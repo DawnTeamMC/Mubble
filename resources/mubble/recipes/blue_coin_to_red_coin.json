@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "mubble:red_coin",
+  "ingredients": [
+    {
+      "item": "blue_coin"
+    }
+  ],
+  "result": {
+    "item": "red_coin",
+    "count": 2
+  }
+}

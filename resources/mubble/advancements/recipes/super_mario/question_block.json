@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mubble:question_block"
+    ]
+  },
+  "criteria": {
+    "has_super_mushroom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mubble:super_mushroom"
+          }
+        ]
+      }
+    },
+    "has_yellow_concrete": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:concrete",
+            "data": 4
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "mubble:question_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_super_mushroom",
+      "has_yellow_concrete",
+      "has_the_recipe"
+    ]
+  ]
+}

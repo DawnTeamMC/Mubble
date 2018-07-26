@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "red_coin"
+    }
+  ],
+  "result": {
+    "item": "yellow_coin",
+    "count": 5
+  }
+}

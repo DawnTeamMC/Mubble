@@ -1,0 +1,55 @@
+itemGroup.nintendo_items_tab=Nintendo Items
+itemGroup.nintendo_blocks_tab=Nintendo Blocks
+
+tile.vanadium_block.name=Block of Vanadium
+tile.vanadium_ore.name=Vanadium Ore
+tile.red_bricks.name=Red Bricks
+tile.white_bricks.name=White Bricks
+tile.blunite.name=Blunite
+tile.polished_blunite.name=Polished Blunite
+tile.carbonite.name=Carbonite
+tile.polished_carbonite.name=Polished Carbonite
+
+tile.footblock.name=Footblock
+
+tile.question_block.name=? Block
+tile.empty_block.name=Empty Block
+tile.rotating_block.name=Rotating Block
+tile.light_block.name=Light Block
+tile.brick_block.name=Brick Block
+tile.golden_brick_block.name=Golden Brick Block
+tile.note_block.name=Note Block
+tile.super_note_block.name=Super Note Block
+
+tile.blue_tetris_block.name=Blue Tetris Block
+tile.green_tetris_block.name=Green Tetris Block
+tile.yellow_tetris_block.name=Yellow Tetris Block
+tile.orange_tetris_block.name=Orange Tetris Block
+tile.red_tetris_block.name=Red Tetris Block
+tile.purple_tetris_block.name=Purple Tetris Block
+tile.gray_tetris_block.name=Gray Tetris Block
+
+item.vanadium.name=Vanadium
+item.wheat_flour.name=Wheat Flour
+item.caramel_cube.name=Caramel Cube
+item.crepe.name=Crêpe
+item.chocolate_crepe.name=Chocolate Crêpe
+item.caramel_crepe.name=Caramel Crêpe
+
+item.super_mushroom.name=Super Mushroom
+item.peach.name=Peach
+item.super_star.name=Super Star
+item.yellow_coin.name=Yellow Coin
+item.red_coin.name=Red Coin
+item.blue_coin.name=Blue Coin
+
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
+
+entity.toad.name=Toad
+
+subtitles.block.question_block.loot=? Block loots
+subtitles.block.question_block.loot_coin=? Block drops coin
+subtitles.entity.toad.ambient=Toad mumbles
+subtitles.entity.toad.hurt=Toad suffers
+subtitles.entity.toad.death=Toad dies

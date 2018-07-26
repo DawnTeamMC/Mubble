@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "OXO",
+    "XOX",
+    "OXO"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:wool",
+      "data": 0
+    },
+    "O": {
+      "item": "minecraft:wool",
+      "data": 15
+    }
+  },
+  "result": {
+    "item": "footblock",
+    "count": 9
+  }
+}

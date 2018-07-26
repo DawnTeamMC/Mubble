@@ -1,0 +1,52 @@
+itemGroup.nintendo_items_tab=Objets Nintendo
+itemGroup.nintendo_blocks_tab=Blocs Nintendo
+
+tile.vanadium_block.name=Bloc de vanadium
+tile.vanadium_ore.name=Minerai de vanadium
+tile.red_bricks.name=Briques rouges
+tile.white_bricks.name=Briques blanches
+tile.blunite.name=Blunite
+tile.polished_blunite.name=Blunite poli
+tile.carbonite.name=Carbonite
+tile.polished_carbonite.name=Carbonite polie
+
+tile.footblock.name=Bloc de foot
+
+tile.question_block.name=Bloc ?
+tile.empty_block.name=Bloc vide
+tile.rotating_block.name=Bloc pivotant
+tile.light_block.name=Bloc lumineux
+tile.brick_block.name=Bloc de brique
+tile.golden_brick_block.name=Bloc de brique dorée
+tile.note_block.name=Bloc note
+tile.super_note_block.name=Super bloc note
+
+tile.blue_tetris_block.name=Bloc Tetris bleu
+tile.green_tetris_block.name=Bloc Tetris vert
+tile.yellow_tetris_block.name=Bloc Tetris jaune
+tile.orange_tetris_block.name=Bloc Tetris orange
+tile.red_tetris_block.name=Bloc Tetris rouge
+tile.purple_tetris_block.name=Bloc Tetris violet
+tile.gray_tetris_block.name=Bloc Tetris gris
+
+item.vanadium.name=Vanadium
+item.wheat_flour.name=Farine de blé
+item.caramel_cube.name=Cube de caramel
+item.crepe.name=Crêpe
+item.chocolate_crepe.name=Crêpe au chocolat
+item.caramel_crepe.name=Crêpe au caramel
+
+item.super_mushroom.name=Super champignon
+item.peach.name=Pêche
+item.super_star.name=Super étoile
+item.yellow_coin.name=Pièce jaune
+item.red_coin.name=Pièce rouge
+item.blue_coin.name=Pièce bleue
+
+entity.toad.name=Toad
+
+subtitles.block.question_block.loot=Bloc ? pillé
+subtitles.block.question_block.loot_coin=Pièce sortie d'un bloc ?
+subtitles.entity.toad.ambient=Toad qui parle
+subtitles.entity.toad.hurt=Toad qui souffre
+subtitles.entity.toad.death=Toad qui meurt

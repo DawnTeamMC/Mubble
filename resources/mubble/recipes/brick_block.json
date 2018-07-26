@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:brick_block"
+    },
+    {
+      "item": "yellow_coin"
+    }
+  ],
+  "result": {
+    "item": "brick_block"
+  }
+}

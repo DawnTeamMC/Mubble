@@ -1,0 +1,52 @@
+itemGroup.nintendo_items_tab=nerdtendo toys
+itemGroup.nintendo_blocks_tab=nerdtendo cubes
+
+tile.vanadium_block.name=shiny purple cube
+tile.vanadium_ore.name=shiny purple in blox
+tile.red_bricks.name=bloo brik
+tile.white_bricks.name=cool brik
+tile.blunite.name=moon-a-bloc
+tile.polished_blunite.name=pretteh monnbloc
+tile.carbonite.name=blac stoneh
+tile.polished_carbonite.name=pretteh blac ston
+
+tile.footblock.name=futbloc
+
+tile.question_block.name=BLOC ???? BLOOOOOC ?????????????
+tile.empty_block.name=GBJ
+tile.rotating_block.name=movin cube
+tile.light_block.name=super shiny boiii
+tile.brick_block.name=brik stak
+tile.golden_brick_block.name=guld brik stak
+tile.note_block.name=bouncy stun
+tile.super_note_block.name=SUPER bouncy stun
+
+tile.blue_tetris_block.name=cool blu tetri
+tile.green_tetris_block.name=cool gren tetri
+tile.yellow_tetris_block.name=cool yeule tetri
+tile.orange_tetris_block.name=cool oranj tetri
+tile.red_tetris_block.name=cool blood tetri
+tile.purple_tetris_block.name=cool gay tetri
+tile.gray_tetris_block.name=cool gree tetri
+
+item.vanadium.name=shiny purple
+item.wheat_flour.name=wet floor
+item.caramel_cube.name=tiny caraml boii
+item.crepe.name=creeepe
+item.chocolate_crepe.name=crepe + choco
+item.caramel_crepe.name=crepe + caraml good
+
+item.super_mushroom.name=SUPA MUSH
+item.peach.name=salty peesh very gud
+item.super_star.name=SUPA STARR
+item.yellow_coin.name=yullu coIn
+item.red_coin.name=bloody cIn
+item.blue_coin.name=blu cooin
+
+entity.toad.name=tod
+
+subtitles.block.question_block.loot=BLOCO ???? givs item
+subtitles.block.question_block.loot_coin=BLOCO ???? drop coin
+subtitles.entity.toad.ambient=tod bups
+subtitles.entity.toad.hurt=todtod oofs
+subtitles.entity.toad.death=tod ded

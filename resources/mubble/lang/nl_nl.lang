@@ -1,0 +1,52 @@
+itemGroup.nintendo_items_tab=Nintendo voorwerpen
+itemGroup.nintendo_blocks_tab=Nintendo blokken
+
+tile.vanadium_block.name=Vanadiumblok
+tile.vanadium_ore.name=Vanadiumerts
+tile.red_bricks.name=Rode bakstenen
+tile.white_bricks.name=Witte bakstenen
+tile.blunite.name=Blunite
+tile.polished_blunite.name=Gepolijst blunite
+tile.carbonite.name=Carbonite
+tile.polished_carbonite.name=Gepolijst carbonite
+
+tile.footblock.name=Voetblok
+
+tile.question_block.name=?-blok
+tile.empty_block.name=Leeg blok
+tile.rotating_block.name=Draaiend blok
+tile.light_block.name=Licht blok
+tile.brick_block.name=Baksteenblok
+tile.golden_brick_block.name=Goude baksteenblok
+tile.note_block.name=Nootblok
+tile.super_note_block.name=Super nootblok
+
+tile.blue_tetris_block.name=Blauwe Tetris blok
+tile.green_tetris_block.name=Groene Tetris blok
+tile.yellow_tetris_block.name=Gele Tetris blok
+tile.orange_tetris_block.name=Oranje Tetris blok
+tile.red_tetris_block.name=Rode Tetris blok
+tile.purple_tetris_block.name=Paarse Tetris blok
+tile.gray_tetris_block.name=Grijze Tetris blok
+
+item.vanadium.name=Vanadium
+item.wheat_flour.name=Tarwemeel
+item.caramel_cube.name=Karamel kubus
+item.crepe.name=Crêpe
+item.chocolate_crepe.name=Chocolade crêpe
+item.caramel_crepe.name=Karamel crêpe
+
+item.super_mushroom.name=Super paddenstoel
+item.peach.name=Perzik
+item.super_star.name=Super ster
+item.yellow_coin.name=Gele munt
+item.red_coin.name=Rode munt
+item.blue_coin.name=Blauwe munt
+
+entity.toad.name=Toad
+
+subtitles.block.question_block.loot=?-blok plundert
+subtitles.block.question_block.loot_coin=?-blok laat munt vallen
+subtitles.entity.toad.ambient=Toad mompelt
+subtitles.entity.toad.hurt=Toad leid
+subtitles.entity.toad.death=Toad sterft

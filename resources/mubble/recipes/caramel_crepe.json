@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "caramel_cube"
+    },
+    {
+      "item": "crepe"
+    }
+  ],
+  "result": {
+    "item": "caramel_crepe"
+  }
+}

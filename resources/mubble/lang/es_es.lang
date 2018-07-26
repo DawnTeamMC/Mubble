@@ -1,0 +1,52 @@
+itemGroup.nintendo_items_tab=Nintendo objetos
+itemGroup.nintendo_blocks_tab=Nintendo bloques
+
+tile.vanadium_block.name=Bloque de vanadio 
+tile.vanadium_ore.name=Mena de vanadio
+tile.red_bricks.name=Ladrillos rojos
+tile.white_bricks.name=Ladrillos blancos
+tile.blunite.name=Blunito
+tile.polished_blunite.name=Blunito pulido
+tile.carbonite.name=Carbonito
+tile.polished_carbonite.name=Carbonito pulida
+
+tile.footblock.name=Futbloque
+
+tile.question_block.name=Bloque ?
+tile.empty_block.name=Bloque vacío
+tile.rotating_block.name=Bloque giratorio
+tile.light_block.name=Bloque luminoso
+tile.brick_block.name=Bloque de ladrillo
+tile.golden_brick_block.name=Bloque de ladrillo dorado
+tile.note_block.name=Bloque nota
+tile.super_note_block.name=Súper bloque nota
+
+tile.blue_tetris_block.name=Bloque Tetris azul 
+tile.green_tetris_block.name=Bloque Tetris verde
+tile.yellow_tetris_block.name=Bloque Tetris amarillo
+tile.orange_tetris_block.name=Bloque Tetris naranja
+tile.red_tetris_block.name=Bloque Tetris rojo
+tile.purple_tetris_block.name=Bloque Tetris morado
+tile.gray_tetris_block.name=Bloque Tetris gris
+
+item.vanadium.name=Vanadio
+item.wheat_flour.name=Harina de trigo
+item.caramel_cube.name=Cubo de caramelo
+item.crepe.name=Crepe
+item.chocolate_crepe.name=Crepe de chocolate
+item.caramel_crepe.name=Crepe de caramelo
+
+item.super_mushroom.name=Super champiñón
+item.peach.name=Durazno
+item.super_star.name=Super estrella
+item.yellow_coin.name=Moneda amarilla
+item.red_coin.name=Moneda roja
+item.blue_coin.name=Moneda azul
+
+entity.toad.name=Toad
+
+subtitles.block.question_block.loot=Bloque ? saquea
+subtitles.block.question_block.loot_coin=Bloque ? solta
+subtitles.entity.toad.ambient=Toad murmura
+subtitles.entity.toad.hurt=Toad sufre
+subtitles.entity.toad.death=Toad muere

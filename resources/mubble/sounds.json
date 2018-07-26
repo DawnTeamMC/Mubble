@@ -1,0 +1,167 @@
+{
+	"block.question_block.loot":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.question_block.loot",
+		"sounds":
+		[
+			{
+				"name": "mubble:block/question_block.loot", "stream": true
+			}
+		]
+	},
+	"block.question_block.loot_coin":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.question_block.loot_coin",
+		"sounds":
+		[
+			{
+				"name": "mubble:block/question_block.loot_coin", "stream": true
+			}
+		]
+	},
+	"block.empty_block.hit":
+	{
+		"category": "block",
+		"sounds":
+		[
+			{
+				"name": "mubble:block/empty_block.hit", "stream": true
+			}
+		]
+	},
+	"block.brick_block.break":
+	{
+		"category": "block",
+		"sounds":
+		[
+			{
+				"name": "mubble:block/brick_block.break", "stream": true
+			}
+		]
+	},
+	"block.note_block.jump":
+	{
+		"category": "block",
+		"sounds":
+		[
+			{
+				"name": "mubble:block/note_block.jump0", "stream": true
+			},
+			{
+				"name": "mubble:block/note_block.jump1", "stream": true
+			}
+		]
+	},
+	"block.note_block.jump_high":
+	{
+		"category": "block",
+		"sounds":
+		[
+			{
+				"name": "mubble:block/note_block.jump_high", "stream": true
+			}
+		]
+	},
+	"item.super_mushroom.consume":
+	{
+		"category": "player",
+		"sounds":
+		[
+			{
+				"name": "mubble:item/super_mushroom.consume", "stream": true
+			}
+		]
+	},
+	"item.super_star.theme":
+	{
+		"category": "player",
+		"sounds":
+		[
+			{
+				"name": "mubble:item/super_star.theme", "stream": true
+			}
+		]
+	},
+	"entity.toad.ambient":
+	{
+		"category": "neutral",
+		"subtitle": "subtitles.entity.toad.ambient",
+		"sounds":
+		[
+			{
+				"name": "mubble:entity/toad.ambient0", "stream": true
+			},
+			{
+				"name": "mubble:entity/toad.ambient1", "stream": true
+			},
+			{
+				"name": "mubble:entity/toad.ambient2", "stream": true
+			},
+			{
+				"name": "mubble:entity/toad.ambient3", "stream": true
+			},
+			{
+				"name": "mubble:entity/toad.ambient4", "stream": true
+			}
+		]
+	},
+	"entity.toad.hurt":
+	{
+		"category": "neutral",
+		"subtitle": "subtitles.entity.toad.hurt",
+		"sounds":
+		[
+			{
+				"name": "mubble:entity/toad.hurt0", "stream": true
+			},
+			{
+				"name": "mubble:entity/toad.hurt1", "stream": true
+			},
+			{
+				"name": "mubble:entity/toad.hurt2", "stream": true
+			},
+			{
+				"name": "mubble:entity/toad.hurt3", "stream": true
+			},
+			{
+				"name": "mubble:entity/toad.hurt4", "stream": true
+			}
+		]
+	},
+	"entity.toad.death":
+	{
+		"category": "neutral",
+		"subtitle": "subtitles.entity.toad.death",
+		"sounds":
+		[
+			{
+				"name": "mubble:entity/toad.death0", "stream": true
+			},
+			{
+				"name": "mubble:entity/toad.death1", "stream": true
+			}
+		]
+	},
+	"record.champions_road":
+	{
+		"category": "record",
+		"sounds":
+		[
+			{
+				"name": "mubble:record/champions_road", "stream": true
+			}
+		]
+	},
+	"record.ebb_flow_demo":
+	{
+		"category": "record",
+		"sounds":
+		[
+			{
+				"name": "mubble:record/ebb_flow_demo", "stream": true
+			}
+		]
+	}
+}
