@@ -1,14 +1,14 @@
-itemGroup.nintendo_items_tab=Nintendo objetos
-itemGroup.nintendo_blocks_tab=Nintendo bloques
+itemGroup.nintendo_items_tab=Objetos de Nintendo
+itemGroup.nintendo_blocks_tab=Bloques de Nintendo
 
 tile.vanadium_block.name=Bloque de vanadio 
 tile.vanadium_ore.name=Mena de vanadio
 tile.red_bricks.name=Ladrillos rojos
 tile.white_bricks.name=Ladrillos blancos
-tile.blunite.name=Blunito
-tile.polished_blunite.name=Blunito pulido
-tile.carbonite.name=Carbonito
-tile.polished_carbonite.name=Carbonito pulida
+tile.blunite.name=Blunita
+tile.polished_blunite.name=Blunita pulida
+tile.carbonite.name=Carbonita
+tile.polished_carbonite.name=Carbonita pulida
 
 tile.footblock.name=Futbloque
 
@@ -36,17 +36,17 @@ item.crepe.name=Crepe
 item.chocolate_crepe.name=Crepe de chocolate
 item.caramel_crepe.name=Crepe de caramelo
 
-item.super_mushroom.name=Super champiñón
+item.super_mushroom.name=Súper champiñón
 item.peach.name=Durazno
-item.super_star.name=Super estrella
+item.super_star.name=Superestrella
 item.yellow_coin.name=Moneda amarilla
 item.red_coin.name=Moneda roja
 item.blue_coin.name=Moneda azul
 
 entity.toad.name=Toad
 
-subtitles.block.question_block.loot=Bloque ? saquea
-subtitles.block.question_block.loot_coin=Bloque ? solta
-subtitles.entity.toad.ambient=Toad murmura
-subtitles.entity.toad.hurt=Toad sufre
+subtitles.block.question_block.loot=Bloque ? suelta un ítem
+subtitles.block.question_block.loot_coin=Bloque ? suelta una moneda
+subtitles.entity.toad.ambient=Toad balbucea
+subtitles.entity.toad.hurt=Toad herido
 subtitles.entity.toad.death=Toad muere
