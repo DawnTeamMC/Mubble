@@ -43,6 +43,9 @@ item.yellow_coin.name=Moneda amarilla
 item.red_coin.name=Moneda roja
 item.blue_coin.name=Moneda azul
 
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
+
 entity.toad.name=Toad
 
 subtitles.block.question_block.loot=Bloque ? suelta un ítem
