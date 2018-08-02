@@ -43,6 +43,9 @@ item.yellow_coin.name=黄币
 item.red_coin.name=红币
 item.blue_coin.name=蓝币
 
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
+
 entity.toad.name=奇诺比奥
 
 subtitles.block.question_block.loot=问号块战利品
