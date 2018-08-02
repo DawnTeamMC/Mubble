@@ -43,6 +43,9 @@ item.yellow_coin.name=yullu coIn
 item.red_coin.name=bloody cIn
 item.blue_coin.name=blu cooin
 
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
+
 entity.toad.name=tod
 
 subtitles.block.question_block.loot=BLOCO ???? givs item
