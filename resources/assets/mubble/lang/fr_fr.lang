@@ -43,6 +43,9 @@ item.yellow_coin.name=Pièce jaune
 item.red_coin.name=Pièce rouge
 item.blue_coin.name=Pièce bleue
 
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
+
 entity.toad.name=Toad
 
 subtitles.block.question_block.loot=Bloc ? pillé
