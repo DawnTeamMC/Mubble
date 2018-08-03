@@ -59,8 +59,8 @@ item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
 
 entity.toad.name=Toad
 
-subtitles.block.question_block.loot=Bloque ? suelta un ítem
-subtitles.block.question_block.loot_coin=Bloque ? suelta una moneda
+subtitles.block.question_block.loot.super_mushroom=Bloque ? suelta un súper champiñón
+subtitles.block.question_block.loot.coin=Bloque ? suelta una moneda
 subtitles.entity.toad.ambient=Toad balbucea
 subtitles.entity.toad.hurt=Toad herido
 subtitles.entity.toad.death=Toad muere

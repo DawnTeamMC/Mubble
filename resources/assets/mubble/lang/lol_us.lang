@@ -59,8 +59,8 @@ item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
 
 entity.toad.name=tod
 
-subtitles.block.question_block.loot=BLOCO ???? givs item
-subtitles.block.question_block.loot_coin=BLOCO ???? drop coin
+subtitles.block.question_block.loot.super_mushroom=BLOCO ???? drop supa mush
+subtitles.block.question_block.loot.coin=BLOCO ???? drop coin
 subtitles.entity.toad.ambient=tod bups
 subtitles.entity.toad.hurt=todtod oofs
 subtitles.entity.toad.death=tod ded

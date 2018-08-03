@@ -59,8 +59,8 @@ item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
 
 entity.toad.name=Toad
 
-subtitles.block.question_block.loot=?-blok plundert
-subtitles.block.question_block.loot_coin=?-blok laat munt vallen
+subtitles.block.question_block.loot.super_mushroom=?-blok plundert <super mushroom>
+subtitles.block.question_block.loot.coin=?-blok laat munt vallen
 subtitles.entity.toad.ambient=Toad mompelt
 subtitles.entity.toad.hurt=Toad heeft pijn
 subtitles.entity.toad.death=Toad sterft

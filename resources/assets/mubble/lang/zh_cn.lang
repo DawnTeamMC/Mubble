@@ -59,8 +59,8 @@ item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
 
 entity.toad.name=奇诺比奥
 
-subtitles.block.question_block.loot=问号块战利品
-subtitles.block.question_block.loot_coin=问号块掉落硬币
+subtitles.block.question_block.loot.super_mushroom=问号块战利品 <super mushroom>
+subtitles.block.question_block.loot.coin=问号块掉落硬币
 subtitles.entity.toad.ambient=奇诺比奥咕哝声
 subtitles.entity.toad.hurt=奇诺比奥受到伤害
 subtitles.entity.toad.death=奇诺比奥死亡
