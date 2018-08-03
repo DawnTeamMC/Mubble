@@ -9,7 +9,6 @@ tile.blunite.name=Blunite
 tile.polished_blunite.name=Polished Blunite
 tile.carbonite.name=Carbonite
 tile.polished_carbonite.name=Polished Carbonite
-
 tile.footblock.name=Footblock
 
 tile.question_block.name=? Block
@@ -22,12 +21,23 @@ tile.note_block.name=Note Block
 tile.super_note_block.name=Super Note Block
 
 tile.blue_tetris_block.name=Blue Tetris Block
+tile.light_blue_tetris_block.name=Light Blue Tetris Block
 tile.green_tetris_block.name=Green Tetris Block
 tile.yellow_tetris_block.name=Yellow Tetris Block
 tile.orange_tetris_block.name=Orange Tetris Block
 tile.red_tetris_block.name=Red Tetris Block
 tile.purple_tetris_block.name=Purple Tetris Block
 tile.gray_tetris_block.name=Gray Tetris Block
+tile.tetris_glass.name=Tetris Glass
+tile.japanese_tetris_cushion.name=Japanese Tetris Cushion
+tile.rainbow_tetris_scaffolding.name=Rainbow Tetris Scaffolding
+tile.monochrome_tetris_scaffolding.name=Monochrome Tetris Scaffolding
+
+tile.iron_scaffolding.name=Iron Scaffolding
+tile.purple_bricks.name=Purple Bricks
+tile.cyan_bricks.name=Cyan Bricks
+tile.elder_pebbles.name=Elder Pebbles
+tile.space_matter.name=Space Matter
 
 item.vanadium.name=Vanadium
 item.wheat_flour.name=Wheat Flour
@@ -42,14 +52,15 @@ item.super_star.name=Super Star
 item.yellow_coin.name=Yellow Coin
 item.red_coin.name=Red Coin
 item.blue_coin.name=Blue Coin
+item.cappy.name=Cappy
 
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
 
 entity.toad.name=Toad
 
-subtitles.block.question_block.loot=? Block loots
-subtitles.block.question_block.loot_coin=? Block drops coin
+subtitles.block.question_block.loot.super_mushroom=? Block drops super mushroom
+subtitles.block.question_block.loot.coin=? Block drops coin
 subtitles.entity.toad.ambient=Toad mumbles
 subtitles.entity.toad.hurt=Toad suffers
 subtitles.entity.toad.death=Toad dies

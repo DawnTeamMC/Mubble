@@ -21,12 +21,23 @@ tile.note_block.name=Bloc note
 tile.super_note_block.name=Super bloc note
 
 tile.blue_tetris_block.name=Bloc Tetris bleu
+tile.light_blue_tetris_block.name=Bloc Tetris bleu clair
 tile.green_tetris_block.name=Bloc Tetris vert
 tile.yellow_tetris_block.name=Bloc Tetris jaune
 tile.orange_tetris_block.name=Bloc Tetris orange
 tile.red_tetris_block.name=Bloc Tetris rouge
 tile.purple_tetris_block.name=Bloc Tetris violet
 tile.gray_tetris_block.name=Bloc Tetris gris
+tile.tetris_glass.name=Verre Tetris
+tile.japanese_tetris_cushion.name=Coussin Tetris japonais
+tile.rainbow_tetris_scaffolding.name=Échafaudage Tetris multicolore
+tile.monochrome_tetris_scaffolding.name=Échafaudage Tetris monochrome
+
+tile.iron_scaffolding.name=Échafaudage en fer
+tile.purple_bricks.name=Briques violettes
+tile.cyan_bricks.name=Briques cyan
+tile.elder_pebbles.name=Anciens galets
+tile.space_matter.name=Matière spatiale
 
 item.vanadium.name=Vanadium
 item.wheat_flour.name=Farine de blé
@@ -41,6 +52,7 @@ item.super_star.name=Super étoile
 item.yellow_coin.name=Pièce jaune
 item.red_coin.name=Pièce rouge
 item.blue_coin.name=Pièce bleue
+item.cappy.name=Cappy
 
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo

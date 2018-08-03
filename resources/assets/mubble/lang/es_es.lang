@@ -20,13 +20,24 @@ tile.golden_brick_block.name=Bloque de ladrillo dorado
 tile.note_block.name=Bloque nota
 tile.super_note_block.name=Súper bloque nota
 
-tile.blue_tetris_block.name=Bloque Tetris azul 
+tile.blue_tetris_block.name=Bloque Tetris azul
+tile.light_blue_tetris_block.name=<newline>
 tile.green_tetris_block.name=Bloque Tetris verde
 tile.yellow_tetris_block.name=Bloque Tetris amarillo
 tile.orange_tetris_block.name=Bloque Tetris naranja
 tile.red_tetris_block.name=Bloque Tetris rojo
 tile.purple_tetris_block.name=Bloque Tetris morado
 tile.gray_tetris_block.name=Bloque Tetris gris
+tile.tetris_glass.name=<newline>
+tile.japanese_tetris_cushion.name=<newline>
+tile.rainbow_tetris_scaffolding.name=<newline>
+tile.monochrome_tetris_scaffolding.name=<newline>
+
+tile.iron_scaffolding.name=<newline>
+tile.purple_bricks.name=<newline>
+tile.cyan_bricks.name=<newline>
+tile.elder_pebbles.name=<newline>
+tile.space_matter.name=<newline>
 
 item.vanadium.name=Vanadio
 item.wheat_flour.name=Harina de trigo
@@ -41,6 +52,7 @@ item.super_star.name=Superestrella
 item.yellow_coin.name=Moneda amarilla
 item.red_coin.name=Moneda roja
 item.blue_coin.name=Moneda azul
+item.cappy.name=<newline>
 
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo

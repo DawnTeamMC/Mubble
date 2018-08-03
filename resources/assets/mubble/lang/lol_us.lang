@@ -21,12 +21,23 @@ tile.note_block.name=bouncy stun
 tile.super_note_block.name=SUPER bouncy stun
 
 tile.blue_tetris_block.name=cool blu tetri
+tile.blue_tetris_block.name=cool lit bloo tetri
 tile.green_tetris_block.name=cool gren tetri
 tile.yellow_tetris_block.name=cool yeule tetri
 tile.orange_tetris_block.name=cool oranj tetri
 tile.red_tetris_block.name=cool blood tetri
 tile.purple_tetris_block.name=cool gay tetri
 tile.gray_tetris_block.name=cool gree tetri
+tile.tetris_glass.name=tetri glazz
+tile.japanese_tetris_cushion.name=jaPAN tetri sleep
+tile.rainbow_tetris_scaffolding.name=varicolordd tetri zcffolding
+tile.monochrome_tetris_scaffolding.name=blak & wite tetri zcffolding
+
+tile.iron_scaffolding.name=irun zcffolding
+tile.purple_bricks.name=parpal brik
+tile.cyan_bricks.name=nyan briks
+tile.elder_pebbles.name=old pebbL
+tile.space_matter.name=MARTIAN DIRT OoOoOoO
 
 item.vanadium.name=shiny purple
 item.wheat_flour.name=wet floor
@@ -41,6 +52,7 @@ item.super_star.name=SUPA STARR
 item.yellow_coin.name=yullu coIn
 item.red_coin.name=bloody cIn
 item.blue_coin.name=blu cooin
+item.cappy.name=capy da hat
 
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo

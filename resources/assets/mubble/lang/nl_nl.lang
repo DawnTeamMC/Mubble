@@ -21,12 +21,23 @@ tile.note_block.name=Nootblok
 tile.super_note_block.name=Super nootblok
 
 tile.blue_tetris_block.name=Blauw Tetris blok
+tile.light_blue_tetris_block.name=<newline>
 tile.green_tetris_block.name=Groen Tetris blok
 tile.yellow_tetris_block.name=Geel Tetris blok
 tile.orange_tetris_block.name=Oranje Tetris blok
 tile.red_tetris_block.name=Rood Tetris blok
 tile.purple_tetris_block.name=Paars Tetris blok
 tile.gray_tetris_block.name=Grijs Tetris blok
+tile.tetris_glass.name=<newline>
+tile.japanese_tetris_cushion.name=<newline>
+tile.rainbow_tetris_scaffolding.name=<newline>
+tile.monochrome_tetris_scaffolding.name=<newline>
+
+tile.iron_scaffolding.name=<newline>
+tile.purple_bricks.name=<newline>
+tile.cyan_bricks.name=<newline>
+tile.elder_pebbles.name=<newline>
+tile.space_matter.name=<newline>
 
 item.vanadium.name=Vanadium
 item.wheat_flour.name=Tarwemeel
@@ -41,6 +52,7 @@ item.super_star.name=Super ster
 item.yellow_coin.name=Gele munt
 item.red_coin.name=Rode munt
 item.blue_coin.name=Blauwe munt
+item.cappy.name=<newline>
 
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
