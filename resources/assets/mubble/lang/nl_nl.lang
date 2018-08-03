@@ -21,23 +21,23 @@ tile.note_block.name=Nootblok
 tile.super_note_block.name=Super nootblok
 
 tile.blue_tetris_block.name=Blauw Tetris blok
-tile.light_blue_tetris_block.name=<newline>
+tile.light_blue_tetris_block.name=Lichtblauw Tetris blok
 tile.green_tetris_block.name=Groen Tetris blok
 tile.yellow_tetris_block.name=Geel Tetris blok
 tile.orange_tetris_block.name=Oranje Tetris blok
 tile.red_tetris_block.name=Rood Tetris blok
 tile.purple_tetris_block.name=Paars Tetris blok
 tile.gray_tetris_block.name=Grijs Tetris blok
-tile.tetris_glass.name=<newline>
-tile.japanese_tetris_cushion.name=<newline>
-tile.rainbow_tetris_scaffolding.name=<newline>
-tile.monochrome_tetris_scaffolding.name=<newline>
+tile.tetris_glass.name=Tetris glas
+tile.japanese_tetris_cushion.name=Japans Tetris kussen
+tile.rainbow_tetris_scaffolding.name=Regenboog Tetris steiger
+tile.monochrome_tetris_scaffolding.name=Zwart-wit Tetris steiger
 
-tile.iron_scaffolding.name=<newline>
-tile.purple_bricks.name=<newline>
-tile.cyan_bricks.name=<newline>
-tile.elder_pebbles.name=<newline>
-tile.space_matter.name=<newline>
+tile.iron_scaffolding.name=IJzersteiger
+tile.purple_bricks.name=Paarse bakstenen
+tile.cyan_bricks.name=Turquoise bakstenen
+tile.elder_pebbles.name=Oudere keizels
+tile.space_matter.name=Ruimte materie
 
 item.vanadium.name=Vanadium
 item.wheat_flour.name=Tarwemeel
@@ -52,14 +52,14 @@ item.super_star.name=Super ster
 item.yellow_coin.name=Gele munt
 item.red_coin.name=Rode munt
 item.blue_coin.name=Blauwe munt
-item.cappy.name=<newline>
+item.cappy.name=Cappy
 
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
 
 entity.toad.name=Toad
 
-subtitles.block.question_block.loot.super_mushroom=?-blok plundert <super mushroom>
+subtitles.block.question_block.loot.super_mushroom=?-blok plundert super paddenstoel
 subtitles.block.question_block.loot.coin=?-blok laat munt vallen
 subtitles.entity.toad.ambient=Toad mompelt
 subtitles.entity.toad.hurt=Toad heeft pijn
