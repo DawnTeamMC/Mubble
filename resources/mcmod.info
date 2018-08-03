@@ -12,11 +12,7 @@
   Spanish Translation - Cochu
   Dutch Translation - FVbico
   Chinese (Simplified) Translation - Zhuyansong",
-<<<<<<< HEAD
   "logoFile": "assets/mubble/textures/block/polished_blunite.png",
-=======
-  "logoFile": "",
->>>>>>> 991fc340a81770b40ea4d95553f8698aa1a7fcb7
   "screenshots": [],
   "dependencies": []
  }
