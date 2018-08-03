@@ -52,14 +52,14 @@ item.super_star.name=无敌星
 item.yellow_coin.name=黄币
 item.red_coin.name=红币
 item.blue_coin.name=蓝币
-item.cappy.name=凯皮
+item.cappy.name=凯比
 
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
 
 entity.toad.name=奇诺比奥
 
-subtitles.block.question_block.loot.super_mushroom=问号块战利品 <super mushroom>
+subtitles.block.question_block.loot.super_mushroom=问号块掉落超级蘑菇
 subtitles.block.question_block.loot.coin=问号块掉落硬币
 subtitles.entity.toad.ambient=奇诺比奥咕哝声
 subtitles.entity.toad.hurt=奇诺比奥受到伤害
