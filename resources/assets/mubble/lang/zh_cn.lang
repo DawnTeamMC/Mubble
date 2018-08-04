@@ -21,23 +21,23 @@ tile.note_block.name=音符块
 tile.super_note_block.name=超级音符块
 
 tile.blue_tetris_block.name=蓝色俄罗斯方块
-tile.light_blue_tetris_block.name=<newline>
+tile.light_blue_tetris_block.name=淡蓝色俄罗斯方块
 tile.green_tetris_block.name=绿色俄罗斯方块
 tile.yellow_tetris_block.name=黄色俄罗斯方块
 tile.orange_tetris_block.name=橙色俄罗斯方块
 tile.red_tetris_block.name=红色俄罗斯方块
 tile.purple_tetris_block.name=紫色俄罗斯方块
 tile.gray_tetris_block.name=灰色俄罗斯方块
-tile.tetris_glass.name=<newline>
-tile.japanese_tetris_cushion.name=<newline>
-tile.rainbow_tetris_scaffolding.name=<newline>
-tile.monochrome_tetris_scaffolding.name=<newline>
+tile.tetris_glass.name=俄罗斯方块玻璃
+tile.japanese_tetris_cushion.name=日式俄罗斯方块坐垫
+tile.rainbow_tetris_scaffolding.name=彩虹俄罗斯方块脚手架
+tile.monochrome_tetris_scaffolding.name=单色俄罗斯方块脚手架
 
-tile.iron_scaffolding.name=<newline>
-tile.purple_bricks.name=<newline>
-tile.cyan_bricks.name=<newline>
-tile.elder_pebbles.name=<newline>
-tile.space_matter.name=<newline>
+tile.iron_scaffolding.name=铁质脚手架
+tile.purple_bricks.name=紫色砖块
+tile.cyan_bricks.name=青色砖块
+tile.elder_pebbles.name=远古鹅卵石
+tile.space_matter.name=太空物质
 
 item.vanadium.name=钒
 item.wheat_flour.name=小麦面粉
@@ -52,7 +52,7 @@ item.super_star.name=无敌星
 item.yellow_coin.name=黄币
 item.red_coin.name=红币
 item.blue_coin.name=蓝币
-item.cappy.name=凯比
+item.cappy.name=凯皮
 
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
@@ -61,6 +61,6 @@ entity.toad.name=奇诺比奥
 
 subtitles.block.question_block.loot.super_mushroom=问号块掉落超级蘑菇
 subtitles.block.question_block.loot.coin=问号块掉落硬币
-subtitles.entity.toad.ambient=奇诺比奥咕哝声
-subtitles.entity.toad.hurt=奇诺比奥受到伤害
+subtitles.entity.toad.ambient=奇诺比奥咕哝
+subtitles.entity.toad.hurt=奇诺比奥受伤
 subtitles.entity.toad.death=奇诺比奥死亡
