@@ -1,0 +1,75 @@
+itemGroup.nintendo_items_tab=sɯǝʇI opuǝʇuᴉN
+itemGroup.nintendo_blocks_tab=sʞɔolᗺ opuǝʇuᴉN
+
+tile.vanadium_block.name=ɯnᴉpɐuɐΛ ɟo ʞɔolᗺ
+tile.vanadium_ore.name=ǝɹO ɯnᴉpɐuɐΛ
+tile.red_bricks.name=sʞɔᴉɹᗺ pǝᴚ
+tile.white_bricks.name=sʞɔᴉɹᗺ ǝʇᴉɥM
+tile.blunite.name=ǝʇᴉunlᗺ
+tile.polished_blunite.name=ǝʇᴉunlᗺ pǝɥsᴉloԀ
+tile.carbonite.name=ǝʇᴉuoqɹɐƆ
+tile.polished_carbonite.name=ǝʇᴉuoqɹɐƆ pǝɥsᴉloԀ
+tile.footblock.name=ʞɔolqʇooℲ
+
+tile.question_block.name=ʞɔolᗺ ¿
+tile.empty_block.name=ʞɔolᗺ ʎʇdɯƎ
+tile.rotating_block.name=ʞɔolq ƃuᴉʇɐʇoᴚ
+tile.light_block.name=ʞɔolᗺ ʇɥƃᴉ˥
+tile.brick_block.name=ʞɔolᗺ ʞɔᴉɹᗺ
+tile.golden_brick_block.name=ʞɔolᗺ ʞɔᴉɹᗺ uǝploפ
+tile.note_block.name=ʞɔolᗺ ǝʇoN
+tile.super_note_block.name=ʞɔolᗺ ǝʇoN ɹǝdnS
+
+tile.blue_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ ǝnlᗺ
+tile.light_blue_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ ǝnlᗺ ʇɥƃᴉ˥
+tile.green_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ uǝǝɹפ
+tile.yellow_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ ʍollǝ⅄
+tile.orange_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ ǝƃuɐɹO
+tile.red_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ pǝᴚ
+tile.purple_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ ǝldɹnԀ
+tile.gray_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ ʎɐɹפ
+tile.tetris_glass.name=ssɐlפ sᴉɹʇǝ┴
+tile.japanese_tetris_cushion.name=uoᴉɥsnƆ sᴉɹʇǝ┴ ǝsǝuɐdɐſ
+tile.rainbow_tetris_scaffolding.name=ƃuᴉploɟɟɐɔS sᴉɹʇǝ┴ ʍoquᴉɐɹ
+tile.monochrome_tetris_scaffolding.name=ƃuᴉploɟɟɐɔS sᴉɹʇǝ┴ ǝɯoɹɥɔouoW
+
+tile.iron_scaffolding.name=ƃuᴉploɟɟɐɔS uoɹI
+tile.purple_bricks.name=sʞɔᴉɹᗺ ǝldɹnԀ
+tile.cyan_bricks.name=sʞɔᴉɹᗺ uɐʎƆ
+tile.elder_pebbles.name=sǝlqqǝԀ ɹǝplƎ
+tile.space_matter.name=ɹǝʇʇɐW ǝɔɐdS
+
+item.vanadium.name=ɯnᴉpɐuɐΛ
+item.wheat_flour.name=ɹnolℲ ʇɐǝɥM
+item.caramel_cube.name=ǝqnƆ lǝɯɐɹɐƆ
+item.crepe.name=ǝdǝɹƆ
+item.chocolate_crepe.name=ǝdǝɹƆ ǝʇɐloɔoɥƆ
+item.caramel_crepe.name=ǝdǝɹƆ lǝɯɐɹɐƆ
+
+item.super_mushroom.name=ɯooɹɥsnW ɹǝdnS
+item.peach.name=ɥɔɐǝԀ
+item.super_star.name=ɹɐʇS ɹǝdnS
+item.yellow_coin.name=uᴉoƆ ʍollǝℲ
+item.red_coin.name=uᴉoƆ pǝᴚ
+item.blue_coin.name=uᴉoƆ ǝnlᗺ
+item.cappy.name=ʎddɐƆ
+
+item.record.champions_road.desc=pɐoᴚ s,uoᴉdɯɐɥƆ  - plɹoM ᗡƐ oᴉɹɐW ɹǝdnS
+item.record.ebb_flow_demo.desc=oɯǝᗡ ʍolℲ ⅋ qqƎ - ᘔ uooʇɐldS
+
+entity.toad.name=pɐo┴
+
+subtitles.block.question_block.loot.super_mushroom=ɯooɹɥsnɯ ɹǝdns sdoɹp ʞɔolᗺ ¿
+subtitles.block.question_block.loot.coin=uᴉoɔ sdoɹp ʞɔolᗺ ¿
+subtitles.entity.toad.ambient=sǝlqɯnɯ pɐo┴
+subtitles.entity.toad.hurt=sʇɹnɥ pɐo┴
+subtitles.entity.toad.death=sǝᴉp pɐo┴
+
+advancements.mubble.root.title=ǝlqqnW
+advancements.mubble.root.description=ʎǝuɹnoɾ ʍǝu puɐɹƃ ∀
+advancements.mubble.get_coin.title=¡ploפ ¡ǝuᴉɯ s,ʇI
+advancements.mubble.get_coin.description=suᴉoɔ puᴉℲ
+advancements.mubble.get_vanadium.title=¡sɯnᴉpɐuɐΛ
+advancements.mubble.get_vanadium.description=sɯnᴉpɐuɐʌ ǝɹᴉnbɔ∀
+advancements.mubble.get_tetris_block.title=pǝʇɔǝuuoƆ ll∀ s,ʇI
+advancements.mubble.get_tetris_block.description=ʞɔolᗺ sᴉɹʇǝ┴ ɐ uo puɐɥ ɹnoʎ ʇǝפ
