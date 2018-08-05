@@ -65,7 +65,7 @@ subtitles.entity.toad.ambient=Toad balbucea
 subtitles.entity.toad.hurt=Toad herido
 subtitles.entity.toad.death=Toad muere
 
-advancements.mubble.root.title=<newline>
+advancements.mubble.root.title=Mubble
 advancements.mubble.root.description=<newline>
 advancements.mubble.get_coin.title=<newline>
 advancements.mubble.get_coin.description=<newline>
