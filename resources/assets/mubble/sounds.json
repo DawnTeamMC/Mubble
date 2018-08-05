@@ -1,34 +1,28 @@
 {
-	"block.question_block.loot":
+	"block.question_block.loot.super_mushroom":
 	{
 		"category": "block",
-		"subtitle": "subtitles.block.question_block.loot",
+		"subtitle": "subtitles.block.question_block.loot.super_mushroom",
 		"sounds":
 		[
-			{
-				"name": "mubble:block/question_block.loot", "stream": true
-			}
+			"mubble:block/question_block/loot/super_mushroom"
 		]
 	},
-	"block.question_block.loot_coin":
+	"block.question_block.loot.coin":
 	{
 		"category": "block",
-		"subtitle": "subtitles.block.question_block.loot_coin",
+		"subtitle": "subtitles.block.question_block.loot.coin",
 		"sounds":
 		[
-			{
-				"name": "mubble:block/question_block.loot_coin", "stream": true
-			}
+			"mubble:block/question_block/loot/coin"
 		]
 	},
-	"block.empty_block.hit":
+	"block.empty_block.break":
 	{
 		"category": "block",
 		"sounds":
 		[
-			{
-				"name": "mubble:block/empty_block.hit", "stream": true
-			}
+			"mubble:block/empty_block/break"
 		]
 	},
 	"block.brick_block.break":
@@ -36,32 +30,82 @@
 		"category": "block",
 		"sounds":
 		[
-			{
-				"name": "mubble:block/brick_block.break", "stream": true
-			}
+			"mubble:block/brick_block/break"
 		]
 	},
-	"block.note_block.jump":
+	"block.note_block.jump.small":
 	{
 		"category": "block",
 		"sounds":
 		[
-			{
-				"name": "mubble:block/note_block.jump0", "stream": true
-			},
-			{
-				"name": "mubble:block/note_block.jump1", "stream": true
-			}
+			"mubble:block/note_block/jump/small1",
+			"mubble:block/note_block/jump/small2"
 		]
 	},
-	"block.note_block.jump_high":
+	"block.note_block.jump.high":
 	{
 		"category": "block",
 		"sounds":
 		[
-			{
-				"name": "mubble:block/note_block.jump_high", "stream": true
-			}
+			"mubble:block/note_block/jump/high"
+		]
+	},
+	"block.space_matter.break":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.generic.break",
+		"sounds":
+		[
+			"mubble:block/space_matter/hit1",
+			"mubble:block/space_matter/hit2",
+			"mubble:block/space_matter/hit3",
+			"mubble:block/space_matter/hit4"
+		]
+	},
+	"block.space_matter.fall":
+	{
+		"category": "block",
+		"sounds":
+		[
+			"mubble:block/space_matter/fall1",
+			"mubble:block/space_matter/fall2",
+			"mubble:block/space_matter/fall3"
+		]
+	},
+	"block.space_matter.hit":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.generic.hit",
+		"sounds":
+		[
+			"mubble:block/space_matter/hit1",
+			"mubble:block/space_matter/hit2",
+			"mubble:block/space_matter/hit3",
+			"mubble:block/space_matter/hit4"
+		]
+	},
+	"block.space_matter.place":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.generic.place",
+		"sounds":
+		[
+			"mubble:block/space_matter/hit1",
+			"mubble:block/space_matter/hit2",
+			"mubble:block/space_matter/hit3",
+			"mubble:block/space_matter/hit4"
+		]
+	},
+	"block.space_matter.step":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.generic.footsteps",
+		"sounds":
+		[
+			"mubble:block/space_matter/step1",
+			"mubble:block/space_matter/step2",
+			"mubble:block/space_matter/step3",
+			"mubble:block/space_matter/step4"
 		]
 	},
 	"item.super_mushroom.consume":
@@ -69,9 +113,7 @@
 		"category": "player",
 		"sounds":
 		[
-			{
-				"name": "mubble:item/super_mushroom.consume", "stream": true
-			}
+			"mubble:item/super_mushroom/consume"
 		]
 	},
 	"item.super_star.theme":
@@ -79,9 +121,7 @@
 		"category": "player",
 		"sounds":
 		[
-			{
-				"name": "mubble:item/super_star.theme", "stream": true
-			}
+			"mubble:item/super_star/theme"
 		]
 	},
 	"entity.toad.ambient":
@@ -90,21 +130,11 @@
 		"subtitle": "subtitles.entity.toad.ambient",
 		"sounds":
 		[
-			{
-				"name": "mubble:entity/toad.ambient0", "stream": true
-			},
-			{
-				"name": "mubble:entity/toad.ambient1", "stream": true
-			},
-			{
-				"name": "mubble:entity/toad.ambient2", "stream": true
-			},
-			{
-				"name": "mubble:entity/toad.ambient3", "stream": true
-			},
-			{
-				"name": "mubble:entity/toad.ambient4", "stream": true
-			}
+			"mubble:entity/toad/ambient1",
+			"mubble:entity/toad/ambient2",
+			"mubble:entity/toad/ambient3",
+			"mubble:entity/toad/ambient4",
+			"mubble:entity/toad/ambient5"
 		]
 	},
 	"entity.toad.hurt":
@@ -113,21 +143,11 @@
 		"subtitle": "subtitles.entity.toad.hurt",
 		"sounds":
 		[
-			{
-				"name": "mubble:entity/toad.hurt0", "stream": true
-			},
-			{
-				"name": "mubble:entity/toad.hurt1", "stream": true
-			},
-			{
-				"name": "mubble:entity/toad.hurt2", "stream": true
-			},
-			{
-				"name": "mubble:entity/toad.hurt3", "stream": true
-			},
-			{
-				"name": "mubble:entity/toad.hurt4", "stream": true
-			}
+			"mubble:entity/toad/hurt1",
+			"mubble:entity/toad/hurt2",
+			"mubble:entity/toad/hurt3",
+			"mubble:entity/toad/hurt4",
+			"mubble:entity/toad/hurt5"
 		]
 	},
 	"entity.toad.death":
@@ -136,12 +156,8 @@
 		"subtitle": "subtitles.entity.toad.death",
 		"sounds":
 		[
-			{
-				"name": "mubble:entity/toad.death0", "stream": true
-			},
-			{
-				"name": "mubble:entity/toad.death1", "stream": true
-			}
+			"mubble:entity/toad/death1",
+			"mubble:entity/toad/death2"
 		]
 	},
 	"record.champions_road":

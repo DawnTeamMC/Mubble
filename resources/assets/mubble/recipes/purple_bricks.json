@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XOX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:brick_block"
+    },
+    "O": {
+      "item": "minecraft:dye",
+      "data": 5
+    }
+  },
+  "result": {
+    "item": "purple_bricks",
+    "count": 8
+  }
+}

@@ -5,21 +5,13 @@ import java.util.Random;
 import hugman.mod.Main;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.ItemInit;
+import hugman.mod.init.SoundTypeInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 
 public class BlockBrick extends Block implements IHasModel
 {
@@ -41,7 +33,7 @@ public class BlockBrick extends Block implements IHasModel
 		setCreativeTab(Main.NINTENDO_BLOCKS);
 		setHardness(1.5f);
 		this.blockResistance = 20f;
-		setSoundType(SoundType.STONE);
+		setSoundType(SoundTypeInit.BRICK_BLOCK);
 		
 		BlockInit.BLOCKS.add(this);
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));

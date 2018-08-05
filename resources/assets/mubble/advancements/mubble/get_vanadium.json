@@ -1,0 +1,26 @@
+{
+    "display": {
+        "icon": {
+			"item": "mubble:vanadium"
+		},
+        "title": {
+            "translate": "advancements.mubble.get_vanadium.title"
+        },
+        "description": {
+            "translate": "advancements.mubble.get_vanadium.description"
+        }
+    },
+    "parent": "mubble:mubble/get_coin",
+    "criteria": {
+        "has_vanadium": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:vanadium"
+                    }
+                ]
+            }
+        }
+	}
+}

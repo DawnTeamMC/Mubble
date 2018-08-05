@@ -2,8 +2,6 @@ package hugman.mod.objects.blocks;
 
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import hugman.mod.Main;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.ItemInit;
@@ -21,7 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -60,7 +57,7 @@ public class BlockQuestion extends Block implements IHasModel
             else if (loot == 10)
             {
             	worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(ItemInit.SUPER_MUSHROOM)));
-            	worldIn.playSound(null, x, y, z, SoundHandler.BLOCK_QUESTION_BLOCK_LOOT, SoundCategory.BLOCKS, 1f, 1f);
+            	worldIn.playSound(null, x, y, z, SoundHandler.BLOCK_QUESTION_BLOCK_LOOT_SUPER_MUSHROOM, SoundCategory.BLOCKS, 1f, 1f);
             }
     		worldIn.setBlockState(pos, state0);
         }

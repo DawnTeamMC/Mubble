@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "normal": [
+        	{ "model": "mubble:purple_bricks/0"},
+        	{ "model": "mubble:purple_bricks/1"},
+        	{ "model": "mubble:purple_bricks/2"},
+        	{ "model": "mubble:purple_bricks/3"},
+        	{ "model": "mubble:purple_bricks/4"},
+        	{ "model": "mubble:purple_bricks/5"}
+    	]
+    }
+}

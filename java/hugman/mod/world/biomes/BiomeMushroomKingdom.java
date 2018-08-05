@@ -1,10 +1,7 @@
 package hugman.mod.world.biomes;
 
-import hugman.mod.entity.EntityToad;
-import hugman.mod.init.BlockInit;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.feature.WorldGenMinable;
 
 public class BiomeMushroomKingdom extends Biome 
 {

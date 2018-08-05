@@ -1,11 +1,9 @@
 package hugman.mod.world.dimension.nintendo;
 
-import hugman.mod.init.BiomeInit;
 import hugman.mod.init.DimensionInit;
 import hugman.mod.world.dimension.EmptyChunkGenerator;
 import net.minecraft.init.Biomes;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.IChunkGenerator;

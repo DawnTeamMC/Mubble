@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "mubble:block/purple_bricks/1"
+    }
+}

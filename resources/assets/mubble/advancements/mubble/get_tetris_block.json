@@ -1,0 +1,108 @@
+{
+    "display": {
+        "icon": {
+			"item": "mubble:light_blue_tetris_block"
+		},
+        "title": {
+            "translate": "advancements.mubble.get_tetris_block.title"
+        },
+        "description": {
+            "translate": "advancements.mubble.get_tetris_block.description"
+        }
+    },
+    "parent": "mubble:mubble/get_vanadium",
+    "criteria": {
+        "has_blue_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:blue_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_light_blue_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:light_blue_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_green_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:green_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_yellow_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:yellow_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_orange_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:orange_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_red_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:red_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_purple_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:purple_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_gray_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:gray_tetris_block"
+                    }
+                ]
+            }
+        }
+	},
+    "requirements": [
+        [
+            "has_blue_tetris_block",
+            "has_light_blue_tetris_block",
+            "has_green_tetris_block",
+            "has_yellow_tetris_block",
+            "has_orange_tetris_block",
+            "has_red_tetris_block",
+            "has_purple_tetris_block",
+            "has_gray_tetris_block"
+        ]
+    ]
+}

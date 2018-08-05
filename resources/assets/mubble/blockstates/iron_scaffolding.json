@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": {
+   			"model": "mubble:iron_scaffolding"
+    	}
+    }
+}

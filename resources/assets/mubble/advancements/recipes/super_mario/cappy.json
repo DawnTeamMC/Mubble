@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mubble:cappy"
+    ]
+  },
+  "criteria": {
+    "has_red_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:wool",
+            "data": 14
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "mubble:cappy"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_red_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

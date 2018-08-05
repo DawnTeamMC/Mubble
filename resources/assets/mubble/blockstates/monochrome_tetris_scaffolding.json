@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": {
+   			"model": "mubble:monochrome_tetris_scaffolding"
+    	}
+    }
+}

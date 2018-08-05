@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import hugman.mod.init.BlockInit;
 import hugman.mod.world.biomes.BiomeMushroomKingdom;
 import hugman.mod.world.gen.generators.WorldGenStructure;
 import net.minecraft.block.Block;
@@ -12,8 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
-import net.minecraft.world.biome.BiomeForest;
-import net.minecraft.world.biome.BiomePlains;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenerator;

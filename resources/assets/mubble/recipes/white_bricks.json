@@ -15,6 +15,7 @@
     }
   },
   "result": {
-    "item": "white_bricks"
+    "item": "white_bricks",
+    "count": 8
   }
 }

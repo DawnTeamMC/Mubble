@@ -9,7 +9,6 @@ import hugman.mod.util.handlers.LootTableHandler;
 import hugman.mod.util.handlers.SoundHandler;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFindEntityNearest;
 import net.minecraft.entity.ai.EntityAILookIdle;

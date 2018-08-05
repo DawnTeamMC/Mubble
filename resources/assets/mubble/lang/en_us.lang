@@ -64,3 +64,12 @@ subtitles.block.question_block.loot.coin=? Block drops coin
 subtitles.entity.toad.ambient=Toad mumbles
 subtitles.entity.toad.hurt=Toad suffers
 subtitles.entity.toad.death=Toad dies
+
+advancements.mubble.root.title=Mubble
+advancements.mubble.root.description=A grand new journey
+advancements.mubble.get_coin.title=It's mine! Gold!
+advancements.mubble.get_coin.description=Find coins
+advancements.mubble.get_vanadium.title=Vanadiums!
+advancements.mubble.get_vanadium.description=Acquire vanadiums
+advancements.mubble.get_tetris_block.title=It's All Connected
+advancements.mubble.get_tetris_block.description=Get the hand on a Tetris Block

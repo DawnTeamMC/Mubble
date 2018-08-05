@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class RenderToad extends RenderLiving<EntityToad>
 {
-	public static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MODID + ":textures/entity/toad.png");
+	public static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MODID + ":textures/entity/toad/red.png");
 	
 	public RenderToad(RenderManager manager) 
 	{

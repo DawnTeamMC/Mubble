@@ -23,8 +23,6 @@ public class ItemInit
 	// Vanilla
 	public static final Item VANADIUM = new ItemBase("vanadium", CreativeTabs.MISC);
 	public static final Item WHEAT_FLOUR = new ItemBase("wheat_flour", CreativeTabs.MISC);
-
-	// Extra
 	public static final Item CARAMEL_CUBE = new ItemEdible("caramel_cube", CreativeTabs.FOOD, 4, 2.8f, false);
 	public static final Item CREPE = new ItemEdible("crepe", CreativeTabs.FOOD, 3, 0.5f, false);
 	public static final Item CHOCOLATE_CREPE = new ItemEdible("chocolate_crepe", CreativeTabs.FOOD, 8, 2f, false);
@@ -37,6 +35,7 @@ public class ItemInit
 	public static final Item YELLOW_COIN = new ItemBase("yellow_coin", Main.NINTENDO_ITEMS);
 	public static final Item RED_COIN = new ItemBase("red_coin", Main.NINTENDO_ITEMS);
 	public static final Item BLUE_COIN = new ItemBase("blue_coin", Main.NINTENDO_ITEMS);
+	public static final Item CAPPY = new ItemHelmet("cappy", Main.NINTENDO_ITEMS);
 	public static final Item RECORD_CHAMPIONS_ROAD = new ItemMusicDisc("champions_road", SoundHandler.RECORD_CHAMPIONS_ROAD, Main.NINTENDO_ITEMS);
 	
 	// Splatoon

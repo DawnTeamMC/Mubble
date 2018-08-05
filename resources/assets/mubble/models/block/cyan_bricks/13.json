@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "mubble:block/cyan_bricks/13"
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XOX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:wool",
+      "data": 14
+    },
+    "O": {
+      "item": "vanadium"
+    }
+  },
+  "result": {
+    "item": "japanese_tetris_cushion",
+    "count": 8
+  }
+}

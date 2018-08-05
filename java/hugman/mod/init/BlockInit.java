@@ -6,6 +6,7 @@ import java.util.List;
 import hugman.mod.Main;
 import hugman.mod.objects.blocks.BlockBase;
 import hugman.mod.objects.blocks.BlockBrick;
+import hugman.mod.objects.blocks.BlockGlass;
 import hugman.mod.objects.blocks.BlockNote;
 import hugman.mod.objects.blocks.BlockOre;
 import hugman.mod.objects.blocks.BlockQuestion;
@@ -29,13 +30,11 @@ public class BlockInit
 	public static final Block POLISHED_BLUNITE = new BlockBase("polished_blunite", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, 1.5f, 30f, SoundType.STONE, 0);
 	public static final Block CARBONITE = new BlockBase("carbonite", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, 1.5f, 30f, SoundType.STONE, 0);
 	public static final Block POLISHED_CARBONITE = new BlockBase("polished_carbonite", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, 1.5f, 30f, SoundType.STONE, 0);
-	
-	// Extra
 	public static final Block FOOTBLOCK = new BlockBase("footblock", CreativeTabs.DECORATIONS, Material.CLOTH, 0.8f, 4f, SoundType.CLOTH, 0);
 	
 	// Mario
 	public static final Block QUESTION_BLOCK = new BlockQuestion();
-	public static final Block EMPTY_BLOCK = new BlockBase("empty_block", Main.NINTENDO_BLOCKS, Material.IRON, 1.5f, 30f, SoundType.METAL, 0);
+	public static final Block EMPTY_BLOCK = new BlockBase("empty_block", Main.NINTENDO_BLOCKS, Material.IRON, 1.5f, 30f, SoundTypeInit.EMPTY_BLOCK, 0);
 	public static final Block ROTATING_BLOCK = new BlockRotating();
 	public static final Block LIGHT_BLOCK = new BlockBase("light_block", Main.NINTENDO_BLOCKS, Material.ROCK, 1.5f, 30f, SoundType.STONE, 15);
 	public static final Block BRICK_BLOCK = new BlockBrick("normal");
@@ -44,11 +43,23 @@ public class BlockInit
 	public static final Block SUPER_NOTE_BLOCK = new BlockNote("super");
 	
 	// Tetris
-	public static final Block BLUE_TETRIS_BLOCK = new BlockTetris("blue");
-	public static final Block GREEN_TETRIS_BLOCK = new BlockTetris("green");
-	public static final Block YELLOW_TETRIS_BLOCK = new BlockTetris("yellow");
-	public static final Block ORANGE_TETRIS_BLOCK = new BlockTetris("orange");
-	public static final Block RED_TETRIS_BLOCK = new BlockTetris("red");
-	public static final Block PURPLE_TETRIS_BLOCK = new BlockTetris("purple");
-	public static final Block GRAY_TETRIS_BLOCK = new BlockTetris("gray");
+	public static final Block BLUE_TETRIS_BLOCK = new BlockTetris("blue", "block", Material.ROCK);
+	public static final Block LIGHT_BLUE_TETRIS_BLOCK = new BlockTetris("light_blue", "block" ,Material.ROCK);
+	public static final Block GREEN_TETRIS_BLOCK = new BlockTetris("green", "block", Material.ROCK);
+	public static final Block YELLOW_TETRIS_BLOCK = new BlockTetris("yellow", "block", Material.ROCK);
+	public static final Block ORANGE_TETRIS_BLOCK = new BlockTetris("orange", "block", Material.ROCK);
+	public static final Block RED_TETRIS_BLOCK = new BlockTetris("red", "block", Material.ROCK);
+	public static final Block PURPLE_TETRIS_BLOCK = new BlockTetris("purple", "block", Material.ROCK);
+	public static final Block GRAY_TETRIS_BLOCK = new BlockTetris("gray", "block", Material.ROCK);
+	public static final Block TETRIS_GLASS = new BlockGlass("tetris_glass", Main.NINTENDO_BLOCKS);
+	public static final Block JAPANESE_TETRIS_CUSHION = new BlockTetris("japanese", "cushion", Material.CLOTH);
+	public static final Block RAINBOW_TETRIS_SCAFFOLDING = new BlockTetris("rainbow", "scaffolding", Material.IRON);
+	public static final Block MONOCHROME_TETRIS_SCAFFOLDING = new BlockTetris("monochrome", "scaffolding", Material.IRON);
+	
+	// Celeste
+	public static final Block IRON_SCAFFOLDING = new BlockBase("iron_scaffolding", Main.NINTENDO_BLOCKS, Material.IRON, 5f, 30f, SoundType.METAL, 0);
+	public static final Block PURPLE_BRICKS = new BlockBase("purple_bricks", Main.NINTENDO_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 0);
+	public static final Block CYAN_BRICKS = new BlockBase("cyan_bricks", Main.NINTENDO_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 0);
+	public static final Block ELDER_PEBBLES = new BlockBase("elder_pebbles", Main.NINTENDO_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 5);
+	public static final Block SPACE_MATTER = new BlockBase("space_matter", Main.NINTENDO_BLOCKS, Material.SAND, 0.4f, 30f, SoundTypeInit.SPACE_MATTER, 5);
 }

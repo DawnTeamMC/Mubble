@@ -15,6 +15,7 @@
     }
   },
   "result": {
-    "item": "red_bricks"
+    "item": "red_bricks",
+    "count": 8
   }
 }
