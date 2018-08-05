@@ -64,3 +64,12 @@ subtitles.block.question_block.loot.coin=Pièce sortie d'un bloc ?
 subtitles.entity.toad.ambient=Toad qui parle
 subtitles.entity.toad.hurt=Toad qui souffre
 subtitles.entity.toad.death=Toad qui meurt
+
+advancements.mubble.root.title=<newline>
+advancements.mubble.root.description=<newline>
+advancements.mubble.get_coin.title=<newline>
+advancements.mubble.get_coin.description=<newline>
+advancements.mubble.get_vanadium.title=<newline>
+advancements.mubble.get_vanadium.description=<newline>
+advancements.mubble.get_tetris_block.title=<newline>
+advancements.mubble.get_tetris_block.description=<newline>

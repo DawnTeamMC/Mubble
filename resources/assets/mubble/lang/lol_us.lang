@@ -64,3 +64,12 @@ subtitles.block.question_block.loot.coin=BLOCO ???? drop coin
 subtitles.entity.toad.ambient=tod bups
 subtitles.entity.toad.hurt=todtod oofs
 subtitles.entity.toad.death=tod ded
+
+advancements.mubble.root.title=<newline>
+advancements.mubble.root.description=<newline>
+advancements.mubble.get_coin.title=<newline>
+advancements.mubble.get_coin.description=<newline>
+advancements.mubble.get_vanadium.title=<newline>
+advancements.mubble.get_vanadium.description=<newline>
+advancements.mubble.get_tetris_block.title=<newline>
+advancements.mubble.get_tetris_block.description=<newline>

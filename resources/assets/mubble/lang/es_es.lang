@@ -64,3 +64,12 @@ subtitles.block.question_block.loot.coin=Bloque ? suelta una moneda
 subtitles.entity.toad.ambient=Toad balbucea
 subtitles.entity.toad.hurt=Toad herido
 subtitles.entity.toad.death=Toad muere
+
+advancements.mubble.root.title=<newline>
+advancements.mubble.root.description=<newline>
+advancements.mubble.get_coin.title=<newline>
+advancements.mubble.get_coin.description=<newline>
+advancements.mubble.get_vanadium.title=<newline>
+advancements.mubble.get_vanadium.description=<newline>
+advancements.mubble.get_tetris_block.title=<newline>
+advancements.mubble.get_tetris_block.description=<newline>
