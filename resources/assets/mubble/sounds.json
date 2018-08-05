@@ -20,6 +20,7 @@
 	"block.empty_block.break":
 	{
 		"category": "block",
+		"subtitle": "subtitles.block.generic.break",
 		"sounds":
 		[
 			"mubble:block/empty_block/break"
@@ -28,6 +29,7 @@
 	"block.brick_block.break":
 	{
 		"category": "block",
+		"subtitle": "subtitles.block.generic.break",
 		"sounds":
 		[
 			"mubble:block/brick_block/break"
