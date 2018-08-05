@@ -28,7 +28,7 @@ tile.orange_tetris_block.name=Bloque Tetris naranja
 tile.red_tetris_block.name=Bloque Tetris rojo
 tile.purple_tetris_block.name=Bloque Tetris morado
 tile.gray_tetris_block.name=Bloque Tetris gris
-tile.tetris_glass.name=Cristal Tetris
+tile.tetris_glass.name=Bloque Tetris de cristal
 tile.japanese_tetris_cushion.name=Cojín Tetris japonés
 tile.rainbow_tetris_scaffolding.name=Andamio Tetris arco iris
 tile.monochrome_tetris_scaffolding.name=Andamio Tetris monocromático
@@ -36,7 +36,7 @@ tile.monochrome_tetris_scaffolding.name=Andamio Tetris monocromático
 tile.iron_scaffolding.name=Andamio de hierro
 tile.purple_bricks.name=Ladrillos morados
 tile.cyan_bricks.name=Ladrillos cian
-tile.elder_pebbles.name=Anciano guijarros
+tile.elder_pebbles.name=Guijarros antiguos
 tile.space_matter.name=Materia espacial
 
 item.vanadium.name=Vanadio
