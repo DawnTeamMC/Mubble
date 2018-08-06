@@ -31,7 +31,7 @@ tile.gray_tetris_block.name=灰色俄罗斯方块
 tile.tetris_glass.name=俄罗斯方块玻璃
 tile.japanese_tetris_cushion.name=日式俄罗斯方块坐垫
 tile.rainbow_tetris_scaffolding.name=彩虹俄罗斯方块脚手架
-tile.monochrome_tetris_scaffolding.name=单色俄罗斯方块脚手架
+tile.monochrome_tetris_scaffolding.name=黑白俄罗斯方块脚手架
 
 tile.iron_scaffolding.name=铁质脚手架
 tile.purple_bricks.name=紫色砖块
