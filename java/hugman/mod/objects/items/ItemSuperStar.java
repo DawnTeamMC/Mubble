@@ -31,7 +31,7 @@ public class ItemSuperStar extends ItemFood implements IHasModel
 		player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 600, 3));
 		player.addPotionEffect(new PotionEffect(Potion.getPotionById(11), 600, 1));
 		player.addPotionEffect(new PotionEffect(Potion.getPotionById(16), 600, 0));
-		player.playSound(SoundHandler.ITEM_SUPER_STAR_THEME, 10000, 1);
+		player.playSound(SoundHandler.ITEM_SUPER_STAR_THEME, 60000000, 1);
 	}
 	
 	@Override
