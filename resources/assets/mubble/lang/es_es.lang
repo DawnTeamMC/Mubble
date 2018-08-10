@@ -66,10 +66,10 @@ subtitles.entity.toad.hurt=Toad herido
 subtitles.entity.toad.death=Toad muere
 
 advancements.mubble.root.title=Mubble
-advancements.mubble.root.description=<newline>
-advancements.mubble.get_coin.title=<newline>
-advancements.mubble.get_coin.description=<newline>
-advancements.mubble.get_vanadium.title=<newline>
-advancements.mubble.get_vanadium.description=<newline>
-advancements.mubble.get_tetris_block.title=<newline>
-advancements.mubble.get_tetris_block.description=<newline>
+advancements.mubble.root.description=Una nueva aventura
+advancements.mubble.get_coin.title=¡Es mío! ¡Oro!
+advancements.mubble.get_coin.description=Encuentra monedas
+advancements.mubble.get_vanadium.title=Vanadios!
+advancements.mubble.get_vanadium.description=Adquiere vanadios
+advancements.mubble.get_tetris_block.title=Está todo conectado
+advancements.mubble.get_tetris_block.description=Consigue un bloque Tetris

@@ -1,0 +1,75 @@
+itemGroup.nintendo_items_tab=Hav-ajo Nintendo
+itemGroup.nintendo_blocks_tab=Blokos Nintendo
+
+tile.vanadium_block.name=Bloko di vanadio
+tile.vanadium_ore.name=Erco di vanadio
+tile.red_bricks.name=Briki reda
+tile.white_bricks.name=Briki blanka
+tile.blunite.name=Blunito
+tile.polished_blunite.name=Blunito polisita
+tile.carbonite.name=Carbonito
+tile.polished_carbonite.name=Carbonito polisita
+tile.footblock.name=Futbloko
+
+tile.question_block.name=Bloko ? 
+tile.empty_block.name=Bloko vakua
+tile.rotating_block.name=Bloko rotaco
+tile.light_block.name=Bloko lumo
+tile.brick_block.name=Bloko briko
+tile.golden_brick_block.name=Bloko briko oro
+tile.note_block.name=Bloko noto
+tile.super_note_block.name=Bloko figuranto noto
+
+tile.blue_tetris_block.name=Blue Tetris Block
+tile.light_blue_tetris_block.name=Light Blue Tetris Block
+tile.green_tetris_block.name=Green Tetris Block
+tile.yellow_tetris_block.name=Yellow Tetris Block
+tile.orange_tetris_block.name=Orange Tetris Block
+tile.red_tetris_block.name=Red Tetris Block
+tile.purple_tetris_block.name=Purple Tetris Block
+tile.gray_tetris_block.name=Gray Tetris Block
+tile.tetris_glass.name=Tetris Glass
+tile.japanese_tetris_cushion.name=Japanese Tetris Cushion
+tile.rainbow_tetris_scaffolding.name=Rainbow Tetris Scaffolding
+tile.monochrome_tetris_scaffolding.name=Monochrome Tetris Scaffolding
+
+tile.iron_scaffolding.name=Iron Scaffolding
+tile.purple_bricks.name=Purple Bricks
+tile.cyan_bricks.name=Cyan Bricks
+tile.elder_pebbles.name=Elder Pebbles
+tile.space_matter.name=Space Matter
+
+item.vanadium.name=Vanadium
+item.wheat_flour.name=Wheat Flour
+item.caramel_cube.name=Caramel Cube
+item.crepe.name=Crêpe
+item.chocolate_crepe.name=Chocolate Crêpe
+item.caramel_crepe.name=Caramel Crêpe
+
+item.super_mushroom.name=Super Mushroom
+item.peach.name=Peach
+item.super_star.name=Super Star
+item.yellow_coin.name=Yellow Coin
+item.red_coin.name=Red Coin
+item.blue_coin.name=Blue Coin
+item.cappy.name=Cappy
+
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
+
+entity.toad.name=Toad
+
+subtitles.block.question_block.loot.super_mushroom=? Block drops super mushroom
+subtitles.block.question_block.loot.coin=? Block drops coin
+subtitles.entity.toad.ambient=Toad mumbles
+subtitles.entity.toad.hurt=Toad hurts
+subtitles.entity.toad.death=Toad dies
+
+advancements.mubble.root.title=Mubble
+advancements.mubble.root.description=A grand new journey
+advancements.mubble.get_coin.title=It's mine! Gold!
+advancements.mubble.get_coin.description=Find coins
+advancements.mubble.get_vanadium.title=Vanadiums!
+advancements.mubble.get_vanadium.description=Acquire vanadiums
+advancements.mubble.get_tetris_block.title=It's All Connected
+advancements.mubble.get_tetris_block.description=Get your hand on a Tetris Block
