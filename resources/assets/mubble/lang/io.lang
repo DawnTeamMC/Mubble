@@ -46,12 +46,12 @@ item.crepe.name=Krepo
 item.chocolate_crepe.name=Krepo di chokolado
 item.caramel_crepe.name=Krepo di karamelo
 
-item.super_mushroom.name=Super Mushroom
-item.peach.name=Peach
-item.super_star.name=Super Star
-item.yellow_coin.name=Yellow Coin
-item.red_coin.name=Red Coin
-item.blue_coin.name=Blue Coin
+item.super_mushroom.name=Champiniono figuranto
+item.peach.name=Persiko
+item.super_star.name=Stelo figuranto
+item.yellow_coin.name=Moneto flava
+item.red_coin.name=Moneto reda
+item.blue_coin.name=Moneto blua
 item.cappy.name=Cappy
 
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
@@ -59,11 +59,11 @@ item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
 
 entity.toad.name=Toad
 
-subtitles.block.question_block.loot.super_mushroom=? Block drops super mushroom
-subtitles.block.question_block.loot.coin=? Block drops coin
-subtitles.entity.toad.ambient=Toad mumbles
-subtitles.entity.toad.hurt=Toad hurts
-subtitles.entity.toad.death=Toad dies
+subtitles.block.question_block.loot.super_mushroom=Bloko ? falas champiniono figuranto
+subtitles.block.question_block.loot.coin=Bloko ? falas moneto
+subtitles.entity.toad.ambient=Toad murmura
+subtitles.entity.toad.hurt=Toad doloranta
+subtitles.entity.toad.death=Toad mortanta
 
 advancements.mubble.root.title=Mubble
 advancements.mubble.root.description=A grand new journey
