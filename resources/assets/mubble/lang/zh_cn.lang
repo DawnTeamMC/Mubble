@@ -1,5 +1,5 @@
-itemGroup.nintendo_items_tab=任天堂物品
-itemGroup.nintendo_blocks_tab=任天堂方块
+itemGroup.mubble_items_tab=Mubble物品
+itemGroup.mubble_blocks_tab=Mubble方块
 
 tile.vanadium_block.name=钒块
 tile.vanadium_ore.name=钒矿石
@@ -65,7 +65,7 @@ subtitles.entity.toad.ambient=奇诺比奥:咕哝
 subtitles.entity.toad.hurt=奇诺比奥:受伤
 subtitles.entity.toad.death=奇诺比奥:死亡
 
-advancements.mubble.root.title=探索任天堂领域
+advancements.mubble.root.title=Mubble
 advancements.mubble.root.description=一次伟大崭新的旅程
 advancements.mubble.get_coin.title=宝藏是我的！
 advancements.mubble.get_coin.description=找到硬币

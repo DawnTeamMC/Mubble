@@ -1,5 +1,5 @@
-itemGroup.nintendo_items_tab=nerdtendo toys
-itemGroup.nintendo_blocks_tab=nerdtendo cubes
+itemGroup.mubble_items_tab=Mubble toys
+itemGroup.mubble_blocks_tab=Mubble cubes
 
 tile.vanadium_block.name=shiny purple cube
 tile.vanadium_ore.name=shiny purple in blox

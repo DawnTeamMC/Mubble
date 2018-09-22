@@ -1,5 +1,5 @@
-itemGroup.nintendo_items_tab=Nintendo Items
-itemGroup.nintendo_blocks_tab=Nintendo Blocks
+itemGroup.mubble_items_tab=Mubble Items
+itemGroup.mubble_blocks_tab=Mubble Blocks
 
 tile.vanadium_block.name=Block of Vanadium
 tile.vanadium_ore.name=Vanadium Ore
