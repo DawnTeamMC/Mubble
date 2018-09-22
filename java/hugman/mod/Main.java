@@ -21,8 +21,8 @@ public class Main
 	@SidedProxy(clientSide = Reference.CLIENTPROXY, serverSide = Reference.COMMONPROXY)
 	public static CommonProxy proxy;
 	
-	public static final CreativeTabs NINTENDO_ITEMS = new NintendoItemsTab("nintendo_items_tab");
-	public static final CreativeTabs NINTENDO_BLOCKS = new NintendoBlocksTab("nintendo_blocks_tab");
+	public static final CreativeTabs MUBBLE_ITEMS = new MubbleItemsTab("mubble_items_tab");
+	public static final CreativeTabs MUBBLE_BLOCKS = new MubbleBlocksTab("mubble_blocks_tab");
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event)

@@ -29,14 +29,14 @@ public class ItemInit
 	public static final Item CARAMEL_CREPE = new ItemEdible("caramel_crepe", CreativeTabs.FOOD, 9, 3.4f, false);
 	
 	// Mario
-	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", Main.NINTENDO_ITEMS, 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));
-	public static final Item PEACH = new ItemEdible("peach", Main.NINTENDO_ITEMS, 4, 2.4f, true);
+	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", Main.MUBBLE_ITEMS, 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));
+	public static final Item PEACH = new ItemEdible("peach", Main.MUBBLE_ITEMS, 4, 2.4f, true);
 	public static final Item SUPER_STAR = new ItemSuperStar();
-	public static final Item YELLOW_COIN = new ItemBase("yellow_coin", Main.NINTENDO_ITEMS);
-	public static final Item RED_COIN = new ItemBase("red_coin", Main.NINTENDO_ITEMS);
-	public static final Item BLUE_COIN = new ItemBase("blue_coin", Main.NINTENDO_ITEMS);
-	public static final Item CAPPY = new ItemHelmet("cappy", Main.NINTENDO_ITEMS);
-	public static final Item RECORD_CHAMPIONS_ROAD = new ItemMusicDisc("champions_road", SoundHandler.RECORD_CHAMPIONS_ROAD, Main.NINTENDO_ITEMS);
+	public static final Item YELLOW_COIN = new ItemBase("yellow_coin", Main.MUBBLE_ITEMS);
+	public static final Item RED_COIN = new ItemBase("red_coin", Main.MUBBLE_ITEMS);
+	public static final Item BLUE_COIN = new ItemBase("blue_coin", Main.MUBBLE_ITEMS);
+	public static final Item CAPPY = new ItemHelmet("cappy", Main.MUBBLE_ITEMS);
+	public static final Item RECORD_CHAMPIONS_ROAD = new ItemMusicDisc("champions_road", SoundHandler.RECORD_CHAMPIONS_ROAD, Main.MUBBLE_ITEMS);
 	
 	// Splatoon
 	// public static final Item RECORD_EBB_FLOW_DEMO = new ItemMusicDisc("ebb_flow_demo", SoundHandler.RECORD_EBB_FLOW_DEMO, null);

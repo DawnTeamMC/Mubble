@@ -18,7 +18,7 @@ public class ItemSuperStar extends ItemFood implements IHasModel
 		super(3, 2.4f, false);
 		setTranslationKey("super_star");
 		setRegistryName("super_star");
-		setCreativeTab(Main.NINTENDO_ITEMS);
+		setCreativeTab(Main.MUBBLE_ITEMS);
 		setAlwaysEdible();
 		ItemInit.ITEMS.add(this);
 	}

@@ -20,7 +20,7 @@ public class BlockRotating extends Block implements IHasModel
 		super(Material.ROCK);
 		setTranslationKey("rotating_block");
 		setRegistryName("rotating_block");
-		setCreativeTab(Main.NINTENDO_BLOCKS);
+		setCreativeTab(Main.MUBBLE_BLOCKS);
 		setHardness(1.5f);
 		this.blockResistance = 20f;
 		setSoundType(SoundType.STONE);

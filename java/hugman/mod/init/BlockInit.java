@@ -21,7 +21,7 @@ public class BlockInit
 {
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
 	
-	// Vanilla
+	// VANILLA
 	public static final Block VANADIUM_BLOCK = new BlockBase("vanadium_block", CreativeTabs.BUILDING_BLOCKS, Material.IRON, 5f, 30f, SoundType.METAL, 0);
 	public static final Block VANADIUM_ORE = new BlockOre("vanadium_ore");
 	public static final Block RED_BRICKS = new BlockBase("red_bricks", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 0);
@@ -32,17 +32,17 @@ public class BlockInit
 	public static final Block POLISHED_CARBONITE = new BlockBase("polished_carbonite", CreativeTabs.BUILDING_BLOCKS, Material.ROCK, 1.5f, 30f, SoundType.STONE, 0);
 	public static final Block FOOTBLOCK = new BlockBase("footblock", CreativeTabs.DECORATIONS, Material.CLOTH, 0.8f, 4f, SoundType.CLOTH, 0);
 	
-	// Mario
+	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();
-	public static final Block EMPTY_BLOCK = new BlockBase("empty_block", Main.NINTENDO_BLOCKS, Material.IRON, 1.5f, 30f, SoundTypeInit.EMPTY_BLOCK, 0);
+	public static final Block EMPTY_BLOCK = new BlockBase("empty_block", Main.MUBBLE_BLOCKS, Material.IRON, 1.5f, 30f, SoundTypeInit.EMPTY_BLOCK, 0);
 	public static final Block ROTATING_BLOCK = new BlockRotating();
-	public static final Block LIGHT_BLOCK = new BlockBase("light_block", Main.NINTENDO_BLOCKS, Material.ROCK, 1.5f, 30f, SoundType.STONE, 15);
+	public static final Block LIGHT_BLOCK = new BlockBase("light_block", Main.MUBBLE_BLOCKS, Material.ROCK, 1.5f, 30f, SoundType.STONE, 15);
 	public static final Block BRICK_BLOCK = new BlockBrick("normal");
 	public static final Block GOLDEN_BRICK_BLOCK = new BlockBrick("golden");
 	public static final Block NOTE_BLOCK = new BlockNote("normal");
 	public static final Block SUPER_NOTE_BLOCK = new BlockNote("super");
 	
-	// Tetris
+	// TETRIS
 	public static final Block BLUE_TETRIS_BLOCK = new BlockTetris("blue", "block", Material.ROCK);
 	public static final Block LIGHT_BLUE_TETRIS_BLOCK = new BlockTetris("light_blue", "block" ,Material.ROCK);
 	public static final Block GREEN_TETRIS_BLOCK = new BlockTetris("green", "block", Material.ROCK);
@@ -51,15 +51,15 @@ public class BlockInit
 	public static final Block RED_TETRIS_BLOCK = new BlockTetris("red", "block", Material.ROCK);
 	public static final Block PURPLE_TETRIS_BLOCK = new BlockTetris("purple", "block", Material.ROCK);
 	public static final Block GRAY_TETRIS_BLOCK = new BlockTetris("gray", "block", Material.ROCK);
-	public static final Block TETRIS_GLASS = new BlockGlass("tetris_glass", Main.NINTENDO_BLOCKS);
+	public static final Block TETRIS_GLASS = new BlockGlass("tetris_glass", Main.MUBBLE_BLOCKS);
 	public static final Block JAPANESE_TETRIS_CUSHION = new BlockTetris("japanese", "cushion", Material.CLOTH);
 	public static final Block RAINBOW_TETRIS_SCAFFOLDING = new BlockTetris("rainbow", "scaffolding", Material.IRON);
 	public static final Block MONOCHROME_TETRIS_SCAFFOLDING = new BlockTetris("monochrome", "scaffolding", Material.IRON);
 	
-	// Celeste
-	public static final Block IRON_SCAFFOLDING = new BlockBase("iron_scaffolding", Main.NINTENDO_BLOCKS, Material.IRON, 5f, 30f, SoundType.METAL, 0);
-	public static final Block PURPLE_BRICKS = new BlockBase("purple_bricks", Main.NINTENDO_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 0);
-	public static final Block CYAN_BRICKS = new BlockBase("cyan_bricks", Main.NINTENDO_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 0);
-	public static final Block ELDER_PEBBLES = new BlockBase("elder_pebbles", Main.NINTENDO_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 5);
-	public static final Block SPACE_MATTER = new BlockBase("space_matter", Main.NINTENDO_BLOCKS, Material.SAND, 0.4f, 30f, SoundTypeInit.SPACE_MATTER, 5);
+	// CELESTE
+	public static final Block IRON_SCAFFOLDING = new BlockBase("iron_scaffolding", Main.MUBBLE_BLOCKS, Material.IRON, 5f, 30f, SoundType.METAL, 0);
+	public static final Block PURPLE_BRICKS = new BlockBase("purple_bricks", Main.MUBBLE_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 0);
+	public static final Block CYAN_BRICKS = new BlockBase("cyan_bricks", Main.MUBBLE_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 0);
+	public static final Block ELDER_PEBBLES = new BlockBase("elder_pebbles", Main.MUBBLE_BLOCKS, Material.ROCK, 2f, 30f, SoundType.STONE, 5);
+	public static final Block SPACE_MATTER = new BlockBase("space_matter", Main.MUBBLE_BLOCKS, Material.SAND, 0.4f, 30f, SoundTypeInit.SPACE_MATTER, 5);
 }

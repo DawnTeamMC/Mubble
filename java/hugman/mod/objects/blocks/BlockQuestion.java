@@ -29,7 +29,7 @@ public class BlockQuestion extends Block implements IHasModel
 		super(Material.IRON);
 		setTranslationKey("question_block");
 		setRegistryName("question_block");
-		setCreativeTab(Main.NINTENDO_BLOCKS);
+		setCreativeTab(Main.MUBBLE_BLOCKS);
 		setHardness(1.5f);
 		this.blockResistance = 30f;
 		setSoundType(SoundType.METAL);

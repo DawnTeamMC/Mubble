@@ -17,7 +17,7 @@ public class BlockTetris extends BlockFalling implements IHasModel
 		super(material);
 		setTranslationKey(color+"_tetris_"+type);
 		setRegistryName(color+"_tetris_"+type);
-		setCreativeTab(Main.NINTENDO_BLOCKS);
+		setCreativeTab(Main.MUBBLE_BLOCKS);
 		if(material==Material.ROCK)
 		{
 			setHardness(1.5f);

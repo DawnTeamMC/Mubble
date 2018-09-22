@@ -30,7 +30,7 @@ public class BlockBrick extends Block implements IHasModel
 			setTranslationKey("golden_brick_block");
 			setRegistryName("golden_brick_block");
 		}
-		setCreativeTab(Main.NINTENDO_BLOCKS);
+		setCreativeTab(Main.MUBBLE_BLOCKS);
 		setHardness(1.5f);
 		this.blockResistance = 20f;
 		setSoundType(SoundTypeInit.BRICK_BLOCK);

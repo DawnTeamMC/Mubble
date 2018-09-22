@@ -33,7 +33,7 @@ public class BlockNote extends Block implements IHasModel
 			setTranslationKey("super_note_block");
 			setRegistryName("super_note_block");
 		}
-		setCreativeTab(Main.NINTENDO_BLOCKS);
+		setCreativeTab(Main.MUBBLE_BLOCKS);
 		setHardness(1.4f);
 		this.blockResistance = 10f;
 		setSoundType(SoundType.STONE);
