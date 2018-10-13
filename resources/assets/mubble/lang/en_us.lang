@@ -63,6 +63,8 @@ tile.green_candy_cane_pillar.name=Green Candy Cane Pillar
 tile.yellow_candy_cane_pillar.name=Yellow Candy Cane Pillar
 tile.red_candy_cane_pillar.name=Red Candy Cane Pillar
 
+tile.koretato_block.name=Koretato Block
+
 --- ITEMS ---
 item.vanadium.name=Vanadium
 item.wheat_flour.name=Wheat Flour

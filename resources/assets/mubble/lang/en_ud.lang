@@ -63,6 +63,8 @@ tile.green_candy_cane_pillar.name=<newline>
 tile.yellow_candy_cane_pillar.name=<newline>
 tile.red_candy_cane_pillar.name=<newline>
 
+tile.koretato_block.name=<newline>
+
 --- ITEMS ---
 item.vanadium.name=ɯnᴉpɐuɐΛ
 item.wheat_flour.name=ɹnolℲ ʇɐǝɥM
@@ -70,6 +72,7 @@ item.caramel_cube.name=ǝqnƆ lǝɯɐɹɐƆ
 item.crepe.name=ǝdǝɹƆ
 item.chocolate_crepe.name=ǝdǝɹƆ ǝʇɐloɔoɥƆ
 item.caramel_crepe.name=ǝdǝɹƆ lǝɯɐɹɐƆ
+item.candy_cane.name=<newline>
 
 item.super_mushroom.name=ɯooɹɥsnW ɹǝdnS
 item.peach.name=ɥɔɐǝԀ
@@ -93,7 +96,6 @@ item.bandana.name=ɐuɐpuɐᗺ
 item.smash_ball.name=llɐᗺ ɥsɐɯS
 
 item.headphones.name=<newline>
-item.record_blank.name=<newline>
 item.record_blank.name=ɔsᴉp ɔᴉsnW ʞuɐlᗺ
 item.record.champions_road.desc=pɐoᴚ s,uoᴉdɯɐɥƆ - plɹoM ᗡƐ oᴉɹɐW ɹǝdnS
 item.record.fly_octo_fly.desc=ʎlℲ oʇɔO ʎlℲ - ᘔ uooʇɐldS

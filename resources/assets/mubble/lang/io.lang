@@ -63,6 +63,8 @@ tile.green_candy_cane_pillar.name=<newline>
 tile.yellow_candy_cane_pillar.name=<newline>
 tile.red_candy_cane_pillar.name=<newline>
 
+tile.koretato_block.name=<newline>
+
 --- ITEMS ---
 item.vanadium.name=Vanadio
 item.wheat_flour.name=Farino di frumento 
@@ -70,6 +72,7 @@ item.caramel_cube.name=Kubo di karamelo
 item.crepe.name=Krepo
 item.chocolate_crepe.name=Krepo di chokolado
 item.caramel_crepe.name=Krepo di karamelo
+item.candy_cane.name=<newline>
 
 item.super_mushroom.name=Champiniono figuranto
 item.peach.name=Persiko

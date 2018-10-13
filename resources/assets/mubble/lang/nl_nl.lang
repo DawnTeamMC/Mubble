@@ -50,6 +50,12 @@ tile.space_matter.name=Ruimte materie
 tile.vampire_stone.name=<newline>
 tile.medusa_stone.name=<newline>
 tile.medusa_bricks.name=<newline>
+tile.blue_candy_cane_pillar.name=<newline>
+tile.green_candy_cane_pillar.name=<newline>
+tile.yellow_candy_cane_pillar.name=<newline>
+tile.red_candy_cane_pillar.name=<newline>
+
+tile.koretato_block.name=<newline>
 
 --- ITEMS ---
 item.vanadium.name=Vanadium
@@ -58,7 +64,7 @@ item.caramel_cube.name=Karamel kubus
 item.crepe.name=Crêpe
 item.chocolate_crepe.name=Chocolade crêpe
 item.caramel_crepe.name=Karamel crêpe
-item.headphones.name=<newline>
+item.candy_cane.name=<newline>
 
 item.super_mushroom.name=Super paddenstoel
 item.peach.name=Perzik
@@ -76,12 +82,14 @@ item.bandana.name=<newline>
 
 item.smash_ball.name=<newline>
 
-item.noteblock_head.name=<newline>
-
+item.headphones.name=<newline>
 item.record_blank.name=<newline>
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
 item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+
+item.mayro_cap.name=<newline>
+item.noteblock_head.name=<newline>
 item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
 item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
 item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
