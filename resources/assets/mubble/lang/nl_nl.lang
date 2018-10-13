@@ -1,6 +1,9 @@
-itemGroup.mubble_items_tab=Mubble voorwerpen
+--- CREATIVE TABS ---
 itemGroup.mubble_blocks_tab=Mubble blokken
+itemGroup.mubble_items_tab=Mubble voorwerpen
+itemGroup.mubble_costumes_tab=<newline>
 
+--- BLOCKS ---
 tile.vanadium_block.name=Vanadiumblok
 tile.vanadium_ore.name=Vanadiumerts
 tile.red_bricks.name=Rode bakstenen
@@ -19,6 +22,11 @@ tile.brick_block.name=Baksteenblok
 tile.golden_brick_block.name=Gouden baksteenblok
 tile.note_block.name=Nootblok
 tile.super_note_block.name=Super nootblok
+tile.fire_flower.name=<newline>
+tile.ice_flower.name=<newline>
+tile.boomerang_flower.name=<newline>
+tile.cloud_flower.name=<newline>
+tile.cloud_block.name=<newline>
 
 tile.blue_tetris_block.name=Blauw Tetris blok
 tile.light_blue_tetris_block.name=Lichtblauw Tetris blok
@@ -39,32 +47,60 @@ tile.cyan_bricks.name=Turquoise bakstenen
 tile.elder_pebbles.name=Oudere keizels
 tile.space_matter.name=Ruimte materie
 
+tile.vampire_stone.name=<newline>
+tile.medusa_stone.name=<newline>
+tile.medusa_bricks.name=<newline>
+
+--- ITEMS ---
 item.vanadium.name=Vanadium
 item.wheat_flour.name=Tarwemeel
 item.caramel_cube.name=Karamel kubus
 item.crepe.name=Crêpe
 item.chocolate_crepe.name=Chocolade crêpe
 item.caramel_crepe.name=Karamel crêpe
+item.headphones.name=<newline>
 
 item.super_mushroom.name=Super paddenstoel
 item.peach.name=Perzik
+item.cape_feather.name=<newline>
 item.super_star.name=Super ster
 item.yellow_coin.name=Gele munt
 item.red_coin.name=Rode munt
 item.blue_coin.name=Blauwe munt
 item.cappy.name=Cappy
+item.princess_peach_crown.name=<newline>
+item.princess_daisy_crown.name=<newline>
+item.super_crown.name=Superkroon
 
+item.bandana.name=<newline>
+
+item.smash_ball.name=<newline>
+
+item.noteblock_head.name=<newline>
+
+item.record_blank.name=<newline>
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
-item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
 
+--- ENTITIES ---
 entity.toad.name=Toad
+entity.chincho.name=<newline>
 
+--- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=?-blok plundert super paddenstoel
 subtitles.block.question_block.loot.coin=?-blok laat munt vallen
+subtitles.item.cape_feather.use=<newline>
+subtitles.item.smash_ball.use=<newline>
 subtitles.entity.toad.ambient=Toad mompelt
 subtitles.entity.toad.hurt=Toad heeft pijn
 subtitles.entity.toad.death=Toad sterft
 
+--- ADVANCEMENTS ---
 advancements.mubble.root.title=Mubble
 advancements.mubble.root.description=Een grandioos nieuw avontuur
 advancements.mubble.get_coin.title=Het is van mij! Goud!

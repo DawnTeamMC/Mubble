@@ -1,6 +1,9 @@
-itemGroup.mubble_items_tab=Mubble toys
+--- CREATIVE TABS ---
 itemGroup.mubble_blocks_tab=Mubble cubes
+itemGroup.mubble_items_tab=Mubble toys
+itemGroup.mubble_costumes_tab=<newline>
 
+--- BLOCKS ---
 tile.vanadium_block.name=shiny purple cube
 tile.vanadium_ore.name=shiny purple in blox
 tile.red_bricks.name=bloo brik
@@ -19,6 +22,19 @@ tile.brick_block.name=brik stak
 tile.golden_brick_block.name=guld brik stak
 tile.note_block.name=bouncy stun
 tile.super_note_block.name=SUPER bouncy stun
+tile.fire_flower.name=fir flow
+tile.ice_flower.name=ice flow
+tile.boomerang_flower.name=triangle ting flow
+tile.cloud_flower.name=clown flow
+tile.cloud_block.name=clown blok
+tile.blue_mushroom.name=<newline>
+tile.green_mushroom.name=<newline>
+tile.yellow_mushroom.name=<newline>
+tile.purple_mushroom.name=<newline>
+tile.blue_mushroom_block.name=<newline>
+tile.green_mushroom_block.name=<newline>
+tile.yellow_mushroom_block.name=<newline>
+tile.purple_mushroom_block.name=<newline>
 
 tile.blue_tetris_block.name=cool blu tetri
 tile.blue_tetris_block.name=cool lit bloo tetri
@@ -39,6 +55,15 @@ tile.cyan_bricks.name=nyan briks
 tile.elder_pebbles.name=old pebbL
 tile.space_matter.name=MARTIAN DIRT OoOoOoO
 
+tile.vampire_stone.name=spooky ston
+tile.medusa_stone.name=the stone in the room with the sp0ky girl with snakes on her head
+tile.medusa_bricks.name=the bricks in the room with the sp00ky girl with snakes on her head
+tile.blue_candy_cane_pillar.name=<newline>
+tile.green_candy_cane_pillar.name=<newline>
+tile.yellow_candy_cane_pillar.name=<newline>
+tile.red_candy_cane_pillar.name=<newline>
+
+--- ITEMS ---
 item.vanadium.name=shiny purple
 item.wheat_flour.name=wet floor
 item.caramel_cube.name=tiny caraml boii
@@ -48,23 +73,51 @@ item.caramel_crepe.name=crepe + caraml good
 
 item.super_mushroom.name=SUPA MUSH
 item.peach.name=salty peesh very gud
+item.cape_feather.name=cool feather that VOOHOOING
 item.super_star.name=SUPA STARR
 item.yellow_coin.name=yullu coIn
 item.red_coin.name=bloody cIn
 item.blue_coin.name=blu cooin
 item.cappy.name=capy da hat
+item.luigi_cap.name=<newline>
+item.wario_cap.name=<newline>
+item.waluigi_cap.name=<newline>
+item.invisibility_cap.name=<newline>
+item.wing_cap.name=<newline>
+item.princess_peach_crown.name=<newline>
+item.princess_daisy_crown.name=<newline>
+item.super_crown.name=waifu creator
 
+item.bandana.name=banana
+
+item.smash_ball.name=sm4sh bol
+item.headphones.name=<newline>
+item.record_blank.name=<newline>
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
-item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
+item.mayro_cap.name=<newline>
+item.noteblock_head.name=<newline>
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
+
+--- ENTITIES ---
 entity.toad.name=tod
+entity.chincho.name=<newline>
 
+--- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=BLOCO ???? drop supa mush
 subtitles.block.question_block.loot.coin=BLOCO ???? drop coin
+subtitles.item.cape_feather.use=<newline>
+subtitles.item.smash_ball.use=<newline>
 subtitles.entity.toad.ambient=tod bups
 subtitles.entity.toad.hurt=todtod oofs
 subtitles.entity.toad.death=tod ded
 
+--- ADVANCEMENTS ---
 advancements.mubble.root.title=Mubble
 advancements.mubble.root.description=woohoo adventur
 advancements.mubble.get_coin.title=gimme money!!1!

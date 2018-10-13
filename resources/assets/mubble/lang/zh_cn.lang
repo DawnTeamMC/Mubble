@@ -1,6 +1,9 @@
-itemGroup.mubble_items_tab=Mubble物品
+--- CREATIVE TABS ---
 itemGroup.mubble_blocks_tab=Mubble方块
+itemGroup.mubble_items_tab=Mubble物品
+itemGroup.mubble_costumes_tab=<newline>
 
+--- BLOCKS ---
 tile.vanadium_block.name=钒块
 tile.vanadium_ore.name=钒矿石
 tile.red_bricks.name=红色砖块
@@ -19,6 +22,11 @@ tile.brick_block.name=砖块
 tile.golden_brick_block.name=金色砖块
 tile.note_block.name=音符块
 tile.super_note_block.name=超级音符块
+tile.fire_flower.name=<newline>
+tile.ice_flower.name=<newline>
+tile.boomerang_flower.name=<newline>
+tile.cloud_flower.name=<newline>
+tile.cloud_block.name=<newline>
 
 tile.blue_tetris_block.name=蓝色俄罗斯方块
 tile.light_blue_tetris_block.name=淡蓝色俄罗斯方块
@@ -39,32 +47,60 @@ tile.cyan_bricks.name=青色砖块
 tile.elder_pebbles.name=远古鹅卵石
 tile.space_matter.name=太空物质
 
+tile.vampire_stone.name=<newline>
+tile.medusa_stone.name=<newline>
+tile.medusa_bricks.name=<newline>
+
+--- ITEMS ---
 item.vanadium.name=钒
 item.wheat_flour.name=小麦面粉
 item.caramel_cube.name=焦糖块
 item.crepe.name=可丽饼
 item.chocolate_crepe.name=巧克力可丽饼
 item.caramel_crepe.name=焦糖可丽饼
+item.headphones.name=<newline>
 
 item.super_mushroom.name=超级蘑菇
 item.peach.name=桃子
+item.cape_feather.name=<newline>
 item.super_star.name=无敌星
 item.yellow_coin.name=黄币
 item.red_coin.name=红币
 item.blue_coin.name=蓝币
 item.cappy.name=凯皮
+item.princess_peach_crown.name=<newline>
+item.princess_daisy_crown.name=<newline>
+item.super_crown.name=<newline>
 
+item.bandana.name=<newline>
+
+item.smash_ball.name=<newline>
+
+item.noteblock_head.name=<newline>
+
+item.record_blank.name=<newline>
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
-item.record.ebb_flow_demo.desc=Splatoon 2 - Ebb & Flow Demo
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
 
+--- ENTITIES ---
 entity.toad.name=奇诺比奥
+entity.chincho.name=<newline>
 
+--- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=问号块:掉落超级蘑菇
 subtitles.block.question_block.loot.coin=问号块:掉落硬币
+subtitles.item.cape_feather.use=<newline>
+subtitles.item.smash_ball.use=<newline>
 subtitles.entity.toad.ambient=奇诺比奥:咕哝
 subtitles.entity.toad.hurt=奇诺比奥:受伤
 subtitles.entity.toad.death=奇诺比奥:死亡
 
+--- ADVANCEMENTS ---
 advancements.mubble.root.title=Mubble
 advancements.mubble.root.description=一次伟大崭新的旅程
 advancements.mubble.get_coin.title=宝藏是我的！
