@@ -27,6 +27,14 @@ tile.ice_flower.name=<newline>
 tile.boomerang_flower.name=<newline>
 tile.cloud_flower.name=<newline>
 tile.cloud_block.name=<newline>
+tile.blue_mushroom.name=<newline>
+tile.green_mushroom.name=<newline>
+tile.yellow_mushroom.name=<newline>
+tile.purple_mushroom.name=<newline>
+tile.blue_mushroom_block.name=<newline>
+tile.green_mushroom_block.name=<newline>
+tile.yellow_mushroom_block.name=<newline>
+tile.purple_mushroom_block.name=<newline>
 
 tile.blue_tetris_block.name=Blauw Tetris blok
 tile.light_blue_tetris_block.name=Lichtblauw Tetris blok
