@@ -1,7 +1,7 @@
 --- CREATIVE TABS ---
 itemGroup.mubble_blocks_tab=Mubble cubes
 itemGroup.mubble_items_tab=Mubble toys
-itemGroup.mubble_costumes_tab=<newline>
+itemGroup.mubble_costumes_tab=Mubble put things on you
 
 --- BLOCKS ---
 tile.vanadium_block.name=shiny purple cube
@@ -58,12 +58,12 @@ tile.space_matter.name=MARTIAN DIRT OoOoOoO
 tile.vampire_stone.name=spooky ston
 tile.medusa_stone.name=the stone in the room with the sp0ky girl with snakes on her head
 tile.medusa_bricks.name=the bricks in the room with the sp00ky girl with snakes on her head
-tile.blue_candy_cane_pillar.name=<newline>
-tile.green_candy_cane_pillar.name=<newline>
-tile.yellow_candy_cane_pillar.name=<newline>
-tile.red_candy_cane_pillar.name=<newline>
+tile.blue_candy_cane_pillar.name=blue big christmas cane
+tile.green_candy_cane_pillar.name=gren big christmas cane
+tile.yellow_candy_cane_pillar.name=yelou big christmas cane
+tile.red_candy_cane_pillar.name=redd big christmas cane
 
-tile.koretato_block.name=<newline>
+tile.koretato_block.name=Koretato blok
 
 --- ITEMS ---
 item.vanadium.name=shiny purple
@@ -72,7 +72,7 @@ item.caramel_cube.name=tiny caraml boii
 item.crepe.name=creeepe
 item.chocolate_crepe.name=crepe + choco
 item.caramel_crepe.name=crepe + caraml good
-item.candy_cane.name=<newline>
+item.candy_cane.name=christmas cane
 
 item.super_mushroom.name=SUPA MUSH
 item.peach.name=salty peesh very gud
@@ -82,27 +82,27 @@ item.yellow_coin.name=yullu coIn
 item.red_coin.name=bloody cIn
 item.blue_coin.name=blu cooin
 item.cappy.name=capy da hat
-item.luigi_cap.name=<newline>
-item.wario_cap.name=<newline>
-item.waluigi_cap.name=<newline>
-item.invisibility_cap.name=<newline>
-item.wing_cap.name=<newline>
-item.princess_peach_crown.name=<newline>
-item.princess_daisy_crown.name=<newline>
+item.luigi_cap.name=looigi hat
+item.wario_cap.name=wori hat
+item.waluigi_cap.name=walogi hat
+item.invisibility_cap.name=vanis hat
+item.wing_cap.name=fly hat
+item.princess_peach_crown.name=peech cron
+item.princess_daisy_crown.name=disi  cron
 item.super_crown.name=waifu creator
 
 item.bandana.name=banana
 
 item.smash_ball.name=sm4sh bol
 
-item.headphones.name=<newline>
-item.record_blank.name=<newline>
+item.headphones.name=hedponz
+item.record_blank.name=EMPTY DISC
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
 item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
-item.mayro_cap.name=<newline>
-item.noteblock_head.name=<newline>
+item.mayro_cap.name=Mayro hat
+item.noteblock_head.name=NoteBlock hed
 item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
 item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
 item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
@@ -110,13 +110,13 @@ item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harve
 
 --- ENTITIES ---
 entity.toad.name=tod
-entity.chincho.name=<newline>
+entity.chincho.name=tostarenan mummy
 
 --- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=BLOCO ???? drop supa mush
 subtitles.block.question_block.loot.coin=BLOCO ???? drop coin
-subtitles.item.cape_feather.use=<newline>
-subtitles.item.smash_ball.use=<newline>
+subtitles.item.cape_feather.use=cap that makes you high jumped was actully used!
+subtitles.item.smash_ball.use=sm4sh bol uzd
 subtitles.entity.toad.ambient=tod bups
 subtitles.entity.toad.hurt=todtod oofs
 subtitles.entity.toad.death=tod ded
