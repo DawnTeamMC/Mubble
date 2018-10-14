@@ -1,7 +1,7 @@
 --- CREATIVE TABS ---
 itemGroup.mubble_blocks_tab=Blocs Mubble
 itemGroup.mubble_items_tab=Objets Mubble
-itemGroup.mubble_costumes_tab=<newline>
+itemGroup.mubble_costumes_tab=Costumes Mubble
 
 --- BLOCKS ---
 tile.vanadium_block.name=Bloc de vanadium
@@ -27,14 +27,14 @@ tile.ice_flower.name=Fleur de glace
 tile.boomerang_flower.name=	Fleur boomerang
 tile.cloud_flower.name=Fleur nuage
 tile.cloud_block.name=Bloc nuage
-tile.blue_mushroom.name=<newline>
-tile.green_mushroom.name=<newline>
-tile.yellow_mushroom.name=<newline>
-tile.purple_mushroom.name=<newline>
-tile.blue_mushroom_block.name=<newline>
-tile.green_mushroom_block.name=<newline>
-tile.yellow_mushroom_block.name=<newline>
-tile.purple_mushroom_block.name=<newline>
+tile.blue_mushroom.name=Champignon bleu
+tile.green_mushroom.name=Champignon vert
+tile.yellow_mushroom.name=Champignon jaune
+tile.purple_mushroom.name=Champignon violet
+tile.blue_mushroom_block.name=Bloc de champignon bleu
+tile.green_mushroom_block.name=Bloc de champignon vert
+tile.yellow_mushroom_block.name=Bloc de champignon jaune
+tile.purple_mushroom_block.name=Bloc de champignon violet
 
 tile.blue_tetris_block.name=Bloc Tetris bleu
 tile.light_blue_tetris_block.name=Bloc Tetris bleu clair
@@ -58,12 +58,12 @@ tile.space_matter.name=Matière spatiale
 tile.vampire_stone.name=Roche Vampire
 tile.medusa_stone.name=Roche de Méduse
 tile.medusa_bricks.name=Briques de Méduse
-tile.blue_candy_cane_pillar.name=<newline>
-tile.green_candy_cane_pillar.name=<newline>
-tile.yellow_candy_cane_pillar.name=<newline>
-tile.red_candy_cane_pillar.name=<newline>
+tile.blue_candy_cane_pillar.name=Piller de sucre d'orge bleu
+tile.green_candy_cane_pillar.name=Piller de sucre d'orge vert
+tile.yellow_candy_cane_pillar.name=Piller de sucre d'orge jaune
+tile.red_candy_cane_pillar.name=Piller de sucre d'orge rouge
 
-tile.koretato_block.name=<newline>
+tile.koretato_block.name=Bloc Koretato
 
 --- ITEMS ---
 item.vanadium.name=Vanadium
@@ -72,37 +72,37 @@ item.caramel_cube.name=Cube de caramel
 item.crepe.name=Crêpe
 item.chocolate_crepe.name=Crêpe au chocolat
 item.caramel_crepe.name=Crêpe au caramel
-item.candy_cane.name=<newline>
+item.candy_cane.name=Sucre d'orge
 
 item.super_mushroom.name=Super champignon
 item.peach.name=Pêche
-item.cape_feather.name=<newline>
+item.cape_feather.name=Plume acrobate
 item.super_star.name=Super étoile
 item.yellow_coin.name=Pièce jaune
 item.red_coin.name=Pièce rouge
 item.blue_coin.name=Pièce bleue
 item.cappy.name=Cappy
-item.luigi_cap.name=<newline>
-item.wario_cap.name=<newline>
-item.waluigi_cap.name=<newline>
-item.invisibility_cap.name=<newline>
-item.wing_cap.name=<newline>
-item.princess_peach_crown.name=<newline>
-item.princess_daisy_crown.name=<newline>
+item.luigi_cap.name=Casquette de Luigi
+item.wario_cap.name=Casquette de Wario
+item.waluigi_cap.name=Casquette de Waluigi
+item.invisibility_cap.name=Casquette de disparition
+item.wing_cap.name=Casquette ailée
+item.princess_peach_crown.name=Couronne de la Princesse Peach
+item.princess_daisy_crown.name=Couronne de la Princesse Daisy
 item.super_crown.name=Super couronne
 
 item.bandana.name=Bandana
 
 item.smash_ball.name=Balle Smash
 
-item.headphones.name=<newline>
-item.record_blank.name=<newline>
+item.headphones.name=Casque audio
+item.record_blank.name=Disque vide
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
 item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
-item.mayro_cap.name=<newline>
-item.noteblock_head.name=<newline>
+item.mayro_cap.name=Casquette de Mayro
+item.noteblock_head.name=Tête de NoteBlock
 item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
 item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
 item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
@@ -110,13 +110,13 @@ item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harve
 
 --- ENTITIES ---
 entity.toad.name=Toad
-entity.chincho.name=<newline>
+entity.chincho.name=Chincho
 
 --- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=Super champignon sorti d'un bloc ?
 subtitles.block.question_block.loot.coin=Pièce sortie d'un bloc ?
-subtitles.item.cape_feather.use=<newline>
-subtitles.item.smash_ball.use=<newline>
+subtitles.item.cape_feather.use=Plume acrobate utilisée
+subtitles.item.smash_ball.use=Balle Smash acrobate
 subtitles.entity.toad.ambient=Marmonnement de Toad
 subtitles.entity.toad.hurt=Toad blessé
 subtitles.entity.toad.death=Toad qui meurt
