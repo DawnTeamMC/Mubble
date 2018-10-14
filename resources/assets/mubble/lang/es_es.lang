@@ -1,7 +1,7 @@
 --- CREATIVE TABS ---
 itemGroup.mubble_blocks_tab=Bloques de Mubble
 itemGroup.mubble_items_tab=Objetos de Mubble
-itemGroup.mubble_costumes_tab=<newline>
+itemGroup.mubble_costumes_tab=Trajes de Mubble
 
 --- BLOCKS ---
 tile.vanadium_block.name=Bloque de vanadio 
@@ -27,14 +27,14 @@ tile.ice_flower.name=Flor de hielo
 tile.boomerang_flower.name=Flor boomerang
 tile.cloud_flower.name=Flor nube
 tile.cloud_block.name=Bloque nube
-tile.blue_mushroom.name=<newline>
-tile.green_mushroom.name=<newline>
-tile.yellow_mushroom.name=<newline>
-tile.purple_mushroom.name=<newline>
-tile.blue_mushroom_block.name=<newline>
-tile.green_mushroom_block.name=<newline>
-tile.yellow_mushroom_block.name=<newline>
-tile.purple_mushroom_block.name=<newline>
+tile.blue_mushroom.name=Champiñón azul
+tile.green_mushroom.name=Champiñón verde
+tile.yellow_mushroom.name=Champiñón amarillo
+tile.purple_mushroom.name=Champiñón púrpura
+tile.blue_mushroom_block.name=Bloque de champiñón azul
+tile.green_mushroom_block.name=Bloque de champiñón verde
+tile.yellow_mushroom_block.name=Bloque de champiñón amarillo
+tile.purple_mushroom_block.name=Bloque de champiñón púrpura
 
 tile.blue_tetris_block.name=Bloque Tetris azul
 tile.light_blue_tetris_block.name=Bloque Tetris azul claro
@@ -55,15 +55,15 @@ tile.cyan_bricks.name=Ladrillos cian
 tile.elder_pebbles.name=Guijarros antiguos
 tile.space_matter.name=Materia espacial
 
-tile.vampire_stone.name=<newline>
-tile.medusa_stone.name=<newline>
-tile.medusa_bricks.name=<newline>
-tile.blue_candy_cane_pillar.name=<newline>
-tile.green_candy_cane_pillar.name=<newline>
-tile.yellow_candy_cane_pillar.name=<newline>
-tile.red_candy_cane_pillar.name=<newline>
+tile.vampire_stone.name=Piedra vampiro
+tile.medusa_stone.name=Piedra medusa
+tile.medusa_bricks.name=Ladrillos de medusa
+tile.blue_candy_cane_pillar.name=Pilar de bastón de caramelo azul
+tile.green_candy_cane_pillar.name=Pilar de bastón de caramelo verde
+tile.yellow_candy_cane_pillar.name=Pilar de bastón de caramelo amarillo
+tile.red_candy_cane_pillar.name=Pilar de bastón de caramelo rojo
 
-tile.koretato_block.name=<newline>
+tile.koretato_block.name=Bloque Koretato
 
 --- ITEMS ---
 item.vanadium.name=Vanadio
@@ -72,37 +72,37 @@ item.caramel_cube.name=Cubo de caramelo
 item.crepe.name=Crepe
 item.chocolate_crepe.name=Crepe de chocolate
 item.caramel_crepe.name=Crepe de caramelo
-item.candy_cane.name=<newline>
+item.candy_cane.name=Bastón de caramelo
 
 item.super_mushroom.name=Súper champiñón
 item.peach.name=Durazno
-item.cape_feather.name=<newline>
+item.cape_feather.name=Pluma
 item.super_star.name=Superestrella
 item.yellow_coin.name=Moneda amarilla
 item.red_coin.name=Moneda roja
 item.blue_coin.name=Moneda azul
 item.cappy.name=Cappy
-item.luigi_cap.name=<newline>
-item.wario_cap.name=<newline>
-item.waluigi_cap.name=<newline>
-item.invisibility_cap.name=<newline>
-item.wing_cap.name=<newline>
-item.princess_peach_crown.name=<newline>
-item.princess_daisy_crown.name=<newline>
+item.luigi_cap.name=Gorra de Luigi
+item.wario_cap.name=Gorra de Wario
+item.waluigi_cap.name=Gorra de Waluigi
+item.invisibility_cap.name=Gorra de invisibilidad
+item.wing_cap.name=Wing cap
+item.princess_peach_crown.name=Corona de la Princesa Peach
+item.princess_daisy_crown.name=Corona de la Princesa Daisy
 item.super_crown.name=Supercorona
 
-item.bandana.name=<newline>
+item.bandana.name=Pañuelo
 
 item.smash_ball.name=Bola Smash
 
-item.headphones.name=<newline>
-item.record_blank.name=<newline>
+item.headphones.name=Cascos
+item.record_blank.name=Disco en blanco
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
 item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
-item.mayro_cap.name=<newline>
-item.noteblock_head.name=<newline>
+item.mayro_cap.name=Gorra de Mayro
+item.noteblock_head.name=Cabeza de Noteblock
 item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
 item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
 item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
@@ -110,13 +110,13 @@ item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harve
 
 --- ENTITIES ---
 entity.toad.name=Toad
-entity.chincho.name=<newline>
+entity.chincho.name=Chincho
 
 --- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=Bloque ? suelta un súper champiñón
 subtitles.block.question_block.loot.coin=Bloque ? suelta una moneda
-subtitles.item.cape_feather.use=<newline>
-subtitles.item.smash_ball.use=<newline>
+subtitles.item.cape_feather.use=Pluma utilizada
+subtitles.item.smash_ball.use=Bola de Smash utilizada
 subtitles.entity.toad.ambient=Toad balbucea
 subtitles.entity.toad.hurt=Toad herido
 subtitles.entity.toad.death=Toad muere
