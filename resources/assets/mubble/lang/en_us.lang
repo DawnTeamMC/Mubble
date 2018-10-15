@@ -73,6 +73,7 @@ item.crepe.name=Crêpe
 item.chocolate_crepe.name=Chocolate Crêpe
 item.caramel_crepe.name=Caramel Crêpe
 item.candy_cane.name=Candy Cane
+item.bandage.name=Bandage
 
 item.super_mushroom.name=Super Mushroom
 item.peach.name=Peach
@@ -85,7 +86,7 @@ item.cappy.name=Cappy
 item.luigi_cap.name=Luigi's Cap
 item.wario_cap.name=Wario's Cap
 item.waluigi_cap.name=Waluigi's Cap
-item.vanish_cap.name=Invisibility Cap
+item.vanish_cap.name=Vanish Cap
 item.wing_cap.name=Wing Cap
 item.princess_peach_crown.name=Princess Peach's Crown
 item.princess_daisy_crown.name=Princess Daisy's Crown
