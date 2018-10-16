@@ -1,7 +1,7 @@
 --- CREATIVE TABS ---
 itemGroup.mubble_blocks_tab=Mubble blokken
 itemGroup.mubble_items_tab=Mubble voorwerpen
-itemGroup.mubble_costumes_tab=<newline>
+itemGroup.mubble_costumes_tab=Mubble kostuums
 
 --- BLOCKS ---
 tile.vanadium_block.name=Vanadiumblok
@@ -22,19 +22,19 @@ tile.brick_block.name=Baksteenblok
 tile.golden_brick_block.name=Gouden baksteenblok
 tile.note_block.name=Nootblok
 tile.super_note_block.name=Super nootblok
-tile.fire_flower.name=<newline>
-tile.ice_flower.name=<newline>
-tile.boomerang_flower.name=<newline>
-tile.cloud_flower.name=<newline>
-tile.cloud_block.name=<newline>
-tile.blue_mushroom.name=<newline>
-tile.green_mushroom.name=<newline>
-tile.yellow_mushroom.name=<newline>
-tile.purple_mushroom.name=<newline>
-tile.blue_mushroom_block.name=<newline>
-tile.green_mushroom_block.name=<newline>
-tile.yellow_mushroom_block.name=<newline>
-tile.purple_mushroom_block.name=<newline>
+tile.fire_flower.name=Vuur bloem
+tile.ice_flower.name=IJs bloem
+tile.boomerang_flower.name=Boomerang bloem
+tile.cloud_flower.name=Wolk bloem
+tile.cloud_block.name=Wolk blok
+tile.blue_mushroom.name=Blauwe paddenstoel
+tile.green_mushroom.name=Groene paddenstoel
+tile.yellow_mushroom.name=Gele paddenstoel
+tile.purple_mushroom.name=Paarse paddenstoel
+tile.blue_mushroom_block.name=Blauw paddenstoelenblok
+tile.green_mushroom_block.name=Groen paddenstoelenblok
+tile.yellow_mushroom_block.name=Geel paddenstoelenblok
+tile.purple_mushroom_block.name=Paars paddenstoelenblok
 
 tile.blue_tetris_block.name=Blauw Tetris blok
 tile.light_blue_tetris_block.name=Lichtblauw Tetris blok
@@ -55,15 +55,15 @@ tile.cyan_bricks.name=Turquoise bakstenen
 tile.elder_pebbles.name=Oudere keizels
 tile.space_matter.name=Ruimte materie
 
-tile.vampire_stone.name=<newline>
-tile.medusa_stone.name=<newline>
-tile.medusa_bricks.name=<newline>
-tile.blue_candy_cane_pillar.name=<newline>
-tile.green_candy_cane_pillar.name=<newline>
-tile.yellow_candy_cane_pillar.name=<newline>
-tile.red_candy_cane_pillar.name=<newline>
+tile.vampire_stone.name=Vampier steen
+tile.medusa_stone.name=Medusa steen
+tile.medusa_bricks.name=Medusa bakstenen
+tile.blue_candy_cane_pillar.name=Blauwe zuurstokpillaar
+tile.green_candy_cane_pillar.name=Groene zuurstokpillaar
+tile.yellow_candy_cane_pillar.name=Gele zuurstokpillaar
+tile.red_candy_cane_pillar.name=Rode zuurstokpillaar
 
-tile.koretato_block.name=<newline>
+tile.koretato_block.name=Koretato-blok
 
 --- ITEMS ---
 item.vanadium.name=Vanadium
@@ -72,38 +72,38 @@ item.caramel_cube.name=Karamel kubus
 item.crepe.name=Crêpe
 item.chocolate_crepe.name=Chocolade crêpe
 item.caramel_crepe.name=Karamel crêpe
-item.candy_cane.name=<newline>
-item.bandage.name=<newline>
+item.candy_cane.name=Zuurstok
+item.bandage.name=Verband
 
 item.super_mushroom.name=Super paddenstoel
 item.peach.name=Perzik
-item.cape_feather.name=<newline>
+item.cape_feather.name=Cape veer
 item.super_star.name=Super ster
 item.yellow_coin.name=Gele munt
 item.red_coin.name=Rode munt
 item.blue_coin.name=Blauwe munt
 item.cappy.name=Cappy
-item.luigi_cap.name=<newline>
-item.wario_cap.name=<newline>
-item.waluigi_cap.name=<newline>
-item.vanish_cap.name=<newline>
-item.wing_cap.name=<newline>
-item.princess_peach_crown.name=<newline>
-item.princess_daisy_crown.name=<newline>
+item.luigi_cap.name=Luigi's pet
+item.wario_cap.name=Wario's pet
+item.waluigi_cap.name=Waluigi's pet
+item.vanish_cap.name=Verdwijn pet
+item.wing_cap.name=Vleugel pet
+item.princess_peach_crown.name=Prinses Peach's kroon
+item.princess_daisy_crown.name=Prinses Daisy's kroon
 item.super_crown.name=Superkroon
 
-item.bandana.name=<newline>
+item.bandana.name=Bandana
 
-item.smash_ball.name=<newline>
+item.smash_ball.name=Smash bal
 
-item.headphones.name=<newline>
-item.record_blank.name=<newline>
+item.headphones.name=Koptelefoon
+item.record_blank.name=Blanke muziekplaat
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
 item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
-item.mayro_cap.name=<newline>
-item.noteblock_head.name=<newline>
+item.mayro_cap.name=Mayro's pet
+item.noteblock_head.name=NoteBlock's hooft
 item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
 item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
 item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
@@ -111,13 +111,13 @@ item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harve
 
 --- ENTITIES ---
 entity.toad.name=Toad
-entity.chincho.name=<newline>
+entity.chincho.name=Chincho
 
 --- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=?-blok plundert super paddenstoel
 subtitles.block.question_block.loot.coin=?-blok laat munt vallen
-subtitles.item.cape_feather.use=<newline>
-subtitles.item.smash_ball.use=<newline>
+subtitles.item.cape_feather.use=Capeveer wordt gebruikt
+subtitles.item.smash_ball.use=Smash bal wordt gebruikt
 subtitles.entity.toad.ambient=Toad mompelt
 subtitles.entity.toad.hurt=Toad heeft pijn
 subtitles.entity.toad.death=Toad sterft
