@@ -1,5 +1,7 @@
 package hugman.mod.objects.items;
 
+import java.util.Random;
+
 import hugman.mod.Main;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
@@ -7,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -57,8 +60,9 @@ public class ItemHelmet extends ItemBase implements IHasModel
     }
 	
 	@Override
-	public void onArmorTick(World world, EntityPlayer playerIn, ItemStack armor)
+	public void onArmorTick(World worldIn, EntityPlayer playerIn, ItemStack armor)
 	{
+        Random rand = new Random();
 		for(PotionEffect effect : effects)
 		{
 			playerIn.addPotionEffect(new PotionEffect(effect));
@@ -75,6 +79,11 @@ public class ItemHelmet extends ItemBase implements IHasModel
 			playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(25), 1, 2));
 			playerIn.fallDistance = 0f;
 			armor.damageItem(1, playerIn);
+		}
+		if(this.name == "gooigi_cap" && rand.nextInt(51) == 50)
+		{
+	        worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_SLIME_HIT, SoundCategory.PLAYERS, 1f, 1f);
+		    playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(8), 2, 1));
 		}
 	}
 	

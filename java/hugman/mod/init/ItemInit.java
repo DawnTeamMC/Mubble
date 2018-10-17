@@ -46,6 +46,7 @@ public class ItemInit
 	public static final Item WALUIGI_CAP = new ItemHelmet("waluigi_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new PotionEffect(Potion.getPotionById(8), 1, 1));
 	public static final Item VANISH_CAP = new ItemHelmet("vanish_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	public static final Item WING_CAP = new ItemHelmet("wing_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+	public static final Item GOOIGI_CAP = new ItemHelmet("gooigi_cap", SoundEvents.BLOCK_SLIME_PLACE);
 	public static final Item PRINCESS_PEACH_CROWN = new ItemHelmet("princess_peach_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 	public static final Item PRINCESS_DAISY_CROWN = new ItemHelmet("princess_daisy_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 	public static final Item SUPER_CROWN = new ItemHelmet("super_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
