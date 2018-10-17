@@ -131,3 +131,9 @@ advancements.mubble.get_vanadium.title=Du vanadium !
 advancements.mubble.get_vanadium.description=Obtenez du vanadium
 advancements.mubble.get_tetris_block.title=Connectés à travers l'espace
 advancements.mubble.get_tetris_block.description=Attrapez un bloc Tetris
+
+--- OTHER ---
+item.cappy.secret_status=Tellement paradoxal... :)
+item.bandana.secret_status=C'est pour toi, §6Pixel§r !
+item.noteblock_head.secret_status=Hé ! Je croyais que tu avais déjà ça sur la tête, §6Evan§r !
+item.mayro_cap.secret_status=Franchement, t'es le seul à en avoir le moins besoin, n'est-ce pas, Mr. "§6Sossie§r" ?
