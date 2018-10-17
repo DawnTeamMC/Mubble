@@ -1,0 +1,150 @@
+{
+  "pools": [
+    {
+      "name":"coins",
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "item",
+          "name": "mubble:yellow_coin",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 5
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "mubble:red_coin",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name":"blocks",
+      "rolls": 3,
+      "entries": [
+        {
+          "type": "item",
+          "name": "mubble:question_block",
+          "weight": 3,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 7
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "mubble:brick_block",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "mubble:golden_brick_block",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name":"power_ups",
+      "rolls": 2,
+      "entries": [
+        {
+          "type": "item",
+          "name": "mubble:cape_feather",
+          "weight": 2,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 2,
+                "max": 7
+              }
+            }
+          ]
+        },
+        {
+          "type": "item",
+          "name": "mubble:super_mushroom",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name":"disc",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "empty",
+          "weight": 200
+        },
+        {
+          "type": "item",
+          "name": "mubble:record_blank",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "mubble:record_champions_road",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "mubble:record_nb_buoy_base_galaxy",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "mubble:record_nb_waluigi_pinball",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

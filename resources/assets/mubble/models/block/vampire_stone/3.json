@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "mubble:block/vampire_stone/3"
+    }
+}

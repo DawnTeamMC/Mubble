@@ -1,28 +1,28 @@
 package hugman.mod.objects.blocks;
 
-import hugman.mod.Main;
+import java.util.Random;
+
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockNote extends Block implements IHasModel
+public class BlockNote extends BlockBase implements IHasModel
 {
 	String type;
 	public BlockNote(String type)
 	{
-		super(Material.ROCK);
-		this.type = type;
+		super(Material.ROCK, 1.4f, 10f, SoundType.STONE);
 		if(type == "normal")
 		{
 			setTranslationKey("note_block");
@@ -33,13 +33,10 @@ public class BlockNote extends Block implements IHasModel
 			setTranslationKey("super_note_block");
 			setRegistryName("super_note_block");
 		}
-		setCreativeTab(Main.MUBBLE_BLOCKS);
-		setHardness(1.4f);
-		this.blockResistance = 10f;
-		setSoundType(SoundType.STONE);
 		
 		BlockInit.BLOCKS.add(this);
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		this.type = type;
 	}
 	
 	@Override
@@ -62,17 +59,24 @@ public class BlockNote extends Block implements IHasModel
         final double x = pos.getX() + 0.5D;
         final double y = pos.getY() + 0.5D;
         final double z = pos.getZ() + 0.5D;
+        Random rand = new Random();
         if(entityIn instanceof EntityLivingBase)
         {
         	if(!entityIn.isSneaking())
     		{
+    	        worldIn.playSound((EntityPlayer)null, x, y, z, SoundHandler.BLOCK_NOTE_BLOCK_JUMP_HIGH, SoundCategory.BLOCKS, 1f, 1f);
+    	        for (int i = 0; i < rand.nextInt(5) + 1; i++) {
+    	        	worldIn.spawnParticle(EnumParticleTypes.NOTE, x + (rand.nextInt(7) - 3) / 10D, y + 0.6D, z + (rand.nextInt(7) - 3) / 10D, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D, 0);
+            	}
     			if(type == "normal") entityIn.motionY = 0.9D;
     			if(type == "super") entityIn.motionY = 1.5D;
-    	        worldIn.playSound(null, x, y, z, SoundHandler.BLOCK_NOTE_BLOCK_JUMP_HIGH, SoundCategory.BLOCKS, 1f, 1f);
     		}
     		else if(entityIn.isSneaking())
     		{
-    			worldIn.playSound(null, x, y, z, SoundHandler.BLOCK_NOTE_BLOCK_JUMP_SMALL, SoundCategory.BLOCKS, 1f, 1f);
+    			worldIn.playSound((EntityPlayer)null, x, y, z, SoundHandler.BLOCK_NOTE_BLOCK_JUMP_SMALL, SoundCategory.BLOCKS, 1f, 1f);
+    	        for (int i = 0; i < rand.nextInt(1) + 1; i++) {
+    	        	worldIn.spawnParticle(EnumParticleTypes.NOTE, x, y + 0.6D, z, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D, 0);
+            	}
     	        entityIn.motionY = 0.5D;
     		}
     		else
@@ -80,11 +84,5 @@ public class BlockNote extends Block implements IHasModel
     			entityIn.motionY = 0D;
     		}
         }
-	}
-	
-	@Override
-	public void registerModels()
-	{
-		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 }

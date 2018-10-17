@@ -15,7 +15,7 @@ import net.minecraft.world.gen.structure.template.TemplateManager;
 
 public class WorldGenStructure extends WorldGenerator implements IStructure
 {
-	public static String structureName;
+	public String structureName;
 	
 	public WorldGenStructure(String name) 
 	{
@@ -29,7 +29,7 @@ public class WorldGenStructure extends WorldGenerator implements IStructure
 		return true;
 	}
 	
-	public static void generateStructure(World world, BlockPos pos)
+	public void generateStructure(World world, BlockPos pos)
 	{
 		MinecraftServer mcServer = world.getMinecraftServer();
 		TemplateManager manager = worldServer.getStructureTemplateManager();
@@ -39,8 +39,17 @@ public class WorldGenStructure extends WorldGenerator implements IStructure
 		if(template != null)
 		{
 			IBlockState state = world.getBlockState(pos);
+	        Random rand = new Random();
 			world.notifyBlockUpdate(pos, state, state, 3);
-			template.addBlocksToWorldChunk(world, pos, settings);
+			int settings = rand.nextInt(8);
+			if(settings == 0) template.addBlocksToWorldChunk(world, pos, settings0);
+			else if(settings == 1) template.addBlocksToWorldChunk(world, pos, settings1);
+			else if(settings == 2) template.addBlocksToWorldChunk(world, pos, settings2);
+			else if(settings == 3) template.addBlocksToWorldChunk(world, pos, settings3);
+			else if(settings == 4) template.addBlocksToWorldChunk(world, pos, settings4);
+			else if(settings == 5) template.addBlocksToWorldChunk(world, pos, settings5);
+			else if(settings == 6) template.addBlocksToWorldChunk(world, pos, settings6);
+			else if(settings == 7) template.addBlocksToWorldChunk(world, pos, settings7);
 		}
 	}
 }

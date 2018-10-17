@@ -18,29 +18,26 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenCustomStructures implements IWorldGenerator
 {
-	public static final WorldGenStructure TOAD_HOUSE = new WorldGenStructure("toad_house");
+	public static final WorldGenStructure RED_TOAD_HOUSE = new WorldGenStructure("toad_house/red");
+	public static final WorldGenStructure BLUE_TOAD_HOUSE = new WorldGenStructure("toad_house/blue");
+	public static final WorldGenStructure GREEN_TOAD_HOUSE = new WorldGenStructure("toad_house/green");
+	public static final WorldGenStructure STARSHROOM0 = new WorldGenStructure("starshroom/0");
+	public static final WorldGenStructure STARSHROOM1 = new WorldGenStructure("starshroom/1");
+	public static final WorldGenStructure STARSHROOM2 = new WorldGenStructure("starshroom/2");
 	
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) 
 	{
-		switch(world.provider.getDimension())
+		if(world.provider.getDimension() == 0)
 		{
-		case 2:
-			
-			break;
-			
-		case 1:
-			
-			break;
-			
-		case 0:
-			
-			generateStructure(TOAD_HOUSE, world, random, chunkX, chunkZ, 20, Blocks.GRASS, BiomeMushroomKingdom.class);
-			
-			break;
-			
-		case -1:
-			
+			//Total for Toad House must be 90 or 100
+			generateStructure(RED_TOAD_HOUSE, world, random, chunkX, chunkZ, 30, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(BLUE_TOAD_HOUSE, world, random, chunkX, chunkZ, 30, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(GREEN_TOAD_HOUSE, world, random, chunkX, chunkZ, 30, Blocks.GRASS, BiomeMushroomKingdom.class);
+			//Total for Starshroom must be 500
+			generateStructure(STARSHROOM0, world, random, chunkX, chunkZ, 350, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(STARSHROOM1, world, random, chunkX, chunkZ, 95, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(STARSHROOM2, world, random, chunkX, chunkZ, 55, Blocks.GRASS, BiomeMushroomKingdom.class);
 		}
 	}
 	

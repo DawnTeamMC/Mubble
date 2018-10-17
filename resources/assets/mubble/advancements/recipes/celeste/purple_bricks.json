@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:purple_bricks"
+      "mubble:celeste/purple_bricks"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:purple_bricks"
+        "recipe": "mubble:celeste/purple_bricks"
       }
     }
   },

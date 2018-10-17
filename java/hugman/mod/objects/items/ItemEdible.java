@@ -3,17 +3,16 @@ package hugman.mod.objects.items;
 import hugman.mod.Main;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemFood;
 
 public class ItemEdible extends ItemFood implements IHasModel
 {
-	public ItemEdible(String name, CreativeTabs tab, int amount, float saturation, boolean isWolfFood)
+	public ItemEdible(String name, int amount, float saturation, boolean isWolfFood)
 	{
 		super(amount, saturation, isWolfFood);
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
+		setCreativeTab(Main.MUBBLE_ITEMS);
 	
 		ItemInit.ITEMS.add(this);
 	}

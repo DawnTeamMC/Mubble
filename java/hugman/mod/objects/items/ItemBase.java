@@ -8,13 +8,27 @@ import net.minecraft.item.Item;
 
 public class ItemBase extends Item implements IHasModel
 {
-	public ItemBase(String name, CreativeTabs tab)
+	public ItemBase(String name)
+	{
+		setTranslationKey(name);
+		setRegistryName(name);
+		setCreativeTab(Main.MUBBLE_ITEMS);
+	}
+	
+	public ItemBase(String name, int max)
+	{
+		setTranslationKey(name);
+		setRegistryName(name);
+		setCreativeTab(Main.MUBBLE_ITEMS);
+		setMaxStackSize(max);
+	}
+	
+	public ItemBase(String name, int max, CreativeTabs tab)
 	{
 		setTranslationKey(name);
 		setRegistryName(name);
 		setCreativeTab(tab);
-		
-		ItemInit.ITEMS.add(this);
+		setMaxStackSize(max);
 	}
 
 	@Override

@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:iron_scaffolding"
+      "mubble:celeste/iron_scaffolding"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:iron_scaffolding"
+        "recipe": "mubble:celeste/iron_scaffolding"
       }
     }
   },

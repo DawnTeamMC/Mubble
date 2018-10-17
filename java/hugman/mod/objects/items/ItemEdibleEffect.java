@@ -14,23 +14,23 @@ public class ItemEdibleEffect extends ItemFood implements IHasModel
 {
 	private PotionEffect[] effects;
 	
-	public ItemEdibleEffect(String name, CreativeTabs tab, int amount, float saturation, boolean isWolfFood, PotionEffect...potionEffect)
+	public ItemEdibleEffect(String name, int amount, float saturation, boolean isWolfFood, PotionEffect...potionEffect)
 	{
 		super(amount, saturation, isWolfFood);
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
+		setCreativeTab(Main.MUBBLE_ITEMS);
 	
 		ItemInit.ITEMS.add(this);
 		this.effects = potionEffect;
 	}
 
 	@Override
-	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
+	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer playerIn)
 	{
 		for(PotionEffect effect : effects)
 		{
-			player.addPotionEffect(new PotionEffect(effect));
+			playerIn.addPotionEffect(new PotionEffect(effect));
 		}
 	}
 	

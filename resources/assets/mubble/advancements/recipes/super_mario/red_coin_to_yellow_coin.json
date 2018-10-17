@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:red_coin_to_yellow_coin"
+      "mubble:super_mario/red_coin_to_yellow_coin"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:red_coin_to_yellow_coin"
+        "recipe": "mubble:super_mario/red_coin_to_yellow_coin"
       }
     }
   },

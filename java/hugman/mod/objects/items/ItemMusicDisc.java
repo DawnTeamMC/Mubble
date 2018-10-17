@@ -9,12 +9,12 @@ import net.minecraft.util.SoundEvent;
 
 public class ItemMusicDisc extends ItemRecord implements IHasModel
 {	
-	public ItemMusicDisc(String p_i46742_1_, SoundEvent soundIn, CreativeTabs tab)
+	public ItemMusicDisc(String name, SoundEvent soundIn)
 	{
-		super(p_i46742_1_, soundIn);
+		super(name, soundIn);
 		setTranslationKey("record");
-		setRegistryName("record_" + p_i46742_1_);
-        setCreativeTab(tab);
+		setRegistryName("record_" + name);
+        setCreativeTab(Main.MUBBLE_ITEMS);
 		
 		ItemInit.ITEMS.add(this);
 	}

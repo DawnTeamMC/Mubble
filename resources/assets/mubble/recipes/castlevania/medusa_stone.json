@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XXX",
+    "XOX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:cobblestone"
+    },
+    "O": {
+      "item": "minecraft:dye",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "medusa_stone",
+    "count": 8
+  }
+}

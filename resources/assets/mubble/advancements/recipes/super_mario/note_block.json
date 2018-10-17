@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:note_block"
+      "mubble:super_mario/note_block"
     ]
   },
   "criteria": {
@@ -29,7 +29,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:note_block"
+        "recipe": "mubble:super_mario/note_block"
       }
     }
   },

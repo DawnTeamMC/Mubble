@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "mubble:candy_cane_pillar",
+  "pattern": [
+    " X ",
+    "XOX",
+    " X "
+  ],
+  "key": {
+    "X": {
+      "item": "candy_cane"
+    },
+    "O": {
+      "item": "minecraft:dye",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "red_candy_cane_pillar",
+    "count": 2
+  }
+}

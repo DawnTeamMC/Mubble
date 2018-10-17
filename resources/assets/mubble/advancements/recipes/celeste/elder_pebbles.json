@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:elder_pebbles"
+      "mubble:celeste/elder_pebbles"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:elder_pebbles"
+        "recipe": "mubble:celeste/elder_pebbles"
       }
     }
   },

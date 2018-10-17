@@ -1,11 +1,11 @@
 {
-	"block.question_block.loot.super_mushroom":
+	"block.question_block.loot.power_up":
 	{
 		"category": "block",
-		"subtitle": "subtitles.block.question_block.loot.super_mushroom",
+		"subtitle": "subtitles.block.question_block.loot.power_up",
 		"sounds":
 		[
-			"mubble:block/question_block/loot/super_mushroom"
+			"mubble:block/question_block/loot/power_up"
 		]
 	},
 	"block.question_block.loot.coin":
@@ -110,6 +110,24 @@
 			"mubble:block/space_matter/step4"
 		]
 	},
+	"item.cape_feather.use":
+	{
+		"category": "player",
+		"subtitle": "subtitles.item.cape_feather.use",
+		"sounds":
+		[
+			"mubble:item/cape_feather/use"
+		]
+	},
+	"item.smash_ball.use":
+	{
+		"category": "player",
+		"subtitle": "subtitles.item.smash_ball.use",
+		"sounds":
+		[
+			"mubble:item/smash_ball/use"
+		]
+	},
 	"item.super_mushroom.consume":
 	{
 		"category": "player",
@@ -172,13 +190,63 @@
 			}
 		]
 	},
-	"record.ebb_flow_demo":
+	"record.fly_octo_fly":
 	{
 		"category": "record",
 		"sounds":
 		[
 			{
-				"name": "mubble:record/ebb_flow_demo", "stream": true
+				"name": "mubble:record/fly_octo_fly", "stream": true
+			}
+		]
+	},
+	"record.vampire_killer":
+	{
+		"category": "record",
+		"sounds":
+		[
+			{
+				"name": "mubble:record/vampire_killer", "stream": true
+			}
+		]
+	},
+	"record.nb.buoy_base_galaxy":
+	{
+		"category": "record",
+		"sounds":
+		[
+			{
+				"name": "mubble:record/nb/buoy_base_galaxy", "stream": true
+			}
+		]
+	},
+	"record.nb.harvest_hazards":
+	{
+		"category": "record",
+		"sounds":
+		[
+			{
+				"name": "mubble:record/nb/harvest_hazards", "stream": true
+			}
+		]
+	},
+	"record.nb.sweden":
+	{
+		"category": "record",
+		"sounds":
+		[
+			{
+				"name": "mubble:record/nb/sweden", "stream": true
+			}
+		]
+	},
+	"record.nb.waluigi_pinball":
+	{
+		"category": "record",
+		"sounds":
+		[
+			{
+				"name": "mubble:record/nb/waluigi_pinball", "stream": true
 			}
 		]
 	}

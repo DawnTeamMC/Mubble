@@ -20,9 +20,10 @@ public class Main
 	
 	@SidedProxy(clientSide = Reference.CLIENTPROXY, serverSide = Reference.COMMONPROXY)
 	public static CommonProxy proxy;
-	
-	public static final CreativeTabs MUBBLE_ITEMS = new MubbleItemsTab("mubble_items_tab");
+
 	public static final CreativeTabs MUBBLE_BLOCKS = new MubbleBlocksTab("mubble_blocks_tab");
+	public static final CreativeTabs MUBBLE_ITEMS = new MubbleItemsTab("mubble_items_tab");
+	public static final CreativeTabs MUBBLE_COSTUMES = new MubbleCostumesTab("mubble_costumes_tab");
 	
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event)

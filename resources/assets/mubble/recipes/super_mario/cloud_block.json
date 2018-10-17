@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "cloud_flower"
+    }
+  ],
+  "result": {
+    "item": "cloud_block"
+  }
+}

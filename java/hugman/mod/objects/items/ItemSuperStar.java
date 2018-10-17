@@ -4,6 +4,8 @@ import hugman.mod.Main;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.ISound;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -24,14 +26,14 @@ public class ItemSuperStar extends ItemFood implements IHasModel
 	}
 
 	@Override
-	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
+	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer playerIn)
 	{
-		player.addPotionEffect(new PotionEffect(Potion.getPotionById(1), 600, 2));
-		player.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 600, 2));
-		player.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 600, 3));
-		player.addPotionEffect(new PotionEffect(Potion.getPotionById(11), 600, 1));
-		player.addPotionEffect(new PotionEffect(Potion.getPotionById(16), 600, 0));
-		player.playSound(SoundHandler.ITEM_SUPER_STAR_THEME, 60000000, 1);
+		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(1), 600, 1));
+		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 600, 1));
+		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 600, 2));
+		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(11), 600, 1));
+		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(16), 600, 0));
+		playerIn.playSound(SoundHandler.ITEM_SUPER_STAR_THEME, 60000000, 1);
 	}
 	
 	@Override

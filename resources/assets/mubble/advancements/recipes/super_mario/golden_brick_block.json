@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:golden_brick_block"
+      "mubble:super_mario/golden_brick_block"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:golden_brick_block"
+        "recipe": "mubble:super_mario/golden_brick_block"
       }
     }
   },

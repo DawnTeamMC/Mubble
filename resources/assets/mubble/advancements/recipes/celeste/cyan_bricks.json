@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:cyan_bricks"
+      "mubble:celeste/cyan_bricks"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:cyan_bricks"
+        "recipe": "mubble:celeste/cyan_bricks"
       }
     }
   },

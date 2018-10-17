@@ -131,3 +131,7 @@ advancements.mubble.get_vanadium.title=Vanadiums!
 advancements.mubble.get_vanadium.description=Acquire vanadiums
 advancements.mubble.get_tetris_block.title=It's All Connected
 advancements.mubble.get_tetris_block.description=Get your hand on a Tetris Block
+
+--- Other ---
+status.no_need=Come on, you don't need that, §6right§r?
+status.for_you=That's for you, my boy!

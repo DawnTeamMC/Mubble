@@ -13,26 +13,14 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockRotating extends Block implements IHasModel
+public class BlockRotating extends BlockBase implements IHasModel
 {
 	public BlockRotating()
 	{
-		super(Material.ROCK);
-		setTranslationKey("rotating_block");
-		setRegistryName("rotating_block");
-		setCreativeTab(Main.MUBBLE_BLOCKS);
-		setHardness(1.5f);
-		this.blockResistance = 20f;
-		setSoundType(SoundType.STONE);
+		super("rotating_block", Material.ROCK, 1.5f, 20f, SoundType.STONE);
 		
 		BlockInit.BLOCKS.add(this);
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-	}
-	
-	@Override
-	public void registerModels()
-	{
-		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 
 	@Override

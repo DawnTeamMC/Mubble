@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:rotating_block"
+      "mubble:super_mario/rotating_block"
     ]
   },
   "criteria": {
@@ -20,7 +20,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:rotating_block"
+        "recipe": "mubble:super_mario/rotating_block"
       }
     }
   },

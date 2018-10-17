@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "mubble:candy_cane",
+  "pattern": [
+    " X ",
+    "X X",
+    "  X"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:sugar"
+    }
+  },
+  "result": {
+    "item": "candy_cane",
+    "count": 2
+  }
+}

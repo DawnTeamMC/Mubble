@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:question_block"
+      "mubble:super_mario/question_block"
     ]
   },
   "criteria": {
@@ -30,7 +30,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:question_block"
+        "recipe": "mubble:super_mario/question_block"
       }
     }
   },

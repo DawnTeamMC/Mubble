@@ -15,7 +15,7 @@ public class BiomeInit
 	
 	public static void registerBiomes()
 	{
-		//initBiome(MUSHROOM_KINGDOM, "Mushroom Kingdom", BiomeType.COOL, Type.SPARSE);
+		initBiome(MUSHROOM_KINGDOM, "Mushroom Kingdom", BiomeType.COOL, Type.SPARSE);
 	}
 	
 	private static Biome initBiome(Biome biome, String name, BiomeType biomeType, Type... types)

@@ -15,19 +15,13 @@ import net.minecraft.world.World;
 public class ItemDrink extends ItemFood implements IHasModel
 {
 	String type;
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
-    {
-        return EnumAction.DRINK;
-    }
 	
 	public ItemDrink(String name, CreativeTabs tab, String type, int amount, float saturation, boolean isWolfFood)
 	{
 		super(amount, saturation, isWolfFood);
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
+		setCreativeTab(Main.MUBBLE_BLOCKS);
 		setMaxStackSize(1);
 	
 		ItemInit.ITEMS.add(this);
@@ -37,20 +31,15 @@ public class ItemDrink extends ItemFood implements IHasModel
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	{
-		if (this.type == "isBucket")
-		{
-			if (entityLiving instanceof EntityPlayer && !((EntityPlayer)entityLiving).capabilities.isCreativeMode)
-			{
-				stack.shrink(1);
-			}
-			return stack.isEmpty() ? new ItemStack(Items.BUCKET) : stack;
-		}
-		else
-		{
-			stack.shrink(1);
-		}
+		stack.shrink(1);
 		return stack;
 	}
+	
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+    {
+        return EnumAction.DRINK;
+    }
 	
 	@Override
 	public void registerModels()
