@@ -23,6 +23,9 @@ public class SoundHandler
 	ITEM_SMASH_BALL_USE,
 	ITEM_SUPER_MUSHROOM_CONSUME,
 	ITEM_SUPER_STAR_THEME,
+	ENTITY_CHINCHO_AMBIENT,
+	ENTITY_CHINCHO_HURT,
+	ENTITY_CHINCHO_DEATH,
 	ENTITY_TOAD_AMBIENT,
 	ENTITY_TOAD_HURT,
 	ENTITY_TOAD_DEATH,
@@ -51,6 +54,9 @@ public class SoundHandler
 		ITEM_CAPE_FEATHER_USE = registerSound("item.cape_feather.use");
 		ITEM_SUPER_MUSHROOM_CONSUME = registerSound("item.super_mushroom.consume");
 		ITEM_SUPER_STAR_THEME = registerSound("item.super_star.theme");
+		ENTITY_CHINCHO_AMBIENT = registerSound("entity.chincho.ambient");
+		ENTITY_CHINCHO_HURT = registerSound("entity.chincho.hurt");
+		ENTITY_CHINCHO_DEATH = registerSound("entity.chincho.death");
 		ENTITY_TOAD_AMBIENT = registerSound("entity.toad.ambient");
 		ENTITY_TOAD_HURT = registerSound("entity.toad.hurt");
 		ENTITY_TOAD_DEATH = registerSound("entity.toad.death");

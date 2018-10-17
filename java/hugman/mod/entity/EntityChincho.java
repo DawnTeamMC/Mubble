@@ -1,6 +1,7 @@
 package hugman.mod.entity;
 
 import hugman.mod.util.handlers.LootTableHandler;
+import hugman.mod.util.handlers.SoundHandler;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -116,19 +117,19 @@ public class EntityChincho extends EntityMob
 	@Override
 	protected SoundEvent getAmbientSound() 
 	{
-		return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
+		return SoundHandler.ENTITY_CHINCHO_AMBIENT;
 	}
 	
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) 
 	{
-		return SoundEvents.ENTITY_ZOMBIE_HURT;
+		return SoundHandler.ENTITY_CHINCHO_HURT;
 	}
 	
 	@Override
 	protected SoundEvent getDeathSound() 
 	{
-		return SoundEvents.ENTITY_ZOMBIE_DEATH;
+		return SoundHandler.ENTITY_CHINCHO_DEATH;
 	}
 	
 	@Override

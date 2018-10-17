@@ -144,6 +144,42 @@
 			"mubble:item/super_star/theme"
 		]
 	},
+	"entity.chincho.ambient":
+	{
+		"category": "hostile",
+		"subtitle": "subtitles.entity.chincho.ambient",
+		"sounds":
+		[
+			"mubble:entity/chincho/ambient1",
+			"mubble:entity/chincho/ambient2",
+			"mubble:entity/chincho/ambient3",
+			"mubble:entity/chincho/ambient4",
+			"mubble:entity/chincho/ambient5",
+			"mubble:entity/chincho/ambient6",
+			"mubble:entity/chincho/ambient7"
+		]
+	},
+	"entity.chincho.hurt":
+	{
+		"category": "hostile",
+		"subtitle": "subtitles.entity.chincho.hurt",
+		"sounds":
+		[
+			"mubble:entity/chincho/hurt1",
+			"mubble:entity/chincho/hurt2",
+			"mubble:entity/chincho/hurt3",
+			"mubble:entity/chincho/hurt4"
+		]
+	},
+	"entity.chincho.death":
+	{
+		"category": "hostile",
+		"subtitle": "subtitles.entity.chincho.death",
+		"sounds":
+		[
+			"mubble:entity/chincho/death1"
+		]
+	},
 	"entity.toad.ambient":
 	{
 		"category": "neutral",
