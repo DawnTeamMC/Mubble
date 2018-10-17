@@ -91,10 +91,10 @@ public class ItemHelmet extends ItemBase implements IHasModel
             if (!playerIn.capabilities.isCreativeMode) itemstack.setCount(0);
             worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, sound, SoundCategory.PLAYERS, 1f, 1f);
             playerIn.addStat(StatList.getObjectUseStats(this));
-            if(this.name == "cappy" && playerIn.getName() == "Hugman_76") playerIn.sendStatusMessage(new TextComponentTranslation("item.cappy.secret_status", new Object[0]), true);
-            if(this.name == "mayro_cap" && playerIn.getName() == "MayroSMM") playerIn.sendStatusMessage(new TextComponentTranslation("item.mayro_cap.secret_status", new Object[0]), true);
-            if(this.name == "noteblock_head" && playerIn.getName() == "NoteBlockRemix") playerIn.sendStatusMessage(new TextComponentTranslation("item.noteblock_head.secret_status", new Object[0]), true);
-            if(this.name == "bandana" && playerIn.getName() == "Pixelcraftian") playerIn.sendStatusMessage(new TextComponentTranslation("item.bandana.secret_status", new Object[0]), true);
+            if(this.name == "cappy" && "Hugman_76".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.cappy.secret_status", new Object[0]), true);
+            if(this.name == "mayro_cap" && "MayroSMM".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mayro_cap.secret_status", new Object[0]), true);
+            if(this.name == "noteblock_head" && "NoteBlockRemix".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.noteblock_head.secret_status", new Object[0]), true);
+            if(this.name == "bandana" && "Pixelcraftian".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.bandana.secret_status", new Object[0]), true);
             return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
         }
         else
