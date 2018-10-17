@@ -1,7 +1,7 @@
 --- CREATIVE TABS ---
 itemGroup.mubble_blocks_tab=sʞɔolᗺ ǝlqqnW
 itemGroup.mubble_items_tab=sɯǝʇI ǝlqqnW
-itemGroup.mubble_costumes_tab=<newline>
+itemGroup.mubble_costumes_tab=sǝɯnʇsoƆ ǝlqqnW
 
 --- BLOCKS ---
 tile.vanadium_block.name=ɯnᴉpɐuɐΛ ɟo ʞɔolᗺ
@@ -22,19 +22,19 @@ tile.brick_block.name=ʞɔolᗺ ʞɔᴉɹᗺ
 tile.golden_brick_block.name=ʞɔolᗺ ʞɔᴉɹᗺ uǝploפ
 tile.note_block.name=ʞɔolᗺ ǝʇoN
 tile.super_note_block.name=ʞɔolᗺ ǝʇoN ɹǝdnS
-tile.fire_flower.name=<newline>
-tile.ice_flower.name=<newline>
-tile.boomerang_flower.name=<newline>
-tile.cloud_flower.name=<newline>
-tile.cloud_block.name=<newline>
-tile.blue_mushroom.name=<newline>
-tile.green_mushroom.name=<newline>
-tile.yellow_mushroom.name=<newline>
-tile.purple_mushroom.name=<newline>
-tile.blue_mushroom_block.name=<newline>
-tile.green_mushroom_block.name=<newline>
-tile.yellow_mushroom_block.name=<newline>
-tile.purple_mushroom_block.name=<newline>
+tile.fire_flower.name=ɹǝʍolℲ ǝɹᴉℲ
+tile.ice_flower.name=ɹǝʍolℲ ǝɔI
+tile.boomerang_flower.name=ɹǝʍolℲ ƃuɐɹǝɯooᗺ
+tile.cloud_flower.name=ɹǝʍolℲ pnolƆ
+tile.cloud_block.name=ʞɔolq pnolƆ
+tile.blue_mushroom.name=ɯooɹɥsnW ǝnlᗺ
+tile.green_mushroom.name=ɯooɹɥsnW uǝǝɹפ
+tile.yellow_mushroom.name=ɯooɹɥsnW ʍollǝ⅄
+tile.purple_mushroom.name=ɯooɹɥsnW ǝldɹnԀ
+tile.blue_mushroom_block.name=ʞɔolᗺ ɯooɹɥsnW ǝnlᗺ
+tile.green_mushroom_block.name=ʞɔolᗺ ɯooɹɥsnW uǝǝɹפ
+tile.yellow_mushroom_block.name=ʞɔolᗺ ɯooɹɥsnW ʍollǝ⅄
+tile.purple_mushroom_block.name=ʞɔolᗺ ɯooɹɥsnW ǝldɹnԀ
 
 tile.blue_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ ǝnlᗺ
 tile.light_blue_tetris_block.name=ʞɔolᗺ sᴉɹʇǝ┴ ǝnlᗺ ʇɥƃᴉ˥
@@ -55,15 +55,15 @@ tile.cyan_bricks.name=sʞɔᴉɹᗺ uɐʎƆ
 tile.elder_pebbles.name=sǝlqqǝԀ ɹǝplƎ
 tile.space_matter.name=ɹǝʇʇɐW ǝɔɐdS
 
-tile.vampire_stone.name=<newline>
-tile.medusa_stone.name=<newline>
-tile.medusa_bricks.name=<newline>
-tile.blue_candy_cane_pillar.name=<newline>
-tile.green_candy_cane_pillar.name=<newline>
-tile.yellow_candy_cane_pillar.name=<newline>
-tile.red_candy_cane_pillar.name=<newline>
+tile.vampire_stone.name=ǝuoʇS ǝɹᴉdɯɐΛ
+tile.medusa_stone.name=ǝuoʇS s,ɐsnpǝW
+tile.medusa_bricks.name=sʞɔᴉɹq s,ɐsnpǝW
+tile.blue_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ ǝnlᗺ
+tile.green_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ uǝǝɹפ
+tile.yellow_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ ʍollǝ⅄
+tile.red_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ pǝᴚ
 
-tile.koretato_block.name=<newline>
+tile.koretato_block.name=ʞɔolq oʇɐʇǝɹoʞ
 
 --- ITEMS ---
 item.vanadium.name=ɯnᴉpɐuɐΛ
@@ -72,8 +72,8 @@ item.caramel_cube.name=ǝqnƆ lǝɯɐɹɐƆ
 item.crepe.name=ǝdǝɹƆ
 item.chocolate_crepe.name=ǝdǝɹƆ ǝʇɐloɔoɥƆ
 item.caramel_crepe.name=ǝdǝɹƆ lǝɯɐɹɐƆ
-item.candy_cane.name=<newline>
-item.bandage.name=<newline>
+item.candy_cane.name=ǝuɐƆ ʎpuɐƆ
+item.bandage.name=ǝƃɐpuɐᗺ
 
 item.super_mushroom.name=ɯooɹɥsnW ɹǝdnS
 item.peach.name=ɥɔɐǝԀ
@@ -83,26 +83,26 @@ item.yellow_coin.name=uᴉoƆ ʍollǝℲ
 item.red_coin.name=uᴉoƆ pǝᴚ
 item.blue_coin.name=uᴉoƆ ǝnlᗺ
 item.cappy.name=ʎddɐƆ
-item.luigi_cap.name=<newline>
-item.wario_cap.name=<newline>
-item.waluigi_cap.name=<newline>
-item.vanish_cap.name=<newline>
-item.wing_cap.name=<newline>
-item.princess_peach_crown.name=<newline>
-item.princess_daisy_crown.name=<newline>
+item.luigi_cap.name=dɐƆ s,ᴉƃᴉn˥
+item.wario_cap.name=dɐƆ s,oᴉɹɐM
+item.waluigi_cap.name=dɐƆ s,ᴉƃᴉnlɐM
+item.vanish_cap.name=dɐƆ ɥsᴉuɐΛ
+item.wing_cap.name=dɐƆ ƃuᴉM
+item.princess_peach_crown.name=uʍoɹƆ s,ɥɔɐǝԀ ssǝɔuᴉɹԀ
+item.princess_daisy_crown.name=uʍoɹƆ s,ʎsᴉɐp ssǝɔuᴉɹԀ
 item.super_crown.name=uʍoɹƆ ɹǝdnS
 
 item.bandana.name=ɐuɐpuɐᗺ
 
 item.smash_ball.name=llɐᗺ ɥsɐɯS
 
-item.headphones.name=<newline>
+item.headphones.name=sǝuoɥdpɐǝH
 item.record_blank.name=ɔsᴉp ɔᴉsnW ʞuɐlᗺ
 item.record.champions_road.desc=pɐoᴚ s,uoᴉdɯɐɥƆ - plɹoM ᗡƐ oᴉɹɐW ɹǝdnS
 item.record.fly_octo_fly.desc=ʎlℲ oʇɔO ʎlℲ - ᘔ uooʇɐldS
 item.record.vampire_killer.desc=ɹǝllᴉʞ ǝɹᴉdɯɐΛ - ʇuǝɯǝƃpnſ ɐᴉuɐʌǝlʇsɐƆ
 
-item.mayro_cap.name=<newline>
+item.mayro_cap.name=dɐƆ s,oɹʎɐW
 item.noteblock_head.name=pɐǝH s,ʞɔolᗺǝʇoN
 item.record.nb_sweden.desc=(xᴉɯǝɹ ʞɔolᗺǝʇoN) uǝpǝʍS - 8ƖㄣƆ
 item.record.nb_buoy_base_galaxy.desc=(xᴉɯǝɹ ʞɔolᗺǝʇoN) ʎxɐlɐפ ǝsɐᗺ ʎonᗺ - ʎxɐlɐפ oᴉɹɐW ɹǝdnS
@@ -111,7 +111,7 @@ item.record.nb_harvest_hazards.desc=(xᴉɯǝɹ ʞɔolᗺǝʇoN) spɹɐzɐH ʇs�
 
 --- ENTITIES ---
 entity.toad.name=pɐo┴
-entity.chincho.name=<newline>
+entity.chincho.name=oɥɔuᴉɥƆ
 
 --- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=ɯooɹɥsnɯ ɹǝdns sdoɹp ʞɔolᗺ ¿
@@ -131,3 +131,9 @@ advancements.mubble.get_vanadium.title=¡sɯnᴉpɐuɐΛ
 advancements.mubble.get_vanadium.description=sɯnᴉpɐuɐʌ ǝɹᴉnbɔ∀
 advancements.mubble.get_tetris_block.title=pǝʇɔǝuuoƆ ll∀ s,ʇI
 advancements.mubble.get_tetris_block.description=ʞɔolᗺ sᴉɹʇǝ┴ ɐ uo puɐɥ ɹnoʎ ʇǝפ
+
+--- OTHER ---
+item.cappy.secret_status=(: ˙˙˙lɐxopɐɹɐd ʍoH
+item.bandana.secret_status=¡§6lǝxᴉԀ§r 'noʎ ɹoɟ s,ʇɐɥ┴
+item.noteblock_head.secret_status=¡§6uɐʌƎ§r 'pɐǝɥ ɹnoʎ uo sᴉɥʇ pɐɥ ʎpɐǝɹlɐ noʎ ʇɥƃnoɥʇ I ¡ʎǝH
+item.mayro_cap.secret_status=¿,,§6ǝᴉssoS§r,, ˙ɹW 'noʎ ʇ,uǝɹɐ 'ʇsɐǝl ǝɥʇ ʇᴉ spǝǝu oɥʍ ǝuo ǝɥʇ ǝɹ,noʎ 'uo ǝɯoƆ
