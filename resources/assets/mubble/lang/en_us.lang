@@ -132,6 +132,8 @@ advancements.mubble.get_vanadium.description=Acquire vanadiums
 advancements.mubble.get_tetris_block.title=It's All Connected
 advancements.mubble.get_tetris_block.description=Get your hand on a Tetris Block
 
---- Other ---
-status.no_need=Come on, you don't need that, §6right§r?
-status.for_you=That's for you, my boy!
+--- OTHER ---
+item.cappy.secret_status=How paradoxal... :)
+item.bandana.secret_status=That's for you, §6Pixel§r!
+item.noteblock_head.secret_status=Hey! I thought you already had this on your head, §6Evan§r!
+item.mayro_cap.secret_status=Come on, you're the one who needs it the least, aren't you, Mr. "§6Sossie§r"?
