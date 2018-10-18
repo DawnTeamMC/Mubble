@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:tetris/tetris_glass"
+      "mubble:super_mario/mayro_cap"
     ]
   },
   "criteria": {
-    "has_vanadium": {
+    "has_yellow_coin": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "mubble:vanadium"
+            "item": "mubble:yellow_coin"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe":"mubble:tetris/tetris_glass"
+        "recipe": "mubble:super_mario/mayro_cap"
       }
     }
   },
   "requirements": [
     [
-      "has_vanadium",
+      "has_yellow_coin",
       "has_the_recipe"
     ]
   ]

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " XX",
+    "XOX"
+  ],
+  "key": {
+    "X": {
+      "item": "cloud_block"
+    },
+    "O": {
+      "item": "super_star"
+    }
+  },
+  "result": {
+    "item": "vanish_cap"
+  }
+}

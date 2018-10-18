@@ -6,13 +6,12 @@
     ]
   },
   "criteria": {
-    "has_red_wool": {
+    "has_super_star": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "minecraft:wool",
-            "data": 14
+            "item": "mubble:super_star"
           }
         ]
       }
@@ -26,7 +25,7 @@
   },
   "requirements": [
     [
-      "has_red_wool",
+      "has_super_star",
       "has_the_recipe"
     ]
   ]

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " XX",
+    "XOX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:wool",
+      "data": 5
+    },
+    "O": {
+      "item": "super_star"
+    }
+  },
+  "result": {
+    "item": "luigi_cap"
+  }
+}

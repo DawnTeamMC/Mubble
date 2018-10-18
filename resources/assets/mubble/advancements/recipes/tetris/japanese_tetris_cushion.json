@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe":"mubble/tetris:japanese_tetris_cushion"
+        "recipe":"mubble:tetris/japanese_tetris_cushion"
       }
     }
   },

@@ -20,7 +20,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble/vanilla:footblock"
+        "recipe": "mubble:vanilla/footblock"
       }
     }
   },

@@ -2,16 +2,26 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:tetris/tetris_glass"
+      "mubble:vanilla/headphones"
     ]
   },
   "criteria": {
-    "has_vanadium": {
+    "has_iron_ingot": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "mubble:vanadium"
+            "item": "minecraft:iron_ingot"
+          }
+        ]
+      }
+    },
+    "has_iron_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:iron_nugget"
           }
         ]
       }
@@ -19,13 +29,14 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe":"mubble:tetris/tetris_glass"
+        "recipe": "mubble:vanilla/headphones"
       }
     }
   },
   "requirements": [
     [
-      "has_vanadium",
+      "has_iron_ingot",
+      "has_iron_nugget",
       "has_the_recipe"
     ]
   ]
