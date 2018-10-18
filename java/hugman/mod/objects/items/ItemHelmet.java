@@ -62,29 +62,33 @@ public class ItemHelmet extends ItemBase implements IHasModel
 	@Override
 	public void onArmorTick(World worldIn, EntityPlayer playerIn, ItemStack armor)
 	{
-        Random rand = new Random();
-		for(PotionEffect effect : effects)
-		{
-			playerIn.addPotionEffect(new PotionEffect(effect));
-		}
-		if(this.name == "mayro_cap")
-		{
-			playerIn.inventory.clearMatchingItems(ItemInit.YELLOW_COIN, 0, 1, null);
-			playerIn.inventory.clearMatchingItems(ItemInit.RED_COIN, 0, 1, null);
-			playerIn.inventory.clearMatchingItems(ItemInit.BLUE_COIN, 0, 1, null);
-		}
-		if(this.name == "vanish_cap" && playerIn.isSneaking()) playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(14), 2, 0));
-		if(this.name == "wing_cap" && this.isUsable(armor) && playerIn.isSprinting())
-		{
-			playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(25), 1, 2));
-			playerIn.fallDistance = 0f;
-			armor.damageItem(1, playerIn);
-		}
-		if(this.name == "gooigi_cap" && rand.nextInt(51) == 50)
-		{
-	        worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_SLIME_HIT, SoundCategory.PLAYERS, 1f, 1f);
-		    playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(8), rand.nextInt(3) + 1, rand.nextInt(1)));
-		}
+		if(this.name == "wing_cap" && this.isUsable(armor) && playerIn.isSprinting()) armor.damageItem(1, playerIn);
+        if(!worldIn.isRemote)
+        {
+            Random rand = new Random();
+    		for(PotionEffect effect : effects)
+    		{
+    			playerIn.addPotionEffect(new PotionEffect(effect));
+    		}
+    		if(this.name == "mayro_cap")
+    		{
+    			playerIn.inventory.clearMatchingItems(ItemInit.YELLOW_COIN, 0, 1, null);
+    			playerIn.inventory.clearMatchingItems(ItemInit.RED_COIN, 0, 1, null);
+    			playerIn.inventory.clearMatchingItems(ItemInit.BLUE_COIN, 0, 1, null);
+    		}
+    		if(this.name == "vanish_cap" && playerIn.isSneaking()) playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(14), 2, 0));
+    		if(this.name == "wing_cap" && this.isUsable(armor) && playerIn.isSprinting())
+    		{
+    			playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(25), 1, 2));
+    			playerIn.fallDistance = 0f;
+    		}
+    		if(this.name == "gooigi_cap" && rand.nextInt(51) == 50)
+    		{
+    	        worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_SLIME_HIT, SoundCategory.PLAYERS, 1f, 1f);
+    		    playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(8), (rand.nextInt(3) + 1) * 20, rand.nextInt(2)));
+    		}
+        	
+        }
 	}
 	
 	@Override
