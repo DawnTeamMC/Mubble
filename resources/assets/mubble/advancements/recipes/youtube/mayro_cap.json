@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:super_mario/mayro_cap"
+      "mubble:youtube/mayro_cap"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:super_mario/mayro_cap"
+        "recipe": "mubble:youtube/mayro_cap"
       }
     }
   },
