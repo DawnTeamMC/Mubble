@@ -31,6 +31,7 @@ public class ItemInit
 	public static final Item CARAMEL_CREPE = new ItemEdible("caramel_crepe", 9, 3.4f, false);
 	public static final Item CANDY_CANE = new ItemEdible("candy_cane", 4, 1.8f, true);
 	public static final Item BANDAGE = new ItemBandage();
+	public static final Item HEADPHONES = new ItemHelmet("headphones", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 	
 	// SUPER MARIO
 	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));
@@ -53,20 +54,19 @@ public class ItemInit
 	
 	// KIRBY
 	public static final Item BANDANA = new ItemHelmet("bandana", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
-
+	
 	// SUPER SMASH BROS.
 	public static final Item SMASH_BALL = new ItemSmashBall();
-	
-	// OTHER
-	public static final Item HEADPHONES = new ItemHelmet("headphones", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
-	public static final Item RECORD_BLANK = new ItemSimple("record_blank", 1);
-	public static final Item RECORD_CHAMPIONS_ROAD = new ItemMusicDisc("champions_road", SoundHandler.RECORD_CHAMPIONS_ROAD);
-	public static final Item RECORD_VAMPIRE_KILLER = new ItemMusicDisc("vampire_killer", SoundHandler.RECORD_VAMPIRE_KILLER);
-	public static final Item RECORD_FLY_OCTO_FLY = new ItemMusicDisc("fly_octo_fly", SoundHandler.RECORD_FLY_OCTO_FLY);
 	
 	// YOUTUBE
 	public static final Item MAYRO_CAP = new ItemHelmet("mayro_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new PotionEffect(Potion.getPotionById(12), 1, 0));
 	public static final Item NOTEBLOCK_HEAD = new ItemHelmet("noteblock_head", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+	
+	// MUSIC DISCS
+	public static final Item RECORD_BLANK = new ItemSimple("record_blank", 1);
+	public static final Item RECORD_CHAMPIONS_ROAD = new ItemMusicDisc("champions_road", SoundHandler.RECORD_CHAMPIONS_ROAD);
+	public static final Item RECORD_VAMPIRE_KILLER = new ItemMusicDisc("vampire_killer", SoundHandler.RECORD_VAMPIRE_KILLER);
+	public static final Item RECORD_FLY_OCTO_FLY = new ItemMusicDisc("fly_octo_fly", SoundHandler.RECORD_FLY_OCTO_FLY);
 	public static final Item RECORD_NB_SWEDEN = new ItemMusicDisc("nb_sweden", SoundHandler.RECORD_NB_SWEDEN);
 	public static final Item RECORD_NB_BUOY_BASE_GALAXY = new ItemMusicDisc("nb_buoy_base_galaxy", SoundHandler.RECORD_NB_BUOY_BASE_GALAXY);
 	public static final Item RECORD_NB_WALUIGI_PINBALL = new ItemMusicDisc("nb_waluigi_pinball", SoundHandler.RECORD_NB_WALUIGI_PINBALL);
