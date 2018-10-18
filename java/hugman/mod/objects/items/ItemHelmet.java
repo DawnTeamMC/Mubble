@@ -83,7 +83,7 @@ public class ItemHelmet extends ItemBase implements IHasModel
 		if(this.name == "gooigi_cap" && rand.nextInt(51) == 50)
 		{
 	        worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_SLIME_HIT, SoundCategory.PLAYERS, 1f, 1f);
-		    playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(8), 2, 1));
+		    playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(8), rand.nextInt(3) + 1, rand.nextInt(1)));
 		}
 	}
 	
