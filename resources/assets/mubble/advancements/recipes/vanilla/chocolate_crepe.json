@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:chocolate_crepe"
+      "mubble:vanilla/chocolate_crepe"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:chocolate_crepe"
+        "recipe": "mubble/vanilla:chocolate_crepe"
       }
     }
   },

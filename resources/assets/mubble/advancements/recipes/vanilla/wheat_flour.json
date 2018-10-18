@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:wheat_flour"
+      "mubble:vanilla/wheat_flour"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:wheat_flour"
+        "recipe": "mubble/vanilla:wheat_flour"
       }
     }
   },

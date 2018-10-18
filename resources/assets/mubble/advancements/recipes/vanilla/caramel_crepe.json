@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:caramel_crepe"
+      "mubble:vanilla/caramel_crepe"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:caramel_crepe"
+        "recipe": "mubble/vanilla:caramel_crepe"
       }
     }
   },

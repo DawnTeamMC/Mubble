@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:japanese_tetris_cushion"
+      "mubble:tetris/japanese_tetris_cushion"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:japanese_tetris_cushion"
+        "recipe":"mubble/tetris:japanese_tetris_cushion"
       }
     }
   },
