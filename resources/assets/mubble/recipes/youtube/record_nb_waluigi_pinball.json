@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "record_blank"
+    },
+    {
+      "item": "noteblock_head"
+    },
+    {
+      "item": "waluigi_cap"
+    }
+  ],
+  "result": {
+    "item": "record_nb_waluigi_pinball"
+  }
+}

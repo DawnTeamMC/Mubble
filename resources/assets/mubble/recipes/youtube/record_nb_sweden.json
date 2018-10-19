@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "record_blank"
+    },
+    {
+      "item": "noteblock_head"
+    },
+    {
+      "item": "minecraft:grass"
+    }
+  ],
+  "result": {
+    "item": "record_nb_sweden"
+  }
+}

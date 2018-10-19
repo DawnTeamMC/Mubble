@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "record_blank"
+    },
+    {
+      "item": "vampire_stone"
+    }
+  ],
+  "result": {
+    "item": "record_vampire_killer"
+  }
+}
