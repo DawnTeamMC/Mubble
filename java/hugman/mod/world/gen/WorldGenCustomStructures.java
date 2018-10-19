@@ -34,10 +34,9 @@ public class WorldGenCustomStructures implements IWorldGenerator
 			generateStructure(RED_TOAD_HOUSE, world, random, chunkX, chunkZ, 30, Blocks.GRASS, BiomeMushroomKingdom.class);
 			generateStructure(BLUE_TOAD_HOUSE, world, random, chunkX, chunkZ, 30, Blocks.GRASS, BiomeMushroomKingdom.class);
 			generateStructure(GREEN_TOAD_HOUSE, world, random, chunkX, chunkZ, 30, Blocks.GRASS, BiomeMushroomKingdom.class);
-			//Total for Starshroom must be 500
-			generateStructure(STARSHROOM0, world, random, chunkX, chunkZ, 350, Blocks.GRASS, BiomeMushroomKingdom.class);
-			generateStructure(STARSHROOM1, world, random, chunkX, chunkZ, 95, Blocks.GRASS, BiomeMushroomKingdom.class);
-			generateStructure(STARSHROOM2, world, random, chunkX, chunkZ, 55, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(STARSHROOM0, world, random, chunkX, chunkZ, 500, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(STARSHROOM1, world, random, chunkX, chunkZ, 700, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(STARSHROOM2, world, random, chunkX, chunkZ, 800, Blocks.GRASS, BiomeMushroomKingdom.class);
 		}
 	}
 	

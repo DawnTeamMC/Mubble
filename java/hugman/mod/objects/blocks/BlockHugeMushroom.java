@@ -70,16 +70,6 @@ public class BlockHugeMushroom extends BlockBase implements IHasModel
     }
     
     @Override
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
-    {
-    	if(color == "blue") return new ItemStack(Item.getItemFromBlock(BlockInit.BLUE_MUSHROOM));
-    	else if(color == "green") return new ItemStack(Item.getItemFromBlock(BlockInit.GREEN_MUSHROOM));
-    	else if(color == "yellow") return new ItemStack(Item.getItemFromBlock(BlockInit.YELLOW_MUSHROOM));
-    	else if(color == "purple") return new ItemStack(Item.getItemFromBlock(BlockInit.PURPLE_MUSHROOM));
-		return null;
-    }
-    
-    @Override
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getDefaultState();

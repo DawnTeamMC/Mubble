@@ -32,7 +32,8 @@ public class ItemSmashBall extends ItemBase implements IHasModel
     {
         ItemStack stack = playerIn.getHeldItem(handIn);
         Random rand = new Random();
-        for (int i = 0; i < rand.nextInt(21) + 10; i++) {
+        for (int i = 0; i < rand.nextInt(21) + 10; i++)
+        {
         	worldIn.spawnParticle(EnumParticleTypes.FLAME, playerIn.posX + (rand.nextInt(11) - 5) / 10F, playerIn.posY + rand.nextInt(21) / 10F, playerIn.posZ + (rand.nextInt(11) - 5) / 10F, (rand.nextInt(21) - 10) / 120F, (rand.nextInt(2) + 0.1) / 11F, (rand.nextInt(21) - 10) / 120F);
         }
         playerIn.motionY = playerIn.motionY + 0.25D;

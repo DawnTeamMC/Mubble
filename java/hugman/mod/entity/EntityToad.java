@@ -66,7 +66,7 @@ public class EntityToad extends EntityAnimal
 	protected void initEntityAI()
 	{
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityHorse.class, 10, 1.2f, 1.45f));
+		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityChincho.class, 10, 1.2f, 1.45f));
 		this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> (checkedEntity).getItem().getItem() == ItemInit.SUPER_CROWN, 10, 1.2f, 1.45f));
 		this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.MAIN_HAND).getItem() == ItemInit.SUPER_CROWN, 10, 1.2f, 1.45f));
 		this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.OFF_HAND).getItem() == ItemInit.SUPER_CROWN, 10, 1.2f, 1.45f));
