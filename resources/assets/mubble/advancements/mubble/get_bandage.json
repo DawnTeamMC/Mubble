@@ -1,23 +1,23 @@
 {
-    "parent": "mubble:mubble/root",
+    "parent": "mubble:mubble/get_coin",
     "display": {
         "icon": {
-			"item": "mubble:vanadium"
+			"item": "mubble:bandage"
 		},
         "title": {
-            "translate": "advancements.mubble.get_vanadium.title"
+            "translate": "advancements.mubble.get_bandage.title"
         },
         "description": {
-            "translate": "advancements.mubble.get_vanadium.description"
+            "translate": "advancements.mubble.get_bandage.description"
         }
     },
     "criteria": {
-        "has_vanadium": {
+        "has_bandage": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "mubble:vanadium"
+                        "item": "mubble:bandage"
                     }
                 ]
             }

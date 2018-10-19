@@ -1,4 +1,5 @@
 {
+    "parent": "mubble:mubble/root",
     "display": {
         "icon": {
 			"item": "mubble:yellow_coin"
@@ -10,7 +11,6 @@
             "translate": "advancements.mubble.get_coin.description"
         }
     },
-    "parent": "mubble:mubble/root",
     "criteria": {
         "has_yellow_coin": {
             "trigger": "minecraft:inventory_changed",
