@@ -8,11 +8,7 @@
   "url": "https://minecraft.curseforge.com/projects/mubble",
   "updateUrl": "",
   "authorList": ["Hugman_76"],
-  "credits": "
-  Spanish Translation - Cochu
-  Dutch Translation - FVbico
-  Chinese (Simplified) Translation - Zhuyansong
-  Music - NoteBlock",
+  "credits": "https://ftb.gamepedia.com/Mubble/Credits",
   "logoFile": "assets/mubble/logo.png",
   "screenshots": [],
   "dependencies": []
