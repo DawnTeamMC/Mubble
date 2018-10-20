@@ -49,22 +49,30 @@ public class BiomeMushroomKingdom extends Biome
         addFlower(BlockInit.BOOMERANG_FLOWER.getDefaultState(), 20);
     }
     
-    public void addBlocks(World worldIn, Random rand1, BlockPos pos)
+    public void addBlocks(World worldIn, Random rand, BlockPos pos)
     {
-        Block block = BlockInit.QUESTION_BLOCK;
-        IBlockState state0=block.getDefaultState();
+        IBlockState question_block = BlockInit.QUESTION_BLOCK.getDefaultState();
+        IBlockState brick_block = BlockInit.BRICK_BLOCK.getDefaultState();
         for (int i = 0; i < 2; ++i)
         {
             for (int j = 0; j < 2; ++j)
             {
-                int x = i * 4 + 1 + 8 + rand1.nextInt(3);
-                int z = j * 4 + 1 + 8 + rand1.nextInt(3);
+                int x = i * 4 + 1 + 8 + rand.nextInt(3);
+                int z = j * 4 + 1 + 8 + rand.nextInt(3);
                 BlockPos blockPos = worldIn.getHeight(pos.add(x, 0, z));
-                int y = rand1.nextInt(1) + 3;
-                int luck = rand1.nextInt(10) + 1;
-                if (luck == 10)
+                int y = rand.nextInt(1) + 3;
+                int luck = rand.nextInt(10);
+                if (luck == 0)
                 {
-                	worldIn.setBlockState(blockPos.add(0, y, 0), state0);
+                	worldIn.setBlockState(blockPos.add(0, y, 0), question_block);
+                	for (int loop = 0; loop < rand.nextInt(6) + 1; loop++)
+                	{
+                    	luck = rand.nextInt(10) + 1;
+                    	if(luck == 0) worldIn.setBlockState(blockPos.add(0, y, 0).north(), brick_block);
+                    	else if(luck == 1) worldIn.setBlockState(blockPos.add(0, y, 0).south(), brick_block);
+                    	else if(luck == 2) worldIn.setBlockState(blockPos.add(0, y, 0).east(), brick_block);
+                    	else if(luck == 3) worldIn.setBlockState(blockPos.add(0, y, 0).west(), brick_block);
+                	}
                 }
             }
         }
