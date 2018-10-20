@@ -129,13 +129,19 @@ advancements.mubble.root.title=Mubble
 advancements.mubble.root.description=Een grandioos nieuw avontuur
 advancements.mubble.get_coin.title=Het is van mij! Goud!
 advancements.mubble.get_coin.description=Vind munten
-advancements.mubble.get_super_crown.title=<newline>
-advancements.mubble.get_super_crown.description=<newline>
-advancements.mubble.get_bandage.title=<newline>
-advancements.mubble.get_bandage.description=<newline>
-advancements.mubble.get_all_caps.title=<newline>
-advancements.mubble.get_all_caps.description=<newline>
+advancements.mubble.get_super_crown.title=De luxe behandeling
+advancements.mubble.get_super_crown.description=Vind een super kroon
+advancements.mubble.get_bandage.title=Herstel
+advancements.mubble.get_bandage.description=Verkrijg een verband
+advancements.mubble.get_all_caps.title=Supersterren
+advancements.mubble.get_all_caps.description=Maak alle petten
 advancements.mubble.get_vanadium.title=Vanadiums!
 advancements.mubble.get_vanadium.description=Verkrijg vanadiums
 advancements.mubble.get_tetris_block.title=Het is allemaal verbonden
 advancements.mubble.get_tetris_block.description=Krijg je handen aan een Tetris blok
+
+--- OTHER ---
+item.cappy.secret_status=Hoe paradoxaal... :)
+item.bandana.secret_status=Dat is voor jou, §6Pixel§r!
+item.noteblock_head.secret_status=Hey! Ik dacht dat je dit al op je hoofd had, §6Evan§r!
+item.mayro_cap.secret_status=Kom op, jij bent de laatste die dit nodig heeft, of niet, Mr. "§6Sossie§r"?
