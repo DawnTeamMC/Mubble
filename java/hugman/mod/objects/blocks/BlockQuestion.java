@@ -7,11 +7,13 @@ import hugman.mod.init.BlockInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -20,6 +22,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockQuestion extends BlockBase implements IHasModel
@@ -32,10 +35,9 @@ public class BlockQuestion extends BlockBase implements IHasModel
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos blockpos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-        if (!worldIn.getBlockState(blockpos.up()).getBlock().isPassable(worldIn, blockpos)) return true;
+	public void loot(World worldIn, BlockPos blockpos, IBlockState state)
+	{
+		if (!worldIn.getBlockState(blockpos.up()).getBlock().isPassable(worldIn, blockpos)) return;
         IBlockState empty_block = BlockInit.EMPTY_BLOCK.getDefaultState();
         final double x = blockpos.getX() + 0.5D;
         final double y = blockpos.getY() + 0.5D + 0.6D;
@@ -66,6 +68,37 @@ public class BlockQuestion extends BlockBase implements IHasModel
             	worldIn.spawnParticle(EnumParticleTypes.CRIT, x + (rand.nextInt(7) - 3) / 10D, y + 0.3D, z + (rand.nextInt(7) - 3) / 10D, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D, 0);
             }
         }
+	}
+	
+	@Override
+    public void onBlockAdded(World worldIn, BlockPos blockpos, IBlockState state)
+    {
+        if (!worldIn.isRemote)
+        {
+            if (worldIn.isBlockPowered(blockpos))
+            {
+            	this.loot(worldIn, blockpos, state);
+            }
+        }
+    }
+	
+	@Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos blockpos, Block blockIn, BlockPos fromPos)
+    {
+        if (!worldIn.isRemote)
+        {
+            if (worldIn.isBlockPowered(blockpos))
+            {
+            	this.loot(worldIn, blockpos, state);
+                worldIn.scheduleUpdate(blockpos, this, 2);
+            }
+        }
+    }
+	
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos blockpos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    {
+		this.loot(worldIn, blockpos, state);
         return true;
     }
 }
