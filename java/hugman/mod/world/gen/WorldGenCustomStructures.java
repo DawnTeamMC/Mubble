@@ -21,6 +21,8 @@ public class WorldGenCustomStructures implements IWorldGenerator
 	public static final WorldGenStructure RED_TOAD_HOUSE = new WorldGenStructure("toad_house/red");
 	public static final WorldGenStructure BLUE_TOAD_HOUSE = new WorldGenStructure("toad_house/blue");
 	public static final WorldGenStructure GREEN_TOAD_HOUSE = new WorldGenStructure("toad_house/green");
+	public static final WorldGenStructure YELLOW_TOAD_HOUSE = new WorldGenStructure("toad_house/yellow");
+	public static final WorldGenStructure PURPLE_TOAD_HOUSE = new WorldGenStructure("toad_house/purple");
 	public static final WorldGenStructure STARSHROOM0 = new WorldGenStructure("starshroom/0");
 	public static final WorldGenStructure STARSHROOM1 = new WorldGenStructure("starshroom/1");
 	public static final WorldGenStructure STARSHROOM2 = new WorldGenStructure("starshroom/2");
@@ -31,12 +33,14 @@ public class WorldGenCustomStructures implements IWorldGenerator
 		if(world.provider.getDimension() == 0)
 		{
 			//Total for Toad House must be 90 or 100
-			generateStructure(RED_TOAD_HOUSE, world, random, chunkX, chunkZ, 30, Blocks.GRASS, BiomeMushroomKingdom.class);
-			generateStructure(BLUE_TOAD_HOUSE, world, random, chunkX, chunkZ, 30, Blocks.GRASS, BiomeMushroomKingdom.class);
-			generateStructure(GREEN_TOAD_HOUSE, world, random, chunkX, chunkZ, 30, Blocks.GRASS, BiomeMushroomKingdom.class);
-			generateStructure(STARSHROOM0, world, random, chunkX, chunkZ, 500, Blocks.GRASS, BiomeMushroomKingdom.class);
-			generateStructure(STARSHROOM1, world, random, chunkX, chunkZ, 700, Blocks.GRASS, BiomeMushroomKingdom.class);
-			generateStructure(STARSHROOM2, world, random, chunkX, chunkZ, 800, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(RED_TOAD_HOUSE, world, random, chunkX, chunkZ, 60, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(BLUE_TOAD_HOUSE, world, random, chunkX, chunkZ, 60, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(GREEN_TOAD_HOUSE, world, random, chunkX, chunkZ, 60, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(YELLOW_TOAD_HOUSE, world, random, chunkX, chunkZ, 60, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(PURPLE_TOAD_HOUSE, world, random, chunkX, chunkZ, 60, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(STARSHROOM0, world, random, chunkX, chunkZ, 800, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(STARSHROOM1, world, random, chunkX, chunkZ, 1000, Blocks.GRASS, BiomeMushroomKingdom.class);
+			generateStructure(STARSHROOM2, world, random, chunkX, chunkZ, 1200, Blocks.GRASS, BiomeMushroomKingdom.class);
 		}
 	}
 	
