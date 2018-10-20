@@ -29,6 +29,12 @@ public class SoundHandler
 	ENTITY_TOAD_AMBIENT,
 	ENTITY_TOAD_HURT,
 	ENTITY_TOAD_DEATH,
+	COSTUME_CAPPY_AMBIENT,
+	COSTUME_CAPPY_AMBIENT_NETHER,
+	COSTUME_CAPPY_EQUIP,
+	COSTUME_CAPPY_HAPPY,
+	COSTUME_CAPPY_HELP,
+	COSTUME_CAPPY_HELP_WATER,
 	RECORD_CHAMPIONS_ROAD,
 	RECORD_FLY_OCTO_FLY,
 	RECORD_VAMPIRE_KILLER,
@@ -60,6 +66,12 @@ public class SoundHandler
 		ENTITY_TOAD_AMBIENT = registerSound("entity.toad.ambient");
 		ENTITY_TOAD_HURT = registerSound("entity.toad.hurt");
 		ENTITY_TOAD_DEATH = registerSound("entity.toad.death");
+		COSTUME_CAPPY_AMBIENT = registerSound("costume.cappy.ambient");
+		COSTUME_CAPPY_AMBIENT_NETHER = registerSound("costume.cappy.ambient.nether");
+		COSTUME_CAPPY_EQUIP = registerSound("costume.cappy.equip");
+		COSTUME_CAPPY_HAPPY = registerSound("costume.cappy.happy");
+		COSTUME_CAPPY_HELP = registerSound("costume.cappy.help");
+		COSTUME_CAPPY_HELP_WATER = registerSound("costume.cappy.help.water");
 		RECORD_CHAMPIONS_ROAD = registerSound("record.champions_road");
 		RECORD_FLY_OCTO_FLY = registerSound("record.fly_octo_fly");
 		RECORD_VAMPIRE_KILLER = registerSound("record.vampire_killer");

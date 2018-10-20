@@ -216,6 +216,88 @@
 			"mubble:entity/toad/death2"
 		]
 	},
+	"costume.cappy.ambient":
+	{
+		"category": "voice",
+		"sounds":
+		[
+			"mubble:costume/cappy/ambient1",
+			"mubble:costume/cappy/ambient2",
+			"mubble:costume/cappy/ambient3",
+			"mubble:costume/cappy/ambient4",
+			"mubble:costume/cappy/ambient5",
+			"mubble:costume/cappy/ambient6",
+			"mubble:costume/cappy/ambient7",
+			"mubble:costume/cappy/ambient8",
+			"mubble:costume/cappy/ambient9",
+			"mubble:costume/cappy/ambient10",
+			"mubble:costume/cappy/ambient11",
+			"mubble:costume/cappy/ambient12",
+			"mubble:costume/cappy/ambient13",
+			"mubble:costume/cappy/ambient14",
+			"mubble:costume/cappy/ambient15",
+			"mubble:costume/cappy/ambient16"
+		]
+	},
+	"costume.cappy.ambient.nether":
+	{
+		"category": "voice",
+		"sounds":
+		[
+			"mubble:costume/cappy/ambient_nether1",
+			"mubble:costume/cappy/ambient_nether2",
+			"mubble:costume/cappy/ambient_nether3",
+			"mubble:costume/cappy/ambient_nether4"
+		]
+	},
+	"costume.cappy.equip":
+	{
+		"category": "voice",
+		"sounds":
+		[
+			"mubble:costume/cappy/equip1",
+			"mubble:costume/cappy/equip2",
+			"mubble:costume/cappy/equip3"
+		]
+	},
+	"costume.cappy.happy":
+	{
+		"category": "voice",
+		"sounds":
+		[
+			"mubble:costume/cappy/happy1",
+			"mubble:costume/cappy/happy2",
+			"mubble:costume/cappy/happy3",
+			"mubble:costume/cappy/happy4",
+			"mubble:costume/cappy/happy5",
+			"mubble:costume/cappy/happy6",
+			"mubble:costume/cappy/happy7"
+		]
+	},
+	"costume.cappy.help":
+	{
+		"category": "voice",
+		"sounds":
+		[
+			"mubble:costume/cappy/help1",
+			"mubble:costume/cappy/help2",
+			"mubble:costume/cappy/help3",
+			"mubble:costume/cappy/help4",
+			"mubble:costume/cappy/help5",
+			"mubble:costume/cappy/help6"
+		]
+	},
+	"costume.cappy.help.water":
+	{
+		"category": "voice",
+		"sounds":
+		[
+			"mubble:costume/cappy/help_water1",
+			"mubble:costume/cappy/help_water2",
+			"mubble:costume/cappy/help_water3",
+			"mubble:costume/cappy/help_water4"
+		]
+	},
 	"record.champions_road":
 	{
 		"category": "record",
