@@ -4,11 +4,9 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
-import hugman.mod.Main;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

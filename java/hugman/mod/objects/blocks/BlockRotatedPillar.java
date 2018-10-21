@@ -1,7 +1,5 @@
 package hugman.mod.objects.blocks;
 
-import java.util.Random;
-
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
@@ -12,11 +10,8 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

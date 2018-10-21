@@ -3,7 +3,6 @@ package hugman.mod.objects.items;
 import hugman.mod.Main;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.util.SoundEvent;
 
