@@ -7,11 +7,8 @@ import com.google.common.collect.Maps;
 import hugman.mod.entity.EntityToad;
 import hugman.mod.entity.model.ModelToad;
 import hugman.mod.util.Reference;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.LayeredTexture;
-import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderToad extends RenderLiving<EntityToad>

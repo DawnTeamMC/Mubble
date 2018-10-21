@@ -3,10 +3,10 @@ package hugman.mod.entity.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelChincho extends ModelBase {
+public class ModelChincho extends ModelBase
+{
     public ModelRenderer head;
     public ModelRenderer body;
     public ModelRenderer right_arm;
@@ -17,7 +17,8 @@ public class ModelChincho extends ModelBase {
     public ModelRenderer middle_teeth;
     public ModelRenderer left_teeth;
 
-    public ModelChincho() {
+    public ModelChincho()
+    {
         this.textureWidth = 64;
         this.textureHeight = 64;
         this.head = new ModelRenderer(this, 0, 0);
@@ -52,7 +53,8 @@ public class ModelChincho extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+    { 
         this.right_arm.render(f5);
         this.left_arm.render(f5);
         this.left_leg.render(f5);
@@ -64,7 +66,8 @@ public class ModelChincho extends ModelBase {
         this.left_teeth.render(f5);
     }
 
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
+    {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
