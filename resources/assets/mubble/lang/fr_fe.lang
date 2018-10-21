@@ -1,0 +1,141 @@
+--- CREATIVE TABS ---
+itemGroup.mubble_blocks_tab=blauc Mubble
+itemGroup.mubble_items_tab=trucs Mubble
+itemGroup.mubble_costumes_tab=costum Mubble
+
+--- BLOCKS ---
+tile.vanadium_block.name=cube joli et mjenta
+tile.vanadium_ore.name=minrai cool et mjenta
+tile.red_bricks.name=brik rouj
+tile.white_bricks.name=brik blanch
+tile.blunite.name=blunit
+tile.polished_blunite.name=blunit tou bo tou propr
+tile.carbonite.name=crbonit
+tile.polished_carbonite.name=cobnite bo
+tile.footblock.name=blok foutbol
+
+tile.question_block.name=bloc???
+tile.empty_block.name=bloc san rien lol
+tile.rotating_block.name=bloc tourn
+tile.light_block.name=blok qui brye
+tile.brick_block.name=blok de brik
+tile.golden_brick_block.name=bloc de brik en or!!!!!
+tile.note_block.name=blok sautai en ler
+tile.super_note_block.name=super sautai supair en ler
+tile.fire_flower.name=fleu de fee
+tile.ice_flower.name=fleu de glas
+tile.boomerang_flower.name=fleu boumrangue
+tile.cloud_flower.name=fleu nuaj
+tile.cloud_block.name=blok nuaj
+tile.blue_mushroom.name=jampinon ble
+tile.green_mushroom.name=jampinon ver
+tile.yellow_mushroom.name=jampinon jone
+tile.purple_mushroom.name=jampinon violet
+tile.blue_mushroom_block.name=blok jampinon ble
+tile.green_mushroom_block.name=bloc jampinon ver
+tile.yellow_mushroom_block.name=bloc jampinon jon
+tile.purple_mushroom_block.name=bloc jampinon violet
+
+tile.blue_tetris_block.name=blok taitri beul
+tile.light_blue_tetris_block.name=blok titri beul cler
+tile.green_tetris_block.name=bloc taitri ver cool
+tile.yellow_tetris_block.name=bloc tirti jon
+tile.orange_tetris_block.name=blok taitri ranj
+tile.red_tetris_block.name=blok tetri rouj
+tile.purple_tetris_block.name=blok taitri violet
+tile.gray_tetris_block.name=bloc taitri grise
+tile.tetris_glass.name=ver titri
+tile.japanese_tetris_cushion.name=cousin CHINOIIS:!$ ahahha (tetri)
+tile.rainbow_tetris_scaffolding.name=shafaudaj tirtris ARC EN CIELLLLL!! tro bo lai arc en cie
+tile.monochrome_tetris_scaffolding.name=shafaudag tirtri pa bo c noir et blen c vieu
+
+tile.iron_scaffolding.name=chafaudaj an faire
+tile.purple_bricks.name=brik volete
+tile.cyan_bricks.name=brik sian
+tile.elder_pebbles.name=vieu galai come su la plaj de diepp
+tile.space_matter.name=matiare martiéne
+
+tile.vampire_stone.name=cayou vampir
+tile.medusa_stone.name=cayoue de la madane serpen
+tile.medusa_bricks.name=brik chai madame serpens!
+tile.blue_candy_cane_pillar.name=piler de bonbon de noel sauf que c ble
+tile.green_candy_cane_pillar.name=pylier de bonbon de noel sof que c ver
+tile.yellow_candy_cane_pillar.name=piler de bonbon de noel sauf que c jonne
+tile.red_candy_cane_pillar.name=pyer de bombon de noel sauf que c rouj
+tile.purple_candy_cane_pillar.name=piler de bobon de novel sauf que c pourpr
+
+tile.koretato_block.name=patete qui vi
+
+--- ITEMS ---
+item.vanadium.name=mincraf minerai cool pourpré
+item.wheat_flour.name=farin
+item.caramel_cube.name=cub carmiel
+item.crepe.name=craipe
+item.chocolate_crepe.name=craipe au nutela
+item.caramel_crepe.name=craipe au caramale
+item.candy_cane.name=c le bon bon de noel sa
+item.bandage.name=pensmen
+
+item.super_mushroom.name=coul champignon
+item.peach.name=g la paich!! ahaha
+item.cape_feather.name=plum supere sot
+item.super_star.name=supare etoile
+item.yellow_coin.name=fric jaunne
+item.red_coin.name=flouz rouj
+item.blue_coin.name=firc lbeu ohoh
+item.cappy.name=capi
+item.luigi_cap.name=casqut luiji
+item.wario_cap.name=casqeut a worio
+item.waluigi_cap.name=cazquett a va-luiji
+item.vanish_cap.name=casquet t pu la mdrrr!!
+item.wing_cap.name=caskette ailé
+item.gooigi_cap.name=casett de goiii lo!l c du slim block en fait??!
+item.princess_peach_crown.name=couron disi
+item.princess_daisy_crown.name=couraun peeach
+item.super_crown.name=couraune bien supair coule. 
+
+item.bandana.name=banade
+
+item.smash_ball.name=boul smash bros
+
+item.headphones.name=ecouteur
+item.record_blank.name=diske rien dedans
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+
+item.mayro_cap.name=kaetse maryo
+item.noteblock_head.name=tete nau tblok
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
+
+--- ENTITIES ---
+entity.toad.name=BUP BUP
+entity.chincho.name=chienchau
+
+--- SUBTITLES ---
+subtitles.block.question_block.loot.super_mushroom=cool champi sorti ? blok
+subtitles.block.question_block.loot.coin=fric sorti ? bloc
+subtitles.item.cape_feather.use=plum sauper so qq a utiliser sa
+subtitles.item.smash_ball.use=ball mach qq la utilise
+subtitles.entity.toad.ambient=tod chucoht
+subtitles.entity.toad.hurt=toad a mal
+subtitles.entity.toad.death=toad a trai mal
+
+--- ADVANCEMENTS ---
+advancements.mubble.root.title=Mubble
+advancements.mubble.root.description=c le mod sa
+advancements.mubble.get_coin.title=du fric
+advancements.mubble.get_coin.description=donn du fric stp
+advancements.mubble.get_super_crown.title=la couronn pa bi-un
+advancements.mubble.get_super_crown.description=fau la trouvé (je croi)
+advancements.mubble.get_bandage.title=hopital
+advancements.mubble.get_bandage.description=soin
+advancements.mubble.get_all_caps.title=les gen sont conus
+advancements.mubble.get_all_caps.description=fo voler leur chapo
+advancements.mubble.get_vanadium.title=je sui blinder
+advancements.mubble.get_vanadium.description=trouv du truc la qi brillai et pourpré
+advancements.mubble.get_tetris_block.title=la majie du jeu sur fb
+advancements.mubble.get_tetris_block.description=tu te souvien du jeu ou fallai construir non pa minecraft s un vieu jeu sur vielle console bah il fau un de c bloks jcroi
