@@ -2,7 +2,7 @@
   "pools": [
     {
       "name":"coins",
-      "rolls": 3,
+      "rolls": 2,
       "entries": [
         {
           "type": "item",
@@ -36,7 +36,7 @@
     },
     {
       "name":"blocks",
-      "rolls": 3,
+      "rolls": 1,
       "entries": [
         {
           "type": "item",
@@ -46,8 +46,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 2,
-                "max": 7
+                "min": 1,
+                "max": 4
               }
             }
           ]
@@ -61,7 +61,7 @@
               "function": "set_count",
               "count": {
                 "min": 1,
-                "max": 3
+                "max": 2
               }
             }
           ]
@@ -75,7 +75,7 @@
               "function": "set_count",
               "count": {
                 "min": 1,
-                "max": 3
+                "max": 2
               }
             }
           ]
@@ -94,8 +94,8 @@
             {
               "function": "set_count",
               "count": {
-                "min": 2,
-                "max": 7
+                "min": 1,
+                "max": 3
               }
             }
           ]
