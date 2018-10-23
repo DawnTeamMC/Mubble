@@ -14,7 +14,7 @@ import hugman.mod.objects.blocks.BlockMushroom;
 import hugman.mod.objects.blocks.BlockNote;
 import hugman.mod.objects.blocks.BlockOre;
 import hugman.mod.objects.blocks.BlockQuestion;
-import hugman.mod.objects.blocks.BlockRotatedPillar;
+import hugman.mod.objects.blocks.BlockPillar;
 import hugman.mod.objects.blocks.BlockRotating;
 import hugman.mod.objects.blocks.BlockSimple;
 import hugman.mod.objects.blocks.BlockTetris;
@@ -78,11 +78,11 @@ public class BlockInit
 	public static final Block VAMPIRE_STONE = new BlockSimple("vampire_stone", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block MEDUSA_STONE = new BlockSimple("medusa_stone", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block MEDUSA_BRICKS = new BlockSimple("medusa_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
-	public static final Block BLUE_CANDY_CANE_PILLAR = new BlockRotatedPillar("blue_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
-	public static final Block GREEN_CANDY_CANE_PILLAR = new BlockRotatedPillar("green_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
-	public static final Block YELLOW_CANDY_CANE_PILLAR = new BlockRotatedPillar("yellow_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
-	public static final Block RED_CANDY_CANE_PILLAR = new BlockRotatedPillar("red_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
-	public static final Block PURPLE_CANDY_CANE_PILLAR = new BlockRotatedPillar("purple_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block BLUE_CANDY_CANE_PILLAR = new BlockPillar("blue_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block GREEN_CANDY_CANE_PILLAR = new BlockPillar("green_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block YELLOW_CANDY_CANE_PILLAR = new BlockPillar("yellow_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block RED_CANDY_CANE_PILLAR = new BlockPillar("red_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block PURPLE_CANDY_CANE_PILLAR = new BlockPillar("purple_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 
 	// CELESTE
 	public static final Block IRON_SCAFFOLDING = new BlockSimple("iron_scaffolding", Material.IRON, 5f, 30f, SoundType.METAL);
