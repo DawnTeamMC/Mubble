@@ -16,12 +16,12 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockRotatedPillar extends BlockBase implements IHasModel
+public class BlockPillar extends BlockBase implements IHasModel
 {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class);
     String name;
     
-	public BlockRotatedPillar(String name, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockPillar(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
 		super(name, material, hardness, resistance, sound, light);
 
@@ -30,7 +30,7 @@ public class BlockRotatedPillar extends BlockBase implements IHasModel
 		this.name = name;
 	}
 	
-	public BlockRotatedPillar(String name, Material material, float hardness, float resistance, SoundType sound)
+	public BlockPillar(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
 		super(name, material, hardness, resistance, sound);
 
