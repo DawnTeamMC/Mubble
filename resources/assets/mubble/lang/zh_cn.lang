@@ -1,7 +1,7 @@
 --- CREATIVE TABS ---
-itemGroup.mubble_blocks_tab=Mubble方块
-itemGroup.mubble_items_tab=Mubble物品
-itemGroup.mubble_costumes_tab=<newline>
+itemGroup.mubble_blocks_tab=任天堂领域方块
+itemGroup.mubble_items_tab=任天堂领域物品
+itemGroup.mubble_costumes_tab=任天堂领域时装
 
 --- BLOCKS ---
 tile.vanadium_block.name=钒块
@@ -22,19 +22,19 @@ tile.brick_block.name=砖块
 tile.golden_brick_block.name=金色砖块
 tile.note_block.name=音符块
 tile.super_note_block.name=超级音符块
-tile.fire_flower.name=<newline>
-tile.ice_flower.name=<newline>
-tile.boomerang_flower.name=<newline>
-tile.cloud_flower.name=<newline>
-tile.cloud_block.name=<newline>
-tile.blue_mushroom.name=<newline>
-tile.green_mushroom.name=<newline>
-tile.yellow_mushroom.name=<newline>
-tile.purple_mushroom.name=<newline>
-tile.blue_mushroom_block.name=<newline>
-tile.green_mushroom_block.name=<newline>
-tile.yellow_mushroom_block.name=<newline>
-tile.purple_mushroom_block.name=<newline>
+tile.fire_flower.name=火花
+tile.ice_flower.name=冰花
+tile.boomerang_flower.name=回旋镖花
+tile.cloud_flower.name=云花
+tile.cloud_block.name=云
+tile.blue_mushroom.name=蓝色蘑菇
+tile.green_mushroom.name=绿色蘑菇
+tile.yellow_mushroom.name=黄色蘑菇
+tile.purple_mushroom.name=紫色蘑菇
+tile.blue_mushroom_block.name=蓝色蘑菇方块
+tile.green_mushroom_block.name=绿色蘑菇方块
+tile.yellow_mushroom_block.name=黄色蘑菇方块
+tile.purple_mushroom_block.name=紫色蘑菇方块
 
 tile.blue_tetris_block.name=蓝色俄罗斯方块
 tile.light_blue_tetris_block.name=淡蓝色俄罗斯方块
@@ -49,22 +49,22 @@ tile.japanese_tetris_cushion.name=日式俄罗斯方块坐垫
 tile.rainbow_tetris_scaffolding.name=彩虹俄罗斯方块脚手架
 tile.monochrome_tetris_scaffolding.name=黑白俄罗斯方块脚手架
 
-tile.iron_scaffolding.name=铁质脚手架
+tile.iron_scaffolding.name=铁脚手架
 tile.purple_bricks.name=紫色砖块
 tile.cyan_bricks.name=青色砖块
 tile.elder_pebbles.name=远古鹅卵石
 tile.space_matter.name=太空物质
 
-tile.vampire_stone.name=<newline>
-tile.medusa_stone.name=<newline>
-tile.medusa_bricks.name=<newline>
-tile.blue_candy_cane_pillar.name=<newline>
-tile.green_candy_cane_pillar.name=<newline>
-tile.yellow_candy_cane_pillar.name=<newline>
-tile.red_candy_cane_pillar.name=<newline>
-tile.purple_candy_cane_pillar.name=<newline>
+tile.vampire_stone.name=吸血鬼之石
+tile.medusa_stone.name=美杜莎之石
+tile.medusa_bricks.name=美杜莎砖块
+tile.blue_candy_cane_pillar.name=蓝色拐杖糖支柱
+tile.green_candy_cane_pillar.name=绿色拐杖糖支柱
+tile.yellow_candy_cane_pillar.name=黄色拐杖糖支柱
+tile.red_candy_cane_pillar.name=红色拐杖糖支柱
+tile.purple_candy_cane_pillar.name=紫色拐杖糖支柱
 
-tile.koretato_block.name=<newline>
+tile.koretato_block.name=Koretato块
 
 --- ITEMS ---
 item.vanadium.name=钒
@@ -73,39 +73,39 @@ item.caramel_cube.name=焦糖块
 item.crepe.name=可丽饼
 item.chocolate_crepe.name=巧克力可丽饼
 item.caramel_crepe.name=焦糖可丽饼
-item.candy_cane.name=<newline>
-item.bandage.name=<newline>
+item.candy_cane.name=拐杖糖
+item.bandage.name=绷带
 
 item.super_mushroom.name=超级蘑菇
 item.peach.name=桃子
-item.cape_feather.name=<newline>
+item.cape_feather.name=披风羽毛
 item.super_star.name=无敌星
 item.yellow_coin.name=黄币
 item.red_coin.name=红币
 item.blue_coin.name=蓝币
 item.cappy.name=凯皮
-item.luigi_cap.name=<newline>
-item.wario_cap.name=<newline>
-item.waluigi_cap.name=<newline>
-item.vanish_cap.name=<newline>
-item.wing_cap.name=<newline>
-item.gooigi_cap.name=<newline>
-item.princess_peach_crown.name=<newline>
-item.princess_daisy_crown.name=<newline>
-item.super_crown.name=<newline>
+item.luigi_cap.name=路易的帽子
+item.wario_cap.name=瓦里奥的帽子
+item.waluigi_cap.name=瓦路易的帽子
+item.vanish_cap.name=消失的帽子
+item.wing_cap.name=翼帽
+item.gooigi_cap.name=古基的帽子
+item.princess_peach_crown.name=碧奇公主的王冠
+item.princess_daisy_crown.name=黛西公主的王冠
+item.super_crown.name=超级王冠
 
-item.bandana.name=<newline>
+item.bandana.name=手帕
 
-item.smash_ball.name=<newline>
+item.smash_ball.name=粉碎球
 
-item.headphones.name=<newline>
-item.record_blank.name=<newline>
+item.headphones.name=耳机
+item.record_blank.name=空白音乐唱片
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
 item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
 item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
-item.mayro_cap.name=<newline>
-item.noteblock_head.name=<newline>
+item.mayro_cap.name=马伊罗的帽子
+item.noteblock_head.name=NoteBlock的头
 item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
 item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
 item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
@@ -113,29 +113,29 @@ item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harve
 
 --- ENTITIES ---
 entity.toad.name=奇诺比奥
-entity.chincho.name=<newline>
+entity.chincho.name=钦乔
 
 --- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=问号块:掉落超级蘑菇
 subtitles.block.question_block.loot.coin=问号块:掉落硬币
-subtitles.item.cape_feather.use=<newline>
-subtitles.item.smash_ball.use=<newline>
+subtitles.item.cape_feather.use=披风羽毛:被使用
+subtitles.item.smash_ball.use=粉碎球:被使用
 subtitles.entity.toad.ambient=奇诺比奥:咕哝
 subtitles.entity.toad.hurt=奇诺比奥:受伤
 subtitles.entity.toad.death=奇诺比奥:死亡
 
 --- ADVANCEMENTS ---
-advancements.mubble.root.title=Mubble
-advancements.mubble.root.description=一次伟大崭新的旅程
-advancements.mubble.get_coin.title=宝藏是我的！
+advancements.mubble.root.title=任天堂领域
+advancements.mubble.root.description=一次崭新伟大的旅程
+advancements.mubble.get_coin.title=宝藏都是我的！
 advancements.mubble.get_coin.description=找到硬币
-advancements.mubble.get_super_crown.title=<newline>
-advancements.mubble.get_super_crown.description=<newline>
-advancements.mubble.get_bandage.title=<newline>
-advancements.mubble.get_bandage.description=<newline>
-advancements.mubble.get_all_caps.title=<newline>
-advancements.mubble.get_all_caps.description=<newline>
+advancements.mubble.get_super_crown.title=豪华待遇
+advancements.mubble.get_super_crown.description=找到一顶超级王冠
+advancements.mubble.get_bandage.title=康复
+advancements.mubble.get_bandage.description=获得一个绷带
+advancements.mubble.get_all_caps.title=大明星
+advancements.mubble.get_all_caps.description=合成所有帽子
 advancements.mubble.get_vanadium.title=钒！
 advancements.mubble.get_vanadium.description=获得钒
-advancements.mubble.get_tetris_block.title=一切都是可以连接的
+advancements.mubble.get_tetris_block.title=连接成功
 advancements.mubble.get_tetris_block.description=手握俄罗斯方块
