@@ -1,0 +1,147 @@
+--- CREATIVE TABS ---
+itemGroup.mubble_blocks_tab=Mubble Blöcke
+itemGroup.mubble_items_tab=Mubble Gegenstände
+itemGroup.mubble_costumes_tab=Mubble Kostüme
+
+--- BLOCKS ---
+tile.vanadium_block.name=Vanadium-Block
+tile.vanadium_ore.name=Vanadium-Erz
+tile.red_bricks.name=Rote Ziegelsteine
+tile.white_bricks.name=Weiße Ziegelsteine
+tile.blunite.name=Blunite
+tile.polished_blunite.name=Polierter Blunite
+tile.carbonite.name=Carbonite
+tile.polished_carbonite.name=Polierter Carbonite
+tile.footblock.name=Fußblock
+
+tile.question_block.name=? Block
+tile.empty_block.name=Leerer Block
+tile.rotating_block.name=Rotierender Block
+tile.light_block.name=Leuchtender Block
+tile.brick_block.name=Ziegelstein-Block
+tile.golden_brick_block.name=Goldener Ziegelstein-Block
+tile.note_block.name=Notenblock
+tile.super_note_block.name=Super Notenblock
+tile.fire_flower.name=Feuerblume
+tile.ice_flower.name=Eisblume
+tile.boomerang_flower.name=Bumerangblume
+tile.cloud_flower.name=Wolkenblume
+tile.cloud_block.name=Wolkenblock
+tile.blue_mushroom.name=Blauer Pilz
+tile.green_mushroom.name=Grüner Pilz
+tile.yellow_mushroom.name=Gelber Pilz
+tile.purple_mushroom.name=Lila Pilz
+tile.blue_mushroom_block.name=Blauer Pilzblock
+tile.green_mushroom_block.name=Grüner Pilzblock
+tile.yellow_mushroom_block.name=Gelber Pilzblock
+tile.purple_mushroom_block.name=Lila Pilzblock
+
+tile.blue_tetris_block.name=Blauer Tetris-Block
+tile.light_blue_tetris_block.name=Leuchtenderblauer Tetris-Block
+tile.green_tetris_block.name=Grüner Tetris-Block
+tile.yellow_tetris_block.name=Gelber Tetris-Block
+tile.orange_tetris_block.name=Orangefarbener Tetris-Block
+tile.red_tetris_block.name=Roter Tetris-Block
+tile.purple_tetris_block.name=Lila Tetris-Block
+tile.gray_tetris_block.name=Grauer Tetris-Block
+tile.tetris_glass.name=Tetris-Glas
+tile.japanese_tetris_cushion.name=Japanischer Tetris-Kissen
+tile.rainbow_tetris_scaffolding.name=Regenbogen Tetris-Gerüst
+tile.monochrome_tetris_scaffolding.name=Einfarbiger Tetris-Gerüst
+
+tile.iron_scaffolding.name=Eisen Gerüst
+tile.purple_bricks.name=Lila Ziegelsteine
+tile.cyan_bricks.name=Türkiser Ziegelsteine
+tile.elder_pebbles.name=Elder Pebbles
+tile.space_matter.name=Space Matter
+
+tile.vampire_stone.name=Vampir-Stein
+tile.medusa_stone.name=Medusa's Stein
+tile.medusa_bricks.name=Medusa's Ziegelsteine
+tile.blue_candy_cane_pillar.name=Blauer Zuckerstangensäule
+tile.green_candy_cane_pillar.name=Grüner Zuckerstangensäule
+tile.yellow_candy_cane_pillar.name=Gelber Zuckerstangensäule
+tile.red_candy_cane_pillar.name=Roter Zuckerstangensäule
+tile.purple_candy_cane_pillar.name=Lila Zuckerstangensäule
+
+tile.koretato_block.name=Koretato-Block
+
+--- ITEMS ---
+item.vanadium.name=Vanadium
+item.wheat_flour.name=Weizenmehl
+item.caramel_cube.name=Karamellwürfel
+item.crepe.name=Crêpe
+item.chocolate_crepe.name=Schokoladen-Crêpe
+item.caramel_crepe.name=Karamell-Crêpe
+item.candy_cane.name=Zuckerstange
+item.bandage.name=Verband
+
+item.super_mushroom.name=Super-Pilz
+item.peach.name=Peach
+item.cape_feather.name=Federumhang
+item.super_star.name=Super Stern
+item.yellow_coin.name=Gelbe Münze
+item.red_coin.name=Rote Münze
+item.blue_coin.name=Blaue Münze
+item.cappy.name=Mütze
+item.luigi_cap.name=Luigi-Mütze
+item.wario_cap.name=Wario-Mütze
+item.waluigi_cap.name=Waluigi-Mütze
+item.vanish_cap.name=Vanish-Mütze
+item.wing_cap.name=Wing-Mütze
+item.gooigi_cap.name=Gooigi's Mütze
+item.princess_peach_crown.name=Prinzessin Peach's Krone
+item.princess_daisy_crown.name=Prinzessin Daisy's Krone
+item.super_crown.name=Super Krone
+
+item.bandana.name=Kopftuch
+
+item.smash_ball.name=Smash Ball
+
+item.headphones.name=Kopfhörer
+item.record_blank.name=Leere Musikdiskette
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+
+item.mayro_cap.name=Mayro's Mütze
+item.noteblock_head.name=NoteBlock's Kopf
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
+
+--- ENTITIES ---
+entity.toad.name=Toad
+entity.chincho.name=Chincho
+
+--- SUBTITLES ---
+subtitles.block.question_block.loot.power_up=? Block gibt Power-Up
+subtitles.block.question_block.loot.coin=? Block gibt Münze
+subtitles.item.cape_feather.use=Federmütze benutzt
+subtitles.item.smash_ball.use=Smash Ball benutzt
+subtitles.entity.toad.ambient=Toad murmelt
+subtitles.entity.toad.hurt=Toad verletzt
+subtitles.entity.toad.death=Toad starb
+
+--- ADVANCEMENTS ---
+advancements.mubble.root.title=Mubble
+advancements.mubble.root.description=Eine großartige neue Reise
+advancements.mubble.get_coin.title=Es schürft! Gold!
+advancements.mubble.get_coin.description=Finde Münzen
+advancements.mubble.get_super_crown.title=Die luxuriöse Behandlung
+advancements.mubble.get_super_crown.description=Finde eine Super-Krone
+advancements.mubble.get_bandage.title=Erholung
+advancements.mubble.get_bandage.description=Erhalte ein Verband
+advancements.mubble.get_all_caps.title=Super-Sterne
+advancements.mubble.get_all_caps.description=Stelle alle Mützen her
+advancements.mubble.get_vanadium.title=Vanadiums!
+advancements.mubble.get_vanadium.description=Beschaffe vanadiums
+advancements.mubble.get_tetris_block.title=Es Ist Alles Verbunden
+advancements.mubble.get_tetris_block.description=Halte einen Tetris-Block in deiner Hand
+
+--- OTHER ---
+item.cappy.secret_status=Wie widersprüchlich... :)
+item.bandana.secret_status=Das ist für dich, §6Pixel§r!
+item.noteblock_head.secret_status=Hey! Ich dachte, du hättest das schon auf dem Kopf, §6Evan§r!
+item.mayro_cap.secret_status=Komm schon, du bist der jenige der es am wenigsten braucht. Bist du es nicht, Mr. "§6Sossie§r"?
