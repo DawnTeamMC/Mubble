@@ -30,3 +30,4 @@ Wiki: *https://ftb.gamepedia.com/Mubble*
 * Cochu for the Spanish translation.
 * FVbico for the Dutch translation.
 * ZYSTerry for the Simplified Chinese translation.
+* Sven792 for the German translation.
