@@ -1,8 +1,5 @@
-# Mubble
-Mubble is a Minecraft Mod.
-
 # What is Mubble?
-Mubble is a mod offering new ways to players to build and experience the world of Minecraft with their favorite Nintendo franchises. Mubble also contain unique decoratives blocks and food items. With that in their hands, players are capable of building up the biggest cross-over world of their dreams! Almost every single block and item are available in survival through recipes.
+Mubble is a Minecraft mod offering new ways to players to build and experience the world of Minecraft with their favorite Nintendo franchises. Mubble also contain unique decoratives blocks and food items. With that in their hands, players are capable of building up the biggest cross-over world of their dreams! Almost every single block and item are available in survival through recipes.
 
 Mubble is also very open to community requests. As of v1.1, Mubble has features from pure creativity as well as the Super Mario, the Tetris and the Celeste series with 34 blocks, 14 items and 1 entity... But the journey won't be done soon, as Mubble will be kept updated for a very long time, featuring more and more franchises as well as unique features!
 
