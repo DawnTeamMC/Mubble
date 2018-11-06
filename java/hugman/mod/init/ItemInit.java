@@ -3,6 +3,7 @@ package hugman.mod.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import hugman.mod.objects.items.ItemAnnoyingDog;
 import hugman.mod.objects.items.ItemBandage;
 import hugman.mod.objects.items.ItemCapeFeather;
 import hugman.mod.objects.items.ItemEdible;
@@ -57,6 +58,9 @@ public class ItemInit
 	
 	// SUPER SMASH BROS.
 	public static final Item SMASH_BALL = new ItemSmashBall();
+	
+	// ???
+	public static final Item ANNOYING_DOG = new ItemAnnoyingDog();
 	
 	// YOUTUBE
 	public static final Item MAYRO_CAP = new ItemHelmet("mayro_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new PotionEffect(Potion.getPotionById(12), 1, 0));
