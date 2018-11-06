@@ -34,9 +34,13 @@ public class ItemAnnoyingDog extends ItemBase implements IHasModel
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
     {
         ItemStack stack = playerIn.getHeldItem(handIn);
-        if (!playerIn.capabilities.isCreativeMode) stack.grow(1);
-        playerIn.addStat(StatList.getObjectUseStats(this));
-        worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_GHAST_SCREAM, SoundCategory.PLAYERS, 0.5F, 1F);
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+        if (!playerIn.capabilities.isCreativeMode && stack.getCount() <= 63)
+        {
+        	stack.grow(1);
+            playerIn.addStat(StatList.getObjectUseStats(this));
+            worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_GHAST_SCREAM, SoundCategory.PLAYERS, 0.5F, 1F);
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+        }
+        return new ActionResult<ItemStack>(EnumActionResult.FAIL, stack);
     }
 }
