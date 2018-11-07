@@ -3,7 +3,7 @@ Mubble is a Minecraft mod offering new ways to players to build and experience t
 
 Mubble is also very open to community requests. As of v1.1, Mubble has features from pure creativity as well as the Super Mario, the Tetris and the Celeste series with 34 blocks, 14 items and 1 entity... But the journey won't be done soon, as Mubble will be kept updated for a very long time, featuring more and more franchises as well as unique features!
 
-Mubble is also available in English, Spanish, French, German, Dutch, Simplified Chinese and more!
+Mubble is also available in English, Spanish, French, German, Dutch, Simplified/Traditional Chinese and more!
 
 # Links:
 Twitter: *https://twitter.com/MubbleMC*
@@ -29,5 +29,5 @@ Wiki: *https://ftb.gamepedia.com/Mubble*
 # Credits:
 * Cochu for the Spanish translation.
 * FVbico for the Dutch translation.
-* ZYSTerry for the Simplified Chinese translation.
+* ZYSTerry for the Simplified and Traditional Chinese translation.
 * Sven792 for the German translation.
