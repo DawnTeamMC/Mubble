@@ -110,6 +110,22 @@
 			"mubble:block/space_matter/step4"
 		]
 	},
+	"item.annoying_dog.disappear":
+	{
+		"category": "player",
+		"sounds":
+		[
+			"mubble:item/annoying_dog/disappear"
+		]
+	},
+	"item.annoying_dog.waf":
+	{
+		"category": "player",
+		"sounds":
+		[
+			"mubble:item/annoying_dog/waf"
+		]
+	},
 	"item.cape_feather.use":
 	{
 		"category": "player",
