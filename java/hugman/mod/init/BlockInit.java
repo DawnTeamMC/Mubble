@@ -50,6 +50,7 @@ public class BlockInit
 	public static final Block ICE_FLOWER = new BlockFlower("ice_flower", 0);
 	public static final Block BOOMERANG_FLOWER = new BlockFlower("boomerang_flower", 0);
 	public static final Block CLOUD_FLOWER = new BlockFlower("cloud_flower", 0);
+	public static final Block GOLD_FLOWER = new BlockFlower("gold_flower", 5);
 	public static final Block CLOUD_BLOCK = new BlockCloud();
 	public static final Block BLUE_MUSHROOM = new BlockMushroom("blue", 0);
 	public static final Block GREEN_MUSHROOM = new BlockMushroom("green", 0);
