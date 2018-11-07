@@ -33,6 +33,7 @@ public class BiomeMushroomKingdom extends Biome
         addFlower(BlockInit.ICE_FLOWER.getDefaultState(), 20);
         addFlower(BlockInit.CLOUD_FLOWER.getDefaultState(), 20);
         addFlower(BlockInit.BOOMERANG_FLOWER.getDefaultState(), 20);
+        addFlower(BlockInit.GOLD_FLOWER.getDefaultState(), 20);
     }
     
     public void addBlocks(World worldIn, Random rand, BlockPos pos)
