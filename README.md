@@ -43,6 +43,7 @@ Wiki: *https://ftb.gamepedia.com/Mubble*
 * *Splatoon 2* (2017)
 * *Super Mario Odyssey* (2017)
 * *Celeste* (2018)
+* *Luigi's Mansion* (2018 - 3DS)
 * *Tetris Effect* (2018)
 * *New Super Mario Bros. U Deluxe* (2019)
 
