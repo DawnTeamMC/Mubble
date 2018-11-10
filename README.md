@@ -6,6 +6,8 @@ Mubble is also very open to community requests. As of v1.2, Mubble has features 
 Mubble is also available in English, Spanish, French, German, Dutch, Simplified/Traditional Chinese and more!
 
 # Links:
+Discord: *discord.gg/h2BaAx5*
+
 Twitter: *https://twitter.com/MubbleMC*
 
 Wiki: *https://ftb.gamepedia.com/Mubble*
