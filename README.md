@@ -6,6 +6,8 @@ Mubble is also very open to community requests. As of v1.2, Mubble has features 
 Mubble is also available in English, Spanish, French, German, Dutch, Simplified/Traditional Chinese and more!
 
 # Links:
+Discord: *https://discord.gg/h2BaAx5*
+
 Twitter: *https://twitter.com/MubbleMC*
 
 Wiki: *https://ftb.gamepedia.com/Mubble*
@@ -41,6 +43,7 @@ Wiki: *https://ftb.gamepedia.com/Mubble*
 * *Splatoon 2* (2017)
 * *Super Mario Odyssey* (2017)
 * *Celeste* (2018)
+* *Luigi's Mansion* (2018 - 3DS)
 * *Tetris Effect* (2018)
 * *New Super Mario Bros. U Deluxe* (2019)
 
