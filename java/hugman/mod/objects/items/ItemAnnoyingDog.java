@@ -16,10 +16,12 @@ import net.minecraft.world.World;
 
 public class ItemAnnoyingDog extends ItemBase implements IHasModel
 {
+	/**
+	 * Static class - can only be initialized once.
+	 */
 	public ItemAnnoyingDog()
 	{
 		super("annoying_dog");
-		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override
