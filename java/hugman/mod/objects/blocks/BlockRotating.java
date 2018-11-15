@@ -11,13 +11,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockRotating extends BlockBase implements IHasModel
-{
+{   
+	/**
+	 * Static class - can only be initialized once.
+	 */
 	public BlockRotating()
 	{
 		super("rotating_block", Material.ROCK, 1.5f, 20f, SoundType.STONE);
-		
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 
 	@Override

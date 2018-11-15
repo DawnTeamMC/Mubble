@@ -22,6 +22,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFallingGlass extends BlockFalling implements IHasModel
 {
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockFallingGlass(String name, CreativeTabs tab)
 	{
 		super(Material.GLASS);

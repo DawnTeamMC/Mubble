@@ -3,6 +3,7 @@ package hugman.mod.objects.blocks;
 import java.util.Random;
 
 import hugman.mod.init.BlockInit;
+import hugman.mod.init.CostumeInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
@@ -22,13 +23,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockQuestion extends BlockBase implements IHasModel
-{
+{   
+	/**
+	 * Static class - can only be initialized once.
+	 */
 	public BlockQuestion()
 	{
 		super("question_block", Material.IRON, 1.5f, 30f, SoundType.METAL);
-		
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	public void loot(World worldIn, BlockPos blockpos, IBlockState state)
@@ -51,7 +52,7 @@ public class BlockQuestion extends BlockBase implements IHasModel
         		loot = rand.nextInt(7);
         		if (loot >= 0 && loot <= 2 ) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(ItemInit.SUPER_MUSHROOM)));
         		else if (loot >= 3 && loot <= 5 ) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(ItemInit.CAPE_FEATHER)));
-        		else if (loot == 6) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(ItemInit.SUPER_CROWN)));
+        		else if (loot == 6) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(CostumeInit.SUPER_CROWN)));
             	worldIn.playSound((EntityPlayer)null, x, y - 0.6D, z, SoundHandler.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP, SoundCategory.BLOCKS, 1f, 1f);
             }
             worldIn.setBlockState(blockpos, empty_block);

@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 
 import hugman.mod.Main;
 import hugman.mod.init.BlockInit;
+import hugman.mod.init.CostumeInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
@@ -27,7 +28,9 @@ import net.minecraft.world.World;
 
 public class BlockFlower extends BlockBush implements IHasModel
 {   
-	String name;
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockFlower(String name, int light)
 	{
 		setTranslationKey(name);
@@ -35,7 +38,6 @@ public class BlockFlower extends BlockBush implements IHasModel
 		setCreativeTab(Main.MUBBLE_BLOCKS);
 		setSoundType(SoundType.PLANT);
 		this.lightValue = light;
-		this.name = name;
 		
 		BlockInit.BLOCKS.add(this);
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
@@ -49,14 +51,14 @@ public class BlockFlower extends BlockBush implements IHasModel
 	@Override
 	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
-		if(this.name == "cloud_flower") {
+		if(this == BlockInit.CLOUD_FLOWER) {
 			EntityPlayer playerIn;
 			if(entityIn instanceof EntityPlayer)
 			{
 				playerIn = (EntityPlayer) entityIn;
 				ItemStack armor;
 				armor = playerIn.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-				if(armor.getItem() == ItemInit.SUPER_CROWN)
+				if(armor.getItem() == CostumeInit.SUPER_CROWN)
 				{
 			        Random rand = new Random();
 					if(!playerIn.isSneaking())
@@ -70,7 +72,7 @@ public class BlockFlower extends BlockBush implements IHasModel
 			if(entityIn instanceof EntityItem)
 			{
 				EntityItem itemEntity = (EntityItem) entityIn;
-				if(itemEntity.getItem().getItem() == ItemInit.SUPER_CROWN) itemEntity.motionY = 0.15D;
+				if(itemEntity.getItem().getItem() == CostumeInit.SUPER_CROWN) itemEntity.motionY = 0.15D;
 				if(Lists.newArrayList(
 						Items.FEATHER,
 						ItemInit.CAPE_FEATHER,

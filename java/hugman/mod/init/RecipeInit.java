@@ -5,6 +5,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
+/** 
+ * Init class - used to initialize furnace recipes.
+ */
 public class RecipeInit
 {
 	public static void addRecipes()

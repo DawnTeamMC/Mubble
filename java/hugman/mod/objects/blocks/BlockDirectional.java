@@ -24,24 +24,21 @@ import net.minecraft.world.World;
 public class BlockDirectional extends BlockBase implements IHasModel
 {
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
-    String name;
     
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockDirectional(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
 		super(name, material, hardness, resistance, sound, light);
-
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		this.name = name;
 	}
 	
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockDirectional(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
 		super(name, material, hardness, resistance, sound);
-
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		this.name = name;
 	}
 	
 	@Override
@@ -53,14 +50,14 @@ public class BlockDirectional extends BlockBase implements IHasModel
 	@Override
     public int quantityDropped(Random random)
     {
-    	if(name == "koretato_block") return 3;
+    	if(this == BlockInit.KORETATO_BLOCK) return 3;
     	else return 1;
     }
     
 	@Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-    	if(name == "koretato_block") return Items.POTATO;
+    	if(this == BlockInit.KORETATO_BLOCK) return Items.POTATO;
     	else return Item.getItemFromBlock(this);
     }
     

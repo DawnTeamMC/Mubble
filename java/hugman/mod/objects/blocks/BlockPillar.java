@@ -19,24 +19,21 @@ import net.minecraft.world.World;
 public class BlockPillar extends BlockBase implements IHasModel
 {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class);
-    String name;
-    
+	
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockPillar(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
 		super(name, material, hardness, resistance, sound, light);
-
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		this.name = name;
 	}
 	
+	/** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockPillar(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
 		super(name, material, hardness, resistance, sound);
-
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		this.name = name;
 	}
 	
 	@Override

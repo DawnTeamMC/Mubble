@@ -14,6 +14,9 @@ public class ItemDrink extends ItemFood implements IHasModel
 {
 	String type;
 	
+	/** 
+	 * Open class - can be initialized for multiple items with variables.
+	 */
 	public ItemDrink(String name, CreativeTabs tab, String type, int amount, float saturation, boolean isWolfFood)
 	{
 		super(amount, saturation, isWolfFood);
@@ -21,9 +24,8 @@ public class ItemDrink extends ItemFood implements IHasModel
 		setRegistryName(name);
 		setCreativeTab(Main.MUBBLE_BLOCKS);
 		setMaxStackSize(1);
-	
-		ItemInit.ITEMS.add(this);
 		this.type = type;
+		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override

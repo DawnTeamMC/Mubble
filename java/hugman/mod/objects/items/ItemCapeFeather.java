@@ -17,10 +17,12 @@ import net.minecraft.world.World;
 
 public class ItemCapeFeather extends ItemBase implements IHasModel
 {
+	/**
+	 * Static class - can only be initialized once.
+	 */
 	public ItemCapeFeather()
 	{
 		super("cape_feather");
-		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override

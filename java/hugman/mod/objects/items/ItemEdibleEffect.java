@@ -9,6 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
+/** 
+ * Open class - can be initialized for multiple items with variables.
+ */
 public class ItemEdibleEffect extends ItemFood implements IHasModel
 {
 	private PotionEffect[] effects;
@@ -19,9 +22,8 @@ public class ItemEdibleEffect extends ItemFood implements IHasModel
 		setTranslationKey(name);
 		setRegistryName(name);
 		setCreativeTab(Main.MUBBLE_ITEMS);
-	
-		ItemInit.ITEMS.add(this);
 		this.effects = potionEffect;
+		ItemInit.ITEMS.add(this);
 	}
 
 	@Override

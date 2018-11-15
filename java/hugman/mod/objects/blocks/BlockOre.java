@@ -15,14 +15,14 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class BlockOre extends BlockBase implements IHasModel
-{
+{	
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockOre(String name)
 	{
 		super(name, Material.ROCK, 3f, 15f, SoundType.STONE);
 		setHarvestLevel("pickaxe", 2);
-		
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	@Override

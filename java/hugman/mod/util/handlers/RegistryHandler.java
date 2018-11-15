@@ -2,6 +2,7 @@ package hugman.mod.util.handlers;
 
 import hugman.mod.init.BiomeInit;
 import hugman.mod.init.BlockInit;
+import hugman.mod.init.CostumeInit;
 //import hugman.mod.init.DimensionInit;
 import hugman.mod.init.EntityInit;
 import hugman.mod.init.ItemInit;
@@ -21,20 +22,29 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class RegistryHandler
 {
 	@SubscribeEvent
-	public static void onItemRegister(RegistryEvent.Register<Item> event)
-	{
-		event.getRegistry().registerAll(ItemInit.ITEMS.toArray(new Item[0]));
-	}
-	
-	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event)
 	{
 		event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
+	}
+	
+	@SubscribeEvent
+	public static void onItemRegister(RegistryEvent.Register<Item> event)
+	{
+		event.getRegistry().registerAll(ItemInit.ITEMS.toArray(new Item[0]));
+		event.getRegistry().registerAll(CostumeInit.COSTUMES.toArray(new Item[0]));
 	}
 
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event)
 	{
+		for(Block block : BlockInit.BLOCKS)
+		{
+			if(block instanceof IHasModel)
+			{
+				((IHasModel)block).registerModels();
+			}
+		}
+		
 		for(Item item : ItemInit.ITEMS)
 		{
 			if(item instanceof IHasModel)
@@ -43,11 +53,11 @@ public class RegistryHandler
 			}
 		}
 		
-		for(Block block : BlockInit.BLOCKS)
+		for(Item costume : CostumeInit.COSTUMES)
 		{
-			if(block instanceof IHasModel)
+			if(costume instanceof IHasModel)
 			{
-				((IHasModel)block).registerModels();
+				((IHasModel)costume).registerModels();
 			}
 		}
 	}

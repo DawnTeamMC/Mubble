@@ -17,10 +17,13 @@ import net.minecraft.world.World;
 public class ItemBandage extends ItemBase implements IHasModel
 {
 	private PotionEffect[] effects;
+	
+	/**
+	 * Static class - can only be initialized once.
+	 */
 	public ItemBandage()
 	{
 		super("bandage", 16);
-		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override
