@@ -46,7 +46,7 @@ public class ItemInit
 	// SUPER SMASH BROS.
 	public static final Item SMASH_BALL = new ItemSmashBall();
 	
-	// ???
+	// UNDERTALE
 	public static final Item ANNOYING_DOG = new ItemAnnoyingDog();
 	
 	// MUSIC DISCS

@@ -2,7 +2,6 @@ package hugman.mod.objects.items;
 
 import java.util.Random;
 
-import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;

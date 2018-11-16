@@ -1,7 +1,6 @@
 package hugman.mod;
 
 import hugman.mod.init.CostumeInit;
-import hugman.mod.init.ItemInit;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 

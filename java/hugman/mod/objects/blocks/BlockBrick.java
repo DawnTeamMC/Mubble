@@ -7,11 +7,9 @@ import hugman.mod.init.BlockInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.init.SoundTypeInit;
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 
 public class BlockBrick extends BlockBase implements IHasModel
 {
