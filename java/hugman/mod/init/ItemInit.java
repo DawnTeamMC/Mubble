@@ -6,6 +6,7 @@ import java.util.List;
 import hugman.mod.objects.items.ItemAnnoyingDog;
 import hugman.mod.objects.items.ItemBandage;
 import hugman.mod.objects.items.ItemBase;
+import hugman.mod.objects.items.ItemBurger;
 import hugman.mod.objects.items.ItemCapeFeather;
 import hugman.mod.objects.items.ItemEdible;
 import hugman.mod.objects.items.ItemEdibleEffect;
@@ -26,13 +27,14 @@ public class ItemInit
 	
 	// VANILLA
 	public static final Item VANADIUM = new ItemBase("vanadium");
+	public static final Item BANDAGE = new ItemBandage();
 	public static final Item WHEAT_FLOUR = new ItemBase("wheat_flour");
 	public static final Item CARAMEL_CUBE = new ItemEdible("caramel_cube", 4, 2.8f, false);
 	public static final Item CREPE = new ItemEdible("crepe", 3, 0.5f, false);
 	public static final Item CHOCOLATE_CREPE = new ItemEdible("chocolate_crepe", 8, 2f, false);
 	public static final Item CARAMEL_CREPE = new ItemEdible("caramel_crepe", 9, 3.4f, false);
 	public static final Item CANDY_CANE = new ItemEdible("candy_cane", 4, 1.8f, true);
-	public static final Item BANDAGE = new ItemBandage();
+	public static final Item BURGER = new ItemBurger();
 	
 	// SUPER MARIO
 	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));

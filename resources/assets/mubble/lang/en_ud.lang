@@ -68,13 +68,14 @@ tile.koretato_block.name=ʞɔolq oʇɐʇǝɹoʞ
 
 --- ITEMS ---
 item.vanadium.name=ɯnᴉpɐuɐΛ
+item.bandage.name=ǝƃɐpuɐᗺ
 item.wheat_flour.name=ɹnolℲ ʇɐǝɥM
 item.caramel_cube.name=ǝqnƆ lǝɯɐɹɐƆ
 item.crepe.name=ǝdǝɹƆ
 item.chocolate_crepe.name=ǝdǝɹƆ ǝʇɐloɔoɥƆ
 item.caramel_crepe.name=ǝdǝɹƆ lǝɯɐɹɐƆ
 item.candy_cane.name=ǝuɐƆ ʎpuɐƆ
-item.bandage.name=ǝƃɐpuɐᗺ
+item.burger.name=<newline>
 
 item.super_mushroom.name=ɯooɹɥsnW ɹǝdnS
 item.peach.name=ɥɔɐǝԀ

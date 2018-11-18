@@ -68,13 +68,14 @@ tile.koretato_block.name=patete qui vi
 
 --- ITEMS ---
 item.vanadium.name=mincraf minerai cool pourpré
+item.bandage.name=pensmen
 item.wheat_flour.name=farin
 item.caramel_cube.name=cub carmiel
 item.crepe.name=craipe
 item.chocolate_crepe.name=craipe au nutela
 item.caramel_crepe.name=craipe au caramale
 item.candy_cane.name=c le bon bon de noel sa
-item.bandage.name=pensmen
+item.burger.name=borgor
 
 item.super_mushroom.name=coul champignon
 item.peach.name=g la paich!! ahaha

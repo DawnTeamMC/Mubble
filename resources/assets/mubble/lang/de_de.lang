@@ -68,13 +68,14 @@ tile.koretato_block.name=Koretato-Block
 
 --- ITEMS ---
 item.vanadium.name=Vanadium
+item.bandage.name=Verband
 item.wheat_flour.name=Weizenmehl
 item.caramel_cube.name=Karamellwürfel
 item.crepe.name=Crêpe
 item.chocolate_crepe.name=Schokoladen-Crêpe
 item.caramel_crepe.name=Karamell-Crêpe
 item.candy_cane.name=Zuckerstange
-item.bandage.name=Verband
+item.burger.name=<newline>
 
 item.super_mushroom.name=Super-Pilz
 item.peach.name=Peach

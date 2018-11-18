@@ -68,13 +68,14 @@ tile.koretato_block.name=Koretato塊
 
 --- ITEMS ---
 item.vanadium.name=釩
+item.bandage.name=繃帶
 item.wheat_flour.name=小麥麵粉
 item.caramel_cube.name=焦糖塊
 item.crepe.name=可麗餅
 item.chocolate_crepe.name=巧克力可麗餅
 item.caramel_crepe.name=焦糖可麗餅
 item.candy_cane.name=拐杖糖
-item.bandage.name=繃帶
+item.bandage.name=<newline>
 
 item.super_mushroom.name=超級蘑菇
 item.peach.name=桃子

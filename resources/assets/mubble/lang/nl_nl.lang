@@ -68,13 +68,14 @@ tile.koretato_block.name=Koretato-blok
 
 --- ITEMS ---
 item.vanadium.name=Vanadium
+item.bandage.name=Verband
 item.wheat_flour.name=Tarwemeel
 item.caramel_cube.name=Karamel kubus
 item.crepe.name=Crêpe
 item.chocolate_crepe.name=Chocolade crêpe
 item.caramel_crepe.name=Karamel crêpe
 item.candy_cane.name=Zuurstok
-item.bandage.name=Verband
+item.bandage.name=<newline>
 
 item.super_mushroom.name=Super paddenstoel
 item.peach.name=Perzik
