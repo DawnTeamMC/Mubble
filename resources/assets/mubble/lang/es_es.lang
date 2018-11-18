@@ -75,7 +75,7 @@ item.crepe.name=Crepe
 item.chocolate_crepe.name=Crepe de chocolate
 item.caramel_crepe.name=Crepe de caramelo
 item.candy_cane.name=Bastón de caramelo
-item.burger.name=<newline>
+item.burger.name=Hamburguesa
 
 item.super_mushroom.name=Súper champiñón
 item.peach.name=Durazno
@@ -100,7 +100,7 @@ item.bandana.name=Pañuelo
 
 item.smash_ball.name=Bola Smash
 
-item.ralsei_hat.name=<newline>
+item.ralsei_hat.name=Sombrero de Ralsei
 
 item.headphones.name=Cascos
 item.record_blank.name=Disco en blanco
