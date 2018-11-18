@@ -9,14 +9,14 @@
   "key": {
     "X": {
       "item": "minecraft:concrete",
-      "data": 10
+      "data": 6
     },
     "O": {
       "item": "vanadium"
     }
   },
   "result": {
-    "item": "purple_tetris_block",
+    "item": "pink_tetris_block",
     "count": 8
   }
 }

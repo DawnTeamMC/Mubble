@@ -12,6 +12,7 @@ import hugman.mod.world.gen.WorldGenCustomOres;
 import hugman.mod.world.gen.WorldGenCustomStructures;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -80,21 +81,31 @@ public class RegistryHandler
 		RecipeInit.addRecipes();
 	}
 	
-
-	/*
-	 * HOW TO FIX OLD IDS:
-	private static final ResourceLocation EXAMPLE_BLOCK = new ResourceLocation("mod", "example_block");
-
-	@GameRegistry.ObjectHolder("mubble:test_block")
-	private static final Block TEST_BLOCK = Blocks.AIR;
-
+	private static final ResourceLocation PURPLE_TETRIS_BLOCK = new ResourceLocation("mubble", "purple_tetris_block");
+	
 	@SubscribeEvent
-	public static void onMissingMappings(final RegistryEvent.MissingMappings<Block> event) {
-	    for (final RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getMappings()) {
-	        if (BlockInit.EXAMPLE_BLOCK.equals(mapping.key)) {
-	            mapping.remap(BlockInit.TEST_BLOCK);
+	public static void onMissingBlockMappings(final RegistryEvent.MissingMappings<Block> event)
+	{
+	    for (final RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getMappings())
+	    {
+	        if (RegistryHandler.PURPLE_TETRIS_BLOCK.equals(mapping.key))
+	        {
+	            mapping.remap(BlockInit.PINK_TETRIS_BLOCK);
 	            return;
 	        }
 	    }
-	}*/
+	}
+	
+	@SubscribeEvent
+	public static void onMissingItemMappings(final RegistryEvent.MissingMappings<Item> event)
+	{
+	    for (final RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getMappings())
+	    {
+	        if (RegistryHandler.PURPLE_TETRIS_BLOCK.equals(mapping.key))
+	        {
+	            mapping.remap(Item.getItemFromBlock(BlockInit.PINK_TETRIS_BLOCK));
+	            return;
+	        }
+	    }
+	}
 }
