@@ -1,7 +1,7 @@
 {
     "variants": {
         "normal": {
-   			"model": "mubble:purple_tetris_block"
+   			"model": "mubble:pink_tetris_block"
     	}
     }
 }

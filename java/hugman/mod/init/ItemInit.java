@@ -47,7 +47,7 @@ public class ItemInit
 	public static final Item SMASH_BALL = new ItemSmashBall();
 	
 	// UNDERTALE
-	public static final Item ANNOYING_DOG = new ItemAnnoyingDog();
+	//public static final Item ANNOYING_DOG = new ItemAnnoyingDog();
 	
 	// MUSIC DISCS
 	public static final Item RECORD_BLANK = new ItemBase("record_blank", 1);

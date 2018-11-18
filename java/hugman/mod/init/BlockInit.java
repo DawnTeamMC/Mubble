@@ -18,9 +18,15 @@ import hugman.mod.objects.blocks.BlockPillar;
 import hugman.mod.objects.blocks.BlockQuestion;
 import hugman.mod.objects.blocks.BlockRotating;
 import hugman.mod.objects.blocks.BlockTetris;
+import hugman.mod.util.handlers.RegistryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /** 
  * Init class - used to initialize blocks.
@@ -71,7 +77,7 @@ public class BlockInit
 	public static final Block YELLOW_TETRIS_BLOCK = new BlockTetris("yellow", "block", Material.ROCK);
 	public static final Block ORANGE_TETRIS_BLOCK = new BlockTetris("orange", "block", Material.ROCK);
 	public static final Block RED_TETRIS_BLOCK = new BlockTetris("red", "block", Material.ROCK);
-	public static final Block PURPLE_TETRIS_BLOCK = new BlockTetris("purple", "block", Material.ROCK);
+	public static final Block PINK_TETRIS_BLOCK = new BlockTetris("pink", "block", Material.ROCK);
 	public static final Block GRAY_TETRIS_BLOCK = new BlockTetris("gray", "block", Material.ROCK);
 	public static final Block TETRIS_GLASS = new BlockFallingGlass("tetris_glass", Main.MUBBLE_BLOCKS);
 	public static final Block JAPANESE_TETRIS_CUSHION = new BlockTetris("japanese", "cushion", Material.CLOTH);

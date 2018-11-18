@@ -33,7 +33,6 @@ public class BlockQuestion extends BlockBase implements IHasModel
 	
 	public void loot(World worldIn, BlockPos blockpos, IBlockState state)
 	{
-		if (!worldIn.getBlockState(blockpos.up()).getBlock().isPassable(worldIn, blockpos)) return;
         IBlockState empty_block = BlockInit.EMPTY_BLOCK.getDefaultState();
         final double x = blockpos.getX() + 0.5D;
         final double y = blockpos.getY() + 0.5D + 0.6D;
