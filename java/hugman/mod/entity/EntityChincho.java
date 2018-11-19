@@ -26,16 +26,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityChincho extends EntityMob
-{	
-	public EntityChincho(World worldIn) 
-	{
-		super(worldIn);
-		this.setSize(0.6F, 1.2F);
-	}
+{    
+    public EntityChincho(World worldIn) 
+    {
+        super(worldIn);
+        this.setSize(0.6F, 1.2F);
+    }
 
-	@Override
-	protected void initEntityAI()
-	{
+    @Override
+    protected void initEntityAI()
+    {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
         this.tasks.addTask(3, new EntityAIAvoidEntity(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
@@ -46,35 +46,35 @@ public class EntityChincho extends EntityMob
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityChincho.class}));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
         this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityToad.class, true));
-	}
+    }
 
-	@Override
-	protected void applyEntityAttributes() 
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+    @Override
+    protected void applyEntityAttributes() 
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
         this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
         this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
-	}
-	
+    }
+    
     public EnumCreatureAttribute getCreatureAttribute()
     {
         return EnumCreatureAttribute.UNDEAD;
     }
-	
-	@Override
-	public float getEyeHeight()
+    
+    @Override
+    public float getEyeHeight()
     {
         return 1f;
     }
-	
+    
     protected boolean shouldBurnInDay()
     {
         return true;
     }
-	
+    
     public void onLivingUpdate()
     {
         if (this.world.isDaytime() && !this.world.isRemote && this.shouldBurnInDay())
@@ -111,33 +111,33 @@ public class EntityChincho extends EntityMob
 
         super.onLivingUpdate();
     }
-	
-	@Override
-	protected SoundEvent getAmbientSound() 
-	{
-		return SoundHandler.ENTITY_CHINCHO_AMBIENT;
-	}
-	
-	@Override
-	protected SoundEvent getHurtSound(DamageSource source) 
-	{
-		return SoundHandler.ENTITY_CHINCHO_HURT;
-	}
-	
-	@Override
-	protected SoundEvent getDeathSound() 
-	{
-		return SoundHandler.ENTITY_CHINCHO_DEATH;
-	}
-	
-	@Override
-	protected ResourceLocation getLootTable() 
-	{
-		return LootTableHandler.CHINCHO;
-	}
-	
-	public EntityChincho createChild(EntityAgeable ageable) 
-	{
-		return null;
-	}
+    
+    @Override
+    protected SoundEvent getAmbientSound() 
+    {
+        return SoundHandler.ENTITY_CHINCHO_AMBIENT;
+    }
+    
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) 
+    {
+        return SoundHandler.ENTITY_CHINCHO_HURT;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() 
+    {
+        return SoundHandler.ENTITY_CHINCHO_DEATH;
+    }
+    
+    @Override
+    protected ResourceLocation getLootTable() 
+    {
+        return LootTableHandler.CHINCHO;
+    }
+    
+    public EntityChincho createChild(EntityAgeable ageable) 
+    {
+        return null;
+    }
 }

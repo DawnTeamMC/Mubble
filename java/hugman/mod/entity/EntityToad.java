@@ -39,36 +39,36 @@ import net.minecraft.world.World;
 public class EntityToad extends EntityAnimal
 {
     private static final DataParameter<Integer> TOAD_COLOR = EntityDataManager.<Integer>createKey(EntityToad.class, DataSerializers.VARINT);
-	private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemInit.SUPER_MUSHROOM, ItemInit.PEACH, ItemInit.SUPER_STAR);
-	
-	public EntityToad(World worldIn) 
-	{
-		super(worldIn);
-		this.setSize(0.6F, 1.4F);
-	}
-	
-	@Override
+    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemInit.SUPER_MUSHROOM, ItemInit.PEACH, ItemInit.SUPER_STAR);
+    
+    public EntityToad(World worldIn) 
+    {
+        super(worldIn);
+        this.setSize(0.6F, 1.4F);
+    }
+    
+    @Override
     protected void entityInit()
     {
         super.entityInit();
         this.dataManager.register(TOAD_COLOR, Integer.valueOf(0));
     }
-	
-	@Override
-	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
+    
+    @Override
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
         this.setColor(this.world.rand.nextInt(5));
-		return super.onInitialSpawn(difficulty, livingdata);
-	}
+        return super.onInitialSpawn(difficulty, livingdata);
+    }
 
-	@Override
-	protected void initEntityAI()
-	{
-		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityChincho.class, 10, 1.2f, 1.45f));
-		this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> (checkedEntity).getItem().getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
-		this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.MAIN_HAND).getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
-		this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.OFF_HAND).getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
-		this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
+    @Override
+    protected void initEntityAI()
+    {
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityChincho.class, 10, 1.2f, 1.45f));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> (checkedEntity).getItem().getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.MAIN_HAND).getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.OFF_HAND).getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
         this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(2, new EntityAIPanic(this, 1.6D));
         this.tasks.addTask(3, new EntityAITempt(this, 1.4D, false, TEMPTATION_ITEMS));
@@ -77,54 +77,54 @@ public class EntityToad extends EntityAnimal
         this.tasks.addTask(6, new EntityAIWatchClosest(this, this.getClass(), 8.0F));
         this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
-	}
+    }
 
-	@Override
-	protected void applyEntityAttributes() 
-	{
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(9.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-	}
-	
-	@Override
-	public float getEyeHeight()
+    @Override
+    protected void applyEntityAttributes() 
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(9.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+    }
+    
+    @Override
+    public float getEyeHeight()
     {
         return 1.25f;
     }
-	
-	@Override
-	protected SoundEvent getAmbientSound() 
-	{
-		return SoundHandler.ENTITY_TOAD_AMBIENT;
-	}
-	
-	@Override
-	protected SoundEvent getHurtSound(DamageSource source) 
-	{
-		return SoundHandler.ENTITY_TOAD_HURT;
-	}
-	
-	@Override
-	protected SoundEvent getDeathSound() 
-	{
-		return SoundHandler.ENTITY_TOAD_DEATH;
-	}
-	
-	@Override
+    
+    @Override
+    protected SoundEvent getAmbientSound() 
+    {
+        return SoundHandler.ENTITY_TOAD_AMBIENT;
+    }
+    
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) 
+    {
+        return SoundHandler.ENTITY_TOAD_HURT;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound() 
+    {
+        return SoundHandler.ENTITY_TOAD_DEATH;
+    }
+    
+    @Override
     public void writeEntityToNBT(NBTTagCompound compound)
     {
         super.writeEntityToNBT(compound);
         compound.setInteger("ToadColor", this.getColor());
     }
 
-	@Override
+    @Override
     public void readEntityFromNBT(NBTTagCompound compound)
     {
         super.readEntityFromNBT(compound);
         this.setColor(compound.getInteger("ToadColor"));
     }
-	
+    
     public int getColor()
     {
         return ((Integer)this.dataManager.get(TOAD_COLOR)).intValue();
@@ -134,26 +134,26 @@ public class EntityToad extends EntityAnimal
     {
         this.dataManager.set(TOAD_COLOR, Integer.valueOf(skinId));
     }
-	
-	@Override
-	protected ResourceLocation getLootTable() 
-	{
-		if(this.getColor() == 0) return LootTableHandler.RED_TOAD;
-		if(this.getColor() == 1) return LootTableHandler.BLUE_TOAD;
-		if(this.getColor() == 2) return LootTableHandler.GREEN_TOAD;
-		if(this.getColor() == 3) return LootTableHandler.YELLOW_TOAD;
-		if(this.getColor() == 4) return LootTableHandler.PURPLE_TOAD;
-		if(this.getColor() == 100) return LootTableHandler.CAPTAIN_TOAD;
-		if(this.getColor() == 101) return LootTableHandler.HINT_TOAD;
-		if(this.getColor() == 102) return LootTableHandler.BANKTOAD;
-		if(this.getColor() == 102) return LootTableHandler.YELLOWB_TOAD;
-		if(this.getColor() == 104) return LootTableHandler.MAILTOAD;
-		if(this.getColor() == 105) return LootTableHandler.RED_TOAD;
-		return LootTableHandler.TOAD;
-	}
-	
-	public EntityToad createChild(EntityAgeable ageable) 
-	{
-		return null;
-	}
+    
+    @Override
+    protected ResourceLocation getLootTable() 
+    {
+        if(this.getColor() == 0) return LootTableHandler.RED_TOAD;
+        if(this.getColor() == 1) return LootTableHandler.BLUE_TOAD;
+        if(this.getColor() == 2) return LootTableHandler.GREEN_TOAD;
+        if(this.getColor() == 3) return LootTableHandler.YELLOW_TOAD;
+        if(this.getColor() == 4) return LootTableHandler.PURPLE_TOAD;
+        if(this.getColor() == 100) return LootTableHandler.CAPTAIN_TOAD;
+        if(this.getColor() == 101) return LootTableHandler.HINT_TOAD;
+        if(this.getColor() == 102) return LootTableHandler.BANKTOAD;
+        if(this.getColor() == 102) return LootTableHandler.YELLOWB_TOAD;
+        if(this.getColor() == 104) return LootTableHandler.MAILTOAD;
+        if(this.getColor() == 105) return LootTableHandler.RED_TOAD;
+        return LootTableHandler.TOAD;
+    }
+    
+    public EntityToad createChild(EntityAgeable ageable) 
+    {
+        return null;
+    }
 }
