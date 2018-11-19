@@ -11,11 +11,14 @@ import hugman.mod.util.interfaces.IHasModel;
 import hugman.mod.world.gen.WorldGenCustomOres;
 import hugman.mod.world.gen.WorldGenCustomStructures;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -73,7 +76,6 @@ public class RegistryHandler
 		//DimensionInit.registerDimensions();
 		
 		EntityInit.registerEntities();
-		RenderHandler.registerEntityRenders();
 	}
 	
 	public static void initRegistries()
