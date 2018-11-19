@@ -26,6 +26,7 @@ tile.fire_flower.name=fir flow
 tile.ice_flower.name=ice flow
 tile.boomerang_flower.name=triangle ting flow
 tile.cloud_flower.name=clown flow
+tile.gold_flower.name=gol flow
 tile.cloud_block.name=clown blok
 tile.blue_mushroom.name=blu mush
 tile.green_mushroom.name=grin mush
