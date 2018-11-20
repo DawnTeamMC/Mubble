@@ -1,7 +1,5 @@
 package hugman.mod.objects.blocks;
 
-import hugman.mod.init.BlockInit;
-import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -10,7 +8,6 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
@@ -19,24 +16,21 @@ import net.minecraft.world.World;
 public class BlockPillar extends BlockBase implements IHasModel
 {
     public static final PropertyEnum<EnumFacing.Axis> AXIS = PropertyEnum.<EnumFacing.Axis>create("axis", EnumFacing.Axis.class);
-    String name;
-    
+	
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockPillar(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
 		super(name, material, hardness, resistance, sound, light);
-
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		this.name = name;
 	}
 	
+	/** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockPillar(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
 		super(name, material, hardness, resistance, sound);
-
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
-		this.name = name;
 	}
 	
 	@Override

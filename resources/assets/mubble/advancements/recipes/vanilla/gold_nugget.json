@@ -2,16 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:tetris/purple_tetris_block"
+      "mubble:vanilla/gold_nugget"
     ]
   },
   "criteria": {
-    "has_vanadium": {
+    "has_gold_flower": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "item": "mubble:vanadium"
+            "item": "mubble:gold_flower"
           }
         ]
       }
@@ -19,13 +19,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe":"mubble:tetris/purple_tetris_block"
+        "recipe": "mubble:vanilla/gold_nugget"
       }
     }
   },
   "requirements": [
     [
-      "has_vanadium",
+      "has_gold_flower",
       "has_the_recipe"
     ]
   ]

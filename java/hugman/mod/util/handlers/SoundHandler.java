@@ -19,6 +19,8 @@ public class SoundHandler
 	BLOCK_SPACE_MATTER_PLACE,
 	BLOCK_SPACE_MATTER_HIT,
 	BLOCK_SPACE_MATTER_STEP,
+	ITEM_ANNOYING_DOG_DISAPPEAR,
+	ITEM_ANNOYING_DOG_WAF,
 	ITEM_CAPE_FEATHER_USE,
 	ITEM_SMASH_BALL_USE,
 	ITEM_SUPER_MUSHROOM_CONSUME,
@@ -56,6 +58,8 @@ public class SoundHandler
 		BLOCK_SPACE_MATTER_PLACE = registerSound("block.space_matter.place");
 		BLOCK_SPACE_MATTER_HIT = registerSound("block.space_matter.hit");
 		BLOCK_SPACE_MATTER_STEP = registerSound("block.space_matter.step");
+		ITEM_ANNOYING_DOG_DISAPPEAR = registerSound("item.annoying_dog.disappear");
+		ITEM_ANNOYING_DOG_WAF = registerSound("item.annoying_dog.waf");
 		ITEM_SMASH_BALL_USE = registerSound("item.smash_ball.use");
 		ITEM_CAPE_FEATHER_USE = registerSound("item.cape_feather.use");
 		ITEM_SUPER_MUSHROOM_CONSUME = registerSound("item.super_mushroom.consume");

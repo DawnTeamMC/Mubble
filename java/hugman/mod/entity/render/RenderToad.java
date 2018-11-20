@@ -31,7 +31,7 @@ public class RenderToad extends RenderLiving<EntityToad>
 	{
 		super(manager, new ModelToad(), 0.5F);
 	}
-	
+
 	@Override
     protected ResourceLocation getEntityTexture(EntityToad entity)
     {

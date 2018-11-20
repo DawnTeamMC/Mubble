@@ -22,6 +22,9 @@ public class BlockMushroom extends BlockBush implements IHasModel
 {   
 	protected static final AxisAlignedBB MUSHROOM_AABB = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.4000000059604645D, 0.699999988079071D);
 	
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockMushroom(String color, int light)
 	{
 		setTranslationKey(color + "_mushroom");

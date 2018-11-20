@@ -20,22 +20,13 @@ import net.minecraft.world.World;
 public class BlockNote extends BlockBase implements IHasModel
 {
 	String type;
+	
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockNote(String type)
 	{
-		super(Material.ROCK, 1.4f, 10f, SoundType.STONE);
-		if(type == "normal")
-		{
-			setTranslationKey("note_block");
-			setRegistryName("note_block");
-		}
-		if(type == "super")
-		{
-			setTranslationKey("super_note_block");
-			setRegistryName("super_note_block");
-		}
-		
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
+		super(type, Material.ROCK, 1.4f, 10f, SoundType.STONE);
 		this.type = type;
 	}
 	
@@ -68,8 +59,8 @@ public class BlockNote extends BlockBase implements IHasModel
     	        for (int i = 0; i < rand.nextInt(5) + 1; i++) {
     	        	worldIn.spawnParticle(EnumParticleTypes.NOTE, x + (rand.nextInt(7) - 3) / 10D, y + 0.6D, z + (rand.nextInt(7) - 3) / 10D, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D, 0);
             	}
-    			if(type == "normal") entityIn.motionY = 0.9D;
-    			if(type == "super") entityIn.motionY = 1.5D;
+    			if(this == BlockInit.NOTE_BLOCK) entityIn.motionY = 0.9D;
+    			if(this == BlockInit.SUPER_NOTE_BLOCK) entityIn.motionY = 1.5D;
     		}
     		else if(entityIn.isSneaking())
     		{

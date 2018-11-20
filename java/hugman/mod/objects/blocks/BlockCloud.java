@@ -5,6 +5,7 @@ import java.util.Random;
 import com.google.common.collect.Lists;
 
 import hugman.mod.init.BlockInit;
+import hugman.mod.init.CostumeInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
@@ -16,7 +17,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -27,13 +27,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockCloud extends BlockBase implements IHasModel
-{	
+{
+	/**
+	 * Static class - can only be initialized once.
+	 */
 	public BlockCloud()
 	{
 		super("cloud_block", Material.CIRCUITS, 0, 0, SoundType.CLOTH);
-		
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	@Override
@@ -81,7 +81,7 @@ public class BlockCloud extends BlockBase implements IHasModel
 			playerIn = (EntityPlayer) entityIn;
 			ItemStack armor;
 			armor = playerIn.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-			if(armor.getItem() == ItemInit.SUPER_CROWN)
+			if(armor.getItem() == CostumeInit.SUPER_CROWN)
 			{
 		        Random rand = new Random();
 				if(!playerIn.isSneaking())
@@ -95,7 +95,7 @@ public class BlockCloud extends BlockBase implements IHasModel
 		if(entityIn instanceof EntityItem)
 		{
 			EntityItem itemEntity = (EntityItem) entityIn;
-			if(itemEntity.getItem().getItem() == ItemInit.SUPER_CROWN) itemEntity.motionY = 0.3D;
+			if(itemEntity.getItem().getItem() == CostumeInit.SUPER_CROWN) itemEntity.motionY = 0.3D;
 			if(Lists.newArrayList(
 					Items.FEATHER,
 					ItemInit.CAPE_FEATHER,

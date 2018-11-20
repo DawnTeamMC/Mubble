@@ -72,12 +72,12 @@
                 ]
             }
         },
-        "has_purple_tetris_block": {
+        "has_pink_tetris_block": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
-                        "item": "mubble:purple_tetris_block"
+                        "item": "mubble:pink_tetris_block"
                     }
                 ]
             }
@@ -101,7 +101,7 @@
             "has_yellow_tetris_block",
             "has_orange_tetris_block",
             "has_red_tetris_block",
-            "has_purple_tetris_block",
+            "has_pink_tetris_block",
             "has_gray_tetris_block"
         ]
     ]

@@ -2,9 +2,7 @@ package hugman.mod.objects.blocks;
 
 import java.util.Random;
 
-import hugman.mod.Main;
 import hugman.mod.init.BlockInit;
-import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -15,7 +13,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.Mirror;
@@ -27,17 +24,14 @@ import net.minecraft.world.World;
 public class BlockHugeMushroom extends BlockBase implements IHasModel
 {   
     public static final PropertyEnum<BlockHugeMushroom.EnumType> VARIANT = PropertyEnum.<BlockHugeMushroom.EnumType>create("variant", BlockHugeMushroom.EnumType.class);
-    String color;
     
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockHugeMushroom(String color, int light)
 	{
 		super(color + "_mushroom_block", Material.WOOD, 0.2f, 1f, SoundType.WOOD, light);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockHugeMushroom.EnumType.ALL_OUTSIDE));
-        this.color = color;
-		setCreativeTab(Main.MUBBLE_BLOCKS);
-		
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
 	@Override
@@ -59,10 +53,10 @@ public class BlockHugeMushroom extends BlockBase implements IHasModel
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-    	if(color == "blue") return Item.getItemFromBlock(BlockInit.BLUE_MUSHROOM);
-    	else if(color == "green") return Item.getItemFromBlock(BlockInit.GREEN_MUSHROOM);
-    	else if(color == "yellow") return Item.getItemFromBlock(BlockInit.YELLOW_MUSHROOM);
-    	else if(color == "purple") return Item.getItemFromBlock(BlockInit.PURPLE_MUSHROOM);
+    	if(this == BlockInit.BLUE_MUSHROOM_BLOCK) return Item.getItemFromBlock(BlockInit.BLUE_MUSHROOM);
+    	else if(this == BlockInit.GREEN_MUSHROOM_BLOCK) return Item.getItemFromBlock(BlockInit.GREEN_MUSHROOM);
+    	else if(this == BlockInit.YELLOW_MUSHROOM_BLOCK) return Item.getItemFromBlock(BlockInit.YELLOW_MUSHROOM);
+    	else if(this == BlockInit.PURPLE_MUSHROOM_BLOCK) return Item.getItemFromBlock(BlockInit.PURPLE_MUSHROOM);
 		return null;
     }
     

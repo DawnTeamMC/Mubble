@@ -9,6 +9,9 @@ import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+/** 
+ * Init class - used to initialize biomes.
+ */
 public class BiomeInit 
 {
 	public static final Biome MUSHROOM_KINGDOM = new BiomeMushroomKingdom();

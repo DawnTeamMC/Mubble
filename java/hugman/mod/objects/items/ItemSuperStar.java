@@ -12,7 +12,10 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class ItemSuperStar extends ItemFood implements IHasModel
-{	
+{
+	/**
+	 * Static class - can only be initialized once.
+	 */
 	public ItemSuperStar()
 	{
 		super(3, 2.4f, false);

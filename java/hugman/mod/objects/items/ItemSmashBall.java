@@ -2,7 +2,6 @@ package hugman.mod.objects.items;
 
 import java.util.Random;
 
-import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,10 +18,12 @@ import net.minecraft.world.World;
 
 public class ItemSmashBall extends ItemBase implements IHasModel
 {
+	/**
+	 * Static class - can only be initialized once.
+	 */
 	public ItemSmashBall()
 	{
 		super("smash_ball",1);
-		ItemInit.ITEMS.add(this);
 	}
 	
 	@Override

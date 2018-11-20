@@ -4,6 +4,9 @@ import hugman.mod.util.handlers.SoundHandler;
 import net.minecraft.block.SoundType;
 import net.minecraft.init.SoundEvents;
 
+/** 
+ * Init class - used to initialize sound types.
+ */
 public class SoundTypeInit
 {
 	public static final SoundType EMPTY_BLOCK = new SoundType(1.0F, 1.0F, SoundHandler.BLOCK_EMPTY_BLOCK_BREAK, SoundEvents.BLOCK_STONE_STEP, SoundEvents.BLOCK_STONE_PLACE, SoundEvents.BLOCK_STONE_HIT, SoundEvents.BLOCK_STONE_FALL);

@@ -10,6 +10,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+/** 
+ * Init class - used to initialize entities.
+ */
 public class EntityInit
 {	
 	public static void registerEntities()

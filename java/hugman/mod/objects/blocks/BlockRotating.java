@@ -1,23 +1,20 @@
 package hugman.mod.objects.blocks;
 
-import hugman.mod.init.BlockInit;
-import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockRotating extends BlockBase implements IHasModel
-{
+{   
+	/**
+	 * Static class - can only be initialized once.
+	 */
 	public BlockRotating()
 	{
 		super("rotating_block", Material.ROCK, 1.5f, 20f, SoundType.STONE);
-		
-		BlockInit.BLOCKS.add(this);
-		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 
 	@Override

@@ -11,7 +11,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
 public class BlockTetris extends BlockFalling implements IHasModel
-{
+{	
+    /** 
+     * Open class - can be initialized for multiple items with variables.
+     */
 	public BlockTetris(String color, String type, Material material)
 	{
 		super(material);
@@ -36,6 +39,7 @@ public class BlockTetris extends BlockFalling implements IHasModel
 			this.blockResistance = 30f;
 			setSoundType(SoundType.METAL);
 		}
+		
 		BlockInit.BLOCKS.add(this);
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
