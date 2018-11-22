@@ -103,7 +103,9 @@ public class BlockInit
 	// CELESTE
 	public static final Block IRON_SCAFFOLDING = new BlockBase("iron_scaffolding", Material.IRON, 5f, 30f, SoundType.METAL);
 	public static final Block PURPLE_BRICKS = new BlockBase("purple_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block PURPLE_BRICKS_STAIRS = new BlockStairs("purple_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block CYAN_BRICKS = new BlockBase("cyan_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block CYAN_BRICKS_STAIRS = new BlockStairs("cyan_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block ELDER_PEBBLES = new BlockBase("elder_pebbles", Material.ROCK, 2f, 30f, SoundType.STONE, 5);
 	public static final Block SPACE_MATTER = new BlockBase("space_matter", Material.SAND, 0.4f, 30f, SoundTypeInit.SPACE_MATTER, 5);
 	

@@ -58,7 +58,7 @@ public class BlockStairs extends BlockBase implements IHasModel
 	 */
 	public BlockStairs(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name + "_stairs", material, hardness, resistance, sound, light);
+		super(name + "_stairs", material, hardness, resistance / 3.0F, sound, light);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(HALF, BlockStairs.EnumHalf.BOTTOM).withProperty(SHAPE, BlockStairs.EnumShape.STRAIGHT));
         this.setLightOpacity(255);
 	}
