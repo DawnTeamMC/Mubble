@@ -50,12 +50,6 @@ tile.japanese_tetris_cushion.name=uoᴉɥsnƆ sᴉɹʇǝ┴ ǝsǝuɐdɐſ
 tile.rainbow_tetris_scaffolding.name=ƃuᴉploɟɟɐɔS sᴉɹʇǝ┴ ʍoquᴉɐɹ
 tile.monochrome_tetris_scaffolding.name=ƃuᴉploɟɟɐɔS sᴉɹʇǝ┴ ǝɯoɹɥɔouoW
 
-tile.iron_scaffolding.name=ƃuᴉploɟɟɐɔS uoɹI
-tile.purple_bricks.name=sʞɔᴉɹᗺ ǝldɹnԀ
-tile.cyan_bricks.name=sʞɔᴉɹᗺ uɐʎƆ
-tile.elder_pebbles.name=sǝlqqǝԀ ɹǝplƎ
-tile.space_matter.name=ɹǝʇʇɐW ǝɔɐdS
-
 tile.vampire_stone.name=ǝuoʇS ǝɹᴉdɯɐΛ
 tile.medusa_stone.name=ǝuoʇS s,ɐsnpǝW
 tile.medusa_bricks.name=sʞɔᴉɹq s,ɐsnpǝW
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ uǝǝɹפ
 tile.yellow_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ ʍollǝ⅄
 tile.red_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ pǝᴚ
 tile.purple_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ ǝldɹnԀ
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=ƃuᴉploɟɟɐɔS uoɹI
+tile.purple_bricks.name=sʞɔᴉɹᗺ ǝldɹnԀ
+tile.cyan_bricks.name=sʞɔᴉɹᗺ uɐʎƆ
+tile.elder_pebbles.name=sǝlqqǝԀ ɹǝplƎ
+tile.space_matter.name=ɹǝʇʇɐW ǝɔɐdS
 
 tile.koretato_block.name=ʞɔolq oʇɐʇǝɹoʞ
 

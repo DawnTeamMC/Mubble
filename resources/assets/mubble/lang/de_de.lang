@@ -50,12 +50,6 @@ tile.japanese_tetris_cushion.name=Japanischer Tetris-Kissen
 tile.rainbow_tetris_scaffolding.name=Regenbogen Tetris-Gerüst
 tile.monochrome_tetris_scaffolding.name=Einfarbiger Tetris-Gerüst
 
-tile.iron_scaffolding.name=Eisen Gerüst
-tile.purple_bricks.name=Lila Ziegelsteine
-tile.cyan_bricks.name=Türkiser Ziegelsteine
-tile.elder_pebbles.name=Elder Pebbles
-tile.space_matter.name=Space Matter
-
 tile.vampire_stone.name=Vampir-Stein
 tile.medusa_stone.name=Medusa's Stein
 tile.medusa_bricks.name=Medusa's Ziegelsteine
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=Grüner Zuckerstangensäule
 tile.yellow_candy_cane_pillar.name=Gelber Zuckerstangensäule
 tile.red_candy_cane_pillar.name=Roter Zuckerstangensäule
 tile.purple_candy_cane_pillar.name=Lila Zuckerstangensäule
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=Eisen Gerüst
+tile.purple_bricks.name=Lila Ziegelsteine
+tile.cyan_bricks.name=Türkiser Ziegelsteine
+tile.elder_pebbles.name=Elder Pebbles
+tile.space_matter.name=Space Matter
 
 tile.koretato_block.name=Koretato-Block
 
@@ -76,7 +78,7 @@ item.crepe.name=Crêpe
 item.chocolate_crepe.name=Schokoladen-Crêpe
 item.caramel_crepe.name=Karamell-Crêpe
 item.candy_cane.name=Zuckerstange
-item.burger.name=<newline>
+//item.burger.name=<newline>
 
 item.super_mushroom.name=Super-Pilz
 item.peach.name=Pfirsich
@@ -101,7 +103,7 @@ item.bandana.name=Kopftuch
 
 item.smash_ball.name=Smash Ball
 
-item.ralsei_hat.name=<newline>
+//item.ralsei_hat.name=<newline>
 
 item.headphones.name=Kopfhörer
 item.record_blank.name=Leere Musikdiskette

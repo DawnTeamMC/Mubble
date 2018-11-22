@@ -50,12 +50,6 @@ tile.japanese_tetris_cushion.name=jaPAN tetri sleep
 tile.rainbow_tetris_scaffolding.name=varicolordd tetri zcffolding
 tile.monochrome_tetris_scaffolding.name=blak & wite tetri zcffolding
 
-tile.iron_scaffolding.name=irun zcffolding
-tile.purple_bricks.name=parpal brik
-tile.cyan_bricks.name=nyan briks
-tile.elder_pebbles.name=old pebbL
-tile.space_matter.name=MARTIAN DIRT OoOoOoO
-
 tile.vampire_stone.name=spooky ston
 tile.medusa_stone.name=the stone in the room with the sp0ky girl with snakes on her head
 tile.medusa_bricks.name=the bricks in the room with the sp00ky girl with snakes on her head
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=gren big christmas cane
 tile.yellow_candy_cane_pillar.name=yelou big christmas cane
 tile.red_candy_cane_pillar.name=redd big christmas cane
 tile.purple_candy_cane_pillar.name=purpl big christmas cane
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=irun zcffolding
+tile.purple_bricks.name=parpal brik
+tile.cyan_bricks.name=nyan briks
+tile.elder_pebbles.name=old pebbL
+tile.space_matter.name=MARTIAN DIRT OoOoOoO
 
 tile.koretato_block.name=Koretato blok
 

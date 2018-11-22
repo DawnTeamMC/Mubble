@@ -50,12 +50,6 @@ tile.japanese_tetris_cushion.name=cousin CHINOIIS:!$ ahahha (tetri)
 tile.rainbow_tetris_scaffolding.name=shafaudaj tirtris ARC EN CIELLLLL!! tro bo lai arc en cie
 tile.monochrome_tetris_scaffolding.name=shafaudag tirtri pa bo c noir et blen c vieu
 
-tile.iron_scaffolding.name=chafaudaj an faire
-tile.purple_bricks.name=brik volete
-tile.cyan_bricks.name=brik sian
-tile.elder_pebbles.name=vieu galai come su la plaj de diepp
-tile.space_matter.name=matiare martiéne
-
 tile.vampire_stone.name=cayou vampir
 tile.medusa_stone.name=cayoue de la madane serpen
 tile.medusa_bricks.name=brik chai madame serpens!
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=pylier de bonbon de noel sof que c ver
 tile.yellow_candy_cane_pillar.name=piler de bonbon de noel sauf que c jonne
 tile.red_candy_cane_pillar.name=pyer de bombon de noel sauf que c rouj
 tile.purple_candy_cane_pillar.name=piler de bobon de novel sauf que c pourpr
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=chafaudaj an faire
+tile.purple_bricks.name=brik volete
+tile.cyan_bricks.name=brik sian
+tile.elder_pebbles.name=vieu galai come su la plaj de diepp
+tile.space_matter.name=matiare martiéne
 
 tile.koretato_block.name=patete qui vi
 

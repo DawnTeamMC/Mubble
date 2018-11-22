@@ -50,12 +50,6 @@ tile.japanese_tetris_cushion.name=Cojín Tetris japonés
 tile.rainbow_tetris_scaffolding.name=Andamio Tetris arco iris
 tile.monochrome_tetris_scaffolding.name=Andamio Tetris monocromático
 
-tile.iron_scaffolding.name=Andamio de hierro
-tile.purple_bricks.name=Ladrillos morados
-tile.cyan_bricks.name=Ladrillos cian
-tile.elder_pebbles.name=Guijarros antiguos
-tile.space_matter.name=Materia espacial
-
 tile.vampire_stone.name=Piedra vampiro
 tile.medusa_stone.name=Piedra medusa
 tile.medusa_bricks.name=Ladrillos de medusa
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=Pilar de bastón de caramelo verde
 tile.yellow_candy_cane_pillar.name=Pilar de bastón de caramelo amarillo
 tile.red_candy_cane_pillar.name=Pilar de bastón de caramelo rojo
 tile.purple_candy_cane_pillar.name=Pilar de bastón de caramelo morado
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=Andamio de hierro
+tile.purple_bricks.name=Ladrillos morados
+tile.cyan_bricks.name=Ladrillos cian
+tile.elder_pebbles.name=Guijarros antiguos
+tile.space_matter.name=Materia espacial
 
 tile.koretato_block.name=Bloque Koretato
 

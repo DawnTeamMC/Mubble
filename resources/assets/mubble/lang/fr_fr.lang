@@ -50,12 +50,6 @@ tile.japanese_tetris_cushion.name=Coussin Tetris japonais
 tile.rainbow_tetris_scaffolding.name=Échafaudage Tetris multicolore
 tile.monochrome_tetris_scaffolding.name=Échafaudage Tetris monochrome
 
-tile.iron_scaffolding.name=Échafaudage en fer
-tile.purple_bricks.name=Briques violettes
-tile.cyan_bricks.name=Briques cyan
-tile.elder_pebbles.name=Anciens galets
-tile.space_matter.name=Matière spatiale
-
 tile.vampire_stone.name=Roche Vampire
 tile.medusa_stone.name=Roche de Méduse
 tile.medusa_bricks.name=Briques de Méduse
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=Piller de sucre d'orge vert
 tile.yellow_candy_cane_pillar.name=Piller de sucre d'orge jaune
 tile.red_candy_cane_pillar.name=Piller de sucre d'orge rouge
 tile.purple_candy_cane_pillar.name=Piller de sucre d'orge violet
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=Échafaudage en fer
+tile.purple_bricks.name=Briques violettes
+tile.cyan_bricks.name=Briques cyan
+tile.elder_pebbles.name=Anciens galets
+tile.space_matter.name=Matière spatiale
 
 tile.koretato_block.name=Bloc Koretato
 

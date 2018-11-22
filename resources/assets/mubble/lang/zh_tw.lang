@@ -50,12 +50,6 @@ tile.japanese_tetris_cushion.name=日式俄羅斯方塊坐墊
 tile.rainbow_tetris_scaffolding.name=彩虹俄羅斯方塊腳手架
 tile.monochrome_tetris_scaffolding.name=黑白俄羅斯方塊腳手架
 
-tile.iron_scaffolding.name=鐵腳手架
-tile.purple_bricks.name=紫色磚塊
-tile.cyan_bricks.name=青色磚塊
-tile.elder_pebbles.name=遠古鵝卵石
-tile.space_matter.name=太空物質
-
 tile.vampire_stone.name=吸血鬼之石
 tile.medusa_stone.name=美杜莎之石
 tile.medusa_bricks.name=美杜莎磚塊
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=綠色拐杖糖支柱
 tile.yellow_candy_cane_pillar.name=黃色拐杖糖支柱
 tile.red_candy_cane_pillar.name=紅色拐杖糖支柱
 tile.purple_candy_cane_pillar.name=紫色拐杖糖支柱
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=鐵腳手架
+tile.purple_bricks.name=紫色磚塊
+tile.cyan_bricks.name=青色磚塊
+tile.elder_pebbles.name=遠古鵝卵石
+tile.space_matter.name=太空物質
 
 tile.koretato_block.name=Koretato塊
 
@@ -76,7 +78,7 @@ item.crepe.name=可麗餅
 item.chocolate_crepe.name=巧克力可麗餅
 item.caramel_crepe.name=焦糖可麗餅
 item.candy_cane.name=拐杖糖
-item.bandage.name=<newline>
+//item.bandage.name=<newline>
 
 item.super_mushroom.name=超級蘑菇
 item.peach.name=桃子
@@ -101,7 +103,7 @@ item.bandana.name=手帕
 
 item.smash_ball.name=粉碎球
 
-item.ralsei_hat.name=<newline>
+//item.ralsei_hat.name=<newline>
 
 item.headphones.name=耳機
 item.record_blank.name=空白音樂唱片

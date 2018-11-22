@@ -50,12 +50,6 @@ tile.japanese_tetris_cushion.name=Japans Tetris kussen
 tile.rainbow_tetris_scaffolding.name=Regenboog Tetris steiger
 tile.monochrome_tetris_scaffolding.name=Zwart-wit Tetris steiger
 
-tile.iron_scaffolding.name=IJzersteiger
-tile.purple_bricks.name=Paarse bakstenen
-tile.cyan_bricks.name=Turquoise bakstenen
-tile.elder_pebbles.name=Oudere keizels
-tile.space_matter.name=Ruimte materie
-
 tile.vampire_stone.name=Vampier steen
 tile.medusa_stone.name=Medusa steen
 tile.medusa_bricks.name=Medusa bakstenen
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=Groene zuurstokpillaar
 tile.yellow_candy_cane_pillar.name=Gele zuurstokpillaar
 tile.red_candy_cane_pillar.name=Rode zuurstokpillaar
 tile.purple_candy_cane_pillar.name=Paars zuurstokpillaar
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=IJzersteiger
+tile.purple_bricks.name=Paarse bakstenen
+tile.cyan_bricks.name=Turquoise bakstenen
+tile.elder_pebbles.name=Oudere keizels
+tile.space_matter.name=Ruimte materie
 
 tile.koretato_block.name=Koretato-blok
 

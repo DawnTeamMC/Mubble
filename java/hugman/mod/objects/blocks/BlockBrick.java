@@ -39,9 +39,4 @@ public class BlockBrick extends BlockBase implements IHasModel
 		if(this == BlockInit.GOLDEN_BRICK_BLOCK) return rand.nextInt(4) + 1;
 		else return 1;
 	}
-	@Override
-	public void registerModels()
-	{
-		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
-	}
 }

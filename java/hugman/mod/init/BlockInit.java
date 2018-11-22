@@ -17,6 +17,7 @@ import hugman.mod.objects.blocks.BlockOre;
 import hugman.mod.objects.blocks.BlockPillar;
 import hugman.mod.objects.blocks.BlockQuestion;
 import hugman.mod.objects.blocks.BlockRotating;
+import hugman.mod.objects.blocks.BlockStairs;
 import hugman.mod.objects.blocks.BlockTetris;
 import hugman.mod.util.handlers.RegistryHandler;
 import net.minecraft.block.Block;
@@ -39,7 +40,9 @@ public class BlockInit
 	public static final Block VANADIUM_BLOCK = new BlockBase("vanadium_block", Material.IRON, 5f, 30f, SoundType.METAL);
 	public static final Block VANADIUM_ORE = new BlockOre("vanadium_ore");
 	public static final Block RED_BRICKS = new BlockBase("red_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block RED_BRICKS_STAIRS = new BlockStairs("red_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block WHITE_BRICKS = new BlockBase("white_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block WHITE_BRICKS_STAIRS = new BlockStairs("white_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block BLUNITE = new BlockBase("blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_BLUNITE = new BlockBase("polished_blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block CARBONITE = new BlockBase("carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
@@ -93,6 +96,9 @@ public class BlockInit
 	public static final Block YELLOW_CANDY_CANE_PILLAR = new BlockPillar("yellow_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block RED_CANDY_CANE_PILLAR = new BlockPillar("red_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block PURPLE_CANDY_CANE_PILLAR = new BlockPillar("purple_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	
+	// DELTARUNE
+	public static final Block SCARLET_MUSHROOM = new BlockMushroom("scarlet", 7);
 
 	// CELESTE
 	public static final Block IRON_SCAFFOLDING = new BlockBase("iron_scaffolding", Material.IRON, 5f, 30f, SoundType.METAL);

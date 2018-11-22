@@ -26,7 +26,7 @@ tile.fire_flower.name=火花
 tile.ice_flower.name=冰花
 tile.boomerang_flower.name=回旋镖花
 tile.cloud_flower.name=云花
-//tile.gold_flower.name=金花
+tile.gold_flower.name=金花
 tile.cloud_block.name=云
 tile.blue_mushroom.name=蓝色蘑菇
 tile.green_mushroom.name=绿色蘑菇
@@ -43,18 +43,12 @@ tile.green_tetris_block.name=绿色俄罗斯方块
 tile.yellow_tetris_block.name=黄色俄罗斯方块
 tile.orange_tetris_block.name=橙色俄罗斯方块
 tile.red_tetris_block.name=红色俄罗斯方块
-//tile.pink_tetris_block.name=粉色俄罗斯方块
+tile.pink_tetris_block.name=粉色俄罗斯方块
 tile.gray_tetris_block.name=灰色俄罗斯方块
 tile.tetris_glass.name=俄罗斯方块玻璃
 tile.japanese_tetris_cushion.name=日式俄罗斯方块坐垫
 tile.rainbow_tetris_scaffolding.name=彩虹俄罗斯方块脚手架
 tile.monochrome_tetris_scaffolding.name=黑白俄罗斯方块脚手架
-
-tile.iron_scaffolding.name=铁脚手架
-tile.purple_bricks.name=紫色砖块
-tile.cyan_bricks.name=青色砖块
-tile.elder_pebbles.name=远古鹅卵石
-tile.space_matter.name=太空物质
 
 tile.vampire_stone.name=吸血鬼之石
 tile.medusa_stone.name=美杜莎之石
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=绿色拐杖糖支柱
 tile.yellow_candy_cane_pillar.name=黄色拐杖糖支柱
 tile.red_candy_cane_pillar.name=红色拐杖糖支柱
 tile.purple_candy_cane_pillar.name=紫色拐杖糖支柱
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=铁脚手架
+tile.purple_bricks.name=紫色砖块
+tile.cyan_bricks.name=青色砖块
+tile.elder_pebbles.name=远古鹅卵石
+tile.space_matter.name=太空物质
 
 tile.koretato_block.name=Koretato块
 
@@ -76,7 +78,7 @@ item.crepe.name=可丽饼
 item.chocolate_crepe.name=巧克力可丽饼
 item.caramel_crepe.name=焦糖可丽饼
 item.candy_cane.name=拐杖糖
-item.bandage.name=<newline>
+item.burger.name=<newline>
 
 item.super_mushroom.name=超级蘑菇
 item.peach.name=桃子
@@ -94,14 +96,14 @@ item.wing_cap.name=翼帽
 item.gooigi_cap.name=古基的帽子
 item.princess_peach_crown.name=碧奇公主的王冠
 item.princess_daisy_crown.name=黛西公主的王冠
-//item.pink_gold_peach_crown.name=碧奇公主的粉金王冠
+item.pink_gold_peach_crown.name=碧奇公主的粉金王冠
 item.super_crown.name=超级王冠
 
 item.bandana.name=手帕
 
 item.smash_ball.name=粉碎球
 
-item.ralsei_hat.name=<newline>
+//item.ralsei_hat.name=<newline>
 
 item.headphones.name=耳机
 item.record_blank.name=空白音乐唱片

@@ -50,12 +50,6 @@ tile.japanese_tetris_cushion.name=Japanese Tetris Cushion
 tile.rainbow_tetris_scaffolding.name=Rainbow Tetris Scaffolding
 tile.monochrome_tetris_scaffolding.name=Monochrome Tetris Scaffolding
 
-tile.iron_scaffolding.name=Iron Scaffolding
-tile.purple_bricks.name=Purple Bricks
-tile.cyan_bricks.name=Cyan Bricks
-tile.elder_pebbles.name=Elder Pebbles
-tile.space_matter.name=Space Matter
-
 tile.vampire_stone.name=Vampire Stone
 tile.medusa_stone.name=Medusa's Stone
 tile.medusa_bricks.name=Medusa's Bricks
@@ -64,6 +58,14 @@ tile.green_candy_cane_pillar.name=Green Candy Cane Pillar
 tile.yellow_candy_cane_pillar.name=Yellow Candy Cane Pillar
 tile.red_candy_cane_pillar.name=Red Candy Cane Pillar
 tile.purple_candy_cane_pillar.name=Purple Candy Cane Pillar
+
+//tile.scarlet_mushroom.name=<newline>
+
+tile.iron_scaffolding.name=Iron Scaffolding
+tile.purple_bricks.name=Purple Bricks
+tile.cyan_bricks.name=Cyan Bricks
+tile.elder_pebbles.name=Elder Pebbles
+tile.space_matter.name=Space Matter
 
 tile.koretato_block.name=Koretato Block
 
