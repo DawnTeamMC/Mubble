@@ -65,7 +65,9 @@ tile.scarlet_mushroom.name=Scarlet Mushroom
 
 tile.iron_scaffolding.name=Iron Scaffolding
 tile.purple_bricks.name=Purple Bricks
+tile.purple_bricks_stairs.name=Purple Bricks Stairs
 tile.cyan_bricks.name=Cyan Bricks
+tile.cyan_bricks_stairs.name=Cyan Bricks Stairs
 tile.elder_pebbles.name=Elder Pebbles
 tile.space_matter.name=Space Matter
 
