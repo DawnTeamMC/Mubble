@@ -26,6 +26,7 @@ tile.fire_flower.name=Fire Flower
 tile.ice_flower.name=Ice Flower
 tile.boomerang_flower.name=Boomerang Flower
 tile.cloud_flower.name=Cloud Flower
+tile.gold_flower.name=Gold Flower
 tile.cloud_block.name=Cloud Block
 tile.blue_mushroom.name=Blue Mushroom
 tile.green_mushroom.name=Green Mushroom

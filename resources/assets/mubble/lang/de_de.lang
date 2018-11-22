@@ -26,6 +26,7 @@ tile.fire_flower.name=Feuerblume
 tile.ice_flower.name=Eisblume
 tile.boomerang_flower.name=Bumerangblume
 tile.cloud_flower.name=Wolkenblume
+tile.gold_flower.name=Goldeneblume
 tile.cloud_block.name=Wolkenblock
 tile.blue_mushroom.name=Blauer Pilz
 tile.green_mushroom.name=Grüner Pilz
@@ -78,7 +79,7 @@ item.candy_cane.name=Zuckerstange
 item.burger.name=<newline>
 
 item.super_mushroom.name=Super-Pilz
-item.peach.name=Peach
+item.peach.name=Pfirsich
 item.cape_feather.name=Federumhang
 item.super_star.name=Super Stern
 item.yellow_coin.name=Gelbe Münze

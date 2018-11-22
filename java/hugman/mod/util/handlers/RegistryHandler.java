@@ -1,5 +1,6 @@
 package hugman.mod.util.handlers;
 
+import hugman.mod.Main;
 import hugman.mod.init.BiomeInit;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.CostumeInit;
@@ -73,7 +74,7 @@ public class RegistryHandler
 		//DimensionInit.registerDimensions();
 		
 		EntityInit.registerEntities();
-		RenderHandler.registerEntityRenders();
+		Main.proxy.registerEntityRenderers();
 	}
 	
 	public static void initRegistries()

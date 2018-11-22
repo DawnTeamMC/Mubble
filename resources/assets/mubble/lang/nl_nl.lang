@@ -26,6 +26,7 @@ tile.fire_flower.name=Vuur bloem
 tile.ice_flower.name=IJs bloem
 tile.boomerang_flower.name=Boomerang bloem
 tile.cloud_flower.name=Wolk bloem
+tile.gold_flower.name=Gouden Bloem
 tile.cloud_block.name=Wolk blok
 tile.blue_mushroom.name=Blauwe paddenstoel
 tile.green_mushroom.name=Groene paddenstoel

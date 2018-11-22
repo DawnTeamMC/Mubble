@@ -1,10 +1,15 @@
 package hugman.mod.proxy;
 
+import hugman.mod.entity.EntityChincho;
+import hugman.mod.entity.EntityToad;
+import hugman.mod.entity.render.RenderChincho;
+import hugman.mod.entity.render.RenderToad;
 import hugman.mod.util.Reference;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {
@@ -19,4 +24,11 @@ public class ClientProxy extends CommonProxy
 	{
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, filename), id));
 	}
+	
+	@Override
+	public void registerEntityRenderers() 
+    {
+		RenderingRegistry.registerEntityRenderingHandler(EntityToad.class, RenderToad::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityChincho.class, RenderChincho::new);
+    }
 }
