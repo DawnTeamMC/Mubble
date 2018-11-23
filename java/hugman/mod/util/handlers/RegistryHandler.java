@@ -83,6 +83,7 @@ public class RegistryHandler
 	}
 	
 	private static final ResourceLocation PURPLE_TETRIS_BLOCK = new ResourceLocation("mubble", "purple_tetris_block");
+	private static final ResourceLocation CLOUD_BLOCK = new ResourceLocation("mubble", "cloud_block");
 	
 	@SubscribeEvent
 	public static void onMissingBlockMappings(final RegistryEvent.MissingMappings<Block> event)
@@ -92,6 +93,11 @@ public class RegistryHandler
 	        if (RegistryHandler.PURPLE_TETRIS_BLOCK.equals(mapping.key))
 	        {
 	            mapping.remap(BlockInit.PINK_TETRIS_BLOCK);
+	            return;
+	        }
+	        if (RegistryHandler.CLOUD_BLOCK.equals(mapping.key))
+	        {
+	            mapping.remap(BlockInit.WHITE_CLOUD_BLOCK);
 	            return;
 	        }
 	    }
@@ -105,6 +111,11 @@ public class RegistryHandler
 	        if (RegistryHandler.PURPLE_TETRIS_BLOCK.equals(mapping.key))
 	        {
 	            mapping.remap(Item.getItemFromBlock(BlockInit.PINK_TETRIS_BLOCK));
+	            return;
+	        }
+	        if (RegistryHandler.CLOUD_BLOCK.equals(mapping.key))
+	        {
+	            mapping.remap(Item.getItemFromBlock(BlockInit.WHITE_CLOUD_BLOCK));
 	            return;
 	        }
 	    }

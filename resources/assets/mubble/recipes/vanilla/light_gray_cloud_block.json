@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "XX",
+    "XX"
+  ],
+  "key": {
+    "X": {
+      "item": "white_cloud_block"
+    }
+  },
+  "result": {
+    "item": "light_gray_cloud_block",
+    "count": 4
+  }
+}

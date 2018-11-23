@@ -31,9 +31,9 @@ public class BlockCloud extends BlockBase implements IHasModel
 	/**
 	 * Static class - can only be initialized once.
 	 */
-	public BlockCloud()
+	public BlockCloud(String color)
 	{
-		super("cloud_block", Material.CIRCUITS, 0, 0, SoundType.CLOTH);
+		super(color + "_cloud_block", Material.CIRCUITS, 0, 0, SoundType.CLOTH);
 	}
 	
 	@Override
@@ -101,7 +101,10 @@ public class BlockCloud extends BlockBase implements IHasModel
 					ItemInit.CAPE_FEATHER,
 					ItemInit.WHEAT_FLOUR,
 					Item.getItemFromBlock(BlockInit.CLOUD_FLOWER),
-					Item.getItemFromBlock(this)).contains(itemEntity.getItem().getItem())
+					Item.getItemFromBlock(BlockInit.WHITE_CLOUD_BLOCK),
+					Item.getItemFromBlock(BlockInit.LIGHT_GRAY_CLOUD_BLOCK),
+					Item.getItemFromBlock(BlockInit.GRAY_CLOUD_BLOCK),
+					Item.getItemFromBlock(BlockInit.BLACK_CLOUD_BLOCK)).contains(itemEntity.getItem().getItem())
 			) itemEntity.motionY = 0.1D;
 		}
     }

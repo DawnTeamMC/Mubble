@@ -48,6 +48,10 @@ public class BlockInit
 	public static final Block CARBONITE = new BlockBase("carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_CARBONITE = new BlockBase("polished_carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block FOOTBLOCK = new BlockBase("footblock", Material.CLOTH, 0.8f, 4f, SoundType.CLOTH);
+	public static final Block WHITE_CLOUD_BLOCK = new BlockCloud("white");
+	public static final Block LIGHT_GRAY_CLOUD_BLOCK = new BlockCloud("light_gray");
+	public static final Block GRAY_CLOUD_BLOCK = new BlockCloud("gray");
+	public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();
@@ -63,7 +67,6 @@ public class BlockInit
 	public static final Block BOOMERANG_FLOWER = new BlockFlower("boomerang_flower", 0);
 	public static final Block CLOUD_FLOWER = new BlockFlower("cloud_flower", 0);
 	public static final Block GOLD_FLOWER = new BlockFlower("gold_flower", 5);
-	public static final Block CLOUD_BLOCK = new BlockCloud();
 	public static final Block BLUE_MUSHROOM = new BlockMushroom("blue", 0);
 	public static final Block GREEN_MUSHROOM = new BlockMushroom("green", 0);
 	public static final Block YELLOW_MUSHROOM = new BlockMushroom("yellow", 0);
@@ -91,6 +94,7 @@ public class BlockInit
 	public static final Block VAMPIRE_STONE = new BlockBase("vampire_stone", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block MEDUSA_STONE = new BlockBase("medusa_stone", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block MEDUSA_BRICKS = new BlockBase("medusa_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block MEDUSA_BRICKS_STAIRS = new BlockStairs("medusa_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block BLUE_CANDY_CANE_PILLAR = new BlockPillar("blue_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block GREEN_CANDY_CANE_PILLAR = new BlockPillar("green_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block YELLOW_CANDY_CANE_PILLAR = new BlockPillar("yellow_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);

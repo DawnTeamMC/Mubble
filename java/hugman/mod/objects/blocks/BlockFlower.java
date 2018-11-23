@@ -77,7 +77,10 @@ public class BlockFlower extends BlockBush implements IHasModel
 						Items.FEATHER,
 						ItemInit.CAPE_FEATHER,
 						ItemInit.WHEAT_FLOUR,
-						Item.getItemFromBlock(BlockInit.CLOUD_BLOCK),
+						Item.getItemFromBlock(BlockInit.WHITE_CLOUD_BLOCK),
+						Item.getItemFromBlock(BlockInit.LIGHT_GRAY_CLOUD_BLOCK),
+						Item.getItemFromBlock(BlockInit.GRAY_CLOUD_BLOCK),
+						Item.getItemFromBlock(BlockInit.BLACK_CLOUD_BLOCK),
 						Item.getItemFromBlock(this)).contains(itemEntity.getItem().getItem())
 				) itemEntity.motionY = 0.05D;
 			}
