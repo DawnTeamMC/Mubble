@@ -13,10 +13,10 @@ tile.polished_blunite.name=Gepolijst blunite
 tile.carbonite.name=Carbonite
 tile.polished_carbonite.name=Gepolijst carbonite
 tile.footblock.name=Voetblok
-//tile.white_cloud_block.name=<newline>
-//tile.light_gray_cloud_block.name=<newline>
-//tile.gray_cloud_block.name=<newline>
-//tile.black_cloud_block.name=<newline>
+tile.white_cloud_block.name=Wittewolkblok
+tile.light_gray_cloud_block.name=Lichtgrijzewolkblok
+tile.gray_cloud_block.name=Grijzewolkblok
+tile.black_cloud_block.name=Zwartewolkblok
 
 tile.question_block.name=?-blok
 tile.empty_block.name=Leeg blok
@@ -53,17 +53,17 @@ tile.japanese_tetris_cushion.name=Japans Tetris kussen
 tile.rainbow_tetris_scaffolding.name=Regenboog Tetris steiger
 tile.monochrome_tetris_scaffolding.name=Zwart-wit Tetris steiger
 
-tile.vampire_stone.name=Vampier steen
-tile.medusa_stone.name=Medusa steen
-tile.medusa_bricks.name=Medusa bakstenen
-//tile.medusa_bricks_stairs.name=<newline>
+tile.vampire_stone.name=Vampiersteen
+tile.medusa_stone.name=Medusasteen
+tile.medusa_bricks.name=Medusablokstenen
+tile.medusa_bricks_stairs.name=Medusablokstenen trap
 tile.blue_candy_cane_pillar.name=Blauwe zuurstokpillaar
 tile.green_candy_cane_pillar.name=Groene zuurstokpillaar
 tile.yellow_candy_cane_pillar.name=Gele zuurstokpillaar
 tile.red_candy_cane_pillar.name=Rode zuurstokpillaar
 tile.purple_candy_cane_pillar.name=Paars zuurstokpillaar
 
-//tile.scarlet_mushroom.name=<newline>
+tile.scarlet_mushroom.name=Scharlake paddenstoel
 
 tile.iron_scaffolding.name=IJzersteiger
 tile.purple_bricks.name=Paarse bakstenen
