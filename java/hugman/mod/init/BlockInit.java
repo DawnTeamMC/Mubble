@@ -44,8 +44,10 @@ public class BlockInit
 	public static final Block WHITE_BRICKS = new BlockBase("white_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block WHITE_BRICKS_STAIRS = new BlockStairs("white_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block BLUNITE = new BlockBase("blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
+	public static final Block BLUNITE_STAIRS = new BlockStairs("blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_BLUNITE = new BlockBase("polished_blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block CARBONITE = new BlockBase("carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
+	public static final Block CARBONITE_STAIRS = new BlockStairs("carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_CARBONITE = new BlockBase("polished_carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block FOOTBLOCK = new BlockBase("footblock", Material.CLOTH, 0.8f, 4f, SoundType.CLOTH);
 	public static final Block WHITE_CLOUD_BLOCK = new BlockCloud("white");
