@@ -26,8 +26,8 @@ tile.question_block.name=?-blok
 tile.empty_block.name=Leeg blok
 tile.rotating_block.name=Draaiend blok
 tile.light_block.name=Licht blok
-tile.brick_block.name=Baksteenblok
-tile.golden_brick_block.name=Gouden baksteenblok
+tile.brick_block.name=Baksteenenblok
+tile.golden_brick_block.name=Gouden baksteenenblok
 tile.note_block.name=Nootblok
 tile.super_note_block.name=Super nootblok
 tile.fire_flower.name=Vuur bloem
@@ -65,7 +65,7 @@ tile.blue_candy_cane_pillar.name=Blauwe zuurstokpillaar
 tile.green_candy_cane_pillar.name=Groene zuurstokpillaar
 tile.yellow_candy_cane_pillar.name=Gele zuurstokpillaar
 tile.red_candy_cane_pillar.name=Rode zuurstokpillaar
-tile.purple_candy_cane_pillar.name=Paars zuurstokpillaar
+tile.purple_candy_cane_pillar.name=Paarse zuurstokpillaar
 
 tile.scarlet_mushroom.name=Scharlake paddenstoel
 
