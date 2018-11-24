@@ -7,9 +7,9 @@ itemGroup.mubble_costumes_tab=Trajes de Mubble
 tile.vanadium_block.name=Bloque de vanadio 
 tile.vanadium_ore.name=Mena de vanadio
 tile.red_bricks.name=Ladrillos rojos
-//tile.red_bricks_stairs.name=<newline>
+//tile.red_bricks_stairs.name=Escalera de Ladrillos rojos
 tile.white_bricks.name=Ladrillos blancos
-//tile.white_bricks_stairs.name=<newline>
+//tile.white_bricks_stairs.name=Escalera de Ladrillos blancos
 tile.blunite.name=Blunita
 tile.polished_blunite.name=Blunita pulida
 tile.carbonite.name=Carbonita
@@ -69,9 +69,9 @@ tile.scarlet_mushroom.name=Champiñón escarlata
 
 tile.iron_scaffolding.name=Andamio de hierro
 tile.purple_bricks.name=Ladrillos morados
-//tile.purple_bricks_stairs.name=<newline>
+//tile.purple_bricks_stairs.name=Escalera de Ladrillos morados
 tile.cyan_bricks.name=Ladrillos cian
-//tile.cyan_bricks_stairs.name=<newline>
+//tile.cyan_bricks_stairs.name=Escalera de Ladrillos cian
 tile.elder_pebbles.name=Guijarros antiguos
 tile.space_matter.name=Materia espacial
 
@@ -111,7 +111,7 @@ item.bandana.name=Pañuelo
 
 item.smash_ball.name=Bola Smash
 
-//item.annoying_dog.name=<newline>
+//item.annoying_dog.name=Perro molesto
 
 item.ralsei_hat.name=Sombrero de Ralsei
 
