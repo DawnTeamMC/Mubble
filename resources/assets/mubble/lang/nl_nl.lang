@@ -7,14 +7,14 @@ itemGroup.mubble_costumes_tab=Mubble kostuums
 tile.vanadium_block.name=Vanadiumblok
 tile.vanadium_ore.name=Vanadiumerts
 tile.red_bricks.name=Rode bakstenen
-//tile.red_brick_stairs.name=<newline>
+tile.red_brick_stairs.name=Rode bakstenen trap
 tile.white_bricks.name=Witte bakstenen
-//tile.white_brick_stairs.name=<newline>
+tile.white_brick_stairs.name=Witte bakstenen trap
 tile.blunite.name=Blunite
-//tile.blunite_stairs.name=<newline>
+tile.blunite_stairs.name=Blunite trap
 tile.polished_blunite.name=Gepolijst blunite
 tile.carbonite.name=Carbonite
-//tile.carbonite_stairs.name=<newline>
+tile.carbonite_stairs.name=Carbonite trap
 tile.polished_carbonite.name=Gepolijst carbonite
 tile.footblock.name=Voetblok
 tile.white_cloud_block.name=Wittewolkblok
@@ -26,8 +26,8 @@ tile.question_block.name=?-blok
 tile.empty_block.name=Leeg blok
 tile.rotating_block.name=Draaiend blok
 tile.light_block.name=Licht blok
-tile.brick_block.name=Baksteenblok
-tile.golden_brick_block.name=Gouden baksteenblok
+tile.brick_block.name=Baksteenenblok
+tile.golden_brick_block.name=Gouden baksteenenblok
 tile.note_block.name=Nootblok
 tile.super_note_block.name=Super nootblok
 tile.fire_flower.name=Vuur bloem
@@ -65,15 +65,15 @@ tile.blue_candy_cane_pillar.name=Blauwe zuurstokpillaar
 tile.green_candy_cane_pillar.name=Groene zuurstokpillaar
 tile.yellow_candy_cane_pillar.name=Gele zuurstokpillaar
 tile.red_candy_cane_pillar.name=Rode zuurstokpillaar
-tile.purple_candy_cane_pillar.name=Paars zuurstokpillaar
+tile.purple_candy_cane_pillar.name=Paarse zuurstokpillaar
 
 tile.scarlet_mushroom.name=Scharlake paddenstoel
 
 tile.iron_scaffolding.name=IJzersteiger
 tile.purple_bricks.name=Paarse bakstenen
-//tile.purple_brick_stairs.name=<newline>
+tile.purple_brick_stairs.name=Paarse bakstenen trap
 tile.cyan_bricks.name=Turquoise bakstenen
-//tile.cyan_brick_stairs.name=<newline>
+tile.cyan_brick_stairs.name=Turqoise bakstenen trap
 tile.elder_pebbles.name=Oudere keizels
 tile.space_matter.name=Ruimte materie
 
@@ -113,9 +113,9 @@ item.bandana.name=Bandana
 
 item.smash_ball.name=Smash bal
 
-//item.annoying_dog.name=<newline>
+item.annoying_dog.name=Iritante hond
 
-item.ralsei_hat.name=<newline>
+item.ralsei_hat.name=Ralsei hoed
 
 item.headphones.name=Koptelefoon
 item.record_blank.name=Blanke muziekplaat
