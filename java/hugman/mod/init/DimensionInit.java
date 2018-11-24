@@ -1,6 +1,6 @@
 package hugman.mod.init;
 
-import hugman.mod.world.dimension.nintendo.DimensionNintendo;
+import hugman.mod.world.dimension.smash.DimensionWorldOfLight;
 import net.minecraft.world.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 
@@ -9,10 +9,10 @@ import net.minecraftforge.common.DimensionManager;
  */
 public class DimensionInit
 {
-	public static final DimensionType NINTENDO = DimensionType.register("Nintendo", "_nintendo", 2, DimensionNintendo.class, false);
+	public static final DimensionType WORLD_OF_LIGHT = DimensionType.register("World Of Light", "_world_of_light", 2, DimensionWorldOfLight.class, false);
 	
 	public static void registerDimensions()
 	{
-		DimensionManager.registerDimension(2, NINTENDO);
+		DimensionManager.registerDimension(2, WORLD_OF_LIGHT);
 	}
 }

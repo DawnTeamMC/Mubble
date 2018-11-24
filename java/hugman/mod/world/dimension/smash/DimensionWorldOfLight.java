@@ -1,4 +1,4 @@
-package hugman.mod.world.dimension.nintendo;
+package hugman.mod.world.dimension.smash;
 
 import hugman.mod.init.DimensionInit;
 import hugman.mod.world.dimension.EmptyChunkGenerator;
@@ -8,9 +8,9 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.IChunkGenerator;
 
-public class DimensionNintendo extends WorldProvider
+public class DimensionWorldOfLight extends WorldProvider
 {
-	public DimensionNintendo()
+	public DimensionWorldOfLight()
 	{
 		this.biomeProvider = new BiomeProviderSingle(Biomes.PLAINS);
 	}
@@ -18,7 +18,7 @@ public class DimensionNintendo extends WorldProvider
 	@Override
 	public DimensionType getDimensionType() 
 	{
-		return DimensionInit.NINTENDO;
+		return DimensionInit.WORLD_OF_LIGHT;
 	}
 	
 	@Override
