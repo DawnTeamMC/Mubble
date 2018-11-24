@@ -40,15 +40,17 @@ public class BlockInit
 	public static final Block VANADIUM_BLOCK = new BlockBase("vanadium_block", Material.IRON, 5f, 30f, SoundType.METAL);
 	public static final Block VANADIUM_ORE = new BlockOre("vanadium_ore");
 	public static final Block RED_BRICKS = new BlockBase("red_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
-	public static final Block RED_BRICKS_STAIRS = new BlockStairs("red_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block RED_BRICK_STAIRS = new BlockStairs("red_brick", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block WHITE_BRICKS = new BlockBase("white_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
-	public static final Block WHITE_BRICKS_STAIRS = new BlockStairs("white_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block WHITE_BRICK_STAIRS = new BlockStairs("white_brick", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block BLUNITE = new BlockBase("blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block BLUNITE_STAIRS = new BlockStairs("blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_BLUNITE = new BlockBase("polished_blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
+	public static final Block POLISHED_BLUNITE_STAIRS = new BlockStairs("polished_blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block CARBONITE = new BlockBase("carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block CARBONITE_STAIRS = new BlockStairs("carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_CARBONITE = new BlockBase("polished_carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
+	public static final Block POLISHED_CARBONITE_STAIRS = new BlockStairs("polished_carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block FOOTBLOCK = new BlockBase("footblock", Material.CLOTH, 0.8f, 4f, SoundType.CLOTH);
 	public static final Block WHITE_CLOUD_BLOCK = new BlockCloud("white");
 	public static final Block LIGHT_GRAY_CLOUD_BLOCK = new BlockCloud("light_gray");
@@ -96,7 +98,7 @@ public class BlockInit
 	public static final Block VAMPIRE_STONE = new BlockBase("vampire_stone", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block MEDUSA_STONE = new BlockBase("medusa_stone", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block MEDUSA_BRICKS = new BlockBase("medusa_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
-	public static final Block MEDUSA_BRICKS_STAIRS = new BlockStairs("medusa_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block MEDUSA_BRICKS_STAIRS = new BlockStairs("medusa_brick", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block BLUE_CANDY_CANE_PILLAR = new BlockPillar("blue_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block GREEN_CANDY_CANE_PILLAR = new BlockPillar("green_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block YELLOW_CANDY_CANE_PILLAR = new BlockPillar("yellow_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
@@ -109,9 +111,9 @@ public class BlockInit
 	// CELESTE
 	public static final Block IRON_SCAFFOLDING = new BlockBase("iron_scaffolding", Material.IRON, 5f, 30f, SoundType.METAL);
 	public static final Block PURPLE_BRICKS = new BlockBase("purple_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
-	public static final Block PURPLE_BRICKS_STAIRS = new BlockStairs("purple_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block PURPLE_BRICKS_STAIRS = new BlockStairs("purple_brick", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block CYAN_BRICKS = new BlockBase("cyan_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
-	public static final Block CYAN_BRICKS_STAIRS = new BlockStairs("cyan_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
+	public static final Block CYAN_BRICKS_STAIRS = new BlockStairs("cyan_brick", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block ELDER_PEBBLES = new BlockBase("elder_pebbles", Material.ROCK, 2f, 30f, SoundType.STONE, 5);
 	public static final Block SPACE_MATTER = new BlockBase("space_matter", Material.SAND, 0.4f, 30f, SoundTypeInit.SPACE_MATTER, 5);
 	
