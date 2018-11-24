@@ -7,7 +7,9 @@ itemGroup.mubble_costumes_tab=sǝɯnʇsoƆ ǝlqqnW
 tile.vanadium_block.name=ɯnᴉpɐuɐΛ ɟo ʞɔolᗺ
 tile.vanadium_ore.name=ǝɹO ɯnᴉpɐuɐΛ
 tile.red_bricks.name=sʞɔᴉɹᗺ pǝᴚ
+//tile.red_bricks_stairs.name=<newline>
 tile.white_bricks.name=sʞɔᴉɹᗺ ǝʇᴉɥM
+//tile.white_bricks_stairs.name=<newline>
 tile.blunite.name=ǝʇᴉunlᗺ
 tile.polished_blunite.name=ǝʇᴉunlᗺ pǝɥsᴉloԀ
 tile.carbonite.name=ǝʇᴉuoqɹɐƆ
@@ -67,7 +69,9 @@ tile.purple_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ ǝldɹnԀ
 
 tile.iron_scaffolding.name=ƃuᴉploɟɟɐɔS uoɹI
 tile.purple_bricks.name=sʞɔᴉɹᗺ ǝldɹnԀ
+//tile.purple_bricks_stairs.name=<newline>
 tile.cyan_bricks.name=sʞɔᴉɹᗺ uɐʎƆ
+//tile.cyan_bricks_stairs.name=<newline>
 tile.elder_pebbles.name=sǝlqqǝԀ ɹǝplƎ
 tile.space_matter.name=ɹǝʇʇɐW ǝɔɐdS
 
@@ -106,6 +110,8 @@ item.super_crown.name=uʍoɹƆ ɹǝdnS
 item.bandana.name=ɐuɐpuɐᗺ
 
 item.smash_ball.name=llɐᗺ ɥsɐɯS
+
+//item.annoying_dog.name=<newline>
 
 item.ralsei_hat.name=ʇɐH s,ᴉǝslɐᴚ
 

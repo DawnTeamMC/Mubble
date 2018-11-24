@@ -7,7 +7,9 @@ itemGroup.mubble_costumes_tab=任天堂领域时装
 tile.vanadium_block.name=钒块
 tile.vanadium_ore.name=钒矿石
 tile.red_bricks.name=红色砖块
+//tile.red_bricks_stairs.name=<newline>
 tile.white_bricks.name=白色砖块
+//tile.white_bricks_stairs.name=<newline>
 tile.blunite.name=蓝岩
 tile.polished_blunite.name=磨制蓝岩
 tile.carbonite.name=碳岩
@@ -67,7 +69,9 @@ tile.purple_candy_cane_pillar.name=紫色拐杖糖支柱
 
 tile.iron_scaffolding.name=铁脚手架
 tile.purple_bricks.name=紫色砖块
+//tile.purple_bricks_stairs.name=<newline>
 tile.cyan_bricks.name=青色砖块
+//tile.cyan_bricks_stairs.name=<newline>
 tile.elder_pebbles.name=远古鹅卵石
 tile.space_matter.name=太空物质
 
@@ -106,6 +110,8 @@ item.super_crown.name=超级王冠
 item.bandana.name=手帕
 
 item.smash_ball.name=粉碎球
+
+//item.annoying_dog.name=<newline>
 
 //item.ralsei_hat.name=<newline>
 

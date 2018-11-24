@@ -7,16 +7,18 @@ itemGroup.mubble_costumes_tab=Trajes de Mubble
 tile.vanadium_block.name=Bloque de vanadio 
 tile.vanadium_ore.name=Mena de vanadio
 tile.red_bricks.name=Ladrillos rojos
+//tile.red_bricks_stairs.name=<newline>
 tile.white_bricks.name=Ladrillos blancos
+//tile.white_bricks_stairs.name=<newline>
 tile.blunite.name=Blunita
 tile.polished_blunite.name=Blunita pulida
 tile.carbonite.name=Carbonita
 tile.polished_carbonite.name=Carbonita pulida
 tile.footblock.name=Futbloque
-//tile.white_cloud_block.name=Bloque de nube blanca
-//tile.light_gray_cloud_block.name=Bloque de nube gris claro
-//tile.gray_cloud_block.name=Bloque de nube gris
-//tile.black_cloud_block.name=Bloque de nube negra
+tile.white_cloud_block.name=Bloque de nube blanca
+tile.light_gray_cloud_block.name=Bloque de nube gris claro
+tile.gray_cloud_block.name=Bloque de nube gris
+tile.black_cloud_block.name=Bloque de nube negra
 
 tile.question_block.name=Bloque ?
 tile.empty_block.name=Bloque vacío
@@ -56,18 +58,20 @@ tile.monochrome_tetris_scaffolding.name=Andamio Tetris monocromático
 tile.vampire_stone.name=Piedra vampiro
 tile.medusa_stone.name=Piedra medusa
 tile.medusa_bricks.name=Ladrillos de medusa
-//tile.medusa_bricks_stairs.name=Escalera de ladrillos de Medusa
+tile.medusa_bricks_stairs.name=Escalera de ladrillos de Medusa
 tile.blue_candy_cane_pillar.name=Pilar de bastón de caramelo azul
 tile.green_candy_cane_pillar.name=Pilar de bastón de caramelo verde
 tile.yellow_candy_cane_pillar.name=Pilar de bastón de caramelo amarillo
 tile.red_candy_cane_pillar.name=Pilar de bastón de caramelo rojo
 tile.purple_candy_cane_pillar.name=Pilar de bastón de caramelo morado
 
-//tile.scarlet_mushroom.name=Champiñón escarlata
+tile.scarlet_mushroom.name=Champiñón escarlata
 
 tile.iron_scaffolding.name=Andamio de hierro
 tile.purple_bricks.name=Ladrillos morados
+//tile.purple_bricks_stairs.name=<newline>
 tile.cyan_bricks.name=Ladrillos cian
+//tile.cyan_bricks_stairs.name=<newline>
 tile.elder_pebbles.name=Guijarros antiguos
 tile.space_matter.name=Materia espacial
 
@@ -106,6 +110,8 @@ item.super_crown.name=Supercorona
 item.bandana.name=Pañuelo
 
 item.smash_ball.name=Bola Smash
+
+//item.annoying_dog.name=<newline>
 
 item.ralsei_hat.name=Sombrero de Ralsei
 

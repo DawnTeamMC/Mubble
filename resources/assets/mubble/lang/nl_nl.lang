@@ -7,7 +7,9 @@ itemGroup.mubble_costumes_tab=Mubble kostuums
 tile.vanadium_block.name=Vanadiumblok
 tile.vanadium_ore.name=Vanadiumerts
 tile.red_bricks.name=Rode bakstenen
+//tile.red_bricks_stairs.name=<newline>
 tile.white_bricks.name=Witte bakstenen
+//tile.white_bricks_stairs.name=<newline>
 tile.blunite.name=Blunite
 tile.polished_blunite.name=Gepolijst blunite
 tile.carbonite.name=Carbonite
@@ -67,7 +69,9 @@ tile.scarlet_mushroom.name=Scharlake paddenstoel
 
 tile.iron_scaffolding.name=IJzersteiger
 tile.purple_bricks.name=Paarse bakstenen
+//tile.purple_bricks_stairs.name=<newline>
 tile.cyan_bricks.name=Turquoise bakstenen
+//tile.cyan_bricks_stairs.name=<newline>
 tile.elder_pebbles.name=Oudere keizels
 tile.space_matter.name=Ruimte materie
 
@@ -106,6 +110,8 @@ item.super_crown.name=Superkroon
 item.bandana.name=Bandana
 
 item.smash_ball.name=Smash bal
+
+//item.annoying_dog.name=<newline>
 
 item.ralsei_hat.name=<newline>
 

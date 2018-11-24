@@ -7,16 +7,18 @@ itemGroup.mubble_costumes_tab=Mubble Costumes
 tile.vanadium_block.name=Block of Vanadium
 tile.vanadium_ore.name=Vanadium Ore
 tile.red_bricks.name=Red Bricks
+tile.red_bricks_stairs.name=Red Bricks Stairs
 tile.white_bricks.name=White Bricks
+tile.white_bricks_stairs.name=White Bricks Stairs
 tile.blunite.name=Blunite
 tile.polished_blunite.name=Polished Blunite
 tile.carbonite.name=Carbonite
 tile.polished_carbonite.name=Polished Carbonite
 tile.footblock.name=Footblock
 tile.white_cloud_block.name=White Cloud Block
-//tile.light_gray_cloud_block.name=<newline>
-//tile.gray_cloud_block.name=<newline>
-//tile.black_cloud_block.name=<newline>
+tile.light_gray_cloud_block.name=Light Grey Cloud Block
+tile.gray_cloud_block.name=Grey Cloud Block
+tile.black_cloud_block.name=Black Cloud Block
 
 tile.question_block.name=? Block
 tile.empty_block.name=Empty Block
@@ -56,18 +58,20 @@ tile.monochrome_tetris_scaffolding.name=Monochrome Tetris Scaffolding
 tile.vampire_stone.name=Vampire Stone
 tile.medusa_stone.name=Medusa's Stone
 tile.medusa_bricks.name=Medusa's Bricks
-//tile.medusa_bricks_stairs.name=<newline>
+tile.medusa_bricks_stairs.name=Medusa's Bricks Stairs
 tile.blue_candy_cane_pillar.name=Blue Candy Cane Pillar
 tile.green_candy_cane_pillar.name=Green Candy Cane Pillar
 tile.yellow_candy_cane_pillar.name=Yellow Candy Cane Pillar
 tile.red_candy_cane_pillar.name=Red Candy Cane Pillar
 tile.purple_candy_cane_pillar.name=Purple Candy Cane Pillar
 
-//tile.scarlet_mushroom.name=<newline>
+tile.scarlet_mushroom.name=Scarlet Mushroom
 
 tile.iron_scaffolding.name=Iron Scaffolding
 tile.purple_bricks.name=Purple Bricks
+tile.purple_bricks_stairs.name=Purple Bricks Stairs
 tile.cyan_bricks.name=Cyan Bricks
+tile.cyan_bricks_stairs.name=Cyan Bricks Stairs
 tile.elder_pebbles.name=Elder Pebbles
 tile.space_matter.name=Space Matter
 
@@ -92,9 +96,9 @@ item.yellow_coin.name=Yellow Coin
 item.red_coin.name=Red Coin
 item.blue_coin.name=Blue Coin
 item.cappy.name=Cappy
-item.luigi_cap.name=Luigi's Cap
-item.wario_cap.name=Wario's Cap
-item.waluigi_cap.name=Waluigi's Cap
+item.luigi_cap.name=Luigi Cap
+item.wario_cap.name=Wario Cap
+item.waluigi_cap.name=Waluigi Cap
 item.vanish_cap.name=Vanish Cap
 item.wing_cap.name=Wing Cap
 item.gooigi_cap.name=Gooigi's Cap
@@ -106,6 +110,8 @@ item.super_crown.name=Super Crown
 item.bandana.name=Bandana
 
 item.smash_ball.name=Smash Ball
+
+item.annoying_dog.name=Annoying Dog
 
 item.ralsei_hat.name=Ralsei's Hat
 

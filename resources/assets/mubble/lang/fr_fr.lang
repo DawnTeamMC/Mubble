@@ -7,7 +7,9 @@ itemGroup.mubble_costumes_tab=Costumes Mubble
 tile.vanadium_block.name=Bloc de vanadium
 tile.vanadium_ore.name=Minerai de vanadium
 tile.red_bricks.name=Briques rouges
+//tile.red_bricks_stairs.name=<newline>
 tile.white_bricks.name=Briques blanches
+//tile.white_bricks_stairs.name=<newline>
 tile.blunite.name=Blunite
 tile.polished_blunite.name=Blunite poli
 tile.carbonite.name=Carbonite
@@ -67,7 +69,9 @@ tile.purple_candy_cane_pillar.name=Piller de sucre d'orge violet
 
 tile.iron_scaffolding.name=Échafaudage en fer
 tile.purple_bricks.name=Briques violettes
+//tile.purple_bricks_stairs.name=<newline>
 tile.cyan_bricks.name=Briques cyan
+//tile.cyan_bricks_stairs.name=<newline>
 tile.elder_pebbles.name=Anciens galets
 tile.space_matter.name=Matière spatiale
 
@@ -106,6 +110,8 @@ item.super_crown.name=Super couronne
 item.bandana.name=Bandana
 
 item.smash_ball.name=Balle Smash
+
+//item.annoying_dog.name=<newline>
 
 item.ralsei_hat.name=Chapeau de Ralsei
 

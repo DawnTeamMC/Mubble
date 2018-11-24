@@ -7,7 +7,9 @@ itemGroup.mubble_costumes_tab=Mubble put things on you
 tile.vanadium_block.name=shiny purple cube
 tile.vanadium_ore.name=shiny purple in blox
 tile.red_bricks.name=bloo brik
+//tile.red_bricks_stairs.name=<newline>
 tile.white_bricks.name=cool brik
+//tile.white_bricks_stairs.name=<newline>
 tile.blunite.name=moon-a-bloc
 tile.polished_blunite.name=pretteh monnbloc
 tile.carbonite.name=blac stoneh
@@ -67,7 +69,9 @@ tile.purple_candy_cane_pillar.name=purpl big christmas cane
 
 tile.iron_scaffolding.name=irun zcffolding
 tile.purple_bricks.name=parpal brik
+//tile.purple_bricks_stairs.name=<newline>
 tile.cyan_bricks.name=nyan briks
+//tile.cyan_bricks_stairs.name=<newline>
 tile.elder_pebbles.name=old pebbL
 tile.space_matter.name=MARTIAN DIRT OoOoOoO
 
@@ -106,6 +110,8 @@ item.super_crown.name=waifu creator
 item.bandana.name=banana
 
 item.smash_ball.name=sm4sh bol
+
+//item.annoying_dog.name=<newline>
 
 item.ralsei_hat.name=ralzi at
 
