@@ -13,10 +13,10 @@ tile.polished_blunite.name=Blunita pulida
 tile.carbonite.name=Carbonita
 tile.polished_carbonite.name=Carbonita pulida
 tile.footblock.name=Futbloque
-//tile.white_cloud_block.name=<newline>
-//tile.light_gray_cloud_block.name=<newline>
-//tile.gray_cloud_block.name=<newline>
-//tile.black_cloud_block.name=<newline>
+//tile.white_cloud_block.name=Bloque de nube blanca
+//tile.light_gray_cloud_block.name=Bloque de nube gris claro
+//tile.gray_cloud_block.name=Bloque de nube gris
+//tile.black_cloud_block.name=Bloque de nube negra
 
 tile.question_block.name=Bloque ?
 tile.empty_block.name=Bloque vacío
@@ -56,14 +56,14 @@ tile.monochrome_tetris_scaffolding.name=Andamio Tetris monocromático
 tile.vampire_stone.name=Piedra vampiro
 tile.medusa_stone.name=Piedra medusa
 tile.medusa_bricks.name=Ladrillos de medusa
-//tile.medusa_bricks_stairs.name=<newline>
+//tile.medusa_bricks_stairs.name=Escalera de ladrillos de Medusa
 tile.blue_candy_cane_pillar.name=Pilar de bastón de caramelo azul
 tile.green_candy_cane_pillar.name=Pilar de bastón de caramelo verde
 tile.yellow_candy_cane_pillar.name=Pilar de bastón de caramelo amarillo
 tile.red_candy_cane_pillar.name=Pilar de bastón de caramelo rojo
 tile.purple_candy_cane_pillar.name=Pilar de bastón de caramelo morado
 
-//tile.scarlet_mushroom.name=<newline>
+//tile.scarlet_mushroom.name=Champiñón escarlata
 
 tile.iron_scaffolding.name=Andamio de hierro
 tile.purple_bricks.name=Ladrillos morados
