@@ -7,14 +7,14 @@ itemGroup.mubble_costumes_tab=Mubble kostuums
 tile.vanadium_block.name=Vanadiumblok
 tile.vanadium_ore.name=Vanadiumerts
 tile.red_bricks.name=Rode bakstenen
-//tile.red_bricks_stairs.name=<newline>
+tile.red_bricks_stairs.name=Rode bakstenen trap
 tile.white_bricks.name=Witte bakstenen
-//tile.white_bricks_stairs.name=<newline>
+tile.white_bricks_stairs.name=Witte bakstenen trap
 tile.blunite.name=Blunite
-//tile.blunite_stairs.name=<newline>
+tile.blunite_stairs.name=Blunite trap
 tile.polished_blunite.name=Gepolijst blunite
 tile.carbonite.name=Carbonite
-//tile.carbonite_stairs.name=<newline>
+tile.carbonite_stairs.name=Carbonite trap
 tile.polished_carbonite.name=Gepolijst carbonite
 tile.footblock.name=Voetblok
 tile.white_cloud_block.name=Wittewolkblok
@@ -71,9 +71,9 @@ tile.scarlet_mushroom.name=Scharlake paddenstoel
 
 tile.iron_scaffolding.name=IJzersteiger
 tile.purple_bricks.name=Paarse bakstenen
-//tile.purple_bricks_stairs.name=<newline>
+tile.purple_bricks_stairs.name=Paarse bakstenen trap
 tile.cyan_bricks.name=Turquoise bakstenen
-//tile.cyan_bricks_stairs.name=<newline>
+tile.cyan_bricks_stairs.name=Turqoise bakstenen trap
 tile.elder_pebbles.name=Oudere keizels
 tile.space_matter.name=Ruimte materie
 
@@ -113,9 +113,9 @@ item.bandana.name=Bandana
 
 item.smash_ball.name=Smash bal
 
-//item.annoying_dog.name=<newline>
+item.annoying_dog.name=Iritante hond
 
-item.ralsei_hat.name=<newline>
+item.ralsei_hat.name=Ralsei hoed
 
 item.headphones.name=Koptelefoon
 item.record_blank.name=Blanke muziekplaat
