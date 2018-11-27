@@ -224,7 +224,8 @@ public class BlockStairs extends BlockBase implements IHasModel
         return facing != EnumFacing.DOWN && (facing == EnumFacing.UP || (double)hitY <= 0.5D) ? iblockstate.withProperty(HALF, BlockStairs.EnumHalf.BOTTOM) : iblockstate.withProperty(HALF, BlockStairs.EnumHalf.TOP);
     }
     
-    @Override @Nullable
+    @Override
+    @Nullable
     public RayTraceResult collisionRayTrace(IBlockState blockState, World worldIn, BlockPos pos, Vec3d start, Vec3d end)
     {
         List<RayTraceResult> list = Lists.<RayTraceResult>newArrayList();
@@ -282,16 +283,16 @@ public class BlockStairs extends BlockBase implements IHasModel
         return state.withProperty(SHAPE, getStairsShape(state, worldIn, pos));
     }
     
-    private static BlockStairs.EnumShape getStairsShape(IBlockState p_185706_0_, IBlockAccess p_185706_1_, BlockPos p_185706_2_)
+    private static BlockStairs.EnumShape getStairsShape(IBlockState state, IBlockAccess block, BlockPos pos)
     {
-        EnumFacing enumfacing = (EnumFacing)p_185706_0_.getValue(FACING);
-        IBlockState iblockstate = p_185706_1_.getBlockState(p_185706_2_.offset(enumfacing));
+        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+        IBlockState iblockstate = block.getBlockState(pos.offset(enumfacing));
 
-        if (isBlockStairs(iblockstate) && p_185706_0_.getValue(HALF) == iblockstate.getValue(HALF))
+        if (isBlockStairs(iblockstate) && state.getValue(HALF) == iblockstate.getValue(HALF))
         {
             EnumFacing enumfacing1 = (EnumFacing)iblockstate.getValue(FACING);
 
-            if (enumfacing1.getAxis() != ((EnumFacing)p_185706_0_.getValue(FACING)).getAxis() && isDifferentStairs(p_185706_0_, p_185706_1_, p_185706_2_, enumfacing1.getOpposite()))
+            if (enumfacing1.getAxis() != ((EnumFacing)state.getValue(FACING)).getAxis() && isDifferentStairs(state, block, pos, enumfacing1.getOpposite()))
             {
                 if (enumfacing1 == enumfacing.rotateYCCW())
                 {
@@ -302,13 +303,13 @@ public class BlockStairs extends BlockBase implements IHasModel
             }
         }
 
-        IBlockState iblockstate1 = p_185706_1_.getBlockState(p_185706_2_.offset(enumfacing.getOpposite()));
+        IBlockState iblockstate1 = block.getBlockState(pos.offset(enumfacing.getOpposite()));
 
-        if (isBlockStairs(iblockstate1) && p_185706_0_.getValue(HALF) == iblockstate1.getValue(HALF))
+        if (isBlockStairs(iblockstate1) && state.getValue(HALF) == iblockstate1.getValue(HALF))
         {
             EnumFacing enumfacing2 = (EnumFacing)iblockstate1.getValue(FACING);
 
-            if (enumfacing2.getAxis() != ((EnumFacing)p_185706_0_.getValue(FACING)).getAxis() && isDifferentStairs(p_185706_0_, p_185706_1_, p_185706_2_, enumfacing2))
+            if (enumfacing2.getAxis() != ((EnumFacing)state.getValue(FACING)).getAxis() && isDifferentStairs(state, block, pos, enumfacing2))
             {
                 if (enumfacing2 == enumfacing.rotateYCCW())
                 {
@@ -322,10 +323,10 @@ public class BlockStairs extends BlockBase implements IHasModel
         return BlockStairs.EnumShape.STRAIGHT;
     }
     
-    private static boolean isDifferentStairs(IBlockState p_185704_0_, IBlockAccess p_185704_1_, BlockPos p_185704_2_, EnumFacing p_185704_3_)
+    private static boolean isDifferentStairs(IBlockState state, IBlockAccess block, BlockPos pos, EnumFacing face)
     {
-        IBlockState iblockstate = p_185704_1_.getBlockState(p_185704_2_.offset(p_185704_3_));
-        return !isBlockStairs(iblockstate) || iblockstate.getValue(FACING) != p_185704_0_.getValue(FACING) || iblockstate.getValue(HALF) != p_185704_0_.getValue(HALF);
+        IBlockState iblockstate = block.getBlockState(pos.offset(face));
+        return !isBlockStairs(iblockstate) || iblockstate.getValue(FACING) != state.getValue(FACING) || iblockstate.getValue(HALF) != state.getValue(HALF);
     }
 
     public static boolean isBlockStairs(IBlockState state)
@@ -338,7 +339,8 @@ public class BlockStairs extends BlockBase implements IHasModel
         return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
     }
     
-    @Override @SuppressWarnings("incomplete-switch")
+    @Override
+    @SuppressWarnings("incomplete-switch")
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
         EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);

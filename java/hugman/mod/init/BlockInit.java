@@ -19,15 +19,10 @@ import hugman.mod.objects.blocks.BlockQuestion;
 import hugman.mod.objects.blocks.BlockRotating;
 import hugman.mod.objects.blocks.BlockStairs;
 import hugman.mod.objects.blocks.BlockTetris;
-import hugman.mod.util.handlers.RegistryHandler;
+import hugman.mod.objects.blocks.BlockWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.init.Blocks;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 /** 
  * Init class - used to initialize blocks.
@@ -45,10 +40,12 @@ public class BlockInit
 	public static final Block WHITE_BRICK_STAIRS = new BlockStairs("white_brick", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block BLUNITE = new BlockBase("blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block BLUNITE_STAIRS = new BlockStairs("blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
+	public static final Block BLUNITE_WALL = new BlockWall("blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_BLUNITE = new BlockBase("polished_blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_BLUNITE_STAIRS = new BlockStairs("polished_blunite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block CARBONITE = new BlockBase("carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block CARBONITE_STAIRS = new BlockStairs("carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
+	public static final Block CARBONITE_WALL = new BlockWall("carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_CARBONITE = new BlockBase("polished_carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block POLISHED_CARBONITE_STAIRS = new BlockStairs("polished_carbonite", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block FOOTBLOCK = new BlockBase("footblock", Material.CLOTH, 0.8f, 4f, SoundType.CLOTH);
