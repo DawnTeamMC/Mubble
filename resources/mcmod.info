@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ["Hugman_76"],
   "credits": "https://ftb.gamepedia.com/Mubble/Credits",
-  "logoFile": "assets/mubble/logo.png",
+  "logoFile": "assets/mubble/textures/gui/logo.png",
   "screenshots": [],
   "dependencies": []
  }
