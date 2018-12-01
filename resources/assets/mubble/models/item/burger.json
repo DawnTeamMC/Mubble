@@ -1,26 +1,6 @@
 {
     "parent": "item/generated",
     "textures": {
-        "layer0": "mubble:item/burger/0"
-    },
-    "overrides": [
-        {
-            "predicate": {
-                "damage": 0.25
-            },
-            "model": "mubble:item/burger/1"
-        },
-        {
-            "predicate": {
-                "damage": 0.5
-            },
-            "model": "mubble:item/burger/2"
-        },
-        {
-            "predicate": {
-                "damage": 0.75
-            },
-            "model": "mubble:item/burger/3"
-        }
-    ]
+        "layer0": "mubble:item/burger"
+    }
 }

@@ -104,6 +104,7 @@ public class BlockInit
 	
 	// DELTARUNE
 	public static final Block SCARLET_MUSHROOM = new BlockMushroom("scarlet", 7);
+	public static final Block SCARLET_ORCHID = new BlockFlower("scarlet_orchid", 7);
 
 	// CELESTE
 	public static final Block IRON_SCAFFOLDING = new BlockBase("iron_scaffolding", Material.IRON, 5f, 30f, SoundType.METAL);
