@@ -26,6 +26,7 @@ public class ItemEdibleSeed extends ItemEdible implements IHasModel, IPlantable
 	public ItemEdibleSeed(String name, int amount, float saturation, ResourceLocation cropsName, Block soil)
 	{
 		super(name, amount, saturation, false);
+		this.cropsName = cropsName;
 		ItemInit.ITEMS.add(this);
 	}
 	
