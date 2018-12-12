@@ -38,7 +38,8 @@ public class ItemInit
 	public static final Item CARAMEL_CREPE = new ItemEdible("caramel_crepe", 9, 3.4f, false);
 	public static final Item CANDY_CANE = new ItemEdible("candy_cane", 4, 1.8f, true);
 	public static final Item BURGER = new ItemEdible("burger", 7, 2F, false);
-	public static final Item TOMATO = new ItemEdibleSeed("tomato", 0, 0);
+	public static final Item TOMATO = new ItemEdibleSeed("tomato", 3, 0.6F);
+	public static final Item SALAD = new ItemEdibleSeed("salad", 3, 0.6F);
 	
 	// SUPER MARIO
 	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));
