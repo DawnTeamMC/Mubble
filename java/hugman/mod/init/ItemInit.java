@@ -38,7 +38,7 @@ public class ItemInit
 	public static final Item CARAMEL_CREPE = new ItemEdible("caramel_crepe", 9, 3.4f, false);
 	public static final Item CANDY_CANE = new ItemEdible("candy_cane", 4, 1.8f, true);
 	public static final Item BURGER = new ItemEdible("burger", 7, 2F, false);
-	public static final Item TOMATO = new ItemEdibleSeed("tomato", 0, 0, new ResourceLocation("mubble", "tomato"), Blocks.FARMLAND);
+	public static final Item TOMATO = new ItemEdibleSeed("tomato", 0, 0);
 	
 	// SUPER MARIO
 	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));

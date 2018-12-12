@@ -28,13 +28,17 @@ import net.minecraft.world.World;
 
 public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasModel, IGrowable
 {
+	Item seed;
+	Item food;
+	
 	/** 
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockCrops(String name, Item seed, Item crop)
+	public BlockCrops(String name, Item seed)
 	{
 		setTranslationKey(name);
 		setRegistryName(name);
+		this.seed = seed;
 		setCreativeTab(Main.MUBBLE_BLOCKS);
         this.setHardness(0.0F);
         this.setResistance(0.0F);
@@ -45,6 +49,45 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
         
 		BlockInit.BLOCKS.add(this);
 	}
+	
+	/** 
+	 * Open class - can be initialized for multiple items with variables.
+	 */
+	public BlockCrops(String name, Item seed, Item food)
+	{
+		setTranslationKey(name);
+		setRegistryName(name);
+		this.seed = seed;
+		this.food = food;
+		setCreativeTab(Main.MUBBLE_BLOCKS);
+        this.setHardness(0.0F);
+        this.setResistance(0.0F);
+		setSoundType(SoundType.PLANT);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(this.getAgeProperty(), Integer.valueOf(0)));
+        this.setTickRandomly(true);
+        this.disableStats();
+        
+		BlockInit.BLOCKS.add(this);
+	}
+	
+	@Override
+    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
+    {
+        IBlockState soil = worldIn.getBlockState(pos.down());
+        return (worldIn.getLight(pos) >= 8 || worldIn.canSeeSky(pos)) && this.canSustainBush(soil);
+    }
+	
+	@Override
+    protected Item getSeed()
+    {
+        return this.seed;
+    }
+	
+    @Override
+    protected Item getCrop()
+    {
+        return this.food;
+    }
     
 	@Override
 	public void registerModels()

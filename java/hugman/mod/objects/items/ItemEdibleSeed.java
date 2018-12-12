@@ -23,10 +23,10 @@ public class ItemEdibleSeed extends ItemEdible implements IHasModel, IPlantable
 	/** 
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public ItemEdibleSeed(String name, int amount, float saturation, ResourceLocation cropsName, Block soil)
+	public ItemEdibleSeed(String name, int amount, float saturation)
 	{
 		super(name, amount, saturation, false);
-		this.cropsName = cropsName;
+		this.cropsName = new ResourceLocation("mubble", name);
 		ItemInit.ITEMS.add(this);
 	}
 	

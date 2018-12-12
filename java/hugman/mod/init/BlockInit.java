@@ -54,7 +54,7 @@ public class BlockInit
 	public static final Block LIGHT_GRAY_CLOUD_BLOCK = new BlockCloud("light_gray");
 	public static final Block GRAY_CLOUD_BLOCK = new BlockCloud("gray");
 	public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
-	public static final Block TOMATO = new BlockCrops("tomato", ItemInit.TOMATO, ItemInit.TOMATO);
+	public static final Block TOMATO = new BlockCrops("tomato", ItemInit.TOMATO);
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();
