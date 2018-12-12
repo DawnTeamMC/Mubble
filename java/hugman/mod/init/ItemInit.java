@@ -10,9 +10,12 @@ import hugman.mod.objects.items.ItemCapeFeather;
 import hugman.mod.objects.items.ItemEdible;
 import hugman.mod.objects.items.ItemEdibleEffect;
 import hugman.mod.objects.items.ItemMusicDisc;
+import hugman.mod.objects.items.ItemEdibleSeed;
 import hugman.mod.objects.items.ItemSmashBall;
 import hugman.mod.objects.items.ItemSuperStar;
 import hugman.mod.util.handlers.SoundHandler;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -34,6 +37,7 @@ public class ItemInit
 	public static final Item CARAMEL_CREPE = new ItemEdible("caramel_crepe", 9, 3.4f, false);
 	public static final Item CANDY_CANE = new ItemEdible("candy_cane", 4, 1.8f, true);
 	public static final Item BURGER = new ItemEdible("burger", 7, 2F, false);
+	public static final Item TOMATO = new ItemEdibleSeed("tomato", 0, 0, BlockInit.TOMATO, Blocks.FARMLAND);
 	
 	// SUPER MARIO
 	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));
