@@ -25,6 +25,8 @@ tile.footblock.name=Bloc de foot
 //tile.light_gray_cloud_block.name=<newline>
 //tile.gray_cloud_block.name=<newline>
 //tile.black_cloud_block.name=<newline>
+//tile.tomato.name=<newline>
+//tile.salad.name=<newline>
 
 tile.question_block.name=Bloc ?
 tile.empty_block.name=Bloc vide
@@ -72,6 +74,7 @@ tile.red_candy_cane_pillar.name=Piller de sucre d'orge rouge
 tile.purple_candy_cane_pillar.name=Piller de sucre d'orge violet
 
 //tile.scarlet_mushroom.name=<newline>
+//tile.scarlet_orchid.name=<newline>
 
 tile.iron_scaffolding.name=Échafaudage en fer
 tile.purple_bricks.name=Briques violettes
@@ -93,6 +96,9 @@ item.chocolate_crepe.name=Crêpe au chocolat
 item.caramel_crepe.name=Crêpe au caramel
 item.candy_cane.name=Sucre d'orge
 item.burger.name=Burger
+//item.tomato.name=<newline>
+//item.salad.name=<newline>
+//item.cheese.name=<newline>
 
 item.super_mushroom.name=Super champignon
 item.peach.name=Pêche
@@ -112,6 +118,7 @@ item.princess_peach_crown.name=Couronne de la Princesse Peach
 item.princess_daisy_crown.name=Couronne de la Princesse Daisy
 item.pink_gold_peach_crown.name=Couronne de Peach d'or rose
 item.super_crown.name=Super couronne
+//item.rosalina_crown.name=<newline>
 
 item.bandana.name=Bandana
 

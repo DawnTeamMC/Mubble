@@ -25,6 +25,8 @@ tile.footblock.name=blok foutbol
 //tile.light_gray_cloud_block.name=<newline>
 //tile.gray_cloud_block.name=<newline>
 //tile.black_cloud_block.name=<newline>
+//tile.tomato.name=<newline>
+//tile.salad.name=<newline>
 
 tile.question_block.name=bloc???
 tile.empty_block.name=bloc san rien lol
@@ -72,6 +74,7 @@ tile.red_candy_cane_pillar.name=pyer de bombon de noel sauf que c rouj
 tile.purple_candy_cane_pillar.name=piler de bobon de novel sauf que c pourpr
 
 //tile.scarlet_mushroom.name=<newline>
+//tile.scarlet_orchid.name=<newline>
 
 tile.iron_scaffolding.name=chafaudaj an faire
 tile.purple_bricks.name=brik volete
@@ -93,6 +96,9 @@ item.chocolate_crepe.name=craipe au nutela
 item.caramel_crepe.name=craipe au caramale
 item.candy_cane.name=c le bon bon de noel sa
 item.burger.name=borgor
+//item.tomato.name=<newline>
+//item.salad.name=<newline>
+//item.cheese.name=<newline>
 
 item.super_mushroom.name=coul champignon
 item.peach.name=g la paich!! ahaha
@@ -112,6 +118,7 @@ item.princess_peach_crown.name=couron disi
 item.princess_daisy_crown.name=couraun peeach
 item.pink_gold_peach_crown.name=couraun pech ros dorai
 item.super_crown.name=couraune bien supair coule. 
+//item.rosalina_crown.name=<newline>
 
 item.bandana.name=banade
 

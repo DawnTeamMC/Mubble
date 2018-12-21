@@ -25,6 +25,8 @@ tile.white_cloud_block.name=White Cloud Block
 tile.light_gray_cloud_block.name=Light Gray Cloud Block
 tile.gray_cloud_block.name=Gray Cloud Block
 tile.black_cloud_block.name=Black Cloud Block
+tile.tomato.name=Tomato
+tile.salad.name=Salad
 
 tile.question_block.name=? Block
 tile.empty_block.name=Empty Block
@@ -72,6 +74,7 @@ tile.red_candy_cane_pillar.name=Red Candy Cane Pillar
 tile.purple_candy_cane_pillar.name=Purple Candy Cane Pillar
 
 tile.scarlet_mushroom.name=Scarlet Mushroom
+tile.scarlet_orchid.name=Scarlet Orchid
 
 tile.iron_scaffolding.name=Iron Scaffolding
 tile.purple_bricks.name=Purple Bricks
@@ -93,6 +96,9 @@ item.chocolate_crepe.name=Chocolate Crêpe
 item.caramel_crepe.name=Caramel Crêpe
 item.candy_cane.name=Candy Cane
 item.burger.name=Burger
+item.tomato.name=Tomato
+item.salad.name=Salad
+item.cheese.name=Cheese
 
 item.super_mushroom.name=Super Mushroom
 item.peach.name=Peach
@@ -112,6 +118,7 @@ item.princess_peach_crown.name=Princess Peach's Crown
 item.princess_daisy_crown.name=Princess Daisy's Crown
 item.pink_gold_peach_crown.name=Pink Gold Peach's Crown
 item.super_crown.name=Super Crown
+item.rosalina_crown.name=Rosalina's Crown
 
 item.bandana.name=Bandana
 

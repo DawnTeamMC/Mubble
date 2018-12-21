@@ -1,6 +1,6 @@
 {
-    "parent": "block/crop",
+    "parent": "mubble:block/cross_crop",
     "textures": {
-        "crop": "mubble:block/tomato/6"
+        "cross_crop": "mubble:block/tomato/6"
     }
 }

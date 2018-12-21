@@ -25,6 +25,8 @@ tile.white_cloud_block.name=Wittewolkblok
 tile.light_gray_cloud_block.name=Lichtgrijzewolkblok
 tile.gray_cloud_block.name=Grijzewolkblok
 tile.black_cloud_block.name=Zwartewolkblok
+//tile.tomato.name=<newline>
+//tile.salad.name=<newline>
 
 tile.question_block.name=?-blok
 tile.empty_block.name=Leeg blok
@@ -72,6 +74,7 @@ tile.red_candy_cane_pillar.name=Rode zuurstokpillaar
 tile.purple_candy_cane_pillar.name=Paarse zuurstokpillaar
 
 tile.scarlet_mushroom.name=Scharlake paddenstoel
+//tile.scarlet_orchid.name=<newline>
 
 tile.iron_scaffolding.name=IJzersteiger
 tile.purple_bricks.name=Paarse bakstenen
@@ -92,7 +95,10 @@ item.crepe.name=Crêpe
 item.chocolate_crepe.name=Chocolade crêpe
 item.caramel_crepe.name=Karamel crêpe
 item.candy_cane.name=Zuurstok
-item.bandage.name=Verband
+//item.burger.name=<newline>
+//item.tomato.name=<newline>
+//item.salad.name=<newline>
+//item.cheese.name=<newline>
 
 item.super_mushroom.name=Super paddenstoel
 item.peach.name=Perzik
@@ -112,6 +118,7 @@ item.princess_peach_crown.name=Prinses Peach's kroon
 item.princess_daisy_crown.name=Prinses Daisy's kroon
 item.pink_gold_peach_crown.name=Rozegouden Peach's kroon
 item.super_crown.name=Superkroon
+//item.rosalina_crown.name=<newline>
 
 item.bandana.name=Bandana
 

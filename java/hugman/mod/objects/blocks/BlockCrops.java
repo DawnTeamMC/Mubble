@@ -30,6 +30,8 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
 {
 	Item seed;
 	Item food;
+	private static final AxisAlignedBB[] CROPS_AABB = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.625D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.75D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D)};
+	private static final AxisAlignedBB[] SMALL_CROPS_AABB = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.1875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.4375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5625D, 1.0D)};
 	
 	/** 
 	 * Open class - can be initialized for multiple items with variables.
@@ -87,6 +89,40 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
     protected Item getCrop()
     {
         return this.food;
+    }
+    
+    @Override
+    public void getDrops(net.minecraft.util.NonNullList<ItemStack> drops, net.minecraft.world.IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+        super.getDrops(drops, world, pos, state, 0);
+        int age = getAge(state);
+        Random rand = world instanceof World ? ((World)world).rand : new Random();
+
+        if (age >= getMaxAge())
+        {
+            int k = 3 + fortune;
+
+            for (int i = 0; i < 3 + fortune; ++i)
+            {
+                if (rand.nextInt(2 * getMaxAge()) <= age)
+                {
+                    drops.add(new ItemStack(this.getSeed(), 1, 0));
+                }
+            }
+        }
+    }
+    
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    {
+    	if(this.seed == ItemInit.SALAD)
+    	{
+    		return SMALL_CROPS_AABB[((Integer)state.getValue(this.getAgeProperty())).intValue()];
+    	}
+    	else
+    	{
+    		return CROPS_AABB[((Integer)state.getValue(this.getAgeProperty())).intValue()];
+    	}
     }
     
 	@Override

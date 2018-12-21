@@ -25,6 +25,8 @@ tile.white_cloud_block.name=ʞɔolq pnolƆ ǝʇᴉɥM
 //tile.light_gray_cloud_block.name=<newline>
 //tile.gray_cloud_block.name=<newline>
 //tile.black_cloud_block.name=<newline>
+//tile.tomato.name=<newline>
+//tile.salad.name=<newline>
 
 tile.question_block.name=ʞɔolᗺ ¿
 tile.empty_block.name=ʞɔolᗺ ʎʇdɯƎ
@@ -72,6 +74,7 @@ tile.red_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ pǝᴚ
 tile.purple_candy_cane_pillar.name=ɹɐllᴉԀ ǝuɐƆ ʎpuɐƆ ǝldɹnԀ
 
 //tile.scarlet_mushroom.name=<newline>
+//tile.scarlet_orchid.name=<newline>
 
 tile.iron_scaffolding.name=ƃuᴉploɟɟɐɔS uoɹI
 tile.purple_bricks.name=sʞɔᴉɹᗺ ǝldɹnԀ
@@ -92,7 +95,10 @@ item.crepe.name=ǝdǝɹƆ
 item.chocolate_crepe.name=ǝdǝɹƆ ǝʇɐloɔoɥƆ
 item.caramel_crepe.name=ǝdǝɹƆ lǝɯɐɹɐƆ
 item.candy_cane.name=ǝuɐƆ ʎpuɐƆ
-item.burger.name=<newline>
+//item.burger.name=<newline>
+//item.tomato.name=<newline>
+//item.salad.name=<newline>
+//item.cheese.name=<newline>
 
 item.super_mushroom.name=ɯooɹɥsnW ɹǝdnS
 item.peach.name=ɥɔɐǝԀ
@@ -112,6 +118,7 @@ item.princess_peach_crown.name=uʍoɹƆ s,ɥɔɐǝԀ ssǝɔuᴉɹԀ
 item.princess_daisy_crown.name=uʍoɹƆ s,ʎsᴉɐp ssǝɔuᴉɹԀ
 item.pink_gold_peach_crown.name=uʍoɹƆ s,ɥɔɐǝԀ ploפ ʞuᴉԀ
 item.super_crown.name=uʍoɹƆ ɹǝdnS
+//item.rosalina_crown.name=<newline>
 
 item.bandana.name=ɐuɐpuɐᗺ
 

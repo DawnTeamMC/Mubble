@@ -27,7 +27,6 @@ public class ItemEdibleSeed extends ItemEdible implements IHasModel, IPlantable
 	{
 		super(name, amount, saturation, false);
 		this.cropsName = new ResourceLocation("mubble", name);
-		ItemInit.ITEMS.add(this);
 	}
 	
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
@@ -57,10 +56,4 @@ public class ItemEdibleSeed extends ItemEdible implements IHasModel, IPlantable
     {
         return net.minecraftforge.common.EnumPlantType.Crop;
     }
-
-	@Override
-	public void registerModels()
-	{
-		Main.proxy.registerItemRenderer(this, 0, "inventory");
-	}
 }

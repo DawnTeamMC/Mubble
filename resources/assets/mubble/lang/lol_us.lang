@@ -25,6 +25,8 @@ tile.footblock.name=futbloc
 //tile.light_gray_cloud_block.name=<newline>
 //tile.gray_cloud_block.name=<newline>
 //tile.black_cloud_block.name=<newline>
+//tile.tomato.name=<newline>
+//tile.salad.name=<newline>
 
 tile.question_block.name=BLOC ???? BLOOOOOC ?????????????
 tile.empty_block.name=GBJ
@@ -72,6 +74,7 @@ tile.red_candy_cane_pillar.name=redd big christmas cane
 tile.purple_candy_cane_pillar.name=purpl big christmas cane
 
 //tile.scarlet_mushroom.name=<newline>
+//tile.scarlet_orchid.name=<newline>
 
 tile.iron_scaffolding.name=irun zcffolding
 tile.purple_bricks.name=parpal brik
@@ -93,6 +96,9 @@ item.chocolate_crepe.name=crepe + choco
 item.caramel_crepe.name=crepe + caraml good
 item.candy_cane.name=christmas cane
 item.burger.name=burug
+//item.tomato.name=<newline>
+//item.salad.name=<newline>
+//item.cheese.name=<newline>
 
 item.super_mushroom.name=SUPA MUSH
 item.peach.name=salty peesh very gud
@@ -112,6 +118,7 @@ item.princess_peach_crown.name=peech cron
 item.princess_daisy_crown.name=disi  cron
 item.pink_gold_peach_crown.name=pingol peech cron
 item.super_crown.name=waifu creator
+//item.rosalina_crown.name=<newline>
 
 item.bandana.name=banana
 

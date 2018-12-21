@@ -25,6 +25,8 @@ tile.footblock.name=足球块
 //tile.light_gray_cloud_block.name=<newline>
 //tile.gray_cloud_block.name=<newline>
 //tile.black_cloud_block.name=<newline>
+//tile.tomato.name=<newline>
+//tile.salad.name=<newline>
 
 tile.question_block.name=问号块
 tile.empty_block.name=钢块
@@ -72,6 +74,7 @@ tile.red_candy_cane_pillar.name=红色拐杖糖支柱
 tile.purple_candy_cane_pillar.name=紫色拐杖糖支柱
 
 //tile.scarlet_mushroom.name=<newline>
+//tile.scarlet_orchid.name=<newline>
 
 tile.iron_scaffolding.name=铁脚手架
 tile.purple_bricks.name=紫色砖块
@@ -92,7 +95,10 @@ item.crepe.name=可丽饼
 item.chocolate_crepe.name=巧克力可丽饼
 item.caramel_crepe.name=焦糖可丽饼
 item.candy_cane.name=拐杖糖
-item.burger.name=<newline>
+//item.burger.name=<newline>
+//item.tomato.name=<newline>
+//item.salad.name=<newline>
+//item.cheese.name=<newline>
 
 item.super_mushroom.name=超级蘑菇
 item.peach.name=桃子
@@ -112,6 +118,7 @@ item.princess_peach_crown.name=碧奇公主的王冠
 item.princess_daisy_crown.name=黛西公主的王冠
 item.pink_gold_peach_crown.name=碧奇公主的粉金王冠
 item.super_crown.name=超级王冠
+//item.rosalina_crown.name=<newline>
 
 item.bandana.name=手帕
 
