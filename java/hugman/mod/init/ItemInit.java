@@ -29,9 +29,7 @@ public class ItemInit
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	
 	// VANILLA
-	public static final Item VANADIUM = new ItemBase("vanadium");
 	public static final Item BANDAGE = new ItemBandage();
-	public static final Item WHEAT_FLOUR = new ItemBase("wheat_flour");
 	public static final Item CARAMEL_CUBE = new ItemEdible("caramel_cube", 4, 2.8f, false);
 	public static final Item CREPE = new ItemEdible("crepe", 3, 0.5f, false);
 	public static final Item CHOCOLATE_CREPE = new ItemEdible("chocolate_crepe", 8, 2f, false);
@@ -41,6 +39,8 @@ public class ItemInit
 	public static final Item TOMATO = new ItemEdibleSeed("tomato", 3, 0.6F);
 	public static final Item SALAD = new ItemEdibleSeed("salad", 1, 0.2F);
 	public static final Item CHEESE = new ItemEdible("cheese", 2, 0.4F, false);
+	public static final Item WHEAT_FLOUR = new ItemBase("wheat_flour");
+	public static final Item VANADIUM = new ItemBase("vanadium");
 	
 	// SUPER MARIO
 	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));

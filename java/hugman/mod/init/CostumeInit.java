@@ -35,8 +35,10 @@ public class CostumeInit
 	public static final Item GOOIGI_CAP = new CostumeGooigiCap();
 	public static final Item PRINCESS_PEACH_CROWN = new CostumeHeadBase("princess_peach_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 	public static final Item PRINCESS_DAISY_CROWN = new CostumeHeadBase("princess_daisy_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+	public static final Item ROSALINA_CROWN = new CostumeHeadBase("rosalina_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 	public static final Item PINK_GOLD_PEACH_CROWN = new CostumeHeadBase("pink_gold_peach_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 	public static final Item SUPER_CROWN = new CostumeHeadBase("super_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+	public static final Item BROQUE_MONSIEUR_HEAD = new CostumeHeadBase("broque_monsieur_head", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 	
 	// KIRBY
 	public static final Item BANDANA = new CostumeHeadBase("bandana", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
