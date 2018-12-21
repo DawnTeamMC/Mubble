@@ -43,6 +43,9 @@ public class CostumeInit
 	// KIRBY
 	public static final Item BANDANA = new CostumeHeadBase("bandana", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	
+	// LAYTON
+	public static final Item TOP_HAT = new CostumeHeadBase("top_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+	
 	// DELTARUNE
 	public static final Item RALSEI_HAT = new CostumeHeadBase("ralsei_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	
