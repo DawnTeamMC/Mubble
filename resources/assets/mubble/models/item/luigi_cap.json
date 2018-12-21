@@ -1,7 +1,6 @@
 {
 	"textures": {
-		"cap": "mubble:costume/luigi_cap",
-		"particle": "mubble:costume/luigi_cap"
+		"cap": "mubble:costume/luigi_cap"
 	},
 	"elements": [
 		{

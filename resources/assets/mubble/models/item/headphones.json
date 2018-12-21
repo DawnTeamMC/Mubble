@@ -1,7 +1,6 @@
 {
 	"textures": {
-		"noteblock": "mubble:costume/noteblock_head",
-		"particle": "mubble:costume/noteblock_head"
+		"noteblock": "mubble:costume/noteblock_head"
 	},
 	"elements": [
 		{

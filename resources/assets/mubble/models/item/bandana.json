@@ -1,7 +1,6 @@
 {
 	"textures": {
-		"wool": "mubble:costume/bandana",
-		"particle": "mubble:costume/bandana"
+		"wool": "mubble:costume/bandana"
 	},
 	"elements": [
 		{

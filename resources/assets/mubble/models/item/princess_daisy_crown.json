@@ -1,7 +1,6 @@
 {
 	"textures": {
-		"crown": "mubble:costume/crown",
-		"particle": "mubble:costume/crown"
+		"crown": "mubble:costume/crown"
 	},
 	"elements": [
 		{

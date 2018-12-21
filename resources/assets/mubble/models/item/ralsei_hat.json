@@ -1,7 +1,6 @@
 {
 	"textures": {
-		"hat": "mubble:costume/ralsei_hat",
-		"particle": "mubble:costume/ralsei_hat"
+		"hat": "mubble:costume/ralsei_hat"
 	},
 	"elements": [
 		{
