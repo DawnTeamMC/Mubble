@@ -206,7 +206,15 @@
 			"mubble:entity/toad/ambient2",
 			"mubble:entity/toad/ambient3",
 			"mubble:entity/toad/ambient4",
-			"mubble:entity/toad/ambient5"
+			"mubble:entity/toad/ambient5",
+			"mubble:entity/toad/ambient6",
+			"mubble:entity/toad/ambient7",
+			"mubble:entity/toad/ambient8",
+			"mubble:entity/toad/ambient9",
+			"mubble:entity/toad/ambient10",
+			"mubble:entity/toad/ambient11",
+			"mubble:entity/toad/ambient12",
+			"mubble:entity/toad/ambient13"
 		]
 	},
 	"entity.toad.hurt":
@@ -219,7 +227,12 @@
 			"mubble:entity/toad/hurt2",
 			"mubble:entity/toad/hurt3",
 			"mubble:entity/toad/hurt4",
-			"mubble:entity/toad/hurt5"
+			"mubble:entity/toad/hurt5",
+			"mubble:entity/toad/hurt6",
+			"mubble:entity/toad/hurt7",
+			"mubble:entity/toad/hurt8",
+			"mubble:entity/toad/hurt9",
+			"mubble:entity/toad/hurt10"
 		]
 	},
 	"entity.toad.death":
@@ -229,7 +242,9 @@
 		"sounds":
 		[
 			"mubble:entity/toad/death1",
-			"mubble:entity/toad/death2"
+			"mubble:entity/toad/death2",
+			"mubble:entity/toad/death3",
+			"mubble:entity/toad/death4"
 		]
 	},
 	"costume.cappy.ambient":
