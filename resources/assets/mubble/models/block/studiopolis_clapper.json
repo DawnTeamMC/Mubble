@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures": {
-        "side": "mubble:block/studiopolis_clapper_side",
-        "end": "mubble:block/studiopolis_clapper_end"
-    }
-}

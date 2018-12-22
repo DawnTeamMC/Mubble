@@ -73,7 +73,8 @@ tile.yellow_candy_cane_pillar.name=Yellow Candy Cane Pillar
 tile.red_candy_cane_pillar.name=Red Candy Cane Pillar
 tile.purple_candy_cane_pillar.name=Purple Candy Cane Pillar
 
-//tile.studiopolis_clapper.name=<newline>
+//tile.yellow_studiopolis_clapper.name=<newline>
+//tile.blue_studiopolis_clapper.name=<newline>
 
 tile.scarlet_mushroom.name=Scarlet Mushroom
 //tile.scarlet_orchid.name=<newline>

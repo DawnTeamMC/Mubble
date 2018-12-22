@@ -73,7 +73,8 @@ tile.yellow_candy_cane_pillar.name=Gelber Zuckerstangensäule
 tile.red_candy_cane_pillar.name=Roter Zuckerstangensäule
 tile.purple_candy_cane_pillar.name=Lila Zuckerstangensäule
 
-//tile.studiopolis_clapper.name=<newline>
+//tile.yellow_studiopolis_clapper.name=<newline>
+//tile.blue_studiopolis_clapper.name=<newline>
 
 //tile.scarlet_mushroom.name=<newline>
 //tile.scarlet_orchid.name=<newline>

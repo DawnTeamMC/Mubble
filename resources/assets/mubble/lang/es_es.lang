@@ -73,7 +73,8 @@ tile.yellow_candy_cane_pillar.name=Pilar de bastón de caramelo amarillo
 tile.red_candy_cane_pillar.name=Pilar de bastón de caramelo rojo
 tile.purple_candy_cane_pillar.name=Pilar de bastón de caramelo morado
 
-//tile.studiopolis_clapper.name=<newline>
+//tile.yellow_studiopolis_clapper.name=<newline>
+//tile.blue_studiopolis_clapper.name=<newline>
 
 tile.scarlet_mushroom.name=Champiñón escarlata
 //tile.scarlet_orchid.name=<newline>

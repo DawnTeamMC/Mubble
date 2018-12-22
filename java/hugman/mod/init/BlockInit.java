@@ -106,7 +106,8 @@ public class BlockInit
 	public static final Block PURPLE_CANDY_CANE_PILLAR = new BlockPillar("purple_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	
 	// SONIC
-	public static final Block STUDIOPOLIS_CLAPPER = new BlockDirectional("studiopolis_clapper", Material.ROCK, 1.5f, 30f, SoundType.METAL);
+	public static final Block YELLOW_STUDIOPOLIS_CLAPPER = new BlockDirectional("yellow_studiopolis_clapper", Material.IRON, 5f, 30f, SoundType.METAL);
+	public static final Block BLUE_STUDIOPOLIS_CLAPPER = new BlockDirectional("blue_studiopolis_clapper", Material.IRON, 5f, 30f, SoundType.METAL);
 	
 	// DELTARUNE
 	public static final Block SCARLET_MUSHROOM = new BlockMushroom("scarlet", 7);

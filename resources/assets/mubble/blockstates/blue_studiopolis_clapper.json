@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "mubble:blue_studiopolis_clapper"},
+        "facing=down": { "model": "mubble:blue_studiopolis_clapper", "x" : 180 },
+        "facing=north": { "model": "mubble:blue_studiopolis_clapper", "x": 90 },
+        "facing=south": { "model": "mubble:blue_studiopolis_clapper", "x": 270 },
+        "facing=west": { "model": "mubble:blue_studiopolis_clapper", "x": 90, "y": 270 },
+        "facing=east": { "model": "mubble:blue_studiopolis_clapper", "x": 90, "y": 90 }
+    }
+}

@@ -73,7 +73,8 @@ tile.yellow_candy_cane_pillar.name=piler de bonbon de noel sauf que c jonne
 tile.red_candy_cane_pillar.name=pyer de bombon de noel sauf que c rouj
 tile.purple_candy_cane_pillar.name=piler de bobon de novel sauf que c pourpr
 
-//tile.studiopolis_clapper.name=<newline>
+//tile.yellow_studiopolis_clapper.name=<newline>
+//tile.blue_studiopolis_clapper.name=<newline>
 
 //tile.scarlet_mushroom.name=<newline>
 //tile.scarlet_orchid.name=<newline>
