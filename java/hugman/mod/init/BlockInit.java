@@ -83,12 +83,20 @@ public class BlockInit
 	// TETRIS
 	public static final Block BLUE_TETRIS_BLOCK = new BlockTetris("blue", "block", Material.ROCK);
 	public static final Block LIGHT_BLUE_TETRIS_BLOCK = new BlockTetris("light_blue", "block" ,Material.ROCK);
+	public static final Block CYAN_TETRIS_BLOCK = new BlockTetris("cyan", "block", Material.ROCK);
 	public static final Block GREEN_TETRIS_BLOCK = new BlockTetris("green", "block", Material.ROCK);
+	public static final Block LIME_TETRIS_BLOCK = new BlockTetris("lime", "block", Material.ROCK);
 	public static final Block YELLOW_TETRIS_BLOCK = new BlockTetris("yellow", "block", Material.ROCK);
 	public static final Block ORANGE_TETRIS_BLOCK = new BlockTetris("orange", "block", Material.ROCK);
 	public static final Block RED_TETRIS_BLOCK = new BlockTetris("red", "block", Material.ROCK);
 	public static final Block PINK_TETRIS_BLOCK = new BlockTetris("pink", "block", Material.ROCK);
+	public static final Block MAGENTA_TETRIS_BLOCK = new BlockTetris("magenta", "block", Material.ROCK);
+	public static final Block PURPLE_TETRIS_BLOCK = new BlockTetris("purple", "block", Material.ROCK);
+	public static final Block BROWN_TETRIS_BLOCK = new BlockTetris("brown", "block", Material.ROCK);
+	public static final Block WHITE_TETRIS_BLOCK = new BlockTetris("white", "block", Material.ROCK);
+	public static final Block LIGHT_GRAY_TETRIS_BLOCK = new BlockTetris("light_gray", "block", Material.ROCK);
 	public static final Block GRAY_TETRIS_BLOCK = new BlockTetris("gray", "block", Material.ROCK);
+	public static final Block BLACK_TETRIS_BLOCK = new BlockTetris("black", "block", Material.ROCK);
 	public static final Block TETRIS_GLASS = new BlockFallingGlass("tetris_glass", Main.MUBBLE_BLOCKS);
 	public static final Block JAPANESE_TETRIS_CUSHION = new BlockTetris("japanese", "cushion", Material.CLOTH);
 	public static final Block RAINBOW_TETRIS_SCAFFOLDING = new BlockTetris("rainbow", "scaffolding", Material.IRON);
