@@ -25,8 +25,9 @@ tile.white_cloud_block.name=White Cloud Block
 tile.light_gray_cloud_block.name=Light Gray Cloud Block
 tile.gray_cloud_block.name=Gray Cloud Block
 tile.black_cloud_block.name=Black Cloud Block
-tile.tomato.name=Tomato
+tile.tomato.name=Tomatoes
 tile.salad.name=Salad
+tile.cheese_block.name=Cheese Block
 
 tile.question_block.name=? Block
 tile.empty_block.name=Empty Block
