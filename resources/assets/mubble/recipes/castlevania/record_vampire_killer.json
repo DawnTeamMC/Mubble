@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "record_blank"
+      "item": "mubble:record_blank"
     },
     {
-      "item": "vampire_stone"
+      "item": "mubble:vampire_stone"
     }
   ],
   "result": {
-    "item": "record_vampire_killer"
+    "item": "mubble:record_vampire_killer"
   }
 }

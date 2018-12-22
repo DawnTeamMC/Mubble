@@ -10,10 +10,10 @@
       "data": 4
     },
     "O": {
-      "item": "super_star"
+      "item": "mubble:super_star"
     }
   },
   "result": {
-    "item": "wario_cap"
+    "item": "mubble:wario_cap"
   }
 }

@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "gold_flower"
+      "item": "mubble:gold_flower"
     }
   ],
   "result": {

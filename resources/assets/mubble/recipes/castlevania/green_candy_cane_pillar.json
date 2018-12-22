@@ -8,7 +8,7 @@
   ],
   "key": {
     "X": {
-      "item": "candy_cane"
+      "item": "mubble:candy_cane"
     },
     "O": {
       "item": "minecraft:dye",
@@ -16,7 +16,7 @@
     }
   },
   "result": {
-    "item": "green_candy_cane_pillar",
+    "item": "mubble:green_candy_cane_pillar",
     "count": 2
   }
 }

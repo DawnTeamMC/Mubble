@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "record_blank"
+      "item": "mubble:record_blank"
     },
     {
-      "item": "noteblock_head"
+      "item": "mubble:noteblock_head"
     },
     {
-      "item": "super_star"
+      "item": "mubble:super_star"
     }
   ],
   "result": {
-    "item": "record_nb_buoy_base_galaxy"
+    "item": "mubble:record_nb_buoy_base_galaxy"
   }
 }

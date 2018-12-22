@@ -7,14 +7,14 @@
   ],
   "key": {
     "X": {
-      "item": "blunite"
+      "item": "mubble:blunite"
     },
     "O": {
       "item": "minecraft:prismarine_crystals"
     }
   },
   "result": {
-    "item": "elder_pebbles",
+    "item": "mubble:elder_pebbles",
     "count": 8
   }
 }

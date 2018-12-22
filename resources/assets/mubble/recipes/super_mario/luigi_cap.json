@@ -10,10 +10,10 @@
       "data": 5
     },
     "O": {
-      "item": "super_star"
+      "item": "mubble:super_star"
     }
   },
   "result": {
-    "item": "luigi_cap"
+    "item": "mubble:luigi_cap"
   }
 }

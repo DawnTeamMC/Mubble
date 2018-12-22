@@ -5,23 +5,23 @@
       "item": "minecraft:bread"
     },
     {
-      "item": "tomato"
+      "item": "mubble:tomato"
     },
     {
-      "item": "cheese"
+      "item": "mubble:cheese"
     },
     {
       "item": "minecraft:cooked_beef"
     },
     {
-      "item": "salad"
+      "item": "mubble:salad"
     },
     {
       "item": "minecraft:bread"
     }
   ],
   "result": {
-    "item": "burger",
+    "item": "mubble:burger",
     "count": 3
   }
 }

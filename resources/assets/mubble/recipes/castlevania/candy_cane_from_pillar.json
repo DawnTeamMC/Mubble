@@ -4,24 +4,24 @@
   "ingredients": [
     [
       {
-        "item": "blue_candy_cane_pillar"
+        "item": "mubble:blue_candy_cane_pillar"
       },
       {
-        "item": "green_candy_cane_pillar"
+        "item": "mubble:green_candy_cane_pillar"
       },
       {
-        "item": "yellow_candy_cane_pillar"
+        "item": "mubble:yellow_candy_cane_pillar"
       },
       {
-        "item": "red_candy_cane_pillar"
+        "item": "mubble:red_candy_cane_pillar"
       },
       {
-        "item": "purple_candy_cane_pillar"
+        "item": "mubble:purple_candy_cane_pillar"
       }
     ]
   ],
   "result": {
-    "item": "candy_cane",
+    "item": "mubble:candy_cane",
     "count": 2
   }
 }

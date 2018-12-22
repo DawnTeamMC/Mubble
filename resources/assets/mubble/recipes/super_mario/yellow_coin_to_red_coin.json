@@ -3,22 +3,22 @@
   "group": "mubble:red_coin",
   "ingredients": [
     {
-      "item": "yellow_coin"
+      "item": "mubble:yellow_coin"
     },
     {
-      "item": "yellow_coin"
+      "item": "mubble:yellow_coin"
     },
     {
-      "item": "yellow_coin"
+      "item": "mubble:yellow_coin"
     },
     {
-      "item": "yellow_coin"
+      "item": "mubble:yellow_coin"
     },
     {
-      "item": "yellow_coin"
+      "item": "mubble:yellow_coin"
     }
   ],
   "result": {
-    "item": "red_coin"
+    "item": "mubble:red_coin"
   }
 }

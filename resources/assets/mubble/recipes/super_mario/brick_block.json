@@ -5,10 +5,10 @@
       "item": "minecraft:brick_block"
     },
     {
-      "item": "yellow_coin"
+      "item": "mubble:yellow_coin"
     }
   ],
   "result": {
-    "item": "brick_block"
+    "item": "mubble:brick_block"
   }
 }

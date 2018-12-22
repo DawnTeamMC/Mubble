@@ -10,7 +10,7 @@
       "item": "minecraft:gold_ingot"
     },
     "O": {
-      "item": "super_mushroom"
+      "item": "mubble:super_mushroom"
     },
     "U": {
       "item": "minecraft:dye",
@@ -18,6 +18,6 @@
     }
   },
   "result": {
-    "item": "super_crown"
+    "item": "mubble:super_crown"
   }
 }

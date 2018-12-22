@@ -6,10 +6,10 @@
   ],
   "key": {
     "X": {
-      "item": "note_block"
+      "item": "mubble:note_block"
     }
   },
   "result": {
-    "item": "super_note_block"
+    "item": "mubble:super_note_block"
   }
 }

@@ -11,11 +11,11 @@
       "data": 4
     },
     "O": {
-      "item": "super_mushroom"
+      "item": "mubble:super_mushroom"
     }
   },
   "result": {
-    "item": "question_block",
+    "item": "mubble:question_block",
     "count": 8
   }
 }

@@ -10,10 +10,10 @@
       "data": 4
     },
     "O": {
-      "item": "yellow_coin"
+      "item": "mubble:yellow_coin"
     }
   },
   "result": {
-    "item": "mayro_cap"
+    "item": "mubble:mayro_cap"
   }
 }

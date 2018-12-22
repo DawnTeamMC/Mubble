@@ -9,10 +9,10 @@
       "item": "minecraft:slime_ball"
     },
     "O": {
-      "item": "super_star"
+      "item": "mubble:super_star"
     }
   },
   "result": {
-    "item": "gooigi_cap"
+    "item": "mubble:gooigi_cap"
   }
 }

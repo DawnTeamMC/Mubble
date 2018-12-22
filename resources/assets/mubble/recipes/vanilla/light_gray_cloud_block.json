@@ -6,11 +6,11 @@
   ],
   "key": {
     "X": {
-      "item": "white_cloud_block"
+      "item": "mubble:white_cloud_block"
     }
   },
   "result": {
-    "item": "light_gray_cloud_block",
+    "item": "mubble:light_gray_cloud_block",
     "count": 4
   }
 }

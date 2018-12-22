@@ -6,13 +6,13 @@
   ],
   "key": {
     "X": {
-      "item": "white_cloud_block"
+      "item": "mubble:white_cloud_block"
     },
     "O": {
-      "item": "super_star"
+      "item": "mubble:super_star"
     }
   },
   "result": {
-    "item": "vanish_cap"
+    "item": "mubble:vanish_cap"
   }
 }

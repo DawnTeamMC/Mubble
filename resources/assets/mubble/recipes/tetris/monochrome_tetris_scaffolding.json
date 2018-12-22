@@ -19,11 +19,11 @@
       "data": 0
     },
     "O": {
-      "item": "vanadium"
+      "item": "mubble:vanadium"
     }
   },
   "result": {
-    "item": "monochrome_tetris_scaffolding",
+    "item": "mubble:monochrome_tetris_scaffolding",
     "count": 4
   }
 }

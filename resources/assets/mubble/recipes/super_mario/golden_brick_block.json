@@ -7,13 +7,13 @@
   ],
   "key": {
     "X": {
-      "item": "yellow_coin"
+      "item": "mubble:yellow_coin"
     },
     "O": {
-      "item": "brick_block"
+      "item": "mubble:brick_block"
     }
   },
   "result": {
-    "item": "golden_brick_block"
+    "item": "mubble:golden_brick_block"
   }
 }

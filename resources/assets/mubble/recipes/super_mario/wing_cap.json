@@ -11,13 +11,13 @@
       "data": 14
     },
     "O": {
-      "item": "super_star"
+      "item": "mubble:super_star"
     },
     "F": {
       "item": "minecraft:feather"
     }
   },
   "result": {
-    "item": "wing_cap"
+    "item": "mubble:wing_cap"
   }
 }

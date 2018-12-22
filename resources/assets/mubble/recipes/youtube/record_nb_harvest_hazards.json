@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "record_blank"
+      "item": "mubble:record_blank"
     },
     {
-      "item": "noteblock_head"
+      "item": "mubble:noteblock_head"
     },
     {
       "item": "minecraft:vine"
     }
   ],
   "result": {
-    "item": "record_nb_harvest_hazards"
+    "item": "mubble:record_nb_harvest_hazards"
   }
 }

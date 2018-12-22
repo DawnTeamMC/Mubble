@@ -10,10 +10,10 @@
       "data": 14
     },
     "O": {
-      "item": "super_star"
+      "item": "mubble:super_star"
     }
   },
   "result": {
-    "item": "cappy"
+    "item": "mubble:cappy"
   }
 }

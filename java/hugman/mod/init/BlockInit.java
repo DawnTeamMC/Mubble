@@ -100,10 +100,21 @@ public class BlockInit
 	public static final Block MEDUSA_BRICKS = new BlockBase("medusa_bricks", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block MEDUSA_BRICKS_STAIRS = new BlockStairs("medusa_brick", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block BLUE_CANDY_CANE_PILLAR = new BlockPillar("blue_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block LIGHT_BLUE_CANDY_CANE_PILLAR = new BlockPillar("light_blue_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block CYAN_CANDY_CANE_PILLAR = new BlockPillar("cyan_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block GREEN_CANDY_CANE_PILLAR = new BlockPillar("green_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block LIME_CANDY_CANE_PILLAR = new BlockPillar("lime_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block YELLOW_CANDY_CANE_PILLAR = new BlockPillar("yellow_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block ORANGE_CANDY_CANE_PILLAR = new BlockPillar("orange_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block RED_CANDY_CANE_PILLAR = new BlockPillar("red_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block PINK_CANDY_CANE_PILLAR = new BlockPillar("pink_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block MAGENTA_CANDY_CANE_PILLAR = new BlockPillar("magenta_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	public static final Block PURPLE_CANDY_CANE_PILLAR = new BlockPillar("purple_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block BROWN_CANDY_CANE_PILLAR = new BlockPillar("brown_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block WHITE_CANDY_CANE_PILLAR = new BlockPillar("white_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block LIGHT_GRAY_CANDY_CANE_PILLAR = new BlockPillar("light_gray_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block GRAY_CANE_PILLAR = new BlockPillar("gray_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
+	public static final Block BLACK_CANDY_CANE_PILLAR = new BlockPillar("black_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	
 	// SONIC
 	public static final Block YELLOW_STUDIOPOLIS_CLAPPER = new BlockDirectional("yellow_studiopolis_clapper", Material.IRON, 5f, 30f, SoundType.METAL);

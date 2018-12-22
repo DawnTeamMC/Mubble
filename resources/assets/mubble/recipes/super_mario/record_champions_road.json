@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "record_blank"
+      "item": "mubble:record_blank"
     },
     {
-      "item": "super_star"
+      "item": "mubble:super_star"
     }
   ],
   "result": {
-    "item": "record_champions_road"
+    "item": "mubble:record_champions_road"
   }
 }

@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "wheat_flour"
+      "item": "mubble:wheat_flour"
     }
   },
   "result": {
-    "item": "crepe"
+    "item": "mubble:crepe"
   }
 }

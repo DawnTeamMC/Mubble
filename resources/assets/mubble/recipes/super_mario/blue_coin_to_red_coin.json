@@ -3,11 +3,11 @@
   "group": "mubble:red_coin",
   "ingredients": [
     {
-      "item": "blue_coin"
+      "item": "mubble:blue_coin"
     }
   ],
   "result": {
-    "item": "red_coin",
+    "item": "mubble:red_coin",
     "count": 2
   }
 }

@@ -6,11 +6,11 @@
   ],
   "key": {
     "X": {
-      "item": "carbonite"
+      "item": "mubble:carbonite"
     }
   },
   "result": {
-    "item": "polished_carbonite",
+    "item": "mubble:polished_carbonite",
     "count": 4
   }
 }

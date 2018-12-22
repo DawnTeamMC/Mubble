@@ -6,11 +6,11 @@
   ],
   "key": {
     "X": {
-      "item": "blunite"
+      "item": "mubble:blunite"
     }
   },
   "result": {
-    "item": "polished_blunite",
+    "item": "mubble:polished_blunite",
     "count": 4
   }
 }

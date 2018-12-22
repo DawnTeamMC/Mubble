@@ -7,10 +7,10 @@
   ],
   "key": {
     "X": {
-      "item": "vanadium"
+      "item": "mubble:vanadium"
     }
   },
   "result": {
-    "item": "vanadium_block"
+    "item": "mubble:vanadium_block"
   }
 }

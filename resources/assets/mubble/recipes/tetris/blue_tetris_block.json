@@ -12,11 +12,11 @@
       "data": 11
     },
     "O": {
-      "item": "vanadium"
+      "item": "mubble:vanadium"
     }
   },
   "result": {
-    "item": "blue_tetris_block",
+    "item": "mubble:blue_tetris_block",
     "count": 8
   }
 }

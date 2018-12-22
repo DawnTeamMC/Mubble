@@ -6,11 +6,11 @@
   ],
   "key": {
     "X": {
-      "item": "medusa_stone"
+      "item": "mubble:medusa_stone"
     }
   },
   "result": {
-    "item": "medusa_bricks",
+    "item": "mubble:medusa_bricks",
     "count": 4
   }
 }

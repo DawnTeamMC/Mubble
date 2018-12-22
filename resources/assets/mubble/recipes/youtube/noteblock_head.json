@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "headphones"
+      "item": "mubble:headphones"
     },
     {
-      "item": "note_block"
+      "item": "mubble:note_block"
     }
   ],
   "result": {
-    "item": "noteblock_head"
+    "item": "mubble:noteblock_head"
   }
 }

@@ -6,10 +6,10 @@
       "data": 3
     },
     {
-      "item": "crepe"
+      "item": "mubble:crepe"
     }
   ],
   "result": {
-    "item": "chocolate_crepe"
+    "item": "mubble:chocolate_crepe"
   }
 }

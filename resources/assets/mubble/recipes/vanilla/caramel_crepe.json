@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "caramel_cube"
+      "item": "mubble:caramel_cube"
     },
     {
-      "item": "crepe"
+      "item": "mubble:crepe"
     }
   ],
   "result": {
-    "item": "caramel_crepe"
+    "item": "mubble:caramel_crepe"
   }
 }

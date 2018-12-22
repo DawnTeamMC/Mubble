@@ -11,11 +11,11 @@
       "data": 14
     },
     "O": {
-      "item": "vanadium"
+      "item": "mubble:vanadium"
     }
   },
   "result": {
-    "item": "japanese_tetris_cushion",
+    "item": "mubble:japanese_tetris_cushion",
     "count": 8
   }
 }

@@ -27,11 +27,11 @@
       "data": 14
     },
     "O": {
-      "item": "vanadium"
+      "item": "mubble:vanadium"
     }
   },
   "result": {
-    "item": "rainbow_tetris_scaffolding",
+    "item": "mubble:rainbow_tetris_scaffolding",
     "count": 4
   }
 }

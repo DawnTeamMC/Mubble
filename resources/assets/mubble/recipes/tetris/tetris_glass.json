@@ -10,11 +10,11 @@
       "item": "minecraft:glass"
     },
     "O": {
-      "item": "vanadium"
+      "item": "mubble:vanadium"
     }
   },
   "result": {
-    "item": "tetris_glass",
+    "item": "mubble:tetris_glass",
     "count": 8
   }
 }
