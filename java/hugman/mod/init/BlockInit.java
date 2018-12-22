@@ -56,6 +56,7 @@ public class BlockInit
 	public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
 	public static final Block TOMATO = new BlockCrops("tomato", ItemInit.TOMATO);
 	public static final Block SALAD = new BlockCrops("salad", ItemInit.SALAD);
+	public static final Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.CLOTH, 0.5f, 2f, SoundType.SNOW);
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();

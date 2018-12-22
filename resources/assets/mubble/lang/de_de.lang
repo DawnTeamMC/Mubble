@@ -27,6 +27,7 @@ tile.white_cloud_block.name=Weiße Wolkenblock
 //tile.black_cloud_block.name=<newline>
 //tile.tomato.name=<newline>
 //tile.salad.name=<newline>
+//tile.cheese_block.name=<newline>
 
 tile.question_block.name=? Block
 tile.empty_block.name=Leerer Block

@@ -27,6 +27,7 @@ tile.gray_cloud_block.name=Bloque de nube gris
 tile.black_cloud_block.name=Bloque de nube negra
 //tile.tomato.name=<newline>
 //tile.salad.name=<newline>
+//tile.cheese_block.name=<newline>
 
 tile.question_block.name=Bloque ?
 tile.empty_block.name=Bloque vacío

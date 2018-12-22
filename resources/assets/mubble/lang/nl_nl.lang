@@ -27,6 +27,7 @@ tile.gray_cloud_block.name=Grijzewolkblok
 tile.black_cloud_block.name=Zwartewolkblok
 tile.tomato.name=Tomaten
 tile.salad.name=Salade
+//tile.cheese_block.name=<newline>
 
 tile.question_block.name=?-blok
 tile.empty_block.name=Leeg blok

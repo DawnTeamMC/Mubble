@@ -27,6 +27,7 @@ tile.footblock.name=足球塊
 //tile.black_cloud_block.name=<newline>
 //tile.tomato.name=<newline>
 //tile.salad.name=<newline>
+//tile.cheese_block.name=<newline>
 
 tile.question_block.name=問號塊
 tile.empty_block.name=鋼塊
