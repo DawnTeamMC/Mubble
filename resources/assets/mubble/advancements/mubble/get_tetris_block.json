@@ -32,12 +32,32 @@
                 ]
             }
         },
+        "has_cyan_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:cyan_tetris_block"
+                    }
+                ]
+            }
+        },
         "has_green_tetris_block": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
                 "items": [
                     {
                         "item": "mubble:green_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_lime_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:lime_tetris_block"
                     }
                 ]
             }
@@ -82,6 +102,56 @@
                 ]
             }
         },
+        "has_magenta_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:magenta_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_purple_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:purple_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_brown_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:brown_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_white_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:white_tetris_block"
+                    }
+                ]
+            }
+        },
+        "has_light_gray_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:light_gray_tetris_block"
+                    }
+                ]
+            }
+        },
         "has_gray_tetris_block": {
             "trigger": "minecraft:inventory_changed",
             "conditions": {
@@ -91,18 +161,36 @@
                     }
                 ]
             }
+        },
+        "has_black_tetris_block": {
+            "trigger": "minecraft:inventory_changed",
+            "conditions": {
+                "items": [
+                    {
+                        "item": "mubble:black_tetris_block"
+                    }
+                ]
+            }
         }
 	},
     "requirements": [
         [
             "has_blue_tetris_block",
             "has_light_blue_tetris_block",
+            "has_cyan_tetris_block",
             "has_green_tetris_block",
+            "has_lime_tetris_block",
             "has_yellow_tetris_block",
             "has_orange_tetris_block",
             "has_red_tetris_block",
             "has_pink_tetris_block",
-            "has_gray_tetris_block"
+            "has_magenta_tetris_block",
+            "has_purple_tetris_block",
+            "has_brown_tetris_block",
+            "has_white_tetris_block",
+            "has_light_gray_tetris_block",
+            "has_gray_tetris_block",
+            "has_black_tetris_block"
         ]
     ]
 }

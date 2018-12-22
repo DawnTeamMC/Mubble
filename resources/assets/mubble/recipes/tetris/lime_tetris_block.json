@@ -9,14 +9,14 @@
   "key": {
     "X": {
       "item": "minecraft:concrete",
-      "data": 13
+      "data": 5
     },
     "O": {
       "item": "mubble:vanadium"
     }
   },
   "result": {
-    "item": "mubble:green_tetris_block",
+    "item": "mubble:lime_tetris_block",
     "count": 8
   }
 }
