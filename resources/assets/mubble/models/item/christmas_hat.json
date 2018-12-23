@@ -5,8 +5,8 @@
 	},
 	"elements": [
 		{
-			"from": [6, 17, -1],
-			"to": [11, 21, 3],
+			"from": [5.5, 17, -1],
+			"to": [10.5, 21, 3],
 			"rotation": {"angle": -22.5, "axis": "x", "origin": [8, 8, 8]},
 			"faces": {
 				"north": {"uv": [4, 0, 9, 4], "rotation": 180, "texture": "#white_wool"},
