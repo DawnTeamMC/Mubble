@@ -93,6 +93,8 @@ tile.purple_candy_cane_pillar.name=Lila Zuckerstangensäule
 //tile.gray_candy_cane_pillar.name=<newline>
 //tile.black_candy_cane_pillar.name=<newline>
 
+//tile.green_hill_grass_block.name=<newline>
+//tile.green_hill_dirt.name=<newline>
 //tile.yellow_studiopolis_clapper.name=<newline>
 //tile.blue_studiopolis_clapper.name=<newline>
 
@@ -131,6 +133,25 @@ item.super_star.name=Super Stern
 item.yellow_coin.name=Gelbe Münze
 item.red_coin.name=Rote Münze
 item.blue_coin.name=Blaue Münze
+
+item.smash_ball.name=Smash Ball
+
+//item.annoying_dog.name=<newline>
+
+item.record_blank.name=Leere Schallplatte
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
+
+--- COSTUMES ---
+item.headphones.name=Kopfhörer
+//item.christmas_hat.name=<newline>
+
 item.cappy.name=Cappy
 item.luigi_cap.name=Luigi-Mütze
 item.wario_cap.name=Wario-Mütze
@@ -140,33 +161,19 @@ item.wing_cap.name=Wing-Mütze
 item.gooigi_cap.name=Gooigi's Mütze
 item.princess_peach_crown.name=Prinzessin Peach's Krone
 item.princess_daisy_crown.name=Prinzessin Daisy's Krone
+//item.rosalina_crown.name=<newline>
 item.pink_gold_peach_crown.name=Rosagold-Peach's Krone
 item.super_crown.name=Super Krone
-//item.rosalina_crown.name=<newline>
 //item.broque_monsieur_head.name=<newline>
 
 item.bandana.name=Kopftuch
 
 //item.top_hat.name=<newline>
 
-item.smash_ball.name=Smash Ball
-
-//item.annoying_dog.name=<newline>
-
 //item.ralsei_hat.name=<newline>
-
-item.headphones.name=Kopfhörer
-item.record_blank.name=Leere Schallplatte
-item.record.champions_road.desc=Super Mario 3D World - Champion's Road
-item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
-item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
 item.mayro_cap.name=Mayro's Mütze
 item.noteblock_head.name=NoteBlock's Kopf
-item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
-item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
-item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
-item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
 
 --- ENTITIES ---
 entity.toad.name=Toad

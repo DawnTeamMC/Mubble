@@ -93,6 +93,8 @@ tile.light_gray_candy_cane_pillar.name=Lichtgrijze zuurstokpillaar
 tile.gray_candy_cane_pillar.name=Grijze zuurstokpillaar
 tile.black_candy_cane_pillar.name=Zwarte zuurstokpillaar
 
+//tile.green_hill_grass_block.name=<newline>
+//tile.green_hill_dirt.name=<newline>
 tile.yellow_studiopolis_clapper.name=Gele studiopolisklepel
 tile.blue_studiopolis_clapper.name=Blauwe studiopolisklepel
 
@@ -131,6 +133,25 @@ item.super_star.name=Super ster
 item.yellow_coin.name=Gele munt
 item.red_coin.name=Rode munt
 item.blue_coin.name=Blauwe munt
+
+item.smash_ball.name=Smash bal
+
+item.annoying_dog.name=Iritante hond
+
+item.record_blank.name=Blanke muziekplaat
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
+
+--- COSTUMES ---
+item.headphones.name=Koptelefoon
+//item.christmas_hat.name=<newline>
+
 item.cappy.name=Cappy
 item.luigi_cap.name=Luigi's pet
 item.wario_cap.name=Wario's pet
@@ -140,33 +161,19 @@ item.wing_cap.name=Vleugel pet
 item.gooigi_cap.name=Gooigi's pet
 item.princess_peach_crown.name=Prinses Peach's kroon
 item.princess_daisy_crown.name=Prinses Daisy's kroon
+item.rosalina_crown.name=Rosaline's kroon
 item.pink_gold_peach_crown.name=Rozegouden Peach's kroon
 item.super_crown.name=Superkroon
-item.rosalina_crown.name=Rosaline's kroon
 item.broque_monsieur_head.name=Broque Monsieur's hoofd
 
 item.bandana.name=Bandana
 
 item.top_hat.name=Hoge hoed
 
-item.smash_ball.name=Smash bal
-
-item.annoying_dog.name=Iritante hond
-
 item.ralsei_hat.name=Ralsei's hoed
-
-item.headphones.name=Koptelefoon
-item.record_blank.name=Blanke muziekplaat
-item.record.champions_road.desc=Super Mario 3D World - Champion's Road
-item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
-item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
 item.mayro_cap.name=Mayro's pet
 item.noteblock_head.name=NoteBlock's hooft
-item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
-item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
-item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
-item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
 
 --- ENTITIES ---
 entity.toad.name=Toad

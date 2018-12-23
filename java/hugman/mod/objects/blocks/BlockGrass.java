@@ -2,7 +2,9 @@ package hugman.mod.objects.blocks;
 
 import java.util.Random;
 
+import hugman.mod.init.BlockInit;
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.IGrowable;
@@ -22,6 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGrass extends BlockBase implements IHasModel, IGrowable
 {
+	
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
@@ -51,12 +54,14 @@ public class BlockGrass extends BlockBase implements IHasModel, IGrowable
 	@Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
+		Block dirt = Blocks.DIRT;
+		if(this == BlockInit.GREEN_HILL_GRASS_BLOCK) dirt = BlockInit.GREEN_HILL_DIRT;
         if (!worldIn.isRemote)
         {
             if (!worldIn.isAreaLoaded(pos, 3)) return;
             if (worldIn.getLightFromNeighbors(pos.up()) < 4 && worldIn.getBlockState(pos.up()).getLightOpacity(worldIn, pos.up()) > 2)
             {
-                worldIn.setBlockState(pos, Blocks.DIRT.getDefaultState());
+                worldIn.setBlockState(pos, dirt.getDefaultState());
             }
             else
             {
@@ -74,7 +79,7 @@ public class BlockGrass extends BlockBase implements IHasModel, IGrowable
                         IBlockState iblockstate = worldIn.getBlockState(blockpos.up());
                         IBlockState iblockstate1 = worldIn.getBlockState(blockpos);
 
-                        if (iblockstate1.getBlock() == Blocks.DIRT && iblockstate1.getValue(BlockDirt.VARIANT) == BlockDirt.DirtType.DIRT && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
+                        if (iblockstate1.getBlock() == dirt && worldIn.getLightFromNeighbors(blockpos.up()) >= 4 && iblockstate.getLightOpacity(worldIn, pos.up()) <= 2)
                         {
                             worldIn.setBlockState(blockpos, this.getDefaultState());
                         }
@@ -87,7 +92,9 @@ public class BlockGrass extends BlockBase implements IHasModel, IGrowable
 	@Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        return Blocks.DIRT.getItemDropped(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), rand, fortune);
+		Block dirt = Blocks.DIRT;
+		if(this == BlockInit.GREEN_HILL_GRASS_BLOCK) dirt = BlockInit.GREEN_HILL_DIRT;
+        return dirt.getItemDropped(dirt.getDefaultState(), rand, fortune);
     }
     
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)

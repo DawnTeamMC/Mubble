@@ -9,6 +9,7 @@ import hugman.mod.objects.blocks.BlockBrick;
 import hugman.mod.objects.blocks.BlockCloud;
 import hugman.mod.objects.blocks.BlockCrops;
 import hugman.mod.objects.blocks.BlockDirectional;
+import hugman.mod.objects.blocks.BlockDirt;
 import hugman.mod.objects.blocks.BlockFallingGlass;
 import hugman.mod.objects.blocks.BlockFlower;
 import hugman.mod.objects.blocks.BlockGrass;
@@ -127,11 +128,13 @@ public class BlockInit
 	public static final Block BLACK_CANDY_CANE_PILLAR = new BlockPillar("black_candy_cane_pillar", Material.ROCK, 1.2f, 15f, SoundType.SNOW);
 	
 	// SONIC
+	public static final Block GREEN_HILL_GRASS_BLOCK = new BlockGrass("green_hill_grass_block", Material.GROUND, 0.6f, 3f, SoundType.PLANT);
+	public static final Block GREEN_HILL_DIRT = new BlockDirt("green_hill_dirt", Material.GROUND, 0.5f, 2.5f, SoundType.GROUND);
 	public static final Block YELLOW_STUDIOPOLIS_CLAPPER = new BlockDirectional("yellow_studiopolis_clapper", Material.IRON, 5f, 30f, SoundType.METAL);
 	public static final Block BLUE_STUDIOPOLIS_CLAPPER = new BlockDirectional("blue_studiopolis_clapper", Material.IRON, 5f, 30f, SoundType.METAL);
 	
 	// DELTARUNE
-	public static final Block SCARLET_GRASS_BLOCK = new BlockGrass("scarlet_grass_block", Material.GRASS, 0.6f, 3f, SoundType.PLANT);
+	public static final Block SCARLET_GRASS_BLOCK = new BlockGrass("scarlet_grass_block", Material.GROUND, 0.6f, 3f, SoundType.PLANT);
 	public static final Block SCARLET_MUSHROOM = new BlockMushroom("scarlet", 7);
 	public static final Block SCARLET_ORCHID = new BlockFlower("scarlet_orchid", 7);
 

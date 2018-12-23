@@ -93,6 +93,8 @@ tile.light_gray_candy_cane_pillar.name=Pilier de sucre d'orge gris clair
 tile.gray_candy_cane_pillar.name=Pilier de sucre d'orge gris
 tile.black_candy_cane_pillar.name=Pilier de sucre d'orge noir
 
+//tile.green_hill_grass_block.name=<newline>
+//tile.green_hill_dirt.name=<newline>
 tile.yellow_studiopolis_clapper.name=Clap jaune de Studiopolis
 tile.blue_studiopolis_clapper.name=Clap bleu de Studiopolis
 
@@ -131,6 +133,25 @@ item.super_star.name=Super étoile
 item.yellow_coin.name=Pièce jaune
 item.red_coin.name=Pièce rouge
 item.blue_coin.name=Pièce bleue
+
+item.smash_ball.name=Balle Smash
+
+item.annoying_dog.name=Chien Agaçant
+
+item.record_blank.name=Disque vide
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
+
+--- COSTUMES ---
+item.headphones.name=Casque audio
+//item.christmas_hat.name=<newline>
+
 item.cappy.name=Cappy
 item.luigi_cap.name=Casquette de Luigi
 item.wario_cap.name=Casquette de Wario
@@ -140,33 +161,19 @@ item.wing_cap.name=Casquette ailée
 item.gooigi_cap.name=Casquette de Gooigi
 item.princess_peach_crown.name=Couronne de la Princesse Peach
 item.princess_daisy_crown.name=Couronne de la Princesse Daisy
+item.rosalina_crown.name=Couronne d'Harmonie
 item.pink_gold_peach_crown.name=Couronne de Peach d'or rose
 item.super_crown.name=Super couronne
-item.rosalina_crown.name=Couronne d'Harmonie
 item.broque_monsieur_head.name=Tête de Charlie Bloc
 
 item.bandana.name=Bandana
 
 item.top_hat.name=Haut-de-forme
 
-item.smash_ball.name=Balle Smash
-
-item.annoying_dog.name=Chien Agaçant
-
 item.ralsei_hat.name=Chapeau de Ralsei
-
-item.headphones.name=Casque audio
-item.record_blank.name=Disque vide
-item.record.champions_road.desc=Super Mario 3D World - Champion's Road
-item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
-item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
 item.mayro_cap.name=Casquette de Mayro
 item.noteblock_head.name=Tête de NoteBlock
-item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
-item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
-item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
-item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
 
 --- ENTITIES ---
 entity.toad.name=Toad

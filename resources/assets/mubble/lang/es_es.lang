@@ -93,6 +93,8 @@ tile.purple_candy_cane_pillar.name=Pilar de bastón de caramelo morado
 //tile.gray_candy_cane_pillar.name=<newline>
 //tile.black_candy_cane_pillar.name=<newline>
 
+//tile.green_hill_grass_block.name=<newline>
+//tile.green_hill_dirt.name=<newline>
 //tile.yellow_studiopolis_clapper.name=<newline>
 //tile.blue_studiopolis_clapper.name=<newline>
 
@@ -131,6 +133,25 @@ item.super_star.name=Superestrella
 item.yellow_coin.name=Moneda amarilla
 item.red_coin.name=Moneda roja
 item.blue_coin.name=Moneda azul
+
+item.smash_ball.name=Bola Smash
+
+//item.annoying_dog.name=Perro molesto
+
+item.record_blank.name=Disco en blanco
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
+
+--- COSTUMES ---
+item.headphones.name=Cascos
+//item.christmas_hat.name=<newline>
+
 item.cappy.name=Cappy
 item.luigi_cap.name=Gorra de Luigi
 item.wario_cap.name=Gorra de Wario
@@ -140,33 +161,19 @@ item.wing_cap.name=Wing cap
 item.gooigi_cap.name=Gorra de Gooigi
 item.princess_peach_crown.name=Corona de la Princesa Peach
 item.princess_daisy_crown.name=Corona de la Princesa Daisy
+//item.rosalina_crown.name=<newline>
 item.pink_gold_peach_crown.name=Corona de Peach de oro rosa
 item.super_crown.name=Supercorona
-//item.rosalina_crown.name=<newline>
 //item.broque_monsieur_head.name=<newline>
 
 item.bandana.name=Pañuelo
 
 //item.top_hat.name=<newline>
 
-item.smash_ball.name=Bola Smash
-
-//item.annoying_dog.name=Perro molesto
-
 item.ralsei_hat.name=Sombrero de Ralsei
-
-item.headphones.name=Cascos
-item.record_blank.name=Disco en blanco
-item.record.champions_road.desc=Super Mario 3D World - Champion's Road
-item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
-item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
 
 item.mayro_cap.name=Gorra de Mayro
 item.noteblock_head.name=Cabeza de NoteBlock
-item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
-item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
-item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
-item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
 
 --- ENTITIES ---
 entity.toad.name=Toad
