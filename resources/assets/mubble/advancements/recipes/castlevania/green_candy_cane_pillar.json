@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "mubble:castlevania/green_candy_cane_pillar"
+        "recipe":"mubble:castlevania/green_candy_cane_pillar"
       }
     }
   },

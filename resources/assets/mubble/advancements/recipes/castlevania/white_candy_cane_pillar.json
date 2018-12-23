@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "mubble:castlevania/red_candy_cane_pillar"
+      "mubble:castlevania/white_candy_cane_pillar"
     ]
   },
   "criteria": {
@@ -19,7 +19,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe":"mubble:castlevania/red_candy_cane_pillar"
+        "recipe":"mubble:castlevania/white_candy_cane_pillar"
       }
     }
   },

@@ -12,11 +12,11 @@
     },
     "O": {
       "item": "minecraft:dye",
-      "data": 2
+      "data": 7
     }
   },
   "result": {
-    "item": "mubble:green_candy_cane_pillar",
+    "item": "mubble:light_gray_candy_cane_pillar",
     "count": 2
   }
 }
