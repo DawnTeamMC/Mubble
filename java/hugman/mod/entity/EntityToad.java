@@ -56,7 +56,7 @@ public class EntityToad extends EntityAnimal
     
     @Override
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
-        this.setColor(this.world.rand.nextInt(5));
+        this.setColor(this.world.rand.nextInt(16));
         return super.onInitialSpawn(difficulty, livingdata);
     }
 
@@ -138,11 +138,22 @@ public class EntityToad extends EntityAnimal
     @Override
     protected ResourceLocation getLootTable() 
     {
-        if(this.getColor() == 0) return LootTableHandler.RED_TOAD;
-        if(this.getColor() == 1) return LootTableHandler.BLUE_TOAD;
-        if(this.getColor() == 2) return LootTableHandler.GREEN_TOAD;
-        if(this.getColor() == 3) return LootTableHandler.YELLOW_TOAD;
-        if(this.getColor() == 4) return LootTableHandler.PURPLE_TOAD;
+    	if(this.getColor()==0) return LootTableHandler.BLUE_TOAD;
+    	if(this.getColor()==1) return LootTableHandler.LIGHT_BLUE_TOAD;
+    	if(this.getColor()==2) return LootTableHandler.CYAN_TOAD;
+    	if(this.getColor()==3) return LootTableHandler.GREEN_TOAD;
+    	if(this.getColor()==4) return LootTableHandler.LIME_TOAD;
+    	if(this.getColor()==5) return LootTableHandler.YELLOW_TOAD;
+    	if(this.getColor()==6) return LootTableHandler.ORANGE_TOAD;
+    	if(this.getColor()==7) return LootTableHandler.RED_TOAD;
+    	if(this.getColor()==8) return LootTableHandler.PINK_TOAD;
+    	if(this.getColor()==9) return LootTableHandler.MAGENTA_TOAD;
+    	if(this.getColor()==10) return LootTableHandler.PURPLE_TOAD;
+    	if(this.getColor()==11) return LootTableHandler.BROWN_TOAD;
+    	if(this.getColor()==12) return LootTableHandler.WHITE_TOAD;
+    	if(this.getColor()==13) return LootTableHandler.LIGHT_GRAY_TOAD;
+    	if(this.getColor()==14) return LootTableHandler.GRAY_TOAD;
+    	if(this.getColor()==15) return LootTableHandler.BLACK_TOAD;
         if(this.getColor() == 100) return LootTableHandler.CAPTAIN_TOAD;
         if(this.getColor() == 101) return LootTableHandler.HINT_TOAD;
         if(this.getColor() == 102) return LootTableHandler.BANKTOAD;
