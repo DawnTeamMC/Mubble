@@ -10,6 +10,7 @@ import hugman.mod.objects.blocks.BlockCloud;
 import hugman.mod.objects.blocks.BlockCrops;
 import hugman.mod.objects.blocks.BlockDirectional;
 import hugman.mod.objects.blocks.BlockDirt;
+import hugman.mod.objects.blocks.BlockEmpty;
 import hugman.mod.objects.blocks.BlockFallingGlass;
 import hugman.mod.objects.blocks.BlockFlower;
 import hugman.mod.objects.blocks.BlockGrass;
@@ -62,7 +63,7 @@ public class BlockInit
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();
-	public static final Block EMPTY_BLOCK = new BlockBase("empty_block", Material.IRON, 1.5f, 30f, SoundTypeInit.EMPTY_BLOCK);
+	public static final Block EMPTY_BLOCK = new BlockEmpty();
 	public static final Block ROTATING_BLOCK = new BlockRotating();
 	public static final Block LIGHT_BLOCK = new BlockBase("light_block", Material.ROCK, 1.5f, 30f, SoundType.STONE, 15);
 	public static final Block BRICK_BLOCK = new BlockBrick("brick_block");
