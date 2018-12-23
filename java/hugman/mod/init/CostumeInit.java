@@ -24,6 +24,7 @@ public class CostumeInit
 	
 	// VANILLA
 	public static final Item HEADPHONES = new CostumeHeadBase("headphones", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+	public static final Item CHRISTMAS_HAT = new CostumeHeadBase("christmas_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	
 	// SUPER MARIO
 	public static final Item CAPPY = new CostumeCappy();
