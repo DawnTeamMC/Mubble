@@ -1,7 +1,10 @@
 {
     "variants": {
-        "normal": {
-   			"model": "mubble:scarlet_grass_block"
-    	}
+        "normal": [
+        	{ "model": "mubble:scarlet_grass_block" },
+        	{ "model": "mubble:scarlet_grass_block", "y": 90 },
+        	{ "model": "mubble:scarlet_grass_block", "y": 180 },
+        	{ "model": "mubble:scarlet_grass_block", "y": 270 }
+    	]
     }
 }

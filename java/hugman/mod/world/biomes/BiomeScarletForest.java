@@ -3,7 +3,9 @@ package hugman.mod.world.biomes;
 import java.util.Random;
 
 import hugman.mod.init.BlockInit;
+import hugman.mod.world.gen.WorldGenCustomGrassPlant;
 import net.minecraft.block.BlockFlower;
+import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -14,6 +16,7 @@ import net.minecraft.world.biome.BiomeForest;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenBigMushroom;
 import net.minecraft.world.gen.feature.WorldGenCanopyTree;
+import net.minecraft.world.gen.feature.WorldGenTallGrass;
 
 public class BiomeScarletForest extends Biome 
 {
@@ -28,7 +31,8 @@ public class BiomeScarletForest extends Biome
 
 		this.decorator.treesPerChunk = -999;
         this.decorator.treesPerChunk = 10;
-        this.decorator.grassPerChunk = 2;
+        this.decorator.grassPerChunk = 0;
+        this.decorator.flowersPerChunk = 0;
 	}
 	
     @Override
@@ -43,7 +47,7 @@ public class BiomeScarletForest extends Biome
     	return ROOF_TREE;
     }
     
-    public void addFlowers(World worldIn, Random rand1, BlockPos posIn)
+    public void addFlowersAndMushrooms(World worldIn, Random rand1, BlockPos posIn)
     {
         IBlockState orchid = BlockInit.SCARLET_ORCHID.getDefaultState();
         IBlockState mushroom = BlockInit.SCARLET_MUSHROOM.getDefaultState();
@@ -54,10 +58,10 @@ public class BiomeScarletForest extends Biome
                 int x = i * 4 + 1 + 8 + rand1.nextInt(3);
                 int z = j * 4 + 1 + 8 + rand1.nextInt(3);
                 BlockPos blockPos = worldIn.getHeight(posIn.add(x, 0, z));
-                int flowerType = rand1.nextInt(4);
+                int mushroomType = rand1.nextInt(4);
                 if(worldIn.getBlockState(blockPos.down()).getBlock() == BlockInit.SCARLET_GRASS_BLOCK || worldIn.getBlockState(blockPos.down()).getBlock() == Blocks.DIRT)
                 {
-                	switch (flowerType)
+                	switch (mushroomType)
                     {
                       case 0:
                     	  worldIn.setBlockState(blockPos, orchid);
@@ -72,10 +76,38 @@ public class BiomeScarletForest extends Biome
         }
     }
     
+    public void addGrass(World worldIn, Random rand, BlockPos posIn)
+    {
+        IBlockState grass = BlockInit.SCARLET_GRASS.getDefaultState();
+        for (IBlockState iblockstate = worldIn.getBlockState(posIn); (iblockstate.getBlock().isAir(iblockstate, worldIn, posIn) || iblockstate.getBlock().isLeaves(iblockstate, worldIn, posIn)) && posIn.getY() > 0; iblockstate = worldIn.getBlockState(posIn))
+        {
+        	posIn = posIn.down();
+        }
+
+        for (int a = 0; a < 128; ++a)
+        {
+            for (int i = 0; i < 2; ++i)
+            {
+                for (int j = 0; j < 2; ++j)
+                {
+                	int x = i * 4 + 1 + 8 + rand.nextInt(3);
+                    int z = j * 4 + 1 + 8 + rand.nextInt(3);
+                    BlockPos blockPos = worldIn.getHeight(posIn.add(x, 0, z));
+
+                    if (worldIn.isAirBlock(blockPos) && Blocks.TALLGRASS.canBlockStay(worldIn, blockPos, grass))
+                    {
+                        worldIn.setBlockState(blockPos, grass, 2);
+                    }
+                }
+            }
+        }
+    }
+    
     @Override
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
-        this.addFlowers(worldIn, rand, pos);
+        this.addFlowersAndMushrooms(worldIn, rand, pos);
+        this.addGrass(worldIn, rand, pos);
         super.decorate(worldIn, rand, pos);
     }
 }

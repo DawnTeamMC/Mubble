@@ -14,6 +14,7 @@ import hugman.mod.objects.blocks.BlockEmpty;
 import hugman.mod.objects.blocks.BlockFallingGlass;
 import hugman.mod.objects.blocks.BlockFlower;
 import hugman.mod.objects.blocks.BlockGrass;
+import hugman.mod.objects.blocks.BlockGrassPlant;
 import hugman.mod.objects.blocks.BlockHugeMushroom;
 import hugman.mod.objects.blocks.BlockMushroom;
 import hugman.mod.objects.blocks.BlockNote;
@@ -136,6 +137,7 @@ public class BlockInit
 	
 	// DELTARUNE
 	public static final Block SCARLET_GRASS_BLOCK = new BlockGrass("scarlet_grass_block", Material.GROUND, 0.6f, 3f, SoundType.PLANT);
+	public static final Block SCARLET_GRASS = new BlockGrassPlant("scarlet_grass");
 	public static final Block SCARLET_MUSHROOM = new BlockMushroom("scarlet", 7);
 	public static final Block SCARLET_ORCHID = new BlockFlower("scarlet_orchid", 7);
 

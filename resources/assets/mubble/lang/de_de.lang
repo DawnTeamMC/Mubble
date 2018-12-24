@@ -99,6 +99,7 @@ tile.yellow_studiopolis_clapper.name=Gelbe Studiopolis-Filmklappe
 tile.blue_studiopolis_clapper.name=Blaue Studiopolis-Filmklappe
 
 tile.scarlet_grass_block.name=Scharlachroter Grassblock
+//tile.scarlet_grass.name=<newline>
 tile.scarlet_mushroom.name=Scharlachroter Pilz
 tile.scarlet_orchid.name=Scharlachrote Orchidee
 
