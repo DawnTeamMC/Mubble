@@ -114,10 +114,9 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
     		return CROPS_AABB[((Integer)state.getValue(this.getAgeProperty())).intValue()];
     	}
     }
-    
+
 	@Override
-	public void registerModels()
-	{
-		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+	public void registerModels() {
+		return;
 	}
 }

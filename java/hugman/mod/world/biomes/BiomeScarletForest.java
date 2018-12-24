@@ -72,49 +72,29 @@ public class BiomeScarletForest extends Biome
     public void addGrass(World worldIn, Random rand1, BlockPos posIn)
     {
     	IBlockState grass = BlockInit.SCARLET_GRASS.getDefaultState();
-        for (int i = 0; i < 2; ++i)
-        {
-            for (int j = 0; j < 2; ++j)
-            {
-                int x = i * 4 + 1 + 8 + rand1.nextInt(3);
-                int z = j * 4 + 1 + 8 + rand1.nextInt(3);
-                BlockPos blockPos = worldIn.getHeight(posIn.add(x, 0, z));
-                if(worldIn.getBlockState(blockPos.down()).getBlock() == BlockInit.SCARLET_GRASS_BLOCK || worldIn.getBlockState(blockPos.down()).getBlock() == Blocks.DIRT)
-                {
-                	worldIn.setBlockState(blockPos, grass);
-                }
-            }
-        }
-        /*IBlockState grass = BlockInit.SCARLET_GRASS.getDefaultState();
-        for (IBlockState iblockstate = worldIn.getBlockState(posIn); (iblockstate.getBlock().isAir(iblockstate, worldIn, posIn) || iblockstate.getBlock().isLeaves(iblockstate, worldIn, posIn)) && posIn.getY() > 0; iblockstate = worldIn.getBlockState(posIn))
-        {
-        	posIn = posIn.down();
-        }
-
-        for (int a = 0; a < 128; ++a)
-        {
-            for (int i = 0; i < 2; ++i)
+    	for (int a = 0; a < 16; ++a)
+    	{
+    		for (int i = 0; i < 2; ++i)
             {
                 for (int j = 0; j < 2; ++j)
                 {
-                	int x = i * 4 + 1 + 8 + rand1.nextInt(3);
+                    int x = i * 4 + 1 + 8 + rand1.nextInt(3);
                     int z = j * 4 + 1 + 8 + rand1.nextInt(3);
                     BlockPos blockPos = worldIn.getHeight(posIn.add(x, 0, z));
-
-                    if (worldIn.isAirBlock(blockPos) && Blocks.TALLGRASS.canBlockStay(worldIn, blockPos, grass))
+                    if(worldIn.getBlockState(blockPos.down()).getBlock() == BlockInit.SCARLET_GRASS_BLOCK || worldIn.getBlockState(blockPos.down()).getBlock() == Blocks.DIRT)
                     {
-                        worldIn.setBlockState(blockPos, grass, 2);
+                    	worldIn.setBlockState(blockPos, grass);
                     }
                 }
             }
-        }*/
+    	}
     }
     
     @Override
     public void decorate(World worldIn, Random rand, BlockPos pos)
     {
-        this.addFlowersAndMushrooms(worldIn, rand, pos);
         this.addGrass(worldIn, rand, pos);
+        this.addFlowersAndMushrooms(worldIn, rand, pos);
         super.decorate(worldIn, rand, pos);
     }
 }
