@@ -9,17 +9,14 @@ import hugman.mod.objects.items.ItemBase;
 import hugman.mod.objects.items.ItemCapeFeather;
 import hugman.mod.objects.items.ItemEdible;
 import hugman.mod.objects.items.ItemEdibleEffect;
-import hugman.mod.objects.items.ItemMusicDisc;
 import hugman.mod.objects.items.ItemEdibleSeed;
+import hugman.mod.objects.items.ItemMusicDisc;
 import hugman.mod.objects.items.ItemSmashBall;
 import hugman.mod.objects.items.ItemSuperStar;
 import hugman.mod.util.handlers.SoundHandler;
-import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ResourceLocation;
 
 /** 
  * Init class - used to initialize items.

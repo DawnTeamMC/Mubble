@@ -2,8 +2,6 @@ package hugman.mod.objects.blocks;
 
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.CostumeInit;
 import hugman.mod.init.ItemInit;

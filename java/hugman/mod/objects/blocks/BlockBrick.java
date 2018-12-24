@@ -2,7 +2,6 @@ package hugman.mod.objects.blocks;
 
 import java.util.Random;
 
-import hugman.mod.Main;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.init.SoundTypeInit;

@@ -1,7 +1,5 @@
 package hugman.mod.objects.items;
 
-import hugman.mod.Main;
-import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

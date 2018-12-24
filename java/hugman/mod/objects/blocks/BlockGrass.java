@@ -5,7 +5,6 @@ import java.util.Random;
 import hugman.mod.init.BlockInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockDirt;
 import net.minecraft.block.BlockTallGrass;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
