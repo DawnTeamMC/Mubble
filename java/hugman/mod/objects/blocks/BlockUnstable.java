@@ -18,6 +18,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -37,17 +38,18 @@ public class BlockUnstable extends BlockBase implements IHasModel
 	@Override
 	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
     {
-		if(!worldIn.isRemote) timer.schedule(destroyTask, 5);
+		destroy(worldIn, pos);
     }
 	
 	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
-		if(!worldIn.isRemote) timer.schedule(destroyTask, 5);
+		destroy(worldIn, pos);
     }
 	
 	public void destroy(World worldIn, BlockPos pos)
     {
+		if(!worldIn.isRemote) timer.schedule(destroyTask, 5);
 		destroyTask = new TimerTask()
 		{
 			@Override
