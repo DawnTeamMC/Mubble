@@ -29,13 +29,13 @@ public class BlockUnstable extends BlockBase implements IHasModel
 	@Override
 	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
     {
-		destroy(worldIn, pos);
+		if(!worldIn.isRemote) destroy(worldIn, pos);
     }
 	
 	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
-		destroy(worldIn, pos);
+		if(!worldIn.isRemote) destroy(worldIn, pos);
     }
 	
 	public void destroy(World worldIn, BlockPos pos)
@@ -48,7 +48,7 @@ public class BlockUnstable extends BlockBase implements IHasModel
 				worldIn.destroyBlock(pos, false);
 			}
 		};
-		if(!worldIn.isRemote) timer.schedule(destroyTask, 100);
+		timer.schedule(destroyTask, 100);
     }
 	
     @Override

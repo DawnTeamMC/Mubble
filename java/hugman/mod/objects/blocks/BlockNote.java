@@ -18,9 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockNote extends BlockBase implements IHasModel
-{
-	private static final AxisAlignedBB NOTE_BLOCK_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.95D, 1.0D);
-	
+{	
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
@@ -35,7 +33,7 @@ public class BlockNote extends BlockBase implements IHasModel
         entityIn.fall(fallDistance, 0.0F);
     }
 	
-	/*@Override
+	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
 		if (Math.abs(entityIn.motionY) < 0.45D) entityIn.motionY = 0.5D;
@@ -46,7 +44,7 @@ public class BlockNote extends BlockBase implements IHasModel
     public void onLanded(World worldIn, Entity entityIn)
     {
 		launch(worldIn, entityIn);
-	}*/
+	}
 	
 	public void launch(World worldIn, Entity entityIn)
     {
@@ -79,10 +77,5 @@ public class BlockNote extends BlockBase implements IHasModel
     			entityIn.motionY = 0D;
     		}
         }
-	}
-	
-	@Override
-	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		launch(worldIn, entityIn);
 	}
 }
