@@ -28,6 +28,7 @@ tile.footblock.name=futbloc
 //tile.tomato.name=<newline>
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
+//tile.unstable_stone.name=<newline>
 
 tile.question_block.name=BLOC ???? BLOOOOOC ?????????????
 tile.empty_block.name=GBJ
@@ -123,13 +124,14 @@ item.chocolate_crepe.name=crepe + choco
 item.caramel_crepe.name=crepe + caraml good
 item.candy_cane.name=christmas cane
 item.burger.name=burug
-//item.tomato.name=<newline>
-//item.salad.name=<newline>
-//item.cheese.name=<newline>
+item.tomato.name=tomto
+item.salad.name=sld
+item.cheese.name=CHEEZ
 
 item.super_mushroom.name=SUPA MUSH
 item.peach.name=salty peesh very gud
 item.cape_feather.name=cool feather that VOOHOOING
+item.super_cape_feather.name=OMG INFINI JUMP FEATHER
 item.super_star.name=SUPA STARR
 item.yellow_coin.name=yullu coIn
 item.red_coin.name=bloody cIn
@@ -137,7 +139,7 @@ item.blue_coin.name=blu cooin
 
 item.smash_ball.name=sm4sh bol
 
-//item.annoying_dog.name=<newline>
+item.annoying_dog.name=horrible entity
 
 item.record_blank.name=EMPTY DISC
 item.record.champions_road.desc=Super Mario 3D World - Champion's Road
@@ -151,7 +153,7 @@ item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harve
 
 --- COSTUMES ---
 item.headphones.name=hedponz
-//item.christmas_hat.name=<newline>
+item.christmas_hat.name=chirstmas hat
 
 item.cappy.name=capy da hat
 item.luigi_cap.name=looigi hat

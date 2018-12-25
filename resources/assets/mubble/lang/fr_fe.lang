@@ -28,6 +28,7 @@ tile.footblock.name=blok foutbol
 //tile.tomato.name=<newline>
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
+//tile.unstable_stone.name=<newline>
 
 tile.question_block.name=bloc???
 tile.empty_block.name=bloc san rien lol
@@ -130,6 +131,7 @@ item.burger.name=borgor
 item.super_mushroom.name=coul champignon
 item.peach.name=g la paich!! ahaha
 item.cape_feather.name=plum supere sot
+//item.super_cape_feather.name=<newline>
 item.super_star.name=supare etoile
 item.yellow_coin.name=fric jaunne
 item.red_coin.name=flouz rouj

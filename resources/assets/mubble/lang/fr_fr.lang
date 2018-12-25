@@ -28,6 +28,7 @@ tile.black_cloud_block.name=Bloc de nuage noir
 tile.tomato.name=Tomate
 tile.salad.name=Salade
 tile.cheese_block.name=Bloc de fromage
+tile.unstable_stone.name=Roche instable
 
 tile.question_block.name=Bloc ?
 tile.empty_block.name=Bloc vide
@@ -130,6 +131,7 @@ item.cheese.name=Fromage
 item.super_mushroom.name=Super champignon
 item.peach.name=Pêche
 item.cape_feather.name=Plume acrobate
+item.super_cape_feather.name=Super plume acrobate
 item.super_star.name=Super étoile
 item.yellow_coin.name=Pièce jaune
 item.red_coin.name=Pièce rouge
@@ -151,7 +153,7 @@ item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harve
 
 --- COSTUMES ---
 item.headphones.name=Casque audio
-item.christmas_hat.name=Chapeau de Noël
+item.christmas_hat.name=Bonnet de Noël
 
 item.cappy.name=Cappy
 item.luigi_cap.name=Casquette de Luigi

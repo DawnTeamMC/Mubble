@@ -28,6 +28,7 @@ tile.footblock.name=足球塊
 //tile.tomato.name=<newline>
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
+//tile.unstable_stone.name=<newline>
 
 tile.question_block.name=問號塊
 tile.empty_block.name=鋼塊
@@ -130,6 +131,7 @@ item.candy_cane.name=拐杖糖
 item.super_mushroom.name=超級蘑菇
 item.peach.name=桃子
 item.cape_feather.name=披風羽毛
+//item.super_cape_feather.name=<newline>
 item.super_star.name=無敵星
 item.yellow_coin.name=黃幣
 item.red_coin.name=紅幣

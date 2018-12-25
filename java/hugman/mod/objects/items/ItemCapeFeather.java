@@ -2,6 +2,7 @@ package hugman.mod.objects.items;
 
 import java.util.Random;
 
+import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,12 +17,12 @@ import net.minecraft.world.World;
 
 public class ItemCapeFeather extends ItemBase implements IHasModel
 {
-	/**
-	 * Static class - can only be initialized once.
+	/** 
+	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public ItemCapeFeather()
+	public ItemCapeFeather(String name)
 	{
-		super("cape_feather");
+		super(name);
 	}
 	
 	@Override
@@ -35,7 +36,7 @@ public class ItemCapeFeather extends ItemBase implements IHasModel
         }
         playerIn.motionY = 0.7D;
         playerIn.fallDistance = 0f;
-        if (!playerIn.capabilities.isCreativeMode) stack.shrink(1);
+        if (!playerIn.capabilities.isCreativeMode && this != ItemInit.SUPER_CAPE_FEATHER) stack.shrink(1);
         playerIn.addStat(StatList.getObjectUseStats(this));
         worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundHandler.ITEM_CAPE_FEATHER_USE, SoundCategory.PLAYERS, 0.5F, 1F);
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);

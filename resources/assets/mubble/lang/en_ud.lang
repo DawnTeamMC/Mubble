@@ -28,6 +28,7 @@ tile.white_cloud_block.name=ʞɔolq pnolƆ ǝʇᴉɥM
 //tile.tomato.name=<newline>
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
+//tile.unstable_stone.name=<newline>
 
 tile.question_block.name=ʞɔolᗺ ¿
 tile.empty_block.name=ʞɔolᗺ ʎʇdɯƎ
@@ -130,6 +131,7 @@ item.candy_cane.name=ǝuɐƆ ʎpuɐƆ
 item.super_mushroom.name=ɯooɹɥsnW ɹǝdnS
 item.peach.name=ɥɔɐǝԀ
 item.cape_feather.name=ɹǝɥʇɐǝℲ ǝdɐƆ
+//item.super_cape_feather.name=<newline>
 item.super_star.name=ɹɐʇS ɹǝdnS
 item.yellow_coin.name=uᴉoƆ ʍollǝℲ
 item.red_coin.name=uᴉoƆ pǝᴚ

@@ -28,6 +28,7 @@ tile.black_cloud_block.name=Zwartewolkblok
 tile.tomato.name=Tomaten
 tile.salad.name=Salade
 //tile.cheese_block.name=<newline>
+//tile.unstable_stone.name=<newline>
 
 tile.question_block.name=?-blok
 tile.empty_block.name=Leeg blok
@@ -130,6 +131,7 @@ item.cheese.name=Kaas
 item.super_mushroom.name=Super paddenstoel
 item.peach.name=Perzik
 item.cape_feather.name=Cape veer
+//item.super_cape_feather.name=<newline>
 item.super_star.name=Super ster
 item.yellow_coin.name=Gele munt
 item.red_coin.name=Rode munt

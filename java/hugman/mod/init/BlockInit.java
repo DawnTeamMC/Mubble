@@ -24,6 +24,7 @@ import hugman.mod.objects.blocks.BlockQuestion;
 import hugman.mod.objects.blocks.BlockRotating;
 import hugman.mod.objects.blocks.BlockStairs;
 import hugman.mod.objects.blocks.BlockTetris;
+import hugman.mod.objects.blocks.BlockUnstable;
 import hugman.mod.objects.blocks.BlockWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -61,6 +62,7 @@ public class BlockInit
 	public static final Block TOMATO = new BlockCrops("tomato", ItemInit.TOMATO);
 	public static final Block SALAD = new BlockCrops("salad", ItemInit.SALAD);
 	public static final Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.CLOTH, 0.5f, 2f, SoundType.SNOW);
+	public static final Block UNSTABLE_STONE = new BlockUnstable("unstable_stone");
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();

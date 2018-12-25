@@ -28,6 +28,7 @@ tile.black_cloud_block.name=Black Cloud Block
 tile.tomato.name=Tomatoes
 tile.salad.name=Salad
 tile.cheese_block.name=Cheese Block
+tile.unstable_stone.name=Unstable Stone
 
 tile.question_block.name=? Block
 tile.empty_block.name=Empty Block
@@ -130,6 +131,7 @@ item.cheese.name=Cheese
 item.super_mushroom.name=Super Mushroom
 item.peach.name=Peach
 item.cape_feather.name=Cape Feather
+item.super_cape_feather.name=Super Cape Feather
 item.super_star.name=Super Star
 item.yellow_coin.name=Yellow Coin
 item.red_coin.name=Red Coin

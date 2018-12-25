@@ -42,7 +42,8 @@ public class ItemInit
 	// SUPER MARIO
 	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));
 	public static final Item PEACH = new ItemEdible("peach", 4, 2.4f, true);
-	public static final Item CAPE_FEATHER = new ItemCapeFeather();
+	public static final Item CAPE_FEATHER = new ItemCapeFeather("cape_feather");
+	public static final Item SUPER_CAPE_FEATHER = new ItemCapeFeather("super_cape_feather");
 	public static final Item SUPER_STAR = new ItemSuperStar();
 	public static final Item YELLOW_COIN = new ItemBase("yellow_coin");
 	public static final Item RED_COIN = new ItemBase("red_coin");
