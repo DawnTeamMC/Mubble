@@ -1,24 +1,15 @@
 package hugman.mod.objects.blocks;
 
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import hugman.mod.init.BlockInit;
-import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
-import io.netty.util.Timeout;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -32,7 +23,7 @@ public class BlockUnstable extends BlockBase implements IHasModel
      */
 	public BlockUnstable(String name)
 	{
-		super(name, Material.ROCK, 0.1f, 10f, SoundType.STONE);
+		super(name, Material.ROCK, 0.1f, 1f, SoundType.STONE);
 	}
 	
 	@Override
@@ -49,7 +40,6 @@ public class BlockUnstable extends BlockBase implements IHasModel
 	
 	public void destroy(World worldIn, BlockPos pos)
     {
-		if(!worldIn.isRemote) timer.schedule(destroyTask, 5);
 		destroyTask = new TimerTask()
 		{
 			@Override
@@ -58,6 +48,7 @@ public class BlockUnstable extends BlockBase implements IHasModel
 				worldIn.destroyBlock(pos, false);
 			}
 		};
+		if(!worldIn.isRemote) timer.schedule(destroyTask, 100);
     }
 	
     @Override
