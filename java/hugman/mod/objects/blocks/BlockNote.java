@@ -7,25 +7,26 @@ import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockNote extends BlockBase implements IHasModel
 {
-	String type;
+	private static final AxisAlignedBB NOTE_BLOCK_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.95D, 1.0D);
 	
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockNote(String type)
+	public BlockNote(String name)
 	{
-		super(type, Material.ROCK, 1.4f, 10f, SoundType.STONE);
-		this.type = type;
+		super(name, Material.ROCK, 1.4f, 10f, SoundType.STONE);
 	}
 	
 	@Override
@@ -34,7 +35,7 @@ public class BlockNote extends BlockBase implements IHasModel
         entityIn.fall(fallDistance, 0.0F);
     }
 	
-	@Override
+	/*@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
 		if (Math.abs(entityIn.motionY) < 0.45D) entityIn.motionY = 0.5D;
@@ -43,6 +44,11 @@ public class BlockNote extends BlockBase implements IHasModel
 
 	@Override
     public void onLanded(World worldIn, Entity entityIn)
+    {
+		launch(worldIn, entityIn);
+	}*/
+	
+	public void launch(World worldIn, Entity entityIn)
     {
 		BlockPos pos = new BlockPos(entityIn).down();
         final double x = pos.getX() + 0.5D;
@@ -73,5 +79,10 @@ public class BlockNote extends BlockBase implements IHasModel
     			entityIn.motionY = 0D;
     		}
         }
+	}
+	
+	@Override
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+		launch(worldIn, entityIn);
 	}
 }

@@ -83,7 +83,7 @@ public class BlockQuestion extends BlockBase implements IHasModel
         {
             if (worldIn.isBlockPowered(blockpos))
             {
-            	this.loot(worldIn, blockpos, state);
+            	loot(worldIn, blockpos, state);
             }
         }
     }

@@ -152,13 +152,6 @@ public class BlockGrass extends BlockBase implements IHasModel, IGrowable
     }
     
     @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
-    {
-        return BlockRenderLayer.SOLID;
-    }
-    
-    @Override
     public int getMetaFromState(IBlockState state)
     {
         return 0;
