@@ -97,6 +97,7 @@ tile.black_candy_cane_pillar.name=Schwarze Zuckerstangensäule
 
 tile.green_hill_grass_block.name=Grüner Hügelgrassblock
 tile.green_hill_dirt.name=Grüne Hügelerde
+//tile.marble_zone_stone.name=<newline>
 tile.yellow_studiopolis_clapper.name=Gelbe Studiopolis-Filmklappe
 tile.blue_studiopolis_clapper.name=Blaue Studiopolis-Filmklappe
 

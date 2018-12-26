@@ -97,6 +97,7 @@ tile.black_candy_cane_pillar.name=Pilier de sucre d'orge noir
 
 tile.green_hill_grass_block.name=Bloc d'herbe de Green Hill
 tile.green_hill_dirt.name=Terre de Green Hill
+//tile.marble_zone_stone.name=<newline>
 tile.yellow_studiopolis_clapper.name=Clap jaune de Studiopolis
 tile.blue_studiopolis_clapper.name=Clap bleu de Studiopolis
 

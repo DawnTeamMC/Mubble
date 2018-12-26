@@ -134,6 +134,7 @@ public class BlockInit
 	// SONIC
 	public static final Block GREEN_HILL_GRASS_BLOCK = new BlockGrass("green_hill_grass_block", Material.GROUND, 0.6f, 3f, SoundType.PLANT);
 	public static final Block GREEN_HILL_DIRT = new BlockDirt("green_hill_dirt", Material.GROUND, 0.5f, 2.5f, SoundType.GROUND);
+	public static final Block MARBLE_ZONE_STONE = new BlockBase("marble_zone_stone", Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block YELLOW_STUDIOPOLIS_CLAPPER = new BlockDirectional("yellow_studiopolis_clapper", Material.IRON, 5f, 30f, SoundType.METAL);
 	public static final Block BLUE_STUDIOPOLIS_CLAPPER = new BlockDirectional("blue_studiopolis_clapper", Material.IRON, 5f, 30f, SoundType.METAL);
 	
