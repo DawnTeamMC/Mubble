@@ -15,13 +15,14 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 public class WorldGenCustomOres implements IWorldGenerator
 {
-	private WorldGenerator vanadium_ore, blunite, carbonite;
+	private WorldGenerator vanadium_ore, blunite, carbonite, unstable_stone;
 	
 	public WorldGenCustomOres()
 	{
 		vanadium_ore = new WorldGenMinable(BlockInit.VANADIUM_ORE.getDefaultState(), 6, BlockMatcher.forBlock(Blocks.STONE));
 		blunite = new WorldGenMinable(BlockInit.BLUNITE.getDefaultState(), 33, BlockMatcher.forBlock(Blocks.STONE));
 		carbonite = new WorldGenMinable(BlockInit.CARBONITE.getDefaultState(), 33, BlockMatcher.forBlock(Blocks.STONE));
+		unstable_stone = new WorldGenMinable(BlockInit.UNSTABLE_STONE.getDefaultState(), 10, BlockMatcher.forBlock(Blocks.STONE));
 	}
 	
 	@Override
@@ -34,6 +35,7 @@ public class WorldGenCustomOres implements IWorldGenerator
 			runGenerator(vanadium_ore, world, random, chunkX, chunkZ, 1, 0, 16);
 			runGenerator(blunite, world, random, chunkX, chunkZ, 10, 0, 80);
 			runGenerator(carbonite, world, random, chunkX, chunkZ, 10, 0, 80);
+			runGenerator(unstable_stone, world, random, chunkX, chunkZ, 5, 0, 255);
 		}
 	}
 	
