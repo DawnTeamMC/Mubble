@@ -29,6 +29,7 @@ tile.black_cloud_block.name=Black Cloud Block
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
 //tile.unstable_stone.name=<newline>
+//tile.rewind_block.name=<newline>
 
 tile.question_block.name=? Block
 tile.empty_block.name=Empty Block

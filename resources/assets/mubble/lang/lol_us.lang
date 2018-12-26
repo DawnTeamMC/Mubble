@@ -29,6 +29,7 @@ tile.footblock.name=futbloc
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
 //tile.unstable_stone.name=<newline>
+//tile.rewind_block.name=<newline>
 
 tile.question_block.name=BLOC ???? BLOOOOOC ?????????????
 tile.empty_block.name=GBJ

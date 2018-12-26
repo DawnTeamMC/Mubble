@@ -52,6 +52,22 @@
 			"mubble:block/note_block/jump/high"
 		]
 	},
+	"block.rewind_block.disappear":
+	{
+		"category": "block",
+		"sounds":
+		[
+			"minecraft:mob/endermen/portal"
+		]
+	},
+	"block.rewind_block.reappear":
+	{
+		"category": "block",
+		"sounds":
+		[
+			"minecraft:mob/endermen/portal2"
+		]
+	},
 	"block.space_matter.break":
 	{
 		"category": "block",

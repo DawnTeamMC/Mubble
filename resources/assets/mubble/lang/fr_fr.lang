@@ -29,6 +29,7 @@ tile.tomato.name=Tomate
 tile.salad.name=Salade
 tile.cheese_block.name=Bloc de fromage
 tile.unstable_stone.name=Roche instable
+//tile.rewind_block.name=<newline>
 
 tile.question_block.name=Bloc ?
 tile.empty_block.name=Bloc vide

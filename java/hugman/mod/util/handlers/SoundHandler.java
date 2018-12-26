@@ -8,12 +8,14 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class SoundHandler 
 {
 	public static SoundEvent
-	BLOCK_QUESTION_BLOCK_LOOT_POWER_UP,
-	BLOCK_QUESTION_BLOCK_LOOT_COIN,
-	BLOCK_EMPTY_BLOCK_BREAK,
 	BLOCK_BRICK_BLOCK_BREAK,
+	BLOCK_EMPTY_BLOCK_BREAK,
 	BLOCK_NOTE_BLOCK_JUMP_SMALL,
 	BLOCK_NOTE_BLOCK_JUMP_HIGH,
+	BLOCK_QUESTION_BLOCK_LOOT_POWER_UP,
+	BLOCK_QUESTION_BLOCK_LOOT_COIN,
+	BLOCK_REWIND_BLOCK_DISAPPEAR,
+	BLOCK_REWIND_BLOCK_REAPPEAR,
 	BLOCK_SPACE_MATTER_BREAK,
 	BLOCK_SPACE_MATTER_FALL,
 	BLOCK_SPACE_MATTER_PLACE,
@@ -47,12 +49,14 @@ public class SoundHandler
 	
 	public static void registerSounds()
 	{
-		BLOCK_QUESTION_BLOCK_LOOT_POWER_UP = registerSound("block.question_block.loot.power_up");
-		BLOCK_QUESTION_BLOCK_LOOT_COIN = registerSound("block.question_block.loot.coin");
-		BLOCK_EMPTY_BLOCK_BREAK = registerSound("block.empty_block.break");
 		BLOCK_BRICK_BLOCK_BREAK = registerSound("block.brick_block.break");
+		BLOCK_EMPTY_BLOCK_BREAK = registerSound("block.empty_block.break");
 		BLOCK_NOTE_BLOCK_JUMP_SMALL = registerSound("block.note_block.jump.small");
 		BLOCK_NOTE_BLOCK_JUMP_HIGH = registerSound("block.note_block.jump.high");
+		BLOCK_QUESTION_BLOCK_LOOT_POWER_UP = registerSound("block.question_block.loot.power_up");
+		BLOCK_QUESTION_BLOCK_LOOT_COIN = registerSound("block.question_block.loot.coin");
+		BLOCK_REWIND_BLOCK_DISAPPEAR = registerSound("block.rewind_block.disappear");
+		BLOCK_REWIND_BLOCK_REAPPEAR = registerSound("block.rewind_block.reappear");
 		BLOCK_SPACE_MATTER_BREAK = registerSound("block.space_matter.break");
 		BLOCK_SPACE_MATTER_FALL = registerSound("block.space_matter.fall");
 		BLOCK_SPACE_MATTER_PLACE = registerSound("block.space_matter.place");
@@ -60,8 +64,8 @@ public class SoundHandler
 		BLOCK_SPACE_MATTER_STEP = registerSound("block.space_matter.step");
 		ITEM_ANNOYING_DOG_DISAPPEAR = registerSound("item.annoying_dog.disappear");
 		ITEM_ANNOYING_DOG_WAF = registerSound("item.annoying_dog.waf");
-		ITEM_SMASH_BALL_USE = registerSound("item.smash_ball.use");
 		ITEM_CAPE_FEATHER_USE = registerSound("item.cape_feather.use");
+		ITEM_SMASH_BALL_USE = registerSound("item.smash_ball.use");
 		ITEM_SUPER_MUSHROOM_CONSUME = registerSound("item.super_mushroom.consume");
 		ITEM_SUPER_STAR_THEME = registerSound("item.super_star.theme");
 		ENTITY_CHINCHO_AMBIENT = registerSound("entity.chincho.ambient");

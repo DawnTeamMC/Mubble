@@ -62,7 +62,7 @@ public class BlockInit
 	public static final Block TOMATO = new BlockCrops("tomato", ItemInit.TOMATO);
 	public static final Block SALAD = new BlockCrops("salad", ItemInit.SALAD);
 	public static final Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.CLOTH, 0.5f, 2f, SoundType.SNOW);
-	public static final Block UNSTABLE_STONE = new BlockUnstable("unstable_stone");
+	public static final Block UNSTABLE_STONE = new BlockUnstable("unstable_stone", Material.ROCK, 0.1f, 1f, SoundType.STONE);
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();
@@ -153,5 +153,6 @@ public class BlockInit
 	public static final Block SPACE_MATTER = new BlockBase("space_matter", Material.SAND, 0.4f, 30f, SoundTypeInit.SPACE_MATTER, 5);
 	
 	// YOUTUBE
+	public static final Block REWIND_BLOCK = new BlockUnstable("rewind_block", Material.IRON, 5f, 30f, SoundType.METAL);
 	public static final Block KORETATO_BLOCK = new BlockDirectional("koretato_block", Material.GROUND, 0.4f, 10f, SoundType.SNOW);
 }

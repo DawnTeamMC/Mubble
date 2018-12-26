@@ -29,6 +29,7 @@ tile.footblock.name=足球块
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
 //tile.unstable_stone.name=<newline>
+//tile.rewind_block.name=<newline>
 
 tile.question_block.name=问号块
 tile.empty_block.name=钢块
