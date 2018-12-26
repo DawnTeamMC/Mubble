@@ -50,6 +50,9 @@ public class CostumeInit
 	// DELTARUNE
 	public static final Item RALSEI_HAT = new CostumeHeadBase("ralsei_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	
+	// BALDI
+	public static final Item BALDI_HEAD = new CostumeHeadBase("baldi_head", SoundEvents.E_PARROT_IM_VEX);
+	
 	// YOUTUBE
 	public static final Item MAYRO_CAP = new CostumeMayroCap();
 	public static final Item NOTEBLOCK_HEAD = new CostumeHeadBase("noteblock_head", SoundEvents.ITEM_ARMOR_EQUIP_IRON);
