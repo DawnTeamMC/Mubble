@@ -50,11 +50,26 @@
           "type": "item",
           "name": "mubble:super_mushroom",
           "weight": 30
-        },
+        }
+      ]
+    },
+    {
+      "name":"rare",
+      "rolls": 1,
+      "entries": [
         {
           "type": "item",
-          "name": "mubble:super_star",
-          "weight": 3
+          "name": "mubble:super_star"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:killed_by_player"
+        },
+        {
+          "condition": "minecraft:random_chance_with_looting",
+          "chance": 0.125,
+          "looting_multiplier": 0.15
         }
       ]
     }

@@ -30,8 +30,8 @@ public class ItemSuperStar extends ItemFood implements IHasModel
 	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer playerIn)
 	{
 		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(1), 600, 1));
-		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 600, 1));
-		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 600, 2));
+		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(5), 600, 0));
+		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(10), 600, 1));
 		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(11), 600, 1));
 		playerIn.addPotionEffect(new PotionEffect(Potion.getPotionById(16), 600, 0));
 		playerIn.playSound(SoundHandler.ITEM_SUPER_STAR_THEME, 60000000, 1);
