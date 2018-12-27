@@ -1,8 +1,11 @@
 package hugman.mod.world.dimension.smash;
 
+import hugman.mod.init.BiomeInit;
 import hugman.mod.init.DimensionInit;
+import hugman.mod.util.Reference;
 import hugman.mod.world.dimension.EmptyChunkGenerator;
 import net.minecraft.init.Biomes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
@@ -12,7 +15,7 @@ public class DimensionWorldOfLight extends WorldProvider
 {
 	public DimensionWorldOfLight()
 	{
-		this.biomeProvider = new BiomeProviderSingle(Biomes.PLAINS);
+		this.biomeProvider = new BiomeProviderSingle(BiomeInit.MUSHROOM_KINGDOM);
 	}
 	
 	@Override
@@ -37,5 +40,11 @@ public class DimensionWorldOfLight extends WorldProvider
 	public boolean isSurfaceWorld() 
 	{
 		return false;
+	}
+	
+	@Override
+	public String getSaveFolder()
+	{
+		return Reference.MODID + ":worlds/wol";
 	}
 }

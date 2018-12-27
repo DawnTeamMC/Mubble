@@ -13,6 +13,6 @@ public class DimensionInit
 	
 	public static void registerDimensions()
 	{
-		DimensionManager.registerDimension(2, WORLD_OF_LIGHT);
+		DimensionManager.registerDimension(10, WORLD_OF_LIGHT);
 	}
 }

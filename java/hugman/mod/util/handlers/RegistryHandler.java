@@ -4,6 +4,7 @@ import hugman.mod.Main;
 import hugman.mod.init.BiomeInit;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.CostumeInit;
+import hugman.mod.init.DimensionInit;
 //import hugman.mod.init.DimensionInit;
 import hugman.mod.init.EntityInit;
 import hugman.mod.init.ItemInit;
@@ -71,7 +72,7 @@ public class RegistryHandler
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
 		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
 		BiomeInit.registerBiomes();
-		//DimensionInit.registerDimensions();
+		DimensionInit.registerDimensions();
 		
 		EntityInit.registerEntities();
 		Main.proxy.registerEntityRenderers();

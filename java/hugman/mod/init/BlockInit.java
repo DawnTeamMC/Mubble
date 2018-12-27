@@ -20,6 +20,7 @@ import hugman.mod.objects.blocks.BlockMushroom;
 import hugman.mod.objects.blocks.BlockNote;
 import hugman.mod.objects.blocks.BlockOre;
 import hugman.mod.objects.blocks.BlockPillar;
+import hugman.mod.objects.blocks.BlockPortal;
 import hugman.mod.objects.blocks.BlockQuestion;
 import hugman.mod.objects.blocks.BlockRotating;
 import hugman.mod.objects.blocks.BlockStairs;
@@ -63,6 +64,7 @@ public class BlockInit
 	public static final Block SALAD = new BlockCrops("salad", ItemInit.SALAD);
 	public static final Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.CLOTH, 0.5f, 2f, SoundType.SNOW);
 	public static final Block UNSTABLE_STONE = new BlockUnstable("unstable_stone", Material.ROCK, 0.1f, 1f, SoundType.STONE);
+	public static final Block WOL_PORTAL = new BlockPortal("wol_portal");
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();
