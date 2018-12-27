@@ -29,7 +29,7 @@ tile.tomato.name=Tomate
 tile.salad.name=Salade
 tile.cheese_block.name=Bloc de fromage
 tile.unstable_stone.name=Roche instable
-//tile.rewind_block.name=<newline>
+tile.rewind_block.name=Bloc Rewind
 
 tile.question_block.name=Bloc ?
 tile.empty_block.name=Bloc vide
@@ -107,7 +107,7 @@ tile.black_candy_cane_pillar.name=Pilier de sucre d'orge noir
 
 tile.green_hill_grass_block.name=Bloc d'herbe de Green Hill
 tile.green_hill_dirt.name=Terre de Green Hill
-//tile.marble_zone_stone.name=<newline>
+tile.marble_zone_stone.name=Pierre de la zone Marble
 tile.yellow_studiopolis_clapper.name=Clap jaune de Studiopolis
 tile.blue_studiopolis_clapper.name=Clap bleu de Studiopolis
 
@@ -187,7 +187,7 @@ item.top_hat.name=Haut-de-forme
 
 item.ralsei_hat.name=Chapeau de Ralsei
 
-//item.baldi_head.name=<newline>
+item.baldi_head.name=Tête de Baldi
 
 item.mayro_cap.name=Casquette de Mayro
 item.noteblock_head.name=Tête de NoteBlock
