@@ -64,7 +64,7 @@ public class BlockInit
 	public static final Block SALAD = new BlockCrops("salad", ItemInit.SALAD);
 	public static final Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.CLOTH, 0.5f, 2f, SoundType.SNOW);
 	public static final Block UNSTABLE_STONE = new BlockUnstable("unstable_stone", Material.ROCK, 0.1f, 1f, SoundType.STONE);
-	public static final Block WOL_PORTAL = new BlockPortal("wol_portal");
+	public static final Block FOURD_PORTAL = new BlockPortal("4D_portal", 64);
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();

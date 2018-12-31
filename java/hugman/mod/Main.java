@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
+@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, updateJSON = Reference.UPDATE_JSON)
 public class Main 
 {
 	@Instance
@@ -47,7 +47,7 @@ public class Main
 	}
 	
 	@EventHandler
-	public static void serverInit(FMLServerAboutToStartEvent event) throws IOException
+	public static void serverInit(FMLServerAboutToStartEvent event)
 	{
 		RegistryHandler.serverInitRegistries();
 	}

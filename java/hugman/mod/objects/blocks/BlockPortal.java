@@ -31,12 +31,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockPortal extends BlockBase implements IHasModel
 {
+	int dim;
+	
 	/**
 	 * Static class - can only be initialized once.
 	 */
-	public BlockPortal(String portal)
+	public BlockPortal(String portal, int dim)
 	{
-		super(portal, Material.PORTAL, 0, 0, SoundType.GLASS);
+		super(portal, Material.PORTAL, 0, 0, SoundType.GLASS, 15, null);
+		this.dim = dim;
 	}
 	
 	@Override
@@ -81,11 +84,23 @@ public class BlockPortal extends BlockBase implements IHasModel
 		if(entityIn instanceof EntityPlayer && !worldIn.isRemote)
 		{
 			EntityPlayer playerIn = (EntityPlayer) entityIn;
-			int desDimInt = 64;
-			if(playerIn.dimension == 64) desDimInt = 0;		
+			int desDimInt = this.dim;
+			if(playerIn.dimension == this.dim) desDimInt = 0;		
 			World desDimWorld = worldIn.getMinecraftServer().getWorld(desDimInt);
 			BlockPos desPos = desDimWorld.getTopSolidOrLiquidBlock(new BlockPos(0.5, 0, 0.5));
 			Teleporter.teleportToDimension(playerIn, desDimInt, desPos.getX(), desPos.getY(), desPos.getZ());
 		}
+    }
+	
+	@Override
+    public int quantityDropped(Random random)
+    {
+        return 0;
+    }
+	
+	@Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+    {
+        return ItemStack.EMPTY;
     }
 }

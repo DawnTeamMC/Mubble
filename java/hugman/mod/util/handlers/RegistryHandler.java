@@ -85,7 +85,7 @@ public class RegistryHandler
 		RecipeInit.addRecipes();
 	}
 	
-	public static void serverInitRegistries() throws IOException
+	public static void serverInitRegistries()
 	{
 		DimensionInit.createFiles();
 	}

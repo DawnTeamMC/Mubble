@@ -19,7 +19,7 @@ public class DimensionInit
 		DimensionManager.registerDimension(64, WORLD_OF_LIGHT);
 	}
 	
-	public static void createFiles() throws IOException
+	public static void createFiles()
 	{
 		MoveFiles.copyToWorld("wol", "region/r.0.0.mca", 64);
 		MoveFiles.copyToWorld("wol", "region/r.0.-1.mca", 64);
