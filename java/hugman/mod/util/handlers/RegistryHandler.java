@@ -1,5 +1,7 @@
 package hugman.mod.util.handlers;
 
+import java.io.IOException;
+
 import hugman.mod.Main;
 import hugman.mod.init.BiomeInit;
 import hugman.mod.init.BlockInit;
@@ -65,7 +67,7 @@ public class RegistryHandler
 		}
 	}
 	
-	public static void preInitRegistries()
+	public static void preInitRegistries() throws IOException
 	{
 		SoundHandler.registerSounds();
 		
@@ -81,6 +83,11 @@ public class RegistryHandler
 	public static void initRegistries()
 	{
 		RecipeInit.addRecipes();
+	}
+	
+	public static void serverInitRegistries() throws IOException
+	{
+		DimensionInit.createFiles();
 	}
 	
 	private static final ResourceLocation PURPLE_TETRIS_BLOCK = new ResourceLocation("mubble", "purple_tetris_block");

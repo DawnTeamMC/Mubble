@@ -1,5 +1,7 @@
 package hugman.mod;
 
+import java.io.IOException;
+
 import hugman.mod.proxy.CommonProxy;
 import hugman.mod.util.Reference;
 import hugman.mod.util.handlers.RegistryHandler;
@@ -11,6 +13,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class Main 
@@ -26,7 +29,7 @@ public class Main
 	public static final CreativeTabs MUBBLE_COSTUMES = new MubbleCostumesTab("mubble_costumes_tab");
 	
 	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event)
+	public static void preInit(FMLPreInitializationEvent event) throws IOException
 	{
 		RegistryHandler.preInitRegistries();
 	}
@@ -41,5 +44,11 @@ public class Main
 	public static void postInit(FMLPostInitializationEvent event)
 	{
 		
+	}
+	
+	@EventHandler
+	public static void serverInit(FMLServerAboutToStartEvent event) throws IOException
+	{
+		RegistryHandler.serverInitRegistries();
 	}
 }

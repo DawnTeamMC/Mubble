@@ -41,10 +41,4 @@ public class DimensionWorldOfLight extends WorldProvider
 	{
 		return false;
 	}
-	
-	@Override
-	public String getSaveFolder()
-	{
-		return Reference.MODID + ":worlds/wol";
-	}
 }

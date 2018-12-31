@@ -81,7 +81,11 @@ public class BlockPortal extends BlockBase implements IHasModel
 		if(entityIn instanceof EntityPlayer && !worldIn.isRemote)
 		{
 			EntityPlayer playerIn = (EntityPlayer) entityIn;
-			Teleporter.teleportToDimension(playerIn, 10, 0, 50, 0);
+			int desDimInt = 64;
+			if(playerIn.dimension == 64) desDimInt = 0;		
+			World desDimWorld = worldIn.getMinecraftServer().getWorld(desDimInt);
+			BlockPos desPos = desDimWorld.getTopSolidOrLiquidBlock(new BlockPos(0.5, 0, 0.5));
+			Teleporter.teleportToDimension(playerIn, desDimInt, desPos.getX(), desPos.getY(), desPos.getZ());
 		}
     }
 }

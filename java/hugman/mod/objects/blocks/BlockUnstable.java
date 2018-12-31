@@ -101,7 +101,7 @@ public class BlockUnstable extends BlockBase implements IHasModel
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (this == BlockInit.REWIND_BLOCK)
 		{
-			rewind(worldIn, pos);
+			if (!worldIn.isRemote) rewind(worldIn, pos);
 			return true;
 		}
 		return false;
