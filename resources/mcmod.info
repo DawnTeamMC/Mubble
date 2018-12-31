@@ -11,6 +11,7 @@
   "credits": "https://ftb.gamepedia.com/Mubble/Credits",
   "logoFile": "assets/mubble/textures/gui/logo.png",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": [],
+  "updateJSON": "https://raw.githubusercontent.com/Hugman76/Mubble/master/update.json"
  }
 ]
