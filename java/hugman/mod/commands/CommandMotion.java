@@ -79,7 +79,6 @@ public class CommandMotion extends CommandBase
     			entity.motionX = dX;
     			entity.motionY = dY;
     			entity.motionZ = dZ;
-    			entity.notify();
         		notifyCommandListener(sender, this, "commands.motion.success", new Object[] {entity.getName(), entity.motionX, entity.motionY, entity.motionZ});
     		}
     		else if ("add".equals(args[1]))
@@ -87,7 +86,6 @@ public class CommandMotion extends CommandBase
     			entity.motionX = entity.motionX + dX;
     			entity.motionY = entity.motionY + dY;
     			entity.motionZ = entity.motionZ + dZ;
-    			entity.notify();
         		notifyCommandListener(sender, this, "commands.motion.success", new Object[] {entity.getName(), entity.motionX, entity.motionY, entity.motionZ});
     		}
         }
