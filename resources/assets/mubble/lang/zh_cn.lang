@@ -220,3 +220,7 @@ advancements.mubble.get_vanadium.title=钒！
 advancements.mubble.get_vanadium.description=获得钒
 advancements.mubble.get_tetris_block.title=连接成功
 advancements.mubble.get_tetris_block.description=手握俄罗斯方块
+
+--- COMMANDS ---
+commands.motion.usage=/motion <entity> <set|add> [dX] [dY] [dZ]
+//commands.motion.success=<newline>

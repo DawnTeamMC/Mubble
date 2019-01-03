@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerAboutToStartEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, updateJSON = Reference.UPDATE_JSON)
 public class Main 
@@ -47,8 +48,14 @@ public class Main
 	}
 	
 	@EventHandler
-	public static void serverInit(FMLServerAboutToStartEvent event)
+	public static void preServerInit(FMLServerAboutToStartEvent event)
 	{
-		RegistryHandler.serverInitRegistries();
+		RegistryHandler.preServerInitRegistries();
+	}
+	
+	@EventHandler
+	public static void ServerInit(FMLServerStartingEvent event)
+	{
+		RegistryHandler.serverInitRegistries(event);
 	}
 }

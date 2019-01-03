@@ -221,6 +221,10 @@ advancements.mubble.get_vanadium.description=Verkrijg vanadiums
 advancements.mubble.get_tetris_block.title=Het is allemaal verbonden
 advancements.mubble.get_tetris_block.description=Krijg je handen aan een Tetris blok
 
+--- COMMANDS ---
+commands.motion.usage=/motion <entity> <set|add> [dX] [dY] [dZ]
+//commands.motion.success=<newline>
+
 --- OTHER ---
 item.cappy.secret_status=Hoe paradoxaal... :)
 item.bandana.secret_status=Dat is voor jou, §6Pixel§r!

@@ -3,6 +3,7 @@ package hugman.mod.util.handlers;
 import java.io.IOException;
 
 import hugman.mod.Main;
+import hugman.mod.commands.CommandMotion;
 import hugman.mod.init.BiomeInit;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.CostumeInit;
@@ -20,6 +21,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -85,7 +87,12 @@ public class RegistryHandler
 		RecipeInit.addRecipes();
 	}
 	
-	public static void serverInitRegistries()
+	public static void serverInitRegistries(FMLServerStartingEvent event)
+	{
+		event.registerServerCommand(new CommandMotion());
+	}
+	
+	public static void preServerInitRegistries()
 	{
 		DimensionInit.createFiles();
 	}

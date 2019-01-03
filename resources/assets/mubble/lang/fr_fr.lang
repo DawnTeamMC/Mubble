@@ -221,6 +221,10 @@ advancements.mubble.get_vanadium.description=Obtenez du vanadium
 advancements.mubble.get_tetris_block.title=Connectés à travers l'espace
 advancements.mubble.get_tetris_block.description=Attrapez un bloc Tetris
 
+--- COMMANDS ---
+commands.motion.usage=/motion <entity> <set|add> [dX] [dY] [dZ]
+//commands.motion.success=<newline>
+
 --- OTHER ---
 item.cappy.secret_status=Tellement paradoxal... :)
 item.bandana.secret_status=C'est pour toi, §6Pixel§r !

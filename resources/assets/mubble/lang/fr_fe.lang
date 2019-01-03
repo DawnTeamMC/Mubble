@@ -221,6 +221,10 @@ advancements.mubble.get_vanadium.description=trouv du truc la qi brillai et pour
 advancements.mubble.get_tetris_block.title=la majie du jeu sur fb
 advancements.mubble.get_tetris_block.description=tu te souvien du jeu ou fallai construir non pa minecraft s un vieu jeu sur vielle console bah il fau un de c bloks jcroi
 
+--- COMMANDS ---
+commands.motion.usage=/motion <entity> <set|add> [dX] [dY] [dZ]
+//commands.motion.success=<newline>
+
 
 
 --- VANILLA --
