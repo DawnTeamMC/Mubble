@@ -29,7 +29,7 @@ tile.footblock.name=blok foutbol
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
 //tile.unstable_stone.name=<newline>
-//tile.rewind_block.name=<newline>
+//tile.ultimatum_portal.name=<newline>
 
 tile.question_block.name=bloc???
 tile.empty_block.name=bloc san rien lol
@@ -124,6 +124,7 @@ tile.cyan_bricks.name=brik sian
 tile.elder_pebbles.name=vieu galai come su la plaj de diepp
 tile.space_matter.name=matiare martiéne
 
+//tile.rewind_block.name=<newline>
 tile.koretato_block.name=patete qui vi
 
 --- ITEMS ---

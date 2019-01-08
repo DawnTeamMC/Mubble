@@ -64,7 +64,7 @@ public class BlockInit
 	public static final Block SALAD = new BlockCrops("salad", ItemInit.SALAD);
 	public static final Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.CLOTH, 0.5f, 2f, SoundType.SNOW);
 	public static final Block UNSTABLE_STONE = new BlockUnstable("unstable_stone", Material.ROCK, 0.1f, 1f, SoundType.STONE);
-	public static final Block FOURD_PORTAL = new BlockPortal("4D_portal", 64);
+	public static final Block ULTIMATUM_PORTAL = new BlockPortal("ultimatum", 64);
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();
@@ -98,6 +98,7 @@ public class BlockInit
 	public static final Block GREEN_MUSHROOM_BLOCK = new BlockHugeMushroom("green", 0);
 	public static final Block YELLOW_MUSHROOM_BLOCK = new BlockHugeMushroom("yellow", 0);
 	public static final Block PURPLE_MUSHROOM_BLOCK = new BlockHugeMushroom("purple", 0);
+	public static final Block CAP_KINGDOM_GRASS_BLOCK = new BlockGrass("cap_kingdom_grass_block", Material.GROUND, 0.6f, 3f, SoundType.PLANT);
 	
 	// TETRIS
 	public static final Block BLUE_TETRIS_BLOCK = new BlockTetris("blue", "block", Material.ROCK);
@@ -164,6 +165,7 @@ public class BlockInit
 	public static final Block CYAN_BRICKS_STAIRS = new BlockStairs("cyan_brick", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block ELDER_PEBBLES = new BlockBase("elder_pebbles", Material.ROCK, 2f, 30f, SoundType.STONE, 5);
 	public static final Block SPACE_MATTER = new BlockBase("space_matter", Material.SAND, 0.4f, 30f, SoundTypeInit.SPACE_MATTER, 5);
+	//public static final Block SPACE_OBSIDIAN = new BlockBase("space_obsidian", Material.ROCK, -1f, 6000000.0f, SoundType.STONE, 2);
 	
 	// YOUTUBE
 	public static final Block REWIND_BLOCK = new BlockUnstable("rewind_block", Material.IRON, 5f, 30f, SoundType.METAL);

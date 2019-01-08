@@ -29,7 +29,7 @@ tile.tomato.name=Tomate
 tile.salad.name=Salade
 tile.cheese_block.name=Bloc de fromage
 tile.unstable_stone.name=Roche instable
-tile.rewind_block.name=Bloc Rewind
+tile.ultimatum_portal.name=Portail de l'Utimatum
 
 tile.question_block.name=Bloc ?
 tile.empty_block.name=Bloc vide
@@ -124,6 +124,7 @@ tile.cyan_brick_stairs.name=Escaliers en brique cyan
 tile.elder_pebbles.name=Anciens galets
 tile.space_matter.name=Matière spatiale
 
+tile.rewind_block.name=Bloc Rewind
 tile.koretato_block.name=Bloc Koretato
 
 --- ITEMS ---

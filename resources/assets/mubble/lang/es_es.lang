@@ -29,7 +29,7 @@ tile.tomato.name=Tomates
 tile.salad.name=Ensalada
 tile.cheese_block.name=Bloque de queso
 //tile.unstable_stone.name=<newline>
-//tile.rewind_block.name=<newline>
+//tile.ultimatum_portal.name=<newline>
 
 tile.question_block.name=Bloque ?
 tile.empty_block.name=Bloque vacío
@@ -124,6 +124,7 @@ tile.cyan_brick_stairs.name=Escalera de ladrillos cian
 tile.elder_pebbles.name=Guijarros antiguos
 tile.space_matter.name=Materia espacial
 
+//tile.rewind_block.name=<newline>
 tile.koretato_block.name=Bloque Koretato
 
 --- ITEMS ---

@@ -29,7 +29,7 @@ tile.black_cloud_block.name=Black Cloud Block
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
 //tile.unstable_stone.name=<newline>
-//tile.rewind_block.name=<newline>
+//tile.ultimatum_portal.name=<newline>
 
 tile.question_block.name=? Block
 tile.empty_block.name=Empty Block
@@ -124,6 +124,7 @@ tile.cyan_brick_stairs.name=Cyan Brick Stairs
 tile.elder_pebbles.name=Elder Pebbles
 tile.space_matter.name=Space Matter
 
+//tile.rewind_block.name=<newline>
 tile.koretato_block.name=Koretato Block
 
 --- ITEMS ---

@@ -21,6 +21,7 @@ public class SoundHandler
 	BLOCK_SPACE_MATTER_PLACE,
 	BLOCK_SPACE_MATTER_HIT,
 	BLOCK_SPACE_MATTER_STEP,
+	BLOCK_ULTIMATUM_PORTAL_AMBIENT,
 	ITEM_ANNOYING_DOG_DISAPPEAR,
 	ITEM_ANNOYING_DOG_WAF,
 	ITEM_CAPE_FEATHER_USE,
@@ -62,6 +63,7 @@ public class SoundHandler
 		BLOCK_SPACE_MATTER_PLACE = registerSound("block.space_matter.place");
 		BLOCK_SPACE_MATTER_HIT = registerSound("block.space_matter.hit");
 		BLOCK_SPACE_MATTER_STEP = registerSound("block.space_matter.step");
+		BLOCK_ULTIMATUM_PORTAL_AMBIENT = registerSound("block.ultimatum_portal.ambient");
 		ITEM_ANNOYING_DOG_DISAPPEAR = registerSound("item.annoying_dog.disappear");
 		ITEM_ANNOYING_DOG_WAF = registerSound("item.annoying_dog.waf");
 		ITEM_CAPE_FEATHER_USE = registerSound("item.cape_feather.use");

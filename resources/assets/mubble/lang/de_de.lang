@@ -29,7 +29,7 @@ tile.tomato.name=Tomaten
 tile.salad.name=Salat
 tile.cheese_block.name=Käseblock
 //tile.unstable_stone.name=<newline>
-//tile.rewind_block.name=<newline>
+//tile.ultimatum_portal.name=<newline>
 
 tile.question_block.name=? Block
 tile.empty_block.name=Leerer Block
@@ -124,6 +124,7 @@ tile.cyan_brick_stairs.name=Türkise Ziegeltreppe
 tile.elder_pebbles.name=Elder Pebbles
 tile.space_matter.name=Space Matter
 
+//tile.rewind_block.name=<newline>
 tile.koretato_block.name=Koretato-Block
 
 --- ITEMS ---

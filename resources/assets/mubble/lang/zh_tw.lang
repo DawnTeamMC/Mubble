@@ -29,7 +29,7 @@ tile.footblock.name=足球塊
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
 //tile.unstable_stone.name=<newline>
-//tile.rewind_block.name=<newline>
+//tile.ultimatum_portal.name=<newline>
 
 tile.question_block.name=問號塊
 tile.empty_block.name=鋼塊
@@ -124,6 +124,7 @@ tile.cyan_bricks.name=青色磚塊
 tile.elder_pebbles.name=遠古鵝卵石
 tile.space_matter.name=太空物質
 
+//tile.rewind_block.name=<newline>
 tile.koretato_block.name=Koretato塊
 
 --- ITEMS ---

@@ -29,7 +29,7 @@ tile.white_cloud_block.name=ʞɔolq pnolƆ ǝʇᴉɥM
 //tile.salad.name=<newline>
 //tile.cheese_block.name=<newline>
 //tile.unstable_stone.name=<newline>
-//tile.rewind_block.name=<newline>
+//tile.ultimatum_portal.name=<newline>
 
 tile.question_block.name=ʞɔolᗺ ¿
 tile.empty_block.name=ʞɔolᗺ ʎʇdɯƎ
@@ -124,6 +124,7 @@ tile.cyan_bricks.name=sʞɔᴉɹᗺ uɐʎƆ
 tile.elder_pebbles.name=sǝlqqǝԀ ɹǝplƎ
 tile.space_matter.name=ɹǝʇʇɐW ǝɔɐdS
 
+//tile.rewind_block.name=<newline>
 tile.koretato_block.name=ʞɔolq oʇɐʇǝɹoʞ
 
 --- ITEMS ---

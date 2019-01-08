@@ -4,11 +4,15 @@ import java.util.Random;
 
 import com.google.common.collect.Lists;
 
+import hugman.mod.Main;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.CostumeInit;
 import hugman.mod.init.ItemInit;
+import hugman.mod.init.SoundTypeInit;
 import hugman.mod.util.Teleporter;
+import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,11 +20,18 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -29,8 +40,9 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockPortal extends BlockBase implements IHasModel
+public class BlockPortal extends Block implements IHasModel
 {
+	protected static final AxisAlignedBB END_PORTAL_AABB = new AxisAlignedBB(0.0D, 0.375D, 0.0D, 1.0D, 0.625D, 1.0D);
 	int dim;
 	
 	/**
@@ -38,9 +50,24 @@ public class BlockPortal extends BlockBase implements IHasModel
 	 */
 	public BlockPortal(String portal, int dim)
 	{
-		super(portal, Material.PORTAL, 0, 0, SoundType.GLASS, 15, null);
+		super(Material.PORTAL);
+		setTranslationKey(portal + "_portal");
+		setRegistryName(portal + "_portal");
+		setCreativeTab(Main.MUBBLE_BLOCKS);
+		setSoundType(SoundType.GLASS);
+		setHardness(-1.0f);
+		this.blockResistance = 6000000.0F;
+		this.lightValue = 15;
 		this.dim = dim;
+		
+		BlockInit.BLOCKS.add(this);
 	}
+	
+	@Override
+    public AxisAlignedBB getBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+    {
+        return END_PORTAL_AABB;
+    }
 	
 	@Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
@@ -98,9 +125,43 @@ public class BlockPortal extends BlockBase implements IHasModel
         return 0;
     }
 	
+    @SideOnly(Side.CLIENT)
+    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+    {
+    	if(this == BlockInit.ULTIMATUM_PORTAL)
+    	{
+            if (rand.nextInt(100) == 0)
+            {
+                worldIn.playSound((double)pos.getX() + 0.5D, (double)pos.getY() + 0.5D, (double)pos.getZ() + 0.5D, SoundHandler.BLOCK_ULTIMATUM_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+            }
+            if (rand.nextInt(30) == 0)
+            {
+                EnumParticleTypes particle = null;
+                switch (rand.nextInt(4))
+                {
+                	case 0: particle = EnumParticleTypes.FLAME;
+        					break;
+                	case 1: particle = EnumParticleTypes.SMOKE_NORMAL;
+    						break;
+                	case 2: particle = EnumParticleTypes.CLOUD;
+    						break;
+                	case 3: particle = EnumParticleTypes.FIREWORKS_SPARK;
+    						break;
+                }
+                for (int i = 0; i < rand.nextInt(11) + 5; i++)
+                {
+                	worldIn.spawnParticle(particle, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ((double)rand.nextFloat() - 0.5D) * 0.3D, (double)rand.nextFloat() * 0.9D, ((double)rand.nextFloat() - 0.5D) * 0.3D);
+                }
+            }
+    	}
+    }
+	
 	@Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
     {
         return ItemStack.EMPTY;
     }
+	
+	@Override
+	public void registerModels(){}
 }
