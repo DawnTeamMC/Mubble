@@ -126,6 +126,17 @@
 			"mubble:block/space_matter/step4"
 		]
 	},
+	"block.ultimatum_portal.ambient":
+	{
+		"category": "block",
+		"sounds":
+		[
+			"mubble:generic/ambient/electric",
+			"mubble:generic/ambient/fire",
+			"mubble:generic/ambient/ice",
+			"mubble:generic/ambient/wind"
+		]
+	},
 	"item.annoying_dog.disappear":
 	{
 		"category": "player",
