@@ -1,9 +1,9 @@
-package hugman.mod.world.dimension.smash;
+package hugman.mod.world.dimension;
 
 import hugman.mod.init.BiomeInit;
 import hugman.mod.init.DimensionInit;
 import hugman.mod.util.Reference;
-import hugman.mod.world.dimension.EmptyChunkGenerator;
+import hugman.mod.world.gen.chunks.EmptyChunkGenerator;
 import net.minecraft.init.Biomes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.DimensionType;
@@ -11,9 +11,9 @@ import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.BiomeProviderSingle;
 import net.minecraft.world.gen.IChunkGenerator;
 
-public class DimensionWorldOfLight extends WorldProvider
+public class DimensionUltimatum extends WorldProvider
 {
-	public DimensionWorldOfLight()
+	public DimensionUltimatum()
 	{
 		this.biomeProvider = new BiomeProviderSingle(BiomeInit.MUSHROOM_KINGDOM);
 	}
@@ -21,7 +21,7 @@ public class DimensionWorldOfLight extends WorldProvider
 	@Override
 	public DimensionType getDimensionType() 
 	{
-		return DimensionInit.WORLD_OF_LIGHT;
+		return DimensionInit.ULTIMATUM;
 	}
 	
 	@Override

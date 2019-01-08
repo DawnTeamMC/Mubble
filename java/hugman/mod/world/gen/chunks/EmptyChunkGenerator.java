@@ -1,4 +1,4 @@
-package hugman.mod.world.dimension;
+package hugman.mod.world.gen.chunks;
 
 import java.util.Collections;
 import java.util.List;

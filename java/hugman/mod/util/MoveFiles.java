@@ -1,4 +1,4 @@
-package hugman.mod.util.handlers;
+package hugman.mod.util;
 
 import java.io.File;
 import java.io.IOException;
