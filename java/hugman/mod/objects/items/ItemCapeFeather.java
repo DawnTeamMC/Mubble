@@ -23,6 +23,7 @@ public class ItemCapeFeather extends ItemBase implements IHasModel
 	public ItemCapeFeather(String name)
 	{
 		super(name);
+		if(this == ItemInit.SUPER_CAPE_FEATHER) setMaxStackSize(1);
 	}
 	
 	@Override
