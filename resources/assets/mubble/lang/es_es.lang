@@ -123,6 +123,7 @@ tile.cyan_bricks.name=Ladrillos cian
 tile.cyan_brick_stairs.name=Escalera de ladrillos cian
 tile.elder_pebbles.name=Guijarros antiguos
 tile.space_matter.name=Materia espacial
+//tile.space_obsidian.name=<newline>
 
 //tile.rewind_block.name=<newline>
 tile.koretato_block.name=Bloque Koretato

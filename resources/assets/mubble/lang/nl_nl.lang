@@ -123,6 +123,7 @@ tile.cyan_bricks.name=Turquoise bakstenen
 tile.cyan_brick_stairs.name=Turqoise bakstenen trap
 tile.elder_pebbles.name=Oudere keizels
 tile.space_matter.name=Ruimte materie
+//tile.space_obsidian.name=<newline>
 
 //tile.rewind_block.name=<newline>
 tile.koretato_block.name=Koretato-blok

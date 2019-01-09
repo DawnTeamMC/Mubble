@@ -123,6 +123,7 @@ tile.cyan_bricks.name=Türkise Ziegelsteine
 tile.cyan_brick_stairs.name=Türkise Ziegeltreppe
 tile.elder_pebbles.name=Elder Pebbles
 tile.space_matter.name=Space Matter
+//tile.space_obsidian.name=<newline>
 
 tile.rewind_block.name=Rückspul-Block
 tile.koretato_block.name=Koretato-Block

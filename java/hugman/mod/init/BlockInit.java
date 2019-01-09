@@ -165,7 +165,7 @@ public class BlockInit
 	public static final Block CYAN_BRICKS_STAIRS = new BlockStairs("cyan_brick", Material.ROCK, 2f, 30f, SoundType.STONE);
 	public static final Block ELDER_PEBBLES = new BlockBase("elder_pebbles", Material.ROCK, 2f, 30f, SoundType.STONE, 5);
 	public static final Block SPACE_MATTER = new BlockBase("space_matter", Material.SAND, 0.4f, 30f, SoundTypeInit.SPACE_MATTER, 5);
-	//public static final Block SPACE_OBSIDIAN = new BlockBase("space_obsidian", Material.ROCK, -1f, 6000000.0f, SoundType.STONE, 2);
+	public static final Block SPACE_OBSIDIAN = new BlockBase("space_obsidian", Material.ROCK, -1f, 6000000.0f, SoundType.STONE, 2);
 	
 	// YOUTUBE
 	public static final Block REWIND_BLOCK = new BlockUnstable("rewind_block", Material.IRON, 5f, 30f, SoundType.METAL);

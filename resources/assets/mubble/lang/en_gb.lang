@@ -123,6 +123,7 @@ tile.cyan_bricks.name=Cyan Bricks
 tile.cyan_brick_stairs.name=Cyan Brick Stairs
 tile.elder_pebbles.name=Elder Pebbles
 tile.space_matter.name=Space Matter
+//tile.space_obsidian.name=<newline>
 
 //tile.rewind_block.name=<newline>
 tile.koretato_block.name=Koretato Block

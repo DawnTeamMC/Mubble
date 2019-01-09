@@ -123,6 +123,7 @@ tile.cyan_bricks.name=Briques cyans
 tile.cyan_brick_stairs.name=Escaliers en brique cyan
 tile.elder_pebbles.name=Anciens galets
 tile.space_matter.name=Matière spatiale
+tile.space_obsidian.name=Obsidienne spatiale
 
 tile.rewind_block.name=Bloc Rewind
 tile.koretato_block.name=Bloc Koretato

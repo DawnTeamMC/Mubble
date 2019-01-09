@@ -123,6 +123,7 @@ tile.cyan_bricks.name=青色砖块
 //tile.cyan_brick_stairs.name=<newline>
 tile.elder_pebbles.name=远古鹅卵石
 tile.space_matter.name=太空物质
+//tile.space_obsidian.name=<newline>
 
 //tile.rewind_block.name=<newline>
 tile.koretato_block.name=Koretato块

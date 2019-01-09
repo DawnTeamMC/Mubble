@@ -123,8 +123,9 @@ tile.cyan_bricks.name=nyan briks
 //tile.cyan_brick_stairs.name=<newline>
 tile.elder_pebbles.name=old pebbL
 tile.space_matter.name=MARTIAN DIRT OoOoOoO
+//tile.space_obsidian.name=<newline>
 
-//tile.rewind_block.name=<newline>
+tile.rewind_block.name=Dat's hawt
 tile.koretato_block.name=Koretato blok
 
 --- ITEMS ---
