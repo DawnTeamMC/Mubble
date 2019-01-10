@@ -13,6 +13,7 @@ import hugman.mod.objects.blocks.BlockDirt;
 import hugman.mod.objects.blocks.BlockEmpty;
 import hugman.mod.objects.blocks.BlockFallingGlass;
 import hugman.mod.objects.blocks.BlockFlower;
+import hugman.mod.objects.blocks.BlockFlying;
 import hugman.mod.objects.blocks.BlockGrass;
 import hugman.mod.objects.blocks.BlockGrassPlant;
 import hugman.mod.objects.blocks.BlockHugeMushroom;
@@ -65,6 +66,8 @@ public class BlockInit
 	public static final Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.CLOTH, 0.5f, 2f, SoundType.SNOW);
 	public static final Block UNSTABLE_STONE = new BlockUnstable("unstable_stone", Material.ROCK, 0.1f, 1f, SoundType.STONE);
 	public static final Block ULTIMATUM_PORTAL = new BlockPortal("ultimatum", 64);
+	public static final Block BLUE_BALLOON = new BlockFlying("blue_balloon", Material.CLOTH, 0f, 0f, SoundType.CLOTH);
+	public static final Block LIGHT_BLUE_BALLOON = new BlockFlying("light_blue_balloon", Material.CLOTH, 0f, 0f, SoundType.CLOTH);
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();

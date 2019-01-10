@@ -12,4 +12,5 @@ public class Reference
 	
 	public static final int ENTITY_TOAD = 64;
 	public static final int ENTITY_CHINCHO = 65;
+	public static final int ENTITY_FLYING_BLOCK = 66;
 }
