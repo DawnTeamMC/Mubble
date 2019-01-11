@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import hugman.mod.Main;
 import hugman.mod.commands.CommandMotion;
+import hugman.mod.entity.EntityFlyingBlock;
 import hugman.mod.init.BiomeInit;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.CostumeInit;
@@ -12,6 +13,7 @@ import hugman.mod.init.DimensionInit;
 import hugman.mod.init.EntityInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.init.RecipeInit;
+import hugman.mod.util.Reference;
 import hugman.mod.util.interfaces.IHasModel;
 import hugman.mod.world.gen.WorldGenCustomOres;
 import hugman.mod.world.gen.WorldGenCustomStructures;
@@ -23,6 +25,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @EventBusSubscriber
@@ -68,6 +72,17 @@ public class RegistryHandler
 			}
 		}
 	}
+	
+	@SubscribeEvent
+    public static void onEntityRegistry(RegistryEvent.Register<EntityEntry> event) {
+        event.getRegistry().register(EntityEntryBuilder.create()
+                .entity(EntityFlyingBlock.class)
+                .id(new ResourceLocation(Reference.MODID, "flying_block"), 0)
+                .name(Reference.MODID + ".flying_block")
+                .tracker(256, 1, true)
+                .build()
+        );
+    }
 	
 	public static void preInitRegistries() throws IOException
 	{
