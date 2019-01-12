@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mod.Main;
+import hugman.mod.objects.blocks.BlockBalloon;
 import hugman.mod.objects.blocks.BlockBase;
 import hugman.mod.objects.blocks.BlockBrick;
 import hugman.mod.objects.blocks.BlockCloud;
@@ -66,8 +67,14 @@ public class BlockInit
 	public static final Block CHEESE_BLOCK = new BlockBase("cheese_block", Material.CLOTH, 0.5f, 2f, SoundType.SNOW);
 	public static final Block UNSTABLE_STONE = new BlockUnstable("unstable_stone", Material.ROCK, 0.1f, 1f, SoundType.STONE);
 	public static final Block ULTIMATUM_PORTAL = new BlockPortal("ultimatum", 64);
-	public static final Block BLUE_BALLOON = new BlockFlying("blue_balloon", Material.CLOTH, 0f, 0f, SoundType.CLOTH);
-	public static final Block LIGHT_BLUE_BALLOON = new BlockFlying("light_blue_balloon", Material.CLOTH, 0f, 0f, SoundType.CLOTH);
+	public static final Block BLUE_BALLOON = new BlockBalloon("blue");
+	public static final Block LIGHT_BLUE_BALLOON = new BlockBalloon("light_blue");
+	public static final Block CYAN_BALLOON = new BlockBalloon("cyan");
+	public static final Block GREEN_BALLOON = new BlockBalloon("green");
+	public static final Block LIME_BALLOON = new BlockBalloon("lime");
+	public static final Block YELLOW_BALLOON = new BlockBalloon("yellow");
+	public static final Block ORANGE_BALLOON = new BlockBalloon("orange");
+	public static final Block RED_BALLOON = new BlockBalloon("red");
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();

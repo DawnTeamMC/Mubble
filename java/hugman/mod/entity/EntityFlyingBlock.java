@@ -1,33 +1,49 @@
 package hugman.mod.entity;
 
+import java.util.UUID;
+
 import javax.annotation.Nullable;
 
 import hugman.mod.objects.blocks.BlockFlying;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityHanging;
+import net.minecraft.entity.EntityLeashKnot;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.ai.EntityAITasks;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.play.server.SPacketEntityAttach;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class EntityFlyingBlock extends Entity
+public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnData
 {
     private IBlockState flyTile;
     public int flyTime;
@@ -35,15 +51,18 @@ public class EntityFlyingBlock extends Entity
     private boolean dontSetBlock;
     public NBTTagCompound tileEntityData;
     protected static final DataParameter<BlockPos> ORIGIN = EntityDataManager.<BlockPos>createKey(EntityFlyingBlock.class, DataSerializers.BLOCK_POS);
+    public final EntityAITasks tasks;
     
     public EntityFlyingBlock(World worldIn)
     {
         super(worldIn);
+        this.tasks = new EntityAITasks(worldIn != null && worldIn.profiler != null ? worldIn.profiler : null);
     }
 
     public EntityFlyingBlock(World worldIn, double x, double y, double z, IBlockState flyingBlockState)
     {
         super(worldIn);
+        this.tasks = new EntityAITasks(worldIn != null && worldIn.profiler != null ? worldIn.profiler : null);
         this.flyTile = flyingBlockState;
         this.preventEntitySpawning = true;
         this.setSize(0.98F, 0.98F);
@@ -56,6 +75,18 @@ public class EntityFlyingBlock extends Entity
         this.prevPosZ = z;
         this.setOrigin(new BlockPos(this));
     }
+
+	@Override
+	public void writeSpawnData(ByteBuf buffer)
+	{
+		buffer.writeInt(Block.getStateId(flyTile));
+	}
+
+	@Override
+	public void readSpawnData(ByteBuf additionalData)
+	{
+		this.flyTile = Block.getStateById(additionalData.readInt());
+	}
     
     @Override
     public boolean canBeAttackedWithItem()
@@ -124,7 +155,7 @@ public class EntityFlyingBlock extends Entity
 
             if (!this.hasNoGravity())
             {
-                this.motionY -= 0.03999999910593033D;
+                this.motionY += 0.03999999910593033D;
             }
 
             this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
@@ -159,12 +190,22 @@ public class EntityFlyingBlock extends Entity
                         this.setDead();
                     }
                 }
+
+                if (this.ticksExisted % 5 == 0)
+                {
+                    boolean flag2 = !(this.getControllingPassenger() instanceof EntityLiving);
+                    boolean flag3 = !(this.getRidingEntity() instanceof EntityBoat);
+                    this.tasks.setControlFlag(1, flag2);
+                    this.tasks.setControlFlag(4, flag2 && flag3);
+                    this.tasks.setControlFlag(2, flag2);
+                }
+                
                 else
                 {
                     IBlockState iblockstate = this.world.getBlockState(blockpos1);
 
-                    if (this.world.isAirBlock(new BlockPos(this.posX, this.posY - 0.009999999776482582D, this.posZ)))
-                    if (!flag1 && BlockFlying.canFlyThrough(this.world.getBlockState(new BlockPos(this.posX, this.posY - 0.009999999776482582D, this.posZ))))
+                    if (this.world.isAirBlock(new BlockPos(this.posX, this.posY + 0.99000000022D, this.posZ)))
+                    if (!flag1 && BlockFlying.canFlyThrough(this.world.getBlockState(new BlockPos(this.posX, this.posY + 0.99000000022D, this.posZ))))
                     {
                         this.onGround = false;
                         return;
@@ -172,7 +213,7 @@ public class EntityFlyingBlock extends Entity
 
                     this.motionX *= 0.699999988079071D;
                     this.motionZ *= 0.699999988079071D;
-                    this.motionY *= 0.5D;
+                    this.motionY *= -0.5D;
 
                     if (iblockstate.getBlock() != Blocks.PISTON_EXTENSION)
                     {
@@ -180,7 +221,7 @@ public class EntityFlyingBlock extends Entity
 
                         if (!this.dontSetBlock)
                         {
-                            if (this.world.mayPlace(block, blockpos1, true, EnumFacing.UP, (Entity)null) && (flag1 || !BlockFlying.canFlyThrough(this.world.getBlockState(blockpos1.up()))) && this.world.setBlockState(blockpos1, this.flyTile, 3))
+                            if (this.world.mayPlace(block, blockpos1, true, EnumFacing.DOWN, (Entity)null) && (flag1 || !BlockFlying.canFlyThrough(this.world.getBlockState(blockpos1.up()))) && this.world.setBlockState(blockpos1, this.flyTile, 3))
                             {
                                 if (block instanceof BlockFlying)
                                 {
@@ -321,6 +362,16 @@ public class EntityFlyingBlock extends Entity
     @Override
     public boolean ignoreItemEntityData()
     {
-        return true;
+        return false;
+    }
+    
+    public final boolean processInitialInteract(EntityPlayer player, EnumHand hand)
+    {
+    	return this.processInteract(player, hand) ? true : super.processInitialInteract(player, hand);
+    }
+
+    protected boolean processInteract(EntityPlayer player, EnumHand hand)
+    {
+        return false;
     }
 }

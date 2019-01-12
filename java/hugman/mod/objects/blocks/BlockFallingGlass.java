@@ -39,6 +39,7 @@ public class BlockFallingGlass extends BlockFalling implements IHasModel
 		ItemInit.ITEMS.add(new ItemBlock(this).setRegistryName(this.getRegistryName()));
 	}
 	
+	@Override
     public int quantityDropped(Random random)
     {
         return 0;
