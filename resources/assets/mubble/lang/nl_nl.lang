@@ -33,25 +33,25 @@ tile.gray_cloud_block.name=Grijzewolkblok
 tile.black_cloud_block.name=Zwartewolkblok
 tile.tomato.name=Tomaten
 tile.salad.name=Salade
-//tile.cheese_block.name=<newline>
-//tile.unstable_stone.name=<newline>
-//tile.ultimatum_portal.name=<newline>
-//tile.blue_balloon.name=<newline>
-//tile.light_blue_balloon.name=<newline>
-//tile.cyan_balloon.name=<newline>
-//tile.green_balloon.name=<newline>
-//tile.lime_balloon.name=<newline>
-//tile.yellow_balloon.name=<newline>
-//tile.orange_balloon.name=<newline>
-//tile.red_balloon.name=<newline>
-//tile.pink_balloon.name=<newline>
-//tile.magenta_balloon.name=<newline>
-//tile.purple_balloon.name=<newline>
-//tile.brown_balloon.name=<newline>
-//tile.white_balloon.name=<newline>
-//tile.light_gray_balloon.name=<newline>
-//tile.gray_balloon.name=<newline>
-//tile.black_balloon.name=<newline>
+tile.cheese_block.name=Kaasblok
+tile.unstable_stone.name=Onstabiel steen
+tile.ultimatum_portal.name=Ultimatumportaal
+tile.blue_balloon.name=Blauwe ballon
+tile.light_blue_balloon.name=Lichtblauwe ballon
+tile.cyan_balloon.name=Turquoise ballon
+tile.green_balloon.name=Groene ballon
+tile.lime_balloon.name=Lichtgroene ballon
+tile.yellow_balloon.name=Gele ballon
+tile.orange_balloon.name=Oranje ballon
+tile.red_balloon.name=Rode ballon
+tile.pink_balloon.name=Roze ballon
+tile.magenta_balloon.name=Magenta ballon
+tile.purple_balloon.name=Paarse ballon
+tile.brown_balloon.name=Bruine ballon
+tile.white_balloon.name=Witte ballon
+tile.light_gray_balloon.name=Lichtgrijze ballon
+tile.gray_balloon.name=Grijze ballon
+tile.black_balloon.name=Zwarte ballon
 
 tile.question_block.name=?-blok
 tile.empty_block.name=Leeg blok
@@ -127,15 +127,15 @@ tile.light_gray_candy_cane_pillar.name=Lichtgrijze zuurstokpillaar
 tile.gray_candy_cane_pillar.name=Grijze zuurstokpillaar
 tile.black_candy_cane_pillar.name=Zwarte zuurstokpillaar
 
-//tile.green_hill_grass_block.name=<newline>
-//tile.green_hill_dirt.name=<newline>
-//tile.marble_zone_stone.name=<newline>
+tile.green_hill_grass_block.name=Groeneheuvel grasblok
+tile.green_hill_dirt.name=Groeneheuvel gras
+tile.marble_zone_stone.name=Marblezone steen
 tile.yellow_studiopolis_clapper.name=Gele studiopolisklepel
 tile.blue_studiopolis_clapper.name=Blauwe studiopolisklepel
-//tile.spring.name=<newline>
+tile.spring.name=Veer
 
-//tile.scarlet_grass_block.name=<newline>
-//tile.scarlet_grass.name=<newline>
+tile.scarlet_grass_block.name=Scharlake grasblok
+tile.scarlet_grass.name=Scharlake gras
 tile.scarlet_mushroom.name=Scharlake paddenstoel
 tile.scarlet_orchid.name=Scharlake orchidee
 
@@ -146,21 +146,21 @@ tile.cyan_bricks.name=Turquoise bakstenen
 tile.cyan_brick_stairs.name=Turqoise bakstenen trap
 tile.elder_pebbles.name=Oudere keizels
 tile.space_matter.name=Ruimte materie
-//tile.space_obsidian.name=<newline>
+tile.space_obsidian.name=Ruimte obsidiaan
 
-//tile.blue_puyo.name=<newline>
-//tile.turquoise_puyo.name=<newline>
-//tile.green_puyo.name=<newline>
-//tile.yellow_puyo.name=<newline>
-//tile.red_puyo.name=<newline>
-//tile.purple_puyo.name=<newline>
-//tile.garbage_puyo.name=<newline>
-//tile.point_puyo.name=<newline>
-//tile.hard_puyo.name=<newline>
-//tile.iron_puyo.name=<newline>
-//tile.puyo_block.name=<newline>
+tile.blue_puyo.name=Blauwe puyo
+tile.cyan_puyo.name=Turquoise puyo
+tile.green_puyo.name=Groene puyo
+tile.yellow_puyo.name=Gele puyo
+tile.red_puyo.name=Rode puyo
+tile.purple_puyo.name=Paarse puyo
+tile.garbage_puyo.name=Afval puyo
+tile.point_puyo.name=Punt puyo
+tile.hard_puyo.name=Harde puyo
+tile.iron_puyo.name=Ijzere puyo
+tile.puyo_block.name=Puyoblok
 
-//tile.rewind_block.name=<newline>
+tile.rewind_block.name=Terugspoelblok
 tile.koretato_block.name=Koretato-blok
 
 --- ITEMS ---
@@ -180,7 +180,7 @@ item.cheese.name=Kaas
 item.super_mushroom.name=Super paddenstoel
 item.peach.name=Perzik
 item.cape_feather.name=Cape veer
-//item.super_cape_feather.name=<newline>
+item.super_cape_feather.name=Supercape veer
 item.super_star.name=Super ster
 item.yellow_coin.name=Gele munt
 item.red_coin.name=Rode munt
@@ -202,7 +202,7 @@ item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harve
 
 --- COSTUMES ---
 item.headphones.name=Koptelefoon
-//item.christmas_hat.name=<newline>
+item.christmas_hat.name=Kerstmuts
 
 item.cappy.name=Cappy
 item.luigi_cap.name=Luigi's pet
@@ -224,10 +224,10 @@ item.top_hat.name=Hoge hoed
 
 item.ralsei_hat.name=Ralsei's hoed
 
-//item.baldi_head.name=<newline>
+item.baldi_head.name=Baldi's hoofd
 
 item.mayro_cap.name=Mayro's pet
-item.noteblock_head.name=NoteBlock's hooft
+item.noteblock_head.name=NoteBlock's hoofd
 
 --- ENTITIES ---
 entity.toad.name=Toad
@@ -260,7 +260,7 @@ advancements.mubble.get_tetris_block.description=Krijg je handen aan een Tetris 
 
 --- COMMANDS ---
 commands.motion.usage=/motion <entity> <set|add> [dX] [dY] [dZ]
-//commands.motion.success=<newline>
+commands.motion.success=Beweging van %s veranderd naar %s, %s, %s
 
 --- OTHER ---
 item.cappy.secret_status=Hoe paradoxaal... :)
