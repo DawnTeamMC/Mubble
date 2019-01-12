@@ -1,5 +1,6 @@
 package hugman.mod.objects.blocks;
 
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -14,7 +15,7 @@ public class BlockRotating extends BlockBase implements IHasModel
 	 */
 	public BlockRotating()
 	{
-		super("rotating_block", Material.ROCK, 1.5f, 20f, SoundType.STONE);
+		super("rotating_block", CreativeTabInit.SUPER_MARIO, Material.ROCK, 1.5f, 20f, SoundType.STONE);
 	}
 
 	@Override

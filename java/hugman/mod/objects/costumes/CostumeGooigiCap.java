@@ -2,6 +2,7 @@ package hugman.mod.objects.costumes;
 
 import java.util.Random;
 
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -18,7 +19,7 @@ public class CostumeGooigiCap extends CostumeHeadBase implements IHasModel
 	 */
 	public CostumeGooigiCap()
 	{
-		super("gooigi_cap", SoundEvents.BLOCK_SLIME_PLACE);
+		super("gooigi_cap", CreativeTabInit.SUPER_MARIO, SoundEvents.BLOCK_SLIME_PLACE);
 	}
 	
 	@Override

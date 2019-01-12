@@ -4,6 +4,7 @@ import hugman.mod.Main;
 import hugman.mod.init.CostumeInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -28,11 +29,11 @@ public class CostumeHeadBase extends Item implements IHasModel
      * Open class - can be initialized for multiple items with variables.<br>
      * Template class - is used to create other classes.
      */
-	public CostumeHeadBase(String name, SoundEvent sound)
+	public CostumeHeadBase(String name, CreativeTabs tab, SoundEvent sound)
 	{
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(Main.MUBBLE_COSTUMES);
+		setCreativeTab(tab);
 		setMaxStackSize(1);
 		
 		CostumeInit.COSTUMES.add(this);

@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -21,9 +22,9 @@ public class BlockFlying extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockFlying(String name, Material material, float hardness, float resistance, SoundType sound)
+	public BlockFlying(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name, material, hardness, resistance, sound);
+		super(name, tab, material, hardness, resistance, sound);
 	}
 	
 	@Override

@@ -1,7 +1,13 @@
 --- CREATIVE TABS ---
-itemGroup.mubble_blocks_tab=Mubble blokken
-itemGroup.mubble_items_tab=Mubble voorwerpen
-itemGroup.mubble_costumes_tab=Mubble kostuums
+itemGroup.super_mario=Mubble - Super Mario
+itemGroup.tetris=Mubble - Tetris
+itemGroup.castlevania=Mubble - Castlevania
+itemGroup.sonic=Mubble - Sonic
+itemGroup.celeste=Mubble - Celeste
+itemGroup.undertale_deltarune=Mubble - UNDERTALE & DELTARUNE
+itemGroup.puyo_puyo=Mubble - Puyo Puyo
+itemGroup.mubble_misc=Mubble - Miscellaneous
+itemGroup.youtube=Mubble - YouTube
 
 --- BLOCKS ---
 tile.vanadium_block.name=Vanadiumblok
@@ -140,6 +146,18 @@ tile.cyan_brick_stairs.name=Turqoise bakstenen trap
 tile.elder_pebbles.name=Oudere keizels
 tile.space_matter.name=Ruimte materie
 //tile.space_obsidian.name=<newline>
+
+//tile.blue_puyo.name=<newline>
+//tile.turquoise_puyo.name=<newline>
+//tile.green_puyo.name=<newline>
+//tile.yellow_puyo.name=<newline>
+//tile.red_puyo.name=<newline>
+//tile.purple_puyo.name=<newline>
+//tile.garbage_puyo.name=<newline>
+//tile.point_puyo.name=<newline>
+//tile.hard_puyo.name=<newline>
+//tile.iron_puyo.name=<newline>
+//tile.puyo_block.name=<newline>
 
 //tile.rewind_block.name=<newline>
 tile.koretato_block.name=Koretato-blok

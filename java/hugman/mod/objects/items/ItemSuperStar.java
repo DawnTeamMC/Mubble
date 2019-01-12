@@ -1,6 +1,7 @@
 package hugman.mod.objects.items;
 
 import hugman.mod.Main;
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
@@ -21,7 +22,7 @@ public class ItemSuperStar extends ItemFood implements IHasModel
 		super(3, 2.4f, false);
 		setTranslationKey("super_star");
 		setRegistryName("super_star");
-		setCreativeTab(Main.MUBBLE_ITEMS);
+		setCreativeTab(CreativeTabInit.SUPER_MARIO);
 		setAlwaysEdible();
 		ItemInit.ITEMS.add(this);
 	}

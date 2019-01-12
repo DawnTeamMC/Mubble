@@ -4,6 +4,7 @@ import java.util.Random;
 
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.CostumeInit;
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
@@ -33,7 +34,7 @@ public class BlockQuestion extends BlockBase implements IHasModel
 	 */
 	public BlockQuestion()
 	{
-		super("question_block", Material.IRON, 1.5f, 30f, SoundType.METAL);
+		super("question_block", CreativeTabInit.SUPER_MARIO, Material.IRON, 1.5f, 30f, SoundType.METAL);
 	}
 	
     @Override

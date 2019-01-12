@@ -2,9 +2,11 @@ package hugman.mod.objects.items;
 
 import java.util.Random;
 
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -22,7 +24,7 @@ public class ItemCapeFeather extends ItemBase implements IHasModel
 	 */
 	public ItemCapeFeather(String name)
 	{
-		super(name);
+		super(name, CreativeTabInit.SUPER_MARIO);
 		if(this == ItemInit.SUPER_CAPE_FEATHER) setMaxStackSize(1);
 	}
 	

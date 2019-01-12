@@ -11,6 +11,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
@@ -28,9 +29,9 @@ public class BlockHugeMushroom extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockHugeMushroom(String color, int light)
+	public BlockHugeMushroom(String color, CreativeTabs tab, int light)
 	{
-		super(color + "_mushroom_block", Material.WOOD, 0.2f, 1f, SoundType.WOOD, light);
+		super(color + "_mushroom_block", tab, Material.WOOD, 0.2f, 1f, SoundType.WOOD, light);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, BlockHugeMushroom.EnumType.ALL_OUTSIDE));
 	}
 	

@@ -8,6 +8,7 @@ import hugman.mod.init.SoundTypeInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -20,11 +21,11 @@ public class BlockBrick extends BlockBase implements IHasModel
 	private static final AxisAlignedBB BRICK_BLOCK_AABB = new AxisAlignedBB(0.0D, 0.05D, 0.0D, 1.0D, 1.0D, 1.0D);
 	
 	/** 
-	 * Open class - can be initialized for multiple items with variables.
+	 * Open class - can be initialized for multiple blocks with variables.
 	 */
-	public BlockBrick(String name)
+	public BlockBrick(String name, CreativeTabs tab)
 	{
-		super(name, Material.ROCK, 1.5f, 20f, SoundTypeInit.BRICK_BLOCK);
+		super(name, tab, Material.ROCK, 1.5f, 20f, SoundTypeInit.BRICK_BLOCK);
 	}
 	
     @Override

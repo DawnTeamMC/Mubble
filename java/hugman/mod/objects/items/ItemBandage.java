@@ -1,6 +1,7 @@
 package hugman.mod.objects.items;
 
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -22,7 +23,7 @@ public class ItemBandage extends ItemBase implements IHasModel
 	 */
 	public ItemBandage()
 	{
-		super("bandage", 16);
+		super("bandage", CreativeTabs.MISC, 16);
 	}
 	
 	@Override

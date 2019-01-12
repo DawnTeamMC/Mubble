@@ -3,6 +3,7 @@ package hugman.mod.objects.costumes;
 import java.util.Random;
 
 import hugman.mod.init.BiomeInit;
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.entity.item.EntityItem;
@@ -20,7 +21,7 @@ public class CostumeCappy extends CostumeHeadBase implements IHasModel
 	 */
 	public CostumeCappy()
 	{
-		super("cappy", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+		super("cappy", CreativeTabInit.SUPER_MARIO, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 	
 	@Override

@@ -2,6 +2,7 @@ package hugman.mod.objects.items;
 
 import java.util.Random;
 
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +24,7 @@ public class ItemSmashBall extends ItemBase implements IHasModel
 	 */
 	public ItemSmashBall()
 	{
-		super("smash_ball",1);
+		super("smash_ball", CreativeTabInit.MUBBLE_MISC, 1);
 	}
 	
 	@Override

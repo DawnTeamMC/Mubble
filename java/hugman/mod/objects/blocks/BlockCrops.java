@@ -9,6 +9,7 @@ import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -24,14 +25,14 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
 	private static final AxisAlignedBB[] SMALL_CROPS_AABB = new AxisAlignedBB[] {new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.1875D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.25D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.3125D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.4375D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5D, 1.0D), new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 0.5625D, 1.0D)};
 	
 	/** 
-	 * Open class - can be initialized for multiple items with variables.
+	 * Open class - can be initialized for multiple blocks with variables.
 	 */
 	public BlockCrops(String name, Item seed)
 	{
 		setTranslationKey(name);
 		setRegistryName(name);
 		this.seed = seed;
-		setCreativeTab(Main.MUBBLE_BLOCKS);
+		setCreativeTab(CreativeTabs.MATERIALS);
         this.setHardness(0.0F);
         this.setResistance(0.0F);
 		setSoundType(SoundType.PLANT);
@@ -43,7 +44,7 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
 	}
 	
 	/** 
-	 * Open class - can be initialized for multiple items with variables.
+	 * Open class - can be initialized for multiple blocks with variables.
 	 */
 	public BlockCrops(String name, Item seed, Item food)
 	{
@@ -51,7 +52,7 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
 		setRegistryName(name);
 		this.seed = seed;
 		this.food = food;
-		setCreativeTab(Main.MUBBLE_BLOCKS);
+		setCreativeTab(CreativeTabs.MATERIALS);
         this.setHardness(0.0F);
         this.setResistance(0.0F);
 		setSoundType(SoundType.PLANT);

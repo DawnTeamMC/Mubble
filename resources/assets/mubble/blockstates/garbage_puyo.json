@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "mubble:garbage_puyo", "x": 270 },
+        "facing=down": { "model": "mubble:garbage_puyo", "x": 90 },
+        "facing=north": { "model": "mubble:garbage_puyo" },
+        "facing=south": { "model": "mubble:garbage_puyo", "y": 180 },
+        "facing=west": { "model": "mubble:garbage_puyo", "y": 270 },
+        "facing=east": { "model": "mubble:garbage_puyo", "y": 90 }
+    }
+}

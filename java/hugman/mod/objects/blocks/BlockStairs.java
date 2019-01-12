@@ -16,6 +16,7 @@ import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
@@ -56,9 +57,9 @@ public class BlockStairs extends BlockBase implements IHasModel
 	/** 
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockStairs(String name, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockStairs(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name + "_stairs", material, hardness, resistance / 1.5F, sound, light);
+		super(name + "_stairs", tab, material, hardness, resistance / 1.5F, sound, light);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(HALF, BlockStairs.EnumHalf.BOTTOM).withProperty(SHAPE, BlockStairs.EnumShape.STRAIGHT));
         this.setLightOpacity(255);
 	}
@@ -66,9 +67,9 @@ public class BlockStairs extends BlockBase implements IHasModel
 	/** 
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockStairs(String name, Material material, float hardness, float resistance, SoundType sound)
+	public BlockStairs(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name + "_stairs", material, hardness, resistance / 1.5F, sound);
+		super(name + "_stairs", tab, material, hardness, resistance / 1.5F, sound);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(HALF, BlockStairs.EnumHalf.BOTTOM).withProperty(SHAPE, BlockStairs.EnumShape.STRAIGHT));
         this.setLightOpacity(255);
 	}

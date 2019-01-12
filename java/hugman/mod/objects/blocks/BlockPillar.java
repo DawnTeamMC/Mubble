@@ -7,6 +7,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Rotation;
@@ -20,17 +21,17 @@ public class BlockPillar extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockPillar(String name, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockPillar(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name, material, hardness, resistance, sound, light);
+		super(name, tab, material, hardness, resistance, sound, light);
 	}
 	
 	/** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockPillar(String name, Material material, float hardness, float resistance, SoundType sound)
+	public BlockPillar(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name, material, hardness, resistance, sound);
+		super(name, tab, material, hardness, resistance, sound);
 	}
 	
 	@Override

@@ -13,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,11 +32,11 @@ public class BlockFlower extends BlockBush implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockFlower(String name, int light)
+	public BlockFlower(String name, CreativeTabs tab, int light)
 	{
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(Main.MUBBLE_BLOCKS);
+		setCreativeTab(tab);
 		setSoundType(SoundType.PLANT);
 		this.lightValue = light;
 		

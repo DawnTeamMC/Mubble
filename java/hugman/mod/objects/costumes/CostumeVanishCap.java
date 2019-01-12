@@ -1,5 +1,6 @@
 package hugman.mod.objects.costumes;
 
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -15,7 +16,7 @@ public class CostumeVanishCap extends CostumeHeadBase implements IHasModel
 	 */
 	public CostumeVanishCap()
 	{
-		super("vanish_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+		super("vanish_cap", CreativeTabInit.SUPER_MARIO, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 	
 	@Override

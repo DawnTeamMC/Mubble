@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
@@ -29,17 +30,17 @@ public class BlockUnstable extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockUnstable(String name, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockUnstable(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name, material, hardness, resistance, sound, light);
+		super(name, tab, material, hardness, resistance, sound, light);
 	}
 	
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockUnstable(String name, Material material, float hardness, float resistance, SoundType sound)
+	public BlockUnstable(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name, material, hardness, resistance, sound);
+		super(name, tab, material, hardness, resistance, sound);
 	}
 	
 	public void destroy(World worldIn, BlockPos pos)

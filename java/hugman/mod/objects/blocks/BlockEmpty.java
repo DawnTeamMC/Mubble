@@ -2,6 +2,7 @@ package hugman.mod.objects.blocks;
 
 import java.util.Random;
 
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
@@ -27,7 +28,7 @@ public class BlockEmpty extends BlockBase implements IHasModel
 	 */
 	public BlockEmpty()
 	{
-		super("empty_block", Material.IRON, 1.5f, 30f, SoundType.METAL);
+		super("empty_block", CreativeTabInit.SUPER_MARIO, Material.IRON, 1.5f, 30f, SoundType.METAL);
 	}
 	
     @Override

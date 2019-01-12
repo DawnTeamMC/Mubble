@@ -4,6 +4,7 @@ import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -14,17 +15,17 @@ public class BlockDirt extends BlockBase implements IHasModel
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockDirt(String name, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockDirt(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name, material, hardness, resistance, sound, light);
+		super(name, tab, material, hardness, resistance, sound, light);
 	}
 	
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockDirt(String name, Material material, float hardness, float resistance, SoundType sound)
+	public BlockDirt(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name, material, hardness, resistance, sound);
+		super(name, tab, material, hardness, resistance, sound);
 	}
     
 	@Override

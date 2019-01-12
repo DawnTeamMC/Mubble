@@ -11,6 +11,7 @@ import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +34,7 @@ public class BlockCloud extends BlockBase implements IHasModel
 	 */
 	public BlockCloud(String color)
 	{
-		super(color + "_cloud_block", Material.CIRCUITS, 0, 0, SoundType.CLOTH);
+		super(color + "_cloud_block", CreativeTabs.DECORATIONS, Material.CIRCUITS, 0, 0, SoundType.CLOTH);
 	}
 	
 	@Override

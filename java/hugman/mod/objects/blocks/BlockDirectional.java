@@ -10,6 +10,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -26,17 +27,17 @@ public class BlockDirectional extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockDirectional(String name, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockDirectional(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name, material, hardness, resistance, sound, light);
+		super(name, tab, material, hardness, resistance, sound, light);
 	}
 	
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockDirectional(String name, Material material, float hardness, float resistance, SoundType sound)
+	public BlockDirectional(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name, material, hardness, resistance, sound);
+		super(name, tab, material, hardness, resistance, sound);
 	}
 	
 	@Override

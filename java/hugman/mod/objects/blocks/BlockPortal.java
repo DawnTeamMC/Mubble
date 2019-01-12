@@ -2,13 +2,8 @@ package hugman.mod.objects.blocks;
 
 import java.util.Random;
 
-import com.google.common.collect.Lists;
-
 import hugman.mod.Main;
 import hugman.mod.init.BlockInit;
-import hugman.mod.init.CostumeInit;
-import hugman.mod.init.ItemInit;
-import hugman.mod.init.SoundTypeInit;
 import hugman.mod.util.Teleporter;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
@@ -16,27 +11,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -53,7 +39,7 @@ public class BlockPortal extends Block implements IHasModel
 		super(Material.PORTAL);
 		setTranslationKey(portal + "_portal");
 		setRegistryName(portal + "_portal");
-		setCreativeTab(Main.MUBBLE_BLOCKS);
+		setCreativeTab(null);
 		setSoundType(SoundType.GLASS);
 		setHardness(-1.0f);
 		this.blockResistance = 6000000.0F;

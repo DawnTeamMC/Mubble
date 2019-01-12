@@ -10,6 +10,7 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -25,11 +26,11 @@ public class BlockMushroom extends BlockBush implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockMushroom(String color, int light)
+	public BlockMushroom(String color, CreativeTabs tab, int light)
 	{
 		setTranslationKey(color + "_mushroom");
 		setRegistryName(color + "_mushroom");
-		setCreativeTab(Main.MUBBLE_BLOCKS);
+		setCreativeTab(tab);
 		setSoundType(SoundType.PLANT);
 		this.lightValue = light;
         this.setTickRandomly(true);

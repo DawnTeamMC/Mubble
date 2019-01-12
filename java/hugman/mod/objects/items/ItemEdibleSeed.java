@@ -2,6 +2,7 @@ package hugman.mod.objects.items;
 
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -21,9 +22,9 @@ public class ItemEdibleSeed extends ItemEdible implements IHasModel, IPlantable
 	/** 
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public ItemEdibleSeed(String name, int amount, float saturation)
+	public ItemEdibleSeed(String name, CreativeTabs tab, int amount, float saturation)
 	{
-		super(name, amount, saturation, false);
+		super(name, tab, amount, saturation, false);
 		this.cropsName = new ResourceLocation("mubble", name);
 	}
 	

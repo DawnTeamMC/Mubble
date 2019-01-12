@@ -22,7 +22,7 @@ public class ItemDrink extends ItemFood implements IHasModel
 		super(amount, saturation, isWolfFood);
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(Main.MUBBLE_BLOCKS);
+		setCreativeTab(tab);
 		setMaxStackSize(1);
 		this.type = type;
 		ItemInit.ITEMS.add(this);

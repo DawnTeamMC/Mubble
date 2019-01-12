@@ -3,6 +3,7 @@ package hugman.mod.objects.costumes;
 import java.util.Random;
 
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -16,9 +17,9 @@ public class CostumeSimpleEffect extends CostumeHeadBase implements IHasModel
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public CostumeSimpleEffect(String name, SoundEvent sound, PotionEffect...potionEffect)
+	public CostumeSimpleEffect(String name, CreativeTabs tab, SoundEvent sound, PotionEffect...potionEffect)
 	{
-		super(name, sound);
+		super(name, tab, sound);
 		this.effects = potionEffect;
 	}
 	

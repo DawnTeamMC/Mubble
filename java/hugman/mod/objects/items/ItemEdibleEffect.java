@@ -3,6 +3,7 @@ package hugman.mod.objects.items;
 import hugman.mod.Main;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -16,12 +17,12 @@ public class ItemEdibleEffect extends ItemFood implements IHasModel
 {
 	private PotionEffect[] effects;
 	
-	public ItemEdibleEffect(String name, int amount, float saturation, boolean isWolfFood, PotionEffect...potionEffect)
+	public ItemEdibleEffect(String name, CreativeTabs tab, int amount, float saturation, boolean isWolfFood, PotionEffect...potionEffect)
 	{
 		super(amount, saturation, isWolfFood);
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(Main.MUBBLE_ITEMS);
+		setCreativeTab(tab);
 		this.effects = potionEffect;
 		ItemInit.ITEMS.add(this);
 	}

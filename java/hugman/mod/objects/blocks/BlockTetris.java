@@ -2,11 +2,13 @@ package hugman.mod.objects.blocks;
 
 import hugman.mod.Main;
 import hugman.mod.init.BlockInit;
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
@@ -20,7 +22,7 @@ public class BlockTetris extends BlockFalling implements IHasModel
 		super(material);
 		setTranslationKey(color+"_tetris_"+type);
 		setRegistryName(color+"_tetris_"+type);
-		setCreativeTab(Main.MUBBLE_BLOCKS);
+		setCreativeTab(CreativeTabInit.TETRIS);
 		if(material==Material.ROCK)
 		{
 			setHardness(1.5f);

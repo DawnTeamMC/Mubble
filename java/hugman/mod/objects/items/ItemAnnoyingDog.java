@@ -2,8 +2,10 @@ package hugman.mod.objects.items;
 
 import java.util.Random;
 
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -20,7 +22,7 @@ public class ItemAnnoyingDog extends ItemBase implements IHasModel
 	 */
 	public ItemAnnoyingDog()
 	{
-		super("annoying_dog");
+		super("annoying_dog", CreativeTabInit.UNDERTALE_DELTARUNE);
 	}
 	
 	@Override

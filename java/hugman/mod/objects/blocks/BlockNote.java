@@ -7,13 +7,12 @@ import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -22,9 +21,9 @@ public class BlockNote extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockNote(String name)
+	public BlockNote(String name, CreativeTabs tab)
 	{
-		super(name, Material.ROCK, 1.4f, 10f, SoundType.STONE);
+		super(name, tab, Material.ROCK, 1.4f, 10f, SoundType.STONE);
 	}
 	
 	@Override

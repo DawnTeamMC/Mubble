@@ -8,6 +8,7 @@ import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -18,9 +19,9 @@ public class BlockOre extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockOre(String name)
+	public BlockOre(String name, CreativeTabs tab)
 	{
-		super(name, Material.ROCK, 3f, 15f, SoundType.STONE);
+		super(name, tab, Material.ROCK, 3f, 15f, SoundType.STONE);
 		setHarvestLevel("pickaxe", 2);
 	}
 	

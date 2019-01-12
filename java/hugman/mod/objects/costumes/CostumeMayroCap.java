@@ -1,5 +1,6 @@
 package hugman.mod.objects.costumes;
 
+import hugman.mod.init.CreativeTabInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
@@ -22,7 +23,7 @@ public class CostumeMayroCap extends CostumeHeadBase implements IHasModel
 	 */
 	public CostumeMayroCap()
 	{
-		super("mayro_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+		super("mayro_cap", CreativeTabInit.YOUTUBE, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 	
 	@Override

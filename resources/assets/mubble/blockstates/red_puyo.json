@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "mubble:red_puyo", "x": 270 },
+        "facing=down": { "model": "mubble:red_puyo", "x": 90 },
+        "facing=north": { "model": "mubble:red_puyo" },
+        "facing=south": { "model": "mubble:red_puyo", "y": 180 },
+        "facing=west": { "model": "mubble:red_puyo", "y": 270 },
+        "facing=east": { "model": "mubble:red_puyo", "y": 90 }
+    }
+}
