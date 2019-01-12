@@ -9,7 +9,6 @@ import hugman.mod.init.BiomeInit;
 import hugman.mod.init.BlockInit;
 import hugman.mod.init.CostumeInit;
 import hugman.mod.init.DimensionInit;
-//import hugman.mod.init.DimensionInit;
 import hugman.mod.init.EntityInit;
 import hugman.mod.init.ItemInit;
 import hugman.mod.init.RecipeInit;
