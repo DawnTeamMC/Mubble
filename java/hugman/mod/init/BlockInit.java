@@ -75,6 +75,14 @@ public class BlockInit
 	public static final Block YELLOW_BALLOON = new BlockBalloon("yellow");
 	public static final Block ORANGE_BALLOON = new BlockBalloon("orange");
 	public static final Block RED_BALLOON = new BlockBalloon("red");
+	public static final Block PINK_BALLOON = new BlockBalloon("pink");
+	public static final Block MAGENTA_BALLOON = new BlockBalloon("magenta");
+	public static final Block PURPLE_BALLOON = new BlockBalloon("purple");
+	public static final Block BROWN_BALLOON = new BlockBalloon("brown");
+	public static final Block WHITE_BALLOON = new BlockBalloon("white");
+	public static final Block LIGHT_GRAY_BALLOON = new BlockBalloon("light_gray");
+	public static final Block GRAY_BALLOON = new BlockBalloon("gray");
+	public static final Block BLACK_BALLOON = new BlockBalloon("black");
 	
 	// SUPER MARIO
 	public static final Block QUESTION_BLOCK = new BlockQuestion();
