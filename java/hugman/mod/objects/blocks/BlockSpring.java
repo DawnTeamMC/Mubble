@@ -1,10 +1,8 @@
 package hugman.mod.objects.blocks;
 
-import java.util.Random;
-
-import hugman.mod.init.BlockInit;
 import hugman.mod.init.CreativeTabInit;
 import hugman.mod.util.interfaces.IHasModel;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -12,10 +10,7 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -118,5 +113,71 @@ public class BlockSpring extends BlockBase implements IHasModel
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
         return true;
+    }
+	
+	@Override
+    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
+    {
+        return canAttachTo(worldIn, pos, side);
+    }
+    
+	@Override
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+    {
+        for (EnumFacing enumfacing : EnumFacing.values())
+        {
+            if (canAttachTo(worldIn, pos, enumfacing))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+	
+    protected static boolean canAttachTo(World worldIn, BlockPos p_181090_1_, EnumFacing p_181090_2_)
+    {
+        return canPlaceBlock(worldIn, p_181090_1_, p_181090_2_);
+    }
+    
+    protected static boolean canPlaceBlock(World worldIn, BlockPos pos, EnumFacing direction)
+    {
+        BlockPos blockpos = pos.offset(direction.getOpposite());
+        IBlockState iblockstate = worldIn.getBlockState(blockpos);
+        boolean flag = iblockstate.getBlockFaceShape(worldIn, blockpos, direction) == BlockFaceShape.SOLID;
+        Block block = iblockstate.getBlock();
+
+        if (direction == EnumFacing.UP)
+        {
+            return iblockstate.isTopSolid() || !isExceptionBlockForAttaching(block) && flag;
+        }
+        else
+        {
+            return !isExceptBlockForAttachWithPiston(block) && flag;
+        }
+    }
+    
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+    {
+        if (this.checkCanSurvive(worldIn, pos, state) && !canAttachTo(worldIn, pos, state.getValue(FACING)))
+        {
+            this.dropBlockAsItem(worldIn, pos, state, 0);
+            worldIn.setBlockToAir(pos);
+        }
+    }
+    
+    private boolean checkCanSurvive(World worldIn, BlockPos pos, IBlockState state)
+    {
+        if (this.canPlaceBlockAt(worldIn, pos))
+        {
+            return true;
+        }
+        else
+        {
+            this.dropBlockAsItem(worldIn, pos, state, 0);
+            worldIn.setBlockToAir(pos);
+            return false;
+        }
     }
 }
