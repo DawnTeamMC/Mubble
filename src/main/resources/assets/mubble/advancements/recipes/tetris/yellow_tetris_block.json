@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mubble:tetris/yellow_tetris_block"
+    ]
+  },
+  "criteria": {
+    "has_vanadium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mubble:vanadium"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe":"mubble:tetris/yellow_tetris_block"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_vanadium",
+      "has_the_recipe"
+    ]
+  ]
+}

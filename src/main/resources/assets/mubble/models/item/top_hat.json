@@ -1,0 +1,81 @@
+{
+	"textures": {
+		"top_hat": "mubble:costume/top_hat"
+	},
+	"elements": [
+		{
+			"from": [-1, 0, -1],
+			"to": [17, 1, 17],
+			"faces": {
+				"north": {"uv": [0, 1, 12, 2], "texture": "#top_hat"},
+				"east": {"uv": [0, 2, 12, 3], "texture": "#top_hat"},
+				"south": {"uv": [0, 2, 12, 3], "texture": "#top_hat"},
+				"west": {"uv": [0, 0, 12, 1], "texture": "#top_hat"},
+				"up": {"uv": [0, 0, 12, 12], "texture": "#top_hat"},
+				"down": {"uv": [0, 0, 12, 12], "texture": "#top_hat"}
+			}
+		},
+		{
+			"from": [1.75, 1, 1.75],
+			"to": [14.25, 3, 14.25],
+			"faces": {
+				"north": {"uv": [12, 0, 16, 1], "texture": "#top_hat"},
+				"east": {"uv": [12, 0, 16, 1], "texture": "#top_hat"},
+				"south": {"uv": [12, 0, 16, 1], "texture": "#top_hat"},
+				"west": {"uv": [12, 0, 16, 1], "texture": "#top_hat"},
+				"up": {"uv": [12, 0, 16, 1], "texture": "#top_hat"},
+				"down": {"uv": [0, 0, 12.5, 12.5], "texture": "#top_hat"}
+			}
+		},
+		{
+			"from": [2, 3, 2],
+			"to": [14, 15, 14],
+			"faces": {
+				"north": {"uv": [0, 0, 11, 12], "texture": "#top_hat"},
+				"east": {"uv": [0, 0, 11, 12], "texture": "#top_hat"},
+				"south": {"uv": [0, 0, 11, 12], "texture": "#top_hat"},
+				"west": {"uv": [0, 0, 11, 12], "texture": "#top_hat"},
+				"up": {"uv": [0, 0, 11, 12], "texture": "#top_hat"},
+				"down": {"uv": [0, 0, 12, 12], "texture": "#top_hat"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"scale": [0.55, 0.55, 0.55],
+			"rotation": [30, 225, 0],
+			"translation": [0, 1, 0]
+		},
+		"head": {
+			"translation": [0, 15, 0]
+		},
+		"ground": {
+			"scale": [0.35, 0.35, 0.35],
+			"rotation": [0, 0, 0],
+			"translation": [0, 3.5, 0]
+		},
+		"firstperson_righthand": {
+			"scale": [0.3, 0.3, 0.3],
+			"translation": [-2, 5, 3.5],
+			"rotation": [0, 45, 0]
+		},
+		"firstperson_lefthand": {
+			"scale": [0.3, 0.3, 0.3],
+			"rotation": [0, 45, 0],
+			"translation": [-2, 5, 3.5]
+		},
+		"thirdperson_righthand": {
+			"scale": [0.2, 0.2, 0.2],
+			"rotation": [76, 45, 0],
+			"translation": [0, 2.5, 2]
+		},
+		"thirdperson_lefthand": {
+			"scale": [0.2, 0.2, 0.2],
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 2]
+		},
+		"fixed": {
+			"translation": [0, 0, 0]
+		}
+	}
+}

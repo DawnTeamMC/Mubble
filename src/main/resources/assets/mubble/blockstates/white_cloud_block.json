@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "normal": [
+        	{ "model": "mubble:white_cloud_block/0"},
+        	{ "model": "mubble:white_cloud_block/1"},
+        	{ "model": "mubble:white_cloud_block/2"},
+        	{ "model": "mubble:white_cloud_block/3"}
+    	]
+    }
+}

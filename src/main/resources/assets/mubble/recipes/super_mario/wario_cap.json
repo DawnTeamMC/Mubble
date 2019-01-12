@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " XX",
+    "XOX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:wool",
+      "data": 4
+    },
+    "O": {
+      "item": "mubble:super_star"
+    }
+  },
+  "result": {
+    "item": "mubble:wario_cap"
+  }
+}

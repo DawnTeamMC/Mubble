@@ -1,0 +1,44 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mubble:castlevania/candy_cane_from_pillar"
+    ]
+  },
+  "criteria": {
+    "has_candy_cane_pillar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mubble:blue_candy_cane_pillar"
+          },
+          {
+            "item": "mubble:green_candy_cane_pillar"
+          },
+          {
+            "item": "mubble:yellow_candy_cane_pillar"
+          },
+          {
+            "item": "mubble:red_candy_cane_pillar"
+          },
+          {
+            "item": "mubble:purple_candy_cane_pillar"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "mubble:castlevania/candy_cane_from_pillar"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_candy_cane_pillar",
+      "has_the_recipe"
+    ]
+  ]
+}

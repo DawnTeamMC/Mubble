@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": {
+   			"model": "mubble:black_tetris_block"
+    	}
+    }
+}

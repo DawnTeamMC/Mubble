@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " X ",
+    " XX",
+    "X  "
+  ],
+  "key": {
+    "X": {
+      "item": "mubble:wheat_flour"
+    }
+  },
+  "result": {
+    "item": "mubble:crepe"
+  }
+}

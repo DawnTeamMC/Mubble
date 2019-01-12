@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mubble:youtube/record_nb_sweden"
+    ]
+  },
+  "criteria": {
+    "has_blank_record": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mubble:record_blank"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "mubble:youtube/record_nb_sweden"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blank_record",
+      "has_the_recipe"
+    ]
+  ]
+}

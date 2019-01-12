@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mubble:deltarune/ralsei_hat"
+    ]
+  },
+  "criteria": {
+    "has_lime_wool": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:wool",
+            "data": 5
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "mubble:deltarune/ralsei_hat"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lime_wool",
+      "has_the_recipe"
+    ]
+  ]
+}

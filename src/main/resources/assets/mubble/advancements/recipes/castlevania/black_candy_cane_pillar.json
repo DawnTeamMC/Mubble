@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mubble:castlevania/black_candy_cane_pillar"
+    ]
+  },
+  "criteria": {
+    "has_candy_cane": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mubble:candy_cane"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe":"mubble:castlevania/black_candy_cane_pillar"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_candy_cane",
+      "has_the_recipe"
+    ]
+  ]
+}

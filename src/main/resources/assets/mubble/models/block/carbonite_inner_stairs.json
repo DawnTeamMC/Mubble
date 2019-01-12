@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "mubble:block/carbonite",
+        "top": "mubble:block/carbonite",
+        "side": "mubble:block/carbonite"
+    }
+}

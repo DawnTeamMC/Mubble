@@ -1,0 +1,13 @@
+{
+    "pack": {
+        "description": "Mubble Pack",
+        "pack_format": 3
+    },
+    "language": {
+        "fr_fe": {
+            "name": "Frensé",
+            "region": "Frense",
+            "bidirectional":false
+        }
+    }
+}

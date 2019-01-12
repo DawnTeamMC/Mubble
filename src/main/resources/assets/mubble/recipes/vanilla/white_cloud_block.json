@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mubble:cloud_flower"
+    }
+  ],
+  "result": {
+    "item": "mubble:white_cloud_block",
+    "count": 2
+  }
+}

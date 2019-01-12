@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mubble:castlevania/record_vampire_killer"
+    ]
+  },
+  "criteria": {
+    "has_blank_record": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mubble:record_blank"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "mubble:castlevania/record_vampire_killer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_blank_record",
+      "has_the_recipe"
+    ]
+  ]
+}

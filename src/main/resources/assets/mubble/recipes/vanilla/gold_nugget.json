@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "mubble:gold_flower"
+    }
+  ],
+  "result": {
+    "item": "minecraft:gold_nugget",
+    "count": 3
+  }
+}

@@ -1,0 +1,18 @@
+{
+    "variants": {
+        "variant=north_west": { "model": "mubble:blue_mushroom_block/nw" },
+        "variant=north": { "model": "mubble:blue_mushroom_block/n" },
+        "variant=north_east": { "model": "mubble:blue_mushroom_block/ne" },
+        "variant=west": { "model": "mubble:blue_mushroom_block/w" },
+        "variant=center": { "model": "mubble:blue_mushroom_block/c" },
+        "variant=east": { "model": "mubble:blue_mushroom_block/e" },
+        "variant=south_west": { "model": "mubble:blue_mushroom_block/sw" },
+        "variant=south": { "model": "mubble:blue_mushroom_block/s" },
+        "variant=south_east": { "model": "mubble:blue_mushroom_block/se" },
+        "variant=stem": { "model": "mubble:blue_mushroom_block/stem" },
+        "variant=all_stem": { "model": "mubble:blue_mushroom_block/stem_all" },
+        "variant=all_outside": { "model": "mubble:blue_mushroom_block/cap_all" },
+        "variant=all_inside": { "model": "mubble:blue_mushroom_block/inside_all" }
+    }
+}
+

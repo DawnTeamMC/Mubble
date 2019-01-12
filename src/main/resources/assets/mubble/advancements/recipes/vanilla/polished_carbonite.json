@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "mubble:vanilla/polished_carbonite"
+    ]
+  },
+  "criteria": {
+    "has_stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "mubble:carbonite"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "mubble:vanilla/polished_carbonite"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_stone",
+      "has_the_recipe"
+    ]
+  ]
+}

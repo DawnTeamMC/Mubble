@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+  	" U ",
+    "XOX",
+    "XXX"
+  ],
+  "key": {
+    "X": {
+      "item": "minecraft:gold_ingot"
+    },
+    "O": {
+      "item": "mubble:super_mushroom"
+    },
+    "U": {
+      "item": "minecraft:dye",
+      "data": 9
+    }
+  },
+  "result": {
+    "item": "mubble:super_crown"
+  }
+}

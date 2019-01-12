@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "facing=up": { "model": "mubble:koretato_block", "x": 270 },
+        "facing=down": { "model": "mubble:koretato_block", "x": 90 },
+        "facing=north": { "model": "mubble:koretato_block" },
+        "facing=south": { "model": "mubble:koretato_block", "y": 180 },
+        "facing=west": { "model": "mubble:koretato_block", "y": 270 },
+        "facing=east": { "model": "mubble:koretato_block", "y": 90 }
+    }
+}
