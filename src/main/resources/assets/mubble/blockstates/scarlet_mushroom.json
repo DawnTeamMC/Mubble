@@ -1,9 +1,0 @@
-{
-    "variants": {
-        "normal": [
-            {"model": "mubble:scarlet_mushroom/0","weight": 5},
-            {"model": "mubble:scarlet_mushroom/1","weight": 5},
-            {"model": "mubble:scarlet_mushroom/2","weight": 1}
-        ]
-    }
-}

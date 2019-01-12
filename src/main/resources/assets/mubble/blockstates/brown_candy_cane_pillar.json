@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "axis=y":  { "model": "mubble:brown_candy_cane_pillar" },
-        "axis=z":   { "model": "mubble:brown_candy_cane_pillar", "x": 90 },
-        "axis=x":   { "model": "mubble:brown_candy_cane_pillar", "x": 90, "y": 90 },
-        "axis=none": { "model": "mubble:brown_candy_cane_pillar" }
-    }
-}
