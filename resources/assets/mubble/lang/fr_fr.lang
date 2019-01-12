@@ -132,6 +132,7 @@ tile.green_hill_dirt.name=Terre de Green Hill
 tile.marble_zone_stone.name=Pierre de la zone Marble
 tile.yellow_studiopolis_clapper.name=Clap jaune de Studiopolis
 tile.blue_studiopolis_clapper.name=Clap bleu de Studiopolis
+//tile.spring.name=<newline>
 
 tile.scarlet_grass_block.name=Bloc d'herbe écarlate
 tile.scarlet_grass.name=Herbe écarlate

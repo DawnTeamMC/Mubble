@@ -132,6 +132,7 @@ tile.green_hill_dirt.name=Green Hill Dirt
 tile.marble_zone_stone.name=Marble Zone Stone
 tile.yellow_studiopolis_clapper.name=Yellow Studiopolis Clapper
 tile.blue_studiopolis_clapper.name=Blue Studiopolis Clapper
+tile.spring.name=Spring
 
 tile.scarlet_grass_block.name=Scarlet Grass Block
 tile.scarlet_grass.name=Scarlet Grass

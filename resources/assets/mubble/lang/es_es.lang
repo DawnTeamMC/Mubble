@@ -132,6 +132,7 @@ tile.green_hill_dirt.name=Tierra de Green Hill
 //tile.marble_zone_stone.name=<newline>
 tile.yellow_studiopolis_clapper.name=Badajo de Studiópolis amarillo
 tile.blue_studiopolis_clapper.name=Badajo de Studiópolis azul
+//tile.spring.name=<newline>
 
 tile.scarlet_grass_block.name=Bloque de césped escarlata
 tile.scarlet_grass.name=Césped de escarlata

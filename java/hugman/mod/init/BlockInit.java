@@ -24,6 +24,7 @@ import hugman.mod.objects.blocks.BlockPortal;
 import hugman.mod.objects.blocks.BlockPuyo;
 import hugman.mod.objects.blocks.BlockQuestion;
 import hugman.mod.objects.blocks.BlockRotating;
+import hugman.mod.objects.blocks.BlockSpring;
 import hugman.mod.objects.blocks.BlockStairs;
 import hugman.mod.objects.blocks.BlockTetris;
 import hugman.mod.objects.blocks.BlockUnstable;
@@ -193,4 +194,5 @@ public class BlockInit
 	public static final Block HARD_PUYO = new BlockDirectional("hard_puyo", CreativeTabInit.PUYO_PUYO, Material.ROCK, 1.5f, 30f, SoundType.STONE);
 	public static final Block IRON_PUYO = new BlockDirectional("iron_puyo", CreativeTabInit.PUYO_PUYO, Material.IRON, 5f, 30f, SoundType.METAL);
 	public static final Block PUYO_BLOCK = new BlockBase("puyo_block", CreativeTabInit.PUYO_PUYO, Material.ROCK, 1.5f, 30f, SoundType.STONE);
+	public static final Block SPRING = new BlockSpring();
 }

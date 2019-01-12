@@ -1,11 +1,11 @@
 {
+	"parent": "block/cube_all",
 	"textures": {
 		"spring": "mubble:block/spring",
 		"particle": "mubble:block/spring"
 	},
 	"elements": [
 		{
-			"name": "iron",
 			"from": [6, 0, 6],
 			"to": [10, 6, 10],
 			"faces": {
@@ -18,7 +18,6 @@
 			}
 		},
 		{
-			"name": "spring",
 			"from": [1, 6, 1],
 			"to": [15, 9, 15],
 			"faces": {
