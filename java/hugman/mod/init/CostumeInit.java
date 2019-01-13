@@ -44,4 +44,5 @@ public class CostumeInit
 	public static final Item BALDI_HEAD = new CostumeHeadBase("baldi_head", CreativeTabInit.MUBBLE_MISC, SoundEvents.E_PARROT_IM_VEX);
 	public static final Item MAYRO_CAP = new CostumeMayroCap();
 	public static final Item NOTEBLOCK_HEAD = new CostumeHeadBase("noteblock_head", CreativeTabInit.YOUTUBE, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+	public static final Item SNORLAX_HAT = new CostumeHeadBase("snorlax_hat", CreativeTabInit.MUBBLE_MISC, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 }
