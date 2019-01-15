@@ -109,11 +109,8 @@ public class BlockPortal extends Block implements IHasModel
 			if(playerIn.dimension == this.dim) desDimInt = 0;		
 			World desDimWorld = worldIn.getMinecraftServer().getWorld(desDimInt);
 			BlockPos desPos = desDimWorld.getTopSolidOrLiquidBlock(new BlockPos(10.5, 0, 10.5));
-			if(playerIn.isSneaking())
-			{
-				if(playerIn.dimension == this.dim) Teleporter.teleportToDimension(playerIn, desDimInt, 100, 250, 100);
-				else Teleporter.teleportToDimension(playerIn, desDimInt, desPos.getX(), desPos.getY(), desPos.getZ());
-			}
+			if(playerIn.dimension != this.dim) Teleporter.teleportToDimension(playerIn, desDimInt, -4, 91, 0);
+			else Teleporter.teleportToDimension(playerIn, desDimInt, desPos.getX(), desPos.getY(), desPos.getZ());
 		}
     }
 	
