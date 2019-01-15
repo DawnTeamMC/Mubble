@@ -1,13 +1,7 @@
 --- CREATIVE TABS ---
-itemGroup.super_mario=Mubble - Super Mario
-itemGroup.tetris=Mubble - Tetris
-itemGroup.castlevania=Mubble - Castlevania
-itemGroup.sonic=Mubble - Sonic
-itemGroup.celeste=Mubble - Celeste
-itemGroup.undertale_deltarune=Mubble - UNDERTALE & DELTARUNE
-itemGroup.puyo_puyo=Mubble - Puyo Puyo
-itemGroup.mubble_misc=Mubble - Miscellaneous
-itemGroup.youtube=Mubble - YouTube
+itemGroup.mubble_blocks=任天堂領域方塊
+itemGroup.mubble_items=任天堂領域物品
+itemGroup.mubble_costumes=任天堂領域時裝
 
 --- BLOCKS ---
 tile.vanadium_block.name=釩塊
@@ -225,6 +219,7 @@ item.bandana.name=手帕
 //item.top_hat.name=<newline>
 
 //item.ralsei_hat.name=<newline>
+//item.king_round_mask.name=<newline>
 
 //item.baldi_head.name=<newline>
 

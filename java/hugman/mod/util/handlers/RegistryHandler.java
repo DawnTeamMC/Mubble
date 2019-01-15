@@ -3,15 +3,16 @@ package hugman.mod.util.handlers;
 import java.io.IOException;
 
 import hugman.mod.Main;
-import hugman.mod.commands.CommandMotion;
 import hugman.mod.entity.EntityFlyingBlock;
-import hugman.mod.init.BiomeInit;
-import hugman.mod.init.BlockInit;
-import hugman.mod.init.CostumeInit;
-import hugman.mod.init.DimensionInit;
-import hugman.mod.init.EntityInit;
-import hugman.mod.init.ItemInit;
-import hugman.mod.init.RecipeInit;
+import hugman.mod.init.MubbleBiomes;
+import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleCommands;
+import hugman.mod.init.MubbleCostumes;
+import hugman.mod.init.MubbleDimensions;
+import hugman.mod.init.MubbleEntities;
+import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleRecipes;
+import hugman.mod.objects.command.CommandMotion;
 import hugman.mod.util.Reference;
 import hugman.mod.util.interfaces.IHasModel;
 import hugman.mod.world.gen.WorldGenCustomOres;
@@ -34,20 +35,20 @@ public class RegistryHandler
 	@SubscribeEvent
 	public static void onBlockRegister(RegistryEvent.Register<Block> event)
 	{
-		event.getRegistry().registerAll(BlockInit.BLOCKS.toArray(new Block[0]));
+		event.getRegistry().registerAll(MubbleBlocks.BLOCKS.toArray(new Block[0]));
 	}
 	
 	@SubscribeEvent
 	public static void onItemRegister(RegistryEvent.Register<Item> event)
 	{
-		event.getRegistry().registerAll(ItemInit.ITEMS.toArray(new Item[0]));
-		event.getRegistry().registerAll(CostumeInit.COSTUMES.toArray(new Item[0]));
+		event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
+		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
 	}
 
 	@SubscribeEvent
 	public static void onModelRegister(ModelRegistryEvent event)
 	{
-		for(Block block : BlockInit.BLOCKS)
+		for(Block block : MubbleBlocks.BLOCKS)
 		{
 			if(block instanceof IHasModel)
 			{
@@ -55,7 +56,7 @@ public class RegistryHandler
 			}
 		}
 		
-		for(Item item : ItemInit.ITEMS)
+		for(Item item : MubbleItems.ITEMS)
 		{
 			if(item instanceof IHasModel)
 			{
@@ -63,7 +64,7 @@ public class RegistryHandler
 			}
 		}
 		
-		for(Item costume : CostumeInit.COSTUMES)
+		for(Item costume : MubbleCostumes.COSTUMES)
 		{
 			if(costume instanceof IHasModel)
 			{
@@ -89,26 +90,26 @@ public class RegistryHandler
 		
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
 		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
-		BiomeInit.registerBiomes();
-		DimensionInit.registerDimensions();
+		MubbleBiomes.registerBiomes();
+		MubbleDimensions.registerDimensions();
 		
-		EntityInit.registerEntities();
+		MubbleEntities.registerEntities();
 		Main.proxy.registerEntityRenderers();
 	}
 	
 	public static void initRegistries()
 	{
-		RecipeInit.addRecipes();
+		MubbleRecipes.addRecipes();
 	}
 	
 	public static void serverInitRegistries(FMLServerStartingEvent event)
 	{
-		event.registerServerCommand(new CommandMotion());
+		MubbleCommands.addCommands(event);
 	}
 	
 	public static void preServerInitRegistries()
 	{
-		DimensionInit.createFiles();
+		MubbleDimensions.createFiles();
 	}
 	
 	private static final ResourceLocation PURPLE_TETRIS_BLOCK = new ResourceLocation("mubble", "purple_tetris_block");
@@ -121,12 +122,12 @@ public class RegistryHandler
 	    {
 	        if (RegistryHandler.PURPLE_TETRIS_BLOCK.equals(mapping.key))
 	        {
-	            mapping.remap(BlockInit.PINK_TETRIS_BLOCK);
+	            mapping.remap(MubbleBlocks.PINK_TETRIS_BLOCK);
 	            return;
 	        }
 	        if (RegistryHandler.CLOUD_BLOCK.equals(mapping.key))
 	        {
-	            mapping.remap(BlockInit.WHITE_CLOUD_BLOCK);
+	            mapping.remap(MubbleBlocks.WHITE_CLOUD_BLOCK);
 	            return;
 	        }
 	    }
@@ -139,12 +140,12 @@ public class RegistryHandler
 	    {
 	        if (RegistryHandler.PURPLE_TETRIS_BLOCK.equals(mapping.key))
 	        {
-	            mapping.remap(Item.getItemFromBlock(BlockInit.PINK_TETRIS_BLOCK));
+	            mapping.remap(Item.getItemFromBlock(MubbleBlocks.PINK_TETRIS_BLOCK));
 	            return;
 	        }
 	        if (RegistryHandler.CLOUD_BLOCK.equals(mapping.key))
 	        {
-	            mapping.remap(Item.getItemFromBlock(BlockInit.WHITE_CLOUD_BLOCK));
+	            mapping.remap(Item.getItemFromBlock(MubbleBlocks.WHITE_CLOUD_BLOCK));
 	            return;
 	        }
 	    }

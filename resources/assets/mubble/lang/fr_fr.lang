@@ -1,13 +1,7 @@
 --- CREATIVE TABS ---
-itemGroup.super_mario=Mubble - Super Mario
-itemGroup.tetris=Mubble - Tetris
-itemGroup.castlevania=Mubble - Castlevania
-itemGroup.sonic=Mubble - Sonic
-itemGroup.celeste=Mubble - Celeste
-itemGroup.undertale_deltarune=Mubble - UNDERTALE & DELTARUNE
-itemGroup.puyo_puyo=Mubble - Puyo Puyo
-itemGroup.mubble_misc=Mubble - Miscellaneous
-itemGroup.youtube=Mubble - YouTube
+itemGroup.mubble_blocks=Blocs Mubble
+itemGroup.mubble_items=Objets Mubble
+itemGroup.mubble_costumes=Costumes Mubble
 
 --- BLOCKS ---
 tile.vanadium_block.name=Bloc de vanadium
@@ -225,6 +219,7 @@ item.bandana.name=Bandana
 item.top_hat.name=Haut-de-forme
 
 item.ralsei_hat.name=Chapeau de Ralsei
+//item.king_round_mask.name=<newline>
 
 item.baldi_head.name=Tête de Baldi
 

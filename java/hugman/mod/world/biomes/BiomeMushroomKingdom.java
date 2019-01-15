@@ -2,7 +2,7 @@ package hugman.mod.world.biomes;
 
 import java.util.Random;
 
-import hugman.mod.init.BlockInit;
+import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -29,17 +29,17 @@ public class BiomeMushroomKingdom extends Biome
     @Override
     public void addDefaultFlowers()
     {
-        addFlower(BlockInit.FIRE_FLOWER.getDefaultState(), 20);
-        addFlower(BlockInit.ICE_FLOWER.getDefaultState(), 20);
-        addFlower(BlockInit.CLOUD_FLOWER.getDefaultState(), 20);
-        addFlower(BlockInit.BOOMERANG_FLOWER.getDefaultState(), 20);
-        addFlower(BlockInit.GOLD_FLOWER.getDefaultState(), 20);
+        addFlower(MubbleBlocks.FIRE_FLOWER.getDefaultState(), 20);
+        addFlower(MubbleBlocks.ICE_FLOWER.getDefaultState(), 20);
+        addFlower(MubbleBlocks.CLOUD_FLOWER.getDefaultState(), 20);
+        addFlower(MubbleBlocks.BOOMERANG_FLOWER.getDefaultState(), 20);
+        addFlower(MubbleBlocks.GOLD_FLOWER.getDefaultState(), 20);
     }
     
     public void addBlocks(World worldIn, Random rand, BlockPos pos)
     {
-        IBlockState question_block = BlockInit.QUESTION_BLOCK.getDefaultState();
-        IBlockState brick_block = BlockInit.BRICK_BLOCK.getDefaultState();
+        IBlockState question_block = MubbleBlocks.QUESTION_BLOCK.getDefaultState();
+        IBlockState brick_block = MubbleBlocks.BRICK_BLOCK.getDefaultState();
         for (int i = 0; i < 2; ++i)
         {
             for (int j = 0; j < 2; ++j)
@@ -67,10 +67,10 @@ public class BiomeMushroomKingdom extends Biome
     
     public void addFlowers(World worldIn, Random rand1, BlockPos posIn)
     {
-        IBlockState fire=BlockInit.FIRE_FLOWER.getDefaultState();
-        IBlockState ice=BlockInit.ICE_FLOWER.getDefaultState();
-        IBlockState boomerang=BlockInit.BOOMERANG_FLOWER.getDefaultState();
-        IBlockState cloud=BlockInit.CLOUD_FLOWER.getDefaultState();
+        IBlockState fire=MubbleBlocks.FIRE_FLOWER.getDefaultState();
+        IBlockState ice=MubbleBlocks.ICE_FLOWER.getDefaultState();
+        IBlockState boomerang=MubbleBlocks.BOOMERANG_FLOWER.getDefaultState();
+        IBlockState cloud=MubbleBlocks.CLOUD_FLOWER.getDefaultState();
         for (int i = 0; i < 2; ++i)
         {
             for (int j = 0; j < 2; ++j)

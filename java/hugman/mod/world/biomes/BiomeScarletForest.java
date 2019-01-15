@@ -2,7 +2,7 @@ package hugman.mod.world.biomes;
 
 import java.util.Random;
 
-import hugman.mod.init.BlockInit;
+import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +19,7 @@ public class BiomeScarletForest extends Biome
 	{
 		super(new BiomeProperties("Scarlet Forest").setBaseHeight(0.005F).setHeightVariation(0.05F).setTemperature(0.8F).setRainfall(0.4F).setWaterColor(65535));
 		
-		topBlock = BlockInit.SCARLET_GRASS_BLOCK.getDefaultState();
+		topBlock = MubbleBlocks.SCARLET_GRASS_BLOCK.getDefaultState();
 		fillerBlock = Blocks.DIRT.getDefaultState();
 
 		this.decorator.treesPerChunk = -999;
@@ -31,7 +31,7 @@ public class BiomeScarletForest extends Biome
     @Override
     public void addDefaultFlowers()
     {
-        addFlower(BlockInit.SCARLET_ORCHID.getDefaultState(), 20);
+        addFlower(MubbleBlocks.SCARLET_ORCHID.getDefaultState(), 20);
     }
     
     @Override
@@ -42,8 +42,8 @@ public class BiomeScarletForest extends Biome
     
     public void addFlowersAndMushrooms(World worldIn, Random rand1, BlockPos posIn)
     {
-        IBlockState orchid = BlockInit.SCARLET_ORCHID.getDefaultState();
-        IBlockState mushroom = BlockInit.SCARLET_MUSHROOM.getDefaultState();
+        IBlockState orchid = MubbleBlocks.SCARLET_ORCHID.getDefaultState();
+        IBlockState mushroom = MubbleBlocks.SCARLET_MUSHROOM.getDefaultState();
         for (int i = 0; i < 2; ++i)
         {
             for (int j = 0; j < 2; ++j)
@@ -52,7 +52,7 @@ public class BiomeScarletForest extends Biome
                 int z = j * 4 + 1 + 8 + rand1.nextInt(3);
                 BlockPos blockPos = worldIn.getHeight(posIn.add(x, 0, z));
                 int block = rand1.nextInt(4);
-                if(worldIn.getBlockState(blockPos.down()).getBlock() == BlockInit.SCARLET_GRASS_BLOCK || worldIn.getBlockState(blockPos.down()).getBlock() == Blocks.DIRT)
+                if(worldIn.getBlockState(blockPos.down()).getBlock() == MubbleBlocks.SCARLET_GRASS_BLOCK || worldIn.getBlockState(blockPos.down()).getBlock() == Blocks.DIRT)
                 {
                 	switch (block)
                     {
@@ -71,7 +71,7 @@ public class BiomeScarletForest extends Biome
     
     public void addGrass(World worldIn, Random rand1, BlockPos posIn)
     {
-    	IBlockState grass = BlockInit.SCARLET_GRASS.getDefaultState();
+    	IBlockState grass = MubbleBlocks.SCARLET_GRASS.getDefaultState();
     	for (int a = 0; a < 16; ++a)
     	{
     		for (int i = 0; i < 2; ++i)
@@ -81,7 +81,7 @@ public class BiomeScarletForest extends Biome
                     int x = i * 4 + 1 + 8 + rand1.nextInt(3);
                     int z = j * 4 + 1 + 8 + rand1.nextInt(3);
                     BlockPos blockPos = worldIn.getHeight(posIn.add(x, 0, z));
-                    if(worldIn.getBlockState(blockPos.down()).getBlock() == BlockInit.SCARLET_GRASS_BLOCK || worldIn.getBlockState(blockPos.down()).getBlock() == Blocks.DIRT)
+                    if(worldIn.getBlockState(blockPos.down()).getBlock() == MubbleBlocks.SCARLET_GRASS_BLOCK || worldIn.getBlockState(blockPos.down()).getBlock() == Blocks.DIRT)
                     {
                     	worldIn.setBlockState(blockPos, grass);
                     }

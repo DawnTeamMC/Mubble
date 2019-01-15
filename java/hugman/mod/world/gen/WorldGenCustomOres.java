@@ -2,7 +2,7 @@ package hugman.mod.world.gen;
 
 import java.util.Random;
 
-import hugman.mod.init.BlockInit;
+import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -19,10 +19,10 @@ public class WorldGenCustomOres implements IWorldGenerator
 	
 	public WorldGenCustomOres()
 	{
-		vanadium_ore = new WorldGenMinable(BlockInit.VANADIUM_ORE.getDefaultState(), 6, BlockMatcher.forBlock(Blocks.STONE));
-		blunite = new WorldGenMinable(BlockInit.BLUNITE.getDefaultState(), 33, BlockMatcher.forBlock(Blocks.STONE));
-		carbonite = new WorldGenMinable(BlockInit.CARBONITE.getDefaultState(), 33, BlockMatcher.forBlock(Blocks.STONE));
-		unstable_stone = new WorldGenMinable(BlockInit.UNSTABLE_STONE.getDefaultState(), 25, BlockMatcher.forBlock(Blocks.STONE));
+		vanadium_ore = new WorldGenMinable(MubbleBlocks.VANADIUM_ORE.getDefaultState(), 6, BlockMatcher.forBlock(Blocks.STONE));
+		blunite = new WorldGenMinable(MubbleBlocks.BLUNITE.getDefaultState(), 33, BlockMatcher.forBlock(Blocks.STONE));
+		carbonite = new WorldGenMinable(MubbleBlocks.CARBONITE.getDefaultState(), 33, BlockMatcher.forBlock(Blocks.STONE));
+		unstable_stone = new WorldGenMinable(MubbleBlocks.UNSTABLE_STONE.getDefaultState(), 25, BlockMatcher.forBlock(Blocks.STONE));
 	}
 	
 	@Override

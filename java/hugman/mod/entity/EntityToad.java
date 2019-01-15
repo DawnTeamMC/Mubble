@@ -4,8 +4,8 @@ import java.util.Set;
 
 import com.google.common.collect.Sets;
 
-import hugman.mod.init.CostumeInit;
-import hugman.mod.init.ItemInit;
+import hugman.mod.init.MubbleCostumes;
+import hugman.mod.init.MubbleItems;
 import hugman.mod.util.handlers.LootTableHandler;
 import hugman.mod.util.handlers.SoundHandler;
 import net.minecraft.entity.EntityAgeable;
@@ -39,7 +39,7 @@ import net.minecraft.world.World;
 public class EntityToad extends EntityAnimal
 {
     private static final DataParameter<Integer> TOAD_COLOR = EntityDataManager.<Integer>createKey(EntityToad.class, DataSerializers.VARINT);
-    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(ItemInit.SUPER_MUSHROOM, ItemInit.PEACH, ItemInit.SUPER_STAR);
+    private static final Set<Item> TEMPTATION_ITEMS = Sets.newHashSet(MubbleItems.SUPER_MUSHROOM, MubbleItems.PEACH, MubbleItems.SUPER_STAR);
     
     public EntityToad(World worldIn) 
     {
@@ -65,10 +65,10 @@ public class EntityToad extends EntityAnimal
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAvoidEntity(this, EntityChincho.class, 10, 1.2f, 1.45f));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> (checkedEntity).getItem().getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.MAIN_HAND).getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.OFF_HAND).getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == CostumeInit.SUPER_CROWN, 10, 1.2f, 1.45f));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> (checkedEntity).getItem().getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.MAIN_HAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.OFF_HAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f));
         this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(2, new EntityAIPanic(this, 1.6D));
         this.tasks.addTask(3, new EntityAITempt(this, 1.4D, false, TEMPTATION_ITEMS));

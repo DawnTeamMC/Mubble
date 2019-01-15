@@ -1,7 +1,7 @@
 package hugman.mod.world.dimension;
 
-import hugman.mod.init.BiomeInit;
-import hugman.mod.init.DimensionInit;
+import hugman.mod.init.MubbleBiomes;
+import hugman.mod.init.MubbleDimensions;
 import hugman.mod.util.Reference;
 import hugman.mod.world.gen.chunks.EmptyChunkGenerator;
 import net.minecraft.init.Biomes;
@@ -15,13 +15,13 @@ public class DimensionUltimatum extends WorldProvider
 {
 	public DimensionUltimatum()
 	{
-		this.biomeProvider = new BiomeProviderSingle(BiomeInit.MUSHROOM_KINGDOM);
+		this.biomeProvider = new BiomeProviderSingle(MubbleBiomes.MUSHROOM_KINGDOM);
 	}
 	
 	@Override
 	public DimensionType getDimensionType() 
 	{
-		return DimensionInit.ULTIMATUM;
+		return MubbleDimensions.ULTIMATUM;
 	}
 	
 	@Override
@@ -39,6 +39,6 @@ public class DimensionUltimatum extends WorldProvider
 	@Override
 	public boolean isSurfaceWorld() 
 	{
-		return false;
+		return true;
 	}
 }
