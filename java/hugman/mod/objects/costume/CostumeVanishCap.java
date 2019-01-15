@@ -16,7 +16,7 @@ public class CostumeVanishCap extends CostumeHeadBase implements IHasModel
 	 */
 	public CostumeVanishCap()
 	{
-		super("vanish_cap", MubbleTabs.MUBBLE_COSTUMES, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+		super("vanish_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 	
 	@Override

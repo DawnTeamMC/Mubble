@@ -19,7 +19,7 @@ public class CostumeGooigiCap extends CostumeHeadBase implements IHasModel
 	 */
 	public CostumeGooigiCap()
 	{
-		super("gooigi_cap", MubbleTabs.MUBBLE_COSTUMES, SoundEvents.BLOCK_SLIME_PLACE);
+		super("gooigi_cap", SoundEvents.BLOCK_SLIME_PLACE);
 	}
 	
 	@Override

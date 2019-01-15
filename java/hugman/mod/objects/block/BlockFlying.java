@@ -22,9 +22,9 @@ public class BlockFlying extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockFlying(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
+	public BlockFlying(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name, tab, material, hardness, resistance, sound);
+		super(name, material, hardness, resistance, sound);
 	}
 	
 	@Override

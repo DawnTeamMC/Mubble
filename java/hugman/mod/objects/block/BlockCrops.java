@@ -5,6 +5,7 @@ import java.util.Random;
 import hugman.mod.Main;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -32,7 +33,7 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
 		setTranslationKey(name);
 		setRegistryName(name);
 		this.seed = seed;
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
         this.setHardness(0.0F);
         this.setResistance(0.0F);
 		setSoundType(SoundType.PLANT);
@@ -52,7 +53,7 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
 		setRegistryName(name);
 		this.seed = seed;
 		this.food = food;
-		setCreativeTab(CreativeTabs.MATERIALS);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
         this.setHardness(0.0F);
         this.setResistance(0.0F);
 		setSoundType(SoundType.PLANT);

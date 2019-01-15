@@ -38,18 +38,18 @@ public class BlockWall extends BlockBase implements IHasModel
 	/** 
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockWall(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockWall(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name + "_wall", tab, material, hardness, resistance / 1.8F, sound, light);
+		super(name + "_wall", material, hardness, resistance / 1.8F, sound, light);
         this.setDefaultState(this.blockState.getBaseState().withProperty(UP, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)));
 	}
 	
 	/** 
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockWall(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
+	public BlockWall(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name + "_wall", tab, material, hardness, resistance / 1.8F, sound);
+		super(name + "_wall", material, hardness, resistance / 1.8F, sound);
         this.setDefaultState(this.blockState.getBaseState().withProperty(UP, Boolean.valueOf(false)).withProperty(NORTH, Boolean.valueOf(false)).withProperty(EAST, Boolean.valueOf(false)).withProperty(SOUTH, Boolean.valueOf(false)).withProperty(WEST, Boolean.valueOf(false)));
 	}
 	

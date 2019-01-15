@@ -5,6 +5,7 @@ import java.util.Random;
 import hugman.mod.Main;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.SoundType;
@@ -28,12 +29,12 @@ public class BlockFallingGlass extends BlockFalling implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockFallingGlass(String name, CreativeTabs tab)
+	public BlockFallingGlass(String name)
 	{
 		super(Material.GLASS);
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setHardness(0.3f);
 		this.blockResistance = 1.5f;
 		setSoundType(SoundType.GLASS);

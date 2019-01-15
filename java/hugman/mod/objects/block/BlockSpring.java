@@ -36,7 +36,7 @@ public class BlockSpring extends BlockBase implements IHasModel
 	 */
 	public BlockSpring()
 	{
-		super("spring", MubbleTabs.MUBBLE_BLOCKS, Material.IRON, 4f, 20f, SoundType.METAL);
+		super("spring", Material.IRON, 4f, 20f, SoundType.METAL);
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.Random;
 import hugman.mod.Main;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockDirt;
@@ -26,11 +27,11 @@ public class BlockMushroom extends BlockBush implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockMushroom(String color, CreativeTabs tab, int light)
+	public BlockMushroom(String color, int light)
 	{
 		setTranslationKey(color + "_mushroom");
 		setRegistryName(color + "_mushroom");
-		setCreativeTab(tab);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setSoundType(SoundType.PLANT);
 		this.lightValue = light;
         this.setTickRandomly(true);

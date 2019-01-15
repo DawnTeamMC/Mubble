@@ -25,9 +25,9 @@ public class BlockGrass extends BlockBase implements IHasModel, IGrowable
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockGrass(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockGrass(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name, tab, material, hardness, resistance, sound, light);
+		super(name, material, hardness, resistance, sound, light);
         this.setDefaultState(this.blockState.getBaseState());
         this.setTickRandomly(true);
 	}
@@ -35,9 +35,9 @@ public class BlockGrass extends BlockBase implements IHasModel, IGrowable
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockGrass(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
+	public BlockGrass(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name, tab, material, hardness, resistance, sound);
+		super(name, material, hardness, resistance, sound);
         this.setDefaultState(this.blockState.getBaseState());
         this.setTickRandomly(true);
 	}

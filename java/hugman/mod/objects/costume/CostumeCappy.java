@@ -21,7 +21,7 @@ public class CostumeCappy extends CostumeHeadBase implements IHasModel
 	 */
 	public CostumeCappy()
 	{
-		super("cappy", MubbleTabs.MUBBLE_COSTUMES, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+		super("cappy", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 	
 	@Override

@@ -8,6 +8,7 @@ import hugman.mod.Main;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -32,11 +33,11 @@ public class BlockFlower extends BlockBush implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockFlower(String name, CreativeTabs tab, int light)
+	public BlockFlower(String name, int light)
 	{
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setSoundType(SoundType.PLANT);
 		this.lightValue = light;
 		

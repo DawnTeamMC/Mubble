@@ -22,7 +22,7 @@ public class ItemAnnoyingDog extends ItemBase implements IHasModel
 	 */
 	public ItemAnnoyingDog()
 	{
-		super("annoying_dog", MubbleTabs.MUBBLE_ITEMS);
+		super("annoying_dog");
 	}
 	
 	@Override

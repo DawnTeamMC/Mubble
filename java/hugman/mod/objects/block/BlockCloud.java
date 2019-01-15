@@ -34,7 +34,7 @@ public class BlockCloud extends BlockBase implements IHasModel
 	 */
 	public BlockCloud(String color)
 	{
-		super(color + "_cloud_block", CreativeTabs.DECORATIONS, Material.CIRCUITS, 0, 0, SoundType.CLOTH);
+		super(color + "_cloud_block", Material.CIRCUITS, 0, 0, SoundType.CLOTH);
 	}
 	
 	@Override

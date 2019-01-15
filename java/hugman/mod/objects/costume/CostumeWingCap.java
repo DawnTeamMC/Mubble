@@ -17,7 +17,7 @@ public class CostumeWingCap extends CostumeHeadBase implements IHasModel
 	 */
 	public CostumeWingCap()
 	{
-		super("wing_cap", MubbleTabs.MUBBLE_COSTUMES, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+		super("wing_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 		this.setMaxDamage(600);
 	}
 	

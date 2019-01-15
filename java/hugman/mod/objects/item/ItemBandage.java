@@ -23,7 +23,7 @@ public class ItemBandage extends ItemBase implements IHasModel
 	 */
 	public ItemBandage()
 	{
-		super("bandage", CreativeTabs.MISC, 16);
+		super("bandage", 16);
 	}
 	
 	@Override

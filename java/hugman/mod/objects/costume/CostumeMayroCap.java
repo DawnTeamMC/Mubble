@@ -23,7 +23,7 @@ public class CostumeMayroCap extends CostumeHeadBase implements IHasModel
 	 */
 	public CostumeMayroCap()
 	{
-		super("mayro_cap", MubbleTabs.MUBBLE_COSTUMES, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+		super("mayro_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 	
 	@Override

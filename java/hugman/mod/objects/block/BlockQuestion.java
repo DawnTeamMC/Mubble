@@ -34,7 +34,7 @@ public class BlockQuestion extends BlockBase implements IHasModel
 	 */
 	public BlockQuestion()
 	{
-		super("question_block", MubbleTabs.MUBBLE_BLOCKS, Material.IRON, 1.5f, 30f, SoundType.METAL);
+		super("question_block", Material.IRON, 1.5f, 30f, SoundType.METAL);
 	}
 	
     @Override

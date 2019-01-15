@@ -28,18 +28,18 @@ public class BlockPuyo extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockPuyo(String type, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockPuyo(String type, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(type + "_puyo", tab, material, hardness, resistance, sound, light);
+		super(type + "_puyo", material, hardness, resistance, sound, light);
         this.slipperiness = 0.8F;
 	}
 	
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockPuyo(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
+	public BlockPuyo(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name + "_puyo", tab, material, hardness, resistance, sound);
+		super(name + "_puyo", material, hardness, resistance, sound);
         this.slipperiness = 0.8F;
 	}
 	

@@ -21,9 +21,9 @@ public class BlockNote extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockNote(String name, CreativeTabs tab)
+	public BlockNote(String name)
 	{
-		super(name, tab, Material.ROCK, 1.4f, 10f, SoundType.STONE);
+		super(name, Material.ROCK, 1.4f, 10f, SoundType.STONE);
 	}
 	
 	@Override

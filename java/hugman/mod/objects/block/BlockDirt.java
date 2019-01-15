@@ -15,17 +15,17 @@ public class BlockDirt extends BlockBase implements IHasModel
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockDirt(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockDirt(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name, tab, material, hardness, resistance, sound, light);
+		super(name, material, hardness, resistance, sound, light);
 	}
 	
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockDirt(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
+	public BlockDirt(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name, tab, material, hardness, resistance, sound);
+		super(name, material, hardness, resistance, sound);
 	}
     
 	@Override

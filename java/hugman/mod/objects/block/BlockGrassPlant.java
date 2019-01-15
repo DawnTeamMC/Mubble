@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import hugman.mod.Main;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -33,11 +34,11 @@ public class BlockGrassPlant extends BlockBush implements IHasModel
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockGrassPlant(String name, CreativeTabs tab, int light)
+	public BlockGrassPlant(String name, int light)
 	{
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setSoundType(SoundType.PLANT);
 		this.blockHardness = 0f;
 		this.blockResistance = 0f;
@@ -49,11 +50,11 @@ public class BlockGrassPlant extends BlockBush implements IHasModel
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public BlockGrassPlant(String name, CreativeTabs tab)
+	public BlockGrassPlant(String name)
 	{
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setSoundType(SoundType.PLANT);
 		this.blockHardness = 0f;
 		this.blockResistance = 0f;

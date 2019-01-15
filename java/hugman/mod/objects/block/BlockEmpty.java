@@ -28,7 +28,7 @@ public class BlockEmpty extends BlockBase implements IHasModel
 	 */
 	public BlockEmpty()
 	{
-		super("empty_block", MubbleTabs.MUBBLE_BLOCKS, Material.IRON, 1.5f, 30f, SoundType.METAL);
+		super("empty_block", Material.IRON, 1.5f, 30f, SoundType.METAL);
 	}
 	
     @Override

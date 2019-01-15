@@ -24,7 +24,7 @@ public class ItemSmashBall extends ItemBase implements IHasModel
 	 */
 	public ItemSmashBall()
 	{
-		super("smash_ball", MubbleTabs.MUBBLE_ITEMS);
+		super("smash_ball");
 	}
 	
 	@Override

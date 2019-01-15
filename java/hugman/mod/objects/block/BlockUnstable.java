@@ -30,17 +30,17 @@ public class BlockUnstable extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockUnstable(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockUnstable(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(name, tab, material, hardness, resistance, sound, light);
+		super(name, material, hardness, resistance, sound, light);
 	}
 	
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockUnstable(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
+	public BlockUnstable(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
-		super(name, tab, material, hardness, resistance, sound);
+		super(name, material, hardness, resistance, sound);
 	}
 	
 	public void destroy(World worldIn, BlockPos pos)

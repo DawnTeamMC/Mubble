@@ -24,7 +24,7 @@ public class ItemCapeFeather extends ItemBase implements IHasModel
 	 */
 	public ItemCapeFeather(String name)
 	{
-		super(name, MubbleTabs.MUBBLE_ITEMS);
+		super(name);
 		if(this == MubbleItems.SUPER_CAPE_FEATHER) setMaxStackSize(1);
 	}
 	

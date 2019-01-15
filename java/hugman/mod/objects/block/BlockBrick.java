@@ -23,9 +23,9 @@ public class BlockBrick extends BlockBase implements IHasModel
 	/** 
 	 * Open class - can be initialized for multiple blocks with variables.
 	 */
-	public BlockBrick(String name, CreativeTabs tab)
+	public BlockBrick(String name)
 	{
-		super(name, tab, Material.ROCK, 1.5f, 20f, MubbleSoundTypes.BRICK_BLOCK);
+		super(name, Material.ROCK, 1.5f, 20f, MubbleSoundTypes.BRICK_BLOCK);
 	}
 	
     @Override

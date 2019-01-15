@@ -17,9 +17,9 @@ public class CostumeSimpleEffect extends CostumeHeadBase implements IHasModel
 	/**
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public CostumeSimpleEffect(String name, CreativeTabs tab, SoundEvent sound, PotionEffect...potionEffect)
+	public CostumeSimpleEffect(String name, SoundEvent sound, PotionEffect...potionEffect)
 	{
-		super(name, tab, sound);
+		super(name, sound);
 		this.effects = potionEffect;
 	}
 	

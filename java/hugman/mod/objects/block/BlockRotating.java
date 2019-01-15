@@ -15,7 +15,7 @@ public class BlockRotating extends BlockBase implements IHasModel
 	 */
 	public BlockRotating()
 	{
-		super("rotating_block", MubbleTabs.MUBBLE_BLOCKS, Material.ROCK, 1.5f, 20f, SoundType.STONE);
+		super("rotating_block", Material.ROCK, 1.5f, 20f, SoundType.STONE);
 	}
 
 	@Override

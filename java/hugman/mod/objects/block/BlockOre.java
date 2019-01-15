@@ -19,9 +19,9 @@ public class BlockOre extends BlockBase implements IHasModel
     /** 
      * Open class - can be initialized for multiple items with variables.
      */
-	public BlockOre(String name, CreativeTabs tab)
+	public BlockOre(String name)
 	{
-		super(name, tab, Material.ROCK, 3f, 15f, SoundType.STONE);
+		super(name, Material.ROCK, 3f, 15f, SoundType.STONE);
 		setHarvestLevel("pickaxe", 2);
 	}
 	

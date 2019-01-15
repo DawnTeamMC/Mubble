@@ -2,6 +2,7 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
+import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,7 +19,7 @@ public class BlockBalloon extends BlockFlying implements IHasModel
      */
 	public BlockBalloon(String color)
 	{
-		super(color + "_balloon", CreativeTabs.DECORATIONS, Material.CLOTH, 0f, 0f, SoundType.CLOTH);
+		super(color + "_balloon", Material.CLOTH, 0f, 0f, SoundType.CLOTH);
 	}
 	
 	@Override

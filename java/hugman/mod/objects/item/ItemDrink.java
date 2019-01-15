@@ -2,6 +2,7 @@ package hugman.mod.objects.item;
 
 import hugman.mod.Main;
 import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,12 +18,12 @@ public class ItemDrink extends ItemFood implements IHasModel
 	/** 
 	 * Open class - can be initialized for multiple items with variables.
 	 */
-	public ItemDrink(String name, CreativeTabs tab, String type, int amount, float saturation, boolean isWolfFood)
+	public ItemDrink(String name, String type, int amount, float saturation, boolean isWolfFood)
 	{
 		super(amount, saturation, isWolfFood);
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
+		setCreativeTab(MubbleTabs.MUBBLE_ITEMS);
 		setMaxStackSize(1);
 		this.type = type;
 		MubbleItems.ITEMS.add(this);

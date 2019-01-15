@@ -18,12 +18,12 @@ public class BlockBase extends Block implements IHasModel
 	 * Open class - can be initialized for multiple blocks with variables.<br>
 	 * Template class - is used to create other classes.
 	 */
-	public BlockBase(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound, int light)
+	public BlockBase(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
 		super(material);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
 		setHardness(hardness);
 		this.blockResistance = resistance;
 		setSoundType(sound);
@@ -37,12 +37,12 @@ public class BlockBase extends Block implements IHasModel
 	 * Open class - can be initialized for multiple items with variables.<br>
 	 * Template class - is used to create other classes.
 	 */
-	public BlockBase(String name, CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
+	public BlockBase(String name, Material material, float hardness, float resistance, SoundType sound)
 	{
 		super(material);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setTranslationKey(name);
 		setRegistryName(name);
-		setCreativeTab(tab);
 		setHardness(hardness);
 		this.blockResistance = resistance;
 		setSoundType(sound);
@@ -55,10 +55,10 @@ public class BlockBase extends Block implements IHasModel
 	 * Open class - can be initialized for multiple items with variables.<br>
 	 * Template class - is used to create other classes.
 	 */
-	public BlockBase(CreativeTabs tab, Material material, float hardness, float resistance, SoundType sound)
+	public BlockBase(Material material, float hardness, float resistance, SoundType sound)
 	{
 		super(material);
-		setCreativeTab(tab);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setHardness(hardness);
 		this.blockResistance = resistance;
 		setSoundType(sound);
@@ -71,10 +71,10 @@ public class BlockBase extends Block implements IHasModel
 	 * Open class - can be initialized for multiple items with variables.<br>
 	 * Template class - is used to create other classes.
 	 */
-	public BlockBase(CreativeTabs tab, Material material, float hardness, float resistance)
+	public BlockBase(Material material, float hardness, float resistance)
 	{
 		super(material);
-		setCreativeTab(tab);
+		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setHardness(hardness);
 		this.blockResistance = resistance;
 		
