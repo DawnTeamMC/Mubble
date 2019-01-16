@@ -30,7 +30,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockPortal extends Block implements IHasModel
 {
-	protected static final AxisAlignedBB END_PORTAL_AABB = new AxisAlignedBB(0.0D, 0.375D, 0.0D, 1.0D, 0.625D, 1.0D);
+	protected static final AxisAlignedBB PORTAL_AABB = new AxisAlignedBB(0.0D, 0.375D, 0.0D, 1.0D, 0.625D, 1.0D);
 	int dim;
 	
 	/**
@@ -54,7 +54,7 @@ public class BlockPortal extends Block implements IHasModel
 	@Override
     public AxisAlignedBB getBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
-        return END_PORTAL_AABB;
+        return PORTAL_AABB;
     }
 	
 	@Override
@@ -99,6 +99,7 @@ public class BlockPortal extends Block implements IHasModel
         return BlockRenderLayer.TRANSLUCENT;
     }
     
+    /* ULTIMATUM LOCK
 	@Override
 	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
     {
@@ -113,13 +114,7 @@ public class BlockPortal extends Block implements IHasModel
 			else Teleporter.teleportToDimension(playerIn, desDimInt, desPos.getX(), desPos.getY(), desPos.getZ());
 		}
     }
-	
-	@Override
-    public int quantityDropped(Random random)
-    {
-        return 0;
-    }
-	
+    
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
@@ -149,6 +144,12 @@ public class BlockPortal extends Block implements IHasModel
                 }
             }
     	}
+    }*/
+	
+	@Override
+    public int quantityDropped(Random random)
+    {
+        return 0;
     }
 	
 	@Override

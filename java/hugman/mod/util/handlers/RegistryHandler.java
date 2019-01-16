@@ -91,7 +91,7 @@ public class RegistryHandler
 		GameRegistry.registerWorldGenerator(new WorldGenCustomOres(), 0);
 		GameRegistry.registerWorldGenerator(new WorldGenCustomStructures(), 0);
 		MubbleBiomes.registerBiomes();
-		MubbleDimensions.registerDimensions();
+		//MubbleDimensions.registerDimensions();
 		
 		MubbleEntities.registerEntities();
 		Main.proxy.registerEntityRenderers();
@@ -109,7 +109,7 @@ public class RegistryHandler
 	
 	public static void preServerInitRegistries()
 	{
-		MubbleDimensions.createFiles();
+		//MubbleDimensions.createFiles();
 	}
 	
 	private static final ResourceLocation PURPLE_TETRIS_BLOCK = new ResourceLocation("mubble", "purple_tetris_block");
