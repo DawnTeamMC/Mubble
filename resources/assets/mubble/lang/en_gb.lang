@@ -255,7 +255,6 @@ subtitles.item.smash_ball.use=Smash Ball used
 //subtitles.costume.cappy.equip=<newline>
 //subtitles.costume.cappy.happy=<newline>
 //subtitles.costume.cappy.help=<newline>
-//subtitles.costume.cappy.help.water=<newline>
 subtitles.entity.toad.ambient=Toad mumbles
 subtitles.entity.toad.hurt=Toad hurts
 subtitles.entity.toad.death=Toad dies
