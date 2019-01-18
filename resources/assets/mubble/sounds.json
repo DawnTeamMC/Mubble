@@ -38,6 +38,7 @@
 	"block.note_block.jump.small":
 	{
 		"category": "block",
+		"subtitle": "subtitles.block.note_block.jump",
 		"sounds":
 		[
 			"mubble:block/note_block/jump/small1",
@@ -47,6 +48,7 @@
 	"block.note_block.jump.high":
 	{
 		"category": "block",
+		"subtitle": "subtitles.block.note_block.jump",
 		"sounds":
 		[
 			"mubble:block/note_block/jump/high"
@@ -55,6 +57,7 @@
 	"block.rewind_block.disappear":
 	{
 		"category": "block",
+		"subtitle": "subtitles.block.rewind_block.disappear",
 		"sounds":
 		[
 			"minecraft:mob/endermen/portal"
@@ -63,6 +66,7 @@
 	"block.rewind_block.reappear":
 	{
 		"category": "block",
+		"subtitle": "subtitles.block.rewind_block.reappear",
 		"sounds":
 		[
 			"minecraft:mob/endermen/portal2"
@@ -93,7 +97,6 @@
 	"block.space_matter.hit":
 	{
 		"category": "block",
-		"subtitle": "subtitles.block.generic.hit",
 		"sounds":
 		[
 			"mubble:block/space_matter/hit1",
@@ -140,6 +143,7 @@
 	"item.annoying_dog.disappear":
 	{
 		"category": "player",
+		"subtitle": "subtitles.block.annoying_dog.disappear",
 		"sounds":
 		[
 			"mubble:item/annoying_dog/disappear"
@@ -148,6 +152,7 @@
 	"item.annoying_dog.waf":
 	{
 		"category": "player",
+		"subtitle": "subtitles.block.annoying_dog.waf",
 		"sounds":
 		[
 			"mubble:item/annoying_dog/waf"
@@ -277,6 +282,7 @@
 	"costume.cappy.ambient":
 	{
 		"category": "voice",
+		"subtitle": "subtitles.costume.cappy.ambient",
 		"sounds":
 		[
 			"mubble:costume/cappy/ambient1",
@@ -300,6 +306,7 @@
 	"costume.cappy.ambient.nether":
 	{
 		"category": "voice",
+		"subtitle": "subtitles.costume.cappy.ambient.nether",
 		"sounds":
 		[
 			"mubble:costume/cappy/ambient_nether1",
@@ -311,6 +318,7 @@
 	"costume.cappy.equip":
 	{
 		"category": "voice",
+		"subtitle": "subtitles.costume.cappy.equip",
 		"sounds":
 		[
 			"mubble:costume/cappy/equip1",
@@ -321,6 +329,7 @@
 	"costume.cappy.happy":
 	{
 		"category": "voice",
+		"subtitle": "subtitles.costume.cappy.happy",
 		"sounds":
 		[
 			"mubble:costume/cappy/happy1",
@@ -335,6 +344,7 @@
 	"costume.cappy.help":
 	{
 		"category": "voice",
+		"subtitle": "subtitles.costume.cappy.help",
 		"sounds":
 		[
 			"mubble:costume/cappy/help1",
@@ -348,6 +358,7 @@
 	"costume.cappy.help.water":
 	{
 		"category": "voice",
+		"subtitle": "subtitles.costume.cappy.help",
 		"sounds":
 		[
 			"mubble:costume/cappy/help_water1",
