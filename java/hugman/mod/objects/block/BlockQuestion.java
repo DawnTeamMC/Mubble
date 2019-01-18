@@ -4,7 +4,6 @@ import java.util.Random;
 
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleCostumes;
-import hugman.mod.init.MubbleTabs;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
@@ -16,8 +15,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -100,16 +97,6 @@ public class BlockQuestion extends BlockBase implements IHasModel
                 worldIn.scheduleUpdate(blockpos, this, 2);
             }
         }
-    }
-	
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos blockpos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-		if(!worldIn.isRemote)
-		{
-			loot(worldIn, blockpos, state);
-		}
-        return true;
     }
 	
 	@Override

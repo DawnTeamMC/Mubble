@@ -5,12 +5,16 @@ import java.util.Random;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSoundTypes;
+import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -33,24 +37,29 @@ public class BlockBrick extends BlockBase implements IHasModel
     {
         return BRICK_BLOCK_AABB;
     }
-	
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		if(this == MubbleBlocks.BRICK_BLOCK)
-		{
-			int drop = rand.nextInt(3);
-			if(drop == 2) return MubbleItems.YELLOW_COIN;
-			else return Item.getItemFromBlock(this);
-		}
-		if(this == MubbleBlocks.GOLDEN_BRICK_BLOCK) return MubbleItems.YELLOW_COIN;
-		else return Item.getItemFromBlock(this);
-	}
-	
-	@Override
-	public int quantityDropped(Random rand)
+    
+	public void loot(World worldIn, BlockPos blockpos, IBlockState state)
 	{
-		if(this == MubbleBlocks.GOLDEN_BRICK_BLOCK) return rand.nextInt(4) + 1;
-		else return 1;
+        IBlockState empty_block = MubbleBlocks.EMPTY_BLOCK.getDefaultState();
+        final double x = blockpos.getX() + 0.5D;
+        final double y = blockpos.getY() + 0.5D + 0.6D;
+        final double z = blockpos.getZ() + 0.5D;
+        if (!worldIn.isRemote)
+        {
+        	Random rand = new Random();
+        	if(this == MubbleBlocks.BRICK_BLOCK) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(MubbleItems.YELLOW_COIN)));
+        	if(this == MubbleBlocks.GOLDEN_BRICK_BLOCK) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(MubbleItems.YELLOW_COIN, rand.nextInt(5) + 3)));
+            worldIn.playSound((EntityPlayer)null, x, y - 0.6D, z, SoundHandler.BLOCK_QUESTION_BLOCK_LOOT_COIN, SoundCategory.BLOCKS, 1f, 1f);
+            worldIn.setBlockState(blockpos, empty_block);
+        }
+        else
+        {
+        	Random rand = new Random();
+        	for (int i = 0; i < rand.nextInt(3) + 1; i++)
+        	{
+            	worldIn.spawnParticle(EnumParticleTypes.CRIT, x + (rand.nextInt(7) - 3) / 10D, y + 0.3D, z + (rand.nextInt(7) - 3) / 10D, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D, 0);
+            }
+        }
 	}
 	
 	@Override
@@ -58,7 +67,14 @@ public class BlockBrick extends BlockBase implements IHasModel
 	{
 		if(!worldIn.isRemote && entityIn.motionY > 0.0D)
 		{
-			worldIn.destroyBlock(blockpos, true);
+            Random rand = new Random();
+            switch (rand.nextInt(2))
+            {
+            	case 0: loot(worldIn, blockpos, state);
+    					break;
+            	case 1: worldIn.destroyBlock(blockpos, false);
+						break;
+            }
 		}
 	}
 }

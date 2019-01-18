@@ -2,7 +2,6 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
@@ -11,8 +10,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -58,15 +55,5 @@ public class BlockEmpty extends BlockBase implements IHasModel
             	worldIn.playSound((EntityPlayer)null, blockpos.getX() + 0.5D, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D, SoundHandler.BLOCK_EMPTY_BLOCK_BREAK, SoundCategory.BLOCKS, 1f, 1f);
             }
         }
-    }
-	
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos blockpos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
-		if(!worldIn.isRemote)
-		{
-			worldIn.playSound((EntityPlayer)null, blockpos.getX() + 0.5D, blockpos.getY() + 0.5D, blockpos.getZ() + 0.5D, SoundHandler.BLOCK_EMPTY_BLOCK_BREAK, SoundCategory.BLOCKS, 1f, 1f);
-		}
-        return true;
     }
 }
