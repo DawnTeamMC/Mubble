@@ -74,20 +74,20 @@ tile.white_mushroom.name=Wite paddenstoel
 tile.light_gray_mushroom.name=Lichtgrijse paddenstoel
 tile.gray_mushroom.name=Grijse paddenstoel
 tile.black_mushroom.name=Zwarte paddenstoel
-tile.blue_mushroom_block.name=Blauwe paddenstoelenblok
-tile.light_blue_mushroom_block.name=Lichtblauwe paddenstoelenblok
-tile.cyan_mushroom_block.name=Turquoise paddenstoelenblok
-tile.green_mushroom_block.name=Groene paddenstoelenblok
-tile.lime_mushroom_block.name=Lichtgroene paddenstoelenblok
-tile.yellow_mushroom_block.name=Geele paddenstoelenblok
+tile.blue_mushroom_block.name=Blauw paddenstoelenblok
+tile.light_blue_mushroom_block.name=Lichtblauw paddenstoelenblok
+tile.cyan_mushroom_block.name=Turquois paddenstoelenblok
+tile.green_mushroom_block.name=Groen paddenstoelenblok
+tile.lime_mushroom_block.name=Lichtgroen paddenstoelenblok
+tile.yellow_mushroom_block.name=Geel paddenstoelenblok
 tile.orange_mushroom_block.name=Oranje paddenstoelenblok
 tile.pink_mushroom_block.name=Roze paddenstoelenblok
 tile.magenta_mushroom_block.name=Magenta paddenstoelenblok
-tile.purple_mushroom_block.name=Paarse paddenstoelenblok
-tile.white_mushroom_block.name=Wite paddenstoelenblok
-tile.light_gray_mushroom_block.name=Lichtgrijse paddenstoelenblok
-tile.gray_mushroom_block.name=Grijse paddenstoelenblok
-tile.black_mushroom_block.name=Zwarte paddenstoelenblok
+tile.purple_mushroom_block.name=Paars paddenstoelenblok
+tile.white_mushroom_block.name=Wit paddenstoelenblok
+tile.light_gray_mushroom_block.name=Lichtgrijs paddenstoelenblok
+tile.gray_mushroom_block.name=Grijs paddenstoelenblok
+tile.black_mushroom_block.name=Zwart paddenstoelenblok
 
 tile.blue_tetris_block.name=Blauw Tetris blok
 tile.light_blue_tetris_block.name=Lichtblauw Tetris blok
@@ -161,7 +161,7 @@ tile.purple_puyo.name=Paarse puyo
 tile.garbage_puyo.name=Afval puyo
 tile.point_puyo.name=Punt puyo
 tile.hard_puyo.name=Harde puyo
-tile.iron_puyo.name=Ijzere puyo
+tile.iron_puyo.name=IJzere puyo
 tile.puyo_block.name=Puyoblok
 
 tile.rewind_block.name=Terugspoelblok
@@ -224,12 +224,12 @@ item.broque_monsieur_head.name=Broque Monsieur's hoofd
 
 item.bandana.name=Bandana
 
-//item.snorlax_hat.name=<newline>
+item.snorlax_hat.name=Snorlax hoed
 
 item.top_hat.name=Hoge hoed
 
 item.ralsei_hat.name=Ralsei's hoed
-//item.king_round_mask.name=<newline>
+item.king_round_mask.name=Koning rond's masker
 
 item.baldi_head.name=Baldi's hoofd
 
@@ -243,18 +243,18 @@ entity.chincho.name=Chincho
 --- SUBTITLES ---
 subtitles.block.question_block.loot.super_mushroom=?-blok plundert super paddenstoel
 subtitles.block.question_block.loot.coin=?-blok laat munt vallen
-//subtitles.block.note_block.jump=<newline>
-//subtitles.block.rewind_block.disappear=<newline>
-//subtitles.block.rewind_block.reappear=<newline>
-//subtitles.item.annoying_dog.disappear=<newline>
-//subtitles.item.annoying_dog.waf=<newline>
+subtitles.block.note_block.jump=Nootblock wordt gebruikt
+subtitles.block.rewind_block.disappear=Terugspoelblok verdwijnd
+subtitles.block.rewind_block.reappear=Terugspoelblok verschijnd
+subtitles.item.annoying_dog.disappear=Iritante hond verdrijnd
+subtitles.item.annoying_dog.waf=Iritante hond blaft
 subtitles.item.cape_feather.use=Capeveer wordt gebruikt
 subtitles.item.smash_ball.use=Smash bal wordt gebruikt
-//subtitles.costume.cappy.ambient=<newline>
-//subtitles.costume.cappy.ambient.nether=<newline>
-//subtitles.costume.cappy.equip=<newline>
-//subtitles.costume.cappy.happy=<newline>
-//subtitles.costume.cappy.help=<newline>
+subtitles.costume.cappy.ambient=Cappy mompelt
+subtitles.costume.cappy.ambient.nether=Cappy raakt op
+subtitles.costume.cappy.equip=Cappy kwam op iemand's hoofd
+subtitles.costume.cappy.happy=Cappy mompelt blij
+subtitles.costume.cappy.help=Cappy vraagt om hulp
 subtitles.entity.toad.ambient=Toad mompelt
 subtitles.entity.toad.hurt=Toad heeft pijn
 subtitles.entity.toad.death=Toad sterft

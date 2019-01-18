@@ -153,7 +153,7 @@ tile.space_matter.name=Space Matter
 tile.space_obsidian.name=Space Obsidian
 
 tile.blue_puyo.name=Blue Puyo
-tile.turquoise_puyo.name=Turquoise Puyo
+tile.cyan_puyo.name=Cyan Puyo
 tile.green_puyo.name=Green Puyo
 tile.yellow_puyo.name=Yellow Puyo
 tile.red_puyo.name=Red Puyo
