@@ -8,11 +8,9 @@ import hugman.mod.init.MubbleBiomes;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleCommands;
 import hugman.mod.init.MubbleCostumes;
-import hugman.mod.init.MubbleDimensions;
 import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleRecipes;
-import hugman.mod.objects.command.CommandMotion;
 import hugman.mod.util.Reference;
 import hugman.mod.util.interfaces.IHasModel;
 import hugman.mod.world.gen.WorldGenCustomOres;
@@ -20,6 +18,7 @@ import hugman.mod.world.gen.WorldGenCustomStructures;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -114,17 +113,13 @@ public class RegistryHandler
 	
 	private static final ResourceLocation PURPLE_TETRIS_BLOCK = new ResourceLocation("mubble", "purple_tetris_block");
 	private static final ResourceLocation CLOUD_BLOCK = new ResourceLocation("mubble", "cloud_block");
+	private static final ResourceLocation MUSHROOM_KINGDOM = new ResourceLocation("mubble", "Mushroom Kingdom");
 	
 	@SubscribeEvent
 	public static void onMissingBlockMappings(final RegistryEvent.MissingMappings<Block> event)
 	{
 	    for (final RegistryEvent.MissingMappings.Mapping<Block> mapping : event.getMappings())
 	    {
-	        if (RegistryHandler.PURPLE_TETRIS_BLOCK.equals(mapping.key))
-	        {
-	            mapping.remap(MubbleBlocks.PINK_TETRIS_BLOCK);
-	            return;
-	        }
 	        if (RegistryHandler.CLOUD_BLOCK.equals(mapping.key))
 	        {
 	            mapping.remap(MubbleBlocks.WHITE_CLOUD_BLOCK);
@@ -138,14 +133,22 @@ public class RegistryHandler
 	{
 	    for (final RegistryEvent.MissingMappings.Mapping<Item> mapping : event.getMappings())
 	    {
-	        if (RegistryHandler.PURPLE_TETRIS_BLOCK.equals(mapping.key))
-	        {
-	            mapping.remap(Item.getItemFromBlock(MubbleBlocks.PINK_TETRIS_BLOCK));
-	            return;
-	        }
 	        if (RegistryHandler.CLOUD_BLOCK.equals(mapping.key))
 	        {
 	            mapping.remap(Item.getItemFromBlock(MubbleBlocks.WHITE_CLOUD_BLOCK));
+	            return;
+	        }
+	    }
+	}
+	
+	@SubscribeEvent
+	public static void onMissingBiomeMappings(final RegistryEvent.MissingMappings<Biome> event)
+	{
+	    for (final RegistryEvent.MissingMappings.Mapping<Biome> mapping : event.getMappings())
+	    {
+	        if (RegistryHandler.MUSHROOM_KINGDOM.equals(mapping.key))
+	        {
+	            mapping.remap(MubbleBiomes.MUSHROOM_KINGDOM);
 	            return;
 	        }
 	    }

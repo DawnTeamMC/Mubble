@@ -20,8 +20,8 @@ public class MubbleBiomes
 	
 	public static void registerBiomes()
 	{
-		initBiome(MUSHROOM_KINGDOM, "Mushroom Kingdom", BiomeType.COOL, Type.SPARSE);
-		initBiome(SCARLET_FOREST, "Scarlet Forest", BiomeType.WARM, Type.FOREST);
+		initBiome(MUSHROOM_KINGDOM, "mushroom_kingdom", BiomeType.COOL, Type.SPARSE);
+		initBiome(SCARLET_FOREST, "scarlet_forest", BiomeType.WARM, Type.FOREST);
 	}
 	
 	private static Biome initBiome(Biome biome, String name, BiomeType biomeType, Type... types)
