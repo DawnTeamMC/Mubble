@@ -136,7 +136,7 @@ tile.green_hill_dirt.name=Grüne Hügelerde
 tile.marble_zone_stone.name=Marble-Zonenstein
 tile.yellow_studiopolis_clapper.name=Gelbe Studiopolis-Filmklappe
 tile.blue_studiopolis_clapper.name=Blaue Studiopolis-Filmklappe
-//tile.spring.name=<newline>
+tile.spring.name=Feder
 
 tile.scarlet_grass_block.name=Scharlachroter Grassblock
 tile.scarlet_grass.name=Scharlachrotes Grass
@@ -149,8 +149,8 @@ tile.purple_brick_stairs.name=Violette Ziegeltreppe
 tile.cyan_bricks.name=Türkise Ziegelsteine
 tile.cyan_brick_stairs.name=Türkise Ziegeltreppe
 tile.elder_pebbles.name=Elder Pebbles
-tile.space_matter.name=Space Matter
-//tile.space_obsidian.name=<newline>
+tile.space_matter.name=Weltraummaterie
+tile.space_obsidian.name=Weltraumobsidian
 
 tile.blue_puyo.name=Blauer Puyo
 tile.turquoise_puyo.name=Türkiser Puyo
@@ -164,7 +164,7 @@ tile.hard_puyo.name=Harter Puyo
 tile.iron_puyo.name=Eisen-Puyo
 tile.puyo_block.name=Puyo-Block
 
-tile.rewind_block.name=Rückspul-Block
+tile.rewind_block.name=Rückspulblock
 tile.koretato_block.name=Koretato-Block
 
 --- ITEMS ---
@@ -181,11 +181,11 @@ item.tomato.name=Tomate
 item.salad.name=Salat
 item.cheese.name=Käse
 
-item.super_mushroom.name=Super-Pilz
+item.super_mushroom.name=Superpilz
 item.peach.name=Pfirsich
 item.cape_feather.name=Federumhang
 item.super_cape_feather.name=Super Federumhang
-item.super_star.name=Super Stern
+item.super_star.name=Superstern
 item.yellow_coin.name=Gelbe Münze
 item.red_coin.name=Rote Münze
 item.blue_coin.name=Blaue Münze
@@ -209,32 +209,32 @@ item.headphones.name=Kopfhörer
 item.christmas_hat.name=Weihnachtshut
 
 item.cappy.name=Cappy
-item.luigi_cap.name=Luigi-Mütze
-item.wario_cap.name=Wario-Mütze
-item.waluigi_cap.name=Waluigi-Mütze
-item.vanish_cap.name=Vanish-Mütze
-item.wing_cap.name=Wing-Mütze
+item.luigi_cap.name=Luigis Mütze
+item.wario_cap.name=Warios Mütze
+item.waluigi_cap.name=Waluigis Mütze
+item.vanish_cap.name=Vanishs Mütze
+item.wing_cap.name=Wings Mütze
 item.gooigi_cap.name=Gooigi's Mütze
-item.princess_peach_crown.name=Prinzessin Peach's Krone
-item.princess_daisy_crown.name=Prinzessin Daisy's Krone
+item.princess_peach_crown.name=Prinzessin Peachs Krone
+item.princess_daisy_crown.name=Prinzessin Daisys Krone
 item.rosalina_crown.name=Rosalina's Krone
-item.pink_gold_peach_crown.name=Rosagold-Peach's Krone
-item.super_crown.name=Super Krone
-item.broque_monsieur_head.name=Broque Monsieur's Kopf
+item.pink_gold_peach_crown.name=Peachs Rosagoldene Krone
+item.super_crown.name=Superkrone
+item.broque_monsieur_head.name=Broque Monsieurs Kopf
 
 item.bandana.name=Kopftuch
 
-//item.snorlax_hat.name=<newline>
+item.snorlax_hat.name=Snorlaxs Hut
 
 item.top_hat.name=Zylinderhut
 
-item.ralsei_hat.name=Ralsei's Hut
-//item.king_round_mask.name=<newline>
+item.ralsei_hat.name=Ralseis Hut
+item.king_round_mask.name=Maske von König Round 
 
-item.baldi_head.name=Baldi's Hut
+item.baldi_head.name=Baldis Hut
 
-item.mayro_cap.name=Mayro's Mütze
-item.noteblock_head.name=NoteBlock's Kopf
+item.mayro_cap.name=Mayros Mütze
+item.noteblock_head.name=NotenBlock's Kopf
 
 --- ENTITIES ---
 entity.toad.name=Toad
@@ -243,18 +243,18 @@ entity.chincho.name=Chincho
 --- SUBTITLES ---
 subtitles.block.question_block.loot.power_up=? Block gibt Power-Up
 subtitles.block.question_block.loot.coin=? Block gibt Münze
-//subtitles.block.note_block.jump=<newline>
-//subtitles.block.rewind_block.disappear=<newline>
-//subtitles.block.rewind_block.reappear=<newline>
-//subtitles.item.annoying_dog.disappear=<newline>
-//subtitles.item.annoying_dog.waf=<newline>
+subtitles.block.note_block.jump=Notenblock genutzt
+subtitles.block.rewind_block.disappear=Rückspulblock verschwindet
+subtitles.block.rewind_block.reappear=Rückspulblock erscheint wieder
+subtitles.item.annoying_dog.disappear=Nerviger Hund verschwindet
+subtitles.item.annoying_dog.waf=Nerviger Hund bellt
 subtitles.item.cape_feather.use=Federmütze benutzt
 subtitles.item.smash_ball.use=Smash Ball benutzt
-//subtitles.costume.cappy.ambient=<newline>
-//subtitles.costume.cappy.ambient.nether=<newline>
-//subtitles.costume.cappy.equip=<newline>
-//subtitles.costume.cappy.happy=<newline>
-//subtitles.costume.cappy.help=<newline>
+subtitles.costume.cappy.ambient=Cappy murmelt
+subtitles.costume.cappy.ambient.nether=Cappy geht der Schwund aus
+subtitles.costume.cappy.equip=Cappy steigt auf jemands Kopf
+subtitles.costume.cappy.happy=Cappy murmelt fröhlich
+subtitles.costume.cappy.help=Cappy bittet um Hilfe
 subtitles.entity.toad.ambient=Toad murmelt
 subtitles.entity.toad.hurt=Toad verletzt
 subtitles.entity.toad.death=Toad stirbt
