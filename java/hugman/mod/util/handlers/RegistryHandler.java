@@ -83,7 +83,7 @@ public class RegistryHandler
         );
     }
 	
-	public static void preInitRegistries() throws IOException
+	public static void preInitRegistries()
 	{
 		SoundHandler.registerSounds();
 		

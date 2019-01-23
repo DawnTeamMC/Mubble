@@ -1,7 +1,5 @@
 package hugman.mod;
 
-import java.io.IOException;
-
 import hugman.mod.proxy.CommonProxy;
 import hugman.mod.util.Reference;
 import hugman.mod.util.handlers.RegistryHandler;
@@ -25,7 +23,7 @@ public class Main
 	public static CommonProxy proxy;
 	
 	@EventHandler
-	public static void preInit(FMLPreInitializationEvent event) throws IOException
+	public static void preInit(FMLPreInitializationEvent event)
 	{
 		RegistryHandler.preInitRegistries();
 	}
