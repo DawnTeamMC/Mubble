@@ -4,6 +4,8 @@ run/
 .gradle/
 build/
 gradle-app.setting
+gradle.properties
+gradlew.bat
 
 ## IntelliJ IDEA
 
