@@ -10,7 +10,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class CostumeWingCap extends CostumeHeadBase implements IHasModel
+public class CostumeWingCap extends CostumeBaseHead implements IHasModel
 {
 	/**
 	 * Static class - can only be initialized once.

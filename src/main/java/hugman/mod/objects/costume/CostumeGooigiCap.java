@@ -12,7 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-public class CostumeGooigiCap extends CostumeHeadBase implements IHasModel
+public class CostumeGooigiCap extends CostumeBaseHead implements IHasModel
 {
 	/**
 	 * Static class - can only be initialized once.

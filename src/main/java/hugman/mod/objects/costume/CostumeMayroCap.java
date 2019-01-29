@@ -16,7 +16,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class CostumeMayroCap extends CostumeHeadBase implements IHasModel
+public class CostumeMayroCap extends CostumeBaseHead implements IHasModel
 {
 	/**
 	 * Static class - can only be initialized once.

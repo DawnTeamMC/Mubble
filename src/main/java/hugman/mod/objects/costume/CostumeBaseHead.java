@@ -20,7 +20,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class CostumeHeadBase extends Item implements IHasModel
+public class CostumeBaseHead extends Item implements IHasModel
 {	
 	String name;
 	SoundEvent sound;
@@ -30,7 +30,7 @@ public class CostumeHeadBase extends Item implements IHasModel
      * Open class - can be initialized for multiple items with variables.<br>
      * Template class - is used to create other classes.
      */
-	public CostumeHeadBase(String name, SoundEvent sound)
+	public CostumeBaseHead(String name, SoundEvent sound)
 	{
 		setTranslationKey(name);
 		setRegistryName(name);

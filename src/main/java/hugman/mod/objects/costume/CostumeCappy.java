@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-public class CostumeCappy extends CostumeHeadBase implements IHasModel
+public class CostumeCappy extends CostumeBaseHead implements IHasModel
 {
 	/**
 	 * Static class - can only be initialized once.

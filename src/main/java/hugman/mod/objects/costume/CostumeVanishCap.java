@@ -9,7 +9,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class CostumeVanishCap extends CostumeHeadBase implements IHasModel
+public class CostumeVanishCap extends CostumeBaseHead implements IHasModel
 {
 	/**
 	 * Static class - can only be initialized once.

@@ -10,7 +10,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-public class CostumeSimpleEffect extends CostumeHeadBase implements IHasModel
+public class CostumeSimpleEffect extends CostumeBaseHead implements IHasModel
 {
 	private PotionEffect[] effects;
     
