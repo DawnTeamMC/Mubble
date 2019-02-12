@@ -95,7 +95,7 @@ public class BlockUnstable extends BlockBase implements IHasModel
 	@Override
 	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
-		if(!worldIn.isRemote && this == MubbleBlocks.UNSTABLE_STONE) destroy(worldIn, pos);
+		if(!worldIn.isRemote && this == MubbleBlocks.UNSTABLE_STONE && entityIn instanceof EntityPlayer) destroy(worldIn, pos);
     }
 	
 	@Override
