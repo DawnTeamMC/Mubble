@@ -89,7 +89,7 @@ public class BlockUnstable extends BlockBase implements IHasModel
 	public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
     {
         entityIn.fall(fallDistance, 1.0F);
-		if(!worldIn.isRemote && this == MubbleBlocks.UNSTABLE_STONE) destroy(worldIn, pos);
+		if(!worldIn.isRemote && this == MubbleBlocks.UNSTABLE_STONE && entityIn instanceof EntityPlayer) destroy(worldIn, pos);
     }
 	
 	@Override
