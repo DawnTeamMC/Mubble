@@ -13,6 +13,7 @@ import hugman.mod.objects.item.ItemEdibleSeed;
 import hugman.mod.objects.item.ItemMusicDisc;
 import hugman.mod.objects.item.ItemSmashBall;
 import hugman.mod.objects.item.ItemSuperStar;
+import hugman.mod.objects.item.ItemTotemOfAscending;
 import hugman.mod.util.handlers.SoundHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -38,6 +39,7 @@ public class MubbleItems
 	public static final Item CHEESE = new ItemEdible("cheese", 2, 0.4F, false);
 	public static final Item WHEAT_FLOUR = new ItemBase("wheat_flour");
 	public static final Item VANADIUM = new ItemBase("vanadium");
+	public static final Item TOTEM_OF_ASCENDING = new ItemTotemOfAscending();
 	public static final Item SUPER_MUSHROOM = new ItemEdibleEffect("super_mushroom", 3, 1f, false, new PotionEffect(Potion.getPotionById(8), 550, 1));
 	public static final Item PEACH = new ItemEdible("peach", 4, 2.4f, true);
 	public static final Item CAPE_FEATHER = new ItemCapeFeather("cape_feather");
