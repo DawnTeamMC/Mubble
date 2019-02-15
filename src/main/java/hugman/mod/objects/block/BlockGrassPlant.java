@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import hugman.mod.Main;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleTabs;
@@ -125,6 +125,6 @@ public class BlockGrassPlant extends BlockBush implements IHasModel
 	@Override
 	public void registerModels()
 	{
-		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+		Mubble.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 }

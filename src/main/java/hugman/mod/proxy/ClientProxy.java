@@ -26,12 +26,4 @@ public class ClientProxy extends CommonProxy
 	{
 		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, filename), id));
 	}
-	
-	@Override
-	public void registerEntityRenderers() 
-    {
-		RenderingRegistry.registerEntityRenderingHandler(EntityToad.class, RenderToad::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityChincho.class, RenderChincho::new);
-		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingBlock.class, RenderFlyingBlock::new);
-    }
 }

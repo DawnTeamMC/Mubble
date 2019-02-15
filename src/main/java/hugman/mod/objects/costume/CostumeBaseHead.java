@@ -1,6 +1,6 @@
 package hugman.mod.objects.costume;
 
-import hugman.mod.Main;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.handlers.SoundHandler;
@@ -81,6 +81,6 @@ public class CostumeBaseHead extends Item implements IHasModel
 	@Override
 	public void registerModels()
 	{
-		Main.proxy.registerItemRenderer(this, 0, "inventory");
+		Mubble.proxy.registerItemRenderer(this, 0, "inventory");
 	}
 }

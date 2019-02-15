@@ -2,7 +2,7 @@ package hugman.mod.util.handlers;
 
 import java.io.IOException;
 
-import hugman.mod.Main;
+import hugman.mod.Mubble;
 import hugman.mod.entity.EntityFlyingBlock;
 import hugman.mod.init.MubbleBiomes;
 import hugman.mod.init.MubbleBlocks;
@@ -21,14 +21,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
-@EventBusSubscriber
+@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class RegistryHandler
 {
 	@SubscribeEvent
@@ -93,7 +92,6 @@ public class RegistryHandler
 		//MubbleDimensions.registerDimensions();
 		
 		MubbleEntities.registerEntities();
-		Main.proxy.registerEntityRenderers();
 	}
 	
 	public static void initRegistries()

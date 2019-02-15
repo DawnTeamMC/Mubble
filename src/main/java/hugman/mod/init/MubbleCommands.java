@@ -1,11 +1,7 @@
 package hugman.mod.init;
 
 import hugman.mod.objects.command.CommandMotion;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 
 /** 
  * Init class - used to initialize commands.

@@ -1,0 +1,16 @@
+displayName="Mubble"
+modId="mubble"
+version="1.3"
+logoFile="assets/mubble/textures/gui/logo.png"
+
+description='''Discover the Nintendo Universe and way more.'''
+
+authors="Hugman_76"
+credits="https://ftb.gamepedia.com/Mubble/Credits"
+
+modLoader="javafml"
+loaderVersion="[24,)"
+
+updateJSONURL="https://raw.githubusercontent.com/Hugman76/Mubble/master/update.json"
+issueTrackerURL="https://github.com/Hugman76/Mubble/issues"
+displayURL="https://minecraft.curseforge.com/projects/mubble"

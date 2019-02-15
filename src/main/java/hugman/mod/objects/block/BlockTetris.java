@@ -1,6 +1,6 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Main;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleTabs;
 import hugman.mod.init.MubbleItems;
@@ -49,6 +49,6 @@ public class BlockTetris extends BlockFalling implements IHasModel
 	@Override
 	public void registerModels()
 	{
-		Main.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
+		Mubble.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
 	}
 }
