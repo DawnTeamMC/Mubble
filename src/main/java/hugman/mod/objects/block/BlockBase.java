@@ -8,6 +8,7 @@ import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -20,13 +21,12 @@ public class BlockBase extends Block implements IHasModel
 	 */
 	public BlockBase(String name, Material material, float hardness, float resistance, SoundType sound, int light)
 	{
-		super(material);
+		super(Block.Properties.create(material));
 		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
-		setTranslationKey(name);
 		setRegistryName(name);
-		setHardness(hardness);
+		this.blockHardness = hardness;
 		this.blockResistance = resistance;
-		setSoundType(sound);
+		this.soundType = sound;
 		this.lightValue = light;
 		
 		MubbleBlocks.BLOCKS.add(this);

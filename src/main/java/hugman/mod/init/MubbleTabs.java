@@ -1,6 +1,6 @@
 package hugman.mod.init;
 
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
 /** 
@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
  */
 public class MubbleTabs 
 {
-    public static final CreativeTabs MUBBLE_BLOCKS = new CreativeTabs("mubble_blocks")
+    public static final ItemGroup MUBBLE_BLOCKS = new ItemGroup("mubble_blocks")
     {
     	@Override
     	public ItemStack createIcon()
@@ -16,7 +16,7 @@ public class MubbleTabs
     		return new ItemStack(MubbleBlocks.QUESTION_BLOCK);
     	}
     };
-    public static final CreativeTabs MUBBLE_ITEMS = new CreativeTabs("mubble_items")
+    public static final ItemGroup MUBBLE_ITEMS = new ItemGroup("mubble_items")
     {
     	@Override
     	public ItemStack createIcon()
@@ -24,7 +24,7 @@ public class MubbleTabs
     		return new ItemStack(MubbleItems.SUPER_MUSHROOM);
     	}
     };
-    public static final CreativeTabs MUBBLE_COSTUMES = new CreativeTabs("mubble_costumes")
+    public static final ItemGroup MUBBLE_COSTUMES = new ItemGroup("mubble_costumes")
     {
     	@Override
     	public ItemStack createIcon()

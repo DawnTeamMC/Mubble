@@ -1,17 +1,10 @@
 package hugman.mod.proxy;
 
-import hugman.mod.entity.EntityChincho;
-import hugman.mod.entity.EntityFlyingBlock;
-import hugman.mod.entity.EntityToad;
-import hugman.mod.entity.render.RenderChincho;
-import hugman.mod.entity.render.RenderFlyingBlock;
-import hugman.mod.entity.render.RenderToad;
 import hugman.mod.util.Reference;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class ClientProxy extends CommonProxy
 {

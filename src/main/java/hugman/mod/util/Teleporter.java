@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
+import net.minecraft.world.dimension.Dimension;
 
 public class Teleporter extends net.minecraft.world.Teleporter
 {
@@ -31,20 +32,20 @@ public class Teleporter extends net.minecraft.world.Teleporter
         entity.motionZ = 0.0f;
 	}
 	
-	public static void teleportToDimension(EntityPlayer player, int dimension, double x, double y, double z) 
+	public static void teleportToDimension(EntityPlayer player, Dimension dimension, double x, double y, double z) 
 	{
-        int oldDimension = player.getEntityWorld().provider.getDimension();
+        Dimension oldDimension = player.getEntityWorld().getDimension();
         EntityPlayerMP entityPlayerMP = (EntityPlayerMP) player;
-        MinecraftServer server = player.getEntityWorld().getMinecraftServer();
-        WorldServer worldServer = server.getWorld(dimension);
+        MinecraftServer server = player.getEntityWorld().getServer();
+        WorldServer worldServer = server.getWorld(dimension.getType());
         player.addExperienceLevel(0);
 
-        if (worldServer == null || worldServer.getMinecraftServer() == null)
+        if (worldServer == null || worldServer.getServer() == null)
         {
             throw new IllegalArgumentException("Dimension: " + dimension + " doesn't exist!");
         }
 
-        worldServer.getMinecraftServer().getPlayerList().transferPlayerToDimension(entityPlayerMP, dimension, new Teleporter(worldServer, x, y, z));
+        worldServer.getServer().getPlayerList().changePlayerDimension(entityPlayerMP, dimension.getType(), new Teleporter(worldServer, x, y, z));;
         player.setPositionAndUpdate(x, y, z);
     }
 }
