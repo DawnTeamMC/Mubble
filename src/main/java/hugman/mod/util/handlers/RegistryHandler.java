@@ -1,7 +1,5 @@
 package hugman.mod.util.handlers;
 
-import java.io.IOException;
-
 import hugman.mod.Main;
 import hugman.mod.entity.EntityFlyingBlock;
 import hugman.mod.init.MubbleBiomes;
@@ -111,7 +109,6 @@ public class RegistryHandler
 		//MubbleDimensions.createFiles();
 	}
 	
-	private static final ResourceLocation PURPLE_TETRIS_BLOCK = new ResourceLocation("mubble", "purple_tetris_block");
 	private static final ResourceLocation CLOUD_BLOCK = new ResourceLocation("mubble", "cloud_block");
 	private static final ResourceLocation MUSHROOM_KINGDOM = new ResourceLocation("mubble", "Mushroom Kingdom");
 	

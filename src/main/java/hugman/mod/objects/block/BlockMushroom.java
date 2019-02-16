@@ -11,7 +11,6 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -29,7 +28,7 @@ public class BlockMushroom extends BlockBush implements IHasModel
      */
 	public BlockMushroom(String color, int light)
 	{
-		setTranslationKey(color + "_mushroom");
+		setUnlocalizedName(color + "_mushroom");
 		setRegistryName(color + "_mushroom");
 		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setSoundType(SoundType.PLANT);
@@ -50,8 +49,6 @@ public class BlockMushroom extends BlockBush implements IHasModel
         if (rand.nextInt(25) == 0)
         {
             int i = 5;
-            int j = 4;
-
             for (BlockPos blockpos : BlockPos.getAllInBoxMutable(pos.add(-4, -1, -4), pos.add(4, 1, 4)))
             {
                 if (worldIn.getBlockState(blockpos).getBlock() == this)

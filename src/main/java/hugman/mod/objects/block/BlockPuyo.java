@@ -1,8 +1,5 @@
 package hugman.mod.objects.block;
 
-import java.util.Random;
-
-import hugman.mod.init.MubbleBlocks;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -10,11 +7,8 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -66,7 +60,7 @@ public class BlockPuyo extends BlockBase implements IHasModel
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta & 7));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 7));
     }
 	
 	@Override

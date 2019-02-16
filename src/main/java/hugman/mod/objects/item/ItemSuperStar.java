@@ -5,16 +5,11 @@ import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
-import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.play.server.SPacketCustomPayload;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class ItemSuperStar extends ItemFood implements IHasModel
@@ -25,7 +20,7 @@ public class ItemSuperStar extends ItemFood implements IHasModel
 	public ItemSuperStar()
 	{
 		super(3, 2.4f, false);
-		setTranslationKey("super_star");
+		setUnlocalizedName("super_star");
 		setRegistryName("super_star");
 		setCreativeTab(MubbleTabs.MUBBLE_ITEMS);
 		setAlwaysEdible();

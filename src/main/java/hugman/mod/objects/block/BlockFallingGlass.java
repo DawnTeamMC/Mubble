@@ -11,7 +11,6 @@ import net.minecraft.block.BlockFalling;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
@@ -32,7 +31,7 @@ public class BlockFallingGlass extends BlockFalling implements IHasModel
 	public BlockFallingGlass(String name)
 	{
 		super(Material.GLASS);
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setHardness(0.3f);
@@ -51,7 +50,7 @@ public class BlockFallingGlass extends BlockFalling implements IHasModel
     
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
+    public BlockRenderLayer getBlockLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }

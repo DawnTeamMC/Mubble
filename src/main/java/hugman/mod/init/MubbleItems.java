@@ -15,7 +15,6 @@ import hugman.mod.objects.item.ItemSmashBall;
 import hugman.mod.objects.item.ItemSuperStar;
 import hugman.mod.objects.item.ItemTotemOfAscending;
 import hugman.mod.util.handlers.SoundHandler;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;

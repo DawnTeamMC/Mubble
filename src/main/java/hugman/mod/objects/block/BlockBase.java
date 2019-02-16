@@ -2,13 +2,12 @@ package hugman.mod.objects.block;
 
 import hugman.mod.Main;
 import hugman.mod.init.MubbleBlocks;
-import hugman.mod.init.MubbleTabs;
 import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 
@@ -22,7 +21,7 @@ public class BlockBase extends Block implements IHasModel
 	{
 		super(material);
 		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setHardness(hardness);
 		this.blockResistance = resistance;
@@ -41,7 +40,7 @@ public class BlockBase extends Block implements IHasModel
 	{
 		super(material);
 		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setHardness(hardness);
 		this.blockResistance = resistance;

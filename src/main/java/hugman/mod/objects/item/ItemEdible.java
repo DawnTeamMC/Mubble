@@ -4,7 +4,6 @@ import hugman.mod.Main;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemFood;
 
 public class ItemEdible extends ItemFood implements IHasModel
@@ -15,7 +14,7 @@ public class ItemEdible extends ItemFood implements IHasModel
 	public ItemEdible(String name, int amount, float saturation, boolean isWolfFood)
 	{
 		super(amount, saturation, isWolfFood);
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MubbleTabs.MUBBLE_ITEMS);
 		MubbleItems.ITEMS.add(this);

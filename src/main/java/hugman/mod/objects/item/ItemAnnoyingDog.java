@@ -2,10 +2,8 @@ package hugman.mod.objects.item;
 
 import java.util.Random;
 
-import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;

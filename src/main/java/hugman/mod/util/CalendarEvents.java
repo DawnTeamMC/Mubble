@@ -2,9 +2,10 @@ package hugman.mod.util;
 
 import java.util.Calendar;
 
+@SuppressWarnings("unused")
 public class CalendarEvents
 {
-    private boolean isNewYear;
+	private boolean isNewYear;
     private boolean isTodayTemp;
     private boolean isAprilFools;
     private boolean isCochuBirthday;
@@ -19,15 +20,15 @@ public class CalendarEvents
         int month 	= cal.get(Calendar.MONTH);
         int day 	= cal.get(Calendar.DAY_OF_MONTH);
         
-        int january 	= cal.JANUARY;
-        int february 	= cal.FEBRUARY;
-        int april 		= cal.APRIL;
-        int june 		= cal.JUNE;
-        int july 		= cal.JULY;
-        int september 	= cal.SEPTEMBER;
-        int october 	= cal.OCTOBER;
-        int november 	= cal.NOVEMBER;
-        int december 	= cal.DECEMBER;
+        int january 	= Calendar.JANUARY;
+        int february 	= Calendar.FEBRUARY;
+        int april 		= Calendar.APRIL;
+        int june 		= Calendar.JUNE;
+        int july 		= Calendar.JULY;
+        int september 	= Calendar.SEPTEMBER;
+        int october 	= Calendar.OCTOBER;
+        int november 	= Calendar.NOVEMBER;
+        int december 	= Calendar.DECEMBER;
 
         if (month == january 	&& day == 1) this.isNewYear = true;
         if (month == january 	&& day == 7) this.isTodayTemp = true;

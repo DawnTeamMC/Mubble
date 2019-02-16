@@ -2,7 +2,6 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Main;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleTabs;
@@ -10,7 +9,6 @@ import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -30,7 +28,7 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
 	 */
 	public BlockCrops(String name, Item seed)
 	{
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		this.seed = seed;
 		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
@@ -49,7 +47,7 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
 	 */
 	public BlockCrops(String name, Item seed, Item food)
 	{
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		this.seed = seed;
 		this.food = food;
@@ -92,8 +90,6 @@ public class BlockCrops extends net.minecraft.block.BlockCrops implements IHasMo
 
         if (age >= getMaxAge())
         {
-            int k = 3 + fortune;
-
             for (int i = 0; i < 3 + fortune; ++i)
             {
                 if (rand.nextInt(2 * getMaxAge()) <= age)

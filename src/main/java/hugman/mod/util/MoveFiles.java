@@ -14,7 +14,7 @@ public final class MoveFiles
 	public static void copyToWorld(String dir, String file, int dim)
 	{
 		InputStream FROM = MoveFiles.class.getClassLoader().getResourceAsStream("assets/mubble/worlds/" + dir + "/" + file);
-	    Path TO = new File(Minecraft.getMinecraft().gameDir + "/saves/" + Minecraft.getMinecraft().getIntegratedServer().getFolderName(), "/DIM" + dim + "/" + file).toPath();
+	    Path TO = new File(Minecraft.getMinecraft().mcDataDir + "/saves/" + Minecraft.getMinecraft().getIntegratedServer().getFolderName(), "/DIM" + dim + "/" + file).toPath();
 	    CopyOption[] options = new CopyOption[] { };
 	    Path parentDir = TO.getParent();
 	    if (Files.exists(TO)) return;

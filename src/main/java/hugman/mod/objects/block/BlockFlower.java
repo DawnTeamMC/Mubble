@@ -14,7 +14,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +34,7 @@ public class BlockFlower extends BlockBush implements IHasModel
      */
 	public BlockFlower(String name, int light)
 	{
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setSoundType(SoundType.PLANT);
@@ -51,7 +50,7 @@ public class BlockFlower extends BlockBush implements IHasModel
     }
     
 	@Override
-	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos blockpos, IBlockState state, Entity entityIn)
     {
 		if(this == MubbleBlocks.CLOUD_FLOWER) {
 			EntityPlayer playerIn;

@@ -11,7 +11,7 @@ public class MubbleTabs
     public static final CreativeTabs MUBBLE_BLOCKS = new CreativeTabs("mubble_blocks")
     {
     	@Override
-    	public ItemStack createIcon()
+    	public ItemStack getTabIconItem()
     	{
     		return new ItemStack(MubbleBlocks.QUESTION_BLOCK);
     	}
@@ -19,7 +19,7 @@ public class MubbleTabs
     public static final CreativeTabs MUBBLE_ITEMS = new CreativeTabs("mubble_items")
     {
     	@Override
-    	public ItemStack createIcon()
+    	public ItemStack getTabIconItem()
     	{
     		return new ItemStack(MubbleItems.SUPER_MUSHROOM);
     	}
@@ -27,7 +27,7 @@ public class MubbleTabs
     public static final CreativeTabs MUBBLE_COSTUMES = new CreativeTabs("mubble_costumes")
     {
     	@Override
-    	public ItemStack createIcon()
+    	public ItemStack getTabIconItem()
     	{
     		return new ItemStack(MubbleCostumes.CAPPY);
     	}

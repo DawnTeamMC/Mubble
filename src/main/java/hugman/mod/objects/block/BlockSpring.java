@@ -1,6 +1,5 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -42,7 +41,6 @@ public class BlockSpring extends BlockBase implements IHasModel
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        state = this.getActualState(state, source, pos);
         if(state.getValue(FACING) == EnumFacing.UP) return UP_AABB;
         else if(state.getValue(FACING) == EnumFacing.DOWN) return DOWN_AABB;
         else if(state.getValue(FACING) == EnumFacing.NORTH) return NORTH_AABB;
@@ -93,7 +91,7 @@ public class BlockSpring extends BlockBase implements IHasModel
     @Override
     public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta & 7));
+        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 7));
     }
 	
 	@Override

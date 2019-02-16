@@ -3,14 +3,13 @@ package hugman.mod.init;
 import java.util.ArrayList;
 import java.util.List;
 
+import hugman.mod.objects.costume.CostumeBaseHead;
 import hugman.mod.objects.costume.CostumeCappy;
 import hugman.mod.objects.costume.CostumeGooigiCap;
-import hugman.mod.objects.costume.CostumeBaseHead;
 import hugman.mod.objects.costume.CostumeMayroCap;
 import hugman.mod.objects.costume.CostumeSimpleEffect;
 import hugman.mod.objects.costume.CostumeVanishCap;
 import hugman.mod.objects.costume.CostumeWingCap;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;

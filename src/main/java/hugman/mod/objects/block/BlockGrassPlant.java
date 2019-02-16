@@ -13,7 +13,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -36,7 +35,7 @@ public class BlockGrassPlant extends BlockBush implements IHasModel
 	 */
 	public BlockGrassPlant(String name, int light)
 	{
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setSoundType(SoundType.PLANT);
@@ -52,7 +51,7 @@ public class BlockGrassPlant extends BlockBush implements IHasModel
 	 */
 	public BlockGrassPlant(String name)
 	{
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MubbleTabs.MUBBLE_BLOCKS);
 		setSoundType(SoundType.PLANT);

@@ -5,7 +5,6 @@ import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -32,7 +31,7 @@ public class CostumeBaseHead extends Item implements IHasModel
      */
 	public CostumeBaseHead(String name, SoundEvent sound)
 	{
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MubbleTabs.MUBBLE_COSTUMES);
 		setMaxStackSize(1);

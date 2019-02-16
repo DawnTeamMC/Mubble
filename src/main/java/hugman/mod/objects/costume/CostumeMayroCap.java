@@ -1,6 +1,5 @@
 package hugman.mod.objects.costume;
 
-import hugman.mod.init.MubbleTabs;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;

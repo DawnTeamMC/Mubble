@@ -10,7 +10,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
@@ -135,7 +134,7 @@ public class BlockUnstable extends BlockBase implements IHasModel
 	
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
+    public BlockRenderLayer getBlockLayer()
     {
         if (this == MubbleBlocks.UNSTABLE_STONE) return BlockRenderLayer.CUTOUT_MIPPED;
         else return BlockRenderLayer.SOLID;

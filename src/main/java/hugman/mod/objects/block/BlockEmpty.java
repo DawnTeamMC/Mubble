@@ -35,7 +35,7 @@ public class BlockEmpty extends BlockBase implements IHasModel
     }
 	
 	@Override
-	public void onEntityCollision(World worldIn, BlockPos blockpos, IBlockState state, Entity entityIn)
+	public void onEntityCollidedWithBlock(World worldIn, BlockPos blockpos, IBlockState state, Entity entityIn)
 	{
 		Random rand = new Random();
 		if(!worldIn.isRemote && entityIn.motionY > 0.0D)

@@ -4,7 +4,6 @@ import hugman.mod.Main;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
 /** 
@@ -15,7 +14,7 @@ public class ItemBase extends Item implements IHasModel
 {
 	public ItemBase(String name)
 	{
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MubbleTabs.MUBBLE_ITEMS);
 		MubbleItems.ITEMS.add(this);
@@ -23,7 +22,7 @@ public class ItemBase extends Item implements IHasModel
 	
 	public ItemBase(String name, int max)
 	{
-		setTranslationKey(name);
+		setUnlocalizedName(name);
 		setRegistryName(name);
 		setCreativeTab(MubbleTabs.MUBBLE_ITEMS);
 		setMaxStackSize(max);

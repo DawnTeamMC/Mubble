@@ -3,7 +3,6 @@ package hugman.mod.objects.costume;
 import java.util.Random;
 
 import hugman.mod.init.MubbleBiomes;
-import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.handlers.SoundHandler;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.entity.item.EntityItem;

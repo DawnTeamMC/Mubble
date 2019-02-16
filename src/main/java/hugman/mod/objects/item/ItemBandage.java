@@ -1,12 +1,10 @@
 package hugman.mod.objects.item;
 
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -15,9 +13,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class ItemBandage extends ItemBase implements IHasModel
-{
-	private PotionEffect[] effects;
-	
+{	
 	/**
 	 * Static class - can only be initialized once.
 	 */

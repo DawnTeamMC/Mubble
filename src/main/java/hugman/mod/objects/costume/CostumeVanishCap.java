@@ -1,6 +1,5 @@
 package hugman.mod.objects.costume;
 
-import hugman.mod.init.MubbleTabs;
 import hugman.mod.util.interfaces.IHasModel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

@@ -1,9 +1,6 @@
 package hugman.mod.objects.costume;
 
-import java.util.Random;
-
 import hugman.mod.util.interfaces.IHasModel;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -28,8 +25,7 @@ public class CostumeSimpleEffect extends CostumeBaseHead implements IHasModel
 	{
         if(!worldIn.isRemote)
         {
-            Random rand = new Random();
-    		for(PotionEffect effect : effects)
+            for(PotionEffect effect : effects)
     		{
     			playerIn.addPotionEffect(new PotionEffect(effect));
     		}

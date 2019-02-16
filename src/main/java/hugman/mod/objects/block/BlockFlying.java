@@ -8,12 +8,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFlying extends BlockBase implements IHasModel
 {	
@@ -52,8 +49,6 @@ public class BlockFlying extends BlockBase implements IHasModel
     {
         if ((worldIn.isAirBlock(pos.up()) || canFlyThrough(worldIn.getBlockState(pos.up()))) && pos.getY() >= 0)
         {
-            int i = 32;
-
             if (!flyInstantly && worldIn.isAreaLoaded(pos.add(-32, -32, -32), pos.add(32, 32, 32)))
             {
                 if (!worldIn.isRemote)
@@ -105,22 +100,5 @@ public class BlockFlying extends BlockBase implements IHasModel
 
     public void onBroken(World worldIn, BlockPos pos)
     {
-    }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
-    {
-        if (rand.nextInt(16) == 0)
-        {
-            BlockPos blockpos = pos.up();
-
-            if (canFlyThrough(worldIn.getBlockState(blockpos)))
-            {
-                double d0 = (double)((float)pos.getX() + rand.nextFloat());
-                double d1 = (double)pos.getY() - 0.05D;
-                double d2 = (double)((float)pos.getZ() + rand.nextFloat());
-            }
-        }
     }
 }
