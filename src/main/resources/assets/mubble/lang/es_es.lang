@@ -180,6 +180,7 @@ item.burger.name=Hamburguesa
 item.tomato.name=Tomate
 item.salad.name=Ensalada
 item.cheese.name=Queso
+//item.totem_of_ascending.name=<newline>
 
 item.super_mushroom.name=Súper champiñón
 item.peach.name=Durazno

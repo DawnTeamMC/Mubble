@@ -27,8 +27,10 @@ public class ItemTotemOfAscending extends ItemBase implements IHasModel
     {
         ItemStack stack = playerIn.getHeldItem(handIn);
         BlockPos desPos = worldIn.getTopSolidOrLiquidBlock(new BlockPos(playerIn.posX, playerIn.posY, playerIn.posZ));
-        playerIn.setPosition(desPos.getX() + 0.5D, desPos.getY() + 0.5D, desPos.getZ() + 0.5D);
+        if(desPos.getY() <= playerIn.posY) playerIn.setPosition(playerIn.posX, desPos.getY() + 20D, playerIn.posZ);
+        else playerIn.setPosition(playerIn.posX, desPos.getY() + 2D, playerIn.posZ);
         if (!playerIn.capabilities.isCreativeMode) stack.shrink(1);
+        playerIn.fallDistance = 0f;
         playerIn.getCooldownTracker().setCooldown(this, 25);
         playerIn.addStat(StatList.getObjectUseStats(this));
         worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_TOTEM_USE, SoundCategory.PLAYERS, 1f, 1f);
