@@ -5,13 +5,13 @@ import java.util.Calendar;
 @SuppressWarnings("unused")
 public class CalendarEvents
 {
-	private boolean isNewYear;
-    private boolean isTodayTemp;
-    private boolean isAprilFools;
-    private boolean isCochuBirthday;
-    private boolean isMubbleBirthday;
-    private boolean isHugmanBirthday;
-    private boolean isChristmas;
+	public boolean isNewYear;
+	public boolean isTodayTemp;
+	public boolean isAprilFools;
+	public boolean isCochuBirthday;
+	public boolean isMubbleBirthday;
+	public boolean isHugmanBirthday;
+	public boolean isChristmas;
     
     public CalendarEvents()
     {
