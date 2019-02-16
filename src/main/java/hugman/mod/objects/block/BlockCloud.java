@@ -67,7 +67,8 @@ public class BlockCloud extends BlockBase implements IHasModel
 	}
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
+    @Override
+    public BlockRenderLayer getBlockLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }

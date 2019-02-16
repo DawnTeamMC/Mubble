@@ -86,7 +86,8 @@ public class BlockPortal extends Block implements IHasModel
 	}
     
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getRenderLayer()
+    @Override
+    public BlockRenderLayer getBlockLayer()
     {
         return BlockRenderLayer.TRANSLUCENT;
     }
