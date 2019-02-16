@@ -9,7 +9,7 @@ authors="Hugman_76"
 credits="https://ftb.gamepedia.com/Mubble/Credits"
 
 modLoader="javafml"
-loaderVersion="[24,)"
+loaderVersion="[25,)"
 
 updateJSONURL="https://raw.githubusercontent.com/Hugman76/Mubble/master/update.json"
 issueTrackerURL="https://github.com/Hugman76/Mubble/issues"

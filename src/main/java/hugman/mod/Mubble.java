@@ -1,65 +1,46 @@
 package hugman.mod;
 
-import java.util.stream.Collectors;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import hugman.mod.init.MubbleBlocks;
-import hugman.mod.init.MubbleCostumes;
-import hugman.mod.init.MubbleEntities;
-import hugman.mod.init.MubbleItems;
-import hugman.mod.proxy.CommonProxy;
-import hugman.mod.util.Reference;
-import hugman.mod.util.handlers.RegistryHandler;
+import hugman.mod.init.MubbleTabs;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(Reference.MODID)
+@Mod(Mubble.ID)
 public class Mubble 
 {
-    private static final Logger LOGGER = LogManager.getLogger();
-    
+	private static final Logger LOGGER = LogManager.getLogger();
+	public static final String ID = "mubble";
+	
     public Mubble()
     {
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, this::registerBlocks);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, this::registerItems);
         
         MinecraftForge.EVENT_BUS.register(this);
     }
     
-    private void setup(final FMLCommonSetupEvent event)
+    private void registerBlocks(final RegistryEvent.Register<Block> event)
     {
-    	RegistryHandler.preInitRegistries();
-    	RegistryHandler.initRegistries();
+    	event.getRegistry().register(MubbleBlocks.QUESTION_BLOCK);
     }
+    
+    private void registerItems(final RegistryEvent.Register<Item> event)
+    {
+        Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
 
-    private void clientSetup(final FMLClientSetupEvent event)
-    {
-    	MubbleEntities.registerEntityRenderers();
+        event.getRegistry().register(new ItemBlock(MubbleBlocks.QUESTION_BLOCK, blocks));
     }
     
-    @SubscribeEvent
-    public static void onServerPreStarting(FMLServerAboutToStartEvent event)
+    public static Logger getLogger()
     {
-    	RegistryHandler.preServerInitRegistries();
-    }
-    
-    @SubscribeEvent
-    public static void onServerStarting(FMLServerStartingEvent event)
-    {
-    	RegistryHandler.serverInitRegistries(event);
+        return LOGGER;
     }
 }
