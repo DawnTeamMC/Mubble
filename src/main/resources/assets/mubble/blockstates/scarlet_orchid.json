@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "normal": [
-            {"model": "mubble:scarlet_orchid/0"},
-            {"model": "mubble:scarlet_orchid/1"}
-        ]
-    }
-}

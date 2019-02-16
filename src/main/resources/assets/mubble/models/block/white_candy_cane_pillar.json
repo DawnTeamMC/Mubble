@@ -1,7 +1,0 @@
-{
-    "parent": "block/cube_column",
-    "textures": {
-        "side": "mubble:block/white_candy_cane_pillar",
-        "end": "mubble:block/candy_cane_pillar_end"
-    }
-}

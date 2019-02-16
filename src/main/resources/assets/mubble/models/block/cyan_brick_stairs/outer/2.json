@@ -1,8 +1,0 @@
-{
-    "parent": "block/outer_stairs",
-    "textures": {
-        "bottom": "mubble:block/cyan_bricks/2",
-        "top": "mubble:block/cyan_bricks/2",
-        "side": "mubble:block/cyan_bricks/2"
-    }
-}

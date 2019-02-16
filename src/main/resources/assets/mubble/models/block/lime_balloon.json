@@ -1,6 +1,0 @@
-{
-    "parent": "mubble:block/balloon",
-	"textures": {
-		"all": "mubble:block/lime_balloon"
-	}
-}
