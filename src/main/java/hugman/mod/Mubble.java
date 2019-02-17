@@ -36,7 +36,7 @@ public class Mubble
     {
         Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
 
-        event.getRegistry().register(new ItemBlock(MubbleBlocks.QUESTION_BLOCK, blocks));
+        event.getRegistry().register(new ItemBlock(MubbleBlocks.QUESTION_BLOCK, blocks).setRegistryName("question_block"));
     }
     
     public static Logger getLogger()

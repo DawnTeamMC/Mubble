@@ -1,7 +1,5 @@
 {
-    "variants": {
-        "normal": {
-   			"model": "mubble:question_block"
-    	}
-    }
+	"variants": {
+		"": { "model": "mubble:block/question_block" }
+	}
 }
