@@ -1,17 +1,28 @@
 modLoader="javafml"
 loaderVersion="[25,)"
+issueTrackerURL="https://github.com/Hugman76/Mubble/issues"
 
 [[mods]]
-displayName="Mubble"
 modId="mubble"
 version="1.3"
-logoFile="assets/mubble/textures/gui/logo.png"
-description='''
-Discover the Nintendo Universe and way more.
-'''
-authors="Hugman_76"
-credits="https://ftb.gamepedia.com/Mubble/Credits"
-
-issueTrackerURL="https://github.com/Hugman76/Mubble/issues"
-displayURL="https://minecraft.curseforge.com/projects/mubble"
+displayName="Mubble"
 updateJSONURL="https://raw.githubusercontent.com/Hugman76/Mubble/master/update.json"
+displayURL="https://minecraft.curseforge.com/projects/mubble"
+logoFile="assets/mubble/textures/gui/logo.png"
+credits="https://ftb.gamepedia.com/Mubble/Credits"
+authors="Hugman_76"
+description='''Discover the Nintendo Universe and way more.'''
+
+[[dependencies.mubble]]
+modId="forge"
+mandatory=true
+versionRange="[25,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.mubble]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.13.2]"
+ordering="NONE"
+side="BOTH"
