@@ -4,41 +4,45 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import hugman.mod.init.MubbleBlocks;
-import hugman.mod.init.MubbleTabs;
+import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(Mubble.ID)
+@Mod(Reference.MOD_ID)
 public class Mubble 
 {
 	private static final Logger LOGGER = LogManager.getLogger();
-	public static final String ID = "mubble";
 	
     public Mubble()
     {
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, this::registerBlocks);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, this::registerItems);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(SoundEvent.class, this::registerSounds);
         
         MinecraftForge.EVENT_BUS.register(this);
     }
     
-    private void registerBlocks(final RegistryEvent.Register<Block> event)
-    {
-    	event.getRegistry().register(MubbleBlocks.QUESTION_BLOCK);
-    }
+	public void registerBlocks(RegistryEvent.Register<Block> event)
+	{
+		event.getRegistry().registerAll(MubbleBlocks.BLOCKS.toArray(new Block[0]));
+	}
+	
+	public void registerItems(RegistryEvent.Register<Item> event)
+	{
+		event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
+	}
     
-    private void registerItems(final RegistryEvent.Register<Item> event)
+    public void registerSounds(RegistryEvent.Register<SoundEvent> event)
     {
-        Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
-
-        event.getRegistry().register(new ItemBlock(MubbleBlocks.QUESTION_BLOCK, blocks).setRegistryName("question_block"));
+    	MubbleSounds.registerSounds();
     }
-    
+	
     public static Logger getLogger()
     {
         return LOGGER;

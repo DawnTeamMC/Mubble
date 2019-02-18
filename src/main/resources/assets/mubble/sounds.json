@@ -1,0 +1,29 @@
+{
+	"block.empty_block.hit":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.generic.hit",
+		"sounds":
+		[
+			"mubble:block/empty_block/hit"
+		]
+	},
+	"block.question_block.loot.power_up":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.question_block.loot.power_up",
+		"sounds":
+		[
+			"mubble:block/question_block/loot/power_up"
+		]
+	},
+	"block.question_block.loot.coin":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.question_block.loot.coin",
+		"sounds":
+		[
+			"mubble:block/question_block/loot/coin"
+		]
+	}
+}

@@ -13,4 +13,13 @@ public class MubbleTabs
     		return new ItemStack(MubbleBlocks.QUESTION_BLOCK);
     	}
     };
+    
+    public static final ItemGroup MUBBLE_ITEMS = new ItemGroup("mubble_items")
+    {
+    	@Override
+    	public ItemStack createIcon()
+    	{
+    		return new ItemStack(MubbleBlocks.QUESTION_BLOCK);
+    	}
+    };
 }

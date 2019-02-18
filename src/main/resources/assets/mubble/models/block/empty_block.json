@@ -1,0 +1,8 @@
+{
+    "parent": "block/cube_bottom_top",
+    "textures": {
+        "top": "mubble:block/empty_block_top",
+        "side": "mubble:block/empty_block_side",
+        "bottom": "mubble:block/empty_block_bottom"
+    }
+}
