@@ -1,7 +1,7 @@
 --- CREATIVE TABS ---
-itemGroup.mubble_blocks=Mubble Blöcke
-itemGroup.mubble_items=Mubble Gegenstände
-itemGroup.mubble_costumes=Mubble Kostüme
+itemGroup.mubble_blocks=Mubble-Blöcke
+itemGroup.mubble_items=Mubble-Gegenstände
+itemGroup.mubble_costumes=Mubble-Kostüme
 
 --- BLOCKS ---
 tile.vanadium_block.name=Vanadium-Block
@@ -47,7 +47,7 @@ tile.light_gray_balloon.name=Hellgrauer Luftballon
 tile.gray_balloon.name=Grauer Luftballon
 tile.black_balloon.name=Schwarzer Luftballon
 
-tile.question_block.name=? Block
+tile.question_block.name=?-Block
 tile.empty_block.name=Leerer Block
 tile.rotating_block.name=Rotierender Block
 tile.light_block.name=Leuchtender Block
@@ -107,7 +107,7 @@ tile.gray_tetris_block.name=Grauer Tetrisblock
 tile.black_tetris_block.name=Schwarzer Tetrisblock
 tile.tetris_glass.name=Tetris-Glas
 tile.japanese_tetris_cushion.name=Japanischer Tetris-Kissen
-tile.rainbow_tetris_scaffolding.name=Regenbogen Tetris-Gerüst
+tile.rainbow_tetris_scaffolding.name=Regenbogen-Tetris-Gerüst
 tile.monochrome_tetris_scaffolding.name=Einfarbiger Tetris-Gerüst
 
 tile.vampire_stone.name=Vampir-Stein
@@ -143,7 +143,7 @@ tile.scarlet_grass.name=Scharlachrotes Grass
 tile.scarlet_mushroom.name=Scharlachroter Pilz
 tile.scarlet_orchid.name=Scharlachrote Orchidee
 
-tile.iron_scaffolding.name=Eisen Gerüst
+tile.iron_scaffolding.name=Eisengerüst
 tile.purple_bricks.name=Violette Ziegelsteine
 tile.purple_brick_stairs.name=Violette Ziegeltreppe
 tile.cyan_bricks.name=Türkise Ziegelsteine
@@ -242,8 +242,8 @@ entity.toad.name=Toad
 entity.chincho.name=Chincho
 
 --- SUBTITLES ---
-subtitles.block.question_block.loot.power_up=? Block gibt Power-Up
-subtitles.block.question_block.loot.coin=? Block gibt Münze
+subtitles.block.question_block.loot.power_up=?-Block gibt Power-Up
+subtitles.block.question_block.loot.coin=?-Block gibt Münze
 subtitles.block.note_block.jump=Notenblock genutzt
 subtitles.block.rewind_block.disappear=Rückspulblock verschwindet
 subtitles.block.rewind_block.reappear=Rückspulblock erscheint wieder
@@ -284,4 +284,4 @@ commands.motion.success=Ändert die Bewegung von %s zu %s, %s, %s
 item.cappy.secret_status=Wie widersprüchlich... :)
 item.bandana.secret_status=Das ist für dich, §6Pixel§r!
 item.noteblock_head.secret_status=Hey! Ich dachte, du hättest das schon auf dem Kopf, §6Evan§r!
-item.mayro_cap.secret_status=Komm schon, du bist der jenige der es am wenigsten braucht. Bist du es nicht, Mr. "§6Sossie§r"?
+item.mayro_cap.secret_status=Komm schon, du bist der jenige der es am wenigsten braucht. Bist du's nicht, Mr. "§6Sossie§r"?
