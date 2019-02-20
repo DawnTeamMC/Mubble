@@ -23,7 +23,8 @@
 		"subtitle": "subtitles.block.block.note_block.jump.low",
 		"sounds":
 		[
-			"mubble:block/note_block/jump/low"
+			"mubble:block/note_block/jump/low0",
+			"mubble:block/note_block/jump/low1"
 		]
 	},
 	"block.question_block.loot.power_up":
