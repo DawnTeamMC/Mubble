@@ -14,7 +14,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Particles;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -89,14 +88,6 @@ public class BlockBrick extends Block
         	if(this == MubbleBlocks.GOLDEN_BRICK_BLOCK) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(MubbleItems.YELLOW_COIN, rand.nextInt(5) + 3)));
             worldIn.playSound((EntityPlayer)null, x, y - 0.6D, z, MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN, SoundCategory.BLOCKS, 1f, 1f);
             worldIn.setBlockState(pos, empty_block);
-        }
-        else
-        {
-        	Random rand = new Random();
-        	for (int i = 0; i < rand.nextInt(3) + 1; i++)
-        	{
-            	worldIn.spawnParticle(Particles.CRIT, x + (rand.nextInt(7) - 3) / 10D, y + 0.3D, z + (rand.nextInt(7) - 3) / 10D, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D);
-            }
         }
 	}
 }
