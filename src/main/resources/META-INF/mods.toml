@@ -11,7 +11,9 @@ displayURL="https://minecraft.curseforge.com/projects/mubble"
 logoFile="assets/mubble/textures/gui/logo.png"
 credits="https://ftb.gamepedia.com/Mubble/Credits"
 authors="Hugman_76"
-description='''Discover the Nintendo Universe and way more.'''
+description='''
+Discover the Nintendo Universe and way more.
+'''
 
 [[dependencies.mubble]]
 modId="forge"

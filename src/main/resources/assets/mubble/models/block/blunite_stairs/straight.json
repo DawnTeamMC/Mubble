@@ -1,0 +1,9 @@
+{
+	"parent": "block/stairs",
+	"textures":
+	{
+		"bottom": "mubble:block/blunite",
+		"top": "mubble:block/blunite",
+		"side": "mubble:block/blunite"
+	}
+}

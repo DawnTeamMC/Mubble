@@ -8,6 +8,24 @@
 			"mubble:block/empty_block/hit"
 		]
 	},
+	"block.note_block.jump.high":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.note_block.jump.high",
+		"sounds":
+		[
+			"mubble:block/note_block/jump/high"
+		]
+	},
+	"block.note_block.jump.low":
+	{
+		"category": "block",
+		"subtitle": "subtitles.block.block.note_block.jump.low",
+		"sounds":
+		[
+			"mubble:block/note_block/jump/low"
+		]
+	},
 	"block.question_block.loot.power_up":
 	{
 		"category": "block",

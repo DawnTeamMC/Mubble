@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+		"type=bottom": {"model": "mubble:block/red_brick_slab/bottom"},
+		"type=top": {"model": "mubble:block/red_brick_slab/top"},
+		"type=double": {"model": "mubble:block/red_bricks"}
+	}
+}

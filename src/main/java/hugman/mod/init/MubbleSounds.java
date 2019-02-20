@@ -9,12 +9,16 @@ public class MubbleSounds
 {
 	public static SoundEvent
 	BLOCK_EMPTY_BLOCK_HIT,
+	BLOCK_NOTE_BLOCK_JUMP_HIGH,
+	BLOCK_NOTE_BLOCK_JUMP_LOW,
 	BLOCK_QUESTION_BLOCK_LOOT_POWER_UP,
 	BLOCK_QUESTION_BLOCK_LOOT_COIN;
 	
 	public static void registerSounds()
 	{
 		BLOCK_EMPTY_BLOCK_HIT = registerSound("block.empty_block.hit");
+		BLOCK_NOTE_BLOCK_JUMP_HIGH = registerSound("block.note_block.jump.high");
+		BLOCK_NOTE_BLOCK_JUMP_LOW = registerSound("block.note_block.jump.low");
 		BLOCK_QUESTION_BLOCK_LOOT_POWER_UP = registerSound("block.question_block.loot.power_up");
 		BLOCK_QUESTION_BLOCK_LOOT_COIN = registerSound("block.question_block.loot.coin");
 	}
