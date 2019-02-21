@@ -15,7 +15,17 @@ public class BlockStairs extends net.minecraft.block.BlockStairs implements IBuc
     public BlockStairs(String name, Block base_block)
     {
         super(base_block.getDefaultState(), Properties.from(base_block));
-        setRegistryName(Reference.MOD_ID, name);
+        setRegistryName(Reference.MOD_ID, name + "_stairs");
+        Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
+        
+		MubbleBlocks.BLOCKS.add(this);
+		MubbleItems.ITEMS.add(new ItemBlock(this, blocks).setRegistryName(this.getRegistryName()));
+    }
+    
+    public BlockStairs(Block base_block)
+    {
+        super(base_block.getDefaultState(), Properties.from(base_block));
+        setRegistryName(base_block.getRegistryName() + "_stairs");
         Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
         
 		MubbleBlocks.BLOCKS.add(this);

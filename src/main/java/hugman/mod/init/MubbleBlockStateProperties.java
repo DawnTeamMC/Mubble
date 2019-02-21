@@ -1,0 +1,9 @@
+package hugman.mod.init;
+
+import hugman.mod.objects.state.properties.SlabVerticalType;
+import net.minecraft.state.EnumProperty;
+
+public class MubbleBlockStateProperties
+{
+	   public static final EnumProperty<SlabVerticalType> VERTICAL_SLAB_TYPE = EnumProperty.create("type", SlabVerticalType.class);
+}

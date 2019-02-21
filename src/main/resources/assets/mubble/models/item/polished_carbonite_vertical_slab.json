@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:item/vertical_slab",
+	"textures":
+	{
+		"block": "mubble:block/polished_carbonite"
+	}
+}

@@ -19,7 +19,7 @@ public class MubbleTabs
     	@Override
     	public ItemStack createIcon()
     	{
-    		return new ItemStack(MubbleBlocks.QUESTION_BLOCK);
+    		return new ItemStack(MubbleItems.SUPER_MUSHROOM);
     	}
     };
 }

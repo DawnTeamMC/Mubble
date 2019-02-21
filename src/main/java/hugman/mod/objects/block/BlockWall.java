@@ -15,7 +15,17 @@ public class BlockWall extends net.minecraft.block.BlockWall implements IBucketP
     public BlockWall(String name, Block base_block)
     {
         super(Properties.from(base_block));
-        setRegistryName(Reference.MOD_ID, name);
+        setRegistryName(Reference.MOD_ID, name + "_wall");
+        Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
+        
+		MubbleBlocks.BLOCKS.add(this);
+		MubbleItems.ITEMS.add(new ItemBlock(this, blocks).setRegistryName(this.getRegistryName()));
+    }
+    
+    public BlockWall(Block base_block)
+    {
+        super(Properties.from(base_block));
+        setRegistryName(base_block.getRegistryName() + "_wall");
         Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
         
 		MubbleBlocks.BLOCKS.add(this);

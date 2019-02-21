@@ -15,7 +15,17 @@ public class BlockSlab extends net.minecraft.block.BlockSlab implements IBucketP
     public BlockSlab(String name, Block base_block)
     {
         super(Properties.from(base_block));
-        setRegistryName(Reference.MOD_ID, name);
+        setRegistryName(Reference.MOD_ID, name + "_slab");
+        Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
+        
+		MubbleBlocks.BLOCKS.add(this);
+		MubbleItems.ITEMS.add(new ItemBlock(this, blocks).setRegistryName(this.getRegistryName()));
+    }
+    
+    public BlockSlab(Block base_block)
+    {
+        super(Properties.from(base_block));
+        setRegistryName(base_block.getRegistryName() + "_slab");
         Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
         
 		MubbleBlocks.BLOCKS.add(this);
