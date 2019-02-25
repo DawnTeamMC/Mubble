@@ -7,14 +7,17 @@ import hugman.mod.objects.block.BlockBrick;
 import hugman.mod.objects.block.BlockEmpty;
 import hugman.mod.objects.block.BlockNote;
 import hugman.mod.objects.block.BlockQuestion;
+import hugman.mod.objects.block.BlockRotating;
 import hugman.mod.objects.block.BlockSimple;
 import hugman.mod.objects.block.BlockSlab;
-import hugman.mod.objects.block.BlockStairs;
 import hugman.mod.objects.block.BlockSlabVertical;
+import hugman.mod.objects.block.BlockStairs;
 import hugman.mod.objects.block.BlockWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 
 public class MubbleBlocks
 {
@@ -58,6 +61,7 @@ public class MubbleBlocks
     
     public static final Block QUESTION_BLOCK = new BlockQuestion();
     public static final Block EMPTY_BLOCK = new BlockEmpty();
+    public static final Block ROTATING_BLOCK = new BlockRotating();
     public static final Block BRICK_BLOCK = new BlockBrick("brick_block");
     public static final Block GOLDEN_BRICK_BLOCK = new BlockBrick("golden_brick_block");
     public static final Block NOTE_BLOCK = new BlockNote("note_block");
@@ -68,4 +72,11 @@ public class MubbleBlocks
     public static final Block CYAN_BRICK_SLAB = new BlockSlab("cyan_brick", MubbleBlocks.CYAN_BRICKS);
     public static final Block CYAN_BRICK_VERTICAL_SLAB = new BlockSlabVertical("cyan_brick", MubbleBlocks.CYAN_BRICKS);
     public static final Block CYAN_BRICK_WALL = new BlockWall("cyan_brick", MubbleBlocks.CYAN_BRICKS);
+    
+    public static void register(Block block)
+    {
+    	Item.Properties group = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
+		BLOCKS.add(block);
+		MubbleItems.ITEMS.add(new ItemBlock(block, group).setRegistryName(block.getRegistryName()));
+    }
 }

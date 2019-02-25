@@ -5,5 +5,5 @@ import net.minecraft.state.EnumProperty;
 
 public class MubbleBlockStateProperties
 {
-	   public static final EnumProperty<SlabVerticalType> VERTICAL_SLAB_TYPE = EnumProperty.create("type", SlabVerticalType.class);
+	public static final EnumProperty<SlabVerticalType> VERTICAL_SLAB_TYPE = EnumProperty.create("type", SlabVerticalType.class);
 }

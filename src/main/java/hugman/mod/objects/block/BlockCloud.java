@@ -4,16 +4,12 @@ import java.util.Random;
 
 import hugman.mod.Reference;
 import hugman.mod.init.MubbleBlocks;
-import hugman.mod.init.MubbleItems;
-import hugman.mod.init.MubbleTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -26,10 +22,7 @@ public class BlockCloud extends Block
     {
         super(Properties.create(Material.AIR).sound(SoundType.CLOTH).hardnessAndResistance(0f));
         setRegistryName(Reference.MOD_ID, name + "_cloud_block");
-        Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
-        
-		MubbleBlocks.BLOCKS.add(this);
-		MubbleItems.ITEMS.add(new ItemBlock(this, blocks).setRegistryName(this.getRegistryName()));
+        MubbleBlocks.register(this);
     }
     
     @Override

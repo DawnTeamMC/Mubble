@@ -7,8 +7,6 @@ import javax.annotation.Nullable;
 import hugman.mod.Reference;
 import hugman.mod.init.MubbleBlockStateProperties;
 import hugman.mod.init.MubbleBlocks;
-import hugman.mod.init.MubbleItems;
-import hugman.mod.init.MubbleTabs;
 import hugman.mod.objects.state.properties.SlabVerticalType;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
@@ -19,8 +17,6 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.init.Fluids;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
@@ -48,22 +44,14 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
     {
         super(Properties.from(base_block));
         setRegistryName(Reference.MOD_ID, name + "_vertical_slab");
-        Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
-        
-		MubbleBlocks.BLOCKS.add(this);
-		MubbleItems.ITEMS.add(new ItemBlock(this, blocks).setRegistryName(this.getRegistryName()));
-	    this.setDefaultState(this.getDefaultState().with(TYPE, SlabVerticalType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
+        MubbleBlocks.register(this);
     }
     
     public BlockSlabVertical(Block base_block)
     {
         super(Properties.from(base_block));
         setRegistryName(base_block.getRegistryName() + "_vertical_slab");
-        Item.Properties blocks = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
-        
-		MubbleBlocks.BLOCKS.add(this);
-		MubbleItems.ITEMS.add(new ItemBlock(this, blocks).setRegistryName(this.getRegistryName()));
-		this.setDefaultState(this.getDefaultState().with(TYPE, SlabVerticalType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
+        MubbleBlocks.register(this);
     }
     
     @Override
