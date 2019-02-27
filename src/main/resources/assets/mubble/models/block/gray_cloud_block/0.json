@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_all",
+	"textures":
+	{
+		"all": "mubble:block/gray_cloud_block/0"
+	}
+}

@@ -9,26 +9,20 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 
 public class BlockCloud extends Block
 {
-    public BlockCloud(String name)
+    public BlockCloud(String color)
     {
-        super(Properties.create(Material.AIR).sound(SoundType.CLOTH).hardnessAndResistance(0f));
-        setRegistryName(Reference.MOD_ID, name + "_cloud_block");
+        super(Properties.create(Material.GLASS).sound(SoundType.CLOTH).hardnessAndResistance(0f));
+        setRegistryName(Reference.MOD_ID, color + "_cloud_block");
         MubbleBlocks.register(this);
-    }
-    
-    @Override
-    public VoxelShape getCollisionShape(IBlockState state, IBlockReader worldIn, BlockPos pos)
-    {
-    	return null;
     }
     
     @Override
@@ -38,16 +32,16 @@ public class BlockCloud extends Block
     }
     
     @Override
-    public boolean isReplaceable(IBlockState state, BlockItemUseContext useContext)
+    public VoxelShape getCollisionShape(IBlockState state, IBlockReader worldIn, BlockPos pos)
     {
-    	return true;
+    	return VoxelShapes.empty();
     }
     
     @Override
-    public int quantityDropped(IBlockState state, Random random)
+    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
-    	return 0;
-    }
+    	return BlockFaceShape.UNDEFINED;
+	}
     
     @Override
     public BlockRenderLayer getRenderLayer()
@@ -56,13 +50,13 @@ public class BlockCloud extends Block
     }
     
     @Override
-    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    public int getOpacity(IBlockState state, IBlockReader worldIn, BlockPos pos)
     {
-    	return BlockFaceShape.UNDEFINED;
+    	return 0;
     }
     
     @Override
-    public int getOpacity(IBlockState state, IBlockReader worldIn, BlockPos pos)
+    public int quantityDropped(IBlockState state, Random random)
     {
     	return 0;
     }

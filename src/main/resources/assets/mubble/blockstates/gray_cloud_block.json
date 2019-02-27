@@ -1,0 +1,12 @@
+{
+	"variants":
+	{
+		"":
+		[
+			{"model": "mubble:block/gray_cloud_block/0"},
+			{"model": "mubble:block/gray_cloud_block/1"},
+			{"model": "mubble:block/gray_cloud_block/2"},
+			{"model": "mubble:block/gray_cloud_block/3"}
+		]
+	}
+}

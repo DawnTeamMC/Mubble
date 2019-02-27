@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mod.objects.block.BlockBrick;
+import hugman.mod.objects.block.BlockCloud;
 import hugman.mod.objects.block.BlockEmpty;
+import hugman.mod.objects.block.BlockFlower;
 import hugman.mod.objects.block.BlockNote;
 import hugman.mod.objects.block.BlockQuestion;
 import hugman.mod.objects.block.BlockRotating;
@@ -54,10 +56,10 @@ public class MubbleBlocks
     public static final Block POLISHED_CARBONITE_SLAB = new BlockSlab(MubbleBlocks.POLISHED_CARBONITE);
     public static final Block POLISHED_CARBONITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.POLISHED_CARBONITE);
     public static final Block FOOTBLOCK = new BlockSimple("footblock", Properties.from(Blocks.WHITE_WOOL));
-    //public static final Block WHITE_CLOUD_BLOCK = new BlockCloud("white");
-    //public static final Block LIGHT_GRAY_CLOUD_BLOCK = new BlockCloud("light_gray");
-    //public static final Block GRAY_CLOUD_BLOCK = new BlockCloud("gray");
-    //public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
+    public static final Block WHITE_CLOUD_BLOCK = new BlockCloud("white");
+    public static final Block LIGHT_GRAY_CLOUD_BLOCK = new BlockCloud("light_gray");
+    public static final Block GRAY_CLOUD_BLOCK = new BlockCloud("gray");
+    public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
     
     public static final Block QUESTION_BLOCK = new BlockQuestion();
     public static final Block EMPTY_BLOCK = new BlockEmpty();
@@ -66,13 +68,18 @@ public class MubbleBlocks
     public static final Block GOLDEN_BRICK_BLOCK = new BlockBrick("golden_brick_block");
     public static final Block NOTE_BLOCK = new BlockNote("note_block");
     public static final Block SUPER_NOTE_BLOCK = new BlockNote("super_note_block");
+    public static final Block FIRE_FLOWER = new BlockFlower("fire_flower");
+    public static final Block ICE_FLOWER = new BlockFlower("ice_flower");
+    public static final Block BOOMERANG_FLOWER = new BlockFlower("boomerang_flower");
+    public static final Block CLOUD_FLOWER = new BlockFlower("cloud_flower");
+    public static final Block GOLD_FLOWER = new BlockFlower("gold_flower", 5);
     
     public static final Block CYAN_BRICKS = new BlockSimple("cyan_bricks", Properties.from(Blocks.BRICKS));
     public static final Block CYAN_BRICK_STAIRS = new BlockStairs("cyan_brick", MubbleBlocks.CYAN_BRICKS);
     public static final Block CYAN_BRICK_SLAB = new BlockSlab("cyan_brick", MubbleBlocks.CYAN_BRICKS);
     public static final Block CYAN_BRICK_VERTICAL_SLAB = new BlockSlabVertical("cyan_brick", MubbleBlocks.CYAN_BRICKS);
     public static final Block CYAN_BRICK_WALL = new BlockWall("cyan_brick", MubbleBlocks.CYAN_BRICKS);
-    
+	
     public static void register(Block block)
     {
     	Item.Properties group = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);

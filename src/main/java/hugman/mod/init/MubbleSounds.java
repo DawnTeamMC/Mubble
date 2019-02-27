@@ -16,14 +16,14 @@ public class MubbleSounds
 	
 	public static void registerSounds()
 	{
-		BLOCK_EMPTY_BLOCK_HIT = registerSound("block.empty_block.hit");
-		BLOCK_NOTE_BLOCK_JUMP_HIGH = registerSound("block.note_block.jump.high");
-		BLOCK_NOTE_BLOCK_JUMP_LOW = registerSound("block.note_block.jump.low");
-		BLOCK_QUESTION_BLOCK_LOOT_POWER_UP = registerSound("block.question_block.loot.power_up");
-		BLOCK_QUESTION_BLOCK_LOOT_COIN = registerSound("block.question_block.loot.coin");
+		BLOCK_EMPTY_BLOCK_HIT = register("block.empty_block.hit");
+		BLOCK_NOTE_BLOCK_JUMP_HIGH = register("block.note_block.jump.high");
+		BLOCK_NOTE_BLOCK_JUMP_LOW = register("block.note_block.jump.low");
+		BLOCK_QUESTION_BLOCK_LOOT_POWER_UP = register("block.question_block.loot.power_up");
+		BLOCK_QUESTION_BLOCK_LOOT_COIN = register("block.question_block.loot.coin");
 	}
 	
-	private static SoundEvent registerSound(String name)
+	private static SoundEvent register(String name)
 	{
 		ResourceLocation location = new ResourceLocation(Reference.MOD_ID, name);
 		SoundEvent event = new SoundEvent(location);
