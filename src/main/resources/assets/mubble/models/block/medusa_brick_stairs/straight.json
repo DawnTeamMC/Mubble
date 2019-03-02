@@ -1,0 +1,9 @@
+{
+	"parent": "block/stairs",
+	"textures":
+	{
+		"bottom": "mubble:block/medusa_bricks",
+		"top": "mubble:block/medusa_bricks",
+		"side": "mubble:block/medusa_bricks"
+	}
+}

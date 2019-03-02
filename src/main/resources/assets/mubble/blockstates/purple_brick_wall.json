@@ -1,0 +1,65 @@
+{
+	"multipart":
+	[
+		{
+			"when": {"up": "true"},
+			"apply":
+			[
+				{"model": "mubble:block/cyan_brick_wall/post/0"},
+				{"model": "mubble:block/cyan_brick_wall/post/1"},
+				{"model": "mubble:block/cyan_brick_wall/post/2"},
+				{"model": "mubble:block/cyan_brick_wall/post/3"},
+				{"model": "mubble:block/cyan_brick_wall/post/4"},
+				{"model": "mubble:block/cyan_brick_wall/post/5"}
+			]
+		},
+		{
+			"when": {"north": "true"},
+			"apply":
+			[
+				{"model": "mubble:block/cyan_brick_wall/side/0", "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/1", "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/2", "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/3", "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/4", "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/5", "uvlock": true}
+			]
+		},
+		{
+			"when": {"east": "true"},
+			"apply":
+			[
+				{"model": "mubble:block/cyan_brick_wall/side/0", "y": 90, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/1", "y": 90, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/2", "y": 90, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/3", "y": 90, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/4", "y": 90, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/5", "y": 90, "uvlock": true}
+			]
+		},
+		{
+			"when": {"south": "true"},
+			"apply":
+			[
+				{"model": "mubble:block/cyan_brick_wall/side/0", "y": 180, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/1", "y": 180, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/2", "y": 180, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/3", "y": 180, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/4", "y": 180, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/5", "y": 180, "uvlock": true}
+			]
+		},
+		{
+			"when": {"west": "true"},
+			"apply": 
+			[
+				{"model": "mubble:block/cyan_brick_wall/side/0", "y": 270, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/1", "y": 270, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/2", "y": 270, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/3", "y": 270, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/4", "y": 270, "uvlock": true},
+				{"model": "mubble:block/cyan_brick_wall/side/5", "y": 270, "uvlock": true}
+			]
+		}
+	]
+}

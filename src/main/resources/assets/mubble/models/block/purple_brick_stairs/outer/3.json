@@ -1,0 +1,9 @@
+{
+	"parent": "block/outer_stairs",
+	"textures":
+	{
+		"bottom": "mubble:block/purple_bricks/3",
+		"top": "mubble:block/purple_bricks/3",
+		"side": "mubble:block/purple_bricks/3"
+	}
+}
