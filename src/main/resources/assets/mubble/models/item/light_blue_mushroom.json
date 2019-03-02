@@ -2,6 +2,6 @@
 	"parent": "block/cross",
 	"textures":
 	{
-		"cross": "mubble:block/blue_mushroom"}
+		"cross": "mubble:block/light_blue_mushroom"}
 	}
 }
