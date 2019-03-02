@@ -1,7 +1,7 @@
 {
-	"parent": "block/cross",
+	"parent": "item/generated",
 	"textures":
 	{
-		"cross": "mubble:block/purple_mushroom"}
+		"layer0": "mubble:block/purple_mushroom"}
 	}
 }
