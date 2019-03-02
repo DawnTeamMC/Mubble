@@ -4,24 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mod.objects.block.BlockBrick;
+import hugman.mod.objects.block.BlockCandyCanePillar;
 import hugman.mod.objects.block.BlockCloud;
+import hugman.mod.objects.block.BlockCrops;
+import hugman.mod.objects.block.BlockDirectional;
 import hugman.mod.objects.block.BlockEmpty;
+import hugman.mod.objects.block.BlockEmptyDrops;
 import hugman.mod.objects.block.BlockFalling;
 import hugman.mod.objects.block.BlockFlower;
 import hugman.mod.objects.block.BlockHugeMushroom;
 import hugman.mod.objects.block.BlockMushroom;
 import hugman.mod.objects.block.BlockNote;
+import hugman.mod.objects.block.BlockPuyo;
 import hugman.mod.objects.block.BlockQuestion;
 import hugman.mod.objects.block.BlockRotating;
 import hugman.mod.objects.block.BlockSimple;
 import hugman.mod.objects.block.BlockSlab;
 import hugman.mod.objects.block.BlockSlabVertical;
+import hugman.mod.objects.block.BlockSpring;
 import hugman.mod.objects.block.BlockStairs;
 import hugman.mod.objects.block.BlockTetris;
 import hugman.mod.objects.block.BlockTetrisGlass;
 import hugman.mod.objects.block.BlockWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
@@ -66,10 +73,13 @@ public class MubbleBlocks
     public static final Block LIGHT_GRAY_CLOUD_BLOCK = new BlockCloud("light_gray");
     public static final Block GRAY_CLOUD_BLOCK = new BlockCloud("gray");
     public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
+    public static final Block TOMATO = new BlockCrops("tomato", MubbleItems.TOMATO);
+    public static final Block SALAD = new BlockCrops("salad", MubbleItems.SALAD);
     
     public static final Block QUESTION_BLOCK = new BlockQuestion();
     public static final Block EMPTY_BLOCK = new BlockEmpty();
     public static final Block ROTATING_BLOCK = new BlockRotating();
+    public static final Block LIGHT_BLOCK = new BlockSimple("light_block", Properties.from(Blocks.STONE).lightValue(15));
     public static final Block BRICK_BLOCK = new BlockBrick("brick_block");
     public static final Block GOLDEN_BRICK_BLOCK = new BlockBrick("golden_brick_block");
     public static final Block NOTE_BLOCK = new BlockNote("note_block");
@@ -110,6 +120,7 @@ public class MubbleBlocks
     public static final Block LIGHT_BLUE_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.LIGHT_BLUE);
     public static final Block CYAN_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.CYAN);
     public static final Block GREEN_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.GREEN);
+    public static final Block LIME_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.LIME);
     public static final Block YELLOW_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.YELLOW);
     public static final Block ORANGE_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.ORANGE);
     public static final Block RED_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.RED);
@@ -133,6 +144,24 @@ public class MubbleBlocks
     public static final Block MEDUSA_BRICK_SLAB = new BlockSlab("medusa_brick", MubbleBlocks.MEDUSA_BRICKS);
     public static final Block MEDUSA_BRICK_VERTICAL_SLAB = new BlockSlabVertical("medusa_brick", MubbleBlocks.MEDUSA_BRICKS);
     public static final Block MEDUSA_BRICK_WALL = new BlockWall("medusa_brick", MubbleBlocks.MEDUSA_BRICKS);
+    public static final Block BLUE_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.BLUE);
+    public static final Block LIGHT_BLUE_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.LIGHT_BLUE);
+    public static final Block CYAN_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.CYAN);
+    public static final Block GREEN_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.GREEN);
+    public static final Block LIME_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.LIME);
+    public static final Block YELLOW_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.YELLOW);
+    public static final Block ORANGE_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.ORANGE);
+    public static final Block RED_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.RED);
+    public static final Block PINK_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.PINK);
+    public static final Block MAGENTA_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.MAGENTA);
+    public static final Block PURPLE_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.PURPLE);
+    public static final Block BROWN_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.BROWN);
+    public static final Block WHITE_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.WHITE);
+    public static final Block LIGHT_GRAY_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.LIGHT_GRAY);
+    public static final Block GRAY_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.GRAY);
+    public static final Block BLACK_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.BLACK);
+    
+    public static final Block SPRING = new BlockSpring();
 
     public static final Block PURPLE_BRICKS = new BlockSimple("purple_bricks", Properties.from(Blocks.BRICKS));
     public static final Block PURPLE_BRICK_STAIRS = new BlockStairs("purple_brick", MubbleBlocks.PURPLE_BRICKS);
@@ -144,6 +173,23 @@ public class MubbleBlocks
     public static final Block CYAN_BRICK_SLAB = new BlockSlab("cyan_brick", MubbleBlocks.CYAN_BRICKS);
     public static final Block CYAN_BRICK_VERTICAL_SLAB = new BlockSlabVertical("cyan_brick", MubbleBlocks.CYAN_BRICKS);
     public static final Block CYAN_BRICK_WALL = new BlockWall("cyan_brick", MubbleBlocks.CYAN_BRICKS);
+    public static final Block ELDER_PEBBLES = new BlockSimple("elder_pebbles", Properties.from(Blocks.BRICKS).lightValue(5));
+    public static final Block SPACE_MATTER = new BlockSimple("space_matter", Properties.create(Material.SAND).hardnessAndResistance(0.4f));
+    public static final Block SPACE_OBSIDIAN = new BlockEmptyDrops("space_obsidian", Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.0F, 3600000.0F));
+    
+    public static final Block BLUE_PUYO = new BlockPuyo(EnumDyeColor.BLUE);
+    public static final Block TURQUOISE_PUYO = new BlockPuyo("turquoise");
+    public static final Block GREEN_PUYO = new BlockPuyo(EnumDyeColor.GREEN);
+    public static final Block YELLOW_PUYO = new BlockPuyo(EnumDyeColor.YELLOW);
+    public static final Block RED_PUYO = new BlockPuyo(EnumDyeColor.RED);
+    public static final Block PURPLE_PUYO = new BlockPuyo(EnumDyeColor.PURPLE);
+    public static final Block GARBAGE_PUYO = new BlockDirectional("garbage_puyo", Properties.from(Blocks.STONE));
+    public static final Block POINT_PUYO = new BlockDirectional("point_puyo", Properties.from(Blocks.STONE).lightValue(10));
+    public static final Block HARD_PUYO = new BlockDirectional("hard_puyo", Properties.from(Blocks.STONE));
+    public static final Block IRON_PUYO = new BlockDirectional("iron_puyo", Properties.from(Blocks.IRON_BLOCK));
+    public static final Block PUYO_BLOCK = new BlockSimple("puyo_block", Properties.from(Blocks.STONE));
+    
+    public static final Block KORETATO_BLOCK = new BlockDirectional("koretato_block", Properties.create(Material.CRAFTED_SNOW).hardnessAndResistance(0.4f, 2f));
 	
     public static void register(Block block)
     {
