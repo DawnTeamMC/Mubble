@@ -1,0 +1,149 @@
+--- CREATIVE TABS ---
+itemGroup.mubble_blocks_tab=Blocos de Mubble
+itemGroup.mubble_items_tab=Itens de Mubble
+itemGroup.mubble_costumes_tab=Trajes de Mubble
+
+--- BLOCKS ---
+tile.vanadium_block.name=Bloco de Vanadium
+tile.vanadium_ore.name=Minério de Vanadium
+tile.red_bricks.name=Tijolos Vermelhos
+tile.white_bricks.name=Tijolos Brancos
+tile.blunite.name=Blunite
+tile.polished_blunite.name=Blunite Polido
+tile.carbonite.name=Carbonite
+tile.polished_carbonite.name=Carbonite Polido
+tile.footblock.name=Futebloco
+
+tile.question_block.name=Bloco de ?
+tile.empty_block.name=Bloco Vazio
+tile.rotating_block.name=Bloco Rotativo
+tile.light_block.name=Bloco de Luz
+tile.brick_block.name=Bloco de Tijolo
+tile.golden_brick_block.name=Bloco de Tijolo Dourado
+tile.note_block.name=Bloco de Nota
+tile.super_note_block.name=Super Bloco de Nota
+tile.fire_flower.name=Flor de Fogo
+tile.ice_flower.name=Flor de Gelo
+tile.boomerang_flower.name=Flor de Bumerangue
+tile.cloud_flower.name=Flor de Nuvem
+tile.gold_flower.name=Flor de Ouro
+tile.cloud_block.name=Bloco de Nuvem
+tile.blue_mushroom.name=Cogumelo Azul
+tile.green_mushroom.name=Cogumelo Verde
+tile.yellow_mushroom.name=Cogumelo Amarelo
+tile.purple_mushroom.name=Cogumelo Roxo
+tile.blue_mushroom_block.name=Bloco de Cogumelo Azul
+tile.green_mushroom_block.name=Bloco de Cogumelo Verde
+tile.yellow_mushroom_block.name=Bloco de Cogumelo Amarelo
+tile.purple_mushroom_block.name=Bloco de Cogumelo Roxo
+
+tile.blue_tetris_block.name=Bloco Azul de Tetris
+tile.light_blue_tetris_block.name=Bloco Azul Claro de Tetris
+tile.green_tetris_block.name=Bloco Verde de Tetris
+tile.yellow_tetris_block.name=Bloco Amarelo de Tetris
+tile.orange_tetris_block.name=Bloco Laranja de Tetris
+tile.red_tetris_block.name=Bloco Vermelho de Tetris
+tile.pink_tetris_block.name=Bloco Rosa de Tetris
+tile.gray_tetris_block.name=Bloco Cinza de Tetris
+tile.tetris_glass.name=Vidro de Tetris
+tile.japanese_tetris_cushion.name=Almofada Japonesa de Tetris
+tile.rainbow_tetris_scaffolding.name=Andaime Arco-Íris de Tetris
+tile.monochrome_tetris_scaffolding.name=Andaime Monocromático de Tetris
+
+tile.iron_scaffolding.name=Andaime de Ferro
+tile.purple_bricks.name=Tijolos Roxos
+tile.cyan_bricks.name=Tijolos Cianos
+tile.elder_pebbles.name=Seixos Antigos
+tile.space_matter.name=Matéria Espacial
+
+tile.vampire_stone.name=Pedra do Vampiro
+tile.medusa_stone.name=Pedra da Medusa
+tile.medusa_bricks.name=Tijolos de Medusa
+tile.blue_candy_cane_pillar.name=Pilar de Bengala Doce Azul
+tile.green_candy_cane_pillar.name=Pilar de Bengala Doce Verde
+tile.yellow_candy_cane_pillar.name=Pilar de Bengala Doce Amarelo
+tile.red_candy_cane_pillar.name=Pilar de Bengala Doce Vermelho
+tile.purple_candy_cane_pillar.name=Pilar de Bengala Doce Roxo
+
+tile.koretato_block.name=Bloco Koretato
+
+--- ITEMS ---
+item.vanadium.name=Vanadium
+item.wheat_flour.name=Farinha de Trigo
+item.caramel_cube.name=Cubo de Caramelo
+item.crepe.name=Crepe
+item.chocolate_crepe.name=Crepe de Chocolate
+item.caramel_crepe.name=Crepe de Caramelo
+item.candy_cane.name=Bengala Doce
+item.bandage.name=Bandagem
+
+item.super_mushroom.name=Super Cogumelo
+item.peach.name=Pêssego
+item.cape_feather.name=Pena da Capa
+item.super_star.name=Super Estrela
+item.yellow_coin.name=Moeda Amarela
+item.red_coin.name=Moeda Vermelha
+item.blue_coin.name=Moeda Azul
+item.cappy.name=Cappy
+item.luigi_cap.name=Boné do Luigi
+item.wario_cap.name=Boné do Wario
+item.waluigi_cap.name=Boné do Waluigi
+item.vanish_cap.name=Boné de Desaparecer
+item.wing_cap.name=Boné de Asas
+item.gooigi_cap.name=Boné de Gooigi
+item.princess_peach_crown.name=Coroa da Princesa Peach
+item.princess_daisy_crown.name=Coroa da Princesa Daisy
+item.pink_gold_peach_crown.name=Coroa Rosa Ouro da Peach's
+item.super_crown.name=Super Coroa
+
+item.bandana.name=Bandana
+
+item.smash_ball.name=Bola Smash
+
+item.headphones.name=Fones de Ouvido
+item.record_blank.name=Disco de Música em Branco
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+
+item.mayro_cap.name=Boné de Mayro
+item.noteblock_head.name=Cabeça de NoteBlock
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
+
+--- ENTITIES ---
+entity.toad.name=Toad
+entity.chincho.name=Chincho
+
+--- SUBTITLES ---
+subtitles.block.question_block.loot.power_up=Bloco de ? dropou um power up
+subtitles.block.question_block.loot.coin=Bloco de ? dropa uma moeda
+subtitles.item.cape_feather.use=Pena da Capa foi usada
+subtitles.item.smash_ball.use=Bola Smash foi usada
+subtitles.entity.toad.ambient=Toad murmura
+subtitles.entity.toad.hurt=Toad senti dor
+subtitles.entity.toad.death=Toad morre
+
+--- ADVANCEMENTS ---
+advancements.mubble.root.title=Mubble
+advancements.mubble.root.description=Uma grande nova jornada
+advancements.mubble.get_coin.title=É meu! Ouro!
+advancements.mubble.get_coin.description=Encontre moedas
+advancements.mubble.get_super_crown.title=O Tratamento de Luxo
+advancements.mubble.get_super_crown.description=Encontre a Super Coroa
+advancements.mubble.get_bandage.title=Recuperação
+advancements.mubble.get_bandage.description=Obtenha uma bandagem
+advancements.mubble.get_all_caps.title=Super-Estrelas
+advancements.mubble.get_all_caps.description=Craftar todos os bonés
+advancements.mubble.get_vanadium.title=Vanadiums!
+advancements.mubble.get_vanadium.description=Adquirir vanadiums
+advancements.mubble.get_tetris_block.title=Está Tudo Conectado
+advancements.mubble.get_tetris_block.description=Coloque em sua mão um Bloco de Tetris
+
+--- OTHER ---
+item.cappy.secret_status=Quão paradoxal... :)
+item.bandana.secret_status=Aquilo é para você, §6Pixel§r!
+item.noteblock_head.secret_status=Oi! Eu pensei que você já tinha isso em sua cabeça, §6Evan§r!
+item.mayro_cap.secret_status=Venha, você é quem menos precisa, né, Mr. "§6Sossie§r"?
