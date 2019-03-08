@@ -1,0 +1,11 @@
+{
+	"parent": "mubble:block/block_directional",
+	"textures":
+	{
+		"bottom": "mubble:block/iron_puyo/body",
+		"side": "mubble:block/iron_puyo/body",
+		"top": "mubble:block/iron_puyo/body",
+		"front": "mubble:block/iron_puyo/front",
+		"particle": "mubble:block/iron_puyo/body"
+	}
+}

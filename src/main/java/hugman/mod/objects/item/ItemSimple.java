@@ -11,7 +11,6 @@ public class ItemSimple extends Item
     {
         super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS));
         setRegistryName(Reference.MOD_ID, name);
-        
-		MubbleItems.ITEMS.add(this);
+		MubbleItems.register(this);
     }
 }

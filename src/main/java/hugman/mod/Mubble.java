@@ -21,21 +21,21 @@ public class Mubble
 	
     public Mubble()
     {
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, this::registerBlocks);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Item.class, this::registerItems);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(Block.class, this::registerBlocks);
         FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(SoundEvent.class, this::registerSounds);
         
         MinecraftForge.EVENT_BUS.register(this);
     }
-    
-	public void registerBlocks(RegistryEvent.Register<Block> event)
-	{
-		event.getRegistry().registerAll(MubbleBlocks.BLOCKS.toArray(new Block[0]));
-	}
 	
 	public void registerItems(RegistryEvent.Register<Item> event)
 	{
 		event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
+	}
+    
+	public void registerBlocks(RegistryEvent.Register<Block> event)
+	{
+		event.getRegistry().registerAll(MubbleBlocks.BLOCKS.toArray(new Block[0]));
 	}
     
     public void registerSounds(RegistryEvent.Register<SoundEvent> event)

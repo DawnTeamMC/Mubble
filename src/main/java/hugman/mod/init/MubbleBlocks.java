@@ -12,6 +12,7 @@ import hugman.mod.objects.block.BlockEmpty;
 import hugman.mod.objects.block.BlockEmptyDrops;
 import hugman.mod.objects.block.BlockFalling;
 import hugman.mod.objects.block.BlockFlower;
+import hugman.mod.objects.block.BlockGrass;
 import hugman.mod.objects.block.BlockHugeMushroom;
 import hugman.mod.objects.block.BlockMushroom;
 import hugman.mod.objects.block.BlockNote;
@@ -28,7 +29,9 @@ import hugman.mod.objects.block.BlockTetrisGlass;
 import hugman.mod.objects.block.BlockWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
@@ -38,7 +41,7 @@ public class MubbleBlocks
 {
 	public static final List<Block> BLOCKS = new ArrayList<Block>();
 
-    public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK));
+	public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK));
     public static final Block VANADIUM_ORE = new BlockSimple("vanadium_ore", Properties.from(Blocks.DIAMOND_ORE));
     public static final Block RED_BRICKS = new BlockSimple("red_bricks", Properties.from(Blocks.BRICKS));
     public static final Block RED_BRICK_STAIRS = new BlockStairs("red_brick", MubbleBlocks.RED_BRICKS);
@@ -73,8 +76,9 @@ public class MubbleBlocks
     public static final Block LIGHT_GRAY_CLOUD_BLOCK = new BlockCloud("light_gray");
     public static final Block GRAY_CLOUD_BLOCK = new BlockCloud("gray");
     public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
-    public static final Block TOMATO = new BlockCrops("tomato", MubbleItems.TOMATO);
-    public static final Block SALAD = new BlockCrops("salad", MubbleItems.SALAD);
+    public static final Block TOMATO = new BlockCrops("tomato");
+    public static final Block SALAD = new BlockCrops("salad");
+    public static final Block CHEESE_BLOCK = new BlockDirectional("cheese_block", Properties.create(Material.GROUND, MaterialColor.YELLOW).hardnessAndResistance(0.5f).sound(SoundType.SNOW));
     
     public static final Block QUESTION_BLOCK = new BlockQuestion();
     public static final Block EMPTY_BLOCK = new BlockEmpty();
@@ -161,8 +165,17 @@ public class MubbleBlocks
     public static final Block GRAY_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.GRAY);
     public static final Block BLACK_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.BLACK);
     
+    public static final Block GREEN_HILL_GRASS_BLOCK  = new BlockGrass("green_hill_grass_block", MubbleBlocks.GREEN_HILL_DIRT, Properties.from(Blocks.GRASS_BLOCK));
+    public static final Block GREEN_HILL_DIRT = new BlockSimple("green_hill_dirt", Properties.from(Blocks.DIRT));
+    public static final Block MARBLE_ZONE_STONE = new BlockSimple("marble_zone_stone", Properties.from(Blocks.STONE));
+    public static final Block YELLOW_STUDIOPOLIS_CLAPPER = new BlockDirectional("yellow_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK));
+    public static final Block BLUE_STUDIOPOLIS_CLAPPER = new BlockDirectional("blue_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK));
     public static final Block SPRING = new BlockSpring();
 
+    public static final Block SCARLET_MUSHROOM = new BlockMushroom("scarlet", 7);
+    public static final Block SCARLET_ORCHID = new BlockFlower("scarlet_orchid", 7);
+    
+    public static final Block IRON_SCAFFOLDING = new BlockSimple("iron_scaffolding", Properties.from(Blocks.IRON_BLOCK));
     public static final Block PURPLE_BRICKS = new BlockSimple("purple_bricks", Properties.from(Blocks.BRICKS));
     public static final Block PURPLE_BRICK_STAIRS = new BlockStairs("purple_brick", MubbleBlocks.PURPLE_BRICKS);
     public static final Block PURPLE_BRICK_SLAB = new BlockSlab("purple_brick", MubbleBlocks.PURPLE_BRICKS);
@@ -189,7 +202,7 @@ public class MubbleBlocks
     public static final Block IRON_PUYO = new BlockDirectional("iron_puyo", Properties.from(Blocks.IRON_BLOCK));
     public static final Block PUYO_BLOCK = new BlockSimple("puyo_block", Properties.from(Blocks.STONE));
     
-    public static final Block KORETATO_BLOCK = new BlockDirectional("koretato_block", Properties.create(Material.CRAFTED_SNOW).hardnessAndResistance(0.4f, 2f));
+    public static final Block KORETATO_BLOCK = new BlockDirectional("koretato_block", Properties.create(Material.GROUND, MaterialColor.YELLOW_TERRACOTTA).hardnessAndResistance(0.4f, 2f).sound(SoundType.SNOW));
 	
     public static void register(Block block)
     {

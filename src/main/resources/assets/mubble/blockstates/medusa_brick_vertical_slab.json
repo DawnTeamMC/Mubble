@@ -5,6 +5,6 @@
 		"type=south":	{"model": "mubble:block/medusa_brick_vertical_slab/south"},
 		"type=east":	{"model": "mubble:block/medusa_brick_vertical_slab/east"},
 		"type=west":	{"model": "mubble:block/medusa_brick_vertical_slab/west"},
-		"type=double":	{"model": "mubble:block/medusa_brick"}
+		"type=double":	{"model": "mubble:block/medusa_bricks"}
 	}
 }

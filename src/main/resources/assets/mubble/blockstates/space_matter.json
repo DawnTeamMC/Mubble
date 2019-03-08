@@ -1,0 +1,20 @@
+
+{
+	"variants":
+	{
+		"":
+		[
+			{"model": "mubble:block/space_matter/0"},
+			{"model": "mubble:block/space_matter/1"},
+			{"model": "mubble:block/space_matter/2"},
+			{"model": "mubble:block/space_matter/3"},
+			{"model": "mubble:block/space_matter/4"},
+			{"model": "mubble:block/space_matter/5"},
+			{"model": "mubble:block/space_matter/6"},
+			{"model": "mubble:block/space_matter/7"},
+			{"model": "mubble:block/space_matter/8"},
+			{"model": "mubble:block/space_matter/9"},
+			{"model": "mubble:block/space_matter/10"}
+		]
+	}
+}

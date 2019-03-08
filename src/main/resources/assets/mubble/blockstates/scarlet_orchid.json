@@ -1,0 +1,10 @@
+{
+	"variants":
+	{
+		"":
+		[
+			{"model": "mubble:block/scarlet_orchid/0"},
+			{"model": "mubble:block/scarlet_orchid/1"}
+		]
+	}
+}

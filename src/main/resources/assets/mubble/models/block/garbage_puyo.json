@@ -1,0 +1,11 @@
+{
+	"parent": "mubble:block/block_directional",
+	"textures":
+	{
+		"bottom": "mubble:block/garbage_puyo/body",
+		"side": "mubble:block/garbage_puyo/body",
+		"top": "mubble:block/garbage_puyo/body",
+		"front": "mubble:block/garbage_puyo/front",
+		"particle": "mubble:block/garbage_puyo/body"
+	}
+}

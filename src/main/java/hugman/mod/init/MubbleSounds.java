@@ -12,7 +12,9 @@ public class MubbleSounds
 	BLOCK_NOTE_BLOCK_JUMP_HIGH,
 	BLOCK_NOTE_BLOCK_JUMP_LOW,
 	BLOCK_QUESTION_BLOCK_LOOT_POWER_UP,
-	BLOCK_QUESTION_BLOCK_LOOT_COIN;
+	BLOCK_QUESTION_BLOCK_LOOT_COIN,
+	ITEM_CAPE_FEATHER_USE,
+	ITEM_SMASH_BALL_USE;
 	
 	public static void registerSounds()
 	{
@@ -21,6 +23,8 @@ public class MubbleSounds
 		BLOCK_NOTE_BLOCK_JUMP_LOW = register("block.note_block.jump.low");
 		BLOCK_QUESTION_BLOCK_LOOT_POWER_UP = register("block.question_block.loot.power_up");
 		BLOCK_QUESTION_BLOCK_LOOT_COIN = register("block.question_block.loot.coin");
+		ITEM_CAPE_FEATHER_USE = register("item.cape_feather.use");
+		ITEM_SMASH_BALL_USE = register("item.smash_ball.use");
 	}
 	
 	private static SoundEvent register(String name)

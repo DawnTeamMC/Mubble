@@ -1,0 +1,19 @@
+{
+	"variants":
+	{
+		"":
+		[
+			{ "model": "mubble:block/elder_pebbles/0", "weight": 20 },
+			{ "model": "mubble:block/elder_pebbles/0", "weight": 20, "y": 180 },
+			{ "model": "mubble:block/elder_pebbles/1", "weight": 20 },
+			{ "model": "mubble:block/elder_pebbles/1", "weight": 20, "y": 180 },
+			{ "model": "mubble:block/elder_pebbles/2", "weight": 20 },
+			{ "model": "mubble:block/elder_pebbles/2", "weight": 20, "y": 180 },
+			{ "model": "mubble:block/elder_pebbles/3", "weight": 20 },
+			{ "model": "mubble:block/elder_pebbles/3", "weight": 20, "y": 180 },
+			{ "model": "mubble:block/elder_pebbles/4", "weight": 20 },
+			{ "model": "mubble:block/elder_pebbles/4", "weight": 20, "y": 180 },
+			{ "model": "mubble:block/elder_pebbles/420", "weight": 2 }
+		]
+	}
+}

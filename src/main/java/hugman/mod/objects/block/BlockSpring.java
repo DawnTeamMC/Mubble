@@ -28,6 +28,9 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
 	private static final VoxelShape IRON_UP = Block.makeCuboidShape(6.0D, 0.0D, 6.0D, 10.0D, 6.0D, 10.0D);
 	private static final VoxelShape PLATE_UP = Block.makeCuboidShape(1.0D, 6.0D, 1.0D, 15.0D, 9.0D, 15.0D);
 	private static final VoxelShape SPRING_UP = VoxelShapes.or(IRON_UP, PLATE_UP);
+	private static final VoxelShape IRON_DOWN = Block.makeCuboidShape(6.0D, 10.0D, 6.0D, 10.0D, 16.0D, 10.0D);
+	private static final VoxelShape PLATE_DOWN = Block.makeCuboidShape(1.0D, 7.0D, 1.0D, 15.0D, 10.0D, 15.0D);
+	private static final VoxelShape SPRING_DOWN = VoxelShapes.or(IRON_DOWN, PLATE_DOWN);
 	
     public BlockSpring()
     {
@@ -53,6 +56,7 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
     {
     	EnumFacing enumfacing = state.get(FACING);
     	if(enumfacing == EnumFacing.UP) return SPRING_UP;
+    	if(enumfacing == EnumFacing.DOWN) return SPRING_DOWN;
     	else return SPRING_UP;
 		//return enumfacing.getAxis() == EnumFacing.Axis.X ? X_AXIS_AABB : Z_AXIS_AABB;
 	}

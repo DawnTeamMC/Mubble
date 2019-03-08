@@ -1,0 +1,7 @@
+{
+	"parent": "block/cross",
+	"textures":
+	{
+		"cross": "mubble:block/scarlet_mushroom/0"}
+	}
+}

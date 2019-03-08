@@ -2,40 +2,36 @@ package hugman.mod.objects.block;
 
 import hugman.mod.Reference;
 import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleItems;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.item.Item;
 import net.minecraft.util.IItemProvider;
 
 public class BlockCrops extends net.minecraft.block.BlockCrops
-{
-	Item seed, crops;
-	
-    public BlockCrops(String name, Item seed)
+{	
+    public BlockCrops(String name)
     {
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().needsRandomTick().hardnessAndResistance(0f).sound(SoundType.PLANT));
         setRegistryName(Reference.MOD_ID, name);
-        MubbleBlocks.register(this);
-        this.seed = seed;
-        this.crops = seed;
-    }
-	
-    public BlockCrops(String name, Item seed, Item crops)
-    {
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().needsRandomTick().hardnessAndResistance(0f).sound(SoundType.PLANT));
-        setRegistryName(Reference.MOD_ID, name);
-        MubbleBlocks.register(this);
-        this.seed = seed;
-        this.crops = seed;
+        MubbleBlocks.BLOCKS.add(this);
     }
     
+    protected IItemProvider getSeedFood()
+    {
+    	if(this == MubbleBlocks.TOMATO) return MubbleItems.TOMATO;
+    	if(this == MubbleBlocks.SALAD) return MubbleItems.SALAD;
+    	else return null;
+    }
+    
+    @Override
     protected IItemProvider getSeedsItem()
     {
-    	return seed;
+    	return getSeedFood();
 	}
-
+    
+    @Override
 	protected IItemProvider getCropsItem()
 	{
-		return crops;
+		return getSeedFood();
 	}
 }

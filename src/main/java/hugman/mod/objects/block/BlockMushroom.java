@@ -22,6 +22,13 @@ public class BlockMushroom extends net.minecraft.block.BlockMushroom
         MubbleBlocks.register(this);
     }
     
+    public BlockMushroom(String color, int light)
+    {
+        super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).needsRandomTick().sound(SoundType.PLANT).lightValue(light));
+        setRegistryName(Reference.MOD_ID, color + "_mushroom");
+        MubbleBlocks.register(this);
+    }
+    
     @Override
     public boolean canGrow(IBlockReader worldIn, BlockPos pos, IBlockState state, boolean isClient)
     {

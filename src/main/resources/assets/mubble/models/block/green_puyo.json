@@ -1,0 +1,11 @@
+{
+	"parent": "mubble:block/block_directional",
+	"textures":
+	{
+		"bottom": "mubble:block/green_puyo/bottom",
+		"side": "mubble:block/green_puyo/side",
+		"top": "mubble:block/green_puyo/top",
+		"front": "mubble:block/green_puyo/front",
+		"particle": "mubble:block/green_puyo/side"
+	}
+}
