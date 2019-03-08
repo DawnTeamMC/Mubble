@@ -11,7 +11,7 @@
 	"block.note_block.jump.high":
 	{
 		"category": "block",
-		"subtitle": "subtitles.block.note_block.jump.high",
+		"subtitle": "subtitles.block.mubble.note_block.jump.high",
 		"sounds":
 		[
 			"mubble:block/note_block/jump/high"
@@ -20,7 +20,7 @@
 	"block.note_block.jump.low":
 	{
 		"category": "block",
-		"subtitle": "subtitles.block.block.note_block.jump.low",
+		"subtitle": "subtitles.block.mubble.note_block.jump.low",
 		"sounds":
 		[
 			"mubble:block/note_block/jump/low0",
@@ -30,7 +30,7 @@
 	"block.question_block.loot.power_up":
 	{
 		"category": "block",
-		"subtitle": "subtitles.block.question_block.loot.power_up",
+		"subtitle": "subtitles.block.mubble.question_block.loot.power_up",
 		"sounds":
 		[
 			"mubble:block/question_block/loot/power_up"
@@ -39,7 +39,7 @@
 	"block.question_block.loot.coin":
 	{
 		"category": "block",
-		"subtitle": "subtitles.block.question_block.loot.coin",
+		"subtitle": "subtitles.block.mubble.question_block.loot.coin",
 		"sounds":
 		[
 			"mubble:block/question_block/loot/coin"
