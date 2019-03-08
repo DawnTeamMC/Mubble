@@ -1,0 +1,287 @@
+--- CREATIVE TABS ---
+itemGroup.mubble_blocks=Blocos de Mubble
+itemGroup.mubble_items=Itens de Mubble
+itemGroup.mubble_costumes=Trajes de Mubble
+
+--- BLOCKS ---
+tile.vanadium_block.name=Bloco de Vanadium
+tile.vanadium_ore.name=Minério de Vanadium
+tile.red_bricks.name=Tijolos Vermelhos
+tile.red_brick_stairs.name=Escadas de Tijolos Vermelhos
+tile.white_bricks.name=Tijolos Brancos
+tile.white_brick_stairs.name=Escadas de Tijolos Brancos
+tile.blunite.name=Blunite
+tile.blunite_stairs.name=Escadas de Blunite
+tile.blunite_wall.name=Parede de Blunite
+tile.polished_blunite.name=Blunite Polido
+tile.polished_blunite_stairs.name=Escadas de Blunite Polido
+tile.carbonite.name=Carbonite
+tile.carbonite_stairs.name=Escadas de Carbonite
+tile.carbonite_wall.name=Parede de Carbonite
+tile.polished_carbonite.name=Carbonite Polido
+tile.polished_carbonite_stairs.name=Escadas de Carbonite Polido
+tile.footblock.name=Futebloco
+tile.white_cloud_block.name=Bloco de Nuvem Branca
+tile.light_gray_cloud_block.name=Bloco de Nuvem Cinza-Claro
+tile.gray_cloud_block.name=Bloco de Nuvem Cinza
+tile.black_cloud_block.name=Bloco de Nuvem Preta
+tile.tomato.name=Tomates
+tile.salad.name=Salada
+tile.cheese_block.name=Bloco de Queijo
+tile.unstable_stone.name=Pedra Instável
+tile.ultimatum_portal.name=Portal Ultimatum
+tile.blue_balloon.name=Balão Azul
+tile.light_blue_balloon.name=Balão Azul Claro
+tile.cyan_balloon.name=Balão Ciano
+tile.green_balloon.name=Balão Verde
+tile.lime_balloon.name=Balão Lima
+tile.yellow_balloon.name=Balão Amarelo
+tile.orange_balloon.name=Balão Laranja
+tile.red_balloon.name=Balão Vermelho
+tile.pink_balloon.name=Balão Rosa
+tile.magenta_balloon.name=Balão Magenta
+tile.purple_balloon.name=Balão Roxo
+tile.brown_balloon.name=Balão Marrom
+tile.white_balloon.name=Balão Branco
+tile.light_gray_balloon.name=Balão Cinza Claro
+tile.gray_balloon.name=Balão Cinza
+tile.black_balloon.name=Balão Preto
+
+tile.question_block.name=Bloco de ?
+tile.empty_block.name=Bloco Vazio
+tile.rotating_block.name=Bloco Rotativo
+tile.light_block.name=Bloco de Luz
+tile.brick_block.name=Bloco de Tijolo
+tile.golden_brick_block.name=Bloco de Tijolo Dourado
+tile.note_block.name=Bloco de Nota
+tile.super_note_block.name=Super Bloco de Nota
+tile.fire_flower.name=Flor de Fogo
+tile.ice_flower.name=Flor de Gelo
+tile.boomerang_flower.name=Flor de Bumerangue
+tile.cloud_flower.name=Flor de Nuvem
+tile.gold_flower.name=Flor de Ouro
+tile.blue_mushroom.name=Cogumelo Azul
+tile.light_blue_mushroom.name=Cogumelo Azul Claro
+tile.cyan_mushroom.name=Cogumelo Ciano
+tile.green_mushroom.name=Cogumelo Verde
+tile.lime_mushroom.name=Cogumelo Lima
+tile.yellow_mushroom.name=Cogumelo Amarelo
+tile.orange_mushroom.name=Cogumelo Laranja
+tile.pink_mushroom.name=Cogumelo Rosa
+tile.magenta_mushroom.name=Cogumelo Magenta
+tile.purple_mushroom.name=Cogumelo Roxo
+tile.white_mushroom.name=Cogumelo Branco
+tile.light_gray_mushroom.name=Cogumelo Cinza Claro
+tile.gray_mushroom.name=Cogumelo Cinza
+tile.black_mushroom.name=Cogumelo Preto
+tile.blue_mushroom_block.name=Bloco de Cogumelo Azul
+tile.light_blue_mushroom_block.name=Bloco de Cogumelo Azul Claro
+tile.cyan_mushroom_block.name=Bloco de Cogumelo Ciano
+tile.green_mushroom_block.name=Bloco de Cogumelo Verde
+tile.lime_mushroom_block.name=Bloco de Cogumelo Lima
+tile.yellow_mushroom_block.name=Bloco de Cogumelo Amarelo
+tile.orange_mushroom_block.name=Bloco de Cogumelo Laranja
+tile.pink_mushroom_block.name=Bloco de Cogumelo Rosa
+tile.magenta_mushroom_block.name=Bloco de Cogumelo Magenta
+tile.purple_mushroom_block.name=Bloco de Cogumelo Roxo
+tile.white_mushroom_block.name=Bloco de Cogumelo Branco
+tile.light_gray_mushroom_block.name=Bloco de Cogumelo Cinza Claro
+tile.gray_mushroom_block.name=Bloco de Cogumelo Cinza
+tile.black_mushroom_block.name=Bloco de Cogumelo Preto
+
+tile.blue_tetris_block.name=Bloco Azul de Tetris
+tile.light_blue_tetris_block.name=Bloco Azul Claro de Tetris
+tile.cyan_tetris_block.name=Bloco Ciano de Tetris
+tile.green_tetris_block.name=Bloco Verde de Tetris
+tile.lime_tetris_block.name=Bloco Lima de Tetris
+tile.yellow_tetris_block.name=Bloco Amarelo de Tetris
+tile.orange_tetris_block.name=Bloco Laranja de Tetris
+tile.red_tetris_block.name=Bloco Vermelho de Tetris
+tile.pink_tetris_block.name=Bloco Rosa de Tetris
+tile.magenta_tetris_block.name=Bloco Magenta de Tetris
+tile.purple_tetris_block.name=Bloco Roxo de Tetris
+tile.brown_tetris_block.name=Bloco Marrom de Tetris
+tile.white_tetris_block.name=Bloco Branco de Tetris
+tile.light_gray_tetris_block.name=Light Gray Tetris Block
+tile.gray_tetris_block.name=Bloco Cinza de Tetris
+tile.black_tetris_block.name=Bloco Preto de Tetris
+tile.tetris_glass.name=Vidro de Tetris
+tile.japanese_tetris_cushion.name=Almofada Japonesa de Tetris
+tile.rainbow_tetris_scaffolding.name=Andaime Arco-Íris de Tetris
+tile.monochrome_tetris_scaffolding.name=Andaime Monocromático de Tetris
+
+tile.vampire_stone.name=Pedra do Vampiro
+tile.medusa_stone.name=Pedra da Medusa
+tile.medusa_bricks.name=Tijolos de Medusa
+tile.medusa_brick_stairs.name=Escadas de Tijolos de Medusa
+tile.blue_candy_cane_pillar.name=Pilar de Bengala Doce Azul
+tile.light_blue_candy_cane_pillar.name=Pilar de Bengala Doce Azul Claro
+tile.cyan_candy_cane_pillar.name=Pilar de Bengala Doce Ciano
+tile.green_candy_cane_pillar.name=Pilar de Bengala Doce Verde
+tile.lime_candy_cane_pillar.name=Pilar de Bengala Doce Lima
+tile.yellow_candy_cane_pillar.name=Pilar de Bengala Doce Amarelo
+tile.orange_candy_cane_pillar.name=Pilar de Bengala Doce Laranja
+tile.red_candy_cane_pillar.name=Pilar de Bengala Doce Vermelho
+tile.pink_candy_cane_pillar.name=Pilar de Bengala Doce Rosa
+tile.magenta_candy_cane_pillar.name=Pilar de Bengala Doce Magenta
+tile.purple_candy_cane_pillar.name=Pilar de Bengala Doce Roxo
+tile.brown_candy_cane_pillar.name=Pilar de Bengala Doce Marrom
+tile.white_candy_cane_pillar.name=Pilar de Bengala Doce Branco
+tile.light_gray_candy_cane_pillar.name=Pilar de Bengala Doce Cinza Claro
+tile.gray_candy_cane_pillar.name=Pilar de Bengala Doce Cinza
+tile.black_candy_cane_pillar.name=Pilar de Bengala Doce Preto
+
+tile.green_hill_grass_block.name=Bloco de Grama de Green Hill
+tile.green_hill_dirt.name=Terra de Green Hill
+tile.marble_zone_stone.name=Pedra de Marble Zone
+tile.yellow_studiopolis_clapper.name=Claquete de Studiopolis Amarela
+tile.blue_studiopolis_clapper.name=Claquete de Studiopolis Azul
+tile.spring.name=Mola
+
+tile.scarlet_grass_block.name=Bloco de Grama Escarlate
+tile.scarlet_grass.name=Grama Escarlate
+tile.scarlet_mushroom.name=Cogumelo Escarlate
+tile.scarlet_orchid.name=Orquídea Escarlate
+
+tile.iron_scaffolding.name=Andaime de Ferro
+tile.purple_bricks.name=Tijolos Roxos
+tile.purple_brick_stairs.name=Escadas de Tijolos Roxos
+tile.cyan_bricks.name=Tijolos Cianos
+tile.cyan_brick_stairs.name=Escadas de Tijolos Cianos
+tile.elder_pebbles.name=Seixos Antigos
+tile.space_matter.name=Matéria Espacial
+tile.space_obsidian.name=Obsidiana Espacial
+
+tile.blue_puyo.name=Puyo Azul
+tile.turquoise_puyo.name=Puyo Turquesa
+tile.green_puyo.name=Puyo Verde
+tile.yellow_puyo.name=Puyo Amarelo
+tile.red_puyo.name=Puyo Vermelho
+tile.purple_puyo.name=Puyo Roxo
+tile.garbage_puyo.name=Puyo Lixo
+tile.point_puyo.name=Puyo Ponto
+tile.hard_puyo.name=Puyo Rígido
+tile.iron_puyo.name=Puyo Ferro
+tile.puyo_block.name=Bloco de Puyo
+
+tile.rewind_block.name=Bloco de Rewind
+tile.koretato_block.name=Bloco Koretato
+
+--- ITEMS ---
+item.vanadium.name=Vanadium
+item.bandage.name=Bandagem
+item.wheat_flour.name=Farinha de Trigo
+item.caramel_cube.name=Cubo de Caramelo
+item.crepe.name=Crepe
+item.chocolate_crepe.name=Crepe de Chocolate
+item.caramel_crepe.name=Crepe de Caramelo
+item.candy_cane.name=Bengala Doce
+item.burger.name=Hambúrger
+item.tomato.name=Tomate
+item.salad.name=Salada
+item.cheese.name=Queijo
+item.totem_of_ascending.name=Totem da Ascensão
+
+item.super_mushroom.name=Super Cogumelo
+item.peach.name=Pêssego
+item.cape_feather.name=Pena da Capa
+item.super_cape_feather.name=Super Pena da Capa
+item.super_star.name=Super Estrela
+item.yellow_coin.name=Moeda Amarela
+item.red_coin.name=Moeda Vermelha
+item.blue_coin.name=Moeda Azul
+
+item.smash_ball.name=Bola Smash
+
+item.annoying_dog.name=Cão Irritante
+
+item.record_blank.name=Disco de Música em Branco
+item.record.champions_road.desc=Super Mario 3D World - Champion's Road
+item.record.fly_octo_fly.desc=Splatoon 2 - Fly Octo Fly
+item.record.vampire_killer.desc=Castlevania Judgement - Vampire Killer
+
+item.record.nb_sweden.desc=C418 - Sweden (NoteBlock Remix)
+item.record.nb_buoy_base_galaxy.desc=Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)
+item.record.nb_waluigi_pinball.desc=Mario Kart DS - Waluigi Pinball (NoteBlock Remix)
+item.record.nb_harvest_hazards.desc=Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)
+
+--- COSTUMES ---
+item.headphones.name=Fones de Ouvido
+item.christmas_hat.name=Chapéu de Natal
+
+item.cappy.name=Cappy
+item.luigi_cap.name=Boné do Luigi
+item.wario_cap.name=Boné do Wario
+item.waluigi_cap.name=Boné do Waluigi
+item.vanish_cap.name=Boné de Desaparecer
+item.wing_cap.name=Boné de Asas
+item.gooigi_cap.name=Boné de Gooigi
+item.princess_peach_crown.name=Coroa da Princesa Peach
+item.princess_daisy_crown.name=Coroa da Princesa Daisy
+item.rosalina_crown.name=Rosalina's Crown
+item.pink_gold_peach_crown.name=Coroa Rosa Ouro da Peach
+item.super_crown.name=Super Coroa
+item.broque_monsieur_head.name=Cabeça de Broque Monsieur
+
+item.bandana.name=Bandana
+
+item.snorlax_hat.name=Chapéu de Snorlax
+
+item.top_hat.name=Cartola
+
+item.ralsei_hat.name=Chapéu de Ralsei
+item.king_round_mask.name=Máscara de King Round
+
+item.baldi_head.name=Cabeça de Baldi
+
+item.mayro_cap.name=Boné de Mayro
+item.noteblock_head.name=Cabeça de NoteBlock
+
+--- ENTITIES ---
+entity.toad.name=Toad
+entity.chincho.name=Chincho
+
+--- SUBTITLES ---
+subtitles.block.question_block.loot.power_up=Bloco de ? dropou um power up
+subtitles.block.question_block.loot.coinBloco de ? dropa uma moeda
+subtitles.block.note_block.jump=Note Block used
+subtitles.block.rewind_block.disappear=Bloco de Rewind desaparece
+subtitles.block.rewind_block.reappear=Bloco de Rewind reaparece
+subtitles.item.annoying_dog.disappear=Cachorro Irritante desaparece
+subtitles.item.annoying_dog.waf=Cachorro Irritante late
+subtitles.item.cape_feather.use=Pena da Capa foi usada
+subtitles.item.smash_ball.use=Bola Smash foi usada
+subtitles.costume.cappy.ambient=Cappy murmura
+subtitles.costume.cappy.ambient.nether=Cappy ficando sem vapor
+subtitles.costume.cappy.equip=Cappy chegou na cabeça de alguém
+subtitles.costume.cappy.happy=Cappy murmura apreciavelmente
+subtitles.costume.cappy.help=Cappy pede por ajuda
+subtitles.entity.toad.ambient=Toad murmura
+subtitles.entity.toad.hurt=Toad senti dor
+subtitles.entity.toad.death=Toad morre
+
+--- ADVANCEMENTS ---
+advancements.mubble.root.title=Mubble
+advancements.mubble.root.description=Uma grande nova jornada
+advancements.mubble.get_coin.title=É meu! Ouro!
+advancements.mubble.get_coin.description=Encontre moedas
+advancements.mubble.get_super_crown.title=O Tratamento de Luxo
+advancements.mubble.get_super_crown.description=Encontre a Super Coroa
+advancements.mubble.get_bandage.title=Recuperação
+advancements.mubble.get_bandage.description=Obtenha uma bandagem
+advancements.mubble.get_all_caps.title=Super-Estrelas
+advancements.mubble.get_all_caps.description=Craftar todos os bonés
+advancements.mubble.get_vanadium.title=Vanadiums!
+advancements.mubble.get_vanadium.description=Adquirir vanadiums
+advancements.mubble.get_tetris_block.title=Está Tudo Conectado
+advancements.mubble.get_tetris_block.description=Coloque em sua mão um Bloco de Tetris
+
+--- COMMANDS ---
+commands.motion.usage=/motion <entity> <set|add> [dX] [dY] [dZ]
+commands.motion.success=Mudou o movimento de %s para %s, %s, %s
+
+--- OTHER ---
+item.cappy.secret_status=Quão paradoxal... :)
+item.bandana.secret_status=Aquilo é para você, §6Pixel§r!
+item.noteblock_head.secret_status=Oi! Eu pensei que você já tinha isso em sua cabeça, §6Evan§r!
+item.mayro_cap.secret_status=Venha, você é quem menos precisa, né, Mr. "§6Sossie§r"?
