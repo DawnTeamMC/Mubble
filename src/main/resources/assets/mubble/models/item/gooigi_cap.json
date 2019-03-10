@@ -2,6 +2,6 @@
 	"parent":"mubble:item/cap",
 	"textures":
 	{
-		"cap": "minecraft:block/slime"
+		"cap": "minecraft:block/slime_block"
 	}
 }
