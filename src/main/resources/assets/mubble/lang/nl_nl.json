@@ -226,10 +226,10 @@
     "item.mubble.record.fly_octo_fly.desc": "Splatoon 2 - Fly Octo Fly",
     "item.mubble.record.vampire_killer.desc": "Castlevania Judgement - Vampire Killer",
 
-    "item.mubble.record.nb_sweden.desc": "C418 - Sweden (Noteblock.mubble Remix)",
-    "item.mubble.record.nb_buoy_base_galaxy.desc": "Super Mario Galaxy - Buoy Base Galaxy (Noteblock.mubble Remix)",
-    "item.mubble.record.nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (Noteblock.mubble Remix)",
-    "item.mubble.record.nb_harvest_hazards.desc": "Donkey Kong Country: Tropical Freeze - Harvest Hazards (Noteblock.mubble Remix)",
+    "item.mubble.record.nb_sweden.desc": "C418 - Sweden (NoteBlock Remix)",
+    "item.mubble.record.nb_buoy_base_galaxy.desc": "Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)",
+    "item.mubble.record.nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
+    "item.mubble.record.nb_harvest_hazards.desc": "Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)",
 
     //COSTUMES
     "item.mubble.headphones": "Koptelefoon",
@@ -261,7 +261,7 @@
     "item.mubble.baldi_head": "Baldi's hoofd",
 
     "item.mubble.mayro_cap": "Mayro's pet",
-    "item.mubble.noteblock.mubble_head": "Noteblock.mubble's hoofd",
+    "item.mubble.noteblock_head": "NoteBlock's hoofd",
 
     //ENTITIES
     "entity.toad": "Toad",
@@ -309,6 +309,6 @@
     //OTHER
     "item.mubble.cappy.secret_status": "Hoe paradoxaal... :)",
     "item.mubble.bandana.secret_status": "Dat is voor jou, §6Pixel§r!",
-    "item.mubble.noteblock.mubble_head.secret_status": "Hey! Ik dacht dat je dit al op je hoofd had, §6Evan§r!",
+    "item.mubble.noteblock_head.secret_status": "Hey! Ik dacht dat je dit al op je hoofd had, §6Evan§r!",
     "item.mubble.mayro_cap.secret_status": "Kom op, jij bent de laatste die dit nodig heeft, of niet, Mr. \"§6Sossie§r\"?"
 }
