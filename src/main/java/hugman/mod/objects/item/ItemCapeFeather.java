@@ -8,6 +8,7 @@ import hugman.mod.init.MubbleSounds;
 import hugman.mod.init.MubbleTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Particles;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -18,10 +19,17 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class ItemCapeFeather extends Item
-{    
+{
     public ItemCapeFeather(String name)
     {
         super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS));
+        setRegistryName(Reference.MOD_ID, name);
+		MubbleItems.register(this);
+    }
+    
+    public ItemCapeFeather(String name, EnumRarity rarity)
+    {
+        super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS).rarity(rarity));
         setRegistryName(Reference.MOD_ID, name);
 		MubbleItems.register(this);
     }

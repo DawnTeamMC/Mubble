@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
@@ -31,6 +32,7 @@ public class Mubble
 	public void registerItems(RegistryEvent.Register<Item> event)
 	{
 		event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
+		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
 	}
     
 	public void registerBlocks(RegistryEvent.Register<Block> event)

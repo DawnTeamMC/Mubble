@@ -4,6 +4,7 @@ import java.util.Random;
 
 import hugman.mod.Reference;
 import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
@@ -74,7 +75,7 @@ public class BlockQuestion extends Block
         		loot = rand.nextInt(7);
         		if (loot >= 0 && loot <= 2 ) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(MubbleItems.SUPER_MUSHROOM)));
         		else if (loot >= 3 && loot <= 5 ) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(MubbleItems.CAPE_FEATHER)));
-        		else if (loot == 6) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(MubbleItems.SUPER_CROWN)));
+        		else if (loot == 6) worldIn.spawnEntity(new EntityItem(worldIn, x, y, z, new ItemStack(MubbleCostumes.SUPER_CROWN)));
             	worldIn.playSound((EntityPlayer)null, x, y - 0.6D, z, MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP, SoundCategory.BLOCKS, 1f, 1f);
             }
             worldIn.setBlockState(pos, empty_block);

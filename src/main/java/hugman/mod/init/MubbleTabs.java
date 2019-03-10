@@ -22,4 +22,13 @@ public class MubbleTabs
     		return new ItemStack(MubbleItems.SUPER_MUSHROOM);
     	}
     };
+    
+    public static final ItemGroup MUBBLE_COSTUMES = new ItemGroup("mubble_costumes")
+    {
+    	@Override
+    	public ItemStack createIcon()
+    	{
+    		return new ItemStack(MubbleCostumes.CAPPY);
+    	}
+    };
 }

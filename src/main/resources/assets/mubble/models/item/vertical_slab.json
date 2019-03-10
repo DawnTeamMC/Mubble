@@ -4,7 +4,8 @@
 		{
 			"from": [0, 0, 4],
 			"to": [16, 16, 12],
-			"faces": {
+			"faces":
+			{
 				"north":	{"uv": [0, 0, 16, 16], "texture": "#block"},
 				"east":		{"uv": [4, 0, 12, 16], "texture": "#block"},
 				"south":	{"uv": [0, 0, 16, 16], "texture": "#block"},

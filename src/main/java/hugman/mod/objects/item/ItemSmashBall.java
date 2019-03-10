@@ -9,6 +9,7 @@ import hugman.mod.init.MubbleTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.Particles;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -23,7 +24,7 @@ public class ItemSmashBall extends Item
 {    
     public ItemSmashBall()
     {
-        super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS));
+        super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS).rarity(EnumRarity.RARE));
         setRegistryName(Reference.MOD_ID, "smash_ball");
 		MubbleItems.register(this);
     }

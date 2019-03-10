@@ -1,0 +1,24 @@
+{
+	"parent": "block/block",
+	"textures":
+	{
+		"caramel_cube": "mubble:item/caramel_cube",
+		"particle": "mubble:item/caramel_cube"
+	},
+	"elements":
+	[
+		{
+			"from": [ 4, 4, 4 ],
+			"to": [ 12, 12, 12 ],
+			"faces":
+			{
+				"down":	{"texture": "#caramel_cube"},
+				"up":	{"texture": "#caramel_cube"},
+				"north":{"texture": "#caramel_cube"},
+				"south":{"texture": "#caramel_cube"},
+				"west":	{"texture": "#caramel_cube"},
+				"east":	{"texture": "#caramel_cube"}
+			}
+		}
+	]
+}
