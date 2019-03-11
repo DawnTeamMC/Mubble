@@ -1,10 +1,10 @@
 {
-    //CREATIVE TABS
+    "comment": "CREATIVE TABS",
     "itemGroup.mubble_blocks": "Mubble Blocks",
     "itemGroup.mubble_items": "Mubble Items",
     "itemGroup.mubble_costumes": "Mubble Costumes",
 
-    //BLOCKS
+    "comment": "BLOCKS",
     "block.mubble.vanadium_block": "Block of Vanadium",
     "block.mubble.vanadium_ore": "Vanadium Ore",
     "block.mubble.red_bricks": "Red Bricks",
@@ -192,7 +192,7 @@
 
     "block.mubble.koretato_block": "Koretato Block",
 
-    //ITEMS
+    "comment": "ITEMS",
     "item.mubble.vanadium": "Vanadium",
     "item.mubble.bandage": "Bandage",
     "item.mubble.wheat_flour": "Wheat Flour",
@@ -230,7 +230,7 @@
     "item.mubble.record.nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
     "item.mubble.record.nb_harvest_hazards.desc": "Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)",
 
-    //COSTUMES
+    "comment": "COSTUMES",
     "item.mubble.headphones": "Headphones",
     "item.mubble.christmas_hat": "Christmas Hat",
 
@@ -262,11 +262,11 @@
     "item.mubble.mayro_cap": "Mayro's Cap",
     "item.mubble.noteblock_head": "NoteBlock's Head",
 
-    //ENTITIES
+    "comment": "ENTITIES",
     "entity.toad": "Toad",
     "entity.chincho": "Chincho",
 
-    //SUBTITLES
+    "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.power_up": "? block.mubble drops power up",
     "subtitles.block.question_block.mubble.loot.coin": "? block.mubble drops coin",
     "subtitles.block.note_block.jump": "Note Block used",
@@ -283,7 +283,7 @@
     "subtitles.entity.toad.hurt": "Toad hurts",
     "subtitles.entity.toad.death": "Toad dies",
 
-    //ADVANCEMENTS
+    "comment": "ADVANCEMENTS",
     "advancements.mubble.root.title": "Mubble",
     "advancements.mubble.root.description": "A grand new journey",
     "advancements.mubble.get_coin.title": "It's mine! Gold!",
@@ -299,7 +299,7 @@
     "advancements.mubble.get_tetris_block.mubble.title": "It's All Connected",
     "advancements.mubble.get_tetris_block.mubble.description": "Get your hand on a Tetris Block",
 
-    //COMMANDS
+    "comment": "COMMANDS",
     "commands.motion.usage": "/motion <entity> <set|add> [dX] [dY] [dZ]",
     "commands.motion.success": "Changed the motion of %s to %s, %s, %s",
 
