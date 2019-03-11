@@ -131,13 +131,13 @@
 			"mubble:item/annoying_dog/disappear"
 		]
 	},
-	"item.annoying_dog.waf":
+	"item.annoying_dog.bark":
 	{
 		"category": "player",
-		"subtitle": "subtitles.block.annoying_dog.waf",
+		"subtitle": "subtitles.block.annoying_dog.bark",
 		"sounds":
 		[
-			"mubble:item/annoying_dog/waf"
+			"mubble:item/annoying_dog/bark"
 		]
 	},
 	"item.cape_feather.use":

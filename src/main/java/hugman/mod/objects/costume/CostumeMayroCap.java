@@ -1,5 +1,6 @@
 package hugman.mod.objects.costume;
 
+import hugman.mod.init.MubbleItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -16,6 +17,6 @@ public class CostumeMayroCap extends CostumeSimple
     @Override
     public void onArmorTick(ItemStack stack, World world, EntityPlayer player)
     {
-    	//player.inventory.clearMatchingItems((Predicate<ItemStack>) MubbleItems.YELLOW_COIN, 1);
+    	player.inventory.clearMatchingItems(item -> item.getItem() == MubbleItems.YELLOW_COIN, 1);
     }
 }

@@ -5,6 +5,7 @@ import java.util.Random;
 import hugman.mod.Reference;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleSoundTypes;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -26,7 +27,7 @@ public class BlockBrick extends Block
 	
     public BlockBrick(String name)
     {
-        super(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F));
+        super(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).sound(MubbleSoundTypes.BRICK_BLOCK));
         setRegistryName(Reference.MOD_ID, name);
         MubbleBlocks.register(this);
     }

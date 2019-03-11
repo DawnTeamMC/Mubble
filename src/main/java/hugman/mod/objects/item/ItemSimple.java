@@ -13,4 +13,11 @@ public class ItemSimple extends Item
         setRegistryName(Reference.MOD_ID, name);
 		MubbleItems.register(this);
     }
+    
+    public ItemSimple(String name, int max)
+    {
+        super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS).maxStackSize(max));
+        setRegistryName(Reference.MOD_ID, name);
+		MubbleItems.register(this);
+    }
 }
