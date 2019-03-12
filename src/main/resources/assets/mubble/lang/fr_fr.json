@@ -1,10 +1,10 @@
 {
-    //CREATIVE TABS
+    "comment": "CREATIVE TABS",
     "itemGroup.mubble_blocks": "Blocs Mubble",
     "itemGroup.mubble_items": "Objets Mubble",
     "itemGroup.mubble_costumes": "Costumes Mubble",
 
-    //BLOCKS
+    "comment": "BLOCKS",
     "block.mubble.vanadium_block": "Bloc de vanadium",
     "block.mubble.vanadium_ore": "Minerai de vanadium",
     "block.mubble.red_bricks": "Briques rouges",
@@ -47,22 +47,22 @@
     "block.mubble.cheese_block": "Bloc de fromage",
     "block.mubble.unstable_stone": "Roche instable",
     "block.mubble.ultimatum_portal": "Portail de l'Utimatum",
-    //"block.mubble.blue_balloon": "<newline>",
-    //"block.mubble.light_blue_balloon": "<newline>",
-    //"block.mubble.cyan_balloon": "<newline>",
-    //"block.mubble.green_balloon": "<newline>",
-    //"block.mubble.lime_balloon": "<newline>",
-    //"block.mubble.yellow_balloon": "<newline>",
-    //"block.mubble.orange_balloon": "<newline>",
-    //"block.mubble.red_balloon": "<newline>",
-    //"block.mubble.pink_balloon": "<newline>",
-    //"block.mubble.magenta_balloon": "<newline>",
-    //"block.mubble.purple_balloon": "<newline>",
-    //"block.mubble.brown_balloon": "<newline>",
-    //"block.mubble.white_balloon": "<newline>",
-    //"block.mubble.light_gray_balloon": "<newline>",
-    //"block.mubble.gray_balloon": "<newline>",
-    //"block.mubble.black_balloon": "<newline>",
+    "//block.mubble.blue_balloon": "<newline>",
+    "//block.mubble.light_blue_balloon": "<newline>",
+    "//block.mubble.cyan_balloon": "<newline>",
+    "//block.mubble.green_balloon": "<newline>",
+    "//block.mubble.lime_balloon": "<newline>",
+    "//block.mubble.yellow_balloon": "<newline>",
+    "//block.mubble.orange_balloon": "<newline>",
+    "//block.mubble.red_balloon": "<newline>",
+    "//block.mubble.pink_balloon": "<newline>",
+    "//block.mubble.magenta_balloon": "<newline>",
+    "//block.mubble.purple_balloon": "<newline>",
+    "//block.mubble.brown_balloon": "<newline>",
+    "//block.mubble.white_balloon": "<newline>",
+    "//block.mubble.light_gray_balloon": "<newline>",
+    "//block.mubble.gray_balloon": "<newline>",
+    "//block.mubble.black_balloon": "<newline>",
 
     "block.mubble.question_block": "Bloc ?",
     "block.mubble.empty_block": "Bloc vide",
@@ -157,6 +157,7 @@
     "block.mubble.yellow_studiopolis_clapper": "Clap jaune de Studiopolis",
     "block.mubble.blue_studiopolis_clapper": "Clap bleu de Studiopolis",
     "block.mubble.spring": "Ressort",
+    "//block.mubble.spring": "<newline>",
 
     "block.mubble.scarlet_grass_block": "Bloc d'herbe écarlate",
     "block.mubble.scarlet_grass": "Herbe écarlate",
@@ -192,7 +193,7 @@
 
     "block.mubble.koretato_block": "Bloc Koretato",
 
-    //ITEMS
+    "comment": "ITEMS",
     "item.mubble.vanadium": "Vanadium",
     "item.mubble.bandage": "Bandage",
     "item.mubble.wheat_flour": "Farine de blé",
@@ -205,6 +206,7 @@
     "item.mubble.tomato": "Tomato",
     "item.mubble.salad": "Salade",
     "item.mubble.cheese": "Fromage",
+
     "item.mubble.totem_of_ascending": "Totem d'ascendance",
 
     "item.mubble.super_mushroom": "Super champignon",
@@ -230,7 +232,7 @@
     "item.mubble.record.nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
     "item.mubble.record.nb_harvest_hazards.desc": "Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)",
 
-    //COSTUMES
+    "comment": "COSTUMES",
     "item.mubble.headphones": "Casque audio",
     "item.mubble.christmas_hat": "Bonnet de Noël",
 
@@ -262,28 +264,28 @@
     "item.mubble.mayro_cap": "Casquette de Mayro",
     "item.mubble.noteblock_head": "Tête de Noteblock",
 
-    //ENTITIES
+    "comment": "ENTITIES",
     "entity.toad": "Toad",
     "entity.chincho": "Chincho",
 
-    //SUBTITLES
+    "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.super_mushroom": "Super champignon sorti d'un bloc ?",
     "subtitles.block.question_block.mubble.loot.coin": "Pièce sortie d'un bloc ?",
-    //"subtitles.block.note_block.jump": "<newline>",
-    //"subtitles.item.annoying_dog.disappear": "<newline>",
-    //"subtitles.item.annoying_dog.bark": "<newline>",
+    "//subtitles.block.note_block.jump": "<newline>",
+    "//subtitles.item.annoying_dog.disappear": "<newline>",
+    "//subtitles.item.annoying_dog.bark": "<newline>",
     "subtitles.item.cape_feather.use": "Plume acrobate utilisée",
     "subtitles.item.smash_ball.use": "Balle Smash utilisée",
-    //"subtitles.costume.cappy.ambient": "<newline>",
-    //"subtitles.costume.cappy.ambient.nether": "<newline>",
-    //"subtitles.costume.cappy.equip": "<newline>",
-    //"subtitles.costume.cappy.happy": "<newline>",
-    //"subtitles.costume.cappy.help": "<newline>",
+    "//subtitles.costume.cappy.ambient": "<newline>",
+    "//subtitles.costume.cappy.ambient.nether": "<newline>",
+    "//subtitles.costume.cappy.equip": "<newline>",
+    "//subtitles.costume.cappy.happy": "<newline>",
+    "//subtitles.costume.cappy.help": "<newline>",
     "subtitles.entity.toad.ambient": "Marmonnement de Toad",
     "subtitles.entity.toad.hurt": "Toad blessé",
     "subtitles.entity.toad.death": "Toad qui meurt",
 
-    //ADVANCEMENTS
+    "comment": "ADVANCEMENTS",
     "advancements.mubble.root.title": "Mubble",
     "advancements.mubble.root.description": "Un tout nouveau voyage",
     "advancements.mubble.get_coin.title": "C'est à moi ! De l'or !",
@@ -299,9 +301,9 @@
     "advancements.mubble.get_tetris_block.mubble.title": "Connectés à travers l'espace",
     "advancements.mubble.get_tetris_block.mubble.description": "Attrapez un bloc Tetris",
 
-    //COMMANDS
+    "comment": "COMMANDS",
     "commands.motion.usage": "/motion <entity> <set|add> [dX] [dY] [dZ]",
-    //"commands.motion.success": "<newline>",
+    "//commands.motion.success": "<newline>",
 
     //OTHER
     "item.mubble.cappy.secret_status": "Tellement paradoxal... :)",

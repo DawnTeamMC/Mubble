@@ -1,10 +1,10 @@
 {
-    //CREATIVE TABS
+    "comment": "CREATIVE TABS",
     "itemGroup.mubble_blocks": "Blocos de Mubble",
     "itemGroup.mubble_items": "Itens de Mubble",
     "itemGroup.mubble_costumes": "Trajes de Mubble",
 
-    //BLOCKS
+    "comment": "BLOCKS",
     "block.mubble.vanadium_block": "Bloco de Vanadium",
     "block.mubble.vanadium_ore": "Minério de Vanadium",
     "block.mubble.red_bricks": "Tijolos Vermelhos",
@@ -193,7 +193,7 @@
     "block.mubble.rewind_block": "Bloco de Rewind",
     "block.mubble.koretato_block": "Bloco Koretato",
 
-    //ITEMS
+    "comment": "ITEMS",
     "item.mubble.vanadium": "Vanadium",
     "item.mubble.bandage": "Bandagem",
     "item.mubble.wheat_flour": "Farinha de Trigo",
@@ -231,7 +231,7 @@
     "item.mubble.record.nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
     "item.mubble.record.nb_harvest_hazards.desc": "Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)",
 
-    //COSTUMES
+    "comment": "COSTUMES",
     "item.mubble.headphones": "Fones de Ouvido",
     "item.mubble.christmas_hat": "Chapéu de Natal",
 
@@ -263,11 +263,11 @@
     "item.mubble.mayro_cap": "Boné de Mayro",
     "item.mubble.noteblock_head": "Cabeça de Noteblock",
 
-    //ENTITIES
+    "comment": "ENTITIES",
     "entity.toad": "Toad",
     "entity.chincho": "Chincho",
 
-    //SUBTITLES
+    "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.power_up": "Bloco de ? dropou um power up",
     "subtitles.block.question_block.mubble.loot.coin": "Bloco de ? dropa uma moeda",
     "subtitles.block.note_block.jump": "Note Block used",
@@ -286,7 +286,7 @@
     "subtitles.entity.toad.hurt": "Toad senti dor",
     "subtitles.entity.toad.death": "Toad morre",
 
-    //ADVANCEMENTS
+    "comment": "ADVANCEMENTS",
     "advancements.mubble.root.title": "Mubble",
     "advancements.mubble.root.description": "Uma grande nova jornada",
     "advancements.mubble.get_coin.title": "É meu! Ouro!",
@@ -302,7 +302,7 @@
     "advancements.mubble.get_tetris_block.mubble.title": "Está Tudo Conectado",
     "advancements.mubble.get_tetris_block.mubble.description": "Coloque em sua mão um Bloco de Tetris",
 
-    //COMMANDS
+    "comment": "COMMANDS",
     "commands.motion.usage": "/motion <entity> <set|add> [dX] [dY] [dZ]",
     "commands.motion.success": "Mudou o movimento de %s para %s, %s, %s",
 
