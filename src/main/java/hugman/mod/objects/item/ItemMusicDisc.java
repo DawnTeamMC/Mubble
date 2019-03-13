@@ -12,7 +12,7 @@ public class ItemMusicDisc extends net.minecraft.item.ItemRecord
     public ItemMusicDisc(String name, SoundEvent soundIn, int comparatorValue)
     {
         super(comparatorValue, soundIn, new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS).maxStackSize(1).rarity(EnumRarity.RARE));
-        setRegistryName(Reference.MOD_ID, "record_" + name);
+        setRegistryName(Reference.MOD_ID, name);
 		MubbleItems.register(this);
     }
 }

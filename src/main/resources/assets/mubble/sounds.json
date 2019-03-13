@@ -1,7 +1,6 @@
 {
 	"block.empty_block.hit":
 	{
-		"category": "block",
 		"subtitle": "subtitles.block.generic.hit",
 		"sounds":
 		[
@@ -10,7 +9,6 @@
 	},
 	"block.brick_block.break":
 	{
-		"category": "block",
 		"subtitle": "subtitles.block.generic.break",
 		"sounds":
 		[
@@ -19,7 +17,6 @@
 	},
 	"block.note_block.jump.high":
 	{
-		"category": "block",
 		"subtitle": "subtitles.block.note_block.jump",
 		"sounds":
 		[
@@ -28,7 +25,6 @@
 	},
 	"block.note_block.jump.low":
 	{
-		"category": "block",
 		"subtitle": "subtitles.block.note_block.low",
 		"sounds":
 		[
@@ -38,7 +34,6 @@
 	},
 	"block.question_block.loot.power_up":
 	{
-		"category": "block",
 		"subtitle": "subtitles.block.question_block.loot.power_up",
 		"sounds":
 		[
@@ -47,7 +42,6 @@
 	},
 	"block.question_block.loot.coin":
 	{
-		"category": "block",
 		"subtitle": "subtitles.block.question_block.loot.coin",
 		"sounds":
 		[
@@ -56,7 +50,6 @@
 	},
 	"block.space_matter.break":
 	{
-		"category": "block",
 		"subtitle": "subtitles.block.generic.break",
 		"sounds":
 		[
@@ -68,7 +61,6 @@
 	},
 	"block.space_matter.fall":
 	{
-		"category": "block",
 		"sounds":
 		[
 			"mubble:block/space_matter/fall1",
@@ -78,7 +70,6 @@
 	},
 	"block.space_matter.hit":
 	{
-		"category": "block",
 		"sounds":
 		[
 			"mubble:block/space_matter/hit1",
@@ -89,7 +80,6 @@
 	},
 	"block.space_matter.place":
 	{
-		"category": "block",
 		"subtitle": "subtitles.block.generic.place",
 		"sounds":
 		[
@@ -101,7 +91,6 @@
 	},
 	"block.space_matter.step":
 	{
-		"category": "block",
 		"subtitle": "subtitles.block.generic.footsteps",
 		"sounds":
 		[
@@ -113,7 +102,6 @@
 	},
 	"block.ultimatum_portal.ambient":
 	{
-		"category": "block",
 		"sounds":
 		[
 			"mubble:generic/ambient/electric",
@@ -124,8 +112,7 @@
 	},
 	"item.annoying_dog.disappear":
 	{
-		"category": "player",
-		"subtitle": "subtitles.block.annoying_dog.disappear",
+		"subtitle": "subtitles.item.annoying_dog.disappear",
 		"sounds":
 		[
 			"mubble:item/annoying_dog/disappear"
@@ -133,8 +120,7 @@
 	},
 	"item.annoying_dog.bark":
 	{
-		"category": "player",
-		"subtitle": "subtitles.block.annoying_dog.bark",
+		"subtitle": "subtitles.item.annoying_dog.bark",
 		"sounds":
 		[
 			"mubble:item/annoying_dog/bark"
@@ -142,7 +128,6 @@
 	},
 	"item.cape_feather.use":
 	{
-		"category": "player",
 		"subtitle": "subtitles.item.cape_feather.use",
 		"sounds":
 		[
@@ -151,7 +136,6 @@
 	},
 	"item.smash_ball.use":
 	{
-		"category": "player",
 		"subtitle": "subtitles.item.smash_ball.use",
 		"sounds":
 		[
@@ -160,7 +144,6 @@
 	},
 	"item.super_mushroom.consume":
 	{
-		"category": "player",
 		"sounds":
 		[
 			"mubble:item/super_mushroom/consume"
@@ -168,7 +151,6 @@
 	},
 	"item.super_star.theme":
 	{
-		"category": "player",
 		"sounds":
 		[
 			"mubble:item/super_star/theme"
@@ -176,7 +158,6 @@
 	},
 	"entity.chincho.ambient":
 	{
-		"category": "hostile",
 		"subtitle": "subtitles.entity.chincho.ambient",
 		"sounds":
 		[
@@ -191,7 +172,6 @@
 	},
 	"entity.chincho.hurt":
 	{
-		"category": "hostile",
 		"subtitle": "subtitles.entity.chincho.hurt",
 		"sounds":
 		[
@@ -203,7 +183,6 @@
 	},
 	"entity.chincho.death":
 	{
-		"category": "hostile",
 		"subtitle": "subtitles.entity.chincho.death",
 		"sounds":
 		[
@@ -212,7 +191,6 @@
 	},
 	"entity.toad.ambient":
 	{
-		"category": "neutral",
 		"subtitle": "subtitles.entity.toad.ambient",
 		"sounds":
 		[
@@ -233,7 +211,6 @@
 	},
 	"entity.toad.hurt":
 	{
-		"category": "neutral",
 		"subtitle": "subtitles.entity.toad.hurt",
 		"sounds":
 		[
@@ -251,7 +228,6 @@
 	},
 	"entity.toad.death":
 	{
-		"category": "neutral",
 		"subtitle": "subtitles.entity.toad.death",
 		"sounds":
 		[
@@ -263,7 +239,6 @@
 	},
 	"costume.cappy.ambient":
 	{
-		"category": "voice",
 		"subtitle": "subtitles.costume.cappy.ambient",
 		"sounds":
 		[
@@ -287,7 +262,6 @@
 	},
 	"costume.cappy.ambient.nether":
 	{
-		"category": "voice",
 		"subtitle": "subtitles.costume.cappy.ambient.nether",
 		"sounds":
 		[
@@ -299,7 +273,6 @@
 	},
 	"costume.cappy.equip":
 	{
-		"category": "voice",
 		"subtitle": "subtitles.costume.cappy.equip",
 		"sounds":
 		[
@@ -310,7 +283,6 @@
 	},
 	"costume.cappy.happy":
 	{
-		"category": "voice",
 		"subtitle": "subtitles.costume.cappy.happy",
 		"sounds":
 		[
@@ -325,7 +297,6 @@
 	},
 	"costume.cappy.help":
 	{
-		"category": "voice",
 		"subtitle": "subtitles.costume.cappy.help",
 		"sounds":
 		[
@@ -339,7 +310,6 @@
 	},
 	"costume.cappy.help.water":
 	{
-		"category": "voice",
 		"subtitle": "subtitles.costume.cappy.help",
 		"sounds":
 		[
@@ -349,79 +319,252 @@
 			"mubble:costume/cappy/help_water4"
 		]
 	},
-	"record.champions_road":
+	"music_disc.battlefield":
 	{
-		"category": "record",
 		"sounds":
 		[
 			{
-				"name": "mubble:record/champions_road",
+				"name": "mubble:music_disc/battlefield",
 				"stream": true
 			}
 		]
 	},
-	"record.fly_octo_fly":
+	"music_disc.champions_road":
 	{
-		"category": "record",
 		"sounds":
 		[
 			{
-				"name": "mubble:record/fly_octo_fly",
+				"name": "mubble:music_disc/champions_road",
 				"stream": true
 			}
 		]
 	},
-	"record.vampire_killer":
+	"music_disc.confronting_myself":
 	{
-		"category": "record",
 		"sounds":
 		[
 			{
-				"name": "mubble:record/vampire_killer",
+				"name": "mubble:music_disc/confronting_myself",
 				"stream": true
 			}
 		]
 	},
-	"record.nb.buoy_base_galaxy":
+	"music_disc.electroplankton_medley":
 	{
-		"category": "record",
 		"sounds":
 		[
 			{
-				"name": "mubble:record/nb/buoy_base_galaxy",
+				"name": "mubble:music_disc/electroplankton_medley",
 				"stream": true
 			}
 		]
 	},
-	"record.nb.harvest_hazards":
+	"music_disc.fields_of_hopes_and_dreams":
 	{
-		"category": "record",
 		"sounds":
 		[
 			{
-				"name": "mubble:record/nb/harvest_hazards",
+				"name": "mubble:music_disc/fields_of_hopes_and_dreams",
 				"stream": true
 			}
 		]
 	},
-	"record.nb.sweden":
+	"music_disc.kass_theme":
 	{
-		"category": "record",
 		"sounds":
 		[
 			{
-				"name": "mubble:record/nb/sweden",
+				"name": "mubble:music_disc/kass_theme",
 				"stream": true
 			}
 		]
 	},
-	"record.nb.waluigi_pinball":
+	"music_disc.lost_painting":
 	{
-		"category": "record",
 		"sounds":
 		[
 			{
-				"name": "mubble:record/nb/waluigi_pinball",
+				"name": "mubble:music_disc/lost_painting",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.mad_mew_mew":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/mad_mew_mew",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.megalovania":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/megalovania",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.popple_battle":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/popple_battle",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.reflection":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/reflection",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.rude_buster":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/rude_buster",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.shark_bytes":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/shark_bytes",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.sound_stage":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/sound_stage",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.studopolis_act1":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/studopolis_act1",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.the_grand_finale":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/the_grand_finale",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.type_a":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/type_a",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.vampire_killer":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/vampire_killer",
+				"stream": true
+			}
+		]
+	},
+	"music_disc.vs_champion_red_and_blue":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:music_disc/vs_champion_red_and_blue",
+				"stream": true
+			}
+		]
+	},
+	"remix_disc.nb.beware_the_forest_mushrooms":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:remix_disc/nb/beware_the_forest_mushrooms",
+				"stream": true
+			}
+		]
+	},
+	"remix_disc.nb.buoy_base_galaxy":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:remix_disc/nb/buoy_base_galaxy",
+				"stream": true
+			}
+		]
+	},
+	"remix_disc.nb.fly_octo_fly":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:remix_disc/nb/fly_octo_fly",
+				"stream": true
+			}
+		]
+	},
+	"remix_disc.nb.harvest_hazards":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:remix_disc/nb/harvest_hazards",
+				"stream": true
+			}
+		]
+	},
+	"remix_disc.nb.sweden":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:remix_disc/nb/sweden",
+				"stream": true
+			}
+		]
+	},
+	"remix_disc.nb.waluigi_pinball":
+	{
+		"sounds":
+		[
+			{
+				"name": "mubble:remix_disc/nb/waluigi_pinball",
 				"stream": true
 			}
 		]

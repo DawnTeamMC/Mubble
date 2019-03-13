@@ -25,6 +25,6 @@ public class BlockRotating extends Block
     		if(!entityIn.world.isRemote) entityIn.world.destroyBlock(new BlockPos(entityIn).down(), false);
     		entityIn.motionY = 0.625D;
     	}
-    	super.onLanded(worldIn, entityIn);
+    	else super.onLanded(worldIn, entityIn);
     }
 }

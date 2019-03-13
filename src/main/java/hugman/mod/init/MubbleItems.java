@@ -47,17 +47,35 @@ public class MubbleItems
 
 	ANNOYING_DOG = new ItemAnnoyingDog(),
 	
-	RECORD_BLANK = new ItemSimple("record_blank", 1),
-	RECORD_CHAMPIONS_ROAD = new ItemMusicDisc("champions_road", MubbleSounds.RECORD_CHAMPIONS_ROAD, 1),
-	RECORD_VAMPIRE_KILLER = new ItemMusicDisc("vampire_killer", MubbleSounds.RECORD_VAMPIRE_KILLER, 1),
-	RECORD_FLY_OCTO_FLY = new ItemMusicDisc("fly_octo_fly", MubbleSounds.RECORD_FLY_OCTO_FLY, 1),
-	RECORD_NB_SWEDEN = new ItemMusicDisc("nb_sweden", MubbleSounds.RECORD_NB_SWEDEN, 2),
-	RECORD_NB_BUOY_BASE_GALAXY = new ItemMusicDisc("nb_buoy_base_galaxy", MubbleSounds.RECORD_NB_BUOY_BASE_GALAXY, 2),
-	RECORD_NB_WALUIGI_PINBALL = new ItemMusicDisc("nb_waluigi_pinball", MubbleSounds.RECORD_NB_WALUIGI_PINBALL, 2),
-	RECORD_NB_HARVEST_HAZARDS = new ItemMusicDisc("nb_harvest_hazards", MubbleSounds.RECORD_NB_HARVEST_HAZARDS, 2);
+	BLANK_MUSIC_DISK = new ItemSimple("blank_music_disc", 1, EnumRarity.RARE),
+	MUSIC_DISC_BATTLEFIELD = new ItemMusicDisc("music_disc_battlefield", MubbleSounds.MUSIC_DISC_BATTLEFIELD, 1),
+	MUSIC_DISC_CHAMPIONS_ROAD = new ItemMusicDisc("music_disc_champions_road", MubbleSounds.MUSIC_DISC_CHAMPIONS_ROAD, 1),
+	MUSIC_DISC_CONFRONTING_MYSELF = new ItemMusicDisc("music_disc_confronting_myself", MubbleSounds.MUSIC_DISC_CONFRONTING_MYSELF, 1),
+	MUSIC_DISC_ELECTROPLANKTON_MELDEY = new ItemMusicDisc("music_disc_electroplankton_medley", MubbleSounds.MUSIC_DISC_ELECTROPLANKTON_MELDEY, 1),
+	MUSIC_DISC_FIELDS_OF_HOPES_AND_DREAMS = new ItemMusicDisc("music_disc_fields_of_hopes_and_dreams", MubbleSounds.MUSIC_DISC_FIELDS_OF_HOPES_AND_DREAMS, 1),
+	MUSIC_DISC_KASS_THEME = new ItemMusicDisc("music_disc_kass_theme", MubbleSounds.MUSIC_DISC_KASS_THEME, 1),
+	MUSIC_DISC_LOST_PAINTING = new ItemMusicDisc("music_disc_lost_painting", MubbleSounds.MUSIC_DISC_LOST_PAINTING, 1),
+	MUSIC_DISC_MAD_MEW_MEW = new ItemMusicDisc("music_disc_mad_mew_mew", MubbleSounds.MUSIC_DISC_MAD_MEW_MEW, 1),
+	MUSIC_DISC_MEGALOVANIA = new ItemMusicDisc("music_disc_megalovania", MubbleSounds.MUSIC_DISC_MEGALOVANIA, 1),
+	MUSIC_DISC_POPPLE_BATTLE = new ItemMusicDisc("music_disc_popple_battle", MubbleSounds.MUSIC_DISC_POPPLE_BATTLE, 1),
+	MUSIC_DISC_REFLECTION = new ItemMusicDisc("music_disc_reflection", MubbleSounds.MUSIC_DISC_REFLECTION, 1),
+	MUSIC_DISC_RUDE_BUSTER = new ItemMusicDisc("music_disc_rude_buster", MubbleSounds.MUSIC_DISC_RUDE_BUSTER, 1),
+	MUSIC_DISC_SHARK_BYTES = new ItemMusicDisc("music_disc_shark_bytes", MubbleSounds.MUSIC_DISC_SHARK_BYTES, 1),
+	MUSIC_DISC_SOUND_STAGE = new ItemMusicDisc("music_disc_sound_stage", MubbleSounds.MUSIC_DISC_SOUND_STAGE, 1),
+	MUSIC_DISC_STUDIOPOLIS_ACT1 = new ItemMusicDisc("music_disc_studiopolis_act1", MubbleSounds.MUSIC_DISC_STUDIOPOLIS_ACT1, 1),
+	MUSIC_DISC_THE_GRAND_FINALE = new ItemMusicDisc("music_disc_the_grand_finale", MubbleSounds.MUSIC_DISC_THE_GRAND_FINALE, 1),
+	MUSIC_DISC_TYPE_A = new ItemMusicDisc("music_disc_type_a", MubbleSounds.MUSIC_DISC_TYPE_A, 1),
+	MUSIC_DISC_VAMPIRE_KILLER = new ItemMusicDisc("music_disc_vampire_killer", MubbleSounds.MUSIC_DISC_VAMPIRE_KILLER, 1),
+	MUSIC_DISC_VS_CHAMPION_RED_AND_BLUE = new ItemMusicDisc("music_disc_vs_champion_red_and_blue", MubbleSounds.MUSIC_DISC_VS_CHAMPION_RED_AND_BLUE, 1),
+	REMIX_DISC_NB_BEWARE_THE_FOREST_MUSHROOMS = new ItemMusicDisc("remix_disc_nb_beware_the_forest_mushrooms", MubbleSounds.REMIX_DISC_NB_BEWARE_THE_FOREST_MUSHROOMS, 2),
+	REMIX_DISC_NB_BUOY_BASE_GALAXY = new ItemMusicDisc("remix_disc_nb_buoy_base_galaxy", MubbleSounds.REMIX_DISC_NB_BUOY_BASE_GALAXY, 2),
+	REMIX_DISC_NB_FLY_OCTO_FLY = new ItemMusicDisc("remix_disc_nb_fly_octo_fly", MubbleSounds.REMIX_DISC_NB_FLY_OCTO_FLY, 2),
+	REMIX_DISC_NB_HARVEST_HAZARDS = new ItemMusicDisc("remix_disc_nb_harvest_hazards", MubbleSounds.REMIX_DISC_NB_HARVEST_HAZARDS, 2),
+	REMIX_DISC_NB_SWEDEN = new ItemMusicDisc("remix_disc_nb_sweden", MubbleSounds.REMIX_DISC_NB_SWEDEN, 2),
+	REMIX_DISC_NB_WALUIGI_PINBALL = new ItemMusicDisc("remix_disc_nb_waluigi_pinball", MubbleSounds.REMIX_DISC_NB_WALUIGI_PINBALL, 2);
 	
-    public static void register(Item item)
-    {
-    	ITEMS.add(item);
-    }
+	public static void register(Item item)
+	{
+		ITEMS.add(item);
+	}
 }
