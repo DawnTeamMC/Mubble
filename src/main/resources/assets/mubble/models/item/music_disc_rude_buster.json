@@ -2,6 +2,6 @@
 	"parent": "item/generated",
 	"textures":
 	{
-		"layer0": "mubble:item/music_disc/fly_octo_fly"
+		"layer0": "mubble:item/music_disc/rude_buster"
 	}
 }

@@ -1,0 +1,7 @@
+{
+	"parent": "item/generated",
+	"textures":
+	{
+		"layer0": "mubble:item/music_disc/vs_champion_red_and_blue"
+	}
+}
