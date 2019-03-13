@@ -2,6 +2,6 @@
 	"parent": "item/generated",
 	"textures":
 	{
-		"layer0": "mubble:item/record/blank_music_disc"
+		"layer0": "mubble:item/blank_music_disc"
 	}
 }

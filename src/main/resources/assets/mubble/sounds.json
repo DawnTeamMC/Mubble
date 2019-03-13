@@ -459,12 +459,12 @@
 			}
 		]
 	},
-	"music_disc.studopolis_act1":
+	"music_disc.studiopolis_act1":
 	{
 		"sounds":
 		[
 			{
-				"name": "mubble:music_disc/studopolis_act1",
+				"name": "mubble:music_disc/studiopolis_act1",
 				"stream": true
 			}
 		]

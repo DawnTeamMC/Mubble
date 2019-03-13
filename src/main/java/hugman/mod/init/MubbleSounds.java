@@ -56,7 +56,7 @@ public class MubbleSounds
 	MUSIC_DISC_RUDE_BUSTER = sound("music_disc.rude_buster"),
 	MUSIC_DISC_SHARK_BYTES = sound("music_disc.shark_bytes"),
 	MUSIC_DISC_SOUND_STAGE = sound("music_disc.sound_stage"),
-	MUSIC_DISC_STUDIOPOLIS_ACT1 = sound("music_disc.studopolis_act1"),
+	MUSIC_DISC_STUDIOPOLIS_ACT1 = sound("music_disc.studiopolis_act1"),
 	MUSIC_DISC_THE_GRAND_FINALE = sound("music_disc.the_grand_finale"),
 	MUSIC_DISC_TYPE_A = sound("music_disc.type_a"),
 	MUSIC_DISC_VAMPIRE_KILLER = sound("music_disc.vampire_killer"),

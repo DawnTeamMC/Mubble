@@ -13,6 +13,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class CostumeSimple extends Item
@@ -59,6 +60,10 @@ public class CostumeSimple extends Item
            playerIn.setItemStackToSlot(armorType, itemstack.copy());
            itemstack.setCount(0);
            worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, sound, SoundCategory.PLAYERS, 1f, 1f);
+           if(this == MubbleCostumes.SNORLAX_HAT && "Snorlax_Lover".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.snorlax_hat.secret_status", new Object[0]), true);
+           if(this == MubbleCostumes.MAYRO_CAP && "MayroSMM".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mayro_cap.secret_status", new Object[0]), true);
+           if(this == MubbleCostumes.NOTEBLOCK_HEAD && "NoteBlockRemix".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.noteblock_head.secret_status", new Object[0]), true);
+           if(this == MubbleCostumes.BANDANA && "Pixelcraftian".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.bandana.secret_status", new Object[0]), true);
            return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
         }
         else
