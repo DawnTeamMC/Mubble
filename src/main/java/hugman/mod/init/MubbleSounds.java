@@ -3,7 +3,7 @@ package hugman.mod.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 
@@ -70,7 +70,7 @@ public class MubbleSounds
 	
 	public static SoundEvent sound(String name)
 	{
-		ResourceLocation path = new ResourceLocation(Reference.MOD_ID, name);
+		ResourceLocation path = new ResourceLocation(Mubble.MOD_ID, name);
 		SoundEvent sound = new SoundEvent(path).setRegistryName(path);
 		SOUNDS.add(sound);
 		return sound;

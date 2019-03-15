@@ -307,8 +307,8 @@
     "item.mubble.noteblock_head": "NoteBlock hed",
 
     "comment": "ENTITIES",
-    "entity.toad": "tod",
-    "entity.chincho": "tostarenan mummy",
+    "entity.mubble.toad": "tod",
+    "entity.mubble.chincho": "tostarenan mummy",
 
     "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.super_mushroom": "BLOCO ???? drop supa mush",

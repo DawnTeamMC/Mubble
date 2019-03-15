@@ -1,6 +1,6 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
 import net.minecraft.block.SoundType;
@@ -12,7 +12,7 @@ public class BlockCrops extends net.minecraft.block.BlockCrops
     public BlockCrops(String name)
     {
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().needsRandomTick().hardnessAndResistance(0f).sound(SoundType.PLANT));
-        setRegistryName(Reference.MOD_ID, name);
+        setRegistryName(Mubble.MOD_ID, name);
         MubbleBlocks.BLOCKS.add(this);
     }
     

@@ -1,6 +1,6 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
@@ -11,7 +11,7 @@ public class BlockStairs extends net.minecraft.block.BlockStairs implements IBuc
     public BlockStairs(String name, Block base_block)
     {
         super(base_block.getDefaultState(), Properties.from(base_block));
-        setRegistryName(Reference.MOD_ID, name + "_stairs");
+        setRegistryName(Mubble.MOD_ID, name + "_stairs");
         MubbleBlocks.register(this);
     }
     

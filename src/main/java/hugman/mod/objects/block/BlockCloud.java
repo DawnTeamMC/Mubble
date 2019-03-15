@@ -2,7 +2,7 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -21,7 +21,7 @@ public class BlockCloud extends Block
     public BlockCloud(String color)
     {
         super(Properties.create(Material.GLASS).sound(SoundType.CLOTH).hardnessAndResistance(0f));
-        setRegistryName(Reference.MOD_ID, color + "_cloud_block");
+        setRegistryName(Mubble.MOD_ID, color + "_cloud_block");
         MubbleBlocks.register(this);
     }
     

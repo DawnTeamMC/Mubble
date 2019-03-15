@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlockStateProperties;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.objects.state.properties.SlabVerticalType;
@@ -43,7 +43,7 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
     public BlockSlabVertical(String name, Block base_block)
     {
         super(Properties.from(base_block));
-        setRegistryName(Reference.MOD_ID, name + "_vertical_slab");
+        setRegistryName(Mubble.MOD_ID, name + "_vertical_slab");
         MubbleBlocks.register(this);
     }
     
@@ -73,9 +73,11 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
 	}
 
 	@Override
-	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos)
+	{
 		SlabVerticalType slabtype = state.get(TYPE);
-		switch(slabtype) {
+		switch(slabtype)
+		{
 		case DOUBLE:
 			return VoxelShapes.fullCube();
         case SOUTH:

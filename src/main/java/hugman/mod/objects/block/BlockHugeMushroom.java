@@ -1,6 +1,6 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -12,7 +12,7 @@ public class BlockHugeMushroom extends net.minecraft.block.BlockHugeMushroom
     public BlockHugeMushroom(Block mushroom, EnumDyeColor color)
     {
         super(mushroom, Block.Properties.create(Material.WOOD, color).hardnessAndResistance(0.2F).sound(SoundType.WOOD));
-        setRegistryName(Reference.MOD_ID, color.getTranslationKey() + "_mushroom_block");
+        setRegistryName(Mubble.MOD_ID, color.getTranslationKey() + "_mushroom_block");
         MubbleBlocks.register(this);
     }
 }

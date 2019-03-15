@@ -2,7 +2,7 @@ package hugman.mod.objects.item;
 
 import java.util.Random;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import hugman.mod.init.MubbleTabs;
@@ -25,7 +25,7 @@ public class ItemSmashBall extends Item
     public ItemSmashBall()
     {
         super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS).rarity(EnumRarity.RARE));
-        setRegistryName(Reference.MOD_ID, "smash_ball");
+        setRegistryName(Mubble.MOD_ID, "smash_ball");
 		MubbleItems.register(this);
     }
     

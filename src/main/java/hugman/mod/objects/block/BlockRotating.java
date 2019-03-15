@@ -1,6 +1,6 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -13,7 +13,7 @@ public class BlockRotating extends Block
     public BlockRotating()
     {
         super(Properties.from(Blocks.STONE));
-        setRegistryName(Reference.MOD_ID, "rotating_block");
+        setRegistryName(Mubble.MOD_ID, "rotating_block");
         MubbleBlocks.register(this);
     }
     

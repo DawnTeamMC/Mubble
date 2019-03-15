@@ -2,7 +2,7 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -18,7 +18,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     public BlockGrass(String name, Block dirt, Properties properties)
     {
         super(properties);
-        setRegistryName(Reference.MOD_ID, name);
+        setRegistryName(Mubble.MOD_ID, name);
         MubbleBlocks.register(this);
     }
     

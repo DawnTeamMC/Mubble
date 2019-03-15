@@ -1,6 +1,6 @@
 package hugman.mod.objects.costume;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleTabs;
 import net.minecraft.entity.Entity;
@@ -24,7 +24,7 @@ public class CostumeSimple extends Item
     public CostumeSimple(String name, SoundEvent sound, EntityEquipmentSlot armorType)
     {
         super(new Item.Properties().group(MubbleTabs.MUBBLE_COSTUMES).maxStackSize(1));
-        setRegistryName(Reference.MOD_ID, name);
+        setRegistryName(Mubble.MOD_ID, name);
 		MubbleCostumes.register(this);
 		this.sound = sound;
 	    this.armorType = armorType;
@@ -33,7 +33,7 @@ public class CostumeSimple extends Item
     public CostumeSimple(String name, SoundEvent sound, EntityEquipmentSlot armorType, Properties properties)
     {
         super(properties);
-        setRegistryName(Reference.MOD_ID, name);
+        setRegistryName(Mubble.MOD_ID, name);
 		MubbleCostumes.register(this);
 		this.sound = sound;
 	    this.armorType = armorType;
@@ -60,10 +60,10 @@ public class CostumeSimple extends Item
            playerIn.setItemStackToSlot(armorType, itemstack.copy());
            itemstack.setCount(0);
            worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, sound, SoundCategory.PLAYERS, 1f, 1f);
-           if(this == MubbleCostumes.SNORLAX_HAT && "Snorlax_Lover".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.snorlax_hat.secret_status", new Object[0]), true);
-           if(this == MubbleCostumes.MAYRO_CAP && "MayroSMM".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mayro_cap.secret_status", new Object[0]), true);
-           if(this == MubbleCostumes.NOTEBLOCK_HEAD && "NoteBlockRemix".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.noteblock_head.secret_status", new Object[0]), true);
-           if(this == MubbleCostumes.BANDANA && "Pixelcraftian".equals(playerIn.getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.bandana.secret_status", new Object[0]), true);
+           if(this == MubbleCostumes.SNORLAX_HAT && "Snorlax_Lover".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.snorlax_hat.secret_status", new Object[0]), true);
+           if(this == MubbleCostumes.MAYRO_CAP && "MayroSMM".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.mayro_cap.secret_status", new Object[0]), true);
+           if(this == MubbleCostumes.NOTEBLOCK_HEAD && "NoteBlockRemix".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.noteblock_head.secret_status", new Object[0]), true);
+           if(this == MubbleCostumes.BANDANA && "Pixelcraftian".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.bandana.secret_status", new Object[0]), true);
            return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
         }
         else

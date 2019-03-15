@@ -1,6 +1,6 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
@@ -11,7 +11,7 @@ public class BlockSlab extends net.minecraft.block.BlockSlab implements IBucketP
     public BlockSlab(String name, Block base_block)
     {
         super(Properties.from(base_block));
-        setRegistryName(Reference.MOD_ID, name + "_slab");
+        setRegistryName(Mubble.MOD_ID, name + "_slab");
         MubbleBlocks.register(this);
     }
     

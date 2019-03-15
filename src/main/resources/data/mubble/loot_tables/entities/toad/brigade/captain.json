@@ -1,0 +1,42 @@
+{
+  "pools": [
+    {
+      "name":"brigade_member",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "mubble:entities/toad/brigade/member",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name":"red",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "loot_table",
+          "name": "mubble:entities/toad/species/red",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "name":"plus",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "mubble:smash_ball",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "mubble:super_star",
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

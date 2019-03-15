@@ -2,7 +2,7 @@ package hugman.mod.objects.item;
 
 import java.util.Random;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import hugman.mod.init.MubbleTabs;
@@ -21,7 +21,7 @@ public class ItemAnnoyingDog extends Item
     public ItemAnnoyingDog()
     {
         super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS));
-        setRegistryName(Reference.MOD_ID, "annoying_dog");
+        setRegistryName(Mubble.MOD_ID, "annoying_dog");
 		MubbleItems.register(this);
     }
     

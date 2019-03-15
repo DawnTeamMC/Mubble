@@ -307,8 +307,8 @@
     "item.mubble.noteblock_head": "NoteBlock的頭",
 
     "comment": "ENTITIES",
-    "entity.toad": "奇諾比奧",
-    "entity.chincho": "欽喬",
+    "entity.mubble.toad": "奇諾比奧",
+    "entity.mubble.chincho": "欽喬",
 
     "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.power_up": "問號塊:掉落超級蘑菇",
@@ -346,6 +346,6 @@
     "advancements.mubble.get_tetris_block.mubble.description": "手握俄羅斯方塊",
 
     "comment": "COMMANDS",
-    "commands.motion.usage": "/motion <entity> <set|add> [dX] [dY] [dZ]"
+    "commands.motion.usage": "/motion <entity> <set|add> [dX] [dY] [dZ]",
     "//commands.motion.success": "<newline>"
 }

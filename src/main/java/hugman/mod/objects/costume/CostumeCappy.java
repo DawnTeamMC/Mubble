@@ -42,7 +42,7 @@ public class CostumeCappy extends CostumeSimple
 	public boolean onEntityItemUpdate(ItemStack stack, EntityItem entity)
 	{
 		Random rand = new Random();
-		World world = entity.getEntityWorld();
+		World world = entity.world;
 		if(rand.nextInt(201) == 0)
 		{
 			if(world.getBlockState(entity.getPosition()).getFluidState() == Fluids.WATER

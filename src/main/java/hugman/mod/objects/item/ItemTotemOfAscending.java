@@ -1,6 +1,6 @@
 package hugman.mod.objects.item;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +22,7 @@ public class ItemTotemOfAscending extends Item
     public ItemTotemOfAscending()
     {
         super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS).maxStackSize(1).rarity(EnumRarity.UNCOMMON));
-        setRegistryName(Reference.MOD_ID, "totem_of_ascending");
+        setRegistryName(Mubble.MOD_ID, "totem_of_ascending");
 		MubbleItems.register(this);
     }
     

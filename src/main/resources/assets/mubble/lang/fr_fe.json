@@ -306,8 +306,8 @@
     "item.mubble.noteblock_head": "tete nau tblok",
 
     "comment": "ENTITIES",
-    "entity.toad": "BUP BUP",
-    "entity.chincho": "chienchau",
+    "entity.mubble.toad": "BUP BUP",
+    "entity.mubble.chincho": "chienchau",
 
     "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.super_mushroom": "cool champi sorti ? blok",

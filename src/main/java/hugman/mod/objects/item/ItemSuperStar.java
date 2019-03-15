@@ -1,6 +1,6 @@
 package hugman.mod.objects.item;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import hugman.mod.init.MubbleTabs;
@@ -17,7 +17,7 @@ public class ItemSuperStar extends net.minecraft.item.ItemFood
     public ItemSuperStar()
     {
         super(3, 2.4F, false, new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS).rarity(EnumRarity.RARE));
-        setRegistryName(Reference.MOD_ID, "super_star");
+        setRegistryName(Mubble.MOD_ID, "super_star");
 		MubbleItems.register(this);
 		this.setAlwaysEdible();
     }

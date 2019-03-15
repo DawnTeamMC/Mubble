@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mod.objects.item.ItemAnnoyingDog;
+import hugman.mod.objects.item.ItemBandage;
 import hugman.mod.objects.item.ItemCapeFeather;
 import hugman.mod.objects.item.ItemFood;
 import hugman.mod.objects.item.ItemMusicDisc;
@@ -21,7 +22,8 @@ public class MubbleItems
 {
 	public static final List<Item> ITEMS = new ArrayList<Item>();
 	
-	public static final Item 
+	public static final Item
+	BANDAGE = new ItemBandage(),
 	CARAMEL_CUBE = new ItemFood("caramel_cube", 4, 2.8f, false),
 	CREPE = new ItemFood("crepe", 3, 0.5f, false),
 	CHOCOLATE_CREPE = new ItemFood("chocolate_crepe", 8, 2f, false),

@@ -307,8 +307,8 @@
     "item.mubble.noteblock_head": "Cabeça de Noteblock",
 
     "comment": "ENTITIES",
-    "entity.toad": "Toad",
-    "entity.chincho": "Chincho",
+    "entity.mubble.toad": "Toad",
+    "entity.mubble.chincho": "Chincho",
 
     "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.power_up": "Bloco de ? dropou um power up",

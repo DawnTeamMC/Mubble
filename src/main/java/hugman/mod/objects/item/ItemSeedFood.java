@@ -1,6 +1,6 @@
 package hugman.mod.objects.item;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleTabs;
@@ -24,7 +24,7 @@ public class ItemSeedFood extends net.minecraft.item.ItemSeedFood implements IPl
     public ItemSeedFood(String name, int heal, float saturation)
     {
         super(heal, saturation, Blocks.STONE, new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS));
-        setRegistryName(Reference.MOD_ID, name);
+        setRegistryName(Mubble.MOD_ID, name);
 		MubbleItems.register(this);
     }
     

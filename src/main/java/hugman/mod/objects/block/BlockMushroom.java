@@ -2,7 +2,7 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -18,14 +18,14 @@ public class BlockMushroom extends net.minecraft.block.BlockMushroom
     public BlockMushroom(EnumDyeColor color)
     {
         super(Properties.create(Material.PLANTS, color).doesNotBlockMovement().hardnessAndResistance(0).needsRandomTick().sound(SoundType.PLANT));
-        setRegistryName(Reference.MOD_ID, color.getTranslationKey() + "_mushroom");
+        setRegistryName(Mubble.MOD_ID, color.getTranslationKey() + "_mushroom");
         MubbleBlocks.register(this);
     }
     
     public BlockMushroom(String color, int light)
     {
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).needsRandomTick().sound(SoundType.PLANT).lightValue(light));
-        setRegistryName(Reference.MOD_ID, color + "_mushroom");
+        setRegistryName(Mubble.MOD_ID, color + "_mushroom");
         MubbleBlocks.register(this);
     }
     

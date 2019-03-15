@@ -2,7 +2,7 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleItems;
@@ -28,7 +28,7 @@ public class BlockQuestion extends Block
     public BlockQuestion()
     {
         super(Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(1.5F, 6.0F));
-        setRegistryName(Reference.MOD_ID, "question_block");
+        setRegistryName(Mubble.MOD_ID, "question_block");
         MubbleBlocks.register(this);
     }
     

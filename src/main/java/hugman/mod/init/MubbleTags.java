@@ -1,6 +1,6 @@
 package hugman.mod.init;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import net.minecraft.item.Item;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
@@ -14,7 +14,7 @@ public class MubbleTags
 
         private static Tag<Item> tag(String name)
         {
-            return new ItemTags.Wrapper(new ResourceLocation(Reference.MOD_ID, name));
+            return new ItemTags.Wrapper(new ResourceLocation(Mubble.MOD_ID, name));
         }
     }
 }

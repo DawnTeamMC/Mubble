@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:block/balloon",
+	"textures":
+	{
+		"all": "mubble:block/blue_balloon"}
+	}
+}

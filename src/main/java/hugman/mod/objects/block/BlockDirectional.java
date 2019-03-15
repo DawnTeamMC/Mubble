@@ -1,6 +1,6 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Reference;
+import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -16,7 +16,7 @@ public class BlockDirectional extends net.minecraft.block.BlockDirectional
     {
         super(properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.UP));
-        setRegistryName(Reference.MOD_ID, name);
+        setRegistryName(Mubble.MOD_ID, name);
         MubbleBlocks.register(this);
     }
     
