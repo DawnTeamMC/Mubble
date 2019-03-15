@@ -48,7 +48,6 @@ public class RenderFlyingBlock extends Render<EntityFlyingBlock>
                GlStateManager.enableColorMaterial();
                GlStateManager.enableOutlineMode(this.getTeamColor(entity));
             }
-
             bufferbuilder.begin(7, DefaultVertexFormats.BLOCK);
             BlockPos blockpos = new BlockPos(entity.posX, entity.getBoundingBox().maxY, entity.posZ);
             GlStateManager.translatef((float)(x - (double)blockpos.getX() - 0.5D), (float)(y - (double)blockpos.getY()), (float)(z - (double)blockpos.getZ() - 0.5D));
@@ -60,7 +59,6 @@ public class RenderFlyingBlock extends Render<EntityFlyingBlock>
                GlStateManager.disableOutlineMode();
                GlStateManager.disableColorMaterial();
             }
-
             GlStateManager.enableLighting();
             GlStateManager.popMatrix();
             super.doRender(entity, x, y, z, entityYaw, partialTicks);

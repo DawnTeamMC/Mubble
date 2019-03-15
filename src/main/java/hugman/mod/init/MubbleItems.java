@@ -11,6 +11,7 @@ import hugman.mod.objects.item.ItemMusicDisc;
 import hugman.mod.objects.item.ItemSeedFood;
 import hugman.mod.objects.item.ItemSimple;
 import hugman.mod.objects.item.ItemSmashBall;
+import hugman.mod.objects.item.ItemSpawnEgg;
 import hugman.mod.objects.item.ItemSuperStar;
 import hugman.mod.objects.item.ItemTotemOfAscending;
 import net.minecraft.init.MobEffects;
@@ -74,7 +75,10 @@ public class MubbleItems
 	REMIX_DISC_NB_FLY_OCTO_FLY = new ItemMusicDisc("remix_disc_nb_fly_octo_fly", MubbleSounds.REMIX_DISC_NB_FLY_OCTO_FLY, 2),
 	REMIX_DISC_NB_HARVEST_HAZARDS = new ItemMusicDisc("remix_disc_nb_harvest_hazards", MubbleSounds.REMIX_DISC_NB_HARVEST_HAZARDS, 2),
 	REMIX_DISC_NB_SWEDEN = new ItemMusicDisc("remix_disc_nb_sweden", MubbleSounds.REMIX_DISC_NB_SWEDEN, 2),
-	REMIX_DISC_NB_WALUIGI_PINBALL = new ItemMusicDisc("remix_disc_nb_waluigi_pinball", MubbleSounds.REMIX_DISC_NB_WALUIGI_PINBALL, 2);
+	REMIX_DISC_NB_WALUIGI_PINBALL = new ItemMusicDisc("remix_disc_nb_waluigi_pinball", MubbleSounds.REMIX_DISC_NB_WALUIGI_PINBALL, 2),
+	
+	TOAD_SPAWN_EGG = new ItemSpawnEgg("toad_spawn_egg", MubbleEntities.TOAD, 14671839, 16722728),
+	CHINCHO_SPAWN_EGG = new ItemSpawnEgg("chincho_spawn_egg", MubbleEntities.CHINCHO, 7527671, 4903);
 	
 	public static void register(Item item)
 	{

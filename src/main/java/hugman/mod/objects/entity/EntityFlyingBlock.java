@@ -252,24 +252,24 @@ public class EntityFlyingBlock extends Entity
    
    @SuppressWarnings("deprecation")
    @Override
-   protected void readAdditional(NBTTagCompound compound) {
+   protected void readAdditional(NBTTagCompound compound)
+   {
       this.flyTile = NBTUtil.readBlockState(compound.getCompound("BlockState"));
       this.flyTime = compound.getInt("Time");
       if (compound.contains("HurtEntities", 99)) {
          this.hurtEntities = compound.getBoolean("HurtEntities");
          this.flyHurtMax = compound.getInt("FlyHurtMax");
-      } else if (this.flyTile.isIn(BlockTags.ANVIL)) {
+      }
+      else if (this.flyTile.isIn(BlockTags.ANVIL))
+      {
          this.hurtEntities = true;
       }
-
       if (compound.contains("DropItem", 99)) {
          this.shouldDropItem = compound.getBoolean("DropItem");
       }
-
       if (compound.contains("TileEntityData", 10)) {
          this.tileEntityData = compound.getCompound("TileEntityData");
       }
-
       if (this.flyTile.isAir()) {
          this.flyTile = Blocks.SAND.getDefaultState();
       }
