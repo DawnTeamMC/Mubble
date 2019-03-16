@@ -9,6 +9,7 @@ import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -17,6 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(Mubble.MOD_ID)
 public class Mubble 
@@ -54,14 +56,21 @@ public class Mubble
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> event)
         {
-    		event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
+        	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
     		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
         }
         
         @SubscribeEvent
         public static void onSoundsRegistry(final RegistryEvent.Register<SoundEvent> event)
         {
-        	 event.getRegistry().registerAll(MubbleSounds.SOUNDS.toArray(new SoundEvent[0]));
+        	event.getRegistry().registerAll(MubbleSounds.SOUNDS.toArray(new SoundEvent[0]));
+        }
+        
+        @SubscribeEvent
+        public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> event)
+        {
+        	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
+        	MubbleEntities.registerEntity(registry);
         }
     }
 }
