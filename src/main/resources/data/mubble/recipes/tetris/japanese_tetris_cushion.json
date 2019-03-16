@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"XXX",
+		"XOX",
+		"XXX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "minecraft:red_wool"
+		},
+		"O":
+		{
+			"item": "mubble:vanadium"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:japanese_tetris_cushion",
+		"count": 8
+	}
+}

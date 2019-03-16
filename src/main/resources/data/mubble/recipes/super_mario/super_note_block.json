@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"XX",
+		"XX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "mubble:note_block"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:super_note_block"
+	}
+}

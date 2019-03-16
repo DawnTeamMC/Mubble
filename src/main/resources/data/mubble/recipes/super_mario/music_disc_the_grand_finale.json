@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:blank_music_disc"
+		},
+		{
+			"item": "mubble:fire_flower"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_the_grand_finale"
+	}
+}

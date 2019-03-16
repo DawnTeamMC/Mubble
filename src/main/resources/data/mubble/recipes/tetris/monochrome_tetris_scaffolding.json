@@ -1,0 +1,34 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:tetris_scaffolding",
+	"pattern":
+	[
+		"XAX",
+		"BOB",
+		"XAX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "minecraft:iron_ingot"
+		},
+		"A":
+		{
+			"item": "minecraft:black_concrete"
+		},
+		"B":
+		{
+			"item": "minecraft:white_concrete"
+		},
+		"O":
+		{
+			"item": "mubble:vanadium"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:monochrome_tetris_scaffolding",
+		"count": 4
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:blank_music_disc"
+		},
+		{
+			"item": "mubble:noteblock_head"
+		},
+		{
+			"item": "minecraft:grass"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:remix_disc_nb_sweden"
+	}
+}

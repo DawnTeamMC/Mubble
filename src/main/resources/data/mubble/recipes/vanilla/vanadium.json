@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:vanadium_block"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:vanadium",
+		"count": 9
+	}
+}

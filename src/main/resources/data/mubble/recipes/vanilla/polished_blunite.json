@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"XX",
+		"XX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "mubble:blunite"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:polished_blunite",
+		"count": 4
+	}
+}

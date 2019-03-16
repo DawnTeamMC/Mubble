@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"XXX",
+		"XOX",
+		"XXX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "minecraft:glass"
+		},
+		"O":
+		{
+			"item": "mubble:vanadium"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:tetris_glass",
+		"count": 8
+	}
+}

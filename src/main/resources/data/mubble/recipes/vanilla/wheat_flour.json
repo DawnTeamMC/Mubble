@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "minecraft:wheat"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:wheat_flour",
+		"count": 2
+	}
+}

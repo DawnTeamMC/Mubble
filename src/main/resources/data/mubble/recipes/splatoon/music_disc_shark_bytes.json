@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:record_blank"
+		},
+		{
+			"item": "minecraft:ink_sac"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_shark_bytes"
+	}
+}

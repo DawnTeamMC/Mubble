@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:purple_bricks"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:purple_brick_slab",
+		"count": 6
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"XOX",
+		"OXO",
+		"XOX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"tag": "forge:ingots/iron"
+		},
+		"O":
+		{
+			"item": "minecraft:iron_bars"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:iron_scaffolding",
+		"count": 5
+	}
+}

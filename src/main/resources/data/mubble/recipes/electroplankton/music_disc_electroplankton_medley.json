@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:record_blank"
+		},
+		{
+			"tag": "minecraft:leaves"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_electroplankton_medley"
+	}
+}

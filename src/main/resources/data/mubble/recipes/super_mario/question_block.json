@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"XXX",
+		"XOX",
+		"XXX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "minecraft:concrete",
+			"data": 4
+		},
+		"O":
+		{
+			"item": "mubble:super_mushroom"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:question_block",
+		"count": 8
+	}
+}

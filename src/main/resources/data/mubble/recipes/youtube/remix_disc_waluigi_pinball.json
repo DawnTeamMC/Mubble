@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:blank_music_disc"
+		},
+		{
+			"item": "mubble:noteblock_head"
+		},
+		{
+			"item": "mubble:waluigi_cap"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:remix_disc_nb_waluigi_pinball"
+	}
+}

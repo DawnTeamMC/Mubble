@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:white_cloud_block",
+		"mubble:light_gray_cloud_block",
+		"mubble:gray_cloud_block",
+		"mubble:black_cloud_block"
+	]
+}

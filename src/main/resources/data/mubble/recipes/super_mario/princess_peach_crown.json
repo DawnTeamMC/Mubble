@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"XOX",
+		"XXX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "minecraft:gold_ingot"
+		},
+		"O":
+		{
+			"item": "minecraft:diamond"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:princess_peach_crown"
+	}
+}

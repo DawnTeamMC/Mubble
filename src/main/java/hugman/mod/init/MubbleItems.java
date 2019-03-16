@@ -77,8 +77,8 @@ public class MubbleItems
 	REMIX_DISC_NB_SWEDEN = new ItemMusicDisc("remix_disc_nb_sweden", MubbleSounds.REMIX_DISC_NB_SWEDEN, 2),
 	REMIX_DISC_NB_WALUIGI_PINBALL = new ItemMusicDisc("remix_disc_nb_waluigi_pinball", MubbleSounds.REMIX_DISC_NB_WALUIGI_PINBALL, 2),
 	
-	TOAD_SPAWN_EGG = new ItemSpawnEgg("toad_spawn_egg", MubbleEntities.TOAD, 14671839, 16722728),
-	CHINCHO_SPAWN_EGG = new ItemSpawnEgg("chincho_spawn_egg", MubbleEntities.CHINCHO, 7527671, 4903);
+	TOAD_SPAWN_EGG = new ItemSpawnEgg("toad", MubbleEntities.TOAD, 14671839, 16722728),
+	CHINCHO_SPAWN_EGG = new ItemSpawnEgg("chincho", MubbleEntities.CHINCHO, 7527671, 4903);
 	
 	public static void register(Item item)
 	{

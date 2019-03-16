@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"XXX",
+		"XOX",
+		"XXX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "minecraft:brick_block"
+		},
+		"O":
+		{
+			"tag": "forge:dyes/red"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:red_bricks",
+		"count": 8
+	}
+}

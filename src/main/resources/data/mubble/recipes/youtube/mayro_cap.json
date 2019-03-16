@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		" XX",
+		"XOX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "minecraft:yellow_wool"
+		},
+		"O":
+		{
+			"item": "mubble:yellow_coin"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:mayro_cap"
+	}
+}

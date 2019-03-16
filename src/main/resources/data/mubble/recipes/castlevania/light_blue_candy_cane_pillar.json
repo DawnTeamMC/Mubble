@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:candy_cane_pillar",
+	"pattern":
+	[
+		" X ",
+		"XOX",
+		" X "
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "mubble:candy_cane"
+		},
+		"O":
+		{
+			"tag": "forge:dyes/light_blue"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:light_blue_candy_cane_pillar",
+		"count": 2
+	}
+}

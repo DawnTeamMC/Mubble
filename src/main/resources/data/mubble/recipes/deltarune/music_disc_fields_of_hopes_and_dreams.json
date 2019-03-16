@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:record_blank"
+		},
+		{
+			"item": 
+			[
+				"mubble:scarlet_mushroom",
+				"mubble:scarlet_orchid"
+			]
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_fields_of_hopes_and_dreams"
+	}
+}

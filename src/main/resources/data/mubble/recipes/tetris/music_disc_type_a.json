@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:blank_music_disc"
+		},
+		{
+			"tag": "mubble:mushrooms"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_type_a"
+	}
+}

@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:record_blank"
+		},
+		{
+			"item":  "minecraft:painting"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_lost_painting"
+	}
+}

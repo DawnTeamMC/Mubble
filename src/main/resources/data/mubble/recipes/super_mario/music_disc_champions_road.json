@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:blank_music_disc"
+		},
+		{
+			"item": "mubble:super_star"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_champions_road"
+	}
+}

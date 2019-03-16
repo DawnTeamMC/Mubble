@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:record_blank"
+		},
+		{
+			"item": "minecraft:iron_sword"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_rude_buster"
+	}
+}

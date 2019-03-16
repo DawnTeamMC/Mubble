@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "mubble:candy_cane",
+	"ingredients":
+	[
+		[
+			{
+				"tag": "mubble:candy_cane_pillars"
+			}
+		]
+	],
+	"result":
+	{
+		"item": "mubble:candy_cane",
+		"count": 2
+	}
+}

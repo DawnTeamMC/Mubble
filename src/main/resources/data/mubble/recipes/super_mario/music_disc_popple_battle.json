@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:blank_music_disc"
+		},
+		{
+			"item": "minecraft:chest"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_popple_battle"
+	}
+}

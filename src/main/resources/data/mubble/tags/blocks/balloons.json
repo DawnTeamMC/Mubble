@@ -1,0 +1,23 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:white_balloon",
+		"mubble:light_gray_balloon",
+		"mubble:gray_balloon",
+		"mubble:black_balloon",
+		"mubble:brown_balloon",
+		"mubble:red_balloon",
+		"mubble:orange_balloon",
+		"mubble:yellow_balloon",
+		"mubble:yellow_balloon",
+		"mubble:lime_balloon",
+		"mubble:green_balloon",
+		"mubble:cyan_balloon",
+		"mubble:light_blue_balloon",
+		"mubble:blue_balloon",
+		"mubble:purple_balloon",
+		"mubble:magenta_balloon",
+		"mubble:pink_balloon"
+	]
+}

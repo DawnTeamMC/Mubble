@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:record_blank"
+		},
+		{
+			"item": "minecraft:feather"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_kass_theme"
+	}
+}
