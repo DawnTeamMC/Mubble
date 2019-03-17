@@ -10,12 +10,12 @@
 	{
 		"#":
 		{
-			"item": "mubble:cyan_bricks"
+			"item": "mubble:old_site_bricks"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:cyan_brick_stairs",
+		"item": "mubble:old_site_brick_stairs",
 		"count": 4
 	}
 }

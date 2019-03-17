@@ -44,16 +44,92 @@ public class MubbleBlocks
 
     public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK));
     public static final Block VANADIUM_ORE = new BlockSimple("vanadium_ore", Properties.from(Blocks.DIAMOND_ORE));
+    
     public static final Block WHITE_BRICKS = new BlockSimple("white_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block LIGHT_GRAY_BRICKS = new BlockSimple("light_gray_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block GRAY_BRICKS = new BlockSimple("gray_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block BLACK_BRICKS = new BlockSimple("black_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block BROWN_BRICKS = new BlockSimple("brown_bricks", Properties.from(Blocks.BRICKS));
     public static final Block RED_BRICKS = new BlockSimple("red_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block ORANGE_BRICKS = new BlockSimple("orange_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block YELLOW_BRICKS = new BlockSimple("yellow_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block LIME_BRICKS = new BlockSimple("lime_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block GREEN_BRICKS = new BlockSimple("green_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block CYAN_BRICKS = new BlockSimple("cyan_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block LIGHT_BLUE_BRICKS = new BlockSimple("light_blue_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block BLUE_BRICKS = new BlockSimple("blue_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block PURPLE_BRICKS = new BlockSimple("purple_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block MAGENTA_BRICKS = new BlockSimple("magenta_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block PINK_BRICKS = new BlockSimple("pink_bricks", Properties.from(Blocks.BRICKS));
+    
     public static final Block WHITE_BRICK_STAIRS = new BlockStairs("white_brick", MubbleBlocks.WHITE_BRICKS);
+    public static final Block LIGHT_GRAY_BRICK_STAIRS = new BlockStairs("light_gray_brick", MubbleBlocks.LIGHT_GRAY_BRICKS);
+    public static final Block GRAY_BRICK_STAIRS = new BlockStairs("gray_brick", MubbleBlocks.GRAY_BRICKS);
+    public static final Block BLACK_BRICK_STAIRS = new BlockStairs("black_brick", MubbleBlocks.BLACK_BRICKS);
+    public static final Block BROWN_BRICK_STAIRS = new BlockStairs("brown_brick", MubbleBlocks.BROWN_BRICKS);
     public static final Block RED_BRICK_STAIRS = new BlockStairs("red_brick", MubbleBlocks.RED_BRICKS);
+    public static final Block ORANGE_BRICK_STAIRS = new BlockStairs("orange_brick", MubbleBlocks.ORANGE_BRICKS);
+    public static final Block YELLOW_BRICK_STAIRS = new BlockStairs("yellow_brick", MubbleBlocks.YELLOW_BRICKS);
+    public static final Block LIME_BRICK_STAIRS = new BlockStairs("lime_brick", MubbleBlocks.LIME_BRICKS);
+    public static final Block GREEN_BRICK_STAIRS = new BlockStairs("green_brick", MubbleBlocks.GREEN_BRICKS);
+    public static final Block CYAN_BRICK_STAIRS = new BlockStairs("cyan_brick", MubbleBlocks.CYAN_BRICKS);
+    public static final Block LIGHT_BLUE_BRICK_STAIRS = new BlockStairs("light_blue_brick", MubbleBlocks.LIGHT_BLUE_BRICKS);
+    public static final Block BLUE_BRICK_STAIRS = new BlockStairs("blue_brick", MubbleBlocks.BLUE_BRICKS);
+    public static final Block PURPLE_BRICK_STAIRS = new BlockStairs("purple_brick", MubbleBlocks.PURPLE_BRICKS);
+    public static final Block MAGENTA_BRICK_STAIRS = new BlockStairs("magenta_brick", MubbleBlocks.MAGENTA_BRICKS);
+    public static final Block PINK_BRICK_STAIRS = new BlockStairs("pink_brick", MubbleBlocks.PINK_BRICKS);
+    
     public static final Block WHITE_BRICK_SLAB = new BlockSlab("white_brick", MubbleBlocks.WHITE_BRICKS);
+    public static final Block LIGHT_GRAY_BRICK_SLAB = new BlockSlab("light_gray_brick", MubbleBlocks.LIGHT_GRAY_BRICKS);
+    public static final Block GRAY_BRICK_SLAB = new BlockSlab("gray_brick", MubbleBlocks.GRAY_BRICKS);
+    public static final Block BLACK_BRICK_SLAB = new BlockSlab("black_brick", MubbleBlocks.BLACK_BRICKS);
+    public static final Block BROWN_BRICK_SLAB = new BlockSlab("brown_brick", MubbleBlocks.BROWN_BRICKS);
     public static final Block RED_BRICK_SLAB = new BlockSlab("red_brick", MubbleBlocks.RED_BRICKS);
+    public static final Block ORANGE_BRICK_SLAB = new BlockSlab("orange_brick", MubbleBlocks.ORANGE_BRICKS);
+    public static final Block YELLOW_BRICK_SLAB = new BlockSlab("yellow_brick", MubbleBlocks.YELLOW_BRICKS);
+    public static final Block LIME_BRICK_SLAB = new BlockSlab("lime_brick", MubbleBlocks.LIME_BRICKS);
+    public static final Block GREEN_BRICK_SLAB = new BlockSlab("green_brick", MubbleBlocks.GREEN_BRICKS);
+    public static final Block CYAN_BRICK_SLAB = new BlockSlab("cyan_brick", MubbleBlocks.CYAN_BRICKS);
+    public static final Block LIGHT_BLUE_BRICK_SLAB = new BlockSlab("light_blue_brick", MubbleBlocks.LIGHT_BLUE_BRICKS);
+    public static final Block BLUE_BRICK_SLAB = new BlockSlab("blue_brick", MubbleBlocks.BLUE_BRICKS);
+    public static final Block PURPLE_BRICK_SLAB = new BlockSlab("purple_brick", MubbleBlocks.PURPLE_BRICKS);
+    public static final Block MAGENTA_BRICK_SLAB = new BlockSlab("magenta_brick", MubbleBlocks.MAGENTA_BRICKS);
+    public static final Block PINK_BRICK_SLAB = new BlockSlab("pink_brick", MubbleBlocks.PINK_BRICKS);
+    
     public static final Block WHITE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("white_brick", MubbleBlocks.WHITE_BRICKS);
+    public static final Block LIGHT_GRAY_BRICK_VERTICAL_SLAB = new BlockSlabVertical("light_gray_brick", MubbleBlocks.LIGHT_GRAY_BRICKS);
+    public static final Block GRAY_BRICK_VERTICAL_SLAB = new BlockSlabVertical("gray_brick", MubbleBlocks.GRAY_BRICKS);
+    public static final Block BLACK_BRICK_VERTICAL_SLAB = new BlockSlabVertical("black_brick", MubbleBlocks.BLACK_BRICKS);
+    public static final Block BROWN_BRICK_VERTICAL_SLAB = new BlockSlabVertical("brown_brick", MubbleBlocks.BROWN_BRICKS);
     public static final Block RED_BRICK_VERTICAL_SLAB = new BlockSlabVertical("red_brick", MubbleBlocks.RED_BRICKS);
+    public static final Block ORANGE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("orange_brick", MubbleBlocks.ORANGE_BRICKS);
+    public static final Block YELLOW_BRICK_VERTICAL_SLAB = new BlockSlabVertical("yellow_brick", MubbleBlocks.YELLOW_BRICKS);
+    public static final Block LIME_BRICK_VERTICAL_SLAB = new BlockSlabVertical("lime_brick", MubbleBlocks.LIME_BRICKS);
+    public static final Block GREEN_BRICK_VERTICAL_SLAB = new BlockSlabVertical("green_brick", MubbleBlocks.GREEN_BRICKS);
+    public static final Block CYAN_BRICK_VERTICAL_SLAB = new BlockSlabVertical("cyan_brick", MubbleBlocks.CYAN_BRICKS);
+    public static final Block LIGHT_BLUE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("light_blue_brick", MubbleBlocks.LIGHT_BLUE_BRICKS);
+    public static final Block BLUE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("blue_brick", MubbleBlocks.BLUE_BRICKS);
+    public static final Block PURPLE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("purple_brick", MubbleBlocks.PURPLE_BRICKS);
+    public static final Block MAGENTA_BRICK_VERTICAL_SLAB = new BlockSlabVertical("magenta_brick", MubbleBlocks.MAGENTA_BRICKS);
+    public static final Block PINK_BRICK_VERTICAL_SLAB = new BlockSlabVertical("pink_brick", MubbleBlocks.PINK_BRICKS);
+    
     public static final Block WHITE_BRICK_WALL = new BlockWall("white_brick", MubbleBlocks.WHITE_BRICKS);
+    public static final Block LIGHT_GRAY_BRICK_WALL = new BlockWall("light_gray_brick", MubbleBlocks.LIGHT_GRAY_BRICKS);
+    public static final Block GRAY_BRICK_WALL = new BlockWall("gray_brick", MubbleBlocks.GRAY_BRICKS);
+    public static final Block BLACK_BRICK_WALL = new BlockWall("black_brick", MubbleBlocks.BLACK_BRICKS);
+    public static final Block BROWN_BRICK_WALL = new BlockWall("brown_brick", MubbleBlocks.BROWN_BRICKS);
     public static final Block RED_BRICK_WALL = new BlockWall("red_brick", MubbleBlocks.RED_BRICKS);
+    public static final Block ORANGE_BRICK_WALL = new BlockWall("orange_brick", MubbleBlocks.ORANGE_BRICKS);
+    public static final Block YELLOW_BRICK_WALL = new BlockWall("yellow_brick", MubbleBlocks.YELLOW_BRICKS);
+    public static final Block LIME_BRICK_WALL = new BlockWall("lime_brick", MubbleBlocks.LIME_BRICKS);
+    public static final Block GREEN_BRICK_WALL = new BlockWall("green_brick", MubbleBlocks.GREEN_BRICKS);
+    public static final Block CYAN_BRICK_WALL = new BlockWall("cyan_brick", MubbleBlocks.CYAN_BRICKS);
+    public static final Block LIGHT_BLUE_BRICK_WALL = new BlockWall("light_blue_brick", MubbleBlocks.LIGHT_BLUE_BRICKS);
+    public static final Block BLUE_BRICK_WALL = new BlockWall("blue_brick", MubbleBlocks.BLUE_BRICKS);
+    public static final Block PURPLE_BRICK_WALL = new BlockWall("purple_brick", MubbleBlocks.PURPLE_BRICKS);
+    public static final Block MAGENTA_BRICK_WALL = new BlockWall("magenta_brick", MubbleBlocks.MAGENTA_BRICKS);
+    public static final Block PINK_BRICK_WALL = new BlockWall("pink_brick", MubbleBlocks.PINK_BRICKS);
+    
     public static final Block BLUNITE = new BlockSimple("blunite", Properties.from(Blocks.STONE));
     public static final Block CARBONITE = new BlockSimple("carbonite", Properties.from(Blocks.STONE));
     public static final Block BLUNITE_STAIRS = new BlockStairs(MubbleBlocks.BLUNITE);
@@ -97,6 +173,8 @@ public class MubbleBlocks
     public static final Block MAGENTA_BALLOON = new BlockBalloon(EnumDyeColor.MAGENTA);
     public static final Block PINK_BALLOON = new BlockBalloon(EnumDyeColor.PINK);
     
+    
+    
     public static final Block QUESTION_BLOCK = new BlockQuestion();
     public static final Block EMPTY_BLOCK = new BlockEmpty();
     public static final Block ROTATING_BLOCK = new BlockRotating();
@@ -138,7 +216,9 @@ public class MubbleBlocks
     public static final Block PURPLE_MUSHROOM_BLOCK = new BlockHugeMushroom(MubbleBlocks.PURPLE_MUSHROOM, EnumDyeColor.PURPLE);
     public static final Block MAGENTA_MUSHROOM_BLOCK = new BlockHugeMushroom(MubbleBlocks.MAGENTA_MUSHROOM, EnumDyeColor.MAGENTA);
     public static final Block PINK_MUSHROOM_BLOCK = new BlockHugeMushroom(MubbleBlocks.PINK_MUSHROOM, EnumDyeColor.PINK);
-
+    
+    
+    
     public static final Block WHITE_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.WHITE);
     public static final Block LIGHT_GRAY_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.LIGHT_GRAY);
     public static final Block GRAY_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.GRAY);
@@ -159,7 +239,9 @@ public class MubbleBlocks
     public static final Block JAPANESE_TETRIS_CUSHION = new BlockFalling("japanese_tetris_cushion", Properties.from(Blocks.RED_WOOL));
     public static final Block RAINBOW_TETRIS_SCAFFOLDING = new BlockFalling("rainbow_tetris_scaffolding", Properties.from(Blocks.IRON_BLOCK));
     public static final Block MONOCHROME_TETRIS_SCAFFOLDING = new BlockFalling("monochrome_tetris_scaffolding", Properties.from(Blocks.IRON_BLOCK));
-
+    
+    
+    
     public static final Block VAMPIRE_STONE = new BlockSimple("vampire_stone", Properties.from(Blocks.STONE));
     public static final Block MEDUSA_STONE = new BlockSimple("medusa_stone", Properties.from(Blocks.STONE));
     public static final Block MEDUSA_BRICKS = new BlockSimple("medusa_bricks", Properties.from(Blocks.STONE_BRICKS));
@@ -184,15 +266,21 @@ public class MubbleBlocks
     public static final Block MAGENTA_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.MAGENTA);
     public static final Block PINK_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.PINK);
     
+    
+    
     public static final Block GREEN_HILL_GRASS_BLOCK  = new BlockGrass("green_hill_grass_block", MubbleBlocks.GREEN_HILL_DIRT, Properties.from(Blocks.GRASS_BLOCK));
     public static final Block GREEN_HILL_DIRT = new BlockSimple("green_hill_dirt", Properties.from(Blocks.DIRT));
     public static final Block MARBLE_ZONE_STONE = new BlockSimple("marble_zone_stone", Properties.from(Blocks.STONE));
     public static final Block YELLOW_STUDIOPOLIS_CLAPPER = new BlockDirectional("yellow_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK));
     public static final Block BLUE_STUDIOPOLIS_CLAPPER = new BlockDirectional("blue_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK));
     public static final Block SPRING = new BlockSpring();
-
+    
+    
+    
     public static final Block SCARLET_MUSHROOM = new BlockMushroom("scarlet", 7);
     public static final Block SCARLET_ORCHID = new BlockFlower("scarlet_orchid", 7);
+    
+    
     
     public static final Block GIRDER = new BlockSimple("girder", Properties.from(Blocks.IRON_BLOCK));
     public static final Block MIRROR_TEMPLE_BRICKS = new BlockSimple("mirror_temple_bricks", Properties.from(Blocks.BRICKS));
@@ -209,6 +297,8 @@ public class MubbleBlocks
     public static final Block SPACE_JAM = new BlockSimple("space_jam", Properties.create(Material.SAND).hardnessAndResistance(0.4f).sound(MubbleSoundTypes.SPACE_JAM));
     public static final Block SPACE_OBSIDIAN = new BlockEmptyDrops("space_obsidian", Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.0F, 3600000.0F));
     
+    
+    
     public static final Block RED_PUYO = new BlockPuyo(EnumDyeColor.RED);
     public static final Block YELLOW_PUYO = new BlockPuyo(EnumDyeColor.YELLOW);
     public static final Block GREEN_PUYO = new BlockPuyo(EnumDyeColor.GREEN);
@@ -220,6 +310,8 @@ public class MubbleBlocks
     public static final Block HARD_PUYO = new BlockDirectional("hard_puyo", Properties.from(Blocks.STONE));
     public static final Block IRON_PUYO = new BlockDirectional("iron_puyo", Properties.from(Blocks.IRON_BLOCK));
     public static final Block PUYO_BLOCK = new BlockSimple("puyo_block", Properties.from(Blocks.STONE));
+    
+    
     
     public static final Block KORETATO_BLOCK = new BlockDirectional("koretato_block", Properties.create(Material.GROUND, MaterialColor.YELLOW_TERRACOTTA).hardnessAndResistance(0.4f, 2f).sound(SoundType.SNOW));
     

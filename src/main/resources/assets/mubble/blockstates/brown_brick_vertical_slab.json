@@ -1,0 +1,10 @@
+{
+	"variants":
+	{
+		"type=north":	{"model": "mubble:block/brown_brick_vertical_slab/north"},
+		"type=south":	{"model": "mubble:block/brown_brick_vertical_slab/south"},
+		"type=east":	{"model": "mubble:block/brown_brick_vertical_slab/east"},
+		"type=west":	{"model": "mubble:block/brown_brick_vertical_slab/west"},
+		"type=double":	{"model": "mubble:block/brown_bricks"}
+	}
+}

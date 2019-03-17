@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:brick_slab",
+	"pattern":
+	[
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:green_bricks"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:green_brick_slab",
+		"count": 6
+	}
+}

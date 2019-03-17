@@ -8,12 +8,12 @@
 	{
 		"#":
 		{
-			"item": "mubble:cyan_bricks"
+			"item": "mubble:old_site_bricks"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:cyan_brick_slab",
+		"item": "mubble:old_site_brick_slab",
 		"count": 6
 	}
 }

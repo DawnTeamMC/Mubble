@@ -9,12 +9,12 @@
 	{
 		"#":
 		{
-			"item": "mubble:purple_bricks"
+			"item": "mubble:mirror_temple_bricks"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:purple_brick_wall",
+		"item": "mubble:mirror_temple_brick_wall",
 		"count": 6
 	}
 }

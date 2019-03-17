@@ -2,9 +2,9 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern":
 	[
-		"XXX",
 		"XOX",
-		"XXX"
+		"OAO",
+		"XOX"
 	],
 	"key":
 	{
@@ -14,12 +14,16 @@
 		},
 		"O":
 		{
+			"item": "minecraft:cobblestone"
+		},
+		"A":
+		{
 			"tag": "forge:dyes/cyan"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:cyan_bricks",
+		"item": "mubble:old_site_bricks",
 		"count": 8
 	}
 }

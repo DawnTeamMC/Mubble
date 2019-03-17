@@ -14,12 +14,12 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/purple"
+			"item": "minecraft:purple_stained_glass"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:purple_bricks",
+		"item": "mubble:mirror_temple_bricks",
 		"count": 8
 	}
 }

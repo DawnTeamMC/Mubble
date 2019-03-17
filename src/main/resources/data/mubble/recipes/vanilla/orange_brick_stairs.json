@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:brick_stairs",
+	"pattern":
+	[
+		"#  ",
+		"## ",
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:orange_bricks"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:orange_brick_stairs",
+		"count": 4
+	}
+}

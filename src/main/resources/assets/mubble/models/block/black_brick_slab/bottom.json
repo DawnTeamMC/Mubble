@@ -1,0 +1,9 @@
+{
+	"parent": "block/slab",
+	"textures":
+	{
+		"bottom": "mubble:block/black_bricks",
+		"top": "mubble:block/black_bricks",
+		"side": "mubble:block/black_bricks"
+	}
+}

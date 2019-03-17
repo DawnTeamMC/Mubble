@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:blank_music_disc"
+		},
+		{
+			"item": "minecraft:snowball"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:music_disc_vs_champion_red_and_blue"
+	}
+}

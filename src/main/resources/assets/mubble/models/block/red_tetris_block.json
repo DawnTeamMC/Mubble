@@ -2,6 +2,6 @@
 	"parent": "block/cube_all",
 	"textures":
 	{
-		"all": "mubble:block/red_tetris_block"}
+		"all": "mubble:block/red_tetris_block"
 	}
 }

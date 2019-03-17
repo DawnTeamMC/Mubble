@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:bricks",
+	"pattern":
+	[
+		"XXX",
+		"XOX",
+		"XXX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "minecraft:bricks"
+		},
+		"O":
+		{
+			"tag": "forge:dyes/cyan"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:cyan_bricks",
+		"count": 8
+	}
+}

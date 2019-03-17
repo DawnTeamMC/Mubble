@@ -1,0 +1,9 @@
+{
+	"parent": "block/inner_stairs",
+	"textures":
+	{
+		"bottom": "mubble:block/blue_bricks",
+		"top": "mubble:block/blue_bricks",
+		"side": "mubble:block/blue_bricks"
+	}
+}
