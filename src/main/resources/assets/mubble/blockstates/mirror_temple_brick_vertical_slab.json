@@ -1,0 +1,50 @@
+{
+	"variants":
+	{
+		"type=north":
+		[
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/north/0"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/north/1"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/north/2"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/north/3"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/north/4"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/north/5"}
+		],
+		"type=south":
+		[
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/south/0"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/south/1"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/south/2"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/south/3"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/south/4"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/south/5"}
+		],
+		"type=east":
+		[
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/east/0"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/east/1"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/east/2"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/east/3"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/east/4"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/east/5"}
+		],
+		"type=west":
+		[
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/west/0"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/west/1"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/west/2"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/west/3"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/west/4"},
+			{"model": "mubble:block/mirror_temple_brick_vertical_slab/west/5"}
+		],
+		"type=double":
+		[
+			{"model": "mubble:block/mirror_temple_bricks/0"},
+			{"model": "mubble:block/mirror_temple_bricks/1"},
+			{"model": "mubble:block/mirror_temple_bricks/2"},
+			{"model": "mubble:block/mirror_temple_bricks/3"},
+			{"model": "mubble:block/mirror_temple_bricks/4"},
+			{"model": "mubble:block/mirror_temple_bricks/5"}
+		]
+	}
+}

@@ -48,56 +48,56 @@
 			"mubble:block/question_block/loot/coin"
 		]
 	},
-	"block.space_matter.break":
+	"block.space_jam.break":
 	{
 		"subtitle": "subtitles.block.generic.break",
 		"sounds":
 		[
-			"mubble:block/space_matter/hit1",
-			"mubble:block/space_matter/hit2",
-			"mubble:block/space_matter/hit3",
-			"mubble:block/space_matter/hit4"
+			"mubble:block/space_jam/hit1",
+			"mubble:block/space_jam/hit2",
+			"mubble:block/space_jam/hit3",
+			"mubble:block/space_jam/hit4"
 		]
 	},
-	"block.space_matter.fall":
+	"block.space_jam.fall":
 	{
 		"sounds":
 		[
-			"mubble:block/space_matter/fall1",
-			"mubble:block/space_matter/fall2",
-			"mubble:block/space_matter/fall3"
+			"mubble:block/space_jam/fall1",
+			"mubble:block/space_jam/fall2",
+			"mubble:block/space_jam/fall3"
 		]
 	},
-	"block.space_matter.hit":
+	"block.space_jam.hit":
 	{
 		"sounds":
 		[
-			"mubble:block/space_matter/hit1",
-			"mubble:block/space_matter/hit2",
-			"mubble:block/space_matter/hit3",
-			"mubble:block/space_matter/hit4"
+			"mubble:block/space_jam/hit1",
+			"mubble:block/space_jam/hit2",
+			"mubble:block/space_jam/hit3",
+			"mubble:block/space_jam/hit4"
 		]
 	},
-	"block.space_matter.place":
+	"block.space_jam.place":
 	{
 		"subtitle": "subtitles.block.generic.place",
 		"sounds":
 		[
-			"mubble:block/space_matter/hit1",
-			"mubble:block/space_matter/hit2",
-			"mubble:block/space_matter/hit3",
-			"mubble:block/space_matter/hit4"
+			"mubble:block/space_jam/hit1",
+			"mubble:block/space_jam/hit2",
+			"mubble:block/space_jam/hit3",
+			"mubble:block/space_jam/hit4"
 		]
 	},
-	"block.space_matter.step":
+	"block.space_jam.step":
 	{
 		"subtitle": "subtitles.block.generic.footsteps",
 		"sounds":
 		[
-			"mubble:block/space_matter/step1",
-			"mubble:block/space_matter/step2",
-			"mubble:block/space_matter/step3",
-			"mubble:block/space_matter/step4"
+			"mubble:block/space_jam/step1",
+			"mubble:block/space_jam/step2",
+			"mubble:block/space_jam/step3",
+			"mubble:block/space_jam/step4"
 		]
 	},
 	"block.ultimatum_portal.ambient":

@@ -1,0 +1,7 @@
+{
+	"parent": "block/template_wall_side",
+	"textures":
+	{
+		"wall": "mubble:block/mirror_temple_bricks/5"
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"parent": "block/wall_inventory",
+	"textures":
+	{
+		"wall": "mubble:block/old_site_bricks/0"
+	}
+}

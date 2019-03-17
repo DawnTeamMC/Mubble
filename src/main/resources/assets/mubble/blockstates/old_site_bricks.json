@@ -1,0 +1,24 @@
+{
+	"variants":
+	{
+		"":
+		[
+			{"model": "mubble:block/old_site_bricks/0"},
+			{"model": "mubble:block/old_site_bricks/1"},
+			{"model": "mubble:block/old_site_bricks/2"},
+			{"model": "mubble:block/old_site_bricks/3"},
+			{"model": "mubble:block/old_site_bricks/4"},
+			{"model": "mubble:block/old_site_bricks/12"},
+			{"model": "mubble:block/old_site_bricks/13"},
+			{"model": "mubble:block/old_site_bricks/14"},
+			{"model": "mubble:block/old_site_bricks/23"},
+			{"model": "mubble:block/old_site_bricks/24"},
+			{"model": "mubble:block/old_site_bricks/34"},
+			{"model": "mubble:block/old_site_bricks/123"},
+			{"model": "mubble:block/old_site_bricks/124"},
+			{"model": "mubble:block/old_site_bricks/134"},
+			{"model": "mubble:block/old_site_bricks/234"},
+			{"model": "mubble:block/old_site_bricks/1234"}
+		]
+	}
+}

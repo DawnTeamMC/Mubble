@@ -1,7 +1,0 @@
-{
-	"parent": "mubble:block/vertical_slab/south",
-	"textures":
-	{
-		"block": "mubble:block/purple_bricks/4"
-	}
-}

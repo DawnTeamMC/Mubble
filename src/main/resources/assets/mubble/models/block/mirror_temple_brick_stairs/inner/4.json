@@ -1,0 +1,9 @@
+{
+	"parent": "block/inner_stairs",
+	"textures":
+	{
+		"bottom": "mubble:block/mirror_temple_bricks/4",
+		"top": "mubble:block/mirror_temple_bricks/4",
+		"side": "mubble:block/mirror_temple_bricks/4"
+	}
+}

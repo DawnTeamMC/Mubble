@@ -1,0 +1,9 @@
+{
+	"parent": "block/slab_top",
+	"textures":
+	{
+		"bottom": "mubble:block/mirror_temple_bricks/1",
+		"top": "mubble:block/mirror_temple_bricks/1",
+		"side": "mubble:block/mirror_temple_bricks/1"
+	}
+}
