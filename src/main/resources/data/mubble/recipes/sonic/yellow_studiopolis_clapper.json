@@ -2,24 +2,23 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern":
 	[
-		"XXX",
-		"XOX",
-		"XXX"
+		"OOX",
+		"XXO",
+		"OOX"
 	],
 	"key":
 	{
-		"X":
+		"O":
 		{
 			"item": "minecraft:yellow_concrete"
 		},
-		"O":
+		"X":
 		{
-			"item": "mubble:super_mushroom"
+			"item": "minecraft:black_concrete"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:question_block",
-		"count": 8
+		"item": "mubble:yellow_studiopolis_clapper"
 	}
 }

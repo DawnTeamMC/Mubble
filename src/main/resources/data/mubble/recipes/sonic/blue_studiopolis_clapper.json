@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"OOX",
+		"XXO",
+		"OOX"
+	],
+	"key":
+	{
+		"O":
+		{
+			"item": "minecraft:blue_concrete"
+		},
+		"X":
+		{
+			"item": "minecraft:black_concrete"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:blue_studiopolis_clapper"
+	}
+}

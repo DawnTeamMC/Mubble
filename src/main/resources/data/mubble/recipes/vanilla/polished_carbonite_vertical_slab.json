@@ -10,12 +10,12 @@
 	{
 		"#":
 		{
-			"item": "mubble:medusa_bricks"
+			"item": "mubble:polished_carbonite"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:medusa_brick_vertical_slab",
+		"item": "mubble:polished_carbonite_vertical_slab",
 		"count": 6
 	}
 }

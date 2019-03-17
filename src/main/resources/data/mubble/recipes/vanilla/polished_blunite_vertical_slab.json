@@ -2,9 +2,9 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern":
 	[
-		"#  ",
-		"## ",
-		"###"
+		"#",
+		"#",
+		"#"
 	],
 	"key":
 	{
@@ -15,7 +15,7 @@
 	},
 	"result":
 	{
-		"item": "mubble:polished_blunite_stairs",
-		"count": 4
+		"item": "mubble:polished_blunite_vertical_slab",
+		"count": 6
 	}
 }

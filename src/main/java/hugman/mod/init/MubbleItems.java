@@ -34,6 +34,7 @@ public class MubbleItems
 	TOMATO = new ItemSeedFood("tomato", 3, 0.6f),
 	SALAD = new ItemSeedFood("salad", 1, 0.2F),
 	CHEESE = new ItemFood("cheese", 2, 0.4F, false),
+	WHEAT_FLOUR = new ItemSimple("wheat_flour"),
 	VANADIUM = new ItemSimple("vanadium"),
 	TOTEM_OF_ASCENDING = new ItemTotemOfAscending(),
 	

@@ -3,7 +3,7 @@
 	"ingredients":
 	[
 		{
-			"item": "minecraft:brick_block"
+			"item": "minecraft:bricks"
 		},
 		{
 			"item": "mubble:yellow_coin"

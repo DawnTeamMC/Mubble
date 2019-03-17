@@ -14,9 +14,10 @@
 		},
 		"O":
 		{
-			"item": "minecraft:slime"
+			"item": "minecraft:slime_block"
 		},
-		"I": {
+		"I":
+		{
 			"item": "minecraft:sticky_piston"
 		}
 	},

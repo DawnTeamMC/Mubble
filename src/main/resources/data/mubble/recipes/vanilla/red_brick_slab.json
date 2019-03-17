@@ -2,20 +2,18 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern":
 	[
-		"#  ",
-		"## ",
 		"###"
 	],
 	"key":
 	{
 		"#":
 		{
-			"item": "mubble:polished_blunite"
+			"item": "mubble:red_bricks"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:polished_blunite_stairs",
-		"count": 4
+		"item": "mubble:red_brick_slab",
+		"count": 6
 	}
 }

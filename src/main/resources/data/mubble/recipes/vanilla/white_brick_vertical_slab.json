@@ -10,12 +10,12 @@
 	{
 		"#":
 		{
-			"item": "mubble:medusa_bricks"
+			"item": "mubble:white_bricks"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:medusa_brick_vertical_slab",
+		"item": "mubble:white_brick_vertical_slab",
 		"count": 6
 	}
 }

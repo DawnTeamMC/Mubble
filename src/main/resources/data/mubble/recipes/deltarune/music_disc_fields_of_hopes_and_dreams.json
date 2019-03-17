@@ -3,14 +3,10 @@
 	"ingredients":
 	[
 		{
-			"item": "mubble:record_blank"
+			"item": "mubble:blank_music_disc"
 		},
 		{
-			"item": 
-			[
-				"mubble:scarlet_mushroom",
-				"mubble:scarlet_orchid"
-			]
+			"item": "mubble:scarlet_orchid"
 		}
 	],
 	"result":
