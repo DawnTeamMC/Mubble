@@ -31,17 +31,17 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
 	private static final VoxelShape IRON_DOWN = Block.makeCuboidShape(6.0D, 10.0D, 6.0D, 10.0D, 16.0D, 10.0D);
 	private static final VoxelShape PLATE_DOWN = Block.makeCuboidShape(1.0D, 7.0D, 1.0D, 15.0D, 10.0D, 15.0D);
 	private static final VoxelShape SPRING_DOWN = VoxelShapes.or(IRON_DOWN, PLATE_DOWN);
-	private static final VoxelShape IRON_NORTH = Block.makeCuboidShape(6.0D, 6.0D, 10.0D, 4.0D, 4.0D, 6.0D);
-	private static final VoxelShape PLATE_NORTH = Block.makeCuboidShape(1.0D, 1.0D, 7.0D, 14.0D, 14.0D, 3.0D);
+	private static final VoxelShape IRON_NORTH = Block.makeCuboidShape(6.0D, 6.0D, 10.0D, 10.0D, 10.0D, 16.0D);
+	private static final VoxelShape PLATE_NORTH = Block.makeCuboidShape(1.0D, 1.0D, 7.0D, 15.0D, 15.0D, 10.0D);
 	private static final VoxelShape SPRING_NORTH = VoxelShapes.or(IRON_NORTH, PLATE_NORTH);
-	private static final VoxelShape IRON_SOUTH = Block.makeCuboidShape(6.0D, 6.0D, 0.0D, 4.0D, 4.0D, 6.0D);
-	private static final VoxelShape PLATE_SOUTH = Block.makeCuboidShape(1.0D, 1.0D, 6.0D, 14.0D, 14.0D, 3.0D);
+	private static final VoxelShape IRON_SOUTH = Block.makeCuboidShape(6.0D, 6.0D, 0.0D, 10.0D, 10.0D, 6.0D);
+	private static final VoxelShape PLATE_SOUTH = Block.makeCuboidShape(1.0D, 1.0D, 6.0D, 15.0D, 15.0D, 9.0D);
 	private static final VoxelShape SPRING_SOUTH = VoxelShapes.or(IRON_SOUTH, PLATE_SOUTH);
-	private static final VoxelShape IRON_EAST = Block.makeCuboidShape(0.0D, 6.0D, 6.0D, 6.0D, 4.0D, 4.0D);
-	private static final VoxelShape PLATE_EAST = Block.makeCuboidShape(6.0D, 1.0D, 1.0D, 3.0D, 14.0D, 14.0D);
+	private static final VoxelShape IRON_EAST = Block.makeCuboidShape(0.0D, 6.0D, 6.0D, 6.0D, 10.0D, 10.0D);
+	private static final VoxelShape PLATE_EAST = Block.makeCuboidShape(6.0D, 1.0D, 1.0D, 9.0D, 15.0D, 15.0D);
 	private static final VoxelShape SPRING_EAST = VoxelShapes.or(IRON_EAST, PLATE_EAST);
-	private static final VoxelShape IRON_WEST = Block.makeCuboidShape(10.0D, 6.0D, 6.0D, 6.0D, 4.0D, 4.0D);
-	private static final VoxelShape PLATE_WEST = Block.makeCuboidShape(7.0D, 1.0D, 1.0D, 3.0D, 14.0D, 14.0D);
+	private static final VoxelShape IRON_WEST = Block.makeCuboidShape(10.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D);
+	private static final VoxelShape PLATE_WEST = Block.makeCuboidShape(7.0D, 1.0D, 1.0D, 10.0D, 15.0D, 15.0D);
 	private static final VoxelShape SPRING_WEST = VoxelShapes.or(IRON_WEST, PLATE_WEST);
 	
     public BlockSpring()
