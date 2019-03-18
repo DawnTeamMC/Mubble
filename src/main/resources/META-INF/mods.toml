@@ -4,7 +4,7 @@ issueTrackerURL="https://github.com/Hugman76/Mubble/issues"
 
 [[mods]]
 modId="mubble"
-version="1.4-pre3"
+version="1.4-pre4"
 displayName="Mubble"
 updateJSONURL="https://raw.githubusercontent.com/Hugman76/Mubble/master/update.json"
 displayURL="https://minecraft.curseforge.com/projects/mubble"
