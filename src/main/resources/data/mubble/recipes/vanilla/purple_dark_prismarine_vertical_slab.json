@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:dark_prismarine_vertical_slab",
+	"pattern":
+	[
+		"#",
+		"#",
+		"#"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:purple_dark_prismarines"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:purple_dark_prismarine_vertical_slab",
+		"count": 6
+	}
+}

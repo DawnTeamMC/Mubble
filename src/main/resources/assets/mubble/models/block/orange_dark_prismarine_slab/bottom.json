@@ -1,0 +1,9 @@
+{
+	"parent": "block/slab",
+	"textures":
+	{
+		"bottom": "mubble:block/orange_dark_prismarine",
+		"top": "mubble:block/orange_dark_prismarine",
+		"side": "mubble:block/orange_dark_prismarine"
+	}
+}

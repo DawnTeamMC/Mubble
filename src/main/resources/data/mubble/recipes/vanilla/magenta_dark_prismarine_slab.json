@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:dark_prismarine_slab",
+	"pattern":
+	[
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:magenta_dark_prismarines"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:magenta_dark_prismarine_slab",
+		"count": 6
+	}
+}

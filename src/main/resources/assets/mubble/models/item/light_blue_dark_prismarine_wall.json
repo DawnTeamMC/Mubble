@@ -1,0 +1,7 @@
+{
+	"parent": "block/wall_inventory",
+	"textures":
+	{
+		"wall": "mubble:block/light_blue_dark_prismarine"
+	}
+}

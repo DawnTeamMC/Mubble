@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:item/vertical_slab",
+	"textures":
+	{
+		"block": "mubble:block/white_dark_prismarine"
+	}
+}

@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:dark_prismarines",
+	"pattern":
+	[
+		"XXX",
+		"XOX",
+		"XXX"
+	],
+	"key":
+	{
+		"X": 
+		{
+			"item": "minecraft:dark_prismarines"
+		},
+		"O":
+		{
+			"tag": "forge:dyes/white"
+		}
+	},
+	"result": {
+		"item": "mubble:white_dark_prismarines",
+		"count": 8
+	}
+}
