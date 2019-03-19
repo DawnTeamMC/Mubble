@@ -1,5 +1,6 @@
 package hugman.mod.objects.entity.model;
 
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.model.ModelBase;
 import net.minecraft.client.renderer.entity.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -55,15 +56,28 @@ public class ModelToad extends ModelBase
     @Override
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
     { 
+    	if (this.isChild)
+        {
+        	GlStateManager.pushMatrix();
+            GlStateManager.translatef(0.0F, 8.0F * scale, 0.0F);
+        }
         this.head.render(scale);
         this.hat.render(scale);
         this.front_lamp.render(scale);
+        if (this.isChild)
+        {
+            GlStateManager.popMatrix();
+            GlStateManager.pushMatrix();
+            GlStateManager.scalef(0.5F, 0.5F, 0.5F);
+            GlStateManager.translatef(0.0F, 24.0F * scale, 0.0F);
+        }
         this.body.render(scale);
         this.bagpack.render(scale);
         this.right_arm.render(scale);
         this.left_arm.render(scale);
         this.right_leg.render(scale);
         this.left_leg.render(scale);
+        if (this.isChild) GlStateManager.popMatrix();
     }
 
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z)
