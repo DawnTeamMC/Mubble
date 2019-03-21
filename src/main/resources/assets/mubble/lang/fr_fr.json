@@ -463,6 +463,7 @@
     "comment": "ENTITIES",
     "entity.mubble.toad": "Toad",
     "entity.mubble.chincho": "Chincho",
+    "//entity.mubble.flying_block": "Flying Block",
 
     "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.super_mushroom": "Super champignon sorti d'un bloc ?",

@@ -462,6 +462,7 @@
     "comment": "ENTITIES",
     "entity.mubble.toad": "tod",
     "entity.mubble.chincho": "tostarenan mummy",
+    "//entity.mubble.flying_block": "Flying Block",
 
     "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.super_mushroom": "BLOCO ???? drop supa mush",

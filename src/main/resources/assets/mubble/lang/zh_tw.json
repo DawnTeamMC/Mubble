@@ -462,6 +462,7 @@
     "comment": "ENTITIES",
     "entity.mubble.toad": "奇諾比奧",
     "entity.mubble.chincho": "欽喬",
+    "//entity.mubble.flying_block": "Flying Block",
 
     "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.power_up": "問號塊:掉落超級蘑菇",
