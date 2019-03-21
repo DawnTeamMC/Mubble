@@ -11,7 +11,7 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 
 public class BlockDirectional extends net.minecraft.block.BlockDirectional
-{
+{	
     public BlockDirectional(String name, Properties properties)
     {
         super(properties);
@@ -36,8 +36,7 @@ public class BlockDirectional extends net.minecraft.block.BlockDirectional
     @Override
     public IBlockState getStateForPlacement(BlockItemUseContext context)
     {
-        EnumFacing enumfacing = context.getFace();
-        return this.getDefaultState().with(FACING, enumfacing);
+        return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite());
     }
     
     @Override

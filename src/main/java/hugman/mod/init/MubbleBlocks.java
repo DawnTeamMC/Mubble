@@ -15,6 +15,7 @@ import hugman.mod.objects.block.BlockFalling;
 import hugman.mod.objects.block.BlockFlower;
 import hugman.mod.objects.block.BlockGrass;
 import hugman.mod.objects.block.BlockHugeMushroom;
+import hugman.mod.objects.block.BlockKoretato;
 import hugman.mod.objects.block.BlockMushroom;
 import hugman.mod.objects.block.BlockNote;
 import hugman.mod.objects.block.BlockPuyo;
@@ -241,7 +242,7 @@ public class MubbleBlocks
     public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
     public static final Block TOMATO = new BlockCrops("tomato");
     public static final Block SALAD = new BlockCrops("salad");
-    public static final Block CHEESE_BLOCK = new BlockDirectional("cheese_block", Properties.create(Material.GROUND, MaterialColor.YELLOW).hardnessAndResistance(0.5f).sound(SoundType.SNOW));
+    public static final Block CHEESE_BLOCK = new BlockSimple("cheese_block", Properties.create(Material.GROUND, MaterialColor.YELLOW).hardnessAndResistance(0.5f).sound(SoundType.SNOW));
     public static final Block WHITE_BALLOON = new BlockBalloon(EnumDyeColor.WHITE);
     public static final Block LIGHT_GRAY_BALLOON = new BlockBalloon(EnumDyeColor.LIGHT_GRAY);
     public static final Block GRAY_BALLOON = new BlockBalloon(EnumDyeColor.GRAY);
@@ -399,7 +400,7 @@ public class MubbleBlocks
     
     
     
-    public static final Block KORETATO_BLOCK = new BlockDirectional("koretato_block", Properties.create(Material.GROUND, MaterialColor.YELLOW_TERRACOTTA).hardnessAndResistance(0.4f, 2f).sound(SoundType.SNOW));
+    public static final Block KORETATO_BLOCK = new BlockKoretato();
     
     public static void register(Block block)
     {
