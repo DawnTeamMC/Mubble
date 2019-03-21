@@ -1,0 +1,11 @@
+{
+	"parent": "mubble:block/block_directional",
+	"textures":
+	{
+		"bottom": "mubble:block/koretato_block/normal/bottom",
+		"side": "mubble:block/koretato_block/normal/side",
+		"top": "mubble:block/koretato_block/normal/top",
+		"front": "mubble:block/koretato_block/normal/front",
+		"particle": "mubble:block/koretato_block/normal/side"
+	}
+}
