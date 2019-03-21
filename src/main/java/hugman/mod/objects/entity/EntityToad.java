@@ -7,7 +7,9 @@ import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIOpenDoor;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -17,6 +19,7 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -31,7 +34,7 @@ import net.minecraft.world.World;
 public class EntityToad extends EntityAnimal
 {
 	private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityToad.class, DataSerializers.VARINT);
-	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(MubbleItems.SUPER_MUSHROOM, MubbleItems.PEACH, MubbleItems.SUPER_STAR);
+	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(MubbleItems.SUPER_MUSHROOM);
 	
     public EntityToad(World worldIn) 
     {
@@ -56,7 +59,9 @@ public class EntityToad extends EntityAnimal
         //this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f));
         this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(2, new EntityAIPanic(this, 1.6D));
+        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
         this.tasks.addTask(3, new EntityAITempt(this, 1.4D, false, TEMPTATION_ITEMS));
+        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
         this.tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0D));
         this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityChicken.class, 10.0F));
         this.tasks.addTask(6, new EntityAIWatchClosest(this, this.getClass(), 8.0F));
@@ -184,6 +189,14 @@ public class EntityToad extends EntityAnimal
     @Override
     public EntityAgeable createChild(EntityAgeable ageable)
     {
-    	return null;
+    	EntityToad childToad = new EntityToad(this.world);
+    	childToad.setVariant(this.world.rand.nextInt(16));
+    	return childToad;
+    }
+    
+    @Override
+    public boolean isBreedingItem(ItemStack stack)
+    {
+        return TEMPTATION_ITEMS.test(stack);
     }
 }

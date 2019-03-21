@@ -1,0 +1,22 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:white_brick_vertical_slab",
+		"mubble:light_gray_brick_vertical_slab",
+		"mubble:gray_brick_vertical_slab",
+		"mubble:black_brick_vertical_slab",
+		"mubble:brown_brick_vertical_slab",
+		"mubble:red_brick_vertical_slab",
+		"mubble:orange_brick_vertical_slab",
+		"mubble:yellow_brick_vertical_slab",
+		"mubble:lime_brick_vertical_slab",
+		"mubble:green_brick_vertical_slab",
+		"mubble:cyan_brick_vertical_slab",
+		"mubble:light_blue_brick_vertical_slab",
+		"mubble:blue_brick_vertical_slab",
+		"mubble:purple_brick_vertical_slab",
+		"mubble:magenta_brick_vertical_slab",
+		"mubble:pink_brick_vertical_slab"
+	]
+}

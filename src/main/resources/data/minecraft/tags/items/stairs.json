@@ -1,0 +1,15 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:blunite_stairs",
+		"mubble:polished_blunite_stairs",
+		"mubble:carbonite_stairs",
+		"mubble:polished_carbonite_stairs",
+		"#mubble:brick/stairs",
+		"#mubble:dark_prismarine/stairs",
+		"mubble:medusa_brick_stairs",
+		"mubble:mirror_temple_brick_stairs",
+		"mubble:old_site_brick_stairs"
+	]
+}

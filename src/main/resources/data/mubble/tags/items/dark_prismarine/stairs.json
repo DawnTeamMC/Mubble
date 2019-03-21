@@ -1,0 +1,22 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:white_dark_prismarine_stairs",
+		"mubble:light_gray_dark_prismarine_stairs",
+		"mubble:gray_dark_prismarine_stairs",
+		"mubble:black_dark_prismarine_stairs",
+		"mubble:brown_dark_prismarine_stairs",
+		"mubble:red_dark_prismarine_stairs",
+		"mubble:orange_dark_prismarine_stairs",
+		"mubble:yellow_dark_prismarine_stairs",
+		"mubble:lime_dark_prismarine_stairs",
+		"mubble:green_dark_prismarine_stairs",
+		"mubble:cyan_dark_prismarine_stairs",
+		"mubble:light_blue_dark_prismarine_stairs",
+		"mubble:blue_dark_prismarine_stairs",
+		"mubble:purple_dark_prismarine_stairs",
+		"mubble:magenta_dark_prismarine_stairs",
+		"mubble:pink_dark_prismarine_stairs"
+	]
+}

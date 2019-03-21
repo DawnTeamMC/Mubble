@@ -2,7 +2,7 @@
 	"parent": "block/cube_column",
 	"textures":
 	{
-		"side": "mubble:block/candy_cane_pillar/orange",
+		"side": "mubble:block/orange_candy_cane_pillar",
 		"end": "mubble:block/candy_cane_pillar/end"
 	}
 }

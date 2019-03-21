@@ -1,0 +1,22 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:white_dark_prismarine",
+		"mubble:light_gray_dark_prismarine",
+		"mubble:gray_dark_prismarine",
+		"mubble:black_dark_prismarine",
+		"mubble:brown_dark_prismarine",
+		"mubble:red_dark_prismarine",
+		"mubble:orange_dark_prismarine",
+		"mubble:yellow_dark_prismarine",
+		"mubble:lime_dark_prismarine",
+		"mubble:green_dark_prismarine",
+		"mubble:cyan_dark_prismarine",
+		"mubble:light_blue_dark_prismarine",
+		"mubble:blue_dark_prismarine",
+		"mubble:purple_dark_prismarine",
+		"mubble:magenta_dark_prismarine",
+		"mubble:pink_dark_prismarine"
+	]
+}

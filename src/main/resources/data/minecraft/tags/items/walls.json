@@ -1,0 +1,15 @@
+{
+	"replace": false,
+	"values":
+	[
+		"minecraft:cobblestone_wall",
+		"minecraft:mossy_cobblestone_wall",
+		"mubble:blunite_wall",
+		"mubble:carbonite_wall",
+		"#mubble:brick/walls",
+		"#mubble:dark_prismarine/walls",
+		"mubble:medusa_brick_wall",
+		"mubble:mirror_temple_brick_wall",
+		"mubble:old_site_brick_wall"
+	]
+}

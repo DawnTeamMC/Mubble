@@ -5,10 +5,10 @@ import java.util.Random;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Fluids;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -45,8 +45,7 @@ public class CostumeCappy extends CostumeSimple
 		World world = entity.world;
 		if(rand.nextInt(201) == 0)
 		{
-			if(world.getBlockState(entity.getPosition()).getFluidState() == Fluids.WATER
-			|| world.getBlockState(entity.getPosition()).getFluidState() == Fluids.FLOWING_WATER) world.playSound((EntityPlayer)null, entity.posX, entity.posY, entity.posZ, MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
+			if(world.getFluidState(entity.getPosition()).isTagged(FluidTags.WATER)) world.playSound((EntityPlayer)null, entity.posX, entity.posY, entity.posZ, MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
 			else world.playSound((EntityPlayer)null, entity.posX, entity.posY, entity.posZ, MubbleSounds.COSTUME_CAPPY_HELP, SoundCategory.VOICE, 1f, 1f);
 		}
 		return super.onEntityItemUpdate(stack, entity);

@@ -1,0 +1,22 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:white_brick_wall",
+		"mubble:light_gray_brick_wall",
+		"mubble:gray_brick_wall",
+		"mubble:black_brick_wall",
+		"mubble:brown_brick_wall",
+		"mubble:red_brick_wall",
+		"mubble:orange_brick_wall",
+		"mubble:yellow_brick_wall",
+		"mubble:lime_brick_wall",
+		"mubble:green_brick_wall",
+		"mubble:cyan_brick_wall",
+		"mubble:light_blue_brick_wall",
+		"mubble:blue_brick_wall",
+		"mubble:purple_brick_wall",
+		"mubble:magenta_brick_wall",
+		"mubble:pink_brick_wall"
+	]
+}

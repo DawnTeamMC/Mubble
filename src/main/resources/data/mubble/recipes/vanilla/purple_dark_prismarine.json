@@ -1,6 +1,6 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"group": "mubble:dark_prismarines",
+	"group": "mubble:dark_prismarine",
 	"pattern":
 	[
 		"XXX",
@@ -11,7 +11,7 @@
 	{
 		"X":
 		{
-			"item": "minecraft:dark_prismarines"
+			"item": "minecraft:dark_prismarine"
 		},
 		"O":
 		{
@@ -20,7 +20,7 @@
 	},
 	"result":
 	{
-		"item": "mubble:purple_dark_prismarines",
+		"item": "mubble:purple_dark_prismarine",
 		"count": 8
 	}
 }
