@@ -45,7 +45,7 @@ public class BlockFlying extends Block
     {
         if (!worldIn.isRemote) this.checkFlyable(worldIn, pos);
     }
-
+    
 	private void checkFlyable(World worldIn, BlockPos pos)
 	{
         if (canFlyThrough(worldIn.getBlockState(pos.up())) && pos.getY() >= 0)
@@ -87,7 +87,8 @@ public class BlockFlying extends Block
 	}
 
     @SuppressWarnings("deprecation")
-	public static boolean canFlyThrough(IBlockState state) {
+	public static boolean canFlyThrough(IBlockState state)
+    {
         Block block = state.getBlock();
         Material material = state.getMaterial();
         return state.isAir() || block == Blocks.FIRE || material.isLiquid() || material.isReplaceable();
@@ -98,6 +99,6 @@ public class BlockFlying extends Block
 	}
     
 	public void onBroken(World worldIn, BlockPos pos)
-     {
-     }
+    {
+    }
 }
