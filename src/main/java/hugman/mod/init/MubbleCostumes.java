@@ -6,6 +6,7 @@ import java.util.List;
 import hugman.mod.objects.costume.CostumeEffect;
 import hugman.mod.objects.costume.CostumeGooigiCap;
 import hugman.mod.objects.costume.CostumeMayroCap;
+import hugman.mod.objects.costume.CostumePrincessPeachCrown;
 import hugman.mod.objects.costume.CostumeSimple;
 import hugman.mod.objects.costume.CostumeVanishCap;
 import hugman.mod.objects.costume.CostumeWingCap;
@@ -29,7 +30,7 @@ public class MubbleCostumes
 	public static final Item VANISH_CAP = new CostumeVanishCap();
 	public static final Item WING_CAP = new CostumeWingCap();
 	public static final Item GOOIGI_CAP = new CostumeGooigiCap();
-	public static final Item PRINCESS_PEACH_CROWN = new CostumeSimple("princess_peach_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
+	public static final Item PRINCESS_PEACH_CROWN = new CostumePrincessPeachCrown();
 	public static final Item PRINCESS_DAISY_CROWN = new CostumeSimple("princess_daisy_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item ROSALINA_CROWN = new CostumeSimple("rosalina_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item PINK_GOLD_PEACH_CROWN = new CostumeSimple("pink_gold_peach_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
