@@ -424,6 +424,9 @@
     "item.mubble.remix_disc_nb_sweden.desc": "C418 - Sweden (NoteBlock Remix)",
     "item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
+    "//item.mubble.toad_spawn_egg":"Toad Spawn Egg",
+    "//item.mubble.chincho_spawn_egg":"Chincho Spawn Egg",
+
     "comment": "COSTUMES",
     "item.mubble.headphones": "耳機",
     "//item.mubble.christmas_hat": "<newline>",
