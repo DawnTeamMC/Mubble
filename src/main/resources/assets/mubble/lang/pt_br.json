@@ -424,8 +424,8 @@
     "item.mubble.remix_disc_nb_sweden.desc": "C418 - Sweden (NoteBlock Remix)",
     "item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
-    "//item.mubble.toad_spawn_egg":"Toad Spawn Egg",
-    "//item.mubble.chincho_spawn_egg":"Chincho Spawn Egg",
+    "//item.mubble.toad_spawn_egg":"Ovo de Gerar Toad",
+    "//item.mubble.chincho_spawn_egg":"Ovo de Gerar Chincho",
 
     "comment": "COSTUMES",
     "item.mubble.headphones": "Fones de Ouvido",
@@ -462,7 +462,7 @@
     "comment": "ENTITIES",
     "entity.mubble.toad": "Toad",
     "entity.mubble.chincho": "Chincho",
-    "//entity.mubble.flying_block": "Flying Block",
+    "entity.mubble.flying_block": "Bloco Voador",
 
     "comment": "SUBTITLES",
     "subtitles.block.question_block.mubble.loot.power_up": "Bloco de ? dropou um power up",
