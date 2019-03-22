@@ -1,5 +1,6 @@
-package hugman.mod.init;
+package hugman.mod.init.technical;
 
+import hugman.mod.init.elements.MubbleSounds;
 import net.minecraft.block.SoundType;
 import net.minecraft.init.SoundEvents;
 

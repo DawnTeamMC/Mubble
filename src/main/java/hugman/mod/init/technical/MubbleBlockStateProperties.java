@@ -1,4 +1,4 @@
-package hugman.mod.init;
+package hugman.mod.init.technical;
 
 import hugman.mod.objects.state.properties.SlabVerticalType;
 import net.minecraft.state.BooleanProperty;

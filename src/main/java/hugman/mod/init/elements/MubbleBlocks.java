@@ -1,8 +1,10 @@
-package hugman.mod.init;
+package hugman.mod.init.elements;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import hugman.mod.init.technical.MubbleSoundTypes;
+import hugman.mod.init.technical.MubbleTabs;
 import hugman.mod.objects.block.BlockBalloon;
 import hugman.mod.objects.block.BlockBrick;
 import hugman.mod.objects.block.BlockCandyCanePillar;
@@ -401,11 +403,17 @@ public class MubbleBlocks
     
     
     public static final Block KORETATO_BLOCK = new BlockKoretato();
+    public static final Block POTATO_FLOWER = new BlockFlower("potato_flower");
     
     public static void register(Block block)
     {
         Item.Properties group = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
         BLOCKS.add(block);
         MubbleItems.ITEMS.add(new ItemBlock(block, group).setRegistryName(block.getRegistryName()));
+    }
+    
+    public static void registerWithoutItem(Block block)
+    {
+        BLOCKS.add(block);
     }
 }
