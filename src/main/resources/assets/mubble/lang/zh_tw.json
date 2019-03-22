@@ -195,7 +195,6 @@
     "//block.mubble.tomato": "<newline>",
     "//block.mubble.salad": "<newline>",
     "//block.mubble.cheese_block": "<newline>",
-    "//block.mubble.unstable_stone": "<newline>",
     "//block.mubble.ultimatum_portal": "<newline>",
     "//block.mubble.blue_balloon": "<newline>",
     "//block.mubble.light_blue_balloon": "<newline>",
@@ -340,8 +339,8 @@
     "//block.mubble.iron_puyo": "<newline>",
     "//block.mubble.puyo_block": "<newline>",
 
-    "//block.mubble.rewind_block": "<newline>",
     "block.mubble.koretato_block": "Koretato塊",
+    "//block.mubble.potato_flower": "Potato Flower",
 
     "comment": "ITEMS",
     "item.mubble.vanadium": "釩",

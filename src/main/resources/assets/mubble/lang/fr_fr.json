@@ -195,7 +195,6 @@
     "block.mubble.tomato": "Tomate",
     "block.mubble.salad": "Salade",
     "block.mubble.cheese_block": "Bloc de fromage",
-    "block.mubble.unstable_stone": "Roche instable",
     "block.mubble.ultimatum_portal": "Portail de l'Utimatum",
     "block.mubble.blue_balloon": "Ballon bleu",
     "block.mubble.light_blue_balloon": "Ballon bleu clair",
@@ -341,6 +340,7 @@
     "block.mubble.puyo_block": "Block Puyo",
 
     "block.mubble.koretato_block": "Bloc Koretato",
+    "//block.mubble.potato_flower": "Potato Flower",
 
     "comment": "ITEMS",
     "item.mubble.vanadium": "Vanadium",

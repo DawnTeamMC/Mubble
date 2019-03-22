@@ -195,7 +195,6 @@
     "block.mubble.tomato": "Tomaten",
     "block.mubble.salad": "Salade",
     "block.mubble.cheese_block": "Kaasblok",
-    "block.mubble.unstable_stone": "Onstabiel steen",
     "block.mubble.ultimatum_portal": "Ultimatumportaal",
     "block.mubble.blue_balloon": "Blauwe ballon",
     "block.mubble.light_blue_balloon": "Lichtblauwe ballon",
@@ -340,8 +339,8 @@
     "block.mubble.iron_puyo": "IJzere puyo",
     "block.mubble.puyo_block": "Puyoblok",
 
-    "block.mubble.rewind_block": "Terugspoelblok",
     "block.mubble.koretato_block": "Koretato-blok",
+    "//block.mubble.potato_flower": "Potato Flower",
 
     "comment": "ITEMS",
     "item.mubble.vanadium": "Vanadium",

@@ -195,7 +195,6 @@
     "block.mubble.tomato": "Tomates",
     "block.mubble.salad": "Salada",
     "block.mubble.cheese_block": "Bloco de Queijo",
-    "block.mubble.unstable_stone": "Pedra Instável",
     "block.mubble.ultimatum_portal": "Portal Ultimatum",
     "block.mubble.blue_balloon": "Balão Azul",
     "block.mubble.light_blue_balloon": "Balão Azul Claro",
@@ -340,8 +339,8 @@
     "block.mubble.iron_puyo": "Puyo Ferro",
     "block.mubble.puyo_block": "Bloco de Puyo",
 
-    "block.mubble.rewind_block": "Bloco de Rewind",
     "block.mubble.koretato_block": "Bloco Koretato",
+    "//block.mubble.potato_flower": "Potato Flower",
 
     "comment": "ITEMS",
     "item.mubble.vanadium": "Vanadium",

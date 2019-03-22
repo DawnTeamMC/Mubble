@@ -195,7 +195,6 @@
     "//block.mubble.tomato": "<newline>",
     "//block.mubble.salad": "<newline>",
     "//block.mubble.cheese_block": "<newline>",
-    "//block.mubble.unstable_stone": "<newline>",
     "//block.mubble.ultimatum_portal": "<newline>",
     "//block.mubble.blue_balloon": "<newline>",
     "//block.mubble.light_blue_balloon": "<newline>",
@@ -342,6 +341,7 @@
     "//block.mubble.puyo_block": "<newline>",
     
     "block.mubble.koretato_block": "patete qui vi",
+    "//block.mubble.potato_flower": "Potato Flower",
 
     "comment": "ITEMS",
     "item.mubble.vanadium": "mincraf minerai cool pourpré",
