@@ -1,8 +1,8 @@
 package hugman.mod.objects.entity;
 
-import hugman.mod.init.MubbleEntities;
-import hugman.mod.init.MubbleLootTables;
-import hugman.mod.init.MubbleSounds;
+import hugman.mod.init.elements.MubbleEntities;
+import hugman.mod.init.elements.MubbleSounds;
+import hugman.mod.init.technical.MubbleLootTables;
 import net.minecraft.entity.CreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;

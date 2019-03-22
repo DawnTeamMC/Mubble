@@ -1,8 +1,8 @@
 package hugman.mod.objects.costume;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleCostumes;
-import hugman.mod.init.MubbleTabs;
+import hugman.mod.init.elements.MubbleCostumes;
+import hugman.mod.init.technical.MubbleTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -58,7 +58,7 @@ public class CostumeSimple extends Item
         if (itemstack1.isEmpty())
         {
            playerIn.setItemStackToSlot(armorType, itemstack.copy());
-           itemstack.setCount(0);
+           itemstack.shrink(1);
            worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, sound, SoundCategory.PLAYERS, 1f, 1f);
            if(this == MubbleCostumes.SNORLAX_HAT && "Snorlax_Lover".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.snorlax_hat.secret_status", new Object[0]), true);
            if(this == MubbleCostumes.MAYRO_CAP && "MayroSMM".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.mayro_cap.secret_status", new Object[0]), true);

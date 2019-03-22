@@ -1,9 +1,9 @@
 package hugman.mod.objects.entity;
 
-import hugman.mod.init.MubbleEntities;
-import hugman.mod.init.MubbleItems;
-import hugman.mod.init.MubbleLootTables;
-import hugman.mod.init.MubbleSounds;
+import hugman.mod.init.elements.MubbleEntities;
+import hugman.mod.init.elements.MubbleItems;
+import hugman.mod.init.elements.MubbleSounds;
+import hugman.mod.init.technical.MubbleLootTables;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -80,6 +80,7 @@ public class EntityToad extends EntityAnimal
     @Override
     public float getEyeHeight()
     {
+    	if(this.isChild()) return 0.75f;
         return 1.25f;
     }
     

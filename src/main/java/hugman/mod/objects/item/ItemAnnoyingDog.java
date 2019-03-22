@@ -3,9 +3,9 @@ package hugman.mod.objects.item;
 import java.util.Random;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleItems;
-import hugman.mod.init.MubbleSounds;
-import hugman.mod.init.MubbleTabs;
+import hugman.mod.init.elements.MubbleItems;
+import hugman.mod.init.elements.MubbleSounds;
+import hugman.mod.init.technical.MubbleTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

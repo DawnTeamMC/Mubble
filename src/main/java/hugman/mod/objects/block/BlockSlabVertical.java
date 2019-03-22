@@ -5,8 +5,8 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlockStateProperties;
-import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.elements.MubbleBlocks;
+import hugman.mod.init.technical.MubbleBlockStateProperties;
 import hugman.mod.objects.state.properties.SlabVerticalType;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;

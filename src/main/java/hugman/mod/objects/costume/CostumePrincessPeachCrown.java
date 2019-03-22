@@ -1,6 +1,6 @@
 package hugman.mod.objects.costume;
 
-import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.elements.MubbleBlocks;
 import hugman.mod.objects.block.BlockKoretato;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

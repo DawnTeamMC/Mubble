@@ -1,7 +1,7 @@
 package hugman.mod.objects.block;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.elements.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.BlockItemUseContext;

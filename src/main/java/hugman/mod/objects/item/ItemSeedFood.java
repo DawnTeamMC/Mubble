@@ -1,9 +1,9 @@
 package hugman.mod.objects.item;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlocks;
-import hugman.mod.init.MubbleItems;
-import hugman.mod.init.MubbleTabs;
+import hugman.mod.init.elements.MubbleBlocks;
+import hugman.mod.init.elements.MubbleItems;
+import hugman.mod.init.technical.MubbleTabs;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

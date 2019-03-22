@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import hugman.mod.init.MubbleBlocks;
-import hugman.mod.init.MubbleEntities;
+import hugman.mod.init.elements.MubbleBlocks;
+import hugman.mod.init.elements.MubbleEntities;
 import hugman.mod.objects.block.BlockFlying;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAnvil;
@@ -128,7 +128,7 @@ public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnD
 					return;
 				}
 			}
-			if (!this.hasNoGravity()) this.motionY += (double)0.04F;
+			if (!this.hasNoGravity()) this.motionY += (double)0.01F;
 			this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
 			if (!this.world.isRemote)
 			{
@@ -163,7 +163,7 @@ public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnD
 
 				this.motionX *= (double)0.7F;
 				this.motionZ *= (double)0.7F;
-				this.motionY *= -0.5D;
+				this.motionY *= -0.2D;
 				if (iblockstate.getBlock() != Blocks.MOVING_PISTON)
 				{
 					this.remove();
