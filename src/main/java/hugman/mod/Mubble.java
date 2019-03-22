@@ -3,11 +3,12 @@ package hugman.mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import hugman.mod.init.MubbleBlocks;
-import hugman.mod.init.MubbleCostumes;
-import hugman.mod.init.MubbleEntities;
-import hugman.mod.init.MubbleItems;
-import hugman.mod.init.MubbleSounds;
+import hugman.mod.init.elements.MubbleBlocks;
+import hugman.mod.init.elements.MubbleCostumes;
+import hugman.mod.init.elements.MubbleEntities;
+import hugman.mod.init.elements.MubbleItems;
+import hugman.mod.init.elements.MubbleSounds;
+import hugman.mod.init.technical.MubbleBlockColors;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -37,6 +38,7 @@ public class Mubble
     private void clientSetup(final FMLClientSetupEvent event)
     {
     	MubbleEntities.registerRenders();
+    	MubbleBlockColors.init();
     }
 	
     public static Logger getLogger()

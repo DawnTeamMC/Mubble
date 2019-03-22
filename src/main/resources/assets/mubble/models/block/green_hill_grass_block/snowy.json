@@ -1,9 +1,10 @@
 {
 	"parent": "block/cube_bottom_top",
-	"textures": {
-		"top": "mubble:block/green_hill_grass_block/snowy/top",
-		"side": "mubble:block/green_hill_grass_block/snowy/side",
+	"textures":
+	{
+		"particle": "mubble:block/green_hill_dirt",
 		"bottom": "mubble:block/green_hill_dirt",
-		"particle": "mubble:block/green_hill_dirt"
+		"top": "mubble:block/green_hill_grass_block/top",
+		"side": "mubble:block/green_hill_grass_block/snowy_side"
 	}
 }

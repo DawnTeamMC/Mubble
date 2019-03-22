@@ -3,7 +3,7 @@ package hugman.mod.objects.block;
 import java.util.Random;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.elements.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -71,5 +71,5 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     {
     	if(this == MubbleBlocks.GREEN_HILL_GRASS_BLOCK) return MubbleBlocks.GREEN_HILL_DIRT;
     	else return Blocks.DIRT;
-     }
+    }
 }
