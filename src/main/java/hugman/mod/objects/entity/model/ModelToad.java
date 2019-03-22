@@ -59,7 +59,8 @@ public class ModelToad extends ModelBase
     	if (this.isChild)
         {
         	GlStateManager.pushMatrix();
-            GlStateManager.translatef(0.0F, 8.0F * scale, 0.0F);
+            GlStateManager.scalef(0.75F, 0.75F, 0.75F);
+            GlStateManager.translatef(0.0F, 13.0F * scale, 0.0F);
         }
         this.head.render(scale);
         this.hat.render(scale);
