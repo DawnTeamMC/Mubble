@@ -1,0 +1,7 @@
+{
+	"parent": "item/handheld_rod",
+	"textures":
+	{
+		"layer0": "mubble:item/baguette"
+	}
+}

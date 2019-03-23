@@ -23,7 +23,7 @@ public class MubbleItems
 {
     public static final List<Item> ITEMS = new ArrayList<Item>();
     
-    public static final Item BANDAGE = new ItemBandage();
+    public static final Item BAGUETTE = new ItemFood("baguette", 6, 0.8F, false);
     public static final Item CARAMEL_CUBE = new ItemFood("caramel_cube", 4, 2.8f, false);
     public static final Item CREPE = new ItemFood("crepe", 3, 0.5f, false);
     public static final Item CHOCOLATE_CREPE = new ItemFood("chocolate_crepe", 8, 2f, false);
@@ -35,6 +35,7 @@ public class MubbleItems
     public static final Item CHEESE = new ItemFood("cheese", 2, 0.4F, false);
     public static final Item WHEAT_FLOUR = new ItemSimple("wheat_flour");
     public static final Item VANADIUM = new ItemSimple("vanadium");
+    public static final Item BANDAGE = new ItemBandage();
     public static final Item TOTEM_OF_ASCENDING = new ItemTotemOfAscending();
 
     public static final Item SUPER_MUSHROOM = new ItemFood("super_mushroom", 3, 1f, false).setPotionEffect(new PotionEffect(MobEffects.JUMP_BOOST, 550, 1), 1F);

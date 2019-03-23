@@ -19,6 +19,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -29,21 +30,28 @@ public class Mubble
 	public static final String MOD_PREFIX = MOD_ID + ":";
 	private static final Logger LOGGER = LogManager.getLogger();
 	
-	
     public Mubble()
     {        
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
     }
     
-    private void clientSetup(final FMLClientSetupEvent event)
-    {
-    	MubbleEntities.registerRenders();
-    }
-	
     public static Logger getLogger()
     {
         return LOGGER;
+    }
+    
+    private void clientSetup(final FMLClientSetupEvent event)
+    {
+    	MubbleEntities.registerRenders();
+    	LOGGER.info("clientSetup - Registered entities renders");
+    }
+    
+    @SubscribeEvent
+    public void serverPreSetup(final FMLServerAboutToStartEvent event)
+    {
+    	//MubbleDimensions.createFiles();
+    	//LOGGER.info("Created dimensions files");
     }
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
