@@ -340,7 +340,7 @@
     "block.mubble.puyo_block": "Puyoblok",
 
     "block.mubble.koretato_block": "Koretato-blok",
-    "//block.mubble.potato_flower": "Potato Flower",
+    "block.mubble.potato_flower": "Aardappelbloem",
 
     "comment": "ITEMS",
     "item.mubble.vanadium": "Vanadium",
@@ -491,10 +491,10 @@
     "advancements.mubble.get_super_crown.description": "Vind een super kroon",
     "advancements.mubble.get_bandage.title": "Herstel",
     "advancements.mubble.get_bandage.description": "Verkrijg een verband",
-    "//advancements.mubble.get_all_crowns.title": "Super-Stars",
-    "//advancements.mubble.get_all_crowns.description": "Get all the crowns",
-    "//advancements.mubble.get_all_caps.title": "Super-Stars",
-    "//advancements.mubble.get_all_caps.description": "Get all the caps",
+    "advancements.mubble.get_all_crowns.title": "Heldinnen door middel van de kroon",
+    "advancements.mubble.get_all_crowns.description": "Verkrijg alle kronen",
+    "advancements.mubble.get_all_caps.title": "Supersterren",
+    "advancements.mubble.get_all_caps.description": "Verkrijg alle petten",
     "advancements.mubble.get_vanadium.title": "Vanadiums!",
     "advancements.mubble.get_vanadium.description": "Verkrijg vanadiums",
     "advancements.mubble.get_tetris_block.title": "Het is allemaal verbonden",
