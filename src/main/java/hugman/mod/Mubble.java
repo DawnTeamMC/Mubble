@@ -8,11 +8,12 @@ import hugman.mod.init.elements.MubbleCostumes;
 import hugman.mod.init.elements.MubbleEntities;
 import hugman.mod.init.elements.MubbleItems;
 import hugman.mod.init.elements.MubbleSounds;
-import hugman.mod.init.technical.MubbleBlockColors;
+import hugman.mod.init.technical.MubbleColorMaps;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,7 +39,6 @@ public class Mubble
     private void clientSetup(final FMLClientSetupEvent event)
     {
     	MubbleEntities.registerRenders();
-    	MubbleBlockColors.init();
     }
 	
     public static Logger getLogger()
@@ -46,8 +46,24 @@ public class Mubble
         return LOGGER;
     }
     
+    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
+    public static class ForgeRegistryEvents
+    {
+    	@SubscribeEvent
+        public static void blockColorsRegistry(final ColorHandlerEvent.Block event)
+        {
+        	MubbleColorMaps.registerBlockColors(event);
+        }
+        
+    	@SubscribeEvent
+        public static void itemColorsRegistry(final ColorHandlerEvent.Item event)
+        {
+        	MubbleColorMaps.registerItemColors(event);
+        }
+    }
+    
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents
+    public static class ModRegistryEvents
     {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> event)
