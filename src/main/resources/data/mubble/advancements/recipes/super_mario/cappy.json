@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:super_mario/cappy"
+		]
+	},
+	"criteria":
+	{
+		"has_super_star":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:super_star"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:super_mario/cappy"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_super_star",
+			"has_the_recipe"
+		]
+	]
+}

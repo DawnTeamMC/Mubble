@@ -1,0 +1,43 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:vanilla/polished_carbonite_stairs",
+			"mubble:vanilla/polished_carbonite_slab",
+			"mubble:vanilla/polished_carbonite_vertical_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_polished_carbonite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:polished_carbonite"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": 
+			{
+				"recipe": "mubble:vanilla/polished_carbonite_blocks"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_polished_carbonite",
+			"has_the_recipe"
+		]
+	]
+}

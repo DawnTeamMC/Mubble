@@ -15,6 +15,9 @@ import hugman.mod.objects.block.BlockEmpty;
 import hugman.mod.objects.block.BlockEmptyDrops;
 import hugman.mod.objects.block.BlockFalling;
 import hugman.mod.objects.block.BlockFlower;
+import hugman.mod.objects.block.BlockFlowerCloud;
+import hugman.mod.objects.block.BlockFlowerGold;
+import hugman.mod.objects.block.BlockFlowerPotato;
 import hugman.mod.objects.block.BlockGrass;
 import hugman.mod.objects.block.BlockHugeMushroom;
 import hugman.mod.objects.block.BlockKoretato;
@@ -275,8 +278,8 @@ public class MubbleBlocks
     public static final Block FIRE_FLOWER = new BlockFlower("fire_flower");
     public static final Block ICE_FLOWER = new BlockFlower("ice_flower");
     public static final Block BOOMERANG_FLOWER = new BlockFlower("boomerang_flower");
-    public static final Block CLOUD_FLOWER = new BlockFlower("cloud_flower");
-    public static final Block GOLD_FLOWER = new BlockFlower("gold_flower", 5);
+    public static final Block CLOUD_FLOWER = new BlockFlowerCloud();
+    public static final Block GOLD_FLOWER = new BlockFlowerGold();
     public static final Block WHITE_MUSHROOM = new BlockMushroom(EnumDyeColor.WHITE);
     public static final Block LIGHT_GRAY_MUSHROOM = new BlockMushroom(EnumDyeColor.LIGHT_GRAY);
     public static final Block GRAY_MUSHROOM = new BlockMushroom(EnumDyeColor.GRAY);
@@ -403,7 +406,7 @@ public class MubbleBlocks
     
     
     public static final Block KORETATO_BLOCK = new BlockKoretato();
-    public static final Block POTATO_FLOWER = new BlockFlower("potato_flower");
+    public static final Block POTATO_FLOWER = new BlockFlowerPotato();
     
     public static void register(Block block)
     {

@@ -1,0 +1,55 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:super_mario/light_block"
+		]
+	},
+	"criteria":
+	{
+		"has_sea_lantern":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:sea_lantern"
+					}
+				]
+			}
+		},
+		"has_white_concrete":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:white_concrete"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:super_mario/light_block"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_sea_lantern",
+			"has_white_concrete",
+			"has_the_recipe"
+		]
+	]
+}

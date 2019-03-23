@@ -6,10 +6,11 @@ import net.minecraft.block.ILiquidContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Fluids;
-import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -20,6 +21,8 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.IWorldReaderBase;
+import net.minecraft.world.World;
 
 public class BlockSpring extends BlockDirectional implements IBucketPickupHandler, ILiquidContainer
 {
@@ -137,10 +140,39 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
     }
     
     @Override
-    public IBlockState getStateForPlacement(BlockItemUseContext context)
+    public boolean isValidPosition(IBlockState state, IWorldReaderBase worldIn, BlockPos pos)
     {
-    	EnumFacing enumfacing = context.getFace();
-        IFluidState ifluidstate = context.getWorld().getFluidState(context.getPos());
-    	return this.getDefaultState().with(FACING, enumfacing).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
+        EnumFacing enumfacing = state.get(FACING);
+        BlockPos blockpos = pos.offset(enumfacing.getOpposite());
+        IBlockState iblockstate = worldIn.getBlockState(blockpos);
+        return iblockstate.getBlockFaceShape(worldIn, blockpos, enumfacing) == BlockFaceShape.SOLID && !isExceptBlockForAttachWithPiston(iblockstate.getBlock());
+    }
+    
+    public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+    {
+        return facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
+    }
+    
+    @Override
+    public void onEntityCollision(IBlockState state, World worldIn, BlockPos pos, Entity entityIn)
+    {
+    	switch (state.get(FACING))
+    	{
+		case UP:
+			entityIn.motionY = 1.5D;
+		case DOWN:
+			entityIn.motionY = -1.5D;
+		case NORTH:
+			entityIn.motionZ = -1.5D;
+		case SOUTH:
+			entityIn.motionZ = 1.5D;
+		case EAST:
+			entityIn.motionX = 1.5D;
+		case WEST:
+			entityIn.motionX = -1.5D;
+		default:
+			break;
+		}
+    	entityIn.fallDistance = 0f;
     }
 }

@@ -1,0 +1,55 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:super_mario/princess_daisy_crown"
+		]
+	},
+	"criteria":
+	{
+		"has_gold_ingot":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:gold_ingot"
+					}
+				]
+			}
+		},
+		"has_emerald":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:emerald"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:super_mario/princess_daisy_crown"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_gold_ingot",
+			"has_emerald",
+			"has_the_recipe"
+		]
+	]
+}

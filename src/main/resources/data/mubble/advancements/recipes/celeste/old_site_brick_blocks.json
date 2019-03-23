@@ -1,0 +1,44 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:celeste/old_site_brick_stairs",
+			"mubble:celeste/old_site_brick_slab",
+			"mubble:celeste/old_site_brick_vertical_slab",
+			"mubble:celeste/old_site_brick_wall"
+		]
+	},
+	"criteria":
+	{
+		"has_old_site_bricks":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:old_site_bricks"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": 
+			{
+				"recipe": "mubble:celeste/old_site_brick_blocks"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_old_site_bricks",
+			"has_the_recipe"
+		]
+	]
+}

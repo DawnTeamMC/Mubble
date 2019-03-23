@@ -23,7 +23,7 @@
 		},
 		"O":
 		{
-			"item": "mubble:vanadium"
+			"tag": "forge:gems/vanadium"
 		}
 	},
 	"result":

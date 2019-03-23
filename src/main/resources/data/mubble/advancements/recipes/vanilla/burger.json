@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:vanilla/burger"
+		]
+	},
+	"criteria":
+	{
+		"has_bread":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:bread"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:vanilla/burger"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_bread",
+			"has_the_recipe"
+		]
+	]
+}

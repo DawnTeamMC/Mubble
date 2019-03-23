@@ -1,0 +1,44 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:vanilla/blunite_stairs",
+			"mubble:vanilla/blunite_slab",
+			"mubble:vanilla/blunite_vertical_slab",
+			"mubble:vanilla/blunite_wall"
+		]
+	},
+	"criteria":
+	{
+		"has_blunite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:blunite"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": 
+			{
+				"recipe": "mubble:vanilla/blunite_blocks"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_blunite",
+			"has_the_recipe"
+		]
+	]
+}

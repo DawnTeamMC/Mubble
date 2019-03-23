@@ -1,0 +1,55 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:sonic/yellow_studiopolis_clapper"
+		]
+	},
+	"criteria":
+	{
+		"has_yellow_concrete":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:yellow_concrete"
+					}
+				]
+			}
+		},
+		"has_black_concrete":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:black_concrete"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:sonic/yellow_studiopolis_clapper"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_yellow_concrete",
+			"has_black_concrete",
+			"has_the_recipe"
+		]
+	]
+}

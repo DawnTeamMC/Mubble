@@ -1,0 +1,56 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:vanilla/white_bricks",
+			"mubble:vanilla/light_gray_bricks",
+			"mubble:vanilla/gray_bricks",
+			"mubble:vanilla/black_bricks",
+			"mubble:vanilla/brown_bricks",
+			"mubble:vanilla/red_bricks",
+			"mubble:vanilla/orange_bricks",
+			"mubble:vanilla/yellow_bricks",
+			"mubble:vanilla/lime_bricks",
+			"mubble:vanilla/green_bricks",
+			"mubble:vanilla/cyan_bricks",
+			"mubble:vanilla/light_blue_bricks",
+			"mubble:vanilla/blue_bricks",
+			"mubble:vanilla/purple_bricks",
+			"mubble:vanilla/magenta_bricks",
+			"mubble:vanilla/pink_bricks"
+		]
+	},
+	"criteria":
+	{
+		"has_bricks":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:bricks"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:vanilla/bricks"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_bricks",
+			"has_the_recipe"
+		]
+	]
+}

@@ -1,0 +1,61 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:tetris/white_tetris_block",
+			"mubble:tetris/light_gray_tetris_block",
+			"mubble:tetris/gray_tetris_block",
+			"mubble:tetris/black_tetris_block",
+			"mubble:tetris/brown_tetris_block",
+			"mubble:tetris/red_tetris_block",
+			"mubble:tetris/orange_tetris_block",
+			"mubble:tetris/yellow_tetris_block",
+			"mubble:tetris/yellow_tetris_block",
+			"mubble:tetris/lime_tetris_block",
+			"mubble:tetris/green_tetris_block",
+			"mubble:tetris/cyan_tetris_block",
+			"mubble:tetris/light_blue_tetris_block",
+			"mubble:tetris/blue_tetris_block",
+			"mubble:tetris/purple_tetris_block",
+			"mubble:tetris/magenta_tetris_block",
+			"mubble:tetris/pink_tetris_block",
+			"mubble:tetris/japanese_tetris_cushion",
+			"mubble:tetris/rainbow_tetris_scaffolding",
+			"mubble:tetris/monochrome_tetris_scaffolding",
+			"mubble:tetris/tetris_glass"
+		]
+	},
+	"criteria":
+	{
+		"has_vanadium":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:vanadium"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe":"mubble:tetris/tetris_blocks"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_vanadium",
+			"has_the_recipe"
+		]
+	]
+}

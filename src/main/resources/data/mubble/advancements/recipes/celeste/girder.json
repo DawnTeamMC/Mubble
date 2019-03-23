@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:celeste/girder"
+		]
+	},
+	"criteria":
+	{
+		"has_iron_bars":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:iron_bars"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:celeste/girder"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_iron_bars",
+			"has_the_recipe"
+		]
+	]
+}

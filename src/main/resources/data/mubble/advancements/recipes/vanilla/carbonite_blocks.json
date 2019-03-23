@@ -1,0 +1,44 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:vanilla/carbonite_stairs",
+			"mubble:vanilla/carbonite_slab",
+			"mubble:vanilla/carbonite_vertical_slab",
+			"mubble:vanilla/carbonite_wall"
+		]
+	},
+	"criteria":
+	{
+		"has_carbonite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:carbonite"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": 
+			{
+				"recipe": "mubble:vanilla/carbonite_blocks"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_carbonite",
+			"has_the_recipe"
+		]
+	]
+}

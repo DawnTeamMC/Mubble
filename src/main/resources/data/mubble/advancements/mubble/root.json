@@ -1,0 +1,54 @@
+{
+	"display":
+	{
+		"icon":
+		{
+			"item": "mubble:question_block"
+		},
+		"title":
+		{
+			"translate": "advancements.mubble.root.title"
+		},
+		"description":
+		{
+			"translate": "advancements.mubble.root.description"
+		},
+		"background": "mubble:textures/gui/advancements/backgrounds/mubble.png"
+	},
+	"criteria":
+	{
+		"has_blunite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:blunite"
+					}
+				]
+			}
+		},
+		"has_carbonite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:carbonite"
+					}
+				]
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_blunite",
+			"has_carbonite"
+		]
+	]
+}

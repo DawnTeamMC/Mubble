@@ -1,0 +1,44 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:castlevania/medusa_brick_stairs",
+			"mubble:castlevania/medusa_brick_slab",
+			"mubble:castlevania/medusa_brick_vertical_slab",
+			"mubble:castlevania/medusa_brick_wall"
+		]
+	},
+	"criteria":
+	{
+		"has_medusa_bricks":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:medusa_bricks"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": 
+			{
+				"recipe": "mubble:castlevania/medusa_brick_blocks"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_medusa_bricks",
+			"has_the_recipe"
+		]
+	]
+}

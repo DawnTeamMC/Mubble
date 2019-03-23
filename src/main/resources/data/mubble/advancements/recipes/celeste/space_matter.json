@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+	"recipes": [
+	  "mubble:celeste/space_matter"
+	]
+  },
+  "criteria": {
+	"has_super_star": {
+	  "trigger": "minecraft:inventory_changed",
+	  "conditions": {
+		"items": [
+		  {
+			"item": "mubble:super_star"
+		  }
+		]
+	  }
+	},
+	"has_the_recipe": {
+	  "trigger": "minecraft:recipe_unlocked",
+	  "conditions": {
+		"recipe": "mubble:celeste/space_matter"
+	  }
+	}
+  },
+  "requirements": [
+	[
+	  "has_super_star",
+	  "has_the_recipe"
+	]
+  ]
+}

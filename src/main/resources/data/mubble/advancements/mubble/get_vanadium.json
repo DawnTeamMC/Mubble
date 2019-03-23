@@ -1,0 +1,34 @@
+{
+	"parent": "mubble:mubble/root",
+	"display":
+	{
+		"icon":
+		{
+			"item": "mubble:vanadium"
+		},
+		"title":
+		{
+			"translate": "advancements.mubble.get_vanadium.title"
+		},
+		"description":
+		{
+			"translate": "advancements.mubble.get_vanadium.description"
+		}
+	},
+	"criteria":
+	{
+		"has_vanadium":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"tag": "forge:gems/vanadium"
+					}
+				]
+			}
+		}
+	}
+}
