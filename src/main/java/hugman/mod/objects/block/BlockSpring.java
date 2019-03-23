@@ -1,5 +1,6 @@
 package hugman.mod.objects.block;
 
+import hugman.mod.init.elements.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
@@ -7,15 +8,18 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Fluids;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -148,9 +152,18 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
         return iblockstate.getBlockFaceShape(worldIn, blockpos, enumfacing) == BlockFaceShape.SOLID && !isExceptBlockForAttachWithPiston(iblockstate.getBlock());
     }
     
+    @Override
     public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
     {
         return facing.getOpposite() == stateIn.get(FACING) && !stateIn.isValidPosition(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
+    }
+    
+    @Override
+    public IBlockState getStateForPlacement(BlockItemUseContext context)
+    {
+        IFluidState fluidState = context.getWorld().getFluidState(context.getPos());
+        IBlockState blockState = this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(fluidState.getFluid() == Fluids.WATER));
+        return blockState.with(FACING, context.getFace());
     }
     
     @Override
@@ -160,19 +173,30 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
     	{
 		case UP:
 			entityIn.motionY = 1.5D;
+			break;
 		case DOWN:
 			entityIn.motionY = -1.5D;
+			break;
 		case NORTH:
 			entityIn.motionZ = -1.5D;
+			entityIn.motionY = 0.2D;
+			break;
 		case SOUTH:
 			entityIn.motionZ = 1.5D;
+			entityIn.motionY = 0.2D;
+			break;
 		case EAST:
 			entityIn.motionX = 1.5D;
+			entityIn.motionY = 0.2D;
+			break;
 		case WEST:
 			entityIn.motionX = -1.5D;
+			entityIn.motionY = 0.2D;
+			break;
 		default:
 			break;
 		}
     	entityIn.fallDistance = 0f;
+    	worldIn.playSound((EntityPlayer)null, pos, MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_HIGH, SoundCategory.BLOCKS, 1f, 1f);
     }
 }

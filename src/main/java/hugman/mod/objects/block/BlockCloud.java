@@ -18,8 +18,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -27,7 +25,7 @@ public class BlockCloud extends Block
 {
     public BlockCloud(String color)
     {
-        super(Properties.create(Material.GLASS).sound(SoundType.CLOTH).hardnessAndResistance(0f));
+        super(Properties.create(Material.GLASS).sound(SoundType.CLOTH).hardnessAndResistance(0f).doesNotBlockMovement());
         setRegistryName(Mubble.MOD_ID, color + "_cloud_block");
         MubbleBlocks.register(this);
     }
@@ -36,12 +34,6 @@ public class BlockCloud extends Block
     public boolean isFullCube(IBlockState state)
     {
     	return false;
-    }
-    
-    @Override
-    public VoxelShape getCollisionShape(IBlockState state, IBlockReader worldIn, BlockPos pos)
-    {
-    	return VoxelShapes.empty();
     }
     
     @Override
