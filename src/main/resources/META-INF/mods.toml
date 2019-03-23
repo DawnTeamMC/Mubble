@@ -1,6 +1,7 @@
 modLoader="javafml"
 loaderVersion="[25,)"
 issueTrackerURL="https://github.com/Hugman76/Mubble/issues"
+logoFile="logo.png"
 
 [[mods]]
 modId="mubble"
@@ -8,12 +9,9 @@ version="1.4-pre5"
 displayName="Mubble"
 updateJSONURL="https://raw.githubusercontent.com/Hugman76/Mubble/master/update.json"
 displayURL="https://minecraft.curseforge.com/projects/mubble"
-logoFile="assets/mubble/textures/gui/logo.png"
 credits="https://ftb.gamepedia.com/Mubble/Credits"
 authors="Hugman_76"
-description='''
-Discover the Nintendo Universe and way more.
-'''
+description='''Discover the Nintendo Universe and way more.'''
 
 [[dependencies.mubble]]
 modId="forge"
