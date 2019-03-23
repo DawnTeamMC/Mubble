@@ -1,10 +1,8 @@
-package hugman.mod.init.elements;
+package hugman.mod.init;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import hugman.mod.init.technical.MubbleSoundTypes;
-import hugman.mod.init.technical.MubbleTabs;
 import hugman.mod.objects.block.BlockBalloon;
 import hugman.mod.objects.block.BlockBrick;
 import hugman.mod.objects.block.BlockCandyCanePillar;

@@ -1,4 +1,4 @@
-package hugman.mod.init.technical;
+package hugman.mod.init;
 
 import hugman.mod.Mubble;
 import net.minecraft.util.ResourceLocation;

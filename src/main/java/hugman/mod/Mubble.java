@@ -3,12 +3,12 @@ package hugman.mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import hugman.mod.init.elements.MubbleBlocks;
-import hugman.mod.init.elements.MubbleCostumes;
-import hugman.mod.init.elements.MubbleEntities;
-import hugman.mod.init.elements.MubbleItems;
-import hugman.mod.init.elements.MubbleSounds;
-import hugman.mod.init.technical.MubbleColorMaps;
+import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleColorMaps;
+import hugman.mod.init.MubbleCostumes;
+import hugman.mod.init.MubbleEntities;
+import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -53,12 +53,14 @@ public class Mubble
         public static void blockColorsRegistry(final ColorHandlerEvent.Block event)
         {
         	MubbleColorMaps.registerBlockColors(event);
+        	LOGGER.info("Registered the color maps for blocks");
         }
         
     	@SubscribeEvent
         public static void itemColorsRegistry(final ColorHandlerEvent.Item event)
         {
         	MubbleColorMaps.registerItemColors(event);
+        	LOGGER.info("Registered the color maps for items");
         }
     }
     
@@ -69,19 +71,23 @@ public class Mubble
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> event)
         {
         	event.getRegistry().registerAll(MubbleBlocks.BLOCKS.toArray(new Block[0]));
+        	LOGGER.info("Registered blocks");
         }
         
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> event)
         {
         	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
+        	LOGGER.info("Registered items");
     		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
+        	LOGGER.info("Registered costumes");
         }
         
         @SubscribeEvent
         public static void onSoundsRegistry(final RegistryEvent.Register<SoundEvent> event)
         {
         	event.getRegistry().registerAll(MubbleSounds.SOUNDS.toArray(new SoundEvent[0]));
+        	LOGGER.info("Registered sounds");
         }
         
         @SubscribeEvent
@@ -89,6 +95,7 @@ public class Mubble
         {
         	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
         	MubbleEntities.registerEntity(registry);
+        	LOGGER.info("Registered entities");
         }
     }
 }

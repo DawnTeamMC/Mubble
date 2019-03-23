@@ -1,8 +1,8 @@
 package hugman.mod.objects.item;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.elements.MubbleItems;
-import hugman.mod.init.technical.MubbleTabs;
+import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubbleTabs;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 

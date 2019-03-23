@@ -1,4 +1,4 @@
-package hugman.mod.init.elements;
+package hugman.mod.init;
 
 import hugman.mod.Mubble;
 import hugman.mod.objects.entity.EntityChincho;

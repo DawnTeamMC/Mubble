@@ -1,8 +1,8 @@
 package hugman.mod.objects.block;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.elements.MubbleBlocks;
-import hugman.mod.init.elements.MubbleItems;
+import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleItems;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.IItemProvider;

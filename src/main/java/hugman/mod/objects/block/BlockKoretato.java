@@ -1,9 +1,9 @@
 package hugman.mod.objects.block;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.elements.MubbleBlocks;
-import hugman.mod.init.elements.MubbleCostumes;
-import hugman.mod.init.technical.MubbleBlockStateProperties;
+import hugman.mod.init.MubbleBlockStateProperties;
+import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleCostumes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.SoundType;

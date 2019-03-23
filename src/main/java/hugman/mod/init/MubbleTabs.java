@@ -1,8 +1,5 @@
-package hugman.mod.init.technical;
+package hugman.mod.init;
 
-import hugman.mod.init.elements.MubbleBlocks;
-import hugman.mod.init.elements.MubbleCostumes;
-import hugman.mod.init.elements.MubbleItems;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 

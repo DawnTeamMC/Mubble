@@ -1,7 +1,7 @@
 package hugman.mod.objects.block;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.elements.MubbleBlocks;
+import hugman.mod.init.MubbleBlocks;
 
 public class BlockRotatedPillar extends net.minecraft.block.BlockRotatedPillar
 {

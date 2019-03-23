@@ -3,8 +3,8 @@ package hugman.mod.objects.block;
 import java.util.Random;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.elements.MubbleBlocks;
-import hugman.mod.init.technical.MubbleTags;
+import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

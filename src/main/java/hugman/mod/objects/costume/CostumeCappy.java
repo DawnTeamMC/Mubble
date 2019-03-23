@@ -2,7 +2,7 @@ package hugman.mod.objects.costume;
 
 import java.util.Random;
 
-import hugman.mod.init.elements.MubbleSounds;
+import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

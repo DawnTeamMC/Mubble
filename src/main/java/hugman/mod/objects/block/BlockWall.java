@@ -1,7 +1,7 @@
 package hugman.mod.objects.block;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.elements.MubbleBlocks;
+import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;

@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
-import hugman.mod.init.elements.MubbleBlocks;
-import hugman.mod.init.elements.MubbleEntities;
+import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleEntities;
 import hugman.mod.objects.block.BlockFlying;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAnvil;

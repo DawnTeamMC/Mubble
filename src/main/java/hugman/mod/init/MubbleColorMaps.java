@@ -1,6 +1,5 @@
-package hugman.mod.init.technical;
+package hugman.mod.init;
 
-import hugman.mod.init.elements.MubbleBlocks;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.world.GrassColors;

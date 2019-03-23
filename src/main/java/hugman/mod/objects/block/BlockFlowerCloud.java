@@ -1,6 +1,6 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.init.technical.MubbleTags;
+import hugman.mod.init.MubbleTags;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

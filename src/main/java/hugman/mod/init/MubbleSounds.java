@@ -1,4 +1,4 @@
-package hugman.mod.init.elements;
+package hugman.mod.init;
 
 import java.util.ArrayList;
 import java.util.List;

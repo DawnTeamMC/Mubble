@@ -1,8 +1,8 @@
 package hugman.mod.objects.costume;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.elements.MubbleCostumes;
-import hugman.mod.init.technical.MubbleTabs;
+import hugman.mod.init.MubbleCostumes;
+import hugman.mod.init.MubbleTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;

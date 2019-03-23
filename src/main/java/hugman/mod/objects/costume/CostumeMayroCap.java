@@ -1,6 +1,6 @@
 package hugman.mod.objects.costume;
 
-import hugman.mod.init.technical.MubbleTags;
+import hugman.mod.init.MubbleTags;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;

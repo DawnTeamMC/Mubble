@@ -1,6 +1,6 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.init.elements.MubbleSounds;
+import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
