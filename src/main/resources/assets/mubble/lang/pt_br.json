@@ -340,7 +340,7 @@
     "block.mubble.puyo_block": "Bloco de Puyo",
 
     "block.mubble.koretato_block": "Bloco Koretato",
-    "//block.mubble.potato_flower": "Potato Flower",
+    "block.mubble.potato_flower": "Flor de Batata",
 
     "comment": "ITEMS",
     "item.mubble.vanadium": "Vanadium",
@@ -423,8 +423,8 @@
     "item.mubble.remix_disc_nb_sweden.desc": "C418 - Sweden (NoteBlock Remix)",
     "item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
-    "//item.mubble.toad_spawn_egg":"Ovo de Gerar Toad",
-    "//item.mubble.chincho_spawn_egg":"Ovo de Gerar Chincho",
+    "item.mubble.toad_spawn_egg":"Ovo de Gerar Toad",
+    "item.mubble.chincho_spawn_egg":"Ovo de Gerar Chincho",
 
     "comment": "COSTUMES",
     "item.mubble.headphones": "Fones de Ouvido",
@@ -493,10 +493,10 @@
     "advancements.mubble.get_bandage.description": "Obtenha uma bandagem",
     "advancements.mubble.get_all_caps.title": "Super-Estrelas",
     "advancements.mubble.get_all_caps.description": "Craftar todos os bonés",
-    "//advancements.mubble.get_all_crowns.title": "Heroines by Crown",
-    "//advancements.mubble.get_all_crowns.description": "Get all the crowns",
-    "//advancements.mubble.get_all_caps.title": "Super-Stars",
-    "//advancements.mubble.get_all_caps.description": "Get all the caps",
+    "advancements.mubble.get_all_crowns.title": "Heroinas pela Coroa",
+    "advancements.mubble.get_all_crowns.description": "Obtenha todas as coroas",
+    "advancements.mubble.get_all_caps.title": "Super-Estrelas",
+    "advancements.mubble.get_all_caps.description": "Obtenha todos os bonés",
     "advancements.mubble.get_tetris_block.title": "Está Tudo Conectado",
     "advancements.mubble.get_tetris_block.description": "Coloque em sua mão um Bloco de Tetris",
 
