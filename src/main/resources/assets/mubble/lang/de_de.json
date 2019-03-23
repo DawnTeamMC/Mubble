@@ -338,7 +338,7 @@
 	"block.mubble.puyo_block": "Puyo-block",
 
 	"block.mubble.koretato_block": "Koretato-block",
-	"//block.mubble.potato_flower": "Potato Flower",
+	"block.mubble.potato_flower": "Kartoffelblume",
 
 	"comment": "ITEMS",
 	"item.mubble.vanadium": "Vanadium",
@@ -465,7 +465,7 @@
     "subtitles.block.note_block.jump": "Notenblock genutzt",
 	"subtitles.block.question_block.mubble.loot.power_up": "?-block gibt Power-Up",
 	"subtitles.block.question_block.mubble.loot.coin": "?-block gibt Münze",
-    "//subtitles.block.spring.trigger": "Spring triggered",
+    "subtitles.block.spring.trigger": "Feder ausgelöst",
 	"subtitles.block.rewind_block.mubble.disappear": "Rückspulblock.mubble verschwindet",
 	"subtitles.block.rewind_block.mubble.reappear": "Rückspulblock.mubble erscheint wieder",
 	"subtitles.item.annoying_dog.disappear": "Nerviger Hund verschwindet",
@@ -490,10 +490,10 @@
 	"advancements.mubble.get_super_crown.description": "Finde eine Super-Krone",
 	"advancements.mubble.get_bandage.title": "Erholung",
 	"advancements.mubble.get_bandage.description": "Erhalte ein Verband",
-	"//advancements.mubble.get_all_crowns.title": "Heroines by Crown",
-	"//advancements.mubble.get_all_crowns.description": "Get all the crowns",
-	"//advancements.mubble.get_all_caps.title": "Super-Stars",
-	"//advancements.mubble.get_all_caps.description": "Get all the caps",
+	"advancements.mubble.get_all_crowns.title": "Heroin durch Kronen",
+	"advancements.mubble.get_all_crowns.description": "Besorge alle Kronen",
+	"advancements.mubble.get_all_caps.title": "Supersterne",
+	"advancements.mubble.get_all_caps.description": "Besorge alle Mützen",
 	"advancements.mubble.get_vanadium.title": "Vanadiums!",
 	"advancements.mubble.get_vanadium.description": "Beschaffe vanadiums",
 	"advancements.mubble.get_tetris_block.title": "Es Ist Alles Verbunden",
@@ -507,5 +507,5 @@
 	"item.mubble.snorlax_hat.secret_status": "Wie widersprüchlich... :)",
 	"item.mubble.bandana.secret_status": "Das ist für dich, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! Ich dachte, du hättest das schon auf dem Kopf, §6Evan§r!",
-	"item.mubble.mayro_cap.secret_status": "Komm schon, du bist der jenige der es am wenigsten braucht. Bist du's nicht, Mr. \"§6Sossie§r\"?"
+	"item.mubble.mayro_cap.secret_status": "Komm schon, du bist der jenige der es am wenigsten braucht. Bist du nicht Mr. \"§6Sossie§r\"?"
 }
