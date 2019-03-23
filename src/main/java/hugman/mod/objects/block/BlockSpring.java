@@ -197,6 +197,12 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
 			break;
 		}
     	entityIn.fallDistance = 0f;
-    	worldIn.playSound((EntityPlayer)null, pos, MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_HIGH, SoundCategory.BLOCKS, 1f, 1f);
+    	worldIn.playSound((EntityPlayer)null, pos, MubbleSounds.BLOCK_SPRING_TRIGGER, SoundCategory.BLOCKS, 1f, 1f);
+    }
+    
+    @Override
+    public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
+    {
+    	entityIn.fall(fallDistance, 0.0F);
     }
 }
