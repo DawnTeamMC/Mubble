@@ -1,5 +1,5 @@
 {
-	"parent": "item/handheld_rod",
+	"parent": "item/handheld",
 	"textures":
 	{
 		"layer0": "mubble:item/baguette"
