@@ -425,8 +425,8 @@
 	"item.mubble.remix_disc_nb_sweden.desc": "C418 - Sweden (NoteBlock Remix)",
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
-	"item.mubble.toad_spawn_egg":"Œuf de Toad",
-	"item.mubble.chincho_spawn_egg":"Œuf de Chincho",
+	"item.mubble.toad_spawn_egg":"Oeuf d'apparition de Toad",
+	"item.mubble.chincho_spawn_egg":"Oeuf d'apparition de Chincho",
 
 	"comment": "COSTUMES",
 	"item.mubble.headphones": "Casque audio",
