@@ -1,6 +1,6 @@
 {
 	"variants":
 	{
-		"": {"model": "mubble:ultimatum_portal"}
+		"": {"model": "mubble:block/ultimatum_portal"}
 	}
 }
