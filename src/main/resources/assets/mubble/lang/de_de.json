@@ -341,7 +341,7 @@
 	"block.mubble.potato_flower": "Kartoffelblume",
 
 	"comment": "ITEMS",
-	"//item.mubble.baguette": "Baguette",
+	"item.mubble.baguette": "Stangenweißbrot",
 	"item.mubble.vanadium": "Vanadium",
 	"item.mubble.bandage": "Verband",
 	"item.mubble.wheat_flour": "Weizenmehl",
