@@ -1,3 +1,7 @@
+[![](http://cf.way2muchnoise.eu/full_mubble_downloads.svg)](https://minecraft.curseforge.com/projects/mubble)
+[![](http://cf.way2muchnoise.eu/versions/Available%20For%20Minecraft_mubble_all.svg)](https://minecraft.curseforge.com/projects/mubble)
+[![](http://cf.way2muchnoise.eu/packs/mubble.svg)](https://minecraft.curseforge.com/projects/mubble)
+
 # What is Mubble?
 Mubble is a Minecraft mod offering new ways to players to build and experience the world of Minecraft with their favorite Nintendo franchises. Mubble also contain unique decoratives blocks and food items. With that in their hands, players are capable of building up the biggest cross-over world of their dreams! Almost every single block and item are available in survival through recipes.
 
