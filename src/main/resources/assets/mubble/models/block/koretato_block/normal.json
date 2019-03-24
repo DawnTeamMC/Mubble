@@ -2,10 +2,10 @@
 	"parent": "mubble:block/block_directional",
 	"textures":
 	{
-		"bottom": "mubble:block/koretato_block/normal/bottom",
-		"side": "mubble:block/koretato_block/normal/side",
-		"top": "mubble:block/koretato_block/normal/top",
+		"top": "mubble:block/koretato_block/normal/body",
+		"bottom": "mubble:block/koretato_block/normal/body",
 		"front": "mubble:block/koretato_block/normal/front",
-		"particle": "mubble:block/koretato_block/normal/side"
+		"side": "mubble:block/koretato_block/normal/body",
+		"particle": "mubble:block/koretato_block/normal/body"
 	}
 }
