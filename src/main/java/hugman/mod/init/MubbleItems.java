@@ -22,18 +22,20 @@ import net.minecraft.potion.PotionEffect;
 public class MubbleItems
 {
     public static final List<Item> ITEMS = new ArrayList<Item>();
-    
-    public static final Item BAGUETTE = new ItemFood("baguette", 6, 0.8F, false);
+
+    public static final Item WHEAT_FLOUR = new ItemSimple("wheat_flour");
+    public static final Item TOMATO = new ItemSeedFood("tomato", 3, 0.6f);
+    public static final Item SALAD = new ItemSeedFood("salad", 2, 0.7F);
+    //public static final Item RICE = new ItemSeedFood("rice", 1, 0.4F);
+    public static final Item CHEESE = new ItemFood("cheese", 2, 0.4F, false);
+    public static final Item BANANA = new ItemFood("banana", 4, 0.3F, false);
     public static final Item CARAMEL_CUBE = new ItemFood("caramel_cube", 4, 2.8f, false);
+    public static final Item BAGUETTE = new ItemFood("baguette", 6, 0.8F, false);
+    public static final Item BURGER = new ItemFood("burger", 7, 2f, false);
     public static final Item CREPE = new ItemFood("crepe", 3, 0.5f, false);
     public static final Item CHOCOLATE_CREPE = new ItemFood("chocolate_crepe", 8, 2f, false);
     public static final Item CARAMEL_CREPE = new ItemFood("caramel_crepe", 9, 3.4f, false);
     public static final Item CANDY_CANE = new ItemFood("candy_cane", 4, 1.8f, false);
-    public static final Item BURGER = new ItemFood("burger", 7, 2f, false);
-    public static final Item TOMATO = new ItemSeedFood("tomato", 3, 0.6f);
-    public static final Item SALAD = new ItemSeedFood("salad", 1, 0.2F);
-    public static final Item CHEESE = new ItemFood("cheese", 2, 0.4F, false);
-    public static final Item WHEAT_FLOUR = new ItemSimple("wheat_flour");
     public static final Item VANADIUM = new ItemSimple("vanadium");
     public static final Item BANDAGE = new ItemBandage();
     public static final Item TOTEM_OF_ASCENDING = new ItemTotemOfAscending();

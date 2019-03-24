@@ -20,6 +20,7 @@ public class BlockMushroom extends net.minecraft.block.BlockMushroom
         super(Properties.create(Material.PLANTS, color).doesNotBlockMovement().hardnessAndResistance(0).needsRandomTick().sound(SoundType.PLANT));
         setRegistryName(Mubble.MOD_ID, color.getTranslationKey() + "_mushroom");
         MubbleBlocks.register(this);
+        MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + color.getTranslationKey() + "_mushroom", this));
     }
     
     public BlockMushroom(String color, int light)
@@ -27,6 +28,7 @@ public class BlockMushroom extends net.minecraft.block.BlockMushroom
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).needsRandomTick().sound(SoundType.PLANT).lightValue(light));
         setRegistryName(Mubble.MOD_ID, color + "_mushroom");
         MubbleBlocks.register(this);
+        MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + color + "_mushroom", this));
     }
     
     @Override

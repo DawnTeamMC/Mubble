@@ -12,6 +12,7 @@ public class BlockFlower extends net.minecraft.block.BlockFlower
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT));
         setRegistryName(Mubble.MOD_ID, name);
         MubbleBlocks.register(this);
+        MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + name, this));
     }
     
     public BlockFlower(String name, int light)
@@ -19,5 +20,6 @@ public class BlockFlower extends net.minecraft.block.BlockFlower
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT).lightValue(light));
         setRegistryName(Mubble.MOD_ID, name);
         MubbleBlocks.register(this);
+        MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + name, this));
     }
 }

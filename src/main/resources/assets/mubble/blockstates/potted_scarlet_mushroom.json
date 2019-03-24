@@ -1,0 +1,11 @@
+{
+	"variants":
+	{
+		"":
+		[
+			{"model": "mubble:block/potted_scarlet_mushroom/0"},
+			{"model": "mubble:block/potted_scarlet_mushroom/1"},
+			{"model": "mubble:block/potted_scarlet_mushroom/2"}
+		]
+	}
+}

@@ -1,0 +1,7 @@
+{
+	"variants":
+	{
+		"powered=false": { "model": "mubble:block/palm_pressure_plate" },
+		"powered=true": { "model": "mubble:block/palm_pressure_plate_down" }
+	}
+}

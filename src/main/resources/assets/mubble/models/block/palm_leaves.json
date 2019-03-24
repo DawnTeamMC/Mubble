@@ -1,0 +1,7 @@
+{
+	"parent": "block/leaves",
+	"textures":
+	{
+		"all": "mubble:block/palm_leaves"
+	}
+}

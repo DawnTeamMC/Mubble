@@ -28,7 +28,7 @@ public class CostumePrincessPeachCrown extends CostumeSimple
         IBlockState iblockstate = world.getBlockState(blockpos);
         if (iblockstate.getBlock() == MubbleBlocks.KORETATO_BLOCK && !iblockstate.get(BlockKoretato.PRINCESS))
         {
-            world.spawnParticle(Particles.HEART, blockpos.getX() + 0.5D, blockpos.getY() + 0.3D, blockpos.getX() + 0.5D, 0.0D, 0.0D, 0.0D);
+            world.spawnParticle(Particles.HEART, (double)((float)blockpos.getX() + 1.1F), blockpos.getY() + 0.3D, (double)((float)blockpos.getZ() + 1.1F), 0.0D, 0.0D, 0.0D);
         	if (world.isRemote) return EnumActionResult.SUCCESS;
         	else
         	{

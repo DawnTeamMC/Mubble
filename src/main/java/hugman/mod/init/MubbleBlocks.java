@@ -5,13 +5,17 @@ import java.util.List;
 
 import hugman.mod.objects.block.BlockBalloon;
 import hugman.mod.objects.block.BlockBrick;
+import hugman.mod.objects.block.BlockButtonWood;
 import hugman.mod.objects.block.BlockCandyCanePillar;
 import hugman.mod.objects.block.BlockCloud;
 import hugman.mod.objects.block.BlockCrops;
 import hugman.mod.objects.block.BlockDirectional;
+import hugman.mod.objects.block.BlockDoor;
 import hugman.mod.objects.block.BlockEmpty;
 import hugman.mod.objects.block.BlockEmptyDrops;
 import hugman.mod.objects.block.BlockFalling;
+import hugman.mod.objects.block.BlockFence;
+import hugman.mod.objects.block.BlockFenceGate;
 import hugman.mod.objects.block.BlockFlower;
 import hugman.mod.objects.block.BlockFlowerCloud;
 import hugman.mod.objects.block.BlockFlowerGold;
@@ -19,11 +23,15 @@ import hugman.mod.objects.block.BlockFlowerPotato;
 import hugman.mod.objects.block.BlockGrass;
 import hugman.mod.objects.block.BlockHugeMushroom;
 import hugman.mod.objects.block.BlockKoretato;
+import hugman.mod.objects.block.BlockLeaves;
 import hugman.mod.objects.block.BlockMushroom;
 import hugman.mod.objects.block.BlockNote;
+import hugman.mod.objects.block.BlockPressurePlate;
 import hugman.mod.objects.block.BlockPuyo;
 import hugman.mod.objects.block.BlockQuestion;
+import hugman.mod.objects.block.BlockRotatedPillar;
 import hugman.mod.objects.block.BlockRotating;
+import hugman.mod.objects.block.BlockSapling;
 import hugman.mod.objects.block.BlockSimple;
 import hugman.mod.objects.block.BlockSlab;
 import hugman.mod.objects.block.BlockSlabVertical;
@@ -31,6 +39,8 @@ import hugman.mod.objects.block.BlockSpring;
 import hugman.mod.objects.block.BlockStairs;
 import hugman.mod.objects.block.BlockTetris;
 import hugman.mod.objects.block.BlockTetrisGlass;
+import hugman.mod.objects.block.BlockTrapDoor;
+import hugman.mod.objects.block.BlockUltimatumPortal;
 import hugman.mod.objects.block.BlockWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
@@ -48,6 +58,21 @@ public class MubbleBlocks
 
     public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK));
     public static final Block VANADIUM_ORE = new BlockSimple("vanadium_ore", Properties.from(Blocks.DIAMOND_ORE));
+    public static final Block PALM_PLANKS = new BlockSimple("palm_planks", Properties.from(Blocks.OAK_PLANKS));
+    public static final Block PALM_SAPLING = new BlockSapling("palm");
+    public static final Block PALM_LOG = new BlockRotatedPillar("palm_log", Properties.from(Blocks.OAK_LOG));
+    public static final Block STRIPPED_PALM_LOG = new BlockRotatedPillar("stripped_palm_log", Properties.from(MubbleBlocks.PALM_LOG));
+    public static final Block PALM_WOOD = new BlockRotatedPillar("palm_wood", Properties.from(MubbleBlocks.PALM_LOG));
+    public static final Block STRIPPED_PALM_WOOD = new BlockRotatedPillar("stripped_palm_wood", Properties.from(MubbleBlocks.PALM_WOOD));
+    public static final Block PALM_LEAVES = new BlockLeaves("palm");
+    public static final Block PALM_PRESSURE_PLATE = new BlockPressurePlate("palm");
+    public static final Block PALM_TRAPDOOR = new BlockTrapDoor("palm");
+    public static final Block PALM_BUTTON = new BlockButtonWood("palm");
+    public static final Block PALM_STAIRS = new BlockStairs("palm", MubbleBlocks.PALM_PLANKS);
+    public static final Block PALM_SLAB = new BlockSlab("palm", MubbleBlocks.PALM_PLANKS);
+    public static final Block PALM_FENCE_GATE = new BlockFenceGate("palm");
+    public static final Block PALM_FENCE = new BlockFence("palm");
+    public static final Block PALM_DOOR = new BlockDoor("palm");
     
     public static final Block WHITE_BRICKS = new BlockSimple("white_bricks", Properties.from(Blocks.BRICKS));
     public static final Block LIGHT_GRAY_BRICKS = new BlockSimple("light_gray_bricks", Properties.from(Blocks.BRICKS));
@@ -245,6 +270,7 @@ public class MubbleBlocks
     public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
     public static final Block TOMATO = new BlockCrops("tomato");
     public static final Block SALAD = new BlockCrops("salad");
+    //public static final Block RICE = new BlockCrops("rice");
     public static final Block CHEESE_BLOCK = new BlockSimple("cheese_block", Properties.create(Material.GROUND, MaterialColor.YELLOW).hardnessAndResistance(0.5f).sound(SoundType.SNOW));
     public static final Block WHITE_BALLOON = new BlockBalloon(EnumDyeColor.WHITE);
     public static final Block LIGHT_GRAY_BALLOON = new BlockBalloon(EnumDyeColor.LIGHT_GRAY);
@@ -262,6 +288,7 @@ public class MubbleBlocks
     public static final Block PURPLE_BALLOON = new BlockBalloon(EnumDyeColor.PURPLE);
     public static final Block MAGENTA_BALLOON = new BlockBalloon(EnumDyeColor.MAGENTA);
     public static final Block PINK_BALLOON = new BlockBalloon(EnumDyeColor.PINK);
+    public static final Block ULTIMATUM_PORTAL = new BlockUltimatumPortal();
     
     
     

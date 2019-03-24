@@ -1,0 +1,7 @@
+{
+	"parent": "block/flower_pot_cross",
+	"textures":
+	{
+		"plant": "mubble:block/magenta_mushroom"}
+	}
+}
