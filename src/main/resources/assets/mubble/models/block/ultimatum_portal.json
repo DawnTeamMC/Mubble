@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:block/horizontal_portal",
+	"textures":
+	{
+		"all": "mubble:block/ultimatum_portal"
+	}
+}

@@ -17,6 +17,6 @@ public class BlockFlowerGold extends BlockFlower
     @Override
     public void getDrops(IBlockState state, NonNullList<ItemStack> drops, World world, BlockPos pos, int fortune)
     {
-    	drops.add(new ItemStack(Items.GOLD_NUGGET, RANDOM.nextInt(2) + 1));
+    	drops.add(new ItemStack(Items.GOLD_NUGGET, RANDOM.nextInt(3) + 1));
     }
 }

@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleColorMaps;
 import hugman.mod.init.MubbleCostumes;
+import hugman.mod.init.MubbleDimensions;
 import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
@@ -15,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -104,6 +106,13 @@ public class Mubble
         	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
         	MubbleEntities.registerEntity(registry);
         	LOGGER.info("Registered entities");
+        }
+        
+        @SubscribeEvent
+        public static void onDimensionsRegistry(final RegistryEvent.Register<ModDimension> event)
+        {
+        	event.getRegistry().registerAll(MubbleDimensions.DIMENSIONS.toArray(new ModDimension[0]));
+        	LOGGER.info("Registered dimensions");
         }
     }
 }
