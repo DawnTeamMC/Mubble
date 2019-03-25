@@ -16,8 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -46,7 +46,7 @@ public class Mubble
     private void clientSetup(final FMLClientSetupEvent event)
     {
     	MubbleEntities.registerRenders();
-    	LOGGER.info("clientSetup - Registered entities renders");
+    	LOGGER.info("[REGISTRY] Registered entities renders (client side-only)");
     }
     
     @SubscribeEvent
@@ -63,14 +63,21 @@ public class Mubble
         public static void blockColorsRegistry(final ColorHandlerEvent.Block event)
         {
         	MubbleColorMaps.registerBlockColors(event);
-        	LOGGER.info("Registered the color maps for blocks");
+        	LOGGER.info("[REGISTRY] Registered the color maps for blocks");
         }
         
     	@SubscribeEvent
         public static void itemColorsRegistry(final ColorHandlerEvent.Item event)
         {
         	MubbleColorMaps.registerItemColors(event);
-        	LOGGER.info("Registered the color maps for items");
+        	LOGGER.info("[REGISTRY] Registered the color maps for items");
+        }
+        
+        @SubscribeEvent
+        public static void onDimensionsRegistry(final RegisterDimensionsEvent event)
+        {
+        	MubbleDimensions.registerDimensions();
+        	LOGGER.info("[REGISTRY] Registered dimensions");
         }
     }
     
@@ -81,23 +88,23 @@ public class Mubble
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> event)
         {
         	event.getRegistry().registerAll(MubbleBlocks.BLOCKS.toArray(new Block[0]));
-        	LOGGER.info("Registered blocks");
+        	LOGGER.info("[REGISTRY] Registered blocks");
         }
         
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> event)
         {
         	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
-        	LOGGER.info("Registered items");
+        	LOGGER.info("[REGISTRY] Registered items");
     		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
-        	LOGGER.info("Registered costumes");
+        	LOGGER.info("[REGISTRY] Registered costumes");
         }
         
         @SubscribeEvent
         public static void onSoundsRegistry(final RegistryEvent.Register<SoundEvent> event)
         {
         	event.getRegistry().registerAll(MubbleSounds.SOUNDS.toArray(new SoundEvent[0]));
-        	LOGGER.info("Registered sounds");
+        	LOGGER.info("[REGISTRY] Registered sounds");
         }
         
         @SubscribeEvent
@@ -105,14 +112,7 @@ public class Mubble
         {
         	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
         	MubbleEntities.registerEntity(registry);
-        	LOGGER.info("Registered entities");
-        }
-        
-        @SubscribeEvent
-        public static void onDimensionsRegistry(final RegistryEvent.Register<ModDimension> event)
-        {
-        	event.getRegistry().registerAll(MubbleDimensions.DIMENSIONS.toArray(new ModDimension[0]));
-        	LOGGER.info("Registered dimensions");
+        	LOGGER.info("[REGISTRY] Registered entities");
         }
     }
 }

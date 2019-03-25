@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values":
+	[
+		"#mubble:valid_ground/sapling",
+		"minecraft:sand",
+		"minecraft:red_sand"
+	]
+}

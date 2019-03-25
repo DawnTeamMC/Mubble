@@ -13,6 +13,7 @@ public class MubbleTags
     public static class Blocks
     {
         public static final Tag<Block> CLOUD_BLOCKS = tag("cloud_blocks");
+        public static final Tag<Block> VALID_GROUND_PALM_SAPLING = tag("valid_ground/palm_sapling");
 
         private static Tag<Block> tag(String name)
         {

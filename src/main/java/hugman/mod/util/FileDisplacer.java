@@ -11,10 +11,10 @@ import net.minecraft.client.Minecraft;
 
 public class FileDisplacer
 {
-	public static void copyToDimension(String dir, String file, int dim)
+	public static void copyToDimension(String dim, String file)
 	{
-		InputStream FROM = FileDisplacer.class.getClassLoader().getResourceAsStream("assets/mubble/worlds/" + dir + "/" + file);
-	    Path TO = new File(Minecraft.getInstance().gameDir + "/saves/" + Minecraft.getInstance().getIntegratedServer().getFolderName(), "/DIM" + dim + "/" + file).toPath();
+		InputStream FROM = FileDisplacer.class.getClassLoader().getResourceAsStream("assets/mubble/worlds/" + dim + "/" + file);
+	    Path TO = new File(Minecraft.getInstance().gameDir + "/saves/" + Minecraft.getInstance().getIntegratedServer().getFolderName(), "/mubble" + dim + "/" + file).toPath();
 	    CopyOption[] options = new CopyOption[] { };
 	    Path parentDir = TO.getParent();
 	    if (Files.exists(TO)) return;

@@ -1,21 +1,30 @@
 package hugman.mod.init;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.function.Function;
 
-import hugman.mod.objects.world.dimension.type.DimensionTypeUltimatum;
+import hugman.mod.Mubble;
+import hugman.mod.objects.world.dimension.DimensionUltimatum;
 import hugman.mod.util.FileDisplacer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.dimension.Dimension;
+import net.minecraft.world.dimension.DimensionType;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
 
 public class MubbleDimensions
-{
-    public static final List<ModDimension> DIMENSIONS = new ArrayList<ModDimension>();
-    
-	public static final ModDimension ULTIMATUM = new DimensionTypeUltimatum();
+{    
+	public static final ModDimension ULTIMATUM = new ModDimension()
+	{	
+		@Override
+		public Function<DimensionType, ? extends Dimension> getFactory()
+		{
+			return DimensionUltimatum::new;
+		}
+	}.setRegistryName(Mubble.MOD_ID, "ultimatum");
 	
-	public static void register(ModDimension dimension)
+	public static void registerDimensions()
 	{
-		DIMENSIONS.add(dimension);
+		DimensionManager.registerDimension(new ResourceLocation(Mubble.MOD_ID, "ultimatum"), MubbleDimensions.ULTIMATUM, null);
 	}
 	
 	public static void createFiles()
