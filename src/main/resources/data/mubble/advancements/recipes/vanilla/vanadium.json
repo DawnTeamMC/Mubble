@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/vanadium"
+			"mubble:vanadium"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:vanilla/vanadium"
+				"recipe": "mubble:vanadium"
 			}
 		}
 	},

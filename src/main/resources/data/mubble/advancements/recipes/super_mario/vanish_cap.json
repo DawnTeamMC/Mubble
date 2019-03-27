@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/vanish_cap"
+			"mubble:vanish_cap"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/vanish_cap"
+				"recipe": "mubble:vanish_cap"
 			}
 		}
 	},

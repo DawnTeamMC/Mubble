@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:celeste/girder"
+			"mubble:girder"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:celeste/girder"
+				"recipe": "mubble:girder"
 			}
 		}
 	},

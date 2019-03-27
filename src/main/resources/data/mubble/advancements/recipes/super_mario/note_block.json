@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/note_block"
+			"mubble:note_block"
 		]
 	},
 	"criteria":
@@ -40,7 +40,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/note_block"
+				"recipe": "mubble:note_block"
 			}
 		}
 	},

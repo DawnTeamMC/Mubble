@@ -5,6 +5,7 @@ import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
@@ -14,7 +15,7 @@ public class BlockRotating extends Block
     {
         super(Properties.from(Blocks.STONE));
         setRegistryName(Mubble.MOD_ID, "rotating_block");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
     
     @Override

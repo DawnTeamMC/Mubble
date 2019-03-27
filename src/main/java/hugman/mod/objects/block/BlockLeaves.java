@@ -6,6 +6,7 @@ import hugman.mod.init.MubbleItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.NonNullList;
@@ -18,7 +19,7 @@ public class BlockLeaves extends net.minecraft.block.BlockLeaves
     {
         super(Properties.from(Blocks.OAK_LEAVES));
         setRegistryName(Mubble.MOD_ID, name + "_leaves");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
     }
     
     @Override

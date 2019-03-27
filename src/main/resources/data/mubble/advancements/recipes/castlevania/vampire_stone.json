@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
 	"recipes": [
-	  "mubble:castlevania/vampire_stone"
+	  "mubble:vampire_stone"
 	]
   },
   "criteria": {
@@ -19,7 +19,7 @@
 	"has_the_recipe": {
 	  "trigger": "minecraft:recipe_unlocked",
 	  "conditions": {
-		"recipe": "mubble:castlevania/vampire_stone"
+		"recipe": "mubble:vampire_stone"
 	  }
 	}
   },

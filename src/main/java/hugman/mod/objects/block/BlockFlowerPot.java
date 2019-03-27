@@ -1,7 +1,6 @@
 package hugman.mod.objects.block;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 
@@ -11,6 +10,5 @@ public class BlockFlowerPot extends net.minecraft.block.BlockFlowerPot
     {
         super(block, Properties.from(Blocks.FLOWER_POT));
         setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.registerWithoutItem(this);
     }
 }

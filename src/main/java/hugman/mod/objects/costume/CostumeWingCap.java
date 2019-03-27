@@ -15,7 +15,7 @@ public class CostumeWingCap extends CostumeSimple
 {    
     public CostumeWingCap()
     {
-        super("wing_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new Item.Properties().group(MubbleTabs.MUBBLE_COSTUMES).maxStackSize(1).defaultMaxDamage(600));
+        super("wing_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new Item.Properties().group(MubbleTabs.COSTUMES).maxStackSize(1).defaultMaxDamage(600));
     }
     
 	@Override

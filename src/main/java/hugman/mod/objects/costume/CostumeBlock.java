@@ -1,7 +1,6 @@
 package hugman.mod.objects.costume;
 
 import hugman.mod.init.MubbleCostumes;
-import hugman.mod.init.MubbleTabs;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +8,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -22,9 +22,9 @@ public class CostumeBlock extends ItemBlock
 	protected final EntityEquipmentSlot armorType;
 	protected final SoundEvent sound;
 	
-    public CostumeBlock(Block base_block, SoundEvent sound, EntityEquipmentSlot armorType)
+    public CostumeBlock(Block base_block, SoundEvent sound, EntityEquipmentSlot armorType, ItemGroup group)
     {
-        super(base_block, new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS));
+        super(base_block, new Item.Properties().group(group));
         setRegistryName(base_block.getRegistryName());
 		MubbleCostumes.register(this);
 		this.sound = sound;

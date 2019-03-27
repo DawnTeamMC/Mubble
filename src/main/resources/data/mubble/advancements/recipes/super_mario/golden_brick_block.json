@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/golden_brick_block"
+			"mubble:golden_brick_block"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/golden_brick_block"
+				"recipe": "mubble:golden_brick_block"
 			}
 		}
 	},

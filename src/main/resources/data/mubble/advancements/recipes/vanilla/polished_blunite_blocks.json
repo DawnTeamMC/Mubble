@@ -4,9 +4,9 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/polished_blunite_stairs",
-			"mubble:vanilla/polished_blunite_slab",
-			"mubble:vanilla/polished_blunite_vertical_slab"
+			"mubble:polished_blunite_stairs",
+			"mubble:polished_blunite_slab",
+			"mubble:polished_blunite_vertical_slab"
 		]
 	},
 	"criteria":
@@ -29,7 +29,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": 
 			{
-				"recipe": "mubble:vanilla/polished_blunite_blocks"
+				"recipe": "mubble:polished_blunite_blocks"
 			}
 		}
 	},

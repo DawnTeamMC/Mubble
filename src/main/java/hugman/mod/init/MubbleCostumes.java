@@ -16,6 +16,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.PotionEffect;
 
 public class MubbleCostumes
@@ -51,7 +52,7 @@ public class MubbleCostumes
 	public static final Item BALDI_HEAD = new CostumeSimple("baldi_head", SoundEvents.ENTITY_PARROT_IMITATE_VEX, EntityEquipmentSlot.HEAD);
 
 	public static final Item MAYRO_CAP = new CostumeMayroCap();
-	public static final Item KORETATO_BLOCK = new CostumeBlock(MubbleBlocks.KORETATO_BLOCK, SoundEvents.BLOCK_SNOW_HIT, EntityEquipmentSlot.HEAD);
+	public static final Item KORETATO_BLOCK = new CostumeBlock(MubbleBlocks.KORETATO_BLOCK, SoundEvents.BLOCK_SNOW_HIT, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
 	public static final Item NOTEBLOCK_HEAD = new CostumeSimple("noteblock_head", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	
 	

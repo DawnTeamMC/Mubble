@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/light_block"
+			"mubble:light_block"
 		]
 	},
 	"criteria":
@@ -40,7 +40,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/light_block"
+				"recipe": "mubble:light_block"
 			}
 		}
 	},

@@ -23,7 +23,7 @@ public class CostumeSimple extends Item
 	
     public CostumeSimple(String name, SoundEvent sound, EntityEquipmentSlot armorType)
     {
-        super(new Item.Properties().group(MubbleTabs.MUBBLE_COSTUMES).maxStackSize(1));
+        super(new Item.Properties().group(MubbleTabs.COSTUMES).maxStackSize(1));
         setRegistryName(Mubble.MOD_ID, name);
 		MubbleCostumes.register(this);
 		this.sound = sound;

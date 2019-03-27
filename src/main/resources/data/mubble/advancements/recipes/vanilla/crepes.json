@@ -4,8 +4,8 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/chocolate_crepe",
-			"mubble:vanilla/caramel_crepe"
+			"mubble:chocolate_crepe",
+			"mubble:caramel_crepe"
 		]
 	},
 	"criteria":
@@ -28,7 +28,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:vanilla/crepes"
+				"recipe": "mubble:crepes"
 			}
 		}
 	},

@@ -4,23 +4,23 @@
 	{
 		"recipes":
 		[
-			"mubble:castlevania/white_candy_cane_pillar",
-			"mubble:castlevania/light_gray_candy_cane_pillar",
-			"mubble:castlevania/gray_candy_cane_pillar",
-			"mubble:castlevania/black_candy_cane_pillar",
-			"mubble:castlevania/brown_candy_cane_pillar",
-			"mubble:castlevania/red_candy_cane_pillar",
-			"mubble:castlevania/orange_candy_cane_pillar",
-			"mubble:castlevania/yellow_candy_cane_pillar",
-			"mubble:castlevania/yellow_candy_cane_pillar",
-			"mubble:castlevania/lime_candy_cane_pillar",
-			"mubble:castlevania/green_candy_cane_pillar",
-			"mubble:castlevania/cyan_candy_cane_pillar",
-			"mubble:castlevania/light_blue_candy_cane_pillar",
-			"mubble:castlevania/blue_candy_cane_pillar",
-			"mubble:castlevania/purple_candy_cane_pillar",
-			"mubble:castlevania/magenta_candy_cane_pillar",
-			"mubble:castlevania/pink_candy_cane_pillar"
+			"mubble:white_candy_cane_pillar",
+			"mubble:light_gray_candy_cane_pillar",
+			"mubble:gray_candy_cane_pillar",
+			"mubble:black_candy_cane_pillar",
+			"mubble:brown_candy_cane_pillar",
+			"mubble:red_candy_cane_pillar",
+			"mubble:orange_candy_cane_pillar",
+			"mubble:yellow_candy_cane_pillar",
+			"mubble:yellow_candy_cane_pillar",
+			"mubble:lime_candy_cane_pillar",
+			"mubble:green_candy_cane_pillar",
+			"mubble:cyan_candy_cane_pillar",
+			"mubble:light_blue_candy_cane_pillar",
+			"mubble:blue_candy_cane_pillar",
+			"mubble:purple_candy_cane_pillar",
+			"mubble:magenta_candy_cane_pillar",
+			"mubble:pink_candy_cane_pillar"
 		]
 	},
 	"criteria":
@@ -43,7 +43,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe":"mubble:castlevania/candy_cane_pillars"
+				"recipe":"mubble:candy_cane_pillars"
 			}
 		}
 	},

@@ -51,19 +51,20 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemGroup;
 
 public class MubbleBlocks
 {
     public static final List<Block> BLOCKS = new ArrayList<Block>();
 
-    public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK));
-    public static final Block VANADIUM_ORE = new BlockSimple("vanadium_ore", Properties.from(Blocks.DIAMOND_ORE));
-    public static final Block PALM_PLANKS = new BlockSimple("palm_planks", Properties.from(Blocks.OAK_PLANKS));
+    public static final Block VANADIUM_ORE = new BlockSimple("vanadium_ore", Properties.from(Blocks.DIAMOND_ORE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK), ItemGroup.BUILDING_BLOCKS);
+    public static final Block PALM_PLANKS = new BlockSimple("palm_planks", Properties.from(Blocks.OAK_PLANKS), ItemGroup.BUILDING_BLOCKS);
     public static final Block PALM_SAPLING = new BlockSapling("palm");
-    public static final Block PALM_LOG = new BlockRotatedPillar("palm_log", Properties.from(Blocks.OAK_LOG));
-    public static final Block STRIPPED_PALM_LOG = new BlockRotatedPillar("stripped_palm_log", Properties.from(MubbleBlocks.PALM_LOG));
-    public static final Block PALM_WOOD = new BlockRotatedPillar("palm_wood", Properties.from(MubbleBlocks.PALM_LOG));
-    public static final Block STRIPPED_PALM_WOOD = new BlockRotatedPillar("stripped_palm_wood", Properties.from(MubbleBlocks.PALM_WOOD));
+    public static final Block PALM_LOG = new BlockRotatedPillar("palm_log", Properties.from(Blocks.OAK_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final Block STRIPPED_PALM_LOG = new BlockRotatedPillar("stripped_palm_log", Properties.from(MubbleBlocks.PALM_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final Block PALM_WOOD = new BlockRotatedPillar("palm_wood", Properties.from(MubbleBlocks.PALM_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final Block STRIPPED_PALM_WOOD = new BlockRotatedPillar("stripped_palm_wood", Properties.from(MubbleBlocks.PALM_WOOD), ItemGroup.BUILDING_BLOCKS);
     public static final Block PALM_LEAVES = new BlockLeaves("palm");
     public static final Block PALM_PRESSURE_PLATE = new BlockPressurePlate("palm");
     public static final Block PALM_TRAPDOOR = new BlockTrapDoor("palm");
@@ -74,22 +75,22 @@ public class MubbleBlocks
     public static final Block PALM_FENCE = new BlockFence("palm");
     public static final Block PALM_DOOR = new BlockDoor("palm");
     
-    public static final Block WHITE_BRICKS = new BlockSimple("white_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block LIGHT_GRAY_BRICKS = new BlockSimple("light_gray_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block GRAY_BRICKS = new BlockSimple("gray_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block BLACK_BRICKS = new BlockSimple("black_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block BROWN_BRICKS = new BlockSimple("brown_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block RED_BRICKS = new BlockSimple("red_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block ORANGE_BRICKS = new BlockSimple("orange_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block YELLOW_BRICKS = new BlockSimple("yellow_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block LIME_BRICKS = new BlockSimple("lime_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block GREEN_BRICKS = new BlockSimple("green_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block CYAN_BRICKS = new BlockSimple("cyan_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block LIGHT_BLUE_BRICKS = new BlockSimple("light_blue_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block BLUE_BRICKS = new BlockSimple("blue_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block PURPLE_BRICKS = new BlockSimple("purple_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block MAGENTA_BRICKS = new BlockSimple("magenta_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block PINK_BRICKS = new BlockSimple("pink_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block WHITE_BRICKS = new BlockSimple("white_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block LIGHT_GRAY_BRICKS = new BlockSimple("light_gray_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block GRAY_BRICKS = new BlockSimple("gray_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block BLACK_BRICKS = new BlockSimple("black_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block BROWN_BRICKS = new BlockSimple("brown_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block RED_BRICKS = new BlockSimple("red_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block ORANGE_BRICKS = new BlockSimple("orange_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block YELLOW_BRICKS = new BlockSimple("yellow_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block LIME_BRICKS = new BlockSimple("lime_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block GREEN_BRICKS = new BlockSimple("green_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block CYAN_BRICKS = new BlockSimple("cyan_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block LIGHT_BLUE_BRICKS = new BlockSimple("light_blue_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block BLUE_BRICKS = new BlockSimple("blue_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block PURPLE_BRICKS = new BlockSimple("purple_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block MAGENTA_BRICKS = new BlockSimple("magenta_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block PINK_BRICKS = new BlockSimple("pink_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
     
     public static final Block WHITE_BRICK_STAIRS = new BlockStairs("white_brick", MubbleBlocks.WHITE_BRICKS);
     public static final Block LIGHT_GRAY_BRICK_STAIRS = new BlockStairs("light_gray_brick", MubbleBlocks.LIGHT_GRAY_BRICKS);
@@ -159,8 +160,8 @@ public class MubbleBlocks
     public static final Block MAGENTA_BRICK_WALL = new BlockWall("magenta_brick", MubbleBlocks.MAGENTA_BRICKS);
     public static final Block PINK_BRICK_WALL = new BlockWall("pink_brick", MubbleBlocks.PINK_BRICKS);
     
-    public static final Block BLUNITE = new BlockSimple("blunite", Properties.from(Blocks.STONE));
-    public static final Block CARBONITE = new BlockSimple("carbonite", Properties.from(Blocks.STONE));
+    public static final Block BLUNITE = new BlockSimple("blunite", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block CARBONITE = new BlockSimple("carbonite", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
     public static final Block BLUNITE_STAIRS = new BlockStairs(MubbleBlocks.BLUNITE);
     public static final Block CARBONITE_STAIRS = new BlockStairs(MubbleBlocks.CARBONITE);
     public static final Block BLUNITE_SLAB = new BlockSlab(MubbleBlocks.BLUNITE);
@@ -169,8 +170,8 @@ public class MubbleBlocks
     public static final Block CARBONITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.CARBONITE);
     public static final Block BLUNITE_WALL = new BlockWall(MubbleBlocks.BLUNITE);
     public static final Block CARBONITE_WALL = new BlockWall(MubbleBlocks.CARBONITE);
-    public static final Block POLISHED_BLUNITE = new BlockSimple("polished_blunite", Properties.from(MubbleBlocks.BLUNITE));
-    public static final Block POLISHED_CARBONITE = new BlockSimple("polished_carbonite", Properties.from(MubbleBlocks.CARBONITE));
+    public static final Block POLISHED_BLUNITE = new BlockSimple("polished_blunite", Properties.from(MubbleBlocks.BLUNITE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block POLISHED_CARBONITE = new BlockSimple("polished_carbonite", Properties.from(MubbleBlocks.CARBONITE), ItemGroup.BUILDING_BLOCKS);
     public static final Block POLISHED_BLUNITE_STAIRS = new BlockStairs(MubbleBlocks.POLISHED_BLUNITE);
     public static final Block POLISHED_CARBONITE_STAIRS = new BlockStairs(MubbleBlocks.POLISHED_CARBONITE);
     public static final Block POLISHED_BLUNITE_SLAB = new BlockSlab(MubbleBlocks.POLISHED_BLUNITE);
@@ -178,22 +179,22 @@ public class MubbleBlocks
     public static final Block POLISHED_BLUNITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.POLISHED_BLUNITE);
     public static final Block POLISHED_CARBONITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.POLISHED_CARBONITE);
     
-    public static final Block WHITE_DARK_PRISMARINE = new BlockSimple("white_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block LIGHT_GRAY_DARK_PRISMARINE = new BlockSimple("light_gray_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block GRAY_DARK_PRISMARINE = new BlockSimple("gray_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block BLACK_DARK_PRISMARINE = new BlockSimple("black_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block BROWN_DARK_PRISMARINE = new BlockSimple("brown_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block RED_DARK_PRISMARINE = new BlockSimple("red_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block ORANGE_DARK_PRISMARINE = new BlockSimple("orange_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block YELLOW_DARK_PRISMARINE = new BlockSimple("yellow_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block LIME_DARK_PRISMARINE = new BlockSimple("lime_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block GREEN_DARK_PRISMARINE = new BlockSimple("green_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block CYAN_DARK_PRISMARINE = new BlockSimple("cyan_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block LIGHT_BLUE_DARK_PRISMARINE = new BlockSimple("light_blue_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block BLUE_DARK_PRISMARINE = new BlockSimple("blue_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block PURPLE_DARK_PRISMARINE = new BlockSimple("purple_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block MAGENTA_DARK_PRISMARINE = new BlockSimple("magenta_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
-    public static final Block PINK_DARK_PRISMARINE = new BlockSimple("pink_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE));
+    public static final Block WHITE_DARK_PRISMARINE = new BlockSimple("white_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block LIGHT_GRAY_DARK_PRISMARINE = new BlockSimple("light_gray_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block GRAY_DARK_PRISMARINE = new BlockSimple("gray_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block BLACK_DARK_PRISMARINE = new BlockSimple("black_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block BROWN_DARK_PRISMARINE = new BlockSimple("brown_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block RED_DARK_PRISMARINE = new BlockSimple("red_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block ORANGE_DARK_PRISMARINE = new BlockSimple("orange_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block YELLOW_DARK_PRISMARINE = new BlockSimple("yellow_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block LIME_DARK_PRISMARINE = new BlockSimple("lime_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block GREEN_DARK_PRISMARINE = new BlockSimple("green_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block CYAN_DARK_PRISMARINE = new BlockSimple("cyan_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block LIGHT_BLUE_DARK_PRISMARINE = new BlockSimple("light_blue_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block BLUE_DARK_PRISMARINE = new BlockSimple("blue_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block PURPLE_DARK_PRISMARINE = new BlockSimple("purple_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block MAGENTA_DARK_PRISMARINE = new BlockSimple("magenta_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block PINK_DARK_PRISMARINE = new BlockSimple("pink_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     
     public static final Block WHITE_DARK_PRISMARINE_STAIRS = new BlockStairs("white_dark_prismarine", MubbleBlocks.WHITE_DARK_PRISMARINE);
     public static final Block LIGHT_GRAY_DARK_PRISMARINE_STAIRS = new BlockStairs("light_gray_dark_prismarine", MubbleBlocks.LIGHT_GRAY_DARK_PRISMARINE);
@@ -263,7 +264,7 @@ public class MubbleBlocks
     public static final Block MAGENTA_DARK_PRISMARINE_WALL = new BlockWall("magenta_dark_prismarine", MubbleBlocks.MAGENTA_DARK_PRISMARINE);
     public static final Block PINK_DARK_PRISMARINE_WALL = new BlockWall("pink_dark_prismarine", MubbleBlocks.PINK_DARK_PRISMARINE);
     
-    public static final Block FOOTBLOCK = new BlockSimple("footblock", Properties.from(Blocks.WHITE_WOOL));
+    public static final Block FOOTBLOCK = new BlockSimple("footblock", Properties.from(Blocks.WHITE_WOOL), ItemGroup.DECORATIONS);
     public static final Block WHITE_CLOUD_BLOCK = new BlockCloud("white");
     public static final Block LIGHT_GRAY_CLOUD_BLOCK = new BlockCloud("light_gray");
     public static final Block GRAY_CLOUD_BLOCK = new BlockCloud("gray");
@@ -271,7 +272,7 @@ public class MubbleBlocks
     public static final Block TOMATO = new BlockCrops("tomato");
     public static final Block SALAD = new BlockCrops("salad");
     //public static final Block RICE = new BlockCrops("rice");
-    public static final Block CHEESE_BLOCK = new BlockSimple("cheese_block", Properties.create(Material.GROUND, MaterialColor.YELLOW).hardnessAndResistance(0.5f).sound(SoundType.SNOW));
+    public static final Block CHEESE_BLOCK = new BlockSimple("cheese_block", Properties.create(Material.GROUND, MaterialColor.YELLOW).hardnessAndResistance(0.5f).sound(SoundType.SNOW), ItemGroup.FOOD);
     public static final Block WHITE_BALLOON = new BlockBalloon(EnumDyeColor.WHITE);
     public static final Block LIGHT_GRAY_BALLOON = new BlockBalloon(EnumDyeColor.LIGHT_GRAY);
     public static final Block GRAY_BALLOON = new BlockBalloon(EnumDyeColor.GRAY);
@@ -295,7 +296,7 @@ public class MubbleBlocks
     public static final Block QUESTION_BLOCK = new BlockQuestion();
     public static final Block EMPTY_BLOCK = new BlockEmpty();
     public static final Block ROTATING_BLOCK = new BlockRotating();
-    public static final Block LIGHT_BLOCK = new BlockSimple("light_block", Properties.from(Blocks.STONE).lightValue(15));
+    public static final Block LIGHT_BLOCK = new BlockSimple("light_block", Properties.from(Blocks.STONE).lightValue(15), ItemGroup.BUILDING_BLOCKS);
     public static final Block BRICK_BLOCK = new BlockBrick("brick_block");
     public static final Block GOLDEN_BRICK_BLOCK = new BlockBrick("golden_brick_block");
     public static final Block NOTE_BLOCK = new BlockNote("note_block");
@@ -353,15 +354,15 @@ public class MubbleBlocks
     public static final Block MAGENTA_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.MAGENTA);
     public static final Block PINK_TETRIS_BLOCK = new BlockTetris(EnumDyeColor.PINK);
     public static final Block TETRIS_GLASS = new BlockTetrisGlass();
-    public static final Block JAPANESE_TETRIS_CUSHION = new BlockFalling("japanese_tetris_cushion", Properties.from(Blocks.RED_WOOL));
-    public static final Block RAINBOW_TETRIS_SCAFFOLDING = new BlockFalling("rainbow_tetris_scaffolding", Properties.from(Blocks.IRON_BLOCK));
-    public static final Block MONOCHROME_TETRIS_SCAFFOLDING = new BlockFalling("monochrome_tetris_scaffolding", Properties.from(Blocks.IRON_BLOCK));
+    public static final Block JAPANESE_TETRIS_CUSHION = new BlockFalling("japanese_tetris_cushion", Properties.from(Blocks.RED_WOOL), ItemGroup.BUILDING_BLOCKS);
+    public static final Block RAINBOW_TETRIS_SCAFFOLDING = new BlockFalling("rainbow_tetris_scaffolding", Properties.from(Blocks.IRON_BLOCK), ItemGroup.DECORATIONS);
+    public static final Block MONOCHROME_TETRIS_SCAFFOLDING = new BlockFalling("monochrome_tetris_scaffolding", Properties.from(Blocks.IRON_BLOCK), ItemGroup.DECORATIONS);
     
     
     
-    public static final Block VAMPIRE_STONE = new BlockSimple("vampire_stone", Properties.from(Blocks.STONE));
-    public static final Block MEDUSA_STONE = new BlockSimple("medusa_stone", Properties.from(Blocks.STONE));
-    public static final Block MEDUSA_BRICKS = new BlockSimple("medusa_bricks", Properties.from(Blocks.STONE_BRICKS));
+    public static final Block VAMPIRE_STONE = new BlockSimple("vampire_stone", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block MEDUSA_STONE = new BlockSimple("medusa_stone", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block MEDUSA_BRICKS = new BlockSimple("medusa_bricks", Properties.from(Blocks.STONE_BRICKS), ItemGroup.BUILDING_BLOCKS);
     public static final Block MEDUSA_BRICK_STAIRS = new BlockStairs("medusa_brick", MubbleBlocks.MEDUSA_BRICKS);
     public static final Block MEDUSA_BRICK_SLAB = new BlockSlab("medusa_brick", MubbleBlocks.MEDUSA_BRICKS);
     public static final Block MEDUSA_BRICK_VERTICAL_SLAB = new BlockSlabVertical("medusa_brick", MubbleBlocks.MEDUSA_BRICKS);
@@ -386,10 +387,10 @@ public class MubbleBlocks
     
     
     public static final Block GREEN_HILL_GRASS_BLOCK  = new BlockGrass("green_hill_grass_block", MubbleBlocks.GREEN_HILL_DIRT, Properties.from(Blocks.GRASS_BLOCK));
-    public static final Block GREEN_HILL_DIRT = new BlockSimple("green_hill_dirt", Properties.from(Blocks.DIRT));
-    public static final Block MARBLE_ZONE_STONE = new BlockSimple("marble_zone_stone", Properties.from(Blocks.STONE));
-    public static final Block YELLOW_STUDIOPOLIS_CLAPPER = new BlockDirectional("yellow_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK));
-    public static final Block BLUE_STUDIOPOLIS_CLAPPER = new BlockDirectional("blue_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK));
+    public static final Block GREEN_HILL_DIRT = new BlockSimple("green_hill_dirt", Properties.from(Blocks.DIRT), ItemGroup.BUILDING_BLOCKS);
+    public static final Block MARBLE_ZONE_STONE = new BlockSimple("marble_zone_stone", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block YELLOW_STUDIOPOLIS_CLAPPER = new BlockDirectional("yellow_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK), ItemGroup.DECORATIONS);
+    public static final Block BLUE_STUDIOPOLIS_CLAPPER = new BlockDirectional("blue_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK), ItemGroup.DECORATIONS);
     public static final Block SPRING = new BlockSpring();
     
     
@@ -399,9 +400,9 @@ public class MubbleBlocks
     
     
     
-    public static final Block GIRDER = new BlockSimple("girder", Properties.from(Blocks.IRON_BLOCK));
-    public static final Block MIRROR_TEMPLE_BRICKS = new BlockSimple("mirror_temple_bricks", Properties.from(Blocks.BRICKS));
-    public static final Block OLD_SITE_BRICKS = new BlockSimple("old_site_bricks", Properties.from(Blocks.BRICKS));
+    public static final Block GIRDER = new BlockSimple("girder", Properties.from(Blocks.IRON_BLOCK), ItemGroup.BUILDING_BLOCKS);
+    public static final Block MIRROR_TEMPLE_BRICKS = new BlockSimple("mirror_temple_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block OLD_SITE_BRICKS = new BlockSimple("old_site_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
     public static final Block MIRROR_TEMPLE_BRICK_STAIRS = new BlockStairs("mirror_temple_brick", MubbleBlocks.MIRROR_TEMPLE_BRICKS);
     public static final Block OLD_SITE_BRICK_STAIRS = new BlockStairs("old_site_brick", MubbleBlocks.OLD_SITE_BRICKS);
     public static final Block MIRROR_TEMPLE_BRICK_SLAB = new BlockSlab("mirror_temple_brick", MubbleBlocks.MIRROR_TEMPLE_BRICKS);
@@ -410,9 +411,9 @@ public class MubbleBlocks
     public static final Block OLD_SITE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("old_site_brick", MubbleBlocks.OLD_SITE_BRICKS);
     public static final Block MIRROR_TEMPLE_BRICK_WALL = new BlockWall("mirror_temple_brick", MubbleBlocks.MIRROR_TEMPLE_BRICKS);
     public static final Block OLD_SITE_BRICK_WALL = new BlockWall("old_site_brick", MubbleBlocks.OLD_SITE_BRICKS);
-    public static final Block ELDER_PEBBLES = new BlockSimple("elder_pebbles", Properties.from(Blocks.BRICKS).lightValue(5));
-    public static final Block SPACE_JAM = new BlockSimple("space_jam", Properties.create(Material.SAND).hardnessAndResistance(0.4f).sound(MubbleSoundTypes.SPACE_JAM));
-    public static final Block SPACE_OBSIDIAN = new BlockEmptyDrops("space_obsidian", Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.0F, 3600000.0F));
+    public static final Block ELDER_PEBBLES = new BlockSimple("elder_pebbles", Properties.from(Blocks.BRICKS).lightValue(5), ItemGroup.BUILDING_BLOCKS);
+    public static final Block SPACE_JAM = new BlockSimple("space_jam", Properties.create(Material.SAND).hardnessAndResistance(0.4f).sound(MubbleSoundTypes.SPACE_JAM), ItemGroup.BUILDING_BLOCKS);
+    public static final Block SPACE_OBSIDIAN = new BlockEmptyDrops("space_obsidian", Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.0F, 3600000.0F), ItemGroup.BUILDING_BLOCKS);
     
     
     
@@ -422,22 +423,21 @@ public class MubbleBlocks
     public static final Block TURQUOISE_PUYO = new BlockPuyo("turquoise");
     public static final Block BLUE_PUYO = new BlockPuyo(EnumDyeColor.BLUE);
     public static final Block PURPLE_PUYO = new BlockPuyo(EnumDyeColor.PURPLE);
-    public static final Block GARBAGE_PUYO = new BlockDirectional("garbage_puyo", Properties.from(Blocks.STONE));
-    public static final Block POINT_PUYO = new BlockDirectional("point_puyo", Properties.from(Blocks.STONE).lightValue(10));
-    public static final Block HARD_PUYO = new BlockDirectional("hard_puyo", Properties.from(Blocks.STONE));
-    public static final Block IRON_PUYO = new BlockDirectional("iron_puyo", Properties.from(Blocks.IRON_BLOCK));
-    public static final Block PUYO_BLOCK = new BlockSimple("puyo_block", Properties.from(Blocks.STONE));
+    public static final Block GARBAGE_PUYO = new BlockDirectional("garbage_puyo", Properties.from(Blocks.STONE), ItemGroup.DECORATIONS);
+    public static final Block POINT_PUYO = new BlockDirectional("point_puyo", Properties.from(Blocks.STONE).lightValue(10), ItemGroup.DECORATIONS);
+    public static final Block HARD_PUYO = new BlockDirectional("hard_puyo", Properties.from(Blocks.STONE), ItemGroup.DECORATIONS);
+    public static final Block IRON_PUYO = new BlockDirectional("iron_puyo", Properties.from(Blocks.IRON_BLOCK), ItemGroup.DECORATIONS);
+    public static final Block PUYO_BLOCK = new BlockSimple("puyo_block", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
     
     
     
     public static final Block KORETATO_BLOCK = new BlockKoretato();
     public static final Block POTATO_FLOWER = new BlockFlowerPotato();
     
-    public static void register(Block block)
+    public static void register(Block block, ItemGroup group)
     {
-        Item.Properties group = new Item.Properties().group(MubbleTabs.MUBBLE_BLOCKS);
         BLOCKS.add(block);
-        MubbleItems.ITEMS.add(new ItemBlock(block, group).setRegistryName(block.getRegistryName()));
+        MubbleItems.ITEMS.add(new ItemBlock(block, new Item.Properties().group(group)).setRegistryName(block.getRegistryName()));
     }
     
     public static void registerWithoutItem(Block block)

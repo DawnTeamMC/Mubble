@@ -5,6 +5,7 @@ import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
+import net.minecraft.item.ItemGroup;
 
 public class BlockSlab extends net.minecraft.block.BlockSlab implements IBucketPickupHandler, ILiquidContainer
 {
@@ -12,13 +13,13 @@ public class BlockSlab extends net.minecraft.block.BlockSlab implements IBucketP
     {
         super(Properties.from(base_block));
         setRegistryName(Mubble.MOD_ID, name + "_slab");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
     
     public BlockSlab(Block base_block)
     {
         super(Properties.from(base_block));
         setRegistryName(base_block.getRegistryName() + "_slab");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
 }

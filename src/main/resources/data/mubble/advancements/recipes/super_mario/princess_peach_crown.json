@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/princess_peach_crown"
+			"mubble:princess_peach_crown"
 		]
 	},
 	"criteria":
@@ -40,7 +40,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/princess_peach_crown"
+				"recipe": "mubble:princess_peach_crown"
 			}
 		}
 	},

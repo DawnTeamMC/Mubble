@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/waluigi_cap"
+			"mubble:waluigi_cap"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/waluigi_cap"
+				"recipe": "mubble:waluigi_cap"
 			}
 		}
 	},

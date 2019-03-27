@@ -4,10 +4,10 @@
 	{
 		"recipes":
 		[
-			"mubble:celeste/mirror_temple_brick_stairs",
-			"mubble:celeste/mirror_temple_brick_slab",
-			"mubble:celeste/mirror_temple_brick_vertical_slab",
-			"mubble:celeste/mirror_temple_brick_wall"
+			"mubble:mirror_temple_brick_stairs",
+			"mubble:mirror_temple_brick_slab",
+			"mubble:mirror_temple_brick_vertical_slab",
+			"mubble:mirror_temple_brick_wall"
 		]
 	},
 	"criteria":
@@ -30,7 +30,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": 
 			{
-				"recipe": "mubble:celeste/mirror_temple_brick_blocks"
+				"recipe": "mubble:mirror_temple_brick_blocks"
 			}
 		}
 	},

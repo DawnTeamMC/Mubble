@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/luigi_cap"
+			"mubble:luigi_cap"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/luigi_cap"
+				"recipe": "mubble:luigi_cap"
 			}
 		}
 	},

@@ -1,11 +1,9 @@
 package hugman.mod.objects.costume;
 
-import hugman.mod.init.MubbleTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
@@ -14,7 +12,7 @@ public class CostumeVanishCap extends CostumeSimple
 {    
     public CostumeVanishCap()
     {
-        super("vanish_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new Item.Properties().group(MubbleTabs.MUBBLE_COSTUMES).maxStackSize(1));
+        super("vanish_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
     }
     
     @Override

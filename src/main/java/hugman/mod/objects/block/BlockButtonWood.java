@@ -3,6 +3,7 @@ package hugman.mod.objects.block;
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemGroup;
 
 public class BlockButtonWood extends net.minecraft.block.BlockButtonWood
 {
@@ -10,6 +11,6 @@ public class BlockButtonWood extends net.minecraft.block.BlockButtonWood
     {
         super(Properties.from(Blocks.OAK_BUTTON));
         setRegistryName(Mubble.MOD_ID, name + "_button");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.REDSTONE);
     }
 }

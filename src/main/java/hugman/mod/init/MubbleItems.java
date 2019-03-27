@@ -17,13 +17,14 @@ import hugman.mod.objects.item.ItemTotemOfAscending;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.potion.PotionEffect;
 
 public class MubbleItems
 {
     public static final List<Item> ITEMS = new ArrayList<Item>();
 
-    public static final Item WHEAT_FLOUR = new ItemSimple("wheat_flour");
+    public static final Item WHEAT_FLOUR = new ItemSimple("wheat_flour", ItemGroup.FOOD);
     public static final Item TOMATO = new ItemSeedFood("tomato", 3, 0.6f);
     public static final Item SALAD = new ItemSeedFood("salad", 2, 0.7F);
     //public static final Item RICE = new ItemSeedFood("rice", 1, 0.4F);
@@ -31,12 +32,12 @@ public class MubbleItems
     public static final Item BANANA = new ItemFood("banana", 4, 0.3F, false);
     public static final Item CARAMEL_CUBE = new ItemFood("caramel_cube", 4, 2.8f, false);
     public static final Item BAGUETTE = new ItemFood("baguette", 6, 0.8F, false);
-    public static final Item BURGER = new ItemFood("burger", 7, 2f, false);
+    public static final Item BURGER = new ItemFood("burger", 9, 2.4f, false);
     public static final Item CREPE = new ItemFood("crepe", 3, 0.5f, false);
     public static final Item CHOCOLATE_CREPE = new ItemFood("chocolate_crepe", 8, 2f, false);
     public static final Item CARAMEL_CREPE = new ItemFood("caramel_crepe", 9, 3.4f, false);
     public static final Item CANDY_CANE = new ItemFood("candy_cane", 4, 1.8f, false);
-    public static final Item VANADIUM = new ItemSimple("vanadium");
+    public static final Item VANADIUM = new ItemSimple("vanadium", ItemGroup.MATERIALS);
     public static final Item BANDAGE = new ItemBandage();
     public static final Item TOTEM_OF_ASCENDING = new ItemTotemOfAscending();
 
@@ -45,15 +46,15 @@ public class MubbleItems
     public static final Item CAPE_FEATHER = new ItemCapeFeather("cape_feather");
     public static final Item SUPER_CAPE_FEATHER = new ItemCapeFeather("super_cape_feather", EnumRarity.EPIC);
     public static final Item SUPER_STAR = new ItemSuperStar();
-    public static final Item YELLOW_COIN = new ItemSimple("yellow_coin");
-    public static final Item RED_COIN = new ItemSimple("red_coin");
-    public static final Item BLUE_COIN = new ItemSimple("blue_coin");
+    public static final Item YELLOW_COIN = new ItemSimple("yellow_coin", ItemGroup.MATERIALS);
+    public static final Item RED_COIN = new ItemSimple("red_coin", ItemGroup.MATERIALS);
+    public static final Item BLUE_COIN = new ItemSimple("blue_coin", ItemGroup.MATERIALS);
     
     public static final Item SMASH_BALL = new ItemSmashBall();
 
     public static final Item ANNOYING_DOG = new ItemAnnoyingDog();
 
-    public static final Item BLANK_MUSIC_DISK = new ItemSimple("blank_music_disc", 1, EnumRarity.RARE);
+    public static final Item BLANK_MUSIC_DISK = new ItemSimple("blank_music_disc", ItemGroup.MISC, 1, EnumRarity.RARE);
     public static final Item MUSIC_DISC_BATTLEFIELD = new ItemMusicDisc("music_disc_battlefield", MubbleSounds.MUSIC_DISC_BATTLEFIELD, 1);
     public static final Item MUSIC_DISC_CHAMPIONS_ROAD = new ItemMusicDisc("music_disc_champions_road", MubbleSounds.MUSIC_DISC_CHAMPIONS_ROAD, 1);
     public static final Item MUSIC_DISC_CONFRONTING_MYSELF = new ItemMusicDisc("music_disc_confronting_myself", MubbleSounds.MUSIC_DISC_CONFRONTING_MYSELF, 1);

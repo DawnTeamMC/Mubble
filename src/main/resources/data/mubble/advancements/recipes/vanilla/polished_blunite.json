@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/polished_blunite"
+			"mubble:polished_blunite"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:vanilla/polished_blunite"
+				"recipe": "mubble:polished_blunite"
 			}
 		}
 	},

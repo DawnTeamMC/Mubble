@@ -14,6 +14,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -27,7 +28,7 @@ public class BlockCloud extends Block
     {
         super(Properties.create(Material.GLASS).sound(SoundType.CLOTH).hardnessAndResistance(0f).doesNotBlockMovement());
         setRegistryName(Mubble.MOD_ID, color + "_cloud_block");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
     }
     
     @Override

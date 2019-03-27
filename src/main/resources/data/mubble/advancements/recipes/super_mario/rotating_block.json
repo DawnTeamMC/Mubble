@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/rotating_block"
+			"mubble:rotating_block"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/rotating_block"
+				"recipe": "mubble:rotating_block"
 			}
 		}
 	},

@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Particles;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -23,7 +24,7 @@ public class BlockNote extends Block
     {
         super(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.4F, 2.0F));
         setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
     
     @Override

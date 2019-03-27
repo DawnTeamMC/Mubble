@@ -4,9 +4,9 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/polished_carbonite_stairs",
-			"mubble:vanilla/polished_carbonite_slab",
-			"mubble:vanilla/polished_carbonite_vertical_slab"
+			"mubble:polished_carbonite_stairs",
+			"mubble:polished_carbonite_slab",
+			"mubble:polished_carbonite_vertical_slab"
 		]
 	},
 	"criteria":
@@ -29,7 +29,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": 
 			{
-				"recipe": "mubble:vanilla/polished_carbonite_blocks"
+				"recipe": "mubble:polished_carbonite_blocks"
 			}
 		}
 	},

@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/super_crown"
+			"mubble:super_crown"
 		]
 	},
 	"criteria":
@@ -40,7 +40,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/super_crown"
+				"recipe": "mubble:super_crown"
 			}
 		}
 	},

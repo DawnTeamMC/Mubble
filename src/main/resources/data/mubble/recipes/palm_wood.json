@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "minecraft:bark",
+	"pattern":
+	[
+		"##",
+		"##"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:palm_log"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:palm_wood",
+		"count": 3
+	}
+}

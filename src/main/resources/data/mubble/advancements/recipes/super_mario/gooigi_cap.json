@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/gooigi_cap"
+			"mubble:gooigi_cap"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/gooigi_cap"
+				"recipe": "mubble:gooigi_cap"
 			}
 		}
 	},

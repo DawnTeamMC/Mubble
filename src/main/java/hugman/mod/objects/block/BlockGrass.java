@@ -7,6 +7,7 @@ import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +20,7 @@ public class BlockGrass extends net.minecraft.block.BlockGrass
     {
         super(properties);
         setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
     
     private static boolean func_196383_a(IWorldReaderBase p_196383_0_, BlockPos p_196383_1_)

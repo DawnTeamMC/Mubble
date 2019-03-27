@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:youtube/mayro_cap"
+			"mubble:mayro_cap"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:youtube/mayro_cap"
+				"recipe": "mubble:mayro_cap"
 			}
 		}
 	},

@@ -6,6 +6,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -14,7 +15,7 @@ public class BlockBalloon extends BlockFlying
 {
     public BlockBalloon(EnumDyeColor color)
     {
-        super(color.getTranslationKey() + "_balloon", Properties.create(Material.CLOTH, color).hardnessAndResistance(0F).sound(SoundType.CLOTH));
+        super(color.getTranslationKey() + "_balloon", Properties.create(Material.CLOTH, color).hardnessAndResistance(0F).sound(SoundType.CLOTH), ItemGroup.DECORATIONS);
     }
     
     @Override

@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:celeste/mirror_temple_bricks"
+			"mubble:mirror_temple_bricks"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:celeste/mirror_temple_bricks"
+				"recipe": "mubble:mirror_temple_bricks"
 			}
 		}
 	},

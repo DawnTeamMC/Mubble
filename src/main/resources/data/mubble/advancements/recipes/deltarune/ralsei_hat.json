@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:deltarune/ralsei_hat"
+			"mubble:ralsei_hat"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:deltarune/ralsei_hat"
+				"recipe": "mubble:ralsei_hat"
 			}
 		}
 	},

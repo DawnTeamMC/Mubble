@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/yellow_coin_to_red_coin"
+			"mubble:yellow_coin_to_red_coin"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/yellow_coin_to_red_coin"
+				"recipe": "mubble:yellow_coin_to_red_coin"
 			}
 		}
 	},

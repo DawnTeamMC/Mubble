@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:castlevania/candy_cane_from_pillar"
+			"mubble:candy_cane_from_pillar"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:castlevania/candy_cane_from_pillar"
+				"recipe": "mubble:candy_cane_from_pillar"
 			}
 		}
 	},

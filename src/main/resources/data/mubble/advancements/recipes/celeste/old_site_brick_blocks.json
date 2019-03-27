@@ -4,10 +4,10 @@
 	{
 		"recipes":
 		[
-			"mubble:celeste/old_site_brick_stairs",
-			"mubble:celeste/old_site_brick_slab",
-			"mubble:celeste/old_site_brick_vertical_slab",
-			"mubble:celeste/old_site_brick_wall"
+			"mubble:old_site_brick_stairs",
+			"mubble:old_site_brick_slab",
+			"mubble:old_site_brick_vertical_slab",
+			"mubble:old_site_brick_wall"
 		]
 	},
 	"criteria":
@@ -30,7 +30,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": 
 			{
-				"recipe": "mubble:celeste/old_site_brick_blocks"
+				"recipe": "mubble:old_site_brick_blocks"
 			}
 		}
 	},

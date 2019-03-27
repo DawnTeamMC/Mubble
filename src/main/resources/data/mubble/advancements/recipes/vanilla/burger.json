@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/burger"
+			"mubble:burger"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:vanilla/burger"
+				"recipe": "mubble:burger"
 			}
 		}
 	},

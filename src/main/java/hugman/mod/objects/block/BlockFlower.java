@@ -4,6 +4,7 @@ import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.item.ItemGroup;
 
 public class BlockFlower extends net.minecraft.block.BlockFlower
 {
@@ -11,7 +12,7 @@ public class BlockFlower extends net.minecraft.block.BlockFlower
     {
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT));
         setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + name, this));
     }
     
@@ -19,7 +20,7 @@ public class BlockFlower extends net.minecraft.block.BlockFlower
     {
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).sound(SoundType.PLANT).lightValue(light));
         setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + name, this));
     }
 }

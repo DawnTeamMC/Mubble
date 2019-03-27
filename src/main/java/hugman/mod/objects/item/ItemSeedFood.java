@@ -3,13 +3,13 @@ package hugman.mod.objects.item;
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
-import hugman.mod.init.MubbleTabs;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.EnumActionResult;
@@ -23,7 +23,7 @@ public class ItemSeedFood extends net.minecraft.item.ItemSeedFood implements IPl
 {
     public ItemSeedFood(String name, int heal, float saturation)
     {
-        super(heal, saturation, Blocks.STONE, new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS));
+        super(heal, saturation, Blocks.STONE, new Item.Properties().group(ItemGroup.FOOD));
         setRegistryName(Mubble.MOD_ID, name);
 		MubbleItems.register(this);
     }

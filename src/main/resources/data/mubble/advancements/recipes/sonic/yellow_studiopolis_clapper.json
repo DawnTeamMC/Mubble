@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:sonic/yellow_studiopolis_clapper"
+			"mubble:yellow_studiopolis_clapper"
 		]
 	},
 	"criteria":
@@ -40,7 +40,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:sonic/yellow_studiopolis_clapper"
+				"recipe": "mubble:yellow_studiopolis_clapper"
 			}
 		}
 	},

@@ -17,6 +17,7 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.init.Fluids;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
@@ -44,14 +45,14 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
     {
         super(Properties.from(base_block));
         setRegistryName(Mubble.MOD_ID, name + "_vertical_slab");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
     
     public BlockSlabVertical(Block base_block)
     {
         super(Properties.from(base_block));
         setRegistryName(base_block.getRegistryName() + "_vertical_slab");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
     
     @Override

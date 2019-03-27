@@ -8,6 +8,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -19,7 +20,7 @@ public class BlockMushroom extends net.minecraft.block.BlockMushroom
     {
         super(Properties.create(Material.PLANTS, color).doesNotBlockMovement().hardnessAndResistance(0).needsRandomTick().sound(SoundType.PLANT));
         setRegistryName(Mubble.MOD_ID, color.getTranslationKey() + "_mushroom");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + color.getTranslationKey() + "_mushroom", this));
     }
     
@@ -27,7 +28,7 @@ public class BlockMushroom extends net.minecraft.block.BlockMushroom
     {
         super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).needsRandomTick().sound(SoundType.PLANT).lightValue(light));
         setRegistryName(Mubble.MOD_ID, color + "_mushroom");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + color + "_mushroom", this));
     }
     

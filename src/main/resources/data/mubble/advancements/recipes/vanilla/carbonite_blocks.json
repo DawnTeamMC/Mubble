@@ -4,10 +4,10 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/carbonite_stairs",
-			"mubble:vanilla/carbonite_slab",
-			"mubble:vanilla/carbonite_vertical_slab",
-			"mubble:vanilla/carbonite_wall"
+			"mubble:carbonite_stairs",
+			"mubble:carbonite_slab",
+			"mubble:carbonite_vertical_slab",
+			"mubble:carbonite_wall"
 		]
 	},
 	"criteria":
@@ -30,7 +30,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": 
 			{
-				"recipe": "mubble:vanilla/carbonite_blocks"
+				"recipe": "mubble:carbonite_blocks"
 			}
 		}
 	},

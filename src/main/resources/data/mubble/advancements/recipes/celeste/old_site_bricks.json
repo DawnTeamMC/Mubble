@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:celeste/old_site_bricks"
+			"mubble:old_site_bricks"
 		]
 	},
 	"criteria":
@@ -40,7 +40,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:celeste/old_site_bricks"
+				"recipe": "mubble:old_site_bricks"
 			}
 		}
 	},

@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:youtube/noteblock_head"
+			"mubble:noteblock_head"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:youtube/noteblock_head"
+				"recipe": "mubble:noteblock_head"
 			}
 		}
 	},

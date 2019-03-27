@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemGroup;
 
 public class BlockHugeMushroom extends net.minecraft.block.BlockHugeMushroom
 {
@@ -13,6 +14,6 @@ public class BlockHugeMushroom extends net.minecraft.block.BlockHugeMushroom
     {
         super(mushroom, Block.Properties.create(Material.WOOD, color).hardnessAndResistance(0.2F).sound(SoundType.WOOD));
         setRegistryName(Mubble.MOD_ID, color.getTranslationKey() + "_mushroom_block");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
     }
 }

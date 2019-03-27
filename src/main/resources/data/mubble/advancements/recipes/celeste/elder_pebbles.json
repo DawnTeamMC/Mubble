@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:celeste/elder_pebbles"
+			"mubble:elder_pebbles"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": 
 			{
-				"recipe": "mubble:celeste/elder_pebbles"
+				"recipe": "mubble:elder_pebbles"
 			}
 		}
 	},

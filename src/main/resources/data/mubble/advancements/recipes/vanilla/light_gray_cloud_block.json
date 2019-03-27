@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/light_gray_cloud_block"
+			"mubble:light_gray_cloud_block"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:vanilla/light_gray_cloud_block"
+				"recipe": "mubble:light_gray_cloud_block"
 			}
 		}
 	},

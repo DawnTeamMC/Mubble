@@ -4,10 +4,10 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/blunite_stairs",
-			"mubble:vanilla/blunite_slab",
-			"mubble:vanilla/blunite_vertical_slab",
-			"mubble:vanilla/blunite_wall"
+			"mubble:blunite_stairs",
+			"mubble:blunite_slab",
+			"mubble:blunite_vertical_slab",
+			"mubble:blunite_wall"
 		]
 	},
 	"criteria":
@@ -30,7 +30,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": 
 			{
-				"recipe": "mubble:vanilla/blunite_blocks"
+				"recipe": "mubble:blunite_blocks"
 			}
 		}
 	},

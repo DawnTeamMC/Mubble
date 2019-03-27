@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:super_mario/princess_daisy_crown"
+			"mubble:princess_daisy_crown"
 		]
 	},
 	"criteria":
@@ -40,7 +40,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:super_mario/princess_daisy_crown"
+				"recipe": "mubble:princess_daisy_crown"
 			}
 		}
 	},

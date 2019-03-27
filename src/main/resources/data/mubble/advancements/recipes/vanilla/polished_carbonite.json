@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/polished_carbonite"
+			"mubble:polished_carbonite"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:vanilla/polished_carbonite"
+				"recipe": "mubble:polished_carbonite"
 			}
 		}
 	},

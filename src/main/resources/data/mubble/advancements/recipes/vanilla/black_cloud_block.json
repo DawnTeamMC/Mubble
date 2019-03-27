@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:vanilla/black_cloud_block"
+			"mubble:black_cloud_block"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:vanilla/black_cloud_block"
+				"recipe": "mubble:black_cloud_block"
 			}
 		}
 	},

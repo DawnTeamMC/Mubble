@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "minecraft:wooden_stairs",
+	"pattern":
+	[
+		"#  ",
+		"## ",
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:palm_planks"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:palm_stairs",
+		"count": 4
+	}
+}

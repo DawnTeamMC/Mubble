@@ -5,6 +5,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -13,12 +14,12 @@ public class BlockPuyo extends BlockDirectional
 {
     public BlockPuyo(EnumDyeColor color)
     {
-        super(color.getTranslationKey() + "_puyo", Properties.create(Material.CLAY, color).slipperiness(0.8F).sound(SoundType.SLIME));
+        super(color.getTranslationKey() + "_puyo", Properties.create(Material.CLAY, color).slipperiness(0.8F).sound(SoundType.SLIME), ItemGroup.DECORATIONS);
     }
     
     public BlockPuyo(String color)
     {
-        super(color + "_puyo", Properties.create(Material.CLAY).slipperiness(0.8F).sound(SoundType.SLIME));
+        super(color + "_puyo", Properties.create(Material.CLAY).slipperiness(0.8F).sound(SoundType.SLIME), ItemGroup.DECORATIONS);
     }
     
     @Override

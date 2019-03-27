@@ -5,6 +5,7 @@ import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.Mirror;
@@ -12,12 +13,12 @@ import net.minecraft.util.Rotation;
 
 public class BlockDirectional extends net.minecraft.block.BlockDirectional
 {	
-    public BlockDirectional(String name, Properties properties)
+    public BlockDirectional(String name, Properties properties, ItemGroup group)
     {
         super(properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.UP));
         setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, group);
     }
     
     @Override

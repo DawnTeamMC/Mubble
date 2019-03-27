@@ -3,6 +3,7 @@ package hugman.mod.objects.block;
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemGroup;
 
 public class BlockTrapDoor extends net.minecraft.block.BlockTrapDoor
 {
@@ -10,6 +11,6 @@ public class BlockTrapDoor extends net.minecraft.block.BlockTrapDoor
     {
         super(Properties.from(Blocks.OAK_TRAPDOOR));
         setRegistryName(Mubble.MOD_ID, name + "_trapdoor");
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, ItemGroup.REDSTONE);
     }
 }

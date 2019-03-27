@@ -5,11 +5,11 @@ import java.util.Random;
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
-import hugman.mod.init.MubbleTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Particles;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
@@ -22,14 +22,14 @@ public class ItemCapeFeather extends Item
 {
     public ItemCapeFeather(String name)
     {
-        super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS));
+        super(new Item.Properties().group(ItemGroup.TRANSPORTATION));
         setRegistryName(Mubble.MOD_ID, name);
 		MubbleItems.register(this);
     }
     
     public ItemCapeFeather(String name, EnumRarity rarity)
     {
-        super(new Item.Properties().group(MubbleTabs.MUBBLE_ITEMS).rarity(rarity));
+        super(new Item.Properties().group(ItemGroup.TRANSPORTATION).rarity(rarity));
         setRegistryName(Mubble.MOD_ID, name);
 		MubbleItems.register(this);
     }

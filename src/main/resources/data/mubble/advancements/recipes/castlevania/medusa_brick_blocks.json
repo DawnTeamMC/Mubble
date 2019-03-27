@@ -4,10 +4,10 @@
 	{
 		"recipes":
 		[
-			"mubble:castlevania/medusa_brick_stairs",
-			"mubble:castlevania/medusa_brick_slab",
-			"mubble:castlevania/medusa_brick_vertical_slab",
-			"mubble:castlevania/medusa_brick_wall"
+			"mubble:medusa_brick_stairs",
+			"mubble:medusa_brick_slab",
+			"mubble:medusa_brick_vertical_slab",
+			"mubble:medusa_brick_wall"
 		]
 	},
 	"criteria":
@@ -30,7 +30,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions": 
 			{
-				"recipe": "mubble:castlevania/medusa_brick_blocks"
+				"recipe": "mubble:medusa_brick_blocks"
 			}
 		}
 	},

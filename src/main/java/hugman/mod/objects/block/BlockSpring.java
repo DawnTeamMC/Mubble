@@ -14,6 +14,7 @@ import net.minecraft.fluid.IFluidState;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Fluids;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -53,7 +54,7 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
 	
     public BlockSpring()
     {
-        super("spring", Properties.create(Material.IRON).hardnessAndResistance(4f));
+        super("spring", Properties.create(Material.IRON).hardnessAndResistance(4f), ItemGroup.TRANSPORTATION);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.UP).with(WATERLOGGED, Boolean.valueOf(false)));
     }
     

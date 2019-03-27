@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -19,11 +20,11 @@ public class BlockFlying extends Block
 {
 	public static boolean flyInstantly;
 	
-    public BlockFlying(String name, Properties properties)
+    public BlockFlying(String name, Properties properties, ItemGroup group)
     {
         super(properties);
         setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this);
+        MubbleBlocks.register(this, group);
     }
     
     @Override
