@@ -11,9 +11,9 @@ Mubble is also available in English, French, Spanish, German, Dutch, Chinese, Br
 
 # Screenshots:
 
-![Super Mario Level](https://raw.githubusercontent.com/Hugman76/Mubble/master/external/screenshots/super_mario_bros._level.png)
-![Colors](https://raw.githubusercontent.com/Hugman76/Mubble/master/external/screenshots/colors.png)
-![Costumes](https://raw.githubusercontent.com/Hugman76/Mubble/master/external/screenshots/costumes.png)
+![Super Mario Level](https://raw.githubusercontent.com/Hugman76/Mubble/1.13/external/screenshots/super_mario_bros._level.png)
+![Colors](https://raw.githubusercontent.com/Hugman76/Mubble/1.13/external/screenshots/colors.png)
+![Costumes](https://raw.githubusercontent.com/Hugman76/Mubble/1.13/external/screenshots/costumes.png)
 
 
 # Links:
