@@ -6,6 +6,7 @@ import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleLootTables;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAvoidEntity;
@@ -31,7 +32,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
@@ -59,10 +59,11 @@ public class EntityToad extends EntityAnimal
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> ((EntityItem) checkedEntity).getItem().getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2d, 1.45d, EntitySelectors.IS_ALIVE));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> ((EntityPlayer) checkedEntity).getHeldItem(EnumHand.MAIN_HAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> ((EntityPlayer) checkedEntity).getHeldItem(EnumHand.OFF_HAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> ((EntityPlayer) checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == MubbleCostumes.SUPER_CROWN || ((EntityPlayer) checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityChincho.class, 10f, 1.2d, 1.45d, EntitySelectors.IS_ALIVE));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> ((EntityItem) checkedEntity).getItem().getItem() == MubbleCostumes.SUPER_CROWN, 10f, 1.2d, 1.45d, EntitySelectors.IS_ALIVE));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> ((EntityLivingBase) checkedEntity).getHeldItemMainhand().getItem() == MubbleCostumes.SUPER_CROWN, 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> ((EntityLivingBase) checkedEntity).getHeldItemOffhand().getItem() == MubbleCostumes.SUPER_CROWN, 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> ((EntityLivingBase) checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == MubbleCostumes.SUPER_CROWN, 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
         this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(2, new EntityAIPanic(this, 1.6D));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
