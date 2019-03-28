@@ -101,7 +101,7 @@ public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnD
 	@Override
 	public boolean canBeCollidedWith()
 	{
-		return !this.removed;
+		return isAlive();
 	}
 	
 	@SuppressWarnings("deprecation")

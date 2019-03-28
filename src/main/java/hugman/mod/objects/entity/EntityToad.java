@@ -1,5 +1,6 @@
 package hugman.mod.objects.entity;
 
+import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleLootTables;
@@ -7,6 +8,7 @@ import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMate;
@@ -16,9 +18,11 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
 import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.NBTTagCompound;
@@ -26,6 +30,8 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntitySelectors;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
@@ -53,10 +59,10 @@ public class EntityToad extends EntityAnimal
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        //this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> (checkedEntity).getItem().getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2d, 1.45d));
-        //this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.MAIN_HAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f));
-        //this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getHeldItem(EnumHand.OFF_HAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f));
-        //this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> (checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> ((EntityItem) checkedEntity).getItem().getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2d, 1.45d, EntitySelectors.IS_ALIVE));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> ((EntityPlayer) checkedEntity).getHeldItem(EnumHand.MAIN_HAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> ((EntityPlayer) checkedEntity).getHeldItem(EnumHand.OFF_HAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityPlayer.class, checkedEntity -> ((EntityPlayer) checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).getItem() == MubbleCostumes.SUPER_CROWN || ((EntityPlayer) checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.OFFHAND).getItem() == MubbleCostumes.SUPER_CROWN, 10, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
         this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(2, new EntityAIPanic(this, 1.6D));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
