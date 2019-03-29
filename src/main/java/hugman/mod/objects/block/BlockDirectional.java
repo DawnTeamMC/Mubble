@@ -28,10 +28,9 @@ public class BlockDirectional extends net.minecraft.block.BlockDirectional
 	}
     
     @Override
-    @SuppressWarnings("deprecation")
 	public IBlockState mirror(IBlockState state, Mirror mirrorIn)
     {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+    	return state.mirror(mirrorIn);
 	}
     
     @Override

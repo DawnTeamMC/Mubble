@@ -1,8 +1,6 @@
 {
 	"comment": "CREATIVE TABS",
-	"itemGroup.mubble_blocks": "Blocs Mubble",
-	"itemGroup.mubble_items": "Objets Mubble",
-	"itemGroup.mubble_costumes": "Costumes Mubble",
+	"itemGroup.costumes": "Costumes",
 
 	"comment": "BLOCKS",
 	"block.mubble.vanadium_block": "Bloc de vanadium",
@@ -472,6 +470,8 @@
 	"item.mubble.king_round_mask": "Masque King Round",
 
 	"item.mubble.baldi_head": "Tête de Baldi",
+
+	"item.mubble.paul_mask": "Masque de Paul",
 
 	"item.mubble.mayro_cap": "Casquette de Mayro",
 	"item.mubble.noteblock_head": "Tête de Noteblock",

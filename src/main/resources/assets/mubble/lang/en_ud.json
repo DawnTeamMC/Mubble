@@ -1,8 +1,6 @@
 {
 	"comment": "CREATIVE TABS",
-	"itemGroup.mubble_blocks": "sʞɔolᗺ ǝlqqnW",
-	"itemGroup.mubble_items": "sɯǝʇI ǝlqqnW",
-	"itemGroup.mubble_costumes": "sǝɯnʇsoƆ ǝlqqnW",
+	"//itemGroup.costumes": "Costumes",
 
 	"comment": "BLOCKS",
 	"block.mubble.vanadium_block": "ɯnᴉpɐuɐΛ ɟo ʞɔolᗺ",
@@ -471,6 +469,8 @@
 	"//item.mubble.king_round_mask": "<newline>",
 
 	"//item.mubble.baldi_head": "<newline>",
+
+	"//item.mubble.paul_mask": "Paul's Mask",
 
 	"item.mubble.mayro_cap": "dɐƆ s,oɹʎɐW",
 	"item.mubble.noteblock_head": "pɐǝH s,ʞɔolᗺǝʇoN",

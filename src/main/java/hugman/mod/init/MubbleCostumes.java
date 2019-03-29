@@ -8,6 +8,7 @@ import hugman.mod.objects.costume.CostumeCappy;
 import hugman.mod.objects.costume.CostumeEffect;
 import hugman.mod.objects.costume.CostumeGooigiCap;
 import hugman.mod.objects.costume.CostumeMayroCap;
+import hugman.mod.objects.costume.CostumePaulMask;
 import hugman.mod.objects.costume.CostumePrincessPeachCrown;
 import hugman.mod.objects.costume.CostumeSimple;
 import hugman.mod.objects.costume.CostumeVanishCap;
@@ -33,23 +34,28 @@ public class MubbleCostumes
 	public static final Item VANISH_CAP = new CostumeVanishCap();
 	public static final Item WING_CAP = new CostumeWingCap();
 	public static final Item GOOIGI_CAP = new CostumeGooigiCap();
+	public static final Item GOLD_MARIO_CAP = new CostumeSimple("gold_mario_cap", SoundEvents.ITEM_ARMOR_EQUIP_GOLD, EntityEquipmentSlot.HEAD);
+	public static final Item SILVER_LUIGI_CAP = new CostumeSimple("silver_mario_cap", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item PRINCESS_PEACH_CROWN = new CostumePrincessPeachCrown();
 	public static final Item PRINCESS_DAISY_CROWN = new CostumeSimple("princess_daisy_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item ROSALINA_CROWN = new CostumeSimple("rosalina_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item PINK_GOLD_PEACH_CROWN = new CostumeSimple("pink_gold_peach_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item SUPER_CROWN = new CostumeSimple("super_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
+	public static final Item MARIO_WEDDING_HAT = new CostumeSimple("mario_wedding_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
 	public static final Item BROQUE_MONSIEUR_HEAD = new CostumeSimple("broque_monsieur_head", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	
 	public static final Item BANDANA = new CostumeSimple("bandana", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
 	
 	public static final Item SNORLAX_HAT = new CostumeSimple("snorlax_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
-	
+
 	public static final Item TOP_HAT = new CostumeSimple("top_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
 	
 	public static final Item RALSEI_HAT = new CostumeSimple("ralsei_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
 	public static final Item KING_ROUND_MASK = new CostumeSimple("king_round_mask", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
 	
 	public static final Item BALDI_HEAD = new CostumeSimple("baldi_head", SoundEvents.ENTITY_PARROT_IMITATE_VEX, EntityEquipmentSlot.HEAD);
+
+	public static final Item PAUL_MASK = new CostumePaulMask();
 
 	public static final Item MAYRO_CAP = new CostumeMayroCap();
 	public static final Item KORETATO_BLOCK = new CostumeBlock(MubbleBlocks.KORETATO_BLOCK, SoundEvents.BLOCK_SNOW_HIT, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);

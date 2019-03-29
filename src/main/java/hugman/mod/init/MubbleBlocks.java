@@ -41,6 +41,7 @@ import hugman.mod.objects.block.BlockTetris;
 import hugman.mod.objects.block.BlockTetrisGlass;
 import hugman.mod.objects.block.BlockTrapDoor;
 import hugman.mod.objects.block.BlockUltimatumPortal;
+import hugman.mod.objects.block.BlockUnstable;
 import hugman.mod.objects.block.BlockWall;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
@@ -289,6 +290,7 @@ public class MubbleBlocks
     public static final Block PURPLE_BALLOON = new BlockBalloon(EnumDyeColor.PURPLE);
     public static final Block MAGENTA_BALLOON = new BlockBalloon(EnumDyeColor.MAGENTA);
     public static final Block PINK_BALLOON = new BlockBalloon(EnumDyeColor.PINK);
+    public static final Block UNSTABLE_STONE = new BlockUnstable();
     public static final Block ULTIMATUM_PORTAL = new BlockUltimatumPortal();
     
     

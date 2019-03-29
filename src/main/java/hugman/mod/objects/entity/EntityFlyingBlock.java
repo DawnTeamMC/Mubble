@@ -104,11 +104,10 @@ public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnD
 		return isAlive();
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	public void tick()
 	{
-		if (this.flyTile.isAir()) this.remove();
+		if (this.flyTile == Blocks.AIR) this.remove();
 		else
 		{
 			this.prevPosX = this.posX;
@@ -247,7 +246,6 @@ public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnD
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void readAdditional(NBTTagCompound compound)
 	{
@@ -267,7 +265,7 @@ public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnD
 		if (compound.contains("TileEntityData", 10)) {
 			this.tileEntityData = compound.getCompound("TileEntityData");
 		}
-		if (this.flyTile.isAir()) {
+		if (this.flyTile == Blocks.AIR) {
 			this.flyTile = Blocks.SAND.getDefaultState();
 		}
 

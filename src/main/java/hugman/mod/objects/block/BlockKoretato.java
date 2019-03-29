@@ -20,6 +20,7 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class BlockKoretato extends BlockDirectional
@@ -35,16 +36,15 @@ public class BlockKoretato extends BlockDirectional
     }
     
     @Override
-    public IBlockState rotate(IBlockState state, Rotation rot)
+    public IBlockState rotate(IBlockState state, IWorld world, BlockPos pos, Rotation direction)
     {
-    	return state.with(FACING, rot.rotate(state.get(FACING)));
-	}
+    	return state.with(FACING, direction.rotate(state.get(FACING)));
+    }
     
     @Override
-    @SuppressWarnings("deprecation")
 	public IBlockState mirror(IBlockState state, Mirror mirrorIn)
     {
-        return state.rotate(mirrorIn.toRotation(state.get(FACING)));
+        return state.mirror(mirrorIn);
 	}
     
     @Override

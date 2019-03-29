@@ -45,7 +45,7 @@ public class Mubble
     private void clientSetup(final FMLClientSetupEvent event)
     {
     	MubbleEntities.registerRenders();
-    	LOGGER.info("[REGISTRY] Registered entities renders (client side-only)");
+    	LOGGER.info("[REGISTRY] Registered entities renders");
     }
     
     @SubscribeEvent

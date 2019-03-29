@@ -1,8 +1,6 @@
 {
 	"comment": "CREATIVE TABS",
-	"itemGroup.mubble_blocks": "任天堂領域方塊",
-	"itemGroup.mubble_items": "任天堂領域物品",
-	"itemGroup.mubble_costumes": "任天堂領域時裝",
+	"//itemGroup.costumes": "Costumes",
 
 	"comment": "BLOCKS",
 	"block.mubble.vanadium_block": "釩塊",
@@ -471,6 +469,8 @@
 	"//item.mubble.king_round_mask": "<newline>",
 
 	"//item.mubble.baldi_head": "<newline>",
+
+	"//item.mubble.paul_mask": "Paul's Mask",
 
 	"item.mubble.mayro_cap": "馬伊羅的帽子",
 	"item.mubble.noteblock_head": "NoteBlock的頭",

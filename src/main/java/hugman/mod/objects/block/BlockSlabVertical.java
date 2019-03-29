@@ -221,12 +221,11 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
            return Fluids.EMPTY;
         }
 	}
-
-	@SuppressWarnings("deprecation")
+	
 	@Override
 	public IFluidState getFluidState(IBlockState state)
 	{
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : state.getFluidState();
 	}
 
 	@Override
@@ -253,7 +252,6 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
         }
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Override
 	public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{

@@ -1,8 +1,6 @@
 {
 	"comment": "CREATIVE TABS",
-	"itemGroup.mubble_blocks": "Mubble blokken",
-	"itemGroup.mubble_items": "Mubble voorwerpen",
-	"itemGroup.mubble_costumes": "Mubble kostuums",
+	"//itemGroup.costumes": "Costumes",
 
 	"comment": "BLOCKS",
 	"block.mubble.vanadium_block": "Vanadiumblok",
@@ -471,6 +469,8 @@
 	"item.mubble.king_round_mask": "Koning rond masker",
 
 	"item.mubble.baldi_head": "Baldi's hoofd",
+
+	"//item.mubble.paul_mask": "Paul's Mask",
 
 	"item.mubble.mayro_cap": "Mayro's pet",
 	"item.mubble.noteblock_head": "NoteBlock's hoofd",

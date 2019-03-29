@@ -116,11 +116,10 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
     	else return Fluids.EMPTY;
     }
     
-    @SuppressWarnings("deprecation")
 	@Override
     public IFluidState getFluidState(IBlockState state)
     {
-    	return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : super.getFluidState(state);
+    	return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : state.getFluidState();
     }
     
     @Override

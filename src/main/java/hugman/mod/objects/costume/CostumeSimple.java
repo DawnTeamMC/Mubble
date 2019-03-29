@@ -98,18 +98,18 @@ public class CostumeSimple extends Item
         ItemStack itemstack1 = playerIn.getItemStackFromSlot(armorType);
         if (itemstack1.isEmpty())
         {
-           playerIn.setItemStackToSlot(armorType, itemstack.copy());
-           itemstack.shrink(1);
-           worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, sound, SoundCategory.PLAYERS, 1f, 1f);
-           if(this == MubbleCostumes.SNORLAX_HAT && "Test".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.snorlax_hat.secret_status", new Object[0]), true);
-           if(this == MubbleCostumes.MAYRO_CAP && "MayroSMM".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.mayro_cap.secret_status", new Object[0]), true);
-           if(this == MubbleCostumes.NOTEBLOCK_HEAD && "NoteBlockRemix".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.noteblock_head.secret_status", new Object[0]), true);
-           if(this == MubbleCostumes.BANDANA && "Pixelcraftian".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.bandana.secret_status", new Object[0]), true);
-           return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+        	playerIn.setItemStackToSlot(armorType, itemstack.copy());
+        	itemstack.shrink(1);
+        	worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, sound, SoundCategory.PLAYERS, 1f, 1f);
+        	if(this == MubbleCostumes.SNORLAX_HAT && "SnorlaxLover".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.snorlax_hat.secret_status", new Object[0]), true);
+        	if(this == MubbleCostumes.MAYRO_CAP && "MayroSMM".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.mayro_cap.secret_status", new Object[0]), true);
+        	if(this == MubbleCostumes.NOTEBLOCK_HEAD && "NoteBlockRemix".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.noteblock_head.secret_status", new Object[0]), true);
+        	if(this == MubbleCostumes.BANDANA && "Pixelcraftian".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.bandana.secret_status", new Object[0]), true);
+        	return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
         }
         else
         {
-           return new ActionResult<>(EnumActionResult.FAIL, itemstack);
+        	return new ActionResult<>(EnumActionResult.FAIL, itemstack);
         }
 	}
     

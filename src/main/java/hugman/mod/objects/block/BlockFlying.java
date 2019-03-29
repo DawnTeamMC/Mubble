@@ -33,7 +33,6 @@ public class BlockFlying extends Block
         worldIn.getPendingBlockTicks().scheduleTick(pos, this, this.tickRate(worldIn));
     }
     
-    @SuppressWarnings("deprecation")
     @Override
 	public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
     {
@@ -86,13 +85,12 @@ public class BlockFlying extends Block
 	{
     	 return 2;
 	}
-
-    @SuppressWarnings("deprecation")
+	
 	public static boolean canFlyThrough(IBlockState state)
     {
         Block block = state.getBlock();
         Material material = state.getMaterial();
-        return state.isAir() || block == Blocks.FIRE || material.isLiquid() || material.isReplaceable();
+        return block == Blocks.AIR || block == Blocks.FIRE || material.isLiquid() || material.isReplaceable();
      }
 
 	public void onEndFlying(World worldIn, BlockPos pos, IBlockState flyingState, IBlockState hitState)

@@ -1,8 +1,6 @@
 {
 	"comment": "CREATIVE TABS",
-	"itemGroup.mubble_blocks": "Mubble cubes thingyz",
-	"itemGroup.mubble_items": "Mubble toyz",
-	"itemGroup.mubble_costumes": "Mubble put things on you for no reazon lol",
+	"//itemGroup.costumes": "Costumes",
 
 	"comment": "BLOCKS",
 	"block.mubble.vanadium_block": "shiny purple cube",
@@ -471,6 +469,8 @@
 	"item.mubble.king_round_mask": "round demon mask creepi hooo",
 
 	"item.mubble.baldi_head": "besicz hed",
+
+	"//item.mubble.paul_mask": "Paul's Mask",
 
 	"item.mubble.mayro_cap": "Mayro hat",
 	"item.mubble.noteblock_head": "NoteBlock hed",
