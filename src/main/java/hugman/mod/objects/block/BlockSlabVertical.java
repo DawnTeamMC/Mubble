@@ -225,7 +225,7 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
 	@Override
 	public IFluidState getFluidState(IBlockState state)
 	{
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : state.getFluidState();
+        return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
 	}
 
 	@Override
@@ -259,8 +259,7 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
         {
            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
         }
-
-        return super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        return stateIn;
 	}
 
 	@Override

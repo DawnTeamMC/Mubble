@@ -119,7 +119,7 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
 	@Override
     public IFluidState getFluidState(IBlockState state)
     {
-    	return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : state.getFluidState();
+    	return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
     }
     
     @Override

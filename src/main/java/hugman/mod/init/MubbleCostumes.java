@@ -35,7 +35,7 @@ public class MubbleCostumes
 	public static final Item WING_CAP = new CostumeWingCap();
 	public static final Item GOOIGI_CAP = new CostumeGooigiCap();
 	public static final Item GOLD_MARIO_CAP = new CostumeSimple("gold_mario_cap", SoundEvents.ITEM_ARMOR_EQUIP_GOLD, EntityEquipmentSlot.HEAD);
-	public static final Item SILVER_LUIGI_CAP = new CostumeSimple("silver_mario_cap", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
+	public static final Item SILVER_LUIGI_CAP = new CostumeSimple("silver_luigi_cap", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item PRINCESS_PEACH_CROWN = new CostumePrincessPeachCrown();
 	public static final Item PRINCESS_DAISY_CROWN = new CostumeSimple("princess_daisy_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	public static final Item ROSALINA_CROWN = new CostumeSimple("rosalina_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
