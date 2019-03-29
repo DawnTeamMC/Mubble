@@ -34,7 +34,7 @@ public class BlockUnstable extends Block
     @Override
     public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
     {
-    	if(worldIn.isRemote && worldIn.rand.nextInt(8) == 0)
+    	if(!worldIn.isRemote && worldIn.rand.nextInt(8) == 0)
     	{
     		worldIn.destroyBlock(pos, false);
     	}
