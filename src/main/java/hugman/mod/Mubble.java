@@ -7,6 +7,7 @@ import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleColorMaps;
 import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleEntities;
+import hugman.mod.init.MubbleGenerators;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
@@ -20,6 +21,7 @@ import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerAboutToStartEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -35,6 +37,7 @@ public class Mubble
     {        
         MinecraftForge.EVENT_BUS.register(this);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
     }
     
     public static Logger getLogger()
@@ -46,6 +49,12 @@ public class Mubble
     {
     	MubbleEntities.registerRenders();
     	LOGGER.info("[REGISTRY] Registered entities renders");
+    }
+    
+    private void setup(final FMLCommonSetupEvent event)
+    {
+    	MubbleGenerators.init();
+    	LOGGER.info("[REGISTRY] Registered ores to world generation");
     }
     
     @SubscribeEvent

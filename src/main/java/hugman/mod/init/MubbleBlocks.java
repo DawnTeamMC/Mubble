@@ -396,7 +396,7 @@ public class MubbleBlocks
     public static final Block SPRING = new BlockSpring();
     
     
-    
+
     public static final Block SCARLET_MUSHROOM = new BlockMushroom("scarlet", 7);
     public static final Block SCARLET_ORCHID = new BlockFlower("scarlet_orchid", 7);
     
