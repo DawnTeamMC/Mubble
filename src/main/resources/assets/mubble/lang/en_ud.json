@@ -226,6 +226,7 @@
 	"//block.mubble.light_gray_balloon": "<newline>",
 	"//block.mubble.gray_balloon": "<newline>",
 	"//block.mubble.black_balloon": "<newline>",
+	"//block.mubble.unstable_stone": "Unstable Stone",
 
 	"block.mubble.question_block": "ʞɔolᗺ ¿",
 	"block.mubble.empty_block": "ʞɔolᗺ ʎʇdɯƎ",
@@ -392,6 +393,9 @@
 	"//item.mubble.tomato": "<newline>",
 	"//item.mubble.salad": "<newline>",
 	"//item.mubble.cheese": "<newline>",
+	"//item.mubble.banana": "Banana",
+	"//item.mubble.apricot": "Apricot",
+	"//item.mubble.mango": "Mango",
 	"//item.mubble.totem_of_ascending": "<newline>",
 
 	"item.mubble.super_mushroom": "ɯooɹɥsnW ɹǝdnS",

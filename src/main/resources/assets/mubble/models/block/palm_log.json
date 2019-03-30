@@ -2,7 +2,7 @@
 	"parent": "block/cube_column",
 	"textures":
 	{
-		"end": "mubble:block/palm_log_top",
-		"side": "mubble:block/palm_log"
+		"end": "mubble:block/palm_log/top",
+		"side": "mubble:block/palm_log/side"
 	}
 }

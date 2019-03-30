@@ -5,7 +5,7 @@ import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.block.trees.OakTree;
+import net.minecraft.block.trees.AbstractTree;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.math.BlockPos;
@@ -13,9 +13,9 @@ import net.minecraft.world.IBlockReader;
 
 public class BlockSapling extends net.minecraft.block.BlockSapling
 {
-    public BlockSapling(String name)
+    public BlockSapling(String name, AbstractTree tree)
     {
-        super(new OakTree(), Properties.from(Blocks.OAK_SAPLING));
+        super(tree, Properties.from(Blocks.OAK_SAPLING));
         setRegistryName(Mubble.MOD_ID, name + "_sapling");
         MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + name + "_sapling", this));

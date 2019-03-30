@@ -2,7 +2,7 @@
 	"parent": "block/door_bottom_rh",
 	"textures":
 	{
-		"bottom": "mubble:block/palm_door_bottom",
-		"top": "mubble:block/palm_door_top"
+		"bottom": "mubble:block/palm_door/bottom",
+		"top": "mubble:block/palm_door/top"
 	}
 }

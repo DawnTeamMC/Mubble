@@ -224,6 +224,7 @@
 	"block.mubble.light_gray_balloon": "Hellgrauer Luftballon",
 	"block.mubble.gray_balloon": "Grauer Luftballon",
 	"block.mubble.black_balloon": "Schwarzer Luftballon",
+	"//block.mubble.unstable_stone": "Unstable Stone",
 
 	"block.mubble.question_block": "?-block",
 	"block.mubble.empty_block": "Leerer Block",
@@ -390,6 +391,9 @@
 	"item.mubble.tomato": "Tomate",
 	"item.mubble.salad": "Salat",
 	"item.mubble.cheese": "Käse",
+	"//item.mubble.banana": "Banana",
+	"//item.mubble.apricot": "Apricot",
+	"//item.mubble.mango": "Mango",
 	"item.mubble.totem_of_ascending": "Totem des Aufsteigends",
 
 	"item.mubble.super_mushroom": "Superpilz",

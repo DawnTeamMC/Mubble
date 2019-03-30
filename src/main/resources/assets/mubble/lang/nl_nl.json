@@ -226,6 +226,7 @@
 	"block.mubble.light_gray_balloon": "Lichtgrijze ballon",
 	"block.mubble.gray_balloon": "Grijze ballon",
 	"block.mubble.black_balloon": "Zwarte ballon",
+	"//block.mubble.unstable_stone": "Unstable Stone",
 
 	"block.mubble.question_block": "?-blok",
 	"block.mubble.empty_block": "Leeg blok",
@@ -392,6 +393,9 @@
 	"item.mubble.tomato": "Tomaat",
 	"item.mubble.salad": "Salade",
 	"item.mubble.cheese": "Kaas",
+	"//item.mubble.banana": "Banana",
+	"//item.mubble.apricot": "Apricot",
+	"//item.mubble.mango": "Mango",
 	"item.mubble.totem_of_ascending": "Totem der opstijging",
 
 	"item.mubble.super_mushroom": "Super paddenstoel",

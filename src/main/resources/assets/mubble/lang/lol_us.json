@@ -226,6 +226,7 @@
 	"block.mubble.light_gray_balloon": "less wot beloon",
 	"block.mubble.gray_balloon": "lesser wot beloon",
 	"block.mubble.black_balloon": "not even wot beloon",
+	"//block.mubble.unstable_stone": "Unstable Stone",
 
 	"block.mubble.question_block": "BLOC ???? BLOOOOOC ?????????????",
 	"block.mubble.empty_block": "GBJ",
@@ -392,6 +393,9 @@
 	"item.mubble.tomato": "tomto",
 	"item.mubble.salad": "sld",
 	"item.mubble.cheese": "CHEEZ",
+	"//item.mubble.banana": "Banana",
+	"//item.mubble.apricot": "Apricot",
+	"//item.mubble.mango": "Mango",
 	"//item.mubble.totem_of_ascending": "<newline>",
 
 	"item.mubble.super_mushroom": "SUPA MUSH",
