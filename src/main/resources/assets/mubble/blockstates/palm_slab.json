@@ -1,8 +1,8 @@
 {
 	"variants":
 	{
-		"type=bottom": { "model": "mubble:block/palm_slab" },
-		"type=top": { "model": "mubble:block/palm_slab_top" },
-		"type=double": { "model": "mubble:block/palm_planks" }
+		"type=bottom": {"model": "mubble:block/palm_slab/bottom"},
+		"type=top": {"model": "mubble:block/palm_slab/top"},
+		"type=double": {"model": "mubble:block/palm_planks"}
 	}
 }

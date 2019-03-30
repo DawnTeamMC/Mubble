@@ -1,5 +1,5 @@
 {
-	"parent": "block/pressure_plate_down",
+	"parent": "block/fence_post",
 	"textures":
 	{
 		"texture": "mubble:block/palm_planks"

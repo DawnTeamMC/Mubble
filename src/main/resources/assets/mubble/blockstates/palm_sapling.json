@@ -1,6 +1,6 @@
 {
 	"variants":
 	{
-		"": { "model": "mubble:block/palm_sapling" }
+		"": {"model": "mubble:block/palm_sapling"}
 	}
 }

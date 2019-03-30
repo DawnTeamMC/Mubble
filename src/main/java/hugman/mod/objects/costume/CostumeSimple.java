@@ -100,7 +100,7 @@ public class CostumeSimple extends Item
         {
         	playerIn.setItemStackToSlot(armorType, itemstack.copy());
         	itemstack.shrink(1);
-        	worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, sound, SoundCategory.PLAYERS, 1f, 1f);
+        	worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, this.sound, SoundCategory.PLAYERS, 1f, 1f);
         	if(this == MubbleCostumes.SNORLAX_HAT && "SnorlaxLover".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.snorlax_hat.secret_status", new Object[0]), true);
         	if(this == MubbleCostumes.MAYRO_CAP && "MayroSMM".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.mayro_cap.secret_status", new Object[0]), true);
         	if(this == MubbleCostumes.NOTEBLOCK_HEAD && "NoteBlockRemix".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TextComponentTranslation("item.mubble.noteblock_head.secret_status", new Object[0]), true);

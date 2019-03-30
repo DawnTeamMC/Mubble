@@ -21,6 +21,14 @@ public class BlockDirectional extends net.minecraft.block.BlockDirectional
         MubbleBlocks.register(this, group);
     }
     
+    public BlockDirectional(String name, Properties properties)
+    {
+        super(properties);
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.UP));
+        setRegistryName(Mubble.MOD_ID, name);
+        MubbleBlocks.registerWithoutItem(this);
+    }
+    
     @Override
     public IBlockState rotate(IBlockState state, Rotation rot)
     {

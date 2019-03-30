@@ -425,10 +425,10 @@ public class MubbleBlocks
     public static final Block TURQUOISE_PUYO = new BlockPuyo("turquoise");
     public static final Block BLUE_PUYO = new BlockPuyo(EnumDyeColor.BLUE);
     public static final Block PURPLE_PUYO = new BlockPuyo(EnumDyeColor.PURPLE);
-    public static final Block GARBAGE_PUYO = new BlockDirectional("garbage_puyo", Properties.from(Blocks.STONE), ItemGroup.DECORATIONS);
-    public static final Block POINT_PUYO = new BlockDirectional("point_puyo", Properties.from(Blocks.STONE).lightValue(10), ItemGroup.DECORATIONS);
-    public static final Block HARD_PUYO = new BlockDirectional("hard_puyo", Properties.from(Blocks.STONE), ItemGroup.DECORATIONS);
-    public static final Block IRON_PUYO = new BlockDirectional("iron_puyo", Properties.from(Blocks.IRON_BLOCK), ItemGroup.DECORATIONS);
+    public static final Block GARBAGE_PUYO = new BlockDirectional("garbage_puyo", Properties.from(Blocks.STONE));
+    public static final Block POINT_PUYO = new BlockDirectional("point_puyo", Properties.from(Blocks.STONE).lightValue(10));
+    public static final Block HARD_PUYO = new BlockDirectional("hard_puyo", Properties.from(Blocks.STONE));
+    public static final Block IRON_PUYO = new BlockDirectional("iron_puyo", Properties.from(Blocks.IRON_BLOCK));
     public static final Block PUYO_BLOCK = new BlockSimple("puyo_block", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
     
     

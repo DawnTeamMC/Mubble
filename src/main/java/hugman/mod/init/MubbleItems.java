@@ -30,6 +30,8 @@ public class MubbleItems
     //public static final Item RICE = new ItemSeedFood("rice", 1, 0.4F);
     public static final Item CHEESE = new ItemFood("cheese", 2, 0.4F, false);
     public static final Item BANANA = new ItemFood("banana", 4, 0.3F, false);
+    public static final Item APRICOT = new ItemFood("apricot", 4, 0.3F, false);
+    public static final Item MANGO = new ItemFood("mango", 4, 0.3F, false);
     public static final Item CARAMEL_CUBE = new ItemFood("caramel_cube", 4, 2.8f, false);
     public static final Item BAGUETTE = new ItemFood("baguette", 6, 0.8F, false);
     public static final Item BURGER = new ItemFood("burger", 9, 2.4f, false);

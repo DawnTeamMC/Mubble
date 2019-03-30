@@ -1,3 +1,7 @@
 {
-	"parent": "mubble:block/palm_fence_inventory"
+	"parent": "block/fence_inventory",
+	"textures":
+	{
+		"texture": "mubble:block/palm_planks"
+	}
 }

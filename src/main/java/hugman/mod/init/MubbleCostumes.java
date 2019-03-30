@@ -52,13 +52,24 @@ public class MubbleCostumes
 	
 	public static final Item RALSEI_HAT = new CostumeSimple("ralsei_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
 	public static final Item KING_ROUND_MASK = new CostumeSimple("king_round_mask", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
+
+	public static final Item RED_PUYO = new CostumeBlock(MubbleBlocks.RED_PUYO, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item YELLOW_PUYO = new CostumeBlock(MubbleBlocks.YELLOW_PUYO, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item GREEN_PUYO = new CostumeBlock(MubbleBlocks.GREEN_PUYO, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item TURQUOISE_PUYO = new CostumeBlock(MubbleBlocks.TURQUOISE_PUYO, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item BLUE_PUYO = new CostumeBlock(MubbleBlocks.BLUE_PUYO, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item PURPLE_PUYO = new CostumeBlock(MubbleBlocks.PURPLE_PUYO, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item GARBAGE_PUYO = new CostumeBlock(MubbleBlocks.GARBAGE_PUYO, SoundEvents.BLOCK_STONE_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item POINT_PUYO = new CostumeBlock(MubbleBlocks.POINT_PUYO, SoundEvents.BLOCK_STONE_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item HARD_PUYO = new CostumeBlock(MubbleBlocks.HARD_PUYO, SoundEvents.BLOCK_STONE_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item IRON_PUYO = new CostumeBlock(MubbleBlocks.IRON_PUYO, SoundEvents.BLOCK_METAL_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
 	
 	public static final Item BALDI_HEAD = new CostumeSimple("baldi_head", SoundEvents.ENTITY_PARROT_IMITATE_VEX, EntityEquipmentSlot.HEAD);
 
 	public static final Item PAUL_MASK = new CostumePaulMask();
 
 	public static final Item MAYRO_CAP = new CostumeMayroCap();
-	public static final Item KORETATO_BLOCK = new CostumeBlock(MubbleBlocks.KORETATO_BLOCK, SoundEvents.BLOCK_SNOW_HIT, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
+	public static final Item KORETATO_BLOCK = new CostumeBlock(MubbleBlocks.KORETATO_BLOCK, SoundEvents.BLOCK_SNOW_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);
 	public static final Item NOTEBLOCK_HEAD = new CostumeSimple("noteblock_head", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
 	
 	

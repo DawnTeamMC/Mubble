@@ -11,7 +11,6 @@ import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -91,7 +90,7 @@ public class CostumeBlock extends ItemBlock
         {
            playerIn.setItemStackToSlot(EntityEquipmentSlot.HEAD, new ItemStack(this));
            itemstack.shrink(1);
-           worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.BLOCK_SNOW_HIT, SoundCategory.PLAYERS, 1f, 1f);
+           worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, this.sound, SoundCategory.PLAYERS, 1f, 1f);
            return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
         }
         else
