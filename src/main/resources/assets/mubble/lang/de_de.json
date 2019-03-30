@@ -1,6 +1,6 @@
 {
 	"comment": "CREATIVE TABS",
-	"//itemGroup.costumes": "Costumes",
+	"itemGroup.costumes": "Kostüme",
 
 	"comment": "BLOCKS",
 	"block.mubble.vanadium_block": "Vanadium-block",
@@ -471,15 +471,15 @@
 	"item.mubble.waluigi_cap": "Waluigis Mütze",
 	"item.mubble.vanish_cap": "Vanishs Mütze",
 	"item.mubble.wing_cap": "Wings Mütze",
-	"item.mubble.gooigi_cap": "Gooigi's Mütze",
-	"//item.mubble.gold_mario_cap": "Gold Mario Cap",
-	"//item.mubble.silver_luigi_cap": "Silver Luigi Cap",
+	"item.mubble.gooigi_cap": "Gooigis Mütze",
+	"item.mubble.gold_mario_cap": "Goldene Mario-Mütze",
+	"item.mubble.silver_luigi_cap": "Silberne Luigi-Mütze",
 	"item.mubble.princess_peach_crown": "Prinzessin Peachs Krone",
 	"item.mubble.princess_daisy_crown": "Prinzessin Daisys Krone",
 	"item.mubble.rosalina_crown": "Rosalina's Krone",
 	"item.mubble.pink_gold_peach_crown": "Peachs Rosagoldene Krone",
 	"item.mubble.super_crown": "Superkrone",
-	"//item.mubble.mario_wedding_hat": "Mario's Wedding Hat",
+	"item.mubble.mario_wedding_hat": "Marios Hochzeitshut",
 	"item.mubble.broque_monsieur_head": "Broque Monsieurs Kopf",
 
 	"item.mubble.bandana": "Kopftuch",
@@ -493,7 +493,7 @@
 
 	"item.mubble.baldi_head": "Baldis Hut",
 
-	"//item.mubble.paul_mask": "Paul's Mask",
+	"item.mubble.paul_mask": "Pauls Maske",
 
 	"item.mubble.mayro_cap": "Mayros Mütze",
 	"item.mubble.noteblock_head": "Notenblock.mubble's Kopf",
