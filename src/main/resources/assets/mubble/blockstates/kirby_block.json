@@ -1,0 +1,11 @@
+{
+	"variants":
+	{
+		"facing=up": {"model": "mubble:block/kirby_block/april_fools", "x": 270},
+		"facing=down": {"model": "mubble:block/kirby_block/april_fools", "x": 90},
+		"facing=north": {"model": "mubble:block/kirby_block/april_fools"},
+		"facing=south": {"model": "mubble:block/kirby_block/april_fools", "y": 180},
+		"facing=west": {"model": "mubble:block/kirby_block/april_fools", "y": 270},
+		"facing=east": {"model": "mubble:block/kirby_block/april_fools", "y": 90}
+	}
+}

@@ -227,6 +227,7 @@
 	"//block.mubble.gray_balloon": "<newline>",
 	"//block.mubble.black_balloon": "<newline>",
 	"//block.mubble.unstable_stone": "Unstable Stone",
+	"//block.mubble.fluid_tank": "Fluid Tank",
 
 	"block.mubble.question_block": "问号块",
 	"block.mubble.empty_block": "钢块",
@@ -269,6 +270,8 @@
 	"//block.mubble.light_gray_mushroom_block": "<newline>",
 	"//block.mubble.gray_mushroom_block": "<newline>",
 	"//block.mubble.black_mushroom_block": "<newline>",
+
+	"//block.mubble.kirby_block": "Kirby Block",
 
 	"//block.mubble.blue_tetris_block": "<newline>",
 	"//block.mubble.light_blue_tetris_block": "<newline>",

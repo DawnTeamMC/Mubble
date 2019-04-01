@@ -20,6 +20,7 @@ import hugman.mod.objects.block.BlockFlower;
 import hugman.mod.objects.block.BlockFlowerCloud;
 import hugman.mod.objects.block.BlockFlowerGold;
 import hugman.mod.objects.block.BlockFlowerPotato;
+import hugman.mod.objects.block.BlockFluidTank;
 import hugman.mod.objects.block.BlockGrass;
 import hugman.mod.objects.block.BlockHugeMushroom;
 import hugman.mod.objects.block.BlockKoretato;
@@ -64,9 +65,9 @@ public class MubbleBlocks
     public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK), ItemGroup.BUILDING_BLOCKS);
     public static final Block PALM_PLANKS = new BlockSimple("palm_planks", Properties.from(Blocks.OAK_PLANKS), ItemGroup.BUILDING_BLOCKS);
     public static final Block PALM_SAPLING = new BlockSapling("palm", new PalmTree());
-    public static final Block PALM_LOG = new BlockWoodStrip("palm_log", Properties.from(Blocks.OAK_LOG), MubbleBlocks.STRIPPED_PALM_LOG, ItemGroup.BUILDING_BLOCKS);
+    public static final Block PALM_LOG = new BlockWoodStrip("palm_log", Properties.from(Blocks.OAK_LOG), ItemGroup.BUILDING_BLOCKS);
     public static final Block STRIPPED_PALM_LOG = new BlockRotatedPillar("stripped_palm_log", Properties.from(MubbleBlocks.PALM_LOG), ItemGroup.BUILDING_BLOCKS);
-    public static final Block PALM_WOOD = new BlockWoodStrip("palm_wood", Properties.from(MubbleBlocks.PALM_LOG), MubbleBlocks.STRIPPED_PALM_WOOD, ItemGroup.BUILDING_BLOCKS);
+    public static final Block PALM_WOOD = new BlockWoodStrip("palm_wood", Properties.from(MubbleBlocks.PALM_LOG), ItemGroup.BUILDING_BLOCKS);
     public static final Block STRIPPED_PALM_WOOD = new BlockRotatedPillar("stripped_palm_wood", Properties.from(MubbleBlocks.PALM_WOOD), ItemGroup.BUILDING_BLOCKS);
     public static final Block PALM_LEAVES = new BlockLeaves("palm");
     public static final Block PALM_PRESSURE_PLATE = new BlockPressurePlate("palm");
@@ -293,6 +294,7 @@ public class MubbleBlocks
     public static final Block MAGENTA_BALLOON = new BlockBalloon(EnumDyeColor.MAGENTA);
     public static final Block PINK_BALLOON = new BlockBalloon(EnumDyeColor.PINK);
     public static final Block UNSTABLE_STONE = new BlockUnstable();
+    public static final Block FLUID_TANK = new BlockFluidTank();
     public static final Block ULTIMATUM_PORTAL = new BlockUltimatumPortal();
     
     
@@ -338,6 +340,10 @@ public class MubbleBlocks
     public static final Block PURPLE_MUSHROOM_BLOCK = new BlockHugeMushroom(MubbleBlocks.PURPLE_MUSHROOM, EnumDyeColor.PURPLE);
     public static final Block MAGENTA_MUSHROOM_BLOCK = new BlockHugeMushroom(MubbleBlocks.MAGENTA_MUSHROOM, EnumDyeColor.MAGENTA);
     public static final Block PINK_MUSHROOM_BLOCK = new BlockHugeMushroom(MubbleBlocks.PINK_MUSHROOM, EnumDyeColor.PINK);
+    
+    
+
+    public static final Block KIRBY_BLOCK = new BlockDirectional("kirby_block", Block.Properties.create(Material.CLAY, MaterialColor.PINK).hardnessAndResistance(0.5F).sound(SoundType.CLOTH), ItemGroup.DECORATIONS);
     
     
     

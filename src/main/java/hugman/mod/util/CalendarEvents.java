@@ -39,7 +39,7 @@ public class CalendarEvents
         	this.isAprilFools = true;
         	this.isMarkBirthday = true;
         }
-        if (month == june 		&& day == 18) this.isMiaBirthday = true;
+        if (month == june 		&& day == 18) this.isJoaquinBirthday = true;
         if (month == july 		&& day == 14) this.isMubbleBirthday = true;
         if (month == october 	&& day == 3) this.isHugmanBirthday = true;
         if (month == december 	&& day >= 24 && day <= 26) this.isChristmas = true;

@@ -227,6 +227,7 @@
 	"block.mubble.gray_balloon": "Grijze ballon",
 	"block.mubble.black_balloon": "Zwarte ballon",
 	"//block.mubble.unstable_stone": "Unstable Stone",
+	"//block.mubble.fluid_tank": "Fluid Tank",
 
 	"block.mubble.question_block": "?-blok",
 	"block.mubble.empty_block": "Leeg blok",
@@ -269,6 +270,8 @@
 	"block.mubble.light_gray_mushroom_block": "Lichtgrijs paddenstoelenblok",
 	"block.mubble.gray_mushroom_block": "Grijs paddenstoelenblok",
 	"block.mubble.black_mushroom_block": "Zwart paddenstoelenblok",
+
+	"//block.mubble.kirby_block": "Kirby Block",
 
 	"block.mubble.blue_tetris_block": "Blauw Tetris blok",
 	"block.mubble.light_blue_tetris_block": "Lichtblauw Tetris blok",

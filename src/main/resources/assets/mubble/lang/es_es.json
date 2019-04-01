@@ -225,6 +225,7 @@
 	"//block.mubble.gray_balloon": "<newline>",
 	"//block.mubble.black_balloon": "<newline>",
 	"//block.mubble.unstable_stone": "Unstable Stone",
+	"//block.mubble.fluid_tank": "Fluid Tank",
 
 	"block.mubble.question_block": "Bloque ?",
 	"block.mubble.empty_block": "Bloque vacío",
@@ -267,6 +268,8 @@
 	"block.mubble.light_gray_mushroom_block": "Bloque de champiñón gris claro",
 	"block.mubble.gray_mushroom_block": "Bloque de champiñón gris",
 	"block.mubble.black_mushroom_block": "Bloque de champiñón negro",
+
+	"//block.mubble.kirby_block": "Kirby Block",
 
 	"block.mubble.blue_tetris_block": "Bloque de Tetris azul",
 	"block.mubble.light_blue_tetris_block": "Bloque de Tetris azul claro",

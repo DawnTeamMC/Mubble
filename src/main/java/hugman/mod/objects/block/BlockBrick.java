@@ -8,12 +8,11 @@ import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSoundTypes;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -28,7 +27,7 @@ public class BlockBrick extends Block
 	
     public BlockBrick(String name)
     {
-        super(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(2.0F, 6.0F).sound(MubbleSoundTypes.BRICK_BLOCK));
+        super(Properties.from(Blocks.BRICKS).sound(MubbleSoundTypes.BRICK_BLOCK));
         setRegistryName(Mubble.MOD_ID, name);
         MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
