@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleColorMaps;
 import hugman.mod.init.MubbleCostumes;
+import hugman.mod.init.MubbleDimensions;
 import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleGenerators;
 import hugman.mod.init.MubbleItems;
@@ -84,8 +85,8 @@ public class Mubble
         @SubscribeEvent
         public static void onDimensionsRegistry(final RegisterDimensionsEvent event)
         {
-        	//MubbleDimensions.registerDimensions();
-        	//LOGGER.info("[REGISTRY] Registered dimensions");
+        	MubbleDimensions.registerDimensions();
+        	LOGGER.info("[REGISTRY] Registered dimensions");
         }
     }
     

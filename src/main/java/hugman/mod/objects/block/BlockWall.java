@@ -3,11 +3,9 @@ package hugman.mod.objects.block;
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.IBucketPickupHandler;
-import net.minecraft.block.ILiquidContainer;
 import net.minecraft.item.ItemGroup;
 
-public class BlockWall extends net.minecraft.block.BlockWall implements IBucketPickupHandler, ILiquidContainer
+public class BlockWall extends net.minecraft.block.BlockWall
 {
     public BlockWall(String name, Block base_block)
     {

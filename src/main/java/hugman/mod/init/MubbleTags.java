@@ -23,6 +23,7 @@ public class MubbleTags
     
     public static class Items
     {
+        public static final Tag<Item> BUCKETS = tag("buckets");
         public static final Tag<Item> COINS = tag("coins");
         public static final Tag<Item> CROWNS = tag("crowns");
         public static final Tag<Item> LIGHTWEIGHT_ITEMS = tag("lightweight_items");

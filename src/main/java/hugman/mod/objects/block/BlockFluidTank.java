@@ -3,6 +3,7 @@ package hugman.mod.objects.block;
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlockStateProperties;
 import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleTags;
 import hugman.mod.objects.state.properties.FluidLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSixWay;
@@ -56,8 +57,8 @@ public class BlockFluidTank extends Block implements IBucketPickupHandler, ILiqu
 	private static final VoxelShape STONE11 = Block.makeCuboidShape(0.0D, 1.0D, 15.0D, 1.0D, 15.0D, 16.0D);
 	private static final VoxelShape STONE = VoxelShapes.or(STONE0, VoxelShapes.or(STONE1, VoxelShapes.or(STONE2, VoxelShapes.or(STONE3, VoxelShapes.or(STONE4, VoxelShapes.or(STONE5, VoxelShapes.or(STONE6, VoxelShapes.or(STONE7, VoxelShapes.or(STONE8, VoxelShapes.or(STONE9, VoxelShapes.or(STONE10, STONE11)))))))))));
 	private static final VoxelShape GLASS_UP = Block.makeCuboidShape(1.0D, 15.75D, 1.0D, 15.0D, 16.0D, 15.0D);
-	private static final VoxelShape GLASS_DOWN = Block.makeCuboidShape(1.0D,0.0D, 1.0D, 15.0D, 0.25D, 15.0D);
-	private static final VoxelShape GLASS_NORTH = Block.makeCuboidShape(1.0D, 1.0D,0.0D, 15.0D, 15.0D, 0.25D);
+	private static final VoxelShape GLASS_DOWN = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 0.25D, 15.0D);
+	private static final VoxelShape GLASS_NORTH = Block.makeCuboidShape(1.0D, 1.0D, 0.0D, 15.0D, 15.0D, 0.25D);
 	private static final VoxelShape GLASS_SOUTH = Block.makeCuboidShape(1.0D, 1.0D, 15.75D, 15.0D, 15.0D, 16.0D);
 	private static final VoxelShape GLASS_EAST = Block.makeCuboidShape(15.75D, 1.0D, 1.0D, 16.0D, 15.0D, 15.0D);
 	private static final VoxelShape GLASS_WEST = Block.makeCuboidShape(0.0D, 1.0D, 1.0D, 0.25D, 15.0D, 15.0D);
@@ -178,40 +179,27 @@ public class BlockFluidTank extends Block implements IBucketPickupHandler, ILiqu
     @Override
     public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-		if(!worldIn.isRemote && (!(player.getHeldItem(hand).getItem() == Items.WATER_BUCKET) || !(player.getHeldItem(hand).getItem() == Items.LAVA_BUCKET)))
+    	if(MubbleTags.Items.BUCKETS.contains(player.getHeldItem(hand).getItem())) return false;
+		if(!worldIn.isRemote)
 		{
-			if(side == EnumFacing.UP)
-			{
-				if(state.get(UP)) worldIn.setBlockState(pos, state.with(UP, false), 11);
-				if(!state.get(UP)) worldIn.setBlockState(pos, state.with(UP, true), 11);
-			}
-			if(side == EnumFacing.DOWN)
-			{
-				if(state.get(DOWN)) worldIn.setBlockState(pos, state.with(DOWN, false), 11);
-				if(!state.get(DOWN)) worldIn.setBlockState(pos, state.with(DOWN, true), 11);
-			}
-			if(side == EnumFacing.NORTH)
-			{
-				if(state.get(NORTH)) worldIn.setBlockState(pos, state.with(NORTH, false), 11);
-				if(!state.get(NORTH)) worldIn.setBlockState(pos, state.with(NORTH, true), 11);
-			}
-			if(side == EnumFacing.EAST)
-			{
-				if(state.get(EAST)) worldIn.setBlockState(pos, state.with(EAST, false), 11);
-				if(!state.get(EAST)) worldIn.setBlockState(pos, state.with(EAST, true), 11);
-			}
-			if(side == EnumFacing.SOUTH)
-			{
-				if(state.get(SOUTH)) worldIn.setBlockState(pos, state.with(SOUTH, false), 11);
-				if(!state.get(SOUTH)) worldIn.setBlockState(pos, state.with(SOUTH, true), 11);
-			}
-			if(side == EnumFacing.WEST)
-			{
-				if(state.get(WEST)) worldIn.setBlockState(pos, state.with(WEST, false), 11);
-				if(!state.get(WEST)) worldIn.setBlockState(pos, state.with(WEST, true), 11);
-			}
-			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_GLASS_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	        IFluidState fluidState = worldIn.getFluidState(pos);
+	        float a = 0.01563f;
+	        float b = 0.98437f;
+			if(hitY > b) permuteSide(state, worldIn, pos, UP);
+			if(hitY < a) permuteSide(state, worldIn, pos, DOWN);
+			if(hitZ < a) permuteSide(state, worldIn, pos, NORTH);
+			if(hitZ > b) permuteSide(state, worldIn, pos, SOUTH);
+			if(hitX > b) permuteSide(state, worldIn, pos, EAST);
+			if(hitX < a) permuteSide(state, worldIn, pos, WEST);
+    		worldIn.getPendingFluidTicks().scheduleTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(worldIn));
 		}
 		return true;
     }
+    
+    private void permuteSide(IBlockState state, World worldIn, BlockPos pos, BooleanProperty property)
+    {
+		if(state.get(property)) worldIn.setBlockState(pos, state.with(property, false), 3);
+		else worldIn.setBlockState(pos, state.with(property, true), 3);
+		worldIn.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_GLASS_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	}
 }
