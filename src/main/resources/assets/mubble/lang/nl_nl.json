@@ -2,7 +2,28 @@
 	"comment": "CREATIVE TABS",
 	"//itemGroup.costumes": "Costumes",
 
+
+
 	"comment": "BLOCKS",
+	"//block.mubble.oak_vertical_slab": "Oak Vertical Slab",
+	"//block.mubble.spruce_vertical_slab": "Spruce Vertical Slab",
+	"//block.mubble.birch_vertical_slab": "Birch Vertical Slab",
+	"//block.mubble.jungle_vertical_slab": "Jungle Vertical Slab",
+	"//block.mubble.acacia_vertical_slab": "Acacia Vertical Slab",
+	"//block.mubble.dark_oak_vertical_slab": "Dark Oak Vertical Slab",
+	"//block.mubble.stone_vertical_slab": "Stone Vertical Slab",
+	"//block.mubble.sandstone_vertical_slab": "Sandstone Vertical Slab",
+	"//block.mubble.cobblestone_vertical_slab": "Cobblestone Vertical Slab",
+	"//block.mubble.brick_vertical_slab": "Brick Vertical Slab",
+	"//block.mubble.stone_brick_vertical_slab": "Stone Brick Vertical Slab",
+	"//block.mubble.nether_brick_vertical_slab": "Nether Brick Vertical Slab",
+	"//block.mubble.quartz_vertical_slab": "Quartz Vertical Slab",
+	"//block.mubble.red_sandstone_vertical_slab": "Red Sandstone Vertical Slab",
+	"//block.mubble.purpur_vertical_slab": "Purpur Vertical Slab",
+	"//block.mubble.prismarine_vertical_slab": "Prismarine Vertical Slab",
+	"//block.mubble.prismarine_brick_vertical_slab": "Prismarine Brick Vertical Slab",
+	"//block.mubble.dark_prismarine_vertical_slab": "Dark Prismarine Vertical Slab",
+	
 	"block.mubble.vanadium_block": "Vanadiumblok",
 	"block.mubble.vanadium_ore": "Vanadiumerts",
 	"block.mubble.palm_planks": "Palmhouten planken",
@@ -21,6 +42,7 @@
 	"block.mubble.palm_fence_gate": "Palmhouten poort",
 	"block.mubble.palm_fence": "Palmhouten hek",
 	"block.mubble.palm_door": "Palmhouten deur",
+
 	"block.mubble.blue_bricks": "Blauwe bakstenen",
 	"block.mubble.light_blue_bricks": "Lichtblauwe bakstenen",
 	"block.mubble.cyan_bricks": "Turquoise bakstenen",
@@ -37,6 +59,7 @@
 	"block.mubble.light_gray_bricks": "Lichtgrijze bakstenen",
 	"block.mubble.gray_bricks": "Grijze bakstenen",
 	"block.mubble.black_bricks": "Zwarte bakstenen",
+
 	"block.mubble.blue_brick_stairs": "Blauwe bakstenen trap",
 	"block.mubble.light_blue_brick_stairs": "Lichtblauwe bakstenen trap",
 	"block.mubble.cyan_brick_stairs": "Turquoise bakstenen trap",
@@ -53,6 +76,7 @@
 	"block.mubble.light_gray_brick_stairs": "Lichtgrijze bakstenen trap",
 	"block.mubble.gray_brick_stairs": "Grijze bakstenen trap",
 	"block.mubble.black_brick_stairs": "Zwarte bakstenen trap",
+
 	"block.mubble.blue_brick_slab": "Blauwe bakstenen plaat",
 	"block.mubble.light_blue_brick_slab": "Lichtblauwe bakstenen plaat",
 	"block.mubble.cyan_brick_slab": "Turquoise bakstenen plaat",
@@ -69,6 +93,7 @@
 	"block.mubble.light_gray_brick_slab": "Lichtgrijze bakstenen plaat",
 	"block.mubble.gray_brick_slab": "Grijze bakstenen plaat",
 	"block.mubble.black_brick_slab": "Zwarte bakstenen plaat",
+
 	"block.mubble.blue_brick_vertical_slab": "Blauwe bakstenen verticale plaat",
 	"block.mubble.light_blue_brick_vertical_slab": "Lichtblauwe bakstenen verticale plaat",
 	"block.mubble.cyan_brick_vertical_slab": "Turquoise bakstenen verticale plaat",
@@ -85,6 +110,7 @@
 	"block.mubble.light_gray_brick_vertical_slab": "Lichtgrijze bakstenen verticale plaat",
 	"block.mubble.gray_brick_vertical_slab": "Grijze bakstenen verticale plaat",
 	"block.mubble.black_brick_vertical_slab": "Zwarte bakstenen verticale plaat",
+
 	"block.mubble.blue_brick_wall": "Blauwe bakstenen muur",
 	"block.mubble.light_blue_brick_wall": "Lichtblauwe bakstenen muur",
 	"block.mubble.cyan_brick_wall": "Turquoise bakstenen muur",
@@ -101,9 +127,9 @@
 	"block.mubble.light_gray_brick_wall": "Lichtgrijze bakstenen muur",
 	"block.mubble.gray_brick_wall": "Grijze bakstenen muur",
 	"block.mubble.black_brick_wall": "Zwarte bakstenen muur",
+
 	"block.mubble.blunite": "Blunite",
 	"block.mubble.blunite_stairs": "Blunite trap",
-	"block.mubble.blunite_wall": "Blunite muur",
 	"block.mubble.blunite_slab": "Blunite plaat",
 	"block.mubble.blunite_vertical_slab": "Blunite verticale plaat",
 	"block.mubble.blunite_wall": "Blunite muur",
@@ -113,7 +139,6 @@
 	"block.mubble.polished_blunite_vertical_slab": "Gepolijst blunite verticale plaat",
 	"block.mubble.carbonite": "Carbonite",
 	"block.mubble.carbonite_stairs": "Carbonite trap",
-	"block.mubble.carbonite_wall": "Carbonite muur",
 	"block.mubble.carbonite_slab": "Carbonite plaat",
 	"block.mubble.carbonite_vertical_slab": "Carbonite verticale plaat",
 	"block.mubble.carbonite_wall": "Carbonite muur",
@@ -121,6 +146,7 @@
 	"block.mubble.polished_carbonite_stairs": "Gepolijst carbonite trap",
 	"block.mubble.polished_carbonite_slab": "Gepolijst carbonite plaat",
 	"block.mubble.polished_carbonite_vertical_slab": "Gepolijst carbonite verticale plaat",
+
 	"block.mubble.blue_dark_prismarine": "Blauwe donkereprismarien",
 	"block.mubble.light_blue_dark_prismarine": "Lichtblauwe donkereprismarien",
 	"block.mubble.cyan_dark_prismarine": "Turquoise donkereprismarien",
@@ -137,6 +163,7 @@
 	"block.mubble.light_gray_dark_prismarine": "Lichtgrijze donkereprismarien",
 	"block.mubble.gray_dark_prismarine": "Grijze donkereprismarien",
 	"block.mubble.black_dark_prismarine": "Zwarte donkereprismarien",
+
 	"block.mubble.blue_dark_prismarine_stairs": "Blauwe donkereprismarientrap",
 	"block.mubble.light_blue_dark_prismarine_stairs": "Lichtblauwe donkereprismarientrap",
 	"block.mubble.cyan_dark_prismarine_stairs": "Turquoise donkereprismarientrap",
@@ -153,6 +180,7 @@
 	"block.mubble.light_gray_dark_prismarine_stairs": "Lichtgrijze donkereprismarientrap",
 	"block.mubble.gray_dark_prismarine_stairs": "Grijze donkereprismarientrap",
 	"block.mubble.black_dark_prismarine_stairs": "Zwarte donkereprismarientrap",
+
 	"block.mubble.blue_dark_prismarine_slab": "Blauwe donkereprismarienplaat",
 	"block.mubble.light_blue_dark_prismarine_slab": "Lichtblauwe donkereprismarienplaat",
 	"block.mubble.cyan_dark_prismarine_slab": "Turquoise donkereprismarienplaat",
@@ -169,6 +197,7 @@
 	"block.mubble.light_gray_dark_prismarine_slab": "Lichtgrijze donkereprismarienplaat",
 	"block.mubble.gray_dark_prismarine_slab": "Grijze donkereprismarienplaat",
 	"block.mubble.black_dark_prismarine_slab": "Zwarte donkereprismarienplaat",
+
 	"block.mubble.blue_dark_prismarine_vertical_slab": "Blauwe donkereprismarien verticale plaat",
 	"block.mubble.light_blue_dark_prismarine_vertical_slab": "Lichtblauwe donkereprismarien verticale plaat",
 	"block.mubble.cyan_dark_prismarine_vertical_slab": "Turquoise donkereprismarien verticale plaat",
@@ -185,6 +214,7 @@
 	"block.mubble.light_gray_dark_prismarine_vertical_slab": "Lichtgrijze donkereprismarien verticale plaat",
 	"block.mubble.gray_dark_prismarine_vertical_slab": "Grijze donkereprismarien verticale plaat",
 	"block.mubble.black_dark_prismarine_vertical_slab": "Zwarte donkereprismarien verticale plaat",
+
 	"block.mubble.blue_dark_prismarine_wall": "Blauwe donkereprismarienmuur",
 	"block.mubble.light_blue_dark_prismarine_wall": "Lichtblauwe donkereprismarienmuur",
 	"block.mubble.cyan_dark_prismarine_wall": "Turquoise donkereprismarienmuur",
@@ -201,6 +231,7 @@
 	"block.mubble.light_gray_dark_prismarine_wall": "Lichtgrijze donkereprismarienmuur",
 	"block.mubble.gray_dark_prismarine_wall": "Grijze donkereprismarienmuur",
 	"block.mubble.black_dark_prismarine_wall": "Zwarte donkereprismarienmuur",
+
 	"block.mubble.footblock": "Voetblok",
 	"block.mubble.white_cloud_block": "Wittewolkblok",
 	"block.mubble.light_gray_cloud_block": "Lichtgrijzewolkblok",
@@ -210,6 +241,7 @@
 	"block.mubble.salad": "Salade",
 	"block.mubble.cheese_block": "Kaasblok",
 	"block.mubble.ultimatum_portal": "Ultimatumportaal",
+
 	"block.mubble.blue_balloon": "Blauwe ballon",
 	"block.mubble.light_blue_balloon": "Lichtblauwe ballon",
 	"block.mubble.cyan_balloon": "Turquoise ballon",
@@ -226,8 +258,10 @@
 	"block.mubble.light_gray_balloon": "Lichtgrijze ballon",
 	"block.mubble.gray_balloon": "Grijze ballon",
 	"block.mubble.black_balloon": "Zwarte ballon",
+
 	"//block.mubble.unstable_stone": "Unstable Stone",
 	"//block.mubble.fluid_tank": "Fluid Tank",
+
 
 	"block.mubble.question_block": "?-blok",
 	"block.mubble.empty_block": "Leeg blok",
@@ -242,6 +276,7 @@
 	"block.mubble.boomerang_flower": "Boomerang bloem",
 	"block.mubble.cloud_flower": "Wolk bloem",
 	"block.mubble.gold_flower": "Gouden Bloem",
+
 	"block.mubble.blue_mushroom": "Blauwe paddenstoel",
 	"block.mubble.light_blue_mushroom": "Lichtblauwe paddenstoel",
 	"block.mubble.cyan_mushroom": "Turquoise paddenstoel",
@@ -256,6 +291,7 @@
 	"block.mubble.light_gray_mushroom": "Lichtgrijse paddenstoel",
 	"block.mubble.gray_mushroom": "Grijse paddenstoel",
 	"block.mubble.black_mushroom": "Zwarte paddenstoel",
+
 	"block.mubble.blue_mushroom_block": "Blauw paddenstoelenblok",
 	"block.mubble.light_blue_mushroom_block": "Lichtblauw paddenstoelenblok",
 	"block.mubble.cyan_mushroom_block": "Turquois paddenstoelenblok",
@@ -271,7 +307,9 @@
 	"block.mubble.gray_mushroom_block": "Grijs paddenstoelenblok",
 	"block.mubble.black_mushroom_block": "Zwart paddenstoelenblok",
 
+
 	"//block.mubble.kirby_block": "Kirby Block",
+
 
 	"block.mubble.blue_tetris_block": "Blauw Tetris blok",
 	"block.mubble.light_blue_tetris_block": "Lichtblauw Tetris blok",
@@ -289,10 +327,12 @@
 	"block.mubble.light_gray_tetris_block": "Lichtgrijs Tetris blok",
 	"block.mubble.gray_tetris_block": "Grijs Tetris blok",
 	"block.mubble.black_tetris_block": "Zwart Tetris blok",
+	
 	"block.mubble.tetris_glass": "Tetris glas",
 	"block.mubble.japanese_tetris_cushion": "Japans Tetris kussen",
 	"block.mubble.rainbow_tetris_scaffolding": "Regenboog Tetris steiger",
 	"block.mubble.monochrome_tetris_scaffolding": "Zwart-witte Tetris steiger",
+
 
 	"block.mubble.vampire_stone": "Vampiersteen",
 	"block.mubble.medusa_stone": "Medusa's steen",
@@ -301,6 +341,7 @@
 	"block.mubble.medusa_brick_slab": "Medusa's blokstenen plaat",
 	"block.mubble.medusa_brick_vertical_slab": "Medusa's blokstenen verticale plaat",
 	"block.mubble.medusa_brick_wall": "Medusa's blokstenen muur",
+
 	"block.mubble.blue_candy_cane_pillar": "Blauwe zuurstokpillaar",
 	"block.mubble.light_blue_candy_cane_pillar": "Lichtblauwe zuurstokpillaar",
 	"block.mubble.cyan_candy_cane_pillar": "Turquoise zuurstokpillaar",
@@ -318,6 +359,7 @@
 	"block.mubble.gray_candy_cane_pillar": "Grijze zuurstokpillaar",
 	"block.mubble.black_candy_cane_pillar": "Zwarte zuurstokpillaar",
 
+
 	"block.mubble.green_hill_grass_block": "Groeneheuvel grasblok",
 	"block.mubble.green_hill_dirt": "Groeneheuvel gras",
 	"block.mubble.marble_zone_stone": "Marblezone steen",
@@ -325,8 +367,10 @@
 	"block.mubble.blue_studiopolis_clapper": "Blauwe studiopolisklepel",
 	"block.mubble.spring": "Veer",
 
+
 	"block.mubble.scarlet_mushroom": "Scharlake paddenstoel",
 	"block.mubble.scarlet_orchid": "Scharlake orchidee",
+
 
 	"block.mubble.girder": "Stalenbalk",
 	"block.mubble.mirror_temple_bricks": "Spiegeltempel bakstenen",
@@ -343,6 +387,7 @@
 	"block.mubble.space_jam": "Ruimte jam",
 	"block.mubble.space_obsidian": "Ruimte obsidiaan",
 
+
 	"block.mubble.blue_puyo": "Blauwe puyo",
 	"block.mubble.cyan_puyo": "Turquoise puyo",
 	"block.mubble.green_puyo": "Groene puyo",
@@ -355,8 +400,10 @@
 	"block.mubble.iron_puyo": "IJzere puyo",
 	"block.mubble.puyo_block": "Puyoblok",
 
+
 	"block.mubble.koretato_block": "Koretato-blok",
 	"block.mubble.potato_flower": "Aardappelbloem",
+
 
 	"//block.mubble.potted_palm_sapling": "Potted Palm Sapling",
 	"//block.mubble.potted_fire_flower": "Potted Fire Flower",
@@ -382,6 +429,8 @@
 	"//block.mubble.potted_scarlet_orchid": "Potted Scarlet Orchid",
 	"//block.mubble.potted_potato_flower": "Potted Potato Flower",
 
+
+
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.vanadium": "Vanadium",
@@ -401,6 +450,7 @@
 	"//item.mubble.mango": "Mango",
 	"item.mubble.totem_of_ascending": "Totem der opstijging",
 
+
 	"item.mubble.super_mushroom": "Super paddenstoel",
 	"item.mubble.peach": "Perzik",
 	"item.mubble.cape_feather": "Cape veer",
@@ -410,9 +460,12 @@
 	"item.mubble.red_coin": "Rode munt",
 	"item.mubble.blue_coin": "Blauwe munt",
 
+
 	"item.mubble.smash_ball": "Smash bal",
 
+
 	"item.mubble.annoying_dog": "Iritante hond",
+
 
 	"item.mubble.blank_music_disc": "Blanke muziekplaat",
 	"item.mubble.music_disc_battlefield": "Muziekplaat",
@@ -454,6 +507,7 @@
 	"item.mubble.music_disc_vampire_killer.desc": "Castlevania Judgement - Vampire Killer",
 	"item.mubble.music_disc_vs_champion_red_and_blue.desc": "Pokémon Sun & Moon - VS. Champion Red & Blue",
 
+
 	"item.mubble.remix_disc_nb_beware_the_forest_mushrooms": "Muziekplaat",
 	"item.mubble.remix_disc_nb_buoy_base_galaxy": "Muziekplaat",
 	"item.mubble.remix_disc_nb_fly_octo_fly": "Muziekplaat",
@@ -467,12 +521,16 @@
 	"item.mubble.remix_disc_nb_sweden.desc": "C418 - Sweden (NoteBlock Remix)",
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
+
 	"item.mubble.toad_spawn_egg":"Toadspawnei",
 	"item.mubble.chincho_spawn_egg":"Chinchospawnei",
+
+
 
 	"comment": "COSTUMES",
 	"item.mubble.headphones": "Koptelefoon",
 	"item.mubble.christmas_hat": "Kerstmuts",
+
 
 	"item.mubble.cappy": "Cappy",
 	"item.mubble.luigi_cap": "Luigi's pet",
@@ -491,34 +549,43 @@
 	"//item.mubble.mario_wedding_hat": "Mario's Wedding Hat",
 	"item.mubble.broque_monsieur_head": "Broque Monsieur's hoofd",
 
+
 	"item.mubble.bandana": "Bandana",
+
 
 	"item.mubble.snorlax_hat": "Snorlax hoed",
 
+
 	"item.mubble.top_hat": "Hoge hoed",
+
 
 	"item.mubble.ralsei_hat": "Ralsei's hoed",
 	"item.mubble.king_round_mask": "Koning rond masker",
 
+
 	"item.mubble.baldi_head": "Baldi's hoofd",
+
 
 	"//item.mubble.paul_mask": "Paul's Mask",
 
+
 	"item.mubble.mayro_cap": "Mayro's pet",
 	"item.mubble.noteblock_head": "NoteBlock's hoofd",
+
+
 
 	"comment": "ENTITIES",
 	"entity.mubble.toad": "Toad",
 	"entity.mubble.chincho": "Chincho",
 	"entity.mubble.flying_block": "Vliegend blok",
 
+
+
 	"comment": "SUBTITLES",
-    "subtitles.block.note_block.jump": "Nootblock wordt gebruikt",
+	"subtitles.block.note_block.jump": "Nootblock wordt gebruikt",
 	"subtitles.block.question_block.mubble.loot.super_mushroom": "?-blok plundert super paddenstoel",
 	"subtitles.block.question_block.mubble.loot.coin": "?-blok laat munt vallen",
-    "subtitles.block.spring.trigger": "Veer geactiveerd",
-	"subtitles.block.rewind_block.mubble.disappear": "Terugspoelblok verdwijnd",
-	"subtitles.block.rewind_block.mubble.reappear": "Terugspoelblok verschijnd",
+	"subtitles.block.spring.trigger": "Veer geactiveerd",
 	"subtitles.item.annoying_dog.disappear": "Iritante hond verdrijnd",
 	"subtitles.item.annoying_dog.bark": "Iritante hond blaft",
 	"subtitles.item.cape_feather.use": "Capeveer wordt gebruikt",
@@ -531,6 +598,8 @@
 	"subtitles.entity.toad.ambient": "Toad mompelt",
 	"subtitles.entity.toad.hurt": "Toad heeft pijn",
 	"subtitles.entity.toad.death": "Toad sterft",
+
+
 
 	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "Mubble",
@@ -550,9 +619,13 @@
 	"advancements.mubble.get_tetris_block.title": "Het is allemaal verbonden",
 	"advancements.mubble.get_tetris_block.description": "Krijg je handen aan een Tetris blok",
 
+
+
 	"comment": "COMMANDS",
 	"commands.motion.usage": "/motion <entity> <set|add> [dX] [dY] [dZ]",
 	"commands.motion.success": "Beweging van %s veranderd naar %s, %s, %s",
+
+
 
 	"comment": "OTHER",
 	"item.mubble.snorlax_hat.secret_status": "Hoe paradoxaal... :)",

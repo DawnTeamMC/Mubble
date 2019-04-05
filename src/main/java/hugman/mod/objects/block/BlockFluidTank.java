@@ -143,7 +143,7 @@ public class BlockFluidTank extends Block implements IBucketPickupHandler, ILiqu
     @Override
 	public boolean canContainFluid(IBlockReader worldIn, BlockPos pos, IBlockState state, Fluid fluidIn)
 	{
-		if(state.get(FLUIDLOG) == FluidLog.EMPTY && (fluidIn == Fluids.WATER || fluidIn == Fluids.LAVA)) return true;
+		if(state.get(FLUIDLOG) == FluidLog.EMPTY) return true;
 		else return false;
 	}
 
@@ -179,27 +179,52 @@ public class BlockFluidTank extends Block implements IBucketPickupHandler, ILiqu
     @Override
     public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-    	if(MubbleTags.Items.BUCKETS.contains(player.getHeldItem(hand).getItem())) return false;
-		if(!worldIn.isRemote)
+    	if(MubbleTags.Items.FLUID_BUCKETS.contains(player.getHeldItem(hand).getItem()) && state.get(FLUIDLOG) == FluidLog.EMPTY) return false;
+    	else if(player.getHeldItem(hand).getItem() == Items.BUCKET && state.get(FLUIDLOG) != FluidLog.EMPTY) return false;
+    	else
 		{
-	        IFluidState fluidState = worldIn.getFluidState(pos);
 	        float a = 0.01563f;
 	        float b = 0.98437f;
-			if(hitY > b) permuteSide(state, worldIn, pos, UP);
-			if(hitY < a) permuteSide(state, worldIn, pos, DOWN);
-			if(hitZ < a) permuteSide(state, worldIn, pos, NORTH);
-			if(hitZ > b) permuteSide(state, worldIn, pos, SOUTH);
-			if(hitX > b) permuteSide(state, worldIn, pos, EAST);
-			if(hitX < a) permuteSide(state, worldIn, pos, WEST);
-    		worldIn.getPendingFluidTicks().scheduleTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(worldIn));
+			if(hitY > b) 
+			{
+				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, UP);
+				return true;
+			}
+			if(hitY < a) 
+			{
+				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, DOWN);
+				return true;
+			}
+			if(hitZ < a)
+			{
+				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, NORTH);
+				return true;
+			}
+			if(hitZ > b)
+			{
+				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, SOUTH);
+				return true;
+			}
+			if(hitX > b)
+			{
+				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, EAST);
+				return true;
+			}
+			if(hitX < a)
+			{
+				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, WEST);
+				return true;
+			}
 		}
-		return true;
+		return false;
     }
     
     private void permuteSide(IBlockState state, World worldIn, BlockPos pos, BooleanProperty property)
     {
+        IFluidState fluidState = worldIn.getFluidState(pos);
 		if(state.get(property)) worldIn.setBlockState(pos, state.with(property, false), 3);
 		else worldIn.setBlockState(pos, state.with(property, true), 3);
+		worldIn.getPendingFluidTicks().scheduleTick(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(worldIn));
 		worldIn.playSound((EntityPlayer)null, pos, SoundEvents.BLOCK_GLASS_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}
 }

@@ -1,0 +1,9 @@
+{
+	"parent": "mubble:block/vertical_slab/south",
+	"textures":
+	{
+		"bottom": "minecraft:block/sandstone_bottom",
+		"top": "minecraft:block/sandstone_top",
+		"block": "minecraft:block/sandstone"
+	}
+}

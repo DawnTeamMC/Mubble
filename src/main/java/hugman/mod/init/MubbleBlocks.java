@@ -61,6 +61,25 @@ public class MubbleBlocks
 {
     public static final List<Block> BLOCKS = new ArrayList<Block>();
 
+    public static final Block OAK_VERTICAL_SLAB = new BlockSlabVertical("oak", Blocks.OAK_PLANKS);
+    public static final Block SPRUCE_VERTICAL_SLAB = new BlockSlabVertical("spruce", Blocks.SPRUCE_PLANKS);
+    public static final Block BIRCH_VERTICAL_SLAB = new BlockSlabVertical("birch", Blocks.BIRCH_PLANKS);
+    public static final Block JUNGLE_VERTICAL_SLAB = new BlockSlabVertical("jungle", Blocks.JUNGLE_PLANKS);
+    public static final Block ACACIA_VERTICAL_SLAB = new BlockSlabVertical("acacia", Blocks.ACACIA_PLANKS);
+    public static final Block DARK_OAK_VERTICAL_SLAB = new BlockSlabVertical("dark_oak", Blocks.DARK_OAK_PLANKS);
+    public static final Block STONE_VERTICAL_SLAB = new BlockSlabVertical("stone", Blocks.STONE);
+    public static final Block SANDSTONE_VERTICAL_SLAB = new BlockSlabVertical("sandstone", Blocks.SANDSTONE);
+    public static final Block COBBLESTONE_VERTICAL_SLAB = new BlockSlabVertical("cobblestone", Blocks.COBBLESTONE);
+    public static final Block BRICK_VERTICAL_SLAB = new BlockSlabVertical("brick", Blocks.BRICKS);
+    public static final Block STONE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("stone_brick", Blocks.STONE_BRICKS);
+    public static final Block NETHER_BRICK_VERTICAL_SLAB = new BlockSlabVertical("nether_brick", Blocks.NETHER_BRICKS);
+    public static final Block QUARTZ_VERTICAL_SLAB = new BlockSlabVertical("quartz", Blocks.QUARTZ_BLOCK);
+    public static final Block RED_SANDSTONE_VERTICAL_SLAB = new BlockSlabVertical("red_sandstone", Blocks.RED_SANDSTONE);
+    public static final Block PURPUR_VERTICAL_SLAB = new BlockSlabVertical("purpur", Blocks.PURPUR_BLOCK);
+    public static final Block PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical("prismarine", Blocks.PRISMARINE);
+    public static final Block PRISMARINE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("prismarine_brick", Blocks.PRISMARINE_BRICKS);
+    public static final Block DARK_PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical("dark_prismarine", Blocks.DARK_PRISMARINE);
+
     public static final Block VANADIUM_ORE = new BlockSimple("vanadium_ore", Properties.from(Blocks.DIAMOND_ORE), ItemGroup.BUILDING_BLOCKS);
     public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK), ItemGroup.BUILDING_BLOCKS);
     public static final Block PALM_PLANKS = new BlockSimple("palm_planks", Properties.from(Blocks.OAK_PLANKS), ItemGroup.BUILDING_BLOCKS);
@@ -75,6 +94,7 @@ public class MubbleBlocks
     public static final Block PALM_BUTTON = new BlockButtonWood("palm");
     public static final Block PALM_STAIRS = new BlockStairs("palm", MubbleBlocks.PALM_PLANKS);
     public static final Block PALM_SLAB = new BlockSlab("palm", MubbleBlocks.PALM_PLANKS);
+    public static final Block PALM_VERTICAL_SLAB = new BlockSlabVertical("palm", MubbleBlocks.PALM_PLANKS);
     public static final Block PALM_FENCE_GATE = new BlockFenceGate("palm");
     public static final Block PALM_FENCE = new BlockFence("palm");
     public static final Block PALM_DOOR = new BlockDoor("palm");
