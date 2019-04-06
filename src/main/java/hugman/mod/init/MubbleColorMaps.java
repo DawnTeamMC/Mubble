@@ -20,7 +20,7 @@ public class MubbleColorMaps extends BlockColors
 		blockColors.register((p_210229_0_, p_210229_1_, p_210229_2_, p_210229_3_) ->
 		{
 			return p_210229_1_ != null && p_210229_2_ != null ? BiomeColors.getFoliageColor(p_210229_1_, p_210229_2_) : FoliageColors.getDefault();
-		}, MubbleBlocks.PALM_LEAVES);
+		}, MubbleBlocks.PALM_LEAVES, MubbleBlocks.SCARLET_LEAVES);
 	}
 	
 	public static void registerItemColors(final ColorHandlerEvent.Item event)
@@ -30,6 +30,6 @@ public class MubbleColorMaps extends BlockColors
 		itemColors.register((p_210235_1_, p_210235_2_) ->
 		{
 	        return GrassColors.get(0.5D, 1.0D);
-	    }, MubbleBlocks.GREEN_HILL_GRASS_BLOCK, MubbleBlocks.PALM_LEAVES);
+	    }, MubbleBlocks.GREEN_HILL_GRASS_BLOCK, MubbleBlocks.PALM_LEAVES, MubbleBlocks.SCARLET_LEAVES);
 	}
 }

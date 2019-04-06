@@ -1,0 +1,7 @@
+{
+	"parent": "block/template_fence_gate_open",
+	"textures":
+	{
+		"texture": "mubble:block/scarlet_planks"
+	}
+}

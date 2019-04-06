@@ -1,0 +1,7 @@
+{
+	"parent": "block/button_inventory",
+	"textures":
+	{
+		"texture": "mubble:block/scarlet_planks"
+	}
+}

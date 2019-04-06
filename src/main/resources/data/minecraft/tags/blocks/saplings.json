@@ -2,6 +2,7 @@
 	"replace": false,
 	"values":
 	[
-		"mubble:palm_sapling"
+		"mubble:palm_sapling",
+		"mubble:scarlet_sapling"
 	]
 }

@@ -45,7 +45,8 @@ import hugman.mod.objects.block.BlockUltimatumPortal;
 import hugman.mod.objects.block.BlockUnstable;
 import hugman.mod.objects.block.BlockWall;
 import hugman.mod.objects.block.BlockWoodStrip;
-import hugman.mod.objects.world.structures.PalmTree;
+import hugman.mod.objects.world.structure.PalmTree;
+import hugman.mod.objects.world.structure.ScarletTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.block.SoundType;
@@ -424,7 +425,23 @@ public class MubbleBlocks
     public static final Block SPRING = new BlockSpring();
     
     
-
+    
+    public static final Block SCARLET_PLANKS = new BlockSimple("scarlet_planks", Properties.from(Blocks.DARK_OAK_PLANKS), ItemGroup.BUILDING_BLOCKS);
+    public static final Block SCARLET_SAPLING = new BlockSapling("scarlet", new ScarletTree());
+    public static final Block SCARLET_LOG = new BlockWoodStrip("scarlet_log", Properties.from(Blocks.DARK_OAK_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final Block STRIPPED_SCARLET_LOG = new BlockRotatedPillar("stripped_scarlet_log", Properties.from(MubbleBlocks.SCARLET_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final Block SCARLET_WOOD = new BlockWoodStrip("scarlet_wood", Properties.from(MubbleBlocks.SCARLET_LOG), ItemGroup.BUILDING_BLOCKS);
+    public static final Block STRIPPED_SCARLET_WOOD = new BlockRotatedPillar("stripped_scarlet_wood", Properties.from(MubbleBlocks.SCARLET_WOOD), ItemGroup.BUILDING_BLOCKS);
+    public static final Block SCARLET_LEAVES = new BlockLeaves("scarlet");
+    public static final Block SCARLET_PRESSURE_PLATE = new BlockPressurePlate("scarlet");
+    public static final Block SCARLET_TRAPDOOR = new BlockTrapDoor("scarlet");
+    public static final Block SCARLET_BUTTON = new BlockButtonWood("scarlet");
+    public static final Block SCARLET_STAIRS = new BlockStairs("scarlet", MubbleBlocks.SCARLET_PLANKS);
+    public static final Block SCARLET_SLAB = new BlockSlab("scarlet", MubbleBlocks.SCARLET_PLANKS);
+    public static final Block SCARLET_VERTICAL_SLAB = new BlockSlabVertical("scarlet", MubbleBlocks.SCARLET_PLANKS);
+    public static final Block SCARLET_FENCE_GATE = new BlockFenceGate("scarlet");
+    public static final Block SCARLET_FENCE = new BlockFence("scarlet");
+    public static final Block SCARLET_DOOR = new BlockDoor("scarlet");
     public static final Block SCARLET_MUSHROOM = new BlockMushroom("scarlet", 7);
     public static final Block SCARLET_ORCHID = new BlockFlower("scarlet_orchid", 7);
     

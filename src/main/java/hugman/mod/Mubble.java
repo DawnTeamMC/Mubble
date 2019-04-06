@@ -3,6 +3,7 @@ package hugman.mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hugman.mod.init.MubbleBiomes;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleColorMaps;
 import hugman.mod.init.MubbleCostumes;
@@ -15,6 +16,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -122,6 +124,14 @@ public class Mubble
         	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
         	MubbleEntities.registerEntity(registry);
         	LOGGER.info("[REGISTRY] Registered entities");
+        }
+        
+        @SubscribeEvent
+        public static void onBiomesRegistry(final RegistryEvent.Register<Biome> event)
+        {
+        	event.getRegistry().registerAll(MubbleBiomes.BIOMES.toArray(new Biome[0]));
+        	MubbleBiomes.registerGenerations();
+        	LOGGER.info("[REGISTRY] Registered biomes");
         }
     }
 }

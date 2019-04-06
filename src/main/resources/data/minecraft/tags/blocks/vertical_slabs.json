@@ -2,6 +2,7 @@
 	"replace": false,
 	"values":
 	[
+		"#minecraft:wooden_vertical_slabs",
 		"mubble:blunite_vertical_slab",
 		"mubble:polished_blunite_vertical_slab",
 		"mubble:carbonite_vertical_slab",

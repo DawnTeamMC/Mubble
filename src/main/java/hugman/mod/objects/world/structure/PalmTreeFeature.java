@@ -1,4 +1,4 @@
-package hugman.mod.objects.world.structures;
+package hugman.mod.objects.world.structure;
 
 import java.util.Random;
 import java.util.Set;
@@ -76,10 +76,10 @@ public class PalmTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 	            			 }
 	            		 }
 	            	 }
-	            	 for(int j2 = 0; j2 < i; ++j2)
+	            	 for(int trunk_height = 0; trunk_height < i; ++trunk_height)
 	            	 {
-	            		 IBlockState iblockstate1 = worldIn.getBlockState(position.up(j2));
-	            		 if (iblockstate1.isAir(worldIn, position.up(j2)) || iblockstate1.isIn(BlockTags.LEAVES)) this.func_208520_a(changedBlocks, worldIn, position.up(j2), LOG);
+	            		 IBlockState iblockstate1 = worldIn.getBlockState(position.up(trunk_height));
+	            		 if (iblockstate1.isAir(worldIn, position.up(trunk_height)) || iblockstate1.isIn(BlockTags.LEAVES)) this.func_208520_a(changedBlocks, worldIn, position.up(trunk_height), LOG);
 	            	 }
 	            	 return true;
 	             }

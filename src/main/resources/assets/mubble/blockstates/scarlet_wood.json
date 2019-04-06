@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+		"axis=y": {"model": "mubble:block/scarlet_wood"},
+		"axis=z": {"model": "mubble:block/scarlet_wood", "x": 90},
+		"axis=x": {"model": "mubble:block/scarlet_wood", "x": 90, "y": 90}
+	}
+}
