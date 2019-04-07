@@ -23,6 +23,14 @@ public class MubbleColorMaps extends BlockColors
 		}, MubbleBlocks.PALM_LEAVES);
 		blockColors.register((p_210229_0_, p_210229_1_, p_210229_2_, p_210229_3_) ->
 		{
+			return 16104984;
+		}, MubbleBlocks.AUTUMN_LEAVES);
+		blockColors.register((p_210229_0_, p_210229_1_, p_210229_2_, p_210229_3_) ->
+		{
+			return 16539096;
+		}, MubbleBlocks.CHERRY_BLOSSOM_LEAVES);
+		blockColors.register((p_210229_0_, p_210229_1_, p_210229_2_, p_210229_3_) ->
+		{
 			return 10622269;
 		}, MubbleBlocks.SCARLET_LEAVES);
 	}
@@ -35,6 +43,14 @@ public class MubbleColorMaps extends BlockColors
 		{
 	        return GrassColors.get(0.5D, 1.0D);
 	    }, MubbleBlocks.GREEN_HILL_GRASS_BLOCK, MubbleBlocks.PALM_LEAVES);
+		itemColors.register((p_210235_1_, p_210235_2_) ->
+		{
+	        return 16104984;
+	    }, MubbleBlocks.AUTUMN_LEAVES);
+		itemColors.register((p_210235_1_, p_210235_2_) ->
+		{
+	        return 16539096;
+	    }, MubbleBlocks.CHERRY_BLOSSOM_LEAVES);
 		itemColors.register((p_210235_1_, p_210235_2_) ->
 		{
 	        return 10622269;

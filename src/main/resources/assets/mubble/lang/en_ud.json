@@ -42,6 +42,10 @@
 	"//block.mubble.palm_fence_gate": "Palm Fence Gate",
 	"//block.mubble.palm_fence": "Palm Fence",
 	"//block.mubble.palm_door": "Palm Door",
+	"//block.mubble.autumn_sapling": "Autumn Sapling",
+	"//block.mubble.autumn_leaves": "Autumn Leaves",
+	"//block.mubble.cherry_blossom_sapling": "Cherry Blossom Sapling",
+	"//block.mubble.cherry_blossom_leaves": "Cherry Blossom Leaves",
 
 	"//block.mubble.blue_bricks": "Blue Bricks",
 	"//block.mubble.light_blue_bricks": "Light Blue Bricks",
@@ -599,6 +603,8 @@
 
 
 	"comment": "BIOMES",
+	"//biome.mubble.autumn_forest": "Autumn Forest",
+	"//biome.mubble.cherry_blossom_forest": "Cherry Blossom Forest",
 	"//biome.mubble.scarlet_forest": "Scarlet Forest",
 
 

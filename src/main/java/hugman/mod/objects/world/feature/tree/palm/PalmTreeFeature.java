@@ -1,27 +1,29 @@
-package hugman.mod.objects.world.structure;
+package hugman.mod.objects.world.feature.tree.palm;
 
 import java.util.Random;
 import java.util.Set;
 
 import hugman.mod.init.MubbleBlocks;
-import hugman.mod.objects.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraftforge.common.IPlantable;
 
 public class PalmTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 {
 	private static final IBlockState LOG = MubbleBlocks.PALM_LOG.getDefaultState();
-	private static final IBlockState LEAF = MubbleBlocks.PALM_LEAVES.getDefaultState();
+	private static final IBlockState LEAVES = MubbleBlocks.PALM_LEAVES.getDefaultState();
+	private static final IPlantable SAPLING = (IPlantable)MubbleBlocks.PALM_SAPLING;
 	
 	public PalmTreeFeature(boolean notify)
 	{
 		super(notify);
 	}
 
+	@Override
 	public boolean place(Set<BlockPos> changedBlocks, IWorld worldIn, Random rand, BlockPos position)
 	{
 		int i = rand.nextInt(4) + 10;
@@ -50,7 +52,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 	         if (!flag) return false;
 	         else
 	         {
-	        	 boolean isSoil = worldIn.getBlockState(position.down()).canSustainPlant(worldIn, position.down(), net.minecraft.util.EnumFacing.UP, (BlockSapling)MubbleBlocks.PALM_SAPLING);
+	        	 boolean isSoil = worldIn.getBlockState(position.down()).canSustainPlant(worldIn, position.down(), net.minecraft.util.EnumFacing.UP, SAPLING);
 	             if (isSoil && position.getY() < worldIn.getWorld().getHeight() - i - 1)
 	             {
 	            	 this.setDirtAt(worldIn, position.down(), position);
@@ -70,7 +72,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 	            					 IBlockState iblockstate = worldIn.getBlockState(blockpos);
 	            					 if (iblockstate.isAir(worldIn, blockpos) || iblockstate.isIn(BlockTags.LEAVES))
 	            					 {
-	            						 this.setBlockState(worldIn, blockpos, LEAF);
+	            						 this.setBlockState(worldIn, blockpos, LEAVES);
 	            					 }
 	            				 }
 	            			 }

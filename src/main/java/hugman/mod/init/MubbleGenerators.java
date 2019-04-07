@@ -1,14 +1,11 @@
 package hugman.mod.init;
 
-import hugman.mod.objects.world.structure.PalmTreeFeature;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStage.Decoration;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.MinableConfig;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.CountRange;
 import net.minecraft.world.gen.placement.CountRangeConfig;
@@ -16,7 +13,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class MubbleGenerators
 {
-	public static final AbstractTreeFeature<NoFeatureConfig> PALM_TREE = new PalmTreeFeature(false);
 	public static void init()
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)

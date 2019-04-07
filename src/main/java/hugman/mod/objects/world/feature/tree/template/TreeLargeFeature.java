@@ -1,10 +1,9 @@
-package hugman.mod.objects.world.structure;
+package hugman.mod.objects.world.feature.tree.template;
 
 import java.util.Random;
 import java.util.Set;
 
-import hugman.mod.init.MubbleBlocks;
-import hugman.mod.objects.block.BlockSapling;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.EnumFacing;
@@ -13,15 +12,20 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraftforge.common.IPlantable;
 
-public class ScarletTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
+public class TreeLargeFeature extends AbstractTreeFeature<NoFeatureConfig>
 {
-	private static final IBlockState SCARLET_LOG = MubbleBlocks.SCARLET_LOG.getDefaultState();
-	private static final IBlockState SCARLET_LEAVES = MubbleBlocks.SCARLET_LEAVES.getDefaultState();
+	private final IBlockState LOG;
+	private final IBlockState LEAVES;
+	private final IPlantable SAPLING;
 
-	public ScarletTreeFeature(boolean notify)
+	public TreeLargeFeature(boolean notify, Block log, Block leaves, Block sapling)
 	{
 		super(notify);
+		this.LOG = log.getDefaultState();
+		this.LEAVES = leaves.getDefaultState();
+		this.SAPLING = (IPlantable)sapling;
 	}
 
 	@Override
@@ -34,7 +38,7 @@ public class ScarletTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 		if (k >= 1 && k + i + 1 < 256)
 		{
 			BlockPos blockpos = position.down();
-			boolean isSoil = worldIn.getBlockState(blockpos).canSustainPlant(worldIn, blockpos, net.minecraft.util.EnumFacing.UP, (BlockSapling)MubbleBlocks.SCARLET_SAPLING);
+			boolean isSoil = worldIn.getBlockState(blockpos).canSustainPlant(worldIn, blockpos, net.minecraft.util.EnumFacing.UP, SAPLING);
 			if (!isSoil) return false;
 			else if (!this.placeTreeOfHeight(worldIn, position, i)) return false;
 			else
@@ -137,12 +141,12 @@ public class ScarletTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 
 	private void func_208533_a(Set<BlockPos> p_208533_1_, IWorld p_208533_2_, BlockPos p_208533_3_)
 	{
-		if (this.canGrowInto(p_208533_2_, p_208533_3_)) this.func_208520_a(p_208533_1_, p_208533_2_, p_208533_3_, SCARLET_LOG);
+		if (this.canGrowInto(p_208533_2_, p_208533_3_)) this.func_208520_a(p_208533_1_, p_208533_2_, p_208533_3_, LOG);
 	}
 
 	private void func_202414_a(IWorld p_202414_1_, int p_202414_2_, int p_202414_3_, int p_202414_4_)
 	{
 		BlockPos blockpos = new BlockPos(p_202414_2_, p_202414_3_, p_202414_4_);
-		if (p_202414_1_.getBlockState(blockpos).isAir(p_202414_1_, blockpos)) this.setBlockState(p_202414_1_, blockpos, SCARLET_LEAVES);
+		if (p_202414_1_.getBlockState(blockpos).isAir(p_202414_1_, blockpos)) this.setBlockState(p_202414_1_, blockpos, LEAVES);
 	}
 }

@@ -45,8 +45,10 @@ import hugman.mod.objects.block.BlockUltimatumPortal;
 import hugman.mod.objects.block.BlockUnstable;
 import hugman.mod.objects.block.BlockWall;
 import hugman.mod.objects.block.BlockWoodStrip;
-import hugman.mod.objects.world.structure.PalmTree;
-import hugman.mod.objects.world.structure.ScarletTree;
+import hugman.mod.objects.world.feature.tree.autumn.AutumnTree;
+import hugman.mod.objects.world.feature.tree.cherry_blossom.CherryBlossomTree;
+import hugman.mod.objects.world.feature.tree.palm.PalmTree;
+import hugman.mod.objects.world.feature.tree.scarlet.ScarletTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Properties;
 import net.minecraft.block.SoundType;
@@ -99,6 +101,10 @@ public class MubbleBlocks
     public static final Block PALM_FENCE_GATE = new BlockFenceGate("palm");
     public static final Block PALM_FENCE = new BlockFence("palm");
     public static final Block PALM_DOOR = new BlockDoor("palm");
+    public static final Block AUTUMN_SAPLING = new BlockSapling("autumn", new AutumnTree());
+    public static final Block AUTUMN_LEAVES = new BlockLeaves("autumn");
+    public static final Block CHERRY_BLOSSOM_SAPLING = new BlockSapling("cherry_blossom", new CherryBlossomTree());
+    public static final Block CHERRY_BLOSSOM_LEAVES = new BlockLeaves("cherry_blossom");
     
     public static final Block WHITE_BRICKS = new BlockSimple("white_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
     public static final Block LIGHT_GRAY_BRICKS = new BlockSimple("light_gray_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);

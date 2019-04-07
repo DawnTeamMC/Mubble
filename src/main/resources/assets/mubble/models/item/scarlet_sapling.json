@@ -1,6 +1,7 @@
 {
 	"parent": "item/generated",
-	"textures": {
+	"textures":
+	{
 		"layer0": "mubble:block/scarlet_sapling"
 	}
 }

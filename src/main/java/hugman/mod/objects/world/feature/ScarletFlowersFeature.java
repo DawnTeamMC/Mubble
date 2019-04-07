@@ -1,4 +1,4 @@
-package hugman.mod.objects.world.structure;
+package hugman.mod.objects.world.feature;
 
 import java.util.Random;
 
