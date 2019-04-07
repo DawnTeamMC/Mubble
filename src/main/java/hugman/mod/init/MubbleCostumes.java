@@ -3,7 +3,6 @@ package hugman.mod.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import hugman.mod.objects.costume.CostumeBlock;
 import hugman.mod.objects.costume.CostumeCappy;
 import hugman.mod.objects.costume.CostumeEffect;
 import hugman.mod.objects.costume.CostumeGooigiCap;
@@ -13,6 +12,7 @@ import hugman.mod.objects.costume.CostumePrincessPeachCrown;
 import hugman.mod.objects.costume.CostumeSimple;
 import hugman.mod.objects.costume.CostumeVanishCap;
 import hugman.mod.objects.costume.CostumeWingCap;
+import hugman.mod.objects.costume.block.CostumeBlock;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;

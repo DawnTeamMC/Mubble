@@ -4,12 +4,12 @@
 	"ingredients":
 	[
 		{
-			"tag": "mubble:palm_logs"
+			"tag": "mubble:scarlet_logs"
 		}
 	],
 	"result":
 	{
-		"item": "mubble:palm_planks",
+		"item": "mubble:scarlet_planks",
 		"count": 4
 	}
 }

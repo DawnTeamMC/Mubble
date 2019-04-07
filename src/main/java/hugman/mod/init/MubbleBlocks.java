@@ -390,7 +390,6 @@ public class MubbleBlocks
     public static final Block MONOCHROME_TETRIS_SCAFFOLDING = new BlockFalling("monochrome_tetris_scaffolding", Properties.from(Blocks.IRON_BLOCK), ItemGroup.DECORATIONS);
     
     
-    
     public static final Block VAMPIRE_STONE = new BlockSimple("vampire_stone", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
     public static final Block MEDUSA_STONE = new BlockSimple("medusa_stone", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
     public static final Block MEDUSA_BRICKS = new BlockSimple("medusa_bricks", Properties.from(Blocks.STONE_BRICKS), ItemGroup.BUILDING_BLOCKS);
@@ -416,14 +415,12 @@ public class MubbleBlocks
     public static final Block PINK_CANDY_CANE_PILLAR = new BlockCandyCanePillar(EnumDyeColor.PINK);
     
     
-    
     public static final Block GREEN_HILL_GRASS_BLOCK  = new BlockGrass("green_hill_grass_block", MubbleBlocks.GREEN_HILL_DIRT, Properties.from(Blocks.GRASS_BLOCK));
     public static final Block GREEN_HILL_DIRT = new BlockSimple("green_hill_dirt", Properties.from(Blocks.DIRT), ItemGroup.BUILDING_BLOCKS);
     public static final Block MARBLE_ZONE_STONE = new BlockSimple("marble_zone_stone", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
     public static final Block YELLOW_STUDIOPOLIS_CLAPPER = new BlockDirectional("yellow_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK), ItemGroup.DECORATIONS);
     public static final Block BLUE_STUDIOPOLIS_CLAPPER = new BlockDirectional("blue_studiopolis_clapper", Properties.from(Blocks.IRON_BLOCK), ItemGroup.DECORATIONS);
     public static final Block SPRING = new BlockSpring();
-    
     
     
     public static final Block SCARLET_PLANKS = new BlockSimple("scarlet_planks", Properties.from(Blocks.DARK_OAK_PLANKS), ItemGroup.BUILDING_BLOCKS);
@@ -446,7 +443,6 @@ public class MubbleBlocks
     public static final Block SCARLET_ORCHID = new BlockFlower("scarlet_orchid", 7);
     
     
-    
     public static final Block GIRDER = new BlockSimple("girder", Properties.from(Blocks.IRON_BLOCK), ItemGroup.BUILDING_BLOCKS);
     public static final Block MIRROR_TEMPLE_BRICKS = new BlockSimple("mirror_temple_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
     public static final Block OLD_SITE_BRICKS = new BlockSimple("old_site_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
@@ -461,7 +457,6 @@ public class MubbleBlocks
     public static final Block ELDER_PEBBLES = new BlockSimple("elder_pebbles", Properties.from(Blocks.BRICKS).lightValue(5), ItemGroup.BUILDING_BLOCKS);
     public static final Block SPACE_JAM = new BlockSimple("space_jam", Properties.create(Material.SAND).hardnessAndResistance(0.4f).sound(MubbleSoundTypes.SPACE_JAM), ItemGroup.BUILDING_BLOCKS);
     public static final Block SPACE_OBSIDIAN = new BlockEmptyDrops("space_obsidian", Block.Properties.create(Material.ROCK).hardnessAndResistance(-1.0F, 3600000.0F), ItemGroup.BUILDING_BLOCKS);
-    
     
     
     public static final Block RED_PUYO = new BlockPuyo(EnumDyeColor.RED);

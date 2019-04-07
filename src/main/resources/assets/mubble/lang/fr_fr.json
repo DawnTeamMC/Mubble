@@ -598,6 +598,11 @@
 
 
 
+	"comment": "BIOMES",
+	"//biome.mubble.scarlet_forest": "Scarlet Forest",
+
+
+
 	"comment": "SUBTITLES",
 	"subtitles.block.note_block.jump": "Bloc note utilisé",
 	"subtitles.block.question_block.mubble.loot.super_mushroom": "Super champignon sorti d'un bloc ?",

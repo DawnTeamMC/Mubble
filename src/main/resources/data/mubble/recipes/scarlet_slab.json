@@ -9,12 +9,12 @@
 	{
 		"#":
 		{
-			"item": "mubble:palm_planks"
+			"item": "mubble:scarlet_planks"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:palm_slab",
+		"item": "mubble:scarlet_slab",
 		"count": 6
 	}
 }

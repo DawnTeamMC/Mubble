@@ -28,6 +28,8 @@ public class BlockWoodStrip extends BlockRotatedPillar
     	Block block = Blocks.STONE;
     	if(this == MubbleBlocks.PALM_LOG) block = MubbleBlocks.STRIPPED_PALM_LOG;
     	if(this == MubbleBlocks.PALM_WOOD) block = MubbleBlocks.STRIPPED_PALM_WOOD;
+    	if(this == MubbleBlocks.SCARLET_LOG) block = MubbleBlocks.STRIPPED_SCARLET_LOG;
+    	if(this == MubbleBlocks.SCARLET_WOOD) block = MubbleBlocks.STRIPPED_SCARLET_WOOD;
     	ItemStack item = player.getHeldItem(hand);
     	if(item.getItem() instanceof ItemAxe)
     	{

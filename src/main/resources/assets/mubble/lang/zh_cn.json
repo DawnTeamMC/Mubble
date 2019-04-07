@@ -598,6 +598,11 @@
 
 
 
+	"comment": "BIOMES",
+	"//biome.mubble.scarlet_forest": "Scarlet Forest",
+
+
+
 	"comment": "SUBTITLES",
 	"//subtitles.block.note_block.jump": "<newline>",
 	"subtitles.block.question_block.mubble.loot.super_mushroom": "问号块:掉落超级蘑菇",

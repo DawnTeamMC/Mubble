@@ -1,9 +1,8 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"group": "wooden_door",
+	"group": "bark",
 	"pattern":
 	[
-		"##",
 		"##",
 		"##"
 	],
@@ -11,12 +10,12 @@
 	{
 		"#":
 		{
-			"item": "mubble:palm_planks"
+			"item": "mubble:scarlet_log"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:palm_door",
+		"item": "mubble:scarlet_wood",
 		"count": 3
 	}
 }

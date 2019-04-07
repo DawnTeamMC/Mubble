@@ -4,11 +4,11 @@
 	"ingredients":
 	[
 		{
-			"item": "mubble:palm_planks"
+			"item": "mubble:scarlet_planks"
 		}
 	],
 	"result":
 	{
-		"item": "mubble:palm_button"
+		"item": "mubble:scarlet_button"
 	}
 }

@@ -30,6 +30,10 @@ public class BlockLeaves extends net.minecraft.block.BlockLeaves
         {
            return MubbleBlocks.PALM_SAPLING;
         }
+        if (block == MubbleBlocks.SCARLET_LEAVES)
+        {
+           return MubbleBlocks.SCARLET_SAPLING;
+        }
 		return block;
 	}
     

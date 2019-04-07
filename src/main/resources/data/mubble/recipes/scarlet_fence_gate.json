@@ -1,10 +1,10 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"group": "wooden_fence",
+	"group": "wooden_fence_gate",
 	"pattern":
 	[
-		"W#W",
-		"W#W"
+		"#W#",
+		"#W#"
 	],
 	"key":
 	{
@@ -14,12 +14,11 @@
 		},
 		"W":
 		{
-			"item": "mubble:palm_planks"
+			"item": "mubble:scarlet_planks"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:palm_fence",
-		"count": 3
+		"item": "mubble:scarlet_fence_gate"
 	}
 }

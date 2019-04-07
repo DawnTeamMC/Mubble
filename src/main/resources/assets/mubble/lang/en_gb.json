@@ -598,6 +598,11 @@
 
 
 
+	"comment": "BIOMES",
+	"//biome.mubble.scarlet_forest": "Scarlet Forest",
+
+
+
 	"comment": "SUBTITLES",
 	"subtitles.block.note_block.jump": "Note Block used",
 	"subtitles.block.question_block.mubble.loot.power_up": "? Block drops power up",

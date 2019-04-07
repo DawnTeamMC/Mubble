@@ -1,4 +1,4 @@
-package hugman.mod.objects.costume;
+package hugman.mod.objects.costume.block;
 
 import java.util.List;
 

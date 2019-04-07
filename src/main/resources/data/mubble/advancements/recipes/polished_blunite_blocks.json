@@ -1,0 +1,61 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:polished_blunite_stairs",
+			"mubble:polished_blunite_slab",
+			"mubble:polished_blunite_vertical_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_polished_blunite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:polished_blunite"
+					}
+				]
+			}
+		},
+		"has_the_polished_blunite_stairs_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": 
+			{
+				"recipe": "mubble:polished_blunite_stairs"
+			}
+		},
+		"has_the_polished_blunite_slab_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": 
+			{
+				"recipe": "mubble:polished_blunite_slab"
+			}
+		},
+		"has_the_polished_blunite_vertical_slab_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions": 
+			{
+				"recipe": "mubble:polished_blunite_vertical_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_the_polished_blunite_slab_recipe",
+			"has_the_polished_blunite_stairs_recipe",
+			"has_the_polished_blunite_vertical_slab_recipe",
+			"has_the_recipe"
+		]
+	]
+}

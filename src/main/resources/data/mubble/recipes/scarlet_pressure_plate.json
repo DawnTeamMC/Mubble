@@ -9,11 +9,11 @@
 	{
 		"#":
 		{
-			"item": "mubble:palm_planks"
+			"item": "mubble:scarlet_planks"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:palm_pressure_plate"
+		"item": "mubble:scarlet_pressure_plate"
 	}
 }

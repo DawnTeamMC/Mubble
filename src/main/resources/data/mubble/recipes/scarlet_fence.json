@@ -14,12 +14,12 @@
 		},
 		"W":
 		{
-			"item": "mubble:palm_planks"
+			"item": "mubble:scarlet_planks"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:palm_fence",
+		"item": "mubble:scarlet_fence",
 		"count": 3
 	}
 }
