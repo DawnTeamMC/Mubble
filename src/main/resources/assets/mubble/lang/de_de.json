@@ -26,6 +26,10 @@
 
 	"block.mubble.vanadium_block": "Vanadium-block",
 	"block.mubble.vanadium_ore": "Vanadium-Erz",
+	"//block.mubble.autumn_oak_sapling": "Autumn Oak Sapling",
+	"//block.mubble.autumn_oak_leaves": "Autumn Oak Leaves",
+	"//block.mubble.cherry_oak_sapling": "Cherry Oak Sapling",
+	"//block.mubble.cherry_oak_leaves": "Cherry Oak Leaves",
 	"block.mubble.palm_planks": "Palmenholzbretter",
 	"block.mubble.palm_sapling": "Palmensetzling",
 	"block.mubble.palm_log": "Palmenstamm",
@@ -42,10 +46,6 @@
 	"block.mubble.palm_fence_gate": "Palmenholzzauntor",
 	"block.mubble.palm_fence": "Palmenholzzaun",
 	"block.mubble.palm_door": "Palmenholztür",
-	"//block.mubble.autumn_sapling": "Autumn Sapling",
-	"//block.mubble.autumn_leaves": "Autumn Leaves",
-	"//block.mubble.cherry_blossom_sapling": "Cherry Blossom Sapling",
-	"//block.mubble.cherry_blossom_leaves": "Cherry Blossom Leaves",
 
 	"block.mubble.blue_bricks": "Blaue Ziegelsteine",
 	"block.mubble.light_blue_bricks": "Hellblaue Ziegelsteine",
@@ -602,8 +602,8 @@
 
 
 	"comment": "BIOMES",
-	"//biome.mubble.autumn_forest": "Autumn Forest",
-	"//biome.mubble.cherry_blossom_forest": "Cherry Blossom Forest",
+	"//biome.mubble.autumn_oak_forest": "Autumn Oak Forest",
+	"//biome.mubble.cherry_oak_forest": "Cherry Oak Forest",
 	"//biome.mubble.scarlet_forest": "Scarlet Forest",
 
 
