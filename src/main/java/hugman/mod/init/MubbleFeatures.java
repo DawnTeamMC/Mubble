@@ -9,7 +9,10 @@ import hugman.mod.objects.world.feature.tree.template.TreeTallFeature;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.gen.feature.AbstractFlowersFeature;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.TallGrassConfig;
+import net.minecraft.world.gen.feature.TallGrassFeature;
 
 public class MubbleFeatures
 {

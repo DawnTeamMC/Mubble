@@ -4,6 +4,7 @@ import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
+import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -56,6 +57,12 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
     {
         super("spring", Properties.create(Material.IRON).hardnessAndResistance(4f), ItemGroup.TRANSPORTATION);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.UP).with(WATERLOGGED, Boolean.valueOf(false)));
+    }
+    
+    @Override
+    public EnumPushReaction getPushReaction(IBlockState state)
+    {
+    	return EnumPushReaction.DESTROY;
     }
     
     @Override

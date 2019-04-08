@@ -7,6 +7,7 @@ import hugman.mod.objects.block.BlockBalloon;
 import hugman.mod.objects.block.BlockBrick;
 import hugman.mod.objects.block.BlockButtonWood;
 import hugman.mod.objects.block.BlockCandyCanePillar;
+import hugman.mod.objects.block.BlockLeavesCarpet;
 import hugman.mod.objects.block.BlockCloud;
 import hugman.mod.objects.block.BlockCrops;
 import hugman.mod.objects.block.BlockDirectional;
@@ -83,8 +84,21 @@ public class MubbleBlocks
     public static final Block PRISMARINE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("prismarine_brick", Blocks.PRISMARINE_BRICKS);
     public static final Block DARK_PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical("dark_prismarine", Blocks.DARK_PRISMARINE);
 
+    public static final Block OAK_LEAVES_CARPET = new BlockLeavesCarpet("oak_leaves", Blocks.OAK_LEAVES);
+    public static final Block SPRUCE_LEAVES_CARPET = new BlockLeavesCarpet("spruce_leaves", Blocks.SPRUCE_LEAVES);
+    public static final Block BIRCH_LEAVES_CARPET = new BlockLeavesCarpet("birch_leaves", Blocks.BIRCH_LEAVES);
+    public static final Block JUNGLE_LEAVES_CARPET = new BlockLeavesCarpet("jungle_leaves", Blocks.JUNGLE_LEAVES);
+    public static final Block ACACIA_LEAVES_CARPET = new BlockLeavesCarpet("acacia_leaves", Blocks.ACACIA_LEAVES);
+    public static final Block DARK_OAK_LEAVES_CARPET = new BlockLeavesCarpet("dark_oak_leaves", Blocks.DARK_OAK_LEAVES);
+
     public static final Block VANADIUM_ORE = new BlockSimple("vanadium_ore", Properties.from(Blocks.DIAMOND_ORE), ItemGroup.BUILDING_BLOCKS);
     public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK), ItemGroup.BUILDING_BLOCKS);
+    public static final Block AUTUMN_OAK_SAPLING = new BlockSapling("autumn_oak", new AutumnOakTree());
+    public static final Block AUTUMN_OAK_LEAVES = new BlockLeaves("autumn_oak");
+    public static final Block AUTUMN_OAK_LEAVES_CARPET = new BlockLeavesCarpet(MubbleBlocks.AUTUMN_OAK_LEAVES);
+    public static final Block CHERRY_OAK_SAPLING = new BlockSapling("cherry_oak", new CherryOakTree());
+    public static final Block CHERRY_OAK_LEAVES = new BlockLeaves("cherry_oak");
+    public static final Block CHERRY_OAK_LEAVES_CARPET = new BlockLeavesCarpet(MubbleBlocks.CHERRY_OAK_LEAVES);
     public static final Block PALM_PLANKS = new BlockSimple("palm_planks", Properties.from(Blocks.OAK_PLANKS), ItemGroup.BUILDING_BLOCKS);
     public static final Block PALM_SAPLING = new BlockSapling("palm", new PalmTree());
     public static final Block PALM_LOG = new BlockWoodStrip("palm_log", Properties.from(Blocks.OAK_LOG), ItemGroup.BUILDING_BLOCKS);
@@ -92,6 +106,7 @@ public class MubbleBlocks
     public static final Block PALM_WOOD = new BlockWoodStrip("palm_wood", Properties.from(MubbleBlocks.PALM_LOG), ItemGroup.BUILDING_BLOCKS);
     public static final Block STRIPPED_PALM_WOOD = new BlockRotatedPillar("stripped_palm_wood", Properties.from(MubbleBlocks.PALM_WOOD), ItemGroup.BUILDING_BLOCKS);
     public static final Block PALM_LEAVES = new BlockLeaves("palm");
+    public static final Block PALM_LEAVES_CARPET = new BlockLeavesCarpet(MubbleBlocks.PALM_LEAVES);
     public static final Block PALM_PRESSURE_PLATE = new BlockPressurePlate("palm");
     public static final Block PALM_TRAPDOOR = new BlockTrapDoor("palm");
     public static final Block PALM_BUTTON = new BlockButtonWood("palm");
@@ -101,10 +116,6 @@ public class MubbleBlocks
     public static final Block PALM_FENCE_GATE = new BlockFenceGate("palm");
     public static final Block PALM_FENCE = new BlockFence("palm");
     public static final Block PALM_DOOR = new BlockDoor("palm");
-    public static final Block AUTUMN_OAK_SAPLING = new BlockSapling("autumn_oak", new AutumnOakTree());
-    public static final Block AUTUMN_OAK_LEAVES = new BlockLeaves("autumn_oak");
-    public static final Block CHERRY_OAK_SAPLING = new BlockSapling("cherry_oak", new CherryOakTree());
-    public static final Block CHERRY_OAK_LEAVES = new BlockLeaves("cherry_oak");
     
     public static final Block WHITE_BRICKS = new BlockSimple("white_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
     public static final Block LIGHT_GRAY_BRICKS = new BlockSimple("light_gray_bricks", Properties.from(Blocks.BRICKS), ItemGroup.BUILDING_BLOCKS);
@@ -436,6 +447,7 @@ public class MubbleBlocks
     public static final Block SCARLET_WOOD = new BlockWoodStrip("scarlet_wood", Properties.from(MubbleBlocks.SCARLET_LOG), ItemGroup.BUILDING_BLOCKS);
     public static final Block STRIPPED_SCARLET_WOOD = new BlockRotatedPillar("stripped_scarlet_wood", Properties.from(MubbleBlocks.SCARLET_WOOD), ItemGroup.BUILDING_BLOCKS);
     public static final Block SCARLET_LEAVES = new BlockLeaves("scarlet");
+    public static final Block SCARLET_LEAVES_CARPET = new BlockLeavesCarpet(MubbleBlocks.SCARLET_LEAVES);
     public static final Block SCARLET_PRESSURE_PLATE = new BlockPressurePlate("scarlet");
     public static final Block SCARLET_TRAPDOOR = new BlockTrapDoor("scarlet");
     public static final Block SCARLET_BUTTON = new BlockButtonWood("scarlet");

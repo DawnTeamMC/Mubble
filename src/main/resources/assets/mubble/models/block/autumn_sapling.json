@@ -1,0 +1,7 @@
+{
+	"parent": "block/cross",
+	"textures":
+	{
+		"cross": "mubble:block/autumn_sapling"
+	}
+}

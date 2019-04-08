@@ -1,0 +1,7 @@
+{
+	"parent": "block/flower_pot_cross",
+	"textures":
+	{
+		"plant": "mubble:block/potted_spring_oak_sapling"
+	}
+}
