@@ -2,6 +2,7 @@
 	"replace": false,
 	"values":
 	[
+		"mubble:cherry_oak_button",
 		"mubble:palm_button",
 		"mubble:scarlet_button"
 	]
