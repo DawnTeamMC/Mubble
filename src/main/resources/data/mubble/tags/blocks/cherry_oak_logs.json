@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:cherry_oak_log",
+		"mubble:stripped_cherry_oak_log",
+		"mubble:cherry_oak_wood",
+		"mubble:stripped_cherry_oak_wood"
+	]
+}
