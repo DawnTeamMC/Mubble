@@ -33,7 +33,7 @@ public class MubbleItems
     public static final Item APRICOT = new ItemFood("apricot", 4, 0.3F, false);
     public static final Item MANGO = new ItemFood("mango", 4, 0.3F, false);
     public static final Item CARAMEL_CUBE = new ItemFood("caramel_cube", 4, 2.8f, false);
-    public static final Item BAGUETTE = new ItemFood("baguette", 6, 0.8F, false);
+    public static final Item BAGUETTE = new ItemFood("baguette", 7, 0.7F, false);
     public static final Item BURGER = new ItemFood("burger", 9, 2.4f, false);
     public static final Item CREPE = new ItemFood("crepe", 3, 0.5f, false);
     public static final Item CHOCOLATE_CREPE = new ItemFood("chocolate_crepe", 8, 2f, false);

@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:smelting/sugar_from_candy_cane_pillar"
+		]
+	},
+	"criteria":
+	{
+		"has_candy_cane_pillar":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"tag": "mubble:candy_cane_pillars"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:smelting/sugar_from_candy_cane_pillar"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_candy_cane_pillar",
+			"has_the_recipe"
+		]
+	]
+}

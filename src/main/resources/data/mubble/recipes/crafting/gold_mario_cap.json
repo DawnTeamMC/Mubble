@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		" XX",
+		"XOX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "minecraft:gold_ingot"
+		},
+		"O":
+		{
+			"item": "mubble:super_star"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:gold_mario_cap"
+	}
+}

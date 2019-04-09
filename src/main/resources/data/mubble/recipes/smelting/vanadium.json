@@ -1,0 +1,10 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient":
+	{
+		"item": "mubble:vanadium_ore"
+	},
+	"result": "mubble:vanadium",
+	"experience": 1.2,
+	"cookingtime": 200
+}

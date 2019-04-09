@@ -1,0 +1,10 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient":
+	{
+		"item": "minecraft:sugar"
+	},
+	"result": "mubble:caramel_cube",
+	"experience": 0.35,
+	"cookingtime": 125
+}
