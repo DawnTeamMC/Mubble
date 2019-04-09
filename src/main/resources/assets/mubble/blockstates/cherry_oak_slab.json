@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+		"type=bottom": {"model": "mubble:block/cherry_oak_slab/bottom"},
+		"type=top": {"model": "mubble:block/cherry_oak_slab/top"},
+		"type=double": {"model": "mubble:block/cherry_oak_planks"}
+	}
+}

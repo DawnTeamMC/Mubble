@@ -4,8 +4,9 @@ import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
@@ -17,7 +18,7 @@ public class BlockLeaves extends net.minecraft.block.BlockLeaves
 {
     public BlockLeaves(String name)
     {
-        super(Properties.from(Blocks.OAK_LEAVES));
+        super(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).needsRandomTick().sound(SoundType.PLANT));
         setRegistryName(Mubble.MOD_ID, name + "_leaves");
         MubbleBlocks.register(this, ItemGroup.DECORATIONS);
     }
