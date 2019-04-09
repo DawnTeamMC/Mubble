@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/carbonite_stairs"
+		]
+	},
+	"criteria":
+	{
+		"has_carbonite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:carbonite"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/carbonite_stairs"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_carbonite",
+			"has_the_recipe"
+		]
+	]
+}

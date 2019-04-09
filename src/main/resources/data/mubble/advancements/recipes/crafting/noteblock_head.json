@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/noteblock_head"
+		]
+	},
+	"criteria":
+	{
+		"has_headphones":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:headphones"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/noteblock_head"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_headphones",
+			"has_the_recipe"
+		]
+	]
+}

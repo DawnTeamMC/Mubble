@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/blue_coin_to_red_coin"
+		]
+	},
+	"criteria":
+	{
+		"has_blue_coin":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:blue_coin"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/blue_coin_to_red_coin"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_blue_coin",
+			"has_the_recipe"
+		]
+	]
+}

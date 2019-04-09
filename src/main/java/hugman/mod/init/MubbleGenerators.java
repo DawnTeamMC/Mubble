@@ -1,5 +1,6 @@
 package hugman.mod.init;
 
+import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStage.Decoration;
@@ -17,6 +18,10 @@ public class MubbleGenerators
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{
+			if (!biome.getCategory().equals(Category.PLAINS))
+			{
+				biome.getSpawns(EnumCreatureType.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.TOAD, 10, 4, 4));
+			}
 			if (!biome.getCategory().equals(Category.NETHER) && !biome.getCategory().equals(Category.THEEND))
 			{
 				biome.addFeature

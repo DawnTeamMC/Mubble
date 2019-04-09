@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/candy_cane"
+		]
+	},
+	"criteria":
+	{
+		"has_sugar":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+					"item": "minecraft:sugar"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/candy_cane"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_sugar",
+			"has_the_recipe"
+		]
+	]
+}
