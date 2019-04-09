@@ -37,12 +37,16 @@
 	"block.mubble.autumn_oak_leaves": "Autumn Oak Leaves",
 	"block.mubble.autumn_oak_leaves_carpet": "Autumn Oak Leaves Carpet",
 	"block.mubble.cherry_oak_planks": "Cherry Oak Planks",
-	"block.mubble.cherry_oak_sapling": "Cherry Oak Sapling",
+	"block.mubble.pink_cherry_oak_sapling": "Pink Cherry Oak Sapling",
+	"block.mubble.white_cherry_oak_sapling": "White Cherry Oak Sapling",
 	"block.mubble.cherry_oak_log": "Cherry Oak Log",
 	"block.mubble.stripped_cherry_oak_log": "Stripped Cherry Oak Log",
 	"block.mubble.cherry_oak_wood": "Cherry Oak Wood",
 	"block.mubble.stripped_cherry_oak_wood": "Stripped Cherry Oak Wood",
-	"block.mubble.cherry_oak_leaves": "Cherry Oak Leaves",
+	"block.mubble.pink_cherry_oak_leaves": "Pink Cherry Oak Leaves",
+	"block.mubble.pink_cherry_oak_leaves_carpet": "Pink Cherry Oak Leaves Carpet",
+	"block.mubble.white_cherry_oak_leaves": "White Cherry Oak Leaves",
+	"block.mubble.white_cherry_oak_leaves_carpet": "White Cherry Oak Leaves Carpet",
 	"block.mubble.cherry_oak_leaves_carpet": "Cherry Oak Leaves Carpet",
 	"block.mubble.cherry_oak_pressure_plate": "Cherry Oak Pressure Plate",
 	"block.mubble.cherry_oak_trapdoor": "Cherry Oak Trapdoor",
@@ -451,7 +455,8 @@
 
 
 	"block.mubble.potted_autumn_oak_sapling": "Potted Autumn Oak Sapling",
-	"block.mubble.potted_cherry_oak_sapling": "Potted Cherry Oak Sapling",
+	"block.mubble.potted_pink_cherry_oak_sapling": "Potted Pink Cherry Oak Sapling",
+	"block.mubble.potted_white_cherry_oak_sapling": "Potted White Cherry Oak Sapling",
 	"block.mubble.potted_palm_sapling": "Potted Palm Sapling",
 	"block.mubble.potted_fire_flower": "Potted Fire Flower",
 	"block.mubble.potted_ice_flower": "Potted Ice Flower",
@@ -570,8 +575,8 @@
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
 
-	"item.mubble.toad_spawn_egg":"Toad Spawn Egg",
-	"item.mubble.chincho_spawn_egg":"Chincho Spawn Egg",
+	"item.mubble.toad_spawn_egg": "Toad Spawn Egg",
+	"item.mubble.chincho_spawn_egg": "Chincho Spawn Egg",
 
 
 
@@ -631,7 +636,8 @@
 
 	"comment": "BIOMES",
 	"biome.mubble.autumn_oak_forest": "Autumn Oak Forest",
-	"biome.mubble.cherry_oak_forest": "Cherry Oak Forest",
+	"biome.mubble.pink_cherry_oak_forest": "Pink Cherry Oak Forest",
+	"biome.mubble.white_cherry_oak_forest": "White Cherry Oak Forest",
 	"biome.mubble.scarlet_forest": "Scarlet Forest",
 
 
