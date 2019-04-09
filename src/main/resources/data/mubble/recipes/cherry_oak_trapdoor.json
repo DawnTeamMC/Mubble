@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "wooden_trapdoor",
+	"pattern":
+	[
+		"###",
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:cherry_oak_planks"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:cherry_oak_trapdoor",
+		"count": 2
+	}
+}
