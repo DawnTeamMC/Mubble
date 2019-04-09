@@ -34,10 +34,10 @@ public class MubbleBiomes
     public static void registerGenerations()
     {
     	BiomeDictionary.addTypes(SCARLET_FOREST, SPOOKY, DENSE, FOREST);
-    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(SCARLET_FOREST, 5));
+    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(SCARLET_FOREST, 3));
     	
     	BiomeDictionary.addTypes(AUTUMN_OAK_FOREST, FOREST);
-    	BiomeManager.addBiome(BiomeType.WARM, new BiomeEntry(AUTUMN_OAK_FOREST, 10));
+    	BiomeManager.addBiome(BiomeType.WARM, new BiomeEntry(AUTUMN_OAK_FOREST, 5));
     	BiomeManager.addSpawnBiome(AUTUMN_OAK_FOREST);
     	
     	BiomeDictionary.addTypes(PINK_CHERRY_OAK_FOREST, FOREST);

@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:blunite_wall"
+		]
+	},
+	"criteria":
+	{
+		"has_blunite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:blunite"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:blunite_wall"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_blunite",
+			"has_the_recipe"
+		]
+	]
+}

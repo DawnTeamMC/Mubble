@@ -1,0 +1,35 @@
+{
+	"parent": "mubble:get_coin",
+	"display":
+	{
+		"icon":
+		{
+			"item": "mubble:super_crown"
+		},
+		"title":
+		{
+			"translate": "advancements.mubble.get_super_crown.title"
+		},
+		"description":
+		{
+			"translate": "advancements.mubble.get_super_crown.description"
+		},
+		"frame": "goal"
+	},
+	"criteria":
+	{
+		"has_super_crown":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:super_crown"
+					}
+				]
+			}
+		}
+	}
+}

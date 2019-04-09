@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:magenta_dark_prismarine_vertical_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_dark_prismarine":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:magenta_dark_prismarine"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:magenta_dark_prismarine_vertical_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_dark_prismarine",
+			"has_the_recipe"
+		]
+	]
+}

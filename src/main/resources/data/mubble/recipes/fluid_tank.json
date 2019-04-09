@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		" # ",
+		"#O#",
+		" # "
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "minecraft:glass_pane"
+		},
+		"O":
+		{
+			"tag": "forge:stone"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:fluid_tank",
+		"count": 2
+	}
+}

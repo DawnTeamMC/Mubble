@@ -1,5 +1,7 @@
 package hugman.mod.objects.block;
 
+import java.util.List;
+
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
@@ -21,8 +23,9 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReaderBase;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IShearable;
 
-public class BlockLeavesCarpet extends BlockBush
+public class BlockLeavesCarpet extends BlockBush implements IShearable
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 	private final Block base;
@@ -93,4 +96,11 @@ public class BlockLeavesCarpet extends BlockBush
     {
     	base.getDrops(base.getDefaultState(), drops, world, pos, fortune);
     }
+
+	@Override
+	public List<ItemStack> onSheared(ItemStack item, IWorld world, BlockPos pos, int fortune)
+	{
+		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
+		return java.util.Arrays.asList(new ItemStack(this));
+	}
 }
