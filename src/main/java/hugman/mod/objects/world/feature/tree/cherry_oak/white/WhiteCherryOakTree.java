@@ -1,4 +1,4 @@
-package hugman.mod.objects.world.feature.tree.cherry_oak;
+package hugman.mod.objects.world.feature.tree.cherry_oak.white;
 
 import java.util.Random;
 
@@ -8,12 +8,12 @@ import net.minecraft.block.trees.AbstractTree;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-public class CherryOakTree extends AbstractTree
+public class WhiteCherryOakTree extends AbstractTree
 {	
 	@Nullable
 	@Override
 	protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random)
 	{
-		return (AbstractTreeFeature<NoFeatureConfig>)(random.nextInt(10) == 0 ? new CherryOakTreeTallFeature(true) : new CherryOakTreeFeature(true));
+		return (AbstractTreeFeature<NoFeatureConfig>)(random.nextInt(10) == 0 ? new WhiteCherryOakTreeTallFeature(true) : new WhiteCherryOakTreeFeature(true));
 	}
 }

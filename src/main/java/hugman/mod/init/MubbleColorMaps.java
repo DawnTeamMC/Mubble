@@ -35,8 +35,12 @@ public class MubbleColorMaps extends BlockColors
 		}, MubbleBlocks.AUTUMN_OAK_LEAVES, MubbleBlocks.AUTUMN_OAK_LEAVES_CARPET);
 		blockColors.register((p_210229_0_, p_210229_1_, p_210229_2_, p_210229_3_) ->
 		{
-			return 16539096;
-		}, MubbleBlocks.CHERRY_OAK_LEAVES, MubbleBlocks.CHERRY_OAK_LEAVES_CARPET);
+			return 15768259;
+		}, MubbleBlocks.PINK_CHERRY_OAK_LEAVES, MubbleBlocks.PINK_CHERRY_OAK_LEAVES_CARPET);
+		blockColors.register((p_210229_0_, p_210229_1_, p_210229_2_, p_210229_3_) ->
+		{
+			return 15786729;
+		}, MubbleBlocks.WHITE_CHERRY_OAK_LEAVES, MubbleBlocks.WHITE_CHERRY_OAK_LEAVES_CARPET);
 		blockColors.register((p_210229_0_, p_210229_1_, p_210229_2_, p_210229_3_) ->
 		{
 			return 10622269;
@@ -57,8 +61,12 @@ public class MubbleColorMaps extends BlockColors
 	    }, MubbleBlocks.AUTUMN_OAK_LEAVES, MubbleBlocks.AUTUMN_OAK_LEAVES_CARPET);
 		itemColors.register((p_210235_1_, p_210235_2_) ->
 		{
-	        return 16539096;
-	    }, MubbleBlocks.CHERRY_OAK_LEAVES, MubbleBlocks.CHERRY_OAK_LEAVES_CARPET);
+	        return 15768259;
+	    }, MubbleBlocks.PINK_CHERRY_OAK_LEAVES, MubbleBlocks.PINK_CHERRY_OAK_LEAVES_CARPET);
+		itemColors.register((p_210235_1_, p_210235_2_) ->
+		{
+	        return 15786729;
+	    }, MubbleBlocks.WHITE_CHERRY_OAK_LEAVES, MubbleBlocks.WHITE_CHERRY_OAK_LEAVES_CARPET);
 		itemColors.register((p_210235_1_, p_210235_2_) ->
 		{
 	        return 10622269;

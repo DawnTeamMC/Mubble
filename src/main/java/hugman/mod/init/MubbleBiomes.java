@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mod.objects.world.biome.AutumnOakForestBiome;
-import hugman.mod.objects.world.biome.CherryOakForestBiome;
+import hugman.mod.objects.world.biome.PinkCherryOakForestBiome;
 import hugman.mod.objects.world.biome.ScarletForestBiome;
+import hugman.mod.objects.world.biome.WhiteCherryOakForestBiome;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeManager;
@@ -21,7 +22,8 @@ public class MubbleBiomes
 	public static final List<Biome> BIOMES = new ArrayList<Biome>();
 
 	public static final Biome AUTUMN_OAK_FOREST = new AutumnOakForestBiome();
-	public static final Biome CHERRY_OAK_FOREST = new CherryOakForestBiome();
+	public static final Biome PINK_CHERRY_OAK_FOREST = new PinkCherryOakForestBiome();
+	public static final Biome WHITE_CHERRY_OAK_FOREST = new WhiteCherryOakForestBiome();
 	public static final Biome SCARLET_FOREST = new ScarletForestBiome();
 	
     public static void register(Biome biome)
@@ -38,8 +40,12 @@ public class MubbleBiomes
     	BiomeManager.addBiome(BiomeType.WARM, new BiomeEntry(AUTUMN_OAK_FOREST, 10));
     	BiomeManager.addSpawnBiome(AUTUMN_OAK_FOREST);
     	
-    	BiomeDictionary.addTypes(CHERRY_OAK_FOREST, FOREST);
-    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(CHERRY_OAK_FOREST, 10));
-    	BiomeManager.addSpawnBiome(CHERRY_OAK_FOREST);
+    	BiomeDictionary.addTypes(PINK_CHERRY_OAK_FOREST, FOREST);
+    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(PINK_CHERRY_OAK_FOREST, 5));
+    	BiomeManager.addSpawnBiome(PINK_CHERRY_OAK_FOREST);
+    	
+    	BiomeDictionary.addTypes(WHITE_CHERRY_OAK_FOREST, FOREST);
+    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(WHITE_CHERRY_OAK_FOREST, 5));
+    	BiomeManager.addSpawnBiome(WHITE_CHERRY_OAK_FOREST);
 	}
 }

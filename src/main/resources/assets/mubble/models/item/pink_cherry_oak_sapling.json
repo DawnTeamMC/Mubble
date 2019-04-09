@@ -2,6 +2,6 @@
 	"parent": "item/generated",
 	"textures":
 	{
-		"layer0": "mubble:block/cherry_oak_sapling"
+		"layer0": "mubble:block/pink_cherry_oak_sapling"
 	}
 }

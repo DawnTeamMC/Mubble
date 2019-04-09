@@ -29,7 +29,7 @@ public class BlockLeavesCarpet extends BlockBush
 	
     public BlockLeavesCarpet(Block base_block)
     {
-        super(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT));
+        super(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement());
         setRegistryName(base_block.getRegistryName() + "_carpet");
         MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         this.base = base_block;
@@ -37,7 +37,7 @@ public class BlockLeavesCarpet extends BlockBush
     
     public BlockLeavesCarpet(String name, Block base_block)
     {
-        super(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT));
+        super(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement());
         setRegistryName(Mubble.MOD_ID, name + "_leaves_carpet");
         MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         this.base = base_block;

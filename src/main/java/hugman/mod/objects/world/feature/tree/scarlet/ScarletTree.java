@@ -6,11 +6,11 @@ import javax.annotation.Nullable;
 
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.trees.AbstractTree;
+import net.minecraft.block.trees.AbstractBigTree;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 
-public class ScarletTree extends AbstractTree
+public class ScarletTree extends AbstractBigTree
 {
 	Block log = MubbleBlocks.SCARLET_LOG;
 	Block leaves = MubbleBlocks.SCARLET_LEAVES;
@@ -24,7 +24,7 @@ public class ScarletTree extends AbstractTree
 	}
 	
 	@Nullable
-	protected AbstractTreeFeature<NoFeatureConfig> getLargeTreeFeature(Random random)
+	protected AbstractTreeFeature<NoFeatureConfig> getBigTreeFeature(Random random)
 	{
 		return new ScarletTreeLargeFeature(true);
 	}

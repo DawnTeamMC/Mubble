@@ -25,11 +25,13 @@ public class BlockWoodStrip extends BlockRotatedPillar
     @Override
     public boolean onBlockActivated(IBlockState state, World worldIn, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
     {
-    	Block block = Blocks.STONE;
+    	Block block = Blocks.OAK_LOG;
     	if(this == MubbleBlocks.PALM_LOG) block = MubbleBlocks.STRIPPED_PALM_LOG;
     	if(this == MubbleBlocks.PALM_WOOD) block = MubbleBlocks.STRIPPED_PALM_WOOD;
     	if(this == MubbleBlocks.SCARLET_LOG) block = MubbleBlocks.STRIPPED_SCARLET_LOG;
     	if(this == MubbleBlocks.SCARLET_WOOD) block = MubbleBlocks.STRIPPED_SCARLET_WOOD;
+    	if(this == MubbleBlocks.CHERRY_OAK_LOG) block = MubbleBlocks.STRIPPED_CHERRY_OAK_LOG;
+    	if(this == MubbleBlocks.CHERRY_OAK_WOOD) block = MubbleBlocks.STRIPPED_CHERRY_OAK_WOOD;
     	ItemStack item = player.getHeldItem(hand);
     	if(item.getItem() instanceof ItemAxe)
     	{

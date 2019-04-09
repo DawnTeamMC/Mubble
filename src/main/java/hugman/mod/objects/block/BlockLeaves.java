@@ -27,23 +27,12 @@ public class BlockLeaves extends net.minecraft.block.BlockLeaves
     public IItemProvider getItemDropped(IBlockState state, World worldIn, BlockPos pos, int fortune)
     {
         Block block = state.getBlock();
-        if (block == MubbleBlocks.PALM_LEAVES)
-        {
-           return MubbleBlocks.PALM_SAPLING;
-        }
-        if (block == MubbleBlocks.SCARLET_LEAVES)
-        {
-           return MubbleBlocks.SCARLET_SAPLING;
-        }
-        if (block == MubbleBlocks.AUTUMN_OAK_LEAVES)
-        {
-           return MubbleBlocks.AUTUMN_OAK_SAPLING;
-        }
-        if (block == MubbleBlocks.CHERRY_OAK_LEAVES)
-        {
-           return MubbleBlocks.CHERRY_OAK_SAPLING;
-        }
-		return block;
+        if (block == MubbleBlocks.PALM_LEAVES) return MubbleBlocks.PALM_SAPLING;
+        else if (block == MubbleBlocks.SCARLET_LEAVES) return MubbleBlocks.SCARLET_SAPLING;
+        else if (block == MubbleBlocks.AUTUMN_OAK_LEAVES) return MubbleBlocks.AUTUMN_OAK_SAPLING;
+        else if (block == MubbleBlocks.PINK_CHERRY_OAK_LEAVES) return MubbleBlocks.PINK_CHERRY_OAK_SAPLING;
+        else if (block == MubbleBlocks.WHITE_CHERRY_OAK_LEAVES) return MubbleBlocks.WHITE_CHERRY_OAK_SAPLING;
+        else return block;
 	}
     
     @Override
