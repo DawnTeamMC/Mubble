@@ -1,102 +1,117 @@
 package hugman.mod.objects.world.dimension;
 
-import net.minecraft.init.Biomes;
+import hugman.mod.init.MubbleBiomes;
+import hugman.mod.init.MubbleBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGeneratorType;
-import net.minecraft.world.gen.FlatGenSettings;
-import net.minecraft.world.gen.FlatLayerInfo;
 import net.minecraft.world.gen.IChunkGenerator;
+import net.minecraft.world.gen.NetherGenSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class DimensionUltimatum extends Dimension
+public class DimensionPermafrost extends Dimension
 {
 	private final DimensionType type;
 	
-	public DimensionUltimatum(DimensionType type) 
+	public DimensionPermafrost(DimensionType type) 
 	{
 		this.type = type;
-		//this.setSpawnPoint(new BlockPos(0, 50, 0));
 	}
 	
 	@Override
 	public IChunkGenerator<?> createChunkGenerator()
 	{
-        world.setSeaLevel(64);
-
-        FlatGenSettings settings = new FlatGenSettings();
-        settings.setBiome(Biomes.PLAINS);
-        settings.getFlatLayers().add(new FlatLayerInfo(1, Blocks.AIR));
-        settings.updateLayers();
-        
-		BiomeProvider biomeProvider = BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.createSettings().setBiome(settings.getBiome()));
+		NetherGenSettings settings = ChunkGeneratorType.CAVES.createSettings();
+		settings.setDefautBlock(MubbleBlocks.PERMAROCK.getDefaultState());
+		settings.setDefaultFluid(Blocks.WATER.getDefaultState());
 		
-		return ChunkGeneratorType.FLAT.create(world, biomeProvider, settings);
+		BiomeProvider biomeProvider = BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.createSettings().setBiome(MubbleBiomes.PERMAFROST));
+		
+		return ChunkGeneratorType.CAVES.create(this.world, biomeProvider, settings);
 	}
 	
 	@Override
 	protected void init()
 	{
-		this.hasSkyLight = true;
+		this.hasSkyLight = false;
 	}
 	
 	@Override
 	public BlockPos findSpawn(ChunkPos p_206920_1_, boolean checkValid)
 	{
-		return new BlockPos(0, 50, 0);
+		return null;
 	}
 	
 	@Override
 	public BlockPos findSpawn(int p_206921_1_, int p_206921_2_, boolean checkValid)
 	{
-		return new BlockPos(0, 50, 0);
+		return null;
 	}
 	
 	@Override
 	public float calculateCelestialAngle(long worldTime, float partialTicks)
 	{
-		return 0;
+		return 0.5f;
 	}
 	
 	@Override
 	public boolean isSurfaceWorld()
 	{
-		return true;
+		return false;
 	}
 	
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
 	{
-	      float f = MathHelper.cos(p_76562_1_ * ((float)Math.PI * 2F)) * 2.0F + 0.5F;
-	      f = MathHelper.clamp(f, 0.0F, 1.0F);
-	      float f1 = 0.7529412F;
-	      float f2 = 0.84705883F;
-	      float f3 = 1.0F;
-	      f1 = f1 * (f * 0.94F + 0.06F);
-	      f2 = f2 * (f * 0.94F + 0.06F);
-	      f3 = f3 * (f * 0.91F + 0.09F);
-	      return new Vec3d((double)f1, (double)f2, (double)f3);
+		return new Vec3d((double)0.03F, (double)0.2F, (double)0.2F);
+	}
+
+	@Override
+	protected void generateLightBrightnessTable()
+	{
+		for(int i = 0; i <= 15; ++i)
+		{
+			float f1 = 1.0F - (float)i / 15.0F;
+			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 0.9F + 0.1F;
+		}
 	}
 	
 	@Override
 	public boolean canRespawnHere()
 	{
-		return true;
+		return false;
 	}
 	
 	@Override
 	public boolean doesXZShowFog(int x, int z)
 	{
-		return false;
+		return true;
+	}
+	
+	@Override
+	public WorldBorder createWorldBorder()
+	{
+		return new WorldBorder()
+		{
+			public double getCenterX()
+			{
+				return super.getCenterX() / 8.0D;
+			}
+
+			public double getCenterZ()
+			{
+				return super.getCenterZ() / 8.0D;
+			}
+		};
 	}
 	
 	@Override

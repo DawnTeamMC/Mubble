@@ -27,7 +27,8 @@ public class MubbleTags
         public static final Tag<Item> CROWNS = tag("crowns");
         public static final Tag<Item> FLUID_BUCKETS = tag("fluid_buckets");
         public static final Tag<Item> LIGHTWEIGHT_ITEMS = tag("lightweight_items");
-        public static final Tag<Item> SCARY_TOAD = tag("scary/toad");
+        public static final Tag<Item> SCARY_TO_TOAD = tag("scary_to/toad");
+        public static final Tag<Item> TEMPTING_TO_TOAD = tag("tempting_to/toad");
 
         private static Tag<Item> tag(String name)
         {

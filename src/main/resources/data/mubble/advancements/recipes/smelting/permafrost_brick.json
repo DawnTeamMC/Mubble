@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:smelting/permafrost_brick"
+		]
+	},
+	"criteria":
+	{
+		"has_permarock":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:permarock"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:smelting/permafrost_brick"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_permarock",
+			"has_the_recipe"
+		]
+	]
+}

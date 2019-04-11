@@ -91,7 +91,28 @@ public class MubbleBlocks
     public static final Block JUNGLE_LEAVES_CARPET = new BlockLeavesCarpet("jungle", Blocks.JUNGLE_LEAVES);
     public static final Block ACACIA_LEAVES_CARPET = new BlockLeavesCarpet("acacia", Blocks.ACACIA_LEAVES);
     public static final Block DARK_OAK_LEAVES_CARPET = new BlockLeavesCarpet("dark_oak", Blocks.DARK_OAK_LEAVES);
+    
+    public static final Block BLUNITE = new BlockSimple("blunite", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block CARBONITE = new BlockSimple("carbonite", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block BLUNITE_STAIRS = new BlockStairs(MubbleBlocks.BLUNITE);
+    public static final Block CARBONITE_STAIRS = new BlockStairs(MubbleBlocks.CARBONITE);
+    public static final Block BLUNITE_SLAB = new BlockSlab(MubbleBlocks.BLUNITE);
+    public static final Block CARBONITE_SLAB = new BlockSlab(MubbleBlocks.CARBONITE);
+    public static final Block BLUNITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.BLUNITE);
+    public static final Block CARBONITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.CARBONITE);
+    public static final Block BLUNITE_WALL = new BlockWall(MubbleBlocks.BLUNITE);
+    public static final Block CARBONITE_WALL = new BlockWall(MubbleBlocks.CARBONITE);
+    public static final Block POLISHED_BLUNITE = new BlockSimple("polished_blunite", Properties.from(MubbleBlocks.BLUNITE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block POLISHED_CARBONITE = new BlockSimple("polished_carbonite", Properties.from(MubbleBlocks.CARBONITE), ItemGroup.BUILDING_BLOCKS);
+    public static final Block POLISHED_BLUNITE_STAIRS = new BlockStairs(MubbleBlocks.POLISHED_BLUNITE);
+    public static final Block POLISHED_CARBONITE_STAIRS = new BlockStairs(MubbleBlocks.POLISHED_CARBONITE);
+    public static final Block POLISHED_BLUNITE_SLAB = new BlockSlab(MubbleBlocks.POLISHED_BLUNITE);
+    public static final Block POLISHED_CARBONITE_SLAB = new BlockSlab(MubbleBlocks.POLISHED_CARBONITE);
+    public static final Block POLISHED_BLUNITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.POLISHED_BLUNITE);
+    public static final Block POLISHED_CARBONITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.POLISHED_CARBONITE);
 
+    public static final Block PERMAROCK = new BlockSimple("permarock", Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(0.4F), ItemGroup.BUILDING_BLOCKS);
+    public static final Block PERMAFROST_BISMUTH_ORE = new BlockSimple("permafrost_bismuth_ore", Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(0.3F), ItemGroup.BUILDING_BLOCKS);
     public static final Block VANADIUM_ORE = new BlockSimple("vanadium_ore", Properties.from(Blocks.DIAMOND_ORE), ItemGroup.BUILDING_BLOCKS);
     public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK), ItemGroup.BUILDING_BLOCKS);
     public static final Block AUTUMN_OAK_SAPLING = new BlockSapling("autumn_oak", new AutumnOakTree());
@@ -219,25 +240,6 @@ public class MubbleBlocks
     public static final Block PURPLE_BRICK_WALL = new BlockWall("purple_brick", MubbleBlocks.PURPLE_BRICKS);
     public static final Block MAGENTA_BRICK_WALL = new BlockWall("magenta_brick", MubbleBlocks.MAGENTA_BRICKS);
     public static final Block PINK_BRICK_WALL = new BlockWall("pink_brick", MubbleBlocks.PINK_BRICKS);
-    
-    public static final Block BLUNITE = new BlockSimple("blunite", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
-    public static final Block CARBONITE = new BlockSimple("carbonite", Properties.from(Blocks.STONE), ItemGroup.BUILDING_BLOCKS);
-    public static final Block BLUNITE_STAIRS = new BlockStairs(MubbleBlocks.BLUNITE);
-    public static final Block CARBONITE_STAIRS = new BlockStairs(MubbleBlocks.CARBONITE);
-    public static final Block BLUNITE_SLAB = new BlockSlab(MubbleBlocks.BLUNITE);
-    public static final Block CARBONITE_SLAB = new BlockSlab(MubbleBlocks.CARBONITE);
-    public static final Block BLUNITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.BLUNITE);
-    public static final Block CARBONITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.CARBONITE);
-    public static final Block BLUNITE_WALL = new BlockWall(MubbleBlocks.BLUNITE);
-    public static final Block CARBONITE_WALL = new BlockWall(MubbleBlocks.CARBONITE);
-    public static final Block POLISHED_BLUNITE = new BlockSimple("polished_blunite", Properties.from(MubbleBlocks.BLUNITE), ItemGroup.BUILDING_BLOCKS);
-    public static final Block POLISHED_CARBONITE = new BlockSimple("polished_carbonite", Properties.from(MubbleBlocks.CARBONITE), ItemGroup.BUILDING_BLOCKS);
-    public static final Block POLISHED_BLUNITE_STAIRS = new BlockStairs(MubbleBlocks.POLISHED_BLUNITE);
-    public static final Block POLISHED_CARBONITE_STAIRS = new BlockStairs(MubbleBlocks.POLISHED_CARBONITE);
-    public static final Block POLISHED_BLUNITE_SLAB = new BlockSlab(MubbleBlocks.POLISHED_BLUNITE);
-    public static final Block POLISHED_CARBONITE_SLAB = new BlockSlab(MubbleBlocks.POLISHED_CARBONITE);
-    public static final Block POLISHED_BLUNITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.POLISHED_BLUNITE);
-    public static final Block POLISHED_CARBONITE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.POLISHED_CARBONITE);
     
     public static final Block WHITE_DARK_PRISMARINE = new BlockSimple("white_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     public static final Block LIGHT_GRAY_DARK_PRISMARINE = new BlockSimple("light_gray_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);

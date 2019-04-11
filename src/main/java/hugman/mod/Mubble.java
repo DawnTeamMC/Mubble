@@ -9,7 +9,7 @@ import hugman.mod.init.MubbleColorMaps;
 import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleDimensions;
 import hugman.mod.init.MubbleEntities;
-import hugman.mod.init.MubbleGenerators;
+import hugman.mod.init.MubbleWorld;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
@@ -58,8 +58,12 @@ public class Mubble
     
     private void setup(final FMLCommonSetupEvent event)
     {
-    	MubbleGenerators.init();
+    	MubbleWorld.Generators.initOres();
     	LOGGER.info("[mubble] Registered ores to world generation");
+    	MubbleWorld.Generators.initTrees();
+    	LOGGER.info("[mubble] Registered trees to world generation");
+    	MubbleWorld.Generators.initSpawns();
+    	LOGGER.info("[mubble] Registered entity spawns to world generation");
     }
     
     @SubscribeEvent
@@ -77,7 +81,7 @@ public class Mubble
         public static void blockColorsRegistry(final ColorHandlerEvent.Block event)
         {
         	MubbleColorMaps.registerBlockColors(event);
-        	LOGGER.info("[mubble] Registered the color maps for blocks");
+        	LOGGER.info("[mubble] Registered color maps for blocks");
         }
 
     	@OnlyIn(Dist.CLIENT)
@@ -85,7 +89,7 @@ public class Mubble
         public static void itemColorsRegistry(final ColorHandlerEvent.Item event)
         {
         	MubbleColorMaps.registerItemColors(event);
-        	LOGGER.info("[mubble] Registered the color maps for items");
+        	LOGGER.info("[mubble] Registered color maps for items");
         }
         
         @SubscribeEvent

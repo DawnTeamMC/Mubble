@@ -1,7 +1,6 @@
 package hugman.mod.objects.entity;
 
 import hugman.mod.init.MubbleEntities;
-import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleLootTables;
 import hugman.mod.init.MubbleSounds;
 import hugman.mod.init.MubbleTags;
@@ -40,7 +39,7 @@ import net.minecraft.world.World;
 public class EntityToad extends EntityAnimal
 {
 	private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityToad.class, DataSerializers.VARINT);
-	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromItems(MubbleItems.SUPER_MUSHROOM);
+	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromTag(MubbleTags.Items.TEMPTING_TO_TOAD);
 	
     public EntityToad(World worldIn) 
     {
@@ -60,10 +59,10 @@ public class EntityToad extends EntityAnimal
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityChincho.class, 10f, 1.2d, 1.45d, EntitySelectors.IS_ALIVE));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> MubbleTags.Items.SCARY_TOAD.contains(((EntityItem) checkedEntity).getItem().getItem()), 10f, 1.2d, 1.45d, EntitySelectors.IS_ALIVE));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> MubbleTags.Items.SCARY_TOAD.contains(((EntityLivingBase) checkedEntity).getHeldItemMainhand().getItem()), 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> MubbleTags.Items.SCARY_TOAD.contains(((EntityLivingBase) checkedEntity).getHeldItemOffhand().getItem()), 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> MubbleTags.Items.SCARY_TOAD.contains(((EntityLivingBase) checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem()), 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((EntityItem) checkedEntity).getItem().getItem()), 10f, 1.2d, 1.45d, EntitySelectors.IS_ALIVE));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((EntityLivingBase) checkedEntity).getHeldItemMainhand().getItem()), 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((EntityLivingBase) checkedEntity).getHeldItemOffhand().getItem()), 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
+        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((EntityLivingBase) checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem()), 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
         this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
         this.tasks.addTask(2, new EntityAIPanic(this, 1.6D));
         this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
