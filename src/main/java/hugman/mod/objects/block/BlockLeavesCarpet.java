@@ -29,19 +29,11 @@ public class BlockLeavesCarpet extends BlockBush implements IShearable
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 	private final Block base;
-	
+    
     public BlockLeavesCarpet(Block base_block)
     {
         super(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement());
-        setRegistryName(base_block.getRegistryName() + "_carpet");
-        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
-        this.base = base_block;
-    }
-    
-    public BlockLeavesCarpet(String name, Block base_block)
-    {
-        super(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement());
-        setRegistryName(Mubble.MOD_ID, name + "_leaves_carpet");
+        setRegistryName(Mubble.MOD_ID, base_block.getRegistryName().getPath() + "_carpet");
         MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         this.base = base_block;
     }

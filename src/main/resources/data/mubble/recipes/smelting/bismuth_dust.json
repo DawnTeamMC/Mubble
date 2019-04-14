@@ -1,0 +1,10 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient":
+	{
+		"item": "mubble:permafrost_bismuth_ore"
+	},
+	"result": "mubble:bismuth_dust",
+	"experience": 1.4,
+	"cookingtime": 400
+}

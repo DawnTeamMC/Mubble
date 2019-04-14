@@ -52,7 +52,7 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
     public BlockSlabVertical(Block base_block)
     {
         super(Properties.from(base_block));
-        setRegistryName(base_block.getRegistryName() + "_vertical_slab");
+        setRegistryName(Mubble.MOD_ID, base_block.getRegistryName().getPath() + "_vertical_slab");
         this.setDefaultState(this.stateContainer.getBaseState().with(TYPE, SlabVerticalType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
         MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }

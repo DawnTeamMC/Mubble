@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"XX",
+		"XX"
+	],
+	"key":
+	{
+		"X":
+		{
+			"item": "mubble:bismuth_dust"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:crystallized_bismuth"
+	}
+}

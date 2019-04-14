@@ -1,0 +1,7 @@
+{
+	"variants":
+	{
+		"axis=x": { "model": "mubble:block/permafrost_portal/x" },
+		"axis=z": { "model": "mubble:block/permafrost_portal/z" }
+	}
+}

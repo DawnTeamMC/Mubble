@@ -17,7 +17,7 @@ public class BlockStairs extends net.minecraft.block.BlockStairs
     public BlockStairs(Block base_block)
     {
         super(base_block.getDefaultState(), Properties.from(base_block));
-        setRegistryName(base_block.getRegistryName() + "_stairs");
+        setRegistryName(Mubble.MOD_ID, base_block.getRegistryName().getPath() + "_stairs");
         MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
 }

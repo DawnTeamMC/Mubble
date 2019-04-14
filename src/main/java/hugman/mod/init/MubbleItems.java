@@ -40,7 +40,8 @@ public class MubbleItems
     public static final Item CARAMEL_CREPE = new ItemFood("caramel_crepe", 9, 3.4f, false);
     public static final Item CANDY_CANE = new ItemFood("candy_cane", 4, 1.8f, false);
     public static final Item VANADIUM = new ItemSimple("vanadium", ItemGroup.MATERIALS);
-    public static final Item BISMUTH = new ItemSimple("bismuth", ItemGroup.MATERIALS);
+    public static final Item BISMUTH_DUST = new ItemSimple("bismuth_dust", ItemGroup.MATERIALS);
+    public static final Item CRYSTALLIZED_BISMUTH = new ItemSimple("crystallized_bismuth", ItemGroup.MATERIALS);
     public static final Item PERMAFROST_BRICK = new ItemSimple("permafrost_brick", ItemGroup.MATERIALS);
     public static final Item BANDAGE = new ItemBandage();
     public static final Item TOTEM_OF_ASCENDING = new ItemTotemOfAscending();
