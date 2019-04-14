@@ -31,6 +31,15 @@
 	"block.mubble.acacia_leaves_carpet": "Akazienlaubteppich",
 	"block.mubble.dark_oak_leaves_carpet": "Schwarzeichenlaubteppich",
 
+	"//block.mubble.permarock": "Permarock",
+	"//block.mubble.permafrost_bricks": "Permafrost Bricks",
+	"//block.mubble.permafrost_brick_stairs": "Permafrost Brick Stairs",
+	"//block.mubble.permafrost_brick_slab": "Permafrost Brick Slab",
+	"//block.mubble.permafrost_brick_vertical_slab": "Permafrost Brick Vertical Slab",
+	"//block.mubble.permafrost_brick_fence": "Permafrost Brick Fence",
+	"//block.mubble.blue_permafrost_bricks": "Blue Permafrost Bricks",
+	"//block.mubble.permafrost_bismuth_ore": "Permafrost Bismuth Ore",
+	
 	"block.mubble.vanadium_block": "Vanadiumblock",
 	"block.mubble.vanadium_ore": "Vanadiumerz",
 
@@ -486,6 +495,8 @@
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Stangenweißbrot",
 	"item.mubble.vanadium": "Vanadium",
+	"//item.mubble.bismuth_dust": "Bismuth Dust",
+	"//item.mubble.crystallized_bismuth": "Cystallized Bismuth",
 	"item.mubble.bandage": "Verband",
 	"item.mubble.wheat_flour": "Weizenmehl",
 	"item.mubble.caramel_cube": "Karamellwürfel",
@@ -637,6 +648,8 @@
 	"biome.mubble.autumn_oak_forest": "Herbsteichenwald",
 	"biome.mubble.pink_cherry_oak_forest": "Rosa Kirscheichenwald",
 	"biome.mubble.white_cherry_oak_forest": "Weißer Kirscheichenwald",
+	"//biome.mubble.permafrost": "Permafrost",
+
 	"biome.mubble.scarlet_forest": "Scharlachwald",
 
 

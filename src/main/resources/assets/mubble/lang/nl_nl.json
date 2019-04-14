@@ -31,8 +31,18 @@
 	"block.mubble.acacia_leaves_carpet": "Acaciabladeren tapijt",
 	"block.mubble.dark_oak_leaves_carpet": "Donkereikenbladeren tapijt",
 	
+	"//block.mubble.permarock": "Permarock",
+	"//block.mubble.permafrost_bricks": "Permafrost Bricks",
+	"//block.mubble.permafrost_brick_stairs": "Permafrost Brick Stairs",
+	"//block.mubble.permafrost_brick_slab": "Permafrost Brick Slab",
+	"//block.mubble.permafrost_brick_vertical_slab": "Permafrost Brick Vertical Slab",
+	"//block.mubble.permafrost_brick_fence": "Permafrost Brick Fence",
+	"//block.mubble.blue_permafrost_bricks": "Blue Permafrost Bricks",
+	"//block.mubble.permafrost_bismuth_ore": "Permafrost Bismuth Ore",
+
 	"block.mubble.vanadium_block": "Vanadiumblok",
 	"block.mubble.vanadium_ore": "Vanadiumerts",
+	
 	"block.mubble.autumn_oak_sapling": "Herfsteikkiemplant",
 	"block.mubble.autumn_oak_leaves": "Herfsteikbladeren",
 	"block.mubble.autumn_oak_leaves_carpet": "Herfsteikbladeren tapijt",
@@ -487,6 +497,8 @@
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.vanadium": "Vanadium",
+	"//item.mubble.bismuth_dust": "Bismuth Dust",
+	"//item.mubble.crystallized_bismuth": "Cystallized Bismuth",
 	"item.mubble.bandage": "Verband",
 	"item.mubble.wheat_flour": "Tarwemeel",
 	"item.mubble.caramel_cube": "Karamel kubus",
@@ -638,6 +650,8 @@
 	"biome.mubble.autumn_oak_forest": "Herfsteiken bos",
 	"biome.mubble.pink_cherry_oak_forest": "Rozekerseneiken bos",
 	"biome.mubble.white_cherry_oak_forest": "Wittekerseneiken bos",
+	"//biome.mubble.permafrost": "Permafrost",
+
 	"biome.mubble.scarlet_forest": "Scharlake bos",
 
 

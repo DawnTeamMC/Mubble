@@ -3,7 +3,6 @@ package hugman.mod.objects.block;
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemGroup;
 
 public class BlockTrapdoor extends net.minecraft.block.BlockTrapDoor

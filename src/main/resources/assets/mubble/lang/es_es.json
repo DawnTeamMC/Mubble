@@ -31,8 +31,18 @@
 	"//block.mubble.acacia_leaves_carpet": "Acacia Leaves Carpet",
 	"//block.mubble.dark_oak_leaves_carpet": "Dark Oak Leaves Carpet",
 
+	"//block.mubble.permarock": "Permarock",
+	"//block.mubble.permafrost_bricks": "Permafrost Bricks",
+	"//block.mubble.permafrost_brick_stairs": "Permafrost Brick Stairs",
+	"//block.mubble.permafrost_brick_slab": "Permafrost Brick Slab",
+	"//block.mubble.permafrost_brick_vertical_slab": "Permafrost Brick Vertical Slab",
+	"//block.mubble.permafrost_brick_fence": "Permafrost Brick Fence",
+	"//block.mubble.blue_permafrost_bricks": "Blue Permafrost Bricks",
+	"//block.mubble.permafrost_bismuth_ore": "Permafrost Bismuth Ore",
+
 	"block.mubble.vanadium_block": "Bloque de vanadio",
 	"block.mubble.vanadium_ore": "Mena de vanadio",
+	
 	"//block.mubble.autumn_oak_sapling": "Autumn Oak Sapling",
 	"//block.mubble.autumn_oak_leaves": "Autumn Oak Leaves",
 	"//block.mubble.autumn_oak_leaves_carpet": "Autumn Oak Leaves Carpet",
@@ -486,6 +496,8 @@
 	"comment": "ITEMS",
 	"//item.mubble.baguette": "Baguette",
 	"item.mubble.vanadium": "Vanadio",
+	"//item.mubble.bismuth_dust": "Bismuth Dust",
+	"//item.mubble.crystallized_bismuth": "Cystallized Bismuth",
 	"item.mubble.bandage": "Vendaje",
 	"item.mubble.wheat_flour": "Harina de trigo",
 	"item.mubble.caramel_cube": "Cubo de caramelo",
@@ -637,6 +649,8 @@
 	"//biome.mubble.autumn_oak_forest": "Autumn Oak Forest",
 	"//biome.mubble.pink_cherry_oak_forest": "Pink Cherry Oak Forest",
 	"//biome.mubble.white_cherry_oak_forest": "White Cherry Oak Forest",
+	"//biome.mubble.permafrost": "Permafrost",
+
 	"//biome.mubble.scarlet_forest": "Scarlet Forest",
 
 
