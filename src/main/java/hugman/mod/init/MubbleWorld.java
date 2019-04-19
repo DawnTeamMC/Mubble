@@ -1,6 +1,7 @@
 package hugman.mod.init;
 
 import hugman.mod.objects.world.carver.PermafrostCaveWorldCarver;
+import hugman.mod.objects.world.feature.PermafrostWaterFeature;
 import hugman.mod.objects.world.feature.ScarletFlowersFeature;
 import hugman.mod.objects.world.feature.tree.autumn_oak.AutumnOakTreeFeature;
 import hugman.mod.objects.world.feature.tree.cherry_oak.pink.PinkCherryOakTreeFeature;
@@ -21,6 +22,7 @@ import net.minecraft.world.gen.carver.WorldCarver;
 import net.minecraft.world.gen.feature.AbstractFlowersFeature;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.HellLavaConfig;
 import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.MinableConfig;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -62,7 +64,10 @@ public class MubbleWorld
 		public static final AbstractTreeFeature<NoFeatureConfig> WHITE_CHERRY_OAK_TREE = new WhiteCherryOakTreeFeature(false);
 		public static final AbstractTreeFeature<NoFeatureConfig> TALL_WHITE_CHERRY_OAK_TREE = new WhiteCherryOakTreeTallFeature(false);
 		public static final AbstractTreeFeature<NoFeatureConfig> SCARLET_SHRUB = new ShrubFeature(MubbleBlocks.SCARLET_LOG.getDefaultState(), MubbleBlocks.SCARLET_LEAVES.getDefaultState()).setSapling((IPlantable)MubbleBlocks.SCARLET_SAPLING);
+		
 		public static final AbstractFlowersFeature SCARLET_FLOWERS = new ScarletFlowersFeature();
+
+		public static final Feature<HellLavaConfig> PERMAFROST_WATER = new PermafrostWaterFeature();
 	}
 	
 	public static class Generators

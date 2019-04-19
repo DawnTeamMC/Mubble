@@ -18,7 +18,7 @@ public class BlockLeaves extends net.minecraft.block.BlockLeaves
 {
     public BlockLeaves(String name)
     {
-        super(Block.Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).needsRandomTick().sound(SoundType.PLANT));
+        super(Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).needsRandomTick().sound(SoundType.PLANT));
         setRegistryName(Mubble.MOD_ID, name + "_leaves");
         MubbleBlocks.register(this, ItemGroup.DECORATIONS);
     }
