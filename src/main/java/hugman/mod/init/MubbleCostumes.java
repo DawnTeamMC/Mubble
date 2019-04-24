@@ -7,7 +7,7 @@ import hugman.mod.objects.costume.CostumeCappy;
 import hugman.mod.objects.costume.CostumeEffect;
 import hugman.mod.objects.costume.CostumeGooigiCap;
 import hugman.mod.objects.costume.CostumeMayroCap;
-import hugman.mod.objects.costume.CostumePaulMask;
+import hugman.mod.objects.costume.CostumeGuardianMask;
 import hugman.mod.objects.costume.CostumePrincessPeachCrown;
 import hugman.mod.objects.costume.CostumeSimple;
 import hugman.mod.objects.costume.CostumeVanishCap;
@@ -66,7 +66,7 @@ public class MubbleCostumes
 	
 	public static final Item BALDI_HEAD = new CostumeSimple("baldi_head", SoundEvents.ENTITY_PARROT_IMITATE_VEX, EntityEquipmentSlot.HEAD);
 
-	public static final Item PAUL_MASK = new CostumePaulMask();
+	public static final Item GUARDIAN_MASK = new CostumeGuardianMask();
 
 	public static final Item MAYRO_CAP = new CostumeMayroCap();
 	public static final Item KORETATO_BLOCK = new CostumeBlock(MubbleBlocks.KORETATO_BLOCK, SoundEvents.BLOCK_SNOW_PLACE, EntityEquipmentSlot.HEAD, ItemGroup.DECORATIONS);

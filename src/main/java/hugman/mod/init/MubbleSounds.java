@@ -46,6 +46,7 @@ public class MubbleSounds
 	public static final SoundEvent ENTITY_TOAD_HURT = register("entity.toad.hurt");
 	public static final SoundEvent ENTITY_TOAD_DEATH = register("entity.toad.death");
 	
+	/*
 	public static final SoundEvent MUSIC_DISC_BATTLEFIELD = register("music_disc.battlefield");
 	public static final SoundEvent MUSIC_DISC_CHAMPIONS_ROAD = register("music_disc.champions_road");
 	public static final SoundEvent MUSIC_DISC_CONFRONTING_MYSELF = register("music_disc.confronting_myself");
@@ -71,6 +72,7 @@ public class MubbleSounds
 	public static final SoundEvent REMIX_DISC_NB_HARVEST_HAZARDS = register("remix_disc.nb.harvest_hazards");
 	public static final SoundEvent REMIX_DISC_NB_SWEDEN = register("remix_disc.nb.sweden");
 	public static final SoundEvent REMIX_DISC_NB_WALUIGI_PINBALL = register("remix_disc.nb.waluigi_pinball");
+	*/
 	
 	public static SoundEvent register(String name)
 	{

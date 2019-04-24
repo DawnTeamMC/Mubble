@@ -7,7 +7,6 @@ import hugman.mod.objects.item.ItemAnnoyingDog;
 import hugman.mod.objects.item.ItemBandage;
 import hugman.mod.objects.item.ItemCapeFeather;
 import hugman.mod.objects.item.ItemFood;
-import hugman.mod.objects.item.ItemMusicDisc;
 import hugman.mod.objects.item.ItemSeedFood;
 import hugman.mod.objects.item.ItemSimple;
 import hugman.mod.objects.item.ItemSmashBall;
@@ -59,7 +58,7 @@ public class MubbleItems
 
     public static final Item ANNOYING_DOG = new ItemAnnoyingDog();
 
-    public static final Item BLANK_MUSIC_DISK = new ItemSimple("blank_music_disc", ItemGroup.MISC, 1, EnumRarity.RARE);
+    /*
     public static final Item MUSIC_DISC_BATTLEFIELD = new ItemMusicDisc("music_disc_battlefield", MubbleSounds.MUSIC_DISC_BATTLEFIELD, 1);
     public static final Item MUSIC_DISC_CHAMPIONS_ROAD = new ItemMusicDisc("music_disc_champions_road", MubbleSounds.MUSIC_DISC_CHAMPIONS_ROAD, 1);
     public static final Item MUSIC_DISC_CONFRONTING_MYSELF = new ItemMusicDisc("music_disc_confronting_myself", MubbleSounds.MUSIC_DISC_CONFRONTING_MYSELF, 1);
@@ -85,6 +84,7 @@ public class MubbleItems
     public static final Item REMIX_DISC_NB_HARVEST_HAZARDS = new ItemMusicDisc("remix_disc_nb_harvest_hazards", MubbleSounds.REMIX_DISC_NB_HARVEST_HAZARDS, 2);
     public static final Item REMIX_DISC_NB_SWEDEN = new ItemMusicDisc("remix_disc_nb_sweden", MubbleSounds.REMIX_DISC_NB_SWEDEN, 2);
     public static final Item REMIX_DISC_NB_WALUIGI_PINBALL = new ItemMusicDisc("remix_disc_nb_waluigi_pinball", MubbleSounds.REMIX_DISC_NB_WALUIGI_PINBALL, 2);
+    */
 
     public static final Item TOAD_SPAWN_EGG = new ItemSpawnEgg("toad", MubbleEntities.TOAD, 14671839, 16722728);
     public static final Item CHINCHO_SPAWN_EGG = new ItemSpawnEgg("chincho", MubbleEntities.CHINCHO, 7527671, 4903);

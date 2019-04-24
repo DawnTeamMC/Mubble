@@ -1,26 +1,26 @@
 {
-  "pools": [
-    {
-      "name":"brigade_member",
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "loot_table",
-          "name": "mubble:entities/toad/brigade/member",
-          "weight": 1
-        }
-      ]
-    },
-    {
-      "name":"yellow",
-      "rolls": 1,
-      "entries": [
-        {
-          "type": "loot_table",
-          "name": "mubble:entities/toad/species/yellow",
-          "weight": 1
-        }
-      ]
-    }
-  ]
+	"pools": [
+		{
+			"name":"brigade_member",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "loot_table",
+					"name": "mubble:entities/toad/brigade/member",
+					"weight": 1
+				}
+			]
+		},
+		{
+			"name":"yellow",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "loot_table",
+					"name": "mubble:entities/toad/species/yellow",
+					"weight": 1
+				}
+			]
+		}
+	]
 }
