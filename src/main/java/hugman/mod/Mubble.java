@@ -1,5 +1,7 @@
 package hugman.mod;
 
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -67,10 +69,10 @@ public class Mubble
     }
     
     @SubscribeEvent
-    public void serverPreSetup(final FMLServerAboutToStartEvent event)
+    public void serverPreSetup(final FMLServerAboutToStartEvent event) throws IOException
     {
-    	//MubbleDimensions.createFiles();
-    	//LOGGER.info("Created dimensions files");
+    	MubbleDimensions.createFiles(event.getServer().getResourceManager());
+    	LOGGER.info("[mubble] Created dimensions files");
     }
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)

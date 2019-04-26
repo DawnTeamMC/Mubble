@@ -2,30 +2,47 @@ package hugman.mod.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import hugman.mod.Mubble;
 import net.minecraft.client.Minecraft;
+import net.minecraft.resources.IReloadableResourceManager;
+import net.minecraft.resources.IResource;
+import net.minecraft.util.ResourceLocation;
 
 public class FileDisplacer
 {
-	public static void copyToDimension(String dim, String file)
+	
+	public static void createUltimatumWorldFiles(IReloadableResourceManager resourceManager)
 	{
-		InputStream FROM = FileDisplacer.class.getClassLoader().getResourceAsStream("assets/mubble/worlds/" + dim + "/" + file);
-	    Path TO = new File(Minecraft.getInstance().gameDir + "/saves/" + Minecraft.getInstance().getIntegratedServer().getFolderName(), "/mubble" + dim + "/" + file).toPath();
-	    CopyOption[] options = new CopyOption[] { };
-	    Path parentDir = TO.getParent();
-	    if (Files.exists(TO)) return;
-	    try
-	    {
-		    if (!Files.exists(parentDir)) Files.createDirectories(parentDir);
-	    	Files.copy(FROM, TO, options);
-	    }
-	    catch (IOException e)
-	    {
-	        e.printStackTrace();
-	    }
+		String folder = "ultimatum_world";
+		String extension = ".txt";
+		
+		for (ResourceLocation file : resourceManager.getAllResourceLocations(folder, n -> n.endsWith(extension)))
+		{
+	    	Mubble.getLogger().info("[mubble/ultimatum] Found file {}", file);
+		    try (IResource iresource = resourceManager.getResource(file))
+		    {
+		    	Path destination = new File(Minecraft.getInstance().gameDir + "/saves/" + Minecraft.getInstance().getIntegratedServer().getFolderName(), "/mubble/ultimatum/region/" + file.getPath() + ".txt").toPath();
+			    CopyOption[] options = new CopyOption[] { };
+			    Path parentDir = destination.getParent();
+			    if(Files.exists(destination)) return;
+			    try
+			    {
+				    if(!Files.exists(parentDir)) Files.createDirectories(parentDir);
+			    	Files.copy(iresource.getInputStream(), destination, options);
+			    }
+			    catch(IOException e)
+			    {
+			        e.printStackTrace();
+			    }
+		    }
+		    catch (IOException e1)
+		    {
+				e1.printStackTrace();
+			}
+		}
 	}
 }
