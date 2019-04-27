@@ -1,6 +1,8 @@
 package hugman.mod.init;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 import hugman.mod.Mubble;
@@ -16,7 +18,9 @@ import net.minecraftforge.common.ModDimension;
 
 public class MubbleDimensions
 {
-	public static final ModDimension PERMAFROST = new ModDimension()
+    public static final List<ModDimension> MOD_DIMENSIONS = new ArrayList<ModDimension>();
+    
+    public static final ModDimension PERMAFROST = new ModDimension()
 	{	
 		@Override
 		public Function<DimensionType, ? extends Dimension> getFactory()
@@ -32,11 +36,14 @@ public class MubbleDimensions
 			return DimensionUltimatum::new;
 		}
 	}.setRegistryName(Mubble.MOD_ID, "ultimatum");
+
+	public static DimensionType ULTIMATUM_TYPE;
+	public static DimensionType PERMAFROST_TYPE;
 	
 	public static void registerDimensions()
 	{
-		DimensionManager.registerDimension(new ResourceLocation(Mubble.MOD_ID, "ultimatum"), MubbleDimensions.ULTIMATUM, null);
-		DimensionManager.registerDimension(new ResourceLocation(Mubble.MOD_ID, "permafrost"), MubbleDimensions.PERMAFROST, null);
+		ULTIMATUM_TYPE = DimensionManager.registerDimension(new ResourceLocation(Mubble.MOD_ID, "permafrost"), MubbleDimensions.PERMAFROST, null);
+		PERMAFROST_TYPE = DimensionManager.registerDimension(new ResourceLocation(Mubble.MOD_ID, "ultimatum"), MubbleDimensions.ULTIMATUM, null);
 	}
 	
 	public static void createFiles(MinecraftServer server) throws IOException

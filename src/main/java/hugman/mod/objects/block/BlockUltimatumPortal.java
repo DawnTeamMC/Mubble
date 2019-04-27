@@ -4,10 +4,12 @@ import java.util.Random;
 
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleDimensions;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Particles;
 import net.minecraft.particles.BasicParticleType;
@@ -15,9 +17,13 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -94,6 +100,16 @@ public class BlockUltimatumPortal extends Block
             {
             	worldIn.spawnParticle(particle, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, ((double)rand.nextFloat() - 0.5D) * 0.3D, (double)rand.nextFloat() * 0.9D, ((double)rand.nextFloat() - 0.5D) * 0.3D);
             }
+        }
+    }
+    
+    @Override
+    public void onEntityCollision(IBlockState state, World worldIn, BlockPos pos, Entity entityIn)
+    {
+        if (!worldIn.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && VoxelShapes.compare(VoxelShapes.create(entityIn.getBoundingBox().offset((double)(-pos.getX()), (double)(-pos.getY()), (double)(-pos.getZ()))), state.getShape(worldIn, pos), IBooleanFunction.AND))
+        {
+        	/*if(worldIn.getDimension() == MubbleDimensions.ULTIMATUM.getFactory()) entityIn.changeDimension(MubbleDimensions.ULTIMATUM_TYPE, new Teleporter(entityIn.getServer().getWorld(DimensionType.OVERWORLD)));
+        	else entityIn.changeDimension(MubbleDimensions.ULTIMATUM_TYPE, new Teleporter(entityIn.getServer().getWorld(MubbleDimensions.ULTIMATUM_TYPE)));*/
         }
     }
 }

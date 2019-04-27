@@ -24,7 +24,7 @@ public class DimensionUltimatum extends Dimension
 	public DimensionUltimatum(DimensionType type) 
 	{
 		this.type = type;
-		//this.setSpawnPoint(new BlockPos(0, 50, 0));
+		//this.setSpawnPoint(new BlockPos(0, 158, 0));
 	}
 	
 	@Override
@@ -51,13 +51,13 @@ public class DimensionUltimatum extends Dimension
 	@Override
 	public BlockPos findSpawn(ChunkPos p_206920_1_, boolean checkValid)
 	{
-		return new BlockPos(0, 50, 0);
+		return new BlockPos(0, 158, 0);
 	}
 	
 	@Override
 	public BlockPos findSpawn(int p_206921_1_, int p_206921_2_, boolean checkValid)
 	{
-		return new BlockPos(0, 50, 0);
+		return new BlockPos(0, 158, 0);
 	}
 	
 	@Override
