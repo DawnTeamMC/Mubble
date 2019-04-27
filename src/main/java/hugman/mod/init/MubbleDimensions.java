@@ -7,7 +7,7 @@ import hugman.mod.Mubble;
 import hugman.mod.objects.world.dimension.DimensionPermafrost;
 import hugman.mod.objects.world.dimension.DimensionUltimatum;
 import hugman.mod.util.FileDisplacer;
-import net.minecraft.resources.IReloadableResourceManager;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
@@ -39,8 +39,8 @@ public class MubbleDimensions
 		DimensionManager.registerDimension(new ResourceLocation(Mubble.MOD_ID, "permafrost"), MubbleDimensions.PERMAFROST, null);
 	}
 	
-	public static void createFiles(IReloadableResourceManager resourceManager) throws IOException
+	public static void createFiles(MinecraftServer server) throws IOException
 	{
-		FileDisplacer.createUltimatumWorldFiles(resourceManager);
+		FileDisplacer.createUltimatumWorldFiles(server);
 	}
 }
