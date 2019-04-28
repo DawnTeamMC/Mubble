@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/green_concrete_stairs"
+		]
+	},
+	"criteria":
+	{
+		"has_concrete":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"tag": "minecraft:concretes"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/green_concrete_stairs"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_concrete",
+			"has_the_recipe"
+		]
+	]
+}

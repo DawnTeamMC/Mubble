@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:concrete_vertical_slab",
+	"pattern":
+	[
+		"#",
+		"#",
+		"#"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "minecraft:white_concrete"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:white_concrete_vertical_slab",
+		"count": 6
+	}
+}

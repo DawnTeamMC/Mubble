@@ -1,0 +1,7 @@
+{
+	"variants":
+	{
+		"powered=false": {"model": "mubble:block/brown_concrete_pressure_plate/unpressed"},
+		"powered=true": {"model": "mubble:block/brown_concrete_pressure_plate/pressed"}
+	}
+}

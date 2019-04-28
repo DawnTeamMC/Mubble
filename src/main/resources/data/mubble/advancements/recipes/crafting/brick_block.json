@@ -9,7 +9,7 @@
 	},
 	"criteria":
 	{
-		"has_brick_block":
+		"has_bricks":
 		{
 			"trigger": "minecraft:inventory_changed",
 			"conditions":
@@ -34,7 +34,7 @@
 	"requirements":
 	[
 		[
-			"has_brick_block",
+			"has_bricks",
 			"has_the_recipe"
 		]
 	]

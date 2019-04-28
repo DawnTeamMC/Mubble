@@ -1,0 +1,7 @@
+{
+	"parent": "block/button_inventory",
+	"textures":
+	{
+		"texture": "minecraft:block/magenta_concrete"
+	}
+}

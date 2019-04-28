@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/pink_concrete_button"
+		]
+	},
+	"criteria":
+	{
+		"has_concrete":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"tag": "minecraft:concretes"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/pink_concrete_button"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_concrete",
+			"has_the_recipe"
+		]
+	]
+}

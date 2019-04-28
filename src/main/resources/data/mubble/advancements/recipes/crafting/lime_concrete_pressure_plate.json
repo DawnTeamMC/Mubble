@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/lime_concrete_pressure_plate"
+		]
+	},
+	"criteria":
+	{
+		"has_concrete":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"tag": "minecraft:concretes"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/lime_concrete_pressure_plate"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_concrete",
+			"has_the_recipe"
+		]
+	]
+}

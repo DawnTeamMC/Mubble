@@ -17,7 +17,7 @@ public class BlockWall extends net.minecraft.block.BlockWall
     public BlockWall(Block base_block)
     {
         super(Properties.from(base_block));
-        setRegistryName(base_block.getRegistryName() + "_wall");
+        setRegistryName(Mubble.MOD_ID, base_block.getRegistryName().getPath() + "_wall");
         MubbleBlocks.register(this, ItemGroup.DECORATIONS);
     }
 }

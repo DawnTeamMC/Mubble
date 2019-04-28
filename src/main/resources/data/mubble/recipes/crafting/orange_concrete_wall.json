@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:concrete_wall",
+	"pattern":
+	[
+		"###",
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "minecraft:orange_concrete"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:orange_concrete_wall",
+		"count": 6
+	}
+}
