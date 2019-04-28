@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+		"type=bottom": {"model": "mubble:block/purple_concrete_slab/bottom"},
+		"type=top": {"model": "mubble:block/purple_concrete_slab/top"},
+		"type=double": {"model": "minecraft:block/purple_concrete"}
+	}
+}
