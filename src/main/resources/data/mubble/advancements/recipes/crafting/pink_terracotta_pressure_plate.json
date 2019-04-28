@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/pink_terracotta_pressure_plate"
+		]
+	},
+	"criteria":
+	{
+		"has_terracotta":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:terracotta"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/pink_terracotta_pressure_plate"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_terracotta",
+			"has_the_recipe"
+		]
+	]
+}

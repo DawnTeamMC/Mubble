@@ -1,0 +1,7 @@
+{
+	"variants":
+	{
+		"powered=false": {"model": "mubble:block/lime_terracotta_pressure_plate/unpressed"},
+		"powered=true": {"model": "mubble:block/lime_terracotta_pressure_plate/pressed"}
+	}
+}

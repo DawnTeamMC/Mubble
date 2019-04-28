@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:terracotta_stairs",
+	"pattern":
+	[
+		"#  ",
+		"## ",
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "minecraft:magenta_terracotta"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:magenta_terracotta_stairs",
+		"count": 4
+	}
+}

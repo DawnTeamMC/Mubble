@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+		"type=bottom": {"model": "mubble:block/red_terracotta_slab/bottom"},
+		"type=top": {"model": "mubble:block/red_terracotta_slab/top"},
+		"type=double": {"model": "minecraft:block/red_terracotta"}
+	}
+}

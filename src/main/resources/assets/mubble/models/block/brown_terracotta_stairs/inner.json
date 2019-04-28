@@ -1,0 +1,9 @@
+{
+	"parent": "block/inner_stairs",
+	"textures":
+	{
+		"bottom": "minecraft:block/brown_terracotta",
+		"top": "minecraft:block/brown_terracotta",
+		"side": "minecraft:block/brown_terracotta"
+	}
+}
