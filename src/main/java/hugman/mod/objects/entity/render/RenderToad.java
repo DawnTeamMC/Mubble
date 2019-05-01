@@ -2,7 +2,7 @@ package hugman.mod.objects.entity.render;
 
 import hugman.mod.Mubble;
 import hugman.mod.objects.entity.EntityToad;
-import hugman.mod.objects.entity.model.ModelToad;
+import hugman.mod.objects.entity.render.model.ModelToad;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

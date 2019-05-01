@@ -45,6 +45,11 @@ public class MubbleSounds
 	public static final SoundEvent ENTITY_TOAD_AMBIENT = register("entity.toad.ambient");
 	public static final SoundEvent ENTITY_TOAD_HURT = register("entity.toad.hurt");
 	public static final SoundEvent ENTITY_TOAD_DEATH = register("entity.toad.death");
+	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_AMBIENT = register("entity.zombie_cowman.ambient");
+	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_STEP = register("entity.zombie_cowman.step");
+	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_ANGRY = register("entity.zombie_cowman.angry");
+	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_HURT = register("entity.zombie_cowman.hurt");
+	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_DEATH = register("entity.zombie_cowman.death");
 	
 	/*
 	public static final SoundEvent MUSIC_DISC_BATTLEFIELD = register("music_disc.battlefield");

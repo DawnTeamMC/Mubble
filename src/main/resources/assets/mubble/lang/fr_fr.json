@@ -31,14 +31,15 @@
 	"block.mubble.acacia_leaves_carpet": "Tapis de feuilles de acacia",
 	"block.mubble.dark_oak_leaves_carpet": "Tapis de feuilles de chêne noir",
 	
-	"//block.mubble.permarock": "Permarock",
-	"//block.mubble.permafrost_bricks": "Permafrost Bricks",
-	"//block.mubble.permafrost_brick_stairs": "Permafrost Brick Stairs",
-	"//block.mubble.permafrost_brick_slab": "Permafrost Brick Slab",
-	"//block.mubble.permafrost_brick_vertical_slab": "Permafrost Brick Vertical Slab",
-	"//block.mubble.permafrost_brick_fence": "Permafrost Brick Fence",
-	"//block.mubble.blue_permafrost_bricks": "Blue Permafrost Bricks",
-	"//block.mubble.permafrost_bismuth_ore": "Permafrost Bismuth Ore",
+	"block.mubble.permarock": "Permaroche",
+	"block.mubble.permafrost_bricks": "Briques du Permafrost",
+	"block.mubble.permafrost_brick_stairs": "Escaliers en briques du Permafrost",
+	"block.mubble.permafrost_brick_slab": "Dalle en briques du Permafrost",
+	"block.mubble.permafrost_brick_vertical_slab": "Dalle verticale en briques du Permafrost",
+	"block.mubble.permafrost_brick_fence": "Barrière en briques du Permafrost",
+	"block.mubble.blue_permafrost_bricks": "Briques bleues du Permafrost",
+	"block.mubble.permafrost_bismuth_ore": "Minerai de bismuth du Permafrost",
+	"block.mubble.frozen_obsidian": "Obsidienne congelée",
 
 	"block.mubble.vanadium_block": "Bloc de vanadium",
 	"block.mubble.vanadium_ore": "Minerai de vanadium",
@@ -700,8 +701,9 @@
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.vanadium": "Vanadium",
-	"//item.mubble.bismuth_dust": "Bismuth Dust",
-	"//item.mubble.crystallized_bismuth": "Crystallized Bismuth",
+	"item.mubble.bismuth_dust": "Poudre de bismuth",
+	"item.mubble.crystallized_bismuth": "Bismuth cristallisé",
+	"item.mubble.permafrost_brick": "Brique du Permafrost",
 	"item.mubble.bandage": "Bandage",
 	"item.mubble.wheat_flour": "Farine de blé",
 	"item.mubble.caramel_cube": "Cube de caramel",
@@ -790,8 +792,9 @@
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
 
-	"item.mubble.toad_spawn_egg": "Oeuf d'apparition de Toad",
 	"item.mubble.chincho_spawn_egg": "Oeuf d'apparition de Chincho",
+	"item.mubble.toad_spawn_egg": "Oeuf d'apparition de Toad",
+	"item.mubble.zombie_cowman_spawn_egg": "Oeuf d'apparition de vache-zombie",
 
 
 
@@ -843,9 +846,10 @@
 
 
 	"comment": "ENTITIES",
-	"entity.mubble.toad": "Toad",
 	"entity.mubble.chincho": "Chincho",
 	"entity.mubble.flying_block": "Bloc volant",
+	"entity.mubble.toad": "Toad",
+	"entity.mubble.zombie_cowman": "Vache-zombie",
 
 
 
@@ -853,7 +857,7 @@
 	"biome.mubble.autumn_oak_forest": "Forêt de chênes d'automne",
 	"biome.mubble.pink_cherry_oak_forest": "Forêt de cerisiers roses",
 	"biome.mubble.white_cherry_oak_forest": "Forêt de cerisiers blancs",
-	"//biome.mubble.permafrost": "Permafrost",
+	"biome.mubble.permafrost": "Permafrost",
 
 	"biome.mubble.scarlet_forest": "Forêt écarlate",
 
@@ -873,9 +877,16 @@
 	"subtitles.costume.cappy.equip": "Cappy équipé",
 	"subtitles.costume.cappy.happy": "Marmonnement heureux de Cappy",
 	"subtitles.costume.cappy.help": "Cappy demande de l'aide",
+	"subtitles.entity.chincho.ambient": "Chincho qui parle",
+	"subtitles.entity.chincho.hurt": "Chincho blessé",
+	"subtitles.entity.chincho.death": "Chincho qui meurt",
 	"subtitles.entity.toad.ambient": "Marmonnement de Toad",
 	"subtitles.entity.toad.hurt": "Toad blessé",
 	"subtitles.entity.toad.death": "Toad qui meurt",
+	"subtitles.entity.zombie_cowman.ambient": "Grognement de vache-zombie",
+	"subtitles.entity.zombie_cowman.hurt": "Vache-zombie blessée",
+	"subtitles.entity.zombie_cowman.angry": "Vache-zombie en colère",
+	"subtitles.entity.zombie_cowman.death": "Vache-zombie qui meurt",
 
 
 

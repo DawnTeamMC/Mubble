@@ -3,6 +3,7 @@ package hugman.mod.objects.world.biome;
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBiomes;
 import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleWorld;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.entity.EntityType;
@@ -43,7 +44,7 @@ public class PermafrostBiome extends Biome
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(Feature.MINABLE, new MinableConfig(BlockMatcher.forBlock(MubbleBlocks.PERMAROCK), Blocks.PACKED_ICE.getDefaultState(), 33), NETHER_MAGMA, new FrequencyConfig(4)));
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createCompositeFeature(MubbleWorld.Features.PERMAFROST_WATER, new HellLavaConfig(true), COUNT_RANGE, new CountRangeConfig(16, 10, 20, 128)));
         this.addSpawn(EnumCreatureType.MONSTER, new Biome.SpawnListEntry(EntityType.GHAST, 50, 4, 4));
-        this.addSpawn(EnumCreatureType.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE_PIGMAN, 100, 4, 4));
+        this.addSpawn(EnumCreatureType.MONSTER, new Biome.SpawnListEntry(MubbleEntities.ZOMBIE_COWMAN, 100, 4, 4));
         this.addSpawn(EnumCreatureType.MONSTER, new Biome.SpawnListEntry(EntityType.MAGMA_CUBE, 2, 4, 4));
         this.addSpawn(EnumCreatureType.MONSTER, new Biome.SpawnListEntry(EntityType.ENDERMAN, 1, 4, 4));
         

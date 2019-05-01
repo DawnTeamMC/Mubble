@@ -2,7 +2,7 @@ package hugman.mod.objects.entity.render;
 
 import hugman.mod.Mubble;
 import hugman.mod.objects.entity.EntityChincho;
-import hugman.mod.objects.entity.model.ModelChincho;
+import hugman.mod.objects.entity.render.model.ModelChincho;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;

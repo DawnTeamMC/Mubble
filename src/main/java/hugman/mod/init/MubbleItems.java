@@ -86,8 +86,9 @@ public class MubbleItems
     public static final Item REMIX_DISC_NB_WALUIGI_PINBALL = new ItemMusicDisc("remix_disc_nb_waluigi_pinball", MubbleSounds.REMIX_DISC_NB_WALUIGI_PINBALL, 2);
     */
 
-    public static final Item TOAD_SPAWN_EGG = new ItemSpawnEgg("toad", MubbleEntities.TOAD, 14671839, 16722728);
     public static final Item CHINCHO_SPAWN_EGG = new ItemSpawnEgg("chincho", MubbleEntities.CHINCHO, 7527671, 4903);
+    public static final Item TOAD_SPAWN_EGG = new ItemSpawnEgg("toad", MubbleEntities.TOAD, 14671839, 16722728);
+    public static final Item ZOMBIE_COWMAN_SPAWN_EGG = new ItemSpawnEgg("zombie_cowman", MubbleEntities.ZOMBIE_COWMAN, 2957585, 5009705);
     
     public static void register(Item item)
     {

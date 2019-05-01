@@ -39,6 +39,7 @@
 	"//block.mubble.permafrost_brick_fence": "Permafrost Brick Fence",
 	"//block.mubble.blue_permafrost_bricks": "Blue Permafrost Bricks",
 	"//block.mubble.permafrost_bismuth_ore": "Permafrost Bismuth Ore",
+	"//block.mubble.frozen_obsidian": "Frozen Obsidian",
 
 	"block.mubble.vanadium_block": "钒块",
 	"block.mubble.vanadium_ore": "钒矿石",
@@ -702,6 +703,7 @@
 	"item.mubble.vanadium": "钒",
 	"//item.mubble.bismuth_dust": "Bismuth Dust",
 	"//item.mubble.crystallized_bismuth": "Crystallized Bismuth",
+	"//item.mubble.permafrost_brick": "Permafrost Brick",
 	"item.mubble.bandage": "绷带",
 	"item.mubble.wheat_flour": "小麦面粉",
 	"item.mubble.caramel_cube": "焦糖块",
@@ -790,8 +792,9 @@
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
 
-	"//item.mubble.toad_spawn_egg": "Toad Spawn Egg",
 	"//item.mubble.chincho_spawn_egg": "Chincho Spawn Egg",
+	"//item.mubble.toad_spawn_egg": "Toad Spawn Egg",
+	"//item.mubble.zombie_cowman_spawn_egg": "Zombie Cowman Spawn Egg",
 
 
 
@@ -843,9 +846,10 @@
 
 
 	"comment": "ENTITIES",
-	"entity.mubble.toad": "奇诺比奥",
 	"entity.mubble.chincho": "钦乔",
 	"//entity.mubble.flying_block": "Flying Block",
+	"entity.mubble.toad": "奇诺比奥",
+	"//entity.mubble.zombie_cowman": "Zombie Cowman",
 
 
 
@@ -873,9 +877,16 @@
 	"//subtitles.costume.cappy.equip": "<newline>",
 	"//subtitles.costume.cappy.happy": "<newline>",
 	"//subtitles.costume.cappy.help": "<newline>",
+	"//subtitles.entity.chincho.ambient": "Chincho talks",
+	"//subtitles.entity.chincho.hurt": "Chincho hurts",
+	"//subtitles.entity.chincho.death": "Chincho dies",
 	"subtitles.entity.toad.ambient": "奇诺比奥:咕哝",
 	"subtitles.entity.toad.hurt": "奇诺比奥:受伤",
 	"subtitles.entity.toad.death": "奇诺比奥:死亡",
+	"//subtitles.entity.zombie_cowman.ambient": "Zombie Cowman grunts",
+	"//subtitles.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
+	"//subtitles.entity.zombie_cowman.angry": "Zombie Cowman angers",
+	"//subtitles.entity.zombie_cowman.death": "Zombie Cowman dies",
 
 
 

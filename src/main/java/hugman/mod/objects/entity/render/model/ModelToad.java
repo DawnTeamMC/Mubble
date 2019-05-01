@@ -1,4 +1,4 @@
-package hugman.mod.objects.entity.model;
+package hugman.mod.objects.entity.render.model;
 
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.model.ModelBase;

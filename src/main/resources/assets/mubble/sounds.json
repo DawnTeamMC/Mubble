@@ -245,6 +245,55 @@
 			"mubble:entity/toad/death4"
 		]
 	},
+	"entity.zombie_cowman.ambient":
+	{
+		"subtitle": "subtitles.entity.zombie_cowman.ambient",
+		"sounds":
+		[
+			"mubble:entity/zombie_cowman/ambient1",
+			"mubble:entity/zombie_cowman/ambient2",
+			"mubble:entity/zombie_cowman/ambient3"
+		]
+	},
+	"entity.zombie_cowman.step":
+	{
+		"subtitle": "subtitles.block.generic.footsteps",
+		"sounds":
+		[
+			"mubble:entity/zombie_cowman/step1",
+			"mubble:entity/zombie_cowman/step2",
+			"mubble:entity/zombie_cowman/step3",
+			"mubble:entity/zombie_cowman/step4"
+		]
+	},
+	"entity.zombie_cowman.angry":
+	{
+		"subtitle": "subtitles.entity.zombie_cowman.angry",
+		"sounds":
+		[
+			"mubble:entity/zombie_cowman/step1",
+			"mubble:entity/zombie_cowman/step2",
+			"mubble:entity/zombie_cowman/step3",
+			"mubble:entity/zombie_cowman/step4"
+		]
+	},
+	"entity.zombie_cowman.hurt":
+	{
+		"subtitle": "subtitles.entity.zombie_cowman.hurt",
+		"sounds":
+		[
+			"mubble:entity/zombie_cowman/hurt1",
+			"mubble:entity/zombie_cowman/hurt2"
+		]
+	},
+	"entity.zombie_cowman.death":
+	{
+		"subtitle": "subtitles.entity.zombie_cowman.death",
+		"sounds":
+		[
+			"mubble:entity/zombie_cowman/death"
+		]
+	},
 	"costume.cappy.ambient":
 	{
 		"subtitle": "subtitles.costume.cappy.ambient",
