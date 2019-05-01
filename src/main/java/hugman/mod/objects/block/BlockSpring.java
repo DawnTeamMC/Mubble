@@ -176,29 +176,32 @@ public class BlockSpring extends BlockDirectional implements IBucketPickupHandle
     @Override
     public void onEntityCollision(IBlockState state, World worldIn, BlockPos pos, Entity entityIn)
     {
+    	double keptXFactor = entityIn.motionX / 3;
+    	double keptYFactor = entityIn.motionY / 3;
+    	double keptZFactor = entityIn.motionZ / 3;
     	switch (state.get(FACING))
     	{
 		case UP:
-			entityIn.motionY = 1.5D;
+			entityIn.motionY = keptYFactor + 1.5D;
 			break;
 		case DOWN:
-			entityIn.motionY = -1.5D;
+			entityIn.motionY = keptYFactor + -1.5D;
 			break;
 		case NORTH:
-			entityIn.motionZ = -1.5D;
-			entityIn.motionY = 0.2D;
+			entityIn.motionZ = keptZFactor + -1.5D;
+			entityIn.motionY = keptYFactor + 0.2D;
 			break;
 		case SOUTH:
-			entityIn.motionZ = 1.5D;
-			entityIn.motionY = 0.2D;
+			entityIn.motionZ = keptZFactor + 1.5D;
+			entityIn.motionY = keptYFactor + 0.2D;
 			break;
 		case EAST:
-			entityIn.motionX = 1.5D;
-			entityIn.motionY = 0.2D;
+			entityIn.motionX = keptXFactor + 1.5D;
+			entityIn.motionY = keptYFactor + 0.2D;
 			break;
 		case WEST:
-			entityIn.motionX = -1.5D;
-			entityIn.motionY = 0.2D;
+			entityIn.motionX = keptXFactor + -1.5D;
+			entityIn.motionY = keptYFactor + 0.2D;
 			break;
 		default:
 			break;

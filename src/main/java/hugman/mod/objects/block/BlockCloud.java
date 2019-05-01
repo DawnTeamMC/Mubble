@@ -7,6 +7,7 @@ import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.EnumPushReaction;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +15,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -24,11 +26,17 @@ import net.minecraft.world.World;
 
 public class BlockCloud extends Block
 {
-    public BlockCloud(String color)
+    public BlockCloud(EnumDyeColor color)
     {
-        super(Properties.create(Material.GLASS).sound(SoundType.CLOTH).hardnessAndResistance(0f).doesNotBlockMovement());
-        setRegistryName(Mubble.MOD_ID, color + "_cloud_block");
+        super(Properties.create(Material.PLANTS, color).sound(SoundType.CLOTH).hardnessAndResistance(0f).doesNotBlockMovement());
+        setRegistryName(Mubble.MOD_ID, color.getTranslationKey() + "_cloud_block");
         MubbleBlocks.register(this, ItemGroup.DECORATIONS);
+    }
+    
+    @Override
+    public EnumPushReaction getPushReaction(IBlockState state)
+    {
+    	return EnumPushReaction.DESTROY;
     }
     
     @Override

@@ -3,6 +3,7 @@ package hugman.mod.objects.entity;
 import java.util.UUID;
 
 import hugman.mod.init.MubbleEntities;
+import hugman.mod.init.MubbleLootTables;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -21,6 +22,7 @@ import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
@@ -66,6 +68,12 @@ public class EntityZombieCowman extends EntityPigZombie
 	protected SoundEvent getDeathSound()
 	{
 		return MubbleSounds.ENTITY_ZOMBIE_COWMAN_DEATH;
+	}
+	
+	@Override
+	protected ResourceLocation getLootTable()
+	{
+		return MubbleLootTables.ZOMBIE_COWMAN;
 	}
 	
 	protected void applyEntityAI()
@@ -146,7 +154,7 @@ public class EntityZombieCowman extends EntityPigZombie
 				((EntityZombieCowman)creatureIn).becomeAngryAt(entityLivingBaseIn);
 			}
 		}
-	}
+	}	
 
 	static class AITargetAggressor extends EntityAINearestAttackableTarget<EntityPlayer>
 	{

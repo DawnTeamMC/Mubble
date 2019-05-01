@@ -544,10 +544,22 @@ public class MubbleBlocks
     public static final Block PINK_CONCRETE_BUTTON = new BlockButtonStone(Blocks.PINK_CONCRETE);
     
     public static final Block FOOTBLOCK = new BlockSimple("footblock", Properties.from(Blocks.WHITE_WOOL), ItemGroup.DECORATIONS);
-    public static final Block WHITE_CLOUD_BLOCK = new BlockCloud("white");
-    public static final Block LIGHT_GRAY_CLOUD_BLOCK = new BlockCloud("light_gray");
-    public static final Block GRAY_CLOUD_BLOCK = new BlockCloud("gray");
-    public static final Block BLACK_CLOUD_BLOCK = new BlockCloud("black");
+    public static final Block WHITE_CLOUD = new BlockCloud(EnumDyeColor.WHITE);
+    public static final Block LIGHT_GRAY_CLOUD = new BlockCloud(EnumDyeColor.LIGHT_GRAY);
+    public static final Block GRAY_CLOUD = new BlockCloud(EnumDyeColor.GRAY);
+    public static final Block BLACK_CLOUD = new BlockCloud(EnumDyeColor.BLACK);
+    public static final Block BROWN_CLOUD = new BlockCloud(EnumDyeColor.BROWN);
+    public static final Block RED_CLOUD = new BlockCloud(EnumDyeColor.RED);
+    public static final Block ORANGE_CLOUD = new BlockCloud(EnumDyeColor.ORANGE);
+    public static final Block YELLOW_CLOUD = new BlockCloud(EnumDyeColor.YELLOW);
+    public static final Block LIME_CLOUD = new BlockCloud(EnumDyeColor.LIME);
+    public static final Block GREEN_CLOUD = new BlockCloud(EnumDyeColor.GREEN);
+    public static final Block CYAN_CLOUD = new BlockCloud(EnumDyeColor.CYAN);
+    public static final Block LIGHT_BLUE_CLOUD = new BlockCloud(EnumDyeColor.LIGHT_BLUE);
+    public static final Block BLUE_CLOUD = new BlockCloud(EnumDyeColor.BLUE);
+    public static final Block PURPLE_CLOUD = new BlockCloud(EnumDyeColor.PURPLE);
+    public static final Block MAGENTA_CLOUD = new BlockCloud(EnumDyeColor.MAGENTA);
+    public static final Block PINK_CLOUD = new BlockCloud(EnumDyeColor.PINK);
     public static final Block TOMATO = new BlockCrops("tomato");
     public static final Block SALAD = new BlockCrops("salad");
     //public static final Block RICE = new BlockCrops("rice");

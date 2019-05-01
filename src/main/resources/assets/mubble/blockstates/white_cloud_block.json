@@ -1,12 +1,6 @@
 {
 	"variants":
 	{
-		"":
-		[
-			{"model": "mubble:block/white_cloud_block/0"},
-			{"model": "mubble:block/white_cloud_block/1"},
-			{"model": "mubble:block/white_cloud_block/2"},
-			{"model": "mubble:block/white_cloud_block/3"}
-		]
+		"": {"model": "mubble:block/white_cloud_block"}
 	}
 }

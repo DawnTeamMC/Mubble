@@ -6,6 +6,8 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 public class MubbleLootTables
 {
+	public static final ResourceLocation CHINCHO = LootTableList.register(new ResourceLocation(Mubble.MOD_ID, "entities/chincho"));
+	
 	public static final ResourceLocation TOAD = LootTableList.register(new ResourceLocation(Mubble.MOD_ID, "entities/toad/normal"));
 	public static final ResourceLocation BLUE_TOAD = LootTableList.register(new ResourceLocation(Mubble.MOD_ID, "entities/toad/species/blue"));
 	public static final ResourceLocation LIGHT_BLUE_TOAD = LootTableList.register(new ResourceLocation(Mubble.MOD_ID, "entities/toad/species/light_blue"));
@@ -28,6 +30,6 @@ public class MubbleLootTables
 	public static final ResourceLocation BANKTOAD = LootTableList.register(new ResourceLocation(Mubble.MOD_ID, "entities/toad/brigade/bank"));
 	public static final ResourceLocation YELLOW_BTOAD = LootTableList.register(new ResourceLocation(Mubble.MOD_ID, "entities/toad/brigade/yellow"));
 	public static final ResourceLocation MAILTOAD = LootTableList.register(new ResourceLocation(Mubble.MOD_ID, "entities/toad/brigade/mail"));
-	
-	public static final ResourceLocation CHINCHO = LootTableList.register(new ResourceLocation(Mubble.MOD_ID, "entities/chincho"));
+
+	public static final ResourceLocation ZOMBIE_COWMAN = LootTableList.register(new ResourceLocation(Mubble.MOD_ID, "entities/zombie_cowman"));
 }

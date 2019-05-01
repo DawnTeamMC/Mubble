@@ -32,7 +32,7 @@ public class BlockLeavesCarpet extends BlockBush implements IShearable
     
     public BlockLeavesCarpet(Block base_block)
     {
-        super(Block.Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement());
+        super(Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement());
         setRegistryName(Mubble.MOD_ID, base_block.getRegistryName().getPath() + "_carpet");
         MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         this.base = base_block;
