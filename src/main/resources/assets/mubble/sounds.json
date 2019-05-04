@@ -17,7 +17,7 @@
 	},
 	"block.note_block.jump.high":
 	{
-		"subtitle": "subtitles.block.note_block.jump",
+		"subtitle": "subtitles.mubble.block.note_block.jump",
 		"sounds":
 		[
 			"mubble:block/note_block/jump/high"
@@ -25,7 +25,7 @@
 	},
 	"block.note_block.jump.low":
 	{
-		"subtitle": "subtitles.block.note_block.low",
+		"subtitle": "subtitles.mubble.block.note_block.low",
 		"sounds":
 		[
 			"mubble:block/note_block/jump/low0",
@@ -34,7 +34,7 @@
 	},
 	"block.question_block.loot.power_up":
 	{
-		"subtitle": "subtitles.block.question_block.loot.power_up",
+		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
 		"sounds":
 		[
 			"mubble:block/question_block/loot/power_up"
@@ -42,7 +42,7 @@
 	},
 	"block.question_block.loot.coin":
 	{
-		"subtitle": "subtitles.block.question_block.loot.coin",
+		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
 		"sounds":
 		[
 			"mubble:block/question_block/loot/coin"
@@ -50,7 +50,7 @@
 	},
 	"block.space_jam.break":
 	{
-		"subtitle": "subtitles.block.generic.break",
+		"subtitle": "subtitles.mubble.block.generic.break",
 		"sounds":
 		[
 			"mubble:block/space_jam/hit1",
@@ -102,7 +102,7 @@
 	},
 	"block.spring.trigger":
 	{
-		"subtitle": "subtitles.block.spring.trigger",
+		"subtitle": "subtitles.mubble.block.spring.trigger",
 		"sounds":
 		[
 			"mubble:block/spring/trigger"
@@ -120,7 +120,7 @@
 	},
 	"item.annoying_dog.disappear":
 	{
-		"subtitle": "subtitles.item.annoying_dog.disappear",
+		"subtitle": "subtitles.mubble.item.annoying_dog.disappear",
 		"sounds":
 		[
 			"mubble:item/annoying_dog/disappear"
@@ -128,7 +128,7 @@
 	},
 	"item.annoying_dog.bark":
 	{
-		"subtitle": "subtitles.item.annoying_dog.bark",
+		"subtitle": "subtitles.mubble.item.annoying_dog.bark",
 		"sounds":
 		[
 			"mubble:item/annoying_dog/bark"
@@ -136,7 +136,7 @@
 	},
 	"item.cape_feather.use":
 	{
-		"subtitle": "subtitles.item.cape_feather.use",
+		"subtitle": "subtitles.mubble.item.cape_feather.use",
 		"sounds":
 		[
 			"mubble:item/cape_feather/use"
@@ -144,7 +144,7 @@
 	},
 	"item.smash_ball.use":
 	{
-		"subtitle": "subtitles.item.smash_ball.use",
+		"subtitle": "subtitles.mubble.item.smash_ball.use",
 		"sounds":
 		[
 			"mubble:item/smash_ball/use"
@@ -166,7 +166,7 @@
 	},
 	"entity.chincho.ambient":
 	{
-		"subtitle": "subtitles.entity.chincho.ambient",
+		"subtitle": "subtitles.mubble.entity.chincho.ambient",
 		"sounds":
 		[
 			"mubble:entity/chincho/ambient1",
@@ -180,7 +180,7 @@
 	},
 	"entity.chincho.hurt":
 	{
-		"subtitle": "subtitles.entity.chincho.hurt",
+		"subtitle": "subtitles.mubble.entity.chincho.hurt",
 		"sounds":
 		[
 			"mubble:entity/chincho/hurt1",
@@ -191,7 +191,7 @@
 	},
 	"entity.chincho.death":
 	{
-		"subtitle": "subtitles.entity.chincho.death",
+		"subtitle": "subtitles.mubble.entity.chincho.death",
 		"sounds":
 		[
 			"mubble:entity/chincho/death1"
@@ -199,7 +199,7 @@
 	},
 	"entity.toad.ambient":
 	{
-		"subtitle": "subtitles.entity.toad.ambient",
+		"subtitle": "subtitles.mubble.entity.toad.ambient",
 		"sounds":
 		[
 			"mubble:entity/toad/ambient1",
@@ -219,7 +219,7 @@
 	},
 	"entity.toad.hurt":
 	{
-		"subtitle": "subtitles.entity.toad.hurt",
+		"subtitle": "subtitles.mubble.entity.toad.hurt",
 		"sounds":
 		[
 			"mubble:entity/toad/hurt1",
@@ -236,7 +236,7 @@
 	},
 	"entity.toad.death":
 	{
-		"subtitle": "subtitles.entity.toad.death",
+		"subtitle": "subtitles.mubble.entity.toad.death",
 		"sounds":
 		[
 			"mubble:entity/toad/death1",
@@ -247,7 +247,7 @@
 	},
 	"entity.zombie_cowman.ambient":
 	{
-		"subtitle": "subtitles.entity.zombie_cowman.ambient",
+		"subtitle": "subtitles.mubble.entity.zombie_cowman.ambient",
 		"sounds":
 		[
 			"mubble:entity/zombie_cowman/ambient1",
@@ -268,7 +268,7 @@
 	},
 	"entity.zombie_cowman.angry":
 	{
-		"subtitle": "subtitles.entity.zombie_cowman.angry",
+		"subtitle": "subtitles.mubble.entity.zombie_cowman.angry",
 		"sounds":
 		[
 			"mubble:entity/zombie_cowman/step1",
@@ -279,7 +279,7 @@
 	},
 	"entity.zombie_cowman.hurt":
 	{
-		"subtitle": "subtitles.entity.zombie_cowman.hurt",
+		"subtitle": "subtitles.mubble.entity.zombie_cowman.hurt",
 		"sounds":
 		[
 			"mubble:entity/zombie_cowman/hurt1",
@@ -288,7 +288,7 @@
 	},
 	"entity.zombie_cowman.death":
 	{
-		"subtitle": "subtitles.entity.zombie_cowman.death",
+		"subtitle": "subtitles.mubble.entity.zombie_cowman.death",
 		"sounds":
 		[
 			"mubble:entity/zombie_cowman/death"
@@ -296,7 +296,7 @@
 	},
 	"costume.cappy.ambient":
 	{
-		"subtitle": "subtitles.costume.cappy.ambient",
+		"subtitle": "subtitles.mubble.costume.cappy.ambient",
 		"sounds":
 		[
 			"mubble:costume/cappy/ambient1",
@@ -319,7 +319,7 @@
 	},
 	"costume.cappy.ambient.nether":
 	{
-		"subtitle": "subtitles.costume.cappy.ambient.nether",
+		"subtitle": "subtitles.mubble.costume.cappy.ambient.nether",
 		"sounds":
 		[
 			"mubble:costume/cappy/ambient_nether1",
@@ -330,7 +330,7 @@
 	},
 	"costume.cappy.equip":
 	{
-		"subtitle": "subtitles.costume.cappy.equip",
+		"subtitle": "subtitles.mubble.costume.cappy.equip",
 		"sounds":
 		[
 			"mubble:costume/cappy/equip1",
@@ -340,7 +340,7 @@
 	},
 	"costume.cappy.happy":
 	{
-		"subtitle": "subtitles.costume.cappy.happy",
+		"subtitle": "subtitles.mubble.costume.cappy.happy",
 		"sounds":
 		[
 			"mubble:costume/cappy/happy1",
@@ -354,7 +354,7 @@
 	},
 	"costume.cappy.help":
 	{
-		"subtitle": "subtitles.costume.cappy.help",
+		"subtitle": "subtitles.mubble.costume.cappy.help",
 		"sounds":
 		[
 			"mubble:costume/cappy/help1",
@@ -367,7 +367,7 @@
 	},
 	"costume.cappy.help.water":
 	{
-		"subtitle": "subtitles.costume.cappy.help",
+		"subtitle": "subtitles.mubble.costume.cappy.help",
 		"sounds":
 		[
 			"mubble:costume/cappy/help_water1",

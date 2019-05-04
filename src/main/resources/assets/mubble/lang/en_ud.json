@@ -865,6 +865,11 @@
 
 
 
+	"comment": "EFFECTS",
+	"//effect.mubble.heaviness": "Heaviness",
+
+
+
 	"comment": "BIOMES",
 	"biome.mubble.autumn_oak_forest": "ʇsǝɹoℲ ʞɐO uɯnʇn∀",
 	"biome.mubble.pink_cherry_oak_forest": "ʇsǝɹoℲ ʞɐO ʎɹɹǝɥƆ ʞuᴉԀ",
@@ -876,25 +881,25 @@
 
 
 	"comment": "SUBTITLES",
-	"subtitles.block.note_block.jump": "pǝsn ʞɔolᗺ ǝʇoN",
-	"subtitles.block.question_block.mubble.loot.power_up": "dn ɹǝʍod sdoɹp ʞɔolᗺ ¿",
-	"subtitles.block.question_block.mubble.loot.coin": "uᴉoɔ sdoɹp ʞɔolᗺ ¿",
-	"subtitles.block.spring.trigger": "pǝɹǝƃƃᴉɹʇ ƃuᴉɹdS",
-	"subtitles.item.annoying_dog.disappear": "sɹɐǝddɐsᴉp ƃop ƃuᴉʎouu∀",
-	"subtitles.item.annoying_dog.bark": "sʞɹɐq ƃop ƃuᴉʎouu∀",
-	"subtitles.item.cape_feather.use": "pǝsn ɹǝɥʇɐǝℲ ǝdɐƆ",
-	"subtitles.item.smash_ball.use": "pǝsn llɐq ɥsɐɯS",
-	"subtitles.costume.cappy.ambient": "sǝlqɯnɯ ʎddɐƆ",
-	"subtitles.costume.cappy.ambient.nether": "ɯɐǝʇs ɟo ʇno ƃuᴉuunɹ ʎddɐƆ",
-	"subtitles.costume.cappy.equip": "pǝdᴉnbǝ ʎddɐƆ",
-	"subtitles.costume.cappy.happy": "sǝlqɯnɯ ʎlƃuᴉoɾuǝ ʎddɐƆ",
-	"subtitles.costume.cappy.help": "dlǝɥ ɹoɟ sʞsɐ ʎddɐƆ",
+	"subtitles.mubble.block.note_block.jump": "pǝsn ʞɔolᗺ ǝʇoN",
+	"subtitles.mubble.block.question_block.mubble.loot.power_up": "dn ɹǝʍod sdoɹp ʞɔolᗺ ¿",
+	"subtitles.mubble.block.question_block.mubble.loot.coin": "uᴉoɔ sdoɹp ʞɔolᗺ ¿",
+	"subtitles.mubble.block.spring.trigger": "pǝɹǝƃƃᴉɹʇ ƃuᴉɹdS",
+	"subtitles.mubble.item.annoying_dog.disappear": "sɹɐǝddɐsᴉp ƃop ƃuᴉʎouu∀",
+	"subtitles.mubble.item.annoying_dog.bark": "sʞɹɐq ƃop ƃuᴉʎouu∀",
+	"subtitles.mubble.item.cape_feather.use": "pǝsn ɹǝɥʇɐǝℲ ǝdɐƆ",
+	"subtitles.mubble.item.smash_ball.use": "pǝsn llɐq ɥsɐɯS",
+	"subtitles.mubble.costume.cappy.ambient": "sǝlqɯnɯ ʎddɐƆ",
+	"subtitles.mubble.costume.cappy.ambient.nether": "ɯɐǝʇs ɟo ʇno ƃuᴉuunɹ ʎddɐƆ",
+	"subtitles.mubble.costume.cappy.equip": "pǝdᴉnbǝ ʎddɐƆ",
+	"subtitles.mubble.costume.cappy.happy": "sǝlqɯnɯ ʎlƃuᴉoɾuǝ ʎddɐƆ",
+	"subtitles.mubble.costume.cappy.help": "dlǝɥ ɹoɟ sʞsɐ ʎddɐƆ",
 	"//subtitles.entity.chincho.ambient": "Chincho talks",
 	"//subtitles.entity.chincho.hurt": "Chincho hurts",
 	"//subtitles.entity.chincho.death": "Chincho dies",
-	"subtitles.entity.toad.ambient": "sǝlqɯnɯ pɐo┴",
-	"subtitles.entity.toad.hurt": "sʇɹnɥ pɐo┴",
-	"subtitles.entity.toad.death": "sǝᴉp pɐo┴",
+	"subtitles.mubble.entity.toad.ambient": "sǝlqɯnɯ pɐo┴",
+	"subtitles.mubble.entity.toad.hurt": "sʇɹnɥ pɐo┴",
+	"subtitles.mubble.entity.toad.death": "sǝᴉp pɐo┴",
 	"//subtitles.entity.zombie_cowman.ambient": "Zombie Cowman grunts",
 	"//subtitles.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
 	"//subtitles.entity.zombie_cowman.angry": "Zombie Cowman angers",

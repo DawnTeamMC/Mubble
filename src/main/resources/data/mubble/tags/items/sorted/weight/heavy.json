@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values":
+	[
+		"#forge:storage_blocks",
+		"#minecraft:anvil",
+		"mubble:gold_mario_cap",
+		"mubble:silver_luigi_cap",
+		"mubble:iron_puyo",
+		"mubble:hard_puyo"
+	]
+}

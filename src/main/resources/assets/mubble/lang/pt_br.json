@@ -865,6 +865,11 @@
 
 
 
+	"comment": "EFFECTS",
+	"//effect.mubble.heaviness": "Heaviness",
+
+
+
 	"comment": "BIOMES",
 	"biome.mubble.autumn_oak_forest": "Floresta de Carvalho de Outono",
 	"biome.mubble.pink_cherry_oak_forest": "Floresta de Carvalho Cereja Rosa",
@@ -876,25 +881,25 @@
 
 
 	"comment": "SUBTITLES",
-	"subtitles.block.note_block.jump": "Note Block used",
-	"subtitles.block.question_block.mubble.loot.power_up": "Bloco de ? dropou um power up",
-	"subtitles.block.question_block.mubble.loot.coin": "Bloco de ? dropa uma moeda",
-	"subtitles.block.spring.trigger": "Primavera acionada",
-	"subtitles.item.annoying_dog.disappear": "Cachorro Irritante desaparece",
-	"subtitles.item.annoying_dog.bark": "Cachorro Irritante late",
-	"subtitles.item.cape_feather.use": "Pena da Capa foi usada",
-	"subtitles.item.smash_ball.use": "Bola Smash foi usada",
-	"subtitles.costume.cappy.ambient": "Cappy murmura",
-	"subtitles.costume.cappy.ambient.nether": "Cappy ficando sem vapor",
-	"subtitles.costume.cappy.equip": "Cappy chegou na cabeça de alguém",
-	"subtitles.costume.cappy.happy": "Cappy murmura apreciavelmente",
-	"subtitles.costume.cappy.help": "Cappy pede por ajuda",
+	"subtitles.mubble.block.note_block.jump": "Note Block used",
+	"subtitles.mubble.block.question_block.mubble.loot.power_up": "Bloco de ? dropou um power up",
+	"subtitles.mubble.block.question_block.mubble.loot.coin": "Bloco de ? dropa uma moeda",
+	"subtitles.mubble.block.spring.trigger": "Primavera acionada",
+	"subtitles.mubble.item.annoying_dog.disappear": "Cachorro Irritante desaparece",
+	"subtitles.mubble.item.annoying_dog.bark": "Cachorro Irritante late",
+	"subtitles.mubble.item.cape_feather.use": "Pena da Capa foi usada",
+	"subtitles.mubble.item.smash_ball.use": "Bola Smash foi usada",
+	"subtitles.mubble.costume.cappy.ambient": "Cappy murmura",
+	"subtitles.mubble.costume.cappy.ambient.nether": "Cappy ficando sem vapor",
+	"subtitles.mubble.costume.cappy.equip": "Cappy chegou na cabeça de alguém",
+	"subtitles.mubble.costume.cappy.happy": "Cappy murmura apreciavelmente",
+	"subtitles.mubble.costume.cappy.help": "Cappy pede por ajuda",
 	"//subtitles.entity.chincho.ambient": "Chincho talks",
 	"//subtitles.entity.chincho.hurt": "Chincho hurts",
 	"//subtitles.entity.chincho.death": "Chincho dies",
-	"subtitles.entity.toad.ambient": "Toad murmura",
-	"subtitles.entity.toad.hurt": "Toad senti dor",
-	"subtitles.entity.toad.death": "Toad morre",
+	"subtitles.mubble.entity.toad.ambient": "Toad murmura",
+	"subtitles.mubble.entity.toad.hurt": "Toad senti dor",
+	"subtitles.mubble.entity.toad.death": "Toad morre",
 	"//subtitles.entity.zombie_cowman.ambient": "Zombie Cowman grunts",
 	"//subtitles.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
 	"//subtitles.entity.zombie_cowman.angry": "Zombie Cowman angers",

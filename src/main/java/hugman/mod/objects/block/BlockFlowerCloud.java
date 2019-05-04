@@ -36,7 +36,7 @@ public class BlockFlowerCloud extends BlockFlower
     	{
     		EntityItem itemIn = (EntityItem)entityIn;
         	if(MubbleTags.Items.CROWNS.contains(itemIn.getItem().getItem())) itemIn.motionY = 0.3D;
-        	if(MubbleTags.Items.LIGHTWEIGHT_ITEMS.contains(itemIn.getItem().getItem())) itemIn.motionY = 0.1D;
+        	if(MubbleTags.Items.WEIGHT_LIGHT.contains(itemIn.getItem().getItem())) itemIn.motionY = 0.1D;
     	}
     }
 }

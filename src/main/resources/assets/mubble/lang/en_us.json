@@ -865,6 +865,11 @@
 
 
 
+	"comment": "EFFECTS",
+	"effect.mubble.heaviness": "Heaviness",
+
+
+
 	"comment": "BIOMES",
 	"biome.mubble.autumn_oak_forest": "Autumn Oak Forest",
 	"biome.mubble.pink_cherry_oak_forest": "Pink Cherry Oak Forest",
@@ -876,29 +881,29 @@
 
 
 	"comment": "SUBTITLES",
-	"subtitles.block.note_block.jump": "Note Block used",
-	"subtitles.block.question_block.mubble.loot.power_up": "? Block drops power up",
-	"subtitles.block.question_block.mubble.loot.coin": "? Block drops coin",
-	"subtitles.block.spring.trigger": "Spring triggered",
-	"subtitles.item.annoying_dog.disappear": "Annoying Dog disappears",
-	"subtitles.item.annoying_dog.bark": "Annoying Dog barks",
-	"subtitles.item.cape_feather.use": "Cape Feather used",
-	"subtitles.item.smash_ball.use": "Smash Ball used",
-	"subtitles.costume.cappy.ambient": "Cappy mumbles",
-	"subtitles.costume.cappy.ambient.nether": "Cappy running out of steam",
-	"subtitles.costume.cappy.equip": "Cappy equiped",
-	"subtitles.costume.cappy.happy": "Cappy enjoingly mumbles",
-	"subtitles.costume.cappy.help": "Cappy asks for help",
-	"subtitles.entity.chincho.ambient": "Chincho talks",
-	"subtitles.entity.chincho.hurt": "Chincho hurts",
-	"subtitles.entity.chincho.death": "Chincho dies",
-	"subtitles.entity.toad.ambient": "Toad mumbles",
-	"subtitles.entity.toad.hurt": "Toad hurts",
-	"subtitles.entity.toad.death": "Toad dies",
-	"subtitles.entity.zombie_cowman.ambient": "Zombie Cowman grunts",
-	"subtitles.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
-	"subtitles.entity.zombie_cowman.angry": "Zombie Cowman angers",
-	"subtitles.entity.zombie_cowman.death": "Zombie Cowman dies",
+	"subtitles.mubble.block.note_block.jump": "Note Block used",
+	"subtitles.mubble.block.question_block.mubble.loot.power_up": "? Block drops power up",
+	"subtitles.mubble.block.question_block.mubble.loot.coin": "? Block drops coin",
+	"subtitles.mubble.block.spring.trigger": "Spring triggered",
+	"subtitles.mubble.item.annoying_dog.disappear": "Annoying Dog disappears",
+	"subtitles.mubble.item.annoying_dog.bark": "Annoying Dog barks",
+	"subtitles.mubble.item.cape_feather.use": "Cape Feather used",
+	"subtitles.mubble.item.smash_ball.use": "Smash Ball used",
+	"subtitles.mubble.costume.cappy.ambient": "Cappy mumbles",
+	"subtitles.mubble.costume.cappy.ambient.nether": "Cappy running out of steam",
+	"subtitles.mubble.costume.cappy.equip": "Cappy equiped",
+	"subtitles.mubble.costume.cappy.happy": "Cappy enjoingly mumbles",
+	"subtitles.mubble.costume.cappy.help": "Cappy asks for help",
+	"subtitles.mubble.entity.chincho.ambient": "Chincho talks",
+	"subtitles.mubble.entity.chincho.hurt": "Chincho hurts",
+	"subtitles.mubble.entity.chincho.death": "Chincho dies",
+	"subtitles.mubble.entity.toad.ambient": "Toad mumbles",
+	"subtitles.mubble.entity.toad.hurt": "Toad hurts",
+	"subtitles.mubble.entity.toad.death": "Toad dies",
+	"subtitles.mubble.entity.zombie_cowman.ambient": "Zombie Cowman grunts",
+	"subtitles.mubble.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
+	"subtitles.mubble.entity.zombie_cowman.angry": "Zombie Cowman angers",
+	"subtitles.mubble.entity.zombie_cowman.death": "Zombie Cowman dies",
 
 
 

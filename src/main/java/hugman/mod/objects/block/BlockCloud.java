@@ -75,8 +75,7 @@ public class BlockCloud extends Block
     	if(entityIn instanceof EntityPlayer)
     	{
     		EntityPlayer playerIn = (EntityPlayer)entityIn;
-    		ItemStack armor;
-    		armor = playerIn.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+    		ItemStack armor = playerIn.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
     		if(MubbleTags.Items.CROWNS.contains(armor.getItem()) && !playerIn.isSneaking())
     		{
         		if(!playerIn.isSprinting()) playerIn.motionY = (this.RANDOM.nextInt(31) + 40) / 100D;
@@ -88,7 +87,7 @@ public class BlockCloud extends Block
     	{
     		EntityItem itemIn = (EntityItem)entityIn;
         	if(MubbleTags.Items.CROWNS.contains(itemIn.getItem().getItem())) itemIn.motionY = 0.3D;
-        	if(MubbleTags.Items.LIGHTWEIGHT_ITEMS.contains(itemIn.getItem().getItem())) itemIn.motionY = 0.1D;
+        	if(MubbleTags.Items.WEIGHT_LIGHT.contains(itemIn.getItem().getItem())) itemIn.motionY = 0.1D;
     	}
     }
 }

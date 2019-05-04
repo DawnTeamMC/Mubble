@@ -865,6 +865,11 @@
 
 
 
+	"comment": "EFFECTS",
+	"//effect.mubble.heaviness": "Heaviness",
+
+
+
 	"comment": "BIOMES",
 	"//biome.mubble.autumn_oak_forest": "Autumn Oak Forest",
 	"//biome.mubble.pink_cherry_oak_forest": "Pink Cherry Oak Forest",
@@ -877,13 +882,13 @@
 
 	"comment": "SUBTITLES",
 	"//subtitles.block.note_block.jump": "<newline>",
-	"subtitles.block.question_block.mubble.loot.power_up": "問號塊:掉落超級蘑菇",
-	"subtitles.block.question_block.mubble.loot.coin": "問號塊:掉落硬幣",
+	"subtitles.mubble.block.question_block.mubble.loot.power_up": "問號塊:掉落超級蘑菇",
+	"subtitles.mubble.block.question_block.mubble.loot.coin": "問號塊:掉落硬幣",
 	"//subtitles.block.spring.trigger": "Spring triggered",
 	"//subtitles.item.annoying_dog.disappear": "<newline>",
 	"//subtitles.item.annoying_dog.bark": "<newline>",
-	"subtitles.item.cape_feather.use": "披風羽毛:被使用",
-	"subtitles.item.smash_ball.use": "粉碎球:被使用",
+	"subtitles.mubble.item.cape_feather.use": "披風羽毛:被使用",
+	"subtitles.mubble.item.smash_ball.use": "粉碎球:被使用",
 	"//subtitles.costume.cappy.ambient": "<newline>",
 	"//subtitles.costume.cappy.ambient.nether": "<newline>",
 	"//subtitles.costume.cappy.equip": "<newline>",
@@ -892,9 +897,9 @@
 	"//subtitles.entity.chincho.ambient": "Chincho talks",
 	"//subtitles.entity.chincho.hurt": "Chincho hurts",
 	"//subtitles.entity.chincho.death": "Chincho dies",
-	"subtitles.entity.toad.ambient": "奇諾比奧:咕噥",
-	"subtitles.entity.toad.hurt": "奇諾比奧:受傷",
-	"subtitles.entity.toad.death": "奇諾比奧:死亡",
+	"subtitles.mubble.entity.toad.ambient": "奇諾比奧:咕噥",
+	"subtitles.mubble.entity.toad.hurt": "奇諾比奧:受傷",
+	"subtitles.mubble.entity.toad.death": "奇諾比奧:死亡",
 	"//subtitles.entity.zombie_cowman.ambient": "Zombie Cowman grunts",
 	"//subtitles.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
 	"//subtitles.entity.zombie_cowman.angry": "Zombie Cowman angers",

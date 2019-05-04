@@ -2,6 +2,7 @@
 	"pools":
     [
 		{
+			"name":"rotten_flesh",
 			"rolls": 1,
 			"entries":
             [
@@ -32,6 +33,7 @@
 			]
 		},
 		{
+			"name":"iron_nugget",
 			"rolls": 1,
 			"entries":
             [
@@ -62,6 +64,7 @@
 			]
 		},
 		{
+			"name":"iron_ingot",
 			"conditions":
             [
 				{

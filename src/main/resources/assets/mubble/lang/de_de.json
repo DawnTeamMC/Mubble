@@ -865,6 +865,11 @@
 
 
 
+	"comment": "EFFECTS",
+	"//effect.mubble.heaviness": "Heaviness",
+
+
+
 	"comment": "BIOMES",
 	"biome.mubble.autumn_oak_forest": "Herbsteichenwald",
 	"biome.mubble.pink_cherry_oak_forest": "Rosa Kirscheichenwald",
@@ -876,29 +881,29 @@
 
 
 	"comment": "SUBTITLES",
-	"subtitles.block.note_block.jump": "Notenblock genutzt",
-	"subtitles.block.question_block.mubble.loot.power_up": "?-Block gibt Power-Up",
-	"subtitles.block.question_block.mubble.loot.coin": "?-Block gibt Münze",
-	"subtitles.block.spring.trigger": "Feder ausgelöst",
-	"subtitles.item.annoying_dog.disappear": "Nerviger Hund verschwindet",
-	"subtitles.item.annoying_dog.bark": "Nerviger Hund bellt",
-	"subtitles.item.cape_feather.use": "Federmütze benutzt",
-	"subtitles.item.smash_ball.use": "Smash-Ball benutzt",
-	"subtitles.costume.cappy.ambient": "Cappy murmelt",
-	"subtitles.costume.cappy.ambient.nether": "Cappy geht der Schwund aus",
-	"subtitles.costume.cappy.equip": "Cappy steigt auf jemands Kopf",
-	"subtitles.costume.cappy.happy": "Cappy murmelt fröhlich",
-	"subtitles.costume.cappy.help": "Cappy bittet um Hilfe",
-	"subtitles.entity.chincho.ambient": "Chincho spricht",
-	"subtitles.entity.chincho.hurt": "Chincho nimmt Schaden",
-	"subtitles.entity.chincho.death": "Chincho stirbt",
-	"subtitles.entity.toad.ambient": "Toad murmelt",
-	"subtitles.entity.toad.hurt": "Toad nimmt Schaden",
-	"subtitles.entity.toad.death": "Toad stirbt",
-	"subtitles.entity.zombie_cowman.ambient": "Kuhzombie grunzt",
-	"subtitles.entity.zombie_cowman.hurt": "Kuhzombie nimmt Schaden",
-	"subtitles.entity.zombie_cowman.angry": "Kuhzombie ist verärgert",
-	"subtitles.entity.zombie_cowman.death": "Kuhzombie stirbt",
+	"subtitles.mubble.block.note_block.jump": "Notenblock genutzt",
+	"subtitles.mubble.block.question_block.mubble.loot.power_up": "?-Block gibt Power-Up",
+	"subtitles.mubble.block.question_block.mubble.loot.coin": "?-Block gibt Münze",
+	"subtitles.mubble.block.spring.trigger": "Feder ausgelöst",
+	"subtitles.mubble.item.annoying_dog.disappear": "Nerviger Hund verschwindet",
+	"subtitles.mubble.item.annoying_dog.bark": "Nerviger Hund bellt",
+	"subtitles.mubble.item.cape_feather.use": "Federmütze benutzt",
+	"subtitles.mubble.item.smash_ball.use": "Smash-Ball benutzt",
+	"subtitles.mubble.costume.cappy.ambient": "Cappy murmelt",
+	"subtitles.mubble.costume.cappy.ambient.nether": "Cappy geht der Schwund aus",
+	"subtitles.mubble.costume.cappy.equip": "Cappy steigt auf jemands Kopf",
+	"subtitles.mubble.costume.cappy.happy": "Cappy murmelt fröhlich",
+	"subtitles.mubble.costume.cappy.help": "Cappy bittet um Hilfe",
+	"subtitles.mubble.entity.chincho.ambient": "Chincho spricht",
+	"subtitles.mubble.entity.chincho.hurt": "Chincho nimmt Schaden",
+	"subtitles.mubble.entity.chincho.death": "Chincho stirbt",
+	"subtitles.mubble.entity.toad.ambient": "Toad murmelt",
+	"subtitles.mubble.entity.toad.hurt": "Toad nimmt Schaden",
+	"subtitles.mubble.entity.toad.death": "Toad stirbt",
+	"subtitles.mubble.entity.zombie_cowman.ambient": "Kuhzombie grunzt",
+	"subtitles.mubble.entity.zombie_cowman.hurt": "Kuhzombie nimmt Schaden",
+	"subtitles.mubble.entity.zombie_cowman.angry": "Kuhzombie ist verärgert",
+	"subtitles.mubble.entity.zombie_cowman.death": "Kuhzombie stirbt",
 
 
 

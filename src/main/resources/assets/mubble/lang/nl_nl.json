@@ -865,6 +865,11 @@
 
 
 
+	"comment": "EFFECTS",
+	"//effect.mubble.heaviness": "Heaviness",
+
+
+
 	"comment": "BIOMES",
 	"biome.mubble.autumn_oak_forest": "Herfsteiken bos",
 	"biome.mubble.pink_cherry_oak_forest": "Rozekerseneiken bos",
@@ -876,25 +881,25 @@
 
 
 	"comment": "SUBTITLES",
-	"subtitles.block.note_block.jump": "Nootblock wordt gebruikt",
-	"subtitles.block.question_block.mubble.loot.super_mushroom": "?-blok plundert super paddenstoel",
-	"subtitles.block.question_block.mubble.loot.coin": "?-blok laat munt vallen",
-	"subtitles.block.spring.trigger": "Veer geactiveerd",
-	"subtitles.item.annoying_dog.disappear": "Iritante hond verdrijnd",
-	"subtitles.item.annoying_dog.bark": "Iritante hond blaft",
-	"subtitles.item.cape_feather.use": "Capeveer wordt gebruikt",
-	"subtitles.item.smash_ball.use": "Smash bal wordt gebruikt",
-	"subtitles.costume.cappy.ambient": "Cappy mompelt",
-	"subtitles.costume.cappy.ambient.nether": "Cappy raakt op",
-	"subtitles.costume.cappy.equip": "Cappy kwam op iemand's hoofd",
-	"subtitles.costume.cappy.happy": "Cappy mompelt blij",
-	"subtitles.costume.cappy.help": "Cappy vraagt om hulp",
+	"subtitles.mubble.block.note_block.jump": "Nootblock wordt gebruikt",
+	"subtitles.mubble.block.question_block.mubble.loot.super_mushroom": "?-blok plundert super paddenstoel",
+	"subtitles.mubble.block.question_block.mubble.loot.coin": "?-blok laat munt vallen",
+	"subtitles.mubble.block.spring.trigger": "Veer geactiveerd",
+	"subtitles.mubble.item.annoying_dog.disappear": "Iritante hond verdrijnd",
+	"subtitles.mubble.item.annoying_dog.bark": "Iritante hond blaft",
+	"subtitles.mubble.item.cape_feather.use": "Capeveer wordt gebruikt",
+	"subtitles.mubble.item.smash_ball.use": "Smash bal wordt gebruikt",
+	"subtitles.mubble.costume.cappy.ambient": "Cappy mompelt",
+	"subtitles.mubble.costume.cappy.ambient.nether": "Cappy raakt op",
+	"subtitles.mubble.costume.cappy.equip": "Cappy kwam op iemand's hoofd",
+	"subtitles.mubble.costume.cappy.happy": "Cappy mompelt blij",
+	"subtitles.mubble.costume.cappy.help": "Cappy vraagt om hulp",
 	"//subtitles.entity.chincho.ambient": "Chincho talks",
 	"//subtitles.entity.chincho.hurt": "Chincho hurts",
 	"//subtitles.entity.chincho.death": "Chincho dies",
-	"subtitles.entity.toad.ambient": "Toad mompelt",
-	"subtitles.entity.toad.hurt": "Toad heeft pijn",
-	"subtitles.entity.toad.death": "Toad sterft",
+	"subtitles.mubble.entity.toad.ambient": "Toad mompelt",
+	"subtitles.mubble.entity.toad.hurt": "Toad heeft pijn",
+	"subtitles.mubble.entity.toad.death": "Toad sterft",
 	"//subtitles.entity.zombie_cowman.ambient": "Zombie Cowman grunts",
 	"//subtitles.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
 	"//subtitles.entity.zombie_cowman.angry": "Zombie Cowman angers",

@@ -12,11 +12,13 @@ import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleDimensions;
 import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleItems;
+import hugman.mod.init.MubblePotionEffects;
 import hugman.mod.init.MubbleSounds;
 import hugman.mod.init.MubbleWorld;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
@@ -117,6 +119,14 @@ public class Mubble
         }
         
         @SubscribeEvent
+        public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> event)
+        {
+        	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
+        	MubbleEntities.registerEntity(registry);
+        	LOGGER.info("Registered entities");
+        }
+        
+        @SubscribeEvent
         public static void onSoundsRegistry(final RegistryEvent.Register<SoundEvent> event)
         {
         	event.getRegistry().registerAll(MubbleSounds.SOUNDS.toArray(new SoundEvent[0]));
@@ -124,11 +134,10 @@ public class Mubble
         }
         
         @SubscribeEvent
-        public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> event)
+        public static void onPotionsRegistry(final RegistryEvent.Register<Potion> event)
         {
-        	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
-        	MubbleEntities.registerEntity(registry);
-        	LOGGER.info("Registered entities");
+        	event.getRegistry().registerAll(MubblePotionEffects.EFFECTS.toArray(new Potion[0]));
+        	LOGGER.info("Registered potion effects");
         }
         
         @SubscribeEvent
