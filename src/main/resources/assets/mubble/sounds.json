@@ -50,7 +50,7 @@
 	},
 	"block.space_jam.break":
 	{
-		"subtitle": "subtitles.mubble.block.generic.break",
+		"subtitle": "subtitles.block.generic.break",
 		"sounds":
 		[
 			"mubble:block/space_jam/hit1",
@@ -70,6 +70,7 @@
 	},
 	"block.space_jam.hit":
 	{
+		"subtitle": "subtitles.block.generic.hit",
 		"sounds":
 		[
 			"mubble:block/space_jam/hit1",
