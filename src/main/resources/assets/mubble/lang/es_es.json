@@ -882,8 +882,8 @@
 
 	"comment": "SUBTITLES",
 	"//subtitles.block.note_block.jump": "<newline>",
-	"subtitles.mubble.block.question_block.mubble.loot.super_mushroom": "Bloque ? suelta un súper champiñón",
-	"subtitles.mubble.block.question_block.mubble.loot.coin": "Bloque ? suelta una moneda",
+	"subtitles.mubble.block.question_block.loot.super_mushroom": "Bloque ? suelta un súper champiñón",
+	"subtitles.mubble.block.question_block.loot.coin": "Bloque ? suelta una moneda",
 	"//subtitles.block.spring.trigger": "Spring triggered",
 	"//subtitles.item.annoying_dog.disappear": "<newline>",
 	"//subtitles.item.annoying_dog.bark": "<newline>",

@@ -882,8 +882,8 @@
 
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.note_block.jump": "Note Block used",
-	"subtitles.mubble.block.question_block.mubble.loot.power_up": "Bloco de ? dropou um power up",
-	"subtitles.mubble.block.question_block.mubble.loot.coin": "Bloco de ? dropa uma moeda",
+	"subtitles.mubble.block.question_block.loot.power_up": "Bloco de ? dropou um power up",
+	"subtitles.mubble.block.question_block.loot.coin": "Bloco de ? dropa uma moeda",
 	"subtitles.mubble.block.spring.trigger": "Primavera acionada",
 	"subtitles.mubble.item.annoying_dog.disappear": "Cachorro Irritante desaparece",
 	"subtitles.mubble.item.annoying_dog.bark": "Cachorro Irritante late",

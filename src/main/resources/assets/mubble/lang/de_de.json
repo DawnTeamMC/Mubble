@@ -882,8 +882,8 @@
 
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.note_block.jump": "Notenblock genutzt",
-	"subtitles.mubble.block.question_block.mubble.loot.power_up": "?-Block gibt Power-Up",
-	"subtitles.mubble.block.question_block.mubble.loot.coin": "?-Block gibt Münze",
+	"subtitles.mubble.block.question_block.loot.power_up": "?-Block gibt Power-Up",
+	"subtitles.mubble.block.question_block.loot.coin": "?-Block gibt Münze",
 	"subtitles.mubble.block.spring.trigger": "Feder ausgelöst",
 	"subtitles.mubble.item.annoying_dog.disappear": "Nerviger Hund verschwindet",
 	"subtitles.mubble.item.annoying_dog.bark": "Nerviger Hund bellt",

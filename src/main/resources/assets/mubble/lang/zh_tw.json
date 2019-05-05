@@ -882,8 +882,8 @@
 
 	"comment": "SUBTITLES",
 	"//subtitles.block.note_block.jump": "<newline>",
-	"subtitles.mubble.block.question_block.mubble.loot.power_up": "問號塊:掉落超級蘑菇",
-	"subtitles.mubble.block.question_block.mubble.loot.coin": "問號塊:掉落硬幣",
+	"subtitles.mubble.block.question_block.loot.power_up": "問號塊:掉落超級蘑菇",
+	"subtitles.mubble.block.question_block.loot.coin": "問號塊:掉落硬幣",
 	"//subtitles.block.spring.trigger": "Spring triggered",
 	"//subtitles.item.annoying_dog.disappear": "<newline>",
 	"//subtitles.item.annoying_dog.bark": "<newline>",

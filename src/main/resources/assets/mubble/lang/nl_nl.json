@@ -882,8 +882,8 @@
 
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.note_block.jump": "Nootblock wordt gebruikt",
-	"subtitles.mubble.block.question_block.mubble.loot.super_mushroom": "?-blok plundert super paddenstoel",
-	"subtitles.mubble.block.question_block.mubble.loot.coin": "?-blok laat munt vallen",
+	"subtitles.mubble.block.question_block.loot.super_mushroom": "?-blok plundert super paddenstoel",
+	"subtitles.mubble.block.question_block.loot.coin": "?-blok laat munt vallen",
 	"subtitles.mubble.block.spring.trigger": "Veer geactiveerd",
 	"subtitles.mubble.item.annoying_dog.disappear": "Iritante hond verdrijnd",
 	"subtitles.mubble.item.annoying_dog.bark": "Iritante hond blaft",

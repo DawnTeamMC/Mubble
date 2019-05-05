@@ -882,8 +882,8 @@
 
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.note_block.jump": "Note Block used",
-	"subtitles.mubble.block.question_block.mubble.loot.power_up": "? Block drops power up",
-	"subtitles.mubble.block.question_block.mubble.loot.coin": "? Block drops coin",
+	"subtitles.mubble.block.question_block.loot.power_up": "? Block drops power up",
+	"subtitles.mubble.block.question_block.loot.coin": "? Block drops coin",
 	"subtitles.mubble.block.spring.trigger": "Spring triggered",
 	"subtitles.mubble.item.annoying_dog.disappear": "Annoying Dog disappears",
 	"subtitles.mubble.item.annoying_dog.bark": "Annoying Dog barks",
