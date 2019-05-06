@@ -894,16 +894,16 @@
 	"subtitles.mubble.costume.cappy.equip": "Cappy equiped",
 	"subtitles.mubble.costume.cappy.happy": "Cappy enjoingly mumbles",
 	"subtitles.mubble.costume.cappy.help": "Cappy asks for help",
-	"//subtitles.entity.chincho.ambient": "Chincho talks",
-	"//subtitles.entity.chincho.hurt": "Chincho hurts",
-	"//subtitles.entity.chincho.death": "Chincho dies",
+	"//subtitles.mubble.entity.chincho.ambient": "Chincho talks",
+	"//subtitles.mubble.entity.chincho.hurt": "Chincho hurts",
+	"//subtitles.mubble.entity.chincho.death": "Chincho dies",
 	"subtitles.mubble.entity.toad.ambient": "Toad mumbles",
 	"subtitles.mubble.entity.toad.hurt": "Toad hurts",
 	"subtitles.mubble.entity.toad.death": "Toad dies",
-	"//subtitles.entity.zombie_cowman.ambient": "Zombie Cowman grunts",
-	"//subtitles.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
-	"//subtitles.entity.zombie_cowman.angry": "Zombie Cowman angers",
-	"//subtitles.entity.zombie_cowman.death": "Zombie Cowman dies",
+	"//subtitles.mubble.entity.zombie_cowman.ambient": "Zombie Cowman grunts",
+	"//subtitles.mubble.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
+	"//subtitles.mubble.entity.zombie_cowman.angry": "Zombie Cowman angers",
+	"//subtitles.mubble.entity.zombie_cowman.death": "Zombie Cowman dies",
 
 
 

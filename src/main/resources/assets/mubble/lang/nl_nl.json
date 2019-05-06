@@ -894,16 +894,16 @@
 	"subtitles.mubble.costume.cappy.equip": "Cappy kwam op iemand's hoofd",
 	"subtitles.mubble.costume.cappy.happy": "Cappy mompelt blij",
 	"subtitles.mubble.costume.cappy.help": "Cappy vraagt om hulp",
-	"subtitles.entity.chincho.ambient": "Chincho praat",
-	"subtitles.entity.chincho.hurt": "Chincho heeft pijn",
-	"subtitles.entity.chincho.death": "Chincho sterft",
+	"subtitles.mubble.entity.chincho.ambient": "Chincho praat",
+	"subtitles.mubble.entity.chincho.hurt": "Chincho heeft pijn",
+	"subtitles.mubble.entity.chincho.death": "Chincho sterft",
 	"subtitles.mubble.entity.toad.ambient": "Toad mompelt",
 	"subtitles.mubble.entity.toad.hurt": "Toad heeft pijn",
 	"subtitles.mubble.entity.toad.death": "Toad sterft",
-	"subtitles.entity.zombie_cowman.ambient": "Zombiekoeienmens knort",
-	"subtitles.entity.zombie_cowman.hurt": "Zombiekoeienmens heeft pijn",
-	"subtitles.entity.zombie_cowman.angry": "Zombiekoeienmens wordt boos",
-	"subtitles.entity.zombie_cowman.death": "Zombiekoeienmens sterft",
+	"subtitles.mubble.entity.zombie_cowman.ambient": "Zombiekoeienmens knort",
+	"subtitles.mubble.entity.zombie_cowman.hurt": "Zombiekoeienmens heeft pijn",
+	"subtitles.mubble.entity.zombie_cowman.angry": "Zombiekoeienmens wordt boos",
+	"subtitles.mubble.entity.zombie_cowman.death": "Zombiekoeienmens sterft",
 
 
 
