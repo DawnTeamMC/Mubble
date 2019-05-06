@@ -1,4 +1,4 @@
-package hugman.mod.init;
+package hugman.mod.init.world;
 
 import static net.minecraftforge.common.BiomeDictionary.Type.COLD;
 import static net.minecraftforge.common.BiomeDictionary.Type.DENSE;
@@ -21,7 +21,7 @@ import net.minecraftforge.common.BiomeManager.BiomeEntry;
 import net.minecraftforge.common.BiomeManager.BiomeType;
 
 public class MubbleBiomes
-{	
+{
 	public static final List<Biome> BIOMES = new ArrayList<Biome>();
 
 	public static final Biome AUTUMN_OAK_FOREST = new AutumnOakForestBiome();

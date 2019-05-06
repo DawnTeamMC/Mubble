@@ -47,6 +47,8 @@ import hugman.mod.objects.block.BlockUltimatumPortal;
 import hugman.mod.objects.block.BlockUnstable;
 import hugman.mod.objects.block.BlockWall;
 import hugman.mod.objects.block.BlockWoodStrip;
+import hugman.mod.objects.block.state.properties.FluidLog;
+import hugman.mod.objects.block.state.properties.SlabVerticalType;
 import hugman.mod.objects.world.feature.tree.autumn_oak.AutumnOakTree;
 import hugman.mod.objects.world.feature.tree.cherry_oak.pink.PinkCherryOakTree;
 import hugman.mod.objects.world.feature.tree.cherry_oak.white.WhiteCherryOakTree;
@@ -63,6 +65,8 @@ import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.EnumProperty;
 
 public class MubbleBlocks
 {
@@ -752,5 +756,13 @@ public class MubbleBlocks
     public static void registerWithoutItem(Block block)
     {
         BLOCKS.add(block);
+    }
+    
+    public static class BlockStateProperties
+    {
+    	//public static final IntegerProperty COLOR = IntegerProperty.create("color", 0 , 16777215);
+    	public static final BooleanProperty PRINCESS = BooleanProperty.create("princess");
+    	public static final EnumProperty<FluidLog> FLUIDLOG = EnumProperty.create("fluidlog", FluidLog.class);
+    	public static final EnumProperty<SlabVerticalType> VERTICAL_SLAB_TYPE = EnumProperty.create("type", SlabVerticalType.class);
     }
 }

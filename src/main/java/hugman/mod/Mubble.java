@@ -5,16 +5,16 @@ import java.io.IOException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import hugman.mod.init.MubbleBiomes;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleColorMaps;
 import hugman.mod.init.MubbleCostumes;
-import hugman.mod.init.MubbleDimensions;
 import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubblePotionEffects;
 import hugman.mod.init.MubbleSounds;
-import hugman.mod.init.MubbleWorld;
+import hugman.mod.init.world.MubbleBiomes;
+import hugman.mod.init.world.MubbleDimensions;
+import hugman.mod.init.world.MubbleGenerators;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -57,11 +57,11 @@ public class Mubble
     
     private void setup(final FMLCommonSetupEvent event)
     {
-    	MubbleWorld.Generators.initOres();
+    	MubbleGenerators.initOres();
     	LOGGER.info("Registered ores to world generation");
-    	MubbleWorld.Generators.initTrees();
+    	MubbleGenerators.initTrees();
     	LOGGER.info("Registered trees to world generation");
-    	MubbleWorld.Generators.initSpawns();
+    	MubbleGenerators.initSpawns();
     	LOGGER.info("Registered entity spawns to world generation");
     }
     

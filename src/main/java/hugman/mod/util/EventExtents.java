@@ -2,7 +2,9 @@ package hugman.mod.util;
 
 import hugman.mod.init.MubblePotionEffects;
 import hugman.mod.init.MubbleTags;
+import hugman.mod.init.world.MubbleDimensions;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -31,10 +33,22 @@ public class EventExtents
 	{
 		EntityLivingBase entity = event.getEntityLiving();
 		World world = entity.getEntityWorld();
-		ItemStack armor = entity.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+		ItemStack itemHead = entity.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+		ItemStack itemMainHand = entity.getHeldItemMainhand();
+		ItemStack itemOffHand = entity.getHeldItemOffhand();
 		if(!world.isRemote)
 		{
-			if(MubbleTags.Items.WEIGHT_HEAVY.contains(armor.getItem())) entity.addPotionEffect(new PotionEffect(MubblePotionEffects.HEAVINESS, 10, 0));
+			if(MubbleTags.Items.WEIGHT_HEAVY.contains(itemHead.getItem())) entity.addPotionEffect(new PotionEffect(MubblePotionEffects.HEAVINESS, 5, 0));
+			if(entity.dimension == MubbleDimensions.PERMAFROST_TYPE)
+			{
+				entity.addPotionEffect(new PotionEffect(MubblePotionEffects.HEAVINESS, 5, 0));
+				entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5, 0));
+				entity.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 5, 0));
+				/*if(itemMainHand != new ItemStack(Blocks.TORCH) && itemOffHand != new ItemStack(Blocks.TORCH))
+				{
+
+				}*/
+			}
 		}
 	}
 	

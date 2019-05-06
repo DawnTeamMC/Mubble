@@ -6,8 +6,8 @@ import java.util.List;
 import hugman.mod.objects.costume.CostumeCappy;
 import hugman.mod.objects.costume.CostumeEffect;
 import hugman.mod.objects.costume.CostumeGooigiCap;
-import hugman.mod.objects.costume.CostumeMayroCap;
 import hugman.mod.objects.costume.CostumeGuardianMask;
+import hugman.mod.objects.costume.CostumeMayroCap;
 import hugman.mod.objects.costume.CostumePrincessPeachCrown;
 import hugman.mod.objects.costume.CostumeSimple;
 import hugman.mod.objects.costume.CostumeVanishCap;
@@ -28,9 +28,9 @@ public class MubbleCostumes
 	public static final Item CHRISTMAS_HAT = new CostumeSimple("christmas_hat", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
 
 	public static final Item CAPPY = new CostumeCappy();
-	public static final Item LUIGI_CAP = new CostumeEffect("luigi_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new PotionEffect(MobEffects.JUMP_BOOST, 1, 0), new PotionEffect(MobEffects.SPEED, 1, 0));
-	public static final Item WARIO_CAP = new CostumeEffect("wario_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new PotionEffect(MobEffects.SLOWNESS, 1, 0), new PotionEffect(MobEffects.STRENGTH, 1, 0));
-	public static final Item WALUIGI_CAP = new CostumeEffect("waluigi_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new PotionEffect(MobEffects.JUMP_BOOST, 2, 0));
+	public static final Item LUIGI_CAP = new CostumeEffect("luigi_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new PotionEffect(MobEffects.JUMP_BOOST, 5, 0), new PotionEffect(MobEffects.SPEED, 5, 0));
+	public static final Item WARIO_CAP = new CostumeEffect("wario_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new PotionEffect(MobEffects.SLOWNESS, 5, 0), new PotionEffect(MobEffects.STRENGTH, 5, 0));
+	public static final Item WALUIGI_CAP = new CostumeEffect("waluigi_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new PotionEffect(MobEffects.JUMP_BOOST, 5, 1));
 	public static final Item VANISH_CAP = new CostumeVanishCap();
 	public static final Item WING_CAP = new CostumeWingCap();
 	public static final Item GOOIGI_CAP = new CostumeGooigiCap();

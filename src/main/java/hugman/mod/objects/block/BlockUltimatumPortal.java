@@ -4,7 +4,6 @@ import java.util.Random;
 
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
-import hugman.mod.init.MubbleDimensions;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
@@ -21,9 +20,7 @@ import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.Teleporter;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 

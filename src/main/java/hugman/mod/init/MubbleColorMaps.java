@@ -5,8 +5,11 @@ import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.world.FoliageColors;
 import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 
+@OnlyIn(Dist.CLIENT)
 public class MubbleColorMaps extends BlockColors
 {
 	public static void registerBlockColors(final ColorHandlerEvent.Block event)

@@ -5,9 +5,8 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlockStateProperties;
 import hugman.mod.init.MubbleBlocks;
-import hugman.mod.objects.state.properties.SlabVerticalType;
+import hugman.mod.objects.block.state.properties.SlabVerticalType;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
@@ -34,7 +33,7 @@ import net.minecraft.world.IWorld;
 
 public class BlockSlabVertical extends Block implements IBucketPickupHandler, ILiquidContainer
 {
-	public static final EnumProperty<SlabVerticalType> TYPE = MubbleBlockStateProperties.VERTICAL_SLAB_TYPE;
+	public static final EnumProperty<SlabVerticalType> TYPE = MubbleBlocks.BlockStateProperties.VERTICAL_SLAB_TYPE;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	protected static final VoxelShape NORTH_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 8.0D);
 	protected static final VoxelShape SOUTH_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);

@@ -1,4 +1,4 @@
-package hugman.mod.objects.state.properties;
+package hugman.mod.objects.block.state.properties;
 
 import net.minecraft.util.IStringSerializable;
 

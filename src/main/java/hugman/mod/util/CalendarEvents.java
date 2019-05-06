@@ -4,45 +4,39 @@ import java.util.Calendar;
 
 public class CalendarEvents
 {
-	public boolean isNewYear;
-	public boolean isTodayTemp;
-	public boolean isAprilFools;
-	public boolean isJoaquinBirthday;
-	public boolean isJulesBirthday;
-	public boolean isMarkBirthday;
-	public boolean isMiaBirthday;
-	public boolean isMubbleBirthday;
-	public boolean isHugmanBirthday;
-	public boolean isChristmas;
+	public static Calendar cal = Calendar.getInstance();
+	public static int dayToday = cal.get(Calendar.DAY_OF_MONTH);
+	public static int monthToday = cal.get(Calendar.MONTH) + 1;
     
-    public CalendarEvents()
+	public static boolean isNewYear = checkDay(1, 1);
+	public static boolean isTodayTemp = checkDay(5, 5);
+	public static boolean isAprilFools = checkDay(1, 4);
+	public static boolean isJoaquinBirthday = checkDay(18, 6);
+	public static boolean isJulesBirthday = checkDay(9, 3);
+	public static boolean isMarkBirthday = checkDay(1, 4);
+	public static boolean isMiaBirthday = checkDay(12, 1);
+	public static boolean isMubbleBirthday = checkDay(14, 7);
+	public static boolean isHugmanBirthday = checkDay(3, 10);
+	public static boolean isAngelicaBirthday = checkDay(11, 8);
+	public static boolean isChristmas = checkBeetweenDays(23, 12, 25, 12);
+	
+	public static int getDayToday()
+	{
+		return dayToday;
+	}
+	
+	public static int getMonthToday()
+	{
+		return monthToday;
+	}
+	
+    private static boolean checkDay(int day, int month)
     {
-        Calendar cal = Calendar.getInstance();
-        
-        int month 	= cal.get(Calendar.MONTH);
-        int day 	= cal.get(Calendar.DAY_OF_MONTH);
-        
-        int january 	= Calendar.JANUARY;
-        int march		= Calendar.MARCH;
-        int april 		= Calendar.APRIL;
-        int june 		= Calendar.JUNE;
-        int july 		= Calendar.JULY;
-        int october 	= Calendar.OCTOBER;
-        int december 	= Calendar.DECEMBER;
-
-        if (month == january 	&& day == 1) this.isNewYear = true;
-        if (month == january 	&& day == 12) this.isMiaBirthday = true;
-        if (month == march		&& day == 9) this.isJulesBirthday = true;
-        if (month == march		&& day == 14) this.isTodayTemp = true;
-        if (month == april 		&& day == 1)
-        {
-        	this.isAprilFools = true;
-        	this.isMarkBirthday = true;
-        }
-        if (month == june 		&& day == 18) this.isJoaquinBirthday = true;
-        if (month == july 		&& day == 14) this.isMubbleBirthday = true;
-        if (month == october 	&& day == 3) this.isHugmanBirthday = true;
-        if (month == december 	&& day >= 24 && day <= 26) this.isChristmas = true;
-        if (month == december	&& day == 31) this.isNewYear = true;
+        return day == dayToday && month == monthToday;
+    }
+    
+    private static boolean checkBeetweenDays(int day1, int month1, int day2, int month2)
+    {
+        return day1 <= dayToday && day2 <= dayToday && month1 <= monthToday && month2 <= monthToday;
     }
 }

@@ -1,4 +1,4 @@
-package hugman.mod.init;
+package hugman.mod.init.world;
 
 import java.io.IOException;
 import java.util.ArrayList;

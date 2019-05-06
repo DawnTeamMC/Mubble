@@ -1,10 +1,9 @@
 package hugman.mod.objects.block;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlockStateProperties;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleTags;
-import hugman.mod.objects.state.properties.FluidLog;
+import hugman.mod.objects.block.state.properties.FluidLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSixWay;
 import net.minecraft.block.IBucketPickupHandler;
@@ -42,7 +41,7 @@ public class BlockFluidTank extends Block implements IBucketPickupHandler, ILiqu
 	public static final BooleanProperty EAST = BlockSixWay.EAST;
 	public static final BooleanProperty SOUTH = BlockSixWay.SOUTH;
 	public static final BooleanProperty WEST = BlockSixWay.WEST;
-	public static final EnumProperty<FluidLog> FLUIDLOG = MubbleBlockStateProperties.FLUIDLOG;
+	public static final EnumProperty<FluidLog> FLUIDLOG = MubbleBlocks.BlockStateProperties.FLUIDLOG;
 	private static final VoxelShape STONE0 = Block.makeCuboidShape(1.0D, 0.0D, 0.0D, 15.0D, 1.0D, 1.0D);
 	private static final VoxelShape STONE1 = Block.makeCuboidShape(1.0D, 0.0D, 15.0D, 15.0D, 1.0D, 16.0D);
 	private static final VoxelShape STONE2 = Block.makeCuboidShape(1.0D, 15.0D, 15.0D, 15.0D, 16.0D, 16.0D);

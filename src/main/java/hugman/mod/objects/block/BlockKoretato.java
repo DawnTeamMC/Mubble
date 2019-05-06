@@ -1,7 +1,6 @@
 package hugman.mod.objects.block;
 
 import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlockStateProperties;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleCostumes;
 import net.minecraft.block.Block;
@@ -25,7 +24,7 @@ import net.minecraft.world.World;
 
 public class BlockKoretato extends BlockDirectional
 {
-	public static final BooleanProperty PRINCESS = MubbleBlockStateProperties.PRINCESS;
+	public static final BooleanProperty PRINCESS = MubbleBlocks.BlockStateProperties.PRINCESS;
 	
     public BlockKoretato()
     {

@@ -1,7 +1,7 @@
 package hugman.mod.objects.world.dimension;
 
-import hugman.mod.init.MubbleBiomes;
 import hugman.mod.init.MubbleBlocks;
+import hugman.mod.init.world.MubbleBiomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
