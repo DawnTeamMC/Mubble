@@ -1,0 +1,24 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:terracotta_pressure_plate",
+		"mubble:white_terracotta_pressure_plate",
+		"mubble:light_gray_terracotta_pressure_plate",
+		"mubble:gray_terracotta_pressure_plate",
+		"mubble:black_terracotta_pressure_plate",
+		"mubble:brown_terracotta_pressure_plate",
+		"mubble:red_terracotta_pressure_plate",
+		"mubble:orange_terracotta_pressure_plate",
+		"mubble:yellow_terracotta_pressure_plate",
+		"mubble:yellow_terracotta_pressure_plate",
+		"mubble:lime_terracotta_pressure_plate",
+		"mubble:green_terracotta_pressure_plate",
+		"mubble:cyan_terracotta_pressure_plate",
+		"mubble:light_blue_terracotta_pressure_plate",
+		"mubble:blue_terracotta_pressure_plate",
+		"mubble:purple_terracotta_pressure_plate",
+		"mubble:magenta_terracotta_pressure_plate",
+		"mubble:pink_terracotta_pressure_plate"
+	]
+}

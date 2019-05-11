@@ -1,0 +1,24 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:terracotta_button",
+		"mubble:white_terracotta_button",
+		"mubble:light_gray_terracotta_button",
+		"mubble:gray_terracotta_button",
+		"mubble:black_terracotta_button",
+		"mubble:brown_terracotta_button",
+		"mubble:red_terracotta_button",
+		"mubble:orange_terracotta_button",
+		"mubble:yellow_terracotta_button",
+		"mubble:yellow_terracotta_button",
+		"mubble:lime_terracotta_button",
+		"mubble:green_terracotta_button",
+		"mubble:cyan_terracotta_button",
+		"mubble:light_blue_terracotta_button",
+		"mubble:blue_terracotta_button",
+		"mubble:purple_terracotta_button",
+		"mubble:magenta_terracotta_button",
+		"mubble:pink_terracotta_button"
+	]
+}

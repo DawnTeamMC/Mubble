@@ -1,0 +1,24 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:terracotta_vertical_slab",
+		"mubble:white_terracotta_vertical_slab",
+		"mubble:light_gray_terracotta_vertical_slab",
+		"mubble:gray_terracotta_vertical_slab",
+		"mubble:black_terracotta_vertical_slab",
+		"mubble:brown_terracotta_vertical_slab",
+		"mubble:red_terracotta_vertical_slab",
+		"mubble:orange_terracotta_vertical_slab",
+		"mubble:yellow_terracotta_vertical_slab",
+		"mubble:yellow_terracotta_vertical_slab",
+		"mubble:lime_terracotta_vertical_slab",
+		"mubble:green_terracotta_vertical_slab",
+		"mubble:cyan_terracotta_vertical_slab",
+		"mubble:light_blue_terracotta_vertical_slab",
+		"mubble:blue_terracotta_vertical_slab",
+		"mubble:purple_terracotta_vertical_slab",
+		"mubble:magenta_terracotta_vertical_slab",
+		"mubble:pink_terracotta_vertical_slab"
+	]
+}

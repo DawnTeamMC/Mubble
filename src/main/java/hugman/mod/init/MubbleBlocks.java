@@ -29,6 +29,7 @@ import hugman.mod.objects.block.BlockLeaves;
 import hugman.mod.objects.block.BlockLeavesCarpet;
 import hugman.mod.objects.block.BlockMushroom;
 import hugman.mod.objects.block.BlockNote;
+import hugman.mod.objects.block.BlockPermafrostPortal;
 import hugman.mod.objects.block.BlockPressurePlate;
 import hugman.mod.objects.block.BlockPuyo;
 import hugman.mod.objects.block.BlockQuestion;
@@ -90,6 +91,8 @@ public class MubbleBlocks
     public static final Block PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical("prismarine", Blocks.PRISMARINE);
     public static final Block PRISMARINE_BRICK_VERTICAL_SLAB = new BlockSlabVertical("prismarine_brick", Blocks.PRISMARINE_BRICKS);
     public static final Block DARK_PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical("dark_prismarine", Blocks.DARK_PRISMARINE);
+    
+    public static final Block DARK_PRISMARINE_WALL = new BlockWall(Blocks.DARK_PRISMARINE);
 
     public static final Block OAK_LEAVES_CARPET = new BlockLeavesCarpet(Blocks.OAK_LEAVES);
     public static final Block SPRUCE_LEAVES_CARPET = new BlockLeavesCarpet(Blocks.SPRUCE_LEAVES);
@@ -126,6 +129,7 @@ public class MubbleBlocks
     public static final Block BLUE_PERMAFROST_BRICKS = new BlockSimple("blue_permafrost_bricks", Properties.from(MubbleBlocks.PERMAFROST_BRICKS), ItemGroup.BUILDING_BLOCKS);
     public static final Block PERMAFROST_BISMUTH_ORE = new BlockSimple("permafrost_bismuth_ore", Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(0.3F), ItemGroup.BUILDING_BLOCKS);
     public static final Block FROZEN_OBSIDIAN = new BlockSimple("frozen_obsidian", Properties.create(Material.ROCK, MaterialColor.BLACK).hardnessAndResistance(75.0F, 1800.0F), ItemGroup.BUILDING_BLOCKS);
+    public static final Block PERMAFROST_PORTAL = new BlockPermafrostPortal();
     
     public static final Block VANADIUM_ORE = new BlockSimple("vanadium_ore", Properties.from(Blocks.DIAMOND_ORE), ItemGroup.BUILDING_BLOCKS);
     public static final Block VANADIUM_BLOCK = new BlockSimple("vanadium_block", Properties.from(Blocks.DIAMOND_BLOCK), ItemGroup.BUILDING_BLOCKS);
@@ -257,7 +261,8 @@ public class MubbleBlocks
     public static final Block PURPLE_BRICK_WALL = new BlockWall("purple_brick", MubbleBlocks.PURPLE_BRICKS);
     public static final Block MAGENTA_BRICK_WALL = new BlockWall("magenta_brick", MubbleBlocks.MAGENTA_BRICKS);
     public static final Block PINK_BRICK_WALL = new BlockWall("pink_brick", MubbleBlocks.PINK_BRICKS);
-    
+
+    public static final Block TERRACOTTA_STAIRS = new BlockStairs(Blocks.TERRACOTTA);
     public static final Block WHITE_TERRACOTTA_STAIRS = new BlockStairs(Blocks.WHITE_TERRACOTTA);
     public static final Block LIGHT_GRAY_TERRACOTTA_STAIRS = new BlockStairs(Blocks.LIGHT_GRAY_TERRACOTTA);
     public static final Block GRAY_TERRACOTTA_STAIRS = new BlockStairs(Blocks.GRAY_TERRACOTTA);
@@ -274,7 +279,8 @@ public class MubbleBlocks
     public static final Block PURPLE_TERRACOTTA_STAIRS = new BlockStairs(Blocks.PURPLE_TERRACOTTA);
     public static final Block MAGENTA_TERRACOTTA_STAIRS = new BlockStairs(Blocks.MAGENTA_TERRACOTTA);
     public static final Block PINK_TERRACOTTA_STAIRS = new BlockStairs(Blocks.PINK_TERRACOTTA);
-    
+
+    public static final Block TERRACOTTA_SLAB = new BlockSlab(Blocks.TERRACOTTA);
     public static final Block WHITE_TERRACOTTA_SLAB = new BlockSlab(Blocks.WHITE_TERRACOTTA);
     public static final Block LIGHT_GRAY_TERRACOTTA_SLAB = new BlockSlab(Blocks.LIGHT_GRAY_TERRACOTTA);
     public static final Block GRAY_TERRACOTTA_SLAB = new BlockSlab(Blocks.GRAY_TERRACOTTA);
@@ -291,7 +297,8 @@ public class MubbleBlocks
     public static final Block PURPLE_TERRACOTTA_SLAB = new BlockSlab(Blocks.PURPLE_TERRACOTTA);
     public static final Block MAGENTA_TERRACOTTA_SLAB = new BlockSlab(Blocks.MAGENTA_TERRACOTTA);
     public static final Block PINK_TERRACOTTA_SLAB = new BlockSlab(Blocks.PINK_TERRACOTTA);
-    
+
+    public static final Block TERRACOTTA_VERTICAL_SLAB = new BlockSlabVertical(Blocks.TERRACOTTA);
     public static final Block WHITE_TERRACOTTA_VERTICAL_SLAB = new BlockSlabVertical(Blocks.WHITE_TERRACOTTA);
     public static final Block LIGHT_GRAY_TERRACOTTA_VERTICAL_SLAB = new BlockSlabVertical(Blocks.LIGHT_GRAY_TERRACOTTA);
     public static final Block GRAY_TERRACOTTA_VERTICAL_SLAB = new BlockSlabVertical(Blocks.GRAY_TERRACOTTA);
@@ -308,7 +315,8 @@ public class MubbleBlocks
     public static final Block PURPLE_TERRACOTTA_VERTICAL_SLAB = new BlockSlabVertical(Blocks.PURPLE_TERRACOTTA);
     public static final Block MAGENTA_TERRACOTTA_VERTICAL_SLAB = new BlockSlabVertical(Blocks.MAGENTA_TERRACOTTA);
     public static final Block PINK_TERRACOTTA_VERTICAL_SLAB = new BlockSlabVertical(Blocks.PINK_TERRACOTTA);
-    
+
+    public static final Block TERRACOTTA_WALL = new BlockWall(Blocks.TERRACOTTA);
     public static final Block WHITE_TERRACOTTA_WALL = new BlockWall(Blocks.WHITE_TERRACOTTA);
     public static final Block LIGHT_GRAY_TERRACOTTA_WALL = new BlockWall(Blocks.LIGHT_GRAY_TERRACOTTA);
     public static final Block GRAY_TERRACOTTA_WALL = new BlockWall(Blocks.GRAY_TERRACOTTA);
@@ -325,7 +333,8 @@ public class MubbleBlocks
     public static final Block PURPLE_TERRACOTTA_WALL = new BlockWall(Blocks.PURPLE_TERRACOTTA);
     public static final Block MAGENTA_TERRACOTTA_WALL = new BlockWall(Blocks.MAGENTA_TERRACOTTA);
     public static final Block PINK_TERRACOTTA_WALL = new BlockWall(Blocks.PINK_TERRACOTTA);
-    
+
+    public static final Block TERRACOTTA_PRESSURE_PLATE = new BlockPressurePlate(Blocks.TERRACOTTA, Sensitivity.MOBS);
     public static final Block WHITE_TERRACOTTA_PRESSURE_PLATE = new BlockPressurePlate(Blocks.WHITE_TERRACOTTA, Sensitivity.MOBS);
     public static final Block LIGHT_GRAY_TERRACOTTA_PRESSURE_PLATE = new BlockPressurePlate(Blocks.LIGHT_GRAY_TERRACOTTA, Sensitivity.MOBS);
     public static final Block GRAY_TERRACOTTA_PRESSURE_PLATE = new BlockPressurePlate(Blocks.GRAY_TERRACOTTA, Sensitivity.MOBS);
@@ -342,7 +351,8 @@ public class MubbleBlocks
     public static final Block PURPLE_TERRACOTTA_PRESSURE_PLATE = new BlockPressurePlate(Blocks.PURPLE_TERRACOTTA, Sensitivity.MOBS);
     public static final Block MAGENTA_TERRACOTTA_PRESSURE_PLATE = new BlockPressurePlate(Blocks.MAGENTA_TERRACOTTA, Sensitivity.MOBS);
     public static final Block PINK_TERRACOTTA_PRESSURE_PLATE = new BlockPressurePlate(Blocks.PINK_TERRACOTTA, Sensitivity.MOBS);
-    
+
+    public static final Block TERRACOTTA_BUTTON = new BlockButtonStone(Blocks.TERRACOTTA);
     public static final Block WHITE_TERRACOTTA_BUTTON = new BlockButtonStone(Blocks.WHITE_TERRACOTTA);
     public static final Block LIGHT_GRAY_TERRACOTTA_BUTTON = new BlockButtonStone(Blocks.LIGHT_GRAY_TERRACOTTA);
     public static final Block GRAY_TERRACOTTA_BUTTON = new BlockButtonStone(Blocks.GRAY_TERRACOTTA);
@@ -376,7 +386,7 @@ public class MubbleBlocks
     public static final Block PURPLE_DARK_PRISMARINE = new BlockSimple("purple_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     public static final Block MAGENTA_DARK_PRISMARINE = new BlockSimple("magenta_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
     public static final Block PINK_DARK_PRISMARINE = new BlockSimple("pink_dark_prismarine", Properties.from(Blocks.DARK_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
-    
+
     public static final Block WHITE_DARK_PRISMARINE_STAIRS = new BlockStairs(MubbleBlocks.WHITE_DARK_PRISMARINE);
     public static final Block LIGHT_GRAY_DARK_PRISMARINE_STAIRS = new BlockStairs(MubbleBlocks.LIGHT_GRAY_DARK_PRISMARINE);
     public static final Block GRAY_DARK_PRISMARINE_STAIRS = new BlockStairs(MubbleBlocks.GRAY_DARK_PRISMARINE);
@@ -393,7 +403,7 @@ public class MubbleBlocks
     public static final Block PURPLE_DARK_PRISMARINE_STAIRS = new BlockStairs(MubbleBlocks.PURPLE_DARK_PRISMARINE);
     public static final Block MAGENTA_DARK_PRISMARINE_STAIRS = new BlockStairs(MubbleBlocks.MAGENTA_DARK_PRISMARINE);
     public static final Block PINK_DARK_PRISMARINE_STAIRS = new BlockStairs(MubbleBlocks.PINK_DARK_PRISMARINE);
-    
+
     public static final Block WHITE_DARK_PRISMARINE_SLAB = new BlockSlab(MubbleBlocks.WHITE_DARK_PRISMARINE);
     public static final Block LIGHT_GRAY_DARK_PRISMARINE_SLAB = new BlockSlab(MubbleBlocks.LIGHT_GRAY_DARK_PRISMARINE);
     public static final Block GRAY_DARK_PRISMARINE_SLAB = new BlockSlab(MubbleBlocks.GRAY_DARK_PRISMARINE);
@@ -410,7 +420,7 @@ public class MubbleBlocks
     public static final Block PURPLE_DARK_PRISMARINE_SLAB = new BlockSlab(MubbleBlocks.PURPLE_DARK_PRISMARINE);
     public static final Block MAGENTA_DARK_PRISMARINE_SLAB = new BlockSlab(MubbleBlocks.MAGENTA_DARK_PRISMARINE);
     public static final Block PINK_DARK_PRISMARINE_SLAB = new BlockSlab(MubbleBlocks.PINK_DARK_PRISMARINE);
-    
+
     public static final Block WHITE_DARK_PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.WHITE_DARK_PRISMARINE);
     public static final Block LIGHT_GRAY_DARK_PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.LIGHT_GRAY_DARK_PRISMARINE);
     public static final Block GRAY_DARK_PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.GRAY_DARK_PRISMARINE);
@@ -427,7 +437,7 @@ public class MubbleBlocks
     public static final Block PURPLE_DARK_PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.PURPLE_DARK_PRISMARINE);
     public static final Block MAGENTA_DARK_PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.MAGENTA_DARK_PRISMARINE);
     public static final Block PINK_DARK_PRISMARINE_VERTICAL_SLAB = new BlockSlabVertical(MubbleBlocks.PINK_DARK_PRISMARINE);
-    
+
     public static final Block WHITE_DARK_PRISMARINE_WALL = new BlockWall(MubbleBlocks.WHITE_DARK_PRISMARINE);
     public static final Block LIGHT_GRAY_DARK_PRISMARINE_WALL = new BlockWall(MubbleBlocks.LIGHT_GRAY_DARK_PRISMARINE);
     public static final Block GRAY_DARK_PRISMARINE_WALL = new BlockWall(MubbleBlocks.GRAY_DARK_PRISMARINE);

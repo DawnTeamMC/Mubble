@@ -2,8 +2,6 @@
 	"replace": false,
 	"values":
 	[
-		"mubble:cherry_oak_slab",
-		"mubble:palm_slab",
-		"mubble:scarlet_slab"
+		"#mubble:wooden_slabs"
 	]
 }

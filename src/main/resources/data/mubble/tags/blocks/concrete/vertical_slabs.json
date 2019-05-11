@@ -1,0 +1,23 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:white_concrete_vertical_slab",
+		"mubble:light_gray_concrete_vertical_slab",
+		"mubble:gray_concrete_vertical_slab",
+		"mubble:black_concrete_vertical_slab",
+		"mubble:brown_concrete_vertical_slab",
+		"mubble:red_concrete_vertical_slab",
+		"mubble:orange_concrete_vertical_slab",
+		"mubble:yellow_concrete_vertical_slab",
+		"mubble:yellow_concrete_vertical_slab",
+		"mubble:lime_concrete_vertical_slab",
+		"mubble:green_concrete_vertical_slab",
+		"mubble:cyan_concrete_vertical_slab",
+		"mubble:light_blue_concrete_vertical_slab",
+		"mubble:blue_concrete_vertical_slab",
+		"mubble:purple_concrete_vertical_slab",
+		"mubble:magenta_concrete_vertical_slab",
+		"mubble:pink_concrete_vertical_slab"
+	]
+}

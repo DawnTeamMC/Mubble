@@ -2,14 +2,6 @@
 	"replace": false,
 	"values":
 	[
-		"mubble:blunite_slab",
-		"mubble:polished_blunite_slab",
-		"mubble:carbonite_slab",
-		"mubble:polished_carbonite_slab",
-		"#mubble:brick/slabs",
-		"#mubble:dark_prismarine/slabs",
-		"mubble:medusa_brick_slab",
-		"mubble:mirror_temple_brick_slab",
-		"mubble:old_site_brick_slab"
+		"#mubble:slabs"
 	]
 }

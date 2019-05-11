@@ -2,6 +2,7 @@
 	"replace": false,
 	"values":
 	[
+		"minecraft:dark_prismarine_stairs",
 		"mubble:white_dark_prismarine_stairs",
 		"mubble:light_gray_dark_prismarine_stairs",
 		"mubble:gray_dark_prismarine_stairs",

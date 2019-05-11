@@ -2,8 +2,6 @@
 	"replace": false,
 	"values":
 	[
-		"mubble:cherry_oak_pressure_plate",
-		"mubble:palm_pressure_plate",
-		"mubble:scarlet_pressure_plate"
+		"#mubble:wooden_pressure_plates"
 	]
 }

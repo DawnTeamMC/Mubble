@@ -24,6 +24,8 @@
 	"block.mubble.prismarine_brick_vertical_slab": "Prismarienblokstenen verticale plaat",
 	"block.mubble.dark_prismarine_vertical_slab": "Donkereprismarien verticale plaat",
 
+	"//block.mubble.dark_prismarine_wall": "Dark Prismarine Wall",
+
 	"block.mubble.oak_leaves_carpet": "Eikenbladeren tapijt",
 	"block.mubble.spruce_leaves_carpet": "Sparrennaalden tapijt",
 	"block.mubble.birch_leaves_carpet": "Berkenbladeren tapijt",
@@ -189,6 +191,7 @@
 	"block.mubble.polished_carbonite_slab": "Gepolijst carbonite plaat",
 	"block.mubble.polished_carbonite_vertical_slab": "Gepolijst carbonite verticale plaat",
 
+	"//block.mubble.terracotta_stairs": "Terracotta Stairs",
 	"block.mubble.blue_terracotta_stairs": "Blauwe terracotta trap",
 	"block.mubble.light_blue_terracotta_stairs": "Lichtblauwe terracotta trap",
 	"block.mubble.cyan_terracotta_stairs": "Turquoise terracotta trap",
@@ -206,6 +209,7 @@
 	"block.mubble.gray_terracotta_stairs": "Grijze terracotta trap",
 	"block.mubble.black_terracotta_stairs": "Zwarte terracotta trap",
 
+	"//block.mubble.terracotta_slab": "Terracotta Slab",
 	"block.mubble.blue_terracotta_slab": "Blauwe terracotta plaat",
 	"block.mubble.light_blue_terracotta_slab": "Lichtblauwe terracotta plaat",
 	"block.mubble.cyan_terracotta_slab": "Turquoise terracotta plaat",
@@ -223,6 +227,7 @@
 	"block.mubble.gray_terracotta_slab": "Grijze terracotta plaat",
 	"block.mubble.black_terracotta_slab": "Zwarte terracotta plaat",
 
+	"//block.mubble.terracotta_vertical_slab": "Terracotta Vertical Slab",
 	"block.mubble.blue_terracotta_vertical_slab": "Blauwe terracotta verticale plaat",
 	"block.mubble.light_blue_terracotta_vertical_slab": "Lichtblauwe terracotta verticale plaat",
 	"block.mubble.cyan_terracotta_vertical_slab": "Turquoise terracotta verticale plaat",
@@ -240,6 +245,7 @@
 	"block.mubble.gray_terracotta_vertical_slab": "Grijze terracotta verticale plaat",
 	"block.mubble.black_terracotta_vertical_slab": "Zwarte terracotta verticale plaat",
 
+	"//block.mubble.terracotta_wall": "Terracotta Wall",
 	"block.mubble.blue_terracotta_wall": "Blauwe terracotta muur",
 	"block.mubble.light_blue_terracotta_wall": "Lichtblauwe terracotta muur",
 	"block.mubble.cyan_terracotta_wall": "Turquoise terracotta muur",
@@ -257,6 +263,7 @@
 	"block.mubble.gray_terracotta_wall": "Grijze terracotta muur",
 	"block.mubble.black_terracotta_wall": "Zwarte terracotta muur",
 
+	"//block.mubble.terracotta_pressure_plate": "Terracotta Pressure Plate",
 	"block.mubble.blue_terracotta_pressure_plate": "Blauwe terracotta drukplaat",
 	"block.mubble.light_blue_terracotta_pressure_plate": "Lichtblauwe terracotta drukplaat",
 	"block.mubble.cyan_terracotta_pressure_plate": "Turquoise terracotta drukplaat",
@@ -274,6 +281,7 @@
 	"block.mubble.gray_terracotta_pressure_plate": "Grijze terracotta drukplaat",
 	"block.mubble.black_terracotta_pressure_plate": "Zwarte terracotta drukplaat",
 
+	"//block.mubble.terracotta_button": "Terracotta Button",
 	"block.mubble.blue_terracotta_button": "Blauwe terracotta knop",
 	"block.mubble.light_blue_terracotta_button": "Lichtblauwe terracotta knop",
 	"block.mubble.cyan_terracotta_button": "Turquoise terracotta knop",
@@ -859,9 +867,12 @@
 
 	"comment": "ENTITIES",
 	"entity.mubble.chincho": "Chincho",
-	"entity.mubble.flying_block": "Vliegend blok",
 	"entity.mubble.toad": "Toad",
+	"//entity.mubble.goomba": "Goomba",
 	"entity.mubble.zombie_cowman": "Zombiekoeienmens",
+
+	"//entity.mubble.custom_tnt": "Custom TNT",
+	"entity.mubble.flying_block": "Vliegend blok",
 
 
 

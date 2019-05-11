@@ -1,0 +1,23 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:white_concrete_slab",
+		"mubble:light_gray_concrete_slab",
+		"mubble:gray_concrete_slab",
+		"mubble:black_concrete_slab",
+		"mubble:brown_concrete_slab",
+		"mubble:red_concrete_slab",
+		"mubble:orange_concrete_slab",
+		"mubble:yellow_concrete_slab",
+		"mubble:yellow_concrete_slab",
+		"mubble:lime_concrete_slab",
+		"mubble:green_concrete_slab",
+		"mubble:cyan_concrete_slab",
+		"mubble:light_blue_concrete_slab",
+		"mubble:blue_concrete_slab",
+		"mubble:purple_concrete_slab",
+		"mubble:magenta_concrete_slab",
+		"mubble:pink_concrete_slab"
+	]
+}

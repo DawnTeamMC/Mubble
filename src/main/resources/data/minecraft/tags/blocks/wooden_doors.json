@@ -2,8 +2,6 @@
 	"replace": false,
 	"values":
 	[
-		"mubble:cherry_oak_door",
-		"mubble:palm_door",
-		"mubble:scarlet_door"
+		"#mubble:wooden_doors"
 	]
 }

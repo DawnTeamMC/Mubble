@@ -38,19 +38,20 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 
 public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnData
 {
-	public IBlockState flyTile = MubbleBlocks.WHITE_BALLOON.getDefaultState();
-	public int flyTime;
-	public boolean shouldDropItem = true;
+	private IBlockState flyTile = MubbleBlocks.WHITE_BALLOON.getDefaultState();
+	private int flyTime;
+	private boolean shouldDropItem = true;
 	private boolean dontSetBlock;
 	private boolean hurtEntities;
 	private int flyHurtMax = 40;
 	private float flyHurtAmount = 2.0F;
-	public NBTTagCompound tileEntityData;
+	private NBTTagCompound tileEntityData;
 	protected static final DataParameter<BlockPos> ORIGIN = EntityDataManager.createKey(EntityFlyingBlock.class, DataSerializers.BLOCK_POS);
 
 	public EntityFlyingBlock(World worldIn)
 	{
 		super(MubbleEntities.FLYING_BLOCK, worldIn);
+		this.setSize(0.98F, 0.98F);
 	}
 
 	public EntityFlyingBlock(World worldIn, double x, double y, double z, IBlockState flyingBlockState)
@@ -259,13 +260,16 @@ public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnD
 		{
 			this.hurtEntities = true;
 		}
-		if (compound.contains("DropItem", 99)) {
+		if (compound.contains("DropItem", 99))
+		{
 			this.shouldDropItem = compound.getBoolean("DropItem");
 		}
-		if (compound.contains("TileEntityData", 10)) {
+		if (compound.contains("TileEntityData", 10))
+		{
 			this.tileEntityData = compound.getCompound("TileEntityData");
 		}
-		if (this.flyTile == Blocks.AIR) {
+		if (this.flyTile == Blocks.AIR)
+		{
 			this.flyTile = Blocks.SAND.getDefaultState();
 		}
 

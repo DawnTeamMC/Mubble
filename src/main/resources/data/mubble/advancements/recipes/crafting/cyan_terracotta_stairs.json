@@ -17,7 +17,7 @@
 				"items":
 				[
 					{
-						"item": "minecraft:terracotta"
+						"tag": "mubble:terracotta/blocks"
 					}
 				]
 			}

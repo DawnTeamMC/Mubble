@@ -36,26 +36,26 @@ public class EventExtents
 		ItemStack itemHead = entity.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
 		ItemStack itemMainHand = entity.getHeldItemMainhand();
 		ItemStack itemOffHand = entity.getHeldItemOffhand();
+		if(world.getDimension().getType() == MubbleDimensions.PERMAFROST_TYPE)
+		{
+			entity.addPotionEffect(new PotionEffect(MubblePotionEffects.HEAVINESS, 5, 0));
+			entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5, 0));
+			entity.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 5, 0));
+			/*if(itemMainHand != new ItemStack(Blocks.TORCH) && itemOffHand != new ItemStack(Blocks.TORCH))
+			{
+
+			}*/
+		}
 		if(!world.isRemote)
 		{
 			if(MubbleTags.Items.WEIGHT_HEAVY.contains(itemHead.getItem())) entity.addPotionEffect(new PotionEffect(MubblePotionEffects.HEAVINESS, 5, 0));
-			if(entity.dimension == MubbleDimensions.PERMAFROST_TYPE)
-			{
-				entity.addPotionEffect(new PotionEffect(MubblePotionEffects.HEAVINESS, 5, 0));
-				entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 5, 0));
-				entity.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 5, 0));
-				/*if(itemMainHand != new ItemStack(Blocks.TORCH) && itemOffHand != new ItemStack(Blocks.TORCH))
-				{
-
-				}*/
-			}
 		}
 	}
 	
 	@SubscribeEvent
 	public static void secretMessages(ClientChatEvent event)
 	{
-		if(event.getMessage() == "shrug")
+		if(event.getOriginalMessage() == "shrug")
 		{
 			event.setMessage("¯\\_(ツ)_/¯");
 		}

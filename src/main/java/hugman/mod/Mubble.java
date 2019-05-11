@@ -122,7 +122,7 @@ public class Mubble
         public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> event)
         {
         	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
-        	MubbleEntities.registerEntity(registry);
+        	MubbleEntities.registerEntities(registry);
         	LOGGER.info("Registered entities");
         }
         

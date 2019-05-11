@@ -1,0 +1,9 @@
+{
+	"parent": "block/stairs",
+	"textures":
+	{
+		"bottom": "minecraft:block/terracotta",
+		"top": "minecraft:block/terracotta",
+		"side": "minecraft:block/terracotta"
+	}
+}

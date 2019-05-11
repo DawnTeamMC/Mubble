@@ -26,8 +26,8 @@ public class MubbleTags
         public static final Tag<Item> COINS = tag("coins");
         public static final Tag<Item> CROWNS = tag("crowns");
         public static final Tag<Item> FLUID_BUCKETS = tag("fluid_buckets");
-        public static final Tag<Item> WEIGHT_HEAVY = tag("sorted/weight/heavy");
-        public static final Tag<Item> WEIGHT_LIGHT = tag("sorted/weight/light");
+        public static final Tag<Item> WEIGHT_HEAVY = tag("weight/heavy");
+        public static final Tag<Item> WEIGHT_LIGHT = tag("weight/light");
         public static final Tag<Item> SCARY_TO_TOAD = tag("scary_to/toad");
         public static final Tag<Item> TEMPTING_TO_TOAD = tag("tempting_to/toad");
 

@@ -38,7 +38,7 @@ import net.minecraft.world.World;
 
 public class EntityToad extends EntityAnimal
 {
-	private static final DataParameter<Integer> VARIANT = EntityDataManager.<Integer>createKey(EntityToad.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityToad.class, DataSerializers.VARINT);
 	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromTag(MubbleTags.Items.TEMPTING_TO_TOAD);
 	
     public EntityToad(World worldIn) 

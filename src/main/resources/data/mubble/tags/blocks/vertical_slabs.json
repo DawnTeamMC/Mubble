@@ -1,0 +1,18 @@
+{
+	"replace": false,
+	"values":
+	[
+		"#mubble:wooden_vertical_slabs",
+		"#mubble:brick/vertical_slabs",
+		"#mubble:concrete/vertical_slabs",
+		"#mubble:dark_prismarine/vertical_slabs",
+		"#mubble:terracotta/vertical_slabs",
+		"mubble:blunite_vertical_slab",
+		"mubble:polished_blunite_vertical_slab",
+		"mubble:carbonite_vertical_slab",
+		"mubble:polished_carbonite_vertical_slab",
+		"mubble:medusa_brick_vertical_slab",
+		"mubble:mirror_temple_brick_vertical_slab",
+		"mubble:old_site_brick_vertical_slab"
+	]
+}

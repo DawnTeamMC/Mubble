@@ -24,6 +24,8 @@
 	"block.mubble.prismarine_brick_vertical_slab": "Senkrechte Prismarinziegelstufe",
 	"block.mubble.dark_prismarine_vertical_slab": "Senkrechte Dunkelprismarinstufe",
 
+	"//block.mubble.dark_prismarine_wall": "Dark Prismarine Wall",
+
 	"block.mubble.oak_leaves_carpet": "Eichenlaubteppich",
 	"block.mubble.spruce_leaves_carpet": "Fichtennadelnteppich",
 	"block.mubble.birch_leaves_carpet": "Birkenlaubteppich",
@@ -189,6 +191,7 @@
 	"block.mubble.polished_carbonite_slab": "Polierte Karbonitstufe",
 	"block.mubble.polished_carbonite_vertical_slab": "Polierte Senkrechte Karbonitstufe",
 
+	"//block.mubble.terracotta_stairs": "Terracotta Stairs",
 	"block.mubble.blue_terracotta_stairs": "Blaue Keramiktreppe",
 	"block.mubble.light_blue_terracotta_stairs": "Hellblaue Keramiktreppe",
 	"block.mubble.cyan_terracotta_stairs": "Türkise Keramiktreppe",
@@ -206,6 +209,7 @@
 	"block.mubble.gray_terracotta_stairs": "Graue Keramiktreppe",
 	"block.mubble.black_terracotta_stairs": "Schwarze Keramiktreppe",
 
+	"//block.mubble.terracotta_slab": "Terracotta Slab",
 	"block.mubble.blue_terracotta_slab": "Blaue Keramikstufe",
 	"block.mubble.light_blue_terracotta_slab": "Hellblaue Keramikstufe",
 	"block.mubble.cyan_terracotta_slab": "Türkise Keramikstufe",
@@ -223,6 +227,7 @@
 	"block.mubble.gray_terracotta_slab": "Graue Keramikstufe",
 	"block.mubble.black_terracotta_slab": "Schwarze Keramikstufe",
 
+	"//block.mubble.terracotta_vertical_slab": "Terracotta Vertical Slab",
 	"block.mubble.blue_terracotta_vertical_slab": "Blaue Senkrechte Keramikstufe",
 	"block.mubble.light_blue_terracotta_vertical_slab": "Hellblaue Senkrechte Keramikstufe",
 	"block.mubble.cyan_terracotta_vertical_slab": "Türkise Senkrechte Keramikstufe",
@@ -240,6 +245,7 @@
 	"block.mubble.gray_terracotta_vertical_slab": "Graue Senkrechte Keramikstufe",
 	"block.mubble.black_terracotta_vertical_slab": "Schwarze Senkrechte Keramikstufe",
 
+	"//block.mubble.terracotta_wall": "Terracotta Wall",
 	"block.mubble.blue_terracotta_wall": "Blaue Keramikmauer",
 	"block.mubble.light_blue_terracotta_wall": "Hellblaue Keramikmauer",
 	"block.mubble.cyan_terracotta_wall": "Türkise Keramikmauer",
@@ -257,6 +263,7 @@
 	"block.mubble.gray_terracotta_wall": "Graue Keramikmauer",
 	"block.mubble.black_terracotta_wall": "Schwarze Keramikmauer",
 
+	"//block.mubble.terracotta_pressure_plate": "Terracotta Pressure Plate",
 	"block.mubble.blue_terracotta_pressure_plate": "Blaue Keramikdruckplatte",
 	"block.mubble.light_blue_terracotta_pressure_plate": "Hellblaue Keramikdruckplatte",
 	"block.mubble.cyan_terracotta_pressure_plate": "Türkise Keramikdruckplatte",
@@ -274,6 +281,7 @@
 	"block.mubble.gray_terracotta_pressure_plate": "Graue Keramikdruckplatte",
 	"block.mubble.black_terracotta_pressure_plate": "Schwarze Keramikdruckplatte",
 
+	"//block.mubble.terracotta_button": "Terracotta Button",
 	"block.mubble.blue_terracotta_button": "Blauer Keramikknopf",
 	"block.mubble.light_blue_terracotta_button": "Hellblauer Keramikknopf",
 	"block.mubble.cyan_terracotta_button": "Türkiser Keramikknopf",
@@ -859,9 +867,12 @@
 
 	"comment": "ENTITIES",
 	"entity.mubble.chincho": "Chincho",
-	"entity.mubble.flying_block": "Fliegender Block",
 	"entity.mubble.toad": "Toad",
+	"//entity.mubble.goomba": "Goomba",
 	"entity.mubble.zombie_cowman": "Kuhzombie",
+
+	"//entity.mubble.custom_tnt": "Custom TNT",
+	"entity.mubble.flying_block": "Fliegender Block",
 
 
 

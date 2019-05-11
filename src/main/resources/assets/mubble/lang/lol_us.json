@@ -24,6 +24,8 @@
 	"//block.mubble.prismarine_brick_vertical_slab": "Prismarine Brick Vertical Slab",
 	"//block.mubble.dark_prismarine_vertical_slab": "Dark Prismarine Vertical Slab",
 
+	"//block.mubble.dark_prismarine_wall": "Dark Prismarine Wall",
+
 	"//block.mubble.oak_leaves_carpet": "Oak Leaves Carpet",
 	"//block.mubble.spruce_leaves_carpet": "Spruce Leaves Carpet",
 	"//block.mubble.birch_leaves_carpet": "Birch Leaves Carpet",
@@ -189,6 +191,7 @@
 	"//block.mubble.polished_carbonite_slab": "Polished Carbonite Slab",
 	"//block.mubble.polished_carbonite_vertical_slab": "Polished Carbonite Vertical Slab",
 
+	"//block.mubble.terracotta_stairs": "Terracotta Stairs",
 	"//block.mubble.blue_terracotta_stairs": "Blue Terracotta Stairs",
 	"//block.mubble.light_blue_terracotta_stairs": "Light Blue Terracotta Stairs",
 	"//block.mubble.cyan_terracotta_stairs": "Cyan Terracotta Stairs",
@@ -206,6 +209,7 @@
 	"//block.mubble.gray_terracotta_stairs": "Gray Terracotta Stairs",
 	"//block.mubble.black_terracotta_stairs": "Black Terracotta Stairs",
 
+	"//block.mubble.terracotta_slab": "Terracotta Slab",
 	"//block.mubble.blue_terracotta_slab": "Blue Terracotta Slab",
 	"//block.mubble.light_blue_terracotta_slab": "Light Blue Terracotta Slab",
 	"//block.mubble.cyan_terracotta_slab": "Cyan Terracotta Slab",
@@ -223,6 +227,7 @@
 	"//block.mubble.gray_terracotta_slab": "Gray Terracotta Slab",
 	"//block.mubble.black_terracotta_slab": "Black Terracotta Slab",
 
+	"//block.mubble.terracotta_vertical_slab": "Terracotta Vertical Slab",
 	"//block.mubble.blue_terracotta_vertical_slab": "Blue Terracotta Vertical Slab",
 	"//block.mubble.light_blue_terracotta_vertical_slab": "Light Blue Terracotta Vertical Slab",
 	"//block.mubble.cyan_terracotta_vertical_slab": "Cyan Terracotta Vertical Slab",
@@ -240,6 +245,7 @@
 	"//block.mubble.gray_terracotta_vertical_slab": "Gray Terracotta Vertical Slab",
 	"//block.mubble.black_terracotta_vertical_slab": "Black Terracotta Vertical Slab",
 
+	"//block.mubble.terracotta_wall": "Terracotta Wall",
 	"//block.mubble.blue_terracotta_wall": "Blue Terracotta Wall",
 	"//block.mubble.light_blue_terracotta_wall": "Light Blue Terracotta Wall",
 	"//block.mubble.cyan_terracotta_wall": "Cyan Terracotta Wall",
@@ -257,6 +263,7 @@
 	"//block.mubble.gray_terracotta_wall": "Gray Terracotta Wall",
 	"//block.mubble.black_terracotta_wall": "Black Terracotta Wall",
 
+	"//block.mubble.terracotta_pressure_plate": "Terracotta Pressure Plate",
 	"//block.mubble.blue_terracotta_pressure_plate": "Blue Terracotta Pressure Plate",
 	"//block.mubble.light_blue_terracotta_pressure_plate": "Light Blue Terracotta Pressure Plate",
 	"//block.mubble.cyan_terracotta_pressure_plate": "Cyan Terracotta Pressure Plate",
@@ -274,6 +281,7 @@
 	"//block.mubble.gray_terracotta_pressure_plate": "Gray Terracotta Pressure Plate",
 	"//block.mubble.black_terracotta_pressure_plate": "Black Terracotta Pressure Plate",
 
+	"//block.mubble.terracotta_button": "Terracotta Button",
 	"//block.mubble.blue_terracotta_button": "Blue Terracotta Button",
 	"//block.mubble.light_blue_terracotta_button": "Light Blue Terracotta Button",
 	"//block.mubble.cyan_terracotta_button": "Cyan Terracotta Button",
@@ -859,9 +867,12 @@
 
 	"comment": "ENTITIES",
 	"entity.mubble.chincho": "tostarenan mummy",
-	"//entity.mubble.flying_block": "Flying Block",
 	"entity.mubble.toad": "tod",
+	"entity.mubble.goomba": "gonba",
 	"//entity.mubble.zombie_cowman": "Zombie Cowman",
+
+	"//entity.mubble.custom_tnt": "Custom TNT",
+	"//entity.mubble.flying_block": "Flying Block",
 
 
 
