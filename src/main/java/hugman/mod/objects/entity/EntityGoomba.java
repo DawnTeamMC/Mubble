@@ -3,6 +3,7 @@ package hugman.mod.objects.entity;
 import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleLootTables;
 import hugman.mod.init.MubbleSounds;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
@@ -17,6 +18,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityGoomba extends EntityMob
@@ -24,7 +27,7 @@ public class EntityGoomba extends EntityMob
     public EntityGoomba(World worldIn) 
     {
         super(MubbleEntities.GOOMBA, worldIn);
-        this.setSize(0.625F, 0.625F);
+        this.setSize(0.9375F, 0.9375F);
     }
     
 	@Override
@@ -59,22 +62,27 @@ public class EntityGoomba extends EntityMob
     }
     
     @Override
-    protected SoundEvent getAmbientSound() 
-    {
-        return MubbleSounds.ENTITY_CHINCHO_AMBIENT;
-    }
-    
-    @Override
     protected SoundEvent getHurtSound(DamageSource source) 
     {
-        return MubbleSounds.ENTITY_CHINCHO_HURT;
+        return MubbleSounds.ENTITY_GOOMBA_HURT;
     }
     
     @Override
     protected SoundEvent getDeathSound() 
     {
-        return MubbleSounds.ENTITY_CHINCHO_DEATH;
+        return MubbleSounds.ENTITY_GOOMBA_DEATH;
     }
+    
+	protected SoundEvent getStepSound()
+	{
+		return MubbleSounds.ENTITY_GOOMBA_STEP;
+	}
+
+	@Override
+	protected void playStepSound(BlockPos pos, IBlockState blockIn)
+	{
+    	 this.playSound(this.getStepSound(), 0.15F, 1.0F);
+	}
     
     @Override
     protected ResourceLocation getLootTable() 
@@ -85,12 +93,16 @@ public class EntityGoomba extends EntityMob
     @Override
     public void onCollideWithPlayer(EntityPlayer playerIn)
     {
-    	
-    	if(playerIn.motionY < 0.0D)
+    	AxisAlignedBB hitbox = this.getBoundingBox().contract(0, -1, 0).shrink(0.1, 0, 0.1);
+    	if(!playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && playerIn.motionY < 0.3D && !this.dead)
     	{
-    		this.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), Float.MAX_VALUE);
     		playerIn.motionY = 0.5D;
     		playerIn.fallDistance = 0.0F;
+    		if(playerIn.motionY == 0.5D)
+    		{
+        		this.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), Float.MAX_VALUE);
+        		this.playSound(MubbleSounds.ENTITY_GOOMBA_CRUSH, this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+    		}
     	}
     }
 }

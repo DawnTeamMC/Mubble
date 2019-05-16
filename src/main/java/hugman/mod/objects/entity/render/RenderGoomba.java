@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 public class RenderGoomba extends RenderLiving<EntityGoomba>
 {
     private static final ResourceLocation NORMAL_GOOMBA_TEXTURES = new ResourceLocation(Mubble.MOD_ID + ":textures/entity/goomba/normal.png");
-    private static final ResourceLocation GOLDEN_GOOMBA_TEXTURES = new ResourceLocation(Mubble.MOD_ID + ":textures/entity/goomba/golden.png");
+    //private static final ResourceLocation GOLDEN_GOOMBA_TEXTURES = new ResourceLocation(Mubble.MOD_ID + ":textures/entity/goomba/golden.png");
 	
 	public RenderGoomba(RenderManager manager) 
 	{

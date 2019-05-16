@@ -12,7 +12,6 @@ public class ModelGoomba extends ModelBase
 	private final ModelRenderer body;
 	private final ModelRenderer head;
 	private final ModelRenderer top;
-	private final ModelRenderer eyes;
 	private final ModelRenderer bottom;
 	private final ModelRenderer left_foot;
 	private final ModelRenderer right_foot;
@@ -35,12 +34,6 @@ public class ModelGoomba extends ModelBase
 		head.addChild(top);
 		top.cubeList.add(new ModelBox(top, 32, 0, -3.5F, -5.0F, -3.5F, 7, 4, 7, 0.0F, false));
 
-		eyes = new ModelRenderer(this);
-		eyes.setRotationPoint(0.0F, 0.0F, 0.0F);
-		head.addChild(eyes);
-		eyes.cubeList.add(new ModelBox(eyes, 16, 19, 0.4F, -2.75F, -3.7F, 1, 2, 1, 0.0F, false));
-		eyes.cubeList.add(new ModelBox(eyes, 16, 22, -2.15F, -2.75F, -3.7F, 1, 2, 1, 0.0F, false));
-
 		bottom = new ModelRenderer(this);
 		bottom.setRotationPoint(0.0F, 0.0F, 0.0F);
 		head.addChild(bottom);
@@ -62,7 +55,7 @@ public class ModelGoomba extends ModelBase
 	{
         GlStateManager.pushMatrix();
         GlStateManager.scalef(1.5F, 1.5F, 1.5F);
-        GlStateManager.translatef(0.0F, 24.0F * scale, 0.0F);
+        GlStateManager.translatef(0.0F, -7.75F * scale, 0.0F);
 		body.render(scale);
 		left_foot.render(scale);
 		right_foot.render(scale);
