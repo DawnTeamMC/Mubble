@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:crafting/light_gray_cloud_block"
+			"mubble:crafting/magenta_cloud_block"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:crafting/light_gray_cloud_block"
+				"recipe": "mubble:crafting/magenta_cloud_block"
 			}
 		}
 	},

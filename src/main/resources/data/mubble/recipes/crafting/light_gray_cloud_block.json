@@ -3,19 +3,24 @@
 	"group": "mubble:cloud_block",
 	"pattern":
 	[
-		"XX",
-		"XX"
+		"XXX",
+		"XOX",
+		"XXX"
 	],
 	"key":
 	{
 		"X":
 		{
 			"item": "mubble:white_cloud_block"
+		},
+		"O":
+		{
+			"tag": "forge:dyes/light_gray"
 		}
 	},
 	"result":
 	{
 		"item": "mubble:light_gray_cloud_block",
-		"count": 4
+		"count": 8
 	}
 }

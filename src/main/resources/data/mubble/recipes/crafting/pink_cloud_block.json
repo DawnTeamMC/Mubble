@@ -15,12 +15,12 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/black"
+			"tag": "forge:dyes/pink"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:black_cloud_block",
+		"item": "mubble:pink_cloud_block",
 		"count": 8
 	}
 }

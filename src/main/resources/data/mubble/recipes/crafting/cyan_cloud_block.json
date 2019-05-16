@@ -15,12 +15,12 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/black"
+			"tag": "forge:dyes/cyan"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:black_cloud_block",
+		"item": "mubble:cyan_cloud_block",
 		"count": 8
 	}
 }

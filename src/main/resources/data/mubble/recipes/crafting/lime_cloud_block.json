@@ -15,12 +15,12 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/black"
+			"tag": "forge:dyes/lime"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:black_cloud_block",
+		"item": "mubble:lime_cloud_block",
 		"count": 8
 	}
 }
