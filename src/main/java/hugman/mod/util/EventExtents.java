@@ -24,7 +24,7 @@ public class EventExtents
 		EntityLivingBase entity = event.getEntityLiving();
 		if(entity.isPotionActive(MubblePotionEffects.HEAVINESS))
 		{
-			entity.motionY += (double)((float)(entity.getActivePotionEffect(MubblePotionEffects.HEAVINESS).getAmplifier() + 1) * -0.05F);
+			entity.motionY -= (double)((float)(entity.getActivePotionEffect(MubblePotionEffects.HEAVINESS).getAmplifier() + 1) * 0.05F);
 		}
 	}
 	

@@ -52,7 +52,7 @@ public class ItemSeedFood extends net.minecraft.item.ItemSeedFood implements IPl
     
     public IBlockState getCrop()
     {
-    	if(this == MubbleItems.TOMATO) return MubbleBlocks.TOMATO.getDefaultState();
+    	if(this == MubbleItems.TOMATO) return MubbleBlocks.TOMATOES.getDefaultState();
     	if(this == MubbleItems.SALAD) return MubbleBlocks.SALAD.getDefaultState();
     	else return null;
     }
