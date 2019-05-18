@@ -1,0 +1,13 @@
+{
+	"variants":
+	{
+		"age=0": { "model": "mubble:block/tomatoes/0" },
+		"age=1": { "model": "mubble:block/tomatoes/1" },
+		"age=2": { "model": "mubble:block/tomatoes/2" },
+		"age=3": { "model": "mubble:block/tomatoes/3" },
+		"age=4": { "model": "mubble:block/tomatoes/4" },
+		"age=5": { "model": "mubble:block/tomatoes/5" },
+		"age=6": { "model": "mubble:block/tomatoes/6" },
+		"age=7": { "model": "mubble:block/tomatoes/7" }
+	}
+}

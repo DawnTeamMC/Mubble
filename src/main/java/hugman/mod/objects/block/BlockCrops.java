@@ -18,7 +18,7 @@ public class BlockCrops extends net.minecraft.block.BlockCrops
     
     protected IItemProvider getSeedFood()
     {
-    	if(this == MubbleBlocks.TOMATO) return MubbleItems.TOMATO;
+    	if(this == MubbleBlocks.TOMATOES) return MubbleItems.TOMATO;
     	if(this == MubbleBlocks.SALAD) return MubbleItems.SALAD;
     	else return null;
     }

@@ -7,6 +7,7 @@ import hugman.mod.objects.block.BlockBalloon;
 import hugman.mod.objects.block.BlockBrick;
 import hugman.mod.objects.block.BlockButtonStone;
 import hugman.mod.objects.block.BlockButtonWood;
+import hugman.mod.objects.block.BlockCake;
 import hugman.mod.objects.block.BlockCandyCanePillar;
 import hugman.mod.objects.block.BlockCloud;
 import hugman.mod.objects.block.BlockCrops;
@@ -48,8 +49,8 @@ import hugman.mod.objects.block.BlockUltimatumPortal;
 import hugman.mod.objects.block.BlockUnstable;
 import hugman.mod.objects.block.BlockWall;
 import hugman.mod.objects.block.BlockWoodStrip;
-import hugman.mod.objects.block.state.properties.FluidLog;
-import hugman.mod.objects.block.state.properties.SlabVerticalType;
+import hugman.mod.objects.block_state.properties.FluidLog;
+import hugman.mod.objects.block_state.properties.SlabVerticalType;
 import hugman.mod.objects.world.feature.tree.autumn_oak.AutumnOakTree;
 import hugman.mod.objects.world.feature.tree.cherry_oak.pink.PinkCherryOakTree;
 import hugman.mod.objects.world.feature.tree.cherry_oak.white.WhiteCherryOakTree;
@@ -574,7 +575,7 @@ public class MubbleBlocks
     public static final Block PURPLE_CLOUD = new BlockCloud(EnumDyeColor.PURPLE);
     public static final Block MAGENTA_CLOUD = new BlockCloud(EnumDyeColor.MAGENTA);
     public static final Block PINK_CLOUD = new BlockCloud(EnumDyeColor.PINK);
-    public static final Block TOMATO = new BlockCrops("tomato");
+    public static final Block TOMATOES = new BlockCrops("tomatoes");
     public static final Block SALAD = new BlockCrops("salad");
     //public static final Block RICE = new BlockCrops("rice");
     public static final Block CHEESE_BLOCK = new BlockSimple("cheese_block", Properties.create(Material.GROUND, MaterialColor.YELLOW).hardnessAndResistance(0.5f).sound(SoundType.SNOW), ItemGroup.FOOD);
@@ -597,6 +598,7 @@ public class MubbleBlocks
     public static final Block UNSTABLE_STONE = new BlockUnstable();
     public static final Block FLUID_TANK = new BlockFluidTank();
     public static final Block ULTIMATUM_PORTAL = new BlockUltimatumPortal();
+    public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = new BlockCake("minecraft_10th_anniversary_cake");
     
     
     

@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
-import hugman.mod.objects.block.state.properties.SlabVerticalType;
+import hugman.mod.objects.block_state.properties.SlabVerticalType;
 import net.minecraft.block.Block;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;

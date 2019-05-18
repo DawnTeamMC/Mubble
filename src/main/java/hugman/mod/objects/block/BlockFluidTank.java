@@ -3,7 +3,7 @@ package hugman.mod.objects.block;
 import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleTags;
-import hugman.mod.objects.block.state.properties.FluidLog;
+import hugman.mod.objects.block_state.properties.FluidLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSixWay;
 import net.minecraft.block.IBucketPickupHandler;

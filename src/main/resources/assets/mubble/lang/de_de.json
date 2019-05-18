@@ -503,10 +503,11 @@
 	"block.mubble.light_gray_cloud_block": "Hellgrauer Wolkenblock",
 	"block.mubble.gray_cloud_block": "Grauer Wolkenblock",
 	"block.mubble.black_cloud_block": "Schwarzer Wolkenblock",
-	"block.mubble.tomato": "Tomaten",
+	"block.mubble.tomatoes": "Tomaten",
 	"block.mubble.salad": "Salat",
 	"block.mubble.cheese_block": "Käseblock",
 	"block.mubble.ultimatum_portal": "Ultimatumportal",
+	"//block.mubble.minecraft_10th_anniversary_cake": "Minecraft's 10th Anniversary Cake",
 
 	"block.mubble.blue_balloon": "Blauer Luftballon",
 	"block.mubble.light_blue_balloon": "Hellblauer Luftballon",
@@ -813,6 +814,7 @@
 
 
 	"item.mubble.chincho_spawn_egg": "Chincho-Spawn-Ei",
+	"//item.mubble.goomba_spawn_egg": "Goomba Spawn Egg",
 	"item.mubble.toad_spawn_egg": "Toad-Spawn-Ei",
 	"item.mubble.zombie_cowman_spawn_egg": "Kuhzombie-Spawn-Ei",
 
@@ -908,6 +910,9 @@
 	"subtitles.mubble.entity.chincho.ambient": "Chincho spricht",
 	"subtitles.mubble.entity.chincho.hurt": "Chincho nimmt Schaden",
 	"subtitles.mubble.entity.chincho.death": "Chincho stirbt",
+	"//subtitles.mubble.entity.goomba.crush": "Goomba crushed",
+	"//subtitles.mubble.entity.goomba.hurt": "Goomba hurts",
+	"//subtitles.mubble.entity.goomba.death": "Goomba dies",
 	"subtitles.mubble.entity.toad.ambient": "Toad murmelt",
 	"subtitles.mubble.entity.toad.hurt": "Toad nimmt Schaden",
 	"subtitles.mubble.entity.toad.death": "Toad stirbt",
