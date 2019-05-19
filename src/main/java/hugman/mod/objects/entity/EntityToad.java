@@ -145,37 +145,37 @@ public class EntityToad extends EntityAnimal
 		switch(this.getVariant())
 		{
         case 0:
-            return MubbleLootTables.BLUE_TOAD;
+            return MubbleLootTables.WHITE_TOAD;
         case 1:
-            return MubbleLootTables.LIGHT_BLUE_TOAD;
+            return MubbleLootTables.LIGHT_GRAY_TOAD;
         case 2:
-            return MubbleLootTables.CYAN_TOAD;
+            return MubbleLootTables.GRAY_TOAD;
         case 3:
-            return MubbleLootTables.GREEN_TOAD;
+            return MubbleLootTables.BLACK_TOAD;
         case 4:
-            return MubbleLootTables.LIME_TOAD;
+            return MubbleLootTables.BROWN_TOAD;
         case 5:
-            return MubbleLootTables.YELLOW_TOAD;
+            return MubbleLootTables.RED_TOAD;
         case 6:
             return MubbleLootTables.ORANGE_TOAD;
         case 7:
-            return MubbleLootTables.RED_TOAD;
+            return MubbleLootTables.YELLOW_TOAD;
         case 8:
-            return MubbleLootTables.PINK_TOAD;
+            return MubbleLootTables.LIME_TOAD;
         case 9:
-            return MubbleLootTables.MAGENTA_TOAD;
+            return MubbleLootTables.GREEN_TOAD;
         case 10:
-            return MubbleLootTables.PURPLE_TOAD;
+            return MubbleLootTables.CYAN_TOAD;
         case 11:
-            return MubbleLootTables.BROWN_TOAD;
+            return MubbleLootTables.LIGHT_BLUE_TOAD;
         case 12:
-            return MubbleLootTables.WHITE_TOAD;
+            return MubbleLootTables.BLUE_TOAD;
         case 13:
-            return MubbleLootTables.LIGHT_GRAY_TOAD;
+            return MubbleLootTables.PURPLE_TOAD;
         case 14:
-            return MubbleLootTables.GRAY_TOAD;
+            return MubbleLootTables.MAGENTA_TOAD;
         case 15:
-            return MubbleLootTables.BLACK_TOAD;
+            return MubbleLootTables.PINK_TOAD;
         case 100:
             return MubbleLootTables.CAPTAIN_TOAD;
         case 101:

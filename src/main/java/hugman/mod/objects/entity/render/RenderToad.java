@@ -42,62 +42,57 @@ public class RenderToad extends RenderLiving<EntityToad>
     protected ResourceLocation getEntityTexture(EntityToad entity)
     {
 		int texture = entity.getVariant();
-		for (int row = 0; row < 2; row++)
-        {
-			switch(texture)
-			{
-	        case 0:
-	            return BLUE_TOAD_TEXTURES;
-	        case 1:
-	            return LIGHT_BLUE_TOAD_TEXTURES;
-	        case 2:
-	            return CYAN_TOAD_TEXTURES;
-	        case 3:
-	            return GREEN_TOAD_TEXTURES;
-	        case 4:
-	            return LIME_TOAD_TEXTURES;
-	        case 5:
-	            return YELLOW_TOAD_TEXTURES;
-	        case 6:
-	            return ORANGE_TOAD_TEXTURES;
-	        case 7:
-	            return RED_TOAD_TEXTURES;
-	        case 8:
-	            return PINK_TOAD_TEXTURES;
-	        case 9:
-	            return MAGENTA_TOAD_TEXTURES;
-	        case 10:
-	            return PURPLE_TOAD_TEXTURES;
-	        case 11:
-	            return BROWN_TOAD_TEXTURES;
-	        case 12:
-	            return WHITE_TOAD_TEXTURES;
-	        case 13:
-	            return LIGHT_GRAY_TOAD_TEXTURES;
-	        case 14:
-	            return GRAY_TOAD_TEXTURES;
-	        case 15:
-	            return BLACK_TOAD_TEXTURES;
-	        case 100:
-	            return CAPTAIN_TOAD_TEXTURES;
-	        case 101:
-	            return HINT_TOAD_TEXTURES;
-	        case 102:
-	            return BANKTOAD_TEXTURES;
-	        case 103:
-	            return YELLOW_BTOAD_TEXTURES;
-	        case 104:
-	            return MAILTOAD_TEXTURES;
-	        case 105:
-	            return PARTY_TOAD_TEXTURES;
-	        case 106:
-	            return KISEKAE_TOAD_TEXTURES;
-			default:
-				texture = texture - 5;
-				row = 0;
-			}
-        }
-		return RED_TOAD_TEXTURES;
+		switch(texture)
+		{
+        case 0:
+            return WHITE_TOAD_TEXTURES;
+        case 1:
+            return LIGHT_GRAY_TOAD_TEXTURES;
+        case 2:
+            return GRAY_TOAD_TEXTURES;
+        case 3:
+            return BLACK_TOAD_TEXTURES;
+        case 4:
+            return BROWN_TOAD_TEXTURES;
+        case 5:
+            return RED_TOAD_TEXTURES;
+        case 6:
+            return ORANGE_TOAD_TEXTURES;
+        case 7:
+            return YELLOW_TOAD_TEXTURES;
+        case 8:
+            return LIME_TOAD_TEXTURES;
+        case 9:
+            return GREEN_TOAD_TEXTURES;
+        case 10:
+            return CYAN_TOAD_TEXTURES;
+        case 11:
+            return LIGHT_BLUE_TOAD_TEXTURES;
+        case 12:
+            return BLUE_TOAD_TEXTURES;
+        case 13:
+            return PURPLE_TOAD_TEXTURES;
+        case 14:
+            return MAGENTA_TOAD_TEXTURES;
+        case 15:
+            return PINK_TOAD_TEXTURES;
+        case 100:
+            return CAPTAIN_TOAD_TEXTURES;
+        case 101:
+            return HINT_TOAD_TEXTURES;
+        case 102:
+            return BANKTOAD_TEXTURES;
+        case 103:
+            return YELLOW_BTOAD_TEXTURES;
+        case 104:
+            return MAILTOAD_TEXTURES;
+        case 105:
+            return PARTY_TOAD_TEXTURES;
+        case 106:
+            return KISEKAE_TOAD_TEXTURES;
+		default:
+			return RED_TOAD_TEXTURES;
+		}
     }
 
 	@Override
