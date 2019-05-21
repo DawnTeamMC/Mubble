@@ -507,7 +507,7 @@
 	"block.mubble.salad": "Salade",
 	"block.mubble.cheese_block": "Kaasblok",
 	"block.mubble.ultimatum_portal": "Ultimatumportaal",
-	"//block.mubble.minecraft_10th_anniversary_cake": "Minecraft's 10th Anniversary Cake",
+	"block.mubble.minecraft_10th_anniversary_cake": "Minecraft's tiende jubileum's taart",
 
 	"block.mubble.blue_balloon": "Blauwe ballon",
 	"block.mubble.light_blue_balloon": "Lichtblauwe ballon",
@@ -814,7 +814,7 @@
 
 
 	"item.mubble.chincho_spawn_egg": "Chinchospawnei",
-	"//item.mubble.goomba_spawn_egg": "Goomba Spawn Egg",
+	"item.mubble.goomba_spawn_egg": "Goombaspawnei",
 	"item.mubble.toad_spawn_egg": "Toadspawnei",
 	"item.mubble.zombie_cowman_spawn_egg": "Zombiekoeienmensspawnei",
 
@@ -910,9 +910,9 @@
 	"subtitles.mubble.entity.chincho.ambient": "Chincho praat",
 	"subtitles.mubble.entity.chincho.hurt": "Chincho heeft pijn",
 	"subtitles.mubble.entity.chincho.death": "Chincho sterft",
-	"//subtitles.mubble.entity.goomba.crush": "Goomba crushed",
-	"//subtitles.mubble.entity.goomba.hurt": "Goomba hurts",
-	"//subtitles.mubble.entity.goomba.death": "Goomba dies",
+	"subtitles.mubble.entity.goomba.crush": "Goomba verpletterd",
+	"subtitles.mubble.entity.goomba.hurt": "Goomba heeft pijn",
+	"subtitles.mubble.entity.goomba.death": "Goomba sterft",
 	"subtitles.mubble.entity.toad.ambient": "Toad mompelt",
 	"subtitles.mubble.entity.toad.hurt": "Toad heeft pijn",
 	"subtitles.mubble.entity.toad.death": "Toad sterft",
