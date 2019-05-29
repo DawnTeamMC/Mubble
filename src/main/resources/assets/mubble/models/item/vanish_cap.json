@@ -1,6 +1,7 @@
 {
 	"parent":"mubble:item/cap",
-	"textures": {
+	"textures":
+	{
 		"cap": "mubble:costume/vanish_cap"
 	}
 }
