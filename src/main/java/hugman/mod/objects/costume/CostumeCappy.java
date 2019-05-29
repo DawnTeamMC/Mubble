@@ -54,7 +54,8 @@ public class CostumeCappy extends CostumeSimple
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
-		worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
+        ItemStack itemstack1 = playerIn.getItemStackFromSlot(armorType);
+        if (itemstack1.isEmpty()) worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 }
