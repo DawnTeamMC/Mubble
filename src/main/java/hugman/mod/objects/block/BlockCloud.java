@@ -12,8 +12,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemGroup;
@@ -72,15 +72,15 @@ public class BlockCloud extends Block
     @Override
     public void onEntityCollision(IBlockState state, World worldIn, BlockPos pos, Entity entityIn)
     {
-    	if(entityIn instanceof EntityPlayer)
+    	if(entityIn instanceof EntityLivingBase)
     	{
-    		EntityPlayer playerIn = (EntityPlayer)entityIn;
-    		ItemStack armor = playerIn.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-    		if(MubbleTags.Items.CROWNS.contains(armor.getItem()) && !playerIn.isSneaking())
+    		EntityLivingBase livingEntityIn = (EntityLivingBase)entityIn;
+    		ItemStack armor = livingEntityIn.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+    		if(MubbleTags.Items.CROWNS.contains(armor.getItem()) && !livingEntityIn.isSneaking())
     		{
-        		if(!playerIn.isSprinting()) playerIn.motionY = (this.RANDOM.nextInt(31) + 40) / 100D;
-    			else playerIn.motionY = 0.7D;
-        		playerIn.fallDistance = 0f;
+        		if(!livingEntityIn.isSprinting()) livingEntityIn.motionY = (this.RANDOM.nextInt(31) + 40) / 100D;
+    			else livingEntityIn.motionY = 0.7D;
+        		livingEntityIn.fallDistance = 0f;
     		}
     	}
     	if(entityIn instanceof EntityItem)
