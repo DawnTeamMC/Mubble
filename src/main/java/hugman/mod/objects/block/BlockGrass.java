@@ -2,12 +2,10 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
@@ -16,11 +14,10 @@ import net.minecraft.world.World;
 
 public class BlockGrass extends net.minecraft.block.BlockGrass
 {
-    public BlockGrass(String name, Block dirt, Properties properties)
+	/* Extension for missing features */
+    public BlockGrass(Properties properties)
     {
         super(properties);
-        setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
     
     private static boolean func_196383_a(IWorldReaderBase p_196383_0_, BlockPos p_196383_1_)

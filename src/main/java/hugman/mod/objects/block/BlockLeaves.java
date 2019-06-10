@@ -1,13 +1,11 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.NonNullList;
@@ -16,11 +14,9 @@ import net.minecraft.world.World;
 
 public class BlockLeaves extends net.minecraft.block.BlockLeaves
 {
-    public BlockLeaves(String name)
+    public BlockLeaves(Block.Properties builder)
     {
         super(Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).needsRandomTick().sound(SoundType.PLANT));
-        setRegistryName(Mubble.MOD_ID, name + "_leaves");
-        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
     }
     
     @Override

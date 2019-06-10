@@ -4,7 +4,6 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.objects.block_state.properties.SlabVerticalType;
 import net.minecraft.block.Block;
@@ -16,7 +15,6 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.IFluidState;
 import net.minecraft.init.Fluids;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.pathfinding.PathType;
 import net.minecraft.state.BooleanProperty;
@@ -40,20 +38,10 @@ public class BlockSlabVertical extends Block implements IBucketPickupHandler, IL
 	protected static final VoxelShape EAST_SHAPE = Block.makeCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 	protected static final VoxelShape WEST_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
 	
-    public BlockSlabVertical(String name, Block base_block)
+    public BlockSlabVertical(Block.Properties builder)
     {
-        super(Properties.from(base_block));
-        setRegistryName(Mubble.MOD_ID, name + "_vertical_slab");
+        super(builder);
         this.setDefaultState(this.stateContainer.getBaseState().with(TYPE, SlabVerticalType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
-        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
-    }
-    
-    public BlockSlabVertical(Block base_block)
-    {
-        super(Properties.from(base_block));
-        setRegistryName(Mubble.MOD_ID, base_block.getRegistryName().getPath() + "_vertical_slab");
-        this.setDefaultState(this.stateContainer.getBaseState().with(TYPE, SlabVerticalType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
-        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
     
     @Override

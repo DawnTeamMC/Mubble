@@ -2,15 +2,11 @@ package hugman.mod.objects.item;
 
 import java.util.Random;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.Particles;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.stats.StatList;
@@ -22,11 +18,9 @@ import net.minecraft.world.World;
 
 public class ItemSmashBall extends Item
 {    
-    public ItemSmashBall()
+    public ItemSmashBall(Item.Properties builder)
     {
-        super(new Item.Properties().group(ItemGroup.COMBAT).rarity(EnumRarity.RARE));
-        setRegistryName(Mubble.MOD_ID, "smash_ball");
-		MubbleItems.register(this);
+        super(builder);
     }
     
     @Override

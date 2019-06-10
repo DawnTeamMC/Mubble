@@ -2,7 +2,6 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
@@ -12,7 +11,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Particles;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -20,11 +18,9 @@ import net.minecraft.world.World;
 
 public class BlockNote extends Block
 {    
-    public BlockNote(String name)
+    public BlockNote()
     {
         super(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.4F, 2.0F));
-        setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this, ItemGroup.BUILDING_BLOCKS);
     }
     
     @Override

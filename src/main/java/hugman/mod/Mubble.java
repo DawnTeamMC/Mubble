@@ -112,6 +112,22 @@ public class Mubble
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> event)
         {
+            event.getRegistry().registerAll(MubbleBlocks.CUBES.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.STAIRS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.SLABS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.VERTICAL_SLABS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.FENCES.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.WALLS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.SAPLINGS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.LEAVES.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.LEAVES_CARPETS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.PRESSURE_PLATES.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.TRAPDOORS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.BUTTONS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.FENCE_GATES.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.DOORS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.FLOWERS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.OTHERS.toArray(new Item[0]));
         	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
         	LOGGER.info("Registered items");
     		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));

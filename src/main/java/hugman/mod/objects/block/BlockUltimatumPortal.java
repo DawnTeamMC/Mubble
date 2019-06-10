@@ -2,8 +2,6 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
@@ -31,8 +29,6 @@ public class BlockUltimatumPortal extends Block
     public BlockUltimatumPortal()
     {
         super(Properties.from(Blocks.NETHER_PORTAL).hardnessAndResistance(-1.0F, 3600000.0F));
-        setRegistryName(Mubble.MOD_ID, "ultimatum_portal");
-        MubbleBlocks.registerWithoutItem(this);
     }
     
     @Override

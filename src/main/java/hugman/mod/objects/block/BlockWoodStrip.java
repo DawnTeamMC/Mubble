@@ -2,12 +2,12 @@ package hugman.mod.objects.block;
 
 import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemAxe;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -17,9 +17,9 @@ import net.minecraft.world.World;
 
 public class BlockWoodStrip extends BlockRotatedPillar
 {
-    public BlockWoodStrip(String name, Properties properties, ItemGroup group)
+    public BlockWoodStrip(Properties builder)
     {
-        super(name, properties, group);
+        super(builder);
     }
     
     @Override

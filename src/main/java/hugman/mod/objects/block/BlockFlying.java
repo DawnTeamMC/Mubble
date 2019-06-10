@@ -2,15 +2,12 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleTags;
 import hugman.mod.objects.entity.EntityFlyingBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
@@ -21,11 +18,9 @@ public class BlockFlying extends Block
 {
 	public static boolean flyInstantly;
 	
-    public BlockFlying(String name, Properties properties, ItemGroup group)
+    public BlockFlying(Block.Properties builder)
     {
-        super(properties);
-        setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this, group);
+        super(builder);
     }
     
     @Override

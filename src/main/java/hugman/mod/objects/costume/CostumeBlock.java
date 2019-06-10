@@ -1,8 +1,7 @@
-package hugman.mod.objects.costume.block;
+package hugman.mod.objects.costume;
 
 import java.util.List;
 
-import hugman.mod.init.MubbleCostumes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
@@ -15,7 +14,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EntitySelectors;
@@ -31,6 +29,14 @@ public class CostumeBlock extends ItemBlock
 {
 	protected final EntityEquipmentSlot armorType;
 	protected final SoundEvent sound;
+	
+    public CostumeBlock(Item.Properties builder, SoundEvent sound, EntityEquipmentSlot armorType, Block base_block)
+    {
+        super(base_block, builder);
+		this.sound = sound;
+	    this.armorType = armorType;
+	    BlockDispenser.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
+    }
 	
 	public static final IBehaviorDispenseItem DISPENSER_BEHAVIOR = new BehaviorDefaultDispenseItem()
 	{
@@ -64,16 +70,6 @@ public class CostumeBlock extends ItemBlock
 			return stack;
 		}
 	}
-	
-    public CostumeBlock(Block base_block, SoundEvent sound, EntityEquipmentSlot armorType, ItemGroup group)
-    {
-        super(base_block, new Item.Properties().group(group));
-        setRegistryName(base_block.getRegistryName());
-		MubbleCostumes.register(this);
-		this.sound = sound;
-	    this.armorType = armorType;
-	    BlockDispenser.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
-    }
     
     @Override
     public EntityEquipmentSlot getEquipmentSlot(ItemStack stack)

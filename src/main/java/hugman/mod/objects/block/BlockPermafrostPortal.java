@@ -2,7 +2,6 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleEntities;
 import net.minecraft.block.Block;
@@ -24,8 +23,6 @@ public class BlockPermafrostPortal extends net.minecraft.block.BlockPortal
     public BlockPermafrostPortal()
     {
         super(Properties.create(Material.PORTAL).doesNotBlockMovement().needsRandomTick().hardnessAndResistance(-1.0F).sound(SoundType.GLASS).lightValue(11));
-        setRegistryName(Mubble.MOD_ID, "permafrost_portal");
-        MubbleBlocks.registerWithoutItem(this);
     }
     
 	public void tick(IBlockState state, World worldIn, BlockPos pos, Random random)

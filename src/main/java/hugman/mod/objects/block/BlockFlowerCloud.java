@@ -1,6 +1,8 @@
 package hugman.mod.objects.block;
 
 import hugman.mod.init.MubbleTags;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -12,9 +14,9 @@ import net.minecraft.world.World;
 
 public class BlockFlowerCloud extends BlockFlower
 {
-    public BlockFlowerCloud()
+    public BlockFlowerCloud(Block.Properties builder)
     {
-        super("cloud_flower");
+        super(builder);
     }
     
     @Override

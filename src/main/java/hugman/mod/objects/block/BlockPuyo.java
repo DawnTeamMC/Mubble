@@ -1,24 +1,17 @@
 package hugman.mod.objects.block;
 
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public class BlockPuyo extends BlockDirectional
 {
-    public BlockPuyo(EnumDyeColor color)
+    public BlockPuyo(Block.Properties builder)
     {
-        super(color.getTranslationKey() + "_puyo", Properties.create(Material.CLAY, color).slipperiness(0.8F).sound(SoundType.SLIME));
-    }
-    
-    public BlockPuyo(String color)
-    {
-        super(color + "_puyo", Properties.create(Material.CLAY).slipperiness(0.8F).sound(SoundType.SLIME));
+        super(builder);
     }
     
     @Override

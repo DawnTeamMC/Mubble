@@ -1,25 +1,18 @@
 package hugman.mod.objects.item;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
 public class ItemSuperStar extends net.minecraft.item.ItemFood
 {    
-    public ItemSuperStar()
+    public ItemSuperStar(int healAmountIn, float saturation, boolean meat, Item.Properties builder)
     {
-        super(3, 2.4F, false, new Item.Properties().group(ItemGroup.MISC).rarity(EnumRarity.RARE));
-        setRegistryName(Mubble.MOD_ID, "super_star");
-		MubbleItems.register(this);
-		this.setAlwaysEdible();
+        super(healAmountIn, saturation, meat, builder);
     }
     
     @Override

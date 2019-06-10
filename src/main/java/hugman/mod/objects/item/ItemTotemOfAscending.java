@@ -1,12 +1,8 @@
 package hugman.mod.objects.item;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
@@ -19,11 +15,9 @@ import net.minecraft.world.gen.Heightmap;
 
 public class ItemTotemOfAscending extends Item
 {    
-    public ItemTotemOfAscending()
+    public ItemTotemOfAscending(Item.Properties builder)
     {
-        super(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1).rarity(EnumRarity.UNCOMMON));
-        setRegistryName(Mubble.MOD_ID, "totem_of_ascending");
-		MubbleItems.register(this);
+        super(builder);
     }
     
 	@Override

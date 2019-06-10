@@ -1,21 +1,19 @@
 package hugman.mod.objects.costume;
 
-import hugman.mod.init.MubbleTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class CostumeWingCap extends CostumeSimple
+public class CostumeWingCap extends CostumeHead
 {    
-    public CostumeWingCap()
+    public CostumeWingCap(Item.Properties builder)
     {
-        super("wing_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD, new Item.Properties().group(MubbleTabs.COSTUMES).maxStackSize(1).defaultMaxDamage(600));
+        super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     }
     
 	@Override

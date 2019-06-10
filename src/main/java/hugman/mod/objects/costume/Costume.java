@@ -2,9 +2,7 @@ package hugman.mod.objects.costume;
 
 import java.util.List;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleCostumes;
-import hugman.mod.init.MubbleTabs;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
@@ -16,6 +14,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumActionResult;
@@ -27,10 +26,29 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
-public class CostumeSimple extends Item
+public class Costume extends Item
 {
 	protected final EntityEquipmentSlot armorType;
 	protected final SoundEvent sound;
+	protected final PotionEffect[] effects;
+    
+    public Costume(Item.Properties builder, SoundEvent sound, EntityEquipmentSlot armorType, PotionEffect... potionEffects)
+    {
+        super(builder);
+		this.sound = sound;
+	    this.armorType = armorType;
+	    this.effects = potionEffects;
+	    BlockDispenser.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
+    }
+    
+    @Override
+    public void onArmorTick(ItemStack stack, World world, EntityPlayer player)
+    {
+    	if(!world.isRemote && effects != null) for(PotionEffect effect : effects)
+    	{
+    		player.addPotionEffect(new PotionEffect(effect));
+    	}
+    }
 	
 	public static final IBehaviorDispenseItem DISPENSER_BEHAVIOR = new BehaviorDefaultDispenseItem()
 	{
@@ -64,26 +82,6 @@ public class CostumeSimple extends Item
 			return stack;
 		}
 	}
-	
-    public CostumeSimple(String name, SoundEvent sound, EntityEquipmentSlot armorType)
-    {
-        super(new Item.Properties().group(MubbleTabs.COSTUMES).maxStackSize(1));
-        setRegistryName(Mubble.MOD_ID, name);
-		MubbleCostumes.register(this);
-		this.sound = sound;
-	    this.armorType = armorType;
-	    BlockDispenser.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
-    }
-    
-    public CostumeSimple(String name, SoundEvent sound, EntityEquipmentSlot armorType, Properties properties)
-    {
-        super(properties);
-        setRegistryName(Mubble.MOD_ID, name);
-		MubbleCostumes.register(this);
-		this.sound = sound;
-	    this.armorType = armorType;
-	    BlockDispenser.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
-    }
     
     @Override
     public EntityEquipmentSlot getEquipmentSlot(ItemStack stack)

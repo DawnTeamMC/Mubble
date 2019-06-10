@@ -2,8 +2,6 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -16,7 +14,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -29,8 +26,6 @@ public class BlockCloud extends Block
     public BlockCloud(EnumDyeColor color)
     {
         super(Properties.create(Material.PLANTS, color).sound(SoundType.CLOTH).hardnessAndResistance(0f).doesNotBlockMovement());
-        setRegistryName(Mubble.MOD_ID, color.getTranslationKey() + "_cloud_block");
-        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
     }
     
     @Override

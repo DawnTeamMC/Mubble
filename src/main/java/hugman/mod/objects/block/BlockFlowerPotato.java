@@ -1,5 +1,7 @@
 package hugman.mod.objects.block;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -9,9 +11,9 @@ import net.minecraft.world.World;
 
 public class BlockFlowerPotato extends BlockFlower
 {
-    public BlockFlowerPotato()
+    public BlockFlowerPotato(Block.Properties builder)
     {
-        super("potato_flower");
+        super(builder);
     }
     
     @Override

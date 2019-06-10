@@ -1,6 +1,5 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleCostumes;
 import net.minecraft.block.Block;
@@ -30,8 +29,6 @@ public class BlockKoretato extends BlockDirectional
     {
         super(Properties.create(Material.GROUND, MaterialColor.YELLOW_TERRACOTTA).hardnessAndResistance(0.4f, 2f).sound(SoundType.SNOW));
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.UP).with(PRINCESS, false));
-        setRegistryName(Mubble.MOD_ID, "koretato_block");
-        MubbleBlocks.registerWithoutItem(this);
     }
     
     @Override

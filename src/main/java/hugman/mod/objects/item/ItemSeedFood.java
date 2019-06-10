@@ -1,6 +1,5 @@
 package hugman.mod.objects.item;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -9,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.EnumActionResult;
@@ -21,11 +19,9 @@ import net.minecraftforge.common.IPlantable;
 
 public class ItemSeedFood extends net.minecraft.item.ItemSeedFood implements IPlantable
 {
-    public ItemSeedFood(String name, int heal, float saturation)
+    public ItemSeedFood(int heal, float saturation, Item.Properties builder)
     {
-        super(heal, saturation, Blocks.STONE, new Item.Properties().group(ItemGroup.FOOD));
-        setRegistryName(Mubble.MOD_ID, name);
-		MubbleItems.register(this);
+        super(heal, saturation, Blocks.STONE, builder);
     }
     
     @Override

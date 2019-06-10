@@ -5,17 +5,17 @@ import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-public class CostumeGooigiCap extends CostumeSimple
+public class CostumeGooigiCap extends CostumeHead
 {    
-    public CostumeGooigiCap()
+    public CostumeGooigiCap(Item.Properties builder)
     {
-        super("gooigi_cap", SoundEvents.BLOCK_SLIME_BLOCK_BREAK, EntityEquipmentSlot.HEAD);
+        super(builder, SoundEvents.BLOCK_SLIME_BLOCK_BREAK);
     }
     
     @Override

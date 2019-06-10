@@ -6,18 +6,18 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Particles;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class CostumePrincessPeachCrown extends CostumeSimple
+public class CostumePrincessPeachCrown extends CostumeHead
 {    
-    public CostumePrincessPeachCrown()
+    public CostumePrincessPeachCrown(Item.Properties builder)
     {
-        super("princess_peach_crown", SoundEvents.ITEM_ARMOR_EQUIP_IRON, EntityEquipmentSlot.HEAD);
+        super(builder, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
     }
     
     @Override

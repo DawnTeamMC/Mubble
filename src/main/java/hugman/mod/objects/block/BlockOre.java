@@ -1,10 +1,8 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleItems;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -12,11 +10,9 @@ import net.minecraft.world.World;
 
 public class BlockOre extends net.minecraft.block.BlockOre
 {    
-    public BlockOre(String name, Properties properties, ItemGroup group)
+    public BlockOre(Properties properties)
     {
         super(properties);
-        setRegistryName(Mubble.MOD_ID, name);
-        MubbleBlocks.register(this, group);
     }
     
     @Override

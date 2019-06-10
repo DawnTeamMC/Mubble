@@ -1,6 +1,5 @@
 package hugman.mod.objects.block;
 
-import hugman.mod.Mubble;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleTags;
 import hugman.mod.objects.block_state.properties.FluidLog;
@@ -18,7 +17,6 @@ import net.minecraft.init.Fluids;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer.Builder;
@@ -66,9 +64,7 @@ public class BlockFluidTank extends Block implements IBucketPickupHandler, ILiqu
     public BlockFluidTank()
     {
         super(Properties.from(Blocks.STONE));
-        setRegistryName(Mubble.MOD_ID, "fluid_tank");
         this.setDefaultState(this.stateContainer.getBaseState().with(FLUIDLOG, FluidLog.EMPTY));
-        MubbleBlocks.register(this, ItemGroup.REDSTONE);
     }
     
     @Override
@@ -100,13 +96,12 @@ public class BlockFluidTank extends Block implements IBucketPickupHandler, ILiqu
     @Override
     public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face)
     {
-    	if(face == EnumFacing.UP && !state.get(UP)) return BlockFaceShape.UNDEFINED;
-    	else if(face == EnumFacing.DOWN && !state.get(DOWN)) return BlockFaceShape.UNDEFINED;
+    	if(face == EnumFacing.DOWN && !state.get(DOWN)) return BlockFaceShape.UNDEFINED;
     	else if(face == EnumFacing.NORTH && !state.get(NORTH)) return BlockFaceShape.UNDEFINED;
     	else if(face == EnumFacing.EAST && !state.get(EAST)) return BlockFaceShape.UNDEFINED;
     	else if(face == EnumFacing.SOUTH && !state.get(SOUTH)) return BlockFaceShape.UNDEFINED;
     	else if(face == EnumFacing.WEST && !state.get(WEST)) return BlockFaceShape.UNDEFINED;
-    	else return super.getBlockFaceShape(worldIn, state, pos, face);
+    	else return BlockFaceShape.UNDEFINED;
     }
     
     @Override
@@ -120,7 +115,7 @@ public class BlockFluidTank extends Block implements IBucketPickupHandler, ILiqu
     {
     	if(state.get(FLUIDLOG) == FluidLog.WATER) return Fluids.WATER.getStillFluidState(false);
     	else if(state.get(FLUIDLOG) == FluidLog.LAVA) return Fluids.LAVA.getStillFluidState(false);
-    	else return super.getFluidState(state);
+    	else return Fluids.EMPTY.getDefaultState();
 	}
     
     @Override

@@ -2,16 +2,16 @@ package hugman.mod.objects.costume;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.world.World;
 
-public class CostumeGuardianMask extends CostumeSimple
+public class CostumeGuardianMask extends CostumeHead
 {    
-    public CostumeGuardianMask()
+    public CostumeGuardianMask(Item.Properties builder)
     {
-        super("guardian_mask", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
+        super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     }
     
     @Override

@@ -1,12 +1,9 @@
 package hugman.mod.objects.item;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
@@ -17,11 +14,9 @@ import net.minecraft.world.World;
 
 public class ItemBandage extends Item
 {    
-    public ItemBandage()
+    public ItemBandage(Item.Properties builder)
     {
-        super(new Item.Properties().group(ItemGroup.MISC));
-        setRegistryName(Mubble.MOD_ID, "bandage");
-		MubbleItems.register(this);
+        super(builder);
     }
     
     @Override

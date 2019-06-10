@@ -2,13 +2,8 @@ package hugman.mod.objects.block;
 
 import java.util.Random;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlocks;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -16,20 +11,9 @@ import net.minecraft.world.World;
 
 public class BlockMushroom extends net.minecraft.block.BlockMushroom
 {
-    public BlockMushroom(EnumDyeColor color)
+    public BlockMushroom(Block.Properties builder)
     {
-        super(Properties.create(Material.PLANTS, color).doesNotBlockMovement().hardnessAndResistance(0).needsRandomTick().sound(SoundType.PLANT));
-        setRegistryName(Mubble.MOD_ID, color.getTranslationKey() + "_mushroom");
-        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
-        MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + color.getTranslationKey() + "_mushroom", this));
-    }
-    
-    public BlockMushroom(String color, int light)
-    {
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0).needsRandomTick().sound(SoundType.PLANT).lightValue(light));
-        setRegistryName(Mubble.MOD_ID, color + "_mushroom");
-        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
-        MubbleBlocks.registerWithoutItem(new BlockFlowerPot("potted_" + color + "_mushroom", this));
+        super(builder);
     }
     
     @Override

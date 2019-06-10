@@ -2,11 +2,11 @@ package hugman.mod.objects.costume;
 
 import java.util.Random;
 
+import hugman.mod.init.MubbleCostumes;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ActionResult;
@@ -15,11 +15,11 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
-public class CostumeCappy extends CostumeSimple
+public class CostumeCappy extends CostumeHead
 {    
     public CostumeCappy()
     {
-        super("cappy", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
+        super(MubbleCostumes.pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     }
     
 	@Override

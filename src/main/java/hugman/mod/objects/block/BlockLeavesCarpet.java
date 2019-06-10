@@ -2,8 +2,6 @@ package hugman.mod.objects.block;
 
 import java.util.List;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -11,7 +9,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.BlockRenderLayer;
@@ -33,8 +30,6 @@ public class BlockLeavesCarpet extends BlockBush implements IShearable
     public BlockLeavesCarpet(Block base_block)
     {
         super(Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement());
-        setRegistryName(Mubble.MOD_ID, base_block.getRegistryName().getPath() + "_carpet");
-        MubbleBlocks.register(this, ItemGroup.DECORATIONS);
         this.base = base_block;
     }
     

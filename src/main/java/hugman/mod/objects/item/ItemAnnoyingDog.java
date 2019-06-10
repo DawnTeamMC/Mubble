@@ -2,12 +2,9 @@ package hugman.mod.objects.item;
 
 import java.util.Random;
 
-import hugman.mod.Mubble;
-import hugman.mod.init.MubbleItems;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
@@ -18,11 +15,9 @@ import net.minecraft.world.World;
 
 public class ItemAnnoyingDog extends Item
 {    
-    public ItemAnnoyingDog()
+    public ItemAnnoyingDog(Item.Properties builder)
     {
-        super(new Item.Properties().group(ItemGroup.MISC));
-        setRegistryName(Mubble.MOD_ID, "annoying_dog");
-		MubbleItems.register(this);
+        super(builder);
     }
     
     @Override

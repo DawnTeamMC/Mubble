@@ -3,15 +3,15 @@ package hugman.mod.objects.costume;
 import hugman.mod.init.MubbleTags;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class CostumeMayroCap extends CostumeSimple
+public class CostumeMayroCap extends CostumeHead
 {    
-    public CostumeMayroCap()
+    public CostumeMayroCap(Item.Properties builder)
     {
-        super("mayro_cap", SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, EntityEquipmentSlot.HEAD);
+        super(builder , SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     }
     
     @Override
