@@ -1,19 +1,20 @@
 package hugman.mod.objects.world.dimension;
 
-import net.minecraft.init.Biomes;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.biome.provider.BiomeProvider;
 import net.minecraft.world.biome.provider.BiomeProviderType;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
-import net.minecraft.world.gen.FlatGenSettings;
+import net.minecraft.world.gen.FlatGenerationSettings;
 import net.minecraft.world.gen.FlatLayerInfo;
-import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -21,18 +22,17 @@ public class DimensionUltimatum extends Dimension
 {
 	private final DimensionType type;
 	
-	public DimensionUltimatum(DimensionType type) 
+	public DimensionUltimatum(World worldIn, DimensionType typeIn) 
 	{
-		this.type = type;
+		super(worldIn, typeIn);
+		this.type = typeIn;
 		//this.setSpawnPoint(new BlockPos(0, 158, 0));
 	}
 	
 	@Override
-	public IChunkGenerator<?> createChunkGenerator()
+	public ChunkGenerator<?> createChunkGenerator()
 	{
-        world.setSeaLevel(64);
-
-        FlatGenSettings settings = new FlatGenSettings();
+        FlatGenerationSettings settings = new FlatGenerationSettings();
         settings.setBiome(Biomes.PLAINS);
         settings.getFlatLayers().add(new FlatLayerInfo(1, Blocks.AIR));
         settings.updateLayers();
@@ -40,12 +40,6 @@ public class DimensionUltimatum extends Dimension
 		BiomeProvider biomeProvider = BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.createSettings().setBiome(settings.getBiome()));
 		
 		return ChunkGeneratorType.FLAT.create(world, biomeProvider, settings);
-	}
-	
-	@Override
-	protected void init()
-	{
-		this.hasSkyLight = true;
 	}
 	
 	@Override

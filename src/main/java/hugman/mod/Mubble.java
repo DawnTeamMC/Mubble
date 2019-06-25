@@ -8,9 +8,9 @@ import org.apache.logging.log4j.Logger;
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleColorMaps;
 import hugman.mod.init.MubbleCostumes;
+import hugman.mod.init.MubbleEffects;
 import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleItems;
-import hugman.mod.init.MubblePotionEffects;
 import hugman.mod.init.MubbleSounds;
 import hugman.mod.init.world.MubbleBiomes;
 import hugman.mod.init.world.MubbleDimensions;
@@ -18,7 +18,7 @@ import hugman.mod.init.world.MubbleGenerators;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Potion;
+import net.minecraft.potion.Effect;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
@@ -150,9 +150,9 @@ public class Mubble
         }
         
         @SubscribeEvent
-        public static void onPotionsRegistry(final RegistryEvent.Register<Potion> event)
+        public static void onPotionsRegistry(final RegistryEvent.Register<Effect> event)
         {
-        	event.getRegistry().registerAll(MubblePotionEffects.EFFECTS.toArray(new Potion[0]));
+        	event.getRegistry().registerAll(MubbleEffects.EFFECTS.toArray(new Effect[0]));
         	LOGGER.info("Registered potion effects");
         }
         

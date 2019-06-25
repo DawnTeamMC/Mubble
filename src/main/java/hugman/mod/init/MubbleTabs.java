@@ -13,4 +13,13 @@ public class MubbleTabs
     		return new ItemStack(MubbleCostumes.CAPPY);
     	}
     };
+    
+    public static final ItemGroup MAKER_BLOCKS = new ItemGroup("maker_blocks")
+    {
+    	@Override
+    	public ItemStack createIcon()
+    	{
+    		return new ItemStack(MubbleBlocks.QUESTION_BLOCK);
+    	}
+    };
 }

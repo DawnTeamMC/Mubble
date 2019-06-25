@@ -1,18 +1,19 @@
 package hugman.mod.objects.potion_effect;
 
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.potion.EffectType;
 
 public class EffectHiccup extends EffectSimple
 {	
-	public EffectHiccup()
+	public EffectHiccup(EffectType typeIn, int liquidColorIn)
 	{
-		super("hiccup", true, 9198906);
+		super(typeIn, liquidColorIn);
 	}
 	
 	@Override
-	public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier)
+	public void performEffect(LivingEntity entityLivingBaseIn, int amplifier)
 	{
-		if(entityLivingBaseIn.onGround) entityLivingBaseIn.motionY =+ 0.2D;
+		if(entityLivingBaseIn.onGround) entityLivingBaseIn.getMotion().add(0.0D, 0.2D, 0.0D);
 	}
 	
 	@Override

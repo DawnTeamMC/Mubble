@@ -6,38 +6,39 @@ import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleLootTables;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIZombieAttack;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.ai.goal.ZombieAttackGoal;
+import net.minecraft.entity.monster.ZombieEntity;
+import net.minecraft.entity.monster.ZombiePigmanEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
-public class EntityZombieCowman extends EntityPigZombie
+public class EntityZombieCowman extends ZombiePigmanEntity
 {
 	private static final UUID ATTACK_SPEED_BOOST_MODIFIER_UUID = UUID.fromString("49455A49-7EC5-45BA-B886-3B90B23A1718");
-	private static final AttributeModifier ATTACK_SPEED_BOOST_MODIFIER = (new AttributeModifier(ATTACK_SPEED_BOOST_MODIFIER_UUID, "Attacking speed boost", 0.05D, 0)).setSaved(false);
+	private static final AttributeModifier ATTACK_SPEED_BOOST_MODIFIER = (new AttributeModifier(ATTACK_SPEED_BOOST_MODIFIER_UUID, "Attacking speed boost", 0.05D, AttributeModifier.Operation.ADDITION)).setSaved(false);
 	private int angerLevel;
 	private int randomSoundDelay;
 	private UUID angerTargetUUID;
 	
-	public EntityZombieCowman(World worldIn)
+	public EntityZombieCowman(EntityType<? extends EntityZombieCowman> type, World worldIn)
 	{
-		super(worldIn);
+		super(type, worldIn);
 	}
 	
 	@Override
@@ -71,31 +72,29 @@ public class EntityZombieCowman extends EntityPigZombie
 	}
 	
 	@Override
-	protected ResourceLocation getLootTable()
-	{
-		return MubbleLootTables.ZOMBIE_COWMAN;
-	}
-	
 	protected void applyEntityAI()
 	{
-		this.tasks.addTask(2, new EntityAIZombieAttack(this, 1.0D, false));
-		this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
-		this.targetTasks.addTask(1, new EntityZombieCowman.AIHurtByAggressor(this));
-		this.targetTasks.addTask(2, new EntityZombieCowman.AITargetAggressor(this));
+		this.goalSelector.addGoal(2, new ZombieAttackGoal(this, 1.0D, false));
+		this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+		this.targetSelector.addGoal(1, new EntityZombieCowman.HurtByAggressorGoal(this));
+		this.targetSelector.addGoal(2, new EntityZombieCowman.TargetAggressorGoal(this));
 	}
-	
+
+	@Override
 	protected void registerAttributes()
 	{
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.34F);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
 	}
-	
+
+	@Override
 	protected void setEquipmentBasedOnDifficulty(DifficultyInstance difficulty)
 	{
-		this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.IRON_SWORD));
+		this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(Items.IRON_SWORD));
 	}
-	
+
+	@Override
 	protected void updateAITasks()
 	{
 		IAttributeInstance iattributeinstance = this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
@@ -120,7 +119,7 @@ public class EntityZombieCowman extends EntityPigZombie
 
 		if (this.angerLevel > 0 && this.angerTargetUUID != null && this.getRevengeTarget() == null)
 		{
-			EntityPlayer entityplayer = this.world.getPlayerEntityByUUID(this.angerTargetUUID);
+			PlayerEntity entityplayer = this.world.getPlayerByUuid(this.angerTargetUUID);
 			this.setRevengeTarget(entityplayer);
 			this.attackingPlayer = entityplayer;
 			this.recentlyHit = this.getRevengeTimer();
@@ -128,44 +127,50 @@ public class EntityZombieCowman extends EntityPigZombie
 
 		super.updateAITasks();
 	}
-	
-	private void becomeAngryAt(Entity p_70835_1_)
+
+	private boolean becomeAngryAt(Entity p_70835_1_)
 	{
 		this.angerLevel = 400 + this.rand.nextInt(400);
-		this.randomSoundDelay = this.rand.nextInt(20);
-		if (p_70835_1_ instanceof EntityLivingBase)
+		this.randomSoundDelay = this.rand.nextInt(40);
+		if (p_70835_1_ instanceof LivingEntity)
 		{
-			this.setRevengeTarget((EntityLivingBase)p_70835_1_);
+			this.setRevengeTarget((LivingEntity)p_70835_1_);
 		}
+		return true;
 	}
 	
-	static class AIHurtByAggressor extends EntityAIHurtByTarget
+	private boolean isAngry() 
 	{
-		public AIHurtByAggressor(EntityZombieCowman p_i45828_1_)
+		return this.angerLevel > 0;
+	}
+	
+	static class HurtByAggressorGoal extends HurtByTargetGoal
+	{
+		public HurtByAggressorGoal(EntityZombieCowman p_i45828_1_)
 		{
-			super(p_i45828_1_, true);
+			super(p_i45828_1_);
+			this.setCallsForHelp(new Class[]{ZombieEntity.class});
 		}
 
-		protected void setEntityAttackTarget(EntityCreature creatureIn, EntityLivingBase entityLivingBaseIn)
+		protected void setAttackTarget(MobEntity mobIn, LivingEntity targetIn)
 		{
-			super.setEntityAttackTarget(creatureIn, entityLivingBaseIn);
-			if (creatureIn instanceof EntityZombieCowman)
+			if (mobIn instanceof EntityZombieCowman && this.field_75299_d.canEntityBeSeen(targetIn) && ((EntityZombieCowman)mobIn).becomeAngryAt(targetIn))
 			{
-				((EntityZombieCowman)creatureIn).becomeAngryAt(entityLivingBaseIn);
+				mobIn.setAttackTarget(targetIn);
 			}
 		}
 	}	
 
-	static class AITargetAggressor extends EntityAINearestAttackableTarget<EntityPlayer>
+	static class TargetAggressorGoal extends NearestAttackableTargetGoal<PlayerEntity>
 	{
-		public AITargetAggressor(EntityZombieCowman p_i45829_1_)
+		public TargetAggressorGoal(EntityZombieCowman p_i45829_1_)
 		{
-			super(p_i45829_1_, EntityPlayer.class, true);
+			super(p_i45829_1_, PlayerEntity.class, true);
 		}
 		
 		public boolean shouldExecute()
 		{
-			return ((EntityZombieCowman)this.taskOwner).isAngry() && super.shouldExecute();
+			return ((EntityZombieCowman)this.field_75299_d).isAngry() && super.shouldExecute();
 		}
 	}
 }

@@ -3,13 +3,13 @@ package hugman.mod.objects.item;
 import java.util.Random;
 
 import hugman.mod.init.MubbleSounds;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.StatList;
+import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
@@ -21,7 +21,7 @@ public class ItemAnnoyingDog extends Item
     }
     
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
     	ItemStack stack = playerIn.getHeldItem(handIn);
     	Random rand = new Random();
@@ -32,16 +32,16 @@ public class ItemAnnoyingDog extends Item
     		if(luck == 0)
     		{
     			stack.setCount(0);
-    			worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.ITEM_ANNOYING_DOG_DISAPPEAR, SoundCategory.PLAYERS, 0.5F, 1F);
+    			worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.ITEM_ANNOYING_DOG_DISAPPEAR, SoundCategory.PLAYERS, 0.5F, 1F);
     		}
     		else
     		{
     			if(!playerIn.abilities.isCreativeMode && stack.getCount() <= 63) stack.grow(1);
-    			worldIn.playSound((EntityPlayer)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.ITEM_ANNOYING_DOG_BARK, SoundCategory.PLAYERS, 0.5F, 1F);
+    			worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.ITEM_ANNOYING_DOG_BARK, SoundCategory.PLAYERS, 0.5F, 1F);
     		}
-    		playerIn.addStat(StatList.ITEM_USED.get(this));
-    		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
+    		playerIn.addStat(Stats.ITEM_USED.get(this));
+    		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, stack);
     	}
-    	return new ActionResult<ItemStack>(EnumActionResult.FAIL, stack);
+    	return new ActionResult<ItemStack>(ActionResultType.FAIL, stack);
     }
 }

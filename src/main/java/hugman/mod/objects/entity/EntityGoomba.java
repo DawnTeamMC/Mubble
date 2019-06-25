@@ -1,47 +1,48 @@
 package hugman.mod.objects.entity;
 
-import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleLootTables;
 import hugman.mod.init.MubbleSounds;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.MoveTowardsRestrictionGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class EntityGoomba extends EntityMob
+public class EntityGoomba extends MonsterEntity
 {    
-    public EntityGoomba(World worldIn) 
+    public EntityGoomba(EntityType<? extends EntityGoomba> type, World worldIn) 
     {
-        super(MubbleEntities.GOOMBA, worldIn);
-        this.setSize(0.9375F, 0.9375F);
+        super(type, worldIn);
     }
     
 	@Override
-    protected void initEntityAI()
+    protected void registerGoals()
     {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
-        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityGoomba.class}));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityToad.class, true));
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[] {EntityGoomba.class}));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, EntityToad.class, true));
     }
     
     @Override
@@ -56,7 +57,7 @@ public class EntityGoomba extends EntityMob
     }
     
     @Override
-    public float getEyeHeight()
+    public float getEyeHeight(Pose pose)
     {
         return 0.40625F;
     }
@@ -79,26 +80,21 @@ public class EntityGoomba extends EntityMob
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, IBlockState blockIn)
+	protected void playStepSound(BlockPos pos, BlockState blockIn)
 	{
     	 this.playSound(this.getStepSound(), 0.15F, 1.0F);
 	}
     
     @Override
-    protected ResourceLocation getLootTable() 
+    public void onCollideWithPlayer(PlayerEntity playerIn)
     {
-        return MubbleLootTables.CHINCHO;
-    }
-    
-    @Override
-    public void onCollideWithPlayer(EntityPlayer playerIn)
-    {
-    	AxisAlignedBB hitbox = this.getBoundingBox().contract(0, -1, 0).shrink(0.1, 0, 0.1);
-    	if(!playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && playerIn.motionY < 0.3D && !this.dead)
+    	AxisAlignedBB hitbox = this.getBoundingBox().contract(0, -1, 0).grow(-0.1, 0, -0.1);
+    	Vec3d vec3d = playerIn.getMotion();
+    	if(!playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && vec3d.y < 0.3D && !this.dead)
     	{
-    		playerIn.motionY = 0.5D;
+    		playerIn.setMotion(vec3d.x, 0.5D, vec3d.z);
     		playerIn.fallDistance = 0.0F;
-    		if(playerIn.motionY == 0.5D)
+    		if(vec3d.y == 0.5D)
     		{
         		this.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), Float.MAX_VALUE);
         		this.playSound(MubbleSounds.ENTITY_GOOMBA_CRUSH, this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);

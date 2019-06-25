@@ -1,22 +1,23 @@
 package hugman.mod.objects.entity.render;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import hugman.mod.objects.entity.EntityCustomTNT;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderCustomTNT extends Render<EntityCustomTNT>
+public class RenderCustomTNT extends EntityRenderer<EntityCustomTNT>
 {
-	public RenderCustomTNT(RenderManager renderManagerIn)
+	public RenderCustomTNT(EntityRendererManager renderManagerIn)
 	{
 		super(renderManagerIn);
 		this.shadowSize = 0.5F;
@@ -25,7 +26,7 @@ public class RenderCustomTNT extends Render<EntityCustomTNT>
 	@Override
 	public void doRender(EntityCustomTNT entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
-		IBlockState blockState = entity.getBlockState();
+		BlockState blockState = entity.getBlockState();
 		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
 		GlStateManager.pushMatrix();
 		GlStateManager.translatef((float)x, (float)y + 0.5F, (float)z);
@@ -48,14 +49,14 @@ public class RenderCustomTNT extends Render<EntityCustomTNT>
 		if (this.renderOutlines)
 		{
 			GlStateManager.enableColorMaterial();
-			GlStateManager.enableOutlineMode(this.getTeamColor(entity));
+			GlStateManager.setupSolidRenderingTextureCombine(this.getTeamColor(entity));
 			blockrendererdispatcher.renderBlockBrightness(blockState, 1.0F);
-			GlStateManager.disableOutlineMode();
+			GlStateManager.tearDownSolidRenderingTextureCombine();
 			GlStateManager.disableColorMaterial();
 		}
 		else if (entity.getFuse() / 5 % 2 == 0)
 		{
-			GlStateManager.disableTexture2D();
+			GlStateManager.disableTexture();
 			GlStateManager.disableLighting();
 			GlStateManager.enableBlend();
 			GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.DST_ALPHA);
@@ -68,7 +69,7 @@ public class RenderCustomTNT extends Render<EntityCustomTNT>
 			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 			GlStateManager.disableBlend();
 			GlStateManager.enableLighting();
-			GlStateManager.enableTexture2D();
+			GlStateManager.enableTexture();
 		}
 
 		GlStateManager.popMatrix();
@@ -78,6 +79,6 @@ public class RenderCustomTNT extends Render<EntityCustomTNT>
 	@Override
 	protected ResourceLocation getEntityTexture(EntityCustomTNT entity)
 	{
-		return TextureMap.LOCATION_BLOCKS_TEXTURE;
+		return AtlasTexture.LOCATION_BLOCKS_TEXTURE;
 	}
 }

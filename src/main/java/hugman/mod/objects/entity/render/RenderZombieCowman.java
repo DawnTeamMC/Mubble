@@ -2,30 +2,20 @@ package hugman.mod.objects.entity.render;
 
 import hugman.mod.Mubble;
 import hugman.mod.objects.entity.EntityZombieCowman;
-import net.minecraft.client.renderer.entity.RenderBiped;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
-import net.minecraft.client.renderer.entity.model.ModelZombie;
+import net.minecraft.client.renderer.entity.BipedRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.layers.BipedArmorLayer;
+import net.minecraft.client.renderer.entity.model.ZombieModel;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderZombieCowman extends RenderBiped<EntityZombieCowman>
+public class RenderZombieCowman extends BipedRenderer<EntityZombieCowman, ZombieModel<EntityZombieCowman>>
 {
 	private static final ResourceLocation ZOMBIE_COWMAN_TEXTURE = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/zombie_cowman.png");
 	
-	public RenderZombieCowman(RenderManager renderManagerIn)
+	public RenderZombieCowman(EntityRendererManager renderManagerIn)
 	{
-		super(renderManagerIn, new ModelZombie(), 0.5F);
-		this.addLayer
-		(
-			new LayerBipedArmor(this)
-			{
-				protected void initArmor()
-				{
-					this.modelLeggings = new ModelZombie(0.5F, true);
-					this.modelArmor = new ModelZombie(1.0F, true);
-				}
-			}
-		);
+		super(renderManagerIn, new ZombieModel<>(), 0.5F);
+		this.addLayer(new BipedArmorLayer<>(this, new ZombieModel<>(0.5F, true), new ZombieModel<>(1.0F, true)));
    }
    
    protected ResourceLocation getEntityTexture(EntityZombieCowman entity)

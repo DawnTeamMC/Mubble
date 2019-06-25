@@ -2,16 +2,17 @@ package hugman.mod.init.world;
 
 import hugman.mod.init.MubbleBlocks;
 import hugman.mod.init.MubbleEntities;
-import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.MinableConfig;
+import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
 import net.minecraft.world.gen.placement.CountRange;
 import net.minecraft.world.gen.placement.CountRangeConfig;
+import net.minecraft.world.gen.placement.Placement;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class MubbleGenerators
@@ -25,11 +26,11 @@ public class MubbleGenerators
 				biome.addFeature
 				(
 					Decoration.UNDERGROUND_ORES, 
-					Biome.createCompositeFeature
+					Biome.createDecoratedFeature
 					(
-						Feature.MINABLE, 
-						new MinableConfig(MinableConfig.IS_ROCK, MubbleBlocks.BLUNITE.getDefaultState(), 33), 
-						new CountRange(),
+						Feature.ORE, 
+						new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, MubbleBlocks.BLUNITE.getDefaultState(), 33),
+						new CountRange(CountRangeConfig::deserialize),
 						new CountRangeConfig(10, 0, 0, 80)
 					)
 				);
@@ -37,11 +38,11 @@ public class MubbleGenerators
 				biome.addFeature
 				(
 					Decoration.UNDERGROUND_ORES, 
-					Biome.createCompositeFeature
+					Biome.createDecoratedFeature
 					(
-						Feature.MINABLE, 
-						new MinableConfig(MinableConfig.IS_ROCK, MubbleBlocks.CARBONITE.getDefaultState(), 33), 
-						new CountRange(),
+						Feature.ORE, 
+						new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, MubbleBlocks.CARBONITE.getDefaultState(), 33),
+						new CountRange(CountRangeConfig::deserialize),
 						new CountRangeConfig(10, 0, 0, 80)
 					)
 				);
@@ -49,11 +50,11 @@ public class MubbleGenerators
 				biome.addFeature
 				(
 					Decoration.UNDERGROUND_ORES, 
-					Biome.createCompositeFeature
+					Biome.createDecoratedFeature
 					(
-						Feature.MINABLE, 
-						new MinableConfig(MinableConfig.IS_ROCK, MubbleBlocks.VANADIUM_ORE.getDefaultState(), 6), 
-						new CountRange(),
+						Feature.ORE, 
+						new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, MubbleBlocks.VANADIUM_ORE.getDefaultState(), 6),
+						new CountRange(CountRangeConfig::deserialize),
 						new CountRangeConfig(1, 0, 0, 16)
 					)
 				);
@@ -67,13 +68,14 @@ public class MubbleGenerators
 		{
 			if (biome.getCategory().equals(Category.DESERT))
 			{
-				biome.addFeature(
+				biome.addFeature
+				(
 					Decoration.VEGETAL_DECORATION, 
-					Biome.createCompositeFeature
+					Biome.createDecoratedFeature
 					(
 						MubbleFeatures.PALM_TREE, 
 						IFeatureConfig.NO_FEATURE_CONFIG,
-						Biome.AT_SURFACE_WITH_EXTRA,
+						Placement.COUNT_EXTRA_HEIGHTMAP,
 						new AtSurfaceWithExtraConfig(0, 0.12F, 1)
 					)
 				);
@@ -87,7 +89,7 @@ public class MubbleGenerators
 		{
 			if (!biome.getCategory().equals(Category.PLAINS))
 			{
-				biome.getSpawns(EnumCreatureType.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.TOAD, 10, 4, 4));
+				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.TOAD, 10, 4, 4));
 			}
 		}
 	}

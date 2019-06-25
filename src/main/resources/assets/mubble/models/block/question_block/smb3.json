@@ -1,0 +1,9 @@
+{
+	"parent": "block/cube_bottom_top",
+	"textures":
+	{
+		"top": "mubble:block/question_block/smb3/top",
+		"side": "mubble:block/question_block/smb3/side",
+		"bottom": "mubble:block/question_block/smb3/bottom"
+	}
+}

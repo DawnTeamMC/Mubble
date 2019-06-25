@@ -1,53 +1,54 @@
 package hugman.mod.objects.entity.render.model;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.model.ModelBase;
-import net.minecraft.client.renderer.entity.model.ModelRenderer;
+import com.mojang.blaze3d.platform.GlStateManager;
+
+import net.minecraft.client.renderer.entity.model.EntityModel;
+import net.minecraft.client.renderer.entity.model.RendererModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
-public class ModelToad extends ModelBase
+public class ModelToad<T extends Entity> extends EntityModel<T>
 {
-	public ModelRenderer head;
-    public ModelRenderer hat;
-    public ModelRenderer front_lamp;
-    public ModelRenderer body;
-    public ModelRenderer bagpack;
-    public ModelRenderer right_arm;
-    public ModelRenderer left_arm;
-    public ModelRenderer right_leg;
-    public ModelRenderer left_leg;
+	public RendererModel head;
+    public RendererModel hat;
+    public RendererModel front_lamp;
+    public RendererModel body;
+    public RendererModel bagpack;
+    public RendererModel right_arm;
+    public RendererModel left_arm;
+    public RendererModel right_leg;
+    public RendererModel left_leg;
 
     public ModelToad()
     {
         this.textureWidth = 64;
         this.textureHeight = 64;
-        this.head = new ModelRenderer(this, 0, 0);
+        this.head = new RendererModel(this, 0, 0);
         this.head.setRotationPoint(0.0F, 8.0F, 0.0F);
         this.head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
-        this.hat = new ModelRenderer(this, 0, 29);
+        this.hat = new RendererModel(this, 0, 29);
         this.hat.setRotationPoint(0.0F, 8.0F, 0.0F);
         this.hat.addBox(-5.0F, -10.0F, -5.0F, 10, 5, 10, 0.0F);
-        this.front_lamp = new ModelRenderer(this, 30, 33);
+        this.front_lamp = new RendererModel(this, 30, 33);
         this.front_lamp.setRotationPoint(0.0F, 8.0F, 0.0F);
         this.front_lamp.addBox(-2.0F, -10.0F, -7.0F, 4, 4, 2, 0.0F);
-        this.body = new ModelRenderer(this, 16, 16);
+        this.body = new RendererModel(this, 16, 16);
         this.body.setRotationPoint(0.0F, 8.0F, 0.0F);
         this.body.addBox(-4.0F, 0.0F, -2F, 8, 9, 4, 0.0F);
-        this.bagpack = new ModelRenderer(this, 0, 44);
+        this.bagpack = new RendererModel(this, 0, 44);
         this.bagpack.setRotationPoint(0.0F, 8.0F, 0.0F);
         this.bagpack.addBox(-3.0F, 0.0F, 2.0F, 6, 8, 4, 0.0F);
-        this.right_arm = new ModelRenderer(this, 40, 16);
+        this.right_arm = new RendererModel(this, 40, 16);
         this.right_arm.setRotationPoint(-5.0F, 10.0F, 0.0F);
         this.right_arm.addBox(-2.0F, -2.0F, -2.0F, 3, 7, 4, 0.0F);
-        this.left_arm = new ModelRenderer(this, 40, 16);
+        this.left_arm = new RendererModel(this, 40, 16);
         this.left_arm.mirror = true;
         this.left_arm.setRotationPoint(5.0F, 10.0F, 0.0F);
         this.left_arm.addBox(-1.0F, -2.0F, -2.0F, 3, 7, 4, 0.0F);
-        this.right_leg = new ModelRenderer(this, 0, 16);
+        this.right_leg = new RendererModel(this, 0, 16);
         this.right_leg.setRotationPoint(-2F, 17.0F, 0F);
         this.right_leg.addBox(-2.0F, 0.0F, -2.0F, 4, 7, 4, 0.0F);
-        this.left_leg = new ModelRenderer(this, 0, 16);
+        this.left_leg = new RendererModel(this, 0, 16);
         this.left_leg.mirror = true;
         this.left_leg.setRotationPoint(2F, 17.0F, 0.0F);
         this.left_leg.addBox(-2.0F, 0.0F, -2.0F, 4, 7, 4, 0.0F);
@@ -82,7 +83,7 @@ public class ModelToad extends ModelBase
     }
     
     @Override
-    public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn) 
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) 
     {
         //this.body.rotateAngleY = MathHelper.sin(MathHelper.sqrt(this.swingProgress) * ((float)Math.PI * 2F)) * 0.2F;
     	this.left_leg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;

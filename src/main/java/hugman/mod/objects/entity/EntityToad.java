@@ -4,75 +4,77 @@ import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleLootTables;
 import hugman.mod.init.MubbleSounds;
 import hugman.mod.init.MubbleTags;
-import net.minecraft.entity.EntityAgeable;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIFollowParent;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
-import net.minecraft.entity.ai.EntityAIOpenDoor;
-import net.minecraft.entity.ai.EntityAIPanic;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAITempt;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.passive.EntityAnimal;
-import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.ai.goal.FollowParentGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.OpenDoorGoal;
+import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.TemptGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntitySelectors;
+import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class EntityToad extends EntityAnimal
+public class EntityToad extends AnimalEntity
 {
 	private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityToad.class, DataSerializers.VARINT);
 	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromTag(MubbleTags.Items.TEMPTING_TO_TOAD);
 	
-    public EntityToad(World worldIn) 
+    public EntityToad(EntityType<? extends EntityToad> type, World worldIn) 
     {
-        super(MubbleEntities.TOAD, worldIn);
-        this.setSize(0.6F, 1.4F);
+        super(type, worldIn);
     }
     
     @Override
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData entityLivingData, NBTTagCompound itemNbt)
+    public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag)
     {
         this.setVariant(this.world.rand.nextInt(16));
-        return super.onInitialSpawn(difficulty, entityLivingData, itemNbt);
+        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
     
     @Override
-    protected void initEntityAI()
+    protected void registerGoals()
     {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityChincho.class, 10f, 1.2d, 1.45d, EntitySelectors.IS_ALIVE));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityItem.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((EntityItem) checkedEntity).getItem().getItem()), 10f, 1.2d, 1.45d, EntitySelectors.IS_ALIVE));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((EntityLivingBase) checkedEntity).getHeldItemMainhand().getItem()), 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((EntityLivingBase) checkedEntity).getHeldItemOffhand().getItem()), 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
-        this.tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((EntityLivingBase) checkedEntity).getItemStackFromSlot(EntityEquipmentSlot.HEAD).getItem()), 10f, 1.2f, 1.45f, EntitySelectors.CAN_AI_TARGET));
-        this.tasks.addTask(1, new EntityAIOpenDoor(this, true));
-        this.tasks.addTask(2, new EntityAIPanic(this, 1.6D));
-        this.tasks.addTask(2, new EntityAIMate(this, 1.0D));
-        this.tasks.addTask(3, new EntityAITempt(this, 1.4D, false, TEMPTATION_ITEMS));
-        this.tasks.addTask(4, new EntityAIFollowParent(this, 1.1D));
-        this.tasks.addTask(4, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(5, new EntityAIWatchClosest(this, EntityChicken.class, 10.0F));
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, this.getClass(), 8.0F));
-        this.tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, EntityChincho.class, 10f, 1.2d, 1.45d, EntityPredicates.IS_ALIVE::test));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((LivingEntity) checkedEntity).getHeldItemMainhand().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.CAN_AI_TARGET::test));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((LivingEntity) checkedEntity).getHeldItemOffhand().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.CAN_AI_TARGET::test));
+        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((LivingEntity) checkedEntity).getItemStackFromSlot(EquipmentSlotType.HEAD).getItem()), 10f, 1.2f, 1.45f, EntityPredicates.CAN_AI_TARGET::test));
+        this.goalSelector.addGoal(1, new OpenDoorGoal(this, true));
+        this.goalSelector.addGoal(2, new PanicGoal(this, 1.6D));
+        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
+        this.goalSelector.addGoal(3, new TemptGoal(this, 1.4D, false, TEMPTATION_ITEMS));
+        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
+        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(5, new LookAtGoal(this, ChickenEntity.class, 10.0F));
+        this.goalSelector.addGoal(6, new LookAtGoal(this, this.getClass(), 8.0F));
+        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
     }
     
     @Override
@@ -84,7 +86,7 @@ public class EntityToad extends EntityAnimal
     }
     
     @Override
-    public float getEyeHeight()
+    public float getEyeHeight(Pose pose)
     {
     	if(this.isChild()) return 0.75f;
         return 1.25f;
@@ -126,14 +128,14 @@ public class EntityToad extends EntityAnimal
 	}
     
     @Override
-    public void writeAdditional(NBTTagCompound compound)
+    public void writeAdditional(CompoundNBT compound)
     {
         super.writeAdditional(compound);
-        compound.setInt("Variant", this.getVariant());
+        compound.putInt("Variant", this.getVariant());
     }
 
     @Override
-    public void readAdditional(NBTTagCompound compound)
+    public void readAdditional(CompoundNBT compound)
     {
         super.readAdditional(compound);
         this.setVariant(compound.getInt("Variant"));
@@ -194,9 +196,9 @@ public class EntityToad extends EntityAnimal
     }
     
     @Override
-    public EntityAgeable createChild(EntityAgeable ageable)
+    public AgeableEntity createChild(AgeableEntity ageable)
     {
-    	EntityToad childToad = new EntityToad(this.world);
+    	EntityToad childToad = new EntityToad(MubbleEntities.TOAD, this.world);
     	childToad.setVariant(this.world.rand.nextInt(16));
     	return childToad;
     }

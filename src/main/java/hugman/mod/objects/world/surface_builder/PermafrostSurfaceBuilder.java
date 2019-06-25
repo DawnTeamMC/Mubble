@@ -1,29 +1,37 @@
 package hugman.mod.objects.world.surface_builder;
 
 import java.util.Random;
+import java.util.function.Function;
+
+import com.mojang.datafixers.Dynamic;
 
 import hugman.mod.init.MubbleBlocks;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunk;
-import net.minecraft.world.gen.NoiseGeneratorOctaves;
-import net.minecraft.world.gen.surfacebuilders.ISurfaceBuilder;
+import net.minecraft.world.gen.OctavesNoiseGenerator;
+import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
-public class PermafrostSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderConfig>
+public class PermafrostSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfig>
 {
-	private static final IBlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
-	private static final IBlockState PERMAROCK = MubbleBlocks.PERMAROCK.getDefaultState();
-	private static final IBlockState BLUE_ICE = Blocks.BLUE_ICE.getDefaultState();
-	private static final IBlockState ICE = Blocks.ICE.getDefaultState();
+	private static final BlockState CAVE_AIR = Blocks.CAVE_AIR.getDefaultState();
+	private static final BlockState PERMAROCK = MubbleBlocks.PERMAROCK.getDefaultState();
+	private static final BlockState BLUE_ICE = Blocks.BLUE_ICE.getDefaultState();
+	private static final BlockState ICE = Blocks.ICE.getDefaultState();
 	protected long field_205552_a;
-	protected NoiseGeneratorOctaves field_205553_b;
+	protected OctavesNoiseGenerator field_205553_b;
+	
+	public PermafrostSurfaceBuilder(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51305_1_)
+	{
+		super(p_i51305_1_);
+	}
 
 	@Override
-	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, IBlockState defaultBlock, IBlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
+	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
 		int i = seaLevel + 1;
 		int j = x & 15;
@@ -34,12 +42,12 @@ public class PermafrostSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderC
 		int l = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
 		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 		int i1 = -1;
-		IBlockState iblockstate = PERMAROCK;
-		IBlockState iblockstate1 = PERMAROCK;
+		BlockState iblockstate = PERMAROCK;
+		BlockState iblockstate1 = PERMAROCK;
 
 		for(int j1 = 127; j1 >= 0; --j1) {
 			blockpos$mutableblockpos.setPos(j, j1, k);
-			IBlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
+			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
 			if (iblockstate2.getBlock() != null && !iblockstate2.isAir())
 			{
 				if (iblockstate2.getBlock() == defaultBlock.getBlock())
@@ -86,7 +94,7 @@ public class PermafrostSurfaceBuilder implements ISurfaceBuilder<SurfaceBuilderC
 	@Override
 	public void setSeed(long seed)
 	{
-		if (this.field_205552_a != seed || this.field_205553_b == null) this.field_205553_b = new NoiseGeneratorOctaves(new SharedSeedRandom(seed), 4);
+		if (this.field_205552_a != seed || this.field_205553_b == null) this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4);
 		this.field_205552_a = seed;
 	}
 }

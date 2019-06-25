@@ -1,23 +1,24 @@
 package hugman.mod.objects.entity;
 
-import hugman.mod.init.MubbleEntities;
 import hugman.mod.init.MubbleLootTables;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.EntityAIAttackMelee;
-import net.minecraft.entity.ai.EntityAIAvoidEntity;
-import net.minecraft.entity.ai.EntityAIHurtByTarget;
-import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.EntityAISwimming;
-import net.minecraft.entity.ai.EntityAIWanderAvoidWater;
-import net.minecraft.entity.ai.EntityAIWatchClosest;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.passive.EntityOcelot;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.entity.ai.goal.AvoidEntityGoal;
+import net.minecraft.entity.ai.goal.HurtByTargetGoal;
+import net.minecraft.entity.ai.goal.LookAtGoal;
+import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.entity.ai.goal.MoveTowardsRestrictionGoal;
+import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.SwimGoal;
+import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.passive.OcelotEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -25,27 +26,26 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EntityChincho extends EntityMob
+public class EntityChincho extends MonsterEntity
 {    
-    public EntityChincho(World worldIn) 
+    public EntityChincho(EntityType<? extends EntityChincho> type, World worldIn) 
     {
-        super(MubbleEntities.CHINCHO, worldIn);
-        this.setSize(0.6F, 1.2F);
+        super(type, worldIn);
     }
     
 	@Override
-    protected void initEntityAI()
+    protected void registerGoals()
     {
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
-        this.tasks.addTask(3, new EntityAIAvoidEntity<>(this, EntityOcelot.class, 6.0F, 1.0D, 1.2D));
-        this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
-        this.tasks.addTask(7, new EntityAIWanderAvoidWater(this, 1.0D));
-        this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
-        this.tasks.addTask(8, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityChincho.class}));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityPlayer.class, true));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityToad.class, true));
+        this.goalSelector.addGoal(0, new SwimGoal(this));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, OcelotEntity.class, 6.0F, 1.0D, 1.2D));
+        this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0D));
+        this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[] {EntityChincho.class}));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, EntityToad.class, true));
     }
     
     @Override
@@ -62,11 +62,11 @@ public class EntityChincho extends EntityMob
     @Override
     public CreatureAttribute getCreatureAttribute()
     {
-        return CreatureAttribute.UNDEAD;
+        return CreatureAttribute.field_223223_b_;
     }
     
     @Override
-    public float getEyeHeight()
+    public float getEyeHeight(Pose p_213307_1_)
     {
         return 1f;
     }
@@ -83,10 +83,10 @@ public class EntityChincho extends EntityMob
         {
             float f = this.getBrightness();
 
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(new BlockPos(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ)))
+            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canBlockSeeSky(new BlockPos(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ)))
             {
                 boolean flag = true;
-                ItemStack itemstack = this.getItemStackFromSlot(EntityEquipmentSlot.HEAD);
+                ItemStack itemstack = this.getItemStackFromSlot(EquipmentSlotType.HEAD);
 
                 if (!itemstack.isEmpty())
                 {
@@ -96,8 +96,8 @@ public class EntityChincho extends EntityMob
 
                         if (itemstack.getDamage() >= itemstack.getMaxDamage())
                         {
-                            this.renderBrokenItemStack(itemstack);
-                            this.setItemStackToSlot(EntityEquipmentSlot.HEAD, ItemStack.EMPTY);
+                        	this.sendBreakAnimation(EquipmentSlotType.HEAD);
+                            this.setItemStackToSlot(EquipmentSlotType.HEAD, ItemStack.EMPTY);
                         }
                     }
 
@@ -130,11 +130,5 @@ public class EntityChincho extends EntityMob
     protected SoundEvent getDeathSound() 
     {
         return MubbleSounds.ENTITY_CHINCHO_DEATH;
-    }
-    
-    @Override
-    protected ResourceLocation getLootTable() 
-    {
-        return MubbleLootTables.CHINCHO;
     }
 }

@@ -3,11 +3,11 @@ package hugman.mod.objects.entity.render;
 import hugman.mod.Mubble;
 import hugman.mod.objects.entity.EntityToad;
 import hugman.mod.objects.entity.render.model.ModelToad;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderToad extends RenderLiving<EntityToad>
+public class RenderToad extends MobRenderer<EntityToad, ModelToad<EntityToad>>
 {
     private static final ResourceLocation BLUE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/blue.png");
     private static final ResourceLocation LIGHT_BLUE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/light_blue.png");
@@ -33,9 +33,9 @@ public class RenderToad extends RenderLiving<EntityToad>
     private static final ResourceLocation PARTY_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/party.png");
     private static final ResourceLocation KISEKAE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/kisekae.png");
 	
-	public RenderToad(RenderManager manager) 
+	public RenderToad(EntityRendererManager manager)
 	{
-		super(manager, new ModelToad(), 0.5F);
+		super(manager, new ModelToad<>(), 0.5F);
 	}
 
 	@Override

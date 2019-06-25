@@ -2,18 +2,19 @@ package hugman.mod.objects.entity.render;
 
 import java.util.Random;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+
 import hugman.mod.objects.entity.EntityFlyingBlock;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -22,9 +23,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.data.EmptyModelData;
 
 @OnlyIn(Dist.CLIENT)
-public class RenderFlyingBlock extends Render<EntityFlyingBlock>
+public class RenderFlyingBlock extends EntityRenderer<EntityFlyingBlock>
 {
-   public RenderFlyingBlock(RenderManager renderManagerIn)
+   public RenderFlyingBlock(EntityRendererManager renderManagerIn)
    {
       super(renderManagerIn);
       this.shadowSize = 0.5F;
@@ -33,13 +34,13 @@ public class RenderFlyingBlock extends Render<EntityFlyingBlock>
    @Override
    public void doRender(EntityFlyingBlock entity, double x, double y, double z, float entityYaw, float partialTicks)
    {
-      IBlockState iblockstate = entity.getBlockState();
-      if (iblockstate.getRenderType() == EnumBlockRenderType.MODEL)
+      BlockState iblockstate = entity.getBlockState();
+      if (iblockstate.getRenderType() == BlockRenderType.MODEL)
       {
          World world = entity.getWorldObj();
-         if (iblockstate != world.getBlockState(new BlockPos(entity)) && iblockstate.getRenderType() != EnumBlockRenderType.INVISIBLE)
+         if (iblockstate != world.getBlockState(new BlockPos(entity)) && iblockstate.getRenderType() != BlockRenderType.INVISIBLE)
          {
-            this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            this.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
             GlStateManager.pushMatrix();
             GlStateManager.disableLighting();
             Tessellator tessellator = Tessellator.getInstance();
@@ -47,7 +48,7 @@ public class RenderFlyingBlock extends Render<EntityFlyingBlock>
             if (this.renderOutlines)
             {
                GlStateManager.enableColorMaterial();
-               GlStateManager.enableOutlineMode(this.getTeamColor(entity));
+               GlStateManager.setupSolidRenderingTextureCombine(this.getTeamColor(entity));
             }
             bufferbuilder.begin(7, DefaultVertexFormats.BLOCK);
             BlockPos blockpos = new BlockPos(entity.posX, entity.getBoundingBox().maxY, entity.posZ);
@@ -57,7 +58,7 @@ public class RenderFlyingBlock extends Render<EntityFlyingBlock>
             tessellator.draw();
             if (this.renderOutlines)
             {
-               GlStateManager.disableOutlineMode();
+               GlStateManager.tearDownSolidRenderingTextureCombine();
                GlStateManager.disableColorMaterial();
             }
             GlStateManager.enableLighting();
@@ -70,6 +71,6 @@ public class RenderFlyingBlock extends Render<EntityFlyingBlock>
    @Override
    protected ResourceLocation getEntityTexture(EntityFlyingBlock entity)
    {
-      return TextureMap.LOCATION_BLOCKS_TEXTURE;
+      return AtlasTexture.LOCATION_BLOCKS_TEXTURE;
    }
 }
