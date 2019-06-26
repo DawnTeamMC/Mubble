@@ -21,6 +21,7 @@ import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -51,7 +52,7 @@ public class VerticalSlabBlock extends Block implements IBucketPickupHandler, IL
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
     {
-       builder.add(TYPE, WATERLOGGED);
+        builder.add(TYPE, WATERLOGGED);
 	}
 
 	@Override
@@ -93,18 +94,22 @@ public class VerticalSlabBlock extends Block implements IBucketPickupHandler, IL
         	BlockState iblockstate1 = this.getDefaultState().with(TYPE, SlabVerticalType.NORTH).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
         	Direction facing = context.getPlacementHorizontalFacing();
         	Direction face_hit = context.getFace();
+        	
+        	Vec3d vec3d = context.getHitVec();
+            double hitX = vec3d.x - (double)context.getPos().getX();
+            double hitZ = vec3d.z - (double)context.getPos().getZ();
         	if(facing == Direction.NORTH || facing == Direction.SOUTH)
         	{
         		if(face_hit == Direction.SOUTH) return iblockstate1.with(TYPE, SlabVerticalType.NORTH);
         		else if(face_hit == Direction.NORTH) return iblockstate1.with(TYPE, SlabVerticalType.SOUTH);
-        		else if((double)context.getHitVec().z > 0.5D) return iblockstate1.with(TYPE, SlabVerticalType.SOUTH);
+        		else if(hitZ > 0.5D) return iblockstate1.with(TYPE, SlabVerticalType.SOUTH);
         		else return iblockstate1.with(TYPE, SlabVerticalType.NORTH);
         	}
         	else if (facing == Direction.EAST || facing == Direction.WEST)
         	{
         		if(face_hit == Direction.WEST) return iblockstate1.with(TYPE, SlabVerticalType.EAST);
         		else if(face_hit == Direction.EAST) return iblockstate1.with(TYPE, SlabVerticalType.WEST);
-        		else if((double)context.getHitVec().z > 0.5D) return iblockstate1.with(TYPE, SlabVerticalType.EAST);
+        		else if(hitX > 0.5D) return iblockstate1.with(TYPE, SlabVerticalType.EAST);
         		else return iblockstate1.with(TYPE, SlabVerticalType.WEST);
         	}
         	else return iblockstate1;
@@ -118,36 +123,27 @@ public class VerticalSlabBlock extends Block implements IBucketPickupHandler, IL
         SlabVerticalType slabtype = state.get(TYPE);
         if (slabtype != SlabVerticalType.DOUBLE && itemstack.getItem() == this.asItem())
         {
-           if (context.replacingClickedOnBlock())
-           {
-              boolean flag1 = (double)context.getHitVec().z > 0.5D;
-              boolean flag2 = (double)context.getHitVec().x > 0.5D;
-              Direction enumfacing = context.getFace();
-              if (slabtype == SlabVerticalType.NORTH)
-              {
-                 return enumfacing == Direction.SOUTH || flag1 && enumfacing.getAxis().isHorizontal();
-              }
-              if (slabtype == SlabVerticalType.SOUTH)
-              {
-                 return enumfacing == Direction.NORTH || !flag1 && enumfacing.getAxis().isHorizontal();
-              }
-              if (slabtype == SlabVerticalType.EAST)
-              {
-                 return enumfacing == Direction.WEST || !flag2 && enumfacing.getAxis().isHorizontal();
-              }
-              else
-              {
-                 return enumfacing == Direction.EAST || flag2 && enumfacing.getAxis().isHorizontal();
-              }
-           }
-           else
-           {
-              return true;
-           }
+            if (context.replacingClickedOnBlock())
+            {
+        	    Vec3d vec3d = context.getHitVec();
+        	    double hitX = vec3d.x - (double)context.getPos().getX();
+        	    double hitZ = vec3d.z - (double)context.getPos().getZ();
+        	    boolean flag1 = hitZ > 0.5D;
+        	    boolean flag2 = hitX > 0.5D;
+        	    Direction enumfacing = context.getFace();
+        	    if (slabtype == SlabVerticalType.NORTH) return enumfacing == Direction.SOUTH || flag1 && enumfacing.getAxis().isHorizontal();
+        	    if (slabtype == SlabVerticalType.SOUTH) return enumfacing == Direction.NORTH || !flag1 && enumfacing.getAxis().isHorizontal();
+        	    if (slabtype == SlabVerticalType.EAST) return enumfacing == Direction.WEST || !flag2 && enumfacing.getAxis().isHorizontal();
+        	    else return enumfacing == Direction.EAST || flag2 && enumfacing.getAxis().isHorizontal();
+            }
+            else
+            {
+            	return true;
+            }
         }
         else
         {
-           return false;
+        	return false;
         }
 	}
 
@@ -156,12 +152,12 @@ public class VerticalSlabBlock extends Block implements IBucketPickupHandler, IL
 	{
         if (state.get(WATERLOGGED))
         {
-           worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(false)), 3);
-           return Fluids.WATER;
+            worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(false)), 3);
+            return Fluids.WATER;
         }
         else
         {
-           return Fluids.EMPTY;
+            return Fluids.EMPTY;
         }
 	}
 	
@@ -182,16 +178,16 @@ public class VerticalSlabBlock extends Block implements IBucketPickupHandler, IL
 	{
         if (state.get(TYPE) != SlabVerticalType.DOUBLE && !state.get(WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER)
         {
-           if (!worldIn.isRemote())
-           {
-              worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)), 3);
-              worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
-           }
-           return true;
+            if (!worldIn.isRemote())
+            {
+            	worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)), 3);
+            	worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
+            }
+            return true;
         }
         else
         {
-           return false;
+            return false;
         }
 	}
 	
@@ -200,7 +196,7 @@ public class VerticalSlabBlock extends Block implements IBucketPickupHandler, IL
 	{
         if (stateIn.get(WATERLOGGED))
         {
-           worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+            worldIn.getPendingFluidTicks().scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
         }
         return stateIn;
 	}
