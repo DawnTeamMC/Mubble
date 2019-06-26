@@ -1,6 +1,5 @@
 package hugman.mod.objects.entity;
 
-import hugman.mod.init.MubbleLootTables;
 import hugman.mod.init.MubbleSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
@@ -17,7 +16,6 @@ import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;

@@ -26,8 +26,8 @@ public class MubbleEntities
 	public static final EntityType<EntityToad> TOAD = register("toad", EntityType.Builder.create(EntityToad::new, EntityClassification.CREATURE).size(0.6F, 1.4F));
 	public static final EntityType<EntityZombieCowman> ZOMBIE_COWMAN = register("zombie_cowman", EntityType.Builder.create(EntityZombieCowman::new, EntityClassification.MONSTER).size(0.6F, 1.95F));
 
-	public static final EntityType<EntityCustomTNT> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<EntityCustomTNT>create(EntityCustomTNT::new, EntityClassification.MISC).immuneToFire().size(0.98F, 0.98F));
-	public static final EntityType<EntityFlyingBlock> FLYING_BLOCK = register("flying_block", EntityType.Builder.<EntityFlyingBlock>create(EntityFlyingBlock::new, EntityClassification.MISC).size(0.98F, 0.98F));
+	public static final EntityType<EntityCustomTNT> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<EntityCustomTNT>create(EntityCustomTNT::new, EntityClassification.MISC).immuneToFire().size(0.98F, 0.98F).setTrackingRange(128).setUpdateInterval(1));
+	public static final EntityType<EntityFlyingBlock> FLYING_BLOCK = register("flying_block", EntityType.Builder.<EntityFlyingBlock>create(EntityFlyingBlock::new, EntityClassification.MISC).size(0.98F, 0.98F).setTrackingRange(128).setUpdateInterval(1));
 	
 	public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder)
 	{

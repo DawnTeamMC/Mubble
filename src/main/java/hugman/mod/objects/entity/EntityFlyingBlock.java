@@ -64,7 +64,7 @@ public class EntityFlyingBlock extends Entity implements IEntityAdditionalSpawnD
 		this.flyTile = flyingBlockState;
 		this.preventEntitySpawning = true;
 		this.setPosition(x, y + (double)((1.0F - this.getHeight()) / 2.0F), z);
-		this.setMotion(0.0D, 0.0D, 0.0D);
+		this.setMotion(Vec3d.ZERO);
 		this.prevPosX = x;
 		this.prevPosY = y;
 		this.prevPosZ = z;
