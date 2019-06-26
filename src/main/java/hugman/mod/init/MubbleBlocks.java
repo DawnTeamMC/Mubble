@@ -100,17 +100,34 @@ public class MubbleBlocks
     public static final Block ACACIA_VERTICAL_SLAB = block("acacia_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.ACACIA_PLANKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block DARK_OAK_VERTICAL_SLAB = block("dark_oak_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.DARK_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block STONE_VERTICAL_SLAB = block("stone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block SANDSTONE_VERTICAL_SLAB = block("sandstone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.SANDSTONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block SMOOTH_STONE_VERTICAL_SLAB = block("smooth_stone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.SMOOTH_STONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block COBBLESTONE_VERTICAL_SLAB = block("cobblestone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.COBBLESTONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block BRICK_VERTICAL_SLAB = block("brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block MOSSY_COBBLESTONE_VERTICAL_SLAB = block("mossy_cobblestone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.MOSSY_COBBLESTONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block STONE_BRICK_VERTICAL_SLAB = block("stone_brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.STONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block NETHER_BRICK_VERTICAL_SLAB = block("nether_brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.NETHER_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block QUARTZ_VERTICAL_SLAB = block("quartz_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.QUARTZ_BLOCK)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block MOSSY_STONE_BRICK_VERTICAL_SLAB = block("mossy_stone_brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.MOSSY_STONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block GRANITE_VERTICAL_SLAB = block("granite_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.GRANITE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block POLISHED_GRANITE_VERTICAL_SLAB = block("polished_granite_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.POLISHED_GRANITE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block DIORITE_VERTICAL_SLAB = block("diorite_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.DIORITE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block POLISHED_DIORITE_VERTICAL_SLAB = block("polished_diorite_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.POLISHED_DIORITE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block ANDESITE_VERTICAL_SLAB = block("andesite_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.ANDESITE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block POLISHED_ANDESITE_VERTICAL_SLAB = block("polished_andesite_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.POLISHED_ANDESITE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block BRICK_VERTICAL_SLAB = block("brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block SANDSTONE_VERTICAL_SLAB = block("sandstone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.SANDSTONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block CUT_SANDSTONE_VERTICAL_SLAB = block("cut_sandstone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.CUT_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block SMOOTH_SANDSTONE_VERTICAL_SLAB = block("smooth_sandstone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.SMOOTH_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block RED_SANDSTONE_VERTICAL_SLAB = block("red_sandstone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block CUT_RED_SANDSTONE_VERTICAL_SLAB = block("cut_red_sandstone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.CUT_RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block SMOOTH_RED_SANDSTONE_VERTICAL_SLAB = block("smooth_red_sandstone_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.SMOOTH_RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block NETHER_BRICK_VERTICAL_SLAB = block("nether_brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.NETHER_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block RED_NETHER_BRICK_VERTICAL_SLAB = block("red_nether_brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.RED_NETHER_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block QUARTZ_VERTICAL_SLAB = block("quartz_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.QUARTZ_BLOCK)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block SMOOTH_QUARTZ_VERTICAL_SLAB = block("smooth_quartz_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.SMOOTH_QUARTZ)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block END_STONE_BRICK_VERTICAL_SLAB = block("end_stone_brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.END_STONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block PURPUR_VERTICAL_SLAB = block("purpur_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.PURPUR_BLOCK)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block PRISMARINE_VERTICAL_SLAB = block("prismarine_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.PRISMARINE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block PRISMARINE_BRICK_VERTICAL_SLAB = block("prismarine_brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.PRISMARINE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block DARK_PRISMARINE_VERTICAL_SLAB = block("dark_prismarine_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.DARK_PRISMARINE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    
     
     public static final Block DARK_PRISMARINE_WALL = block("dark_prismarine_wall", new WallBlock(Properties.from(Blocks.DARK_PRISMARINE)), ItemGroup.DECORATIONS, WALLS);
 
