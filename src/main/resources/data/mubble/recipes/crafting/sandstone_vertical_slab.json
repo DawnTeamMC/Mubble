@@ -8,16 +8,12 @@
 	],
 	"key":
 	{
-		"#":
-		[
+		"#": [
 			{
 				"item": "minecraft:sandstone"
 			},
 			{
 				"item": "minecraft:chiseled_sandstone"
-			},
-			{
-				"item": "minecraft:cut_sandstone"
 			}
 		]
 	},

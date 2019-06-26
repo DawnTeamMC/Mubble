@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:block/vertical_slab/north",
+	"textures":
+	{
+		"block": "minecraft:block/red_nether_bricks"
+	}
+}

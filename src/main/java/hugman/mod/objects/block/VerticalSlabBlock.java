@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IBucketPickupHandler;
 import net.minecraft.block.ILiquidContainer;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.fluid.IFluidState;
@@ -28,7 +29,7 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 
-public class VerticalSlabBlock extends Block implements IBucketPickupHandler, ILiquidContainer
+public class VerticalSlabBlock extends Block implements IWaterLoggable
 {
 	public static final EnumProperty<SlabVerticalType> TYPE = MubbleBlockStateProperties.VERTICAL_SLAB_TYPE;
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -41,6 +42,12 @@ public class VerticalSlabBlock extends Block implements IBucketPickupHandler, IL
     {
         super(builder);
         this.setDefaultState(this.stateContainer.getBaseState().with(TYPE, SlabVerticalType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
+    }
+    
+    @Override
+    public boolean func_220074_n(BlockState state)
+    {
+    	return state.get(TYPE) != SlabVerticalType.DOUBLE;
     }
     
     @Override

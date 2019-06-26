@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mod.Mubble;
-import hugman.mod.objects.item.ItemAnnoyingDog;
-import hugman.mod.objects.item.ItemBandage;
-import hugman.mod.objects.item.ItemCapeFeather;
-import hugman.mod.objects.item.ItemMakerBlock;
-import hugman.mod.objects.item.ItemSmashBall;
-import hugman.mod.objects.item.ItemSuperStar;
-import hugman.mod.objects.item.ItemTotemOfAscending;
+import hugman.mod.objects.item.AnnoyingDogItem;
+import hugman.mod.objects.item.BandageItem;
+import hugman.mod.objects.item.CapeFeatherItem;
+import hugman.mod.objects.item.MakerBlockItem;
+import hugman.mod.objects.item.SmashBallItem;
+import hugman.mod.objects.item.SuperStarItem;
+import hugman.mod.objects.item.TotemOfAscendingItem;
 import net.minecraft.item.BlockNamedItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -49,29 +49,29 @@ public class MubbleItems
     public static final Item BISMUTH_DUST = item("bismuth_dust", new Item(pMaterials));
     public static final Item CRYSTALLIZED_BISMUTH = item("crystallized_bismuth", new Item(pMaterials));
     public static final Item PERMAFROST_BRICK = item("permafrost_brick", new Item(pMaterials));
-    public static final Item BANDAGE = item("bandage", new ItemBandage(pMisc.maxStackSize(16)));
-    public static final Item TOTEM_OF_ASCENDING = item("totem_of_ascending", new ItemTotemOfAscending(pCombat.maxStackSize(1).rarity(Rarity.UNCOMMON)));
+    public static final Item BANDAGE = item("bandage", new BandageItem(pMisc.maxStackSize(16)));
+    public static final Item TOTEM_OF_ASCENDING = item("totem_of_ascending", new TotemOfAscendingItem(pCombat.maxStackSize(1).rarity(Rarity.UNCOMMON)));
 
     /* SUPER MARIO */
     public static final Item SUPER_MUSHROOM = item("super_mushroom", new Item(pFood.food(MubbleFoods.SUPER_MUSHROOM)));
     public static final Item PEACH = item("peach", new Item(pFood.food(MubbleFoods.PEACH)));
-    public static final Item CAPE_FEATHER = item("cape_feather", new ItemCapeFeather(pTransportation));
-    public static final Item SUPER_CAPE_FEATHER = item("super_cape_feather", new ItemCapeFeather(pTransportation.maxStackSize(1).rarity(Rarity.EPIC)));
-    public static final Item SUPER_STAR = item("super_star", new ItemSuperStar(pMisc.maxStackSize(1).rarity(Rarity.RARE).food(MubbleFoods.SUPER_STAR)));
+    public static final Item CAPE_FEATHER = item("cape_feather", new CapeFeatherItem(pTransportation));
+    public static final Item SUPER_CAPE_FEATHER = item("super_cape_feather", new CapeFeatherItem(pTransportation.maxStackSize(1).rarity(Rarity.EPIC)));
+    public static final Item SUPER_STAR = item("super_star", new SuperStarItem(pMisc.maxStackSize(1).rarity(Rarity.RARE).food(MubbleFoods.SUPER_STAR)));
     public static final Item YELLOW_COIN = item("yellow_coin", new Item(pMaterials));
     public static final Item RED_COIN = item("red_coin", new Item(pMaterials));
     public static final Item BLUE_COIN = item("blue_coin", new Item(pMaterials));
     //public static final Item MAKER_TOOL = item("maker_tool", new ItemMakerTool(pMisc.maxStackSize(1)));
-    public static final Item QUESTION_BLOCK_SMB = item("question_block_smb", new ItemMakerBlock(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
-    public static final Item QUESTION_BLOCK_SMB3 = item("question_block_smb3", new ItemMakerBlock(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
-    public static final Item QUESTION_BLOCK_SMW = item("question_block_smw", new ItemMakerBlock(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
-    public static final Item QUESTION_BLOCK_NSMBU = item("question_block_nsmbu", new ItemMakerBlock(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
+    public static final Item QUESTION_BLOCK_SMB = item("question_block_smb", new MakerBlockItem(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
+    public static final Item QUESTION_BLOCK_SMB3 = item("question_block_smb3", new MakerBlockItem(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
+    public static final Item QUESTION_BLOCK_SMW = item("question_block_smw", new MakerBlockItem(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
+    public static final Item QUESTION_BLOCK_NSMBU = item("question_block_nsmbu", new MakerBlockItem(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
     
     /* SUPER SMASH BROS. */
-    public static final Item SMASH_BALL = item("smash_ball", new ItemSmashBall(pCombat.maxStackSize(1).rarity(Rarity.RARE)));
+    public static final Item SMASH_BALL = item("smash_ball", new SmashBallItem(pCombat.maxStackSize(1).rarity(Rarity.RARE)));
 
     /* UNDERTALE / DELTARUNE */
-    public static final Item ANNOYING_DOG = item("annoying_dog", new ItemAnnoyingDog(pMisc.maxStackSize(1)));
+    public static final Item ANNOYING_DOG = item("annoying_dog", new AnnoyingDogItem(pMisc.maxStackSize(1)));
 
     /* SPECIAL */
     public static final Item CHINCHO_SPAWN_EGG = item("chincho_spawn_egg", new SpawnEggItem(MubbleEntities.CHINCHO, 7527671, 4903, pMisc));

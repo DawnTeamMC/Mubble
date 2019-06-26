@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.function.BiFunction;
 
 import hugman.mod.Mubble;
-import hugman.mod.objects.world.dimension.DimensionPermafrost;
-import hugman.mod.objects.world.dimension.DimensionUltimatum;
+import hugman.mod.objects.world.dimension.PermafrostDimension;
+import hugman.mod.objects.world.dimension.UltimatumDimension;
 import hugman.mod.util.FileDisplacer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
@@ -26,7 +26,7 @@ public class MubbleDimensions
 		@Override
 		public BiFunction<World, DimensionType, ? extends Dimension> getFactory()
 		{
-			return DimensionPermafrost::new;
+			return PermafrostDimension::new;
 		}
 	}.setRegistryName(Mubble.MOD_ID, "permafrost");
 	public static final ModDimension ULTIMATUM = new ModDimension()
@@ -34,7 +34,7 @@ public class MubbleDimensions
 		@Override
 		public BiFunction<World, DimensionType, ? extends Dimension> getFactory()
 		{
-			return DimensionUltimatum::new;
+			return UltimatumDimension::new;
 		}
 	}.setRegistryName(Mubble.MOD_ID, "ultimatum");
 

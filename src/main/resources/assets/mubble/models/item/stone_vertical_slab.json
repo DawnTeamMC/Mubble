@@ -2,8 +2,6 @@
 	"parent": "mubble:item/vertical_slab",
 	"textures":
 	{
-		"bottom": "minecraft:block/stone_slab_top",
-		"top": "minecraft:block/stone_slab_top",
-		"block": "minecraft:block/stone_slab_side"
+		"block": "minecraft:block/stone"
 	}
 }

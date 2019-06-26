@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:andesite"
+	},
+	"result": "mubble:polished_andesite_vertical_slab",
+	"count": 2
+}

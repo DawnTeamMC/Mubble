@@ -3,6 +3,7 @@ package hugman.mod.util;
 import hugman.mod.init.MubbleEffects;
 import hugman.mod.init.MubbleTags;
 import hugman.mod.init.world.MubbleDimensions;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
@@ -40,13 +41,12 @@ public class EventExtents
 		ItemStack itemOffHand = entity.getHeldItemOffhand();
 		if(world.getDimension().getType() == MubbleDimensions.PERMAFROST_TYPE)
 		{
-			entity.addPotionEffect(new EffectInstance(MubbleEffects.HEAVINESS, 5, 0));
-			entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 5, 0));
-			entity.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 5, 0));
-			/*if(itemMainHand != new ItemStack(Blocks.TORCH) && itemOffHand != new ItemStack(Blocks.TORCH))
+			if(itemMainHand != new ItemStack(Blocks.TORCH) && itemOffHand != new ItemStack(Blocks.TORCH))
 			{
-
-			}*/
+				entity.addPotionEffect(new EffectInstance(MubbleEffects.HEAVINESS, 5, 0));
+				entity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 5, 0));
+				entity.addPotionEffect(new EffectInstance(Effects.MINING_FATIGUE, 5, 0));
+			}
 		}
 		if(!world.isRemote)
 		{

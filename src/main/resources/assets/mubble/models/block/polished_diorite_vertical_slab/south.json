@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:block/vertical_slab/south",
+	"textures":
+	{
+		"block": "minecraft:block/polished_diorite"
+	}
+}

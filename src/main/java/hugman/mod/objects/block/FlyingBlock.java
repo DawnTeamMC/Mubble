@@ -3,7 +3,7 @@ package hugman.mod.objects.block;
 import java.util.Random;
 
 import hugman.mod.init.MubbleTags;
-import hugman.mod.objects.entity.EntityFlyingBlock;
+import hugman.mod.objects.entity.FlyingBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -48,14 +48,14 @@ public class FlyingBlock extends Block
        {
           if (!worldIn.isRemote)
           {
-        	 EntityFlyingBlock flyingblockentity = new EntityFlyingBlock(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, worldIn.getBlockState(pos));
+        	 FlyingBlockEntity flyingblockentity = new FlyingBlockEntity(worldIn, (double)pos.getX() + 0.5D, (double)pos.getY(), (double)pos.getZ() + 0.5D, worldIn.getBlockState(pos));
              this.onStartFlying(flyingblockentity);
              worldIn.addEntity(flyingblockentity);
           }
        }
     }
 
-	protected void onStartFlying(EntityFlyingBlock flyingEntity)
+	protected void onStartFlying(FlyingBlockEntity flyingEntity)
 	{
 	}
     

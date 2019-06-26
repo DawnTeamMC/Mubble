@@ -1,18 +1,18 @@
 package hugman.mod.init;
 
 import hugman.mod.Mubble;
-import hugman.mod.objects.entity.EntityChincho;
-import hugman.mod.objects.entity.EntityCustomTNT;
-import hugman.mod.objects.entity.EntityFlyingBlock;
-import hugman.mod.objects.entity.EntityGoomba;
-import hugman.mod.objects.entity.EntityToad;
-import hugman.mod.objects.entity.EntityZombieCowman;
-import hugman.mod.objects.entity.render.RenderChincho;
-import hugman.mod.objects.entity.render.RenderCustomTNT;
-import hugman.mod.objects.entity.render.RenderFlyingBlock;
-import hugman.mod.objects.entity.render.RenderGoomba;
-import hugman.mod.objects.entity.render.RenderToad;
-import hugman.mod.objects.entity.render.RenderZombieCowman;
+import hugman.mod.objects.entity.ChinchoEntity;
+import hugman.mod.objects.entity.CustomTNTEntity;
+import hugman.mod.objects.entity.FlyingBlockEntity;
+import hugman.mod.objects.entity.GoombaEntity;
+import hugman.mod.objects.entity.ToadEntity;
+import hugman.mod.objects.entity.ZombieCowmanEntity;
+import hugman.mod.objects.entity.render.ChinchoRender;
+import hugman.mod.objects.entity.render.CustomTNTRender;
+import hugman.mod.objects.entity.render.FlyingBlockRender;
+import hugman.mod.objects.entity.render.GoombaRender;
+import hugman.mod.objects.entity.render.ToadRender;
+import hugman.mod.objects.entity.render.ZombieCowmanRender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -21,13 +21,13 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class MubbleEntities
 {
-	public static final EntityType<EntityChincho> CHINCHO = register("chincho", EntityType.Builder.create(EntityChincho::new, EntityClassification.MONSTER).size(0.6F, 1.2F));
-	public static final EntityType<EntityGoomba> GOOMBA = register("goomba", EntityType.Builder.create(EntityGoomba::new, EntityClassification.MONSTER).size(0.9375F, 0.9375F));
-	public static final EntityType<EntityToad> TOAD = register("toad", EntityType.Builder.create(EntityToad::new, EntityClassification.CREATURE).size(0.6F, 1.4F));
-	public static final EntityType<EntityZombieCowman> ZOMBIE_COWMAN = register("zombie_cowman", EntityType.Builder.create(EntityZombieCowman::new, EntityClassification.MONSTER).size(0.6F, 1.95F));
+	public static final EntityType<ChinchoEntity> CHINCHO = register("chincho", EntityType.Builder.create(ChinchoEntity::new, EntityClassification.MONSTER).size(0.6F, 1.2F));
+	public static final EntityType<GoombaEntity> GOOMBA = register("goomba", EntityType.Builder.create(GoombaEntity::new, EntityClassification.MONSTER).size(0.75F, 0.85F));
+	public static final EntityType<ToadEntity> TOAD = register("toad", EntityType.Builder.create(ToadEntity::new, EntityClassification.CREATURE).size(0.6F, 1.4F));
+	public static final EntityType<ZombieCowmanEntity> ZOMBIE_COWMAN = register("zombie_cowman", EntityType.Builder.create(ZombieCowmanEntity::new, EntityClassification.MONSTER).size(0.6F, 1.95F));
 
-	public static final EntityType<EntityCustomTNT> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<EntityCustomTNT>create(EntityCustomTNT::new, EntityClassification.MISC).immuneToFire().size(0.98F, 0.98F).setTrackingRange(128).setUpdateInterval(1));
-	public static final EntityType<EntityFlyingBlock> FLYING_BLOCK = register("flying_block", EntityType.Builder.<EntityFlyingBlock>create(EntityFlyingBlock::new, EntityClassification.MISC).size(0.98F, 0.98F).setTrackingRange(128).setUpdateInterval(1));
+	public static final EntityType<CustomTNTEntity> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<CustomTNTEntity>create(CustomTNTEntity::new, EntityClassification.MISC).immuneToFire().size(0.98F, 0.98F).setTrackingRange(128).setUpdateInterval(1));
+	public static final EntityType<FlyingBlockEntity> FLYING_BLOCK = register("flying_block", EntityType.Builder.<FlyingBlockEntity>create(FlyingBlockEntity::new, EntityClassification.MISC).size(0.98F, 0.98F).setTrackingRange(128).setUpdateInterval(1));
 	
 	public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder)
 	{
@@ -49,12 +49,12 @@ public class MubbleEntities
     
     public static void registerRenders()
     {
-    	RenderingRegistry.registerEntityRenderingHandler(EntityChincho.class, RenderChincho::new);
-    	RenderingRegistry.registerEntityRenderingHandler(EntityGoomba.class, RenderGoomba::new);
-    	RenderingRegistry.registerEntityRenderingHandler(EntityToad.class, RenderToad::new);
-    	RenderingRegistry.registerEntityRenderingHandler(EntityZombieCowman.class, RenderZombieCowman::new);
+    	RenderingRegistry.registerEntityRenderingHandler(ChinchoEntity.class, ChinchoRender::new);
+    	RenderingRegistry.registerEntityRenderingHandler(GoombaEntity.class, GoombaRender::new);
+    	RenderingRegistry.registerEntityRenderingHandler(ToadEntity.class, ToadRender::new);
+    	RenderingRegistry.registerEntityRenderingHandler(ZombieCowmanEntity.class, ZombieCowmanRender::new);
 
-    	RenderingRegistry.registerEntityRenderingHandler(EntityCustomTNT.class, RenderCustomTNT::new);
-    	RenderingRegistry.registerEntityRenderingHandler(EntityFlyingBlock.class, RenderFlyingBlock::new);
+    	RenderingRegistry.registerEntityRenderingHandler(CustomTNTEntity.class, CustomTNTRender::new);
+    	RenderingRegistry.registerEntityRenderingHandler(FlyingBlockEntity.class, FlyingBlockRender::new);
     }
 }

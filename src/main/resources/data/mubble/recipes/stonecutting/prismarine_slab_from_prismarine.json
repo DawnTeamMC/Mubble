@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:prismarine"
+	},
+	"result": "mubble:prismarine_vertical_slab",
+	"count": 2
+}

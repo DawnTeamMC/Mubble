@@ -128,7 +128,6 @@ public class MubbleBlocks
     public static final Block PRISMARINE_BRICK_VERTICAL_SLAB = block("prismarine_brick_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.PRISMARINE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block DARK_PRISMARINE_VERTICAL_SLAB = block("dark_prismarine_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.DARK_PRISMARINE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     
-    
     public static final Block DARK_PRISMARINE_WALL = block("dark_prismarine_wall", new WallBlock(Properties.from(Blocks.DARK_PRISMARINE)), ItemGroup.DECORATIONS, WALLS);
 
     public static final Block OAK_LEAVES_CARPET = block("oak_leaves_carpet", new LeavesCarpetBlock(Blocks.OAK_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);

@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:item/vertical_slab",
+	"textures":
+	{
+		"block": "minecraft:block/end_stone_bricks"
+	}
+}

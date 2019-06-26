@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:smooth_sandstone"
+	},
+	"result": "mubble:smooth_sandstone_vertical_slab",
+	"count": 2
+}

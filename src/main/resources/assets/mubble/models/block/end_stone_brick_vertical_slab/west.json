@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:block/vertical_slab/west",
+	"textures":
+	{
+		"block": "minecraft:block/end_stone_bricks"
+	}
+}
