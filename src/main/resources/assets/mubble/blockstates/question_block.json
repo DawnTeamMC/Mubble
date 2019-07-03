@@ -1,9 +1,0 @@
-{
-	"variants":
-	{
-		"game_style=smb":	{"model": "mubble:block/question_block/smb"},
-		"game_style=smb3":	{"model": "mubble:block/question_block/smb3"},
-		"game_style=smw":	{"model": "mubble:block/question_block/smw"},
-		"game_style=nsmbu":	{"model": "mubble:block/question_block/nsmbu"}
-	}
-}

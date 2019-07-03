@@ -29,7 +29,7 @@ public class CappyCostume extends HeadCostume
 		if(!world.isRemote && rand.nextInt(301) == 0)
 		{
 			int random = rand.nextInt(5);
-			if(player.dimension == DimensionType.field_223228_b_ && random <= 3)
+			if(player.dimension == DimensionType.THE_NETHER && random <= 3)
 			{
 				world.playSound((PlayerEntity)null, player.posX, player.posY, player.posZ, MubbleSounds.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
 				return;

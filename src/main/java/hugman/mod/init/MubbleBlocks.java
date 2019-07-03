@@ -634,8 +634,11 @@ public class MubbleBlocks
     public static final Block ULTIMATUM_PORTAL = block("ultimatum_portal", new UltimatumPortalBlock());
     public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = block("minecraft_10th_anniversary_cake", new CakeBlock(), ItemGroup.FOOD, OTHERS);
 
-    /* SUPER MARIO */
-    public static final Block QUESTION_BLOCK = block("question_block", new QuestionBlock());
+    /* SUPER MARIO (MAKER) */
+    public static final Block SMB_QUESTION_BLOCK = block("smb_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB3_QUESTION_BLOCK = block("smb3_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_QUESTION_BLOCK = block("smw_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block NSMBU_QUESTION_BLOCK = block("nsmbu_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block EMPTY_BLOCK = block("empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block ROTATING_BLOCK = block("rotating_block", new RotatingBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block LIGHT_BLOCK = block("light_block", new Block(Properties.from(Blocks.STONE).lightValue(15)), ItemGroup.BUILDING_BLOCKS, CUBES);
@@ -643,6 +646,8 @@ public class MubbleBlocks
     public static final Block GOLDEN_BRICK_BLOCK = block("golden_brick_block", new BrickBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NOTE_BLOCK = block("note_block", new NoteBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SUPER_NOTE_BLOCK = block("super_note_block", new NoteBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
+    
+    /* SUPER MARIO (OTHERS) */
     public static final Block FIRE_FLOWER = block("fire_flower", new FlowerBlock(Effects.FIRE_RESISTANCE, 6, pFlower), ItemGroup.DECORATIONS, FLOWERS);
     public static final Block ICE_FLOWER = block("ice_flower", new FlowerBlock(Effects.MINING_FATIGUE, 7, pFlower), ItemGroup.DECORATIONS, FLOWERS);
     public static final Block BOOMERANG_FLOWER = block("boomerang_flower", new FlowerBlock(Effects.HASTE, 6, pFlower), ItemGroup.DECORATIONS, FLOWERS);

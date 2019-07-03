@@ -150,7 +150,7 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 				{
 					if (this.flyTime > 100 && !this.world.isRemote && (blockpos1.getY() < 1 || blockpos1.getY() > 256) || this.flyTime > 600)
 					{
-						if (this.shouldDropItem && this.world.getGameRules().func_223586_b(GameRules.field_223604_g)) this.entityDropItem(block);
+						if (this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) this.entityDropItem(block);
 						this.remove();
 					}
 				}
@@ -187,7 +187,7 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 								}
 							}
 						}
-						else if (this.shouldDropItem && this.world.getGameRules().func_223586_b(GameRules.field_223604_g)) this.entityDropItem(block);
+						else if (this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) this.entityDropItem(block);
 					}
 					else if (block instanceof FlyingBlock) ((FlyingBlock)block).onBroken(this.world, blockpos1);
 				}

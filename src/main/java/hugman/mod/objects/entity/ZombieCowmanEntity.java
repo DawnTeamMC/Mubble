@@ -152,7 +152,7 @@ public class ZombieCowmanEntity extends ZombiePigmanEntity
 
 		protected void setAttackTarget(MobEntity mobIn, LivingEntity targetIn)
 		{
-			if (mobIn instanceof ZombieCowmanEntity && this.field_75299_d.canEntityBeSeen(targetIn) && ((ZombieCowmanEntity)mobIn).becomeAngryAt(targetIn))
+			if (mobIn instanceof ZombieCowmanEntity && this.goalOwner.canEntityBeSeen(targetIn) && ((ZombieCowmanEntity)mobIn).becomeAngryAt(targetIn))
 			{
 				mobIn.setAttackTarget(targetIn);
 			}
@@ -168,7 +168,7 @@ public class ZombieCowmanEntity extends ZombiePigmanEntity
 		
 		public boolean shouldExecute()
 		{
-			return ((ZombieCowmanEntity)this.field_75299_d).isAngry() && super.shouldExecute();
+			return ((ZombieCowmanEntity)this.goalOwner).isAngry() && super.shouldExecute();
 		}
 	}
 }

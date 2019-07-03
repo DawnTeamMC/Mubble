@@ -31,7 +31,7 @@ public class PermafrostPortalBlock extends NetherPortalBlock
     
     public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
     {
-        if(worldIn.dimension.isSurfaceWorld() && worldIn.getGameRules().func_223586_b(GameRules.field_223601_d) && random.nextInt(2000) < worldIn.getDifficulty().getId())
+        if(worldIn.dimension.isSurfaceWorld() && worldIn.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING) && random.nextInt(2000) < worldIn.getDifficulty().getId())
         {
             while(worldIn.getBlockState(pos).getBlock() == this)
             {

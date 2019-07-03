@@ -22,21 +22,21 @@ public class PermafrostCaveWorldCarver extends NetherCaveWorldCarver
     public PermafrostCaveWorldCarver(Function<Dynamic<?>, ? extends ProbabilityConfig> p_i49927_1_)
     {
         super(p_i49927_1_);
-        this.field_222718_j = ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.PODZOL, Blocks.GRASS_BLOCK, MubbleBlocks.PERMAROCK);
-        this.field_222719_k = ImmutableSet.of(Fluids.LAVA, Fluids.WATER);
+        this.carvableBlocks = ImmutableSet.of(Blocks.STONE, Blocks.GRANITE, Blocks.DIORITE, Blocks.ANDESITE, Blocks.DIRT, Blocks.COARSE_DIRT, Blocks.PODZOL, Blocks.GRASS_BLOCK, MubbleBlocks.PERMAROCK);
+        this.carvableFluids = ImmutableSet.of(Fluids.LAVA, Fluids.WATER);
     }
     
     @Override
-    protected boolean func_222703_a(IChunk chunkIn, BitSet p_222703_2_, Random p_222703_3_, BlockPos.MutableBlockPos p_222703_4_, BlockPos.MutableBlockPos p_222703_5_, BlockPos.MutableBlockPos p_222703_6_, int p_222703_7_, int p_222703_8_, int p_222703_9_, int p_222703_10_, int p_222703_11_, int p_222703_12_, int p_222703_13_, int p_222703_14_, AtomicBoolean p_222703_15_)
+    protected boolean carveBlock(IChunk chunkIn, BitSet carvingMask, Random p_222703_3_, BlockPos.MutableBlockPos p_222703_4_, BlockPos.MutableBlockPos p_222703_5_, BlockPos.MutableBlockPos p_222703_6_, int p_222703_7_, int p_222703_8_, int p_222703_9_, int p_222703_10_, int p_222703_11_, int p_222703_12_, int p_222703_13_, int p_222703_14_, AtomicBoolean p_222703_15_)
     {
     	int i = p_222703_12_ | p_222703_14_ << 4 | p_222703_13_ << 8;
-    	if (p_222703_2_.get(i))
+    	if (carvingMask.get(i))
     	{
     		return false;
     	}
     	else
     	{
-    		p_222703_2_.set(i);
+    		carvingMask.set(i);
     		p_222703_4_.setPos(p_222703_10_, p_222703_13_, p_222703_11_);
     		if (this.func_222706_a(chunkIn.getBlockState(p_222703_4_)))
     		{

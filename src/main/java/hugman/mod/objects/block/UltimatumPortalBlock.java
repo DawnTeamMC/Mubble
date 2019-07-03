@@ -80,7 +80,7 @@ public class UltimatumPortalBlock extends Block
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
     {
-        if (!worldIn.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && VoxelShapes.compare(VoxelShapes.create(entityIn.getBoundingBox().offset((double)(-pos.getX()), (double)(-pos.getY()), (double)(-pos.getZ()))), state.getShape(worldIn, pos), IBooleanFunction.field_223238_i_))
+        if (!worldIn.isRemote && !entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss() && VoxelShapes.compare(VoxelShapes.create(entityIn.getBoundingBox().offset((double)(-pos.getX()), (double)(-pos.getY()), (double)(-pos.getZ()))), state.getShape(worldIn, pos), IBooleanFunction.AND))
         {
         	/*if(worldIn.getDimension() == MubbleDimensions.ULTIMATUM.getFactory()) entityIn.changeDimension(MubbleDimensions.ULTIMATUM_TYPE, new Teleporter(entityIn.getServer().getWorld(DimensionType.OVERWORLD)));
         	else entityIn.changeDimension(MubbleDimensions.ULTIMATUM_TYPE, new Teleporter(entityIn.getServer().getWorld(MubbleDimensions.ULTIMATUM_TYPE)));*/

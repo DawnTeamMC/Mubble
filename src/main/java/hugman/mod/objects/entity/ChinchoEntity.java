@@ -60,7 +60,7 @@ public class ChinchoEntity extends MonsterEntity
     @Override
     public CreatureAttribute getCreatureAttribute()
     {
-        return CreatureAttribute.field_223223_b_;
+        return CreatureAttribute.UNDEAD;
     }
     
     @Override

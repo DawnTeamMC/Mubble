@@ -6,8 +6,7 @@ import hugman.mod.objects.block_state.properties.FluidLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.IBucketPickupHandler;
-import net.minecraft.block.ILiquidContainer;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SixWayBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -31,7 +30,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class FluidTankBlock extends Block implements IBucketPickupHandler, ILiquidContainer
+public class FluidTankBlock extends Block implements IWaterLoggable
 {
 	public static final BooleanProperty UP = SixWayBlock.UP;
 	public static final BooleanProperty DOWN = SixWayBlock.DOWN;

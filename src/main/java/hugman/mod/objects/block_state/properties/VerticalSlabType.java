@@ -2,7 +2,7 @@ package hugman.mod.objects.block_state.properties;
 
 import net.minecraft.util.IStringSerializable;
 
-public enum SlabVerticalType implements IStringSerializable
+public enum VerticalSlabType implements IStringSerializable
 {
 	NORTH("north"),
 	SOUTH("south"),
@@ -12,7 +12,7 @@ public enum SlabVerticalType implements IStringSerializable
 
 	private final String name;
 
-	private SlabVerticalType(String name)
+	private VerticalSlabType(String name)
 	{
 		this.name = name;
 	}

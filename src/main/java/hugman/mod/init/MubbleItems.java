@@ -28,7 +28,6 @@ public class MubbleItems
     public static final Item.Properties pMisc = new Item.Properties().group(ItemGroup.MISC);
     public static final Item.Properties pCombat = new Item.Properties().group(ItemGroup.COMBAT);
     public static final Item.Properties pTransportation = new Item.Properties().group(ItemGroup.TRANSPORTATION);
-    public static final Item.Properties pMakerBlocks = new Item.Properties().group(MubbleTabs.MAKER_BLOCKS);
 
     /* MINECRAFT */
     public static final Item WHEAT_FLOUR = item("wheat_flour", new Item(pFood));
@@ -62,10 +61,6 @@ public class MubbleItems
     public static final Item RED_COIN = item("red_coin", new Item(pMaterials));
     public static final Item BLUE_COIN = item("blue_coin", new Item(pMaterials));
     //public static final Item MAKER_TOOL = item("maker_tool", new ItemMakerTool(pMisc.maxStackSize(1)));
-    public static final Item QUESTION_BLOCK_SMB = item("question_block_smb", new MakerBlockItem(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
-    public static final Item QUESTION_BLOCK_SMB3 = item("question_block_smb3", new MakerBlockItem(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
-    public static final Item QUESTION_BLOCK_SMW = item("question_block_smw", new MakerBlockItem(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
-    public static final Item QUESTION_BLOCK_NSMBU = item("question_block_nsmbu", new MakerBlockItem(MubbleBlocks.QUESTION_BLOCK, pMakerBlocks));
     
     /* SUPER SMASH BROS. */
     public static final Item SMASH_BALL = item("smash_ball", new SmashBallItem(pCombat.maxStackSize(1).rarity(Rarity.RARE)));
