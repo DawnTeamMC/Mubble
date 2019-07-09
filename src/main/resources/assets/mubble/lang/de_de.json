@@ -24,7 +24,7 @@
 	"block.mubble.prismarine_brick_vertical_slab": "Senkrechte Prismarinziegelstufe",
 	"block.mubble.dark_prismarine_vertical_slab": "Senkrechte Dunkelprismarinstufe",
 
-	"//block.mubble.dark_prismarine_wall": "Dark Prismarine Wall",
+	"block.mubble.dark_prismarine_wall": "Dunkelprismarinmauer",
 
 	"block.mubble.oak_leaves_carpet": "Eichenlaubteppich",
 	"block.mubble.spruce_leaves_carpet": "Fichtennadelnteppich",
@@ -41,7 +41,7 @@
 	"block.mubble.permafrost_brick_fence": "Permafrostziegelzaun",
 	"block.mubble.blue_permafrost_bricks": "Blauer Permafrostziegelstein",
 	"block.mubble.permafrost_bismuth_ore": "Permafrost-Bismuterz",
-	"//block.mubble.frozen_obsidian": "Frozen Obsidian",
+	"block.mubble.frozen_obsidian": "Vereister Obsidian",
 	
 	"block.mubble.vanadium_block": "Vanadiumblock",
 	"block.mubble.vanadium_ore": "Vanadiumerz",
@@ -191,7 +191,7 @@
 	"block.mubble.polished_carbonite_slab": "Polierte Karbonitstufe",
 	"block.mubble.polished_carbonite_vertical_slab": "Polierte Senkrechte Karbonitstufe",
 
-	"//block.mubble.terracotta_stairs": "Terracotta Stairs",
+	"block.mubble.terracotta_stairs": "Keramiktreppe",
 	"block.mubble.blue_terracotta_stairs": "Blaue Keramiktreppe",
 	"block.mubble.light_blue_terracotta_stairs": "Hellblaue Keramiktreppe",
 	"block.mubble.cyan_terracotta_stairs": "Türkise Keramiktreppe",
@@ -209,7 +209,7 @@
 	"block.mubble.gray_terracotta_stairs": "Graue Keramiktreppe",
 	"block.mubble.black_terracotta_stairs": "Schwarze Keramiktreppe",
 
-	"//block.mubble.terracotta_slab": "Terracotta Slab",
+	"block.mubble.terracotta_slab": "Keramikstufe",
 	"block.mubble.blue_terracotta_slab": "Blaue Keramikstufe",
 	"block.mubble.light_blue_terracotta_slab": "Hellblaue Keramikstufe",
 	"block.mubble.cyan_terracotta_slab": "Türkise Keramikstufe",
@@ -227,7 +227,7 @@
 	"block.mubble.gray_terracotta_slab": "Graue Keramikstufe",
 	"block.mubble.black_terracotta_slab": "Schwarze Keramikstufe",
 
-	"//block.mubble.terracotta_vertical_slab": "Terracotta Vertical Slab",
+	"block.mubble.terracotta_vertical_slab": "Senkrechte Keramikstufe",
 	"block.mubble.blue_terracotta_vertical_slab": "Blaue Senkrechte Keramikstufe",
 	"block.mubble.light_blue_terracotta_vertical_slab": "Hellblaue Senkrechte Keramikstufe",
 	"block.mubble.cyan_terracotta_vertical_slab": "Türkise Senkrechte Keramikstufe",
@@ -245,7 +245,7 @@
 	"block.mubble.gray_terracotta_vertical_slab": "Graue Senkrechte Keramikstufe",
 	"block.mubble.black_terracotta_vertical_slab": "Schwarze Senkrechte Keramikstufe",
 
-	"//block.mubble.terracotta_wall": "Terracotta Wall",
+	"block.mubble.terracotta_wall": "Keramikmauer",
 	"block.mubble.blue_terracotta_wall": "Blaue Keramikmauer",
 	"block.mubble.light_blue_terracotta_wall": "Hellblaue Keramikmauer",
 	"block.mubble.cyan_terracotta_wall": "Türkise Keramikmauer",
@@ -263,7 +263,7 @@
 	"block.mubble.gray_terracotta_wall": "Graue Keramikmauer",
 	"block.mubble.black_terracotta_wall": "Schwarze Keramikmauer",
 
-	"//block.mubble.terracotta_pressure_plate": "Terracotta Pressure Plate",
+	"block.mubble.terracotta_pressure_plate": "Keramikdruckplatte",
 	"block.mubble.blue_terracotta_pressure_plate": "Blaue Keramikdruckplatte",
 	"block.mubble.light_blue_terracotta_pressure_plate": "Hellblaue Keramikdruckplatte",
 	"block.mubble.cyan_terracotta_pressure_plate": "Türkise Keramikdruckplatte",
@@ -281,7 +281,7 @@
 	"block.mubble.gray_terracotta_pressure_plate": "Graue Keramikdruckplatte",
 	"block.mubble.black_terracotta_pressure_plate": "Schwarze Keramikdruckplatte",
 
-	"//block.mubble.terracotta_button": "Terracotta Button",
+	"block.mubble.terracotta_button": "Keramikknopf",
 	"block.mubble.blue_terracotta_button": "Blauer Keramikknopf",
 	"block.mubble.light_blue_terracotta_button": "Hellblauer Keramikknopf",
 	"block.mubble.cyan_terracotta_button": "Türkiser Keramikknopf",
@@ -507,7 +507,7 @@
 	"block.mubble.salad": "Salat",
 	"block.mubble.cheese_block": "Käseblock",
 	"block.mubble.ultimatum_portal": "Ultimatumportal",
-	"//block.mubble.minecraft_10th_anniversary_cake": "Minecraft's 10th Anniversary Cake",
+	"block.mubble.minecraft_10th_anniversary_cake": "Minecrafts Torte zum 10-jährigen Jubiläum",
 
 	"block.mubble.blue_balloon": "Blauer Luftballon",
 	"block.mubble.light_blue_balloon": "Hellblauer Luftballon",
@@ -814,7 +814,7 @@
 
 
 	"item.mubble.chincho_spawn_egg": "Chincho-Spawn-Ei",
-	"//item.mubble.goomba_spawn_egg": "Goomba Spawn Egg",
+	"item.mubble.goomba_spawn_egg": "Goomba-Spawn-Ei",
 	"item.mubble.toad_spawn_egg": "Toad-Spawn-Ei",
 	"item.mubble.zombie_cowman_spawn_egg": "Kuhzombie-Spawn-Ei",
 
@@ -870,16 +870,16 @@
 	"comment": "ENTITIES",
 	"entity.mubble.chincho": "Chincho",
 	"entity.mubble.toad": "Toad",
-	"//entity.mubble.goomba": "Goomba",
+	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.zombie_cowman": "Kuhzombie",
 
-	"//entity.mubble.custom_tnt": "Custom TNT",
+	"entity.mubble.custom_tnt": "Benutzerdefinierter TNT",
 	"entity.mubble.flying_block": "Fliegender Block",
 
 
 
 	"comment": "EFFECTS",
-	"//effect.mubble.heaviness": "Heaviness",
+	"effect.mubble.heaviness": "Schwere",
 
 
 
@@ -910,9 +910,9 @@
 	"subtitles.mubble.entity.chincho.ambient": "Chincho spricht",
 	"subtitles.mubble.entity.chincho.hurt": "Chincho nimmt Schaden",
 	"subtitles.mubble.entity.chincho.death": "Chincho stirbt",
-	"//subtitles.mubble.entity.goomba.crush": "Goomba crushed",
-	"//subtitles.mubble.entity.goomba.hurt": "Goomba hurts",
-	"//subtitles.mubble.entity.goomba.death": "Goomba dies",
+	"subtitles.mubble.entity.goomba.crush": "Goomba zerschmettert",
+	"subtitles.mubble.entity.goomba.hurt": "Goomba nimmt Schaden",
+	"subtitles.mubble.entity.goomba.death": "Goomba stirbt",
 	"subtitles.mubble.entity.toad.ambient": "Toad murmelt",
 	"subtitles.mubble.entity.toad.hurt": "Toad nimmt Schaden",
 	"subtitles.mubble.entity.toad.death": "Toad stirbt",
