@@ -1,0 +1,7 @@
+{
+	"variants":
+	{
+		"snowy=false": {"model": "mubble:block/ground_block/smb/snow/normal"},
+		"snowy=true": {"model": "mubble:block/ground_block/smb/snow/snowy"}
+	}
+}

@@ -1,0 +1,6 @@
+{
+	"variants":
+	{
+		"": {"model": "mubble:block/ground_block/smb/underground"}
+	}
+}
