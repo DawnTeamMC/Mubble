@@ -14,16 +14,15 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
-import net.minecraftforge.common.IShearable;
 
-public class LeavesCarpetBlock extends BushBlock implements IShearable
+public class LeavesCarpetBlock extends BushBlock
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
 	private final Block base;
     
     public LeavesCarpetBlock(Block base_block)
     {
-        super(Properties.create(Material.PLANTS).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement());
+        super(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement());
         this.base = base_block;
     }
     

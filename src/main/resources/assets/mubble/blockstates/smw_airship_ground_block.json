@@ -1,0 +1,11 @@
+{
+	"variants":
+	{
+		"over=false":
+		[
+			{"model": "mubble:block/ground_block/smw/airship/normal/1", "weight": 8},
+			{"model": "mubble:block/ground_block/smw/airship/normal/2", "weight": 1}
+		],
+		"over=true": {"model": "mubble:block/ground_block/smw/airship/over"}
+	}
+}

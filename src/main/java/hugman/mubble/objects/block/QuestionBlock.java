@@ -8,6 +8,7 @@ import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -57,7 +58,11 @@ public class QuestionBlock extends Block
     
     public void loot(World worldIn, BlockPos pos)
 	{
-        BlockState empty_block = MubbleBlocks.EMPTY_BLOCK.getDefaultState();
+        BlockState emptyBlock = Blocks.AIR.getDefaultState();
+        if(this == MubbleBlocks.SMB_QUESTION_BLOCK) emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+        else if(this == MubbleBlocks.SMB3_QUESTION_BLOCK) emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
+        else if(this == MubbleBlocks.SMW_QUESTION_BLOCK) emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
+        else if(this == MubbleBlocks.NSMBU_QUESTION_BLOCK) emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
         final double x = pos.getX() + 0.5D;
         final double y = pos.getY() + 0.5D + 0.6D;
         final double z = pos.getZ() + 0.5D;
@@ -77,7 +82,7 @@ public class QuestionBlock extends Block
         		else if (loot == 6) worldIn.addEntity(new ItemEntity(worldIn, x, y, z, new ItemStack(MubbleCostumes.SUPER_CROWN)));
             	worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP, SoundCategory.BLOCKS, 1f, 1f);
             }
-            worldIn.setBlockState(pos, empty_block);
+            worldIn.setBlockState(pos, emptyBlock);
         }
 	}
 }

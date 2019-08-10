@@ -74,23 +74,7 @@ public class Mubble
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
     public static class ForgeRegistryEvents
-    {
-    	@OnlyIn(Dist.CLIENT)
-    	@SubscribeEvent
-        public static void blockColorsRegistry(final ColorHandlerEvent.Block event)
-        {
-        	MubbleColorMaps.registerBlockColors(event);
-        	LOGGER.info("Registered color maps for blocks");
-        }
-
-    	@OnlyIn(Dist.CLIENT)
-    	@SubscribeEvent
-        public static void itemColorsRegistry(final ColorHandlerEvent.Item event)
-        {
-        	MubbleColorMaps.registerItemColors(event);
-        	LOGGER.info("Registered color maps for items");
-        }
-        
+    {        
         @SubscribeEvent
         public static void onDimensionsRegistry(final RegisterDimensionsEvent event)
         {
@@ -162,6 +146,22 @@ public class Mubble
         	event.getRegistry().registerAll(MubbleBiomes.BIOMES.toArray(new Biome[0]));
         	MubbleBiomes.registerGenerations();
         	LOGGER.info("Registered biomes");
+        }
+        
+    	@OnlyIn(Dist.CLIENT)
+    	@SubscribeEvent
+        public static void blockColorsRegistry(final ColorHandlerEvent.Block event)
+        {
+        	MubbleColorMaps.registerBlockColors(event);
+        	LOGGER.info("Registered color maps for blocks");
+        }
+
+    	@OnlyIn(Dist.CLIENT)
+    	@SubscribeEvent
+        public static void itemColorsRegistry(final ColorHandlerEvent.Item event)
+        {
+        	MubbleColorMaps.registerItemColors(event);
+        	LOGGER.info("Registered color maps for items");
         }
     }
 }

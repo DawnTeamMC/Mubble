@@ -1,7 +1,7 @@
 {
 	"variants":
 	{
-		"snowy=false": {"model": "mubble:block/ground_block/smb/snow/night/normal"},
-		"snowy=true": {"model": "mubble:block/ground_block/smb/snow/night/snowy"}
+		"over=false": {"model": "mubble:block/ground_block/smb/snow/night/normal"},
+		"over=true": {"model": "mubble:block/ground_block/smb/snow/night/over"}
 	}
 }

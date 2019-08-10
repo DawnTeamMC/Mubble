@@ -70,17 +70,17 @@ public class BrickBlock extends Block
     
     public void loot(World worldIn, BlockPos pos)
 	{
-        BlockState empty_block = MubbleBlocks.EMPTY_BLOCK.getDefaultState();
+        BlockState smbEmptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
         final double x = pos.getX() + 0.5D;
         final double y = pos.getY() + 0.5D + 0.6D;
         final double z = pos.getZ() + 0.5D;
         if (!worldIn.isRemote)
         {
         	Random rand = new Random();
+            worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN, SoundCategory.BLOCKS, 1f, 1f);
         	if(this == MubbleBlocks.BRICK_BLOCK) worldIn.addEntity(new ItemEntity(worldIn, x, y, z, new ItemStack(MubbleItems.YELLOW_COIN)));
         	if(this == MubbleBlocks.GOLDEN_BRICK_BLOCK) worldIn.addEntity(new ItemEntity(worldIn, x, y, z, new ItemStack(MubbleItems.YELLOW_COIN, rand.nextInt(5) + 3)));
-            worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN, SoundCategory.BLOCKS, 1f, 1f);
-            worldIn.setBlockState(pos, empty_block);
+            worldIn.setBlockState(pos, smbEmptyBlock);
         }
 	}
 }

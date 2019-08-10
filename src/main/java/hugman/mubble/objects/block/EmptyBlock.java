@@ -1,7 +1,5 @@
 package hugman.mubble.objects.block;
 
-import java.util.Random;
-
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -34,13 +32,13 @@ public class EmptyBlock extends Block
     @Override
     public void onBlockAdded(BlockState p_220082_1_, World worldIn, BlockPos pos, BlockState p_220082_4_, boolean p_220082_5_)
     {
-    	if (!worldIn.isRemote && worldIn.isBlockPowered(pos)) playSound(worldIn, pos);
+    	if(!worldIn.isRemote && worldIn.isBlockPowered(pos)) playSound(worldIn, pos);
     }
     
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_)
     {
-    	if (!worldIn.isRemote && worldIn.isBlockPowered(pos)) playSound(worldIn, pos);
+    	if(!worldIn.isRemote && worldIn.isBlockPowered(pos)) playSound(worldIn, pos);
     	super.neighborChanged(state, worldIn, pos, blockIn, fromPos, p_220069_6_);
     }
     
@@ -49,9 +47,7 @@ public class EmptyBlock extends Block
     {
     	if(!worldIn.isRemote && entityIn.getMotion().getY() > 0.0D)
     	{
-        	Random rand = new Random();
         	playSound(worldIn, pos);
-    		if(rand.nextInt(15) == 0) worldIn.destroyBlock(pos, true);
     	}
     }
     

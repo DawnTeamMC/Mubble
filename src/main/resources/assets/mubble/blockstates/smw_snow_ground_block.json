@@ -1,0 +1,7 @@
+{
+	"variants":
+	{
+		"over=false": {"model": "mubble:block/ground_block/smw/snow/normal"},
+		"over=true": {"model": "mubble:block/ground_block/smw/snow/over"}
+	}
+}
