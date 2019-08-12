@@ -87,7 +87,7 @@ public class MubbleGenerators
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{
-			if (!biome.getCategory().equals(Category.PLAINS))
+			if (biome.getCategory().equals(Category.PLAINS))
 			{
 				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.TOAD, 10, 4, 4));
 			}

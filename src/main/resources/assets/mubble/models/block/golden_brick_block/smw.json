@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_all",
+	"textures":
+	{
+		"all": "mubble:block/golden_brick_block/smw"
+	}
+}

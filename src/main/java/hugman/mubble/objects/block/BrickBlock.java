@@ -38,13 +38,13 @@ public class BrickBlock extends Block
     @Override
     public void onBlockAdded(BlockState p_220082_1_, World worldIn, BlockPos pos, BlockState p_220082_4_, boolean p_220082_5_)
     {
-    	if (worldIn.isBlockPowered(pos)) loot(worldIn, pos);
+    	if(worldIn.isBlockPowered(pos)) loot(worldIn, pos);
     }
     
     @Override
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_)
     {
-    	if (worldIn.isBlockPowered(pos)) loot(worldIn, pos);
+    	if(worldIn.isBlockPowered(pos)) loot(worldIn, pos);
     	super.neighborChanged(state, worldIn, pos, blockIn, fromPos, p_220069_6_);
     }
     
@@ -53,24 +53,24 @@ public class BrickBlock extends Block
     {
 		if(!worldIn.isRemote && entityIn.getMotion().y > 0.0D)
 		{
-			if(this == MubbleBlocks.BRICK_BLOCK)
-			{
-				Random rand = new Random();
-	            switch (rand.nextInt(2))
-	            {
-	            	case 0: loot(worldIn, pos);
-	    					break;
-	            	case 1: worldIn.destroyBlock(pos, false);
-							break;
-	            }
-			}
-			else if (this == MubbleBlocks.GOLDEN_BRICK_BLOCK) loot(worldIn, pos);
+			Random rand = new Random();
+            switch (rand.nextInt(2))
+            {
+            	case 0: loot(worldIn, pos);
+    					break;
+            	case 1: worldIn.destroyBlock(pos, false);
+						break;
+            }
 		}
     }
     
     public void loot(World worldIn, BlockPos pos)
 	{
-        BlockState smbEmptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+        BlockState emptyBlock = Blocks.AIR.getDefaultState();
+        	 if(this == MubbleBlocks.SMB_EMPTY_BLOCK)   emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+        else if(this == MubbleBlocks.SMB3_EMPTY_BLOCK)  emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
+        else if(this == MubbleBlocks.SMW_EMPTY_BLOCK)   emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
+        else if(this == MubbleBlocks.NSMBU_EMPTY_BLOCK) emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
         final double x = pos.getX() + 0.5D;
         final double y = pos.getY() + 0.5D + 0.6D;
         final double z = pos.getZ() + 0.5D;
@@ -78,9 +78,8 @@ public class BrickBlock extends Block
         {
         	Random rand = new Random();
             worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN, SoundCategory.BLOCKS, 1f, 1f);
-        	if(this == MubbleBlocks.BRICK_BLOCK) worldIn.addEntity(new ItemEntity(worldIn, x, y, z, new ItemStack(MubbleItems.YELLOW_COIN)));
-        	if(this == MubbleBlocks.GOLDEN_BRICK_BLOCK) worldIn.addEntity(new ItemEntity(worldIn, x, y, z, new ItemStack(MubbleItems.YELLOW_COIN, rand.nextInt(5) + 3)));
-            worldIn.setBlockState(pos, smbEmptyBlock);
+            worldIn.addEntity(new ItemEntity(worldIn, x, y, z, new ItemStack(MubbleItems.YELLOW_COIN)));
+            worldIn.setBlockState(pos, emptyBlock);
         }
 	}
 }

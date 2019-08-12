@@ -2,8 +2,8 @@
 	"textures":
 	{
 		"broque_monsieur": "mubble:costume/broque_monsieur",
-		"top": "mubble:block/rotating_block/top",
-		"bottom": "mubble:block/rotating_block/bottom"
+		"top": "mubble:block/rotating_block/nsmbu/top",
+		"bottom": "mubble:block/rotating_block/nsmbu/bottom"
 	},
 	"elements":
 	[

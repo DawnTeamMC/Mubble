@@ -9,7 +9,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
 
 public class OverBlock extends Block
@@ -31,9 +30,7 @@ public class OverBlock extends Block
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		IWorldReader iworldreader = context.getWorld();
-		BlockPos pos = context.getPos();
-		if(iworldreader.isAirBlock(pos.up()))
+		if(!context.getWorld().getBlockState(context.getPos()).isSolid())
 		{
 			return this.getDefaultState().with(OVER, true);
 		}

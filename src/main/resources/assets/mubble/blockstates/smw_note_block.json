@@ -1,0 +1,6 @@
+{
+	"variants":
+	{
+		"": {"model": "mubble:block/note_block/smw"}
+	}
+}

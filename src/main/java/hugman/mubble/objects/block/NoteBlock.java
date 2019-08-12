@@ -2,11 +2,8 @@ package hugman.mubble.objects.block;
 
 import java.util.Random;
 
-import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,9 +16,9 @@ import net.minecraft.world.World;
 
 public class NoteBlock extends Block
 {    
-    public NoteBlock()
+    public NoteBlock(Properties builder)
     {
-        super(Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1.4F, 2.0F));
+        super(builder);
     }
     
     @Override
@@ -59,8 +56,7 @@ public class NoteBlock extends Block
     	        {
     	        	worldIn.addParticle(ParticleTypes.NOTE, x + (rand.nextInt(7) - 3) / 10D, y + 0.6D, z + (rand.nextInt(7) - 3) / 10D, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D);
             	}
-    			if(this == MubbleBlocks.NOTE_BLOCK) entityIn.setMotion(vec3d.x, 0.9D, vec3d.z);
-    			if(this == MubbleBlocks.SUPER_NOTE_BLOCK) entityIn.setMotion(vec3d.x, 1.5D, vec3d.z);
+    			entityIn.setMotion(vec3d.x, getProperLaunchMotion(), vec3d.z);
     		}
     		else if(entityIn.isSneaking())
     		{
@@ -77,4 +73,9 @@ public class NoteBlock extends Block
     		}
         }
     }
+    
+    public double getProperLaunchMotion()
+    {
+    	return 0.9D;
+	}
 }

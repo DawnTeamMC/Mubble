@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 public class GrassBlock extends net.minecraft.block.GrassBlock
 {
 	/* Extension for missing features */
-    public GrassBlock(Properties properties)
+    public GrassBlock(Properties builder)
     {
-        super(properties);
+        super(builder);
     }
     
     private static boolean func_196383_a(IWorldReader p_196383_0_, BlockPos p_196383_1_)

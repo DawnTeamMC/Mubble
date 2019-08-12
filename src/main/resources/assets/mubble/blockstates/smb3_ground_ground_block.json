@@ -1,0 +1,7 @@
+{
+	"variants":
+	{
+		"over=false": {"model": "mubble:block/ground_block/smb3/ground/normal"},
+		"over=true": {"model": "mubble:block/ground_block/smb3/ground/over"}
+	}
+}

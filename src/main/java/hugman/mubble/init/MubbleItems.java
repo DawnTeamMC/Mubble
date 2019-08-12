@@ -36,6 +36,7 @@ public class MubbleItems
     public static final Item BANANA = item("banana", new Item(pFood.food(MubbleFoods.BANANA)));
     public static final Item APRICOT = item("apricot", new Item(pFood.food(MubbleFoods.APRICOT)));
     public static final Item MANGO = item("mango", new Item(pFood.food(MubbleFoods.MANGO)));
+    public static final Item BLUEBERRIES = item("blueberries", new BlockNamedItem(MubbleBlocks.BLUEBERRY_BUSH, pFood.food(MubbleFoods.BLUEBERRIES)));
     public static final Item CARAMEL_CUBE = item("caramel_cube", new Item(pFood.food(MubbleFoods.CARAMEL_CUBE)));
     public static final Item BAGUETTE = item("baguette", new Item(pFood.food(MubbleFoods.BAGUETTE)));
     public static final Item BURGER = item("burger", new Item(pFood.food(MubbleFoods.BURGER)));
