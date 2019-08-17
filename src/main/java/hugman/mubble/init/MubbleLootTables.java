@@ -27,4 +27,6 @@ public class MubbleLootTables
     public static final ResourceLocation BANKTOAD = new ResourceLocation(Mubble.MOD_ID, "entities/toad/brigade/bank");
     public static final ResourceLocation YELLOW_BTOAD = new ResourceLocation(Mubble.MOD_ID, "entities/toad/brigade/yellow");
     public static final ResourceLocation MAILTOAD = new ResourceLocation(Mubble.MOD_ID, "entities/toad/brigade/mail");
+    
+    public static final ResourceLocation QUESTION_BLOCK = new ResourceLocation(Mubble.MOD_ID, "block_loots/question_block");
 }

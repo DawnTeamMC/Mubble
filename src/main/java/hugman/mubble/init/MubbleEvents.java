@@ -10,7 +10,6 @@ import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -50,15 +49,6 @@ public class MubbleEvents
 		if(!world.isRemote)
 		{
 			if(MubbleTags.Items.WEIGHT_HEAVY.contains(itemHead.getItem())) entity.addPotionEffect(new EffectInstance(MubbleEffects.HEAVINESS, 5, 0));
-		}
-	}
-	
-	@SubscribeEvent
-	public static void secretMessages(ClientChatEvent event)
-	{
-		if(event.getOriginalMessage() == "shrug")
-		{
-			event.setMessage("¯\\_(ツ)_/¯");
 		}
 	}
 }

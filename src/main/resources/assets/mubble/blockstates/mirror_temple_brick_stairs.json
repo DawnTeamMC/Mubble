@@ -37,6 +37,15 @@
 			{"model": "mubble:block/mirror_temple_brick_stairs/straight/4", "y": 270, "uvlock": true},
 			{"model": "mubble:block/mirror_temple_brick_stairs/straight/5", "y": 270, "uvlock": true}
 		],
+		"facing=east,half=bottom,shape=outer_right":
+		[
+			{"model": "mubble:block/mirror_temple_brick_stairs/outer/0"},
+			{"model": "mubble:block/mirror_temple_brick_stairs/outer/1"},
+			{"model": "mubble:block/mirror_temple_brick_stairs/outer/2"},
+			{"model": "mubble:block/mirror_temple_brick_stairs/outer/3"},
+			{"model": "mubble:block/mirror_temple_brick_stairs/outer/4"},
+			{"model": "mubble:block/mirror_temple_brick_stairs/outer/5"}
+		],
 		"facing=west,half=bottom,shape=outer_right":
 		[
 			{"model": "mubble:block/mirror_temple_brick_stairs/outer/0", "y": 180, "uvlock": true},

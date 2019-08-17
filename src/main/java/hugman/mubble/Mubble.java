@@ -1,7 +1,5 @@
 package hugman.mubble;
 
-import java.io.IOException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,6 +13,7 @@ import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
+import hugman.mubble.init.world.MubbleWorldTypes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -57,19 +56,20 @@ public class Mubble
     
     private void setup(final FMLCommonSetupEvent event)
     {
-    	MubbleGenerators.initOres();
-    	LOGGER.info("Registered ores to world generation");
-    	MubbleGenerators.initTrees();
-    	LOGGER.info("Registered trees to world generation");
-    	MubbleGenerators.initSpawns();
-    	LOGGER.info("Registered entity spawns to world generation");
+    	MubbleGenerators.registerOres();
+    	LOGGER.info("Registered ores");
+    	MubbleGenerators.registerTrees();
+    	LOGGER.info("Registered trees");
+    	MubbleGenerators.registerSpawns();
+    	LOGGER.info("Registered entity spawns");
+    	MubbleWorldTypes.registerWorldTypes();
+    	LOGGER.info("Registered world types");
     }
     
     @SubscribeEvent
-    public void serverSetup(final FMLServerStartingEvent event) throws IOException
+    public void serverSetup(final FMLServerStartingEvent event)
     {
-    	MubbleDimensions.createFiles(event.getServer());
-    	LOGGER.info("Created dimensions files");
+    	//TODO
     }
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
@@ -124,6 +124,8 @@ public class Mubble
         	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
         	MubbleEntities.registerEntities(registry);
         	LOGGER.info("Registered entities");
+        	MubbleEntities.registerPlacements();
+        	LOGGER.info("Registered entity spawn placements");
         }
         
         @SubscribeEvent

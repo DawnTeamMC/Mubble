@@ -9,6 +9,7 @@ public class MubbleBlockStateProperties
 {
     public static final BooleanProperty PRINCESS = BooleanProperty.create("princess");
     public static final BooleanProperty OVER = BooleanProperty.create("over");
+    public static final BooleanProperty LOCKED = BooleanProperty.create("locked");
     public static final EnumProperty<FluidLog> FLUIDLOG = EnumProperty.create("fluidlog", FluidLog.class);
     public static final EnumProperty<VerticalSlabType> VERTICAL_SLAB_TYPE = EnumProperty.create("type", VerticalSlabType.class);
 }

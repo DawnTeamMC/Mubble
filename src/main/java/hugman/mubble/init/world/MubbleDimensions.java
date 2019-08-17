@@ -1,14 +1,11 @@
 package hugman.mubble.init.world;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.dimension.PermafrostDimension;
-import hugman.mubble.util.FileDisplacer;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.Dimension;
@@ -34,10 +31,5 @@ public class MubbleDimensions
 	public static void registerDimensions()
 	{
 		PERMAFROST_TYPE = DimensionManager.registerDimension(new ResourceLocation(Mubble.MOD_ID, "permafrost"), MubbleDimensions.PERMAFROST, null, true);
-	}
-	
-	public static void createFiles(MinecraftServer server) throws IOException
-	{
-		FileDisplacer.createUltimatumWorldFiles(server);
 	}
 }

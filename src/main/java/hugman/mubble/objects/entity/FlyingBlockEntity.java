@@ -163,10 +163,10 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 				}
 
 				this.setMotion(this.getMotion().mul(0.7D, -0.2D, 0.7D));
-				if (iblockstate.getBlock() != Blocks.MOVING_PISTON)
+				if(iblockstate.getBlock() != Blocks.MOVING_PISTON)
 				{
 					this.remove();
-					if (!this.dontSetBlock)
+					if(!this.dontSetBlock)
 					{
 						if (iblockstate.getMaterial().isReplaceable() && (flag1 || !FlyingBlock.canFlyThrough(this.world.getBlockState(blockpos1.up()))) && this.world.setBlockState(blockpos1, this.flyTile, 3))
 						{

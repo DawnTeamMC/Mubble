@@ -1,10 +1,6 @@
 package hugman.mubble.init.world;
 
-import static net.minecraftforge.common.BiomeDictionary.Type.COLD;
-import static net.minecraftforge.common.BiomeDictionary.Type.DENSE;
-import static net.minecraftforge.common.BiomeDictionary.Type.DRY;
-import static net.minecraftforge.common.BiomeDictionary.Type.FOREST;
-import static net.minecraftforge.common.BiomeDictionary.Type.SPOOKY;
+import static net.minecraftforge.common.BiomeDictionary.Type.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +8,7 @@ import java.util.List;
 import hugman.mubble.objects.world.biome.AutumnOakForestBiome;
 import hugman.mubble.objects.world.biome.PermafrostBiome;
 import hugman.mubble.objects.world.biome.PinkCherryOakForestBiome;
+import hugman.mubble.objects.world.biome.SMWGroundBiome;
 import hugman.mubble.objects.world.biome.ScarletForestBiome;
 import hugman.mubble.objects.world.biome.WhiteCherryOakForestBiome;
 import net.minecraft.world.biome.Biome;
@@ -28,6 +25,8 @@ public class MubbleBiomes
 	public static final Biome PINK_CHERRY_OAK_FOREST = new PinkCherryOakForestBiome();
 	public static final Biome WHITE_CHERRY_OAK_FOREST = new WhiteCherryOakForestBiome();
 	public static final Biome PERMAFROST = new PermafrostBiome();
+	
+	public static final Biome SMW_GROUND = new SMWGroundBiome();
 	
 	public static final Biome SCARLET_FOREST = new ScarletForestBiome();
 	
@@ -54,5 +53,7 @@ public class MubbleBiomes
     	BiomeManager.addSpawnBiome(WHITE_CHERRY_OAK_FOREST);
     	
     	BiomeDictionary.addTypes(PERMAFROST, COLD, DRY);
+    	
+    	BiomeDictionary.addTypes(SMW_GROUND, PLAINS);
 	}
 }

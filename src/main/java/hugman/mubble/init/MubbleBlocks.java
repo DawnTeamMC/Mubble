@@ -19,6 +19,7 @@ import hugman.mubble.objects.block.GoldenBrickBlock;
 import hugman.mubble.objects.block.GrassBlock;
 import hugman.mubble.objects.block.KoretatoBlock;
 import hugman.mubble.objects.block.LeavesCarpetBlock;
+import hugman.mubble.objects.block.KeyDoorBlock;
 import hugman.mubble.objects.block.MushroomBlock;
 import hugman.mubble.objects.block.NoteBlock;
 import hugman.mubble.objects.block.OreBlock;
@@ -73,7 +74,7 @@ public class MubbleBlocks
     /* All Content Bag */
     public static final List<Block> BLOCKS = new ArrayList<Block>();
     
-    /* Sorting Lists */
+    /* Sorting Item Lists */
     public static final List<Item> CUBES = new ArrayList<Item>();
     public static final List<Item> STAIRS = new ArrayList<Item>();
     public static final List<Item> SLABS = new ArrayList<Item>();
@@ -649,8 +650,8 @@ public class MubbleBlocks
     public static final Block SMB_UNDERGROUND_GROUND_BLOCK = block("smb_underground_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_UNDERWATER_GROUND_BLOCK = block("smb_underwater_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_GHOST_HOUSE_GROUND_BLOCK = block("smb_ghost_house_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMB_AIRSHIP_GROUND_BLOCK = block("smb_airship_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMB_NIGHT_AIRSHIP_GROUND_BLOCK = block("smb_night_airship_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB_AIRSHIP_GROUND_BLOCK = block("smb_airship_ground_block", new Block(Properties.from(Blocks.IRON_BLOCK)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB_NIGHT_AIRSHIP_GROUND_BLOCK = block("smb_night_airship_ground_block", new Block(Properties.from(Blocks.IRON_BLOCK)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_CASTLE_GROUND_BLOCK = block("smb_castle_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_DESERT_GROUND_BLOCK = block("smb_desert_ground_block", new Block(Properties.from(Blocks.SAND)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_FOREST_GROUND_BLOCK = block("smb_forest_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
@@ -661,8 +662,8 @@ public class MubbleBlocks
     public static final Block SMB3_UNDERGROUND_GROUND_BLOCK = block("smb3_underground_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB3_UNDERWATER_GROUND_BLOCK = block("smb3_underwater_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB3_GHOST_HOUSE_GROUND_BLOCK = block("smb3_ghost_house_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMB3_AIRSHIP_GROUND_BLOCK = block("smb3_airship_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMB3_NIGHT_AIRSHIP_GROUND_BLOCK = block("smb3_night_airship_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB3_AIRSHIP_GROUND_BLOCK = block("smb3_airship_ground_block", new Block(Properties.from(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB3_NIGHT_AIRSHIP_GROUND_BLOCK = block("smb3_night_airship_ground_block", new Block(Properties.from(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB3_CASTLE_GROUND_BLOCK = block("smb3_castle_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB3_NIGHT_CASTLE_GROUND_BLOCK = block("smb3_night_castle_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB3_DESERT_GROUND_BLOCK = block("smb3_desert_ground_block", new OverBlock(Properties.from(Blocks.SAND)), ItemGroup.BUILDING_BLOCKS, CUBES);
@@ -673,12 +674,12 @@ public class MubbleBlocks
     public static final Block SMW_UNDERGROUND_GROUND_BLOCK = block("smw_underground_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_UNDERWATER_GROUND_BLOCK = block("smw_underwater_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_GHOST_HOUSE_GROUND_BLOCK = block("smw_ghost_house_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMW_AIRSHIP_GROUND_BLOCK = block("smw_airship_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_AIRSHIP_GROUND_BLOCK = block("smw_airship_ground_block", new OverBlock(Properties.from(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_CASTLE_GROUND_BLOCK = block("smw_castle_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMW_DESERT_GROUND_BLOCK = block("smw_desert_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMW_FOREST_GROUND_BLOCK = block("smw_forest_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMW_SNOW_GROUND_BLOCK = block("smw_snow_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMW_NIGHT_SNOW_GROUND_BLOCK = block("smw_night_snow_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_DESERT_GROUND_BLOCK = block("smw_desert_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_FOREST_GROUND_BLOCK = block("smw_forest_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_SNOW_GROUND_BLOCK = block("smw_snow_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_NIGHT_SNOW_GROUND_BLOCK = block("smw_night_snow_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_SKY_GROUND_BLOCK = block("smw_sky_ground_block", new OverBlock(Properties.from(Blocks.WHITE_WOOL)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_EMPTY_BLOCK = block("smb_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB3_EMPTY_BLOCK = block("smb3_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
@@ -707,6 +708,14 @@ public class MubbleBlocks
     public static final Block SMB3_SUPER_NOTE_BLOCK = block("smb3_super_note_block", new SuperNoteBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_SUPER_NOTE_BLOCK = block("smw_super_note_block", new SuperNoteBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_SUPER_NOTE_BLOCK = block("nsmbu_super_note_block", new SuperNoteBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB_DOOR = block("smb_door", new DoorBlock(Properties.from(Blocks.OAK_DOOR)), ItemGroup.REDSTONE, DOORS);
+    public static final Block SMB3_DOOR = block("smb3_door", new DoorBlock(Properties.from(Blocks.OAK_DOOR)), ItemGroup.REDSTONE, DOORS);
+    public static final Block SMW_DOOR = block("smw_door", new DoorBlock(Properties.from(Blocks.OAK_DOOR)), ItemGroup.REDSTONE, DOORS);
+    public static final Block NSMBU_DOOR = block("nsmbu_door", new DoorBlock(Properties.from(Blocks.OAK_DOOR)), ItemGroup.REDSTONE, DOORS);
+    public static final Block SMB_KEY_DOOR = block("smb_key_door", new KeyDoorBlock(Properties.from(Blocks.IRON_DOOR)), ItemGroup.REDSTONE, DOORS);
+    public static final Block SMB3_KEY_DOOR = block("smb3_key_door", new KeyDoorBlock(Properties.from(Blocks.IRON_DOOR)), ItemGroup.REDSTONE, DOORS);
+    public static final Block SMW_KEY_DOOR = block("smw_key_door", new KeyDoorBlock(Properties.from(Blocks.IRON_DOOR)), ItemGroup.REDSTONE, DOORS);
+    public static final Block NSMBU_KEY_DOOR = block("nsmbu_key_door", new KeyDoorBlock(Properties.from(Blocks.IRON_DOOR)), ItemGroup.REDSTONE, DOORS);
     
     /* SUPER MARIO (OTHERS) */
     public static final Block FIRE_FLOWER = block("fire_flower", new FlowerBlock(Effects.FIRE_RESISTANCE, 6, pFlower), ItemGroup.DECORATIONS, FLOWERS);

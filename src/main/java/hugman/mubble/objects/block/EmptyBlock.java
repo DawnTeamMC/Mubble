@@ -30,29 +30,11 @@ public class EmptyBlock extends Block
     }
     
     @Override
-    public void onBlockAdded(BlockState p_220082_1_, World worldIn, BlockPos pos, BlockState p_220082_4_, boolean p_220082_5_)
-    {
-    	if(!worldIn.isRemote && worldIn.isBlockPowered(pos)) playSound(worldIn, pos);
-    }
-    
-    @Override
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_)
-    {
-    	if(!worldIn.isRemote && worldIn.isBlockPowered(pos)) playSound(worldIn, pos);
-    	super.neighborChanged(state, worldIn, pos, blockIn, fromPos, p_220069_6_);
-    }
-    
-    @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
     {
     	if(!worldIn.isRemote && entityIn.getMotion().getY() > 0.0D)
     	{
-        	playSound(worldIn, pos);
+    		worldIn.playSound((PlayerEntity)null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, MubbleSounds.BLOCK_EMPTY_BLOCK_HIT, SoundCategory.BLOCKS, 1f, 1f);
     	}
-    }
-    
-    public void playSound(World worldIn, BlockPos pos)
-    {
-    	worldIn.playSound((PlayerEntity)null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, MubbleSounds.BLOCK_EMPTY_BLOCK_HIT, SoundCategory.BLOCKS, 1f, 1f);
     }
 }

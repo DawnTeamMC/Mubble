@@ -30,13 +30,13 @@ public class OverBlock extends Block
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext context)
 	{
-		if(!context.getWorld().getBlockState(context.getPos()).isSolid())
+		if(context.getWorld().getBlockState(context.getPos().up()).isSolid())
 		{
-			return this.getDefaultState().with(OVER, true);
+			return this.getDefaultState().with(OVER, false);
 		}
 		else
 		{
-			return this.getDefaultState().with(OVER, false);
+			return this.getDefaultState().with(OVER, true);
 		}
 	}
 	
@@ -45,7 +45,7 @@ public class OverBlock extends Block
 	{
 		if(!worldIn.isRemote)
 		{
-			if(state.get(OVER) && !worldIn.isAirBlock(pos.up()))
+			if(state.get(OVER) && worldIn.getBlockState(pos.up()).isSolid())
 			{
 				worldIn.setBlockState(pos, state.cycle(OVER), 2);
 			}
@@ -58,7 +58,7 @@ public class OverBlock extends Block
 		if(!worldIn.isRemote)
 		{
 			boolean flag = state.get(OVER);
-			if(flag != worldIn.isAirBlock(pos.up()))
+			if(flag != !worldIn.getBlockState(pos.up()).isSolid())
 			{
 				worldIn.setBlockState(pos, state.cycle(OVER), 2);
 			}

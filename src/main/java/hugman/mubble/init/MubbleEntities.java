@@ -15,7 +15,9 @@ import hugman.mubble.objects.entity.render.ToadRender;
 import hugman.mubble.objects.entity.render.ZombieCowmanRender;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -45,6 +47,11 @@ public class MubbleEntities
 
     	registry.register(CUSTOM_TNT);
     	registry.register(FLYING_BLOCK);
+    }
+    
+    public static void registerPlacements()
+    {
+    	EntitySpawnPlacementRegistry.register(MubbleEntities.ZOMBIE_COWMAN, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieCowmanEntity::canSpawn);
     }
     
     public static void registerRenders()

@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class MubbleGenerators
 {
-	public static void initOres()
+	public static void registerOres()
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{
@@ -62,7 +62,7 @@ public class MubbleGenerators
 		}
 	}
 	
-	public static void initTrees()
+	public static void registerTrees()
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{
@@ -83,7 +83,7 @@ public class MubbleGenerators
 		}
 	}
 	
-	public static void initSpawns()
+	public static void registerSpawns()
 	{
 		for (Biome biome : ForgeRegistries.BIOMES)
 		{

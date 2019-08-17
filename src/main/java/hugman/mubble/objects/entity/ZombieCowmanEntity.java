@@ -1,5 +1,6 @@
 package hugman.mubble.objects.entity;
 
+import java.util.Random;
 import java.util.UUID;
 
 import hugman.mubble.init.MubbleEntities;
@@ -9,6 +10,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
@@ -23,7 +25,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class ZombieCowmanEntity extends ZombiePigmanEntity
@@ -84,6 +89,11 @@ public class ZombieCowmanEntity extends ZombiePigmanEntity
 		super.registerAttributes();
 		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue((double)0.34F);
 		this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+	}
+	
+	public static boolean canSpawn(EntityType<ZombieCowmanEntity> entity, IWorld world, SpawnReason reason, BlockPos pos, Random rand)
+	{
+		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}
 
 	@Override

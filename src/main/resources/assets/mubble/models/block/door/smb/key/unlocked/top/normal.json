@@ -1,0 +1,8 @@
+{
+	"parent": "block/door_top",
+	"textures":
+	{
+		"bottom": "mubble:block/door/smb/key/unlocked/bottom",
+		"top": "mubble:block/door/smb/key/unlocked/top"
+	}
+}
