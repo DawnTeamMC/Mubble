@@ -1,0 +1,9 @@
+{
+	"parent": "block/cube_bottom_top",
+	"textures":
+	{
+		"top": "mubble:block/brick_block/smb/snow/top",
+		"side": "mubble:block/brick_block/smb/snow/side",
+		"bottom": "mubble:block/brick_block/smb/snow/bottom"
+	}
+}

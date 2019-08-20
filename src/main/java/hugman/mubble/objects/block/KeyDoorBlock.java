@@ -1,12 +1,14 @@
 package hugman.mubble.objects.block;
 
 import hugman.mubble.init.MubbleBlockStateProperties;
+import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -40,7 +42,7 @@ public class KeyDoorBlock extends DoorBlock
     {
     	if(state.get(LOCKED))
     	{
-    		if(player.getHeldItem(handIn).getItem() == MubbleItems.BLUEBERRIES)
+    		if(player.getHeldItem(handIn).getItem() == getKey(state.getBlock()))
     		{
             	BlockPos otherBlockPos = pos.offset(state.get(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN);
             	BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
@@ -64,6 +66,14 @@ public class KeyDoorBlock extends DoorBlock
     		return true;
     	}
     }
+    
+    private Item getKey(Block block)
+    {
+    	if(block == MubbleBlocks.SMB_KEY_DOOR) return MubbleItems.SMB_KEY;
+    	else if(block == MubbleBlocks.SMB3_KEY_DOOR) return MubbleItems.SMB3_KEY;
+    	else if(block == MubbleBlocks.SMW_KEY_DOOR) return MubbleItems.SMW_KEY;
+    	else return MubbleItems.NSMBU_KEY;
+	}
     
     public int getCloseSound()
     {
