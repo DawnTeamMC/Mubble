@@ -51,6 +51,7 @@ public class KeyDoorBlock extends DoorBlock
                 BlockPos hitPos = hit.getPos();
                 worldIn.addParticle(ParticleTypes.FLASH, false, hitPos.getX(), hitPos.getY(), hitPos.getZ(), 0, 0, 0);
                 worldIn.playSound((PlayerEntity)null, pos, MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.BLOCKS, 0.8f, 1f);
+                player.getHeldItem(handIn).shrink(1);
         		return true;
     		}
     		else

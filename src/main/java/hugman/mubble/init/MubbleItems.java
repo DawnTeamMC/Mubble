@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.item.AnnoyingDogItem;
 import hugman.mubble.objects.item.BandageItem;
 import hugman.mubble.objects.item.CapeFeatherItem;
 import hugman.mubble.objects.item.SmashBallItem;
@@ -60,9 +59,6 @@ public class MubbleItems
     
     /* SUPER SMASH BROS. */
     public static final Item SMASH_BALL = item("smash_ball", new SmashBallItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1).rarity(Rarity.RARE)));
-
-    /* UNDERTALE / DELTARUNE */
-    public static final Item ANNOYING_DOG = item("annoying_dog", new AnnoyingDogItem(new Item.Properties().group(ItemGroup.MISC).maxStackSize(1)));
 
     /* SPECIAL */
     public static final Item CHINCHO_SPAWN_EGG = item("chincho_spawn_egg", new SpawnEggItem(MubbleEntities.CHINCHO, 7527671, 4903, new Item.Properties().group(ItemGroup.MISC)));

@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "mubble:smb3_key_door",
+              "properties": {
+                "half": "lower"
+              }
+            }
+          ],
+          "name": "mubble:smb3_key_door"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mubble:smb3_key",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "mubble:smb3_key_door",
+              "properties": {
+                "half": "lower",
+                "locked": "false"
+              }
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}
