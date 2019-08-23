@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mubble:bismuth_dust"
+          "name": "mubble:permafrost_bismuth_ore"
         }
       ],
       "conditions": [

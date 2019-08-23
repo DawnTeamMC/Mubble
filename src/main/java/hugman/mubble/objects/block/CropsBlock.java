@@ -12,7 +12,7 @@ public class CropsBlock extends net.minecraft.block.CropsBlock
 	 * + Missing features */
     public CropsBlock()
     {
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0f).sound(SoundType.PLANT));
+        super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0f).sound(SoundType.CROP));
     }
     
     @Override

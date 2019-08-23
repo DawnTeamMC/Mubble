@@ -17,9 +17,9 @@ import hugman.mubble.objects.block.EmptyBlock;
 import hugman.mubble.objects.block.FluidTankBlock;
 import hugman.mubble.objects.block.GoldenBrickBlock;
 import hugman.mubble.objects.block.GrassBlock;
+import hugman.mubble.objects.block.KeyDoorBlock;
 import hugman.mubble.objects.block.KoretatoBlock;
 import hugman.mubble.objects.block.LeavesCarpetBlock;
-import hugman.mubble.objects.block.KeyDoorBlock;
 import hugman.mubble.objects.block.MushroomBlock;
 import hugman.mubble.objects.block.NoteBlock;
 import hugman.mubble.objects.block.OreBlock;
@@ -37,7 +37,6 @@ import hugman.mubble.objects.block.StripWoodBlock;
 import hugman.mubble.objects.block.SuperNoteBlock;
 import hugman.mubble.objects.block.TetrisGlassBlock;
 import hugman.mubble.objects.block.TrapDoorBlock;
-import hugman.mubble.objects.block.UltimatumPortalBlock;
 import hugman.mubble.objects.block.UnstableBlock;
 import hugman.mubble.objects.block.VerticalSlabBlock;
 import hugman.mubble.objects.block.WoodButtonBlock;
@@ -638,7 +637,6 @@ public class MubbleBlocks
     public static final Block PINK_BALLOON = block("pink_balloon", new BalloonBlock(DyeColor.PINK), ItemGroup.DECORATIONS, CUBES);
     public static final Block UNSTABLE_STONE = block("unstable_stone", new UnstableBlock(Properties.from(Blocks.STONE).hardnessAndResistance(0.1F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block FLUID_TANK = block("fluid_tank", new FluidTankBlock(), ItemGroup.REDSTONE, OTHERS);
-    public static final Block ULTIMATUM_PORTAL = block("ultimatum_portal", new UltimatumPortalBlock());
     public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = block("minecraft_10th_anniversary_cake", new CakeBlock(), ItemGroup.FOOD, OTHERS);
 
     /* SUPER MARIO (MAKER) */
