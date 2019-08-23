@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:crafting/golden_brick_block"
+			"mubble:crafting/nsmbu_golden_brick_block"
 		]
 	},
 	"criteria":
@@ -17,7 +17,7 @@
 				"items":
 				[
 					{
-						"item": "mubble:brick_block"
+						"item": "mubble:nsmbu_brick_block"
 					}
 				]
 			}
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:crafting/golden_brick_block"
+				"recipe": "mubble:crafting/nsmbu_golden_brick_block"
 			}
 		}
 	},

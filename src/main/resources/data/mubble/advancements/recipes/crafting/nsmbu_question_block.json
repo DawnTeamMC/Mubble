@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:crafting/question_block"
+			"mubble:crafting/nsmbu_question_block"
 		]
 	},
 	"criteria":
@@ -40,7 +40,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:crafting/question_block"
+				"recipe": "mubble:crafting/nsmbu_question_block"
 			}
 		}
 	},

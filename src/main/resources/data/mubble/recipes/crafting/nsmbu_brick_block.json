@@ -3,19 +3,23 @@
 	"pattern":
 	[
 		"XXX",
-		"X X",
+		"XOX",
 		"XXX"
 	],
 	"key":
 	{
 		"X":
 		{
-			"item": "minecraft:yellow_concrete"
+			"tag": "mubble:brick/blocks"
+		},
+		"O":
+		{
+			"item": "mubble:yellow_coin"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:rotating_block",
+		"item": "mubble:nsmbu_brick_block",
 		"count": 8
 	}
 }

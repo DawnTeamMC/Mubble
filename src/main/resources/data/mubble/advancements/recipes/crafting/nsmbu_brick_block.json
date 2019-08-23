@@ -4,12 +4,12 @@
 	{
 		"recipes":
 		[
-			"mubble:crafting/super_note_block"
+			"mubble:crafting/nsmbu_brick_block"
 		]
 	},
 	"criteria":
 	{
-		"has_note_block":
+		"has_bricks":
 		{
 			"trigger": "minecraft:inventory_changed",
 			"conditions":
@@ -17,7 +17,7 @@
 				"items":
 				[
 					{
-						"item": "mubble:note_block"
+						"tag": "mubble:brick/blocks"
 					}
 				]
 			}
@@ -27,14 +27,14 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:crafting/super_note_block"
+				"recipe": "mubble:crafting/nsmbu_brick_block"
 			}
 		}
 	},
 	"requirements":
 	[
 		[
-			"has_note_block",
+			"has_bricks",
 			"has_the_recipe"
 		]
 	]

@@ -2,6 +2,7 @@
 	"replace": false,
 	"values":
 	[
+		"minecraft:brick_slab",
 		"mubble:white_brick_slab",
 		"mubble:light_gray_brick_slab",
 		"mubble:gray_brick_slab",

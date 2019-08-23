@@ -9,11 +9,11 @@
 	{
 		"X":
 		{
-			"item": "mubble:note_block"
+			"item": "mubble:nsmbu_note_block"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:super_note_block"
+		"item": "mubble:nsmbu_super_note_block"
 	}
 }

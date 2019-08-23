@@ -14,11 +14,11 @@
 		},
 		"O":
 		{
-			"item": "mubble:brick_block"
+			"item": "mubble:nsmbu_brick_block"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:golden_brick_block"
+		"item": "mubble:nsmbu_golden_brick_block"
 	}
 }
