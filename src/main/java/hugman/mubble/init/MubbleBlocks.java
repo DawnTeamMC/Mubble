@@ -95,7 +95,6 @@ public class MubbleBlocks
     public static final Block.Properties pLeaves = Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT);
     public static final Block.Properties pWoodenButton = Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
     public static final Block.Properties pStoneButton = Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F);
-    public static final Block.Properties pFlower = Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT);
 
     /* MINECRAFT */
     public static final Block OAK_VERTICAL_SLAB = block("oak_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
@@ -732,25 +731,25 @@ public class MubbleBlocks
     public static final Block NSMBU_KEY_DOOR = block("nsmbu_key_door", new KeyDoorBlock(Properties.from(Blocks.IRON_DOOR)), ItemGroup.REDSTONE, DOORS);
     
     /* SUPER MARIO (OTHERS) */
-    public static final Block FIRE_FLOWER = block("fire_flower", new FlowerBlock(Effects.FIRE_RESISTANCE, 6, pFlower), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block ICE_FLOWER = block("ice_flower", new FlowerBlock(Effects.MINING_FATIGUE, 7, pFlower), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block BOOMERANG_FLOWER = block("boomerang_flower", new FlowerBlock(Effects.HASTE, 6, pFlower), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block CLOUD_FLOWER = block("cloud_flower", new CloudFlowerBlock(Effects.SLOW_FALLING, 7, pFlower), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block GOLD_FLOWER = block("gold_flower", new FlowerBlock(MubbleEffects.HEAVINESS, 6, pFlower.lightValue(5)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block WHITE_MUSHROOM = block("white_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block LIGHT_GRAY_MUSHROOM = block("light_gray_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block GRAY_MUSHROOM = block("gray_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block BLACK_MUSHROOM = block("black_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block ORANGE_MUSHROOM = block("orange_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block YELLOW_MUSHROOM = block("yellow_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block LIME_MUSHROOM = block("lime_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block GREEN_MUSHROOM = block("green_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block CYAN_MUSHROOM = block("cyan_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block LIGHT_BLUE_MUSHROOM = block("light_blue_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block BLUE_MUSHROOM = block("blue_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block PURPLE_MUSHROOM = block("purple_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block MAGENTA_MUSHROOM = block("magenta_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block PINK_MUSHROOM = block("pink_mushroom", new MushroomBlock(pFlower.lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block FIRE_FLOWER = block("fire_flower", new FlowerBlock(Effects.FIRE_RESISTANCE, 6, Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block ICE_FLOWER = block("ice_flower", new FlowerBlock(Effects.MINING_FATIGUE, 7, Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block BOOMERANG_FLOWER = block("boomerang_flower", new FlowerBlock(Effects.HASTE, 6, Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block CLOUD_FLOWER = block("cloud_flower", new CloudFlowerBlock(Effects.SLOW_FALLING, 7, Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block GOLD_FLOWER = block("gold_flower", new FlowerBlock(MubbleEffects.HEAVINESS, 6, Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(5)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block WHITE_MUSHROOM = block("white_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block LIGHT_GRAY_MUSHROOM = block("light_gray_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block GRAY_MUSHROOM = block("gray_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block BLACK_MUSHROOM = block("black_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block ORANGE_MUSHROOM = block("orange_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block YELLOW_MUSHROOM = block("yellow_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block LIME_MUSHROOM = block("lime_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block GREEN_MUSHROOM = block("green_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block CYAN_MUSHROOM = block("cyan_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block LIGHT_BLUE_MUSHROOM = block("light_blue_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block BLUE_MUSHROOM = block("blue_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block PURPLE_MUSHROOM = block("purple_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block MAGENTA_MUSHROOM = block("magenta_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block PINK_MUSHROOM = block("pink_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(1)), ItemGroup.DECORATIONS, FLOWERS);
     public static final Block WHITE_MUSHROOM_BLOCK = block("white_mushroom_block", new HugeMushroomBlock(Properties.create(Material.WOOD, DyeColor.WHITE).hardnessAndResistance(0.2F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS, CUBES);
     public static final Block LIGHT_GRAY_MUSHROOM_BLOCK = block("light_gray_mushroom_block", new HugeMushroomBlock(Properties.create(Material.WOOD, DyeColor.LIGHT_GRAY).hardnessAndResistance(0.2F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS, CUBES);
     public static final Block GRAY_MUSHROOM_BLOCK = block("gray_mushroom_block", new HugeMushroomBlock(Properties.create(Material.WOOD, DyeColor.GRAY).hardnessAndResistance(0.2F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS, CUBES);
@@ -822,6 +821,28 @@ public class MubbleBlocks
     public static final Block MARBLE_ZONE_STONE = block("marble_zone_stone", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block YELLOW_STUDIOPOLIS_CLAPPER = block("yellow_studiopolis_clapper", new DirectionalBlock(Properties.from(Blocks.IRON_BLOCK)), ItemGroup.DECORATIONS, CUBES);
     public static final Block BLUE_STUDIOPOLIS_CLAPPER = block("blue_studiopolis_clapper", new DirectionalBlock(Properties.from(Blocks.IRON_BLOCK)), ItemGroup.DECORATIONS, CUBES);
+    
+    public static final Block PRESS_GARDEN_PLANKS = block("press_garden_planks", new Block(Properties.from(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block PINK_PRESS_GARDEN_SAPLING = block("pink_press_garden_sapling", new SaplingBlock(new PinkCherryOakTree()), ItemGroup.DECORATIONS, SAPLINGS);
+    public static final Block RED_PRESS_GARDEN_SAPLING = block("red_press_garden_sapling", new SaplingBlock(new WhiteCherryOakTree()), ItemGroup.DECORATIONS, SAPLINGS);
+    public static final Block PRESS_GARDEN_LOG = block("press_garden_log", new StripWoodBlock(Properties.from(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block STRIPPED_PRESS_GARDEN_LOG = block("stripped_press_garden_log", new RotatedPillarBlock(Properties.from(PRESS_GARDEN_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block PRESS_GARDEN_WOOD = block("press_garden_wood", new StripWoodBlock(Properties.from(PRESS_GARDEN_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block STRIPPED_PRESS_GARDEN_WOOD = block("stripped_press_garden_wood", new RotatedPillarBlock(Properties.from(PRESS_GARDEN_WOOD)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block PINK_PRESS_GARDEN_LEAVES = block("pink_press_garden_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, LEAVES);
+    public static final Block PINK_PRESS_GARDEN_LEAVES_CARPET = block("pink_press_garden_leaves_carpet", new LeavesCarpetBlock(PINK_PRESS_GARDEN_LEAVES), ItemGroup.DECORATIONS , LEAVES_CARPETS);
+    public static final Block RED_PRESS_GARDEN_LEAVES = block("red_press_garden_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, LEAVES);
+    public static final Block RED_PRESS_GARDEN_LEAVES_CARPET = block("red_press_garden_leaves_carpet", new LeavesCarpetBlock(RED_PRESS_GARDEN_LEAVES), ItemGroup.DECORATIONS , LEAVES_CARPETS);
+    public static final Block PRESS_GARDEN_PRESSURE_PLATE = block("press_garden_pressure_plate", new PressurePlateBlock(Sensitivity.EVERYTHING, Properties.from(MubbleBlocks.PRESS_GARDEN_PLANKS).doesNotBlockMovement().hardnessAndResistance(0.5F)), ItemGroup.REDSTONE, PRESSURE_PLATES);
+    public static final Block PRESS_GARDEN_TRAPDOOR = block("press_garden_trapdoor", new TrapDoorBlock(Properties.from(MubbleBlocks.PRESS_GARDEN_PLANKS)), ItemGroup.REDSTONE, TRAPDOORS);
+    public static final Block PRESS_GARDEN_BUTTON = block("press_garden_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, BUTTONS);
+    public static final Block PRESS_GARDEN_STAIRS = block("press_garden_stairs", new StairsBlock(PRESS_GARDEN_PLANKS), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block PRESS_GARDEN_SLAB = block("press_garden_slab", new SlabBlock(Properties.from(PRESS_GARDEN_PLANKS)), ItemGroup.BUILDING_BLOCKS, SLABS);
+    public static final Block PRESS_GARDEN_VERTICAL_SLAB = block("press_garden_vertical_slab", new VerticalSlabBlock(Properties.from(PRESS_GARDEN_PLANKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
+    public static final Block PRESS_GARDEN_FENCE_GATE = block("press_garden_fence_gate", new FenceGateBlock(Properties.from(PRESS_GARDEN_PLANKS)), ItemGroup.REDSTONE, FENCE_GATES);
+    public static final Block PRESS_GARDEN_FENCE = block("press_garden_fence", new FenceBlock(Properties.from(PRESS_GARDEN_PLANKS)), ItemGroup.DECORATIONS, FENCES);
+    public static final Block PRESS_GARDEN_DOOR = block("press_garden_door", new DoorBlock(Properties.from(PRESS_GARDEN_PLANKS)), ItemGroup.REDSTONE, DOORS);
+    
     public static final Block SPRING = block("spring", new SpringBlock(Properties.create(Material.IRON).hardnessAndResistance(4f)), ItemGroup.TRANSPORTATION, OTHERS);
     
     /* UNDERTALE / DELTARUNE */
@@ -842,8 +863,8 @@ public class MubbleBlocks
     public static final Block SCARLET_FENCE_GATE = block("scarlet_fence_gate", new FenceGateBlock(Properties.from(SCARLET_PLANKS)), ItemGroup.REDSTONE, FENCE_GATES);
     public static final Block SCARLET_FENCE = block("scarlet_fence", new FenceBlock(Properties.from(SCARLET_PLANKS)), ItemGroup.DECORATIONS, FENCES);
     public static final Block SCARLET_DOOR = block("scarlet_door", new DoorBlock(Properties.from(SCARLET_PLANKS)), ItemGroup.REDSTONE, DOORS);
-    public static final Block SCARLET_MUSHROOM = block("scarlet_mushroom", new MushroomBlock(pFlower.lightValue(7)), ItemGroup.DECORATIONS, FLOWERS);
-    public static final Block SCARLET_ORCHID = block("scarlet_orchid", new FlowerBlock(Effects.GLOWING, 8, pFlower.lightValue(7)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block SCARLET_MUSHROOM = block("scarlet_mushroom", new MushroomBlock(Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(7)), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block SCARLET_ORCHID = block("scarlet_orchid", new FlowerBlock(Effects.GLOWING, 8, Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT).lightValue(7)), ItemGroup.DECORATIONS, FLOWERS);
     
     /* CELESTE */
     public static final Block GIRDER = block("girder", new Block(Properties.from(Blocks.IRON_BLOCK)), ItemGroup.BUILDING_BLOCKS, CUBES);
@@ -876,7 +897,7 @@ public class MubbleBlocks
     
     /* YOUTUBE */
     public static final Block KORETATO_BLOCK = block("koretato_block", new KoretatoBlock());
-    public static final Block POTATO_FLOWER = block("potato_flower", new FlowerBlock(Effects.HUNGER, 9, pFlower), ItemGroup.DECORATIONS, FLOWERS);
+    public static final Block POTATO_FLOWER = block("potato_flower", new FlowerBlock(Effects.HUNGER, 9, Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)), ItemGroup.DECORATIONS, FLOWERS);
     
     public static Block block(String name, Block block)
     {

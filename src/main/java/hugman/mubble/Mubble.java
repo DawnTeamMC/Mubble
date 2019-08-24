@@ -90,7 +90,7 @@ public class Mubble
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> event)
         {
         	event.getRegistry().registerAll(MubbleBlocks.BLOCKS.toArray(new Block[0]));
-        	LOGGER.info("Registered blocks");
+        	LOGGER.info("Registered " + MubbleBlocks.BLOCKS.size() + " blocks");
         }
         
         @SubscribeEvent
@@ -113,9 +113,26 @@ public class Mubble
             event.getRegistry().registerAll(MubbleBlocks.FLOWERS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.OTHERS.toArray(new Item[0]));
         	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
-        	LOGGER.info("Registered items");
+        	int count = MubbleBlocks.CUBES.size() +
+        			MubbleBlocks.STAIRS.size() +
+        			MubbleBlocks.SLABS.size() +
+        			MubbleBlocks.VERTICAL_SLABS.size() +
+        			MubbleBlocks.FENCES.size() +
+        			MubbleBlocks.WALLS.size() +
+        			MubbleBlocks.SAPLINGS.size() +
+        			MubbleBlocks.LEAVES.size() +
+        			MubbleBlocks.LEAVES_CARPETS.size() +
+        			MubbleBlocks.PRESSURE_PLATES.size() +
+        			MubbleBlocks.TRAPDOORS.size() +
+        			MubbleBlocks.BUTTONS.size() +
+        			MubbleBlocks.FENCE_GATES.size() +
+        			MubbleBlocks.DOORS.size() +
+        			MubbleBlocks.FLOWERS.size() +
+        			MubbleBlocks.OTHERS.size() +
+        			MubbleItems.ITEMS.size();
+        	LOGGER.info("Registered " + count + " items");
     		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
-        	LOGGER.info("Registered costumes");
+        	LOGGER.info("Registered " + MubbleCostumes.COSTUMES.size() + " costumes");
         }
         
         @SubscribeEvent
@@ -132,14 +149,14 @@ public class Mubble
         public static void onSoundsRegistry(final RegistryEvent.Register<SoundEvent> event)
         {
         	event.getRegistry().registerAll(MubbleSounds.SOUNDS.toArray(new SoundEvent[0]));
-        	LOGGER.info("Registered sounds");
+        	LOGGER.info("Registered " + MubbleSounds.SOUNDS.size() + " sounds");
         }
         
         @SubscribeEvent
         public static void onPotionsRegistry(final RegistryEvent.Register<Effect> event)
         {
         	event.getRegistry().registerAll(MubbleEffects.EFFECTS.toArray(new Effect[0]));
-        	LOGGER.info("Registered potion effects");
+        	LOGGER.info("Registered " + MubbleEffects.EFFECTS.size() + " effects");
         }
         
         @SubscribeEvent
@@ -147,7 +164,7 @@ public class Mubble
         {
         	event.getRegistry().registerAll(MubbleBiomes.BIOMES.toArray(new Biome[0]));
         	MubbleBiomes.registerGenerations();
-        	LOGGER.info("Registered biomes");
+        	LOGGER.info("Registered " + MubbleBiomes.BIOMES.size() + " biomes");
         }
         
     	@OnlyIn(Dist.CLIENT)

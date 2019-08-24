@@ -1,22 +1,16 @@
 package hugman.mubble.objects.block;
 
 import hugman.mubble.init.MubbleBlockStateProperties;
-import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.MubbleItems;
-import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
@@ -42,22 +36,7 @@ public class KeyDoorBlock extends DoorBlock
     {
     	if(state.get(LOCKED))
     	{
-    		if(player.getHeldItem(handIn).getItem() == getKey(state.getBlock()))
-    		{
-            	BlockPos otherBlockPos = pos.offset(state.get(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN);
-            	BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
-                worldIn.setBlockState(pos, state.with(LOCKED, false));
-                worldIn.setBlockState(otherBlockPos, otherBlockState.with(LOCKED, false));
-                BlockPos hitPos = hit.getPos();
-                worldIn.addParticle(ParticleTypes.FLASH, false, hitPos.getX(), hitPos.getY(), hitPos.getZ(), 0, 0, 0);
-                worldIn.playSound((PlayerEntity)null, pos, MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.BLOCKS, 0.8f, 1f);
-                player.getHeldItem(handIn).shrink(1);
-        		return true;
-    		}
-    		else
-    		{
-        		return false;
-    		}
+    		return false;
     	}
     	else
     	{
@@ -67,14 +46,6 @@ public class KeyDoorBlock extends DoorBlock
     		return true;
     	}
     }
-    
-    private Item getKey(Block block)
-    {
-    	if(block == MubbleBlocks.SMB_KEY_DOOR) return MubbleItems.SMB_KEY;
-    	else if(block == MubbleBlocks.SMB3_KEY_DOOR) return MubbleItems.SMB3_KEY;
-    	else if(block == MubbleBlocks.SMW_KEY_DOOR) return MubbleItems.SMW_KEY;
-    	else return MubbleItems.NSMBU_KEY;
-	}
     
     public int getCloseSound()
     {

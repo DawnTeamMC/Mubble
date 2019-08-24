@@ -1,0 +1,7 @@
+{
+	"parent": "block/template_fence_gate_wall",
+	"textures":
+	{
+		"texture": "mubble:block/press_garden_planks"
+	}
+}

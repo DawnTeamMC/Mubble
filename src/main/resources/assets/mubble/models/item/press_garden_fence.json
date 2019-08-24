@@ -1,0 +1,7 @@
+{
+	"parent": "block/fence_inventory",
+	"textures":
+	{
+		"texture": "mubble:block/press_garden_planks"
+	}
+}

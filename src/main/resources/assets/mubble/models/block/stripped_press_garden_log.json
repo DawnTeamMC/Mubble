@@ -1,0 +1,8 @@
+{
+	"parent": "block/cube_column",
+	"textures":
+	{
+		"end": "mubble:block/stripped_press_garden_log/top",
+		"side": "mubble:block/stripped_press_garden_log/side"
+	}
+}

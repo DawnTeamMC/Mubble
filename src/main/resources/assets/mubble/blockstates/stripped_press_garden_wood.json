@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+		"axis=y": { "model": "mubble:block/stripped_press_garden_wood" },
+		"axis=z": { "model": "mubble:block/stripped_press_garden_wood", "x": 90 },
+		"axis=x": { "model": "mubble:block/stripped_press_garden_wood", "x": 90, "y": 90 }
+	}
+}

@@ -88,17 +88,15 @@ public class GoombaEntity extends MonsterEntity
     {
     	AxisAlignedBB hitbox = this.getBoundingBox().contract(0, -1, 0).grow(-0.2, 0, -0.2);
     	Vec3d vec3d = playerIn.getMotion();
-    	if(this.world.isRemote() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && vec3d.y < 0.3D && !this.dead)
+    	if(!playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && vec3d.y < 0.3D && !this.dead)
     	{
     		playerIn.setMotion(vec3d.x, 0.5D, vec3d.z);
-    		playerIn.fallDistance = 0.0F;
-    		this.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), Float.MAX_VALUE);
-    		this.playSound(MubbleSounds.ENTITY_GOOMBA_CRUSH, this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-    		/*if(vec3d.y == 0.5D)
+    		if(!this.world.isRemote())
     		{
+        		playerIn.fallDistance = 0.0F;
         		this.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), Float.MAX_VALUE);
         		this.playSound(MubbleSounds.ENTITY_GOOMBA_CRUSH, this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
-    		}*/
+    		}
     	}
     }
 }

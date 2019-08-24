@@ -6,6 +6,7 @@ import java.util.List;
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.item.BandageItem;
 import hugman.mubble.objects.item.CapeFeatherItem;
+import hugman.mubble.objects.item.KeyItem;
 import hugman.mubble.objects.item.SmashBallItem;
 import hugman.mubble.objects.item.SuperStarItem;
 import hugman.mubble.objects.item.TotemOfAscendingItem;
@@ -52,10 +53,10 @@ public class MubbleItems
     public static final Item YELLOW_COIN = item("yellow_coin", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item RED_COIN = item("red_coin", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item BLUE_COIN = item("blue_coin", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final Item SMB_KEY = item("smb_key", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final Item SMB3_KEY = item("smb3_key", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final Item SMW_KEY = item("smw_key", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final Item NSMBU_KEY = item("nsmbu_key", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final Item SMB_KEY = item("smb_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final Item SMB3_KEY = item("smb3_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final Item SMW_KEY = item("smw_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final Item NSMBU_KEY = item("nsmbu_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS)));
     
     /* SUPER SMASH BROS. */
     public static final Item SMASH_BALL = item("smash_ball", new SmashBallItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1).rarity(Rarity.RARE)));

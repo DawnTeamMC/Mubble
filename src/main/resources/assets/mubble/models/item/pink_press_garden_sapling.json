@@ -1,0 +1,7 @@
+{
+	"parent": "item/generated",
+	"textures":
+	{
+		"layer0": "mubble:block/pink_press_garden_sapling"
+	}
+}

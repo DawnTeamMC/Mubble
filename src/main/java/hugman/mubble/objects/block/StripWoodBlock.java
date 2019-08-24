@@ -32,6 +32,8 @@ public class StripWoodBlock extends RotatedPillarBlock
     	if(this == MubbleBlocks.SCARLET_WOOD) block = MubbleBlocks.STRIPPED_SCARLET_WOOD;
     	if(this == MubbleBlocks.CHERRY_OAK_LOG) block = MubbleBlocks.STRIPPED_CHERRY_OAK_LOG;
     	if(this == MubbleBlocks.CHERRY_OAK_WOOD) block = MubbleBlocks.STRIPPED_CHERRY_OAK_WOOD;
+    	if(this == MubbleBlocks.PRESS_GARDEN_LOG) block = MubbleBlocks.STRIPPED_PRESS_GARDEN_LOG;
+    	if(this == MubbleBlocks.PRESS_GARDEN_WOOD) block = MubbleBlocks.STRIPPED_PRESS_GARDEN_WOOD;
     	ItemStack item = player.getHeldItem(handIn);
     	if(item.getItem() instanceof AxeItem)
     	{
