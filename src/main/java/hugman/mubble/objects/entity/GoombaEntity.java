@@ -86,7 +86,7 @@ public class GoombaEntity extends MonsterEntity
     @Override
     public void onCollideWithPlayer(PlayerEntity playerIn)
     {
-    	AxisAlignedBB hitbox = this.getBoundingBox().contract(0, -1, 0).grow(-0.2, 0, -0.2);
+    	AxisAlignedBB hitbox = this.getBoundingBox().contract(0, -1, 0).grow(-0.4, 0, -0.4);
     	Vec3d vec3d = playerIn.getMotion();
     	if(!playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && vec3d.y < 0.3D && !this.dead)
     	{

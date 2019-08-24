@@ -733,6 +733,28 @@
 	"block.mubble.marble_zone_stone": "Marble Zone Stone",
 	"block.mubble.yellow_studiopolis_clapper": "Yellow Studiopolis Clapper",
 	"block.mubble.blue_studiopolis_clapper": "Blue Studiopolis Clapper",
+
+	"block.mubble.press_garden_planks": "Press Garden Planks",
+	"block.mubble.pink_press_garden_sapling": "Pink Press Garden Sapling",
+	"block.mubble.red_press_garden_sapling": "Red Press Garden Sapling",
+	"block.mubble.press_garden_log": "Press Garden Log",
+	"block.mubble.stripped_press_garden_log": "Stripped Press Garden Log",
+	"block.mubble.press_garden_wood": "Press Garden Wood",
+	"block.mubble.stripped_press_garden_wood": "Stripped Press Garden Wood",
+	"block.mubble.pink_press_garden_leaves": "Pink Press Garden Leaves",
+	"block.mubble.pink_press_garden_leaves_carpet": "Pink Press Garden Leaves Carpet",
+	"block.mubble.red_press_garden_leaves": "Red Press Garden Leaves",
+	"block.mubble.red_press_garden_leaves_carpet": "Red Press Garden Leaves Carpet",
+	"block.mubble.press_garden_pressure_plate": "Press Garden Pressure Plate",
+	"block.mubble.press_garden_trapdoor": "Press Garden Trapdoor",
+	"block.mubble.press_garden_button": "Press Garden Button",
+	"block.mubble.press_garden_stairs": "Press Garden Stairs",
+	"block.mubble.press_garden_slab": "Press Garden Slab",
+	"block.mubble.press_garden_vertical_slab": "Press Garden Vertical Slab",
+	"block.mubble.press_garden_fence_gate": "Press Garden Fence Gate",
+	"block.mubble.press_garden_fence": "Press Garden Fence",
+	"block.mubble.press_garden_door": "Press Garden Door",
+
 	"block.mubble.spring": "Spring",
 
 
@@ -813,6 +835,8 @@
 	"block.mubble.potted_light_gray_mushroom": "Potted Light Gray Mushroom",
 	"block.mubble.potted_gray_mushroom": "Potted Gray Mushroom",
 	"block.mubble.potted_black_mushroom": "Potted Black Mushroom",
+	"block.mubble.potted_pink_press_garden_sapling": "Potted Pink Press Garden Sapling",
+	"block.mubble.potted_red_press_garden_sapling": "Potted Red Press Garden Sapling",
 	"block.mubble.potted_scarlet_sapling": "Potted Scarlet Sapling",
 	"block.mubble.potted_scarlet_mushroom": "Potted Scarlet Mushroom",
 	"block.mubble.potted_scarlet_orchid": "Potted Scarlet Orchid",
@@ -1059,5 +1083,5 @@
 	"item.mubble.snorlax_hat.secret_status": "How paradoxal... :)",
 	"item.mubble.bandana.secret_status": "That's for you, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! I thought you already had this on your head, §6Evan§r!",
-	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, Mr. \"§6Sossie§r\"?"
+	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?"
 }
