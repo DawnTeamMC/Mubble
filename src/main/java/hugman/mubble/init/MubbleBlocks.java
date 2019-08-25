@@ -910,7 +910,7 @@ public class MubbleBlocks
     {
         Block fBlock = block.setRegistryName(Mubble.MOD_ID, name);
         BLOCKS.add(fBlock);
-        if(itemList == FLOWERS || itemList == SAPLINGS) BLOCKS.add(new FlowerPotBlock(fBlock, Properties.from(Blocks.FLOWER_POT)).setRegistryName(Mubble.MOD_ID, "potted_" + name));
+        if(itemList == FLOWERS || itemList == SAPLINGS) BLOCKS.add(new FlowerPotBlock(fBlock, Properties.from(Blocks.FLOWER_POT).lightValue(fBlock.getDefaultState().getLightValue())).setRegistryName(Mubble.MOD_ID, "potted_" + name));
         itemList.add(new BlockItem(fBlock, new Item.Properties().group(group)).setRegistryName(Mubble.MOD_ID, name));
         return fBlock;
     }
