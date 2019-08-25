@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.IItemProvider;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -63,11 +62,5 @@ public class GrassBlock extends net.minecraft.block.GrassBlock
               }
            }
         }
-    }
-    
-    public IItemProvider getItemDropped(BlockState state, World worldIn, BlockPos pos, int fortune)
-    {
-    	if(this == MubbleBlocks.GREEN_HILL_GRASS_BLOCK) return MubbleBlocks.GREEN_HILL_DIRT;
-    	else return Blocks.DIRT;
     }
 }
