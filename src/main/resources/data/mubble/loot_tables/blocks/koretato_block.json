@@ -20,6 +20,24 @@
           "condition": "minecraft:survives_explosion"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mubble:princess_peach_crown"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "mubble:koretato_block",
+          "properties": {
+            "princess": true
+          }
+        }
+      ]
     }
   ]
 }
