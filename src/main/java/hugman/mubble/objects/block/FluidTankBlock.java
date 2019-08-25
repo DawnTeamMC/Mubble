@@ -160,9 +160,9 @@ public class FluidTankBlock extends Block implements IWaterLoggable
 		{
 	        float a = 0.01563f;
 	        float b = 0.98437f;
-	        double hitX = hit.getHitVec().getX();
-	        double hitY = hit.getHitVec().getY();
-	        double hitZ = hit.getHitVec().getZ();
+	        double hitX = hit.getHitVec().getX() - (double)pos.getX();
+	        double hitY = hit.getHitVec().getY() - (double)pos.getY();
+	        double hitZ = hit.getHitVec().getZ() - (double)pos.getZ();
 			if(hitY > b) 
 			{
 				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, UP);
