@@ -39,7 +39,7 @@ public class VerticalSlabBlock extends Block implements IWaterLoggable
     public VerticalSlabBlock(Block.Properties builder)
     {
         super(builder);
-        this.setDefaultState(this.stateContainer.getBaseState().with(TYPE, VerticalSlabType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
+        this.setDefaultState(this.getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
     }
     
     @Override
@@ -47,12 +47,6 @@ public class VerticalSlabBlock extends Block implements IWaterLoggable
     {
     	return state.get(TYPE) != VerticalSlabType.DOUBLE;
     }
-    
-    @Override
-    public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
-    {
-    	return worldIn.getMaxLightLevel();
-	}
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
@@ -77,12 +71,6 @@ public class VerticalSlabBlock extends Block implements IWaterLoggable
         default:
         	return NORTH_SHAPE;
 		}
-	}
-	
-	@Override
-	public boolean isSolid(BlockState state)
-	{
-		return state.get(TYPE) == VerticalSlabType.DOUBLE;
 	}
 
 	@Nullable
