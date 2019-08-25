@@ -1,7 +1,0 @@
-{
-	"parent": "mubble:block/leaves_carpet",
-	"textures":
-	{
-		"carpet": "minecraft:block/acacia_leaves"
-	}
-}

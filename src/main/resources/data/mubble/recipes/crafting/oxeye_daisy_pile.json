@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "flower_pile",
+	"pattern":
+	[
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "minecraft:oxeye_daisy"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:oxeye_daisy_pile"
+	}
+}

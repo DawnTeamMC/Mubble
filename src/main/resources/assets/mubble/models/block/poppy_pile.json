@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:block/pile",
+	"textures":
+	{
+		"pile": "mubble:block/poppy_pile"
+	}
+}

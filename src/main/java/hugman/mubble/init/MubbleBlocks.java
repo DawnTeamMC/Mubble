@@ -19,7 +19,7 @@ import hugman.mubble.objects.block.GoldenBrickBlock;
 import hugman.mubble.objects.block.GrassBlock;
 import hugman.mubble.objects.block.KeyDoorBlock;
 import hugman.mubble.objects.block.KoretatoBlock;
-import hugman.mubble.objects.block.LeavesCarpetBlock;
+import hugman.mubble.objects.block.PileBlock;
 import hugman.mubble.objects.block.MushroomBlock;
 import hugman.mubble.objects.block.NoteBlock;
 import hugman.mubble.objects.block.OreBlock;
@@ -39,6 +39,7 @@ import hugman.mubble.objects.block.TetrisGlassBlock;
 import hugman.mubble.objects.block.TrapDoorBlock;
 import hugman.mubble.objects.block.UnstableBlock;
 import hugman.mubble.objects.block.VerticalSlabBlock;
+import hugman.mubble.objects.block.WitherRosePileBlock;
 import hugman.mubble.objects.block.WoodButtonBlock;
 import hugman.mubble.objects.world.feature.tree.autumn_oak.AutumnOakTree;
 import hugman.mubble.objects.world.feature.tree.cherry_oak.pink.PinkCherryOakTree;
@@ -82,13 +83,14 @@ public class MubbleBlocks
     public static final List<Item> WALLS = new ArrayList<Item>();
     public static final List<Item> SAPLINGS = new ArrayList<Item>();
     public static final List<Item> LEAVES = new ArrayList<Item>();
-    public static final List<Item> LEAVES_CARPETS = new ArrayList<Item>();
+    public static final List<Item> LEAF_PILES = new ArrayList<Item>();
     public static final List<Item> PRESSURE_PLATES = new ArrayList<Item>();
     public static final List<Item> TRAPDOORS = new ArrayList<Item>();
     public static final List<Item> BUTTONS = new ArrayList<Item>();
     public static final List<Item> FENCE_GATES = new ArrayList<Item>();
     public static final List<Item> DOORS = new ArrayList<Item>();
     public static final List<Item> FLOWERS = new ArrayList<Item>();
+    public static final List<Item> FLOWER_PILES = new ArrayList<Item>();
     public static final List<Item> OTHERS = new ArrayList<Item>();
     
     /* Templates */
@@ -134,12 +136,12 @@ public class MubbleBlocks
     
     public static final Block DARK_PRISMARINE_WALL = block("dark_prismarine_wall", new WallBlock(Properties.from(Blocks.DARK_PRISMARINE)), ItemGroup.DECORATIONS, WALLS);
 
-    public static final Block OAK_LEAVES_CARPET = block("oak_leaves_carpet", new LeavesCarpetBlock(Blocks.OAK_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);
-    public static final Block SPRUCE_LEAVES_CARPET = block("spruce_leaves_carpet", new LeavesCarpetBlock(Blocks.SPRUCE_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);
-    public static final Block BIRCH_LEAVES_CARPET = block("birch_leaves_carpet", new LeavesCarpetBlock(Blocks.BIRCH_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);
-    public static final Block JUNGLE_LEAVES_CARPET = block("jungle_leaves_carpet", new LeavesCarpetBlock(Blocks.JUNGLE_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);
-    public static final Block ACACIA_LEAVES_CARPET = block("acacia_leaves_carpet", new LeavesCarpetBlock(Blocks.ACACIA_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);
-    public static final Block DARK_OAK_LEAVES_CARPET = block("dark_oak_leaves_carpet", new LeavesCarpetBlock(Blocks.DARK_OAK_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);
+    public static final Block OAK_LEAF_PILE = block("oak_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
+    public static final Block SPRUCE_LEAF_PILE = block("spruce_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
+    public static final Block BIRCH_LEAF_PILE = block("birch_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
+    public static final Block JUNGLE_LEAF_PILE = block("jungle_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
+    public static final Block ACACIA_LEAF_PILE = block("acacia_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
+    public static final Block DARK_OAK_LEAF_PILE = block("dark_oak_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
     
     public static final Block BLUNITE = block("blunite", new Block(Properties.create(Material.ROCK, MaterialColor.LIGHT_BLUE_TERRACOTTA).hardnessAndResistance(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block CARBONITE = block("carbonite", new Block(Properties.create(Material.ROCK, MaterialColor.OBSIDIAN).hardnessAndResistance(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS, CUBES);
@@ -176,7 +178,7 @@ public class MubbleBlocks
     
     public static final Block AUTUMN_OAK_SAPLING = block("autumn_oak_sapling", new SaplingBlock(new AutumnOakTree()), ItemGroup.DECORATIONS, SAPLINGS);
     public static final Block AUTUMN_OAK_LEAVES = block("autumn_oak_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, LEAVES);
-    public static final Block AUTUMN_OAK_LEAVES_CARPET = block("autumn_oak_leaves_carpet", new LeavesCarpetBlock(AUTUMN_OAK_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);
+    public static final Block AUTUMN_OAK_LEAF_PILE = block("autumn_oak_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
     
     public static final Block CHERRY_OAK_PLANKS = block("cherry_oak_planks", new Block(Properties.from(Blocks.DARK_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block PINK_CHERRY_OAK_SAPLING = block("pink_cherry_oak_sapling", new SaplingBlock(new PinkCherryOakTree()), ItemGroup.DECORATIONS, SAPLINGS);
@@ -186,9 +188,9 @@ public class MubbleBlocks
     public static final Block CHERRY_OAK_WOOD = block("cherry_oak_wood", new StripWoodBlock(Properties.from(CHERRY_OAK_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block STRIPPED_CHERRY_OAK_WOOD = block("stripped_cherry_oak_wood", new RotatedPillarBlock(Properties.from(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block PINK_CHERRY_OAK_LEAVES = block("pink_cherry_oak_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, LEAVES);
-    public static final Block PINK_CHERRY_OAK_LEAVES_CARPET = block("pink_cherry_oak_leaves_carpet", new LeavesCarpetBlock(PINK_CHERRY_OAK_LEAVES), ItemGroup.DECORATIONS , LEAVES_CARPETS);
+    public static final Block PINK_CHERRY_OAK_LEAF_PILE = block("pink_cherry_oak_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS , LEAF_PILES);
     public static final Block WHITE_CHERRY_OAK_LEAVES = block("white_cherry_oak_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, LEAVES);
-    public static final Block WHITE_CHERRY_OAK_LEAVES_CARPET = block("white_cherry_oak_leaves_carpet", new LeavesCarpetBlock(WHITE_CHERRY_OAK_LEAVES), ItemGroup.DECORATIONS , LEAVES_CARPETS);
+    public static final Block WHITE_CHERRY_OAK_LEAF_PILE = block("white_cherry_oak_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS , LEAF_PILES);
     public static final Block CHERRY_OAK_PRESSURE_PLATE = block("cherry_oak_pressure_plate", new PressurePlateBlock(Sensitivity.EVERYTHING, Properties.from(MubbleBlocks.CHERRY_OAK_PLANKS).doesNotBlockMovement().hardnessAndResistance(0.5F)), ItemGroup.REDSTONE, PRESSURE_PLATES);
     public static final Block CHERRY_OAK_TRAPDOOR = block("cherry_oak_trapdoor", new TrapDoorBlock(Properties.from(MubbleBlocks.CHERRY_OAK_PLANKS)), ItemGroup.REDSTONE, TRAPDOORS);
     public static final Block CHERRY_OAK_BUTTON = block("cherry_oak_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, BUTTONS);
@@ -206,7 +208,7 @@ public class MubbleBlocks
     public static final Block PALM_WOOD = block("palm_wood", new StripWoodBlock(Properties.from(MubbleBlocks.PALM_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block STRIPPED_PALM_WOOD = block("stripped_palm_wood", new RotatedPillarBlock(Properties.from(MubbleBlocks.PALM_WOOD)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block PALM_LEAVES = block("palm_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, LEAVES);
-    public static final Block PALM_LEAVES_CARPET = block("palm_leaves_carpet", new LeavesCarpetBlock(MubbleBlocks.PALM_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);
+    public static final Block PALM_LEAF_PILE = block("palm_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
     public static final Block PALM_PRESSURE_PLATE = block("palm_pressure_plate", new PressurePlateBlock(Sensitivity.EVERYTHING, Properties.from(MubbleBlocks.PALM_PLANKS).doesNotBlockMovement().hardnessAndResistance(0.5F)), ItemGroup.REDSTONE, PRESSURE_PLATES);
     public static final Block PALM_TRAPDOOR = block("palm_trapdoor", new TrapDoorBlock(Properties.from(MubbleBlocks.PALM_PLANKS)), ItemGroup.REDSTONE, TRAPDOORS);
     public static final Block PALM_BUTTON = block("palm_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, BUTTONS);
@@ -598,6 +600,7 @@ public class MubbleBlocks
     public static final Block PINK_CONCRETE_BUTTON = block("pink_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE, BUTTONS);
     
     public static final Block FOOTBLOCK = block("footblock", new Block(Properties.from(Blocks.WHITE_WOOL)), ItemGroup.DECORATIONS, OTHERS);
+    
     public static final Block WHITE_CLOUD_BLOCK = block("white_cloud_block", new CloudBlock(DyeColor.WHITE), ItemGroup.DECORATIONS, CUBES);
     public static final Block LIGHT_GRAY_CLOUD_BLOCK = block("light_gray_cloud_block", new CloudBlock(DyeColor.LIGHT_GRAY), ItemGroup.DECORATIONS, CUBES);
     public static final Block GRAY_CLOUD_BLOCK = block("gray_cloud_block", new CloudBlock(DyeColor.GRAY), ItemGroup.DECORATIONS, CUBES);
@@ -614,10 +617,13 @@ public class MubbleBlocks
     public static final Block PURPLE_CLOUD_BLOCK = block("purple_cloud_block", new CloudBlock(DyeColor.PURPLE), ItemGroup.DECORATIONS, CUBES);
     public static final Block MAGENTA_CLOUD_BLOCK = block("magenta_cloud_block", new CloudBlock(DyeColor.MAGENTA), ItemGroup.DECORATIONS, CUBES);
     public static final Block PINK_CLOUD_BLOCK = block("pink_cloud_block", new CloudBlock(DyeColor.PINK), ItemGroup.DECORATIONS, CUBES);
+    
     public static final Block TOMATOES = block("tomatoes", new CropsBlock());
     public static final Block SALAD = block("salad", new CropsBlock());
     public static final Block BLUEBERRY_BUSH = block("blueberry_bush", new BerryBushBlock(Properties.create(Material.PLANTS).tickRandomly().doesNotBlockMovement().sound(SoundType.SWEET_BERRY_BUSH)));
     public static final Block CHEESE_BLOCK = block("cheese_block", new Block(Properties.create(Material.ORGANIC, MaterialColor.YELLOW).hardnessAndResistance(0.5f).sound(SoundType.SNOW)), ItemGroup.FOOD, OTHERS);
+    public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = block("minecraft_10th_anniversary_cake", new CakeBlock(), ItemGroup.FOOD, OTHERS);
+    
     public static final Block WHITE_BALLOON = block("white_balloon", new BalloonBlock(DyeColor.WHITE), ItemGroup.DECORATIONS, CUBES);
     public static final Block LIGHT_GRAY_BALLOON = block("light_gray_balloon", new BalloonBlock(DyeColor.LIGHT_GRAY), ItemGroup.DECORATIONS, CUBES);
     public static final Block GRAY_BALLOON = block("gray_balloon", new BalloonBlock(DyeColor.GRAY), ItemGroup.DECORATIONS, CUBES);
@@ -634,9 +640,23 @@ public class MubbleBlocks
     public static final Block PURPLE_BALLOON = block("purple_balloon", new BalloonBlock(DyeColor.PURPLE), ItemGroup.DECORATIONS, CUBES);
     public static final Block MAGENTA_BALLOON = block("magenta_balloon", new BalloonBlock(DyeColor.MAGENTA), ItemGroup.DECORATIONS, CUBES);
     public static final Block PINK_BALLOON = block("pink_balloon", new BalloonBlock(DyeColor.PINK), ItemGroup.DECORATIONS, CUBES);
+    
     public static final Block UNSTABLE_STONE = block("unstable_stone", new UnstableBlock(Properties.from(Blocks.STONE).hardnessAndResistance(0.1F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block FLUID_TANK = block("fluid_tank", new FluidTankBlock(), ItemGroup.REDSTONE, OTHERS);
-    public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = block("minecraft_10th_anniversary_cake", new CakeBlock(), ItemGroup.FOOD, OTHERS);
+
+    public static final Block DANDELION_PILE = block("dandelion_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block POPPY_PILE = block("poppy_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block BLUE_ORCHID_PILE = block("blue_orchid_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block ALLIUM_PILE = block("allium_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block AZURE_BLUET_PILE = block("azure_bluet_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block RED_TULIP_PILE = block("red_tulip_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block ORANGE_TULIP_PILE = block("orange_tulip_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block WHITE_TULIP_PILE = block("white_tulip_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block PINK_TULIP_PILE = block("pink_tulip_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block OXEYE_DAISY_PILE = block("oxeye_daisy_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block CORNFLOWER_PILE = block("cornflower_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block LILY_OF_THE_VALLEY_PILE = block("lily_of_the_valley_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
+    public static final Block WITHER_ROSE_PILE = block("wither_rose_pile", new WitherRosePileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
 
     /* SUPER MARIO (MAKER) */
     public static final Block SMB_QUESTION_BLOCK = block("smb_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
@@ -830,9 +850,9 @@ public class MubbleBlocks
     public static final Block PRESS_GARDEN_WOOD = block("press_garden_wood", new StripWoodBlock(Properties.from(PRESS_GARDEN_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block STRIPPED_PRESS_GARDEN_WOOD = block("stripped_press_garden_wood", new RotatedPillarBlock(Properties.from(PRESS_GARDEN_WOOD)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block PINK_PRESS_GARDEN_LEAVES = block("pink_press_garden_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, LEAVES);
-    public static final Block PINK_PRESS_GARDEN_LEAVES_CARPET = block("pink_press_garden_leaves_carpet", new LeavesCarpetBlock(PINK_PRESS_GARDEN_LEAVES), ItemGroup.DECORATIONS , LEAVES_CARPETS);
+    public static final Block PINK_PRESS_GARDEN_LEAF_PILE = block("pink_press_garden_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
     public static final Block RED_PRESS_GARDEN_LEAVES = block("red_press_garden_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, LEAVES);
-    public static final Block RED_PRESS_GARDEN_LEAVES_CARPET = block("red_press_garden_leaves_carpet", new LeavesCarpetBlock(RED_PRESS_GARDEN_LEAVES), ItemGroup.DECORATIONS , LEAVES_CARPETS);
+    public static final Block RED_PRESS_GARDEN_LEAF_PILE = block("red_press_garden_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
     public static final Block PRESS_GARDEN_PRESSURE_PLATE = block("press_garden_pressure_plate", new PressurePlateBlock(Sensitivity.EVERYTHING, Properties.from(MubbleBlocks.PRESS_GARDEN_PLANKS).doesNotBlockMovement().hardnessAndResistance(0.5F)), ItemGroup.REDSTONE, PRESSURE_PLATES);
     public static final Block PRESS_GARDEN_TRAPDOOR = block("press_garden_trapdoor", new TrapDoorBlock(Properties.from(MubbleBlocks.PRESS_GARDEN_PLANKS)), ItemGroup.REDSTONE, TRAPDOORS);
     public static final Block PRESS_GARDEN_BUTTON = block("press_garden_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, BUTTONS);
@@ -849,13 +869,13 @@ public class MubbleBlocks
     public static final Block SCARLET_PLANKS = block("scarlet_planks", new Block(Properties.from(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SCARLET_SAPLING = block("scarlet_sapling", new SaplingBlock(new ScarletTree()), ItemGroup.DECORATIONS, SAPLINGS);
     public static final Block SCARLET_LOG = block("scarlet_log", new StripWoodBlock(Properties.from(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block STRIPPED_SCARLET_LOG = block("stripped_scarlet_log", new RotatedPillarBlock(Properties.from(MubbleBlocks.SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SCARLET_WOOD = block("scarlet_wood", new StripWoodBlock(Properties.from(MubbleBlocks.SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block STRIPPED_SCARLET_WOOD = block("stripped_scarlet_wood", new RotatedPillarBlock(Properties.from(MubbleBlocks.SCARLET_WOOD)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block STRIPPED_SCARLET_LOG = block("stripped_scarlet_log", new RotatedPillarBlock(Properties.from(SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SCARLET_WOOD = block("scarlet_wood", new StripWoodBlock(Properties.from(SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block STRIPPED_SCARLET_WOOD = block("stripped_scarlet_wood", new RotatedPillarBlock(Properties.from(SCARLET_WOOD)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SCARLET_LEAVES = block("scarlet_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, LEAVES);
-    public static final Block SCARLET_LEAVES_CARPET = block("scarlet_leaves_carpet", new LeavesCarpetBlock(MubbleBlocks.SCARLET_LEAVES), ItemGroup.DECORATIONS, LEAVES_CARPETS);
-    public static final Block SCARLET_PRESSURE_PLATE = block("scarlet_pressure_plate", new PressurePlateBlock(Sensitivity.EVERYTHING, Properties.from(MubbleBlocks.SCARLET_PLANKS).doesNotBlockMovement().hardnessAndResistance(0.5F)), ItemGroup.REDSTONE, PRESSURE_PLATES);
-    public static final Block SCARLET_TRAPDOOR = block("scarlet_trapdoor", new TrapDoorBlock(Properties.from(MubbleBlocks.SCARLET_PLANKS)), ItemGroup.REDSTONE, TRAPDOORS);
+    public static final Block SCARLET_LEAF_PILE = block("scarlet_leaf_pile", new PileBlock(Properties.create(Material.LEAVES).hardnessAndResistance(0.1F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, LEAF_PILES);
+    public static final Block SCARLET_PRESSURE_PLATE = block("scarlet_pressure_plate", new PressurePlateBlock(Sensitivity.EVERYTHING, Properties.from(SCARLET_PLANKS).doesNotBlockMovement().hardnessAndResistance(0.5F)), ItemGroup.REDSTONE, PRESSURE_PLATES);
+    public static final Block SCARLET_TRAPDOOR = block("scarlet_trapdoor", new TrapDoorBlock(Properties.from(SCARLET_PLANKS)), ItemGroup.REDSTONE, TRAPDOORS);
     public static final Block SCARLET_BUTTON = block("scarlet_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, BUTTONS);
     public static final Block SCARLET_STAIRS = block("scarlet_stairs", new StairsBlock(SCARLET_PLANKS), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SCARLET_SLAB = block("scarlet_slab", new SlabBlock(Properties.from(SCARLET_PLANKS)), ItemGroup.BUILDING_BLOCKS, SLABS);

@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:crafting/white_cherry_oak_leaves_carpet"
+			"mubble:crafting/white_cherry_oak_leaf_pile"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:crafting/white_cherry_oak_leaves_carpet"
+				"recipe": "mubble:crafting/white_cherry_oak_leaf_pile"
 			}
 		}
 	},

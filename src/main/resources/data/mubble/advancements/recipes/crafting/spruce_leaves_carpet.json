@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:crafting/spruce_leaves_carpet"
+			"mubble:crafting/spruce_leaf_pile"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:crafting/spruce_leaves_carpet"
+				"recipe": "mubble:crafting/spruce_leaf_pile"
 			}
 		}
 	},

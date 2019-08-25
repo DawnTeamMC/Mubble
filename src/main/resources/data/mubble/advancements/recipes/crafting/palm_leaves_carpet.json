@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:crafting/palm_leaves_carpet"
+			"mubble:crafting/palm_leaf_pile"
 		]
 	},
 	"criteria":
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:crafting/palm_leaves_carpet"
+				"recipe": "mubble:crafting/palm_leaf_pile"
 			}
 		}
 	},

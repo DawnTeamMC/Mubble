@@ -104,13 +104,14 @@ public class Mubble
             event.getRegistry().registerAll(MubbleBlocks.WALLS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.SAPLINGS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.LEAVES.toArray(new Item[0]));
-            event.getRegistry().registerAll(MubbleBlocks.LEAVES_CARPETS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.LEAF_PILES.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.PRESSURE_PLATES.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.TRAPDOORS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.BUTTONS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.FENCE_GATES.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.DOORS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.FLOWERS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.FLOWER_PILES.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.OTHERS.toArray(new Item[0]));
         	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
         	int count = MubbleBlocks.CUBES.size() +
@@ -121,13 +122,14 @@ public class Mubble
         			MubbleBlocks.WALLS.size() +
         			MubbleBlocks.SAPLINGS.size() +
         			MubbleBlocks.LEAVES.size() +
-        			MubbleBlocks.LEAVES_CARPETS.size() +
+        			MubbleBlocks.LEAF_PILES.size() +
         			MubbleBlocks.PRESSURE_PLATES.size() +
         			MubbleBlocks.TRAPDOORS.size() +
         			MubbleBlocks.BUTTONS.size() +
         			MubbleBlocks.FENCE_GATES.size() +
         			MubbleBlocks.DOORS.size() +
         			MubbleBlocks.FLOWERS.size() +
+        			MubbleBlocks.FLOWER_PILES.size() +
         			MubbleBlocks.OTHERS.size() +
         			MubbleItems.ITEMS.size();
         	LOGGER.info("Registered " + count + " items");
