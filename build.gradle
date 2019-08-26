@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
-version = '1.4-pre9'
+version = '1.4-pre10'
 group = 'com.hugman.mubble'
 archivesBaseName = 'mubble'
 
