@@ -21,7 +21,7 @@ public class MubbleFoods
     public static final Food CANDY_CANE = (new Food.Builder()).hunger(4).saturation(1.8F).build();
     public static final Food BLUEBERRIES = (new Food.Builder()).hunger(2).saturation(0.1F).build();
 
-    public static final Food SUPER_MUSHROOM = (new Food.Builder()).hunger(3).saturation(1F).effect(new EffectInstance(Effects.JUMP_BOOST, 550, 1), 1.0F).build();
+    public static final Food SUPER_MUSHROOM = (new Food.Builder()).hunger(3).saturation(1F).setAlwaysEdible().effect(new EffectInstance(Effects.JUMP_BOOST, 550, 1), 1.0F).build();
     public static final Food PEACH = (new Food.Builder()).hunger(3).saturation(1F).build();
-    public static final Food SUPER_STAR = (new Food.Builder()).hunger(3).saturation(2.4F).effect(new EffectInstance(Effects.SPEED, 600, 1), 1.0F).effect(new EffectInstance(Effects.STRENGTH, 600, 0), 1.0F).effect(new EffectInstance(Effects.REGENERATION, 600, 1), 1.0F).effect(new EffectInstance(Effects.RESISTANCE, 600, 1), 1.0F).effect(new EffectInstance(Effects.NIGHT_VISION, 600, 0), 1.0F).build();
+    public static final Food SUPER_STAR = (new Food.Builder()).hunger(3).saturation(2.4F).setAlwaysEdible().effect(new EffectInstance(Effects.SPEED, 600, 1), 1.0F).effect(new EffectInstance(Effects.STRENGTH, 600, 0), 1.0F).effect(new EffectInstance(Effects.REGENERATION, 600, 1), 1.0F).effect(new EffectInstance(Effects.RESISTANCE, 600, 1), 1.0F).effect(new EffectInstance(Effects.NIGHT_VISION, 600, 0), 1.0F).build();
 }
