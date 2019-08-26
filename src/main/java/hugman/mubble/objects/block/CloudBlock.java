@@ -14,10 +14,13 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class CloudBlock extends AbstractGlassBlock implements IBeaconBeamColorProvider
 {
@@ -57,6 +60,13 @@ public class CloudBlock extends AbstractGlassBlock implements IBeaconBeamColorPr
     public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
     	return 0;
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Override
+    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side)
+    {
+       return false;
     }
     
     @Override
