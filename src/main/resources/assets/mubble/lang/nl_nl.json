@@ -43,12 +43,12 @@
 
 	"block.mubble.dark_prismarine_wall": "Donkereprismarien muur",
 
-	"block.mubble.oak_leaf_pile": "Eikenbladeren tapijt",
-	"block.mubble.spruce_leaf_pile": "Sparrennaalden tapijt",
-	"block.mubble.birch_leaf_pile": "Berkenbladeren tapijt",
-	"block.mubble.jungle_leaf_pile": "Oerwoudbladeren tapijt",
-	"block.mubble.acacia_leaf_pile": "Acaciabladeren tapijt",
-	"block.mubble.dark_oak_leaf_pile": "Donkereikenbladeren tapijt",
+	"//block.mubble.oak_leaf_pile": "Oak Leaves Pile",
+	"//block.mubble.spruce_leaf_pile": "Spruce Leaves Pile",
+	"//block.mubble.birch_leaf_pile": "Birch Leaves Pile",
+	"//block.mubble.jungle_leaf_pile": "Jungle Leaves Pile",
+	"//block.mubble.acacia_leaf_pile": "Acacia Leaves Pile",
+	"//block.mubble.dark_oak_leaf_pile": "Dark Oak Leaves Pile",
 	
 	"block.mubble.permarock": "Permasteen",
 	"block.mubble.permafrost_bricks": "Permafrost bakstenen",
@@ -504,6 +504,7 @@
 	"block.mubble.black_concrete_button": "Zwarte betonnen knop",
 
 	"block.mubble.footblock": "Voetblok",
+	
 	"block.mubble.blue_cloud_block": "Blauwewolkblok",
 	"block.mubble.light_blue_cloud_block": "Lichtblauwewolkblok",
 	"block.mubble.cyan_cloud_block": "Turquoisewolkblok",
@@ -520,6 +521,7 @@
 	"block.mubble.light_gray_cloud_block": "Lichtgrijzewolkblok",
 	"block.mubble.gray_cloud_block": "Grijzewolkblok",
 	"block.mubble.black_cloud_block": "Zwartewolkblok",
+
 	"block.mubble.tomatoes": "Tomaten",
 	"block.mubble.salad": "Salade",
 	"//block.mubble.blueberry_bush": "Blueberry Bush",
@@ -546,6 +548,19 @@
 	"block.mubble.unstable_stone": "Unstabiel steen",
 	"block.mubble.fluid_tank": "Vloeistoftank",
 
+	"//block.mubble.dandelion_pile": "Dandelion Pile",
+	"//block.mubble.poppy_pile": "Poppy Pile",
+	"//block.mubble.blue_orchid_pile": "Blue Orchid Pile",
+	"//block.mubble.allium_pile": "Allium Pile",
+	"//block.mubble.azure_bluet_pile": "Azure Bluet Pile",
+	"//block.mubble.red_tulip_pile": "Red Tulip Pile",
+	"//block.mubble.orange_tulip_pile": "Orange Tulip Pile",
+	"//block.mubble.white_tulip_pile": "White Tulip Pile",
+	"//block.mubble.pink_tulip_pile": "Pink Tulip Pile",
+	"//block.mubble.oxeye_daisy_pile": "Oxeye Daisy Pile",
+	"//block.mubble.cornflower_pile": "Cornflower Pile",
+	"//block.mubble.lily_of_the_valley_pile": "Lily of the Valley Pile",
+	"//block.mubble.wither_rose_pile": "Wither Rose Pile",
 
 
 	"//block.mubble.smb_question_block": "? Block (SMB)",
@@ -742,9 +757,9 @@
 	"//block.mubble.press_garden_wood": "Press Garden Wood",
 	"//block.mubble.stripped_press_garden_wood": "Stripped Press Garden Wood",
 	"//block.mubble.pink_press_garden_leaves": "Pink Press Garden Leaves",
-	"//block.mubble.pink_press_garden_leaf_pile": "Pink Press Garden Leaves Carpet",
+	"//block.mubble.pink_press_garden_leaf_pile": "Pink Press Garden Leaves Pile",
 	"//block.mubble.red_press_garden_leaves": "Red Press Garden Leaves",
-	"//block.mubble.red_press_garden_leaf_pile": "Red Press Garden Leaves Carpet",
+	"//block.mubble.red_press_garden_leaf_pile": "Red Press Garden Leaves Pile",
 	"//block.mubble.press_garden_pressure_plate": "Press Garden Pressure Plate",
 	"//block.mubble.press_garden_trapdoor": "Press Garden Trapdoor",
 	"//block.mubble.press_garden_button": "Press Garden Button",
@@ -754,7 +769,7 @@
 	"//block.mubble.press_garden_fence_gate": "Press Garden Fence Gate",
 	"//block.mubble.press_garden_fence": "Press Garden Fence",
 	"//block.mubble.press_garden_door": "Press Garden Door",
-
+	
 	"block.mubble.spring": "Veer",
 
 
@@ -876,12 +891,13 @@
 	"item.mubble.yellow_coin": "Gele munt",
 	"item.mubble.red_coin": "Rode munt",
 	"item.mubble.blue_coin": "Blauwe munt",
+	"//item.mubble.smb_key": "Key (SMB)",
+	"//item.mubble.smb3_key": "Key (SMB3)",
+	"//item.mubble.smw_key": "Key (SMW)",
+	"//item.mubble.nsmbu_key": "Key (NSMBU)",
 
 
 	"item.mubble.smash_ball": "Smash bal",
-
-
-	"item.mubble.annoying_dog": "Iritante hond",
 
 
 	"item.mubble.blank_music_disc": "Blanke muziekplaat",
@@ -1014,6 +1030,8 @@
 	"biome.mubble.pink_cherry_oak_forest": "Rozekerseneiken bos",
 	"biome.mubble.white_cherry_oak_forest": "Wittekerseneiken bos",
 	"biome.mubble.permafrost": "Permafrost",
+	
+	"//biome.mubble.press_garden": "Press Garden",
 
 	"biome.mubble.scarlet_forest": "Scharlake bos",
 
@@ -1024,8 +1042,6 @@
 	"subtitles.mubble.block.question_block.loot.power_up": "?-blok laat power up vallen",
 	"subtitles.mubble.block.question_block.loot.coin": "?-blok laat munt vallen",
 	"subtitles.mubble.block.spring.trigger": "Veer geactiveerd",
-	"subtitles.mubble.item.annoying_dog.disappear": "Iritante hond verdrijnd",
-	"subtitles.mubble.item.annoying_dog.bark": "Iritante hond blaft",
 	"subtitles.mubble.item.cape_feather.use": "Capeveer wordt gebruikt",
 	"subtitles.mubble.item.smash_ball.use": "Smash bal wordt gebruikt",
 	"subtitles.mubble.costume.cappy.ambient": "Cappy mompelt",

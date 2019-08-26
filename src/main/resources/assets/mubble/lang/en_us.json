@@ -504,6 +504,7 @@
 	"block.mubble.black_concrete_button": "Black Concrete Button",
 
 	"block.mubble.footblock": "Footblock",
+	
 	"block.mubble.blue_cloud_block": "Blue Cloud Block",
 	"block.mubble.light_blue_cloud_block": "Light Blue Cloud Block",
 	"block.mubble.cyan_cloud_block": "Cyan Cloud Block",
@@ -520,6 +521,7 @@
 	"block.mubble.light_gray_cloud_block": "Light Gray Cloud Block",
 	"block.mubble.gray_cloud_block": "Gray Cloud Block",
 	"block.mubble.black_cloud_block": "Black Cloud Block",
+
 	"block.mubble.tomatoes": "Tomatoes",
 	"block.mubble.salad": "Salad",
 	"block.mubble.blueberry_bush": "Blueberry Bush",
@@ -898,9 +900,6 @@
 	"item.mubble.smash_ball": "Smash Ball",
 
 
-	"item.mubble.annoying_dog": "Annoying Dog",
-
-
 	"item.mubble.blank_music_disc": "Blank Music Disc",
 	"item.mubble.music_disc_battlefield": "Music Disc",
 	"item.mubble.music_disc_champions_road": "Music Disc",
@@ -1031,6 +1030,8 @@
 	"biome.mubble.pink_cherry_oak_forest": "Pink Cherry Oak Forest",
 	"biome.mubble.white_cherry_oak_forest": "White Cherry Oak Forest",
 	"biome.mubble.permafrost": "Permafrost",
+
+	"biome.mubble.press_garden": "Press Garden",
 
 	"biome.mubble.scarlet_forest": "Scarlet Forest",
 

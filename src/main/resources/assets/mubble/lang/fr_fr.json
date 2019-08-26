@@ -504,6 +504,7 @@
 	"//block.mubble.black_concrete_button": "Black Concrete Button",
 
 	"block.mubble.footblock": "Bloc de foot",
+	
 	"block.mubble.blue_cloud_block": "Bloc de nuage bleu",
 	"block.mubble.light_blue_cloud_block": "Bloc de nuage bleu clair",
 	"block.mubble.cyan_cloud_block": "Bloc de nuage cyan",
@@ -520,10 +521,11 @@
 	"block.mubble.light_gray_cloud_block": "Bloc de nuage gris clair",
 	"block.mubble.gray_cloud_block": "Bloc de nuage gris",
 	"block.mubble.black_cloud_block": "Bloc de nuage noir",
+
 	"block.mubble.tomatoes": "Tomates",
 	"block.mubble.salad": "Salade",
+	"//block.mubble.blueberry_bush": "Blueberry Bush",
 	"block.mubble.cheese_block": "Bloc de fromage",
-	"block.mubble.ultimatum_portal": "Portail de l'Utimatum",
 	"block.mubble.minecraft_10th_anniversary_cake": "Gâteau d'anniversaire des 10 ans de Minecraft",
 
 	"block.mubble.blue_balloon": "Ballon bleu",
@@ -546,6 +548,19 @@
 	"block.mubble.unstable_stone": "Roche instable",
 	"block.mubble.fluid_tank": "Réservoir à fluides",
 
+	"//block.mubble.dandelion_pile": "Dandelion Pile",
+	"//block.mubble.poppy_pile": "Poppy Pile",
+	"//block.mubble.blue_orchid_pile": "Blue Orchid Pile",
+	"//block.mubble.allium_pile": "Allium Pile",
+	"//block.mubble.azure_bluet_pile": "Azure Bluet Pile",
+	"//block.mubble.red_tulip_pile": "Red Tulip Pile",
+	"//block.mubble.orange_tulip_pile": "Orange Tulip Pile",
+	"//block.mubble.white_tulip_pile": "White Tulip Pile",
+	"//block.mubble.pink_tulip_pile": "Pink Tulip Pile",
+	"//block.mubble.oxeye_daisy_pile": "Oxeye Daisy Pile",
+	"//block.mubble.cornflower_pile": "Cornflower Pile",
+	"//block.mubble.lily_of_the_valley_pile": "Lily of the Valley Pile",
+	"//block.mubble.wither_rose_pile": "Wither Rose Pile",
 
 
 	"//block.mubble.smb_question_block": "? Block (SMB)",
@@ -742,9 +757,9 @@
 	"//block.mubble.press_garden_wood": "Press Garden Wood",
 	"//block.mubble.stripped_press_garden_wood": "Stripped Press Garden Wood",
 	"//block.mubble.pink_press_garden_leaves": "Pink Press Garden Leaves",
-	"//block.mubble.pink_press_garden_leaf_pile": "Pink Press Garden Leaves Carpet",
+	"//block.mubble.pink_press_garden_leaf_pile": "Pink Press Garden Leaves Pile",
 	"//block.mubble.red_press_garden_leaves": "Red Press Garden Leaves",
-	"//block.mubble.red_press_garden_leaf_pile": "Red Press Garden Leaves Carpet",
+	"//block.mubble.red_press_garden_leaf_pile": "Red Press Garden Leaves Pile",
 	"//block.mubble.press_garden_pressure_plate": "Press Garden Pressure Plate",
 	"//block.mubble.press_garden_trapdoor": "Press Garden Trapdoor",
 	"//block.mubble.press_garden_button": "Press Garden Button",
@@ -754,7 +769,7 @@
 	"//block.mubble.press_garden_fence_gate": "Press Garden Fence Gate",
 	"//block.mubble.press_garden_fence": "Press Garden Fence",
 	"//block.mubble.press_garden_door": "Press Garden Door",
-
+	
 	"block.mubble.spring": "Ressort",
 
 
@@ -883,9 +898,6 @@
 
 
 	"item.mubble.smash_ball": "Balle Smash",
-
-
-	"item.mubble.annoying_dog": "Chien agaçant",
 
 
 	"item.mubble.blank_music_disc": "Disque de musique vide",
@@ -1018,6 +1030,8 @@
 	"biome.mubble.pink_cherry_oak_forest": "Forêt de cerisiers roses",
 	"biome.mubble.white_cherry_oak_forest": "Forêt de cerisiers blancs",
 	"biome.mubble.permafrost": "Permafrost",
+	
+	"//biome.mubble.press_garden": "Press Garden",
 
 	"biome.mubble.scarlet_forest": "Forêt écarlate",
 
@@ -1028,8 +1042,6 @@
 	"subtitles.mubble.block.question_block.loot.power_up": "Objet sorti d'un bloc ?",
 	"subtitles.mubble.block.question_block.loot.coin": "Pièce sortie d'un bloc ?",
 	"subtitles.mubble.block.spring.trigger": "Ressort déclenché",
-	"subtitles.mubble.item.annoying_dog.disappear": "Disparition de chien agaçant",
-	"subtitles.mubble.item.annoying_dog.bark": "Aboiement de chien agaçant",
 	"subtitles.mubble.item.cape_feather.use": "Plume acrobate utilisée",
 	"subtitles.mubble.item.smash_ball.use": "Balle Smash utilisée",
 	"subtitles.mubble.costume.cappy.ambient": "Marmonnement de Cappy",

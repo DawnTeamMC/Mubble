@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "wooden_door",
+	"pattern":
+	[
+		"##",
+		"##",
+		"##"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:press_garden_planks"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:press_garden_door",
+		"count": 3
+	}
+}

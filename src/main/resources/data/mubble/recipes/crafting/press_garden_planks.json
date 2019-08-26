@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"group": "planks",
+	"ingredients":
+	[
+		{
+			"tag": "mubble:press_garden_logs"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:press_garden_planks",
+		"count": 4
+	}
+}
