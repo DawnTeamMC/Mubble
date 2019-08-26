@@ -171,7 +171,7 @@ public class PermafrostPortalBlock extends NetherPortalBlock
         protected boolean func_196900_a(BlockState stateIn)
         {
         	Block block = stateIn.getBlock();
-        	return stateIn.isAir() || block == Blocks.FIRE || block == MubbleBlocks.PERMAFROST_PORTAL;
+        	return block == Blocks.AIR || block == Blocks.FIRE || block == MubbleBlocks.PERMAFROST_PORTAL;
         }
 
         public boolean isValid()

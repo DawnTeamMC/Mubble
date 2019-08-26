@@ -138,7 +138,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 		 		placeLeaves(changedBlocks, worldIn, originX, originY - 3, originZ - 3, boundingBox);
 			 	for(int i3 = 0; i3 < i; ++i3)
 			 	{
-			 		if(isAirOrLeaves(worldIn, position.up(i3)) || func_214576_j(worldIn, position.up(i3)))
+			 		if(isAirOrLeaves(worldIn, position.up(i3)) || isTallPlants(worldIn, position.up(i3)))
 			 		{
 			 			this.setLogState(changedBlocks, worldIn, position.up(i3), LOG, boundingBox);
 			 		}
@@ -151,7 +151,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 	public void placeLeaves(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, int x, int y, int z, MutableBoundingBox boundingBox)
 	{
 		BlockPos blockPos = new BlockPos(x, y, z);
-		if(isAirOrLeaves(worldIn, blockPos) || func_214576_j(worldIn, blockPos))
+		if(isAirOrLeaves(worldIn, blockPos) || isTallPlants(worldIn, blockPos))
 		{
 			boundingBox.expandTo(new MutableBoundingBox(blockPos, blockPos));
 			worldIn.setBlockState(blockPos, LEAVES, 3);

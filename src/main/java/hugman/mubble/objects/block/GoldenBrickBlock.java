@@ -42,10 +42,10 @@ public class GoldenBrickBlock extends Block
     }
     
     @Override
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_)
+    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
     {
     	if(worldIn.isBlockPowered(pos)) loot(worldIn, pos);
-    	super.neighborChanged(state, worldIn, pos, blockIn, fromPos, p_220069_6_);
+    	state.neighborChanged(worldIn, pos, blockIn, fromPos, isMoving);
     }
     
     @Override

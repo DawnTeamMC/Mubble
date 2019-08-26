@@ -76,7 +76,7 @@ public class TreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 							if (Math.abs(k1) != j4 || Math.abs(i2) != j4 || rand.nextInt(2) != 0 && l3 != 0)
 							{
 								BlockPos blockpos = new BlockPos(j1, l2, l1);
-								if (isAirOrLeaves(worldIn, blockpos) || func_214576_j(worldIn, blockpos))
+								if (isAirOrLeaves(worldIn, blockpos) || isTallPlants(worldIn, blockpos))
 								{
 									this.setLogState(changedBlocks, worldIn, blockpos, this.LEAVES, p_208519_5_);
 								}
@@ -86,7 +86,7 @@ public class TreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 				}
 				for(int i3 = 0; i3 < i; ++i3)
 				{
-					if (isAirOrLeaves(worldIn, position.up(i3)) || func_214576_j(worldIn, position.up(i3)))
+					if (isAirOrLeaves(worldIn, position.up(i3)) || isTallPlants(worldIn, position.up(i3)))
 					{
 						this.setLogState(changedBlocks, worldIn, position.up(i3), this.LOG, p_208519_5_);
 					}

@@ -48,7 +48,7 @@ public class PermafrostSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfi
 		for(int j1 = 127; j1 >= 0; --j1) {
 			blockpos$mutableblockpos.setPos(j, j1, k);
 			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
-			if (iblockstate2.getBlock() != null && !iblockstate2.isAir())
+			if (iblockstate2.getBlock() != null && iblockstate2.getBlock() != Blocks.AIR)
 			{
 				if (iblockstate2.getBlock() == defaultBlock.getBlock())
 				{
@@ -75,7 +75,7 @@ public class PermafrostSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfi
 								iblockstate1 = ICE;
 							}
 						}
-						if (j1 < i && (iblockstate == null || iblockstate.isAir())) iblockstate = defaultFluid;
+						if (j1 < i && (iblockstate == null)) iblockstate = defaultFluid;
 						i1 = l;
 						if (j1 >= i - 1) chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
 						else chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
