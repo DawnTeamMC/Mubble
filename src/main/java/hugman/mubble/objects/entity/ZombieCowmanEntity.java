@@ -23,6 +23,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -42,6 +43,7 @@ public class ZombieCowmanEntity extends ZombiePigmanEntity
 	public ZombieCowmanEntity(EntityType<? extends ZombieCowmanEntity> type, World worldIn)
 	{
 		super(type, worldIn);
+		this.setPathPriority(PathNodeType.WATER, 8.0F);
 	}
 	
 	@Override
@@ -180,5 +182,11 @@ public class ZombieCowmanEntity extends ZombiePigmanEntity
 		{
 			return ((ZombieCowmanEntity)this.goalOwner).isAngry() && super.shouldExecute();
 		}
+	}
+	
+	@Override
+	protected boolean shouldBurnInDay()
+	{
+		return false;
 	}
 }
