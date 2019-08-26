@@ -17,13 +17,13 @@ import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraftforge.common.IPlantable;
 
-public class TreeLargeFeature extends AbstractTreeFeature<NoFeatureConfig>
+public class LargeTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 {
     private final BlockState LOG;
     private final BlockState LEAVES;
     private final IPlantable SAPLING;
 
-    public TreeLargeFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory, boolean notify, Block log, Block leaves, Block sapling)
+    public LargeTreeFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory, boolean notify, Block log, Block leaves, Block sapling)
     {
         super(configFactory, notify);
         this.LOG = log.getDefaultState();
