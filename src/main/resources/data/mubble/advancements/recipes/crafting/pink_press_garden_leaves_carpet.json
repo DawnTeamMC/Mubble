@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/pink_press_garden_leaf_pile"
+		]
+	},
+	"criteria":
+	{
+		"has_leaves":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:pink_press_garden_leaves"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/pink_press_garden_leaf_pile"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_leaves",
+			"has_the_recipe"
+		]
+	]
+}
