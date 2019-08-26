@@ -2,7 +2,7 @@
 	"parent": "block/cube_bottom_top",
 	"textures":
 	{
-		"top": "mubble:block/ground_block/smw/forest/over/top",
+		"top": "mubble:block/ground_block/smw/forest/over/top/3",
 		"side": "mubble:block/ground_block/smw/forest/over/side",
 		"bottom": "mubble:block/ground_block/smw/forest/block"
 	}
