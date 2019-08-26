@@ -15,13 +15,13 @@ public class RedPressGardenTree extends BigTree
 	@Override
 	protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random)
 	{
-		return MubbleFeatures.RED_PRESS_GARDEN_TREE;
+		return (AbstractTreeFeature<NoFeatureConfig>)MubbleFeatures.RED_PRESS_GARDEN_TREE;
 	}
 	
 	@Nullable
 	@Override
 	protected AbstractTreeFeature<NoFeatureConfig> getBigTreeFeature(Random random)
 	{
-		return MubbleFeatures.MEGA_RED_PRESS_GARDEN_TREE;
+		return (AbstractTreeFeature<NoFeatureConfig>)MubbleFeatures.MEGA_RED_PRESS_GARDEN_TREE;
 	}
 }

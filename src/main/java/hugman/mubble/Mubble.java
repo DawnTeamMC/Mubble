@@ -13,7 +13,6 @@ import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
-import hugman.mubble.init.world.MubbleWorldTypes;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
@@ -62,8 +61,6 @@ public class Mubble
     	LOGGER.info("Registered trees");
     	MubbleGenerators.registerSpawns();
     	LOGGER.info("Registered entity spawns");
-    	MubbleWorldTypes.registerWorldTypes();
-    	LOGGER.info("Registered world types");
     }
     
     @SubscribeEvent

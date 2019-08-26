@@ -39,7 +39,7 @@ public class WitherRosePileBlock extends PileBlock
     	{
     		if(rand.nextBoolean())
     		{
-    			worldIn.addParticle(ParticleTypes.SMOKE, (double)pos.getX() + (double)(rand.nextInt(17)), (double)pos.getY() + (0.5D - (double)rand.nextFloat()), (double)pos.getZ() + (double)(rand.nextInt(17)), 0.0D, 0.0D, 0.0D);
+    			worldIn.addParticle(ParticleTypes.SMOKE, (double)pos.getX() + (double)(rand.nextInt(17) / 16), (double)pos.getY() + (0.5D - (double)rand.nextFloat()), (double)pos.getZ() + (double)(rand.nextInt(17)  / 16), 0.0D, 0.0D, 0.0D);
     		}
     	}
     }

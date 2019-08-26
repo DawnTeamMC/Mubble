@@ -15,6 +15,6 @@ public class AutumnOakTree extends Tree
 	@Override
 	protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random)
 	{
-		return random.nextInt(10) == 0 ? MubbleFeatures.TALL_AUTUMN_OAK_TREE : MubbleFeatures.AUTUMN_OAK_TREE;
+		return (AbstractTreeFeature<NoFeatureConfig>)(random.nextInt(10) == 0 ? MubbleFeatures.TALL_AUTUMN_OAK_TREE : MubbleFeatures.AUTUMN_OAK_TREE);
 	}
 }

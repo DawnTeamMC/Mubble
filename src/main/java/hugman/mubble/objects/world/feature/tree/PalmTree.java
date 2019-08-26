@@ -15,6 +15,6 @@ public class PalmTree extends Tree
 	@Override
 	protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random)
 	{
-		return MubbleFeatures.PALM_TREE;
+		return (AbstractTreeFeature<NoFeatureConfig>)MubbleFeatures.PALM_TREE;
 	}
 }

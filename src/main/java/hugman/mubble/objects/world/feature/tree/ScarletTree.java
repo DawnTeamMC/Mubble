@@ -15,12 +15,12 @@ public class ScarletTree extends BigTree
 	@Override
 	protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random)
 	{
-		return random.nextInt(10) == 0 ? MubbleFeatures.TALL_SCARLET_TREE : MubbleFeatures.SCARLET_TREE;
+		return (AbstractTreeFeature<NoFeatureConfig>)(random.nextInt(10) == 0 ? MubbleFeatures.TALL_SCARLET_TREE : MubbleFeatures.SCARLET_TREE);
 	}
 	
 	@Nullable
 	protected AbstractTreeFeature<NoFeatureConfig> getBigTreeFeature(Random random)
 	{
-		return MubbleFeatures.LARGE_SCARLET_TREE;
+		return (AbstractTreeFeature<NoFeatureConfig>)MubbleFeatures.LARGE_SCARLET_TREE;
 	}
 }

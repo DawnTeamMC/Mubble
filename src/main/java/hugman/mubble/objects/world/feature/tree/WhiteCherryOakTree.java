@@ -15,6 +15,6 @@ public class WhiteCherryOakTree extends Tree
 	@Override
 	protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random)
 	{
-		return random.nextInt(10) == 0 ? MubbleFeatures.TALL_WHITE_CHERRY_OAK_TREE : MubbleFeatures.WHITE_CHERRY_OAK_TREE;
+		return (AbstractTreeFeature<NoFeatureConfig>)(random.nextInt(10) == 0 ? MubbleFeatures.TALL_WHITE_CHERRY_OAK_TREE : MubbleFeatures.WHITE_CHERRY_OAK_TREE);
 	}
 }

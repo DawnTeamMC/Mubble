@@ -34,7 +34,7 @@ public class ScarletForestBiome extends Biome
         DefaultBiomeFeatures.addStructures(this);
         DefaultBiomeFeatures.addLakes(this);
         DefaultBiomeFeatures.addMonsterRooms(this);
-        this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createDecoratedFeature(Feature.RANDOM_SELECTOR, new MultipleRandomFeatureConfig(new Feature[]{MubbleFeatures.LARGE_SCARLET_TREE, MubbleFeatures.TALL_SCARLET_TREE, MubbleFeatures.SCARLET_SHRUB}, new IFeatureConfig[]{IFeatureConfig.NO_FEATURE_CONFIG, IFeatureConfig.NO_FEATURE_CONFIG, IFeatureConfig.NO_FEATURE_CONFIG}, new float[]{0.6666667F, 0.1F, 0.1F}, MubbleFeatures.SCARLET_TREE, IFeatureConfig.NO_FEATURE_CONFIG), Placement.DARK_OAK_TREE, IPlacementConfig.NO_PLACEMENT_CONFIG));
+        this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createDecoratedFeature(Feature.RANDOM_SELECTOR, new MultipleRandomFeatureConfig(new Feature[]{MubbleFeatures.LARGE_SCARLET_TREE, MubbleFeatures.TALL_SCARLET_TREE, MubbleFeatures.SCARLET_GROUND_BUSH}, new IFeatureConfig[]{IFeatureConfig.NO_FEATURE_CONFIG, IFeatureConfig.NO_FEATURE_CONFIG, IFeatureConfig.NO_FEATURE_CONFIG}, new float[]{0.6666667F, 0.1F, 0.1F}, MubbleFeatures.SCARLET_TREE, IFeatureConfig.NO_FEATURE_CONFIG), Placement.DARK_OAK_TREE, IPlacementConfig.NO_PLACEMENT_CONFIG));
         DefaultBiomeFeatures.addStoneVariants(this);
         DefaultBiomeFeatures.addOres(this);
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(MubbleFeatures.SCARLET_FLOWERS, IFeatureConfig.NO_FEATURE_CONFIG, Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(4)));
