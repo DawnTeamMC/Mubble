@@ -54,7 +54,7 @@ public class MubbleCostumes
 	/* KIRBY */
 	public static final Item BANDANA = costume("bandana", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 	
-	/* POK�MON */
+	/* POKEMON */
 	public static final Item SNORLAX_HAT = costume("snorlax_hat", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 
 	/* PROFESSOR LAYTON */
@@ -63,6 +63,9 @@ public class MubbleCostumes
 	/* UNDERTALE / DELTARUNE */
 	public static final Item RALSEI_HAT = costume("ralsei_hat", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 	public static final Item KING_ROUND_MASK = costume("king_round_mask", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
+	
+	/* A HAT IN TIME */
+	public static final Item KID_HAT = costume("kid_hat", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 
 	/* PUYO PUYO */
 	public static final Item RED_PUYO = costume("red_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.RED_PUYO));
@@ -76,7 +79,7 @@ public class MubbleCostumes
 	public static final Item HARD_PUYO = costume("hard_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.HARD_PUYO));
 	public static final Item IRON_PUYO = costume("iron_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_METAL_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.IRON_PUYO));
 	
-	/* BALDI�S BASICS IN EDUCATION AND LEARNING */
+	/* BALDI'S BASICS IN EDUCATION AND LEARNING */
 	public static final Item BALDI_HEAD = costume("baldi_head", new HeadCostume(pSimple, SoundEvents.ENTITY_PARROT_IMITATE_VEX));
 
 	/* PETSCOP */
