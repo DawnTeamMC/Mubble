@@ -1,4 +1,4 @@
-package hugman.mubble.objects.potion_effect;
+package hugman.mubble.objects.effect;
 
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;

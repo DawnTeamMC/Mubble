@@ -24,7 +24,6 @@
 	"//block.mubble.andesite_vertical_slab": "Andesite Vertical Slab",
 	"//block.mubble.polished_andesite_vertical_slab": "Polished Andesite Vertical Slab",
 	"//block.mubble.brick_vertical_slab": "Brick Vertical Slab",
-	"//block.mubble.stone_brick_vertical_slab": "Stone Brick Vertical Slab",
 	"//block.mubble.sandstone_vertical_slab": "Sandstone Vertical Slab",
 	"//block.mubble.cut_sandstone_vertical_slab": "Cut Sandstone Vertical Slab",
 	"//block.mubble.smooth_sandstone_vertical_slab": "Smooth Sandstone Vertical Slab",
@@ -1025,6 +1024,7 @@
 
 	"comment": "EFFECTS",
 	"effect.mubble.heaviness": "Schwere",
+	"//effect.mubble.hiccup": "Hiccup",
 
 
 

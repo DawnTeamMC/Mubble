@@ -3,8 +3,8 @@ package hugman.mubble.init;
 import java.util.ArrayList;
 import java.util.List;
 
-import hugman.mubble.objects.potion_effect.HiccupEffect;
-import hugman.mubble.objects.potion_effect.SimpleEffect;
+import hugman.mubble.objects.effect.HiccupEffect;
+import hugman.mubble.objects.effect.SimpleEffect;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.EffectType;
 
