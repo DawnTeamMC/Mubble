@@ -1,6 +1,6 @@
 package hugman.mubble.objects.block;
 
-import hugman.mubble.init.MubbleTags;
+import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.IBeaconBeamColorProvider;

@@ -1,7 +1,7 @@
 package hugman.mubble.objects.block;
 
 import hugman.mubble.init.MubbleBlockStateProperties;
-import hugman.mubble.init.MubbleTags;
+import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.objects.block_state.properties.FluidLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

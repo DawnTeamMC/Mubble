@@ -1,6 +1,6 @@
 package hugman.mubble.objects.costume;
 
-import hugman.mubble.init.MubbleTags;
+import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

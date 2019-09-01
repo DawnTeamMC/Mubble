@@ -1,5 +1,6 @@
 package hugman.mubble.init;
 
+import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.init.world.MubbleDimensions;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

@@ -1,9 +1,9 @@
 package hugman.mubble.objects.entity;
 
 import hugman.mubble.init.MubbleEntities;
-import hugman.mubble.init.MubbleLootTables;
 import hugman.mubble.init.MubbleSounds;
-import hugman.mubble.init.MubbleTags;
+import hugman.mubble.init.data.MubbleLootTables;
+import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;

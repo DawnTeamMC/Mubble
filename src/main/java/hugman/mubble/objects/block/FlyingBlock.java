@@ -2,7 +2,7 @@ package hugman.mubble.objects.block;
 
 import java.util.Random;
 
-import hugman.mubble.init.MubbleTags;
+import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.objects.entity.FlyingBlockEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
