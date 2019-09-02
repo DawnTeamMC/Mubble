@@ -25,6 +25,7 @@ import hugman.mubble.objects.block.OreBlock;
 import hugman.mubble.objects.block.OverBlock;
 import hugman.mubble.objects.block.PermafrostPortalBlock;
 import hugman.mubble.objects.block.PileBlock;
+import hugman.mubble.objects.block.PlacerBlock;
 import hugman.mubble.objects.block.PressurePlateBlock;
 import hugman.mubble.objects.block.PuyoBlock;
 import hugman.mubble.objects.block.QuestionBlock;
@@ -645,6 +646,7 @@ public class MubbleBlocks
     
     public static final Block UNSTABLE_STONE = block("unstable_stone", new UnstableBlock(Properties.from(Blocks.STONE).hardnessAndResistance(0.1F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block FLUID_TANK = block("fluid_tank", new FluidTankBlock(), ItemGroup.REDSTONE, OTHERS);
+    public static final Block PLACER = block("placer", new PlacerBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.5F)), ItemGroup.REDSTONE, CUBES);
 
     public static final Block DANDELION_PILE = block("dandelion_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
     public static final Block POPPY_PILE = block("poppy_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);

@@ -546,6 +546,7 @@
 
 	"block.mubble.unstable_stone": "Unstabiel steen",
 	"block.mubble.fluid_tank": "Vloeistoftank",
+	"//block.mubble.placer": "Placer",
 
 	"block.mubble.dandelion_pile": "Paardenbloemen hoop",
 	"block.mubble.poppy_pile": "Klaproozen hoop",
@@ -1008,6 +1009,11 @@
 
 	"item.mubble.mayro_cap": "Mayro's pet",
 	"item.mubble.noteblock_head": "NoteBlock's hoofd",
+
+
+
+	"comment": "CONTAINERS",
+	"//container.mubble.placer": "Placer",
 
 
 

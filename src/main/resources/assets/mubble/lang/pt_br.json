@@ -546,6 +546,7 @@
 
 	"block.mubble.unstable_stone": "Pedra Instável",
 	"block.mubble.fluid_tank": "Tanque de Fluído",
+	"//block.mubble.placer": "Placer",
 
 	"//block.mubble.dandelion_pile": "Dandelion Pile",
 	"//block.mubble.poppy_pile": "Poppy Pile",
@@ -1008,6 +1009,11 @@
 
 	"item.mubble.mayro_cap": "Boné de Mayro",
 	"item.mubble.noteblock_head": "Cabeça de Noteblock",
+
+
+
+	"comment": "CONTAINERS",
+	"//container.mubble.placer": "Placer",
 
 
 

@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/orientable_vertical",
+	"textures":
+	{
+		"front": "mubble:block/placer/front/vertical",
+		"side": "minecraft:block/furnace_top"
+	}
+}

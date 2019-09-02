@@ -1,4 +1,4 @@
-package hugman.mubble.objects.block_state.properties;
+package hugman.mubble.objects.block.block_state_property;
 
 import net.minecraft.util.IStringSerializable;
 

@@ -546,6 +546,7 @@
 
 	"block.mubble.unstable_stone": "ǝuoʇS ǝlqɐʇsu∩",
 	"block.mubble.fluid_tank": "ʞuɐ┴ pᴉnlℲ",
+	"//block.mubble.placer": "Placer",
 
 	"//block.mubble.dandelion_pile": "Dandelion Pile",
 	"//block.mubble.poppy_pile": "Poppy Pile",
@@ -1008,6 +1009,11 @@
 
 	"item.mubble.mayro_cap": "dɐƆ s,oɹʎɐW",
 	"item.mubble.noteblock_head": "pɐǝH s,ʞɔolᗺǝʇoN",
+
+
+
+	"comment": "CONTAINERS",
+	"//container.mubble.placer": "Placer",
 
 
 

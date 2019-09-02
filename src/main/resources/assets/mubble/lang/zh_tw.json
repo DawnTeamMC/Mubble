@@ -546,6 +546,7 @@
 
 	"//block.mubble.unstable_stone": "Unstable Stone",
 	"//block.mubble.fluid_tank": "Fluid Tank",
+	"//block.mubble.placer": "Placer",
 
 	"//block.mubble.dandelion_pile": "Dandelion Pile",
 	"//block.mubble.poppy_pile": "Poppy Pile",
@@ -1008,6 +1009,11 @@
 
 	"item.mubble.mayro_cap": "馬伊羅的帽子",
 	"item.mubble.noteblock_head": "NoteBlock的頭",
+
+
+
+	"comment": "CONTAINERS",
+	"//container.mubble.placer": "Placer",
 
 
 

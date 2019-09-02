@@ -1,7 +1,7 @@
 package hugman.mubble.init;
 
-import hugman.mubble.objects.block_state.properties.FluidLog;
-import hugman.mubble.objects.block_state.properties.VerticalSlabType;
+import hugman.mubble.objects.block.block_state_property.FluidLog;
+import hugman.mubble.objects.block.block_state_property.VerticalSlabType;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 

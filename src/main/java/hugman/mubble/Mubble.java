@@ -10,6 +10,7 @@ import hugman.mubble.init.MubbleEffects;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleSounds;
+import hugman.mubble.init.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
@@ -17,6 +18,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effect;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
@@ -88,6 +90,13 @@ public class Mubble
         {
         	event.getRegistry().registerAll(MubbleBlocks.BLOCKS.toArray(new Block[0]));
         	LOGGER.info("Registered " + MubbleBlocks.BLOCKS.size() + " blocks");
+        }
+        
+        @SubscribeEvent
+        public static void onTileEntitiesRegistry(final RegistryEvent.Register<TileEntityType<?>> event)
+        {
+        	event.getRegistry().registerAll(MubbleTileEntityTypes.TILE_ENTITY_TYPES.toArray(new TileEntityType<?>[0]));
+        	LOGGER.info("Registered " + MubbleTileEntityTypes.TILE_ENTITY_TYPES.size() + " tile entities");
         }
         
         @SubscribeEvent
