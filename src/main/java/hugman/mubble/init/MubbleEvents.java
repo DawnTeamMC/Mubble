@@ -145,41 +145,43 @@ public class MubbleEvents
 	{
 		PlayerEntity player = event.getPlayer();
 		Hand hand = event.getHand();
-		LivingEntity target = (LivingEntity)event.getTarget();
-		
 		ItemStack itemStack = event.getItemStack();
 		Item item = itemStack.getItem();
-		
-		if(item instanceof DyeItem && target instanceof SheepEntity)
+		if(event.getTarget() instanceof LivingEntity)
 		{
-			SheepEntity sheep = (SheepEntity)target;
-			DyeItem dye = (DyeItem)item;
+			LivingEntity target = (LivingEntity)event.getTarget();
 			
-			if(sheep.isAlive() && !sheep.getSheared() && sheep.getFleeceColor() != dye.getDyeColor())
+			if(item instanceof DyeItem && target instanceof SheepEntity)
 			{
-				player.swingArm(hand);
+				SheepEntity sheep = (SheepEntity)target;
+				DyeItem dye = (DyeItem)item;
+				
+				if(sheep.isAlive() && !sheep.getSheared() && sheep.getFleeceColor() != dye.getDyeColor())
+				{
+					player.swingArm(hand);
+				}
 			}
-		}
-		
-		if(item instanceof DyeItem && target instanceof CatEntity)
-		{
-			CatEntity cat = (CatEntity)target;
-			DyeItem dye = (DyeItem)item;
 			
-			if(cat.isTamed() && cat.isOwner(player) && cat.getCollarColor() != dye.getDyeColor())
+			if(item instanceof DyeItem && target instanceof CatEntity)
 			{
-				player.swingArm(hand);
+				CatEntity cat = (CatEntity)target;
+				DyeItem dye = (DyeItem)item;
+				
+				if(cat.isTamed() && cat.isOwner(player) && cat.getCollarColor() != dye.getDyeColor())
+				{
+					player.swingArm(hand);
+				}
 			}
-		}
-		
-		if(item instanceof DyeItem && target instanceof WolfEntity)
-		{
-			WolfEntity wolf = (WolfEntity)target;
-			DyeItem dye = (DyeItem)item;
 			
-			if(wolf.isTamed() && !itemStack.isEmpty() && wolf.getCollarColor() != dye.getDyeColor())
+			if(item instanceof DyeItem && target instanceof WolfEntity)
 			{
-				player.swingArm(hand);
+				WolfEntity wolf = (WolfEntity)target;
+				DyeItem dye = (DyeItem)item;
+				
+				if(wolf.isTamed() && !itemStack.isEmpty() && wolf.getCollarColor() != dye.getDyeColor())
+				{
+					player.swingArm(hand);
+				}
 			}
 		}
 	}
