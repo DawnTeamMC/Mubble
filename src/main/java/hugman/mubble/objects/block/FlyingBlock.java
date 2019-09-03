@@ -39,7 +39,7 @@ public class FlyingBlock extends Block
     @Override
     public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
     {
-        if (!worldIn.isRemote) this.checkFlyable(worldIn, pos);
+        if(!worldIn.isRemote) this.checkFlyable(worldIn, pos);
     }
     
     public void checkFlyable(World worldIn, BlockPos pos)

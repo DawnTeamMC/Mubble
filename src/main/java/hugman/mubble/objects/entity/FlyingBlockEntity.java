@@ -12,10 +12,14 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ConcretePowderBlock;
+import net.minecraft.block.FallingBlock;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.MoverType;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.DirectionalPlaceContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.INBT;
 import net.minecraft.nbt.NBTUtil;
@@ -25,10 +29,12 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SSpawnObjectPacket;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.MathHelper;
@@ -109,7 +115,10 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	@Override
 	public void tick()
 	{
-		if (this.flyTile.getBlock() == Blocks.AIR) this.remove();
+		if(this.flyTile.getBlock() == Blocks.AIR)
+		{
+			this.remove();
+		}
 		else
 		{
 			this.prevPosX = this.posX;
@@ -129,7 +138,10 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 					return;
 				}
 			}
-			if (!this.hasNoGravity()) this.setMotion(this.getMotion().add(0.0D, -0.04D, 0.0D));
+			if (!this.hasNoGravity())
+			{
+				this.setMotion(this.getMotion().add(0.0D, 0.04D, 0.0D));
+			}
 			this.move(MoverType.SELF, this.getMotion());
 			if (!this.world.isRemote)
 			{
@@ -146,53 +158,78 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	                   flag1 = true;
 	                }
 	             }
-				if (!this.onGround && !flag1)
+				if(!this.onGround && !flag1)
 				{
 					if (this.flyTime > 100 && !this.world.isRemote && (blockpos1.getY() < 1 || blockpos1.getY() > 256) || this.flyTime > 600)
 					{
-						if (this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) this.entityDropItem(block);
+						if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+						{
+							this.entityDropItem(block);
+						}
 						this.remove();
 					}
 				}
-				BlockState iblockstate = this.world.getBlockState(blockpos1);
-				if (this.world.isAirBlock(new BlockPos(this.posX, this.posY + (double)0.99F, this.posZ))) //Forge: Don't indent below.
-				if (!flag1 && FlyingBlock.canFlyThrough(this.world.getBlockState(new BlockPos(this.posX, this.posY + (double)0.99F, this.posZ))))
-				{
-					this.onGround = false;
-					return;
-				}
-
-				this.setMotion(this.getMotion().mul(0.7D, -0.2D, 0.7D));
-				if(iblockstate.getBlock() != Blocks.MOVING_PISTON)
+				BlockState blockstate = this.world.getBlockState(blockpos1);
+				this.setMotion(this.getMotion().mul(0.7D, -0.5D, 0.7D));
+				if(blockstate.getBlock() != Blocks.MOVING_PISTON)
 				{
 					this.remove();
 					if(!this.dontSetBlock)
 					{
-						if (iblockstate.getMaterial().isReplaceable() && (flag1 || !FlyingBlock.canFlyThrough(this.world.getBlockState(blockpos1.up()))) && this.world.setBlockState(blockpos1, this.flyTile, 3))
+						boolean flag2 = blockstate.isReplaceable(new DirectionalPlaceContext(this.world, blockpos1, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
+						boolean flag3 = this.flyTile.isValidPosition(this.world, blockpos1);
+						if(flag2 && flag3)
 						{
-							if (block instanceof FlyingBlock) ((FlyingBlock)block).onEndFlying(this.world, blockpos1, this.flyTile, iblockstate);
-							if (this.tileEntityData != null && this.flyTile.hasTileEntity())
+							if(this.flyTile.has(BlockStateProperties.WATERLOGGED) && this.world.getFluidState(blockpos1).getFluid() == Fluids.WATER)
 							{
-								TileEntity tileentity = this.world.getTileEntity(blockpos1);
-								if (tileentity != null)
+								this.flyTile = this.flyTile.with(BlockStateProperties.WATERLOGGED, Boolean.valueOf(true));
+							}
+							
+							if(this.world.setBlockState(blockpos1, this.flyTile, 3))
+							{
+								if(block instanceof FallingBlock)
 								{
-									CompoundNBT compoundnbt = tileentity.write(new CompoundNBT());
-									for(String s : this.tileEntityData.keySet())
+									((FallingBlock)block).onEndFalling(this.world, blockpos1, this.flyTile, blockstate);
+								}
+								
+								if(this.tileEntityData != null && this.flyTile.hasTileEntity())
+								{
+									TileEntity tileEntity = this.world.getTileEntity(blockpos1);
+									if(tileEntity != null)
 									{
-										INBT inbt = this.tileEntityData.get(s);
-										if (!"x".equals(s) && !"y".equals(s) && !"z".equals(s)) compoundnbt.put(s, inbt.copy());
+										CompoundNBT compoundNbt = tileEntity.write(new CompoundNBT());
+										
+										for(String s : this.tileEntityData.keySet())
+										{
+											INBT inbt = this.tileEntityData.get(s);
+											if (!"x".equals(s) && !"y".equals(s) && !"z".equals(s))
+											{
+		                                    	compoundNbt.put(s, inbt.copy());
+		                                    }
+										}
+										
+										tileEntity.read(compoundNbt);
+										tileEntity.markDirty();
 									}
-									tileentity.read(compoundnbt);
-									tileentity.markDirty();
 								}
 							}
+							else if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+							{
+								this.entityDropItem(block);
+							}
 						}
-						else if (this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) this.entityDropItem(block);
+						else if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+						{
+							this.entityDropItem(block);
+						}
 					}
-					else if (block instanceof FlyingBlock) ((FlyingBlock)block).onBroken(this.world, blockpos1);
+					else if(block instanceof FlyingBlock)
+					{
+						((FlyingBlock)block).onBroken(this.world, blockpos1);
+					}
 				}
 			}
-			this.getMotion().mul(0.98F, 0.98F, 0.98F);
+			this.setMotion(this.getMotion().scale(0.98D));
 		}
 	}
 
@@ -253,19 +290,19 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 			this.hurtEntities = compound.getBoolean("HurtEntities");
 			this.flyHurtMax = compound.getInt("FlyHurtMax");
 		}
-		else if (this.flyTile.isIn(BlockTags.ANVIL))
+		else if(this.flyTile.isIn(BlockTags.ANVIL))
 		{
 			this.hurtEntities = true;
 		}
-		if (compound.contains("DropItem", 99))
+		if(compound.contains("DropItem", 99))
 		{
 			this.shouldDropItem = compound.getBoolean("DropItem");
 		}
-		if (compound.contains("TileEntityData", 10))
+		if(compound.contains("TileEntityData", 10))
 		{
 			this.tileEntityData = compound.getCompound("TileEntityData");
 		}
-		if (this.flyTile.getBlock() == Blocks.AIR)
+		if(this.flyTile.getBlock() == Blocks.AIR)
 		{
 			this.flyTile = Blocks.SAND.getDefaultState();
 		}
@@ -282,10 +319,7 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	{
 		this.hurtEntities = hurtEntitiesIn;
 	}
-
-	/**
-	 * Return whether this entity should be rendered as on fire.
-	 */
+	
 	@OnlyIn(Dist.CLIENT)
 	public boolean canRenderOnFire()
 	{
