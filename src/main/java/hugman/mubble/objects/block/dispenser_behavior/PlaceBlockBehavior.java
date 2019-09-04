@@ -1,7 +1,10 @@
 package hugman.mubble.objects.block.dispenser_behavior;
 
+import net.minecraft.block.AirBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.FlowingFluidBlock;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.OptionalDispenseBehavior;
 import net.minecraft.item.BlockItem;
@@ -24,6 +27,7 @@ public class PlaceBlockBehavior extends OptionalDispenseBehavior
 		Direction direction = source.getBlockState().get(DispenserBlock.FACING);
 		BlockPos blockPos = source.getBlockPos().offset(direction);
 		BlockState blockState = worldIn.getBlockState(blockPos);
+		Block block = blockState.getBlock();
 		if(item instanceof BlockItem)
 		{
 			BlockItem blockItem = (BlockItem)item;
@@ -31,7 +35,21 @@ public class PlaceBlockBehavior extends OptionalDispenseBehavior
 		}
 		else if(item instanceof ToolItem)
 		{
-			this.successful = item.canHarvestBlock(blockState) || blockState.getMaterial().isToolNotRequired();
+			if(item.canHarvestBlock(blockState) || blockState.getMaterial().isToolNotRequired())
+			{
+				if(block instanceof AirBlock || block instanceof FlowingFluidBlock)
+				{
+					this.successful = false;
+				}
+				else if(blockState.getBlockHardness(worldIn, blockPos) < 0.0f)
+				{
+					this.successful = false;
+				}
+				else
+				{
+					this.successful = true;
+				}
+			}
 			if(this.successful)
 			{
 				worldIn.destroyBlock(blockPos, true);
