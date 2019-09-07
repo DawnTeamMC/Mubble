@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mubble:puyo_block"
+          "name": "mubble:gray_puyo"
         }
       ],
       "conditions": [

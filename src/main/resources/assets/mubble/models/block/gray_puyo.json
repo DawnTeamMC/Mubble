@@ -1,0 +1,8 @@
+{
+	"parent": "mubble:block/block_directional",
+	"textures":
+	{
+		"block": "mubble:block/gray_puyo/block",
+		"front": "mubble:block/gray_puyo/front"
+	}
+}

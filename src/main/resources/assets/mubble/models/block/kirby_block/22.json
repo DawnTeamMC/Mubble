@@ -2,12 +2,10 @@
 	"parent": "mubble:block/block_directional",
 	"textures":
 	{
+		"block": "mubble:block/kirby_block/block",
 		"bottom": "mubble:block/kirby_block/bottom",
-		"side": "mubble:block/kirby_block/body",
-		"top": "mubble:block/kirby_block/body",
 		"front": "mubble:block/kirby_block/front/22",
 		"right": "mubble:block/kirby_block/right/low",
-		"left": "mubble:block/kirby_block/left/low",
-		"particle": "mubble:block/kirby_block/body"
+		"left": "mubble:block/kirby_block/left/low"
 	}
 }

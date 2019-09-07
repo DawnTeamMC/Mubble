@@ -2,10 +2,7 @@
 	"parent": "mubble:block/block_directional",
 	"textures":
 	{
-		"bottom": "mubble:block/point_puyo/body",
-		"side": "mubble:block/point_puyo/body",
-		"top": "mubble:block/point_puyo/body",
-		"front": "mubble:block/point_puyo/front",
-		"particle": "mubble:block/point_puyo/body"
+		"block": "mubble:block/point_puyo/block",
+		"front": "mubble:block/point_puyo/front"
 	}
 }

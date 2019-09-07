@@ -2,10 +2,7 @@
 	"parent": "mubble:block/block_directional",
 	"textures":
 	{
-		"top": "mubble:block/koretato_block/princess/none/body",
-		"bottom": "mubble:block/koretato_block/princess/none/body",
-		"front": "mubble:block/koretato_block/princess/none/front",
-		"side": "mubble:block/koretato_block/princess/none/body",
-		"particle": "mubble:block/koretato_block/princess/none/body"
+		"block": "mubble:block/koretato_block/princess/none/block",
+		"front": "mubble:block/koretato_block/princess/none/front"
 	}
 }

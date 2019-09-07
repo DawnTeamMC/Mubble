@@ -913,11 +913,11 @@ public class MubbleBlocks
     public static final Block TURQUOISE_PUYO = block("turquoise_puyo", new PuyoBlock(Properties.create(Material.CLAY, MaterialColor.EMERALD).slipperiness(0.8F).sound(SoundType.SLIME)));
     public static final Block BLUE_PUYO = block("blue_puyo", new PuyoBlock(Properties.create(Material.CLAY, DyeColor.BLUE).slipperiness(0.8F).sound(SoundType.SLIME)));
     public static final Block PURPLE_PUYO = block("purple_puyo", new PuyoBlock(Properties.create(Material.CLAY, DyeColor.PURPLE).slipperiness(0.8F).sound(SoundType.SLIME)));
+    public static final Block GRAY_PUYO = block("gray_puyo", new PuyoBlock(Properties.create(Material.CLAY, DyeColor.GRAY).slipperiness(0.8F).sound(SoundType.SLIME)));
     public static final Block GARBAGE_PUYO = block("garbage_puyo", new DirectionalBlock(Properties.from(Blocks.STONE)));
     public static final Block POINT_PUYO = block("point_puyo", new DirectionalBlock(Properties.from(Blocks.STONE).lightValue(10)));
     public static final Block HARD_PUYO = block("hard_puyo", new DirectionalBlock(Properties.from(Blocks.STONE)));
     public static final Block IRON_PUYO = block("iron_puyo", new DirectionalBlock(Properties.from(Blocks.IRON_BLOCK)));
-    public static final Block PUYO_BLOCK = block("puyo_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     
     /* YOUTUBE */
     public static final Block KORETATO_BLOCK = block("koretato_block", new KoretatoBlock());

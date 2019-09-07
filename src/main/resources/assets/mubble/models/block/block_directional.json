@@ -2,10 +2,13 @@
 	"parent": "block/block",
 	"textures":
 	{
-		"front": "#side",
-		"back": "#side",
-		"left": "#side",
-		"right": "#side"
+		"front": "#block",
+		"back": "#block",
+		"left": "#block",
+		"right": "#block",
+		"top": "#block",
+		"bottom": "#block",
+		"particle": "#block"
 	},
 	"elements":
 	[

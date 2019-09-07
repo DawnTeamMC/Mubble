@@ -76,6 +76,7 @@ public class MubbleCostumes
 	public static final Item TURQUOISE_PUYO = costume("turquoise_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.TURQUOISE_PUYO));
 	public static final Item BLUE_PUYO = costume("blue_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.BLUE_PUYO));
 	public static final Item PURPLE_PUYO = costume("purple_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.PURPLE_PUYO));
+	public static final Item GRAY_PUYO = costume("gray_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.GRAY_PUYO));
 	public static final Item GARBAGE_PUYO = costume("garbage_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.GARBAGE_PUYO));
 	public static final Item POINT_PUYO = costume("point_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.POINT_PUYO));
 	public static final Item HARD_PUYO = costume("hard_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.HARD_PUYO));

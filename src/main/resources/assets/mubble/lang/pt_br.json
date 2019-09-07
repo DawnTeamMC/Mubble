@@ -816,11 +816,11 @@
 	"block.mubble.yellow_puyo": "Puyo Amarelo",
 	"block.mubble.red_puyo": "Puyo Vermelho",
 	"block.mubble.purple_puyo": "Puyo Roxo",
+	"//block.mubble.gray_puyo": "Gray Puyo",
 	"block.mubble.garbage_puyo": "Puyo Lixo",
 	"block.mubble.point_puyo": "Puyo Ponto",
 	"block.mubble.hard_puyo": "Puyo Rígido",
 	"block.mubble.iron_puyo": "Puyo Ferro",
-	"block.mubble.puyo_block": "Bloco de Puyo",
 
 
 	"block.mubble.koretato_block": "Bloco Koretato",
