@@ -49,6 +49,7 @@ public class MubbleCostumes
 	public static final Item PINK_GOLD_PEACH_CROWN = costume("pink_gold_peach_crown", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 	public static final Item SUPER_CROWN = costume("super_crown", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 	public static final Item MARIO_WEDDING_HAT = costume("mario_wedding_hat", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
+	public static final Item BOO_HAT = costume("boo_hat", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 	public static final Item BROQUE_MONSIEUR_HEAD = costume("broque_monsieur_head", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 	
 	/* KIRBY */
