@@ -1,17 +1,23 @@
 {
 	"variants":
 	{
-		"facing=up,princess=false":		{ "model": "mubble:block/koretato_block/normal", "x": 270 },
-		"facing=down,princess=false":	{ "model": "mubble:block/koretato_block/normal", "x": 90 },
-		"facing=north,princess=false":	{ "model": "mubble:block/koretato_block/normal" },
-		"facing=south,princess=false":	{ "model": "mubble:block/koretato_block/normal", "y": 180 },
-		"facing=west,princess=false":	{ "model": "mubble:block/koretato_block/normal", "y": 270 },
-		"facing=east,princess=false":	{ "model": "mubble:block/koretato_block/normal", "y": 90 },
-		"facing=up,princess=true":		{ "model": "mubble:block/koretato_block/princess", "x": 270 },
-		"facing=down,princess=true":	{ "model": "mubble:block/koretato_block/princess", "x": 90 },
-		"facing=north,princess=true":	{ "model": "mubble:block/koretato_block/princess" },
-		"facing=south,princess=true":	{ "model": "mubble:block/koretato_block/princess", "y": 180 },
-		"facing=west,princess=true":	{ "model": "mubble:block/koretato_block/princess", "y": 270 },
-		"facing=east,princess=true":	{ "model": "mubble:block/koretato_block/princess", "y": 90 }
+		"facing=up,princess=none":		{ "model": "mubble:block/koretato_block/princess/none", "x": 270 },
+		"facing=down,princess=none":	{ "model": "mubble:block/koretato_block/princess/none", "x": 90 },
+		"facing=north,princess=none":	{ "model": "mubble:block/koretato_block/princess/none" },
+		"facing=south,princess=none":	{ "model": "mubble:block/koretato_block/princess/none", "y": 180 },
+		"facing=west,princess=none":	{ "model": "mubble:block/koretato_block/princess/none", "y": 270 },
+		"facing=east,princess=none":	{ "model": "mubble:block/koretato_block/princess/none", "y": 90 },
+		"facing=up,princess=peach":		{ "model": "mubble:block/koretato_block/princess/peach", "x": 270 },
+		"facing=down,princess=peach":	{ "model": "mubble:block/koretato_block/princess/peach", "x": 90 },
+		"facing=north,princess=peach":	{ "model": "mubble:block/koretato_block/princess/peach" },
+		"facing=south,princess=peach":	{ "model": "mubble:block/koretato_block/princess/peach", "y": 180 },
+		"facing=west,princess=peach":	{ "model": "mubble:block/koretato_block/princess/peach", "y": 270 },
+		"facing=east,princess=peach":	{ "model": "mubble:block/koretato_block/princess/peach", "y": 90 },
+		"facing=up,princess=daisy":		{ "model": "mubble:block/koretato_block/princess/daisy", "x": 270 },
+		"facing=down,princess=daisy":	{ "model": "mubble:block/koretato_block/princess/daisy", "x": 90 },
+		"facing=north,princess=daisy":	{ "model": "mubble:block/koretato_block/princess/daisy" },
+		"facing=south,princess=daisy":	{ "model": "mubble:block/koretato_block/princess/daisy", "y": 180 },
+		"facing=west,princess=daisy":	{ "model": "mubble:block/koretato_block/princess/daisy", "y": 270 },
+		"facing=east,princess=daisy":	{ "model": "mubble:block/koretato_block/princess/daisy", "y": 90 }
 	}
 }

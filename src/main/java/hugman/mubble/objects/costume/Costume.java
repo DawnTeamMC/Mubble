@@ -29,13 +29,13 @@ import net.minecraft.world.World;
 public class Costume extends Item
 {
 	protected final EquipmentSlotType armorType;
-	protected final SoundEvent sound;
+	protected final SoundEvent equipSound;
 	protected final EffectInstance[] effects;
     
     public Costume(Item.Properties builder, SoundEvent sound, EquipmentSlotType armorType, EffectInstance... potionEffects)
     {
         super(builder);
-		this.sound = sound;
+		this.equipSound = sound;
 	    this.armorType = armorType;
 	    this.effects = potionEffects;
 	    DispenserBlock.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
@@ -98,7 +98,7 @@ public class Costume extends Item
         {
         	playerIn.setItemStackToSlot(armorType, itemstack.copy());
         	itemstack.shrink(1);
-        	worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, this.sound, SoundCategory.PLAYERS, 1f, 1f);
+        	worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
         	if(this == MubbleCostumes.SNORLAX_HAT && "SnorlaxLover".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.snorlax_hat.secret_status", new Object[0]), true);
         	if(this == MubbleCostumes.MAYRO_CAP && "MayroSMM".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.mayro_cap.secret_status", new Object[0]), true);
         	if(this == MubbleCostumes.NOTEBLOCK_HEAD && "NoteBlockRemix".equals(playerIn.getGameProfile().getName())) playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.noteblock_head.secret_status", new Object[0]), true);
@@ -114,5 +114,10 @@ public class Costume extends Item
     public static boolean isUsable(ItemStack stack)
     {
     	return stack.getDamage() < stack.getMaxDamage() - 1;
+	}
+    
+    public SoundEvent getEquipSound()
+    {
+		return equipSound;
 	}
 }

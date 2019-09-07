@@ -1,0 +1,12 @@
+{
+	"parent": "mubble:block/block_directional",
+	"textures":
+	{
+		"top": "mubble:block/koretato_block/princess/none/body",
+		"bottom": "mubble:block/koretato_block/princess/none/body",
+		"front": "mubble:block/koretato_block/princess/peach/front",
+		"side": "mubble:block/koretato_block/princess/peach/side",
+		"back": "mubble:block/koretato_block/princess/peach/back",
+		"particle": "mubble:block/koretato_block/princess/none/body"
+	}
+}

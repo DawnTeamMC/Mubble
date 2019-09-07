@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.objects.block.block_state_property.Princess;
 import hugman.mubble.objects.costume.BlockCostume;
 import hugman.mubble.objects.costume.CappyCostume;
 import hugman.mubble.objects.costume.GooigiCapCostume;
 import hugman.mubble.objects.costume.GuardianMaskCostume;
 import hugman.mubble.objects.costume.HeadCostume;
 import hugman.mubble.objects.costume.MayroCapCostume;
-import hugman.mubble.objects.costume.PrincessPeachCrownCostume;
+import hugman.mubble.objects.costume.CrownCostume;
 import hugman.mubble.objects.costume.VanishCapCostume;
 import hugman.mubble.objects.costume.WingCapCostume;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -43,8 +44,8 @@ public class MubbleCostumes
 	public static final Item GOOIGI_CAP = costume("gooigi_cap", new GooigiCapCostume(pSimple));
 	public static final Item GOLD_MARIO_CAP = costume("gold_mario_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_GOLD));
 	public static final Item SILVER_LUIGI_CAP = costume("silver_luigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
-	public static final Item PRINCESS_PEACH_CROWN = costume("princess_peach_crown", new PrincessPeachCrownCostume(pSimple));
-	public static final Item PRINCESS_DAISY_CROWN = costume("princess_daisy_crown", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
+	public static final Item PRINCESS_PEACH_CROWN = costume("princess_peach_crown", new CrownCostume(pSimple, Princess.PEACH));
+	public static final Item PRINCESS_DAISY_CROWN = costume("princess_daisy_crown", new CrownCostume(pSimple, Princess.DAISY));
 	public static final Item ROSALINA_CROWN = costume("rosalina_crown", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 	public static final Item PINK_GOLD_PEACH_CROWN = costume("pink_gold_peach_crown", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 	public static final Item SUPER_CROWN = costume("super_crown", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
