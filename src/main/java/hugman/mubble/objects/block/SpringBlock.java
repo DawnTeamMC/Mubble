@@ -33,22 +33,28 @@ public class SpringBlock extends DirectionalBlock implements IWaterLoggable
 	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private static final VoxelShape IRON_UP = Block.makeCuboidShape(6.0D, 0.0D, 6.0D, 10.0D, 6.0D, 10.0D);
 	private static final VoxelShape PLATE_UP = Block.makeCuboidShape(1.0D, 6.0D, 1.0D, 15.0D, 9.0D, 15.0D);
-	private static final VoxelShape SPRING_UP = VoxelShapes.or(IRON_UP, PLATE_UP);
 	private static final VoxelShape IRON_DOWN = Block.makeCuboidShape(6.0D, 10.0D, 6.0D, 10.0D, 16.0D, 10.0D);
 	private static final VoxelShape PLATE_DOWN = Block.makeCuboidShape(1.0D, 7.0D, 1.0D, 15.0D, 10.0D, 15.0D);
-	private static final VoxelShape SPRING_DOWN = VoxelShapes.or(IRON_DOWN, PLATE_DOWN);
 	private static final VoxelShape IRON_NORTH = Block.makeCuboidShape(6.0D, 6.0D, 10.0D, 10.0D, 10.0D, 16.0D);
 	private static final VoxelShape PLATE_NORTH = Block.makeCuboidShape(1.0D, 1.0D, 7.0D, 15.0D, 15.0D, 10.0D);
-	private static final VoxelShape SPRING_NORTH = VoxelShapes.or(IRON_NORTH, PLATE_NORTH);
 	private static final VoxelShape IRON_SOUTH = Block.makeCuboidShape(6.0D, 6.0D, 0.0D, 10.0D, 10.0D, 6.0D);
 	private static final VoxelShape PLATE_SOUTH = Block.makeCuboidShape(1.0D, 1.0D, 6.0D, 15.0D, 15.0D, 9.0D);
-	private static final VoxelShape SPRING_SOUTH = VoxelShapes.or(IRON_SOUTH, PLATE_SOUTH);
 	private static final VoxelShape IRON_EAST = Block.makeCuboidShape(0.0D, 6.0D, 6.0D, 6.0D, 10.0D, 10.0D);
 	private static final VoxelShape PLATE_EAST = Block.makeCuboidShape(6.0D, 1.0D, 1.0D, 9.0D, 15.0D, 15.0D);
-	private static final VoxelShape SPRING_EAST = VoxelShapes.or(IRON_EAST, PLATE_EAST);
 	private static final VoxelShape IRON_WEST = Block.makeCuboidShape(10.0D, 6.0D, 6.0D, 16.0D, 10.0D, 10.0D);
 	private static final VoxelShape PLATE_WEST = Block.makeCuboidShape(7.0D, 1.0D, 1.0D, 10.0D, 15.0D, 15.0D);
+	private static final VoxelShape SPRING_UP = VoxelShapes.or(IRON_UP, PLATE_UP);
+	private static final VoxelShape SPRING_DOWN = VoxelShapes.or(IRON_DOWN, PLATE_DOWN);
+	private static final VoxelShape SPRING_NORTH = VoxelShapes.or(IRON_NORTH, PLATE_NORTH);
+	private static final VoxelShape SPRING_SOUTH = VoxelShapes.or(IRON_SOUTH, PLATE_SOUTH);
+	private static final VoxelShape SPRING_EAST = VoxelShapes.or(IRON_EAST, PLATE_EAST);
 	private static final VoxelShape SPRING_WEST = VoxelShapes.or(IRON_WEST, PLATE_WEST);
+	private static final VoxelShape COL_SPRING_UP = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 9.0D, 15.0D);
+	private static final VoxelShape COL_SPRING_DOWN = Block.makeCuboidShape(1.0D, 7.0D, 1.0D, 15.0D, 16.0D, 15.0D);
+	private static final VoxelShape COL_SPRING_NORTH = Block.makeCuboidShape(1.0D, 1.0D, 7.0D, 15.0D, 15.0D, 16.0D);
+	private static final VoxelShape COL_SPRING_SOUTH = Block.makeCuboidShape(1.0D, 1.0D, 0.0D, 15.0D, 15.0D, 9.0D);
+	private static final VoxelShape COL_SPRING_EAST = Block.makeCuboidShape(0.0D, 1.0D, 1.0D, 9.0D, 15.0D, 15.0D);
+	private static final VoxelShape COL_SPRING_WEST = Block.makeCuboidShape(7.0D, 1.0D, 1.0D, 16.0D, 15.0D, 15.0D);
 	
     public SpringBlock(Block.Properties builder)
     {
@@ -98,6 +104,28 @@ public class SpringBlock extends DirectionalBlock implements IWaterLoggable
 	}
     
     @Override
+    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+    {
+		switch(state.get(FACING))
+		{
+        case UP:
+            return COL_SPRING_UP;
+        case DOWN:
+            return COL_SPRING_DOWN;
+        case NORTH:
+            return COL_SPRING_NORTH;
+        case SOUTH:
+            return COL_SPRING_SOUTH;
+        case EAST:
+            return COL_SPRING_EAST;
+        case WEST:
+            return COL_SPRING_WEST;
+        default:
+        	return COL_SPRING_UP;
+		}
+    }
+    
+    @Override
     public boolean isSolid(BlockState state)
     {
     	return false;
@@ -139,7 +167,7 @@ public class SpringBlock extends DirectionalBlock implements IWaterLoggable
     	double keptXFactor = vec3d.x / 3;
     	double keptYFactor = vec3d.y / 3;
     	double keptZFactor = vec3d.z / 3;
-    	switch (state.get(FACING))
+    	switch(state.get(FACING))
     	{
 		case UP:
 			entityIn.setMotion(vec3d.x, keptYFactor + 1.5D, vec3d.z);
