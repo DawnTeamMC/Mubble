@@ -56,7 +56,8 @@
 			"mubble:block/space_jam/hit1",
 			"mubble:block/space_jam/hit2",
 			"mubble:block/space_jam/hit3",
-			"mubble:block/space_jam/hit4"
+			"mubble:block/space_jam/hit4",
+			"mubble:block/space_jam/hit5"
 		]
 	},
 	"block.space_jam.fall":
@@ -65,7 +66,9 @@
 		[
 			"mubble:block/space_jam/fall1",
 			"mubble:block/space_jam/fall2",
-			"mubble:block/space_jam/fall3"
+			"mubble:block/space_jam/fall3",
+			"mubble:block/space_jam/fall4",
+			"mubble:block/space_jam/fall5"
 		]
 	},
 	"block.space_jam.hit":
@@ -76,7 +79,8 @@
 			"mubble:block/space_jam/hit1",
 			"mubble:block/space_jam/hit2",
 			"mubble:block/space_jam/hit3",
-			"mubble:block/space_jam/hit4"
+			"mubble:block/space_jam/hit4",
+			"mubble:block/space_jam/hit5"
 		]
 	},
 	"block.space_jam.place":
@@ -87,7 +91,8 @@
 			"mubble:block/space_jam/hit1",
 			"mubble:block/space_jam/hit2",
 			"mubble:block/space_jam/hit3",
-			"mubble:block/space_jam/hit4"
+			"mubble:block/space_jam/hit4",
+			"mubble:block/space_jam/hit5"
 		]
 	},
 	"block.space_jam.step":
@@ -98,7 +103,10 @@
 			"mubble:block/space_jam/step1",
 			"mubble:block/space_jam/step2",
 			"mubble:block/space_jam/step3",
-			"mubble:block/space_jam/step4"
+			"mubble:block/space_jam/step4",
+			"mubble:block/space_jam/step5",
+			"mubble:block/space_jam/step6",
+			"mubble:block/space_jam/step7"
 		]
 	},
 	"block.spring.trigger":
