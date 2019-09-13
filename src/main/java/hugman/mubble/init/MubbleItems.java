@@ -53,10 +53,10 @@ public class MubbleItems
     public static final Item YELLOW_COIN = item("yellow_coin", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item RED_COIN = item("red_coin", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item BLUE_COIN = item("blue_coin", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final Item SMB_KEY = item("smb_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final Item SMB3_KEY = item("smb3_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final Item SMW_KEY = item("smw_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS)));
-    public static final Item NSMBU_KEY = item("nsmbu_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final Item SMB_KEY = item("smb_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS), MubbleBlocks.SMB_KEY_DOOR));
+    public static final Item SMB3_KEY = item("smb3_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS), MubbleBlocks.SMB3_KEY_DOOR));
+    public static final Item SMW_KEY = item("smw_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS), MubbleBlocks.SMW_KEY_DOOR));
+    public static final Item NSMBU_KEY = item("nsmbu_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS), MubbleBlocks.NSMBU_KEY_DOOR));
     
     /* SUPER SMASH BROS. */
     public static final Item SMASH_BALL = item("smash_ball", new SmashBallItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1).rarity(Rarity.RARE)));

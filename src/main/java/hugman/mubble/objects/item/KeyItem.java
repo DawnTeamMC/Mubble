@@ -1,7 +1,5 @@
 package hugman.mubble.objects.item;
 
-import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.objects.block.KeyDoorBlock;
 import net.minecraft.block.Block;
@@ -17,10 +15,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class KeyItem extends Item
-{    
-    public KeyItem(Item.Properties builder)
+{
+	private final Block block;
+	
+    public KeyItem(Item.Properties builder, Block blockIn)
     {
         super(builder);
+        this.block = blockIn;
     }
     
     @Override
@@ -29,7 +30,7 @@ public class KeyItem extends Item
     	World worldIn = context.getWorld();
     	BlockPos pos = context.getPos();
     	BlockState state = worldIn.getBlockState(pos);
-		if(state.getBlock() instanceof KeyDoorBlock && state.getBlock() == getDoor(this))
+		if(state.getBlock() instanceof KeyDoorBlock && state.getBlock() == block)
 		{
 			if(state.get(KeyDoorBlock.LOCKED))
 			{
@@ -55,12 +56,4 @@ public class KeyItem extends Item
 		}
 		else return ActionResultType.FAIL;
     }
-    
-    private Block getDoor(Item item)
-    {
-    	if(item == MubbleItems.SMB_KEY) return MubbleBlocks.SMB_KEY_DOOR;
-    	else if(item == MubbleItems.SMB3_KEY) return MubbleBlocks.SMB3_KEY_DOOR;
-    	else if(item == MubbleItems.SMW_KEY) return MubbleBlocks.SMW_KEY_DOOR;
-    	else return MubbleBlocks.NSMBU_KEY_DOOR;
-	}
 }
