@@ -1,8 +1,8 @@
 {
 	"textures":
 	{
-		"stone": "minecraft:block/andesite",
-		"particle": "minecraft:block/andesite"
+		"stone": "minecraft:block/obsidian",
+		"particle": "minecraft:block/obsidian"
 	},
 	"elements":
 	[

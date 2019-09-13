@@ -2,9 +2,8 @@
 	"parent": "block/cube",
 	"textures":
 	{
-		"stone": "minecraft:block/andesite",
-		"glass": "minecraft:block/glass",
-		"particle": "minecraft:block/andesite"
+		"stone": "minecraft:block/obsidian",
+		"glass": "minecraft:block/glass"
 	},
 	"elements":
 	[
@@ -149,43 +148,7 @@
 			}
 		},
 		{
-			"from": [0, 1, 1],
-			"to": [0.25, 15, 15],
-			"faces":
-			{
-				"east": {"uv": [1, 1, 15, 15], "texture": "#glass"},
-				"west": {"uv": [1, 1, 15, 15], "texture": "#glass"}
-			}
-		},
-		{
-			"from": [15.75, 1, 1],
-			"to": [16, 15, 15],
-			"faces":
-			{
-				"east": {"uv": [1, 1, 15, 15], "texture": "#glass"},
-				"west": {"uv": [1, 1, 15, 15], "texture": "#glass"}
-			}
-		},
-		{
-			"from": [1, 1, 15.75],
-			"to": [15, 15, 16],
-			"faces":
-			{
-				"north": {"uv": [1, 1, 15, 15], "texture": "#glass"},
-				"south": {"uv": [1, 1, 15, 15], "texture": "#glass"}
-			}
-		},
-		{
-			"from": [1, 1, 0],
-			"to": [15, 15, 0.25],
-			"faces":
-			{
-				"north": {"uv": [1, 1, 15, 15], "texture": "#glass"},
-				"south": {"uv": [1, 1, 15, 15], "texture": "#glass"}
-			}
-		},
-		{
-			"from": [1, 15.75, 1],
+			"from": [1, 15, 1],
 			"to": [15, 16, 15],
 			"faces":
 			{
@@ -195,11 +158,47 @@
 		},
 		{
 			"from": [1, 0, 1],
-			"to": [15, 0.25, 15],
+			"to": [15, 1, 15],
 			"faces":
 			{
 				"up": {"uv": [1, 1, 15, 15], "texture": "#glass"},
 				"down": {"uv": [1, 1, 15, 15], "texture": "#glass"}
+			}
+		},
+		{
+			"from": [1, 1, 0],
+			"to": [15, 15, 1],
+			"faces":
+			{
+				"north": {"uv": [1, 1, 15, 15], "texture": "#glass"},
+				"south": {"uv": [1, 1, 15, 15], "texture": "#glass"}
+			}
+		},
+		{
+			"from": [1, 1, 15],
+			"to": [15, 15, 16],
+			"faces":
+			{
+				"north": {"uv": [1, 1, 15, 15], "texture": "#glass"},
+				"south": {"uv": [1, 1, 15, 15], "texture": "#glass"}
+			}
+		},
+		{
+			"from": [15, 1, 1],
+			"to": [16, 15, 15],
+			"faces":
+			{
+				"east": {"uv": [1, 1, 15, 15], "texture": "#glass"},
+				"west": {"uv": [1, 1, 15, 15], "texture": "#glass"}
+			}
+		},
+		{
+			"from": [0, 1, 1],
+			"to": [0, 15, 15],
+			"faces":
+			{
+				"east": {"uv": [1, 1, 15, 15], "texture": "#glass"},
+				"west": {"uv": [1, 1, 15, 15], "texture": "#glass"}
 			}
 		}
 	]
