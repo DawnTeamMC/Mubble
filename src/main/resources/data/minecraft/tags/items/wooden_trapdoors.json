@@ -2,6 +2,9 @@
 	"replace": false,
 	"values":
 	[
-		"#mubble:wooden_trapdoors"
+		"mubble:cherry_oak_trapdoor",
+		"mubble:palm_trapdoor",
+		"mubble:press_garden_trapdoor",
+		"mubble:scarlet_trapdoor"
 	]
 }

@@ -2,6 +2,6 @@
 	"replace": false,
 	"values":
 	[
-		"#forge:storage_blocks/vanadium"
+		"#mubble:storage_blocks/vanadium"
 	]
 }

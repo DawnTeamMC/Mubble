@@ -2,6 +2,12 @@
 	"replace": false,
 	"values":
 	[
-		"#mubble:leaves"
+		"mubble:autumn_oak_leaves",
+		"mubble:pink_cherry_oak_leaves",
+		"mubble:white_cherry_oak_leaves",
+		"mubble:palm_leaves",
+		"mubble:red_press_garden_leaves",
+		"mubble:pink_press_garden_leaves",
+		"mubble:scarlet_leaves"
 	]
 }

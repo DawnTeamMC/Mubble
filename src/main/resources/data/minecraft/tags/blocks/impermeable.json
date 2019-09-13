@@ -2,6 +2,7 @@
 	"replace": false,
 	"values":
 	[
-		"#mubble:impermeable"
+		"mubble:tetris_glass",
+		"mubble:fluid_tank"
 	]
 }
