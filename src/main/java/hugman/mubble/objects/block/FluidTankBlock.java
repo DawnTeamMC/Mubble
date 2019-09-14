@@ -4,7 +4,8 @@ import hugman.mubble.init.MubbleBlockStateProperties;
 import hugman.mubble.objects.block.block_state_property.FluidLog;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
+import net.minecraft.block.IBucketPickupHandler;
+import net.minecraft.block.ILiquidContainer;
 import net.minecraft.block.SixWayBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
@@ -32,7 +33,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class FluidTankBlock extends Block implements IWaterLoggable
+public class FluidTankBlock extends Block implements IBucketPickupHandler, ILiquidContainer
 {
 	public static final BooleanProperty UP = SixWayBlock.UP;
 	public static final BooleanProperty DOWN = SixWayBlock.DOWN;
@@ -122,13 +123,14 @@ public class FluidTankBlock extends Block implements IWaterLoggable
     @Override
 	public boolean receiveFluid(IWorld worldIn, BlockPos pos, BlockState state, IFluidState fluidStateIn)
 	{
-        if (state.get(FLUIDLOG) == FluidLog.EMPTY && (fluidStateIn.getFluid() == Fluids.WATER || fluidStateIn.getFluid() == Fluids.LAVA))
+    	Fluid fluid = fluidStateIn.getFluid();
+        if (state.get(FLUIDLOG) == FluidLog.EMPTY && (fluid == Fluids.WATER || fluid == Fluids.LAVA))
         {
         	if (!worldIn.isRemote())
         	{
-        		if(fluidStateIn.getFluid() == Fluids.WATER) worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.WATER), 3);
-        		else if(fluidStateIn.getFluid() == Fluids.LAVA) worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.LAVA), 3);
-        		worldIn.getPendingFluidTicks().scheduleTick(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
+        		if(fluid == Fluids.WATER) worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.WATER), 3);
+        		else if(fluid == Fluids.LAVA) worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.LAVA), 3);
+        		worldIn.getPendingFluidTicks().scheduleTick(pos, fluid, fluid.getTickRate(worldIn));
         	}
         	return true;
         }
@@ -141,10 +143,10 @@ public class FluidTankBlock extends Block implements IWaterLoggable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context)
     {
-        IFluidState fluidState = context.getWorld().getFluidState(context.getPos());
+        Fluid fluid = context.getWorld().getFluidState(context.getPos()).getFluid();
         BlockState blockState = this.getDefaultState();
-    	if(fluidState == Fluids.WATER) return blockState.with(FLUIDLOG, FluidLog.WATER);
-    	else if(fluidState == Fluids.LAVA) return blockState.with(FLUIDLOG, FluidLog.LAVA);
+    	if(fluid == Fluids.WATER) return blockState.with(FLUIDLOG, FluidLog.WATER);
+    	else if(fluid == Fluids.LAVA) return blockState.with(FLUIDLOG, FluidLog.LAVA);
     	else return blockState.with(FLUIDLOG, FluidLog.EMPTY);
     }
     

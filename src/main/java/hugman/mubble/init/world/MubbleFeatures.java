@@ -2,6 +2,7 @@ package hugman.mubble.init.world;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.objects.world.feature.PermafrostSpringFeature;
+import hugman.mubble.objects.world.feature.ReplaceBlockGroupFeature;
 import hugman.mubble.objects.world.feature.ScarletFlowersFeature;
 import hugman.mubble.objects.world.feature.TomatoFeature;
 import hugman.mubble.objects.world.feature.tree.PalmTreeFeature;
@@ -9,6 +10,7 @@ import hugman.mubble.objects.world.feature.tree.template.LargeTreeFeature;
 import hugman.mubble.objects.world.feature.tree.template.MegaTreeFeature;
 import hugman.mubble.objects.world.feature.tree.template.TallTreeFeature;
 import hugman.mubble.objects.world.feature.tree.template.TreeFeature;
+import hugman.mubble.objects.world.feature_config.ReplaceBlockGroupConfig;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.world.gen.feature.Feature;
@@ -44,4 +46,6 @@ public class MubbleFeatures
 	public static final Feature<NoFeatureConfig> BLUEBERRY_BUSH = new ScatteredPlantFeature(NoFeatureConfig::deserialize, MubbleBlocks.BLUEBERRY_BUSH.getDefaultState().with(SweetBerryBushBlock.AGE, Integer.valueOf(3)));
 	
 	public static final Feature<HellLavaConfig> PERMAFROST_SPRING = new PermafrostSpringFeature(HellLavaConfig::deserialize);
+	
+	public static final Feature<ReplaceBlockGroupConfig> REPLACE_BLOCK_GROUP = new ReplaceBlockGroupFeature(ReplaceBlockGroupConfig::deserialize);
 }

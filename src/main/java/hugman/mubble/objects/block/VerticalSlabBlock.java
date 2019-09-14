@@ -199,6 +199,8 @@ public class VerticalSlabBlock extends Block implements IWaterLoggable
 	{
         switch(type)
         {
+        	case LAND:
+        		return false;
         	case WATER:
         		return worldIn.getFluidState(pos).isTagged(FluidTags.WATER);
         	case AIR:
