@@ -547,6 +547,7 @@
 	"block.mubble.unstable_stone": "Instabiler Stein",
 	"block.mubble.fluid_tank": "Flüssigkeitsbehälter",
 	"block.mubble.placer": "Platzierer",
+	"//block.mubble.timeswap_table": "Timeswap Table",
 
 	"block.mubble.dandelion_pile": "Löwenzahnhaufen",
 	"block.mubble.poppy_pile": "Mohnhaufen",
@@ -1015,6 +1016,7 @@
 
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Platzierer",
+	"//container.mubble.timeswap_table": "Timeswap Table",
 
 
 

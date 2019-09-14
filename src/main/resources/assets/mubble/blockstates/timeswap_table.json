@@ -1,0 +1,6 @@
+{
+	"variants":
+	{
+		"": {"model": "mubble:block/timeswap_table"}
+	}
+}

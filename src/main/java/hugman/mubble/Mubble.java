@@ -5,10 +5,12 @@ import org.apache.logging.log4j.Logger;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleColorMaps;
+import hugman.mubble.init.MubbleContainerTypes;
 import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.MubbleEffects;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
+import hugman.mubble.init.MubbleScreens;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
@@ -16,6 +18,7 @@ import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Effect;
 import net.minecraft.tileentity.TileEntityType;
@@ -53,6 +56,8 @@ public class Mubble
     {
     	MubbleEntities.registerRenders();
     	LOGGER.info("Registered entities renders");
+    	MubbleScreens.registerScreens();
+    	LOGGER.info("Registered screens");
     }
     
     private void setup(final FMLCommonSetupEvent event)
@@ -97,6 +102,13 @@ public class Mubble
         {
         	event.getRegistry().registerAll(MubbleTileEntityTypes.TILE_ENTITY_TYPES.toArray(new TileEntityType<?>[0]));
         	LOGGER.info("Registered " + MubbleTileEntityTypes.TILE_ENTITY_TYPES.size() + " tile entities");
+        }
+        
+        @SubscribeEvent
+        public static void onContainersRegistry(final RegistryEvent.Register<ContainerType<?>> event)
+        {
+        	event.getRegistry().registerAll(MubbleContainerTypes.CONTAINER_TYPES.toArray(new ContainerType<?>[0]));
+        	LOGGER.info("Registered " + MubbleContainerTypes.CONTAINER_TYPES.size() + " containers");
         }
         
         @SubscribeEvent

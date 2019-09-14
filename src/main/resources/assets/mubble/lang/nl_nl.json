@@ -547,6 +547,7 @@
 	"block.mubble.unstable_stone": "Unstabiel steen",
 	"block.mubble.fluid_tank": "Vloeistoftank",
 	"//block.mubble.placer": "Placer",
+	"//block.mubble.timeswap_table": "Timeswap Table",
 
 	"block.mubble.dandelion_pile": "Paardenbloemen hoop",
 	"block.mubble.poppy_pile": "Klaproozen hoop",
@@ -1015,6 +1016,7 @@
 
 	"comment": "CONTAINERS",
 	"//container.mubble.placer": "Placer",
+	"//container.mubble.timeswap_table": "Timeswap Table",
 
 
 

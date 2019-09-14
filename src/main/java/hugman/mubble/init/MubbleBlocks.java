@@ -37,6 +37,7 @@ import hugman.mubble.objects.block.StoneButtonBlock;
 import hugman.mubble.objects.block.StripWoodBlock;
 import hugman.mubble.objects.block.SuperNoteBlock;
 import hugman.mubble.objects.block.TetrisGlassBlock;
+import hugman.mubble.objects.block.TimeswapTableBlock;
 import hugman.mubble.objects.block.TrapDoorBlock;
 import hugman.mubble.objects.block.UnstableBlock;
 import hugman.mubble.objects.block.VerticalSlabBlock;
@@ -647,6 +648,7 @@ public class MubbleBlocks
     public static final Block UNSTABLE_STONE = block("unstable_stone", new UnstableBlock(Properties.from(Blocks.STONE).hardnessAndResistance(0.1F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block FLUID_TANK = block("fluid_tank", new FluidTankBlock(Properties.from(Blocks.OBSIDIAN)), ItemGroup.REDSTONE, OTHERS);
     public static final Block PLACER = block("placer", new PlacerBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.5F)), ItemGroup.REDSTONE, CUBES);
+    public static final Block TIMESWAP_TABLE = block("timeswap_table", new TimeswapTableBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3.5F)), ItemGroup.DECORATIONS, CUBES);
 
     public static final Block DANDELION_PILE = block("dandelion_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);
     public static final Block POPPY_PILE = block("poppy_pile", new PileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement()), ItemGroup.DECORATIONS, FLOWER_PILES);

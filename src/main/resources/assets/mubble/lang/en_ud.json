@@ -547,6 +547,7 @@
 	"block.mubble.unstable_stone": "ǝuoʇS ǝlqɐʇsu∩",
 	"block.mubble.fluid_tank": "ʞuɐ┴ pᴉnlℲ",
 	"//block.mubble.placer": "Placer",
+	"//block.mubble.timeswap_table": "Timeswap Table",
 
 	"//block.mubble.dandelion_pile": "Dandelion Pile",
 	"//block.mubble.poppy_pile": "Poppy Pile",
@@ -1015,6 +1016,7 @@
 
 	"comment": "CONTAINERS",
 	"//container.mubble.placer": "Placer",
+	"//container.mubble.timeswap_table": "Timeswap Table",
 
 
 

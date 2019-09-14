@@ -1,0 +1,10 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:smb_question_block",
+		"mubble:smb3_question_block",
+		"mubble:smw_question_block",
+		"mubble:nsmbu_question_block"
+	]
+}

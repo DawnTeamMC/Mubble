@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"CV",
+		"##",
+		"##"
+	],
+	"key":
+	{
+		"#":
+		{
+			"tag": "minecraft:planks"
+		},
+		"C":
+		{
+			"item": "minecraft:clock"
+		},
+		"V":
+		{
+			"item": "mubble:vanadium"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:timeswap_table"
+	}
+}

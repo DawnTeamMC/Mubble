@@ -1,0 +1,16 @@
+{
+	"replace": false,
+	"values":
+	[
+		"mubble:smb_ground_hard_block",
+		"mubble:smb_underground_hard_block",
+		"mubble:smb_underwater_hard_block",
+		"mubble:smb_castle_hard_block",
+		"mubble:smb_snow_hard_block",
+		"mubble:smb_night_snow_hard_block",
+		"mubble:smb3_hard_block",
+		"mubble:smw_stone_hard_block",
+		"mubble:smw_wood_hard_block",
+		"mubble:nsmbu_hard_block"
+	]
+}
