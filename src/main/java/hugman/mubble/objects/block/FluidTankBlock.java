@@ -60,7 +60,6 @@ public class FluidTankBlock extends Block implements IWaterLoggable
     @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
-    	context.func_216378_a(shape, pos, p_216378_3_)
     	return FULL_SHAPE;
 	}
     
