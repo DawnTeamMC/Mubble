@@ -174,7 +174,7 @@ public class MubbleBlocks
     public static final Block BLUE_PERMAFROST_BRICKS = block("blue_permafrost_bricks", new Block(Properties.from(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block PERMAFROST_BISMUTH_ORE = block("permafrost_bismuth_ore", new Block(Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(0.3F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block FROZEN_OBSIDIAN = block("frozen_obsidian", new Block(Properties.create(Material.ROCK, MaterialColor.BLACK).hardnessAndResistance(75.0F, 1800.0F)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block PERMAFROST_PORTAL = block("permafrost_portal", new PermafrostPortalBlock());
+    public static final Block PERMAFROST_PORTAL = block("permafrost_portal", new PermafrostPortalBlock(Block.Properties.create(Material.PORTAL).doesNotBlockMovement().tickRandomly().hardnessAndResistance(-1.0F).sound(SoundType.GLASS).lightValue(11).noDrops()));
     
     public static final Block VANADIUM_ORE = block("vanadium_ore", new OreBlock(Properties.from(Blocks.DIAMOND_ORE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block VANADIUM_BLOCK = block("vanadium_block", new Block(Properties.from(Blocks.DIAMOND_BLOCK)), ItemGroup.BUILDING_BLOCKS, CUBES);

@@ -2,200 +2,132 @@ package hugman.mubble.objects.block;
 
 import java.util.Random;
 
-import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.MubbleEntities;
+import hugman.mubble.init.world.MubbleDimensions;
+import hugman.mubble.util.teleporters.DimensionTeleporterManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.NetherPortalBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.item.ItemStack;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.state.EnumProperty;
+import net.minecraft.state.StateContainer.Builder;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.world.GameRules;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class PermafrostPortalBlock extends NetherPortalBlock
+public class PermafrostPortalBlock extends Block
 {
-    public PermafrostPortalBlock()
-    {
-        super(Properties.create(Material.PORTAL).doesNotBlockMovement().tickRandomly().hardnessAndResistance(-1.0F).sound(SoundType.GLASS).lightValue(11));
-    }
-    
-    public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
-    {
-        if(worldIn.dimension.isSurfaceWorld() && worldIn.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING) && random.nextInt(2000) < worldIn.getDifficulty().getId())
-        {
-            while(worldIn.getBlockState(pos).getBlock() == this)
-            {
-                pos = pos.down();
-            }
-            if(worldIn.getBlockState(pos).canEntitySpawn(worldIn, pos, EntityType.ZOMBIE_PIGMAN))
-            {
-                Entity entity = MubbleEntities.ZOMBIE_COWMAN.spawn(worldIn, (CompoundNBT)null, (ITextComponent)null, (PlayerEntity)null, pos.up(), SpawnReason.STRUCTURE, false, false);
-                if (entity != null)
-                {
-                    entity.timeUntilPortal = entity.getPortalCooldown();
-                }
-            }
-        }
-    }
-    
-    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
-    {
-    	Direction.Axis enumfacing$axis = facing.getAxis();
-        Direction.Axis enumfacing$axis1 = stateIn.get(AXIS);
-        boolean flag = enumfacing$axis1 != enumfacing$axis && enumfacing$axis.isHorizontal();
-        return !flag && facingState.getBlock() != this && !(new PermafrostPortalBlock.Size(worldIn, currentPos, enumfacing$axis1)).func_208508_f() ? Blocks.AIR.getDefaultState() : super.updatePostPlacement(stateIn, facing, facingState, worldIn, currentPos, facingPos);
-	}
-    
-	public static class Size
+	public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
+	protected static final VoxelShape X_AABB = Block.makeCuboidShape(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);
+	protected static final VoxelShape Z_AABB = Block.makeCuboidShape(6.0D, 0.0D, 0.0D, 10.0D, 16.0D, 16.0D);
+
+	public PermafrostPortalBlock(Properties builder)
 	{
-		private final IWorld world;
-        private final Direction.Axis axis;
-        private final Direction rightDir;
-        private final Direction leftDir;
-        private int portalBlockCount;
-        private BlockPos bottomLeft;
-        private int height;
-        private int width;
+		super(builder);
+		this.setDefaultState(this.stateContainer.getBaseState().with(AXIS, Direction.Axis.X));
+	}
 
-        public Size(IWorld p_i48740_1_, BlockPos p_i48740_2_, Direction.Axis p_i48740_3_)
-        {
-        	this.world = p_i48740_1_;
-        	this.axis = p_i48740_3_;
-        	if (p_i48740_3_ == Direction.Axis.X)
-        	{
-        		this.leftDir = Direction.EAST;
-        		this.rightDir = Direction.WEST;
-        	}
-        	else
-        	{
-        		this.leftDir = Direction.NORTH;
-        		this.rightDir = Direction.SOUTH;
-        	}
-        	for(BlockPos blockpos = p_i48740_2_; p_i48740_2_.getY() > blockpos.getY() - 21 && p_i48740_2_.getY() > 0 && this.func_196900_a(p_i48740_1_.getBlockState(p_i48740_2_.down())); p_i48740_2_ = p_i48740_2_.down())
-        	{
-        		;
-        	}
+	@Override
+	protected void fillStateContainer(Builder<Block, BlockState> builder)
+	{
+		builder.add(AXIS);
+	}
 
-        	int i = this.getDistanceUntilEdge(p_i48740_2_, this.leftDir) - 1;
-        	if (i >= 0)
-        	{
-        		this.bottomLeft = p_i48740_2_.offset(this.leftDir, i);
-        		this.width = this.getDistanceUntilEdge(this.bottomLeft, this.rightDir);
-        		if (this.width < 2 || this.width > 21)
-        		{
-        			this.bottomLeft = null;
-        			this.width = 0;
-        		}
-        	}
-        	if (this.bottomLeft != null)
-        	{
-        		this.height = this.calculatePortalHeight();
-        	}
-        }
-        
-        protected int getDistanceUntilEdge(BlockPos p_180120_1_, Direction p_180120_2_)
-        {
-        	int i;
-        	for(i = 0; i < 22; ++i)
-        	{
-        		BlockPos blockpos = p_180120_1_.offset(p_180120_2_, i);
-        		if (!this.func_196900_a(this.world.getBlockState(blockpos)) || this.world.getBlockState(blockpos.down()).getBlock() != MubbleBlocks.FROZEN_OBSIDIAN) break;
-        	}
-        	Block block = this.world.getBlockState(p_180120_1_.offset(p_180120_2_, i)).getBlock();
-        	return block == MubbleBlocks.FROZEN_OBSIDIAN ? i : 0;
-        }
+	@Override
+	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state)
+	{
+		return ItemStack.EMPTY;
+	}
 
-        public int getHeight()
-        {
-           return this.height;
-        }
+	@Override
+	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) 
+	{
+		switch ((Direction.Axis) state.get(AXIS))
+		{
+		case Z:
+			return Z_AABB;
+		case X:
+		default:
+			return X_AABB;
+		}
+	}
 
-        public int getWidth()
-        {
-           return this.width;
-        }
+	@Override
+	public BlockRenderLayer getRenderLayer()
+	{
+		return BlockRenderLayer.TRANSLUCENT;
+	}
 
-        protected int calculatePortalHeight()
-        {
-        	label56:
-        		for(this.height = 0; this.height < 21; ++this.height)
-        		{
-        			for(int i = 0; i < this.width; ++i)
-        			{
-        				BlockPos blockpos = this.bottomLeft.offset(this.rightDir, i).up(this.height);
-        				BlockState iblockstate = this.world.getBlockState(blockpos);
-        				if (!this.func_196900_a(iblockstate)) break label56;
-        				
-        				Block block = iblockstate.getBlock();
-        				if (block == MubbleBlocks.PERMAFROST_PORTAL) ++this.portalBlockCount;
-        				if (i == 0)
-        				{
-        					block = this.world.getBlockState(blockpos.offset(this.leftDir)).getBlock();
-        					if (block != MubbleBlocks.FROZEN_OBSIDIAN) break label56;
-        				}
-        				else if (i == this.width - 1)
-        				{
-        					block = this.world.getBlockState(blockpos.offset(this.rightDir)).getBlock();
-        					if (block != MubbleBlocks.FROZEN_OBSIDIAN) break label56;
-        				}
-        			}
-        		}
-        	for(int j = 0; j < this.width; ++j)
-        	{
-        		if (this.world.getBlockState(this.bottomLeft.offset(this.rightDir, j).up(this.height)).getBlock() != MubbleBlocks.FROZEN_OBSIDIAN)
-        		{
-        			this.height = 0;
-        			break;
-        		}
-        	}
-        	if (this.height <= 21 && this.height >= 3) return this.height;
-        	else
-        	{
-        		this.bottomLeft = null;
-        		this.width = 0;
-        		this.height = 0;
-        		return 0;
-        	}
-        }
+	@Override
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
+	{
+		if (!entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss())
+		{
+			DimensionTeleporterManager.teleport(worldIn, entityIn, MubbleDimensions.PERMAFROST_TYPE);
+		}
+	}
 
-        protected boolean func_196900_a(BlockState stateIn)
-        {
-        	Block block = stateIn.getBlock();
-        	return block == Blocks.AIR || block == Blocks.FIRE || block == MubbleBlocks.PERMAFROST_PORTAL;
-        }
+	@Override
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	{
+		if (rand.nextInt(100) == 0)
+		{
+			worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
+		}
 
-        public boolean isValid()
-        {
-        	return this.bottomLeft != null && this.width >= 2 && this.width <= 21 && this.height >= 3 && this.height <= 21;
-        }
+		for (int i = 0; i < 4; ++i)
+		{
+			double d0 = (double) ((float) pos.getX() + rand.nextFloat());
+			double d1 = (double) ((float) pos.getY() + rand.nextFloat());
+			double d2 = (double) ((float) pos.getZ() + rand.nextFloat());
+			double d3 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+			double d4 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+			double d5 = ((double) rand.nextFloat() - 0.5D) * 0.5D;
+			int j = rand.nextInt(2) * 2 - 1;
+			if (worldIn.getBlockState(pos.west()).getBlock() != this && worldIn.getBlockState(pos.east()).getBlock() != this)
+			{
+				d0 = (double) pos.getX() + 0.5D + 0.25D * (double) j;
+				d3 = (double) (rand.nextFloat() * 2.0F * (float) j);
+			} else
+			{
+				d2 = (double) pos.getZ() + 0.5D + 0.25D * (double) j;
+				d5 = (double) (rand.nextFloat() * 2.0F * (float) j);
+			}
 
-        public void placePortalBlocks()
-        {
-        	for(int i = 0; i < this.width; ++i)
-        	{
-        		BlockPos blockpos = this.bottomLeft.offset(this.rightDir, i);
-        		for(int j = 0; j < this.height; ++j) this.world.setBlockState(blockpos.up(j), MubbleBlocks.PERMAFROST_PORTAL.getDefaultState().with(PermafrostPortalBlock.AXIS, this.axis), 18);
-        	}
-        }
+			worldIn.addParticle(ParticleTypes.TOTEM_OF_UNDYING, d0, d1, d2, d3, d4, d5);
+		}
+	}
 
-        private boolean func_196899_f()
-        {
-           return this.portalBlockCount >= this.width * this.height;
-        }
-
-        public boolean func_208508_f()
-        {
-           return this.isValid() && this.func_196899_f();
-        }
-     }
+	@Override
+	public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation rot)
+	{
+		switch (rot)
+		{
+		case COUNTERCLOCKWISE_90:
+		case CLOCKWISE_90:
+			switch ((Direction.Axis) state.get(AXIS))
+			{
+			case Z:
+				return state.with(AXIS, Direction.Axis.X);
+			case X:
+				return state.with(AXIS, Direction.Axis.Z);
+			default:
+				return state;
+			}
+		default:
+			return state;
+		}
+	}
 }
