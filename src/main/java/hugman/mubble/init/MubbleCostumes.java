@@ -57,6 +57,7 @@ public class MubbleCostumes
 	public static final Item BANDANA = costume("bandana", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 	
 	/* POKEMON */
+	public static final Item PIKACHU_EARS = costume("pikachu_ears", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 	public static final Item SNORLAX_HAT = costume("snorlax_hat", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 
 	/* PROFESSOR LAYTON */
