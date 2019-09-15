@@ -13,9 +13,9 @@ public class DimensionTeleporterManager
 		{
 			if (entity.getRidingEntity() == null && !entity.isBeingRidden())
 			{
-				entity.setPortal(new BlockPos(entity.posX, entity.posY, entity.posZ));
+				//setPortal(entity, new BlockPos(entity.posX, entity.posY, entity.posZ));
 
-				if (entity.timeUntilPortal > 0)
+				if(entity.timeUntilPortal > 0)
 				{
 					entity.timeUntilPortal = 10;
 				}
@@ -30,6 +30,14 @@ public class DimensionTeleporterManager
 					entity.changeDimension(DimensionType.OVERWORLD);
 				}
 			}
+		}
+	}
+	
+	public static void setPortal(Entity entity, BlockPos pos)
+	{
+		if(entity.timeUntilPortal > 0)
+		{
+			entity.timeUntilPortal = entity.getPortalCooldown();
 		}
 	}
 }

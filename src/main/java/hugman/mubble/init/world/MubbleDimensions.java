@@ -17,7 +17,7 @@ public class MubbleDimensions
 {
     public static final List<ModDimension> MOD_DIMENSIONS = new ArrayList<ModDimension>();
     
-    public static final ModDimension PERMAFROST = new ModDimension()
+    private static final ModDimension PERMAFROST_DIM = new ModDimension()
 	{	
 		@Override
 		public BiFunction<World, DimensionType, ? extends Dimension> getFactory()
@@ -26,10 +26,10 @@ public class MubbleDimensions
 		}
 	}.setRegistryName(Mubble.MOD_ID, "permafrost");
 
-	public static DimensionType PERMAFROST_TYPE;
+	public static DimensionType PERMAFROST;
 	
 	public static void registerDimensions()
 	{
-		PERMAFROST_TYPE = DimensionManager.registerDimension(new ResourceLocation(Mubble.MOD_ID, "permafrost"), MubbleDimensions.PERMAFROST, null, true);
+		PERMAFROST = DimensionManager.registerDimension(new ResourceLocation(Mubble.MOD_ID, "permafrost"), MubbleDimensions.PERMAFROST_DIM, null, true);
 	}
 }
