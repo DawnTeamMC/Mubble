@@ -1,8 +1,6 @@
 package hugman.mubble.objects.world.biome;
 
-import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleFeatures;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -27,8 +25,17 @@ public class ScarletForestBiome extends Biome
 {
     public ScarletForestBiome()
     {
-        super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG).precipitation(Biome.RainType.RAIN).category(Biome.Category.FOREST).depth(0.1F).scale(0.2F).temperature(0.7F).downfall(0.8F).waterColor(4159204).waterFogColor(329011).parent((String)null));
-        this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
+		super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
+				.precipitation(Biome.RainType.RAIN)
+				.category(Biome.Category.FOREST)
+				.depth(0.1F)
+				.scale(0.2F)
+				.temperature(0.7F)
+				.downfall(0.8F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.parent((String) null));
+		this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
         this.addStructure(Feature.STRONGHOLD, IFeatureConfig.NO_FEATURE_CONFIG);
         DefaultBiomeFeatures.addCarvers(this);
         DefaultBiomeFeatures.addStructures(this);
@@ -57,9 +64,6 @@ public class ScarletForestBiome extends Biome
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SLIME, 100, 4, 4));
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ENDERMAN, 10, 1, 4));
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.WITCH, 5, 1, 1));
-        
-        this.setRegistryName(Mubble.MOD_ID, "scarlet_forest");
-        MubbleBiomes.register(this);
     }
     
     @Override

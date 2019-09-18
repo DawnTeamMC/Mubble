@@ -8,8 +8,6 @@ import com.google.common.cache.LoadingCache;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
-import hugman.mubble.init.world.MubbleDimensions;
-import hugman.mubble.util.teleporters.DimensionTeleporterManager;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -131,12 +129,12 @@ public class PermafrostPortalBlock extends Block
 	@OnlyIn(Dist.CLIENT)
 	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
 	{
-		if (rand.nextInt(100) == 0)
+		if(rand.nextInt(100) == 0)
 		{
 			worldIn.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_PORTAL_AMBIENT, SoundCategory.BLOCKS, 0.5F, rand.nextFloat() * 0.4F + 0.8F, false);
 		}
 
-		for (int i = 0; i < 4; ++i)
+		for(int i = 0; i < 4; ++i)
 		{
 			double d0 = (double) ((float) pos.getX() + rand.nextFloat());
 			double d1 = (double) ((float) pos.getY() + rand.nextFloat());
@@ -148,14 +146,14 @@ public class PermafrostPortalBlock extends Block
 			if (worldIn.getBlockState(pos.west()).getBlock() != this && worldIn.getBlockState(pos.east()).getBlock() != this)
 			{
 				d0 = (double) pos.getX() + 0.5D + 0.25D * (double) j;
-				d3 = (double) (rand.nextFloat() * 2.0F * (float) j);
+				d3 = (double) (rand.nextFloat() * 0.3F * (float) j);
 			} else
 			{
 				d2 = (double) pos.getZ() + 0.5D + 0.25D * (double) j;
-				d5 = (double) (rand.nextFloat() * 2.0F * (float) j);
+				d5 = (double) (rand.nextFloat() * 0.3F * (float) j);
 			}
 
-			worldIn.addParticle(ParticleTypes.TOTEM_OF_UNDYING, d0, d1, d2, d3, d4, d5);
+			if(rand.nextInt(10) == 0) worldIn.addParticle(ParticleTypes.CLOUD, d0, d1, d2, d3, d4, d5);
 		}
 	}
 	
@@ -164,10 +162,17 @@ public class PermafrostPortalBlock extends Block
 	@Override
 	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
 	{
+		/*
+		if (entityIn.timeUntilPortal > 0)
+		{
+			entityIn.timeUntilPortal = entityIn.getPortalCooldown();
+		}
+		else
 		if(!entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss())
 		{
-			DimensionTeleporterManager.teleport(worldIn, entityIn, MubbleDimensions.PERMAFROST);
+			entityIn.changeDimension(MubbleDimensions.PERMAFROST);
 		}
+		*/
 	}
 	
 	public boolean trySpawnPortal(IWorld worldIn, BlockPos pos) 

@@ -1,9 +1,7 @@
 package hugman.mubble.objects.world.biome;
 
-import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
-import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleCarvers;
 import hugman.mubble.init.world.MubbleFeatures;
 import hugman.mubble.init.world.MubbleSurfaceBuilders;
@@ -30,8 +28,17 @@ public class PermafrostBiome extends Biome
 {
     public PermafrostBiome()
     {
-        super((new Biome.Builder()).surfaceBuilder(MubbleSurfaceBuilders.PERMAFROST_SURFACE_BUILDER, MubbleSurfaceBuilders.PERMAROCK_SURFACE).precipitation(Biome.RainType.NONE).category(Biome.Category.NETHER).depth(0.1F).scale(0.2F).temperature(0.0F).downfall(0.0F).waterColor(4159204).waterFogColor(329011).parent((String)null));
-        this.addCarver(GenerationStage.Carving.AIR, createCarver(MubbleCarvers.PERMAFROST_CAVE_WORLD_CARVER, new ProbabilityConfig(0.2F)));
+		super((new Biome.Builder()).surfaceBuilder(MubbleSurfaceBuilders.PERMAFROST_SURFACE_BUILDER, MubbleSurfaceBuilders.PERMAROCK_SURFACE)
+				.precipitation(Biome.RainType.NONE)
+				.category(Biome.Category.NETHER)
+				.depth(0.1F)
+				.scale(0.2F)
+				.temperature(0.0F)
+				.downfall(0.0F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
+				.parent((String) null));
+		this.addCarver(GenerationStage.Carving.AIR, createCarver(MubbleCarvers.PERMAFROST_CAVE_WORLD_CARVER, new ProbabilityConfig(0.2F)));
         this.addCarver(GenerationStage.Carving.AIR, createCarver(WorldCarver.HELL_CAVE, new ProbabilityConfig(0.2F)));
         this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, createDecoratedFeature(Feature.SPRING_FEATURE, new LiquidsConfig(Fluids.LAVA.getDefaultState()), Placement.COUNT_VERY_BIASED_RANGE, new CountRangeConfig(20, 8, 16, 256)));
         DefaultBiomeFeatures.addMushrooms(this);
@@ -43,8 +50,5 @@ public class PermafrostBiome extends Biome
         this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, createDecoratedFeature(MubbleFeatures.PERMAFROST_SPRING, new HellLavaConfig(true), Placement.COUNT_RANGE, new CountRangeConfig(16, 10, 20, 128)));
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(MubbleEntities.ZOMBIE_COWMAN, 100, 4, 4));
         this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.GUARDIAN, 100, 4, 4));
-        
-        this.setRegistryName(Mubble.MOD_ID, "permafrost");
-        MubbleBiomes.register(this);
     }
 }

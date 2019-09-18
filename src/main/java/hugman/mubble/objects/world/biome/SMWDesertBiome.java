@@ -1,42 +1,39 @@
 package hugman.mubble.objects.world.biome;
 
-import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.world.MubbleFeatures;
+import com.google.common.collect.Lists;
+
+import hugman.mubble.init.world.MubbleSurfaceBuilders;
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.feature.BushConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.GrassFeatureConfig;
 import net.minecraft.world.gen.feature.IFeatureConfig;
-import net.minecraft.world.gen.feature.MultipleRandomFeatureConfig;
+import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.structure.MineshaftConfig;
 import net.minecraft.world.gen.feature.structure.MineshaftStructure;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 
-public class AutumnOakForestBiome extends Biome
+public class SMWDesertBiome extends Biome
 {
-	public AutumnOakForestBiome()
+	public SMWDesertBiome()
 	{
-		super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_DIRT_GRAVEL_CONFIG)
+		super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, MubbleSurfaceBuilders.SMW_DESERT_SURFACE)
 				.precipitation(Biome.RainType.RAIN)
 				.category(Biome.Category.FOREST)
-				.depth(0.1F)
-				.scale(0.2F)
-				.temperature(0.8F)
-				.downfall(0.9F)
-				.waterColor(155336)
-				.waterFogColor(541)
+				.depth(0.55F)
+				.scale(0.5F)
+				.temperature(0.6F)
+				.downfall(0.6F)
+				.waterColor(4159204)
+				.waterFogColor(329011)
 				.parent((String) null));
 		this.addStructure(Feature.MINESHAFT, new MineshaftConfig(0.004D, MineshaftStructure.Type.NORMAL));
-		this.addStructure(Feature.STRONGHOLD, IFeatureConfig.NO_FEATURE_CONFIG);
 		this.addStructure(Feature.STRONGHOLD, IFeatureConfig.NO_FEATURE_CONFIG);
 		DefaultBiomeFeatures.addCarvers(this);
 		DefaultBiomeFeatures.addStructures(this);
@@ -45,14 +42,8 @@ public class AutumnOakForestBiome extends Biome
 		DefaultBiomeFeatures.addDoubleFlowers(this);
 		DefaultBiomeFeatures.addStoneVariants(this);
 		DefaultBiomeFeatures.addOres(this);
-		DefaultBiomeFeatures.addSedimentDisks(this);
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(Feature.RANDOM_SELECTOR, new MultipleRandomFeatureConfig(new Feature[]{Feature.NORMAL_TREE, MubbleFeatures.TALL_AUTUMN_OAK_TREE}, new IFeatureConfig[]{IFeatureConfig.NO_FEATURE_CONFIG, IFeatureConfig.NO_FEATURE_CONFIG}, new float[]{0.2F, 0.1F}, MubbleFeatures.AUTUMN_OAK_TREE, IFeatureConfig.NO_FEATURE_CONFIG), Placement.COUNT_EXTRA_HEIGHTMAP, new AtSurfaceWithExtraConfig(10, 0.1F, 1)));
-		DefaultBiomeFeatures.addDefaultFlowers(this);
-		DefaultBiomeFeatures.addGrass(this);
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(Feature.GRASS, new GrassFeatureConfig(MubbleBlocks.AUTUMN_OAK_LEAF_PILE.getDefaultState()), Placement.COUNT_HEIGHTMAP_DOUBLE, new FrequencyConfig(4)));
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.DISK, new SphereReplaceConfig(Blocks.GRAVEL.getDefaultState(), 6, 2, Lists.newArrayList(MubbleSurfaceBuilders.BlockStates.SMW_DESERT_TOP, MubbleSurfaceBuilders.BlockStates.SMW_DESERT_DIRT)), Placement.COUNT_TOP_SOLID, new FrequencyConfig(1)));
 		DefaultBiomeFeatures.addMushrooms(this);
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(MubbleBlocks.YELLOW_MUSHROOM.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(8)));
-		this.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, Biome.createDecoratedFeature(Feature.BUSH, new BushConfig(MubbleBlocks.ORANGE_MUSHROOM.getDefaultState()), Placement.CHANCE_HEIGHTMAP_DOUBLE, new ChanceConfig(8)));
 		DefaultBiomeFeatures.addReedsAndPumpkins(this);
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addFreezeTopLayer(this);
@@ -60,7 +51,6 @@ public class AutumnOakForestBiome extends Biome
 		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.PIG, 10, 4, 4));
 		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.CHICKEN, 10, 4, 4));
 		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.COW, 8, 4, 4));
-		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.WOLF, 5, 4, 4));
 		this.addSpawn(EntityClassification.AMBIENT, new Biome.SpawnListEntry(EntityType.BAT, 10, 8, 8));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SPIDER, 100, 4, 4));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));
@@ -71,16 +61,22 @@ public class AutumnOakForestBiome extends Biome
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ENDERMAN, 10, 1, 4));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.WITCH, 5, 1, 1));
 	}
-	
+
 	@Override
 	public int getGrassColor(BlockPos pos)
 	{
 		return 16091672;
 	}
-	
+
 	@Override
 	public int getFoliageColor(BlockPos pos)
 	{
 		return 16094768;
+	}
+	
+	@Override
+	public int getSkyColorByTemp(float currentTemperature)
+	{
+		return 15323816;
 	}
 }
