@@ -1,18 +1,18 @@
 {
-	"parent": "mubble:get_coin",
+	"parent": "mubble:get_vanadium",
 	"display":
 	{
 		"icon":
 		{
-			"item": "mubble:vanadium"
+			"item": "mubble:timeswap_table"
 		},
 		"title":
 		{
-			"translate": "advancements.mubble.get_vanadium.title"
+			"translate": "advancements.mubble.get_timeswap_table.title"
 		},
 		"description":
 		{
-			"translate": "advancements.mubble.get_vanadium.description"
+			"translate": "advancements.mubble.get_timeswap_table.description"
 		}
 	},
 	"criteria":
@@ -25,7 +25,7 @@
 				"items":
 				[
 					{
-						"tag": "mubble:gems/vanadium"
+						"item": "mubble:timeswap_table"
 					}
 				]
 			}
