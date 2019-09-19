@@ -23,7 +23,6 @@ public class MubbleSounds
 	public static final SoundEvent BLOCK_SPACE_JAM_HIT = register("block.space_jam.hit");
 	public static final SoundEvent BLOCK_SPACE_JAM_STEP = register("block.space_jam.step");
 	public static final SoundEvent BLOCK_SPRING_TRIGGER = register("block.spring.trigger");
-	public static final SoundEvent BLOCK_ULTIMATUM_PORTAL_AMBIENT = register("block.ultimatum_portal.ambient");
 
 	public static final SoundEvent ITEM_ANNOYING_DOG_DISAPPEAR = register("item.annoying_dog.disappear");
 	public static final SoundEvent ITEM_ANNOYING_DOG_BARK = register("item.annoying_dog.bark");

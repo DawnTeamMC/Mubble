@@ -117,32 +117,6 @@
 			"mubble:block/spring/trigger"
 		]
 	},
-	"block.ultimatum_portal.ambient":
-	{
-		"sounds":
-		[
-			"mubble:generic/ambient/electric",
-			"mubble:generic/ambient/fire",
-			"mubble:generic/ambient/ice",
-			"mubble:generic/ambient/wind"
-		]
-	},
-	"item.annoying_dog.disappear":
-	{
-		"subtitle": "subtitles.mubble.item.annoying_dog.disappear",
-		"sounds":
-		[
-			"mubble:item/annoying_dog/disappear"
-		]
-	},
-	"item.annoying_dog.bark":
-	{
-		"subtitle": "subtitles.mubble.item.annoying_dog.bark",
-		"sounds":
-		[
-			"mubble:item/annoying_dog/bark"
-		]
-	},
 	"item.cape_feather.use":
 	{
 		"subtitle": "subtitles.mubble.item.cape_feather.use",
