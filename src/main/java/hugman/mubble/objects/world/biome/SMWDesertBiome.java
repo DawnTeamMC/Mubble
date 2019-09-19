@@ -2,6 +2,7 @@ package hugman.mubble.objects.world.biome;
 
 import com.google.common.collect.Lists;
 
+import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.world.MubbleSurfaceBuilders;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityClassification;
@@ -15,6 +16,7 @@ import net.minecraft.world.gen.feature.IFeatureConfig;
 import net.minecraft.world.gen.feature.SphereReplaceConfig;
 import net.minecraft.world.gen.feature.structure.MineshaftConfig;
 import net.minecraft.world.gen.feature.structure.MineshaftStructure;
+import net.minecraft.world.gen.placement.ChanceConfig;
 import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.Placement;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
@@ -26,9 +28,9 @@ public class SMWDesertBiome extends Biome
 		super((new Biome.Builder()).surfaceBuilder(SurfaceBuilder.DEFAULT, MubbleSurfaceBuilders.SMW_DESERT_SURFACE)
 				.precipitation(Biome.RainType.RAIN)
 				.category(Biome.Category.FOREST)
-				.depth(0.55F)
-				.scale(0.5F)
-				.temperature(0.6F)
+				.depth(0.3625F)
+				.scale(1.225F)
+				.temperature(2.0F)
 				.downfall(0.6F)
 				.waterColor(4159204)
 				.waterFogColor(329011)
@@ -39,13 +41,14 @@ public class SMWDesertBiome extends Biome
 		DefaultBiomeFeatures.addStructures(this);
 		DefaultBiomeFeatures.addLakes(this);
 		DefaultBiomeFeatures.addMonsterRooms(this);
-		DefaultBiomeFeatures.addDoubleFlowers(this);
 		DefaultBiomeFeatures.addStoneVariants(this);
 		DefaultBiomeFeatures.addOres(this);
 		this.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Biome.createDecoratedFeature(Feature.DISK, new SphereReplaceConfig(Blocks.GRAVEL.getDefaultState(), 6, 2, Lists.newArrayList(MubbleSurfaceBuilders.BlockStates.SMW_DESERT_TOP, MubbleSurfaceBuilders.BlockStates.SMW_DESERT_DIRT)), Placement.COUNT_TOP_SOLID, new FrequencyConfig(1)));
+		DefaultBiomeFeatures.addDeadBushes(this);
 		DefaultBiomeFeatures.addMushrooms(this);
 		DefaultBiomeFeatures.addReedsAndPumpkins(this);
 		DefaultBiomeFeatures.addSprings(this);
+		this.addFeature(GenerationStage.Decoration.UNDERGROUND_DECORATION, Biome.createDecoratedFeature(Feature.FOSSIL, IFeatureConfig.NO_FEATURE_CONFIG, Placement.CHANCE_PASSTHROUGH, new ChanceConfig(64)));
 		DefaultBiomeFeatures.addFreezeTopLayer(this);
 		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.SHEEP, 12, 4, 4));
 		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.PIG, 10, 4, 4));
@@ -53,6 +56,7 @@ public class SMWDesertBiome extends Biome
 		this.addSpawn(EntityClassification.CREATURE, new Biome.SpawnListEntry(EntityType.COW, 8, 4, 4));
 		this.addSpawn(EntityClassification.AMBIENT, new Biome.SpawnListEntry(EntityType.BAT, 10, 8, 8));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SPIDER, 100, 4, 4));
+		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(MubbleEntities.GOOMBA, 95, 4, 4));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE, 95, 4, 4));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.ZOMBIE_VILLAGER, 5, 1, 1));
 		this.addSpawn(EntityClassification.MONSTER, new Biome.SpawnListEntry(EntityType.SKELETON, 100, 4, 4));
@@ -65,13 +69,7 @@ public class SMWDesertBiome extends Biome
 	@Override
 	public int getGrassColor(BlockPos pos)
 	{
-		return 16091672;
-	}
-
-	@Override
-	public int getFoliageColor(BlockPos pos)
-	{
-		return 16094768;
+		return 16110261;
 	}
 	
 	@Override
