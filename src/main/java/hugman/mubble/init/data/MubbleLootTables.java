@@ -29,4 +29,6 @@ public class MubbleLootTables
     public static final ResourceLocation MAILTOAD = new ResourceLocation(Mubble.MOD_ID, "entities/toad/brigade/mail");
     
     public static final ResourceLocation QUESTION_BLOCK = new ResourceLocation(Mubble.MOD_ID, "block_loots/question_block");
+    public static final ResourceLocation BRICK_BLOCK = new ResourceLocation(Mubble.MOD_ID, "block_loots/brick_block");
+    public static final ResourceLocation GOLDEN_BRICK_BLOCK = new ResourceLocation(Mubble.MOD_ID, "block_loots/golden_brick_block");
 }

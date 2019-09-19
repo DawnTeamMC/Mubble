@@ -15,7 +15,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -89,7 +88,7 @@ public class QuestionBlock extends Block
             LootContext lootContext = new LootContext.Builder((ServerWorld) worldIn)
             		.withParameter(LootParameters.BLOCK_STATE, this.getDefaultState())
             		.withParameter(LootParameters.POSITION, pos)
-            		.withParameter(LootParameters.TOOL, new ItemStack(Items.AIR))
+            		.withParameter(LootParameters.TOOL, ItemStack.EMPTY)
             		.build(LootParameterSets.BLOCK);
             List<ItemStack> items = lootTable.generate(lootContext);
             for(ItemStack item : items)
