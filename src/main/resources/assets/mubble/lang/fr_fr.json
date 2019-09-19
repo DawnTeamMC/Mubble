@@ -546,8 +546,8 @@
 
 	"block.mubble.unstable_stone": "Roche instable",
 	"block.mubble.fluid_tank": "Réservoir à fluides",
-	"//block.mubble.placer": "Placer",
-	"//block.mubble.timeswap_table": "Timeswap Table",
+	"block.mubble.placer": "Placeur",
+	"block.mubble.timeswap_table": "Table d'échange temporel",
 
 	"//block.mubble.dandelion_pile": "Dandelion Pile",
 	"//block.mubble.poppy_pile": "Poppy Pile",
@@ -983,14 +983,14 @@
 	"item.mubble.pink_gold_peach_crown": "Couronne de Peach d'or rose",
 	"item.mubble.super_crown": "Super couronne",
 	"item.mubble.mario_wedding_hat": "Chapeau de mariage de Mario",
-	"//item.mubble.boo_hat": "Boo Hat",
+	"item.mubble.boo_hat": "Chapeau Boo",
 	"item.mubble.broque_monsieur_head": "Tête de Charlie Bloc",
 
 
 	"item.mubble.bandana": "Bandana",
 
 
-	"//item.mubble.pikachu_ears": "Pikachu Ears",
+	"item.mubble.pikachu_ears": "Oreilles de Pikachu",
 	"item.mubble.snorlax_hat": "Chapeau Ronflex",
 
 
@@ -1001,7 +1001,7 @@
 	"item.mubble.king_round_mask": "Masque King Round",
 
 
-	"//item.mubble.kid_hat": "Kid's Hat",
+	"item.mubble.kid_hat": "Haut-de-forme (Hat Kid)",
 
 
 	"item.mubble.baldi_head": "Tête de Baldi",
@@ -1016,8 +1016,8 @@
 
 
 	"comment": "CONTAINERS",
-	"//container.mubble.placer": "Placer",
-	"//container.mubble.timeswap_table": "Timeswap Table",
+	"container.mubble.placer": "Placeur",
+	"container.mubble.timeswap_table": "Table d'échange temporel",
 
 
 
@@ -1034,7 +1034,7 @@
 
 	"comment": "EFFECTS",
 	"effect.mubble.heaviness": "Lourdeur",
-	"//effect.mubble.hiccup": "Hiccup",
+	"effect.mubble.hiccup": "Hoquet",
 
 
 
@@ -1044,7 +1044,7 @@
 	"biome.mubble.white_cherry_oak_forest": "Forêt de cerisiers blancs",
 	"biome.mubble.permafrost": "Permafrost",
 	
-	"//biome.mubble.press_garden": "Press Garden",
+	"biome.mubble.press_garden": "Jardin de presse",
 
 	"biome.mubble.scarlet_forest": "Forêt écarlate",
 
