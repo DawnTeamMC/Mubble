@@ -4,17 +4,18 @@ import java.util.List;
 import java.util.Random;
 
 import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.MubbleSoundTypes;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleLootTables;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -30,9 +31,9 @@ public class BrickBlock extends Block
 {
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
 	
-    public BrickBlock()
+    public BrickBlock(SoundType soundType)
     {
-        super(Properties.from(Blocks.BRICKS).sound(MubbleSoundTypes.BRICK_BLOCK));
+        super(Properties.from(Blocks.BRICKS).sound(soundType));
     }
     
     @Override
@@ -93,12 +94,14 @@ public class BrickBlock extends Block
 	{
     	if (!worldIn.isRemote)
     	{
-            BlockState emptyBlock = Blocks.AIR.getDefaultState();
+            BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+            SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
             if(this == MubbleBlocks.SMB_GROUND_BRICK_BLOCK
             || this == MubbleBlocks.SMB_UNDERGROUND_BRICK_BLOCK
             || this == MubbleBlocks.SMB_CASTLE_BRICK_BLOCK)
             {
-            		 emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+                coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
+            	emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
             }
             else if(this == MubbleBlocks.SMB3_BRICK_BLOCK)
             {
@@ -110,6 +113,7 @@ public class BrickBlock extends Block
             }
             else if(this == MubbleBlocks.NSMBU_BRICK_BLOCK)
             {
+                coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
             	emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
             }
             final double x = pos.getX() + 0.5D;
@@ -125,7 +129,7 @@ public class BrickBlock extends Block
             for(ItemStack item : items)
             {
             	worldIn.addEntity(new ItemEntity(worldIn, x, y, z, item));
-        		worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN, SoundCategory.BLOCKS, 1f, 1f);
+        		worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, coinLootSound, SoundCategory.BLOCKS, 1f, 1f);
             }
             worldIn.setBlockState(pos, emptyBlock);
     	}

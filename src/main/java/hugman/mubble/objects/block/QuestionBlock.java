@@ -8,7 +8,6 @@ import hugman.mubble.init.data.MubbleLootTables;
 import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -16,6 +15,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -64,9 +64,13 @@ public class QuestionBlock extends Block
 	{
         if(!worldIn.isRemote)
         {
-            BlockState emptyBlock = Blocks.AIR.getDefaultState();
+            BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+            SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB;
+            SoundEvent powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
             if(this == MubbleBlocks.SMB_QUESTION_BLOCK)
             {
+                coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB;
+                powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
             	emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
             }
             else if(this == MubbleBlocks.SMB3_QUESTION_BLOCK)
@@ -79,6 +83,8 @@ public class QuestionBlock extends Block
             }
             else if(this == MubbleBlocks.NSMBU_QUESTION_BLOCK)
             {
+            	coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_NSMBU;
+            	powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
             	emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
             }
             final double x = pos.getX() + 0.5D;
@@ -96,11 +102,11 @@ public class QuestionBlock extends Block
             	worldIn.addEntity(new ItemEntity(worldIn, x, y, z, item));
             	if(item.getItem().isIn(MubbleTags.Items.COINS))
             	{
-            		worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN, SoundCategory.BLOCKS, 1f, 1f);
+            		worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, coinLootSound, SoundCategory.BLOCKS, 1f, 1f);
             	}
             	else
             	{
-            		worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP, SoundCategory.BLOCKS, 1f, 1f);
+            		worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, powerUpLootSound, SoundCategory.BLOCKS, 1f, 1f);
             	}
             }
             worldIn.setBlockState(pos, emptyBlock);

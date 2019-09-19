@@ -10,22 +10,25 @@ import net.minecraft.util.SoundEvent;
 public class MubbleSounds 
 {	
 	public static final List<SoundEvent> SOUNDS = new ArrayList<SoundEvent>();
-	
-	public static final SoundEvent BLOCK_BRICK_BLOCK_BREAK = register("block.brick_block.break");
-	public static final SoundEvent BLOCK_EMPTY_BLOCK_HIT = register("block.empty_block.hit");
-	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_LOW = register("block.note_block.jump.low");
-	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_HIGH = register("block.note_block.jump.high");
-	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP = register("block.question_block.loot.power_up");
-	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_COIN = register("block.question_block.loot.coin");
+
+	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB = register("block.question_block.loot.power_up.smb");
+	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB = register("block.question_block.loot.coin.smb");
+	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU = register("block.question_block.loot.power_up.nsmbu");
+	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_COIN_NSMBU = register("block.question_block.loot.coin.nsmbu");
+	public static final SoundEvent BLOCK_BRICK_BLOCK_BREAK_SMB = register("block.brick_block.break.smb");
+	public static final SoundEvent BLOCK_BRICK_BLOCK_BREAK_NSMBU = register("block.brick_block.break.nsmbu");
+	public static final SoundEvent BLOCK_EMPTY_BLOCK_HIT_SMB = register("block.empty_block.hit.smb");
+	public static final SoundEvent BLOCK_EMPTY_BLOCK_HIT_NSMBU = register("block.empty_block.hit.nsmbu");
+	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_SMB = register("block.note_block.jump.smb");
+	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_LOW_NSMBU = register("block.note_block.jump.low.nsmbu");
+	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_HIGH_NSMBU = register("block.note_block.jump.high.nsmbu");
 	public static final SoundEvent BLOCK_SPACE_JAM_BREAK = register("block.space_jam.break");
 	public static final SoundEvent BLOCK_SPACE_JAM_FALL = register("block.space_jam.fall");
 	public static final SoundEvent BLOCK_SPACE_JAM_PLACE = register("block.space_jam.place");
 	public static final SoundEvent BLOCK_SPACE_JAM_HIT = register("block.space_jam.hit");
 	public static final SoundEvent BLOCK_SPACE_JAM_STEP = register("block.space_jam.step");
 	public static final SoundEvent BLOCK_SPRING_TRIGGER = register("block.spring.trigger");
-
-	public static final SoundEvent ITEM_ANNOYING_DOG_DISAPPEAR = register("item.annoying_dog.disappear");
-	public static final SoundEvent ITEM_ANNOYING_DOG_BARK = register("item.annoying_dog.bark");
+	
 	public static final SoundEvent ITEM_CAPE_FEATHER_USE = register("item.cape_feather.use");
 	public static final SoundEvent ITEM_SMASH_BALL_USE = register("item.smash_ball.use");
 	public static final SoundEvent ITEM_SUPER_MUSHROOM_CONSUME = register("item.super_mushroom.consume");
@@ -53,6 +56,8 @@ public class MubbleSounds
 	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_ANGRY = register("entity.zombie_cowman.angry");
 	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_HURT = register("entity.zombie_cowman.hurt");
 	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_DEATH = register("entity.zombie_cowman.death");
+	
+	public static final SoundEvent UI_TIMESWAP_TABLE_TAKE_RESULT = register("ui.timeswap_table.take_result");
 	
 	/*
 	public static final SoundEvent MUSIC_DISC_BATTLEFIELD = register("music_disc.battlefield");

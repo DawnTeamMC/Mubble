@@ -1,51 +1,91 @@
 {
-	"block.empty_block.hit":
-	{
-		"subtitle": "subtitles.block.generic.hit",
-		"sounds":
-		[
-			"mubble:block/empty_block/hit"
-		]
-	},
-	"block.brick_block.break":
-	{
-		"subtitle": "subtitles.block.generic.break",
-		"sounds":
-		[
-			"mubble:block/brick_block/break"
-		]
-	},
-	"block.note_block.jump.high":
-	{
-		"subtitle": "subtitles.mubble.block.note_block.jump",
-		"sounds":
-		[
-			"mubble:block/note_block/jump/high"
-		]
-	},
-	"block.note_block.jump.low":
-	{
-		"subtitle": "subtitles.mubble.block.note_block.low",
-		"sounds":
-		[
-			"mubble:block/note_block/jump/low0",
-			"mubble:block/note_block/jump/low1"
-		]
-	},
-	"block.question_block.loot.power_up":
+	"block.question_block.loot.power_up.smb":
 	{
 		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
 		"sounds":
 		[
-			"mubble:block/question_block/loot/power_up"
+			"mubble:block/question_block/loot/power_up/smb"
 		]
 	},
-	"block.question_block.loot.coin":
+	"block.question_block.loot.power_up.nsmbu":
+	{
+		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
+		"sounds":
+		[
+			"mubble:block/question_block/loot/power_up/nsmbu"
+		]
+	},
+	"block.question_block.loot.coin.smb":
 	{
 		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
 		"sounds":
 		[
-			"mubble:block/question_block/loot/coin"
+			"mubble:block/question_block/loot/coin/smb"
+		]
+	},
+	"block.question_block.loot.coin.nsmbu":
+	{
+		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
+		"sounds":
+		[
+			"mubble:block/question_block/loot/coin/nsmbu"
+		]
+	},
+	"block.brick_block.break.smb":
+	{
+		"subtitle": "subtitles.block.generic.break",
+		"sounds":
+		[
+			"mubble:block/brick_block/break/smb"
+		]
+	},
+	"block.brick_block.break.nsmbu":
+	{
+		"subtitle": "subtitles.block.generic.break",
+		"sounds":
+		[
+			"mubble:block/brick_block/break/nsmbu"
+		]
+	},
+	"block.empty_block.hit.smb":
+	{
+		"subtitle": "subtitles.block.generic.hit",
+		"sounds":
+		[
+			"mubble:block/empty_block/hit/smb"
+		]
+	},
+	"block.empty_block.hit.nsmbu":
+	{
+		"subtitle": "subtitles.block.generic.hit",
+		"sounds":
+		[
+			"mubble:block/empty_block/hit/nsmbu"
+		]
+	},
+	"block.note_block.jump.smb":
+	{
+		"subtitle": "subtitles.mubble.block.note_block.jump",
+		"sounds":
+		[
+			"mubble:block/note_block/jump/smb"
+		]
+	},
+	"block.note_block.jump.high.nsmbu":
+	{
+		"subtitle": "subtitles.mubble.block.note_block.jump",
+		"sounds":
+		[
+			"mubble:block/note_block/jump/high/nsmbu"
+		]
+	},
+	"block.note_block.jump.low.nsmbu":
+	{
+		"subtitle": "subtitles.mubble.block.note_block.low",
+		"sounds":
+		[
+			"mubble:block/note_block/jump/low/nsmbu0",
+			"mubble:block/note_block/jump/low/nsmbu1"
 		]
 	},
 	"block.space_jam.break":
@@ -392,6 +432,13 @@
 			"mubble:costume/cappy/help_water2",
 			"mubble:costume/cappy/help_water3",
 			"mubble:costume/cappy/help_water4"
+		]
+	},
+	"ui.timeswap_table.take_result":
+	{
+		"sounds":
+		[
+			"mubble:ui/timeswap_table/take_result"
 		]
 	}
 }

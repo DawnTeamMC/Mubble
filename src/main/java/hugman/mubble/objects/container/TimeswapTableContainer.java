@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleContainerTypes;
+import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,7 +22,6 @@ import net.minecraft.tags.Tag;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -81,7 +81,7 @@ public class TimeswapTableContainer extends Container
 	    			long l = worldIn.getGameTime();
 	    			if (TimeswapTableContainer.this.lastOnTake != l)
 	    			{
-	    				worldIn.playSound((PlayerEntity)null, blockPos, SoundEvents.UI_STONECUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	    				worldIn.playSound((PlayerEntity)null, blockPos, MubbleSounds.UI_TIMESWAP_TABLE_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	    				TimeswapTableContainer.this.lastOnTake = l;
 	    			}
 	    		});
