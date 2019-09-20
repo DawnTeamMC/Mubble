@@ -105,10 +105,12 @@ public class BrickBlock extends Block
             }
             else if(this == MubbleBlocks.SMB3_BRICK_BLOCK)
             {
+                coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
             	emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
             }
             else if(this == MubbleBlocks.SMW_BRICK_BLOCK)
             {
+                coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
             	emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
             }
             else if(this == MubbleBlocks.NSMBU_BRICK_BLOCK)

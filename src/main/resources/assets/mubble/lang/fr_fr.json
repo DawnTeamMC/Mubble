@@ -1051,9 +1051,10 @@
 
 
 	"comment": "SUBTITLES",
-	"subtitles.mubble.block.note_block.jump": "Bloc note utilisé",
 	"subtitles.mubble.block.question_block.loot.power_up": "Objet sorti d'un bloc ?",
 	"subtitles.mubble.block.question_block.loot.coin": "Pièce sortie d'un bloc ?",
+	"subtitles.mubble.block.note_block.jump": "Bloc note utilisé",
+	"//subtitles.mubble.block.door.key.success": "Key used",
 	"subtitles.mubble.block.spring.trigger": "Ressort déclenché",
 	"subtitles.mubble.item.cape_feather.use": "Plume acrobate utilisée",
 	"subtitles.mubble.item.smash_ball.use": "Balle Smash utilisée",

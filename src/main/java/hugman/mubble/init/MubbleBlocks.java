@@ -708,18 +708,18 @@ public class MubbleBlocks
     public static final Block SMB3_EMPTY_BLOCK = block("smb3_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_EMPTY_BLOCK = block("smw_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_EMPTY_BLOCK = block("nsmbu_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMB_ROTATING_BLOCK = block("smb_rotating_block", new RotatingBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMB3_ROTATING_BLOCK = block("smb3_rotating_block", new RotatingBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMW_ROTATING_BLOCK = block("smw_rotating_block", new RotatingBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block NSMBU_ROTATING_BLOCK = block("nsmbu_rotating_block", new RotatingBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB_ROTATING_BLOCK = block("smb_rotating_block", new RotatingBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB3_ROTATING_BLOCK = block("smb3_rotating_block", new RotatingBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_ROTATING_BLOCK = block("smw_rotating_block", new RotatingBlock(MubbleSoundTypes.SMW_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block NSMBU_ROTATING_BLOCK = block("nsmbu_rotating_block", new RotatingBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block LIGHT_BLOCK = block("light_block", new Block(Properties.from(Blocks.STONE).lightValue(15)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_GROUND_BRICK_BLOCK = block("smb_ground_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_UNDERGROUND_BRICK_BLOCK = block("smb_underground_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_CASTLE_BRICK_BLOCK = block("smb_castle_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_SNOW_BRICK_BLOCK = block("smb_snow_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_NIGHT_SNOW_BRICK_BLOCK = block("smb_night_snow_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMB3_BRICK_BLOCK = block("smb3_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMW_BRICK_BLOCK = block("smw_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB3_BRICK_BLOCK = block("smb3_brick_block", new BrickBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_BRICK_BLOCK = block("smw_brick_block", new BrickBlock(MubbleSoundTypes.SMW_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_BRICK_BLOCK = block("nsmbu_brick_block", new BrickBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_GOLDEN_BRICK_BLOCK = block("smb_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB3_GOLDEN_BRICK_BLOCK = block("smb3_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
@@ -925,14 +925,14 @@ public class MubbleBlocks
     public static final Block KORETATO_BLOCK = block("koretato_block", new KoretatoBlock());
     public static final Block POTATO_FLOWER = block("potato_flower", new FlowerBlock(Effects.HUNGER, 9, Properties.create(Material.PLANTS).doesNotBlockMovement().hardnessAndResistance(0.0F).sound(SoundType.PLANT)), ItemGroup.DECORATIONS, FLOWERS);
     
-    public static Block block(String name, Block block)
+    private static Block block(String name, Block block)
     {
         Block fBlock = block.setRegistryName(Mubble.MOD_ID, name);
         BLOCKS.add(fBlock);
         return fBlock;
     }
     
-    public static Block block(String name, Block block, ItemGroup group, List<Item> itemList)
+    private static Block block(String name, Block block, ItemGroup group, List<Item> itemList)
     {
         Block fBlock = block.setRegistryName(Mubble.MOD_ID, name);
         BLOCKS.add(fBlock);

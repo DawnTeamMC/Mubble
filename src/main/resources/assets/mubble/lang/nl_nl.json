@@ -1051,9 +1051,10 @@
 
 
 	"comment": "SUBTITLES",
-	"subtitles.mubble.block.note_block.jump": "Nootblock wordt gebruikt",
 	"subtitles.mubble.block.question_block.loot.power_up": "?-blok laat power up vallen",
 	"subtitles.mubble.block.question_block.loot.coin": "?-blok laat munt vallen",
+	"subtitles.mubble.block.note_block.jump": "Nootblock wordt gebruikt",
+	"//subtitles.mubble.block.door.key.success": "Key used",
 	"subtitles.mubble.block.spring.trigger": "Veer geactiveerd",
 	"subtitles.mubble.item.cape_feather.use": "Capeveer wordt gebruikt",
 	"subtitles.mubble.item.smash_ball.use": "Smash bal wordt gebruikt",

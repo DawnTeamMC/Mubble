@@ -12,16 +12,42 @@ public class MubbleSounds
 	public static final List<SoundEvent> SOUNDS = new ArrayList<SoundEvent>();
 
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB = register("block.question_block.loot.power_up.smb");
-	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB = register("block.question_block.loot.coin.smb");
+	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3 = register("block.question_block.loot.power_up.smb3");
+	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW = register("block.question_block.loot.power_up.smw");
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU = register("block.question_block.loot.power_up.nsmbu");
+	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB = register("block.question_block.loot.coin.smb");
+	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB3 = register("block.question_block.loot.coin.smb3");
+	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_COIN_SMW = register("block.question_block.loot.coin.smw");
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_COIN_NSMBU = register("block.question_block.loot.coin.nsmbu");
 	public static final SoundEvent BLOCK_BRICK_BLOCK_BREAK_SMB = register("block.brick_block.break.smb");
+	public static final SoundEvent BLOCK_BRICK_BLOCK_BREAK_SMB3 = register("block.brick_block.break.smb3");
+	public static final SoundEvent BLOCK_BRICK_BLOCK_BREAK_SMW = register("block.brick_block.break.smw");
 	public static final SoundEvent BLOCK_BRICK_BLOCK_BREAK_NSMBU = register("block.brick_block.break.nsmbu");
 	public static final SoundEvent BLOCK_EMPTY_BLOCK_HIT_SMB = register("block.empty_block.hit.smb");
+	public static final SoundEvent BLOCK_EMPTY_BLOCK_HIT_SMB3 = register("block.empty_block.hit.smb3");
+	public static final SoundEvent BLOCK_EMPTY_BLOCK_HIT_SMW = register("block.empty_block.hit.smw");
 	public static final SoundEvent BLOCK_EMPTY_BLOCK_HIT_NSMBU = register("block.empty_block.hit.nsmbu");
 	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_SMB = register("block.note_block.jump.smb");
+	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_SMB3 = register("block.note_block.jump.smb3");
+	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_SMW = register("block.note_block.jump.smw");
 	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_LOW_NSMBU = register("block.note_block.jump.low.nsmbu");
 	public static final SoundEvent BLOCK_NOTE_BLOCK_JUMP_HIGH_NSMBU = register("block.note_block.jump.high.nsmbu");
+	public static final SoundEvent BLOCK_DOOR_OPEN_SMB = register("block.door.open.smb");
+	public static final SoundEvent BLOCK_DOOR_OPEN_SMB3 = register("block.door.open.smb3");
+	public static final SoundEvent BLOCK_DOOR_OPEN_SMW = register("block.door.open.smw");
+	public static final SoundEvent BLOCK_DOOR_OPEN_NSMBU = register("block.door.open.nsmbu");
+	public static final SoundEvent BLOCK_DOOR_CLOSE_SMB = register("block.door.close.smb");
+	public static final SoundEvent BLOCK_DOOR_CLOSE_SMB3 = register("block.door.close.smb3");
+	public static final SoundEvent BLOCK_DOOR_CLOSE_SMW = register("block.door.close.smw");
+	public static final SoundEvent BLOCK_DOOR_CLOSE_NSMBU = register("block.door.close.nsmbu");
+	public static final SoundEvent BLOCK_DOOR_KEY_SUCCESS_SMB = register("block.door.key.success.smb");
+	public static final SoundEvent BLOCK_DOOR_KEY_SUCCESS_SMB3 = register("block.door.key.success.smb3");
+	public static final SoundEvent BLOCK_DOOR_KEY_SUCCESS_SMW = register("block.door.key.success.smw");
+	public static final SoundEvent BLOCK_DOOR_KEY_SUCCESS_NSMBU = register("block.door.key.success.nsmbu");
+	public static final SoundEvent BLOCK_DOOR_KEY_FAIL_SMB = register("block.door.key.fail.smb");
+	public static final SoundEvent BLOCK_DOOR_KEY_FAIL_SMB3 = register("block.door.key.fail.smb3");
+	public static final SoundEvent BLOCK_DOOR_KEY_FAIL_SMW = register("block.door.key.fail.smw");
+	public static final SoundEvent BLOCK_DOOR_KEY_FAIL_NSMBU = register("block.door.key.fail.nsmbu");
 	public static final SoundEvent BLOCK_SPACE_JAM_BREAK = register("block.space_jam.break");
 	public static final SoundEvent BLOCK_SPACE_JAM_FALL = register("block.space_jam.fall");
 	public static final SoundEvent BLOCK_SPACE_JAM_PLACE = register("block.space_jam.place");
@@ -87,7 +113,7 @@ public class MubbleSounds
 	public static final SoundEvent REMIX_DISC_NB_WALUIGI_PINBALL = register("remix_disc.nb.waluigi_pinball");
 	*/
 	
-	public static SoundEvent register(String name)
+	private static SoundEvent register(String name)
 	{
 		ResourceLocation path = new ResourceLocation(Mubble.MOD_ID, name);
 		SoundEvent sound = new SoundEvent(path).setRegistryName(path);

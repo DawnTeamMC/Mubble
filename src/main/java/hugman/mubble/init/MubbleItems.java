@@ -67,7 +67,7 @@ public class MubbleItems
     public static final Item TOAD_SPAWN_EGG = item("toad_spawn_egg", new SpawnEggItem(MubbleEntities.TOAD, 14671839, 16722728, new Item.Properties().group(ItemGroup.MISC)));
     public static final Item ZOMBIE_COWMAN_SPAWN_EGG = item("zombie_cowman_spawn_egg", new SpawnEggItem(MubbleEntities.ZOMBIE_COWMAN, 2957585, 5009705, new Item.Properties().group(ItemGroup.MISC)));
     
-    public static Item item(String name, Item item)
+    private static Item item(String name, Item item)
     {
     	Item fItem = item.setRegistryName(Mubble.MOD_ID, name);
         ITEMS.add(fItem);

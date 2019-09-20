@@ -1,5 +1,6 @@
 package hugman.mubble.objects.item;
 
+import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.objects.block.KeyDoorBlock;
 import net.minecraft.block.Block;
@@ -11,6 +12,7 @@ import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -44,7 +46,7 @@ public class KeyItem extends Item
 		        	BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
 		            worldIn.setBlockState(pos, state.with(KeyDoorBlock.LOCKED, false), 2);
 		            worldIn.setBlockState(otherBlockPos, otherBlockState.with(KeyDoorBlock.LOCKED, false), 2);
-		            worldIn.playSound((PlayerEntity)null, pos, MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.BLOCKS, 0.8f, 1f);
+		        	worldIn.playSound((PlayerEntity)null, pos, this.getKeySuccessSound(state.getBlock(), !state.get(KeyDoorBlock.LOCKED)), SoundCategory.BLOCKS, 1.0F, 1.0F);
 		            context.getItem().shrink(1);
 		    		return ActionResultType.SUCCESS;
 				}
@@ -55,5 +57,29 @@ public class KeyItem extends Item
 			}
 		}
 		else return ActionResultType.FAIL;
+    }
+    
+    public SoundEvent getKeySuccessSound(Block block, boolean success)
+    {
+    	if(block == MubbleBlocks.SMB_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
+    	}
+    	else if(block == MubbleBlocks.SMB3_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB3;
+    	}
+    	else if(block == MubbleBlocks.SMW_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMW;
+    	}
+    	else if(block == MubbleBlocks.NSMBU_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_NSMBU;
+    	}
+    	else
+    	{
+        	return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
+    	}
     }
 }

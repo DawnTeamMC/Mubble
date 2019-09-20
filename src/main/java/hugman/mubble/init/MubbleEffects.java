@@ -16,7 +16,7 @@ public class MubbleEffects
     //public static final Effect SNEEZING = new EffectSimple("sneezing", true, 9753716);
     public static final Effect HICCUP = register("hiccup", new HiccupEffect(EffectType.NEUTRAL, 9198906));
     
-    public static Effect register(String name, Effect effect)
+    private static Effect register(String name, Effect effect)
     {
     	Effect fEffect = effect.setRegistryName(name);
     	EFFECTS.add(fEffect);

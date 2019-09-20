@@ -1,5 +1,7 @@
 package hugman.mubble.objects.entity;
 
+import java.util.Random;
+
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleLootTables;
@@ -35,6 +37,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -207,4 +210,9 @@ public class ToadEntity extends AnimalEntity
     {
         return TEMPTATION_ITEMS.test(stack);
     }
+    
+	public static boolean canSpawn(EntityType<ToadEntity> entity, IWorld world, SpawnReason reason, BlockPos pos, Random rand)
+	{
+		return true;
+	}
 }

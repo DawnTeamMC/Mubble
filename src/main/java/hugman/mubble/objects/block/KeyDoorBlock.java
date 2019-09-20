@@ -1,9 +1,10 @@
 package hugman.mubble.objects.block;
 
 import hugman.mubble.init.MubbleBlockStateProperties;
+import hugman.mubble.init.MubbleBlocks;
+import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -11,6 +12,8 @@ import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.state.properties.DoubleBlockHalf;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
@@ -36,30 +39,99 @@ public class KeyDoorBlock extends DoorBlock
     {
     	if(state.get(LOCKED))
     	{
+    		this.playFailedOpenSound(worldIn, pos);
+    		player.swingArm(handIn);
     		return false;
     	}
     	else
     	{
     		state = state.cycle(OPEN);
     		worldIn.setBlockState(pos, state, 10);
-    		worldIn.playEvent(player, state.get(OPEN) ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+    		this.playToggleSound(worldIn, pos, state.get(OPEN));
     		return true;
     	}
     }
-    
-    public int getCloseSound()
-    {
-    	return this.material == Material.IRON ? 1011 : 1012;
-    }
 
-    public int getOpenSound()
+    public SoundEvent getOpenSound(Block block)
     {
-    	return this.material == Material.IRON ? 1005 : 1006;
+    	if(block == MubbleBlocks.SMB_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_OPEN_SMB;
+    	}
+    	else if(block == MubbleBlocks.SMB3_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_OPEN_SMB3;
+    	}
+    	else if(block == MubbleBlocks.SMW_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_OPEN_SMW;
+    	}
+    	else if(block == MubbleBlocks.NSMBU_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_OPEN_NSMBU;
+    	}
+    	else
+    	{
+        	return MubbleSounds.BLOCK_DOOR_OPEN_SMB;
+    	}
     }
     
-    public void playSound(World world, BlockPos pos, boolean flag)
+    public SoundEvent getCloseSound(Block block)
     {
-    	world.playEvent((PlayerEntity)null, flag ? this.getOpenSound() : this.getCloseSound(), pos, 0);
+    	if(block == MubbleBlocks.SMB_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_CLOSE_SMB;
+    	}
+    	else if(block == MubbleBlocks.SMB3_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_CLOSE_SMB3;
+    	}
+    	else if(block == MubbleBlocks.SMW_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_CLOSE_SMW;
+    	}
+    	else if(block == MubbleBlocks.NSMBU_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_CLOSE_NSMBU;
+    	}
+    	else
+    	{
+        	return MubbleSounds.BLOCK_DOOR_CLOSE_SMB;
+    	}
+    }
+    
+    public SoundEvent getKeyFailSound(Block block)
+    {
+    	if(block == MubbleBlocks.SMB_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_KEY_FAIL_SMB;
+    	}
+    	else if(block == MubbleBlocks.SMB3_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_KEY_FAIL_SMB3;
+    	}
+    	else if(block == MubbleBlocks.SMW_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_KEY_FAIL_SMW;
+    	}
+    	else if(block == MubbleBlocks.NSMBU_KEY_DOOR)
+    	{
+    		return MubbleSounds.BLOCK_DOOR_KEY_FAIL_NSMBU;
+    	}
+    	else
+    	{
+        	return MubbleSounds.BLOCK_DOOR_KEY_FAIL_SMB;
+    	}
+    }
+    
+    public void playToggleSound(World worldIn, BlockPos pos, boolean flag)
+    {
+    	worldIn.playSound((PlayerEntity)null, pos, flag ? this.getOpenSound(this) : this.getCloseSound(this), SoundCategory.BLOCKS, 1.0F, 1.0F);
+	}
+    
+    public void playFailedOpenSound(World worldIn, BlockPos pos)
+    {
+    	worldIn.playSound((PlayerEntity)null, pos, this.getKeyFailSound(this), SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}
 
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
@@ -81,7 +153,7 @@ public class KeyDoorBlock extends DoorBlock
         {
         	if (flag1 != state.get(OPEN))
         	{
-        		this.playSound(worldIn, pos, flag1);
+        		this.playToggleSound(worldIn, pos, flag1);
         	}
         	worldIn.setBlockState(pos, state.with(POWERED, Boolean.valueOf(flag1)).with(OPEN, Boolean.valueOf(flag1)).with(LOCKED, Boolean.valueOf(!flag2)), 2);
         }

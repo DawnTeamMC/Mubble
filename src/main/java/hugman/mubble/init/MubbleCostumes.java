@@ -94,7 +94,7 @@ public class MubbleCostumes
 	public static final Item KORETATO_BLOCK = costume("koretato_block", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SNOW_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.KORETATO_BLOCK));
 	public static final Item NOTEBLOCK_HEAD = costume("noteblock_head", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 	
-    public static Item costume(String name, Item item)
+    private static Item costume(String name, Item item)
     {
     	Item fCostume = item.setRegistryName(Mubble.MOD_ID, name);
         COSTUMES.add(fCostume);

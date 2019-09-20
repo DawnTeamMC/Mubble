@@ -43,11 +43,11 @@ public class EmptyBlock extends Block
     		}
     		else if(this == MubbleBlocks.SMB3_EMPTY_BLOCK)
     		{
-    			
+    			hitSound = MubbleSounds.BLOCK_EMPTY_BLOCK_HIT_SMB3;
     		}
     		else if(this == MubbleBlocks.SMW_EMPTY_BLOCK)
     		{
-    			
+    			hitSound = MubbleSounds.BLOCK_EMPTY_BLOCK_HIT_SMW;
     		}
     		else if(this == MubbleBlocks.NSMBU_EMPTY_BLOCK)
     		{

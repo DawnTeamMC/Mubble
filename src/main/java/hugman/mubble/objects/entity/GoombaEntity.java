@@ -1,10 +1,13 @@
 package hugman.mubble.objects.entity;
 
+import java.util.Random;
+
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Pose;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.HurtByTargetGoal;
 import net.minecraft.entity.ai.goal.LookAtGoal;
 import net.minecraft.entity.ai.goal.LookRandomlyGoal;
@@ -20,6 +23,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class GoombaEntity extends MonsterEntity
@@ -99,4 +104,9 @@ public class GoombaEntity extends MonsterEntity
     		}
     	}
     }
+    
+	public static boolean canSpawn(EntityType<GoombaEntity> entity, IWorld world, SpawnReason reason, BlockPos pos, Random rand)
+	{
+		return world.getDifficulty() != Difficulty.PEACEFUL;
+	}
 }

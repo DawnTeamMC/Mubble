@@ -1051,9 +1051,10 @@
 
 
 	"comment": "SUBTITLES",
-	"//subtitles.mubble.block.note_block.jump": "<newline>",
 	"//subtitles.mubble.block.question_block.loot.power_up": "? Block drops power up",
 	"subtitles.mubble.block.question_block.loot.coin": "BLOCO ???? drop coin",
+	"//subtitles.mubble.block.note_block.jump": "<newline>",
+	"//subtitles.mubble.block.door.key.success": "Key used",
 	"//subtitles.mubble.block.spring.trigger": "Spring triggered",
 	"subtitles.mubble.item.cape_feather.use": "cap that makes you high jumped was actully used!",
 	"subtitles.mubble.item.smash_ball.use": "sm4sh bol uzd",

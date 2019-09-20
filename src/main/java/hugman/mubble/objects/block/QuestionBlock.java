@@ -75,10 +75,14 @@ public class QuestionBlock extends Block
             }
             else if(this == MubbleBlocks.SMB3_QUESTION_BLOCK)
             {
+                coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB3;
+                powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
             	emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
             }
             else if(this == MubbleBlocks.SMW_QUESTION_BLOCK)
             {
+                coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMW;
+                powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
             	emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
             }
             else if(this == MubbleBlocks.NSMBU_QUESTION_BLOCK)

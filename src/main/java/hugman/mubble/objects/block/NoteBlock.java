@@ -55,11 +55,13 @@ public class NoteBlock extends Block
     		}
     		else if(this == MubbleBlocks.SMB3_NOTE_BLOCK || this == MubbleBlocks.SMB3_SUPER_NOTE_BLOCK)
     		{
-    			
+    			lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB3;
+    			highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB3;
     		}
     		else if(this == MubbleBlocks.SMW_NOTE_BLOCK || this == MubbleBlocks.SMW_SUPER_NOTE_BLOCK)
     		{
-    			
+    			lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMW;
+    			highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMW;
     		}
     		else if(this == MubbleBlocks.NSMBU_NOTE_BLOCK || this == MubbleBlocks.NSMBU_SUPER_NOTE_BLOCK)
     		{

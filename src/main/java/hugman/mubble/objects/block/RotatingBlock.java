@@ -3,6 +3,7 @@ package hugman.mubble.objects.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -15,9 +16,9 @@ public class RotatingBlock extends Block
 {	
 	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
 	
-    public RotatingBlock()
+    public RotatingBlock(SoundType soundType)
     {
-        super(Properties.from(Blocks.STONE));
+        super(Properties.from(Blocks.STONE).sound(soundType));
     }
     
     @Override
