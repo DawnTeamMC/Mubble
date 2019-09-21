@@ -1,9 +1,3 @@
 {
-	"parent": "mubble:item/vertical_slab",
-	"textures":
-	{
-		"bottom": "block/red_sandstone_top",
-		"top": "block/red_sandstone_top",
-		"block": "block/cut_red_sandstone"
-	}
+	"parent": "mubble:block/cut_red_sandstone_vertical_slab/north"
 }

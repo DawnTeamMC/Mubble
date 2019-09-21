@@ -1,7 +1,3 @@
 {
-	"parent": "mubble:item/vertical_slab",
-	"textures":
-	{
-		"block": "mubble:block/blunite"
-	}
+	"parent": "mubble:block/blunite_vertical_slab/north"
 }

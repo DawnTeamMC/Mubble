@@ -1,7 +1,3 @@
 {
-	"parent": "mubble:item/vertical_slab",
-	"textures":
-	{
-		"block": "minecraft:block/acacia_planks"
-	}
+	"parent": "mubble:block/acacia_vertical_slab/north"
 }

@@ -1,9 +1,3 @@
 {
-	"parent": "mubble:item/vertical_slab",
-	"textures":
-	{
-		"bottom": "minecraft:block/quartz_block_bottom",
-		"top": "minecraft:block/quartz_block_top",
-		"block": "minecraft:block/quartz_block_side"
-	}
+	"parent": "mubble:block/quartz_vertical_slab/north"
 }

@@ -1,9 +1,3 @@
 {
-	"parent": "mubble:item/vertical_slab",
-	"textures":
-	{
-		"bottom": "minecraft:block/smooth_stone",
-		"top": "minecraft:block/smooth_stone",
-		"block": "minecraft:block/smooth_stone_slab_side"
-	}
+	"parent": "mubble:block/smooth_stone_vertical_slab/north"
 }

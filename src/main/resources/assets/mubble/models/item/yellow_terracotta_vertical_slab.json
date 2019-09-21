@@ -1,7 +1,3 @@
 {
-	"parent": "mubble:item/vertical_slab",
-	"textures":
-	{
-		"block": "minecraft:block/yellow_terracotta"
-	}
+	"parent": "mubble:block/yellow_terracotta_vertical_slab/north"
 }

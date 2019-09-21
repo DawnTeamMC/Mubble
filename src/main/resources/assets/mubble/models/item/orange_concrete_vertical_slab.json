@@ -1,7 +1,3 @@
 {
-	"parent": "mubble:item/vertical_slab",
-	"textures":
-	{
-		"block": "minecraft:block/orange_concrete"
-	}
+	"parent": "mubble:block/orange_concrete_vertical_slab/north"
 }
