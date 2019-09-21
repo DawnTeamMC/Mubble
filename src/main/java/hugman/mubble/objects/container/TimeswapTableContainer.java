@@ -24,6 +24,7 @@ import net.minecraft.util.IntReferenceHolder;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class TimeswapTableContainer extends Container
 {
@@ -167,7 +168,11 @@ public class TimeswapTableContainer extends Container
 			Tag<Item> tag = correspondingTag(stack.getItem());
 			if(tag != null)
 			{
-				this.outputItems = Lists.newArrayList(tag.getAllElements());
+				this.outputItems = Lists.newArrayList();
+				for(Item item : ForgeRegistries.ITEMS)
+				{
+					if(item.isIn(tag)) this.outputItems.add(item);
+				}
 			}
 		}
 	}

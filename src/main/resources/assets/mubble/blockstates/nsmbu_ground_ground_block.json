@@ -1,0 +1,23 @@
+{
+	"variants":
+	{
+		"over=false":
+		[
+			{"model": "mubble:block/ground_block/nsmbu/ground/normal/1"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/normal/2"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/normal/3"}
+		],
+		"over=true": 
+		[
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/111"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/122"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/133"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/211"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/222"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/233"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/311"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/322"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/333"}
+		]
+	}
+}

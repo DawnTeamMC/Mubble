@@ -704,6 +704,7 @@ public class MubbleBlocks
     public static final Block SMW_SNOW_GROUND_BLOCK = block("smw_snow_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_NIGHT_SNOW_GROUND_BLOCK = block("smw_night_snow_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_SKY_GROUND_BLOCK = block("smw_sky_ground_block", new OverBlock(Properties.from(Blocks.WHITE_WOOL)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block NSMBU_GROUND_GROUND_BLOCK = block("nsmbu_ground_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_EMPTY_BLOCK = block("smb_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB3_EMPTY_BLOCK = block("smb3_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_EMPTY_BLOCK = block("smw_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);

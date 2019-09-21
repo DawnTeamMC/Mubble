@@ -36,6 +36,7 @@
 		"mubble:smw_forest_ground_block",
 		"mubble:smw_snow_ground_block",
 		"mubble:smw_night_snow_ground_block",
-		"mubble:smw_sky_ground_block"
+		"mubble:smw_sky_ground_block",
+		"mubble:nsmbu_ground_ground_block"
 	]
 }
