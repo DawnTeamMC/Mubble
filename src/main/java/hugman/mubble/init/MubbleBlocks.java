@@ -905,8 +905,8 @@ public class MubbleBlocks
     public static final Block OLD_SITE_BRICK_VERTICAL_SLAB = block("old_site_brick_vertical_slab", new VerticalSlabBlock(Properties.from(OLD_SITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block OLD_SITE_BRICK_WALL = block("old_site_brick_wall", new WallBlock(Properties.from(OLD_SITE_BRICKS)), ItemGroup.DECORATIONS, WALLS);
     public static final Block ELDER_PEBBLES = block("elder_pebbles", new Block(Properties.from(Blocks.BRICKS).lightValue(5)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SPACE_JAM = block("space_jam", new Block(Properties.create(Material.SAND).hardnessAndResistance(0.4f).sound(MubbleSoundTypes.SPACE_JAM)), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SPACE_OBSIDIAN = block("space_obsidian", new Block(Properties.create(Material.ROCK).hardnessAndResistance(-1.0F, 3600000.0F)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block DREAM_BLOCK = block("dream_block", new Block(Properties.create(Material.SAND).hardnessAndResistance(0.4f).sound(MubbleSoundTypes.DREAM_BLOCK)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block DREAM_BEDROCK = block("dream_bedrock", new Block(Properties.create(Material.ROCK).hardnessAndResistance(-1.0F, 3600000.0F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     
     /* PUYO PUYO */
     public static final Block RED_PUYO = block("red_puyo", new PuyoBlock(Properties.create(Material.CLAY, DyeColor.RED).slipperiness(0.8F).sound(SoundType.SLIME)));

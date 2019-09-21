@@ -807,8 +807,8 @@
 	"block.mubble.old_site_brick_vertical_slab": "Senkrechte Ziegelstufe aus der alten Anlage",
 	"block.mubble.old_site_brick_wall": "Ziegelmauer aus der alten Anlage",
 	"block.mubble.elder_pebbles": "Ältester Kieselstein",
-	"block.mubble.space_jam": "Weltraumstau",
-	"block.mubble.space_obsidian": "Weltraumobsidian",
+	"//block.mubble.dream_block": "Dream Block",
+	"//block.mubble.dream_bedrock": "Dream Bedrock",
 
 
 	"block.mubble.blue_puyo": "Blauer Puyo",

@@ -292,65 +292,65 @@
 			"mubble:block/door/key/fail/nsmbu"
 		]
 	},
-	"block.space_jam.break":
+	"block.dream_block.break":
 	{
 		"subtitle": "subtitles.block.generic.break",
 		"sounds":
 		[
-			"mubble:block/space_jam/hit1",
-			"mubble:block/space_jam/hit2",
-			"mubble:block/space_jam/hit3",
-			"mubble:block/space_jam/hit4",
-			"mubble:block/space_jam/hit5"
+			"mubble:block/dream_block/hit1",
+			"mubble:block/dream_block/hit2",
+			"mubble:block/dream_block/hit3",
+			"mubble:block/dream_block/hit4",
+			"mubble:block/dream_block/hit5"
 		]
 	},
-	"block.space_jam.fall":
+	"block.dream_block.fall":
 	{
 		"sounds":
 		[
-			"mubble:block/space_jam/fall1",
-			"mubble:block/space_jam/fall2",
-			"mubble:block/space_jam/fall3",
-			"mubble:block/space_jam/fall4",
-			"mubble:block/space_jam/fall5"
+			"mubble:block/dream_block/fall1",
+			"mubble:block/dream_block/fall2",
+			"mubble:block/dream_block/fall3",
+			"mubble:block/dream_block/fall4",
+			"mubble:block/dream_block/fall5"
 		]
 	},
-	"block.space_jam.hit":
+	"block.dream_block.hit":
 	{
 		"subtitle": "subtitles.block.generic.hit",
 		"sounds":
 		[
-			"mubble:block/space_jam/hit1",
-			"mubble:block/space_jam/hit2",
-			"mubble:block/space_jam/hit3",
-			"mubble:block/space_jam/hit4",
-			"mubble:block/space_jam/hit5"
+			"mubble:block/dream_block/hit1",
+			"mubble:block/dream_block/hit2",
+			"mubble:block/dream_block/hit3",
+			"mubble:block/dream_block/hit4",
+			"mubble:block/dream_block/hit5"
 		]
 	},
-	"block.space_jam.place":
+	"block.dream_block.place":
 	{
 		"subtitle": "subtitles.block.generic.place",
 		"sounds":
 		[
-			"mubble:block/space_jam/hit1",
-			"mubble:block/space_jam/hit2",
-			"mubble:block/space_jam/hit3",
-			"mubble:block/space_jam/hit4",
-			"mubble:block/space_jam/hit5"
+			"mubble:block/dream_block/hit1",
+			"mubble:block/dream_block/hit2",
+			"mubble:block/dream_block/hit3",
+			"mubble:block/dream_block/hit4",
+			"mubble:block/dream_block/hit5"
 		]
 	},
-	"block.space_jam.step":
+	"block.dream_block.step":
 	{
 		"subtitle": "subtitles.block.generic.footsteps",
 		"sounds":
 		[
-			"mubble:block/space_jam/step1",
-			"mubble:block/space_jam/step2",
-			"mubble:block/space_jam/step3",
-			"mubble:block/space_jam/step4",
-			"mubble:block/space_jam/step5",
-			"mubble:block/space_jam/step6",
-			"mubble:block/space_jam/step7"
+			"mubble:block/dream_block/step1",
+			"mubble:block/dream_block/step2",
+			"mubble:block/dream_block/step3",
+			"mubble:block/dream_block/step4",
+			"mubble:block/dream_block/step5",
+			"mubble:block/dream_block/step6",
+			"mubble:block/dream_block/step7"
 		]
 	},
 	"block.spring.trigger":

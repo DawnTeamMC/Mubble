@@ -4,6 +4,7 @@ import hugman.mubble.init.MubbleBlockStateProperties;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.objects.world.surface_builder.PermafrostSurfaceBuilder;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.world.gen.surfacebuilders.ShatteredSavannaSurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
@@ -24,5 +25,5 @@ public class MubbleSurfaceBuilders
 
 	public static final SurfaceBuilderConfig PERMAROCK_SURFACE = new SurfaceBuilderConfig(BlockStates.PERMAROCK, BlockStates.PERMAROCK, BlockStates.PERMAROCK);
 	public static final SurfaceBuilderConfig SMW_GROUND_SURFACE = new SurfaceBuilderConfig(BlockStates.SMW_GROUND_TOP, BlockStates.SMW_GROUND_DIRT, BlockStates.SMW_GROUND_DIRT);
-	public static final SurfaceBuilderConfig SMW_DESERT_SURFACE = new SurfaceBuilderConfig(BlockStates.SMW_DESERT_TOP, BlockStates.SMW_DESERT_DIRT, BlockStates.SMW_DESERT_DIRT);
+	public static final SurfaceBuilderConfig SMW_DESERT_SURFACE = new SurfaceBuilderConfig(BlockStates.SMW_DESERT_TOP, BlockStates.SMW_DESERT_DIRT, Blocks.DIRT.getDefaultState());
 }

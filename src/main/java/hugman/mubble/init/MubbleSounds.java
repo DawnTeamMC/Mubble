@@ -48,11 +48,11 @@ public class MubbleSounds
 	public static final SoundEvent BLOCK_DOOR_KEY_FAIL_SMB3 = register("block.door.key.fail.smb3");
 	public static final SoundEvent BLOCK_DOOR_KEY_FAIL_SMW = register("block.door.key.fail.smw");
 	public static final SoundEvent BLOCK_DOOR_KEY_FAIL_NSMBU = register("block.door.key.fail.nsmbu");
-	public static final SoundEvent BLOCK_SPACE_JAM_BREAK = register("block.space_jam.break");
-	public static final SoundEvent BLOCK_SPACE_JAM_FALL = register("block.space_jam.fall");
-	public static final SoundEvent BLOCK_SPACE_JAM_PLACE = register("block.space_jam.place");
-	public static final SoundEvent BLOCK_SPACE_JAM_HIT = register("block.space_jam.hit");
-	public static final SoundEvent BLOCK_SPACE_JAM_STEP = register("block.space_jam.step");
+	public static final SoundEvent BLOCK_DREAM_BLOCK_BREAK = register("block.dream_block.break");
+	public static final SoundEvent BLOCK_DREAM_BLOCK_FALL = register("block.dream_block.fall");
+	public static final SoundEvent BLOCK_DREAM_BLOCK_PLACE = register("block.dream_block.place");
+	public static final SoundEvent BLOCK_DREAM_BLOCK_HIT = register("block.dream_block.hit");
+	public static final SoundEvent BLOCK_DREAM_BLOCK_STEP = register("block.dream_block.step");
 	public static final SoundEvent BLOCK_SPRING_TRIGGER = register("block.spring.trigger");
 	
 	public static final SoundEvent ITEM_CAPE_FEATHER_USE = register("item.cape_feather.use");

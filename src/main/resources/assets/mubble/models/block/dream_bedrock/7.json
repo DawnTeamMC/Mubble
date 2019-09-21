@@ -2,6 +2,6 @@
 	"parent": "block/cube_all",
 	"textures":
 	{
-		"all": "mubble:block/space_obsidian/6"
+		"all": "mubble:block/dream_bedrock/7"
 	}
 }

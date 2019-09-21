@@ -2,6 +2,6 @@
 	"parent": "block/cube_all",
 	"textures":
 	{
-		"all": "mubble:block/space_jam/5"
+		"all": "mubble:block/dream_block/8"
 	}
 }
