@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:red_sandstone"
+		},
+		{
+			"item": "minecraft:cut_red_sandstone"
+		}
+	],
+	"result": "mubble:cut_red_sandstone_vertical_slab",
+	"count": 2
+}

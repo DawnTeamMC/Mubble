@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:cyan_concrete"
+	},
+	"result": "mubble:cyan_concrete_vertical_slab",
+	"count": 2
+}

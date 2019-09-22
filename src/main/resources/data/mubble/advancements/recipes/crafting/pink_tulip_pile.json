@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/pink_tulip_pile"
+		]
+	},
+	"criteria":
+	{
+		"has_flower":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:pink_tulip"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/pink_tulip_pile"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_flower",
+			"has_the_recipe"
+		]
+	]
+}

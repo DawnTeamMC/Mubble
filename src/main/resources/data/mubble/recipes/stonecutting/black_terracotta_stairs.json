@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:black_terracotta"
+	},
+	"result": "mubble:black_terracotta_stairs",
+	"count": 1
+}

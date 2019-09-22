@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:yellow_concrete"
+	},
+	"result": "mubble:yellow_concrete_slab",
+	"count": 2
+}

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:red_terracotta"
+	},
+	"result": "mubble:red_terracotta_vertical_slab",
+	"count": 2
+}

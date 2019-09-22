@@ -1,9 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
-		"item": "minecraft:polished_diorite"
-	},
-	"result": "mubble:polished_diorite_vertical_slab",
-	"count": 2
-}

@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:granite"
+		},
+		{
+			"item": "minecraft:polished_granite"
+		}
+	],
+	"result": "mubble:polished_granite_vertical_slab",
+	"count": 2
+}

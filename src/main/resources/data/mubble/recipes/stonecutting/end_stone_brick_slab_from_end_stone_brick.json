@@ -1,9 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
-		"item": "minecraft:end_stone_bricks"
-	},
-	"result": "mubble:end_stone_brick_vertical_slab",
-	"count": 2
-}

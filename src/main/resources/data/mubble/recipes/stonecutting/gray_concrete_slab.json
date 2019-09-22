@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:gray_concrete"
+	},
+	"result": "mubble:gray_concrete_slab",
+	"count": 2
+}

@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:white_terracotta"
+	},
+	"result": "mubble:white_terracotta_wall",
+	"count": 1
+}

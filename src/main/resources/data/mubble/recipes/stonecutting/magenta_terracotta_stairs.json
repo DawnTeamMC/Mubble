@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:magenta_terracotta"
+	},
+	"result": "mubble:magenta_terracotta_stairs",
+	"count": 1
+}

@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/crystallized_bismuth"
+		]
+	},
+	"criteria":
+	{
+		"has_bismuth_dust":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:bismuth_dust"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/crystallized_bismuth"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_bismuth_dust",
+			"has_the_recipe"
+		]
+	]
+}

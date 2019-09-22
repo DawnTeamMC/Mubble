@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:lime_concrete"
+	},
+	"result": "mubble:lime_concrete_wall",
+	"count": 1
+}

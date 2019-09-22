@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "mubble:blunite"
+		},
+		{
+			"item": "mubble:polished_blunite"
+		}
+	],
+	"result": "mubble:polished_blunite_vertical_slab",
+	"count": 2
+}
