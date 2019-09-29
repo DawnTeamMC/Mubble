@@ -547,7 +547,7 @@
 	"block.mubble.unstable_stone": "Instabiler Stein",
 	"block.mubble.fluid_tank": "Flüssigkeitsbehälter",
 	"block.mubble.placer": "Platzierer",
-	"//block.mubble.timeswap_table": "Timeswap Table",
+	"block.mubble.timeswap_table": "Zeitvertauschungstisch",
 
 	"block.mubble.dandelion_pile": "Löwenzahnhaufen",
 	"block.mubble.poppy_pile": "Mohnhaufen",
@@ -807,8 +807,8 @@
 	"block.mubble.old_site_brick_vertical_slab": "Senkrechte Ziegelstufe aus der alten Anlage",
 	"block.mubble.old_site_brick_wall": "Ziegelmauer aus der alten Anlage",
 	"block.mubble.elder_pebbles": "Ältester Kieselstein",
-	"//block.mubble.dream_block": "Dream Block",
-	"//block.mubble.dream_bedrock": "Dream Bedrock",
+	"block.mubble.dream_block": "Traumblock",
+	"block.mubble.dream_bedrock": "Traumgrundgestein",
 
 
 	"block.mubble.blue_puyo": "Blauer Puyo",
@@ -870,12 +870,12 @@
 	"item.mubble.wheat_flour": "Weizenmehl",
 	"item.mubble.caramel_cube": "Karamellwürfel",
 	"item.mubble.crepe": "Krepp",
-	"//item.mubble.sugar_crepe": "Sugar Crêpe",
+	"item.mubble.sugar_crepe": "Zuckerkrepp",
 	"item.mubble.chocolate_crepe": "Schokoladenkrepp",
 	"item.mubble.caramel_crepe": "Karamellkrepp",
-	"//item.mubble.honey_crepe": "Honey Crêpe",
-	"//item.mubble.sweet_berry_crepe": "Sweet Berry Crêpe",
-	"//item.mubble.blueberry_crepe": "Blueberry Crêpe",
+	"item.mubble.honey_crepe": "Honigkrepp",
+	"item.mubble.sweet_berry_crepe": "Süßbeerenkrepp",
+	"item.mubble.blueberry_crepe": "Blaubeerenkrepp",
 	"item.mubble.candy_cane": "Zuckerstange",
 	"item.mubble.burger": "Burger",
 	"item.mubble.tomato": "Tomate",
@@ -994,7 +994,7 @@
 	"item.mubble.bandana": "Kopftuch",
 
 
-	"//item.mubble.pikachu_ears": "Pikachu Ears",
+	"item.mubble.pikachu_ears": "Pikachus Ohren",
 	"item.mubble.snorlax_hat": "Snorlaxs Hut",
 
 
@@ -1021,7 +1021,7 @@
 
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Platzierer",
-	"//container.mubble.timeswap_table": "Timeswap Table",
+	"container.mubble.timeswap_table": "Zeitvertauschungstisch",
 
 
 
@@ -1058,7 +1058,7 @@
 	"subtitles.mubble.block.question_block.loot.power_up": "?-Block gibt Power-Up",
 	"subtitles.mubble.block.question_block.loot.coin": "?-Block gibt Münze",
 	"subtitles.mubble.block.note_block.jump": "Notenblock genutzt",
-	"//subtitles.mubble.block.door.key.success": "Key used",
+	"subtitles.mubble.block.door.key.success": "Schlüssel benutzt",
 	"subtitles.mubble.block.spring.trigger": "Feder ausgelöst",
 	"subtitles.mubble.item.cape_feather.use": "Federmütze benutzt",
 	"subtitles.mubble.item.smash_ball.use": "Smash-Ball benutzt",
@@ -1096,12 +1096,12 @@
 	"advancements.mubble.get_all_crowns.description": "Besorge alle Kronen",
 	"advancements.mubble.get_all_caps.title": "Supersterne",
 	"advancements.mubble.get_all_caps.description": "Besorge alle Mützen",
-	"advancements.mubble.get_vanadium.title": "Vanadiums!",
-	"advancements.mubble.get_vanadium.description": "Beschaffe vanadiums",
-	"//advancements.mubble.get_timeswap_table.title": "Retroactive",
-	"//advancements.mubble.get_timeswap_table.description": "Craft a Timeswap Table",
+	"advancements.mubble.get_vanadium.title": "Vanadium!",
+	"advancements.mubble.get_vanadium.description": "Beschaffe Vanadium",
+	"advancements.mubble.get_timeswap_table.title": "Retroaktiv",
+	"advancements.mubble.get_timeswap_table.description": "Stelle einen Zeitvertauschungstisch her",
 	"advancements.mubble.get_tetris_block.title": "Es Ist Alles Verbunden",
-	"advancements.mubble.get_tetris_block.description": "Halte einen Tetris-block.mubble in deiner Hand",
+	"advancements.mubble.get_tetris_block.description": "Halte deine Hand auf den Tetris-Block",
 
 
 
