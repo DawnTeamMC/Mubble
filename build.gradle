@@ -18,7 +18,7 @@ archivesBaseName = 'mubble'
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20190913-1.14.3'
+    mappings channel: 'snapshot', version: '20190929-1.14.3'
     runs {
         client = {
             properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -36,5 +36,5 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.4-28.1.1'
+    minecraft 'net.minecraftforge:forge:1.14.4-28.1.26'
 }
