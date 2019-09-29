@@ -16,15 +16,15 @@ public class OreBlock extends net.minecraft.block.OreBlock
     }
     
     @Override
-    protected int func_220281_a(Random p_220281_1_)
+    protected int getExperience(Random rand)
     {
-    	if (this == MubbleBlocks.VANADIUM_ORE) return MathHelper.nextInt(p_220281_1_, 4, 8);
-    	return super.func_220281_a(p_220281_1_);
+    	if (this == MubbleBlocks.VANADIUM_ORE) return MathHelper.nextInt(rand, 4, 8);
+    	return super.getExperience(rand);
     }
     
     @Override
-    public int getExpDrop(BlockState state, IWorldReader reader, BlockPos pos, int fortune, int silktouch)
+    public int getExpDrop(BlockState state, IWorldReader reader, BlockPos pos, int fortune, int silkTouch)
     {
-    	return silktouch == 0 ? this.func_220281_a(RANDOM) : 0;
+    	return silkTouch == 0 ? this.getExperience(RANDOM) : 0;
     }
 }

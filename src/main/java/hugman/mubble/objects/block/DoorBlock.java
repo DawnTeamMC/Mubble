@@ -104,19 +104,19 @@ public class DoorBlock extends net.minecraft.block.DoorBlock
     
     public SoundEvent getCloseSound(Block block)
     {
-    	if(block == MubbleBlocks.SMB_KEY_DOOR)
+    	if(block == MubbleBlocks.SMB_DOOR)
     	{
     		return MubbleSounds.BLOCK_DOOR_CLOSE_SMB;
     	}
-    	else if(block == MubbleBlocks.SMB3_KEY_DOOR)
+    	else if(block == MubbleBlocks.SMB3_DOOR)
     	{
     		return MubbleSounds.BLOCK_DOOR_CLOSE_SMB3;
     	}
-    	else if(block == MubbleBlocks.SMW_KEY_DOOR)
+    	else if(block == MubbleBlocks.SMW_DOOR)
     	{
     		return MubbleSounds.BLOCK_DOOR_CLOSE_SMW;
     	}
-    	else if(block == MubbleBlocks.NSMBU_KEY_DOOR)
+    	else if(block == MubbleBlocks.NSMBU_DOOR)
     	{
     		return MubbleSounds.BLOCK_DOOR_CLOSE_NSMBU;
     	}
