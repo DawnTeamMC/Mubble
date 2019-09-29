@@ -34,11 +34,11 @@ public class FlyingBlockRender extends EntityRenderer<FlyingBlockEntity>
    @Override
    public void doRender(FlyingBlockEntity entity, double x, double y, double z, float entityYaw, float partialTicks)
    {
-      BlockState iblockstate = entity.getBlockState();
-      if (iblockstate.getRenderType() == BlockRenderType.MODEL)
+      BlockState blockState = entity.getBlockState();
+      if (blockState.getRenderType() == BlockRenderType.MODEL)
       {
          World world = entity.getWorldObj();
-         if (iblockstate != world.getBlockState(new BlockPos(entity)) && iblockstate.getRenderType() != BlockRenderType.INVISIBLE)
+         if (blockState != world.getBlockState(new BlockPos(entity)) && blockState.getRenderType() != BlockRenderType.INVISIBLE)
          {
             this.bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
             GlStateManager.pushMatrix();
@@ -54,7 +54,7 @@ public class FlyingBlockRender extends EntityRenderer<FlyingBlockEntity>
             BlockPos blockpos = new BlockPos(entity.posX, entity.getBoundingBox().maxY, entity.posZ);
             GlStateManager.translatef((float)(x - (double)blockpos.getX() - 0.5D), (float)(y - (double)blockpos.getY()), (float)(z - (double)blockpos.getZ() - 0.5D));
             BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
-            blockrendererdispatcher.getBlockModelRenderer().renderModel(world, blockrendererdispatcher.getModelForState(iblockstate), iblockstate, blockpos, bufferbuilder, false, new Random(), iblockstate.getPositionRandom(entity.getOrigin()), EmptyModelData.INSTANCE);
+            blockrendererdispatcher.getBlockModelRenderer().renderModel(world, blockrendererdispatcher.getModelForState(blockState), blockState, blockpos, bufferbuilder, false, new Random(), blockState.getPositionRandom(entity.getOrigin()), EmptyModelData.INSTANCE);
             tessellator.draw();
             if (this.renderOutlines)
             {

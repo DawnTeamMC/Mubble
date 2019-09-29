@@ -37,6 +37,12 @@
 		"mubble:smw_snow_ground_block",
 		"mubble:smw_night_snow_ground_block",
 		"mubble:smw_sky_ground_block",
-		"mubble:nsmbu_ground_ground_block"
+		"mubble:nsmbu_ground_ground_block",
+		"mubble:nsmbu_underground_ground_block",
+		"mubble:nsmbu_castle_ground_block",
+		"mubble:nsmbu_desert_ground_block",
+		"mubble:nsmbu_snow_ground_block",
+		"mubble:nsmbu_night_snow_ground_block",
+		"mubble:nsmbu_sky_ground_block"
 	]
 }

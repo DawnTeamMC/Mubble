@@ -7,6 +7,7 @@ import com.google.common.collect.Lists;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.objects.block.FlyingBlock;
+import net.minecraft.block.AirBlock;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -83,9 +84,9 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 		return false;
 	}
 	
-	public void setOrigin(BlockPos p_184530_1_)
+	public void setOrigin(BlockPos pos)
 	{
-		this.dataManager.set(ORIGIN, p_184530_1_);
+		this.dataManager.set(ORIGIN, pos);
 	}
 
 	@OnlyIn(Dist.CLIENT)
@@ -140,7 +141,7 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 			}
 			if (!this.hasNoGravity())
 			{
-				this.setMotion(this.getMotion().add(0.0D, 0.04D, 0.0D));
+				this.setMotion(this.getMotion().add(0.0D, -0.04D, 0.0D));
 			}
 			this.move(MoverType.SELF, this.getMotion());
 			if (!this.world.isRemote)
@@ -158,9 +159,9 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	                   flag1 = true;
 	                }
 	             }
-				if(!this.onGround && !flag1)
+				if(/*!this.onGround && */!flag1)
 				{
-					if (this.flyTime > 100 && !this.world.isRemote && (blockpos1.getY() < 1 || blockpos1.getY() > 256) || this.flyTime > 600)
+					if(!this.world.isRemote && this.flyTime > 100 && !this.world.isRemote && (blockpos1.getY() < 1 || blockpos1.getY() > 256) || this.flyTime > 600)
 					{
 						if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 						{
@@ -237,7 +238,7 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	{
 		if (this.hurtEntities)
 		{
-			int i = MathHelper.ceil(distance + 1.0F);
+			int i = MathHelper.ceil(distance - 1.0F);
 			if (i > 0)
 			{
 				List<Entity> list = Lists.newArrayList(this.world.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox()));
@@ -302,9 +303,9 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 		{
 			this.tileEntityData = compound.getCompound("TileEntityData");
 		}
-		if(this.flyTile.getBlock() == Blocks.AIR)
+		if(this.flyTile.getBlock() instanceof AirBlock)
 		{
-			this.flyTile = Blocks.SAND.getDefaultState();
+			this.flyTile = MubbleBlocks.WHITE_BALLOON.getDefaultState();
 		}
 
 	}

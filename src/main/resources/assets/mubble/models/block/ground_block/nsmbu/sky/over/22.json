@@ -1,0 +1,9 @@
+{
+	"parent": "block/cube_bottom_top",
+	"textures":
+	{
+		"top": "mubble:block/ground_block/nsmbu/sky/over/top",
+		"side": "mubble:block/ground_block/nsmbu/sky/over/side/2",
+		"bottom": "mubble:block/ground_block/nsmbu/sky/block/2"
+	}
+}

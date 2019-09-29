@@ -1,23 +1,45 @@
 {
 	"variants":
 	{
-		"over=false":
-		[
-			{"model": "mubble:block/ground_block/nsmbu/ground/normal/1"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/normal/2"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/normal/3"}
-		],
+		"over=false": {"model": "mubble:block/ground_block/nsmbu/ground/normal"},
 		"over=true": 
 		[
-			{"model": "mubble:block/ground_block/nsmbu/ground/over/111"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/over/122"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/over/133"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/over/211"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/over/222"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/over/233"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/over/311"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/over/322"},
-			{"model": "mubble:block/ground_block/nsmbu/ground/over/333"}
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/11"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/12"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/13"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/21"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/22"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/23"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/31"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/32"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/33"},
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/11", "y": 90 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/12", "y": 90 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/13", "y": 90 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/21", "y": 90 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/22", "y": 90 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/23", "y": 90 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/31", "y": 90 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/32", "y": 90 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/33", "y": 90 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/11", "y": 180 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/12", "y": 180 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/13", "y": 180 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/21", "y": 180 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/22", "y": 180 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/23", "y": 180 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/31", "y": 180 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/32", "y": 180 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/33", "y": 180 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/11", "y": 270 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/12", "y": 270 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/13", "y": 270 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/21", "y": 270 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/22", "y": 270 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/23", "y": 270 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/31", "y": 270 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/32", "y": 270 },
+			{"model": "mubble:block/ground_block/nsmbu/ground/over/33", "y": 270 }
 		]
 	}
 }
