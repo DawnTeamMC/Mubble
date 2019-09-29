@@ -34,8 +34,12 @@ public class MubbleItems
     public static final Item BAGUETTE = item("baguette", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.BAGUETTE)));
     public static final Item BURGER = item("burger", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.BURGER)));
     public static final Item CREPE = item("crepe", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.CREPE)));
+    public static final Item SUGAR_CREPE = item("sugar_crepe", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.SUGAR_CREPE)));
     public static final Item CHOCOLATE_CREPE = item("chocolate_crepe", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.CHOCOLATE_CREPE)));
     public static final Item CARAMEL_CREPE = item("caramel_crepe", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.CARAMEL_CREPE)));
+    public static final Item HONEY_CREPE = item("honey_crepe", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.HONEY_CREPE)));
+    public static final Item SWEET_BERRY_CREPE = item("sweet_berry_crepe", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.SWEET_BERRY_CREPE)));
+    public static final Item BLUEBERRY_CREPE = item("blueberry_crepe", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.BLUEBERRY_CREPE)));
     public static final Item CANDY_CANE = item("candy_cane", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.CANDY_CANE)));
     public static final Item VANADIUM = item("vanadium", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item BISMUTH_DUST = item("bismuth_dust", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));

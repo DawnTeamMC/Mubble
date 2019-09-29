@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:blueberries"
+		},
+		{
+			"item": "mubble:crepe"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:blueberry_crepe"
+	}
+}
