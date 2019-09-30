@@ -706,8 +706,11 @@ public class MubbleBlocks
     public static final Block SMW_SKY_GROUND_BLOCK = block("smw_sky_ground_block", new OverBlock(Properties.from(Blocks.WHITE_WOOL)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_GROUND_GROUND_BLOCK = block("nsmbu_ground_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_UNDERGROUND_GROUND_BLOCK = block("nsmbu_underground_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block NSMBU_UNDERWATER_GROUND_BLOCK = block("nsmbu_underwater_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block NSMBU_GHOST_HOUSE_GROUND_BLOCK = block("nsmbu_ghost_house_ground_block", new OverBlock(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_CASTLE_GROUND_BLOCK = block("nsmbu_castle_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_DESERT_GROUND_BLOCK = block("nsmbu_desert_ground_block", new OverBlock(Properties.from(Blocks.SAND)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block NSMBU_FOREST_GROUND_BLOCK = block("nsmbu_forest_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_SNOW_GROUND_BLOCK = block("nsmbu_snow_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_NIGHT_SNOW_GROUND_BLOCK = block("nsmbu_night_snow_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_SKY_GROUND_BLOCK = block("nsmbu_sky_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
