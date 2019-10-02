@@ -10,8 +10,14 @@ displayName="Mubble"
 updateJSONURL="https://raw.githubusercontent.com/Hugman76/Mubble/1.14/update.json"
 displayURL="https://sites.google.com/view/mubblemc"
 credits="https://ftb.gamepedia.com/Mubble/Credits"
-authors="Hugman_76"
-description='''Discover the Nintendo Universe and way more.'''
+authors="Hugman"
+description='''
+    Mubble is a very complete mod that adds many useful blocks, items and costumes that feel very natural to Minecraft vanilla. 
+
+    This mod also includes a ton of content based around Nintendo (a lot of Super Mario Maker 2 content) and indie games such as Celeste and Castlevania.
+
+    Please visit the Mubble pages on the FTB Wiki for more information.
+'''
 
 [[dependencies.mubble]]
 modId="forge"

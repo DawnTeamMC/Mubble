@@ -626,6 +626,7 @@ public class MubbleBlocks
     public static final Block SALAD = block("salad", new CropsBlock());
     public static final Block BLUEBERRY_BUSH = block("blueberry_bush", new BerryBushBlock(Properties.create(Material.PLANTS).tickRandomly().doesNotBlockMovement().sound(SoundType.SWEET_BERRY_BUSH)));
     public static final Block CHEESE_BLOCK = block("cheese_block", new Block(Properties.create(Material.ORGANIC, MaterialColor.YELLOW).hardnessAndResistance(0.5f).sound(SoundType.SNOW)), ItemGroup.FOOD, OTHERS);
+    public static final Block CHOCOLATE_CAKE = block("chocolate_cake", new CakeBlock(), ItemGroup.FOOD, OTHERS);
     public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = block("minecraft_10th_anniversary_cake", new CakeBlock(), ItemGroup.FOOD, OTHERS);
     
     public static final Block WHITE_BALLOON = block("white_balloon", new BalloonBlock(DyeColor.WHITE), ItemGroup.DECORATIONS, CUBES);
