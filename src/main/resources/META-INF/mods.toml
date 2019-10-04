@@ -5,7 +5,7 @@ logoFile="logo.png"
 
 [[mods]]
 modId="mubble"
-version="1.4"
+version="2.0"
 displayName="Mubble"
 updateJSONURL="https://raw.githubusercontent.com/Hugman76/Mubble/1.14/update.json"
 displayURL="https://sites.google.com/view/mubblemc"
