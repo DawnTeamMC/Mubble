@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:blunite"
+	},
+	"result": "mubble:polished_blunite",
+	"count": 1
+}

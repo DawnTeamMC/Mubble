@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:carbonite"
+	},
+	"result": "mubble:carbonite_slab",
+	"count": 2
+}
