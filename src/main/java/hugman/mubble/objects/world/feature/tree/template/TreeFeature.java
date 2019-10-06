@@ -39,8 +39,14 @@ public class TreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 			for(int j = position.getY(); j <= position.getY() + 1 + i; ++j)
 			{
 				int k = 1;
-	            if (j == position.getY()) k = 0;
-	            if (j >= position.getY() + 1 + i - 2) k = 2;
+	            if (j == position.getY())
+	            {
+	            	k = 0;
+	            }
+	            if (j >= position.getY() + 1 + i - 2)
+	            {
+	            	k = 2;
+	            }
 	            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
 	            for(int l = position.getX() - k; l <= position.getX() + k && flag; ++l)
 	            {
@@ -48,7 +54,10 @@ public class TreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 	            	{
 	            		if (j >= 0 && j < worldIn.getMaxHeight())
 	            		{
-	            			if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(l, j, i1))) flag = false;
+	            			if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(l, j, i1)))
+	            			{
+	            				flag = false;
+	            			}
 	            		}
 	            		else flag = false;
 	            	}

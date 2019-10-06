@@ -51,19 +51,26 @@ public class PalmTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 	            	{
 	            		if (j >= 0 && j < worldIn.getMaxHeight())
 	            		{
-	            			if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(l, j, i1))) flag = false;
+	            			if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(l, j, i1)))
+	            			{
+	            				flag = false;
+	            			}
 	            		}
 	            		else flag = false;
 	            	}
 	            }
-	         }
-
-	         if(!flag) return false;
-	         else if(isSoil(worldIn, position.down(), SAPLING) && position.getY() < worldIn.getMaxHeight() - i - 1)
-			 {
-		 		int originX = position.getX();
+			}
+			
+			if(!flag)
+	        {
+				return false;
+	        }
+			else if(isSoil(worldIn, position.down(), SAPLING) && position.getY() < worldIn.getMaxHeight() - i - 1)
+			{
+				int originX = position.getX();
 		 		int originY = position.getY() + i - 1;
 		 		int originZ = position.getZ();
+		 		this.setDirtAt(worldIn, position.down(), position);
 		 		placeLeaves(changedBlocks, worldIn, originX, originY + 1, originZ, boundingBox);
 		 		placeLeaves(changedBlocks, worldIn, originX + 1, originY + 1, originZ, boundingBox);
 		 		placeLeaves(changedBlocks, worldIn, originX - 1, originY + 1, originZ, boundingBox);
@@ -143,18 +150,21 @@ public class PalmTreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 			 			this.setLogState(changedBlocks, worldIn, position.up(i3), LOG, boundingBox);
 			 		}
 			 	}
-			 }
+			}
 		}
-		return false;
+		else
+		{
+			return false;
+		}
+		return flag;
 	}
 	
 	public void placeLeaves(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, int x, int y, int z, MutableBoundingBox boundingBox)
 	{
 		BlockPos blockPos = new BlockPos(x, y, z);
-		if(isAirOrLeaves(worldIn, blockPos) || isTallPlants(worldIn, blockPos))
+		if (isAirOrLeaves(worldIn, blockPos) || isTallPlants(worldIn, blockPos))
 		{
-			boundingBox.expandTo(new MutableBoundingBox(blockPos, blockPos));
-			worldIn.setBlockState(blockPos, LEAVES, 3);
+			this.setLogState(changedBlocks, worldIn, blockPos, LEAVES, boundingBox);
 		}
 	}
 }
