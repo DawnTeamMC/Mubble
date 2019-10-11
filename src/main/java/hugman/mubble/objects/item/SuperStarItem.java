@@ -18,7 +18,10 @@ public class SuperStarItem extends Item
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving)
     {
-    	worldIn.playMovingSound((PlayerEntity)null, entityLiving, MubbleSounds.ITEM_SUPER_STAR_THEME, SoundCategory.PLAYERS, 1.0F, 1.0F);
+    	if (!worldIn.isRemote)
+    	{
+        	worldIn.playMovingSound((PlayerEntity)null, entityLiving, MubbleSounds.ITEM_SUPER_STAR_THEME, SoundCategory.PLAYERS, 1.0F, 1.0F);
+    	}
 		return super.onItemUseFinish(stack, worldIn, entityLiving);
     }
 }
