@@ -4,6 +4,7 @@ import java.util.Random;
 
 import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.objects.entity.FlyingBlockEntity;
+import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -68,7 +69,7 @@ public class FlyingBlock extends Block
     {
         Block block = state.getBlock();
         Material material = state.getMaterial();
-        return block == Blocks.AIR || block == Blocks.FIRE || block.isIn(MubbleTags.Blocks.CLOUD_BLOCKS) || material.isLiquid() || material.isReplaceable();
+        return block instanceof AirBlock || block == Blocks.FIRE || block.isIn(MubbleTags.Blocks.CLOUD_BLOCKS) || material.isLiquid() || material.isReplaceable();
      }
 
 	public void onEndFlying(World worldIn, BlockPos pos, BlockState flyingState, BlockState hitState)
