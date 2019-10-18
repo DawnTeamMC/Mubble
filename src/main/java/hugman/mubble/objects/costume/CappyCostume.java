@@ -2,7 +2,6 @@ package hugman.mubble.objects.costume;
 
 import java.util.Random;
 
-import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,15 +10,15 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
 public class CappyCostume extends HeadCostume
 {    
-    public CappyCostume()
+    public CappyCostume(Properties builder, SoundEvent sound)
     {
-        super(MubbleCostumes.pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+        super(builder, sound);
     }
     
 	@Override

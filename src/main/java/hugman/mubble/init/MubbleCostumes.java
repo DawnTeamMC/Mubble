@@ -7,13 +7,14 @@ import hugman.mubble.Mubble;
 import hugman.mubble.objects.block.block_state_property.Princess;
 import hugman.mubble.objects.costume.BlockCostume;
 import hugman.mubble.objects.costume.CappyCostume;
+import hugman.mubble.objects.costume.CrownCostume;
 import hugman.mubble.objects.costume.GooigiCapCostume;
 import hugman.mubble.objects.costume.GuardianMaskCostume;
 import hugman.mubble.objects.costume.HeadCostume;
 import hugman.mubble.objects.costume.MayroCapCostume;
-import hugman.mubble.objects.costume.CrownCostume;
 import hugman.mubble.objects.costume.VanishCapCostume;
 import hugman.mubble.objects.costume.WingCapCostume;
+import hugman.mubble.util.Shaders;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -27,15 +28,33 @@ public class MubbleCostumes
 	public static final List<Item> COSTUMES = new ArrayList<Item>();
 
 	/* Templates */
-	public static final Item.Properties pSimple = new Item.Properties().group(MubbleTabs.COSTUMES).maxStackSize(1);
-	public static final Item.Properties pBlockDecorations = new Item.Properties().group(ItemGroup.DECORATIONS);
+	protected static final Item.Properties pSimple = new Item.Properties().group(MubbleTabs.COSTUMES).maxStackSize(1);
+	protected static final Item.Properties pBlockDecorations = new Item.Properties().group(ItemGroup.DECORATIONS);
 	
 	/* MINECRAFT */
 	public static final Item HEADPHONES = costume("headphones", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
+	
+	public static final Item WHITE_VIRTUAL_GOOGLES = costume("white_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.WHITE_RETRO));
+	public static final Item LIGHT_GRAY_VIRTUAL_GOOGLES = costume("light_gray_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.LIGHT_GRAY_RETRO));
+	public static final Item GRAY_VIRTUAL_GOOGLES = costume("gray_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.GRAY_RETRO));
+	public static final Item BLACK_VIRTUAL_GOOGLES = costume("black_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.BLACK_RETRO));
+	public static final Item BROWN_VIRTUAL_GOOGLES = costume("brown_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.BROWN_RETRO));
+	public static final Item RED_VIRTUAL_GOOGLES = costume("red_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.RED_RETRO));
+	public static final Item ORANGE_VIRTUAL_GOOGLES = costume("orange_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.ORANGE_RETRO));
+	public static final Item YELLOW_VIRTUAL_GOOGLES = costume("yellow_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.YELLOW_RETRO));
+	public static final Item LIME_VIRTUAL_GOOGLES = costume("lime_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.LIME_RETRO));
+	public static final Item GREEN_VIRTUAL_GOOGLES = costume("green_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.GREEN_RETRO));
+	public static final Item CYAN_VIRTUAL_GOOGLES = costume("cyan_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.CYAN_RETRO));
+	public static final Item LIGHT_BLUE_VIRTUAL_GOOGLES = costume("light_blue_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.LIGHT_BLUE_RETRO));
+	public static final Item BLUE_VIRTUAL_GOOGLES = costume("blue_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.BLUE_RETRO));
+	public static final Item PURPLE_VIRTUAL_GOOGLES = costume("purple_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.PURPLE_RETRO));
+	public static final Item MAGENTA_VIRTUAL_GOOGLES = costume("magenta_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.MAGENTA_RETRO));
+	public static final Item PINK_VIRTUAL_GOOGLES = costume("pink_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.PINK_RETRO));
+	
 	public static final Item CHRISTMAS_HAT = costume("christmas_hat", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 
 	/* SUPER MARIO */
-	public static final Item CAPPY = costume("cappy", new CappyCostume());
+	public static final Item CAPPY = costume("cappy", new CappyCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 	public static final Item LUIGI_CAP = costume("luigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new EffectInstance(Effects.JUMP_BOOST, 5, 0), new EffectInstance(Effects.SPEED, 5, 0)));
 	public static final Item WARIO_CAP = costume("wario_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new EffectInstance(Effects.SLOWNESS, 5, 0), new EffectInstance(Effects.STRENGTH, 5, 0)));
 	public static final Item WALUIGI_CAP = costume("waluigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new EffectInstance(Effects.JUMP_BOOST, 5, 1)));

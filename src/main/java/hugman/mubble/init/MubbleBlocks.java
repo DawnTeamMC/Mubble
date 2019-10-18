@@ -734,8 +734,8 @@ public class MubbleBlocks
     public static final Block SMW_BRICK_BLOCK = block("smw_brick_block", new BrickBlock(MubbleSoundTypes.SMW_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_BRICK_BLOCK = block("nsmbu_brick_block", new BrickBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_GOLDEN_BRICK_BLOCK = block("smb_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMB3_GOLDEN_BRICK_BLOCK = block("smb3_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMW_GOLDEN_BRICK_BLOCK = block("smw_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB3_GOLDEN_BRICK_BLOCK = block("smb3_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_GOLDEN_BRICK_BLOCK = block("smw_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMW_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_GOLDEN_BRICK_BLOCK = block("nsmbu_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_GROUND_HARD_BLOCK = block("smb_ground_hard_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_UNDERGROUND_HARD_BLOCK = block("smb_underground_hard_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);

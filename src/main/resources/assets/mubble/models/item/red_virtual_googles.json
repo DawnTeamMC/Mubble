@@ -1,0 +1,7 @@
+{
+	"parent":"mubble:item/virtual_googles",
+	"textures":
+	{
+		"glass": "mubble:costume/virtual_googles/glass/red"
+	}
+}

@@ -980,6 +980,24 @@
 
 	"comment": "COSTUMES",
 	"item.mubble.headphones": "耳机",
+
+	"//item.mubble.white_virtual_googles": "White Virtual Googles",
+	"//item.mubble.light_gray_virtual_googles": "Light Gray Virtual Googles",
+	"//item.mubble.gray_virtual_googles": "Gray Virtual Googles",
+	"//item.mubble.black_virtual_googles": "Black Virtual Googles",
+	"//item.mubble.brown_virtual_googles": "Brown Virtual Googles",
+	"//item.mubble.red_virtual_googles": "Red Virtual Googles",
+	"//item.mubble.orange_virtual_googles": "Orange Virtual Googles",
+	"//item.mubble.yellow_virtual_googles": "Yellow Virtual Googles",
+	"//item.mubble.lime_virtual_googles": "Lime Virtual Googles",
+	"//item.mubble.green_virtual_googles": "Green Virtual Googles",
+	"//item.mubble.cyan_virtual_googles": "Cyan Virtual Googles",
+	"//item.mubble.light_blue_virtual_googles": "Light Blue Virtual Googles",
+	"//item.mubble.blue_virtual_googles": "Blue Virtual Googles",
+	"//item.mubble.purple_virtual_googles": "Purple Virtual Googles",
+	"//item.mubble.magenta_virtual_googles": "Magenta Virtual Googles",
+	"//item.mubble.pink_virtual_googles": "Pink Virtual Googles",
+	
 	"//item.mubble.christmas_hat": "<newline>",
 
 

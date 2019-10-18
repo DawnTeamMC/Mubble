@@ -63,7 +63,7 @@ public class MubbleBiomes
     	BiomeManager.addSpawnBiome(WHITE_CHERRY_OAK_FOREST);
     	
     	BiomeDictionary.addTypes(PRESS_GARDEN, FOREST);
-    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(PRESS_GARDEN, 10));
+    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(PRESS_GARDEN, 1));
     	BiomeManager.addSpawnBiome(PRESS_GARDEN);
     	
     	BiomeDictionary.addTypes(SMW_DESERT, HOT, DRY, SANDY);

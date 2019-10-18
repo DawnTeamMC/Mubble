@@ -1,12 +1,20 @@
 package hugman.mubble.init;
 
+import com.mojang.blaze3d.platform.GLX;
+
 import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.objects.block.PermafrostPortalBlock;
+import hugman.mubble.objects.costume.BlockCostume;
+import hugman.mubble.objects.costume.Costume;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FireBlock;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.EffectInstance;
@@ -42,7 +50,33 @@ public class MubbleEvents
 		ItemStack headItem = entity.getItemStackFromSlot(EquipmentSlotType.HEAD);
 		if(!world.isRemote)
 		{
-			if(MubbleTags.Items.WEIGHT_HEAVY.contains(headItem.getItem())) entity.addPotionEffect(new EffectInstance(MubbleEffects.HEAVINESS, 25, 0));
+			if(MubbleTags.Items.WEIGHT_HEAVY.contains(headItem.getItem()))
+			{
+				entity.addPotionEffect(new EffectInstance(MubbleEffects.HEAVINESS, 25, 0));
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onArmorChange(LivingUpdateEvent event)
+	{
+		LivingEntity entity = event.getEntityLiving();
+		World world = entity.getEntityWorld();
+		ItemStack headItem = entity.getItemStackFromSlot(EquipmentSlotType.HEAD);	
+		if(entity instanceof PlayerEntity && world.isRemote)
+		{
+			GameRenderer renderer = Minecraft.getInstance().gameRenderer;
+			ShaderGroup shaderGroup = renderer.getShaderGroup();
+			if(GLX.usePostProcess)
+			{
+				if(!(headItem.getItem() instanceof Costume) && !(headItem.getItem() instanceof BlockCostume))
+				{
+					if(shaderGroup != null)
+					{
+						shaderGroup.close();
+					}
+				}
+			}
 		}
 	}
 	
