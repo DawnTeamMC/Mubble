@@ -1,10 +1,10 @@
 package hugman.mubble.objects.costume;
 
 import java.util.List;
-import java.util.UUID;
 
 import com.mojang.blaze3d.platform.GLX;
 
+import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleCostumes;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.Minecraft;
@@ -137,19 +137,20 @@ public class Costume extends Item
         	playerIn.setItemStackToSlot(armorType, itemstack.copy());
         	itemstack.shrink(1);
         	worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
-        	if(this == MubbleCostumes.SNORLAX_HAT && playerIn.getGameProfile().getId() == UUID.fromString("202d33ae3f81418b8282926f9d689f1f"))
+        	Mubble.LOGGER.info(playerIn.getGameProfile().getId().toString());
+        	if(this == MubbleCostumes.SNORLAX_HAT && playerIn.getGameProfile().getId().toString() == "202d33ae-3f81-418b-8282-926f9d689f1f")
         	{
         		playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.snorlax_hat.secret_status", new Object[0]), true);
         	}
-        	else if(this == MubbleCostumes.MAYRO_CAP && playerIn.getGameProfile().getId() == UUID.fromString("8cf615194ac24d609d65d0c7abcf4524"))
+        	else if(this == MubbleCostumes.MAYRO_CAP && playerIn.getGameProfile().getId().toString() == "8cf61519-4ac2-4d60-9d65-d0c7abcf4524")
         	{
         		playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.mayro_cap.secret_status", new Object[0]), true);
         	}
-        	else if(this == MubbleCostumes.NOTEBLOCK_HEAD && playerIn.getGameProfile().getId() == UUID.fromString("5a68af56e29344e9bbf821d58300b3f3"))
+        	else if(this == MubbleCostumes.NOTEBLOCK_HEAD && playerIn.getGameProfile().getId().toString() == "5a68af56-e293-44e9-bbf8-21d58300b3f3")
         	{
         		playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.noteblock_head.secret_status", new Object[0]), true);
         	}
-        	else if(this == MubbleCostumes.BANDANA && playerIn.getGameProfile().getId() == UUID.fromString("1805e857329e463e8ca8122fcc686996"))
+        	else if(this == MubbleCostumes.BANDANA && playerIn.getGameProfile().getId().toString() == "1805e857-329e-463e-8ca8-122fcc686996")
         	{
         		playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.bandana.secret_status", new Object[0]), true);
         	}
