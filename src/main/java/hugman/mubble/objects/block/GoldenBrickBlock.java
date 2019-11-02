@@ -51,7 +51,6 @@ public class GoldenBrickBlock extends Block
     public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
     {
     	if(worldIn.isBlockPowered(pos)) loot(worldIn, pos);
-    	state.neighborChanged(worldIn, pos, blockIn, fromPos, isMoving);
     }
     
     @Override

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.mojang.blaze3d.platform.GLX;
 
-import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleCostumes;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.Minecraft;
@@ -137,12 +136,7 @@ public class Costume extends Item
         	playerIn.setItemStackToSlot(armorType, itemstack.copy());
         	itemstack.shrink(1);
         	worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
-        	Mubble.LOGGER.info(playerIn.getGameProfile().getId().toString());
-        	if(this == MubbleCostumes.SNORLAX_HAT && playerIn.getGameProfile().getId().toString() == "202d33ae-3f81-418b-8282-926f9d689f1f")
-        	{
-        		playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.snorlax_hat.secret_status", new Object[0]), true);
-        	}
-        	else if(this == MubbleCostumes.MAYRO_CAP && playerIn.getGameProfile().getId().toString() == "8cf61519-4ac2-4d60-9d65-d0c7abcf4524")
+        	if(this == MubbleCostumes.MAYRO_CAP && playerIn.getGameProfile().getId().toString() == "8cf61519-4ac2-4d60-9d65-d0c7abcf4524")
         	{
         		playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.mayro_cap.secret_status", new Object[0]), true);
         	}
