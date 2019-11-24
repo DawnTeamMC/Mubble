@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 public class Shaders
 {
     public static final List<ResourceLocation> SHADERS = new ArrayList<ResourceLocation>();
+    public static final List<ResourceLocation> RETRO_SHADERS = new ArrayList<ResourceLocation>();
     
 	public static final ResourceLocation ANTIALIAS = register("minecraft", "antialias");
 	public static final ResourceLocation ART = register("minecraft", "art");
@@ -36,27 +37,35 @@ public class Shaders
 	public static final ResourceLocation SPIDER = register("minecraft", "spider");
 	public static final ResourceLocation WOBBLE = register("minecraft", "wobble");
 
-	public static final ResourceLocation WHITE_RETRO = register(Mubble.MOD_ID, "retro/white");
-	public static final ResourceLocation LIGHT_GRAY_RETRO = register(Mubble.MOD_ID, "retro/light_gray");
-	public static final ResourceLocation GRAY_RETRO = register(Mubble.MOD_ID, "retro/gray");
-	public static final ResourceLocation BLACK_RETRO = register(Mubble.MOD_ID, "retro/black");
-	public static final ResourceLocation BROWN_RETRO = register(Mubble.MOD_ID, "retro/brown");
-	public static final ResourceLocation RED_RETRO = register(Mubble.MOD_ID, "retro/red");
-	public static final ResourceLocation ORANGE_RETRO = register(Mubble.MOD_ID, "retro/orange");
-	public static final ResourceLocation YELLOW_RETRO = register(Mubble.MOD_ID, "retro/yellow");
-	public static final ResourceLocation LIME_RETRO = register(Mubble.MOD_ID, "retro/lime");
-	public static final ResourceLocation GREEN_RETRO = register(Mubble.MOD_ID, "retro/green");
-	public static final ResourceLocation CYAN_RETRO = register(Mubble.MOD_ID, "retro/cyan");
-	public static final ResourceLocation LIGHT_BLUE_RETRO = register(Mubble.MOD_ID, "retro/light_blue");
-	public static final ResourceLocation BLUE_RETRO = register(Mubble.MOD_ID, "retro/blue");
-	public static final ResourceLocation PURPLE_RETRO = register(Mubble.MOD_ID, "retro/purple");
-	public static final ResourceLocation MAGENTA_RETRO = register(Mubble.MOD_ID, "retro/magenta");
-	public static final ResourceLocation PINK_RETRO = register(Mubble.MOD_ID, "retro/pink");
+	public static final ResourceLocation WHITE_RETRO = register(Mubble.MOD_ID, "retro/white", RETRO_SHADERS);
+	public static final ResourceLocation LIGHT_GRAY_RETRO = register(Mubble.MOD_ID, "retro/light_gray", RETRO_SHADERS);
+	public static final ResourceLocation GRAY_RETRO = register(Mubble.MOD_ID, "retro/gray", RETRO_SHADERS);
+	public static final ResourceLocation BLACK_RETRO = register(Mubble.MOD_ID, "retro/black", RETRO_SHADERS);
+	public static final ResourceLocation BROWN_RETRO = register(Mubble.MOD_ID, "retro/brown", RETRO_SHADERS);
+	public static final ResourceLocation RED_RETRO = register(Mubble.MOD_ID, "retro/red", RETRO_SHADERS);
+	public static final ResourceLocation ORANGE_RETRO = register(Mubble.MOD_ID, "retro/orange", RETRO_SHADERS);
+	public static final ResourceLocation YELLOW_RETRO = register(Mubble.MOD_ID, "retro/yellow", RETRO_SHADERS);
+	public static final ResourceLocation LIME_RETRO = register(Mubble.MOD_ID, "retro/lime", RETRO_SHADERS);
+	public static final ResourceLocation GREEN_RETRO = register(Mubble.MOD_ID, "retro/green", RETRO_SHADERS);
+	public static final ResourceLocation CYAN_RETRO = register(Mubble.MOD_ID, "retro/cyan", RETRO_SHADERS);
+	public static final ResourceLocation LIGHT_BLUE_RETRO = register(Mubble.MOD_ID, "retro/light_blue", RETRO_SHADERS);
+	public static final ResourceLocation BLUE_RETRO = register(Mubble.MOD_ID, "retro/blue", RETRO_SHADERS);
+	public static final ResourceLocation PURPLE_RETRO = register(Mubble.MOD_ID, "retro/purple", RETRO_SHADERS);
+	public static final ResourceLocation MAGENTA_RETRO = register(Mubble.MOD_ID, "retro/magenta", RETRO_SHADERS);
+	public static final ResourceLocation PINK_RETRO = register(Mubble.MOD_ID, "retro/pink", RETRO_SHADERS);
 	
 	private static ResourceLocation register(String namespace, String name)
 	{
 		ResourceLocation shaderRL = new ResourceLocation(namespace, "shaders/post/" + name + ".json");
 		SHADERS.add(shaderRL);
+		return shaderRL;
+	}
+	
+	private static ResourceLocation register(String namespace, String name, List<ResourceLocation> aditionalList)
+	{
+		ResourceLocation shaderRL = new ResourceLocation(namespace, "shaders/post/" + name + ".json");
+		SHADERS.add(shaderRL);
+		aditionalList.add(shaderRL);
 		return shaderRL;
 	}
 }

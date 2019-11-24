@@ -6,6 +6,7 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleLootTables;
 import hugman.mubble.init.data.MubbleTags;
+import hugman.mubble.util.CalendarEvents;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;
@@ -97,7 +98,8 @@ public class ToadEntity extends AnimalEntity
     @Override
     protected SoundEvent getAmbientSound() 
     {
-        return MubbleSounds.ENTITY_TOAD_AMBIENT;
+    	if(CalendarEvents.isAprilFools) return MubbleSounds.ENTITY_TOAD_BUP;
+    	else return MubbleSounds.ENTITY_TOAD_AMBIENT;
     }
     
     @Override

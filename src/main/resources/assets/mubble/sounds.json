@@ -479,6 +479,14 @@
 			"mubble:entity/toad/ambient13"
 		]
 	},
+	"entity.toad.bup":
+	{
+		"subtitle": "subtitles.mubble.entity.toad.ambient",
+		"sounds":
+		[
+			"mubble:entity/toad/ambient4"
+		]
+	},
 	"entity.toad.hurt":
 	{
 		"subtitle": "subtitles.mubble.entity.toad.hurt",

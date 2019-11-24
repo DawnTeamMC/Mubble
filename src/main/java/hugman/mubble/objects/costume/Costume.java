@@ -1,10 +1,13 @@
 package hugman.mubble.objects.costume;
 
 import java.util.List;
+import java.util.Random;
 
 import com.mojang.blaze3d.platform.GLX;
 
 import hugman.mubble.init.MubbleCostumes;
+import hugman.mubble.util.CalendarEvents;
+import hugman.mubble.util.Shaders;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
@@ -55,7 +58,15 @@ public class Costume extends Item
 		this.equipSound = sound;
 	    this.armorType = armorType;
 	    this.effects = potionEffects;
-        this.shader = shader;
+    	if(Shaders.RETRO_SHADERS.contains(shader) && CalendarEvents.isAprilFools)
+    	{
+    		Random rand = new Random();
+    		this.shader = Shaders.RETRO_SHADERS.get(rand.nextInt(Shaders.RETRO_SHADERS.size()));
+    	}
+    	else
+    	{
+            this.shader = shader;
+    	}
 	    DispenserBlock.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
     }
     

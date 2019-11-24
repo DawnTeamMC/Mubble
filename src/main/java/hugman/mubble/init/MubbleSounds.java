@@ -71,6 +71,7 @@ public class MubbleSounds
 	public static final SoundEvent ENTITY_CHINCHO_HURT = register("entity.chincho.hurt");
 	public static final SoundEvent ENTITY_CHINCHO_DEATH = register("entity.chincho.death");
 	public static final SoundEvent ENTITY_TOAD_AMBIENT = register("entity.toad.ambient");
+	public static final SoundEvent ENTITY_TOAD_BUP = register("entity.toad.bup");
 	public static final SoundEvent ENTITY_TOAD_HURT = register("entity.toad.hurt");
 	public static final SoundEvent ENTITY_TOAD_DEATH = register("entity.toad.death");
 	public static final SoundEvent ENTITY_GOOMBA_STEP = register("entity.goomba.step");

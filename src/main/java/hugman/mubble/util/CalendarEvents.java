@@ -10,14 +10,15 @@ public class CalendarEvents
 	public static int monthToday = localdate.get(ChronoField.MONTH_OF_YEAR);
     
 	public static boolean isNewYear = checkDay(1, 1);
-	public static boolean isTodayTemp = checkDay(12, 8);
+	public static boolean isTodayTemp = checkDay(24, 11);
 	public static boolean isAprilFools = checkDay(1, 4);
 	public static boolean isJulesBirthday = checkDay(9, 3);
 	public static boolean isMarkBirthday = checkDay(1, 4);
 	public static boolean isJoaquinBirthday = checkDay(18, 6);
 	public static boolean isMubbleBirthday = checkDay(14, 7);
 	public static boolean isAngelicaBirthday = checkDay(11, 8);
-	public static boolean isHugmanBirthday = checkDay(3, 10);
+	public static boolean isHugoBirthday = checkDay(3, 10);
+	public static boolean isAlexandreBirthday = checkDay(20, 11);
 	public static boolean isChristmas = checkBeetweenDays(23, 12, 25, 12);
 	
 	public static int getDayToday()
