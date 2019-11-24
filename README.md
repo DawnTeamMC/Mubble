@@ -1,6 +1,6 @@
-[![](http://cf.way2muchnoise.eu/full_mubble_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/mubble)
-[![](http://cf.way2muchnoise.eu/versions/Available%20For%20Minecraft_mubble_all.svg)](https://www.curseforge.com/minecraft/mc-mods/mubble)
-[![](http://cf.way2muchnoise.eu/packs/mubble.svg)](https://www.curseforge.com/minecraft/mc-mods/mubble)
+[![](http://cf.way2muchnoise.eu/full_mubble_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/mubble)
+[![](http://cf.way2muchnoise.eu/versions/Available%20For%20Minecraft_mubble_all.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/mubble)
+[![](http://cf.way2muchnoise.eu/packs/mubble.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/mubble)
 
 # Mubble - A Minecraft Mod
 Mubble is a Minecraft mod featuring unique additions to Minecraft, such as new wood types, new colorful blocks, new food, new mobs, new musics and way more is to come next! Mubble also offers many new ways to players to build and experience the world of Minecraft with their favorite Nintendo franchises. With that in their hands, players are capable of building up the biggest cross-over world of their dreams! In creative through the tabs or in survival through recipes, everything is easily found and they work as you think they should!
