@@ -49,7 +49,6 @@ public class MubbleBiomes
     
     public static void registerGenerations()
     {
-    	
     	BiomeDictionary.addTypes(AUTUMN_OAK_FOREST, FOREST);
     	BiomeManager.addBiome(BiomeType.WARM, new BiomeEntry(AUTUMN_OAK_FOREST, 10));
     	BiomeManager.addSpawnBiome(AUTUMN_OAK_FOREST);

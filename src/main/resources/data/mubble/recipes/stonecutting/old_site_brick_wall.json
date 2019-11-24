@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:old_site_bricks"
+	},
+	"result": "mubble:old_site_brick_wall",
+	"count": 1
+}

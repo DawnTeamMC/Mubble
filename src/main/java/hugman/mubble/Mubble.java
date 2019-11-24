@@ -132,25 +132,7 @@ public class Mubble
             event.getRegistry().registerAll(MubbleBlocks.FLOWER_PILES.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.OTHERS.toArray(new Item[0]));
         	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
-        	int count = MubbleBlocks.CUBES.size() +
-        			MubbleBlocks.STAIRS.size() +
-        			MubbleBlocks.SLABS.size() +
-        			MubbleBlocks.VERTICAL_SLABS.size() +
-        			MubbleBlocks.FENCES.size() +
-        			MubbleBlocks.WALLS.size() +
-        			MubbleBlocks.SAPLINGS.size() +
-        			MubbleBlocks.LEAVES.size() +
-        			MubbleBlocks.LEAF_PILES.size() +
-        			MubbleBlocks.PRESSURE_PLATES.size() +
-        			MubbleBlocks.TRAPDOORS.size() +
-        			MubbleBlocks.BUTTONS.size() +
-        			MubbleBlocks.FENCE_GATES.size() +
-        			MubbleBlocks.DOORS.size() +
-        			MubbleBlocks.FLOWERS.size() +
-        			MubbleBlocks.FLOWER_PILES.size() +
-        			MubbleBlocks.OTHERS.size() +
-        			MubbleItems.ITEMS.size();
-        	LOGGER.info("Registered " + count + " items");
+        	LOGGER.info("Registered " + MubbleItems.ITEMS.size() + " items (without the amount of block items)");
     		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
         	LOGGER.info("Registered " + MubbleCostumes.COSTUMES.size() + " costumes");
         }

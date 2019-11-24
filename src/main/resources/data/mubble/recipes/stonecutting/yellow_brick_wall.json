@@ -2,8 +2,8 @@
 	"type": "minecraft:stonecutting",
 	"ingredient":
 	{
-		"item": "minecraft:terracotta"
+		"item": "mubble:yellow_bricks"
 	},
-	"result": "mubble:terracotta_stairs",
+	"result": "mubble:yellow_brick_wall",
 	"count": 1
 }

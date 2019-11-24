@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:magenta_bricks"
+	},
+	"result": "mubble:magenta_brick_stairs",
+	"count": 1
+}

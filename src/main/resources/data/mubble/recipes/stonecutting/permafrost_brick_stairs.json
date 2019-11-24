@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:permafrost_bricks"
+	},
+	"result": "mubble:permafrost_brick_stairs",
+	"count": 1
+}

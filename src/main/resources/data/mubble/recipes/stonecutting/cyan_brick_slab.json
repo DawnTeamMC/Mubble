@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:cyan_bricks"
+	},
+	"result": "mubble:cyan_brick_slab",
+	"count": 2
+}

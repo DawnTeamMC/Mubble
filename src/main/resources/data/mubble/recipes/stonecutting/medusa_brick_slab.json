@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:medusa_bricks"
+	},
+	"result": "mubble:medusa_brick_slab",
+	"count": 2
+}

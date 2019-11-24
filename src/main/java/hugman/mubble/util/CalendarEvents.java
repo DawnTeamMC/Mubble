@@ -12,7 +12,6 @@ public class CalendarEvents
 	public static boolean isNewYear = checkDay(1, 1);
 	public static boolean isTodayTemp = checkDay(12, 8);
 	public static boolean isAprilFools = checkDay(1, 4);
-	public static boolean isMiaBirthday = checkDay(12, 1);
 	public static boolean isJulesBirthday = checkDay(9, 3);
 	public static boolean isMarkBirthday = checkDay(1, 4);
 	public static boolean isJoaquinBirthday = checkDay(18, 6);

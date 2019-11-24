@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:black_dark_prismarine"
+	},
+	"result": "mubble:black_dark_prismarine_vertical_slab",
+	"count": 2
+}
