@@ -73,7 +73,7 @@ public class MubbleEvents
 				{
 					if(shaderGroup != null)
 					{
-						shaderGroup.close();
+						renderer.stopUseShader();
 					}
 				}
 			}

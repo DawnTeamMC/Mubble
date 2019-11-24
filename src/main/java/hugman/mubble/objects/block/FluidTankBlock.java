@@ -167,7 +167,7 @@ public class FluidTankBlock extends Block implements IBucketPickupHandler, ILiqu
     			return false;
     		}
     	}
-    	else if(itemIn instanceof BlockItem)
+    	if(itemIn instanceof BlockItem)
     	{
     		BlockItem blockItem = (BlockItem)itemIn;
     		if(blockItem.getBlock() instanceof FluidTankBlock)

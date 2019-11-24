@@ -13,15 +13,15 @@
 			[
 				{
 					"name": "RedMatrix",
-					"values": [ 0.0, 0.0, 0.0 ]
-				},
-				{
-					"name": "GreenMatrix",
 					"values": [ 0.3, 0.3, 0.2 ]
 				},
 				{
+					"name": "GreenMatrix",
+					"values": [ 0.2, 0.2, 0.1 ]
+				},
+				{
 					"name": "BlueMatrix",
-					"values": [ 0.25, 0.25, 0.2 ]
+					"values": [ 0.0, 0.0, 0.0 ]
 				}
 			]
 		},

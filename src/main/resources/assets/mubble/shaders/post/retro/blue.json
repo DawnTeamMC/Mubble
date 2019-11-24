@@ -33,11 +33,11 @@
 			[
 				{
 					"name": "Resolution",
-					"values": [ 16.0 ]
+					"values": [ 32.0 ]
 				},
 				{
 					"name": "MosaicSize",
-					"values": [ 6.0 ]
+					"values": [ 4.0 ]
 				}
 			]
 		}

@@ -17,11 +17,11 @@
 				},
 				{
 					"name": "GreenMatrix",
-					"values": [ 0.3, 0.3, 0.2 ]
+					"values": [ 0.3, 0.3, 0.1 ]
 				},
 				{
 					"name": "BlueMatrix",
-					"values": [ 0.25, 0.25, 0.2 ]
+					"values": [ 0.3, 0.3, 0.1 ]
 				}
 			]
 		},

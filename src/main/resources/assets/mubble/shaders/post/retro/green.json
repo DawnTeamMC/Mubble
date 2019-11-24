@@ -17,7 +17,7 @@
 				},
 				{
 					"name": "GreenMatrix",
-					"values": [ 0.3, 0.3, 0.2 ]
+					"values": [ 0.2, 0.2, 0.1 ]
 				},
 				{
 					"name": "BlueMatrix",
@@ -33,11 +33,11 @@
 			[
 				{
 					"name": "Resolution",
-					"values": [ 16.0 ]
+					"values": [ 32.0 ]
 				},
 				{
 					"name": "MosaicSize",
-					"values": [ 6.0 ]
+					"values": [ 4.0 ]
 				}
 			]
 		}
