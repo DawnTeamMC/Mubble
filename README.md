@@ -35,8 +35,9 @@ Mubble is available in English, French, Spanish, German, Dutch, Chinese, Brazili
 # Credits:
 [Full credits](https://ftb.gamepedia.com/Mubble/Credits)
 
-**Textures**
+**Pixel Art**
 * Play Dash
+* Mayro
 
 **Translation**
 * Cochu (*Spanish*)
