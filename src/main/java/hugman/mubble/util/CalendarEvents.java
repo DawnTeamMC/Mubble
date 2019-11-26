@@ -10,7 +10,6 @@ public class CalendarEvents
 	public static int monthToday = localdate.get(ChronoField.MONTH_OF_YEAR);
     
 	public static boolean isNewYear = checkDay(1, 1);
-	public static boolean isTodayTemp = checkDay(24, 11);
 	public static boolean isAprilFools = checkDay(1, 4);
 	public static boolean isJulesBirthday = checkDay(9, 3);
 	public static boolean isMarkBirthday = checkDay(1, 4);
