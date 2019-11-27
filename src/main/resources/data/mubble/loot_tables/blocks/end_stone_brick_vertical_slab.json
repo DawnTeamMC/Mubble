@@ -12,7 +12,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "mubble:end_stone_vertical_slab",
+                  "block": "mubble:end_stone_brick_vertical_slab",
                   "properties": {
                     "type": "double"
                   }
@@ -24,7 +24,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "mubble:end_stone_vertical_slab"
+          "name": "mubble:end_stone_brick_vertical_slab"
         }
       ]
     }

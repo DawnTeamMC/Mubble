@@ -12,7 +12,7 @@
               "conditions": [
                 {
                   "condition": "minecraft:block_state_property",
-                  "block": "mubble:brown_terracotta_vertical_slab_vertical_slab",
+                  "block": "mubble:brown_terracotta_vertical_slab",
                   "properties": {
                     "type": "double"
                   }
@@ -24,7 +24,7 @@
               "function": "minecraft:explosion_decay"
             }
           ],
-          "name": "mubble:brown_terracotta_vertical_slab_vertical_slab"
+          "name": "mubble:brown_terracotta_vertical_slab"
         }
       ]
     }
