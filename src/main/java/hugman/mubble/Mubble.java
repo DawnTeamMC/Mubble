@@ -3,6 +3,8 @@ package hugman.mubble;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.mojang.brigadier.CommandDispatcher;
+
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleColorMaps;
 import hugman.mubble.init.MubbleContainerTypes;
@@ -16,7 +18,11 @@ import hugman.mubble.init.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
+import hugman.mubble.objects.command.FoodbarCommand;
+import hugman.mubble.objects.command.HealthCommand;
+import hugman.mubble.objects.command.MotionCommand;
 import net.minecraft.block.Block;
+import net.minecraft.command.CommandSource;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
@@ -73,7 +79,12 @@ public class Mubble
     @SubscribeEvent
     public void serverSetup(final FMLServerStartingEvent event)
     {
-    	//TODO
+    	CommandDispatcher<CommandSource> dispatcher = event.getCommandDispatcher();
+
+    	new FoodbarCommand(dispatcher);
+    	new HealthCommand(dispatcher);
+    	new MotionCommand(dispatcher);
+    	LOGGER.info("Registered commands");
     }
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
