@@ -58,23 +58,26 @@ public class BlockCostume extends BlockItem
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player)
     {
-		GameRenderer renderer = Minecraft.getInstance().gameRenderer;
-		ShaderGroup shaderGroup = renderer.getShaderGroup();
-		ResourceLocation shader = this.getShader();
-		if(world.isRemote && GLX.usePostProcess && shader != null)
-		{
-			if(shaderGroup != null)
-			{
-				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
-				{
-					renderer.loadShader(shader);
-				}
-			}
-			else
-			{
-				renderer.loadShader(shader);
-			}
-		}
+    	if(world.isRemote)
+    	{
+    		GameRenderer renderer = Minecraft.getInstance().gameRenderer;
+    		ShaderGroup shaderGroup = renderer.getShaderGroup();
+    		ResourceLocation shader = this.getShader();
+    		if(GLX.usePostProcess && shader != null)
+    		{
+    			if(shaderGroup != null)
+    			{
+    				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
+    				{
+    					renderer.loadShader(shader);
+    				}
+    			}
+    			else
+    			{
+    				renderer.loadShader(shader);
+    			}
+    		}
+    	}
     }
 	
 	public static final IDispenseItemBehavior DISPENSER_BEHAVIOR = new DefaultDispenseItemBehavior()

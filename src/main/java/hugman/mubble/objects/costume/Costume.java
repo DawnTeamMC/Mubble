@@ -73,26 +73,32 @@ public class Costume extends Item
     @Override
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player)
     {
-		GameRenderer renderer = Minecraft.getInstance().gameRenderer;
-		ShaderGroup shaderGroup = renderer.getShaderGroup();
-		ResourceLocation shader = this.getShader();
-		if(world.isRemote && GLX.usePostProcess && shader != null)
-		{
-			if(shaderGroup != null)
-			{
-				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
-				{
-					renderer.loadShader(shader);
-				}
-			}
-			else
-			{
-				renderer.loadShader(shader);
-			}
-		}
-    	if(!world.isRemote && effects != null) for(EffectInstance effect : effects)
+    	if(world.isRemote)
     	{
-    		player.addPotionEffect(new EffectInstance(effect));
+    		GameRenderer renderer = Minecraft.getInstance().gameRenderer;
+    		ShaderGroup shaderGroup = renderer.getShaderGroup();
+    		ResourceLocation shader = this.getShader();
+    		if(GLX.usePostProcess && shader != null)
+    		{
+    			if(shaderGroup != null)
+    			{
+    				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
+    				{
+    					renderer.loadShader(shader);
+    				}
+    			}
+    			else
+    			{
+    				renderer.loadShader(shader);
+    			}
+    		}
+    	}
+    	if(!world.isRemote && effects != null)
+    	{
+    		for(EffectInstance effect : effects)
+        	{
+        		player.addPotionEffect(new EffectInstance(effect));
+        	}
     	}
     }
 	
