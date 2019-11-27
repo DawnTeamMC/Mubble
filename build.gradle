@@ -11,14 +11,14 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
-version = '2.0'
+version = '2.0.1'
 group = 'com.hugman.mubble'
 archivesBaseName = 'mubble'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 minecraft {
-    mappings channel: 'snapshot', version: '20191123-1.14.3'
+    mappings channel: 'snapshot', version: '20191127-1.14.3'
     runs {
         client = {
             properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
@@ -36,5 +36,5 @@ minecraft {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.14.4-28.1.92'
+    minecraft 'net.minecraftforge:forge:1.14.4-28.1.96'
 }
