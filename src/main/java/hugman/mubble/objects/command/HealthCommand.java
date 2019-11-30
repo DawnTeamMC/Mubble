@@ -48,9 +48,9 @@ public class HealthCommand
 		int finalTargetAmount = 0;
 		for(Entity entity : targets)
 		{
-			finalTargetAmount =+ 1;
 			if(entity instanceof LivingEntity)
 			{
+				finalTargetAmount++;
 				LivingEntity livingEntity = (LivingEntity) entity;
 				if(sum == true)
 				{

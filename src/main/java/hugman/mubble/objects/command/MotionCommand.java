@@ -59,8 +59,7 @@ public class MotionCommand
 			{
 				entity.setMotion(x, y, z);
 			}
-
-			//entity.velocityChanged = true;
+			
 			if(entity instanceof ServerPlayerEntity)
 			{
 				ServerPlayerEntity player = (ServerPlayerEntity)entity;
