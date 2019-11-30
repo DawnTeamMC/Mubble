@@ -1,4 +1,4 @@
-package hugman.mubble.init;
+package hugman.mubble.init.data;
 
 import hugman.mubble.objects.block.block_state_property.FluidLog;
 import hugman.mubble.objects.block.block_state_property.Princess;

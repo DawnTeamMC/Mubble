@@ -3,26 +3,21 @@ package hugman.mubble;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.mojang.brigadier.CommandDispatcher;
-
 import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.MubbleColorMaps;
-import hugman.mubble.init.MubbleContainerTypes;
+import hugman.mubble.init.MubbleCommands;
 import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.MubbleEffects;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleScreens;
 import hugman.mubble.init.MubbleSounds;
-import hugman.mubble.init.MubbleTileEntityTypes;
+import hugman.mubble.init.data.MubbleColorMaps;
+import hugman.mubble.init.data.MubbleContainerTypes;
+import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
-import hugman.mubble.objects.command.FoodbarCommand;
-import hugman.mubble.objects.command.HealthCommand;
-import hugman.mubble.objects.command.MotionCommand;
 import net.minecraft.block.Block;
-import net.minecraft.command.CommandSource;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
@@ -49,7 +44,7 @@ public class Mubble
 {
 	public static final String MOD_ID = "mubble";
 	public static final String MOD_PREFIX = MOD_ID + ":";
-	public static final Logger LOGGER = LogManager.getLogger(MOD_ID);
+	public static final Logger LOGGER = LogManager.getLogger();
 	
     public Mubble()
     {        
@@ -79,12 +74,8 @@ public class Mubble
     @SubscribeEvent
     public void serverSetup(final FMLServerStartingEvent event)
     {
-    	CommandDispatcher<CommandSource> dispatcher = event.getCommandDispatcher();
-
-    	new FoodbarCommand(dispatcher);
-    	new HealthCommand(dispatcher);
-    	new MotionCommand(dispatcher);
-    	LOGGER.info("Registered commands");
+    	MubbleCommands.registerCommands(event.getCommandDispatcher());
+    	LOGGER.info("Registered " + MubbleCommands.COMMANDS.size() + " commands");
     }
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
@@ -94,7 +85,7 @@ public class Mubble
         public static void onDimensionsRegistry(final RegisterDimensionsEvent event)
         {
         	MubbleDimensions.registerDimensions();
-        	LOGGER.info("Registered dimensions");
+        	LOGGER.info("Registered " + MubbleDimensions.DIMENSIONS.size() + " dimensions");
         }
     }
     
@@ -153,7 +144,7 @@ public class Mubble
         {
         	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
         	MubbleEntities.registerEntities(registry);
-        	LOGGER.info("Registered entities");
+        	LOGGER.info("Registered " + MubbleEntities.ENTITY_TYPES.size() + " entities");
         	MubbleEntities.registerPlacements();
         	LOGGER.info("Registered entity spawn placements");
         }

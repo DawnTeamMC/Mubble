@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.init.data.MubbleSoundTypes;
 import hugman.mubble.objects.block.BalloonBlock;
 import hugman.mubble.objects.block.BerryBushBlock;
 import hugman.mubble.objects.block.BrickBlock;

@@ -1,5 +1,6 @@
 package hugman.mubble.init;
 
+import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.objects.screen.TimeswapTableScreen;
 import net.minecraft.client.gui.ScreenManager;
 

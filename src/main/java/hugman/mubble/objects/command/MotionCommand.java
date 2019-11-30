@@ -14,9 +14,10 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class MotionCommand
+public class MotionCommand implements ICommand
 {
-	public MotionCommand(CommandDispatcher<CommandSource> dispatcher)
+	@Override
+	public void register(CommandDispatcher<CommandSource> dispatcher)
 	{
 		dispatcher.register(
 			LiteralArgumentBuilder.<CommandSource>literal("motion")

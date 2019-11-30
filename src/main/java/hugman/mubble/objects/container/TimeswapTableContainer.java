@@ -5,8 +5,8 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.MubbleContainerTypes;
 import hugman.mubble.init.MubbleSounds;
+import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;

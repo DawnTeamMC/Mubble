@@ -1,7 +1,7 @@
 package hugman.mubble.init.world;
 
-import hugman.mubble.init.MubbleBlockStateProperties;
 import hugman.mubble.init.MubbleBlocks;
+import hugman.mubble.init.data.MubbleBlockStateProperties;
 import hugman.mubble.objects.world.surface_builder.PermafrostSurfaceBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

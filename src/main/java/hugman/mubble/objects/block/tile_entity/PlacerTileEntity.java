@@ -1,7 +1,7 @@
 package hugman.mubble.objects.block.tile_entity;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.init.MubbleTileEntityTypes;
+import hugman.mubble.init.data.MubbleTileEntityTypes;
 import net.minecraft.tileentity.DispenserTileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;

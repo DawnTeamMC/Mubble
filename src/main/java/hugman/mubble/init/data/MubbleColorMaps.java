@@ -1,5 +1,6 @@
-package hugman.mubble.init;
+package hugman.mubble.init.data;
 
+import hugman.mubble.init.MubbleBlocks;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.world.FoliageColors;

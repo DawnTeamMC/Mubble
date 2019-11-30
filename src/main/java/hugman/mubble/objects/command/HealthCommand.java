@@ -14,9 +14,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class HealthCommand
+public class HealthCommand implements ICommand
 {
-	public HealthCommand(CommandDispatcher<CommandSource> dispatcher)
+	@Override
+	public void register(CommandDispatcher<CommandSource> dispatcher)
 	{
 		dispatcher.register(
 			LiteralArgumentBuilder.<CommandSource>literal("health")

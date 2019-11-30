@@ -2,7 +2,7 @@ package hugman.mubble.objects.block;
 
 import java.util.Random;
 
-import hugman.mubble.init.MubbleBlockStateProperties;
+import hugman.mubble.init.data.MubbleBlockStateProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;

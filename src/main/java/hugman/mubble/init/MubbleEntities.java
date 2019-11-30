@@ -1,5 +1,8 @@
 package hugman.mubble.init;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.ChinchoEntity;
 import hugman.mubble.objects.entity.CustomTNTEntity;
@@ -23,6 +26,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class MubbleEntities
 {
+    public static final List<EntityType<? extends Entity>> ENTITY_TYPES = new ArrayList<EntityType<? extends Entity>>();
+    
 	public static final EntityType<ChinchoEntity> CHINCHO = register("chincho", EntityType.Builder.create(ChinchoEntity::new, EntityClassification.MONSTER).size(0.6F, 1.2F));
 	public static final EntityType<GoombaEntity> GOOMBA = register("goomba", EntityType.Builder.create(GoombaEntity::new, EntityClassification.MONSTER).size(0.75F, 0.85F));
 	public static final EntityType<ToadEntity> TOAD = register("toad", EntityType.Builder.create(ToadEntity::new, EntityClassification.CREATURE).size(0.6F, 1.4F));
@@ -35,6 +40,7 @@ public class MubbleEntities
 	{
 	    EntityType<T> entitytype = builder.build(Mubble.MOD_PREFIX + id);
 	    entitytype.setRegistryName(Mubble.MOD_ID, id);
+	    ENTITY_TYPES.add(entitytype);
 		return entitytype;
 	}
 	

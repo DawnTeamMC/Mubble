@@ -2,7 +2,7 @@ package hugman.mubble.objects.block;
 
 import javax.annotation.Nullable;
 
-import hugman.mubble.init.MubbleBlockStateProperties;
+import hugman.mubble.init.data.MubbleBlockStateProperties;
 import hugman.mubble.objects.block.block_state_property.VerticalSlabType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

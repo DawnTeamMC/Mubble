@@ -1,9 +1,10 @@
-package hugman.mubble.init;
+package hugman.mubble.init.data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.objects.block.tile_entity.PlacerTileEntity;
 import net.minecraft.tileentity.DispenserTileEntity;
 import net.minecraft.tileentity.TileEntity;

@@ -1,8 +1,10 @@
 package hugman.mubble.objects.world.dimension;
 
+import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.world.MubbleBiomes;
 import net.minecraft.block.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
@@ -114,5 +116,10 @@ public class PermafrostDimension extends Dimension
 	public DimensionType getType()
 	{
 		return this.type;
+	}
+
+	public static ResourceLocation getName()
+	{
+		return new ResourceLocation(Mubble.MOD_ID, "permafrost");
 	}
 }

@@ -1,8 +1,8 @@
 package hugman.mubble.objects.block;
 
-import hugman.mubble.init.MubbleBlockStateProperties;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleSounds;
+import hugman.mubble.init.data.MubbleBlockStateProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

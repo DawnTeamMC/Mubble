@@ -14,9 +14,10 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.FoodStats;
 import net.minecraft.util.text.TranslationTextComponent;
 
-public class FoodbarCommand
+public class FoodbarCommand implements ICommand
 {
-	public FoodbarCommand(CommandDispatcher<CommandSource> dispatcher)
+	@Override
+	public void register(CommandDispatcher<CommandSource> dispatcher)
 	{
 		dispatcher.register(
 			LiteralArgumentBuilder.<CommandSource>literal("foodbar")
