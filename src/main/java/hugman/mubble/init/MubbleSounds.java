@@ -54,8 +54,9 @@ public class MubbleSounds
 	public static final SoundEvent BLOCK_DREAM_BLOCK_HIT = register("block.dream_block.hit");
 	public static final SoundEvent BLOCK_DREAM_BLOCK_STEP = register("block.dream_block.step");
 	public static final SoundEvent BLOCK_SPRING_TRIGGER = register("block.spring.trigger");
-	
+
 	public static final SoundEvent ITEM_CAPE_FEATHER_USE = register("item.cape_feather.use");
+	public static final SoundEvent ITEM_JINGLE_BELLS_USE = register("item.jingle_bells.use");
 	public static final SoundEvent ITEM_SMASH_BALL_USE = register("item.smash_ball.use");
 	public static final SoundEvent ITEM_SUPER_MUSHROOM_CONSUME = register("item.super_mushroom.consume");
 	public static final SoundEvent ITEM_SUPER_STAR_THEME = register("item.super_star.theme");

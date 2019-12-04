@@ -1,6 +1,7 @@
 {
 	"comment": "CREATIVE TABS",
 	"itemGroup.costumes": "Kostuums",
+	"//itemGroup.instruments": "Instruments",
 
 
 
@@ -896,6 +897,7 @@
 	"item.mubble.apricot": "Abrikoos",
 	"item.mubble.mango": "Mango",
 	"item.mubble.blueberries": "Blauwebessen",
+	"//item.mubble.jingle_bells": "Jingle Bells",
 	"item.mubble.totem_of_ascending": "Totem der opstijging",
 
 
@@ -1090,6 +1092,7 @@
 	"subtitles.mubble.block.door.key.success": "Sleutel gebruikt",
 	"subtitles.mubble.block.spring.trigger": "Veer geactiveerd",
 	"subtitles.mubble.item.cape_feather.use": "Capeveer wordt gebruikt",
+	"//subtitles.mubble.item.jingle_bells.use": "Jingle Bells used",
 	"subtitles.mubble.item.smash_ball.use": "Smash bal wordt gebruikt",
 	"subtitles.mubble.costume.cappy.ambient": "Cappy mompelt",
 	"subtitles.mubble.costume.cappy.ambient.nether": "Cappy raakt op",

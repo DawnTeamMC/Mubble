@@ -27,7 +27,10 @@ public class TotemOfAscendingItem extends Item
         BlockPos desPos = new BlockPos(playerIn.posX, worldIn.getChunk(playerIn.getPosition()).getTopBlockY(Heightmap.Type.WORLD_SURFACE, (int)playerIn.posX, (int)playerIn.posZ), playerIn.posZ);
         if(desPos.getY() <= playerIn.posY) playerIn.setPosition(playerIn.posX, playerIn.posY + 20D, playerIn.posZ);
         else playerIn.setPosition(playerIn.posX, desPos.getY() + 2D, playerIn.posZ);
-        if (!playerIn.abilities.isCreativeMode) stack.shrink(1);
+        if(!playerIn.abilities.isCreativeMode)
+        {
+        	stack.shrink(1);
+        }
         playerIn.fallDistance = 0f;
         playerIn.getCooldownTracker().setCooldown(this, 25);
         playerIn.addStat(Stats.ITEM_USED.get(this));

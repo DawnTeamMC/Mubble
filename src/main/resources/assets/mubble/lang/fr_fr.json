@@ -1,6 +1,7 @@
 {
 	"comment": "CREATIVE TABS",
 	"itemGroup.costumes": "Costumes",
+	"itemGroup.instruments": "Instruments",
 
 
 
@@ -896,6 +897,7 @@
 	"item.mubble.apricot": "Abricot",
 	"item.mubble.mango": "Mangue",
 	"item.mubble.blueberries": "Myrtilles",
+	"item.mubble.jingle_bells": "Grelots",
 	"item.mubble.totem_of_ascending": "Totem d'ascendance",
 
 
@@ -1090,6 +1092,7 @@
 	"subtitles.mubble.block.door.key.success": "Clé utilisée",
 	"subtitles.mubble.block.spring.trigger": "Ressort déclenché",
 	"subtitles.mubble.item.cape_feather.use": "Plume acrobate utilisée",
+	"subtitles.mubble.item.jingle_bells.use": "Grelots utilisés",
 	"subtitles.mubble.item.smash_ball.use": "Balle Smash utilisée",
 	"subtitles.mubble.costume.cappy.ambient": "Marmonnement de Cappy",
 	"subtitles.mubble.costume.cappy.ambient.nether": "Marmonnement essouflé de Cappy",

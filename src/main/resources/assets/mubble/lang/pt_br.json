@@ -1,6 +1,7 @@
 {
 	"comment": "CREATIVE TABS",
 	"itemGroup.costumes": "Trajes",
+	"//itemGroup.instruments": "Instruments",
 
 
 
@@ -896,6 +897,7 @@
 	"item.mubble.apricot": "Damasco",
 	"item.mubble.mango": "Manga",
 	"//item.mubble.blueberries": "Blueberries",
+	"//item.mubble.jingle_bells": "Jingle Bells",
 	"item.mubble.totem_of_ascending": "Totem da Ascensão",
 
 
@@ -1090,6 +1092,7 @@
 	"//subtitles.mubble.block.door.key.success": "Key used",
 	"subtitles.mubble.block.spring.trigger": "Primavera acionada",
 	"subtitles.mubble.item.cape_feather.use": "Pena da Capa foi usada",
+	"//subtitles.mubble.item.jingle_bells.use": "Jingle Bells used",
 	"subtitles.mubble.item.smash_ball.use": "Bola Smash foi usada",
 	"subtitles.mubble.costume.cappy.ambient": "Cappy murmura",
 	"subtitles.mubble.costume.cappy.ambient.nether": "Cappy ficando sem vapor",
