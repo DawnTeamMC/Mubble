@@ -7,6 +7,7 @@ import hugman.mubble.Mubble;
 import hugman.mubble.objects.block.block_state_property.Princess;
 import hugman.mubble.objects.costume.BlockCostume;
 import hugman.mubble.objects.costume.CappyCostume;
+import hugman.mubble.objects.costume.ChristmasHatCostume;
 import hugman.mubble.objects.costume.CrownCostume;
 import hugman.mubble.objects.costume.GooigiCapCostume;
 import hugman.mubble.objects.costume.GuardianMaskCostume;
@@ -51,7 +52,7 @@ public class MubbleCostumes
 	public static final Item MAGENTA_VIRTUAL_GOOGLES = costume("magenta_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.MAGENTA_RETRO));
 	public static final Item PINK_VIRTUAL_GOOGLES = costume("pink_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.PINK_RETRO));
 	
-	public static final Item CHRISTMAS_HAT = costume("christmas_hat", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
+	public static final Item CHRISTMAS_HAT = costume("christmas_hat", new ChristmasHatCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 
 	/* SUPER MARIO */
 	public static final Item CAPPY = costume("cappy", new CappyCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
@@ -60,7 +61,7 @@ public class MubbleCostumes
 	public static final Item WALUIGI_CAP = costume("waluigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new EffectInstance(Effects.JUMP_BOOST, 5, 1)));
 	public static final Item VANISH_CAP = costume("vanish_cap", new VanishCapCostume(pSimple));
 	public static final Item WING_CAP = costume("wing_cap", new WingCapCostume(pSimple.defaultMaxDamage(600)));
-	public static final Item GOOIGI_CAP = costume("gooigi_cap", new GooigiCapCostume(pSimple));
+	public static final Item GOOIGI_CAP = costume("gooigi_cap", new GooigiCapCostume(pSimple, SoundEvents.BLOCK_SLIME_BLOCK_BREAK));
 	public static final Item GOLD_MARIO_CAP = costume("gold_mario_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_GOLD));
 	public static final Item SILVER_LUIGI_CAP = costume("silver_luigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 	public static final Item PRINCESS_PEACH_CROWN = costume("princess_peach_crown", new CrownCostume(pSimple, Princess.PEACH));

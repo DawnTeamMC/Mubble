@@ -1,5 +1,7 @@
 package hugman.mubble.init;
 
+import java.util.Random;
+
 import com.mojang.blaze3d.platform.GLX;
 
 import hugman.mubble.init.data.MubbleTags;
@@ -7,13 +9,18 @@ import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.objects.block.PermafrostPortalBlock;
 import hugman.mubble.objects.costume.BlockCostume;
 import hugman.mubble.objects.costume.Costume;
+import hugman.mubble.util.CalendarEvents;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FireBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.shader.ShaderGroup;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.monster.AbstractSkeletonEntity;
+import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
@@ -24,6 +31,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -99,6 +107,25 @@ public class MubbleEvents
 				else
 				{
 					worldIn.getPendingBlockTicks().scheduleTick(pos, block, block.tickRate(worldIn) + worldIn.rand.nextInt(10));
+				}
+			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onSpawn(LivingSpawnEvent.CheckSpawn event)
+	{
+		Entity fEntity = event.getEntity();
+		Random rand = new Random();
+		if(fEntity instanceof MobEntity)
+		{
+			MobEntity entity = (MobEntity)fEntity;
+			if(entity instanceof ZombieEntity || entity instanceof AbstractSkeletonEntity)
+			{
+				if(entity.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty() && CalendarEvents.isDecember && rand.nextFloat() < 0.25F)
+				{
+					entity.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(MubbleCostumes.CHRISTMAS_HAT));
+					entity.setDropChance(EquipmentSlotType.HEAD, 0.0F);
 				}
 			}
 		}

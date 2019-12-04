@@ -22,5 +22,6 @@ public class GuardianMaskCostume extends HeadCostume
     		player.getCooldownTracker().setCooldown(this, 25);
     		player.addStat(Stats.ITEM_USED.get(this));
     	}
+    	super.onArmorTick(stack, world, player);
     }
 }

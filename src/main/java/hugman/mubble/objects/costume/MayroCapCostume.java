@@ -18,5 +18,6 @@ public class MayroCapCostume extends HeadCostume
     public void onArmorTick(ItemStack stack, World world, PlayerEntity player)
     {
     	player.inventory.clearMatchingItems(item -> MubbleTags.Items.COINS.contains(item.getItem()), 1);
+    	super.onArmorTick(stack, world, player);
     }
 }

@@ -31,10 +31,13 @@ public class CappyCostume extends HeadCostume
 			if(player.dimension == DimensionType.THE_NETHER && random <= 3)
 			{
 				world.playSound((PlayerEntity)null, player.posX, player.posY, player.posZ, MubbleSounds.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
-				return;
 			}
-			else world.playSound((PlayerEntity)null, player.posX, player.posY, player.posZ, MubbleSounds.COSTUME_CAPPY_AMBIENT, SoundCategory.VOICE, 1f, 1f);
+			else
+			{
+				world.playSound((PlayerEntity)null, player.posX, player.posY, player.posZ, MubbleSounds.COSTUME_CAPPY_AMBIENT, SoundCategory.VOICE, 1f, 1f);
+			}
 		}
+    	super.onArmorTick(stack, world, player);
 	}
 	
 	@Override
@@ -44,8 +47,14 @@ public class CappyCostume extends HeadCostume
 		World world = entity.world;
 		if(rand.nextInt(201) == 0)
 		{
-			if(world.getFluidState(entity.getPosition()).isTagged(FluidTags.WATER)) world.playSound((PlayerEntity)null, entity.posX, entity.posY, entity.posZ, MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
-			else world.playSound((PlayerEntity)null, entity.posX, entity.posY, entity.posZ, MubbleSounds.COSTUME_CAPPY_HELP, SoundCategory.VOICE, 1f, 1f);
+			if(world.getFluidState(entity.getPosition()).isTagged(FluidTags.WATER))
+			{
+				world.playSound((PlayerEntity)null, entity.posX, entity.posY, entity.posZ, MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
+			}
+			else
+			{
+				world.playSound((PlayerEntity)null, entity.posX, entity.posY, entity.posZ, MubbleSounds.COSTUME_CAPPY_HELP, SoundCategory.VOICE, 1f, 1f);
+			}
 		}
 		return super.onEntityItemUpdate(stack, entity);
 	}
@@ -54,7 +63,10 @@ public class CappyCostume extends HeadCostume
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
 	{
         ItemStack itemstack1 = playerIn.getItemStackFromSlot(armorType);
-        if (itemstack1.isEmpty()) worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
+        if (itemstack1.isEmpty())
+        {
+        	worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
+        }
 		return super.onItemRightClick(worldIn, playerIn, handIn);
 	}
 }

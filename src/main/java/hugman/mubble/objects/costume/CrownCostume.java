@@ -33,17 +33,16 @@ public class CrownCostume extends HeadCostume
         if(iblockstate.getBlock() == MubbleBlocks.KORETATO_BLOCK && iblockstate.get(KoretatoBlock.PRINCESS) == Princess.NONE)
         {
             world.addParticle(ParticleTypes.HEART, (double)((float)blockPos.getX() + 0.5F), (double)((float)blockPos.getY() + 1.1F), (double)((float)blockPos.getZ() + 0.5F), 0.0D, 0.0D, 0.0D);
-        	if(world.isRemote) return ActionResultType.SUCCESS;
-        	else
+        	if(!world.isRemote)
         	{
         		BlockState blockState1 = iblockstate.with(KoretatoBlock.PRINCESS, princess);
         		world.setBlockState(blockPos, blockState1, 2);
         		context.getItem().shrink(1);
         		world.playSound((PlayerEntity)null, blockPos, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1.0F, 1.0F);
         		world.playSound((PlayerEntity)null, blockPos, this.getEquipSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
-        		return ActionResultType.SUCCESS;
         	}
+    		return ActionResultType.SUCCESS;
         }
-        else return ActionResultType.PASS;
+        else return super.onItemUse(context);
     }
 }

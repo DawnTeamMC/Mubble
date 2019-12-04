@@ -22,5 +22,6 @@ public class VanishCapCostume extends HeadCostume
     	{
     		player.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 2, 0));
     	}
+    	super.onArmorTick(stack, world, player);
     }
 }

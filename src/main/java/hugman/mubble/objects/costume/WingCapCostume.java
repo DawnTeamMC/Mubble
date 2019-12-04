@@ -38,5 +38,6 @@ public class WingCapCostume extends HeadCostume
     		player.addPotionEffect(new EffectInstance(Effects.LEVITATION, 1, 2));
     		player.fallDistance = 0f;
     	}
+    	super.onArmorTick(stack, world, player);
     }
 }
