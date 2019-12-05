@@ -1,0 +1,55 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/polished_carbonite_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_carbonite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:carbonite"
+					}
+				]
+			}
+		},
+		"has_polished_carbonite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:polished_carbonite"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/polished_carbonite_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_carbonite",
+			"has_polished_carbonite",
+			"has_the_recipe"
+		]
+	]
+}

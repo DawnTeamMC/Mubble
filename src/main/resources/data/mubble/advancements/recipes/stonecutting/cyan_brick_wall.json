@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/cyan_brick_wall"
+		]
+	},
+	"criteria":
+	{
+		"has_cyan_bricks":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:cyan_bricks"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/cyan_brick_wall"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_cyan_bricks",
+			"has_the_recipe"
+		]
+	]
+}

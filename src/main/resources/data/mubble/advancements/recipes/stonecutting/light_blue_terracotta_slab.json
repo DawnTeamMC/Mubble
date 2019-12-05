@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/light_blue_terracotta_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_light_blue_terracotta":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:light_blue_terracotta"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/light_blue_terracotta_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_light_blue_terracotta",
+			"has_the_recipe"
+		]
+	]
+}

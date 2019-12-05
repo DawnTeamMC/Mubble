@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:blue_permafrost_bricks"
+	},
+	"result": "mubble:blue_permafrost_brick_vertical_slab",
+	"count": 2
+}

@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/yellow_concrete_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_yellow_concrete":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:yellow_concrete"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/yellow_concrete_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_yellow_concrete",
+			"has_the_recipe"
+		]
+	]
+}

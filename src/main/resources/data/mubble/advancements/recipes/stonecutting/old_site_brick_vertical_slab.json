@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/old_site_brick_vertical_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_old_site_bricks":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:old_site_bricks"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/old_site_brick_vertical_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_old_site_bricks",
+			"has_the_recipe"
+		]
+	]
+}

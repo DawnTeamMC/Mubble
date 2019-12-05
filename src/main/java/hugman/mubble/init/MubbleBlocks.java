@@ -175,6 +175,10 @@ public class MubbleBlocks
     public static final Block PERMAFROST_BRICK_VERTICAL_SLAB = block("permafrost_brick_vertical_slab", new VerticalSlabBlock(Properties.from(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
     public static final Block PERMAFROST_BRICK_FENCE = block("permafrost_brick_fence", new FenceBlock(Properties.from(PERMAFROST_BRICKS)), ItemGroup.DECORATIONS, FENCES);
     public static final Block BLUE_PERMAFROST_BRICKS = block("blue_permafrost_bricks", new Block(Properties.from(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block BLUE_PERMAFROST_BRICK_STAIRS = block("blue_permafrost_brick_stairs", new StairsBlock(BLUE_PERMAFROST_BRICKS), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block BLUE_PERMAFROST_BRICK_SLAB = block("blue_permafrost_brick_slab", new SlabBlock(Properties.from(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block BLUE_PERMAFROST_BRICK_VERTICAL_SLAB = block("blue_permafrost_brick_vertical_slab", new VerticalSlabBlock(Properties.from(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block BLUE_PERMAFROST_BRICK_WALL = block("blue_permafrost_brick_wall", new WallBlock(Properties.from(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block PERMAFROST_BISMUTH_ORE = block("permafrost_bismuth_ore", new Block(Properties.create(Material.ROCK, MaterialColor.ICE).hardnessAndResistance(0.3F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block FROZEN_OBSIDIAN = block("frozen_obsidian", new Block(Properties.create(Material.ROCK, MaterialColor.BLACK).hardnessAndResistance(75.0F, 1800.0F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block PERMAFROST_PORTAL = block("permafrost_portal", new PermafrostPortalBlock(Block.Properties.create(Material.PORTAL).doesNotBlockMovement().tickRandomly().hardnessAndResistance(-1.0F).sound(SoundType.GLASS).lightValue(11).noDrops()));
@@ -604,6 +608,16 @@ public class MubbleBlocks
     public static final Block PURPLE_CONCRETE_BUTTON = block("purple_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE, BUTTONS);
     public static final Block MAGENTA_CONCRETE_BUTTON = block("magenta_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE, BUTTONS);
     public static final Block PINK_CONCRETE_BUTTON = block("pink_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE, BUTTONS);
+
+    public static final Block RED_CHRISTMAS_BAUBLE = block("red_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.RED_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
+    public static final Block ORANGE_CHRISTMAS_BAUBLE = block("orange_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.ORANGE_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
+    public static final Block YELLOW_CHRISTMAS_BAUBLE = block("yellow_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.YELLOW_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
+    public static final Block PURPLE_CHRISTMAS_BAUBLE = block("purple_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.PURPLE_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
+    public static final Block MAGENTA_CHRISTMAS_BAUBLE = block("magenta_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.MAGENTA_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
+    public static final Block PINK_CHRISTMAS_BAUBLE = block("pink_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.PINK_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
+    public static final Block BLUE_CHRISTMAS_BAUBLE = block("blue_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.BLUE_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
+    public static final Block LIGHT_BLUE_CHRISTMAS_BAUBLE = block("light_blue_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.LIGHT_BLUE_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
+    public static final Block WHITE_CHRISTMAS_BAUBLE = block("white_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
     
     public static final Block FOOTBLOCK = block("footblock", new Block(Properties.from(Blocks.WHITE_WOOL)), ItemGroup.DECORATIONS, OTHERS, 60, 60);
     

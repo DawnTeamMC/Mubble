@@ -1,0 +1,55 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/polished_granite_vertical_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_granite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:granite"
+					}
+				]
+			}
+		},
+		"has_polished_granite":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:polished_granite"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/polished_granite_vertical_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_granite",
+			"has_polished_granite",
+			"has_the_recipe"
+		]
+	]
+}

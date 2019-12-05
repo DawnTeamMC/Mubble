@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/purple_dark_prismarine_stairs"
+		]
+	},
+	"criteria":
+	{
+		"has_purple_dark_prismarine":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:purple_dark_prismarine"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/purple_dark_prismarine_stairs"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_purple_dark_prismarine",
+			"has_the_recipe"
+		]
+	]
+}

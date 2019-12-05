@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_all",
+	"textures":
+	{
+		"all": "mubble:block/light_blue_christmas_bauble"
+	}
+}

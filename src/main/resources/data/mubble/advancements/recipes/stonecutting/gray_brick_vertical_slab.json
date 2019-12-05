@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/gray_brick_vertical_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_gray_bricks":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:gray_bricks"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/gray_brick_vertical_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_gray_bricks",
+			"has_the_recipe"
+		]
+	]
+}

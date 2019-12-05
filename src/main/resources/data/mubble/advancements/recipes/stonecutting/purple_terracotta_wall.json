@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/purple_terracotta_wall"
+		]
+	},
+	"criteria":
+	{
+		"has_purple_terracotta":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:purple_terracotta"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/purple_terracotta_wall"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_purple_terracotta",
+			"has_the_recipe"
+		]
+	]
+}

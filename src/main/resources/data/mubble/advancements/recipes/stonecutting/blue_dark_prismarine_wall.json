@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/blue_dark_prismarine_wall"
+		]
+	},
+	"criteria":
+	{
+		"has_blue_dark_prismarine":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:blue_dark_prismarine"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/blue_dark_prismarine_wall"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_blue_dark_prismarine",
+			"has_the_recipe"
+		]
+	]
+}

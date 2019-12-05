@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/magenta_concrete_stairs"
+		]
+	},
+	"criteria":
+	{
+		"has_magenta_concrete":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:magenta_concrete"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/magenta_concrete_stairs"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_magenta_concrete",
+			"has_the_recipe"
+		]
+	]
+}

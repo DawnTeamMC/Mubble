@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern":
+	[
+		"#",
+		"#",
+		"#"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:permafrost_bricks"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:permafrost_brick_vertical_slab",
+		"count": 6
+	}
+}

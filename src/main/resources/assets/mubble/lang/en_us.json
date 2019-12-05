@@ -57,6 +57,10 @@
 	"block.mubble.permafrost_brick_vertical_slab": "Permafrost Brick Vertical Slab",
 	"block.mubble.permafrost_brick_fence": "Permafrost Brick Fence",
 	"block.mubble.blue_permafrost_bricks": "Blue Permafrost Bricks",
+	"block.mubble.blue_permafrost_brick_stairs": "Blue Permafrost Brick Stairs",
+	"block.mubble.blue_permafrost_brick_slab": "Blue Permafrost Brick Slab",
+	"block.mubble.blue_permafrost_brick_vertical_slab": "Blue Permafrost Brick Vertical Slab",
+	"block.mubble.blue_permafrost_brick_wall": "Blue Permafrost Brick Wall",
 	"block.mubble.permafrost_bismuth_ore": "Permafrost Bismuth Ore",
 	"block.mubble.frozen_obsidian": "Frozen Obsidian",
 
@@ -503,8 +507,18 @@
 	"block.mubble.gray_concrete_button": "Gray Concrete Button",
 	"block.mubble.black_concrete_button": "Black Concrete Button",
 
+	"block.mubble.red_christmas_bauble": "Red Christmas Bauble",
+	"block.mubble.orange_christmas_bauble": "Orange Christmas Bauble",
+	"block.mubble.yellow_christmas_bauble": "Yellow Christmas Bauble",
+	"block.mubble.purple_christmas_bauble": "Purple Christmas Bauble",
+	"block.mubble.magenta_christmas_bauble": "Magenta Christmas Bauble",
+	"block.mubble.pink_christmas_bauble": "Pink Christmas Bauble",
+	"block.mubble.blue_christmas_bauble": "Blue Christmas Bauble",
+	"block.mubble.light_blue_christmas_bauble": "Light Blue Christmas Bauble",
+	"block.mubble.white_christmas_bauble": "White Christmas Bauble",
+
 	"block.mubble.footblock": "Footblock",
-	
+
 	"block.mubble.blue_cloud_block": "Blue Cloud Block",
 	"block.mubble.light_blue_cloud_block": "Light Blue Cloud Block",
 	"block.mubble.cyan_cloud_block": "Cyan Cloud Block",
