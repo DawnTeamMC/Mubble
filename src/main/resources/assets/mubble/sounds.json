@@ -447,7 +447,7 @@
 		"subtitle": "subtitles.mubble.entity.goomba.hurt",
 		"sounds":
 		[
-			"mubble:entity/goomba/hurt/1"
+			"mubble:entity/goomba/hurt"
 		]
 	},
 	"entity.goomba.crush":

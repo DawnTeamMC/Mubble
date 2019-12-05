@@ -42,7 +42,7 @@ public class MubbleItems
     public static final Item SWEET_BERRY_CREPE = item("sweet_berry_crepe", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.SWEET_BERRY_CREPE)));
     public static final Item BLUEBERRY_CREPE = item("blueberry_crepe", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.BLUEBERRY_CREPE)));
     public static final Item CANDY_CANE = item("candy_cane", new Item(new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.CANDY_CANE)));
-    public static final Item JINGLE_BELLS = item("jingle_bells", new ShakeInstrumentItem(new Item.Properties().group(MubbleTabs.INSTRUMENTS), MubbleSounds.ITEM_JINGLE_BELLS_USE));
+    public static final Item JINGLE_BELLS = item("jingle_bells", new ShakeInstrumentItem(new Item.Properties().group(MubbleTabs.INSTRUMENTS).maxStackSize(1), MubbleSounds.ITEM_JINGLE_BELLS_USE));
     public static final Item VANADIUM = item("vanadium", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item BISMUTH_DUST = item("bismuth_dust", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item CRYSTALLIZED_BISMUTH = item("crystallized_bismuth", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
