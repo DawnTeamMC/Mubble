@@ -36,11 +36,7 @@ public class KeyItem extends Item
 		{
 			if(state.get(KeyDoorBlock.LOCKED))
 			{
-				if(worldIn.isRemote)
-				{
-		            return ActionResultType.SUCCESS;
-		        }
-				else
+				if(!worldIn.isRemote)
 				{
 		        	BlockPos otherBlockPos = pos.offset(state.get(KeyDoorBlock.HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN);
 		        	BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
@@ -48,15 +44,11 @@ public class KeyItem extends Item
 		            worldIn.setBlockState(otherBlockPos, otherBlockState.with(KeyDoorBlock.LOCKED, false), 2);
 		        	worldIn.playSound((PlayerEntity)null, pos, this.getKeySuccessSound(state.getBlock(), !state.get(KeyDoorBlock.LOCKED)), SoundCategory.BLOCKS, 1.0F, 1.0F);
 		            context.getItem().shrink(1);
-		    		return ActionResultType.SUCCESS;
 				}
-			}
-			else
-			{
-				return ActionResultType.FAIL;
+	            return ActionResultType.SUCCESS;
 			}
 		}
-		else return ActionResultType.FAIL;
+		return ActionResultType.FAIL;
     }
     
     public SoundEvent getKeySuccessSound(Block block, boolean success)

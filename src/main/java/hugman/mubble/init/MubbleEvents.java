@@ -122,7 +122,7 @@ public class MubbleEvents
 			MobEntity entity = (MobEntity)fEntity;
 			if(entity instanceof ZombieEntity || entity instanceof AbstractSkeletonEntity)
 			{
-				if(entity.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty() && CalendarEvents.isDecember && rand.nextFloat() < 0.25F)
+				if(entity.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty() && CalendarEvents.isChristmasSeason && rand.nextFloat() < CalendarEvents.getDayToday() / 25)
 				{
 					entity.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(MubbleCostumes.CHRISTMAS_HAT));
 					entity.setDropChance(EquipmentSlotType.HEAD, 0.0F);

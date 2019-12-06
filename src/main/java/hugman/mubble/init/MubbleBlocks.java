@@ -16,6 +16,7 @@ import hugman.mubble.objects.block.DirectionalBlock;
 import hugman.mubble.objects.block.DoorBlock;
 import hugman.mubble.objects.block.EmptyBlock;
 import hugman.mubble.objects.block.FluidTankBlock;
+import hugman.mubble.objects.block.GarlandBlock;
 import hugman.mubble.objects.block.GoldenBrickBlock;
 import hugman.mubble.objects.block.GrassBlock;
 import hugman.mubble.objects.block.KeyDoorBlock;
@@ -618,6 +619,10 @@ public class MubbleBlocks
     public static final Block BLUE_CHRISTMAS_BAUBLE = block("blue_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.BLUE_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
     public static final Block LIGHT_BLUE_CHRISTMAS_BAUBLE = block("light_blue_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.LIGHT_BLUE_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
     public static final Block WHITE_CHRISTMAS_BAUBLE = block("white_christmas_bauble", new Block(Properties.create(Material.GLASS, MaterialColor.WHITE_TERRACOTTA).hardnessAndResistance(0.3F).sound(SoundType.GLASS)), ItemGroup.DECORATIONS, CUBES);
+
+    public static final Block RED_SHINY_GARLAND = block("red_shiny_garland", new GarlandBlock(Properties.create(Material.LEAVES, MaterialColor.RED).hardnessAndResistance(0.2F).sound(SoundType.PLANT).lightValue(10)), ItemGroup.DECORATIONS, OTHERS, 30, 60);
+    public static final Block SILVER_SHINY_GARLAND = block("silver_shiny_garland", new GarlandBlock(Properties.create(Material.LEAVES, MaterialColor.CLAY).hardnessAndResistance(0.2F).sound(SoundType.PLANT).lightValue(10)), ItemGroup.DECORATIONS, OTHERS, 30, 60);
+    public static final Block GOLD_SHINY_GARLAND = block("gold_shiny_garland", new GarlandBlock(Properties.create(Material.LEAVES, MaterialColor.GOLD).hardnessAndResistance(0.2F).sound(SoundType.PLANT).lightValue(10)), ItemGroup.DECORATIONS, OTHERS, 30, 60);
     
     public static final Block FOOTBLOCK = block("footblock", new Block(Properties.from(Blocks.WHITE_WOOL)), ItemGroup.DECORATIONS, OTHERS, 60, 60);
     

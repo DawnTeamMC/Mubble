@@ -517,6 +517,10 @@
 	"//block.mubble.light_blue_christmas_bauble": "Light Blue Christmas Bauble",
 	"//block.mubble.white_christmas_bauble": "White Christmas Bauble",
 
+	"//block.mubble.red_shiny_garland": "Red Shiny Garland",
+	"//block.mubble.silver_shiny_garland": "Silver Shiny Garland",
+	"//block.mubble.gold_shiny_garland": "Gold Shiny Garland",
+
 	"block.mubble.footblock": "Fußblock",
 	
 	"block.mubble.blue_cloud_block": "Blauer Wolkenblock",
@@ -912,6 +916,7 @@
 	"item.mubble.mango": "Mango",
 	"item.mubble.blueberries": "Blaubeeren",
 	"//item.mubble.jingle_bells": "Jingle Bells",
+	"//item.mubble.small_bulb": "Small Bulb",
 	"item.mubble.totem_of_ascending": "Totem des Aufsteigends",
 
 

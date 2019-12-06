@@ -5,15 +5,16 @@ import java.time.temporal.ChronoField;
 
 public class CalendarEvents
 {
-	public static LocalDate localdate = LocalDate.now();
-	public static int dayToday = localdate.get(ChronoField.DAY_OF_MONTH);
-	public static int monthToday = localdate.get(ChronoField.MONTH_OF_YEAR);
+	protected static LocalDate localdate = LocalDate.now();
+	protected static int dayToday = localdate.get(ChronoField.DAY_OF_MONTH);
+	protected static int monthToday = localdate.get(ChronoField.MONTH_OF_YEAR);
     
 	public static boolean isNewYear = checkDay(1, 1);
 	public static boolean isAprilFools = checkDay(1, 4);
 	public static boolean isMubbleBirthday = checkDay(14, 7);
 	public static boolean isHugoBirthday = checkDay(3, 10);
 	public static boolean isChristmas = checkBeetweenDays(23, 12, 25, 12);
+	public static boolean isChristmasSeason = checkBeetweenDays(1, 12, 25, 12);
 	public static boolean isDecember = getMonthToday() == 12;
 	
 	public static int getDayToday()
