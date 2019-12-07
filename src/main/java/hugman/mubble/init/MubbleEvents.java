@@ -98,7 +98,7 @@ public class MubbleEvents
 		
 		if(block instanceof FireBlock)
 		{
-			if(worldIn.dimension.getType() != DimensionType.OVERWORLD && worldIn.dimension.getType() != MubbleDimensions.PERMAFROST || !((PermafrostPortalBlock)MubbleBlocks.PERMAFROST_PORTAL).trySpawnPortal(worldIn, pos))
+			if(worldIn.dimension.getType() != DimensionType.OVERWORLD && worldIn.getDimension().getType().getModType() != MubbleDimensions.PERMAFROST || !((PermafrostPortalBlock)MubbleBlocks.PERMAFROST_PORTAL).trySpawnPortal(worldIn, pos))
 			{
 				if (!state.isValidPosition(worldIn, pos))
 				{

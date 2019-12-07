@@ -29,8 +29,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -76,17 +76,6 @@ public class Mubble
     {
     	MubbleCommands.registerCommands(event.getCommandDispatcher());
     	LOGGER.info("Registered " + MubbleCommands.COMMANDS.size() + " commands");
-    }
-    
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
-    public static class ForgeRegistryEvents
-    {        
-        @SubscribeEvent
-        public static void onDimensionsRegistry(final RegisterDimensionsEvent event)
-        {
-        	MubbleDimensions.registerDimensions();
-        	LOGGER.info("Registered " + MubbleDimensions.DIMENSIONS.size() + " dimensions");
-        }
     }
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
@@ -169,6 +158,13 @@ public class Mubble
         	event.getRegistry().registerAll(MubbleBiomes.BIOMES.toArray(new Biome[0]));
         	MubbleBiomes.registerGenerations();
         	LOGGER.info("Registered " + MubbleBiomes.BIOMES.size() + " biomes");
+        }
+        
+        @SubscribeEvent
+        public static void onDimensionsRegistry(final RegistryEvent.Register<ModDimension> event)
+        {
+        	event.getRegistry().registerAll(MubbleDimensions.DIMENSIONS.toArray(new ModDimension[0]));
+        	LOGGER.info("Registered " + MubbleDimensions.DIMENSIONS.size() + " dimensions");
         }
         
     	@OnlyIn(Dist.CLIENT)

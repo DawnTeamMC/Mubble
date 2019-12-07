@@ -9,7 +9,7 @@
 	},
 	"criteria":
 	{
-		"has_red_sandstones":
+		"has_red_sandstone":
 		{
 			"trigger": "minecraft:inventory_changed",
 			"conditions":
@@ -17,7 +17,7 @@
 				"items":
 				[
 					{
-						"item": "minecraft:red_sandstones"
+						"item": "minecraft:red_sandstone"
 					}
 				]
 			}
@@ -34,7 +34,7 @@
 	"requirements":
 	[
 		[
-			"has_red_sandstones",
+			"has_red_sandstone",
 			"has_the_recipe"
 		]
 	]

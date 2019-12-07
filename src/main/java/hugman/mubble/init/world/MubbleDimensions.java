@@ -3,19 +3,21 @@ package hugman.mubble.init.world;
 import java.util.ArrayList;
 import java.util.List;
 
+import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.dimension.PermafrostDimension;
 import hugman.mubble.util.CustomDimension;
-import net.minecraft.world.dimension.DimensionType;
-import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.ModDimension;
 
 public class MubbleDimensions
 {
-    public static final List<CustomDimension> DIMENSIONS = new ArrayList<CustomDimension>();
+    public static final List<ModDimension> DIMENSIONS = new ArrayList<ModDimension>();
 
-	public static DimensionType PERMAFROST;
+	public static ModDimension PERMAFROST = register("permafrost", new CustomDimension(PermafrostDimension::new));
 	
-	public static void registerDimensions()
+	private static ModDimension register(String name, ModDimension dimension)
 	{
-		PERMAFROST = DimensionManager.registerDimension(PermafrostDimension.getName(), new CustomDimension(PermafrostDimension::new, PermafrostDimension.getName()), null, true);
+		ModDimension fDimension = dimension.setRegistryName(Mubble.MOD_ID, name);
+		MubbleDimensions.DIMENSIONS.add(fDimension);
+		return fDimension;
 	}
 }
