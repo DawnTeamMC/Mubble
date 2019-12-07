@@ -1,4 +1,4 @@
-package hugman.mubble.objects.block.tile_entity;
+package hugman.mubble.objects.tile_entity;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.init.data.MubbleTileEntityTypes;

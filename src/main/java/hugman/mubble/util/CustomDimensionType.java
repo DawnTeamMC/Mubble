@@ -7,11 +7,11 @@ import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.ModDimension;
 
-public class CustomDimension extends ModDimension
+public class CustomDimensionType extends ModDimension
 {
 	private final BiFunction<World, DimensionType, ? extends Dimension> dimClass;
 	
-	public CustomDimension(BiFunction<World, DimensionType, ? extends Dimension> dimClass)
+	public CustomDimensionType(BiFunction<World, DimensionType, ? extends Dimension> dimClass)
 	{
 		this.dimClass = dimClass;
 	}

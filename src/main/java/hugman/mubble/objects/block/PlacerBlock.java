@@ -1,7 +1,7 @@
 package hugman.mubble.objects.block;
 
 import hugman.mubble.objects.block.dispenser_behavior.PlaceBlockBehavior;
-import hugman.mubble.objects.block.tile_entity.PlacerTileEntity;
+import hugman.mubble.objects.tile_entity.PlacerTileEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.dispenser.IDispenseItemBehavior;

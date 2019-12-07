@@ -5,14 +5,14 @@ import java.util.List;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.dimension.PermafrostDimension;
-import hugman.mubble.util.CustomDimension;
+import hugman.mubble.util.CustomDimensionType;
 import net.minecraftforge.common.ModDimension;
 
 public class MubbleDimensions
 {
     public static final List<ModDimension> DIMENSIONS = new ArrayList<ModDimension>();
 
-	public static ModDimension PERMAFROST = register("permafrost", new CustomDimension(PermafrostDimension::new));
+	public static ModDimension PERMAFROST = register("permafrost", new CustomDimensionType(PermafrostDimension::new));
 	
 	private static ModDimension register(String name, ModDimension dimension)
 	{
