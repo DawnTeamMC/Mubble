@@ -1,4 +1,19 @@
 {
+	"block.present.close":
+	{
+		"sounds":
+		[
+			"minecraft:block/barrel/close"
+		]
+	},
+	"block.present.open":
+	{
+		"sounds":
+		[
+			"minecraft:block/barrel/open1",
+			"minecraft:block/barrel/open2"
+		]
+	},
 	"block.question_block.loot.power_up.smb":
 	{
 		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",

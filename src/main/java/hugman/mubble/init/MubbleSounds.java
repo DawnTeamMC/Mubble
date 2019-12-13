@@ -11,6 +11,8 @@ public class MubbleSounds
 {	
 	public static final List<SoundEvent> SOUNDS = new ArrayList<SoundEvent>();
 
+	public static final SoundEvent BLOCK_PRESENT_CLOSE = register("block.present.close");
+	public static final SoundEvent BLOCK_PRESENT_OPEN = register("block.present.open");
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB = register("block.question_block.loot.power_up.smb");
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3 = register("block.question_block.loot.power_up.smb3");
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW = register("block.question_block.loot.power_up.smw");

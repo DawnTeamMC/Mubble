@@ -1,0 +1,20 @@
+{
+	"variants":
+	{
+		"open=false,empty=false":
+		[
+			{ "model": "mubble:block/red_present/closed" }
+		],
+		"open=true,empty=false":
+		[
+			{ "model": "mubble:block/red_present/open" },
+			{ "model": "mubble:block/red_present/open", "y": 90 },
+			{ "model": "mubble:block/red_present/open", "y": 180 },
+			{ "model": "mubble:block/red_present/open", "y": 270 }
+		],
+		"empty=true":
+		[
+			{ "model": "mubble:block/red_present/empty" }
+		]
+	}
+}

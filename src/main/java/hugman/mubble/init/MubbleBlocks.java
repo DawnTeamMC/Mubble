@@ -28,6 +28,7 @@ import hugman.mubble.objects.block.OverBlock;
 import hugman.mubble.objects.block.PermafrostPortalBlock;
 import hugman.mubble.objects.block.PileBlock;
 import hugman.mubble.objects.block.PlacerBlock;
+import hugman.mubble.objects.block.PresentBlock;
 import hugman.mubble.objects.block.PressurePlateBlock;
 import hugman.mubble.objects.block.PuyoBlock;
 import hugman.mubble.objects.block.QuestionBlock;
@@ -623,6 +624,9 @@ public class MubbleBlocks
     public static final Block RED_SHINY_GARLAND = register("red_shiny_garland", new GarlandBlock(Properties.create(Material.LEAVES, MaterialColor.RED).hardnessAndResistance(0.2F).sound(SoundType.PLANT).lightValue(10)), ItemGroup.DECORATIONS, OTHERS, 30, 60);
     public static final Block SILVER_SHINY_GARLAND = register("silver_shiny_garland", new GarlandBlock(Properties.create(Material.LEAVES, MaterialColor.CLAY).hardnessAndResistance(0.2F).sound(SoundType.PLANT).lightValue(10)), ItemGroup.DECORATIONS, OTHERS, 30, 60);
     public static final Block GOLD_SHINY_GARLAND = register("gold_shiny_garland", new GarlandBlock(Properties.create(Material.LEAVES, MaterialColor.GOLD).hardnessAndResistance(0.2F).sound(SoundType.PLANT).lightValue(10)), ItemGroup.DECORATIONS, OTHERS, 30, 60);
+
+    public static final Block RED_PRESENT = register("red_present", new PresentBlock(Properties.create(Material.WOOD, MaterialColor.RED_TERRACOTTA).hardnessAndResistance(0.8F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS, OTHERS, 60, 60);
+    public static final Block GREEN_PRESENT = register("green_present", new PresentBlock(Properties.create(Material.WOOD, MaterialColor.GREEN_TERRACOTTA).hardnessAndResistance(0.8F).sound(SoundType.WOOD)), ItemGroup.DECORATIONS, OTHERS, 60, 60);
     
     public static final Block FOOTBLOCK = register("footblock", new Block(Properties.from(Blocks.WHITE_WOOL)), ItemGroup.DECORATIONS, OTHERS, 60, 60);
     
