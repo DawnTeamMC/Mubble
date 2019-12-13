@@ -521,6 +521,9 @@
 	"block.mubble.silver_shiny_garland": "Guirlande brillante argentée",
 	"block.mubble.gold_shiny_garland": "Guirlande brillante dorée",
 
+	"block.mubble.red_present": "Cadeau rouge",
+	"block.mubble.green_present": "Cadeau vert",
+
 	"block.mubble.footblock": "Bloc de foot",
 	
 	"block.mubble.blue_cloud_block": "Bloc de nuage bleu",
@@ -1072,7 +1075,7 @@
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Placeur",
 	"container.mubble.timeswap_table": "Table d'échange temporel",
-	"//container.mubble.present": "Present",
+	"container.mubble.present": "Cadeau",
 
 
 
