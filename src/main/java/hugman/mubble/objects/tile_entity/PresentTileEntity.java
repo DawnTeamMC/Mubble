@@ -18,7 +18,6 @@ import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -83,12 +82,14 @@ public class PresentTileEntity extends LockableLootTileEntity
 	@Override
 	public ItemStack decrStackSize(int index, int count)
 	{
+		this.scheduleTick();
 		return ItemStackHelper.getAndSplit(this.content, index, count);
 	}
 	
 	@Override
 	public ItemStack removeStackFromSlot(int index)
 	{
+		this.scheduleTick();
 		return ItemStackHelper.getAndRemove(this.content, index);
 	}
 	
@@ -100,6 +101,7 @@ public class PresentTileEntity extends LockableLootTileEntity
 		{
 			stack.setCount(this.getInventoryStackLimit());
 		}
+		this.scheduleTick();
 	}
 	
 	@Override
@@ -168,22 +170,25 @@ public class PresentTileEntity extends LockableLootTileEntity
 		int i = this.pos.getX();
 		int j = this.pos.getY();
 		int k = this.pos.getZ();
+		
 		this.numPlayersUsing = ChestTileEntity.calculatePlayersUsing(this.world, this, i, j, k);
+		
+		BlockState blockstate = this.getBlockState();
+		boolean flag1 = blockstate.get(PresentBlock.OPEN);
+		boolean flag2 = this.isEmpty();
+
+		this.setEmptyProperty(blockstate, flag2);
 		if(this.numPlayersUsing > 0)
 		{
 			this.scheduleTick();
 		}
 		else
 		{
-			BlockState blockstate = this.getBlockState();
 			if(!(blockstate.getBlock() instanceof PresentBlock))
 			{
 				this.remove();
 				return;
 			}
-			
-			boolean flag1 = blockstate.get(PresentBlock.OPEN);
-			boolean flag2 = this.isEmpty();
 			if(flag1)
 			{
 				if(!flag2)
@@ -207,6 +212,11 @@ public class PresentTileEntity extends LockableLootTileEntity
 	private void setOpenProperty(BlockState state, boolean open)
 	{
 		this.world.setBlockState(this.getPos(), state.with(PresentBlock.OPEN, Boolean.valueOf(open)), 3);
+	}
+	
+	private void setEmptyProperty(BlockState state, boolean empty)
+	{
+		this.world.setBlockState(this.getPos(), state.with(PresentBlock.EMPTY, Boolean.valueOf(empty)), 3);
 	}
 	
 	private void playSound(BlockState state, SoundEvent sound)

@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/orange_quartz_paving_stairs"
+		]
+	},
+	"criteria":
+	{
+		"has_orange_quartz_paving":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:orange_quartz_paving"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/orange_quartz_paving_stairs"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_orange_quartz_paving",
+			"has_the_recipe"
+		]
+	]
+}

@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/purple_quartz_paving_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_purple_quartz_paving":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:purple_quartz_paving"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/purple_quartz_paving_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_purple_quartz_paving",
+			"has_the_recipe"
+		]
+	]
+}

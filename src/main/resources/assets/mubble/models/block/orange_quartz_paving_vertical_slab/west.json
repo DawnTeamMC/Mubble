@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:block/vertical_slab/west",
+	"textures":
+	{
+		"block": "mubble:block/orange_quartz_paving"
+	}
+}

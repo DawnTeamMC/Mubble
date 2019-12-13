@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:stonecutting/blue_quartz_paving_stairs"
+		]
+	},
+	"criteria":
+	{
+		"has_blue_quartz_paving":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:blue_quartz_paving"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:stonecutting/blue_quartz_paving_stairs"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_blue_quartz_paving",
+			"has_the_recipe"
+		]
+	]
+}

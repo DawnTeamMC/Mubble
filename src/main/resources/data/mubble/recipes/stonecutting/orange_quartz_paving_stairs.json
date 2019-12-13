@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "mubble:orange_quartz_paving"
+	},
+	"result": "mubble:orange_quartz_paving_stairs",
+	"count": 1
+}

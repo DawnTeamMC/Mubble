@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_all",
+	"textures":
+	{
+		"all": "mubble:block/light_gray_quartz_paving"
+	}
+}
