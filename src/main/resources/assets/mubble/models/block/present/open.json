@@ -11,12 +11,12 @@
 			"to": [15, 12, 15],
 			"faces":
 			{
-				"north": {"uv": [0, 7, 7, 13], "texture": "#all"},
-				"east": {"uv": [0, 7, 7, 13], "texture": "#all"},
-				"south": {"uv": [0, 7, 7, 13], "texture": "#all"},
-				"west": {"uv": [0, 7, 7, 13], "texture": "#all"},
-				"up": {"uv": [0, 0, 7, 7], "texture": "#all"},
-				"down": {"uv": [7, 0, 14, 7], "texture": "#all"}
+				"north": {"uv": [7, 3.5, 10.5, 6.25], "texture": "#all"},
+				"east": {"uv": [7, 3.5, 10.5, 6.25], "texture": "#all"},
+				"south": {"uv": [7, 3.5, 10.5, 6.25], "texture": "#all"},
+				"west": {"uv": [7, 3.5, 10.5, 6.25], "texture": "#all"},
+				"up": {"uv": [7, 0, 10.5, 3.5], "texture": "#all"},
+				"down": {"uv": [7, 6.5, 10.5, 10], "texture": "#all"}
 			}
 		},
 		{
@@ -30,12 +30,12 @@
 			},
 			"faces":
 			{
-				"north": {"uv": [0, 0, 7, 7], "texture": "#all"},
-				"east": {"uv": [7, 7, 14, 9.5], "rotation": 270, "texture": "#all"},
-				"south": {"uv": [7, 0, 14, 7], "texture": "#all"},
-				"west": {"uv": [7, 7, 14, 9.5], "rotation": 90, "texture": "#all"},
-				"up": {"uv": [7, 7, 14, 9.5], "rotation": 180, "texture": "#all"},
-				"down": {"uv": [7, 7, 14, 9.5], "texture": "#all"}
+				"north": {"uv": [3.5, 0, 7, 3.5], "texture": "#all"},
+				"east": {"uv": [0, 3.5, 3.5, 4.75], "rotation": 90, "texture": "#all"},
+				"south": {"uv": [0, 0, 3.5, 3.5], "texture": "#all"},
+				"west": {"uv": [0, 3.5, 3.5, 4.75], "rotation": 270, "texture": "#all"},
+				"up": {"uv": [0, 3.5, 3.5, 4.75], "rotation": 180, "texture": "#all"},
+				"down": {"uv": [0, 3.5, 3.5, 4.75], "texture": "#all"}
 			}
 		},
 		{
@@ -49,8 +49,8 @@
 			},
 			"faces":
 			{
-				"east": {"uv": [7.5, 10, 15, 12], "texture": "#all", "rotation": 270},
-				"west": {"uv": [7.5, 10, 15, 12], "texture": "#all", "rotation": 90}
+				"east": {"uv": [10.5, 0, 14.25, 1], "rotation": 270, "texture": "#all"},
+				"west": {"uv": [10.5, 0, 14.25, 1], "rotation": 90, "texture": "#all"}
 			}
 		},
 		{
@@ -64,8 +64,8 @@
 			},
 			"faces":
 			{
-				"up": {"uv": [7.5, 10, 15, 12], "texture": "#all", "rotation": 180},
-				"down": {"uv": [7.5, 10, 15, 12], "texture": "#all"}
+				"up": {"uv": [10.5, 0, 14.25, 1], "rotation": 180, "texture": "#all"},
+				"down": {"uv": [10.5, 0, 14.25, 1], "texture": "#all"}
 			}
 		}
 	]

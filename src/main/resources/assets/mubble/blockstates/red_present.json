@@ -3,7 +3,10 @@
 	{
 		"open=false,empty=false":
 		[
-			{ "model": "mubble:block/red_present/closed" }
+			{ "model": "mubble:block/red_present/closed" },
+			{ "model": "mubble:block/red_present/closed", "y": 90 },
+			{ "model": "mubble:block/red_present/closed", "y": 180 },
+			{ "model": "mubble:block/red_present/closed", "y": 270 }
 		],
 		"open=true,empty=false":
 		[
@@ -14,7 +17,10 @@
 		],
 		"empty=true":
 		[
-			{ "model": "mubble:block/red_present/empty" }
+			{ "model": "mubble:block/red_present/empty" },
+			{ "model": "mubble:block/red_present/empty", "y": 90 },
+			{ "model": "mubble:block/red_present/empty", "y": 180 },
+			{ "model": "mubble:block/red_present/empty", "y": 270 }
 		]
 	}
 }
