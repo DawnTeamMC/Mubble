@@ -14,7 +14,6 @@ public class CalendarEvents
 	public static boolean isMubbleBirthday = checkDay(14, 7);
 	public static boolean isHugoBirthday = checkDay(3, 10);
 	public static boolean isChristmas = checkBeetweenDays(23, 12, 25, 12);
-	public static boolean isChristmasSeason = checkBeetweenDays(1, 12, 25, 12);
 	public static boolean isDecember = getMonthToday() == 12;
 	
 	public static int getDayToday()
@@ -34,6 +33,6 @@ public class CalendarEvents
     
     private static boolean checkBeetweenDays(int day1, int month1, int day2, int month2)
     {
-        return day1 <= dayToday && day2 <= dayToday && month1 <= monthToday && month2 <= monthToday;
+        return day1 <= dayToday && day2 >= dayToday && month1 <= monthToday && month2 >= monthToday;
     }
 }

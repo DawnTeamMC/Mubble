@@ -589,8 +589,10 @@
 	"block.mubble.silver_shiny_garland": "Zilvere glanzende slinger",
 	"block.mubble.gold_shiny_garland": "Goude glanzende slinger",
 
-	"//block.mubble.red_present": "Red Present",
+	"//block.mubble.blue_present": "Blue Present",
 	"//block.mubble.green_present": "Green Present",
+	"//block.mubble.yellow_present": "Yellow Present",
+	"//block.mubble.red_present": "Red Present",
 
 	"block.mubble.footblock": "Voetblok",
 	

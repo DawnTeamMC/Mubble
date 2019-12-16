@@ -1,0 +1,26 @@
+{
+	"variants":
+	{
+		"open=false,empty=false":
+		[
+			{ "model": "mubble:block/blue_present/closed" },
+			{ "model": "mubble:block/blue_present/closed", "y": 90 },
+			{ "model": "mubble:block/blue_present/closed", "y": 180 },
+			{ "model": "mubble:block/blue_present/closed", "y": 270 }
+		],
+		"open=true,empty=false":
+		[
+			{ "model": "mubble:block/blue_present/open" },
+			{ "model": "mubble:block/blue_present/open", "y": 90 },
+			{ "model": "mubble:block/blue_present/open", "y": 180 },
+			{ "model": "mubble:block/blue_present/open", "y": 270 }
+		],
+		"empty=true":
+		[
+			{ "model": "mubble:block/blue_present/empty" },
+			{ "model": "mubble:block/blue_present/empty", "y": 90 },
+			{ "model": "mubble:block/blue_present/empty", "y": 180 },
+			{ "model": "mubble:block/blue_present/empty", "y": 270 }
+		]
+	}
+}
