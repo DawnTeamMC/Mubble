@@ -30,11 +30,6 @@ public class MubbleItems
     public static final List<Item> ITEMS = new ArrayList<Item>();
 
     /* MINECRAFT */
-    public static final Item BISMUTH_SWORD = register("bismuth_sword", new SwordItem(MubbleItemTier.BISMUTH, 4, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
-    public static final Item BISMUTH_SHOVEL = register("bismuth_shovel", new ShovelItem(MubbleItemTier.BISMUTH, 1.5F, -3.0F, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final Item BISMUTH_PICKAXE = register("bismuth_pickaxe", new PickaxeItem(MubbleItemTier.BISMUTH, 1, -2.4F, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final Item BISMUTH_AXE = register("bismuth_axe", new AxeItem(MubbleItemTier.BISMUTH, 7.5F, -2.5F, new Item.Properties().group(ItemGroup.TOOLS)));
-    public static final Item BISMUTH_HOE = register("bismuth_hoe", new HoeItem(MubbleItemTier.BISMUTH, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final Item WHEAT_FLOUR = register("wheat_flour", new Item(new Item.Properties().group(ItemGroup.FOOD)));
     public static final Item TOMATO = register("tomato", new BlockNamedItem(MubbleBlocks.TOMATOES, new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.TOMATO)));
     public static final Item SALAD = register("salad", new BlockNamedItem(MubbleBlocks.SALAD, new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.SALAD)));
@@ -59,6 +54,11 @@ public class MubbleItems
     public static final Item VANADIUM = register("vanadium", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item BISMUTH_DUST = register("bismuth_dust", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item CRYSTALLIZED_BISMUTH = register("crystallized_bismuth", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
+    public static final Item BISMUTH_SWORD = register("bismuth_sword", new SwordItem(MubbleItemTier.BISMUTH, 4, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final Item BISMUTH_SHOVEL = register("bismuth_shovel", new ShovelItem(MubbleItemTier.BISMUTH, 1.5F, -3.0F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_PICKAXE = register("bismuth_pickaxe", new PickaxeItem(MubbleItemTier.BISMUTH, 1, -2.4F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_AXE = register("bismuth_axe", new AxeItem(MubbleItemTier.BISMUTH, 7.5F, -2.5F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_HOE = register("bismuth_hoe", new HoeItem(MubbleItemTier.BISMUTH, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final Item PERMAFROST_BRICK = register("permafrost_brick", new Item(new Item.Properties().group(ItemGroup.MATERIALS)));
     public static final Item BANDAGE = register("bandage", new BandageItem(new Item.Properties().group(ItemGroup.MISC).maxStackSize(16)));
     public static final Item TOTEM_OF_ASCENDING = register("totem_of_ascending", new TotemOfAscendingItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1).rarity(Rarity.UNCOMMON)));
