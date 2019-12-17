@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/small_bulb"
+		]
+	},
+	"criteria":
+	{
+		"has_torch":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:torch"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/small_bulb"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_torch",
+			"has_the_recipe"
+		]
+	]
+}
