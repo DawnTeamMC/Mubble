@@ -5,7 +5,7 @@ logoFile="logo.png"
 
 [[mods]]
 modId="mubble"
-version="2.0.2"
+version="2.1"
 displayName="Mubble"
 updateJSONURL="https://raw.githubusercontent.com/Hugman76/Mubble/1.14/update.json"
 displayURL="https://sites.google.com/view/mubblemc"
@@ -17,7 +17,7 @@ description='''
 
     This mod also includes a ton of content based around Nintendo (a lot of Super Mario Maker 2 content) and indie games such as Celeste and Castlevania.
 
-    Please visit the Mubble pages on the FTB Wiki for more information.
+    Please visit the Mubble website and pages on the FTB Wiki for more information.
 '''
 
 [[dependencies.mubble]]
