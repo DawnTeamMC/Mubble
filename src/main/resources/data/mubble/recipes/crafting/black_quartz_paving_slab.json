@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:quartz_paving_slab",
+	"pattern":
+	[
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:black_quartz_paving"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:black_quartz_paving_slab",
+		"count": 6
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:quartz_paving_stairs",
+	"pattern":
+	[
+		"#  ",
+		"## ",
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:purple_quartz_paving"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:purple_quartz_paving_stairs",
+		"count": 4
+	}
+}
