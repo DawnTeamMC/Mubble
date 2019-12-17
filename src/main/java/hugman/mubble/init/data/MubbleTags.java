@@ -5,8 +5,10 @@ import java.util.List;
 
 import hugman.mubble.Mubble;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
@@ -61,6 +63,16 @@ public class MubbleTags
         	Tag<Item> fTag = new ItemTags.Wrapper(new ResourceLocation(Mubble.MOD_ID, name));
         	TIMESWAP_TAGS.add(fTag);
             return fTag;
+        }
+    }
+    
+    public static class EntityTypes
+    {
+        public static final Tag<EntityType<?>> CAN_WEAR_HELMET = tag("can_wear_helmet");
+
+        private static Tag<EntityType<?>> tag(String name)
+        {
+            return new EntityTypeTags.Wrapper(new ResourceLocation(Mubble.MOD_ID, name));
         }
     }
 }

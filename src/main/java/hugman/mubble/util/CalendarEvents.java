@@ -1,19 +1,19 @@
 package hugman.mubble.util;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoField;
 
 public class CalendarEvents
 {
-	protected static LocalDate localdate = LocalDate.now();
-	protected static int dayToday = localdate.get(ChronoField.DAY_OF_MONTH);
-	protected static int monthToday = localdate.get(ChronoField.MONTH_OF_YEAR);
+	protected static LocalDate date = LocalDate.now();
+	protected static int dayToday = date.getDayOfMonth();
+	protected static int monthToday = date.getMonthValue();
     
 	public static boolean isNewYear = checkDay(1, 1);
 	public static boolean isAprilFools = checkDay(1, 4);
 	public static boolean isMubbleBirthday = checkDay(14, 7);
 	public static boolean isHugoBirthday = checkDay(3, 10);
 	public static boolean isChristmas = checkBeetweenDays(23, 12, 25, 12);
+	public static boolean isChristmasSeason = checkBeetweenDays(1, 12, 26, 12);
 	public static boolean isDecember = getMonthToday() == 12;
 	
 	public static int getDayToday()

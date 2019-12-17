@@ -1,0 +1,7 @@
+{
+	"parent": "item/handheld",
+	"textures":
+	{
+		"layer0": "mubble:item/bismuth_sword"
+	}
+}

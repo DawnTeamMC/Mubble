@@ -19,8 +19,6 @@ import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MobEntity;
-import net.minecraft.entity.monster.AbstractSkeletonEntity;
-import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
@@ -120,12 +118,15 @@ public class MubbleEvents
 		if(fEntity instanceof MobEntity)
 		{
 			MobEntity entity = (MobEntity)fEntity;
-			if(entity instanceof ZombieEntity || entity instanceof AbstractSkeletonEntity)
+			if(MubbleTags.EntityTypes.CAN_WEAR_HELMET.contains(entity.getType()))
 			{
-				if(entity.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty() && CalendarEvents.isDecember && rand.nextFloat() < (CalendarEvents.getDayToday() / 25))
+				if(entity.getItemStackFromSlot(EquipmentSlotType.HEAD).isEmpty() && CalendarEvents.isChristmasSeason)
 				{
-					entity.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(MubbleCostumes.CHRISTMAS_HAT));
-					entity.setDropChance(EquipmentSlotType.HEAD, 0.0F);
+					if(rand.nextFloat() < (float)CalendarEvents.getDayToday() / 25.0f)
+					{
+						entity.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(MubbleCostumes.CHRISTMAS_HAT));
+						entity.setDropChance(EquipmentSlotType.HEAD, 0.0F);
+					}
 				}
 			}
 		}

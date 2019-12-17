@@ -2,6 +2,7 @@
 	"replace": false,
 	"values":
 	[
+		"minecraft:grass_block",
 		"mubble:smb_ground_ground_block",
 		"mubble:smb_underground_ground_block",
 		"mubble:smb_underwater_ground_block",

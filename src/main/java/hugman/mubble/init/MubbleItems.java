@@ -12,11 +12,17 @@ import hugman.mubble.objects.item.SmallBulbItem;
 import hugman.mubble.objects.item.SmashBallItem;
 import hugman.mubble.objects.item.SuperStarItem;
 import hugman.mubble.objects.item.TotemOfAscendingItem;
+import hugman.mubble.util.MubbleItemTier;
+import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockNamedItem;
+import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.Rarity;
+import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SpawnEggItem;
+import net.minecraft.item.SwordItem;
 
 public class MubbleItems
 {
@@ -24,6 +30,11 @@ public class MubbleItems
     public static final List<Item> ITEMS = new ArrayList<Item>();
 
     /* MINECRAFT */
+    public static final Item BISMUTH_SWORD = register("bismuth_sword", new SwordItem(MubbleItemTier.BISMUTH, 4, -2.4F, new Item.Properties().group(ItemGroup.COMBAT)));
+    public static final Item BISMUTH_SHOVEL = register("bismuth_shovel", new ShovelItem(MubbleItemTier.BISMUTH, 1.5F, -3.0F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_PICKAXE = register("bismuth_pickaxe", new PickaxeItem(MubbleItemTier.BISMUTH, 1, -2.4F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_AXE = register("bismuth_axe", new AxeItem(MubbleItemTier.BISMUTH, 7.5F, -2.5F, new Item.Properties().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_HOE = register("bismuth_hoe", new HoeItem(MubbleItemTier.BISMUTH, 0.0F, new Item.Properties().group(ItemGroup.TOOLS)));
     public static final Item WHEAT_FLOUR = register("wheat_flour", new Item(new Item.Properties().group(ItemGroup.FOOD)));
     public static final Item TOMATO = register("tomato", new BlockNamedItem(MubbleBlocks.TOMATOES, new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.TOMATO)));
     public static final Item SALAD = register("salad", new BlockNamedItem(MubbleBlocks.SALAD, new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.SALAD)));
