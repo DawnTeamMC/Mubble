@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/white_christmas_bauble"
+		]
+	},
+	"criteria":
+	{
+		"has_glowstone":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"tag": "forge:dusts/glowstone"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/white_christmas_bauble"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_glowstone",
+			"has_the_recipe"
+		]
+	]
+}
