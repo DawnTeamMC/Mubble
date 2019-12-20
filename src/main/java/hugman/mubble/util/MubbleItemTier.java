@@ -9,7 +9,7 @@ import net.minecraft.util.LazyLoadBase;
 
 public enum MubbleItemTier implements IItemTier
 {
-	BISMUTH(4, 2176, 11.0F, 3.5F, 20, () ->
+	BISMUTH(4, 2176, 11.0F, 3F, 20, () ->
 	{
 		return Ingredient.fromTag(MubbleTags.Items.GEMS_BISMUTH);
 	});

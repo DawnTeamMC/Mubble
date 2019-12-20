@@ -13,12 +13,12 @@ import net.minecraft.world.gen.feature.NoFeatureConfig;
 
 public class ScarletFlowersFeature extends FlowersFeature
 {	
-	public ScarletFlowersFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> p_i49876_1_)
+	public ScarletFlowersFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> config)
 	{
-		super(p_i49876_1_);
+		super(config);
 	}
 
-	public BlockState getRandomFlower(Random p_202355_1_, BlockPos p_202355_2_)
+	public BlockState getRandomFlower(Random random, BlockPos pos)
 	{
 		return MubbleBlocks.SCARLET_ORCHID.getDefaultState();
 	}

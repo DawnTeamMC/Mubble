@@ -27,7 +27,7 @@ public class PermafrostCaveWorldCarver extends NetherCaveWorldCarver
     }
     
     @Override
-    protected boolean carveBlock(IChunk chunkIn, BitSet carvingMask, Random p_222703_3_, BlockPos.MutableBlockPos p_222703_4_, BlockPos.MutableBlockPos p_222703_5_, BlockPos.MutableBlockPos p_222703_6_, int p_222703_7_, int p_222703_8_, int p_222703_9_, int p_222703_10_, int p_222703_11_, int p_222703_12_, int p_222703_13_, int p_222703_14_, AtomicBoolean p_222703_15_)
+    protected boolean carveBlock(IChunk chunkIn, BitSet carvingMask, Random rand, BlockPos.MutableBlockPos p_222703_4_, BlockPos.MutableBlockPos p_222703_5_, BlockPos.MutableBlockPos p_222703_6_, int p_222703_7_, int p_222703_8_, int p_222703_9_, int p_222703_10_, int p_222703_11_, int p_222703_12_, int p_222703_13_, int p_222703_14_, AtomicBoolean p_222703_15_)
     {
     	int i = p_222703_12_ | p_222703_14_ << 4 | p_222703_13_ << 8;
     	if (carvingMask.get(i))

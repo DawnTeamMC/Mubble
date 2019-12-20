@@ -43,13 +43,13 @@ public class PermafrostDimension extends Dimension
 	}
 	
 	@Override
-	public BlockPos findSpawn(ChunkPos p_206920_1_, boolean checkValid)
+	public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid)
 	{
 		return null;
 	}
 	
 	@Override
-	public BlockPos findSpawn(int p_206921_1_, int p_206921_2_, boolean checkValid)
+	public BlockPos findSpawn(int posX, int posZ, boolean checkValid)
 	{
 		return null;
 	}
@@ -68,7 +68,7 @@ public class PermafrostDimension extends Dimension
 	
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public Vec3d getFogColor(float p_76562_1_, float p_76562_2_)
+	public Vec3d getFogColor(float celestialAngle, float partialTicks)
 	{
 		return new Vec3d((double)0.03F, (double)0.2F, (double)0.2F);
 	}
