@@ -4,17 +4,17 @@
     "version": "${version}",
 
     "name": "Mubble",
-    "description": "",
+    "description": "Expand your world with features from the Nintendo universe, and way more.",
     "authors": [
         "Hugman"
     ],
     "contact": {
-        "homepage": "",
-        "sources": "",
-        "issues": ""
+        "homepage": "https://sites.google.com/view/mubblemc",
+        "sources": "https://github.com/Hugman76/Mubble",
+        "issues": "https://github.com/Hugman76/Mubble/issues"
     },
     
-    "license": "GPLv3",
+    "license": "MIT",
     "icon": "logo.png",
 
     "environment": "*",
@@ -22,7 +22,7 @@
         "main": [
             "hugman.mubble.Mubble"
         ]
-    }
+    },
     "depends": {
         "fabricloader": ">=0.7.2",
         "fabric": "*"
