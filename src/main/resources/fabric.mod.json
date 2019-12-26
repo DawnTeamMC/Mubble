@@ -1,0 +1,30 @@
+{
+    "schemaVersion": 1,
+    "id": "mubble",
+    "version": "${version}",
+
+    "name": "Mubble",
+    "description": "",
+    "authors": [
+        "Hugman"
+    ],
+    "contact": {
+        "homepage": "",
+        "sources": "",
+        "issues": ""
+    },
+    
+    "license": "GPLv3",
+    "icon": "logo.png",
+
+    "environment": "*",
+    "entrypoints": {
+        "main": [
+            "hugman.mubble.Mubble"
+        ]
+    }
+    "depends": {
+        "fabricloader": ">=0.7.2",
+        "fabric": "*"
+    }
+}
