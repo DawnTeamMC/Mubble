@@ -2,7 +2,7 @@ package hugman.mubble.objects.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 
-import net.minecraft.command.CommandSource;
+import net.minecraft.server.command.CommandSource;
 
 public interface ICommand
 {

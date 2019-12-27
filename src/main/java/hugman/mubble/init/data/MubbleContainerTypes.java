@@ -1,25 +1,18 @@
 package hugman.mubble.init.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.container.TimeswapTableContainer;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
+import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
+import net.minecraft.util.Identifier;
 
 public class MubbleContainerTypes
-{
-	/* All Content Bag */
-    public static final List<ContainerType<?>> CONTAINER_TYPES = new ArrayList<ContainerType<?>>();
+{    
+	public static final Identifier TIMESWAP_TABLE = new Identifier(Mubble.MOD_ID, "timeswap_table");
     
-    public static final ContainerType<TimeswapTableContainer> TIMESWAP_TABLE = type("timeswap_table", TimeswapTableContainer::new);
-    
-    private static <T extends Container> ContainerType<T> type(String name, ContainerType.IFactory<T> factory)
+    public static void init()
     {
-    	ContainerType<T> fType = new ContainerType<>(factory);
-    	fType.setRegistryName(Mubble.MOD_ID, name);
-    	CONTAINER_TYPES.add(fType);
-    	return fType;
+    	ContainerProviderRegistry.INSTANCE.registerFactory(TIMESWAP_TABLE, (syncId, identifier, player, buf) -> {
+			return new TimeswapTableContainer(syncId, player.inventory);
+		});
     }
 }

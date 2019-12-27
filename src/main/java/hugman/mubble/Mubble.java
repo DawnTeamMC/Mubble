@@ -29,32 +29,28 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod(Mubble.MOD_ID)
-public class Mubble 
+public class Mubble implements ModInitializer
 {
 	public static final String MOD_ID = "mubble";
 	public static final String MOD_PREFIX = MOD_ID + ":";
 	public static final Logger LOGGER = LogManager.getLogger();
 	
-    public Mubble()
-    {        
-        MinecraftForge.EVENT_BUS.register(this);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-    }
+	@Override
+	public void onInitialize()
+	{
+		clientSetup();
+		setup();
+		
+		MubbleContainerTypes.init();
+	}
     
-    private void clientSetup(final FMLClientSetupEvent event)
+    private void clientSetup()
     {
     	MubbleEntities.registerRenders();
     	LOGGER.info("Registered entities renders");
@@ -62,7 +58,7 @@ public class Mubble
     	LOGGER.info("Registered screens");
     }
     
-    private void setup(final FMLCommonSetupEvent event)
+    private void setup()
     {
     	MubbleGenerators.registerOres();
     	LOGGER.info("Registered ores");
