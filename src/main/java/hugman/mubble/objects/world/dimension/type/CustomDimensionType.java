@@ -1,4 +1,4 @@
-package hugman.mubble.util;
+package hugman.mubble.objects.world.dimension.type;
 
 import java.util.function.BiFunction;
 

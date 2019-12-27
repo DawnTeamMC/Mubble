@@ -6,8 +6,8 @@ import java.util.Random;
 import com.mojang.blaze3d.platform.GLX;
 
 import hugman.mubble.init.MubbleCostumes;
-import hugman.mubble.util.CalendarEvents;
-import hugman.mubble.util.Shaders;
+import hugman.mubble.objects.CalendarEvents;
+import hugman.mubble.objects.Shaders;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;

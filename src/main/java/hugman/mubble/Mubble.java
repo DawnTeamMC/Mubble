@@ -17,6 +17,7 @@ import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
+import hugman.mubble.objects.events_handlers.KonamiHandler;
 import hugman.mubble.util.MoreWordUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
@@ -57,9 +58,10 @@ public class Mubble
     private void clientSetup(final FMLClientSetupEvent event)
     {
     	MubbleEntities.registerRenders();
-    	LOGGER.info("Registered entities renders");
+    	LOGGER.info("Registered entity renders");
     	MubbleScreens.registerScreens();
     	LOGGER.info("Registered screens");
+    	MinecraftForge.EVENT_BUS.register(new KonamiHandler());
     }
     
     private void setup(final FMLCommonSetupEvent event)

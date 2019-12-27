@@ -1,4 +1,4 @@
-package hugman.mubble.util;
+package hugman.mubble.objects;
 
 import java.util.ArrayList;
 import java.util.List;

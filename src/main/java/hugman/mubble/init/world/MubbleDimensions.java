@@ -5,7 +5,7 @@ import java.util.List;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.dimension.PermafrostDimension;
-import hugman.mubble.util.CustomDimensionType;
+import hugman.mubble.objects.world.dimension.type.CustomDimensionType;
 import net.minecraftforge.common.ModDimension;
 
 public class MubbleDimensions

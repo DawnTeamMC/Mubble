@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.objects.Shaders;
 import hugman.mubble.objects.block.block_state_property.Princess;
 import hugman.mubble.objects.costume.BlockCostume;
 import hugman.mubble.objects.costume.CappyCostume;
@@ -15,7 +16,6 @@ import hugman.mubble.objects.costume.HeadCostume;
 import hugman.mubble.objects.costume.MayroCapCostume;
 import hugman.mubble.objects.costume.VanishCapCostume;
 import hugman.mubble.objects.costume.WingCapCostume;
-import hugman.mubble.util.Shaders;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
