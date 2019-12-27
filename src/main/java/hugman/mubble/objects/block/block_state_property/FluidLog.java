@@ -1,8 +1,8 @@
 package hugman.mubble.objects.block.block_state_property;
 
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringIdentifiable;
 
-public enum FluidLog implements IStringSerializable
+public enum FluidLog implements StringIdentifiable
 {
 	EMPTY("empty"),
 	WATER("water"),
@@ -15,7 +15,7 @@ public enum FluidLog implements IStringSerializable
 		this.name = name;
 	}
 
-	public String toString()
+	public String asString()
 	{
 		return this.name;
 	}

@@ -3,11 +3,11 @@ package hugman.mubble.util;
 import java.util.function.Supplier;
 
 import hugman.mubble.init.data.MubbleTags;
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyLoadBase;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.util.Lazy;
 
-public enum MubbleItemTier implements IItemTier
+public enum MubbleItemTier implements ToolMaterial
 {
 	BISMUTH(4, 2176, 11.0F, 3F, 20, () ->
 	{
@@ -18,7 +18,7 @@ public enum MubbleItemTier implements IItemTier
 	private final float efficiency;
 	private final float attackDamage;
 	private final int enchantability;
-	private final LazyLoadBase<Ingredient> repairMaterial;
+	private final Lazy<Ingredient> repairMaterial;
 
 	private MubbleItemTier(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn)
 	{
@@ -27,15 +27,15 @@ public enum MubbleItemTier implements IItemTier
 		this.efficiency = efficiencyIn;
 		this.attackDamage = attackDamageIn;
 		this.enchantability = enchantabilityIn;
-		this.repairMaterial = new LazyLoadBase<>(repairMaterialIn);
+		this.repairMaterial = new Lazy<>(repairMaterialIn);
 	}
 
-	public int getMaxUses()
+	public int getDurability()
 	{
 		return this.maxUses;
 	}
 
-	public float getEfficiency()
+	public float getMiningSpeed()
 	{
 		return this.efficiency;
 	}
@@ -45,7 +45,7 @@ public enum MubbleItemTier implements IItemTier
 		return this.attackDamage;
 	}
 
-	public int getHarvestLevel()
+	public int getMiningLevel()
 	{
 		return this.harvestLevel;
 	}
@@ -55,8 +55,8 @@ public enum MubbleItemTier implements IItemTier
 		return this.enchantability;
 	}
 
-	public Ingredient getRepairMaterial()
+	public Ingredient getRepairIngredient()
 	{
-		return this.repairMaterial.getValue();
+		return this.repairMaterial.get();
 	}
 }
