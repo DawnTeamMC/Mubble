@@ -1,11 +1,11 @@
 package hugman.mubble.objects.effect;
 
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectType;
 
-public class SimpleEffect extends Effect
+public class SimpleEffect extends StatusEffect
 {	
-	public SimpleEffect(EffectType typeIn, int liquidColorIn)
+	public SimpleEffect(StatusEffectType typeIn, int liquidColorIn)
 	{
 		super(typeIn, liquidColorIn);
 	}
