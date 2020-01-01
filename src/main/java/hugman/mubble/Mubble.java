@@ -42,6 +42,7 @@ public class Mubble implements ModInitializer
 		
 		// Data
 		new MubbleContainerTypes();
+		new MubbleTileEntityTypes();
 		
 		// World
 		new MubbleCarvers();

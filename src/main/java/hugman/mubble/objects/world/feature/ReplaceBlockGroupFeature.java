@@ -9,10 +9,10 @@ import com.mojang.datafixers.Dynamic;
 import hugman.mubble.objects.world.feature_config.ReplaceBlockGroupConfig;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
-import net.minecraft.world.gen.Heightmap;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 
 public class ReplaceBlockGroupFeature extends Feature<ReplaceBlockGroupConfig>
@@ -23,7 +23,7 @@ public class ReplaceBlockGroupFeature extends Feature<ReplaceBlockGroupConfig>
 	}
 
 	@Override
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> generator, Random rand, BlockPos pos, ReplaceBlockGroupConfig config)
+	public boolean generate(IWorld worldIn, ChunkGenerator<? extends ChunkGeneratorConfig> generator, Random rand, BlockPos pos, ReplaceBlockGroupConfig config)
 	{
 		float f = rand.nextFloat() * (float) Math.PI;
 		float f1 = (float) config.size / 8.0F;
@@ -45,7 +45,7 @@ public class ReplaceBlockGroupFeature extends Feature<ReplaceBlockGroupConfig>
 		{
 			for (int i2 = i1; i2 <= i1 + j1; ++i2)
 			{
-				if (l <= worldIn.getHeight(Heightmap.Type.OCEAN_FLOOR_WG, l1, i2))
+				if (l <= worldIn.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, l1, i2))
 				{
 					return this.func_207803_a(worldIn, rand, config, d0, d1, d2, d3, d4, d5, k, l, i1, j1, k1);
 				}
@@ -59,7 +59,7 @@ public class ReplaceBlockGroupFeature extends Feature<ReplaceBlockGroupConfig>
 	{
 		int i = 0;
 		BitSet bitset = new BitSet(p_207803_19_ * p_207803_20_ * p_207803_19_);
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+		BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
 		double[] adouble = new double[config.size * 4];
 
 		for (int j = 0; j < config.size; ++j)
@@ -138,7 +138,7 @@ public class ReplaceBlockGroupFeature extends Feature<ReplaceBlockGroupConfig>
 										if (!bitset.get(k2))
 										{
 											bitset.set(k2);
-											blockpos$mutableblockpos.setPos(l1, i2, j2);
+											blockpos$mutableblockpos.set(l1, i2, j2);
 											if(worldIn.getBlockState(blockpos$mutableblockpos).getBlock() == config.target.getBlock())
 											{
 												worldIn.setBlockState(blockpos$mutableblockpos, config.state, 2);
