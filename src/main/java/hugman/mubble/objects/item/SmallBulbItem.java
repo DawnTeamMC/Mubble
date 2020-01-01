@@ -3,36 +3,36 @@ package hugman.mubble.objects.item;
 import hugman.mubble.objects.block.GarlandBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemUseContext;
-import net.minecraft.util.ActionResultType;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class SmallBulbItem extends Item
 {
-    public SmallBulbItem(Item.Properties builder)
+    public SmallBulbItem(Item.Settings builder)
     {
         super(builder);
     }
 	
 	@Override
-	public ActionResultType onItemUse(ItemUseContext context)
+	public ActionResult useOnBlock(ItemUsageContext context)
 	{
     	World worldIn = context.getWorld();
-    	BlockPos pos = context.getPos();
+    	BlockPos pos = context.getBlockPos();
     	BlockState state = worldIn.getBlockState(pos);
     	if(state.getBlock() instanceof GarlandBlock)
     	{
 			if(!state.get(GarlandBlock.ILLUMINATED))
 			{
-				if(!worldIn.isRemote)
+				if(!worldIn.isClient)
 				{
 		            worldIn.setBlockState(pos, state.with(GarlandBlock.ILLUMINATED, true), 2);
-		            context.getItem().shrink(1);
+		            context.getStack().decrement(1);
 				}
-	    		return ActionResultType.SUCCESS;
+	    		return ActionResult.SUCCESS;
 			}
     	}
-		return ActionResultType.FAIL;
+		return ActionResult.FAIL;
 	}
 }

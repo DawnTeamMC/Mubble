@@ -1,9 +1,11 @@
 package hugman.mubble.init;
 
+import hugman.mubble.Mubble;
 import hugman.mubble.objects.effect.HiccupEffect;
 import hugman.mubble.objects.effect.SimpleEffect;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class MubbleEffects
@@ -15,6 +17,6 @@ public class MubbleEffects
     
     private static StatusEffect register(String name, StatusEffect statusEffect)
     {
-    	return Registry.register(Registry.STATUS_EFFECT, name, statusEffect);
+    	return Registry.register(Registry.STATUS_EFFECT, new Identifier(Mubble.MOD_ID, name), statusEffect);
     }
 }
