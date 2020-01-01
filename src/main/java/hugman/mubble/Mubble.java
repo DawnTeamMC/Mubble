@@ -15,17 +15,16 @@ import hugman.mubble.init.data.MubbleColorMaps;
 import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
+import hugman.mubble.init.world.MubbleCarvers;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
+import hugman.mubble.init.world.MubbleSurfaceBuilders;
 import hugman.mubble.util.MoreWordUtils;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
-import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
-import net.minecraft.potion.Effect;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
 
 public class Mubble implements ModInitializer
@@ -37,10 +36,16 @@ public class Mubble implements ModInitializer
 	@Override
 	public void onInitialize()
 	{
-		clientSetup();
-		setup();
+		new MubbleCommands();
+		new MubbleEffects();
+		new MubbleSounds();
 		
-		MubbleContainerTypes.init();
+		// Data
+		new MubbleContainerTypes();
+		
+		// World
+		new MubbleCarvers();
+		new MubbleSurfaceBuilders();
 		initGenerators();
 	}
 	
@@ -84,13 +89,6 @@ public class Mubble implements ModInitializer
         }
         
         @SubscribeEvent
-        public static void onContainersRegistry(final RegistryEvent.Register<ContainerType<?>> event)
-        {
-        	event.getRegistry().registerAll(MubbleContainerTypes.CONTAINER_TYPES.toArray(new ContainerType<?>[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleContainerTypes.CONTAINER_TYPES.size(), "container"));
-        }
-        
-        @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> event)
         {
             event.getRegistry().registerAll(MubbleBlocks.CUBES.toArray(new Item[0]));
@@ -124,20 +122,6 @@ public class Mubble implements ModInitializer
         	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleEntities.ENTITY_TYPES.size(), "entity"));
         	MubbleEntities.registerPlacements();
         	LOGGER.info("Registered entity spawn placements");
-        }
-        
-        @SubscribeEvent
-        public static void onSoundsRegistry(final RegistryEvent.Register<SoundEvent> event)
-        {
-        	event.getRegistry().registerAll(MubbleSounds.SOUNDS.toArray(new SoundEvent[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleSounds.SOUNDS.size(), "sound"));
-        }
-        
-        @SubscribeEvent
-        public static void onPotionsRegistry(final RegistryEvent.Register<Effect> event)
-        {
-        	event.getRegistry().registerAll(MubbleEffects.EFFECTS.toArray(new Effect[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleEffects.EFFECTS.size(), "effect"));
         }
         
         @SubscribeEvent

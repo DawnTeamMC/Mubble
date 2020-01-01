@@ -6,45 +6,44 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.Commands;
-import net.minecraft.command.arguments.EntityArgument;
+import net.minecraft.command.arguments.EntityArgumentType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.TranslatableText;
 
-public class HealthCommand implements ICommand
+public class HealthCommand
 {
-	@Override
-	public void register(CommandDispatcher<CommandSource> dispatcher)
+	public static void register(CommandDispatcher<ServerCommandSource> dispatcher)
 	{
 		dispatcher.register(
-			LiteralArgumentBuilder.<CommandSource>literal("health")
+			LiteralArgumentBuilder.<ServerCommandSource>literal("health")
 			.requires((source) ->
 			{
 				return source.hasPermissionLevel(2);
 			})
-			.then(Commands.literal("add")
-			.then(Commands.argument("targets", EntityArgument.entities())
-			.then(Commands.argument("amount", FloatArgumentType.floatArg())
+			.then(CommandManager.literal("add")
+			.then(CommandManager.argument("targets", EntityArgumentType.entities())
+			.then(CommandManager.argument("amount", FloatArgumentType.floatArg())
 			.executes((source) ->
 			{
-				return setHealth(source.getSource(), EntityArgument.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true);
+				return setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true);
 			})
 			)))
-			.then(Commands.literal("set")
-			.then(Commands.argument("targets", EntityArgument.entities())
-			.then(Commands.argument("amount", FloatArgumentType.floatArg(0.0f))
+			.then(CommandManager.literal("set")
+			.then(CommandManager.argument("targets", EntityArgumentType.entities())
+			.then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f))
 			.executes((source) ->
 			{
-				return setHealth(source.getSource(), EntityArgument.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false);
+				return setHealth(source.getSource(), EntityArgumentType.getEntities(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false);
 			})
 			)))
 		);
 	}
 	
-	private static int setHealth(CommandSource source, Collection<? extends Entity> targets, float amount, boolean sum)
+	private static int setHealth(ServerCommandSource source, Collection<? extends Entity> targets, float amount, boolean sum)
 	{
 		int finalTargetAmount = 0;
 		for(Entity entity : targets)
@@ -61,7 +60,7 @@ public class HealthCommand implements ICommand
 					}
 					else if(amount < 0.0F)
 					{
-						livingEntity.attackEntityFrom(DamageSource.OUT_OF_WORLD, amount * -1.0f);
+						livingEntity.damage(DamageSource.OUT_OF_WORLD, amount * -1.0f);
 					}
 				}
 				else
@@ -70,7 +69,7 @@ public class HealthCommand implements ICommand
 					{
 						if(amount == 0.0F)
 						{
-							livingEntity.onKillCommand();
+							livingEntity.kill();
 						}
 						else
 						{
@@ -92,11 +91,11 @@ public class HealthCommand implements ICommand
 		}
 		if(targets.size() == 1)
 		{
-			source.sendFeedback(new TranslationTextComponent("commands.health." + parameter + ".success.single", amount, targets.iterator().next().getDisplayName()), true);
+			source.sendFeedback(new TranslatableText("commands.health." + parameter + ".success.single", amount, targets.iterator().next().getDisplayName()), true);
 		}
 		else
 		{
-			source.sendFeedback(new TranslationTextComponent("commands.health." + parameter + ".success.multiple", amount, finalTargetAmount), true);
+			source.sendFeedback(new TranslatableText("commands.health." + parameter + ".success.multiple", amount, finalTargetAmount), true);
 		}
 		
 		return finalTargetAmount;

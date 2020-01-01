@@ -6,65 +6,64 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.DoubleArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.Commands;
-import net.minecraft.command.arguments.EntityArgument;
+import net.minecraft.client.network.packet.EntityVelocityUpdateS2CPacket;
+import net.minecraft.command.arguments.EntityArgumentType;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.play.server.SEntityVelocityPacket;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.TranslatableText;
 
-public class MotionCommand implements ICommand
+public class MotionCommand
 {
-	@Override
-	public void register(CommandDispatcher<CommandSource> dispatcher)
+	public static void register(CommandDispatcher<ServerCommandSource> dispatcher)
 	{
 		dispatcher.register(
-			LiteralArgumentBuilder.<CommandSource>literal("motion")
+			LiteralArgumentBuilder.<ServerCommandSource>literal("motion")
 			.requires((source) ->
 			{
 				return source.hasPermissionLevel(2);
 			})
-			.then(Commands.literal("add")
-			.then(Commands.argument("targets", EntityArgument.entities())
-			.then(Commands.argument("x", DoubleArgumentType.doubleArg())
-			.then(Commands.argument("y", DoubleArgumentType.doubleArg())
-			.then(Commands.argument("z", DoubleArgumentType.doubleArg())
+			.then(CommandManager.literal("add")
+			.then(CommandManager.argument("targets", EntityArgumentType.entities())
+			.then(CommandManager.argument("x", DoubleArgumentType.doubleArg())
+			.then(CommandManager.argument("y", DoubleArgumentType.doubleArg())
+			.then(CommandManager.argument("z", DoubleArgumentType.doubleArg())
 			.executes((source) ->
 			{
-				return setMotion(source.getSource(), EntityArgument.getEntities(source, "targets"), DoubleArgumentType.getDouble(source, "x"), DoubleArgumentType.getDouble(source, "y"), DoubleArgumentType.getDouble(source, "z"), true);
+				return setMotion(source.getSource(), EntityArgumentType.getEntities(source, "targets"), DoubleArgumentType.getDouble(source, "x"), DoubleArgumentType.getDouble(source, "y"), DoubleArgumentType.getDouble(source, "z"), true);
 			})
 			)))))
-			.then(Commands.literal("set")
-			.then(Commands.argument("targets", EntityArgument.entities())
-			.then(Commands.argument("x", DoubleArgumentType.doubleArg())
-			.then(Commands.argument("y", DoubleArgumentType.doubleArg())
-			.then(Commands.argument("z", DoubleArgumentType.doubleArg())
+			.then(CommandManager.literal("set")
+			.then(CommandManager.argument("targets", EntityArgumentType.entities())
+			.then(CommandManager.argument("x", DoubleArgumentType.doubleArg())
+			.then(CommandManager.argument("y", DoubleArgumentType.doubleArg())
+			.then(CommandManager.argument("z", DoubleArgumentType.doubleArg())
 			.executes((source) ->
 			{
-				return setMotion(source.getSource(), EntityArgument.getEntities(source, "targets"), DoubleArgumentType.getDouble(source, "x"), DoubleArgumentType.getDouble(source, "y"), DoubleArgumentType.getDouble(source, "z"), false);
+				return setMotion(source.getSource(), EntityArgumentType.getEntities(source, "targets"), DoubleArgumentType.getDouble(source, "x"), DoubleArgumentType.getDouble(source, "y"), DoubleArgumentType.getDouble(source, "z"), false);
 			})
 			)))))
 		);
 	}
 	
-	private static int setMotion(CommandSource source, Collection<? extends Entity> targets, double x, double y, double z, boolean sum)
+	private static int setMotion(ServerCommandSource source, Collection<? extends Entity> targets, double x, double y, double z, boolean sum)
 	{
 		for(Entity entity : targets)
 		{
 			if(sum == true)
 			{
-				entity.setMotion(entity.getMotion().add(x, y, z));
+				entity.setVelocity(entity.getVelocity().add(x, y, z));
 			}
 			else
 			{
-				entity.setMotion(x, y, z);
+				entity.setVelocity(x, y, z);
 			}
 			
 			if(entity instanceof ServerPlayerEntity)
 			{
 				ServerPlayerEntity player = (ServerPlayerEntity)entity;
-				player.connection.sendPacket(new SEntityVelocityPacket(entity));
+				player.networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(entity));
 			}
 		}
 		
@@ -79,11 +78,11 @@ public class MotionCommand implements ICommand
 		}
 		if(targets.size() == 1)
 		{
-			source.sendFeedback(new TranslationTextComponent("commands.motion." + parameter + ".success.single", x, y, z, targets.iterator().next().getDisplayName()), true);
+			source.sendFeedback(new TranslatableText("commands.motion." + parameter + ".success.single", x, y, z, targets.iterator().next().getDisplayName()), true);
 		}
 		else
 		{
-			source.sendFeedback(new TranslationTextComponent("commands.motion." + parameter + ".success.multiple", x, y, z, targets.size()), true);
+			source.sendFeedback(new TranslatableText("commands.motion." + parameter + ".success.multiple", x, y, z, targets.size()), true);
 		}
 		
 		return targets.size();
