@@ -18,6 +18,7 @@ import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
 import hugman.mubble.util.MoreWordUtils;
+import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
@@ -26,14 +27,6 @@ import net.minecraft.potion.Effect;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.ColorHandlerEvent;
-import net.minecraftforge.common.ModDimension;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.registries.IForgeRegistry;
 
 public class Mubble implements ModInitializer
 {
@@ -48,6 +41,14 @@ public class Mubble implements ModInitializer
 		setup();
 		
 		MubbleContainerTypes.init();
+		initGenerators();
+	}
+	
+	private void initGenerators()
+	{
+		MubbleGenerators.registerOres();
+		MubbleGenerators.registerTrees();
+		MubbleGenerators.registerSpawns();
 	}
     
     private void clientSetup()
@@ -56,16 +57,6 @@ public class Mubble implements ModInitializer
     	LOGGER.info("Registered entities renders");
     	MubbleScreens.registerScreens();
     	LOGGER.info("Registered screens");
-    }
-    
-    private void setup()
-    {
-    	MubbleGenerators.registerOres();
-    	LOGGER.info("Registered ores");
-    	MubbleGenerators.registerTrees();
-    	LOGGER.info("Registered trees");
-    	MubbleGenerators.registerSpawns();
-    	LOGGER.info("Registered entity spawns");
     }
     
     @SubscribeEvent

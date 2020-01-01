@@ -1,13 +1,16 @@
 package hugman.mubble.init.world;
 
+import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.data.MubbleBlockStateProperties;
 import hugman.mubble.objects.world.surface_builder.PermafrostSurfaceBuilder;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.world.gen.surfacebuilders.ShatteredSavannaSurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
+import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
+import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 public class MubbleSurfaceBuilders
 {
@@ -20,10 +23,13 @@ public class MubbleSurfaceBuilders
 		public static final BlockState PERMAROCK = MubbleBlocks.PERMAROCK.getDefaultState();
 	}
 
-	public static final SurfaceBuilder<SurfaceBuilderConfig> PERMAFROST_SURFACE_BUILDER = new PermafrostSurfaceBuilder(SurfaceBuilderConfig::deserialize);
-	public static final SurfaceBuilder<SurfaceBuilderConfig> SHATTERED_SAVANNA = new ShatteredSavannaSurfaceBuilder(SurfaceBuilderConfig::deserialize);
+	public static final SurfaceBuilder<TernarySurfaceConfig> PERMAFROST_SURFACE_BUILDER = register("permafrost", new PermafrostSurfaceBuilder(TernarySurfaceConfig::deserialize));
 
-	public static final SurfaceBuilderConfig PERMAROCK_SURFACE = new SurfaceBuilderConfig(BlockStates.PERMAROCK, BlockStates.PERMAROCK, BlockStates.PERMAROCK);
-	public static final SurfaceBuilderConfig SMW_GROUND_SURFACE = new SurfaceBuilderConfig(BlockStates.SMW_GROUND_TOP, BlockStates.SMW_GROUND_DIRT, BlockStates.SMW_GROUND_DIRT);
-	public static final SurfaceBuilderConfig SMW_DESERT_SURFACE = new SurfaceBuilderConfig(BlockStates.SMW_DESERT_TOP, BlockStates.SMW_DESERT_DIRT, Blocks.DIRT.getDefaultState());
+	public static final TernarySurfaceConfig PERMAROCK_SURFACE = new TernarySurfaceConfig(BlockStates.PERMAROCK, BlockStates.PERMAROCK, BlockStates.PERMAROCK);
+	public static final TernarySurfaceConfig SMW_GROUND_SURFACE = new TernarySurfaceConfig(BlockStates.SMW_GROUND_TOP, BlockStates.SMW_GROUND_DIRT, BlockStates.SMW_GROUND_DIRT);
+	public static final TernarySurfaceConfig SMW_DESERT_SURFACE = new TernarySurfaceConfig(BlockStates.SMW_DESERT_TOP, BlockStates.SMW_DESERT_DIRT, Blocks.DIRT.getDefaultState());
+	
+	private static <C extends SurfaceConfig, F extends SurfaceBuilder<C>> F register(String name, F surfaceBuilder) {
+		return Registry.register(Registry.SURFACE_BUILDER, new Identifier(Mubble.MOD_ID, name), surfaceBuilder);
+	}
 }

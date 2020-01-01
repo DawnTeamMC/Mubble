@@ -2,60 +2,62 @@ package hugman.mubble.init.world;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
-import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityCategory;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.gen.GenerationStage.Decoration;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.IFeatureConfig;
+import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.CountRange;
-import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class MubbleGenerators
 {
 	public static void registerOres()
 	{
-		for (Biome biome : ForgeRegistries.BIOMES)
+		for (Biome biome : Registry.BIOME)
 		{
 			if (!biome.getCategory().equals(Category.NETHER) && !biome.getCategory().equals(Category.THEEND))
 			{
 				biome.addFeature
 				(
-					Decoration.UNDERGROUND_ORES, 
-					Biome.createDecoratedFeature
+					GenerationStep.Feature.UNDERGROUND_ORES,
+					Feature.ORE.configure
 					(
-						Feature.ORE, 
-						new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, MubbleBlocks.BLUNITE.getDefaultState(), 33),
-						new CountRange(CountRangeConfig::deserialize),
-						new CountRangeConfig(10, 0, 0, 80)
+						new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, MubbleBlocks.BLUNITE.getDefaultState(), 33)
+					)
+					.createDecoratedFeature
+					(
+						Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(10, 0, 0, 80))
 					)
 				);
 				
 				biome.addFeature
 				(
-					Decoration.UNDERGROUND_ORES, 
-					Biome.createDecoratedFeature
+					GenerationStep.Feature.UNDERGROUND_ORES,
+					Feature.ORE.configure
 					(
-						Feature.ORE, 
-						new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, MubbleBlocks.CARBONITE.getDefaultState(), 33),
-						new CountRange(CountRangeConfig::deserialize),
-						new CountRangeConfig(10, 0, 0, 80)
+						new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, MubbleBlocks.CARBONITE.getDefaultState(), 33)
+					)
+					.createDecoratedFeature
+					(
+						Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(10, 0, 0, 80))
 					)
 				);
 				
 				biome.addFeature
 				(
-					Decoration.UNDERGROUND_ORES, 
-					Biome.createDecoratedFeature
+					GenerationStep.Feature.UNDERGROUND_ORES,
+					Feature.ORE.configure
 					(
-						Feature.ORE, 
-						new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, MubbleBlocks.VANADIUM_ORE.getDefaultState(), 6),
-						new CountRange(CountRangeConfig::deserialize),
-						new CountRangeConfig(1, 0, 0, 16)
+						new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, MubbleBlocks.VANADIUM_ORE.getDefaultState(), 6)
+					)
+					.createDecoratedFeature
+					(
+						Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(1, 0, 0, 16))
 					)
 				);
 			}
@@ -64,19 +66,20 @@ public class MubbleGenerators
 	
 	public static void registerTrees()
 	{
-		for (Biome biome : ForgeRegistries.BIOMES)
+		for (Biome biome : Registry.BIOME)
 		{
 			if (biome.getCategory().equals(Category.DESERT))
 			{
 				biome.addFeature
 				(
-					Decoration.VEGETAL_DECORATION, 
-					Biome.createDecoratedFeature
+					GenerationStep.Feature.VEGETAL_DECORATION,
+					MubbleFeatures.PALM_TREE.configure
+					( 
+						FeatureConfig.DEFAULT
+					)
+					.createDecoratedFeature
 					(
-						MubbleFeatures.PALM_TREE, 
-						IFeatureConfig.NO_FEATURE_CONFIG,
-						Placement.COUNT_EXTRA_HEIGHTMAP,
-						new AtSurfaceWithExtraConfig(0, 0.12F, 1)
+						Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.12F, 1))
 					)
 				);
 			}
@@ -85,11 +88,11 @@ public class MubbleGenerators
 	
 	public static void registerSpawns()
 	{
-		for (Biome biome : ForgeRegistries.BIOMES)
+		for (Biome biome : Registry.BIOME)
 		{
 			if (biome.getCategory().equals(Category.PLAINS))
 			{
-				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.TOAD, 10, 4, 4));
+				biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(MubbleEntities.TOAD, 10, 4, 4));
 			}
 		}
 	}
