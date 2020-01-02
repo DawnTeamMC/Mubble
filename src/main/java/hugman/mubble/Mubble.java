@@ -7,6 +7,7 @@ import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleCommands;
 import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.MubbleEffects;
+import hugman.mubble.init.MubbleEnchantments;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleScreens;
@@ -17,9 +18,10 @@ import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
-import hugman.mubble.objects.events_handlers.KonamiHandler;
+import hugman.mubble.objects.events_handler.KonamiHandler;
 import hugman.mubble.util.MoreWordUtils;
 import net.minecraft.block.Block;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
@@ -39,7 +41,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(Mubble.MOD_ID)
 public class Mubble 
@@ -51,19 +52,10 @@ public class Mubble
     public Mubble()
     {        
         MinecraftForge.EVENT_BUS.register(this);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
     }
-    
-    private void clientSetup(final FMLClientSetupEvent event)
-    {
-    	MubbleEntities.registerRenders();
-    	LOGGER.info("Registered entity renders");
-    	MubbleScreens.registerScreens();
-    	LOGGER.info("Registered screens");
-    	MinecraftForge.EVENT_BUS.register(new KonamiHandler());
-    }
-    
+
     private void setup(final FMLCommonSetupEvent event)
     {
     	MubbleGenerators.registerOres();
@@ -72,6 +64,15 @@ public class Mubble
     	LOGGER.info("Registered trees");
     	MubbleGenerators.registerSpawns();
     	LOGGER.info("Registered entity spawns");
+    }
+
+    private void clientSetup(final FMLClientSetupEvent event)
+    {
+    	MubbleEntities.registerRenders();
+    	LOGGER.info("Registered entity renders");
+    	MubbleScreens.registerScreens();
+    	LOGGER.info("Registered screens");
+    	MinecraftForge.EVENT_BUS.register(new KonamiHandler());
     }
     
     @SubscribeEvent
@@ -132,10 +133,16 @@ public class Mubble
         }
         
         @SubscribeEvent
+        public static void onEnchantmentsRegistry(final RegistryEvent.Register<Enchantment> event)
+        {
+        	event.getRegistry().registerAll(MubbleEnchantments.ENCHANTMENTS.toArray(new Enchantment[0]));
+        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleEnchantments.ENCHANTMENTS.size(), "enchantment"));
+        }
+        
+        @SubscribeEvent
         public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> event)
         {
-        	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
-        	MubbleEntities.registerEntities(registry);
+        	event.getRegistry().registerAll(MubbleEntities.ENTITY_TYPES.toArray(new EntityType<?>[0]));
         	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleEntities.ENTITY_TYPES.size(), "entity"));
         	MubbleEntities.registerPlacements();
         	LOGGER.info("Registered entity spawn placements");

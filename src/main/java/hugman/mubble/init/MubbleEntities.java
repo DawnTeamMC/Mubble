@@ -22,11 +22,10 @@ import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.registries.IForgeRegistry;
 
 public class MubbleEntities
 {
-    public static final List<EntityType<? extends Entity>> ENTITY_TYPES = new ArrayList<EntityType<? extends Entity>>();
+    public static final List<EntityType<?>> ENTITY_TYPES = new ArrayList<EntityType<? extends Entity>>();
     
 	public static final EntityType<ChinchoEntity> CHINCHO = register("chincho", EntityType.Builder.create(ChinchoEntity::new, EntityClassification.MONSTER).size(0.6F, 1.2F));
 	public static final EntityType<GoombaEntity> GOOMBA = register("goomba", EntityType.Builder.create(GoombaEntity::new, EntityClassification.MONSTER).size(0.75F, 0.85F));
@@ -43,17 +42,6 @@ public class MubbleEntities
 	    ENTITY_TYPES.add(entitytype);
 		return entitytype;
 	}
-	
-    public static void registerEntities(IForgeRegistry<EntityType<?>> registry)
-    {
-    	registry.register(CHINCHO);
-    	registry.register(TOAD);
-    	registry.register(GOOMBA);
-    	registry.register(ZOMBIE_COWMAN);
-
-    	registry.register(CUSTOM_TNT);
-    	registry.register(FLYING_BLOCK);
-    }
     
     public static void registerPlacements()
     {

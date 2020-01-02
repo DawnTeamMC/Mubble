@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handlers;
+package hugman.mubble.objects.events_handler;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;

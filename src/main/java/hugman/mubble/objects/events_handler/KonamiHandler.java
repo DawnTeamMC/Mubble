@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handlers;
+package hugman.mubble.objects.events_handler;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -72,6 +72,7 @@ public class KonamiHandler
 		{	
 			if(checkKonami(event.getKeyCode()))
 			{
+				// TODO Implement here whatever you want the konami code to do
 				Minecraft.getInstance().displayGuiScreen(new DirtMessageScreen(new StringTextComponent("bruh")));
 			}
 		}

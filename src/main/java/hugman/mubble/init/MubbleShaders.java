@@ -1,4 +1,4 @@
-package hugman.mubble.objects;
+package hugman.mubble.init;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 import hugman.mubble.Mubble;
 import net.minecraft.util.ResourceLocation;
 
-public class Shaders
+public class MubbleShaders
 {
     public static final List<ResourceLocation> SHADERS = new ArrayList<ResourceLocation>();
     public static final List<ResourceLocation> RETRO_SHADERS = new ArrayList<ResourceLocation>();

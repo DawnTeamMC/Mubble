@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handlers;
+package hugman.mubble.objects.events_handler;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.world.MubbleDimensions;

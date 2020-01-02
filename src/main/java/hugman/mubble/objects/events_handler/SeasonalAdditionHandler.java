@@ -1,10 +1,10 @@
-package hugman.mubble.objects.events_handlers;
+package hugman.mubble.objects.events_handler;
 
 import java.util.Random;
 
 import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.data.MubbleTags;
-import hugman.mubble.objects.CalendarEvents;
+import hugman.mubble.util.CalendarEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MobEntity;
 import net.minecraft.inventory.EquipmentSlotType;

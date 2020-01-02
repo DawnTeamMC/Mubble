@@ -6,7 +6,7 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleLootTables;
 import hugman.mubble.init.data.MubbleTags;
-import hugman.mubble.objects.CalendarEvents;
+import hugman.mubble.util.CalendarEvents;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ILivingEntityData;

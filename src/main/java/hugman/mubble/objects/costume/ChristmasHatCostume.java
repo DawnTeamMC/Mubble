@@ -2,7 +2,7 @@ package hugman.mubble.objects.costume;
 
 import java.util.Random;
 
-import hugman.mubble.objects.CalendarEvents;
+import hugman.mubble.util.CalendarEvents;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

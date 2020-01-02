@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handlers;
+package hugman.mubble.objects.events_handler;
 
 import com.mojang.blaze3d.platform.GLX;
 
@@ -18,7 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE, value=Dist.CLIENT)
 public class ShaderHandler
-{	
+{
 	@SubscribeEvent
 	public static void onArmorChange(LivingUpdateEvent event)
 	{

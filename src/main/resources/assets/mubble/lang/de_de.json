@@ -1149,6 +1149,11 @@
 
 
 
+	"comment": "ENCHANTMENTS",
+	"//enchantment.mubble.telekinesis": "Telekinesis",
+
+
+
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Platzierer",
 	"container.mubble.timeswap_table": "Zeitvertauschungstisch",

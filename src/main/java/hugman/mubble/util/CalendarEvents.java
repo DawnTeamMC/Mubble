@@ -1,4 +1,4 @@
-package hugman.mubble.objects;
+package hugman.mubble.util;
 
 import java.time.LocalDate;
 
