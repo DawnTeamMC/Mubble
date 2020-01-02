@@ -8,15 +8,20 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ContainerBlock;
+import net.minecraft.block.IWaterLoggable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.inventory.container.Container;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Hand;
@@ -28,17 +33,18 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class PresentBlock extends ContainerBlock
+public class PresentBlock extends ContainerBlock implements IWaterLoggable
 {
 	public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
 	public static final BooleanProperty EMPTY = MubbleBlockStateProperties.EMPTY;
+	public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	protected static final VoxelShape EMPTY_SHAPE = Block.makeCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 12.0D, 15.0D);
 	protected static final VoxelShape FULL_SHAPE = VoxelShapes.or(EMPTY_SHAPE, Block.makeCuboidShape(0.0D, 10.0D, 0.0D, 16.0D, 16.0D, 16.0D));
 	
     public PresentBlock(Properties builder)
     {
         super(builder);
-        this.setDefaultState(this.stateContainer.getBaseState().with(OPEN, Boolean.valueOf(false)).with(EMPTY, Boolean.valueOf(true)));
+        this.setDefaultState(this.stateContainer.getBaseState().with(OPEN, Boolean.valueOf(false)).with(EMPTY, Boolean.valueOf(true)).with(WATERLOGGED, Boolean.valueOf(false)));
     }
     
     @Override
@@ -63,7 +69,7 @@ public class PresentBlock extends ContainerBlock
     		if(tileEntity instanceof PresentTileEntity)
     		{
     			player.openContainer((PresentTileEntity)tileEntity);
-    			//TODO player.addStat(Stats.OPEN_BARREL);
+    			player.addStat(Stats.OPEN_BARREL);
     		}
     	}
 		return true;
@@ -107,6 +113,12 @@ public class PresentBlock extends ContainerBlock
 		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 	
+    @Override
+    public BlockState getStateForPlacement(BlockItemUseContext context)
+    {
+        return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(context.getWorld().getFluidState(context.getPos()).getFluid() == Fluids.WATER));
+    }
+	
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
 	{
@@ -135,8 +147,14 @@ public class PresentBlock extends ContainerBlock
 	@Override
 	protected void fillStateContainer(Builder<Block, BlockState> builder)
 	{
-		builder.add(OPEN, EMPTY);
+		builder.add(OPEN, EMPTY, WATERLOGGED);
 	}
+	
+	@Override
+    public IFluidState getFluidState(BlockState state)
+    {
+    	return state.get(WATERLOGGED) ? Fluids.WATER.getStillFluidState(false) : Fluids.EMPTY.getDefaultState();
+    }
     
     @Override
     public boolean hasTileEntity(BlockState state)
