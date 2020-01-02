@@ -1041,8 +1041,7 @@ public class MubbleBlocks
     
     private static Block register(String name, Block block, int fireEncouragement, int flammability)
     {
-        Block fBlock = block.setRegistryName(Mubble.MOD_ID, name);
-        BLOCKS.add(fBlock);
+    	Block fBlock = register(name, block);
         FireBlock fireblock = (FireBlock)Blocks.FIRE;
         fireblock.setFireInfo(block, fireEncouragement, flammability);
         return fBlock;
@@ -1050,19 +1049,23 @@ public class MubbleBlocks
     
     private static Block register(String name, Block block, ItemGroup group, List<Item> itemList)
     {
-        Block fBlock = block.setRegistryName(Mubble.MOD_ID, name);
-        BLOCKS.add(fBlock);
-        if(itemList == FLOWERS || itemList == SAPLINGS) BLOCKS.add(new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.delegate.get(), () -> fBlock.delegate.get(), Properties.from(Blocks.FLOWER_POT).lightValue(fBlock.getDefaultState().getLightValue())).setRegistryName(Mubble.MOD_ID, "potted_" + name));
+    	Block fBlock = register(name, block);
+        if(itemList == FLOWERS || itemList == SAPLINGS)
+        {
+        	Block fullFlowerPot = new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.delegate.get(), () -> fBlock.delegate.get(), Properties.from(Blocks.FLOWER_POT).lightValue(fBlock.getDefaultState().getLightValue())).setRegistryName(Mubble.MOD_ID, "potted_" + name);
+        	BLOCKS.add(fullFlowerPot);
+            if(Blocks.FLOWER_POT != null)
+            {
+                ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(fBlock.getRegistryName(), () -> fullFlowerPot);
+             }
+        }
         itemList.add(new BlockItem(fBlock, new Item.Properties().group(group)).setRegistryName(Mubble.MOD_ID, name));
         return fBlock;
     }
     
     private static Block register(String name, Block block, ItemGroup group, List<Item> itemList, int fireEncouragement, int flammability)
     {
-        Block fBlock = block.setRegistryName(Mubble.MOD_ID, name);
-        BLOCKS.add(fBlock);
-        if(itemList == FLOWERS || itemList == SAPLINGS) BLOCKS.add(new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.delegate.get(), () -> fBlock.delegate.get(), Properties.from(Blocks.FLOWER_POT).lightValue(fBlock.getDefaultState().getLightValue())).setRegistryName(Mubble.MOD_ID, "potted_" + name));
-        itemList.add(new BlockItem(fBlock, new Item.Properties().group(group)).setRegistryName(Mubble.MOD_ID, name));
+    	Block fBlock = register(name, block, group, itemList);
         FireBlock fireblock = (FireBlock)Blocks.FIRE;
         fireblock.setFireInfo(block, fireEncouragement, flammability);
         return fBlock;
