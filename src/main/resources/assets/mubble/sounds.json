@@ -517,41 +517,6 @@
 			"mubble:entity/chincho/death"
 		]
 	},
-	"entity.goomba.step":
-	{
-		"subtitle": "subtitles.block.generic.footsteps",
-		"sounds":
-		[
-			"mubble:entity/goomba/step/1",
-			"mubble:entity/goomba/step/2"
-		]
-	},
-	"entity.goomba.hurt":
-	{
-		"subtitle": "subtitles.mubble.entity.goomba.hurt",
-		"sounds":
-		[
-			"mubble:entity/goomba/hurt"
-		]
-	},
-	"entity.goomba.crush":
-	{
-		"subtitle": "subtitles.mubble.entity.goomba.crush",
-		"sounds":
-		[
-			"mubble:entity/goomba/crush/1",
-			"mubble:entity/goomba/crush/2",
-			"mubble:entity/goomba/crush/3"
-		]
-	},
-	"entity.goomba.death":
-	{
-		"subtitle": "subtitles.mubble.entity.goomba.death",
-		"sounds":
-		[
-			"mubble:entity/goomba/hurt"
-		]
-	},
 	"entity.toad.ambient":
 	{
 		"subtitle": "subtitles.mubble.entity.toad.ambient",
@@ -605,6 +570,48 @@
 			"mubble:entity/toad/death/2",
 			"mubble:entity/toad/death/3",
 			"mubble:entity/toad/death/4"
+		]
+	},
+	"entity.goomba.step":
+	{
+		"subtitle": "subtitles.block.generic.footsteps",
+		"sounds":
+		[
+			"mubble:entity/goomba/step/1",
+			"mubble:entity/goomba/step/2"
+		]
+	},
+	"entity.goomba.hurt":
+	{
+		"subtitle": "subtitles.mubble.entity.goomba.hurt",
+		"sounds":
+		[
+			"mubble:entity/goomba/hurt"
+		]
+	},
+	"entity.goomba.crush":
+	{
+		"subtitle": "subtitles.mubble.entity.goomba.crush",
+		"sounds":
+		[
+			"mubble:entity/goomba/crush/1",
+			"mubble:entity/goomba/crush/2",
+			"mubble:entity/goomba/crush/3"
+		]
+	},
+	"entity.goomba.death":
+	{
+		"subtitle": "subtitles.mubble.entity.goomba.death",
+		"sounds":
+		[
+			"mubble:entity/goomba/hurt"
+		]
+	},
+	"entity.pufferfish.aeugh":
+	{
+		"sounds":
+		[
+			"mubble:entity/pufferfish/aeugh"
 		]
 	},
 	"entity.zombie_cowman.ambient":

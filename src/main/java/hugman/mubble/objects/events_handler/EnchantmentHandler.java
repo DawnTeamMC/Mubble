@@ -41,13 +41,16 @@ public class EnchantmentHandler
 	@SubscribeEvent
 	public static void onEntityDropsExperience(LivingExperienceDropEvent event)
 	{
-		PlayerEntity playerIn = event.getAttackingPlayer();
-		if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.TELEKINESIS, playerIn.getHeldItem(Hand.MAIN_HAND)))
+		if(event.getAttackingPlayer() != null)
 		{
-			if(EnchantmentHelper.getEnchantmentLevel(MubbleEnchantments.TELEKINESIS, playerIn.getHeldItem(Hand.MAIN_HAND)) >= 2)
+			PlayerEntity playerIn = event.getAttackingPlayer();
+			if(playerIn.getHeldItem(Hand.MAIN_HAND) != null)
 			{
-				playerIn.giveExperiencePoints(event.getDroppedExperience());
-				event.setCanceled(true);
+				if(EnchantmentHelper.getEnchantmentLevel(MubbleEnchantments.TELEKINESIS, playerIn.getHeldItem(Hand.MAIN_HAND)) >= 2)
+				{
+					playerIn.giveExperiencePoints(event.getDroppedExperience());
+					event.setCanceled(true);
+				}
 			}
 		}
 	}
