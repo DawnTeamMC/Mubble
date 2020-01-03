@@ -26,12 +26,6 @@ public class TetrisGlassBlock extends FallingBlock
     }
     
     @Override
-	public BlockRenderLayer getRenderLayer()
-    {
-    	return BlockRenderLayer.TRANSLUCENT;
-	}
-    
-    @Override
     @OnlyIn(Dist.CLIENT)
     public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos)
     {

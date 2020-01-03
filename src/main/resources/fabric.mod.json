@@ -21,6 +21,9 @@
     "entrypoints": {
         "main": [
             "hugman.mubble.Mubble"
+        ],
+        "client": [
+            "hugman.mubble.MubbleClient"
         ]
     },
     "depends": {

@@ -18,12 +18,6 @@ public class BalloonBlock extends FlyingBlock
         super(Properties.create(Material.WOOL, color).hardnessAndResistance(0F).sound(SoundType.CLOTH));
     }
     
-    @Override
-	public BlockRenderLayer getRenderLayer()
-    {
-    	return BlockRenderLayer.TRANSLUCENT;
-	}
-    
     @OnlyIn(Dist.CLIENT)
     public float func_220080_a(BlockState state, IBlockReader worldIn, BlockPos pos)
     {

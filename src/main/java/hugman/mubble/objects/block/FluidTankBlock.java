@@ -84,12 +84,6 @@ public class FluidTankBlock extends Block implements IBucketPickupHandler, ILiqu
     }
     
     @Override
-	public BlockRenderLayer getRenderLayer()
-    {
-    	return BlockRenderLayer.CUTOUT_MIPPED;
-	}
-    
-    @Override
     public IFluidState getFluidState(BlockState state)
     {
     	if(state.get(FLUIDLOG) == FluidLog.WATER) return Fluids.WATER.getStillFluidState(false);

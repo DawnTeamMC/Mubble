@@ -78,12 +78,6 @@ public class PermafrostPortalBlock extends Block
 	}
 
 	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.TRANSLUCENT;
-	}
-
-	@Override
 	public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation rot)
 	{
 		switch (rot)

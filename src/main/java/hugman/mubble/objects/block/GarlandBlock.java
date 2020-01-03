@@ -58,12 +58,6 @@ public class GarlandBlock extends Block
     }
 	
 	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.CUTOUT_MIPPED;
-	}
-	
-	@Override
 	public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos)
 	{
 		return false;

@@ -51,12 +51,6 @@ public class CloudBlock extends AbstractGlassBlock implements IBeaconBeamColorPr
     }
     
     @Override
-    public BlockRenderLayer getRenderLayer()
-    {
-    	return BlockRenderLayer.TRANSLUCENT;
-    }
-    
-    @Override
     public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
     	return 0;
