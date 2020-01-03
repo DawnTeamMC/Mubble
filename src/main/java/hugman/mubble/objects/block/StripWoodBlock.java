@@ -4,26 +4,27 @@ import hugman.mubble.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.RotatedPillarBlock;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
-public class StripWoodBlock extends RotatedPillarBlock
+public class StripWoodBlock extends PillarBlock
 {
-    public StripWoodBlock(Properties builder)
+    public StripWoodBlock(Settings builder)
     {
         super(builder);
     }
     
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResult onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
     {
     	Block block = Blocks.OAK_LOG;
     	if(this == MubbleBlocks.PALM_LOG) block = MubbleBlocks.STRIPPED_PALM_LOG;
@@ -34,23 +35,23 @@ public class StripWoodBlock extends RotatedPillarBlock
     	if(this == MubbleBlocks.CHERRY_OAK_WOOD) block = MubbleBlocks.STRIPPED_CHERRY_OAK_WOOD;
     	if(this == MubbleBlocks.PRESS_GARDEN_LOG) block = MubbleBlocks.STRIPPED_PRESS_GARDEN_LOG;
     	if(this == MubbleBlocks.PRESS_GARDEN_WOOD) block = MubbleBlocks.STRIPPED_PRESS_GARDEN_WOOD;
-    	ItemStack item = player.getHeldItem(handIn);
+    	ItemStack item = player.getStackInHand(handIn);
     	if(item.getItem() instanceof AxeItem)
     	{
     		worldIn.playSound(player, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-    		if(!worldIn.isRemote)
+    		if(!worldIn.isClient)
     		{
-    			worldIn.setBlockState(pos, block.getDefaultState().with(RotatedPillarBlock.AXIS, state.get(RotatedPillarBlock.AXIS)), 11);
+    			worldIn.setBlockState(pos, block.getDefaultState().with(PillarBlock.AXIS, state.get(PillarBlock.AXIS)), 11);
                 if (player != null)
                 {
-                	item.damageItem(1, player, (p_214023_1_) ->
+                	item.damage(1, player, (p_214023_1_) ->
                 	{
-                		p_214023_1_.sendBreakAnimation(handIn);
+                		p_214023_1_.sendToolBreakStatus(handIn);
                 	});
                 }
     		}
-            return true;
+            return ActionResult.SUCCESS;
     	}
-    	return false;
+    	return ActionResult.PASS;
     }
 }

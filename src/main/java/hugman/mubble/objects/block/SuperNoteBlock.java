@@ -2,7 +2,7 @@ package hugman.mubble.objects.block;
 
 public class SuperNoteBlock extends NoteBlock
 {    
-    public SuperNoteBlock(Properties builder)
+    public SuperNoteBlock(Settings builder)
     {
 		super(builder);
 	}

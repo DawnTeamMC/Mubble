@@ -1,9 +1,9 @@
 package hugman.mubble.objects.block;
 
-public class TrapDoorBlock extends net.minecraft.block.TrapDoorBlock
+public class TrapDoorBlock extends net.minecraft.block.TrapdoorBlock
 {
 	/* Extension for internal publicity */
-    public TrapDoorBlock(Properties builder)
+    public TrapDoorBlock(Settings builder)
     {
         super(builder);
     }

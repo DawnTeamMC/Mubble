@@ -1,46 +1,46 @@
 package hugman.mubble.objects.block;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Material;
 import net.minecraft.entity.EntityType;
-import net.minecraft.item.DyeColor;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.world.BlockView;
 
 public class BalloonBlock extends FlyingBlock
 {
     public BalloonBlock(DyeColor color)
     {
-        super(Properties.create(Material.WOOL, color).hardnessAndResistance(0F).sound(SoundType.CLOTH));
+        super(FabricBlockSettings.of(Material.WOOL, color).hardness(0F).sounds(BlockSoundGroup.WOOL).build());
     }
     
-    @OnlyIn(Dist.CLIENT)
-    public float func_220080_a(BlockState state, IBlockReader worldIn, BlockPos pos)
+    @Environment(EnvType.CLIENT)
+    public float func_220080_a(BlockState state, BlockView worldIn, BlockPos pos)
     {
        return 1.0F;
     }
     
     @Override
-    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos)
+    public boolean isTranslucent(BlockState state, BlockView reader, BlockPos pos)
     {
     	return true;
 	}
 
-    public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos)
+    public boolean causesSuffocation(BlockState state, BlockView worldIn, BlockPos pos)
     {
        return false;
     }
 
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos)
+    public boolean isNormalCube(BlockState state, BlockView worldIn, BlockPos pos)
     {
        return false;
     }
 
-    public boolean canEntitySpawn(BlockState state, IBlockReader worldIn, BlockPos pos, EntityType<?> type)
+    public boolean canEntitySpawn(BlockState state, BlockView worldIn, BlockPos pos, EntityType<?> type)
     {
        return false;
     }

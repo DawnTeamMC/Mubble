@@ -6,52 +6,53 @@ import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleLootTables;
 import hugman.mubble.init.data.MubbleTags;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Material;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.EntityContext;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.loot.context.LootContextTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraft.world.storage.loot.LootContext;
-import net.minecraft.world.storage.loot.LootParameterSets;
-import net.minecraft.world.storage.loot.LootParameters;
-import net.minecraft.world.storage.loot.LootTable;
 
 public class QuestionBlock extends Block
 {
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
 	
     public QuestionBlock()
     {
-        super(Properties.create(Material.IRON).sound(SoundType.METAL).hardnessAndResistance(1.5F, 6.0F));
+        super(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(1.5F, 6.0F).build());
     }
     
     @Override
-    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+    public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context)
     {
     	return SHAPE;
     }
     
     @Override
-    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean p_220082_5_)
+    public void onBlockAdded(BlockState state, World worldIn, BlockPos pos, BlockState oldState, boolean moved)
     {
-    	if(worldIn.isBlockPowered(pos)) loot(worldIn, pos);
+    	if(worldIn.isReceivingRedstonePower(pos)) loot(worldIn, pos);
     }
     
     @Override
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_)
+    public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean moved)
     {
-    	if(worldIn.isBlockPowered(pos)) loot(worldIn, pos);
+    	if(worldIn.isReceivingRedstonePower(pos)) loot(worldIn, pos);
     }
     
     @Override
@@ -62,7 +63,7 @@ public class QuestionBlock extends Block
     
     public void loot(World worldIn, BlockPos pos)
 	{
-        if(!worldIn.isRemote)
+        if(!worldIn.isClient)
         {
             BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
             SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB;
@@ -94,16 +95,16 @@ public class QuestionBlock extends Block
             final double x = pos.getX() + 0.5D;
             final double y = pos.getY() + 0.5D + 0.6D;
             final double z = pos.getZ() + 0.5D;
-            LootTable lootTable = worldIn.getServer().getLootTableManager().getLootTableFromLocation(MubbleLootTables.QUESTION_BLOCK);
+            LootTable lootTable = worldIn.getServer().getLootManager().getSupplier(MubbleLootTables.QUESTION_BLOCK);
             LootContext lootContext = new LootContext.Builder((ServerWorld) worldIn)
-            		.withParameter(LootParameters.BLOCK_STATE, this.getDefaultState())
-            		.withParameter(LootParameters.POSITION, pos)
-            		.withParameter(LootParameters.TOOL, ItemStack.EMPTY)
-            		.build(LootParameterSets.BLOCK);
-            List<ItemStack> items = lootTable.generate(lootContext);
+            		.put(LootContextParameters.BLOCK_STATE, this.getDefaultState())
+            		.put(LootContextParameters.POSITION, pos)
+            		.put(LootContextParameters.TOOL, ItemStack.EMPTY)
+            		.build(LootContextTypes.BLOCK);
+            List<ItemStack> items = lootTable.getDrops(lootContext);
             for(ItemStack item : items)
             {
-            	worldIn.addEntity(new ItemEntity(worldIn, x, y, z, item));
+            	worldIn.spawnEntity(new ItemEntity(worldIn, x, y, z, item));
             	if(item.getItem().isIn(MubbleTags.Items.COINS))
             	{
             		worldIn.playSound((PlayerEntity)null, x, y - 0.6D, z, coinLootSound, SoundCategory.BLOCKS, 1f, 1f);

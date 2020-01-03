@@ -5,50 +5,51 @@ import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleBlockStateProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.enums.DoorHinge;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.DoorHingeSide;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.util.Direction;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.state.StateManager;
+import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class KeyDoorBlock extends DoorBlock
 {
 	public static final BooleanProperty LOCKED = MubbleBlockStateProperties.LOCKED;
 	
-    public KeyDoorBlock(Block.Properties builder)
+    public KeyDoorBlock(Block.Settings builder)
     {
         super(builder);
-        this.setDefaultState(this.stateContainer.getBaseState().with(LOCKED, true).with(FACING, Direction.NORTH).with(OPEN, Boolean.valueOf(false)).with(HINGE, DoorHingeSide.LEFT).with(POWERED, Boolean.valueOf(false)).with(HALF, DoubleBlockHalf.LOWER));
+        this.setDefaultState(this.stateManager.getDefaultState().with(LOCKED, true).with(FACING, Direction.NORTH).with(OPEN, Boolean.valueOf(false)).with(HINGE, DoorHinge.LEFT).with(POWERED, Boolean.valueOf(false)).with(HALF, DoubleBlockHalf.LOWER));
     }
 
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {
     	builder.add(HALF, FACING, OPEN, HINGE, POWERED, LOCKED);
     }
 
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResult onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
     {
     	if(state.get(LOCKED))
     	{
     		this.playFailedOpenSound(worldIn, pos);
-    		player.swingArm(handIn);
-    		return false;
+    		player.swingHand(handIn);
+    		return ActionResult.PASS;
     	}
     	else
     	{
     		state = state.cycle(OPEN);
     		worldIn.setBlockState(pos, state, 10);
     		this.playToggleSound(worldIn, pos, state.get(OPEN));
-    		return true;
+    		return ActionResult.SUCCESS;
     	}
     }
 
@@ -134,12 +135,12 @@ public class KeyDoorBlock extends DoorBlock
     	worldIn.playSound((PlayerEntity)null, pos, this.getKeyFailSound(this), SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}
 
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
+    public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
     {
     	BlockPos otherBlockPos = pos.offset(state.get(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN);
     	BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
 
-        boolean flag1 = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(otherBlockPos);
+        boolean flag1 = worldIn.isReceivingRedstonePower(pos) || worldIn.isReceivingRedstonePower(otherBlockPos);
         boolean flag2;
         if(otherBlockState.getBlock() instanceof KeyDoorBlock)
         {

@@ -19,6 +19,9 @@ public class MubbleClient implements ClientModInitializer
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.RED_SHINY_GARLAND,
 				MubbleBlocks.SILVER_SHINY_GARLAND, MubbleBlocks.GOLD_SHINY_GARLAND
 			);
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.BLUE_PRESENT,
+				MubbleBlocks.GREEN_PRESENT, MubbleBlocks.YELLOW_PRESENT, MubbleBlocks.RED_PRESENT
+			);
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getTranslucent(), MubbleBlocks.WHITE_CLOUD_BLOCK,
 				MubbleBlocks.LIGHT_GRAY_CLOUD_BLOCK, MubbleBlocks.GRAY_CLOUD_BLOCK, MubbleBlocks.BLACK_CLOUD_BLOCK,
 				MubbleBlocks.BROWN_CLOUD_BLOCK, MubbleBlocks.RED_CLOUD_BLOCK, MubbleBlocks.ORANGE_CLOUD_BLOCK,
