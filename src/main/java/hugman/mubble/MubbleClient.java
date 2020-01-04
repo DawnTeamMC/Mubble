@@ -1,6 +1,7 @@
 package hugman.mubble;
 
 import hugman.mubble.init.MubbleBlocks;
+import hugman.mubble.init.MubbleScreens;
 import hugman.mubble.init.data.MubbleColorMaps;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
@@ -11,6 +12,8 @@ public class MubbleClient implements ClientModInitializer
 	@Override
 	public void onInitializeClient()
 	{
+		MubbleScreens.init();
+		
 		MubbleColorMaps.registerBlockColors();
 		MubbleColorMaps.registerItemColors();
 		registerBlockRenderLayers();

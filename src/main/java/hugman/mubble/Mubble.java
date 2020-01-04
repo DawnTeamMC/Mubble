@@ -40,8 +40,8 @@ public class Mubble implements ModInitializer
 		new MubbleSounds();
 		
 		// Data
-		new MubbleContainerTypes();
 		new MubbleTileEntityTypes();
+		MubbleContainerTypes.init();
 		
 		// World
 		new MubbleCarvers();
@@ -60,8 +60,6 @@ public class Mubble implements ModInitializer
     {
     	MubbleEntities.registerRenders();
     	LOGGER.info("Registered entities renders");
-    	MubbleScreens.registerScreens();
-    	LOGGER.info("Registered screens");
     }
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)

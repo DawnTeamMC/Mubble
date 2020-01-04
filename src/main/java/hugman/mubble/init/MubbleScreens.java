@@ -1,13 +1,17 @@
 package hugman.mubble.init;
 
 import hugman.mubble.init.data.MubbleContainerTypes;
+import hugman.mubble.objects.container.TimeswapTableContainer;
 import hugman.mubble.objects.screen.TimeswapTableScreen;
-import net.minecraft.client.gui.ScreenManager;
+import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
 
 public class MubbleScreens
 {
-	public static void registerScreens()
+	public static void init()
 	{
-		ScreenManager.registerFactory(MubbleContainerTypes.TIMESWAP_TABLE, TimeswapTableScreen::new);
+		ScreenProviderRegistry.INSTANCE.registerFactory(MubbleContainerTypes.TIMESWAP_TABLE, (syncId, identifier, player, buf) ->
+		{
+			return new TimeswapTableScreen(new TimeswapTableContainer(syncId, player.inventory), player.inventory, null);
+		});
 	}
 }
