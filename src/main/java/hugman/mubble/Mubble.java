@@ -11,7 +11,6 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleScreens;
 import hugman.mubble.init.MubbleSounds;
-import hugman.mubble.init.data.MubbleColorMaps;
 import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
@@ -63,13 +62,6 @@ public class Mubble implements ModInitializer
     	LOGGER.info("Registered entities renders");
     	MubbleScreens.registerScreens();
     	LOGGER.info("Registered screens");
-    }
-    
-    @SubscribeEvent
-    public void serverSetup(final FMLServerStartingEvent event)
-    {
-    	MubbleCommands.registerCommands(event.getCommandDispatcher());
-    	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleCommands.COMMANDS.size(), "command"));
     }
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
@@ -138,22 +130,6 @@ public class Mubble implements ModInitializer
         {
         	event.getRegistry().registerAll(MubbleDimensions.DIMENSIONS.toArray(new ModDimension[0]));
         	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleDimensions.DIMENSIONS.size(), "dimension"));
-        }
-        
-    	@OnlyIn(Dist.CLIENT)
-    	@SubscribeEvent
-        public static void blockColorsRegistry(final ColorHandlerEvent.Block event)
-        {
-        	MubbleColorMaps.registerBlockColors(event);
-        	LOGGER.info("Registered color maps for blocks");
-        }
-
-    	@OnlyIn(Dist.CLIENT)
-    	@SubscribeEvent
-        public static void itemColorsRegistry(final ColorHandlerEvent.Item event)
-        {
-        	MubbleColorMaps.registerItemColors(event);
-        	LOGGER.info("Registered color maps for items");
         }
     }
 }
