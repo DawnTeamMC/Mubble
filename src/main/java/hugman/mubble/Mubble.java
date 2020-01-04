@@ -58,12 +58,6 @@ public class Mubble implements ModInitializer
 		MubbleGenerators.registerSpawns();
 	}
     
-    private void clientSetup()
-    {
-    	MubbleEntities.registerRenders();
-    	LOGGER.info("Registered entities renders");
-    }
-    
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class ModRegistryEvents
     {

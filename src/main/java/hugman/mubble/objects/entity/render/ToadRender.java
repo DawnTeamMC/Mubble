@@ -3,43 +3,46 @@ package hugman.mubble.objects.entity.render;
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.ToadEntity;
 import hugman.mubble.objects.entity.render.model.ToadModel;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.util.Identifier;
 
-public class ToadRender extends MobRenderer<ToadEntity, ToadModel<ToadEntity>>
+@Environment(EnvType.CLIENT)
+public class ToadRender extends MobEntityRenderer<ToadEntity, ToadModel<ToadEntity>>
 {
-    private static final ResourceLocation BLUE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/blue.png");
-    private static final ResourceLocation LIGHT_BLUE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/light_blue.png");
-    private static final ResourceLocation CYAN_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/cyan.png");
-    private static final ResourceLocation GREEN_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/green.png");
-    private static final ResourceLocation LIME_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/lime.png");
-    private static final ResourceLocation YELLOW_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/yellow.png");
-    private static final ResourceLocation ORANGE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/orange.png");
-    private static final ResourceLocation RED_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/red.png");
-    private static final ResourceLocation PINK_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/pink.png");
-    private static final ResourceLocation MAGENTA_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/magenta.png");
-    private static final ResourceLocation PURPLE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/purple.png");
-    private static final ResourceLocation BROWN_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/brown.png");
-    private static final ResourceLocation WHITE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/white.png");
-    private static final ResourceLocation LIGHT_GRAY_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/light_gray.png");
-    private static final ResourceLocation GRAY_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/gray.png");
-    private static final ResourceLocation BLACK_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/black.png");
-    private static final ResourceLocation CAPTAIN_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/captain.png");
-    private static final ResourceLocation HINT_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/hint.png");
-    private static final ResourceLocation BANKTOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/bank.png");
-    private static final ResourceLocation MAILTOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/mail.png");
-    private static final ResourceLocation YELLOW_BTOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/yellow.png");
-    private static final ResourceLocation PARTY_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/party.png");
-    private static final ResourceLocation KISEKAE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/kisekae.png");
+    private static final Identifier BLUE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/blue.png");
+    private static final Identifier LIGHT_BLUE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/light_blue.png");
+    private static final Identifier CYAN_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/cyan.png");
+    private static final Identifier GREEN_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/green.png");
+    private static final Identifier LIME_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/lime.png");
+    private static final Identifier YELLOW_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/yellow.png");
+    private static final Identifier ORANGE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/orange.png");
+    private static final Identifier RED_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/red.png");
+    private static final Identifier PINK_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/pink.png");
+    private static final Identifier MAGENTA_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/magenta.png");
+    private static final Identifier PURPLE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/purple.png");
+    private static final Identifier BROWN_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/brown.png");
+    private static final Identifier WHITE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/white.png");
+    private static final Identifier LIGHT_GRAY_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/light_gray.png");
+    private static final Identifier GRAY_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/gray.png");
+    private static final Identifier BLACK_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/black.png");
+    private static final Identifier CAPTAIN_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/captain.png");
+    private static final Identifier HINT_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/hint.png");
+    private static final Identifier BANKTOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/bank.png");
+    private static final Identifier MAILTOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/mail.png");
+    private static final Identifier YELLOW_BTOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/brigade/yellow.png");
+    private static final Identifier PARTY_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/party.png");
+    private static final Identifier KISEKAE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/kisekae.png");
 	
-	public ToadRender(EntityRendererManager manager)
+	public ToadRender(EntityRenderDispatcher dispatcher)
 	{
-		super(manager, new ToadModel<>(), 0.5F);
+		super(dispatcher, new ToadModel<>(), 0.5F);
 	}
 
 	@Override
-    protected ResourceLocation getEntityTexture(ToadEntity entity)
+	public Identifier getTexture(ToadEntity entity)
     {
 		int texture = entity.getVariant();
 		switch(texture)
@@ -94,10 +97,4 @@ public class ToadRender extends MobRenderer<ToadEntity, ToadModel<ToadEntity>>
 			return RED_TOAD_TEXTURES;
 		}
     }
-
-	@Override
-	protected void applyRotations(ToadEntity entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-	{
-		super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-	}
 }

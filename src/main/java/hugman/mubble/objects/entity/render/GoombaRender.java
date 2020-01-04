@@ -3,28 +3,25 @@ package hugman.mubble.objects.entity.render;
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.GoombaEntity;
 import hugman.mubble.objects.entity.render.model.GoombaModel;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.util.Identifier;
 
-public class GoombaRender extends MobRenderer<GoombaEntity, GoombaModel<GoombaEntity>>
+@Environment(EnvType.CLIENT)
+public class GoombaRender extends MobEntityRenderer<GoombaEntity, GoombaModel<GoombaEntity>>
 {
-    private static final ResourceLocation NORMAL_GOOMBA_TEXTURES = new ResourceLocation(Mubble.MOD_ID + ":textures/entity/goomba/normal.png");
-    //private static final ResourceLocation GOLDEN_GOOMBA_TEXTURES = new ResourceLocation(Mubble.MOD_ID + ":textures/entity/goomba/golden.png");
+    private static final Identifier NORMAL_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID + ":textures/entity/goomba/normal.png");
+    //private static final Identifier GOLDEN_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID + ":textures/entity/goomba/golden.png");
 	
-	public GoombaRender(EntityRendererManager manager)
+	public GoombaRender(EntityRenderDispatcher dispatcher)
 	{
-		super(manager, new GoombaModel<>(), 0.5F);
+		super(dispatcher, new GoombaModel<>(), 0.5F);
 	}
 	
-	protected ResourceLocation getEntityTexture(GoombaEntity entity)
+	public Identifier getTexture(GoombaEntity entity)
     {
 		return NORMAL_GOOMBA_TEXTURES;
     }
-
-	@Override
-	protected void applyRotations(GoombaEntity entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-	{
-		super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-	}
 }

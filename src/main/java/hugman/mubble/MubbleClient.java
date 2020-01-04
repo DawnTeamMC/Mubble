@@ -1,10 +1,18 @@
 package hugman.mubble;
 
 import hugman.mubble.init.MubbleBlocks;
+import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleScreens;
 import hugman.mubble.init.data.MubbleColorMaps;
+import hugman.mubble.objects.entity.render.ChinchoRender;
+import hugman.mubble.objects.entity.render.CustomTNTRender;
+import hugman.mubble.objects.entity.render.FlyingBlockRender;
+import hugman.mubble.objects.entity.render.GoombaRender;
+import hugman.mubble.objects.entity.render.ToadRender;
+import hugman.mubble.objects.entity.render.ZombieCowmanRender;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.minecraft.client.render.RenderLayer;
 
 public class MubbleClient implements ClientModInitializer
@@ -13,10 +21,10 @@ public class MubbleClient implements ClientModInitializer
 	public void onInitializeClient()
 	{
 		MubbleScreens.init();
-		
 		MubbleColorMaps.registerBlockColors();
 		MubbleColorMaps.registerItemColors();
 		registerBlockRenderLayers();
+		registerEntityRenders();
 	}
 	
 	private void registerBlockRenderLayers()
@@ -55,5 +63,15 @@ public class MubbleClient implements ClientModInitializer
 				MubbleBlocks.SPRUCE_LEAF_PILE, MubbleBlocks.WHITE_CHERRY_OAK_LEAF_PILE, MubbleBlocks.WHITE_TULIP_PILE,
 				MubbleBlocks.WITHER_ROSE_PILE
 			);
+	}
+	
+	private void registerEntityRenders()
+	{
+		EntityRendererRegistry.INSTANCE.register(MubbleEntities.CHINCHO, (dispatcher, context) -> new ChinchoRender(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(MubbleEntities.GOOMBA, (dispatcher, context) -> new GoombaRender(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(MubbleEntities.TOAD, (dispatcher, context) -> new ToadRender(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(MubbleEntities.ZOMBIE_COWMAN, (dispatcher, context) -> new ZombieCowmanRender(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(MubbleEntities.CUSTOM_TNT, (dispatcher, context) -> new CustomTNTRender(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(MubbleEntities.FLYING_BLOCK, (dispatcher, context) -> new FlyingBlockRender(dispatcher));
 	}
 }
