@@ -35,8 +35,10 @@ public class Mubble implements ModInitializer
 	public void onInitialize()
 	{
 		new MubbleCommands();
+		new MubbleCostumes();
 		new MubbleEffects();
 		new MubbleEntities();
+		new MubbleItems();
 		new MubbleSounds();
 		
 		// Data
@@ -92,10 +94,6 @@ public class Mubble implements ModInitializer
             event.getRegistry().registerAll(MubbleBlocks.FLOWERS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.FLOWER_PILES.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.OTHERS.toArray(new Item[0]));
-        	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleItems.ITEMS.size(), "item"));
-    		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleCostumes.COSTUMES.size(), "costume"));
         }
         
         @SubscribeEvent

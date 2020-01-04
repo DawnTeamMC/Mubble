@@ -1,43 +1,43 @@
 package hugman.mubble.objects.costume;
 
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 public class WingCapCostume extends HeadCostume
 {    
-    public WingCapCostume(Item.Properties builder)
+    public WingCapCostume(Item.Settings builder)
     {
         super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     }
     
 	@Override
-    public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
+    public boolean canRepair(ItemStack toRepair, ItemStack repair)
     {
 		return repair.getItem() == Items.FEATHER;
     }
     
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player)
+    public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks)
     {
     	if(isUsable(stack) && player.isSprinting())
     	{
-        	stack.damageItem(1, player, (p_214023_1_) ->
+        	stack.damage(1, player, (p_214023_1_) ->
         	{
-        		p_214023_1_.sendBreakAnimation(EquipmentSlotType.HEAD);
+        		p_214023_1_.sendEquipmentBreakStatus(EquipmentSlot.HEAD);
         	});
     	}
-    	if(!world.isRemote && isUsable(stack) && player.isSprinting())
+    	if(!world.isClient && isUsable(stack) && player.isSprinting())
     	{
-    		player.addPotionEffect(new EffectInstance(Effects.LEVITATION, 1, 2));
+    		player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 1, 2));
     		player.fallDistance = 0f;
     	}
-    	super.onArmorTick(stack, world, player);
+    	super.usageTick(world, player, stack, remainingUseTicks);
     }
 }

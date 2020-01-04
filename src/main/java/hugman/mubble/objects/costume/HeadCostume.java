@@ -1,19 +1,19 @@
 package hugman.mubble.objects.costume;
 
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 
 public class HeadCostume extends Costume
 {
-    public HeadCostume(Properties builder, SoundEvent sound, EffectInstance... potionEffects)
+    public HeadCostume(Settings builder, SoundEvent sound, StatusEffectInstance... potionEffects)
     {
-        super(builder, sound, EquipmentSlotType.HEAD, potionEffects);
+        super(builder, sound, EquipmentSlot.HEAD, potionEffects);
     }
 	
-    public HeadCostume(Properties builder, SoundEvent sound, ResourceLocation shader, EffectInstance... potionEffects)
+    public HeadCostume(Settings builder, SoundEvent sound, Identifier shader, StatusEffectInstance... potionEffects)
     {
-        super(builder, sound, EquipmentSlotType.HEAD, shader, potionEffects);
+        super(builder, sound, EquipmentSlot.HEAD, shader, potionEffects);
     }
 }
