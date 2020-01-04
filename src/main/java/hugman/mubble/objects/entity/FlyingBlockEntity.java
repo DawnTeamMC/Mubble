@@ -7,47 +7,46 @@ import com.google.common.collect.Lists;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.objects.block.FlyingBlock;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ConcretePowderBlock;
-import net.minecraft.crash.CrashReportCategory;
+import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.client.network.packet.EntitySpawnS2CPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MoverType;
+import net.minecraft.entity.MovementType;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.DirectionalPlaceContext;
+import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.NBTUtil;
-import net.minecraft.network.IPacket;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Direction;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtHelper;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.Packet;
+import net.minecraft.state.property.Properties;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.FluidTags;
+import net.minecraft.util.crash.CrashReportSection;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
+import net.minecraft.world.RayTraceContext;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
-import net.minecraftforge.fml.network.NetworkHooks;
 
-public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnData
+public class FlyingBlockEntity extends Entity
 {
 	private BlockState flyTile = MubbleBlocks.WHITE_BALLOON.getDefaultState();
 	private int flyTime;
@@ -56,8 +55,8 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	private boolean hurtEntities;
 	private int flyHurtMax = 40;
 	private float flyHurtAmount = 2.0F;
-	private CompoundNBT tileEntityData;
-	protected static final DataParameter<BlockPos> ORIGIN = EntityDataManager.createKey(FlyingBlockEntity.class, DataSerializers.BLOCK_POS);
+	private CompoundTag tileEntityData;
+	protected static final TrackedData<BlockPos> ORIGIN = DataTracker.registerData(FlyingBlockEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
 
 	public FlyingBlockEntity(EntityType<? extends FlyingBlockEntity> type, World worldIn)
 	{
@@ -68,46 +67,34 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	{
 		this(MubbleEntities.FLYING_BLOCK, worldIn);
 		this.flyTile = flyingBlockState;
-		this.preventEntitySpawning = true;
+		this.inanimate = true;
 		this.setPosition(x, y + (double)((1.0F - this.getHeight()) / 2.0F), z);
-		this.setMotion(Vec3d.ZERO);
-		this.prevPosX = x;
-		this.prevPosY = y;
-		this.prevPosZ = z;
+		this.setVelocity(Vec3d.ZERO);
+		this.prevX = x;
+		this.prevY = y;
+		this.prevZ = z;
 		this.setOrigin(new BlockPos(this));
-	}
-
-	@Override
-	public boolean canBeAttackedWithItem()
-	{
-		return false;
 	}
 	
 	public void setOrigin(BlockPos pos)
 	{
-		this.dataManager.set(ORIGIN, pos);
+		this.dataTracker.set(ORIGIN, pos);
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public BlockPos getOrigin()
 	{
-		return this.dataManager.get(ORIGIN);
+		return this.dataTracker.get(ORIGIN);
 	}
 	
 	@Override
-	protected boolean canTriggerWalking()
+	protected void initDataTracker()
 	{
-		return false;
+		this.dataTracker.startTracking(ORIGIN, BlockPos.ORIGIN);
 	}
 	
 	@Override
-	protected void registerData()
-	{
-		this.dataManager.register(ORIGIN, BlockPos.ZERO);
-	}
-	
-	@Override
-	public boolean canBeCollidedWith()
+	public boolean collides()
 	{
 		return isAlive();
 	}
@@ -121,9 +108,9 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 		}
 		else
 		{
-			this.prevPosX = this.posX;
-			this.prevPosY = this.posY;
-			this.prevPosZ = this.posZ;
+			this.prevX = this.getX();
+			this.prevY = this.getY();
+			this.prevZ = this.getZ();
 			Block block = this.flyTile.getBlock();
 			if (this.flyTime++ == 0)
 			{
@@ -132,7 +119,7 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 				{
 					this.world.removeBlock(blockpos, false);
 				}
-				else if (!this.world.isRemote)
+				else if (!this.world.isClient)
 				{
 					this.remove();
 					return;
@@ -140,31 +127,31 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 			}
 			if(!this.hasNoGravity())
 			{
-				this.setMotion(this.getMotion().add(0.0D, 0.01D, 0.0D));
+				this.setVelocity(this.getVelocity().add(0.0D, 0.01D, 0.0D));
 			}
-			this.move(MoverType.SELF, this.getMotion());
-			if (!this.world.isRemote)
+			this.move(MovementType.SELF, this.getVelocity());
+			if (!this.world.isClient)
 			{
 				BlockPos blockpos1 = new BlockPos(this);
 				boolean flag = this.flyTile.getBlock() instanceof ConcretePowderBlock;
-				boolean flag1 = flag && this.world.getFluidState(blockpos1).isTagged(FluidTags.WATER);
-				double d0 = this.getMotion().lengthSquared();
+				boolean flag1 = flag && this.world.getFluidState(blockpos1).matches(FluidTags.WATER);
+				double d0 = this.getVelocity().lengthSquared();
 	            if (flag && d0 > 1.0D)
 	            {
-	                BlockRayTraceResult blockraytraceresult = this.world.rayTraceBlocks(new RayTraceContext(new Vec3d(this.prevPosX, this.prevPosY, this.prevPosZ), new Vec3d(this.posX, this.posY, this.posZ), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.SOURCE_ONLY, this));
-	                if (blockraytraceresult.getType() != RayTraceResult.Type.MISS && this.world.getFluidState(blockraytraceresult.getPos()).isTagged(FluidTags.WATER))
+	                BlockHitResult blockraytraceresult = this.world.rayTrace(new RayTraceContext(new Vec3d(this.prevX, this.prevY, this.prevZ), new Vec3d(this.getX(), this.getY(), this.getZ()), RayTraceContext.ShapeType.COLLIDER, RayTraceContext.FluidHandling.SOURCE_ONLY, this));
+	                if (blockraytraceresult.getType() != HitResult.Type.MISS && this.world.getFluidState(blockraytraceresult.getBlockPos()).matches(FluidTags.WATER))
 	                {
-	                   blockpos1 = blockraytraceresult.getPos();
+	                   blockpos1 = blockraytraceresult.getBlockPos();
 	                   flag1 = true;
 	                }
 	             }
 				if(FlyingBlock.canFlyThrough(this.world.getBlockState(blockpos1.up())) && !flag1)
 				{
-					if(!this.world.isRemote && (this.flyTime > 100 && (blockpos1.getY() < 1 || blockpos1.getY() > 256) || this.flyTime > 600))
+					if(!this.world.isClient && (this.flyTime > 100 && (blockpos1.getY() < 1 || blockpos1.getY() > 256) || this.flyTime > 600))
 					{
 						if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 						{
-							this.entityDropItem(block);
+							this.dropItem(block);
 						}
 						this.remove();
 					}
@@ -172,89 +159,89 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 				else
 				{
 					BlockState blockstate = this.world.getBlockState(blockpos1);
-					this.setMotion(this.getMotion().mul(0.7D, 0.4D, 0.7D));
+					this.setVelocity(this.getVelocity().multiply(0.7D, 0.4D, 0.7D));
 					if(blockstate.getBlock() != Blocks.MOVING_PISTON)
 					{
 						this.remove();
 						if(!this.dontSetBlock)
 						{
-							boolean flag2 = blockstate.isReplaceable(new DirectionalPlaceContext(this.world, blockpos1, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
-							boolean flag3 = this.flyTile.isValidPosition(this.world, blockpos1);
+							boolean flag2 = blockstate.canReplace(new AutomaticItemPlacementContext(this.world, blockpos1, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
+							boolean flag3 = this.flyTile.canPlaceAt(this.world, blockpos1);
 							if(flag2 && flag3)
 							{
-								if(this.flyTile.has(BlockStateProperties.WATERLOGGED) && this.world.getFluidState(blockpos1).getFluid() == Fluids.WATER)
+								if(this.flyTile.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockpos1).getFluid() == Fluids.WATER)
 								{
-									this.flyTile = this.flyTile.with(BlockStateProperties.WATERLOGGED, Boolean.valueOf(true));
+									this.flyTile = this.flyTile.with(Properties.WATERLOGGED, Boolean.valueOf(true));
 								}
 								
 								if(this.world.setBlockState(blockpos1, this.flyTile, 3))
 								{
 									if(block instanceof FlyingBlock)
 									{
-										((FlyingBlock)block).onEndFlying(this.world, blockpos1, this.flyTile, blockstate);
+										((FlyingBlock) block).onEndFlying(this.world, blockpos1, this.flyTile, blockstate);
 									}
 									
-									if(this.tileEntityData != null && this.flyTile.hasTileEntity())
+									if(this.tileEntityData != null && flyTile instanceof BlockEntityProvider)
 									{
-										TileEntity tileEntity = this.world.getTileEntity(blockpos1);
+										BlockEntity tileEntity = this.world.getBlockEntity(blockpos1);
 										if(tileEntity != null)
 										{
-											CompoundNBT compoundNbt = tileEntity.write(new CompoundNBT());
+											CompoundTag compoundNbt = tileEntity.toTag(new CompoundTag());
 											
-											for(String s : this.tileEntityData.keySet())
+											for(String s : this.tileEntityData.getKeys())
 											{
-												INBT inbt = this.tileEntityData.get(s);
+												Tag inbt = this.tileEntityData.get(s);
 												if (!"x".equals(s) && !"y".equals(s) && !"z".equals(s))
 												{
 		        	                            	compoundNbt.put(s, inbt.copy());
 		        	                            }
 											}
 											
-											tileEntity.read(compoundNbt);
+											tileEntity.fromTag(compoundNbt);
 											tileEntity.markDirty();
 										}
 									}
 								}
 								else if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 								{
-									this.entityDropItem(block);
+									this.dropItem(block);
 								}
 							}
 							else if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 							{
-								this.entityDropItem(block);
+								this.dropItem(block);
 							}
 						}
 						else if(block instanceof FlyingBlock)
 						{
-							((FlyingBlock)block).onBroken(this.world, blockpos1);
+							((FlyingBlock) block).onBroken(this.world, blockpos1);
 						}
 					}
 				}
 			}
-			this.setMotion(this.getMotion().scale(0.98D));
+			this.setVelocity(this.getVelocity().multiply(0.98D));
 		}
 	}
 
-	public void fly(float distance, float damageMultiplier)
+	public boolean handleFallDamage(float distance, float damageMultiplier)
 	{
 		if (this.hurtEntities)
 		{
 			int i = MathHelper.ceil(distance - 1.0F);
 			if (i > 0)
 			{
-				List<Entity> list = Lists.newArrayList(this.world.getEntitiesWithinAABBExcludingEntity(this, this.getBoundingBox()));
-				boolean flag = this.flyTile.isIn(BlockTags.ANVIL);
+				List<Entity> list = Lists.newArrayList(this.world.getEntities(this, this.getBoundingBox()));
+				boolean flag = this.flyTile.matches(BlockTags.ANVIL);
 				DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
 
 				for(Entity entity : list)
 				{
-					entity.attackEntityFrom(damagesource, (float)Math.min(MathHelper.floor((float)i * this.flyHurtAmount), this.flyHurtMax));
+					entity.damage(damagesource, (float)Math.min(MathHelper.floor((float)i * this.flyHurtAmount), this.flyHurtMax));
 				}
 
-				if (flag && (double)this.rand.nextFloat() < (double)0.05F + (double)i * 0.05D)
+				if (flag && (double)this.random.nextFloat() < (double)0.05F + (double)i * 0.05D)
 				{
-					BlockState iblockstate = AnvilBlock.damage(this.flyTile);
+					BlockState iblockstate = AnvilBlock.getLandingState(this.flyTile);
 					if (iblockstate == null)
 					{
 						this.dontSetBlock = true;
@@ -266,13 +253,13 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 				}
 			}
 		}
-
+		return false;
 	}
 
 	@Override
-	protected void writeAdditional(CompoundNBT compound)
+	protected void writeCustomDataToTag(CompoundTag compound)
 	{
-		compound.put("BlockState", NBTUtil.writeBlockState(this.flyTile));
+		compound.put("BlockState", NbtHelper.fromBlockState(this.flyTile));
 		compound.putInt("Time", this.flyTime);
 		compound.putBoolean("DropItem", this.shouldDropItem);
 		compound.putBoolean("HurtEntities", this.hurtEntities);
@@ -285,15 +272,15 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	}
 	
 	@Override
-	protected void readAdditional(CompoundNBT compound)
+	protected void readCustomDataFromTag(CompoundTag compound)
 	{
-		this.flyTile = NBTUtil.readBlockState(compound.getCompound("BlockState"));
+		this.flyTile = NbtHelper.toBlockState(compound.getCompound("BlockState"));
 		this.flyTime = compound.getInt("Time");
 		if (compound.contains("HurtEntities", 99)) {
 			this.hurtEntities = compound.getBoolean("HurtEntities");
 			this.flyHurtMax = compound.getInt("FlyHurtMax");
 		}
-		else if(this.flyTile.isIn(BlockTags.ANVIL))
+		else if(this.flyTile.matches(BlockTags.ANVIL))
 		{
 			this.hurtEntities = true;
 		}
@@ -312,7 +299,7 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 
 	}
 
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public World getWorldObj()
 	{
 		return this.world;
@@ -323,29 +310,17 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 		this.hurtEntities = hurtEntitiesIn;
 	}
 	
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public boolean canRenderOnFire()
 	{
 		return false;
 	}
 	
 	@Override
-	public void fillCrashReport(CrashReportCategory category)
+	public void populateCrashReport(CrashReportSection category)
 	{
-		super.fillCrashReport(category);
-		category.addDetail("Immitating BlockState", this.flyTile.toString());
-	}
-	
-	@Override
-	public void writeSpawnData(PacketBuffer buffer)
-	{
-		buffer.writeInt(Block.getStateId(flyTile));
-	}
-	
-	@Override
-	public void readSpawnData(PacketBuffer additionalData)
-	{
-		this.flyTile = Block.getStateById(additionalData.readInt());
+		super.populateCrashReport(category);
+		category.add("Immitating BlockState", this.flyTile.toString());
 	}
 	
 	public BlockState getBlockState()
@@ -354,14 +329,8 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	}
 
 	@Override
-	public boolean ignoreItemEntityData()
+	public Packet<?> createSpawnPacket()
 	{
-		return true;
-	}
-
-	@Override
-	public IPacket<?> createSpawnPacket()
-	{
-		return NetworkHooks.getEntitySpawningPacket(this);
+		return new EntitySpawnS2CPacket(this);
 	}
 }

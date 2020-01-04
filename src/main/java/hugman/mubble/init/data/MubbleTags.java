@@ -7,22 +7,22 @@ import hugman.mubble.Mubble;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.EntityTypeTags;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.tag.EntityTypeTags;
+import net.minecraft.tag.ItemTags;
+import net.minecraft.tag.Tag;
+import net.minecraft.util.Identifier;
 
 public class MubbleTags
 {
     public static class Blocks
     {
-        public static final Tag<Block> CLOUD_BLOCKS = tag("cloud_blocks");
-        public static final Tag<Block> VALID_GROUND_PALM_SAPLING = tag("valid_ground/palm_sapling");
+        public static final Tag<Block> CLOUD_BLOCKS = register("cloud_blocks");
+        public static final Tag<Block> VALID_GROUND_PALM_SAPLING = register("valid_ground/palm_sapling");
 
-        private static Tag<Block> tag(String name)
+        private static Tag<Block> register(String name)
         {
-            return new BlockTags.Wrapper(new ResourceLocation(Mubble.MOD_ID, name));
+            return BlockTags.getContainer().getOrCreate(new Identifier(Mubble.MOD_ID, name));
         }
     }
     
@@ -30,37 +30,37 @@ public class MubbleTags
     {
         public static final List<Tag<Item>> TIMESWAP_TAGS = new ArrayList<Tag<Item>>();
         
-        public static final Tag<Item> COINS = tag("coins");
-        public static final Tag<Item> CROWNS = tag("crowns");
-        public static final Tag<Item> WEIGHT_HEAVY = tag("weight/heavy");
-        public static final Tag<Item> WEIGHT_LIGHT = tag("weight/light");
-        public static final Tag<Item> SCARY_TO_TOAD = tag("scary_to/toad");
-        public static final Tag<Item> TEMPTING_TO_TOAD = tag("tempting_to/toad");
+        public static final Tag<Item> COINS = register("coins");
+        public static final Tag<Item> CROWNS = register("crowns");
+        public static final Tag<Item> WEIGHT_HEAVY = register("weight/heavy");
+        public static final Tag<Item> WEIGHT_LIGHT = register("weight/light");
+        public static final Tag<Item> SCARY_TO_TOAD = register("scary_to/toad");
+        public static final Tag<Item> TEMPTING_TO_TOAD = register("tempting_to/toad");
 
-        public static final Tag<Item> GEMS_BISMUTH = tag("gems/bismuth");
+        public static final Tag<Item> GEMS_BISMUTH = register("gems/bismuth");
 
-        public static final Tag<Item> TIMESWAP_QUESTION_BLOCKS = timeswapTag("timeswap/question_blocks");
-        public static final Tag<Item> TIMESWAP_GROUND_BLOCKS = timeswapTag("timeswap/ground_blocks");
-        public static final Tag<Item> TIMESWAP_EMPTY_BLOCKS = timeswapTag("timeswap/empty_blocks");
-        public static final Tag<Item> TIMESWAP_ROTATING_BLOCKS = timeswapTag("timeswap/rotating_blocks");
-        public static final Tag<Item> TIMESWAP_BRICK_BLOCKS = timeswapTag("timeswap/brick_blocks");
-        public static final Tag<Item> TIMESWAP_GOLDEN_BRICK_BLOCKS = timeswapTag("timeswap/golden_brick_blocks");
-        public static final Tag<Item> TIMESWAP_HARD_BLOCKS = timeswapTag("timeswap/hard_blocks");
-        public static final Tag<Item> TIMESWAP_ICE_BLOCKS = timeswapTag("timeswap/ice_blocks");
-        public static final Tag<Item> TIMESWAP_NOTE_BLOCKS = timeswapTag("timeswap/note_blocks");
-        public static final Tag<Item> TIMESWAP_SUPER_NOTE_BLOCKS = timeswapTag("timeswap/super_note_blocks");
-        public static final Tag<Item> TIMESWAP_DOORS = timeswapTag("timeswap/doors");
-        public static final Tag<Item> TIMESWAP_KEY_DOORS = timeswapTag("timeswap/key_doors");
-        public static final Tag<Item> TIMESWAP_KEYS = timeswapTag("timeswap/keys");
+        public static final Tag<Item> TIMESWAP_QUESTION_BLOCKS = registerTimeswap("timeswap/question_blocks");
+        public static final Tag<Item> TIMESWAP_GROUND_BLOCKS = registerTimeswap("timeswap/ground_blocks");
+        public static final Tag<Item> TIMESWAP_EMPTY_BLOCKS = registerTimeswap("timeswap/empty_blocks");
+        public static final Tag<Item> TIMESWAP_ROTATING_BLOCKS = registerTimeswap("timeswap/rotating_blocks");
+        public static final Tag<Item> TIMESWAP_BRICK_BLOCKS = registerTimeswap("timeswap/brick_blocks");
+        public static final Tag<Item> TIMESWAP_GOLDEN_BRICK_BLOCKS = registerTimeswap("timeswap/golden_brick_blocks");
+        public static final Tag<Item> TIMESWAP_HARD_BLOCKS = registerTimeswap("timeswap/hard_blocks");
+        public static final Tag<Item> TIMESWAP_ICE_BLOCKS = registerTimeswap("timeswap/ice_blocks");
+        public static final Tag<Item> TIMESWAP_NOTE_BLOCKS = registerTimeswap("timeswap/note_blocks");
+        public static final Tag<Item> TIMESWAP_SUPER_NOTE_BLOCKS = registerTimeswap("timeswap/super_note_blocks");
+        public static final Tag<Item> TIMESWAP_DOORS = registerTimeswap("timeswap/doors");
+        public static final Tag<Item> TIMESWAP_KEY_DOORS = registerTimeswap("timeswap/key_doors");
+        public static final Tag<Item> TIMESWAP_KEYS = registerTimeswap("timeswap/keys");
 
-        private static Tag<Item> tag(String name)
+        private static Tag<Item> register(String name)
         {
-        	return new ItemTags.Wrapper(new ResourceLocation(Mubble.MOD_ID, name));
+        	return new ItemTags.CachingTag(new Identifier(Mubble.MOD_ID, name));
         }
 
-        private static Tag<Item> timeswapTag(String name)
+        private static Tag<Item> registerTimeswap(String name)
         {
-        	Tag<Item> fTag = new ItemTags.Wrapper(new ResourceLocation(Mubble.MOD_ID, name));
+        	Tag<Item> fTag = new ItemTags.CachingTag(new Identifier(Mubble.MOD_ID, name));
         	TIMESWAP_TAGS.add(fTag);
             return fTag;
         }
@@ -68,11 +68,11 @@ public class MubbleTags
     
     public static class EntityTypes
     {
-        public static final Tag<EntityType<?>> CAN_WEAR_HELMET = tag("can_wear_helmet");
+        public static final Tag<EntityType<?>> CAN_WEAR_HELMET = register("can_wear_helmet");
 
-        private static Tag<EntityType<?>> tag(String name)
+        private static Tag<EntityType<?>> register(String name)
         {
-            return new EntityTypeTags.Wrapper(new ResourceLocation(Mubble.MOD_ID, name));
+            return new EntityTypeTags.CachingTag(new Identifier(Mubble.MOD_ID, name));
         }
     }
 }

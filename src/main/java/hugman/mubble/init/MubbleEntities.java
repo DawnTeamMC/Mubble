@@ -10,50 +10,30 @@ import hugman.mubble.objects.entity.FlyingBlockEntity;
 import hugman.mubble.objects.entity.GoombaEntity;
 import hugman.mubble.objects.entity.ToadEntity;
 import hugman.mubble.objects.entity.ZombieCowmanEntity;
-import hugman.mubble.objects.entity.render.ChinchoRender;
-import hugman.mubble.objects.entity.render.CustomTNTRender;
-import hugman.mubble.objects.entity.render.FlyingBlockRender;
-import hugman.mubble.objects.entity.render.GoombaRender;
-import hugman.mubble.objects.entity.render.ToadRender;
-import hugman.mubble.objects.entity.render.ZombieCowmanRender;
+import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntitySpawnPlacementRegistry;
+import net.minecraft.entity.EntityCategory;
+import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
-import net.minecraft.world.gen.Heightmap;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class MubbleEntities
 {
     public static final List<EntityType<? extends Entity>> ENTITY_TYPES = new ArrayList<EntityType<? extends Entity>>();
     
-	public static final EntityType<ChinchoEntity> CHINCHO = register("chincho", EntityType.Builder.create(ChinchoEntity::new, EntityClassification.MONSTER).size(0.6F, 1.2F));
-	public static final EntityType<GoombaEntity> GOOMBA = register("goomba", EntityType.Builder.create(GoombaEntity::new, EntityClassification.MONSTER).size(0.75F, 0.85F));
-	public static final EntityType<ToadEntity> TOAD = register("toad", EntityType.Builder.create(ToadEntity::new, EntityClassification.CREATURE).size(0.6F, 1.4F));
-	public static final EntityType<ZombieCowmanEntity> ZOMBIE_COWMAN = register("zombie_cowman", EntityType.Builder.create(ZombieCowmanEntity::new, EntityClassification.MONSTER).size(0.6F, 1.95F));
+	public static final EntityType<ChinchoEntity> CHINCHO = register("chincho", FabricEntityTypeBuilder.create(EntityCategory.MONSTER, ChinchoEntity::new).size(EntityDimensions.fixed(0.6F, 1.2F)).build());
+	public static final EntityType<GoombaEntity> GOOMBA = register("goomba", FabricEntityTypeBuilder.create(EntityCategory.MONSTER, GoombaEntity::new).size(EntityDimensions.fixed(0.75F, 0.85F)).build());
+	public static final EntityType<ToadEntity> TOAD = register("toad", FabricEntityTypeBuilder.create(EntityCategory.CREATURE, ToadEntity::new).size(EntityDimensions.fixed(0.6F, 1.4F)).build());
+	public static final EntityType<ZombieCowmanEntity> ZOMBIE_COWMAN = register("zombie_cowman", FabricEntityTypeBuilder.create(EntityCategory.MONSTER, ZombieCowmanEntity::new).size(EntityDimensions.fixed(0.6F, 1.95F)).build());
 
-	public static final EntityType<CustomTNTEntity> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<CustomTNTEntity>create(CustomTNTEntity::new, EntityClassification.MISC).immuneToFire().size(0.98F, 0.98F).setTrackingRange(128).setUpdateInterval(1));
-	public static final EntityType<FlyingBlockEntity> FLYING_BLOCK = register("flying_block", EntityType.Builder.<FlyingBlockEntity>create(FlyingBlockEntity::new, EntityClassification.MISC).size(0.98F, 0.98F).setTrackingRange(128).setUpdateInterval(1));
+	public static final EntityType<CustomTNTEntity> CUSTOM_TNT = register("custom_tnt", FabricEntityTypeBuilder.<CustomTNTEntity>create(EntityCategory.MISC, CustomTNTEntity::new).setImmuneToFire().size(EntityDimensions.fixed(0.98F, 0.98F)).trackable(128, 1).build());
+	public static final EntityType<FlyingBlockEntity> FLYING_BLOCK = register("flying_block", FabricEntityTypeBuilder.<FlyingBlockEntity>create(EntityCategory.MISC, FlyingBlockEntity::new).size(EntityDimensions.fixed(0.98F, 0.98F)).trackable(128, 1).build());
 	
-	public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder)
+	private static <T extends Entity> EntityType<T> register(String name, EntityType<T> builder)
 	{
-	    EntityType<T> entitytype = builder.build(Mubble.MOD_PREFIX + id);
-	    entitytype.setRegistryName(Mubble.MOD_ID, id);
-	    ENTITY_TYPES.add(entitytype);
-		return entitytype;
+		return Registry.register(Registry.ENTITY_TYPE, new Identifier(Mubble.MOD_ID, name), builder);
 	}
-	
-    public static void registerEntities(IForgeRegistry<EntityType<?>> registry)
-    {
-    	registry.register(CHINCHO);
-    	registry.register(TOAD);
-    	registry.register(GOOMBA);
-    	registry.register(ZOMBIE_COWMAN);
-
-    	registry.register(CUSTOM_TNT);
-    	registry.register(FLYING_BLOCK);
-    }
     
     public static void registerPlacements()
     {

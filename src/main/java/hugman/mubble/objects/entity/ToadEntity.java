@@ -7,45 +7,44 @@ import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleLootTables;
 import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.util.CalendarEvents;
-import net.minecraft.entity.AgeableEntity;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.OpenDoorGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.LongDoorInteractGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 
 public class ToadEntity extends AnimalEntity
 {
-	private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(ToadEntity.class, DataSerializers.VARINT);
+	private static final TrackedData<Integer> VARIANT = DataTracker.registerData(ToadEntity.class, TrackedDataHandlerRegistry.INTEGER);
 	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromTag(MubbleTags.Items.TEMPTING_TO_TOAD);
 	
     public ToadEntity(EntityType<? extends ToadEntity> type, World worldIn) 
@@ -54,44 +53,44 @@ public class ToadEntity extends AnimalEntity
     }
     
     @Override
-    public ILivingEntityData onInitialSpawn(IWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, ILivingEntityData spawnDataIn, CompoundNBT dataTag)
+    public net.minecraft.entity.EntityData initialize(IWorld worldIn, LocalDifficulty difficultyIn, SpawnType reason, net.minecraft.entity.EntityData spawnDataIn, CompoundTag dataTag)
     {
-        this.setVariant(this.world.rand.nextInt(16));
-        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
+        this.setVariant(this.world.random.nextInt(16));
+        return super.initialize(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
     
     @Override
-    protected void registerGoals()
+    protected void initGoals()
     {
-        this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, ChinchoEntity.class, 10f, 1.2d, 1.45d, EntityPredicates.IS_ALIVE::test));
-        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((LivingEntity) checkedEntity).getHeldItemMainhand().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.CAN_AI_TARGET::test));
-        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((LivingEntity) checkedEntity).getHeldItemOffhand().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.CAN_AI_TARGET::test));
-        this.goalSelector.addGoal(1, new AvoidEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((LivingEntity) checkedEntity).getItemStackFromSlot(EquipmentSlotType.HEAD).getItem()), 10f, 1.2f, 1.45f, EntityPredicates.CAN_AI_TARGET::test));
-        this.goalSelector.addGoal(1, new OpenDoorGoal(this, true));
-        this.goalSelector.addGoal(2, new PanicGoal(this, 1.6D));
-        this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new TemptGoal(this, 1.4D, false, TEMPTATION_ITEMS));
-        this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(5, new LookAtGoal(this, ChickenEntity.class, 10.0F));
-        this.goalSelector.addGoal(6, new LookAtGoal(this, this.getClass(), 8.0F));
-        this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new FleeEntityGoal<>(this, ChinchoEntity.class, 10f, 1.2d, 1.45d, EntityPredicates.VALID_ENTITY_LIVING::test));
+        this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((LivingEntity) checkedEntity).getMainHandStack().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
+        this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((LivingEntity) checkedEntity).getOffHandStack().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
+        this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.SCARY_TO_TOAD.contains(((LivingEntity) checkedEntity).getEquippedStack(EquipmentSlot.HEAD).getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
+        this.goalSelector.add(1, new LongDoorInteractGoal(this, true));
+        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.6D));
+        this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
+        this.goalSelector.add(3, new TemptGoal(this, 1.4D, false, TEMPTATION_ITEMS));
+        this.goalSelector.add(4, new FollowParentGoal(this, 1.1D));
+        this.goalSelector.add(4, new EscapeDangerGoal(this, 1.0D));
+        this.goalSelector.add(5, new LookAtEntityGoal(this, ChickenEntity.class, 10.0F));
+        this.goalSelector.add(6, new LookAtEntityGoal(this, this.getClass(), 8.0F));
+        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
+        this.goalSelector.add(8, new LookAroundGoal(this));
     }
     
     @Override
-    protected void registerAttributes() 
+    protected void initAttributes() 
     {
-        super.registerAttributes();
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(9.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        super.initAttributes();
+        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(9.0D);
+        this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
     }
     
     @Override
-    public float getEyeHeight(Pose pose)
+    public float getEyeHeight(EntityPose pose)
     {
-    	if(this.isChild()) return 0.75f;
+    	if(this.isBaby()) return 0.75f;
         return 1.25f;
     }
     
@@ -116,37 +115,37 @@ public class ToadEntity extends AnimalEntity
     
     public int getVariant()
     {
-    	return this.dataManager.get(VARIANT);
+    	return this.dataTracker.get(VARIANT);
 	}
 
 	public void setVariant(int variantIn)
 	{
-		this.dataManager.set(VARIANT, variantIn);
+		this.dataTracker.set(VARIANT, variantIn);
 	}
 	
 	@Override
-	protected void registerData()
+	protected void initDataTracker()
 	{
-		super.registerData();
-		this.dataManager.register(VARIANT, 0);
+		super.initDataTracker();
+		this.dataTracker.startTracking(VARIANT, 0);
 	}
     
     @Override
-    public void writeAdditional(CompoundNBT compound)
+    public void writeCustomDataToTag(CompoundTag compound)
     {
-        super.writeAdditional(compound);
+        super.writeCustomDataToTag(compound);
         compound.putInt("Variant", this.getVariant());
     }
 
     @Override
-    public void readAdditional(CompoundNBT compound)
+    public void readCustomDataFromTag(CompoundTag compound)
     {
-        super.readAdditional(compound);
+        super.readCustomDataFromTag(compound);
         this.setVariant(compound.getInt("Variant"));
     }
     
     @Override
-    protected ResourceLocation getLootTable()
+    protected Identifier getLootTableId()
     {
 		switch(this.getVariant())
 		{
@@ -200,10 +199,10 @@ public class ToadEntity extends AnimalEntity
     }
     
     @Override
-    public AgeableEntity createChild(AgeableEntity ageable)
+    public PassiveEntity createChild(PassiveEntity ageable)
     {
     	ToadEntity childToad = new ToadEntity(MubbleEntities.TOAD, this.world);
-    	childToad.setVariant(this.world.rand.nextInt(16));
+    	childToad.setVariant(this.world.random.nextInt(16));
     	return childToad;
     }
     
@@ -213,7 +212,7 @@ public class ToadEntity extends AnimalEntity
         return TEMPTATION_ITEMS.test(stack);
     }
     
-	public static boolean canSpawn(EntityType<ToadEntity> entity, IWorld world, SpawnReason reason, BlockPos pos, Random rand)
+	public static boolean canSpawn(EntityType<ToadEntity> entity, IWorld world, SpawnType reason, BlockPos pos, Random rand)
 	{
 		return true;
 	}

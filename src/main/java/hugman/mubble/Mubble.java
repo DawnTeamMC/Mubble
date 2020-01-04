@@ -23,7 +23,6 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.world.biome.Biome;
 
 public class Mubble implements ModInitializer
@@ -37,6 +36,7 @@ public class Mubble implements ModInitializer
 	{
 		new MubbleCommands();
 		new MubbleEffects();
+		new MubbleEntities();
 		new MubbleSounds();
 		
 		// Data
@@ -75,13 +75,6 @@ public class Mubble implements ModInitializer
         }
         
         @SubscribeEvent
-        public static void onTileEntitiesRegistry(final RegistryEvent.Register<TileEntityType<?>> event)
-        {
-        	event.getRegistry().registerAll(MubbleTileEntityTypes.TILE_ENTITY_TYPES.toArray(new TileEntityType<?>[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleTileEntityTypes.TILE_ENTITY_TYPES.size(), "tile entity"));
-        }
-        
-        @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> event)
         {
             event.getRegistry().registerAll(MubbleBlocks.CUBES.toArray(new Item[0]));
@@ -105,16 +98,6 @@ public class Mubble implements ModInitializer
         	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleItems.ITEMS.size(), "item"));
     		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
         	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleCostumes.COSTUMES.size(), "costume"));
-        }
-        
-        @SubscribeEvent
-        public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> event)
-        {
-        	IForgeRegistry<EntityType<?>> registry = event.getRegistry();
-        	MubbleEntities.registerEntities(registry);
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleEntities.ENTITY_TYPES.size(), "entity"));
-        	MubbleEntities.registerPlacements();
-        	LOGGER.info("Registered entity spawn placements");
         }
         
         @SubscribeEvent
