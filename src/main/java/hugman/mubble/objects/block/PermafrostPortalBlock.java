@@ -2,70 +2,69 @@ package hugman.mubble.objects.block;
 
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
 import com.google.common.cache.LoadingCache;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.pattern.BlockPattern;
+import net.minecraft.block.pattern.CachedBlockPosition;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.CachedBlockInfo;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Rotation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.state.StateManager.Builder;
+import net.minecraft.state.property.EnumProperty;
+import net.minecraft.state.property.Properties;
+import net.minecraft.text.Text;
+import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class PermafrostPortalBlock extends Block
 {
-	public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
-	protected static final VoxelShape X_SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);
-	protected static final VoxelShape Z_SHAPE = Block.makeCuboidShape(6.0D, 0.0D, 0.0D, 10.0D, 16.0D, 16.0D);
+	public static final EnumProperty<Direction.Axis> AXIS = Properties.HORIZONTAL_AXIS;
+	protected static final VoxelShape X_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 6.0D, 16.0D, 16.0D, 10.0D);
+	protected static final VoxelShape Z_SHAPE = Block.createCuboidShape(6.0D, 0.0D, 0.0D, 10.0D, 16.0D, 16.0D);
 
-	public PermafrostPortalBlock(Properties builder)
+	public PermafrostPortalBlock(Settings builder)
 	{
 		super(builder);
-		this.setDefaultState(this.stateContainer.getBaseState().with(AXIS, Direction.Axis.X));
+		this.setDefaultState(this.stateManager.getDefaultState().with(AXIS, Direction.Axis.X));
 	}
 
 	@Override
-	protected void fillStateContainer(Builder<Block, BlockState> builder)
+	protected void appendProperties(Builder<Block, BlockState> builder)
 	{
 		builder.add(AXIS);
 	}
 
 	@Override
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state)
+	public Item asItem()
 	{
-		return ItemStack.EMPTY;
+		return ItemStack.EMPTY.getItem();
 	}
 
 	@Override
-	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) 
+	public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context) 
 	{
 		switch ((Direction.Axis) state.get(AXIS))
 		{
@@ -78,7 +77,7 @@ public class PermafrostPortalBlock extends Block
 	}
 
 	@Override
-	public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation rot)
+	public BlockState rotate(BlockState state, BlockRotation rot)
 	{
 		switch (rot)
 		{
@@ -99,29 +98,29 @@ public class PermafrostPortalBlock extends Block
 	}
 	
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
 	{
-		if(worldIn.dimension.isSurfaceWorld() && worldIn.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING) && random.nextInt(2000) < worldIn.getDifficulty().getId())
+		if(worldIn.dimension.hasVisibleSky() && worldIn.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING) && random.nextInt(2000) < worldIn.getDifficulty().getId())
 		{
 			while(worldIn.getBlockState(pos).getBlock() == this)
 			{
 				pos = pos.down();
 			}
 			
-			if(worldIn.getBlockState(pos).canEntitySpawn(worldIn, pos, EntityType.ZOMBIE_PIGMAN))
+			if(worldIn.getBlockState(pos).allowsSpawning(worldIn, pos, EntityType.ZOMBIE_PIGMAN))
 			{
-				Entity entity = MubbleEntities.ZOMBIE_COWMAN.spawn(worldIn, (CompoundNBT)null, (ITextComponent)null, (PlayerEntity)null, pos.up(), SpawnReason.STRUCTURE, false, false);
+				Entity entity = MubbleEntities.ZOMBIE_COWMAN.spawn(worldIn, (CompoundTag) null, (Text) null, (PlayerEntity) null, pos.up(), SpawnType.STRUCTURE, false, false);
 				if (entity != null)
 				{
-					entity.timeUntilPortal = entity.getPortalCooldown();
+					entity.netherPortalCooldown = entity.getDefaultNetherPortalCooldown();
 				}
 			}
 		}
 	}
 
 	@Override
-	@OnlyIn(Dist.CLIENT)
-	public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	@Environment(EnvType.CLIENT)
+	public void randomDisplayTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
 	{
 		if(rand.nextInt(100) == 0)
 		{
@@ -183,7 +182,6 @@ public class PermafrostPortalBlock extends Block
 		}
 	}
 	
-	@Nullable
 	public PermafrostPortalBlock.Size isPortal(IWorld worldIn, BlockPos pos)
 	{
 		PermafrostPortalBlock.Size permafrostPortalBlock$size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
@@ -199,7 +197,7 @@ public class PermafrostPortalBlock extends Block
 	}
 
 	@Override
-	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+	public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
 		Direction.Axis direction$axis = facing.getAxis();
 		Direction.Axis direction$axis1 = stateIn.get(AXIS);
@@ -207,11 +205,11 @@ public class PermafrostPortalBlock extends Block
 		return !flag && facingState.getBlock() != this && !(new PermafrostPortalBlock.Size(worldIn, currentPos, direction$axis1)).isCorrectPortal() ? Blocks.AIR.getDefaultState() : stateIn;
 	}
 
-	public BlockPattern.PatternHelper createPatternHelper(IWorld worldIn, BlockPos pos)
+	public BlockPattern.Result createPatternHelper(IWorld worldIn, BlockPos pos)
 	{
 		Direction.Axis direction$axis = Direction.Axis.Z;
 		PermafrostPortalBlock.Size permafrostPortalBlock$size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
-		LoadingCache<BlockPos, CachedBlockInfo> loadingcache = BlockPattern.createLoadingCache(worldIn, true);
+		LoadingCache<BlockPos, CachedBlockPosition> loadingcache = BlockPattern.makeCache(worldIn, true);
 		if (!permafrostPortalBlock$size.isValid())
 		{
 			direction$axis = Direction.Axis.X;
@@ -220,23 +218,23 @@ public class PermafrostPortalBlock extends Block
 
 		if (!permafrostPortalBlock$size.isValid())
 		{
-			return new BlockPattern.PatternHelper(pos, Direction.NORTH, Direction.UP, loadingcache, 1, 1, 1);
+			return new BlockPattern.Result(pos, Direction.NORTH, Direction.UP, loadingcache, 1, 1, 1);
 		}
 		else
 		{
 			int[] aint = new int[Direction.AxisDirection.values().length];
-			Direction direction = permafrostPortalBlock$size.rightDir.rotateYCCW();
+			Direction direction = permafrostPortalBlock$size.rightDir.rotateYCounterclockwise();
 			BlockPos blockpos = permafrostPortalBlock$size.bottomLeft.up(permafrostPortalBlock$size.getHeight() - 1);
 
 			for (Direction.AxisDirection direction$axisdirection : Direction.AxisDirection.values())
 			{
-				BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(direction.getAxisDirection() == direction$axisdirection ? blockpos : blockpos.offset(permafrostPortalBlock$size.rightDir, permafrostPortalBlock$size.getWidth() - 1), Direction.getFacingFromAxis(direction$axisdirection, direction$axis), Direction.UP, loadingcache, permafrostPortalBlock$size.getWidth(), permafrostPortalBlock$size.getHeight(), 1);
+				BlockPattern.Result blockpattern$patternhelper = new BlockPattern.Result(direction.getDirection() == direction$axisdirection ? blockpos : blockpos.offset(permafrostPortalBlock$size.rightDir, permafrostPortalBlock$size.getWidth() - 1), Direction.get(direction$axisdirection, direction$axis), Direction.UP, loadingcache, permafrostPortalBlock$size.getWidth(), permafrostPortalBlock$size.getHeight(), 1);
 
 				for (int i = 0; i < permafrostPortalBlock$size.getWidth(); ++i)
 				{
 					for (int j = 0; j < permafrostPortalBlock$size.getHeight(); ++j)
 					{
-						CachedBlockInfo cachedblockinfo = blockpattern$patternhelper.translateOffset(i, j, 1);
+						CachedBlockPosition cachedblockinfo = blockpattern$patternhelper.translate(i, j, 1);
 						if(!(cachedblockinfo.getBlockState().getBlock() instanceof AirBlock))
 						{
 							++aint[direction$axisdirection.ordinal()];
@@ -255,7 +253,7 @@ public class PermafrostPortalBlock extends Block
 				}
 			}
 
-			return new BlockPattern.PatternHelper(direction.getAxisDirection() == direction$axisdirection1 ? blockpos : blockpos.offset(permafrostPortalBlock$size.rightDir, permafrostPortalBlock$size.getWidth() - 1), Direction.getFacingFromAxis(direction$axisdirection1, direction$axis), Direction.UP, loadingcache, permafrostPortalBlock$size.getWidth(), permafrostPortalBlock$size.getHeight(), 1);
+			return new BlockPattern.Result(direction.getDirection() == direction$axisdirection1 ? blockpos : blockpos.offset(permafrostPortalBlock$size.rightDir, permafrostPortalBlock$size.getWidth() - 1), Direction.get(direction$axisdirection1, direction$axis), Direction.UP, loadingcache, permafrostPortalBlock$size.getWidth(), permafrostPortalBlock$size.getHeight(), 1);
 		}
 	}
 	
@@ -266,7 +264,6 @@ public class PermafrostPortalBlock extends Block
 		private final Direction rightDir;
 		private final Direction leftDir;
 		private int portalBlockCount;
-		@Nullable
 		private BlockPos bottomLeft;
 		private int height;
 		private int width;

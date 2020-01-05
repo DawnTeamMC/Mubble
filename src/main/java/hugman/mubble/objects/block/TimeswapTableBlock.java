@@ -1,44 +1,42 @@
 package hugman.mubble.objects.block;
 
-import javax.annotation.Nullable;
-
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.container.TimeswapTableContainer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.network.ClientDummyContainerProvider;
+import net.minecraft.container.BlockContext;
+import net.minecraft.container.NameableContainerProvider;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
-import net.minecraft.inventory.container.SimpleNamedContainerProvider;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.IWorldPosCallable;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 public class TimeswapTableBlock extends Block
 {
-	private static final TranslationTextComponent CONTAINER_NAME = new TranslationTextComponent("container." + Mubble.MOD_ID + ".timeswap_table");
+	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");
 	
-    public TimeswapTableBlock(Block.Properties builder)
+    public TimeswapTableBlock(Block.Settings builder)
     {
         super(builder);
     }
     
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResult onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
     {
-        player.openContainer(state.getContainer(worldIn, pos));
-        return true;
+        player.openContainer(state.createContainerProvider(worldIn, pos));
+        return ActionResult.SUCCESS;
     }
     
     @Override
-    @Nullable
-    public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos)
+    public NameableContainerProvider createContainerProvider(BlockState state, World worldIn, BlockPos pos)
     {
-    	return new SimpleNamedContainerProvider((windowId, inventory, playerIn) ->
+    	return new ClientDummyContainerProvider((syncId, inventory, playerIn) ->
     	{
-    		return new TimeswapTableContainer(windowId, inventory, IWorldPosCallable.of(worldIn, pos));
+    		return new TimeswapTableContainer(syncId, inventory, BlockContext.create(worldIn, pos));
     	}, CONTAINER_NAME);
     }
 }
