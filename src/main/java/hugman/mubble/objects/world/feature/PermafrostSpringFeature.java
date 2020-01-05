@@ -11,24 +11,24 @@ import net.minecraft.block.Blocks;
 import net.minecraft.fluid.Fluids;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.GenerationSettings;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.HellLavaConfig;
+import net.minecraft.world.gen.feature.SpringFeatureConfig;
 
-public class PermafrostSpringFeature extends Feature<HellLavaConfig>
+public class PermafrostSpringFeature extends Feature<SpringFeatureConfig>
 {
 	private static final BlockState PERMAROCK = MubbleBlocks.PERMAROCK.getDefaultState();
 	
-	public PermafrostSpringFeature(Function<Dynamic<?>, ? extends HellLavaConfig> configFactoryIn)
+	public PermafrostSpringFeature(Function<Dynamic<?>, ? extends SpringFeatureConfig> configFactoryIn)
 	{
 		super(configFactoryIn);
 	}
 	
-	public boolean place(IWorld worldIn, ChunkGenerator<? extends GenerationSettings> chunkIn, Random rand, BlockPos pos, HellLavaConfig config)
+	public boolean generate(IWorld worldIn, ChunkGenerator<? extends ChunkGeneratorConfig> chunkIn, Random rand, BlockPos pos, SpringFeatureConfig config)
 	{
 		if (worldIn.getBlockState(pos.up()) != PERMAROCK) return false;
-		else if (!worldIn.isAirBlock(pos) && worldIn.getBlockState(pos) != PERMAROCK) return false;
+		else if (!worldIn.isAir(pos) && worldIn.getBlockState(pos) != PERMAROCK) return false;
 		else
 		{
 			int i = 0;
@@ -38,15 +38,15 @@ public class PermafrostSpringFeature extends Feature<HellLavaConfig>
             if (worldIn.getBlockState(pos.north()) == PERMAROCK)  ++i;
             if (worldIn.getBlockState(pos.south()) == PERMAROCK) ++i;
             if (worldIn.getBlockState(pos.down()) == PERMAROCK) ++i;
-            if (worldIn.isAirBlock(pos.west())) ++j;
-            if (worldIn.isAirBlock(pos.east())) ++j;
-            if (worldIn.isAirBlock(pos.north())) ++j;
-            if (worldIn.isAirBlock(pos.south())) ++j;
-            if (worldIn.isAirBlock(pos.down())) ++j;
-            if (!config.insideRock && i == 4 && j == 1 || i == 5)
+            if (worldIn.isAir(pos.west())) ++j;
+            if (worldIn.isAir(pos.east())) ++j;
+            if (worldIn.isAir(pos.north())) ++j;
+            if (worldIn.isAir(pos.south())) ++j;
+            if (worldIn.isAir(pos.down())) ++j;
+            if (!config.requiresBlockBelow && i == 4 && j == 1 || i == 5)
             {
             	worldIn.setBlockState(pos, Blocks.WATER.getDefaultState(), 2);
-            	worldIn.getPendingFluidTicks().scheduleTick(pos, Fluids.WATER, 0);
+            	worldIn.getFluidTickScheduler().schedule(pos, Fluids.WATER, 0);
             }
             return true;
 		}

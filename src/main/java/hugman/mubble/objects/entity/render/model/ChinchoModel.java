@@ -1,90 +1,97 @@
 package hugman.mubble.objects.entity.render.model;
 
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.entity.model.RendererModel;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
+@Environment(EnvType.CLIENT)
 public class ChinchoModel<T extends Entity> extends EntityModel<T>
 {
-    public RendererModel head;
-    public RendererModel body;
-    public RendererModel right_arm;
-    public RendererModel left_arm;
-    public RendererModel right_leg;
-    public RendererModel left_leg;
-    public RendererModel right_teeth;
-    public RendererModel middle_teeth;
-    public RendererModel left_teeth;
+    public ModelPart head;
+    public ModelPart body;
+    public ModelPart right_arm;
+    public ModelPart left_arm;
+    public ModelPart right_leg;
+    public ModelPart left_leg;
+    public ModelPart right_teeth;
+    public ModelPart middle_teeth;
+    public ModelPart left_teeth;
 
     public ChinchoModel()
     {
         this.textureWidth = 64;
         this.textureHeight = 64;
-        this.head = new RendererModel(this, 0, 0);
-        this.head.setRotationPoint(0.0F, 13.0F, 0.0F);
-        this.head.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
-        this.body = new RendererModel(this, 16, 16);
-        this.body.setRotationPoint(0.0F, 8.0F, 0.0F);
-        this.body.addBox(-4.0F, 5.0F, -2F, 8, 7, 4, 0.0F);
-        this.right_teeth = new RendererModel(this, 0, 24);
-        this.right_teeth.setRotationPoint(0.0F, 13.0F, 0.0F);
-        this.right_teeth.addBox(1.8F, -2.0F, -5.0F, 3, 3, 2, 0.0F);
-        this.middle_teeth = new RendererModel(this, 0, 34);
-        this.middle_teeth.setRotationPoint(0.0F, 13.0F, 0.0F);
-        this.middle_teeth.addBox(-1.5F, -2.0F, -5.0F, 3, 3, 2, 0.0F);
-        this.left_teeth = new RendererModel(this, 0, 29);
-        this.left_teeth.setRotationPoint(0.0F, 13.0F, 0.0F);
-        this.left_teeth.addBox(-4.8F, -2.0F, -5.0F, 3, 3, 2, 0.0F);
-        this.right_arm = new RendererModel(this, 40, 16);
-        this.right_arm.setRotationPoint(-5.0F, 15.0F, 0.0F);
-        this.right_arm.addBox(-2.0F, -2.0F, -2.0F, 3, 6, 4, 0.0F);
-        this.left_arm = new RendererModel(this, 40, 16);
+        this.head = new ModelPart(this, 0, 0);
+        this.head.setPivot(0.0F, 13.0F, 0.0F);
+        this.head.addCuboid(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
+        this.body = new ModelPart(this, 16, 16);
+        this.body.setPivot(0.0F, 8.0F, 0.0F);
+        this.body.addCuboid(-4.0F, 5.0F, -2F, 8, 7, 4, 0.0F);
+        this.right_teeth = new ModelPart(this, 0, 24);
+        this.right_teeth.setPivot(0.0F, 13.0F, 0.0F);
+        this.right_teeth.addCuboid(1.8F, -2.0F, -5.0F, 3, 3, 2, 0.0F);
+        this.middle_teeth = new ModelPart(this, 0, 34);
+        this.middle_teeth.setPivot(0.0F, 13.0F, 0.0F);
+        this.middle_teeth.addCuboid(-1.5F, -2.0F, -5.0F, 3, 3, 2, 0.0F);
+        this.left_teeth = new ModelPart(this, 0, 29);
+        this.left_teeth.setPivot(0.0F, 13.0F, 0.0F);
+        this.left_teeth.addCuboid(-4.8F, -2.0F, -5.0F, 3, 3, 2, 0.0F);
+        this.right_arm = new ModelPart(this, 40, 16);
+        this.right_arm.setPivot(-5.0F, 15.0F, 0.0F);
+        this.right_arm.addCuboid(-2.0F, -2.0F, -2.0F, 3, 6, 4, 0.0F);
+        this.left_arm = new ModelPart(this, 40, 16);
         this.left_arm.mirror = true;
-        this.left_arm.setRotationPoint(5.0F, 15.0F, 0.0F);
-        this.left_arm.addBox(-1.0F, -2.0F, -2.0F, 3, 6, 4, 0.0F);
-        this.right_leg = new RendererModel(this, 0, 16);
-        this.right_leg.setRotationPoint(-2F, 17.0F, 0.0F);
-        this.right_leg.addBox(-2.0F, 3.0F, -2.0F, 4, 4, 4, 0.0F);
-        this.left_leg = new RendererModel(this, 0, 16);
+        this.left_arm.setPivot(5.0F, 15.0F, 0.0F);
+        this.left_arm.addCuboid(-1.0F, -2.0F, -2.0F, 3, 6, 4, 0.0F);
+        this.right_leg = new ModelPart(this, 0, 16);
+        this.right_leg.setPivot(-2F, 17.0F, 0.0F);
+        this.right_leg.addCuboid(-2.0F, 3.0F, -2.0F, 4, 4, 4, 0.0F);
+        this.left_leg = new ModelPart(this, 0, 16);
         this.left_leg.mirror = true;
-        this.left_leg.setRotationPoint(2F, 17.0F, 0.0F);
-        this.left_leg.addBox(-2.0F, 3.0F, -2.0F, 4, 4, 4, 0.0F);
-    }
-
-    @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    { 
-        this.right_arm.render(f5);
-        this.left_arm.render(f5);
-        this.left_leg.render(f5);
-        this.middle_teeth.render(f5);
-        this.body.render(f5);
-        this.right_leg.render(f5);
-        this.right_teeth.render(f5);
-        this.head.render(f5);
-        this.left_teeth.render(f5);
+        this.left_leg.setPivot(2F, 17.0F, 0.0F);
+        this.left_leg.addCuboid(-2.0F, 3.0F, -2.0F, 4, 4, 4, 0.0F);
     }
     
     @Override
-    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
+	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha)
     {
-        this.right_arm.rotateAngleX = 3.7699115F;
-        this.left_arm.rotateAngleX = 3.7699115F;
-        this.right_leg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        this.left_leg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        this.right_leg.rotateAngleY = 0.0F;
-        this.left_leg.rotateAngleY = 0.0F;
-        this.right_leg.rotateAngleZ = 0.0F;
-        this.left_leg.rotateAngleZ = 0.0F;
+    	matrices.push();
+    	this.right_arm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+    	this.left_arm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+    	this.left_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+    	this.middle_teeth.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+    	this.body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+    	this.right_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        this.right_teeth.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        this.head.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        this.left_teeth.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+        matrices.pop();
+    }
+    
+    @Override
+    public void setAngles(T entityIn, float limbSwing, float limbSwingAmount, float customAngle, float netHeadYaw, float headPitch)
+    {
+        this.right_arm.pivotX = 3.7699115F;
+        this.left_arm.pivotX = 3.7699115F;
+        this.right_leg.pivotX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        this.left_leg.pivotX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+        this.right_leg.pivotY = 0.0F;
+        this.left_leg.pivotY = 0.0F;
+        this.right_leg.pivotZ = 0.0F;
+        this.left_leg.pivotZ = 0.0F;
         
-    	this.head.rotateAngleY = netHeadYaw * 0.017453292F;
-    	this.head.rotateAngleX = headPitch * 0.017453292F;
-    	this.right_teeth.rotateAngleY = netHeadYaw * 0.017453292F;
-    	this.right_teeth.rotateAngleX = headPitch * 0.017453292F;
-    	this.middle_teeth.rotateAngleY = netHeadYaw * 0.017453292F;
-    	this.middle_teeth.rotateAngleX = headPitch * 0.017453292F;
-    	this.left_teeth.rotateAngleY = netHeadYaw * 0.017453292F;
-    	this.left_teeth.rotateAngleX = headPitch * 0.017453292F;
+    	this.head.pivotY = netHeadYaw * 0.017453292F;
+    	this.head.pivotX = headPitch * 0.017453292F;
+    	this.right_teeth.pivotY = netHeadYaw * 0.017453292F;
+    	this.right_teeth.pivotX = headPitch * 0.017453292F;
+    	this.middle_teeth.pivotY = netHeadYaw * 0.017453292F;
+    	this.middle_teeth.pivotX = headPitch * 0.017453292F;
+    	this.left_teeth.pivotY = netHeadYaw * 0.017453292F;
+    	this.left_teeth.pivotX = headPitch * 0.017453292F;
     }
 }
