@@ -23,7 +23,6 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
-import net.minecraft.world.biome.Biome;
 
 public class Mubble implements ModInitializer
 {
@@ -46,6 +45,7 @@ public class Mubble implements ModInitializer
 		MubbleContainerTypes.init();
 		
 		// World
+		new MubbleBiomes();
 		new MubbleCarvers();
 		new MubbleSurfaceBuilders();
 		initGenerators();
@@ -88,14 +88,6 @@ public class Mubble implements ModInitializer
             event.getRegistry().registerAll(MubbleBlocks.FLOWERS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.FLOWER_PILES.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.OTHERS.toArray(new Item[0]));
-        }
-        
-        @SubscribeEvent
-        public static void onBiomesRegistry(final RegistryEvent.Register<Biome> event)
-        {
-        	event.getRegistry().registerAll(MubbleBiomes.BIOMES.toArray(new Biome[0]));
-        	MubbleBiomes.registerGenerations();
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleBiomes.BIOMES.size(), "biome"));
         }
         
         @SubscribeEvent

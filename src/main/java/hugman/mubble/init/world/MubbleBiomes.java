@@ -1,13 +1,5 @@
 package hugman.mubble.init.world;
 
-import static net.minecraftforge.common.BiomeDictionary.Type.COLD;
-import static net.minecraftforge.common.BiomeDictionary.Type.DENSE;
-import static net.minecraftforge.common.BiomeDictionary.Type.DRY;
-import static net.minecraftforge.common.BiomeDictionary.Type.FOREST;
-import static net.minecraftforge.common.BiomeDictionary.Type.HOT;
-import static net.minecraftforge.common.BiomeDictionary.Type.SANDY;
-import static net.minecraftforge.common.BiomeDictionary.Type.SPOOKY;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,16 +11,12 @@ import hugman.mubble.objects.world.biome.PressGardenBiome;
 import hugman.mubble.objects.world.biome.SMWDesertBiome;
 import hugman.mubble.objects.world.biome.ScarletForestBiome;
 import hugman.mubble.objects.world.biome.WhiteCherryOakForestBiome;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.BiomeDictionary;
-import net.minecraftforge.common.BiomeManager;
-import net.minecraftforge.common.BiomeManager.BiomeEntry;
-import net.minecraftforge.common.BiomeManager.BiomeType;
 
 public class MubbleBiomes
 {
-	public static final List<Biome> BIOMES = new ArrayList<Biome>();
-
 	public static final Biome AUTUMN_OAK_FOREST = register("autumn_oak_forest", new AutumnOakForestBiome());
 	public static final Biome PINK_CHERRY_OAK_FOREST = register("pink_cherry_oak_forest", new PinkCherryOakForestBiome());
 	public static final Biome WHITE_CHERRY_OAK_FOREST = register("white_cherry_oak_forest", new WhiteCherryOakForestBiome());
@@ -40,11 +28,9 @@ public class MubbleBiomes
 	
 	public static final Biome SCARLET_FOREST = register("scarlet_forest", new ScarletForestBiome());
 	
-    public static Biome register(String name, Biome biome)
+	private static Biome register(String name, Biome biome)
     {
-    	Biome fBiome = biome.setRegistryName(Mubble.MOD_ID, name);
-    	BIOMES.add(fBiome);
-		return fBiome;
+		return Registry.register(Registry.BIOME, new Identifier(Mubble.MOD_ID, name), biome);
     }
     
     public static void registerGenerations()
