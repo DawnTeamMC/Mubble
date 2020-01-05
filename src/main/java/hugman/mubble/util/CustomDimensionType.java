@@ -2,23 +2,17 @@ package hugman.mubble.util;
 
 import java.util.function.BiFunction;
 
+import hugman.mubble.init.world.MubbleDimensions;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.source.BiomeAccessType;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraftforge.common.ModDimension;
 
-public class CustomDimensionType extends ModDimension
+public class CustomDimensionType extends DimensionType
 {
-	private final BiFunction<World, DimensionType, ? extends Dimension> dimClass;
-	
-	public CustomDimensionType(BiFunction<World, DimensionType, ? extends Dimension> dimClass)
+	public CustomDimensionType(BiFunction<World, DimensionType, ? extends Dimension> factory, boolean hasSkylight, BiomeAccessType biomeAccessType)
 	{
-		this.dimClass = dimClass;
-	}
-	
-	@Override
-	public BiFunction<World, DimensionType, ? extends Dimension> getFactory()
-	{
-		return this.dimClass;
+		super(Registry.DIMENSION.getRawId(MubbleDimensions.PERMAFROST), "_" + Registry.DIMENSION.getId(MubbleDimensions.PERMAFROST).getPath(), "DIM_" + Registry.DIMENSION.getId(MubbleDimensions.PERMAFROST).getPath().toUpperCase(), factory, hasSkylight, biomeAccessType);
 	}
 }

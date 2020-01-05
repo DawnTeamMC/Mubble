@@ -1,23 +1,18 @@
 package hugman.mubble.init.world;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.dimension.PermafrostDimension;
 import hugman.mubble.util.CustomDimensionType;
-import net.minecraftforge.common.ModDimension;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.biome.source.VoronoiBiomeAccessType;
+import net.minecraft.world.dimension.DimensionType;
 
 public class MubbleDimensions
 {
-    public static final List<ModDimension> DIMENSIONS = new ArrayList<ModDimension>();
-
-	public static ModDimension PERMAFROST = register("permafrost", new CustomDimensionType(PermafrostDimension::new));
+	public final static DimensionType PERMAFROST = register("permafrost", new CustomDimensionType(PermafrostDimension::new, false, VoronoiBiomeAccessType.INSTANCE));
 	
-	private static ModDimension register(String name, ModDimension dimension)
-	{
-		ModDimension fDimension = dimension.setRegistryName(Mubble.MOD_ID, name);
-		MubbleDimensions.DIMENSIONS.add(fDimension);
-		return fDimension;
+	private static DimensionType register(String name, DimensionType dimension) {
+		return Registry.register(Registry.DIMENSION, new Identifier(Mubble.MOD_ID, name), dimension);
 	}
 }

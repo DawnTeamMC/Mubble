@@ -1,96 +1,90 @@
 package hugman.mubble.objects.world.dimension;
 
-import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.world.MubbleBiomes;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.biome.source.BiomeSourceType;
+import net.minecraft.world.biome.source.FixedBiomeSource;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.ChunkGeneratorType;
-import net.minecraft.world.gen.NetherGenSettings;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.world.gen.chunk.CavesChunkGeneratorConfig;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.ChunkGeneratorType;
 
 public class PermafrostDimension extends Dimension
 {
 	private final DimensionType type;
 	
-	public PermafrostDimension(World worldIn, DimensionType typeIn) 
+	public PermafrostDimension(World worldIn, DimensionType typeIn)
 	{
-		super(worldIn, typeIn);
+		super(worldIn, typeIn, 0.1F);
 		this.type = typeIn;
+		
+		for(int i = 0; i <= 15; ++i)
+		{
+			float f1 = 1.0F - (float)i / 15.0F;
+			this.lightLevelToBrightness[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 0.9F + 0.1F;
+		}
 	}
 	
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{
-		NetherGenSettings settings = ChunkGeneratorType.CAVES.createSettings();
+		CavesChunkGeneratorConfig settings = ChunkGeneratorType.CAVES.createSettings();
 		settings.setDefaultBlock(MubbleBlocks.PERMAROCK.getDefaultState());
 		settings.setDefaultFluid(Blocks.WATER.getDefaultState());
 		
-		BiomeProvider biomeProvider = BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.createSettings().setBiome(MubbleBiomes.PERMAFROST));
+		FixedBiomeSource biomeProvider = BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig(this.world.getLevelProperties()).setBiome(MubbleBiomes.PERMAFROST));
 		
 		return ChunkGeneratorType.CAVES.create(this.world, biomeProvider, settings);
 	}
 	
 	@Override
-	public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid)
+	public BlockPos getSpawningBlockInChunk(ChunkPos chunkPosIn, boolean checkValid)
 	{
 		return null;
 	}
 	
 	@Override
-	public BlockPos findSpawn(int posX, int posZ, boolean checkValid)
+	public BlockPos getTopSpawningBlockPosition(int posX, int posZ, boolean checkValid)
 	{
 		return null;
 	}
 	
 	@Override
-	public float calculateCelestialAngle(long worldTime, float partialTicks)
+	public float getSkyAngle(long worldTime, float partialTicks)
 	{
 		return 0.5f;
 	}
 	
 	@Override
-	public boolean isSurfaceWorld()
+	public boolean hasVisibleSky()
 	{
 		return false;
 	}
 	
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public Vec3d getFogColor(float celestialAngle, float partialTicks)
 	{
-		return new Vec3d((double)0.03F, (double)0.2F, (double)0.2F);
-	}
-
-	@Override
-	protected void generateLightBrightnessTable()
-	{
-		for(int i = 0; i <= 15; ++i)
-		{
-			float f1 = 1.0F - (float)i / 15.0F;
-			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 0.9F + 0.1F;
-		}
+		return new Vec3d((double) 0.03F, (double) 0.2F, (double) 0.2F);
 	}
 	
 	@Override
-	public boolean canRespawnHere()
+	public boolean canPlayersSleep()
 	{
 		return false;
 	}
 	
 	@Override
-	public boolean doesXZShowFog(int x, int z)
+	public boolean isFogThick(int x, int z)
 	{
 		return true;
 	}
@@ -116,10 +110,5 @@ public class PermafrostDimension extends Dimension
 	public DimensionType getType()
 	{
 		return this.type;
-	}
-
-	public static ResourceLocation getName()
-	{
-		return new ResourceLocation(Mubble.MOD_ID, "permafrost");
 	}
 }

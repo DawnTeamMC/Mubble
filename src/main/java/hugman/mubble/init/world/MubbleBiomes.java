@@ -1,8 +1,5 @@
 package hugman.mubble.init.world;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.biome.AutumnOakForestBiome;
 import hugman.mubble.objects.world.biome.PermafrostBiome;
@@ -11,6 +8,9 @@ import hugman.mubble.objects.world.biome.PressGardenBiome;
 import hugman.mubble.objects.world.biome.SMWDesertBiome;
 import hugman.mubble.objects.world.biome.ScarletForestBiome;
 import hugman.mubble.objects.world.biome.WhiteCherryOakForestBiome;
+import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
+import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
+import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -33,29 +33,20 @@ public class MubbleBiomes
 		return Registry.register(Registry.BIOME, new Identifier(Mubble.MOD_ID, name), biome);
     }
     
-    public static void registerGenerations()
+    public static void initBiomeGeneration()
     {
-    	BiomeDictionary.addTypes(AUTUMN_OAK_FOREST, FOREST);
-    	BiomeManager.addBiome(BiomeType.WARM, new BiomeEntry(AUTUMN_OAK_FOREST, 10));
-    	BiomeManager.addSpawnBiome(AUTUMN_OAK_FOREST);
+    	OverworldBiomes.addContinentalBiome(AUTUMN_OAK_FOREST, OverworldClimate.TEMPERATE, 10);
+    	FabricBiomes.addSpawnBiome(AUTUMN_OAK_FOREST);
     	
-    	BiomeDictionary.addTypes(PINK_CHERRY_OAK_FOREST, FOREST);
-    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(PINK_CHERRY_OAK_FOREST, 5));
-    	BiomeManager.addSpawnBiome(PINK_CHERRY_OAK_FOREST);
+    	OverworldBiomes.addContinentalBiome(PINK_CHERRY_OAK_FOREST, OverworldClimate.COOL, 5);
+    	FabricBiomes.addSpawnBiome(PINK_CHERRY_OAK_FOREST);
     	
-    	BiomeDictionary.addTypes(WHITE_CHERRY_OAK_FOREST, FOREST);
-    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(WHITE_CHERRY_OAK_FOREST, 5));
-    	BiomeManager.addSpawnBiome(WHITE_CHERRY_OAK_FOREST);
+    	OverworldBiomes.addContinentalBiome(WHITE_CHERRY_OAK_FOREST, OverworldClimate.COOL, 5);
+    	FabricBiomes.addSpawnBiome(WHITE_CHERRY_OAK_FOREST);
     	
-    	BiomeDictionary.addTypes(PRESS_GARDEN, FOREST);
-    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(PRESS_GARDEN, 1));
-    	BiomeManager.addSpawnBiome(PRESS_GARDEN);
+    	OverworldBiomes.addContinentalBiome(PRESS_GARDEN, OverworldClimate.COOL, 1);
+    	FabricBiomes.addSpawnBiome(PRESS_GARDEN);
     	
-    	BiomeDictionary.addTypes(SMW_DESERT, HOT, DRY, SANDY);
-    	
-    	BiomeDictionary.addTypes(PERMAFROST, COLD, DRY);
-    	
-    	BiomeDictionary.addTypes(SCARLET_FOREST, SPOOKY, DENSE, FOREST);
-    	BiomeManager.addBiome(BiomeType.COOL, new BiomeEntry(SCARLET_FOREST, 6));
+    	OverworldBiomes.addContinentalBiome(SCARLET_FOREST, OverworldClimate.COOL, 6);
     }
 }

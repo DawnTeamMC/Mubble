@@ -47,7 +47,9 @@ public class Mubble implements ModInitializer
 		// World
 		new MubbleBiomes();
 		new MubbleCarvers();
+		new MubbleDimensions();
 		new MubbleSurfaceBuilders();
+		MubbleBiomes.initBiomeGeneration();
 		initGenerators();
 	}
 	
@@ -88,13 +90,6 @@ public class Mubble implements ModInitializer
             event.getRegistry().registerAll(MubbleBlocks.FLOWERS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.FLOWER_PILES.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.OTHERS.toArray(new Item[0]));
-        }
-        
-        @SubscribeEvent
-        public static void onDimensionsRegistry(final RegistryEvent.Register<ModDimension> event)
-        {
-        	event.getRegistry().registerAll(MubbleDimensions.DIMENSIONS.toArray(new ModDimension[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleDimensions.DIMENSIONS.size(), "dimension"));
         }
     }
 }
