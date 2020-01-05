@@ -34,23 +34,4 @@ public class MubbleEntities
 	{
 		return Registry.register(Registry.ENTITY_TYPE, new Identifier(Mubble.MOD_ID, name), builder);
 	}
-    
-    public static void registerPlacements()
-    {
-    	EntitySpawnPlacementRegistry.register(MubbleEntities.CHINCHO, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ChinchoEntity::canSpawn);
-    	EntitySpawnPlacementRegistry.register(MubbleEntities.TOAD, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ToadEntity::canSpawn);
-    	EntitySpawnPlacementRegistry.register(MubbleEntities.GOOMBA, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GoombaEntity::canSpawn);
-    	EntitySpawnPlacementRegistry.register(MubbleEntities.ZOMBIE_COWMAN, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieCowmanEntity::canSpawn);
-    }
-    
-    public static void registerRenders()
-    {
-    	RenderingRegistry.registerEntityRenderingHandler(ChinchoEntity.class, ChinchoRender::new);
-    	RenderingRegistry.registerEntityRenderingHandler(GoombaEntity.class, GoombaRender::new);
-    	RenderingRegistry.registerEntityRenderingHandler(ToadEntity.class, ToadRender::new);
-    	RenderingRegistry.registerEntityRenderingHandler(ZombieCowmanEntity.class, ZombieCowmanRender::new);
-
-    	RenderingRegistry.registerEntityRenderingHandler(CustomTNTEntity.class, CustomTNTRender::new);
-    	RenderingRegistry.registerEntityRenderingHandler(FlyingBlockEntity.class, FlyingBlockRender::new);
-    }
 }
