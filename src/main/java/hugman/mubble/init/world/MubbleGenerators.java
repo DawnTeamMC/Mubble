@@ -10,9 +10,11 @@ import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.foliage.AcaciaFoliagePlacer;
+import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 
 public class MubbleGenerators
 {
@@ -75,7 +77,7 @@ public class MubbleGenerators
 					GenerationStep.Feature.VEGETAL_DECORATION,
 					MubbleFeatures.PALM_TREE.configure
 					( 
-						FeatureConfig.DEFAULT
+						new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PALM_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.PALM_LEAVES.getDefaultState()), new AcaciaFoliagePlacer(2, 0)).build()
 					)
 					.createDecoratedFeature
 					(
