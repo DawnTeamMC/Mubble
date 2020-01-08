@@ -2,26 +2,26 @@ package hugman.mubble.objects.world.feature.tree;
 
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
+import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.world.MubbleFeatures;
-import net.minecraft.block.trees.BigTree;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.block.sapling.LargeTreeSaplingGenerator;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 
-public class RedPressGardenTree extends BigTree
-{	
-	@Nullable
+public class RedPressGardenTree extends LargeTreeSaplingGenerator
+{
 	@Override
-	protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random)
+	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random)
 	{
-		return (AbstractTreeFeature<NoFeatureConfig>)MubbleFeatures.RED_PRESS_GARDEN_TREE;
+		return MubbleFeatures.RED_PRESS_GARDEN_TREE.configure(new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PRESS_GARDEN_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build());
 	}
 	
-	@Nullable
 	@Override
-	protected AbstractTreeFeature<NoFeatureConfig> getBigTreeFeature(Random random)
+	protected ConfiguredFeature<MegaTreeFeatureConfig, ?> createLargeTreeFeature(Random random)
 	{
-		return (AbstractTreeFeature<NoFeatureConfig>)MubbleFeatures.MEGA_RED_PRESS_GARDEN_TREE;
+		return MubbleFeatures.MEGA_RED_PRESS_GARDEN_TREE.configure(new MegaTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PRESS_GARDEN_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getDefaultState())).build());
 	}
 }
