@@ -35,12 +35,6 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 public class MubbleFeatures
 {
-	public static final Feature<NoFeatureConfig> AUTUMN_OAK_TREE = new TreeFeature(NoFeatureConfig::deserialize, true, Blocks.OAK_LOG, MubbleBlocks.AUTUMN_OAK_LEAVES, MubbleBlocks.AUTUMN_OAK_SAPLING);
-	public static final Feature<NoFeatureConfig> TALL_AUTUMN_OAK_TREE = new TallTreeFeature(NoFeatureConfig::deserialize, true, Blocks.OAK_LOG, MubbleBlocks.AUTUMN_OAK_LEAVES, MubbleBlocks.AUTUMN_OAK_SAPLING);
-	public static final Feature<NoFeatureConfig> PINK_CHERRY_OAK_TREE = new TreeFeature(NoFeatureConfig::deserialize, true, MubbleBlocks.CHERRY_OAK_LOG, MubbleBlocks.PINK_CHERRY_OAK_LEAVES, MubbleBlocks.PINK_CHERRY_OAK_SAPLING);
-	public static final Feature<NoFeatureConfig> TALL_PINK_CHERRY_OAK_TREE = new TallTreeFeature(NoFeatureConfig::deserialize, true, MubbleBlocks.CHERRY_OAK_LOG, MubbleBlocks.PINK_CHERRY_OAK_LEAVES, MubbleBlocks.PINK_CHERRY_OAK_SAPLING);
-	public static final Feature<NoFeatureConfig> WHITE_CHERRY_OAK_TREE = new TreeFeature(NoFeatureConfig::deserialize, true, MubbleBlocks.CHERRY_OAK_LOG, MubbleBlocks.WHITE_CHERRY_OAK_LEAVES, MubbleBlocks.WHITE_CHERRY_OAK_SAPLING);
-	public static final Feature<NoFeatureConfig> TALL_WHITE_CHERRY_OAK_TREE = new TallTreeFeature(NoFeatureConfig::deserialize, true, MubbleBlocks.CHERRY_OAK_LOG, MubbleBlocks.WHITE_CHERRY_OAK_LEAVES, MubbleBlocks.WHITE_CHERRY_OAK_SAPLING);
 	public static final Feature<NoFeatureConfig> RED_PRESS_GARDEN_TREE = new TreeFeature(NoFeatureConfig::deserialize, true, MubbleBlocks.PRESS_GARDEN_LOG, MubbleBlocks.RED_PRESS_GARDEN_LEAVES, MubbleBlocks.RED_PRESS_GARDEN_SAPLING);
 	public static final Feature<NoFeatureConfig> MEGA_RED_PRESS_GARDEN_TREE = new MegaTreeFeature(NoFeatureConfig::deserialize, true, 30, 40, MubbleBlocks.PRESS_GARDEN_LOG, MubbleBlocks.RED_PRESS_GARDEN_LEAVES, MubbleBlocks.RED_PRESS_GARDEN_SAPLING);
 	public static final Feature<NoFeatureConfig> PINK_PRESS_GARDEN_TREE = new TreeFeature(NoFeatureConfig::deserialize, true, MubbleBlocks.PRESS_GARDEN_LOG, MubbleBlocks.PINK_PRESS_GARDEN_LEAVES, MubbleBlocks.PINK_PRESS_GARDEN_SAPLING);
@@ -49,6 +43,12 @@ public class MubbleFeatures
 	public static final Feature<BranchedTreeFeatureConfig> SCARLET_TREE = register("scarlet_tree", new TreeFeature(BranchedTreeFeatureConfig::deserialize));
 	public static final Feature<BranchedTreeFeatureConfig> TALL_SCARLET_TREE = register("tall_scarlet_tree", new TallTreeFeature(BranchedTreeFeatureConfig::deserialize));
 	public static final Feature<MegaTreeFeatureConfig> LARGE_SCARLET_TREE = register("large_scarlet_tree", new LargeTreeFeature(MegaTreeFeatureConfig::deserialize));
+	public static final Feature<BranchedTreeFeatureConfig> AUTUMN_OAK_TREE = register("autumn_oak_tree", new TreeFeature(BranchedTreeFeatureConfig::deserialize));
+	public static final Feature<BranchedTreeFeatureConfig> TALL_AUTUMN_OAK_TREE = register("tall_autumn_oak_tree", new TallTreeFeature(BranchedTreeFeatureConfig::deserialize));
+	public static final Feature<BranchedTreeFeatureConfig> PINK_CHERRY_OAK_TREE = register("pink_cherry_oak_tree", new TreeFeature(BranchedTreeFeatureConfig::deserialize));
+	public static final Feature<BranchedTreeFeatureConfig> TALL_PINK_CHERRY_OAK_TREE = register("tall_pink_cherry_oak_tree", new TallTreeFeature(BranchedTreeFeatureConfig::deserialize));
+	public static final Feature<BranchedTreeFeatureConfig> WHITE_CHERRY_OAK_TREE = register("white_cherry_oak_tree", new TreeFeature(BranchedTreeFeatureConfig::deserialize));
+	public static final Feature<BranchedTreeFeatureConfig> TALL_WHITE_CHERRY_OAK_TREE = register("tall_white_cherry_oak_tree", new TallTreeFeature(BranchedTreeFeatureConfig::deserialize));
 	
 	public static final Feature<TreeFeatureConfig> PINK_PRESS_GARDEN_GROUND_BUSH = register("pink_press_garden_ground_bush", new JungleGroundBushFeature(TreeFeatureConfig::deserialize));
 	
