@@ -8,13 +8,18 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.container.Container;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.FluidState;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -28,17 +33,18 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class PresentBlock extends BlockWithEntity
+public class PresentBlock extends BlockWithEntity implements Waterloggable
 {
 	public static final BooleanProperty OPEN = Properties.OPEN;
 	public static final BooleanProperty EMPTY = MubbleBlockStateProperties.EMPTY;
+	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	protected static final VoxelShape EMPTY_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 12.0D, 15.0D);
 	protected static final VoxelShape FULL_SHAPE = VoxelShapes.union(EMPTY_SHAPE, Block.createCuboidShape(0.0D, 10.0D, 0.0D, 16.0D, 16.0D, 16.0D));
 	
     public PresentBlock(Settings builder)
     {
         super(builder);
-        this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, Boolean.valueOf(false)).with(EMPTY, Boolean.valueOf(true)));
+        this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, Boolean.valueOf(false)).with(EMPTY, Boolean.valueOf(true)).with(WATERLOGGED, Boolean.valueOf(false)));
     }
     
     @Override
@@ -63,7 +69,7 @@ public class PresentBlock extends BlockWithEntity
     		if(tileEntity instanceof PresentTileEntity)
     		{
     			player.openContainer((PresentTileEntity) tileEntity);
-    			//TODO player.addStat(Stats.OPEN_BARREL);
+    			player.incrementStat(Stats.OPEN_BARREL);
     		}
     	}
 		return ActionResult.SUCCESS;
@@ -101,6 +107,12 @@ public class PresentBlock extends BlockWithEntity
 	}
 	
 	@Override
+	public BlockState getPlacementState(ItemPlacementContext context)
+	{
+		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(context.getWorld().getFluidState(context.getBlockPos()).getFluid() == Fluids.WATER));
+	}
+	
+	@Override
 	public void onPlaced(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
 	{
 		if(stack.hasCustomName())
@@ -128,7 +140,13 @@ public class PresentBlock extends BlockWithEntity
 	@Override
 	protected void appendProperties(Builder<Block, BlockState> builder)
 	{
-		builder.add(OPEN, EMPTY);
+		builder.add(OPEN, EMPTY, WATERLOGGED);
+	}
+	
+	@Override
+	public FluidState getFluidState(BlockState state)
+	{
+		return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : Fluids.EMPTY.getDefaultState();
 	}
     
     @Override

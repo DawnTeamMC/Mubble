@@ -217,6 +217,6 @@ public class PresentTileEntity extends LockableContainerBlockEntity
 
 	@Override
 	public boolean canPlayerUseInv(PlayerEntity player) {
-		return false;
+		return true;
 	}
 }

@@ -1,6 +1,7 @@
 package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.init.client.MubbleShaders;
 import hugman.mubble.objects.block.block_state_property.Princess;
 import hugman.mubble.objects.costume.BlockCostume;
 import hugman.mubble.objects.costume.CappyCostume;
@@ -12,7 +13,6 @@ import hugman.mubble.objects.costume.HeadCostume;
 import hugman.mubble.objects.costume.MayroCapCostume;
 import hugman.mubble.objects.costume.VanishCapCostume;
 import hugman.mubble.objects.costume.WingCapCostume;
-import hugman.mubble.util.Shaders;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -31,22 +31,22 @@ public class MubbleCostumes
     /* MINECRAFT */
     public static final Item HEADPHONES = register("headphones", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
     
-    public static final Item WHITE_VIRTUAL_GOOGLES = register("white_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.WHITE_RETRO));
-    public static final Item LIGHT_GRAY_VIRTUAL_GOOGLES = register("light_gray_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.LIGHT_GRAY_RETRO));
-    public static final Item GRAY_VIRTUAL_GOOGLES = register("gray_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.GRAY_RETRO));
-    public static final Item BLACK_VIRTUAL_GOOGLES = register("black_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.BLACK_RETRO));
-    public static final Item BROWN_VIRTUAL_GOOGLES = register("brown_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.BROWN_RETRO));
-    public static final Item RED_VIRTUAL_GOOGLES = register("red_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.RED_RETRO));
-    public static final Item ORANGE_VIRTUAL_GOOGLES = register("orange_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.ORANGE_RETRO));
-    public static final Item YELLOW_VIRTUAL_GOOGLES = register("yellow_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.YELLOW_RETRO));
-    public static final Item LIME_VIRTUAL_GOOGLES = register("lime_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.LIME_RETRO));
-    public static final Item GREEN_VIRTUAL_GOOGLES = register("green_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.GREEN_RETRO));
-    public static final Item CYAN_VIRTUAL_GOOGLES = register("cyan_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.CYAN_RETRO));
-    public static final Item LIGHT_BLUE_VIRTUAL_GOOGLES = register("light_blue_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.LIGHT_BLUE_RETRO));
-    public static final Item BLUE_VIRTUAL_GOOGLES = register("blue_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.BLUE_RETRO));
-    public static final Item PURPLE_VIRTUAL_GOOGLES = register("purple_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.PURPLE_RETRO));
-    public static final Item MAGENTA_VIRTUAL_GOOGLES = register("magenta_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.MAGENTA_RETRO));
-    public static final Item PINK_VIRTUAL_GOOGLES = register("pink_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, Shaders.PINK_RETRO));
+    public static final Item WHITE_VIRTUAL_GOOGLES = register("white_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.WHITE_RETRO));
+    public static final Item LIGHT_GRAY_VIRTUAL_GOOGLES = register("light_gray_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.LIGHT_GRAY_RETRO));
+    public static final Item GRAY_VIRTUAL_GOOGLES = register("gray_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.GRAY_RETRO));
+    public static final Item BLACK_VIRTUAL_GOOGLES = register("black_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.BLACK_RETRO));
+    public static final Item BROWN_VIRTUAL_GOOGLES = register("brown_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.BROWN_RETRO));
+    public static final Item RED_VIRTUAL_GOOGLES = register("red_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.RED_RETRO));
+    public static final Item ORANGE_VIRTUAL_GOOGLES = register("orange_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.ORANGE_RETRO));
+    public static final Item YELLOW_VIRTUAL_GOOGLES = register("yellow_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.YELLOW_RETRO));
+    public static final Item LIME_VIRTUAL_GOOGLES = register("lime_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.LIME_RETRO));
+    public static final Item GREEN_VIRTUAL_GOOGLES = register("green_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.GREEN_RETRO));
+    public static final Item CYAN_VIRTUAL_GOOGLES = register("cyan_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.CYAN_RETRO));
+    public static final Item LIGHT_BLUE_VIRTUAL_GOOGLES = register("light_blue_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.LIGHT_BLUE_RETRO));
+    public static final Item BLUE_VIRTUAL_GOOGLES = register("blue_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.BLUE_RETRO));
+    public static final Item PURPLE_VIRTUAL_GOOGLES = register("purple_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.PURPLE_RETRO));
+    public static final Item MAGENTA_VIRTUAL_GOOGLES = register("magenta_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.MAGENTA_RETRO));
+    public static final Item PINK_VIRTUAL_GOOGLES = register("pink_virtual_googles", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.PINK_RETRO));
     
     public static final Item CHRISTMAS_HAT = register("christmas_hat", new ChristmasHatCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 
