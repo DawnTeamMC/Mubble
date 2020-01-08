@@ -30,12 +30,12 @@ public class Mubble implements ModInitializer
 	public void onInitialize()
 	{
 		new MubbleBlocks();
-		new MubbleCommands();
 		new MubbleCostumes();
 		new MubbleEffects();
 		new MubbleEntities();
 		new MubbleItems();
 		new MubbleSounds();
+		MubbleCommands.init();
 		
 		// Data
 		new MubbleTileEntityTypes();

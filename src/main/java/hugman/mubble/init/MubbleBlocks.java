@@ -51,6 +51,7 @@ import hugman.mubble.objects.world.feature.tree.RedPressGardenTree;
 import hugman.mubble.objects.world.feature.tree.ScarletTree;
 import hugman.mubble.objects.world.feature.tree.WhiteCherryOakTree;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Block.Settings;
@@ -71,6 +72,7 @@ import net.minecraft.block.MaterialColor;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.block.SlabBlock;
 import net.minecraft.block.WallBlock;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -1026,6 +1028,7 @@ public class MubbleBlocks
     	if (canBePotted)
     	{
     		Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, "potted_" + name), new FlowerPotBlock(block, FabricBlockSettings.copy(Blocks.FLOWER_POT).lightLevel(block.getDefaultState().getLuminance()).build()));
+    		BlockRenderLayerMap.INSTANCE.putBlock(Registry.BLOCK.get(new Identifier(Mubble.MOD_ID, "potted_" + name)), RenderLayer.getCutout());
     	}
     	Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), new BlockItem(block, new Item.Settings().group(group)));
     	return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
@@ -1036,6 +1039,7 @@ public class MubbleBlocks
     	if (canBePotted)
     	{
     		Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, "potted_" + name), new FlowerPotBlock(block, FabricBlockSettings.copy(Blocks.FLOWER_POT).lightLevel(block.getDefaultState().getLuminance()).build()));
+    		BlockRenderLayerMap.INSTANCE.putBlock(Registry.BLOCK.get(new Identifier(Mubble.MOD_ID, "potted_" + name)), RenderLayer.getCutout());
     	}
     	Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), new BlockItem(block, new Item.Settings().group(group)));
     	FlammableBlockRegistry.getDefaultInstance().add(block, fireEncouragement, flammability);

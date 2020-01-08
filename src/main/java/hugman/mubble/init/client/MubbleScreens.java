@@ -1,4 +1,4 @@
-package hugman.mubble.init;
+package hugman.mubble.init.client;
 
 import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.objects.container.TimeswapTableContainer;

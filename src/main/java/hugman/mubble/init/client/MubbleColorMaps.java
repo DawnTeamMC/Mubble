@@ -1,16 +1,15 @@
-package hugman.mubble.init.data;
+package hugman.mubble.init.client;
 
 import hugman.mubble.init.MubbleBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
-import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
 
 @Environment(EnvType.CLIENT)
-public class MubbleColorMaps extends BlockColors
+public class MubbleColorMaps
 {
 	public static void registerBlockColors()
 	{
