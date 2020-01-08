@@ -15,6 +15,7 @@ import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleCarvers;
 import hugman.mubble.init.world.MubbleDimensions;
+import hugman.mubble.init.world.MubbleFeatures;
 import hugman.mubble.init.world.MubbleGenerators;
 import hugman.mubble.init.world.MubbleSurfaceBuilders;
 import net.fabricmc.api.ModInitializer;
@@ -44,6 +45,7 @@ public class Mubble implements ModInitializer
 		new MubbleBiomes();
 		new MubbleCarvers();
 		new MubbleDimensions();
+		new MubbleFeatures();
 		new MubbleSurfaceBuilders();
 		MubbleBiomes.initBiomeGeneration();
 		initGenerators();
