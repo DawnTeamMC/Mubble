@@ -6,35 +6,26 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.gen.IWorldGenerationReader;
+import net.minecraft.world.Heightmap;
+import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraftforge.common.IPlantable;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
-public class TreeFeature extends AbstractTreeFeature<NoFeatureConfig>
+public class TreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig>
 {
-	private final BlockState LOG;
-	private final BlockState LEAVES;
-	private final IPlantable SAPLING;
-
-	public TreeFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory, boolean notify, Block log, Block leaves, Block sapling)
+	public TreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> configFactory)
 	{
-		super(configFactory, notify);
-		this.LOG = log.getDefaultState();
-		this.LEAVES = leaves.getDefaultState();
-		this.SAPLING = (IPlantable)sapling;
+		super(configFactory);
 	}
 	
 	@Override
-	protected boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox p_208519_5_)
+	protected boolean generate(ModifiableTestableWorld worldIn, Random rand, BlockPos position, Set<BlockPos> changedBlocks, Set<BlockPos> leavesPositions, BlockBox box, BranchedTreeFeatureConfig config)
 	{
 		int i = rand.nextInt(3) + 4;
 		boolean flag = true;
-		if (position.getY() >= 1 && position.getY() + i + 1 <= worldIn.getMaxHeight())
+		if (position.getY() >= 1 && position.getY() + i + 1 <= worldIn.getTopPosition(Heightmap.Type.WORLD_SURFACE, position).getY())
 		{
 			for(int j = position.getY(); j <= position.getY() + 1 + i; ++j)
 			{
@@ -47,14 +38,14 @@ public class TreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 	            {
 	            	k = 2;
 	            }
-	            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+	            BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
 	            for(int l = position.getX() - k; l <= position.getX() + k && flag; ++l)
 	            {
 	            	for(int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1)
 	            	{
-	            		if (j >= 0 && j < worldIn.getMaxHeight())
+	            		if (j >= 0 && j < worldIn.getTopPosition(Heightmap.Type.WORLD_SURFACE, position).getY())
 	            		{
-	            			if (!func_214587_a(worldIn, blockpos$mutableblockpos.setPos(l, j, i1)))
+	            			if (!canTreeReplace(worldIn, blockpos$mutableblockpos.set(l, j, i1)))
 	            			{
 	            				flag = false;
 	            			}
@@ -68,9 +59,9 @@ public class TreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 			{
 				return false;
 			}
-			else if (isSoil(worldIn, position.down(), SAPLING) && position.getY() < worldIn.getMaxHeight() - i - 1)
+			else if (isDirtOrGrass(worldIn, position.down()) && position.getY() < worldIn.getTopPosition(Heightmap.Type.WORLD_SURFACE, position).getY() - i - 1)
 			{
-				this.setDirtAt(worldIn, position.down(), position);
+				this.setToDirt(worldIn, position);
 
 				for(int l2 = position.getY() - 3 + i; l2 <= position.getY() + i; ++l2)
 				{
@@ -85,9 +76,9 @@ public class TreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 							if (Math.abs(k1) != j4 || Math.abs(i2) != j4 || rand.nextInt(2) != 0 && l3 != 0)
 							{
 								BlockPos blockpos = new BlockPos(j1, l2, l1);
-								if (isAirOrLeaves(worldIn, blockpos) || isTallPlants(worldIn, blockpos))
+								if (isAirOrLeaves(worldIn, blockpos) || isReplaceablePlant(worldIn, blockpos))
 								{
-									this.setLogState(changedBlocks, worldIn, blockpos, this.LEAVES, p_208519_5_);
+									this.setLeavesBlockState(worldIn, rand, blockpos, leavesPositions, box, config);
 								}
 							}
 						}
@@ -95,9 +86,9 @@ public class TreeFeature extends AbstractTreeFeature<NoFeatureConfig>
 				}
 				for(int i3 = 0; i3 < i; ++i3)
 				{
-					if (isAirOrLeaves(worldIn, position.up(i3)) || isTallPlants(worldIn, position.up(i3)))
+					if (isAirOrLeaves(worldIn, position.up(i3)) || isReplaceablePlant(worldIn, position.up(i3)))
 					{
-						this.setLogState(changedBlocks, worldIn, position.up(i3), this.LOG, p_208519_5_);
+						this.setLogBlockState(worldIn, rand, position.up(i3), changedBlocks, box, config);
 					}
 				}
 			}

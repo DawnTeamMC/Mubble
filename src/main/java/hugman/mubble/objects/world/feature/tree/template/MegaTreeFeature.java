@@ -7,33 +7,30 @@ import java.util.function.Function;
 import com.mojang.datafixers.Dynamic;
 
 import net.minecraft.block.Block;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.gen.IWorldGenerationReader;
-import net.minecraft.world.gen.feature.HugeTreesFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraftforge.common.IPlantable;
+import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 
-public class MegaTreeFeature extends HugeTreesFeature<NoFeatureConfig>
+public class MegaTreeFeature extends net.minecraft.world.gen.feature.MegaTreeFeature<MegaTreeFeatureConfig>
 {
-	public MegaTreeFeature(Function<Dynamic<?>, ? extends NoFeatureConfig> configFactory, boolean notify, int baseHeightIn, int extraRandomHeightIn, Block log, Block leaves, Block sapling)
+	public MegaTreeFeature(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> configFactory, boolean notify, int baseHeightIn, int extraRandomHeightIn, Block log, Block leaves, Block sapling)
 	{
-		super(configFactory, notify, baseHeightIn, extraRandomHeightIn, log.getDefaultState(), leaves.getDefaultState());
-		setSapling((IPlantable)sapling);
+		super(configFactory);
 	}
 	
 	@Override
-	public boolean place(Set<BlockPos> changedBlocks, IWorldGenerationReader worldIn, Random rand, BlockPos position, MutableBoundingBox boundingBox)
+	public boolean generate(ModifiableTestableWorld worldIn, Random rand, BlockPos position, Set<BlockPos> changedBlocks, Set<BlockPos> leavesPositions, BlockBox box, MegaTreeFeatureConfig config)
 	{
-		int i = this.getHeight(rand);
-		if (!this.func_203427_a(worldIn, position, i))
+		int i = this.getHeight(rand, config);
+		if (!this.checkTreeFitsAndReplaceGround(worldIn, position, i))
 		{
 			return false;
 		}
 		else
 		{
-			this.func_214601_d(worldIn, position.up(i), 2, boundingBox, changedBlocks);
+			this.func_214601_d(worldIn, rand, position.up(i), box, changedBlocks, config);
 			for(int j = position.getY() + i - 2 - rand.nextInt(4); j > position.getY() + i / 2; j -= 2 + rand.nextInt(4))
 			{
 				float f = rand.nextFloat() * ((float)Math.PI * 2F);
@@ -44,7 +41,7 @@ public class MegaTreeFeature extends HugeTreesFeature<NoFeatureConfig>
 	            {
 	            	k = position.getX() + (int)(1.5F + MathHelper.cos(f) * (float)i1);
 	            	l = position.getZ() + (int)(1.5F + MathHelper.sin(f) * (float)i1);
-	            	this.setLogState(changedBlocks, worldIn, new BlockPos(k, j - 3 + i1 / 2, l), this.trunk, boundingBox);
+	            	this.setLogBlockState(worldIn, rand, new BlockPos(k, j - 3 + i1 / 2, l), changedBlocks, box, config);
 	            }
 
 	            int j2 = 1 + rand.nextInt(2);
@@ -53,36 +50,36 @@ public class MegaTreeFeature extends HugeTreesFeature<NoFeatureConfig>
 	            for(int k1 = j - j2; k1 <= j1; ++k1)
 	            {
 	            	int l1 = k1 - j1;
-	            	this.func_222838_b(worldIn, new BlockPos(k, k1, l), 1 - l1, boundingBox, changedBlocks);
+	            	this.makeSquaredLeafLayer(worldIn, rand, new BlockPos(k, k1, l), 1 - l1, changedBlocks, box, config);
 	            }
 			}
 			
 	         for(int i2 = 0; i2 < i; ++i2)
 	         {
 	             BlockPos blockpos = position.up(i2);
-	             if (func_214587_a(worldIn, blockpos))
+	             if (canTreeReplace(worldIn, blockpos))
 	             {
-	                this.setLogState(changedBlocks, worldIn, blockpos, this.trunk, boundingBox);
+	                this.setLogBlockState(worldIn, rand, blockpos, changedBlocks, box, config);
 	             }
 
 	             if (i2 < i - 1)
 	             {
 	                BlockPos blockpos1 = blockpos.east();
-	                if (func_214587_a(worldIn, blockpos1))
+	                if (canTreeReplace(worldIn, blockpos1))
 	                {
-	                   this.setLogState(changedBlocks, worldIn, blockpos1, this.trunk, boundingBox);
+	                   this.setLogBlockState(worldIn, rand, blockpos1, changedBlocks, box, config);
 	                }
 
 	                BlockPos blockpos2 = blockpos.south().east();
-	                if (func_214587_a(worldIn, blockpos2))
+	                if (canTreeReplace(worldIn, blockpos2))
 	                {
-	                   this.setLogState(changedBlocks, worldIn, blockpos2, this.trunk, boundingBox);
+	                   this.setLogBlockState(worldIn, rand, blockpos2, changedBlocks, box, config);
 	                }
 
 	                BlockPos blockpos3 = blockpos.south();
-	                if(func_214587_a(worldIn, blockpos3))
+	                if(canTreeReplace(worldIn, blockpos3))
 	                {
-	                   this.setLogState(changedBlocks, worldIn, blockpos3, this.trunk, boundingBox);
+	                   this.setLogBlockState(worldIn, rand, blockpos3, changedBlocks, box, config);
 	                }
 	             }
 	         }
@@ -90,11 +87,11 @@ public class MegaTreeFeature extends HugeTreesFeature<NoFeatureConfig>
 		}
 	}
 
-	private void func_214601_d(IWorldGenerationReader worldIn, BlockPos pos, int p_214601_3_, MutableBoundingBox p_214601_4_, Set<BlockPos> changedBlocks)
+	private void func_214601_d(ModifiableTestableWorld worldIn, Random random, BlockPos pos, BlockBox p_214601_4_, Set<BlockPos> changedBlocks, MegaTreeFeatureConfig config)
 	{
 		for(int j = -2; j <= 0; ++j)
 		{
-			this.func_222839_a(worldIn, pos.up(j), p_214601_3_ + 1 - j, p_214601_4_, changedBlocks);
+			this.setLeavesBlockState(worldIn, random, pos.up(j), changedBlocks, p_214601_4_, config);
 		}
 	}
 }
