@@ -17,12 +17,12 @@ public enum VerticalSlabType implements StringIdentifiable
 		this.name = name;
 	}
 
-	public String asString()
+	public String toString()
 	{
 		return this.name;
 	}
 
-	public String getName()
+	public String asString()
 	{
 		return this.name;
 	}
