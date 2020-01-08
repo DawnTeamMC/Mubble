@@ -6,23 +6,22 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 
-public class LargeTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig>
+public class LargeTreeFeature extends AbstractTreeFeature<MegaTreeFeatureConfig>
 {
-    public LargeTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> configFactory, boolean notify, Block log, Block leaves, Block sapling)
+    public LargeTreeFeature(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> configFactory)
     {
         super(configFactory);
     }
 
     @Override
-    public boolean generate(ModifiableTestableWorld worldIn, Random rand, BlockPos position, Set<BlockPos> changedBlocks, Set<BlockPos> leavesPositions, BlockBox box, BranchedTreeFeatureConfig config)
+    public boolean generate(ModifiableTestableWorld worldIn, Random rand, BlockPos position, Set<BlockPos> changedBlocks, Set<BlockPos> leavesPositions, BlockBox box, MegaTreeFeatureConfig config)
     {
         int i = rand.nextInt(3) + rand.nextInt(2) + 6;
         int j = position.getX();
@@ -156,14 +155,14 @@ public class LargeTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureCon
         return true;
     }
 
-    private void func_214616_a(Set<BlockPos> p_214616_1_, ModifiableTestableWorld world, Random random, BlockPos pos, BlockBox box, BranchedTreeFeatureConfig config) {
+    private void func_214616_a(Set<BlockPos> p_214616_1_, ModifiableTestableWorld world, Random random, BlockPos pos, BlockBox box, MegaTreeFeatureConfig config) {
         if (canTreeReplace(world, pos)) {
           this.setLogBlockState(world, random, pos, p_214616_1_, box, config);
         }
 
     }
 
-    private void func_214617_a(ModifiableTestableWorld world, Random random, int p_214617_2_, int p_214617_3_, int p_214617_4_, BlockBox box, Set<BlockPos> p_214617_6_, BranchedTreeFeatureConfig config) {
+    private void func_214617_a(ModifiableTestableWorld world, Random random, int p_214617_2_, int p_214617_3_, int p_214617_4_, BlockBox box, Set<BlockPos> p_214617_6_, MegaTreeFeatureConfig config) {
         BlockPos pos = new BlockPos(p_214617_2_, p_214617_3_, p_214617_4_);
         if (isAir(world, pos)) {
           this.setLeavesBlockState(world, random, pos, p_214617_6_, box, config);

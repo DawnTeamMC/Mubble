@@ -2,25 +2,26 @@ package hugman.mubble.objects.world.feature.tree;
 
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
+import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.world.MubbleFeatures;
-import net.minecraft.block.trees.BigTree;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.block.sapling.LargeTreeSaplingGenerator;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
+import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 
-public class ScarletTree extends BigTree
+public class ScarletTree extends LargeTreeSaplingGenerator
 {
-	@Nullable
 	@Override
-	protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random)
+	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random)
 	{
-		return (AbstractTreeFeature<NoFeatureConfig>)(random.nextInt(10) == 0 ? MubbleFeatures.TALL_SCARLET_TREE : MubbleFeatures.SCARLET_TREE);
+		return random.nextInt(10) == 0 ? MubbleFeatures.TALL_SCARLET_TREE.configure(new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.SCARLET_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build()) : MubbleFeatures.SCARLET_TREE.configure(new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.SCARLET_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build());
 	}
 	
-	@Nullable
-	protected AbstractTreeFeature<NoFeatureConfig> getBigTreeFeature(Random random)
+	@Override
+	protected ConfiguredFeature<MegaTreeFeatureConfig, ?> createLargeTreeFeature(Random random)
 	{
-		return (AbstractTreeFeature<NoFeatureConfig>)MubbleFeatures.LARGE_SCARLET_TREE;
+		return MubbleFeatures.LARGE_SCARLET_TREE.configure(new MegaTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.SCARLET_LEAVES.getDefaultState())).build());
 	}
 }

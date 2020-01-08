@@ -6,7 +6,6 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -15,7 +14,7 @@ import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 
 public class MegaTreeFeature extends net.minecraft.world.gen.feature.MegaTreeFeature<MegaTreeFeatureConfig>
 {
-	public MegaTreeFeature(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> configFactory, boolean notify, int baseHeightIn, int extraRandomHeightIn, Block log, Block leaves, Block sapling)
+	public MegaTreeFeature(Function<Dynamic<?>, ? extends MegaTreeFeatureConfig> configFactory)
 	{
 		super(configFactory);
 	}
