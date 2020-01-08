@@ -1017,7 +1017,7 @@ public class MubbleBlocks
     
     private static Block register(String name, Block block, int fireEncouragement, int flammability)
     {
-    	FlammableBlockRegistry.getInstance(block).add(block, fireEncouragement, flammability);
+    	FlammableBlockRegistry.getDefaultInstance().add(block, fireEncouragement, flammability);
     	return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
     }
     
@@ -1038,7 +1038,7 @@ public class MubbleBlocks
     		Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, "potted_" + name), new FlowerPotBlock(block, FabricBlockSettings.copy(Blocks.FLOWER_POT).lightLevel(block.getDefaultState().getLuminance()).build()));
     	}
     	Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), new BlockItem(block, new Item.Settings().group(group)));
-    	FlammableBlockRegistry.getInstance(block).add(block, fireEncouragement, flammability);
+    	FlammableBlockRegistry.getDefaultInstance().add(block, fireEncouragement, flammability);
     	return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
     }
 }

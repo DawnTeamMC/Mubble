@@ -18,6 +18,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
+import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
@@ -42,7 +43,7 @@ public class Costume extends ArmorItem
     
     public Costume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, StatusEffectInstance... potionEffects)
     {
-        super(null, armorType, builder);
+        super(ArmorMaterials.LEATHER, armorType, builder);
 		this.equipSound = sound;
 	    this.armorType = armorType;
 	    this.effects = potionEffects;
@@ -52,7 +53,7 @@ public class Costume extends ArmorItem
     
     public Costume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Identifier shader, StatusEffectInstance... potionEffects)
     {
-        super(null, armorType, builder);
+        super(ArmorMaterials.LEATHER, armorType, builder);
 		this.equipSound = sound;
 	    this.armorType = armorType;
 	    this.effects = potionEffects;

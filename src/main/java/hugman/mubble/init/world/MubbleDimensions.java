@@ -2,17 +2,22 @@ package hugman.mubble.init.world;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.dimension.PermafrostDimension;
-import hugman.mubble.util.CustomDimensionType;
+import net.fabricmc.fabric.api.dimension.v1.EntityPlacer;
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensionType;
+import net.minecraft.block.pattern.BlockPattern;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.source.VoronoiBiomeAccessType;
-import net.minecraft.world.dimension.DimensionType;
 
 public class MubbleDimensions
 {
-	public final static DimensionType PERMAFROST = register("permafrost", new CustomDimensionType(PermafrostDimension::new, false, VoronoiBiomeAccessType.INSTANCE));
+	private static EntityPlacer PLACER = (entity, world, dim, offsetX, offsetZ) -> new BlockPattern.TeleportTarget(new Vec3d(entity.getBlockPos().getX(), world.getChunk(entity.getBlockPos().getX() >> 4, entity.getBlockPos().getZ() >> 4).sampleHeightmap(Heightmap.Type.MOTION_BLOCKING, entity.getBlockPos().getX() & 15, entity.getBlockPos().getZ() & 15) + 1, entity.getBlockPos().getZ()), entity.getVelocity(), (int) entity.yaw);
 	
-	private static DimensionType register(String name, DimensionType dimension) {
-		return Registry.register(Registry.DIMENSION, new Identifier(Mubble.MOD_ID, name), dimension);
-	}
+	public final static FabricDimensionType PERMAFROST = FabricDimensionType.builder()
+			.skyLight(false)
+			.biomeAccessStrategy(VoronoiBiomeAccessType.INSTANCE)
+			.defaultPlacer(PLACER)
+			.factory(PermafrostDimension::new)
+			.buildAndRegister(new Identifier(Mubble.MOD_ID, "permafrost"));
 }
