@@ -1,25 +1,21 @@
 package hugman.mubble.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hugman.mubble.Mubble;
+import hugman.mubble.objects.item.AxeItem;
 import hugman.mubble.objects.item.BandageItem;
 import hugman.mubble.objects.item.CapeFeatherItem;
 import hugman.mubble.objects.item.KeyItem;
+import hugman.mubble.objects.item.PickaxeItem;
 import hugman.mubble.objects.item.ShakeInstrumentItem;
 import hugman.mubble.objects.item.SmallBulbItem;
 import hugman.mubble.objects.item.SmashBallItem;
 import hugman.mubble.objects.item.SuperStarItem;
 import hugman.mubble.objects.item.TotemOfAscendingItem;
 import hugman.mubble.util.MubbleItemTier;
-import net.minecraft.entity.effect.StatusEffect;
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.PickaxeItem;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.item.SwordItem;
