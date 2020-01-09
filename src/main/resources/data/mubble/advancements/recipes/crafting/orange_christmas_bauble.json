@@ -17,7 +17,7 @@
 				"items":
 				[
 					{
-						"tag": "forge:dusts/glowstone"
+						"item": "minecraft:glowstone_dust"
 					}
 				]
 			}

@@ -13,7 +13,7 @@
 		},
 		"X":
 		{
-			"tag": "forge:nuggets/iron"
+			"item": "minecraft:iron_nugget"
 		}
 	},
 	"result":

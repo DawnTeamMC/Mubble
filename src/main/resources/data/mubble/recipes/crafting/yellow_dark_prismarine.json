@@ -15,7 +15,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/yellow"
+			"item": "minecraft:yellow_dye"
 		}
 	},
 	"result":

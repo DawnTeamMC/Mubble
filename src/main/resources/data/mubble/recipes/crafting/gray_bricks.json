@@ -15,7 +15,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/gray"
+			"item": "minecraft:gray_dye"
 		}
 	},
 	"result":

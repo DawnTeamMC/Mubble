@@ -14,7 +14,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/cyan"
+			"item": "minecraft:cyan_dye"
 		}
 	},
 	"result":

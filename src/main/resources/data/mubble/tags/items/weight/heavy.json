@@ -2,7 +2,7 @@
 	"replace": false,
 	"values":
 	[
-		"#forge:storage_blocks",
+		"#c:storage_blocks",
 		"#minecraft:anvil",
 		"mubble:gold_mario_cap",
 		"mubble:silver_luigi_cap",
