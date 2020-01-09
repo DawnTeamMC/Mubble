@@ -16,12 +16,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class TimeswapTableScreen extends AbstractContainerScreen<TimeswapTableContainer>
 {
+	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");
 	private static final Identifier BACKGROUND_TEXTURE = new Identifier(Mubble.MOD_ID, "textures/gui/container/timeswap_table.png");
 	private float sliderProgress;
 	private boolean clickedOnSroll;
@@ -40,7 +42,7 @@ public class TimeswapTableScreen extends AbstractContainerScreen<TimeswapTableCo
 	}
 	
 	protected void drawForeground(int mouseX, int mouseY) {
-		this.font.draw(this.title.asFormattedString(), 8.0F, 4.0F, 4210752);
+		this.font.draw(CONTAINER_NAME.asFormattedString(), 8.0F, 4.0F, 4210752);
 		this.font.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float) (this.containerHeight - 94), 4210752);
 	}
 
