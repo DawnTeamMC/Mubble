@@ -26,6 +26,8 @@ import net.minecraft.world.gen.feature.RandomPatchFeature;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.SpringFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.foliage.AcaciaFoliagePlacer;
+import net.minecraft.world.gen.foliage.BlobFoliagePlacer;
 import net.minecraft.world.gen.placer.SimpleBlockPlacer;
 import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 
@@ -64,6 +66,23 @@ public class MubbleFeatures
 	
 	public static class Config
 	{
+		public static final BranchedTreeFeatureConfig PALM_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PALM_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.PALM_LEAVES.getDefaultState()), new AcaciaFoliagePlacer(2, 0)).baseHeight(5).heightRandA(2).heightRandB(2).trunkHeight(0).noVines().build();
+		public static final BranchedTreeFeatureConfig SCARLET_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.SCARLET_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build();
+		public static final BranchedTreeFeatureConfig TALL_SCARLET_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.SCARLET_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build();
+		public static final MegaTreeFeatureConfig LARGE_SCARLET_TREE = new MegaTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.SCARLET_LEAVES.getDefaultState())).build();
+		public static final BranchedTreeFeatureConfig AUTUMN_OAK_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(Blocks.OAK_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.AUTUMN_OAK_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).baseHeight(4).heightRandA(2).foliageHeight(3).noVines().build();
+		public static final BranchedTreeFeatureConfig TALL_AUTUMN_OAK_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(Blocks.OAK_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.AUTUMN_OAK_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build();
+		public static final BranchedTreeFeatureConfig PINK_CHERRY_OAK_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.CHERRY_OAK_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.PINK_CHERRY_OAK_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build();
+		public static final BranchedTreeFeatureConfig TALL_PINK_CHERRY_OAK_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.CHERRY_OAK_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.PINK_CHERRY_OAK_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build();
+		public static final BranchedTreeFeatureConfig WHITE_CHERRY_OAK_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.CHERRY_OAK_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.WHITE_CHERRY_OAK_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build();
+		public static final BranchedTreeFeatureConfig TALL_WHITE_CHERRY_OAK_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.CHERRY_OAK_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.WHITE_CHERRY_OAK_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build();
+		public static final BranchedTreeFeatureConfig PINK_PRESS_GARDEN_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PRESS_GARDEN_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build();
+		public static final BranchedTreeFeatureConfig RED_PRESS_GARDEN_TREE = new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PRESS_GARDEN_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build();
+		public static final MegaTreeFeatureConfig MEGA_RED_PRESS_GARDEN_TREE = new MegaTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PRESS_GARDEN_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getDefaultState())).build();
+		
+		public static final TreeFeatureConfig PINK_PRESS_GARDEN_GROUND_BUSH = new TreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PRESS_GARDEN_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getDefaultState())).build();
+		public static final TreeFeatureConfig SCARLET_GROUND_BUSH = new TreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.SCARLET_LEAVES.getDefaultState())).build();
+		
 		public static final RandomPatchFeatureConfig BROWN_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(Blocks.BROWN_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
 		public static final RandomPatchFeatureConfig LIGHT_BLUE_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.LIGHT_BLUE_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
 		public static final RandomPatchFeatureConfig LIGHT_GRAY_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.LIGHT_GRAY_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
