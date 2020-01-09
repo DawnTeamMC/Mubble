@@ -1,16 +1,16 @@
 package hugman.mubble.objects.entity.render.model;
 
+import com.google.common.collect.ImmutableList;
+
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.render.entity.model.CompositeEntityModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class ToadModel<T extends Entity> extends EntityModel<T>
+public class ToadModel<T extends Entity> extends CompositeEntityModel<T>
 {
 	public ModelPart head;
     public ModelPart hat;
@@ -56,34 +56,6 @@ public class ToadModel<T extends Entity> extends EntityModel<T>
         this.left_leg.setPivot(2F, 17.0F, 0.0F);
         this.left_leg.addCuboid(-2.0F, 0.0F, -2.0F, 4, 7, 4, 0.0F);
     }
-
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha)
-    { 
-    	if (this.child)
-        {
-        	matrices.push();
-        	matrices.scale(0.75F, 0.75F, 0.75F);
-        	matrices.translate(0.0F, 13.0F, 0.0F);
-        }
-        this.head.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        this.hat.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        this.front_lamp.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        if (this.child)
-        {
-        	matrices.pop();
-            matrices.push();
-            matrices.scale(0.5F, 0.5F, 0.5F);
-            matrices.translate(0.0F, 24.0F, 0.0F);
-        }
-        this.body.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        this.bagpack.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        this.right_arm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        this.left_arm.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        this.right_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        this.left_leg.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-        if (this.child) matrices.pop();
-    }
     
     @Override
     public void setAngles(T entityIn, float limbSwing, float limbSwingAmount, float customAngle, float netHeadYaw, float headPitch)
@@ -100,5 +72,11 @@ public class ToadModel<T extends Entity> extends EntityModel<T>
     	this.hat.pivotX = headPitch * 0.017453292F;
     	this.front_lamp.pivotY = netHeadYaw * 0.017453292F;
     	this.front_lamp.pivotX = headPitch * 0.017453292F;
+    }
+    
+    @Override
+	public Iterable<ModelPart> getParts()
+    {
+    	return ImmutableList.of(this.head, this.hat, this.front_lamp, this.body, this.bagpack, this.right_arm, this.left_arm, this.right_leg, this.left_leg);
     }
 }

@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.SpawnRestriction;
+import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.FleeEntityGoal;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
@@ -59,7 +59,7 @@ public class ChinchoEntity extends MobEntityWithAi
         this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
         this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
         this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+        this.getAttributes().register(EntityAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
     }
     
     @Override
@@ -135,7 +135,7 @@ public class ChinchoEntity extends MobEntityWithAi
         return MubbleSounds.ENTITY_CHINCHO_DEATH;
     }
     
-	public static boolean canSpawn(EntityType<ChinchoEntity> entity, IWorld world, SpawnRestriction reason, BlockPos pos, Random rand)
+	public static boolean canSpawn(EntityType<ChinchoEntity> entity, IWorld world, SpawnType reason, BlockPos pos, Random rand)
 	{
 		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}

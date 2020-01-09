@@ -12,8 +12,8 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class GoombaRender extends MobEntityRenderer<GoombaEntity, GoombaModel<GoombaEntity>>
 {
-    private static final Identifier NORMAL_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID + ":textures/entity/goomba/normal.png");
-    //private static final Identifier GOLDEN_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID + ":textures/entity/goomba/golden.png");
+    private static final Identifier NORMAL_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/goomba/normal.png");
+    //private static final Identifier GOLDEN_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/goomba/golden.png");
 	
 	public GoombaRender(EntityRenderDispatcher dispatcher)
 	{

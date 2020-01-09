@@ -19,14 +19,11 @@ public class ShakeInstrumentItem extends InstrumentItem
     }
     
     @Override
-    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity entity)
+    public boolean useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand)
     {
-    	entity.playSound(getInstrumentSound(), 0.5F, 1F);
-    	if(entity instanceof PlayerEntity)
-    	{
-    		((PlayerEntity) entity).incrementStat(Stats.USED.getOrCreateStat(this));
-    	}
-    	return super.postHit(stack, target, entity);
+    	player.playSound(getInstrumentSound(), 0.5F, 1F);
+    	player.incrementStat(Stats.USED.getOrCreateStat(this));
+    	return super.useOnEntity(stack, player, entity, hand);
     }
     
     @Override
