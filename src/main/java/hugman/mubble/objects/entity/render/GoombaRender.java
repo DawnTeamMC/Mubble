@@ -20,6 +20,7 @@ public class GoombaRender extends MobEntityRenderer<GoombaEntity, GoombaModel<Go
 		super(dispatcher, new GoombaModel<>(), 0.5F);
 	}
 	
+	@Override
 	public Identifier getTexture(GoombaEntity entity)
     {
 		return NORMAL_GOOMBA_TEXTURES;

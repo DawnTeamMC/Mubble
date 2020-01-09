@@ -19,6 +19,7 @@ public class ChinchoRender extends MobEntityRenderer<ChinchoEntity, ChinchoModel
 		super(dispatcher, new ChinchoModel<>(), 0.5F);
 	}
 	
+	@Override
 	public Identifier getTexture(ChinchoEntity entity)
     {
 		return CHINCHO_TEXTURES;

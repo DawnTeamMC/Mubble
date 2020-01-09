@@ -13,15 +13,16 @@ import net.minecraft.util.Identifier;
 @Environment(EnvType.CLIENT)
 public class ZombieCowmanRender extends BipedEntityRenderer<ZombieCowmanEntity, ZombieEntityModel<ZombieCowmanEntity>>
 {
-	private static final Identifier ZOMBIE_COWMAN_TEXTURE = new Identifier(Mubble.MOD_PREFIX + "textures/entity/zombie_cowman.png");
+	private static final Identifier ZOMBIE_COWMAN_TEXTURE = new Identifier(Mubble.MOD_ID, "textures/entity/zombie_cowman.png");
 	
 	public ZombieCowmanRender(EntityRenderDispatcher dispatcher)
 	{
-		super(dispatcher, new ZombieEntityModel<>(0.5F, true), 0.5F);
+		super(dispatcher, new ZombieEntityModel<>(0.0F, false), 0.5F);
 		this.addFeature(new ArmorBipedFeatureRenderer<>(this, new ZombieEntityModel<>(0.5F, true), new ZombieEntityModel<>(1.0F, true)));
 	}
 	
-	protected Identifier getEntityTexture(ZombieCowmanEntity entity)
+	@Override
+	public Identifier getTexture(ZombieCowmanEntity entity)
 	{
 		return ZOMBIE_COWMAN_TEXTURE;
 	}
