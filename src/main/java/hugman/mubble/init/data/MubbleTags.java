@@ -38,6 +38,8 @@ public class MubbleTags
         public static final Tag<Item> TEMPTING_TO_TOAD = register("tempting_to/toad");
 
         public static final Tag<Item> GEMS_BISMUTH = register("gems/bismuth");
+        public static final Tag<Item> GEMS_KYBER = register("gems/kyber");
+        public static final Tag<Item> GEMS_VANADIUM = register("gems/vanadium");
 
         public static final Tag<Item> TIMESWAP_QUESTION_BLOCKS = registerTimeswap("timeswap/question_blocks");
         public static final Tag<Item> TIMESWAP_GROUND_BLOCKS = registerTimeswap("timeswap/ground_blocks");

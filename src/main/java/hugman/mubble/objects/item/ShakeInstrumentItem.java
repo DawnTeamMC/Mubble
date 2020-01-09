@@ -4,7 +4,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.ActionResult;
@@ -22,8 +21,7 @@ public class ShakeInstrumentItem extends InstrumentItem
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity entity)
     {
-    	World worldIn = entity.getEntityWorld();
-    	worldIn.playSoundFromEntity((PlayerEntity) null, entity, getInstrumentSound(), SoundCategory.PLAYERS, 0.5F, 1F);
+    	entity.playSound(getInstrumentSound(), 0.5F, 1F);
     	if(entity instanceof PlayerEntity)
     	{
     		((PlayerEntity) entity).incrementStat(Stats.USED.getOrCreateStat(this));

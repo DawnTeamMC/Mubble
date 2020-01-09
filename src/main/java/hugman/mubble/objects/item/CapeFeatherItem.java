@@ -35,7 +35,10 @@ public class CapeFeatherItem extends Item
         }
         playerIn.setVelocity(vec3d.x, 0.7D, vec3d.z);
         playerIn.fallDistance = 0f;
-        if (!playerIn.abilities.creativeMode && this != MubbleItems.SUPER_CAPE_FEATHER) stack.decrement(1);
+        if (!playerIn.abilities.creativeMode && this != MubbleItems.SUPER_CAPE_FEATHER)
+        {
+        	stack.decrement(1);
+        }
         playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
         worldIn.playSound((PlayerEntity)null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), MubbleSounds.ITEM_CAPE_FEATHER_USE, SoundCategory.PLAYERS, 0.5F, 1F);
         return new TypedActionResult<ItemStack>(ActionResult.SUCCESS, stack);
