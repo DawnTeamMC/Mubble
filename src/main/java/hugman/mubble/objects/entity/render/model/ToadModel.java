@@ -5,12 +5,12 @@ import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
-import net.minecraft.client.render.entity.model.CompositeEntityModel;
+import net.minecraft.client.render.entity.model.AnimalModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class ToadModel<T extends Entity> extends CompositeEntityModel<T>
+public class ToadModel<T extends Entity> extends AnimalModel<T>
 {
     public ModelPart head;
     public ModelPart hat;
@@ -24,6 +24,8 @@ public class ToadModel<T extends Entity> extends CompositeEntityModel<T>
 
     public ToadModel()
     {
+    	super(true, 13.3F, 0.0F);
+    	
         this.textureWidth = 64;
         this.textureHeight = 64;
         
@@ -82,10 +84,16 @@ public class ToadModel<T extends Entity> extends CompositeEntityModel<T>
     	this.front_lamp.yaw = netHeadYaw * 0.017453292F;
     	this.front_lamp.pitch = headPitch * 0.017453292F;
     }
-    
-    @Override
-	public Iterable<ModelPart> getParts()
-    {
-    	return ImmutableList.of(this.head, this.hat, this.front_lamp, this.body, this.bagpack, this.right_arm, this.left_arm, this.right_leg, this.left_leg);
-    }
+
+	@Override
+	protected Iterable<ModelPart> getHeadParts()
+	{
+		return ImmutableList.of(this.head, this.hat, this.front_lamp);
+	}
+
+	@Override
+	protected Iterable<ModelPart> getBodyParts()
+	{
+		return ImmutableList.of(this.body, this.bagpack, this.right_arm, this.left_arm, this.right_leg, this.left_leg);
+	}
 }

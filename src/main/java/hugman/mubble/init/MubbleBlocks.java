@@ -81,7 +81,7 @@ import net.minecraft.item.ItemGroup;
 public class MubbleBlocks
 {
     /* Templates */
-    protected static final Block.Settings pLeaves = FabricBlockSettings.of(Material.LEAVES).hardness(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).build();
+    protected static final Block.Settings pLeaves = FabricBlockSettings.of(Material.LEAVES).hardness(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().build();
     protected static final Block.Settings pWoodenButton = FabricBlockSettings.of(Material.WOOD).collidable(true).hardness(0.5F).sounds(BlockSoundGroup.WOOD).build();
     protected static final Block.Settings pStoneButton = FabricBlockSettings.of(Material.STONE).collidable(true).hardness(0.5F).build();
 
@@ -722,7 +722,7 @@ public class MubbleBlocks
     public static final Block PINK_BALLOON = register("pink_balloon", new BalloonBlock(DyeColor.PINK), ItemGroup.DECORATIONS, false, 30, 60);
     
     public static final Block UNSTABLE_STONE = register("unstable_stone", new UnstableBlock(FabricBlockSettings.copy(Blocks.STONE).hardness(0.1F).build()), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block FLUID_TANK = register("fluid_tank", new FluidTankBlock(Settings.copy(Blocks.OBSIDIAN)), ItemGroup.REDSTONE, false);
+    public static final Block FLUID_TANK = register("fluid_tank", new FluidTankBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).nonOpaque().build()), ItemGroup.REDSTONE, false);
     public static final Block PLACER = register("placer", new PlacerBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F).build()), ItemGroup.REDSTONE, false);
     public static final Block TIMESWAP_TABLE = register("timeswap_table", new TimeswapTableBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F).build()), ItemGroup.DECORATIONS, false);
 
