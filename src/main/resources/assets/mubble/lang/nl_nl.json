@@ -1,7 +1,7 @@
 {
 	"comment": "CREATIVE TABS",
-	"itemGroup.costumes": "Kostuums",
-	"itemGroup.instruments": "Instrumenten",
+	"itemGroup.mubble.costumes": "Kostuums",
+	"itemGroup.mubble.instruments": "Instrumenten",
 
 
 
@@ -1146,6 +1146,11 @@
 
 	"item.mubble.mayro_cap": "Mayro's pet",
 	"item.mubble.noteblock_head": "NoteBlock's hoofd",
+
+
+
+	"comment": "ENCHANTMENTS",
+	"enchantment.mubble.telekinesis": "Afstandelijke Voorwerpbeweging",
 
 
 

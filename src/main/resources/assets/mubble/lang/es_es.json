@@ -1,7 +1,7 @@
 {
 	"comment": "CREATIVE TABS",
-	"//itemGroup.costumes": "Costumes",
-	"//itemGroup.instruments": "Instruments",
+	"//itemGroup.mubble.costumes": "Costumes",
+	"//itemGroup.mubble.instruments": "Instruments",
 
 
 
@@ -1146,6 +1146,11 @@
 
 	"item.mubble.mayro_cap": "Gorra de Mayro",
 	"item.mubble.noteblock_head": "Cabeza de Noteblock",
+
+
+
+	"comment": "ENCHANTMENTS",
+	"//enchantment.mubble.telekinesis": "Telekinesis",
 
 
 

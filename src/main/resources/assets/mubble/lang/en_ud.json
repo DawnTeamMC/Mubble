@@ -1,7 +1,7 @@
 {
 	"comment": "CREATIVE TABS",
-	"itemGroup.costumes": "sǝɯnʇsoƆ",
-	"//itemGroup.instruments": "Instruments",
+	"itemGroup.mubble.costumes": "sǝɯnʇsoƆ",
+	"//itemGroup.mubble.instruments": "Instruments",
 
 
 
@@ -1146,6 +1146,11 @@
 
 	"item.mubble.mayro_cap": "dɐƆ s,oɹʎɐW",
 	"item.mubble.noteblock_head": "pɐǝH s,ʞɔolᗺǝʇoN",
+
+
+
+	"comment": "ENCHANTMENTS",
+	"//enchantment.mubble.telekinesis": "Telekinesis",
 
 
 
