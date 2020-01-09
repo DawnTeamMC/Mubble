@@ -1,6 +1,7 @@
 package hugman.mubble.init.world;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.objects.world.feature.PermafrostSpringFeature;
 import hugman.mubble.objects.world.feature.ReplaceBlockGroupFeature;
 import hugman.mubble.objects.world.feature.ScarletFlowersFeature;
@@ -11,6 +12,7 @@ import hugman.mubble.objects.world.feature.tree.template.MegaTreeFeature;
 import hugman.mubble.objects.world.feature.tree.template.TallTreeFeature;
 import hugman.mubble.objects.world.feature.tree.template.TreeFeature;
 import hugman.mubble.objects.world.feature_config.ReplaceBlockGroupConfig;
+import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
@@ -24,6 +26,8 @@ import net.minecraft.world.gen.feature.RandomPatchFeature;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.SpringFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.placer.SimpleBlockPlacer;
+import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 
 public class MubbleFeatures
 {
@@ -56,5 +60,18 @@ public class MubbleFeatures
 	
 	private static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature) {
 		return Registry.register(Registry.FEATURE, new Identifier(Mubble.MOD_ID, name), feature);
+	}
+	
+	public static class Config
+	{
+		public static final RandomPatchFeatureConfig BROWN_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(Blocks.BROWN_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
+		public static final RandomPatchFeatureConfig LIGHT_BLUE_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.LIGHT_BLUE_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
+		public static final RandomPatchFeatureConfig LIGHT_GRAY_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.LIGHT_GRAY_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
+		public static final RandomPatchFeatureConfig MAGENTA_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.MAGENTA_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
+		public static final RandomPatchFeatureConfig ORANGE_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.ORANGE_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
+		public static final RandomPatchFeatureConfig PINK_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PINK_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
+		public static final RandomPatchFeatureConfig YELLOW_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.YELLOW_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
+		public static final RandomPatchFeatureConfig WHITE_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.WHITE_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
+		public static final RandomPatchFeatureConfig SCARLET_MUSHROOM = new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).tries(64).cannotProject().build();
 	}
 }

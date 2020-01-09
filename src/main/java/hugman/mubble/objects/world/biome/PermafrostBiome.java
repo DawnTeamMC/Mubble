@@ -25,10 +25,7 @@ import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.SpringFeatureConfig;
-import net.minecraft.world.gen.placer.SimpleBlockPlacer;
-import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 
 public class PermafrostBiome extends Biome
 {
@@ -51,8 +48,8 @@ public class PermafrostBiome extends Biome
         this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SPRING_FEATURE.configure(new SpringFeatureConfig(Fluids.LAVA.getDefaultState(), true, 4, 1, carvableBlocks)).createDecoratedFeature(Decorator.COUNT_VERY_BIASED_RANGE.configure(new RangeDecoratorConfig(20, 8, 16, 256))));
         DefaultBiomeFeatures.addDefaultMushrooms(this);
         this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleFeatures.PERMAFROST_SPRING.configure(new SpringFeatureConfig(Fluids.LAVA.getDefaultState(), false, 4, 1, carvableBlocks)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(8, 4, 8, 128))));
-        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(Blocks.BROWN_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).build()).createDecoratedFeature(Decorator.CHANCE_RANGE.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
-        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.LIGHT_BLUE_MUSHROOM.getDefaultState()), new SimpleBlockPlacer()).build()).createDecoratedFeature(Decorator.CHANCE_RANGE.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
+        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatures.Config.BROWN_MUSHROOM).createDecoratedFeature(Decorator.CHANCE_RANGE.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
+        this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatures.Config.LIGHT_BLUE_MUSHROOM).createDecoratedFeature(Decorator.CHANCE_RANGE.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
         this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleFeatures.REPLACE_BLOCK_GROUP.configure(new ReplaceBlockGroupConfig(MubbleBlocks.PERMAROCK.getDefaultState(), MubbleBlocks.PERMAFROST_BISMUTH_ORE.getDefaultState(), 14)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(16, 10, 20, 128))));
         this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleFeatures.REPLACE_BLOCK_GROUP.configure(new ReplaceBlockGroupConfig(MubbleBlocks.PERMAROCK.getDefaultState(), Blocks.SEA_LANTERN.getDefaultState(), 33)).createDecoratedFeature(Decorator.MAGMA.configure(new CountDecoratorConfig(4))));
         this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleFeatures.PERMAFROST_SPRING.configure(new SpringFeatureConfig(Fluids.LAVA.getDefaultState(), true, 4, 1, carvableBlocks)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(16, 10, 20, 128))));
