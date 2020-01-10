@@ -447,8 +447,7 @@
 	{
 		"sounds":
 		[
-			"mubble:item/lightsaber/pull_out/1",
-			"mubble:item/lightsaber/pull_out/2"
+			"mubble:item/lightsaber/pull_out"
 		]
 	},
 	"item.lightsaber.spark":
