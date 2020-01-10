@@ -11,6 +11,7 @@ import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderEffect;
+import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -18,7 +19,6 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterials;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
@@ -34,7 +34,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
-public class Costume extends ArmorItem
+public class Costume extends Item
 {
 	protected final EquipmentSlot armorType;
 	protected final SoundEvent equipSound;
@@ -43,7 +43,7 @@ public class Costume extends ArmorItem
     
     public Costume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, StatusEffectInstance... potionEffects)
     {
-        super(ArmorMaterials.LEATHER, armorType, builder);
+        super(builder);
 		this.equipSound = sound;
 	    this.armorType = armorType;
 	    this.effects = potionEffects;
@@ -53,7 +53,7 @@ public class Costume extends ArmorItem
     
     public Costume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Identifier shader, StatusEffectInstance... potionEffects)
     {
-        super(ArmorMaterials.LEATHER, armorType, builder);
+        super(builder);
 		this.equipSound = sound;
 	    this.armorType = armorType;
 	    this.effects = potionEffects;
@@ -83,12 +83,12 @@ public class Costume extends ArmorItem
     			{
     				if(!shaderGroup.getName().equals(shader.toString()))
     				{
-    					renderer.toggleShadersEnabled();
+    					renderer.getShader().render(remainingUseTicks);
     				}
     			}
     			else
     			{
-    				renderer.toggleShadersEnabled();
+    				renderer.getShader().render(remainingUseTicks);
     			}
     		}
     	}
@@ -135,16 +135,10 @@ public class Costume extends ArmorItem
 	}
     
     @Override
-    public EquipmentSlot getSlotType()
-    {
-    	return this.armorType;
-    }
-    
-    @Override
     public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
         ItemStack itemstack = playerIn.getStackInHand(handIn);
-        ItemStack itemstack1 = playerIn.getEquippedStack(armorType);
+        ItemStack itemstack1 = playerIn.getEquippedStack(this.armorType);
         if (itemstack1.isEmpty())
         {
         	playerIn.equipStack(armorType, itemstack.copy());

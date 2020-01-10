@@ -1,6 +1,5 @@
 package hugman.mubble.objects.item;
 
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,17 +18,11 @@ public class ShakeInstrumentItem extends InstrumentItem
     }
     
     @Override
-    public boolean useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity entity, Hand hand)
-    {
-    	player.playSound(getInstrumentSound(), 0.5F, 1F);
-    	player.incrementStat(Stats.USED.getOrCreateStat(this));
-    	return super.useOnEntity(stack, player, entity, hand);
-    }
-    
-    @Override
     public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
     	playerIn.swingHand(handIn);
+    	playerIn.playSound(getInstrumentSound(), 0.5F, 1F);
+    	playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
 		return new TypedActionResult<ItemStack>(ActionResult.SUCCESS, playerIn.getStackInHand(handIn));
     }
 }

@@ -44,6 +44,10 @@ public class MubbleRenderLayers
 		BlockRenderLayerMap.INSTANCE.putBlock(MubbleBlocks.FLUID_TANK, RenderLayer.getCutoutMipped());
 		BlockRenderLayerMap.INSTANCE.putBlock(MubbleBlocks.TETRIS_GLASS, RenderLayer.getTranslucent());
 		
+		// Food Plants
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), MubbleBlocks.BLUEBERRY_BUSH,
+				MubbleBlocks.SALAD, MubbleBlocks.TOMATOES);
+		
 		// Piles
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.ACACIA_LEAF_PILE,
 				MubbleBlocks.ALLIUM_PILE, MubbleBlocks.AUTUMN_OAK_LEAF_PILE, MubbleBlocks.AZURE_BLUET_PILE,
@@ -56,8 +60,6 @@ public class MubbleRenderLayers
 				MubbleBlocks.SPRUCE_LEAF_PILE, MubbleBlocks.WHITE_CHERRY_OAK_LEAF_PILE, MubbleBlocks.WHITE_TULIP_PILE,
 				MubbleBlocks.WITHER_ROSE_PILE
 			);
-		
-		BlockRenderLayerMap.INSTANCE.putBlock(MubbleBlocks.BLUEBERRY_BUSH, RenderLayer.getCutout());
 		
 		// Flowers
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), MubbleBlocks.BOOMERANG_FLOWER,
