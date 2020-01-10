@@ -88,6 +88,11 @@ public class BlockCostume extends BlockItem
 		}
 	};
 	
+    public EquipmentSlot getArmorType()
+    {
+    	return this.armorType;
+    }
+	
 	public static ItemStack dispenseArmor(BlockPointer blockSource, ItemStack stack)
 	{
 		BlockPos blockpos = blockSource.getBlockPos().offset(blockSource.getBlockState().get(DispenserBlock.FACING));

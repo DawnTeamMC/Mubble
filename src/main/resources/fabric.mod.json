@@ -26,6 +26,9 @@
             "hugman.mubble.MubbleClient"
         ]
     },
+	"mixins": [
+        "mubble.mixins.json"
+    ],
     "depends": {
         "fabricloader": ">=0.7.2",
         "fabric": "*"

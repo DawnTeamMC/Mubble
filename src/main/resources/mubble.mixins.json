@@ -1,0 +1,11 @@
+{
+    "required": true,
+    "package": "hugman.mubble.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+		"MobEntityMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

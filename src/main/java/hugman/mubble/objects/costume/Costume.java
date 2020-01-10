@@ -68,6 +68,11 @@ public class Costume extends Item
 	    DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
     }
     
+    public EquipmentSlot getArmorType()
+    {
+    	return this.armorType;
+    }
+    
     @Override
     public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks)
     {
