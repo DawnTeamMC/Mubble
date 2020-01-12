@@ -30,31 +30,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.dimension.DimensionType;
 
 public class MubbleEvents
-{
-	public static void onJump(LivingJumpEvent event)
-	{
-		LivingEntity entity = event.getEntityLiving();
-		if(entity.hasStatusEffect(MubbleEffects.HEAVINESS))
-		{
-			Vec3d vec3d = entity.getVelocity();
-			entity.setVelocity(vec3d.x, vec3d.y - (float)(entity.getStatusEffect(MubbleEffects.HEAVINESS).getAmplifier() + 1) * 0.05F, vec3d.z);
-		}
-	}
-	
-	public static void onTick(LivingUpdateEvent event)
-	{
-		LivingEntity entity = event.getEntityLiving();
-		World world = entity.getEntityWorld();
-		ItemStack headItem = entity.getEquippedStack(EquipmentSlot.HEAD);
-		if(!world.isClient)
-		{
-			if(MubbleTags.Items.WEIGHT_HEAVY.contains(headItem.getItem()))
-			{
-				entity.addStatusEffect(new StatusEffectInstance(MubbleEffects.HEAVINESS, 25, 0));
-			}
-		}
-	}
-	
+{	
 	public static void onArmorChange(LivingUpdateEvent event)
 	{
 		LivingEntity entity = event.getEntityLiving();
