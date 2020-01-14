@@ -72,25 +72,4 @@ public class MubbleEvents
 			}
 		}
 	}
-	
-	public static void onSpawn(LivingSpawnEvent.CheckSpawn event)
-	{
-		Entity fEntity = event.getEntity();
-		Random rand = new Random();
-		if(fEntity instanceof MobEntity)
-		{
-			MobEntity entity = (MobEntity) fEntity;
-			if(MubbleTags.EntityTypes.CAN_WEAR_HELMET.contains(entity.getType()))
-			{
-				if(entity.getEquippedStack(EquipmentSlot.HEAD).isEmpty() && CalendarEvents.isChristmasSeason)
-				{
-					if(rand.nextFloat() < (float)CalendarEvents.getDayToday() / 25.0f)
-					{
-						entity.equipStack(EquipmentSlot.HEAD, new ItemStack(MubbleCostumes.CHRISTMAS_HAT));
-						entity.setEquipmentDropChance(EquipmentSlot.HEAD, 0.0F);
-					}
-				}
-			}
-		}
-	}
 }*/

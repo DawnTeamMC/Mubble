@@ -17,6 +17,6 @@ public class MubbleTileEntityTypes
     
     private static <T extends BlockEntity> BlockEntityType<T> register(String name, BlockEntityType.Builder<T> builder)
     {
-    	return Registry.register(Registry.BLOCK_ENTITY, new Identifier(Mubble.MOD_ID, name), builder.build(null));
+    	return Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(Mubble.MOD_ID, name), builder.build(null));
     }
 }

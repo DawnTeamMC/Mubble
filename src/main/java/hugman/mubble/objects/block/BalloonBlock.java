@@ -15,11 +15,11 @@ public class BalloonBlock extends FlyingBlock
 {
     public BalloonBlock(DyeColor color)
     {
-        super(FabricBlockSettings.of(Material.WOOL, color).hardness(0F).sounds(BlockSoundGroup.WOOL).build());
+        super(FabricBlockSettings.of(Material.WOOL, color).hardness(0F).sounds(BlockSoundGroup.WOOL).nonOpaque().build());
     }
     
     @Environment(EnvType.CLIENT)
-    public float func_220080_a(BlockState state, BlockView worldIn, BlockPos pos)
+    public float getAmbientOcclusionLightLevel(BlockState state, BlockView worldIn, BlockPos pos)
     {
        return 1.0F;
     }
