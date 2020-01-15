@@ -58,6 +58,15 @@ public class MubbleSounds
 	public static final SoundEvent ITEM_SMASH_BALL_USE = register("item.smash_ball.use");
 	public static final SoundEvent ITEM_SUPER_MUSHROOM_CONSUME = register("item.super_mushroom.consume");
 	public static final SoundEvent ITEM_SUPER_STAR_THEME = register("item.super_star.theme");
+
+	public static final SoundEvent ITEM_LIGHTSABER_BLOCK = register("item.lightsaber.block");
+	public static final SoundEvent ITEM_LIGHTSABER_IDLE = register("item.lightsaber.idle");
+	public static final SoundEvent ITEM_LIGHTSABER_PULL_IN = register("item.lightsaber.pull_in");
+	public static final SoundEvent ITEM_LIGHTSABER_PULL_OUT = register("item.lightsaber.pull_out");
+	public static final SoundEvent ITEM_LIGHTSABER_SPARK = register("item.lightsaber.spark");
+	public static final SoundEvent ITEM_LIGHTSABER_SWIPE = register("item.lightsaber.swipe");
+	public static final SoundEvent ITEM_LIGHTSABER_THROW_FAR = register("item.lightsaber.throw.far");
+	public static final SoundEvent ITEM_LIGHTSABER_THROW_NEAR = register("item.lightsaber.throw.near");
 	
 	public static final SoundEvent COSTUME_CAPPY_AMBIENT = register("costume.cappy.ambient");
 	public static final SoundEvent COSTUME_CAPPY_AMBIENT_NETHER = register("costume.cappy.ambient.nether");
@@ -77,6 +86,7 @@ public class MubbleSounds
 	public static final SoundEvent ENTITY_GOOMBA_CRUSH = register("entity.goomba.crush");
 	public static final SoundEvent ENTITY_GOOMBA_HURT = register("entity.goomba.hurt");
 	public static final SoundEvent ENTITY_GOOMBA_DEATH = register("entity.goomba.death");
+	public static final SoundEvent ENTITY_PUFFERFISH_AEUGH = register("entity.pufferfish.aeugh");
 	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_AMBIENT = register("entity.zombie_cowman.ambient");
 	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_STEP = register("entity.zombie_cowman.step");
 	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_ANGRY = register("entity.zombie_cowman.angry");

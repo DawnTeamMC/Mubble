@@ -40,7 +40,7 @@ public class CapeFeatherItem extends Item
         	stack.decrement(1);
         }
         playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
-        worldIn.playSound((PlayerEntity)null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), MubbleSounds.ITEM_CAPE_FEATHER_USE, SoundCategory.PLAYERS, 0.5F, 1F);
+        worldIn.playSound((PlayerEntity) null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), MubbleSounds.ITEM_CAPE_FEATHER_USE, SoundCategory.PLAYERS, 0.5F, 1F);
         return new TypedActionResult<ItemStack>(ActionResult.SUCCESS, stack);
     }
 }

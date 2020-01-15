@@ -37,6 +37,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable
 {
 	public static final BooleanProperty OPEN = Properties.OPEN;
 	public static final BooleanProperty EMPTY = MubbleBlockStateProperties.EMPTY;
+	
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	protected static final VoxelShape EMPTY_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 12.0D, 15.0D);
 	protected static final VoxelShape FULL_SHAPE = VoxelShapes.union(EMPTY_SHAPE, Block.createCuboidShape(0.0D, 10.0D, 0.0D, 16.0D, 16.0D, 16.0D));

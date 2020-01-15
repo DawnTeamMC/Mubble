@@ -415,6 +415,74 @@
 			"mubble:item/super_star/theme"
 		]
 	},
+	"item.lightsaber.block":
+	{
+		"sounds":
+		[
+			"mubble:item/lightsaber/block/1",
+			"mubble:item/lightsaber/block/2",
+			"mubble:item/lightsaber/block/3",
+			"mubble:item/lightsaber/block/4",
+			"mubble:item/lightsaber/block/5",
+			"mubble:item/lightsaber/block/6",
+			"mubble:item/lightsaber/block/7"
+		]
+	},
+	"item.lightsaber.idle":
+	{
+		"sounds":
+		[
+			"mubble:item/lightsaber/idle"
+		]
+	},
+	"item.lightsaber.pull_in":
+	{
+		"sounds":
+		[
+			"mubble:item/lightsaber/pull_in/1",
+			"mubble:item/lightsaber/pull_in/2"
+		]
+	},
+	"item.lightsaber.pull_out":
+	{
+		"sounds":
+		[
+			"mubble:item/lightsaber/pull_out"
+		]
+	},
+	"item.lightsaber.spark":
+	{
+		"sounds":
+		[
+			"mubble:item/lightsaber/spark"
+		]
+	},
+	"item.lightsaber.swipe":
+	{
+		"sounds":
+		[
+			"mubble:item/lightsaber/swipe/1",
+			"mubble:item/lightsaber/swipe/2",
+			"mubble:item/lightsaber/swipe/3",
+			"mubble:item/lightsaber/swipe/4",
+			"mubble:item/lightsaber/swipe/5",
+			"mubble:item/lightsaber/swipe/6"
+		]
+	},
+	"item.lightsaber.throw.far":
+	{
+		"sounds":
+		[
+			"mubble:item/lightsaber/throw/far"
+		]
+	},
+	"item.lightsaber.throw.near":
+	{
+		"sounds":
+		[
+			"mubble:item/lightsaber/throw/near"
+		]
+	},
 	"entity.chincho.ambient":
 	{
 		"subtitle": "subtitles.mubble.entity.chincho.ambient",
@@ -446,41 +514,6 @@
 		"sounds":
 		[
 			"mubble:entity/chincho/death"
-		]
-	},
-	"entity.goomba.step":
-	{
-		"subtitle": "subtitles.block.generic.footsteps",
-		"sounds":
-		[
-			"mubble:entity/goomba/step/1",
-			"mubble:entity/goomba/step/2"
-		]
-	},
-	"entity.goomba.hurt":
-	{
-		"subtitle": "subtitles.mubble.entity.goomba.hurt",
-		"sounds":
-		[
-			"mubble:entity/goomba/hurt"
-		]
-	},
-	"entity.goomba.crush":
-	{
-		"subtitle": "subtitles.mubble.entity.goomba.crush",
-		"sounds":
-		[
-			"mubble:entity/goomba/crush/1",
-			"mubble:entity/goomba/crush/2",
-			"mubble:entity/goomba/crush/3"
-		]
-	},
-	"entity.goomba.death":
-	{
-		"subtitle": "subtitles.mubble.entity.goomba.death",
-		"sounds":
-		[
-			"mubble:entity/goomba/hurt"
 		]
 	},
 	"entity.toad.ambient":
@@ -536,6 +569,48 @@
 			"mubble:entity/toad/death/2",
 			"mubble:entity/toad/death/3",
 			"mubble:entity/toad/death/4"
+		]
+	},
+	"entity.goomba.step":
+	{
+		"subtitle": "subtitles.block.generic.footsteps",
+		"sounds":
+		[
+			"mubble:entity/goomba/step/1",
+			"mubble:entity/goomba/step/2"
+		]
+	},
+	"entity.goomba.hurt":
+	{
+		"subtitle": "subtitles.mubble.entity.goomba.hurt",
+		"sounds":
+		[
+			"mubble:entity/goomba/hurt"
+		]
+	},
+	"entity.goomba.crush":
+	{
+		"subtitle": "subtitles.mubble.entity.goomba.crush",
+		"sounds":
+		[
+			"mubble:entity/goomba/crush/1",
+			"mubble:entity/goomba/crush/2",
+			"mubble:entity/goomba/crush/3"
+		]
+	},
+	"entity.goomba.death":
+	{
+		"subtitle": "subtitles.mubble.entity.goomba.death",
+		"sounds":
+		[
+			"mubble:entity/goomba/hurt"
+		]
+	},
+	"entity.pufferfish.aeugh":
+	{
+		"sounds":
+		[
+			"mubble:entity/pufferfish/aeugh"
 		]
 	},
 	"entity.zombie_cowman.ambient":

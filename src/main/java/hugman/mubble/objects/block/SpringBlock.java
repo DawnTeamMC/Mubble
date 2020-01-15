@@ -149,9 +149,7 @@ public class SpringBlock extends DirectionalBlock implements Waterloggable
     @Override
     public BlockState getPlacementState(ItemPlacementContext context)
     {
-        FluidState fluidState = context.getWorld().getFluidState(context.getBlockPos());
-        BlockState blockState = this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(fluidState.getFluid() == Fluids.WATER));
-        return blockState.with(FACING, context.getPlayerFacing());
+        return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(context.getWorld().getFluidState(context.getBlockPos()).getFluid() == Fluids.WATER)).with(FACING, context.getPlayerFacing());
     }
     
     @Override
