@@ -1017,6 +1017,24 @@
 	"item.mubble.smash_ball": "Balle Smash",
 
 
+	"item.mubble.white_lightsaber": "Sabre laser blanc",
+	"item.mubble.light_gray_lightsaber": "Sabre laser gris clair",
+	"item.mubble.gray_lightsaber": "Sabre laser gris",
+	"item.mubble.black_lightsaber": "Sabre laser noir",
+	"item.mubble.brown_lightsaber": "Sabre laser marron",
+	"item.mubble.red_lightsaber": "Sabre laser rouge",
+	"item.mubble.orange_lightsaber": "Sabre laser orange",
+	"item.mubble.yellow_lightsaber": "Sabre laser jaune",
+	"item.mubble.lime_lightsaber": "Sabre laser vert clair",
+	"item.mubble.green_lightsaber": "Sabre laser vert",
+	"item.mubble.cyan_lightsaber": "Sabre laser cyan",
+	"item.mubble.light_blue_lightsaber": "Sabre laser bleu clair",
+	"item.mubble.blue_lightsaber": "Sabre laser bleu",
+	"item.mubble.purple_lightsaber": "Sabre laser violet",
+	"item.mubble.magenta_lightsaber": "Sabre laser magenta",
+	"item.mubble.pink_lightsaber": "Sabre laser rose",
+
+
 	"item.mubble.blank_music_disc": "Disque de musique vide",
 	"item.mubble.music_disc_battlefield": "Disque de musique",
 	"item.mubble.music_disc_champions_road": "Disque de musique",

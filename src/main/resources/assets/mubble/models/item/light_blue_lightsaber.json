@@ -1,0 +1,7 @@
+{
+	"parent":"mubble:item/lightsaber",
+	"textures":
+	{
+		"plasma": "mubble:item/lightsaber/plasma/light_blue"
+	}
+}
