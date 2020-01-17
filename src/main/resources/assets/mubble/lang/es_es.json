@@ -590,10 +590,14 @@
 	"//block.mubble.silver_shiny_garland": "Silver Shiny Garland",
 	"//block.mubble.gold_shiny_garland": "Gold Shiny Garland",
 
+	"//block.mubble.white_present": "White Present",
+	"//block.mubble.black_present": "Black Present",
 	"//block.mubble.blue_present": "Blue Present",
 	"//block.mubble.green_present": "Green Present",
 	"//block.mubble.yellow_present": "Yellow Present",
 	"//block.mubble.red_present": "Red Present",
+	"//block.mubble.purple_present": "Purple Present",
+	"//block.mubble.golden_present": "Golden Present",
 
 	"block.mubble.footblock": "Futbloque",
 

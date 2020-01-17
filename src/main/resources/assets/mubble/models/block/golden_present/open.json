@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:block/present/open",
+	"textures":
+	{
+		"all": "mubble:block/golden_present"
+	}
+}
