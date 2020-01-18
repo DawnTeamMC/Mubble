@@ -590,10 +590,14 @@
 	"block.mubble.silver_shiny_garland": "Zilvere glanzende slinger",
 	"block.mubble.gold_shiny_garland": "Goude glanzende slinger",
 
+	"//block.mubble.white_present": "White Present",
+	"//block.mubble.black_present": "Black Present",
 	"block.mubble.blue_present": "Blauw cadeau",
 	"block.mubble.green_present": "Groen cadeau",
 	"block.mubble.yellow_present": "Geel cadeau",
 	"block.mubble.red_present": "Rood cadeau",
+	"//block.mubble.purple_present": "Purple Present",
+	"//block.mubble.golden_present": "Golden Present",
 
 	"block.mubble.footblock": "Voetblok",
 	
@@ -1015,6 +1019,24 @@
 
 
 	"item.mubble.smash_ball": "Smash bal",
+
+
+	"//item.mubble.white_lightsaber": "White Lightsaber",
+	"//item.mubble.light_gray_lightsaber": "Light Gray Lightsaber",
+	"//item.mubble.gray_lightsaber": "Gray Lightsaber",
+	"//item.mubble.black_lightsaber": "Black Lightsaber",
+	"//item.mubble.brown_lightsaber": "Brown Lightsaber",
+	"//item.mubble.red_lightsaber": "Red Lightsaber",
+	"//item.mubble.orange_lightsaber": "Orange Lightsaber",
+	"//item.mubble.yellow_lightsaber": "Yellow Lightsaber",
+	"//item.mubble.lime_lightsaber": "Lime Lightsaber",
+	"//item.mubble.green_lightsaber": "Green Lightsaber",
+	"//item.mubble.cyan_lightsaber": "Cyan Lightsaber",
+	"//item.mubble.light_blue_lightsaber": "Light Blue Lightsaber",
+	"//item.mubble.blue_lightsaber": "Blue Lightsaber",
+	"//item.mubble.purple_lightsaber": "Purple Lightsaber",
+	"//item.mubble.magenta_lightsaber": "Magenta Lightsaber",
+	"//item.mubble.pink_lightsaber": "Pink Lightsaber",
 
 
 	"item.mubble.blank_music_disc": "Blanke muziekplaat",

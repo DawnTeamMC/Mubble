@@ -1,0 +1,7 @@
+{
+	"parent": "mubble:block/present/closed",
+	"textures":
+	{
+		"all": "mubble:block/black_present"
+	}
+}

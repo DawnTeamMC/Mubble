@@ -590,10 +590,14 @@
 	"block.mubble.silver_shiny_garland": "Guirlande brillante argentée",
 	"block.mubble.gold_shiny_garland": "Guirlande brillante dorée",
 
+	"block.mubble.white_present": "Cadeau blanc",
+	"block.mubble.black_present": "Cadeau noir",
 	"block.mubble.blue_present": "Cadeau bleu",
 	"block.mubble.green_present": "Cadeau vert",
 	"block.mubble.yellow_present": "Cadeau jaune",
 	"block.mubble.red_present": "Cadeau rouge",
+	"block.mubble.purple_present": "Cadeau violet",
+	"block.mubble.golden_present": "Cadeau doré",
 
 	"block.mubble.footblock": "Bloc de foot",
 	
@@ -1017,6 +1021,24 @@
 	"item.mubble.smash_ball": "Balle Smash",
 
 
+	"item.mubble.white_lightsaber": "Sabre laser blanc",
+	"item.mubble.light_gray_lightsaber": "Sabre laser gris clair",
+	"item.mubble.gray_lightsaber": "Sabre laser gris",
+	"item.mubble.black_lightsaber": "Sabre laser noir",
+	"item.mubble.brown_lightsaber": "Sabre laser marron",
+	"item.mubble.red_lightsaber": "Sabre laser rouge",
+	"item.mubble.orange_lightsaber": "Sabre laser orange",
+	"item.mubble.yellow_lightsaber": "Sabre laser jaune",
+	"item.mubble.lime_lightsaber": "Sabre laser vert clair",
+	"item.mubble.green_lightsaber": "Sabre laser vert",
+	"item.mubble.cyan_lightsaber": "Sabre laser cyan",
+	"item.mubble.light_blue_lightsaber": "Sabre laser bleu clair",
+	"item.mubble.blue_lightsaber": "Sabre laser bleu",
+	"item.mubble.purple_lightsaber": "Sabre laser violet",
+	"item.mubble.magenta_lightsaber": "Sabre laser magenta",
+	"item.mubble.pink_lightsaber": "Sabre laser rose",
+
+
 	"item.mubble.blank_music_disc": "Disque de musique vide",
 	"item.mubble.music_disc_battlefield": "Disque de musique",
 	"item.mubble.music_disc_champions_road": "Disque de musique",
@@ -1135,7 +1157,7 @@
 	"item.mubble.king_round_mask": "Masque King Round",
 
 
-	"item.mubble.kid_hat": "Haut-de-forme (Hat Kid)",
+	"item.mubble.kid_hat": "Haut-de-forme de Hat Kid",
 
 
 	"item.mubble.baldi_head": "Tête de Baldi",
@@ -1150,7 +1172,7 @@
 
 
 	"comment": "ENCHANTMENTS",
-	"//enchantment.mubble.telekinesis": "Telekinesis",
+	"enchantment.mubble.telekinesis": "Télékinésie",
 
 
 

@@ -673,10 +673,14 @@ public class MubbleBlocks
     public static final Block SILVER_SHINY_GARLAND = register("silver_shiny_garland", new GarlandBlock(FabricBlockSettings.of(Material.LEAVES, MaterialColor.CLAY).hardness(0.2F).sounds(BlockSoundGroup.GRASS).lightLevel(10).build()), ItemGroup.DECORATIONS, false, 30, 60);
     public static final Block GOLD_SHINY_GARLAND = register("gold_shiny_garland", new GarlandBlock(FabricBlockSettings.of(Material.LEAVES, MaterialColor.GOLD).hardness(0.2F).sounds(BlockSoundGroup.GRASS).lightLevel(10).build()), ItemGroup.DECORATIONS, false, 30, 60);
 
+    public static final Block WHITE_PRESENT = register("white_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD).build()), ItemGroup.DECORATIONS, false, 60, 60);
+    public static final Block BLACK_PRESENT = register("black_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.BLACK_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD).build()), ItemGroup.DECORATIONS, false, 60, 60);
     public static final Block BLUE_PRESENT = register("blue_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.BLUE_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD).build()), ItemGroup.DECORATIONS, false, 60, 60);
     public static final Block GREEN_PRESENT = register("green_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.GREEN_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD).build()), ItemGroup.DECORATIONS, false, 60, 60);
     public static final Block YELLOW_PRESENT = register("yellow_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.YELLOW_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD).build()), ItemGroup.DECORATIONS, false, 60, 60);
     public static final Block RED_PRESENT = register("red_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.RED_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD).build()), ItemGroup.DECORATIONS, false, 60, 60);
+    public static final Block PURPLE_PRESENT = register("purple_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.PURPLE_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD).build()), ItemGroup.DECORATIONS, false, 60, 60);
+    public static final Block GOLDEN_PRESENT = register("golden_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.GOLD).hardness(0.8F).sounds(BlockSoundGroup.WOOD).build()), ItemGroup.DECORATIONS, false, 60, 60);
     
     public static final Block FOOTBLOCK = register("footblock", new Block(Settings.copy(Blocks.WHITE_WOOL)), ItemGroup.DECORATIONS, false, 60, 60);
     
