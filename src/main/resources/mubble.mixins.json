@@ -3,6 +3,7 @@
     "package": "hugman.mubble.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+		"FireBlockMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
 		"PlayerEntityMixin"
