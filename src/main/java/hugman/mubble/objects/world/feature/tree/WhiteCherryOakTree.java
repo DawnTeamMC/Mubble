@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 public class WhiteCherryOakTree extends SaplingGenerator
 {
 	@Override
-	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random)
+	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl)
 	{
 		return random.nextInt(10) == 0 ? MubbleFeatures.TALL_WHITE_CHERRY_OAK_TREE.configure(MubbleFeatures.Config.TALL_WHITE_CHERRY_OAK_TREE) : MubbleFeatures.WHITE_CHERRY_OAK_TREE.configure(MubbleFeatures.Config.WHITE_CHERRY_OAK_TREE);
 	}

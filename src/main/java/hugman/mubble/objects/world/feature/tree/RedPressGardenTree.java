@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 public class RedPressGardenTree extends LargeTreeSaplingGenerator
 {
 	@Override
-	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random)
+	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl)
 	{
 		return MubbleFeatures.RED_PRESS_GARDEN_TREE.configure(MubbleFeatures.Config.RED_PRESS_GARDEN_TREE);
 	}

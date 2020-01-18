@@ -68,7 +68,7 @@ public class FlyingBlockEntity extends Entity
 		this(MubbleEntities.FLYING_BLOCK, worldIn);
 		this.flyTile = flyingBlockState;
 		this.inanimate = true;
-		this.setPosition(x, y + (double)((1.0F - this.getHeight()) / 2.0F), z);
+		this.updatePosition(x, y + (double)((1.0F - this.getHeight()) / 2.0F), z);
 		this.setVelocity(Vec3d.ZERO);
 		this.prevX = x;
 		this.prevY = y;

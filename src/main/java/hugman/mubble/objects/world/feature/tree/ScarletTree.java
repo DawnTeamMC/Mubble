@@ -14,7 +14,7 @@ import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 public class ScarletTree extends LargeTreeSaplingGenerator
 {
 	@Override
-	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random)
+	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl)
 	{
 		return random.nextInt(10) == 0 ? MubbleFeatures.TALL_SCARLET_TREE.configure(new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.SCARLET_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build()) : MubbleFeatures.SCARLET_TREE.configure(new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.SCARLET_LOG.getDefaultState()), new SimpleStateProvider(MubbleBlocks.SCARLET_LEAVES.getDefaultState()), new BlobFoliagePlacer(2, 0)).build());
 	}

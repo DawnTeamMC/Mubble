@@ -25,8 +25,8 @@ public class TotemOfAscendingItem extends Item
     {
         ItemStack stack = playerIn.getStackInHand(handIn);
         BlockPos desPos = new BlockPos(playerIn.getX(), worldIn.getChunk(playerIn.getBlockPos()).sampleHeightmap(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getX(), (int) playerIn.getZ()), playerIn.getZ());
-        if(desPos.getY() <= playerIn.getY()) playerIn.setPosition(playerIn.getX(), playerIn.getY() + 20D, playerIn.getZ());
-        else playerIn.setPosition(playerIn.getX(), desPos.getY() + 2D, playerIn.getZ());
+        if(desPos.getY() <= playerIn.getY()) playerIn.updatePosition(playerIn.getX(), playerIn.getY() + 20D, playerIn.getZ());
+        else playerIn.updatePosition(playerIn.getX(), desPos.getY() + 2D, playerIn.getZ());
         if(!playerIn.abilities.creativeMode)
         {
         	stack.decrement(1);

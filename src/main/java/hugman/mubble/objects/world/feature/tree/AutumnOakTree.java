@@ -10,7 +10,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 public class AutumnOakTree extends SaplingGenerator
 {
 	@Override
-	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random)
+	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl)
 	{
 		return random.nextInt(10) == 0 ? MubbleFeatures.TALL_AUTUMN_OAK_TREE.configure(MubbleFeatures.Config.TALL_AUTUMN_OAK_TREE) : MubbleFeatures.AUTUMN_OAK_TREE.configure(MubbleFeatures.Config.AUTUMN_OAK_TREE);
 	}
