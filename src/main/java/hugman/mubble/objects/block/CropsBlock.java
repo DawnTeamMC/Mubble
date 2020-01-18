@@ -14,7 +14,7 @@ public class CropsBlock extends CropBlock
 	 * + Missing features */
     public CropsBlock()
     {
-        super(FabricBlockSettings.of(Material.LEAVES).collidable(true).ticksRandomly().hardness(0f).sounds(BlockSoundGroup.CROP).build());
+        super(FabricBlockSettings.of(Material.LEAVES).collidable(true).ticksRandomly().hardness(0f).sounds(BlockSoundGroup.CROP).nonOpaque().build());
     }
     
     @Override
