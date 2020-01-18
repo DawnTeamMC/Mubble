@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handler;
+/*package hugman.mubble.objects.events_handler;
 
 import hugman.mubble.init.MubbleEnchantments;
 import hugman.mubble.util.EnchantmentUtil;
@@ -54,4 +54,4 @@ public class EnchantmentHandler
 			}
 		}
 	}
-}
+}*/

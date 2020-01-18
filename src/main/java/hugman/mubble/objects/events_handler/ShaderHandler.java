@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handler;
+/*package hugman.mubble.objects.events_handler;
 
 import com.mojang.blaze3d.platform.GLX;
 
@@ -40,4 +40,4 @@ public class ShaderHandler
 			}
 		}
 	}
-}
+}*/

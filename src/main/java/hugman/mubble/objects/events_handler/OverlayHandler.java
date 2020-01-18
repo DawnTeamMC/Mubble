@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handler;
+/*package hugman.mubble.objects.events_handler;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -17,4 +17,4 @@ public class OverlayHandler
 			//GuiUtils.drawGradientRect(5, 5, 5, 50, 100, Color.YELLOW.getRGB(), Color.RED.getRGB());
 		}
 	}
-}
+}*/

@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handler;
+/*package hugman.mubble.objects.events_handler;
 
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.Entity;
@@ -39,4 +39,4 @@ public class PufferfishAeughHandler
 			}
 		}
 	}
-}
+}*/

@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handler;
+/*package hugman.mubble.objects.events_handler;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.world.MubbleDimensions;
@@ -39,4 +39,4 @@ public class PortalCreationHandler
 			}
 		}
 	}
-}
+}*/

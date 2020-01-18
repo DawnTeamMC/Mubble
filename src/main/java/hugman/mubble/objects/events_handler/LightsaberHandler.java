@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handler;
+/*package hugman.mubble.objects.events_handler;
 
 import hugman.mubble.objects.item.LightsaberItem;
 import net.minecraft.entity.LivingEntity;
@@ -51,4 +51,4 @@ public class LightsaberHandler
 			}
 		}
 	}
-}
+}*/

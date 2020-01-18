@@ -8,6 +8,6 @@ public class EnchantmentUtil
 {
 	public static boolean hasEnchantment(Enchantment enchantment, ItemStack stack)
 	{
-		return EnchantmentHelper.getEnchantmentLevel(enchantment, stack) > 0;
+		return EnchantmentHelper.getLevel(enchantment, stack) > 0;
 	}
 }

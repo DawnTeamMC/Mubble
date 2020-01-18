@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handler;
+/*package hugman.mubble.objects.events_handler;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -77,4 +77,4 @@ public class KonamiHandler
 			}
 		}
 	}
-}
+}*/

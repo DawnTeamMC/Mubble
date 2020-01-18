@@ -1,8 +1,5 @@
 package hugman.mubble.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.ChinchoEntity;
 import hugman.mubble.objects.entity.CustomTNTEntity;
@@ -19,9 +16,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class MubbleEntities
-{
-    public static final List<EntityType<?>> ENTITY_TYPES = new ArrayList<EntityType<? extends Entity>>();
-    
+{    
 	public static final EntityType<ChinchoEntity> CHINCHO = register("chincho", FabricEntityTypeBuilder.create(EntityCategory.MONSTER, ChinchoEntity::new).size(EntityDimensions.fixed(0.6F, 1.2F)).build());
 	public static final EntityType<GoombaEntity> GOOMBA = register("goomba", FabricEntityTypeBuilder.create(EntityCategory.MONSTER, GoombaEntity::new).size(EntityDimensions.fixed(0.75F, 0.85F)).build());
 	public static final EntityType<ToadEntity> TOAD = register("toad", FabricEntityTypeBuilder.create(EntityCategory.CREATURE, ToadEntity::new).size(EntityDimensions.fixed(0.6F, 1.4F)).build());
