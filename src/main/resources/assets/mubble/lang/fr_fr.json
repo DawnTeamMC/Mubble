@@ -590,14 +590,14 @@
 	"block.mubble.silver_shiny_garland": "Guirlande brillante argentée",
 	"block.mubble.gold_shiny_garland": "Guirlande brillante dorée",
 
-	"//block.mubble.white_present": "White Present",
-	"//block.mubble.black_present": "Black Present",
+	"block.mubble.white_present": "Cadeau blanc",
+	"block.mubble.black_present": "Cadeau noir",
 	"block.mubble.blue_present": "Cadeau bleu",
 	"block.mubble.green_present": "Cadeau vert",
 	"block.mubble.yellow_present": "Cadeau jaune",
 	"block.mubble.red_present": "Cadeau rouge",
-	"//block.mubble.purple_present": "Purple Present",
-	"//block.mubble.golden_present": "Golden Present",
+	"block.mubble.purple_present": "Cadeau violet",
+	"block.mubble.golden_present": "Cadeau doré",
 
 	"block.mubble.footblock": "Bloc de foot",
 	
@@ -1157,7 +1157,7 @@
 	"item.mubble.king_round_mask": "Masque King Round",
 
 
-	"item.mubble.kid_hat": "Haut-de-forme (Hat Kid)",
+	"item.mubble.kid_hat": "Haut-de-forme de Hat Kid",
 
 
 	"item.mubble.baldi_head": "Tête de Baldi",
@@ -1172,7 +1172,7 @@
 
 
 	"comment": "ENCHANTMENTS",
-	"//enchantment.mubble.telekinesis": "Telekinesis",
+	"enchantment.mubble.telekinesis": "Télékinésie",
 
 
 

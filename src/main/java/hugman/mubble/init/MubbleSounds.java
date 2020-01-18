@@ -64,6 +64,7 @@ public class MubbleSounds
 	public static final SoundEvent ITEM_SUPER_STAR_THEME = register("item.super_star.theme");
 
 	public static final SoundEvent ITEM_LIGHTSABER_BLOCK = register("item.lightsaber.block");
+	public static final SoundEvent ITEM_LIGHTSABER_HIT = register("item.lightsaber.hit");
 	public static final SoundEvent ITEM_LIGHTSABER_IDLE = register("item.lightsaber.idle");
 	public static final SoundEvent ITEM_LIGHTSABER_PULL_IN = register("item.lightsaber.pull_in");
 	public static final SoundEvent ITEM_LIGHTSABER_PULL_OUT = register("item.lightsaber.pull_out");

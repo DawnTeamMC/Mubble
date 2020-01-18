@@ -9,6 +9,9 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickEmpty;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -49,6 +52,36 @@ public class LightsaberHandler
 			{
 				LightsaberItem.idleTimer = 0;
 			}
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onBlockLeftClick(LeftClickBlock event)
+	{
+		ItemStack itemStack = event.getItemStack();
+		if(itemStack.getItem() instanceof LightsaberItem)
+		{
+			((LightsaberItem)itemStack.getItem()).onSwing(event.getPlayer(), false);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onAirLeftClick(LeftClickEmpty event)
+	{
+		ItemStack itemStack = event.getItemStack();
+		if(itemStack.getItem() instanceof LightsaberItem)
+		{
+			((LightsaberItem)itemStack.getItem()).onSwing(event.getPlayer(), false);
+		}
+	}
+	
+	@SubscribeEvent
+	public static void onAttack(AttackEntityEvent event)
+	{
+		ItemStack itemStack = event.getPlayer().getActiveItemStack();
+		if(itemStack.getItem() instanceof LightsaberItem)
+		{
+			((LightsaberItem)itemStack.getItem()).onSwing(event.getPlayer(), true);
 		}
 	}
 }

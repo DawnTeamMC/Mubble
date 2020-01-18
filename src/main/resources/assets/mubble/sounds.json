@@ -421,11 +421,17 @@
 		[
 			"mubble:item/lightsaber/block/1",
 			"mubble:item/lightsaber/block/2",
-			"mubble:item/lightsaber/block/3",
-			"mubble:item/lightsaber/block/4",
-			"mubble:item/lightsaber/block/5",
-			"mubble:item/lightsaber/block/6",
-			"mubble:item/lightsaber/block/7"
+			"mubble:item/lightsaber/block/3"
+		]
+	},
+	"item.lightsaber.hit":
+	{
+		"sounds":
+		[
+			"mubble:item/lightsaber/hit/1",
+			"mubble:item/lightsaber/hit/2",
+			"mubble:item/lightsaber/hit/3",
+			"mubble:item/lightsaber/hit/4"
 		]
 	},
 	"item.lightsaber.idle":
