@@ -6,8 +6,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class MushroomBlock extends net.minecraft.block.MushroomBlock
 {
@@ -23,7 +23,7 @@ public class MushroomBlock extends net.minecraft.block.MushroomBlock
     }
     
     @Override
-    public void grow(World worldIn, Random rand, BlockPos pos, BlockState state)
+    public void grow(ServerWorld worldIn, Random rand, BlockPos pos, BlockState state)
     {
     	return;
     }
@@ -35,7 +35,7 @@ public class MushroomBlock extends net.minecraft.block.MushroomBlock
     }
     
     @Override
-    public boolean generateBigMushroom(IWorld worldIn, BlockPos pos, BlockState state, Random rand)
+    public boolean trySpawningBigMushroom(ServerWorld worldIn, BlockPos pos, BlockState state, Random rand)
     {
     	return false;
     }

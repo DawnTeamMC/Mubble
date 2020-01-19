@@ -5,7 +5,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.DyeColor;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
@@ -19,13 +19,15 @@ public class BalloonBlock extends FlyingBlock
     }
     
     @Override
-	public BlockRenderLayer getRenderLayer()
+    @OnlyIn(Dist.CLIENT)
+    public boolean isSideInvisible(BlockState state1, BlockState state2, Direction direction)
     {
-    	return BlockRenderLayer.TRANSLUCENT;
-	}
+       return state2.getBlock() == this ? true : false;
+    }
     
     @OnlyIn(Dist.CLIENT)
-    public float func_220080_a(BlockState state, IBlockReader worldIn, BlockPos pos)
+    @Override
+    public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
        return 1.0F;
     }
@@ -36,16 +38,19 @@ public class BalloonBlock extends FlyingBlock
     	return true;
 	}
 
-    public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos)
+    @Override
+    public boolean canSuffocate(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
        return false;
     }
 
+    @Override
     public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
        return false;
     }
 
+    @Override
     public boolean canEntitySpawn(BlockState state, IBlockReader worldIn, BlockPos pos, EntityType<?> type)
     {
        return false;

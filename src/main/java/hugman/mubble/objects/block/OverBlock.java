@@ -16,6 +16,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.IPlantable;
 
 public class OverBlock extends Block
@@ -48,13 +49,13 @@ public class OverBlock extends Block
 	}
 	
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
-		if(!worldIn.isRemote)
+		if(!world.isRemote)
 		{
-			if(state.get(OVER) && isFaceAboveSolid(worldIn, pos))
+			if(state.get(OVER) && isFaceAboveSolid(world, pos))
 			{
-				worldIn.setBlockState(pos, state.cycle(OVER), 2);
+				world.setBlockState(pos, state.cycle(OVER), 2);
 			}
 		}
 	}
@@ -76,7 +77,7 @@ public class OverBlock extends Block
 	{
 		BlockPos blockpos = pos.offset(Direction.UP);
 		BlockState blockstate = worldIn.getBlockState(blockpos);
-		return blockstate.func_224755_d(worldIn, blockpos, Direction.DOWN);
+		return blockstate.isSideSolidFullSquare(worldIn, blockpos, Direction.DOWN);
 	}
 	
 	@Override

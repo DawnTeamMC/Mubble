@@ -6,6 +6,7 @@ import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -28,13 +29,13 @@ public class BerryBushBlock extends SweetBerryBushBlock
     }
     
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
         int i = state.get(AGE);
         boolean flag = i == 3;
         if (!flag && player.getHeldItem(handIn).getItem() == Items.BONE_MEAL)
         {
-           return false;
+           return ActionResultType.PASS;
         }
         else if (i > 1)
         {
@@ -42,11 +43,11 @@ public class BerryBushBlock extends SweetBerryBushBlock
            spawnAsEntity(worldIn, pos, new ItemStack(MubbleItems.BLUEBERRIES, j + (flag ? 1 : 0)));
            worldIn.playSound((PlayerEntity)null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.rand.nextFloat() * 0.4F);
            worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
-           return true;
+           return ActionResultType.SUCCESS;
         }
         else
         {
-           return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+           return super.onUse(state, worldIn, pos, player, handIn, hit);
         }
     }
 }

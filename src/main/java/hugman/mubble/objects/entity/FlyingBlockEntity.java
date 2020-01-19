@@ -95,7 +95,7 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 	}
 	
 	@Override
-	protected boolean canTriggerWalking()
+	protected boolean canClimb()
 	{
 		return false;
 	}
@@ -121,9 +121,6 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 		}
 		else
 		{
-			this.prevPosX = this.posX;
-			this.prevPosY = this.posY;
-			this.prevPosZ = this.posZ;
 			Block block = this.flyTile.getBlock();
 			if (this.flyTime++ == 0)
 			{
@@ -151,7 +148,7 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 				double d0 = this.getMotion().lengthSquared();
 	            if (flag && d0 > 1.0D)
 	            {
-	                BlockRayTraceResult blockraytraceresult = this.world.rayTraceBlocks(new RayTraceContext(new Vec3d(this.prevPosX, this.prevPosY, this.prevPosZ), new Vec3d(this.posX, this.posY, this.posZ), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.SOURCE_ONLY, this));
+	                BlockRayTraceResult blockraytraceresult = this.world.rayTraceBlocks(new RayTraceContext(new Vec3d(this.prevPosX, this.prevPosY, this.prevPosZ), this.getPositionVec(), RayTraceContext.BlockMode.COLLIDER, RayTraceContext.FluidMode.SOURCE_ONLY, this));
 	                if (blockraytraceresult.getType() != RayTraceResult.Type.MISS && this.world.getFluidState(blockraytraceresult.getPos()).isTagged(FluidTags.WATER))
 	                {
 	                   blockpos1 = blockraytraceresult.getPos();
@@ -235,8 +232,9 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 			this.setMotion(this.getMotion().scale(0.98D));
 		}
 	}
-
-	public void fly(float distance, float damageMultiplier)
+	
+	@Override
+	public boolean handleFallDamage(float distance, float damageMultiplier)
 	{
 		if (this.hurtEntities)
 		{
@@ -266,7 +264,8 @@ public class FlyingBlockEntity extends Entity implements IEntityAdditionalSpawnD
 				}
 			}
 		}
-
+		
+		return false;
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class ChristmasHatCostume extends HeadCostume
     	Random rand = new Random();
     	if(world.isRemote && rand.nextInt(2) == 0 && CalendarEvents.isDecember)
     	{
-    		world.addParticle(ParticleTypes.ITEM_SNOWBALL, player.posX + (rand.nextDouble() - 0.5D) * 0.3D, player.posY + player.getHeight() + rand.nextDouble() * 0.3D, player.posZ + (rand.nextDouble() - 0.5D) * 0.3D, (rand.nextDouble() - 0.5D) * 1.1D, (rand.nextDouble() - 0.5D) * 1.1D, (rand.nextDouble() - 0.5D) * 1.1D);
+    		world.addParticle(ParticleTypes.ITEM_SNOWBALL, player.getX() + (rand.nextDouble() - 0.5D) * 0.3D, player.getY() + player.getHeight() + rand.nextDouble() * 0.3D, player.getZ() + (rand.nextDouble() - 0.5D) * 0.3D, (rand.nextDouble() - 0.5D) * 1.1D, (rand.nextDouble() - 0.5D) * 1.1D, (rand.nextDouble() - 0.5D) * 1.1D);
     	}
     	super.onArmorTick(stack, world, player);
     }

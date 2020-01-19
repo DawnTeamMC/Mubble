@@ -86,7 +86,7 @@ public class ChinchoEntity extends MonsterEntity
         {
             float f = this.getBrightness();
 
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canBlockSeeSky(new BlockPos(this.posX, this.posY + (double)this.getEyeHeight(), this.posZ)))
+            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canBlockSeeSky(new BlockPos(this.getX(), this.getY() + (double)this.getEyeHeight(), this.getZ())))
             {
                 boolean flag = true;
                 ItemStack itemstack = this.getItemStackFromSlot(EquipmentSlotType.HEAD);

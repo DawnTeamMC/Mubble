@@ -26,7 +26,7 @@ public class NoteBlock extends Block
     @Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
     {
-    	entityIn.fall(fallDistance, 0.0F);
+    	entityIn.handleFallDamage(fallDistance, 0.0F);
     }
     
     @Override

@@ -3,8 +3,6 @@ package hugman.mubble.objects.costume;
 import java.util.List;
 import java.util.Random;
 
-import com.mojang.blaze3d.platform.GLX;
-
 import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.MubbleShaders;
 import hugman.mubble.util.CalendarEvents;
@@ -78,20 +76,17 @@ public class Costume extends Item
     		GameRenderer renderer = Minecraft.getInstance().gameRenderer;
     		ShaderGroup shaderGroup = renderer.getShaderGroup();
     		ResourceLocation shader = this.getShader();
-    		if(GLX.usePostProcess && shader != null)
-    		{
-    			if(shaderGroup != null)
-    			{
-    				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
-    				{
-    					renderer.loadShader(shader);
-    				}
-    			}
-    			else
-    			{
-    				renderer.loadShader(shader);
-    			}
-    		}
+			if(shaderGroup != null)
+			{
+				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
+				{
+					renderer.loadShader(shader);
+				}
+			}
+			else
+			{
+				renderer.loadShader(shader);
+			}
     	}
     	if(!world.isRemote && effects != null)
     	{
@@ -107,8 +102,7 @@ public class Costume extends Item
 		@Override
 		protected ItemStack dispenseStack(IBlockSource source, ItemStack stack)
 		{
-			ItemStack itemstack = ArmorItem.dispenseArmor(source, stack);
-			return itemstack.isEmpty() ? super.dispenseStack(source, stack) : itemstack;
+			return ArmorItem.dispenseArmor(source, stack) ? stack : super.dispenseStack(source, stack);
 		}
 	};
 	
@@ -150,7 +144,7 @@ public class Costume extends Item
         {
         	playerIn.setItemStackToSlot(armorType, itemstack.copy());
         	itemstack.shrink(1);
-        	worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
+        	worldIn.playSound((PlayerEntity)null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
         	if(this == MubbleCostumes.MAYRO_CAP && playerIn.getGameProfile().getId().toString() == "8cf61519-4ac2-4d60-9d65-d0c7abcf4524")
         	{
         		playerIn.sendStatusMessage(new TranslationTextComponent("item.mubble.mayro_cap.secret_status", new Object[0]), true);

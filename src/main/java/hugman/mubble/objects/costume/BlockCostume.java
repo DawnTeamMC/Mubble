@@ -2,8 +2,6 @@ package hugman.mubble.objects.costume;
 
 import java.util.List;
 
-import com.mojang.blaze3d.platform.GLX;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.client.Minecraft;
@@ -63,20 +61,17 @@ public class BlockCostume extends BlockItem
     		GameRenderer renderer = Minecraft.getInstance().gameRenderer;
     		ShaderGroup shaderGroup = renderer.getShaderGroup();
     		ResourceLocation shader = this.getShader();
-    		if(GLX.usePostProcess && shader != null)
-    		{
-    			if(shaderGroup != null)
-    			{
-    				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
-    				{
-    					renderer.loadShader(shader);
-    				}
-    			}
-    			else
-    			{
-    				renderer.loadShader(shader);
-    			}
-    		}
+			if(shaderGroup != null)
+			{
+				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
+				{
+					renderer.loadShader(shader);
+				}
+			}
+			else
+			{
+				renderer.loadShader(shader);
+			}
     	}
     }
 	
@@ -85,8 +80,7 @@ public class BlockCostume extends BlockItem
 		@Override
 		protected ItemStack dispenseStack(IBlockSource source, ItemStack stack)
 		{
-			ItemStack itemstack = ArmorItem.dispenseArmor(source, stack);
-			return itemstack.isEmpty() ? super.dispenseStack(source, stack) : itemstack;
+			return ArmorItem.dispenseArmor(source, stack) ? stack : super.dispenseStack(source, stack);
 		}
 	};
 	
@@ -128,7 +122,7 @@ public class BlockCostume extends BlockItem
         {
            playerIn.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(this));
            itemstack.shrink(1);
-           worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, this.sound, SoundCategory.PLAYERS, 1f, 1f);
+           worldIn.playSound((PlayerEntity)null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), this.sound, SoundCategory.PLAYERS, 1f, 1f);
            return new ActionResult<>(ActionResultType.SUCCESS, itemstack);
         }
         else

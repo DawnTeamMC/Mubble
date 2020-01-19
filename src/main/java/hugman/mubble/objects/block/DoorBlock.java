@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.state.properties.DoubleBlockHalf;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
@@ -56,16 +57,16 @@ public class DoorBlock extends net.minecraft.block.DoorBlock
     }
     
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
     	if(isSmm2Door())
     	{
 			state = state.cycle(OPEN);
 			worldIn.setBlockState(pos, state, 10);
 			this.playToggleSound(worldIn, pos, state.get(OPEN));
-			return true;
+			return ActionResultType.SUCCESS;
     	}
-    	return super.onBlockActivated(state, worldIn, pos, player, handIn, hit);
+    	return super.onUse(state, worldIn, pos, player, handIn, hit);
     }
     
     private boolean isSmm2Door()

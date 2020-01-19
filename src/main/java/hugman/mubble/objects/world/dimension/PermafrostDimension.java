@@ -26,7 +26,7 @@ public class PermafrostDimension extends Dimension
 	
 	public PermafrostDimension(World worldIn, DimensionType typeIn) 
 	{
-		super(worldIn, typeIn);
+		super(worldIn, typeIn, 0.1F);
 		this.type = typeIn;
 	}
 	
@@ -37,7 +37,7 @@ public class PermafrostDimension extends Dimension
 		settings.setDefaultBlock(MubbleBlocks.PERMAROCK.getDefaultState());
 		settings.setDefaultFluid(Blocks.WATER.getDefaultState());
 		
-		BiomeProvider biomeProvider = BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.createSettings().setBiome(MubbleBiomes.PERMAFROST));
+		BiomeProvider biomeProvider = BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.getConfig(world.getWorldInfo()).setBiome(MubbleBiomes.PERMAFROST));
 		
 		return ChunkGeneratorType.CAVES.create(this.world, biomeProvider, settings);
 	}
@@ -71,16 +71,6 @@ public class PermafrostDimension extends Dimension
 	public Vec3d getFogColor(float celestialAngle, float partialTicks)
 	{
 		return new Vec3d((double)0.03F, (double)0.2F, (double)0.2F);
-	}
-
-	@Override
-	protected void generateLightBrightnessTable()
-	{
-		for(int i = 0; i <= 15; ++i)
-		{
-			float f1 = 1.0F - (float)i / 15.0F;
-			this.lightBrightnessTable[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 0.9F + 0.1F;
-		}
 	}
 	
 	@Override

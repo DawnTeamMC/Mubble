@@ -24,9 +24,9 @@ public class TotemOfAscendingItem extends Item
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
         ItemStack stack = playerIn.getHeldItem(handIn);
-        BlockPos desPos = new BlockPos(playerIn.posX, worldIn.getChunk(playerIn.getPosition()).getTopBlockY(Heightmap.Type.WORLD_SURFACE, (int)playerIn.posX, (int)playerIn.posZ), playerIn.posZ);
-        if(desPos.getY() <= playerIn.posY) playerIn.setPosition(playerIn.posX, playerIn.posY + 20D, playerIn.posZ);
-        else playerIn.setPosition(playerIn.posX, desPos.getY() + 2D, playerIn.posZ);
+        BlockPos desPos = new BlockPos(playerIn.getX(), worldIn.getChunk(playerIn.getPosition()).getTopBlockY(Heightmap.Type.WORLD_SURFACE, (int)playerIn.getX(), (int)playerIn.getZ()), playerIn.getZ());
+        if(desPos.getY() <= playerIn.getY()) playerIn.setPosition(playerIn.getX(), playerIn.getY() + 20D, playerIn.getZ());
+        else playerIn.setPosition(playerIn.getX(), desPos.getY() + 2D, playerIn.getZ());
         if(!playerIn.abilities.isCreativeMode)
         {
         	stack.shrink(1);
@@ -34,7 +34,7 @@ public class TotemOfAscendingItem extends Item
         playerIn.fallDistance = 0f;
         playerIn.getCooldownTracker().setCooldown(this, 25);
         playerIn.addStat(Stats.ITEM_USED.get(this));
-        worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_TOTEM_USE, SoundCategory.PLAYERS, 1f, 1f);
+        worldIn.playSound((PlayerEntity)null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ITEM_TOTEM_USE, SoundCategory.PLAYERS, 1f, 1f);
         return new ActionResult<ItemStack>(ActionResultType.SUCCESS, stack);
     }
 }

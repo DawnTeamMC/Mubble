@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.entity.EntityType;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -26,12 +25,6 @@ public class TetrisGlassBlock extends FallingBlock
     }
     
     @Override
-	public BlockRenderLayer getRenderLayer()
-    {
-    	return BlockRenderLayer.TRANSLUCENT;
-	}
-    
-    @Override
     @OnlyIn(Dist.CLIENT)
     public float getAmbientOcclusionLightValue(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
@@ -45,7 +38,7 @@ public class TetrisGlassBlock extends FallingBlock
     }
 
     @Override
-    public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos)
+    public boolean canSuffocate(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
        return false;
     }

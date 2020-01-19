@@ -30,7 +30,7 @@ public class SmashBallItem extends Item
     	Random rand = new Random();
     	for (int i = 0; i < rand.nextInt(21) + 10; i++)
     	{
-    		worldIn.addParticle(ParticleTypes.FLAME, playerIn.posX + (rand.nextInt(11) - 5) / 10F, playerIn.posY + rand.nextInt(21) / 10F, playerIn.posZ + (rand.nextInt(11) - 5) / 10F, (rand.nextInt(21) - 10) / 120F, (rand.nextInt(2) + 0.1) / 11F, (rand.nextInt(21) - 10) / 120F);
+    		worldIn.addParticle(ParticleTypes.FLAME, playerIn.getX() + (rand.nextInt(11) - 5) / 10F, playerIn.getY() + rand.nextInt(21) / 10F, playerIn.getZ() + (rand.nextInt(11) - 5) / 10F, (rand.nextInt(21) - 10) / 120F, (rand.nextInt(2) + 0.1) / 11F, (rand.nextInt(21) - 10) / 120F);
     	}
     	playerIn.getMotion().add(0.0D, 0.25, 0.0D);
     	playerIn.addPotionEffect(new EffectInstance(Effects.GLOWING, 25, 0));
@@ -40,7 +40,7 @@ public class SmashBallItem extends Item
     	if (!playerIn.abilities.isCreativeMode) stack.shrink(1);
     	playerIn.getCooldownTracker().setCooldown(this, 25);
     	playerIn.addStat(Stats.ITEM_USED.get(this));
-    	worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.ITEM_SMASH_BALL_USE, SoundCategory.PLAYERS, 1f, 1f);
+    	worldIn.playSound((PlayerEntity)null, playerIn.getPosition(), MubbleSounds.ITEM_SMASH_BALL_USE, SoundCategory.PLAYERS, 1f, 1f);
     	return new ActionResult<ItemStack>(ActionResultType.SUCCESS, stack);
     }
 }

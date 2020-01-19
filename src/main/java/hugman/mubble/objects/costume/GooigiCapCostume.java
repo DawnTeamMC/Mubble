@@ -25,7 +25,7 @@ public class GooigiCapCostume extends HeadCostume
     	Random rand = new Random();
     	if(!world.isRemote && rand.nextInt(51) == 0)
     	{
-    		world.playSound((PlayerEntity)null, player.posX, player.posY, player.posZ, SoundEvents.BLOCK_SLIME_BLOCK_HIT, SoundCategory.PLAYERS, 1f, 1f);
+    		world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_SLIME_BLOCK_HIT, SoundCategory.PLAYERS, 1f, 1f);
     		player.addPotionEffect(new EffectInstance(Effects.JUMP_BOOST, (rand.nextInt(3) + 1) * 20, rand.nextInt(3)));
     	}
     	super.onArmorTick(stack, world, player);

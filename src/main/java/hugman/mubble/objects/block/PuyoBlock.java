@@ -18,21 +18,24 @@ public class PuyoBlock extends DirectionalBlock
     @Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
     {
-    	if (entityIn.isSneaking()) super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
-    	else entityIn.fall(fallDistance, 0.0F);
+    	if(entityIn.isSneaking())
+    	{
+    		super.onFallenUpon(worldIn, pos, entityIn, fallDistance);
+    	}
+    	else entityIn.handleFallDamage(fallDistance, 0.0F);
     }
     
     @Override
     public void onLanded(IBlockReader worldIn, Entity entityIn)
     {
-    	if (entityIn.isSneaking())
+    	if(entityIn.isSneaking())
     	{
     		super.onLanded(worldIn, entityIn);
         }
     	else
     	{
            Vec3d vec3d = entityIn.getMotion();
-           if (vec3d.y < 0.0D)
+           if(vec3d.y < 0.0D)
            {
         	   double d0 = entityIn instanceof LivingEntity ? 1.0D : 0.8D;
         	   entityIn.setMotion(vec3d.x, -vec3d.y * d0, vec3d.z);

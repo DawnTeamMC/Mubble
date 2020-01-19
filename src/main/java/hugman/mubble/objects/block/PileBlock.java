@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.BushBlock;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
@@ -32,12 +31,6 @@ public class PileBlock extends BushBlock
     public int getOpacity(BlockState state, IBlockReader worldIn, BlockPos pos)
     {
     	return 1;
-    }
-    
-    @Override
-    public BlockRenderLayer getRenderLayer()
-    {
-    	return BlockRenderLayer.CUTOUT_MIPPED;
     }
     
     @Override

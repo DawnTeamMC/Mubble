@@ -23,7 +23,6 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.CachedBlockInfo;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Rotation;
@@ -37,6 +36,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -78,12 +78,6 @@ public class PermafrostPortalBlock extends Block
 	}
 
 	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.TRANSLUCENT;
-	}
-
-	@Override
 	public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation rot)
 	{
 		switch (rot)
@@ -105,18 +99,18 @@ public class PermafrostPortalBlock extends Block
 	}
 	
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
-		if(worldIn.dimension.isSurfaceWorld() && worldIn.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING) && random.nextInt(2000) < worldIn.getDifficulty().getId())
+		if(world.dimension.isSurfaceWorld() && world.getGameRules().getBoolean(GameRules.DO_MOB_SPAWNING) && random.nextInt(2000) < world.getDifficulty().getId())
 		{
-			while(worldIn.getBlockState(pos).getBlock() == this)
+			while(world.getBlockState(pos).getBlock() == this)
 			{
 				pos = pos.down();
 			}
 			
-			if(worldIn.getBlockState(pos).canEntitySpawn(worldIn, pos, EntityType.ZOMBIE_PIGMAN))
+			if(world.getBlockState(pos).canEntitySpawn(world, pos, EntityType.ZOMBIE_PIGMAN))
 			{
-				Entity entity = MubbleEntities.ZOMBIE_COWMAN.spawn(worldIn, (CompoundNBT)null, (ITextComponent)null, (PlayerEntity)null, pos.up(), SpawnReason.STRUCTURE, false, false);
+				Entity entity = MubbleEntities.ZOMBIE_COWMAN.spawn(world, (CompoundNBT)null, (ITextComponent)null, (PlayerEntity)null, pos.up(), SpawnReason.STRUCTURE, false, false);
 				if (entity != null)
 				{
 					entity.timeUntilPortal = entity.getPortalCooldown();

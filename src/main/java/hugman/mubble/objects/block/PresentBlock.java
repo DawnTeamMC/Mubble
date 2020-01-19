@@ -23,7 +23,7 @@ import net.minecraft.state.StateContainer.Builder;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.stats.Stats;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -32,6 +32,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class PresentBlock extends ContainerBlock implements IWaterLoggable
 {
@@ -61,7 +62,7 @@ public class PresentBlock extends ContainerBlock implements IWaterLoggable
     }
     
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
     	if(!worldIn.isRemote)
     	{
@@ -72,7 +73,7 @@ public class PresentBlock extends ContainerBlock implements IWaterLoggable
     			player.addStat(Stats.OPEN_BARREL);
     		}
     	}
-		return true;
+		return ActionResultType.SUCCESS;
     }
 
 	@Override
@@ -92,7 +93,7 @@ public class PresentBlock extends ContainerBlock implements IWaterLoggable
     }
 	
 	@Override
-	public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
 	{
 		TileEntity tileEntity = worldIn.getTileEntity(pos);
 		if(tileEntity instanceof PresentTileEntity)
@@ -105,12 +106,6 @@ public class PresentBlock extends ContainerBlock implements IWaterLoggable
 	public BlockRenderType getRenderType(BlockState state)
 	{
 		return BlockRenderType.MODEL;
-	}
-	
-	@Override
-	public BlockRenderLayer getRenderLayer()
-	{
-		return BlockRenderLayer.CUTOUT_MIPPED;
 	}
 	
     @Override

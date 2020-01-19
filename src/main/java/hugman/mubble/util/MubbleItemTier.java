@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.item.IItemTier;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyLoadBase;
+import net.minecraft.util.LazyValue;
 
 public enum MubbleItemTier implements IItemTier
 {
@@ -26,7 +26,7 @@ public enum MubbleItemTier implements IItemTier
 	private final float efficiency;
 	private final float attackDamage;
 	private final int enchantability;
-	private final LazyLoadBase<Ingredient> repairMaterial;
+	private final LazyValue<Ingredient> repairMaterial;
 
 	private MubbleItemTier(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn)
 	{
@@ -35,7 +35,7 @@ public enum MubbleItemTier implements IItemTier
 		this.efficiency = efficiencyIn;
 		this.attackDamage = attackDamageIn;
 		this.enchantability = enchantabilityIn;
-		this.repairMaterial = new LazyLoadBase<>(repairMaterialIn);
+		this.repairMaterial = new LazyValue<>(repairMaterialIn);
 	}
 
 	public int getMaxUses()

@@ -6,8 +6,11 @@ import hugman.mubble.objects.entity.render.model.ToadModel;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class ToadRender extends MobRenderer<ToadEntity, ToadModel<ToadEntity>>
+@OnlyIn(Dist.CLIENT)
+public class ToadRenderer extends MobRenderer<ToadEntity, ToadModel<ToadEntity>>
 {
     private static final ResourceLocation BLUE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/blue.png");
     private static final ResourceLocation LIGHT_BLUE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/species/light_blue.png");
@@ -33,13 +36,13 @@ public class ToadRender extends MobRenderer<ToadEntity, ToadModel<ToadEntity>>
     private static final ResourceLocation PARTY_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/party.png");
     private static final ResourceLocation KISEKAE_TOAD_TEXTURES = new ResourceLocation(Mubble.MOD_PREFIX + "textures/entity/toad/kisekae.png");
 	
-	public ToadRender(EntityRendererManager manager)
+	public ToadRenderer(EntityRendererManager manager)
 	{
 		super(manager, new ToadModel<>(), 0.5F);
 	}
 
 	@Override
-    protected ResourceLocation getEntityTexture(ToadEntity entity)
+	public ResourceLocation getEntityTexture(ToadEntity entity)
     {
 		int texture = entity.getVariant();
 		switch(texture)
@@ -94,10 +97,4 @@ public class ToadRender extends MobRenderer<ToadEntity, ToadModel<ToadEntity>>
 			return RED_TOAD_TEXTURES;
 		}
     }
-
-	@Override
-	protected void applyRotations(ToadEntity entityLiving, float p_77043_2_, float rotationYaw, float partialTicks)
-	{
-		super.applyRotations(entityLiving, p_77043_2_, rotationYaw, partialTicks);
-	}
 }

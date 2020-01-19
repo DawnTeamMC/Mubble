@@ -8,6 +8,7 @@ import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -23,7 +24,7 @@ public class StripWoodBlock extends RotatedPillarBlock
     }
     
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
     	Block block = Blocks.OAK_LOG;
     	if(this == MubbleBlocks.PALM_LOG) block = MubbleBlocks.STRIPPED_PALM_LOG;
@@ -49,8 +50,8 @@ public class StripWoodBlock extends RotatedPillarBlock
                 	});
                 }
     		}
-            return true;
+            return ActionResultType.SUCCESS;
     	}
-    	return false;
+    	return ActionResultType.PASS;
     }
 }

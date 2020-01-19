@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
+import net.minecraft.world.server.ServerWorld;
 
 public class FlyingBlock extends Block
 {
@@ -38,10 +39,16 @@ public class FlyingBlock extends Block
     }
 
     @Override
-    public void tick(BlockState state, World worldIn, BlockPos pos, Random random)
+    public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
     {
         if(!worldIn.isRemote) this.checkFlyable(worldIn, pos);
     }
+    
+	@Override
+	public int tickRate(IWorldReader worldIn)
+	{
+    	 return 2;
+	}
     
     public void checkFlyable(World worldIn, BlockPos pos)
     {
@@ -58,11 +65,6 @@ public class FlyingBlock extends Block
 
 	protected void onStartFlying(FlyingBlockEntity flyingEntity)
 	{
-	}
-    
-	public int tickRate(IWorldReader worldIn)
-	{
-    	 return 2;
 	}
 	
 	public static boolean canFlyThrough(BlockState state)

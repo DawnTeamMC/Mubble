@@ -30,11 +30,11 @@ public class CappyCostume extends HeadCostume
 			int random = rand.nextInt(5);
 			if(player.dimension == DimensionType.THE_NETHER && random <= 3)
 			{
-				world.playSound((PlayerEntity)null, player.posX, player.posY, player.posZ, MubbleSounds.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
+				world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
 			}
 			else
 			{
-				world.playSound((PlayerEntity)null, player.posX, player.posY, player.posZ, MubbleSounds.COSTUME_CAPPY_AMBIENT, SoundCategory.VOICE, 1f, 1f);
+				world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT, SoundCategory.VOICE, 1f, 1f);
 			}
 		}
     	super.onArmorTick(stack, world, player);
@@ -49,24 +49,24 @@ public class CappyCostume extends HeadCostume
 		{
 			if(world.getFluidState(entity.getPosition()).isTagged(FluidTags.WATER))
 			{
-				world.playSound((PlayerEntity)null, entity.posX, entity.posY, entity.posZ, MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
+				world.playSound((PlayerEntity)null, entity.getX(), entity.getY(), entity.getZ(), MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
 			}
 			else
 			{
-				world.playSound((PlayerEntity)null, entity.posX, entity.posY, entity.posZ, MubbleSounds.COSTUME_CAPPY_HELP, SoundCategory.VOICE, 1f, 1f);
+				world.playSound((PlayerEntity)null, entity.getX(), entity.getY(), entity.getZ(), MubbleSounds.COSTUME_CAPPY_HELP, SoundCategory.VOICE, 1f, 1f);
 			}
 		}
 		return super.onEntityItemUpdate(stack, entity);
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
+	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
 	{
-        ItemStack itemstack1 = playerIn.getItemStackFromSlot(armorType);
+        ItemStack itemstack1 = player.getItemStackFromSlot(armorType);
         if (itemstack1.isEmpty())
         {
-        	worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
+        	world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
         }
-		return super.onItemRightClick(worldIn, playerIn, handIn);
+		return super.onItemRightClick(world, player, hand);
 	}
 }

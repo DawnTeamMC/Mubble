@@ -34,7 +34,7 @@ public class BandageItem extends Item
             playerIn.removePotionEffect(Effects.WITHER);
             if (!playerIn.abilities.isCreativeMode) stack.shrink(1);
             playerIn.addStat(Stats.ITEM_USED.get(this));
-            worldIn.playSound((PlayerEntity)null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 0.5F, 1F);
+            worldIn.playSound((PlayerEntity)null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 0.5F, 1F);
             return new ActionResult<ItemStack>(ActionResultType.SUCCESS, stack);
         }
         return new ActionResult<ItemStack>(ActionResultType.FAIL, stack);

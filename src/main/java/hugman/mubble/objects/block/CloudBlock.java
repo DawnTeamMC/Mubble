@@ -13,7 +13,6 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -42,18 +41,6 @@ public class CloudBlock extends AbstractGlassBlock implements IBeaconBeamColorPr
     public PushReaction getPushReaction(BlockState state)
     {
     	return PushReaction.DESTROY;
-    }
-    
-    @Override
-    public boolean isSolid(BlockState state)
-    {
-    	return false;
-    }
-    
-    @Override
-    public BlockRenderLayer getRenderLayer()
-    {
-    	return BlockRenderLayer.TRANSLUCENT;
     }
     
     @Override

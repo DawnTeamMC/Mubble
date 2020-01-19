@@ -125,12 +125,6 @@ public class SpringBlock extends DirectionalBlock implements IWaterLoggable
 		}
     }
     
-    @Override
-    public boolean isSolid(BlockState state)
-    {
-    	return false;
-    }
-    
 	@Override
     public IFluidState getFluidState(BlockState state)
     {
@@ -195,6 +189,6 @@ public class SpringBlock extends DirectionalBlock implements IWaterLoggable
     @Override
     public void onFallenUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
     {
-    	entityIn.fall(fallDistance, 0.0F);
+    	entityIn.handleFallDamage(fallDistance, 0.0F);
     }
 }

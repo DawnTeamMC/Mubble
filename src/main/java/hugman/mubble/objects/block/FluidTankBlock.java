@@ -19,7 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -84,12 +84,6 @@ public class FluidTankBlock extends Block implements IBucketPickupHandler, ILiqu
     }
     
     @Override
-	public BlockRenderLayer getRenderLayer()
-    {
-    	return BlockRenderLayer.CUTOUT_MIPPED;
-	}
-    
-    @Override
     public IFluidState getFluidState(BlockState state)
     {
     	if(state.get(FLUIDLOG) == FluidLog.WATER) return Fluids.WATER.getStillFluidState(false);
@@ -151,7 +145,7 @@ public class FluidTankBlock extends Block implements IBucketPickupHandler, ILiqu
     }
     
     @Override
-    public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
     {
     	ItemStack itemStackIn = player.getHeldItem(handIn);
     	Item itemIn = itemStackIn.getItem();
@@ -160,11 +154,11 @@ public class FluidTankBlock extends Block implements IBucketPickupHandler, ILiqu
     		BucketItem bucket = (BucketItem)itemIn;
     		if(bucket.getFluid() == Fluids.EMPTY && state.get(FLUIDLOG) != FluidLog.EMPTY)
     		{
-    			return false;
+    			return ActionResultType.PASS;
     		}
     		else if(bucket.getFluid() != Fluids.EMPTY && state.get(FLUIDLOG) == FluidLog.EMPTY)
     		{
-    			return false;
+    			return ActionResultType.PASS;
     		}
     	}
     	if(itemIn instanceof BlockItem)
@@ -172,7 +166,7 @@ public class FluidTankBlock extends Block implements IBucketPickupHandler, ILiqu
     		BlockItem blockItem = (BlockItem)itemIn;
     		if(blockItem.getBlock() instanceof FluidTankBlock)
     		{
-    			return false;
+    			return ActionResultType.PASS;
     		}
     	}
     	else
@@ -185,35 +179,35 @@ public class FluidTankBlock extends Block implements IBucketPickupHandler, ILiqu
 			if(hitY > b) 
 			{
 				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, UP);
-				return true;
+				return ActionResultType.SUCCESS;
 			}
 			if(hitY < a) 
 			{
 				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, DOWN);
-				return true;
+				return ActionResultType.SUCCESS;
 			}
 			if(hitZ < a)
 			{
 				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, NORTH);
-				return true;
+				return ActionResultType.SUCCESS;
 			}
 			if(hitZ > b)
 			{
 				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, SOUTH);
-				return true;
+				return ActionResultType.SUCCESS;
 			}
 			if(hitX > b)
 			{
 				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, EAST);
-				return true;
+				return ActionResultType.SUCCESS;
 			}
 			if(hitX < a)
 			{
 				if(!worldIn.isRemote) permuteSide(state, worldIn, pos, WEST);
-				return true;
+				return ActionResultType.SUCCESS;
 			}
 		}
-		return false;
+		return ActionResultType.PASS;
     }
     
     private void permuteSide(BlockState state, World worldIn, BlockPos pos, BooleanProperty property)

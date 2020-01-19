@@ -66,9 +66,6 @@ public class CustomTNTEntity extends Entity implements IEntityAdditionalSpawnDat
 	@Override
 	public void tick()
 	{
-		this.prevPosX = this.posX;
-		this.prevPosY = this.posY;
-		this.prevPosZ = this.posZ;
 		if (!this.hasNoGravity())
 		{
 			this.setMotion(this.getMotion().add(0.0D, -0.04D, 0.0D));
@@ -92,13 +89,13 @@ public class CustomTNTEntity extends Entity implements IEntityAdditionalSpawnDat
 		else
 		{
 			this.handleWaterMovement();
-			this.world.addParticle(ParticleTypes.SMOKE, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
+			this.world.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
 		}
 	}
 	
 	private void explode()
 	{
-		this.world.createExplosion(this, this.posX, this.posY + (double)(this.getHeight() / 16.0F), this.posZ, this.strenght, Explosion.Mode.BREAK);
+		this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), this.strenght, Explosion.Mode.BREAK);
 	}
 	
 	@Override

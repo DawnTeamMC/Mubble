@@ -4,17 +4,18 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import hugman.mubble.init.world.MubbleFeatureConfigs;
 import hugman.mubble.init.world.MubbleFeatures;
 import net.minecraft.block.trees.Tree;
-import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
+import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 public class PalmTree extends Tree
 {
 	@Nullable
 	@Override
-	protected AbstractTreeFeature<NoFeatureConfig> getTreeFeature(Random random)
+	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random)
 	{
-		return (AbstractTreeFeature<NoFeatureConfig>)MubbleFeatures.PALM_TREE;
+		return MubbleFeatures.PALM_TREE.configure(MubbleFeatureConfigs.PALM_TREE_CONFIG);
 	}
 }

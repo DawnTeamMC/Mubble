@@ -10,18 +10,14 @@ import hugman.mubble.objects.entity.FlyingBlockEntity;
 import hugman.mubble.objects.entity.GoombaEntity;
 import hugman.mubble.objects.entity.ToadEntity;
 import hugman.mubble.objects.entity.ZombieCowmanEntity;
-import hugman.mubble.objects.entity.render.ChinchoRender;
-import hugman.mubble.objects.entity.render.CustomTNTRender;
-import hugman.mubble.objects.entity.render.FlyingBlockRender;
-import hugman.mubble.objects.entity.render.GoombaRender;
-import hugman.mubble.objects.entity.render.ToadRender;
-import hugman.mubble.objects.entity.render.ZombieCowmanRender;
+import hugman.mubble.objects.entity.render.ToadRenderer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.gen.Heightmap;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
 public class MubbleEntities
 {
@@ -53,12 +49,7 @@ public class MubbleEntities
     
     public static void registerRenders()
     {
-    	RenderingRegistry.registerEntityRenderingHandler(ChinchoEntity.class, ChinchoRender::new);
-    	RenderingRegistry.registerEntityRenderingHandler(GoombaEntity.class, GoombaRender::new);
-    	RenderingRegistry.registerEntityRenderingHandler(ToadEntity.class, ToadRender::new);
-    	RenderingRegistry.registerEntityRenderingHandler(ZombieCowmanEntity.class, ZombieCowmanRender::new);
-
-    	RenderingRegistry.registerEntityRenderingHandler(CustomTNTEntity.class, CustomTNTRender::new);
-    	RenderingRegistry.registerEntityRenderingHandler(FlyingBlockEntity.class, FlyingBlockRender::new);
+    	EntityRendererManager manager = Minecraft.getInstance().getRenderManager();
+    	manager.register(TOAD, new ToadRenderer(manager));
     }
 }

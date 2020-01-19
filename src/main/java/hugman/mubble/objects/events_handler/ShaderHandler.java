@@ -1,7 +1,5 @@
 package hugman.mubble.objects.events_handler;
 
-import com.mojang.blaze3d.platform.GLX;
-
 import hugman.mubble.objects.costume.BlockCostume;
 import hugman.mubble.objects.costume.Costume;
 import net.minecraft.client.Minecraft;
@@ -28,14 +26,11 @@ public class ShaderHandler
 		{
 			GameRenderer renderer = Minecraft.getInstance().gameRenderer;
 			ShaderGroup shaderGroup = renderer.getShaderGroup();
-			if(GLX.usePostProcess)
+			if(!(headItem.getItem() instanceof Costume) && !(headItem.getItem() instanceof BlockCostume))
 			{
-				if(!(headItem.getItem() instanceof Costume) && !(headItem.getItem() instanceof BlockCostume))
+				if(shaderGroup != null)
 				{
-					if(shaderGroup != null)
-					{
-						renderer.stopUseShader();
-					}
+					renderer.stopUseShader();
 				}
 			}
 		}

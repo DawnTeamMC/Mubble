@@ -40,47 +40,48 @@ public class PermafrostSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfi
 		boolean flag = this.field_205553_b.func_205563_a((double)x * d0, (double)z * d0, 0.0D) + random.nextDouble() * 0.2D > 0.0D;
 		boolean flag1 = this.field_205553_b.func_205563_a((double)x * d0, 109.0D, (double)z * d0) + random.nextDouble() * 0.2D > 0.0D;
 		int l = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+		BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
 		int i1 = -1;
 		BlockState iblockstate = PERMAROCK;
 		BlockState iblockstate1 = PERMAROCK;
 
-		for(int j1 = 127; j1 >= 0; --j1) {
+		for(int j1 = 127; j1 >= 0; --j1)
+		{
 			blockpos$mutableblockpos.setPos(j, j1, k);
 			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
-			if (iblockstate2.getBlock() != null && iblockstate2.getBlock() != Blocks.AIR)
+			if(iblockstate2.getBlock() != null && iblockstate2.getBlock() != Blocks.AIR)
 			{
-				if (iblockstate2.getBlock() == defaultBlock.getBlock())
+				if(iblockstate2.getBlock() == defaultBlock.getBlock())
 				{
-					if (i1 == -1)
+					if(i1 == -1)
 					{
-						if (l <= 0)
+						if(l <= 0)
 						{
 							iblockstate = CAVE_AIR;
 							iblockstate1 = PERMAROCK;
 						}
-						else if (j1 >= i - 4 && j1 <= i + 1)
+						else if(j1 >= i - 4 && j1 <= i + 1)
 						{
 							iblockstate = PERMAROCK;
 							iblockstate1 = PERMAROCK;
-							if (flag1)
+							if(flag1)
 							{
 								iblockstate = BLUE_ICE;
 								iblockstate1 = PERMAROCK;
 							}
 
-							if (flag)
+							if(flag)
 							{
 								iblockstate = ICE;
 								iblockstate1 = ICE;
 							}
 						}
-						if (j1 < i && (iblockstate == null)) iblockstate = defaultFluid;
+						if(j1 < i && (iblockstate == null)) iblockstate = defaultFluid;
 						i1 = l;
-						if (j1 >= i - 1) chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
+						if(j1 >= i - 1) chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate, false);
 						else chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
 					}
-					else if (i1 > 0)
+					else if(i1 > 0)
 					{
 						--i1;
 						chunkIn.setBlockState(blockpos$mutableblockpos, iblockstate1, false);
@@ -94,7 +95,10 @@ public class PermafrostSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfi
 	@Override
 	public void setSeed(long seed)
 	{
-		if (this.field_205552_a != seed || this.field_205553_b == null) this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 4);
+		if(this.field_205552_a != seed || this.field_205553_b == null)
+		{
+			this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 3, 0);
+		}
 		this.field_205552_a = seed;
 	}
 }
