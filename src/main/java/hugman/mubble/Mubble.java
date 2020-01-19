@@ -10,6 +10,7 @@ import hugman.mubble.init.MubbleEffects;
 import hugman.mubble.init.MubbleEnchantments;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
+import hugman.mubble.init.MubbleRenderLayers;
 import hugman.mubble.init.MubbleScreens;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleColorMaps;
@@ -68,8 +69,8 @@ public class Mubble
 
     private void clientSetup(final FMLClientSetupEvent event)
     {
-    	MubbleEntities.registerRenders();
-    	LOGGER.info("Registered entity renders");
+    	MubbleRenderLayers.registerBlockLayers();
+    	LOGGER.info("Registered block render layers");
     	MubbleEntities.registerRenders();
     	LOGGER.info("Registered entity renders");
     	MubbleScreens.registerScreens();
@@ -127,6 +128,8 @@ public class Mubble
             event.getRegistry().registerAll(MubbleBlocks.DOORS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.FLOWERS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.FLOWER_PILES.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.BALLOONS.toArray(new Item[0]));
+            event.getRegistry().registerAll(MubbleBlocks.CLOUD_BLOCKS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.OTHERS.toArray(new Item[0]));
         	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
         	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleItems.ITEMS.size(), "item"));

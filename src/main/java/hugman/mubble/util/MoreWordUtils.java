@@ -4,7 +4,11 @@ public class MoreWordUtils
 {
 	public static String pluralize(int number, String text)
 	{
-		if(number == 0 ||number == 1)
+		if(number == 0)
+		{
+			return "no " + text;
+		}
+		else if(number == 1)
 		{
 			return number + " " + text;
 		}

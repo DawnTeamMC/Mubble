@@ -83,23 +83,28 @@ public class MubbleBlocks
     public static final List<Block> BLOCKS = new ArrayList<Block>();
     
     /* Sorting Item Lists */
-    public static final List<Item> CUBES = new ArrayList<Item>();
-    public static final List<Item> STAIRS = new ArrayList<Item>();
-    public static final List<Item> SLABS = new ArrayList<Item>();
-    public static final List<Item> VERTICAL_SLABS = new ArrayList<Item>();
-    public static final List<Item> FENCES = new ArrayList<Item>();
-    public static final List<Item> WALLS = new ArrayList<Item>();
-    public static final List<Item> SAPLINGS = new ArrayList<Item>();
-    public static final List<Item> LEAVES = new ArrayList<Item>();
-    public static final List<Item> LEAF_PILES = new ArrayList<Item>();
-    public static final List<Item> PRESSURE_PLATES = new ArrayList<Item>();
-    public static final List<Item> TRAPDOORS = new ArrayList<Item>();
-    public static final List<Item> BUTTONS = new ArrayList<Item>();
-    public static final List<Item> FENCE_GATES = new ArrayList<Item>();
-    public static final List<Item> DOORS = new ArrayList<Item>();
-    public static final List<Item> FLOWERS = new ArrayList<Item>();
-    public static final List<Item> FLOWER_PILES = new ArrayList<Item>();
-    public static final List<Item> OTHERS = new ArrayList<Item>();
+    public static final List<BlockItem> CUBES = new ArrayList<BlockItem>();
+    public static final List<BlockItem> STAIRS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> SLABS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> VERTICAL_SLABS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> FENCES = new ArrayList<BlockItem>();
+    public static final List<BlockItem> WALLS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> SAPLINGS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> LEAVES = new ArrayList<BlockItem>();
+    public static final List<BlockItem> LEAF_PILES = new ArrayList<BlockItem>();
+    public static final List<BlockItem> PRESSURE_PLATES = new ArrayList<BlockItem>();
+    public static final List<BlockItem> TRAPDOORS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> BUTTONS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> FENCE_GATES = new ArrayList<BlockItem>();
+    public static final List<BlockItem> DOORS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> FLOWERS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> FLOWER_PILES = new ArrayList<BlockItem>();
+    public static final List<BlockItem> CLOUD_BLOCKS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> BALLOONS = new ArrayList<BlockItem>();
+    public static final List<BlockItem> OTHERS = new ArrayList<BlockItem>();
+
+    /* Potted Plants (used for render layering) */
+    public static final List<Block> POTTED_PLANTS = new ArrayList<Block>();
     
     /* Templates */
     protected static final Block.Properties pLeaves = Properties.create(Material.LEAVES).hardnessAndResistance(0.2F).tickRandomly().sound(SoundType.PLANT).nonOpaque();
@@ -705,22 +710,22 @@ public class MubbleBlocks
     
     public static final Block FOOTBLOCK = register("footblock", new Block(Properties.from(Blocks.WHITE_WOOL)), ItemGroup.DECORATIONS, OTHERS, 60, 60);
     
-    public static final Block WHITE_CLOUD_BLOCK = register("white_cloud_block", new CloudBlock(DyeColor.WHITE), ItemGroup.DECORATIONS, CUBES);
-    public static final Block LIGHT_GRAY_CLOUD_BLOCK = register("light_gray_cloud_block", new CloudBlock(DyeColor.LIGHT_GRAY), ItemGroup.DECORATIONS, CUBES);
-    public static final Block GRAY_CLOUD_BLOCK = register("gray_cloud_block", new CloudBlock(DyeColor.GRAY), ItemGroup.DECORATIONS, CUBES);
-    public static final Block BLACK_CLOUD_BLOCK = register("black_cloud_block", new CloudBlock(DyeColor.BLACK), ItemGroup.DECORATIONS, CUBES);
-    public static final Block BROWN_CLOUD_BLOCK = register("brown_cloud_block", new CloudBlock(DyeColor.BROWN), ItemGroup.DECORATIONS, CUBES);
-    public static final Block RED_CLOUD_BLOCK = register("red_cloud_block", new CloudBlock(DyeColor.RED), ItemGroup.DECORATIONS, CUBES);
-    public static final Block ORANGE_CLOUD_BLOCK = register("orange_cloud_block", new CloudBlock(DyeColor.ORANGE), ItemGroup.DECORATIONS, CUBES);
-    public static final Block YELLOW_CLOUD_BLOCK = register("yellow_cloud_block", new CloudBlock(DyeColor.YELLOW), ItemGroup.DECORATIONS, CUBES);
-    public static final Block LIME_CLOUD_BLOCK = register("lime_cloud_block", new CloudBlock(DyeColor.LIME), ItemGroup.DECORATIONS, CUBES);
-    public static final Block GREEN_CLOUD_BLOCK = register("green_cloud_block", new CloudBlock(DyeColor.GREEN), ItemGroup.DECORATIONS, CUBES);
-    public static final Block CYAN_CLOUD_BLOCK = register("cyan_cloud_block", new CloudBlock(DyeColor.CYAN), ItemGroup.DECORATIONS, CUBES);
-    public static final Block LIGHT_BLUE_CLOUD_BLOCK = register("light_blue_cloud_block", new CloudBlock(DyeColor.LIGHT_BLUE), ItemGroup.DECORATIONS, CUBES);
-    public static final Block BLUE_CLOUD_BLOCK = register("blue_cloud_block", new CloudBlock(DyeColor.BLUE), ItemGroup.DECORATIONS, CUBES);
-    public static final Block PURPLE_CLOUD_BLOCK = register("purple_cloud_block", new CloudBlock(DyeColor.PURPLE), ItemGroup.DECORATIONS, CUBES);
-    public static final Block MAGENTA_CLOUD_BLOCK = register("magenta_cloud_block", new CloudBlock(DyeColor.MAGENTA), ItemGroup.DECORATIONS, CUBES);
-    public static final Block PINK_CLOUD_BLOCK = register("pink_cloud_block", new CloudBlock(DyeColor.PINK), ItemGroup.DECORATIONS, CUBES);
+    public static final Block WHITE_CLOUD_BLOCK = register("white_cloud_block", new CloudBlock(DyeColor.WHITE), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block LIGHT_GRAY_CLOUD_BLOCK = register("light_gray_cloud_block", new CloudBlock(DyeColor.LIGHT_GRAY), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block GRAY_CLOUD_BLOCK = register("gray_cloud_block", new CloudBlock(DyeColor.GRAY), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block BLACK_CLOUD_BLOCK = register("black_cloud_block", new CloudBlock(DyeColor.BLACK), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block BROWN_CLOUD_BLOCK = register("brown_cloud_block", new CloudBlock(DyeColor.BROWN), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block RED_CLOUD_BLOCK = register("red_cloud_block", new CloudBlock(DyeColor.RED), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block ORANGE_CLOUD_BLOCK = register("orange_cloud_block", new CloudBlock(DyeColor.ORANGE), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block YELLOW_CLOUD_BLOCK = register("yellow_cloud_block", new CloudBlock(DyeColor.YELLOW), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block LIME_CLOUD_BLOCK = register("lime_cloud_block", new CloudBlock(DyeColor.LIME), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block GREEN_CLOUD_BLOCK = register("green_cloud_block", new CloudBlock(DyeColor.GREEN), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block CYAN_CLOUD_BLOCK = register("cyan_cloud_block", new CloudBlock(DyeColor.CYAN), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block LIGHT_BLUE_CLOUD_BLOCK = register("light_blue_cloud_block", new CloudBlock(DyeColor.LIGHT_BLUE), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block BLUE_CLOUD_BLOCK = register("blue_cloud_block", new CloudBlock(DyeColor.BLUE), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block PURPLE_CLOUD_BLOCK = register("purple_cloud_block", new CloudBlock(DyeColor.PURPLE), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block MAGENTA_CLOUD_BLOCK = register("magenta_cloud_block", new CloudBlock(DyeColor.MAGENTA), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
+    public static final Block PINK_CLOUD_BLOCK = register("pink_cloud_block", new CloudBlock(DyeColor.PINK), ItemGroup.DECORATIONS, CLOUD_BLOCKS);
     
     public static final Block TOMATOES = register("tomatoes", new CropsBlock());
     public static final Block SALAD = register("salad", new CropsBlock());
@@ -729,22 +734,22 @@ public class MubbleBlocks
     public static final Block CHOCOLATE_CAKE = register("chocolate_cake", new CakeBlock(), ItemGroup.FOOD, OTHERS);
     public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = register("minecraft_10th_anniversary_cake", new CakeBlock(), ItemGroup.FOOD, OTHERS);
     
-    public static final Block WHITE_BALLOON = register("white_balloon", new BalloonBlock(DyeColor.WHITE), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block LIGHT_GRAY_BALLOON = register("light_gray_balloon", new BalloonBlock(DyeColor.LIGHT_GRAY), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block GRAY_BALLOON = register("gray_balloon", new BalloonBlock(DyeColor.GRAY), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block BLACK_BALLOON = register("black_balloon", new BalloonBlock(DyeColor.BLACK), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block BROWN_BALLOON = register("brown_balloon", new BalloonBlock(DyeColor.BROWN), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block RED_BALLOON = register("red_balloon", new BalloonBlock(DyeColor.RED), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block ORANGE_BALLOON = register("orange_balloon", new BalloonBlock(DyeColor.ORANGE), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block YELLOW_BALLOON = register("yellow_balloon", new BalloonBlock(DyeColor.YELLOW), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block LIME_BALLOON = register("lime_balloon", new BalloonBlock(DyeColor.LIME), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block GREEN_BALLOON = register("green_balloon", new BalloonBlock(DyeColor.GREEN), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block CYAN_BALLOON = register("cyan_balloon", new BalloonBlock(DyeColor.CYAN), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block LIGHT_BLUE_BALLOON = register("light_blue_balloon", new BalloonBlock(DyeColor.LIGHT_BLUE), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block BLUE_BALLOON = register("blue_balloon", new BalloonBlock(DyeColor.BLUE), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block PURPLE_BALLOON = register("purple_balloon", new BalloonBlock(DyeColor.PURPLE), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block MAGENTA_BALLOON = register("magenta_balloon", new BalloonBlock(DyeColor.MAGENTA), ItemGroup.DECORATIONS, CUBES, 30, 60);
-    public static final Block PINK_BALLOON = register("pink_balloon", new BalloonBlock(DyeColor.PINK), ItemGroup.DECORATIONS, CUBES, 30, 60);
+    public static final Block WHITE_BALLOON = register("white_balloon", new BalloonBlock(DyeColor.WHITE), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block LIGHT_GRAY_BALLOON = register("light_gray_balloon", new BalloonBlock(DyeColor.LIGHT_GRAY), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block GRAY_BALLOON = register("gray_balloon", new BalloonBlock(DyeColor.GRAY), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block BLACK_BALLOON = register("black_balloon", new BalloonBlock(DyeColor.BLACK), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block BROWN_BALLOON = register("brown_balloon", new BalloonBlock(DyeColor.BROWN), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block RED_BALLOON = register("red_balloon", new BalloonBlock(DyeColor.RED), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block ORANGE_BALLOON = register("orange_balloon", new BalloonBlock(DyeColor.ORANGE), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block YELLOW_BALLOON = register("yellow_balloon", new BalloonBlock(DyeColor.YELLOW), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block LIME_BALLOON = register("lime_balloon", new BalloonBlock(DyeColor.LIME), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block GREEN_BALLOON = register("green_balloon", new BalloonBlock(DyeColor.GREEN), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block CYAN_BALLOON = register("cyan_balloon", new BalloonBlock(DyeColor.CYAN), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block LIGHT_BLUE_BALLOON = register("light_blue_balloon", new BalloonBlock(DyeColor.LIGHT_BLUE), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block BLUE_BALLOON = register("blue_balloon", new BalloonBlock(DyeColor.BLUE), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block PURPLE_BALLOON = register("purple_balloon", new BalloonBlock(DyeColor.PURPLE), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block MAGENTA_BALLOON = register("magenta_balloon", new BalloonBlock(DyeColor.MAGENTA), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
+    public static final Block PINK_BALLOON = register("pink_balloon", new BalloonBlock(DyeColor.PINK), ItemGroup.DECORATIONS, BALLOONS, 30, 60);
     
     public static final Block UNSTABLE_STONE = register("unstable_stone", new UnstableBlock(Properties.from(Blocks.STONE).hardnessAndResistance(0.1F)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block FLUID_TANK = register("fluid_tank", new FluidTankBlock(Properties.from(Blocks.OBSIDIAN).nonOpaque()), ItemGroup.REDSTONE, OTHERS);
@@ -1051,23 +1056,24 @@ public class MubbleBlocks
         return fBlock;
     }
     
-    private static Block register(String name, Block block, ItemGroup group, List<Item> itemList)
+    private static Block register(String name, Block block, ItemGroup group, List<BlockItem> itemList)
     {
     	Block fBlock = register(name, block);
         if(itemList == FLOWERS || itemList == SAPLINGS)
         {
         	Block fullFlowerPot = new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.delegate.get(), () -> fBlock.delegate.get(), Properties.from(Blocks.FLOWER_POT).lightValue(fBlock.getDefaultState().getLightValue())).setRegistryName(Mubble.MOD_ID, "potted_" + name);
         	BLOCKS.add(fullFlowerPot);
+        	POTTED_PLANTS.add(fullFlowerPot);
             if(Blocks.FLOWER_POT != null)
             {
                 ((FlowerPotBlock)Blocks.FLOWER_POT).addPlant(fBlock.getRegistryName(), () -> fullFlowerPot);
-             }
+            }
         }
-        itemList.add(new BlockItem(fBlock, new Item.Properties().group(group)).setRegistryName(Mubble.MOD_ID, name));
+        itemList.add((BlockItem) new BlockItem(fBlock, new Item.Properties().group(group)).setRegistryName(Mubble.MOD_ID, name));
         return fBlock;
     }
     
-    private static Block register(String name, Block block, ItemGroup group, List<Item> itemList, int fireEncouragement, int flammability)
+    private static Block register(String name, Block block, ItemGroup group, List<BlockItem> itemList, int fireEncouragement, int flammability)
     {
     	Block fBlock = register(name, block, group, itemList);
         FireBlock fireblock = (FireBlock)Blocks.FIRE;
