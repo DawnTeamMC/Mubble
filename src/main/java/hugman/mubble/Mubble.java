@@ -70,6 +70,8 @@ public class Mubble
     {
     	MubbleEntities.registerRenders();
     	LOGGER.info("Registered entity renders");
+    	MubbleEntities.registerRenders();
+    	LOGGER.info("Registered entity renders");
     	MubbleScreens.registerScreens();
     	LOGGER.info("Registered screens");
     	MinecraftForge.EVENT_BUS.register(new KonamiHandler());

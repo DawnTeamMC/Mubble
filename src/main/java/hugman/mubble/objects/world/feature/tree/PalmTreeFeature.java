@@ -91,7 +91,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 		 		setLeavesBlockState(world, rand, pos.add(1, 0, -2), changedLeaves, boundingBox, config);
 		 		setLeavesBlockState(world, rand, pos.add(-1, 0, -2), changedLeaves, boundingBox, config);
 
-		 		for (int i1 = -2; i1 <= 2; i1--)
+		 		for (int i1 = -2; i1 <= 2; i1++)
 		 		{
 			 		setLeavesBlockState(world, rand, pos.add(2, -1, i1), changedLeaves, boundingBox, config);
 			 		setLeavesBlockState(world, rand, pos.add(-2, -1, i1), changedLeaves, boundingBox, config);
@@ -110,7 +110,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 			 		setLeavesBlockState(world, rand, pos.add(0, i2, 3), changedLeaves, boundingBox, config);
 			 		setLeavesBlockState(world, rand, pos.add(0, i2, -3), changedLeaves, boundingBox, config);
 		 		}
-			 	for(int i3 = 0; i3 < i; ++i3)
+			 	for(int i3 = 0; i3 < i; i3++)
 			 	{
 			 		if(isAirOrLeaves(world, position.up(i3)) || isTallPlants(world, position.up(i3)))
 			 		{

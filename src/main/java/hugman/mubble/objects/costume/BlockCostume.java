@@ -61,17 +61,20 @@ public class BlockCostume extends BlockItem
     		GameRenderer renderer = Minecraft.getInstance().gameRenderer;
     		ShaderGroup shaderGroup = renderer.getShaderGroup();
     		ResourceLocation shader = this.getShader();
-			if(shaderGroup != null)
-			{
-				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
-				{
-					renderer.loadShader(shader);
-				}
-			}
-			else
-			{
-				renderer.loadShader(shader);
-			}
+    		if(shader != null)
+    		{
+    			if(shaderGroup != null)
+    			{
+    				if(!shaderGroup.getShaderGroupName().equals(shader.toString()))
+    				{
+    					renderer.loadShader(shader);
+    				}
+    			}
+    			else
+    			{
+    				renderer.loadShader(shader);
+    			}
+    		}
     	}
     }
 	

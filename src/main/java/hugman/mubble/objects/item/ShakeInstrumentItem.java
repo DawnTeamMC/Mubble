@@ -32,7 +32,6 @@ public class ShakeInstrumentItem extends InstrumentItem
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn)
     {
-    	playerIn.swingArm(handIn);
 		return new ActionResult<ItemStack>(ActionResultType.SUCCESS, playerIn.getHeldItem(handIn));
     }
 }

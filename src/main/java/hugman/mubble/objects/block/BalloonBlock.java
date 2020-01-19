@@ -15,7 +15,7 @@ public class BalloonBlock extends FlyingBlock
 {
     public BalloonBlock(DyeColor color)
     {
-        super(Properties.create(Material.WOOL, color).hardnessAndResistance(0F).sound(SoundType.CLOTH));
+        super(Properties.create(Material.WOOL, color).hardnessAndResistance(0F).sound(SoundType.CLOTH).nonOpaque());
     }
     
     @Override

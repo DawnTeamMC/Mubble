@@ -27,7 +27,7 @@ public class CloudBlock extends AbstractGlassBlock implements IBeaconBeamColorPr
 	
     public CloudBlock(DyeColor colorIn)
     {
-        super(Properties.create(Material.PLANTS, colorIn).sound(SoundType.CLOTH).hardnessAndResistance(0f).doesNotBlockMovement());
+        super(Properties.create(Material.PLANTS, colorIn).sound(SoundType.CLOTH).hardnessAndResistance(0f).doesNotBlockMovement().nonOpaque());
     	this.color = colorIn;
     }
 
