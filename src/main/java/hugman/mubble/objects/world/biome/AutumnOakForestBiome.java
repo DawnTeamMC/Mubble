@@ -2,8 +2,7 @@ package hugman.mubble.objects.world.biome;
 
 import com.google.common.collect.ImmutableList;
 
-import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.world.MubbleFeatures;
+import hugman.mubble.init.world.MubbleFeatureConfigs;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
@@ -18,9 +17,6 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
-import net.minecraft.world.gen.placer.SimpleBlockPlacer;
-import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class AutumnOakForestBiome extends Biome
@@ -48,13 +44,13 @@ public class AutumnOakForestBiome extends Biome
 		DefaultBiomeFeatures.addMineables(this);
 		DefaultBiomeFeatures.addDefaultOres(this);
 		DefaultBiomeFeatures.addDefaultDisks(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_CONFIG).withChance(0.2F), MubbleFeatures.TALL_AUTUMN_OAK_TREE.configure(MubbleFeatures.Config.TALL_AUTUMN_OAK_TREE).withChance(0.1F)), MubbleFeatures.AUTUMN_OAK_TREE.configure(MubbleFeatures.Config.AUTUMN_OAK_TREE).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(10, 0.1F, 1))))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(Feature.NORMAL_TREE.configure(DefaultBiomeFeatures.OAK_TREE_WITH_MORE_BEEHIVES_CONFIG).withChance(0.2F), Feature.FANCY_TREE.configure(MubbleFeatureConfigs.FANCY_AUTUMN_OAK_BEEHIVED_CONFIG).withChance(0.1F)), Feature.NORMAL_TREE.configure(MubbleFeatureConfigs.AUTUMN_OAK_TREE_BEEHIVED_CONFIG).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(10, 0.1F, 1))))));
 		DefaultBiomeFeatures.addDefaultFlowers(this);
 		DefaultBiomeFeatures.addForestGrass(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.AUTUMN_OAK_LEAF_PILE.getDefaultState()), new SimpleBlockPlacer()).build()).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.AUTUMN_OAK_LEAF_PILE_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatures.Config.YELLOW_MUSHROOM).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatures.Config.ORANGE_MUSHROOM).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.YELLOW_MUSHROOM_CONFIG).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.ORANGE_MUSHROOM_CONFIG).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
 		DefaultBiomeFeatures.addDefaultVegetation(this);
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addFrozenTopLayer(this);

@@ -2,15 +2,12 @@ package hugman.mubble.objects.world.biome;
 
 import com.google.common.collect.ImmutableList;
 
-import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.world.MubbleFeatures;
-import net.minecraft.block.SweetBerryBushBlock;
+import hugman.mubble.init.world.MubbleFeatureConfigs;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
@@ -19,9 +16,6 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.MineshaftFeature;
 import net.minecraft.world.gen.feature.MineshaftFeatureConfig;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
-import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
-import net.minecraft.world.gen.placer.SimpleBlockPlacer;
-import net.minecraft.world.gen.stateprovider.SimpleStateProvider;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class PressGardenBiome extends Biome
@@ -46,17 +40,16 @@ public class PressGardenBiome extends Biome
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		DefaultBiomeFeatures.addDungeons(this);
 		DefaultBiomeFeatures.addLargeFerns(this);
-	    this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(MubbleFeatures.PINK_PRESS_GARDEN_TREE.configure(MubbleFeatures.Config.PINK_PRESS_GARDEN_TREE).withChance(0.1F), MubbleFeatures.PINK_PRESS_GARDEN_GROUND_BUSH.configure(MubbleFeatures.Config.PINK_PRESS_GARDEN_GROUND_BUSH).withChance(0.3F), MubbleFeatures.MEGA_RED_PRESS_GARDEN_TREE.configure(MubbleFeatures.Config.MEGA_RED_PRESS_GARDEN_TREE).withChance(0.6F)), MubbleFeatures.RED_PRESS_GARDEN_TREE.configure(MubbleFeatures.Config.RED_PRESS_GARDEN_TREE).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(50, 0.1F, 1))))));
+	    this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(Feature.NORMAL_TREE.configure(MubbleFeatureConfigs.PINK_PRESS_GARDEN_TREE_CONFIG).withChance(0.1F), Feature.JUNGLE_GROUND_BUSH.configure(MubbleFeatureConfigs.PINK_PRESS_GARDEN_GROUND_BUSH_CONFIG).withChance(0.3F), Feature.MEGA_JUNGLE_TREE.configure(MubbleFeatureConfigs.MEGA_RED_PRESS_GARDEN_TREE_CONFIG).withChance(0.6F)), Feature.NORMAL_TREE.configure(MubbleFeatureConfigs.RED_PRESS_GARDEN_TREE_CONFIG).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(50, 0.1F, 1))))));
 		DefaultBiomeFeatures.addMineables(this);
 		DefaultBiomeFeatures.addDefaultOres(this);
 		DefaultBiomeFeatures.addDefaultDisks(this);
 		DefaultBiomeFeatures.addDefaultFlowers(this);
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
 		DefaultBiomeFeatures.addDefaultVegetation(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.RED_PRESS_GARDEN_LEAF_PILE.getDefaultState()), new SimpleBlockPlacer()).build()).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.PINK_PRESS_GARDEN_LEAF_PILE.getDefaultState()), new SimpleBlockPlacer()).build()).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(2))));
-	 	this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleFeatures.BLUEBERRY_BUSH.configure(new RandomPatchFeatureConfig.Builder(new SimpleStateProvider(MubbleBlocks.BLUEBERRY_BUSH.getDefaultState().with(SweetBerryBushBlock.AGE, Integer.valueOf(3))), new SimpleBlockPlacer()).build()).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(12))));
-	 	this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleFeatures.TOMATOES.configure(FeatureConfig.DEFAULT).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(1))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.RED_PRESS_GARDEN_LEAF_PILE_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.PINK_PRESS_GARDEN_LEAF_PILE_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(2))));
+	 	this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.BLUEBLERRY_BUSH_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(1))));
 	 	DefaultBiomeFeatures.addFrozenTopLayer(this);
 	 	this.addSpawn(EntityCategory.CREATURE, new Biome.SpawnEntry(EntityType.SHEEP, 12, 4, 4));
 	 	this.addSpawn(EntityCategory.CREATURE, new Biome.SpawnEntry(EntityType.PIG, 10, 4, 4));

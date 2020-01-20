@@ -2,6 +2,7 @@ package hugman.mubble.objects.world.feature.tree;
 
 import java.util.Random;
 
+import hugman.mubble.init.world.MubbleFeatureConfigs;
 import hugman.mubble.init.world.MubbleFeatures;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
@@ -12,6 +13,6 @@ public class PalmTree extends SaplingGenerator
 	@Override
 	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl)
 	{
-		return MubbleFeatures.PALM_TREE.configure(MubbleFeatures.Config.PALM_TREE);
+		return MubbleFeatures.PALM_TREE.configure(MubbleFeatureConfigs.PALM_TREE_CONFIG);
 	}
 }

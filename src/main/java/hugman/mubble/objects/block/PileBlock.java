@@ -10,6 +10,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldView;
 
 public class PileBlock extends PlantBlock
 {
@@ -36,6 +37,12 @@ public class PileBlock extends PlantBlock
     public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
     {
         return !stateIn.canPlaceAt(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : super.getStateForNeighborUpdate(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+    }
+    
+    @Override
+    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
+    {
+    	return !world.isAir(pos.down());
     }
     
     @Override

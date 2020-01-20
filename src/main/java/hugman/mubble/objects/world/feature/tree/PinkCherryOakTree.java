@@ -2,16 +2,17 @@ package hugman.mubble.objects.world.feature.tree;
 
 import java.util.Random;
 
-import hugman.mubble.init.world.MubbleFeatures;
+import hugman.mubble.init.world.MubbleFeatureConfigs;
 import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
 
 public class PinkCherryOakTree extends SaplingGenerator
 {
 	@Override
 	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl)
 	{
-		return random.nextInt(10) == 0 ? MubbleFeatures.TALL_PINK_CHERRY_OAK_TREE.configure(MubbleFeatures.Config.TALL_PINK_CHERRY_OAK_TREE) : MubbleFeatures.PINK_CHERRY_OAK_TREE.configure(MubbleFeatures.Config.PINK_CHERRY_OAK_TREE);
+		return random.nextInt(10) == 0 ? Feature.FANCY_TREE.configure(MubbleFeatureConfigs.FANCY_PINK_CHERRY_OAK_TREE_CONFIG) : Feature.NORMAL_TREE.configure(MubbleFeatureConfigs.PINK_CHERRY_OAK_TREE_CONFIG);
 	}
 }

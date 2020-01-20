@@ -21,11 +21,11 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 	}
 
 	@Override
-	public boolean generate(ModifiableTestableWorld worldIn, Random rand, BlockPos position, Set<BlockPos> changedBlocks, Set<BlockPos> leaves, BlockBox boundingBox, BranchedTreeFeatureConfig config)
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos position, Set<BlockPos> changedLogs, Set<BlockPos> changedLeaves, BlockBox boundingBox, BranchedTreeFeatureConfig config)
 	{
-		int i = rand.nextInt(4) + 17;
+		int i = rand.nextInt(config.heightRandA) + config.baseHeight;
 		boolean flag = true;
-		if(position.getY() >= 1 && position.getY() + i + 1 <= worldIn.getTopPosition(Heightmap.Type.WORLD_SURFACE, position).getY())
+		if(position.getY() >= 1 && position.getY() + i + 1 <= world.getTopPosition(Heightmap.Type.WORLD_SURFACE, position).getY())
 		{
 			for(int j = position.getY(); j <= position.getY() + 1 + i; ++j)
 			{
@@ -43,9 +43,9 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 	            {
 	            	for(int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1)
 	            	{
-	            		if (j >= 0 && j < worldIn.getTopPosition(Heightmap.Type.WORLD_SURFACE, position).getY())
+	            		if (j >= 0 && j < world.getTopPosition(Heightmap.Type.WORLD_SURFACE, position).getY())
 	            		{
-	            			if (!canTreeReplace(worldIn, blockpos$mutableblockpos.set(l, j, i1)))
+	            			if (!canTreeReplace(world, blockpos$mutableblockpos.set(l, j, i1)))
 	            			{
 	            				flag = false;
 	            			}
@@ -59,89 +59,63 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 	        {
 				return false;
 	        }
-			else if(isDirtOrGrass(worldIn, position.down()) && position.getY() < worldIn.getTopPosition(Heightmap.Type.WORLD_SURFACE, position).getY() - i - 1)
+			else if(isNaturalDirtOrGrass(world, position.down()) && position.getY() < world.getTopPosition(Heightmap.Type.WORLD_SURFACE, position).getY() - i - 1)
 			{
-				int originX = position.getX();
-		 		int originY = position.getY() + i - 1;
-		 		int originZ = position.getZ();
-		 		this.setToDirt(worldIn, position);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY + 1, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 1, originY + 1, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 1, originY + 1, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY + 1, originZ + 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY + 1, originZ - 1, boundingBox, config);
-		 		
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 1, originY, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 1, originY, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY, originZ + 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY, originZ - 1, boundingBox, config);
-		 		
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 1, originY, originZ + 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 1, originY, originZ - 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 1, originY, originZ + 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 1, originY, originZ - 1, boundingBox, config);
-		 		
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY, originZ + 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY, originZ - 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY, originZ + 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY, originZ - 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 1, originY, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 1, originY, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY, originZ - 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 1, originY, originZ - 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 1, originY, originZ - 2, boundingBox, config);
-		 		
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY - 1, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY - 1, originZ + 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY - 1, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY - 1, originZ - 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY - 1, originZ - 2, boundingBox, config);
-		 		
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY - 1, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY - 1, originZ + 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY - 1, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY - 1, originZ - 1, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY - 1, originZ - 2, boundingBox, config);
+				BlockPos pos = position.add(0, i - 1, 0);
+		 		setToDirt(world, position.down());
+		 		setLeavesBlockState(world, rand, pos.add(0, 1, 0), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(1, 1, 0), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-1, 1, 0), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(0, 1, 1), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(0, 1, -1), changedLeaves, boundingBox, config);
 
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY - 1, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 1, originY - 1, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY - 1, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 1, originY - 1, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY - 1, originZ + 2, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(1, 0, 0), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-1, 0, 0), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(0, 0, 1), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(0, 0, -1), changedLeaves, boundingBox, config);
 		 		
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY - 1, originZ - 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 1, originY - 1, originZ - 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY - 1, originZ - 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 1, originY - 1, originZ - 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY - 1, originZ - 2, boundingBox, config);
-		 		
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY - 2, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 2, originY - 2, originZ - 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY - 2, originZ + 2, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 2, originY - 2, originZ - 2, boundingBox, config);
-		 		
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 3, originY - 1, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 3, originY - 1, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY - 1, originZ + 3, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY - 1, originZ - 3, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(1, 0, 1), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(1, 0, -1), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-1, 0, 1), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-1, 0, -1), changedLeaves, boundingBox, config);
 
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 3, originY - 2, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 3, originY - 2, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY - 2, originZ + 3, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY - 2, originZ - 3, boundingBox, config);
-		 		
-		 		placeLeaves(changedBlocks, worldIn, rand, originX + 3, originY - 3, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX - 3, originY - 3, originZ, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY - 3, originZ + 3, boundingBox, config);
-		 		placeLeaves(changedBlocks, worldIn, rand, originX, originY - 3, originZ - 3, boundingBox, config);
-			 	for(int i3 = 0; i3 < i; ++i3)
+		 		setLeavesBlockState(world, rand, pos.add(2, 0, 0), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(2, 0, 1), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(2, 0, -1), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-2, 0, 0), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-2, 0, 1), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-2, 0, -1), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(0, 0, 2), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(1, 0, 2), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-1, 0, 2), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(0, 0, -2), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(1, 0, -2), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-1, 0, -2), changedLeaves, boundingBox, config);
+
+		 		for (int i1 = -2; i1 <= 2; i1++)
+		 		{
+			 		setLeavesBlockState(world, rand, pos.add(2, -1, i1), changedLeaves, boundingBox, config);
+			 		setLeavesBlockState(world, rand, pos.add(-2, -1, i1), changedLeaves, boundingBox, config);
+			 		setLeavesBlockState(world, rand, pos.add(i1, -1, 2), changedLeaves, boundingBox, config);
+			 		setLeavesBlockState(world, rand, pos.add(i1, -1, -2), changedLeaves, boundingBox, config);
+		 		}
+		 		setLeavesBlockState(world, rand, pos.add(2, -2, 2), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(2, -2, -2), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-2, -2, 2), changedLeaves, boundingBox, config);
+		 		setLeavesBlockState(world, rand, pos.add(-2, -2, -2), changedLeaves, boundingBox, config);
+
+		 		for (int i2 = -3; i2 <= -1; i2++)
+		 		{
+			 		setLeavesBlockState(world, rand, pos.add(3, i2, 0), changedLeaves, boundingBox, config);
+			 		setLeavesBlockState(world, rand, pos.add(-3, i2, 0), changedLeaves, boundingBox, config);
+			 		setLeavesBlockState(world, rand, pos.add(0, i2, 3), changedLeaves, boundingBox, config);
+			 		setLeavesBlockState(world, rand, pos.add(0, i2, -3), changedLeaves, boundingBox, config);
+		 		}
+			 	for(int i3 = 0; i3 < i; i3++)
 			 	{
-			 		if(isAirOrLeaves(worldIn, position.up(i3)) || isReplaceablePlant(worldIn, position.up(i3)))
+			 		if(isAirOrLeaves(world, position.up(i3)) || isReplaceablePlant(world, position.up(i3)))
 			 		{
-			 			this.setLogBlockState(worldIn, rand, position.up(i3), changedBlocks, boundingBox, config);
+			 			setLogBlockState(world, rand, position.up(i3), changedLogs, boundingBox, config);
 			 		}
 			 	}
 			}
@@ -151,14 +125,5 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 			return false;
 		}
 		return flag;
-	}
-	
-	public void placeLeaves(Set<BlockPos> changedBlocks, ModifiableTestableWorld worldIn, Random random, int x, int y, int z, BlockBox boundingBox, BranchedTreeFeatureConfig config)
-	{
-		BlockPos blockPos = new BlockPos(x, y, z);
-		if (isAirOrLeaves(worldIn, blockPos) || isReplaceablePlant(worldIn, blockPos))
-		{
-			this.setLogBlockState(worldIn, random, blockPos, changedBlocks, boundingBox, config);
-		}
 	}
 }
