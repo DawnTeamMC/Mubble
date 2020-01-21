@@ -3,34 +3,33 @@ package hugman.mubble.objects.entity.render;
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.GoombaEntity;
 import hugman.mubble.objects.entity.render.model.GoombaModel;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.util.Identifier;
 
-@OnlyIn(Dist.CLIENT)
-public class GoombaRenderer extends MobRenderer<GoombaEntity, GoombaModel<GoombaEntity>>
+@Environment(EnvType.CLIENT)
+public class GoombaRenderer extends MobEntityRenderer<GoombaEntity, GoombaModel<GoombaEntity>>
 {
-    private static final ResourceLocation NORMAL_GOOMBA_TEXTURES = new ResourceLocation(Mubble.MOD_ID + ":textures/entity/goomba/normal.png");
-    private static final ResourceLocation GOLDEN_GOOMBA_TEXTURES = new ResourceLocation(Mubble.MOD_ID + ":textures/entity/goomba/golden.png");
+    private static final Identifier NORMAL_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/goomba/normal.png");
+    private static final Identifier GOLDEN_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/goomba/golden.png");
 	
-	public GoombaRenderer(EntityRendererManager manager)
+	public GoombaRenderer(EntityRenderDispatcher dispatcher)
 	{
-		super(manager, new GoombaModel<>(), 0.5F);
+		super(dispatcher, new GoombaModel<>(), 0.5F);
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(GoombaEntity entity)
+	public Identifier getTexture(GoombaEntity entity)
     {
 		switch(entity.getVariant())
 		{
-        case 0:
-            return NORMAL_GOOMBA_TEXTURES;
-        case 1:
-            return GOLDEN_GOOMBA_TEXTURES;
-        default:
-        	return NORMAL_GOOMBA_TEXTURES;
+		default:
+    	case 0:
+    		return NORMAL_GOOMBA_TEXTURES;
+    	case 1:
+    		return GOLDEN_GOOMBA_TEXTURES;
 		}
-	}
+    }
 }
