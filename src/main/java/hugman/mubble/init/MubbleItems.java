@@ -13,7 +13,6 @@ import hugman.mubble.objects.item.SmashBallItem;
 import hugman.mubble.objects.item.SuperStarItem;
 import hugman.mubble.objects.item.TotemOfAscendingItem;
 import hugman.mubble.util.MubbleItemTier;
-import hugman.mubble.util.MubbleRarity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -79,22 +78,22 @@ public class MubbleItems
     public static final Item SMASH_BALL = register("smash_ball", new SmashBallItem(new Item.Settings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE)));
     
     /* STAR WARS */
-    public static final Item WHITE_LIGHTSABER = register("white_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item LIGHT_GRAY_LIGHTSABER = register("light_gray_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item GRAY_LIGHTSABER = register("gray_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item BLACK_LIGHTSABER = register("black_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item BROWN_LIGHTSABER = register("brown_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item RED_LIGHTSABER = register("red_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item ORANGE_LIGHTSABER = register("orange_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item YELLOW_LIGHTSABER = register("yellow_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item LIME_LIGHTSABER = register("lime_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item GREEN_LIGHTSABER = register("green_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item CYAN_LIGHTSABER = register("cyan_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item LIGHT_BLUE_LIGHTSABER = register("light_blue_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item BLUE_LIGHTSABER = register("blue_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item PURPLE_LIGHTSABER = register("purple_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item MAGENTA_LIGHTSABER = register("magenta_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
-    public static final Item PINK_LIGHTSABER = register("pink_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(MubbleRarity.LEGENDARY)));
+    public static final Item WHITE_LIGHTSABER = register("white_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item LIGHT_GRAY_LIGHTSABER = register("light_gray_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item GRAY_LIGHTSABER = register("gray_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item BLACK_LIGHTSABER = register("black_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item BROWN_LIGHTSABER = register("brown_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item RED_LIGHTSABER = register("red_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item ORANGE_LIGHTSABER = register("orange_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item YELLOW_LIGHTSABER = register("yellow_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item LIME_LIGHTSABER = register("lime_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item GREEN_LIGHTSABER = register("green_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item CYAN_LIGHTSABER = register("cyan_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item LIGHT_BLUE_LIGHTSABER = register("light_blue_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item BLUE_LIGHTSABER = register("blue_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item PURPLE_LIGHTSABER = register("purple_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item MAGENTA_LIGHTSABER = register("magenta_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
+    public static final Item PINK_LIGHTSABER = register("pink_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC)));
 
     /* SPECIAL */
     public static final Item CHINCHO_SPAWN_EGG = register("chincho_spawn_egg", new SpawnEggItem(MubbleEntities.CHINCHO, 7527671, 4903, new Item.Settings().group(ItemGroup.MISC)));

@@ -40,13 +40,7 @@ public class PileBlock extends PlantBlock
     }
     
     @Override
-    public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-    {
-    	return !world.isAir(pos.down());
-    }
-    
-    @Override
-    public boolean canPlantOnTop(BlockState state, BlockView worldIn, BlockPos pos)
+    public boolean canPlaceAt(BlockState state, WorldView worldIn, BlockPos pos)
     {
         BlockPos blockpos = pos.offset(Direction.DOWN);
         BlockState blockstate = worldIn.getBlockState(blockpos);
