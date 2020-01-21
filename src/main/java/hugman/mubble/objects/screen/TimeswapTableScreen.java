@@ -9,7 +9,7 @@ import hugman.mubble.objects.container.TimeswapTableContainer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen;
+import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
@@ -21,7 +21,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class TimeswapTableScreen extends AbstractContainerScreen<TimeswapTableContainer>
+public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 {
 	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");
 	private static final Identifier BACKGROUND_TEXTURE = new Identifier(Mubble.MOD_ID, "textures/gui/container/timeswap_table.png");
