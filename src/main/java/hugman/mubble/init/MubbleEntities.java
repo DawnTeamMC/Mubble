@@ -10,8 +10,10 @@ import hugman.mubble.objects.entity.FlyingBlockEntity;
 import hugman.mubble.objects.entity.GoombaEntity;
 import hugman.mubble.objects.entity.ToadEntity;
 import hugman.mubble.objects.entity.ZombieCowmanEntity;
+import hugman.mubble.objects.entity.render.ChinchoRenderer;
 import hugman.mubble.objects.entity.render.CustomTNTRenderer;
 import hugman.mubble.objects.entity.render.FlyingBlockRenderer;
+import hugman.mubble.objects.entity.render.GoombaRenderer;
 import hugman.mubble.objects.entity.render.ToadRenderer;
 import hugman.mubble.objects.entity.render.ZombieCowmanRenderer;
 import net.minecraft.client.Minecraft;
@@ -58,8 +60,8 @@ public class MubbleEntities
     	manager.register(ZOMBIE_COWMAN, new ZombieCowmanRenderer(manager));
     	manager.register(CUSTOM_TNT, new CustomTNTRenderer(manager));
     	manager.register(FLYING_BLOCK, new FlyingBlockRenderer(manager));
-    	//manager.register(CHINCHO, new ChinchoRenderer(manager));
-    	//manager.register(GOOMBA, new GoombaRenderer(manager));
+    	manager.register(CHINCHO, new ChinchoRenderer(manager));
+    	manager.register(GOOMBA, new GoombaRenderer(manager));
     	manager.register(TOAD, new ToadRenderer(manager));
     }
 }

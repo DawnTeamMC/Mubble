@@ -19,6 +19,10 @@ import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SEntityVelocityPacket;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundEvent;
@@ -30,7 +34,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class GoombaEntity extends MonsterEntity
-{    
+{
+	private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(ToadEntity.class, DataSerializers.VARINT);
+	
     public GoombaEntity(EntityType<? extends GoombaEntity> type, World worldIn) 
     {
         super(type, worldIn);
@@ -90,12 +96,43 @@ public class GoombaEntity extends MonsterEntity
     	 this.playSound(this.getStepSound(), 0.15F, 1.0F);
 	}
     
+    public int getVariant()
+    {
+    	return this.dataManager.get(VARIANT);
+	}
+
+	public void setVariant(int variantIn)
+	{
+		this.dataManager.set(VARIANT, variantIn);
+	}
+	
+	@Override
+	protected void registerData()
+	{
+		super.registerData();
+		this.dataManager.register(VARIANT, 0);
+	}
+    
+    @Override
+    public void writeAdditional(CompoundNBT compound)
+    {
+        super.writeAdditional(compound);
+        compound.putInt("Variant", this.getVariant());
+    }
+
+    @Override
+    public void readAdditional(CompoundNBT compound)
+    {
+        super.readAdditional(compound);
+        this.setVariant(compound.getInt("Variant"));
+    }
+    
     @Override
     public void onCollideWithPlayer(PlayerEntity playerIn)
     {
     	AxisAlignedBB hitbox = this.getBoundingBox().contract(0, -1, 0).grow(-0.4, 0, -0.4);
     	Vec3d vec3d = playerIn.getMotion();
-    	if(!this.world.isRemote() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && vec3d.y < 0.3D && !this.dead)
+    	if(!this.world.isRemote() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && vec3d.y < 0.3D && this.isAlive())
     	{
     		playerIn.setMotion(vec3d.x, 0.5D, vec3d.z);
 			((ServerPlayerEntity)playerIn).connection.sendPacket(new SEntityVelocityPacket(playerIn));

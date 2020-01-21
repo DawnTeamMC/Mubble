@@ -25,6 +25,7 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -74,6 +75,7 @@ public class ToadEntity extends AnimalEntity
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.4D, false, TEMPTATION_ITEMS));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(4, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
+        this.goalSelector.addGoal(4, new LookAtGoal(this, BeeEntity.class, 10.0F, 0.08F));
         this.goalSelector.addGoal(5, new LookAtGoal(this, ChickenEntity.class, 10.0F));
         this.goalSelector.addGoal(6, new LookAtGoal(this, this.getClass(), 8.0F));
         this.goalSelector.addGoal(7, new LookAtGoal(this, PlayerEntity.class, 6.0F));
@@ -92,7 +94,7 @@ public class ToadEntity extends AnimalEntity
     public float getEyeHeight(Pose pose)
     {
     	if(this.isChild()) return 0.75f;
-        return 1.25f;
+        return 1.35f;
     }
     
     @Override

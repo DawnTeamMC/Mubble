@@ -30,8 +30,6 @@ public class MubbleRenderLayers
 		cutoutBlockItems.add(MubbleBlocks.FLOWER_PILES);
 		cutoutBlockItems.add(MubbleBlocks.DOORS);
 		cutoutBlockItems.add(MubbleBlocks.TRAPDOORS);
-		cutoutBlockItems.add(MubbleBlocks.BALLOONS);
-		cutoutBlockItems.add(MubbleBlocks.CLOUD_BLOCKS);
 		RenderTypeLookup.setRenderLayer(MubbleBlocks.FLUID_TANK, typeC);
 		RenderTypeLookup.setRenderLayer(MubbleBlocks.BLACK_PRESENT, typeC);
 		RenderTypeLookup.setRenderLayer(MubbleBlocks.BLUE_PRESENT, typeC);
@@ -48,6 +46,8 @@ public class MubbleRenderLayers
 		RenderTypeLookup.setRenderLayer(MubbleBlocks.SALAD, typeC);
 		RenderTypeLookup.setRenderLayer(MubbleBlocks.BLUEBERRY_BUSH, typeC);
 		RenderTypeLookup.setRenderLayer(MubbleBlocks.TETRIS_GLASS, typeC);
+		translucentBlockItems.add(MubbleBlocks.BALLOONS);
+		translucentBlockItems.add(MubbleBlocks.CLOUD_BLOCKS);
     	
     	for(List<BlockItem> list : cutoutMippedBlockItems)
     	{

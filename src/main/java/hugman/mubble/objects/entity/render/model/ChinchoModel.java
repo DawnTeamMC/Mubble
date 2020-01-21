@@ -1,90 +1,70 @@
 package hugman.mubble.objects.entity.render.model;
 
-import net.minecraft.client.renderer.entity.model.EntityModel;
-import net.minecraft.client.renderer.model.ModelRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
+import com.google.common.collect.ImmutableList;
 
-public class ChinchoModel<T extends Entity> extends EntityModel<T>
+import net.minecraft.client.renderer.entity.model.BipedModel;
+import net.minecraft.client.renderer.model.ModelRenderer;
+import net.minecraft.entity.LivingEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+@OnlyIn(Dist.CLIENT)
+public class ChinchoModel<T extends LivingEntity> extends BipedModel<T>
 {
-    public ModelRenderer head;
-    public ModelRenderer body;
-    public ModelRenderer right_arm;
-    public ModelRenderer left_arm;
-    public ModelRenderer right_leg;
-    public ModelRenderer left_leg;
-    public ModelRenderer right_teeth;
-    public ModelRenderer middle_teeth;
-    public ModelRenderer left_teeth;
+    public ModelRenderer rightTeeth;
+    public ModelRenderer middleTeeth;
+    public ModelRenderer leftTeeth;
 
     public ChinchoModel()
     {
-        this.textureWidth = 64;
-        this.textureHeight = 64;
-        this.head = new ModelRenderer(this, 0, 0);
-        this.head.setRotationPoint(0.0F, 13.0F, 0.0F);
-        this.head.addCuboid(-4.0F, -8.0F, -4.0F, 8, 8, 8, 0.0F);
-        this.body = new ModelRenderer(this, 16, 16);
-        this.body.setRotationPoint(0.0F, 8.0F, 0.0F);
-        this.body.addCuboid(-4.0F, 5.0F, -2F, 8, 7, 4, 0.0F);
-        this.right_teeth = new ModelRenderer(this, 0, 24);
-        this.right_teeth.setRotationPoint(0.0F, 13.0F, 0.0F);
-        this.right_teeth.addCuboid(1.8F, -2.0F, -5.0F, 3, 3, 2, 0.0F);
-        this.middle_teeth = new ModelRenderer(this, 0, 34);
-        this.middle_teeth.setRotationPoint(0.0F, 13.0F, 0.0F);
-        this.middle_teeth.addCuboid(-1.5F, -2.0F, -5.0F, 3, 3, 2, 0.0F);
-        this.left_teeth = new ModelRenderer(this, 0, 29);
-        this.left_teeth.setRotationPoint(0.0F, 13.0F, 0.0F);
-        this.left_teeth.addCuboid(-4.8F, -2.0F, -5.0F, 3, 3, 2, 0.0F);
-        this.right_arm = new ModelRenderer(this, 40, 16);
-        this.right_arm.setRotationPoint(-5.0F, 15.0F, 0.0F);
-        this.right_arm.addCuboid(-2.0F, -2.0F, -2.0F, 3, 6, 4, 0.0F);
-        this.left_arm = new ModelRenderer(this, 40, 16);
-        this.left_arm.mirror = true;
-        this.left_arm.setRotationPoint(5.0F, 15.0F, 0.0F);
-        this.left_arm.addCuboid(-1.0F, -2.0F, -2.0F, 3, 6, 4, 0.0F);
-        this.right_leg = new ModelRenderer(this, 0, 16);
-        this.right_leg.setRotationPoint(-2F, 17.0F, 0.0F);
-        this.right_leg.addCuboid(-2.0F, 3.0F, -2.0F, 4, 4, 4, 0.0F);
-        this.left_leg = new ModelRenderer(this, 0, 16);
-        this.left_leg.mirror = true;
-        this.left_leg.setRotationPoint(2F, 17.0F, 0.0F);
-        this.left_leg.addCuboid(-2.0F, 3.0F, -2.0F, 4, 4, 4, 0.0F);
-    }
-
-    @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-    { 
-        this.right_arm.render(f5);
-        this.left_arm.render(f5);
-        this.left_leg.render(f5);
-        this.middle_teeth.render(f5);
-        this.body.render(f5);
-        this.right_leg.render(f5);
-        this.right_teeth.render(f5);
-        this.head.render(f5);
-        this.left_teeth.render(f5);
+        super(0.0F, 8.0F, 64, 64);
+        this.bipedHead = new ModelRenderer(this, 0, 0);
+        this.bipedHead.addCuboid(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F);
+        this.bipedBody = new ModelRenderer(this, 16, 16);
+        this.bipedBody.addCuboid(-4.0F, 5.0F, -2.0F, 8.0F, 7.0F, 4.0F, 0.0F);
+        this.rightTeeth = new ModelRenderer(this, 0, 24);
+        this.rightTeeth.addCuboid(1.8F, -2.0F, -5.0F, 3.0F, 3.0F, 2.0F, 0.0F);
+        this.middleTeeth = new ModelRenderer(this, 0, 34);
+        this.middleTeeth.addCuboid(-1.5F, -2.0F, -5.0F, 3.0F, 3.0F, 2.0F, 0.0F);
+        this.leftTeeth = new ModelRenderer(this, 0, 29);
+        this.leftTeeth.addCuboid(-4.8F, -2.0F, -5.0F, 3.0F, 3.0F, 2.0F, 0.0F);
+        this.bipedRightArm = new ModelRenderer(this, 40, 16);
+        this.bipedRightArm.addCuboid(-2.0F, -2.0F, -2.0F, 3.0F, 6.0F, 4.0F, 0.0F);
+        this.bipedLeftArm = new ModelRenderer(this, 40, 16);
+        this.bipedLeftArm.mirror = true;
+        this.bipedLeftArm.addCuboid(-1.0F, -2.0F, -2.0F, 3.0F, 6.0F, 4.0F, 0.0F);
+        this.bipedRightLeg = new ModelRenderer(this, 0, 16);
+        this.bipedRightLeg.addCuboid(-2.0F, 3.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0.0F);
+        this.bipedLeftLeg = new ModelRenderer(this, 0, 16);
+        this.bipedLeftLeg.mirror = true;
+        this.bipedLeftLeg.addCuboid(-2.0F, 3.0F, -2.0F, 4.0F, 4.0F, 4.0F, 0.0F);
     }
     
     @Override
-    public void setAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
+    protected Iterable<ModelRenderer> getHeadParts()
     {
-        this.right_arm.rotateAngleX = 3.7699115F;
-        this.left_arm.rotateAngleX = 3.7699115F;
-        this.right_leg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-        this.left_leg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
-        this.right_leg.rotateAngleY = 0.0F;
-        this.left_leg.rotateAngleY = 0.0F;
-        this.right_leg.rotateAngleZ = 0.0F;
-        this.left_leg.rotateAngleZ = 0.0F;
-        
-    	this.head.rotateAngleY = netHeadYaw * 0.017453292F;
-    	this.head.rotateAngleX = headPitch * 0.017453292F;
-    	this.right_teeth.rotateAngleY = netHeadYaw * 0.017453292F;
-    	this.right_teeth.rotateAngleX = headPitch * 0.017453292F;
-    	this.middle_teeth.rotateAngleY = netHeadYaw * 0.017453292F;
-    	this.middle_teeth.rotateAngleX = headPitch * 0.017453292F;
-    	this.left_teeth.rotateAngleY = netHeadYaw * 0.017453292F;
-    	this.left_teeth.rotateAngleX = headPitch * 0.017453292F;
+        return ImmutableList.of(this.bipedHead, this.rightTeeth, this.middleTeeth, this.leftTeeth);
+    }
+    
+    @Override
+    protected Iterable<ModelRenderer> getBodyParts()
+    {
+        return ImmutableList.of(this.bipedBody, this.bipedRightArm, this.bipedLeftArm, this.bipedRightLeg, this.bipedLeftLeg, this.bipedHeadwear);
+    }
+    
+    @Override
+    public void setAngles(T entity, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_)
+    {
+    	super.setAngles(entity, p_225597_2_, p_225597_3_, p_225597_4_, p_225597_5_, p_225597_6_);
+        this.bipedHead.setRotationPoint(0.0F, 13.0F, 0.0F);
+        this.bipedBody.setRotationPoint(0.0F, 8.0F, 0.0F);
+        this.rightTeeth.copyModelAngles(this.bipedHead);
+        this.middleTeeth.copyModelAngles(this.bipedHead);
+        this.leftTeeth.copyModelAngles(this.bipedHead);
+        this.bipedRightArm.setRotationPoint(-5.0F, 15.0F, 0.0F);
+        this.bipedLeftArm.setRotationPoint(5.0F, 15.0F, 0.0F);
+        this.bipedRightLeg.setRotationPoint(-2F, 17.0F, 0.0F);
+        this.bipedLeftLeg.setRotationPoint(2F, 17.0F, 0.0F);
+    	
     }
 }
