@@ -9,11 +9,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 
 public class FlyingBlock extends Block
 {
@@ -38,7 +39,7 @@ public class FlyingBlock extends Block
     }
 
     @Override
-    public void randomDisplayTick(BlockState state, World worldIn, BlockPos pos, Random random)
+    public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
     {
         if(!worldIn.isClient) this.checkFlyable(worldIn, pos);
     }
@@ -60,7 +61,8 @@ public class FlyingBlock extends Block
 	{
 	}
     
-	public int tickRate(BlockView worldIn)
+	@Override
+	public int getTickRate(WorldView worldIn)
 	{
     	 return 2;
 	}

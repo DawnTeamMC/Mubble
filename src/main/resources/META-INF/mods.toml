@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[28,)"
+loaderVersion="[30,)"
 issueTrackerURL="https://github.com/Hugman76/Mubble/issues"
 logoFile="logo.png"
 
@@ -23,13 +23,13 @@ description='''
 [[dependencies.mubble]]
 modId="forge"
 mandatory=true
-versionRange="[28,)"
+versionRange="[30,)"
 ordering="NONE"
 side="BOTH"
 
 [[dependencies.mubble]]
 modId="minecraft"
 mandatory=true
-versionRange="[1.14.4]"
+versionRange="[1.15.1]"
 ordering="NONE"
 side="BOTH"

@@ -122,7 +122,7 @@ public class MubbleBlocks
     public static final Block DARK_PRISMARINE_VERTICAL_SLAB = register("dark_prismarine_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.DARK_PRISMARINE)), ItemGroup.BUILDING_BLOCKS, false);
     
     public static final Block DARK_PRISMARINE_WALL = register("dark_prismarine_wall", new WallBlock(Settings.copy(Blocks.DARK_PRISMARINE)), ItemGroup.DECORATIONS, false);
-
+    
     public static final Block OAK_LEAF_PILE = register("oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS, false, 60, 20);
     public static final Block SPRUCE_LEAF_PILE = register("spruce_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS, false, 60, 20);
     public static final Block BIRCH_LEAF_PILE = register("birch_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS, false, 60, 20);

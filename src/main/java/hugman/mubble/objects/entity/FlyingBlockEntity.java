@@ -88,6 +88,12 @@ public class FlyingBlockEntity extends Entity
 	}
 	
 	@Override
+	protected boolean canClimb()
+	{
+		return false;
+	}
+	
+	@Override
 	protected void initDataTracker()
 	{
 		this.dataTracker.startTracking(ORIGIN, BlockPos.ORIGIN);
@@ -222,7 +228,8 @@ public class FlyingBlockEntity extends Entity
 			this.setVelocity(this.getVelocity().multiply(0.98D));
 		}
 	}
-
+	
+	@Override
 	public boolean handleFallDamage(float distance, float damageMultiplier)
 	{
 		if (this.hurtEntities)

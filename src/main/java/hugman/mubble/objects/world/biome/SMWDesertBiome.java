@@ -2,8 +2,11 @@ package hugman.mubble.objects.world.biome;
 
 import com.google.common.collect.Lists;
 
+import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
+import hugman.mubble.init.data.MubbleBlockStateProperties;
 import hugman.mubble.init.world.MubbleSurfaceBuilders;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;
@@ -22,6 +25,9 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class SMWDesertBiome extends Biome
 {
+	private static final BlockState SMW_DESERT_TOP = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getDefaultState().with(MubbleBlockStateProperties.OVER, true);
+	private static final BlockState SMW_DESERT_DIRT = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getDefaultState().with(MubbleBlockStateProperties.OVER, false);
+	
 	public SMWDesertBiome()
 	{
 		super((new Biome.Settings()).configureSurfaceBuilder(SurfaceBuilder.DEFAULT, MubbleSurfaceBuilders.SMW_DESERT_SURFACE)
@@ -42,7 +48,7 @@ public class SMWDesertBiome extends Biome
 		DefaultBiomeFeatures.addDungeons(this);
 		DefaultBiomeFeatures.addMineables(this);
 		DefaultBiomeFeatures.addDefaultOres(this);
-		this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.DISK.configure(new DiskFeatureConfig(Blocks.GRAVEL.getDefaultState(), 6, 2, Lists.newArrayList(MubbleSurfaceBuilders.BlockStates.SMW_DESERT_TOP, MubbleSurfaceBuilders.BlockStates.SMW_DESERT_DIRT))).createDecoratedFeature(Decorator.COUNT_TOP_SOLID.configure(new CountDecoratorConfig(1))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.DISK.configure(new DiskFeatureConfig(Blocks.GRAVEL.getDefaultState(), 6, 2, Lists.newArrayList(SMW_DESERT_TOP, SMW_DESERT_DIRT))).createDecoratedFeature(Decorator.COUNT_TOP_SOLID.configure(new CountDecoratorConfig(1))));
 		DefaultBiomeFeatures.addDesertDeadBushes(this);
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
 		DefaultBiomeFeatures.addDefaultVegetation(this);

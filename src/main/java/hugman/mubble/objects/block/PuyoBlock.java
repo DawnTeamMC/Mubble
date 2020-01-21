@@ -18,14 +18,17 @@ public class PuyoBlock extends DirectionalBlock
     @Override
     public void onLandedUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
     {
-    	if (entityIn.isSneaking()) super.onLandedUpon(worldIn, pos, entityIn, fallDistance);
+    	if(entityIn.isSneaking())
+    	{
+    		super.onLandedUpon(worldIn, pos, entityIn, fallDistance);
+    	}
     	else entityIn.handleFallDamage(fallDistance, 0.0F);
     }
     
     @Override
     public void onEntityLand(BlockView worldIn, Entity entityIn)
     {
-    	if (entityIn.isSneaking())
+    	if(entityIn.isSneaking())
     	{
     		super.onEntityLand(worldIn, entityIn);
         }

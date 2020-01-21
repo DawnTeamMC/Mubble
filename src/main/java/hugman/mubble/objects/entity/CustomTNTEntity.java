@@ -92,7 +92,7 @@ public class CustomTNTEntity extends Entity
 	
 	private void explode()
 	{
-		this.world.createExplosion(this, this.getX(), this.getY() + (double)(this.getHeight() / 16.0F), this.getZ(), this.strenght, Explosion.DestructionType.BREAK);
+		this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), this.strenght, Explosion.DestructionType.BREAK);
 	}
 	
 	@Override

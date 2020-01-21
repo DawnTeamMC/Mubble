@@ -24,7 +24,7 @@ public class MubbleGenerators
 	{
 		for (Biome biome : Registry.BIOME)
 		{
-			if (!biome.getCategory().equals(Category.NETHER) && !biome.getCategory().equals(Category.THEEND))
+			if(!biome.getCategory().equals(Category.NETHER) && !biome.getCategory().equals(Category.THEEND))
 			{
 				biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, BLUNITE, 33)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(10, 0, 0, 80))));
 				biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, CARBONITE, 33)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(10, 0, 0, 80))));
@@ -48,7 +48,7 @@ public class MubbleGenerators
 	{
 		for (Biome biome : Registry.BIOME)
 		{
-			if (biome.getCategory().equals(Category.PLAINS))
+			if(biome.getCategory().equals(Category.PLAINS))
 			{
 				biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(MubbleEntities.TOAD, 10, 4, 4));
 			}

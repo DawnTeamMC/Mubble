@@ -19,6 +19,7 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
@@ -92,7 +93,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable
     }
 	
 	@Override
-	public void randomDisplayTick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
 	{
 		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
 		if(tileEntity instanceof PresentTileEntity)

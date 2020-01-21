@@ -83,8 +83,7 @@ public class BlockCostume extends BlockItem
 		@Override
 		public ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
 		{
-			ItemStack itemstack = ArmorItem.DISPENSER_BEHAVIOR.dispense(source, stack);
-			return itemstack.isEmpty() ? super.dispenseSilently(source, stack) : itemstack;
+			return ArmorItem.dispenseArmor(source, stack) ? stack : super.dispenseSilently(source, stack);
 		}
 	};
 	

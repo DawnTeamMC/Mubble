@@ -2,7 +2,7 @@ package hugman.mubble.objects.screen;
 
 import java.util.List;
 
-import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.container.TimeswapTableContainer;
@@ -48,7 +48,7 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 
 	protected void drawBackground(float partialTicks, int mouseX, int mouseY) {
 		this.renderBackground();
-		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
 		int i = this.x;
 		int j = this.y;
@@ -62,8 +62,10 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 		this.drawRecipesItems(l, i1, j1);
 	}
 
-	private void drawRecipesBackground(int mouseX, int mouseY, int left, int top, int recipeIndexOffsetMax) {
-		for (int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.container.getOutputItemsListSize(); ++i) {
+	private void drawRecipesBackground(int mouseX, int mouseY, int left, int top, int recipeIndexOffsetMax)
+	{
+		for (int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.container.getOutputItemsListSize(); ++i)
+		{
 			int j = i - this.recipeIndexOffset;
 			int k = left + j % 4 * 16;
 			int l = j / 4;
@@ -71,7 +73,9 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 			int j1 = this.containerHeight;
 			if (i == this.container.getSelectedOutputItem()) {
 				j1 += 18;
-			} else if (mouseX >= k && mouseY >= i1 && mouseX < k + 16 && mouseY < i1 + 18) {
+			}
+			else if(mouseX >= k && mouseY >= i1 && mouseX < k + 16 && mouseY < i1 + 18)
+			{
 				j1 += 36;
 			}
 
@@ -83,7 +87,8 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 	private void drawRecipesItems(int left, int top, int recipeIndexOffsetMax) {
 		List<Item> list = this.container.getOutputItemsList();
 
-		for (int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.container.getOutputItemsListSize(); ++i) {
+		for (int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.container.getOutputItemsListSize(); ++i)
+		{
 			int j = i - this.recipeIndexOffset;
 			int k = left + j % 4 * 16;
 			int l = j / 4;
@@ -92,14 +97,16 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 		}
 	}
 
-	public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
+	public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_)
+	{
 		this.clickedOnSroll = false;
 		if (this.hasItemsInInputSlot) {
 			int i = this.x + 52;
 			int j = this.y + 14;
 			int k = this.recipeIndexOffset + 12;
 
-			for (int l = this.recipeIndexOffset; l < k; ++l) {
+			for(int l = this.recipeIndexOffset; l < k; ++l)
+			{
 				int i1 = l - this.recipeIndexOffset;
 				double d0 = p_mouseClicked_1_ - (double) (i + i1 % 4 * 16);
 				double d1 = p_mouseClicked_3_ - (double) (j + i1 / 4 * 18);
@@ -130,13 +137,17 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 			this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
 			this.recipeIndexOffset = (int) ((double) (this.sliderProgress * (float) this.getHiddenRows()) + 0.5D) * 4;
 			return true;
-		} else {
+		}
+		else
+		{
 			return super.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_, p_mouseDragged_8_);
 		}
 	}
 
-	public boolean mouseScrolled(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double p_mouseScrolled_5_) {
-		if (this.canScroll()) {
+	public boolean mouseScrolled(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double p_mouseScrolled_5_)
+	{
+		if (this.canScroll())
+		{
 			int i = this.getHiddenRows();
 			this.sliderProgress = (float) ((double) this.sliderProgress - p_mouseScrolled_5_ / (double) i);
 			this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);

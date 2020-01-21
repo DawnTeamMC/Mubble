@@ -19,6 +19,7 @@ public class BalloonBlock extends FlyingBlock
     }
     
     @Environment(EnvType.CLIENT)
+    @Override
     public float getAmbientOcclusionLightLevel(BlockState state, BlockView worldIn, BlockPos pos)
     {
        return 1.0F;
@@ -29,18 +30,21 @@ public class BalloonBlock extends FlyingBlock
     {
     	return true;
 	}
-
-    public boolean causesSuffocation(BlockState state, BlockView worldIn, BlockPos pos)
+    
+    @Override
+    public boolean canSuffocate(BlockState state, BlockView worldIn, BlockPos pos)
     {
        return false;
     }
-
-    public boolean isNormalCube(BlockState state, BlockView worldIn, BlockPos pos)
+    
+    @Override
+    public boolean isSimpleFullBlock(BlockState state, BlockView worldIn, BlockPos pos)
     {
        return false;
     }
-
-    public boolean canEntitySpawn(BlockState state, BlockView worldIn, BlockPos pos, EntityType<?> type)
+    
+    @Override
+    public boolean allowsSpawning(BlockState state, BlockView worldIn, BlockPos pos, EntityType<?> type)
     {
        return false;
     }

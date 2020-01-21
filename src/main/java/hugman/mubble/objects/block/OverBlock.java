@@ -7,6 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
@@ -44,13 +45,13 @@ public class OverBlock extends Block
 	}
 	
 	@Override
-	public void randomDisplayTick(BlockState state, World worldIn, BlockPos pos, Random random)
+	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
-		if(!worldIn.isClient)
+		if(!world.isClient)
 		{
-			if(state.get(OVER) && isFaceAboveSolid(worldIn, pos))
+			if(state.get(OVER) && isFaceAboveSolid(world, pos))
 			{
-				worldIn.setBlockState(pos, state.cycle(OVER), 2);
+				world.setBlockState(pos, state.cycle(OVER), 2);
 			}
 		}
 	}

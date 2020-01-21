@@ -41,7 +41,7 @@ public class GrassBlock extends net.minecraft.block.GrassBlock
            if (!worldIn.isChunkLoaded(pos)) return;
            if (!canSurvive(state, worldIn, pos))
            {
-              worldIn.setBlockState(pos, dirt.getDefaultState());
+        	   worldIn.setBlockState(pos, dirt.getDefaultState());
            }
            else
            {
@@ -56,7 +56,7 @@ public class GrassBlock extends net.minecraft.block.GrassBlock
                     }
                     if (worldIn.getBlockState(blockpos).getBlock() == dirt && canSpread(state, worldIn, blockpos))
                     {
-                       worldIn.setBlockState(blockpos, this.getDefaultState());
+                    	worldIn.setBlockState(blockpos, this.getDefaultState());
                     }
                  }
               }
