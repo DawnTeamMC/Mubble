@@ -44,8 +44,7 @@ public class ToadRender extends MobEntityRenderer<ToadEntity, ToadModel<ToadEnti
 	@Override
 	public Identifier getTexture(ToadEntity entity)
     {
-		int texture = entity.getVariant();
-		switch(texture)
+		switch(entity.getVariant())
 		{
         case 0:
             return WHITE_TOAD_TEXTURES;

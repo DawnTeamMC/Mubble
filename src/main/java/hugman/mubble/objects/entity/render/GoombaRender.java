@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 public class GoombaRender extends MobEntityRenderer<GoombaEntity, GoombaModel<GoombaEntity>>
 {
     private static final Identifier NORMAL_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/goomba/normal.png");
-    //private static final Identifier GOLDEN_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/goomba/golden.png");
+    private static final Identifier GOLDEN_GOOMBA_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/goomba/golden.png");
 	
 	public GoombaRender(EntityRenderDispatcher dispatcher)
 	{
@@ -23,6 +23,13 @@ public class GoombaRender extends MobEntityRenderer<GoombaEntity, GoombaModel<Go
 	@Override
 	public Identifier getTexture(GoombaEntity entity)
     {
-		return NORMAL_GOOMBA_TEXTURES;
+		switch(entity.getVariant())
+		{
+		default:
+    	case 0:
+    		return NORMAL_GOOMBA_TEXTURES;
+    	case 1:
+    		return GOLDEN_GOOMBA_TEXTURES;
+		}
     }
 }

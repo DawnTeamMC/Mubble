@@ -18,8 +18,12 @@ import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -30,7 +34,9 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
 public class GoombaEntity extends MobEntityWithAi
-{    
+{
+	private static final TrackedData<Integer> VARIANT = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
+	
     public GoombaEntity(EntityType<? extends GoombaEntity> type, World worldIn) 
     {
         super(type, worldIn);
@@ -89,13 +95,44 @@ public class GoombaEntity extends MobEntityWithAi
 	{
     	 this.playSound(this.getStepSound(), 0.15F, 1.0F);
 	}
+	
+	public int getVariant()
+    {
+    	return this.dataTracker.get(VARIANT);
+	}
+
+	public void setVariant(int variantIn)
+	{
+		this.dataTracker.set(VARIANT, variantIn);
+	}
+	
+	@Override
+	protected void initDataTracker()
+	{
+		super.initDataTracker();
+		this.dataTracker.startTracking(VARIANT, 0);
+	}
+    
+    @Override
+    public void writeCustomDataToTag(CompoundTag compound)
+    {
+        super.writeCustomDataToTag(compound);
+        compound.putInt("Variant", this.getVariant());
+    }
+
+    @Override
+    public void readCustomDataFromTag(CompoundTag compound)
+    {
+        super.readCustomDataFromTag(compound);
+        this.setVariant(compound.getInt("Variant"));
+    }
     
     @Override
     public void onPlayerCollision(PlayerEntity playerIn)
     {
     	Box hitbox = this.getBoundingBox().shrink(0, -1, 0).expand(-0.4, 0, -0.4);
     	Vec3d vec3d = playerIn.getVelocity();
-    	if(!this.world.isClient() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && vec3d.y < 0.3D && !this.dead)
+    	if(!this.world.isClient() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && vec3d.y < 0.3D && this.isAlive())
     	{
     		playerIn.setVelocity(vec3d.x, 0.5D, vec3d.z);
 			((ServerPlayerEntity) playerIn).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(playerIn));

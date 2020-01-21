@@ -28,6 +28,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.passive.ChickenEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -73,6 +74,7 @@ public class ToadEntity extends AnimalEntity
         this.goalSelector.add(3, new TemptGoal(this, 1.4D, false, TEMPTATION_ITEMS));
         this.goalSelector.add(4, new FollowParentGoal(this, 1.1D));
         this.goalSelector.add(4, new EscapeDangerGoal(this, 1.0D));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, BeeEntity.class, 10.0F, 0.08F));
         this.goalSelector.add(5, new LookAtEntityGoal(this, ChickenEntity.class, 10.0F));
         this.goalSelector.add(6, new LookAtEntityGoal(this, this.getClass(), 8.0F));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
@@ -91,7 +93,7 @@ public class ToadEntity extends AnimalEntity
     public float getEyeHeight(EntityPose pose)
     {
     	if(this.isBaby()) return 0.75f;
-        return 1.25f;
+        return 1.35f;
     }
     
     @Override
