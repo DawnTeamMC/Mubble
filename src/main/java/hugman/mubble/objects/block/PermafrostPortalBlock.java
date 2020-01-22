@@ -188,10 +188,10 @@ public class PermafrostPortalBlock extends Block
 	
 	public boolean trySpawnPortal(IWorld worldIn, BlockPos pos) 
 	{
-		PermafrostPortalBlock.Size permafrostPortalBlock$size = this.isPortal(worldIn, pos);
-		if (permafrostPortalBlock$size != null)
+		PermafrostPortalBlock.Size size = this.isPortal(worldIn, pos);
+		if (size != null)
 		{
-			permafrostPortalBlock$size.placePortalBlocks();
+			size.placePortalBlocks();
 			return true;
 		}
 		else
@@ -203,55 +203,55 @@ public class PermafrostPortalBlock extends Block
 	@Nullable
 	public PermafrostPortalBlock.Size isPortal(IWorld worldIn, BlockPos pos)
 	{
-		PermafrostPortalBlock.Size permafrostPortalBlock$size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
-		if (permafrostPortalBlock$size.isValid() && permafrostPortalBlock$size.portalBlockCount == 0)
+		PermafrostPortalBlock.Size sizeX = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
+		if (sizeX.isValid() && sizeX.portalBlockCount == 0)
 		{
-			return permafrostPortalBlock$size;
+			return sizeX;
 		}
 		else
 		{
-			PermafrostPortalBlock.Size permafrostPortalBlock$size1 = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.Z);
-			return permafrostPortalBlock$size1.isValid() && permafrostPortalBlock$size1.portalBlockCount == 0 ? permafrostPortalBlock$size1 : null;
+			PermafrostPortalBlock.Size sizeZ = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.Z);
+			return sizeZ.isValid() && sizeZ.portalBlockCount == 0 ? sizeZ : null;
 		}
 	}
 
 	@Override
 	public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
-		Direction.Axis direction$axis = facing.getAxis();
-		Direction.Axis direction$axis1 = stateIn.get(AXIS);
-		boolean flag = direction$axis1 != direction$axis && direction$axis.isHorizontal();
-		return !flag && facingState.getBlock() != this && !(new PermafrostPortalBlock.Size(worldIn, currentPos, direction$axis1)).isCorrectPortal() ? Blocks.AIR.getDefaultState() : stateIn;
+		Direction.Axis facingAxis = facing.getAxis();
+		Direction.Axis stateAxis = stateIn.get(AXIS);
+		boolean flag = stateAxis != facingAxis && facingAxis.isHorizontal();
+		return !flag && facingState.getBlock() != this && !(new PermafrostPortalBlock.Size(worldIn, currentPos, stateAxis)).isCorrectPortal() ? Blocks.AIR.getDefaultState() : stateIn;
 	}
 
 	public static BlockPattern.PatternHelper createPatternHelper(IWorld worldIn, BlockPos pos)
 	{
 		Direction.Axis direction$axis = Direction.Axis.Z;
-		PermafrostPortalBlock.Size permafrostPortalBlock$size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
+		PermafrostPortalBlock.Size size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
 		LoadingCache<BlockPos, CachedBlockInfo> loadingcache = BlockPattern.createLoadingCache(worldIn, true);
-		if (!permafrostPortalBlock$size.isValid())
+		if (!size.isValid())
 		{
 			direction$axis = Direction.Axis.X;
-			permafrostPortalBlock$size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.Z);
+			size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.Z);
 		}
 
-		if (!permafrostPortalBlock$size.isValid())
+		if (!size.isValid())
 		{
 			return new BlockPattern.PatternHelper(pos, Direction.NORTH, Direction.UP, loadingcache, 1, 1, 1);
 		}
 		else
 		{
 			int[] aint = new int[Direction.AxisDirection.values().length];
-			Direction direction = permafrostPortalBlock$size.rightDir.rotateYCCW();
-			BlockPos blockpos = permafrostPortalBlock$size.bottomLeft.up(permafrostPortalBlock$size.getHeight() - 1);
+			Direction direction = size.rightDir.rotateYCCW();
+			BlockPos blockpos = size.bottomLeft.up(size.getHeight() - 1);
 
 			for (Direction.AxisDirection direction$axisdirection : Direction.AxisDirection.values())
 			{
-				BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(direction.getAxisDirection() == direction$axisdirection ? blockpos : blockpos.offset(permafrostPortalBlock$size.rightDir, permafrostPortalBlock$size.getWidth() - 1), Direction.getFacingFromAxis(direction$axisdirection, direction$axis), Direction.UP, loadingcache, permafrostPortalBlock$size.getWidth(), permafrostPortalBlock$size.getHeight(), 1);
+				BlockPattern.PatternHelper blockpattern$patternhelper = new BlockPattern.PatternHelper(direction.getAxisDirection() == direction$axisdirection ? blockpos : blockpos.offset(size.rightDir, size.getWidth() - 1), Direction.getFacingFromAxis(direction$axisdirection, direction$axis), Direction.UP, loadingcache, size.getWidth(), size.getHeight(), 1);
 
-				for (int i = 0; i < permafrostPortalBlock$size.getWidth(); ++i)
+				for (int i = 0; i < size.getWidth(); ++i)
 				{
-					for (int j = 0; j < permafrostPortalBlock$size.getHeight(); ++j)
+					for (int j = 0; j < size.getHeight(); ++j)
 					{
 						CachedBlockInfo cachedblockinfo = blockpattern$patternhelper.translateOffset(i, j, 1);
 						if(!(cachedblockinfo.getBlockState().getBlock() instanceof AirBlock))
@@ -272,7 +272,7 @@ public class PermafrostPortalBlock extends Block
 				}
 			}
 
-			return new BlockPattern.PatternHelper(direction.getAxisDirection() == direction$axisdirection1 ? blockpos : blockpos.offset(permafrostPortalBlock$size.rightDir, permafrostPortalBlock$size.getWidth() - 1), Direction.getFacingFromAxis(direction$axisdirection1, direction$axis), Direction.UP, loadingcache, permafrostPortalBlock$size.getWidth(), permafrostPortalBlock$size.getHeight(), 1);
+			return new BlockPattern.PatternHelper(direction.getAxisDirection() == direction$axisdirection1 ? blockpos : blockpos.offset(size.rightDir, size.getWidth() - 1), Direction.getFacingFromAxis(direction$axisdirection1, direction$axis), Direction.UP, loadingcache, size.getWidth(), size.getHeight(), 1);
 		}
 	}
 	
@@ -429,8 +429,7 @@ public class PermafrostPortalBlock extends Block
 
 				for (int j = 0; j < this.height; ++j)
 				{
-					this.world.setBlockState(blockpos.up(j),
-					MubbleBlocks.PERMAFROST_PORTAL.getDefaultState().with(PermafrostPortalBlock.AXIS, this.axis), 18);
+					this.world.setBlockState(blockpos.up(j), MubbleBlocks.PERMAFROST_PORTAL.getDefaultState().with(PermafrostPortalBlock.AXIS, this.axis), 18);
 				}
 			}
 		}

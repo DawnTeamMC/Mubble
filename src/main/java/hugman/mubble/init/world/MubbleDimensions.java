@@ -51,16 +51,7 @@ public class MubbleDimensions
 		@SubscribeEvent
 		public static void onModDimensionRegister(final RegisterDimensionsEvent event)
 		{
-			ResourceLocation id = new ResourceLocation(Mubble.MOD_ID, PermafrostDimension.getName());
-			if(DimensionType.byName(id) == null)
-			{
-				PERMAFROST = DimensionManager.registerDimension(id, PERMAFROST_MOD_DIMENSION.get(), new PacketBuffer(Unpooled.buffer()), true);
-				DimensionManager.keepLoaded(PERMAFROST, false);
-			}
-			else
-			{
-				PERMAFROST = DimensionType.byName(id);
-			}
+			DimensionManager.registerOrGetDimension(new ResourceLocation(Mubble.MOD_ID, PermafrostDimension.getName()), PERMAFROST_MOD_DIMENSION.get(), new PacketBuffer(Unpooled.buffer()), true);
 		}
 	}
 }

@@ -17,6 +17,7 @@ import hugman.mubble.init.data.MubbleColorMaps;
 import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
+import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
 import hugman.mubble.objects.events_handler.KonamiHandler;
 import hugman.mubble.util.MoreWordUtils;
@@ -34,6 +35,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -49,10 +51,12 @@ public class Mubble
 	public static final Logger LOGGER = LogManager.getLogger();
 	
     public Mubble()
-    {        
-        MinecraftForge.EVENT_BUS.register(this);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);
+    {
+    	IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+    	MinecraftForge.EVENT_BUS.register(this);
+        modBus.addListener(this::setup);
+        modBus.addListener(this::clientSetup);
+        MubbleDimensions.DIMENSIONS.register(modBus);
     }
 
     private void setup(final FMLCommonSetupEvent event)

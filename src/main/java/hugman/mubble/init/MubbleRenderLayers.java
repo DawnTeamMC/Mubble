@@ -48,6 +48,7 @@ public class MubbleRenderLayers
 		RenderTypeLookup.setRenderLayer(MubbleBlocks.TETRIS_GLASS, typeC);
 		translucentBlockItems.add(MubbleBlocks.BALLOONS);
 		translucentBlockItems.add(MubbleBlocks.CLOUD_BLOCKS);
+		RenderTypeLookup.setRenderLayer(MubbleBlocks.PERMAFROST_PORTAL, typeT);
     	
     	for(List<BlockItem> list : cutoutMippedBlockItems)
     	{
