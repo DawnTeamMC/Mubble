@@ -8,6 +8,7 @@ import com.google.common.cache.LoadingCache;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
+import hugman.mubble.init.world.MubbleDimensions;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -29,6 +30,9 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.ITextComponent;
@@ -36,6 +40,7 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -57,9 +62,9 @@ public class PermafrostPortalBlock extends Block
 	{
 		builder.add(AXIS);
 	}
-
+	
 	@Override
-	public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state)
+	public ItemStack getPickBlock(BlockState state, RayTraceResult target, IBlockReader world, BlockPos pos, PlayerEntity player)
 	{
 		return ItemStack.EMPTY;
 	}
@@ -67,13 +72,13 @@ public class PermafrostPortalBlock extends Block
 	@Override
 	public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) 
 	{
-		switch ((Direction.Axis) state.get(AXIS))
+		switch((Direction.Axis)state.get(AXIS))
 		{
-		case Z:
-			return Z_SHAPE;
-		case X:
-		default:
-			return X_SHAPE;
+			case Z:
+				return Z_SHAPE;
+			case X:
+			default:
+				return X_SHAPE;
 		}
 	}
 
@@ -154,19 +159,31 @@ public class PermafrostPortalBlock extends Block
 	/* PORTAL STUFF */
 
 	@Override
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
 	{
-		/*
-		if (entityIn.timeUntilPortal > 0)
+		if(!entity.isPassenger() && !entity.isBeingRidden() && entity.isNonBoss())
 		{
-			entityIn.timeUntilPortal = entityIn.getPortalCooldown();
+			if(entity.timeUntilPortal > 0)
+			{
+				entity.timeUntilPortal = entity.getPortalCooldown();
+			}
+			else
+			{
+				if(!world.isRemote && !pos.equals(entity.lastPortalPos))
+				{
+					entity.lastPortalPos = new BlockPos(pos);
+					BlockPattern.PatternHelper patternHelper = PermafrostPortalBlock.createPatternHelper(entity.world, entity.lastPortalPos);
+					double d0 = patternHelper.getForwards().getAxis() == Direction.Axis.X ? (double) patternHelper.getFrontTopLeft().getZ() : (double) patternHelper.getFrontTopLeft().getX();
+					double d1 = Math.abs(MathHelper.pct((patternHelper.getForwards().getAxis() == Direction.Axis.X ? entity.getZ() : entity.getX()) - (double) (patternHelper.getForwards().rotateY().getAxisDirection() == Direction.AxisDirection.NEGATIVE ? 1 : 0), d0, d0 - (double) patternHelper.getWidth()));
+					double d2 = MathHelper.pct(entity.getY() - 1.0D, (double) patternHelper.getFrontTopLeft().getY(), (double) (patternHelper.getFrontTopLeft().getY() - patternHelper.getHeight()));
+					entity.lastPortalVec = new Vec3d(d1, d2, 0.0D);
+					entity.teleportDirection = patternHelper.getForwards();
+					entity.changeDimension(world.dimension.getType() == MubbleDimensions.PERMAFROST ? DimensionType.OVERWORLD : MubbleDimensions.PERMAFROST);
+				}
+
+				entity.inPortal = true;
+			}
 		}
-		else
-		if(!entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss())
-		{
-			entityIn.changeDimension(MubbleDimensions.PERMAFROST);
-		}
-		*/
 	}
 	
 	public boolean trySpawnPortal(IWorld worldIn, BlockPos pos) 
@@ -207,7 +224,7 @@ public class PermafrostPortalBlock extends Block
 		return !flag && facingState.getBlock() != this && !(new PermafrostPortalBlock.Size(worldIn, currentPos, direction$axis1)).isCorrectPortal() ? Blocks.AIR.getDefaultState() : stateIn;
 	}
 
-	public BlockPattern.PatternHelper createPatternHelper(IWorld worldIn, BlockPos pos)
+	public static BlockPattern.PatternHelper createPatternHelper(IWorld worldIn, BlockPos pos)
 	{
 		Direction.Axis direction$axis = Direction.Axis.Z;
 		PermafrostPortalBlock.Size permafrostPortalBlock$size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);

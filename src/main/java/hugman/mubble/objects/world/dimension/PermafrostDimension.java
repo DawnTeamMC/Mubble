@@ -1,10 +1,8 @@
 package hugman.mubble.objects.world.dimension;
 
-import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.world.MubbleBiomes;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
@@ -21,13 +19,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class PermafrostDimension extends Dimension
-{
-	private final DimensionType type;
-	
+{	
 	public PermafrostDimension(World worldIn, DimensionType typeIn) 
 	{
 		super(worldIn, typeIn, 0.1F);
-		this.type = typeIn;
 	}
 	
 	@Override
@@ -101,15 +96,9 @@ public class PermafrostDimension extends Dimension
 			}
 		};
 	}
-	
-	@Override
-	public DimensionType getType()
-	{
-		return this.type;
-	}
 
-	public static ResourceLocation getName()
+	public static String getName()
 	{
-		return new ResourceLocation(Mubble.MOD_ID, "permafrost");
+		return "permafrost";
 	}
 }

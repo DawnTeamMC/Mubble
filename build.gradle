@@ -1,22 +1,30 @@
-buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net/maven' }
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-    }
+buildscript
+{
+	repositories
+    {
+		maven
+        {
+            url = 'https://files.minecraftforge.net/maven'
+        }
+		jcenter()
+		mavenCentral()
+	}
+	dependencies
+    {
+		classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+	}
 }
 
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-repositories {
-    maven {
-        url "https://maven.tterrag.com/"
-    }
+repositories
+{
+	maven
+    {
+		url "https://maven.tterrag.com/"
+	}
 }
 
 version = '2.2'
@@ -25,34 +33,44 @@ archivesBaseName = 'mubble'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
-minecraft {
-	//See https://maven.tterrag.com/de/oceanlabs/mcp/mcp_snapshot
-    mappings channel: 'snapshot', version: '20200119-mixed-1.15.1'
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
-        }
-        server {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-            property 'forge.logging.console.level', 'debug'
-
-            singleInstance(true)
-        }
-        data {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', ''
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'mubble', '--all', '--output', file('src/generated/resources/')
-        }
-    }
+dependencies
+{
+    minecraft 'net.minecraftforge:forge:1.15.1-30.0.42'
 }
 
-dependencies {
-    minecraft 'net.minecraftforge:forge:1.15.1-30.0.41'
+minecraft
+{
+	//See http://export.mcpbot.bspk.rs/ or https://maven.tterrag.com/de/oceanlabs/mcp/mcp_snapshot
+	mappings channel: 'snapshot', version: '20200120-mixed-1.15.1'
+
+    accessTransformer = file('accessTransformers.cfg')
+
+	runs
+    {
+		client
+        {
+			workingDirectory project.file('run')
+
+			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+			property 'forge.logging.console.level', 'debug'
+		}
+		server
+        {
+			workingDirectory project.file('run')
+
+			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
+			property 'forge.logging.console.level', 'debug'
+
+			singleInstance(true)
+		}
+		data
+        {
+			workingDirectory project.file('run')
+
+			property 'forge.logging.markers', ''
+			property 'forge.logging.console.level', 'debug'
+
+			args '--mod', 'mubble', '--all', '--output', file('src/generated/resources/')
+		}
+	}
 }

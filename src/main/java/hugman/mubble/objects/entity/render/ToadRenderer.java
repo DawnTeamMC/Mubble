@@ -57,6 +57,7 @@ public class ToadRenderer extends MobRenderer<ToadEntity, ToadModel<ToadEntity>>
         case 4:
             return BROWN_TOAD_TEXTURES;
         case 5:
+		default:
             return RED_TOAD_TEXTURES;
         case 6:
             return ORANGE_TOAD_TEXTURES;
@@ -92,8 +93,6 @@ public class ToadRenderer extends MobRenderer<ToadEntity, ToadModel<ToadEntity>>
             return PARTY_TOAD_TEXTURES;
         case 106:
             return KISEKAE_TOAD_TEXTURES;
-		default:
-			return RED_TOAD_TEXTURES;
 		}
     }
 }

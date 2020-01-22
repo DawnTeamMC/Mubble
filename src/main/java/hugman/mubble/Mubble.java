@@ -17,7 +17,6 @@ import hugman.mubble.init.data.MubbleColorMaps;
 import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
-import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
 import hugman.mubble.objects.events_handler.KonamiHandler;
 import hugman.mubble.util.MoreWordUtils;
@@ -34,7 +33,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -173,13 +171,6 @@ public class Mubble
         	event.getRegistry().registerAll(MubbleBiomes.BIOMES.toArray(new Biome[0]));
         	MubbleBiomes.registerGenerations();
         	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleBiomes.BIOMES.size(), "biome"));
-        }
-        
-        @SubscribeEvent
-        public static void onDimensionsRegistry(final RegistryEvent.Register<ModDimension> event)
-        {
-        	event.getRegistry().registerAll(MubbleDimensions.DIMENSIONS.toArray(new ModDimension[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleDimensions.DIMENSIONS.size(), "dimension"));
         }
         
     	@OnlyIn(Dist.CLIENT)

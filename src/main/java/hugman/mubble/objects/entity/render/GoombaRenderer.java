@@ -17,7 +17,7 @@ public class GoombaRenderer extends MobRenderer<GoombaEntity, GoombaModel<Goomba
 	
 	public GoombaRenderer(EntityRendererManager manager)
 	{
-		super(manager, new GoombaModel<>(), 0.5F);
+		super(manager, new GoombaModel<>(), 0.3F);
 	}
 	
 	@Override
@@ -26,11 +26,10 @@ public class GoombaRenderer extends MobRenderer<GoombaEntity, GoombaModel<Goomba
 		switch(entity.getVariant())
 		{
         case 0:
+        default:
             return NORMAL_GOOMBA_TEXTURES;
         case 1:
             return GOLDEN_GOOMBA_TEXTURES;
-        default:
-        	return NORMAL_GOOMBA_TEXTURES;
 		}
 	}
 }

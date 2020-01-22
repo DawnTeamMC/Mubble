@@ -163,6 +163,7 @@ public class ToadEntity extends AnimalEntity
         case 4:
             return MubbleLootTables.BROWN_TOAD;
         case 5:
+		default:
             return MubbleLootTables.RED_TOAD;
         case 6:
             return MubbleLootTables.ORANGE_TOAD;
@@ -194,10 +195,6 @@ public class ToadEntity extends AnimalEntity
             return MubbleLootTables.YELLOW_BTOAD;
         case 104:
             return MubbleLootTables.MAILTOAD;
-        case 105:
-            return MubbleLootTables.RED_TOAD;
-		default:
-			return MubbleLootTables.RED_TOAD;
 		}
     }
     
