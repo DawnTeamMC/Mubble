@@ -25,6 +25,11 @@ public class PermafrostDimension extends Dimension
 		super(worldIn, typeIn, 0.1F);
 	}
 	
+	public static String getName()
+	{
+		return "permafrost";
+	}
+	
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{
@@ -95,10 +100,5 @@ public class PermafrostDimension extends Dimension
 				return super.getCenterZ() / 8.0D;
 			}
 		};
-	}
-
-	public static String getName()
-	{
-		return "permafrost";
 	}
 }

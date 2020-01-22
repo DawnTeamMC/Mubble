@@ -1,57 +1,42 @@
 package hugman.mubble.init.world;
 
-import java.util.function.BiFunction;
-import java.util.function.Supplier;
+import java.util.ArrayList;
+import java.util.List;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.dimension.PermafrostDimension;
+import hugman.mubble.util.CustomModDimension;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.World;
-import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.ModDimension;
-import net.minecraftforge.event.world.RegisterDimensionsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class MubbleDimensions
 {
-	public static final DeferredRegister<ModDimension> DIMENSIONS = new DeferredRegister<>(ForgeRegistries.MOD_DIMENSIONS, Mubble.MOD_ID);
+	public static final List<DimensionType> DIMENSIONS_TYPES = new ArrayList<DimensionType>();
+	public static final List<ModDimension> MOD_DIMENSIONS = new ArrayList<ModDimension>();
 
 	public static DimensionType PERMAFROST;
 	
-	public static final RegistryObject<ModDimension> PERMAFROST_MOD_DIMENSION = register(PermafrostDimension.getName(), MubbleDimensions::dimFactory);
-
-	private static ModDimension dimFactory()
+	public static final ModDimension PERMAFROST_MOD_DIMENSION = register(PermafrostDimension.getName(), new CustomModDimension(PermafrostDimension::new));
+	
+	private static ModDimension register(String name, ModDimension modDimensionIn)
 	{
-		return new ModDimension()
-		{
-			@Override
-			public BiFunction<World, DimensionType, ? extends Dimension> getFactory()
-			{
-				return PermafrostDimension::new;
-			}
-		};
+		ModDimension modDimension = modDimensionIn.setRegistryName(Mubble.MOD_ID, name);
+		MOD_DIMENSIONS.add(modDimension);
+		return modDimension;
 	}
 	
-	private static RegistryObject<ModDimension> register(final String name, final Supplier<ModDimension> sup)
+	private static DimensionType register(ModDimension modDimension, boolean hasSkyLight)
 	{
-		return DIMENSIONS.register(name, sup);
+		DimensionType dimensionType = DimensionManager.registerOrGetDimension(modDimension.getRegistryName(), modDimension, new PacketBuffer(Unpooled.buffer()), hasSkyLight);
+		DIMENSIONS_TYPES.add(dimensionType);
+		return dimensionType;
 	}
 	
-	@Mod.EventBusSubscriber(modid = Mubble.MOD_ID)
-	public static class EventDimensionType
+	public static void registerDimensions()
 	{
-		@SubscribeEvent
-		public static void onModDimensionRegister(final RegisterDimensionsEvent event)
-		{
-			DimensionManager.registerOrGetDimension(new ResourceLocation(Mubble.MOD_ID, PermafrostDimension.getName()), PERMAFROST_MOD_DIMENSION.get(), new PacketBuffer(Unpooled.buffer()), true);
-		}
+		PERMAFROST = register(PERMAFROST_MOD_DIMENSION, false);
 	}
 }

@@ -34,7 +34,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ModDimension;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.RegisterDimensionsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -56,7 +58,6 @@ public class Mubble
     	MinecraftForge.EVENT_BUS.register(this);
         modBus.addListener(this::setup);
         modBus.addListener(this::clientSetup);
-        MubbleDimensions.DIMENSIONS.register(modBus);
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -84,7 +85,7 @@ public class Mubble
     public void serverSetup(final FMLServerStartingEvent event)
     {
     	MubbleCommands.registerCommands(event.getCommandDispatcher());
-    	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleCommands.COMMANDS.size(), "command"));
+    	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleCommands.COMMANDS.size(), "command"));
     }
     
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
@@ -94,21 +95,21 @@ public class Mubble
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> event)
         {
         	event.getRegistry().registerAll(MubbleBlocks.BLOCKS.toArray(new Block[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleBlocks.BLOCKS.size(), "block"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleBlocks.BLOCKS.size(), "block"));
         }
         
         @SubscribeEvent
         public static void onTileEntitiesRegistry(final RegistryEvent.Register<TileEntityType<?>> event)
         {
         	event.getRegistry().registerAll(MubbleTileEntityTypes.TILE_ENTITY_TYPES.toArray(new TileEntityType<?>[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleTileEntityTypes.TILE_ENTITY_TYPES.size(), "tile entity"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleTileEntityTypes.TILE_ENTITY_TYPES.size(), "tile entity"));
         }
         
         @SubscribeEvent
         public static void onContainersRegistry(final RegistryEvent.Register<ContainerType<?>> event)
         {
         	event.getRegistry().registerAll(MubbleContainerTypes.CONTAINER_TYPES.toArray(new ContainerType<?>[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleContainerTypes.CONTAINER_TYPES.size(), "container"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleContainerTypes.CONTAINER_TYPES.size(), "container"));
         }
         
         @SubscribeEvent
@@ -134,23 +135,23 @@ public class Mubble
             event.getRegistry().registerAll(MubbleBlocks.CLOUD_BLOCKS.toArray(new Item[0]));
             event.getRegistry().registerAll(MubbleBlocks.OTHERS.toArray(new Item[0]));
         	event.getRegistry().registerAll(MubbleItems.ITEMS.toArray(new Item[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleItems.ITEMS.size(), "item"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleItems.ITEMS.size(), "item"));
     		event.getRegistry().registerAll(MubbleCostumes.COSTUMES.toArray(new Item[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleCostumes.COSTUMES.size(), "costume"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleCostumes.COSTUMES.size(), "costume"));
         }
         
         @SubscribeEvent
         public static void onEnchantmentsRegistry(final RegistryEvent.Register<Enchantment> event)
         {
         	event.getRegistry().registerAll(MubbleEnchantments.ENCHANTMENTS.toArray(new Enchantment[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleEnchantments.ENCHANTMENTS.size(), "enchantment"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleEnchantments.ENCHANTMENTS.size(), "enchantment"));
         }
         
         @SubscribeEvent
         public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> event)
         {
         	event.getRegistry().registerAll(MubbleEntities.ENTITY_TYPES.toArray(new EntityType<?>[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleEntities.ENTITY_TYPES.size(), "entity"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleEntities.ENTITY_TYPES.size(), "entity"));
         	MubbleEntities.registerPlacements();
         	LOGGER.info("Registered entity spawn placements");
         }
@@ -159,14 +160,14 @@ public class Mubble
         public static void onSoundsRegistry(final RegistryEvent.Register<SoundEvent> event)
         {
         	event.getRegistry().registerAll(MubbleSounds.SOUNDS.toArray(new SoundEvent[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleSounds.SOUNDS.size(), "sound"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleSounds.SOUNDS.size(), "sound"));
         }
         
         @SubscribeEvent
         public static void onPotionsRegistry(final RegistryEvent.Register<Effect> event)
         {
         	event.getRegistry().registerAll(MubbleEffects.EFFECTS.toArray(new Effect[0]));
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleEffects.EFFECTS.size(), "effect"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleEffects.EFFECTS.size(), "effect"));
         }
         
         @SubscribeEvent
@@ -174,7 +175,14 @@ public class Mubble
         {
         	event.getRegistry().registerAll(MubbleBiomes.BIOMES.toArray(new Biome[0]));
         	MubbleBiomes.registerGenerations();
-        	LOGGER.info("Registered " + MoreWordUtils.pluralize(MubbleBiomes.BIOMES.size(), "biome"));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleBiomes.BIOMES.size(), "biome"));
+        }
+        
+        @SubscribeEvent
+        public static void onModDimensionsRegistry(final RegistryEvent.Register<ModDimension> event)
+        {
+        	event.getRegistry().registerAll(MubbleDimensions.MOD_DIMENSIONS.toArray(new ModDimension[0]));
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleDimensions.MOD_DIMENSIONS.size(), "mod dimension"));
         }
         
     	@OnlyIn(Dist.CLIENT)
@@ -191,6 +199,17 @@ public class Mubble
         {
         	MubbleColorMaps.registerItemColors(event);
         	LOGGER.info("Registered color maps for items");
+        }
+    }
+    
+    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.FORGE)
+    public static class ForgeRegistryEvents
+    {
+        @SubscribeEvent
+        public static void onDimensionTypesRegistry(final RegisterDimensionsEvent event)
+        {
+        	MubbleDimensions.registerDimensions();
+        	LOGGER.info("Registered " + MoreWordUtils.numerate(MubbleDimensions.DIMENSIONS_TYPES.size(), "dimension type"));
         }
     }
 }
