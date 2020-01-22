@@ -30,9 +30,9 @@ public class MubbleFeatureConfigs
 	private static final BlockState AUTUMN_OAK_LEAF_PILE = MubbleBlocks.AUTUMN_OAK_LEAF_PILE.getDefaultState();
 	
 	private static final BlockState CHERRY_OAK_LOG = MubbleBlocks.CHERRY_OAK_LOG.getDefaultState();
-	private static final BlockState PINK_CHERRY_OAK_LEAVES = MubbleBlocks.WHITE_CHERRY_OAK_LEAVES.getDefaultState();
-	private static final IPlantable PINK_CHERRY_OAK_SAPLING = (IPlantable)(MubbleBlocks.WHITE_CHERRY_OAK_SAPLING);
-	private static final BlockState PINK_CHERRY_OAK_LEAF_PILE = MubbleBlocks.WHITE_CHERRY_OAK_LEAF_PILE.getDefaultState();
+	private static final BlockState PINK_CHERRY_OAK_LEAVES = MubbleBlocks.PINK_CHERRY_OAK_LEAVES.getDefaultState();
+	private static final IPlantable PINK_CHERRY_OAK_SAPLING = (IPlantable)(MubbleBlocks.PINK_CHERRY_OAK_SAPLING);
+	private static final BlockState PINK_CHERRY_OAK_LEAF_PILE = MubbleBlocks.PINK_CHERRY_OAK_LEAF_PILE.getDefaultState();
 	private static final BlockState WHITE_CHERRY_OAK_LEAVES = MubbleBlocks.WHITE_CHERRY_OAK_LEAVES.getDefaultState();
 	private static final IPlantable WHITE_CHERRY_OAK_SAPLING = (IPlantable)(MubbleBlocks.WHITE_CHERRY_OAK_SAPLING);
 	private static final BlockState WHITE_CHERRY_OAK_LEAF_PILE = MubbleBlocks.WHITE_CHERRY_OAK_LEAF_PILE.getDefaultState();
