@@ -27,7 +27,8 @@ public class MubbleSurfaceBuilders
 	public static final TernarySurfaceConfig SMW_GROUND_SURFACE = new TernarySurfaceConfig(SMW_GROUND_TOP, SMW_GROUND_DIRT, SMW_GROUND_DIRT);
 	public static final TernarySurfaceConfig SMW_DESERT_SURFACE = new TernarySurfaceConfig(SMW_DESERT_TOP, SMW_DESERT_DIRT, DIRT);
 	
-	private static <C extends SurfaceConfig, F extends SurfaceBuilder<C>> F register(String name, F surfaceBuilder) {
+	private static <C extends SurfaceConfig, F extends SurfaceBuilder<C>> F register(String name, F surfaceBuilder)
+	{
 		return Registry.register(Registry.SURFACE_BUILDER, new Identifier(Mubble.MOD_ID, name), surfaceBuilder);
 	}
 }

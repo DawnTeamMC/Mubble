@@ -22,7 +22,6 @@ import net.minecraft.entity.SpawnType;
 import net.minecraft.entity.boss.WitherEntity;
 import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.particle.ParticleTypes;
@@ -36,14 +35,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 
 public class PermafrostPortalBlock extends Block
 {
@@ -163,26 +159,27 @@ public class PermafrostPortalBlock extends Block
 	{
 		if(!entity.hasVehicle() && !entity.hasPassengers() && !(entity instanceof EnderDragonEntity) && !(entity instanceof WitherEntity))
 		{
-			if(entity.netherPortalCooldown > 0)
+			entity.changeDimension(MubbleDimensions.PERMAFROST);
+			/*if(entity.netherPortalCooldown > 0)
 			{
 				entity.netherPortalCooldown = entity.getDefaultNetherPortalCooldown();
 			}
 			else
 			{
-				if(!world.isClient /*&& !pos.equals(entity.lastPortalPos)*/)
+				if(!world.isClient && !pos.equals(entity.lastNetherPortalPosition))
 				{
-					//entity.lastPortalPos = new BlockPos(pos);
-					BlockPattern.Result patternHelper = PermafrostPortalBlock.createPatternHelper(entity.world, entity.lastPortalPos);
+					entity.lastNetherPortalPosition = new BlockPos(pos);
+					BlockPattern.Result patternHelper = PermafrostPortalBlock.createPatternHelper(entity.world, entity.lastNetherPortalPosition);
 					double d0 = patternHelper.getForwards().getAxis() == Direction.Axis.X ? (double) patternHelper.getFrontTopLeft().getZ() : (double) patternHelper.getFrontTopLeft().getX();
-					double d1 = Math.abs(MathHelper.pct((patternHelper.getForwards().getAxis() == Direction.Axis.X ? entity.getZ() : entity.getX()) - (double) (patternHelper.getForwards().rotateY().getAxisDirection() == Direction.AxisDirection.NEGATIVE ? 1 : 0), d0, d0 - (double) patternHelper.getWidth()));
-					double d2 = MathHelper.pct(entity.getY() - 1.0D, (double) patternHelper.getFrontTopLeft().getY(), (double) (patternHelper.getFrontTopLeft().getY() - patternHelper.getHeight()));
-					entity.lastPortalVec = new Vec3d(d1, d2, 0.0D);
-					entity.teleportDirection = patternHelper.getForwards();
+					double d1 = Math.abs(MathHelper.minusDiv((patternHelper.getForwards().getAxis() == Direction.Axis.X ? entity.getZ() : entity.getX()) - (double) (patternHelper.getForwards().rotateYClockwise().getDirection() == Direction.AxisDirection.NEGATIVE ? 1 : 0), d0, d0 - (double) patternHelper.getWidth()));
+					double d2 = MathHelper.minusDiv(entity.getY() - 1.0D, (double) patternHelper.getFrontTopLeft().getY(), (double) (patternHelper.getFrontTopLeft().getY() - patternHelper.getHeight()));
+					entity.lastNetherPortalDirectionVector = new Vec3d(d1, d2, 0.0D);
+					entity.lastNetherPortalDirection = patternHelper.getForwards();
 					entity.changeDimension(world.dimension.getType() == MubbleDimensions.PERMAFROST ? DimensionType.OVERWORLD : MubbleDimensions.PERMAFROST);
 				}
 
-				entity.inPortal = true;
-			}
+				entity.inNetherPortal = true;
+			}*/
 		}
 	}
 	

@@ -75,7 +75,6 @@ public class MubbleFeatureConfigs
 	public static final SpringFeatureConfig PERMAFROST_SPRING_CONFIG = new SpringFeatureConfig(Fluids.WATER.getDefaultState(), true, 4, 1, ImmutableSet.of(MubbleBlocks.PERMAROCK));
 	public static final SpringFeatureConfig ENCLOSED_PERMAFROST_SPRING_CONFIG = new SpringFeatureConfig(Fluids.WATER.getDefaultState(), false, 5, 0, ImmutableSet.of(MubbleBlocks.PERMAROCK));
 	public static final RandomPatchFeatureConfig LIGHT_BLUE_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.LIGHT_BLUE_MUSHROOM);
-	//public static final OreFeatureConfig.Target PERMAROCK_FILLER = OreFeatureConfig.Target.create("permarock_filler", "permarock", new BlockMatcher(MubbleBlocks.PERMAROCK));
 	
 	/* SONIC */
 	public static final BranchedTreeFeatureConfig RED_PRESS_GARDEN_TREE_CONFIG = (new BranchedTreeFeatureConfig.Builder(new SimpleStateProvider(PRESS_GARDEN_LOG), new SimpleStateProvider(RED_PRESS_GARDEN_LEAVES), new BlobFoliagePlacer(2, 0))).baseHeight(5).heightRandA(2).foliageHeight(3).noVines().build();
