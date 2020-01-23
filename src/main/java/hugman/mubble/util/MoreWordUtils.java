@@ -2,7 +2,7 @@ package hugman.mubble.util;
 
 public class MoreWordUtils
 {
-	public static String pluralize(int number, String text)
+	public static String numerate(int number, String text)
 	{
 		if(number == 0)
 		{

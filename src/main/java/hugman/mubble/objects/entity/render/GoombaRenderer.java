@@ -17,7 +17,7 @@ public class GoombaRenderer extends MobEntityRenderer<GoombaEntity, GoombaModel<
 	
 	public GoombaRenderer(EntityRenderDispatcher dispatcher)
 	{
-		super(dispatcher, new GoombaModel<>(), 0.5F);
+		super(dispatcher, new GoombaModel<>(), 0.3F);
 	}
 	
 	@Override

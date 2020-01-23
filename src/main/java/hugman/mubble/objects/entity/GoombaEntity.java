@@ -22,6 +22,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntityWithAi;
+import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -46,11 +47,12 @@ public class GoombaEntity extends MobEntityWithAi
     protected void initGoals()
     {
         this.goalSelector.add(0, new SwimGoal(this));
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0D, false));
-        this.goalSelector.add(5, new GoToWalkTargetGoal(this, 1.0D));
-        this.goalSelector.add(7, new EscapeDangerGoal(this, 1.0D));
-        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(8, new LookAroundGoal(this));
+        this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.add(2, new GoToWalkTargetGoal(this, 1.0D));
+        this.goalSelector.add(3, new EscapeDangerGoal(this, 1.0D));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, BeeEntity.class, 10.0F));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(4, new LookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this, new Class[] {GoombaEntity.class}));
         this.targetSelector.add(3, new FollowTargetGoal<>(this, PlayerEntity.class, true));
         this.targetSelector.add(3, new FollowTargetGoal<>(this, ToadEntity.class, true));
@@ -70,7 +72,7 @@ public class GoombaEntity extends MobEntityWithAi
     @Override
     public float getEyeHeight(EntityPose pose)
     {
-        return 0.40625F;
+        return 0.375F;
     }
     
     @Override
@@ -131,10 +133,10 @@ public class GoombaEntity extends MobEntityWithAi
     public void onPlayerCollision(PlayerEntity playerIn)
     {
     	Box hitbox = this.getBoundingBox().shrink(0, -1, 0).expand(-0.4, 0, -0.4);
-    	Vec3d vec3d = playerIn.getVelocity();
-    	if(!this.world.isClient() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && vec3d.y < 0.3D && this.isAlive())
+    	Vec3d velocity = playerIn.getVelocity();
+    	if(!this.world.isClient() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && velocity.y < 0.3D && this.isAlive())
     	{
-    		playerIn.setVelocity(vec3d.x, 0.5D, vec3d.z);
+    		playerIn.setVelocity(velocity.x, 0.5D, velocity.z);
 			((ServerPlayerEntity) playerIn).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(playerIn));
     		playerIn.fallDistance = 0.0F;
     		this.damage(DamageSource.player(playerIn), Float.MAX_VALUE);

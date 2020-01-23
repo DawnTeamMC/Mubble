@@ -22,10 +22,10 @@ public class PermafrostDimension extends Dimension
 {
 	private final DimensionType type;
 	
-	public PermafrostDimension(World worldIn, DimensionType typeIn)
+	public PermafrostDimension(World world, DimensionType type)
 	{
-		super(worldIn, typeIn, 0.1F);
-		this.type = typeIn;
+		super(world, type, 0.1F);
+		this.type = type;
 		
 		for(int i = 0; i <= 15; ++i)
 		{

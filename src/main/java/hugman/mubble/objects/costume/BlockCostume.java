@@ -1,7 +1,5 @@
 package hugman.mubble.objects.costume;
 
-import java.util.List;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
@@ -11,13 +9,11 @@ import net.minecraft.client.gl.ShaderEffect;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.ActionResult;
@@ -25,8 +21,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 public class BlockCostume extends BlockItem
@@ -91,29 +85,6 @@ public class BlockCostume extends BlockItem
     {
     	return this.armorType;
     }
-	
-	public static ItemStack dispenseArmor(BlockPointer blockSource, ItemStack stack)
-	{
-		BlockPos blockpos = blockSource.getBlockPos().offset(blockSource.getBlockState().get(DispenserBlock.FACING));
-		List<LivingEntity> list = blockSource.getWorld().getEntities(LivingEntity.class, new Box(blockpos), EntityPredicates.EXCEPT_SPECTATOR.and(new EntityPredicates.CanPickup(stack)));
-		if (list.isEmpty())
-		{
-			return ItemStack.EMPTY;
-		}
-		else
-		{
-			LivingEntity entitylivingbase = list.get(0);
-			EquipmentSlot entityequipmentslot = MobEntity.getPreferredEquipmentSlot(stack);
-			ItemStack itemstack = stack.split(1);
-			entitylivingbase.equipStack(entityequipmentslot, itemstack);
-			if (entitylivingbase instanceof MobEntity)
-			{
-				((MobEntity) entitylivingbase).setEquipmentDropChance(entityequipmentslot, 2.0F);
-				((MobEntity) entitylivingbase).setPersistent();
-			}
-			return stack;
-		}
-	}
     
     @Override
     public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)

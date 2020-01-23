@@ -1,6 +1,5 @@
 package hugman.mubble.objects.costume;
 
-import java.util.List;
 import java.util.Random;
 
 import hugman.mubble.init.MubbleCostumes;
@@ -15,12 +14,10 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.TranslatableText;
@@ -29,8 +26,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
 public class Costume extends Item
@@ -98,10 +93,14 @@ public class Costume extends Item
     	}
     	if(!world.isClient && effects != null)
     	{
-    		for(StatusEffectInstance effect : effects)
-        	{
-        		player.addStatusEffect(new StatusEffectInstance(effect));
-        	}
+    		long i = world.getTime();
+    		if(i % 40L == 0L)
+    		{
+    			for(StatusEffectInstance effect : effects)
+            	{
+            		player.addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 260, effect.getAmplifier(), false, true));
+            	}
+    		}
     	}
     }
 	
@@ -113,29 +112,6 @@ public class Costume extends Item
 			return ArmorItem.dispenseArmor(source, stack) ? stack : super.dispenseSilently(source, stack);
 		}
 	};
-	
-	public static boolean dispenseArmor(BlockPointer blockSource, ItemStack stack)
-	{
-		BlockPos blockpos = blockSource.getBlockPos().offset(blockSource.getBlockState().get(DispenserBlock.FACING));
-		List<LivingEntity> list = blockSource.getWorld().getEntities(LivingEntity.class, new Box(blockpos), EntityPredicates.EXCEPT_SPECTATOR.and(new EntityPredicates.CanPickup(stack)));
-		if (list.isEmpty())
-		{
-			return false;
-		}
-		else
-		{
-			LivingEntity entitylivingbase = list.get(0);
-			EquipmentSlot entityequipmentslot = MobEntity.getPreferredEquipmentSlot(stack);
-			ItemStack itemstack = stack.split(1);
-			entitylivingbase.equipStack(entityequipmentslot, itemstack);
-			if (entitylivingbase instanceof MobEntity)
-			{
-				((MobEntity) entitylivingbase).setEquipmentDropChance(entityequipmentslot, 2.0F);
-				((MobEntity) entitylivingbase).setPersistent();
-			}
-			return true;
-		}
-	}
     
     @Override
     public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)

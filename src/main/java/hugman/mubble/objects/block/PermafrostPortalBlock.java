@@ -6,6 +6,7 @@ import com.google.common.cache.LoadingCache;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
+import hugman.mubble.init.world.MubbleDimensions;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.AirBlock;
@@ -18,6 +19,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.boss.WitherEntity;
+import net.minecraft.entity.boss.dragon.EnderDragonEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -33,11 +36,14 @@ import net.minecraft.text.Text;
 import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.DimensionType;
 
 public class PermafrostPortalBlock extends Block
 {
@@ -56,23 +62,23 @@ public class PermafrostPortalBlock extends Block
 	{
 		builder.add(AXIS);
 	}
-
+	
 	@Override
-	public Item asItem()
+	public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state)
 	{
-		return ItemStack.EMPTY.getItem();
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context) 
 	{
-		switch ((Direction.Axis) state.get(AXIS))
+		switch((Direction.Axis)state.get(AXIS))
 		{
-		case Z:
-			return Z_SHAPE;
-		case X:
-		default:
-			return X_SHAPE;
+			case Z:
+				return Z_SHAPE;
+			case X:
+			default:
+				return X_SHAPE;
 		}
 	}
 
@@ -153,27 +159,39 @@ public class PermafrostPortalBlock extends Block
 	/* PORTAL STUFF */
 
 	@Override
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
 	{
-		/*
-		if (entityIn.timeUntilPortal > 0)
+		if(!entity.hasVehicle() && !entity.hasPassengers() && !(entity instanceof EnderDragonEntity) && !(entity instanceof WitherEntity))
 		{
-			entityIn.timeUntilPortal = entityIn.getPortalCooldown();
+			if(entity.netherPortalCooldown > 0)
+			{
+				entity.netherPortalCooldown = entity.getDefaultNetherPortalCooldown();
+			}
+			else
+			{
+				if(!world.isClient /*&& !pos.equals(entity.lastPortalPos)*/)
+				{
+					//entity.lastPortalPos = new BlockPos(pos);
+					BlockPattern.Result patternHelper = PermafrostPortalBlock.createPatternHelper(entity.world, entity.lastPortalPos);
+					double d0 = patternHelper.getForwards().getAxis() == Direction.Axis.X ? (double) patternHelper.getFrontTopLeft().getZ() : (double) patternHelper.getFrontTopLeft().getX();
+					double d1 = Math.abs(MathHelper.pct((patternHelper.getForwards().getAxis() == Direction.Axis.X ? entity.getZ() : entity.getX()) - (double) (patternHelper.getForwards().rotateY().getAxisDirection() == Direction.AxisDirection.NEGATIVE ? 1 : 0), d0, d0 - (double) patternHelper.getWidth()));
+					double d2 = MathHelper.pct(entity.getY() - 1.0D, (double) patternHelper.getFrontTopLeft().getY(), (double) (patternHelper.getFrontTopLeft().getY() - patternHelper.getHeight()));
+					entity.lastPortalVec = new Vec3d(d1, d2, 0.0D);
+					entity.teleportDirection = patternHelper.getForwards();
+					entity.changeDimension(world.dimension.getType() == MubbleDimensions.PERMAFROST ? DimensionType.OVERWORLD : MubbleDimensions.PERMAFROST);
+				}
+
+				entity.inPortal = true;
+			}
 		}
-		else
-		if(!entityIn.isPassenger() && !entityIn.isBeingRidden() && entityIn.isNonBoss())
-		{
-			entityIn.changeDimension(MubbleDimensions.PERMAFROST);
-		}
-		*/
 	}
 	
 	public boolean trySpawnPortal(IWorld worldIn, BlockPos pos) 
 	{
-		PermafrostPortalBlock.Size permafrostPortalBlock$size = this.isPortal(worldIn, pos);
-		if (permafrostPortalBlock$size != null)
+		PermafrostPortalBlock.Size size = this.isPortal(worldIn, pos);
+		if (size != null)
 		{
-			permafrostPortalBlock$size.placePortalBlocks();
+			size.placePortalBlocks();
 			return true;
 		}
 		else
@@ -184,55 +202,55 @@ public class PermafrostPortalBlock extends Block
 	
 	public PermafrostPortalBlock.Size isPortal(IWorld worldIn, BlockPos pos)
 	{
-		PermafrostPortalBlock.Size permafrostPortalBlock$size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
-		if (permafrostPortalBlock$size.isValid() && permafrostPortalBlock$size.portalBlockCount == 0)
+		PermafrostPortalBlock.Size sizeX = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
+		if (sizeX.isValid() && sizeX.portalBlockCount == 0)
 		{
-			return permafrostPortalBlock$size;
+			return sizeX;
 		}
 		else
 		{
-			PermafrostPortalBlock.Size permafrostPortalBlock$size1 = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.Z);
-			return permafrostPortalBlock$size1.isValid() && permafrostPortalBlock$size1.portalBlockCount == 0 ? permafrostPortalBlock$size1 : null;
+			PermafrostPortalBlock.Size sizeZ = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.Z);
+			return sizeZ.isValid() && sizeZ.portalBlockCount == 0 ? sizeZ : null;
 		}
 	}
 
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
-		Direction.Axis direction$axis = facing.getAxis();
-		Direction.Axis direction$axis1 = stateIn.get(AXIS);
-		boolean flag = direction$axis1 != direction$axis && direction$axis.isHorizontal();
-		return !flag && facingState.getBlock() != this && !(new PermafrostPortalBlock.Size(worldIn, currentPos, direction$axis1)).isCorrectPortal() ? Blocks.AIR.getDefaultState() : stateIn;
+		Direction.Axis facingAxis = facing.getAxis();
+		Direction.Axis stateAxis = stateIn.get(AXIS);
+		boolean flag = stateAxis != facingAxis && facingAxis.isHorizontal();
+		return !flag && facingState.getBlock() != this && !(new PermafrostPortalBlock.Size(worldIn, currentPos, stateAxis)).isCorrectPortal() ? Blocks.AIR.getDefaultState() : stateIn;
 	}
 
-	public BlockPattern.Result createPatternHelper(IWorld worldIn, BlockPos pos)
+	public static BlockPattern.Result createPatternHelper(IWorld worldIn, BlockPos pos)
 	{
 		Direction.Axis direction$axis = Direction.Axis.Z;
-		PermafrostPortalBlock.Size permafrostPortalBlock$size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
+		PermafrostPortalBlock.Size size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.X);
 		LoadingCache<BlockPos, CachedBlockPosition> loadingcache = BlockPattern.makeCache(worldIn, true);
-		if (!permafrostPortalBlock$size.isValid())
+		if (!size.isValid())
 		{
 			direction$axis = Direction.Axis.X;
-			permafrostPortalBlock$size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.Z);
+			size = new PermafrostPortalBlock.Size(worldIn, pos, Direction.Axis.Z);
 		}
 
-		if (!permafrostPortalBlock$size.isValid())
+		if (!size.isValid())
 		{
 			return new BlockPattern.Result(pos, Direction.NORTH, Direction.UP, loadingcache, 1, 1, 1);
 		}
 		else
 		{
 			int[] aint = new int[Direction.AxisDirection.values().length];
-			Direction direction = permafrostPortalBlock$size.rightDir.rotateYCounterclockwise();
-			BlockPos blockpos = permafrostPortalBlock$size.bottomLeft.up(permafrostPortalBlock$size.getHeight() - 1);
+			Direction direction = size.rightDir.rotateYCounterclockwise();
+			BlockPos blockpos = size.bottomLeft.up(size.getHeight() - 1);
 
 			for (Direction.AxisDirection direction$axisdirection : Direction.AxisDirection.values())
 			{
-				BlockPattern.Result blockpattern$patternhelper = new BlockPattern.Result(direction.getDirection() == direction$axisdirection ? blockpos : blockpos.offset(permafrostPortalBlock$size.rightDir, permafrostPortalBlock$size.getWidth() - 1), Direction.get(direction$axisdirection, direction$axis), Direction.UP, loadingcache, permafrostPortalBlock$size.getWidth(), permafrostPortalBlock$size.getHeight(), 1);
+				BlockPattern.Result blockpattern$patternhelper = new BlockPattern.Result(direction.getDirection() == direction$axisdirection ? blockpos : blockpos.offset(size.rightDir, size.getWidth() - 1), Direction.get(direction$axisdirection, direction$axis), Direction.UP, loadingcache, size.getWidth(), size.getHeight(), 1);
 
-				for (int i = 0; i < permafrostPortalBlock$size.getWidth(); ++i)
+				for (int i = 0; i < size.getWidth(); ++i)
 				{
-					for (int j = 0; j < permafrostPortalBlock$size.getHeight(); ++j)
+					for (int j = 0; j < size.getHeight(); ++j)
 					{
 						CachedBlockPosition cachedblockinfo = blockpattern$patternhelper.translate(i, j, 1);
 						if(!(cachedblockinfo.getBlockState().getBlock() instanceof AirBlock))
@@ -253,7 +271,7 @@ public class PermafrostPortalBlock extends Block
 				}
 			}
 
-			return new BlockPattern.Result(direction.getDirection() == direction$axisdirection1 ? blockpos : blockpos.offset(permafrostPortalBlock$size.rightDir, permafrostPortalBlock$size.getWidth() - 1), Direction.get(direction$axisdirection1, direction$axis), Direction.UP, loadingcache, permafrostPortalBlock$size.getWidth(), permafrostPortalBlock$size.getHeight(), 1);
+			return new BlockPattern.Result(direction.getDirection() == direction$axisdirection1 ? blockpos : blockpos.offset(size.rightDir, size.getWidth() - 1), Direction.get(direction$axisdirection1, direction$axis), Direction.UP, loadingcache, size.getWidth(), size.getHeight(), 1);
 		}
 	}
 	
@@ -409,8 +427,7 @@ public class PermafrostPortalBlock extends Block
 
 				for (int j = 0; j < this.height; ++j)
 				{
-					this.world.setBlockState(blockpos.up(j),
-					MubbleBlocks.PERMAFROST_PORTAL.getDefaultState().with(PermafrostPortalBlock.AXIS, this.axis), 18);
+					this.world.setBlockState(blockpos.up(j), MubbleBlocks.PERMAFROST_PORTAL.getDefaultState().with(PermafrostPortalBlock.AXIS, this.axis), 18);
 				}
 			}
 		}
