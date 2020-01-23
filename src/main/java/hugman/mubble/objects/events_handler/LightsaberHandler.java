@@ -25,46 +25,4 @@ public class LightsaberHandler
 			}
 		}
 	}
-	
-	public static void clientTick(ClientTickEvent event)
-	{
-		if(event.phase == Phase.START)
-		{
-			if(LightsaberItem.idleTimer <= 95)
-			{
-				LightsaberItem.idleTimer++;
-			}
-			else
-			{
-				LightsaberItem.idleTimer = 0;
-			}
-		}
-	}
-	
-	public static void onBlockLeftClick(LeftClickBlock event)
-	{
-		ItemStack itemStack = event.getItemStack();
-		if(itemStack.getItem() instanceof LightsaberItem)
-		{
-			((LightsaberItem)itemStack.getItem()).onSwing(event.getPlayer(), false);
-		}
-	}
-	
-	public static void onAirLeftClick(LeftClickEmpty event)
-	{
-		ItemStack itemStack = event.getItemStack();
-		if(itemStack.getItem() instanceof LightsaberItem)
-		{
-			((LightsaberItem)itemStack.getItem()).onSwing(event.getPlayer(), false);
-		}
-	}
-	
-	public static void onAttack(AttackEntityEvent event)
-	{
-		ItemStack itemStack = event.getPlayer().getActiveItemStack();
-		if(itemStack.getItem() instanceof LightsaberItem)
-		{
-			((LightsaberItem)itemStack.getItem()).onSwing(event.getPlayer(), true);
-		}
-	}
 }*/
