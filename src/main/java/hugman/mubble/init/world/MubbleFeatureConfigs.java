@@ -59,21 +59,25 @@ public class MubbleFeatureConfigs
 	
 	/* MINECRAFT */
 	public static final TreeFeatureConfig AUTUMN_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(OAK_LOG), new SimpleBlockStateProvider(AUTUMN_OAK_LEAVES), new BlobFoliagePlacer(2, 0))).baseHeight(4).heightRandA(2).foliageHeight(3).noVines().setSapling(AUTUMN_OAK_SAPLING).build();
-	public static final TreeFeatureConfig FANCY_AUTUMN_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(OAK_LOG), new SimpleBlockStateProvider(AUTUMN_OAK_LEAVES), new BlobFoliagePlacer(0, 0))).setSapling(AUTUMN_OAK_SAPLING).build();
 	public static final TreeFeatureConfig AUTUMN_OAK_TREE_BEEHIVED_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(OAK_LOG), new SimpleBlockStateProvider(AUTUMN_OAK_LEAVES), new BlobFoliagePlacer(2, 0))).baseHeight(4).heightRandA(2).foliageHeight(3).noVines().treeDecorators(ImmutableList.of(new BeehiveTreeDecorator(0.05F))).setSapling(AUTUMN_OAK_SAPLING).build();
+	public static final TreeFeatureConfig FANCY_AUTUMN_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(OAK_LOG), new SimpleBlockStateProvider(AUTUMN_OAK_LEAVES), new BlobFoliagePlacer(0, 0))).setSapling(AUTUMN_OAK_SAPLING).build();
 	public static final TreeFeatureConfig FANCY_AUTUMN_OAK_BEEHIVED_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(OAK_LOG), new SimpleBlockStateProvider(AUTUMN_OAK_LEAVES), new BlobFoliagePlacer(0, 0))).treeDecorators(ImmutableList.of(new BeehiveTreeDecorator(0.05F))).setSapling(AUTUMN_OAK_SAPLING).build();
 	public static final BlockClusterFeatureConfig AUTUMN_OAK_LEAF_PILE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(AUTUMN_OAK_LEAF_PILE), new SimpleBlockPlacer())).tries(32).build();
 	public static final BlockClusterFeatureConfig YELLOW_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.YELLOW_MUSHROOM);
 	public static final BlockClusterFeatureConfig ORANGE_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.ORANGE_MUSHROOM);
-	
+
 	public static final TreeFeatureConfig PINK_CHERRY_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(CHERRY_OAK_LOG), new SimpleBlockStateProvider(PINK_CHERRY_OAK_LEAVES), new BlobFoliagePlacer(2, 0))).baseHeight(5).heightRandA(2).foliageHeight(3).noVines().setSapling(PINK_CHERRY_OAK_SAPLING).build();
+	public static final TreeFeatureConfig PINK_CHERRY_OAK_TREE_BEEHIVED_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(CHERRY_OAK_LOG), new SimpleBlockStateProvider(PINK_CHERRY_OAK_LEAVES), new BlobFoliagePlacer(2, 0))).baseHeight(5).heightRandA(2).foliageHeight(3).noVines().treeDecorators(ImmutableList.of(new BeehiveTreeDecorator(0.05F))).setSapling(PINK_CHERRY_OAK_SAPLING).build();
 	public static final TreeFeatureConfig FANCY_PINK_CHERRY_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(CHERRY_OAK_LOG), new SimpleBlockStateProvider(PINK_CHERRY_OAK_LEAVES), new BlobFoliagePlacer(0, 0))).setSapling(PINK_CHERRY_OAK_SAPLING).build();
+	public static final TreeFeatureConfig FANCY_PINK_CHERRY_OAK_TREE_BEEHIVED_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(CHERRY_OAK_LOG), new SimpleBlockStateProvider(PINK_CHERRY_OAK_LEAVES), new BlobFoliagePlacer(0, 0))).treeDecorators(ImmutableList.of(new BeehiveTreeDecorator(0.05F))).setSapling(PINK_CHERRY_OAK_SAPLING).build();
 	public static final BlockClusterFeatureConfig PINK_CHERRY_OAK_LEAF_PILE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(PINK_CHERRY_OAK_LEAF_PILE), new SimpleBlockPlacer())).tries(32).build();
 	public static final BlockClusterFeatureConfig PINK_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.WHITE_MUSHROOM);
 	public static final BlockClusterFeatureConfig MAGENTA_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.LIGHT_GRAY_MUSHROOM);
-	
+
 	public static final TreeFeatureConfig WHITE_CHERRY_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(CHERRY_OAK_LOG), new SimpleBlockStateProvider(WHITE_CHERRY_OAK_LEAVES), new BlobFoliagePlacer(2, 0))).baseHeight(5).heightRandA(2).foliageHeight(3).noVines().setSapling(WHITE_CHERRY_OAK_SAPLING).build();
+	public static final TreeFeatureConfig WHITE_CHERRY_OAK_TREE_BEEHIVED_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(CHERRY_OAK_LOG), new SimpleBlockStateProvider(WHITE_CHERRY_OAK_LEAVES), new BlobFoliagePlacer(2, 0))).baseHeight(5).heightRandA(2).foliageHeight(3).noVines().treeDecorators(ImmutableList.of(new BeehiveTreeDecorator(0.05F))).setSapling(WHITE_CHERRY_OAK_SAPLING).build();
 	public static final TreeFeatureConfig FANCY_WHITE_CHERRY_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(CHERRY_OAK_LOG), new SimpleBlockStateProvider(WHITE_CHERRY_OAK_LEAVES), new BlobFoliagePlacer(0, 0))).setSapling(WHITE_CHERRY_OAK_SAPLING).build();
+	public static final TreeFeatureConfig FANCY_WHITE_CHERRY_OAK_TREE_BEEHIVED_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(CHERRY_OAK_LOG), new SimpleBlockStateProvider(WHITE_CHERRY_OAK_LEAVES), new BlobFoliagePlacer(0, 0))).treeDecorators(ImmutableList.of(new BeehiveTreeDecorator(0.05F))).setSapling(WHITE_CHERRY_OAK_SAPLING).build();
 	public static final BlockClusterFeatureConfig WHITE_CHERRY_OAK_LEAF_PILE_CONFIG = (new BlockClusterFeatureConfig.Builder(new SimpleBlockStateProvider(WHITE_CHERRY_OAK_LEAF_PILE), new SimpleBlockPlacer())).tries(32).build();
 	public static final BlockClusterFeatureConfig WHITE_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.WHITE_MUSHROOM);
 	public static final BlockClusterFeatureConfig LIGHT_GRAY_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.LIGHT_GRAY_MUSHROOM);

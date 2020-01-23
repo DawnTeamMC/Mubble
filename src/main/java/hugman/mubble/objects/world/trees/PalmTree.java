@@ -1,4 +1,4 @@
-package hugman.mubble.objects.world.feature.tree;
+package hugman.mubble.objects.world.trees;
 
 import java.util.Random;
 
@@ -14,7 +14,7 @@ public class PalmTree extends Tree
 {
 	@Nullable
 	@Override
-	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random)
+	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean canHaveBeeHive)
 	{
 		return MubbleFeatures.PALM_TREE.configure(MubbleFeatureConfigs.PALM_TREE_CONFIG);
 	}

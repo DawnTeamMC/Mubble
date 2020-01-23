@@ -1,4 +1,4 @@
-package hugman.mubble.objects.world.feature.tree;
+package hugman.mubble.objects.world.trees;
 
 import java.util.Random;
 
@@ -15,7 +15,7 @@ public class RedPressGardenTree extends BigTree
 {
 	@Nullable
 	@Override
-	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random rand)
+	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random rand, boolean canHaveBeeHive)
 	{
 	      return rand.nextInt(10) == 0 ? Feature.FANCY_TREE.configure(MubbleFeatureConfigs.FANCY_RED_PRESS_GARDEN_TREE_CONFIG) : Feature.NORMAL_TREE.configure(MubbleFeatureConfigs.RED_PRESS_GARDEN_TREE_CONFIG);
 	}
