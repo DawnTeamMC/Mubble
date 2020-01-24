@@ -1,4 +1,4 @@
-package hugman.mubble.objects.world.feature.tree;
+package hugman.mubble.objects.world.trees;
 
 import java.util.Random;
 
@@ -12,7 +12,7 @@ import net.minecraft.world.gen.feature.MegaTreeFeatureConfig;
 public class PinkPressGardenTree extends LargeTreeSaplingGenerator
 {
 	@Override
-	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl)
+	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean canHaveBeeHive)
 	{
 		return random.nextInt(10) == 0 ? Feature.FANCY_TREE.configure(MubbleFeatureConfigs.FANCY_PINK_PRESS_GARDEN_TREE_CONFIG) : Feature.NORMAL_TREE.configure(MubbleFeatureConfigs.PINK_PRESS_GARDEN_TREE_CONFIG);
 	}

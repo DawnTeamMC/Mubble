@@ -1,4 +1,4 @@
-package hugman.mubble.objects.world.feature.tree;
+package hugman.mubble.objects.world.trees;
 
 import java.util.Random;
 
@@ -11,7 +11,7 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 public class PalmTree extends SaplingGenerator
 {
 	@Override
-	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean bl)
+	protected ConfiguredFeature<BranchedTreeFeatureConfig, ?> createTreeFeature(Random random, boolean canHaveBeeHive)
 	{
 		return MubbleFeatures.PALM_TREE.configure(MubbleFeatureConfigs.PALM_TREE_CONFIG);
 	}
