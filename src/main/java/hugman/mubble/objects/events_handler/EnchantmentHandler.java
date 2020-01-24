@@ -39,7 +39,7 @@ public class EnchantmentHandler
 			PlayerEntity playerIn = event.getAttackingPlayer();
 			if(playerIn.getStackInHand(Hand.MAIN_HAND) != null)
 			{
-				if(EnchantmentHelper.getLevel(MubbleEnchantments.TELEKINESIS, playerIn.getStackInHand(Hand.MAIN_HAND)) >= 2)
+				if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.TELEKINESIS, playerIn.getStackInHand(Hand.MAIN_HAND)) >= 2)
 				{
 					playerIn.giveExperiencePoints(event.getDroppedExperience());
 					event.setCanceled(true);

@@ -1,4 +1,4 @@
-package hugman.mubble.objects.world.feature.tree;
+package hugman.mubble.objects.world.feature;
 
 import java.util.Random;
 import java.util.Set;

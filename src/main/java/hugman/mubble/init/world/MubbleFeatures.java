@@ -2,7 +2,7 @@ package hugman.mubble.init.world;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.feature.MubbleOreFeature;
-import hugman.mubble.objects.world.feature.tree.PalmTreeFeature;
+import hugman.mubble.objects.world.feature.PalmTreeFeature;
 import hugman.mubble.objects.world.feature_config.MubbleOreFeatureConfig;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
