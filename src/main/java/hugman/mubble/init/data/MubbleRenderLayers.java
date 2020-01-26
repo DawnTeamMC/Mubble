@@ -1,8 +1,9 @@
-package hugman.mubble.init;
+package hugman.mubble.init.data;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import hugman.mubble.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;

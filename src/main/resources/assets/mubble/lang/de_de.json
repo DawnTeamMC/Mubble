@@ -966,6 +966,23 @@
 	"block.mubble.potted_scarlet_orchid": "Eingetopfte Scharlachrote Orchidee",
 	"block.mubble.potted_potato_flower": "Eingetopfte Kartoffelblume",
 
+	"//block.minecraft.banner.star.blue": "Blue Star",
+	"//block.minecraft.banner.star.light_blue": "Light Blue Star",
+	"//block.minecraft.banner.star.cyan": "Cyan Star",
+	"//block.minecraft.banner.star.green": "Green Star",
+	"//block.minecraft.banner.star.lime": "Lime Star",
+	"//block.minecraft.banner.star.yellow": "Yellow Star",
+	"//block.minecraft.banner.star.orange": "Orange Star",
+	"//block.minecraft.banner.star.red": "Red Star",
+	"//block.minecraft.banner.star.pink": "Pink Star",
+	"//block.minecraft.banner.star.magenta": "Magenta Star",
+	"//block.minecraft.banner.star.purple": "Purple Star",
+	"//block.minecraft.banner.star.brown": "Brown Star",
+	"//block.minecraft.banner.star.white": "White Star",
+	"//block.minecraft.banner.star.light_gray": "Light Gray Star",
+	"//block.minecraft.banner.star.gray": "Gray Star",
+	"//block.minecraft.banner.star.black": "Black Star",
+
 
 
 	"comment": "ITEMS",
@@ -1002,10 +1019,13 @@
 	"item.mubble.jingle_bells": "Klingelglocken",
 	"item.mubble.small_bulb": "Kleine Glühbirne",
 	"item.mubble.totem_of_ascending": "Totem des Aufsteigends",
+	"//item.mubble.star_banner_pattern": "Banner Pattern",
+	"//item.mubble.star_banner_pattern.desc": "Star",
 
 
 	"item.mubble.super_mushroom": "Superpilz",
 	"item.mubble.peach": "Pfirsich",
+	"item.mubble.fireball": "Feuerball",
 	"item.mubble.cape_feather": "Federumhang",
 	"item.mubble.super_cape_feather": "Superfederumhang",
 	"item.mubble.super_star": "Superstern",

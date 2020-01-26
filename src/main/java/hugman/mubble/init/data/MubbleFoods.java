@@ -1,4 +1,4 @@
-package hugman.mubble.init;
+package hugman.mubble.init.data;
 
 import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;
