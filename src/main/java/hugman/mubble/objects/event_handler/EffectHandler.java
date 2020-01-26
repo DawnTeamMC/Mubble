@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handler;
+package hugman.mubble.objects.event_handler;
 
 import hugman.mubble.init.MubbleEffects;
 import hugman.mubble.init.data.MubbleTags;

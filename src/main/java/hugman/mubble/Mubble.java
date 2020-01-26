@@ -19,7 +19,7 @@ import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
-import hugman.mubble.objects.events_handler.KonamiHandler;
+import hugman.mubble.objects.event_handler.KonamiHandler;
 import hugman.mubble.util.MoreWordUtils;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;

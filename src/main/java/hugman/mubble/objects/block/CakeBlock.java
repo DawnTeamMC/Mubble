@@ -1,13 +1,12 @@
 package hugman.mubble.objects.block;
 
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
 
 public class CakeBlock extends net.minecraft.block.CakeBlock
 {
 	/* Extension for internal publicity */
-    public CakeBlock()
+    public CakeBlock(Block.Properties builder)
     {
-        super(Properties.create(Material.CAKE).hardnessAndResistance(0.5F).sound(SoundType.CLOTH));
+        super(builder);
     }
 }

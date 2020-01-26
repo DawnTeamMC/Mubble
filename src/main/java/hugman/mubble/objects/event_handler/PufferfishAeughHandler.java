@@ -1,4 +1,4 @@
-package hugman.mubble.objects.events_handler;
+package hugman.mubble.objects.event_handler;
 
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.Entity;
