@@ -2,31 +2,32 @@ package hugman.mubble.objects.item;
 
 import hugman.mubble.objects.entity.FireballEntity;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.dispenser.IPosition;
-import net.minecraft.dispenser.ProjectileDispenseBehavior;
-import net.minecraft.entity.IProjectile;
+import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.SnowballEntity;
+import net.minecraft.entity.projectile.Projectile;
+import net.minecraft.entity.thrown.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
 
 public class FireballItem extends Item
 {
-	public FireballItem(Properties builder)
+	public FireballItem(Settings builder)
 	{
 		super(builder);
 		
-	    DispenserBlock.registerDispenseBehavior(Items.SNOWBALL, new ProjectileDispenseBehavior()
+	    DispenserBlock.registerBehavior(Items.SNOWBALL, new ProjectileDispenserBehavior()
 	    {
-	    	protected IProjectile getProjectileEntity(World world, IPosition pos, ItemStack stack)
+	    	@Override
+	    	protected Projectile createProjectile(World world, Position pos, ItemStack stack)
 	    	{
 	    		return Util.make(new SnowballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) ->
 	    		{
@@ -37,24 +38,24 @@ public class FireballItem extends Item
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
+	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
 	{
-		ItemStack stack = player.getHeldItem(hand);
-		world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
-		if(!world.isRemote)
+		ItemStack stack = player.getStackInHand(hand);
+		world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (RANDOM.nextFloat() * 0.4F + 0.8F));
+		if(!world.isClient)
 		{
 			FireballEntity entity = new FireballEntity(world, player);
 			entity.setItem(stack);
-			entity.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
-			world.addEntity(entity);
+			entity.setProperties(player, player.pitch, player.yaw, 0.0F, 1.5F, 1.0F);
+			world.spawnEntity(entity);
 		}
 		
-		player.addStat(Stats.ITEM_USED.get(this));
-		if(!player.abilities.isCreativeMode)
+		player.incrementStat(Stats.USED.getOrCreateStat(this));
+		if(!player.abilities.creativeMode)
 		{
-			stack.shrink(1);
+			stack.decrement(1);
 		}
 		
-		return ActionResult.success(stack);
+		return TypedActionResult.success(stack);
 	}
 }

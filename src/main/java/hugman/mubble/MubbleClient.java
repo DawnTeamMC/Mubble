@@ -12,6 +12,7 @@ import hugman.mubble.objects.entity.render.ToadRenderer;
 import hugman.mubble.objects.entity.render.ZombieCowmanRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 
 public class MubbleClient implements ClientModInitializer
 {
@@ -33,5 +34,6 @@ public class MubbleClient implements ClientModInitializer
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.ZOMBIE_COWMAN, (dispatcher, context) -> new ZombieCowmanRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.CUSTOM_TNT, (dispatcher, context) -> new CustomTNTRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.FLYING_BLOCK, (dispatcher, context) -> new FlyingBlockRenderer(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(MubbleEntities.FIREBALL, (dispatcher, context) -> new FlyingItemEntityRenderer<>(dispatcher, context.getItemRenderer()));
 	}
 }

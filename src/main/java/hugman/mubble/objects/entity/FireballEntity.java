@@ -4,25 +4,25 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.network.packet.EntitySpawnS2CPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.BlazeEntity;
-import net.minecraft.entity.projectile.ProjectileItemEntity;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.BlazeEntity;
+import net.minecraft.entity.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.network.IPacket;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.util.DamageSource;
+import net.minecraft.network.Packet;
+import net.minecraft.tag.BlockTags;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.EntityRayTraceResult;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
 
-public class FireballEntity extends ProjectileItemEntity
+public class FireballEntity extends ThrownItemEntity
 {
-	public FireballEntity(EntityType<? extends ProjectileItemEntity> entityType, World world)
+	public FireballEntity(EntityType<? extends ThrownItemEntity> entityType, World world)
 	{
 		super(entityType, world);
 	}
@@ -44,47 +44,48 @@ public class FireballEntity extends ProjectileItemEntity
 	}
 
 	@Override
-	protected void onImpact(RayTraceResult result)
+	protected void onCollision(HitResult result)
 	{
-		if(result.getType() == RayTraceResult.Type.ENTITY)
+		if(result.getType() == HitResult.Type.ENTITY)
 		{
-			Entity entity = ((EntityRayTraceResult)result).getEntity();
+			Entity entity = ((EntityHitResult) result).getEntity();
 			int i = entity instanceof BlazeEntity ? 0 : 3;
-			entity.setFire(5);
-			entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), (float)i);
+			entity.setOnFireFor(5);
+			entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), (float) i);
 		}
 		
-		if(result.getType() == RayTraceResult.Type.BLOCK)
+		if(result.getType() == HitResult.Type.BLOCK)
 		{
-			onBlockImpact(((BlockRayTraceResult)result).getPos());
+			onBlockImpact(((BlockHitResult) result).getBlockPos());
 		}
 		
-		if(!world.isRemote)
+		if(!this.world.isClient)
 		{
-			world.setEntityState(this, (byte)3);
-			remove();
+			this.world.sendEntityStatus(this, (byte) 3);
+			this.remove();
 		}
 	}
 
 	@Override
-	public IPacket<?> createSpawnPacket()
+	public Packet<?> createSpawnPacket()
 	{
-		return NetworkHooks.getEntitySpawningPacket(this);
+		Entity entity = this.getOwner();
+		return new EntitySpawnS2CPacket(this, entity == null ? 0 : entity.getEntityId());
 	}
 	
 	private void onBlockImpact(BlockPos pos)
 	{
-		BlockState state = world.getBlockState(pos);
-		if(state.getBlock().isIn(BlockTags.ICE))
+		BlockState state = this.world.getBlockState(pos);
+		if(state.getBlock().matches(BlockTags.ICE))
 		{
-			if(world.dimension.doesWaterVaporize())
+			if(this.world.dimension.doesWaterVaporize())
 			{
-				world.removeBlock(pos, false);
+				this.world.removeBlock(pos, false);
 			}
 			else
 			{
-				world.setBlockState(pos, Blocks.WATER.getDefaultState());
-				world.neighborChanged(pos, Blocks.WATER, pos);
+				this.world.setBlockState(pos, Blocks.WATER.getDefaultState());
+				this.world.updateNeighbor(pos, Blocks.WATER, pos);
 			}
 		}
 	}
