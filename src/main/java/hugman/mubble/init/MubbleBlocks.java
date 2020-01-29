@@ -34,7 +34,6 @@ import hugman.mubble.objects.block.SaplingBlock;
 import hugman.mubble.objects.block.SpringBlock;
 import hugman.mubble.objects.block.StairsBlock;
 import hugman.mubble.objects.block.StoneButtonBlock;
-import hugman.mubble.objects.block.StripWoodBlock;
 import hugman.mubble.objects.block.SuperNoteBlock;
 import hugman.mubble.objects.block.TetrisGlassBlock;
 import hugman.mubble.objects.block.TimeswapTableBlock;
@@ -67,6 +66,7 @@ import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.FlowerBlock;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.LeavesBlock;
+import net.minecraft.block.LogBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.block.PillarBlock;
@@ -174,10 +174,10 @@ public class MubbleBlocks
     public static final Block CHERRY_OAK_PLANKS = register("cherry_oak_planks", new Block(Settings.copy(Blocks.DARK_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
     public static final Block PINK_CHERRY_OAK_SAPLING = register("pink_cherry_oak_sapling", new SaplingBlock(new PinkCherryOakTree()), ItemGroup.DECORATIONS, true);
     public static final Block WHITE_CHERRY_OAK_SAPLING = register("white_cherry_oak_sapling", new SaplingBlock(new WhiteCherryOakTree()), ItemGroup.DECORATIONS, true);
-    public static final Block CHERRY_OAK_LOG = register("cherry_oak_log", new StripWoodBlock(Settings.copy(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block STRIPPED_CHERRY_OAK_LOG = register("stripped_cherry_oak_log", new PillarBlock(Settings.copy(CHERRY_OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block CHERRY_OAK_WOOD = register("cherry_oak_wood", new StripWoodBlock(Settings.copy(CHERRY_OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block STRIPPED_CHERRY_OAK_WOOD = register("stripped_cherry_oak_wood", new PillarBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block CHERRY_OAK_LOG = register("cherry_oak_log", new LogBlock(MaterialColor.WOOD, Settings.copy(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block STRIPPED_CHERRY_OAK_LOG = register("stripped_cherry_oak_log", new LogBlock(MaterialColor.WOOD, Settings.copy(CHERRY_OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block CHERRY_OAK_WOOD = register("cherry_oak_wood", new LogBlock(MaterialColor.WOOD, Settings.copy(CHERRY_OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block STRIPPED_CHERRY_OAK_WOOD = register("stripped_cherry_oak_wood", new LogBlock(MaterialColor.WOOD, Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
     public static final Block PINK_CHERRY_OAK_LEAVES = register("pink_cherry_oak_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, false, 30, 60);
     public static final Block PINK_CHERRY_OAK_LEAF_PILE = register("pink_cherry_oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS , false, 60, 20);
     public static final Block WHITE_CHERRY_OAK_LEAVES = register("white_cherry_oak_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, false, 30, 60);
@@ -194,10 +194,10 @@ public class MubbleBlocks
 
     public static final Block PALM_PLANKS = register("palm_planks", new Block(Settings.copy(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
     public static final Block PALM_SAPLING = register("palm_sapling", new SaplingBlock(new PalmTree()), ItemGroup.DECORATIONS, true);
-    public static final Block PALM_LOG = register("palm_log", new StripWoodBlock(Settings.copy(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block STRIPPED_PALM_LOG = register("stripped_palm_log", new PillarBlock(Settings.copy(MubbleBlocks.PALM_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block PALM_WOOD = register("palm_wood", new StripWoodBlock(Settings.copy(MubbleBlocks.PALM_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block STRIPPED_PALM_WOOD = register("stripped_palm_wood", new PillarBlock(Settings.copy(MubbleBlocks.PALM_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block PALM_LOG = register("palm_log", new LogBlock(MaterialColor.WOOD, Settings.copy(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block STRIPPED_PALM_LOG = register("stripped_palm_log", new LogBlock(MaterialColor.WOOD, Settings.copy(MubbleBlocks.PALM_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block PALM_WOOD = register("palm_wood", new LogBlock(MaterialColor.WOOD, Settings.copy(MubbleBlocks.PALM_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block STRIPPED_PALM_WOOD = register("stripped_palm_wood", new LogBlock(MaterialColor.WOOD, Settings.copy(MubbleBlocks.PALM_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
     public static final Block PALM_LEAVES = register("palm_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, false, 30, 60);
     public static final Block PALM_LEAF_PILE = register("palm_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS, false, 60, 20);
     public static final Block PALM_PRESSURE_PLATE = register("palm_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.copy(MubbleBlocks.PALM_PLANKS).noCollision().hardness(0.5F).build()), ItemGroup.REDSTONE, false);
@@ -703,10 +703,11 @@ public class MubbleBlocks
     
     public static final Block TOMATOES = register("tomatoes", new CropsBlock());
     public static final Block SALAD = register("salad", new CropsBlock());
+    
     public static final Block BLUEBERRY_BUSH = register("blueberry_bush", new BerryBushBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH).build()), 60, 100);
     public static final Block CHEESE_BLOCK = register("cheese_block", new Block(FabricBlockSettings.of(Material.ORGANIC, MaterialColor.YELLOW).hardness(0.5f).sounds(BlockSoundGroup.SNOW).build()), ItemGroup.FOOD, false, 60, 60);
-    public static final Block CHOCOLATE_CAKE = register("chocolate_cake", new CakeBlock(), ItemGroup.FOOD, false);
-    public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = register("minecraft_10th_anniversary_cake", new CakeBlock(), ItemGroup.FOOD, false);
+    public static final Block CHOCOLATE_CAKE = register("chocolate_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL).build()), ItemGroup.FOOD, false);
+    public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = register("minecraft_10th_anniversary_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL).build()), ItemGroup.FOOD, false);
     
     public static final Block WHITE_BALLOON = register("white_balloon", new BalloonBlock(DyeColor.WHITE), ItemGroup.DECORATIONS, false, 30, 60);
     public static final Block LIGHT_GRAY_BALLOON = register("light_gray_balloon", new BalloonBlock(DyeColor.LIGHT_GRAY), ItemGroup.DECORATIONS, false, 30, 60);
@@ -941,10 +942,10 @@ public class MubbleBlocks
     public static final Block PRESS_GARDEN_PLANKS = register("press_garden_planks", new Block(Settings.copy(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
     public static final Block RED_PRESS_GARDEN_SAPLING = register("red_press_garden_sapling", new SaplingBlock(new RedPressGardenTree()), ItemGroup.DECORATIONS, true);
     public static final Block PINK_PRESS_GARDEN_SAPLING = register("pink_press_garden_sapling", new SaplingBlock(new PinkPressGardenTree()), ItemGroup.DECORATIONS, true);
-    public static final Block PRESS_GARDEN_LOG = register("press_garden_log", new StripWoodBlock(Settings.copy(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block STRIPPED_PRESS_GARDEN_LOG = register("stripped_press_garden_log", new PillarBlock(Settings.copy(PRESS_GARDEN_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block PRESS_GARDEN_WOOD = register("press_garden_wood", new StripWoodBlock(Settings.copy(PRESS_GARDEN_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block STRIPPED_PRESS_GARDEN_WOOD = register("stripped_press_garden_wood", new PillarBlock(Settings.copy(PRESS_GARDEN_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block PRESS_GARDEN_LOG = register("press_garden_log", new LogBlock(MaterialColor.WOOD, Settings.copy(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block STRIPPED_PRESS_GARDEN_LOG = register("stripped_press_garden_log", new LogBlock(MaterialColor.WOOD, Settings.copy(PRESS_GARDEN_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block PRESS_GARDEN_WOOD = register("press_garden_wood", new LogBlock(MaterialColor.WOOD, Settings.copy(PRESS_GARDEN_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block STRIPPED_PRESS_GARDEN_WOOD = register("stripped_press_garden_wood", new LogBlock(MaterialColor.WOOD, Settings.copy(PRESS_GARDEN_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
     public static final Block RED_PRESS_GARDEN_LEAVES = register("red_press_garden_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, false, 30, 60);
     public static final Block RED_PRESS_GARDEN_LEAF_PILE = register("red_press_garden_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS, false, 60, 20);
     public static final Block PINK_PRESS_GARDEN_LEAVES = register("pink_press_garden_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, false, 30, 60);
@@ -964,10 +965,10 @@ public class MubbleBlocks
     /* UNDERTALE / DELTARUNE */
     public static final Block SCARLET_PLANKS = register("scarlet_planks", new Block(Settings.copy(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
     public static final Block SCARLET_SAPLING = register("scarlet_sapling", new SaplingBlock(new ScarletTree()), ItemGroup.DECORATIONS, true);
-    public static final Block SCARLET_LOG = register("scarlet_log", new StripWoodBlock(Settings.copy(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block STRIPPED_SCARLET_LOG = register("stripped_scarlet_log", new PillarBlock(Settings.copy(SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block SCARLET_WOOD = register("scarlet_wood", new StripWoodBlock(Settings.copy(SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
-    public static final Block STRIPPED_SCARLET_WOOD = register("stripped_scarlet_wood", new PillarBlock(Settings.copy(SCARLET_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block SCARLET_LOG = register("scarlet_log", new LogBlock(MaterialColor.WOOD, Settings.copy(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block STRIPPED_SCARLET_LOG = register("stripped_scarlet_log", new LogBlock(MaterialColor.WOOD, Settings.copy(SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block SCARLET_WOOD = register("scarlet_wood", new LogBlock(MaterialColor.WOOD, Settings.copy(SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
+    public static final Block STRIPPED_SCARLET_WOOD = register("stripped_scarlet_wood", new LogBlock(MaterialColor.WOOD, Settings.copy(SCARLET_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
     public static final Block SCARLET_LEAVES = register("scarlet_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, false, 30, 60);
     public static final Block SCARLET_LEAF_PILE = register("scarlet_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS, false, 60, 20);
     public static final Block SCARLET_PRESSURE_PLATE = register("scarlet_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.copy(SCARLET_PLANKS).noCollision().hardness(0.5F).build()), ItemGroup.REDSTONE, false);

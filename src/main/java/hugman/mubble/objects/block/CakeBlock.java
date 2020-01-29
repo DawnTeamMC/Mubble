@@ -1,14 +1,12 @@
 package hugman.mubble.objects.block;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.minecraft.block.Material;
-import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.block.Block;
 
 public class CakeBlock extends net.minecraft.block.CakeBlock
 {
 	/* Extension for internal publicity */
-    public CakeBlock()
+    public CakeBlock(Block.Settings builder)
     {
-        super(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL).build());
+        super(builder);
     }
 }

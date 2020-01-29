@@ -5,7 +5,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.stat.Stats;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -18,11 +17,11 @@ public class ShakeInstrumentItem extends InstrumentItem
     }
     
     @Override
-    public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
+    public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity player, Hand handIn)
     {
-    	playerIn.swingHand(handIn);
-    	playerIn.playSound(getInstrumentSound(), 0.5F, 1F);
-    	playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
-		return new TypedActionResult<ItemStack>(ActionResult.SUCCESS, playerIn.getStackInHand(handIn));
+    	player.swingHand(handIn);
+    	player.playSound(getInstrumentSound(), 0.5F, 1F);
+    	player.incrementStat(Stats.USED.getOrCreateStat(this));
+		return TypedActionResult.success(player.getStackInHand(handIn));
     }
 }

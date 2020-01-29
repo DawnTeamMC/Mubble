@@ -1,4 +1,5 @@
 {
+    "gui_light": "front",
 	"textures":
 	{
 		"handle": "mubble:item/lightsaber/handle"

@@ -1,9 +1,12 @@
 package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.init.data.MubbleFoods;
+import hugman.mubble.init.data.MubbleItemTiers;
 import hugman.mubble.objects.item.AxeItem;
 import hugman.mubble.objects.item.BandageItem;
 import hugman.mubble.objects.item.CapeFeatherItem;
+import hugman.mubble.objects.item.FireballItem;
 import hugman.mubble.objects.item.KeyItem;
 import hugman.mubble.objects.item.LightsaberItem;
 import hugman.mubble.objects.item.PickaxeItem;
@@ -12,7 +15,7 @@ import hugman.mubble.objects.item.SmallBulbItem;
 import hugman.mubble.objects.item.SmashBallItem;
 import hugman.mubble.objects.item.SuperStarItem;
 import hugman.mubble.objects.item.TotemOfAscendingItem;
-import hugman.mubble.util.MubbleItemTier;
+import net.minecraft.item.BannerPatternItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -51,18 +54,20 @@ public class MubbleItems
     public static final Item VANADIUM = register("vanadium", new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
     public static final Item BISMUTH_DUST = register("bismuth_dust", new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
     public static final Item CRYSTALLIZED_BISMUTH = register("crystallized_bismuth", new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
-    public static final Item BISMUTH_SWORD = register("bismuth_sword", new SwordItem(MubbleItemTier.BISMUTH, 4, -2.4F, new Item.Settings().group(ItemGroup.COMBAT)));
-    public static final Item BISMUTH_SHOVEL = register("bismuth_shovel", new ShovelItem(MubbleItemTier.BISMUTH, 1.5F, -3.0F, new Item.Settings().group(ItemGroup.TOOLS)));
-    public static final Item BISMUTH_PICKAXE = register("bismuth_pickaxe", new PickaxeItem(MubbleItemTier.BISMUTH, 1, -2.4F, new Item.Settings().group(ItemGroup.TOOLS)));
-    public static final Item BISMUTH_AXE = register("bismuth_axe", new AxeItem(MubbleItemTier.BISMUTH, 4.5F, -2.5F, new Item.Settings().group(ItemGroup.TOOLS)));
-    public static final Item BISMUTH_HOE = register("bismuth_hoe", new HoeItem(MubbleItemTier.BISMUTH, 0.0F, new Item.Settings().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_SWORD = register("bismuth_sword", new SwordItem(MubbleItemTiers.BISMUTH, 4, -2.4F, new Item.Settings().group(ItemGroup.COMBAT)));
+    public static final Item BISMUTH_SHOVEL = register("bismuth_shovel", new ShovelItem(MubbleItemTiers.BISMUTH, 1.5F, -3.0F, new Item.Settings().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_PICKAXE = register("bismuth_pickaxe", new PickaxeItem(MubbleItemTiers.BISMUTH, 1, -2.4F, new Item.Settings().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_AXE = register("bismuth_axe", new AxeItem(MubbleItemTiers.BISMUTH, 4.5F, -2.5F, new Item.Settings().group(ItemGroup.TOOLS)));
+    public static final Item BISMUTH_HOE = register("bismuth_hoe", new HoeItem(MubbleItemTiers.BISMUTH, 0.0F, new Item.Settings().group(ItemGroup.TOOLS)));
     public static final Item PERMAFROST_BRICK = register("permafrost_brick", new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
     public static final Item BANDAGE = register("bandage", new BandageItem(new Item.Settings().group(ItemGroup.MISC).maxCount(16)));
     public static final Item TOTEM_OF_ASCENDING = register("totem_of_ascending", new TotemOfAscendingItem(new Item.Settings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON)));
-
+    public static final Item STAR_BANNER_PATTERN = register("star_banner_pattern", new BannerPatternItem(MubbleBannerPatterns.STAR, (new Item.Settings()).maxCount(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
+    
     /* SUPER MARIO */
     public static final Item SUPER_MUSHROOM = register("super_mushroom", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.SUPER_MUSHROOM)));
     public static final Item PEACH = register("peach", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.PEACH)));
+    public static final Item FIREBALL = register("fireball", new FireballItem(new Item.Settings().group(ItemGroup.COMBAT)));
     public static final Item CAPE_FEATHER = register("cape_feather", new CapeFeatherItem(new Item.Settings().group(ItemGroup.TRANSPORTATION)));
     public static final Item SUPER_CAPE_FEATHER = register("super_cape_feather", new CapeFeatherItem(new Item.Settings().group(ItemGroup.TRANSPORTATION).maxCount(1).rarity(Rarity.EPIC)));
     public static final Item SUPER_STAR = register("super_star", new SuperStarItem(new Item.Settings().group(ItemGroup.MISC).maxCount(1).rarity(Rarity.RARE).food(MubbleFoods.SUPER_STAR)));

@@ -1,4 +1,4 @@
-package hugman.mubble.util;
+package hugman.mubble.init.data;
 
 import java.util.function.Supplier;
 
@@ -7,7 +7,7 @@ import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Lazy;
 
-public enum MubbleItemTier implements ToolMaterial
+public enum MubbleItemTiers implements ToolMaterial
 {
 	VANADIUM(3, 1756, 10.0F, 3.5F, 12, () ->
 	{
@@ -28,7 +28,7 @@ public enum MubbleItemTier implements ToolMaterial
 	private final int enchantability;
 	private final Lazy<Ingredient> repairMaterial;
 
-	private MubbleItemTier(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn)
+	private MubbleItemTiers(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn)
 	{
 		this.harvestLevel = harvestLevelIn;
 		this.maxUses = maxUsesIn;

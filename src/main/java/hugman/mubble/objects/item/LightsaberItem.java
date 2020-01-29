@@ -1,7 +1,7 @@
 package hugman.mubble.objects.item;
 
 import hugman.mubble.init.MubbleSounds;
-import hugman.mubble.util.MubbleItemTier;
+import hugman.mubble.init.data.MubbleItemTiers;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.packet.PlaySoundFromEntityS2CPacket;
 import net.minecraft.client.network.packet.StopSoundS2CPacket;
@@ -21,7 +21,7 @@ public class LightsaberItem extends SwordItem
 	
 	public LightsaberItem(Settings builder)
 	{
-		super(MubbleItemTier.KYBER, 3, -2.4F, builder);
+		super(MubbleItemTiers.KYBER, 3, -2.4F, builder);
 	}
 	
 	/*@Override

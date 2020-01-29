@@ -21,6 +21,7 @@ public class SmallBulbItem extends Item
     	World worldIn = context.getWorld();
     	BlockPos pos = context.getBlockPos();
     	BlockState state = worldIn.getBlockState(pos);
+    	
     	if(state.getBlock() instanceof GarlandBlock)
     	{
 			if(!state.get(GarlandBlock.ILLUMINATED))

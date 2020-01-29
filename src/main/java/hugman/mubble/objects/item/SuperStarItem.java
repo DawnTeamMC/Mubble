@@ -29,8 +29,8 @@ public class SuperStarItem extends Item
     		{
     			serverplayerentity.networkHandler.sendPacket(sstopsoundpacket);
     		}
-        	worldIn.playSoundFromEntity((PlayerEntity) null, entityLiving, MubbleSounds.ITEM_SUPER_STAR_THEME, SoundCategory.PLAYERS, 1.0F, 1.0F);
     	}
+    	worldIn.playSoundFromEntity((PlayerEntity) null, entityLiving, MubbleSounds.ITEM_SUPER_STAR_THEME, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		return super.finishUsing(stack, worldIn, entityLiving);
     }
 }

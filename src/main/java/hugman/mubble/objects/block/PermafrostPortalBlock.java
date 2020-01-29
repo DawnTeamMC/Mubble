@@ -151,8 +151,6 @@ public class PermafrostPortalBlock extends Block
 			if(rand.nextInt(10) == 0) worldIn.addParticle(ParticleTypes.CLOUD, d0, d1, d2, d3, d4, d5);
 		}
 	}
-	
-	/* PORTAL STUFF */
 
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)

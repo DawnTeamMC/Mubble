@@ -966,6 +966,23 @@
 	"block.mubble.potted_scarlet_orchid": "Orchidée écarlate en pot",
 	"block.mubble.potted_potato_flower": "Fleur patate en pot",
 
+	"block.minecraft.banner.star.blue": "Étoile bleue",
+	"block.minecraft.banner.star.light_blue": "Étoile bleu clair",
+	"block.minecraft.banner.star.cyan": "Étoile cyan",
+	"block.minecraft.banner.star.green": "Étoile verte",
+	"block.minecraft.banner.star.lime": "Étoile clair",
+	"block.minecraft.banner.star.yellow": "Étoile jaune",
+	"block.minecraft.banner.star.orange": "Étoile orange",
+	"block.minecraft.banner.star.red": "Étoile rouge",
+	"block.minecraft.banner.star.pink": "Étoile rose",
+	"block.minecraft.banner.star.magenta": "Étoile magenta",
+	"block.minecraft.banner.star.purple": "Étoile violette",
+	"block.minecraft.banner.star.brown": "Étoile marron",
+	"block.minecraft.banner.star.white": "Étoile blanche",
+	"block.minecraft.banner.star.light_gray": "Étoile gris clair",
+	"block.minecraft.banner.star.gray": "Étoile grise",
+	"block.minecraft.banner.star.black": "Étoile noire",
+
 
 
 	"comment": "ITEMS",
@@ -1002,10 +1019,13 @@
 	"item.mubble.jingle_bells": "Grelots",
 	"item.mubble.small_bulb": "Petite ampoule",
 	"item.mubble.totem_of_ascending": "Totem d'ascendance",
+	"item.mubble.star_banner_pattern": "Motif de bannière",
+	"item.mubble.star_banner_pattern.desc": "Étoile",
 
 
 	"item.mubble.super_mushroom": "Super champignon",
 	"item.mubble.peach": "Pêche",
+	"item.mubble.fireball": "Boule de feu",
 	"item.mubble.cape_feather": "Plume acrobate",
 	"item.mubble.super_cape_feather": "Super plume acrobate",
 	"item.mubble.super_star": "Super étoile",

@@ -1,4 +1,4 @@
-package hugman.mubble.init;
+package hugman.mubble.init.data;
 
 import hugman.mubble.objects.command.FoodbarCommand;
 import hugman.mubble.objects.command.HealthCommand;
