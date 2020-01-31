@@ -3,14 +3,13 @@ package hugman.mubble.objects.item;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.objects.entity.FireballEntity;
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.dispenser.IDispenseItemBehavior;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.dispenser.ProjectileDispenseBehavior;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -23,17 +22,7 @@ public class FireballItem extends Item
 	public FireballItem(Properties builder)
 	{
 		super(builder);
-		
-	    DispenserBlock.registerDispenseBehavior(Items.SNOWBALL, new ProjectileDispenseBehavior()
-	    {
-	    	protected IProjectile getProjectileEntity(World world, IPosition pos, ItemStack stack)
-	    	{
-	    		return Util.make(new SnowballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) ->
-	    		{
-	    			entity.setItem(stack);
-	    		});
-	    	}
-	    });
+	    DispenserBlock.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
 	}
 	
 	@Override
@@ -57,4 +46,16 @@ public class FireballItem extends Item
 		
 		return ActionResult.success(stack);
 	}
+	
+	public static final IDispenseItemBehavior DISPENSER_BEHAVIOR = new ProjectileDispenseBehavior()
+	{
+		@Override
+		protected IProjectile getProjectileEntity(World world, IPosition pos, ItemStack stack)
+		{
+			return Util.make(new FireballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) ->
+    		{
+    			entity.setItem(stack);
+    		});
+		};
+	};
 }

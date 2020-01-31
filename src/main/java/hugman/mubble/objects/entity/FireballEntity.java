@@ -161,7 +161,7 @@ public class FireballEntity extends ProjectileItemEntity
 		}
 		if(result.getFace() == Direction.UP)
 		{
-			setMotion(getMotion().subtract(0, getMotion().y * 1.3, 0));
+			setMotion(getMotion().subtract(0, getMotion().y * 1.45, 0));
 			return false;
 		}
 		else
