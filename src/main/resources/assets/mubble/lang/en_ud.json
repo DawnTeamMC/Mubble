@@ -1204,13 +1204,14 @@
 
 
 	"comment": "ENTITIES",
-	"entity.mubble.chincho": "oɥɔuᴉɥƆ",
-	"entity.mubble.toad": "pɐo┴",
-	"//entity.mubble.goomba": "Goomba",
 	"//entity.mubble.zombie_cowman": "Zombie Cowman",
-
 	"//entity.mubble.custom_tnt": "Custom TNT",
 	"entity.mubble.flying_block": "ʞɔolᗺ ƃuᴉʎlℲ",
+
+	"entity.mubble.chincho": "oɥɔuᴉɥƆ",
+	"//entity.mubble.goomba": "Goomba",
+	"entity.mubble.toad": "pɐo┴",
+	"//entity.mubble.fireball": "Fireball",
 
 
 
@@ -1249,6 +1250,7 @@
 	"//subtitles.mubble.entity.chincho.ambient": "Chincho talks",
 	"//subtitles.mubble.entity.chincho.hurt": "Chincho hurts",
 	"//subtitles.mubble.entity.chincho.death": "Chincho dies",
+	"//subtitles.mubble.entity.fireball.throw": "Fireball flies",
 	"//subtitles.mubble.entity.goomba.crush": "Goomba crushed",
 	"//subtitles.mubble.entity.goomba.hurt": "Goomba hurts",
 	"//subtitles.mubble.entity.goomba.death": "Goomba dies",

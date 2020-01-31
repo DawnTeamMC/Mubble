@@ -522,6 +522,21 @@
 			"mubble:entity/chincho/death"
 		]
 	},
+	"entity.fireball.death":
+	{
+		"sounds":
+		[
+			"mubble:entity/fireball/death"
+		]
+	},
+	"entity.fireball.throw":
+	{
+		"subtitle": "subtitles.mubble.entity.fireball.throw",
+		"sounds":
+		[
+			"mubble:entity/fireball/throw"
+		]
+	},
 	"entity.toad.ambient":
 	{
 		"subtitle": "subtitles.mubble.entity.toad.ambient",

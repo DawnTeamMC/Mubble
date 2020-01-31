@@ -6,9 +6,11 @@ import java.util.List;
 import hugman.mubble.Mubble;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.util.ResourceLocation;
@@ -17,8 +19,9 @@ public class MubbleTags
 {
     public static class Blocks
     {
+        public static final Tag<Block> MELTABLE_TO_WATER = tag("meltable/water");
         public static final Tag<Block> CLOUD_BLOCKS = tag("cloud_blocks");
-        public static final Tag<Block> VALID_GROUND_PALM_SAPLING = tag("valid_ground/palm_sapling");
+        public static final Tag<Block> PALM_SAPLING_VALID_GROUND = tag("valid_ground/palm_sapling");
 
         private static Tag<Block> tag(String name)
         {
@@ -29,7 +32,7 @@ public class MubbleTags
     public static class Items
     {
         public static final List<Tag<Item>> TIMESWAP_TAGS = new ArrayList<Tag<Item>>();
-        
+
         public static final Tag<Item> COINS = tag("coins");
         public static final Tag<Item> CROWNS = tag("crowns");
         public static final Tag<Item> WEIGHT_HEAVY = tag("weight/heavy");
@@ -75,6 +78,16 @@ public class MubbleTags
         private static Tag<EntityType<?>> tag(String name)
         {
             return new EntityTypeTags.Wrapper(new ResourceLocation(Mubble.MOD_ID, name));
+        }
+    }
+    
+    public static class Fluids
+    {
+        public static final Tag<Fluid> FREEZABLE_TO_ICE = tag("freezable/ice");
+
+        private static Tag<Fluid> tag(String name)
+        {
+            return new FluidTags.Wrapper(new ResourceLocation(Mubble.MOD_ID, name));
         }
     }
 }

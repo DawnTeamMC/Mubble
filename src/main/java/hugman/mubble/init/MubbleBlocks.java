@@ -1048,14 +1048,6 @@ public class MubbleBlocks
         return fBlock;
     }
     
-    private static Block register(String name, Block block, int fireEncouragement, int flammability)
-    {
-    	Block fBlock = register(name, block);
-        FireBlock fireblock = (FireBlock)Blocks.FIRE;
-        fireblock.setFireInfo(block, fireEncouragement, flammability);
-        return fBlock;
-    }
-    
     private static Block register(String name, Block block, ItemGroup group, List<BlockItem> itemList)
     {
     	Block fBlock = register(name, block);
@@ -1070,6 +1062,14 @@ public class MubbleBlocks
             }
         }
         itemList.add((BlockItem) new BlockItem(fBlock, new Item.Properties().group(group)).setRegistryName(Mubble.MOD_ID, name));
+        return fBlock;
+    }
+    
+    private static Block register(String name, Block block, int fireEncouragement, int flammability)
+    {
+    	Block fBlock = register(name, block);
+        FireBlock fireblock = (FireBlock)Blocks.FIRE;
+        fireblock.setFireInfo(block, fireEncouragement, flammability);
         return fBlock;
     }
     

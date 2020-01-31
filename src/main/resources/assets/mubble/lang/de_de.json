@@ -1204,13 +1204,14 @@
 
 
 	"comment": "ENTITIES",
-	"entity.mubble.chincho": "Chincho",
-	"entity.mubble.toad": "Toad",
-	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.zombie_cowman": "Kuhzombie",
-
 	"entity.mubble.custom_tnt": "Benutzerdefinierter TNT",
 	"entity.mubble.flying_block": "Fliegender Block",
+
+	"entity.mubble.chincho": "Chincho",
+	"entity.mubble.goomba": "Goomba",
+	"entity.mubble.toad": "Toad",
+	"//entity.mubble.fireball": "Fireball",
 
 
 
@@ -1249,6 +1250,7 @@
 	"subtitles.mubble.entity.chincho.ambient": "Chincho spricht",
 	"subtitles.mubble.entity.chincho.hurt": "Chincho nimmt Schaden",
 	"subtitles.mubble.entity.chincho.death": "Chincho stirbt",
+	"//subtitles.mubble.entity.fireball.throw": "Fireball flies",
 	"subtitles.mubble.entity.goomba.crush": "Goomba zerschmettert",
 	"subtitles.mubble.entity.goomba.hurt": "Goomba nimmt Schaden",
 	"subtitles.mubble.entity.goomba.death": "Goomba stirbt",
