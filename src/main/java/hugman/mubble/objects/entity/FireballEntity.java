@@ -13,6 +13,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.DamageSource;
@@ -29,6 +30,8 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class FireballEntity extends ProjectileItemEntity
 {
+	private int reboundingAmount = 3;
+	
 	public FireballEntity(EntityType<? extends ProjectileItemEntity> entityType, World world)
 	{
 		super(entityType, world);
@@ -49,6 +52,20 @@ public class FireballEntity extends ProjectileItemEntity
 	{
 		return MubbleItems.FIREBALL;
 	}
+	
+	@Override
+	public void writeAdditional(CompoundNBT compound)
+	{
+		super.writeAdditional(compound);
+		compound.putInt("ReboundingAmount", reboundingAmount);
+	}
+	
+	@Override
+	public void readAdditional(CompoundNBT compound)
+	{
+		super.readAdditional(compound);
+		this.reboundingAmount = compound.getInt("ReboundingAmount");
+	}
 
 	@Override
 	protected void onImpact(RayTraceResult result)
@@ -64,7 +81,7 @@ public class FireballEntity extends ProjectileItemEntity
 			removeOnImpact = onBlockImpact(((BlockRayTraceResult)result));
 		}
 		
-		if(removeOnImpact)
+		if(removeOnImpact || reboundingAmount <= 0)
 		{
 			world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_DEATH, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			if(!world.isRemote)
@@ -72,6 +89,10 @@ public class FireballEntity extends ProjectileItemEntity
 				world.setEntityState(this, (byte)3);
 				remove();
 			}
+		}
+		else
+		{
+			reboundingAmount--;
 		}
 	}
 
@@ -140,7 +161,7 @@ public class FireballEntity extends ProjectileItemEntity
 		}
 		if(result.getFace() == Direction.UP)
 		{
-			setMotion(getMotion().subtract(0, getMotion().y * 2, 0));
+			setMotion(getMotion().subtract(0, getMotion().y * 1.3, 0));
 			return false;
 		}
 		else
