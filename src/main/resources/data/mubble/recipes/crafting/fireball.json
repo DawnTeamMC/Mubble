@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:fire_flower"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:fireball",
+		"count": 5
+	}
+}
