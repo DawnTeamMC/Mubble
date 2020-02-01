@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/press_garden_wood_vertical_slab"
+		]
+	},
+	"criteria":
+	{
+		"has_wood":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:press_garden_wood"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/press_garden_wood_vertical_slab"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_wood",
+			"has_the_recipe"
+		]
+	]
+}

@@ -43,6 +43,34 @@
 
 	"block.mubble.dark_prismarine_wall": "Muret de prismarine sombre",
 
+	"//block.mubble.oak_wood_stairs": "Oak Wood Stairs",
+	"//block.mubble.spruce_wood_stairs": "Spruce Wood Stairs",
+	"//block.mubble.birch_wood_stairs": "Birch Wood Stairs",
+	"//block.mubble.jungle_wood_stairs": "Jungle Wood Stairs",
+	"//block.mubble.acacia_wood_stairs": "Acacia Wood Stairs",
+	"//block.mubble.dark_oak_wood_stairs": "Dark Oak Wood Stairs",
+	
+	"//block.mubble.oak_wood_slab": "Oak Wood Slab",
+	"//block.mubble.spruce_wood_slab": "Spruce Wood Slab",
+	"//block.mubble.birch_wood_slab": "Birch Wood Slab",
+	"//block.mubble.jungle_wood_slab": "Jungle Wood Slab",
+	"//block.mubble.acacia_wood_slab": "Acacia Wood Slab",
+	"//block.mubble.dark_oak_wood_slab": "Dark Oak Wood Slab",
+
+	"//block.mubble.oak_wood_vertical_slab": "Oak Wood Vertical Slab",
+	"//block.mubble.spruce_wood_vertical_slab": "Spruce Wood Vertical Slab",
+	"//block.mubble.birch_wood_vertical_slab": "Birch Wood Vertical Slab",
+	"//block.mubble.jungle_wood_vertical_slab": "Jungle Wood Vertical Slab",
+	"//block.mubble.acacia_wood_vertical_slab": "Acacia Wood Vertical Slab",
+	"//block.mubble.dark_oak_wood_vertical_slab": "Dark Oak Wood Vertical Slab",
+
+	"//block.mubble.oak_wood_button": "Oak Wood Button",
+	"//block.mubble.spruce_wood_button": "Spruce Wood Button",
+	"//block.mubble.birch_wood_button": "Birch Wood Button",
+	"//block.mubble.jungle_wood_button": "Jungle Wood Button",
+	"//block.mubble.acacia_wood_button": "Acacia Wood Button",
+	"//block.mubble.dark_oak_wood_button": "Dark Oak Wood Button",
+
 	"block.mubble.oak_leaf_pile": "Pile de feuilles de chêne",
 	"block.mubble.spruce_leaf_pile": "Pile de feuilles de sapin",
 	"block.mubble.birch_leaf_pile": "Pile de feuilles de bouleau",
@@ -90,6 +118,11 @@
 	"block.mubble.cherry_oak_fence_gate": "Portillon en cerisier",
 	"block.mubble.cherry_oak_fence": "Barrière en cerisier",
 	"block.mubble.cherry_oak_door": "Porte en cerisier",
+	"//block.mubble.cherry_oak_wood_stairs": "Cherry Oak Wood Stairs",
+	"//block.mubble.cherry_oak_wood_slab": "Cherry Oak Wood Slab",
+	"//block.mubble.cherry_oak_wood_vertical_slab": "Cherry Oak Wood Vertical Slab",
+	"//block.mubble.cherry_oak_wood_button": "Cherry Oak Wood Button",
+	
 	"block.mubble.palm_planks": "Planches de palmier",
 	"block.mubble.palm_sapling": "Pousse de palmier",
 	"block.mubble.palm_log": "Bûche de palmier",
@@ -107,6 +140,10 @@
 	"block.mubble.palm_fence_gate": "Portillon en palmier",
 	"block.mubble.palm_fence": "Barrière en palmier",
 	"block.mubble.palm_door": "Porte en palmier",
+	"//block.mubble.palm_wood_stairs": "Palm Wood Stairs",
+	"//block.mubble.palm_wood_slab": "Palm Wood Slab",
+	"//block.mubble.palm_wood_vertical_slab": "Palm Wood Vertical Slab",
+	"//block.mubble.palm_wood_button": "Palm Wood Button",
 
 	"block.mubble.blue_bricks": "Briques bleues",
 	"block.mubble.light_blue_bricks": "Briques bleu clairs",
@@ -878,6 +915,10 @@
 	"block.mubble.press_garden_fence_gate": "Portillon en bois de Press Garden",
 	"block.mubble.press_garden_fence": "Barrière en bois de Press Garden",
 	"block.mubble.press_garden_door": "Porte en bois de Press Garden",
+	"//block.mubble.press_garden_wood_stairs": "Press Garden Wood Stairs",
+	"//block.mubble.press_garden_wood_slab": "Press Garden Wood Slab",
+	"//block.mubble.press_garden_wood_vertical_slab": "Press Garden Wood Vertical Slab",
+	"//block.mubble.press_garden_wood_button": "Press Garden Wood Button",
 	
 	"block.mubble.spring": "Ressort",
 
@@ -899,6 +940,10 @@
 	"block.mubble.scarlet_fence_gate": "Portillon écarlate",
 	"block.mubble.scarlet_fence": "Barrière écarlate",
 	"block.mubble.scarlet_door": "Porte écarlate",
+	"//block.mubble.scarlet_wood_stairs": "Scarlet Wood Stairs",
+	"//block.mubble.scarlet_wood_slab": "Scarlet Wood Slab",
+	"//block.mubble.scarlet_wood_vertical_slab": "Scarlet Wood Vertical Slab",
+	"//block.mubble.scarlet_wood_button": "Scarlet Wood Button",
 	"block.mubble.scarlet_mushroom": "Champignon écarlate",
 	"block.mubble.scarlet_orchid": "Orchidée écarlate",
 
@@ -983,6 +1028,23 @@
 	"block.minecraft.banner.star.gray": "Étoile grise",
 	"block.minecraft.banner.star.black": "Étoile noire",
 
+	"//block.minecraft.banner.smash_ball.blue": "Balle Smash bleue",
+	"//block.minecraft.banner.smash_ball.light_blue": "Balle Smash bleu clair",
+	"//block.minecraft.banner.smash_ball.cyan": "Balle Smash cyan",
+	"//block.minecraft.banner.smash_ball.green": "Balle Smash verte",
+	"//block.minecraft.banner.smash_ball.lime": "Balle Smash clair",
+	"//block.minecraft.banner.smash_ball.yellow": "Balle Smash jaune",
+	"//block.minecraft.banner.smash_ball.orange": "Balle Smash orange",
+	"//block.minecraft.banner.smash_ball.red": "Balle Smash rouge",
+	"//block.minecraft.banner.smash_ball.pink": "Balle Smash rose",
+	"//block.minecraft.banner.smash_ball.magenta": "Balle Smash magenta",
+	"//block.minecraft.banner.smash_ball.purple": "Balle Smash violette",
+	"//block.minecraft.banner.smash_ball.brown": "Balle Smash marron",
+	"//block.minecraft.banner.smash_ball.white": "Balle Smash blanche",
+	"//block.minecraft.banner.smash_ball.light_gray": "Balle Smash gris clair",
+	"//block.minecraft.banner.smash_ball.gray": "Balle Smash grise",
+	"//block.minecraft.banner.smash_ball.black": "Balle Smash noire",
+
 
 
 	"comment": "ITEMS",
@@ -1021,6 +1083,8 @@
 	"item.mubble.totem_of_ascending": "Totem d'ascendance",
 	"item.mubble.star_banner_pattern": "Motif de bannière",
 	"item.mubble.star_banner_pattern.desc": "Étoile",
+	"item.mubble.smash_ball_banner_pattern": "Motif de bannière",
+	"item.mubble.smash_ball_banner_pattern.desc": "Balle Smash",
 
 
 	"item.mubble.super_mushroom": "Super champignon",
@@ -1250,7 +1314,7 @@
 	"subtitles.mubble.entity.chincho.ambient": "Chincho qui parle",
 	"subtitles.mubble.entity.chincho.hurt": "Chincho blessé",
 	"subtitles.mubble.entity.chincho.death": "Chincho qui meurt",
-	"//subtitles.mubble.entity.fireball.throw": "Fireball flies",
+	"subtitles.mubble.entity.fireball.throw": "Boule de feu lancée",
 	"subtitles.mubble.entity.goomba.crush": "Goomba écrasé",
 	"subtitles.mubble.entity.goomba.hurt": "Goomba blessé",
 	"subtitles.mubble.entity.goomba.death": "Goomba qui meurt",

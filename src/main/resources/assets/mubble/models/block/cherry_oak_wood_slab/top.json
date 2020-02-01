@@ -1,0 +1,9 @@
+{
+	"parent": "block/slab_top",
+	"textures":
+	{
+		"bottom": "mubble:block/cherry_oak_log/side",
+		"top": "mubble:block/cherry_oak_log/side",
+		"side": "mubble:block/cherry_oak_log/side"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"parent": "block/stairs",
+	"textures":
+	{
+		"bottom": "minecraft:block/jungle_log",
+		"top": "minecraft:block/jungle_log",
+		"side": "minecraft:block/jungle_log"
+	}
+}

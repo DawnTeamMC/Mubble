@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+		"type=bottom": {"model": "mubble:block/birch_wood_slab/bottom"},
+		"type=top": {"model": "mubble:block/birch_wood_slab/top"},
+		"type=double": {"model": "minecraft:block/birch_wood"}
+	}
+}

@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/honey_crepe"
+		]
+	},
+	"criteria":
+	{
+		"has_honey_bottle":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:honey_bottle"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/honey_crepe"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_honey_bottle",
+			"has_the_recipe"
+		]
+	]
+}

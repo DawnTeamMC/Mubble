@@ -1,0 +1,22 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:wood_stairs",
+	"pattern":
+	[
+		"#  ",
+		"## ",
+		"###"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:cherry_oak_wood"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:cherry_oak_wood_stairs",
+		"count": 4
+	}
+}
