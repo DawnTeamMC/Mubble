@@ -18,8 +18,8 @@ public class MubbleDimensions
 	public static final List<ModDimension> MOD_DIMENSIONS = new ArrayList<ModDimension>();
 
 	public static DimensionType PERMAFROST;
-	
-	public static final ModDimension PERMAFROST_MOD_DIMENSION = register(PermafrostDimension.getName(), new CustomModDimension(PermafrostDimension::new));
+
+	public static final ModDimension PERMAFROST_MOD_DIMENSION = register("permafrost", new CustomModDimension(PermafrostDimension::new));
 	
 	private static ModDimension register(String name, ModDimension modDimensionIn)
 	{

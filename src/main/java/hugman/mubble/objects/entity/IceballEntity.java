@@ -1,5 +1,6 @@
 package hugman.mubble.objects.entity;
 
+import hugman.mubble.init.MubbleEffects;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleSounds;
@@ -8,16 +9,18 @@ import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FireBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.IPacket;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Direction;
 import net.minecraft.util.SoundCategory;
@@ -31,29 +34,29 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class FireballEntity extends ProjectileItemEntity
+public class IceballEntity extends ProjectileItemEntity
 {
 	private int reboundingAmount = 3;
 	
-	public FireballEntity(EntityType<? extends ProjectileItemEntity> entityType, World world)
+	public IceballEntity(EntityType<? extends ProjectileItemEntity> entityType, World world)
 	{
 		super(entityType, world);
 	}
 	
-	public FireballEntity(World world, LivingEntity owner)
+	public IceballEntity(World world, LivingEntity owner)
 	{
-		super(MubbleEntities.FIREBALL, owner, world);
+		super(MubbleEntities.ICEBALL, owner, world);
 	}
 	
-	public FireballEntity(World world, double x, double y, double z)
+	public IceballEntity(World world, double x, double y, double z)
 	{
-		super(MubbleEntities.FIREBALL, x, y, z, world);
+		super(MubbleEntities.ICEBALL, x, y, z, world);
 	}
 
 	@Override
 	protected Item getDefaultItem()
 	{
-		return MubbleItems.FIREBALL;
+		return MubbleItems.ICEBALL;
 	}
 	
 	@Override
@@ -95,7 +98,7 @@ public class FireballEntity extends ProjectileItemEntity
 			}
 			if(!removeOnImpact && cantRebound)
 			{
-				world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+				world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			}
 		}
 		else
@@ -114,7 +117,7 @@ public class FireballEntity extends ProjectileItemEntity
 				float s1 = rand.nextFloat() * 0.2F - 0.1F;
 				float s2 = rand.nextFloat() * 0.2F - 0.1F;
 				float s3 = rand.nextFloat() * 0.2F - 0.1F;
-				world.addParticle(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), s1, s2, s3);
+				world.addParticle(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), s1, s2, s3);
 			}
 		}
 	}
@@ -122,17 +125,19 @@ public class FireballEntity extends ProjectileItemEntity
 	private boolean onEntityImpact(EntityRayTraceResult result)
 	{
 		Entity entity = ((EntityRayTraceResult)result).getEntity();
-		float damage = entity.isImmuneToFire() ? 1.0F : 3.0F;
+		float damage = entity instanceof SnowGolemEntity ? 1.0F : 3.0F;
         boolean flag = entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.owner), damage);
         if(flag)
         {
-           this.applyEnchantments(this.owner, entity);
+            this.applyEnchantments(this.owner, entity);
         }
-        if(!entity.isImmuneToFire())
+        if(!(entity instanceof SnowGolemEntity) || entity instanceof LivingEntity)
         {
-            entity.setFire(5);
+        	LivingEntity livingEntity = (LivingEntity)entity;
+        	livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 40, 1));
+        	livingEntity.addPotionEffect(new EffectInstance(MubbleEffects.HEAVINESS, 40));
         }
-		world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return true;
 	}
 	
@@ -141,27 +146,18 @@ public class FireballEntity extends ProjectileItemEntity
 		BlockPos pos = result.getPos();
 		BlockState state = world.getBlockState(pos);
 		Direction face = result.getFace();
-		FireBlock fire = (FireBlock)Blocks.FIRE;
 		Block resultBlock = null;
 		
-		if(state.getBlock().isIn(MubbleTags.Blocks.MELTABLE_TO_AIR))
+		if(state.getBlock().isIn(MubbleTags.Blocks.FREEZABLE_TO_PACKED_ICE))
 		{
-			resultBlock = Blocks.AIR;
-		}
-		else if(state.getBlock().isIn(MubbleTags.Blocks.MELTABLE_TO_ICE))
-		{
-			resultBlock = Blocks.ICE;
-		}
-		else if(state.getBlock().isIn(MubbleTags.Blocks.MELTABLE_TO_WATER))
-		{
-			resultBlock = Blocks.WATER;
+			resultBlock = Blocks.PACKED_ICE;
 		}
 		
 		if(resultBlock != null)
 		{
 			if(!world.isRemote)
 			{
-				if(world.dimension.doesWaterVaporize() || resultBlock instanceof AirBlock)
+				if(resultBlock instanceof AirBlock)
 				{
 					world.removeBlock(pos, false);
 				}
@@ -171,17 +167,7 @@ public class FireballEntity extends ProjectileItemEntity
 					world.neighborChanged(pos, resultBlock, pos);
 				}
 			}
-			world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-            return true;
-		}
-		if(fire.canCatchFire(world, pos, face))
-		{
-			BlockPos firePos = pos.offset(face);
-            if(this.world.isAirBlock(firePos) && !world.isRemote)
-            {
-               this.world.setBlockState(firePos, fire.getStateForPlacement(world, firePos));
-            }
-			world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+			world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             return true;
 		}
 		if(face == Direction.UP)
@@ -197,7 +183,7 @@ public class FireballEntity extends ProjectileItemEntity
 		}
 		else
 		{
-			world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+			world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
 	}

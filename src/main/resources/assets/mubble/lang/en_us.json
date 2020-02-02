@@ -1091,6 +1091,7 @@
 	"item.mubble.super_mushroom": "Super Mushroom",
 	"item.mubble.peach": "Peach",
 	"item.mubble.fireball": "Fireball",
+	"item.mubble.iceball": "Iceball",
 	"item.mubble.cape_feather": "Cape Feather",
 	"item.mubble.super_cape_feather": "Super Cape Feather",
 	"item.mubble.super_star": "Super Star",
@@ -1277,6 +1278,7 @@
 	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.toad": "Toad",
 	"entity.mubble.fireball": "Fireball",
+	"entity.mubble.iceball": "Iceball",
 
 
 
@@ -1316,6 +1318,7 @@
 	"subtitles.mubble.entity.chincho.hurt": "Chincho hurts",
 	"subtitles.mubble.entity.chincho.death": "Chincho dies",
 	"subtitles.mubble.entity.fireball.throw": "Fireball flies",
+	"subtitles.mubble.entity.iceball.throw": "Iceball flies",
 	"subtitles.mubble.entity.goomba.crush": "Goomba crushed",
 	"subtitles.mubble.entity.goomba.hurt": "Goomba hurts",
 	"subtitles.mubble.entity.goomba.death": "Goomba dies",

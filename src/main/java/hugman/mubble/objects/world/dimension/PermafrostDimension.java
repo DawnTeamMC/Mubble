@@ -25,11 +25,6 @@ public class PermafrostDimension extends Dimension
 		super(worldIn, typeIn, 0.1F);
 	}
 	
-	public static String getName()
-	{
-		return "permafrost";
-	}
-	
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{

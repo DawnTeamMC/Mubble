@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients":
+	[
+		{
+			"item": "mubble:ice_flower"
+		}
+	],
+	"result":
+	{
+		"item": "mubble:iceball",
+		"count": 5
+	}
+}

@@ -1,6 +1,6 @@
 package hugman.mubble.init.world;
 
-import hugman.mubble.objects.world.feature.tree.PalmTreeFeature;
+import hugman.mubble.objects.world.feature.PalmTreeFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
 

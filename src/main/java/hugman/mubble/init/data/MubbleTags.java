@@ -19,6 +19,9 @@ public class MubbleTags
 {
     public static class Blocks
     {
+        public static final Tag<Block> FREEZABLE_TO_PACKED_ICE = tag("freezable/packed_ice");
+        public static final Tag<Block> MELTABLE_TO_AIR = tag("meltable/air");
+        public static final Tag<Block> MELTABLE_TO_ICE = tag("meltable/ice");
         public static final Tag<Block> MELTABLE_TO_WATER = tag("meltable/water");
         public static final Tag<Block> CLOUD_BLOCKS = tag("cloud_blocks");
         public static final Tag<Block> PALM_SAPLING_VALID_GROUND = tag("valid_ground/palm_sapling");

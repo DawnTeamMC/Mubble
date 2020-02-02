@@ -9,6 +9,7 @@ import hugman.mubble.objects.entity.CustomTNTEntity;
 import hugman.mubble.objects.entity.FireballEntity;
 import hugman.mubble.objects.entity.FlyingBlockEntity;
 import hugman.mubble.objects.entity.GoombaEntity;
+import hugman.mubble.objects.entity.IceballEntity;
 import hugman.mubble.objects.entity.ToadEntity;
 import hugman.mubble.objects.entity.ZombieCowmanEntity;
 import hugman.mubble.objects.entity.render.ChinchoRenderer;
@@ -41,8 +42,9 @@ public class MubbleEntities
 	public static final EntityType<ChinchoEntity> CHINCHO = register("chincho", EntityType.Builder.create(ChinchoEntity::new, EntityClassification.MONSTER).size(0.6F, 1.2F));
 	public static final EntityType<GoombaEntity> GOOMBA = register("goomba", EntityType.Builder.create(GoombaEntity::new, EntityClassification.MONSTER).size(0.5F, 0.625F));
 	public static final EntityType<ToadEntity> TOAD = register("toad", EntityType.Builder.create(ToadEntity::new, EntityClassification.CREATURE).size(0.6F, 1.4F));
-	
+
 	public static final EntityType<FireballEntity> FIREBALL = register("fireball", EntityType.Builder.<FireballEntity>create(FireballEntity::new, EntityClassification.MISC).size(0.98F, 0.98F).setTrackingRange(4).setUpdateInterval(10));
+	public static final EntityType<IceballEntity> ICEBALL = register("iceball", EntityType.Builder.<IceballEntity>create(IceballEntity::new, EntityClassification.MISC).size(0.98F, 0.98F).setTrackingRange(4).setUpdateInterval(10));
 	
 	public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder)
 	{
@@ -73,5 +75,6 @@ public class MubbleEntities
     	manager.register(GOOMBA, new GoombaRenderer(manager));
     	manager.register(TOAD, new ToadRenderer(manager));
     	manager.register(FIREBALL, new SpriteRenderer<>(manager, itemRenderer));
+    	manager.register(ICEBALL, new SpriteRenderer<>(manager, itemRenderer));
     }
 }

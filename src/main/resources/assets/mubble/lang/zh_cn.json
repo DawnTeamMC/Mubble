@@ -1090,6 +1090,7 @@
 	"item.mubble.super_mushroom": "超级蘑菇",
 	"item.mubble.peach": "桃子",
 	"//item.mubble.fireball": "Fireball",
+	"//item.mubble.iceball": "Iceball",
 	"item.mubble.cape_feather": "披风羽毛",
 	"//item.mubble.super_cape_feather": "<newline>",
 	"item.mubble.super_star": "无敌星",
@@ -1276,6 +1277,7 @@
 	"//entity.mubble.goomba": "Goomba",
 	"entity.mubble.toad": "奇诺比奥",
 	"//entity.mubble.fireball": "Fireball",
+	"//entity.mubble.iceball": "Iceball",
 
 
 
@@ -1315,6 +1317,7 @@
 	"//subtitles.mubble.entity.chincho.hurt": "Chincho hurts",
 	"//subtitles.mubble.entity.chincho.death": "Chincho dies",
 	"//subtitles.mubble.entity.fireball.throw": "Fireball flies",
+	"//subtitles.mubble.entity.iceball.throw": "Iceball flies",
 	"//subtitles.mubble.entity.goomba.crush": "Goomba crushed",
 	"//subtitles.mubble.entity.goomba.hurt": "Goomba hurts",
 	"//subtitles.mubble.entity.goomba.death": "Goomba dies",

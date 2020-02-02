@@ -522,11 +522,25 @@
 			"mubble:entity/chincho/death"
 		]
 	},
-	"entity.fireball.death":
+	"entity.fireball.hit.block":
 	{
 		"sounds":
 		[
-			"mubble:entity/fireball/death"
+			"mubble:entity/fireball/hit/block"
+		]
+	},
+	"entity.fireball.hit.entity":
+	{
+		"sounds":
+		[
+			"mubble:entity/fireball/hit/entity"
+		]
+	},
+	"entity.fireball.hit.meltable":
+	{
+		"sounds":
+		[
+			"mubble:entity/fireball/hit/meltable"
 		]
 	},
 	"entity.fireball.throw":
@@ -535,6 +549,28 @@
 		"sounds":
 		[
 			"mubble:entity/fireball/throw"
+		]
+	},
+	"entity.iceball.hit.block":
+	{
+		"sounds":
+		[
+			"mubble:entity/iceball/hit/block"
+		]
+	},
+	"entity.iceball.hit.entity":
+	{
+		"sounds":
+		[
+			"mubble:entity/iceball/hit/entity"
+		]
+	},
+	"entity.iceball.throw":
+	{
+		"subtitle": "subtitles.mubble.entity.iceball.throw",
+		"sounds":
+		[
+			"mubble:entity/iceball/throw"
 		]
 	},
 	"entity.toad.ambient":
