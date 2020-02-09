@@ -7,8 +7,8 @@ import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
+import net.minecraft.block.Stainable;
 import net.minecraft.block.piston.PistonBehavior;
-import net.minecraft.client.block.ColoredBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.ItemEntity;
@@ -22,7 +22,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class CloudBlock extends AbstractGlassBlock implements ColoredBlock
+public class CloudBlock extends AbstractGlassBlock implements Stainable
 {
 	private final DyeColor color;
 	

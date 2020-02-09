@@ -37,10 +37,10 @@ public class Mubble implements ModInitializer
 		new MubbleEntities();
 		new MubbleItems();
 		new MubbleSounds();
-		MubbleCommands.init();
 		
 		// Data
 		new MubbleTileEntityTypes();
+		MubbleCommands.init();
 		MubbleContainerTypes.init();
 		
 		// World
