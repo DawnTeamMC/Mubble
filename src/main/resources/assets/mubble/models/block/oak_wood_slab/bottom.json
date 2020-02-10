@@ -1,0 +1,9 @@
+{
+	"parent": "block/slab",
+	"textures":
+	{
+		"bottom": "minecraft:block/oak_log",
+		"top": "minecraft:block/oak_log",
+		"side": "minecraft:block/oak_log"
+	}
+}

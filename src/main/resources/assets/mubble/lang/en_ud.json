@@ -43,6 +43,34 @@
 
 	"//block.mubble.dark_prismarine_wall": "Dark Prismarine Wall",
 
+	"//block.mubble.oak_wood_stairs": "Oak Wood Stairs",
+	"//block.mubble.spruce_wood_stairs": "Spruce Wood Stairs",
+	"//block.mubble.birch_wood_stairs": "Birch Wood Stairs",
+	"//block.mubble.jungle_wood_stairs": "Jungle Wood Stairs",
+	"//block.mubble.acacia_wood_stairs": "Acacia Wood Stairs",
+	"//block.mubble.dark_oak_wood_stairs": "Dark Oak Wood Stairs",
+	
+	"//block.mubble.oak_wood_slab": "Oak Wood Slab",
+	"//block.mubble.spruce_wood_slab": "Spruce Wood Slab",
+	"//block.mubble.birch_wood_slab": "Birch Wood Slab",
+	"//block.mubble.jungle_wood_slab": "Jungle Wood Slab",
+	"//block.mubble.acacia_wood_slab": "Acacia Wood Slab",
+	"//block.mubble.dark_oak_wood_slab": "Dark Oak Wood Slab",
+
+	"//block.mubble.oak_wood_vertical_slab": "Oak Wood Vertical Slab",
+	"//block.mubble.spruce_wood_vertical_slab": "Spruce Wood Vertical Slab",
+	"//block.mubble.birch_wood_vertical_slab": "Birch Wood Vertical Slab",
+	"//block.mubble.jungle_wood_vertical_slab": "Jungle Wood Vertical Slab",
+	"//block.mubble.acacia_wood_vertical_slab": "Acacia Wood Vertical Slab",
+	"//block.mubble.dark_oak_wood_vertical_slab": "Dark Oak Wood Vertical Slab",
+
+	"//block.mubble.oak_wood_button": "Oak Wood Button",
+	"//block.mubble.spruce_wood_button": "Spruce Wood Button",
+	"//block.mubble.birch_wood_button": "Birch Wood Button",
+	"//block.mubble.jungle_wood_button": "Jungle Wood Button",
+	"//block.mubble.acacia_wood_button": "Acacia Wood Button",
+	"//block.mubble.dark_oak_wood_button": "Dark Oak Wood Button",
+
 	"//block.mubble.oak_leaf_pile": "Oak Leaves Pile",
 	"//block.mubble.spruce_leaf_pile": "Spruce Leaves Pile",
 	"//block.mubble.birch_leaf_pile": "Birch Leaves Pile",
@@ -90,6 +118,11 @@
 	"block.mubble.cherry_oak_fence_gate": "ǝʇɐפ ǝɔuǝℲ ʞɐO ʎɹɹǝɥƆ",
 	"block.mubble.cherry_oak_fence": "ǝɔuǝℲ ʞɐO ʎɹɹǝɥƆ",
 	"block.mubble.cherry_oak_door": "ɹoop ʞɐO ʎɹɹǝɥƆ",
+	"//block.mubble.cherry_oak_wood_stairs": "Cherry Oak Wood Stairs",
+	"//block.mubble.cherry_oak_wood_slab": "Cherry Oak Wood Slab",
+	"//block.mubble.cherry_oak_wood_vertical_slab": "Cherry Oak Wood Vertical Slab",
+	"//block.mubble.cherry_oak_wood_button": "Cherry Oak Wood Button",
+	
 	"block.mubble.palm_planks": "sʞuɐlԀ ɯlɐԀ",
 	"block.mubble.palm_sapling": "ƃuᴉldɐS ɯlɐԀ",
 	"block.mubble.palm_log": "ƃo˥ ɯlɐԀ",
@@ -107,6 +140,10 @@
 	"block.mubble.palm_fence_gate": "ǝʇɐפ ǝɔuǝℲ ɯlɐԀ",
 	"block.mubble.palm_fence": "ǝɔuǝℲ ɯlɐԀ",
 	"block.mubble.palm_door": "ɹoop ɯlɐԀ",
+	"//block.mubble.palm_wood_stairs": "Palm Wood Stairs",
+	"//block.mubble.palm_wood_slab": "Palm Wood Slab",
+	"//block.mubble.palm_wood_vertical_slab": "Palm Wood Vertical Slab",
+	"//block.mubble.palm_wood_button": "Palm Wood Button",
 
 	"block.mubble.blue_bricks": "sʞɔᴉɹq ǝnlq",
 	"block.mubble.light_blue_bricks": "sʞɔᴉɹq ǝnlq ʇɥƃᴉ˥",
@@ -878,6 +915,10 @@
 	"//block.mubble.press_garden_fence_gate": "Press Garden Fence Gate",
 	"//block.mubble.press_garden_fence": "Press Garden Fence",
 	"//block.mubble.press_garden_door": "Press Garden Door",
+	"//block.mubble.press_garden_wood_stairs": "Press Garden Wood Stairs",
+	"//block.mubble.press_garden_wood_slab": "Press Garden Wood Slab",
+	"//block.mubble.press_garden_wood_vertical_slab": "Press Garden Wood Vertical Slab",
+	"//block.mubble.press_garden_wood_button": "Press Garden Wood Button",
 	
 	"block.mubble.spring": "ƃuᴉɹdS",
 
@@ -899,6 +940,10 @@
 	"block.mubble.scarlet_fence_gate": "ǝʇɐפ ǝɔuǝℲ ʇǝlɹɐɔS",
 	"block.mubble.scarlet_fence": "ǝɔuǝℲ ʇǝlɹɐɔS",
 	"block.mubble.scarlet_door": "ɹoop ʇǝlɹɐɔS",
+	"//block.mubble.scarlet_wood_stairs": "Scarlet Wood Stairs",
+	"//block.mubble.scarlet_wood_slab": "Scarlet Wood Slab",
+	"//block.mubble.scarlet_wood_vertical_slab": "Scarlet Wood Vertical Slab",
+	"//block.mubble.scarlet_wood_button": "Scarlet Wood Button",
 	"block.mubble.scarlet_mushroom": "ɯooɹɥsnW ʇǝlɹɐɔS",
 	"block.mubble.scarlet_orchid": "pᴉɥɔɹO ʇǝlɹɐɔS",
 
@@ -983,6 +1028,23 @@
 	"//block.minecraft.banner.star.gray": "Gray Star",
 	"//block.minecraft.banner.star.black": "Black Star",
 
+	"//block.minecraft.banner.smash_ball.blue": "Blue Smash Ball",
+	"//block.minecraft.banner.smash_ball.light_blue": "Light Blue Smash Ball",
+	"//block.minecraft.banner.smash_ball.cyan": "Cyan Smash Ball",
+	"//block.minecraft.banner.smash_ball.green": "Green Smash Ball",
+	"//block.minecraft.banner.smash_ball.lime": "Lime Smash Ball",
+	"//block.minecraft.banner.smash_ball.yellow": "Yellow Smash Ball",
+	"//block.minecraft.banner.smash_ball.orange": "Orange Smash Ball",
+	"//block.minecraft.banner.smash_ball.red": "Red Smash Ball",
+	"//block.minecraft.banner.smash_ball.pink": "Pink Smash Ball",
+	"//block.minecraft.banner.smash_ball.magenta": "Magenta Smash Ball",
+	"//block.minecraft.banner.smash_ball.purple": "Purple Smash Ball",
+	"//block.minecraft.banner.smash_ball.brown": "Brown Smash Ball",
+	"//block.minecraft.banner.smash_ball.white": "White Smash Ball",
+	"//block.minecraft.banner.smash_ball.light_gray": "Light Gray Smash Ball",
+	"//block.minecraft.banner.smash_ball.gray": "Gray Smash Ball",
+	"//block.minecraft.banner.smash_ball.black": "Black Smash Ball",
+
 
 
 	"comment": "ITEMS",
@@ -1021,11 +1083,14 @@
 	"item.mubble.totem_of_ascending": "ƃuᴉpuǝɔs∀ ɟo ɯǝʇo┴",
 	"//item.mubble.star_banner_pattern": "Banner Pattern",
 	"//item.mubble.star_banner_pattern.desc": "Star",
+	"//item.mubble.smash_ball_banner_pattern": "Banner Pattern",
+	"//item.mubble.smash_ball_banner_pattern.desc": "Smash Ball",
 
 
 	"item.mubble.super_mushroom": "ɯooɹɥsnW ɹǝdnS",
 	"item.mubble.peach": "ɥɔɐǝԀ",
 	"//item.mubble.fireball": "Fireball",
+	"//item.mubble.iceball": "Iceball",
 	"item.mubble.cape_feather": "ɹǝɥʇɐǝℲ ǝdɐƆ",
 	"item.mubble.super_cape_feather": "ɹǝɥʇɐǝℲ ǝdɐƆ ɹǝdnS",
 	"item.mubble.super_star": "ɹɐʇS ɹǝdnS",
@@ -1204,13 +1269,15 @@
 
 
 	"comment": "ENTITIES",
-	"entity.mubble.chincho": "oɥɔuᴉɥƆ",
-	"entity.mubble.toad": "pɐo┴",
-	"//entity.mubble.goomba": "Goomba",
 	"//entity.mubble.zombie_cowman": "Zombie Cowman",
-
 	"//entity.mubble.custom_tnt": "Custom TNT",
 	"entity.mubble.flying_block": "ʞɔolᗺ ƃuᴉʎlℲ",
+
+	"entity.mubble.chincho": "oɥɔuᴉɥƆ",
+	"//entity.mubble.goomba": "Goomba",
+	"entity.mubble.toad": "pɐo┴",
+	"//entity.mubble.fireball": "Fireball",
+	"//entity.mubble.iceball": "Iceball",
 
 
 
@@ -1249,6 +1316,8 @@
 	"//subtitles.mubble.entity.chincho.ambient": "Chincho talks",
 	"//subtitles.mubble.entity.chincho.hurt": "Chincho hurts",
 	"//subtitles.mubble.entity.chincho.death": "Chincho dies",
+	"//subtitles.mubble.entity.fireball.throw": "Fireball flies",
+	"//subtitles.mubble.entity.iceball.throw": "Iceball flies",
 	"//subtitles.mubble.entity.goomba.crush": "Goomba crushed",
 	"//subtitles.mubble.entity.goomba.hurt": "Goomba hurts",
 	"//subtitles.mubble.entity.goomba.death": "Goomba dies",

@@ -6,6 +6,7 @@ import hugman.mubble.objects.entity.CustomTNTEntity;
 import hugman.mubble.objects.entity.FireballEntity;
 import hugman.mubble.objects.entity.FlyingBlockEntity;
 import hugman.mubble.objects.entity.GoombaEntity;
+import hugman.mubble.objects.entity.IceballEntity;
 import hugman.mubble.objects.entity.ToadEntity;
 import hugman.mubble.objects.entity.ZombieCowmanEntity;
 import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
@@ -30,6 +31,7 @@ public class MubbleEntities
 	public static final EntityType<ToadEntity> TOAD = register("toad", FabricEntityTypeBuilder.create(EntityCategory.CREATURE, ToadEntity::new).size(EntityDimensions.fixed(0.6F, 1.4F)).build());
 	
 	public static final EntityType<FireballEntity> FIREBALL = register("fireball", FabricEntityTypeBuilder.<FireballEntity>create(EntityCategory.MISC, FireballEntity::new).size(EntityDimensions.fixed(0.98F, 0.98F)).trackable(4, 10).build());
+	public static final EntityType<IceballEntity> ICEBALL = register("iceball", FabricEntityTypeBuilder.<IceballEntity>create(EntityCategory.MISC, IceballEntity::new).size(EntityDimensions.fixed(0.98F, 0.98F)).trackable(4, 10).build());
 	
 	public static <T extends Entity> EntityType<T> register(String name, EntityType<T> builder)
 	{

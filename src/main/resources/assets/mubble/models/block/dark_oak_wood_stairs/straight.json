@@ -1,0 +1,9 @@
+{
+	"parent": "block/stairs",
+	"textures":
+	{
+		"bottom": "minecraft:block/dark_oak_log",
+		"top": "minecraft:block/dark_oak_log",
+		"side": "minecraft:block/dark_oak_log"
+	}
+}

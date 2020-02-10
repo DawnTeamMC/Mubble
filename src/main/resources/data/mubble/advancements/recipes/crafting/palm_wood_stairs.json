@@ -4,12 +4,12 @@
 	{
 		"recipes":
 		[
-			"mubble:crafting/rotating_block"
+			"mubble:crafting/palm_wood_stairs"
 		]
 	},
 	"criteria":
 	{
-		"has_yellow_concrete":
+		"has_wood":
 		{
 			"trigger": "minecraft:inventory_changed",
 			"conditions":
@@ -17,7 +17,7 @@
 				"items":
 				[
 					{
-						"item": "minecraft:yellow_concrete"
+						"item": "mubble:palm_wood"
 					}
 				]
 			}
@@ -27,14 +27,14 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:crafting/rotating_block"
+				"recipe": "mubble:crafting/palm_wood_stairs"
 			}
 		}
 	},
 	"requirements":
 	[
 		[
-			"has_yellow_concrete",
+			"has_wood",
 			"has_the_recipe"
 		]
 	]

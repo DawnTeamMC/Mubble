@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values":
+	[
+		"#mubble:dark_prismarine/blocks",
+		"#mubble:dark_prismarine/slabs",
+		"#mubble:dark_prismarine/stairs",
+		"#mubble:dark_prismarine/vertical_slabs",
+		"#mubble:dark_prismarine/walls"
+	]
+}

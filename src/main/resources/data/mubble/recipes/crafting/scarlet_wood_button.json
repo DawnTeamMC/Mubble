@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:wood_button",
+	"pattern":
+	[
+		"#"
+	],
+	"key":
+	{
+		"#":
+		{
+			"item": "mubble:scarlet_wood"
+		}
+	},
+	"result":
+	{
+		"item": "mubble:scarlet_wood_button"
+	}
+}

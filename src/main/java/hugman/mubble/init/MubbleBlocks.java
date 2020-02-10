@@ -123,6 +123,34 @@ public class MubbleBlocks
     
     public static final Block DARK_PRISMARINE_WALL = register("dark_prismarine_wall", new WallBlock(Settings.copy(Blocks.DARK_PRISMARINE)), ItemGroup.DECORATIONS, false);
     
+    public static final Block OAK_WOOD_STAIRS = register("oak_wood_stairs", new StairsBlock(Blocks.OAK_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block SPRUCE_WOOD_STAIRS = register("spruce_wood_stairs", new StairsBlock(Blocks.SPRUCE_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block BIRCH_WOOD_STAIRS = register("birch_wood_stairs", new StairsBlock(Blocks.BIRCH_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block JUNGLE_WOOD_STAIRS = register("jungle_wood_stairs", new StairsBlock(Blocks.JUNGLE_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block ACACIA_WOOD_STAIRS = register("acacia_wood_stairs", new StairsBlock(Blocks.ACACIA_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block DARK_OAK_WOOD_STAIRS = register("dark_oak_wood_stairs", new StairsBlock(Blocks.DARK_OAK_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    
+    public static final Block OAK_WOOD_SLAB = register("oak_wood_slab", new SlabBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block SPRUCE_WOOD_SLAB = register("spruce_wood_slab", new SlabBlock(Settings.copy(Blocks.SPRUCE_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block BIRCH_WOOD_SLAB = register("birch_wood_slab", new SlabBlock(Settings.copy(Blocks.BIRCH_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block JUNGLE_WOOD_SLAB = register("jungle_wood_slab", new SlabBlock(Settings.copy(Blocks.JUNGLE_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block ACACIA_WOOD_SLAB = register("acacia_wood_slab", new SlabBlock(Settings.copy(Blocks.ACACIA_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block DARK_OAK_WOOD_SLAB = register("dark_oak_wood_slab", new SlabBlock(Settings.copy(Blocks.DARK_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    
+    public static final Block OAK_WOOD_VERTICAL_SLAB = register("oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block SPRUCE_WOOD_VERTICAL_SLAB = register("spruce_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.SPRUCE_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block BIRCH_WOOD_VERTICAL_SLAB = register("birch_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.BIRCH_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block JUNGLE_WOOD_VERTICAL_SLAB = register("jungle_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.JUNGLE_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block ACACIA_WOOD_VERTICAL_SLAB = register("acacia_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.ACACIA_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block DARK_OAK_WOOD_VERTICAL_SLAB = register("dark_oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.DARK_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    
+    public static final Block OAK_WOOD_BUTTON = register("oak_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
+    public static final Block SPRUCE_WOOD_BUTTON = register("spruce_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
+    public static final Block BIRCH_WOOD_BUTTON = register("birch_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
+    public static final Block JUNGLE_WOOD_BUTTON = register("jungle_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
+    public static final Block ACACIA_WOOD_BUTTON = register("acacia_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
+    public static final Block DARK_OAK_WOOD_BUTTON = register("dark_oak_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
+    
     public static final Block OAK_LEAF_PILE = register("oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS, false, 60, 20);
     public static final Block SPRUCE_LEAF_PILE = register("spruce_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS, false, 60, 20);
     public static final Block BIRCH_LEAF_PILE = register("birch_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision().build()), ItemGroup.DECORATIONS, false, 60, 20);
@@ -191,7 +219,11 @@ public class MubbleBlocks
     public static final Block CHERRY_OAK_FENCE_GATE = register("cherry_oak_fence_gate", new FenceGateBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.REDSTONE, false, 5, 20);
     public static final Block CHERRY_OAK_FENCE = register("cherry_oak_fence", new FenceBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.DECORATIONS, false, 5, 20);
     public static final Block CHERRY_OAK_DOOR = register("cherry_oak_door", new DoorBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.REDSTONE, false);
-
+    public static final Block CHERRY_OAK_WOOD_STAIRS = register("cherry_oak_wood_stairs", new StairsBlock(CHERRY_OAK_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block CHERRY_OAK_WOOD_SLAB = register("cherry_oak_wood_slab", new SlabBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block CHERRY_OAK_WOOD_VERTICAL_SLAB = register("cherry_oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block CHERRY_OAK_WOOD_BUTTON = register("cherry_oak_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
+    
     public static final Block PALM_PLANKS = register("palm_planks", new Block(Settings.copy(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
     public static final Block PALM_SAPLING = register("palm_sapling", new SaplingBlock(new PalmTree()), ItemGroup.DECORATIONS, true);
     public static final Block PALM_LOG = register("palm_log", new LogBlock(MaterialColor.WOOD, Settings.copy(Blocks.OAK_LOG)), ItemGroup.BUILDING_BLOCKS, false, 5, 5);
@@ -209,6 +241,10 @@ public class MubbleBlocks
     public static final Block PALM_FENCE_GATE = register("palm_fence_gate", new FenceGateBlock(Settings.copy(PALM_PLANKS)), ItemGroup.REDSTONE, false, 5, 20);
     public static final Block PALM_FENCE = register("palm_fence", new FenceBlock(Settings.copy(PALM_PLANKS)), ItemGroup.DECORATIONS, false, 5, 20);
     public static final Block PALM_DOOR = register("palm_door", new DoorBlock(Settings.copy(PALM_PLANKS)), ItemGroup.REDSTONE, false);
+    public static final Block PALM_WOOD_STAIRS = register("palm_wood_stairs", new StairsBlock(PALM_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block PALM_WOOD_SLAB = register("palm_wood_slab", new SlabBlock(Settings.copy(PALM_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block PALM_WOOD_VERTICAL_SLAB = register("palm_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(PALM_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block PALM_WOOD_BUTTON = register("palm_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
     
     public static final Block WHITE_BRICKS = register("white_bricks", new Block(Settings.copy(Blocks.BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block LIGHT_GRAY_BRICKS = register("light_gray_bricks", new Block(Settings.copy(Blocks.BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
@@ -959,6 +995,10 @@ public class MubbleBlocks
     public static final Block PRESS_GARDEN_FENCE_GATE = register("press_garden_fence_gate", new FenceGateBlock(Settings.copy(PRESS_GARDEN_PLANKS)), ItemGroup.REDSTONE, false, 5, 20);
     public static final Block PRESS_GARDEN_FENCE = register("press_garden_fence", new FenceBlock(Settings.copy(PRESS_GARDEN_PLANKS)), ItemGroup.DECORATIONS, false, 5, 20);
     public static final Block PRESS_GARDEN_DOOR = register("press_garden_door", new DoorBlock(Settings.copy(PRESS_GARDEN_PLANKS)), ItemGroup.REDSTONE, false);
+    public static final Block PRESS_GARDEN_WOOD_STAIRS = register("press_garden_wood_stairs", new StairsBlock(PRESS_GARDEN_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block PRESS_GARDEN_WOOD_SLAB = register("press_garden_wood_slab", new SlabBlock(Settings.copy(PRESS_GARDEN_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block PRESS_GARDEN_WOOD_VERTICAL_SLAB = register("press_garden_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(PRESS_GARDEN_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block PRESS_GARDEN_WOOD_BUTTON = register("press_garden_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
     
     public static final Block SPRING = register("spring", new SpringBlock(FabricBlockSettings.of(Material.METAL).hardness(4f).build()), ItemGroup.TRANSPORTATION, false);
     
@@ -980,6 +1020,10 @@ public class MubbleBlocks
     public static final Block SCARLET_FENCE_GATE = register("scarlet_fence_gate", new FenceGateBlock(Settings.copy(SCARLET_PLANKS)), ItemGroup.REDSTONE, false, 5, 20);
     public static final Block SCARLET_FENCE = register("scarlet_fence", new FenceBlock(Settings.copy(SCARLET_PLANKS)), ItemGroup.DECORATIONS, false, 5, 20);
     public static final Block SCARLET_DOOR = register("scarlet_door", new DoorBlock(Settings.copy(SCARLET_PLANKS)), ItemGroup.REDSTONE, false);
+    public static final Block SCARLET_WOOD_STAIRS = register("scarlet_wood_stairs", new StairsBlock(SCARLET_WOOD), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block SCARLET_WOOD_SLAB = register("scarlet_wood_slab", new SlabBlock(Settings.copy(SCARLET_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block SCARLET_WOOD_VERTICAL_SLAB = register("scarlet_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(SCARLET_WOOD)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
+    public static final Block SCARLET_WOOD_BUTTON = register("scarlet_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE, false);
     public static final Block SCARLET_MUSHROOM = register("scarlet_mushroom", new MushroomBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7).build()), ItemGroup.DECORATIONS, true);
     public static final Block SCARLET_ORCHID = register("scarlet_orchid", new FlowerBlock(StatusEffects.GLOWING, 8, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7).build()), ItemGroup.DECORATIONS, true, 60, 100);
     

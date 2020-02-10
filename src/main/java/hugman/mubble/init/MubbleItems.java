@@ -7,6 +7,7 @@ import hugman.mubble.objects.item.AxeItem;
 import hugman.mubble.objects.item.BandageItem;
 import hugman.mubble.objects.item.CapeFeatherItem;
 import hugman.mubble.objects.item.FireballItem;
+import hugman.mubble.objects.item.IceballItem;
 import hugman.mubble.objects.item.KeyItem;
 import hugman.mubble.objects.item.LightsaberItem;
 import hugman.mubble.objects.item.PickaxeItem;
@@ -67,6 +68,7 @@ public class MubbleItems
     public static final Item SUPER_MUSHROOM = register("super_mushroom", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.SUPER_MUSHROOM)));
     public static final Item PEACH = register("peach", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.PEACH)));
     public static final Item FIREBALL = register("fireball", new FireballItem(new Item.Settings().group(ItemGroup.COMBAT)));
+    public static final Item ICEBALL = register("iceball", new IceballItem(new Item.Settings().group(ItemGroup.COMBAT)));
     public static final Item CAPE_FEATHER = register("cape_feather", new CapeFeatherItem(new Item.Settings().group(ItemGroup.TRANSPORTATION)));
     public static final Item SUPER_CAPE_FEATHER = register("super_cape_feather", new CapeFeatherItem(new Item.Settings().group(ItemGroup.TRANSPORTATION).maxCount(1).rarity(Rarity.EPIC)));
     public static final Item SUPER_STAR = register("super_star", new SuperStarItem(new Item.Settings().group(ItemGroup.MISC).maxCount(1).rarity(Rarity.RARE).food(MubbleFoods.SUPER_STAR)));

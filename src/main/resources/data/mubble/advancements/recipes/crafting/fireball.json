@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/fireball"
+		]
+	},
+	"criteria":
+	{
+		"has_fire_flower":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "mubble:fire_flower"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/fireball"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_fire_flower",
+			"has_the_recipe"
+		]
+	]
+}

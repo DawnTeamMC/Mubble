@@ -1,16 +1,15 @@
 package hugman.mubble.objects.item;
 
+import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.objects.entity.FireballEntity;
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.Projectile;
-import net.minecraft.entity.thrown.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -23,25 +22,14 @@ public class FireballItem extends Item
 	public FireballItem(Settings builder)
 	{
 		super(builder);
-		
-	    DispenserBlock.registerBehavior(Items.SNOWBALL, new ProjectileDispenserBehavior()
-	    {
-	    	@Override
-	    	protected Projectile createProjectile(World world, Position pos, ItemStack stack)
-	    	{
-	    		return Util.make(new SnowballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) ->
-	    		{
-	    			entity.setItem(stack);
-	    		});
-	    	}
-	    });
+		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
 	}
 	
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
 	{
 		ItemStack stack = player.getStackInHand(hand);
-		world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (RANDOM.nextFloat() * 0.4F + 0.8F));
+		world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), MubbleSounds.ENTITY_FIREBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		if(!world.isClient)
 		{
 			FireballEntity entity = new FireballEntity(world, player);
@@ -58,4 +46,16 @@ public class FireballItem extends Item
 		
 		return TypedActionResult.success(stack);
 	}
+	
+	public static final ItemDispenserBehavior DISPENSER_BEHAVIOR = new ProjectileDispenserBehavior()
+	{
+		@Override
+		protected Projectile createProjectile(World world, Position pos, ItemStack stack)
+		{
+			return Util.make(new FireballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) ->
+    		{
+    			entity.setItem(stack);
+    		});
+		};
+	};
 }

@@ -6,9 +6,11 @@ import java.util.List;
 import hugman.mubble.Mubble;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
+import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.EntityTypeTags;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
@@ -17,8 +19,12 @@ public class MubbleTags
 {
     public static class Blocks
     {
+    	public static final Tag<Block> FREEZABLE_TO_PACKED_ICE = register("freezable/packed_ice");
+        public static final Tag<Block> MELTABLE_TO_AIR = register("meltable/air");
+        public static final Tag<Block> MELTABLE_TO_ICE = register("meltable/ice");
+        public static final Tag<Block> MELTABLE_TO_WATER = register("meltable/water");
         public static final Tag<Block> CLOUD_BLOCKS = register("cloud_blocks");
-        public static final Tag<Block> VALID_GROUND_PALM_SAPLING = register("valid_ground/palm_sapling");
+        public static final Tag<Block> PALM_SAPLING_VALID_GROUND = register("valid_ground/palm_sapling");
 
         private static Tag<Block> register(String name)
         {
@@ -75,6 +81,16 @@ public class MubbleTags
         private static Tag<EntityType<?>> register(String name)
         {
             return new EntityTypeTags.CachingTag(new Identifier(Mubble.MOD_ID, name));
+        }
+    }
+    
+    public static class Fluids
+    {
+        public static final Tag<Fluid> FREEZABLE_TO_ICE = register("freezable/ice");
+
+        private static Tag<Fluid> register(String name)
+        {
+            return new FluidTags.CachingTag(new Identifier(Mubble.MOD_ID, name));
         }
     }
 }
