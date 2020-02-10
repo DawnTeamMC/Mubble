@@ -1,45 +1,46 @@
 package hugman.mubble.mixin;
 
-import java.util.Map;
-
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.google.common.collect.ImmutableMap.Builder;
-
-import hugman.mubble.init.MubbleBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.LogBlock;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemUsageContext;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 @Mixin(AxeItem.class)
 public class AxeItemMixin
-{
-	@Shadow protected static final Map<Block, Block> STRIPPED_BLOCKS;
-	
-	static
+{	
+	@Inject(method = "useOnBlock", at = @At(value = "HEAD"), cancellable = true)
+	private void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir)
 	{
-		STRIPPED_BLOCKS = (new Builder<Block, Block>())
-				.put(Blocks.OAK_WOOD, Blocks.STRIPPED_OAK_WOOD)
-				.put(Blocks.OAK_LOG, Blocks.STRIPPED_OAK_LOG)
-				.put(Blocks.DARK_OAK_WOOD, Blocks.STRIPPED_DARK_OAK_WOOD)
-				.put(Blocks.DARK_OAK_LOG, Blocks.STRIPPED_DARK_OAK_LOG)
-				.put(Blocks.ACACIA_WOOD, Blocks.STRIPPED_ACACIA_WOOD)
-				.put(Blocks.ACACIA_LOG, Blocks.STRIPPED_ACACIA_LOG)
-				.put(Blocks.BIRCH_WOOD, Blocks.STRIPPED_BIRCH_WOOD)
-				.put(Blocks.BIRCH_LOG, Blocks.STRIPPED_BIRCH_LOG)
-				.put(Blocks.JUNGLE_WOOD, Blocks.STRIPPED_JUNGLE_WOOD)
-				.put(Blocks.JUNGLE_LOG, Blocks.STRIPPED_JUNGLE_LOG)
-				.put(Blocks.SPRUCE_WOOD, Blocks.STRIPPED_SPRUCE_WOOD)
-				.put(Blocks.SPRUCE_LOG, Blocks.STRIPPED_SPRUCE_LOG)
-				.put(MubbleBlocks.PALM_LOG, MubbleBlocks.STRIPPED_PALM_LOG)
-				.put(MubbleBlocks.PALM_WOOD, MubbleBlocks.STRIPPED_PALM_WOOD)
-				.put(MubbleBlocks.SCARLET_LOG, MubbleBlocks.STRIPPED_SCARLET_LOG)
-				.put(MubbleBlocks.SCARLET_WOOD, MubbleBlocks.STRIPPED_SCARLET_WOOD)
-				.put(MubbleBlocks.CHERRY_OAK_LOG, MubbleBlocks.STRIPPED_CHERRY_OAK_LOG)
-				.put(MubbleBlocks.CHERRY_OAK_WOOD, MubbleBlocks.STRIPPED_CHERRY_OAK_WOOD)
-				.put(MubbleBlocks.PRESS_GARDEN_LOG, MubbleBlocks.STRIPPED_PRESS_GARDEN_LOG)
-				.put(MubbleBlocks.PRESS_GARDEN_WOOD, MubbleBlocks.STRIPPED_PRESS_GARDEN_WOOD)
-				.build();
+		World world = context.getWorld();
+		BlockPos pos = context.getBlockPos();
+		BlockState state = world.getBlockState(pos);
+		Block block = hugman.mubble.objects.item.AxeItem.BLOCK_STRIPPING_MAP.get(state.getBlock());
+		PlayerEntity player = context.getPlayer();
+		if (block != null) {
+			world.playSound(player, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			if (!world.isClient) {
+				world.setBlockState(pos, block.getDefaultState().with(LogBlock.AXIS, state.get(LogBlock.AXIS)), 11);
+				if (player != null) {
+					context.getStack().damage(1, player, (p) -> {
+						p.sendToolBreakStatus(context.getHand());
+					});
+				}
+			}
+			cir.setReturnValue(ActionResult.SUCCESS);
+		} else {
+			cir.setReturnValue(ActionResult.PASS);
+		}
 	}
 }

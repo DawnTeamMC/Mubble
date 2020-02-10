@@ -4,9 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.ShaderEffect;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -52,7 +49,7 @@ public class BlockCostume extends BlockItem
     {
     	if(world.isClient)
     	{
-    		GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
+    		/*GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
     		ShaderEffect shaderGroup = renderer.getShader();
     		Identifier shader = this.getShader();
     		if(shader != null)
@@ -61,14 +58,14 @@ public class BlockCostume extends BlockItem
     			{
     				if(!shaderGroup.getName().equals(shader.toString()))
     				{
-    					renderer.toggleShadersEnabled();
+    					renderer.loadShader(shader);
     				}
     			}
     			else
     			{
-    				renderer.toggleShadersEnabled();
+    				renderer.loadShader(shader);
     			}
-    		}
+    		}*/
     	}
     }
 	

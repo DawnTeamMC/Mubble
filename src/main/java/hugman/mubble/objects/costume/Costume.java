@@ -8,9 +8,7 @@ import hugman.mubble.util.CalendarEvents;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.ShaderEffect;
-import net.minecraft.client.render.GameRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -69,11 +67,11 @@ public class Costume extends Item
     }
     
     @Override
-    public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks)
+    public void inventoryTick(ItemStack stack, World world, Entity player, int slot, boolean selected)
     {
     	if(world.isClient)
     	{
-    		GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
+    		/*GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
     		ShaderEffect shaderGroup = renderer.getShader();
     		Identifier shader = this.getShader();
     		if(shader != null)
@@ -82,14 +80,14 @@ public class Costume extends Item
     			{
     				if(!shaderGroup.getName().equals(shader.toString()))
     				{
-    					renderer.getShader().render(remainingUseTicks);
+    					renderer.loadShader(shader);
     				}
     			}
     			else
     			{
-    				renderer.getShader().render(remainingUseTicks);
+    				renderer.loadShader(shader);
     			}
-    		}
+    		}*/
     	}
     	if(!world.isClient && effects != null)
     	{
@@ -98,7 +96,7 @@ public class Costume extends Item
     		{
     			for(StatusEffectInstance effect : effects)
             	{
-            		player.addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 260, effect.getAmplifier(), false, true));
+            		((LivingEntity) player).addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 260, effect.getAmplifier(), false, true));
             	}
     		}
     	}
