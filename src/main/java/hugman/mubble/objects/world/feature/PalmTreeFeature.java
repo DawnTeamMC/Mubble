@@ -6,13 +6,13 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.ModifiableTestableWorld;
-import net.minecraft.world.WorldView;
+import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
 import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig>
 {	
@@ -26,7 +26,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 	{
 		int i = rand.nextInt(config.heightRandA) + config.baseHeight;
 		boolean flag = true;
-		if(position.getY() >= 1 && position.getY() + i + 1 <= world.getMaxHeight())
+		if(position.getY() >= 1)
 		{
 			for(int j = position.getY(); j <= position.getY() + 1 + i; ++j)
 			{
@@ -44,9 +44,9 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 	            {
 	            	for(int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1)
 	            	{
-	            		if (j >= 0 && j < world.getMaxHeight())
+	            		if (j >= 0)
 	            		{
-	            			if (!func_214587_a(world, blockpos$mutableblockpos.set(l, j, i1)))
+	            			if (!canTreeReplace(world, blockpos$mutableblockpos.set(l, j, i1)))
 	            			{
 	            				flag = false;
 	            			}
@@ -60,7 +60,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 	        {
 				return false;
 	        }
-			else if(isSoil(world, position.down()) && position.getY() < world.getMaxHeight() - i - 1)
+			else if(isNaturalDirtOrGrass(world, position.down()) || isSand(world, position.down()))
 			{
 				BlockPos pos = position.add(0, i - 1, 0);
 		 		setToDirt(world, position.down());
@@ -126,5 +126,13 @@ public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConf
 			return false;
 		}
 		return flag;
+	}
+	
+	private boolean isSand(TestableWorld world, BlockPos pos)
+	{
+		return world.testBlockState(pos, (state) ->
+			{
+				return state.matches(BlockTags.SAND);
+			});
 	}
 }

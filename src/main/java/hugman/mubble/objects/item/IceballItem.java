@@ -3,54 +3,54 @@ package hugman.mubble.objects.item;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.objects.entity.IceballEntity;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.dispenser.IDispenseItemBehavior;
-import net.minecraft.dispenser.IPosition;
-import net.minecraft.dispenser.ProjectileDispenseBehavior;
-import net.minecraft.entity.IProjectile;
+import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.Projectile;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.Util;
+import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
 
 public class IceballItem extends Item
 {
-	public IceballItem(Properties builder)
+	public IceballItem(Settings builder)
 	{
 		super(builder);
-	    DispenserBlock.registerDispenseBehavior(this, DISPENSER_BEHAVIOR);
+		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, PlayerEntity player, Hand hand)
+	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
 	{
-		ItemStack stack = player.getHeldItem(hand);
-		world.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), MubbleSounds.ENTITY_ICEBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-		if(!world.isRemote)
+		ItemStack stack = player.getStackInHand(hand);
+		world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), MubbleSounds.ENTITY_ICEBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		if(!world.isClient)
 		{
 			IceballEntity entity = new IceballEntity(world, player);
 			entity.setItem(stack);
-			entity.shoot(player, player.rotationPitch, player.rotationYaw, 0.0F, 1.5F, 1.0F);
-			world.addEntity(entity);
+			entity.setProperties(player, player.pitch, player.yaw, 0.0F, 1.5F, 1.0F);
+			world.spawnEntity(entity);
 		}
 		
-		player.addStat(Stats.ITEM_USED.get(this));
-		if(!player.abilities.isCreativeMode)
+		player.incrementStat(Stats.USED.getOrCreateStat(this));
+		if(!player.abilities.creativeMode)
 		{
-			stack.shrink(1);
+			stack.decrement(1);
 		}
 		
-		return ActionResult.success(stack);
+		return TypedActionResult.success(stack);
 	}
 	
-	public static final IDispenseItemBehavior DISPENSER_BEHAVIOR = new ProjectileDispenseBehavior()
+	public static final ItemDispenserBehavior DISPENSER_BEHAVIOR = new ProjectileDispenserBehavior()
 	{
 		@Override
-		protected IProjectile getProjectileEntity(World world, IPosition pos, ItemStack stack)
+		protected Projectile createProjectile(World world, Position pos, ItemStack stack)
 		{
 			return Util.make(new IceballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) ->
     		{

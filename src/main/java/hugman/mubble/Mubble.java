@@ -9,6 +9,7 @@ import hugman.mubble.init.MubbleEffects;
 import hugman.mubble.init.MubbleEnchantments;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
+import hugman.mubble.init.MubblePaintingTypes;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleCommands;
 import hugman.mubble.init.data.MubbleContainerTypes;
@@ -36,6 +37,7 @@ public class Mubble implements ModInitializer
 		new MubbleEnchantments();
 		new MubbleEntities();
 		new MubbleItems();
+		new MubblePaintingTypes();
 		new MubbleSounds();
 		
 		// Data
