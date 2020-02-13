@@ -15,6 +15,7 @@ minecraft {
 
 repositories {
 	maven { url 'https://jitpack.io' }
+	maven { url 'http://server.bbkr.space:8081/artifactory/libs-release' }
 }
 
 dependencies {
@@ -29,9 +30,11 @@ dependencies {
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 	
-	modImplementation "com.github.ladysnake:Satin:${satin_version}"
-    // Include Satin as a Jar-in-Jar dependency (optional)
-    include "io.github.ladysnake:Satin:${satin_version}"
+	modImplementation "com.github.ladysnake:Satin:${project.satin_version}"
+	include "com.github.ladysnake:Satin:${project.satin_version}"
+	
+	modImplementation "io.github.kvverti:bannerpp:${project.bannerpp_version}"
+	include "io.github.kvverti:bannerpp:${project.bannerpp_version}"
 }
 
 processResources {

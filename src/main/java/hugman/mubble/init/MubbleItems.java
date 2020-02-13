@@ -16,6 +16,7 @@ import hugman.mubble.objects.item.SmallBulbItem;
 import hugman.mubble.objects.item.SmashBallItem;
 import hugman.mubble.objects.item.SuperStarItem;
 import hugman.mubble.objects.item.TotemOfAscendingItem;
+import io.github.kvverti.bannerpp.api.LoomPatternItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.HoeItem;
 import net.minecraft.item.Item;
@@ -62,7 +63,7 @@ public class MubbleItems
     public static final Item PERMAFROST_BRICK = register("permafrost_brick", new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
     public static final Item BANDAGE = register("bandage", new BandageItem(new Item.Settings().group(ItemGroup.MISC).maxCount(16)));
     public static final Item TOTEM_OF_ASCENDING = register("totem_of_ascending", new TotemOfAscendingItem(new Item.Settings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON)));
-    //public static final Item STAR_BANNER_PATTERN = register("star_banner_pattern", new BannerPatternItem(MubbleBannerPatterns.STAR, (new Item.Settings()).maxCount(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
+    public static final Item STAR_BANNER_PATTERN = register("star_banner_pattern", new LoomPatternItem(MubbleBannerPatterns.STAR, new Item.Settings().maxCount(1).group(ItemGroup.MISC).rarity(Rarity.RARE)));
     
     /* SUPER MARIO */
     public static final Item SUPER_MUSHROOM = register("super_mushroom", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.SUPER_MUSHROOM)));

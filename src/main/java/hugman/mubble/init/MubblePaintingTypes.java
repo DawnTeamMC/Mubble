@@ -19,6 +19,6 @@ public class MubblePaintingTypes
 	
 	private static PaintingMotive register(String name, int width, int height)
 	{
-		return Registry.register(Registry.MOTIVE, new Identifier(Mubble.MOD_ID, name), new PaintingMotive(width, height));
+		return Registry.register(Registry.PAINTING_MOTIVE, new Identifier(Mubble.MOD_ID, name), new PaintingMotive(width, height));
 	}
 }
