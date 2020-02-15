@@ -131,11 +131,14 @@ public class IceballEntity extends ProjectileItemEntity
         {
             this.applyEnchantments(this.owner, entity);
         }
-        if(!(entity instanceof SnowGolemEntity) || entity instanceof LivingEntity)
+        if(!world.isRemote)
         {
-        	LivingEntity livingEntity = (LivingEntity)entity;
-        	livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 40, 1));
-        	livingEntity.addPotionEffect(new EffectInstance(MubbleEffects.HEAVINESS, 40));
+            if(!(entity instanceof SnowGolemEntity) || entity instanceof LivingEntity)
+            {
+            	LivingEntity livingEntity = (LivingEntity)entity;
+            	livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 40, 1));
+            	livingEntity.addPotionEffect(new EffectInstance(MubbleEffects.HEAVINESS, 40));
+            }
         }
 		world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return true;

@@ -123,7 +123,7 @@ public class FireballEntity extends ProjectileItemEntity
 	{
 		Entity entity = ((EntityRayTraceResult)result).getEntity();
 		float damage = entity.isImmuneToFire() ? 1.0F : 3.0F;
-        boolean flag = entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.owner), damage);
+        boolean flag = entity.attackEntityFrom(DamageSource.causeThrownDamage(this, this.owner).setFireDamage(), damage);
         if(flag)
         {
            this.applyEnchantments(this.owner, entity);
