@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:andesite"
+	},
+	"result": "mubble:andesite_bricks",
+	"count": 1
+}

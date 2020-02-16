@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:red_sandstone"
+		},
+		{
+			"item": "mubble:red_sandstone_bricks"
+		}
+	],
+	"result": "mubble:red_sandstone_brick_wall",
+	"count": 1
+}

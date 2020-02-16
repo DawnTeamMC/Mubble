@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:smooth_stone"
+	},
+	"result": "mubble:smooth_stone_paving",
+	"count": 1
+}

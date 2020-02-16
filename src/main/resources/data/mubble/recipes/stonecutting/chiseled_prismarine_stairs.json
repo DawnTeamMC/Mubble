@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:prismarine"
+		},
+		{
+			"item": "mubble:chiseled_prismarine"
+		}
+	],
+	"result": "mubble:chiseled_prismarine_stairs",
+	"count": 1
+}

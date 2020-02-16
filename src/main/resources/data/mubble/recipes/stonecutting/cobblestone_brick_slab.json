@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:cobblestone"
+		},
+		{
+			"item": "mubble:cobblestone_bricks"
+		}
+	],
+	"result": "mubble:cobblestone_brick_slab",
+	"count": 2
+}
