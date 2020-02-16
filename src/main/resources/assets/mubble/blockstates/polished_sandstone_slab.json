@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+		"type=bottom": {"model": "mubble:block/polished_sandstone_slab/bottom"},
+		"type=top": {"model": "mubble:block/polished_sandstone_slab/top"},
+		"type=double": {"model": "mubble:block/polished_sandstone"}
+	}
+}

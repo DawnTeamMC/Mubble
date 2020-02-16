@@ -1,0 +1,9 @@
+{
+	"parent": "block/inner_stairs",
+	"textures":
+	{
+		"bottom": "mubble:block/sandstone_bricks",
+		"top": "mubble:block/sandstone_bricks",
+		"side": "mubble:block/sandstone_bricks"
+	}
+}

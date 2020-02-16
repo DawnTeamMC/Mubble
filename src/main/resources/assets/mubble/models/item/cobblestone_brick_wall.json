@@ -1,0 +1,7 @@
+{
+	"parent": "block/wall_inventory",
+	"textures":
+	{
+		"wall": "mubble:block/cobblestone_bricks"
+	}
+}
