@@ -2,10 +2,7 @@ buildscript
 {
 	repositories
     {
-		maven
-        {
-            url = 'https://files.minecraftforge.net/maven'
-        }
+		maven { url = 'https://files.minecraftforge.net/maven' }
 		jcenter()
 		mavenCentral()
 	}
@@ -21,27 +18,26 @@ apply plugin: 'eclipse'
 
 repositories
 {
-	maven
-    {
-		url "https://maven.tterrag.com/"
-	}
+	maven { url 'https://maven.tterrag.com/' }
+	maven { url 'https://maven.blamejared.com' }
 }
 
-version = '3.0'
+version = mod_version
 group = 'com.hugman.mubble'
-archivesBaseName = 'mubble'
+archivesBaseName = 'Mubble'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
 
 dependencies
 {
-    minecraft 'net.minecraftforge:forge:1.15.2-31.1.12'
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    
+    compile fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
 }
 
 minecraft
 {
-	//See http://export.mcpbot.bspk.rs/ or https://maven.tterrag.com/de/oceanlabs/mcp/mcp_snapshot
-	mappings channel: 'snapshot', version: '20200213-mixed-1.15.2'
+	mappings channel: 'snapshot', version: "${mappings_version}"
 
     accessTransformer = file('accessTransformers.cfg')
 
@@ -53,6 +49,7 @@ minecraft
 
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
+			property 'fml.earlyprogresswindow', 'false'
 		}
 		server
         {
@@ -60,6 +57,7 @@ minecraft
 
 			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
+			property 'fml.earlyprogresswindow', 'false'
 
 			singleInstance(true)
 		}
