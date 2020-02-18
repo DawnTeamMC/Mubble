@@ -1,0 +1,9 @@
+{
+	"parent": "block/stairs",
+	"textures":
+	{
+		"bottom": "mubble:block/diorite_bricks",
+		"top": "mubble:block/diorite_bricks",
+		"side": "mubble:block/diorite_bricks"
+	}
+}

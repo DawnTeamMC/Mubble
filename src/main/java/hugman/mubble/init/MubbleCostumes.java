@@ -57,7 +57,7 @@ public class MubbleCostumes
     public static final Item WALUIGI_CAP = register("waluigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 1)));
     public static final Item VANISH_CAP = register("vanish_cap", new VanishCapCostume(pSimple));
     public static final Item WING_CAP = register("wing_cap", new WingCapCostume(pSimple.maxDamageIfAbsent(600)));
-    public static final Item GOOIGI_CAP = register("gooigi_cap", new GooigiCapCostume(pSimple, SoundEvents.BLOCK_SLIME_BLOCK_BREAK));
+    public static final Item GOOIGI_CAP = register("gooigi_cap", new GooigiCapCostume(pSimple, SoundEvents.BLOCK_SLIME_BLOCK_PLACE));
     public static final Item GOLD_MARIO_CAP = register("gold_mario_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_GOLD));
     public static final Item SILVER_LUIGI_CAP = register("silver_luigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
     public static final Item PRINCESS_PEACH_CROWN = register("princess_peach_crown", new CrownCostume(pSimple, Princess.PEACH));

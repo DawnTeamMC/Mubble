@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:granite"
+		},
+		{
+			"item": "mubble:granite_bricks"
+		}
+	],
+	"result": "mubble:granite_brick_wall",
+	"count": 1
+}

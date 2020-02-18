@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:mossy_cobblestone"
+		},
+		{
+			"item": "mubble:mossy_cobblestone_bricks"
+		}
+	],
+	"result": "mubble:mossy_cobblestone_brick_wall",
+	"count": 1
+}

@@ -131,11 +131,14 @@ public class IceballEntity extends ThrownItemEntity
         {
             this.dealDamage(this.owner, entity);
         }
-        if(!(entity instanceof SnowGolemEntity) || entity instanceof LivingEntity)
+        if(!world.isClient)
         {
-        	LivingEntity livingEntity = (LivingEntity) entity;
-        	livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 1));
-        	livingEntity.addStatusEffect(new StatusEffectInstance(MubbleEffects.HEAVINESS, 40));
+            if(!(entity instanceof SnowGolemEntity) || entity instanceof LivingEntity)
+            {
+            	LivingEntity livingEntity = (LivingEntity) entity;
+            	livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 1));
+            	livingEntity.addStatusEffect(new StatusEffectInstance(MubbleEffects.HEAVINESS, 40));
+            }
         }
 		world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return true;

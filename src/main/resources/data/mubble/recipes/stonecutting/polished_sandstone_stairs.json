@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:sandstone"
+		},
+		{
+			"item": "mubble:polished_sandstone"
+		}
+	],
+	"result": "mubble:polished_sandstone_stairs",
+	"count": 1
+}

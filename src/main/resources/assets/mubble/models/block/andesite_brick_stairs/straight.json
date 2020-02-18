@@ -1,0 +1,9 @@
+{
+	"parent": "block/stairs",
+	"textures":
+	{
+		"bottom": "mubble:block/andesite_bricks",
+		"top": "mubble:block/andesite_bricks",
+		"side": "mubble:block/andesite_bricks"
+	}
+}

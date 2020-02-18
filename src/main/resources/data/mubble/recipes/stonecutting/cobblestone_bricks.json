@@ -1,0 +1,9 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	{
+		"item": "minecraft:cobblestone"
+	},
+	"result": "mubble:cobblestone_bricks",
+	"count": 1
+}

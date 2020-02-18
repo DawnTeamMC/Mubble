@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:sandstone"
+		},
+		{
+			"item": "mubble:sandstone_bricks"
+		}
+	],
+	"result": "mubble:sandstone_brick_vertical_slab",
+	"count": 2
+}

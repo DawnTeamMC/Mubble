@@ -1,0 +1,8 @@
+{
+	"variants":
+	{
+		"type=bottom": {"model": "mubble:block/prismarine_brick_paving_slab/bottom"},
+		"type=top": {"model": "mubble:block/prismarine_brick_paving_slab/top"},
+		"type=double": {"model": "mubble:block/prismarine_brick_paving"}
+	}
+}

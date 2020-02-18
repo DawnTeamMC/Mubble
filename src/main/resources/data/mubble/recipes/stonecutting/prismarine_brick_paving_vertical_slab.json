@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:stonecutting",
+	"ingredient":
+	[
+		{
+			"item": "minecraft:prismarine_bricks"
+		},
+		{
+			"item": "mubble:prismarine_brick_paving"
+		}
+	],
+	"result": "mubble:prismarine_brick_paving_vertical_slab",
+	"count": 2
+}

@@ -1,0 +1,9 @@
+{
+	"parent": "block/stairs",
+	"textures":
+	{
+		"bottom": "mubble:block/polished_red_sandstone",
+		"top": "mubble:block/polished_red_sandstone",
+		"side": "mubble:block/polished_red_sandstone"
+	}
+}
