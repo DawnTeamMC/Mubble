@@ -5,6 +5,7 @@
     "mixins": [
 		"AxeItemMixin",
 		"ClientPlayNetworkHandlerMixin",
+		"EntityAccessor",
 		"FireBlockMixin",
 		"LivingEntityMixin",
 		"MinecraftClientMixin",
