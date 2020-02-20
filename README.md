@@ -1,4 +1,4 @@
-# Mubble - A Minecraft Mod for 1.14.4
+# Mubble - A Minecraft Mod for 1.15.2
 [![](http://cf.way2muchnoise.eu/full_mubble_downloads.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/mubble)
 [![](http://cf.way2muchnoise.eu/versions/Available%20For%20Minecraft_mubble_all.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/mubble)
 [![](http://cf.way2muchnoise.eu/packs/mubble.svg?badge_style=for_the_badge)](https://www.curseforge.com/minecraft/mc-mods/mubble)
@@ -36,19 +36,16 @@ Mubble is available in English, French, Spanish, German, Dutch, Chinese, Brazili
 [Full credits](https://ftb.gamepedia.com/Mubble/Credits)
 
 **Pixel Art**
-* Play Dash
-* Mayro
+* [Play Dash](https://twitter.com/ItzTheDash)
+* [FutureNatePlayz](https://www.curseforge.com/members/futurenp)
+* [Mayro](https://www.youtube.com/channel/UCumgUoIV9t2aGtaQXmwXIAg)
 
 **Translation**
-* Cochu (*Spanish*)
-* FVbico (*Dutch*)
-* ZYSTerry (*Simplified and Traditional Chinese*)
-* Sven792 (*German*)
+* [Cochu](https://www.youtube.com/cochuu) (*Spanish*)
+* [FVbico](https://twitter.com/FVbico) (*Dutch*)
+* [ZYSTerry](https://twitter.com/22zhuyansong) (*Simplified and Traditional Chinese*)
+* [Sven792](https://twitter.com/Sven7922) (*German*)
 * Lorrampi (*Brazilian Portuguese*)
 
-# License
-The **MIT License Copyright** (c) 2018-2019 Hugman Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+**Music**
+* [NoteBlock](https://www.youtube.com/user/NoteBlockRemix)
