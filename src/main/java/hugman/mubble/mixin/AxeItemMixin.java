@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 @Mixin(AxeItem.class)
 public class AxeItemMixin
-{	
+{
 	@Inject(method = "useOnBlock", at = @At(value = "HEAD"), cancellable = true)
 	private void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir)
 	{

@@ -4,3 +4,6 @@
 
 Items:
 * Lightsabers have an Epic rarity instead of Legendary
+
+Entities:
+* Fireballs do explosive damage instead of fire damage

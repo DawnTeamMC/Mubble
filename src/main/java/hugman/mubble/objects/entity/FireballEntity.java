@@ -123,7 +123,7 @@ public class FireballEntity extends ThrownItemEntity
 	{
 		Entity entity = result.getEntity();
 		float damage = entity.isFireImmune() ? 1.0F : 3.0F;
-        boolean flag = entity.damage(DamageSource.thrownProjectile(this, this.owner).setFire(), damage);
+        boolean flag = entity.damage(DamageSource.thrownProjectile(this, this.owner).setExplosive(), damage);
         if(flag)
         {
            this.dealDamage(this.owner, entity);

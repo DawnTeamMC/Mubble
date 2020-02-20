@@ -4,6 +4,7 @@
     "compatibilityLevel": "JAVA_8",
     "mixins": [
 		"AxeItemMixin",
+		"ClientPlayNetworkHandlerMixin",
 		"FireBlockMixin",
 		"LivingEntityMixin",
 		"MinecraftClientMixin",

@@ -2,51 +2,53 @@ package hugman.mubble.objects.item;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class AymrItem extends Item
 {
-    public AymrItem(Item.Properties builder)
+    public AymrItem(Item.Settings builder)
     {
         super(builder);
     }
     
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EquipmentSlotType slot, ItemStack stack)
+    public Multimap<String, EntityAttributeModifier> getModifiers(EquipmentSlot slot)
     {
-    	Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
-    	if(slot == EquipmentSlotType.MAINHAND)
+    	Multimap<String, EntityAttributeModifier> multimap = super.getModifiers(slot);
+    	if(slot == EquipmentSlot.MAINHAND)
     	{
-    		multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", 5.0D, AttributeModifier.Operation.ADDITION));
-    		multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3.5D, AttributeModifier.Operation.ADDITION));
+    		multimap.put(EntityAttributes.ATTACK_DAMAGE.getId(), new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_UUID, "Tool modifier", 5.0D, EntityAttributeModifier.Operation.ADDITION));
+    		multimap.put(EntityAttributes.ATTACK_SPEED.getId(), new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_UUID, "Tool modifier", -3.5D, EntityAttributeModifier.Operation.ADDITION));
     	}
     	return multimap;
     }
     
     @Override
-    public boolean hitEntity(ItemStack stack, LivingEntity victim, LivingEntity sender)
+    public boolean postHit(ItemStack stack, LivingEntity victim, LivingEntity sender)
     {
-    	stack.damageItem(2, sender, (entity) ->
+    	stack.damage(2, sender, (entity) ->
     	{
-    		entity.sendBreakAnimation(EquipmentSlotType.MAINHAND);
+    		entity.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND);
         });
         return true;
     }
     
     @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player)
+    public boolean postMine(ItemStack itemstack, World world, BlockState state, BlockPos pos, LivingEntity player)
     {
-    	if(player.getCooledAttackStrength(0.0F) == 1.0F)
+    	if(((PlayerEntity) player).getAttackCooldownProgress(0.0F) == 1.0F)
     	{
     		player.getEntityWorld().removeBlock(pos, true);
     	}
-    	return super.onBlockStartBreak(itemstack, pos, player);
+    	return super.postMine(itemstack, world, state, pos, player);
     }
 }
