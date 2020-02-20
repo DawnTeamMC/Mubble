@@ -111,7 +111,7 @@ public class MubbleBlocks
     protected static final Block.Properties pWoodenButton = Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F).sound(SoundType.WOOD);
     protected static final Block.Properties pStoneButton = Properties.create(Material.MISCELLANEOUS).doesNotBlockMovement().hardnessAndResistance(0.5F);
 
-    /* MINECRAFT */
+    /* MUBBLE */
     public static final Block OAK_VERTICAL_SLAB = register("oak_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS, 5, 20);
     public static final Block SPRUCE_VERTICAL_SLAB = register("spruce_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.SPRUCE_PLANKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS, 5, 20);
     public static final Block BIRCH_VERTICAL_SLAB = register("birch_vertical_slab", new VerticalSlabBlock(Properties.from(Blocks.BIRCH_PLANKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS, 5, 20);
@@ -868,10 +868,6 @@ public class MubbleBlocks
     public static final Block WITHER_ROSE_PILE = register("wither_rose_pile", new WitherRosePileBlock(Properties.create(Material.PLANTS).hardnessAndResistance(0.0F).sound(SoundType.PLANT).doesNotBlockMovement().nonOpaque()), ItemGroup.DECORATIONS, FLOWER_PILES, 60, 20);
 
     /* SUPER MARIO (MAKER) */
-    public static final Block SMB_QUESTION_BLOCK = register("smb_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMB3_QUESTION_BLOCK = register("smb3_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block SMW_QUESTION_BLOCK = register("smw_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
-    public static final Block NSMBU_QUESTION_BLOCK = register("nsmbu_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_GROUND_GROUND_BLOCK = register("smb_ground_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_UNDERGROUND_GROUND_BLOCK = register("smb_underground_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_UNDERWATER_GROUND_BLOCK = register("smb_underwater_ground_block", new Block(Properties.from(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
@@ -917,6 +913,10 @@ public class MubbleBlocks
     public static final Block NSMBU_SNOW_GROUND_BLOCK = register("nsmbu_snow_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_NIGHT_SNOW_GROUND_BLOCK = register("nsmbu_night_snow_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block NSMBU_SKY_GROUND_BLOCK = register("nsmbu_sky_ground_block", new OverBlock(Properties.from(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB_QUESTION_BLOCK = register("smb_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMB3_QUESTION_BLOCK = register("smb3_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block SMW_QUESTION_BLOCK = register("smw_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
+    public static final Block NSMBU_QUESTION_BLOCK = register("nsmbu_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB_EMPTY_BLOCK = register("smb_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMB3_EMPTY_BLOCK = register("smb3_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SMW_EMPTY_BLOCK = register("smw_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS, CUBES);

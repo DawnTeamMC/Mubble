@@ -36,7 +36,7 @@ public class MubbleItems
     /* All Content Bag */
     public static final List<Item> ITEMS = new ArrayList<Item>();
 
-    /* MINECRAFT */
+    /* MUBBLE */
     public static final Item WHEAT_FLOUR = register("wheat_flour", new Item(new Item.Properties().group(ItemGroup.FOOD)));
     public static final Item TOMATO = register("tomato", new BlockNamedItem(MubbleBlocks.TOMATOES, new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.TOMATO)));
     public static final Item SALAD = register("salad", new BlockNamedItem(MubbleBlocks.SALAD, new Item.Properties().group(ItemGroup.FOOD).food(MubbleFoods.SALAD)));
