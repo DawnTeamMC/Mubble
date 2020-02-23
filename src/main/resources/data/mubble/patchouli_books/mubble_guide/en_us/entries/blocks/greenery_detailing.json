@@ -1,0 +1,30 @@
+{
+	"icon": "mubble:scarlet_mushroom",
+	"name": "Greenery Detailing",
+	"category": "blocks",
+	"pages":
+	[
+		{
+			"type": "text",
+			"text": ""
+		},
+		{
+			"type": "spotlight",
+			"title": "Leaf Piles",
+			"item": "mubble:acacia_leaf_pile",
+			"text": ""
+		},
+		{
+			"type": "spotlight",
+			"title": "More Wood Types",
+			"item": "mubble:white_cherry_oak_sapling",
+			"text": ""
+		},
+		{
+			"type": "spotlight",
+			"title": "Green Hills",
+			"item": "mubble:green_hill_grass_block",
+			"text": ""
+		}
+	]
+}
