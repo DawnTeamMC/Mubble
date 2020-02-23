@@ -10,6 +10,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
@@ -20,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.data.EmptyModelData;
 
 @OnlyIn(Dist.CLIENT)
@@ -32,29 +34,29 @@ public class FlyingBlockRenderer extends EntityRenderer<FlyingBlockEntity>
 	}
 	
 	@Override
-	public void render(FlyingBlockEntity p_225623_1_, float p_225623_2_, float p_225623_3_, MatrixStack p_225623_4_, IRenderTypeBuffer p_225623_5_, int p_225623_6_)
+	public void render(FlyingBlockEntity entity, float p_225623_2_, float p_225623_3_, MatrixStack matrix, IRenderTypeBuffer buffer, int p_225623_6_)
 	{
-		BlockState blockstate = p_225623_1_.getBlockState();
+		BlockState blockstate = entity.getBlockState();
 		if (blockstate.getRenderType() == BlockRenderType.MODEL)
 		{
-			World world = p_225623_1_.getWorldObj();
-			if (blockstate != world.getBlockState(new BlockPos(p_225623_1_)) && blockstate.getRenderType() != BlockRenderType.INVISIBLE)
+			World world = entity.getWorldObj();
+			if (blockstate != world.getBlockState(new BlockPos(entity)) && blockstate.getRenderType() != BlockRenderType.INVISIBLE)
 			{
-				p_225623_4_.push();
-				BlockPos blockpos = new BlockPos(p_225623_1_.getX(), p_225623_1_.getBoundingBox().maxY, p_225623_1_.getZ());
-				p_225623_4_.translate(-0.5D, 0.0D, -0.5D);
+				matrix.push();
+				BlockPos blockpos = new BlockPos(entity.getX(), entity.getBoundingBox().maxY, entity.getZ());
+				matrix.translate(-0.5D, 0.0D, -0.5D);
 				BlockRendererDispatcher blockrendererdispatcher = Minecraft.getInstance().getBlockRendererDispatcher();
-				for(net.minecraft.client.renderer.RenderType type : net.minecraft.client.renderer.RenderType.getBlockLayers())
+				for(RenderType type : RenderType.getBlockLayers())
 				{
 					if (RenderTypeLookup.canRenderInLayer(blockstate, type))
 					{
-						net.minecraftforge.client.ForgeHooksClient.setRenderLayer(type);
-						blockrendererdispatcher.getBlockModelRenderer().renderModel(world, blockrendererdispatcher.getModelForState(blockstate), blockstate, blockpos, p_225623_4_, p_225623_5_.getBuffer(type), false, new Random(), blockstate.getPositionRandom(p_225623_1_.getOrigin()), OverlayTexture.DEFAULT_UV, EmptyModelData.INSTANCE);
+						ForgeHooksClient.setRenderLayer(type);
+						blockrendererdispatcher.getBlockModelRenderer().renderModel(world, blockrendererdispatcher.getModelForState(blockstate), blockstate, blockpos, matrix, buffer.getBuffer(type), false, new Random(), blockstate.getPositionRandom(entity.getOrigin()), OverlayTexture.DEFAULT_UV, EmptyModelData.INSTANCE);
 					}
 				}
-				net.minecraftforge.client.ForgeHooksClient.setRenderLayer(null);
-				p_225623_4_.pop();
-				super.render(p_225623_1_, p_225623_2_, p_225623_3_, p_225623_4_, p_225623_5_, p_225623_6_);
+				ForgeHooksClient.setRenderLayer(null);
+				matrix.pop();
+				super.render(entity, p_225623_2_, p_225623_3_, matrix, buffer, p_225623_6_);
 			}
 		}
 	}

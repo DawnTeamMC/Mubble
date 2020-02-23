@@ -6,6 +6,7 @@ import java.util.List;
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.ChinchoEntity;
 import hugman.mubble.objects.entity.CustomTNTEntity;
+import hugman.mubble.objects.entity.DuckEntity;
 import hugman.mubble.objects.entity.FireballEntity;
 import hugman.mubble.objects.entity.FlyingBlockEntity;
 import hugman.mubble.objects.entity.GoombaEntity;
@@ -14,6 +15,7 @@ import hugman.mubble.objects.entity.ToadEntity;
 import hugman.mubble.objects.entity.ZombieCowmanEntity;
 import hugman.mubble.objects.entity.render.ChinchoRenderer;
 import hugman.mubble.objects.entity.render.CustomTNTRenderer;
+import hugman.mubble.objects.entity.render.DuckRenderer;
 import hugman.mubble.objects.entity.render.FlyingBlockRenderer;
 import hugman.mubble.objects.entity.render.GoombaRenderer;
 import hugman.mubble.objects.entity.render.ToadRenderer;
@@ -26,13 +28,15 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.world.gen.Heightmap;
 
 public class MubbleEntities
 {
     public static final List<EntityType<?>> ENTITY_TYPES = new ArrayList<EntityType<? extends Entity>>();
 
-    /* MINECRAFT */
+    /* MUBBLE */
+	public static final EntityType<DuckEntity> DUCK = register("duck", EntityType.Builder.create(DuckEntity::new, EntityClassification.CREATURE).size(0.4F, 0.8F));
 	public static final EntityType<ZombieCowmanEntity> ZOMBIE_COWMAN = register("zombie_cowman", EntityType.Builder.create(ZombieCowmanEntity::new, EntityClassification.MONSTER).size(0.6F, 1.95F));
 	
 	public static final EntityType<CustomTNTEntity> CUSTOM_TNT = register("custom_tnt", EntityType.Builder.<CustomTNTEntity>create(CustomTNTEntity::new, EntityClassification.MISC).immuneToFire().size(0.98F, 0.98F).setTrackingRange(10).setUpdateInterval(20));
@@ -56,17 +60,20 @@ public class MubbleEntities
     
     public static void registerPlacements()
     {
+    	EntitySpawnPlacementRegistry.register(MubbleEntities.DUCK, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::func_223316_b);
+    	EntitySpawnPlacementRegistry.register(MubbleEntities.ZOMBIE_COWMAN, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieCowmanEntity::canSpawn);
+    	
     	EntitySpawnPlacementRegistry.register(MubbleEntities.CHINCHO, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ChinchoEntity::canSpawn);
     	EntitySpawnPlacementRegistry.register(MubbleEntities.TOAD, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ToadEntity::canSpawn);
     	EntitySpawnPlacementRegistry.register(MubbleEntities.GOOMBA, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, GoombaEntity::canSpawn);
-    	EntitySpawnPlacementRegistry.register(MubbleEntities.ZOMBIE_COWMAN, EntitySpawnPlacementRegistry.PlacementType.ON_GROUND, Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ZombieCowmanEntity::canSpawn);
     }
     
     public static void registerRenders()
     {
     	EntityRendererManager manager = Minecraft.getInstance().getRenderManager();
     	ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
-    	
+
+    	manager.register(DUCK, new DuckRenderer(manager));
     	manager.register(ZOMBIE_COWMAN, new ZombieCowmanRenderer(manager));
     	manager.register(CUSTOM_TNT, new CustomTNTRenderer(manager));
     	manager.register(FLYING_BLOCK, new FlyingBlockRenderer(manager));

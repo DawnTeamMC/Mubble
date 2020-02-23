@@ -112,10 +112,12 @@ public class MubbleItems
     public static final Item PINK_LIGHTSABER = register("pink_lightsaber", new LightsaberItem(new Item.Properties().group(ItemGroup.COMBAT).rarity(MubbleRarities.LEGENDARY)));
 
     /* SPECIAL */
+    public static final Item DUCK_SPAWN_EGG = register("duck_spawn_egg", new SpawnEggItem(MubbleEntities.DUCK, 10592673, 15904341, new Item.Properties().group(ItemGroup.MISC)));
+    public static final Item ZOMBIE_COWMAN_SPAWN_EGG = register("zombie_cowman_spawn_egg", new SpawnEggItem(MubbleEntities.ZOMBIE_COWMAN, 2957585, 5009705, new Item.Properties().group(ItemGroup.MISC)));
+    
+    public static final Item TOAD_SPAWN_EGG = register("toad_spawn_egg", new SpawnEggItem(MubbleEntities.TOAD, 14671839, 16722728, new Item.Properties().group(ItemGroup.MISC)));
     public static final Item CHINCHO_SPAWN_EGG = register("chincho_spawn_egg", new SpawnEggItem(MubbleEntities.CHINCHO, 7527671, 4903, new Item.Properties().group(ItemGroup.MISC)));
     public static final Item GOOMBA_SPAWN_EGG = register("goomba_spawn_egg", new SpawnEggItem(MubbleEntities.GOOMBA, 10839375, 12097909, new Item.Properties().group(ItemGroup.MISC)));
-    public static final Item TOAD_SPAWN_EGG = register("toad_spawn_egg", new SpawnEggItem(MubbleEntities.TOAD, 14671839, 16722728, new Item.Properties().group(ItemGroup.MISC)));
-    public static final Item ZOMBIE_COWMAN_SPAWN_EGG = register("zombie_cowman_spawn_egg", new SpawnEggItem(MubbleEntities.ZOMBIE_COWMAN, 2957585, 5009705, new Item.Properties().group(ItemGroup.MISC)));
     
     private static Item register(String name, Item item)
     {

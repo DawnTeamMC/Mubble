@@ -40,8 +40,9 @@ public class MubbleTags
         public static final Tag<Item> CROWNS = tag("crowns");
         public static final Tag<Item> WEIGHT_HEAVY = tag("weight/heavy");
         public static final Tag<Item> WEIGHT_LIGHT = tag("weight/light");
-        public static final Tag<Item> SCARY_TO_TOAD = tag("scary_to/toad");
-        public static final Tag<Item> TEMPTING_TO_TOAD = tag("tempting_to/toad");
+        public static final Tag<Item> TOAD_FEAR = tag("fear/toad");
+        public static final Tag<Item> TOAD_FEEDING = tag("feeding/toad");
+        public static final Tag<Item> DUCK_FEEDING = tag("feeding/duck");
 
         public static final Tag<Item> GEMS_BISMUTH = tag("gems/bismuth");
         public static final Tag<Item> GEMS_KYBER = tag("gems/kyber");
