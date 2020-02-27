@@ -1240,6 +1240,7 @@
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
 
+	"//item.mubble.duck_spawn_egg": "Duck Spawn Egg",
 	"//item.mubble.chincho_spawn_egg": "Chincho Spawn Egg",
 	"//item.mubble.goomba_spawn_egg": "Goomba Spawn Egg",
 	"//item.mubble.toad_spawn_egg": "Toad Spawn Egg",
@@ -1330,6 +1331,7 @@
 
 
 	"comment": "ENTITIES",
+	"//entity.mubble.duck": "Duck",
 	"//entity.mubble.zombie_cowman": "Zombie Cowman",
 	"//entity.mubble.custom_tnt": "Custom TNT",
 	"//entity.mubble.flying_block": "Flying Block",

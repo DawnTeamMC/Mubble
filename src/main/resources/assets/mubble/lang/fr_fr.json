@@ -1089,22 +1089,22 @@
 	"block.minecraft.banner.star.gray": "Étoile grise",
 	"block.minecraft.banner.star.black": "Étoile noire",
 
-	"//block.minecraft.banner.smash_ball.blue": "Balle Smash bleue",
-	"//block.minecraft.banner.smash_ball.light_blue": "Balle Smash bleu clair",
-	"//block.minecraft.banner.smash_ball.cyan": "Balle Smash cyan",
-	"//block.minecraft.banner.smash_ball.green": "Balle Smash verte",
-	"//block.minecraft.banner.smash_ball.lime": "Balle Smash clair",
-	"//block.minecraft.banner.smash_ball.yellow": "Balle Smash jaune",
-	"//block.minecraft.banner.smash_ball.orange": "Balle Smash orange",
-	"//block.minecraft.banner.smash_ball.red": "Balle Smash rouge",
-	"//block.minecraft.banner.smash_ball.pink": "Balle Smash rose",
-	"//block.minecraft.banner.smash_ball.magenta": "Balle Smash magenta",
-	"//block.minecraft.banner.smash_ball.purple": "Balle Smash violette",
-	"//block.minecraft.banner.smash_ball.brown": "Balle Smash marron",
-	"//block.minecraft.banner.smash_ball.white": "Balle Smash blanche",
-	"//block.minecraft.banner.smash_ball.light_gray": "Balle Smash gris clair",
-	"//block.minecraft.banner.smash_ball.gray": "Balle Smash grise",
-	"//block.minecraft.banner.smash_ball.black": "Balle Smash noire",
+	"block.minecraft.banner.smash_ball.blue": "Balle Smash bleue",
+	"block.minecraft.banner.smash_ball.light_blue": "Balle Smash bleu clair",
+	"block.minecraft.banner.smash_ball.cyan": "Balle Smash cyan",
+	"block.minecraft.banner.smash_ball.green": "Balle Smash verte",
+	"block.minecraft.banner.smash_ball.lime": "Balle Smash clair",
+	"block.minecraft.banner.smash_ball.yellow": "Balle Smash jaune",
+	"block.minecraft.banner.smash_ball.orange": "Balle Smash orange",
+	"block.minecraft.banner.smash_ball.red": "Balle Smash rouge",
+	"block.minecraft.banner.smash_ball.pink": "Balle Smash rose",
+	"block.minecraft.banner.smash_ball.magenta": "Balle Smash magenta",
+	"block.minecraft.banner.smash_ball.purple": "Balle Smash violette",
+	"block.minecraft.banner.smash_ball.brown": "Balle Smash marron",
+	"block.minecraft.banner.smash_ball.white": "Balle Smash blanche",
+	"block.minecraft.banner.smash_ball.light_gray": "Balle Smash gris clair",
+	"block.minecraft.banner.smash_ball.gray": "Balle Smash grise",
+	"block.minecraft.banner.smash_ball.black": "Balle Smash noire",
 
 
 
@@ -1151,7 +1151,7 @@
 	"item.mubble.super_mushroom": "Super champignon",
 	"item.mubble.peach": "Pêche",
 	"item.mubble.fireball": "Boule de feu",
-	"//item.mubble.iceball": "Iceball",
+	"item.mubble.iceball": "Boule de glace",
 	"item.mubble.cape_feather": "Plume acrobate",
 	"item.mubble.super_cape_feather": "Super plume acrobate",
 	"item.mubble.super_star": "Super étoile",
@@ -1240,6 +1240,7 @@
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
 
+	"//item.mubble.duck_spawn_egg": "Duck Spawn Egg",
 	"item.mubble.chincho_spawn_egg": "Oeuf d'apparition de Chincho",
 	"item.mubble.goomba_spawn_egg": "Oeuf d'apparition de Goomba",
 	"item.mubble.toad_spawn_egg": "Oeuf d'apparition de Toad",
@@ -1330,6 +1331,7 @@
 
 
 	"comment": "ENTITIES",
+	"entity.mubble.duck": "Canard",
 	"entity.mubble.zombie_cowman": "Vache-zombie",
 	"entity.mubble.custom_tnt": "TNT personalisée",
 	"entity.mubble.flying_block": "Bloc volant",
@@ -1338,7 +1340,7 @@
 	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.toad": "Toad",
 	"entity.mubble.fireball": "Boule de feu",
-	"//entity.mubble.iceball": "Iceball",
+	"entity.mubble.iceball": "Boule de glace",
 
 
 
@@ -1378,7 +1380,7 @@
 	"subtitles.mubble.entity.chincho.hurt": "Chincho blessé",
 	"subtitles.mubble.entity.chincho.death": "Chincho qui meurt",
 	"subtitles.mubble.entity.fireball.throw": "Boule de feu lancée",
-	"//subtitles.mubble.entity.iceball.throw": "Iceball flies",
+	"subtitles.mubble.entity.iceball.throw": "Boule de glace lancée",
 	"subtitles.mubble.entity.goomba.crush": "Goomba écrasé",
 	"subtitles.mubble.entity.goomba.hurt": "Goomba blessé",
 	"subtitles.mubble.entity.goomba.death": "Goomba qui meurt",
