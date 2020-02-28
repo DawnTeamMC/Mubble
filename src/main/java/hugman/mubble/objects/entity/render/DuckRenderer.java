@@ -17,7 +17,7 @@ public class DuckRenderer extends MobRenderer<DuckEntity, DuckModel<DuckEntity>>
 	
 	public DuckRenderer(EntityRendererManager manager)
 	{
-		super(manager, new DuckModel<>(), 0.5F);
+		super(manager, new DuckModel<>(), 0.3F);
 	}
 	
 	@Override

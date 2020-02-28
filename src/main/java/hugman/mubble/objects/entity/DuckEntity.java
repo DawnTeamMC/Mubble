@@ -1,6 +1,7 @@
 package hugman.mubble.objects.entity;
 
 import hugman.mubble.init.MubbleEntities;
+import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.AgeableEntity;
@@ -23,7 +24,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -79,29 +81,49 @@ public class DuckEntity extends AnimalEntity
 		this.oFlapSpeed = this.destPos;
 		this.destPos = (float)((double) this.destPos + (double) (this.onGround ? -1 : 4) * 0.3D);
 		this.destPos = MathHelper.clamp(this.destPos, 0.0F, 1.0F);
-		if(!this.onGround && this.wingRotDelta < 1.0F)
+		if(!this.onGround && this.wingRotDelta < 1.5F)
 		{
-			this.wingRotDelta = 2.0F;
+			this.wingRotDelta = 1.5F;
 		}
 
 		this.wingRotDelta = (float)((double) this.wingRotDelta * 0.9D);
 		Vec3d vec3d = this.getMotion();
 		if(!this.onGround && vec3d.y < 0.0D)
 		{
-			this.setMotion(vec3d.mul(1.0D, 0.9D, 1.0D));
+			this.setMotion(vec3d.mul(1.0D, 0.5D, 1.0D));
 		}
+		
+		this.wingRotation += this.wingRotDelta * 2.0F;
     }
     
     @Override
     public boolean handleFallDamage(float distance, float multiplier)
     {
-    	return super.handleFallDamage(distance, multiplier * 0.9F);
+    	return false;
+    }
+    
+    @Override
+    protected SoundEvent getAmbientSound()
+    {
+    	return MubbleSounds.ENTITY_DUCK_AMBIENT;
+    }
+    
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source)
+    {
+    	return MubbleSounds.ENTITY_DUCK_HURT;
+    }
+    
+    @Override
+    protected SoundEvent getDeathSound()
+    {
+    	return MubbleSounds.ENTITY_DUCK_DEATH;
     }
     
     @Override
 	protected void playStepSound(BlockPos pos, BlockState state)
 	{
-		this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.0F);
+		this.playSound(MubbleSounds.ENTITY_DUCK_STEP, 0.15F, 1.0F);
 	}
 	
     @Override

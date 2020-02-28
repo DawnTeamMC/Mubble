@@ -83,6 +83,10 @@ public class MubbleSounds
 	public static final SoundEvent ENTITY_CHINCHO_AMBIENT = register("entity.chincho.ambient");
 	public static final SoundEvent ENTITY_CHINCHO_HURT = register("entity.chincho.hurt");
 	public static final SoundEvent ENTITY_CHINCHO_DEATH = register("entity.chincho.death");
+	public static final SoundEvent ENTITY_DUCK_AMBIENT = register("entity.duck.ambient");
+	public static final SoundEvent ENTITY_DUCK_HURT = register("entity.duck.hurt");
+	public static final SoundEvent ENTITY_DUCK_DEATH = register("entity.duck.death");
+	public static final SoundEvent ENTITY_DUCK_STEP = register("entity.duck.step");
 	public static final SoundEvent ENTITY_FIREBALL_HIT_BLOCK = register("entity.fireball.hit.block");
 	public static final SoundEvent ENTITY_FIREBALL_HIT_ENTITY = register("entity.fireball.hit.entity");
 	public static final SoundEvent ENTITY_FIREBALL_HIT_MELTABLE = register("entity.fireball.hit.meltable");

@@ -522,6 +522,45 @@
 			"mubble:entity/chincho/death"
 		]
 	},
+	"entity.duck.ambient":
+	{
+		"subtitle": "subtitles.mubble.entity.duck.ambient",
+		"sounds":
+		[
+			"mubble:entity/duck/ambient/1",
+			"mubble:entity/duck/ambient/2",
+			"mubble:entity/duck/ambient/3",
+			"mubble:entity/duck/ambient/4",
+			"mubble:entity/duck/ambient/5"
+		]
+	},
+	"entity.duck.hurt":
+	{
+		"subtitle": "subtitles.mubble.entity.duck.hurt",
+		"sounds":
+		[
+			"mubble:entity/duck/hurt/1",
+			"mubble:entity/duck/hurt/2",
+			"mubble:entity/duck/hurt/3"
+		]
+	},
+	"entity.duck.death":
+	{
+		"subtitle": "subtitles.mubble.entity.duck.death",
+		"sounds":
+		[
+			"mubble:entity/duck/death"
+		]
+	},
+	"entity.duck.step":
+	{
+		"subtitle": "subtitles.block.generic.footsteps",
+		"sounds":
+		[
+			"minecraft:mob/chicken/step1",
+			"minecraft:mob/chicken/step2"
+		]
+	},
 	"entity.fireball.hit.block":
 	{
 		"sounds":
