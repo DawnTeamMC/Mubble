@@ -1,0 +1,10 @@
+{
+	"type": "minecraft:smelting",
+	"ingredient":
+	{
+		"item": "mubble:duck"
+	},
+	"result": "mubble:cooked_duck",
+	"experience": 0.35,
+	"cookingtime": 200
+}

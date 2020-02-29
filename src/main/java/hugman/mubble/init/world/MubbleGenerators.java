@@ -4,6 +4,7 @@ import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStage;
@@ -51,6 +52,10 @@ public class MubbleGenerators
 			if(biome.getCategory().equals(Category.PLAINS))
 			{
 				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.TOAD, 10, 4, 4));
+			}
+			if(biome.getSpawns(EntityClassification.CREATURE).contains(new Biome.SpawnListEntry(EntityType.CHICKEN, 10, 4, 4)))
+			{
+				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.DUCK, 10, 4, 4));
 			}
 		}
 	}
