@@ -7,7 +7,6 @@ import hugman.mubble.Mubble;
 import hugman.mubble.init.data.MubbleFoods;
 import hugman.mubble.init.data.MubbleItemTiers;
 import hugman.mubble.init.data.MubbleRarities;
-import hugman.mubble.objects.item.AymrItem;
 import hugman.mubble.objects.item.BandageItem;
 import hugman.mubble.objects.item.CapeFeatherItem;
 import hugman.mubble.objects.item.FireballItem;
@@ -90,7 +89,7 @@ public class MubbleItems
     public static final Item NSMBU_KEY = register("nsmbu_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS), MubbleBlocks.NSMBU_KEY_DOOR));
     
     /* FIRE EMBLEM */
-    public static final Item AYMR = register("aymr", new AymrItem(new Item.Properties().group(ItemGroup.COMBAT)));
+    //public static final Item AYMR = register("aymr", new AymrItem(new Item.Properties().group(ItemGroup.COMBAT)));
     
     /* SUPER SMASH BROS. */
     public static final Item SMASH_BALL = register("smash_ball", new SmashBallItem(new Item.Properties().group(ItemGroup.COMBAT).maxStackSize(1).rarity(Rarity.RARE)));
