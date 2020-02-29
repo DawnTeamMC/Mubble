@@ -10,7 +10,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-import net.minecraft.network.play.server.SSpawnMovingSoundEffectPacket;
 import net.minecraft.network.play.server.SStopSoundPacket;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
@@ -42,11 +41,6 @@ public class LightsaberItem extends SwordItem
 	public void onPullOut(Entity entity, World world)
 	{
 		world.playMovingSound((PlayerEntity)null, entity, MubbleSounds.ITEM_LIGHTSABER_PULL_OUT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-		if(entity instanceof ServerPlayerEntity)
-		{
-    		SSpawnMovingSoundEffectPacket packet = new SSpawnMovingSoundEffectPacket(MubbleSounds.ITEM_LIGHTSABER_IDLE, SoundCategory.MASTER, entity, 0.15F, 1.0F);
-    		((ServerPlayerEntity)entity).connection.sendPacket(packet);
-		}
 	}
 	
 	public void onPullIn(Entity entity, World world)
