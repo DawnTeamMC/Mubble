@@ -1,9 +1,12 @@
 {
-	"pools": [
+	"type": "minecraft:entity",
+	"pools":
+	[
 		{
 			"name":"brigade_member",
 			"rolls": 1,
-			"entries": [
+			"entries":
+			[
 				{
 					"type": "loot_table",
 					"name": "mubble:entities/toad/brigade/member",
@@ -14,7 +17,8 @@
 		{
 			"name":"red",
 			"rolls": 1,
-			"entries": [
+			"entries":
+			[
 				{
 					"type": "loot_table",
 					"name": "mubble:entities/toad/species/red",
@@ -25,7 +29,8 @@
 		{
 			"name":"plus",
 			"rolls": 1,
-			"entries": [
+			"entries":
+			[
 				{
 					"type": "item",
 					"name": "mubble:smash_ball",

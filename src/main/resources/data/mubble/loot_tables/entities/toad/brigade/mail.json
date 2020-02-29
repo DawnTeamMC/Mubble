@@ -1,9 +1,12 @@
 {
-	"pools": [
+	"type": "minecraft:entity",
+	"pools":
+	[
 		{
 			"name":"brigade_member",
 			"rolls": 1,
-			"entries": [
+			"entries":
+			[
 				{
 					"type": "loot_table",
 					"name": "mubble:entities/toad/brigade/member",
@@ -14,7 +17,8 @@
 		{
 			"name":"purple",
 			"rolls": 1,
-			"entries": [
+			"entries":
+			[
 				{
 					"type": "loot_table",
 					"name": "mubble:entities/toad/species/purple",

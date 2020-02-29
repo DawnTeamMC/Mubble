@@ -3,7 +3,6 @@ package hugman.mubble.objects.entity;
 import java.util.Random;
 import java.util.UUID;
 
-import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -44,12 +43,6 @@ public class ZombieCowmanEntity extends ZombiePigmanEntity
 	{
 		super(type, worldIn);
 		this.setPathPriority(PathNodeType.WATER, 8.0F);
-	}
-	
-	@Override
-	public EntityType<?> getType()
-	{
-		return MubbleEntities.ZOMBIE_COWMAN;
 	}
 	
 	@Override
