@@ -8,7 +8,6 @@ import com.google.common.cache.LoadingCache;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
-import hugman.mubble.init.world.MubbleDimensions;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -30,9 +29,7 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.text.ITextComponent;
@@ -40,7 +37,6 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -156,6 +152,7 @@ public class PermafrostPortalBlock extends Block
 		}
 	}
 
+	/*
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
 	{
@@ -183,6 +180,7 @@ public class PermafrostPortalBlock extends Block
 			}
 		}
 	}
+	*/
 	
 	public boolean trySpawnPortal(IWorld worldIn, BlockPos pos) 
 	{
