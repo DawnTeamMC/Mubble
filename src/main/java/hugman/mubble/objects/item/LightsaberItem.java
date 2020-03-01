@@ -13,6 +13,8 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.network.play.server.SStopSoundPacket;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class LightsaberItem extends SwordItem
 {
@@ -54,6 +56,7 @@ public class LightsaberItem extends SwordItem
 	}
 	
 	@Override
+	@OnlyIn(Dist.CLIENT)
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
 	{
     	if(isSelected && worldIn.isRemote && idleTimer == 0 && entityIn instanceof PlayerEntity)
