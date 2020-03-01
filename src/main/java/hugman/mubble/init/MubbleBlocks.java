@@ -188,33 +188,33 @@ public class MubbleBlocks
     public static final Block COBBLESTONE_BRICK_STAIRS = register("cobblestone_brick_stairs", new StairsBlock(COBBLESTONE_BRICKS), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block COBBLESTONE_BRICK_SLAB = register("cobblestone_brick_slab", new SlabBlock(Properties.from(COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, SLABS);
     public static final Block COBBLESTONE_BRICK_VERTICAL_SLAB = register("cobblestone_brick_vertical_slab", new VerticalSlabBlock(Properties.from(COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block COBBLESTONE_BRICK_WALL = register("cobblestone_brick_wall", new WallBlock(Properties.from(COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, WALLS);
+    public static final Block COBBLESTONE_BRICK_WALL = register("cobblestone_brick_wall", new WallBlock(Properties.from(COBBLESTONE_BRICKS)), ItemGroup.DECORATIONS, WALLS);
     public static final Block MOSSY_COBBLESTONE_BRICKS = register("mossy_cobblestone_bricks", new Block(Properties.from(Blocks.MOSSY_COBBLESTONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block MOSSY_COBBLESTONE_BRICK_STAIRS = register("mossy_cobblestone_brick_stairs", new StairsBlock(MOSSY_COBBLESTONE_BRICKS), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block MOSSY_COBBLESTONE_BRICK_SLAB = register("mossy_cobblestone_brick_slab", new SlabBlock(Properties.from(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, SLABS);
     public static final Block MOSSY_COBBLESTONE_BRICK_VERTICAL_SLAB = register("mossy_cobblestone_brick_vertical_slab", new VerticalSlabBlock(Properties.from(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block MOSSY_COBBLESTONE_BRICK_WALL = register("mossy_cobblestone_brick_wall", new WallBlock(Properties.from(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, WALLS);
+    public static final Block MOSSY_COBBLESTONE_BRICK_WALL = register("mossy_cobblestone_brick_wall", new WallBlock(Properties.from(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.DECORATIONS, WALLS);
     public static final Block GRANITE_BRICKS = register("granite_bricks", new Block(Properties.from(Blocks.GRANITE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block GRANITE_BRICK_STAIRS = register("granite_brick_stairs", new StairsBlock(GRANITE_BRICKS), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block GRANITE_BRICK_SLAB = register("granite_brick_slab", new SlabBlock(Properties.from(GRANITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, SLABS);
     public static final Block GRANITE_BRICK_VERTICAL_SLAB = register("granite_brick_vertical_slab", new VerticalSlabBlock(Properties.from(GRANITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block GRANITE_BRICK_WALL = register("granite_brick_wall", new WallBlock(Properties.from(GRANITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, WALLS);
+    public static final Block GRANITE_BRICK_WALL = register("granite_brick_wall", new WallBlock(Properties.from(GRANITE_BRICKS)), ItemGroup.DECORATIONS, WALLS);
     public static final Block DIORITE_BRICKS = register("diorite_bricks", new Block(Properties.from(Blocks.DIORITE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block DIORITE_BRICK_STAIRS = register("diorite_brick_stairs", new StairsBlock(DIORITE_BRICKS), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block DIORITE_BRICK_SLAB = register("diorite_brick_slab", new SlabBlock(Properties.from(DIORITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, SLABS);
     public static final Block DIORITE_BRICK_VERTICAL_SLAB = register("diorite_brick_vertical_slab", new VerticalSlabBlock(Properties.from(DIORITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block DIORITE_BRICK_WALL = register("diorite_brick_wall", new WallBlock(Properties.from(DIORITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, WALLS);
+    public static final Block DIORITE_BRICK_WALL = register("diorite_brick_wall", new WallBlock(Properties.from(DIORITE_BRICKS)), ItemGroup.DECORATIONS, WALLS);
     public static final Block ANDESITE_BRICKS = register("andesite_bricks", new Block(Properties.from(Blocks.ANDESITE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block ANDESITE_BRICK_STAIRS = register("andesite_brick_stairs", new StairsBlock(ANDESITE_BRICKS), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block ANDESITE_BRICK_SLAB = register("andesite_brick_slab", new SlabBlock(Properties.from(ANDESITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, SLABS);
     public static final Block ANDESITE_BRICK_VERTICAL_SLAB = register("andesite_brick_vertical_slab", new VerticalSlabBlock(Properties.from(ANDESITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block ANDESITE_BRICK_WALL = register("andesite_brick_wall", new WallBlock(Properties.from(ANDESITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, WALLS);
+    public static final Block ANDESITE_BRICK_WALL = register("andesite_brick_wall", new WallBlock(Properties.from(ANDESITE_BRICKS)), ItemGroup.DECORATIONS, WALLS);
 
     public static final Block SANDSTONE_BRICKS = register("sandstone_bricks", new Block(Properties.from(Blocks.SANDSTONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block SANDSTONE_BRICK_STAIRS = register("sandstone_brick_stairs", new StairsBlock(SANDSTONE_BRICKS), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block SANDSTONE_BRICK_SLAB = register("sandstone_brick_slab", new SlabBlock(Properties.from(SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, SLABS);
     public static final Block SANDSTONE_BRICK_VERTICAL_SLAB = register("sandstone_brick_vertical_slab", new VerticalSlabBlock(Properties.from(SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block SANDSTONE_BRICK_WALL = register("sandstone_brick_wall", new WallBlock(Properties.from(SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, WALLS);
+    public static final Block SANDSTONE_BRICK_WALL = register("sandstone_brick_wall", new WallBlock(Properties.from(SANDSTONE_BRICKS)), ItemGroup.DECORATIONS, WALLS);
     public static final Block POLISHED_SANDSTONE = register("polished_sandstone", new Block(Properties.from(Blocks.SANDSTONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block POLISHED_SANDSTONE_STAIRS = register("polished_sandstone_stairs", new StairsBlock(POLISHED_SANDSTONE), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block POLISHED_SANDSTONE_SLAB = register("polished_sandstone_slab", new SlabBlock(Properties.from(POLISHED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, SLABS);
@@ -223,7 +223,7 @@ public class MubbleBlocks
     public static final Block RED_SANDSTONE_BRICK_STAIRS = register("red_sandstone_brick_stairs", new StairsBlock(RED_SANDSTONE_BRICKS), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block RED_SANDSTONE_BRICK_SLAB = register("red_sandstone_brick_slab", new SlabBlock(Properties.from(RED_SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, SLABS);
     public static final Block RED_SANDSTONE_BRICK_VERTICAL_SLAB = register("red_sandstone_brick_vertical_slab", new VerticalSlabBlock(Properties.from(RED_SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block RED_SANDSTONE_BRICK_WALL = register("red_sandstone_brick_wall", new WallBlock(Properties.from(RED_SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, WALLS);
+    public static final Block RED_SANDSTONE_BRICK_WALL = register("red_sandstone_brick_wall", new WallBlock(Properties.from(RED_SANDSTONE_BRICKS)), ItemGroup.DECORATIONS, WALLS);
     public static final Block POLISHED_RED_SANDSTONE = register("polished_red_sandstone", new Block(Properties.from(Blocks.RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block POLISHED_RED_SANDSTONE_STAIRS = register("polished_red_sandstone_stairs", new StairsBlock(POLISHED_RED_SANDSTONE), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block POLISHED_RED_SANDSTONE_SLAB = register("polished_red_sandstone_slab", new SlabBlock(Properties.from(POLISHED_RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, SLABS);
@@ -238,7 +238,7 @@ public class MubbleBlocks
     public static final Block CHISELED_PRISMARINE_STAIRS = register("chiseled_prismarine_stairs", new StairsBlock(CHISELED_PRISMARINE), ItemGroup.BUILDING_BLOCKS, STAIRS);
     public static final Block CHISELED_PRISMARINE_SLAB = register("chiseled_prismarine_slab", new SlabBlock(Properties.from(CHISELED_PRISMARINE)), ItemGroup.BUILDING_BLOCKS, SLABS);
     public static final Block CHISELED_PRISMARINE_VERTICAL_SLAB = register("chiseled_prismarine_vertical_slab", new VerticalSlabBlock(Properties.from(CHISELED_PRISMARINE)), ItemGroup.BUILDING_BLOCKS, VERTICAL_SLABS);
-    public static final Block CHISELED_PRISMARINE_WALL = register("chiseled_prismarine_wall", new WallBlock(Properties.from(CHISELED_PRISMARINE)), ItemGroup.BUILDING_BLOCKS, WALLS);
+    public static final Block CHISELED_PRISMARINE_WALL = register("chiseled_prismarine_wall", new WallBlock(Properties.from(CHISELED_PRISMARINE)), ItemGroup.DECORATIONS, WALLS);
     
     public static final Block PRISMARINE_BRICK_PAVING = register("prismarine_brick_paving", new Block(Properties.from(Blocks.PRISMARINE_BRICKS)), ItemGroup.BUILDING_BLOCKS, CUBES);
     public static final Block PRISMARINE_BRICK_PAVING_STAIRS = register("prismarine_brick_paving_stairs", new StairsBlock(PRISMARINE_BRICK_PAVING), ItemGroup.BUILDING_BLOCKS, STAIRS);
