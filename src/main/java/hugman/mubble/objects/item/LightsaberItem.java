@@ -1,5 +1,6 @@
 package hugman.mubble.objects.item;
 
+import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleItemTiers;
 import net.minecraft.client.Minecraft;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.network.play.server.SStopSoundPacket;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -50,7 +52,7 @@ public class LightsaberItem extends SwordItem
 		world.playMovingSound((PlayerEntity)null, entity, MubbleSounds.ITEM_LIGHTSABER_PULL_IN, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		if(entity instanceof ServerPlayerEntity)
 		{
-    		SStopSoundPacket packet = new SStopSoundPacket(MubbleSounds.ITEM_LIGHTSABER_IDLE.getName(), SoundCategory.MASTER);
+    		SStopSoundPacket packet = new SStopSoundPacket(new ResourceLocation(Mubble.MOD_ID, "item.lightsaber.idle"), SoundCategory.MASTER);
     		((ServerPlayerEntity)entity).connection.sendPacket(packet);
 		}
 	}
