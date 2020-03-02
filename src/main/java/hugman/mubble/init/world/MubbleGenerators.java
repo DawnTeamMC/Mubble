@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStage;
+import net.minecraft.world.gen.GenerationStage.Decoration;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
@@ -27,9 +28,9 @@ public class MubbleGenerators
 		{
 			if(!biome.getCategory().equals(Category.NETHER) && !biome.getCategory().equals(Category.THEEND))
 			{
-				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BLUNITE, 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 0, 80))));
-				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, CARBONITE, 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 0, 80))));
-				biome.addFeature(GenerationStage.Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, VANADIUM_ORE, 6)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 16))));
+				biome.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BLUNITE, 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 0, 80))));
+				biome.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, CARBONITE, 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 0, 80))));
+				biome.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, VANADIUM_ORE, 6)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 16))));
 			}
 		}
 	}
@@ -38,7 +39,7 @@ public class MubbleGenerators
 	{
 		for(Biome biome : ForgeRegistries.BIOMES)
 		{
-			if (biome.getCategory().equals(Category.DESERT))
+			if(biome.getCategory().equals(Category.DESERT))
 			{
 				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, MubbleFeatures.PALM_TREE.configure(MubbleFeatureConfigs.PALM_TREE_CONFIG).createDecoratedFeature(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.12F, 1))));
 			}
@@ -53,10 +54,15 @@ public class MubbleGenerators
 			{
 				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.TOAD, 10, 4, 4));
 			}
-			if(biome.getSpawns(EntityClassification.CREATURE).contains(new Biome.SpawnListEntry(EntityType.CHICKEN, 10, 4, 4)))
+			if(canEntitySpawnInBiome(EntityType.CHICKEN, biome))
 			{
 				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.DUCK, 10, 4, 4));
 			}
 		}
+	}
+	
+	private static boolean canEntitySpawnInBiome(EntityType<?> entity, Biome biome)
+	{
+		return biome.getSpawns(entity.getClassification()).stream().anyMatch(entry -> entry.entityType == entity);
 	}
 }
