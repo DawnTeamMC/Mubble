@@ -1,8 +1,12 @@
 package hugman.mubble.objects.event_handler;
 
 import hugman.mubble.objects.item.LightsaberItem;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -23,9 +27,9 @@ public class LightsaberHandler
 	{
 		LivingEntity entityIn = event.getEntityLiving();
 		World worldIn = entityIn.getEntityWorld();
-		ItemStack to = event.getTo();
-		ItemStack from = event.getFrom();
-		if(to != from)
+		Item to = event.getTo().getItem();
+		Item from = event.getFrom().getItem();
+		if(!(to instanceof LightsaberItem && from instanceof LightsaberItem))
 		{
 			if(to.getItem() instanceof LightsaberItem)
 			{
@@ -68,10 +72,19 @@ public class LightsaberHandler
 	@SubscribeEvent
 	public static void onAttack(AttackEntityEvent event)
 	{
-		ItemStack itemStack = event.getPlayer().getHeldItem(Hand.MAIN_HAND);
+		Entity target = event.getTarget();
+		PlayerEntity player = event.getPlayer();
+		ItemStack itemStack = player.getHeldItem(Hand.MAIN_HAND);
 		if(itemStack.getItem() instanceof LightsaberItem)
 		{
-			((LightsaberItem)itemStack.getItem()).onSwing(event.getPlayer(), true);
+			if(target.canBeAttackedWithItem() && !target.isInvulnerableTo(DamageSource.causePlayerDamage(player)) && target.isAlive() && !target.hitByEntity(player))
+			{
+				((LightsaberItem)itemStack.getItem()).onSwing(event.getPlayer(), true);
+			}
+			else
+			{
+				((LightsaberItem)itemStack.getItem()).onSwing(event.getPlayer(), false);
+			}
 		}
 	}
 }
