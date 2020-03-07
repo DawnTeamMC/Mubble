@@ -14,7 +14,7 @@ import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.ChunkGeneratorType;
-import net.minecraft.world.gen.NetherGenSettings;
+import net.minecraft.world.gen.EndGenerationSettings;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -28,13 +28,13 @@ public class PermafrostDimension extends Dimension
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{
-		NetherGenSettings settings = ChunkGeneratorType.CAVES.createSettings();
+		EndGenerationSettings settings = ChunkGeneratorType.FLOATING_ISLANDS.createSettings();
 		settings.setDefaultBlock(MubbleBlocks.PERMAROCK.getDefaultState());
 		settings.setDefaultFluid(Blocks.WATER.getDefaultState());
 		
 		BiomeProvider biomeProvider = BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.getConfig(world.getWorldInfo()).setBiome(MubbleBiomes.PERMAFROST));
 		
-		return ChunkGeneratorType.CAVES.create(this.world, biomeProvider, settings);
+		return ChunkGeneratorType.FLOATING_ISLANDS.create(this.world, biomeProvider, settings);
 	}
 	
 	@Override

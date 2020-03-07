@@ -87,14 +87,10 @@ public class Costume extends Item
     	}
     	if(!world.isRemote && effects != null)
     	{
-    		long i = world.getGameTime();
-    		if(i % 40L == 0L)
-    		{
-        		for(EffectInstance effect : effects)
-            	{
-            		player.addPotionEffect(new EffectInstance(effect.getPotion(), 260, effect.getAmplifier(), false, true));
-            	}
-    		}
+    		for(EffectInstance effect : effects)
+        	{
+        		player.addPotionEffect(new EffectInstance(effect.getPotion(), 5, effect.getAmplifier(), false, true));
+        	}
     	}
     }
 	

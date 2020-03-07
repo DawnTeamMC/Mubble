@@ -91,7 +91,7 @@ public class BlockCostume extends BlockItem
     {
         ItemStack itemstack = playerIn.getHeldItem(handIn);
         ItemStack itemstack1 = playerIn.getItemStackFromSlot(EquipmentSlotType.HEAD);
-        if (itemstack1.isEmpty())
+        if(itemstack1.isEmpty())
         {
            playerIn.setItemStackToSlot(EquipmentSlotType.HEAD, new ItemStack(this));
            itemstack.shrink(1);

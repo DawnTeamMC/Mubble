@@ -166,20 +166,21 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 		return true;
 	}
 
-	private boolean canScroll() {
+	private boolean canScroll()
+	{
 		return this.hasItemsInInputSlot && this.container.getOutputItemsListSize() > 12;
 	}
 
-	protected int getHiddenRows() {
+	protected int getHiddenRows()
+	{
 		return (this.container.getOutputItemsListSize() + 4 - 1) / 4 - 3;
 	}
-
-	/**
-	 * Called every time this screen's container is changed (is marked as dirty).
-	 */
-	private void onInventoryUpdate() {
+	
+	private void onInventoryUpdate()
+	{
 		this.hasItemsInInputSlot = this.container.hasItemsinInputSlot();
-		if (!this.hasItemsInInputSlot) {
+		if(!this.hasItemsInInputSlot)
+		{
 			this.sliderProgress = 0.0F;
 			this.recipeIndexOffset = 0;
 		}

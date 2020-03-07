@@ -22,7 +22,7 @@ public class PermafrostSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfi
 	private static final BlockState PERMAROCK = MubbleBlocks.PERMAROCK.getDefaultState();
 	private static final BlockState BLUE_ICE = Blocks.BLUE_ICE.getDefaultState();
 	private static final BlockState ICE = Blocks.ICE.getDefaultState();
-	protected long field_205552_a;
+	protected long seed;
 	protected OctavesNoiseGenerator field_205553_b;
 	
 	public PermafrostSurfaceBuilder(Function<Dynamic<?>, ? extends SurfaceBuilderConfig> p_i51305_1_)
@@ -33,19 +33,19 @@ public class PermafrostSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfi
 	@Override
 	public void buildSurface(Random random, IChunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, SurfaceBuilderConfig config)
 	{
-		int i = seaLevel + 1;
+		int i = 250;
 		int j = x & 15;
 		int k = z & 15;
 		double d0 = 0.03125D;
 		boolean flag = this.field_205553_b.func_205563_a((double)x * d0, (double)z * d0, 0.0D) + random.nextDouble() * 0.2D > 0.0D;
-		boolean flag1 = this.field_205553_b.func_205563_a((double)x * d0, 109.0D, (double)z * d0) + random.nextDouble() * 0.2D > 0.0D;
+		boolean flag1 = this.field_205553_b.func_205563_a((double)x * d0, 250.0D, (double)z * d0) + random.nextDouble() * 0.2D > 0.0D;
 		int l = (int)(noise / 3.0D + 3.0D + random.nextDouble() * 0.25D);
 		BlockPos.Mutable blockpos$mutableblockpos = new BlockPos.Mutable();
 		int i1 = -1;
 		BlockState iblockstate = PERMAROCK;
 		BlockState iblockstate1 = PERMAROCK;
 
-		for(int j1 = 127; j1 >= 0; --j1)
+		for(int j1 = 250; j1 >= 0; --j1)
 		{
 			blockpos$mutableblockpos.setPos(j, j1, k);
 			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);
@@ -93,12 +93,12 @@ public class PermafrostSurfaceBuilder extends SurfaceBuilder<SurfaceBuilderConfi
 	}
 
 	@Override
-	public void setSeed(long seed)
+	public void setSeed(long seedIn)
 	{
-		if(this.field_205552_a != seed || this.field_205553_b == null)
+		if(this.seed != seedIn || this.field_205553_b == null)
 		{
-			this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seed), 3, 0);
+			this.field_205553_b = new OctavesNoiseGenerator(new SharedSeedRandom(seedIn), 3, 0);
 		}
-		this.field_205552_a = seed;
+		this.seed = seedIn;
 	}
 }
