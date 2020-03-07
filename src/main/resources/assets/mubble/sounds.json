@@ -530,8 +530,7 @@
 			"mubble:entity/duck/ambient/1",
 			"mubble:entity/duck/ambient/2",
 			"mubble:entity/duck/ambient/3",
-			"mubble:entity/duck/ambient/4",
-			"mubble:entity/duck/ambient/5"
+			"mubble:entity/duck/ambient/4"
 		]
 	},
 	"entity.duck.hurt":

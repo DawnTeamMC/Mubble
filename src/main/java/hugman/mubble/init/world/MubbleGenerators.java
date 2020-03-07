@@ -2,9 +2,9 @@ package hugman.mubble.init.world;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
+import hugman.mubble.objects.entity.DuckEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStage;
@@ -54,15 +54,17 @@ public class MubbleGenerators
 			{
 				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.TOAD, 10, 4, 4));
 			}
-			if(canEntitySpawnInBiome(EntityType.CHICKEN, biome))
-			{
-				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.DUCK, 10, 4, 4));
-			}
+		}
+		for(Biome biome : DuckEntity.getSpawnBiomes())
+		{
+			biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.DUCK, 10, 4, 4));
 		}
 	}
 	
+	/*
 	private static boolean canEntitySpawnInBiome(EntityType<?> entity, Biome biome)
 	{
 		return biome.getSpawns(entity.getClassification()).stream().anyMatch(entry -> entry.entityType == entity);
 	}
+	*/
 }

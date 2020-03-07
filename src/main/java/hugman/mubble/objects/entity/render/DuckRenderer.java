@@ -12,9 +12,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class DuckRenderer extends MobRenderer<DuckEntity, DuckModel<DuckEntity>>
-{
-    private static final ResourceLocation DUCK_TEXTURES = new ResourceLocation(Mubble.MOD_ID + ":textures/entity/duck.png");
-	
+{	
 	public DuckRenderer(EntityRendererManager manager)
 	{
 		super(manager, new DuckModel<>(), 0.3F);
@@ -23,7 +21,7 @@ public class DuckRenderer extends MobRenderer<DuckEntity, DuckModel<DuckEntity>>
 	@Override
 	public ResourceLocation getEntityTexture(DuckEntity entity)
     {
-		return DUCK_TEXTURES;
+		return new ResourceLocation(Mubble.MOD_ID, "textures/entity/duck/" + entity.getVariantType().getName() + ".png");
     }
 	
 	protected float handleRotationFloat(DuckEntity entity, float p_77044_2_)

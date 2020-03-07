@@ -18,6 +18,13 @@ Visit the official website for more information.
 '''
 
 [[dependencies.mubble]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.15.2]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.mubble]]
 modId="forge"
 mandatory=true
 versionRange="[31,)"
@@ -25,8 +32,7 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.mubble]]
-modId="minecraft"
-mandatory=true
-versionRange="[1.15.2]"
+modId="patchouli"
+mandatory=false
 ordering="NONE"
 side="BOTH"
