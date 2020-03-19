@@ -133,7 +133,7 @@ public class IceballEntity extends ProjectileItemEntity
         }
         if(!world.isRemote)
         {
-            if(!(entity instanceof SnowGolemEntity) || entity instanceof LivingEntity)
+            if(!(entity instanceof SnowGolemEntity) && entity instanceof LivingEntity)
             {
             	LivingEntity livingEntity = (LivingEntity)entity;
             	livingEntity.addPotionEffect(new EffectInstance(Effects.SLOWNESS, 40, 1));
