@@ -9,7 +9,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -18,6 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 public class ShaderHandler
 {
 	@SubscribeEvent
+	@OnlyIn(Dist.CLIENT)
 	public static void onArmorChange(LivingUpdateEvent event)
 	{
 		LivingEntity entity = event.getEntityLiving();
@@ -29,6 +32,22 @@ public class ShaderHandler
 			if(!(headItem.getItem() instanceof Costume) && !(headItem.getItem() instanceof BlockCostume))
 			{
 				if(shaderGroup != null)
+				{
+					renderer.stopUseShader();
+				}
+			}
+			if(headItem.getItem() instanceof Costume)
+			{
+				ResourceLocation shader = ((Costume) headItem.getItem()).getShader();
+				if(shaderGroup != null && shader == null)
+				{
+					renderer.stopUseShader();
+				}
+			}
+			if(headItem.getItem() instanceof BlockCostume)
+			{
+				ResourceLocation shader = ((BlockCostume) headItem.getItem()).getShader();
+				if(shaderGroup != null && shader == null)
 				{
 					renderer.stopUseShader();
 				}
