@@ -11,7 +11,6 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,12 +19,11 @@ import net.minecraftforge.fml.common.Mod;
 public class ShaderHandler
 {
 	@SubscribeEvent
-	@OnlyIn(Dist.CLIENT)
 	public static void onArmorChange(LivingUpdateEvent event)
 	{
 		LivingEntity entity = event.getEntityLiving();
 		ItemStack headItem = entity.getItemStackFromSlot(EquipmentSlotType.HEAD);	
-		if(entity instanceof PlayerEntity)
+		if(entity instanceof PlayerEntity && entity.world.isRemote)
 		{
 			GameRenderer renderer = Minecraft.getInstance().gameRenderer;
 			ShaderGroup shaderGroup = renderer.getShaderGroup();
