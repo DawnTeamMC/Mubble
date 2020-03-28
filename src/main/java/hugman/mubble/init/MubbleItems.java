@@ -12,6 +12,7 @@ import hugman.mubble.objects.item.CapeFeatherItem;
 import hugman.mubble.objects.item.FireballItem;
 import hugman.mubble.objects.item.IceballItem;
 import hugman.mubble.objects.item.KeyItem;
+import hugman.mubble.objects.item.KirbyBallItem;
 import hugman.mubble.objects.item.LightsaberItem;
 import hugman.mubble.objects.item.ShakeInstrumentItem;
 import hugman.mubble.objects.item.SmallBulbItem;
@@ -87,6 +88,9 @@ public class MubbleItems
     public static final Item SMB3_KEY = register("smb3_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS), MubbleBlocks.SMB3_KEY_DOOR));
     public static final Item SMW_KEY = register("smw_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS), MubbleBlocks.SMW_KEY_DOOR));
     public static final Item NSMBU_KEY = register("nsmbu_key", new KeyItem(new Item.Properties().group(ItemGroup.MATERIALS), MubbleBlocks.NSMBU_KEY_DOOR));
+    
+    /* KIRBY */
+    public static final Item KIRBY_BALL = register("kirby_ball", new KirbyBallItem(new Item.Properties().group(ItemGroup.COMBAT)));
     
     /* FIRE EMBLEM */
     //public static final Item AYMR = register("aymr", new AymrItem(new Item.Properties().group(ItemGroup.COMBAT)));

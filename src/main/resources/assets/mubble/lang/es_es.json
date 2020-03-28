@@ -1166,6 +1166,9 @@
 	"//item.mubble.nsmbu_key": "Key (NSMBU)",
 
 
+	"//item.mubble.kirby_ball": "Kirby Ball",
+
+
 	"item.mubble.smash_ball": "Bola Smash",
 
 
@@ -1344,6 +1347,8 @@
 	"//entity.mubble.fireball": "Fireball",
 	"//entity.mubble.iceball": "Iceball",
 
+	"//entity.mubble.kirby_ball": "Kirby Ball",
+
 
 
 	"comment": "EFFECTS",
@@ -1386,6 +1391,7 @@
 	"//subtitles.mubble.entity.duck.death": "Duck dies",
 	"//subtitles.mubble.entity.fireball.throw": "Fireball flies",
 	"//subtitles.mubble.entity.iceball.throw": "Iceball flies",
+	"//subtitles.mubble.entity.kirby_ball.throw": "Kirby Ball flies",
 	"//subtitles.mubble.entity.goomba.crush": "Goomba crushed",
 	"//subtitles.mubble.entity.goomba.hurt": "Goomba hurts",
 	"//subtitles.mubble.entity.goomba.death": "Goomba dies",

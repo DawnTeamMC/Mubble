@@ -11,6 +11,7 @@ import hugman.mubble.objects.entity.FireballEntity;
 import hugman.mubble.objects.entity.FlyingBlockEntity;
 import hugman.mubble.objects.entity.GoombaEntity;
 import hugman.mubble.objects.entity.IceballEntity;
+import hugman.mubble.objects.entity.KirbyBallEntity;
 import hugman.mubble.objects.entity.ToadEntity;
 import hugman.mubble.objects.entity.ZombieCowmanEntity;
 import hugman.mubble.objects.entity.render.ChinchoRenderer;
@@ -52,6 +53,9 @@ public class MubbleEntities
 	public static final EntityType<FireballEntity> FIREBALL = register("fireball", EntityType.Builder.<FireballEntity>create(FireballEntity::new, EntityClassification.MISC).size(0.98F, 0.98F).setTrackingRange(4).setUpdateInterval(10));
 	public static final EntityType<IceballEntity> ICEBALL = register("iceball", EntityType.Builder.<IceballEntity>create(IceballEntity::new, EntityClassification.MISC).size(0.98F, 0.98F).setTrackingRange(4).setUpdateInterval(10));
 	
+	/* KIRBY */
+	public static final EntityType<KirbyBallEntity> KIRBY_BALL = register("kirby_ball", EntityType.Builder.<KirbyBallEntity>create(KirbyBallEntity::new, EntityClassification.MISC).size(0.98F, 0.98F).setTrackingRange(4).setUpdateInterval(10));
+	
 	public static <T extends Entity> EntityType<T> register(String id, EntityType.Builder<T> builder)
 	{
 	    EntityType<T> entitytype = builder.build(Mubble.MOD_PREFIX + id);
@@ -86,5 +90,7 @@ public class MubbleEntities
     	manager.register(TOAD, new ToadRenderer(manager));
     	manager.register(FIREBALL, new SpriteRenderer<>(manager, itemRenderer));
     	manager.register(ICEBALL, new SpriteRenderer<>(manager, itemRenderer));
+    	
+    	manager.register(KIRBY_BALL, new SpriteRenderer<>(manager, itemRenderer));
     }
 }

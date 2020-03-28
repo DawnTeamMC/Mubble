@@ -1166,6 +1166,9 @@
 	"item.mubble.nsmbu_key": "Clé (NSMBU)",
 
 
+	"//item.mubble.kirby_ball": "Kirby Ball",
+
+
 	"item.mubble.smash_ball": "Balle Smash",
 
 
@@ -1344,6 +1347,8 @@
 	"entity.mubble.fireball": "Boule de feu",
 	"entity.mubble.iceball": "Boule de glace",
 
+	"//entity.mubble.kirby_ball": "Kirby Ball",
+
 
 
 	"comment": "EFFECTS",
@@ -1386,6 +1391,7 @@
 	"subtitles.mubble.entity.duck.death": "Canard qui meurt",
 	"subtitles.mubble.entity.fireball.throw": "Boule de feu lancée",
 	"subtitles.mubble.entity.iceball.throw": "Boule de glace lancée",
+	"//subtitles.mubble.entity.kirby_ball.throw": "Kirby Ball flies",
 	"subtitles.mubble.entity.goomba.crush": "Goomba écrasé",
 	"subtitles.mubble.entity.goomba.hurt": "Goomba blessé",
 	"subtitles.mubble.entity.goomba.death": "Goomba qui meurt",

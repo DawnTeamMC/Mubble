@@ -94,6 +94,10 @@ public class MubbleSounds
 	public static final SoundEvent ENTITY_ICEBALL_HIT_BLOCK = register("entity.iceball.hit.block");
 	public static final SoundEvent ENTITY_ICEBALL_HIT_ENTITY = register("entity.iceball.hit.entity");
 	public static final SoundEvent ENTITY_ICEBALL_THROW = register("entity.iceball.throw");
+	public static final SoundEvent ENTITY_KIRBY_BALL_HIT_BLOCK = register("entity.kirby_ball.hit.block");
+	public static final SoundEvent ENTITY_KIRBY_BALL_HIT_ENTITY = register("entity.kirby_ball.hit.entity");
+	public static final SoundEvent ENTITY_KIRBY_BALL_REBOUND = register("entity.kirby_ball.rebound");
+	public static final SoundEvent ENTITY_KIRBY_BALL_THROW = register("entity.kirby_ball.throw");
 	public static final SoundEvent ENTITY_TOAD_AMBIENT = register("entity.toad.ambient");
 	public static final SoundEvent ENTITY_TOAD_BUP = register("entity.toad.bup");
 	public static final SoundEvent ENTITY_TOAD_HURT = register("entity.toad.hurt");

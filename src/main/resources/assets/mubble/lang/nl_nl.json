@@ -1166,6 +1166,9 @@
 	"item.mubble.nsmbu_key": "Sleutel (NSMBU)",
 
 
+	"//item.mubble.kirby_ball": "Kirby Ball",
+
+
 	"item.mubble.smash_ball": "Smash bal",
 
 
@@ -1344,6 +1347,8 @@
 	"entity.mubble.fireball": "Vuurbal",
 	"entity.mubble.iceball": "IJsbal",
 
+	"//entity.mubble.kirby_ball": "Kirby Ball",
+
 
 
 	"comment": "EFFECTS",
@@ -1386,6 +1391,7 @@
 	"subtitles.mubble.entity.duck.death": "Eend sterft",
 	"subtitles.mubble.entity.fireball.throw": "Vuurbal vliegt",
 	"subtitles.mubble.entity.iceball.throw": "IJsbal vliegt",
+	"//subtitles.mubble.entity.kirby_ball.throw": "Kirby Ball flies",
 	"subtitles.mubble.entity.goomba.crush": "Goomba verpletterd",
 	"subtitles.mubble.entity.goomba.hurt": "Goomba heeft pijn",
 	"subtitles.mubble.entity.goomba.death": "Goomba sterft",
