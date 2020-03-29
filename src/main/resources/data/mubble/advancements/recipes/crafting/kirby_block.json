@@ -1,0 +1,41 @@
+{
+	"parent": "minecraft:recipes/root",
+	"rewards":
+	{
+		"recipes":
+		[
+			"mubble:crafting/kirby_block"
+		]
+	},
+	"criteria":
+	{
+		"has_kirby_ball":
+		{
+			"trigger": "minecraft:inventory_changed",
+			"conditions":
+			{
+				"items":
+				[
+					{
+						"item": "minecraft:kirby_ball"
+					}
+				]
+			}
+		},
+		"has_the_recipe":
+		{
+			"trigger": "minecraft:recipe_unlocked",
+			"conditions":
+			{
+				"recipe": "mubble:crafting/kirby_block"
+			}
+		}
+	},
+	"requirements":
+	[
+		[
+			"has_kirby_ball",
+			"has_the_recipe"
+		]
+	]
+}
