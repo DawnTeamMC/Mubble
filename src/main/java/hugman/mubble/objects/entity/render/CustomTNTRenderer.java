@@ -3,7 +3,7 @@ package hugman.mubble.objects.entity.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 
 import hugman.mubble.objects.entity.CustomTNTEntity;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.Vector3f;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -27,6 +27,7 @@ public class CustomTNTRenderer extends EntityRenderer<CustomTNTEntity>
 	@Override
 	public void render(CustomTNTEntity entity, float p_225623_2_, float p_225623_3_, MatrixStack matrix, IRenderTypeBuffer buffer, int p_225623_6_)
 	{
+		BlockState state = entity.getCustomTile();
 		matrix.push();
 		matrix.translate(0.0D, 0.5D, 0.0D);
 		if ((float) entity.getFuse() - p_225623_3_ + 1.0F < 10.0F) {
@@ -41,7 +42,7 @@ public class CustomTNTRenderer extends EntityRenderer<CustomTNTEntity>
 		matrix.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-90.0F));
 		matrix.translate(-0.5D, -0.5D, 0.5D);
 		matrix.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90.0F));
-		TNTMinecartRenderer.func_229127_a_(Blocks.TNT.getDefaultState(), matrix, buffer, p_225623_6_, entity.getFuse() / 5 % 2 == 0);
+		TNTMinecartRenderer.func_229127_a_(state, matrix, buffer, p_225623_6_, entity.getFuse() / 5 % 2 == 0);
 		matrix.pop();
 		super.render(entity, p_225623_2_, p_225623_3_, matrix, buffer, p_225623_6_);
 	}

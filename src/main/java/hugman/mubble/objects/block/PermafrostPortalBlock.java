@@ -173,7 +173,7 @@ public class PermafrostPortalBlock extends Block
 					double d2 = MathHelper.pct(entity.getY() - 1.0D, (double) patternHelper.getFrontTopLeft().getY(), (double) (patternHelper.getFrontTopLeft().getY() - patternHelper.getHeight()));
 					entity.lastPortalVec = new Vec3d(d1, d2, 0.0D);
 					entity.teleportDirection = patternHelper.getForwards();
-					entity.changeDimension(world.dimension.getType() == MubbleDimensions.PERMAFROST ? DimensionType.OVERWORLD : MubbleDimensions.PERMAFROST);
+					entity.changeDimension(world.dimension.getType() == MubbleDimensions.PERMAFROST ? DimensionType.OVERWORLD : MubbleDimensions.PERMAFROST, new PermafrostTeleporter((ServerWorld) world));
 				}
 
 				entity.inPortal = true;

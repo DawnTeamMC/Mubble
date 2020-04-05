@@ -11,7 +11,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.item.TNTEntity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.network.IPacket;
@@ -27,9 +26,9 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class CustomTNTEntity extends Entity implements IEntityAdditionalSpawnData
 {
-	private static final DataParameter<Integer> FUSE = EntityDataManager.createKey(TNTEntity.class, DataSerializers.VARINT);
-	private static final DataParameter<Float> STRENGHT = EntityDataManager.createKey(TNTEntity.class, DataSerializers.FLOAT);
-	private BlockState customTile = Blocks.TNT.getDefaultState();
+	private static final DataParameter<Integer> FUSE = EntityDataManager.createKey(CustomTNTEntity.class, DataSerializers.VARINT);
+	private static final DataParameter<Float> STRENGHT = EntityDataManager.createKey(CustomTNTEntity.class, DataSerializers.FLOAT);
+	private BlockState customTile = Blocks.SAND.getDefaultState();
 	private int fuse = 80;
 	private float strenght = 4.0F;
 	@Nullable
@@ -41,15 +40,15 @@ public class CustomTNTEntity extends Entity implements IEntityAdditionalSpawnDat
 		this.preventEntitySpawning = true;
 	}
 	
-	public CustomTNTEntity(BlockState customTileIn, World worldIn, double x, double y, double z, @Nullable LivingEntity igniter)
+	public CustomTNTEntity(BlockState customTileIn, World worldIn, double x, double y, double z, int fuseIn, float strenghtIn, @Nullable LivingEntity igniter)
 	{
 		this(MubbleEntities.CUSTOM_TNT, worldIn);
 		this.customTile = customTileIn;
 		this.setPosition(x, y, z);
 	    float f = (float)(Math.random() * (double)((float)Math.PI * 2F));
 	    this.setMotion((double)(-((float)Math.sin((double)f)) * 0.02F), (double)0.2F, (double)(-((float)Math.cos((double)f)) * 0.02F));
-	    this.setFuse(fuse);
-	    this.setStrenght(strenght);
+	    this.setFuse(fuseIn);
+	    this.setStrenght(strenghtIn);
 	    this.prevPosX = x;
 	    this.prevPosY = y;
 	    this.prevPosZ = z;
@@ -118,10 +117,10 @@ public class CustomTNTEntity extends Entity implements IEntityAdditionalSpawnDat
 		this.setStrenght(compound.getFloat("Strenght"));
 	}
 	
-	@Override
-	public void notifyDataManagerChange(DataParameter<?> key)
+	public void setFuse(int fuseIn)
 	{
-		if(FUSE.equals(key)) this.fuse = this.getFuseDataManager();
+		this.dataManager.set(FUSE, fuseIn);
+		this.fuse = fuseIn;
 	}
 
 	public int getFuse()
@@ -129,18 +128,7 @@ public class CustomTNTEntity extends Entity implements IEntityAdditionalSpawnDat
 		return this.fuse;
 	}
 	
-	public void setFuse(int fuseIn)
-	{
-		this.dataManager.set(FUSE, fuseIn);
-		this.fuse = fuseIn;
-	}
-	
-	public int getFuseDataManager()
-	{
-		return this.dataManager.get(FUSE);
-	}
-	
-	public BlockState getBlockState()
+	public BlockState getCustomTile()
 	{
 		return this.customTile;
 	}
@@ -160,6 +148,17 @@ public class CustomTNTEntity extends Entity implements IEntityAdditionalSpawnDat
 	public LivingEntity getTntPlacedBy()
 	{
 		return this.tntPlacedBy;
+	}
+	
+	@Override
+	public void notifyDataManagerChange(DataParameter<?> key)
+	{
+		if(FUSE.equals(key)) this.fuse = this.getFuseDataManager();
+	}
+	
+	public int getFuseDataManager()
+	{
+		return this.dataManager.get(FUSE);
 	}
 	
 	@Override

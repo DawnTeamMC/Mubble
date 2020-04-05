@@ -9,7 +9,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.particles.ParticleTypes;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 public class AymrItem extends Item
 {
@@ -41,12 +47,23 @@ public class AymrItem extends Item
     }
     
     @Override
-    public boolean onBlockStartBreak(ItemStack itemstack, BlockPos pos, PlayerEntity player)
+    public ActionResultType onItemUse(ItemUseContext context)
     {
+    	BlockPos pos = context.getPos();
+    	PlayerEntity player = context.getPlayer();
+    	World world = context.getWorld();
+    	
     	if(player.getCooledAttackStrength(0.0F) == 1.0F)
     	{
-    		player.getEntityWorld().removeBlock(pos, true);
+    		if(world.isRemote)
+    		{
+    			world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.2F) * 0.7F, false);
+			}
+    		world.addParticle(ParticleTypes.EXPLOSION, pos.getX(), pos.getY(), pos.getZ(), 1.0D, 0.0D, 0.0D);
+    		world.addParticle(ParticleTypes.EXPLOSION_EMITTER, pos.getX(), pos.getY(), pos.getZ(), 1.0D, 0.0D, 0.0D);
+    		world.removeBlock(pos, true);
+    		return ActionResultType.SUCCESS;
     	}
-    	return super.onBlockStartBreak(itemstack, pos, player);
+		return ActionResultType.FAIL;
     }
 }
