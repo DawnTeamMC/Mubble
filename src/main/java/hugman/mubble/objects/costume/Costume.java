@@ -27,7 +27,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-public class Costume extends Item
+public abstract class Costume extends Item
 {
 	protected final EquipmentSlotType armorType;
 	protected final SoundEvent equipSound;

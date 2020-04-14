@@ -15,11 +15,13 @@ import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleColorMaps;
 import hugman.mubble.init.data.MubbleCommands;
 import hugman.mubble.init.data.MubbleContainerTypes;
+import hugman.mubble.init.data.MubbleKeyBindings;
 import hugman.mubble.init.data.MubbleRenderLayers;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleGenerators;
+import hugman.mubble.objects.event_handler.KeyBindingsHandler;
 import hugman.mubble.objects.event_handler.KonamiHandler;
 import hugman.mubble.util.MoreWordUtils;
 import net.minecraft.block.Block;
@@ -80,6 +82,9 @@ public class Mubble
     	LOGGER.info("Registered entity renders");
     	MubbleScreens.registerScreens();
     	LOGGER.info("Registered screens");
+    	MubbleKeyBindings.registerKeyBindings();
+    	MinecraftForge.EVENT_BUS.register(new KeyBindingsHandler());
+    	LOGGER.info("Registered key bindings");
     	MinecraftForge.EVENT_BUS.register(new KonamiHandler());
     }
     
