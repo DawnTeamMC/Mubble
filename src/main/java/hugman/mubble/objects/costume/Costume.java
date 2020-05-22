@@ -4,10 +4,14 @@ import java.util.Random;
 
 import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.client.MubbleShaders;
+import hugman.mubble.mixin.GameRendererAccessor;
 import hugman.mubble.util.CalendarEvents;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.ShaderEffect;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -67,36 +71,41 @@ public class Costume extends Item
     }
     
     @Override
-    public void inventoryTick(ItemStack stack, World world, Entity player, int slot, boolean selected)
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
     {
-    	if(world.isClient)
+    	if (world.isClient && entity instanceof PlayerEntity)
     	{
-    		/*GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
-    		ShaderEffect shaderGroup = renderer.getShader();
-    		Identifier shader = this.getShader();
-    		if(shader != null)
-    		{
-    			if(shaderGroup != null)
-    			{
-    				if(!shaderGroup.getName().equals(shader.toString()))
-    				{
-    					renderer.loadShader(shader);
-    				}
-    			}
-    			else
-    			{
-    				renderer.loadShader(shader);
-    			}
-    		}*/
+    		GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
+    		PlayerEntity player = (PlayerEntity) entity;
+    		if (player.inventory.getArmorStack(3).equals(stack)) {
+        		ShaderEffect shaderGroup = renderer.getShader();
+        		Identifier shader = this.getShader();
+        		if (shader != null)
+        		{
+        			if (shaderGroup != null)
+        			{
+        				if (!shaderGroup.getName().equals(shader.toString()))
+        				{
+        					((GameRendererAccessor) renderer).invokeLoadShader(shader);
+        				}
+        			}
+        			else
+        			{
+        				((GameRendererAccessor) renderer).invokeLoadShader(shader);
+        			}
+        		}
+    		} else {
+    			renderer.disableShader();
+    		}
     	}
-    	if(!world.isClient && effects != null)
+    	if (!world.isClient && effects != null)
     	{
     		long i = world.getTime();
     		if(i % 40L == 0L)
     		{
     			for(StatusEffectInstance effect : effects)
             	{
-            		((LivingEntity) player).addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 5, effect.getAmplifier(), false, true));
+            		((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 5, effect.getAmplifier(), false, true));
             	}
     		}
     	}

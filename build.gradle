@@ -25,9 +25,6 @@ dependencies {
 
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	
-	//modImplementation "com.github.ladysnake:Satin:${project.satin_version}"
-	//include "com.github.ladysnake:Satin:${project.satin_version}"
-	
 	modImplementation "io.github.kvverti:bannerpp:${project.bannerpp_version}"
 	include "io.github.kvverti:bannerpp:${project.bannerpp_version}"
 }

@@ -1,11 +1,15 @@
 package hugman.mubble.objects.costume;
 
+import hugman.mubble.mixin.GameRendererAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.ShaderEffect;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
@@ -45,27 +49,32 @@ public class BlockCostume extends BlockItem
     }
     
     @Override
-    public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks)
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
     {
-    	if(world.isClient)
+    	if (world.isClient && entity instanceof PlayerEntity)
     	{
-    		/*GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
-    		ShaderEffect shaderGroup = renderer.getShader();
-    		Identifier shader = this.getShader();
-    		if(shader != null)
-    		{
-    			if(shaderGroup != null)
-    			{
-    				if(!shaderGroup.getName().equals(shader.toString()))
-    				{
-    					renderer.loadShader(shader);
-    				}
-    			}
-    			else
-    			{
-    				renderer.loadShader(shader);
-    			}
-    		}*/
+    		GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
+    		PlayerEntity player = (PlayerEntity) entity;
+    		if (player.inventory.getArmorStack(3).equals(stack)) {
+        		ShaderEffect shaderGroup = renderer.getShader();
+        		Identifier shader = this.getShader();
+        		if (shader != null)
+        		{
+        			if (shaderGroup != null)
+        			{
+        				if (!shaderGroup.getName().equals(shader.toString()))
+        				{
+        					((GameRendererAccessor) renderer).invokeLoadShader(shader);
+        				}
+        			}
+        			else
+        			{
+        				((GameRendererAccessor) renderer).invokeLoadShader(shader);
+        			}
+        		}
+    		} else {
+    			renderer.disableShader();
+    		}
     	}
     }
 	
