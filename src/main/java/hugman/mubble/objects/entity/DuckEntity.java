@@ -12,46 +12,45 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntitySize;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ILivingEntityData;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.BreedGoal;
+import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.ai.goal.AnimalMateGoal;
+import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
-import net.minecraft.entity.ai.goal.PanicGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
+import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNodeType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IWorld;
+import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 
 public class DuckEntity extends AnimalEntity
 {
-	private static final DataParameter<Integer> DUCK_TYPE = EntityDataManager.createKey(DuckEntity.class, DataSerializers.VARINT);
+	private static final TrackedData<Integer> DUCK_TYPE = DataTracker.registerData(DuckEntity.class, TrackedDataHandlerRegistry.INTEGER);
 	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromTag(MubbleTags.Items.DUCK_FEEDING);
 	public float wingRotation;
 	public float destPos;
@@ -62,18 +61,18 @@ public class DuckEntity extends AnimalEntity
     public DuckEntity(EntityType<? extends DuckEntity> type, World worldIn) 
     {
         super(type, worldIn);
-        this.setPathPriority(PathNodeType.WATER, 0.0F);
+        this.setPathfindingPenalty(PathNodeType.WATER, 0.0F);
     }
     
     @Override
-    protected void registerData()
+    protected void initDataTracker()
     {
-    	super.registerData();
-    	this.dataManager.register(DUCK_TYPE, 0);
+    	super.initDataTracker();
+    	this.dataTracker.startTracking(DUCK_TYPE, 0);
     }
     
     @Override
-    public ILivingEntityData onInitialSpawn(IWorld world, DifficultyInstance difficulty, SpawnReason spawnReason, ILivingEntityData data, CompoundNBT compound)
+    public net.minecraft.entity.EntityData initialize(IWorld world, LocalDifficulty difficulty, SpawnType spawnReason, net.minecraft.entity.EntityData data, CompoundTag compound)
     {
 		Biome biome = world.getBiome(new BlockPos(this));
 		DuckEntity.Type type = DuckEntity.Type.getTypeByBiome(biome);
@@ -87,54 +86,54 @@ public class DuckEntity extends AnimalEntity
 		}
 		
 		this.setVariantType(type);
-    	return super.onInitialSpawn(world, difficulty, spawnReason, data, compound);
+    	return super.initialize(world, difficulty, spawnReason, data, compound);
     }
     
     @Override
-	protected void registerGoals()
+	protected void initGoals()
 	{
-		this.goalSelector.addGoal(0, new SwimGoal(this));
-		this.goalSelector.addGoal(1, new PanicGoal(this, 1.4D));
-		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
-		this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, false, TEMPTATION_ITEMS));
-		this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.1D));
-		this.goalSelector.addGoal(5, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-		this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 6.0F));
-		this.goalSelector.addGoal(7, new LookRandomlyGoal(this));
+		this.goalSelector.add(0, new SwimGoal(this));
+		this.goalSelector.add(1, new EscapeDangerGoal(this, 1.4D));
+		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
+		this.goalSelector.add(3, new TemptGoal(this, 1.0D, false, TEMPTATION_ITEMS));
+		this.goalSelector.add(4, new FollowParentGoal(this, 1.1D));
+		this.goalSelector.add(5, new WanderAroundFarGoal(this, 1.0D));
+		this.goalSelector.add(6, new LookAtEntityGoal(this, PlayerEntity.class, 6.0F));
+		this.goalSelector.add(7, new LookAroundGoal(this));
 	}
     
     @Override
-    public void writeAdditional(CompoundNBT compound)
+    public void writeCustomDataToTag(CompoundTag compound)
     {
-    	super.writeAdditional(compound);
+    	super.writeCustomDataToTag(compound);
     	compound.putString("Type", this.getVariantType().getName());
     }
     
     @Override
-    public void readAdditional(CompoundNBT compound)
+    public void readCustomDataFromTag(CompoundTag compound)
     {
-    	super.readAdditional(compound);
+    	super.readCustomDataFromTag(compound);
     	this.setVariantType(DuckEntity.Type.getTypeByName(compound.getString("Type")));
     }
     
     @Override
-	protected void registerAttributes()
+	protected void initAttributes()
 	{
-		super.registerAttributes();
-		this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(4.0D);
-		this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+		super.initAttributes();
+		this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(4.0D);
+		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
 	}
     
     @Override
-    protected float getStandingEyeHeight(Pose pose, EntitySize size)
+    protected float getActiveEyeHeight(EntityPose pose, EntityDimensions size)
     {
-    	return this.isChild() ? size.height * 0.85F : size.height * 0.92F;
+    	return this.isBaby() ? size.height * 0.85F : size.height * 0.92F;
     }
     
     @Override
-    public void livingTick()
+    public void tickMovement()
     {
-		super.livingTick();
+		super.tickMovement();
 		this.oFlap = this.wingRotation;
 		this.oFlapSpeed = this.destPos;
 		this.destPos = (float)((double) this.destPos + (double) (this.onGround ? -1 : 4) * 0.3D);
@@ -145,10 +144,10 @@ public class DuckEntity extends AnimalEntity
 		}
 
 		this.wingRotDelta = (float)((double) this.wingRotDelta * 0.9D);
-		Vec3d vec3d = this.getMotion();
+		Vec3d vec3d = this.getVelocity();
 		if(!this.onGround && vec3d.y < 0.0D)
 		{
-			this.setMotion(vec3d.mul(1.0D, 0.75D, 1.0D));
+			this.setVelocity(vec3d.multiply(1.0D, 0.75D, 1.0D));
 		}
 		
 		this.wingRotation += this.wingRotDelta * 2.0F;
@@ -185,7 +184,7 @@ public class DuckEntity extends AnimalEntity
 	}
 	
     @Override
-    public DuckEntity createChild(AgeableEntity parent)
+    public DuckEntity createChild(PassiveEntity parent)
     {
     	DuckEntity entity = MubbleEntities.DUCK.create(this.world);
     	entity.setVariantType(((DuckEntity)parent).getVariantType());
@@ -199,19 +198,19 @@ public class DuckEntity extends AnimalEntity
     }
     
     @Override
-	public void updatePassenger(Entity entity)
+	public void updatePassengerPosition(Entity entity)
     {
-		super.updatePassenger(entity);
-		float f = MathHelper.sin(this.renderYawOffset * ((float) Math.PI / 180F));
-		float f1 = MathHelper.cos(this.renderYawOffset * ((float) Math.PI / 180F));
-		entity.setPosition(this.getX() + (double) (0.1F * f), this.getBodyY(0.5D) + entity.getYOffset() + 0.0D, this.getZ() - (double) (0.1F * f1));
+		super.updatePassengerPosition(entity);
+		float f = MathHelper.sin(this.bodyYaw * ((float) Math.PI / 180F));
+		float f1 = MathHelper.cos(this.bodyYaw * ((float) Math.PI / 180F));
+		entity.updatePosition(this.getX() + (double) (0.1F * f), this.getBodyY(0.5D) + entity.getHeightOffset() + 0.0D, this.getZ() - (double) (0.1F * f1));
 		if(entity instanceof LivingEntity)
 		{
-			((LivingEntity)entity).renderYawOffset = this.renderYawOffset;
+			((LivingEntity)entity).bodyYaw = this.bodyYaw;
 		}
 	}
 	
-	public static class DuckData extends AgeableEntity.AgeableData
+	public static class DuckData extends PassiveEntity.EntityData
 	{
 		public final DuckEntity.Type type;
 
@@ -224,12 +223,12 @@ public class DuckEntity extends AnimalEntity
     
 	public DuckEntity.Type getVariantType()
 	{
-		return DuckEntity.Type.getTypeByIndex(this.dataManager.get(DUCK_TYPE));
+		return DuckEntity.Type.getTypeByIndex(this.dataTracker.get(DUCK_TYPE));
 	}
 
 	private void setVariantType(DuckEntity.Type type)
 	{
-		this.dataManager.set(DUCK_TYPE, type.getIndex());
+		this.dataTracker.set(DUCK_TYPE, type.getIndex());
 	}
 	
 	public static List<Biome> getSpawnBiomes()

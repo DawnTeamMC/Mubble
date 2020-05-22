@@ -6,6 +6,7 @@ import hugman.mubble.init.client.MubbleRenderLayers;
 import hugman.mubble.init.client.MubbleScreens;
 import hugman.mubble.objects.entity.render.ChinchoRenderer;
 import hugman.mubble.objects.entity.render.CustomTNTRenderer;
+import hugman.mubble.objects.entity.render.DuckRenderer;
 import hugman.mubble.objects.entity.render.FlyingBlockRenderer;
 import hugman.mubble.objects.entity.render.GoombaRenderer;
 import hugman.mubble.objects.entity.render.ToadRenderer;
@@ -31,6 +32,7 @@ public class MubbleClient implements ClientModInitializer
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.CHINCHO, (dispatcher, context) -> new ChinchoRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.GOOMBA, (dispatcher, context) -> new GoombaRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.TOAD, (dispatcher, context) -> new ToadRenderer(dispatcher));
+		EntityRendererRegistry.INSTANCE.register(MubbleEntities.DUCK, (dispatcher, context) -> new DuckRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.ZOMBIE_COWMAN, (dispatcher, context) -> new ZombieCowmanRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.CUSTOM_TNT, (dispatcher, context) -> new CustomTNTRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.FLYING_BLOCK, (dispatcher, context) -> new FlyingBlockRenderer(dispatcher));

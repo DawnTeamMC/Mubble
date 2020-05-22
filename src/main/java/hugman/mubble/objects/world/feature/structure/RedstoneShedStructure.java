@@ -4,39 +4,39 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
-import net.minecraft.util.Rotation;
+import net.minecraft.structure.StructureManager;
+import net.minecraft.structure.StructureStart;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.gen.ChunkGenerator;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.feature.AbstractTempleFeature;
+import net.minecraft.world.gen.feature.DefaultFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.NoFeatureConfig;
-import net.minecraft.world.gen.feature.structure.ScatteredStructure;
-import net.minecraft.world.gen.feature.structure.Structure;
-import net.minecraft.world.gen.feature.structure.StructureStart;
-import net.minecraft.world.gen.feature.template.TemplateManager;
+import net.minecraft.world.gen.feature.StructureFeature;
 
-public class RedstoneShedStructure extends ScatteredStructure<NoFeatureConfig>
+public class RedstoneShedStructure extends AbstractTempleFeature<DefaultFeatureConfig>
 {
-	public RedstoneShedStructure(Function<Dynamic<?>, ? extends NoFeatureConfig> config)
+	public RedstoneShedStructure(Function<Dynamic<?>, ? extends DefaultFeatureConfig> config)
 	{
 		super(config);
 	}
 	
 	@Override
-	public String getStructureName()
+	public String getName()
 	{
 		return "RedstoneShed";
 	}
 	
 	@Override
-	public int getSize()
+	public int getRadius()
 	{
 		return 3;
 	}
 	
 	@Override
-	public IStartFactory getStartFactory()
+	public StructureFeature.StructureStartFactory getStructureStartFactory()
 	{
 		return RedstoneShedStructure.Start::new;
 	}
@@ -49,21 +49,21 @@ public class RedstoneShedStructure extends ScatteredStructure<NoFeatureConfig>
 	
 	public static class Start extends StructureStart
 	{
-		public Start(Structure<?> structure, int chunkPosX, int chunkPosZ, MutableBoundingBox mutable, int references, long seed)
+		public Start(StructureFeature<?> structure, int chunkPosX, int chunkPosZ, BlockBox mutable, int references, long seed)
 		{
 			super(structure, chunkPosX, chunkPosZ, mutable, references, seed);
 		}
 		
 		@Override
-		public void init(ChunkGenerator<?> chunkGen, TemplateManager tempManager, int posX, int posZ, Biome biome)
+		public void initialize(ChunkGenerator<?> chunkGen, StructureManager tempManager, int posX, int posZ, Biome biome)
 		{
-			NoFeatureConfig nofeatureconfig = (NoFeatureConfig)chunkGen.getStructureConfig(biome, Feature.IGLOO);
+			DefaultFeatureConfig nofeatureconfig = (DefaultFeatureConfig)chunkGen.getStructureConfig(biome, Feature.IGLOO);
 			int i = posX * 16;
 			int j = posZ * 16;
 			BlockPos blockpos = new BlockPos(i, 90, j);
-			Rotation rotation = Rotation.values()[this.rand.nextInt(Rotation.values().length)];
-			RedstoneShedPieces.place(tempManager, blockpos, rotation, this.components, this.rand, nofeatureconfig);
-			this.recalculateStructureSize();
+			BlockRotation rotation = BlockRotation.values()[this.random.nextInt(BlockRotation.values().length)];
+			RedstoneShedPieces.place(tempManager, blockpos, rotation, this.children, this.random, nofeatureconfig);
+			this.setBoundingBoxFromChildren();
 		}
 	}
 }

@@ -40,6 +40,8 @@ public class MubbleItems
     public static final Item APRICOT = register("apricot", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.APRICOT)));
     public static final Item MANGO = register("mango", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.MANGO)));
     public static final Item BLUEBERRIES = register("blueberries", new BlockItem(MubbleBlocks.BLUEBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.BLUEBERRIES)));
+    public static final Item DUCK = register("duck", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.DUCK)));
+    public static final Item COOKED_DUCK = register("cooked_duck", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.COOKED_DUCK)));
     public static final Item CARAMEL_CUBE = register("caramel_cube", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.CARAMEL_CUBE)));
     public static final Item BAGUETTE = register("baguette", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.BAGUETTE)));
     public static final Item BURGER = register("burger", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.BURGER)));

@@ -14,9 +14,9 @@ import net.minecraft.world.biome.source.FixedBiomeSource;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.chunk.CavesChunkGeneratorConfig;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorType;
+import net.minecraft.world.gen.chunk.FloatingIslandsChunkGeneratorConfig;
 
 public class PermafrostDimension extends Dimension
 {
@@ -37,7 +37,7 @@ public class PermafrostDimension extends Dimension
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{
-		CavesChunkGeneratorConfig settings = ChunkGeneratorType.FLOATING_ISLANDS.createSettings();
+		FloatingIslandsChunkGeneratorConfig settings = ChunkGeneratorType.FLOATING_ISLANDS.createSettings();
 		settings.setDefaultBlock(MubbleBlocks.PERMAROCK.getDefaultState());
 		settings.setDefaultFluid(Blocks.WATER.getDefaultState());
 		
