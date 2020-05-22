@@ -85,7 +85,7 @@ public class MubbleBlocks
     protected static final Block.Settings pWoodenButton = FabricBlockSettings.of(Material.WOOD).collidable(true).hardness(0.5F).sounds(BlockSoundGroup.WOOD).build();
     protected static final Block.Settings pStoneButton = FabricBlockSettings.of(Material.STONE).collidable(true).hardness(0.5F).build();
 
-    /* MINECRAFT */
+    /* MUBBLE */
     public static final Block OAK_VERTICAL_SLAB = register("oak_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
     public static final Block SPRUCE_VERTICAL_SLAB = register("spruce_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.SPRUCE_PLANKS)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);
     public static final Block BIRCH_VERTICAL_SLAB = register("birch_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.BIRCH_PLANKS)), ItemGroup.BUILDING_BLOCKS, false, 5, 20);

@@ -3,6 +3,7 @@ package hugman.mubble.init;
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.ChinchoEntity;
 import hugman.mubble.objects.entity.CustomTNTEntity;
+import hugman.mubble.objects.entity.DuckEntity;
 import hugman.mubble.objects.entity.FireballEntity;
 import hugman.mubble.objects.entity.FlyingBlockEntity;
 import hugman.mubble.objects.entity.GoombaEntity;
@@ -19,7 +20,8 @@ import net.minecraft.util.registry.Registry;
 
 public class MubbleEntities
 {
-    /* MINECRAFT */
+    /* MUBBLE */
+	public static final EntityType<DuckEntity> DUCK = register("duck", FabricEntityTypeBuilder.create(DuckEntity::new, EntityCategory.CREATURE).size(0.4F, 0.8F));
 	public static final EntityType<ZombieCowmanEntity> ZOMBIE_COWMAN = register("zombie_cowman", FabricEntityTypeBuilder.create(EntityCategory.MONSTER, ZombieCowmanEntity::new).size(EntityDimensions.fixed(0.6F, 1.95F)).build());
 	
 	public static final EntityType<CustomTNTEntity> CUSTOM_TNT = register("custom_tnt", FabricEntityTypeBuilder.<CustomTNTEntity>create(EntityCategory.MISC, CustomTNTEntity::new).setImmuneToFire().size(EntityDimensions.fixed(0.98F, 0.98F)).trackable(10, 20).build());

@@ -1,0 +1,106 @@
+{
+	"icon": "mubble:smb_question_block",
+	"name": "Maker Blocks",
+	"category": "blocks",
+	"pages":
+	[
+		{
+			"type": "text",
+			"text": "The #mario games are always filled with bright and colorful elements. Over the years, many of those elements dwelled in the long grids called \"levels\". As you might know, #smm2 is a celebration of that aspect, and so is #mubble.<++>Customize your world and create #mario levels using the large collection of terrain and special blocks."
+		},
+		{
+			"type": "spotlight",
+			"title": "What you'll need",
+			"item": "mubble:timeswap_table",
+			"text": "The <b>timeswap table</> will come in handy when manipulating blocks of this kind. Using this powerful tool, you will be able to <hl2>change the theme and style</> of any <hl1>maker block</>!"
+		},
+		{
+			"type": "spotlight",
+			"title": "? Blocks",
+			"item": "mubble:smw_question_block",
+			"text": "This iconic block can be looted by <hl2>triggering</> it (<i>jump right under it or input a redstone signal</>)!<+>Depending on what style it is, the loot will change. For example, only the #nsmbu <b>? block</> will drop <hl1>super crowns</> and only the #smw one will drop <hl1>cape feathers</>."
+		},
+		{
+			"type": "spotlight",
+			"title": "Empty Blocks",
+			"item": "mubble:smw_empty_block",
+			"text": "After activating a <hl1>? block</>, you are left with the matching <b>empty block</>.<+>You can try to <hl2>activate</> it again, but you won't be able to make it loot anything."
+		},
+		{
+			"type": "spotlight",
+			"title": "Ground Blocks",
+			"item": "mubble:smb_ground_ground_block",
+			"text": "As simple as it sounds, build the floor of your levels by mainly using this block and its very large amount of variants. With <hl3>ground</>, <hl3>underground</>, <hl3>underwater</>, <hl3>ghost house</>, <hl3>airship</>, <hl3>castle</>, <hl3>desert</>, <hl3>forest</>, <hl3>snow</> and <hl3>sky</> themes for every style, you surely won't have the time to try everything!"
+		},
+		{
+			"type": "image",
+			"images":
+			[
+				"mubble:textures/patchouli_books/screenshots/smb_ground_blocks.png",
+				"mubble:textures/patchouli_books/screenshots/smw_ground_blocks.png"
+			],
+			"border": true,
+			"text": "Also, the appearance of the block will change depending if there is a solid block above!"
+		},
+		{
+			"type": "spotlight",
+			"title": "Brick Blocks",
+			"item": "mubble:nsmbu_brick_block",
+			"text": "<b>Brick blocks</> work in a similar way as <hl1>? blocks</>, but won't always loot stuff. In fact, it has 1 chance in 2 to just break upon getting <hl2>triggered</>. If you're lucky, it might drop a few <hl1>yellow coins</>, or even <hl1>red ones</>!<+>There was no <b>brick block</> in #smw? No need to worry, we've created it!"
+		},
+		{
+			"type": "spotlight",
+			"title": "Golden Brick Blocks",
+			"item": "mubble:nsmbu_golden_brick_block",
+			"text": "Just like <hl1>regular brick blocks</>, these <b>golden variants</> can drop coins! However, it will always drop <hl1>coins</>, and will never get destroyed when <hl2>activated</>. You will get much richer with those, since it has more chance to drop amounts of <hl1>coins</> that are more valuable than those that come out of <hl1>regular brick blocks</>."
+		},
+		{
+			"type": "spotlight",
+			"title": "Rotating Blocks",
+			"item": "mubble:smw_rotating_block",
+			"text": "<b>Rotating blocks</> can be activated in the same manner as previously seen blocks, and it will always break upon activation. You can also <hl2>crouch-jump</> on it to <hl2>trigger</> it.<+>Out of the 4 styles, these blocks only appeared in #smw, but we've also added variants for #smb and #smb3, as well as #nsmbu."
+		},
+		{
+			"type": "spotlight",
+			"title": "Light Block",
+			"item": "mubble:light_block",
+			"text": "This cute little buddy will just emit light whenever you need it to. Handy, just like in the games.<++>Nothing special here.<+>It's just adorable."
+		},
+		{
+			"type": "spotlight",
+			"title": "Hard Blocks",
+			"item": "mubble:smw_wood_hard_block",
+			"text": "Usually, <b>hard blocks</> are used by the #smm2 community to mark places where a path is <hl2>blocked</>, or can be exploded. However, since most of the blocks can be exploded in #minecraft, you may use them in another, yet creative, way!<+>They're pretty to look at though, so decorative motives work too."
+		},
+		{
+			"type": "spotlight",
+			"title": "Ice Blocks",
+			"item": "mubble:smb3_ice_block",
+			"text": "The same can apply to <b>ice blocks</>. For this one though, there is a way to destroy it with a property that no other block has: throwing <hl1>fireballs</> at it will instantly melt it, leaving nothing but air behind. #minecraft's ice can also be melted by <hl1>fireballs</>, but that one leaves water after its death."
+		},
+		{
+			"type": "spotlight",
+			"title": "Note Blocks",
+			"item": "mubble:nsmbu_note_block",
+			"text": "Bounce up, and really high up into the air with the <b>note blocks</>! Walking upon them will <hl2>launch</> you up precisely 4 blocks into the air.<+><hl2>Crouch</>, and you will only go as far as around half a block high."
+		},
+		{
+			"type": "spotlight",
+			"title": "Super Note Blocks",
+			"item": "mubble:nsmbu_super_note_block",
+			"text": "This is the <b>super variant</> of the <hl1>note block</>. It is much stronger (<i>when you're not crouching</>), launching you at 10.5 blocks high.<+>Impressive!"
+		},
+		{
+			"type": "spotlight",
+			"title": "Doors",
+			"item": "mubble:smw_door",
+			"text": "These <b>doors</> work exactly as normal, #minecraft doors. (<i>except for the sounds</>)<++>Nothing else.<+>Use them as you want, they will work as you can already imagine."
+		},
+		{
+			"type": "spotlight",
+			"title": "Key Doors",
+			"item": "mubble:smw_key_door",
+			"text": "<i>These</> <b>doors</>, however, won't open or close to $(t:right clicks or redstone signals)anything</> until $(t:with a right click)you <hl2>unlock</> them with the $(t:matching = from the same style)matching <hl1>key</>."
+		}
+	]
+}

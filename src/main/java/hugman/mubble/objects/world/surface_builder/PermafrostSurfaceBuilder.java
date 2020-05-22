@@ -33,7 +33,7 @@ public class PermafrostSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfi
 	@Override
 	public void generate(Random random, Chunk chunkIn, Biome biomeIn, int x, int z, int startHeight, double noise, BlockState defaultBlock, BlockState defaultFluid, int seaLevel, long seed, TernarySurfaceConfig config)
 	{
-		int i = seaLevel + 1;
+		int i = 250;
 		int j = x & 15;
 		int k = z & 15;
 		double d0 = 0.03125D;
@@ -45,7 +45,7 @@ public class PermafrostSurfaceBuilder extends SurfaceBuilder<TernarySurfaceConfi
 		BlockState iblockstate = PERMAROCK;
 		BlockState iblockstate1 = PERMAROCK;
 
-		for(int j1 = 127; j1 >= 0; --j1)
+		for(int j1 = 250; j1 >= 0; --j1)
 		{
 			blockpos$mutableblockpos.set(j, j1, k);
 			BlockState iblockstate2 = chunkIn.getBlockState(blockpos$mutableblockpos);

@@ -2,6 +2,7 @@ package hugman.mubble.init.world;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
+import hugman.mubble.objects.entity.DuckEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.util.registry.Registry;
@@ -37,7 +38,7 @@ public class MubbleGenerators
 	{
 		for (Biome biome : Registry.BIOME)
 		{
-			if (biome.getCategory().equals(Category.DESERT))
+			if(biome.getCategory().equals(Category.DESERT))
 			{
 				biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleFeatures.PALM_TREE.configure(MubbleFeatureConfigs.PALM_TREE_CONFIG).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.12F, 1))));
 			}
@@ -53,5 +54,16 @@ public class MubbleGenerators
 				biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(MubbleEntities.TOAD, 10, 4, 4));
 			}
 		}
+		for(Biome biome : DuckEntity.getSpawnBiomes())
+		{
+			biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.DUCK, 10, 4, 4));
+		}
 	}
+	
+	/*
+	private static boolean canEntitySpawnInBiome(EntityType<?> entity, Biome biome)
+	{
+		return biome.getSpawns(entity.getClassification()).stream().anyMatch(entry -> entry.entityType == entity);
+	}
+	*/
 }

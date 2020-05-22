@@ -1,8 +1,13 @@
 /*package hugman.mubble.objects.events_handler;
 
 import hugman.mubble.objects.item.LightsaberItem;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class LightsaberHandler

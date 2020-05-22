@@ -1,5 +1,6 @@
 package hugman.mubble.objects.item;
 
+import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

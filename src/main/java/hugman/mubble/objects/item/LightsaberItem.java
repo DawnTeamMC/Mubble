@@ -1,5 +1,6 @@
 package hugman.mubble.objects.item;
 
+import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleItemTiers;
 import net.minecraft.client.MinecraftClient;
@@ -42,11 +43,6 @@ public class LightsaberItem extends SwordItem
 	public void onPullOut(Entity entity, World world)
 	{
 		world.playSoundFromEntity((PlayerEntity) null, entity, MubbleSounds.ITEM_LIGHTSABER_PULL_OUT, SoundCategory.PLAYERS, 1.0F, 1.0F);
-		if(entity instanceof ServerPlayerEntity)
-		{
-			PlaySoundFromEntityS2CPacket packet = new PlaySoundFromEntityS2CPacket(MubbleSounds.ITEM_LIGHTSABER_IDLE, SoundCategory.MASTER, entity, 0.15F, 1.0F);
-    		((ServerPlayerEntity) entity).networkHandler.sendPacket(packet);
-		}
 	}
 	
 	public void onPullIn(Entity entity, World world)

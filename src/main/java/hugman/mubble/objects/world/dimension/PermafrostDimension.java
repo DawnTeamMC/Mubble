@@ -37,13 +37,13 @@ public class PermafrostDimension extends Dimension
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{
-		CavesChunkGeneratorConfig settings = ChunkGeneratorType.CAVES.createSettings();
+		CavesChunkGeneratorConfig settings = ChunkGeneratorType.FLOATING_ISLANDS.createSettings();
 		settings.setDefaultBlock(MubbleBlocks.PERMAROCK.getDefaultState());
 		settings.setDefaultFluid(Blocks.WATER.getDefaultState());
 		
 		FixedBiomeSource biomeProvider = BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig(this.world.getLevelProperties()).setBiome(MubbleBiomes.PERMAFROST));
 		
-		return ChunkGeneratorType.CAVES.create(this.world, biomeProvider, settings);
+		return ChunkGeneratorType.FLOATING_ISLANDS.create(this.world, biomeProvider, settings);
 	}
 	
 	@Override

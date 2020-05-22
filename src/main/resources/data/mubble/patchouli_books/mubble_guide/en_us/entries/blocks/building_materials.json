@@ -1,0 +1,85 @@
+{
+	"icon": "mubble:red_bricks",
+	"name": "Building Materials",
+	"category": "blocks",
+	"pages":
+	[
+		{
+			"type": "text",
+			"text": "The decorative perspective of #mubble is very wide. In this chapter we will take a look at the <b>building materials</>, the type of blocks that you might use the most when <hl2>building structures</>."
+		},
+		{
+			"type": "spotlight",
+			"title": "What you'll need",
+			"item": "minecraft:stonecutter",
+			"text": "The <b>stonecutter</> will be your golden key if you want to come across most of the forms of materials. With this tool, you will be able to turn many of the blocks into other shapes, or even change their look to become fancier!<+>You might also need a <hl1>crafting table</> and a <hl1>furnace</> for more possibilities."
+		},
+		{
+			"type": "spotlight",
+			"title": "Vertical Slabs",
+			"item": "mubble:oak_vertical_slab",
+			"text": "The <b>vertical slabs</> are the perfect examples as to how #mubble will add details to your buildings. You may use them as walls, fences and many more!<+>Each vanilla slab (added by #minecraft) has a vertical slab variant, and the same applies to every slab you will encounter in this guide."
+		},
+		{
+			"type": "multiblock",
+			"name": "Example",
+			"multiblock":
+			{
+				"mapping":
+				{
+					"A": "mubble:stone_vertical_slab[type=east]",
+					"B": "mubble:sandstone_vertical_slab[type=west]",
+					"C": "mubble:purpur_vertical_slab[type=east]",
+					"D": "mubble:end_stone_brick_vertical_slab[type=west]",
+					"E": "mubble:red_nether_brick_vertical_slab[type=east]",
+					"F": "mubble:prismarine_vertical_slab[type=west]",
+					"G": "mubble:dark_prismarine_vertical_slab[type=east]",
+					"H": "mubble:blue_brick_vertical_slab[type=north]",
+					"I": "mubble:light_blue_brick_vertical_slab[type=south]",
+					"J": "mubble:oak_wood_vertical_slab[type=south]",
+					"K": "mubble:dark_oak_wood_vertical_slab[type=north]",
+					"L": "mubble:magenta_dark_prismarine_vertical_slab[type=north]",
+					"M": "mubble:pink_dark_prismarine_vertical_slab[type=south]",
+					"N": "mubble:lime_concrete_vertical_slab[type=south]",
+					"O": "mubble:green_concrete_vertical_slab[type=north]"
+				},
+				"pattern":
+				[
+					[ " IK0MO " ],
+					[ " HJ LN " ],
+					[ "ABCDEFG" ]
+				]
+			},
+			"enable_visualize": false,
+			"text": "There are <hl3>many</> types of vertical slabs. Wood, stone... you guessed it: they can be placed <hl3>anywhere</>."
+		},
+		{
+			"type": "spotlight",
+			"title": "Barked Style",
+			"item": "mubble:birch_wood_stairs",
+			"text": "Did you <b>love</> the addition of <hl3>wood</> blocks? (Those logs with bark textures all over them)<+>Yes? Well, you'll be happy to know that you can start working with even more shapes of them! <hl1>Stairs</>, <hl1>slabs</>, <hl1>vertical slabs</> and even <hl1>buttons</>."
+		},
+		{
+			"type": "image",
+			"images":
+			[
+				"mubble:textures/patchouli_books/screenshots/wood_blocks.png"
+			],
+			"border": true,
+			"text": "You can actually get these pretty early, since wood only requires 4 logs to be crafted!"
+		},
+		{
+			"type": "spotlight",
+			"title": "Stained Cubes",
+			"item": "mubble:yellow_bricks",
+			"text": "A large part of the massive collection of decorative blocks are the variations in colors of blocks. #mubble adds a ton of them, such as: <hl1>bricks</>, <hl1>dark prismarines</> and brand new <hl1>quartz pavings</>. And as seen before, you can put them in a <hl1>stonecutter</> to get them under the form of <hl1>stairs</>, <hl1>slabs</>, <hl1>vertical slabs</> and even <hl1>walls</> for some!"
+		},
+		{
+			"type": "spotlight",
+			"title": "And Even More!",
+			"item": "mubble:light_blue_concrete_stairs",
+			"text": "Concrete and terracotta blocks also get the deluxe treatment!<+>These blocks made out of cheerful colors can now turn into <hl1>stairs</>, <hl1>slabs</>, <hl1>vertical slabs</>, <hl1>walls</>, <hl1>buttons</> and <hl1>pressure plates</>!<++>With everything you saw right here, the $(t:Java Edition 1.12)<b>World of Color Update</> got expanded by a lot.",
+			"anchor": "terraconcrete_stuff"
+		}
+	]
+}

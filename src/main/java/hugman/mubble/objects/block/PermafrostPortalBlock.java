@@ -156,6 +156,7 @@ public class PermafrostPortalBlock extends Block
 		}
 	}
 
+	/*
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
 	{
@@ -183,6 +184,7 @@ public class PermafrostPortalBlock extends Block
 			}
 		}
 	}
+	*/
 	
 	public boolean trySpawnPortal(IWorld worldIn, BlockPos pos) 
 	{

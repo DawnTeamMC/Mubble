@@ -1139,6 +1139,8 @@
 	"item.mubble.apricot": "Abricot",
 	"item.mubble.mango": "Mangue",
 	"item.mubble.blueberries": "Myrtilles",
+	"item.mubble.duck": "Canard",
+	"item.mubble.cooked_duck": "Canard rôti",
 	"item.mubble.jingle_bells": "Grelots",
 	"item.mubble.small_bulb": "Petite ampoule",
 	"item.mubble.totem_of_ascending": "Totem d'ascendance",
@@ -1151,7 +1153,7 @@
 	"item.mubble.super_mushroom": "Super champignon",
 	"item.mubble.peach": "Pêche",
 	"item.mubble.fireball": "Boule de feu",
-	"//item.mubble.iceball": "Iceball",
+	"item.mubble.iceball": "Boule de glace",
 	"item.mubble.cape_feather": "Plume acrobate",
 	"item.mubble.super_cape_feather": "Super plume acrobate",
 	"item.mubble.super_star": "Super étoile",
@@ -1240,6 +1242,7 @@
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
 
+	"item.mubble.duck_spawn_egg": "Oeuf d'apparition de canard",
 	"item.mubble.chincho_spawn_egg": "Oeuf d'apparition de Chincho",
 	"item.mubble.goomba_spawn_egg": "Oeuf d'apparition de Goomba",
 	"item.mubble.toad_spawn_egg": "Oeuf d'apparition de Toad",
@@ -1330,6 +1333,7 @@
 
 
 	"comment": "ENTITIES",
+	"entity.mubble.duck": "Canard",
 	"entity.mubble.zombie_cowman": "Vache-zombie",
 	"entity.mubble.custom_tnt": "TNT personalisée",
 	"entity.mubble.flying_block": "Bloc volant",
@@ -1338,7 +1342,7 @@
 	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.toad": "Toad",
 	"entity.mubble.fireball": "Boule de feu",
-	"//entity.mubble.iceball": "Iceball",
+	"entity.mubble.iceball": "Boule de glace",
 
 
 
@@ -1377,8 +1381,11 @@
 	"subtitles.mubble.entity.chincho.ambient": "Chincho qui parle",
 	"subtitles.mubble.entity.chincho.hurt": "Chincho blessé",
 	"subtitles.mubble.entity.chincho.death": "Chincho qui meurt",
+	"subtitles.mubble.entity.duck.ambient": "Canard qui cancane",
+	"subtitles.mubble.entity.duck.hurt": "Canard blessé",
+	"subtitles.mubble.entity.duck.death": "Canard qui meurt",
 	"subtitles.mubble.entity.fireball.throw": "Boule de feu lancée",
-	"//subtitles.mubble.entity.iceball.throw": "Iceball flies",
+	"subtitles.mubble.entity.iceball.throw": "Boule de glace lancée",
 	"subtitles.mubble.entity.goomba.crush": "Goomba écrasé",
 	"subtitles.mubble.entity.goomba.hurt": "Goomba blessé",
 	"subtitles.mubble.entity.goomba.death": "Goomba qui meurt",

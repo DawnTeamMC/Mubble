@@ -133,7 +133,7 @@ public class IceballEntity extends ThrownItemEntity
         }
         if(!world.isClient)
         {
-            if(!(entity instanceof SnowGolemEntity) || entity instanceof LivingEntity)
+            if(!(entity instanceof SnowGolemEntity) && entity instanceof LivingEntity)
             {
             	LivingEntity livingEntity = (LivingEntity) entity;
             	livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 1));

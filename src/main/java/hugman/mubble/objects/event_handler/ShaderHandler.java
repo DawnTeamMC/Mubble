@@ -27,6 +27,22 @@ public class ShaderHandler
 					renderer.disableShader();
 				}
 			}
+			if(headItem.getItem() instanceof Costume)
+			{
+				ResourceLocation shader = ((Costume) headItem.getItem()).getShader();
+				if(shaderGroup != null && shader == null)
+				{
+					renderer.stopUseShader();
+				}
+			}
+			if(headItem.getItem() instanceof BlockCostume)
+			{
+				ResourceLocation shader = ((BlockCostume) headItem.getItem()).getShader();
+				if(shaderGroup != null && shader == null)
+				{
+					renderer.stopUseShader();
+				}
+			}
 		}
 	}
 }*/

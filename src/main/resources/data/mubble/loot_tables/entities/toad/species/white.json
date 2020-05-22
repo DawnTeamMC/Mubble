@@ -1,9 +1,12 @@
 {
-	"pools": [
+	"type": "minecraft:entity",
+	"pools":
+	[
 		{
-			"name":"normal",
+			"name": "normal",
 			"rolls": 1,
-			"entries": [
+			"entries": 
+			[
 				{
 					"type": "loot_table",
 					"name": "mubble:entities/toad/normal",
@@ -12,17 +15,20 @@
 			]
 		},
 		{
-			"name":"white",
+			"name": "white",
 			"rolls": 1,
-			"entries": [
+			"entries":
+			[
 				{
 					"type": "item",
 					"name": "mubble:white_mushroom",
 					"weight": 1,
-					"functions": [
+					"functions":
+					[
 						{
 							"function": "set_count",
-							"count": {
+							"count":
+							{
 								"min": 2,
 								"max": 4
 							}

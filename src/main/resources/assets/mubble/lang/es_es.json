@@ -1139,6 +1139,8 @@
 	"//item.mubble.apricot": "Apricot",
 	"//item.mubble.mango": "Mango",
 	"//item.mubble.blueberries": "Blueberries",
+	"//item.mubble.duck": "Duck",
+	"//item.mubble.cooked_duck": "Cooked Duck",
 	"//item.mubble.jingle_bells": "Jingle Bells",
 	"//item.mubble.small_bulb": "Small Bulb",
 	"//item.mubble.totem_of_ascending": "<newline>",
@@ -1240,6 +1242,7 @@
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
 
 
+	"//item.mubble.duck_spawn_egg": "Duck Spawn Egg",
 	"item.mubble.chincho_spawn_egg": "Generar chincho",
 	"//item.mubble.goomba_spawn_egg": "Goomba Spawn Egg",
 	"item.mubble.toad_spawn_egg": "Generar toad",
@@ -1330,6 +1333,7 @@
 
 
 	"comment": "ENTITIES",
+	"//entity.mubble.duck": "Duck",
 	"//entity.mubble.zombie_cowman": "Zombie Cowman",
 	"//entity.mubble.custom_tnt": "Custom TNT",
 	"//entity.mubble.flying_block": "Flying Block",
@@ -1377,6 +1381,9 @@
 	"//subtitles.mubble.entity.chincho.ambient": "Chincho talks",
 	"//subtitles.mubble.entity.chincho.hurt": "Chincho hurts",
 	"//subtitles.mubble.entity.chincho.death": "Chincho dies",
+	"//subtitles.mubble.entity.duck.ambient": "Duck quacks",
+	"//subtitles.mubble.entity.duck.hurt": "Duck hurts",
+	"//subtitles.mubble.entity.duck.death": "Duck dies",
 	"//subtitles.mubble.entity.fireball.throw": "Fireball flies",
 	"//subtitles.mubble.entity.iceball.throw": "Iceball flies",
 	"//subtitles.mubble.entity.goomba.crush": "Goomba crushed",
