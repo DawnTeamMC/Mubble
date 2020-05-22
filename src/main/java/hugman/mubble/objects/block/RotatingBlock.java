@@ -1,9 +1,10 @@
 package hugman.mubble.objects.block;
 
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
+import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.sound.BlockSoundGroup;
@@ -19,7 +20,7 @@ public class RotatingBlock extends Block
 	
     public RotatingBlock(BlockSoundGroup soundType)
     {
-        super(FabricBlockSettings.copy(Blocks.STONE).sounds(soundType).build());
+        super(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).sounds(soundType));
     }
     
     @Override

@@ -2,7 +2,7 @@ package hugman.mubble.objects.block;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleItems;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.Material;
 import net.minecraft.item.ItemConvertible;
@@ -14,7 +14,7 @@ public class CropsBlock extends CropBlock
 	 * + Missing features */
     public CropsBlock()
     {
-        super(FabricBlockSettings.of(Material.LEAVES).collidable(true).ticksRandomly().hardness(0f).sounds(BlockSoundGroup.CROP).nonOpaque().build());
+        super(FabricBlockSettings.of(Material.LEAVES).collidable(true).ticksRandomly().hardness(0f).sounds(BlockSoundGroup.CROP).nonOpaque());
     }
     
     @Override

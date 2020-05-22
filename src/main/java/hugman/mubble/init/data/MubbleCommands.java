@@ -3,19 +3,19 @@ package hugman.mubble.init.data;
 import hugman.mubble.objects.command.FoodbarCommand;
 import hugman.mubble.objects.command.HealthCommand;
 import hugman.mubble.objects.command.MotionCommand;
-import net.fabricmc.fabric.api.registry.CommandRegistry;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 
 public class MubbleCommands
 {
     public static void init()
     {
     	// Health
-    	CommandRegistry.INSTANCE.register(false, HealthCommand::register);
+    	CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> HealthCommand.register(dispatcher));
     	
     	// Motion
-    	CommandRegistry.INSTANCE.register(false, MotionCommand::register);
+    	CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> MotionCommand.register(dispatcher));
     	
     	// Foodbar
-    	CommandRegistry.INSTANCE.register(false, FoodbarCommand::register);
+    	CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> FoodbarCommand.register(dispatcher));
     }
 }

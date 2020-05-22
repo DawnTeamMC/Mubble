@@ -3,7 +3,7 @@ package hugman.mubble.objects.block;
 import hugman.mubble.init.data.MubbleTags;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.AbstractGlassBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
@@ -28,7 +28,7 @@ public class CloudBlock extends AbstractGlassBlock implements Stainable
 	
     public CloudBlock(DyeColor colorIn)
     {
-        super(FabricBlockSettings.of(Material.LEAVES, colorIn).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision().build());
+        super(FabricBlockSettings.of(Material.LEAVES, colorIn).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision());
     	this.color = colorIn;
     }
 

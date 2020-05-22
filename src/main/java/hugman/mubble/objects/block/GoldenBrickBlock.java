@@ -5,10 +5,12 @@ import java.util.List;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleLootTables;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.Material;
+import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.ItemEntity;
@@ -33,7 +35,7 @@ public class GoldenBrickBlock extends Block
 	
     public GoldenBrickBlock(BlockSoundGroup soundType)
     {
-        super(FabricBlockSettings.copy(Blocks.BRICKS).sounds(soundType).build());
+        super(FabricBlockSettings.of(Material.STONE, MaterialColor.RED).strength(2.0F, 6.0F).sounds(soundType));
     }
     
     @Override

@@ -1,6 +1,5 @@
 package hugman.mubble.objects.item;
 
-import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleItemTiers;
 import net.minecraft.client.MinecraftClient;
@@ -10,7 +9,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
-import net.minecraft.network.packet.s2c.play.PlaySoundFromEntityS2CPacket;
 import net.minecraft.network.packet.s2c.play.StopSoundS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;

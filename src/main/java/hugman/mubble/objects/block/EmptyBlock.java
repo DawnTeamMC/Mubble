@@ -2,7 +2,7 @@ package hugman.mubble.objects.block;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleSounds;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
@@ -23,7 +23,7 @@ public class EmptyBlock extends Block
 	
     public EmptyBlock()
     {
-        super(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(1.5F, 6.0F).build());
+        super(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(1.5F, 6.0F));
     }
     
     @Override

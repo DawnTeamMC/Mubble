@@ -2,7 +2,7 @@ package hugman.mubble.objects.block;
 
 import hugman.mubble.init.data.MubbleBlockStateProperties;
 import hugman.mubble.objects.block.block_state_property.Princess;
-import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
@@ -21,7 +21,7 @@ public class KoretatoBlock extends DirectionalBlock
 	
     public KoretatoBlock()
     {
-        super(FabricBlockSettings.of(Material.ORGANIC, MaterialColor.YELLOW_TERRACOTTA).strength(0.4f, 2f).sounds(BlockSoundGroup.SNOW).build());
+        super(FabricBlockSettings.of(Material.ORGANIC, MaterialColor.YELLOW_TERRACOTTA).strength(0.4f, 2f).sounds(BlockSoundGroup.SNOW));
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP).with(PRINCESS, Princess.NONE));
     }
     
