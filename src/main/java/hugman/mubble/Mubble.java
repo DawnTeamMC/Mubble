@@ -20,6 +20,7 @@ import hugman.mubble.init.world.MubbleDimensions;
 import hugman.mubble.init.world.MubbleFeatures;
 import hugman.mubble.init.world.MubbleGenerators;
 import hugman.mubble.init.world.MubbleSurfaceBuilders;
+import hugman.mubble.objects.event.LightsaberEvents;
 import net.fabricmc.api.ModInitializer;
 
 public class Mubble implements ModInitializer
@@ -53,6 +54,9 @@ public class Mubble implements ModInitializer
 		new MubbleSurfaceBuilders();
 		MubbleBiomes.initBiomeGeneration();
 		initGenerators();
+		
+		// Events
+		LightsaberEvents.init();
 	}
 	
 	private void initGenerators()

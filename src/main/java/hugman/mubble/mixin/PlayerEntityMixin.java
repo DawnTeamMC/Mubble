@@ -16,10 +16,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.world.World;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin
 {
+	private static ItemStack prevStack;
+	
 	@Inject(method = "interact", at = @At(value = "TAIL"), cancellable = true)
 	private void interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir)
 	{
@@ -41,14 +44,24 @@ public class PlayerEntityMixin
 		}
 	}
 	
-	@Inject(method = "attack", at = @At(value = "TAIL"), cancellable = true)
-	private void attack(Entity target, CallbackInfo ci)
+	@Inject(method = "tick", at = @At(value = "TAIL"), cancellable = true)
+	private void tick(CallbackInfo ci)
 	{
 		PlayerEntity player = (PlayerEntity) (Object) this;
-		ItemStack stack = player.getMainHandStack();
-		if(stack.getItem() instanceof LightsaberItem)
+		World world = player.getEntityWorld();
+		if (prevStack == null) prevStack = player.getMainHandStack();
+		ItemStack currentStack = player.getMainHandStack();
+		if (prevStack.getItem() != currentStack.getItem())
 		{
-			((LightsaberItem) stack.getItem()).onSwing(player, true);
+			if (currentStack.getItem() instanceof LightsaberItem)
+			{
+				((LightsaberItem) currentStack.getItem()).onPullOut(player, world);
+			}
+			if (prevStack.getItem() instanceof LightsaberItem)
+			{
+				((LightsaberItem) prevStack.getItem()).onPullIn(player, world);
+			}
 		}
+		prevStack = player.getMainHandStack();
 	}
 }

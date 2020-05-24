@@ -9,7 +9,6 @@
 		"FireBlockMixin",
 		"GameRendererAccessor",
 		"LivingEntityMixin",
-		"MinecraftClientMixin",
 		"MobEntityMixin",
 		"PlayerEntityMixin",
 		"SpongeBlockMixin"
