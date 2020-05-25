@@ -7,7 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
-import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -22,9 +21,9 @@ import net.minecraft.world.explosion.Explosion;
 
 public class CustomTNTEntity extends Entity
 {
-	private static final TrackedData<Integer> FUSE = DataTracker.registerData(TntEntity.class, TrackedDataHandlerRegistry.INTEGER);
-	private static final TrackedData<Float> STRENGHT = DataTracker.registerData(TntEntity.class, TrackedDataHandlerRegistry.FLOAT);
-	private BlockState customTile = Blocks.TNT.getDefaultState();
+	private static final TrackedData<Integer> FUSE = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.INTEGER);
+	private static final TrackedData<Float> STRENGHT = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.FLOAT);
+	private BlockState customTile = Blocks.SAND.getDefaultState();
 	private int fuse = 80;
 	private float strenght = 4.0F;
 	private LivingEntity tntPlacedBy;
@@ -35,7 +34,7 @@ public class CustomTNTEntity extends Entity
 		this.inanimate = true;
 	}
 	
-	public CustomTNTEntity(BlockState customTileIn, World worldIn, double x, double y, double z, LivingEntity igniter)
+	public CustomTNTEntity(BlockState customTileIn, World worldIn, double x, double y, double z, int fuse, float strength, LivingEntity igniter)
 	{
 		this(MubbleEntities.CUSTOM_TNT, worldIn);
 		this.customTile = customTileIn;
@@ -43,7 +42,7 @@ public class CustomTNTEntity extends Entity
 	    float f = (float)(Math.random() * (double)((float)Math.PI * 2F));
 	    this.setVelocity((double)(-((float)Math.sin((double)f)) * 0.02F), (double)0.2F, (double)(-((float)Math.cos((double)f)) * 0.02F));
 	    this.setFuse(fuse);
-	    this.setStrenght(strenght);
+	    this.setStrenght(strength);
 	    this.prevX = x;
 	    this.prevY = y;
 	    this.prevZ = z;
@@ -115,26 +114,15 @@ public class CustomTNTEntity extends Entity
 		this.setStrenght(compound.getFloat("Strenght"));
 	}
 	
-	@Override
-	public void onTrackedDataSet(TrackedData<?> key)
-	{
-		if(FUSE.equals(key)) this.fuse = this.getFuseDataManager();
-	}
-
-	public int getFuse()
-	{
-		return this.fuse;
-	}
-	
 	public void setFuse(int fuseIn)
 	{
 		this.dataTracker.set(FUSE, fuseIn);
 		this.fuse = fuseIn;
 	}
 	
-	public int getFuseDataManager()
+	public int getFuse()
 	{
-		return this.dataTracker.get(FUSE);
+		return this.fuse;
 	}
 	
 	public BlockState getBlockState()
@@ -156,6 +144,17 @@ public class CustomTNTEntity extends Entity
 	public LivingEntity getTntPlacedBy()
 	{
 		return this.tntPlacedBy;
+	}
+	
+	@Override
+	public void onTrackedDataSet(TrackedData<?> key)
+	{
+		if(FUSE.equals(key)) this.fuse = this.getFuseDataManager();
+	}
+	
+	public int getFuseDataManager()
+	{
+		return this.dataTracker.get(FUSE);
 	}
 	
 	@Override

@@ -5,8 +5,6 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleTags;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,38 +17,33 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Packet;
-import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
+import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-public class IceballEntity extends ThrownItemEntity
+public class IceballEntity extends BallEntity
 {
-	private int reboundingAmount = 3;
-	
-	public IceballEntity(EntityType<? extends ThrownItemEntity> entityType, World world)
+	public IceballEntity(EntityType<? extends BallEntity> entityType, World world)
 	{
 		super(entityType, world);
 	}
 	
 	public IceballEntity(World world, LivingEntity owner)
 	{
-		super(MubbleEntities.ICEBALL, owner, world);
+		super(MubbleEntities.ICEBALL, world, owner);
 	}
 	
 	public IceballEntity(World world, double x, double y, double z)
 	{
-		super(MubbleEntities.ICEBALL, x, y, z, world);
+		super(MubbleEntities.ICEBALL, world, x, y, z);
 	}
 
 	@Override
@@ -58,71 +51,21 @@ public class IceballEntity extends ThrownItemEntity
 	{
 		return MubbleItems.ICEBALL;
 	}
-	
+
 	@Override
-	public void writeCustomDataToTag(CompoundTag compound)
+	protected SoundEvent getDeathSound()
 	{
-		super.writeCustomDataToTag(compound);
-		compound.putInt("ReboundingAmount", reboundingAmount);
-	}
-	
-	@Override
-	public void readCustomDataFromTag(CompoundTag compound)
-	{
-		super.readCustomDataFromTag(compound);
-		this.reboundingAmount = compound.getInt("ReboundingAmount");
+		return MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK;
 	}
 
 	@Override
-	protected void onCollision(HitResult result)
+	protected ParticleEffect getDeathParticle()
 	{
-		boolean removeOnImpact = true;
-		
-		if(result.getType() == HitResult.Type.ENTITY)
-		{
-			removeOnImpact = onEntityImpact((EntityHitResult) result);
-		}
-		else if(result.getType() == HitResult.Type.BLOCK)
-		{
-			removeOnImpact = onBlockImpact(((BlockHitResult) result));
-		}
-		
-		boolean cantRebound = reboundingAmount <= 0;
-		
-		if(removeOnImpact || cantRebound)
-		{
-			if(!this.world.isClient)
-			{
-				this.world.sendEntityStatus(this, (byte)3);
-				this.remove();
-			}
-			if(!removeOnImpact && cantRebound)
-			{
-				this.world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-			}
-		}
-		else
-		{
-			reboundingAmount--;
-		}
-	}
-
-	@Environment(EnvType.CLIENT)
-	public void handleStatus(byte state)
-	{
-		if(state == 3)
-		{
-			for(int i = 0; i < 8; ++i)
-			{
-				float s1 = random.nextFloat() * 0.2F - 0.1F;
-				float s2 = random.nextFloat() * 0.2F - 0.1F;
-				float s3 = random.nextFloat() * 0.2F - 0.1F;
-				world.addParticle(ParticleTypes.CLOUD, this.getX(), this.getY(), this.getZ(), s1, s2, s3);
-			}
-		}
+		return ParticleTypes.CLOUD;
 	}
 	
-	private boolean onEntityImpact(EntityHitResult result)
+	@Override
+	protected boolean onEntityImpact(EntityHitResult result)
 	{
 		Entity entity = result.getEntity();
 		float damage = entity instanceof SnowGolemEntity ? 1.0F : 3.0F;
@@ -144,7 +87,8 @@ public class IceballEntity extends ThrownItemEntity
 		return true;
 	}
 	
-	private boolean onBlockImpact(BlockHitResult result)
+	@Override
+	protected boolean onBlockImpact(BlockHitResult result)
 	{
 		BlockPos pos = result.getBlockPos();
 		BlockState state = world.getBlockState(pos);
@@ -189,12 +133,5 @@ public class IceballEntity extends ThrownItemEntity
 			world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
-	}
-
-	@Override
-	public Packet<?> createSpawnPacket()
-	{
-		Entity entity = this.getOwner();
-		return new EntitySpawnS2CPacket(this, entity == null ? 0 : entity.getEntityId());
 	}
 }

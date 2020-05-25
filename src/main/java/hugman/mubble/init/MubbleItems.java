@@ -4,12 +4,12 @@ import hugman.mubble.Mubble;
 import hugman.mubble.init.data.MubbleFoods;
 import hugman.mubble.init.data.MubbleItemTiers;
 import hugman.mubble.objects.item.AxeItem;
-import hugman.mubble.objects.item.AymrItem;
 import hugman.mubble.objects.item.BandageItem;
 import hugman.mubble.objects.item.CapeFeatherItem;
 import hugman.mubble.objects.item.FireballItem;
 import hugman.mubble.objects.item.IceballItem;
 import hugman.mubble.objects.item.KeyItem;
+import hugman.mubble.objects.item.KirbyBallItem;
 import hugman.mubble.objects.item.LightsaberItem;
 import hugman.mubble.objects.item.PickaxeItem;
 import hugman.mubble.objects.item.ShakeInstrumentItem;
@@ -84,8 +84,11 @@ public class MubbleItems
     public static final Item SMW_KEY = register("smw_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.SMW_KEY_DOOR));
     public static final Item NSMBU_KEY = register("nsmbu_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.NSMBU_KEY_DOOR));
     
+    /* KIRBY */
+    public static final Item KIRBY_BALL = register("kirby_ball", new KirbyBallItem(new Item.Settings().group(ItemGroup.COMBAT)));
+    
     /* FIRE EMBLEM */
-    public static final Item AYMR = register("aymr", new AymrItem(new Item.Settings().group(ItemGroup.COMBAT)));
+    //public static final Item AYMR = register("aymr", new AymrItem(new Item.Settings().group(ItemGroup.COMBAT)));
     
     /* SUPER SMASH BROS. */
     public static final Item SMASH_BALL = register("smash_ball", new SmashBallItem(new Item.Settings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE)));

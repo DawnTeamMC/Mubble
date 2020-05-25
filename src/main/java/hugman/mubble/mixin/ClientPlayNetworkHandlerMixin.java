@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.objects.entity.FireballEntity;
 import hugman.mubble.objects.entity.IceballEntity;
+import hugman.mubble.objects.entity.KirbyBallEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.world.ClientWorld;
@@ -42,6 +43,10 @@ public class ClientPlayNetworkHandlerMixin
 		else if (entityType == MubbleEntities.ICEBALL)
 		{
 			entity = new IceballEntity(this.world, x, y, z);
+		}
+		else if (entityType == MubbleEntities.KIRBY_BALL)
+		{
+			entity = new KirbyBallEntity(this.world, x, y, z);
 		}
 		if (entity != null) {
 			int i = packet.getId();
