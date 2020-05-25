@@ -54,12 +54,12 @@ public class LightsaberItem extends SwordItem
 	}
 	
 	@Override
-	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
 	{
-    	if(isSelected && worldIn.isClient && idleTimer == 0 && entityIn instanceof PlayerEntity)
+    	if (selected && world.isClient && idleTimer == 0 && entity instanceof PlayerEntity)
     	{
     		MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(MubbleSounds.ITEM_LIGHTSABER_IDLE, 1.0F, 0.15F));
     	}
-		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
+		super.inventoryTick(stack, world, entity, slot, selected);
 	}
 }

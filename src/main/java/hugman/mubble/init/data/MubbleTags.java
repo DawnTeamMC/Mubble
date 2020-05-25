@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hugman.mubble.Mubble;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
-import net.minecraft.tag.BlockTags;
-import net.minecraft.tag.EntityTypeTags;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 
@@ -28,7 +25,7 @@ public class MubbleTags
 
         private static Tag<Block> register(String name)
         {
-            return BlockTags.getContainer().getOrCreate(new Identifier(Mubble.MOD_ID, name));
+            return TagRegistry.block(new Identifier(Mubble.MOD_ID, name));
         }
     }
     
@@ -64,12 +61,12 @@ public class MubbleTags
 
         private static Tag<Item> register(String name)
         {
-        	return new ItemTags.CachingTag(new Identifier(Mubble.MOD_ID, name));
+        	return TagRegistry.item(new Identifier(Mubble.MOD_ID, name));
         }
 
         private static Tag<Item> registerTimeswap(String name)
         {
-        	Tag<Item> fTag = new ItemTags.CachingTag(new Identifier(Mubble.MOD_ID, name));
+        	Tag<Item> fTag = TagRegistry.item(new Identifier(Mubble.MOD_ID, name));
         	TIMESWAP_TAGS.add(fTag);
             return fTag;
         }
@@ -81,7 +78,7 @@ public class MubbleTags
 
         private static Tag<EntityType<?>> register(String name)
         {
-            return new EntityTypeTags.CachingTag(new Identifier(Mubble.MOD_ID, name));
+            return TagRegistry.entityType(new Identifier(Mubble.MOD_ID, name));
         }
     }
     
@@ -91,7 +88,7 @@ public class MubbleTags
 
         private static Tag<Fluid> register(String name)
         {
-            return new FluidTags.CachingTag(new Identifier(Mubble.MOD_ID, name));
+            return TagRegistry.fluid(new Identifier(Mubble.MOD_ID, name));
         }
     }
 }

@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleSounds;
-import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
@@ -36,6 +35,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
@@ -51,7 +51,7 @@ import net.minecraft.world.biome.Biomes;
 public class DuckEntity extends AnimalEntity
 {
 	private static final TrackedData<Integer> DUCK_TYPE = DataTracker.registerData(DuckEntity.class, TrackedDataHandlerRegistry.INTEGER);
-	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromTag(MubbleTags.Items.DUCK_FEEDING);
+	private static final Ingredient TEMPTATION_ITEMS = Ingredient.ofItems(Items.WHEAT_SEEDS, Items.MELON_SEEDS, Items.PUMPKIN_SEEDS, Items.BEETROOT_SEEDS);
 	public float wingRotation;
 	public float destPos;
 	public float oFlapSpeed;

@@ -162,33 +162,33 @@ public class MubbleBlocks
     public static final Block COBBLESTONE_BRICK_STAIRS = register("cobblestone_brick_stairs", new StairsBlock(COBBLESTONE_BRICKS), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block COBBLESTONE_BRICK_SLAB = register("cobblestone_brick_slab", new SlabBlock(Settings.copy(COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block COBBLESTONE_BRICK_VERTICAL_SLAB = register("cobblestone_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block COBBLESTONE_BRICK_WALL = register("cobblestone_brick_wall", new WallBlock(Settings.copy(COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
+    public static final Block COBBLESTONE_BRICK_WALL = register("cobblestone_brick_wall", new WallBlock(Settings.copy(COBBLESTONE_BRICKS)), ItemGroup.DECORATIONS, false);
     public static final Block MOSSY_COBBLESTONE_BRICKS = register("mossy_cobblestone_bricks", new Block(Settings.copy(Blocks.MOSSY_COBBLESTONE)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block MOSSY_COBBLESTONE_BRICK_STAIRS = register("mossy_cobblestone_brick_stairs", new StairsBlock(MOSSY_COBBLESTONE_BRICKS), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block MOSSY_COBBLESTONE_BRICK_SLAB = register("mossy_cobblestone_brick_slab", new SlabBlock(Settings.copy(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block MOSSY_COBBLESTONE_BRICK_VERTICAL_SLAB = register("mossy_cobblestone_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block MOSSY_COBBLESTONE_BRICK_WALL = register("mossy_cobblestone_brick_wall", new WallBlock(Settings.copy(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
+    public static final Block MOSSY_COBBLESTONE_BRICK_WALL = register("mossy_cobblestone_brick_wall", new WallBlock(Settings.copy(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.DECORATIONS, false);
     public static final Block GRANITE_BRICKS = register("granite_bricks", new Block(Settings.copy(Blocks.GRANITE)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block GRANITE_BRICK_STAIRS = register("granite_brick_stairs", new StairsBlock(GRANITE_BRICKS), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block GRANITE_BRICK_SLAB = register("granite_brick_slab", new SlabBlock(Settings.copy(GRANITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block GRANITE_BRICK_VERTICAL_SLAB = register("granite_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(GRANITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block GRANITE_BRICK_WALL = register("granite_brick_wall", new WallBlock(Settings.copy(GRANITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
+    public static final Block GRANITE_BRICK_WALL = register("granite_brick_wall", new WallBlock(Settings.copy(GRANITE_BRICKS)), ItemGroup.DECORATIONS, false);
     public static final Block DIORITE_BRICKS = register("diorite_bricks", new Block(Settings.copy(Blocks.DIORITE)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block DIORITE_BRICK_STAIRS = register("diorite_brick_stairs", new StairsBlock(DIORITE_BRICKS), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block DIORITE_BRICK_SLAB = register("diorite_brick_slab", new SlabBlock(Settings.copy(DIORITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block DIORITE_BRICK_VERTICAL_SLAB = register("diorite_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(DIORITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block DIORITE_BRICK_WALL = register("diorite_brick_wall", new WallBlock(Settings.copy(DIORITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
+    public static final Block DIORITE_BRICK_WALL = register("diorite_brick_wall", new WallBlock(Settings.copy(DIORITE_BRICKS)), ItemGroup.DECORATIONS, false);
     public static final Block ANDESITE_BRICKS = register("andesite_bricks", new Block(Settings.copy(Blocks.ANDESITE)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block ANDESITE_BRICK_STAIRS = register("andesite_brick_stairs", new StairsBlock(ANDESITE_BRICKS), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block ANDESITE_BRICK_SLAB = register("andesite_brick_slab", new SlabBlock(Settings.copy(ANDESITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block ANDESITE_BRICK_VERTICAL_SLAB = register("andesite_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(ANDESITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block ANDESITE_BRICK_WALL = register("andesite_brick_wall", new WallBlock(Settings.copy(ANDESITE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
+    public static final Block ANDESITE_BRICK_WALL = register("andesite_brick_wall", new WallBlock(Settings.copy(ANDESITE_BRICKS)), ItemGroup.DECORATIONS, false);
 
     public static final Block SANDSTONE_BRICKS = register("sandstone_bricks", new Block(Settings.copy(Blocks.SANDSTONE)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block SANDSTONE_BRICK_STAIRS = register("sandstone_brick_stairs", new StairsBlock(SANDSTONE_BRICKS), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block SANDSTONE_BRICK_SLAB = register("sandstone_brick_slab", new SlabBlock(Settings.copy(SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block SANDSTONE_BRICK_VERTICAL_SLAB = register("sandstone_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block SANDSTONE_BRICK_WALL = register("sandstone_brick_wall", new WallBlock(Settings.copy(SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
+    public static final Block SANDSTONE_BRICK_WALL = register("sandstone_brick_wall", new WallBlock(Settings.copy(SANDSTONE_BRICKS)), ItemGroup.DECORATIONS, false);
     public static final Block POLISHED_SANDSTONE = register("polished_sandstone", new Block(Settings.copy(Blocks.SANDSTONE)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block POLISHED_SANDSTONE_STAIRS = register("polished_sandstone_stairs", new StairsBlock(POLISHED_SANDSTONE), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block POLISHED_SANDSTONE_SLAB = register("polished_sandstone_slab", new SlabBlock(Settings.copy(POLISHED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, false);
@@ -197,7 +197,7 @@ public class MubbleBlocks
     public static final Block RED_SANDSTONE_BRICK_STAIRS = register("red_sandstone_brick_stairs", new StairsBlock(RED_SANDSTONE_BRICKS), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block RED_SANDSTONE_BRICK_SLAB = register("red_sandstone_brick_slab", new SlabBlock(Settings.copy(RED_SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block RED_SANDSTONE_BRICK_VERTICAL_SLAB = register("red_sandstone_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(RED_SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block RED_SANDSTONE_BRICK_WALL = register("red_sandstone_brick_wall", new WallBlock(Settings.copy(RED_SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
+    public static final Block RED_SANDSTONE_BRICK_WALL = register("red_sandstone_brick_wall", new WallBlock(Settings.copy(RED_SANDSTONE_BRICKS)), ItemGroup.DECORATIONS, false);
     public static final Block POLISHED_RED_SANDSTONE = register("polished_red_sandstone", new Block(Settings.copy(Blocks.RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block POLISHED_RED_SANDSTONE_STAIRS = register("polished_red_sandstone_stairs", new StairsBlock(POLISHED_RED_SANDSTONE), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block POLISHED_RED_SANDSTONE_SLAB = register("polished_red_sandstone_slab", new SlabBlock(Settings.copy(POLISHED_RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS, false);
@@ -212,7 +212,7 @@ public class MubbleBlocks
     public static final Block CHISELED_PRISMARINE_STAIRS = register("chiseled_prismarine_stairs", new StairsBlock(CHISELED_PRISMARINE), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block CHISELED_PRISMARINE_SLAB = register("chiseled_prismarine_slab", new SlabBlock(Settings.copy(CHISELED_PRISMARINE)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block CHISELED_PRISMARINE_VERTICAL_SLAB = register("chiseled_prismarine_vertical_slab", new VerticalSlabBlock(Settings.copy(CHISELED_PRISMARINE)), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block CHISELED_PRISMARINE_WALL = register("chiseled_prismarine_wall", new WallBlock(Settings.copy(CHISELED_PRISMARINE)), ItemGroup.BUILDING_BLOCKS, false);
+    public static final Block CHISELED_PRISMARINE_WALL = register("chiseled_prismarine_wall", new WallBlock(Settings.copy(CHISELED_PRISMARINE)), ItemGroup.DECORATIONS, false);
     
     public static final Block PRISMARINE_BRICK_PAVING = register("prismarine_brick_paving", new Block(Settings.copy(Blocks.PRISMARINE_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block PRISMARINE_BRICK_PAVING_STAIRS = register("prismarine_brick_paving_stairs", new StairsBlock(PRISMARINE_BRICK_PAVING), ItemGroup.BUILDING_BLOCKS, false);
@@ -248,7 +248,7 @@ public class MubbleBlocks
     public static final Block BLUE_PERMAFROST_BRICK_STAIRS = register("blue_permafrost_brick_stairs", new StairsBlock(BLUE_PERMAFROST_BRICKS), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block BLUE_PERMAFROST_BRICK_SLAB = register("blue_permafrost_brick_slab", new SlabBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block BLUE_PERMAFROST_BRICK_VERTICAL_SLAB = register("blue_permafrost_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
-    public static final Block BLUE_PERMAFROST_BRICK_WALL = register("blue_permafrost_brick_wall", new WallBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS, false);
+    public static final Block BLUE_PERMAFROST_BRICK_WALL = register("blue_permafrost_brick_wall", new WallBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.DECORATIONS, false);
     public static final Block PERMAFROST_BISMUTH_ORE = register("permafrost_bismuth_ore", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.3F)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block FROZEN_OBSIDIAN = register("frozen_obsidian", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).strength(75.0F, 1800.0F)), ItemGroup.BUILDING_BLOCKS, false);
     public static final Block PERMAFROST_PORTAL = register("permafrost_portal", new PermafrostPortalBlock(FabricBlockSettings.of(Material.PORTAL).noCollision().ticksRandomly().hardness(-1.0F).sounds(BlockSoundGroup.GLASS).lightLevel(11).dropsNothing()));
