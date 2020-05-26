@@ -83,11 +83,11 @@ public class VerticalSlabBlock extends Block implements Waterloggable
         	FluidState ifluidstate = context.getWorld().getFluidState(context.getBlockPos());
         	BlockState iblockstate1 = this.getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
         	Direction facing = context.getPlayerFacing();
-        	Direction face_hit = context.getPlayerLookDirection();
+        	Direction face_hit = context.getSide();
         	
         	Vec3d vec3d = context.getHitPos();
-            double hitX = vec3d.x - (double) context.getHitPos().getX();
-            double hitZ = vec3d.z - (double) context.getHitPos().getZ();
+            double hitX = vec3d.x - context.getBlockPos().getX();
+            double hitZ = vec3d.z - context.getBlockPos().getZ();
         	if(facing == Direction.NORTH || facing == Direction.SOUTH)
         	{
         		if(face_hit == Direction.SOUTH) return iblockstate1.with(TYPE, VerticalSlabType.NORTH);
