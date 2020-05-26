@@ -116,11 +116,11 @@ public class VerticalSlabBlock extends Block implements Waterloggable
             if (context.canReplaceExisting())
             {
         	    Vec3d vec3d = context.getHitPos();
-        	    double hitX = vec3d.x - (double) context.getHitPos().getX();
-        	    double hitZ = vec3d.z - (double) context.getHitPos().getZ();
+        	    double hitX = vec3d.x - context.getBlockPos().getX();
+        	    double hitZ = vec3d.z - context.getBlockPos().getZ();
         	    boolean flag1 = hitZ > 0.5D;
         	    boolean flag2 = hitX > 0.5D;
-        	    Direction enumfacing = context.getPlayerFacing();
+        	    Direction enumfacing = context.getSide();
         	    if (slabtype == VerticalSlabType.NORTH) return enumfacing == Direction.SOUTH || flag1 && enumfacing.getAxis().isHorizontal();
         	    if (slabtype == VerticalSlabType.SOUTH) return enumfacing == Direction.NORTH || !flag1 && enumfacing.getAxis().isHorizontal();
         	    if (slabtype == VerticalSlabType.EAST) return enumfacing == Direction.WEST || !flag2 && enumfacing.getAxis().isHorizontal();
