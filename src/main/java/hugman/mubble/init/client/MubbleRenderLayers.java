@@ -20,7 +20,9 @@ public class MubbleRenderLayers
 		
 		// Presents
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.BLUE_PRESENT,
-				MubbleBlocks.GREEN_PRESENT, MubbleBlocks.YELLOW_PRESENT, MubbleBlocks.RED_PRESENT
+				MubbleBlocks.GREEN_PRESENT, MubbleBlocks.YELLOW_PRESENT, MubbleBlocks.RED_PRESENT,
+				MubbleBlocks.PURPLE_PRESENT, MubbleBlocks.BLACK_PRESENT, MubbleBlocks.WHITE_PRESENT,
+				MubbleBlocks.GOLDEN_PRESENT
 			);
 		
 		// Cloud Blocks
