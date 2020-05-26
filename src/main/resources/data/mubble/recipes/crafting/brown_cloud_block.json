@@ -15,7 +15,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/brown"
+			"item": "minecraft:brown_dye"
 		}
 	},
 	"result":

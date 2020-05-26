@@ -2,11 +2,11 @@ package hugman.mubble.objects.tile_entity;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
-import net.minecraft.tileentity.DispenserTileEntity;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.block.entity.DispenserBlockEntity;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 
-public class PlacerTileEntity extends DispenserTileEntity
+public class PlacerTileEntity extends DispenserBlockEntity
 {
 	public PlacerTileEntity()
 	{
@@ -14,8 +14,8 @@ public class PlacerTileEntity extends DispenserTileEntity
 	}
 	
 	@Override
-	protected ITextComponent getDefaultName()
+	protected Text getContainerName()
 	{
-		return new TranslationTextComponent("container." + Mubble.MOD_ID + ".placer");
+		return new TranslatableText("container." + Mubble.MOD_ID + ".placer");
 	}
 }

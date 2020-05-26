@@ -4,27 +4,27 @@ import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.enums.DoubleBlockHalf;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.state.properties.DoubleBlockHalf;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 public class DoorBlock extends net.minecraft.block.DoorBlock
 {
 	/* Extension for internal publicity */
-    public DoorBlock(Block.Properties builder)
+    public DoorBlock(Block.Settings builder)
     {
         super(builder);
     }
     
     @Override
-    public void toggleDoor(World worldIn, BlockPos pos, boolean open)
+    public void setOpen(World worldIn, BlockPos pos, boolean open)
     {
     	if(isSmm2Door())
     	{
@@ -35,15 +35,15 @@ public class DoorBlock extends net.minecraft.block.DoorBlock
 				this.playToggleSound(worldIn, pos, open);
 			}
     	}
-    	else super.toggleDoor(worldIn, pos, open);
+    	else super.setOpen(worldIn, pos, open);
     }
     
     @Override
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
+    public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
     {
     	if(isSmm2Door())
     	{
-			boolean flag = worldIn.isBlockPowered(pos) || worldIn.isBlockPowered(pos.offset(state.get(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN));
+			boolean flag = worldIn.isReceivingRedstonePower(pos) || worldIn.isReceivingRedstonePower(pos.offset(state.get(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN));
 			if(blockIn != this && flag != state.get(POWERED))
 			{
 				if (flag != state.get(OPEN))
@@ -53,18 +53,18 @@ public class DoorBlock extends net.minecraft.block.DoorBlock
 				worldIn.setBlockState(pos, state.with(POWERED, Boolean.valueOf(flag)).with(OPEN, Boolean.valueOf(flag)), 2);
 			}
     	}
-    	else super.neighborChanged(state, worldIn, pos, blockIn, fromPos, isMoving);
+    	else super.neighborUpdate(state, worldIn, pos, blockIn, fromPos, isMoving);
     }
     
     @Override
-    public ActionResultType onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit)
+    public ActionResult onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
     {
     	if(isSmm2Door())
     	{
 			state = state.cycle(OPEN);
 			worldIn.setBlockState(pos, state, 10);
 			this.playToggleSound(worldIn, pos, state.get(OPEN));
-			return ActionResultType.SUCCESS;
+			return ActionResult.SUCCESS;
     	}
     	return super.onUse(state, worldIn, pos, player, handIn, hit);
     }

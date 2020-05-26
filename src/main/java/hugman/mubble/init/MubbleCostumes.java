@@ -1,9 +1,7 @@
 package hugman.mubble.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hugman.mubble.Mubble;
+import hugman.mubble.init.client.MubbleShaders;
 import hugman.mubble.objects.block.block_state_property.Princess;
 import hugman.mubble.objects.costume.BlockCostume;
 import hugman.mubble.objects.costume.CappyCostume;
@@ -15,21 +13,20 @@ import hugman.mubble.objects.costume.HeadCostume;
 import hugman.mubble.objects.costume.MayroCapCostume;
 import hugman.mubble.objects.costume.VanishCapCostume;
 import hugman.mubble.objects.costume.WingCapCostume;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class MubbleCostumes
-{
-    /* All Content Bag */
-    public static final List<Item> COSTUMES = new ArrayList<Item>();
-
+{	
     /* Templates */
-    protected static final Item.Properties pSimple = new Item.Properties().group(MubbleTabs.COSTUMES).maxStackSize(1);
-    protected static final Item.Properties pBlockDecorations = new Item.Properties().group(ItemGroup.DECORATIONS);
+    protected static final Item.Settings pSimple = new Item.Settings().group(MubbleTabs.COSTUMES).maxCount(1);
+    protected static final Item.Settings pBlockDecorations = new Item.Settings().group(ItemGroup.DECORATIONS);
     
     /* MINECRAFT */
     public static final Item HEADPHONES = register("headphones", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
@@ -55,11 +52,11 @@ public class MubbleCostumes
 
     /* SUPER MARIO */
     public static final Item CAPPY = register("cappy", new CappyCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
-    public static final Item LUIGI_CAP = register("luigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new EffectInstance(Effects.JUMP_BOOST, 5, 0), new EffectInstance(Effects.SPEED, 5, 0)));
-    public static final Item WARIO_CAP = register("wario_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new EffectInstance(Effects.SLOWNESS, 5, 0), new EffectInstance(Effects.STRENGTH, 5, 0)));
-    public static final Item WALUIGI_CAP = register("waluigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new EffectInstance(Effects.JUMP_BOOST, 5, 1)));
+    public static final Item LUIGI_CAP = register("luigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 0), new StatusEffectInstance(StatusEffects.SPEED, 5, 0)));
+    public static final Item WARIO_CAP = register("wario_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new StatusEffectInstance(StatusEffects.SLOWNESS, 5, 0), new StatusEffectInstance(StatusEffects.STRENGTH, 5, 0)));
+    public static final Item WALUIGI_CAP = register("waluigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 1)));
     public static final Item VANISH_CAP = register("vanish_cap", new VanishCapCostume(pSimple));
-    public static final Item WING_CAP = register("wing_cap", new WingCapCostume(pSimple.defaultMaxDamage(600)));
+    public static final Item WING_CAP = register("wing_cap", new WingCapCostume(pSimple.maxDamageIfAbsent(600)));
     public static final Item GOOIGI_CAP = register("gooigi_cap", new GooigiCapCostume(pSimple, SoundEvents.BLOCK_SLIME_BLOCK_PLACE));
     public static final Item GOLD_MARIO_CAP = register("gold_mario_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_GOLD));
     public static final Item SILVER_LUIGI_CAP = register("silver_luigi_cap", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
@@ -90,17 +87,17 @@ public class MubbleCostumes
     public static final Item KID_HAT = register("kid_hat", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER));
 
     /* PUYO PUYO */
-    public static final Item RED_PUYO = register("red_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.RED_PUYO));
-    public static final Item YELLOW_PUYO = register("yellow_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.YELLOW_PUYO));
-    public static final Item GREEN_PUYO = register("green_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.GREEN_PUYO));
-    public static final Item TURQUOISE_PUYO = register("turquoise_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.TURQUOISE_PUYO));
-    public static final Item BLUE_PUYO = register("blue_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.BLUE_PUYO));
-    public static final Item PURPLE_PUYO = register("purple_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.PURPLE_PUYO));
-    public static final Item GRAY_PUYO = register("gray_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.GRAY_PUYO));
-    public static final Item GARBAGE_PUYO = register("garbage_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.GARBAGE_PUYO));
-    public static final Item POINT_PUYO = register("point_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.POINT_PUYO));
-    public static final Item HARD_PUYO = register("hard_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.HARD_PUYO));
-    public static final Item IRON_PUYO = register("iron_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_METAL_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.IRON_PUYO));
+    public static final Item RED_PUYO = register("red_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.RED_PUYO));
+    public static final Item YELLOW_PUYO = register("yellow_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.YELLOW_PUYO));
+    public static final Item GREEN_PUYO = register("green_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.GREEN_PUYO));
+    public static final Item TURQUOISE_PUYO = register("turquoise_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.TURQUOISE_PUYO));
+    public static final Item BLUE_PUYO = register("blue_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.BLUE_PUYO));
+    public static final Item PURPLE_PUYO = register("purple_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.PURPLE_PUYO));
+    public static final Item GRAY_PUYO = register("gray_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.GRAY_PUYO));
+    public static final Item GARBAGE_PUYO = register("garbage_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlot.HEAD, MubbleBlocks.GARBAGE_PUYO));
+    public static final Item POINT_PUYO = register("point_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlot.HEAD, MubbleBlocks.POINT_PUYO));
+    public static final Item HARD_PUYO = register("hard_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlot.HEAD, MubbleBlocks.HARD_PUYO));
+    public static final Item IRON_PUYO = register("iron_puyo", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_METAL_PLACE, EquipmentSlot.HEAD, MubbleBlocks.IRON_PUYO));
     
     /* BALDI'S BASICS IN EDUCATION AND LEARNING */
     public static final Item BALDI_HEAD = register("baldi_head", new HeadCostume(pSimple, SoundEvents.ENTITY_PARROT_IMITATE_VEX));
@@ -110,13 +107,11 @@ public class MubbleCostumes
 
     /* YOUTUBE */
     public static final Item MAYRO_CAP = register("mayro_cap", new MayroCapCostume(pSimple));
-    public static final Item KORETATO_BLOCK = register("koretato_block", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SNOW_PLACE, EquipmentSlotType.HEAD, MubbleBlocks.KORETATO_BLOCK));
+    public static final Item KORETATO_BLOCK = register("koretato_block", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SNOW_PLACE, EquipmentSlot.HEAD, MubbleBlocks.KORETATO_BLOCK));
     public static final Item NOTEBLOCK_HEAD = register("noteblock_head", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
     
     private static Item register(String name, Item item)
     {
-        Item fCostume = item.setRegistryName(Mubble.MOD_ID, name);
-        COSTUMES.add(fCostume);
-        return fCostume;
+    	return Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), item);
     }
 }

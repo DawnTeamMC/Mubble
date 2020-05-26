@@ -1,16 +1,14 @@
-package hugman.mubble.objects.event_handler;
+/*package hugman.mubble.objects.events_handler;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.lwjgl.glfw.GLFW;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screen.DirtMessageScreen;
-import net.minecraft.client.gui.screen.MainMenuScreen;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraftforge.client.event.GuiScreenEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.screen.TitleScreen;
+import net.minecraft.text.LiteralText;
 
 public class KonamiHandler
 {
@@ -65,16 +63,15 @@ public class KonamiHandler
 		return currentNode == konamiCode.length - 1;
 	}
 	
-	@SubscribeEvent
 	public void onKeyPressed(GuiScreenEvent.KeyboardKeyPressedEvent.Post event)
 	{
-		if(event.getGui() instanceof MainMenuScreen)
-		{	
+		if(event.getGui() instanceof TitleScreen)
+		{
 			if(checkKonami(event.getKeyCode()))
 			{
 				// TODO Implement here whatever you want the konami code to do
-				Minecraft.getInstance().displayGuiScreen(new DirtMessageScreen(new StringTextComponent("bruh")));
+				MinecraftClient.getInstance().openScreen(new Screen(new LiteralText("bruh")));
 			}
 		}
 	}
-}
+}*/

@@ -2,42 +2,43 @@ package hugman.mubble.objects.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
+import net.minecraft.block.FacingBlock;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.state.StateManager;
+import net.minecraft.util.BlockMirror;
+import net.minecraft.util.BlockRotation;
+import net.minecraft.util.math.Direction;
 
-public class DirectionalBlock extends net.minecraft.block.DirectionalBlock
+public class DirectionalBlock extends FacingBlock
 {	
 	/* Extension for internal publicity
 	 * + Missing features */
-    public DirectionalBlock(Properties builder)
+    public DirectionalBlock(Settings builder)
     {
         super(builder);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.UP));
+        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP));
     }
     
     @Override
-    public BlockState rotate(BlockState state, Rotation rot)
+    public BlockState rotate(BlockState state, BlockRotation rot)
     {
     	return state.with(FACING, rot.rotate(state.get(FACING)));
 	}
     
     @Override
-	public BlockState mirror(BlockState state, Mirror mirrorIn)
+	public BlockState mirror(BlockState state, BlockMirror mirrorIn)
     {
     	return state.mirror(mirrorIn);
 	}
     
     @Override
-    public BlockState getStateForPlacement(BlockItemUseContext context)
+    public BlockState getPlacementState(ItemPlacementContext context)
     {
-        return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite());
+        return this.getDefaultState().with(FACING, context.getPlayerLookDirection().getOpposite());
     }
     
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder)
+    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
     {
     	builder.add(FACING);
 	}

@@ -14,7 +14,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/blue"
+			"item": "minecraft:blue_dye"
 		}
 	},
 	"result":

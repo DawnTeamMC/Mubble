@@ -4,39 +4,39 @@ import java.util.Random;
 
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.GoToWalkTargetGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.MoveTowardsRestrictionGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
-import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.network.play.server.SEntityVelocityPacket;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class GoombaEntity extends MonsterEntity
+public class GoombaEntity extends MobEntityWithAi
 {
-	private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(ToadEntity.class, DataSerializers.VARINT);
+	private static final TrackedData<Integer> VARIANT = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
 	
     public GoombaEntity(EntityType<? extends GoombaEntity> type, World worldIn) 
     {
@@ -44,45 +44,45 @@ public class GoombaEntity extends MonsterEntity
     }
     
 	@Override
-    protected void registerGoals()
+    protected void initGoals()
     {
-        this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.0D, false));
-        this.goalSelector.addGoal(2, new MoveTowardsRestrictionGoal(this, 1.0D));
-        this.goalSelector.addGoal(3, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(4, new LookAtGoal(this, BeeEntity.class, 10.0F));
-        this.goalSelector.addGoal(4, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(4, new LookRandomlyGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[] {GoombaEntity.class}));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, ToadEntity.class, true));
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.add(2, new GoToWalkTargetGoal(this, 1.0D));
+        this.goalSelector.add(3, new EscapeDangerGoal(this, 1.0D));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, BeeEntity.class, 10.0F));
+        this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(4, new LookAroundGoal(this));
+        this.targetSelector.add(1, new RevengeGoal(this, new Class[] {GoombaEntity.class}));
+        this.targetSelector.add(3, new FollowTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(3, new FollowTargetGoal<>(this, ToadEntity.class, true));
     }
     
     @Override
-    protected void registerAttributes() 
+    protected void initAttributes() 
     {
-        super.registerAttributes();        
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+        super.initAttributes();        
+        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(12.0D);
+        this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
+        this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+        this.getAttributes().register(EntityAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
     }
     
     @Override
-    public float getEyeHeight(Pose pose)
+    public float getEyeHeight(EntityPose pose)
     {
         return 0.375F;
     }
     
     @Override
-    protected SoundEvent getHurtSound(DamageSource source) 
+    protected SoundEvent getHurtSound(DamageSource source)
     {
         return MubbleSounds.ENTITY_GOOMBA_HURT;
     }
     
     @Override
-    protected SoundEvent getDeathSound() 
+    protected SoundEvent getDeathSound()
     {
         return MubbleSounds.ENTITY_GOOMBA_DEATH;
     }
@@ -97,54 +97,54 @@ public class GoombaEntity extends MonsterEntity
 	{
     	 this.playSound(this.getStepSound(), 0.15F, 1.0F);
 	}
-    
-    public int getVariant()
+	
+	public int getVariant()
     {
-    	return this.dataManager.get(VARIANT);
+    	return this.dataTracker.get(VARIANT);
 	}
 
 	public void setVariant(int variantIn)
 	{
-		this.dataManager.set(VARIANT, variantIn);
+		this.dataTracker.set(VARIANT, variantIn);
 	}
 	
 	@Override
-	protected void registerData()
+	protected void initDataTracker()
 	{
-		super.registerData();
-		this.dataManager.register(VARIANT, 0);
+		super.initDataTracker();
+		this.dataTracker.startTracking(VARIANT, 0);
 	}
     
     @Override
-    public void writeAdditional(CompoundNBT compound)
+    public void writeCustomDataToTag(CompoundTag compound)
     {
-        super.writeAdditional(compound);
+        super.writeCustomDataToTag(compound);
         compound.putInt("Variant", this.getVariant());
     }
 
     @Override
-    public void readAdditional(CompoundNBT compound)
+    public void readCustomDataFromTag(CompoundTag compound)
     {
-        super.readAdditional(compound);
+        super.readCustomDataFromTag(compound);
         this.setVariant(compound.getInt("Variant"));
     }
     
     @Override
-    public void onCollideWithPlayer(PlayerEntity playerIn)
+    public void onPlayerCollision(PlayerEntity playerIn)
     {
-    	AxisAlignedBB hitbox = this.getBoundingBox().contract(0, -1, 0).grow(-0.4, 0, -0.4);
-    	Vec3d motion = playerIn.getMotion();
-    	if(!this.world.isRemote() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && motion.y < 0.3D && this.isAlive())
+    	Box hitbox = this.getBoundingBox().shrink(0, -1, 0).expand(-0.4, 0, -0.4);
+    	Vec3d velocity = playerIn.getVelocity();
+    	if(!this.world.isClient() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && velocity.y < 0.3D && this.isAlive())
     	{
-    		playerIn.setMotion(motion.x, 0.5D, motion.z);
-			((ServerPlayerEntity)playerIn).connection.sendPacket(new SEntityVelocityPacket(playerIn));
+    		playerIn.setVelocity(velocity.x, 0.5D, velocity.z);
+			((ServerPlayerEntity) playerIn).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(playerIn));
     		playerIn.fallDistance = 0.0F;
-    		this.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), Float.MAX_VALUE);
-    		this.playSound(MubbleSounds.ENTITY_GOOMBA_CRUSH, this.getSoundVolume(), (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F + 1.0F);
+    		this.damage(DamageSource.player(playerIn), Float.MAX_VALUE);
+    		this.playSound(MubbleSounds.ENTITY_GOOMBA_CRUSH, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
     	}
     }
     
-	public static boolean canSpawn(EntityType<GoombaEntity> entity, IWorld world, SpawnReason reason, BlockPos pos, Random rand)
+	public static boolean canSpawn(EntityType<GoombaEntity> entity, IWorld world, SpawnType reason, BlockPos pos, Random rand)
 	{
 		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}

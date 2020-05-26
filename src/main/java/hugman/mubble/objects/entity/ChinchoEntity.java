@@ -3,33 +3,33 @@ package hugman.mubble.objects.entity;
 import java.util.Random;
 
 import hugman.mubble.init.MubbleSounds;
-import net.minecraft.entity.CreatureAttribute;
+import net.minecraft.entity.EntityGroup;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Pose;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.AvoidEntityGoal;
-import net.minecraft.entity.ai.goal.HurtByTargetGoal;
-import net.minecraft.entity.ai.goal.LookAtGoal;
-import net.minecraft.entity.ai.goal.LookRandomlyGoal;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.ai.goal.EscapeDangerGoal;
+import net.minecraft.entity.ai.goal.FleeEntityGoal;
+import net.minecraft.entity.ai.goal.FollowTargetGoal;
+import net.minecraft.entity.ai.goal.GoToWalkTargetGoal;
+import net.minecraft.entity.ai.goal.LookAroundGoal;
+import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.ai.goal.MoveTowardsRestrictionGoal;
-import net.minecraft.entity.ai.goal.NearestAttackableTargetGoal;
+import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.WaterAvoidingRandomWalkingGoal;
-import net.minecraft.entity.monster.MonsterEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public class ChinchoEntity extends MonsterEntity
+public class ChinchoEntity extends MobEntityWithAi
 {    
     public ChinchoEntity(EntityType<? extends ChinchoEntity> type, World worldIn) 
     {
@@ -37,39 +37,39 @@ public class ChinchoEntity extends MonsterEntity
     }
     
 	@Override
-    protected void registerGoals()
+    protected void initGoals()
     {
-        this.goalSelector.addGoal(0, new SwimGoal(this));
-        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0D, false));
-        this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, OcelotEntity.class, 6.0F, 1.0D, 1.2D));
-        this.goalSelector.addGoal(5, new MoveTowardsRestrictionGoal(this, 1.0D));
-        this.goalSelector.addGoal(7, new WaterAvoidingRandomWalkingGoal(this, 1.0D));
-        this.goalSelector.addGoal(8, new LookAtGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.addGoal(8, new LookRandomlyGoal(this));
-        this.targetSelector.addGoal(1, new HurtByTargetGoal(this, new Class[] {ChinchoEntity.class}));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, ToadEntity.class, true));
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0D, false));
+        this.goalSelector.add(3, new FleeEntityGoal<>(this, OcelotEntity.class, 6.0F, 1.0D, 1.2D));
+        this.goalSelector.add(5, new GoToWalkTargetGoal(this, 1.0D));
+        this.goalSelector.add(7, new EscapeDangerGoal(this, 1.0D));
+        this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(8, new LookAroundGoal(this));
+        this.targetSelector.add(1, new RevengeGoal(this, new Class[] {ChinchoEntity.class}));
+        this.targetSelector.add(3, new FollowTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(3, new FollowTargetGoal<>(this, ToadEntity.class, true));
     }
     
     @Override
-    protected void registerAttributes() 
+    protected void initAttributes()
     {
-        super.registerAttributes();        
-        this.getAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(12.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
-        this.getAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
-        this.getAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
-        this.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
+        super.initAttributes();
+        this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(12.0D);
+        this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+        this.getAttributeInstance(EntityAttributes.FOLLOW_RANGE).setBaseValue(25.0D);
+        this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.3D);
+        this.getAttributes().register(EntityAttributes.ATTACK_DAMAGE).setBaseValue(2.0D);
     }
     
     @Override
-    public CreatureAttribute getCreatureAttribute()
+    public EntityGroup getGroup()
     {
-        return CreatureAttribute.UNDEAD;
+        return EntityGroup.UNDEAD;
     }
     
     @Override
-    public float getEyeHeight(Pose p_213307_1_)
+    public float getEyeHeight(EntityPose pose)
     {
         return 1f;
     }
@@ -80,27 +80,27 @@ public class ChinchoEntity extends MonsterEntity
     }
     
     @Override
-    public void livingTick()
+    public void tickMovement()
     {
-        if (this.world.isDaytime() && !this.world.isRemote && this.shouldBurnInDay())
+        if (this.world.isDay() && !this.world.isClient && this.shouldBurnInDay())
         {
-            float f = this.getBrightness();
+            float f = this.getBrightnessAtEyes();
 
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canBlockSeeSky(new BlockPos(this.getX(), this.getY() + (double)this.getEyeHeight(), this.getZ())))
+            if (f > 0.5F && this.random.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.isSkyVisible(new BlockPos(this.getX(), this.getY() + (double)this.getEyeY(), this.getZ())))
             {
                 boolean flag = true;
-                ItemStack itemstack = this.getItemStackFromSlot(EquipmentSlotType.HEAD);
+                ItemStack itemstack = this.getEquippedStack(EquipmentSlot.HEAD);
 
                 if (!itemstack.isEmpty())
                 {
                     if (itemstack.isDamageable())
                     {
-                        itemstack.setDamage(itemstack.getDamage() + this.rand.nextInt(2));
+                        itemstack.setDamage(itemstack.getDamage() + this.random.nextInt(2));
 
                         if (itemstack.getDamage() >= itemstack.getMaxDamage())
                         {
-                        	this.sendBreakAnimation(EquipmentSlotType.HEAD);
-                            this.setItemStackToSlot(EquipmentSlotType.HEAD, ItemStack.EMPTY);
+                        	this.sendEquipmentBreakStatus(EquipmentSlot.HEAD);
+                            this.equipStack(EquipmentSlot.HEAD, ItemStack.EMPTY);
                         }
                     }
 
@@ -109,12 +109,12 @@ public class ChinchoEntity extends MonsterEntity
 
                 if (flag)
                 {
-                    this.setFire(8);
+                    this.setFireTicks(8);
                 }
             }
         }
 
-        super.livingTick();
+        super.tickMovement();
     }
     
     @Override
@@ -135,7 +135,7 @@ public class ChinchoEntity extends MonsterEntity
         return MubbleSounds.ENTITY_CHINCHO_DEATH;
     }
     
-	public static boolean canSpawn(EntityType<ChinchoEntity> entity, IWorld world, SpawnReason reason, BlockPos pos, Random rand)
+	public static boolean canSpawn(EntityType<ChinchoEntity> entity, IWorld world, SpawnType reason, BlockPos pos, Random rand)
 	{
 		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}

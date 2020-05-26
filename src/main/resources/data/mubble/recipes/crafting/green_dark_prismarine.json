@@ -15,7 +15,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/green"
+			"item": "minecraft:green_dye"
 		}
 	},
 	"result":

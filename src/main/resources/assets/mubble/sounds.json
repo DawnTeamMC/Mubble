@@ -611,6 +611,35 @@
 			"mubble:entity/iceball/throw"
 		]
 	},
+	"entity.kirby_ball.hit.block":
+	{
+		"sounds":
+		[
+			"mubble:entity/kirby_ball/hit/block"
+		]
+	},
+	"entity.kirby_ball.hit.entity":
+	{
+		"sounds":
+		[
+			"mubble:entity/kirby_ball/hit/entity"
+		]
+	},
+	"entity.kirby_ball.rebound":
+	{
+		"sounds":
+		[
+			"mubble:entity/kirby_ball/rebound"
+		]
+	},
+	"entity.kirby_ball.throw":
+	{
+		"subtitle": "subtitles.mubble.entity.kirby_ball.throw",
+		"sounds":
+		[
+			"mubble:entity/kirby_ball/throw"
+		]
+	},
 	"entity.toad.ambient":
 	{
 		"subtitle": "subtitles.mubble.entity.toad.ambient",

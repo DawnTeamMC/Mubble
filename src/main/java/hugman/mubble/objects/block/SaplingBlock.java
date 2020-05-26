@@ -5,24 +5,24 @@ import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.trees.Tree;
+import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.world.BlockView;
 
 public class SaplingBlock extends net.minecraft.block.SaplingBlock
 {
 	/* Extension for internal publicity
 	 * + Missing features */
-    public SaplingBlock(Tree tree)
+    public SaplingBlock(SaplingGenerator tree)
     {
-        super(tree, Properties.from(Blocks.OAK_SAPLING));
+        super(tree, Settings.copy(Blocks.OAK_SAPLING));
     }
     
     @Override
-    protected boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos)
+    protected boolean canPlantOnTop(BlockState state, BlockView worldIn, BlockPos pos)
     {
     	Block block = state.getBlock();
         if(this == MubbleBlocks.PALM_SAPLING) return MubbleTags.Blocks.PALM_SAPLING_VALID_GROUND.contains(block);
-        else return super.isValidGround(state, worldIn, pos);
+        else return super.canPlantOnTop(state, worldIn, pos);
     }
 }

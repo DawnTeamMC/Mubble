@@ -6,61 +6,57 @@ import com.mojang.blaze3d.systems.RenderSystem;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.container.TimeswapTableContainer;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SimpleSound;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@Environment(EnvType.CLIENT)
 public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 {
-	private static final ResourceLocation BACKGROUND_TEXTURE = new ResourceLocation(Mubble.MOD_ID, "textures/gui/container/timeswap_table.png");
+	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");
+	private static final Identifier BACKGROUND_TEXTURE = new Identifier(Mubble.MOD_ID, "textures/gui/container/timeswap_table.png");
 	private float sliderProgress;
 	private boolean clickedOnSroll;
 	private int recipeIndexOffset;
 	private boolean hasItemsInInputSlot;
 
-	public TimeswapTableScreen(TimeswapTableContainer containerIn, PlayerInventory playerInv, ITextComponent titleIn)
+	public TimeswapTableScreen(TimeswapTableContainer containerIn, PlayerInventory playerInv, Text titleIn)
 	{
 		super(containerIn, playerInv, titleIn);
 		containerIn.setInventoryUpdateListener(this::onInventoryUpdate);
 	}
 
-	@Override
-	public void render(int p_render_1_, int p_render_2_, float p_render_3_)
-	{
-		super.render(p_render_1_, p_render_2_, p_render_3_);
-		this.renderHoveredToolTip(p_render_1_, p_render_2_);
+	public void render(int mouseX, int mouseY, float delta) {
+		super.render(mouseX, mouseY, delta);
+		this.drawMouseoverTooltip(mouseX, mouseY);
 	}
 	
-	@Override
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
-	{
-		this.font.drawString(this.title.getFormattedText(), 8.0F, 4.0F, 4210752);
-		this.font.drawString(this.playerInventory.getDisplayName().getFormattedText(), 8.0F, (float) (this.ySize - 94), 4210752);
+	protected void drawForeground(int mouseX, int mouseY) {
+		this.font.draw(CONTAINER_NAME.asFormattedString(), 8.0F, 4.0F, 4210752);
+		this.font.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float) (this.containerHeight - 94), 4210752);
 	}
 
-	@Override
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY)
-	{
+	protected void drawBackground(float partialTicks, int mouseX, int mouseY) {
 		this.renderBackground();
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
-		int i = this.guiLeft;
-		int j = this.guiTop;
-		this.blit(i, j, 0, 0, this.xSize, this.ySize);
+		int i = this.x;
+		int j = this.y;
+		this.blit(i, j, 0, 0, this.containerWidth, this.containerHeight);
 		int k = (int) (41.0F * this.sliderProgress);
 		this.blit(i + 119, j + 15 + k, 176 + (this.canScroll() ? 0 : 12), 0, 12, 15);
-		int l = this.guiLeft + 52;
-		int i1 = this.guiTop + 14;
+		int l = this.x + 52;
+		int i1 = this.y + 14;
 		int j1 = this.recipeIndexOffset + 12;
 		this.drawRecipesBackground(mouseX, mouseY, l, i1, j1);
 		this.drawRecipesItems(l, i1, j1);
@@ -74,9 +70,8 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 			int k = left + j % 4 * 16;
 			int l = j / 4;
 			int i1 = top + l * 18 + 2;
-			int j1 = this.ySize;
-			if(i == this.container.getSelectedOutputItem())
-			{
+			int j1 = this.containerHeight;
+			if (i == this.container.getSelectedOutputItem()) {
 				j1 += 18;
 			}
 			else if(mouseX >= k && mouseY >= i1 && mouseX < k + 16 && mouseY < i1 + 18)
@@ -89,8 +84,7 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 
 	}
 
-	private void drawRecipesItems(int left, int top, int recipeIndexOffsetMax)
-	{
+	private void drawRecipesItems(int left, int top, int recipeIndexOffsetMax) {
 		List<Item> list = this.container.getOutputItemsList();
 
 		for (int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.container.getOutputItemsListSize(); ++i)
@@ -99,17 +93,16 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 			int k = left + j % 4 * 16;
 			int l = j / 4;
 			int i1 = top + l * 18 + 2;
-			this.minecraft.getItemRenderer().renderItemAndEffectIntoGUI(new ItemStack(list.get(i)), k, i1);
+			this.minecraft.getItemRenderer().renderGuiItem(new ItemStack(list.get(i)), k, i1);
 		}
 	}
 
 	public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_)
 	{
 		this.clickedOnSroll = false;
-		if (this.hasItemsInInputSlot)
-		{
-			int i = this.guiLeft + 52;
-			int j = this.guiTop + 14;
+		if (this.hasItemsInInputSlot) {
+			int i = this.x + 52;
+			int j = this.y + 14;
 			int k = this.recipeIndexOffset + 12;
 
 			for(int l = this.recipeIndexOffset; l < k; ++l)
@@ -117,18 +110,18 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 				int i1 = l - this.recipeIndexOffset;
 				double d0 = p_mouseClicked_1_ - (double) (i + i1 % 4 * 16);
 				double d1 = p_mouseClicked_3_ - (double) (j + i1 / 4 * 18);
-				if(d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && this.container.enchantItem(this.minecraft.player, l))
-				{
-					Minecraft.getInstance().getSoundHandler().play(SimpleSound.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
-					this.minecraft.playerController.sendEnchantPacket((this.container).windowId, l);
+				if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D
+						&& this.container.onButtonClick(this.minecraft.player, l)) {
+					MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
+					this.minecraft.interactionManager.clickButton((this.container).syncId, l);
 					return true;
 				}
 			}
 
-			i = this.guiLeft + 119;
-			j = this.guiTop + 9;
-			if(p_mouseClicked_1_ >= (double) i && p_mouseClicked_1_ < (double) (i + 12) && p_mouseClicked_3_ >= (double) j && p_mouseClicked_3_ < (double) (j + 54))
-			{
+			i = this.x + 119;
+			j = this.y + 9;
+			if (p_mouseClicked_1_ >= (double) i && p_mouseClicked_1_ < (double) (i + 12)
+					&& p_mouseClicked_3_ >= (double) j && p_mouseClicked_3_ < (double) (j + 54)) {
 				this.clickedOnSroll = true;
 			}
 		}
@@ -136,11 +129,9 @@ public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
 		return super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
 	}
 
-	public boolean mouseDragged(double p_mouseDragged_1_, double p_mouseDragged_3_, int p_mouseDragged_5_, double p_mouseDragged_6_, double p_mouseDragged_8_)
-	{
-		if(this.clickedOnSroll && this.canScroll())
-		{
-			int i = this.guiTop + 14;
+	public boolean mouseDragged(double p_mouseDragged_1_, double p_mouseDragged_3_, int p_mouseDragged_5_, double p_mouseDragged_6_, double p_mouseDragged_8_) {
+		if (this.clickedOnSroll && this.canScroll()) {
+			int i = this.y + 14;
 			int j = i + 54;
 			this.sliderProgress = ((float) p_mouseDragged_3_ - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
 			this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);

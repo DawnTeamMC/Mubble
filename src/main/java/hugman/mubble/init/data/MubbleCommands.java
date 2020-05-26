@@ -1,35 +1,21 @@
 package hugman.mubble.init.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.mojang.brigadier.CommandDispatcher;
-
 import hugman.mubble.objects.command.FoodbarCommand;
 import hugman.mubble.objects.command.HealthCommand;
-import hugman.mubble.objects.command.ICommand;
 import hugman.mubble.objects.command.MotionCommand;
-import net.minecraft.command.CommandSource;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 
 public class MubbleCommands
 {
-    public static final List<ICommand> COMMANDS = new ArrayList<ICommand>();
-
-    public static final ICommand HEALTH = register(new HealthCommand());
-    public static final ICommand MOTION = register(new MotionCommand());
-    public static final ICommand FOODBAR = register(new FoodbarCommand());
-    
-    private static ICommand register(ICommand command)
+    public static void init()
     {
-    	COMMANDS.add(command);
-    	return command;
+    	// Health
+    	CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> HealthCommand.register(dispatcher));
+    	
+    	// Motion
+    	CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> MotionCommand.register(dispatcher));
+    	
+    	// Foodbar
+    	CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> FoodbarCommand.register(dispatcher));
     }
-    
-    public static void registerCommands(CommandDispatcher<CommandSource> dispatcher)
-    {
-    	for(ICommand command : COMMANDS)
-    	{
-    		command.register(dispatcher);
-    	}
-	}
 }

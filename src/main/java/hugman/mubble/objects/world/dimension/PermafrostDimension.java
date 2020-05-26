@@ -2,80 +2,89 @@ package hugman.mubble.objects.world.dimension;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.world.MubbleBiomes;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.provider.BiomeProvider;
-import net.minecraft.world.biome.provider.BiomeProviderType;
+import net.minecraft.world.biome.source.BiomeSourceType;
+import net.minecraft.world.biome.source.FixedBiomeSource;
 import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.dimension.Dimension;
 import net.minecraft.world.dimension.DimensionType;
-import net.minecraft.world.gen.ChunkGenerator;
-import net.minecraft.world.gen.ChunkGeneratorType;
-import net.minecraft.world.gen.EndGenerationSettings;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraft.world.gen.chunk.ChunkGenerator;
+import net.minecraft.world.gen.chunk.ChunkGeneratorType;
+import net.minecraft.world.gen.chunk.FloatingIslandsChunkGeneratorConfig;
 
 public class PermafrostDimension extends Dimension
-{	
-	public PermafrostDimension(World worldIn, DimensionType typeIn) 
+{
+	private final DimensionType type;
+	
+	public PermafrostDimension(World world, DimensionType type)
 	{
-		super(worldIn, typeIn, 0.1F);
+		super(world, type, 0.1F);
+		this.type = type;
+		
+		for(int i = 0; i <= 15; ++i)
+		{
+			float f1 = 1.0F - (float)i / 15.0F;
+			this.lightLevelToBrightness[i] = (1.0F - f1) / (f1 * 3.0F + 1.0F) * 0.9F + 0.1F;
+		}
 	}
 	
 	@Override
 	public ChunkGenerator<?> createChunkGenerator()
 	{
-		EndGenerationSettings settings = ChunkGeneratorType.FLOATING_ISLANDS.createSettings();
+		FloatingIslandsChunkGeneratorConfig settings = ChunkGeneratorType.FLOATING_ISLANDS.createSettings();
 		settings.setDefaultBlock(MubbleBlocks.PERMAROCK.getDefaultState());
 		settings.setDefaultFluid(Blocks.WATER.getDefaultState());
 		
-		BiomeProvider biomeProvider = BiomeProviderType.FIXED.create(BiomeProviderType.FIXED.getConfig(world.getWorldInfo()).setBiome(MubbleBiomes.PERMAFROST));
+		FixedBiomeSource biomeProvider = BiomeSourceType.FIXED.applyConfig(BiomeSourceType.FIXED.getConfig(this.world.getLevelProperties()).setBiome(MubbleBiomes.PERMAFROST));
 		
 		return ChunkGeneratorType.FLOATING_ISLANDS.create(this.world, biomeProvider, settings);
 	}
 	
 	@Override
-	public BlockPos findSpawn(ChunkPos chunkPosIn, boolean checkValid)
+	public BlockPos getSpawningBlockInChunk(ChunkPos chunkPosIn, boolean checkValid)
 	{
 		return null;
 	}
 	
 	@Override
-	public BlockPos findSpawn(int posX, int posZ, boolean checkValid)
+	public BlockPos getTopSpawningBlockPosition(int posX, int posZ, boolean checkValid)
 	{
 		return null;
 	}
 	
 	@Override
-	public float calculateCelestialAngle(long worldTime, float partialTicks)
+	public float getSkyAngle(long worldTime, float partialTicks)
 	{
 		return 0.5f;
 	}
 	
 	@Override
-	public boolean isSurfaceWorld()
+	public boolean hasVisibleSky()
 	{
 		return false;
 	}
 	
 	@Override
-	@OnlyIn(Dist.CLIENT)
+	@Environment(EnvType.CLIENT)
 	public Vec3d getFogColor(float celestialAngle, float partialTicks)
 	{
-		return new Vec3d((double)0.03F, (double)0.2F, (double)0.2F);
+		return new Vec3d((double) 0.03F, (double) 0.2F, (double) 0.2F);
 	}
 	
 	@Override
-	public boolean canRespawnHere()
+	public boolean canPlayersSleep()
 	{
 		return false;
 	}
 	
 	@Override
-	public boolean doesXZShowFog(int x, int z)
+	public boolean isFogThick(int x, int z)
 	{
 		return true;
 	}
@@ -95,5 +104,11 @@ public class PermafrostDimension extends Dimension
 				return super.getCenterZ() / 8.0D;
 			}
 		};
+	}
+	
+	@Override
+	public DimensionType getType()
+	{
+		return this.type;
 	}
 }

@@ -1,8 +1,8 @@
 package hugman.mubble.objects.block.block_state_property;
 
-import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.StringIdentifiable;
 
-public enum Princess implements IStringSerializable
+public enum Princess implements StringIdentifiable
 {
 	NONE("none"),
 	PEACH("peach"),
@@ -20,7 +20,7 @@ public enum Princess implements IStringSerializable
 		return this.name;
 	}
 
-	public String getName()
+	public String asString()
 	{
 		return this.name;
 	}

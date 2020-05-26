@@ -5,40 +5,36 @@ import java.util.Random;
 import hugman.mubble.init.data.MubbleBlockStateProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.StateContainer.Builder;
-import net.minecraft.util.Direction;
+import net.minecraft.block.Material;
+import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateManager.Builder;
+import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.IWorldReader;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraftforge.common.IPlantable;
 
 public class OverBlock extends Block
 {
 	public static final BooleanProperty OVER = MubbleBlockStateProperties.OVER;
 	
-    public OverBlock(Block.Properties builder)
+    public OverBlock(Block.Settings builder)
     {
         super(builder);
         this.setDefaultState(this.getDefaultState().with(OVER, false));
     }
     
     @Override
-    protected void fillStateContainer(Builder<Block, BlockState> builder)
+    protected void appendProperties(Builder<Block, BlockState> builder)
     {
     	builder.add(OVER);
     }
 	
 	@Override
-	public BlockState getStateForPlacement(BlockItemUseContext context)
+	public BlockState getPlacementState(ItemPlacementContext context)
 	{
-		if(isFaceAboveSolid(context.getWorld(), context.getPos()))
+		if(isFaceAboveSolid(context.getWorld(), context.getBlockPos()))
 		{
 			return this.getDefaultState().with(OVER, false);
 		}
@@ -51,7 +47,7 @@ public class OverBlock extends Block
 	@Override
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random)
 	{
-		if(!world.isRemote)
+		if(!world.isClient)
 		{
 			if(state.get(OVER) && isFaceAboveSolid(world, pos))
 			{
@@ -61,9 +57,9 @@ public class OverBlock extends Block
 	}
 	
 	@Override
-	public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
+	public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
 	{
-		if(!worldIn.isRemote)
+		if(!worldIn.isClient)
 		{
 			boolean flag = state.get(OVER);
 			if(flag != !isFaceAboveSolid(worldIn, pos))
@@ -81,29 +77,19 @@ public class OverBlock extends Block
 	}
 	
 	@Override
-	public SoundType getSoundType(BlockState state, IWorldReader world, BlockPos pos, Entity entity)
+	public BlockSoundGroup getSoundGroup(BlockState state)
 	{
 		if(state.getMaterial() == Material.EARTH)
 		{
 			if(state.get(OVER))
 			{
-				return SoundType.PLANT;
+				return BlockSoundGroup.GRASS;
 			}
 			else
 			{
-				return SoundType.GROUND;
+				return BlockSoundGroup.STONE;
 			}
 		}
-		return super.getSoundType(state, world, pos, entity);
-	}
-	
-	@Override
-	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing, IPlantable plantable)
-	{
-		if(state.getMaterial() == Material.EARTH)
-		{
-			return true;
-		}
-		return super.canSustainPlant(state, world, pos, facing, plantable);
+		return super.getSoundGroup(state);
 	}
 }

@@ -2,11 +2,12 @@ package hugman.mubble.init.data;
 
 import java.util.function.Supplier;
 
-import net.minecraft.item.IItemTier;
-import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.util.LazyValue;
+import hugman.mubble.init.data.MubbleTags;
+import net.minecraft.item.ToolMaterial;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.util.Lazy;
 
-public enum MubbleItemTiers implements IItemTier
+public enum MubbleItemTiers implements ToolMaterial
 {
 	VANADIUM(3, 1756, 10.0F, 3.5F, 12, () ->
 	{
@@ -25,7 +26,7 @@ public enum MubbleItemTiers implements IItemTier
 	private final float efficiency;
 	private final float attackDamage;
 	private final int enchantability;
-	private final LazyValue<Ingredient> repairMaterial;
+	private final Lazy<Ingredient> repairMaterial;
 
 	private MubbleItemTiers(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn)
 	{
@@ -34,15 +35,15 @@ public enum MubbleItemTiers implements IItemTier
 		this.efficiency = efficiencyIn;
 		this.attackDamage = attackDamageIn;
 		this.enchantability = enchantabilityIn;
-		this.repairMaterial = new LazyValue<>(repairMaterialIn);
+		this.repairMaterial = new Lazy<>(repairMaterialIn);
 	}
 
-	public int getMaxUses()
+	public int getDurability()
 	{
 		return this.maxUses;
 	}
 
-	public float getEfficiency()
+	public float getMiningSpeed()
 	{
 		return this.efficiency;
 	}
@@ -52,7 +53,7 @@ public enum MubbleItemTiers implements IItemTier
 		return this.attackDamage;
 	}
 
-	public int getHarvestLevel()
+	public int getMiningLevel()
 	{
 		return this.harvestLevel;
 	}
@@ -62,8 +63,8 @@ public enum MubbleItemTiers implements IItemTier
 		return this.enchantability;
 	}
 
-	public Ingredient getRepairMaterial()
+	public Ingredient getRepairIngredient()
 	{
-		return this.repairMaterial.getValue();
+		return this.repairMaterial.get();
 	}
 }

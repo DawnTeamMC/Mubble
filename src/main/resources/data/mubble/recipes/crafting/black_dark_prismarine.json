@@ -15,7 +15,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/black"
+			"item": "minecraft:black_dye"
 		}
 	},
 	"result":

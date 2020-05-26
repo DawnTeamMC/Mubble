@@ -1,54 +1,86 @@
 package hugman.mubble.objects.entity.render;
 
-import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.platform.GlStateManager;
 
 import hugman.mubble.objects.entity.CustomTNTEntity;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.renderer.IRenderTypeBuffer;
-import net.minecraft.client.renderer.Vector3f;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.TNTMinecartRenderer;
-import net.minecraft.inventory.container.PlayerContainer;
-import net.minecraft.util.ResourceLocation;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.block.BlockRenderManager;
+import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.texture.SpriteAtlasTexture;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
-@OnlyIn(Dist.CLIENT)
+@Environment(EnvType.CLIENT)
 public class CustomTNTRenderer extends EntityRenderer<CustomTNTEntity>
 {
-	public CustomTNTRenderer(EntityRendererManager renderManagerIn)
+	public CustomTNTRenderer(EntityRenderDispatcher dispatcher)
 	{
-		super(renderManagerIn);
+		super(dispatcher);
 		this.shadowSize = 0.5F;
 	}
 	
 	@Override
-	public void render(CustomTNTEntity entity, float p_225623_2_, float p_225623_3_, MatrixStack matrix, IRenderTypeBuffer buffer, int p_225623_6_)
+	public void render(CustomTNTEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light)
 	{
-		matrix.push();
-		matrix.translate(0.0D, 0.5D, 0.0D);
-		if ((float) entity.getFuse() - p_225623_3_ + 1.0F < 10.0F) {
-			float f = 1.0F - ((float) entity.getFuse() - p_225623_3_ + 1.0F) / 10.0F;
+		BlockState blockState = entity.getBlockState();
+		BlockRenderManager blockrendererdispatcher = MinecraftClient.getInstance().getBlockRenderManager();
+		GlStateManager.pushMatrix();
+		GlStateManager.translatef((float) entity.getX(), (float) entity.getY() + 0.5F, (float) entity.getZ());
+		if ((float)entity.getFuse() - partialTicks + 1.0F < 10.0F)
+		{
+			float f = 1.0F - ((float)entity.getFuse() - partialTicks + 1.0F) / 10.0F;
 			f = MathHelper.clamp(f, 0.0F, 1.0F);
 			f = f * f;
 			f = f * f;
 			float f1 = 1.0F + f * 0.3F;
-			matrix.scale(f1, f1, f1);
+			GlStateManager.scalef(f1, f1, f1);
 		}
 
-		matrix.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-90.0F));
-		matrix.translate(-0.5D, -0.5D, 0.5D);
-		matrix.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90.0F));
-		TNTMinecartRenderer.func_229127_a_(Blocks.TNT.getDefaultState(), matrix, buffer, p_225623_6_, entity.getFuse() / 5 % 2 == 0);
-		matrix.pop();
-		super.render(entity, p_225623_2_, p_225623_3_, matrix, buffer, p_225623_6_);
+		float f2 = (1.0F - ((float)entity.getFuse() - partialTicks + 1.0F) / 100.0F) * 0.8F;
+		this.getTexture(entity);
+		GlStateManager.rotatef(-90.0F, 0.0F, 1.0F, 0.0F);
+		GlStateManager.translatef(-0.5F, -0.5F, 0.5F);
+		blockrendererdispatcher.renderBlockAsEntity(blockState, matrixStack, vertexConsumerProvider, light, (int) entity.getBrightnessAtEyes());
+		GlStateManager.translatef(0.0F, 0.0F, 1.0F);
+		if (this.getRenderManager().shouldRenderHitboxes())
+		{
+			GlStateManager.enableColorMaterial();
+			GlStateManager.setupOverlayColor(entity.getTeamColorValue(), 1);
+			blockrendererdispatcher.renderBlockAsEntity(blockState, matrixStack, vertexConsumerProvider, light, 1);
+			GlStateManager.teardownOverlayColor();
+			GlStateManager.disableColorMaterial();
+		}
+		else if (entity.getFuse() / 5 % 2 == 0)
+		{
+			GlStateManager.disableTexture();
+			GlStateManager.disableLighting();
+			GlStateManager.enableBlend();
+			GlStateManager.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA.value, GlStateManager.DstFactor.DST_ALPHA.value);
+			GlStateManager.color4f(1.0F, 1.0F, 1.0F, f2);
+			GlStateManager.polygonOffset(-3.0F, -3.0F);
+			GlStateManager.enablePolygonOffset();
+			blockrendererdispatcher.renderBlockAsEntity(blockState, matrixStack, vertexConsumerProvider, light, 1);
+			GlStateManager.polygonOffset(0.0F, 0.0F);
+			GlStateManager.disablePolygonOffset();
+			GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.disableBlend();
+			GlStateManager.enableLighting();
+			GlStateManager.enableTexture();
+		}
+
+		GlStateManager.popMatrix();
+		super.render(entity, entityYaw, partialTicks, matrixStack, vertexConsumerProvider, light);
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(CustomTNTEntity entity)
+	public Identifier getTexture(CustomTNTEntity entity)
 	{
-		return PlayerContainer.BLOCK_ATLAS_TEXTURE;
+		return SpriteAtlasTexture.BLOCK_ATLAS_TEX;
 	}
 }

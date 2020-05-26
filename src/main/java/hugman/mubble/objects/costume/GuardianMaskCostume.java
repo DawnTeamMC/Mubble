@@ -1,27 +1,28 @@
 package hugman.mubble.objects.costume;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.world.World;
 
 public class GuardianMaskCostume extends HeadCostume
 {    
-    public GuardianMaskCostume(Item.Properties builder)
+    public GuardianMaskCostume(Item.Settings builder)
     {
         super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
     }
     
     @Override
-    public void onArmorTick(ItemStack stack, World world, PlayerEntity player)
+    public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks)
     {
-    	if(player.isSneaking() && player.getCooldownTracker().getCooldown(this, 0) == 0)
+    	if(player.isSneaking() && ((PlayerEntity) player).getItemCooldownManager().getCooldownProgress(this, 0) == 0)
     	{
-    		player.getCooldownTracker().setCooldown(this, 25);
-    		player.addStat(Stats.ITEM_USED.get(this));
+    		((PlayerEntity) player).getItemCooldownManager().set(this, 25);
+    		((PlayerEntity) player).incrementStat(Stats.USED.getOrCreateStat(this));
     	}
-    	super.onArmorTick(stack, world, player);
+    	super.usageTick(world, player, stack, remainingUseTicks);
     }
 }

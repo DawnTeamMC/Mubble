@@ -5,25 +5,25 @@ import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.objects.block.PresentBlock;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.ChestBlockEntity;
+import net.minecraft.block.entity.LockableContainerBlockEntity;
+import net.minecraft.container.Container;
+import net.minecraft.container.ContainerType;
+import net.minecraft.container.GenericContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.ItemStackHelper;
-import net.minecraft.inventory.container.ChestContainer;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.tileentity.ChestTileEntity;
-import net.minecraft.tileentity.LockableLootTileEntity;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.DefaultedList;
 
-public class PresentTileEntity extends LockableLootTileEntity
+public class PresentTileEntity extends LockableContainerBlockEntity
 {
-	private NonNullList<ItemStack> content = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
+	private DefaultedList<ItemStack> content = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
 	private int numPlayersUsing;
 	
 	public PresentTileEntity()
@@ -32,35 +32,35 @@ public class PresentTileEntity extends LockableLootTileEntity
 	}
 	
 	@Override
-	public CompoundNBT write(CompoundNBT compound)
+	public CompoundTag toTag(CompoundTag compound)
 	{
-		super.write(compound);
-		if(!this.checkLootAndWrite(compound))
+		super.toTag(compound);
+		if(!this.isInvEmpty())
 		{
-			ItemStackHelper.saveAllItems(compound, this.content);
+			Inventories.toTag(compound, this.content);
 		}
 		return compound;
 	}
 	
 	@Override
-	public void read(CompoundNBT compound)
+	public void fromTag(CompoundTag compound)
 	{
-		super.read(compound);
-		this.content = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-		if(!this.checkLootAndRead(compound))
+		super.fromTag(compound);
+		this.content = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
+		if(!this.isInvEmpty())
 		{
-			ItemStackHelper.loadAllItems(compound, this.content);
+			Inventories.fromTag(compound, this.content);
 		}
 	}
 	
 	@Override
-	public int getSizeInventory()
+	public int getInvSize()
 	{
 		return 9 * 2;
 	}
 	
 	@Override
-	public boolean isEmpty()
+	public boolean isInvEmpty()
 	{
 		for(ItemStack itemstack : this.content)
 		{
@@ -74,32 +74,32 @@ public class PresentTileEntity extends LockableLootTileEntity
 	}
 	
 	@Override
-	public ItemStack getStackInSlot(int index)
+	public ItemStack getInvStack(int index)
 	{
 		return this.content.get(index);
 	}
 	
 	@Override
-	public ItemStack decrStackSize(int index, int count)
+	public ItemStack takeInvStack(int index, int count)
 	{
 		this.scheduleTick();
-		return ItemStackHelper.getAndSplit(this.content, index, count);
+		return Inventories.splitStack(this.content, index, count);
 	}
 	
 	@Override
-	public ItemStack removeStackFromSlot(int index)
+	public ItemStack removeInvStack(int index)
 	{
 		this.scheduleTick();
-		return ItemStackHelper.getAndRemove(this.content, index);
+		return Inventories.removeStack(this.content, index);
 	}
 	
 	@Override
-	public void setInventorySlotContents(int index, ItemStack stack)
+	public void setInvStack(int index, ItemStack stack)
 	{
 		this.content.set(index, stack);
-		if(stack.getCount() > this.getInventoryStackLimit())
+		if(stack.getCount() > this.getInvMaxStackAmount())
 		{
-			stack.setCount(this.getInventoryStackLimit());
+			stack.setCount(this.getInvMaxStackAmount());
 		}
 		this.scheduleTick();
 	}
@@ -111,31 +111,19 @@ public class PresentTileEntity extends LockableLootTileEntity
 	}
 	
 	@Override
-	protected NonNullList<ItemStack> getItems()
+	protected Text getContainerName()
 	{
-		return this.content;
+		return new TranslatableText("container." + Mubble.MOD_ID + ".present");
 	}
 	
 	@Override
-	protected void setItems(NonNullList<ItemStack> itemsIn)
+	protected Container createContainer(int id, PlayerInventory player)
 	{
-		this.content = itemsIn;
+		return new GenericContainer(ContainerType.GENERIC_9X2, id, player, this, 2);
 	}
 	
 	@Override
-	protected ITextComponent getDefaultName()
-	{
-		return new TranslationTextComponent("container." + Mubble.MOD_ID + ".present");
-	}
-	
-	@Override
-	protected Container createMenu(int id, PlayerInventory player)
-	{
-		return new ChestContainer(ContainerType.GENERIC_9X2, id, player, this, 2);
-	}
-	
-	@Override
-	public void openInventory(PlayerEntity player)
+	public void onInvOpen(PlayerEntity player)
 	{
 		if(!player.isSpectator())
 		{
@@ -145,7 +133,7 @@ public class PresentTileEntity extends LockableLootTileEntity
 			}
 			++this.numPlayersUsing;
 			
-			BlockState blockstate = this.getBlockState();
+			BlockState blockstate = this.getCachedState();
 			boolean flag1 = blockstate.get(PresentBlock.OPEN);
 			boolean flag2 = blockstate.get(PresentBlock.EMPTY);
 			if(!flag1)
@@ -162,7 +150,7 @@ public class PresentTileEntity extends LockableLootTileEntity
 	
 	private void scheduleTick()
 	{
-		this.world.getPendingBlockTicks().scheduleTick(this.getPos(), this.getBlockState().getBlock(), 5);
+		this.world.getBlockTickScheduler().schedule(this.getPos(), this.getCachedState().getBlock(), 5);
 	}
 	
 	public void presentTick()
@@ -171,11 +159,11 @@ public class PresentTileEntity extends LockableLootTileEntity
 		int j = this.pos.getY();
 		int k = this.pos.getZ();
 		
-		this.numPlayersUsing = ChestTileEntity.calculatePlayersUsing(this.world, this, i, j, k);
+		this.numPlayersUsing = ChestBlockEntity.countViewers(this.world, this, i, j, k);
 		
-		BlockState blockstate = this.getBlockState();
+		BlockState blockstate = this.getCachedState();
 		boolean flag1 = blockstate.get(PresentBlock.OPEN);
-		boolean flag2 = this.isEmpty();
+		boolean flag2 = this.isInvEmpty();
 
 		this.setEmptyProperty(blockstate, flag2);
 		if(this.numPlayersUsing > 0)
@@ -186,7 +174,7 @@ public class PresentTileEntity extends LockableLootTileEntity
 		{
 			if(!(blockstate.getBlock() instanceof PresentBlock))
 			{
-				this.remove();
+				this.markRemoved();
 				return;
 			}
 			if(flag1)
@@ -201,7 +189,7 @@ public class PresentTileEntity extends LockableLootTileEntity
 	} 
 	
 	@Override
-	public void closeInventory(PlayerEntity player)
+	public void onInvClose(PlayerEntity player)
 	{
 		if(!player.isSpectator())
 		{
@@ -224,6 +212,11 @@ public class PresentTileEntity extends LockableLootTileEntity
 		double d0 = (double) this.pos.getX() + 0.5D;
 		double d1 = (double) this.pos.getY() + 0.5D;
 		double d2 = (double) this.pos.getZ() + 0.5D;
-		this.world.playSound((PlayerEntity)null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+		this.world.playSound((PlayerEntity) null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+	}
+
+	@Override
+	public boolean canPlayerUseInv(PlayerEntity player) {
+		return true;
 	}
 }

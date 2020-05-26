@@ -3,24 +3,24 @@ package hugman.mubble.objects.entity.render;
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.ChinchoEntity;
 import hugman.mubble.objects.entity.render.model.ChinchoModel;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.minecraft.client.render.entity.EntityRenderDispatcher;
+import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.util.Identifier;
 
-@OnlyIn(Dist.CLIENT)
-public class ChinchoRenderer extends MobRenderer<ChinchoEntity, ChinchoModel<ChinchoEntity>>
+@Environment(EnvType.CLIENT)
+public class ChinchoRenderer extends MobEntityRenderer<ChinchoEntity, ChinchoModel<ChinchoEntity>>
 {
-    private static final ResourceLocation CHINCHO_TEXTURES = new ResourceLocation(Mubble.MOD_ID + ":textures/entity/chincho.png");
+    private static final Identifier CHINCHO_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/chincho.png");
 	
-	public ChinchoRenderer(EntityRendererManager manager)
+	public ChinchoRenderer(EntityRenderDispatcher dispatcher)
 	{
-		super(manager, new ChinchoModel<>(), 0.5F);
+		super(dispatcher, new ChinchoModel<>(), 0.5F);
 	}
 	
 	@Override
-	public ResourceLocation getEntityTexture(ChinchoEntity entity)
+	public Identifier getTexture(ChinchoEntity entity)
     {
 		return CHINCHO_TEXTURES;
     }

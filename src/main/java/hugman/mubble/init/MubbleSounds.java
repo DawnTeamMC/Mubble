@@ -1,16 +1,12 @@
 package hugman.mubble.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hugman.mubble.Mubble;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class MubbleSounds 
-{	
-	public static final List<SoundEvent> SOUNDS = new ArrayList<SoundEvent>();
-
+{
 	public static final SoundEvent BLOCK_PRESENT_CLOSE = register("block.present.close");
 	public static final SoundEvent BLOCK_PRESENT_OPEN = register("block.present.open");
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB = register("block.question_block.loot.power_up.smb");
@@ -94,6 +90,10 @@ public class MubbleSounds
 	public static final SoundEvent ENTITY_ICEBALL_HIT_BLOCK = register("entity.iceball.hit.block");
 	public static final SoundEvent ENTITY_ICEBALL_HIT_ENTITY = register("entity.iceball.hit.entity");
 	public static final SoundEvent ENTITY_ICEBALL_THROW = register("entity.iceball.throw");
+	public static final SoundEvent ENTITY_KIRBY_BALL_HIT_BLOCK = register("entity.kirby_ball.hit.block");
+	public static final SoundEvent ENTITY_KIRBY_BALL_HIT_ENTITY = register("entity.kirby_ball.hit.entity");
+	public static final SoundEvent ENTITY_KIRBY_BALL_REBOUND = register("entity.kirby_ball.rebound");
+	public static final SoundEvent ENTITY_KIRBY_BALL_THROW = register("entity.kirby_ball.throw");
 	public static final SoundEvent ENTITY_TOAD_AMBIENT = register("entity.toad.ambient");
 	public static final SoundEvent ENTITY_TOAD_BUP = register("entity.toad.bup");
 	public static final SoundEvent ENTITY_TOAD_HURT = register("entity.toad.hurt");
@@ -141,9 +141,7 @@ public class MubbleSounds
 	
 	private static SoundEvent register(String name)
 	{
-		ResourceLocation path = new ResourceLocation(Mubble.MOD_ID, name);
-		SoundEvent sound = new SoundEvent(path).setRegistryName(path);
-		SOUNDS.add(sound);
-		return sound;
+		Identifier path = new Identifier(Mubble.MOD_ID, name);
+		return Registry.register(Registry.SOUND_EVENT, path, new SoundEvent(path));
 	}
 }

@@ -4,17 +4,16 @@ import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.objects.entity.DuckEntity;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityCategory;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
-import net.minecraft.world.gen.GenerationStage;
-import net.minecraft.world.gen.GenerationStage.Decoration;
+import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
+import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
-import net.minecraft.world.gen.placement.AtSurfaceWithExtraConfig;
-import net.minecraft.world.gen.placement.CountRangeConfig;
-import net.minecraft.world.gen.placement.Placement;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class MubbleGenerators
 {
@@ -24,40 +23,41 @@ public class MubbleGenerators
 	
 	public static void registerOres()
 	{
-		for(Biome biome : ForgeRegistries.BIOMES)
+		for (Biome biome : Registry.BIOME)
 		{
 			if(!biome.getCategory().equals(Category.NETHER) && !biome.getCategory().equals(Category.THEEND))
 			{
-				biome.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, BLUNITE, 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 0, 80))));
-				biome.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, CARBONITE, 33)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(10, 0, 0, 80))));
-				biome.addFeature(Decoration.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.FillerBlockType.NATURAL_STONE, VANADIUM_ORE, 6)).createDecoratedFeature(Placement.COUNT_RANGE.configure(new CountRangeConfig(1, 0, 0, 16))));
+				biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, BLUNITE, 33)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(10, 0, 0, 80))));
+				biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, CARBONITE, 33)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(10, 0, 0, 80))));
+				biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Target.NATURAL_STONE, VANADIUM_ORE, 6)).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(1, 0, 0, 16))));
 			}
 		}
 	}
 	
 	public static void registerTrees()
 	{
-		for(Biome biome : ForgeRegistries.BIOMES)
+		for (Biome biome : Registry.BIOME)
 		{
 			if(biome.getCategory().equals(Category.DESERT))
 			{
-				biome.addFeature(GenerationStage.Decoration.VEGETAL_DECORATION, MubbleFeatures.PALM_TREE.configure(MubbleFeatureConfigs.PALM_TREE_CONFIG).createDecoratedFeature(Placement.COUNT_EXTRA_HEIGHTMAP.configure(new AtSurfaceWithExtraConfig(0, 0.12F, 1))));
+				biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleFeatures.PALM_TREE.configure(MubbleFeatureConfigs.PALM_TREE_CONFIG).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(0, 0.12F, 1))));
 			}
 		}
 	}
 	
 	public static void registerSpawns()
 	{
-		for(Biome biome : ForgeRegistries.BIOMES)
+		for (Biome biome : Registry.BIOME)
 		{
 			if(biome.getCategory().equals(Category.PLAINS))
 			{
-				biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.TOAD, 10, 4, 4));
+				biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(MubbleEntities.TOAD, 10, 4, 4));
 			}
 		}
-		for(Biome biome : DuckEntity.getSpawnBiomes())
+		
+		for (Biome biome : DuckEntity.getSpawnBiomes())
 		{
-			biome.getSpawns(EntityClassification.CREATURE).add(new Biome.SpawnListEntry(MubbleEntities.DUCK, 10, 4, 4));
+			biome.getEntitySpawnList(EntityCategory.CREATURE).add(new Biome.SpawnEntry(MubbleEntities.DUCK, 10, 4, 4));
 		}
 	}
 	

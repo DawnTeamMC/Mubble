@@ -1,14 +1,6 @@
 {
 	"variants":
 	{
-		"":
-		[
-			{ "model": "mubble:block/cheese_block/0"},
-			{ "model": "mubble:block/cheese_block/1"},
-			{ "model": "mubble:block/cheese_block/2"},
-			{ "model": "mubble:block/cheese_block/3"},
-			{ "model": "mubble:block/cheese_block/4"},
-			{ "model": "mubble:block/cheese_block/5"}
-		]
+		"": { "model": "mubble:block/cheese_block"}
 	}
 }

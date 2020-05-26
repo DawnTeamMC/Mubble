@@ -4,24 +4,24 @@ import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.FlowingFluidBlock;
-import net.minecraft.dispenser.IBlockSource;
-import net.minecraft.dispenser.OptionalDispenseBehavior;
+import net.minecraft.block.FluidBlock;
+import net.minecraft.block.dispenser.BlockPlacementDispenserBehavior;
+import net.minecraft.item.AutomaticItemPlacementContext;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.DirectionalPlaceContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.Direction;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class PlaceBlockBehavior extends OptionalDispenseBehavior
+public class PlaceBlockBehavior extends BlockPlacementDispenserBehavior
 {
-	protected ItemStack dispenseStack(IBlockSource source, ItemStack stack)
+	protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
 	{
-		this.successful = false;
+		this.success = false;
 		Item item = stack.getItem();
 		World worldIn = source.getWorld();
 		Direction direction = source.getBlockState().get(DispenserBlock.FACING);
@@ -31,29 +31,29 @@ public class PlaceBlockBehavior extends OptionalDispenseBehavior
 		if(item instanceof BlockItem)
 		{
 			BlockItem blockItem = (BlockItem)item;
-			this.successful = blockItem.tryPlace(new DirectionalPlaceContext(source.getWorld(), blockPos, direction, stack, direction)) == ActionResultType.SUCCESS;
+			this.success = blockItem.place(new AutomaticItemPlacementContext(source.getWorld(), blockPos, direction, stack, direction)) == ActionResult.SUCCESS;
 		}
 		else if(item instanceof ToolItem)
 		{
-			if(item.canHarvestBlock(blockState) || blockState.getMaterial().isToolNotRequired())
+			if(item.isEffectiveOn(blockState) || blockState.getMaterial().canBreakByHand())
 			{
-				if(block instanceof AirBlock || block instanceof FlowingFluidBlock)
+				if(block instanceof AirBlock || block instanceof FluidBlock)
 				{
-					this.successful = false;
+					this.success = false;
 				}
-				else if(blockState.getBlockHardness(worldIn, blockPos) < 0.0f)
+				else if(blockState.getHardness(worldIn, blockPos) < 0.0f)
 				{
-					this.successful = false;
+					this.success = false;
 				}
 				else
 				{
-					this.successful = true;
+					this.success = true;
 				}
 			}
-			if(this.successful)
+			if(this.success)
 			{
-				worldIn.destroyBlock(blockPos, true);
-				stack.attemptDamageItem(1, worldIn.getRandom(), null);
+				worldIn.removeBlock(blockPos, true);
+				stack.damage(1, worldIn.getRandom(), null);
 			}
 		}
 		return stack;

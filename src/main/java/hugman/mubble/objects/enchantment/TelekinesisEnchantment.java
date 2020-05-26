@@ -1,31 +1,31 @@
 package hugman.mubble.objects.enchantment;
 
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentType;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.enchantment.EnchantmentTarget;
+import net.minecraft.entity.EquipmentSlot;
 
 public class TelekinesisEnchantment extends Enchantment
 {
-	public TelekinesisEnchantment(Rarity rarityIn, EquipmentSlotType... slots)
+	public TelekinesisEnchantment(Enchantment.Weight weight, EquipmentSlot... slots)
 	{
-		super(rarityIn, EnchantmentType.WEAPON, slots);
+		super(weight, EnchantmentTarget.WEAPON, slots);
 	}
 	
 	@Override
-	public int getMaxLevel()
+	public int getMaximumLevel()
 	{
 		return 2;
 	}
-
+	
 	@Override
-	public int getMinEnchantability(int enchantmentLevel)
+	public int getMinimumPower(int enchantmentLevel)
 	{
 		return 25 + enchantmentLevel * 5;
 	}
-
+	
 	@Override
-	public int getMaxEnchantability(int enchantmentLevel)
+	public int getMaximumPower(int enchantmentLevel)
 	{
-		return this.getMinEnchantability(enchantmentLevel) + 15;
+		return this.getMinimumPower(enchantmentLevel) + 15;
 	}
 }

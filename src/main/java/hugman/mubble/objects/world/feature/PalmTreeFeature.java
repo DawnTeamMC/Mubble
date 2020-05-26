@@ -6,25 +6,27 @@ import java.util.function.Function;
 
 import com.mojang.datafixers.Dynamic;
 
+import net.minecraft.tag.BlockTags;
+import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MutableBoundingBox;
-import net.minecraft.world.gen.IWorldGenerationReader;
+import net.minecraft.world.ModifiableTestableWorld;
+import net.minecraft.world.TestableWorld;
 import net.minecraft.world.gen.feature.AbstractTreeFeature;
-import net.minecraft.world.gen.feature.TreeFeatureConfig;
+import net.minecraft.world.gen.feature.BranchedTreeFeatureConfig;
 
-public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
+public class PalmTreeFeature extends AbstractTreeFeature<BranchedTreeFeatureConfig>
 {	
-	public PalmTreeFeature(Function<Dynamic<?>, ? extends TreeFeatureConfig> configFactory)
+	public PalmTreeFeature(Function<Dynamic<?>, ? extends BranchedTreeFeatureConfig> configFactory)
 	{
 		super(configFactory);
 	}
 
 	@Override
-	public boolean generate(IWorldGenerationReader world, Random rand, BlockPos position, Set<BlockPos> changedLogs, Set<BlockPos> changedLeaves, MutableBoundingBox boundingBox, TreeFeatureConfig config)
+	public boolean generate(ModifiableTestableWorld world, Random rand, BlockPos position, Set<BlockPos> changedLogs, Set<BlockPos> changedLeaves, BlockBox boundingBox, BranchedTreeFeatureConfig config)
 	{
 		int i = rand.nextInt(config.heightRandA) + config.baseHeight;
 		boolean flag = true;
-		if(position.getY() >= 1 && position.getY() + i + 1 <= world.getMaxHeight())
+		if(position.getY() >= 1)
 		{
 			for(int j = position.getY(); j <= position.getY() + 1 + i; ++j)
 			{
@@ -42,9 +44,9 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 	            {
 	            	for(int i1 = position.getZ() - k; i1 <= position.getZ() + k && flag; ++i1)
 	            	{
-	            		if (j >= 0 && j < world.getMaxHeight())
+	            		if (j >= 0)
 	            		{
-	            			if (!func_214587_a(world, blockpos$mutableblockpos.setPos(l, j, i1)))
+	            			if (!canTreeReplace(world, blockpos$mutableblockpos.set(l, j, i1)))
 	            			{
 	            				flag = false;
 	            			}
@@ -58,10 +60,10 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 	        {
 				return false;
 	        }
-			else if(isSoil(world, position.down(), config.getSapling()) && position.getY() < world.getMaxHeight() - i - 1)
+			else if(isNaturalDirtOrGrass(world, position.down()) || isSand(world, position.down()))
 			{
 				BlockPos pos = position.add(0, i - 1, 0);
-		 		setDirtAt(world, position.down(), position);
+		 		setToDirt(world, position.down());
 		 		setLeavesBlockState(world, rand, pos.add(0, 1, 0), changedLeaves, boundingBox, config);
 		 		setLeavesBlockState(world, rand, pos.add(1, 1, 0), changedLeaves, boundingBox, config);
 		 		setLeavesBlockState(world, rand, pos.add(-1, 1, 0), changedLeaves, boundingBox, config);
@@ -112,7 +114,7 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 		 		}
 			 	for(int i3 = 0; i3 < i; i3++)
 			 	{
-			 		if(isAirOrLeaves(world, position.up(i3)) || isTallPlants(world, position.up(i3)))
+			 		if(isAirOrLeaves(world, position.up(i3)) || isReplaceablePlant(world, position.up(i3)))
 			 		{
 			 			setLogBlockState(world, rand, position.up(i3), changedLogs, boundingBox, config);
 			 		}
@@ -124,5 +126,13 @@ public class PalmTreeFeature extends AbstractTreeFeature<TreeFeatureConfig>
 			return false;
 		}
 		return flag;
+	}
+	
+	private boolean isSand(TestableWorld world, BlockPos pos)
+	{
+		return world.testBlockState(pos, (state) ->
+			{
+				return state.matches(BlockTags.SAND);
+			});
 	}
 }

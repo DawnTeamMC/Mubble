@@ -1,23 +1,18 @@
 package hugman.mubble.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.enchantment.TelekinesisEnchantment;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class MubbleEnchantments
 {
-    public static final List<Enchantment> ENCHANTMENTS = new ArrayList<Enchantment>();
-
-    public static final Enchantment TELEKINESIS = register("telekinesis", new TelekinesisEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlotType.MAINHAND));
-    
-    private static Enchantment register(String name, Enchantment enchantment)
-    {
-    	enchantment.setRegistryName(Mubble.MOD_ID, name);
-    	ENCHANTMENTS.add(enchantment);
-    	return enchantment;
-    }
+	public static final Enchantment TELEKINESIS = register("telekinesis", new TelekinesisEnchantment(Enchantment.Weight.VERY_RARE, EquipmentSlot.MAINHAND));
+	
+	private static Enchantment register(String name, Enchantment enchantment)
+	{
+		return Registry.register(Registry.ENCHANTMENT, new Identifier(Mubble.MOD_ID, name), enchantment);
+	}
 }

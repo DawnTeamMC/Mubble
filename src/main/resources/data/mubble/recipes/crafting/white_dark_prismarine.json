@@ -15,7 +15,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/white"
+			"item": "minecraft:white_dye"
 		}
 	},
 	"result": {

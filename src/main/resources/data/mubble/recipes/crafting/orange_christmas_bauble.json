@@ -11,15 +11,15 @@
 	{
 		"#":
 		{
-			"tag": "forge:nuggets/iron"
+			"item": "minecraft:iron_nugget"
 		},
 		"X":
 		{
-			"tag": "forge:dusts/glowstone"
+			"item": "minecraft:glowstone_dust"
 		},
 		"O":
 		{
-			"tag": "forge:dyes/orange"
+			"item": "minecraft:orange_dye"
 		}
 	},
 	"result":

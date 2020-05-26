@@ -4,53 +4,52 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.Effects;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.ActionResult;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
 public class BandageItem extends Item
 {
-	public static final List<Effect> CURABLE_EFFECTS = new ArrayList<>(Arrays.asList(Effects.MINING_FATIGUE, Effects.NAUSEA, Effects.POISON, Effects.WITHER));
+	public static final List<StatusEffect> CURABLE_EFFECTS = new ArrayList<>(Arrays.asList(StatusEffects.MINING_FATIGUE, StatusEffects.NAUSEA, StatusEffects.POISON, StatusEffects.WITHER));
 	
-    public BandageItem(Item.Properties builder)
+    public BandageItem(Item.Settings builder)
     {
         super(builder);
     }
     
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity player, Hand hand)
+    public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity player, Hand handIn)
     {
-        ItemStack stack = player.getHeldItem(hand);
+        ItemStack stack = player.getStackInHand(handIn);
         boolean doesCure = false;
         
-        for(Effect effect : CURABLE_EFFECTS)
+        for(StatusEffect effect : CURABLE_EFFECTS)
         {
-        	if(player.isPotionActive(effect))
-        	{
+        	if(player.hasStatusEffect(effect))
+			{
         		doesCure = true;
-        		player.removeActivePotionEffect(effect);
-        	}
+        		player.removeStatusEffect(effect);
+			}	
         }
         if(doesCure)
         {
-            worldIn.playSound((PlayerEntity)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 0.5F, 1F);
-            
-            if(!player.abilities.isCreativeMode)
-            {
-            	stack.shrink(1);
-            }
-            player.addStat(Stats.ITEM_USED.get(this));
-            return ActionResult.success(stack);
+        	worldIn.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 0.5F, 1F);
+        	
+            if (!player.abilities.creativeMode)
+        	{
+            	stack.decrement(1);
+        	}
+            player.incrementStat(Stats.USED.getOrCreateStat(this));
+            return TypedActionResult.success(stack);
         }
-        
-        return ActionResult.fail(stack);
+        return TypedActionResult.fail(stack);
     }
 }

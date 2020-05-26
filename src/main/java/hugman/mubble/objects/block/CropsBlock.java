@@ -2,21 +2,23 @@ package hugman.mubble.objects.block;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleItems;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.IItemProvider;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.CropBlock;
+import net.minecraft.block.Material;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.sound.BlockSoundGroup;
 
-public class CropsBlock extends net.minecraft.block.CropsBlock
+public class CropsBlock extends CropBlock
 {	
 	/* Extension for internal publicity
 	 * + Missing features */
     public CropsBlock()
     {
-        super(Properties.create(Material.PLANTS).doesNotBlockMovement().tickRandomly().hardnessAndResistance(0f).sound(SoundType.CROP));
+        super(FabricBlockSettings.of(Material.LEAVES).collidable(true).ticksRandomly().hardness(0f).sounds(BlockSoundGroup.CROP).nonOpaque());
     }
     
     @Override
-    protected IItemProvider getSeedsItem()
+    protected ItemConvertible getSeedsItem()
     {
     	if(this == MubbleBlocks.TOMATOES) return MubbleItems.TOMATO;
     	if(this == MubbleBlocks.SALAD) return MubbleItems.SALAD;

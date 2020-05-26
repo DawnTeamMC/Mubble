@@ -14,7 +14,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/lime"
+			"item": "minecraft:lime_dye"
 		}
 	},
 	"result":

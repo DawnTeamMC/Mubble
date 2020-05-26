@@ -7,17 +7,17 @@ import net.minecraft.world.World;
 
 public class UnstableBlock extends Block
 {	
-    public UnstableBlock(Block.Properties builder)
+    public UnstableBlock(Block.Settings builder)
     {
         super(builder);
     }
     
     @Override
-    public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn)
+    public void onSteppedOn(World worldIn, BlockPos pos, Entity entityIn)
     {
-    	if(!worldIn.isRemote && worldIn.rand.nextInt(8) == 0)
+    	if(!worldIn.isClient && worldIn.random.nextInt(8) == 0)
     	{
-    		worldIn.destroyBlock(pos, false);
+    		worldIn.removeBlock(pos, false);
     	}
     }
 }

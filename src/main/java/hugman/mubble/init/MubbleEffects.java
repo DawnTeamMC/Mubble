@@ -1,25 +1,22 @@
 package hugman.mubble.init;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import hugman.mubble.Mubble;
 import hugman.mubble.objects.effect.HiccupEffect;
 import hugman.mubble.objects.effect.SimpleEffect;
-import net.minecraft.potion.Effect;
-import net.minecraft.potion.EffectType;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectType;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class MubbleEffects
 {
-    public static final List<Effect> EFFECTS = new ArrayList<Effect>();
 
-    public static final Effect HEAVINESS = register("heaviness", new SimpleEffect(EffectType.HARMFUL, 9198906));
-    //public static final Effect SNEEZING = new EffectSimple("sneezing", true, 9753716);
-    public static final Effect HICCUP = register("hiccup", new HiccupEffect(EffectType.NEUTRAL, 9198906));
+    public static final StatusEffect HEAVINESS = register("heaviness", new SimpleEffect(StatusEffectType.HARMFUL, 9198906));
+    //public static final StatusEffect SNEEZING = new SimpleEffect("sneezing", true, 9753716);
+    public static final StatusEffect HICCUP = register("hiccup", new HiccupEffect(StatusEffectType.NEUTRAL, 9198906));
     
-    private static Effect register(String name, Effect effect)
+    private static StatusEffect register(String name, StatusEffect statusEffect)
     {
-    	Effect fEffect = effect.setRegistryName(name);
-    	EFFECTS.add(fEffect);
-    	return fEffect;
+    	return Registry.register(Registry.STATUS_EFFECT, new Identifier(Mubble.MOD_ID, name), statusEffect);
     }
 }

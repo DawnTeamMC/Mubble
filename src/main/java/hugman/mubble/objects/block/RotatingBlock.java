@@ -1,59 +1,61 @@
 package hugman.mubble.objects.block;
 
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.Material;
+import net.minecraft.block.MaterialColor;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityContext;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.shapes.ISelectionContext;
-import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.util.shape.VoxelShape;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
 public class RotatingBlock extends Block
 {	
-	protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
+	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
 	
-    public RotatingBlock(SoundType soundType)
+    public RotatingBlock(BlockSoundGroup soundType)
     {
-        super(Properties.from(Blocks.STONE).sound(soundType));
+        super(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).sounds(soundType));
     }
     
     @Override
-    public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
+    public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context)
     {
     	return SHAPE;
     }
     
     @Override
-    public void onLanded(IBlockReader worldIn, Entity entityIn)
+    public void onEntityLand(BlockView worldIn, Entity entityIn)
     {
-    	Vec3d vec3d = entityIn.getMotion();
+    	Vec3d vec3d = entityIn.getVelocity();
     	if(entityIn.isSneaking() && vec3d.y < -0.1)
     	{
-    		if(!entityIn.world.isRemote) entityIn.world.destroyBlock(new BlockPos(entityIn).down(), false);
-    		entityIn.setMotion(vec3d.x, 0.625D, vec3d.z);
+    		if(!entityIn.world.isClient) entityIn.world.removeBlock(new BlockPos(entityIn).down(), false);
+    		entityIn.setVelocity(vec3d.x, 0.625D, vec3d.z);
     	}
-    	else super.onLanded(worldIn, entityIn);
+    	else super.onEntityLand(worldIn, entityIn);
     }
     
     @Override
-    public void neighborChanged(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_)
+    public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean moved)
     {
-		if(!worldIn.isRemote && worldIn.isBlockPowered(pos))
+		if(!worldIn.isClient && worldIn.isReceivingRedstonePower(pos))
 		{
-			worldIn.destroyBlock(pos, false);
+			worldIn.removeBlock(pos, false);
 		}
     }
     
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
     {
-		if(!worldIn.isRemote && entityIn.getMotion().y > 0.0D)
+		if(!worldIn.isClient && entityIn.getVelocity().y > 0.0D)
 		{
-			worldIn.destroyBlock(pos, false);
+			worldIn.removeBlock(pos, false);
 		}
     }
 }

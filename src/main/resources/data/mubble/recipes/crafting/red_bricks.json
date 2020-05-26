@@ -15,7 +15,7 @@
 		},
 		"O":
 		{
-			"tag": "forge:dyes/red"
+			"item": "minecraft:red_dye"
 		}
 	},
 	"result":

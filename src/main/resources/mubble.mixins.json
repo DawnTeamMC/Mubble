@@ -1,0 +1,19 @@
+{
+    "required": true,
+    "package": "hugman.mubble.mixin",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+		"AxeItemMixin",
+		"ClientPlayNetworkHandlerMixin",
+		"EntityAccessor",
+		"FireBlockMixin",
+		"GameRendererAccessor",
+		"LivingEntityMixin",
+		"MobEntityMixin",
+		"PlayerEntityMixin",
+		"SpongeBlockMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

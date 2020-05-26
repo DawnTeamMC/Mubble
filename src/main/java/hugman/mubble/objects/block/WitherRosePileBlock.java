@@ -2,37 +2,37 @@ package hugman.mubble.objects.block;
 
 import java.util.Random;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.particles.ParticleTypes;
-import net.minecraft.potion.EffectInstance;
-import net.minecraft.potion.Effects;
-import net.minecraft.util.DamageSource;
+import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.BlockView;
 import net.minecraft.world.Difficulty;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class WitherRosePileBlock extends PileBlock
 {
-    public WitherRosePileBlock(Properties builder)
+    public WitherRosePileBlock(Settings builder)
     {
         super(builder);
     }
 
     @Override
-    public boolean isValidGround(BlockState state, IBlockReader worldIn, BlockPos pos)
+    public boolean canPlantOnTop(BlockState state, BlockView worldIn, BlockPos pos)
     {
     	Block block = state.getBlock();
-    	return super.isValidGround(state, worldIn, pos) || block == Blocks.SOUL_SAND;
+    	return super.canPlantOnTop(state, worldIn, pos) || block == Blocks.SOUL_SAND;
     }
     
-    @OnlyIn(Dist.CLIENT)
+    @Environment(EnvType.CLIENT)
     public void animateTick(BlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
     	for(int i = 0; i < 5; ++i)
@@ -47,14 +47,14 @@ public class WitherRosePileBlock extends PileBlock
     @Override
     public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
     {
-    	if (!worldIn.isRemote && worldIn.getDifficulty() != Difficulty.PEACEFUL)
+    	if (!worldIn.isClient && worldIn.getDifficulty() != Difficulty.PEACEFUL)
     	{
     		if (entityIn instanceof LivingEntity)
     		{
     			LivingEntity livingentity = (LivingEntity)entityIn;
     			if (!livingentity.isInvulnerableTo(DamageSource.WITHER))
     			{
-    				livingentity.addPotionEffect(new EffectInstance(Effects.WITHER, 40));
+    				livingentity.addStatusEffect(new StatusEffectInstance(StatusEffects.WITHER, 40));
     			}
     		}
     	}

@@ -1,118 +1,83 @@
-buildscript
-{
-	repositories
-	{
-		maven { url = 'https://files.minecraftforge.net/maven' }
-		jcenter()
-		mavenCentral()
-	}
-	dependencies
-	{
-		classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
-	}
+plugins {
+	id 'fabric-loom' version '0.4.3'
+	id 'maven-publish'
 }
 
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'java'
-apply plugin: 'eclipse'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
-repositories
-{
-	maven { url 'https://maven.tterrag.com/' }
-	maven { url 'https://maven.blamejared.com' }
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
+
+minecraft {
 }
 
-version = mod_version
-group = "hugman.${mod_id}"
-archivesBaseName = "${mod_name}"
-
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8'
-
-minecraft
-{
-	mappings channel: 'snapshot', version: "${mappings_version}"
-
-	accessTransformer = file('src/main/resources/META-INF/accessTransformers.cfg')
-
-	runs
-	{
-		client
-		{
-			workingDirectory project.file('run')
-
-			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-			property 'forge.logging.console.level', 'debug'
-			property 'fml.earlyprogresswindow', 'false'
-
-			mods
-			{
-				mubble
-				{
-					source sourceSets.main
-				}
-			}
-		}
-		server
-		{
-			workingDirectory project.file('run')
-
-			property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-			property 'forge.logging.console.level', 'debug'
-			property 'fml.earlyprogresswindow', 'false'
-
-			mods
-			{
-				mubble
-				{
-					source sourceSets.main
-				}
-			}
-		}
-		data
-		{
-			workingDirectory project.file('run')
-
-			property 'forge.logging.markers', ''
-			property 'forge.logging.console.level', 'debug'
-
-			args '--mod', 'mubble', '--all', '--output', file('src/generated/resources/')
-
-			mods
-			{
-				mubble
-				{
-					source sourceSets.main
-				}
-			}
-		}
-	}
+repositories {
+	maven { url 'https://jitpack.io' }
+	maven { url 'http://server.bbkr.space:8081/artifactory/libs-release' }
 }
 
-dependencies
-{
-	minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+dependencies {
+	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
+
+	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 	
-	compileOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api")
-	runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
+	modImplementation "io.github.kvverti:bannerpp:${project.bannerpp_version}"
+	include "io.github.kvverti:bannerpp:${project.bannerpp_version}"
 }
 
-jar
-{
-	manifest
-	{
-		attributes
-		([
-			"Specification-Title": "${mod_id}",
-			"Specification-Vendor": "Hugman",
-			"Specification-Version": "1",
-			"Implementation-Title": "${mod_id}",
-			"Implementation-Version": "${mod_version}",
-			"Implementation-Vendor" :"Hugman",
-			"Implementation-Timestamp": new Date().format("dd-MM-yyyy'T'HH:mm:ssZ")
-		])
+processResources {
+	inputs.property "version", project.version
+
+	from(sourceSets.main.resources.srcDirs) {
+		include "fabric.mod.json"
+		expand "version": project.version
 	}
 
-	exclude "**/*.bat"
-	exclude "**/*.psd"
-	exclude "**/*.exe"
+	from(sourceSets.main.resources.srcDirs) {
+		exclude "fabric.mod.json"
+	}
+}
+
+// ensure that the encoding is set to UTF-8, no matter what the system default is
+// this fixes some edge cases with special characters not displaying correctly
+// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+tasks.withType(JavaCompile) {
+	options.encoding = "UTF-8"
+}
+
+// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
+// if it is present.
+// If you remove this task, sources will not be generated.
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = "sources"
+	from sourceSets.main.allSource
+}
+
+jar {
+	from "LICENSE"
+}
+
+// configure the maven publication
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			// add all the jars that should be included when publishing to maven
+			artifact(jar) {
+				builtBy remapJar
+			}
+			artifact(sourcesJar) {
+				builtBy remapSourcesJar
+			}
+		}
+	}
+
+	// select the repositories you want to publish to
+	repositories {
+		// uncomment to publish to the local maven
+		// mavenLocal()
+	}
 }
