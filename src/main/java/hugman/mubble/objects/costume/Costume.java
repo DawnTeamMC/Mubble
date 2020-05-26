@@ -101,13 +101,10 @@ public class Costume extends Item
     	if (!world.isClient && effects != null)
     	{
     		long i = world.getTime();
-    		if(i % 40L == 0L)
-    		{
-    			for(StatusEffectInstance effect : effects)
-            	{
-            		((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 5, effect.getAmplifier(), false, true));
-            	}
-    		}
+			for(StatusEffectInstance effect : effects)
+			{
+				((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 5, effect.getAmplifier(), false, true));
+			}
     	}
     }
 	
