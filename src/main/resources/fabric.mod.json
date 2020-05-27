@@ -6,7 +6,8 @@
     "name": "Mubble",
     "description": "Expand your world with features from the Nintendo universe, and way more.",
     "authors": [
-        "Hugman"
+        "Hugman",
+        "Yanis48"
     ],
     "contact": {
         "homepage": "https://sites.google.com/view/mubblemc",
@@ -15,7 +16,7 @@
     },
     
     "license": "MIT",
-    "icon": "logo.png",
+    "icon": "icon.png",
 
     "environment": "*",
     "entrypoints": {
