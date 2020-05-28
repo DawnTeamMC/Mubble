@@ -5,7 +5,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
@@ -19,9 +18,9 @@ public class TetrisGlassBlock extends FallingBlock
     
     @Override
     @Environment(EnvType.CLIENT)
-    public boolean isSideInvisible(BlockState state, BlockState adjacentBlockState, Direction side)
+    public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing)
     {
-    	return adjacentBlockState.getBlock() == this ? true : false;
+    	return neighbor.getBlock() == this ? true : super.isSideInvisible(state, neighbor, facing);
     }
     
     @Override
@@ -35,23 +34,5 @@ public class TetrisGlassBlock extends FallingBlock
     public boolean isTranslucent(BlockState state, BlockView reader, BlockPos pos)
     {
        return true;
-    }
-
-    @Override
-    public boolean canSuffocate(BlockState state, BlockView worldIn, BlockPos pos)
-    {
-       return false;
-    }
-
-    @Override
-    public boolean isSimpleFullBlock(BlockState state, BlockView worldIn, BlockPos pos)
-    {
-       return false;
-    }
-
-    @Override
-    public boolean allowsSpawning(BlockState state, BlockView worldIn, BlockPos pos, EntityType<?> type)
-    {
-       return false;
     }
 }

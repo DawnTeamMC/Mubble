@@ -18,12 +18,6 @@ public class PlacerBlock extends DispenserBlock
     }
     
     @Override
-    public boolean hasBlockEntity()
-    {
-    	return true;
-    }
-    
-    @Override
     public BlockEntity createBlockEntity(BlockView world)
     {
     	return new PlacerTileEntity();

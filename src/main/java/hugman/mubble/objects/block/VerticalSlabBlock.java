@@ -3,10 +3,10 @@ package hugman.mubble.objects.block;
 import hugman.mubble.init.data.MubbleBlockStateProperties;
 import hugman.mubble.objects.block.block_state_property.VerticalSlabType;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPlacementEnvironment;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.entity.ai.pathing.NavigationType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.fluid.Fluids;
@@ -23,7 +23,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.IWorld;
+import net.minecraft.world.WorldAccess;
 
 public class VerticalSlabBlock extends Block implements Waterloggable
 {
@@ -53,7 +53,7 @@ public class VerticalSlabBlock extends Block implements Waterloggable
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context)
+	public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context)
 	{
 		VerticalSlabType verticalslabtype = state.get(TYPE);
 		switch(verticalslabtype)
@@ -138,7 +138,7 @@ public class VerticalSlabBlock extends Block implements Waterloggable
 	}
 
 	@Override
-	public Fluid tryDrainFluid(IWorld worldIn, BlockPos pos, BlockState state)
+	public Fluid tryDrainFluid(WorldAccess worldIn, BlockPos pos, BlockState state)
 	{
         if (state.get(WATERLOGGED))
         {
@@ -164,7 +164,7 @@ public class VerticalSlabBlock extends Block implements Waterloggable
 	}
 
 	@Override
-	public boolean tryFillWithFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn)
+	public boolean tryFillWithFluid(WorldAccess worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn)
 	{
         if (state.get(TYPE) != VerticalSlabType.DOUBLE && !state.get(WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER)
         {
@@ -182,7 +182,7 @@ public class VerticalSlabBlock extends Block implements Waterloggable
 	}
 	
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos)
+	public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facing, BlockState facingState, WorldAccess worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
         if (stateIn.get(WATERLOGGED))
         {
@@ -192,7 +192,7 @@ public class VerticalSlabBlock extends Block implements Waterloggable
 	}
 
 	@Override
-	public boolean canPlaceAtSide(BlockState state, BlockView worldIn, BlockPos pos, BlockPlacementEnvironment type)
+	public boolean canPathfindThrough(BlockState state, BlockView worldIn, BlockPos pos, NavigationType type)
 	{
         switch(type)
         {

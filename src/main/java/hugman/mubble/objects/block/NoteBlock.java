@@ -68,7 +68,7 @@ public class NoteBlock extends Block
     			lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_LOW_NSMBU;
     			highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_HIGH_NSMBU;
     		}
-        	BlockPos pos = new BlockPos(entityIn).down();
+        	BlockPos pos = entityIn.getBlockPos().down();
             final double x = pos.getX() + 0.5D;
             final double y = pos.getY() + 0.5D;
             final double z = pos.getZ() + 0.5D;

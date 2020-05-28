@@ -5,8 +5,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.block.MaterialColor;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityContext;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -24,38 +24,38 @@ public class RotatingBlock extends Block
     }
     
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context)
+    public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
     {
     	return SHAPE;
     }
     
     @Override
-    public void onEntityLand(BlockView worldIn, Entity entityIn)
+    public void onEntityLand(BlockView world, Entity entity)
     {
-    	Vec3d vec3d = entityIn.getVelocity();
-    	if(entityIn.isSneaking() && vec3d.y < -0.1)
+    	Vec3d vec3d = entity.getVelocity();
+    	if(entity.isSneaking() && vec3d.y < -0.1)
     	{
-    		if(!entityIn.world.isClient) entityIn.world.removeBlock(new BlockPos(entityIn).down(), false);
-    		entityIn.setVelocity(vec3d.x, 0.625D, vec3d.z);
+    		if(!entity.world.isClient) entity.world.removeBlock(entity.getBlockPos().down(), false);
+    		entity.setVelocity(vec3d.x, 0.625D, vec3d.z);
     	}
-    	else super.onEntityLand(worldIn, entityIn);
+    	else super.onEntityLand(world, entity);
     }
     
     @Override
-    public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean moved)
+    public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean moved)
     {
-		if(!worldIn.isClient && worldIn.isReceivingRedstonePower(pos))
+		if(!world.isClient && world.isReceivingRedstonePower(pos))
 		{
-			worldIn.removeBlock(pos, false);
+			world.removeBlock(pos, false);
 		}
     }
     
     @Override
-    public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity)
     {
-		if(!worldIn.isClient && entityIn.getVelocity().y > 0.0D)
+		if(!world.isClient && entity.getVelocity().y > 0.0D)
 		{
-			worldIn.removeBlock(pos, false);
+			world.removeBlock(pos, false);
 		}
     }
 }

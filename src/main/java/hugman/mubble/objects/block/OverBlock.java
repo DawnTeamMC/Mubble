@@ -79,7 +79,7 @@ public class OverBlock extends Block
 	@Override
 	public BlockSoundGroup getSoundGroup(BlockState state)
 	{
-		if(state.getMaterial() == Material.EARTH)
+		if(state.getMaterial() == Material.SOIL)
 		{
 			if(state.get(OVER))
 			{

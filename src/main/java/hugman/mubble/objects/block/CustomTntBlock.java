@@ -20,17 +20,16 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
-public class CustomTNTBlock extends Block
+public class CustomTntBlock extends Block
 {
 	public static final BooleanProperty UNSTABLE = Properties.UNSTABLE;
 	public final int fuse;
 	public final float strenght;
 
-    public CustomTNTBlock(Settings builder, int fuseIn, float strenghtIn)
+    public CustomTntBlock(Settings builder, int fuseIn, float strenghtIn)
     {
         super(builder);
         fuse = fuseIn;
@@ -38,49 +37,47 @@ public class CustomTNTBlock extends Block
         this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
     }
 
-    public CustomTNTBlock(Settings builder, float multiplier)
+    public CustomTntBlock(Settings builder, float multiplier)
     {
         super(builder);
         fuse = Math.round(80.0F * (multiplier * 0.75F));
         strenght = 4.0F * multiplier;
         this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
     }
-
-    public void catchFire(BlockState state, World world, BlockPos pos, Direction face, LivingEntity igniter)
-    {
-    	explode(world, pos, igniter);
-    }
-
+    
     @Override
-	public void onBlockAdded(BlockState state1, World world, BlockPos pos, BlockState state2, boolean p_220082_5_)
-	{
-		if (state2.getBlock() != state1.getBlock())
+	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify)
+    {
+		if (!oldState.isOf(state.getBlock()))
 		{
 			if (world.isReceivingRedstonePower(pos))
 			{
-				catchFire(state1, world, pos, null, null);
+				primeTnt(world, pos);
 				world.removeBlock(pos, false);
 			}
+
 		}
 	}
-
-	@Override
-	public void neighborUpdate(BlockState state1, World world, BlockPos pos1, Block block, BlockPos pos2, boolean p_220069_6_)
-	{
-		if (world.isReceivingRedstonePower(pos1))
+    
+    @Override
+	public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify)
+    {
+		if(world.isReceivingRedstonePower(pos))
 		{
-			catchFire(state1, world, pos1, null, null);
-			world.removeBlock(pos1, false);
+			primeTnt(world, pos);
+			world.removeBlock(pos, false);
 		}
+
 	}
 
-	@Override
+    @Override
 	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player)
 	{
-		if(!world.isClient() && !player.isCreative() && state.get(UNSTABLE))
+		if(!world.isClient() && !player.isCreative() && (Boolean) state.get(UNSTABLE))
 		{
-			catchFire(state, world, pos, null, player);
+			primeTnt(world, pos, player);
 		}
+
 		super.onBreak(world, pos, state, player);
 	}
 
@@ -94,8 +91,13 @@ public class CustomTNTBlock extends Block
 			world.spawnEntity(tntentity);
 		}
 	}
+	
+	public void primeTnt(World world, BlockPos pos)
+	{
+        primeTnt(world, pos, (LivingEntity)null);
+    }
 
-	private void explode(World world, BlockPos pos, LivingEntity igniter)
+	private void primeTnt(World world, BlockPos pos, LivingEntity igniter)
 	{
 		if(!world.isClient)
 		{
@@ -116,7 +118,7 @@ public class CustomTNTBlock extends Block
 		}
 		else
 		{
-			catchFire(state, world, pos, result.getSide(), player);
+			primeTnt(world, pos, player);
 			world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
 			if(!player.isCreative())
 			{
@@ -138,16 +140,16 @@ public class CustomTNTBlock extends Block
 	}
 
 	@Override
-	public void onProjectileHit(World world, BlockState state, BlockHitResult result, Entity entityIn) {
-		if(!world.isClient && entityIn instanceof ProjectileEntity)
+	public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile)
+	{
+		if (!world.isClient)
 		{
-			ProjectileEntity abstractarrowentity = (ProjectileEntity) entityIn;
-			Entity shooter = abstractarrowentity.getOwner();
-			if (abstractarrowentity.isOnFire())
+			Entity entity = projectile.getOwner();
+			if (projectile.isOnFire())
 			{
-				BlockPos blockpos = result.getBlockPos();
-				catchFire(state, world, blockpos, null, shooter instanceof LivingEntity ? (LivingEntity) shooter : null);
-				world.removeBlock(blockpos, false);
+				BlockPos blockPos = hit.getBlockPos();
+				primeTnt(world, blockPos, entity instanceof LivingEntity ? (LivingEntity) entity : null);
+				world.removeBlock(blockPos, false);
 			}
 		}
 

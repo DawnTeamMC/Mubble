@@ -8,10 +8,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.Waterloggable;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.container.Container;
-import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
@@ -19,8 +18,8 @@ import net.minecraft.fluid.Fluids;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager.Builder;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.Properties;
@@ -50,7 +49,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable
     }
     
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context)
+    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
     {
 		if(!state.get(EMPTY) && !state.get(OPEN))
 		{
@@ -63,44 +62,80 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable
     }
     
     @Override
-    public ActionResult onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
+    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
     {
-    	if(!worldIn.isClient)
+    	if(world.isClient)
     	{
-    		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-    		if(tileEntity instanceof PresentTileEntity)
+    		return ActionResult.SUCCESS;
+    	}
+    	if(!world.isClient)
+    	{
+    		BlockEntity blockEntity = world.getBlockEntity(pos);
+    		if(blockEntity instanceof PresentTileEntity)
     		{
-    			player.openContainer((PresentTileEntity) tileEntity);
-    			player.incrementStat(Stats.OPEN_BARREL);
+    			player.openHandledScreen((PresentTileEntity)blockEntity);
+    			//TODO player.incrementStat(Stats.OPEN_BARREL);
     		}
     	}
 		return ActionResult.SUCCESS;
     }
+    
+    @Override
+	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean notify)
+	{
+		if(!state.isOf(newState.getBlock()))
+		{
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if(blockEntity instanceof Inventory)
+			{
+				ItemScatterer.spawn(world, pos, (Inventory)blockEntity);
+				world.updateComparators(pos, this);
+			}
 
-	@Override
-    public void onBlockRemoved(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving)
-    {
-    	if(state.getBlock() != newState.getBlock())
-    	{
-    		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-    		if(tileEntity instanceof Inventory)
-    		{
-    			ItemScatterer.spawn(worldIn, pos, (Inventory) tileEntity);
-    			worldIn.updateHorizontalAdjacent(pos, this);
-    		}
-    	}
-    	super.onBlockRemoved(state, worldIn, pos, newState, isMoving);
-    }
+			super.onStateReplaced(state, world, pos, newState, notify);
+		}
+	}
 	
 	@Override
 	public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
 	{
-		BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-		if(tileEntity instanceof PresentTileEntity)
+		BlockEntity blockEntity = worldIn.getBlockEntity(pos);
+		if(blockEntity instanceof PresentTileEntity)
 		{
-			((PresentTileEntity) tileEntity).presentTick();
+			((PresentTileEntity)blockEntity).tick();
 		}
 	}
+
+	@Override
+	public BlockEntity createBlockEntity(BlockView worldIn)
+	{
+		return new PresentTileEntity();
+	}
+	
+	@Override
+	public void onPlaced(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
+	{
+		if(stack.hasCustomName())
+		{
+			BlockEntity blockEntity = worldIn.getBlockEntity(pos);
+			if(blockEntity instanceof PresentTileEntity)
+			{
+				((PresentTileEntity)blockEntity).setCustomName(stack.getName());
+			}
+		}
+	}
+	
+	@Override
+    public boolean hasComparatorOutput(BlockState state)
+	{
+        return true;
+    }
+
+	@Override
+    public int getComparatorOutput(BlockState state, World world, BlockPos pos)
+	{
+        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+    }
 	
 	@Override
 	public BlockRenderType getRenderType(BlockState state)
@@ -115,31 +150,6 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable
 	}
 	
 	@Override
-	public void onPlaced(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
-	{
-		if(stack.hasCustomName())
-		{
-			BlockEntity tileEntity = worldIn.getBlockEntity(pos);
-			if(tileEntity instanceof PresentTileEntity)
-			{
-				((PresentTileEntity) tileEntity).setCustomName(stack.getName());
-			}
-		}
-	}
-	
-	@Override
-	public boolean hasComparatorOutput(BlockState state)
-	{
-		return true;
-	}
-	
-	@Override
-	public int getComparatorOutput(BlockState blockState, World worldIn, BlockPos pos)
-	{
-		return Container.calculateComparatorOutput(worldIn.getBlockEntity(pos));
-	}
-	
-	@Override
 	protected void appendProperties(Builder<Block, BlockState> builder)
 	{
 		builder.add(OPEN, EMPTY, WATERLOGGED);
@@ -149,17 +159,5 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable
 	public FluidState getFluidState(BlockState state)
 	{
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : Fluids.EMPTY.getDefaultState();
-	}
-    
-    @Override
-    public boolean hasBlockEntity()
-    {
-    	return true;
-    }
-
-	@Override
-	public BlockEntity createBlockEntity(BlockView worldIn)
-	{
-		return new PresentTileEntity();
 	}
 }

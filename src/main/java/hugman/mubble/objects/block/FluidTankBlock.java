@@ -6,7 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidDrainable;
 import net.minecraft.block.FluidFillable;
-import net.minecraft.entity.EntityContext;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
@@ -23,15 +23,15 @@ import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.BooleanBiFunction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 
 public class FluidTankBlock extends Block implements FluidDrainable, FluidFillable
 {
@@ -59,13 +59,13 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
     }
     
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context)
+    public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context)
     {
     	return FULL_SHAPE;
 	}
     
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context)
+    public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context)
     {
     	VoxelShape shape = FULL_SHAPE;
     	if(!state.get(UP)) shape = VoxelShapes.combineAndSimplify(shape, GLASS_UP, BooleanBiFunction.ONLY_FIRST);
@@ -92,7 +92,7 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 	}
     
     @Override
-    public Fluid tryDrainFluid(IWorld worldIn, BlockPos pos, BlockState state)
+    public Fluid tryDrainFluid(WorldAccess worldIn, BlockPos pos, BlockState state)
     {
     	if(state.get(FLUIDLOG) == FluidLog.WATER)
     	{
@@ -115,7 +115,7 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 	}
 
     @Override
-	public boolean tryFillWithFluid(IWorld worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn)
+	public boolean tryFillWithFluid(WorldAccess worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn)
 	{
     	Fluid fluid = fluidStateIn.getFluid();
         if (state.get(FLUIDLOG) == FluidLog.EMPTY && (fluid == Fluids.WATER || fluid == Fluids.LAVA))

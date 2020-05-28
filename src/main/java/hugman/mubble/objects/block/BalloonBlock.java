@@ -5,7 +5,6 @@ import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
-import net.minecraft.entity.EntityType;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.math.BlockPos;
@@ -30,22 +29,4 @@ public class BalloonBlock extends FlyingBlock
     {
     	return true;
 	}
-    
-    @Override
-    public boolean canSuffocate(BlockState state, BlockView worldIn, BlockPos pos)
-    {
-       return false;
-    }
-    
-    @Override
-    public boolean isSimpleFullBlock(BlockState state, BlockView worldIn, BlockPos pos)
-    {
-       return false;
-    }
-    
-    @Override
-    public boolean allowsSpawning(BlockState state, BlockView worldIn, BlockPos pos, EntityType<?> type)
-    {
-       return false;
-    }
 }

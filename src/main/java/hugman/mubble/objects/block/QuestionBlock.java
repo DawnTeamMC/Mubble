@@ -10,8 +10,8 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityContext;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -38,7 +38,7 @@ public class QuestionBlock extends Block
     }
     
     @Override
-    public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, EntityContext context)
+    public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context)
     {
     	return SHAPE;
     }
@@ -95,13 +95,13 @@ public class QuestionBlock extends Block
             final double x = pos.getX() + 0.5D;
             final double y = pos.getY() + 0.5D + 0.6D;
             final double z = pos.getZ() + 0.5D;
-            LootTable lootTable = worldIn.getServer().getLootManager().getSupplier(MubbleLootTables.QUESTION_BLOCK);
+            LootTable lootTable = worldIn.getServer().getLootManager().getTable(MubbleLootTables.QUESTION_BLOCK);
             LootContext lootContext = new LootContext.Builder((ServerWorld) worldIn)
-            		.put(LootContextParameters.BLOCK_STATE, this.getDefaultState())
-            		.put(LootContextParameters.POSITION, pos)
-            		.put(LootContextParameters.TOOL, ItemStack.EMPTY)
+            		.parameter(LootContextParameters.BLOCK_STATE, this.getDefaultState())
+            		.parameter(LootContextParameters.POSITION, pos)
+            		.parameter(LootContextParameters.TOOL, ItemStack.EMPTY)
             		.build(LootContextTypes.BLOCK);
-            List<ItemStack> items = lootTable.getDrops(lootContext);
+            List<ItemStack> items = lootTable.generateLoot(lootContext);
             for(ItemStack item : items)
             {
             	worldIn.spawnEntity(new ItemEntity(worldIn, x, y, z, item));

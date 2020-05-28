@@ -6,132 +6,93 @@ import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.objects.block.PresentBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ChestBlockEntity;
-import net.minecraft.block.entity.LockableContainerBlockEntity;
-import net.minecraft.container.Container;
-import net.minecraft.container.ContainerType;
-import net.minecraft.container.GenericContainer;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.screen.GenericContainerScreenHandler;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.util.collection.DefaultedList;
 
-public class PresentTileEntity extends LockableContainerBlockEntity
+public class PresentTileEntity extends LootableContainerBlockEntity
 {
-	private DefaultedList<ItemStack> content = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
-	private int numPlayersUsing;
+	private DefaultedList<ItemStack> inventory;
+	private int viewerCount;
 	
 	public PresentTileEntity()
 	{
 		super(MubbleTileEntityTypes.PRESENT);
+		this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
 	}
 	
 	@Override
-	public CompoundTag toTag(CompoundTag compound)
+	public CompoundTag toTag(CompoundTag tag)
 	{
-		super.toTag(compound);
-		if(!this.isInvEmpty())
+		super.toTag(tag);
+		if (!this.serializeLootTable(tag))
 		{
-			Inventories.toTag(compound, this.content);
+			Inventories.toTag(tag, this.inventory);
 		}
-		return compound;
+
+		return tag;
 	}
-	
+
 	@Override
-	public void fromTag(CompoundTag compound)
+	public void fromTag(BlockState state, CompoundTag tag)
 	{
-		super.fromTag(compound);
-		this.content = DefaultedList.ofSize(this.getInvSize(), ItemStack.EMPTY);
-		if(!this.isInvEmpty())
+		super.fromTag(state, tag);
+		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
+		if (!this.deserializeLootTable(tag))
 		{
-			Inventories.fromTag(compound, this.content);
+			Inventories.fromTag(tag, this.inventory);
 		}
+
 	}
 	
 	@Override
-	public int getInvSize()
+	public int size()
 	{
 		return 9 * 2;
 	}
-	
-	@Override
-	public boolean isInvEmpty()
+
+	protected DefaultedList<ItemStack> getInvStackList()
 	{
-		for(ItemStack itemstack : this.content)
-		{
-			if(!itemstack.isEmpty())
-			{
-				return false;
-			}
-		}
-		
-		return true;
+		return this.inventory;
 	}
-	
-	@Override
-	public ItemStack getInvStack(int index)
+
+	protected void setInvStackList(DefaultedList<ItemStack> list)
 	{
-		return this.content.get(index);
+		this.inventory = list;
 	}
-	
-	@Override
-	public ItemStack takeInvStack(int index, int count)
+
+	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory)
 	{
-		this.scheduleTick();
-		return Inventories.splitStack(this.content, index, count);
-	}
-	
-	@Override
-	public ItemStack removeInvStack(int index)
-	{
-		this.scheduleTick();
-		return Inventories.removeStack(this.content, index);
-	}
-	
-	@Override
-	public void setInvStack(int index, ItemStack stack)
-	{
-		this.content.set(index, stack);
-		if(stack.getCount() > this.getInvMaxStackAmount())
-		{
-			stack.setCount(this.getInvMaxStackAmount());
-		}
-		this.scheduleTick();
+		return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_9X2, syncId, playerInventory, this, 2);
 	}
 	
 	@Override
 	public void clear()
 	{
-		this.content.clear();
+		this.inventory.clear();
 	}
 	
 	@Override
-	protected Text getContainerName()
-	{
-		return new TranslatableText("container." + Mubble.MOD_ID + ".present");
-	}
-	
-	@Override
-	protected Container createContainer(int id, PlayerInventory player)
-	{
-		return new GenericContainer(ContainerType.GENERIC_9X2, id, player, this, 2);
-	}
-	
-	@Override
-	public void onInvOpen(PlayerEntity player)
+	public void onOpen(PlayerEntity player)
 	{
 		if(!player.isSpectator())
 		{
-			if(this.numPlayersUsing < 0)
+			if(this.viewerCount < 0)
 			{
-				this.numPlayersUsing = 0;
+				this.viewerCount = 0;
 			}
-			++this.numPlayersUsing;
+			++this.viewerCount;
 			
 			BlockState blockstate = this.getCachedState();
 			boolean flag1 = blockstate.get(PresentBlock.OPEN);
@@ -153,20 +114,20 @@ public class PresentTileEntity extends LockableContainerBlockEntity
 		this.world.getBlockTickScheduler().schedule(this.getPos(), this.getCachedState().getBlock(), 5);
 	}
 	
-	public void presentTick()
+	public void tick()
 	{
 		int i = this.pos.getX();
 		int j = this.pos.getY();
 		int k = this.pos.getZ();
 		
-		this.numPlayersUsing = ChestBlockEntity.countViewers(this.world, this, i, j, k);
+		this.viewerCount = ChestBlockEntity.countViewers(this.world, this, i, j, k);
 		
 		BlockState blockstate = this.getCachedState();
 		boolean flag1 = blockstate.get(PresentBlock.OPEN);
-		boolean flag2 = this.isInvEmpty();
+		boolean flag2 = this.isEmpty();
 
 		this.setEmptyProperty(blockstate, flag2);
-		if(this.numPlayersUsing > 0)
+		if(this.viewerCount > 0)
 		{
 			this.scheduleTick();
 		}
@@ -189,11 +150,11 @@ public class PresentTileEntity extends LockableContainerBlockEntity
 	} 
 	
 	@Override
-	public void onInvClose(PlayerEntity player)
+	public void onClose(PlayerEntity player)
 	{
 		if(!player.isSpectator())
 		{
-			--this.numPlayersUsing;
+			--this.viewerCount;
 		}
 	}
 	
@@ -214,9 +175,10 @@ public class PresentTileEntity extends LockableContainerBlockEntity
 		double d2 = (double) this.pos.getZ() + 0.5D;
 		this.world.playSound((PlayerEntity) null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
 	}
-
+	
 	@Override
-	public boolean canPlayerUseInv(PlayerEntity player) {
-		return true;
+	protected Text getContainerName()
+	{
+		return new TranslatableText("container." + Mubble.MOD_ID + ".present");
 	}
 }

@@ -21,7 +21,7 @@ public class KoretatoBlock extends DirectionalBlock
 	
     public KoretatoBlock()
     {
-        super(FabricBlockSettings.of(Material.ORGANIC, MaterialColor.YELLOW_TERRACOTTA).strength(0.4f, 2f).sounds(BlockSoundGroup.SNOW));
+        super(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.YELLOW_TERRACOTTA).strength(0.4f, 2f).sounds(BlockSoundGroup.SNOW));
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP).with(PRINCESS, Princess.NONE));
     }
     
