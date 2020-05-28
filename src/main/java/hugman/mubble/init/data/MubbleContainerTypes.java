@@ -1,7 +1,7 @@
 package hugman.mubble.init.data;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.container.TimeswapTableContainer;
+import hugman.mubble.objects.screen_handler.TimeswapTableScreenHandler;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.util.Identifier;
 
@@ -12,7 +12,7 @@ public class MubbleContainerTypes
     public static void init()
     {
     	ContainerProviderRegistry.INSTANCE.registerFactory(TIMESWAP_TABLE, (syncId, identifier, player, buf) -> {
-			return new TimeswapTableContainer(syncId, player.inventory);
+			return new TimeswapTableScreenHandler(syncId, player.inventory);
 		});
     }
 }

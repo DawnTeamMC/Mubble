@@ -5,12 +5,13 @@ import java.util.List;
 import com.mojang.blaze3d.systems.RenderSystem;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.container.TimeswapTableContainer;
+import hugman.mubble.objects.screen_handler.TimeswapTableScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.ingame.ContainerScreen;
+import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.sound.PositionedSoundInstance;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,159 +22,188 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class TimeswapTableScreen extends ContainerScreen<TimeswapTableContainer>
+public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandler>
 {
 	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");
-	private static final Identifier BACKGROUND_TEXTURE = new Identifier(Mubble.MOD_ID, "textures/gui/container/timeswap_table.png");
-	private float sliderProgress;
-	private boolean clickedOnSroll;
-	private int recipeIndexOffset;
-	private boolean hasItemsInInputSlot;
+	private static final Identifier TEXTURE = new Identifier(Mubble.MOD_ID, "textures/gui/container/timeswap_table.png");
+	private float scrollAmount;
+	private boolean mouseClicked;
+	private int scrollOffset;
+	private boolean canCraft;
 
-	public TimeswapTableScreen(TimeswapTableContainer containerIn, PlayerInventory playerInv, Text titleIn)
+	public TimeswapTableScreen(TimeswapTableScreenHandler handler, PlayerInventory inventory, Text title)
 	{
-		super(containerIn, playerInv, titleIn);
-		containerIn.setInventoryUpdateListener(this::onInventoryUpdate);
+		super(handler, inventory, CONTAINER_NAME);
+		handler.setContentsChangedListener(this::onInventoryChange);
 	}
 
-	public void render(int mouseX, int mouseY, float delta) {
-		super.render(mouseX, mouseY, delta);
-		this.drawMouseoverTooltip(mouseX, mouseY);
+	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
+	{
+		super.render(matrices, mouseX, mouseY, delta);
+		this.drawMouseoverTooltip(matrices, mouseX, mouseY);
 	}
 	
-	protected void drawForeground(int mouseX, int mouseY) {
-		this.font.draw(CONTAINER_NAME.asFormattedString(), 8.0F, 4.0F, 4210752);
-		this.font.draw(this.playerInventory.getDisplayName().asFormattedString(), 8.0F, (float) (this.containerHeight - 94), 4210752);
-	}
-
-	protected void drawBackground(float partialTicks, int mouseX, int mouseY) {
-		this.renderBackground();
-		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.minecraft.getTextureManager().bindTexture(BACKGROUND_TEXTURE);
-		int i = this.x;
-		int j = this.y;
-		this.blit(i, j, 0, 0, this.containerWidth, this.containerHeight);
-		int k = (int) (41.0F * this.sliderProgress);
-		this.blit(i + 119, j + 15 + k, 176 + (this.canScroll() ? 0 : 12), 0, 12, 15);
-		int l = this.x + 52;
-		int i1 = this.y + 14;
-		int j1 = this.recipeIndexOffset + 12;
-		this.drawRecipesBackground(mouseX, mouseY, l, i1, j1);
-		this.drawRecipesItems(l, i1, j1);
-	}
-
-	private void drawRecipesBackground(int mouseX, int mouseY, int left, int top, int recipeIndexOffsetMax)
+	protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY)
 	{
-		for (int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.container.getOutputItemsListSize(); ++i)
-		{
-			int j = i - this.recipeIndexOffset;
-			int k = left + j % 4 * 16;
-			int l = j / 4;
-			int i1 = top + l * 18 + 2;
-			int j1 = this.containerHeight;
-			if (i == this.container.getSelectedOutputItem()) {
-				j1 += 18;
-			}
-			else if(mouseX >= k && mouseY >= i1 && mouseX < k + 16 && mouseY < i1 + 18)
-			{
-				j1 += 36;
-			}
-
-			this.blit(k, i1 - 1, 0, j1, 16, 18);
-		}
-
+		this.textRenderer.draw(matrices, this.title, 8.0F, 4.0F, 4210752);
+		this.textRenderer.draw(matrices, this.playerInventory.getDisplayName(), 8.0F, (float) (this.backgroundHeight - 94), 4210752);
+	}
+	
+    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY)
+    {
+        this.renderBackground(matrices);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+        this.client.getTextureManager().bindTexture(TEXTURE);
+        int i = this.x;
+        int j = this.y;
+        this.drawTexture(matrices, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        int k = (int)(41.0F * this.scrollAmount);
+        this.drawTexture(matrices, i + 119, j + 15 + k, 176 + (this.shouldScroll() ? 0 : 12), 0, 12, 15);
+        int l = this.x + 52;
+        int m = this.y + 14;
+        int n = this.scrollOffset + 12;
+        this.renderRecipeBackground(matrices, mouseX, mouseY, l, m, n);
+        this.renderRecipeIcons(l, m, n);
 	}
 
-	private void drawRecipesItems(int left, int top, int recipeIndexOffsetMax) {
-		List<Item> list = this.container.getOutputItemsList();
-
-		for (int i = this.recipeIndexOffset; i < recipeIndexOffsetMax && i < this.container.getOutputItemsListSize(); ++i)
-		{
-			int j = i - this.recipeIndexOffset;
-			int k = left + j % 4 * 16;
-			int l = j / 4;
-			int i1 = top + l * 18 + 2;
-			this.minecraft.getItemRenderer().renderGuiItem(new ItemStack(list.get(i)), k, i1);
-		}
-	}
-
-	public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_)
+	protected void drawMouseoverTooltip(MatrixStack matrices, int x, int y)
 	{
-		this.clickedOnSroll = false;
-		if (this.hasItemsInInputSlot) {
+		super.drawMouseoverTooltip(matrices, x, y);
+		if (this.canCraft) {
 			int i = this.x + 52;
 			int j = this.y + 14;
-			int k = this.recipeIndexOffset + 12;
+			int k = this.scrollOffset + 12;
+			List<Item> list = ((TimeswapTableScreenHandler) this.handler).getAvailableRecipes();
 
-			for(int l = this.recipeIndexOffset; l < k; ++l)
+			for (int l = this.scrollOffset; l < k && l < ((TimeswapTableScreenHandler) this.handler).getAvailableRecipeCount(); ++l)
 			{
-				int i1 = l - this.recipeIndexOffset;
-				double d0 = p_mouseClicked_1_ - (double) (i + i1 % 4 * 16);
-				double d1 = p_mouseClicked_3_ - (double) (j + i1 / 4 * 18);
-				if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D
-						&& this.container.onButtonClick(this.minecraft.player, l)) {
+				int m = l - this.scrollOffset;
+				int n = i + m % 4 * 16;
+				int o = j + m / 4 * 18 + 2;
+				if (x >= n && x < n + 16 && y >= o && y < o + 18)
+				{
+					this.renderTooltip(matrices, new ItemStack(list.get(i)), x, y);
+				}
+			}
+		}
+
+	}
+
+	private void renderRecipeBackground(MatrixStack matrixStack, int i, int j, int k, int l, int m)
+	{
+		for (int n = this.scrollOffset; n < m
+				&& n < ((TimeswapTableScreenHandler) this.handler).getAvailableRecipeCount(); ++n)
+		{
+			int o = n - this.scrollOffset;
+			int p = k + o % 4 * 16;
+			int q = o / 4;
+			int r = l + q * 18 + 2;
+			int s = this.backgroundHeight;
+			if (n == ((TimeswapTableScreenHandler) this.handler).getSelectedRecipe())
+			{
+				s += 18;
+			} else if (i >= p && j >= r && i < p + 16 && j < r + 18) {
+				s += 36;
+			}
+
+			this.drawTexture(matrixStack, p, r - 1, 0, s, 16, 18);
+		}
+
+	}
+
+	private void renderRecipeIcons(int x, int y, int scrollOffset)
+	{
+		List<Item> list = ((TimeswapTableScreenHandler) this.handler).getAvailableRecipes();
+
+		for (int i = this.scrollOffset; i < scrollOffset && i < ((TimeswapTableScreenHandler) this.handler).getAvailableRecipeCount(); ++i)
+		{
+			int j = i - this.scrollOffset;
+			int k = x + j % 4 * 16;
+			int l = j / 4;
+			int m = y + l * 18 + 2;
+			this.client.getItemRenderer().renderGuiItem(new ItemStack(list.get(i)), k, m);
+		}
+
+	}
+
+	public boolean mouseClicked(double mouseX, double mouseY, int button)
+	{
+		this.mouseClicked = false;
+		if (this.canCraft)
+		{
+			int i = this.x + 52;
+			int j = this.y + 14;
+			int k = this.scrollOffset + 12;
+
+			for (int l = this.scrollOffset; l < k; ++l)
+			{
+				int m = l - this.scrollOffset;
+				double d = mouseX - (double) (i + m % 4 * 16);
+				double e = mouseY - (double) (j + m / 4 * 18);
+				if (d >= 0.0D && e >= 0.0D && d < 16.0D && e < 18.0D && ((TimeswapTableScreenHandler) this.handler).onButtonClick(this.client.player, l))
+				{
 					MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
-					this.minecraft.interactionManager.clickButton((this.container).syncId, l);
+					this.client.interactionManager.clickButton(((TimeswapTableScreenHandler) this.handler).syncId, l);
 					return true;
 				}
 			}
 
 			i = this.x + 119;
 			j = this.y + 9;
-			if (p_mouseClicked_1_ >= (double) i && p_mouseClicked_1_ < (double) (i + 12)
-					&& p_mouseClicked_3_ >= (double) j && p_mouseClicked_3_ < (double) (j + 54)) {
-				this.clickedOnSroll = true;
+			if (mouseX >= (double) i && mouseX < (double) (i + 12) && mouseY >= (double) j && mouseY < (double) (j + 54))
+			{
+				this.mouseClicked = true;
 			}
 		}
 
-		return super.mouseClicked(p_mouseClicked_1_, p_mouseClicked_3_, p_mouseClicked_5_);
+		return super.mouseClicked(mouseX, mouseY, button);
 	}
-
-	public boolean mouseDragged(double p_mouseDragged_1_, double p_mouseDragged_3_, int p_mouseDragged_5_, double p_mouseDragged_6_, double p_mouseDragged_8_) {
-		if (this.clickedOnSroll && this.canScroll()) {
+	
+	public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) 
+	{
+		if (this.mouseClicked && this.shouldScroll())
+		{
 			int i = this.y + 14;
 			int j = i + 54;
-			this.sliderProgress = ((float) p_mouseDragged_3_ - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
-			this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
-			this.recipeIndexOffset = (int) ((double) (this.sliderProgress * (float) this.getHiddenRows()) + 0.5D) * 4;
+			this.scrollAmount = ((float) mouseY - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
+			this.scrollAmount = MathHelper.clamp(this.scrollAmount, 0.0F, 1.0F);
+			this.scrollOffset = (int) ((double) (this.scrollAmount * (float) this.getMaxScroll()) + 0.5D) * 4;
 			return true;
-		}
-		else
-		{
-			return super.mouseDragged(p_mouseDragged_1_, p_mouseDragged_3_, p_mouseDragged_5_, p_mouseDragged_6_, p_mouseDragged_8_);
+		} else {
+			return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
 		}
 	}
 
-	public boolean mouseScrolled(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double p_mouseScrolled_5_)
+	public boolean mouseScrolled(double mouseX, double mouseY, double amount)
 	{
-		if (this.canScroll())
+		if (this.shouldScroll())
 		{
-			int i = this.getHiddenRows();
-			this.sliderProgress = (float) ((double) this.sliderProgress - p_mouseScrolled_5_ / (double) i);
-			this.sliderProgress = MathHelper.clamp(this.sliderProgress, 0.0F, 1.0F);
-			this.recipeIndexOffset = (int) ((double) (this.sliderProgress * (float) i) + 0.5D) * 4;
+			int i = this.getMaxScroll();
+			this.scrollAmount = (float) ((double) this.scrollAmount - amount / (double) i);
+			this.scrollAmount = MathHelper.clamp(this.scrollAmount, 0.0F, 1.0F);
+			this.scrollOffset = (int) ((double) (this.scrollAmount * (float) i) + 0.5D) * 4;
 		}
 
 		return true;
 	}
 
-	private boolean canScroll()
+	private boolean shouldScroll()
 	{
-		return this.hasItemsInInputSlot && this.container.getOutputItemsListSize() > 12;
+		return this.canCraft && ((TimeswapTableScreenHandler) this.handler).getAvailableRecipeCount() > 12;
 	}
 
-	protected int getHiddenRows()
+	protected int getMaxScroll()
 	{
-		return (this.container.getOutputItemsListSize() + 4 - 1) / 4 - 3;
+		return (((TimeswapTableScreenHandler) this.handler).getAvailableRecipeCount() + 4 - 1) / 4 - 3;
 	}
-	
-	private void onInventoryUpdate()
+
+	private void onInventoryChange()
 	{
-		this.hasItemsInInputSlot = this.container.hasItemsinInputSlot();
-		if(!this.hasItemsInInputSlot)
+		this.canCraft = ((TimeswapTableScreenHandler) this.handler).canCraft();
+		if (!this.canCraft)
 		{
-			this.sliderProgress = 0.0F;
-			this.recipeIndexOffset = 0;
+			this.scrollAmount = 0.0F;
+			this.scrollOffset = 0;
 		}
 
 	}
