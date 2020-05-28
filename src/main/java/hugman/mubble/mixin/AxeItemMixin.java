@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LogBlock;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemUsageContext;
@@ -31,7 +31,7 @@ public class AxeItemMixin
 		if (block != null) {
 			world.playSound(player, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			if (!world.isClient) {
-				world.setBlockState(pos, block.getDefaultState().with(LogBlock.AXIS, state.get(LogBlock.AXIS)), 11);
+				world.setBlockState(pos, block.getDefaultState().with(PillarBlock.AXIS, state.get(PillarBlock.AXIS)), 11);
 				if (player != null) {
 					context.getStack().damage(1, player, (p) -> {
 						p.sendToolBreakStatus(context.getHand());

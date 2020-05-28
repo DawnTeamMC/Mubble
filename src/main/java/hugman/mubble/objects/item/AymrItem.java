@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
@@ -25,13 +26,13 @@ public class AymrItem extends Item
     }
     
     @Override
-    public Multimap<String, EntityAttributeModifier> getModifiers(EquipmentSlot slot)
+    public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot)
     {
-    	Multimap<String, EntityAttributeModifier> multimap = super.getModifiers(slot);
+    	Multimap<EntityAttribute, EntityAttributeModifier> multimap = super.getAttributeModifiers(slot);
     	if(slot == EquipmentSlot.MAINHAND)
     	{
-    		multimap.put(EntityAttributes.ATTACK_DAMAGE.getId(), new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_UUID, "Tool modifier", 5.0D, EntityAttributeModifier.Operation.ADDITION));
-    		multimap.put(EntityAttributes.ATTACK_SPEED.getId(), new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_UUID, "Tool modifier", -3.5D, EntityAttributeModifier.Operation.ADDITION));
+    		multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Tool modifier", 5.0D, EntityAttributeModifier.Operation.ADDITION));
+    		multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Tool modifier", -3.5D, EntityAttributeModifier.Operation.ADDITION));
     	}
     	return multimap;
     }

@@ -6,7 +6,7 @@ import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.block.dispenser.ProjectileDispenserBehavior;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.Projectile;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -50,7 +50,7 @@ public class KirbyBallItem extends Item
 	public static final ItemDispenserBehavior DISPENSER_BEHAVIOR = new ProjectileDispenserBehavior()
 	{
 		@Override
-		protected Projectile createProjectile(World world, Position pos, ItemStack stack)
+		protected ProjectileEntity createProjectile(World world, Position pos, ItemStack stack)
 		{
 			return Util.make(new KirbyBallEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) ->
     		{

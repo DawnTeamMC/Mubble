@@ -63,12 +63,12 @@ public class FlyingBlock extends Block
 		return block instanceof AirBlock || block == Blocks.FIRE || block.isIn(MubbleTags.Blocks.CLOUD_BLOCKS) || material.isLiquid() || material.isReplaceable();
 	}
 	
-	public void onLanding(World world, BlockPos pos, BlockState fallingBlockState, BlockState currentStateInPos, FlyingBlockEntity fallingBlockEntity)
+	public void onLanding(World world, BlockPos pos, BlockState flyingBlockState, BlockState currentStateInPos, FlyingBlockEntity flyingBlockEntity)
 	{
 		
 	}
 
-	public void onDestroyedOnLanding(World world, BlockPos pos, FlyingBlockEntity fallingBlockEntity)
+	public void onDestroyedOnLanding(World world, BlockPos pos, FlyingBlockEntity flyingBlockEntity)
 	{
 		
 	}

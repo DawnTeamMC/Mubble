@@ -26,7 +26,7 @@ public class CustomTNTEntity extends Entity
 	private BlockState customTile = Blocks.SAND.getDefaultState();
 	private int fuse = 80;
 	private float strenght = 4.0F;
-	private LivingEntity tntPlacedBy;
+	private LivingEntity causingEntity;
 	
 	public CustomTNTEntity(EntityType<? extends CustomTNTEntity> type, World worldIn)
 	{
@@ -46,7 +46,7 @@ public class CustomTNTEntity extends Entity
 	    this.prevX = x;
 	    this.prevY = y;
 	    this.prevZ = z;
-	    this.tntPlacedBy = igniter;
+	    this.causingEntity = igniter;
 	}
 	
 	@Override
@@ -55,21 +55,30 @@ public class CustomTNTEntity extends Entity
 		this.dataTracker.startTracking(FUSE, fuse);
 		this.dataTracker.startTracking(STRENGHT, strenght);
 	}
+	
+	@Override
+	protected boolean canClimb()
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean collides()
+	{
+		return !this.removed;
+	}
 
 	@Override
 	public void tick()
 	{
-		this.prevX = this.getX();
-		this.prevY = this.getY();
-		this.prevZ = this.getZ();
 		if (!this.hasNoGravity())
 		{
 			this.setVelocity(this.getVelocity().add(0.0D, -0.04D, 0.0D));
 		}
+
 		this.move(MovementType.SELF, this.getVelocity());
 		this.setVelocity(this.getVelocity().multiply(0.98D));
-		if (this.onGround)
-		{
+		if (this.onGround) {
 			this.setVelocity(this.getVelocity().multiply(0.7D, -0.5D, 0.7D));
 		}
 
@@ -84,8 +93,11 @@ public class CustomTNTEntity extends Entity
 		}
 		else
 		{
-			this.checkWaterState();
-			this.world.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
+			this.updateWaterState();
+			if(this.world.isClient)
+			{
+				this.world.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
+			}
 		}
 	}
 	
@@ -114,6 +126,11 @@ public class CustomTNTEntity extends Entity
 		this.setStrenght(compound.getFloat("Strenght"));
 	}
 	
+    public LivingEntity getCausingEntity()
+	{
+        return this.causingEntity;
+    }
+	
 	public void setFuse(int fuseIn)
 	{
 		this.dataTracker.set(FUSE, fuseIn);
@@ -139,11 +156,6 @@ public class CustomTNTEntity extends Entity
 	public float getStrenght()
 	{
 		return this.strenght;
-	}
-	
-	public LivingEntity getTntPlacedBy()
-	{
-		return this.tntPlacedBy;
 	}
 	
 	@Override

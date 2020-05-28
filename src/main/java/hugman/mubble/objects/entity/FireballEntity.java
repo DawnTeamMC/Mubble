@@ -4,11 +4,12 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleTags;
+import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.FireBlock;
+import net.minecraft.block.CampfireBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -19,6 +20,7 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.tag.BlockTags;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -85,7 +87,7 @@ public class FireballEntity extends BallEntity
 		BlockPos pos = result.getBlockPos();
 		BlockState state = this.world.getBlockState(pos);
 		Direction face = result.getSide();
-		FireBlock fire = (FireBlock) Blocks.FIRE;
+		AbstractFireBlock fire = (AbstractFireBlock) Blocks.FIRE;
 		Block resultBlock = null;
 		
 		if(state.getBlock().isIn(MubbleTags.Blocks.MELTABLE_TO_AIR))
@@ -118,12 +120,27 @@ public class FireballEntity extends BallEntity
 			world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
+		if(state.method_27851(BlockTags.CAMPFIRES, (abstractBlockState) ->
+		{
+			return abstractBlockState.contains(CampfireBlock.LIT) && abstractBlockState.contains(CampfireBlock.WATERLOGGED);
+		}))
+		{
+			if (!(Boolean) state.get(CampfireBlock.LIT) && !(Boolean) state.get(CampfireBlock.WATERLOGGED))
+			{
+				if(!world.isClient)
+				{
+					world.setBlockState(pos, (BlockState) state.with(CampfireBlock.LIT, true));
+				}
+				world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+	            return true;
+			}
+		}
 		if(fire.isFlammable(state))
 		{
 			BlockPos firePos = pos.offset(face);
             if(this.world.isAir(firePos) && !world.isClient)
             {
-               this.world.setBlockState(firePos, fire.getStateForPosition(world, firePos));
+               this.world.setBlockState(firePos, AbstractFireBlock.getState(world, pos));
             }
 			world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             return true;

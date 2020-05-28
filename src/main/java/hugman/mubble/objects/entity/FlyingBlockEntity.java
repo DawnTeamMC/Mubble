@@ -1,5 +1,6 @@
 package hugman.mubble.objects.entity;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.collect.Lists;
@@ -37,54 +38,65 @@ import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.crash.CrashReportSection;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.hit.HitResult.Type;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.RayTraceContext;
+import net.minecraft.world.RayTraceContext.FluidHandling;
+import net.minecraft.world.RayTraceContext.ShapeType;
 import net.minecraft.world.World;
 
 public class FlyingBlockEntity extends Entity
 {
-	private BlockState flyTile = MubbleBlocks.WHITE_BALLOON.getDefaultState();
-	private int flyTime;
-	private boolean shouldDropItem = true;
-	private boolean dontSetBlock;
+	private BlockState block;
+	public int timeFlying;
+	public boolean dropItem;
+	private boolean destroyedOnLanding;
 	private boolean hurtEntities;
-	private int flyHurtMax = 40;
-	private float flyHurtAmount = 2.0F;
-	private CompoundTag tileEntityData;
-	protected static final TrackedData<BlockPos> ORIGIN = DataTracker.registerData(FlyingBlockEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
+	private int flyHurtMax;
+	private float flyHurtAmount;
+	public CompoundTag blockEntityData;
+	protected static final TrackedData<BlockPos> BLOCK_POS = DataTracker.registerData(FlyingBlockEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
 
-	public FlyingBlockEntity(EntityType<? extends FlyingBlockEntity> type, World worldIn)
+	public FlyingBlockEntity(EntityType<? extends FlyingBlockEntity> type, World world)
 	{
-		super(type, worldIn);
+		super(type, world);
+        this.block = Blocks.SAND.getDefaultState();
+        this.dropItem = true;
+        this.flyHurtMax = 40;
+        this.flyHurtAmount = 2.0F;
 	}
 
-	public FlyingBlockEntity(World worldIn, double x, double y, double z, BlockState flyingBlockState)
+	public FlyingBlockEntity(World world, double x, double y, double z, BlockState block)
 	{
-		this(MubbleEntities.FLYING_BLOCK, worldIn);
-		this.flyTile = flyingBlockState;
-		this.inanimate = true;
-		this.updatePosition(x, y + (double)((1.0F - this.getHeight()) / 2.0F), z);
-		this.setVelocity(Vec3d.ZERO);
-		this.prevX = x;
-		this.prevY = y;
-		this.prevZ = z;
-		this.setOrigin(new BlockPos(this));
+		this(MubbleEntities.FLYING_BLOCK, world);
+        this.block = block;
+        this.inanimate = true;
+        this.updatePosition(x, y + (double)((1.0F - this.getHeight()) / 2.0F), z);
+        this.setVelocity(Vec3d.ZERO);
+        this.prevX = x;
+        this.prevY = y;
+        this.prevZ = z;
+        this.setFlyingBlockPos(this.getBlockPos());
 	}
 	
-	public void setOrigin(BlockPos pos)
+	public boolean isAttackable()
 	{
-		this.dataTracker.set(ORIGIN, pos);
+		return false;
+	}
+	
+	public void setFlyingBlockPos(BlockPos pos)
+	{
+		this.dataTracker.set(BLOCK_POS, pos);
 	}
 
 	@Environment(EnvType.CLIENT)
-	public BlockPos getOrigin()
+	public BlockPos getFallingBlockPos()
 	{
-		return this.dataTracker.get(ORIGIN);
+		return (BlockPos) this.dataTracker.get(BLOCK_POS);
 	}
 	
 	@Override
@@ -94,36 +106,34 @@ public class FlyingBlockEntity extends Entity
 	}
 	
 	@Override
-	protected void initDataTracker()
+    protected void initDataTracker()
 	{
-		this.dataTracker.startTracking(ORIGIN, BlockPos.ORIGIN);
-	}
-	
+        this.dataTracker.startTracking(BLOCK_POS, BlockPos.ORIGIN);
+    }
+
 	@Override
-	public boolean collides()
+    public boolean collides()
 	{
-		return isAlive();
-	}
+        return !this.removed;
+    }
 	
 	@Override
 	public void tick()
 	{
-		if(this.flyTile.getBlock() instanceof AirBlock)
+		if (this.block.isAir())
 		{
 			this.remove();
 		}
 		else
-		{
-			this.prevX = this.getX();
-			this.prevY = this.getY();
-			this.prevZ = this.getZ();
-			Block block = this.flyTile.getBlock();
-			if (this.flyTime++ == 0)
+        {
+			Block block = this.block.getBlock();
+            BlockPos blockPos2;
+			if (this.timeFlying++ == 0)
 			{
-				BlockPos blockpos = new BlockPos(this);
-				if (this.world.getBlockState(blockpos).getBlock() == block)
+				blockPos2 = this.getBlockPos();
+				if (this.world.getBlockState(blockPos2).isOf(block))
 				{
-					this.world.removeBlock(blockpos, false);
+					this.world.removeBlock(blockPos2, false);
 				}
 				else if (!this.world.isClient)
 				{
@@ -138,24 +148,24 @@ public class FlyingBlockEntity extends Entity
 			this.move(MovementType.SELF, this.getVelocity());
 			if (!this.world.isClient)
 			{
-				BlockPos blockpos1 = new BlockPos(this);
-				boolean flag = this.flyTile.getBlock() instanceof ConcretePowderBlock;
-				boolean flag1 = flag && this.world.getFluidState(blockpos1).matches(FluidTags.WATER);
-				double d0 = this.getVelocity().lengthSquared();
-	            if (flag && d0 > 1.0D)
-	            {
-	                BlockHitResult blockraytraceresult = this.world.rayTrace(new RayTraceContext(new Vec3d(this.prevX, this.prevY, this.prevZ), new Vec3d(this.getX(), this.getY(), this.getZ()), RayTraceContext.ShapeType.COLLIDER, RayTraceContext.FluidHandling.SOURCE_ONLY, this));
-	                if (blockraytraceresult.getType() != HitResult.Type.MISS && this.world.getFluidState(blockraytraceresult.getBlockPos()).matches(FluidTags.WATER))
-	                {
-	                   blockpos1 = blockraytraceresult.getBlockPos();
-	                   flag1 = true;
-	                }
-	             }
-				if(FlyingBlock.canFlyThrough(this.world.getBlockState(blockpos1.up())) && !flag1)
+				blockPos2 = this.getBlockPos();
+                boolean bl = this.block.getBlock() instanceof ConcretePowderBlock;
+                boolean bl2 = bl && this.world.getFluidState(blockPos2).matches(FluidTags.WATER);
+                double d = this.getVelocity().lengthSquared();
+				if (bl && d > 1.0D)
 				{
-					if(!this.world.isClient && (this.flyTime > 100 && (blockpos1.getY() < 1 || blockpos1.getY() > 256) || this.flyTime > 600))
+					BlockHitResult blockHitResult = this.world.rayTrace(new RayTraceContext(new Vec3d(this.prevX, this.prevY, this.prevZ), this.getPos(), ShapeType.COLLIDER, FluidHandling.SOURCE_ONLY, this));
+					if (blockHitResult.getType() != Type.MISS && this.world.getFluidState(blockHitResult.getBlockPos()).matches(FluidTags.WATER))
 					{
-						if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+						blockPos2 = blockHitResult.getBlockPos();
+						bl2 = true;
+					}
+				}
+				if(FlyingBlock.canFlyThrough(this.world.getBlockState(blockPos2.up())) && !bl2)
+				{
+					if(!this.world.isClient && (this.timeFlying > 100 && (blockPos2.getY() < 1 || blockPos2.getY() > 256) || this.timeFlying > 600))
+					{
+						if(this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 						{
 							this.dropItem(block);
 						}
@@ -164,63 +174,65 @@ public class FlyingBlockEntity extends Entity
 				}
 				else
 				{
-					BlockState blockstate = this.world.getBlockState(blockpos1);
+					BlockState blockState = this.world.getBlockState(blockPos2);
 					this.setVelocity(this.getVelocity().multiply(0.7D, 0.4D, 0.7D));
-					if(blockstate.getBlock() != Blocks.MOVING_PISTON)
+					if(!blockState.isOf(Blocks.MOVING_PISTON))
 					{
 						this.remove();
-						if(!this.dontSetBlock)
+						if(!this.destroyedOnLanding)
 						{
-							boolean flag2 = blockstate.canReplace(new AutomaticItemPlacementContext(this.world, blockpos1, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
-							boolean flag3 = this.flyTile.canPlaceAt(this.world, blockpos1);
-							if(flag2 && flag3)
+							boolean bl3 = blockState.canReplace(new AutomaticItemPlacementContext(this.world, blockPos2, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
+							boolean bl4 = this.block.canPlaceAt(this.world, blockPos2);
+							if(bl3 && bl4)
 							{
-								if(this.flyTile.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockpos1).getFluid() == Fluids.WATER)
+								if(this.block.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockPos2).getFluid() == Fluids.WATER)
 								{
-									this.flyTile = this.flyTile.with(Properties.WATERLOGGED, Boolean.valueOf(true));
+									this.block = this.block.with(Properties.WATERLOGGED, Boolean.valueOf(true));
 								}
 								
-								if(this.world.setBlockState(blockpos1, this.flyTile, 3))
+								if(this.world.setBlockState(blockPos2, this.block, 3))
 								{
 									if(block instanceof FlyingBlock)
 									{
-										((FlyingBlock) block).onEndFlying(this.world, blockpos1, this.flyTile, blockstate);
+										((FlyingBlock) block).onLanding(this.world, blockPos2, this.block, blockState, this);
 									}
 									
-									if(this.tileEntityData != null && flyTile instanceof BlockEntityProvider)
+									if(this.blockEntityData != null && block instanceof BlockEntityProvider)
 									{
-										BlockEntity tileEntity = this.world.getBlockEntity(blockpos1);
-										if(tileEntity != null)
+										BlockEntity blockEntity = this.world.getBlockEntity(blockPos2);
+										if (blockEntity != null)
 										{
-											CompoundTag compoundNbt = tileEntity.toTag(new CompoundTag());
-											
-											for(String s : this.tileEntityData.getKeys())
+											CompoundTag compoundTag = blockEntity.toTag(new CompoundTag());
+											Iterator var13 = this.blockEntityData.getKeys().iterator();
+
+											while (var13.hasNext())
 											{
-												Tag inbt = this.tileEntityData.get(s);
-												if (!"x".equals(s) && !"y".equals(s) && !"z".equals(s))
+												String string = (String) var13.next();
+												Tag tag = this.blockEntityData.get(string);
+												if (!"x".equals(string) && !"y".equals(string) && !"z".equals(string))
 												{
-		        	                            	compoundNbt.put(s, inbt.copy());
-		        	                            }
+													compoundTag.put(string, tag.copy());
+												}
 											}
 											
-											tileEntity.fromTag(compoundNbt);
-											tileEntity.markDirty();
+											blockEntity.fromTag(this.block, compoundTag);
+											blockEntity.markDirty();
 										}
 									}
 								}
-								else if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+								else if(this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 								{
 									this.dropItem(block);
 								}
 							}
-							else if(this.shouldDropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+							else if(this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 							{
 								this.dropItem(block);
 							}
 						}
 						else if(block instanceof FlyingBlock)
 						{
-							((FlyingBlock) block).onBroken(this.world, blockpos1);
+							((FlyingBlock) block).onDestroyedOnLanding(this.world, blockPos2, this);
 						}
 					}
 				}
@@ -230,84 +242,87 @@ public class FlyingBlockEntity extends Entity
 	}
 	
 	@Override
-	public boolean handleFallDamage(float distance, float damageMultiplier)
+	public boolean handleFallDamage(float fallDistance, float damageMultiplier)
 	{
 		if (this.hurtEntities)
 		{
-			int i = MathHelper.ceil(distance - 1.0F);
+			int i = MathHelper.ceil(fallDistance - 1.0F);
 			if (i > 0)
 			{
 				List<Entity> list = Lists.newArrayList(this.world.getEntities(this, this.getBoundingBox()));
-				boolean flag = this.flyTile.matches(BlockTags.ANVIL);
-				DamageSource damagesource = flag ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
+				boolean bl = this.block.isIn(BlockTags.ANVIL);
+				DamageSource damageSource = bl ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
+				Iterator var7 = list.iterator();
 
-				for(Entity entity : list)
+				while (var7.hasNext())
 				{
-					entity.damage(damagesource, (float)Math.min(MathHelper.floor((float)i * this.flyHurtAmount), this.flyHurtMax));
+					Entity entity = (Entity) var7.next();
+					entity.damage(damageSource, (float) Math.min(MathHelper.floor((float) i * this.flyHurtAmount), this.flyHurtMax));
 				}
 
-				if (flag && (double)this.random.nextFloat() < (double)0.05F + (double)i * 0.05D)
+				if (bl && (double) this.random.nextFloat() < 0.05000000074505806D + (double) i * 0.05D)
 				{
-					BlockState iblockstate = AnvilBlock.getLandingState(this.flyTile);
-					if (iblockstate == null)
+					BlockState blockState = AnvilBlock.getLandingState(this.block);
+					if (blockState == null)
 					{
-						this.dontSetBlock = true;
+						this.destroyedOnLanding = true;
 					}
 					else
 					{
-						this.flyTile = iblockstate;
+						this.block = blockState;
 					}
 				}
 			}
 		}
+
 		return false;
 	}
 
 	@Override
 	protected void writeCustomDataToTag(CompoundTag compound)
 	{
-		compound.put("BlockState", NbtHelper.fromBlockState(this.flyTile));
-		compound.putInt("Time", this.flyTime);
-		compound.putBoolean("DropItem", this.shouldDropItem);
+		compound.put("BlockState", NbtHelper.fromBlockState(this.block));
+		compound.putInt("Time", this.timeFlying);
+		compound.putBoolean("DropItem", this.dropItem);
 		compound.putBoolean("HurtEntities", this.hurtEntities);
 		compound.putFloat("FlyHurtAmount", this.flyHurtAmount);
 		compound.putInt("FlyHurtMax", this.flyHurtMax);
-		if (this.tileEntityData != null)
+		if (this.blockEntityData != null)
 		{
-			compound.put("TileEntityData", this.tileEntityData);
+			compound.put("TileEntityData", this.blockEntityData);
 		}
 	}
 	
 	@Override
 	protected void readCustomDataFromTag(CompoundTag compound)
 	{
-		this.flyTile = NbtHelper.toBlockState(compound.getCompound("BlockState"));
-		this.flyTime = compound.getInt("Time");
+		this.block = NbtHelper.toBlockState(compound.getCompound("BlockState"));
+		this.timeFlying = compound.getInt("Time");
 		if (compound.contains("HurtEntities", 99)) {
 			this.hurtEntities = compound.getBoolean("HurtEntities");
 			this.flyHurtMax = compound.getInt("FlyHurtMax");
 		}
-		else if(this.flyTile.matches(BlockTags.ANVIL))
+		else if(this.block.isIn(BlockTags.ANVIL))
 		{
 			this.hurtEntities = true;
 		}
 		if(compound.contains("DropItem", 99))
 		{
-			this.shouldDropItem = compound.getBoolean("DropItem");
+			this.dropItem = compound.getBoolean("DropItem");
 		}
 		if(compound.contains("TileEntityData", 10))
 		{
-			this.tileEntityData = compound.getCompound("TileEntityData");
+			this.blockEntityData = compound.getCompound("TileEntityData");
 		}
-		if(this.flyTile.getBlock() instanceof AirBlock)
+		if(this.block.getBlock() instanceof AirBlock)
 		{
-			this.flyTile = MubbleBlocks.WHITE_BALLOON.getDefaultState();
+			this.block = MubbleBlocks.WHITE_BALLOON.getDefaultState();
 		}
 
 	}
 
 	@Environment(EnvType.CLIENT)
-	public World getWorldObj()
+	public World getWorldClient()
 	{
 		return this.world;
 	}
@@ -318,7 +333,8 @@ public class FlyingBlockEntity extends Entity
 	}
 	
 	@Environment(EnvType.CLIENT)
-	public boolean canRenderOnFire()
+	@Override
+	public boolean doesRenderOnFire()
 	{
 		return false;
 	}
@@ -327,12 +343,18 @@ public class FlyingBlockEntity extends Entity
 	public void populateCrashReport(CrashReportSection category)
 	{
 		super.populateCrashReport(category);
-		category.add("Immitating BlockState", this.flyTile.toString());
+		category.add("Immitating BlockState", this.block.toString());
 	}
 	
 	public BlockState getBlockState()
 	{
-		return this.flyTile;
+		return this.block;
+	}
+	
+	@Override
+	public boolean entityDataRequiresOperator()
+	{
+		return true;
 	}
 
 	@Override

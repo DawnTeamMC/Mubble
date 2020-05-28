@@ -12,11 +12,12 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.AnimalMateGoal;
 import net.minecraft.entity.ai.goal.EscapeDangerGoal;
 import net.minecraft.entity.ai.goal.FollowParentGoal;
@@ -26,11 +27,13 @@ import net.minecraft.entity.ai.goal.SwimGoal;
 import net.minecraft.entity.ai.goal.TemptGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.attribute.DefaultAttributeContainer.Builder;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -42,9 +45,9 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 
@@ -72,9 +75,9 @@ public class DuckEntity extends AnimalEntity
     }
     
     @Override
-    public net.minecraft.entity.EntityData initialize(IWorld world, LocalDifficulty difficulty, SpawnType spawnReason, net.minecraft.entity.EntityData data, CompoundTag compound)
+    public EntityData initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, net.minecraft.entity.EntityData data, CompoundTag compound)
     {
-		Biome biome = world.getBiome(new BlockPos(this));
+		Biome biome = world.getBiome(this.getBlockPos());
 		DuckEntity.Type type = DuckEntity.Type.getTypeByBiome(biome);
 		if(data instanceof DuckEntity.DuckData)
 		{
@@ -116,12 +119,9 @@ public class DuckEntity extends AnimalEntity
     	this.setVariantType(DuckEntity.Type.getTypeByName(compound.getString("Type")));
     }
     
-    @Override
-	protected void initAttributes()
+    public static Builder createDuckAttributes()
 	{
-		super.initAttributes();
-		this.getAttributeInstance(EntityAttributes.MAX_HEALTH).setBaseValue(4.0D);
-		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue(0.25D);
+    	return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
 	}
     
     @Override
@@ -210,7 +210,7 @@ public class DuckEntity extends AnimalEntity
 		}
 	}
 	
-	public static class DuckData extends PassiveEntity.EntityData
+	public static class DuckData extends PassiveEntity.PassiveData
 	{
 		public final DuckEntity.Type type;
 
