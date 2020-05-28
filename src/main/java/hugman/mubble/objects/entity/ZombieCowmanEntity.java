@@ -21,6 +21,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.ZombieEntity;
 import net.minecraft.entity.mob.ZombiePigmanEntity;
+import net.minecraft.entity.mob.ZombifiedPiglinEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -31,7 +32,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 
-public class ZombieCowmanEntity extends ZombiePigmanEntity
+public class ZombieCowmanEntity extends ZombifiedPiglinEntity
 {
 	private static final UUID ATTACK_SPEED_BOOST_MODIFIER_UUID = UUID.fromString("49455A49-7EC5-45BA-B886-3B90B23A1718");
 	private static final EntityAttributeModifier ATTACK_SPEED_BOOST_MODIFIER = (new EntityAttributeModifier(ATTACK_SPEED_BOOST_MODIFIER_UUID, "Attacking speed boost", 0.05D, EntityAttributeModifier.Operation.ADDITION)).setSerialize(false);
@@ -82,11 +83,11 @@ public class ZombieCowmanEntity extends ZombiePigmanEntity
 	protected void initAttributes()
 	{
 		super.initAttributes();
-		this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED).setBaseValue((double) 0.34F);
-		this.getAttributeInstance(EntityAttributes.ATTACK_DAMAGE).setBaseValue(5.0D);
+		this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue((double) 0.34F);
+		this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(5.0D);
 	}
 	
-	public static boolean canSpawn(EntityType<ZombiePigmanEntity> entity, IWorld world, SpawnType reason, BlockPos pos, Random rand)
+	public static boolean canSpawn(EntityType<ZombifiedPiglinEntity> entity, IWorld world, SpawnType reason, BlockPos pos, Random rand)
 	{
 		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}
@@ -100,7 +101,7 @@ public class ZombieCowmanEntity extends ZombiePigmanEntity
 	@Override
 	protected void mobTick()
 	{
-		EntityAttributeInstance iattributeinstance = this.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED);
+		EntityAttributeInstance iattributeinstance = this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
 		if (this.isAngry())
 		{
 			if (!this.isBaby() && !iattributeinstance.hasModifier(ATTACK_SPEED_BOOST_MODIFIER))

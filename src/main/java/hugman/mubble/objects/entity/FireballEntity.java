@@ -66,10 +66,10 @@ public class FireballEntity extends BallEntity
 	{
 		Entity entity = result.getEntity();
 		float damage = entity.isFireImmune() ? 1.0F : 3.0F;
-        boolean flag = entity.damage(DamageSource.thrownProjectile(this, this.owner).setExplosive(), damage);
+        boolean flag = entity.damage(DamageSource.thrownProjectile(this, this.getOwner()).setExplosive(), damage);
         if(flag)
         {
-            this.dealDamage(this.owner, entity);
+            this.dealDamage((LivingEntity) this.getOwner(), entity);
         }
         if(!entity.isFireImmune())
         {
@@ -88,15 +88,15 @@ public class FireballEntity extends BallEntity
 		FireBlock fire = (FireBlock) Blocks.FIRE;
 		Block resultBlock = null;
 		
-		if(state.getBlock().matches(MubbleTags.Blocks.MELTABLE_TO_AIR))
+		if(state.getBlock().isIn(MubbleTags.Blocks.MELTABLE_TO_AIR))
 		{
 			resultBlock = Blocks.AIR;
 		}
-		else if(state.getBlock().matches(MubbleTags.Blocks.MELTABLE_TO_ICE))
+		else if(state.getBlock().isIn(MubbleTags.Blocks.MELTABLE_TO_ICE))
 		{
 			resultBlock = Blocks.ICE;
 		}
-		else if(state.getBlock().matches(MubbleTags.Blocks.MELTABLE_TO_WATER))
+		else if(state.getBlock().isIn(MubbleTags.Blocks.MELTABLE_TO_WATER))
 		{
 			resultBlock = Blocks.WATER;
 		}
@@ -105,7 +105,7 @@ public class FireballEntity extends BallEntity
 		{
 			if(!world.isClient)
 			{
-				if(world.dimension.doesWaterVaporize() || resultBlock instanceof AirBlock)
+				if(world.getDimension().isUltrawarm() || resultBlock instanceof AirBlock)
 				{
 					world.removeBlock(pos, false);
 				}

@@ -6,9 +6,9 @@ import net.minecraft.entity.EquipmentSlot;
 
 public class TelekinesisEnchantment extends Enchantment
 {
-	public TelekinesisEnchantment(Enchantment.Weight weight, EquipmentSlot... slots)
+	public TelekinesisEnchantment(Enchantment.Rarity rarity, EquipmentSlot... slots)
 	{
-		super(weight, EnchantmentTarget.WEAPON, slots);
+		super(rarity, EnchantmentTarget.WEAPON, slots);
 	}
 	
 	@Override

@@ -6,7 +6,7 @@ import hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
@@ -15,7 +15,6 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionType;
 
 public class CappyCostume extends HeadCostume
 {    
@@ -31,7 +30,7 @@ public class CappyCostume extends HeadCostume
 		if(!world.isClient && rand.nextInt(301) == 0)
 		{
 			int random = rand.nextInt(5);
-			if(player.dimension == DimensionType.THE_NETHER && random <= 3)
+			if(world.getDimension().isNether() && random <= 3)
 			{
 				world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
 			}
@@ -46,7 +45,7 @@ public class CappyCostume extends HeadCostume
 	@Override
 	public boolean useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity living, Hand hand)
 	{
-		ItemEntity entity = (ItemEntity) EntityType.ITEM.spawnFromItemStack(player.world, stack, player, player.getBlockPos(), SpawnType.DISPENSER, true, false);
+		ItemEntity entity = (ItemEntity) EntityType.ITEM.spawnFromItemStack(player.world, stack, player, player.getBlockPos(), SpawnReason.DISPENSER, true, false);
 		Random rand = new Random();
 		World world = entity.world;
 		if(rand.nextInt(201) == 0)

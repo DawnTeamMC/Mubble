@@ -2,7 +2,6 @@ package hugman.mubble.init.data;
 
 import java.util.function.Supplier;
 
-import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Lazy;
@@ -13,7 +12,7 @@ public enum MubbleItemTiers implements ToolMaterial
 	{
 		return Ingredient.fromTag(MubbleTags.Items.GEMS_KYBER);
 	}),
-	KYBER(4, 1932, 10.0F, 4.5F, 16, () ->
+	KYBER(3, 1932, 10.0F, 4.5F, 16, () ->
 	{
 		return Ingredient.fromTag(MubbleTags.Items.GEMS_KYBER);
 	}),
@@ -21,31 +20,33 @@ public enum MubbleItemTiers implements ToolMaterial
 	{
 		return Ingredient.fromTag(MubbleTags.Items.GEMS_BISMUTH);
 	});
-	private final int harvestLevel;
-	private final int maxUses;
-	private final float efficiency;
+
+	private final int miningLevel;
+	private final int itemDurability;
+	private final float miningSpeed;
 	private final float attackDamage;
 	private final int enchantability;
-	private final Lazy<Ingredient> repairMaterial;
+	private final Lazy<Ingredient> repairIngredient;
 
-	private MubbleItemTiers(int harvestLevelIn, int maxUsesIn, float efficiencyIn, float attackDamageIn, int enchantabilityIn, Supplier<Ingredient> repairMaterialIn)
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private MubbleItemTiers(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantibility, Supplier<Ingredient> repairIngredient)
 	{
-		this.harvestLevel = harvestLevelIn;
-		this.maxUses = maxUsesIn;
-		this.efficiency = efficiencyIn;
-		this.attackDamage = attackDamageIn;
-		this.enchantability = enchantabilityIn;
-		this.repairMaterial = new Lazy<>(repairMaterialIn);
+		this.miningLevel = miningLevel;
+		this.itemDurability = itemDurability;
+		this.miningSpeed = miningSpeed;
+		this.attackDamage = attackDamage;
+		this.enchantability = enchantibility;
+		this.repairIngredient = new Lazy(repairIngredient);
 	}
 
 	public int getDurability()
 	{
-		return this.maxUses;
+		return this.itemDurability;
 	}
 
-	public float getMiningSpeed()
+	public float getMiningSpeedMultiplier()
 	{
-		return this.efficiency;
+		return this.miningSpeed;
 	}
 
 	public float getAttackDamage()
@@ -55,7 +56,7 @@ public enum MubbleItemTiers implements ToolMaterial
 
 	public int getMiningLevel()
 	{
-		return this.harvestLevel;
+		return this.miningLevel;
 	}
 
 	public int getEnchantability()
@@ -65,6 +66,6 @@ public enum MubbleItemTiers implements ToolMaterial
 
 	public Ingredient getRepairIngredient()
 	{
-		return this.repairMaterial.get();
+		return (Ingredient) this.repairIngredient.get();
 	}
 }
