@@ -9,7 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class PlaceBlockBehavior extends BlockPlacementDispenserBehavior
+public class PlaceBreakDispenserBehavior extends BlockPlacementDispenserBehavior
 {
 	protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
 	{

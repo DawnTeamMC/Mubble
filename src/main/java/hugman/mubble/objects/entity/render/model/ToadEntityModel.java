@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class ToadModel<T extends Entity> extends AnimalModel<T>
+public class ToadEntityModel<T extends Entity> extends AnimalModel<T>
 {
 	public ModelPart head;
 	public ModelPart hat;
@@ -21,7 +21,7 @@ public class ToadModel<T extends Entity> extends AnimalModel<T>
 	public ModelPart right_leg;
 	public ModelPart left_leg;
 
-	public ToadModel()
+	public ToadEntityModel()
 	{
 		super(true, 13.3F, 0.0F);
 		this.textureWidth = 64;

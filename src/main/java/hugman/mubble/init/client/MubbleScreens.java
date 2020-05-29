@@ -2,7 +2,7 @@ package hugman.mubble.init.client;
 
 import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.objects.screen.TimeswapTableScreen;
-import hugman.mubble.objects.screen_handler.TimeswapTableScreenHandler;
+import hugman.mubble.objects.screen.screen_handler.TimeswapTableScreenHandler;
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
 
 public class MubbleScreens

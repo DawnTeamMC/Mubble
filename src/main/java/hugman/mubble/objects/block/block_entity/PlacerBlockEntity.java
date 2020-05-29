@@ -1,4 +1,4 @@
-package hugman.mubble.objects.tile_entity;
+package hugman.mubble.objects.block.block_entity;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
@@ -6,9 +6,9 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-public class PlacerTileEntity extends DispenserBlockEntity
+public class PlacerBlockEntity extends DispenserBlockEntity
 {
-	public PlacerTileEntity()
+	public PlacerBlockEntity()
 	{
 		super(MubbleTileEntityTypes.PLACER);
 	}

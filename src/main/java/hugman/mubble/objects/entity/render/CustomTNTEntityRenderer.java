@@ -15,9 +15,9 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class CustomTNTRenderer extends EntityRenderer<CustomTNTEntity>
+public class CustomTNTEntityRenderer extends EntityRenderer<CustomTNTEntity>
 {
-	public CustomTNTRenderer(EntityRenderDispatcher dispatcher)
+	public CustomTNTEntityRenderer(EntityRenderDispatcher dispatcher)
 	{
 		super(dispatcher);
 		this.shadowRadius = 0.5F;

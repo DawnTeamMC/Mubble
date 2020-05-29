@@ -1,7 +1,7 @@
 package hugman.mubble.init.data;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.screen_handler.TimeswapTableScreenHandler;
+import hugman.mubble.objects.screen.screen_handler.TimeswapTableScreenHandler;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.util.Identifier;
 

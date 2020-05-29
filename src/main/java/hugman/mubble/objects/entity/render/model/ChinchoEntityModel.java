@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class ChinchoModel<T extends Entity> extends CompositeEntityModel<T>
+public class ChinchoEntityModel<T extends Entity> extends CompositeEntityModel<T>
 {
 	public ModelPart head;
 	public ModelPart body;
@@ -21,7 +21,7 @@ public class ChinchoModel<T extends Entity> extends CompositeEntityModel<T>
 	public ModelPart middle_teeth;
 	public ModelPart left_teeth;
 
-	public ChinchoModel()
+	public ChinchoEntityModel()
 	{
 		this.textureWidth = 64;
 		this.textureHeight = 64;

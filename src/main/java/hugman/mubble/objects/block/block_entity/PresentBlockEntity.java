@@ -1,4 +1,4 @@
-package hugman.mubble.objects.tile_entity;
+package hugman.mubble.objects.block.block_entity;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleSounds;
@@ -21,12 +21,12 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 
-public class PresentTileEntity extends LootableContainerBlockEntity
+public class PresentBlockEntity extends LootableContainerBlockEntity
 {
 	private DefaultedList<ItemStack> inventory;
 	private int viewerCount;
 
-	public PresentTileEntity()
+	public PresentBlockEntity()
 	{
 		super(MubbleTileEntityTypes.PRESENT);
 		this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);

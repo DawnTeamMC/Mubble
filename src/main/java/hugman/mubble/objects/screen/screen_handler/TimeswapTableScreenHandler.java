@@ -1,4 +1,4 @@
-package hugman.mubble.objects.screen_handler;
+package hugman.mubble.objects.screen.screen_handler;
 
 import com.google.common.collect.Lists;
 import hugman.mubble.init.MubbleBlocks;

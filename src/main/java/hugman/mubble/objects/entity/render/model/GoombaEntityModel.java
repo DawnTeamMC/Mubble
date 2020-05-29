@@ -9,7 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class GoombaModel<T extends Entity> extends CompositeEntityModel<T>
+public class GoombaEntityModel<T extends Entity> extends CompositeEntityModel<T>
 {
 	private final ModelPart body;
 	private final ModelPart head;
@@ -18,7 +18,7 @@ public class GoombaModel<T extends Entity> extends CompositeEntityModel<T>
 	private final ModelPart left_foot;
 	private final ModelPart right_foot;
 
-	public GoombaModel()
+	public GoombaEntityModel()
 	{
 		textureWidth = 64;
 		textureHeight = 64;

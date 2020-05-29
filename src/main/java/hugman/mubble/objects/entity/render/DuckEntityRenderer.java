@@ -2,7 +2,7 @@ package hugman.mubble.objects.entity.render;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.DuckEntity;
-import hugman.mubble.objects.entity.render.model.DuckModel;
+import hugman.mubble.objects.entity.render.model.DuckEntityModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -11,11 +11,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class DuckRenderer extends MobEntityRenderer<DuckEntity, DuckModel<DuckEntity>>
+public class DuckEntityRenderer extends MobEntityRenderer<DuckEntity, DuckEntityModel<DuckEntity>>
 {
-	public DuckRenderer(EntityRenderDispatcher manager)
+	public DuckEntityRenderer(EntityRenderDispatcher manager)
 	{
-		super(manager, new DuckModel<>(), 0.3F);
+		super(manager, new DuckEntityModel<>(), 0.3F);
 	}
 
 	@Override

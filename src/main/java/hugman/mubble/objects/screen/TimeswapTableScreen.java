@@ -2,7 +2,7 @@ package hugman.mubble.objects.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.screen_handler.TimeswapTableScreenHandler;
+import hugman.mubble.objects.screen.screen_handler.TimeswapTableScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;

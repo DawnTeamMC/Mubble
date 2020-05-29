@@ -2,7 +2,7 @@ package hugman.mubble.objects.entity.render;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.ChinchoEntity;
-import hugman.mubble.objects.entity.render.model.ChinchoModel;
+import hugman.mubble.objects.entity.render.model.ChinchoEntityModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -10,13 +10,13 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class ChinchoRenderer extends MobEntityRenderer<ChinchoEntity, ChinchoModel<ChinchoEntity>>
+public class ChinchoEntityRenderer extends MobEntityRenderer<ChinchoEntity, ChinchoEntityModel<ChinchoEntity>>
 {
 	private static final Identifier CHINCHO_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/chincho.png");
 
-	public ChinchoRenderer(EntityRenderDispatcher dispatcher)
+	public ChinchoEntityRenderer(EntityRenderDispatcher dispatcher)
 	{
-		super(dispatcher, new ChinchoModel<>(), 0.5F);
+		super(dispatcher, new ChinchoEntityModel<>(), 0.5F);
 	}
 
 	@Override

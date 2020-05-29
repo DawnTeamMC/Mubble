@@ -11,11 +11,11 @@ import net.minecraft.client.render.entity.model.ZombieEntityModel;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class ZombieCowmanRenderer extends BipedEntityRenderer<ZombieCowmanEntity, ZombieEntityModel<ZombieCowmanEntity>>
+public class ZombieCowmanEntityRenderer extends BipedEntityRenderer<ZombieCowmanEntity, ZombieEntityModel<ZombieCowmanEntity>>
 {
 	private static final Identifier ZOMBIE_COWMAN_TEXTURE = new Identifier(Mubble.MOD_ID, "textures/entity/zombie_cowman.png");
 
-	public ZombieCowmanRenderer(EntityRenderDispatcher dispatcher)
+	public ZombieCowmanEntityRenderer(EntityRenderDispatcher dispatcher)
 	{
 		super(dispatcher, new ZombieEntityModel<>(0.0F, false), 0.5F);
 		this.addFeature(new ArmorBipedFeatureRenderer<>(this, new ZombieEntityModel<>(0.5F, true), new ZombieEntityModel<>(1.0F, true)));

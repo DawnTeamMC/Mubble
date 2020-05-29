@@ -23,13 +23,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
-public class CustomTntBlock extends Block
+public class CustomTNTBlock extends Block
 {
 	public static final BooleanProperty UNSTABLE = Properties.UNSTABLE;
 	public final int fuse;
 	public final float strenght;
 
-	public CustomTntBlock(Settings builder, int fuseIn, float strenghtIn)
+	public CustomTNTBlock(Settings builder, int fuseIn, float strenghtIn)
 	{
 		super(builder);
 		fuse = fuseIn;
@@ -37,7 +37,7 @@ public class CustomTntBlock extends Block
 		this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
 	}
 
-	public CustomTntBlock(Settings builder, float multiplier)
+	public CustomTNTBlock(Settings builder, float multiplier)
 	{
 		super(builder);
 		fuse = Math.round(80.0F * (multiplier * 0.75F));

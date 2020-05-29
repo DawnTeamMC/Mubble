@@ -2,7 +2,7 @@ package hugman.mubble.objects.entity.render;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.ToadEntity;
-import hugman.mubble.objects.entity.render.model.ToadModel;
+import hugman.mubble.objects.entity.render.model.ToadEntityModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -10,7 +10,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class ToadRenderer extends MobEntityRenderer<ToadEntity, ToadModel<ToadEntity>>
+public class ToadEntityRenderer extends MobEntityRenderer<ToadEntity, ToadEntityModel<ToadEntity>>
 {
 	private static final Identifier BLUE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/blue.png");
 	private static final Identifier LIGHT_BLUE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/light_blue.png");
@@ -36,9 +36,9 @@ public class ToadRenderer extends MobEntityRenderer<ToadEntity, ToadModel<ToadEn
 	private static final Identifier PARTY_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/party.png");
 	private static final Identifier KISEKAE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/kisekae.png");
 
-	public ToadRenderer(EntityRenderDispatcher dispatcher)
+	public ToadEntityRenderer(EntityRenderDispatcher dispatcher)
 	{
-		super(dispatcher, new ToadModel<>(), 0.5F);
+		super(dispatcher, new ToadEntityModel<>(), 0.5F);
 	}
 
 	@Override

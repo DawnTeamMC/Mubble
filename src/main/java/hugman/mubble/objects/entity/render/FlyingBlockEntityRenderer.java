@@ -21,9 +21,9 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 @Environment(EnvType.CLIENT)
-public class FlyingBlockRenderer extends EntityRenderer<FlyingBlockEntity>
+public class FlyingBlockEntityRenderer extends EntityRenderer<FlyingBlockEntity>
 {
-	public FlyingBlockRenderer(EntityRenderDispatcher dispatcher)
+	public FlyingBlockEntityRenderer(EntityRenderDispatcher dispatcher)
 	{
 		super(dispatcher);
 		this.shadowRadius = 0.5F;
