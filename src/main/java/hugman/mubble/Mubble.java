@@ -26,6 +26,7 @@ public class Mubble implements ModInitializer
 		new MubbleEffects();
 		new MubbleEnchantments();
 		new MubbleEntities();
+		MubbleEntities.registerEntityAttributes();
 		new MubbleItems();
 		new MubblePaintingTypes();
 		new MubbleSounds();

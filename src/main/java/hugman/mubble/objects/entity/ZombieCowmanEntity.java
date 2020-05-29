@@ -7,6 +7,7 @@ import net.minecraft.entity.ai.goal.RevengeGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.goal.ZombieAttackGoal;
 import net.minecraft.entity.ai.pathing.PathNodeType;
+import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -39,6 +40,12 @@ public class ZombieCowmanEntity extends ZombifiedPiglinEntity
 	{
 		super(type, worldIn);
 		this.setPathfindingPenalty(PathNodeType.WATER, 8.0F);
+	}
+
+	public static DefaultAttributeContainer.Builder createZombieCowmanAttributes()
+	{
+		return ZombifiedPiglinEntity.createZombifiedPiglinAttributes()
+				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35D);
 	}
 
 	@Override

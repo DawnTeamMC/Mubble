@@ -2,6 +2,7 @@ package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.*;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
@@ -33,5 +34,15 @@ public class MubbleEntities
 	public static <T extends Entity> EntityType<T> register(String name, EntityType<T> builder)
 	{
 		return Registry.register(Registry.ENTITY_TYPE, new Identifier(Mubble.MOD_ID, name), builder);
+	}
+
+	public static void registerEntityAttributes()
+	{
+		FabricDefaultAttributeRegistry.register(DUCK, DuckEntity.createDuckAttributes());
+		FabricDefaultAttributeRegistry.register(ZOMBIE_COWMAN, ZombieCowmanEntity.createZombieCowmanAttributes());
+
+		FabricDefaultAttributeRegistry.register(CHINCHO, ChinchoEntity.createChinchoAttributes());
+		FabricDefaultAttributeRegistry.register(GOOMBA, GoombaEntity.createGoombaAttributes());
+		FabricDefaultAttributeRegistry.register(TOAD, ToadEntity.createToadAttributes());
 	}
 }
