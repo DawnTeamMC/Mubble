@@ -4,13 +4,7 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.client.MubbleColorMaps;
 import hugman.mubble.init.client.MubbleRenderLayers;
 import hugman.mubble.init.client.MubbleScreens;
-import hugman.mubble.objects.entity.render.ChinchoRenderer;
-import hugman.mubble.objects.entity.render.CustomTNTRenderer;
-import hugman.mubble.objects.entity.render.DuckRenderer;
-import hugman.mubble.objects.entity.render.FlyingBlockRenderer;
-import hugman.mubble.objects.entity.render.GoombaRenderer;
-import hugman.mubble.objects.entity.render.ToadRenderer;
-import hugman.mubble.objects.entity.render.ZombieCowmanRenderer;
+import hugman.mubble.objects.entity.render.*;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
@@ -26,7 +20,7 @@ public class MubbleClient implements ClientModInitializer
 		MubbleRenderLayers.init();
 		registerEntityRenders();
 	}
-	
+
 	private void registerEntityRenders()
 	{
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.CHINCHO, (dispatcher, context) -> new ChinchoRenderer(dispatcher));

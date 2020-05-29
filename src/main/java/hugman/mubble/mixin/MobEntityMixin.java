@@ -1,12 +1,5 @@
 package hugman.mubble.mixin;
 
-import java.util.Random;
-
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.objects.costume.BlockCostume;
@@ -14,13 +7,19 @@ import hugman.mubble.objects.costume.Costume;
 import hugman.mubble.util.CalendarEvents;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.SpawnType;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.IWorld;
 import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.WorldAccess;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Random;
 
 @Mixin(MobEntity.class)
 public class MobEntityMixin
@@ -33,15 +32,16 @@ public class MobEntityMixin
 		{
 			Costume costume = (Costume) item;
 			cir.setReturnValue(costume.getArmorType());
-		} else if (item instanceof BlockCostume)
-			{
-				BlockCostume costume = (BlockCostume) item;
-				cir.setReturnValue(costume.getArmorType());
-			}
+		}
+		else if (item instanceof BlockCostume)
+		{
+			BlockCostume costume = (BlockCostume) item;
+			cir.setReturnValue(costume.getArmorType());
+		}
 	}
-	
+
 	@Inject(method = "initialize", at = @At(value = "TAIL"), cancellable = true)
-	private void initialize(IWorld world, LocalDifficulty difficulty, SpawnType spawnType, EntityData entityData, CompoundTag entityTag, CallbackInfoReturnable<EntityData> cir)
+	private void initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason spawnType, EntityData entityData, CompoundTag entityTag, CallbackInfoReturnable<EntityData> cir)
 	{
 		MobEntity entity = (MobEntity) (Object) this;
 		Random rand = new Random();

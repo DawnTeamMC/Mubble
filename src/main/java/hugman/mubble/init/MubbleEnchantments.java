@@ -10,7 +10,7 @@ import net.minecraft.util.registry.Registry;
 public class MubbleEnchantments
 {
 	public static final Enchantment TELEKINESIS = register("telekinesis", new TelekinesisEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.MAINHAND));
-	
+
 	private static Enchantment register(String name, Enchantment enchantment)
 	{
 		return Registry.register(Registry.ENCHANTMENT, new Identifier(Mubble.MOD_ID, name), enchantment);

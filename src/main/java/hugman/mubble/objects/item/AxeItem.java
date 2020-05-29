@@ -1,24 +1,22 @@
 package hugman.mubble.objects.item;
 
 import com.google.common.collect.ImmutableMap.Builder;
-
 import hugman.mubble.init.MubbleBlocks;
-
-import java.util.Map;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ToolMaterial;
+
+import java.util.Map;
 
 public class AxeItem extends net.minecraft.item.AxeItem
 {
 	public static final Map<Block, Block> BLOCK_STRIPPING_MAP;
-	
+
 	/* Extension for internal publicity */
 	public AxeItem(ToolMaterial material, float attackDamage, float attackSpeed, Settings settings)
 	{
 		super(material, attackDamage, attackSpeed, settings);
 	}
-	
+
 	static
 	{
 		BLOCK_STRIPPING_MAP = (new Builder<Block, Block>())

@@ -10,36 +10,36 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
 
 public class DirectionalBlock extends FacingBlock
-{	
+{
 	/* Extension for internal publicity
 	 * + Missing features */
-    public DirectionalBlock(Settings builder)
-    {
-        super(builder);
-        this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP));
-    }
-    
-    @Override
-    public BlockState rotate(BlockState state, BlockRotation rot)
-    {
-    	return state.with(FACING, rot.rotate(state.get(FACING)));
+	public DirectionalBlock(Settings builder)
+	{
+		super(builder);
+		this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP));
 	}
-    
-    @Override
+
+	@Override
+	public BlockState rotate(BlockState state, BlockRotation rot)
+	{
+		return state.with(FACING, rot.rotate(state.get(FACING)));
+	}
+
+	@Override
 	public BlockState mirror(BlockState state, BlockMirror mirrorIn)
-    {
-    	return state.mirror(mirrorIn);
+	{
+		return state.mirror(mirrorIn);
 	}
-    
-    @Override
-    public BlockState getPlacementState(ItemPlacementContext context)
-    {
-        return this.getDefaultState().with(FACING, context.getPlayerLookDirection().getOpposite());
-    }
-    
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
-    {
-    	builder.add(FACING);
+
+	@Override
+	public BlockState getPlacementState(ItemPlacementContext context)
+	{
+		return this.getDefaultState().with(FACING, context.getPlayerLookDirection().getOpposite());
+	}
+
+	@Override
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
+	{
+		builder.add(FACING);
 	}
 }

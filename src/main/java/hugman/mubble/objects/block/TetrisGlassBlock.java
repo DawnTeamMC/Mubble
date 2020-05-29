@@ -11,28 +11,28 @@ import net.minecraft.world.BlockView;
 
 public class TetrisGlassBlock extends FallingBlock
 {
-    public TetrisGlassBlock(Block.Settings builder)
-    {
-        super(builder);
-    }
-    
-    @Override
-    @Environment(EnvType.CLIENT)
-    public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing)
-    {
-    	return neighbor.getBlock() == this ? true : super.isSideInvisible(state, neighbor, facing);
-    }
-    
-    @Override
-    @Environment(EnvType.CLIENT)
-    public float getAmbientOcclusionLightLevel(BlockState state, BlockView worldIn, BlockPos pos)
-    {
-    	return 1.0F;
-    }
+	public TetrisGlassBlock(Block.Settings builder)
+	{
+		super(builder);
+	}
 
-    @Override
-    public boolean isTranslucent(BlockState state, BlockView reader, BlockPos pos)
-    {
-       return true;
-    }
+	@Override
+	@Environment(EnvType.CLIENT)
+	public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing)
+	{
+		return neighbor.getBlock() == this ? true : super.isSideInvisible(state, neighbor, facing);
+	}
+
+	@Override
+	@Environment(EnvType.CLIENT)
+	public float getAmbientOcclusionLightLevel(BlockState state, BlockView worldIn, BlockPos pos)
+	{
+		return 1.0F;
+	}
+
+	@Override
+	public boolean isTranslucent(BlockState state, BlockView reader, BlockPos pos)
+	{
+		return true;
+	}
 }

@@ -19,59 +19,59 @@ import net.minecraft.world.World;
 public class KeyItem extends Item
 {
 	private final Block block;
-	
-    public KeyItem(Item.Settings builder, Block blockIn)
-    {
-        super(builder);
-        this.block = blockIn;
-    }
-    
-    @Override
-    public ActionResult useOnBlock(ItemUsageContext context)
-    {
-    	World worldIn = context.getWorld();
-    	BlockPos pos = context.getBlockPos();
-    	BlockState state = worldIn.getBlockState(pos);
-		if(state.getBlock() instanceof KeyDoorBlock && state.getBlock() == block)
+
+	public KeyItem(Item.Settings builder, Block blockIn)
+	{
+		super(builder);
+		this.block = blockIn;
+	}
+
+	@Override
+	public ActionResult useOnBlock(ItemUsageContext context)
+	{
+		World worldIn = context.getWorld();
+		BlockPos pos = context.getBlockPos();
+		BlockState state = worldIn.getBlockState(pos);
+		if (state.getBlock() instanceof KeyDoorBlock && state.getBlock() == block)
 		{
-			if(state.get(KeyDoorBlock.LOCKED))
+			if (state.get(KeyDoorBlock.LOCKED))
 			{
-				if(!worldIn.isClient())
+				if (!worldIn.isClient())
 				{
-		        	BlockPos otherBlockPos = pos.offset(state.get(KeyDoorBlock.HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN);
-		        	BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
-		            worldIn.setBlockState(pos, state.with(KeyDoorBlock.LOCKED, false), 2);
-		            worldIn.setBlockState(otherBlockPos, otherBlockState.with(KeyDoorBlock.LOCKED, false), 2);
-		        	worldIn.playSound((PlayerEntity) null, pos, this.getKeySuccessSound(state.getBlock(), !state.get(KeyDoorBlock.LOCKED)), SoundCategory.BLOCKS, 1.0F, 1.0F);
-		            context.getStack().decrement(1);
+					BlockPos otherBlockPos = pos.offset(state.get(KeyDoorBlock.HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN);
+					BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
+					worldIn.setBlockState(pos, state.with(KeyDoorBlock.LOCKED, false), 2);
+					worldIn.setBlockState(otherBlockPos, otherBlockState.with(KeyDoorBlock.LOCKED, false), 2);
+					worldIn.playSound((PlayerEntity) null, pos, this.getKeySuccessSound(state.getBlock(), !state.get(KeyDoorBlock.LOCKED)), SoundCategory.BLOCKS, 1.0F, 1.0F);
+					context.getStack().decrement(1);
 				}
-	            return ActionResult.SUCCESS;
+				return ActionResult.SUCCESS;
 			}
 		}
 		return ActionResult.FAIL;
-    }
-    
-    public SoundEvent getKeySuccessSound(Block block, boolean success)
-    {
-    	if(block == MubbleBlocks.SMB_KEY_DOOR)
-    	{
-    		return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
-    	}
-    	else if(block == MubbleBlocks.SMB3_KEY_DOOR)
-    	{
-    		return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB3;
-    	}
-    	else if(block == MubbleBlocks.SMW_KEY_DOOR)
-    	{
-    		return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMW;
-    	}
-    	else if(block == MubbleBlocks.NSMBU_KEY_DOOR)
-    	{
-    		return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_NSMBU;
-    	}
-    	else
-    	{
-        	return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
-    	}
-    }
+	}
+
+	public SoundEvent getKeySuccessSound(Block block, boolean success)
+	{
+		if (block == MubbleBlocks.SMB_KEY_DOOR)
+		{
+			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
+		}
+		else if (block == MubbleBlocks.SMB3_KEY_DOOR)
+		{
+			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB3;
+		}
+		else if (block == MubbleBlocks.SMW_KEY_DOOR)
+		{
+			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMW;
+		}
+		else if (block == MubbleBlocks.NSMBU_KEY_DOOR)
+		{
+			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_NSMBU;
+		}
+		else
+		{
+			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
+		}
+	}
 }

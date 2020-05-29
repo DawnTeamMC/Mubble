@@ -11,33 +11,33 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 public class WingCapCostume extends HeadCostume
-{    
-    public WingCapCostume(Item.Settings builder)
-    {
-        super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
-    }
-    
+{
+	public WingCapCostume(Item.Settings builder)
+	{
+		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+	}
+
 	@Override
-    public boolean canRepair(ItemStack toRepair, ItemStack repair)
-    {
+	public boolean canRepair(ItemStack toRepair, ItemStack repair)
+	{
 		return repair.getItem() == Items.FEATHER;
-    }
-    
-    @Override
-    public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks)
-    {
-    	if(isUsable(stack) && player.isSprinting())
-    	{
-        	stack.damage(1, player, (p_214023_1_) ->
-        	{
-        		p_214023_1_.sendEquipmentBreakStatus(EquipmentSlot.HEAD);
-        	});
-    	}
-    	if(!world.isClient && isUsable(stack) && player.isSprinting())
-    	{
-    		player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 1, 2));
-    		player.fallDistance = 0f;
-    	}
-    	super.usageTick(world, player, stack, remainingUseTicks);
-    }
+	}
+
+	@Override
+	public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks)
+	{
+		if (isUsable(stack) && player.isSprinting())
+		{
+			stack.damage(1, player, (p_214023_1_) ->
+			{
+				p_214023_1_.sendEquipmentBreakStatus(EquipmentSlot.HEAD);
+			});
+		}
+		if (!world.isClient && isUsable(stack) && player.isSprinting())
+		{
+			player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 1, 2));
+			player.fallDistance = 0f;
+		}
+		super.usageTick(world, player, stack, remainingUseTicks);
+	}
 }

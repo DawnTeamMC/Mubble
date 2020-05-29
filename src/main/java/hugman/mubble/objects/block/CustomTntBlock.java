@@ -29,25 +29,25 @@ public class CustomTntBlock extends Block
 	public final int fuse;
 	public final float strenght;
 
-    public CustomTntBlock(Settings builder, int fuseIn, float strenghtIn)
-    {
-        super(builder);
-        fuse = fuseIn;
-        strenght = strenghtIn;
-        this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
-    }
+	public CustomTntBlock(Settings builder, int fuseIn, float strenghtIn)
+	{
+		super(builder);
+		fuse = fuseIn;
+		strenght = strenghtIn;
+		this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
+	}
 
-    public CustomTntBlock(Settings builder, float multiplier)
-    {
-        super(builder);
-        fuse = Math.round(80.0F * (multiplier * 0.75F));
-        strenght = 4.0F * multiplier;
-        this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
-    }
-    
-    @Override
+	public CustomTntBlock(Settings builder, float multiplier)
+	{
+		super(builder);
+		fuse = Math.round(80.0F * (multiplier * 0.75F));
+		strenght = 4.0F * multiplier;
+		this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
+	}
+
+	@Override
 	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify)
-    {
+	{
 		if (!oldState.isOf(state.getBlock()))
 		{
 			if (world.isReceivingRedstonePower(pos))
@@ -58,11 +58,11 @@ public class CustomTntBlock extends Block
 
 		}
 	}
-    
-    @Override
+
+	@Override
 	public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean notify)
-    {
-		if(world.isReceivingRedstonePower(pos))
+	{
+		if (world.isReceivingRedstonePower(pos))
 		{
 			primeTnt(world, pos);
 			world.removeBlock(pos, false);
@@ -70,36 +70,35 @@ public class CustomTntBlock extends Block
 
 	}
 
-    @Override
+	@Override
 	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player)
 	{
-		if(!world.isClient() && !player.isCreative() && (Boolean) state.get(UNSTABLE))
+		if (!world.isClient() && !player.isCreative() && (Boolean) state.get(UNSTABLE))
 		{
 			primeTnt(world, pos, player);
 		}
-
 		super.onBreak(world, pos, state, player);
 	}
 
 	@Override
 	public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion)
 	{
-		if(!world.isClient)
+		if (!world.isClient)
 		{
 			CustomTNTEntity tntentity = new CustomTNTEntity(this.getDefaultState(), world, (double) ((float) pos.getX() + 0.5F), (double) pos.getY(), (double) ((float) pos.getZ() + 0.5F), fuse, strenght, explosion.getCausingEntity());
 			tntentity.setFuse((short) (world.random.nextInt(tntentity.getFuse() / 4) + tntentity.getFuse() / 8));
 			world.spawnEntity(tntentity);
 		}
 	}
-	
+
 	public void primeTnt(World world, BlockPos pos)
 	{
-        primeTnt(world, pos, (LivingEntity)null);
-    }
+		primeTnt(world, pos, (LivingEntity) null);
+	}
 
 	private void primeTnt(World world, BlockPos pos, LivingEntity igniter)
 	{
-		if(!world.isClient)
+		if (!world.isClient)
 		{
 			CustomTNTEntity tntentity = new CustomTNTEntity(this.getDefaultState(), world, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, fuse, strenght, igniter);
 			world.spawnEntity(tntentity);
@@ -112,7 +111,7 @@ public class CustomTntBlock extends Block
 	{
 		ItemStack itemstack = player.getStackInHand(hand);
 		Item item = itemstack.getItem();
-		if(item != Items.FLINT_AND_STEEL && item != Items.FIRE_CHARGE)
+		if (item != Items.FLINT_AND_STEEL && item != Items.FIRE_CHARGE)
 		{
 			return super.onUse(state, world, pos, player, hand, result);
 		}
@@ -120,11 +119,11 @@ public class CustomTntBlock extends Block
 		{
 			primeTnt(world, pos, player);
 			world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
-			if(!player.isCreative())
+			if (!player.isCreative())
 			{
-				if(item == Items.FLINT_AND_STEEL)
+				if (item == Items.FLINT_AND_STEEL)
 				{
-					itemstack.damage(1, player, (entity) -> 
+					itemstack.damage(1, player, (entity) ->
 					{
 						entity.sendToolBreakStatus(hand);
 					});
@@ -134,7 +133,6 @@ public class CustomTntBlock extends Block
 					itemstack.decrement(1);
 				}
 			}
-
 			return ActionResult.SUCCESS;
 		}
 	}

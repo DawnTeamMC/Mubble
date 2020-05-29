@@ -12,25 +12,25 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.world.World;
 
 public class SuperStarItem extends Item
-{    
-    public SuperStarItem(Item.Settings builder)
-    {
-        super(builder);
-    }
-    
-    @Override
-    public ItemStack finishUsing(ItemStack stack, World worldIn, LivingEntity entityLiving)
-    {
-    	if(!worldIn.isClient)
-    	{
-    		ServerWorld serverWorldIn = (ServerWorld) worldIn;
-    		StopSoundS2CPacket sstopsoundpacket = new StopSoundS2CPacket(MubbleSounds.ITEM_SUPER_STAR_THEME.getId(), SoundCategory.PLAYERS);
-    		for(ServerPlayerEntity serverplayerentity : serverWorldIn.getPlayers())
-    		{
-    			serverplayerentity.networkHandler.sendPacket(sstopsoundpacket);
-    		}
-    	}
-    	worldIn.playSoundFromEntity((PlayerEntity) null, entityLiving, MubbleSounds.ITEM_SUPER_STAR_THEME, SoundCategory.PLAYERS, 1.0F, 1.0F);
+{
+	public SuperStarItem(Item.Settings builder)
+	{
+		super(builder);
+	}
+
+	@Override
+	public ItemStack finishUsing(ItemStack stack, World worldIn, LivingEntity entityLiving)
+	{
+		if (!worldIn.isClient)
+		{
+			ServerWorld serverWorldIn = (ServerWorld) worldIn;
+			StopSoundS2CPacket sstopsoundpacket = new StopSoundS2CPacket(MubbleSounds.ITEM_SUPER_STAR_THEME.getId(), SoundCategory.PLAYERS);
+			for (ServerPlayerEntity serverplayerentity : serverWorldIn.getPlayers())
+			{
+				serverplayerentity.networkHandler.sendPacket(sstopsoundpacket);
+			}
+		}
+		worldIn.playSoundFromEntity((PlayerEntity) null, entityLiving, MubbleSounds.ITEM_SUPER_STAR_THEME, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		return super.finishUsing(stack, worldIn, entityLiving);
-    }
+	}
 }

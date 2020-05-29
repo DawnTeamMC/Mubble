@@ -10,19 +10,19 @@ public class TelekinesisEnchantment extends Enchantment
 	{
 		super(rarity, EnchantmentTarget.WEAPON, slots);
 	}
-	
+
 	@Override
 	public int getMaximumLevel()
 	{
 		return 2;
 	}
-	
+
 	@Override
 	public int getMinimumPower(int enchantmentLevel)
 	{
 		return 25 + enchantmentLevel * 5;
 	}
-	
+
 	@Override
 	public int getMaximumPower(int enchantmentLevel)
 	{

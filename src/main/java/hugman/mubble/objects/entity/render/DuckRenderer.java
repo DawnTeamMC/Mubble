@@ -12,18 +12,18 @@ import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class DuckRenderer extends MobEntityRenderer<DuckEntity, DuckModel<DuckEntity>>
-{	
+{
 	public DuckRenderer(EntityRenderDispatcher manager)
 	{
 		super(manager, new DuckModel<>(), 0.3F);
 	}
-	
+
 	@Override
 	public Identifier getTexture(DuckEntity entity)
-    {
+	{
 		return new Identifier(Mubble.MOD_ID, "textures/entity/duck/" + entity.getVariantType().getName() + ".png");
-    }
-	
+	}
+
 	protected float getAnimationProgress(DuckEntity entity, float p_77044_2_)
 	{
 		float f = MathHelper.lerp(p_77044_2_, entity.oFlap, entity.wingRotation);

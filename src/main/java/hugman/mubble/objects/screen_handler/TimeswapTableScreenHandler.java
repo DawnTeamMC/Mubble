@@ -1,9 +1,6 @@
 package hugman.mubble.objects.screen_handler;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleTags;
@@ -24,8 +21,10 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.registry.Registry;
 
+import java.util.List;
+
 public class TimeswapTableScreenHandler extends ScreenHandler
-{	
+{
 	private final ScreenHandlerContext context;
 	private final Property selectedRecipe;
 	private List<Item> availableRecipes;
@@ -36,7 +35,7 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 	private Runnable contentsChangedListener;
 	public final Inventory input;
 	private final CraftingResultInventory output;
-	
+
 	public TimeswapTableScreenHandler(int syncId, PlayerInventory playerInventory)
 	{
 		this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -53,7 +52,8 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 		};
 		this.input = new SimpleInventory(1)
 		{
-			public void markDirty() {
+			public void markDirty()
+			{
 				super.markDirty();
 				TimeswapTableScreenHandler.this.onContentChanged(this);
 				TimeswapTableScreenHandler.this.contentsChangedListener.run();
@@ -62,21 +62,26 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 		this.output = new CraftingResultInventory();
 		this.context = context;
 		this.inputSlot = this.addSlot(new Slot(this.input, 0, 20, 33));
-		this.outputSlot = this.addSlot(new Slot(this.output, 1, 143, 33) {
-			public boolean canInsert(ItemStack stack) {
+		this.outputSlot = this.addSlot(new Slot(this.output, 1, 143, 33)
+		{
+			public boolean canInsert(ItemStack stack)
+			{
 				return false;
 			}
 
-			public ItemStack onTakeItem(PlayerEntity player, ItemStack stack) {
+			public ItemStack onTakeItem(PlayerEntity player, ItemStack stack)
+			{
 				ItemStack itemStack = TimeswapTableScreenHandler.this.inputSlot.takeStack(1);
-				if (!itemStack.isEmpty()) {
+				if (!itemStack.isEmpty())
+				{
 					TimeswapTableScreenHandler.this.populateResult();
 				}
-
 				stack.getItem().onCraft(stack, player.world, player);
-				context.run((world, blockPos) -> {
+				context.run((world, blockPos) ->
+				{
 					long l = world.getTime();
-					if (TimeswapTableScreenHandler.this.lastTakeTime != l) {
+					if (TimeswapTableScreenHandler.this.lastTakeTime != l)
+					{
 						world.playSound((PlayerEntity) null, blockPos, MubbleSounds.UI_TIMESWAP_TABLE_TAKE_RESULT,
 								SoundCategory.BLOCKS, 1.0F, 1.0F);
 						TimeswapTableScreenHandler.this.lastTakeTime = l;
@@ -86,7 +91,6 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 				return super.onTakeItem(player, stack);
 			}
 		});
-	    
 		int k;
 		for (k = 0; k < 3; ++k)
 		{
@@ -95,11 +99,10 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 				this.addSlot(new Slot(playerInventory, j + k * 9 + 9, 8 + j * 18, 84 + k * 18));
 			}
 		}
-
-		for (k = 0; k < 9; ++k) {
+		for (k = 0; k < 9; ++k)
+		{
 			this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
 		}
-
 		this.addProperty(this.selectedRecipe);
 	}
 
@@ -132,7 +135,7 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 	{
 		return canUse(this.context, player, MubbleBlocks.TIMESWAP_TABLE);
 	}
-	
+
 	@Override
 	public boolean onButtonClick(PlayerEntity player, int id)
 	{
@@ -141,10 +144,9 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 			this.selectedRecipe.set(id);
 			this.populateResult();
 		}
-
 		return true;
 	}
-	
+
 	@Override
 	public void onContentChanged(Inventory inventory)
 	{
@@ -156,29 +158,29 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 		}
 
 	}
-	
+
 	private void updateInput(Inventory input, ItemStack stack)
 	{
 		this.availableRecipes.clear();
 		this.selectedRecipe.set(-1);
 		this.outputSlot.setStack(ItemStack.EMPTY);
-		if(!stack.isEmpty())
+		if (!stack.isEmpty())
 		{
 			Tag<Item> tag = correspondingTag(stack.getItem());
-			if(tag != null)
+			if (tag != null)
 			{
 				this.availableRecipes = Lists.newArrayList();
-				for(Item item : Registry.ITEM)
+				for (Item item : Registry.ITEM)
 				{
-					if(item.isIn(tag)) this.availableRecipes.add(item);
+					if (item.isIn(tag)) this.availableRecipes.add(item);
 				}
 			}
 		}
 	}
-	
+
 	private void populateResult()
 	{
-		if(!this.availableRecipes.isEmpty())
+		if (!this.availableRecipes.isEmpty())
 		{
 			Item item = this.availableRecipes.get(this.selectedRecipe.get());
 			this.outputSlot.setStack(new ItemStack(item));
@@ -187,34 +189,33 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 		{
 			this.outputSlot.setStack(ItemStack.EMPTY);
 		}
-		
 		this.sendContentUpdates();
 	}
-	
+
 	@Environment(EnvType.CLIENT)
 	public void setContentsChangedListener(Runnable runnable)
 	{
 		this.contentsChangedListener = runnable;
 	}
-	
+
 	@Override
 	public boolean canInsertIntoSlot(ItemStack stack, Slot slot)
 	{
 		return slot.inventory != this.output && super.canInsertIntoSlot(stack, slot);
 	}
-	
+
 	@Override
 	public ItemStack transferSlot(PlayerEntity playerIn, int index)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(index);
-		if(slot != null && slot.hasStack())
+		if (slot != null && slot.hasStack())
 		{
 			ItemStack itemstack1 = slot.getStack();
 			Item item = itemstack1.getItem();
 			itemstack = itemstack1.copy();
 			Tag<Item> tag = correspondingTag(item);
-			if(index == 1)
+			if (index == 1)
 			{
 				item.onCraft(itemstack1, playerIn.world, playerIn);
 				if (!this.insertItem(itemstack1, 2, 38, true))
@@ -230,7 +231,7 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 					return ItemStack.EMPTY;
 				}
 			}
-			else if(tag != null)
+			else if (tag != null)
 			{
 				if (!this.insertItem(itemstack1, 0, 1, false))
 				{
@@ -248,25 +249,21 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 			{
 				return ItemStack.EMPTY;
 			}
-			
-			if(itemstack1.isEmpty())
+			if (itemstack1.isEmpty())
 			{
 				slot.setStack(ItemStack.EMPTY);
 			}
-			
 			slot.markDirty();
-			if(itemstack1.getCount() == itemstack.getCount())
+			if (itemstack1.getCount() == itemstack.getCount())
 			{
 				return ItemStack.EMPTY;
 			}
-			
 			slot.onTakeItem(playerIn, itemstack1);
 			this.sendContentUpdates();
 		}
-		
 		return itemstack;
 	}
-	
+
 	@Override
 	public void close(PlayerEntity player)
 	{
@@ -277,13 +274,19 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 			this.dropInventory(player, player.world, this.input);
 		});
 	}
-	
+
 	private static Tag<Item> correspondingTag(Item item)
 	{
-		for(Tag<Item> tag : MubbleTags.Items.TIMESWAP_TAGS)
+		for (Tag<Item> tag : MubbleTags.Items.TIMESWAP_TAGS)
 		{
-			if(item.isIn(tag)) return tag;
-			else continue;
+            if (item.isIn(tag))
+            {
+                return tag;
+            }
+            else
+            {
+                continue;
+            }
 		}
 		return null;
 	}

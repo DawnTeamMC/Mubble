@@ -1,16 +1,16 @@
 package hugman.mubble.init.client;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import hugman.mubble.Mubble;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MubbleShaders
 {
-    public static final List<Identifier> SHADERS = new ArrayList<Identifier>();
-    public static final List<Identifier> RETRO_SHADERS = new ArrayList<Identifier>();
-    
+	public static final List<Identifier> SHADERS = new ArrayList<Identifier>();
+	public static final List<Identifier> RETRO_SHADERS = new ArrayList<Identifier>();
+
 	public static final Identifier ANTIALIAS = register("minecraft", "antialias");
 	public static final Identifier ART = register("minecraft", "art");
 	public static final Identifier BITS = register("minecraft", "bits");
@@ -53,14 +53,14 @@ public class MubbleShaders
 	public static final Identifier PURPLE_RETRO = register(Mubble.MOD_ID, "retro/purple", RETRO_SHADERS);
 	public static final Identifier MAGENTA_RETRO = register(Mubble.MOD_ID, "retro/magenta", RETRO_SHADERS);
 	public static final Identifier PINK_RETRO = register(Mubble.MOD_ID, "retro/pink", RETRO_SHADERS);
-	
+
 	private static Identifier register(String namespace, String name)
 	{
 		Identifier shaderRL = new Identifier(namespace, "shaders/post/" + name + ".json");
 		SHADERS.add(shaderRL);
 		return shaderRL;
 	}
-	
+
 	private static Identifier register(String namespace, String name, List<Identifier> aditionalList)
 	{
 		Identifier shaderRL = new Identifier(namespace, "shaders/post/" + name + ".json");

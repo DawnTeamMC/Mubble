@@ -11,21 +11,21 @@ import net.minecraft.world.BlockView;
 public class PlacerBlock extends DispenserBlock
 {
 	private static final DispenserBehavior PLACE_BEHAVIOR = new PlaceBlockBehavior();
-	
-    public PlacerBlock(Settings builder)
-    {
-        super(builder);
-    }
-    
-    @Override
-    public BlockEntity createBlockEntity(BlockView world)
-    {
-    	return new PlacerTileEntity();
-    }
-    
-    @Override
-    protected DispenserBehavior getBehaviorForItem(ItemStack stack)
-    {
-    	return PLACE_BEHAVIOR;
-    }
+
+	public PlacerBlock(Settings builder)
+	{
+		super(builder);
+	}
+
+	@Override
+	public BlockEntity createBlockEntity(BlockView world)
+	{
+		return new PlacerTileEntity();
+	}
+
+	@Override
+	protected DispenserBehavior getBehaviorForItem(ItemStack stack)
+	{
+		return PLACE_BEHAVIOR;
+	}
 }

@@ -1,7 +1,5 @@
 package hugman.mubble.objects.entity.render;
 
-import java.util.Random;
-
 import hugman.mubble.objects.entity.FlyingBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -20,23 +18,27 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 @Environment(EnvType.CLIENT)
 public class FlyingBlockRenderer extends EntityRenderer<FlyingBlockEntity>
 {
-   public FlyingBlockRenderer(EntityRenderDispatcher dispatcher)
-   {
-      super(dispatcher);
-      this.shadowRadius = 0.5F;
-   }
+	public FlyingBlockRenderer(EntityRenderDispatcher dispatcher)
+	{
+		super(dispatcher);
+		this.shadowRadius = 0.5F;
+	}
 
-   @Override
-   public void render(FlyingBlockEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light)
-   {
+	@Override
+	public void render(FlyingBlockEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light)
+	{
 		BlockState blockState = entity.getBlockState();
-		if (blockState.getRenderType() == BlockRenderType.MODEL) {
+		if (blockState.getRenderType() == BlockRenderType.MODEL)
+		{
 			World world = entity.getWorldClient();
 			if (blockState != world.getBlockState(entity.getBlockPos())
-					&& blockState.getRenderType() != BlockRenderType.INVISIBLE) {
+					&& blockState.getRenderType() != BlockRenderType.INVISIBLE)
+			{
 				matrixStack.push();
 				BlockPos blockPos = new BlockPos(entity.getX(), entity.getBoundingBox().maxY,
 						entity.getZ());
@@ -50,11 +52,11 @@ public class FlyingBlockRenderer extends EntityRenderer<FlyingBlockEntity>
 				super.render(entity, entityYaw, partialTicks, matrixStack, vertexConsumerProvider, light);
 			}
 		}
-   }
-   
-   @Override
-   public Identifier getTexture(FlyingBlockEntity entity)
-   {
-      return SpriteAtlasTexture.BLOCK_ATLAS_TEX;
-   }
+	}
+
+	@Override
+	public Identifier getTexture(FlyingBlockEntity entity)
+	{
+		return SpriteAtlasTexture.BLOCK_ATLAS_TEX;
+	}
 }

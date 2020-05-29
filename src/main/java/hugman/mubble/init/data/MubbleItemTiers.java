@@ -1,10 +1,10 @@
 package hugman.mubble.init.data;
 
-import java.util.function.Supplier;
-
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Lazy;
+
+import java.util.function.Supplier;
 
 public enum MubbleItemTiers implements ToolMaterial
 {
@@ -28,7 +28,7 @@ public enum MubbleItemTiers implements ToolMaterial
 	private final int enchantability;
 	private final Lazy<Ingredient> repairIngredient;
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	private MubbleItemTiers(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantibility, Supplier<Ingredient> repairIngredient)
 	{
 		this.miningLevel = miningLevel;

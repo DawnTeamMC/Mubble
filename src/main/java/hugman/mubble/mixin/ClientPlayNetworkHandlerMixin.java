@@ -1,11 +1,5 @@
 package hugman.mubble.mixin;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.objects.entity.FireballEntity;
 import hugman.mubble.objects.entity.IceballEntity;
@@ -18,12 +12,18 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.network.NetworkThreadUtils;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.util.thread.ThreadExecutor;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayNetworkHandler.class)
 public class ClientPlayNetworkHandlerMixin
 {
-	@Shadow private ClientWorld world;
-	
+	@Shadow
+	private ClientWorld world;
+
 	@SuppressWarnings("rawtypes")
 	@Inject(method = "onEntitySpawn", at = @At(value = "HEAD"), cancellable = true)
 	private void onEntitySpawn(EntitySpawnS2CPacket packet, CallbackInfo ci)
@@ -48,11 +48,12 @@ public class ClientPlayNetworkHandlerMixin
 		{
 			entity = new KirbyBallEntity(this.world, x, y, z);
 		}
-		if (entity != null) {
+		if (entity != null)
+		{
 			int i = packet.getId();
 			((Entity) entity).updateTrackedPosition(x, y, z);
-			((Entity) entity).pitch = (float)(packet.getPitch() * 360) / 256.0F;
-			((Entity) entity).yaw = (float)(packet.getYaw() * 360) / 256.0F;
+			((Entity) entity).pitch = (float) (packet.getPitch() * 360) / 256.0F;
+			((Entity) entity).yaw = (float) (packet.getYaw() * 360) / 256.0F;
 			((Entity) entity).setEntityId(i);
 			((Entity) entity).setUuid(packet.getUuid());
 			this.world.addEntity(i, (Entity) entity);

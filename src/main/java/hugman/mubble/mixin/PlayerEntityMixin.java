@@ -1,11 +1,5 @@
 package hugman.mubble.mixin;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.objects.item.LightsaberItem;
 import net.minecraft.entity.Entity;
@@ -17,12 +11,17 @@ import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin
 {
 	private static ItemStack prevStack;
-	
+
 	@Inject(method = "interact", at = @At(value = "TAIL"), cancellable = true)
 	private void interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir)
 	{
@@ -33,7 +32,7 @@ public class PlayerEntityMixin
 			PufferfishEntity pufferfish = (PufferfishEntity) entity;
 			if (pufferfish.getPuffState() >= 1 && pufferfish.isAlive())
 			{
-				if(!player.abilities.creativeMode)
+				if (!player.abilities.creativeMode)
 				{
 					stack.decrement(1);
 				}
@@ -43,7 +42,7 @@ public class PlayerEntityMixin
 			}
 		}
 	}
-	
+
 	@Inject(method = "tick", at = @At(value = "TAIL"), cancellable = true)
 	private void tick(CallbackInfo ci)
 	{

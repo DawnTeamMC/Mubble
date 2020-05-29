@@ -33,177 +33,215 @@ public class VerticalSlabBlock extends Block implements Waterloggable
 	protected static final VoxelShape SOUTH_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 8.0D, 16.0D, 16.0D, 16.0D);
 	protected static final VoxelShape EAST_SHAPE = Block.createCuboidShape(8.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
 	protected static final VoxelShape WEST_SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 8.0D, 16.0D, 16.0D);
-	
-    public VerticalSlabBlock(Block.Settings builder)
-    {
-        super(builder);
-        this.setDefaultState(this.getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
-    }
-    
-    @Override
-    public boolean hasSidedTransparency(BlockState state)
-    {
-    	return state.get(TYPE) != VerticalSlabType.DOUBLE;
-    }
 
-    @Override
-    protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
-    {
-        builder.add(TYPE, WATERLOGGED);
+	public VerticalSlabBlock(Block.Settings builder)
+	{
+		super(builder);
+		this.setDefaultState(this.getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(WATERLOGGED, Boolean.valueOf(false)));
+	}
+
+	@Override
+	public boolean hasSidedTransparency(BlockState state)
+	{
+		return state.get(TYPE) != VerticalSlabType.DOUBLE;
+	}
+
+	@Override
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder)
+	{
+		builder.add(TYPE, WATERLOGGED);
 	}
 
 	@Override
 	public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context)
 	{
 		VerticalSlabType verticalslabtype = state.get(TYPE);
-		switch(verticalslabtype)
+		switch (verticalslabtype)
 		{
-		case DOUBLE:
-			return VoxelShapes.fullCube();
-        case SOUTH:
-        	return SOUTH_SHAPE;
-        case EAST:
-            return EAST_SHAPE;
-        case WEST:
-            return WEST_SHAPE;
-        default:
-        	return NORTH_SHAPE;
+			case DOUBLE:
+				return VoxelShapes.fullCube();
+			case SOUTH:
+				return SOUTH_SHAPE;
+			case EAST:
+				return EAST_SHAPE;
+			case WEST:
+				return WEST_SHAPE;
+			default:
+				return NORTH_SHAPE;
 		}
 	}
-	
+
 	public BlockState getPlacementState(ItemPlacementContext context)
 	{
 		BlockState iblockstate = context.getWorld().getBlockState(context.getBlockPos());
-        if (iblockstate.getBlock() == this)
-        {
-        	return iblockstate.with(TYPE, VerticalSlabType.DOUBLE).with(WATERLOGGED, Boolean.valueOf(false));
-        }
-        else
-        {
-        	FluidState ifluidstate = context.getWorld().getFluidState(context.getBlockPos());
-        	BlockState iblockstate1 = this.getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
-        	Direction facing = context.getPlayerFacing();
-        	Direction face_hit = context.getSide();
-        	
-        	Vec3d vec3d = context.getHitPos();
-            double hitX = vec3d.x - context.getBlockPos().getX();
-            double hitZ = vec3d.z - context.getBlockPos().getZ();
-        	if(facing == Direction.NORTH || facing == Direction.SOUTH)
-        	{
-        		if(face_hit == Direction.SOUTH) return iblockstate1.with(TYPE, VerticalSlabType.NORTH);
-        		else if(face_hit == Direction.NORTH) return iblockstate1.with(TYPE, VerticalSlabType.SOUTH);
-        		else if(hitZ > 0.5D) return iblockstate1.with(TYPE, VerticalSlabType.SOUTH);
-        		else return iblockstate1.with(TYPE, VerticalSlabType.NORTH);
-        	}
-        	else if (facing == Direction.EAST || facing == Direction.WEST)
-        	{
-        		if(face_hit == Direction.WEST) return iblockstate1.with(TYPE, VerticalSlabType.EAST);
-        		else if(face_hit == Direction.EAST) return iblockstate1.with(TYPE, VerticalSlabType.WEST);
-        		else if(hitX > 0.5D) return iblockstate1.with(TYPE, VerticalSlabType.EAST);
-        		else return iblockstate1.with(TYPE, VerticalSlabType.WEST);
-        	}
-        	else return iblockstate1;
-        }
-    }
-
-	@Override
-    public boolean canReplace(BlockState state, ItemPlacementContext context)
-	{
-        ItemStack itemstack = context.getStack();
-        VerticalSlabType slabtype = state.get(TYPE);
-        if (slabtype != VerticalSlabType.DOUBLE && itemstack.getItem() == this.asItem())
-        {
-            if (context.canReplaceExisting())
+		if (iblockstate.getBlock() == this)
+		{
+			return iblockstate.with(TYPE, VerticalSlabType.DOUBLE).with(WATERLOGGED, Boolean.valueOf(false));
+		}
+		else
+		{
+			FluidState ifluidstate = context.getWorld().getFluidState(context.getBlockPos());
+			BlockState iblockstate1 = this.getDefaultState().with(TYPE, VerticalSlabType.NORTH).with(WATERLOGGED, Boolean.valueOf(ifluidstate.getFluid() == Fluids.WATER));
+			Direction facing = context.getPlayerFacing();
+			Direction face_hit = context.getSide();
+			Vec3d vec3d = context.getHitPos();
+			double hitX = vec3d.x - context.getBlockPos().getX();
+			double hitZ = vec3d.z - context.getBlockPos().getZ();
+			if (facing == Direction.NORTH || facing == Direction.SOUTH)
+			{
+                if (face_hit == Direction.SOUTH)
+                {
+                    return iblockstate1.with(TYPE, VerticalSlabType.NORTH);
+                }
+                else if (face_hit == Direction.NORTH)
+                {
+                    return iblockstate1.with(TYPE, VerticalSlabType.SOUTH);
+                }
+                else if (hitZ > 0.5D)
+                {
+                    return iblockstate1.with(TYPE, VerticalSlabType.SOUTH);
+                }
+                else
+                {
+                    return iblockstate1.with(TYPE, VerticalSlabType.NORTH);
+                }
+			}
+			else if (facing == Direction.EAST || facing == Direction.WEST)
             {
-        	    Vec3d vec3d = context.getHitPos();
-        	    double hitX = vec3d.x - context.getBlockPos().getX();
-        	    double hitZ = vec3d.z - context.getBlockPos().getZ();
-        	    boolean flag1 = hitZ > 0.5D;
-        	    boolean flag2 = hitX > 0.5D;
-        	    Direction enumfacing = context.getSide();
-        	    if (slabtype == VerticalSlabType.NORTH) return enumfacing == Direction.SOUTH || flag1 && enumfacing.getAxis().isHorizontal();
-        	    if (slabtype == VerticalSlabType.SOUTH) return enumfacing == Direction.NORTH || !flag1 && enumfacing.getAxis().isHorizontal();
-        	    if (slabtype == VerticalSlabType.EAST) return enumfacing == Direction.WEST || !flag2 && enumfacing.getAxis().isHorizontal();
-        	    else return enumfacing == Direction.EAST || flag2 && enumfacing.getAxis().isHorizontal();
+                if (face_hit == Direction.WEST)
+                {
+                    return iblockstate1.with(TYPE, VerticalSlabType.EAST);
+                }
+                else if (face_hit == Direction.EAST)
+                {
+                    return iblockstate1.with(TYPE, VerticalSlabType.WEST);
+                }
+                else if (hitX > 0.5D)
+                {
+                    return iblockstate1.with(TYPE, VerticalSlabType.EAST);
+                }
+                else
+                {
+                    return iblockstate1.with(TYPE, VerticalSlabType.WEST);
+                }
             }
             else
             {
-            	return true;
+                return iblockstate1;
             }
-        }
-        else
-        {
-        	return false;
-        }
+		}
+	}
+
+	@Override
+	public boolean canReplace(BlockState state, ItemPlacementContext context)
+	{
+		ItemStack itemstack = context.getStack();
+		VerticalSlabType slabtype = state.get(TYPE);
+		if (slabtype != VerticalSlabType.DOUBLE && itemstack.getItem() == this.asItem())
+		{
+			if (context.canReplaceExisting())
+			{
+				Vec3d vec3d = context.getHitPos();
+				double hitX = vec3d.x - context.getBlockPos().getX();
+				double hitZ = vec3d.z - context.getBlockPos().getZ();
+				boolean flag1 = hitZ > 0.5D;
+				boolean flag2 = hitX > 0.5D;
+				Direction enumfacing = context.getSide();
+                if (slabtype == VerticalSlabType.NORTH)
+                {
+                    return enumfacing == Direction.SOUTH || flag1 && enumfacing.getAxis().isHorizontal();
+                }
+                if (slabtype == VerticalSlabType.SOUTH)
+                {
+                    return enumfacing == Direction.NORTH || !flag1 && enumfacing.getAxis().isHorizontal();
+                }
+                if (slabtype == VerticalSlabType.EAST)
+                {
+                    return enumfacing == Direction.WEST || !flag2 && enumfacing.getAxis().isHorizontal();
+                }
+                else
+                {
+                    return enumfacing == Direction.EAST || flag2 && enumfacing.getAxis().isHorizontal();
+                }
+			}
+			else
+			{
+				return true;
+			}
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
 	public Fluid tryDrainFluid(WorldAccess worldIn, BlockPos pos, BlockState state)
 	{
-        if (state.get(WATERLOGGED))
-        {
-            worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(false)), 3);
-            return Fluids.WATER;
-        }
-        else
-        {
-            return Fluids.EMPTY;
-        }
+		if (state.get(WATERLOGGED))
+		{
+			worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(false)), 3);
+			return Fluids.WATER;
+		}
+		else
+		{
+			return Fluids.EMPTY;
+		}
 	}
-	
+
 	@Override
 	public FluidState getFluidState(BlockState state)
 	{
-        return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : Fluids.EMPTY.getDefaultState();
+		return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : Fluids.EMPTY.getDefaultState();
 	}
 
 	@Override
 	public boolean canFillWithFluid(BlockView worldIn, BlockPos pos, BlockState state, Fluid fluidIn)
 	{
-        return state.get(TYPE) != VerticalSlabType.DOUBLE && !state.get(WATERLOGGED) && fluidIn == Fluids.WATER;
+		return state.get(TYPE) != VerticalSlabType.DOUBLE && !state.get(WATERLOGGED) && fluidIn == Fluids.WATER;
 	}
 
 	@Override
 	public boolean tryFillWithFluid(WorldAccess worldIn, BlockPos pos, BlockState state, FluidState fluidStateIn)
 	{
-        if (state.get(TYPE) != VerticalSlabType.DOUBLE && !state.get(WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER)
-        {
-            if (!worldIn.isClient())
-            {
-            	worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)), 3);
-            	worldIn.getFluidTickScheduler().schedule(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
-            }
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+		if (state.get(TYPE) != VerticalSlabType.DOUBLE && !state.get(WATERLOGGED) && fluidStateIn.getFluid() == Fluids.WATER)
+		{
+			if (!worldIn.isClient())
+			{
+				worldIn.setBlockState(pos, state.with(WATERLOGGED, Boolean.valueOf(true)), 3);
+				worldIn.getFluidTickScheduler().schedule(pos, fluidStateIn.getFluid(), fluidStateIn.getFluid().getTickRate(worldIn));
+			}
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
-	
+
 	@Override
 	public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facing, BlockState facingState, WorldAccess worldIn, BlockPos currentPos, BlockPos facingPos)
 	{
-        if (stateIn.get(WATERLOGGED))
-        {
-            worldIn.getFluidTickScheduler().schedule(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
-        }
-        return stateIn;
+		if (stateIn.get(WATERLOGGED))
+		{
+			worldIn.getFluidTickScheduler().schedule(currentPos, Fluids.WATER, Fluids.WATER.getTickRate(worldIn));
+		}
+		return stateIn;
 	}
 
 	@Override
 	public boolean canPathfindThrough(BlockState state, BlockView worldIn, BlockPos pos, NavigationType type)
 	{
-        switch(type)
-        {
-        	case LAND:
-        		return false;
-        	case WATER:
-        		return worldIn.getFluidState(pos).matches(FluidTags.WATER);
-        	case AIR:
-        		return false;
-        	default:
-        		return false;
-        }
+		switch (type)
+		{
+			case LAND:
+				return false;
+			case WATER:
+				return worldIn.getFluidState(pos).matches(FluidTags.WATER);
+			case AIR:
+				return false;
+			default:
+				return false;
+		}
 	}
 }

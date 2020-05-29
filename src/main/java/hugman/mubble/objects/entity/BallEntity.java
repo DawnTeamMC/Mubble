@@ -64,26 +64,23 @@ public abstract class BallEntity extends ThrownItemEntity
 	protected void onCollision(HitResult result)
 	{
 		boolean removeOnImpact = true;
-		
-		if(result.getType() == HitResult.Type.ENTITY)
+		if (result.getType() == HitResult.Type.ENTITY)
 		{
 			removeOnImpact = onEntityImpact((EntityHitResult) result);
 		}
-		else if(result.getType() == HitResult.Type.BLOCK)
+		else if (result.getType() == HitResult.Type.BLOCK)
 		{
 			removeOnImpact = onBlockImpact((BlockHitResult) result);
 		}
-		
 		boolean cantRebound = reboundingAmount <= 0;
-		
-		if(removeOnImpact || cantRebound)
+		if (removeOnImpact || cantRebound)
 		{
-			if(!this.world.isClient)
+			if (!this.world.isClient)
 			{
 				this.world.sendEntityStatus(this, (byte) 3);
 				this.remove();
 			}
-			if(!removeOnImpact && cantRebound)
+			if (!removeOnImpact && cantRebound)
 			{
 				this.world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			}
@@ -93,12 +90,12 @@ public abstract class BallEntity extends ThrownItemEntity
 			reboundingAmount--;
 		}
 	}
-	
+
 	@Environment(EnvType.CLIENT)
 	@Override
 	public void handleStatus(byte state)
 	{
-		if(state == 3)
+		if (state == 3)
 		{
 			this.spawnDeathParticles();
 		}
@@ -106,7 +103,7 @@ public abstract class BallEntity extends ThrownItemEntity
 
 	protected void spawnDeathParticles()
 	{
-		for(int i = 0; i < 8; ++i)
+		for (int i = 0; i < 8; ++i)
 		{
 			float s1 = random.nextFloat() * 0.2F - 0.1F;
 			float s2 = random.nextFloat() * 0.2F - 0.1F;

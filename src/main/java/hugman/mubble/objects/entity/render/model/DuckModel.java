@@ -1,7 +1,6 @@
 package hugman.mubble.objects.entity.render.model;
 
 import com.google.common.collect.ImmutableList;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
@@ -19,9 +18,9 @@ public class DuckModel<T extends LivingEntity> extends AnimalModel<T>
 	private final ModelPart rightWing;
 	private final ModelPart leftWing;
 	private final ModelPart beak;
-	   
-    public DuckModel()
-    {
+
+	public DuckModel()
+	{
 		head = new ModelPart(this, 0, 0);
 		head.addCuboid(-2.0F, -10.0F, -2.0F, 4.0F, 10.0F, 3.0F, 0.0F);
 		head.setPivot(0.0F, 15.0F, -4.0F);

@@ -17,37 +17,37 @@ import net.minecraft.world.World;
 
 public class BerryBushBlock extends SweetBerryBushBlock
 {
-    public BerryBushBlock(Settings builder)
-    {
-        super(builder);
-    }
-    
-    @Override
-    public ItemStack getPickStack(BlockView worldIn, BlockPos pos, BlockState state)
-    {
-    	return new ItemStack(MubbleItems.BLUEBERRIES);
-    }
-    
-    @Override
-    public ActionResult onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
-    {
-        int i = state.get(AGE);
-        boolean flag = i == 3;
-        if (!flag && player.getStackInHand(handIn).getItem() == Items.BONE_MEAL)
-        {
-           return ActionResult.PASS;
-        }
-        else if (i > 1)
-        {
-           int j = 1 + worldIn.random.nextInt(2);
-           dropStack(worldIn, pos, new ItemStack(MubbleItems.BLUEBERRIES, j + (flag ? 1 : 0)));
-           worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
-           worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
-           return ActionResult.SUCCESS;
-        }
-        else
-        {
-           return super.onUse(state, worldIn, pos, player, handIn, hit);
-        }
-    }
+	public BerryBushBlock(Settings builder)
+	{
+		super(builder);
+	}
+
+	@Override
+	public ItemStack getPickStack(BlockView worldIn, BlockPos pos, BlockState state)
+	{
+		return new ItemStack(MubbleItems.BLUEBERRIES);
+	}
+
+	@Override
+	public ActionResult onUse(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
+	{
+		int i = state.get(AGE);
+		boolean flag = i == 3;
+		if (!flag && player.getStackInHand(handIn).getItem() == Items.BONE_MEAL)
+		{
+			return ActionResult.PASS;
+		}
+		else if (i > 1)
+		{
+			int j = 1 + worldIn.random.nextInt(2);
+			dropStack(worldIn, pos, new ItemStack(MubbleItems.BLUEBERRIES, j + (flag ? 1 : 0)));
+			worldIn.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
+			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
+			return ActionResult.SUCCESS;
+		}
+		else
+		{
+			return super.onUse(state, worldIn, pos, player, handIn, hit);
+		}
+	}
 }

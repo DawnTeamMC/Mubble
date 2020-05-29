@@ -1,22 +1,12 @@
 package hugman.mubble.objects.entity;
 
-import java.util.Iterator;
-import java.util.List;
-
 import com.google.common.collect.Lists;
-
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.objects.block.FlyingBlock;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.AnvilBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.ConcretePowderBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -49,6 +39,9 @@ import net.minecraft.world.RayTraceContext.FluidHandling;
 import net.minecraft.world.RayTraceContext.ShapeType;
 import net.minecraft.world.World;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class FlyingBlockEntity extends Entity
 {
 	private BlockState block;
@@ -64,30 +57,30 @@ public class FlyingBlockEntity extends Entity
 	public FlyingBlockEntity(EntityType<? extends FlyingBlockEntity> type, World world)
 	{
 		super(type, world);
-        this.block = Blocks.SAND.getDefaultState();
-        this.dropItem = true;
-        this.flyHurtMax = 40;
-        this.flyHurtAmount = 2.0F;
+		this.block = Blocks.SAND.getDefaultState();
+		this.dropItem = true;
+		this.flyHurtMax = 40;
+		this.flyHurtAmount = 2.0F;
 	}
 
 	public FlyingBlockEntity(World world, double x, double y, double z, BlockState block)
 	{
 		this(MubbleEntities.FLYING_BLOCK, world);
-        this.block = block;
-        this.inanimate = true;
-        this.updatePosition(x, y + (double)((1.0F - this.getHeight()) / 2.0F), z);
-        this.setVelocity(Vec3d.ZERO);
-        this.prevX = x;
-        this.prevY = y;
-        this.prevZ = z;
-        this.setFlyingBlockPos(this.getBlockPos());
+		this.block = block;
+		this.inanimate = true;
+		this.updatePosition(x, y + (double) ((1.0F - this.getHeight()) / 2.0F), z);
+		this.setVelocity(Vec3d.ZERO);
+		this.prevX = x;
+		this.prevY = y;
+		this.prevZ = z;
+		this.setFlyingBlockPos(this.getBlockPos());
 	}
-	
+
 	public boolean isAttackable()
 	{
 		return false;
 	}
-	
+
 	public void setFlyingBlockPos(BlockPos pos)
 	{
 		this.dataTracker.set(BLOCK_POS, pos);
@@ -98,25 +91,25 @@ public class FlyingBlockEntity extends Entity
 	{
 		return (BlockPos) this.dataTracker.get(BLOCK_POS);
 	}
-	
+
 	@Override
 	protected boolean canClimb()
 	{
 		return false;
 	}
-	
-	@Override
-    protected void initDataTracker()
-	{
-        this.dataTracker.startTracking(BLOCK_POS, BlockPos.ORIGIN);
-    }
 
 	@Override
-    public boolean collides()
+	protected void initDataTracker()
 	{
-        return !this.removed;
-    }
-	
+		this.dataTracker.startTracking(BLOCK_POS, BlockPos.ORIGIN);
+	}
+
+	@Override
+	public boolean collides()
+	{
+		return !this.removed;
+	}
+
 	@Override
 	public void tick()
 	{
@@ -125,9 +118,9 @@ public class FlyingBlockEntity extends Entity
 			this.remove();
 		}
 		else
-        {
+		{
 			Block block = this.block.getBlock();
-            BlockPos blockPos2;
+			BlockPos blockPos2;
 			if (this.timeFlying++ == 0)
 			{
 				blockPos2 = this.getBlockPos();
@@ -141,7 +134,7 @@ public class FlyingBlockEntity extends Entity
 					return;
 				}
 			}
-			if(!this.hasNoGravity())
+			if (!this.hasNoGravity())
 			{
 				this.setVelocity(this.getVelocity().add(0.0D, 0.01D, 0.0D));
 			}
@@ -149,9 +142,9 @@ public class FlyingBlockEntity extends Entity
 			if (!this.world.isClient)
 			{
 				blockPos2 = this.getBlockPos();
-                boolean bl = this.block.getBlock() instanceof ConcretePowderBlock;
-                boolean bl2 = bl && this.world.getFluidState(blockPos2).matches(FluidTags.WATER);
-                double d = this.getVelocity().lengthSquared();
+				boolean bl = this.block.getBlock() instanceof ConcretePowderBlock;
+				boolean bl2 = bl && this.world.getFluidState(blockPos2).matches(FluidTags.WATER);
+				double d = this.getVelocity().lengthSquared();
 				if (bl && d > 1.0D)
 				{
 					BlockHitResult blockHitResult = this.world.rayTrace(new RayTraceContext(new Vec3d(this.prevX, this.prevY, this.prevZ), this.getPos(), ShapeType.COLLIDER, FluidHandling.SOURCE_ONLY, this));
@@ -161,11 +154,11 @@ public class FlyingBlockEntity extends Entity
 						bl2 = true;
 					}
 				}
-				if(FlyingBlock.canFlyThrough(this.world.getBlockState(blockPos2.up())) && !bl2)
+				if (FlyingBlock.canFlyThrough(this.world.getBlockState(blockPos2.up())) && !bl2)
 				{
-					if(!this.world.isClient && (this.timeFlying > 100 && (blockPos2.getY() < 1 || blockPos2.getY() > 256) || this.timeFlying > 600))
+					if (!this.world.isClient && (this.timeFlying > 100 && (blockPos2.getY() < 1 || blockPos2.getY() > 256) || this.timeFlying > 600))
 					{
-						if(this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+						if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 						{
 							this.dropItem(block);
 						}
@@ -176,35 +169,32 @@ public class FlyingBlockEntity extends Entity
 				{
 					BlockState blockState = this.world.getBlockState(blockPos2);
 					this.setVelocity(this.getVelocity().multiply(0.7D, 0.4D, 0.7D));
-					if(!blockState.isOf(Blocks.MOVING_PISTON))
+					if (!blockState.isOf(Blocks.MOVING_PISTON))
 					{
 						this.remove();
-						if(!this.destroyedOnLanding)
+						if (!this.destroyedOnLanding)
 						{
 							boolean bl3 = blockState.canReplace(new AutomaticItemPlacementContext(this.world, blockPos2, Direction.UP, ItemStack.EMPTY, Direction.DOWN));
 							boolean bl4 = this.block.canPlaceAt(this.world, blockPos2);
-							if(bl3 && bl4)
+							if (bl3 && bl4)
 							{
-								if(this.block.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockPos2).getFluid() == Fluids.WATER)
+								if (this.block.contains(Properties.WATERLOGGED) && this.world.getFluidState(blockPos2).getFluid() == Fluids.WATER)
 								{
 									this.block = this.block.with(Properties.WATERLOGGED, Boolean.valueOf(true));
 								}
-								
-								if(this.world.setBlockState(blockPos2, this.block, 3))
+								if (this.world.setBlockState(blockPos2, this.block, 3))
 								{
-									if(block instanceof FlyingBlock)
+									if (block instanceof FlyingBlock)
 									{
 										((FlyingBlock) block).onLanding(this.world, blockPos2, this.block, blockState, this);
 									}
-									
-									if(this.blockEntityData != null && block instanceof BlockEntityProvider)
+									if (this.blockEntityData != null && block instanceof BlockEntityProvider)
 									{
 										BlockEntity blockEntity = this.world.getBlockEntity(blockPos2);
 										if (blockEntity != null)
 										{
 											CompoundTag compoundTag = blockEntity.toTag(new CompoundTag());
 											Iterator var13 = this.blockEntityData.getKeys().iterator();
-
 											while (var13.hasNext())
 											{
 												String string = (String) var13.next();
@@ -214,23 +204,22 @@ public class FlyingBlockEntity extends Entity
 													compoundTag.put(string, tag.copy());
 												}
 											}
-											
 											blockEntity.fromTag(this.block, compoundTag);
 											blockEntity.markDirty();
 										}
 									}
 								}
-								else if(this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+								else if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 								{
 									this.dropItem(block);
 								}
 							}
-							else if(this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
+							else if (this.dropItem && this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS))
 							{
 								this.dropItem(block);
 							}
 						}
-						else if(block instanceof FlyingBlock)
+						else if (block instanceof FlyingBlock)
 						{
 							((FlyingBlock) block).onDestroyedOnLanding(this.world, blockPos2, this);
 						}
@@ -240,7 +229,7 @@ public class FlyingBlockEntity extends Entity
 			this.setVelocity(this.getVelocity().multiply(0.98D));
 		}
 	}
-	
+
 	@Override
 	public boolean handleFallDamage(float fallDistance, float damageMultiplier)
 	{
@@ -253,13 +242,11 @@ public class FlyingBlockEntity extends Entity
 				boolean bl = this.block.isIn(BlockTags.ANVIL);
 				DamageSource damageSource = bl ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
 				Iterator var7 = list.iterator();
-
 				while (var7.hasNext())
 				{
 					Entity entity = (Entity) var7.next();
 					entity.damage(damageSource, (float) Math.min(MathHelper.floor((float) i * this.flyHurtAmount), this.flyHurtMax));
 				}
-
 				if (bl && (double) this.random.nextFloat() < 0.05000000074505806D + (double) i * 0.05D)
 				{
 					BlockState blockState = AnvilBlock.getLandingState(this.block);
@@ -274,7 +261,6 @@ public class FlyingBlockEntity extends Entity
 				}
 			}
 		}
-
 		return false;
 	}
 
@@ -292,29 +278,30 @@ public class FlyingBlockEntity extends Entity
 			compound.put("TileEntityData", this.blockEntityData);
 		}
 	}
-	
+
 	@Override
 	protected void readCustomDataFromTag(CompoundTag compound)
 	{
 		this.block = NbtHelper.toBlockState(compound.getCompound("BlockState"));
 		this.timeFlying = compound.getInt("Time");
-		if (compound.contains("HurtEntities", 99)) {
+		if (compound.contains("HurtEntities", 99))
+		{
 			this.hurtEntities = compound.getBoolean("HurtEntities");
 			this.flyHurtMax = compound.getInt("FlyHurtMax");
 		}
-		else if(this.block.isIn(BlockTags.ANVIL))
+		else if (this.block.isIn(BlockTags.ANVIL))
 		{
 			this.hurtEntities = true;
 		}
-		if(compound.contains("DropItem", 99))
+		if (compound.contains("DropItem", 99))
 		{
 			this.dropItem = compound.getBoolean("DropItem");
 		}
-		if(compound.contains("TileEntityData", 10))
+		if (compound.contains("TileEntityData", 10))
 		{
 			this.blockEntityData = compound.getCompound("TileEntityData");
 		}
-		if(this.block.getBlock() instanceof AirBlock)
+		if (this.block.getBlock() instanceof AirBlock)
 		{
 			this.block = MubbleBlocks.WHITE_BALLOON.getDefaultState();
 		}
@@ -326,31 +313,31 @@ public class FlyingBlockEntity extends Entity
 	{
 		return this.world;
 	}
-	
+
 	public void setHurtEntities(boolean hurtEntitiesIn)
 	{
 		this.hurtEntities = hurtEntitiesIn;
 	}
-	
+
 	@Environment(EnvType.CLIENT)
 	@Override
 	public boolean doesRenderOnFire()
 	{
 		return false;
 	}
-	
+
 	@Override
 	public void populateCrashReport(CrashReportSection category)
 	{
 		super.populateCrashReport(category);
 		category.add("Immitating BlockState", this.block.toString());
 	}
-	
+
 	public BlockState getBlockState()
 	{
 		return this.block;
 	}
-	
+
 	@Override
 	public boolean entityDataRequiresOperator()
 	{

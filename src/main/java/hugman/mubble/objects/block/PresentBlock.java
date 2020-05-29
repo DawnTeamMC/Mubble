@@ -1,15 +1,8 @@
 package hugman.mubble.objects.block;
 
-import java.util.Random;
-
 import hugman.mubble.init.data.MubbleBlockStateProperties;
 import hugman.mubble.objects.tile_entity.PresentTileEntity;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.BlockWithEntity;
-import net.minecraft.block.ShapeContext;
-import net.minecraft.block.Waterloggable;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -33,76 +26,77 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class PresentBlock extends BlockWithEntity implements Waterloggable
 {
 	public static final BooleanProperty OPEN = Properties.OPEN;
 	public static final BooleanProperty EMPTY = MubbleBlockStateProperties.EMPTY;
-	
+
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	protected static final VoxelShape EMPTY_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 12.0D, 15.0D);
 	protected static final VoxelShape FULL_SHAPE = VoxelShapes.union(EMPTY_SHAPE, Block.createCuboidShape(0.0D, 10.0D, 0.0D, 16.0D, 16.0D, 16.0D));
-	
-    public PresentBlock(Settings builder)
-    {
-        super(builder);
-        this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, Boolean.valueOf(false)).with(EMPTY, Boolean.valueOf(true)).with(WATERLOGGED, Boolean.valueOf(false)));
-    }
-    
-    @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
-    {
-		if(!state.get(EMPTY) && !state.get(OPEN))
+
+	public PresentBlock(Settings builder)
+	{
+		super(builder);
+		this.setDefaultState(this.stateManager.getDefaultState().with(OPEN, Boolean.valueOf(false)).with(EMPTY, Boolean.valueOf(true)).with(WATERLOGGED, Boolean.valueOf(false)));
+	}
+
+	@Override
+	public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context)
+	{
+		if (!state.get(EMPTY) && !state.get(OPEN))
 		{
-    		return FULL_SHAPE;
+			return FULL_SHAPE;
 		}
 		else
 		{
 			return EMPTY_SHAPE;
 		}
-    }
-    
-    @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
-    {
-    	if(world.isClient)
-    	{
-    		return ActionResult.SUCCESS;
-    	}
-    	if(!world.isClient)
-    	{
-    		BlockEntity blockEntity = world.getBlockEntity(pos);
-    		if(blockEntity instanceof PresentTileEntity)
-    		{
-    			player.openHandledScreen((PresentTileEntity)blockEntity);
-    			//TODO player.incrementStat(Stats.OPEN_BARREL);
-    		}
-    	}
-		return ActionResult.SUCCESS;
-    }
-    
-    @Override
-	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean notify)
+	}
+
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockHitResult hit)
 	{
-		if(!state.isOf(newState.getBlock()))
+		if (world.isClient)
+		{
+			return ActionResult.SUCCESS;
+		}
+		if (!world.isClient)
 		{
 			BlockEntity blockEntity = world.getBlockEntity(pos);
-			if(blockEntity instanceof Inventory)
+			if (blockEntity instanceof PresentTileEntity)
 			{
-				ItemScatterer.spawn(world, pos, (Inventory)blockEntity);
+				player.openHandledScreen((PresentTileEntity) blockEntity);
+				//TODO player.incrementStat(Stats.OPEN_BARREL);
+			}
+		}
+		return ActionResult.SUCCESS;
+	}
+
+	@Override
+	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean notify)
+	{
+		if (!state.isOf(newState.getBlock()))
+		{
+			BlockEntity blockEntity = world.getBlockEntity(pos);
+			if (blockEntity instanceof Inventory)
+			{
+				ItemScatterer.spawn(world, pos, (Inventory) blockEntity);
 				world.updateComparators(pos, this);
 			}
-
 			super.onStateReplaced(state, world, pos, newState, notify);
 		}
 	}
-	
+
 	@Override
 	public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random)
 	{
 		BlockEntity blockEntity = worldIn.getBlockEntity(pos);
-		if(blockEntity instanceof PresentTileEntity)
+		if (blockEntity instanceof PresentTileEntity)
 		{
-			((PresentTileEntity)blockEntity).tick();
+			((PresentTileEntity) blockEntity).tick();
 		}
 	}
 
@@ -111,50 +105,50 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable
 	{
 		return new PresentTileEntity();
 	}
-	
+
 	@Override
 	public void onPlaced(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack)
 	{
-		if(stack.hasCustomName())
+		if (stack.hasCustomName())
 		{
 			BlockEntity blockEntity = worldIn.getBlockEntity(pos);
-			if(blockEntity instanceof PresentTileEntity)
+			if (blockEntity instanceof PresentTileEntity)
 			{
-				((PresentTileEntity)blockEntity).setCustomName(stack.getName());
+				((PresentTileEntity) blockEntity).setCustomName(stack.getName());
 			}
 		}
 	}
-	
-	@Override
-    public boolean hasComparatorOutput(BlockState state)
-	{
-        return true;
-    }
 
 	@Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos)
+	public boolean hasComparatorOutput(BlockState state)
 	{
-        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
-    }
-	
+		return true;
+	}
+
+	@Override
+	public int getComparatorOutput(BlockState state, World world, BlockPos pos)
+	{
+		return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+	}
+
 	@Override
 	public BlockRenderType getRenderType(BlockState state)
 	{
 		return BlockRenderType.MODEL;
 	}
-	
+
 	@Override
 	public BlockState getPlacementState(ItemPlacementContext context)
 	{
 		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(context.getWorld().getFluidState(context.getBlockPos()).getFluid() == Fluids.WATER));
 	}
-	
+
 	@Override
 	protected void appendProperties(Builder<Block, BlockState> builder)
 	{
 		builder.add(OPEN, EMPTY, WATERLOGGED);
 	}
-	
+
 	@Override
 	public FluidState getFluidState(BlockState state)
 	{

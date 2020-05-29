@@ -6,20 +6,36 @@
 			"apply": {"model": "mubble:block/orange_dark_prismarine_wall/post"}
 		},
 		{
-			"when": {"north": "true"},
+			"when": {"north": "low"},
 			"apply": {"model": "mubble:block/orange_dark_prismarine_wall/side", "uvlock": true}
 		},
 		{
-			"when": {"east": "true"},
+			"when": {"east": "low"},
 			"apply": {"model": "mubble:block/orange_dark_prismarine_wall/side", "y": 90, "uvlock": true}
 		},
 		{
-			"when": {"south": "true"},
+			"when": {"south": "low"},
 			"apply": {"model": "mubble:block/orange_dark_prismarine_wall/side", "y": 180, "uvlock": true}
 		},
 		{
-			"when": {"west": "true"},
+			"when": {"west": "low"},
 			"apply": {"model": "mubble:block/orange_dark_prismarine_wall/side", "y": 270, "uvlock": true}
+		},
+		{
+			"when": {"north": "tall"},
+			"apply": {"model": "mubble:block/orange_dark_prismarine_wall/side_tall", "uvlock": true}
+		},
+		{
+			"when": {"east": "tall"},
+			"apply": {"model": "mubble:block/orange_dark_prismarine_wall/side_tall", "y": 90, "uvlock": true}
+		},
+		{
+			"when": {"south": "tall"},
+			"apply": {"model": "mubble:block/orange_dark_prismarine_wall/side_tall", "y": 180, "uvlock": true}
+		},
+		{
+			"when": {"west": "tall"},
+			"apply": {"model": "mubble:block/orange_dark_prismarine_wall/side_tall", "y": 270, "uvlock": true}
 		}
 	]
 }

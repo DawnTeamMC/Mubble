@@ -1,34 +1,23 @@
 package hugman.mubble;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.init.MubbleCostumes;
-import hugman.mubble.init.MubbleEffects;
-import hugman.mubble.init.MubbleEnchantments;
-import hugman.mubble.init.MubbleEntities;
-import hugman.mubble.init.MubbleItems;
-import hugman.mubble.init.MubblePaintingTypes;
-import hugman.mubble.init.MubbleSounds;
+import hugman.mubble.init.*;
 import hugman.mubble.init.data.MubbleCommands;
 import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
-import hugman.mubble.init.world.MubbleCarvers;
-import hugman.mubble.init.world.MubbleDimensions;
-import hugman.mubble.init.world.MubbleFeatures;
 import hugman.mubble.init.world.MubbleGenerators;
 import hugman.mubble.init.world.MubbleSurfaceBuilders;
 import hugman.mubble.objects.event.LightsaberEvents;
 import net.fabricmc.api.ModInitializer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class Mubble implements ModInitializer
 {
 	public static final String MOD_ID = "mubble";
 	public static final String MOD_PREFIX = MOD_ID + ":";
 	public static final Logger LOGGER = LogManager.getLogger();
-	
+
 	@Override
 	public void onInitialize()
 	{
@@ -40,25 +29,19 @@ public class Mubble implements ModInitializer
 		new MubbleItems();
 		new MubblePaintingTypes();
 		new MubbleSounds();
-		
 		// Data
 		new MubbleTileEntityTypes();
 		MubbleCommands.init();
 		MubbleContainerTypes.init();
-		
 		// World
 		new MubbleBiomes();
-		new MubbleCarvers();
-		new MubbleDimensions();
-		new MubbleFeatures();
 		new MubbleSurfaceBuilders();
 		MubbleBiomes.initBiomeGeneration();
 		initGenerators();
-		
 		// Events
 		LightsaberEvents.init();
 	}
-	
+
 	private void initGenerators()
 	{
 		MubbleGenerators.registerOres();

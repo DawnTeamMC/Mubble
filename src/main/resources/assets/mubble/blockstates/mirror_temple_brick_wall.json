@@ -14,7 +14,7 @@
 			]
 		},
 		{
-			"when": {"north": "true"},
+			"when": {"north": "low"},
 			"apply":
 			[
 				{"model": "mubble:block/mirror_temple_brick_wall/side/0", "uvlock": true},
@@ -26,7 +26,7 @@
 			]
 		},
 		{
-			"when": {"east": "true"},
+			"when": {"east": "low"},
 			"apply":
 			[
 				{"model": "mubble:block/mirror_temple_brick_wall/side/0", "y": 90, "uvlock": true},
@@ -38,7 +38,7 @@
 			]
 		},
 		{
-			"when": {"south": "true"},
+			"when": {"south": "low"},
 			"apply":
 			[
 				{"model": "mubble:block/mirror_temple_brick_wall/side/0", "y": 180, "uvlock": true},
@@ -50,7 +50,7 @@
 			]
 		},
 		{
-			"when": {"west": "true"},
+			"when": {"west": "low"},
 			"apply": 
 			[
 				{"model": "mubble:block/mirror_temple_brick_wall/side/0", "y": 270, "uvlock": true},
@@ -59,6 +59,54 @@
 				{"model": "mubble:block/mirror_temple_brick_wall/side/3", "y": 270, "uvlock": true},
 				{"model": "mubble:block/mirror_temple_brick_wall/side/4", "y": 270, "uvlock": true},
 				{"model": "mubble:block/mirror_temple_brick_wall/side/5", "y": 270, "uvlock": true}
+			]
+		},
+		{
+			"when": {"north": "tall"},
+			"apply":
+			[
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/0", "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/1", "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/2", "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/3", "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/4", "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/5", "uvlock": true}
+			]
+		},
+		{
+			"when": {"east": "tall"},
+			"apply":
+			[
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/0", "y": 90, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/1", "y": 90, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/2", "y": 90, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/3", "y": 90, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/4", "y": 90, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/5", "y": 90, "uvlock": true}
+			]
+		},
+		{
+			"when": {"south": "tall"},
+			"apply":
+			[
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/0", "y": 180, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/1", "y": 180, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/2", "y": 180, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/3", "y": 180, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/4", "y": 180, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/5", "y": 180, "uvlock": true}
+			]
+		},
+		{
+			"when": {"west": "tall"},
+			"apply": 
+			[
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/0", "y": 270, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/1", "y": 270, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/2", "y": 270, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/3", "y": 270, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/4", "y": 270, "uvlock": true},
+				{"model": "mubble:block/mirror_temple_brick_wall/side_tall/5", "y": 270, "uvlock": true}
 			]
 		}
 	]

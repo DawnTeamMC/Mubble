@@ -11,12 +11,12 @@ import net.minecraft.util.registry.Registry;
 public class MubbleEffects
 {
 
-    public static final StatusEffect HEAVINESS = register("heaviness", new SimpleEffect(StatusEffectType.HARMFUL, 9198906));
-    //public static final StatusEffect SNEEZING = new SimpleEffect("sneezing", true, 9753716);
-    public static final StatusEffect HICCUP = register("hiccup", new HiccupEffect(StatusEffectType.NEUTRAL, 9198906));
-    
-    private static StatusEffect register(String name, StatusEffect statusEffect)
-    {
-    	return Registry.register(Registry.STATUS_EFFECT, new Identifier(Mubble.MOD_ID, name), statusEffect);
-    }
+	public static final StatusEffect HEAVINESS = register("heaviness", new SimpleEffect(StatusEffectType.HARMFUL, 9198906));
+	//public static final StatusEffect SNEEZING = new SimpleEffect("sneezing", true, 9753716);
+	public static final StatusEffect HICCUP = register("hiccup", new HiccupEffect(StatusEffectType.NEUTRAL, 9198906));
+
+	private static StatusEffect register(String name, StatusEffect statusEffect)
+	{
+		return Registry.register(Registry.STATUS_EFFECT, new Identifier(Mubble.MOD_ID, name), statusEffect);
+	}
 }

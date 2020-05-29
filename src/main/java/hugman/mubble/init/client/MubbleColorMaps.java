@@ -54,7 +54,7 @@ public class MubbleColorMaps
 			return 10622269;
 		}, MubbleBlocks.SCARLET_LEAVES, MubbleBlocks.SCARLET_LEAF_PILE);
 	}
-	
+
 	public static void registerItemColors()
 	{
 		ColorProviderRegistry.ITEM.register((item, layer) ->

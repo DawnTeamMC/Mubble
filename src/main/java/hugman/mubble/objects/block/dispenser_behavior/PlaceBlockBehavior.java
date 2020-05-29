@@ -1,16 +1,8 @@
 package hugman.mubble.objects.block.dispenser_behavior;
 
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.FluidBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.dispenser.BlockPlacementDispenserBehavior;
-import net.minecraft.item.AutomaticItemPlacementContext;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ToolItem;
+import net.minecraft.item.*;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.util.math.BlockPos;
@@ -21,39 +13,39 @@ public class PlaceBlockBehavior extends BlockPlacementDispenserBehavior
 {
 	protected ItemStack dispenseSilently(BlockPointer source, ItemStack stack)
 	{
-		this.success = false;
+		this.setSuccess(false);
 		Item item = stack.getItem();
-		World worldIn = source.getWorld();
+		World world = source.getWorld();
 		Direction direction = source.getBlockState().get(DispenserBlock.FACING);
-		BlockPos blockPos = source.getBlockPos().offset(direction);
-		BlockState blockState = worldIn.getBlockState(blockPos);
-		Block block = blockState.getBlock();
-		if(item instanceof BlockItem)
+		BlockPos pos = source.getBlockPos().offset(direction);
+		BlockState state = world.getBlockState(pos);
+		Block block = state.getBlock();
+		if (item instanceof BlockItem)
 		{
-			BlockItem blockItem = (BlockItem)item;
-			this.success = blockItem.place(new AutomaticItemPlacementContext(source.getWorld(), blockPos, direction, stack, direction)) == ActionResult.SUCCESS;
+			BlockItem blockItem = (BlockItem) item;
+			this.setSuccess(blockItem.place(new AutomaticItemPlacementContext(source.getWorld(), pos, direction, stack, direction)) == ActionResult.SUCCESS);
 		}
-		else if(item instanceof ToolItem)
+		else if (item instanceof ToolItem)
 		{
-			if(item.isEffectiveOn(blockState) || blockState.getMaterial().canBreakByHand())
+			if (item.isEffectiveOn(state) || state.getHardness(world, pos) <= 0.6f)
 			{
-				if(block instanceof AirBlock || block instanceof FluidBlock)
+				if (block instanceof AirBlock || block instanceof FluidBlock)
 				{
-					this.success = false;
+					this.setSuccess(false);
 				}
-				else if(blockState.getHardness(worldIn, blockPos) < 0.0f)
+				else if (state.getHardness(world, pos) < 0.0f)
 				{
-					this.success = false;
+					this.setSuccess(false);
 				}
 				else
 				{
-					this.success = true;
+					this.setSuccess(true);
 				}
 			}
-			if(this.success)
+			if (this.isSuccess())
 			{
-				worldIn.removeBlock(blockPos, true);
-				stack.damage(1, worldIn.getRandom(), null);
+				world.removeBlock(pos, true);
+				stack.damage(1, world.getRandom(), null);
 			}
 		}
 		return stack;

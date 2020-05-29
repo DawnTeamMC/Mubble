@@ -1,9 +1,6 @@
 package hugman.mubble.objects.screen;
 
-import java.util.List;
-
 import com.mojang.blaze3d.systems.RenderSystem;
-
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.screen_handler.TimeswapTableScreenHandler;
 import net.fabricmc.api.EnvType;
@@ -20,6 +17,8 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
+
+import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandler>
@@ -42,39 +41,39 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 		super.render(matrices, mouseX, mouseY, delta);
 		this.drawMouseoverTooltip(matrices, mouseX, mouseY);
 	}
-	
+
 	protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY)
 	{
 		this.textRenderer.draw(matrices, this.title, 8.0F, 4.0F, 4210752);
 		this.textRenderer.draw(matrices, this.playerInventory.getDisplayName(), 8.0F, (float) (this.backgroundHeight - 94), 4210752);
 	}
-	
-    protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY)
-    {
-        this.renderBackground(matrices);
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.client.getTextureManager().bindTexture(TEXTURE);
-        int i = this.x;
-        int j = this.y;
-        this.drawTexture(matrices, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
-        int k = (int)(41.0F * this.scrollAmount);
-        this.drawTexture(matrices, i + 119, j + 15 + k, 176 + (this.shouldScroll() ? 0 : 12), 0, 12, 15);
-        int l = this.x + 52;
-        int m = this.y + 14;
-        int n = this.scrollOffset + 12;
-        this.renderRecipeBackground(matrices, mouseX, mouseY, l, m, n);
-        this.renderRecipeIcons(l, m, n);
+
+	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY)
+	{
+		this.renderBackground(matrices);
+		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+		this.client.getTextureManager().bindTexture(TEXTURE);
+		int i = this.x;
+		int j = this.y;
+		this.drawTexture(matrices, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
+		int k = (int) (41.0F * this.scrollAmount);
+		this.drawTexture(matrices, i + 119, j + 15 + k, 176 + (this.shouldScroll() ? 0 : 12), 0, 12, 15);
+		int l = this.x + 52;
+		int m = this.y + 14;
+		int n = this.scrollOffset + 12;
+		this.renderRecipeBackground(matrices, mouseX, mouseY, l, m, n);
+		this.renderRecipeIcons(l, m, n);
 	}
 
 	protected void drawMouseoverTooltip(MatrixStack matrices, int x, int y)
 	{
 		super.drawMouseoverTooltip(matrices, x, y);
-		if (this.canCraft) {
+		if (this.canCraft)
+		{
 			int i = this.x + 52;
 			int j = this.y + 14;
 			int k = this.scrollOffset + 12;
 			List<Item> list = ((TimeswapTableScreenHandler) this.handler).getAvailableRecipes();
-
 			for (int l = this.scrollOffset; l < k && l < ((TimeswapTableScreenHandler) this.handler).getAvailableRecipeCount(); ++l)
 			{
 				int m = l - this.scrollOffset;
@@ -102,10 +101,11 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 			if (n == ((TimeswapTableScreenHandler) this.handler).getSelectedRecipe())
 			{
 				s += 18;
-			} else if (i >= p && j >= r && i < p + 16 && j < r + 18) {
+			}
+			else if (i >= p && j >= r && i < p + 16 && j < r + 18)
+			{
 				s += 36;
 			}
-
 			this.drawTexture(matrixStack, p, r - 1, 0, s, 16, 18);
 		}
 
@@ -114,7 +114,6 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 	private void renderRecipeIcons(int x, int y, int scrollOffset)
 	{
 		List<Item> list = ((TimeswapTableScreenHandler) this.handler).getAvailableRecipes();
-
 		for (int i = this.scrollOffset; i < scrollOffset && i < ((TimeswapTableScreenHandler) this.handler).getAvailableRecipeCount(); ++i)
 		{
 			int j = i - this.scrollOffset;
@@ -134,7 +133,6 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 			int i = this.x + 52;
 			int j = this.y + 14;
 			int k = this.scrollOffset + 12;
-
 			for (int l = this.scrollOffset; l < k; ++l)
 			{
 				int m = l - this.scrollOffset;
@@ -147,7 +145,6 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 					return true;
 				}
 			}
-
 			i = this.x + 119;
 			j = this.y + 9;
 			if (mouseX >= (double) i && mouseX < (double) (i + 12) && mouseY >= (double) j && mouseY < (double) (j + 54))
@@ -155,11 +152,10 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 				this.mouseClicked = true;
 			}
 		}
-
 		return super.mouseClicked(mouseX, mouseY, button);
 	}
-	
-	public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) 
+
+	public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY)
 	{
 		if (this.mouseClicked && this.shouldScroll())
 		{
@@ -169,7 +165,9 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 			this.scrollAmount = MathHelper.clamp(this.scrollAmount, 0.0F, 1.0F);
 			this.scrollOffset = (int) ((double) (this.scrollAmount * (float) this.getMaxScroll()) + 0.5D) * 4;
 			return true;
-		} else {
+		}
+		else
+		{
 			return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
 		}
 	}
@@ -183,7 +181,6 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 			this.scrollAmount = MathHelper.clamp(this.scrollAmount, 0.0F, 1.0F);
 			this.scrollOffset = (int) ((double) (this.scrollAmount * (float) i) + 0.5D) * 4;
 		}
-
 		return true;
 	}
 

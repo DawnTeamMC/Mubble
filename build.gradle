@@ -24,9 +24,6 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
-	modImplementation "io.github.kvverti:bannerpp:${project.bannerpp_version}"
-	include "io.github.kvverti:bannerpp:${project.bannerpp_version}"
 }
 
 processResources {

@@ -13,16 +13,19 @@ public class SaplingBlock extends net.minecraft.block.SaplingBlock
 {
 	/* Extension for internal publicity
 	 * + Missing features */
-    public SaplingBlock(SaplingGenerator tree)
-    {
-        super(tree, Settings.copy(Blocks.OAK_SAPLING));
-    }
-    
-    @Override
-    protected boolean canPlantOnTop(BlockState state, BlockView worldIn, BlockPos pos)
-    {
-    	Block block = state.getBlock();
-        if(this == MubbleBlocks.PALM_SAPLING) return MubbleTags.Blocks.PALM_SAPLING_VALID_GROUND.contains(block);
+	public SaplingBlock(SaplingGenerator tree)
+	{
+		super(tree, Settings.copy(Blocks.OAK_SAPLING));
+	}
+
+	@Override
+	protected boolean canPlantOnTop(BlockState state, BlockView worldIn, BlockPos pos)
+	{
+		Block block = state.getBlock();
+        if (this == MubbleBlocks.PALM_SAPLING)
+        {
+            return MubbleTags.Blocks.PALM_SAPLING_VALID_GROUND.contains(block);
+        }
         else return super.canPlantOnTop(state, worldIn, pos);
-    }
+	}
 }

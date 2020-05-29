@@ -61,11 +61,11 @@ public class KirbyBallEntity extends BallEntity
 	protected boolean onEntityImpact(EntityHitResult result)
 	{
 		Entity entity = ((EntityHitResult) result).getEntity();
-        boolean flag = entity.damage(DamageSource.thrownProjectile(this, this.owner), 2.5F);
-        if(flag)
-        {
-        	this.dealDamage(this.owner, entity);
-        }
+		boolean flag = entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), 2.5F);
+		if (flag)
+		{
+			this.dealDamage((LivingEntity) this.getOwner(), entity);
+		}
 		world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return true;
 	}
@@ -74,24 +74,29 @@ public class KirbyBallEntity extends BallEntity
 	protected boolean onBlockImpact(BlockHitResult result)
 	{
 		Direction face = result.getSide();
-
 		Vec3d motion = getVelocity();
-		if(face == Direction.UP || face == Direction.DOWN)
+		if (face == Direction.UP || face == Direction.DOWN)
 		{
 			motion = motion.subtract(0.0D, getVelocity().y * 1.25D, 0.0D);
-			if(face == Direction.UP)
+			if (face == Direction.UP)
 			{
 				double minY = 0.3D;
-				if(motion.y < minY)
+				if (motion.y < minY)
 				{
 					motion = new Vec3d(motion.x, minY, motion.z);
 				}
 			}
 		}
-		else if(face == Direction.WEST || face == Direction.EAST) motion = motion.subtract(getVelocity().x * 1.25D, 0.0D, 0.0D);
-		else if(face == Direction.NORTH || face == Direction.SOUTH) motion = motion.subtract(0.0D, 0.0D, getVelocity().z * 1.25D);
+		else if (face == Direction.WEST || face == Direction.EAST)
+        {
+            motion = motion.subtract(getVelocity().x * 1.25D, 0.0D, 0.0D);
+        }
+        else if (face == Direction.NORTH || face == Direction.SOUTH)
+        {
+            motion = motion.subtract(0.0D, 0.0D, getVelocity().z * 1.25D);
+        }
 		setVelocity(motion);
-		world.playSound((PlayerEntity)null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_REBOUND, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_REBOUND, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return false;
 	}
 }
