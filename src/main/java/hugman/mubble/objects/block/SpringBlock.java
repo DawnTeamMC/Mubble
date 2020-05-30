@@ -128,12 +128,10 @@ public class SpringBlock extends DirectionalBlock implements Waterloggable
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView worldIn, BlockPos pos)
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
 	{
 		Direction direction = state.get(FACING);
-		BlockPos blockpos = pos.offset(direction.getOpposite());
-		BlockState blockstate = worldIn.getBlockState(blockpos);
-		return Block.isSideSolidFullSquare(blockstate, worldIn, blockpos, direction);
+		return Block.sideCoversSmallSquare(world, pos.offset(direction.getOpposite()), direction);
 	}
 
 	@Override
