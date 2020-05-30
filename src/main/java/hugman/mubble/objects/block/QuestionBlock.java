@@ -107,11 +107,11 @@ public class QuestionBlock extends Block
 				worldIn.spawnEntity(new ItemEntity(worldIn, x, y, z, item));
 				if (item.getItem().isIn(MubbleTags.Items.COINS))
 				{
-					worldIn.playSound((PlayerEntity) null, x, y - 0.6D, z, coinLootSound, SoundCategory.BLOCKS, 1f, 1f);
+					worldIn.playSound(null, x, y - 0.6D, z, coinLootSound, SoundCategory.BLOCKS, 1f, 1f);
 				}
 				else
 				{
-					worldIn.playSound((PlayerEntity) null, x, y - 0.6D, z, powerUpLootSound, SoundCategory.BLOCKS, 1f, 1f);
+					worldIn.playSound(null, x, y - 0.6D, z, powerUpLootSound, SoundCategory.BLOCKS, 1f, 1f);
 				}
 			}
 			worldIn.setBlockState(pos, emptyBlock);

@@ -1,4 +1,4 @@
-package hugman.mubble.objects.costume;
+package hugman.mubble.objects.item.costume;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;

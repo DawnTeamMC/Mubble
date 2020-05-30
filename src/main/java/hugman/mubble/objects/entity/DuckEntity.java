@@ -223,7 +223,7 @@ public class DuckEntity extends AnimalEntity
 		return fBiomeList;
 	}
 
-	public static enum Type
+	public enum Type
 	{
 		PEKIN(0, "pekin", Biomes.PLAINS, Biomes.FOREST),
 		MALLARD(1, "mallard", Biomes.PLAINS, Biomes.RIVER, Biomes.SWAMP);
@@ -240,7 +240,7 @@ public class DuckEntity extends AnimalEntity
 		private final String name;
 		private final List<Biome> spawnBiomes;
 
-		private Type(int indexIn, String nameIn, Biome... spawnBiomesIn)
+		Type(int indexIn, String nameIn, Biome... spawnBiomesIn)
 		{
 			this.index = indexIn;
 			this.name = nameIn;

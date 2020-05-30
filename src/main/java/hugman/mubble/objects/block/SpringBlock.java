@@ -177,7 +177,7 @@ public class SpringBlock extends DirectionalBlock implements Waterloggable
 				break;
 		}
 		entityIn.fallDistance = 0f;
-		worldIn.playSound((PlayerEntity) null, pos, MubbleSounds.BLOCK_SPRING_TRIGGER, SoundCategory.BLOCKS, 1f, 1f);
+		worldIn.playSound(null, pos, MubbleSounds.BLOCK_SPRING_TRIGGER, SoundCategory.BLOCKS, 1f, 1f);
 	}
 
 	@Override

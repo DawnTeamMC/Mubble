@@ -38,7 +38,7 @@ public class FlyingBlock extends Block
 	{
 		if (canFlyThrough(world.getBlockState(pos.down())) && pos.getY() >= 0)
 		{
-			FlyingBlockEntity flyingBlockEntity = new FlyingBlockEntity(world, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, world.getBlockState(pos));
+			FlyingBlockEntity flyingBlockEntity = new FlyingBlockEntity(world, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, world.getBlockState(pos));
 			this.configureFlyingBlockEntity(flyingBlockEntity);
 			world.spawnEntity(flyingBlockEntity);
 		}

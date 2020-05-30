@@ -54,7 +54,7 @@ public class EmptyBlock extends Block
 			{
 				hitSound = MubbleSounds.BLOCK_EMPTY_BLOCK_HIT_NSMBU;
 			}
-			worldIn.playSound((PlayerEntity) null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, hitSound, SoundCategory.BLOCKS, 1f, 1f);
+			worldIn.playSound(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, hitSound, SoundCategory.BLOCKS, 1f, 1f);
 		}
 	}
 }

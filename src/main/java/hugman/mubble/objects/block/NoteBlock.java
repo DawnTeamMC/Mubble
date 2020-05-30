@@ -78,7 +78,7 @@ public class NoteBlock extends Block
 			Random rand = new Random();
 			if (!entityIn.isSneaking())
 			{
-				worldIn.playSound((PlayerEntity) null, x, y, z, highJumpSound, SoundCategory.BLOCKS, 1f, 1f);
+				worldIn.playSound(null, x, y, z, highJumpSound, SoundCategory.BLOCKS, 1f, 1f);
 				for (int i = 0; i < rand.nextInt(5) + 1; i++)
 				{
 					worldIn.addParticle(ParticleTypes.NOTE, x + (rand.nextInt(7) - 3) / 10D, y + 0.6D, z + (rand.nextInt(7) - 3) / 10D, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D);
@@ -87,7 +87,7 @@ public class NoteBlock extends Block
 			}
 			else
 			{
-				worldIn.playSound((PlayerEntity) null, x, y, z, lowJumpSound, SoundCategory.BLOCKS, 1f, 1f);
+				worldIn.playSound(null, x, y, z, lowJumpSound, SoundCategory.BLOCKS, 1f, 1f);
 				for (int i = 0; i < rand.nextInt(1) + 1; i++)
 				{
 					worldIn.addParticle(ParticleTypes.NOTE, x, y + 0.6D, z, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D);

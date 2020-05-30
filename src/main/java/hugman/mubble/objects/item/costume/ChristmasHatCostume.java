@@ -1,4 +1,4 @@
-package hugman.mubble.objects.costume;
+package hugman.mubble.objects.item.costume;
 
 import hugman.mubble.util.CalendarEvents;
 import net.minecraft.entity.LivingEntity;

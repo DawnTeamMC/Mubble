@@ -5,9 +5,8 @@ import hugman.mubble.init.data.MubbleCommands;
 import hugman.mubble.init.data.MubbleContainerTypes;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
+import hugman.mubble.init.world.MubbleFeatures;
 import hugman.mubble.init.world.MubbleGenerators;
-import hugman.mubble.init.world.MubbleSurfaceBuilders;
-import hugman.mubble.objects.event.LightsaberEvents;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,7 +35,7 @@ public class Mubble implements ModInitializer
 		MubbleContainerTypes.init();
 		// World
 		new MubbleBiomes();
-		new MubbleSurfaceBuilders();
+		new MubbleFeatures();
 		MubbleBiomes.initBiomeGeneration();
 		initGenerators();
 	}

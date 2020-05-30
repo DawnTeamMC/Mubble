@@ -73,7 +73,7 @@ public class CustomTNTBlock extends Block
 	@Override
 	public void onBreak(World world, BlockPos pos, BlockState state, PlayerEntity player)
 	{
-		if (!world.isClient() && !player.isCreative() && (Boolean) state.get(UNSTABLE))
+		if (!world.isClient() && !player.isCreative() && state.get(UNSTABLE))
 		{
 			primeTnt(world, pos, player);
 		}
@@ -85,7 +85,7 @@ public class CustomTNTBlock extends Block
 	{
 		if (!world.isClient)
 		{
-			CustomTNTEntity tntentity = new CustomTNTEntity(this.getDefaultState(), world, (double) ((float) pos.getX() + 0.5F), (double) pos.getY(), (double) ((float) pos.getZ() + 0.5F), fuse, strenght, explosion.getCausingEntity());
+			CustomTNTEntity tntentity = new CustomTNTEntity(this.getDefaultState(), world, (float) pos.getX() + 0.5F, pos.getY(), (float) pos.getZ() + 0.5F, fuse, strenght, explosion.getCausingEntity());
 			tntentity.setFuse((short) (world.random.nextInt(tntentity.getFuse() / 4) + tntentity.getFuse() / 8));
 			world.spawnEntity(tntentity);
 		}
@@ -93,16 +93,16 @@ public class CustomTNTBlock extends Block
 
 	public void primeTnt(World world, BlockPos pos)
 	{
-		primeTnt(world, pos, (LivingEntity) null);
+		primeTnt(world, pos, null);
 	}
 
 	private void primeTnt(World world, BlockPos pos, LivingEntity igniter)
 	{
 		if (!world.isClient)
 		{
-			CustomTNTEntity tntentity = new CustomTNTEntity(this.getDefaultState(), world, (double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, fuse, strenght, igniter);
+			CustomTNTEntity tntentity = new CustomTNTEntity(this.getDefaultState(), world, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, fuse, strenght, igniter);
 			world.spawnEntity(tntentity);
-			world.playSound((PlayerEntity) null, tntentity.getX(), tntentity.getY(), tntentity.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			world.playSound(null, tntentity.getX(), tntentity.getY(), tntentity.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		}
 	}
 

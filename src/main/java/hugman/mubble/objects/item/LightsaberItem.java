@@ -42,12 +42,12 @@ public class LightsaberItem extends SwordItem
 
 	public void onPullOut(Entity entity, World world)
 	{
-		world.playSoundFromEntity((PlayerEntity) null, entity, MubbleSounds.ITEM_LIGHTSABER_PULL_OUT, SoundCategory.PLAYERS, 1.0F, 1.0F);
+		world.playSoundFromEntity(null, entity, MubbleSounds.ITEM_LIGHTSABER_PULL_OUT, SoundCategory.PLAYERS, 1.0F, 1.0F);
 	}
 
 	public void onPullIn(Entity entity, World world)
 	{
-		world.playSoundFromEntity((PlayerEntity) null, entity, MubbleSounds.ITEM_LIGHTSABER_PULL_IN, SoundCategory.PLAYERS, 1.0F, 1.0F);
+		world.playSoundFromEntity(null, entity, MubbleSounds.ITEM_LIGHTSABER_PULL_IN, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		if (entity instanceof ServerPlayerEntity)
 		{
 			StopSoundS2CPacket packet = new StopSoundS2CPacket(MubbleSounds.ITEM_LIGHTSABER_IDLE.getId(), SoundCategory.MASTER);

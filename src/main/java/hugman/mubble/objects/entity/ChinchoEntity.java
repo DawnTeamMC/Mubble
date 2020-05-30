@@ -36,7 +36,7 @@ public class ChinchoEntity extends MobEntityWithAi
 		this.goalSelector.add(7, new EscapeDangerGoal(this, 1.0D));
 		this.goalSelector.add(8, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.add(8, new LookAroundGoal(this));
-		this.targetSelector.add(1, new RevengeGoal(this, new Class[]{ChinchoEntity.class}));
+		this.targetSelector.add(1, new RevengeGoal(this, ChinchoEntity.class));
 		this.targetSelector.add(3, new FollowTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.add(3, new FollowTargetGoal<>(this, ToadEntity.class, true));
 	}
@@ -73,7 +73,7 @@ public class ChinchoEntity extends MobEntityWithAi
 		if (this.world.isDay() && !this.world.isClient && this.shouldBurnInDay())
 		{
 			float f = this.getBrightnessAtEyes();
-			if (f > 0.5F && this.random.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.isSkyVisible(new BlockPos(this.getX(), this.getY() + (double) this.getEyeY(), this.getZ())))
+			if (f > 0.5F && this.random.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.isSkyVisible(new BlockPos(this.getX(), this.getY() + this.getEyeY(), this.getZ())))
 			{
 				boolean flag = true;
 				ItemStack itemstack = this.getEquippedStack(EquipmentSlot.HEAD);

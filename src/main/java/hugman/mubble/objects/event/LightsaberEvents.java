@@ -30,14 +30,7 @@ public class LightsaberEvents
 			ItemStack stack = player.getMainHandStack();
 			if (stack.getItem() instanceof LightsaberItem)
 			{
-				if (entity.isAttackable() && !entity.isInvulnerableTo(DamageSource.player(player)) && entity.isAlive())
-				{
-					((LightsaberItem) stack.getItem()).onSwing(player, true);
-				}
-				else
-				{
-					((LightsaberItem) stack.getItem()).onSwing(player, false);
-				}
+				((LightsaberItem) stack.getItem()).onSwing(player, entity.isAttackable() && !entity.isInvulnerableTo(DamageSource.player(player)) && entity.isAlive());
 			}
 			return ActionResult.PASS;
 		});

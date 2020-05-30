@@ -14,7 +14,7 @@ import hugman.mubble.objects.block.StairsBlock;
 import hugman.mubble.objects.block.StoneButtonBlock;
 import hugman.mubble.objects.block.WoodButtonBlock;
 import hugman.mubble.objects.block.*;
-import hugman.mubble.objects.world.sapling_generator.*;
+import hugman.mubble.objects.block.sapling_generator.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.AbstractBlock.Settings;

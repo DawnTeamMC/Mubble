@@ -85,7 +85,7 @@ public class ZombieCowmanEntity extends ZombifiedPiglinEntity
 	protected void initAttributes()
 	{
 		super.initAttributes();
-		this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue((double) 0.34F);
+		this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.34F);
 		this.getAttributeInstance(EntityAttributes.GENERIC_ATTACK_DAMAGE).setBaseValue(5.0D);
 	}
 
@@ -151,7 +151,7 @@ public class ZombieCowmanEntity extends ZombifiedPiglinEntity
 		public HurtByAggressorGoal(ZombieCowmanEntity p_i45828_1_)
 		{
 			super(p_i45828_1_);
-			this.setGroupRevenge(new Class[]{ZombieEntity.class});
+			this.setGroupRevenge(ZombieEntity.class);
 		}
 
 		protected void setMobEntityTarget(MobEntity mobIn, LivingEntity targetIn)

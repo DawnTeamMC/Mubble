@@ -168,7 +168,7 @@ public class PresentBlockEntity extends LootableContainerBlockEntity
 		double d0 = (double) this.pos.getX() + 0.5D;
 		double d1 = (double) this.pos.getY() + 0.5D;
 		double d2 = (double) this.pos.getZ() + 0.5D;
-		this.world.playSound((PlayerEntity) null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
+		this.world.playSound(null, d0, d1, d2, sound, SoundCategory.BLOCKS, 0.5F, this.world.random.nextFloat() * 0.1F + 0.9F);
 	}
 
 	@Override

@@ -82,7 +82,7 @@ public class DoorBlock extends net.minecraft.block.DoorBlock
 
 	public void playToggleSound(World worldIn, BlockPos pos, boolean flag)
 	{
-		worldIn.playSound((PlayerEntity) null, pos, flag ? this.getOpenSound(this) : this.getCloseSound(this), SoundCategory.BLOCKS, 1.0F, 1.0F);
+		worldIn.playSound(null, pos, flag ? this.getOpenSound(this) : this.getCloseSound(this), SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}
 
 	public SoundEvent getOpenSound(Block block)

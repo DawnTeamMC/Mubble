@@ -20,7 +20,7 @@ public class TetrisGlassBlock extends FallingBlock
 	@Environment(EnvType.CLIENT)
 	public boolean isSideInvisible(BlockState state, BlockState neighbor, Direction facing)
 	{
-		return neighbor.getBlock() == this ? true : super.isSideInvisible(state, neighbor, facing);
+		return neighbor.getBlock() == this || super.isSideInvisible(state, neighbor, facing);
 	}
 
 	@Override

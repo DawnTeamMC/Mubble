@@ -82,7 +82,7 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 					long l = world.getTime();
 					if (TimeswapTableScreenHandler.this.lastTakeTime != l)
 					{
-						world.playSound((PlayerEntity) null, blockPos, MubbleSounds.UI_TIMESWAP_TABLE_TAKE_RESULT,
+						world.playSound(null, blockPos, MubbleSounds.UI_TIMESWAP_TABLE_TAKE_RESULT,
 								SoundCategory.BLOCKS, 1.0F, 1.0F);
 						TimeswapTableScreenHandler.this.lastTakeTime = l;
 					}

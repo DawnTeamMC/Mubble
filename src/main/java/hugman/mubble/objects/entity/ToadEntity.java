@@ -54,9 +54,9 @@ public class ToadEntity extends AnimalEntity
 	{
 		this.goalSelector.add(0, new SwimGoal(this));
 		this.goalSelector.add(1, new FleeEntityGoal<>(this, ChinchoEntity.class, 10f, 1.2d, 1.45d, EntityPredicates.VALID_LIVING_ENTITY::test));
-		this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.TOAD_FEAR.contains(((LivingEntity) checkedEntity).getMainHandStack().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
-		this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.TOAD_FEAR.contains(((LivingEntity) checkedEntity).getOffHandStack().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
-		this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.TOAD_FEAR.contains(((LivingEntity) checkedEntity).getEquippedStack(EquipmentSlot.HEAD).getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
+		this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.TOAD_FEAR.contains(checkedEntity.getMainHandStack().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
+		this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.TOAD_FEAR.contains(checkedEntity.getOffHandStack().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
+		this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.TOAD_FEAR.contains(checkedEntity.getEquippedStack(EquipmentSlot.HEAD).getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
 		this.goalSelector.add(1, new LongDoorInteractGoal(this, true));
 		this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.6D));
 		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));

@@ -12,20 +12,20 @@ public class TelekinesisEnchantment extends Enchantment
 	}
 
 	@Override
-	public int getMaximumLevel()
+	public int getMaxLevel()
 	{
 		return 2;
 	}
 
 	@Override
-	public int getMinimumPower(int enchantmentLevel)
+	public int getMinPower(int enchantmentLevel)
 	{
 		return 25 + enchantmentLevel * 5;
 	}
 
 	@Override
-	public int getMaximumPower(int enchantmentLevel)
+	public int getMaxPower(int enchantmentLevel)
 	{
-		return this.getMinimumPower(enchantmentLevel) + 15;
+		return this.getMinPower(enchantmentLevel) + 15;
 	}
 }

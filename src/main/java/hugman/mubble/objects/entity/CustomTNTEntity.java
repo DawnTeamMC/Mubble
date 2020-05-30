@@ -40,7 +40,7 @@ public class CustomTNTEntity extends Entity
 		this.customTile = customTileIn;
 		this.updatePosition(x, y, z);
 		float f = (float) (Math.random() * (double) ((float) Math.PI * 2F));
-		this.setVelocity((double) (-((float) Math.sin((double) f)) * 0.02F), (double) 0.2F, (double) (-((float) Math.cos((double) f)) * 0.02F));
+		this.setVelocity(-((float) Math.sin(f)) * 0.02F, 0.2F, -((float) Math.cos(f)) * 0.02F);
 		this.setFuse(fuse);
 		this.setStrenght(strength);
 		this.prevX = x;
@@ -110,7 +110,7 @@ public class CustomTNTEntity extends Entity
 	{
 		compound.put("BlockState", NbtHelper.fromBlockState(this.customTile));
 		compound.putShort("Fuse", (short) this.getFuse());
-		compound.putFloat("Strenght", (float) this.getStrenght());
+		compound.putFloat("Strenght", this.getStrenght());
 	}
 
 	@Override

@@ -29,7 +29,7 @@ public enum MubbleItemTiers implements ToolMaterial
 	private final Lazy<Ingredient> repairIngredient;
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	private MubbleItemTiers(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantibility, Supplier<Ingredient> repairIngredient)
+	MubbleItemTiers(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantibility, Supplier<Ingredient> repairIngredient)
 	{
 		this.miningLevel = miningLevel;
 		this.itemDurability = itemDurability;
@@ -66,6 +66,6 @@ public enum MubbleItemTiers implements ToolMaterial
 
 	public Ingredient getRepairIngredient()
 	{
-		return (Ingredient) this.repairIngredient.get();
+		return this.repairIngredient.get();
 	}
 }

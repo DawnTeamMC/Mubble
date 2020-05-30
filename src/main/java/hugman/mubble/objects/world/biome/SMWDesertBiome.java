@@ -12,11 +12,11 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.BiomeMoodSound;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.DiskFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
@@ -42,7 +42,7 @@ public class SMWDesertBiome extends Biome
 						.fogColor(12638463)
 						.moodSound(BiomeMoodSound.CAVE)
 						.build())
-				.parent((String) null));
+				.parent(null));
 		this.addStructureFeature(DefaultBiomeFeatures.field_24687);
 		DefaultBiomeFeatures.method_28440(this);
 		this.addStructureFeature(DefaultBiomeFeatures.field_24711);

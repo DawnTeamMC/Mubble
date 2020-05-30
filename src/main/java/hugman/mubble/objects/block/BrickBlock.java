@@ -135,7 +135,7 @@ public class BrickBlock extends Block
 			for (ItemStack item : items)
 			{
 				worldIn.spawnEntity(new ItemEntity(worldIn, x, y, z, item));
-				worldIn.playSound((PlayerEntity) null, x, y - 0.6D, z, coinLootSound, SoundCategory.BLOCKS, 1f, 1f);
+				worldIn.playSound(null, x, y - 0.6D, z, coinLootSound, SoundCategory.BLOCKS, 1f, 1f);
 			}
 			worldIn.setBlockState(pos, emptyBlock);
 		}

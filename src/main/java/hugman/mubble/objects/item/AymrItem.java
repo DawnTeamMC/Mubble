@@ -52,7 +52,7 @@ public class AymrItem extends Item
 		BlockPos pos = context.getBlockPos();
 		PlayerEntity player = context.getPlayer();
 		World world = context.getWorld();
-		if (((PlayerEntity) player).getAttackCooldownProgress(0.0F) == 1.0F)
+		if (player.getAttackCooldownProgress(0.0F) == 1.0F)
 		{
 			if (world.isClient)
 			{

@@ -3,7 +3,7 @@ package hugman.mubble.init;
 import hugman.mubble.Mubble;
 import hugman.mubble.init.client.MubbleShaders;
 import hugman.mubble.objects.block.block_state_property.Princess;
-import hugman.mubble.objects.costume.*;
+import hugman.mubble.objects.item.costume.*;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;

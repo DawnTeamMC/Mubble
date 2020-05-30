@@ -29,7 +29,7 @@ public class IceballItem extends Item
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand)
 	{
 		ItemStack stack = player.getStackInHand(hand);
-		world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), MubbleSounds.ENTITY_ICEBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.ENTITY_ICEBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		if (!world.isClient)
 		{
 			IceballEntity entity = new IceballEntity(world, player);
@@ -56,6 +56,5 @@ public class IceballItem extends Item
 			});
 		}
 
-		;
 	};
 }

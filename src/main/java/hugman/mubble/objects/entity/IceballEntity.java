@@ -83,7 +83,7 @@ public class IceballEntity extends BallEntity
 				livingEntity.addStatusEffect(new StatusEffectInstance(MubbleEffects.HEAVINESS, 40));
 			}
 		}
-		world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return true;
 	}
 
@@ -112,7 +112,7 @@ public class IceballEntity extends BallEntity
 					world.updateNeighbor(pos, resultBlock, pos);
 				}
 			}
-			world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+			world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
 		if (face == Direction.UP)
@@ -128,7 +128,7 @@ public class IceballEntity extends BallEntity
 		}
 		else
 		{
-			world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+			world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
 	}

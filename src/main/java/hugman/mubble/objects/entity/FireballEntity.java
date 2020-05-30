@@ -72,7 +72,7 @@ public class FireballEntity extends BallEntity
 		{
 			entity.setOnFireFor(5);
 		}
-		world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return true;
 	}
 
@@ -110,7 +110,7 @@ public class FireballEntity extends BallEntity
 					world.updateNeighbor(pos, resultBlock, pos);
 				}
 			}
-			world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+			world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
 		if (state.method_27851(BlockTags.CAMPFIRES, (abstractBlockState) ->
@@ -118,13 +118,13 @@ public class FireballEntity extends BallEntity
 			return abstractBlockState.contains(CampfireBlock.LIT) && abstractBlockState.contains(CampfireBlock.WATERLOGGED);
 		}))
 		{
-			if (!(Boolean) state.get(CampfireBlock.LIT) && !(Boolean) state.get(CampfireBlock.WATERLOGGED))
+			if (!state.get(CampfireBlock.LIT) && !state.get(CampfireBlock.WATERLOGGED))
 			{
 				if (!world.isClient)
 				{
-					world.setBlockState(pos, (BlockState) state.with(CampfireBlock.LIT, true));
+					world.setBlockState(pos, state.with(CampfireBlock.LIT, true));
 				}
-				world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+				world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 				return true;
 			}
 		}
@@ -153,7 +153,7 @@ public class FireballEntity extends BallEntity
 		}
 		else
 		{
-			world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+			world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
 	}

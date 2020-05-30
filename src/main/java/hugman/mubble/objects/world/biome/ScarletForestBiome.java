@@ -7,12 +7,12 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.BiomeMoodSound;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.DefaultBiomeFeatures;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.DecoratorConfig;
+import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
@@ -34,7 +34,7 @@ public class ScarletForestBiome extends Biome
 						.fogColor(12638463)
 						.moodSound(BiomeMoodSound.CAVE)
 						.build())
-				.parent((String) null));
+				.parent(null));
 		DefaultBiomeFeatures.method_28440(this);
 		this.addStructureFeature(DefaultBiomeFeatures.field_24711);
 		DefaultBiomeFeatures.addLandCarvers(this);

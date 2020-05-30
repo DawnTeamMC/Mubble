@@ -1,4 +1,4 @@
-package hugman.mubble.objects.costume;
+package hugman.mubble.objects.item.costume;
 
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.EntityType;
@@ -32,11 +32,11 @@ public class CappyCostume extends HeadCostume
 			int random = rand.nextInt(5);
 			if (world.getDimension().isNether() && random <= 3)
 			{
-				world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
+				world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
 			}
 			else
 			{
-				world.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT, SoundCategory.VOICE, 1f, 1f);
+				world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT, SoundCategory.VOICE, 1f, 1f);
 			}
 		}
 		super.usageTick(world, player, stack, remainingUseTicks);
@@ -52,11 +52,11 @@ public class CappyCostume extends HeadCostume
 		{
 			if (world.getFluidState(entity.getBlockPos()).matches(FluidTags.WATER))
 			{
-				world.playSound((PlayerEntity) null, entity.getX(), entity.getY(), entity.getZ(), MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
+				world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
 			}
 			else
 			{
-				world.playSound((PlayerEntity) null, entity.getX(), entity.getY(), entity.getZ(), MubbleSounds.COSTUME_CAPPY_HELP, SoundCategory.VOICE, 1f, 1f);
+				world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), MubbleSounds.COSTUME_CAPPY_HELP, SoundCategory.VOICE, 1f, 1f);
 			}
 		}
 		return super.useOnEntity(stack, player, living, hand);
@@ -68,7 +68,7 @@ public class CappyCostume extends HeadCostume
 		ItemStack itemstack1 = playerIn.getEquippedStack(armorType);
 		if (itemstack1.isEmpty())
 		{
-			worldIn.playSound((PlayerEntity) null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
+			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
 		}
 		return super.use(worldIn, playerIn, handIn);
 	}

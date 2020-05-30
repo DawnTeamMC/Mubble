@@ -27,7 +27,7 @@ public class SmashBallItem extends Item
 	{
 		ItemStack stack = playerIn.getStackInHand(handIn);
 		Random rand = new Random();
-		worldIn.playSound((PlayerEntity) null, playerIn.getBlockPos(), MubbleSounds.ITEM_SMASH_BALL_USE, SoundCategory.PLAYERS, 1f, 1f);
+		worldIn.playSound(null, playerIn.getBlockPos(), MubbleSounds.ITEM_SMASH_BALL_USE, SoundCategory.PLAYERS, 1f, 1f);
 		for (int i = 0; i < rand.nextInt(21) + 10; i++)
 		{
 			worldIn.addParticle(ParticleTypes.FLAME, playerIn.getX() + (rand.nextInt(11) - 5) / 10F, playerIn.getY() + rand.nextInt(21) / 10F, playerIn.getZ() + (rand.nextInt(11) - 5) / 10F, (rand.nextInt(21) - 10) / 120F, (rand.nextInt(2) + 0.1) / 11F, (rand.nextInt(21) - 10) / 120F);

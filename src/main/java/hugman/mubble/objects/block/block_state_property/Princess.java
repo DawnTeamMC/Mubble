@@ -10,7 +10,7 @@ public enum Princess implements StringIdentifiable
 
 	private final String name;
 
-	private Princess(String name)
+	Princess(String name)
 	{
 		this.name = name;
 	}

@@ -56,7 +56,7 @@ public class MubbleGenerators
 		}
 		for (Biome biome : DuckEntity.getSpawnBiomes())
 		{
-			biome.getEntitySpawnList(SpawnGroup.CREATURE.CREATURE).add(new Biome.SpawnEntry(MubbleEntities.DUCK, 10, 4, 4));
+			biome.getEntitySpawnList(SpawnGroup.CREATURE).add(new Biome.SpawnEntry(MubbleEntities.DUCK, 10, 4, 4));
 		}
 	}
 	

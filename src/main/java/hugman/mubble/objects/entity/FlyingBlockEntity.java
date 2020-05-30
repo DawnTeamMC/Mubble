@@ -50,7 +50,7 @@ public class FlyingBlockEntity extends Entity
 	private boolean destroyedOnLanding;
 	private boolean hurtEntities;
 	private int flyHurtMax;
-	private float flyHurtAmount;
+	private final float flyHurtAmount;
 	public CompoundTag blockEntityData;
 	protected static final TrackedData<BlockPos> BLOCK_POS = DataTracker.registerData(FlyingBlockEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
 
@@ -89,7 +89,7 @@ public class FlyingBlockEntity extends Entity
 	@Environment(EnvType.CLIENT)
 	public BlockPos getFallingBlockPos()
 	{
-		return (BlockPos) this.dataTracker.get(BLOCK_POS);
+		return this.dataTracker.get(BLOCK_POS);
 	}
 
 	@Override

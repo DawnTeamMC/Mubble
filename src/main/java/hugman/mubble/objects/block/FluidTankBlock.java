@@ -114,14 +114,7 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 	@Override
 	public boolean canFillWithFluid(BlockView worldIn, BlockPos pos, BlockState state, Fluid fluidIn)
 	{
-		if (state.get(FLUIDLOG) == FluidLog.EMPTY)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		return state.get(FLUIDLOG) == FluidLog.EMPTY;
 	}
 
 	@Override
@@ -244,6 +237,6 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 			worldIn.setBlockState(pos, state.with(property, true), 3);
 		}
 		worldIn.getFluidTickScheduler().schedule(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(worldIn));
-		worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BLOCK_GLASS_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		worldIn.playSound(null, pos, SoundEvents.BLOCK_GLASS_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}
 }

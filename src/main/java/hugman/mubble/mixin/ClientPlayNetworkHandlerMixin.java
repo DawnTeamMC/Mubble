@@ -30,7 +30,7 @@ public class ClientPlayNetworkHandlerMixin
 	{
 		ClientPlayNetworkHandler cpnh = (ClientPlayNetworkHandler) (Object) this;
 		MinecraftClient client = MinecraftClient.getInstance();
-		NetworkThreadUtils.forceMainThread(packet, cpnh, (ThreadExecutor) client);
+		NetworkThreadUtils.forceMainThread(packet, cpnh, client);
 		double x = packet.getX();
 		double y = packet.getY();
 		double z = packet.getZ();

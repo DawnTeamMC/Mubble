@@ -82,7 +82,7 @@ public abstract class BallEntity extends ThrownItemEntity
 			}
 			if (!removeOnImpact && cantRebound)
 			{
-				this.world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+				this.world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			}
 		}
 		else

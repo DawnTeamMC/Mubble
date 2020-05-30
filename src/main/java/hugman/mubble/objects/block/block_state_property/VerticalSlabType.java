@@ -12,7 +12,7 @@ public enum VerticalSlabType implements StringIdentifiable
 
 	private final String name;
 
-	private VerticalSlabType(String name)
+	VerticalSlabType(String name)
 	{
 		this.name = name;
 	}

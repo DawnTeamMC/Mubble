@@ -10,7 +10,7 @@ public enum FluidLog implements StringIdentifiable
 
 	private final String name;
 
-	private FluidLog(String name)
+	FluidLog(String name)
 	{
 		this.name = name;
 	}

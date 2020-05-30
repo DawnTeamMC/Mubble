@@ -60,13 +60,13 @@ public class KirbyBallEntity extends BallEntity
 	@Override
 	protected boolean onEntityImpact(EntityHitResult result)
 	{
-		Entity entity = ((EntityHitResult) result).getEntity();
+		Entity entity = result.getEntity();
 		boolean flag = entity.damage(DamageSource.thrownProjectile(this, this.getOwner()), 2.5F);
 		if (flag)
 		{
 			this.dealDamage((LivingEntity) this.getOwner(), entity);
 		}
-		world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return true;
 	}
 
@@ -96,7 +96,7 @@ public class KirbyBallEntity extends BallEntity
 			motion = motion.subtract(0.0D, 0.0D, getVelocity().z * 1.25D);
 		}
 		setVelocity(motion);
-		world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_REBOUND, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_REBOUND, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return false;
 	}
 }

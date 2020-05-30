@@ -48,7 +48,7 @@ public class GoombaEntity extends MobEntityWithAi
 		this.goalSelector.add(4, new LookAtEntityGoal(this, BeeEntity.class, 10.0F));
 		this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.add(4, new LookAroundGoal(this));
-		this.targetSelector.add(1, new RevengeGoal(this, new Class[]{GoombaEntity.class}));
+		this.targetSelector.add(1, new RevengeGoal(this, GoombaEntity.class));
 		this.targetSelector.add(3, new FollowTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.add(3, new FollowTargetGoal<>(this, ToadEntity.class, true));
 	}

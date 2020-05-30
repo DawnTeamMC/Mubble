@@ -42,7 +42,7 @@ public class KeyItem extends Item
 					BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
 					worldIn.setBlockState(pos, state.with(KeyDoorBlock.LOCKED, false), 2);
 					worldIn.setBlockState(otherBlockPos, otherBlockState.with(KeyDoorBlock.LOCKED, false), 2);
-					worldIn.playSound((PlayerEntity) null, pos, this.getKeySuccessSound(state.getBlock(), !state.get(KeyDoorBlock.LOCKED)), SoundCategory.BLOCKS, 1.0F, 1.0F);
+					worldIn.playSound(null, pos, this.getKeySuccessSound(state.getBlock(), !state.get(KeyDoorBlock.LOCKED)), SoundCategory.BLOCKS, 1.0F, 1.0F);
 					context.getStack().decrement(1);
 				}
 				return ActionResult.SUCCESS;

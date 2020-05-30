@@ -40,7 +40,7 @@ public class BandageItem extends Item
 		}
 		if (doesCure)
 		{
-			worldIn.playSound((PlayerEntity) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 0.5F, 1F);
+			worldIn.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.PLAYERS, 0.5F, 1F);
 			if (!player.abilities.creativeMode)
 			{
 				stack.decrement(1);
