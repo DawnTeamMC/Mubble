@@ -2,6 +2,8 @@ package hugman.mubble.objects.item;
 
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleItemTiers;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.entity.Entity;
@@ -54,6 +56,7 @@ public class LightsaberItem extends SwordItem
 	}
 
 	@Override
+	@Environment(EnvType.CLIENT)
 	public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected)
 	{
 		if (selected && world.isClient && idleTimer == 0 && entity instanceof PlayerEntity)

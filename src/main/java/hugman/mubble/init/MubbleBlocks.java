@@ -15,13 +15,11 @@ import hugman.mubble.objects.block.StoneButtonBlock;
 import hugman.mubble.objects.block.WoodButtonBlock;
 import hugman.mubble.objects.block.*;
 import hugman.mubble.objects.world.sapling_generator.*;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.*;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
-import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -31,8 +29,14 @@ import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MubbleBlocks
 {
+	/* Potted Plants (used for render layering) */
+	public static final List<Block> POTTED_PLANTS = new ArrayList<Block>();
+
 	/* Templates */
 	protected static final Block.Settings pLeaves = FabricBlockSettings.of(Material.LEAVES).hardness(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque();
 	protected static final Block.Settings pWoodenButton = FabricBlockSettings.of(Material.WOOD).collidable(true).hardness(0.5F).sounds(BlockSoundGroup.WOOD);
@@ -1092,7 +1096,7 @@ public class MubbleBlocks
 		if (canBePotted)
 		{
 			Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, "potted_" + name), new FlowerPotBlock(block, FabricBlockSettings.of(Material.SUPPORTED).breakInstantly().nonOpaque().lightLevel(block.getDefaultState().getLuminance())));
-			BlockRenderLayerMap.INSTANCE.putBlock(Registry.BLOCK.get(new Identifier(Mubble.MOD_ID, "potted_" + name)), RenderLayer.getCutout());
+			POTTED_PLANTS.add(Registry.BLOCK.get(new Identifier(Mubble.MOD_ID, "potted_" + name)));
 		}
 		Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), new BlockItem(block, new Item.Settings().group(group)));
 		return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
@@ -1103,7 +1107,7 @@ public class MubbleBlocks
 		if (canBePotted)
 		{
 			Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, "potted_" + name), new FlowerPotBlock(block, FabricBlockSettings.of(Material.SUPPORTED).breakInstantly().nonOpaque().lightLevel(block.getDefaultState().getLuminance())));
-			BlockRenderLayerMap.INSTANCE.putBlock(Registry.BLOCK.get(new Identifier(Mubble.MOD_ID, "potted_" + name)), RenderLayer.getCutout());
+			POTTED_PLANTS.add(Registry.BLOCK.get(new Identifier(Mubble.MOD_ID, "potted_" + name)));
 		}
 		Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), new BlockItem(block, new Item.Settings().group(group)));
 		FlammableBlockRegistry.getDefaultInstance().add(block, fireEncouragement, flammability);

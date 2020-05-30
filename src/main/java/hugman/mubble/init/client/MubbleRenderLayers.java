@@ -11,7 +11,6 @@ public class MubbleRenderLayers
 {
 	public static void init()
 	{
-		BlockRenderLayerMap.INSTANCE.putBlock(MubbleBlocks.PERMAFROST_PORTAL, RenderLayer.getTranslucent());
 		// Shiny Garlands
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.RED_SHINY_GARLAND,
 				MubbleBlocks.SILVER_SHINY_GARLAND, MubbleBlocks.GOLD_SHINY_GARLAND
@@ -43,6 +42,8 @@ public class MubbleRenderLayers
 		// Food Plants
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), MubbleBlocks.BLUEBERRY_BUSH,
 				MubbleBlocks.SALAD, MubbleBlocks.TOMATOES);
+		// Pots
+		MubbleBlocks.POTTED_PLANTS.forEach((block -> { BlockRenderLayerMap.INSTANCE.putBlock(block, RenderLayer.getCutout()); } ));
 		// Piles
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.ACACIA_LEAF_PILE,
 				MubbleBlocks.ALLIUM_PILE, MubbleBlocks.AUTUMN_BIRCH_LEAF_PILE, MubbleBlocks.AUTUMN_OAK_LEAF_PILE, MubbleBlocks.AZURE_BLUET_PILE,

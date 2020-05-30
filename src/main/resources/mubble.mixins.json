@@ -4,12 +4,13 @@
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
 		"AxeItemMixin",
-		"ClientPlayNetworkHandlerMixin",
-		"EntityAccessor",
-		"GameRendererAccessor",
 		"LivingEntityMixin",
 		"MobEntityMixin",
 		"PlayerEntityMixin",
+	],
+	"client": [
+		"ClientPlayNetworkHandlerMixin",
+		"GameRendererAccessor",
 	],
 	"injectors": {
 		"defaultRequire": 1

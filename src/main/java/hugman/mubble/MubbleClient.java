@@ -5,6 +5,7 @@ import hugman.mubble.init.client.MubbleColorMaps;
 import hugman.mubble.init.client.MubbleRenderLayers;
 import hugman.mubble.init.client.MubbleScreens;
 import hugman.mubble.objects.entity.render.*;
+import hugman.mubble.objects.event.LightsaberEvents;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
@@ -19,6 +20,7 @@ public class MubbleClient implements ClientModInitializer
 		MubbleColorMaps.registerItemColors();
 		MubbleRenderLayers.init();
 		registerEntityRenders();
+		LightsaberEvents.init();
 	}
 
 	private void registerEntityRenders()
