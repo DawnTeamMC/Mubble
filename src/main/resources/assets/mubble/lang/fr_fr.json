@@ -156,9 +156,9 @@
 	"block.mubble.vanadium_block": "Bloc de vanadium",
 	"block.mubble.vanadium_ore": "Minerai de vanadium",
 	
-	"//block.mubble.autumn_birch_sapling": "Autumn Birch Sapling",
-	"//block.mubble.autumn_birch_leaves": "Autumn Birch Leaves",
-	"//block.mubble.autumn_birch_leaf_pile": "Autumn Birch Leaves Pile",
+	"block.mubble.autumn_birch_sapling": "Pousse de bouleau d'automne",
+	"block.mubble.autumn_birch_leaves": "Feuilles de bouleau d'automne",
+	"block.mubble.autumn_birch_leaf_pile": "Pile de feuilles de bouleau d'automne",
 	
 	"block.mubble.cherry_oak_planks": "Planches de cerisier",
 	"block.mubble.pink_cherry_oak_sapling": "Pousse de cerisier rose",
@@ -1043,7 +1043,7 @@
 	"block.mubble.potato_flower": "Fleur patate",
 
 
-	"//block.mubble.potted_autumn_birch_sapling": "Potted Autumn Birch Sapling",
+	"block.mubble.potted_autumn_birch_sapling": "Pousse de bouleau d'automne en pot",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Pousse de cerisier rose en pot",
 	"block.mubble.potted_white_cherry_oak_sapling": "Pousse de cerisier blanc en pot",
 	"block.mubble.potted_palm_sapling": "Pousse de palmier en pot",
@@ -1072,40 +1072,6 @@
 	"block.mubble.potted_scarlet_mushroom": "Champignon écarlate en pot",
 	"block.mubble.potted_scarlet_orchid": "Orchidée écarlate en pot",
 	"block.mubble.potted_potato_flower": "Fleur patate en pot",
-
-	"bannerpp.pattern.mubble.star.blue": "Étoile bleue",
-	"bannerpp.pattern.mubble.star.light_blue": "Étoile bleu clair",
-	"bannerpp.pattern.mubble.star.cyan": "Étoile cyan",
-	"bannerpp.pattern.mubble.star.green": "Étoile verte",
-	"bannerpp.pattern.mubble.star.lime": "Étoile clair",
-	"bannerpp.pattern.mubble.star.yellow": "Étoile jaune",
-	"bannerpp.pattern.mubble.star.orange": "Étoile orange",
-	"bannerpp.pattern.mubble.star.red": "Étoile rouge",
-	"bannerpp.pattern.mubble.star.pink": "Étoile rose",
-	"bannerpp.pattern.mubble.star.magenta": "Étoile magenta",
-	"bannerpp.pattern.mubble.star.purple": "Étoile violette",
-	"bannerpp.pattern.mubble.star.brown": "Étoile marron",
-	"bannerpp.pattern.mubble.star.white": "Étoile blanche",
-	"bannerpp.pattern.mubble.star.light_gray": "Étoile gris clair",
-	"bannerpp.pattern.mubble.star.gray": "Étoile grise",
-	"bannerpp.pattern.mubble.star.black": "Étoile noire",
-
-	"//bannerpp.pattern.mubble.smash_ball.blue": "Balle Smash bleue",
-	"//bannerpp.pattern.mubble.smash_ball.light_blue": "Balle Smash bleu clair",
-	"//bannerpp.pattern.mubble.smash_ball.cyan": "Balle Smash cyan",
-	"//bannerpp.pattern.mubble.smash_ball.green": "Balle Smash verte",
-	"//bannerpp.pattern.mubble.smash_ball.lime": "Balle Smash clair",
-	"//bannerpp.pattern.mubble.smash_ball.yellow": "Balle Smash jaune",
-	"//bannerpp.pattern.mubble.smash_ball.orange": "Balle Smash orange",
-	"//bannerpp.pattern.mubble.smash_ball.red": "Balle Smash rouge",
-	"//bannerpp.pattern.mubble.smash_ball.pink": "Balle Smash rose",
-	"//bannerpp.pattern.mubble.smash_ball.magenta": "Balle Smash magenta",
-	"//bannerpp.pattern.mubble.smash_ball.purple": "Balle Smash violette",
-	"//bannerpp.pattern.mubble.smash_ball.brown": "Balle Smash marron",
-	"//bannerpp.pattern.mubble.smash_ball.white": "Balle Smash blanche",
-	"//bannerpp.pattern.mubble.smash_ball.light_gray": "Balle Smash gris clair",
-	"//bannerpp.pattern.mubble.smash_ball.gray": "Balle Smash grise",
-	"//bannerpp.pattern.mubble.smash_ball.black": "Balle Smash noire",
 
 
 
@@ -1145,10 +1111,6 @@
 	"item.mubble.jingle_bells": "Grelots",
 	"item.mubble.small_bulb": "Petite ampoule",
 	"item.mubble.totem_of_ascending": "Totem d'ascendance",
-	"item.mubble.star_banner_pattern": "Motif de bannière",
-	"item.mubble.star_banner_pattern.desc": "Étoile",
-	"item.mubble.smash_ball_banner_pattern": "Motif de bannière",
-	"item.mubble.smash_ball_banner_pattern.desc": "Balle Smash",
 
 
 	"item.mubble.super_mushroom": "Super champignon",
@@ -1359,7 +1321,7 @@
 
 
 	"comment": "BIOMES",
-	"//biome.mubble.pumpkin_pastures": "Pumpkin Pastures",
+	"biome.mubble.pumpkin_pastures": "Champs de citrouilles",
 	"biome.mubble.pink_cherry_oak_forest": "Forêt de cerisiers roses",
 	"biome.mubble.white_cherry_oak_forest": "Forêt de cerisiers blancs",
 	
