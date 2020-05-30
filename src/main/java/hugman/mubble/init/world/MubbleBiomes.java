@@ -11,7 +11,7 @@ import net.minecraft.world.biome.Biome;
 
 public class MubbleBiomes
 {
-	public static final Biome AUTUMN_OAK_FOREST = register("autumn_oak_forest", new AutumnOakForestBiome());
+	public static final Biome PUMPKIN_PASTURES = register("pumpkin_pastures", new PumpkinPasturesBiome());
 	public static final Biome PINK_CHERRY_OAK_FOREST = register("pink_cherry_oak_forest", new PinkCherryOakForestBiome());
 	public static final Biome WHITE_CHERRY_OAK_FOREST = register("white_cherry_oak_forest", new WhiteCherryOakForestBiome());
 
@@ -28,14 +28,14 @@ public class MubbleBiomes
 
 	public static void initBiomeGeneration()
 	{
-		OverworldBiomes.addContinentalBiome(AUTUMN_OAK_FOREST, OverworldClimate.TEMPERATE, 10);
-		FabricBiomes.addSpawnBiome(AUTUMN_OAK_FOREST);
-		OverworldBiomes.addContinentalBiome(PINK_CHERRY_OAK_FOREST, OverworldClimate.COOL, 5);
+		OverworldBiomes.addContinentalBiome(PUMPKIN_PASTURES, OverworldClimate.TEMPERATE, 1D);
+		FabricBiomes.addSpawnBiome(PUMPKIN_PASTURES);
+		OverworldBiomes.addContinentalBiome(PINK_CHERRY_OAK_FOREST, OverworldClimate.COOL, 1D);
 		FabricBiomes.addSpawnBiome(PINK_CHERRY_OAK_FOREST);
-		OverworldBiomes.addContinentalBiome(WHITE_CHERRY_OAK_FOREST, OverworldClimate.COOL, 5);
+		OverworldBiomes.addContinentalBiome(WHITE_CHERRY_OAK_FOREST, OverworldClimate.COOL, 1D);
 		FabricBiomes.addSpawnBiome(WHITE_CHERRY_OAK_FOREST);
-		OverworldBiomes.addContinentalBiome(PRESS_GARDEN, OverworldClimate.COOL, 1);
+		OverworldBiomes.addContinentalBiome(PRESS_GARDEN, OverworldClimate.SNOWY, 0.25D);
 		FabricBiomes.addSpawnBiome(PRESS_GARDEN);
-		OverworldBiomes.addContinentalBiome(SCARLET_FOREST, OverworldClimate.COOL, 6);
+		OverworldBiomes.addContinentalBiome(SCARLET_FOREST, OverworldClimate.COOL, 1D);
 	}
 }

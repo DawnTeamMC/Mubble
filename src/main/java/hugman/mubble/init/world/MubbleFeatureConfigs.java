@@ -24,10 +24,10 @@ import java.util.OptionalInt;
 
 public class MubbleFeatureConfigs
 {
-	private static final BlockState OAK_LOG = Blocks.OAK_LOG.getDefaultState();
+	private static final BlockState BIRCH_LOG = Blocks.BIRCH_LOG.getDefaultState();
 
-	private static final BlockState AUTUMN_OAK_LEAVES = MubbleBlocks.AUTUMN_OAK_LEAVES.getDefaultState();
-	private static final BlockState AUTUMN_OAK_LEAF_PILE = MubbleBlocks.AUTUMN_OAK_LEAF_PILE.getDefaultState();
+	private static final BlockState AUTUMN_BIRCH_LEAVES = MubbleBlocks.AUTUMN_BIRCH_LEAVES.getDefaultState();
+	private static final BlockState AUTUMN_BIRCH_LEAF_PILE = MubbleBlocks.AUTUMN_BIRCH_LEAF_PILE.getDefaultState();
 
 	private static final BlockState CHERRY_OAK_LOG = MubbleBlocks.CHERRY_OAK_LOG.getDefaultState();
 	private static final BlockState PINK_CHERRY_OAK_LEAVES = MubbleBlocks.PINK_CHERRY_OAK_LEAVES.getDefaultState();
@@ -56,11 +56,11 @@ public class MubbleFeatureConfigs
 	public static final BeehiveTreeDecorator MORE_BEEHIVES_CONFIG = new BeehiveTreeDecorator(0.05F);
 
 	/* MINECRAFT */
-	public static final TreeFeatureConfig AUTUMN_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(OAK_LOG), new SimpleBlockStateProvider(AUTUMN_OAK_LEAVES), new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).method_27374().build();
-	public static final TreeFeatureConfig AUTUMN_OAK_TREE_B1_CONFIG = AUTUMN_OAK_TREE_CONFIG.setTreeDecorators(ImmutableList.of(MORE_BEEHIVES_CONFIG));
-	public static final TreeFeatureConfig FANCY_AUTUMN_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(OAK_LOG), new SimpleBlockStateProvider(AUTUMN_OAK_LEAVES), new LargeOakFoliagePlacer(2, 0, 4, 0, 4), new LargeOakTrunkPlacer(3, 11, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).method_27374().method_27375(Type.MOTION_BLOCKING).build();
-	public static final TreeFeatureConfig FANCY_AUTUMN_OAK_TREE_B1_CONFIG = FANCY_AUTUMN_OAK_TREE_CONFIG.setTreeDecorators(ImmutableList.of(MORE_BEEHIVES_CONFIG));
-	public static final RandomPatchFeatureConfig AUTUMN_OAK_LEAF_PILE_CONFIG = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(AUTUMN_OAK_LEAF_PILE), new SimpleBlockPlacer())).tries(32).build();
+	public static final TreeFeatureConfig AUTUMN_BIRCH_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(BIRCH_LOG), new SimpleBlockStateProvider(AUTUMN_BIRCH_LEAVES), new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).method_27374().build();
+	public static final TreeFeatureConfig AUTUMN_BIRCH_TREE_B1_CONFIG = AUTUMN_BIRCH_TREE_CONFIG.setTreeDecorators(ImmutableList.of(MORE_BEEHIVES_CONFIG));
+	public static final TreeFeatureConfig FANCY_AUTUMN_BIRCH_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(BIRCH_LOG), new SimpleBlockStateProvider(AUTUMN_BIRCH_LEAVES), new LargeOakFoliagePlacer(2, 0, 4, 0, 4), new LargeOakTrunkPlacer(3, 11, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).method_27374().method_27375(Type.MOTION_BLOCKING).build();
+	public static final TreeFeatureConfig FANCY_AUTUMN_BIRCH_TREE_B1_CONFIG = FANCY_AUTUMN_BIRCH_TREE_CONFIG.setTreeDecorators(ImmutableList.of(MORE_BEEHIVES_CONFIG));
+	public static final RandomPatchFeatureConfig AUTUMN_BIRCH_LEAF_PILE_CONFIG = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(AUTUMN_BIRCH_LEAF_PILE), new SimpleBlockPlacer())).tries(32).build();
 	public static final RandomPatchFeatureConfig YELLOW_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.YELLOW_MUSHROOM);
 	public static final RandomPatchFeatureConfig ORANGE_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.ORANGE_MUSHROOM);
 
@@ -87,11 +87,11 @@ public class MubbleFeatureConfigs
 	/* SONIC */
 	public static final TreeFeatureConfig RED_PRESS_GARDEN_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(RED_PRESS_GARDEN_LEAVES), new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).method_27374().build();
 	public static final TreeFeatureConfig FANCY_RED_PRESS_GARDEN_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(RED_PRESS_GARDEN_LEAVES), new LargeOakFoliagePlacer(2, 0, 4, 0, 4), new LargeOakTrunkPlacer(3, 11, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).method_27374().method_27375(Type.MOTION_BLOCKING).build();
-	public static final TreeFeatureConfig MEGA_RED_PRESS_GARDEN_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(RED_PRESS_GARDEN_LEAVES), new JungleFoliagePlacer(2, 0, 0, 0, 2), new MegaJungleTrunkPlacer(30, 2, 20), new TwoLayersFeatureSize(1, 1, 2))).method_27376(ImmutableList.of(TrunkVineTreeDecorator.field_24965, LeaveVineTreeDecorator.field_24961)).build();
+	public static final TreeFeatureConfig MEGA_RED_PRESS_GARDEN_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(RED_PRESS_GARDEN_LEAVES), new JungleFoliagePlacer(2, 0, 0, 0, 2), new MegaJungleTrunkPlacer(30, 2, 20), new TwoLayersFeatureSize(1, 1, 2))).build();
 	public static final RandomPatchFeatureConfig RED_PRESS_GARDEN_LEAF_PILE_CONFIG = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(RED_PRESS_GARDEN_LEAF_PILE), new SimpleBlockPlacer())).tries(32).build();
 	public static final TreeFeatureConfig PINK_PRESS_GARDEN_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(PINK_PRESS_GARDEN_LEAVES), new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).method_27374().build();
 	public static final TreeFeatureConfig FANCY_PINK_PRESS_GARDEN_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(PINK_PRESS_GARDEN_LEAVES), new LargeOakFoliagePlacer(2, 0, 4, 0, 4), new LargeOakTrunkPlacer(3, 11, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).method_27374().method_27375(Type.MOTION_BLOCKING).build();
-	public static final TreeFeatureConfig MEGA_PINK_PRESS_GARDEN_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(PINK_PRESS_GARDEN_LEAVES), new JungleFoliagePlacer(2, 0, 0, 0, 2), new MegaJungleTrunkPlacer(30, 2, 20), new TwoLayersFeatureSize(1, 1, 2))).method_27376(ImmutableList.of(TrunkVineTreeDecorator.field_24965, LeaveVineTreeDecorator.field_24961)).build();
+	public static final TreeFeatureConfig MEGA_PINK_PRESS_GARDEN_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(PINK_PRESS_GARDEN_LEAVES), new JungleFoliagePlacer(2, 0, 0, 0, 2), new MegaJungleTrunkPlacer(30, 2, 20), new TwoLayersFeatureSize(1, 1, 2))).build();
 	public static final RandomPatchFeatureConfig PINK_PRESS_GARDEN_LEAF_PILE_CONFIG = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(PINK_PRESS_GARDEN_LEAF_PILE), new SimpleBlockPlacer())).tries(32).build();
 	public static final TreeFeatureConfig PINK_PRESS_GARDEN_GROUND_BUSH_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(PINK_PRESS_GARDEN_LEAVES), new BushFoliagePlacer(2, 0, 1, 0, 2), new StraightTrunkPlacer(1, 0, 0), new TwoLayersFeatureSize(0, 0, 0))).method_27375(Type.MOTION_BLOCKING_NO_LEAVES).build();
 

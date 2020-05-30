@@ -156,9 +156,9 @@
 	"block.mubble.vanadium_block": "Vanadiumblock",
 	"block.mubble.vanadium_ore": "Vanadiumerz",
 
-	"block.mubble.autumn_oak_sapling": "Herbsteichensetzling",
-	"block.mubble.autumn_oak_leaves": "Herbsteichenlaub",
-	"block.mubble.autumn_oak_leaf_pile": "Herbsteichenlaubteppich",
+	"//block.mubble.autumn_birch_sapling": "Autumn Birch Sapling",
+	"//block.mubble.autumn_birch_leaves": "Autumn Birch Leaves",
+	"//block.mubble.autumn_birch_leaf_pile": "Autumn Birch Leaves Pile",
 	
 	"block.mubble.cherry_oak_planks": "Kirscheichenholzbretter",
 	"block.mubble.pink_cherry_oak_sapling": "Rosa Kirscheichensetzling",
@@ -1043,7 +1043,7 @@
 	"block.mubble.potato_flower": "Kartoffelblume",
 
 
-	"block.mubble.potted_autumn_oak_sapling": "Eingetopfter Herbsteichensetzling",
+	"//block.mubble.potted_autumn_birch_sapling": "Potted Autumn Birch Sapling",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Eingetopfter Rosa Kirscheichensetzling",
 	"block.mubble.potted_white_cherry_oak_sapling": "Eingetopfter Weißer Kirscheichensetzling",
 	"block.mubble.potted_palm_sapling": "Eingetopfter Palmensetzling",
@@ -1359,10 +1359,9 @@
 
 
 	"comment": "BIOMES",
-	"biome.mubble.autumn_oak_forest": "Herbsteichenwald",
+	"//biome.mubble.pumpkin_pastures": "Pumpkin Pastures",
 	"biome.mubble.pink_cherry_oak_forest": "Rosa Kirscheichenwald",
 	"biome.mubble.white_cherry_oak_forest": "Weißer Kirscheichenwald",
-	"biome.mubble.permafrost": "Permafrostboden",
 	
 	"biome.mubble.press_garden": "Press Garden",
 

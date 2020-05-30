@@ -156,9 +156,9 @@
 	"block.mubble.vanadium_block": "ɯnᴉpɐuɐᗺ ɟo ʞɔolᗺ",
 	"block.mubble.vanadium_ore": "ǝɹO ɯnᴉpɐuɐΛ",
 
-	"block.mubble.autumn_oak_sapling": "ƃuᴉldɐS ʞɐO uɯnʇn∀",
-	"block.mubble.autumn_oak_leaves": "sǝʌɐǝ˥ ʞɐO uɯnʇn∀",
-	"block.mubble.autumn_oak_leaf_pile": "ʇǝdɹɐƆ sǝʌɐǝ˥ ʞɐO uɯnʇn∀",
+	"//block.mubble.autumn_birch_sapling": "Autumn Birch Sapling",
+	"//block.mubble.autumn_birch_leaves": "Autumn Birch Leaves",
+	"//block.mubble.autumn_birch_leaf_pile": "Autumn Birch Leaves Pile",
 	
 	"block.mubble.cherry_oak_planks": "sʞuɐlԀ ʞɐO ʎɹɹǝɥƆ",
 	"block.mubble.pink_cherry_oak_sapling": "ƃuᴉldɐS ʞɐO ʎɹɹǝɥƆ ʞuᴉԀ",
@@ -1043,7 +1043,7 @@
 	"block.mubble.potato_flower": "ɹǝʍolℲ oʇɐʇoԀ",
 
 
-	"block.mubble.potted_autumn_oak_sapling": "ƃuᴉldɐS ʞɐO uɯnʇn∀ pǝʇʇoԀ",
+	"//block.mubble.potted_autumn_birch_sapling": "Potted Autumn Birch Sapling",
 	"block.mubble.potted_pink_cherry_oak_sapling": "ƃuᴉldɐS ʞɐO ʎɹɹǝɥƆ ʞuᴉԀ pǝʇʇoԀ",
 	"block.mubble.potted_white_cherry_oak_sapling": "ƃuᴉldɐS ʞɐO ʎɹɹǝɥƆ ǝʇᴉɥM pǝʇʇoԀ",
 	"block.mubble.potted_palm_sapling": "ƃuᴉldɐS ɯlɐԀ pǝʇʇoԀ",
@@ -1359,10 +1359,9 @@
 
 
 	"comment": "BIOMES",
-	"biome.mubble.autumn_oak_forest": "ʇsǝɹoℲ ʞɐO uɯnʇn∀",
+	"//biome.mubble.pumpkin_pastures": "Pumpkin Pastures",
 	"biome.mubble.pink_cherry_oak_forest": "ʇsǝɹoℲ ʞɐO ʎɹɹǝɥƆ ʞuᴉԀ",
 	"biome.mubble.white_cherry_oak_forest": "ʇsǝɹoℲ ʞɐO ʎɹɹǝɥƆ ǝʇᴉɥM",
-	"//biome.mubble.permafrost": "Permafrost",
 	
 	"//biome.mubble.press_garden": "Press Garden",
 

@@ -35,7 +35,7 @@
                   ]
                 }
               ],
-              "name": "mubble:autumn_oak_leaf_pile"
+              "name": "mubble:autumn_birch_leaf_pile"
             },
             {
               "type": "minecraft:item",
@@ -54,7 +54,7 @@
                   ]
                 }
               ],
-              "name": "mubble:autumn_oak_sapling"
+              "name": "mubble:autumn_birch_sapling"
             }
           ]
         }

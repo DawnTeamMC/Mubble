@@ -156,9 +156,9 @@
 	"block.mubble.vanadium_block": "Bloco de Vanadium",
 	"block.mubble.vanadium_ore": "Minério de Vanadium",
 	
-	"block.mubble.autumn_oak_sapling": "Muda de Carvalho de Outono",
-	"block.mubble.autumn_oak_leaves": "Folhas de Carvalho de Outono",
-	"block.mubble.autumn_oak_leaf_pile": "Tapete de Folhas de Carvalho de Outono",
+	"//block.mubble.autumn_birch_sapling": "Autumn Birch Sapling",
+	"//block.mubble.autumn_birch_leaves": "Autumn Birch Leaves",
+	"//block.mubble.autumn_birch_leaf_pile": "Autumn Birch Leaves Pile",
 	
 	"block.mubble.cherry_oak_planks": "Tábuas de Carvalho Cereja",
 	"block.mubble.pink_cherry_oak_sapling": "Muda de Carvalho Cereja Rosa",
@@ -1043,7 +1043,7 @@
 	"block.mubble.potato_flower": "Flor de Batata",
 
 
-	"block.mubble.potted_autumn_oak_sapling": "Vaso de Muda de Carvalho de Outono",
+	"//block.mubble.potted_autumn_birch_sapling": "Potted Autumn Birch Sapling",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Vaso de Muda de Carvalho Cereja Rosa",
 	"block.mubble.potted_white_cherry_oak_sapling": "Vaso de Muda de Carvalho Cereja Branca",
 	"block.mubble.potted_palm_sapling": "Vaso de Muda de Palmeira",
@@ -1359,10 +1359,9 @@
 
 
 	"comment": "BIOMES",
-	"biome.mubble.autumn_oak_forest": "Floresta de Carvalho de Outono",
+	"//biome.mubble.pumpkin_pastures": "Pumpkin Pastures",
 	"biome.mubble.pink_cherry_oak_forest": "Floresta de Carvalho Cereja Rosa",
 	"biome.mubble.white_cherry_oak_forest": "Floresta de Carvalho Cereja Branca",
-	"//biome.mubble.permafrost": "Permafrost",
 	
 	"//biome.mubble.press_garden": "Press Garden",
 

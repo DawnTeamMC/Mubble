@@ -156,9 +156,9 @@
 	"block.mubble.vanadium_block": "Bloc de vanadium",
 	"block.mubble.vanadium_ore": "Minerai de vanadium",
 	
-	"block.mubble.autumn_oak_sapling": "Pousse de chêne d'automne",
-	"block.mubble.autumn_oak_leaves": "Feuilles de chêne d'automne",
-	"block.mubble.autumn_oak_leaf_pile": "Pile de feuilles de chêne d'automne",
+	"//block.mubble.autumn_birch_sapling": "Autumn Birch Sapling",
+	"//block.mubble.autumn_birch_leaves": "Autumn Birch Leaves",
+	"//block.mubble.autumn_birch_leaf_pile": "Autumn Birch Leaves Pile",
 	
 	"block.mubble.cherry_oak_planks": "Planches de cerisier",
 	"block.mubble.pink_cherry_oak_sapling": "Pousse de cerisier rose",
@@ -1043,7 +1043,7 @@
 	"block.mubble.potato_flower": "Fleur patate",
 
 
-	"block.mubble.potted_autumn_oak_sapling": "Pousse de chêne d'automne en pot",
+	"//block.mubble.potted_autumn_birch_sapling": "Potted Autumn Birch Sapling",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Pousse de cerisier rose en pot",
 	"block.mubble.potted_white_cherry_oak_sapling": "Pousse de cerisier blanc en pot",
 	"block.mubble.potted_palm_sapling": "Pousse de palmier en pot",
@@ -1359,10 +1359,9 @@
 
 
 	"comment": "BIOMES",
-	"biome.mubble.autumn_oak_forest": "Forêt de chênes d'automne",
+	"//biome.mubble.pumpkin_pastures": "Pumpkin Pastures",
 	"biome.mubble.pink_cherry_oak_forest": "Forêt de cerisiers roses",
 	"biome.mubble.white_cherry_oak_forest": "Forêt de cerisiers blancs",
-	"biome.mubble.permafrost": "Permafrost",
 	
 	"biome.mubble.press_garden": "Jardin de presse",
 

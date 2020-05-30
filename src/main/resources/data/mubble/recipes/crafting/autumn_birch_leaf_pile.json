@@ -9,12 +9,12 @@
 	{
 		"#":
 		{
-			"item": "mubble:autumn_oak_leaves"
+			"item": "mubble:autumn_birch_leaves"
 		}
 	},
 	"result":
 	{
-		"item": "mubble:autumn_oak_leaf_pile",
+		"item": "mubble:autumn_birch_leaf_pile",
 		"count": 2
 	}
 }

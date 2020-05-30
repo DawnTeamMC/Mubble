@@ -4,7 +4,7 @@
 	{
 		"recipes":
 		[
-			"mubble:crafting/autumn_oak_leaf_pile"
+			"mubble:crafting/autumn_birch_leaf_pile"
 		]
 	},
 	"criteria":
@@ -17,7 +17,7 @@
 				"items":
 				[
 					{
-						"item": "mubble:autumn_oak_leaves"
+						"item": "mubble:autumn_birch_leaves"
 					}
 				]
 			}
@@ -27,7 +27,7 @@
 			"trigger": "minecraft:recipe_unlocked",
 			"conditions":
 			{
-				"recipe": "mubble:crafting/autumn_oak_pile"
+				"recipe": "mubble:crafting/autumn_birch_pile"
 			}
 		}
 	},
