@@ -26,40 +26,40 @@ public class DoorBlock extends net.minecraft.block.DoorBlock
 	@Override
 	public void setOpen(World worldIn, BlockPos pos, boolean open)
 	{
-        if (isSmm2Door())
-        {
-            BlockState blockstate = worldIn.getBlockState(pos);
-            if (blockstate.getBlock() == this && blockstate.get(OPEN) != open)
-            {
-                worldIn.setBlockState(pos, blockstate.with(OPEN, Boolean.valueOf(open)), 10);
-                this.playToggleSound(worldIn, pos, open);
-            }
-        }
-        else
-        {
-            super.setOpen(worldIn, pos, open);
-        }
+		if (isSmm2Door())
+		{
+			BlockState blockstate = worldIn.getBlockState(pos);
+			if (blockstate.getBlock() == this && blockstate.get(OPEN) != open)
+			{
+				worldIn.setBlockState(pos, blockstate.with(OPEN, Boolean.valueOf(open)), 10);
+				this.playToggleSound(worldIn, pos, open);
+			}
+		}
+		else
+		{
+			super.setOpen(worldIn, pos, open);
+		}
 	}
 
 	@Override
 	public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving)
 	{
-        if (isSmm2Door())
-        {
-            boolean flag = worldIn.isReceivingRedstonePower(pos) || worldIn.isReceivingRedstonePower(pos.offset(state.get(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN));
-            if (blockIn != this && flag != state.get(POWERED))
-            {
-                if (flag != state.get(OPEN))
-                {
-                    this.playToggleSound(worldIn, pos, flag);
-                }
-                worldIn.setBlockState(pos, state.with(POWERED, Boolean.valueOf(flag)).with(OPEN, Boolean.valueOf(flag)), 2);
-            }
-        }
-        else
-        {
-            super.neighborUpdate(state, worldIn, pos, blockIn, fromPos, isMoving);
-        }
+		if (isSmm2Door())
+		{
+			boolean flag = worldIn.isReceivingRedstonePower(pos) || worldIn.isReceivingRedstonePower(pos.offset(state.get(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN));
+			if (blockIn != this && flag != state.get(POWERED))
+			{
+				if (flag != state.get(OPEN))
+				{
+					this.playToggleSound(worldIn, pos, flag);
+				}
+				worldIn.setBlockState(pos, state.with(POWERED, Boolean.valueOf(flag)).with(OPEN, Boolean.valueOf(flag)), 2);
+			}
+		}
+		else
+		{
+			super.neighborUpdate(state, worldIn, pos, blockIn, fromPos, isMoving);
+		}
 	}
 
 	@Override

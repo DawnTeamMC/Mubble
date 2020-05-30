@@ -5,7 +5,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
@@ -19,9 +18,9 @@ public class MayroCapCostume extends HeadCostume
 	@Override
 	public void usageTick(World world, LivingEntity entity, ItemStack stack, int remainingUseTicks)
 	{
-		if(entity instanceof PlayerEntity)
+		if (entity instanceof PlayerEntity)
 		{
-			((PlayerEntity) entity).inventory.method_29280(item -> MubbleTags.Items.COINS.contains(item.getItem()), 1, ((PlayerEntity)entity).playerScreenHandler.method_29281());
+			((PlayerEntity) entity).inventory.method_29280(item -> MubbleTags.Items.COINS.contains(item.getItem()), 1, ((PlayerEntity) entity).playerScreenHandler.method_29281());
 		}
 		super.usageTick(world, entity, stack, remainingUseTicks);
 	}

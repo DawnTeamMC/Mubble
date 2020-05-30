@@ -23,10 +23,13 @@ public class HiccupEffect extends SimpleEffect
 	public boolean canApplyUpdateEffect(int duration, int amplifier)
 	{
 		int k = 200 >> amplifier;
-        if (k > 0)
-        {
-            return duration % k == 0;
-        }
-        else return true;
+		if (k > 0)
+		{
+			return duration % k == 0;
+		}
+		else
+		{
+			return true;
+		}
 	}
 }

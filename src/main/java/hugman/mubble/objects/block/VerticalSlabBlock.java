@@ -89,46 +89,46 @@ public class VerticalSlabBlock extends Block implements Waterloggable
 			double hitZ = vec3d.z - context.getBlockPos().getZ();
 			if (facing == Direction.NORTH || facing == Direction.SOUTH)
 			{
-                if (face_hit == Direction.SOUTH)
-                {
-                    return iblockstate1.with(TYPE, VerticalSlabType.NORTH);
-                }
-                else if (face_hit == Direction.NORTH)
-                {
-                    return iblockstate1.with(TYPE, VerticalSlabType.SOUTH);
-                }
-                else if (hitZ > 0.5D)
-                {
-                    return iblockstate1.with(TYPE, VerticalSlabType.SOUTH);
-                }
-                else
-                {
-                    return iblockstate1.with(TYPE, VerticalSlabType.NORTH);
-                }
+				if (face_hit == Direction.SOUTH)
+				{
+					return iblockstate1.with(TYPE, VerticalSlabType.NORTH);
+				}
+				else if (face_hit == Direction.NORTH)
+				{
+					return iblockstate1.with(TYPE, VerticalSlabType.SOUTH);
+				}
+				else if (hitZ > 0.5D)
+				{
+					return iblockstate1.with(TYPE, VerticalSlabType.SOUTH);
+				}
+				else
+				{
+					return iblockstate1.with(TYPE, VerticalSlabType.NORTH);
+				}
 			}
 			else if (facing == Direction.EAST || facing == Direction.WEST)
-            {
-                if (face_hit == Direction.WEST)
-                {
-                    return iblockstate1.with(TYPE, VerticalSlabType.EAST);
-                }
-                else if (face_hit == Direction.EAST)
-                {
-                    return iblockstate1.with(TYPE, VerticalSlabType.WEST);
-                }
-                else if (hitX > 0.5D)
-                {
-                    return iblockstate1.with(TYPE, VerticalSlabType.EAST);
-                }
-                else
-                {
-                    return iblockstate1.with(TYPE, VerticalSlabType.WEST);
-                }
-            }
-            else
-            {
-                return iblockstate1;
-            }
+			{
+				if (face_hit == Direction.WEST)
+				{
+					return iblockstate1.with(TYPE, VerticalSlabType.EAST);
+				}
+				else if (face_hit == Direction.EAST)
+				{
+					return iblockstate1.with(TYPE, VerticalSlabType.WEST);
+				}
+				else if (hitX > 0.5D)
+				{
+					return iblockstate1.with(TYPE, VerticalSlabType.EAST);
+				}
+				else
+				{
+					return iblockstate1.with(TYPE, VerticalSlabType.WEST);
+				}
+			}
+			else
+			{
+				return iblockstate1;
+			}
 		}
 	}
 
@@ -147,22 +147,22 @@ public class VerticalSlabBlock extends Block implements Waterloggable
 				boolean flag1 = hitZ > 0.5D;
 				boolean flag2 = hitX > 0.5D;
 				Direction enumfacing = context.getSide();
-                if (slabtype == VerticalSlabType.NORTH)
-                {
-                    return enumfacing == Direction.SOUTH || flag1 && enumfacing.getAxis().isHorizontal();
-                }
-                if (slabtype == VerticalSlabType.SOUTH)
-                {
-                    return enumfacing == Direction.NORTH || !flag1 && enumfacing.getAxis().isHorizontal();
-                }
-                if (slabtype == VerticalSlabType.EAST)
-                {
-                    return enumfacing == Direction.WEST || !flag2 && enumfacing.getAxis().isHorizontal();
-                }
-                else
-                {
-                    return enumfacing == Direction.EAST || flag2 && enumfacing.getAxis().isHorizontal();
-                }
+				if (slabtype == VerticalSlabType.NORTH)
+				{
+					return enumfacing == Direction.SOUTH || flag1 && enumfacing.getAxis().isHorizontal();
+				}
+				if (slabtype == VerticalSlabType.SOUTH)
+				{
+					return enumfacing == Direction.NORTH || !flag1 && enumfacing.getAxis().isHorizontal();
+				}
+				if (slabtype == VerticalSlabType.EAST)
+				{
+					return enumfacing == Direction.WEST || !flag2 && enumfacing.getAxis().isHorizontal();
+				}
+				else
+				{
+					return enumfacing == Direction.EAST || flag2 && enumfacing.getAxis().isHorizontal();
+				}
 			}
 			else
 			{

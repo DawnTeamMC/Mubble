@@ -156,6 +156,9 @@
 	"block.mubble.vanadium_block": "釩塊",
 	"block.mubble.vanadium_ore": "釩礦石",
 	
+	"//block.mubble.autumn_oak_sapling": "Autumn Oak Sapling",
+	"//block.mubble.autumn_oak_leaves": "Autumn Oak Leaves",
+	"//block.mubble.autumn_oak_leaf_pile": "Autumn Oak Leaves Carpet",
 	"//block.mubble.autumn_birch_sapling": "Autumn Birch Sapling",
 	"//block.mubble.autumn_birch_leaves": "Autumn Birch Leaves",
 	"//block.mubble.autumn_birch_leaf_pile": "Autumn Birch Leaves Pile",
@@ -1043,6 +1046,7 @@
 	"//block.mubble.potato_flower": "Potato Flower",
 
 
+	"//block.mubble.potted_autumn_oak_sapling": "Potted Autumn Oak Sapling",
 	"//block.mubble.potted_autumn_birch_sapling": "Potted Autumn Birch Sapling",
 	"//block.mubble.potted_pink_cherry_oak_sapling": "Potted Pink Cherry Oak Sapling",
 	"//block.mubble.potted_white_cherry_oak_sapling": "Potted White Cherry Oak Sapling",

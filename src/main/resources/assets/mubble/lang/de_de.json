@@ -156,6 +156,9 @@
 	"block.mubble.vanadium_block": "Vanadiumblock",
 	"block.mubble.vanadium_ore": "Vanadiumerz",
 
+	"block.mubble.autumn_oak_sapling": "Herbsteichensetzling",
+	"block.mubble.autumn_oak_leaves": "Herbsteichenlaub",
+	"block.mubble.autumn_oak_leaf_pile": "Herbsteichenlaubteppich",
 	"//block.mubble.autumn_birch_sapling": "Autumn Birch Sapling",
 	"//block.mubble.autumn_birch_leaves": "Autumn Birch Leaves",
 	"//block.mubble.autumn_birch_leaf_pile": "Autumn Birch Leaves Pile",
@@ -1043,6 +1046,7 @@
 	"block.mubble.potato_flower": "Kartoffelblume",
 
 
+	"block.mubble.potted_autumn_oak_sapling": "Eingetopfter Herbsteichensetzling",
 	"//block.mubble.potted_autumn_birch_sapling": "Potted Autumn Birch Sapling",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Eingetopfter Rosa Kirscheichensetzling",
 	"block.mubble.potted_white_cherry_oak_sapling": "Eingetopfter Weißer Kirscheichensetzling",

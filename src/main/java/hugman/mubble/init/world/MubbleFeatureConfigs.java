@@ -8,8 +8,6 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.world.Heightmap.Type;
 import net.minecraft.world.gen.decorator.BeehiveTreeDecorator;
-import net.minecraft.world.gen.decorator.LeaveVineTreeDecorator;
-import net.minecraft.world.gen.decorator.TrunkVineTreeDecorator;
 import net.minecraft.world.gen.feature.JungleFoliagePlacer;
 import net.minecraft.world.gen.feature.RandomPatchFeatureConfig;
 import net.minecraft.world.gen.feature.TreeFeatureConfig;
@@ -24,8 +22,11 @@ import java.util.OptionalInt;
 
 public class MubbleFeatureConfigs
 {
+	private static final BlockState OAK_LOG = Blocks.OAK_LOG.getDefaultState();
 	private static final BlockState BIRCH_LOG = Blocks.BIRCH_LOG.getDefaultState();
 
+	private static final BlockState AUTUMN_OAK_LEAVES = MubbleBlocks.AUTUMN_OAK_LEAVES.getDefaultState();
+	private static final BlockState AUTUMN_OAK_LEAF_PILE = MubbleBlocks.AUTUMN_OAK_LEAF_PILE.getDefaultState();
 	private static final BlockState AUTUMN_BIRCH_LEAVES = MubbleBlocks.AUTUMN_BIRCH_LEAVES.getDefaultState();
 	private static final BlockState AUTUMN_BIRCH_LEAF_PILE = MubbleBlocks.AUTUMN_BIRCH_LEAF_PILE.getDefaultState();
 
@@ -56,11 +57,16 @@ public class MubbleFeatureConfigs
 	public static final BeehiveTreeDecorator MORE_BEEHIVES_CONFIG = new BeehiveTreeDecorator(0.05F);
 
 	/* MINECRAFT */
+	public static final TreeFeatureConfig AUTUMN_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(OAK_LOG), new SimpleBlockStateProvider(AUTUMN_OAK_LEAVES), new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).method_27374().build();
+	public static final TreeFeatureConfig AUTUMN_OAK_TREE_B1_CONFIG = AUTUMN_OAK_TREE_CONFIG.setTreeDecorators(ImmutableList.of(REGULAR_BEEHIVES_CONFIG));
+	public static final TreeFeatureConfig FANCY_AUTUMN_OAK_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(OAK_LOG), new SimpleBlockStateProvider(AUTUMN_OAK_LEAVES), new LargeOakFoliagePlacer(2, 0, 4, 0, 4), new LargeOakTrunkPlacer(3, 11, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).method_27374().method_27375(Type.MOTION_BLOCKING).build();
+	public static final TreeFeatureConfig FANCY_AUTUMN_OAK_TREE_B1_CONFIG = FANCY_AUTUMN_OAK_TREE_CONFIG.setTreeDecorators(ImmutableList.of(REGULAR_BEEHIVES_CONFIG));
 	public static final TreeFeatureConfig AUTUMN_BIRCH_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(BIRCH_LOG), new SimpleBlockStateProvider(AUTUMN_BIRCH_LEAVES), new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).method_27374().build();
-	public static final TreeFeatureConfig AUTUMN_BIRCH_TREE_B1_CONFIG = AUTUMN_BIRCH_TREE_CONFIG.setTreeDecorators(ImmutableList.of(MORE_BEEHIVES_CONFIG));
+	public static final TreeFeatureConfig AUTUMN_BIRCH_TREE_B1_CONFIG = AUTUMN_BIRCH_TREE_CONFIG.setTreeDecorators(ImmutableList.of(REGULAR_BEEHIVES_CONFIG));
 	public static final TreeFeatureConfig FANCY_AUTUMN_BIRCH_TREE_CONFIG = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(BIRCH_LOG), new SimpleBlockStateProvider(AUTUMN_BIRCH_LEAVES), new LargeOakFoliagePlacer(2, 0, 4, 0, 4), new LargeOakTrunkPlacer(3, 11, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).method_27374().method_27375(Type.MOTION_BLOCKING).build();
-	public static final TreeFeatureConfig FANCY_AUTUMN_BIRCH_TREE_B1_CONFIG = FANCY_AUTUMN_BIRCH_TREE_CONFIG.setTreeDecorators(ImmutableList.of(MORE_BEEHIVES_CONFIG));
-	public static final RandomPatchFeatureConfig AUTUMN_BIRCH_LEAF_PILE_CONFIG = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(AUTUMN_BIRCH_LEAF_PILE), new SimpleBlockPlacer())).tries(32).build();
+	public static final TreeFeatureConfig FANCY_AUTUMN_BIRCH_TREE_B1_CONFIG = FANCY_AUTUMN_BIRCH_TREE_CONFIG.setTreeDecorators(ImmutableList.of(REGULAR_BEEHIVES_CONFIG));
+	public static final RandomPatchFeatureConfig AUTUMN_OAK_LEAF_PILE_CONFIG = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(AUTUMN_OAK_LEAF_PILE), new SimpleBlockPlacer())).tries(16).build();
+	public static final RandomPatchFeatureConfig AUTUMN_BIRCH_LEAF_PILE_CONFIG = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(AUTUMN_BIRCH_LEAF_PILE), new SimpleBlockPlacer())).tries(16).build();
 	public static final RandomPatchFeatureConfig YELLOW_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.YELLOW_MUSHROOM);
 	public static final RandomPatchFeatureConfig ORANGE_MUSHROOM_CONFIG = mushroomConfig(MubbleBlocks.ORANGE_MUSHROOM);
 

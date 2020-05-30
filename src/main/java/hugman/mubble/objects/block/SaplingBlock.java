@@ -22,10 +22,13 @@ public class SaplingBlock extends net.minecraft.block.SaplingBlock
 	protected boolean canPlantOnTop(BlockState state, BlockView worldIn, BlockPos pos)
 	{
 		Block block = state.getBlock();
-        if (this == MubbleBlocks.PALM_SAPLING)
-        {
-            return MubbleTags.Blocks.PALM_SAPLING_VALID_GROUND.contains(block);
-        }
-        else return super.canPlantOnTop(state, worldIn, pos);
+		if (this == MubbleBlocks.PALM_SAPLING)
+		{
+			return MubbleTags.Blocks.PALM_SAPLING_VALID_GROUND.contains(block);
+		}
+		else
+		{
+			return super.canPlantOnTop(state, worldIn, pos);
+		}
 	}
 }

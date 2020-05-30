@@ -32,10 +32,10 @@ public class NoteBlock extends Block
 	@Override
 	public void onSteppedOn(World worldIn, BlockPos pos, Entity entityIn)
 	{
-        if (Math.abs(entityIn.getVelocity().getY()) < 0.45D)
-        {
-            entityIn.setVelocity(entityIn.getVelocity().getX(), 0.5D, entityIn.getVelocity().getZ());
-        }
+		if (Math.abs(entityIn.getVelocity().getY()) < 0.45D)
+		{
+			entityIn.setVelocity(entityIn.getVelocity().getX(), 0.5D, entityIn.getVelocity().getZ());
+		}
 	}
 
 	@Override

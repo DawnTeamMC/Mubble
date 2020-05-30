@@ -78,18 +78,18 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 	@Override
 	public FluidState getFluidState(BlockState state)
 	{
-        if (state.get(FLUIDLOG) == FluidLog.WATER)
-        {
-            return Fluids.WATER.getStill(false);
-        }
-        else if (state.get(FLUIDLOG) == FluidLog.LAVA)
-        {
-            return Fluids.LAVA.getStill(false);
-        }
-        else
-        {
-            return Fluids.EMPTY.getDefaultState();
-        }
+		if (state.get(FLUIDLOG) == FluidLog.WATER)
+		{
+			return Fluids.WATER.getStill(false);
+		}
+		else if (state.get(FLUIDLOG) == FluidLog.LAVA)
+		{
+			return Fluids.LAVA.getStill(false);
+		}
+		else
+		{
+			return Fluids.EMPTY.getDefaultState();
+		}
 	}
 
 	@Override
@@ -101,27 +101,27 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 			return Fluids.WATER;
 		}
 		else if (state.get(FLUIDLOG) == FluidLog.LAVA)
-        {
-            worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.EMPTY), 3);
-            return Fluids.LAVA;
-        }
-        else
-        {
-            return Fluids.EMPTY;
-        }
+		{
+			worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.EMPTY), 3);
+			return Fluids.LAVA;
+		}
+		else
+		{
+			return Fluids.EMPTY;
+		}
 	}
 
 	@Override
 	public boolean canFillWithFluid(BlockView worldIn, BlockPos pos, BlockState state, Fluid fluidIn)
 	{
-        if (state.get(FLUIDLOG) == FluidLog.EMPTY)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+		if (state.get(FLUIDLOG) == FluidLog.EMPTY)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
@@ -132,11 +132,11 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 		{
 			if (!worldIn.isClient())
 			{
-                if (fluid == Fluids.WATER)
-                {
-                    worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.WATER), 3);
-                }
-                else if (fluid == Fluids.LAVA) worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.LAVA), 3);
+				if (fluid == Fluids.WATER)
+				{
+					worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.WATER), 3);
+				}
+				else if (fluid == Fluids.LAVA) worldIn.setBlockState(pos, state.with(FLUIDLOG, FluidLog.LAVA), 3);
 				worldIn.getFluidTickScheduler().schedule(pos, fluid, fluid.getTickRate(worldIn));
 			}
 			return true;
@@ -152,18 +152,18 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 	{
 		Fluid fluid = context.getWorld().getFluidState(context.getBlockPos()).getFluid();
 		BlockState blockState = this.getDefaultState();
-        if (fluid == Fluids.WATER)
-        {
-            return blockState.with(FLUIDLOG, FluidLog.WATER);
-        }
-        else if (fluid == Fluids.LAVA)
-        {
-            return blockState.with(FLUIDLOG, FluidLog.LAVA);
-        }
-        else
-        {
-            return blockState.with(FLUIDLOG, FluidLog.EMPTY);
-        }
+		if (fluid == Fluids.WATER)
+		{
+			return blockState.with(FLUIDLOG, FluidLog.WATER);
+		}
+		else if (fluid == Fluids.LAVA)
+		{
+			return blockState.with(FLUIDLOG, FluidLog.LAVA);
+		}
+		else
+		{
+			return blockState.with(FLUIDLOG, FluidLog.EMPTY);
+		}
 	}
 
 	@Override
@@ -235,14 +235,14 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 	private void permuteSide(BlockState state, World worldIn, BlockPos pos, BooleanProperty property)
 	{
 		FluidState fluidState = worldIn.getFluidState(pos);
-        if (state.get(property))
-        {
-            worldIn.setBlockState(pos, state.with(property, false), 3);
-        }
-        else
-        {
-            worldIn.setBlockState(pos, state.with(property, true), 3);
-        }
+		if (state.get(property))
+		{
+			worldIn.setBlockState(pos, state.with(property, false), 3);
+		}
+		else
+		{
+			worldIn.setBlockState(pos, state.with(property, true), 3);
+		}
 		worldIn.getFluidTickScheduler().schedule(pos, fluidState.getFluid(), fluidState.getFluid().getTickRate(worldIn));
 		worldIn.playSound((PlayerEntity) null, pos, SoundEvents.BLOCK_GLASS_HIT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}

@@ -21,13 +21,13 @@ public class CropsBlock extends CropBlock
 	protected ItemConvertible getSeedsItem()
 	{
 		if (this == MubbleBlocks.TOMATOES) return MubbleItems.TOMATO;
-        if (this == MubbleBlocks.SALAD)
-        {
-            return MubbleItems.SALAD;
-        }
-        else
-        {
-            return null;
-        }
+		if (this == MubbleBlocks.SALAD)
+		{
+			return MubbleItems.SALAD;
+		}
+		else
+		{
+			return null;
+		}
 	}
 }

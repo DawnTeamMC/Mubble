@@ -279,14 +279,14 @@ public class TimeswapTableScreenHandler extends ScreenHandler
 	{
 		for (Tag<Item> tag : MubbleTags.Items.TIMESWAP_TAGS)
 		{
-            if (item.isIn(tag))
-            {
-                return tag;
-            }
-            else
-            {
-                continue;
-            }
+			if (item.isIn(tag))
+			{
+				return tag;
+			}
+			else
+			{
+				continue;
+			}
 		}
 		return null;
 	}

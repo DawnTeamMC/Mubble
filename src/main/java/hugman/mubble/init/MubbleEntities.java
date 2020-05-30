@@ -40,7 +40,6 @@ public class MubbleEntities
 	{
 		FabricDefaultAttributeRegistry.register(DUCK, DuckEntity.createDuckAttributes());
 		FabricDefaultAttributeRegistry.register(ZOMBIE_COWMAN, ZombieCowmanEntity.createZombieCowmanAttributes());
-
 		FabricDefaultAttributeRegistry.register(CHINCHO, ChinchoEntity.createChinchoAttributes());
 		FabricDefaultAttributeRegistry.register(GOOMBA, GoombaEntity.createGoombaAttributes());
 		FabricDefaultAttributeRegistry.register(TOAD, ToadEntity.createToadAttributes());

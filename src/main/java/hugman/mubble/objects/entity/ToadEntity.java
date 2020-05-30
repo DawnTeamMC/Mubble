@@ -87,14 +87,14 @@ public class ToadEntity extends AnimalEntity
 	@Override
 	protected SoundEvent getAmbientSound()
 	{
-        if (CalendarEvents.isAprilFools)
-        {
-            return MubbleSounds.ENTITY_TOAD_BUP;
-        }
-        else
-        {
-            return MubbleSounds.ENTITY_TOAD_AMBIENT;
-        }
+		if (CalendarEvents.isAprilFools)
+		{
+			return MubbleSounds.ENTITY_TOAD_BUP;
+		}
+		else
+		{
+			return MubbleSounds.ENTITY_TOAD_AMBIENT;
+		}
 	}
 
 	@Override

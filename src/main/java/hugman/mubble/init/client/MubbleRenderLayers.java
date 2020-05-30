@@ -45,7 +45,7 @@ public class MubbleRenderLayers
 				MubbleBlocks.SALAD, MubbleBlocks.TOMATOES);
 		// Piles
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.ACACIA_LEAF_PILE,
-				MubbleBlocks.ALLIUM_PILE, MubbleBlocks.AUTUMN_BIRCH_LEAF_PILE, MubbleBlocks.AZURE_BLUET_PILE,
+				MubbleBlocks.ALLIUM_PILE, MubbleBlocks.AUTUMN_BIRCH_LEAF_PILE, MubbleBlocks.AUTUMN_OAK_LEAF_PILE, MubbleBlocks.AZURE_BLUET_PILE,
 				MubbleBlocks.BIRCH_LEAF_PILE, MubbleBlocks.BLUE_ORCHID_PILE, MubbleBlocks.CORNFLOWER_PILE,
 				MubbleBlocks.DANDELION_PILE, MubbleBlocks.DARK_OAK_LEAF_PILE, MubbleBlocks.JUNGLE_LEAF_PILE,
 				MubbleBlocks.LILY_OF_THE_VALLEY_PILE, MubbleBlocks.OAK_LEAF_PILE, MubbleBlocks.ORANGE_TULIP_PILE,
@@ -67,11 +67,11 @@ public class MubbleRenderLayers
 				MubbleBlocks.PINK_MUSHROOM, MubbleBlocks.PURPLE_MUSHROOM, MubbleBlocks.WHITE_MUSHROOM,
 				MubbleBlocks.YELLOW_MUSHROOM, MubbleBlocks.SCARLET_MUSHROOM);
 		// Saplings
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), MubbleBlocks.AUTUMN_BIRCH_SAPLING,
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), MubbleBlocks.AUTUMN_BIRCH_SAPLING, MubbleBlocks.AUTUMN_OAK_SAPLING,
 				MubbleBlocks.PALM_SAPLING, MubbleBlocks.PINK_CHERRY_OAK_SAPLING, MubbleBlocks.PINK_PRESS_GARDEN_SAPLING,
 				MubbleBlocks.RED_PRESS_GARDEN_SAPLING, MubbleBlocks.SCARLET_SAPLING, MubbleBlocks.WHITE_CHERRY_OAK_SAPLING);
 		// Leaves
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.AUTUMN_BIRCH_LEAVES,
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.AUTUMN_BIRCH_LEAVES, MubbleBlocks.AUTUMN_OAK_LEAVES,
 				MubbleBlocks.PALM_LEAVES, MubbleBlocks.PINK_CHERRY_OAK_LEAVES, MubbleBlocks.PINK_PRESS_GARDEN_LEAVES,
 				MubbleBlocks.RED_PRESS_GARDEN_LEAVES, MubbleBlocks.SCARLET_LEAVES, MubbleBlocks.WHITE_CHERRY_OAK_LEAVES);
 		// Doors

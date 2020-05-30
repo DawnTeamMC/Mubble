@@ -29,15 +29,15 @@ public class RotatingBlock extends Block
 	public void onEntityLand(BlockView world, Entity entity)
 	{
 		Vec3d vec3d = entity.getVelocity();
-        if (entity.isSneaking() && vec3d.y < -0.1)
-        {
-            if (!entity.world.isClient) entity.world.removeBlock(entity.getBlockPos().down(), false);
-            entity.setVelocity(vec3d.x, 0.625D, vec3d.z);
-        }
-        else
-        {
-            super.onEntityLand(world, entity);
-        }
+		if (entity.isSneaking() && vec3d.y < -0.1)
+		{
+			if (!entity.world.isClient) entity.world.removeBlock(entity.getBlockPos().down(), false);
+			entity.setVelocity(vec3d.x, 0.625D, vec3d.z);
+		}
+		else
+		{
+			super.onEntityLand(world, entity);
+		}
 	}
 
 	@Override

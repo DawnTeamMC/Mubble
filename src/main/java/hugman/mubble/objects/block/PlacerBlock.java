@@ -1,7 +1,7 @@
 package hugman.mubble.objects.block;
 
-import hugman.mubble.objects.block.dispenser_behavior.PlaceBreakDispenserBehavior;
 import hugman.mubble.objects.block.block_entity.PlacerBlockEntity;
+import hugman.mubble.objects.block.dispenser_behavior.PlaceBreakDispenserBehavior;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
 import net.minecraft.block.entity.BlockEntity;

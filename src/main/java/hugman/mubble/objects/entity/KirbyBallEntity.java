@@ -88,13 +88,13 @@ public class KirbyBallEntity extends BallEntity
 			}
 		}
 		else if (face == Direction.WEST || face == Direction.EAST)
-        {
-            motion = motion.subtract(getVelocity().x * 1.25D, 0.0D, 0.0D);
-        }
-        else if (face == Direction.NORTH || face == Direction.SOUTH)
-        {
-            motion = motion.subtract(0.0D, 0.0D, getVelocity().z * 1.25D);
-        }
+		{
+			motion = motion.subtract(getVelocity().x * 1.25D, 0.0D, 0.0D);
+		}
+		else if (face == Direction.NORTH || face == Direction.SOUTH)
+		{
+			motion = motion.subtract(0.0D, 0.0D, getVelocity().z * 1.25D);
+		}
 		setVelocity(motion);
 		world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_REBOUND, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return false;

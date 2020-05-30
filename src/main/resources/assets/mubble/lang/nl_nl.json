@@ -156,6 +156,9 @@
 	"block.mubble.vanadium_block": "Vanadiumblok",
 	"block.mubble.vanadium_ore": "Vanadiumerts",
 	
+	"block.mubble.autumn_oak_sapling": "Herfsteikkiemplant",
+	"block.mubble.autumn_oak_leaves": "Herfsteikbladeren",
+	"block.mubble.autumn_oak_leaf_pile": "Herfsteikbladeren tapijt",
 	"//block.mubble.autumn_birch_sapling": "Autumn Birch Sapling",
 	"//block.mubble.autumn_birch_leaves": "Autumn Birch Leaves",
 	"//block.mubble.autumn_birch_leaf_pile": "Autumn Birch Leaves Pile",
@@ -1043,6 +1046,7 @@
 	"block.mubble.potato_flower": "Aardappelbloem",
 
 
+	"block.mubble.potted_autumn_oak_sapling": "Gepotte herfsteikkiemplant",
 	"//block.mubble.potted_autumn_birch_sapling": "Potted Autumn Birch Sapling",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Gepotte rozekerseneikkiemplant",
 	"block.mubble.potted_white_cherry_oak_sapling": "Gepotte wittekerseneikkiemplant",
