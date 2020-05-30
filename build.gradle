@@ -15,7 +15,6 @@ minecraft {
 
 repositories {
 	maven { url 'https://jitpack.io' }
-	maven { url 'http://server.bbkr.space:8081/artifactory/libs-release' }
 }
 
 dependencies {
