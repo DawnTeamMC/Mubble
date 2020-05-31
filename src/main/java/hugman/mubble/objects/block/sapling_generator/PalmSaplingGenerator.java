@@ -13,6 +13,6 @@ public class PalmSaplingGenerator extends SaplingGenerator
 	@Override
 	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive)
 	{
-		return Feature.TREE.configure(MubbleFeatureConfigs.PALM_TREE_CONFIG);
+		return Feature.TREE.configure(MubbleFeatureConfigs.PALM_TREE);
 	}
 }

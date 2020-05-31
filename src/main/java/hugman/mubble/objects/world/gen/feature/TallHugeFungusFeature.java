@@ -9,7 +9,6 @@ import net.minecraft.block.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
@@ -193,28 +192,29 @@ public class TallHugeFungusFeature extends HugeFungusFeature
 
 	}
 
-	private void tryGenerateVines(WorldAccess world, Random random, BlockPos pos, BlockState state, boolean bl)
+	private void tryGenerateVines(WorldAccess world, Random random, BlockPos origin, BlockState state, boolean bl)
 	{
-		if (world.getBlockState(pos.down()).isOf(state.getBlock()))
+		BlockPos.Mutable mutable = origin.mutableCopy();
+		if (world.getBlockState(mutable.down()).isOf(state.getBlock()))
 		{
-			this.setBlockState(world, pos, state);
+			this.setBlockState(world, mutable, state);
 		}
 		else if ((double) random.nextFloat() < 0.15D)
 		{
-			this.setBlockState(world, pos, state);
+			this.setBlockState(world, origin, state);
 			if (bl && random.nextInt(11) == 0)
 			{
-				generateVines(pos, world, random);
+				generateVines(mutable, world, random);
 			}
 		}
 
 	}
 
 	@Nullable
-	private static BlockPos.Mutable getStartPos(WorldAccess world, BlockPos pos, Block block)
+	private static BlockPos.Mutable getStartPos(WorldAccess world, BlockPos origin, Block block)
 	{
-		BlockPos.Mutable mutable = pos.mutableCopy();
-		for (int i = pos.getY(); i >= 1; --i)
+		BlockPos.Mutable mutable = origin.mutableCopy();
+		for (int i = origin.getY(); i >= 1; --i)
 		{
 			mutable.setY(i);
 			Block block2 = world.getBlockState(mutable.down()).getBlock();

@@ -13,12 +13,12 @@ public class ScarletSaplingGenerator extends LargeTreeSaplingGenerator
 	@Override
 	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive)
 	{
-		return random.nextInt(10) == 0 ? Feature.TREE.configure(MubbleFeatureConfigs.FANCY_SCARLET_TREE_CONFIG) : Feature.TREE.configure(MubbleFeatureConfigs.SCARLET_TREE_CONFIG);
+		return random.nextInt(10) == 0 ? Feature.TREE.configure(MubbleFeatureConfigs.FANCY_SCARLET_TREE) : Feature.TREE.configure(MubbleFeatureConfigs.SCARLET_TREE);
 	}
 
 	@Override
 	protected ConfiguredFeature<TreeFeatureConfig, ?> createLargeTreeFeature(Random random)
 	{
-		return Feature.TREE.configure(MubbleFeatureConfigs.HUGE_SCARLET_TREE_CONFIG);
+		return Feature.TREE.configure(MubbleFeatureConfigs.HUGE_SCARLET_TREE);
 	}
 }

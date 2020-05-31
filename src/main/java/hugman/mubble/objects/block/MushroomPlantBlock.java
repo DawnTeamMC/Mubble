@@ -2,7 +2,6 @@ package hugman.mubble.objects.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.MushroomPlantBlock;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
@@ -10,9 +9,9 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class MushroomBlock extends MushroomPlantBlock
+public class MushroomPlantBlock extends net.minecraft.block.MushroomPlantBlock
 {
-	public MushroomBlock(Block.Settings builder)
+	public MushroomPlantBlock(Block.Settings builder)
 	{
 		super(builder);
 	}
