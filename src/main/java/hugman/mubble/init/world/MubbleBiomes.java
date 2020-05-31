@@ -3,6 +3,7 @@ package hugman.mubble.init.world;
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.biome.*;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
+import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.util.Identifier;
@@ -40,5 +41,8 @@ public class MubbleBiomes
 		OverworldBiomes.addContinentalBiome(PRESS_GARDEN, OverworldClimate.SNOWY, 0.25D);
 		FabricBiomes.addSpawnBiome(PRESS_GARDEN);
 		OverworldBiomes.addContinentalBiome(SCARLET_FOREST, OverworldClimate.COOL, 1D);
+		NetherBiomes.addNetherBiome(MUSHROOM_NETHER_WASTERS);
+		NetherBiomes.addNetherBiome(TALL_CRIMSON_FOREST);
+		NetherBiomes.addNetherBiome(TALL_WARPED_FOREST);
 	}
 }
