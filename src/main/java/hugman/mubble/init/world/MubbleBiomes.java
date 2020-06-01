@@ -1,7 +1,11 @@
 package hugman.mubble.init.world;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.world.biome.*;
+import hugman.mubble.objects.world.biome.SMWDesertBiome;
+import hugman.mubble.objects.world.biome.nether.TallCrimsonForestBiome;
+import hugman.mubble.objects.world.biome.nether.TallWarpedForestBiome;
+import hugman.mubble.objects.world.biome.nether.TritanopianGalleryBiome;
+import hugman.mubble.objects.world.biome.overworld.*;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
@@ -14,7 +18,7 @@ public class MubbleBiomes
 	public static final Biome PUMPKIN_PASTURES = register("pumpkin_pastures", new PumpkinPasturesBiome());
 	public static final Biome PINK_CHERRY_OAK_FOREST = register("pink_cherry_oak_forest", new PinkCherryOakForestBiome());
 	public static final Biome WHITE_CHERRY_OAK_FOREST = register("white_cherry_oak_forest", new WhiteCherryOakForestBiome());
-	public static final Biome MUSHROOM_NETHER_WASTES = register("mushroom_nether_wastes", new MushroomNetherWastesBiome());
+	public static final Biome TRITANOPIAN_GALLERY = register("tritanopian_gallery", new TritanopianGalleryBiome());
 	public static final Biome TALL_CRIMSON_FOREST = register("tall_crimson_forest", new TallCrimsonForestBiome());
 	public static final Biome TALL_WARPED_FOREST = register("tall_warped_forest", new TallWarpedForestBiome());
 

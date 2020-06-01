@@ -66,12 +66,12 @@ public class TallHugeFungusFeature extends HugeFungusFeature
 		}
 	}
 
-	private static boolean method_24866(WorldAccess worldAccess, BlockPos blockPos, boolean bl)
+	private static boolean isReplaceable(WorldAccess worldAccess, BlockPos blockPos, boolean canReplaceAllPlants)
 	{
 		return worldAccess.testBlockState(blockPos, (blockState) ->
 		{
 			Material material = blockState.getMaterial();
-			return blockState.isAir() || blockState.isOf(Blocks.WATER) || blockState.isOf(Blocks.LAVA) || material == Material.REPLACEABLE_PLANT || bl && material == Material.PLANT;
+			return blockState.isAir() || blockState.isOf(Blocks.WATER) || blockState.isOf(Blocks.LAVA) || material == Material.REPLACEABLE_PLANT || canReplaceAllPlants && material == Material.PLANT;
 		});
 	}
 
@@ -88,7 +88,7 @@ public class TallHugeFungusFeature extends HugeFungusFeature
 				for (int l = 0; l < stemHeight; ++l)
 				{
 					mutable.set(blockPos, j, l, k);
-					if (method_24866(world, mutable, true))
+					if (isReplaceable(world, mutable, true))
 					{
 						if (config.planted)
 						{
@@ -143,7 +143,7 @@ public class TallHugeFungusFeature extends HugeFungusFeature
 					boolean bl5 = bl2 && bl3;
 					boolean bl6 = k < j + 3;
 					mutable.set(blockPos, m, k, n);
-					if (method_24866(world, mutable, false))
+					if (isReplaceable(world, mutable, false))
 					{
 						if (config.planted && !world.getBlockState(mutable.down()).isAir())
 						{

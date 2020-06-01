@@ -29,7 +29,8 @@ public class SMWDesertBiome extends Biome
 
 	public SMWDesertBiome()
 	{
-		super((new Biome.Settings()).configureSurfaceBuilder(SurfaceBuilder.DEFAULT, MubbleSurfaceBuilders.SMW_DESERT_SURFACE)
+		super((new Biome.Settings())
+				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, MubbleSurfaceBuilders.SMW_DESERT_SURFACE)
 				.precipitation(Biome.Precipitation.RAIN)
 				.category(Biome.Category.FOREST)
 				.depth(0.3625F)
@@ -45,7 +46,7 @@ public class SMWDesertBiome extends Biome
 				.parent(null));
 		this.addStructureFeature(DefaultBiomeFeatures.field_24687);
 		DefaultBiomeFeatures.method_28440(this);
-		this.addStructureFeature(DefaultBiomeFeatures.field_24711);
+		this.addStructureFeature(DefaultBiomeFeatures.DESERT_CONFIGURED_RUINED_PORTAL);
 		DefaultBiomeFeatures.addLandCarvers(this);
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		DefaultBiomeFeatures.addDungeons(this);

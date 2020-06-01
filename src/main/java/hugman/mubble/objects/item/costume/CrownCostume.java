@@ -4,7 +4,6 @@ import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.objects.block.KoretatoBlock;
 import hugman.mubble.objects.block.block_state_property.Princess;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.particle.ParticleTypes;

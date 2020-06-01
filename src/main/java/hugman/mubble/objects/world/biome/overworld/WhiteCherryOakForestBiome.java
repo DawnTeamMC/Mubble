@@ -1,4 +1,4 @@
-package hugman.mubble.objects.world.biome;
+package hugman.mubble.objects.world.biome.overworld;
 
 import com.google.common.collect.ImmutableList;
 import hugman.mubble.init.world.MubbleFeatureConfigs;
@@ -17,28 +17,28 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-public class PumpkinPasturesBiome extends Biome
+public class WhiteCherryOakForestBiome extends Biome
 {
-	public PumpkinPasturesBiome()
+	public WhiteCherryOakForestBiome()
 	{
-		super((new Biome.Settings()).configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
+		super((new Biome.Settings())
+				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN)
 				.category(Biome.Category.FOREST)
 				.depth(0.1F)
 				.scale(0.2F)
-				.temperature(0.8F)
-				.downfall(0.9F)
+				.temperature(0.6F)
+				.downfall(0.4F)
 				.effects((new BiomeEffects.Builder()
-						.waterColor(155336)
-						.waterFogColor(541))
+						.waterColor(6459391)
+						.waterFogColor(2170954))
 						.fogColor(12638463)
 						.moodSound(BiomeMoodSound.CAVE)
 						.build())
 				.parent(null));
-		this.addStructureFeature(DefaultBiomeFeatures.field_24706);
 		this.addStructureFeature(DefaultBiomeFeatures.field_24687);
 		DefaultBiomeFeatures.method_28440(this);
-		this.addStructureFeature(DefaultBiomeFeatures.field_24711);
+		this.addStructureFeature(DefaultBiomeFeatures.STANDARD_CONFIGURED_RUINED_PORTAL);
 		DefaultBiomeFeatures.addLandCarvers(this);
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		DefaultBiomeFeatures.addDungeons(this);
@@ -46,14 +46,13 @@ public class PumpkinPasturesBiome extends Biome
 		DefaultBiomeFeatures.addMineables(this);
 		DefaultBiomeFeatures.addDefaultOres(this);
 		DefaultBiomeFeatures.addDefaultDisks(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(Feature.TREE.configure(MubbleFeatureConfigs.AUTUMN_OAK_TREE_B1).withChance(0.2F), Feature.TREE.configure(MubbleFeatureConfigs.FANCY_AUTUMN_BIRCH_TREE_B1_CONFIG).withChance(0.1F)), Feature.TREE.configure(MubbleFeatureConfigs.AUTUMN_BIRCH_TREE_B1))).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(10, 0.1F, 1))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(Feature.TREE.configure(MubbleFeatureConfigs.PINK_CHERRY_OAK_TREE).withChance(0.2F), Feature.TREE.configure(MubbleFeatureConfigs.FANCY_WHITE_CHERRY_OAK_TREE).withChance(0.1F)), Feature.TREE.configure(MubbleFeatureConfigs.WHITE_CHERRY_OAK_TREE))).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(10, 0.1F, 1))));
 		DefaultBiomeFeatures.addDefaultFlowers(this);
 		DefaultBiomeFeatures.addForestGrass(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.AUTUMN_BIRCH_LEAF_PILE_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.AUTUMN_OAK_LEAF_PILE_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(2))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.WHITE_CHERRY_OAK_LEAF_PILE_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.YELLOW_MUSHROOM_PATCHES).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.ORANGE_MUSHROOM_PATCHES).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.WHITE_MUSHROOM_PATCHES).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.LIGHT_GRAY_MUSHROOM_PATCHES).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
 		DefaultBiomeFeatures.addDefaultVegetation(this);
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addFrozenTopLayer(this);
@@ -74,14 +73,8 @@ public class PumpkinPasturesBiome extends Biome
 	}
 
 	@Override
-	public int getGrassColorAt(double x, double z)
-	{
-		return 15443554;
-	}
-
-	@Override
 	public int getFoliageColor()
 	{
-		return 15232304;
+		return 15786729;
 	}
 }

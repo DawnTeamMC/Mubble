@@ -33,7 +33,10 @@ public class PlaceBreakDispenserBehavior extends BlockPlacementDispenserBehavior
 				{
 					this.setSuccess(false);
 				}
-				else this.setSuccess(!(state.getHardness(world, pos) < 0.0f));
+				else
+				{
+					this.setSuccess(!(state.getHardness(world, pos) < 0.0f));
+				}
 			}
 			if (this.isSuccess())
 			{

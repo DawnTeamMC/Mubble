@@ -1,4 +1,4 @@
-package hugman.mubble.objects.world.biome;
+package hugman.mubble.objects.world.biome.nether;
 
 import com.google.common.collect.ImmutableList;
 import hugman.mubble.init.world.MubbleFeatures;
@@ -26,7 +26,8 @@ public class TallWarpedForestBiome extends Biome
 {
 	public TallWarpedForestBiome()
 	{
-		super((new Settings()).configureSurfaceBuilder(SurfaceBuilder.NETHER_FOREST, SurfaceBuilder.WARPED_NYLIUM_CONFIG)
+		super((new Settings())
+				.configureSurfaceBuilder(SurfaceBuilder.NETHER_FOREST, SurfaceBuilder.WARPED_NYLIUM_CONFIG)
 				.precipitation(Precipitation.NONE)
 				.category(Category.NETHER)
 				.depth(0.2F)
@@ -45,9 +46,9 @@ public class TallWarpedForestBiome extends Biome
 						.build())
 				.parent("warped_forest")
 				.noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.5F, 0.0F, 0.0F, 0.375F))));
+		this.addStructureFeature(DefaultBiomeFeatures.NETHER_CONFIGURED_RUINED_PORTAL);
 		this.addStructureFeature(DefaultBiomeFeatures.field_24701);
 		this.addStructureFeature(DefaultBiomeFeatures.field_24705);
-		this.addStructureFeature(DefaultBiomeFeatures.field_24686);
 		this.addCarver(GenerationStep.Carver.AIR, configureCarver(Carver.NETHER_CAVE, new ProbabilityConfig(0.2F)));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.LAVA_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_VERY_BIASED_RANGE.configure(new RangeDecoratorConfig(20, 8, 16, 256))));
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
