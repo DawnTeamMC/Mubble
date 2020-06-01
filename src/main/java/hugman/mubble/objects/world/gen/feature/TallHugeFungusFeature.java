@@ -13,13 +13,13 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.HugeFungusFeature;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 import net.minecraft.world.gen.feature.WeepingVinesFeature;
 
 import java.util.Random;
 
-public class TallHugeFungusFeature extends HugeFungusFeature
+public class TallHugeFungusFeature extends Feature<HugeFungusFeatureConfig>
 {
 	public TallHugeFungusFeature(Codec<HugeFungusFeatureConfig> codec)
 	{

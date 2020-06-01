@@ -5,6 +5,7 @@ import hugman.mubble.objects.world.biome.SMWDesertBiome;
 import hugman.mubble.objects.world.biome.nether.*;
 import hugman.mubble.objects.world.biome.overworld.*;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
+import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.util.Identifier;
@@ -44,11 +45,10 @@ public class MubbleBiomes
 		OverworldBiomes.addContinentalBiome(PRESS_GARDEN, OverworldClimate.SNOWY, 0.25D);
 		FabricBiomes.addSpawnBiome(PRESS_GARDEN);
 		OverworldBiomes.addContinentalBiome(SCARLET_FOREST, OverworldClimate.COOL, 1D);
-		/*
-		NetherBiomes.addNetherBiome(MUSHROOM_NETHER_WASTES);
 		NetherBiomes.addNetherBiome(TALL_CRIMSON_FOREST);
 		NetherBiomes.addNetherBiome(TALL_WARPED_FOREST);
-
-		 */
+		NetherBiomes.addNetherBiome(TRITANOPIAN_GALLERY);
+		NetherBiomes.addNetherBiome(ACHROMATOPSIAN_GALLERY);
+		NetherBiomes.addNetherBiome(PROTANOPIAN_GALLERY);
 	}
 }
