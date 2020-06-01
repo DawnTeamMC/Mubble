@@ -3,7 +3,7 @@ package hugman.mubble.objects.world.biome.nether;
 import hugman.mubble.init.world.MubbleFeatureConfigs;
 import hugman.mubble.init.world.MubbleFeatures;
 import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
+import net.minecraft.world.gen.decorator.ChanceRangeDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.Feature;
@@ -14,12 +14,14 @@ public class TritanopianGalleryBiome extends GalleryBiome
 	public TritanopianGalleryBiome()
 	{
 		super();
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION,
 				Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.PINK_MUSHROOM_PATCHES)
-						.createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.createDecoratedFeature(Decorator.CHANCE_RANGE
+								.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
+		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION,
 				Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.CYAN_MUSHROOM_PATCHES)
-						.createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
+						.createDecoratedFeature(Decorator.CHANCE_RANGE
+								.configure(new ChanceRangeDecoratorConfig(0.5F, 0, 0, 128))));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.PINK_HUGE_NETHER_MUSHROOM),
