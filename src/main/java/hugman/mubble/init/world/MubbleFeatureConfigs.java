@@ -86,6 +86,7 @@ public class MubbleFeatureConfigs
 
 	public static final RandomPatchFeatureConfig BLUEBERRY_BUSH_PATCHES = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(BLUEBERRY_BUSH), SimpleBlockPlacer.field_24871)).tries(64).whitelist(ImmutableSet.of(Blocks.GRASS_BLOCK)).cannotProject().build();
 
+	public static final RandomPatchFeatureConfig BLUE_MUSHROOM_PATCHES = mushroomConfig(MubbleBlocks.BLUE_MUSHROOM);
 	public static final RandomPatchFeatureConfig CYAN_MUSHROOM_PATCHES = mushroomConfig(MubbleBlocks.CYAN_MUSHROOM);
 	public static final RandomPatchFeatureConfig YELLOW_MUSHROOM_PATCHES = mushroomConfig(MubbleBlocks.YELLOW_MUSHROOM);
 	public static final RandomPatchFeatureConfig ORANGE_MUSHROOM_PATCHES = mushroomConfig(MubbleBlocks.ORANGE_MUSHROOM);
@@ -96,12 +97,15 @@ public class MubbleFeatureConfigs
 	public static final RandomPatchFeatureConfig GRAY_MUSHROOM_PATCHES = mushroomConfig(MubbleBlocks.GRAY_MUSHROOM);
 	public static final RandomPatchFeatureConfig BLACK_MUSHROOM_PATCHES = mushroomConfig(MubbleBlocks.BLACK_MUSHROOM);
 
-	public static final HugeNetherMushroomFeatureConfig CYAN_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(4, 3, MubbleBlocks.CYAN_MUSHROOM_BLOCK.getDefaultState(), 2, Blocks.SHROOMLIGHT.getDefaultState(), 0.05F, 0.1F);
-	public static final HugeNetherMushroomFeatureConfig PINK_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(5, 4, MubbleBlocks.PINK_MUSHROOM_BLOCK.getDefaultState(), 2, Blocks.SHROOMLIGHT.getDefaultState(), 0.05F, 0.1F);
-	public static final HugeNetherMushroomFeatureConfig WHITE_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(6, 2, MubbleBlocks.WHITE_MUSHROOM_BLOCK.getDefaultState(), 2, Blocks.SHROOMLIGHT.getDefaultState(), 0.05F, 0.0F);
-	public static final HugeNetherMushroomFeatureConfig LIGHT_GRAY_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(4, 7, MubbleBlocks.LIGHT_GRAY_MUSHROOM_BLOCK.getDefaultState(), 3, Blocks.SHROOMLIGHT.getDefaultState(), 0.05F, 0.0F);
-	public static final HugeNetherMushroomFeatureConfig GRAY_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(4, 7, MubbleBlocks.GRAY_MUSHROOM_BLOCK.getDefaultState(), 3, Blocks.SHROOMLIGHT.getDefaultState(), 0.01F, 0.0F);
-	public static final HugeNetherMushroomFeatureConfig BLACK_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(6, 2, MubbleBlocks.BLACK_MUSHROOM_BLOCK.getDefaultState(), 2, Blocks.SHROOMLIGHT.getDefaultState(), 0.01F, 0.0F);
+	public static final HugeNetherMushroomFeatureConfig BLUE_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(13, 8, MubbleBlocks.BLUE_MUSHROOM_BLOCK.getDefaultState(), 3, 3, Blocks.SHROOMLIGHT.getDefaultState(), 0.1F, 0.05F);
+	public static final HugeNetherMushroomFeatureConfig CYAN_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(4, 3, MubbleBlocks.CYAN_MUSHROOM_BLOCK.getDefaultState(), 2, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.05F, 0.1F);
+	public static final HugeNetherMushroomFeatureConfig PINK_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(5, 4, MubbleBlocks.PINK_MUSHROOM_BLOCK.getDefaultState(), 2, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.05F, 0.1F);
+	public static final HugeNetherMushroomFeatureConfig YELLOW_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(4, 3, MubbleBlocks.YELLOW_MUSHROOM_BLOCK.getDefaultState(), 3, 0, Blocks.SHROOMLIGHT.getDefaultState(), 0.1F, 0.0F);
+	public static final HugeNetherMushroomFeatureConfig BROWN_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(4, 3, Blocks.BROWN_MUSHROOM_BLOCK.getDefaultState(), 3, 0, Blocks.SHROOMLIGHT.getDefaultState(), 0.1F, 0.0F);
+	public static final HugeNetherMushroomFeatureConfig WHITE_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(6, 2, MubbleBlocks.WHITE_MUSHROOM_BLOCK.getDefaultState(), 2, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.05F, 0.0F);
+	public static final HugeNetherMushroomFeatureConfig LIGHT_GRAY_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(4, 7, MubbleBlocks.LIGHT_GRAY_MUSHROOM_BLOCK.getDefaultState(), 3, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.05F, 0.0F);
+	public static final HugeNetherMushroomFeatureConfig GRAY_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(4, 7, MubbleBlocks.GRAY_MUSHROOM_BLOCK.getDefaultState(), 3, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.01F, 0.0F);
+	public static final HugeNetherMushroomFeatureConfig BLACK_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(6, 2, MubbleBlocks.BLACK_MUSHROOM_BLOCK.getDefaultState(), 2, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.01F, 0.0F);
 
 	/* SONIC */
 	public static final TreeFeatureConfig RED_PRESS_GARDEN_TREE = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(RED_PRESS_GARDEN_LEAVES), new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).method_27374().build();

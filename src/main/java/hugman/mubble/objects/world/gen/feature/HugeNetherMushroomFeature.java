@@ -28,37 +28,38 @@ public class HugeNetherMushroomFeature extends Feature<HugeNetherMushroomFeature
 
 	public boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockPos pos, HugeNetherMushroomFeatureConfig config)
 	{
-		int height = getHeight(random, config);
-		BlockPos origin = getOrigin(world, pos, height, config);
+		int stemHeight = getStemHeight(random, config);
+		int hatSize = getHatSize(random, config);
+		BlockPos origin = getOrigin(world, pos, stemHeight, config);
 		if (origin == null)
 		{
 			return false;
 		}
 		else
 		{
-			if (origin.getY() + height + 1 >= world.getDimensionHeight())
+			if (origin.getY() + stemHeight + 1 >= world.getDimensionHeight())
 			{
 				return false;
 			}
 			world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
-			this.generateStem(world, random, origin, height, config);
+			this.generateStem(world, random, origin, stemHeight, config);
 			if (config.flatHat)
 			{
-				this.generateFlatHat(world, random, origin, height, config);
+				this.generateFlatHat(world, random, origin, stemHeight, hatSize, config);
 			}
 			else
 			{
-				this.generateBubbleHat(world, random, origin, height, config);
+				this.generateBubbleHat(world, random, origin, stemHeight, hatSize, config);
 			}
 			return true;
 		}
 	}
 
-	private void generateStem(WorldAccess world, Random random, BlockPos origin, int height, HugeNetherMushroomFeatureConfig config)
+	private void generateStem(WorldAccess world, Random random, BlockPos origin, int stemHeight, HugeNetherMushroomFeatureConfig config)
 	{
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
 		BlockState blockState = config.stemState;
-		for (int i = 0; i < height; ++i)
+		for (int i = 0; i < stemHeight; ++i)
 		{
 			mutable.set(origin).move(config.upsideDown ? Direction.DOWN : Direction.UP, i);
 			if (isReplaceable(world, mutable, true, true))
@@ -68,13 +69,13 @@ public class HugeNetherMushroomFeature extends Feature<HugeNetherMushroomFeature
 		}
 	}
 
-	protected void generateBubbleHat(WorldAccess world, Random random, BlockPos origin, int height, HugeNetherMushroomFeatureConfig config)
+	protected void generateBubbleHat(WorldAccess world, Random random, BlockPos origin, int stemHeight, int hatSize, HugeNetherMushroomFeatureConfig config)
 	{
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		for (int i = height - 3; i <= height; ++i)
+		for (int i = stemHeight - hatSize; i <= stemHeight; ++i)
 		{
-			int j = i < height ? config.hatSize : config.hatSize - 1;
-			int k = config.hatSize - 2;
+			int j = i < stemHeight ? hatSize : hatSize - 1;
+			int k = hatSize - 2;
 			for (int l = -j; l <= j; ++l)
 			{
 				for (int m = -j; m <= j; ++m)
@@ -85,13 +86,13 @@ public class HugeNetherMushroomFeature extends Feature<HugeNetherMushroomFeature
 					boolean bl4 = m == j;
 					boolean bl5 = bl || bl2;
 					boolean bl6 = bl3 || bl4;
-					if (i >= height || bl5 != bl6)
+					if (i >= stemHeight || bl5 != bl6)
 					{
 						mutable.set(origin, l, config.upsideDown ? -i : i, m);
 						if (!world.getBlockState(mutable).isOpaqueFullCube(world, mutable))
 						{
-							boolean bl7 = i >= height - 1;
-							boolean bl8 = i <= height - 3;
+							boolean bl7 = i >= stemHeight - 1;
+							boolean bl8 = i <= stemHeight - 3;
 							boolean up = config.upsideDown ? bl8 : bl7;
 							boolean down = config.upsideDown ? bl7 : bl8;
 							BlockState state = config.hatState.with(MushroomBlock.UP, up).with(MushroomBlock.DOWN, down).with(MushroomBlock.WEST, l < -k).with(MushroomBlock.EAST, l > k).with(MushroomBlock.NORTH, m < -k).with(MushroomBlock.SOUTH, m > k);
@@ -103,29 +104,28 @@ public class HugeNetherMushroomFeature extends Feature<HugeNetherMushroomFeature
 		}
 	}
 
-	protected void generateFlatHat(WorldAccess world, Random random, BlockPos origin, int height, HugeNetherMushroomFeatureConfig config)
+	protected void generateFlatHat(WorldAccess world, Random random, BlockPos origin, int stemHeight, int hatSize, HugeNetherMushroomFeatureConfig config)
 	{
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		int i = config.hatSize;
-		for (int j = -i; j <= i; ++j)
+		for (int j = -hatSize; j <= hatSize; ++j)
 		{
-			for (int k = -i; k <= i; ++k)
+			for (int k = -hatSize; k <= hatSize; ++k)
 			{
-				boolean bl = j == -i;
-				boolean bl2 = j == i;
-				boolean bl3 = k == -i;
-				boolean bl4 = k == i;
+				boolean bl = j == -hatSize;
+				boolean bl2 = j == hatSize;
+				boolean bl3 = k == -hatSize;
+				boolean bl4 = k == hatSize;
 				boolean bl5 = bl || bl2;
 				boolean bl6 = bl3 || bl4;
 				if (!bl5 || !bl6)
 				{
-					mutable.set(origin, j, config.upsideDown ? -height : height, k);
+					mutable.set(origin, j, config.upsideDown ? -stemHeight : stemHeight, k);
 					if (!world.getBlockState(mutable).isOpaqueFullCube(world, mutable))
 					{
-						boolean bl7 = bl || bl6 && j == 1 - i;
-						boolean bl8 = bl2 || bl6 && j == i - 1;
-						boolean bl9 = bl3 || bl5 && k == 1 - i;
-						boolean bl10 = bl4 || bl5 && k == i - 1;
+						boolean bl7 = bl || bl6 && j == 1 - hatSize;
+						boolean bl8 = bl2 || bl6 && j == hatSize - 1;
+						boolean bl9 = bl3 || bl5 && k == 1 - hatSize;
+						boolean bl10 = bl4 || bl5 && k == hatSize - 1;
 						BlockState state = config.hatState.with(MushroomBlock.UP, !config.upsideDown).with(MushroomBlock.DOWN, config.upsideDown).with(MushroomBlock.WEST, bl7).with(MushroomBlock.EAST, bl8).with(MushroomBlock.NORTH, bl9).with(MushroomBlock.SOUTH, bl10);
 						this.generateHatBlock(world, random, mutable, state, config);
 					}
@@ -171,14 +171,26 @@ public class HugeNetherMushroomFeature extends Feature<HugeNetherMushroomFeature
 		}
 	}
 
-	protected int getHeight(Random random, HugeNetherMushroomFeatureConfig config)
+	protected int getStemHeight(Random random, HugeNetherMushroomFeatureConfig config)
 	{
-		int i = config.baseHeight + random.nextInt(config.randomHeight);
+		int i = config.stemBaseHeight + random.nextInt(config.stepRandomHeight);
 		if (random.nextInt(12) == 0)
 		{
 			i *= 2;
 		}
 		return i;
+	}
+
+	protected int getHatSize(Random random, HugeNetherMushroomFeatureConfig config)
+	{
+		if(config.hatRandomSize == 0)
+		{
+			return config.hatBaseSize;
+		}
+		else
+		{
+			return config.hatBaseSize + random.nextInt(config.hatRandomSize);
+		}
 	}
 
 	@Nullable

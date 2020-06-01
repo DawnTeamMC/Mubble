@@ -36,12 +36,12 @@ public class TritanopianGalleryBiome extends GalleryBiome
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.PINK_HUGE_NETHER_MUSHROOM.setFlatHat()),
-								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.CYAN_HUGE_NETHER_MUSHROOM.setFlatHat(3))))
+								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.CYAN_HUGE_NETHER_MUSHROOM.setFlatHat().setHatBaseSize(3))))
 						.createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(2))));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.PINK_HUGE_NETHER_MUSHROOM.setFlatHat().setUpsideDown()),
-								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.CYAN_HUGE_NETHER_MUSHROOM.setFlatHat(3).setUpsideDown())))
+								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.CYAN_HUGE_NETHER_MUSHROOM.setFlatHat().setUpsideDown().setHatBaseSize(3))))
 						.createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(2))));
 	}
 }

@@ -13,18 +13,21 @@ public class HugeNetherMushroomFeatureConfig implements FeatureConfig
 		return instance.group(BlockState.field_24734.fieldOf("stem_state").forGetter((config) ->
 		{
 			return config.stemState;
-		}), Codec.INT.fieldOf("base_height").forGetter((config) ->
+		}), Codec.INT.fieldOf("stem_base_height").forGetter((config) ->
 		{
-			return config.baseHeight;
-		}), Codec.INT.fieldOf("random_height").forGetter((config) ->
+			return config.stemBaseHeight;
+		}), Codec.INT.fieldOf("stem_random_height").forGetter((config) ->
 		{
-			return config.randomHeight;
+			return config.stepRandomHeight;
 		}), BlockState.field_24734.fieldOf("hat_state").forGetter((config) ->
 		{
 			return config.hatState;
-		}), Codec.INT.fieldOf("hat_size").withDefault(2).forGetter((config) ->
+		}), Codec.INT.fieldOf("hat_base_size").forGetter((config) ->
 		{
-			return config.hatSize;
+			return config.hatBaseSize;
+		}), Codec.INT.fieldOf("hat_random_size").forGetter((config) ->
+		{
+			return config.hatRandomSize;
 		}), Codec.BOOL.fieldOf("flat_hat").withDefault(false).forGetter((config) ->
 		{
 			return config.flatHat;
@@ -43,23 +46,25 @@ public class HugeNetherMushroomFeatureConfig implements FeatureConfig
 		})).apply(instance, HugeNetherMushroomFeatureConfig::new);
 	});
 	public final BlockState stemState;
-	public final int baseHeight;
-	public final int randomHeight;
+	public final int stemBaseHeight;
+	public final int stepRandomHeight;
 	public final BlockState hatState;
-	public final int hatSize;
+	public final int hatBaseSize;
+	public final int hatRandomSize;
 	public final boolean flatHat;
 	public final BlockState decorationState;
 	public final double decorationChance;
 	public final double vineChance;
 	public final boolean upsideDown;
 
-	private HugeNetherMushroomFeatureConfig(BlockState stemState, int baseHeight, int randomHeight, BlockState hatState, int hatSize, boolean flatHat, BlockState decorationState, double decorationChance, double vineChance, boolean upsideDown)
+	private HugeNetherMushroomFeatureConfig(BlockState stemState, int stemBaseHeight, int stepRandomHeight, BlockState hatState, int hatBaseSize, int hatRandomSize, boolean flatHat, BlockState decorationState, double decorationChance, double vineChance, boolean upsideDown)
 	{
 		this.stemState = stemState;
-		this.baseHeight = baseHeight;
-		this.randomHeight = randomHeight;
+		this.stemBaseHeight = stemBaseHeight;
+		this.stepRandomHeight = stepRandomHeight;
 		this.hatState = hatState;
-		this.hatSize = hatSize;
+		this.hatBaseSize = hatBaseSize;
+		this.hatRandomSize = hatRandomSize;
 		this.flatHat = flatHat;
 		this.decorationState = decorationState;
 		this.decorationChance = decorationChance;
@@ -67,13 +72,14 @@ public class HugeNetherMushroomFeatureConfig implements FeatureConfig
 		this.upsideDown = upsideDown;
 	}
 
-	public HugeNetherMushroomFeatureConfig(int baseHeight, int randomHeight, BlockState hatState, int hatSize, BlockState decorationState, double decorationChance, double vineChance)
+	public HugeNetherMushroomFeatureConfig(int stemBaseHeight, int stepRandomHeight, BlockState hatState, int hatBaseSize, int hatRandomSize, BlockState decorationState, double decorationChance, double vineChance)
 	{
 		this.stemState = Blocks.MUSHROOM_STEM.getDefaultState();
-		this.baseHeight = baseHeight;
-		this.randomHeight = randomHeight;
+		this.stemBaseHeight = stemBaseHeight;
+		this.stepRandomHeight = stepRandomHeight;
 		this.hatState = hatState;
-		this.hatSize = hatSize;
+		this.hatBaseSize = hatBaseSize;
+		this.hatRandomSize = hatRandomSize;
 		this.flatHat = false;
 		this.decorationState = decorationState;
 		this.decorationChance = decorationChance;
@@ -83,16 +89,21 @@ public class HugeNetherMushroomFeatureConfig implements FeatureConfig
 
 	public HugeNetherMushroomFeatureConfig setUpsideDown()
 	{
-		return new HugeNetherMushroomFeatureConfig(this.stemState, this.baseHeight, this.randomHeight, this.hatState, this.hatSize, this.flatHat, this.decorationState, this.decorationChance, this.vineChance, true);
+		return new HugeNetherMushroomFeatureConfig(this.stemState, this.stemBaseHeight, this.stepRandomHeight, this.hatState, this.hatBaseSize, this.hatRandomSize, this.flatHat, this.decorationState, this.decorationChance, this.vineChance, true);
 	}
 
 	public HugeNetherMushroomFeatureConfig setFlatHat()
 	{
-		return new HugeNetherMushroomFeatureConfig(this.stemState, this.baseHeight, this.randomHeight, this.hatState, this.hatSize, true, this.decorationState, this.decorationChance, this.vineChance, this.upsideDown);
+		return new HugeNetherMushroomFeatureConfig(this.stemState, this.stemBaseHeight, this.stepRandomHeight, this.hatState, this.hatBaseSize, this.hatRandomSize, true, this.decorationState, this.decorationChance, this.vineChance, this.upsideDown);
 	}
 
-	public HugeNetherMushroomFeatureConfig setFlatHat(int hatSize)
+	public HugeNetherMushroomFeatureConfig setHatBaseSize(int hatBaseSize)
 	{
-		return new HugeNetherMushroomFeatureConfig(this.stemState, this.baseHeight, this.randomHeight, this.hatState, hatSize, true, this.decorationState, this.decorationChance, this.vineChance, this.upsideDown);
+		return new HugeNetherMushroomFeatureConfig(this.stemState, this.stemBaseHeight, this.stepRandomHeight, this.hatState, hatBaseSize, this.hatRandomSize, this.flatHat, this.decorationState, this.decorationChance, this.vineChance, this.upsideDown);
+	}
+
+	public HugeNetherMushroomFeatureConfig setHatRandomSize(int hatRandomSize)
+	{
+		return new HugeNetherMushroomFeatureConfig(this.stemState, this.stemBaseHeight, this.stepRandomHeight, this.hatState, this.hatBaseSize, hatRandomSize, this.flatHat, this.decorationState, this.decorationChance, this.vineChance, this.upsideDown);
 	}
 }
