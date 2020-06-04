@@ -92,7 +92,7 @@ public class HugeNetherMushroomFeature extends Feature<HugeNetherMushroomFeature
 						if (!world.getBlockState(mutable).isOpaqueFullCube(world, mutable))
 						{
 							boolean bl7 = i >= stemHeight - 1;
-							boolean bl8 = i <= stemHeight - 3;
+							boolean bl8 = i <= stemHeight - hatSize;
 							boolean up = config.upsideDown ? bl8 : bl7;
 							boolean down = config.upsideDown ? bl7 : bl8;
 							BlockState state = config.hatState.with(MushroomBlock.UP, up).with(MushroomBlock.DOWN, down).with(MushroomBlock.WEST, l < -k).with(MushroomBlock.EAST, l > k).with(MushroomBlock.NORTH, m < -k).with(MushroomBlock.SOUTH, m > k);
