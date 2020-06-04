@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.tag.FluidTags;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
@@ -43,7 +44,7 @@ public class CappyCostume extends HeadCostume
 	}
 
 	@Override
-	public boolean useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity living, Hand hand)
+	public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity living, Hand hand)
 	{
 		ItemEntity entity = (ItemEntity) EntityType.ITEM.spawnFromItemStack(player.world, stack, player, player.getBlockPos(), SpawnReason.DISPENSER, true, false);
 		Random rand = new Random();
