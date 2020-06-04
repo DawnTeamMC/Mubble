@@ -68,7 +68,7 @@ public abstract class LivingEntityMixin
 	{
 		LivingEntity entity = (LivingEntity) (Object) this;
 		World world = entity.getEntityWorld();
-		if (causedByPlayer)
+		if (causedByPlayer && source.getAttacker() instanceof PlayerEntity)
 		{
 			PlayerEntity player = (PlayerEntity) source.getAttacker();
 			LootTable lootTable = world.getServer().getLootManager().getTable(entity.getLootTable());
