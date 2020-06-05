@@ -1292,6 +1292,7 @@
 
 	"comment": "ENCHANTMENTS",
 	"enchantment.mubble.telekinesis": "Télékinésie",
+	"enchantment.mubble.ignorance_curse": "Malédiction d'ignorance",
 
 
 
@@ -1328,6 +1329,11 @@
 	"biome.mubble.pumpkin_pastures": "Champs de citrouilles",
 	"biome.mubble.pink_cherry_oak_forest": "Forêt de cerisiers roses",
 	"biome.mubble.white_cherry_oak_forest": "Forêt de cerisiers blancs",
+	"biome.mubble.tall_crimson_forest": "Grande forêt carmin",
+	"biome.mubble.tall_warped_forest": "Grande forêt biscornue",
+	"biome.mubble.tritanopian_gallery": "Galerie tritanopienne",
+	"biome.mubble.achromatopsian_gallery": "Galerie achromatopsienne",
+	"biome.mubble.protanopian_gallery": "Galerie protanopienne",
 	
 	"biome.mubble.press_garden": "Jardin de presse",
 

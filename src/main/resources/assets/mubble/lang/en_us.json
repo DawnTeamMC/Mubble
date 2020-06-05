@@ -1292,6 +1292,7 @@
 
 	"comment": "ENCHANTMENTS",
 	"enchantment.mubble.telekinesis": "Telekinesis",
+	"enchantment.mubble.ignorance_curse": "Curse of Ignorance",
 
 
 
@@ -1328,6 +1329,11 @@
 	"biome.mubble.pumpkin_pastures": "Pumpkin Pastures",
 	"biome.mubble.pink_cherry_oak_forest": "Pink Cherry Oak Forest",
 	"biome.mubble.white_cherry_oak_forest": "White Cherry Oak Forest",
+	"biome.mubble.tall_crimson_forest": "Tall Crimson Forest",
+	"biome.mubble.tall_warped_forest": "Tall Warped Forest",
+	"biome.mubble.tritanopian_gallery": "Tritanopian Gallery",
+	"biome.mubble.achromatopsian_gallery": "Achromatopsian Gallery",
+	"biome.mubble.protanopian_gallery": "Protanopian Gallery",
 
 	"biome.mubble.press_garden": "Press Garden",
 
