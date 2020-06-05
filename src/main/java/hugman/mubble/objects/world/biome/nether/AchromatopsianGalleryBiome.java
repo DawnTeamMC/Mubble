@@ -13,7 +13,7 @@ public class AchromatopsianGalleryBiome extends GalleryBiome
 {
 	public AchromatopsianGalleryBiome()
 	{
-		super();
+		super(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION,
 				Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.WHITE_MUSHROOM_PATCHES)
 						.createDecoratedFeature(Decorator.CHANCE_RANGE

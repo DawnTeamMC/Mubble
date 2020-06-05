@@ -24,7 +24,7 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public abstract class GalleryBiome extends Biome
 {
-	protected GalleryBiome()
+	protected GalleryBiome(MixedNoisePoint noisePoint)
 	{
 		super((new Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)
@@ -44,7 +44,7 @@ public abstract class GalleryBiome extends Biome
 						.music(MusicType.method_27283(SoundEvents.MUSIC_NETHER_NETHER_WASTES))
 						.build())
 				.parent("nether_wastes")
-				.noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 0.0F))));
+				.noises(ImmutableList.of(noisePoint)));
 		this.addStructureFeature(DefaultBiomeFeatures.NETHER_CONFIGURED_RUINED_PORTAL);
 		this.addStructureFeature(DefaultBiomeFeatures.field_24701);
 		this.addStructureFeature(DefaultBiomeFeatures.field_24705);
