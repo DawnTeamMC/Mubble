@@ -2,7 +2,7 @@ package hugman.mubble.objects.item.costume;
 
 import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.client.MubbleShaders;
-import hugman.mubble.mixin.GameRendererAccessor;
+import hugman.mubble.mixin.client.GameRendererAccessor;
 import hugman.mubble.util.CalendarEvents;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;

@@ -25,23 +25,23 @@ import java.util.Random;
 public class MobEntityMixin
 {
 	@Inject(method = "getPreferredEquipmentSlot", at = @At(value = "TAIL"), cancellable = true)
-	private static void getPreferredEquipmentSlot(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> cir)
+	private static void getPreferredEquipmentSlot(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> info)
 	{
 		Item item = stack.getItem();
 		if (item instanceof Costume)
 		{
 			Costume costume = (Costume) item;
-			cir.setReturnValue(costume.getArmorType());
+			info.setReturnValue(costume.getArmorType());
 		}
 		else if (item instanceof BlockCostume)
 		{
 			BlockCostume costume = (BlockCostume) item;
-			cir.setReturnValue(costume.getArmorType());
+			info.setReturnValue(costume.getArmorType());
 		}
 	}
 
 	@Inject(method = "initialize", at = @At(value = "TAIL"), cancellable = true)
-	private void initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason spawnType, EntityData entityData, CompoundTag entityTag, CallbackInfoReturnable<EntityData> cir)
+	private void initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason spawnType, EntityData entityData, CompoundTag entityTag, CallbackInfoReturnable<EntityData> info)
 	{
 		MobEntity entity = (MobEntity) (Object) this;
 		Random rand = new Random();
@@ -56,6 +56,6 @@ public class MobEntityMixin
 				}
 			}
 		}
-		cir.setReturnValue(entityData);
+		info.setReturnValue(entityData);
 	}
 }

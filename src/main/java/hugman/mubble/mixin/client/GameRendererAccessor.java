@@ -1,4 +1,4 @@
-package hugman.mubble.mixin;
+package hugman.mubble.mixin.client;
 
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.util.Identifier;

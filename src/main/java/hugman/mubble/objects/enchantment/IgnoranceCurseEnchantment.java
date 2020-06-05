@@ -4,28 +4,40 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 
-public class TelekinesisEnchantment extends Enchantment
+public class IgnoranceCurseEnchantment extends Enchantment
 {
-	public TelekinesisEnchantment(Rarity rarity, EquipmentSlot... slotTypes)
+	public IgnoranceCurseEnchantment(Rarity rarity, EquipmentSlot... slotTypes)
 	{
-		super(rarity, EnchantmentTarget.WEAPON, slotTypes);
+		super(rarity, EnchantmentTarget.BREAKABLE, slotTypes);
 	}
 
 	@Override
 	public int getMaxLevel()
 	{
-		return 2;
+		return 1;
 	}
 
 	@Override
 	public int getMinPower(int enchantmentLevel)
 	{
-		return 25 + enchantmentLevel * 5;
+		return 25;
 	}
 
 	@Override
 	public int getMaxPower(int enchantmentLevel)
 	{
-		return this.getMinPower(enchantmentLevel) + 15;
+		return 50;
+	}
+
+	@Override
+	public boolean isCursed()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean isTreasure()
+	{
+		return true;
 	}
 }

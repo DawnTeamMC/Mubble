@@ -1,4 +1,4 @@
-package hugman.mubble.mixin;
+package hugman.mubble.mixin.client;
 
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.objects.entity.FireballEntity;
@@ -25,7 +25,7 @@ public class ClientPlayNetworkHandlerMixin
 
 	@SuppressWarnings("rawtypes")
 	@Inject(method = "onEntitySpawn", at = @At(value = "HEAD"), cancellable = true)
-	private void onEntitySpawn(EntitySpawnS2CPacket packet, CallbackInfo ci)
+	private void onEntitySpawn(EntitySpawnS2CPacket packet, CallbackInfo info)
 	{
 		ClientPlayNetworkHandler cpnh = (ClientPlayNetworkHandler) (Object) this;
 		MinecraftClient client = MinecraftClient.getInstance();

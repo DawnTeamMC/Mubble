@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class AxeItemMixin
 {
 	@Inject(method = "useOnBlock", at = @At(value = "HEAD"), cancellable = true)
-	private void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir)
+	private void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info)
 	{
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos();
@@ -41,11 +41,11 @@ public class AxeItemMixin
 					});
 				}
 			}
-			cir.setReturnValue(ActionResult.SUCCESS);
+			info.setReturnValue(ActionResult.SUCCESS);
 		}
 		else
 		{
-			cir.setReturnValue(ActionResult.PASS);
+			info.setReturnValue(ActionResult.PASS);
 		}
 	}
 }

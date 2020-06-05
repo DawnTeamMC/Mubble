@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class LivingEntityMixin
 {
 	@Inject(method = "jump", at = @At(value = "TAIL"), cancellable = true)
-	private void jump(CallbackInfo ci)
+	private void jump(CallbackInfo info)
 	{
 		LivingEntity entity = (LivingEntity) (Object) this;
 		if (entity.hasStatusEffect(MubbleEffects.HEAVINESS))
@@ -38,7 +38,7 @@ public abstract class LivingEntityMixin
 	}
 
 	@Inject(method = "tick", at = @At(value = "TAIL"), cancellable = true)
-	private void tick(CallbackInfo ci)
+	private void tick(CallbackInfo info)
 	{
 		LivingEntity entity = (LivingEntity) (Object) this;
 		World world = entity.getEntityWorld();
@@ -53,7 +53,7 @@ public abstract class LivingEntityMixin
 	}
 
 	@Inject(method = "swingHand", at = @At(value = "TAIL"), cancellable = true)
-	private void swingHand(Hand hand, CallbackInfo ci)
+	private void swingHand(Hand hand, CallbackInfo info)
 	{
 		LivingEntity entity = (LivingEntity) (Object) this;
 		ItemStack stack = entity.getMainHandStack();
@@ -64,7 +64,7 @@ public abstract class LivingEntityMixin
 	}
 
 	@Inject(method = "dropLoot", at = @At(value = "HEAD"), cancellable = true)
-	private void dropLoot(DamageSource source, boolean causedByPlayer, CallbackInfo ci)
+	private void dropLoot(DamageSource source, boolean causedByPlayer, CallbackInfo info)
 	{
 		LivingEntity entity = (LivingEntity) (Object) this;
 		World world = entity.getEntityWorld();
@@ -79,13 +79,13 @@ public abstract class LivingEntityMixin
 				{
 					player.inventory.insertStack(stack);
 				}
-				ci.cancel();
+				info.cancel();
 			}
 		}
 	}
 
 	@Inject(method = "dropXp", at = @At(value = "HEAD"), cancellable = true)
-	private void dropXp(CallbackInfo ci)
+	private void dropXp(CallbackInfo info)
 	{
 		LivingEntity entity = (LivingEntity) (Object) this;
 		LivingEntity attacker = entity.getAttacker();
@@ -97,7 +97,7 @@ public abstract class LivingEntityMixin
 				if (EnchantmentUtil.hasEnchantment(MubbleEnchantments.TELEKINESIS, player.getMainHandStack()))
 				{
 					player.addExperience(this.getCurrentExperience(player));
-					ci.cancel();
+					info.cancel();
 				}
 			}
 		}

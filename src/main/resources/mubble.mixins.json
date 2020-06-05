@@ -6,11 +6,12 @@
 		"AxeItemMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
-		"PlayerEntityMixin",
+		"PlayerEntityMixin"
 	],
 	"client": [
-		"ClientPlayNetworkHandlerMixin",
-		"GameRendererAccessor",
+		"client.ClientPlayNetworkHandlerMixin",
+		"client.GameRendererAccessor",
+		"client.ItemStackMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

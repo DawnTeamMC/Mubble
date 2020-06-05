@@ -1,6 +1,6 @@
 package hugman.mubble.objects.item.costume;
 
-import hugman.mubble.mixin.GameRendererAccessor;
+import hugman.mubble.mixin.client.GameRendererAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;

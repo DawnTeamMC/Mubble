@@ -23,7 +23,7 @@ public class PlayerEntityMixin
 	private static ItemStack prevStack;
 
 	@Inject(method = "interact", at = @At(value = "TAIL"), cancellable = true)
-	private void interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir)
+	private void interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> info)
 	{
 		PlayerEntity player = (PlayerEntity) (Object) this;
 		ItemStack stack = player.getStackInHand(hand);
@@ -38,13 +38,13 @@ public class PlayerEntityMixin
 				}
 				player.swingHand(hand);
 				pufferfish.playSound(MubbleSounds.ENTITY_PUFFERFISH_AEUGH, 0.6F, 1.0F);
-				cir.setReturnValue(ActionResult.SUCCESS);
+				info.setReturnValue(ActionResult.SUCCESS);
 			}
 		}
 	}
 
 	@Inject(method = "tick", at = @At(value = "TAIL"), cancellable = true)
-	private void tick(CallbackInfo ci)
+	private void tick(CallbackInfo info)
 	{
 		PlayerEntity player = (PlayerEntity) (Object) this;
 		World world = player.getEntityWorld();
