@@ -15,7 +15,7 @@ public class ProtanopianGalleryBiome extends GalleryBiome
 {
 	public ProtanopianGalleryBiome()
 	{
-		super(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		super(new MixedNoisePoint(0.025F, 0.1F, 0.0F, 0.0F, 0.05F));
 		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION,
 				Feature.RANDOM_PATCH.configure(DefaultBiomeFeatures.BROWN_MUSHROOM_CONFIG)
 						.createDecoratedFeature(Decorator.CHANCE_RANGE

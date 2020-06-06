@@ -13,7 +13,7 @@ public class TritanopianGalleryBiome extends GalleryBiome
 {
 	public TritanopianGalleryBiome()
 	{
-		super(new MixedNoisePoint(0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
+		super(new MixedNoisePoint(0.05F, 0.025F, 0.0F, 0.0F, 0.05F));
 		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION,
 				Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.PINK_MUSHROOM_PATCHES)
 						.createDecoratedFeature(Decorator.CHANCE_RANGE

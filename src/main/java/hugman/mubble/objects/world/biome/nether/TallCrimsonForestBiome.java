@@ -44,7 +44,7 @@ public class TallCrimsonForestBiome extends Biome
 						.additionsSound(new BiomeAdditionsSound(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS, 0.0111D))
 						.music(MusicType.method_27283(SoundEvents.MUSIC_NETHER_CRIMSON_FOREST))
 						.build())
-				.noises(ImmutableList.of(new MixedNoisePoint(0.4F, 0.0F, 0.0F, 0.0F, 0.0F)))
+				.noises(ImmutableList.of(new MixedNoisePoint(0.4F, 0.0F, 0.1F, 0.0F, 0.0F)))
 				.parent("crimson_forest"));
 		this.addStructureFeature(DefaultBiomeFeatures.NETHER_CONFIGURED_RUINED_PORTAL);
 		this.addCarver(GenerationStep.Carver.AIR, configureCarver(Carver.NETHER_CAVE, new ProbabilityConfig(0.2F)));

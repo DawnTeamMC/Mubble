@@ -45,7 +45,7 @@ public class TallWarpedForestBiome extends Biome
 						.music(MusicType.method_27283(SoundEvents.MUSIC_NETHER_WARPED_FOREST))
 						.build())
 				.parent("warped_forest")
-				.noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.5F, 0.0F, 0.0F, 0.375F))));
+				.noises(ImmutableList.of(new MixedNoisePoint(0.0F, 0.5F, 0.1F, 0.0F, 0.375F))));
 		this.addStructureFeature(DefaultBiomeFeatures.NETHER_CONFIGURED_RUINED_PORTAL);
 		this.addStructureFeature(DefaultBiomeFeatures.field_24701);
 		this.addStructureFeature(DefaultBiomeFeatures.field_24705);
