@@ -1,7 +1,6 @@
 package hugman.mubble.objects.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import com.sun.istack.internal.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -210,7 +209,6 @@ public class TallHugeFungusFeature extends Feature<HugeFungusFeatureConfig>
 
 	}
 
-	@Nullable
 	private static BlockPos.Mutable getStartPos(WorldAccess world, BlockPos origin, Block block)
 	{
 		BlockPos.Mutable mutable = origin.mutableCopy();

@@ -1,7 +1,6 @@
 package hugman.mubble.mixin.client;
 
 import com.google.common.collect.Lists;
-import com.sun.istack.internal.Nullable;
 import hugman.mubble.init.MubbleEnchantments;
 import hugman.mubble.util.EnchantmentUtil;
 import net.minecraft.client.font.TextRenderer;
@@ -25,7 +24,7 @@ import java.util.List;
 public class ItemRendererMixin
 {
 	@Inject(method = "renderGuiItemOverlay", at = @At(value = "TAIL"), cancellable = true)
-	private void renderGuiItemOverlay(TextRenderer fontRenderer, ItemStack stack, int x, int y, @Nullable String amountText, CallbackInfoReturnable<List<Text>> info)
+	private void renderGuiItemOverlay(TextRenderer fontRenderer, ItemStack stack, int x, int y, String amountText, CallbackInfoReturnable<List<Text>> info)
 	{
 		//bruh just cancel the durability from showing up
 	}

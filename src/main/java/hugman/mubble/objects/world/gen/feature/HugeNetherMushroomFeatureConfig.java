@@ -10,7 +10,7 @@ public class HugeNetherMushroomFeatureConfig implements FeatureConfig
 {
 	public static final Codec<HugeNetherMushroomFeatureConfig> CODEC = RecordCodecBuilder.create((instance) ->
 	{
-		return instance.group(BlockState.field_24734.fieldOf("stem_state").forGetter((config) ->
+		return instance.group(BlockState.CODEC.fieldOf("stem_state").forGetter((config) ->
 		{
 			return config.stemState;
 		}), Codec.INT.fieldOf("stem_base_height").forGetter((config) ->
@@ -19,7 +19,7 @@ public class HugeNetherMushroomFeatureConfig implements FeatureConfig
 		}), Codec.INT.fieldOf("stem_random_height").forGetter((config) ->
 		{
 			return config.stepRandomHeight;
-		}), BlockState.field_24734.fieldOf("hat_state").forGetter((config) ->
+		}), BlockState.CODEC.fieldOf("hat_state").forGetter((config) ->
 		{
 			return config.hatState;
 		}), Codec.INT.fieldOf("hat_base_size").forGetter((config) ->
@@ -31,7 +31,7 @@ public class HugeNetherMushroomFeatureConfig implements FeatureConfig
 		}), Codec.BOOL.fieldOf("flat_hat").withDefault(false).forGetter((config) ->
 		{
 			return config.flatHat;
-		}), BlockState.field_24734.fieldOf("decor_state").forGetter((config) ->
+		}), BlockState.CODEC.fieldOf("decor_state").forGetter((config) ->
 		{
 			return config.decorationState;
 		}), Codec.DOUBLE.fieldOf("decor_chance").forGetter((config) ->

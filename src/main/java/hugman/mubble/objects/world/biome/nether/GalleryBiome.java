@@ -45,9 +45,9 @@ public abstract class GalleryBiome extends Biome
 						.build())
 				.parent("nether_wastes")
 				.noises(ImmutableList.of(noisePoint)));
-		this.addStructureFeature(DefaultBiomeFeatures.NETHER_CONFIGURED_RUINED_PORTAL);
-		this.addStructureFeature(DefaultBiomeFeatures.field_24701);
-		this.addStructureFeature(DefaultBiomeFeatures.field_24705);
+		this.addStructureFeature(DefaultBiomeFeatures.NETHER_RUINED_PORTAL);
+		this.addStructureFeature(DefaultBiomeFeatures.FORTRESS);
+		this.addStructureFeature(DefaultBiomeFeatures.BASTION_REMNANT);
 		this.addCarver(GenerationStep.Carver.AIR, configureCarver(Carver.NETHER_CAVE, new ProbabilityConfig(0.2F)));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.LAVA_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_VERY_BIASED_RANGE.configure(new RangeDecoratorConfig(20, 8, 16, 256))));
 		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, Feature.SPRING_FEATURE.configure(DefaultBiomeFeatures.NETHER_SPRING_CONFIG).createDecoratedFeature(Decorator.COUNT_RANGE.configure(new RangeDecoratorConfig(8, 4, 8, 128))));

@@ -36,9 +36,9 @@ public class PinkCherryOakForestBiome extends Biome
 						.moodSound(BiomeMoodSound.CAVE)
 						.build())
 				.parent(null));
-		this.addStructureFeature(DefaultBiomeFeatures.field_24687);
+		this.addStructureFeature(DefaultBiomeFeatures.PILLAGER_OUTPOST);
 		DefaultBiomeFeatures.method_28440(this);
-		this.addStructureFeature(DefaultBiomeFeatures.STANDARD_CONFIGURED_RUINED_PORTAL);
+		this.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL);
 		DefaultBiomeFeatures.addLandCarvers(this);
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		DefaultBiomeFeatures.addDungeons(this);

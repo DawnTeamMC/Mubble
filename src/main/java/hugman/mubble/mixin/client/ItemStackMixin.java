@@ -1,7 +1,6 @@
 package hugman.mubble.mixin.client;
 
 import com.google.common.collect.Lists;
-import com.sun.istack.internal.Nullable;
 import hugman.mubble.init.MubbleEnchantments;
 import hugman.mubble.util.EnchantmentUtil;
 import net.minecraft.client.item.TooltipContext;
@@ -23,7 +22,7 @@ import java.util.List;
 public class ItemStackMixin
 {
 	@Inject(method = "getTooltip", at = @At(value = "TAIL"), cancellable = true)
-	private void getTooltip(@Nullable PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> info)
+	private void getTooltip(PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> info)
 	{
 		ItemStack itemStack = (ItemStack) (Object) this;
 		if (player != null)

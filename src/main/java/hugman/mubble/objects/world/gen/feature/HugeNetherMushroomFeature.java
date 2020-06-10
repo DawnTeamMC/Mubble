@@ -1,7 +1,6 @@
 package hugman.mubble.objects.world.gen.feature;
 
 import com.mojang.serialization.Codec;
-import com.sun.istack.internal.Nullable;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
@@ -193,7 +192,6 @@ public class HugeNetherMushroomFeature extends Feature<HugeNetherMushroomFeature
 		}
 	}
 
-	@Nullable
 	private static BlockPos.Mutable getOrigin(WorldAccess world, BlockPos pos, int height, HugeNetherMushroomFeatureConfig config)
 	{
 		BlockPos.Mutable mutable = pos.mutableCopy();

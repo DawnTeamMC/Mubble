@@ -120,7 +120,7 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 			int k = x + j % 4 * 16;
 			int l = j / 4;
 			int m = y + l * 18 + 2;
-			this.client.getItemRenderer().renderGuiItem(new ItemStack(list.get(i)), k, m);
+			this.client.getItemRenderer().renderInGuiWithOverrides(new ItemStack(list.get(i)), k, m);
 		}
 
 	}
