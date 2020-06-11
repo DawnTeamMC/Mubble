@@ -63,6 +63,6 @@ public abstract class GalleryBiome extends Biome
 		this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.MAGMA_CUBE, 2, 4, 4));
 		this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
 		this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
-		this.addSpawn(SpawnGroup.CREATURE, new SpawnEntry(EntityType.STRIDER, 60, 2, 4));
+		this.addSpawn(SpawnGroup.CREATURE, new SpawnEntry(EntityType.STRIDER, 60, 1, 2));
 	}
 }

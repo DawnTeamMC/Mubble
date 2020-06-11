@@ -31,7 +31,7 @@ public class CappyCostume extends HeadCostume
 		if (!world.isClient && rand.nextInt(301) == 0)
 		{
 			int random = rand.nextInt(5);
-			if (world.getDimension().isNether() && random <= 3)
+			if (world.getDimension().isUltrawarm() && random <= 3)
 			{
 				world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
 			}
