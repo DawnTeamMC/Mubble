@@ -24,12 +24,6 @@ public class LightsaberItem extends SwordItem
 	{
 		super(MubbleItemTiers.KYBER, 3, -2.4F, builder);
 	}
-	
-	/*@Override
-	public boolean canDisableShield(ItemStack stack, ItemStack shield, LivingEntity entity, LivingEntity attacker)
-	{
-		return true;
-	}*/
 
 	public void onSwing(LivingEntity entity, boolean hitsEntity)
 	{
