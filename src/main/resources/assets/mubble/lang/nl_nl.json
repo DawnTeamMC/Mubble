@@ -158,10 +158,10 @@
 	
 	"block.mubble.autumn_oak_sapling": "Herfsteikkiemplant",
 	"block.mubble.autumn_oak_leaves": "Herfsteikbladeren",
-	"block.mubble.autumn_oak_leaf_pile": "Herfsteikbladeren tapijt",
-	"//block.mubble.autumn_birch_sapling": "Autumn Birch Sapling",
-	"//block.mubble.autumn_birch_leaves": "Autumn Birch Leaves",
-	"//block.mubble.autumn_birch_leaf_pile": "Autumn Birch Leaves Pile",
+	"block.mubble.autumn_oak_leaf_pile": "Herfsteikbladerhoop",
+	"block.mubble.autumn_birch_sapling": "Herfstberkenkiemplant",
+	"block.mubble.autumn_birch_leaves": "Herfstberkenbladeren",
+	"block.mubble.autumn_birch_leaf_pile": "Herfstberkenbladerhoop",
 	
 	"block.mubble.cherry_oak_planks": "Kerseneikhouten planken",
 	"block.mubble.pink_cherry_oak_sapling": "Rozekerseneikkiemplant",
@@ -171,9 +171,9 @@
 	"block.mubble.cherry_oak_wood": "Kerseneikenhout",
 	"block.mubble.stripped_cherry_oak_wood": "Gestript kerseneikenhout",
 	"block.mubble.pink_cherry_oak_leaves": "Rozekerseneikbladeren",
-	"block.mubble.pink_cherry_oak_leaf_pile": "Rozekerseneikbladeren tapijt",
+	"block.mubble.pink_cherry_oak_leaf_pile": "Rozekerseneikbladerhoop",
 	"block.mubble.white_cherry_oak_leaves": "Wittekerseneikbladeren",
-	"block.mubble.white_cherry_oak_leaf_pile": "Wittekerseneikbladeren tapijt",
+	"block.mubble.white_cherry_oak_leaf_pile": "Wittekerseneikbladerhoop",
 	"block.mubble.cherry_oak_pressure_plate": "Kerseneikhouten drukplaat",
 	"block.mubble.cherry_oak_trapdoor": "Kerseneikhouten valluik",
 	"block.mubble.cherry_oak_button": "Kerseneikhouten knop",
@@ -195,7 +195,7 @@
 	"block.mubble.palm_wood": "Palmhout",
 	"block.mubble.stripped_palm_wood": "Gestript palmhout",
 	"block.mubble.palm_leaves": "Palmbladeren",
-	"block.mubble.palm_leaf_pile": "Palmbladeren tapijt",
+	"block.mubble.palm_leaf_pile": "Palmbladerhoop",
 	"block.mubble.palm_pressure_plate": "Palmhouten drukplaat",
 	"block.mubble.palm_trapdoor": "Palmhouten valluik",
 	"block.mubble.palm_button": "Palmhouten knop",
@@ -995,7 +995,7 @@
 	"block.mubble.scarlet_wood": "Scharlakehout",
 	"block.mubble.stripped_scarlet_wood": "Gestript scharlakehout",
 	"block.mubble.scarlet_leaves": "Scharlakebladeren",
-	"block.mubble.scarlet_leaf_pile": "Scarlakebladeren tapijt",
+	"block.mubble.scarlet_leaf_pile": "Scarlakebladerhoop",
 	"block.mubble.scarlet_pressure_plate": "Scharlakehouten drukplaat",
 	"block.mubble.scarlet_trapdoor": "Scharlakehouten valluik",
 	"block.mubble.scarlet_button": "Scharlakehouten knop",
@@ -1047,7 +1047,7 @@
 
 
 	"block.mubble.potted_autumn_oak_sapling": "Gepotte herfsteikkiemplant",
-	"//block.mubble.potted_autumn_birch_sapling": "Potted Autumn Birch Sapling",
+	"block.mubble.potted_autumn_birch_sapling": "Gepotte Herfstberkenkiemplant",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Gepotte rozekerseneikkiemplant",
 	"block.mubble.potted_white_cherry_oak_sapling": "Gepotte wittekerseneikkiemplant",
 	"block.mubble.potted_palm_sapling": "Gepotte palmkiemplant",
@@ -1133,7 +1133,7 @@
 	"item.mubble.nsmbu_key": "Sleutel (NSMBU)",
 
 
-	"//item.mubble.kirby_ball": "Kirby Ball",
+	"item.mubble.kirby_ball": "Kirby bal",
 
 
 	"item.mubble.smash_ball": "Smash bal",
@@ -1315,7 +1315,7 @@
 	"entity.mubble.fireball": "Vuurbal",
 	"entity.mubble.iceball": "IJsbal",
 
-	"//entity.mubble.kirby_ball": "Kirby Ball",
+	"entity.mubble.kirby_ball": "Kirby bal",
 
 
 
@@ -1326,7 +1326,7 @@
 
 
 	"comment": "BIOMES",
-	"//biome.mubble.pumpkin_pastures": "Pumpkin Pastures",
+	"biome.mubble.pumpkin_pastures": "Pompoen weiland",
 	"biome.mubble.pink_cherry_oak_forest": "Rozekerseneiken bos",
 	"biome.mubble.white_cherry_oak_forest": "Wittekerseneiken bos",
 	"//biome.mubble.tall_crimson_forest": "Tall Crimson Forest",
@@ -1363,7 +1363,7 @@
 	"subtitles.mubble.entity.duck.death": "Eend sterft",
 	"subtitles.mubble.entity.fireball.throw": "Vuurbal vliegt",
 	"subtitles.mubble.entity.iceball.throw": "IJsbal vliegt",
-	"//subtitles.mubble.entity.kirby_ball.throw": "Kirby Ball flies",
+	"subtitles.mubble.entity.kirby_ball.throw": "Kirby bal vliegt",
 	"subtitles.mubble.entity.goomba.crush": "Goomba verpletterd",
 	"subtitles.mubble.entity.goomba.hurt": "Goomba heeft pijn",
 	"subtitles.mubble.entity.goomba.death": "Goomba sterft",
