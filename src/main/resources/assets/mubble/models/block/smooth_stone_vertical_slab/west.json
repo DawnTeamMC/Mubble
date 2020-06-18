@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/vertical_slab/west",
-	"textures":
-	{
+	"textures": {
 		"bottom": "minecraft:block/smooth_stone",
 		"top": "minecraft:block/smooth_stone",
 		"block": "minecraft:block/smooth_stone_slab_side"

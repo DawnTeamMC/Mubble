@@ -11,8 +11,7 @@ import net.minecraft.entity.SpawnGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class MubbleEntities
-{
+public class MubbleEntities {
 	/* MUBBLE */
 	public static final EntityType<DuckEntity> DUCK = register("duck", FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, DuckEntity::new).dimensions(EntityDimensions.fixed(0.4F, 0.8F)).trackable(10, 3).build());
 	public static final EntityType<ZombieCowmanEntity> ZOMBIE_COWMAN = register("zombie_cowman", FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ZombieCowmanEntity::new).dimensions(EntityDimensions.fixed(0.6F, 1.95F)).trackable(8, 3).build());
@@ -31,13 +30,11 @@ public class MubbleEntities
 	/* KIRBY */
 	public static final EntityType<KirbyBallEntity> KIRBY_BALL = register("kirby_ball", FabricEntityTypeBuilder.<KirbyBallEntity>create(SpawnGroup.MISC, KirbyBallEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackable(4, 10).build());
 
-	public static <T extends Entity> EntityType<T> register(String name, EntityType<T> builder)
-	{
+	public static <T extends Entity> EntityType<T> register(String name, EntityType<T> builder) {
 		return Registry.register(Registry.ENTITY_TYPE, new Identifier(Mubble.MOD_ID, name), builder);
 	}
 
-	public static void registerEntityAttributes()
-	{
+	public static void registerEntityAttributes() {
 		FabricDefaultAttributeRegistry.register(DUCK, DuckEntity.createDuckAttributes());
 		FabricDefaultAttributeRegistry.register(ZOMBIE_COWMAN, ZombieCowmanEntity.createZombieCowmanAttributes());
 		FabricDefaultAttributeRegistry.register(CHINCHO, ChinchoEntity.createChinchoAttributes());

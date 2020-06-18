@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/pink_tulip_pile"
 		]
 	},
-	"criteria":
-	{
-		"has_flower":
-		{
+	"criteria": {
+		"has_flower": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:pink_tulip"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/pink_tulip_pile"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_flower",
 			"has_the_recipe"

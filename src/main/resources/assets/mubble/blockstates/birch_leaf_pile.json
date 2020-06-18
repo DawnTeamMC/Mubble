@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/birch_leaf_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/birch_leaf_pile"
+		}
 	}
 }

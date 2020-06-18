@@ -1,7 +1,6 @@
 {
 	"parent": "block/crop",
-	"textures":
-	{
+	"textures": {
 		"crop": "mubble:block/salad/1"
 	}
 }

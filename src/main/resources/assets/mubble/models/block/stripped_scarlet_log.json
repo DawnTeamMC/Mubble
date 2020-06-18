@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_column",
-	"textures":
-	{
+	"textures": {
 		"end": "mubble:block/stripped_scarlet_log/top",
 		"side": "mubble:block/stripped_scarlet_log/side"
 	}

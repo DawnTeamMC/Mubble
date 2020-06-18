@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_bottom_top",
-	"textures":
-	{
+	"textures": {
 		"top": "mubble:block/super_note_block/nsmbu/top",
 		"side": "mubble:block/super_note_block/nsmbu/side",
 		"bottom": "mubble:block/super_note_block/nsmbu/bottom"

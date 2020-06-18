@@ -1,10 +1,19 @@
 {
-	"variants":
-	{
-		"type=north":	{"model": "mubble:block/cobblestone_vertical_slab/north"},
-		"type=south":	{"model": "mubble:block/cobblestone_vertical_slab/south"},
-		"type=east":	{"model": "mubble:block/cobblestone_vertical_slab/east"},
-		"type=west":	{"model": "mubble:block/cobblestone_vertical_slab/west"},
-		"type=double":	{"model": "minecraft:block/cobblestone"}
+	"variants": {
+		"type=north": {
+			"model": "mubble:block/cobblestone_vertical_slab/north"
+		},
+		"type=south": {
+			"model": "mubble:block/cobblestone_vertical_slab/south"
+		},
+		"type=east": {
+			"model": "mubble:block/cobblestone_vertical_slab/east"
+		},
+		"type=west": {
+			"model": "mubble:block/cobblestone_vertical_slab/west"
+		},
+		"type=double": {
+			"model": "minecraft:block/cobblestone"
+		}
 	}
 }

@@ -2,11 +2,9 @@ package hugman.mubble.objects.item;
 
 import net.minecraft.item.ToolMaterial;
 
-public class HoeItem extends net.minecraft.item.HoeItem
-{
+public class HoeItem extends net.minecraft.item.HoeItem {
 	/* Extension for internal publicity */
-	public HoeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings)
-	{
+	public HoeItem(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
 		super(material, attackDamage, attackSpeed, settings);
 	}
 }

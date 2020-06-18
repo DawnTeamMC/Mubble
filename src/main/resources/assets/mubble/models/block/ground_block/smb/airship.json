@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_bottom_top",
-	"textures":
-	{
+	"textures": {
 		"top": "mubble:block/ground_block/smb/airship/top",
 		"side": "mubble:block/ground_block/smb/airship/side",
 		"bottom": "mubble:block/ground_block/smb/airship/bottom"

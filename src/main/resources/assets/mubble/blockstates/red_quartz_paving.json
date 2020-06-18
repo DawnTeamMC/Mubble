@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/red_quartz_paving"}
+	"variants": {
+		"": {
+			"model": "mubble:block/red_quartz_paving"
+		}
 	}
 }

@@ -1,21 +1,17 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:brick_vertical_slab",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:green_bricks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:green_brick_vertical_slab",
 		"count": 6
 	}

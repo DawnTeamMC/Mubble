@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:smelting/baguette"
 		]
 	},
-	"criteria":
-	{
-		"has_bread":
-		{
+	"criteria": {
+		"has_bread": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:bread"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:smelting/baguette"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_bread",
 			"has_the_recipe"

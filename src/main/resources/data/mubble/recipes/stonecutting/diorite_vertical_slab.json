@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:diorite"
 	},
 	"result": "mubble:diorite_vertical_slab",

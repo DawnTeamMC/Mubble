@@ -24,59 +24,47 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin
-{
+public abstract class LivingEntityMixin {
 	@Inject(method = "jump", at = @At(value = "TAIL"), cancellable = true)
-	private void jump(CallbackInfo info)
-	{
+	private void jump(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
-		if (entity.hasStatusEffect(MubbleEffects.HEAVINESS))
-		{
+		if(entity.hasStatusEffect(MubbleEffects.HEAVINESS)) {
 			Vec3d vec3d = entity.getVelocity();
 			entity.setVelocity(vec3d.x, vec3d.y - (float) (entity.getStatusEffect(MubbleEffects.HEAVINESS).getAmplifier() + 1) * 0.05F, vec3d.z);
 		}
 	}
 
 	@Inject(method = "tick", at = @At(value = "TAIL"), cancellable = true)
-	private void tick(CallbackInfo info)
-	{
+	private void tick(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		World world = entity.getEntityWorld();
 		ItemStack headItem = entity.getEquippedStack(EquipmentSlot.HEAD);
-		if (!world.isClient)
-		{
-			if (MubbleTags.Items.WEIGHT_HEAVY.contains(headItem.getItem()))
-			{
+		if(!world.isClient) {
+			if(MubbleTags.Items.WEIGHT_HEAVY.contains(headItem.getItem())) {
 				entity.addStatusEffect(new StatusEffectInstance(MubbleEffects.HEAVINESS, 25, 0));
 			}
 		}
 	}
 
 	@Inject(method = "swingHand", at = @At(value = "TAIL"), cancellable = true)
-	private void swingHand(Hand hand, CallbackInfo info)
-	{
+	private void swingHand(Hand hand, CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		ItemStack stack = entity.getMainHandStack();
-		if (stack.getItem() instanceof LightsaberItem)
-		{
+		if(stack.getItem() instanceof LightsaberItem) {
 			((LightsaberItem) stack.getItem()).onSwing(entity, false);
 		}
 	}
 
 	@Inject(method = "dropLoot", at = @At(value = "HEAD"), cancellable = true)
-	private void dropLoot(DamageSource source, boolean causedByPlayer, CallbackInfo info)
-	{
+	private void dropLoot(DamageSource source, boolean causedByPlayer, CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		World world = entity.getEntityWorld();
-		if (causedByPlayer && source.getAttacker() instanceof PlayerEntity)
-		{
+		if(causedByPlayer && source.getAttacker() instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) source.getAttacker();
 			LootTable lootTable = world.getServer().getLootManager().getTable(entity.getLootTable());
 			LootContext.Builder builder = this.getLootContextBuilder(causedByPlayer, source);
-			if (EnchantmentUtil.hasEnchantment(MubbleEnchantments.TELEKINESIS, player.getMainHandStack()))
-			{
-				for (ItemStack stack : lootTable.generateLoot(builder.build(LootContextTypes.ENTITY)))
-				{
+			if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.TELEKINESIS, player.getMainHandStack())) {
+				for(ItemStack stack : lootTable.generateLoot(builder.build(LootContextTypes.ENTITY))) {
 					player.inventory.insertStack(stack);
 				}
 				info.cancel();
@@ -85,17 +73,13 @@ public abstract class LivingEntityMixin
 	}
 
 	@Inject(method = "dropXp", at = @At(value = "HEAD"), cancellable = true)
-	private void dropXp(CallbackInfo info)
-	{
+	private void dropXp(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		LivingEntity attacker = entity.getAttacker();
-		if (attacker instanceof PlayerEntity)
-		{
+		if(attacker instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) attacker;
-			if (!player.getMainHandStack().isEmpty())
-			{
-				if (EnchantmentUtil.hasEnchantment(MubbleEnchantments.TELEKINESIS, player.getMainHandStack()))
-				{
+			if(!player.getMainHandStack().isEmpty()) {
+				if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.TELEKINESIS, player.getMainHandStack())) {
 					player.addExperience(this.getCurrentExperience(player));
 					info.cancel();
 				}

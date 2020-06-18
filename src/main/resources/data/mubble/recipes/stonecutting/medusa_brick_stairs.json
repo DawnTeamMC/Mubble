@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:medusa_bricks"
 	},
 	"result": "mubble:medusa_brick_stairs",

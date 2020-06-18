@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:dark_prismarine_wall",
-	"pattern":
-	[
+	"pattern": [
 		"###",
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:yellow_dark_prismarine"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:yellow_dark_prismarine_wall",
 		"count": 6
 	}

@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/green_terracotta_pressure_plate"
 		]
 	},
-	"criteria":
-	{
-		"has_terracotta":
-		{
+	"criteria": {
+		"has_terracotta": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"tag": "mubble:terracotta/blocks"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/green_terracotta_pressure_plate"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_terracotta",
 			"has_the_recipe"

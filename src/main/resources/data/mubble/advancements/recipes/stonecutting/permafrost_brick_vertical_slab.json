@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:stonecutting/permafrost_brick_vertical_slab"
 		]
 	},
-	"criteria":
-	{
-		"has_permafrost_bricks":
-		{
+	"criteria": {
+		"has_permafrost_bricks": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:permafrost_bricks"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:stonecutting/permafrost_brick_vertical_slab"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_permafrost_bricks",
 			"has_the_recipe"

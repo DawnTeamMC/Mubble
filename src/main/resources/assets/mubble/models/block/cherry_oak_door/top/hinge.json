@@ -1,7 +1,6 @@
 {
 	"parent": "block/door_top_rh",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/cherry_oak_door/bottom",
 		"top": "mubble:block/cherry_oak_door/top"
 	}

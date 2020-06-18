@@ -1,18 +1,14 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:blunite"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:blunite_slab",
 		"count": 6
 	}

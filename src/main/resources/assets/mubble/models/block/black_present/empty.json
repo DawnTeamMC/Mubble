@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/present/empty",
-	"textures":
-	{
+	"textures": {
 		"all": "mubble:block/black_present"
 	}
 }

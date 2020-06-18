@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:black_terracotta"
 	},
 	"result": "mubble:black_terracotta_wall",

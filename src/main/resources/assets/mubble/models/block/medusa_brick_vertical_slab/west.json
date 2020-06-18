@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/vertical_slab/west",
-	"textures":
-	{
+	"textures": {
 		"block": "mubble:block/medusa_bricks"
 	}
 }

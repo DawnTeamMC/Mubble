@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/fluid_tank"
 		]
 	},
-	"criteria":
-	{
-		"has_glass_pane":
-		{
+	"criteria": {
+		"has_glass_pane": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:glass_pane"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/fluid_tank"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_glass_pane",
 			"has_the_recipe"

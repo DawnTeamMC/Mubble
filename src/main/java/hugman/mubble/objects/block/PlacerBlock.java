@@ -8,24 +8,20 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.BlockView;
 
-public class PlacerBlock extends DispenserBlock
-{
+public class PlacerBlock extends DispenserBlock {
 	private static final DispenserBehavior PLACE_BEHAVIOR = new PlaceBreakDispenserBehavior();
 
-	public PlacerBlock(Settings builder)
-	{
+	public PlacerBlock(Settings builder) {
 		super(builder);
 	}
 
 	@Override
-	public BlockEntity createBlockEntity(BlockView world)
-	{
+	public BlockEntity createBlockEntity(BlockView world) {
 		return new PlacerBlockEntity();
 	}
 
 	@Override
-	protected DispenserBehavior getBehaviorForItem(ItemStack stack)
-	{
+	protected DispenserBehavior getBehaviorForItem(ItemStack stack) {
 		return PLACE_BEHAVIOR;
 	}
 }

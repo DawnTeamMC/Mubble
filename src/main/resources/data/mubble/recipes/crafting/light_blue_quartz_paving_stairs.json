@@ -1,21 +1,17 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:quartz_paving_stairs",
-	"pattern":
-	[
+	"pattern": [
 		"#  ",
 		"## ",
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:light_blue_quartz_paving"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:light_blue_quartz_paving_stairs",
 		"count": 4
 	}

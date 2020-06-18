@@ -1,7 +1,6 @@
 {
 	"parent": "block/stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/cherry_oak_planks",
 		"top": "mubble:block/cherry_oak_planks",
 		"side": "mubble:block/cherry_oak_planks"

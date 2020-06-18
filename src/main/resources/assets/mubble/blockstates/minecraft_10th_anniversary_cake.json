@@ -1,12 +1,25 @@
 {
-	"variants":
-	{
-		"bites=0": { "model": "mubble:block/minecraft_10th_anniversary_cake/full" },
-		"bites=1": { "model": "mubble:block/minecraft_10th_anniversary_cake/sliced/1" },
-		"bites=2": { "model": "mubble:block/minecraft_10th_anniversary_cake/sliced/2" },
-		"bites=3": { "model": "mubble:block/minecraft_10th_anniversary_cake/sliced/3" },
-		"bites=4": { "model": "mubble:block/minecraft_10th_anniversary_cake/sliced/4" },
-		"bites=5": { "model": "mubble:block/minecraft_10th_anniversary_cake/sliced/5" },
-		"bites=6": { "model": "mubble:block/minecraft_10th_anniversary_cake/sliced/6" }
+	"variants": {
+		"bites=0": {
+			"model": "mubble:block/minecraft_10th_anniversary_cake/full"
+		},
+		"bites=1": {
+			"model": "mubble:block/minecraft_10th_anniversary_cake/sliced/1"
+		},
+		"bites=2": {
+			"model": "mubble:block/minecraft_10th_anniversary_cake/sliced/2"
+		},
+		"bites=3": {
+			"model": "mubble:block/minecraft_10th_anniversary_cake/sliced/3"
+		},
+		"bites=4": {
+			"model": "mubble:block/minecraft_10th_anniversary_cake/sliced/4"
+		},
+		"bites=5": {
+			"model": "mubble:block/minecraft_10th_anniversary_cake/sliced/5"
+		},
+		"bites=6": {
+			"model": "mubble:block/minecraft_10th_anniversary_cake/sliced/6"
+		}
 	}
 }

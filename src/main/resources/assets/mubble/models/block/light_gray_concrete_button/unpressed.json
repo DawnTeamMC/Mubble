@@ -1,7 +1,6 @@
 {
 	"parent": "block/button",
-	"textures":
-	{
+	"textures": {
 		"texture": "minecraft:block/light_gray_concrete"
 	}
 }

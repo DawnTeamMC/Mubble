@@ -1,24 +1,78 @@
 {
-	"variants":
-	{
-		"":
-		[
-			{ "model": "mubble:block/permarock" },
-			{ "model": "mubble:block/permarock", "x": 90 },
-			{ "model": "mubble:block/permarock", "x": 180 },
-			{ "model": "mubble:block/permarock", "x": 270 },
-			{ "model": "mubble:block/permarock", "y": 90 },
-			{ "model": "mubble:block/permarock", "y": 90, "x": 90 },
-			{ "model": "mubble:block/permarock", "y": 90, "x": 180 },
-			{ "model": "mubble:block/permarock", "y": 90, "x": 270 },
-			{ "model": "mubble:block/permarock", "y": 180 },
-			{ "model": "mubble:block/permarock", "y": 180, "x": 90 },
-			{ "model": "mubble:block/permarock", "y": 180, "x": 180 },
-			{ "model": "mubble:block/permarock", "y": 180, "x": 270 },
-			{ "model": "mubble:block/permarock", "y": 270 },
-			{ "model": "mubble:block/permarock", "y": 270, "x": 90 },
-			{ "model": "mubble:block/permarock", "y": 270, "x": 180 },
-			{ "model": "mubble:block/permarock", "y": 270, "x": 270 }
+	"variants": {
+		"": [
+			{
+				"model": "mubble:block/permarock"
+			},
+			{
+				"model": "mubble:block/permarock",
+				"x": 90
+			},
+			{
+				"model": "mubble:block/permarock",
+				"x": 180
+			},
+			{
+				"model": "mubble:block/permarock",
+				"x": 270
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 90
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 90,
+				"x": 90
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 90,
+				"x": 180
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 90,
+				"x": 270
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 180
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 180,
+				"x": 90
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 180,
+				"x": 180
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 180,
+				"x": 270
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 270
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 270,
+				"x": 90
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 270,
+				"x": 180
+			},
+			{
+				"model": "mubble:block/permarock",
+				"y": 270,
+				"x": 270
+			}
 		]
 	}
 }

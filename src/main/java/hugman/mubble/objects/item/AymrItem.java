@@ -17,19 +17,15 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class AymrItem extends Item
-{
-	public AymrItem(Item.Settings builder)
-	{
+public class AymrItem extends Item {
+	public AymrItem(Item.Settings builder) {
 		super(builder);
 	}
 
 	@Override
-	public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot)
-	{
+	public Multimap<EntityAttribute, EntityAttributeModifier> getAttributeModifiers(EquipmentSlot slot) {
 		Multimap<EntityAttribute, EntityAttributeModifier> multimap = super.getAttributeModifiers(slot);
-		if (slot == EquipmentSlot.MAINHAND)
-		{
+		if(slot == EquipmentSlot.MAINHAND) {
 			multimap.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID, "Tool modifier", 5.0D, EntityAttributeModifier.Operation.ADDITION));
 			multimap.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID, "Tool modifier", -3.5D, EntityAttributeModifier.Operation.ADDITION));
 		}
@@ -37,8 +33,7 @@ public class AymrItem extends Item
 	}
 
 	@Override
-	public boolean postHit(ItemStack stack, LivingEntity victim, LivingEntity sender)
-	{
+	public boolean postHit(ItemStack stack, LivingEntity victim, LivingEntity sender) {
 		stack.damage(2, sender, (entity) ->
 		{
 			entity.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND);
@@ -47,15 +42,12 @@ public class AymrItem extends Item
 	}
 
 	@Override
-	public ActionResult useOnBlock(ItemUsageContext context)
-	{
+	public ActionResult useOnBlock(ItemUsageContext context) {
 		BlockPos pos = context.getBlockPos();
 		PlayerEntity player = context.getPlayer();
 		World world = context.getWorld();
-		if (player.getAttackCooldownProgress(0.0F) == 1.0F)
-		{
-			if (world.isClient)
-			{
+		if(player.getAttackCooldownProgress(0.0F) == 1.0F) {
+			if(world.isClient) {
 				world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 4.0F, (1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.2F) * 0.7F, false);
 			}
 			world.addParticle(ParticleTypes.EXPLOSION, pos.getX(), pos.getY(), pos.getZ(), 1.0D, 0.0D, 0.0D);

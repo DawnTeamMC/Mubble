@@ -1,7 +1,6 @@
 {
 	"parent": "block/fence_side",
-	"textures":
-	{
+	"textures": {
 		"texture": "mubble:block/palm_planks"
 	}
 }

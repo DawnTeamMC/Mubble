@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:smelting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:permarock"
 	},
 	"result": "mubble:permafrost_brick",

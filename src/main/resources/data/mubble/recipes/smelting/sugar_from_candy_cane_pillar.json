@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:smelting",
-	"ingredient":
-	{
+	"ingredient": {
 		"tag": "mubble:candy_cane_pillars"
 	},
 	"result": "minecraft:sugar",

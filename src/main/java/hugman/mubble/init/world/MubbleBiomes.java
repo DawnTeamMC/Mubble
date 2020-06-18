@@ -12,8 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 
-public class MubbleBiomes
-{
+public class MubbleBiomes {
 	public static final Biome PUMPKIN_PASTURES = register("pumpkin_pastures", new PumpkinPasturesBiome());
 	public static final Biome PINK_CHERRY_OAK_FOREST = register("pink_cherry_oak_forest", new PinkCherryOakForestBiome());
 	public static final Biome WHITE_CHERRY_OAK_FOREST = register("white_cherry_oak_forest", new WhiteCherryOakForestBiome());
@@ -29,13 +28,11 @@ public class MubbleBiomes
 
 	public static final Biome SCARLET_FOREST = register("scarlet_forest", new ScarletForestBiome());
 
-	private static Biome register(String name, Biome biome)
-	{
+	private static Biome register(String name, Biome biome) {
 		return Registry.register(Registry.BIOME, new Identifier(Mubble.MOD_ID, name), biome);
 	}
 
-	public static void initBiomeGeneration()
-	{
+	public static void initBiomeGeneration() {
 		OverworldBiomes.addContinentalBiome(PUMPKIN_PASTURES, OverworldClimate.TEMPERATE, 1D);
 		FabricBiomes.addSpawnBiome(PUMPKIN_PASTURES);
 		OverworldBiomes.addContinentalBiome(PINK_CHERRY_OAK_FOREST, OverworldClimate.COOL, 1D);

@@ -1,8 +1,13 @@
 {
-	"variants":
-	{
-		"type=bottom": {"model": "mubble:block/light_gray_concrete_slab/bottom"},
-		"type=top": {"model": "mubble:block/light_gray_concrete_slab/top"},
-		"type=double": {"model": "minecraft:block/light_gray_concrete"}
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/light_gray_concrete_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/light_gray_concrete_slab/top"
+		},
+		"type=double": {
+			"model": "minecraft:block/light_gray_concrete"
+		}
 	}
 }

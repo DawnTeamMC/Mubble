@@ -9,16 +9,13 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 
-public class ShakeInstrumentItem extends InstrumentItem
-{
-	public ShakeInstrumentItem(Item.Settings builder, SoundEvent soundIn)
-	{
+public class ShakeInstrumentItem extends InstrumentItem {
+	public ShakeInstrumentItem(Item.Settings builder, SoundEvent soundIn) {
 		super(builder, soundIn);
 	}
 
 	@Override
-	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity player, Hand handIn)
-	{
+	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity player, Hand handIn) {
 		player.swingHand(handIn);
 		player.playSound(getInstrumentSound(), 0.5F, 1F);
 		player.incrementStat(Stats.USED.getOrCreateStat(this));

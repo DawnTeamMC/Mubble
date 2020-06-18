@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/block_directional",
-	"textures":
-	{
+	"textures": {
 		"block": "mubble:block/kirby_block/block",
 		"bottom": "mubble:block/kirby_block/bottom",
 		"front": "mubble:block/kirby_block/front/12",

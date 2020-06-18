@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:stonecutting/black_terracotta_slab"
 		]
 	},
-	"criteria":
-	{
-		"has_black_terracotta":
-		{
+	"criteria": {
+		"has_black_terracotta": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:black_terracotta"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:stonecutting/black_terracotta_slab"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_black_terracotta",
 			"has_the_recipe"

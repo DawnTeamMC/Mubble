@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:smooth_quartz"
 	},
 	"result": "mubble:smooth_quartz_vertical_slab",

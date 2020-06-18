@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/gold_flower"}
+	"variants": {
+		"": {
+			"model": "mubble:block/gold_flower"
+		}
 	}
 }

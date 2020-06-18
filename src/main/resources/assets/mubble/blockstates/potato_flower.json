@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/potato_flower"}
+	"variants": {
+		"": {
+			"model": "mubble:block/potato_flower"
+		}
 	}
 }

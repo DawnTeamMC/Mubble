@@ -9,8 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class ToadEntityModel<T extends Entity> extends AnimalModel<T>
-{
+public class ToadEntityModel<T extends Entity> extends AnimalModel<T> {
 	public ModelPart head;
 	public ModelPart hat;
 	public ModelPart front_lamp;
@@ -21,8 +20,7 @@ public class ToadEntityModel<T extends Entity> extends AnimalModel<T>
 	public ModelPart right_leg;
 	public ModelPart left_leg;
 
-	public ToadEntityModel()
-	{
+	public ToadEntityModel() {
 		super(true, 13.3F, 0.0F);
 		this.textureWidth = 64;
 		this.textureHeight = 64;
@@ -58,8 +56,7 @@ public class ToadEntityModel<T extends Entity> extends AnimalModel<T>
 	}
 
 	@Override
-	public void setAngles(T entityIn, float limbSwing, float limbSwingAmount, float customAngle, float netHeadYaw, float headPitch)
-	{
+	public void setAngles(T entityIn, float limbSwing, float limbSwingAmount, float customAngle, float netHeadYaw, float headPitch) {
 		//this.body.yaw = MathHelper.sin(MathHelper.sqrt(this.swingProgress) * ((float) Math.PI * 2F)) * 0.2F;
 		this.left_leg.pitch = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
 		this.right_leg.pitch = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
@@ -74,14 +71,12 @@ public class ToadEntityModel<T extends Entity> extends AnimalModel<T>
 	}
 
 	@Override
-	protected Iterable<ModelPart> getHeadParts()
-	{
+	protected Iterable<ModelPart> getHeadParts() {
 		return ImmutableList.of(this.head, this.hat, this.front_lamp);
 	}
 
 	@Override
-	protected Iterable<ModelPart> getBodyParts()
-	{
+	protected Iterable<ModelPart> getBodyParts() {
 		return ImmutableList.of(this.body, this.bagpack, this.right_arm, this.left_arm, this.right_leg, this.left_leg);
 	}
 }

@@ -22,35 +22,27 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.Random;
 
 @Mixin(MobEntity.class)
-public class MobEntityMixin
-{
+public class MobEntityMixin {
 	@Inject(method = "getPreferredEquipmentSlot", at = @At(value = "TAIL"), cancellable = true)
-	private static void getPreferredEquipmentSlot(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> info)
-	{
+	private static void getPreferredEquipmentSlot(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> info) {
 		Item item = stack.getItem();
-		if (item instanceof Costume)
-		{
+		if(item instanceof Costume) {
 			Costume costume = (Costume) item;
 			info.setReturnValue(costume.getArmorType());
 		}
-		else if (item instanceof BlockCostume)
-		{
+		else if(item instanceof BlockCostume) {
 			BlockCostume costume = (BlockCostume) item;
 			info.setReturnValue(costume.getArmorType());
 		}
 	}
 
 	@Inject(method = "initialize", at = @At(value = "TAIL"), cancellable = true)
-	private void initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason spawnType, EntityData entityData, CompoundTag entityTag, CallbackInfoReturnable<EntityData> info)
-	{
+	private void initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason spawnType, EntityData entityData, CompoundTag entityTag, CallbackInfoReturnable<EntityData> info) {
 		MobEntity entity = (MobEntity) (Object) this;
 		Random rand = new Random();
-		if (MubbleTags.EntityTypes.CAN_WEAR_HELMET.contains(entity.getType()))
-		{
-			if (entity.getEquippedStack(EquipmentSlot.HEAD).isEmpty() && CalendarEvents.isChristmasSeason)
-			{
-				if (rand.nextFloat() < (float) CalendarEvents.getDayToday() / 25.0f)
-				{
+		if(MubbleTags.EntityTypes.CAN_WEAR_HELMET.contains(entity.getType())) {
+			if(entity.getEquippedStack(EquipmentSlot.HEAD).isEmpty() && CalendarEvents.isChristmasSeason) {
+				if(rand.nextFloat() < (float) CalendarEvents.getDayToday() / 25.0f) {
 					entity.equipStack(EquipmentSlot.HEAD, new ItemStack(MubbleCostumes.CHRISTMAS_HAT));
 					entity.setEquipmentDropChance(EquipmentSlot.HEAD, 0.0F);
 				}

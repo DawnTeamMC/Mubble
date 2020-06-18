@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_column",
-	"textures":
-	{
+	"textures": {
 		"side": "mubble:block/note_block/smb3/side",
 		"end": "mubble:block/note_block/smb3/end"
 	}

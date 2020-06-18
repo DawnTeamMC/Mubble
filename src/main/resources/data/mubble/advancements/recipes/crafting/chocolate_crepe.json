@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/chocolate_crepe"
 		]
 	},
-	"criteria":
-	{
-		"has_crepe":
-		{
+	"criteria": {
+		"has_crepe": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:crepe"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/chocolate_crepe"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_crepe",
 			"has_the_recipe"

@@ -8,38 +8,29 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class PuyoBlock extends DirectionalBlock
-{
-	public PuyoBlock(Block.Settings builder)
-	{
+public class PuyoBlock extends DirectionalBlock {
+	public PuyoBlock(Block.Settings builder) {
 		super(builder);
 	}
 
 	@Override
-	public void onLandedUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
-	{
-		if (entityIn.isSneaking())
-		{
+	public void onLandedUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
+		if(entityIn.isSneaking()) {
 			super.onLandedUpon(worldIn, pos, entityIn, fallDistance);
 		}
-		else
-		{
+		else {
 			entityIn.handleFallDamage(fallDistance, 0.0F);
 		}
 	}
 
 	@Override
-	public void onEntityLand(BlockView worldIn, Entity entityIn)
-	{
-		if (entityIn.isSneaking())
-		{
+	public void onEntityLand(BlockView worldIn, Entity entityIn) {
+		if(entityIn.isSneaking()) {
 			super.onEntityLand(worldIn, entityIn);
 		}
-		else
-		{
+		else {
 			Vec3d vec3d = entityIn.getVelocity();
-			if (vec3d.y < 0.0D)
-			{
+			if(vec3d.y < 0.0D) {
 				double d0 = entityIn instanceof LivingEntity ? 1.0D : 0.8D;
 				entityIn.setVelocity(vec3d.x, -vec3d.y * d0, vec3d.z);
 			}
@@ -47,11 +38,9 @@ public class PuyoBlock extends DirectionalBlock
 	}
 
 	@Override
-	public void onSteppedOn(World worldIn, BlockPos pos, Entity entityIn)
-	{
+	public void onSteppedOn(World worldIn, BlockPos pos, Entity entityIn) {
 		double d0 = Math.abs(entityIn.getVelocity().y);
-		if (d0 < 0.1D && !entityIn.isSneaking())
-		{
+		if(d0 < 0.1D && !entityIn.isSneaking()) {
 			double d1 = 0.4D + d0 * 0.2D;
 			entityIn.setVelocity(entityIn.getVelocity().multiply(d1, 1.0D, d1));
 		}

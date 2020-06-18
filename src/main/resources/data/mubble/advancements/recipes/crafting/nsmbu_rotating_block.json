@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/nsmbu_rotating_block"
 		]
 	},
-	"criteria":
-	{
-		"has_yellow_concrete":
-		{
+	"criteria": {
+		"has_yellow_concrete": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:yellow_concrete"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/nsmbu_rotating_block"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_yellow_concrete",
 			"has_the_recipe"

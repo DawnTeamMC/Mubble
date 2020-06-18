@@ -17,10 +17,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-public class ScarletForestBiome extends Biome
-{
-	public ScarletForestBiome()
-	{
+public class ScarletForestBiome extends Biome {
+	public ScarletForestBiome() {
 		super((new Biome.Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN)
@@ -67,14 +65,12 @@ public class ScarletForestBiome extends Biome
 	}
 
 	@Override
-	public int getGrassColorAt(double x, double z)
-	{
+	public int getGrassColorAt(double x, double z) {
 		return 8720466;
 	}
 
 	@Override
-	public int getFoliageColor()
-	{
+	public int getFoliageColor() {
 		return 10622269;
 	}
 }

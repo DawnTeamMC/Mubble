@@ -1,62 +1,154 @@
 {
-	"variants":
-	{
-		"type=bottom":
-		[
-			{"model": "mubble:block/old_site_brick_slab/bottom/0"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/1"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/2"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/3"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/4"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/12"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/13"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/14"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/23"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/24"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/34"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/123"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/124"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/134"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/234"},
-			{"model": "mubble:block/old_site_brick_slab/bottom/1234"}
+	"variants": {
+		"type=bottom": [
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/0"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/1"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/2"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/3"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/4"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/12"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/13"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/14"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/23"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/24"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/34"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/123"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/124"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/134"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/234"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/bottom/1234"
+			}
 		],
-		"type=top":
-		[
-			{"model": "mubble:block/old_site_brick_slab/top/0"},
-			{"model": "mubble:block/old_site_brick_slab/top/1"},
-			{"model": "mubble:block/old_site_brick_slab/top/2"},
-			{"model": "mubble:block/old_site_brick_slab/top/3"},
-			{"model": "mubble:block/old_site_brick_slab/top/4"},
-			{"model": "mubble:block/old_site_brick_slab/top/12"},
-			{"model": "mubble:block/old_site_brick_slab/top/13"},
-			{"model": "mubble:block/old_site_brick_slab/top/14"},
-			{"model": "mubble:block/old_site_brick_slab/top/23"},
-			{"model": "mubble:block/old_site_brick_slab/top/24"},
-			{"model": "mubble:block/old_site_brick_slab/top/34"},
-			{"model": "mubble:block/old_site_brick_slab/top/123"},
-			{"model": "mubble:block/old_site_brick_slab/top/124"},
-			{"model": "mubble:block/old_site_brick_slab/top/134"},
-			{"model": "mubble:block/old_site_brick_slab/top/234"},
-			{"model": "mubble:block/old_site_brick_slab/top/1234"}
+		"type=top": [
+			{
+				"model": "mubble:block/old_site_brick_slab/top/0"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/1"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/2"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/3"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/4"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/12"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/13"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/14"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/23"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/24"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/34"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/123"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/124"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/134"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/234"
+			},
+			{
+				"model": "mubble:block/old_site_brick_slab/top/1234"
+			}
 		],
-		"type=double":
-		[
-			{"model": "mubble:block/old_site_bricks/0"},
-			{"model": "mubble:block/old_site_bricks/1"},
-			{"model": "mubble:block/old_site_bricks/2"},
-			{"model": "mubble:block/old_site_bricks/3"},
-			{"model": "mubble:block/old_site_bricks/4"},
-			{"model": "mubble:block/old_site_bricks/12"},
-			{"model": "mubble:block/old_site_bricks/13"},
-			{"model": "mubble:block/old_site_bricks/14"},
-			{"model": "mubble:block/old_site_bricks/23"},
-			{"model": "mubble:block/old_site_bricks/24"},
-			{"model": "mubble:block/old_site_bricks/34"},
-			{"model": "mubble:block/old_site_bricks/123"},
-			{"model": "mubble:block/old_site_bricks/124"},
-			{"model": "mubble:block/old_site_bricks/134"},
-			{"model": "mubble:block/old_site_bricks/234"},
-			{"model": "mubble:block/old_site_bricks/1234"}
+		"type=double": [
+			{
+				"model": "mubble:block/old_site_bricks/0"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/1"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/2"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/3"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/4"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/12"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/13"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/14"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/23"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/24"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/34"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/123"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/124"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/134"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/234"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/1234"
+			}
 		]
 	}
 }

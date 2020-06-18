@@ -4,8 +4,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodComponent;
 
-public class MubbleFoods
-{
+public class MubbleFoods {
 	public static final int crepeHunger = 3;
 	public static final float crepeSaturation = 0.5f;
 

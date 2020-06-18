@@ -1,12 +1,21 @@
 {
-	"variants":
-	{
-		"over=false":
-		[
-			{"model": "mubble:block/ground_block/smb3/ghost_house/normal/1", "weight": 10},
-			{"model": "mubble:block/ground_block/smb3/ghost_house/normal/2", "weight": 5},
-			{"model": "mubble:block/ground_block/smb3/ghost_house/normal/3", "weight": 2}
+	"variants": {
+		"over=false": [
+			{
+				"model": "mubble:block/ground_block/smb3/ghost_house/normal/1",
+				"weight": 10
+			},
+			{
+				"model": "mubble:block/ground_block/smb3/ghost_house/normal/2",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/smb3/ghost_house/normal/3",
+				"weight": 2
+			}
 		],
-		"over=true": {"model": "mubble:block/ground_block/smb3/ghost_house/over"}
+		"over=true": {
+			"model": "mubble:block/ground_block/smb3/ghost_house/over"
+		}
 	}
 }

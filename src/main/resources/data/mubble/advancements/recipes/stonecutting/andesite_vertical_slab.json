@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:stonecutting/andesite_vertical_slab"
 		]
 	},
-	"criteria":
-	{
-		"has_andesite":
-		{
+	"criteria": {
+		"has_andesite": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:andesite"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:stonecutting/andesite_vertical_slab"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_andesite",
 			"has_the_recipe"

@@ -13,27 +13,22 @@ import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 
 import java.util.Random;
 
-public class GrowableMushroomPlantBlock extends net.minecraft.block.MushroomPlantBlock
-{
+public class GrowableMushroomPlantBlock extends net.minecraft.block.MushroomPlantBlock {
 	protected final Block hatBlock;
 
-	public GrowableMushroomPlantBlock(Settings settings, Block hatBlock)
-	{
+	public GrowableMushroomPlantBlock(Settings settings, Block hatBlock) {
 		super(settings);
 		this.hatBlock = hatBlock;
 	}
 
 	@Override
-	public boolean trySpawningBigMushroom(ServerWorld serverWorld, BlockPos pos, BlockState state, Random random)
-	{
+	public boolean trySpawningBigMushroom(ServerWorld serverWorld, BlockPos pos, BlockState state, Random random) {
 		serverWorld.removeBlock(pos, false);
 		ConfiguredFeature hugeMushroomFeature = Feature.HUGE_RED_MUSHROOM.configure(new HugeMushroomFeatureConfig(new SimpleBlockStateProvider(this.hatBlock.getDefaultState().with(MushroomBlock.DOWN, false)), new SimpleBlockStateProvider(Blocks.MUSHROOM_STEM.getDefaultState()), 2));
-		if (hugeMushroomFeature.generate(serverWorld, serverWorld.getStructureAccessor(), serverWorld.getChunkManager().getChunkGenerator(), random, pos))
-		{
+		if(hugeMushroomFeature.generate(serverWorld, serverWorld.getStructureAccessor(), serverWorld.getChunkManager().getChunkGenerator(), random, pos)) {
 			return true;
 		}
-		else
-		{
+		else {
 			serverWorld.setBlockState(pos, state, 3);
 			return false;
 		}

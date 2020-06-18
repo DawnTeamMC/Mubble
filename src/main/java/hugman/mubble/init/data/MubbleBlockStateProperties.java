@@ -6,8 +6,7 @@ import hugman.mubble.objects.block.block_state_property.VerticalSlabType;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 
-public class MubbleBlockStateProperties
-{
+public class MubbleBlockStateProperties {
 	public static final BooleanProperty OVER = BooleanProperty.of("over");
 	public static final BooleanProperty EMPTY = BooleanProperty.of("empty");
 	public static final BooleanProperty LOCKED = BooleanProperty.of("locked");

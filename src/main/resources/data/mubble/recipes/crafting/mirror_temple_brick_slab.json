@@ -1,18 +1,14 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:mirror_temple_bricks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:mirror_temple_brick_slab",
 		"count": 6
 	}

@@ -1,51 +1,39 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/pink_gold_peach_crown"
 		]
 	},
-	"criteria":
-	{
-		"has_gold_ingot":
-		{
+	"criteria": {
+		"has_gold_ingot": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:gold_ingot"
 					}
 				]
 			}
 		},
-		"has_iron_ingot":
-		{
+		"has_iron_ingot": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:iron_ingot"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/pink_gold_peach_crown"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_gold_ingot",
 			"has_iron_ingot",

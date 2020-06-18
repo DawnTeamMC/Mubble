@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"minecraft:brick_wall",
 		"mubble:white_brick_wall",
 		"mubble:light_gray_brick_wall",

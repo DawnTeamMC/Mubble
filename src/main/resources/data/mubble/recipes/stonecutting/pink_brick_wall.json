@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:pink_bricks"
 	},
 	"result": "mubble:pink_brick_wall",

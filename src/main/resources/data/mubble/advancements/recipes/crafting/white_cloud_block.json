@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/white_cloud_block"
 		]
 	},
-	"criteria":
-	{
-		"has_cloud_flower":
-		{
+	"criteria": {
+		"has_cloud_flower": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:cloud_flower"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/white_cloud_block"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_cloud_flower",
 			"has_the_recipe"

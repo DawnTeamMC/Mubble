@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:end_stone_bricks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:end_stone_brick_vertical_slab",
 		"count": 6
 	}

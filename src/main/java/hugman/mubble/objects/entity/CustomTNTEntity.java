@@ -19,8 +19,7 @@ import net.minecraft.util.crash.CrashReportSection;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 
-public class CustomTNTEntity extends Entity
-{
+public class CustomTNTEntity extends Entity {
 	private static final TrackedData<Integer> FUSE = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.INTEGER);
 	private static final TrackedData<Float> STRENGHT = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.FLOAT);
 	private BlockState customTile = Blocks.SAND.getDefaultState();
@@ -28,14 +27,12 @@ public class CustomTNTEntity extends Entity
 	private float strenght = 4.0F;
 	private LivingEntity causingEntity;
 
-	public CustomTNTEntity(EntityType<? extends CustomTNTEntity> type, World worldIn)
-	{
+	public CustomTNTEntity(EntityType<? extends CustomTNTEntity> type, World worldIn) {
 		super(type, worldIn);
 		this.inanimate = true;
 	}
 
-	public CustomTNTEntity(BlockState customTileIn, World worldIn, double x, double y, double z, int fuse, float strength, LivingEntity igniter)
-	{
+	public CustomTNTEntity(BlockState customTileIn, World worldIn, double x, double y, double z, int fuse, float strength, LivingEntity igniter) {
 		this(MubbleEntities.CUSTOM_TNT, worldIn);
 		this.customTile = customTileIn;
 		this.updatePosition(x, y, z);
@@ -50,134 +47,112 @@ public class CustomTNTEntity extends Entity
 	}
 
 	@Override
-	protected void initDataTracker()
-	{
+	protected void initDataTracker() {
 		this.dataTracker.startTracking(FUSE, fuse);
 		this.dataTracker.startTracking(STRENGHT, strenght);
 	}
 
 	@Override
-	protected boolean canClimb()
-	{
+	protected boolean canClimb() {
 		return false;
 	}
 
 	@Override
-	public boolean collides()
-	{
+	public boolean collides() {
 		return !this.removed;
 	}
 
 	@Override
-	public void tick()
-	{
-		if (!this.hasNoGravity())
-		{
+	public void tick() {
+		if(!this.hasNoGravity()) {
 			this.setVelocity(this.getVelocity().add(0.0D, -0.04D, 0.0D));
 		}
 		this.move(MovementType.SELF, this.getVelocity());
 		this.setVelocity(this.getVelocity().multiply(0.98D));
-		if (this.onGround)
-		{
+		if(this.onGround) {
 			this.setVelocity(this.getVelocity().multiply(0.7D, -0.5D, 0.7D));
 		}
 		--this.fuse;
-		if (this.fuse <= 0)
-		{
+		if(this.fuse <= 0) {
 			this.remove();
-			if (!this.world.isClient)
-			{
+			if(!this.world.isClient) {
 				this.explode();
 			}
 		}
-		else
-		{
+		else {
 			this.updateWaterState();
-			if (this.world.isClient)
-			{
+			if(this.world.isClient) {
 				this.world.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY() + 0.5D, this.getZ(), 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
 
-	private void explode()
-	{
+	private void explode() {
 		this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), this.strenght, Explosion.DestructionType.BREAK);
 	}
 
 	@Override
-	protected void writeCustomDataToTag(CompoundTag compound)
-	{
+	protected void writeCustomDataToTag(CompoundTag compound) {
 		compound.put("BlockState", NbtHelper.fromBlockState(this.customTile));
 		compound.putShort("Fuse", (short) this.getFuse());
 		compound.putFloat("Strenght", this.getStrenght());
 	}
 
 	@Override
-	protected void readCustomDataFromTag(CompoundTag compound)
-	{
+	protected void readCustomDataFromTag(CompoundTag compound) {
 		this.customTile = NbtHelper.toBlockState(compound.getCompound("BlockState"));
-		if (this.customTile.getBlock() == Blocks.AIR)
-		{
+		if(this.customTile.getBlock() == Blocks.AIR) {
 			this.customTile = Blocks.TNT.getDefaultState();
 		}
 		this.setFuse(compound.getShort("Fuse"));
 		this.setStrenght(compound.getFloat("Strenght"));
 	}
 
-	public LivingEntity getCausingEntity()
-	{
+	public LivingEntity getCausingEntity() {
 		return this.causingEntity;
 	}
 
-	public void setFuse(int fuseIn)
-	{
+	public void setFuse(int fuseIn) {
 		this.dataTracker.set(FUSE, fuseIn);
 		this.fuse = fuseIn;
 	}
 
-	public int getFuse()
-	{
+	public int getFuse() {
 		return this.fuse;
 	}
 
-	public BlockState getBlockState()
-	{
+	public BlockState getBlockState() {
 		return this.customTile;
 	}
 
-	public void setStrenght(float strenghtIn)
-	{
+	public void setStrenght(float strenghtIn) {
 		this.dataTracker.set(STRENGHT, strenghtIn);
 		this.strenght = strenghtIn;
 	}
 
-	public float getStrenght()
-	{
+	public float getStrenght() {
 		return this.strenght;
 	}
 
 	@Override
-	public void onTrackedDataSet(TrackedData<?> key)
-	{
-		if (FUSE.equals(key)) this.fuse = this.getFuseDataManager();
+	public void onTrackedDataSet(TrackedData<?> key) {
+		if(FUSE.equals(key)) {
+			this.fuse = this.getFuseDataManager();
+		}
 	}
 
-	public int getFuseDataManager()
-	{
+	public int getFuseDataManager() {
 		return this.dataTracker.get(FUSE);
 	}
 
 	@Override
-	public void populateCrashReport(CrashReportSection category)
-	{
+	public void populateCrashReport(CrashReportSection category) {
 		super.populateCrashReport(category);
 		category.add("Immitating BlockState", this.customTile.toString());
 	}
 
 	@Override
-	public Packet<?> createSpawnPacket()
-	{
+	public Packet<?> createSpawnPacket() {
 		return new EntitySpawnS2CPacket(this);
 	}
 }

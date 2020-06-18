@@ -1,50 +1,188 @@
 {
-	"variants":
-	{
-		"over=false":
-		[
-			{"model": "mubble:block/ground_block/smw/snow/night/normal/1"},
-			{"model": "mubble:block/ground_block/smw/snow/night/normal/2"},
-			{"model": "mubble:block/ground_block/smw/snow/night/normal/3"}
+	"variants": {
+		"over=false": [
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/normal/1"
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/normal/2"
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/normal/3"
+			}
 		],
-		"over=true": 
-		[
-			{"model": "mubble:block/ground_block/smw/snow/night/over/111", "weight": 50},
-			{"model": "mubble:block/ground_block/smw/snow/night/over/111", "weight": 50, "y": 90 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/111", "weight": 50, "y": 180 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/111", "weight": 50, "y": 270 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/122", "weight": 50},
-			{"model": "mubble:block/ground_block/smw/snow/night/over/122", "weight": 50, "y": 90 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/122", "weight": 50, "y": 180 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/122", "weight": 50, "y": 270 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/133", "weight": 50},
-			{"model": "mubble:block/ground_block/smw/snow/night/over/133", "weight": 50, "y": 90 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/133", "weight": 50, "y": 180 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/133", "weight": 50, "y": 270 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/211", "weight": 10 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/211", "weight": 10 , "y": 90 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/211", "weight": 10 , "y": 180 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/211", "weight": 10 , "y": 270 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/222", "weight": 10 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/222", "weight": 10 , "y": 90 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/222", "weight": 10 , "y": 180 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/222", "weight": 10 , "y": 270 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/233", "weight": 10 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/233", "weight": 10 , "y": 90 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/233", "weight": 10 , "y": 180 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/233", "weight": 10 , "y": 270 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/311", "weight": 10 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/311", "weight": 10 , "y": 90 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/311", "weight": 10 , "y": 180 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/311", "weight": 10 , "y": 270 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/322", "weight": 10 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/322", "weight": 10 , "y": 90 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/322", "weight": 10 , "y": 180 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/322", "weight": 10 , "y": 270 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/333", "weight": 10 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/333", "weight": 10 , "y": 90 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/333", "weight": 10 , "y": 180 },
-			{"model": "mubble:block/ground_block/smw/snow/night/over/333", "weight": 10 , "y": 270 }
+		"over=true": [
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/111",
+				"weight": 50
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/111",
+				"weight": 50,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/111",
+				"weight": 50,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/111",
+				"weight": 50,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/122",
+				"weight": 50
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/122",
+				"weight": 50,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/122",
+				"weight": 50,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/122",
+				"weight": 50,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/133",
+				"weight": 50
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/133",
+				"weight": 50,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/133",
+				"weight": 50,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/133",
+				"weight": 50,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/211",
+				"weight": 10
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/211",
+				"weight": 10,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/211",
+				"weight": 10,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/211",
+				"weight": 10,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/222",
+				"weight": 10
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/222",
+				"weight": 10,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/222",
+				"weight": 10,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/222",
+				"weight": 10,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/233",
+				"weight": 10
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/233",
+				"weight": 10,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/233",
+				"weight": 10,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/233",
+				"weight": 10,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/311",
+				"weight": 10
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/311",
+				"weight": 10,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/311",
+				"weight": 10,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/311",
+				"weight": 10,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/322",
+				"weight": 10
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/322",
+				"weight": 10,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/322",
+				"weight": 10,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/322",
+				"weight": 10,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/333",
+				"weight": 10
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/333",
+				"weight": 10,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/333",
+				"weight": 10,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/snow/night/over/333",
+				"weight": 10,
+				"y": 270
+			}
 		]
 	}
 }

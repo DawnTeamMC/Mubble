@@ -1,8 +1,13 @@
 {
-	"variants":
-	{
-		"type=bottom": {"model": "mubble:block/sandstone_brick_slab/bottom"},
-		"type=top": {"model": "mubble:block/sandstone_brick_slab/top"},
-		"type=double": {"model": "mubble:block/sandstone_bricks"}
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/sandstone_brick_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/sandstone_brick_slab/top"
+		},
+		"type=double": {
+			"model": "mubble:block/sandstone_bricks"
+		}
 	}
 }

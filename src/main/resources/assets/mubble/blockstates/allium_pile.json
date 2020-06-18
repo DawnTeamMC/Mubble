@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/allium_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/allium_pile"
+		}
 	}
 }

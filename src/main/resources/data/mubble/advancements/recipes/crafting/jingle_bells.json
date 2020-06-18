@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/jingle_bells"
 		]
 	},
-	"criteria":
-	{
-		"has_iron_nugget":
-		{
+	"criteria": {
+		"has_iron_nugget": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:iron_nugget"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/jingle_bells"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_iron_nugget",
 			"has_the_recipe"

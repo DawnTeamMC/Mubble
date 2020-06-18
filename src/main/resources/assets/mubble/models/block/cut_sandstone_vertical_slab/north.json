@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/vertical_slab/north",
-	"textures":
-	{
+	"textures": {
 		"bottom": "block/sandstone_top",
 		"top": "block/sandstone_top",
 		"block": "block/cut_sandstone"

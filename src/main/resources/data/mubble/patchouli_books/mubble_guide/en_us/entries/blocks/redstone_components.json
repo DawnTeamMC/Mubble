@@ -2,8 +2,7 @@
 	"icon": "mubble:placer",
 	"name": "Redstone Components",
 	"category": "blocks",
-	"pages":
-	[
+	"pages": [
 		{
 			"type": "text",
 			"text": "<hl1>Redstone</> must be one of the most important aspect of #minecraft. At the moment, #mubble does not add that much redstone items, but we still have a few of them, with some interesting concepts!"

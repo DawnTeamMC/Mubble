@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:black_dark_prismarine"
 	},
 	"result": "mubble:black_dark_prismarine_stairs",

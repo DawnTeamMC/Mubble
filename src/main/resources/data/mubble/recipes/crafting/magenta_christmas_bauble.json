@@ -1,29 +1,23 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "christmas_bauble",
-	"pattern":
-	[
+	"pattern": [
 		"X#X",
 		"#O#",
 		"X#X"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:iron_nugget"
 		},
-		"X":
-		{
+		"X": {
 			"item": "minecraft:glowstone_dust"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:magenta_dye"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:magenta_christmas_bauble"
 	}
 }

@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:terracotta_slab",
 		"mubble:white_terracotta_slab",
 		"mubble:light_gray_terracotta_slab",

@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/black_concrete_slab"
 		]
 	},
-	"criteria":
-	{
-		"has_concrete":
-		{
+	"criteria": {
+		"has_concrete": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"tag": "mubble:concrete/blocks"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/black_concrete_slab"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_concrete",
 			"has_the_recipe"

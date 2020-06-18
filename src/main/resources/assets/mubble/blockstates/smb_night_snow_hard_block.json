@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/hard_block/smb/snow/night"}
+	"variants": {
+		"": {
+			"model": "mubble:block/hard_block/smb/snow/night"
+		}
 	}
 }

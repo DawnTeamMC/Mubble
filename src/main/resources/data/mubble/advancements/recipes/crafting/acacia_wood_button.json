@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/acacia_wood_button"
 		]
 	},
-	"criteria":
-	{
-		"has_wood":
-		{
+	"criteria": {
+		"has_wood": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:acacia_wood"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/acacia_wood_button"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_wood",
 			"has_the_recipe"

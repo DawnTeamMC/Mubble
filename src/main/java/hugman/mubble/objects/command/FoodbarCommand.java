@@ -13,10 +13,8 @@ import net.minecraft.text.TranslatableText;
 
 import java.util.Collection;
 
-public class FoodbarCommand
-{
-	public static void register(CommandDispatcher<ServerCommandSource> dispatcher)
-	{
+public class FoodbarCommand {
+	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
 		dispatcher.register(
 				LiteralArgumentBuilder.<ServerCommandSource>literal("foodbar")
 						.requires((source) ->
@@ -62,69 +60,53 @@ public class FoodbarCommand
 		);
 	}
 
-	private static int setFood(ServerCommandSource source, Collection<ServerPlayerEntity> targets, int amount, boolean sum)
-	{
-		for (ServerPlayerEntity entity : targets)
-		{
+	private static int setFood(ServerCommandSource source, Collection<ServerPlayerEntity> targets, int amount, boolean sum) {
+		for(ServerPlayerEntity entity : targets) {
 			HungerManager stats = entity.getHungerManager();
-			if (sum == true)
-			{
+			if(sum == true) {
 				stats.setFoodLevel(amount + stats.getFoodLevel());
 			}
-			else
-			{
+			else {
 				stats.setFoodLevel(amount);
 			}
 		}
 		final String parameter;
-		if (sum == true)
-		{
+		if(sum == true) {
 			parameter = "add";
 		}
-		else
-		{
+		else {
 			parameter = "set";
 		}
-		if (targets.size() == 1)
-		{
+		if(targets.size() == 1) {
 			source.sendFeedback(new TranslatableText("commands.foodbar." + parameter + ".food.success.single", amount, targets.iterator().next().getDisplayName()), true);
 		}
-		else
-		{
+		else {
 			source.sendFeedback(new TranslatableText("commands.foodbar." + parameter + ".food.success.multiple", amount, targets.size()), true);
 		}
 		return targets.size();
 	}
 
-	private static int setSaturation(ServerCommandSource source, Collection<ServerPlayerEntity> targets, float amount, boolean sum)
-	{
-		for (ServerPlayerEntity entity : targets)
-		{
+	private static int setSaturation(ServerCommandSource source, Collection<ServerPlayerEntity> targets, float amount, boolean sum) {
+		for(ServerPlayerEntity entity : targets) {
 			HungerManager stats = entity.getHungerManager();
-			if (sum == true)
-			{
+			if(sum == true) {
 				stats.setSaturationLevelClient(amount + stats.getFoodLevel());
 			}
-			else
-			{
+			else {
 				stats.setSaturationLevelClient(amount);
 			}
 		}
 		final String parameter;
-		if (sum == true)
-		{
+		if(sum == true) {
 			parameter = "add";
 		}
-		else
-		{
+		else {
 			parameter = "set";
 		}
-		if (targets.size() == 1)
-		{
+		if(targets.size() == 1) {
 			source.sendFeedback(new TranslatableText("commands.foodbar." + parameter + ".saturation.success.single", amount, targets.iterator().next().getDisplayName()), true);
 		}
-		else
-		{
+		else {
 			source.sendFeedback(new TranslatableText("commands.foodbar." + parameter + ".saturation.success.multiple", amount, targets.size()), true);
 		}
 		return targets.size();

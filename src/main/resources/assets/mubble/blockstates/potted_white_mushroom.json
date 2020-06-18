@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/potted_white_mushroom"}
+	"variants": {
+		"": {
+			"model": "mubble:block/potted_white_mushroom"
+		}
 	}
 }

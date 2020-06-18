@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/magenta_mushroom"}
+	"variants": {
+		"": {
+			"model": "mubble:block/magenta_mushroom"
+		}
 	}
 }

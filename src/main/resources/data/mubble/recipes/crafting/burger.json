@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:crafting_shapeless",
-	"ingredients":
-	[
+	"ingredients": [
 		{
 			"item": "minecraft:bread"
 		},
@@ -21,8 +20,7 @@
 			"item": "minecraft:bread"
 		}
 	],
-	"result":
-	{
+	"result": {
 		"item": "mubble:burger",
 		"count": 3
 	}

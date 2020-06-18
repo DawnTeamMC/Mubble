@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:white_mushroom",
 		"mubble:light_gray_mushroom",
 		"mubble:gray_mushroom",

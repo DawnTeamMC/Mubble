@@ -1,32 +1,62 @@
 {
-	"multipart":
-	[
+	"multipart": [
 		{
-			"apply": {"model": "mubble:block/fluid_tank/stone"}
+			"apply": {
+				"model": "mubble:block/fluid_tank/stone"
+			}
 		},
 		{
-			"when": {"up": "true"},
-			"apply": {"model": "mubble:block/fluid_tank/glass", "x": 270}
+			"when": {
+				"up": "true"
+			},
+			"apply": {
+				"model": "mubble:block/fluid_tank/glass",
+				"x": 270
+			}
 		},
 		{
-			"when": {"down": "true"},
-			"apply": {"model": "mubble:block/fluid_tank/glass", "x": 90}
+			"when": {
+				"down": "true"
+			},
+			"apply": {
+				"model": "mubble:block/fluid_tank/glass",
+				"x": 90
+			}
 		},
 		{
-			"when": {"north": "true"},
-			"apply": {"model": "mubble:block/fluid_tank/glass"}
+			"when": {
+				"north": "true"
+			},
+			"apply": {
+				"model": "mubble:block/fluid_tank/glass"
+			}
 		},
 		{
-			"when": {"east": "true"},
-			"apply": {"model": "mubble:block/fluid_tank/glass", "y": 90}
+			"when": {
+				"east": "true"
+			},
+			"apply": {
+				"model": "mubble:block/fluid_tank/glass",
+				"y": 90
+			}
 		},
 		{
-			"when": {"south": "true"},
-			"apply": {"model": "mubble:block/fluid_tank/glass", "y": 180}
+			"when": {
+				"south": "true"
+			},
+			"apply": {
+				"model": "mubble:block/fluid_tank/glass",
+				"y": 180
+			}
 		},
 		{
-			"when": {"west": "true"},
-			"apply": {"model": "mubble:block/fluid_tank/glass", "y": 270}
+			"when": {
+				"west": "true"
+			},
+			"apply": {
+				"model": "mubble:block/fluid_tank/glass",
+				"y": 270
+			}
 		}
 	]
 }

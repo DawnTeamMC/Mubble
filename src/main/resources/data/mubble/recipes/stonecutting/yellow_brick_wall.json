@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:yellow_bricks"
 	},
 	"result": "mubble:yellow_brick_wall",

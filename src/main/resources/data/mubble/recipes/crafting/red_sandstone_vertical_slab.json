@@ -1,13 +1,11 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
+	"key": {
 		"#": [
 			{
 				"item": "minecraft:red_sandstone"
@@ -17,8 +15,7 @@
 			}
 		]
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:red_sandstone_vertical_slab",
 		"count": 6
 	}

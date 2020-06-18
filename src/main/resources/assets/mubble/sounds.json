@@ -1,317 +1,237 @@
 {
-	"block.present.close":
-	{
-		"sounds":
-		[
+	"block.present.close": {
+		"sounds": [
 			"minecraft:block/barrel/close"
 		]
 	},
-	"block.present.open":
-	{
-		"sounds":
-		[
+	"block.present.open": {
+		"sounds": [
 			"minecraft:block/barrel/open1",
 			"minecraft:block/barrel/open2"
 		]
 	},
-	"block.question_block.loot.power_up.smb":
-	{
+	"block.question_block.loot.power_up.smb": {
 		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/question_block/loot/power_up/smb"
 		]
 	},
-	"block.question_block.loot.power_up.smb3":
-	{
+	"block.question_block.loot.power_up.smb3": {
 		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/question_block/loot/power_up/smb3"
 		]
 	},
-	"block.question_block.loot.power_up.smw":
-	{
+	"block.question_block.loot.power_up.smw": {
 		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/question_block/loot/power_up/smw"
 		]
 	},
-	"block.question_block.loot.power_up.nsmbu":
-	{
+	"block.question_block.loot.power_up.nsmbu": {
 		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/question_block/loot/power_up/nsmbu"
 		]
 	},
-	"block.question_block.loot.coin.smb":
-	{
+	"block.question_block.loot.coin.smb": {
 		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/question_block/loot/coin/smb"
 		]
 	},
-	"block.question_block.loot.coin.smb3":
-	{
+	"block.question_block.loot.coin.smb3": {
 		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/question_block/loot/coin/smb3"
 		]
 	},
-	"block.question_block.loot.coin.smw":
-	{
+	"block.question_block.loot.coin.smw": {
 		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/question_block/loot/coin/smw"
 		]
 	},
-	"block.question_block.loot.coin.nsmbu":
-	{
+	"block.question_block.loot.coin.nsmbu": {
 		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/question_block/loot/coin/nsmbu"
 		]
 	},
-	"block.brick_block.break.smb":
-	{
+	"block.brick_block.break.smb": {
 		"subtitle": "subtitles.block.generic.break",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/brick_block/break/smb"
 		]
 	},
-	"block.brick_block.break.smb3":
-	{
+	"block.brick_block.break.smb3": {
 		"subtitle": "subtitles.block.generic.break",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/brick_block/break/smb"
 		]
 	},
-	"block.brick_block.break.smw":
-	{
+	"block.brick_block.break.smw": {
 		"subtitle": "subtitles.block.generic.break",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/brick_block/break/smw"
 		]
 	},
-	"block.brick_block.break.nsmbu":
-	{
+	"block.brick_block.break.nsmbu": {
 		"subtitle": "subtitles.block.generic.break",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/brick_block/break/nsmbu"
 		]
 	},
-	"block.empty_block.hit.smb":
-	{
+	"block.empty_block.hit.smb": {
 		"subtitle": "subtitles.block.generic.hit",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/empty_block/hit/smb"
 		]
 	},
-	"block.empty_block.hit.smb3":
-	{
+	"block.empty_block.hit.smb3": {
 		"subtitle": "subtitles.block.generic.hit",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/empty_block/hit/smb3"
 		]
 	},
-	"block.empty_block.hit.smw":
-	{
+	"block.empty_block.hit.smw": {
 		"subtitle": "subtitles.block.generic.hit",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/empty_block/hit/smw"
 		]
 	},
-	"block.empty_block.hit.nsmbu":
-	{
+	"block.empty_block.hit.nsmbu": {
 		"subtitle": "subtitles.block.generic.hit",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/empty_block/hit/nsmbu"
 		]
 	},
-	"block.note_block.jump.smb":
-	{
+	"block.note_block.jump.smb": {
 		"subtitle": "subtitles.mubble.block.note_block.jump",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/note_block/jump/smb"
 		]
 	},
-	"block.note_block.jump.smb3":
-	{
+	"block.note_block.jump.smb3": {
 		"subtitle": "subtitles.mubble.block.note_block.jump",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/note_block/jump/smb3"
 		]
 	},
-	"block.note_block.jump.smw":
-	{
+	"block.note_block.jump.smw": {
 		"subtitle": "subtitles.mubble.block.note_block.jump",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/note_block/jump/smw"
 		]
 	},
-	"block.note_block.jump.high.nsmbu":
-	{
+	"block.note_block.jump.high.nsmbu": {
 		"subtitle": "subtitles.mubble.block.note_block.jump",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/note_block/jump/high/nsmbu"
 		]
 	},
-	"block.note_block.jump.low.nsmbu":
-	{
+	"block.note_block.jump.low.nsmbu": {
 		"subtitle": "subtitles.mubble.block.note_block.jump",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/note_block/jump/low/nsmbu/1",
 			"mubble:block/note_block/jump/low/nsmbu/2"
 		]
 	},
-	"block.door.open.smb":
-	{
+	"block.door.open.smb": {
 		"subtitle": "subtitles.block.door.toggle",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/open/smb"
 		]
 	},
-	"block.door.open.smb3":
-	{
+	"block.door.open.smb3": {
 		"subtitle": "subtitles.block.door.toggle",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/open/smb3"
 		]
 	},
-	"block.door.open.smw":
-	{
+	"block.door.open.smw": {
 		"subtitle": "subtitles.block.door.toggle",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/open/smw"
 		]
 	},
-	"block.door.open.nsmbu":
-	{
+	"block.door.open.nsmbu": {
 		"subtitle": "subtitles.block.door.toggle",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/open/nsmbu"
 		]
 	},
-	"block.door.close.smb":
-	{
+	"block.door.close.smb": {
 		"subtitle": "subtitles.block.door.toggle",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/close/smb"
 		]
 	},
-	"block.door.close.smb3":
-	{
+	"block.door.close.smb3": {
 		"subtitle": "subtitles.block.door.toggle",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/close/smb3"
 		]
 	},
-	"block.door.close.smw":
-	{
+	"block.door.close.smw": {
 		"subtitle": "subtitles.block.door.toggle",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/close/smw"
 		]
 	},
-	"block.door.close.nsmbu":
-	{
+	"block.door.close.nsmbu": {
 		"subtitle": "subtitles.block.door.toggle",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/close/nsmbu"
 		]
 	},
-	"block.door.key.success.smb":
-	{
+	"block.door.key.success.smb": {
 		"subtitle": "subtitles.mubble.block.door.key.success",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/key/success/smb"
 		]
 	},
-	"block.door.key.success.smb3":
-	{
+	"block.door.key.success.smb3": {
 		"subtitle": "subtitles.mubble.block.door.key.success",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/key/success/smb3"
 		]
 	},
-	"block.door.key.success.smw":
-	{
+	"block.door.key.success.smw": {
 		"subtitle": "subtitles.mubble.block.door.key.success",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/key/success/smw"
 		]
 	},
-	"block.door.key.success.nsmbu":
-	{
+	"block.door.key.success.nsmbu": {
 		"subtitle": "subtitles.mubble.block.door.key.success",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/door/key/success/nsmbu"
 		]
 	},
-	"block.door.key.fail.smb":
-	{
-		"sounds":
-		[
+	"block.door.key.fail.smb": {
+		"sounds": [
 			"mubble:block/door/key/fail/smb"
 		]
 	},
-	"block.door.key.fail.smb3":
-	{
-		"sounds":
-		[
+	"block.door.key.fail.smb3": {
+		"sounds": [
 			"mubble:block/door/key/fail/smb3"
 		]
 	},
-	"block.door.key.fail.smw":
-	{
-		"sounds":
-		[
+	"block.door.key.fail.smw": {
+		"sounds": [
 			"mubble:block/door/key/fail/smw"
 		]
 	},
-	"block.door.key.fail.nsmbu":
-	{
-		"sounds":
-		[
+	"block.door.key.fail.nsmbu": {
+		"sounds": [
 			"mubble:block/door/key/fail/nsmbu"
 		]
 	},
-	"block.dream_block.break":
-	{
+	"block.dream_block.break": {
 		"subtitle": "subtitles.block.generic.break",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/dream_block/hit/1",
 			"mubble:block/dream_block/hit/2",
 			"mubble:block/dream_block/hit/3",
@@ -319,10 +239,8 @@
 			"mubble:block/dream_block/hit/5"
 		]
 	},
-	"block.dream_block.fall":
-	{
-		"sounds":
-		[
+	"block.dream_block.fall": {
+		"sounds": [
 			"mubble:block/dream_block/fall/1",
 			"mubble:block/dream_block/fall/2",
 			"mubble:block/dream_block/fall/3",
@@ -330,11 +248,9 @@
 			"mubble:block/dream_block/fall/5"
 		]
 	},
-	"block.dream_block.hit":
-	{
+	"block.dream_block.hit": {
 		"subtitle": "subtitles.block.generic.hit",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/dream_block/hit/1",
 			"mubble:block/dream_block/hit/2",
 			"mubble:block/dream_block/hit/3",
@@ -342,11 +258,9 @@
 			"mubble:block/dream_block/hit/5"
 		]
 	},
-	"block.dream_block.place":
-	{
+	"block.dream_block.place": {
 		"subtitle": "subtitles.block.generic.place",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/dream_block/hit/1",
 			"mubble:block/dream_block/hit/2",
 			"mubble:block/dream_block/hit/3",
@@ -354,11 +268,9 @@
 			"mubble:block/dream_block/hit/5"
 		]
 	},
-	"block.dream_block.step":
-	{
+	"block.dream_block.step": {
 		"subtitle": "subtitles.block.generic.footsteps",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/dream_block/step/1",
 			"mubble:block/dream_block/step/2",
 			"mubble:block/dream_block/step/3",
@@ -368,105 +280,79 @@
 			"mubble:block/dream_block/step/7"
 		]
 	},
-	"block.spring.trigger":
-	{
+	"block.spring.trigger": {
 		"subtitle": "subtitles.mubble.block.spring.trigger",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:block/spring/trigger"
 		]
 	},
-	"item.cape_feather.use":
-	{
+	"item.cape_feather.use": {
 		"subtitle": "subtitles.mubble.item.cape_feather.use",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:item/cape_feather/use"
 		]
 	},
-	"item.jingle_bells.use":
-	{
+	"item.jingle_bells.use": {
 		"subtitle": "subtitles.mubble.item.jingle_bells.use",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:item/jingle_bells/use/1",
 			"mubble:item/jingle_bells/use/2"
 		]
 	},
-	"item.smash_ball.use":
-	{
+	"item.smash_ball.use": {
 		"subtitle": "subtitles.mubble.item.smash_ball.use",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:item/smash_ball/use"
 		]
 	},
-	"item.super_mushroom.consume":
-	{
-		"sounds":
-		[
+	"item.super_mushroom.consume": {
+		"sounds": [
 			"mubble:item/super_mushroom/consume"
 		]
 	},
-	"item.super_star.theme":
-	{
-		"sounds":
-		[
+	"item.super_star.theme": {
+		"sounds": [
 			"mubble:item/super_star/theme"
 		]
 	},
-	"item.lightsaber.block":
-	{
-		"sounds":
-		[
+	"item.lightsaber.block": {
+		"sounds": [
 			"mubble:item/lightsaber/block/1",
 			"mubble:item/lightsaber/block/2",
 			"mubble:item/lightsaber/block/3"
 		]
 	},
-	"item.lightsaber.hit":
-	{
-		"sounds":
-		[
+	"item.lightsaber.hit": {
+		"sounds": [
 			"mubble:item/lightsaber/hit/1",
 			"mubble:item/lightsaber/hit/2",
 			"mubble:item/lightsaber/hit/3",
 			"mubble:item/lightsaber/hit/4"
 		]
 	},
-	"item.lightsaber.idle":
-	{
-		"sounds":
-		[
+	"item.lightsaber.idle": {
+		"sounds": [
 			"mubble:item/lightsaber/idle"
 		]
 	},
-	"item.lightsaber.pull_in":
-	{
-		"sounds":
-		[
+	"item.lightsaber.pull_in": {
+		"sounds": [
 			"mubble:item/lightsaber/pull_in/1",
 			"mubble:item/lightsaber/pull_in/2"
 		]
 	},
-	"item.lightsaber.pull_out":
-	{
-		"sounds":
-		[
+	"item.lightsaber.pull_out": {
+		"sounds": [
 			"mubble:item/lightsaber/pull_out"
 		]
 	},
-	"item.lightsaber.spark":
-	{
-		"sounds":
-		[
+	"item.lightsaber.spark": {
+		"sounds": [
 			"mubble:item/lightsaber/spark"
 		]
 	},
-	"item.lightsaber.swipe":
-	{
-		"sounds":
-		[
+	"item.lightsaber.swipe": {
+		"sounds": [
 			"mubble:item/lightsaber/swipe/1",
 			"mubble:item/lightsaber/swipe/2",
 			"mubble:item/lightsaber/swipe/3",
@@ -475,25 +361,19 @@
 			"mubble:item/lightsaber/swipe/6"
 		]
 	},
-	"item.lightsaber.throw.far":
-	{
-		"sounds":
-		[
+	"item.lightsaber.throw.far": {
+		"sounds": [
 			"mubble:item/lightsaber/throw/far"
 		]
 	},
-	"item.lightsaber.throw.near":
-	{
-		"sounds":
-		[
+	"item.lightsaber.throw.near": {
+		"sounds": [
 			"mubble:item/lightsaber/throw/near"
 		]
 	},
-	"entity.chincho.ambient":
-	{
+	"entity.chincho.ambient": {
 		"subtitle": "subtitles.mubble.entity.chincho.ambient",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/chincho/ambient/1",
 			"mubble:entity/chincho/ambient/2",
 			"mubble:entity/chincho/ambient/3",
@@ -503,148 +383,112 @@
 			"mubble:entity/chincho/ambient/7"
 		]
 	},
-	"entity.chincho.hurt":
-	{
+	"entity.chincho.hurt": {
 		"subtitle": "subtitles.mubble.entity.chincho.hurt",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/chincho/hurt/1",
 			"mubble:entity/chincho/hurt/2",
 			"mubble:entity/chincho/hurt/3",
 			"mubble:entity/chincho/hurt/4"
 		]
 	},
-	"entity.chincho.death":
-	{
+	"entity.chincho.death": {
 		"subtitle": "subtitles.mubble.entity.chincho.death",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/chincho/death"
 		]
 	},
-	"entity.duck.ambient":
-	{
+	"entity.duck.ambient": {
 		"subtitle": "subtitles.mubble.entity.duck.ambient",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/duck/ambient/1",
 			"mubble:entity/duck/ambient/2",
 			"mubble:entity/duck/ambient/3",
 			"mubble:entity/duck/ambient/4"
 		]
 	},
-	"entity.duck.hurt":
-	{
+	"entity.duck.hurt": {
 		"subtitle": "subtitles.mubble.entity.duck.hurt",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/duck/hurt/1",
 			"mubble:entity/duck/hurt/2",
 			"mubble:entity/duck/hurt/3"
 		]
 	},
-	"entity.duck.death":
-	{
+	"entity.duck.death": {
 		"subtitle": "subtitles.mubble.entity.duck.death",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/duck/death"
 		]
 	},
-	"entity.duck.step":
-	{
+	"entity.duck.step": {
 		"subtitle": "subtitles.block.generic.footsteps",
-		"sounds":
-		[
+		"sounds": [
 			"minecraft:mob/chicken/step1",
 			"minecraft:mob/chicken/step2"
 		]
 	},
-	"entity.fireball.hit.block":
-	{
-		"sounds":
-		[
+	"entity.fireball.hit.block": {
+		"sounds": [
 			"mubble:entity/fireball/hit/block"
 		]
 	},
-	"entity.fireball.hit.entity":
-	{
-		"sounds":
-		[
+	"entity.fireball.hit.entity": {
+		"sounds": [
 			"mubble:entity/fireball/hit/entity"
 		]
 	},
-	"entity.fireball.hit.meltable":
-	{
-		"sounds":
-		[
+	"entity.fireball.hit.meltable": {
+		"sounds": [
 			"mubble:entity/fireball/hit/meltable"
 		]
 	},
-	"entity.fireball.throw":
-	{
+	"entity.fireball.throw": {
 		"subtitle": "subtitles.mubble.entity.fireball.throw",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/fireball/throw"
 		]
 	},
-	"entity.iceball.hit.block":
-	{
-		"sounds":
-		[
+	"entity.iceball.hit.block": {
+		"sounds": [
 			"mubble:entity/iceball/hit/block"
 		]
 	},
-	"entity.iceball.hit.entity":
-	{
-		"sounds":
-		[
+	"entity.iceball.hit.entity": {
+		"sounds": [
 			"mubble:entity/iceball/hit/entity"
 		]
 	},
-	"entity.iceball.throw":
-	{
+	"entity.iceball.throw": {
 		"subtitle": "subtitles.mubble.entity.iceball.throw",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/iceball/throw"
 		]
 	},
-	"entity.kirby_ball.hit.block":
-	{
-		"sounds":
-		[
+	"entity.kirby_ball.hit.block": {
+		"sounds": [
 			"mubble:entity/kirby_ball/hit/block"
 		]
 	},
-	"entity.kirby_ball.hit.entity":
-	{
-		"sounds":
-		[
+	"entity.kirby_ball.hit.entity": {
+		"sounds": [
 			"mubble:entity/kirby_ball/hit/entity"
 		]
 	},
-	"entity.kirby_ball.rebound":
-	{
-		"sounds":
-		[
+	"entity.kirby_ball.rebound": {
+		"sounds": [
 			"mubble:entity/kirby_ball/rebound"
 		]
 	},
-	"entity.kirby_ball.throw":
-	{
+	"entity.kirby_ball.throw": {
 		"subtitle": "subtitles.mubble.entity.kirby_ball.throw",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/kirby_ball/throw"
 		]
 	},
-	"entity.toad.ambient":
-	{
+	"entity.toad.ambient": {
 		"subtitle": "subtitles.mubble.entity.toad.ambient",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/toad/ambient/1",
 			"mubble:entity/toad/ambient/2",
 			"mubble:entity/toad/ambient/3",
@@ -659,19 +503,15 @@
 			"mubble:entity/toad/ambient/12"
 		]
 	},
-	"entity.toad.bup":
-	{
+	"entity.toad.bup": {
 		"subtitle": "subtitles.mubble.entity.toad.ambient",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/toad/ambient/bup"
 		]
 	},
-	"entity.toad.hurt":
-	{
+	"entity.toad.hurt": {
 		"subtitle": "subtitles.mubble.entity.toad.hurt",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/toad/hurt/1",
 			"mubble:entity/toad/hurt/2",
 			"mubble:entity/toad/hurt/3",
@@ -684,113 +524,89 @@
 			"mubble:entity/toad/hurt/10"
 		]
 	},
-	"entity.toad.death":
-	{
+	"entity.toad.death": {
 		"subtitle": "subtitles.mubble.entity.toad.death",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/toad/death/1",
 			"mubble:entity/toad/death/2",
 			"mubble:entity/toad/death/3",
 			"mubble:entity/toad/death/4"
 		]
 	},
-	"entity.goomba.step":
-	{
+	"entity.goomba.step": {
 		"subtitle": "subtitles.block.generic.footsteps",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/goomba/step/1",
 			"mubble:entity/goomba/step/2"
 		]
 	},
-	"entity.goomba.hurt":
-	{
+	"entity.goomba.hurt": {
 		"subtitle": "subtitles.mubble.entity.goomba.hurt",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/goomba/hurt"
 		]
 	},
-	"entity.goomba.crush":
-	{
+	"entity.goomba.crush": {
 		"subtitle": "subtitles.mubble.entity.goomba.crush",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/goomba/crush/1",
 			"mubble:entity/goomba/crush/2",
 			"mubble:entity/goomba/crush/3"
 		]
 	},
-	"entity.goomba.death":
-	{
+	"entity.goomba.death": {
 		"subtitle": "subtitles.mubble.entity.goomba.death",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/goomba/hurt"
 		]
 	},
-	"entity.pufferfish.aeugh":
-	{
-		"sounds":
-		[
+	"entity.pufferfish.aeugh": {
+		"sounds": [
 			"mubble:entity/pufferfish/aeugh"
 		]
 	},
-	"entity.zombie_cowman.ambient":
-	{
+	"entity.zombie_cowman.ambient": {
 		"subtitle": "subtitles.mubble.entity.zombie_cowman.ambient",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/zombie_cowman/ambient/1",
 			"mubble:entity/zombie_cowman/ambient/2",
 			"mubble:entity/zombie_cowman/ambient/3"
 		]
 	},
-	"entity.zombie_cowman.step":
-	{
+	"entity.zombie_cowman.step": {
 		"subtitle": "subtitles.block.generic.footsteps",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/zombie_cowman/step/1",
 			"mubble:entity/zombie_cowman/step/2",
 			"mubble:entity/zombie_cowman/step/3",
 			"mubble:entity/zombie_cowman/step/4"
 		]
 	},
-	"entity.zombie_cowman.angry":
-	{
+	"entity.zombie_cowman.angry": {
 		"subtitle": "subtitles.mubble.entity.zombie_cowman.angry",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/zombie_cowman/step/1",
 			"mubble:entity/zombie_cowman/step/2",
 			"mubble:entity/zombie_cowman/step/3",
 			"mubble:entity/zombie_cowman/step/4"
 		]
 	},
-	"entity.zombie_cowman.hurt":
-	{
+	"entity.zombie_cowman.hurt": {
 		"subtitle": "subtitles.mubble.entity.zombie_cowman.hurt",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/zombie_cowman/hurt/1",
 			"mubble:entity/zombie_cowman/hurt/2"
 		]
 	},
-	"entity.zombie_cowman.death":
-	{
+	"entity.zombie_cowman.death": {
 		"subtitle": "subtitles.mubble.entity.zombie_cowman.death",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:entity/zombie_cowman/death"
 		]
 	},
-	"costume.cappy.ambient":
-	{
+	"costume.cappy.ambient": {
 		"subtitle": "subtitles.mubble.costume.cappy.ambient",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:costume/cappy/ambient/1",
 			"mubble:costume/cappy/ambient/2",
 			"mubble:costume/cappy/ambient/3",
@@ -809,32 +625,26 @@
 			"mubble:costume/cappy/ambient/16"
 		]
 	},
-	"costume.cappy.ambient.nether":
-	{
+	"costume.cappy.ambient.nether": {
 		"subtitle": "subtitles.mubble.costume.cappy.ambient.nether",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:costume/cappy/ambient/nether/1",
 			"mubble:costume/cappy/ambient/nether/2",
 			"mubble:costume/cappy/ambient/nether/3",
 			"mubble:costume/cappy/ambient/nether/4"
 		]
 	},
-	"costume.cappy.equip":
-	{
+	"costume.cappy.equip": {
 		"subtitle": "subtitles.mubble.costume.cappy.equip",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:costume/cappy/equip/1",
 			"mubble:costume/cappy/equip/2",
 			"mubble:costume/cappy/equip/3"
 		]
 	},
-	"costume.cappy.happy":
-	{
+	"costume.cappy.happy": {
 		"subtitle": "subtitles.mubble.costume.cappy.happy",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:costume/cappy/happy/1",
 			"mubble:costume/cappy/happy/2",
 			"mubble:costume/cappy/happy/3",
@@ -844,11 +654,9 @@
 			"mubble:costume/cappy/happy/7"
 		]
 	},
-	"costume.cappy.help":
-	{
+	"costume.cappy.help": {
 		"subtitle": "subtitles.mubble.costume.cappy.help",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:costume/cappy/help/1",
 			"mubble:costume/cappy/help/2",
 			"mubble:costume/cappy/help/3",
@@ -857,21 +665,17 @@
 			"mubble:costume/cappy/help/6"
 		]
 	},
-	"costume.cappy.help.water":
-	{
+	"costume.cappy.help.water": {
 		"subtitle": "subtitles.mubble.costume.cappy.help",
-		"sounds":
-		[
+		"sounds": [
 			"mubble:costume/cappy/help/water/1",
 			"mubble:costume/cappy/help/water/2",
 			"mubble:costume/cappy/help/water/3",
 			"mubble:costume/cappy/help/water/4"
 		]
 	},
-	"ui.timeswap_table.take_result":
-	{
-		"sounds":
-		[
+	"ui.timeswap_table.take_result": {
+		"sounds": [
 			"mubble:ui/timeswap_table/take_result"
 		]
 	}

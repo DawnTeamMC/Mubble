@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/brown_bricks"}
+	"variants": {
+		"": {
+			"model": "mubble:block/brown_bricks"
+		}
 	}
 }

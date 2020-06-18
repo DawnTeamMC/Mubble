@@ -1,23 +1,44 @@
 {
-	"variants":
-	{
-		"over=false":
-		[
-			{"model": "mubble:block/ground_block/nsmbu/sky/normal/1"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/normal/2"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/normal/3"}
+	"variants": {
+		"over=false": [
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/normal/1"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/normal/2"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/normal/3"
+			}
 		],
-		"over=true": 
-		[
-			{"model": "mubble:block/ground_block/nsmbu/sky/over/11"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/over/12"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/over/13"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/over/21"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/over/22"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/over/23"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/over/31"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/over/32"},
-			{"model": "mubble:block/ground_block/nsmbu/sky/over/33"}
+		"over=true": [
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/over/11"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/over/12"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/over/13"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/over/21"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/over/22"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/over/23"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/over/31"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/over/32"
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/sky/over/33"
+			}
 		]
 	}
 }

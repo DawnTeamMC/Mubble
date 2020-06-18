@@ -1,14 +1,12 @@
 {
 	"type": "minecraft:crafting_shapeless",
 	"group": "wooden_button",
-	"ingredients":
-	[
+	"ingredients": [
 		{
 			"item": "mubble:cherry_oak_planks"
 		}
 	],
-	"result":
-	{
+	"result": {
 		"item": "mubble:cherry_oak_button"
 	}
 }

@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/potted_autumn_oak_sapling"}
+	"variants": {
+		"": {
+			"model": "mubble:block/potted_autumn_oak_sapling"
+		}
 	}
 }

@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:stonecutting/red_quartz_paving_stairs"
 		]
 	},
-	"criteria":
-	{
-		"has_red_quartz_paving":
-		{
+	"criteria": {
+		"has_red_quartz_paving": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:red_quartz_paving"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:stonecutting/red_quartz_paving_stairs"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_red_quartz_paving",
 			"has_the_recipe"

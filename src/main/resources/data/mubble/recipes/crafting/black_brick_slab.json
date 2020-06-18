@@ -1,19 +1,15 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:brick_slab",
-	"pattern":
-	[
+	"pattern": [
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:black_bricks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:black_brick_slab",
 		"count": 6
 	}

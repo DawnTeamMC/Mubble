@@ -1,14 +1,12 @@
 {
 	"type": "minecraft:crafting_shapeless",
 	"group": "planks",
-	"ingredients":
-	[
+	"ingredients": [
 		{
 			"tag": "mubble:palm_logs"
 		}
 	],
-	"result":
-	{
+	"result": {
 		"item": "mubble:palm_planks",
 		"count": 4
 	}

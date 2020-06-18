@@ -1,8 +1,13 @@
 {
-	"variants":
-	{
-		"type=bottom": {"model": "mubble:block/oak_wood_slab/bottom"},
-		"type=top": {"model": "mubble:block/oak_wood_slab/top"},
-		"type=double": {"model": "minecraft:block/oak_wood"}
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/oak_wood_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/oak_wood_slab/top"
+		},
+		"type=double": {
+			"model": "minecraft:block/oak_wood"
+		}
 	}
 }

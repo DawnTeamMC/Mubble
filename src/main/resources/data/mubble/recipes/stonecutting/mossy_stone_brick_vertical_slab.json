@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:mossy_stone_bricks"
 	},
 	"result": "mubble:mossy_stone_brick_vertical_slab",

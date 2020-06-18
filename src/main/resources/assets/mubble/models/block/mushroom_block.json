@@ -1,14 +1,24 @@
 {
-	"textures":
-	{
+	"textures": {
 		"particle": "#block"
 	},
-	"elements":
-	[
-		{	"from": [ 0, 0, 0 ],
-			"to": [ 16, 16, 0 ],
+	"elements": [
+		{
+			"from": [
+				0,
+				0,
+				0
+			],
+			"to": [
+				16,
+				16,
+				0
+			],
 			"faces": {
-				"north": { "texture": "#block", "cullface":"north" }
+				"north": {
+					"texture": "#block",
+					"cullface": "north"
+				}
 			}
 		}
 	]

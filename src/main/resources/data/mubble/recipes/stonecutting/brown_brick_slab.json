@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:brown_bricks"
 	},
 	"result": "mubble:brown_brick_slab",

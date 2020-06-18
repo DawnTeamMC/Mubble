@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/yellow_coin_to_red_coin"
 		]
 	},
-	"criteria":
-	{
-		"has_yellow_coin":
-		{
+	"criteria": {
+		"has_yellow_coin": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:yellow_coin"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/yellow_coin_to_red_coin"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_yellow_coin",
 			"has_the_recipe"

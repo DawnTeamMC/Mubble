@@ -1,7 +1,6 @@
 {
 	"parent": "block/cross",
-	"textures":
-	{
+	"textures": {
 		"cross": "mubble:block/blueberry_bush/age/3"
 	}
 }

@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/potted_pink_press_garden_sapling"}
+	"variants": {
+		"": {
+			"model": "mubble:block/potted_pink_press_garden_sapling"
+		}
 	}
 }

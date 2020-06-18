@@ -1,25 +1,20 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:tetris_block",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XOX",
 		"XXX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:white_concrete"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:gravel"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:white_tetris_block",
 		"count": 8
 	}

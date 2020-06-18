@@ -1,8 +1,13 @@
 {
-	"variants":
-	{
-		"type=bottom": {"model": "mubble:block/scarlet_slab/bottom"},
-		"type=top": {"model": "mubble:block/scarlet_slab/top"},
-		"type=double": {"model": "mubble:block/scarlet_planks"}
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/scarlet_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/scarlet_slab/top"
+		},
+		"type=double": {
+			"model": "mubble:block/scarlet_planks"
+		}
 	}
 }

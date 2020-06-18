@@ -1,11 +1,15 @@
 {
-	"variants":
-	{
-		"":
-		[
-			{"model": "mubble:block/scarlet_mushroom/0"},
-			{"model": "mubble:block/scarlet_mushroom/1"},
-			{"model": "mubble:block/scarlet_mushroom/2"}
+	"variants": {
+		"": [
+			{
+				"model": "mubble:block/scarlet_mushroom/0"
+			},
+			{
+				"model": "mubble:block/scarlet_mushroom/1"
+			},
+			{
+				"model": "mubble:block/scarlet_mushroom/2"
+			}
 		]
 	}
 }

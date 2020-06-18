@@ -1,7 +1,6 @@
 {
 	"parent": "block/fence_post",
-	"textures":
-	{
+	"textures": {
 		"texture": "mubble:block/press_garden_planks"
 	}
 }

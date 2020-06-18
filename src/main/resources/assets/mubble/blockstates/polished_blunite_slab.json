@@ -1,8 +1,13 @@
 {
-	"variants":
-	{
-		"type=bottom": {"model": "mubble:block/polished_blunite_slab/bottom"},
-		"type=top": {"model": "mubble:block/polished_blunite_slab/top"},
-		"type=double": {"model": "mubble:block/polished_blunite"}
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/polished_blunite_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/polished_blunite_slab/top"
+		},
+		"type=double": {
+			"model": "mubble:block/polished_blunite"
+		}
 	}
 }

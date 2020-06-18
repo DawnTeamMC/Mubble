@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/scarlet_leaves"}
+	"variants": {
+		"": {
+			"model": "mubble:block/scarlet_leaves"
+		}
 	}
 }

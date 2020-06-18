@@ -1,12 +1,10 @@
 {
 	"type": "minecraft:entity",
-	"pools":
-	[
+	"pools": [
 		{
-			"name":"normal",
+			"name": "normal",
 			"rolls": 1,
-			"entries":
-			[
+			"entries": [
 				{
 					"type": "loot_table",
 					"name": "mubble:entities/toad/normal",
@@ -15,20 +13,17 @@
 			]
 		},
 		{
-			"name":"adventure",
+			"name": "adventure",
 			"rolls": 2,
-			"entries":
-			[
+			"entries": [
 				{
 					"type": "item",
 					"name": "minecraft:paper",
 					"weight": 2,
-					"functions":
-					[
+					"functions": [
 						{
 							"function": "set_count",
-							"count":
-							{
+							"count": {
 								"min": 2,
 								"max": 5
 							}
@@ -39,12 +34,10 @@
 					"type": "item",
 					"name": "minecraft:book",
 					"weight": 1,
-					"functions":
-					[
+					"functions": [
 						{
 							"function": "set_count",
-							"count":
-							{
+							"count": {
 								"min": 1,
 								"max": 3
 							}

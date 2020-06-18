@@ -1,8 +1,16 @@
 {
-	"variants":
-	{
-		"axis=y": { "model": "mubble:block/stripped_scarlet_log" },
-		"axis=z": { "model": "mubble:block/stripped_scarlet_log", "x": 90 },
-		"axis=x": { "model": "mubble:block/stripped_scarlet_log", "x": 90, "y": 90 }
+	"variants": {
+		"axis=y": {
+			"model": "mubble:block/stripped_scarlet_log"
+		},
+		"axis=z": {
+			"model": "mubble:block/stripped_scarlet_log",
+			"x": 90
+		},
+		"axis=x": {
+			"model": "mubble:block/stripped_scarlet_log",
+			"x": 90,
+			"y": 90
+		}
 	}
 }

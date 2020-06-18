@@ -6,16 +6,13 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
-public class PlacerBlockEntity extends DispenserBlockEntity
-{
-	public PlacerBlockEntity()
-	{
+public class PlacerBlockEntity extends DispenserBlockEntity {
+	public PlacerBlockEntity() {
 		super(MubbleTileEntityTypes.PLACER);
 	}
 
 	@Override
-	protected Text getContainerName()
-	{
+	protected Text getContainerName() {
 		return new TranslatableText("container." + Mubble.MOD_ID + ".placer");
 	}
 }

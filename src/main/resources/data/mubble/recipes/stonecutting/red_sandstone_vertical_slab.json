@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:red_sandstone"
 	},
 	"result": "mubble:red_sandstone_vertical_slab",

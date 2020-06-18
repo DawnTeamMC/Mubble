@@ -1,19 +1,15 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XX",
 		"XX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "mubble:nsmbu_note_block"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:nsmbu_super_note_block"
 	}
 }

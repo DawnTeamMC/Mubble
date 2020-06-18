@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XOX",
 		"XXX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:bricks"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:purple_stained_glass"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:mirror_temple_bricks",
 		"count": 8
 	}

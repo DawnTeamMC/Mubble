@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/orange_tulip_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/orange_tulip_pile"
+		}
 	}
 }

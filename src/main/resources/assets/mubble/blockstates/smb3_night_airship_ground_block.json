@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/ground_block/smb3/airship/night"}
+	"variants": {
+		"": {
+			"model": "mubble:block/ground_block/smb3/airship/night"
+		}
 	}
 }

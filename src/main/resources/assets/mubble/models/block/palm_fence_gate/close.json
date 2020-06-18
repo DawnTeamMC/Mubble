@@ -1,7 +1,6 @@
 {
 	"parent": "block/template_fence_gate",
-	"textures":
-	{
+	"textures": {
 		"texture": "mubble:block/palm_planks"
 	}
 }

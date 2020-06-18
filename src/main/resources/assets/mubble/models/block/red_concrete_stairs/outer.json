@@ -1,7 +1,6 @@
 {
 	"parent": "block/outer_stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "minecraft:block/red_concrete",
 		"top": "minecraft:block/red_concrete",
 		"side": "minecraft:block/red_concrete"

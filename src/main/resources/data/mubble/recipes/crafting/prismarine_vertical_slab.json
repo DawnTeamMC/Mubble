@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:prismarine"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:prismarine_vertical_slab",
 		"count": 6
 	}

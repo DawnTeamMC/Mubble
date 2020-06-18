@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:stonecutting/pink_quartz_paving_stairs"
 		]
 	},
-	"criteria":
-	{
-		"has_pink_quartz_paving":
-		{
+	"criteria": {
+		"has_pink_quartz_paving": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:pink_quartz_paving"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:stonecutting/pink_quartz_paving_stairs"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_pink_quartz_paving",
 			"has_the_recipe"

@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:andesite"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:andesite_vertical_slab",
 		"count": 6
 	}

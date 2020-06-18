@@ -1,7 +1,7 @@
 {
 	"parent": "block/cube_all",
-	"textures":
-	{
-		"all": "mubble:block/tetris_glass"}
+	"textures": {
+		"all": "mubble:block/tetris_glass"
 	}
+}
 }

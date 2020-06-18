@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:crafting_shapeless",
-	"ingredients":
-	[
+	"ingredients": [
 		{
 			"item": "minecraft:cobblestone"
 		},
@@ -9,8 +8,7 @@
 			"item": "minecraft:soul_sand"
 		}
 	],
-	"result":
-	{
+	"result": {
 		"item": "mubble:vampire_stone",
 		"count": 2
 	}

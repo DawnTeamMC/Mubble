@@ -1,7 +1,6 @@
 {
 	"parent": "block/slab_top",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/blunite",
 		"top": "mubble:block/blunite",
 		"side": "mubble:block/blunite"

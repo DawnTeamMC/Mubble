@@ -1,29 +1,21 @@
 {
 	"parent": "mubble:get_vanadium",
-	"display":
-	{
-		"icon":
-		{
+	"display": {
+		"icon": {
 			"item": "mubble:timeswap_table"
 		},
-		"title":
-		{
+		"title": {
 			"translate": "advancements.mubble.get_timeswap_table.title"
 		},
-		"description":
-		{
+		"description": {
 			"translate": "advancements.mubble.get_timeswap_table.description"
 		}
 	},
-	"criteria":
-	{
-		"has_vanadium":
-		{
+	"criteria": {
+		"has_vanadium": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:timeswap_table"
 					}

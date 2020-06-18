@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/pile",
-	"textures":
-	{
+	"textures": {
 		"pile": "minecraft:block/acacia_leaves"
 	}
 }

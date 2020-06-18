@@ -1,7 +1,6 @@
 {
 	"parent": "block/outer_stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/mossy_cobblestone_bricks",
 		"top": "mubble:block/mossy_cobblestone_bricks",
 		"side": "mubble:block/mossy_cobblestone_bricks"

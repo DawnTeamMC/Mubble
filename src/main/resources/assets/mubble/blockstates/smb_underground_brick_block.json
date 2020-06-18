@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/brick_block/smb/underground"}
+	"variants": {
+		"": {
+			"model": "mubble:block/brick_block/smb/underground"
+		}
 	}
 }

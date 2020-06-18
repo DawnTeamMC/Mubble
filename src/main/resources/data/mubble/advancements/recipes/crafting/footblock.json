@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/footblock"
 		]
 	},
-	"criteria":
-	{
-		"has_wool":
-		{
+	"criteria": {
+		"has_wool": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"tag": "minecraft:wool"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/footblock"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_wool",
 			"has_the_recipe"

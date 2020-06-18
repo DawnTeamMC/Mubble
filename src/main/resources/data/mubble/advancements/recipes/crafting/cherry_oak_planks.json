@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/cherry_oak_planks"
 		]
 	},
-	"criteria":
-	{
-		"has_logs":
-		{
+	"criteria": {
+		"has_logs": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"tag": "mubble:cherry_oak_logs"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/cherry_oak_planks"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_logs",
 			"has_the_recipe"

@@ -29,18 +29,15 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
-public class GoombaEntity extends MobEntityWithAi
-{
+public class GoombaEntity extends MobEntityWithAi {
 	private static final TrackedData<Integer> VARIANT = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
-	public GoombaEntity(EntityType<? extends GoombaEntity> type, World worldIn)
-	{
+	public GoombaEntity(EntityType<? extends GoombaEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
 
 	@Override
-	protected void initGoals()
-	{
+	protected void initGoals() {
 		this.goalSelector.add(0, new SwimGoal(this));
 		this.goalSelector.add(1, new MeleeAttackGoal(this, 1.0D, false));
 		this.goalSelector.add(2, new GoToWalkTargetGoal(this, 1.0D));
@@ -53,8 +50,7 @@ public class GoombaEntity extends MobEntityWithAi
 		this.targetSelector.add(3, new FollowTargetGoal<>(this, ToadEntity.class, true));
 	}
 
-	public static Builder createGoombaAttributes()
-	{
+	public static Builder createGoombaAttributes() {
 		return MobEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0D)
 				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3D)
@@ -63,72 +59,60 @@ public class GoombaEntity extends MobEntityWithAi
 	}
 
 	@Override
-	public float getEyeHeight(EntityPose pose)
-	{
+	public float getEyeHeight(EntityPose pose) {
 		return 0.375F;
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source)
-	{
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return MubbleSounds.ENTITY_GOOMBA_HURT;
 	}
 
 	@Override
-	protected SoundEvent getDeathSound()
-	{
+	protected SoundEvent getDeathSound() {
 		return MubbleSounds.ENTITY_GOOMBA_DEATH;
 	}
 
-	protected SoundEvent getStepSound()
-	{
+	protected SoundEvent getStepSound() {
 		return MubbleSounds.ENTITY_GOOMBA_STEP;
 	}
 
 	@Override
-	protected void playStepSound(BlockPos pos, BlockState blockIn)
-	{
+	protected void playStepSound(BlockPos pos, BlockState blockIn) {
 		this.playSound(this.getStepSound(), 0.15F, 1.0F);
 	}
 
-	public int getVariant()
-	{
+	public int getVariant() {
 		return this.dataTracker.get(VARIANT);
 	}
 
-	public void setVariant(int variantIn)
-	{
+	public void setVariant(int variantIn) {
 		this.dataTracker.set(VARIANT, variantIn);
 	}
 
 	@Override
-	protected void initDataTracker()
-	{
+	protected void initDataTracker() {
 		super.initDataTracker();
 		this.dataTracker.startTracking(VARIANT, 0);
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag compound)
-	{
+	public void writeCustomDataToTag(CompoundTag compound) {
 		super.writeCustomDataToTag(compound);
 		compound.putInt("Variant", this.getVariant());
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag compound)
-	{
+	public void readCustomDataFromTag(CompoundTag compound) {
 		super.readCustomDataFromTag(compound);
 		this.setVariant(compound.getInt("Variant"));
 	}
 
 	@Override
-	public void onPlayerCollision(PlayerEntity playerIn)
-	{
+	public void onPlayerCollision(PlayerEntity playerIn) {
 		Box hitbox = this.getBoundingBox().shrink(0, -1, 0).expand(-0.4, 0, -0.4);
 		Vec3d velocity = playerIn.getVelocity();
-		if (!this.world.isClient() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && velocity.y < 0.3D && this.isAlive())
-		{
+		if(!this.world.isClient() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && velocity.y < 0.3D && this.isAlive()) {
 			playerIn.setVelocity(velocity.x, 0.5D, velocity.z);
 			((ServerPlayerEntity) playerIn).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(playerIn));
 			playerIn.fallDistance = 0.0F;
@@ -137,8 +121,7 @@ public class GoombaEntity extends MobEntityWithAi
 		}
 	}
 
-	public static boolean canSpawn(EntityType<GoombaEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand)
-	{
+	public static boolean canSpawn(EntityType<GoombaEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand) {
 		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}
 }

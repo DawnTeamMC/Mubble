@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/vertical_slab/east",
-	"textures":
-	{
+	"textures": {
 		"block": "mubble:block/pink_dark_prismarine"
 	}
 }

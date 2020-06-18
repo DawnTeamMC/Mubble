@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:cherry_oak_fence",
 		"mubble:palm_fence",
 		"mubble:press_garden_fence",

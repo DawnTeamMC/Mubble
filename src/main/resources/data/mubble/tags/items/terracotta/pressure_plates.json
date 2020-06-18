@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:terracotta_pressure_plate",
 		"mubble:white_terracotta_pressure_plate",
 		"mubble:light_gray_terracotta_pressure_plate",

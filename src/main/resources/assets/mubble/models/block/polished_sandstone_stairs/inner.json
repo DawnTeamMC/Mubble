@@ -1,7 +1,6 @@
 {
 	"parent": "block/inner_stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/polished_sandstone",
 		"top": "mubble:block/polished_sandstone",
 		"side": "mubble:block/polished_sandstone"

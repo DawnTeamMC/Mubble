@@ -1,10 +1,19 @@
 {
-	"variants":
-	{
-		"type=north":	{"model": "mubble:block/oak_vertical_slab/north"},
-		"type=south":	{"model": "mubble:block/oak_vertical_slab/south"},
-		"type=east":	{"model": "mubble:block/oak_vertical_slab/east"},
-		"type=west":	{"model": "mubble:block/oak_vertical_slab/west"},
-		"type=double":	{"model": "minecraft:block/oak_planks"}
+	"variants": {
+		"type=north": {
+			"model": "mubble:block/oak_vertical_slab/north"
+		},
+		"type=south": {
+			"model": "mubble:block/oak_vertical_slab/south"
+		},
+		"type=east": {
+			"model": "mubble:block/oak_vertical_slab/east"
+		},
+		"type=west": {
+			"model": "mubble:block/oak_vertical_slab/west"
+		},
+		"type=double": {
+			"model": "minecraft:block/oak_planks"
+		}
 	}
 }

@@ -10,8 +10,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
-public class ToadEntityRenderer extends MobEntityRenderer<ToadEntity, ToadEntityModel<ToadEntity>>
-{
+public class ToadEntityRenderer extends MobEntityRenderer<ToadEntity, ToadEntityModel<ToadEntity>> {
 	private static final Identifier BLUE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/blue.png");
 	private static final Identifier LIGHT_BLUE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/light_blue.png");
 	private static final Identifier CYAN_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/species/cyan.png");
@@ -36,16 +35,13 @@ public class ToadEntityRenderer extends MobEntityRenderer<ToadEntity, ToadEntity
 	private static final Identifier PARTY_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/party.png");
 	private static final Identifier KISEKAE_TOAD_TEXTURES = new Identifier(Mubble.MOD_PREFIX + "textures/entity/toad/kisekae.png");
 
-	public ToadEntityRenderer(EntityRenderDispatcher dispatcher)
-	{
+	public ToadEntityRenderer(EntityRenderDispatcher dispatcher) {
 		super(dispatcher, new ToadEntityModel<>(), 0.5F);
 	}
 
 	@Override
-	public Identifier getTexture(ToadEntity entity)
-	{
-		switch (entity.getVariant())
-		{
+	public Identifier getTexture(ToadEntity entity) {
+		switch(entity.getVariant()) {
 			case 0:
 				return WHITE_TOAD_TEXTURES;
 			case 1:

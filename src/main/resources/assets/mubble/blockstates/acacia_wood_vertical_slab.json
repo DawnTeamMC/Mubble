@@ -1,10 +1,19 @@
 {
-	"variants":
-	{
-		"type=north":	{"model": "mubble:block/acacia_wood_vertical_slab/north"},
-		"type=south":	{"model": "mubble:block/acacia_wood_vertical_slab/south"},
-		"type=east":	{"model": "mubble:block/acacia_wood_vertical_slab/east"},
-		"type=west":	{"model": "mubble:block/acacia_wood_vertical_slab/west"},
-		"type=double":	{"model": "minecraft:block/acacia_wood"}
+	"variants": {
+		"type=north": {
+			"model": "mubble:block/acacia_wood_vertical_slab/north"
+		},
+		"type=south": {
+			"model": "mubble:block/acacia_wood_vertical_slab/south"
+		},
+		"type=east": {
+			"model": "mubble:block/acacia_wood_vertical_slab/east"
+		},
+		"type=west": {
+			"model": "mubble:block/acacia_wood_vertical_slab/west"
+		},
+		"type=double": {
+			"model": "minecraft:block/acacia_wood"
+		}
 	}
 }

@@ -1,7 +1,6 @@
 {
 	"parent": "block/door_top",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/door/nsmbu/key/locked/bottom",
 		"top": "mubble:block/door/nsmbu/key/locked/top"
 	}

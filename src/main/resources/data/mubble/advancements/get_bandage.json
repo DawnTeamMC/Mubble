@@ -1,29 +1,21 @@
 {
 	"parent": "mubble:get_coin",
-	"display":
-	{
-		"icon":
-		{
+	"display": {
+		"icon": {
 			"item": "mubble:bandage"
 		},
-		"title":
-		{
+		"title": {
 			"translate": "advancements.mubble.get_bandage.title"
 		},
-		"description":
-		{
+		"description": {
 			"translate": "advancements.mubble.get_bandage.description"
 		}
 	},
-	"criteria":
-	{
-		"has_bandage":
-		{
+	"criteria": {
+		"has_bandage": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:bandage"
 					}

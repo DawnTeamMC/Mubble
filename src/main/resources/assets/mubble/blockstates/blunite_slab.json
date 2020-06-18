@@ -1,8 +1,13 @@
 {
-	"variants":
-	{
-		"type=bottom": {"model": "mubble:block/blunite_slab/bottom"},
-		"type=top": {"model": "mubble:block/blunite_slab/top"},
-		"type=double": {"model": "mubble:block/blunite"}
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/blunite_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/blunite_slab/top"
+		},
+		"type=double": {
+			"model": "mubble:block/blunite"
+		}
 	}
 }

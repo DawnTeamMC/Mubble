@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/vanadium_ore"}
+	"variants": {
+		"": {
+			"model": "mubble:block/vanadium_ore"
+		}
 	}
 }

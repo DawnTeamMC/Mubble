@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/japanese_tetris_cushion"}
+	"variants": {
+		"": {
+			"model": "mubble:block/japanese_tetris_cushion"
+		}
 	}
 }

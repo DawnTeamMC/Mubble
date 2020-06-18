@@ -1,7 +1,6 @@
 {
 	"parent": "block/outer_stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/mirror_temple_bricks/0",
 		"top": "mubble:block/mirror_temple_bricks/0",
 		"side": "mubble:block/mirror_temple_bricks/0"

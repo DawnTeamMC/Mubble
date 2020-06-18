@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/elder_pebbles"
 		]
 	},
-	"criteria":
-	{
-		"has_prismarine_crystals":
-		{
+	"criteria": {
+		"has_prismarine_crystals": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:prismarine_crystals"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions": 
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/elder_pebbles"
 			}
 		}
 	},
-	"requirements": 
-	[
+	"requirements": [
 		[
 			"has_prismarine_crystals",
 			"has_the_recipe"

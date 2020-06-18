@@ -1,51 +1,39 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:stonecutting/cut_red_sandstone_vertical_slab"
 		]
 	},
-	"criteria":
-	{
-		"has_red_sandstone":
-		{
+	"criteria": {
+		"has_red_sandstone": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:red_sandstone"
 					}
 				]
 			}
 		},
-		"has_cut_red_sandstone":
-		{
+		"has_cut_red_sandstone": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:cut_red_sandstone"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:stonecutting/cut_red_sandstone_vertical_slab"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_red_sandstone",
 			"has_cut_red_sandstone",

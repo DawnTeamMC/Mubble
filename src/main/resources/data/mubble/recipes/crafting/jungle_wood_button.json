@@ -1,19 +1,15 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:wood_button",
-	"pattern":
-	[
+	"pattern": [
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:jungle_wood"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:jungle_wood_button"
 	}
 }

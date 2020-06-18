@@ -1,8 +1,13 @@
 {
-	"variants":
-	{
-		"type=bottom": {"model": "mubble:block/light_gray_quartz_paving_slab/bottom"},
-		"type=top": {"model": "mubble:block/light_gray_quartz_paving_slab/top"},
-		"type=double": {"model": "mubble:block/light_gray_quartz_paving"}
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/light_gray_quartz_paving_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/light_gray_quartz_paving_slab/top"
+		},
+		"type=double": {
+			"model": "mubble:block/light_gray_quartz_paving"
+		}
 	}
 }

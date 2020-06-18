@@ -1,7 +1,6 @@
 {
 	"parent": "block/stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/yellow_dark_prismarine",
 		"top": "mubble:block/yellow_dark_prismarine",
 		"side": "mubble:block/yellow_dark_prismarine"

@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "wooden_trapdoor",
-	"pattern":
-	[
+	"pattern": [
 		"###",
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:press_garden_planks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:press_garden_trapdoor",
 		"count": 2
 	}

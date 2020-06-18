@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/cloud_flower"}
+	"variants": {
+		"": {
+			"model": "mubble:block/cloud_flower"
+		}
 	}
 }

@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:smb_super_note_block",
 		"mubble:smb3_super_note_block",
 		"mubble:smw_super_note_block",

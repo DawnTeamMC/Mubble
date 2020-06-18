@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:mirror_temple_bricks"
 	},
 	"result": "mubble:mirror_temple_brick_vertical_slab",

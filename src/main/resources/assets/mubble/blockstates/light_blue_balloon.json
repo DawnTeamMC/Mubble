@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/light_blue_balloon"}
+	"variants": {
+		"": {
+			"model": "mubble:block/light_blue_balloon"
+		}
 	}
 }

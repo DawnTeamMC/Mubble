@@ -1,21 +1,17 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:concrete_stairs",
-	"pattern":
-	[
+	"pattern": [
 		"#  ",
 		"## ",
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:yellow_concrete"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:yellow_concrete_stairs",
 		"count": 4
 	}

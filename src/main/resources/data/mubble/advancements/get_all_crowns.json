@@ -1,82 +1,62 @@
 {
 	"parent": "mubble:get_super_crown",
-	"display":
-	{
-		"icon":
-		{
+	"display": {
+		"icon": {
 			"item": "mubble:super_crown"
 		},
-		"title":
-		{
+		"title": {
 			"translate": "advancements.mubble.get_all_crowns.title"
 		},
-		"description":
-		{
+		"description": {
 			"translate": "advancements.mubble.get_all_crowns.description"
 		},
 		"frame": "challenge"
 	},
-	"criteria":
-	{
-		"has_princess_peach_crown":
-		{
+	"criteria": {
+		"has_princess_peach_crown": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:princess_peach_crown"
 					}
 				]
 			}
 		},
-		"has_princess_daisy_crown":
-		{
+		"has_princess_daisy_crown": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:princess_daisy_crown"
 					}
 				]
 			}
 		},
-		"has_rosalina_crown":
-		{
+		"has_rosalina_crown": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:rosalina_crown"
 					}
 				]
 			}
 		},
-		"has_pink_gold_peach_crown":
-		{
+		"has_pink_gold_peach_crown": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:pink_gold_peach_crown"
 					}
 				]
 			}
 		},
-		"has_super_crown":
-		{
+		"has_super_crown": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:super_crown"
 					}
@@ -84,16 +64,24 @@
 			}
 		}
 	},
-	"requirements":
-	[
-		["has_princess_peach_crown"],
-		["has_princess_daisy_crown"],
-		["has_rosalina_crown"],
-		["has_pink_gold_peach_crown"],
-		["has_super_crown"]
+	"requirements": [
+		[
+			"has_princess_peach_crown"
+		],
+		[
+			"has_princess_daisy_crown"
+		],
+		[
+			"has_rosalina_crown"
+		],
+		[
+			"has_pink_gold_peach_crown"
+		],
+		[
+			"has_super_crown"
+		]
 	],
-	"rewards":
-	{
+	"rewards": {
 		"experience": 125
 	}
 }

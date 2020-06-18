@@ -1,7 +1,6 @@
 {
 	"parent": "block/outer_stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/press_garden_planks",
 		"top": "mubble:block/press_garden_planks",
 		"side": "mubble:block/press_garden_planks"

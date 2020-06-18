@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"#mubble:brick/stairs",
 		"#mubble:concrete/stairs",
 		"#mubble:dark_prismarine/stairs",

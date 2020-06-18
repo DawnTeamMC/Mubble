@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/honey_crepe"
 		]
 	},
-	"criteria":
-	{
-		"has_honey_bottle":
-		{
+	"criteria": {
+		"has_honey_bottle": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:honey_bottle"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/honey_crepe"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_honey_bottle",
 			"has_the_recipe"

@@ -1,8 +1,7 @@
 {
 	"name": "Mubble Guide",
 	"landing_text": "Welcome to the #mubble guide book!<+>In this book, you will find the documentation over thousands of the additions bringed to the table by #mubble.",
-	"macros":
-	{
+	"macros": {
 		"<+>": "$(br)",
 		"<++>": "$(2br)",
 		"<b>": "$(bold)",

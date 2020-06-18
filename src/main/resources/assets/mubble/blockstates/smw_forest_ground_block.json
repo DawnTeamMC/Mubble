@@ -1,21 +1,66 @@
 {
-	"variants":
-	{
-		"over=false": {"model": "mubble:block/ground_block/smw/forest/normal"},
-		"over=true": 
-		[
-			{"model": "mubble:block/ground_block/smw/forest/over/1", "weight": 50},
-			{"model": "mubble:block/ground_block/smw/forest/over/1", "weight": 50, "y": 90 },
-			{"model": "mubble:block/ground_block/smw/forest/over/1", "weight": 50, "y": 180 },
-			{"model": "mubble:block/ground_block/smw/forest/over/1", "weight": 50, "y": 270 },
-			{"model": "mubble:block/ground_block/smw/forest/over/2", "weight": 10},
-			{"model": "mubble:block/ground_block/smw/forest/over/2", "weight": 10, "y": 90 },
-			{"model": "mubble:block/ground_block/smw/forest/over/2", "weight": 10, "y": 180 },
-			{"model": "mubble:block/ground_block/smw/forest/over/2", "weight": 10, "y": 270 },
-			{"model": "mubble:block/ground_block/smw/forest/over/3", "weight": 10},
-			{"model": "mubble:block/ground_block/smw/forest/over/3", "weight": 10, "y": 90 },
-			{"model": "mubble:block/ground_block/smw/forest/over/3", "weight": 10, "y": 180 },
-			{"model": "mubble:block/ground_block/smw/forest/over/3", "weight": 10, "y": 270 }
+	"variants": {
+		"over=false": {
+			"model": "mubble:block/ground_block/smw/forest/normal"
+		},
+		"over=true": [
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/1",
+				"weight": 50
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/1",
+				"weight": 50,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/1",
+				"weight": 50,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/1",
+				"weight": 50,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/2",
+				"weight": 10
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/2",
+				"weight": 10,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/2",
+				"weight": 10,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/2",
+				"weight": 10,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/3",
+				"weight": 10
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/3",
+				"weight": 10,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/3",
+				"weight": 10,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/smw/forest/over/3",
+				"weight": 10,
+				"y": 270
+			}
 		]
 	}
 }

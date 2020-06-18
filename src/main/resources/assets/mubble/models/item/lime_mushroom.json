@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
-	"textures":
-	{
-		"layer0": "mubble:block/lime_mushroom"}
+	"textures": {
+		"layer0": "mubble:block/lime_mushroom"
 	}
+}
 }

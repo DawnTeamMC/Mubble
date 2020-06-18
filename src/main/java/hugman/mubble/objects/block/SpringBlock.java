@@ -22,8 +22,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.WorldView;
 
-public class SpringBlock extends DirectionalBlock implements Waterloggable
-{
+public class SpringBlock extends DirectionalBlock implements Waterloggable {
 	public static final DirectionProperty FACING = Properties.FACING;
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	private static final VoxelShape IRON_UP = Block.createCuboidShape(6.0D, 0.0D, 6.0D, 10.0D, 6.0D, 10.0D);
@@ -51,36 +50,30 @@ public class SpringBlock extends DirectionalBlock implements Waterloggable
 	private static final VoxelShape COL_SPRING_EAST = Block.createCuboidShape(0.0D, 1.0D, 1.0D, 9.0D, 15.0D, 15.0D);
 	private static final VoxelShape COL_SPRING_WEST = Block.createCuboidShape(7.0D, 1.0D, 1.0D, 16.0D, 15.0D, 15.0D);
 
-	public SpringBlock(Block.Settings builder)
-	{
+	public SpringBlock(Block.Settings builder) {
 		super(builder);
 		this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.UP).with(WATERLOGGED, Boolean.valueOf(false)));
 	}
 
 	@Override
-	public PistonBehavior getPistonBehavior(BlockState state)
-	{
+	public PistonBehavior getPistonBehavior(BlockState state) {
 		return PistonBehavior.DESTROY;
 	}
 
 	@Override
-	protected void appendProperties(Builder<Block, BlockState> builder)
-	{
+	protected void appendProperties(Builder<Block, BlockState> builder) {
 		builder.add(WATERLOGGED);
 		super.appendProperties(builder);
 	}
 
 	@Override
-	public boolean isTranslucent(BlockState state, BlockView reader, BlockPos pos)
-	{
+	public boolean isTranslucent(BlockState state, BlockView reader, BlockPos pos) {
 		return true;
 	}
 
 	@Override
-	public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context)
-	{
-		switch (state.get(FACING))
-		{
+	public VoxelShape getOutlineShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context) {
+		switch(state.get(FACING)) {
 			case UP:
 				return SPRING_UP;
 			case DOWN:
@@ -99,10 +92,8 @@ public class SpringBlock extends DirectionalBlock implements Waterloggable
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context)
-	{
-		switch (state.get(FACING))
-		{
+	public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context) {
+		switch(state.get(FACING)) {
 			case UP:
 				return COL_SPRING_UP;
 			case DOWN:
@@ -121,39 +112,33 @@ public class SpringBlock extends DirectionalBlock implements Waterloggable
 	}
 
 	@Override
-	public FluidState getFluidState(BlockState state)
-	{
+	public FluidState getFluidState(BlockState state) {
 		return state.get(WATERLOGGED) ? Fluids.WATER.getStill(false) : Fluids.EMPTY.getDefaultState();
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos)
-	{
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		Direction direction = state.get(FACING);
 		return Block.sideCoversSmallSquare(world, pos.offset(direction.getOpposite()), direction);
 	}
 
 	@Override
-	public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facing, BlockState facingState, WorldAccess worldIn, BlockPos currentPos, BlockPos facingPos)
-	{
+	public BlockState getStateForNeighborUpdate(BlockState stateIn, Direction facing, BlockState facingState, WorldAccess worldIn, BlockPos currentPos, BlockPos facingPos) {
 		return facing.getOpposite() == stateIn.get(FACING) && !stateIn.canPlaceAt(worldIn, currentPos) ? Blocks.AIR.getDefaultState() : stateIn;
 	}
 
 	@Override
-	public BlockState getPlacementState(ItemPlacementContext context)
-	{
+	public BlockState getPlacementState(ItemPlacementContext context) {
 		return this.getDefaultState().with(WATERLOGGED, Boolean.valueOf(context.getWorld().getFluidState(context.getBlockPos()).getFluid() == Fluids.WATER)).with(FACING, context.getPlayerFacing());
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn)
-	{
+	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		Vec3d vec3d = entityIn.getVelocity();
 		double keptXFactor = vec3d.x / 3;
 		double keptYFactor = vec3d.y / 3;
 		double keptZFactor = vec3d.z / 3;
-		switch (state.get(FACING))
-		{
+		switch(state.get(FACING)) {
 			case UP:
 				entityIn.setVelocity(vec3d.x, keptYFactor + 1.5D, vec3d.z);
 				break;
@@ -180,8 +165,7 @@ public class SpringBlock extends DirectionalBlock implements Waterloggable
 	}
 
 	@Override
-	public void onLandedUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance)
-	{
+	public void onLandedUpon(World worldIn, BlockPos pos, Entity entityIn, float fallDistance) {
 		entityIn.handleFallDamage(fallDistance, 0.0F);
 	}
 }

@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/scarlet_sapling"}
+	"variants": {
+		"": {
+			"model": "mubble:block/scarlet_sapling"
+		}
 	}
 }

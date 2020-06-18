@@ -9,8 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class DuckEntityModel<T extends LivingEntity> extends AnimalModel<T>
-{
+public class DuckEntityModel<T extends LivingEntity> extends AnimalModel<T> {
 	private final ModelPart head;
 	private final ModelPart body;
 	private final ModelPart rightLeg;
@@ -19,8 +18,7 @@ public class DuckEntityModel<T extends LivingEntity> extends AnimalModel<T>
 	private final ModelPart leftWing;
 	private final ModelPart beak;
 
-	public DuckEntityModel()
-	{
+	public DuckEntityModel() {
 		head = new ModelPart(this, 0, 0);
 		head.addCuboid(-2.0F, -10.0F, -2.0F, 4.0F, 10.0F, 3.0F, 0.0F);
 		head.setPivot(0.0F, 15.0F, -4.0F);
@@ -43,18 +41,15 @@ public class DuckEntityModel<T extends LivingEntity> extends AnimalModel<T>
 		leftWing.setPivot(4.0F, 13.0F, 0.0F);
 	}
 
-	protected Iterable<ModelPart> getHeadParts()
-	{
+	protected Iterable<ModelPart> getHeadParts() {
 		return ImmutableList.of(head, beak);
 	}
 
-	protected Iterable<ModelPart> getBodyParts()
-	{
+	protected Iterable<ModelPart> getBodyParts() {
 		return ImmutableList.of(body, rightLeg, leftLeg, rightWing, leftWing);
 	}
 
-	public void setAngles(T entity, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_)
-	{
+	public void setAngles(T entity, float p_225597_2_, float p_225597_3_, float p_225597_4_, float p_225597_5_, float p_225597_6_) {
 		head.pitch = p_225597_6_ * ((float) Math.PI / 180F);
 		head.yaw = p_225597_5_ * ((float) Math.PI / 180F);
 		beak.copyPositionAndRotation(head);

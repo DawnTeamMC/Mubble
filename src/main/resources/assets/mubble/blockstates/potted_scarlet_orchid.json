@@ -1,10 +1,12 @@
 {
-	"variants":
-	{
-		"":
-		[
-			{"model": "mubble:block/potted_scarlet_orchid/0"},
-			{"model": "mubble:block/potted_scarlet_orchid/1"}
+	"variants": {
+		"": [
+			{
+				"model": "mubble:block/potted_scarlet_orchid/0"
+			},
+			{
+				"model": "mubble:block/potted_scarlet_orchid/1"
+			}
 		]
 	}
 }

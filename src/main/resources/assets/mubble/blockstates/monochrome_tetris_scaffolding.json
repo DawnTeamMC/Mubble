@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/monochrome_tetris_scaffolding"}
+	"variants": {
+		"": {
+			"model": "mubble:block/monochrome_tetris_scaffolding"
+		}
 	}
 }

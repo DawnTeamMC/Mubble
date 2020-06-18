@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"X X",
 		"XXX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:yellow_concrete"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:nsmbu_rotating_block",
 		"count": 8
 	}

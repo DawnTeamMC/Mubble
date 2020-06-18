@@ -6,8 +6,7 @@ import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
-public enum MubbleItemTiers implements ToolMaterial
-{
+public enum MubbleItemTiers implements ToolMaterial {
 	VANADIUM(3, 1756, 10.0F, 3.5F, 12, () ->
 	{
 		return Ingredient.fromTag(MubbleTags.Items.GEMS_KYBER);
@@ -29,8 +28,7 @@ public enum MubbleItemTiers implements ToolMaterial
 	private final Lazy<Ingredient> repairIngredient;
 
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	MubbleItemTiers(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantibility, Supplier<Ingredient> repairIngredient)
-	{
+	MubbleItemTiers(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantibility, Supplier<Ingredient> repairIngredient) {
 		this.miningLevel = miningLevel;
 		this.itemDurability = itemDurability;
 		this.miningSpeed = miningSpeed;
@@ -39,33 +37,27 @@ public enum MubbleItemTiers implements ToolMaterial
 		this.repairIngredient = new Lazy(repairIngredient);
 	}
 
-	public int getDurability()
-	{
+	public int getDurability() {
 		return this.itemDurability;
 	}
 
-	public float getMiningSpeedMultiplier()
-	{
+	public float getMiningSpeedMultiplier() {
 		return this.miningSpeed;
 	}
 
-	public float getAttackDamage()
-	{
+	public float getAttackDamage() {
 		return this.attackDamage;
 	}
 
-	public int getMiningLevel()
-	{
+	public int getMiningLevel() {
 		return this.miningLevel;
 	}
 
-	public int getEnchantability()
-	{
+	public int getEnchantability() {
 		return this.enchantability;
 	}
 
-	public Ingredient getRepairIngredient()
-	{
+	public Ingredient getRepairIngredient() {
 		return this.repairIngredient.get();
 	}
 }

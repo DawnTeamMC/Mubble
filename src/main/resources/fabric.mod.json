@@ -1,37 +1,34 @@
 {
-    "schemaVersion": 1,
-    "id": "mubble",
-    "version": "${version}",
-
-    "name": "Mubble",
-    "description": "Expand your world with features from the Nintendo universe, and way more.",
-    "authors": [
-        "Hugman",
-        "Yanis48"
-    ],
-    "contact": {
-        "homepage": "https://sites.google.com/view/mubblemc",
-        "sources": "https://github.com/Hugman76/Mubble",
-        "issues": "https://github.com/Hugman76/Mubble/issues"
-    },
-    
-    "license": "MIT",
-    "icon": "icon.png",
-
-    "environment": "*",
-    "entrypoints": {
-        "main": [
-            "hugman.mubble.Mubble"
-        ],
-        "client": [
-            "hugman.mubble.MubbleClient"
-        ]
-    },
+	"schemaVersion": 1,
+	"id": "mubble",
+	"version": "${version}",
+	"name": "Mubble",
+	"description": "Expand your world with features from the Nintendo universe, and way more.",
+	"authors": [
+		"Hugman",
+		"Yanis48"
+	],
+	"contact": {
+		"homepage": "https://sites.google.com/view/mubblemc",
+		"sources": "https://github.com/Hugman76/Mubble",
+		"issues": "https://github.com/Hugman76/Mubble/issues"
+	},
+	"license": "MIT",
+	"icon": "icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"hugman.mubble.Mubble"
+		],
+		"client": [
+			"hugman.mubble.MubbleClient"
+		]
+	},
 	"mixins": [
-        "mubble.mixins.json"
-    ],
-    "depends": {
-        "fabricloader": ">=0.8.2",
-        "fabric": "*"
-    }
+		"mubble.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.8.2",
+		"fabric": "*"
+	}
 }

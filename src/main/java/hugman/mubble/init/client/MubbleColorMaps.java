@@ -9,10 +9,8 @@ import net.minecraft.client.color.world.FoliageColors;
 import net.minecraft.client.color.world.GrassColors;
 
 @Environment(EnvType.CLIENT)
-public class MubbleColorMaps
-{
-	public static void registerBlockColors()
-	{
+public class MubbleColorMaps {
+	public static void registerBlockColors() {
 		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) ->
 		{
 			return pos != null && world != null ? BiomeColors.getGrassColor(pos, world) : GrassColors.getColor(0.5D, 1.0D);
@@ -59,8 +57,7 @@ public class MubbleColorMaps
 		}, MubbleBlocks.SCARLET_LEAVES, MubbleBlocks.SCARLET_LEAF_PILE);
 	}
 
-	public static void registerItemColors()
-	{
+	public static void registerItemColors() {
 		ColorProviderRegistry.ITEM.register((item, layer) ->
 		{
 			return GrassColors.getColor(0.5D, 1.0D);

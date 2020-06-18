@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/pink_tetris_block"
 		]
 	},
-	"criteria":
-	{
-		"has_gravel":
-		{
+	"criteria": {
+		"has_gravel": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:gravel"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/pink_tetris_block"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_gravel",
 			"has_the_recipe"

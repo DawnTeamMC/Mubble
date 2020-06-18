@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/ground_block/nsmbu/castle"}
+	"variants": {
+		"": {
+			"model": "mubble:block/ground_block/nsmbu/castle"
+		}
 	}
 }

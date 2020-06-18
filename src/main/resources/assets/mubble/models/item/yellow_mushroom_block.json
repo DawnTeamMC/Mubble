@@ -1,7 +1,7 @@
 {
 	"parent": "block/cube_all",
-	"textures":
-	{
-		"all": "mubble:block/yellow_mushroom_block"}
+	"textures": {
+		"all": "mubble:block/yellow_mushroom_block"
 	}
+}
 }

@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/brick_block/nsmbu"}
+	"variants": {
+		"": {
+			"model": "mubble:block/brick_block/nsmbu"
+		}
 	}
 }

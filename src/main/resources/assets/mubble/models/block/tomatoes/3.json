@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/cross_crop",
-	"textures":
-	{
+	"textures": {
 		"cross_crop": "mubble:block/tomatoes/3"
 	}
 }

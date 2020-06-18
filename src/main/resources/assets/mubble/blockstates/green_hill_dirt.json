@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/green_hill_dirt"}
+	"variants": {
+		"": {
+			"model": "mubble:block/green_hill_dirt"
+		}
 	}
 }

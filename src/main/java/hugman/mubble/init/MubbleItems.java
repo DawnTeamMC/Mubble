@@ -12,8 +12,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 import net.minecraft.util.registry.Registry;
 
-public class MubbleItems
-{
+public class MubbleItems {
 	/* MUBBLE */
 	public static final Item WHEAT_FLOUR = register("wheat_flour", new Item(new Item.Settings().group(ItemGroup.FOOD)));
 	public static final Item TOMATO = register("tomato", new BlockItem(MubbleBlocks.TOMATOES, new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.TOMATO)));
@@ -101,8 +100,7 @@ public class MubbleItems
 	public static final Item CHINCHO_SPAWN_EGG = register("chincho_spawn_egg", new SpawnEggItem(MubbleEntities.CHINCHO, 7527671, 4903, new Item.Settings().group(ItemGroup.MISC)));
 	public static final Item GOOMBA_SPAWN_EGG = register("goomba_spawn_egg", new SpawnEggItem(MubbleEntities.GOOMBA, 10839375, 12097909, new Item.Settings().group(ItemGroup.MISC)));
 
-	private static Item register(String name, Item item)
-	{
+	private static Item register(String name, Item item) {
 		return Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), item);
 	}
 }

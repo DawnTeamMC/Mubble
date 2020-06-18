@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:light_gray_concrete"
 	},
 	"result": "mubble:light_gray_concrete_wall",

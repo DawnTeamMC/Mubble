@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/orange_tetris_block"}
+	"variants": {
+		"": {
+			"model": "mubble:block/orange_tetris_block"
+		}
 	}
 }

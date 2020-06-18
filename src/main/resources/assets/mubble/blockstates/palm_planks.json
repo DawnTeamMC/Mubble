@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/palm_planks"}
+	"variants": {
+		"": {
+			"model": "mubble:block/palm_planks"
+		}
 	}
 }

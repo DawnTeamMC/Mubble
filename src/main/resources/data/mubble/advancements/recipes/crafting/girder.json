@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/girder"
 		]
 	},
-	"criteria":
-	{
-		"has_iron_bars":
-		{
+	"criteria": {
+		"has_iron_bars": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:iron_bars"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/girder"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_iron_bars",
 			"has_the_recipe"

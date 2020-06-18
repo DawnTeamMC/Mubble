@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:yellow_coin",
 		"mubble:red_coin",
 		"mubble:blue_coin"

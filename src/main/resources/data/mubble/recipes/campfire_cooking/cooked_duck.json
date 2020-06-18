@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:campfire_cooking",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:duck"
 	},
 	"result": "mubble:cooked_duck",

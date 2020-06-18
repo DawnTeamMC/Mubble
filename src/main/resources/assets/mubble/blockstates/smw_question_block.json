@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/question_block/smw"}
+	"variants": {
+		"": {
+			"model": "mubble:block/question_block/smw"
+		}
 	}
 }

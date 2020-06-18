@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"#c:storage_blocks",
 		"#minecraft:anvil",
 		"mubble:gold_mario_cap",

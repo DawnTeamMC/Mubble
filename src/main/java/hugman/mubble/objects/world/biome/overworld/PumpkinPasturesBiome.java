@@ -17,10 +17,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-public class PumpkinPasturesBiome extends Biome
-{
-	public PumpkinPasturesBiome()
-	{
+public class PumpkinPasturesBiome extends Biome {
+	public PumpkinPasturesBiome() {
 		super((new Biome.Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN)
@@ -75,14 +73,12 @@ public class PumpkinPasturesBiome extends Biome
 	}
 
 	@Override
-	public int getGrassColorAt(double x, double z)
-	{
+	public int getGrassColorAt(double x, double z) {
 		return 15443554;
 	}
 
 	@Override
-	public int getFoliageColor()
-	{
+	public int getFoliageColor() {
 		return 15232304;
 	}
 }

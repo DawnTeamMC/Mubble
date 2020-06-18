@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/footblock"}
+	"variants": {
+		"": {
+			"model": "mubble:block/footblock"
+		}
 	}
 }

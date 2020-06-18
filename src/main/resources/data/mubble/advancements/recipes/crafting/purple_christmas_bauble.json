@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/purple_christmas_bauble"
 		]
 	},
-	"criteria":
-	{
-		"has_glowstone":
-		{
+	"criteria": {
+		"has_glowstone": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:glowstone_dust"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/purple_christmas_bauble"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_glowstone",
 			"has_the_recipe"

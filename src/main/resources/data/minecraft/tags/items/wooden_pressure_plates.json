@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:cherry_oak_pressure_plate",
 		"mubble:palm_pressure_plate",
 		"mubble:press_garden_pressure_plate",

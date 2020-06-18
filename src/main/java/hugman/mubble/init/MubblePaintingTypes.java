@@ -5,8 +5,7 @@ import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class MubblePaintingTypes
-{
+public class MubblePaintingTypes {
 	public static final PaintingMotive THE_GREAT_WAVE_OFF_KANAGAWA = register("the_great_wave_off_kanagawa", 64, 64);
 	public static final PaintingMotive THE_SCREAM = register("the_scream", 16, 32);
 	public static final PaintingMotive THE_STARRY_NIGHT = register("the_starry_night", 64, 48);
@@ -23,8 +22,7 @@ public class MubblePaintingTypes
 
 	public static final PaintingMotive SSBU_ROSTER = register("ssbu_roster", 384, 64);
 
-	private static PaintingMotive register(String name, int width, int height)
-	{
+	private static PaintingMotive register(String name, int width, int height) {
 		return Registry.register(Registry.PAINTING_MOTIVE, new Identifier(Mubble.MOD_ID, name), new PaintingMotive(width, height));
 	}
 }

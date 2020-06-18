@@ -1,7 +1,6 @@
 {
 	"parent": "minecraft:block/leaves",
-	"textures":
-	{
+	"textures": {
 		"all": "mubble:block/palm_leaves"
 	}
 }

@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:smoking/cooked_duck"
 		]
 	},
-	"criteria":
-	{
-		"has_duck":
-		{
+	"criteria": {
+		"has_duck": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:duck"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:smoking/cooked_duck"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_duck",
 			"has_the_recipe"

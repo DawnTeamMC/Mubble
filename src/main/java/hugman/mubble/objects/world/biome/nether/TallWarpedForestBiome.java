@@ -22,10 +22,8 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-public class TallWarpedForestBiome extends Biome
-{
-	public TallWarpedForestBiome()
-	{
+public class TallWarpedForestBiome extends Biome {
+	public TallWarpedForestBiome() {
 		super((new Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.NETHER_FOREST, SurfaceBuilder.WARPED_NYLIUM_CONFIG)
 				.precipitation(Precipitation.NONE)

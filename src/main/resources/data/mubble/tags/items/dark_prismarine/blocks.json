@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"minecraft:dark_prismarine",
 		"mubble:white_dark_prismarine",
 		"mubble:light_gray_dark_prismarine",

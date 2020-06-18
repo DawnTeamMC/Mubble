@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/wither_rose_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/wither_rose_pile"
+		}
 	}
 }

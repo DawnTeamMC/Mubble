@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:smelting/caramel_cube"
 		]
 	},
-	"criteria":
-	{
-		"has_sugar":
-		{
+	"criteria": {
+		"has_sugar": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:sugar"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:smelting/caramel_cube"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_sugar",
 			"has_the_recipe"

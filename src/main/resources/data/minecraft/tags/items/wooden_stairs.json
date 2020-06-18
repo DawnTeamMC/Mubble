@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:cherry_oak_stairs",
 		"mubble:palm_stairs",
 		"mubble:press_garden_stairs",

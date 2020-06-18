@@ -1,7 +1,7 @@
 {
 	"parent": "block/cross",
-	"textures":
-	{
-		"cross": "mubble:block/yellow_mushroom"}
+	"textures": {
+		"cross": "mubble:block/yellow_mushroom"
 	}
+}
 }

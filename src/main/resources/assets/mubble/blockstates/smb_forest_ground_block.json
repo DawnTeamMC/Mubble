@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/ground_block/smb/forest"}
+	"variants": {
+		"": {
+			"model": "mubble:block/ground_block/smb/forest"
+		}
 	}
 }

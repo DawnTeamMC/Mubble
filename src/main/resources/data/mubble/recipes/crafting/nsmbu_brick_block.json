@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XOX",
 		"XXX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"tag": "mubble:brick/blocks"
 		},
-		"O":
-		{
+		"O": {
 			"item": "mubble:yellow_coin"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:nsmbu_brick_block",
 		"count": 8
 	}

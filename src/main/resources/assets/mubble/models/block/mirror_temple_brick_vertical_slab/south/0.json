@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/vertical_slab/south",
-	"textures":
-	{
+	"textures": {
 		"block": "mubble:block/mirror_temple_bricks/0"
 	}
 }

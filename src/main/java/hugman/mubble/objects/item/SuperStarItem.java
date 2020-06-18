@@ -10,22 +10,17 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.world.World;
 
-public class SuperStarItem extends Item
-{
-	public SuperStarItem(Item.Settings builder)
-	{
+public class SuperStarItem extends Item {
+	public SuperStarItem(Item.Settings builder) {
 		super(builder);
 	}
 
 	@Override
-	public ItemStack finishUsing(ItemStack stack, World worldIn, LivingEntity entityLiving)
-	{
-		if (!worldIn.isClient)
-		{
+	public ItemStack finishUsing(ItemStack stack, World worldIn, LivingEntity entityLiving) {
+		if(!worldIn.isClient) {
 			ServerWorld serverWorldIn = (ServerWorld) worldIn;
 			StopSoundS2CPacket sstopsoundpacket = new StopSoundS2CPacket(MubbleSounds.ITEM_SUPER_STAR_THEME.getId(), SoundCategory.PLAYERS);
-			for (ServerPlayerEntity serverplayerentity : serverWorldIn.getPlayers())
-			{
+			for(ServerPlayerEntity serverplayerentity : serverWorldIn.getPlayers()) {
 				serverplayerentity.networkHandler.sendPacket(sstopsoundpacket);
 			}
 		}

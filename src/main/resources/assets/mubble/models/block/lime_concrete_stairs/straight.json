@@ -1,7 +1,6 @@
 {
 	"parent": "block/stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "minecraft:block/lime_concrete",
 		"top": "minecraft:block/lime_concrete",
 		"side": "minecraft:block/lime_concrete"

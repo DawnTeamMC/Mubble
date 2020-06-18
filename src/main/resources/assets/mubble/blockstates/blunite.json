@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/blunite"}
+	"variants": {
+		"": {
+			"model": "mubble:block/blunite"
+		}
 	}
 }

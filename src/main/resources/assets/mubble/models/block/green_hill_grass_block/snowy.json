@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_bottom_top",
-	"textures":
-	{
+	"textures": {
 		"particle": "mubble:block/green_hill_dirt",
 		"bottom": "mubble:block/green_hill_dirt",
 		"top": "mubble:block/green_hill_grass_block/top",

@@ -12,30 +12,24 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.World;
 
-public class TotemOfAscendingItem extends Item
-{
-	public TotemOfAscendingItem(Item.Settings builder)
-	{
+public class TotemOfAscendingItem extends Item {
+	public TotemOfAscendingItem(Item.Settings builder) {
 		super(builder);
 	}
 
 	@Override
-	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
-	{
+	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getStackInHand(handIn);
 		BlockPos desPos = new BlockPos(playerIn.getX(), worldIn.getChunk(playerIn.getBlockPos()).sampleHeightmap(Heightmap.Type.WORLD_SURFACE, (int) playerIn.getX(), (int) playerIn.getZ()), playerIn.getZ());
 		worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), SoundEvents.ITEM_TOTEM_USE, SoundCategory.PLAYERS, 1f, 1f);
-		if (desPos.getY() <= playerIn.getY())
-		{
+		if(desPos.getY() <= playerIn.getY()) {
 			playerIn.updatePosition(playerIn.getX(), playerIn.getY() + 20D, playerIn.getZ());
 		}
-		else
-		{
+		else {
 			playerIn.updatePosition(playerIn.getX(), desPos.getY() + 2D, playerIn.getZ());
 		}
 		playerIn.fallDistance = 0f;
-		if (!playerIn.abilities.creativeMode)
-		{
+		if(!playerIn.abilities.creativeMode) {
 			stack.decrement(1);
 		}
 		playerIn.getItemCooldownManager().set(this, 25);

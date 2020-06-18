@@ -1,7 +1,6 @@
 {
 	"parent": "block/door_bottom_rh",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/door/smb/bottom",
 		"top": "mubble:block/door/smb/top"
 	}

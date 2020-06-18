@@ -17,10 +17,8 @@ import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-public class PinkCherryOakForestBiome extends Biome
-{
-	public PinkCherryOakForestBiome()
-	{
+public class PinkCherryOakForestBiome extends Biome {
+	public PinkCherryOakForestBiome() {
 		super((new Biome.Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
 				.precipitation(Biome.Precipitation.RAIN)
@@ -73,8 +71,7 @@ public class PinkCherryOakForestBiome extends Biome
 	}
 
 	@Override
-	public int getFoliageColor()
-	{
+	public int getFoliageColor() {
 		return 15768259;
 	}
 }

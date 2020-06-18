@@ -1,7 +1,6 @@
 {
 	"parent": "minecraft:block/orientable",
-	"textures":
-	{
+	"textures": {
 		"top": "minecraft:block/furnace_top",
 		"front": "mubble:block/placer/front",
 		"side": "minecraft:block/furnace_side"

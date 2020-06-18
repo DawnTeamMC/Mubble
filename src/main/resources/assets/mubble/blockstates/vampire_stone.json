@@ -1,15 +1,27 @@
 {
-	"variants":
-	{
-		"":
-		[
-			{"model": "mubble:block/vampire_stone/0"},
-			{"model": "mubble:block/vampire_stone/1"},
-			{"model": "mubble:block/vampire_stone/2"},
-			{"model": "mubble:block/vampire_stone/3"},
-			{"model": "mubble:block/vampire_stone/4"},
-			{"model": "mubble:block/vampire_stone/5"},
-			{"model": "mubble:block/vampire_stone/6"}
+	"variants": {
+		"": [
+			{
+				"model": "mubble:block/vampire_stone/0"
+			},
+			{
+				"model": "mubble:block/vampire_stone/1"
+			},
+			{
+				"model": "mubble:block/vampire_stone/2"
+			},
+			{
+				"model": "mubble:block/vampire_stone/3"
+			},
+			{
+				"model": "mubble:block/vampire_stone/4"
+			},
+			{
+				"model": "mubble:block/vampire_stone/5"
+			},
+			{
+				"model": "mubble:block/vampire_stone/6"
+			}
 		]
 	}
 }

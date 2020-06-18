@@ -1,7 +1,6 @@
 {
-	"parent":"mubble:item/cap",
-	"textures":
-	{
+	"parent": "mubble:item/cap",
+	"textures": {
 		"cap": "mubble:costume/waluigi_cap"
 	}
 }

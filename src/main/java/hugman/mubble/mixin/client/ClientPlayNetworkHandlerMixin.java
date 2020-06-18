@@ -18,15 +18,13 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientPlayNetworkHandler.class)
-public class ClientPlayNetworkHandlerMixin
-{
+public class ClientPlayNetworkHandlerMixin {
 	@Shadow
 	private ClientWorld world;
 
 	@SuppressWarnings("rawtypes")
 	@Inject(method = "onEntitySpawn", at = @At(value = "HEAD"), cancellable = true)
-	private void onEntitySpawn(EntitySpawnS2CPacket packet, CallbackInfo info)
-	{
+	private void onEntitySpawn(EntitySpawnS2CPacket packet, CallbackInfo info) {
 		ClientPlayNetworkHandler cpnh = (ClientPlayNetworkHandler) (Object) this;
 		MinecraftClient client = MinecraftClient.getInstance();
 		NetworkThreadUtils.forceMainThread(packet, cpnh, client);
@@ -35,20 +33,16 @@ public class ClientPlayNetworkHandlerMixin
 		double z = packet.getZ();
 		EntityType<?> entityType = packet.getEntityTypeId();
 		Object entity = null;
-		if (entityType == MubbleEntities.FIREBALL)
-		{
+		if(entityType == MubbleEntities.FIREBALL) {
 			entity = new FireballEntity(this.world, x, y, z);
 		}
-		else if (entityType == MubbleEntities.ICEBALL)
-		{
+		else if(entityType == MubbleEntities.ICEBALL) {
 			entity = new IceballEntity(this.world, x, y, z);
 		}
-		else if (entityType == MubbleEntities.KIRBY_BALL)
-		{
+		else if(entityType == MubbleEntities.KIRBY_BALL) {
 			entity = new KirbyBallEntity(this.world, x, y, z);
 		}
-		if (entity != null)
-		{
+		if(entity != null) {
 			int i = packet.getId();
 			((Entity) entity).updateTrackedPosition(x, y, z);
 			((Entity) entity).pitch = (float) (packet.getPitch() * 360) / 256.0F;

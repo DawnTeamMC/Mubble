@@ -21,8 +21,7 @@ import net.minecraft.world.gen.trunk.*;
 
 import java.util.OptionalInt;
 
-public class MubbleFeatureConfigs
-{
+public class MubbleFeatureConfigs {
 	private static final BlockState OAK_LOG = Blocks.OAK_LOG.getDefaultState();
 	private static final BlockState BIRCH_LOG = Blocks.BIRCH_LOG.getDefaultState();
 
@@ -127,8 +126,7 @@ public class MubbleFeatureConfigs
 	public static final RandomPatchFeatureConfig SCARLET_MUSHROOM_PATCHES = mushroomConfig(MubbleBlocks.SCARLET_MUSHROOM);
 	public static final RandomPatchFeatureConfig SCARLET_ORCHID_PATCHES = (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(SCARLET_ORCHID), SimpleBlockPlacer.field_24871)).tries(64).build();
 
-	public static RandomPatchFeatureConfig mushroomConfig(Block block)
-	{
+	public static RandomPatchFeatureConfig mushroomConfig(Block block) {
 		return (new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(block.getDefaultState()), SimpleBlockPlacer.field_24871)).tries(64).cannotProject().build();
 	}
 }

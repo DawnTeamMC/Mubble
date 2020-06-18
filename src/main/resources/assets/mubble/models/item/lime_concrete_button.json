@@ -1,7 +1,6 @@
 {
 	"parent": "block/button_inventory",
-	"textures":
-	{
+	"textures": {
 		"texture": "minecraft:block/lime_concrete"
 	}
 }

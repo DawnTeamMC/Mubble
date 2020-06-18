@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:smelting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:permafrost_bismuth_ore"
 	},
 	"result": "mubble:bismuth_dust",

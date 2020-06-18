@@ -1,7 +1,6 @@
 {
 	"parent": "block/inner_stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/green_dark_prismarine",
 		"top": "mubble:block/green_dark_prismarine",
 		"side": "mubble:block/green_dark_prismarine"

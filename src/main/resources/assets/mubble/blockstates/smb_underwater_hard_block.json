@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/hard_block/smb/underwater"}
+	"variants": {
+		"": {
+			"model": "mubble:block/hard_block/smb/underwater"
+		}
 	}
 }

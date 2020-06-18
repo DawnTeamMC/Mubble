@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:stonecutting/mirror_temple_brick_wall"
 		]
 	},
-	"criteria":
-	{
-		"has_mirror_temple_bricks":
-		{
+	"criteria": {
+		"has_mirror_temple_bricks": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:mirror_temple_bricks"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:stonecutting/mirror_temple_brick_wall"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_mirror_temple_bricks",
 			"has_the_recipe"

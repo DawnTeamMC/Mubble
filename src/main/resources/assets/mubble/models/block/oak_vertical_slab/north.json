@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/vertical_slab/north",
-	"textures":
-	{
+	"textures": {
 		"block": "minecraft:block/oak_planks"
 	}
 }

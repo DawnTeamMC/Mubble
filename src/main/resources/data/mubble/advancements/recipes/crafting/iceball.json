@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/iceball"
 		]
 	},
-	"criteria":
-	{
-		"has_ice_flower":
-		{
+	"criteria": {
+		"has_ice_flower": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:ice_flower"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/iceball"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_ice_flower",
 			"has_the_recipe"

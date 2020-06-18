@@ -22,10 +22,8 @@ import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.*;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-public class TallCrimsonForestBiome extends Biome
-{
-	public TallCrimsonForestBiome()
-	{
+public class TallCrimsonForestBiome extends Biome {
+	public TallCrimsonForestBiome() {
 		super((new Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.NETHER_FOREST, SurfaceBuilder.CRIMSON_NYLIUM_CONFIG)
 				.precipitation(Precipitation.NONE)

@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/question_block/smb3"}
+	"variants": {
+		"": {
+			"model": "mubble:block/question_block/smb3"
+		}
 	}
 }

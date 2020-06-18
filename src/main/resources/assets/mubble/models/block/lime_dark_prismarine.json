@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_all",
-	"textures":
-	{
+	"textures": {
 		"all": "mubble:block/lime_dark_prismarine"
 	}
 }

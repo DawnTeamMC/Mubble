@@ -21,8 +21,7 @@ import net.minecraft.util.math.MathHelper;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandler>
-{
+public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandler> {
 	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");
 	private static final Identifier TEXTURE = new Identifier(Mubble.MOD_ID, "textures/gui/container/timeswap_table.png");
 	private float scrollAmount;
@@ -30,26 +29,22 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 	private int scrollOffset;
 	private boolean canCraft;
 
-	public TimeswapTableScreen(TimeswapTableScreenHandler handler, PlayerInventory inventory, Text title)
-	{
+	public TimeswapTableScreen(TimeswapTableScreenHandler handler, PlayerInventory inventory, Text title) {
 		super(handler, inventory, CONTAINER_NAME);
 		handler.setContentsChangedListener(this::onInventoryChange);
 	}
 
-	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta)
-	{
+	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		super.render(matrices, mouseX, mouseY, delta);
 		this.drawMouseoverTooltip(matrices, mouseX, mouseY);
 	}
 
-	protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY)
-	{
+	protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
 		this.textRenderer.draw(matrices, this.title, 8.0F, 4.0F, 4210752);
 		this.textRenderer.draw(matrices, this.playerInventory.getDisplayName(), 8.0F, (float) (this.backgroundHeight - 94), 4210752);
 	}
 
-	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY)
-	{
+	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
 		this.renderBackground(matrices);
 		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.client.getTextureManager().bindTexture(TEXTURE);
@@ -65,22 +60,18 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 		this.renderRecipeIcons(l, m, n);
 	}
 
-	protected void drawMouseoverTooltip(MatrixStack matrices, int x, int y)
-	{
+	protected void drawMouseoverTooltip(MatrixStack matrices, int x, int y) {
 		super.drawMouseoverTooltip(matrices, x, y);
-		if (this.canCraft)
-		{
+		if(this.canCraft) {
 			int i = this.x + 52;
 			int j = this.y + 14;
 			int k = this.scrollOffset + 12;
 			List<Item> list = this.handler.getAvailableRecipes();
-			for (int l = this.scrollOffset; l < k && l < this.handler.getAvailableRecipeCount(); ++l)
-			{
+			for(int l = this.scrollOffset; l < k && l < this.handler.getAvailableRecipeCount(); ++l) {
 				int m = l - this.scrollOffset;
 				int n = i + m % 4 * 16;
 				int o = j + m / 4 * 18 + 2;
-				if (x >= n && x < n + 16 && y >= o && y < o + 18)
-				{
+				if(x >= n && x < n + 16 && y >= o && y < o + 18) {
 					this.renderTooltip(matrices, new ItemStack(list.get(i)), x, y);
 				}
 			}
@@ -88,22 +79,18 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 
 	}
 
-	private void renderRecipeBackground(MatrixStack matrixStack, int i, int j, int k, int l, int m)
-	{
-		for (int n = this.scrollOffset; n < m
-				&& n < this.handler.getAvailableRecipeCount(); ++n)
-		{
+	private void renderRecipeBackground(MatrixStack matrixStack, int i, int j, int k, int l, int m) {
+		for(int n = this.scrollOffset; n < m
+				&& n < this.handler.getAvailableRecipeCount(); ++n) {
 			int o = n - this.scrollOffset;
 			int p = k + o % 4 * 16;
 			int q = o / 4;
 			int r = l + q * 18 + 2;
 			int s = this.backgroundHeight;
-			if (n == this.handler.getSelectedRecipe())
-			{
+			if(n == this.handler.getSelectedRecipe()) {
 				s += 18;
 			}
-			else if (i >= p && j >= r && i < p + 16 && j < r + 18)
-			{
+			else if(i >= p && j >= r && i < p + 16 && j < r + 18) {
 				s += 36;
 			}
 			this.drawTexture(matrixStack, p, r - 1, 0, s, 16, 18);
@@ -111,11 +98,9 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 
 	}
 
-	private void renderRecipeIcons(int x, int y, int scrollOffset)
-	{
+	private void renderRecipeIcons(int x, int y, int scrollOffset) {
 		List<Item> list = this.handler.getAvailableRecipes();
-		for (int i = this.scrollOffset; i < scrollOffset && i < this.handler.getAvailableRecipeCount(); ++i)
-		{
+		for(int i = this.scrollOffset; i < scrollOffset && i < this.handler.getAvailableRecipeCount(); ++i) {
 			int j = i - this.scrollOffset;
 			int k = x + j % 4 * 16;
 			int l = j / 4;
@@ -125,21 +110,17 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 
 	}
 
-	public boolean mouseClicked(double mouseX, double mouseY, int button)
-	{
+	public boolean mouseClicked(double mouseX, double mouseY, int button) {
 		this.mouseClicked = false;
-		if (this.canCraft)
-		{
+		if(this.canCraft) {
 			int i = this.x + 52;
 			int j = this.y + 14;
 			int k = this.scrollOffset + 12;
-			for (int l = this.scrollOffset; l < k; ++l)
-			{
+			for(int l = this.scrollOffset; l < k; ++l) {
 				int m = l - this.scrollOffset;
 				double d = mouseX - (double) (i + m % 4 * 16);
 				double e = mouseY - (double) (j + m / 4 * 18);
-				if (d >= 0.0D && e >= 0.0D && d < 16.0D && e < 18.0D && this.handler.onButtonClick(this.client.player, l))
-				{
+				if(d >= 0.0D && e >= 0.0D && d < 16.0D && e < 18.0D && this.handler.onButtonClick(this.client.player, l)) {
 					MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_STONECUTTER_SELECT_RECIPE, 1.0F));
 					this.client.interactionManager.clickButton(this.handler.syncId, l);
 					return true;
@@ -147,18 +128,15 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 			}
 			i = this.x + 119;
 			j = this.y + 9;
-			if (mouseX >= (double) i && mouseX < (double) (i + 12) && mouseY >= (double) j && mouseY < (double) (j + 54))
-			{
+			if(mouseX >= (double) i && mouseX < (double) (i + 12) && mouseY >= (double) j && mouseY < (double) (j + 54)) {
 				this.mouseClicked = true;
 			}
 		}
 		return super.mouseClicked(mouseX, mouseY, button);
 	}
 
-	public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY)
-	{
-		if (this.mouseClicked && this.shouldScroll())
-		{
+	public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+		if(this.mouseClicked && this.shouldScroll()) {
 			int i = this.y + 14;
 			int j = i + 54;
 			this.scrollAmount = ((float) mouseY - (float) i - 7.5F) / ((float) (j - i) - 15.0F);
@@ -166,16 +144,13 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 			this.scrollOffset = (int) ((double) (this.scrollAmount * (float) this.getMaxScroll()) + 0.5D) * 4;
 			return true;
 		}
-		else
-		{
+		else {
 			return super.mouseDragged(mouseX, mouseY, button, deltaX, deltaY);
 		}
 	}
 
-	public boolean mouseScrolled(double mouseX, double mouseY, double amount)
-	{
-		if (this.shouldScroll())
-		{
+	public boolean mouseScrolled(double mouseX, double mouseY, double amount) {
+		if(this.shouldScroll()) {
 			int i = this.getMaxScroll();
 			this.scrollAmount = (float) ((double) this.scrollAmount - amount / (double) i);
 			this.scrollAmount = MathHelper.clamp(this.scrollAmount, 0.0F, 1.0F);
@@ -184,21 +159,17 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 		return true;
 	}
 
-	private boolean shouldScroll()
-	{
+	private boolean shouldScroll() {
 		return this.canCraft && this.handler.getAvailableRecipeCount() > 12;
 	}
 
-	protected int getMaxScroll()
-	{
+	protected int getMaxScroll() {
 		return (this.handler.getAvailableRecipeCount() + 4 - 1) / 4 - 3;
 	}
 
-	private void onInventoryChange()
-	{
+	private void onInventoryChange() {
 		this.canCraft = this.handler.canCraft();
-		if (!this.canCraft)
-		{
+		if(!this.canCraft) {
 			this.scrollAmount = 0.0F;
 			this.scrollOffset = 0;
 		}

@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:crafting_shapeless",
-	"ingredients":
-	[
+	"ingredients": [
 		{
 			"item": "minecraft:sugar"
 		},
@@ -9,8 +8,7 @@
 			"item": "mubble:crepe"
 		}
 	],
-	"result":
-	{
+	"result": {
 		"item": "mubble:sugar_crepe"
 	}
 }

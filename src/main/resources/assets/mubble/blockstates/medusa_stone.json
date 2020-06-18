@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/medusa_stone"}
+	"variants": {
+		"": {
+			"model": "mubble:block/medusa_stone"
+		}
 	}
 }

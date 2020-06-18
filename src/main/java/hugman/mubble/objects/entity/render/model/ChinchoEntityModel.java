@@ -9,8 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class ChinchoEntityModel<T extends Entity> extends CompositeEntityModel<T>
-{
+public class ChinchoEntityModel<T extends Entity> extends CompositeEntityModel<T> {
 	public ModelPart head;
 	public ModelPart body;
 	public ModelPart right_arm;
@@ -21,8 +20,7 @@ public class ChinchoEntityModel<T extends Entity> extends CompositeEntityModel<T
 	public ModelPart middle_teeth;
 	public ModelPart left_teeth;
 
-	public ChinchoEntityModel()
-	{
+	public ChinchoEntityModel() {
 		this.textureWidth = 64;
 		this.textureHeight = 64;
 		this.head = new ModelPart(this, 0, 0);
@@ -57,8 +55,7 @@ public class ChinchoEntityModel<T extends Entity> extends CompositeEntityModel<T
 	}
 
 	@Override
-	public void setAngles(T entityIn, float limbSwing, float limbSwingAmount, float customAngle, float netHeadYaw, float headPitch)
-	{
+	public void setAngles(T entityIn, float limbSwing, float limbSwingAmount, float customAngle, float netHeadYaw, float headPitch) {
 		this.right_arm.pitch = 3.7699115F;
 		this.left_arm.pitch = 3.7699115F;
 		this.right_leg.pitch = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
@@ -76,8 +73,7 @@ public class ChinchoEntityModel<T extends Entity> extends CompositeEntityModel<T
 	}
 
 	@Override
-	public Iterable<ModelPart> getParts()
-	{
+	public Iterable<ModelPart> getParts() {
 		return ImmutableList.of(this.body, this.head, this.right_arm, this.left_arm, this.right_leg, this.left_leg, this.right_teeth, this.middle_teeth, this.left_teeth);
 	}
 }

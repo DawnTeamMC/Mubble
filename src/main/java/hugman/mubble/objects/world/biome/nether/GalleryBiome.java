@@ -22,10 +22,8 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
-public abstract class GalleryBiome extends Biome
-{
-	protected GalleryBiome(MixedNoisePoint noisePoint)
-	{
+public abstract class GalleryBiome extends Biome {
+	protected GalleryBiome(MixedNoisePoint noisePoint) {
 		super((new Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.NETHER, SurfaceBuilder.NETHER_CONFIG)
 				.precipitation(Precipitation.NONE)

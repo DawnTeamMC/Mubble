@@ -15,28 +15,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class KeyItem extends Item
-{
+public class KeyItem extends Item {
 	private final Block block;
 
-	public KeyItem(Item.Settings builder, Block blockIn)
-	{
+	public KeyItem(Item.Settings builder, Block blockIn) {
 		super(builder);
 		this.block = blockIn;
 	}
 
 	@Override
-	public ActionResult useOnBlock(ItemUsageContext context)
-	{
+	public ActionResult useOnBlock(ItemUsageContext context) {
 		World worldIn = context.getWorld();
 		BlockPos pos = context.getBlockPos();
 		BlockState state = worldIn.getBlockState(pos);
-		if (state.getBlock() instanceof KeyDoorBlock && state.getBlock() == block)
-		{
-			if (state.get(KeyDoorBlock.LOCKED))
-			{
-				if (!worldIn.isClient())
-				{
+		if(state.getBlock() instanceof KeyDoorBlock && state.getBlock() == block) {
+			if(state.get(KeyDoorBlock.LOCKED)) {
+				if(!worldIn.isClient()) {
 					BlockPos otherBlockPos = pos.offset(state.get(KeyDoorBlock.HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN);
 					BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
 					worldIn.setBlockState(pos, state.with(KeyDoorBlock.LOCKED, false), 2);
@@ -50,26 +44,20 @@ public class KeyItem extends Item
 		return ActionResult.FAIL;
 	}
 
-	public SoundEvent getKeySuccessSound(Block block, boolean success)
-	{
-		if (block == MubbleBlocks.SMB_KEY_DOOR)
-		{
+	public SoundEvent getKeySuccessSound(Block block, boolean success) {
+		if(block == MubbleBlocks.SMB_KEY_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
 		}
-		else if (block == MubbleBlocks.SMB3_KEY_DOOR)
-		{
+		else if(block == MubbleBlocks.SMB3_KEY_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB3;
 		}
-		else if (block == MubbleBlocks.SMW_KEY_DOOR)
-		{
+		else if(block == MubbleBlocks.SMW_KEY_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMW;
 		}
-		else if (block == MubbleBlocks.NSMBU_KEY_DOOR)
-		{
+		else if(block == MubbleBlocks.NSMBU_KEY_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_NSMBU;
 		}
-		else
-		{
+		else {
 			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
 		}
 	}

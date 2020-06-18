@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_bottom_top",
-	"textures":
-	{
+	"textures": {
 		"top": "mubble:block/ground_block/smb/snow/night/over/top",
 		"side": "mubble:block/ground_block/smb/snow/night/over/side",
 		"bottom": "mubble:block/ground_block/smb/snow/night/block"

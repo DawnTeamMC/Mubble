@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:smb_ground_brick_block",
 		"mubble:smb_underground_brick_block",
 		"mubble:smb_castle_brick_block",

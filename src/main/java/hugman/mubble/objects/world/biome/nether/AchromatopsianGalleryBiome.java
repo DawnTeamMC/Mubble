@@ -9,10 +9,8 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.RandomBooleanFeatureConfig;
 
-public class AchromatopsianGalleryBiome extends GalleryBiome
-{
-	public AchromatopsianGalleryBiome()
-	{
+public class AchromatopsianGalleryBiome extends GalleryBiome {
+	public AchromatopsianGalleryBiome() {
 		super(new MixedNoisePoint(0.1F, 0.05F, 0.0F, 0.0F, 0.025F));
 		this.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION,
 				Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.WHITE_MUSHROOM_PATCHES)
@@ -32,8 +30,8 @@ public class AchromatopsianGalleryBiome extends GalleryBiome
 								.configure(new ChanceRangeDecoratorConfig(0.25F, 0, 0, 128))));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
-								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.GRAY_HUGE_NETHER_MUSHROOM),
-								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.BLACK_HUGE_NETHER_MUSHROOM)))
+						MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.GRAY_HUGE_NETHER_MUSHROOM),
+						MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.BLACK_HUGE_NETHER_MUSHROOM)))
 						.createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(2))));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR
@@ -43,13 +41,13 @@ public class AchromatopsianGalleryBiome extends GalleryBiome
 						.createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(2))));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
-								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.GRAY_HUGE_NETHER_MUSHROOM.setFlatHat()),
-								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.BLACK_HUGE_NETHER_MUSHROOM.setFlatHat())))
+						MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.GRAY_HUGE_NETHER_MUSHROOM.setFlatHat()),
+						MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.BLACK_HUGE_NETHER_MUSHROOM.setFlatHat())))
 						.createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(2))));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
-								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.WHITE_HUGE_NETHER_MUSHROOM.setFlatHat().setUpsideDown()),
-								MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.LIGHT_GRAY_HUGE_NETHER_MUSHROOM.setFlatHat().setUpsideDown())))
+						MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.WHITE_HUGE_NETHER_MUSHROOM.setFlatHat().setUpsideDown()),
+						MubbleFeatures.HUGE_NETHER_MUSHROOM.configure(MubbleFeatureConfigs.LIGHT_GRAY_HUGE_NETHER_MUSHROOM.setFlatHat().setUpsideDown())))
 						.createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(2))));
 	}
 }

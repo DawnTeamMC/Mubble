@@ -1,28 +1,22 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XOX",
 		"XRX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:cobblestone"
 		},
-		"R":
-		{
+		"R": {
 			"item": "minecraft:redstone"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:stone_pickaxe"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:placer"
 	}
 }

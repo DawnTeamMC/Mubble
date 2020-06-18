@@ -1,63 +1,252 @@
 {
-	"variants":
-	{
-		"over=false":
-		[
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/normal/1", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/normal/2", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/normal/3", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/normal/4", "weight": 1}
+	"variants": {
+		"over=false": [
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/normal/1",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/normal/2",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/normal/3",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/normal/4",
+				"weight": 1
+			}
 		],
-		"over=true": 
-		[
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/11", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/12", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/13", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/14", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/21", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/22", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/23", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/24", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/31", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/32", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/33", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/34", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/11", "weight": 5, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/12", "weight": 1, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/13", "weight": 1, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/14", "weight": 1, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/21", "weight": 5, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/22", "weight": 1, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/23", "weight": 1, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/24", "weight": 1, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/31", "weight": 5, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/32", "weight": 1, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/33", "weight": 1, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/34", "weight": 1, "y": 90},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/11", "weight": 5, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/12", "weight": 1, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/13", "weight": 1, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/14", "weight": 1, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/21", "weight": 5, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/22", "weight": 1, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/23", "weight": 1, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/24", "weight": 1, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/31", "weight": 5, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/32", "weight": 1, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/33", "weight": 1, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/34", "weight": 1, "y": 180},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/11", "weight": 5, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/12", "weight": 1, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/13", "weight": 1, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/14", "weight": 1, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/21", "weight": 5, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/22", "weight": 1, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/23", "weight": 1, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/24", "weight": 1, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/31", "weight": 5, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/32", "weight": 1, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/33", "weight": 1, "y": 270},
-			{"model": "mubble:block/ground_block/nsmbu/ghost_house/over/34", "weight": 1, "y": 270}
+		"over=true": [
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/11",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/12",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/13",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/14",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/21",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/22",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/23",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/24",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/31",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/32",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/33",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/34",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/11",
+				"weight": 5,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/12",
+				"weight": 1,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/13",
+				"weight": 1,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/14",
+				"weight": 1,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/21",
+				"weight": 5,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/22",
+				"weight": 1,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/23",
+				"weight": 1,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/24",
+				"weight": 1,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/31",
+				"weight": 5,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/32",
+				"weight": 1,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/33",
+				"weight": 1,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/34",
+				"weight": 1,
+				"y": 90
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/11",
+				"weight": 5,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/12",
+				"weight": 1,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/13",
+				"weight": 1,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/14",
+				"weight": 1,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/21",
+				"weight": 5,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/22",
+				"weight": 1,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/23",
+				"weight": 1,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/24",
+				"weight": 1,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/31",
+				"weight": 5,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/32",
+				"weight": 1,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/33",
+				"weight": 1,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/34",
+				"weight": 1,
+				"y": 180
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/11",
+				"weight": 5,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/12",
+				"weight": 1,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/13",
+				"weight": 1,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/14",
+				"weight": 1,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/21",
+				"weight": 5,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/22",
+				"weight": 1,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/23",
+				"weight": 1,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/24",
+				"weight": 1,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/31",
+				"weight": 5,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/32",
+				"weight": 1,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/33",
+				"weight": 1,
+				"y": 270
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/ghost_house/over/34",
+				"weight": 1,
+				"y": 270
+			}
 		]
 	}
 }

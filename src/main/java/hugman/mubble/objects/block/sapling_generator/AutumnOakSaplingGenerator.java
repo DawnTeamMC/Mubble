@@ -8,11 +8,9 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 
-public class AutumnOakSaplingGenerator extends SaplingGenerator
-{
+public class AutumnOakSaplingGenerator extends SaplingGenerator {
 	@Override
-	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive)
-	{
+	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive) {
 		return random.nextInt(10) == 0 ? Feature.TREE.configure(beeHive ? MubbleFeatureConfigs.FANCY_AUTUMN_OAK_TREE_B1 : MubbleFeatureConfigs.FANCY_AUTUMN_OAK_TREE) : Feature.TREE.configure(beeHive ? MubbleFeatureConfigs.AUTUMN_OAK_TREE_B1 : MubbleFeatureConfigs.AUTUMN_OAK_TREE);
 	}
 }

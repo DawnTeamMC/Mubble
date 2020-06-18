@@ -2,8 +2,7 @@
 	"icon": "mubble:red_bricks",
 	"name": "Building Materials",
 	"category": "blocks",
-	"pages":
-	[
+	"pages": [
 		{
 			"type": "text",
 			"text": "The decorative perspective of #mubble is very wide. In this chapter we will take a look at the <b>building materials</>, the type of blocks that you might use the most when <hl2>building structures</>."
@@ -23,10 +22,8 @@
 		{
 			"type": "multiblock",
 			"name": "Example",
-			"multiblock":
-			{
-				"mapping":
-				{
+			"multiblock": {
+				"mapping": {
 					"A": "mubble:stone_vertical_slab[type=east]",
 					"B": "mubble:sandstone_vertical_slab[type=west]",
 					"C": "mubble:purpur_vertical_slab[type=east]",
@@ -43,11 +40,16 @@
 					"N": "mubble:lime_concrete_vertical_slab[type=south]",
 					"O": "mubble:green_concrete_vertical_slab[type=north]"
 				},
-				"pattern":
-				[
-					[ " IK0MO " ],
-					[ " HJ LN " ],
-					[ "ABCDEFG" ]
+				"pattern": [
+					[
+						" IK0MO "
+					],
+					[
+						" HJ LN "
+					],
+					[
+						"ABCDEFG"
+					]
 				]
 			},
 			"enable_visualize": false,
@@ -61,8 +63,7 @@
 		},
 		{
 			"type": "image",
-			"images":
-			[
+			"images": [
 				"mubble:textures/patchouli_books/screenshots/wood_blocks.png"
 			],
 			"border": true,

@@ -1,14 +1,12 @@
 {
 	"type": "minecraft:crafting_shapeless",
 	"group": "planks",
-	"ingredients":
-	[
+	"ingredients": [
 		{
 			"tag": "mubble:scarlet_logs"
 		}
 	],
-	"result":
-	{
+	"result": {
 		"item": "mubble:scarlet_planks",
 		"count": 4
 	}

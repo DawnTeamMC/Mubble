@@ -21,24 +21,19 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 @Environment(EnvType.CLIENT)
-public class FlyingBlockEntityRenderer extends EntityRenderer<FlyingBlockEntity>
-{
-	public FlyingBlockEntityRenderer(EntityRenderDispatcher dispatcher)
-	{
+public class FlyingBlockEntityRenderer extends EntityRenderer<FlyingBlockEntity> {
+	public FlyingBlockEntityRenderer(EntityRenderDispatcher dispatcher) {
 		super(dispatcher);
 		this.shadowRadius = 0.5F;
 	}
 
 	@Override
-	public void render(FlyingBlockEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light)
-	{
+	public void render(FlyingBlockEntity entity, float entityYaw, float partialTicks, MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light) {
 		BlockState blockState = entity.getBlockState();
-		if (blockState.getRenderType() == BlockRenderType.MODEL)
-		{
+		if(blockState.getRenderType() == BlockRenderType.MODEL) {
 			World world = entity.getWorldClient();
-			if (blockState != world.getBlockState(entity.getBlockPos())
-					&& blockState.getRenderType() != BlockRenderType.INVISIBLE)
-			{
+			if(blockState != world.getBlockState(entity.getBlockPos())
+					&& blockState.getRenderType() != BlockRenderType.INVISIBLE) {
 				matrixStack.push();
 				BlockPos blockPos = new BlockPos(entity.getX(), entity.getBoundingBox().maxY,
 						entity.getZ());
@@ -55,8 +50,7 @@ public class FlyingBlockEntityRenderer extends EntityRenderer<FlyingBlockEntity>
 	}
 
 	@Override
-	public Identifier getTexture(FlyingBlockEntity entity)
-	{
+	public Identifier getTexture(FlyingBlockEntity entity) {
 		return SpriteAtlasTexture.BLOCK_ATLAS_TEX;
 	}
 }

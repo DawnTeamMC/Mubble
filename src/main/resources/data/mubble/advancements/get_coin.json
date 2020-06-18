@@ -1,29 +1,21 @@
 {
 	"parent": "mubble:root",
-	"display":
-	{
-		"icon":
-		{
+	"display": {
+		"icon": {
 			"item": "mubble:yellow_coin"
 		},
-		"title":
-		{
+		"title": {
 			"translate": "advancements.mubble.get_coin.title"
 		},
-		"description":
-		{
+		"description": {
 			"translate": "advancements.mubble.get_coin.description"
 		}
 	},
-	"criteria":
-	{
-		"has_coin":
-		{
+	"criteria": {
+		"has_coin": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"tag": "mubble:coins"
 					}

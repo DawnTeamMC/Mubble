@@ -5,10 +5,8 @@ import hugman.mubble.objects.command.HealthCommand;
 import hugman.mubble.objects.command.MotionCommand;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 
-public class MubbleCommands
-{
-	public static void init()
-	{
+public class MubbleCommands {
+	public static void init() {
 		// Health
 		CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> HealthCommand.register(dispatcher));
 		// Motion

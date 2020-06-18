@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/light_gray_cloud_block"}
+	"variants": {
+		"": {
+			"model": "mubble:block/light_gray_cloud_block"
+		}
 	}
 }

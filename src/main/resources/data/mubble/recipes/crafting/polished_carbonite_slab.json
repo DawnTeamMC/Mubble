@@ -1,18 +1,14 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:polished_carbonite"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:polished_carbonite_slab",
 		"count": 6
 	}

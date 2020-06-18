@@ -8,11 +8,9 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 
-public class PalmSaplingGenerator extends SaplingGenerator
-{
+public class PalmSaplingGenerator extends SaplingGenerator {
 	@Override
-	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive)
-	{
+	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive) {
 		return Feature.TREE.configure(MubbleFeatureConfigs.PALM_TREE);
 	}
 }

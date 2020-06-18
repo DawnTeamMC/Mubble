@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/vanadium_block"
 		]
 	},
-	"criteria":
-	{
-		"has_vanadium":
-		{
+	"criteria": {
+		"has_vanadium": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:vanadium"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/vanadium_block"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_vanadium",
 			"has_the_recipe"

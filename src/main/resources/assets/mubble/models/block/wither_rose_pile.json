@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/pile",
-	"textures":
-	{
+	"textures": {
 		"pile": "mubble:block/wither_rose_pile"
 	}
 }

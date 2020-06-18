@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_all",
-	"textures":
-	{
+	"textures": {
 		"all": "mubble:block/ground_block/smw/snow/night/block/1"
 	}
 }

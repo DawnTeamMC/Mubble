@@ -1,7 +1,10 @@
 {
-	"variants":
-	{
-		"snowy=false": {"model": "mubble:block/green_hill_grass_block/normal"},
-		"snowy=true": {"model": "mubble:block/green_hill_grass_block/snowy"}
+	"variants": {
+		"snowy=false": {
+			"model": "mubble:block/green_hill_grass_block/normal"
+		},
+		"snowy=true": {
+			"model": "mubble:block/green_hill_grass_block/snowy"
+		}
 	}
 }

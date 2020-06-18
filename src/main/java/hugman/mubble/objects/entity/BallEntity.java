@@ -18,22 +18,18 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
-public abstract class BallEntity extends ThrownItemEntity
-{
+public abstract class BallEntity extends ThrownItemEntity {
 	protected int reboundingAmount = 3;
 
-	public BallEntity(EntityType<? extends BallEntity> entityType, World world)
-	{
+	public BallEntity(EntityType<? extends BallEntity> entityType, World world) {
 		super(entityType, world);
 	}
 
-	public BallEntity(EntityType<? extends BallEntity> entityType, World world, LivingEntity owner)
-	{
+	public BallEntity(EntityType<? extends BallEntity> entityType, World world, LivingEntity owner) {
 		super(entityType, owner, world);
 	}
 
-	public BallEntity(EntityType<? extends BallEntity> entityType, World world, double x, double y, double z)
-	{
+	public BallEntity(EntityType<? extends BallEntity> entityType, World world, double x, double y, double z) {
 		super(entityType, x, y, z, world);
 	}
 
@@ -46,64 +42,51 @@ public abstract class BallEntity extends ThrownItemEntity
 	protected abstract boolean onBlockImpact(BlockHitResult result);
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag compound)
-	{
+	public void writeCustomDataToTag(CompoundTag compound) {
 		super.writeCustomDataToTag(compound);
 		compound.putInt("ReboundingAmount", reboundingAmount);
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag compound)
-	{
+	public void readCustomDataFromTag(CompoundTag compound) {
 		super.readCustomDataFromTag(compound);
 		this.reboundingAmount = compound.getInt("ReboundingAmount");
 	}
 
 	@Override
-	protected void onCollision(HitResult result)
-	{
+	protected void onCollision(HitResult result) {
 		boolean removeOnImpact = true;
-		if (result.getType() == HitResult.Type.ENTITY)
-		{
+		if(result.getType() == HitResult.Type.ENTITY) {
 			removeOnImpact = onEntityImpact((EntityHitResult) result);
 		}
-		else if (result.getType() == HitResult.Type.BLOCK)
-		{
+		else if(result.getType() == HitResult.Type.BLOCK) {
 			removeOnImpact = onBlockImpact((BlockHitResult) result);
 		}
 		boolean cantRebound = reboundingAmount <= 0;
-		if (removeOnImpact || cantRebound)
-		{
-			if (!this.world.isClient)
-			{
+		if(removeOnImpact || cantRebound) {
+			if(!this.world.isClient) {
 				this.world.sendEntityStatus(this, (byte) 3);
 				this.remove();
 			}
-			if (!removeOnImpact && cantRebound)
-			{
+			if(!removeOnImpact && cantRebound) {
 				this.world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			}
 		}
-		else
-		{
+		else {
 			reboundingAmount--;
 		}
 	}
 
 	@Environment(EnvType.CLIENT)
 	@Override
-	public void handleStatus(byte state)
-	{
-		if (state == 3)
-		{
+	public void handleStatus(byte state) {
+		if(state == 3) {
 			this.spawnDeathParticles();
 		}
 	}
 
-	protected void spawnDeathParticles()
-	{
-		for (int i = 0; i < 8; ++i)
-		{
+	protected void spawnDeathParticles() {
+		for(int i = 0; i < 8; ++i) {
 			float s1 = random.nextFloat() * 0.2F - 0.1F;
 			float s2 = random.nextFloat() * 0.2F - 0.1F;
 			float s3 = random.nextFloat() * 0.2F - 0.1F;
@@ -112,8 +95,7 @@ public abstract class BallEntity extends ThrownItemEntity
 	}
 
 	@Override
-	public Packet<?> createSpawnPacket()
-	{
+	public Packet<?> createSpawnPacket() {
 		Entity entity = this.getOwner();
 		return new EntitySpawnS2CPacket(this, entity == null ? 0 : entity.getEntityId());
 	}

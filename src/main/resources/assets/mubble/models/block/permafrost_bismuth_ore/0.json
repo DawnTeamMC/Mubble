@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_all",
-	"textures":
-	{
+	"textures": {
 		"all": "mubble:block/permafrost_bismuth_ore/0"
 	}
 }

@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/white_cherry_oak_leaves"}
+	"variants": {
+		"": {
+			"model": "mubble:block/white_cherry_oak_leaves"
+		}
 	}
 }

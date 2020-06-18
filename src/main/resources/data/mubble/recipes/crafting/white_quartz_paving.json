@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:quartz_paving",
-	"pattern":
-	[
+	"pattern": [
 		"XO",
 		"OX"
 	],
-	"key":
-	{
-		"X": 
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:quartz_block"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:white_dye"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:white_quartz_paving",
 		"count": 2
 	}

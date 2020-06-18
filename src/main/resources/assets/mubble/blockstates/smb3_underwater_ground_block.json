@@ -1,7 +1,10 @@
 {
-	"variants":
-	{
-		"over=false": {"model": "mubble:block/ground_block/smb3/underwater/normal"},
-		"over=true": {"model": "mubble:block/ground_block/smb3/underwater/over"}
+	"variants": {
+		"over=false": {
+			"model": "mubble:block/ground_block/smb3/underwater/normal"
+		},
+		"over=true": {
+			"model": "mubble:block/ground_block/smb3/underwater/over"
+		}
 	}
 }

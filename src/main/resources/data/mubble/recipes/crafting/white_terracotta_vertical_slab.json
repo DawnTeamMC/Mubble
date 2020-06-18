@@ -1,21 +1,17 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:terracotta_vertical_slab",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:white_terracotta"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:white_terracotta_vertical_slab",
 		"count": 6
 	}

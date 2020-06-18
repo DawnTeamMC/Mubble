@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:stonecutting/gray_dark_prismarine_stairs"
 		]
 	},
-	"criteria":
-	{
-		"has_gray_dark_prismarine":
-		{
+	"criteria": {
+		"has_gray_dark_prismarine": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:gray_dark_prismarine"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:stonecutting/gray_dark_prismarine_stairs"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_gray_dark_prismarine",
 			"has_the_recipe"

@@ -1,11 +1,27 @@
 {
-	"variants":
-	{
-		"facing=up":	{ "model": "mubble:block/hard_puyo", "x": 270 },
-		"facing=down":	{ "model": "mubble:block/hard_puyo", "x": 90 },
-		"facing=north":	{ "model": "mubble:block/hard_puyo" },
-		"facing=south":	{ "model": "mubble:block/hard_puyo", "y": 180 },
-		"facing=west":	{ "model": "mubble:block/hard_puyo", "y": 270 },
-		"facing=east":	{ "model": "mubble:block/hard_puyo", "y": 90 }
+	"variants": {
+		"facing=up": {
+			"model": "mubble:block/hard_puyo",
+			"x": 270
+		},
+		"facing=down": {
+			"model": "mubble:block/hard_puyo",
+			"x": 90
+		},
+		"facing=north": {
+			"model": "mubble:block/hard_puyo"
+		},
+		"facing=south": {
+			"model": "mubble:block/hard_puyo",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "mubble:block/hard_puyo",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "mubble:block/hard_puyo",
+			"y": 90
+		}
 	}
 }

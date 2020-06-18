@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:brick_wall",
-	"pattern":
-	[
+	"pattern": [
 		"###",
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:magenta_bricks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:magenta_brick_wall",
 		"count": 6
 	}

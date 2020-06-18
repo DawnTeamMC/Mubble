@@ -32,26 +32,22 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
-public class ToadEntity extends AnimalEntity
-{
+public class ToadEntity extends AnimalEntity {
 	private static final TrackedData<Integer> VARIANT = DataTracker.registerData(ToadEntity.class, TrackedDataHandlerRegistry.INTEGER);
 	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromTag(MubbleTags.Items.TOAD_FEEDING);
 
-	public ToadEntity(EntityType<? extends ToadEntity> type, World worldIn)
-	{
+	public ToadEntity(EntityType<? extends ToadEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
 
 	@Override
-	public net.minecraft.entity.EntityData initialize(WorldAccess worldIn, LocalDifficulty difficultyIn, SpawnReason reason, net.minecraft.entity.EntityData spawnDataIn, CompoundTag dataTag)
-	{
+	public net.minecraft.entity.EntityData initialize(WorldAccess worldIn, LocalDifficulty difficultyIn, SpawnReason reason, net.minecraft.entity.EntityData spawnDataIn, CompoundTag dataTag) {
 		this.setVariant(this.world.random.nextInt(16));
 		return super.initialize(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
 	}
 
 	@Override
-	protected void initGoals()
-	{
+	protected void initGoals() {
 		this.goalSelector.add(0, new SwimGoal(this));
 		this.goalSelector.add(1, new FleeEntityGoal<>(this, ChinchoEntity.class, 10f, 1.2d, 1.45d, EntityPredicates.VALID_LIVING_ENTITY::test));
 		this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.TOAD_FEAR.contains(checkedEntity.getMainHandStack().getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
@@ -70,81 +66,69 @@ public class ToadEntity extends AnimalEntity
 		this.goalSelector.add(8, new LookAroundGoal(this));
 	}
 
-	public static Builder createToadAttributes()
-	{
+	public static Builder createToadAttributes() {
 		return MobEntity.createMobAttributes()
 				.add(EntityAttributes.GENERIC_MAX_HEALTH, 9.0D)
 				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
 	}
 
 	@Override
-	public float getEyeHeight(EntityPose pose)
-	{
-		if (this.isBaby()) return 0.75f;
+	public float getEyeHeight(EntityPose pose) {
+		if(this.isBaby()) {
+			return 0.75f;
+		}
 		return 1.35f;
 	}
 
 	@Override
-	protected SoundEvent getAmbientSound()
-	{
-		if (CalendarEvents.isAprilFools)
-		{
+	protected SoundEvent getAmbientSound() {
+		if(CalendarEvents.isAprilFools) {
 			return MubbleSounds.ENTITY_TOAD_BUP;
 		}
-		else
-		{
+		else {
 			return MubbleSounds.ENTITY_TOAD_AMBIENT;
 		}
 	}
 
 	@Override
-	protected SoundEvent getHurtSound(DamageSource source)
-	{
+	protected SoundEvent getHurtSound(DamageSource source) {
 		return MubbleSounds.ENTITY_TOAD_HURT;
 	}
 
 	@Override
-	protected SoundEvent getDeathSound()
-	{
+	protected SoundEvent getDeathSound() {
 		return MubbleSounds.ENTITY_TOAD_DEATH;
 	}
 
-	public int getVariant()
-	{
+	public int getVariant() {
 		return this.dataTracker.get(VARIANT);
 	}
 
-	public void setVariant(int variantIn)
-	{
+	public void setVariant(int variantIn) {
 		this.dataTracker.set(VARIANT, variantIn);
 	}
 
 	@Override
-	protected void initDataTracker()
-	{
+	protected void initDataTracker() {
 		super.initDataTracker();
 		this.dataTracker.startTracking(VARIANT, 0);
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag compound)
-	{
+	public void writeCustomDataToTag(CompoundTag compound) {
 		super.writeCustomDataToTag(compound);
 		compound.putInt("Variant", this.getVariant());
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag compound)
-	{
+	public void readCustomDataFromTag(CompoundTag compound) {
 		super.readCustomDataFromTag(compound);
 		this.setVariant(compound.getInt("Variant"));
 	}
 
 	@Override
-	protected Identifier getLootTableId()
-	{
-		switch (this.getVariant())
-		{
+	protected Identifier getLootTableId() {
+		switch(this.getVariant()) {
 			case 0:
 				return MubbleLootTables.WHITE_TOAD;
 			case 1:
@@ -192,21 +176,18 @@ public class ToadEntity extends AnimalEntity
 	}
 
 	@Override
-	public PassiveEntity createChild(PassiveEntity ageable)
-	{
+	public PassiveEntity createChild(PassiveEntity ageable) {
 		ToadEntity childToad = new ToadEntity(MubbleEntities.TOAD, this.world);
 		childToad.setVariant(this.world.random.nextInt(16));
 		return childToad;
 	}
 
 	@Override
-	public boolean isBreedingItem(ItemStack stack)
-	{
+	public boolean isBreedingItem(ItemStack stack) {
 		return TEMPTATION_ITEMS.test(stack);
 	}
 
-	public static boolean canSpawn(EntityType<ToadEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand)
-	{
+	public static boolean canSpawn(EntityType<ToadEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand) {
 		return true;
 	}
 }

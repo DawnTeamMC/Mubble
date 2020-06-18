@@ -2,8 +2,7 @@ package hugman.mubble.objects.block.block_state_property;
 
 import net.minecraft.util.StringIdentifiable;
 
-public enum VerticalSlabType implements StringIdentifiable
-{
+public enum VerticalSlabType implements StringIdentifiable {
 	NORTH("north"),
 	SOUTH("south"),
 	EAST("east"),
@@ -12,18 +11,15 @@ public enum VerticalSlabType implements StringIdentifiable
 
 	private final String name;
 
-	VerticalSlabType(String name)
-	{
+	VerticalSlabType(String name) {
 		this.name = name;
 	}
 
-	public String toString()
-	{
+	public String toString() {
 		return this.name;
 	}
 
-	public String asString()
-	{
+	public String asString() {
 		return this.name;
 	}
 }

@@ -8,25 +8,22 @@ import net.minecraft.block.Material;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.sound.BlockSoundGroup;
 
-public class CropsBlock extends CropBlock
-{
+public class CropsBlock extends CropBlock {
 	/* Extension for internal publicity
 	 * + Missing features */
-	public CropsBlock()
-	{
+	public CropsBlock() {
 		super(FabricBlockSettings.of(Material.LEAVES).collidable(true).ticksRandomly().hardness(0f).sounds(BlockSoundGroup.CROP).nonOpaque());
 	}
 
 	@Override
-	protected ItemConvertible getSeedsItem()
-	{
-		if (this == MubbleBlocks.TOMATOES) return MubbleItems.TOMATO;
-		if (this == MubbleBlocks.SALAD)
-		{
+	protected ItemConvertible getSeedsItem() {
+		if(this == MubbleBlocks.TOMATOES) {
+			return MubbleItems.TOMATO;
+		}
+		if(this == MubbleBlocks.SALAD) {
 			return MubbleItems.SALAD;
 		}
-		else
-		{
+		else {
 			return null;
 		}
 	}

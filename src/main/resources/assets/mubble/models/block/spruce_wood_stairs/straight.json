@@ -1,7 +1,6 @@
 {
 	"parent": "block/stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "minecraft:block/spruce_log",
 		"top": "minecraft:block/spruce_log",
 		"side": "minecraft:block/spruce_log"

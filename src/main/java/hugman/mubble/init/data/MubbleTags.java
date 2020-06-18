@@ -12,10 +12,8 @@ import net.minecraft.util.Identifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MubbleTags
-{
-	public static class Blocks
-	{
+public class MubbleTags {
+	public static class Blocks {
 		public static final Tag<Block> FREEZABLE_TO_PACKED_ICE = register("freezable/packed_ice");
 		public static final Tag<Block> MELTABLE_TO_AIR = register("meltable/air");
 		public static final Tag<Block> MELTABLE_TO_ICE = register("meltable/ice");
@@ -23,14 +21,12 @@ public class MubbleTags
 		public static final Tag<Block> CLOUD_BLOCKS = register("cloud_blocks");
 		public static final Tag<Block> PALM_SAPLING_VALID_GROUND = register("valid_ground/palm_sapling");
 
-		private static Tag<Block> register(String name)
-		{
+		private static Tag<Block> register(String name) {
 			return TagRegistry.block(new Identifier(Mubble.MOD_ID, name));
 		}
 	}
 
-	public static class Items
-	{
+	public static class Items {
 		public static final List<Tag<Item>> TIMESWAP_TAGS = new ArrayList<Tag<Item>>();
 
 		public static final Tag<Item> COINS = register("coins");
@@ -59,35 +55,29 @@ public class MubbleTags
 		public static final Tag<Item> TIMESWAP_KEY_DOORS = registerTimeswap("timeswap/key_doors");
 		public static final Tag<Item> TIMESWAP_KEYS = registerTimeswap("timeswap/keys");
 
-		private static Tag<Item> register(String name)
-		{
+		private static Tag<Item> register(String name) {
 			return TagRegistry.item(new Identifier(Mubble.MOD_ID, name));
 		}
 
-		private static Tag<Item> registerTimeswap(String name)
-		{
+		private static Tag<Item> registerTimeswap(String name) {
 			Tag<Item> fTag = TagRegistry.item(new Identifier(Mubble.MOD_ID, name));
 			TIMESWAP_TAGS.add(fTag);
 			return fTag;
 		}
 	}
 
-	public static class EntityTypes
-	{
+	public static class EntityTypes {
 		public static final Tag<EntityType<?>> CAN_WEAR_HELMET = register("can_wear_helmet");
 
-		private static Tag<EntityType<?>> register(String name)
-		{
+		private static Tag<EntityType<?>> register(String name) {
 			return TagRegistry.entityType(new Identifier(Mubble.MOD_ID, name));
 		}
 	}
 
-	public static class Fluids
-	{
+	public static class Fluids {
 		public static final Tag<Fluid> FREEZABLE_TO_ICE = register("freezable/ice");
 
-		private static Tag<Fluid> register(String name)
-		{
+		private static Tag<Fluid> register(String name) {
 			return TagRegistry.fluid(new Identifier(Mubble.MOD_ID, name));
 		}
 	}

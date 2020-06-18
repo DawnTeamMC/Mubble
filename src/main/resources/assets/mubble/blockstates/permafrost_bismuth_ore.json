@@ -1,13 +1,21 @@
 {
-	"variants":
-	{
-		"":
-		[
-			{"model": "mubble:block/permafrost_bismuth_ore/0"},
-			{"model": "mubble:block/permafrost_bismuth_ore/1"},
-			{"model": "mubble:block/permafrost_bismuth_ore/2"},
-			{"model": "mubble:block/permafrost_bismuth_ore/3"},
-			{"model": "mubble:block/permafrost_bismuth_ore/4"}
+	"variants": {
+		"": [
+			{
+				"model": "mubble:block/permafrost_bismuth_ore/0"
+			},
+			{
+				"model": "mubble:block/permafrost_bismuth_ore/1"
+			},
+			{
+				"model": "mubble:block/permafrost_bismuth_ore/2"
+			},
+			{
+				"model": "mubble:block/permafrost_bismuth_ore/3"
+			},
+			{
+				"model": "mubble:block/permafrost_bismuth_ore/4"
+			}
 		]
 	}
 }

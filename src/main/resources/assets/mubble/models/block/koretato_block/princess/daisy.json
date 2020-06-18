@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/block_directional",
-	"textures":
-	{
+	"textures": {
 		"block": "mubble:block/koretato_block/princess/none/block",
 		"front": "mubble:block/koretato_block/princess/daisy/front",
 		"left": "mubble:block/koretato_block/princess/daisy/side",

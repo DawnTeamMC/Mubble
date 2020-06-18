@@ -1,21 +1,17 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:quartz_paving_vertical_slab",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:lime_quartz_paving"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:lime_quartz_paving_vertical_slab",
 		"count": 6
 	}

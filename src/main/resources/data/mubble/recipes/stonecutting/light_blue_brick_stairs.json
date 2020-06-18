@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:light_blue_bricks"
 	},
 	"result": "mubble:light_blue_brick_stairs",

@@ -2,9 +2,6 @@
 	"comment": "CREATIVE TABS",
 	"itemGroup.mubble.costumes": "Kostuums",
 	"itemGroup.mubble.instruments": "Instrumenten",
-
-
-
 	"comment": "BLOCKS",
 	"block.mubble.oak_vertical_slab": "Eikenhouten plaat verticaal",
 	"block.mubble.spruce_vertical_slab": "Sparrehouten plaat verticaal",
@@ -40,44 +37,37 @@
 	"block.mubble.prismarine_vertical_slab": "Prismarienplaat verticaal",
 	"block.mubble.prismarine_brick_vertical_slab": "Prismarienblokstenenplaat verticaal",
 	"block.mubble.dark_prismarine_vertical_slab": "Donkerprismarienplaat verticaal",
-
 	"block.mubble.dark_prismarine_wall": "Donkereprismarienmuur",
-
 	"block.mubble.oak_wood_stairs": "Eikenhouten trap",
 	"block.mubble.spruce_wood_stairs": "Sparrehouten trap",
 	"block.mubble.birch_wood_stairs": "Berkenhouten trap",
 	"block.mubble.jungle_wood_stairs": "Oerwoudhouten trap",
 	"block.mubble.acacia_wood_stairs": "Acaciahouten trap",
 	"block.mubble.dark_oak_wood_stairs": "Donkereikenhouten trap",
-	
 	"block.mubble.oak_wood_slab": "Eikenhouten plaat",
 	"block.mubble.spruce_wood_slab": "Sparrehouten plaat",
 	"block.mubble.birch_wood_slab": "Berkenhouten plaat",
 	"block.mubble.jungle_wood_slab": "Oerwoudhouten plaat",
 	"block.mubble.acacia_wood_slab": "Acaciahouten plaat",
 	"block.mubble.dark_oak_wood_slab": "Donkereikenhouten plaat",
-
 	"block.mubble.oak_wood_vertical_slab": "Eikenhouten plaat verticaal",
 	"block.mubble.spruce_wood_vertical_slab": "Sparrehouten plaat verticaal",
 	"block.mubble.birch_wood_vertical_slab": "Berkenhouten plaat verticaal",
 	"block.mubble.jungle_wood_vertical_slab": "Oerwoudhouten plaat verticaal",
 	"block.mubble.acacia_wood_vertical_slab": "Acaciahouten plaat verticaal",
 	"block.mubble.dark_oak_wood_vertical_slab": "Donkereikenhouten plaat verticaal",
-
 	"block.mubble.oak_wood_button": "Eikenhouten knop",
 	"block.mubble.spruce_wood_button": "Sparrehouten knop",
 	"block.mubble.birch_wood_button": "Berkenhouten knop",
 	"block.mubble.jungle_wood_button": "Oerwoudhouten knop",
 	"block.mubble.acacia_wood_button": "Acaciahouten knop",
 	"block.mubble.dark_oak_wood_button": "Donkereikenhouten knop",
-
 	"block.mubble.oak_leaf_pile": "Eikenbladeren hoop",
 	"block.mubble.spruce_leaf_pile": "Sparrebladeren hoop",
 	"block.mubble.birch_leaf_pile": "Berkenbladeren hoop",
 	"block.mubble.jungle_leaf_pile": "Oerwoudbladeren hoop",
 	"block.mubble.acacia_leaf_pile": "Acaciabladeren hoop",
 	"block.mubble.dark_oak_leaf_pile": "Donkereikenbladeren hoop",
-
 	"block.mubble.cobblestone_bricks": "Keisteenblokstenen",
 	"block.mubble.cobblestone_brick_stairs": "Keisteenblokstenen trap",
 	"block.mubble.cobblestone_brick_slab": "Keisteenblokstenen plaat",
@@ -103,7 +93,6 @@
 	"block.mubble.andesite_brick_slab": "Andesietblokstenen plaat",
 	"block.mubble.andesite_brick_vertical_slab": "Andesietblokstenen plaat verticaal",
 	"block.mubble.andesite_brick_wall": "Andesietblokstenen muur",
-
 	"block.mubble.sandstone_bricks": "Zandstenenblokstenen",
 	"block.mubble.sandstone_brick_stairs": "Zandstenenblokstenen trap",
 	"block.mubble.sandstone_brick_slab": "Zandstenenblokstenen plaat",
@@ -122,23 +111,19 @@
 	"block.mubble.polished_red_sandstone_stairs": "Gepolijste rode zandstenenblokstenen trap",
 	"block.mubble.polished_red_sandstone_slab": "Gepolijste rode zandstenenblokstenen plaat",
 	"block.mubble.polished_red_sandstone_vertical_slab": "Gepolijste rode zandstenenblokstenen plaat verticaal",
-
 	"block.mubble.smooth_stone_paving": "Gladde stenen tegels",
 	"block.mubble.smooth_stone_paving_stairs": "Gladde stenen tegel trap",
 	"block.mubble.smooth_stone_paving_slab": "Gladde stenen tegel plaat",
 	"block.mubble.smooth_stone_paving_vertical_slab": "Gladde stenen tegel plaat verticaal",
-
 	"block.mubble.chiseled_prismarine": "Gebeiteld prismarien",
 	"block.mubble.chiseled_prismarine_stairs": "Gebeiteld prismarientrap",
 	"block.mubble.chiseled_prismarine_slab": "Gebeiteld prismarienplaat",
 	"block.mubble.chiseled_prismarine_vertical_slab": "Gebeiteld prismarienplaat verticaal",
 	"block.mubble.chiseled_prismarine_wall": "Gebeiteld prismarienmuur",
-	
 	"block.mubble.prismarine_brick_paving": "Prismarienblokstenen tegels",
 	"block.mubble.prismarine_brick_paving_stairs": "Prismarienblokstenen tegel trap",
 	"block.mubble.prismarine_brick_paving_slab": "Prismarienblokstenen tegel plaat",
 	"block.mubble.prismarine_brick_paving_vertical_slab": "Prismarienblokstenen tegel plaat verticaal",
-	
 	"block.mubble.permarock": "Permasteen",
 	"block.mubble.permafrost_bricks": "Permafrostbakstenen",
 	"block.mubble.permafrost_brick_stairs": "Permafrostbakstenen trap",
@@ -152,17 +137,14 @@
 	"block.mubble.blue_permafrost_brick_wall": "Blauwe permafrostbakstenenmuur",
 	"block.mubble.permafrost_bismuth_ore": "Permafrost bismutherts",
 	"block.mubble.frozen_obsidian": "Bevroren obsidiaan",
-
 	"block.mubble.vanadium_block": "Vanadiumblok",
 	"block.mubble.vanadium_ore": "Vanadiumerts",
-	
 	"block.mubble.autumn_oak_sapling": "Herfsteikkiemplant",
 	"block.mubble.autumn_oak_leaves": "Herfsteikbladeren",
 	"block.mubble.autumn_oak_leaf_pile": "Herfsteikbladerhoop",
 	"block.mubble.autumn_birch_sapling": "Herfstberkenkiemplant",
 	"block.mubble.autumn_birch_leaves": "Herfstberkenbladeren",
 	"block.mubble.autumn_birch_leaf_pile": "Herfstberkenbladerhoop",
-	
 	"block.mubble.cherry_oak_planks": "Kerseneikhouten planken",
 	"block.mubble.pink_cherry_oak_sapling": "Rozekerseneikkiemplant",
 	"block.mubble.white_cherry_oak_sapling": "Wittekerseneikkiemplant",
@@ -187,7 +169,6 @@
 	"block.mubble.cherry_oak_wood_slab": "Kerseneikhouten plaat",
 	"block.mubble.cherry_oak_wood_vertical_slab": "Kerseneikhouten plaat verticaal",
 	"block.mubble.cherry_oak_wood_button": "Kerseneikhouten knop",
-	
 	"block.mubble.palm_planks": "Palmhouten planken",
 	"block.mubble.palm_sapling": "Palmkiemplant",
 	"block.mubble.palm_log": "Palmstam",
@@ -209,7 +190,6 @@
 	"block.mubble.palm_wood_slab": "Palmhouten plaat",
 	"block.mubble.palm_wood_vertical_slab": "Palmhouten plaat verticaal",
 	"block.mubble.palm_wood_button": "Palmhouten knop",
-
 	"block.mubble.blue_bricks": "Blauwe bakstenen",
 	"block.mubble.light_blue_bricks": "Lichtblauwe bakstenen",
 	"block.mubble.cyan_bricks": "Turquoise bakstenen",
@@ -226,7 +206,6 @@
 	"block.mubble.light_gray_bricks": "Lichtgrijze bakstenen",
 	"block.mubble.gray_bricks": "Grijze bakstenen",
 	"block.mubble.black_bricks": "Zwarte bakstenen",
-
 	"block.mubble.blue_brick_stairs": "Blauwe bakstenen trap",
 	"block.mubble.light_blue_brick_stairs": "Lichtblauwe bakstenen trap",
 	"block.mubble.cyan_brick_stairs": "Turquoise bakstenen trap",
@@ -243,7 +222,6 @@
 	"block.mubble.light_gray_brick_stairs": "Lichtgrijze bakstenen trap",
 	"block.mubble.gray_brick_stairs": "Grijze bakstenen trap",
 	"block.mubble.black_brick_stairs": "Zwarte bakstenen trap",
-
 	"block.mubble.blue_brick_slab": "Blauwe bakstenen plaat",
 	"block.mubble.light_blue_brick_slab": "Lichtblauwe bakstenen plaat",
 	"block.mubble.cyan_brick_slab": "Turquoise bakstenen plaat",
@@ -260,7 +238,6 @@
 	"block.mubble.light_gray_brick_slab": "Lichtgrijze bakstenen plaat",
 	"block.mubble.gray_brick_slab": "Grijze bakstenen plaat",
 	"block.mubble.black_brick_slab": "Zwarte bakstenen plaat",
-
 	"block.mubble.blue_brick_vertical_slab": "Blauwe bakstenen plaat verticaal",
 	"block.mubble.light_blue_brick_vertical_slab": "Lichtblauwe bakstenen plaat verticaal",
 	"block.mubble.cyan_brick_vertical_slab": "Turquoise bakstenen plaat verticaal",
@@ -277,7 +254,6 @@
 	"block.mubble.light_gray_brick_vertical_slab": "Lichtgrijze bakstenen plaat verticaal",
 	"block.mubble.gray_brick_vertical_slab": "Grijze bakstenen plaat verticaal",
 	"block.mubble.black_brick_vertical_slab": "Zwarte bakstenen plaat verticaal",
-
 	"block.mubble.blue_brick_wall": "Blauwe bakstenen muur",
 	"block.mubble.light_blue_brick_wall": "Lichtblauwe bakstenen muur",
 	"block.mubble.cyan_brick_wall": "Turquoise bakstenen muur",
@@ -294,7 +270,6 @@
 	"block.mubble.light_gray_brick_wall": "Lichtgrijze bakstenen muur",
 	"block.mubble.gray_brick_wall": "Grijze bakstenen muur",
 	"block.mubble.black_brick_wall": "Zwarte bakstenen muur",
-
 	"block.mubble.blunite": "Bluniet",
 	"block.mubble.blunite_stairs": "Bluniettrap",
 	"block.mubble.blunite_slab": "Blunietplaat",
@@ -313,7 +288,6 @@
 	"block.mubble.polished_carbonite_stairs": "Gepolijst carboniettrap",
 	"block.mubble.polished_carbonite_slab": "Gepolijst carbonietplaat",
 	"block.mubble.polished_carbonite_vertical_slab": "Gepolijst carbonietplaat verticaal",
-
 	"block.mubble.terracotta_stairs": "Terracotta trap",
 	"block.mubble.blue_terracotta_stairs": "Blauwe terracotta trap",
 	"block.mubble.light_blue_terracotta_stairs": "Lichtblauwe terracotta trap",
@@ -331,7 +305,6 @@
 	"block.mubble.light_gray_terracotta_stairs": "Lichtgrijze terracotta trap",
 	"block.mubble.gray_terracotta_stairs": "Grijze terracotta trap",
 	"block.mubble.black_terracotta_stairs": "Zwarte terracotta trap",
-
 	"block.mubble.terracotta_slab": "Terracotta plaat",
 	"block.mubble.blue_terracotta_slab": "Blauwe terracotta plaat",
 	"block.mubble.light_blue_terracotta_slab": "Lichtblauwe terracotta plaat",
@@ -349,7 +322,6 @@
 	"block.mubble.light_gray_terracotta_slab": "Lichtgrijze terracotta plaat",
 	"block.mubble.gray_terracotta_slab": "Grijze terracotta plaat",
 	"block.mubble.black_terracotta_slab": "Zwarte terracotta plaat",
-
 	"block.mubble.terracotta_vertical_slab": "Terracotta plaat verticaal",
 	"block.mubble.blue_terracotta_vertical_slab": "Blauwe terracotta plaat verticaal",
 	"block.mubble.light_blue_terracotta_vertical_slab": "Lichtblauwe terracotta plaat verticaal",
@@ -367,7 +339,6 @@
 	"block.mubble.light_gray_terracotta_vertical_slab": "Lichtgrijze terracotta plaat verticaal",
 	"block.mubble.gray_terracotta_vertical_slab": "Grijze terracotta plaat verticaal",
 	"block.mubble.black_terracotta_vertical_slab": "Zwarte terracotta plaat verticaal",
-
 	"block.mubble.terracotta_wall": "Terracotta muur",
 	"block.mubble.blue_terracotta_wall": "Blauwe terracotta muur",
 	"block.mubble.light_blue_terracotta_wall": "Lichtblauwe terracotta muur",
@@ -385,7 +356,6 @@
 	"block.mubble.light_gray_terracotta_wall": "Lichtgrijze terracotta muur",
 	"block.mubble.gray_terracotta_wall": "Grijze terracotta muur",
 	"block.mubble.black_terracotta_wall": "Zwarte terracotta muur",
-
 	"block.mubble.terracotta_pressure_plate": "Terracotta drukplaat",
 	"block.mubble.blue_terracotta_pressure_plate": "Blauwe terracotta drukplaat",
 	"block.mubble.light_blue_terracotta_pressure_plate": "Lichtblauwe terracotta drukplaat",
@@ -403,7 +373,6 @@
 	"block.mubble.light_gray_terracotta_pressure_plate": "Lichtgrijze terracotta drukplaat",
 	"block.mubble.gray_terracotta_pressure_plate": "Grijze terracotta drukplaat",
 	"block.mubble.black_terracotta_pressure_plate": "Zwarte terracotta drukplaat",
-
 	"block.mubble.terracotta_button": "Terracotta knop",
 	"block.mubble.blue_terracotta_button": "Blauwe terracotta knop",
 	"block.mubble.light_blue_terracotta_button": "Lichtblauwe terracotta knop",
@@ -421,7 +390,6 @@
 	"block.mubble.light_gray_terracotta_button": "Lichtgrijze terracotta knop",
 	"block.mubble.gray_terracotta_button": "Grijze terracotta knop",
 	"block.mubble.black_terracotta_button": "Zwarte terracotta knop",
-
 	"block.mubble.blue_dark_prismarine": "Blauwe donkereprismarien",
 	"block.mubble.light_blue_dark_prismarine": "Lichtblauwe donkereprismarien",
 	"block.mubble.cyan_dark_prismarine": "Turquoise donkereprismarien",
@@ -438,7 +406,6 @@
 	"block.mubble.light_gray_dark_prismarine": "Lichtgrijze donkereprismarien",
 	"block.mubble.gray_dark_prismarine": "Grijze donkereprismarien",
 	"block.mubble.black_dark_prismarine": "Zwarte donkereprismarien",
-
 	"block.mubble.blue_dark_prismarine_stairs": "Blauwe donkereprismarientrap",
 	"block.mubble.light_blue_dark_prismarine_stairs": "Lichtblauwe donkereprismarientrap",
 	"block.mubble.cyan_dark_prismarine_stairs": "Turquoise donkereprismarientrap",
@@ -455,7 +422,6 @@
 	"block.mubble.light_gray_dark_prismarine_stairs": "Lichtgrijze donkereprismarientrap",
 	"block.mubble.gray_dark_prismarine_stairs": "Grijze donkereprismarientrap",
 	"block.mubble.black_dark_prismarine_stairs": "Zwarte donkereprismarientrap",
-
 	"block.mubble.blue_dark_prismarine_slab": "Blauwe donkereprismarienplaat",
 	"block.mubble.light_blue_dark_prismarine_slab": "Lichtblauwe donkereprismarienplaat",
 	"block.mubble.cyan_dark_prismarine_slab": "Turquoise donkereprismarienplaat",
@@ -472,7 +438,6 @@
 	"block.mubble.light_gray_dark_prismarine_slab": "Lichtgrijze donkereprismarienplaat",
 	"block.mubble.gray_dark_prismarine_slab": "Grijze donkereprismarienplaat",
 	"block.mubble.black_dark_prismarine_slab": "Zwarte donkereprismarienplaat",
-
 	"block.mubble.blue_dark_prismarine_vertical_slab": "Blauwe donkereprismarienplaat verticaal",
 	"block.mubble.light_blue_dark_prismarine_vertical_slab": "Lichtblauwe donkereprismarienplaat verticaal",
 	"block.mubble.cyan_dark_prismarine_vertical_slab": "Turquoise donkereprismarienplaat verticaal",
@@ -489,7 +454,6 @@
 	"block.mubble.light_gray_dark_prismarine_vertical_slab": "Lichtgrijze donkereprismarienplaat verticaal",
 	"block.mubble.gray_dark_prismarine_vertical_slab": "Grijze donkereprismarienplaat verticaal",
 	"block.mubble.black_dark_prismarine_vertical_slab": "Zwarte donkereprismarienplaat verticaal",
-
 	"block.mubble.blue_dark_prismarine_wall": "Blauwe donkereprismarienmuur",
 	"block.mubble.light_blue_dark_prismarine_wall": "Lichtblauwe donkereprismarienmuur",
 	"block.mubble.cyan_dark_prismarine_wall": "Turquoise donkereprismarienmuur",
@@ -506,7 +470,6 @@
 	"block.mubble.light_gray_dark_prismarine_wall": "Lichtgrijze donkereprismarienmuur",
 	"block.mubble.gray_dark_prismarine_wall": "Grijze donkereprismarienmuur",
 	"block.mubble.black_dark_prismarine_wall": "Zwarte donkereprismarienmuur",
-
 	"block.mubble.blue_concrete_stairs": "Blauwe betonnen trap",
 	"block.mubble.light_blue_concrete_stairs": "Lichtblauwe betonnen trap",
 	"block.mubble.cyan_concrete_stairs": "Turquoise betonnen trap",
@@ -523,7 +486,6 @@
 	"block.mubble.light_gray_concrete_stairs": "Lichtgrijze betonnen trap",
 	"block.mubble.gray_concrete_stairs": "Grijze betonnen trap",
 	"block.mubble.black_concrete_stairs": "Zwarte betonnen trap",
-
 	"block.mubble.blue_concrete_slab": "Blauwe betonnen plaat",
 	"block.mubble.light_blue_concrete_slab": "Lichtblauwe betonnen plaat",
 	"block.mubble.cyan_concrete_slab": "Turquoise betonnen plaat",
@@ -540,7 +502,6 @@
 	"block.mubble.light_gray_concrete_slab": "Lichtgrijze betonnen plaat",
 	"block.mubble.gray_concrete_slab": "Grijze betonnen plaat",
 	"block.mubble.black_concrete_slab": "Zwarte betonnen plaat",
-
 	"block.mubble.blue_concrete_vertical_slab": "Blauwe betonnen plaat verticaal",
 	"block.mubble.light_blue_concrete_vertical_slab": "Lichtblauwe betonnen plaat verticaal",
 	"block.mubble.cyan_concrete_vertical_slab": "Turquoise betonnen plaat verticaal",
@@ -557,7 +518,6 @@
 	"block.mubble.light_gray_concrete_vertical_slab": "Lichtgrijze betonnen plaat verticaal",
 	"block.mubble.gray_concrete_vertical_slab": "Grijze betonnen plaat verticaal",
 	"block.mubble.black_concrete_vertical_slab": "Zwarte betonnen plaat verticaal",
-
 	"block.mubble.blue_concrete_wall": "Blauwe betonnen muur",
 	"block.mubble.light_blue_concrete_wall": "Lichtblauwe betonnen muur",
 	"block.mubble.cyan_concrete_wall": "Turquoise betonnen muur",
@@ -574,7 +534,6 @@
 	"block.mubble.light_gray_concrete_wall": "Lichtgrijze betonnen muur",
 	"block.mubble.gray_concrete_wall": "Grijze betonnen muur",
 	"block.mubble.black_concrete_wall": "Zwarte betonnen muur",
-	
 	"block.mubble.blue_concrete_pressure_plate": "Blauwe betonnen drukplaat",
 	"block.mubble.light_blue_concrete_pressure_plate": "Lichtblauwe betonnen drukplaat",
 	"block.mubble.cyan_concrete_pressure_plate": "Turquoise betonnen drukplaat",
@@ -591,7 +550,6 @@
 	"block.mubble.light_gray_concrete_pressure_plate": "Lichtgrijze betonnen drukplaat",
 	"block.mubble.gray_concrete_pressure_plate": "Grijze betonnen drukplaat",
 	"block.mubble.black_concrete_pressure_plate": "Zwarte betonnen drukplaat",
-
 	"block.mubble.blue_concrete_button": "Blauwe betonnen knop",
 	"block.mubble.light_blue_concrete_button": "Lichtblauwe betonnen knop",
 	"block.mubble.cyan_concrete_button": "Turquoise betonnen knop",
@@ -608,7 +566,6 @@
 	"block.mubble.light_gray_concrete_button": "Lichtgrijze betonnen knop",
 	"block.mubble.gray_concrete_button": "Grijze betonnen knop",
 	"block.mubble.black_concrete_button": "Zwarte betonnen knop",
-
 	"block.mubble.blue_quartz_paving": "Blauwe kwarts tegels",
 	"block.mubble.light_blue_quartz_paving": "Lichtblauwe kwarts tegels",
 	"block.mubble.cyan_quartz_paving": "Turquoise kwarts tegels",
@@ -625,7 +582,6 @@
 	"block.mubble.light_gray_quartz_paving": "Lichtgrijze kwarts tegels",
 	"block.mubble.gray_quartz_paving": "Grijze kwarts tegels",
 	"block.mubble.black_quartz_paving": "Zwarte kwarts tegels",
-
 	"block.mubble.blue_quartz_paving_stairs": "Blauwe kwarts tegeltrap",
 	"block.mubble.light_blue_quartz_paving_stairs": "Lichtblauwe kwarts tegeltrap",
 	"block.mubble.cyan_quartz_paving_stairs": "Turquoise kwarts tegeltrap",
@@ -642,7 +598,6 @@
 	"block.mubble.light_gray_quartz_paving_stairs": "Lichtgrijze kwarts tegeltrap",
 	"block.mubble.gray_quartz_paving_stairs": "Grijze kwarts tegeltrap",
 	"block.mubble.black_quartz_paving_stairs": "Zwarte kwarts tegeltrap",
-
 	"block.mubble.blue_quartz_paving_slab": "Blauwe kwarts tegelplaat",
 	"block.mubble.light_blue_quartz_paving_slab": "Lichtblauwe kwarts tegelplaat",
 	"block.mubble.cyan_quartz_paving_slab": "Turquoise kwarts tegelplaat",
@@ -659,7 +614,6 @@
 	"block.mubble.light_gray_quartz_paving_slab": "Lichtgrijze kwarts tegelplaat",
 	"block.mubble.gray_quartz_paving_slab": "Grijze kwarts tegelplaat",
 	"block.mubble.black_quartz_paving_slab": "Zwarte kwarts tegelplaat",
-
 	"block.mubble.blue_quartz_paving_vertical_slab": "Blauwe kwarts tegel plaat verticaal",
 	"block.mubble.light_blue_quartz_paving_vertical_slab": "Lichtblauwe kwarts tegel plaat verticaal",
 	"block.mubble.cyan_quartz_paving_vertical_slab": "Turquoise kwarts tegel plaat verticaal",
@@ -676,7 +630,6 @@
 	"block.mubble.light_gray_quartz_paving_vertical_slab": "Lichtgrijze kwarts tegel plaat verticaal",
 	"block.mubble.gray_quartz_paving_vertical_slab": "Grijze kwarts tegel plaat verticaal",
 	"block.mubble.black_quartz_paving_vertical_slab": "Zwarte kwarts tegel plaat verticaal",
-
 	"block.mubble.red_christmas_bauble": "Rode kerstbal",
 	"block.mubble.orange_christmas_bauble": "Orange kerstbal",
 	"block.mubble.yellow_christmas_bauble": "Gele kerstbal",
@@ -687,11 +640,9 @@
 	"block.mubble.light_blue_christmas_bauble": "Lichtblauwe kerstbal",
 	"block.mubble.green_christmas_bauble": "Groene kerstbal",
 	"block.mubble.white_christmas_bauble": "Witte kerstbal",
-
 	"block.mubble.red_shiny_garland": "Rode glanzende slinger",
 	"block.mubble.silver_shiny_garland": "Zilvere glanzende slinger",
 	"block.mubble.gold_shiny_garland": "Goude glanzende slinger",
-
 	"block.mubble.white_present": "Wit cadeau",
 	"block.mubble.black_present": "Zwart cadeau",
 	"block.mubble.blue_present": "Blauw cadeau",
@@ -700,9 +651,7 @@
 	"block.mubble.red_present": "Rood cadeau",
 	"block.mubble.purple_present": "Paars cadeau",
 	"block.mubble.golden_present": "Goud cadeau",
-
 	"block.mubble.footblock": "Voetblok",
-	
 	"block.mubble.blue_cloud_block": "Blauwewolkblok",
 	"block.mubble.light_blue_cloud_block": "Lichtblauwewolkblok",
 	"block.mubble.cyan_cloud_block": "Turquoisewolkblok",
@@ -719,14 +668,12 @@
 	"block.mubble.light_gray_cloud_block": "Lichtgrijzewolkblok",
 	"block.mubble.gray_cloud_block": "Grijzewolkblok",
 	"block.mubble.black_cloud_block": "Zwartewolkblok",
-
 	"block.mubble.tomatoes": "Tomaten",
 	"block.mubble.salad": "Salade",
 	"block.mubble.blueberry_bush": "Blauwebessenstruik",
 	"block.mubble.cheese_block": "Kaasblok",
 	"block.mubble.chocolate_cake": "Chocolade taart",
 	"block.mubble.minecraft_10th_anniversary_cake": "Minecraft's tiende jubileum's taart",
-
 	"block.mubble.blue_balloon": "Blauwe ballon",
 	"block.mubble.light_blue_balloon": "Lichtblauwe ballon",
 	"block.mubble.cyan_balloon": "Turquoise ballon",
@@ -743,12 +690,10 @@
 	"block.mubble.light_gray_balloon": "Lichtgrijze ballon",
 	"block.mubble.gray_balloon": "Grijze ballon",
 	"block.mubble.black_balloon": "Zwarte ballon",
-
 	"block.mubble.unstable_stone": "Unstabiel steen",
 	"block.mubble.fluid_tank": "Vloeistoftank",
 	"block.mubble.placer": "Plaatser",
 	"block.mubble.timeswap_table": "Tijdwisselstaftel",
-
 	"block.mubble.dandelion_pile": "Paardenbloemen hoop",
 	"block.mubble.poppy_pile": "Klaproozen hoop",
 	"block.mubble.blue_orchid_pile": "Blauwe Orchideen hoop",
@@ -762,8 +707,6 @@
 	"block.mubble.cornflower_pile": "Korenbloemen hoop",
 	"block.mubble.lily_of_the_valley_pile": "Lelietjes-van-dalen hoop",
 	"block.mubble.wither_rose_pile": "Witherroosen hoop",
-
-
 	"block.mubble.smb_question_block": "?-blok (SMB)",
 	"block.mubble.smb3_question_block": "?-blok (SMB3)",
 	"block.mubble.smw_question_block": "?-blok (SMW)",
@@ -864,13 +807,11 @@
 	"block.mubble.smb3_key_door": "Sleutel deur (SMB3)",
 	"block.mubble.smw_key_door": "Sleutel deur (SMW)",
 	"block.mubble.nsmbu_key_door": "Sleutel deur (NSMBU)",
-
 	"block.mubble.fire_flower": "Vuur bloem",
 	"block.mubble.ice_flower": "IJs bloem",
 	"block.mubble.boomerang_flower": "Boomerang bloem",
 	"block.mubble.cloud_flower": "Wolk bloem",
 	"block.mubble.gold_flower": "Gouden Bloem",
-
 	"block.mubble.blue_mushroom": "Blauwe paddenstoel",
 	"block.mubble.light_blue_mushroom": "Lichtblauwe paddenstoel",
 	"block.mubble.cyan_mushroom": "Turquoise paddenstoel",
@@ -885,7 +826,6 @@
 	"block.mubble.light_gray_mushroom": "Lichtgrijse paddenstoel",
 	"block.mubble.gray_mushroom": "Grijse paddenstoel",
 	"block.mubble.black_mushroom": "Zwarte paddenstoel",
-
 	"block.mubble.blue_mushroom_block": "Blauw paddenstoelenblok",
 	"block.mubble.light_blue_mushroom_block": "Lichtblauw paddenstoelenblok",
 	"block.mubble.cyan_mushroom_block": "Turquoise paddenstoelenblok",
@@ -900,11 +840,7 @@
 	"block.mubble.light_gray_mushroom_block": "Lichtgrijs paddenstoelenblok",
 	"block.mubble.gray_mushroom_block": "Grijs paddenstoelenblok",
 	"block.mubble.black_mushroom_block": "Zwart paddenstoelenblok",
-
-
 	"block.mubble.kirby_block": "Kirby blok",
-
-
 	"block.mubble.blue_tetris_block": "Blauw Tetris blok",
 	"block.mubble.light_blue_tetris_block": "Lichtblauw Tetris blok",
 	"block.mubble.cyan_tetris_block": "Turquoise Tetris blok",
@@ -921,13 +857,10 @@
 	"block.mubble.light_gray_tetris_block": "Lichtgrijs Tetris blok",
 	"block.mubble.gray_tetris_block": "Grijs Tetris blok",
 	"block.mubble.black_tetris_block": "Zwart Tetris blok",
-	
 	"block.mubble.tetris_glass": "Tetris glas",
 	"block.mubble.japanese_tetris_cushion": "Japans Tetris kussen",
 	"block.mubble.rainbow_tetris_scaffolding": "Regenboog Tetris steiger",
 	"block.mubble.monochrome_tetris_scaffolding": "Zwart-witte Tetris steiger",
-
-
 	"block.mubble.vampire_stone": "Vampiersteen",
 	"block.mubble.medusa_stone": "Medusa's steen",
 	"block.mubble.medusa_bricks": "Medusa's blokstenen",
@@ -935,7 +868,6 @@
 	"block.mubble.medusa_brick_slab": "Medusa's blokstenen plaat",
 	"block.mubble.medusa_brick_vertical_slab": "Medusa's blokstenen plaat verticaal",
 	"block.mubble.medusa_brick_wall": "Medusa's blokstenen muur",
-
 	"block.mubble.blue_candy_cane_pillar": "Blauwe zuurstokpillaar",
 	"block.mubble.light_blue_candy_cane_pillar": "Lichtblauwe zuurstokpillaar",
 	"block.mubble.cyan_candy_cane_pillar": "Turquoise zuurstokpillaar",
@@ -952,14 +884,11 @@
 	"block.mubble.light_gray_candy_cane_pillar": "Lichtgrijze zuurstokpillaar",
 	"block.mubble.gray_candy_cane_pillar": "Grijze zuurstokpillaar",
 	"block.mubble.black_candy_cane_pillar": "Zwarte zuurstokpillaar",
-
-
 	"block.mubble.green_hill_grass_block": "Groeneheuvel grasblok",
 	"block.mubble.green_hill_dirt": "Groeneheuvel aarde",
 	"block.mubble.marble_zone_stone": "Marblezone steen",
 	"block.mubble.yellow_studiopolis_clapper": "Gele studiopolisklepel",
 	"block.mubble.blue_studiopolis_clapper": "Blauwe studiopolisklepel",
-
 	"block.mubble.press_garden_planks": "Perstuinplanken",
 	"block.mubble.pink_press_garden_sapling": "Roze perstuin kiemplant",
 	"block.mubble.red_press_garden_sapling": "Rode perstuin kiemplant",
@@ -984,10 +913,7 @@
 	"block.mubble.press_garden_wood_slab": "Perstuin houten plaat",
 	"block.mubble.press_garden_wood_vertical_slab": "Perstuin houten plaat verticaal",
 	"block.mubble.press_garden_wood_button": "Perstuin houten knop",
-	
 	"block.mubble.spring": "Veer",
-
-
 	"block.mubble.scarlet_planks": "Scharlakehouten planken",
 	"block.mubble.scarlet_sapling": "Scharlakekiemplant",
 	"block.mubble.scarlet_log": "Scharlakeboomstam",
@@ -1011,8 +937,6 @@
 	"block.mubble.scarlet_wood_button": "Scharlakehouten knop",
 	"block.mubble.scarlet_mushroom": "Scharlake paddenstoel",
 	"block.mubble.scarlet_orchid": "Scharlake orchidee",
-
-
 	"block.mubble.girder": "Stalenbalk",
 	"block.mubble.mirror_temple_bricks": "Spiegeltempel bakstenen",
 	"block.mubble.mirror_temple_brick_stairs": "Spiegeltempel bakstenen trap",
@@ -1027,8 +951,6 @@
 	"block.mubble.elder_pebbles": "Oudere keizels",
 	"block.mubble.dream_block": "Droom blok",
 	"block.mubble.dream_bedrock": "Droom bodemsteen",
-
-
 	"block.mubble.blue_puyo": "Blauwe puyo",
 	"block.mubble.cyan_puyo": "Turquoise puyo",
 	"block.mubble.green_puyo": "Groene puyo",
@@ -1040,12 +962,8 @@
 	"block.mubble.point_puyo": "Punt puyo",
 	"block.mubble.hard_puyo": "Harde puyo",
 	"block.mubble.iron_puyo": "IJzere puyo",
-
-
 	"block.mubble.koretato_block": "Koretato-blok",
 	"block.mubble.potato_flower": "Aardappelbloem",
-
-
 	"block.mubble.potted_autumn_oak_sapling": "Gepotte herfsteikkiemplant",
 	"block.mubble.potted_autumn_birch_sapling": "Gepotte Herfstberkenkiemplant",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Gepotte rozekerseneikkiemplant",
@@ -1076,9 +994,6 @@
 	"block.mubble.potted_scarlet_mushroom": "Gepotte scharlake paddenstoel",
 	"block.mubble.potted_scarlet_orchid": "Gepotte scharlake orchidee",
 	"block.mubble.potted_potato_flower": "Gepotte aardappelbloem",
-
-
-
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.vanadium": "Vanadium",
@@ -1115,8 +1030,6 @@
 	"item.mubble.jingle_bells": "Jingle bellen",
 	"item.mubble.small_bulb": "Kleine lamp",
 	"item.mubble.totem_of_ascending": "Totem der opstijging",
-
-
 	"item.mubble.super_mushroom": "Super paddenstoel",
 	"item.mubble.peach": "Perzik",
 	"item.mubble.fireball": "Vuurbal",
@@ -1131,14 +1044,8 @@
 	"item.mubble.smb3_key": "Sleutel (SMB3)",
 	"item.mubble.smw_key": "Sleutel (SMW)",
 	"item.mubble.nsmbu_key": "Sleutel (NSMBU)",
-
-
 	"item.mubble.kirby_ball": "Kirby bal",
-
-
 	"item.mubble.smash_ball": "Smash bal",
-
-
 	"item.mubble.white_lightsaber": "Wit lichtzwaard",
 	"item.mubble.light_gray_lightsaber": "Lichtgrijs lichtzwaard",
 	"item.mubble.gray_lightsaber": "Grijs lichtzwaard",
@@ -1155,8 +1062,6 @@
 	"item.mubble.purple_lightsaber": "Paars lichtzwaard",
 	"item.mubble.magenta_lightsaber": "Magenta lichtzwaard",
 	"item.mubble.pink_lightsaber": "Roze lichtzwaard",
-
-
 	"item.mubble.blank_music_disc": "Blanke muziekplaat",
 	"item.mubble.music_disc_battlefield": "Muziekplaat",
 	"item.mubble.music_disc_champions_road": "Muziekplaat",
@@ -1196,8 +1101,6 @@
 	"item.mubble.music_disc_type_a.desc": "Tetris 99 - Type A",
 	"item.mubble.music_disc_vampire_killer.desc": "Castlevania Judgement - Vampire Killer",
 	"item.mubble.music_disc_vs_champion_red_and_blue.desc": "Pokémon Sun & Moon - VS. Champion Red & Blue",
-
-
 	"item.mubble.remix_disc_nb_beware_the_forest_mushrooms": "Muziekplaat",
 	"item.mubble.remix_disc_nb_buoy_base_galaxy": "Muziekplaat",
 	"item.mubble.remix_disc_nb_fly_octo_fly": "Muziekplaat",
@@ -1210,19 +1113,13 @@
 	"item.mubble.remix_disc_nb_harvest_hazards.desc": "Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)",
 	"item.mubble.remix_disc_nb_sweden.desc": "C418 - Sweden (NoteBlock Remix)",
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
-
-
 	"item.mubble.duck_spawn_egg": "Eendspawnei",
 	"item.mubble.chincho_spawn_egg": "Chinchospawnei",
 	"item.mubble.goomba_spawn_egg": "Goombaspawnei",
 	"item.mubble.toad_spawn_egg": "Toadspawnei",
 	"item.mubble.zombie_cowman_spawn_egg": "Zombiekoeienmensspawnei",
-
-
-
 	"comment": "COSTUMES",
 	"item.mubble.headphones": "Koptelefoon",
-
 	"item.mubble.white_virtual_googles": "witte virtuele bril",
 	"item.mubble.light_gray_virtual_googles": "Lichtgrijze virtuele bril",
 	"item.mubble.gray_virtual_googles": "Grijze virtuele bril",
@@ -1239,10 +1136,7 @@
 	"item.mubble.purple_virtual_googles": "Paarse virtuele bril",
 	"item.mubble.magenta_virtual_googles": "Magenta virtuele bril",
 	"item.mubble.pink_virtual_googles": "Roze virtuele bril",
-	
 	"item.mubble.christmas_hat": "Kerstmuts",
-
-
 	"item.mubble.cappy": "Cappy",
 	"item.mubble.luigi_cap": "Luigi's pet",
 	"item.mubble.wario_cap": "Wario's pet",
@@ -1260,71 +1154,38 @@
 	"item.mubble.mario_wedding_hat": "Mario's trouwdag hoed",
 	"item.mubble.boo_hat": "Boo hoed",
 	"item.mubble.broque_monsieur_head": "Broque Monsieur's hoofd",
-
-
 	"item.mubble.bandana": "Bandana",
-
-
 	"item.mubble.pikachu_ears": "Pikachu ooren",
 	"item.mubble.snorlax_hat": "Snorlax hoed",
-
-
 	"item.mubble.top_hat": "Hoge hoed",
-
-
 	"item.mubble.ralsei_hat": "Ralsei's hoed",
 	"item.mubble.king_round_mask": "Koning rond masker",
-
-
 	"item.mubble.kid_hat": "Kind's hoed",
-
-
 	"item.mubble.baldi_head": "Baldi's hoofd",
-
-
 	"item.mubble.guardian_mask": "Bewaker's masker",
-
-
 	"item.mubble.mayro_cap": "Mayro's pet",
 	"item.mubble.noteblock_head": "NoteBlock's hoofd",
-
-
-
 	"comment": "ENCHANTMENTS",
 	"enchantment.mubble.telekinesis": "Afstandelijke Voorwerpbeweging",
 	"enchantment.mubble.ignorance_curse": "Vloek der Ontwetendheid",
-
-
-
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Plaatser",
 	"container.mubble.timeswap_table": "Tijdwisselstafel",
 	"container.mubble.present": "Cadeau",
-
-
-
 	"comment": "ENTITIES",
 	"entity.mubble.duck": "Eend",
 	"entity.mubble.zombie_cowman": "Zombiekoeienmens",
 	"entity.mubble.custom_tnt": "Aangepaste TNT",
 	"entity.mubble.flying_block": "Vliegend blok",
-	
 	"entity.mubble.chincho": "Chincho",
 	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.toad": "Toad",
 	"entity.mubble.fireball": "Vuurbal",
 	"entity.mubble.iceball": "IJsbal",
-
 	"entity.mubble.kirby_ball": "Kirby bal",
-
-
-
 	"comment": "EFFECTS",
 	"effect.mubble.heaviness": "Zwaarte",
 	"effect.mubble.hiccup": "Hik",
-
-
-
 	"comment": "BIOMES",
 	"biome.mubble.pumpkin_pastures": "Pompoen weiland",
 	"biome.mubble.pink_cherry_oak_forest": "Rozekerseneiken bos",
@@ -1334,13 +1195,8 @@
 	"biome.mubble.tritanopian_gallery": "Tritanopische galerij",
 	"biome.mubble.achromatopsian_gallery": "Achromatopsian galerij",
 	"biome.mubble.protanopian_gallery": "Protanopishe galerij",
-	
 	"biome.mubble.press_garden": "Perstuin",
-
 	"biome.mubble.scarlet_forest": "Scharlake bos",
-
-
-
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.question_block.loot.power_up": "?-blok laat power up vallen",
 	"subtitles.mubble.block.question_block.loot.coin": "?-blok laat munt vallen",
@@ -1374,9 +1230,6 @@
 	"subtitles.mubble.entity.zombie_cowman.hurt": "Zombiekoeienmens heeft pijn",
 	"subtitles.mubble.entity.zombie_cowman.angry": "Zombiekoeienmens wordt boos",
 	"subtitles.mubble.entity.zombie_cowman.death": "Zombiekoeienmens sterft",
-
-
-
 	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "Een grandioos nieuw avontuur",
@@ -1396,9 +1249,6 @@
 	"advancements.mubble.get_timeswap_table.description": "Maak een tijdwisselstafel",
 	"advancements.mubble.get_tetris_block.title": "Het is allemaal verbonden",
 	"advancements.mubble.get_tetris_block.description": "Krijg je handen aan een Tetris blok",
-
-
-
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Heb %s voetselpunt(en) toegevoegd aan %s",
 	"commands.foodbar.add.food.success.multiple": "Heb %s voetselpunt(en) toegevoegd aan %s entiteiten",
@@ -1416,9 +1266,6 @@
 	"commands.motion.add.success.multiple": "Heb %s, %s, %s toegevoegd aan de beweging van %s entiteiten",
 	"commands.motion.set.success.single": "Heb beweging naar %s, %s, %s gezet voor %s",
 	"commands.motion.set.success.multiple": "Heb beweging naar %s, %s, %s gezet voor %s entiteiten",
-
-
-
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "Dat is voor jou, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! Ik dacht dat je dit al op je hoofd had, §6Evan§r!",

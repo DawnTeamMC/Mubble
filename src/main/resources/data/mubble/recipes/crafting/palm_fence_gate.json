@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "wooden_fence_gate",
-	"pattern":
-	[
+	"pattern": [
 		"#W#",
 		"#W#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:stick"
 		},
-		"W":
-		{
+		"W": {
 			"item": "mubble:palm_planks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:palm_fence_gate"
 	}
 }

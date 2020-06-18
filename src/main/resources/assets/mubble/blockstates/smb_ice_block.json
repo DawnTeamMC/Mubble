@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/ice_block/smb"}
+	"variants": {
+		"": {
+			"model": "mubble:block/ice_block/smb"
+		}
 	}
 }

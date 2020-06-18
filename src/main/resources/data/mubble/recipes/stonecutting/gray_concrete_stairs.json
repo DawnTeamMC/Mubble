@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:gray_concrete"
 	},
 	"result": "mubble:gray_concrete_stairs",

@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XOX",
 		"OXO",
 		"XOX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:iron_ingot"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:iron_bars"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:girder",
 		"count": 5
 	}

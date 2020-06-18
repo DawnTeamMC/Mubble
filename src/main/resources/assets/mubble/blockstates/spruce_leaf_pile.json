@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/spruce_leaf_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/spruce_leaf_pile"
+		}
 	}
 }

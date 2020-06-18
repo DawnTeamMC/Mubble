@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/cornflower_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/cornflower_pile"
+		}
 	}
 }

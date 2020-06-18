@@ -1,7 +1,6 @@
 {
-	"parent":"mubble:item/crown",
-	"textures":
-	{
+	"parent": "mubble:item/crown",
+	"textures": {
 		"crown": "mubble:costume/princess_daisy_crown"
 	}
 }

@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:cut_sandstone"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:cut_sandstone_vertical_slab",
 		"count": 6
 	}

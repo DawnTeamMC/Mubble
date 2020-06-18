@@ -1,28 +1,22 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XOX",
 		"XIX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:white_concrete"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:slime_block"
 		},
-		"I":
-		{
+		"I": {
 			"item": "minecraft:sticky_piston"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:nsmbu_note_block",
 		"count": 4
 	}

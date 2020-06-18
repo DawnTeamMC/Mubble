@@ -1,42 +1,31 @@
 {
-	"display":
-	{
-		"icon":
-		{
+	"display": {
+		"icon": {
 			"item": "mubble:nsmbu_question_block"
 		},
-		"title":
-		{
+		"title": {
 			"translate": "advancements.mubble.root.title"
 		},
-		"description":
-		{
+		"description": {
 			"translate": "advancements.mubble.root.description"
 		},
 		"background": "mubble:textures/gui/advancements/backgrounds/mubble.png"
 	},
-	"criteria":
-	{
-		"has_blunite":
-		{
+	"criteria": {
+		"has_blunite": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:blunite"
 					}
 				]
 			}
 		},
-		"has_carbonite":
-		{
+		"has_carbonite": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:carbonite"
 					}
@@ -44,8 +33,7 @@
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_blunite",
 			"has_carbonite"

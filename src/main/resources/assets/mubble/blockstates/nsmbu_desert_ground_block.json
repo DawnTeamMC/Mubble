@@ -1,51 +1,168 @@
 {
-	"variants":
-	{
-		"over=false":
-		[
-			{"model": "mubble:block/ground_block/nsmbu/desert/normal/1", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/normal/2", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/normal/3", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/normal/4", "weight": 1}
+	"variants": {
+		"over=false": [
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/normal/1",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/normal/2",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/normal/3",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/normal/4",
+				"weight": 1
+			}
 		],
-		"over=true": 
-		[
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/111", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/112", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/113", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/114", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/121", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/122", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/123", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/124", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/131", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/132", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/133", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/134", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/211", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/212", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/213", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/214", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/221", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/222", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/223", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/224", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/231", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/232", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/233", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/234", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/311", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/312", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/313", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/314", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/321", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/322", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/323", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/324", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/331", "weight": 5},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/332", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/333", "weight": 1},
-			{"model": "mubble:block/ground_block/nsmbu/desert/over/334", "weight": 1}
+		"over=true": [
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/111",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/112",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/113",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/114",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/121",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/122",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/123",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/124",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/131",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/132",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/133",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/134",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/211",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/212",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/213",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/214",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/221",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/222",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/223",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/224",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/231",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/232",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/233",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/234",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/311",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/312",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/313",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/314",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/321",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/322",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/323",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/324",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/331",
+				"weight": 5
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/332",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/333",
+				"weight": 1
+			},
+			{
+				"model": "mubble:block/ground_block/nsmbu/desert/over/334",
+				"weight": 1
+			}
 		]
 	}
 }

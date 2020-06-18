@@ -1,7 +1,6 @@
 {
 	"parent": "block/slab",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/orange_quartz_paving",
 		"top": "mubble:block/orange_quartz_paving",
 		"side": "mubble:block/orange_quartz_paving"

@@ -1,7 +1,6 @@
 {
 	"parent": "block/template_wall_post",
-	"textures":
-	{
+	"textures": {
 		"wall": "mubble:block/mirror_temple_bricks/0"
 	}
 }

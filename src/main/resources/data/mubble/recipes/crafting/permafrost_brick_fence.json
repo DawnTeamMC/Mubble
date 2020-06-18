@@ -1,23 +1,18 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"ABA",
 		"ABA"
 	],
-	"key":
-	{
-		"A":
-		{
+	"key": {
+		"A": {
 			"item": "mubble:permafrost_bricks"
 		},
-		"B":
-		{
+		"B": {
 			"item": "mubble:permafrost_brick"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:permafrost_brick_fence",
 		"count": 6
 	}

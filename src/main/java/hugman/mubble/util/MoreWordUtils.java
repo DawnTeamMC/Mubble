@@ -1,25 +1,18 @@
 package hugman.mubble.util;
 
-public class MoreWordUtils
-{
-	public static String numerate(int number, String text)
-	{
-		if (number == 0)
-		{
+public class MoreWordUtils {
+	public static String numerate(int number, String text) {
+		if(number == 0) {
 			return "no " + text;
 		}
-		else if (number == 1)
-		{
+		else if(number == 1) {
 			return number + " " + text;
 		}
-		else
-		{
-			if (text.endsWith("y"))
-			{
+		else {
+			if(text.endsWith("y")) {
 				return number + " " + text.substring(0, text.length() - 1) + "ies";
 			}
-			else
-			{
+			else {
 				return number + " " + text + "s";
 			}
 		}

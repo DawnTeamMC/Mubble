@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XOX",
 		"XXX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:yellow_concrete"
 		},
-		"O":
-		{
+		"O": {
 			"item": "mubble:super_mushroom"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:nsmbu_question_block",
 		"count": 8
 	}

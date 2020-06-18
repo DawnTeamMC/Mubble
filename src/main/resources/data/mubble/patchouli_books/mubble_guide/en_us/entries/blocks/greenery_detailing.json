@@ -2,8 +2,7 @@
 	"icon": "mubble:scarlet_mushroom",
 	"name": "Greenery Detailing",
 	"category": "blocks",
-	"pages":
-	[
+	"pages": [
 		{
 			"type": "text",
 			"text": ""

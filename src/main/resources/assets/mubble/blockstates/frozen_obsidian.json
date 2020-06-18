@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/frozen_obsidian"}
+	"variants": {
+		"": {
+			"model": "mubble:block/frozen_obsidian"
+		}
 	}
 }

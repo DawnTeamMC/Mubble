@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/poppy_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/poppy_pile"
+		}
 	}
 }

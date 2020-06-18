@@ -1,7 +1,6 @@
 {
 	"parent": "block/slab",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/blue_permafrost_bricks",
 		"top": "mubble:block/blue_permafrost_bricks",
 		"side": "mubble:block/blue_permafrost_bricks"

@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/red_dark_prismarine"}
+	"variants": {
+		"": {
+			"model": "mubble:block/red_dark_prismarine"
+		}
 	}
 }

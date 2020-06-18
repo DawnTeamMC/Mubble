@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"minecraft:grass_block",
 		"mubble:smb_ground_ground_block",
 		"mubble:smb_underground_ground_block",

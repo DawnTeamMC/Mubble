@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:smelting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:candy_cane"
 	},
 	"result": "minecraft:sugar",

@@ -7,10 +7,8 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.render.RenderLayer;
 
 @Environment(EnvType.CLIENT)
-public class MubbleRenderLayers
-{
-	public static void init()
-	{
+public class MubbleRenderLayers {
+	public static void init() {
 		// Shiny Garlands
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutoutMipped(), MubbleBlocks.RED_SHINY_GARLAND,
 				MubbleBlocks.SILVER_SHINY_GARLAND, MubbleBlocks.GOLD_SHINY_GARLAND

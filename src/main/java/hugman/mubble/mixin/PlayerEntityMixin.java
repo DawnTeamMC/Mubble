@@ -18,22 +18,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
-public class PlayerEntityMixin
-{
+public class PlayerEntityMixin {
 	private static ItemStack prevStack;
 
 	@Inject(method = "interact", at = @At(value = "TAIL"), cancellable = true)
-	private void interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> info)
-	{
+	private void interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> info) {
 		PlayerEntity player = (PlayerEntity) (Object) this;
 		ItemStack stack = player.getStackInHand(hand);
-		if (stack.getItem() == Items.CARROT && entity.getType() == EntityType.PUFFERFISH)
-		{
+		if(stack.getItem() == Items.CARROT && entity.getType() == EntityType.PUFFERFISH) {
 			PufferfishEntity pufferfish = (PufferfishEntity) entity;
-			if (pufferfish.getPuffState() >= 1 && pufferfish.isAlive())
-			{
-				if (!player.abilities.creativeMode)
-				{
+			if(pufferfish.getPuffState() >= 1 && pufferfish.isAlive()) {
+				if(!player.abilities.creativeMode) {
 					stack.decrement(1);
 				}
 				player.swingHand(hand);
@@ -44,20 +39,18 @@ public class PlayerEntityMixin
 	}
 
 	@Inject(method = "tick", at = @At(value = "TAIL"), cancellable = true)
-	private void tick(CallbackInfo info)
-	{
+	private void tick(CallbackInfo info) {
 		PlayerEntity player = (PlayerEntity) (Object) this;
 		World world = player.getEntityWorld();
-		if (prevStack == null) prevStack = player.getMainHandStack();
+		if(prevStack == null) {
+			prevStack = player.getMainHandStack();
+		}
 		ItemStack currentStack = player.getMainHandStack();
-		if (prevStack.getItem() != currentStack.getItem())
-		{
-			if (currentStack.getItem() instanceof LightsaberItem)
-			{
+		if(prevStack.getItem() != currentStack.getItem()) {
+			if(currentStack.getItem() instanceof LightsaberItem) {
 				((LightsaberItem) currentStack.getItem()).onPullOut(player, world);
 			}
-			if (prevStack.getItem() instanceof LightsaberItem)
-			{
+			if(prevStack.getItem() instanceof LightsaberItem) {
 				((LightsaberItem) prevStack.getItem()).onPullIn(player, world);
 			}
 		}

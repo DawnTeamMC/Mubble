@@ -1,23 +1,18 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XOX",
 		"XXX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:gold_ingot"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:iron_ingot"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:pink_gold_peach_crown"
 	}
 }

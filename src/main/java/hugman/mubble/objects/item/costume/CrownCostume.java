@@ -13,27 +13,22 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class CrownCostume extends HeadCostume
-{
+public class CrownCostume extends HeadCostume {
 	protected final Princess princess;
 
-	public CrownCostume(Item.Settings builder, Princess princess)
-	{
+	public CrownCostume(Item.Settings builder, Princess princess) {
 		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 		this.princess = princess;
 	}
 
 	@Override
-	public ActionResult useOnBlock(ItemUsageContext context)
-	{
+	public ActionResult useOnBlock(ItemUsageContext context) {
 		World world = context.getWorld();
 		BlockPos blockPos = context.getBlockPos();
 		BlockState iblockstate = world.getBlockState(blockPos);
-		if (iblockstate.getBlock() == MubbleBlocks.KORETATO_BLOCK && iblockstate.get(KoretatoBlock.PRINCESS) == Princess.NONE)
-		{
+		if(iblockstate.getBlock() == MubbleBlocks.KORETATO_BLOCK && iblockstate.get(KoretatoBlock.PRINCESS) == Princess.NONE) {
 			world.addParticle(ParticleTypes.HEART, (float) blockPos.getX() + 0.5F, (float) blockPos.getY() + 1.1F, (float) blockPos.getZ() + 0.5F, 0.0D, 0.0D, 0.0D);
-			if (!world.isClient)
-			{
+			if(!world.isClient) {
 				BlockState blockState1 = iblockstate.with(KoretatoBlock.PRINCESS, princess);
 				world.setBlockState(blockPos, blockState1, 2);
 				context.getStack().decrement(1);
@@ -42,8 +37,7 @@ public class CrownCostume extends HeadCostume
 			}
 			return ActionResult.SUCCESS;
 		}
-		else
-		{
+		else {
 			return super.useOnBlock(context);
 		}
 	}

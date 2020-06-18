@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/autumn_oak_leaf_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/autumn_oak_leaf_pile"
+		}
 	}
 }

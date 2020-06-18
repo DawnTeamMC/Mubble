@@ -1,7 +1,6 @@
 {
 	"parent": "block/template_orientable_trapdoor_bottom",
-	"textures":
-	{
+	"textures": {
 		"texture": "mubble:block/cherry_oak_trapdoor"
 	}
 }

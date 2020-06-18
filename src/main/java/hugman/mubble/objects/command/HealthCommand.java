@@ -13,10 +13,8 @@ import net.minecraft.text.TranslatableText;
 
 import java.util.Collection;
 
-public class HealthCommand
-{
-	public static void register(CommandDispatcher<ServerCommandSource> dispatcher)
-	{
+public class HealthCommand {
+	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
 		dispatcher.register(
 				LiteralArgumentBuilder.<ServerCommandSource>literal("health")
 						.requires((source) ->
@@ -42,36 +40,26 @@ public class HealthCommand
 		);
 	}
 
-	private static int setHealth(ServerCommandSource source, Collection<? extends Entity> targets, float amount, boolean sum)
-	{
+	private static int setHealth(ServerCommandSource source, Collection<? extends Entity> targets, float amount, boolean sum) {
 		int finalTargetAmount = 0;
-		for (Entity entity : targets)
-		{
-			if (entity instanceof LivingEntity)
-			{
+		for(Entity entity : targets) {
+			if(entity instanceof LivingEntity) {
 				finalTargetAmount++;
 				LivingEntity livingEntity = (LivingEntity) entity;
-				if (sum == true)
-				{
-					if (amount > 0.0F)
-					{
+				if(sum == true) {
+					if(amount > 0.0F) {
 						livingEntity.heal(amount);
 					}
-					else if (amount < 0.0F)
-					{
+					else if(amount < 0.0F) {
 						livingEntity.damage(DamageSource.OUT_OF_WORLD, amount * -1.0f);
 					}
 				}
-				else
-				{
-					if (livingEntity.getHealth() > 0.0F)
-					{
-						if (amount == 0.0F)
-						{
+				else {
+					if(livingEntity.getHealth() > 0.0F) {
+						if(amount == 0.0F) {
 							livingEntity.kill();
 						}
-						else
-						{
+						else {
 							livingEntity.setHealth(amount);
 						}
 					}
@@ -79,20 +67,16 @@ public class HealthCommand
 			}
 		}
 		final String parameter;
-		if (sum == true)
-		{
+		if(sum == true) {
 			parameter = "add";
 		}
-		else
-		{
+		else {
 			parameter = "set";
 		}
-		if (targets.size() == 1)
-		{
+		if(targets.size() == 1) {
 			source.sendFeedback(new TranslatableText("commands.health." + parameter + ".success.single", amount, targets.iterator().next().getDisplayName()), true);
 		}
-		else
-		{
+		else {
 			source.sendFeedback(new TranslatableText("commands.health." + parameter + ".success.multiple", amount, finalTargetAmount), true);
 		}
 		return finalTargetAmount;

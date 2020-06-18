@@ -19,20 +19,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.List;
 
 @Mixin(ItemStack.class)
-public class ItemStackMixin
-{
+public class ItemStackMixin {
 	@Inject(method = "getTooltip", at = @At(value = "TAIL"), cancellable = true)
-	private void getTooltip(PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> info)
-	{
+	private void getTooltip(PlayerEntity player, TooltipContext context, CallbackInfoReturnable<List<Text>> info) {
 		ItemStack itemStack = (ItemStack) (Object) this;
-		if (player != null)
-		{
-			if (!player.isCreative() & EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, itemStack))
-			{
+		if(player != null) {
+			if(!player.isCreative() & EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, itemStack)) {
 				List<Text> tooltip = Lists.newArrayList();
 				MutableText mutableText = (new LiteralText("")).append(itemStack.getName()).formatted(itemStack.getRarity().formatting);
-				if (itemStack.hasCustomName())
-				{
+				if(itemStack.hasCustomName()) {
 					mutableText.formatted(Formatting.ITALIC);
 				}
 				tooltip.add(mutableText);

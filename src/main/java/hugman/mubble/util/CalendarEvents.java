@@ -2,8 +2,7 @@ package hugman.mubble.util;
 
 import java.time.LocalDate;
 
-public class CalendarEvents
-{
+public class CalendarEvents {
 	protected static LocalDate date = LocalDate.now();
 	protected static int dayToday = date.getDayOfMonth();
 	protected static int monthToday = date.getMonthValue();
@@ -16,23 +15,19 @@ public class CalendarEvents
 	public static boolean isChristmasSeason = checkBetweenDays(1, 12, 26, 12);
 	public static boolean isDecember = getMonthToday() == 12;
 
-	public static int getDayToday()
-	{
+	public static int getDayToday() {
 		return dayToday;
 	}
 
-	public static int getMonthToday()
-	{
+	public static int getMonthToday() {
 		return monthToday;
 	}
 
-	private static boolean checkDay(int day, int month)
-	{
+	private static boolean checkDay(int day, int month) {
 		return day == dayToday && month == monthToday;
 	}
 
-	private static boolean checkBetweenDays(int day1, int month1, int day2, int month2)
-	{
+	private static boolean checkBetweenDays(int day1, int month1, int day2, int month2) {
 		return day1 <= dayToday && day2 >= dayToday && month1 <= monthToday && month2 >= monthToday;
 	}
 }

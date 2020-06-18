@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:stonecutting/yellow_concrete_wall"
 		]
 	},
-	"criteria":
-	{
-		"has_yellow_concrete":
-		{
+	"criteria": {
+		"has_yellow_concrete": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:yellow_concrete"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:stonecutting/yellow_concrete_wall"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_yellow_concrete",
 			"has_the_recipe"

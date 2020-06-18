@@ -1,7 +1,6 @@
 {
 	"parent": "block/button_pressed",
-	"textures":
-	{
+	"textures": {
 		"texture": "mubble:block/scarlet_log/side"
 	}
 }

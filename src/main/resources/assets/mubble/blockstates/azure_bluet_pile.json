@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/azure_bluet_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/azure_bluet_pile"
+		}
 	}
 }

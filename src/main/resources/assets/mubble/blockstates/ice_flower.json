@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/ice_flower"}
+	"variants": {
+		"": {
+			"model": "mubble:block/ice_flower"
+		}
 	}
 }

@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:smoking",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:duck"
 	},
 	"result": "mubble:cooked_duck",

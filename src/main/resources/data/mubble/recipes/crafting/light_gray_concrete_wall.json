@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:concrete_wall",
-	"pattern":
-	[
+	"pattern": [
 		"###",
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:light_gray_concrete"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:light_gray_concrete_wall",
 		"count": 6
 	}

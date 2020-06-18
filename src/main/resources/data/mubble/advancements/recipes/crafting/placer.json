@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/placer"
 		]
 	},
-	"criteria":
-	{
-		"has_stone_pickaxe":
-		{
+	"criteria": {
+		"has_stone_pickaxe": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:stone_pickaxe"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/placer"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_stone_pickaxe",
 			"has_the_recipe"

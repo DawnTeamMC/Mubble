@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:nether_bricks"
 	},
 	"result": "mubble:nether_brick_vertical_slab",

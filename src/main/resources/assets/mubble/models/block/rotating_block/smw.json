@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_bottom_top",
-	"textures":
-	{
+	"textures": {
 		"top": "mubble:block/rotating_block/smw/top",
 		"side": "mubble:block/rotating_block/smw/side",
 		"bottom": "mubble:block/rotating_block/smw/bottom"

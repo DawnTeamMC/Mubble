@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/ralsei_hat"
 		]
 	},
-	"criteria":
-	{
-		"has_lime_wool":
-		{
+	"criteria": {
+		"has_lime_wool": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:lime_wool"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/ralsei_hat"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_lime_wool",
 			"has_the_recipe"

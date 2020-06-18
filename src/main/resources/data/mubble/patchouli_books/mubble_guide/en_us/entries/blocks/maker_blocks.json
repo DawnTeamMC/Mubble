@@ -2,8 +2,7 @@
 	"icon": "mubble:smb_question_block",
 	"name": "Maker Blocks",
 	"category": "blocks",
-	"pages":
-	[
+	"pages": [
 		{
 			"type": "text",
 			"text": "The #mario games are always filled with bright and colorful elements. Over the years, many of those elements dwelled in the long grids called \"levels\". As you might know, #smm2 is a celebration of that aspect, and so is #mubble.<++>Customize your world and create #mario levels using the large collection of terrain and special blocks."
@@ -34,8 +33,7 @@
 		},
 		{
 			"type": "image",
-			"images":
-			[
+			"images": [
 				"mubble:textures/patchouli_books/screenshots/smb_ground_blocks.png",
 				"mubble:textures/patchouli_books/screenshots/smw_ground_blocks.png"
 			],

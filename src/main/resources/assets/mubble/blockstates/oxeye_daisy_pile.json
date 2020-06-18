@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/oxeye_daisy_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/oxeye_daisy_pile"
+		}
 	}
 }

@@ -1,41 +1,32 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:tetris_scaffolding",
-	"pattern":
-	[
+	"pattern": [
 		"XAX",
 		"BOC",
 		"XDX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:iron_ingot"
 		},
-		"A":
-		{
+		"A": {
 			"item": "minecraft:blue_concrete"
 		},
-		"B":
-		{
+		"B": {
 			"item": "minecraft:lime_concrete"
 		},
-		"C":
-		{
+		"C": {
 			"item": "minecraft:yellow_concrete"
 		},
-		"D":
-		{
+		"D": {
 			"item": "minecraft:red_concrete"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:gravel"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:rainbow_tetris_scaffolding",
 		"count": 4
 	}

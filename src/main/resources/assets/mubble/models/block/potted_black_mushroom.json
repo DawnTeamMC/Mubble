@@ -1,7 +1,7 @@
 {
 	"parent": "block/flower_pot_cross",
-	"textures":
-	{
-		"plant": "mubble:block/black_mushroom"}
+	"textures": {
+		"plant": "mubble:block/black_mushroom"
 	}
+}
 }

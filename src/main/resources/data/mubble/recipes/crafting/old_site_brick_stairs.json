@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"#  ",
 		"## ",
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:old_site_bricks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:old_site_brick_stairs",
 		"count": 4
 	}

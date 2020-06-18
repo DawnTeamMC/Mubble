@@ -1,11 +1,26 @@
 {
-	"variants":
-	{
-		"facing=down":	{"model": "mubble:block/placer/vertical", "x": 180},
-		"facing=up":	{"model": "mubble:block/placer/vertical"},
-		"facing=north":	{"model": "mubble:block/placer"},
-		"facing=south":	{"model": "mubble:block/placer", "y": 180},
-		"facing=west":	{"model": "mubble:block/placer", "y": 270},
-		"facing=east":	{"model": "mubble:block/placer", "y": 90}
+	"variants": {
+		"facing=down": {
+			"model": "mubble:block/placer/vertical",
+			"x": 180
+		},
+		"facing=up": {
+			"model": "mubble:block/placer/vertical"
+		},
+		"facing=north": {
+			"model": "mubble:block/placer"
+		},
+		"facing=south": {
+			"model": "mubble:block/placer",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "mubble:block/placer",
+			"y": 270
+		},
+		"facing=east": {
+			"model": "mubble:block/placer",
+			"y": 90
+		}
 	}
 }

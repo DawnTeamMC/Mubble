@@ -1,18 +1,14 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:blue_permafrost_bricks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:blue_permafrost_brick_slab",
 		"count": 6
 	}

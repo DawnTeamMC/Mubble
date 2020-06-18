@@ -1,7 +1,6 @@
 {
 	"parent": "block/inner_stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/palm_planks",
 		"top": "mubble:block/palm_planks",
 		"side": "mubble:block/palm_planks"

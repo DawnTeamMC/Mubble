@@ -1,8 +1,13 @@
 {
-	"variants":
-	{
-		"type=bottom": {"model": "mubble:block/orange_terracotta_slab/bottom"},
-		"type=top": {"model": "mubble:block/orange_terracotta_slab/top"},
-		"type=double": {"model": "minecraft:block/orange_terracotta"}
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/orange_terracotta_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/orange_terracotta_slab/top"
+		},
+		"type=double": {
+			"model": "minecraft:block/orange_terracotta"
+		}
 	}
 }

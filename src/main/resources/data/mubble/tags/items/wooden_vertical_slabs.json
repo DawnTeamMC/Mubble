@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:cherry_oak_vertical_slab",
 		"mubble:palm_vertical_slab",
 		"mubble:press_garden_vertical_slab",

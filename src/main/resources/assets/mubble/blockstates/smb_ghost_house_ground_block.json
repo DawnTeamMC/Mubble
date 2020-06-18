@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/ground_block/smb/ghost_house"}
+	"variants": {
+		"": {
+			"model": "mubble:block/ground_block/smb/ghost_house"
+		}
 	}
 }

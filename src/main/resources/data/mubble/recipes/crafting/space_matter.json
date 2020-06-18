@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		" X ",
 		"XOX",
 		" X "
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:gravel"
 		},
-		"O":
-		{
+		"O": {
 			"item": "mubble:super_star"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:dream_block",
 		"count": 6
 	}

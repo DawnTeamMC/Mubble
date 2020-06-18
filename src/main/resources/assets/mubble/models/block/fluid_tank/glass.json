@@ -1,17 +1,38 @@
 {
-	"textures":
-	{
+	"textures": {
 		"glass": "minecraft:block/glass"
 	},
-	"elements":
-	[
+	"elements": [
 		{
-			"from": [1, 1, 0],
-			"to": [15, 15, 1],
-			"faces":
-			{
-				"north": {"uv": [1, 1, 15, 15], "texture": "#glass"},
-				"south": {"uv": [1, 1, 15, 15], "texture": "#glass"}
+			"from": [
+				1,
+				1,
+				0
+			],
+			"to": [
+				15,
+				15,
+				1
+			],
+			"faces": {
+				"north": {
+					"uv": [
+						1,
+						1,
+						15,
+						15
+					],
+					"texture": "#glass"
+				},
+				"south": {
+					"uv": [
+						1,
+						1,
+						15,
+						15
+					],
+					"texture": "#glass"
+				}
 			}
 		}
 	]

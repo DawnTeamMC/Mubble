@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:smelting/vanadium"
 		]
 	},
-	"criteria":
-	{
-		"has_vanadium_ore":
-		{
+	"criteria": {
+		"has_vanadium_ore": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:vanadium_ore"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:smelting/vanadium"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_vanadium_ore",
 			"has_the_recipe"

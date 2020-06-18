@@ -1,7 +1,6 @@
 {
 	"parent": "block/wall_inventory",
-	"textures":
-	{
+	"textures": {
 		"wall": "mubble:block/green_bricks"
 	}
 }

@@ -1,7 +1,6 @@
 {
 	"parent": "block/cube_bottom_top",
-	"textures":
-	{
+	"textures": {
 		"top": "mubble:block/question_block/smw/top",
 		"side": "mubble:block/question_block/smw/side",
 		"bottom": "mubble:block/question_block/smw/bottom"

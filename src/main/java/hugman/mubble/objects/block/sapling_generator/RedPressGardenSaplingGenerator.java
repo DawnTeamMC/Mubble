@@ -8,17 +8,14 @@ import net.minecraft.world.gen.feature.TreeFeatureConfig;
 
 import java.util.Random;
 
-public class RedPressGardenSaplingGenerator extends LargeTreeSaplingGenerator
-{
+public class RedPressGardenSaplingGenerator extends LargeTreeSaplingGenerator {
 	@Override
-	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive)
-	{
+	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive) {
 		return random.nextInt(10) == 0 ? Feature.TREE.configure(MubbleFeatureConfigs.FANCY_RED_PRESS_GARDEN_TREE) : Feature.TREE.configure(MubbleFeatureConfigs.RED_PRESS_GARDEN_TREE);
 	}
 
 	@Override
-	protected ConfiguredFeature<TreeFeatureConfig, ?> createLargeTreeFeature(Random random)
-	{
+	protected ConfiguredFeature<TreeFeatureConfig, ?> createLargeTreeFeature(Random random) {
 		return Feature.TREE.configure(MubbleFeatureConfigs.MEGA_RED_PRESS_GARDEN_TREE);
 	}
 }

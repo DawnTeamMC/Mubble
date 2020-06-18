@@ -1,7 +1,6 @@
 {
 	"parent": "block/pressure_plate_up",
-	"textures":
-	{
+	"textures": {
 		"texture": "minecraft:block/brown_concrete"
 	}
 }

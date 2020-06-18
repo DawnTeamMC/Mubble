@@ -1,28 +1,22 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XOX",
 		"OAO",
 		"XOX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:bricks"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:cobblestone"
 		},
-		"A":
-		{
+		"A": {
 			"item": "minecraft:cyan_dye"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:old_site_bricks",
 		"count": 8
 	}

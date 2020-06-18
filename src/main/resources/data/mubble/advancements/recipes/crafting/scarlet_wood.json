@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/scarlet_wood"
 		]
 	},
-	"criteria":
-	{
-		"has_log":
-		{
+	"criteria": {
+		"has_log": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:scarlet_log"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/scarlet_wood"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_log",
 			"has_the_recipe"

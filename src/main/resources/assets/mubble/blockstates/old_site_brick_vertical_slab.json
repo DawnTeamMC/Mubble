@@ -1,100 +1,254 @@
 {
-	"variants":
-	{
-		"type=north":
-		[
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/0"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/1"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/2"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/3"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/4"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/12"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/13"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/14"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/23"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/24"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/34"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/123"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/124"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/134"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/234"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/north/1234"}
+	"variants": {
+		"type=north": [
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/0"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/1"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/2"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/3"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/4"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/12"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/13"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/14"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/23"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/24"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/34"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/123"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/124"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/134"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/234"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/north/1234"
+			}
 		],
-		"type=south":
-		[
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/0"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/1"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/2"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/3"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/4"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/12"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/13"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/14"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/23"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/24"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/34"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/123"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/124"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/134"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/234"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/south/1234"}
+		"type=south": [
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/0"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/1"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/2"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/3"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/4"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/12"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/13"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/14"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/23"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/24"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/34"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/123"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/124"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/134"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/234"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/south/1234"
+			}
 		],
-		"type=east":
-		[
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/0"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/1"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/2"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/3"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/4"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/12"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/13"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/14"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/23"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/24"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/34"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/123"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/124"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/134"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/234"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/east/1234"}
+		"type=east": [
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/0"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/1"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/2"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/3"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/4"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/12"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/13"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/14"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/23"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/24"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/34"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/123"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/124"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/134"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/234"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/east/1234"
+			}
 		],
-		"type=west":
-		[
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/0"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/1"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/2"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/3"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/4"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/12"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/13"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/14"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/23"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/24"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/34"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/123"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/124"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/134"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/234"},
-			{"model": "mubble:block/old_site_brick_vertical_slab/west/1234"}
+		"type=west": [
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/0"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/1"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/2"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/3"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/4"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/12"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/13"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/14"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/23"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/24"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/34"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/123"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/124"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/134"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/234"
+			},
+			{
+				"model": "mubble:block/old_site_brick_vertical_slab/west/1234"
+			}
 		],
-		"type=double":
-		[
-			{"model": "mubble:block/old_site_bricks/0"},
-			{"model": "mubble:block/old_site_bricks/1"},
-			{"model": "mubble:block/old_site_bricks/2"},
-			{"model": "mubble:block/old_site_bricks/3"},
-			{"model": "mubble:block/old_site_bricks/4"},
-			{"model": "mubble:block/old_site_bricks/12"},
-			{"model": "mubble:block/old_site_bricks/13"},
-			{"model": "mubble:block/old_site_bricks/14"},
-			{"model": "mubble:block/old_site_bricks/23"},
-			{"model": "mubble:block/old_site_bricks/24"},
-			{"model": "mubble:block/old_site_bricks/34"},
-			{"model": "mubble:block/old_site_bricks/123"},
-			{"model": "mubble:block/old_site_bricks/124"},
-			{"model": "mubble:block/old_site_bricks/134"},
-			{"model": "mubble:block/old_site_bricks/234"},
-			{"model": "mubble:block/old_site_bricks/1234"}
+		"type=double": [
+			{
+				"model": "mubble:block/old_site_bricks/0"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/1"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/2"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/3"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/4"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/12"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/13"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/14"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/23"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/24"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/34"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/123"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/124"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/134"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/234"
+			},
+			{
+				"model": "mubble:block/old_site_bricks/1234"
+			}
 		]
 	}
 }

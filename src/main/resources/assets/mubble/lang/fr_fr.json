@@ -2,9 +2,6 @@
 	"comment": "CREATIVE TABS",
 	"itemGroup.mubble.costumes": "Costumes",
 	"itemGroup.mubble.instruments": "Instruments",
-
-
-
 	"comment": "BLOCKS",
 	"block.mubble.oak_vertical_slab": "Dalle verticale de chêne",
 	"block.mubble.spruce_vertical_slab": "Dalle verticale de sapin",
@@ -40,44 +37,37 @@
 	"block.mubble.prismarine_vertical_slab": "Dalle verticale de prismarine",
 	"block.mubble.prismarine_brick_vertical_slab": "Dalle verticale de prismarine taillée",
 	"block.mubble.dark_prismarine_vertical_slab": "Dalle verticale de prismarine sombre",
-
 	"block.mubble.dark_prismarine_wall": "Muret de prismarine sombre",
-
 	"block.mubble.oak_wood_stairs": "Escalier en bois de chêne",
 	"block.mubble.spruce_wood_stairs": "Escalier en bois de sapin",
 	"block.mubble.birch_wood_stairs": "Escalier en bois de bouleau",
 	"block.mubble.jungle_wood_stairs": "Escalier en bois d'acajou",
 	"block.mubble.acacia_wood_stairs": "Escalier en bois d'acacia",
 	"block.mubble.dark_oak_wood_stairs": "Escalier en bois de chêne noir",
-
 	"block.mubble.oak_wood_slab": "Dalle en bois de chêne",
 	"block.mubble.spruce_wood_slab": "Dalle en bois de sapin",
 	"block.mubble.birch_wood_slab": "Dalle en bois de bouleau",
 	"block.mubble.jungle_wood_slab": "Dalle en bois d'acajou",
 	"block.mubble.acacia_wood_slab": "Dalle en bois d'acacia",
 	"block.mubble.dark_oak_wood_slab": "Dalle en bois de chêne noir",
-
 	"block.mubble.oak_wood_vertical_slab": "Dalle verticale en bois de chêne",
 	"block.mubble.spruce_wood_vertical_slab": "Dalle verticale en bois de sapin",
 	"block.mubble.birch_wood_vertical_slab": "Dalle verticale en bois de bouleau",
 	"block.mubble.jungle_wood_vertical_slab": "Dalle verticale en bois d'acajou",
 	"block.mubble.acacia_wood_vertical_slab": "Dalle verticale en bois d'acacia",
 	"block.mubble.dark_oak_wood_vertical_slab": "Dalle verticale en bois de chêne noir",
-
 	"block.mubble.dark_oak_wood_button": "Bouton en bois de chêne",
 	"block.mubble.spruce_wood_button": "Bouton en bois de sapin",
 	"block.mubble.birch_wood_button": "Bouton en bois de bouleau",
 	"block.mubble.jungle_wood_button": "Bouton en bois d'acajou",
 	"block.mubble.acacia_wood_button": "Bouton en bois d'acacia",
 	"block.mubble.dark_oak_wood_button": "Bouton en bois de chêne noir",
-
 	"block.mubble.oak_leaf_pile": "Pile de feuilles de chêne",
 	"block.mubble.spruce_leaf_pile": "Pile de feuilles de sapin",
 	"block.mubble.birch_leaf_pile": "Pile de feuilles de bouleau",
 	"block.mubble.jungle_leaf_pile": "Pile de feuilles de acajou",
 	"block.mubble.acacia_leaf_pile": "Pile de feuilles de acacia",
 	"block.mubble.dark_oak_leaf_pile": "Pile de feuilles de chêne noir",
-
 	"block.mubble.cobblestone_bricks": "Briques de pierres",
 	"block.mubble.cobblestone_brick_stairs": "Escalier en briques de pierres",
 	"block.mubble.cobblestone_brick_slab": "Dalle en briques de pierres",
@@ -103,7 +93,6 @@
 	"block.mubble.andesite_brick_slab": "Dalle en briques d'andésite",
 	"block.mubble.andesite_brick_vertical_slab": "Dalle verticale en briques d'andésite",
 	"block.mubble.andesite_brick_wall": "Muret en briques d'andésite",
-
 	"block.mubble.sandstone_bricks": "Briques de grès",
 	"block.mubble.sandstone_brick_stairs": "Escalier en briques de grès",
 	"block.mubble.sandstone_brick_slab": "Dalle en briques de grès",
@@ -122,23 +111,19 @@
 	"block.mubble.polished_red_sandstone_stairs": "Escalier en grès rouge poli",
 	"block.mubble.polished_red_sandstone_slab": "Dalle en grès rouge poli",
 	"block.mubble.polished_red_sandstone_vertical_slab": "Dalle verticale en grès rouge poli",
-
 	"block.mubble.smooth_stone_paving": "Carrelage de roche lisse",
 	"block.mubble.smooth_stone_paving_stairs": "Escalier en carrelage de roche lisse",
 	"block.mubble.smooth_stone_paving_slab": "Dalle en carrelage de roche lisse",
 	"block.mubble.smooth_stone_paving_vertical_slab": "Dalle verticale en carrelage de roche lisse",
-
 	"block.mubble.chiseled_prismarine": "Prismarine sculptée",
 	"block.mubble.chiseled_prismarine_stairs": "Escalier en prismarine sculptée",
 	"block.mubble.chiseled_prismarine_slab": "Dalle en prismarine sculptée",
 	"block.mubble.chiseled_prismarine_vertical_slab": "Dalle verticale en prismarine sculptée",
 	"block.mubble.chiseled_prismarine_wall": "Muret en prismarine sculptée",
-	
 	"block.mubble.prismarine_brick_paving": "Carrelage de briques de prismarine",
 	"block.mubble.prismarine_brick_paving_stairs": "Escalier en carrelage de briques de prismarine",
 	"block.mubble.prismarine_brick_paving_slab": "Dalle en carrelage de briques de prismarine",
 	"block.mubble.prismarine_brick_paving_vertical_slab": "Dalle verticale en carrelage de briques de prismarine",
-	
 	"block.mubble.permarock": "Permaroche",
 	"block.mubble.permafrost_bricks": "Briques du Permafrost",
 	"block.mubble.permafrost_brick_stairs": "Escalier en briques du Permafrost",
@@ -152,17 +137,14 @@
 	"block.mubble.blue_permafrost_brick_wall": "Muret en briques bleues du Permafrost",
 	"block.mubble.permafrost_bismuth_ore": "Minerai de bismuth du Permafrost",
 	"block.mubble.frozen_obsidian": "Obsidienne congelée",
-
 	"block.mubble.vanadium_block": "Bloc de vanadium",
 	"block.mubble.vanadium_ore": "Minerai de vanadium",
-	
 	"block.mubble.autumn_oak_sapling": "Pousse de chêne d'automne",
 	"block.mubble.autumn_oak_leaves": "Feuilles de chêne d'automne",
 	"block.mubble.autumn_oak_leaf_pile": "Pile de feuilles de chêne d'automne",
 	"block.mubble.autumn_birch_sapling": "Pousse de bouleau d'automne",
 	"block.mubble.autumn_birch_leaves": "Feuilles de bouleau d'automne",
 	"block.mubble.autumn_birch_leaf_pile": "Pile de feuilles de bouleau d'automne",
-	
 	"block.mubble.cherry_oak_planks": "Planches de cerisier",
 	"block.mubble.pink_cherry_oak_sapling": "Pousse de cerisier rose",
 	"block.mubble.white_cherry_oak_sapling": "Pousse de cerisier blanc",
@@ -187,7 +169,6 @@
 	"block.mubble.cherry_oak_wood_slab": "Dalle en bois de cerisier",
 	"block.mubble.cherry_oak_wood_vertical_slab": "Dalle verticale en bois de cerisier",
 	"block.mubble.cherry_oak_wood_button": "Bouton en bois de cerisier",
-	
 	"block.mubble.palm_planks": "Planches de palmier",
 	"block.mubble.palm_sapling": "Pousse de palmier",
 	"block.mubble.palm_log": "Bûche de palmier",
@@ -209,7 +190,6 @@
 	"block.mubble.palm_wood_slab": "Dalle en bois de palmier",
 	"block.mubble.palm_wood_vertical_slab": "Dalle verticale en bois de palmier",
 	"block.mubble.palm_wood_button": "Bouton en bois de palmier",
-
 	"block.mubble.blue_bricks": "Briques bleues",
 	"block.mubble.light_blue_bricks": "Briques bleu clairs",
 	"block.mubble.cyan_bricks": "Briques cyans",
@@ -226,7 +206,6 @@
 	"block.mubble.light_gray_bricks": "Briques gris clairs",
 	"block.mubble.gray_bricks": "Briques grises",
 	"block.mubble.black_bricks": "Briques noires",
-
 	"block.mubble.blue_brick_stairs": "Escalier en brique bleue",
 	"block.mubble.light_blue_brick_stairs": "Escalier en brique bleu clair",
 	"block.mubble.cyan_brick_stairs": "Escalier en brique cyan",
@@ -243,7 +222,6 @@
 	"block.mubble.light_gray_brick_stairs": "Escalier en brique gris clair",
 	"block.mubble.gray_brick_stairs": "Escalier en brique grise",
 	"block.mubble.black_brick_stairs": "Escalier en brique noire",
-
 	"block.mubble.blue_brick_slab": "Dalle en brique bleue",
 	"block.mubble.light_blue_brick_slab": "Dalle en brique bleu clair",
 	"block.mubble.cyan_brick_slab": "Dalle en brique cyan",
@@ -260,7 +238,6 @@
 	"block.mubble.light_gray_brick_slab": "Dalle en brique gris clair",
 	"block.mubble.gray_brick_slab": "Dalle en brique grise",
 	"block.mubble.black_brick_slab": "Dalle en brique noire",
-
 	"block.mubble.blue_brick_vertical_slab": "Dalle verticale en brique bleue",
 	"block.mubble.light_blue_brick_vertical_slab": "Dalle verticale en brique bleu clair",
 	"block.mubble.cyan_brick_vertical_slab": "Dalle verticale en brique cyan",
@@ -277,7 +254,6 @@
 	"block.mubble.light_gray_brick_vertical_slab": "Dalle verticale en brique gris clair",
 	"block.mubble.gray_brick_vertical_slab": "Dalle verticale en brique grise",
 	"block.mubble.black_brick_vertical_slab": "Dalle verticale en brique noire",
-
 	"block.mubble.blue_brick_wall": "Muret en brique bleue",
 	"block.mubble.light_blue_brick_wall": "Muret en brique bleu clair",
 	"block.mubble.cyan_brick_wall": "Muret en brique cyan",
@@ -294,7 +270,6 @@
 	"block.mubble.light_gray_brick_wall": "Muret en brique gris clair",
 	"block.mubble.gray_brick_wall": "Muret en brique grise",
 	"block.mubble.black_brick_wall": "Muret en brique noire",
-
 	"block.mubble.blunite": "Blunite",
 	"block.mubble.blunite_stairs": "Escalier en blunite",
 	"block.mubble.blunite_slab": "Dalle en blunite",
@@ -313,7 +288,6 @@
 	"block.mubble.polished_carbonite_stairs": "Escalier en carbonite polie",
 	"block.mubble.polished_carbonite_slab": "Dalle en carbonite polie",
 	"block.mubble.polished_carbonite_vertical_slab": "Dalle verticale en carbonite polie",
-
 	"block.mubble.terracotta_stairs": "Escalier en terre cuite",
 	"block.mubble.blue_terracotta_stairs": "Escalier en terre cuite bleue",
 	"block.mubble.light_blue_terracotta_stairs": "Escalier en terre cuite bleu clair",
@@ -331,7 +305,6 @@
 	"block.mubble.light_gray_terracotta_stairs": "Escalier en terre cuite gris clair",
 	"block.mubble.gray_terracotta_stairs": "Escalier en terre cuite grise",
 	"block.mubble.black_terracotta_stairs": "Escalier en terre cuite noire",
-
 	"block.mubble.terracotta_slab": "Dalle en terre cuite",
 	"block.mubble.blue_terracotta_slab": "Dalle en terre cuite bleue",
 	"block.mubble.light_blue_terracotta_slab": "Dalle en terre cuite bleu clair",
@@ -349,7 +322,6 @@
 	"block.mubble.light_gray_terracotta_slab": "Dalle en terre cuite gris clair",
 	"block.mubble.gray_terracotta_slab": "Dalle en terre cuite grise",
 	"block.mubble.black_terracotta_slab": "Dalle en terre cuite noire",
-
 	"block.mubble.terracotta_vertical_slab": "Dalle verticale en terre cuite",
 	"block.mubble.blue_terracotta_vertical_slab": "Dalle verticale en terre cuite bleue",
 	"block.mubble.light_blue_terracotta_vertical_slab": "Dalle verticale en terre cuite bleu clair",
@@ -367,7 +339,6 @@
 	"block.mubble.light_gray_terracotta_vertical_slab": "Dalle verticale en terre cuite gris clair",
 	"block.mubble.gray_terracotta_vertical_slab": "Dalle verticale en terre cuite grise",
 	"block.mubble.black_terracotta_vertical_slab": "Dalle verticale en terre cuite noire",
-
 	"block.mubble.terracotta_wall": "Muret en terre cuite",
 	"block.mubble.blue_terracotta_wall": "Muret en terre cuite bleue",
 	"block.mubble.light_blue_terracotta_wall": "Muret en terre cuite bleu clair",
@@ -385,7 +356,6 @@
 	"block.mubble.light_gray_terracotta_wall": "Muret en terre cuite gris clair",
 	"block.mubble.gray_terracotta_wall": "Muret en terre cuite grise",
 	"block.mubble.black_terracotta_wall": "Muret en terre cuite noire",
-
 	"block.mubble.terracotta_pressure_plate": "Plaque de pression en terre cuite",
 	"block.mubble.blue_terracotta_pressure_plate": "Plaque de pression en terre cuite bleue",
 	"block.mubble.light_blue_terracotta_pressure_plate": "Plaque de pression en terre cuite bleu clair",
@@ -403,7 +373,6 @@
 	"block.mubble.light_gray_terracotta_pressure_plate": "Plaque de pression en terre cuite gris clair",
 	"block.mubble.gray_terracotta_pressure_plate": "Plaque de pression en terre cuite grise",
 	"block.mubble.black_terracotta_pressure_plate": "Plaque de pression en terre cuite noire",
-
 	"block.mubble.terracotta_button": "Bouton en terre cuite",
 	"block.mubble.blue_terracotta_button": "Bouton en terre cuite bleue",
 	"block.mubble.light_blue_terracotta_button": "Bouton en terre cuite bleu clair",
@@ -421,7 +390,6 @@
 	"block.mubble.light_gray_terracotta_button": "Bouton en terre cuite gris clair",
 	"block.mubble.gray_terracotta_button": "Bouton en terre cuite grise",
 	"block.mubble.black_terracotta_button": "Bouton en terre cuite noire",
-
 	"block.mubble.blue_dark_prismarine": "Prismarine sombre bleue",
 	"block.mubble.light_blue_dark_prismarine": "Prismarine sombre bleu clair",
 	"block.mubble.cyan_dark_prismarine": "Prismarine sombre cyan",
@@ -438,7 +406,6 @@
 	"block.mubble.light_gray_dark_prismarine": "Prismarine sombre gris clair",
 	"block.mubble.gray_dark_prismarine": "Prismarine sombre grise",
 	"block.mubble.black_dark_prismarine": "Prismarine sombre noire",
-
 	"block.mubble.blue_dark_prismarine_stairs": "Escalier en prismarine sombre bleue",
 	"block.mubble.light_blue_dark_prismarine_stairs": "Escalier en prismarine sombre bleu clair",
 	"block.mubble.cyan_dark_prismarine_stairs": "Escalier en prismarine sombre cyan",
@@ -455,7 +422,6 @@
 	"block.mubble.light_gray_dark_prismarine_stairs": "Escalier en prismarine sombre gris clair",
 	"block.mubble.gray_dark_prismarine_stairs": "Escalier en prismarine sombre grise",
 	"block.mubble.black_dark_prismarine_stairs": "Escalier en prismarine sombre noire",
-
 	"block.mubble.blue_dark_prismarine_slab": "Dalle en prismarine sombre bleue",
 	"block.mubble.light_blue_dark_prismarine_slab": "Dalle en prismarine sombre bleu clair",
 	"block.mubble.cyan_dark_prismarine_slab": "Dalle en prismarine sombre cyan",
@@ -472,7 +438,6 @@
 	"block.mubble.light_gray_dark_prismarine_slab": "Dalle en prismarine sombre gris clair",
 	"block.mubble.gray_dark_prismarine_slab": "Dalle en prismarine sombre grise",
 	"block.mubble.black_dark_prismarine_slab": "Dalle en prismarine sombre noire",
-
 	"block.mubble.blue_dark_prismarine_vertical_slab": "Dalle verticale en prismarine sombre bleue",
 	"block.mubble.light_blue_dark_prismarine_vertical_slab": "Dalle verticale en prismarine sombre bleu clair",
 	"block.mubble.cyan_dark_prismarine_vertical_slab": "Dalle verticale en prismarine sombre cyan",
@@ -489,7 +454,6 @@
 	"block.mubble.light_gray_dark_prismarine_vertical_slab": "Dalle verticale en prismarine sombre gris clair",
 	"block.mubble.gray_dark_prismarine_vertical_slab": "Dalle verticale en prismarine sombre grise",
 	"block.mubble.black_dark_prismarine_vertical_slab": "Dalle verticale en prismarine sombre noire",
-
 	"block.mubble.blue_dark_prismarine_wall": "Muret en prismarine sombre bleue",
 	"block.mubble.light_blue_dark_prismarine_wall": "Muret en prismarine sombre bleu clair",
 	"block.mubble.cyan_dark_prismarine_wall": "Muret en prismarine sombre cyan",
@@ -506,7 +470,6 @@
 	"block.mubble.light_gray_dark_prismarine_wall": "Muret en prismarine sombre gris clair",
 	"block.mubble.gray_dark_prismarine_wall": "Muret en prismarine sombre grise",
 	"block.mubble.black_dark_prismarine_wall": "Muret en prismarine sombre noire",
-
 	"block.mubble.blue_concrete_stairs": "Escalier en béton bleu",
 	"block.mubble.light_blue_concrete_stairs": "Escalier en béton bleu clair",
 	"block.mubble.cyan_concrete_stairs": "Escalier en béton cyan",
@@ -523,7 +486,6 @@
 	"block.mubble.light_gray_concrete_stairs": "Escalier en béton gris clair",
 	"block.mubble.gray_concrete_stairs": "Escalier en béton gris",
 	"block.mubble.black_concrete_stairs": "Escalier en béton noir",
-
 	"block.mubble.blue_concrete_slab": "Dalle en béton bleu",
 	"block.mubble.light_blue_concrete_slab": "Dalle en béton bleu clair",
 	"block.mubble.cyan_concrete_slab": "Dalle en béton cyan",
@@ -540,7 +502,6 @@
 	"block.mubble.light_gray_concrete_slab": "Dalle en béton gris clair",
 	"block.mubble.gray_concrete_slab": "Dalle en béton gris",
 	"block.mubble.black_concrete_slab": "Dalle en béton noir",
-
 	"block.mubble.blue_concrete_vertical_slab": "Dalle verticale en béton bleu",
 	"block.mubble.light_blue_concrete_vertical_slab": "Dalle verticale en béton bleu clair",
 	"block.mubble.cyan_concrete_vertical_slab": "Dalle verticale en béton cyan",
@@ -557,7 +518,6 @@
 	"block.mubble.light_gray_concrete_vertical_slab": "Dalle verticale en béton gris clair",
 	"block.mubble.gray_concrete_vertical_slab": "Dalle verticale en béton gris",
 	"block.mubble.black_concrete_vertical_slab": "Dalle verticale en béton noir",
-
 	"block.mubble.blue_concrete_wall": "Muret en béton bleu",
 	"block.mubble.light_blue_concrete_wall": "Muret en béton bleu clair",
 	"block.mubble.cyan_concrete_wall": "Muret en béton cyan",
@@ -574,7 +534,6 @@
 	"block.mubble.light_gray_concrete_wall": "Muret en béton gris clair",
 	"block.mubble.gray_concrete_wall": "Muret en béton gris",
 	"block.mubble.black_concrete_wall": "Muret en béton noir",
-	
 	"block.mubble.blue_concrete_pressure_plate": "Plaque de pression en béton bleu",
 	"block.mubble.light_blue_concrete_pressure_plate": "Plaque de pression en béton bleu clair",
 	"block.mubble.cyan_concrete_pressure_plate": "Plaque de pression en béton cyan",
@@ -591,7 +550,6 @@
 	"block.mubble.light_gray_concrete_pressure_plate": "Plaque de pression en béton gris clair",
 	"block.mubble.gray_concrete_pressure_plate": "Plaque de pression en béton gris",
 	"block.mubble.black_concrete_pressure_plate": "Plaque de pression en béton noir",
-
 	"block.mubble.blue_concrete_button": "Bouton en béton bleu",
 	"block.mubble.light_blue_concrete_button": "Bouton en béton bleu clair",
 	"block.mubble.cyan_concrete_button": "Bouton en béton cyan",
@@ -608,7 +566,6 @@
 	"block.mubble.light_gray_concrete_button": "Bouton en béton gris clair",
 	"block.mubble.gray_concrete_button": "Bouton en béton gris",
 	"block.mubble.black_concrete_button": "Bouton en béton noir",
-
 	"block.mubble.blue_quartz_paving": "Carrelage de quartz bleu",
 	"block.mubble.light_blue_quartz_paving": "Carrelage de quartz bleu clair",
 	"block.mubble.cyan_quartz_paving": "Carrelage de quartz cyan",
@@ -625,7 +582,6 @@
 	"block.mubble.light_gray_quartz_paving": "Carrelage de quartz gris clair",
 	"block.mubble.gray_quartz_paving": "Carrelage de quartz gris",
 	"block.mubble.black_quartz_paving": "Carrelage de quartz noir",
-
 	"block.mubble.blue_quartz_paving_stairs": "Escalier en carrelage de quartz bleu",
 	"block.mubble.light_blue_quartz_paving_stairs": "Escalier en carrelage de quartz bleu clair",
 	"block.mubble.cyan_quartz_paving_stairs": "Escalier en carrelage de quartz cyan",
@@ -642,7 +598,6 @@
 	"block.mubble.light_gray_quartz_paving_stairs": "Escalier en carrelage de quartz gris clair",
 	"block.mubble.gray_quartz_paving_stairs": "Escalier en carrelage de quartz gris",
 	"block.mubble.black_quartz_paving_stairs": "Escalier en carrelage de quartz noir",
-
 	"block.mubble.blue_quartz_paving_slab": "Dalle en carrelage de quartz bleu",
 	"block.mubble.light_blue_quartz_paving_slab": "Dalle en carrelage de quartz bleu clair",
 	"block.mubble.cyan_quartz_paving_slab": "Dalle en carrelage de quartz cyan",
@@ -659,7 +614,6 @@
 	"block.mubble.light_gray_quartz_paving_slab": "Dalle en carrelage de quartz gris clair",
 	"block.mubble.gray_quartz_paving_slab": "Dalle en carrelage de quartz gris",
 	"block.mubble.black_quartz_paving_slab": "Dalle en carrelage de quartz noir",
-
 	"block.mubble.blue_quartz_paving_vertical_slab": "Dalle verticale en carrelage de quartz bleu",
 	"block.mubble.light_blue_quartz_paving_vertical_slab": "Dalle verticale en carrelage de quartz bleu clair",
 	"block.mubble.cyan_quartz_paving_vertical_slab": "Dalle verticale en carrelage de quartz cyan",
@@ -676,7 +630,6 @@
 	"block.mubble.light_gray_quartz_paving_vertical_slab": "Dalle verticale en carrelage de quartz gris clair",
 	"block.mubble.gray_quartz_paving_vertical_slab": "Dalle verticale en carrelage de quartz gris",
 	"block.mubble.black_quartz_paving_vertical_slab": "Dalle verticale en carrelage de quartz noir",
-
 	"block.mubble.red_christmas_bauble": "Boule de Noël rouge",
 	"block.mubble.orange_christmas_bauble": "Boule de Noël orange",
 	"block.mubble.yellow_christmas_bauble": "Boule de Noël jaune",
@@ -687,11 +640,9 @@
 	"block.mubble.light_blue_christmas_bauble": "Boule de Noël bleu clair",
 	"block.mubble.green_christmas_bauble": "Boule de Noël verte",
 	"block.mubble.white_christmas_bauble": "Boule de Noël blanche",
-
 	"block.mubble.red_shiny_garland": "Guirlande brillante rouge",
 	"block.mubble.silver_shiny_garland": "Guirlande brillante argentée",
 	"block.mubble.gold_shiny_garland": "Guirlande brillante dorée",
-
 	"block.mubble.white_present": "Cadeau blanc",
 	"block.mubble.black_present": "Cadeau noir",
 	"block.mubble.blue_present": "Cadeau bleu",
@@ -700,9 +651,7 @@
 	"block.mubble.red_present": "Cadeau rouge",
 	"block.mubble.purple_present": "Cadeau violet",
 	"block.mubble.golden_present": "Cadeau doré",
-
 	"block.mubble.footblock": "Bloc de foot",
-	
 	"block.mubble.blue_cloud_block": "Bloc de nuage bleu",
 	"block.mubble.light_blue_cloud_block": "Bloc de nuage bleu clair",
 	"block.mubble.cyan_cloud_block": "Bloc de nuage cyan",
@@ -719,14 +668,12 @@
 	"block.mubble.light_gray_cloud_block": "Bloc de nuage gris clair",
 	"block.mubble.gray_cloud_block": "Bloc de nuage gris",
 	"block.mubble.black_cloud_block": "Bloc de nuage noir",
-
 	"block.mubble.tomatoes": "Tomates",
 	"block.mubble.salad": "Salade",
 	"block.mubble.blueberry_bush": "Buisson à myrtilles",
 	"block.mubble.cheese_block": "Bloc de fromage",
 	"block.mubble.chocolate_cake": "Gâteau au chocolat",
 	"block.mubble.minecraft_10th_anniversary_cake": "Gâteau d'anniversaire des 10 ans de Minecraft",
-
 	"block.mubble.blue_balloon": "Ballon bleu",
 	"block.mubble.light_blue_balloon": "Ballon bleu clair",
 	"block.mubble.cyan_balloon": "Ballon cyan",
@@ -743,12 +690,10 @@
 	"block.mubble.light_gray_balloon": "Ballon gris clair",
 	"block.mubble.gray_balloon": "Ballon gris",
 	"block.mubble.black_balloon": "Ballon noir",
-
 	"block.mubble.unstable_stone": "Roche instable",
 	"block.mubble.fluid_tank": "Réservoir à fluides",
 	"block.mubble.placer": "Placeur",
 	"block.mubble.timeswap_table": "Table d'échange temporel",
-
 	"block.mubble.dandelion_pile": "Pile de pissenlits",
 	"block.mubble.poppy_pile": "Pile de coquelits",
 	"block.mubble.blue_orchid_pile": "Pile d'orchidées bleues",
@@ -762,8 +707,6 @@
 	"block.mubble.cornflower_pile": "Pile de bleuets",
 	"block.mubble.lily_of_the_valley_pile": "Pile de muguets",
 	"block.mubble.wither_rose_pile": "Pile de rose de Wither",
-
-
 	"block.mubble.smb_question_block": "Bloc ? (SMB)",
 	"block.mubble.smb3_question_block": "Bloc ? (SMB3)",
 	"block.mubble.smw_question_block": "Bloc ? (SMW)",
@@ -864,13 +807,11 @@
 	"block.mubble.smb3_key_door": "Porte verrouillée (SMB3)",
 	"block.mubble.smw_key_door": "Porte verrouillée (SMW)",
 	"block.mubble.nsmbu_key_door": "Porte verrouillée (NSMBU)",
-
 	"block.mubble.fire_flower": "Fleur de feu",
 	"block.mubble.ice_flower": "Fleur de glace",
 	"block.mubble.boomerang_flower": "Fleur boomerang",
 	"block.mubble.cloud_flower": "Fleur nuage",
 	"block.mubble.gold_flower": "Fleur d'or",
-
 	"block.mubble.blue_mushroom": "Champignon bleu",
 	"block.mubble.light_blue_mushroom": "Champignon bleu clair",
 	"block.mubble.cyan_mushroom": "Champignon cyan",
@@ -885,7 +826,6 @@
 	"block.mubble.light_gray_mushroom": "Champignon gris clair",
 	"block.mubble.gray_mushroom": "Champignon gris",
 	"block.mubble.black_mushroom": "Champignon noir",
-
 	"block.mubble.blue_mushroom_block": "Bloc de champignon bleu",
 	"block.mubble.light_blue_mushroom_block": "Bloc de champignon bleu clair",
 	"block.mubble.cyan_mushroom_block": "Bloc de champignon cyan",
@@ -900,11 +840,7 @@
 	"block.mubble.light_gray_mushroom_block": "Bloc de champignon gris clair",
 	"block.mubble.gray_mushroom_block": "Bloc de champignon gris",
 	"block.mubble.black_mushroom_block": "Bloc de champignon noir",
-
-
 	"block.mubble.kirby_block": "Bloc Kirby",
-
-
 	"block.mubble.blue_tetris_block": "Bloc Tetris bleu",
 	"block.mubble.light_blue_tetris_block": "Bloc Tetris bleu clair",
 	"block.mubble.cyan_tetris_block": "Bloc Tetris cyan",
@@ -921,13 +857,10 @@
 	"block.mubble.light_gray_tetris_block": "Bloc Tetris gris clair",
 	"block.mubble.gray_tetris_block": "Bloc Tetris gris",
 	"block.mubble.black_tetris_block": "Bloc Tetris noir",
-
 	"block.mubble.tetris_glass": "Verre Tetris",
 	"block.mubble.japanese_tetris_cushion": "Coussin Tetris japonais",
 	"block.mubble.rainbow_tetris_scaffolding": "Échafaudage Tetris multicolore",
 	"block.mubble.monochrome_tetris_scaffolding": "Échafaudage Tetris monochrome",
-
-
 	"block.mubble.vampire_stone": "Roche Vampire",
 	"block.mubble.medusa_stone": "Roche de Méduse",
 	"block.mubble.medusa_bricks": "Briques de Méduse",
@@ -935,7 +868,6 @@
 	"block.mubble.medusa_brick_slab": "Dalle en briques de Méduse",
 	"block.mubble.medusa_brick_vertical_slab": "Dalle verticale en briques de Méduse",
 	"block.mubble.medusa_brick_wall": "Muret en briques de Méduse",
-
 	"block.mubble.blue_candy_cane_pillar": "Pilier de sucre d'orge bleu",
 	"block.mubble.light_blue_candy_cane_pillar": "Pilier de sucre d'orge bleu clair",
 	"block.mubble.cyan_candy_cane_pillar": "Pilier de sucre d'orge cyan",
@@ -952,14 +884,11 @@
 	"block.mubble.light_gray_candy_cane_pillar": "Pilier de sucre d'orge gris clair",
 	"block.mubble.gray_candy_cane_pillar": "Pilier de sucre d'orge gris",
 	"block.mubble.black_candy_cane_pillar": "Pilier de sucre d'orge noir",
-
-
 	"block.mubble.green_hill_grass_block": "Bloc d'herbe de Green Hill",
 	"block.mubble.green_hill_dirt": "Terre de Green Hill",
 	"block.mubble.marble_zone_stone": "Pierre de la zone Marble",
 	"block.mubble.yellow_studiopolis_clapper": "Clap jaune de Studiopolis",
 	"block.mubble.blue_studiopolis_clapper": "Clap bleu de Studiopolis",
-
 	"block.mubble.press_garden_planks": "Planches de Press Garden",
 	"block.mubble.red_press_garden_sapling": "Pousse rouge de Press Garden",
 	"block.mubble.pink_press_garden_sapling": "Pousse rose de Press Garden",
@@ -984,10 +913,7 @@
 	"block.mubble.press_garden_wood_slab": "Dalle en bois de Press Garden",
 	"block.mubble.press_garden_wood_vertical_slab": "Dalle verticale en bois de Press Garden",
 	"block.mubble.press_garden_wood_button": "Bouton en bois de Press Garden",
-	
 	"block.mubble.spring": "Ressort",
-
-
 	"block.mubble.scarlet_planks": "Planches écarlate",
 	"block.mubble.scarlet_sapling": "Pousse écarlate",
 	"block.mubble.scarlet_log": "Bûche écarlate",
@@ -1011,8 +937,6 @@
 	"block.mubble.scarlet_wood_button": "Bouton en bois écarlate",
 	"block.mubble.scarlet_mushroom": "Champignon écarlate",
 	"block.mubble.scarlet_orchid": "Orchidée écarlate",
-
-
 	"block.mubble.girder": "Poutre",
 	"block.mubble.mirror_temple_bricks": "Briques du temple miroir",
 	"block.mubble.mirror_temple_brick_stairs": "Escalier en brique du temple miroir",
@@ -1027,8 +951,6 @@
 	"block.mubble.elder_pebbles": "Anciens galets",
 	"block.mubble.dream_block": "Bloc de rêve",
 	"block.mubble.dream_bedrock": "Bedrock de rêve",
-
-
 	"block.mubble.blue_puyo": "Puyo bleu",
 	"block.mubble.turquoise_puyo": "Puyo turquoise",
 	"block.mubble.green_puyo": "Puyo vert",
@@ -1040,12 +962,8 @@
 	"block.mubble.point_puyo": "Point Puyo",
 	"block.mubble.hard_puyo": "Puyo dur",
 	"block.mubble.iron_puyo": "Puyo de fer",
-
-
 	"block.mubble.koretato_block": "Bloc Koretato",
 	"block.mubble.potato_flower": "Fleur patate",
-
-
 	"block.mubble.potted_autumn_oak_sapling": "Pousse de chêne d'automne en pot",
 	"block.mubble.potted_autumn_birch_sapling": "Pousse de bouleau d'automne en pot",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Pousse de cerisier rose en pot",
@@ -1076,9 +994,6 @@
 	"block.mubble.potted_scarlet_mushroom": "Champignon écarlate en pot",
 	"block.mubble.potted_scarlet_orchid": "Orchidée écarlate en pot",
 	"block.mubble.potted_potato_flower": "Fleur patate en pot",
-
-
-
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.vanadium": "Vanadium",
@@ -1115,8 +1030,6 @@
 	"item.mubble.jingle_bells": "Grelots",
 	"item.mubble.small_bulb": "Petite ampoule",
 	"item.mubble.totem_of_ascending": "Totem d'ascendance",
-
-
 	"item.mubble.super_mushroom": "Super champignon",
 	"item.mubble.peach": "Pêche",
 	"item.mubble.fireball": "Boule de feu",
@@ -1131,14 +1044,8 @@
 	"item.mubble.smb3_key": "Clé (SMB3)",
 	"item.mubble.smw_key": "Clé (SMW)",
 	"item.mubble.nsmbu_key": "Clé (NSMBU)",
-
-
 	"item.mubble.kirby_ball": "Balle Kirby",
-
-
 	"item.mubble.smash_ball": "Balle Smash",
-
-
 	"item.mubble.white_lightsaber": "Sabre laser blanc",
 	"item.mubble.light_gray_lightsaber": "Sabre laser gris clair",
 	"item.mubble.gray_lightsaber": "Sabre laser gris",
@@ -1155,8 +1062,6 @@
 	"item.mubble.purple_lightsaber": "Sabre laser violet",
 	"item.mubble.magenta_lightsaber": "Sabre laser magenta",
 	"item.mubble.pink_lightsaber": "Sabre laser rose",
-
-
 	"item.mubble.blank_music_disc": "Disque de musique vide",
 	"item.mubble.music_disc_battlefield": "Disque de musique",
 	"item.mubble.music_disc_champions_road": "Disque de musique",
@@ -1196,8 +1101,6 @@
 	"item.mubble.music_disc_type_a.desc": "Tetris 99 - Type A",
 	"item.mubble.music_disc_vampire_killer.desc": "Castlevania Judgement - Vampire Killer",
 	"item.mubble.music_disc_vs_champion_red_and_blue.desc": "Pokémon Sun & Moon - VS. Champion Red & Blue",
-
-
 	"item.mubble.remix_disc_nb_beware_the_forest_mushrooms": "Disque de remix",
 	"item.mubble.remix_disc_nb_buoy_base_galaxy": "Disque de remix",
 	"item.mubble.remix_disc_nb_fly_octo_fly": "Disque de remix",
@@ -1210,19 +1113,13 @@
 	"item.mubble.remix_disc_nb_harvest_hazards.desc": "Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)",
 	"item.mubble.remix_disc_nb_sweden.desc": "C418 - Sweden (NoteBlock Remix)",
 	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
-
-
 	"item.mubble.duck_spawn_egg": "Oeuf d'apparition de canard",
 	"item.mubble.chincho_spawn_egg": "Oeuf d'apparition de Chincho",
 	"item.mubble.goomba_spawn_egg": "Oeuf d'apparition de Goomba",
 	"item.mubble.toad_spawn_egg": "Oeuf d'apparition de Toad",
 	"item.mubble.zombie_cowman_spawn_egg": "Oeuf d'apparition de vache-zombie",
-
-
-
 	"comment": "COSTUMES",
 	"item.mubble.headphones": "Casque audio",
-
 	"item.mubble.blue_virtual_googles": "Lunettes virtuelles bleues",
 	"item.mubble.light_blue_virtual_googles": "Lunettes virtuelles bleu clairs",
 	"item.mubble.cyan_virtual_googles": "Lunettes virtuelles cyans",
@@ -1239,10 +1136,7 @@
 	"item.mubble.light_gray_virtual_googles": "Lunettes virtuelles gris clairs",
 	"item.mubble.gray_virtual_googles": "Lunettes virtuelles grises",
 	"item.mubble.black_virtual_googles": "Lunettes virtuelles noires",
-	
 	"item.mubble.christmas_hat": "Bonnet de Noël",
-
-
 	"item.mubble.cappy": "Cappy",
 	"item.mubble.luigi_cap": "Casquette de Luigi",
 	"item.mubble.wario_cap": "Casquette de Wario",
@@ -1260,71 +1154,38 @@
 	"item.mubble.mario_wedding_hat": "Chapeau de mariage de Mario",
 	"item.mubble.boo_hat": "Chapeau Boo",
 	"item.mubble.broque_monsieur_head": "Tête de Charlie Bloc",
-
-
 	"item.mubble.bandana": "Bandana",
-
-
 	"item.mubble.pikachu_ears": "Oreilles de Pikachu",
 	"item.mubble.snorlax_hat": "Chapeau Ronflex",
-
-
 	"item.mubble.top_hat": "Haut-de-forme",
-
-
 	"item.mubble.ralsei_hat": "Chapeau de Ralsei",
 	"item.mubble.king_round_mask": "Masque King Round",
-
-
 	"item.mubble.kid_hat": "Haut-de-forme de Hat Kid",
-
-
 	"item.mubble.baldi_head": "Tête de Baldi",
-
-
 	"item.mubble.guardian_mask": "Masque du Gardien",
-
-
 	"item.mubble.mayro_cap": "Casquette de Mayro",
 	"item.mubble.noteblock_head": "Tête de Noteblock",
-
-
-
 	"comment": "ENCHANTMENTS",
 	"enchantment.mubble.telekinesis": "Télékinésie",
 	"enchantment.mubble.ignorance_curse": "Malédiction d'ignorance",
-
-
-
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Placeur",
 	"container.mubble.timeswap_table": "Table d'échange temporel",
 	"container.mubble.present": "Cadeau",
-
-
-
 	"comment": "ENTITIES",
 	"entity.mubble.duck": "Canard",
 	"entity.mubble.zombie_cowman": "Vache-zombie",
 	"entity.mubble.custom_tnt": "TNT personalisée",
 	"entity.mubble.flying_block": "Bloc volant",
-
 	"entity.mubble.chincho": "Chincho",
 	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.toad": "Toad",
 	"entity.mubble.fireball": "Boule de feu",
 	"entity.mubble.iceball": "Boule de glace",
-
 	"entity.mubble.kirby_ball": "Balle Kirby",
-
-
-
 	"comment": "EFFECTS",
 	"effect.mubble.heaviness": "Lourdeur",
 	"effect.mubble.hiccup": "Hoquet",
-
-
-
 	"comment": "BIOMES",
 	"biome.mubble.pumpkin_pastures": "Champs de citrouilles",
 	"biome.mubble.pink_cherry_oak_forest": "Forêt de cerisiers roses",
@@ -1334,13 +1195,8 @@
 	"biome.mubble.tritanopian_gallery": "Galerie tritanopienne",
 	"biome.mubble.achromatopsian_gallery": "Galerie achromatopsienne",
 	"biome.mubble.protanopian_gallery": "Galerie protanopienne",
-	
 	"biome.mubble.press_garden": "Jardin de presse",
-
 	"biome.mubble.scarlet_forest": "Forêt écarlate",
-
-
-
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.question_block.loot.power_up": "Objet sorti d'un bloc ?",
 	"subtitles.mubble.block.question_block.loot.coin": "Pièce sortie d'un bloc ?",
@@ -1374,9 +1230,6 @@
 	"subtitles.mubble.entity.zombie_cowman.hurt": "Vache-zombie blessée",
 	"subtitles.mubble.entity.zombie_cowman.angry": "Vache-zombie en colère",
 	"subtitles.mubble.entity.zombie_cowman.death": "Vache-zombie qui meurt",
-
-
-
 	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "Un tout nouveau voyage",
@@ -1396,9 +1249,6 @@
 	"advancements.mubble.get_timeswap_table.description": "Fabriquez une table d'échange temporel",
 	"advancements.mubble.get_tetris_block.title": "Connectés à travers l'espace",
 	"advancements.mubble.get_tetris_block.description": "Attrapez un bloc Tetris",
-
-
-
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Don de %s points de nourriture à %s",
 	"commands.foodbar.add.food.success.multiple": "Don de %s points de nourriture à %s entités",
@@ -1416,9 +1266,6 @@
 	"commands.motion.add.success.multiple": "Ajout des valeurs %s, %s, %s au vecteur de mouvement de %s entités",
 	"commands.motion.set.success.single": "Valeurs %s, %s, %s attribuées au vecteur de mouvement de %s",
 	"commands.motion.set.success.multiple": "Valeurs %s, %s, %s attribuées au vecteur de mouvement de %s entités",
-
-
-
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "C'est pour toi, §6Pixel§r !",
 	"item.mubble.noteblock_head.secret_status": "Hé ! Je croyais que tu avais déjà ça sur la tête, §6Evan§r !",

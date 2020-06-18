@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/polished_sandstone"}
+	"variants": {
+		"": {
+			"model": "mubble:block/polished_sandstone"
+		}
 	}
 }

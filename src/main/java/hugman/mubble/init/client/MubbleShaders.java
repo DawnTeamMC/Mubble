@@ -6,8 +6,7 @@ import net.minecraft.util.Identifier;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MubbleShaders
-{
+public class MubbleShaders {
 	public static final List<Identifier> SHADERS = new ArrayList<Identifier>();
 	public static final List<Identifier> RETRO_SHADERS = new ArrayList<Identifier>();
 
@@ -54,15 +53,13 @@ public class MubbleShaders
 	public static final Identifier MAGENTA_RETRO = register(Mubble.MOD_ID, "retro/magenta", RETRO_SHADERS);
 	public static final Identifier PINK_RETRO = register(Mubble.MOD_ID, "retro/pink", RETRO_SHADERS);
 
-	private static Identifier register(String namespace, String name)
-	{
+	private static Identifier register(String namespace, String name) {
 		Identifier shaderRL = new Identifier(namespace, "shaders/post/" + name + ".json");
 		SHADERS.add(shaderRL);
 		return shaderRL;
 	}
 
-	private static Identifier register(String namespace, String name, List<Identifier> aditionalList)
-	{
+	private static Identifier register(String namespace, String name, List<Identifier> aditionalList) {
 		Identifier shaderRL = new Identifier(namespace, "shaders/post/" + name + ".json");
 		SHADERS.add(shaderRL);
 		aditionalList.add(shaderRL);

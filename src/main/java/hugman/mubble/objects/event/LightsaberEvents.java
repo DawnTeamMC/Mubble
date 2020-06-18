@@ -10,26 +10,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 
 @Environment(EnvType.CLIENT)
-public class LightsaberEvents
-{
-	public static void init()
-	{
+public class LightsaberEvents {
+	public static void init() {
 		ClientTickCallback.EVENT.register(event ->
 		{
-			if (LightsaberItem.idleTimer <= 95)
-			{
+			if(LightsaberItem.idleTimer <= 95) {
 				LightsaberItem.idleTimer++;
 			}
-			else
-			{
+			else {
 				LightsaberItem.idleTimer = 0;
 			}
 		});
 		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) ->
 		{
 			ItemStack stack = player.getMainHandStack();
-			if (stack.getItem() instanceof LightsaberItem)
-			{
+			if(stack.getItem() instanceof LightsaberItem) {
 				((LightsaberItem) stack.getItem()).onSwing(player, entity.isAttackable() && !entity.isInvulnerableTo(DamageSource.player(player)) && entity.isAlive());
 			}
 			return ActionResult.PASS;

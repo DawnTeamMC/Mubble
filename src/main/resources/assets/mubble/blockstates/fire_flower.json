@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/fire_flower"}
+	"variants": {
+		"": {
+			"model": "mubble:block/fire_flower"
+		}
 	}
 }

@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XOX",
 		"XXX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "mubble:blunite"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:prismarine_crystals"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:elder_pebbles",
 		"count": 8
 	}

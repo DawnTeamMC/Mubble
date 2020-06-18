@@ -1,19 +1,15 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:concrete_button",
-	"pattern":
-	[
+	"pattern": [
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:black_concrete"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:black_concrete_button"
 	}
 }

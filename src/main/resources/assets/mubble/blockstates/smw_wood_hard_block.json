@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/hard_block/smw/wood"}
+	"variants": {
+		"": {
+			"model": "mubble:block/hard_block/smw/wood"
+		}
 	}
 }

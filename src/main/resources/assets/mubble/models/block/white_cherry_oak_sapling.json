@@ -1,7 +1,6 @@
 {
 	"parent": "block/cross",
-	"textures":
-	{
+	"textures": {
 		"cross": "mubble:block/white_cherry_oak_sapling"
 	}
 }

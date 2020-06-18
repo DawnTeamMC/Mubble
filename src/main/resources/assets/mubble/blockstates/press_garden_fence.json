@@ -1,24 +1,48 @@
 {
-	"multipart":
-	[
+	"multipart": [
 		{
-			"apply": {"model": "mubble:block/press_garden_fence/post"}
+			"apply": {
+				"model": "mubble:block/press_garden_fence/post"
+			}
 		},
 		{
-			"when": {"north": "true"},
-			"apply": {"model": "mubble:block/press_garden_fence/side", "uvlock": true}
+			"when": {
+				"north": "true"
+			},
+			"apply": {
+				"model": "mubble:block/press_garden_fence/side",
+				"uvlock": true
+			}
 		},
 		{
-			"when": {"east": "true"},
-			"apply": {"model": "mubble:block/press_garden_fence/side", "y": 90, "uvlock": true}
+			"when": {
+				"east": "true"
+			},
+			"apply": {
+				"model": "mubble:block/press_garden_fence/side",
+				"y": 90,
+				"uvlock": true
+			}
 		},
 		{
-			"when": {"south": "true"},
-			"apply": {"model": "mubble:block/press_garden_fence/side", "y": 180, "uvlock": true}
+			"when": {
+				"south": "true"
+			},
+			"apply": {
+				"model": "mubble:block/press_garden_fence/side",
+				"y": 180,
+				"uvlock": true
+			}
 		},
 		{
-			"when": {"west": "true"},
-			"apply": {"model": "mubble:block/press_garden_fence/side", "y": 270, "uvlock": true}
+			"when": {
+				"west": "true"
+			},
+			"apply": {
+				"model": "mubble:block/press_garden_fence/side",
+				"y": 270,
+				"uvlock": true
+			}
 		}
 	]
 }

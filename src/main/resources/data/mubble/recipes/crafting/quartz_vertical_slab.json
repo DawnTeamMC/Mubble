@@ -1,13 +1,11 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
+	"key": {
 		"#": [
 			{
 				"item": "minecraft:chiseled_quartz_block"
@@ -20,8 +18,7 @@
 			}
 		]
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:quartz_vertical_slab",
 		"count": 6
 	}

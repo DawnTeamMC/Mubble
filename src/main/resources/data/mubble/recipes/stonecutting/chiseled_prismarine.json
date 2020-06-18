@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:prismarine"
 	},
 	"result": "mubble:chiseled_prismarine",

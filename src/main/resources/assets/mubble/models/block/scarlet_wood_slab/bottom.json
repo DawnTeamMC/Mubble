@@ -1,7 +1,6 @@
 {
 	"parent": "block/slab",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/scarlet_log/side",
 		"top": "mubble:block/scarlet_log/side",
 		"side": "mubble:block/scarlet_log/side"

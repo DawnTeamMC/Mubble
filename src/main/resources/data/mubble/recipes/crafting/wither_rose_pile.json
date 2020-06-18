@@ -1,19 +1,15 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "flower_pile",
-	"pattern":
-	[
+	"pattern": [
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:wither_rose"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:wither_rose_pile"
 	}
 }

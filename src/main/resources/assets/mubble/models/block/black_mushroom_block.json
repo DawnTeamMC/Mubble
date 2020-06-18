@@ -1,7 +1,7 @@
 {
 	"parent": "mubble:block/mushroom_block",
-	"textures":
-	{
-		"block": "mubble:block/black_mushroom_block"}
+	"textures": {
+		"block": "mubble:block/black_mushroom_block"
 	}
+}
 }

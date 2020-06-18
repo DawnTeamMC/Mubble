@@ -1,7 +1,6 @@
 {
 	"parent": "item/handheld",
-	"textures":
-	{
+	"textures": {
 		"layer0": "mubble:item/baguette"
 	}
 }

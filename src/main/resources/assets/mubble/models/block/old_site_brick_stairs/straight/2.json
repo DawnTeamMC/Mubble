@@ -1,7 +1,6 @@
 {
 	"parent": "block/stairs",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/old_site_bricks/2",
 		"top": "mubble:block/old_site_bricks/2",
 		"side": "mubble:block/old_site_bricks/2"

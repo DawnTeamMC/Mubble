@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"OXO",
 		"XOX",
 		"OXO"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:white_wool"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:black_wool"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:footblock",
 		"count": 9
 	}

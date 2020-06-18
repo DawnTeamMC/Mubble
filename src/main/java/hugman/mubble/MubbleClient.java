@@ -10,11 +10,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 
-public class MubbleClient implements ClientModInitializer
-{
+public class MubbleClient implements ClientModInitializer {
 	@Override
-	public void onInitializeClient()
-	{
+	public void onInitializeClient() {
 		MubbleScreens.init();
 		MubbleColorMaps.registerBlockColors();
 		MubbleColorMaps.registerItemColors();
@@ -23,8 +21,7 @@ public class MubbleClient implements ClientModInitializer
 		LightsaberEvents.init();
 	}
 
-	private void registerEntityRenders()
-	{
+	private void registerEntityRenders() {
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.CHINCHO, (dispatcher, context) -> new ChinchoEntityRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.GOOMBA, (dispatcher, context) -> new GoombaEntityRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.TOAD, (dispatcher, context) -> new ToadEntityRenderer(dispatcher));

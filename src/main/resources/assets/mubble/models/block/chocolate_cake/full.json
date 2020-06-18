@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/cake/full",
-	"textures":
-	{
+	"textures": {
 		"bottom": "mubble:block/chocolate_cake/bottom",
 		"top": "mubble:block/chocolate_cake/top",
 		"side": "mubble:block/chocolate_cake/side"

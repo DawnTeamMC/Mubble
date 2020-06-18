@@ -11,15 +11,13 @@ import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class Mubble implements ModInitializer
-{
+public class Mubble implements ModInitializer {
 	public static final String MOD_ID = "mubble";
 	public static final String MOD_PREFIX = MOD_ID + ":";
 	public static final Logger LOGGER = LogManager.getLogger();
 
 	@Override
-	public void onInitialize()
-	{
+	public void onInitialize() {
 		new MubbleBlocks();
 		new MubbleCostumes();
 		new MubbleEffects();
@@ -40,8 +38,7 @@ public class Mubble implements ModInitializer
 		initGenerators();
 	}
 
-	private void initGenerators()
-	{
+	private void initGenerators() {
 		MubbleGenerators.registerOres();
 		MubbleGenerators.registerTrees();
 		MubbleGenerators.registerSpawns();

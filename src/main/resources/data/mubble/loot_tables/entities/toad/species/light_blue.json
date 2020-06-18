@@ -1,12 +1,10 @@
 {
 	"type": "minecraft:entity",
-	"pools":
-	[
+	"pools": [
 		{
 			"name": "normal",
 			"rolls": 1,
-			"entries": 
-			[
+			"entries": [
 				{
 					"type": "loot_table",
 					"name": "mubble:entities/toad/normal",
@@ -17,18 +15,15 @@
 		{
 			"name": "light_blue",
 			"rolls": 1,
-			"entries":
-			[
+			"entries": [
 				{
 					"type": "item",
 					"name": "mubble:light_blue_mushroom",
 					"weight": 1,
-					"functions":
-					[
+					"functions": [
 						{
 							"function": "set_count",
-							"count":
-							{
+							"count": {
 								"min": 2,
 								"max": 4
 							}

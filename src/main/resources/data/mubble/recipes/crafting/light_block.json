@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"XXX",
 		"XOX",
 		"XXX"
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:white_concrete"
 		},
-		"O":
-		{
+		"O": {
 			"item": "minecraft:sea_lantern"
 		}
 	},
-	"result": 
-	{
+	"result": {
 		"item": "mubble:light_block",
 		"count": 8
 	}

@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:terracotta_wall",
-	"pattern":
-	[
+	"pattern": [
 		"###",
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:white_terracotta"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:white_terracotta_wall",
 		"count": 6
 	}

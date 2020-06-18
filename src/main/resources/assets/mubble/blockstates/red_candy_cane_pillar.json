@@ -1,8 +1,16 @@
 {
-	"variants":
-	{
-		"axis=y":	{ "model": "mubble:block/red_candy_cane_pillar" },
-		"axis=z":	{ "model": "mubble:block/red_candy_cane_pillar", "x": 90 },
-		"axis=x":	{ "model": "mubble:block/red_candy_cane_pillar", "x": 90, "y": 90 }
+	"variants": {
+		"axis=y": {
+			"model": "mubble:block/red_candy_cane_pillar"
+		},
+		"axis=z": {
+			"model": "mubble:block/red_candy_cane_pillar",
+			"x": 90
+		},
+		"axis=x": {
+			"model": "mubble:block/red_candy_cane_pillar",
+			"x": 90,
+			"y": 90
+		}
 	}
 }

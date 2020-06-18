@@ -3,8 +3,7 @@ package hugman.mubble.init.data;
 import hugman.mubble.Mubble;
 import net.minecraft.util.Identifier;
 
-public class MubbleLootTables
-{
+public class MubbleLootTables {
 	public static final Identifier TOAD = new Identifier(Mubble.MOD_ID, "entities/toad/normal");
 	public static final Identifier BLUE_TOAD = new Identifier(Mubble.MOD_ID, "entities/toad/species/blue");
 	public static final Identifier LIGHT_BLUE_TOAD = new Identifier(Mubble.MOD_ID, "entities/toad/species/light_blue");

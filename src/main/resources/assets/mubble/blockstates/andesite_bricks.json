@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/andesite_bricks"}
+	"variants": {
+		"": {
+			"model": "mubble:block/andesite_bricks"
+		}
 	}
 }

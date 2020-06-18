@@ -1,7 +1,6 @@
 {
 	"parent": "block/slab",
-	"textures":
-	{
+	"textures": {
 		"bottom": "minecraft:block/white_terracotta",
 		"top": "minecraft:block/white_terracotta",
 		"side": "minecraft:block/white_terracotta"

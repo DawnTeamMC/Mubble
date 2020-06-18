@@ -1,20 +1,16 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"#",
 		"#",
 		"#"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:polished_granite"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:polished_granite_vertical_slab",
 		"count": 6
 	}

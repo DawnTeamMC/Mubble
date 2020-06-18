@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "mubble:blue_permafrost_bricks"
 	},
 	"result": "mubble:blue_permafrost_brick_slab",

@@ -1,7 +1,6 @@
 {
 	"parent": "block/button_inventory",
-	"textures":
-	{
+	"textures": {
 		"texture": "mubble:block/palm_log/side"
 	}
 }

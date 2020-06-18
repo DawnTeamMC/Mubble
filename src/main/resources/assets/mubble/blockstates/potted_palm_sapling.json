@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/potted_palm_sapling"}
+	"variants": {
+		"": {
+			"model": "mubble:block/potted_palm_sapling"
+		}
 	}
 }

@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:pink_terracotta"
 	},
 	"result": "mubble:pink_terracotta_stairs",

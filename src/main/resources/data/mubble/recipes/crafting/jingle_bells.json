@@ -1,24 +1,19 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		" BX",
 		"BXB",
 		"XB "
 	],
-	"key":
-	{
-		"X":
-		{
+	"key": {
+		"X": {
 			"item": "minecraft:stick"
 		},
-		"B":
-		{
+		"B": {
 			"item": "minecraft:iron_nugget"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:jingle_bells"
 	}
 }

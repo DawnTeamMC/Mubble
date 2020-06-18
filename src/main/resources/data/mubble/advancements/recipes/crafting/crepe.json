@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/crepe"
 		]
 	},
-	"criteria":
-	{
-		"has_wheat_flour":
-		{
+	"criteria": {
+		"has_wheat_flour": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:wheat_flour"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/crepe"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_wheat_flour",
 			"has_the_recipe"

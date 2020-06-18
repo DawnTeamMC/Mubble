@@ -1,14 +1,12 @@
 {
 	"type": "minecraft:crafting_shapeless",
 	"group": "wooden_button",
-	"ingredients":
-	[
+	"ingredients": [
 		{
 			"item": "mubble:press_garden_planks"
 		}
 	],
-	"result":
-	{
+	"result": {
 		"item": "mubble:press_garden_button"
 	}
 }

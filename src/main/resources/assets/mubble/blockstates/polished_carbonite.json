@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/polished_carbonite"}
+	"variants": {
+		"": {
+			"model": "mubble:block/polished_carbonite"
+		}
 	}
 }

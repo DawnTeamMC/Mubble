@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/blue_permafrost_bricks"}
+	"variants": {
+		"": {
+			"model": "mubble:block/blue_permafrost_bricks"
+		}
 	}
 }

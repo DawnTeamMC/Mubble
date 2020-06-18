@@ -1,23 +1,18 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"O",
 		"X"
 	],
-	"key":
-	{
-		"O":
-		{
+	"key": {
+		"O": {
 			"item": "minecraft:torch"
 		},
-		"X":
-		{
+		"X": {
 			"item": "minecraft:iron_nugget"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:small_bulb",
 		"count": 2
 	}

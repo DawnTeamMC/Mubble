@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/mossy_cobblestone_bricks"}
+	"variants": {
+		"": {
+			"model": "mubble:block/mossy_cobblestone_bricks"
+		}
 	}
 }

@@ -1,8 +1,13 @@
 {
-	"variants":
-	{
-		"type=bottom": {"model": "mubble:block/black_dark_prismarine_slab/bottom"},
-		"type=top": {"model": "mubble:block/black_dark_prismarine_slab/top"},
-		"type=double": {"model": "mubble:block/black_dark_prismarine"}
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/black_dark_prismarine_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/black_dark_prismarine_slab/top"
+		},
+		"type=double": {
+			"model": "mubble:block/black_dark_prismarine"
+		}
 	}
 }

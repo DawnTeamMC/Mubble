@@ -1,18 +1,14 @@
 {
 	"type": "minecraft:crafting_shaped",
-	"pattern":
-	[
+	"pattern": [
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "mubble:medusa_bricks"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:medusa_brick_slab",
 		"count": 6
 	}

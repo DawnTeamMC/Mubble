@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/cherry_oak_planks"}
+	"variants": {
+		"": {
+			"model": "mubble:block/cherry_oak_planks"
+		}
 	}
 }

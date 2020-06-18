@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:white_tetris_block",
 		"mubble:light_gray_tetris_block",
 		"mubble:gray_tetris_block",

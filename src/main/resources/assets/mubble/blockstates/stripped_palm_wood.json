@@ -1,8 +1,16 @@
 {
-	"variants":
-	{
-		"axis=y": { "model": "mubble:block/stripped_palm_wood" },
-		"axis=z": { "model": "mubble:block/stripped_palm_wood", "x": 90 },
-		"axis=x": { "model": "mubble:block/stripped_palm_wood", "x": 90, "y": 90 }
+	"variants": {
+		"axis=y": {
+			"model": "mubble:block/stripped_palm_wood"
+		},
+		"axis=z": {
+			"model": "mubble:block/stripped_palm_wood",
+			"x": 90
+		},
+		"axis=x": {
+			"model": "mubble:block/stripped_palm_wood",
+			"x": 90,
+			"y": 90
+		}
 	}
 }

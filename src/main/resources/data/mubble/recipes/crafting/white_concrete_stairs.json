@@ -1,21 +1,17 @@
 {
 	"type": "minecraft:crafting_shaped",
 	"group": "mubble:concrete_stairs",
-	"pattern":
-	[
+	"pattern": [
 		"#  ",
 		"## ",
 		"###"
 	],
-	"key":
-	{
-		"#":
-		{
+	"key": {
+		"#": {
 			"item": "minecraft:white_concrete"
 		}
 	},
-	"result":
-	{
+	"result": {
 		"item": "mubble:white_concrete_stairs",
 		"count": 4
 	}

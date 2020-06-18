@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/fireball"
 		]
 	},
-	"criteria":
-	{
-		"has_fire_flower":
-		{
+	"criteria": {
+		"has_fire_flower": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:fire_flower"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/fireball"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_fire_flower",
 			"has_the_recipe"

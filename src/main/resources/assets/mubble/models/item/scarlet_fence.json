@@ -1,7 +1,6 @@
 {
 	"parent": "block/fence_inventory",
-	"textures":
-	{
+	"textures": {
 		"texture": "mubble:block/scarlet_planks"
 	}
 }

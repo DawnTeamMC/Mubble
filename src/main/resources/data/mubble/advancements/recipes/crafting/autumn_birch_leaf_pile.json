@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/autumn_birch_leaf_pile"
 		]
 	},
-	"criteria":
-	{
-		"has_leaves":
-		{
+	"criteria": {
+		"has_leaves": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:autumn_birch_leaves"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/autumn_birch_pile"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_leaves",
 			"has_the_recipe"

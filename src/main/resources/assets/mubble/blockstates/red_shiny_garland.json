@@ -1,43 +1,152 @@
 {
-	"variants":
-	{
-		"illuminated=false":
-		[
-			{ "model": "mubble:block/red_shiny_garland/normal" },
-			{ "model": "mubble:block/red_shiny_garland/normal", "x": 90 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "x": 180 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "x": 270 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 90 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 90, "x": 90 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 90, "x": 180 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 90, "x": 270 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 180 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 180, "x": 90 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 180, "x": 180 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 180, "x": 270 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 270 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 270, "x": 90 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 270, "x": 180 },
-			{ "model": "mubble:block/red_shiny_garland/normal", "y": 270, "x": 270 }
+	"variants": {
+		"illuminated=false": [
+			{
+				"model": "mubble:block/red_shiny_garland/normal"
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"x": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"x": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"x": 270
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 90,
+				"x": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 90,
+				"x": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 90,
+				"x": 270
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 180,
+				"x": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 180,
+				"x": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 180,
+				"x": 270
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 270
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 270,
+				"x": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 270,
+				"x": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/normal",
+				"y": 270,
+				"x": 270
+			}
 		],
-		"illuminated=true":
-		[
-			{ "model": "mubble:block/red_shiny_garland/illuminated" },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "x": 90 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "x": 180 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "x": 270 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 90 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 90, "x": 90 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 90, "x": 180 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 90, "x": 270 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 180 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 180, "x": 90 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 180, "x": 180 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 180, "x": 270 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 270 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 270, "x": 90 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 270, "x": 180 },
-			{ "model": "mubble:block/red_shiny_garland/illuminated", "y": 270, "x": 270 }
+		"illuminated=true": [
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated"
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"x": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"x": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"x": 270
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 90,
+				"x": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 90,
+				"x": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 90,
+				"x": 270
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 180,
+				"x": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 180,
+				"x": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 180,
+				"x": 270
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 270
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 270,
+				"x": 90
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 270,
+				"x": 180
+			},
+			{
+				"model": "mubble:block/red_shiny_garland/illuminated",
+				"y": 270,
+				"x": 270
+			}
 		]
 	}
 }

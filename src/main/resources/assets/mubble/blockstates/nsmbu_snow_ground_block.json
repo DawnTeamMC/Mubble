@@ -1,7 +1,10 @@
 {
-	"variants":
-	{
-		"over=false": {"model": "mubble:block/ground_block/nsmbu/snow/normal"},
-		"over=true": {"model": "mubble:block/ground_block/nsmbu/snow/over"}
+	"variants": {
+		"over=false": {
+			"model": "mubble:block/ground_block/nsmbu/snow/normal"
+		},
+		"over=true": {
+			"model": "mubble:block/ground_block/nsmbu/snow/over"
+		}
 	}
 }

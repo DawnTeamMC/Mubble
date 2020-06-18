@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:prismarine_bricks"
 	},
 	"result": "mubble:prismarine_brick_paving",

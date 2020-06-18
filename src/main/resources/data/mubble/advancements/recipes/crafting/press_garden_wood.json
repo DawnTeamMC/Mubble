@@ -1,38 +1,29 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/press_garden_wood"
 		]
 	},
-	"criteria":
-	{
-		"has_log":
-		{
+	"criteria": {
+		"has_log": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "mubble:press_garden_log"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/press_garden_wood"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_log",
 			"has_the_recipe"

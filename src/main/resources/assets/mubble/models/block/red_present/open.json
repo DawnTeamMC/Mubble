@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/present/open",
-	"textures":
-	{
+	"textures": {
 		"all": "mubble:block/red_present"
 	}
 }

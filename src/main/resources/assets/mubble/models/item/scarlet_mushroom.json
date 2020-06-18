@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
-	"textures":
-	{
-		"layer0": "mubble:block/scarlet_mushroom/0"}
+	"textures": {
+		"layer0": "mubble:block/scarlet_mushroom/0"
 	}
+}
 }

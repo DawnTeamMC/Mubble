@@ -5,8 +5,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class MubbleSounds
-{
+public class MubbleSounds {
 	public static final SoundEvent BLOCK_PRESENT_CLOSE = register("block.present.close");
 	public static final SoundEvent BLOCK_PRESENT_OPEN = register("block.present.open");
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB = register("block.question_block.loot.power_up.smb");
@@ -139,8 +138,7 @@ public class MubbleSounds
 	public static final SoundEvent REMIX_DISC_NB_WALUIGI_PINBALL = register("remix_disc.nb.waluigi_pinball");
 	*/
 
-	private static SoundEvent register(String name)
-	{
+	private static SoundEvent register(String name) {
 		Identifier path = new Identifier(Mubble.MOD_ID, name);
 		return Registry.register(Registry.SOUND_EVENT, path, new SoundEvent(path));
 	}

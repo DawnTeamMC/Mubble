@@ -1,22 +1,18 @@
 {
 	"type": "minecraft:entity",
-	"pools":
-	[
+	"pools": [
 		{
-			"name":"main",
+			"name": "main",
 			"rolls": 1,
-			"entries":
-			[
+			"entries": [
 				{
 					"type": "item",
 					"name": "mubble:yellow_coin",
 					"weight": 100,
-					"functions":
-					[
+					"functions": [
 						{
 							"function": "set_count",
-							"count":
-							{
+							"count": {
 								"min": 1,
 								"max": 4
 							}
@@ -27,12 +23,10 @@
 					"type": "item",
 					"name": "mubble:red_coin",
 					"weight": 70,
-					"functions":
-					[
+					"functions": [
 						{
 							"function": "set_count",
-							"count":
-							{
+							"count": {
 								"min": 1,
 								"max": 2
 							}
@@ -43,12 +37,10 @@
 					"type": "item",
 					"name": "mubble:peach",
 					"weight": 55,
-					"functions":
-					[
+					"functions": [
 						{
 							"function": "set_count",
-							"count":
-							{
+							"count": {
 								"min": 1,
 								"max": 3
 							}
@@ -63,17 +55,15 @@
 			]
 		},
 		{
-			"name":"rare",
+			"name": "rare",
 			"rolls": 1,
-			"entries":
-			[
+			"entries": [
 				{
 					"type": "item",
 					"name": "mubble:super_star"
 				}
 			],
-			"conditions":
-			[
+			"conditions": [
 				{
 					"condition": "minecraft:killed_by_player"
 				},

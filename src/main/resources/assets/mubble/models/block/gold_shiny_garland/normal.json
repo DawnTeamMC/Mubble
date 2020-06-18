@@ -1,7 +1,6 @@
 {
 	"parent": "mubble:block/garland",
-	"textures":
-	{
+	"textures": {
 		"all": "mubble:block/gold_shiny_garland/normal"
 	}
 }

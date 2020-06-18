@@ -1,7 +1,6 @@
 {
 	"replace": false,
-	"values":
-	[
+	"values": [
 		"mubble:press_garden_log",
 		"mubble:stripped_press_garden_log",
 		"mubble:press_garden_wood",

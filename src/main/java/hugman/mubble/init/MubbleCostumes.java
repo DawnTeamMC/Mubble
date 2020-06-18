@@ -13,8 +13,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class MubbleCostumes
-{
+public class MubbleCostumes {
 	/* Templates */
 	protected static final Item.Settings pSimple = new Item.Settings().group(MubbleTabs.COSTUMES).maxCount(1);
 	protected static final Item.Settings pBlockDecorations = new Item.Settings().group(ItemGroup.DECORATIONS);
@@ -101,8 +100,7 @@ public class MubbleCostumes
 	public static final Item KORETATO_BLOCK = register("koretato_block", new BlockCostume(pBlockDecorations, SoundEvents.BLOCK_SNOW_PLACE, EquipmentSlot.HEAD, MubbleBlocks.KORETATO_BLOCK));
 	public static final Item NOTEBLOCK_HEAD = register("noteblock_head", new HeadCostume(pSimple, SoundEvents.ITEM_ARMOR_EQUIP_IRON));
 
-	private static Item register(String name, Item item)
-	{
+	private static Item register(String name, Item item) {
 		return Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), item);
 	}
 }

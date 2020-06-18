@@ -1,7 +1,6 @@
 {
 	"type": "minecraft:stonecutting",
-	"ingredient":
-	{
+	"ingredient": {
 		"item": "minecraft:lime_terracotta"
 	},
 	"result": "mubble:lime_terracotta_vertical_slab",

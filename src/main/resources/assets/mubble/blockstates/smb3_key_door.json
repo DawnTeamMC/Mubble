@@ -1,69 +1,244 @@
 {
-	"variants":
-	{
-		"locked=true,facing=east,half=lower,hinge=left,open=false":  {"model": "mubble:block/door/smb3/key/locked/bottom/normal"},
-		"locked=true,facing=south,half=lower,hinge=left,open=false": {"model": "mubble:block/door/smb3/key/locked/bottom/normal", "y": 90},
-		"locked=true,facing=west,half=lower,hinge=left,open=false":  {"model": "mubble:block/door/smb3/key/locked/bottom/normal", "y": 180},
-		"locked=true,facing=north,half=lower,hinge=left,open=false": {"model": "mubble:block/door/smb3/key/locked/bottom/normal", "y": 270},
-		"locked=true,facing=east,half=lower,hinge=right,open=false":  {"model": "mubble:block/door/smb3/key/locked/bottom/hinge"},
-		"locked=true,facing=south,half=lower,hinge=right,open=false": {"model": "mubble:block/door/smb3/key/locked/bottom/hinge", "y": 90},
-		"locked=true,facing=west,half=lower,hinge=right,open=false":  {"model": "mubble:block/door/smb3/key/locked/bottom/hinge", "y": 180},
-		"locked=true,facing=north,half=lower,hinge=right,open=false": {"model": "mubble:block/door/smb3/key/locked/bottom/hinge", "y": 270},
-		"locked=true,facing=east,half=lower,hinge=left,open=true":  {"model": "mubble:block/door/smb3/key/locked/bottom/hinge", "y": 90},
-		"locked=true,facing=south,half=lower,hinge=left,open=true": {"model": "mubble:block/door/smb3/key/locked/bottom/hinge", "y": 180},
-		"locked=true,facing=west,half=lower,hinge=left,open=true":  {"model": "mubble:block/door/smb3/key/locked/bottom/hinge", "y": 270},
-		"locked=true,facing=north,half=lower,hinge=left,open=true": {"model": "mubble:block/door/smb3/key/locked/bottom/hinge"},
-		"locked=true,facing=east,half=lower,hinge=right,open=true":  {"model": "mubble:block/door/smb3/key/locked/bottom/normal", "y": 270},
-		"locked=true,facing=south,half=lower,hinge=right,open=true": {"model": "mubble:block/door/smb3/key/locked/bottom/normal"},
-		"locked=true,facing=west,half=lower,hinge=right,open=true":  {"model": "mubble:block/door/smb3/key/locked/bottom/normal", "y": 90},
-		"locked=true,facing=north,half=lower,hinge=right,open=true": {"model": "mubble:block/door/smb3/key/locked/bottom/normal", "y": 180},
-		"locked=true,facing=east,half=upper,hinge=left,open=false":  {"model": "mubble:block/door/smb3/key/locked/top/normal"},
-		"locked=true,facing=south,half=upper,hinge=left,open=false": {"model": "mubble:block/door/smb3/key/locked/top/normal", "y": 90},
-		"locked=true,facing=west,half=upper,hinge=left,open=false":  {"model": "mubble:block/door/smb3/key/locked/top/normal", "y": 180},
-		"locked=true,facing=north,half=upper,hinge=left,open=false": {"model": "mubble:block/door/smb3/key/locked/top/normal", "y": 270},
-		"locked=true,facing=east,half=upper,hinge=right,open=false":  {"model": "mubble:block/door/smb3/key/locked/top/hinge"},
-		"locked=true,facing=south,half=upper,hinge=right,open=false": {"model": "mubble:block/door/smb3/key/locked/top/hinge", "y": 90},
-		"locked=true,facing=west,half=upper,hinge=right,open=false":  {"model": "mubble:block/door/smb3/key/locked/top/hinge", "y": 180},
-		"locked=true,facing=north,half=upper,hinge=right,open=false": {"model": "mubble:block/door/smb3/key/locked/top/hinge", "y": 270},
-		"locked=true,facing=east,half=upper,hinge=left,open=true":  {"model": "mubble:block/door/smb3/key/locked/top/hinge", "y": 90},
-		"locked=true,facing=south,half=upper,hinge=left,open=true": {"model": "mubble:block/door/smb3/key/locked/top/hinge", "y": 180},
-		"locked=true,facing=west,half=upper,hinge=left,open=true":  {"model": "mubble:block/door/smb3/key/locked/top/hinge", "y": 270},
-		"locked=true,facing=north,half=upper,hinge=left,open=true": {"model": "mubble:block/door/smb3/key/locked/top/hinge"},
-		"locked=true,facing=east,half=upper,hinge=right,open=true":  {"model": "mubble:block/door/smb3/key/locked/top/normal", "y": 270},
-		"locked=true,facing=south,half=upper,hinge=right,open=true": {"model": "mubble:block/door/smb3/key/locked/top/normal"},
-		"locked=true,facing=west,half=upper,hinge=right,open=true":  {"model": "mubble:block/door/smb3/key/locked/top/normal", "y": 90},
-		"locked=true,facing=north,half=upper,hinge=right,open=true": {"model": "mubble:block/door/smb3/key/locked/top/normal", "y": 180},
-		"locked=false,facing=east,half=lower,hinge=left,open=false":  {"model": "mubble:block/door/smb3/key/unlocked/bottom/normal"},
-		"locked=false,facing=south,half=lower,hinge=left,open=false": {"model": "mubble:block/door/smb3/key/unlocked/bottom/normal", "y": 90},
-		"locked=false,facing=west,half=lower,hinge=left,open=false":  {"model": "mubble:block/door/smb3/key/unlocked/bottom/normal", "y": 180},
-		"locked=false,facing=north,half=lower,hinge=left,open=false": {"model": "mubble:block/door/smb3/key/unlocked/bottom/normal", "y": 270},
-		"locked=false,facing=east,half=lower,hinge=right,open=false":  {"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge"},
-		"locked=false,facing=south,half=lower,hinge=right,open=false": {"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge", "y": 90},
-		"locked=false,facing=west,half=lower,hinge=right,open=false":  {"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge", "y": 180},
-		"locked=false,facing=north,half=lower,hinge=right,open=false": {"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge", "y": 270},
-		"locked=false,facing=east,half=lower,hinge=left,open=true":  {"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge", "y": 90},
-		"locked=false,facing=south,half=lower,hinge=left,open=true": {"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge", "y": 180},
-		"locked=false,facing=west,half=lower,hinge=left,open=true":  {"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge", "y": 270},
-		"locked=false,facing=north,half=lower,hinge=left,open=true": {"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge"},
-		"locked=false,facing=east,half=lower,hinge=right,open=true":  {"model": "mubble:block/door/smb3/key/unlocked/bottom/normal", "y": 270},
-		"locked=false,facing=south,half=lower,hinge=right,open=true": {"model": "mubble:block/door/smb3/key/unlocked/bottom/normal"},
-		"locked=false,facing=west,half=lower,hinge=right,open=true":  {"model": "mubble:block/door/smb3/key/unlocked/bottom/normal", "y": 90},
-		"locked=false,facing=north,half=lower,hinge=right,open=true": {"model": "mubble:block/door/smb3/key/unlocked/bottom/normal", "y": 180},
-		"locked=false,facing=east,half=upper,hinge=left,open=false":  {"model": "mubble:block/door/smb3/key/unlocked/top/normal"},
-		"locked=false,facing=south,half=upper,hinge=left,open=false": {"model": "mubble:block/door/smb3/key/unlocked/top/normal", "y": 90},
-		"locked=false,facing=west,half=upper,hinge=left,open=false":  {"model": "mubble:block/door/smb3/key/unlocked/top/normal", "y": 180},
-		"locked=false,facing=north,half=upper,hinge=left,open=false": {"model": "mubble:block/door/smb3/key/unlocked/top/normal", "y": 270},
-		"locked=false,facing=east,half=upper,hinge=right,open=false":  {"model": "mubble:block/door/smb3/key/unlocked/top/hinge"},
-		"locked=false,facing=south,half=upper,hinge=right,open=false": {"model": "mubble:block/door/smb3/key/unlocked/top/hinge", "y": 90},
-		"locked=false,facing=west,half=upper,hinge=right,open=false":  {"model": "mubble:block/door/smb3/key/unlocked/top/hinge", "y": 180},
-		"locked=false,facing=north,half=upper,hinge=right,open=false": {"model": "mubble:block/door/smb3/key/unlocked/top/hinge", "y": 270},
-		"locked=false,facing=east,half=upper,hinge=left,open=true":  {"model": "mubble:block/door/smb3/key/unlocked/top/hinge", "y": 90},
-		"locked=false,facing=south,half=upper,hinge=left,open=true": {"model": "mubble:block/door/smb3/key/unlocked/top/hinge", "y": 180},
-		"locked=false,facing=west,half=upper,hinge=left,open=true":  {"model": "mubble:block/door/smb3/key/unlocked/top/hinge", "y": 270},
-		"locked=false,facing=north,half=upper,hinge=left,open=true": {"model": "mubble:block/door/smb3/key/unlocked/top/hinge"},
-		"locked=false,facing=east,half=upper,hinge=right,open=true":  {"model": "mubble:block/door/smb3/key/unlocked/top/normal", "y": 270},
-		"locked=false,facing=south,half=upper,hinge=right,open=true": {"model": "mubble:block/door/smb3/key/unlocked/top/normal"},
-		"locked=false,facing=west,half=upper,hinge=right,open=true":  {"model": "mubble:block/door/smb3/key/unlocked/top/normal", "y": 90},
-		"locked=false,facing=north,half=upper,hinge=right,open=true": {"model": "mubble:block/door/smb3/key/unlocked/top/normal", "y": 180}
+	"variants": {
+		"locked=true,facing=east,half=lower,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/normal"
+		},
+		"locked=true,facing=south,half=lower,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/normal",
+			"y": 90
+		},
+		"locked=true,facing=west,half=lower,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/normal",
+			"y": 180
+		},
+		"locked=true,facing=north,half=lower,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/normal",
+			"y": 270
+		},
+		"locked=true,facing=east,half=lower,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/hinge"
+		},
+		"locked=true,facing=south,half=lower,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/hinge",
+			"y": 90
+		},
+		"locked=true,facing=west,half=lower,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/hinge",
+			"y": 180
+		},
+		"locked=true,facing=north,half=lower,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/hinge",
+			"y": 270
+		},
+		"locked=true,facing=east,half=lower,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/hinge",
+			"y": 90
+		},
+		"locked=true,facing=south,half=lower,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/hinge",
+			"y": 180
+		},
+		"locked=true,facing=west,half=lower,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/hinge",
+			"y": 270
+		},
+		"locked=true,facing=north,half=lower,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/hinge"
+		},
+		"locked=true,facing=east,half=lower,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/normal",
+			"y": 270
+		},
+		"locked=true,facing=south,half=lower,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/normal"
+		},
+		"locked=true,facing=west,half=lower,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/normal",
+			"y": 90
+		},
+		"locked=true,facing=north,half=lower,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/bottom/normal",
+			"y": 180
+		},
+		"locked=true,facing=east,half=upper,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/top/normal"
+		},
+		"locked=true,facing=south,half=upper,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/top/normal",
+			"y": 90
+		},
+		"locked=true,facing=west,half=upper,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/top/normal",
+			"y": 180
+		},
+		"locked=true,facing=north,half=upper,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/top/normal",
+			"y": 270
+		},
+		"locked=true,facing=east,half=upper,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/top/hinge"
+		},
+		"locked=true,facing=south,half=upper,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/top/hinge",
+			"y": 90
+		},
+		"locked=true,facing=west,half=upper,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/top/hinge",
+			"y": 180
+		},
+		"locked=true,facing=north,half=upper,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/locked/top/hinge",
+			"y": 270
+		},
+		"locked=true,facing=east,half=upper,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/top/hinge",
+			"y": 90
+		},
+		"locked=true,facing=south,half=upper,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/top/hinge",
+			"y": 180
+		},
+		"locked=true,facing=west,half=upper,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/top/hinge",
+			"y": 270
+		},
+		"locked=true,facing=north,half=upper,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/top/hinge"
+		},
+		"locked=true,facing=east,half=upper,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/top/normal",
+			"y": 270
+		},
+		"locked=true,facing=south,half=upper,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/top/normal"
+		},
+		"locked=true,facing=west,half=upper,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/top/normal",
+			"y": 90
+		},
+		"locked=true,facing=north,half=upper,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/locked/top/normal",
+			"y": 180
+		},
+		"locked=false,facing=east,half=lower,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/normal"
+		},
+		"locked=false,facing=south,half=lower,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/normal",
+			"y": 90
+		},
+		"locked=false,facing=west,half=lower,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/normal",
+			"y": 180
+		},
+		"locked=false,facing=north,half=lower,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/normal",
+			"y": 270
+		},
+		"locked=false,facing=east,half=lower,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge"
+		},
+		"locked=false,facing=south,half=lower,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge",
+			"y": 90
+		},
+		"locked=false,facing=west,half=lower,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge",
+			"y": 180
+		},
+		"locked=false,facing=north,half=lower,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge",
+			"y": 270
+		},
+		"locked=false,facing=east,half=lower,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge",
+			"y": 90
+		},
+		"locked=false,facing=south,half=lower,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge",
+			"y": 180
+		},
+		"locked=false,facing=west,half=lower,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge",
+			"y": 270
+		},
+		"locked=false,facing=north,half=lower,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/hinge"
+		},
+		"locked=false,facing=east,half=lower,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/normal",
+			"y": 270
+		},
+		"locked=false,facing=south,half=lower,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/normal"
+		},
+		"locked=false,facing=west,half=lower,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/normal",
+			"y": 90
+		},
+		"locked=false,facing=north,half=lower,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/bottom/normal",
+			"y": 180
+		},
+		"locked=false,facing=east,half=upper,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/normal"
+		},
+		"locked=false,facing=south,half=upper,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/normal",
+			"y": 90
+		},
+		"locked=false,facing=west,half=upper,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/normal",
+			"y": 180
+		},
+		"locked=false,facing=north,half=upper,hinge=left,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/normal",
+			"y": 270
+		},
+		"locked=false,facing=east,half=upper,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/hinge"
+		},
+		"locked=false,facing=south,half=upper,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/hinge",
+			"y": 90
+		},
+		"locked=false,facing=west,half=upper,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/hinge",
+			"y": 180
+		},
+		"locked=false,facing=north,half=upper,hinge=right,open=false": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/hinge",
+			"y": 270
+		},
+		"locked=false,facing=east,half=upper,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/hinge",
+			"y": 90
+		},
+		"locked=false,facing=south,half=upper,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/hinge",
+			"y": 180
+		},
+		"locked=false,facing=west,half=upper,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/hinge",
+			"y": 270
+		},
+		"locked=false,facing=north,half=upper,hinge=left,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/hinge"
+		},
+		"locked=false,facing=east,half=upper,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/normal",
+			"y": 270
+		},
+		"locked=false,facing=south,half=upper,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/normal"
+		},
+		"locked=false,facing=west,half=upper,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/normal",
+			"y": 90
+		},
+		"locked=false,facing=north,half=upper,hinge=right,open=true": {
+			"model": "mubble:block/door/smb3/key/unlocked/top/normal",
+			"y": 180
+		}
 	}
 }

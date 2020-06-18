@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": {"model": "mubble:block/rotating_block/smw"}
+	"variants": {
+		"": {
+			"model": "mubble:block/rotating_block/smw"
+		}
 	}
 }

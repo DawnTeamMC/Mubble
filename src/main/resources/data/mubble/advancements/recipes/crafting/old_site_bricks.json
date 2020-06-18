@@ -1,51 +1,39 @@
 {
 	"parent": "minecraft:recipes/root",
-	"rewards":
-	{
-		"recipes":
-		[
+	"rewards": {
+		"recipes": [
 			"mubble:crafting/old_site_bricks"
 		]
 	},
-	"criteria":
-	{
-		"has_bricks":
-		{
+	"criteria": {
+		"has_bricks": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:bricks"
 					}
 				]
 			}
 		},
-		"has_cobblestone":
-		{
+		"has_cobblestone": {
 			"trigger": "minecraft:inventory_changed",
-			"conditions":
-			{
-				"items":
-				[
+			"conditions": {
+				"items": [
 					{
 						"item": "minecraft:bricks"
 					}
 				]
 			}
 		},
-		"has_the_recipe":
-		{
+		"has_the_recipe": {
 			"trigger": "minecraft:recipe_unlocked",
-			"conditions":
-			{
+			"conditions": {
 				"recipe": "mubble:crafting/old_site_bricks"
 			}
 		}
 	},
-	"requirements":
-	[
+	"requirements": [
 		[
 			"has_bricks",
 			"has_cobblestone",

@@ -21,84 +21,68 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 
-public class PresentBlockEntity extends LootableContainerBlockEntity
-{
+public class PresentBlockEntity extends LootableContainerBlockEntity {
 	private DefaultedList<ItemStack> inventory;
 	private int viewerCount;
 
-	public PresentBlockEntity()
-	{
+	public PresentBlockEntity() {
 		super(MubbleTileEntityTypes.PRESENT);
 		this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
 	}
 
 	@Override
-	public CompoundTag toTag(CompoundTag tag)
-	{
+	public CompoundTag toTag(CompoundTag tag) {
 		super.toTag(tag);
-		if (!this.serializeLootTable(tag))
-		{
+		if(!this.serializeLootTable(tag)) {
 			Inventories.toTag(tag, this.inventory);
 		}
 		return tag;
 	}
 
 	@Override
-	public void fromTag(BlockState state, CompoundTag tag)
-	{
+	public void fromTag(BlockState state, CompoundTag tag) {
 		super.fromTag(state, tag);
 		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-		if (!this.deserializeLootTable(tag))
-		{
+		if(!this.deserializeLootTable(tag)) {
 			Inventories.fromTag(tag, this.inventory);
 		}
 
 	}
 
 	@Override
-	public int size()
-	{
+	public int size() {
 		return 9 * 2;
 	}
 
-	protected DefaultedList<ItemStack> getInvStackList()
-	{
+	protected DefaultedList<ItemStack> getInvStackList() {
 		return this.inventory;
 	}
 
-	protected void setInvStackList(DefaultedList<ItemStack> list)
-	{
+	protected void setInvStackList(DefaultedList<ItemStack> list) {
 		this.inventory = list;
 	}
 
-	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory)
-	{
+	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
 		return new GenericContainerScreenHandler(ScreenHandlerType.GENERIC_9X2, syncId, playerInventory, this, 2);
 	}
 
 	@Override
-	public void clear()
-	{
+	public void clear() {
 		this.inventory.clear();
 	}
 
 	@Override
-	public void onOpen(PlayerEntity player)
-	{
-		if (!player.isSpectator())
-		{
-			if (this.viewerCount < 0)
-			{
+	public void onOpen(PlayerEntity player) {
+		if(!player.isSpectator()) {
+			if(this.viewerCount < 0) {
 				this.viewerCount = 0;
 			}
 			++this.viewerCount;
 			BlockState blockstate = this.getCachedState();
 			boolean flag1 = blockstate.get(PresentBlock.OPEN);
 			boolean flag2 = blockstate.get(PresentBlock.EMPTY);
-			if (!flag1)
-			{
-				if (!flag2)
-				{
+			if(!flag1) {
+				if(!flag2) {
 					this.playSound(blockstate, MubbleSounds.BLOCK_PRESENT_OPEN);
 				}
 				this.setOpenProperty(blockstate, true);
@@ -107,13 +91,11 @@ public class PresentBlockEntity extends LootableContainerBlockEntity
 		}
 	}
 
-	private void scheduleTick()
-	{
+	private void scheduleTick() {
 		this.world.getBlockTickScheduler().schedule(this.getPos(), this.getCachedState().getBlock(), 5);
 	}
 
-	public void tick()
-	{
+	public void tick() {
 		int i = this.pos.getX();
 		int j = this.pos.getY();
 		int k = this.pos.getZ();
@@ -122,21 +104,16 @@ public class PresentBlockEntity extends LootableContainerBlockEntity
 		boolean flag1 = blockstate.get(PresentBlock.OPEN);
 		boolean flag2 = this.isEmpty();
 		this.setEmptyProperty(blockstate, flag2);
-		if (this.viewerCount > 0)
-		{
+		if(this.viewerCount > 0) {
 			this.scheduleTick();
 		}
-		else
-		{
-			if (!(blockstate.getBlock() instanceof PresentBlock))
-			{
+		else {
+			if(!(blockstate.getBlock() instanceof PresentBlock)) {
 				this.markRemoved();
 				return;
 			}
-			if (flag1)
-			{
-				if (!flag2)
-				{
+			if(flag1) {
+				if(!flag2) {
 					this.playSound(blockstate, MubbleSounds.BLOCK_PRESENT_CLOSE);
 				}
 				this.setOpenProperty(blockstate.with(PresentBlock.EMPTY, flag2), false);
@@ -145,26 +122,21 @@ public class PresentBlockEntity extends LootableContainerBlockEntity
 	}
 
 	@Override
-	public void onClose(PlayerEntity player)
-	{
-		if (!player.isSpectator())
-		{
+	public void onClose(PlayerEntity player) {
+		if(!player.isSpectator()) {
 			--this.viewerCount;
 		}
 	}
 
-	private void setOpenProperty(BlockState state, boolean open)
-	{
+	private void setOpenProperty(BlockState state, boolean open) {
 		this.world.setBlockState(this.getPos(), state.with(PresentBlock.OPEN, Boolean.valueOf(open)), 3);
 	}
 
-	private void setEmptyProperty(BlockState state, boolean empty)
-	{
+	private void setEmptyProperty(BlockState state, boolean empty) {
 		this.world.setBlockState(this.getPos(), state.with(PresentBlock.EMPTY, Boolean.valueOf(empty)), 3);
 	}
 
-	private void playSound(BlockState state, SoundEvent sound)
-	{
+	private void playSound(BlockState state, SoundEvent sound) {
 		double d0 = (double) this.pos.getX() + 0.5D;
 		double d1 = (double) this.pos.getY() + 0.5D;
 		double d2 = (double) this.pos.getZ() + 0.5D;
@@ -172,8 +144,7 @@ public class PresentBlockEntity extends LootableContainerBlockEntity
 	}
 
 	@Override
-	protected Text getContainerName()
-	{
+	protected Text getContainerName() {
 		return new TranslatableText("container." + Mubble.MOD_ID + ".present");
 	}
 }

@@ -1,6 +1,7 @@
 {
-	"variants":
-	{
-		"": { "model": "mubble:block/lily_of_the_valley_pile" }
+	"variants": {
+		"": {
+			"model": "mubble:block/lily_of_the_valley_pile"
+		}
 	}
 }
