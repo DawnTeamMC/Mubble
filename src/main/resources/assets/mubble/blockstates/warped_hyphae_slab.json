@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/warped_hyphae_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/warped_hyphae_slab/top"
+		},
+		"type=double": {
+			"model": "minecraft:block/warped_hyphae"
+		}
+	}
+}

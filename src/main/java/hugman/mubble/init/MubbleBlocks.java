@@ -38,8 +38,9 @@ public class MubbleBlocks {
 
 	/* Templates */
 	protected static final Block.Settings pLeaves = FabricBlockSettings.of(Material.LEAVES).hardness(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque();
-	protected static final Block.Settings pWoodenButton = FabricBlockSettings.of(Material.WOOD).collidable(true).hardness(0.5F).sounds(BlockSoundGroup.WOOD);
-	protected static final Block.Settings pStoneButton = FabricBlockSettings.of(Material.STONE).collidable(true).hardness(0.5F);
+	protected static final Block.Settings pWoodenButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(true).hardness(0.5F).sounds(BlockSoundGroup.WOOD);
+	protected static final Block.Settings pStemButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(true).hardness(0.5F).sounds(BlockSoundGroup.NETHER_STEM);
+	protected static final Block.Settings pStoneButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(true).hardness(0.5F);
 
 	/* MUBBLE */
 	public static final Block OAK_VERTICAL_SLAB = register("oak_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.OAK_SLAB)), ItemGroup.BUILDING_BLOCKS, 5, 20);
@@ -90,6 +91,8 @@ public class MubbleBlocks {
 	public static final Block JUNGLE_WOOD_STAIRS = register("jungle_wood_stairs", new StairsBlock(Blocks.JUNGLE_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block ACACIA_WOOD_STAIRS = register("acacia_wood_stairs", new StairsBlock(Blocks.ACACIA_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block DARK_OAK_WOOD_STAIRS = register("dark_oak_wood_stairs", new StairsBlock(Blocks.DARK_OAK_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
+	public static final Block CRIMSON_HYPHAE_STAIRS = register("crimson_hyphae_stairs", new StairsBlock(Blocks.CRIMSON_HYPHAE), ItemGroup.BUILDING_BLOCKS);
+	public static final Block WARPED_HYPHAE_STAIRS = register("warped_hyphae_stairs", new StairsBlock(Blocks.WARPED_HYPHAE), ItemGroup.BUILDING_BLOCKS);
 
 	public static final Block OAK_WOOD_SLAB = register("oak_wood_slab", new SlabBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block SPRUCE_WOOD_SLAB = register("spruce_wood_slab", new SlabBlock(Settings.copy(Blocks.SPRUCE_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
@@ -97,6 +100,8 @@ public class MubbleBlocks {
 	public static final Block JUNGLE_WOOD_SLAB = register("jungle_wood_slab", new SlabBlock(Settings.copy(Blocks.JUNGLE_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block ACACIA_WOOD_SLAB = register("acacia_wood_slab", new SlabBlock(Settings.copy(Blocks.ACACIA_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block DARK_OAK_WOOD_SLAB = register("dark_oak_wood_slab", new SlabBlock(Settings.copy(Blocks.DARK_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
+	public static final Block CRIMSON_HYPHAE_SLAB = register("crimson_hyphae_slab", new SlabBlock(Settings.copy(Blocks.CRIMSON_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block WARPED_HYPHAE_SLAB = register("warped_hyphae_slab", new SlabBlock(Settings.copy(Blocks.WARPED_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
 
 	public static final Block OAK_WOOD_VERTICAL_SLAB = register("oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block SPRUCE_WOOD_VERTICAL_SLAB = register("spruce_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.SPRUCE_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
@@ -104,6 +109,8 @@ public class MubbleBlocks {
 	public static final Block JUNGLE_WOOD_VERTICAL_SLAB = register("jungle_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.JUNGLE_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block ACACIA_WOOD_VERTICAL_SLAB = register("acacia_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.ACACIA_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block DARK_OAK_WOOD_VERTICAL_SLAB = register("dark_oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.DARK_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
+	public static final Block CRIMSON_HYPHAE_VERTICAL_SLAB = register("crimson_hyphae_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.CRIMSON_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block WARPED_HYPHAE_VERTICAL_SLAB = register("warped_hyphae_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.WARPED_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
 
 	public static final Block OAK_WOOD_BUTTON = register("oak_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
 	public static final Block SPRUCE_WOOD_BUTTON = register("spruce_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
@@ -111,6 +118,8 @@ public class MubbleBlocks {
 	public static final Block JUNGLE_WOOD_BUTTON = register("jungle_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
 	public static final Block ACACIA_WOOD_BUTTON = register("acacia_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
 	public static final Block DARK_OAK_WOOD_BUTTON = register("dark_oak_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
+	public static final Block CRIMSON_HYPHAE_BUTTON = register("crimson_hyphae_button", new WoodButtonBlock(pStemButton), ItemGroup.REDSTONE);
+	public static final Block WARPED_HYPHAE_BUTTON = register("warped_hyphae_button", new WoodButtonBlock(pStemButton), ItemGroup.REDSTONE);
 
 	public static final Block OAK_LEAF_PILE = register("oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block SPRUCE_LEAF_PILE = register("spruce_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);

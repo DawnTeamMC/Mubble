@@ -52,6 +52,8 @@
 	"//block.mubble.jungle_wood_stairs": "Jungle Wood Stairs",
 	"//block.mubble.acacia_wood_stairs": "Acacia Wood Stairs",
 	"//block.mubble.dark_oak_wood_stairs": "Dark Oak Wood Stairs",
+	"//block.mubble.crimson_hyphae_stairs": "Crimson Hyphae Stairs",
+	"//block.mubble.warped_hyphae_stairs": "Warped Hyphae Stairs",
 
 	"//block.mubble.oak_wood_slab": "Oak Wood Slab",
 	"//block.mubble.spruce_wood_slab": "Spruce Wood Slab",
@@ -59,6 +61,8 @@
 	"//block.mubble.jungle_wood_slab": "Jungle Wood Slab",
 	"//block.mubble.acacia_wood_slab": "Acacia Wood Slab",
 	"//block.mubble.dark_oak_wood_slab": "Dark Oak Wood Slab",
+	"//block.mubble.crimson_hyphae_slab": "Crimson Hyphae Slab",
+	"//block.mubble.warped_hyphae_slab": "Warped Hyphae Slab",
 
 	"//block.mubble.oak_wood_vertical_slab": "Oak Wood Vertical Slab",
 	"//block.mubble.spruce_wood_vertical_slab": "Spruce Wood Vertical Slab",
@@ -66,6 +70,8 @@
 	"//block.mubble.jungle_wood_vertical_slab": "Jungle Wood Vertical Slab",
 	"//block.mubble.acacia_wood_vertical_slab": "Acacia Wood Vertical Slab",
 	"//block.mubble.dark_oak_wood_vertical_slab": "Dark Oak Wood Vertical Slab",
+	"//block.mubble.crimson_hyphae_vertical_slab": "Crimson Hyphae Vertical Slab",
+	"//block.mubble.warped_hyphae_vertical_slab": "Warped Hyphae Vertical Slab",
 
 	"//block.mubble.oak_wood_button": "Oak Wood Button",
 	"//block.mubble.spruce_wood_button": "Spruce Wood Button",
@@ -73,6 +79,8 @@
 	"//block.mubble.jungle_wood_button": "Jungle Wood Button",
 	"//block.mubble.acacia_wood_button": "Acacia Wood Button",
 	"//block.mubble.dark_oak_wood_button": "Dark Oak Wood Button",
+	"//block.mubble.crimson_hyphae_button": "Crimson Hyphae Button",
+	"//block.mubble.warped_hyphae_button": "Warped Hyphae Button",
 
 	"//block.mubble.oak_leaf_pile": "Oak Leaves Pile",
 	"//block.mubble.spruce_leaf_pile": "Spruce Leaves Pile",

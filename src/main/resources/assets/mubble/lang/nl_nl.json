@@ -52,6 +52,8 @@
 	"block.mubble.jungle_wood_stairs": "Oerwoudhouten trap",
 	"block.mubble.acacia_wood_stairs": "Acaciahouten trap",
 	"block.mubble.dark_oak_wood_stairs": "Donkereikenhouten trap",
+	"//block.mubble.crimson_hyphae_stairs": "Crimson Hyphae Stairs",
+	"//block.mubble.warped_hyphae_stairs": "Warped Hyphae Stairs",
 
 	"block.mubble.oak_wood_slab": "Eikenhouten plaat",
 	"block.mubble.spruce_wood_slab": "Sparrehouten plaat",
@@ -59,6 +61,8 @@
 	"block.mubble.jungle_wood_slab": "Oerwoudhouten plaat",
 	"block.mubble.acacia_wood_slab": "Acaciahouten plaat",
 	"block.mubble.dark_oak_wood_slab": "Donkereikenhouten plaat",
+	"//block.mubble.crimson_hyphae_slab": "Crimson Hyphae Slab",
+	"//block.mubble.warped_hyphae_slab": "Warped Hyphae Slab",
 
 	"block.mubble.oak_wood_vertical_slab": "Eikenhouten plaat verticaal",
 	"block.mubble.spruce_wood_vertical_slab": "Sparrehouten plaat verticaal",
@@ -66,6 +70,8 @@
 	"block.mubble.jungle_wood_vertical_slab": "Oerwoudhouten plaat verticaal",
 	"block.mubble.acacia_wood_vertical_slab": "Acaciahouten plaat verticaal",
 	"block.mubble.dark_oak_wood_vertical_slab": "Donkereikenhouten plaat verticaal",
+	"//block.mubble.crimson_hyphae_vertical_slab": "Crimson Hyphae Vertical Slab",
+	"//block.mubble.warped_hyphae_vertical_slab": "Warped Hyphae Vertical Slab",
 
 	"block.mubble.oak_wood_button": "Eikenhouten knop",
 	"block.mubble.spruce_wood_button": "Sparrehouten knop",
@@ -73,6 +79,8 @@
 	"block.mubble.jungle_wood_button": "Oerwoudhouten knop",
 	"block.mubble.acacia_wood_button": "Acaciahouten knop",
 	"block.mubble.dark_oak_wood_button": "Donkereikenhouten knop",
+	"//block.mubble.crimson_hyphae_button": "Crimson Hyphae Button",
+	"//block.mubble.warped_hyphae_button": "Warped Hyphae Button",
 
 	"block.mubble.oak_leaf_pile": "Eikenbladeren hoop",
 	"block.mubble.spruce_leaf_pile": "Sparrebladeren hoop",

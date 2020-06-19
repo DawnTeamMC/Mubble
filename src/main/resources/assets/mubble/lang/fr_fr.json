@@ -53,12 +53,16 @@
 	"block.mubble.acacia_wood_stairs": "Escalier en bois d'acacia",
 	"block.mubble.dark_oak_wood_stairs": "Escalier en bois de chêne noir",
 	"block.mubble.oak_wood_slab": "Dalle en bois de chêne",
+	"//block.mubble.crimson_hyphae_stairs": "Crimson Hyphae Stairs",
+	"//block.mubble.warped_hyphae_stairs": "Warped Hyphae Stairs",
 
 	"block.mubble.spruce_wood_slab": "Dalle en bois de sapin",
 	"block.mubble.birch_wood_slab": "Dalle en bois de bouleau",
 	"block.mubble.jungle_wood_slab": "Dalle en bois d'acajou",
 	"block.mubble.acacia_wood_slab": "Dalle en bois d'acacia",
 	"block.mubble.dark_oak_wood_slab": "Dalle en bois de chêne noir",
+	"//block.mubble.crimson_hyphae_slab": "Crimson Hyphae Slab",
+	"//block.mubble.warped_hyphae_slab": "Warped Hyphae Slab",
 
 	"block.mubble.oak_wood_vertical_slab": "Dalle verticale en bois de chêne",
 	"block.mubble.spruce_wood_vertical_slab": "Dalle verticale en bois de sapin",
@@ -66,6 +70,8 @@
 	"block.mubble.jungle_wood_vertical_slab": "Dalle verticale en bois d'acajou",
 	"block.mubble.acacia_wood_vertical_slab": "Dalle verticale en bois d'acacia",
 	"block.mubble.dark_oak_wood_vertical_slab": "Dalle verticale en bois de chêne noir",
+	"//block.mubble.crimson_hyphae_vertical_slab": "Crimson Hyphae Vertical Slab",
+	"//block.mubble.warped_hyphae_vertical_slab": "Warped Hyphae Vertical Slab",
 
 	"block.mubble.dark_oak_wood_button": "Bouton en bois de chêne",
 	"block.mubble.spruce_wood_button": "Bouton en bois de sapin",
@@ -73,6 +79,8 @@
 	"block.mubble.jungle_wood_button": "Bouton en bois d'acajou",
 	"block.mubble.acacia_wood_button": "Bouton en bois d'acacia",
 	"block.mubble.dark_oak_wood_button": "Bouton en bois de chêne noir",
+	"//block.mubble.crimson_hyphae_button": "Crimson Hyphae Button",
+	"//block.mubble.warped_hyphae_button": "Warped Hyphae Button",
 
 	"block.mubble.oak_leaf_pile": "Pile de feuilles de chêne",
 	"block.mubble.spruce_leaf_pile": "Pile de feuilles de sapin",
