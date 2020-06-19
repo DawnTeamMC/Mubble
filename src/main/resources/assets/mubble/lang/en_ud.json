@@ -2,7 +2,7 @@
 	"comment": "CREATIVE TABS",
 	"itemGroup.mubble.costumes": "sǝɯnʇsoƆ",
 	"//itemGroup.mubble.instruments": "Instruments",
-	
+
 	"comment": "BLOCKS",
 	"//block.mubble.oak_vertical_slab": "Oak Vertical Slab",
 	"//block.mubble.spruce_vertical_slab": "Spruce Vertical Slab",
@@ -10,6 +10,8 @@
 	"//block.mubble.jungle_vertical_slab": "Jungle Vertical Slab",
 	"//block.mubble.acacia_vertical_slab": "Acacia Vertical Slab",
 	"//block.mubble.dark_oak_vertical_slab": "Dark Oak Vertical Slab",
+	"//block.mubble.crimson_vertical_slab": "Crimson Vertical Slab",
+	"//block.mubble.warped_vertical_slab": "Warped Vertical Slab",
 	"//block.mubble.stone_vertical_slab": "Stone Vertical Slab",
 	"//block.mubble.smooth_stone_vertical_slab": "Smooth Stone Vertical Slab",
 	"//block.mubble.cobblestone_vertical_slab": "Cobblestone Vertical Slab",
@@ -38,6 +40,9 @@
 	"//block.mubble.prismarine_vertical_slab": "Prismarine Vertical Slab",
 	"//block.mubble.prismarine_brick_vertical_slab": "Prismarine Brick Vertical Slab",
 	"//block.mubble.dark_prismarine_vertical_slab": "Dark Prismarine Vertical Slab",
+	"//block.mubble.blackstone_vertical_slab": "Blackstone Vertical Slab",
+	"//block.mubble.polished_blackstone_brick_vertical_slab": "Polished Blackstone Brick Vertical Slab",
+	"//block.mubble.polished_blackstone_vertical_slab": "Polished Blackstone Vertical Slab",
 
 	"//block.mubble.dark_prismarine_wall": "Dark Prismarine Wall",
 
@@ -1066,7 +1071,7 @@
 	"block.mubble.potted_scarlet_mushroom": "ɯooɹɥsnW ʇǝlɹɐɔS pǝʇʇoԀ",
 	"block.mubble.potted_scarlet_orchid": "pᴉɥɔɹO ʇǝlɹɐɔS pǝʇʇoԀ",
 	"block.mubble.potted_potato_flower": "ɹǝʍolℲ oʇɐʇoԀ pǝʇʇoԀ",
-	
+
 	"comment": "ITEMS",
 	"item.mubble.baguette": "ǝʇʇǝnƃɐq",
 	"item.mubble.vanadium": "ɯnᴉpɐuɐΛ",
@@ -1145,7 +1150,7 @@
 	"//item.mubble.goomba_spawn_egg": "Goomba Spawn Egg",
 	"item.mubble.toad_spawn_egg": "ƃƃƎ uʍɐdS pɐo┴",
 	"//item.mubble.zombie_cowman_spawn_egg": "Zombie Cowman Spawn Egg",
-	
+
 	"comment": "COSTUMES",
 	"item.mubble.headphones": "sǝuoɥdpɐǝH",
 
@@ -1187,33 +1192,33 @@
 	"item.mubble.broque_monsieur_head": "pɐǝH s,ɹnǝᴉsuoW ǝnboɹq",
 
 	"item.mubble.bandana": "ɐuɐpuɐq",
-	
+
 	"//item.mubble.pikachu_ears": "Pikachu Ears",
 	"item.mubble.snorlax_hat": "ʇɐH xɐlɹouS",
-	
+
 	"item.mubble.top_hat": "ʇɐH do┴",
-	
+
 	"item.mubble.ralsei_hat": "ʇɐH s,ᴉǝslɐɹ",
 	"item.mubble.king_round_mask": "ʞsɐW punoɹ ƃuᴉʞ",
-	
+
 	"//item.mubble.kid_hat": "Kid's Hat",
-	
+
 	"item.mubble.baldi_head": "pɐǝH s,ᴉplɐq",
-	
+
 	"//item.mubble.guardian_mask": "Guardian's Mask",
-	
+
 	"item.mubble.mayro_cap": "dɐƆ s,oɹʎɐW",
 	"item.mubble.noteblock_head": "pɐǝH s,ʞɔolᗺǝʇoN",
-	
+
 	"comment": "ENCHANTMENTS",
 	"//enchantment.mubble.telekinesis": "Telekinesis",
 	"//enchantment.mubble.ignorance_curse": "Curse of Ignorance",
-	
+
 	"comment": "CONTAINERS",
 	"//container.mubble.placer": "Placer",
 	"//container.mubble.timeswap_table": "Timeswap Table",
 	"//container.mubble.present": "Present",
-	
+
 	"comment": "ENTITIES",
 	"//entity.mubble.duck": "Duck",
 	"//entity.mubble.zombie_cowman": "Zombie Cowman",
@@ -1225,11 +1230,11 @@
 	"//entity.mubble.fireball": "Fireball",
 	"//entity.mubble.iceball": "Iceball",
 	"//entity.mubble.kirby_ball": "Kirby Ball",
-	
+
 	"comment": "EFFECTS",
 	"//effect.mubble.heaviness": "Heaviness",
 	"//effect.mubble.hiccup": "Hiccup",
-	
+
 	"comment": "BIOMES",
 	"//biome.mubble.pumpkin_pastures": "Pumpkin Pastures",
 	"biome.mubble.pink_cherry_oak_forest": "ʇsǝɹoℲ ʞɐO ʎɹɹǝɥƆ ʞuᴉԀ",
@@ -1241,7 +1246,7 @@
 	"//biome.mubble.protanopian_gallery": "Protanopian Gallery",
 	"//biome.mubble.press_garden": "Press Garden",
 	"biome.mubble.scarlet_forest": "ʇsǝɹoℲ ʇǝlɹɐɔS",
-	
+
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.question_block.loot.power_up": "dn ɹǝʍod sdoɹp ʞɔolᗺ ¿",
 	"subtitles.mubble.block.question_block.loot.coin": "uᴉoɔ sdoɹp ʞɔolᗺ ¿",
@@ -1275,7 +1280,7 @@
 	"//subtitles.mubble.entity.zombie_cowman.hurt": "Zombie Cowman hurts",
 	"//subtitles.mubble.entity.zombie_cowman.angry": "Zombie Cowman angers",
 	"//subtitles.mubble.entity.zombie_cowman.death": "Zombie Cowman dies",
-	
+
 	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "ǝlqqnW",
 	"advancements.mubble.root.description": "ʎǝuɹnoɾ ʍǝu puɐɹƃ ∀",
@@ -1295,7 +1300,7 @@
 	"//advancements.mubble.get_timeswap_table.description": "Craft a Timeswap Table",
 	"advancements.mubble.get_tetris_block.title": "pǝʇɔǝuuoƆ ll∀ s,ʇI",
 	"advancements.mubble.get_tetris_block.description": "ʞɔolᗺ sᴉɹʇǝ┴ ɐ uo puɐɥ ɹnoʎ ʇǝפ",
-	
+
 	"comment": "COMMANDS",
 	"//commands.foodbar.add.food.success.single": "Gave %s food points to %s",
 	"//commands.foodbar.add.food.success.multiple": "Gave %s food points to %s entities",
@@ -1313,7 +1318,7 @@
 	"//commands.motion.add.success.multiple": "Added %s, %s, %s to the motion of %s entities",
 	"//commands.motion.set.success.single": "Set %s, %s, %s to the motion of %s",
 	"//commands.motion.set.success.multiple": "Set %s, %s, %s to the motion of %s entities",
-	
+
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "¡§6lǝxᴉԀ§r 'noʎ ɹoɟ s,ʇɐɥ┴",
 	"item.mubble.noteblock_head.secret_status": "¡§6uɐʌƎ§r 'pɐǝɥ ɹnoʎ uo sᴉɥʇ pɐɥ ʎpɐǝɹlɐ noʎ ʇɥƃnoɥʇ I ¡ʎǝH",

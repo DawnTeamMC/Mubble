@@ -5,7 +5,6 @@ import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.objects.entity.DuckEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.Category;
 import net.minecraft.world.gen.GenerationStep;

@@ -10,6 +10,8 @@
 	"block.mubble.jungle_vertical_slab": "Oerwoudhouten plaat verticaal",
 	"block.mubble.acacia_vertical_slab": "Acaciahouten plaat verticaal",
 	"block.mubble.dark_oak_vertical_slab": "Donkereikenhouten plaat verticaal",
+	"//block.mubble.crimson_vertical_slab": "Crimson Vertical Slab",
+	"//block.mubble.warped_vertical_slab": "Warped Vertical Slab",
 	"block.mubble.stone_vertical_slab": "Stenen plaat verticaal",
 	"block.mubble.smooth_stone_vertical_slab": "Gladde stenen plaat verticaal",
 	"block.mubble.cobblestone_vertical_slab": "kiezelstenen plaat verticaal",
@@ -38,6 +40,9 @@
 	"block.mubble.prismarine_vertical_slab": "Prismarienplaat verticaal",
 	"block.mubble.prismarine_brick_vertical_slab": "Prismarienblokstenenplaat verticaal",
 	"block.mubble.dark_prismarine_vertical_slab": "Donkerprismarienplaat verticaal",
+	"//block.mubble.blackstone_vertical_slab": "Blackstone Vertical Slab",
+	"//block.mubble.polished_blackstone_brick_vertical_slab": "Polished Blackstone Brick Vertical Slab",
+	"//block.mubble.polished_blackstone_vertical_slab": "Polished Blackstone Vertical Slab",
 
 	"block.mubble.dark_prismarine_wall": "Donkereprismarienmuur",
 

@@ -10,6 +10,8 @@
 	"block.mubble.jungle_vertical_slab": "Jungle Vertical Slab",
 	"block.mubble.acacia_vertical_slab": "Acacia Vertical Slab",
 	"block.mubble.dark_oak_vertical_slab": "Dark Oak Vertical Slab",
+	"block.mubble.crimson_vertical_slab": "Crimson Vertical Slab",
+	"block.mubble.warped_vertical_slab": "Warped Vertical Slab",
 	"block.mubble.stone_vertical_slab": "Stone Vertical Slab",
 	"block.mubble.smooth_stone_vertical_slab": "Smooth Stone Vertical Slab",
 	"block.mubble.cobblestone_vertical_slab": "Cobblestone Vertical Slab",
@@ -38,6 +40,9 @@
 	"block.mubble.prismarine_vertical_slab": "Prismarine Vertical Slab",
 	"block.mubble.prismarine_brick_vertical_slab": "Prismarine Brick Vertical Slab",
 	"block.mubble.dark_prismarine_vertical_slab": "Dark Prismarine Vertical Slab",
+	"block.mubble.blackstone_vertical_slab": "Blackstone Vertical Slab",
+	"block.mubble.polished_blackstone_brick_vertical_slab": "Polished Blackstone Brick Vertical Slab",
+	"block.mubble.polished_blackstone_vertical_slab": "Polished Blackstone Vertical Slab",
 
 	"block.mubble.dark_prismarine_wall": "Dark Prismarine Wall",
 
@@ -101,7 +106,7 @@
 	"block.mubble.andesite_brick_slab": "Andesite Brick Slab",
 	"block.mubble.andesite_brick_vertical_slab": "Andesite Brick Vertical Slab",
 	"block.mubble.andesite_brick_wall": "Andesite Brick Wall",
-	
+
 	"block.mubble.sandstone_bricks": "Sandstone Bricks",
 	"block.mubble.sandstone_brick_stairs": "Sandstone Brick Stairs",
 	"block.mubble.sandstone_brick_slab": "Sandstone Brick Slab",

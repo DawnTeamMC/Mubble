@@ -2,7 +2,7 @@
 	"comment": "CREATIVE TABS",
 	"itemGroup.mubble.costumes": "Trajes",
 	"itemGroup.mubble.instruments": "Instrumentos",
-	
+
 	"comment": "BLOCKS",
 	"block.mubble.oak_vertical_slab": "Laje Vertical de Carvalho",
 	"block.mubble.spruce_vertical_slab": "Laje Vertical de Pinheiro",
@@ -10,6 +10,8 @@
 	"block.mubble.jungle_vertical_slab": "Laje Vertical de Selva",
 	"block.mubble.acacia_vertical_slab": "Laje Vertical de Acácia",
 	"block.mubble.dark_oak_vertical_slab": "Laje Vertical de Carvalho Escuro",
+	"//block.mubble.crimson_vertical_slab": "Crimson Vertical Slab",
+	"//block.mubble.warped_vertical_slab": "Warped Vertical Slab",
 	"block.mubble.stone_vertical_slab": "Laje Vertical de Pedra",
 	"block.mubble.smooth_stone_vertical_slab": "Laje Vertical de Pedra Lisa",
 	"block.mubble.cobblestone_vertical_slab": "Laje Vertical de Pedregulho",
@@ -38,6 +40,9 @@
 	"block.mubble.prismarine_vertical_slab": "Laje Vertical de Prismarino",
 	"block.mubble.prismarine_brick_vertical_slab": "Laje Vertical de Tijolos de Prismarino",
 	"block.mubble.dark_prismarine_vertical_slab": "Laje Vertical de Prismarino Escuro",
+	"//block.mubble.blackstone_vertical_slab": "Blackstone Vertical Slab",
+	"//block.mubble.polished_blackstone_brick_vertical_slab": "Polished Blackstone Brick Vertical Slab",
+	"//block.mubble.polished_blackstone_vertical_slab": "Polished Blackstone Vertical Slab",
 
 	"block.mubble.dark_prismarine_wall": "Muro de Prismarino Escuro",
 
@@ -179,7 +184,7 @@
 	"block.mubble.autumn_birch_sapling": "Muda de Eucalipto de Outono",
 	"block.mubble.autumn_birch_leaves": "Folhas de Eucalipto de Outono",
 	"block.mubble.autumn_birch_leaf_pile": "Tapete de Folhas de Eucalipto de Outono",
-	
+
 	"block.mubble.cherry_oak_planks": "Tábuas de Carvalho Cereja",
 	"block.mubble.pink_cherry_oak_sapling": "Muda de Carvalho Cereja Rosa",
 	"block.mubble.white_cherry_oak_sapling": "Muda de Carvalho Cereja Branca",
@@ -1066,7 +1071,7 @@
 	"block.mubble.potted_scarlet_mushroom": "Vaso de Cogumelo Escarlate",
 	"block.mubble.potted_scarlet_orchid": "Vaso de Orquidea Escarlate",
 	"block.mubble.potted_potato_flower": "Vaso de Flor de Batata",
-	
+
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.vanadium": "Vanadium",
@@ -1145,7 +1150,7 @@
 	"item.mubble.goomba_spawn_egg": "Ovo de Gerar Goomba",
 	"item.mubble.toad_spawn_egg": "Ovo de Gerar Toad",
 	"item.mubble.zombie_cowman_spawn_egg": "Ovo de Gerar Vaqueiro Zumbi",
-	
+
 	"comment": "COSTUMES",
 	"item.mubble.headphones": "Fones de Ouvido",
 
@@ -1204,16 +1209,16 @@
 
 	"item.mubble.mayro_cap": "Boné de Mayro",
 	"item.mubble.noteblock_head": "Cabeça de Noteblock",
-	
+
 	"comment": "ENCHANTMENTS",
 	"enchantment.mubble.telekinesis": "Telecinese",
 	"//enchantment.mubble.ignorance_curse": "Curse of Ignorance",
-	
+
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Dispensador",
 	"container.mubble.timeswap_table": "Mesa Troca-Tempo",
 	"container.mubble.present": "Presente",
-	
+
 	"comment": "ENTITIES",
 	"entity.mubble.duck": "Pato",
 	"entity.mubble.zombie_cowman": "Vaqueiro Zumbi",
@@ -1225,11 +1230,11 @@
 	"entity.mubble.fireball": "Bola-de-Fogo",
 	"entity.mubble.iceball": "Bola-de-Gelo",
 	"entity.mubble.kirby_ball": "Kirby Ball",
-	
+
 	"comment": "EFFECTS",
 	"//effect.mubble.heaviness": "Heaviness",
 	"//effect.mubble.hiccup": "Hiccup",
-	
+
 	"comment": "BIOMES",
 	"biome.mubble.pumpkin_pastures": "Pastagens de Abóbora",
 	"biome.mubble.pink_cherry_oak_forest": "Floresta de Carvalho Cereja Rosa",
@@ -1241,7 +1246,7 @@
 	"//biome.mubble.protanopian_gallery": "Protanopian Gallery",
 	"biome.mubble.press_garden": "Press Garden",
 	"biome.mubble.scarlet_forest": "Floresta de Escarlate",
-	
+
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.question_block.loot.power_up": "Bloco de ? dropou um power up",
 	"subtitles.mubble.block.question_block.loot.coin": "Bloco de ? dropa uma moeda",
@@ -1275,7 +1280,7 @@
 	"subtitles.mubble.entity.zombie_cowman.hurt": "Vaqueiro Zumbi sente dor",
 	"subtitles.mubble.entity.zombie_cowman.angry": "Vaqueiro Zumbi se enfurece",
 	"subtitles.mubble.entity.zombie_cowman.death": "Vaqueiro Zumbi morre",
-	
+
 	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "Uma grande nova jornada",
@@ -1295,7 +1300,7 @@
 	"advancements.mubble.get_timeswap_table.description": "Craftou uma Mesa de Troca-Tempo",
 	"advancements.mubble.get_tetris_block.title": "Está Tudo Conectado",
 	"advancements.mubble.get_tetris_block.description": "Definiu em sua mão um Bloco de Tetris",
-	
+
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Deu %s pontos de comida para %s",
 	"commands.foodbar.add.food.success.multiple": "Deu %s pontos de comida para %s entidades",
@@ -1313,7 +1318,7 @@
 	"commands.motion.add.success.multiple": "Adicionado %s, %s, %s ao movimente de %s entidades",
 	"commands.motion.set.success.single": "Definiu %s, %s, %s para o movimento de %s",
 	"commands.motion.set.success.multiple": "Definiu %s, %s, %s para o movimento de %s entidades",
-	
+
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "Aquilo é para você, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Oi! Eu pensei que você já tinha isso em sua cabeça, §6Evan§r!",

@@ -10,6 +10,8 @@
 	"block.mubble.jungle_vertical_slab": "Dalle verticale d'acajou",
 	"block.mubble.acacia_vertical_slab": "Dalle verticale d'acacia",
 	"block.mubble.dark_oak_vertical_slab": "Dalle verticale de chêne noir",
+	"block.mubble.crimson_vertical_slab": "Dalle verticale carmin",
+	"block.mubble.warped_vertical_slab": "Dalle verticale biscornue",
 	"block.mubble.stone_vertical_slab": "Dalle verticale de pierre",
 	"block.mubble.smooth_stone_vertical_slab": "Dalle verticale de roche lisse",
 	"block.mubble.cobblestone_vertical_slab": "Dalle verticale en pierres",
@@ -38,6 +40,9 @@
 	"block.mubble.prismarine_vertical_slab": "Dalle verticale de prismarine",
 	"block.mubble.prismarine_brick_vertical_slab": "Dalle verticale de prismarine taillée",
 	"block.mubble.dark_prismarine_vertical_slab": "Dalle verticale de prismarine sombre",
+	"block.mubble.blackstone_vertical_slab": "Dalle verticale de roche noire",
+	"block.mubble.polished_blackstone_brick_vertical_slab": "Dalle verticale en pierre noire taillée",
+	"block.mubble.polished_blackstone_vertical_slab": "Dalle verticale en pierre noire",
 
 	"block.mubble.dark_prismarine_wall": "Muret de prismarine sombre",
 
@@ -1313,7 +1318,7 @@
 	"commands.motion.add.success.multiple": "Ajout des valeurs %s, %s, %s au vecteur de mouvement de %s entités",
 	"commands.motion.set.success.single": "Valeurs %s, %s, %s attribuées au vecteur de mouvement de %s",
 	"commands.motion.set.success.multiple": "Valeurs %s, %s, %s attribuées au vecteur de mouvement de %s entités",
-	
+
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "C'est pour toi, §6Pixel§r !",
 	"item.mubble.noteblock_head.secret_status": "Hé ! Je croyais que tu avais déjà ça sur la tête, §6Evan§r !",

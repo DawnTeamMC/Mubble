@@ -2,7 +2,7 @@
 	"comment": "CREATIVE TABS",
 	"itemGroup.mubble.costumes": "Kostüme",
 	"itemGroup.mubble.instruments": "Instrumente",
-	
+
 	"comment": "BLOCKS",
 	"block.mubble.oak_vertical_slab": "Senkrechte Eichenholzstufe",
 	"block.mubble.spruce_vertical_slab": "Senkrechte Fichtenholzstufe",
@@ -10,6 +10,8 @@
 	"block.mubble.jungle_vertical_slab": "Senkrechte Tropenholzstufe",
 	"block.mubble.acacia_vertical_slab": "Senkrechte Akzienholzstufe",
 	"block.mubble.dark_oak_vertical_slab": "Senkrechte Schwarzeichenholzstufe",
+	"//block.mubble.crimson_vertical_slab": "Crimson Vertical Slab",
+	"//block.mubble.warped_vertical_slab": "Warped Vertical Slab",
 	"block.mubble.stone_vertical_slab": "Senkrechte Steinstufe",
 	"block.mubble.smooth_stone_vertical_slab": "Senkrechte Glatte Steinstufe",
 	"block.mubble.cobblestone_vertical_slab": "Senkrechte Bruchsteinstufe",
@@ -38,6 +40,9 @@
 	"block.mubble.prismarine_vertical_slab": "Senkrechte Prismarinstufe",
 	"block.mubble.prismarine_brick_vertical_slab": "Senkrechte Prismarinziegelstufe",
 	"block.mubble.dark_prismarine_vertical_slab": "Senkrechte Dunkle Prismarinstufe",
+	"//block.mubble.blackstone_vertical_slab": "Blackstone Vertical Slab",
+	"//block.mubble.polished_blackstone_brick_vertical_slab": "Polished Blackstone Brick Vertical Slab",
+	"//block.mubble.polished_blackstone_vertical_slab": "Polished Blackstone Vertical Slab",
 
 	"block.mubble.dark_prismarine_wall": "Dunkelprismarinmauer",
 
@@ -1066,7 +1071,7 @@
 	"block.mubble.potted_scarlet_mushroom": "Eingetopfter Scharlachpilz",
 	"block.mubble.potted_scarlet_orchid": "Eingetopfte Scharlachrote Orchidee",
 	"block.mubble.potted_potato_flower": "Eingetopfte Kartoffelblume",
-	
+
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Stangenweißbrot",
 	"item.mubble.vanadium": "Vanadium",
@@ -1145,7 +1150,7 @@
 	"item.mubble.goomba_spawn_egg": "Goomba-Spawn-Ei",
 	"item.mubble.toad_spawn_egg": "Toad-Spawn-Ei",
 	"item.mubble.zombie_cowman_spawn_egg": "Kuhzombie-Spawn-Ei",
-	
+
 	"comment": "COSTUMES",
 	"item.mubble.headphones": "Kopfhörer",
 
@@ -1204,16 +1209,16 @@
 
 	"item.mubble.mayro_cap": "Mayros Mütze",
 	"item.mubble.noteblock_head": "Notenblocks Kopf",
-	
+
 	"comment": "ENCHANTMENTS",
 	"enchantment.mubble.telekinesis": "Telekinese",
 	"//enchantment.mubble.ignorance_curse": "Curse of Ignorance",
-	
+
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Platzierer",
 	"container.mubble.timeswap_table": "Zeitvertauschungstisch",
 	"container.mubble.present": "Geschenk",
-	
+
 	"comment": "ENTITIES",
 	"//entity.mubble.duck": "Duck",
 	"entity.mubble.zombie_cowman": "Kuhzombie",
@@ -1225,11 +1230,11 @@
 	"//entity.mubble.fireball": "Fireball",
 	"//entity.mubble.iceball": "Iceball",
 	"//entity.mubble.kirby_ball": "Kirby Ball",
-	
+
 	"comment": "EFFECTS",
 	"effect.mubble.heaviness": "Schwere",
 	"effect.mubble.hiccup": "Schluckauf",
-	
+
 	"comment": "BIOMES",
 	"biome.mubble.pumpkin_pastures": "Kürbisweiden",
 	"biome.mubble.pink_cherry_oak_forest": "Rosa Kirscheichenwald",
@@ -1241,7 +1246,7 @@
 	"//biome.mubble.protanopian_gallery": "Protanopian Gallery",
 	"biome.mubble.press_garden": "Press Garden",
 	"biome.mubble.scarlet_forest": "Scharlachwald",
-	
+
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.question_block.loot.power_up": "?-Block gibt Power-Up",
 	"subtitles.mubble.block.question_block.loot.coin": "?-Block gibt Münze",
@@ -1275,7 +1280,7 @@
 	"subtitles.mubble.entity.zombie_cowman.hurt": "Kuhzombie nimmt Schaden",
 	"subtitles.mubble.entity.zombie_cowman.angry": "Kuhzombie ist verärgert",
 	"subtitles.mubble.entity.zombie_cowman.death": "Kuhzombie stirbt",
-	
+
 	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "Eine großartige neue Reise",
@@ -1295,7 +1300,7 @@
 	"advancements.mubble.get_timeswap_table.description": "Stelle einen Zeitvertauschungstisch her",
 	"advancements.mubble.get_tetris_block.title": "Es Ist Alles Verbunden",
 	"advancements.mubble.get_tetris_block.description": "Halte deine Hand auf den Tetris-Block",
-	
+
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Gebe %s Nahrungspunkt(e) an %s",
 	"commands.foodbar.add.food.success.multiple": "Gebe %s Nahrungspunkt(e) an %s Wesen",
@@ -1313,7 +1318,7 @@
 	"//commands.motion.add.success.multiple": "Added %s, %s, %s to the motion of %s entities",
 	"//commands.motion.set.success.single": "Set %s, %s, %s to the motion of %s",
 	"//commands.motion.set.success.multiple": "Set %s, %s, %s to the motion of %s entities",
-	
+
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "Das ist für dich, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! Ich dachte, du hättest das schon auf dem Kopf, §6Evan§r!",

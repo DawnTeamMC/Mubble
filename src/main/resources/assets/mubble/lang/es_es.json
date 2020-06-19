@@ -10,6 +10,8 @@
 	"//block.mubble.jungle_vertical_slab": "Jungle Vertical Slab",
 	"//block.mubble.acacia_vertical_slab": "Acacia Vertical Slab",
 	"//block.mubble.dark_oak_vertical_slab": "Dark Oak Vertical Slab",
+	"//block.mubble.crimson_vertical_slab": "Crimson Vertical Slab",
+	"//block.mubble.warped_vertical_slab": "Warped Vertical Slab",
 	"//block.mubble.stone_vertical_slab": "Stone Vertical Slab",
 	"//block.mubble.smooth_stone_vertical_slab": "Smooth Stone Vertical Slab",
 	"//block.mubble.cobblestone_vertical_slab": "Cobblestone Vertical Slab",
@@ -38,6 +40,9 @@
 	"//block.mubble.prismarine_vertical_slab": "Prismarine Vertical Slab",
 	"//block.mubble.prismarine_brick_vertical_slab": "Prismarine Brick Vertical Slab",
 	"//block.mubble.dark_prismarine_vertical_slab": "Dark Prismarine Vertical Slab",
+	"//block.mubble.blackstone_vertical_slab": "Blackstone Vertical Slab",
+	"//block.mubble.polished_blackstone_brick_vertical_slab": "Polished Blackstone Brick Vertical Slab",
+	"//block.mubble.polished_blackstone_vertical_slab": "Polished Blackstone Vertical Slab",
 
 	"//block.mubble.dark_prismarine_wall": "Dark Prismarine Wall",
 
@@ -1201,7 +1206,7 @@
 	"//item.mubble.baldi_head": "<newline>",
 
 	"//item.mubble.guardian_mask": "Guardian's Mask",
-	
+
 	"item.mubble.mayro_cap": "Gorra de Mayro",
 	"item.mubble.noteblock_head": "Cabeza de Noteblock",
 
