@@ -56,7 +56,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
 		if(world.isClient) {
 			return ActionResult.SUCCESS;
 		}
-		if(!world.isClient) {
+		else {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if(blockEntity instanceof PresentBlockEntity) {
 				player.openHandledScreen((PresentBlockEntity) blockEntity);

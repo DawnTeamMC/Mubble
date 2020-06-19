@@ -32,11 +32,14 @@ public class ItemStackMixin {
 	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "appendEnchantments"))
 	public void hideEnchantments(List<Text> tooltip, ListTag enchantments, PlayerEntity playerEntity, TooltipContext context) {
 		ItemStack stack = (ItemStack) (Object) this;
+		/*
 		if(!playerEntity.isCreative() && EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, stack)) {
 			tooltip.add(MubbleEnchantments.IGNORANCE_CURSE.getName(EnchantmentHelper.getLevel(MubbleEnchantments.IGNORANCE_CURSE, stack)));
 		}
 		else {
 			stack.appendEnchantments(tooltip, enchantments);
 		}
+
+		 */
 	}
 }

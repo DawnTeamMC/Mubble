@@ -102,7 +102,7 @@ public class PresentBlockEntity extends LootableContainerBlockEntity {
 		this.viewerCount = ChestBlockEntity.countViewers(this.world, this, i, j, k);
 		BlockState blockstate = this.getCachedState();
 		boolean flag1 = blockstate.get(PresentBlock.OPEN);
-		boolean flag2 = this.isEmpty();
+		boolean flag2 = this.isEmpty() && this.lootTableId == null;
 		this.setEmptyProperty(blockstate, flag2);
 		if(this.viewerCount > 0) {
 			this.scheduleTick();
