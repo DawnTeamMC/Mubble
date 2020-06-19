@@ -2,6 +2,7 @@
 	"comment": "CREATIVE TABS",
 	"itemGroup.mubble.costumes": "Trajes",
 	"itemGroup.mubble.instruments": "Instrumentos",
+	
 	"comment": "BLOCKS",
 	"block.mubble.oak_vertical_slab": "Laje Vertical de Carvalho",
 	"block.mubble.spruce_vertical_slab": "Laje Vertical de Pinheiro",
@@ -37,37 +38,44 @@
 	"block.mubble.prismarine_vertical_slab": "Laje Vertical de Prismarino",
 	"block.mubble.prismarine_brick_vertical_slab": "Laje Vertical de Tijolos de Prismarino",
 	"block.mubble.dark_prismarine_vertical_slab": "Laje Vertical de Prismarino Escuro",
+
 	"block.mubble.dark_prismarine_wall": "Muro de Prismarino Escuro",
+
 	"block.mubble.oak_wood_stairs": "Escadas de Madeira de Carvalho",
 	"block.mubble.spruce_wood_stairs": "Escadas de Madeira de Pinheiro",
 	"block.mubble.birch_wood_stairs": "Escadas de Madeira de Eucalipto",
 	"block.mubble.jungle_wood_stairs": "Escadas de Madeira de Selva",
 	"block.mubble.acacia_wood_stairs": "Escadas de Madeira de Acácia",
 	"block.mubble.dark_oak_wood_stairs": "Escadas de Madeira de Carvalho Escuro",
+
 	"block.mubble.oak_wood_slab": "Laje de Madeira de Carvalho",
 	"block.mubble.spruce_wood_slab": "Laje de Madeira de Pinheiro",
 	"block.mubble.birch_wood_slab": "Laje de Madeira de Eucalipto",
 	"block.mubble.jungle_wood_slab": "Laje de Madeira de Selva",
 	"block.mubble.acacia_wood_slab": "Laje de Madeira de Acácia",
 	"block.mubble.dark_oak_wood_slab": "Laje de Madeira de Carvalho Escuro",
+
 	"block.mubble.oak_wood_vertical_slab": "Laje Vertical de Madeira de Carvalho",
 	"block.mubble.spruce_wood_vertical_slab": "Laje Vertical de Madeira de Pinheiro",
 	"block.mubble.birch_wood_vertical_slab": "Laje Vertical de Madeira de Eucalipto",
 	"block.mubble.jungle_wood_vertical_slab": "Laje Vertical de Madeira de Selva",
 	"block.mubble.acacia_wood_vertical_slab": "Laje Vertical de Madeira de Acácia",
 	"block.mubble.dark_oak_wood_vertical_slab": "Laje Vertical de Madeira de Carvalho Escuro",
+
 	"block.mubble.oak_wood_button": "Botão de Madeira de Carvalho",
 	"block.mubble.spruce_wood_button": "Botão de Madeira de Pinheiro",
 	"block.mubble.birch_wood_button": "Botão de Madeira de Eucalipto",
 	"block.mubble.jungle_wood_button": "Botão de Madeira de Selva",
 	"block.mubble.acacia_wood_button": "Botão de Madeira de Acácia",
 	"block.mubble.dark_oak_wood_button": "Botão de Madeira de Carvalho Escuro",
+
 	"block.mubble.oak_leaf_pile": "Pilha de Folhas de Carvalho",
 	"block.mubble.spruce_leaf_pile": "Pilha de Folhas de Pinheiro",
 	"block.mubble.birch_leaf_pile": "Pilha de Folhas de Eucalipto",
 	"block.mubble.jungle_leaf_pile": "Pilha de Folhas de Selva",
 	"block.mubble.acacia_leaf_pile": "Pilha de Folhas de Acácia",
 	"block.mubble.dark_oak_leaf_pile": "Pilha de Folhas de Carvalho Escuro",
+
 	"block.mubble.cobblestone_bricks": "Tijolos de Pedregulho",
 	"block.mubble.cobblestone_brick_stairs": "Escadas de Tijolos de Pedregulho",
 	"block.mubble.cobblestone_brick_slab": "Laje de Tijolos de Pedregulho",
@@ -93,6 +101,7 @@
 	"block.mubble.andesite_brick_slab": "Laje de Tijolos de Andesito",
 	"block.mubble.andesite_brick_vertical_slab": "Laje Vertical de Tijolos de Andesito",
 	"block.mubble.andesite_brick_wall": "Muro de Tijolos de Andesito",
+
 	"block.mubble.sandstone_bricks": "Tijolos de Arenito",
 	"block.mubble.sandstone_brick_stairs": "Escadas de Tijolos de Arenito",
 	"block.mubble.sandstone_brick_slab": "Laje de Tijolos de Arenito",
@@ -111,19 +120,42 @@
 	"block.mubble.polished_red_sandstone_stairs": "Escadas de Arenito Vermelho Polido",
 	"block.mubble.polished_red_sandstone_slab": "Laje de Arenito Vermelho Polido",
 	"block.mubble.polished_red_sandstone_vertical_slab": "Laje Vertical de Arenito Vermelho Polido",
+
 	"block.mubble.smooth_stone_paving": "Calçamento de Pedra Polida",
 	"block.mubble.smooth_stone_paving_stairs": "Escadas de Calçamento de Pedra Polida",
 	"block.mubble.smooth_stone_paving_slab": "Laje de Calçamento de Pedra Polida",
 	"block.mubble.smooth_stone_paving_vertical_slab": "Laje Vertical de Calçamento de Pedra Polida",
+
 	"block.mubble.chiseled_prismarine": "Prismarino Cinzelado",
 	"block.mubble.chiseled_prismarine_stairs": "Escadas de Prismarino Cinzelado",
 	"block.mubble.chiseled_prismarine_slab": "Laje de Prismarino Cinzelado",
 	"block.mubble.chiseled_prismarine_vertical_slab": "Laje Vertical de Prismarino Cinzelado",
 	"block.mubble.chiseled_prismarine_wall": "Muro de Prismarino Cinzelado",
+
 	"block.mubble.prismarine_brick_paving": "Calçamento de Tijolos de Prismarino",
 	"block.mubble.prismarine_brick_paving_stairs": "Escadas de Calçamento de Tijolos de Prismarino",
 	"block.mubble.prismarine_brick_paving_slab": "Laje de Calçamento de Tijolos de Prismarino",
 	"block.mubble.prismarine_brick_paving_vertical_slab": "Laje Vertical de Calçamento de Tijolos de Prismarino",
+
+	"block.mubble.blunite": "Blunite",
+	"block.mubble.blunite_stairs": "Escadas de Blunite",
+	"block.mubble.blunite_slab": "Laje de Blunite",
+	"block.mubble.blunite_vertical_slab": "Laje Vertical de Blunite",
+	"block.mubble.blunite_wall": "Parede de Blunite",
+	"block.mubble.polished_blunite": "Blunite Polido",
+	"block.mubble.polished_blunite_stairs": "Escadas de Blunite Polido",
+	"block.mubble.polished_blunite_slab": "Laje de Blunite Polido",
+	"block.mubble.polished_blunite_vertical_slab": "Laje Vertical de Blunite Polido",
+	"block.mubble.carbonite": "Carbonite",
+	"block.mubble.carbonite_stairs": "Escadas de Carbonite",
+	"block.mubble.carbonite_slab": "Laje de Carbonite",
+	"block.mubble.carbonite_vertical_slab": "Laje Vertical de Carbonite",
+	"block.mubble.carbonite_wall": "Parede de Carbonite",
+	"block.mubble.polished_carbonite": "Carbonite Polido",
+	"block.mubble.polished_carbonite_stairs": "Escadas de Carbonite Polido",
+	"block.mubble.polished_carbonite_slab": "Laje de Carbonite Polido",
+	"block.mubble.polished_carbonite_vertical_slab": "Laje Vertical de Carbonite Polido",
+
 	"block.mubble.permarock": "Permarock",
 	"block.mubble.permafrost_bricks": "Tijolos de Permafrost",
 	"block.mubble.permafrost_brick_stairs": "Escadas de Tijolos de Permafrost",
@@ -137,14 +169,17 @@
 	"block.mubble.blue_permafrost_brick_wall": "Muro de Tijolos de Permafrost Azul",
 	"block.mubble.permafrost_bismuth_ore": "Minério de Bismuto de Permafrost",
 	"block.mubble.frozen_obsidian": "Obsidiana Congelada",
-	"block.mubble.vanadium_block": "Bloco de Vanadium",
+
 	"block.mubble.vanadium_ore": "Minério de Vanadium",
+	"block.mubble.vanadium_block": "Bloco de Vanadium",
+
 	"block.mubble.autumn_oak_sapling": "Muda de Carvalho de Outono",
 	"block.mubble.autumn_oak_leaves": "Folhas de Carvalho de Outono",
 	"block.mubble.autumn_oak_leaf_pile": "Tapete de Folhas de Carvalho de Outono",
 	"block.mubble.autumn_birch_sapling": "Muda de Eucalipto de Outono",
 	"block.mubble.autumn_birch_leaves": "Folhas de Eucalipto de Outono",
 	"block.mubble.autumn_birch_leaf_pile": "Tapete de Folhas de Eucalipto de Outono",
+	
 	"block.mubble.cherry_oak_planks": "Tábuas de Carvalho Cereja",
 	"block.mubble.pink_cherry_oak_sapling": "Muda de Carvalho Cereja Rosa",
 	"block.mubble.white_cherry_oak_sapling": "Muda de Carvalho Cereja Branca",
@@ -169,6 +204,7 @@
 	"block.mubble.cherry_oak_wood_slab": "Laje de Carvalho Cereja",
 	"block.mubble.cherry_oak_wood_vertical_slab": "Laje Vertical de Carvalho Cereja",
 	"block.mubble.cherry_oak_wood_button": "Botão de Carvalho Cereja",
+
 	"block.mubble.palm_planks": "Tábua de Palmeira",
 	"block.mubble.palm_sapling": "Muda de Palmeira",
 	"block.mubble.palm_log": "Palmeira",
@@ -190,6 +226,7 @@
 	"block.mubble.palm_wood_slab": "Laje de Madeira de Palmeira",
 	"block.mubble.palm_wood_vertical_slab": "Laje Vertical de Madeira de Palmeira",
 	"block.mubble.palm_wood_button": "Botão de Madeira de Palmeira",
+
 	"block.mubble.blue_bricks": "Tijolos Azuis",
 	"block.mubble.light_blue_bricks": "Tijolos Azul Claros",
 	"block.mubble.cyan_bricks": "Tijolos Ciano",
@@ -206,6 +243,7 @@
 	"block.mubble.light_gray_bricks": "Tijolos Cinza Claros",
 	"block.mubble.gray_bricks": "Tijolos Cinza",
 	"block.mubble.black_bricks": "Tijolos Pretos",
+
 	"block.mubble.blue_brick_stairs": "Escadas de Tijolo Azul",
 	"block.mubble.light_blue_brick_stairs": "Escadas de Tijolo Azul Claro",
 	"block.mubble.cyan_brick_stairs": "Escadas de Tijolo Ciano",
@@ -222,6 +260,7 @@
 	"block.mubble.light_gray_brick_stairs": "Escadas de Tijolo Cinza Claro",
 	"block.mubble.gray_brick_stairs": "Escadas de Tijolo Cinza",
 	"block.mubble.black_brick_stairs": "Escadas de Tijolo Preto",
+
 	"block.mubble.blue_brick_slab": "Laje de Tijolo Azul",
 	"block.mubble.light_blue_brick_slab": "Laje de Tijolo Azul Claro",
 	"block.mubble.cyan_brick_slab": "Laje de Tijolo Ciano",
@@ -238,6 +277,7 @@
 	"block.mubble.light_gray_brick_slab": "Laje de Tijolo Cinza Claro",
 	"block.mubble.gray_brick_slab": "Laje de Tijolo Cinza",
 	"block.mubble.black_brick_slab": "Laje de Tijolo Preto",
+
 	"block.mubble.blue_brick_vertical_slab": "Laje Vertical de Tijolo Azul",
 	"block.mubble.light_blue_brick_vertical_slab": "Laje Vertical de Tijolo Azul Claro",
 	"block.mubble.cyan_brick_vertical_slab": "Laje Vertical de Tijolo Ciano",
@@ -254,6 +294,7 @@
 	"block.mubble.light_gray_brick_vertical_slab": "Laje Vertical de Tijolo Cinza Claro",
 	"block.mubble.gray_brick_vertical_slab": "Laje Vertical de Tijolo Cinza",
 	"block.mubble.black_brick_vertical_slab": "Laje Vertical de Tijolo Preto",
+
 	"block.mubble.blue_brick_wall": "Parede de Tijolo Azul",
 	"block.mubble.light_blue_brick_wall": "Parede de Tijolo Azul Claro",
 	"block.mubble.cyan_brick_wall": "Parede de Tijolo Ciano",
@@ -270,24 +311,7 @@
 	"block.mubble.light_gray_brick_wall": "Parede de Tijolo Cinza Claro",
 	"block.mubble.gray_brick_wall": "Parede de Tijolo Cinza",
 	"block.mubble.black_brick_wall": "Parede de Tijolo Preto",
-	"block.mubble.blunite": "Blunite",
-	"block.mubble.blunite_stairs": "Escadas de Blunite",
-	"block.mubble.blunite_slab": "Laje de Blunite",
-	"block.mubble.blunite_vertical_slab": "Laje Vertical de Blunite",
-	"block.mubble.blunite_wall": "Parede de Blunite",
-	"block.mubble.polished_blunite": "Blunite Polido",
-	"block.mubble.polished_blunite_stairs": "Escadas de Blunite Polido",
-	"block.mubble.polished_blunite_slab": "Laje de Blunite Polido",
-	"block.mubble.polished_blunite_vertical_slab": "Laje Vertical de Blunite Polido",
-	"block.mubble.carbonite": "Carbonite",
-	"block.mubble.carbonite_stairs": "Escadas de Carbonite",
-	"block.mubble.carbonite_slab": "Laje de Carbonite",
-	"block.mubble.carbonite_vertical_slab": "Laje Vertical de Carbonite",
-	"block.mubble.carbonite_wall": "Parede de Carbonite",
-	"block.mubble.polished_carbonite": "Carbonite Polido",
-	"block.mubble.polished_carbonite_stairs": "Escadas de Carbonite Polido",
-	"block.mubble.polished_carbonite_slab": "Laje de Carbonite Polido",
-	"block.mubble.polished_carbonite_vertical_slab": "Laje Vertical de Carbonite Polido",
+
 	"block.mubble.terracotta_stairs": "Escadas de Terracota",
 	"block.mubble.blue_terracotta_stairs": "Escadas de Terracota Azul",
 	"block.mubble.light_blue_terracotta_stairs": "Escadas de Terracota Azul Claro",
@@ -305,6 +329,7 @@
 	"block.mubble.light_gray_terracotta_stairs": "Escadas de Terracota Cinza Claro",
 	"block.mubble.gray_terracotta_stairs": "Escadas de Terracota Cinza",
 	"block.mubble.black_terracotta_stairs": "Escadas de Terracota Preta",
+
 	"block.mubble.terracotta_slab": "Laje de Terracota",
 	"block.mubble.blue_terracotta_slab": "Laje de Terracota Azul",
 	"block.mubble.light_blue_terracotta_slab": "Laje de Terracota Azul Claro",
@@ -322,6 +347,7 @@
 	"block.mubble.light_gray_terracotta_slab": "Laje de Terracota Cinza Claro",
 	"block.mubble.gray_terracotta_slab": "Laje de Terracota Cinza",
 	"block.mubble.black_terracotta_slab": "Laje de Terracota Preta",
+
 	"block.mubble.terracotta_vertical_slab": "Laje Vertical de Terracota",
 	"block.mubble.blue_terracotta_vertical_slab": "Laje Vertical de Terracota Azul",
 	"block.mubble.light_blue_terracotta_vertical_slab": "Laje Vertical de Terracota Azul Claro",
@@ -339,6 +365,7 @@
 	"block.mubble.light_gray_terracotta_vertical_slab": "Laje Vertical de Terracota Cinza Claro",
 	"block.mubble.gray_terracotta_vertical_slab": "Laje Vertical de Terracota Cinza",
 	"block.mubble.black_terracotta_vertical_slab": "Laje Vertical de Terracota Preta",
+
 	"block.mubble.terracotta_wall": "Muro de Terracota",
 	"block.mubble.blue_terracotta_wall": "Muro de Terracota Azul",
 	"block.mubble.light_blue_terracotta_wall": "Muro de Terracota Azul Claro",
@@ -356,6 +383,7 @@
 	"block.mubble.light_gray_terracotta_wall": "Muro de Terracota Cinza Claro",
 	"block.mubble.gray_terracotta_wall": "Muro de Terracota Cinza",
 	"block.mubble.black_terracotta_wall": "Muro de Terracota Preta",
+
 	"block.mubble.terracotta_pressure_plate": "Placa de Pressão de Terracota",
 	"block.mubble.blue_terracotta_pressure_plate": "Placa de Pressão de Terracota Azul",
 	"block.mubble.light_blue_terracotta_pressure_plate": "Placa de Pressão de Terracota Azul Claro",
@@ -373,6 +401,7 @@
 	"block.mubble.light_gray_terracotta_pressure_plate": "Placa de Pressão de Terracota Cinza Claro",
 	"block.mubble.gray_terracotta_pressure_plate": "Placa de Pressão de Terracota Cinza",
 	"block.mubble.black_terracotta_pressure_plate": "Placa de Pressão de Terracota Preta",
+
 	"block.mubble.terracotta_button": "Botão de Terracota",
 	"block.mubble.blue_terracotta_button": "Botão de Terracota Azul",
 	"block.mubble.light_blue_terracotta_button": "Botão de Terracota Azul Claro",
@@ -390,6 +419,7 @@
 	"block.mubble.light_gray_terracotta_button": "Botão de Terracota Cinza Claro",
 	"block.mubble.gray_terracotta_button": "Botão de Terracota Cinza",
 	"block.mubble.black_terracotta_button": "Botão de Terracota Preta",
+
 	"block.mubble.blue_dark_prismarine": "Prismarine Sombrio Azul",
 	"block.mubble.light_blue_dark_prismarine": "Prismarine Sombrio Azul Claro",
 	"block.mubble.cyan_dark_prismarine": "Prismarine Sombrio Ciano",
@@ -406,6 +436,7 @@
 	"block.mubble.light_gray_dark_prismarine": "Prismarine Sombrio Cinza Claro",
 	"block.mubble.gray_dark_prismarine": "Prismarine Sombrio Cinza",
 	"block.mubble.black_dark_prismarine": "Prismarine Sombrio Preto",
+
 	"block.mubble.blue_dark_prismarine_stairs": "Escadas de Prismarine Sombrio Azul",
 	"block.mubble.light_blue_dark_prismarine_stairs": "Escadas de Prismarine Sombrio Azul Claro",
 	"block.mubble.cyan_dark_prismarine_stairs": "Escadas de Prismarine Sombrio Ciano",
@@ -422,6 +453,7 @@
 	"block.mubble.light_gray_dark_prismarine_stairs": "Escadas de Prismarine Sombrio Cinza Claro",
 	"block.mubble.gray_dark_prismarine_stairs": "Escadas de Prismarine Sombrio Cinza",
 	"block.mubble.black_dark_prismarine_stairs": "Escadas de Prismarine Sombrio Preto",
+
 	"block.mubble.blue_dark_prismarine_slab": "Laje de Prismarine Sombrio Azul",
 	"block.mubble.light_blue_dark_prismarine_slab": "Laje de Prismarine Sombrio Azul Claro",
 	"block.mubble.cyan_dark_prismarine_slab": "Laje de Prismarine Sombrio Ciano",
@@ -438,6 +470,7 @@
 	"block.mubble.light_gray_dark_prismarine_slab": "Laje de Prismarine Sombrio Cinza Claro",
 	"block.mubble.gray_dark_prismarine_slab": "Laje de Prismarine Sombrio Cinza",
 	"block.mubble.black_dark_prismarine_slab": "Laje de Prismarine Sombrio Preto",
+
 	"block.mubble.blue_dark_prismarine_vertical_slab": "Laje Vertical de Prismarine Sombrio Azul",
 	"block.mubble.light_blue_dark_prismarine_vertical_slab": "Laje Vertical de Prismarine Sombrio Azul Claro",
 	"block.mubble.cyan_dark_prismarine_vertical_slab": "Laje Vertical de Prismarine Sombrio Ciano",
@@ -454,6 +487,7 @@
 	"block.mubble.light_gray_dark_prismarine_vertical_slab": "Laje Vertical de Prismarine Sombrio Cinza Claro",
 	"block.mubble.gray_dark_prismarine_vertical_slab": "Laje Vertical de Prismarine Sombrio Cinza",
 	"block.mubble.black_dark_prismarine_vertical_slab": "Laje Vertical de Prismarine Sombrio Preto",
+
 	"block.mubble.blue_dark_prismarine_wall": "Parede de Prismarire Sombrio Azul",
 	"block.mubble.light_blue_dark_prismarine_wall": "Parede de Prismarire Sombrio Azul Claro",
 	"block.mubble.cyan_dark_prismarine_wall": "Parede de Prismarire Sombrio Ciano",
@@ -470,6 +504,7 @@
 	"block.mubble.light_gray_dark_prismarine_wall": "Parede de Prismarire Sombrio Cinza Claro",
 	"block.mubble.gray_dark_prismarine_wall": "Parede de Prismarire Sombrio Cinza",
 	"block.mubble.black_dark_prismarine_wall": "Parede de Prismarire Sombrio Preto",
+
 	"block.mubble.blue_concrete_stairs": "Escadas de Concreto Azul",
 	"block.mubble.light_blue_concrete_stairs": "Escadas de Concreto Azul Claro",
 	"block.mubble.cyan_concrete_stairs": "Escadas de Concreto Ciano",
@@ -486,6 +521,7 @@
 	"block.mubble.light_gray_concrete_stairs": "Escadas de Concreto Cinza Claro",
 	"block.mubble.gray_concrete_stairs": "Escadas de Concreto Cinza",
 	"block.mubble.black_concrete_stairs": "Escadas de Concreto Preto",
+
 	"block.mubble.blue_concrete_slab": "Laje de Concreto Azul",
 	"block.mubble.light_blue_concrete_slab": "Laje de Concreto Azul Claro",
 	"block.mubble.cyan_concrete_slab": "Laje de Concreto Ciano",
@@ -502,6 +538,7 @@
 	"block.mubble.light_gray_concrete_slab": "Laje de Concreto Cinza Claro",
 	"block.mubble.gray_concrete_slab": "Laje de Concreto Cinza",
 	"block.mubble.black_concrete_slab": "Laje de Concreto Preto",
+
 	"block.mubble.blue_concrete_vertical_slab": "Laje Vertical de Concreto Azul",
 	"block.mubble.light_blue_concrete_vertical_slab": "Laje Vertical de Concreto Azul Claro",
 	"block.mubble.cyan_concrete_vertical_slab": "Laje Vertical de Concreto Ciano",
@@ -518,6 +555,7 @@
 	"block.mubble.light_gray_concrete_vertical_slab": "Laje Vertical de Concreto Cinza Claro",
 	"block.mubble.gray_concrete_vertical_slab": "Laje Vertical de Concreto Cinza",
 	"block.mubble.black_concrete_vertical_slab": "Laje Vertical de Concreto preto",
+
 	"block.mubble.blue_concrete_wall": "Muro de Concreto Azul",
 	"block.mubble.light_blue_concrete_wall": "Muro de Concreto Azul Claro",
 	"block.mubble.cyan_concrete_wall": "Muro de Concreto Ciano",
@@ -534,6 +572,7 @@
 	"block.mubble.light_gray_concrete_wall": "Muro de Concreto Cinza Claro",
 	"block.mubble.gray_concrete_wall": "Muro de Concreto Cinza",
 	"block.mubble.black_concrete_wall": "Muro de Concreto Preto",
+
 	"block.mubble.blue_concrete_pressure_plate": "Placa de Pressão de Concreto Azul",
 	"block.mubble.light_blue_concrete_pressure_plate": "Placa de Pressão de Concreto Azul Claro",
 	"block.mubble.cyan_concrete_pressure_plate": "Placa de Pressão de Concreto Ciano",
@@ -550,6 +589,7 @@
 	"block.mubble.light_gray_concrete_pressure_plate": "Placa de Pressão de Concreto Cinza Claro",
 	"block.mubble.gray_concrete_pressure_plate": "Placa de Pressão de Concreto Cinza",
 	"block.mubble.black_concrete_pressure_plate": "Placa de Pressão de Concreto Preto",
+
 	"block.mubble.blue_concrete_button": "Botão de Concreto Azul",
 	"block.mubble.light_blue_concrete_button": "Botão de Concreto Azul Claro",
 	"block.mubble.cyan_concrete_button": "Botão de Concreto Ciano",
@@ -566,6 +606,7 @@
 	"block.mubble.light_gray_concrete_button": "Botão de Concreto Cinza Claro",
 	"block.mubble.gray_concrete_button": "Botão de Concreto Cinza",
 	"block.mubble.black_concrete_button": "Botão de Concreto Preto",
+
 	"block.mubble.blue_quartz_paving": "Calçamento de Quartzo Azul",
 	"block.mubble.light_blue_quartz_paving": "Calçamento de Quartzo Azul Claro",
 	"block.mubble.cyan_quartz_paving": "Calçamento de Quartzo Ciano",
@@ -582,6 +623,7 @@
 	"block.mubble.light_gray_quartz_paving": "Calçamento de Quartzo Cinza Claro",
 	"block.mubble.gray_quartz_paving": "Calçamento de Quartzo Cinza",
 	"block.mubble.black_quartz_paving": "Calçamento de Quartzo Preto",
+
 	"block.mubble.blue_quartz_paving_stairs": "Escadas de Calçamento de Quartzo Azul",
 	"block.mubble.light_blue_quartz_paving_stairs": "Escadas de Calçamento de Quartzo Azul Claro",
 	"block.mubble.cyan_quartz_paving_stairs": "Escadas de Calçamento de Quartzo Ciano",
@@ -598,6 +640,7 @@
 	"block.mubble.light_gray_quartz_paving_stairs": "Escadas de Calçamento de Quartzo Cinza Claro",
 	"block.mubble.gray_quartz_paving_stairs": "Escadas de Calçamento de Quartzo Cinza",
 	"block.mubble.black_quartz_paving_stairs": "Escadas de Calçamento de Quartzo Preto",
+
 	"block.mubble.blue_quartz_paving_slab": "Laje de Calçamento de Quartzo Azul",
 	"block.mubble.light_blue_quartz_paving_slab": "Laje de Calçamento de Quartzo Azul Claro",
 	"block.mubble.cyan_quartz_paving_slab": "Laje de Calçamento de Quartzo Ciano",
@@ -614,6 +657,7 @@
 	"block.mubble.light_gray_quartz_paving_slab": "Laje de Calçamento de Quartzo Cinza Claro",
 	"block.mubble.gray_quartz_paving_slab": "Laje de Calçamento de Quartzo Cinza",
 	"block.mubble.black_quartz_paving_slab": "Laje de Calçamento de Quartzo Preto",
+
 	"block.mubble.blue_quartz_paving_vertical_slab": "Laje Vertical de Calçamento de Quartzo Azul",
 	"block.mubble.light_blue_quartz_paving_vertical_slab": "Laje Vertical de Calçamento de Quartzo Azul Claro",
 	"block.mubble.cyan_quartz_paving_vertical_slab": "Laje Vertical de Calçamento de Quartzo Ciano",
@@ -630,6 +674,7 @@
 	"block.mubble.light_gray_quartz_paving_vertical_slab": "Laje Vertical de Calçamento de Quartzo Cinza Claro",
 	"block.mubble.gray_quartz_paving_vertical_slab": "Laje Vertical de Calçamento de Quartzo Cinza",
 	"block.mubble.black_quartz_paving_vertical_slab": "Laje Vertical de Calçamento de Quartzo Preto",
+
 	"block.mubble.red_christmas_bauble": "Enfeites de Natal Vermelho",
 	"block.mubble.orange_christmas_bauble": "Enfeites de Natal Laranja",
 	"block.mubble.yellow_christmas_bauble": "Enfeites de Natal Amarelo",
@@ -640,9 +685,11 @@
 	"block.mubble.light_blue_christmas_bauble": "Enfeites de Natal Azul Claro",
 	"block.mubble.green_christmas_bauble": "Enfeites de Natal Verde",
 	"block.mubble.white_christmas_bauble": "Enfeites de Natal Branco",
+
 	"block.mubble.red_shiny_garland": "Guirlanda Brilhante Vermelha",
 	"block.mubble.silver_shiny_garland": "Guirlanda Brilhante Prata",
 	"block.mubble.gold_shiny_garland": "Guirlanda Brilhante Ouro",
+
 	"block.mubble.white_present": "Presente Branco",
 	"block.mubble.black_present": "Presente Preto",
 	"block.mubble.blue_present": "Presente Azul",
@@ -651,7 +698,9 @@
 	"block.mubble.red_present": "Presente Vermelho",
 	"block.mubble.purple_present": "Presente Roxo",
 	"block.mubble.golden_present": "Presente Dourado",
+
 	"block.mubble.footblock": "Futebloco",
+
 	"block.mubble.blue_cloud_block": "Bloco de Nuvem Azul",
 	"block.mubble.light_blue_cloud_block": "Bloco de Nuvem Azul Claro",
 	"block.mubble.cyan_cloud_block": "Bloco de Nuvem Ciano",
@@ -668,12 +717,15 @@
 	"block.mubble.light_gray_cloud_block": "Bloco de Nuvem Cinza Claro",
 	"block.mubble.gray_cloud_block": "Bloco de Nuvem Cinza",
 	"block.mubble.black_cloud_block": "Bloco de Nuvem Preta",
+
 	"block.mubble.tomatoes": "Tomates",
 	"block.mubble.salad": "Salada",
+
 	"block.mubble.blueberry_bush": "Arbusto de Blueberry",
 	"block.mubble.cheese_block": "Bloco de Queijo",
 	"block.mubble.chocolate_cake": "Bolo de Chocolate",
 	"block.mubble.minecraft_10th_anniversary_cake": "Bolo do 10º Aniversário do Minecraft",
+
 	"block.mubble.blue_balloon": "Balão Azul",
 	"block.mubble.light_blue_balloon": "Balão Azul Claro",
 	"block.mubble.cyan_balloon": "Balão Ciano",
@@ -690,10 +742,12 @@
 	"block.mubble.light_gray_balloon": "Balão Cinza Claro",
 	"block.mubble.gray_balloon": "Balão Cinza",
 	"block.mubble.black_balloon": "Balão Preto",
+
 	"block.mubble.unstable_stone": "Pedra Instável",
 	"block.mubble.fluid_tank": "Tanque de Fluído",
 	"block.mubble.placer": "Dispensador",
 	"block.mubble.timeswap_table": "Mesa Troca-Tempo",
+
 	"block.mubble.dandelion_pile": "Pilha de Dente-de-Leão",
 	"block.mubble.poppy_pile": "Pilha de Papoula",
 	"block.mubble.blue_orchid_pile": "Pilha de Orquídea Azul",
@@ -707,6 +761,7 @@
 	"block.mubble.cornflower_pile": "Pilha de Centáurea",
 	"block.mubble.lily_of_the_valley_pile": "Pilha de Lírio do Vale",
 	"block.mubble.wither_rose_pile": "Pilha de Rosa Wither",
+
 	"block.mubble.smb_question_block": "Bloco de ? (SMB)",
 	"block.mubble.smb3_question_block": "Bloco de ? (SMB3)",
 	"block.mubble.smw_question_block": "Bloco de ? (SMW)",
@@ -807,6 +862,7 @@
 	"block.mubble.smb3_key_door": "Porta de Chave (SMB3)",
 	"block.mubble.smw_key_door": "Porta de Chave (SMW)",
 	"block.mubble.nsmbu_key_door": "Porta de Chave (NSMBU)",
+
 	"block.mubble.fire_flower": "Flor de Fogo",
 	"block.mubble.ice_flower": "Flor de Gelo",
 	"block.mubble.boomerang_flower": "Flor de Bumerangue",
@@ -840,7 +896,9 @@
 	"block.mubble.light_gray_mushroom_block": "Bloco de Cogumelo Cinza Claro",
 	"block.mubble.gray_mushroom_block": "Bloco de Cogumelo Cinza",
 	"block.mubble.black_mushroom_block": "Bloco de Cogumelo Preto",
+
 	"block.mubble.kirby_block": "Bloco de Kirby",
+
 	"block.mubble.blue_tetris_block": "Bloco Azul de Tetris",
 	"block.mubble.light_blue_tetris_block": "Bloco Azul Claro de Tetris",
 	"block.mubble.cyan_tetris_block": "Bloco Ciano de Tetris",
@@ -861,13 +919,16 @@
 	"block.mubble.japanese_tetris_cushion": "Almofada Japonesa de Tetris",
 	"block.mubble.rainbow_tetris_scaffolding": "Andaime Arco-Íris de Tetris",
 	"block.mubble.monochrome_tetris_scaffolding": "Andaime Monocromático de Tetris",
+
 	"block.mubble.vampire_stone": "Pedra do Vampiro",
+
 	"block.mubble.medusa_stone": "Pedra da Medusa",
 	"block.mubble.medusa_bricks": "Tijolos de Medusa",
 	"block.mubble.medusa_brick_stairs": "Escadas de Tijolos de Medusa",
 	"block.mubble.medusa_brick_slab": "Laje de Tijolos de Medusa",
 	"block.mubble.medusa_brick_vertical_slab": "Laje Vertical de Tijolos de Medusa",
 	"block.mubble.medusa_brick_wall": "Parede de Tijolos de Medusa",
+
 	"block.mubble.blue_candy_cane_pillar": "Pilar de Bengala Doce Azul",
 	"block.mubble.light_blue_candy_cane_pillar": "Pilar de Bengala Doce Azul Claro",
 	"block.mubble.cyan_candy_cane_pillar": "Pilar de Bengala Doce Ciano",
@@ -884,11 +945,13 @@
 	"block.mubble.light_gray_candy_cane_pillar": "Pilar de Bengala Doce Cinza Claro",
 	"block.mubble.gray_candy_cane_pillar": "Pilar de Bengala Doce Cinza",
 	"block.mubble.black_candy_cane_pillar": "Pilar de Bengala Doce Preto",
+
 	"block.mubble.green_hill_grass_block": "Bloco de Grama de Green Hill",
 	"block.mubble.green_hill_dirt": "Terra de Green Hill",
 	"block.mubble.marble_zone_stone": "Pedra de Marble Zone",
 	"block.mubble.yellow_studiopolis_clapper": "Claquete de Studiopolis Amarela",
 	"block.mubble.blue_studiopolis_clapper": "Claquete de Studiopolis Azul",
+
 	"block.mubble.press_garden_planks": "Tábuas de Press Garden",
 	"block.mubble.pink_press_garden_sapling": "Muda de Press Garden Rosa",
 	"block.mubble.red_press_garden_sapling": "Muda de Press Garden Vermelho",
@@ -913,7 +976,9 @@
 	"block.mubble.press_garden_wood_slab": "Laje de Madeira de Press Garden",
 	"block.mubble.press_garden_wood_vertical_slab": "Laje Vertical de Madeira de Press Garden ",
 	"block.mubble.press_garden_wood_button": "Botão de Madeira de Press Garden",
+
 	"block.mubble.spring": "Mola",
+
 	"block.mubble.scarlet_planks": "Tábuas Escarlate",
 	"block.mubble.scarlet_sapling": "Muda de Escarlate",
 	"block.mubble.scarlet_log": "Escarlate",
@@ -937,20 +1002,25 @@
 	"block.mubble.scarlet_wood_button": "Botão de Madeira de Escarlate",
 	"block.mubble.scarlet_mushroom": "Cogumelo Escarlate",
 	"block.mubble.scarlet_orchid": "Orquídea Escarlate",
+
 	"block.mubble.girder": "Viga",
+
 	"block.mubble.mirror_temple_bricks": "Tijolos de Templo do Espelho",
 	"block.mubble.mirror_temple_brick_stairs": "Escadas de Tijolo de Templo do Espelho",
 	"block.mubble.mirror_temple_brick_slab": "Laje de Tijolo de Templo do Espelho",
 	"block.mubble.mirror_temple_brick_vertical_slab": "Laje Vertical de Tijolo de Templo do Espelho",
 	"block.mubble.mirror_temple_brick_wall": "Parede de Tijolo de Templo do Espelho",
+
 	"block.mubble.old_site_bricks": "Tijolos de Terreno Antigo",
 	"block.mubble.old_site_brick_stairs": "Escadas de Tijolo de Terreno Antigo",
 	"block.mubble.old_site_brick_slab": "Laje de Tijolo de Terreno Antigo",
 	"block.mubble.old_site_brick_vertical_slab": "Laje Vertical de Tijolo de Terreno Antigo",
 	"block.mubble.old_site_brick_wall": "Parede de Tijolo de Terreno Antigo",
+
 	"block.mubble.elder_pebbles": "Seixos Antigos",
 	"block.mubble.dream_block": "Bloco de Sonho",
 	"block.mubble.dream_bedrock": "Rocha-mãe de Sonho",
+
 	"block.mubble.blue_puyo": "Puyo Azul",
 	"block.mubble.turquoise_puyo": "Puyo Turquesa",
 	"block.mubble.green_puyo": "Puyo Verde",
@@ -962,8 +1032,10 @@
 	"block.mubble.point_puyo": "Puyo Ponto",
 	"block.mubble.hard_puyo": "Puyo Rígido",
 	"block.mubble.iron_puyo": "Puyo Ferro",
+
 	"block.mubble.koretato_block": "Bloco Koretato",
 	"block.mubble.potato_flower": "Flor de Batata",
+
 	"block.mubble.potted_autumn_oak_sapling": "Vaso de Muda de Carvalho de Outono",
 	"block.mubble.potted_autumn_birch_sapling": "Vaso de Muda de Eucalipto de Outono",
 	"block.mubble.potted_pink_cherry_oak_sapling": "Vaso de Muda de Carvalho Cereja Rosa",
@@ -994,6 +1066,7 @@
 	"block.mubble.potted_scarlet_mushroom": "Vaso de Cogumelo Escarlate",
 	"block.mubble.potted_scarlet_orchid": "Vaso de Orquidea Escarlate",
 	"block.mubble.potted_potato_flower": "Vaso de Flor de Batata",
+	
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.vanadium": "Vanadium",
@@ -1030,6 +1103,7 @@
 	"item.mubble.jingle_bells": "Jingle Bells",
 	"item.mubble.small_bulb": "Lâmpada Pequena",
 	"item.mubble.totem_of_ascending": "Totem da Ascensão",
+
 	"item.mubble.super_mushroom": "Super Cogumelo",
 	"item.mubble.peach": "Pêssego",
 	"item.mubble.fireball": "Bola-de-Fogo",
@@ -1044,8 +1118,11 @@
 	"item.mubble.smb3_key": "Chave (SMB3)",
 	"item.mubble.smw_key": "Chave (SMW)",
 	"item.mubble.nsmbu_key": "Chave (NSMBU)",
+
 	"item.mubble.kirby_ball": "Kirby Ball",
+
 	"item.mubble.smash_ball": "Smash Ball",
+
 	"item.mubble.white_lightsaber": "Sabre de Luz Branca",
 	"item.mubble.light_gray_lightsaber": "Sabre de Luz Cinza Claro",
 	"item.mubble.gray_lightsaber": "Sabre de Luz Cinza",
@@ -1062,64 +1139,16 @@
 	"item.mubble.purple_lightsaber": "Sabre de Luz Roxo",
 	"item.mubble.magenta_lightsaber": "Sabre de Luz Magenta",
 	"item.mubble.pink_lightsaber": "Sabre de Luz Rosa",
-	"item.mubble.blank_music_disc": "Disco de Música em Branco",
-	"item.mubble.music_disc_battlefield": "Disco de Música",
-	"item.mubble.music_disc_champions_road": "Disco de Música",
-	"item.mubble.music_disc_confronting_myself": "Disco de Música",
-	"item.mubble.music_disc_electroplankton_medley": "Disco de Música",
-	"item.mubble.music_disc_fields_of_hopes_and_dreams": "Disco de Música",
-	"item.mubble.music_disc_kass_theme": "Disco de Música",
-	"item.mubble.music_disc_lost_painting": "Disco de Música",
-	"item.mubble.music_disc_mad_mew_mew": "Disco de Música",
-	"item.mubble.music_disc_megalovania": "Disco de Música",
-	"item.mubble.music_disc_popple_battle": "Disco de Música",
-	"item.mubble.music_disc_reflection": "Disco de Música",
-	"item.mubble.music_disc_rude_buster": "Disco de Música",
-	"item.mubble.music_disc_shark_bytes": "Disco de Música",
-	"item.mubble.music_disc_sound_stage": "Disco de Música",
-	"item.mubble.music_disc_studiopolis_act1": "Disco de Música",
-	"item.mubble.music_disc_the_grand_finale": "Disco de Música",
-	"item.mubble.music_disc_type_a": "Disco de Música",
-	"item.mubble.music_disc_vampire_killer": "Disco de Música",
-	"item.mubble.music_disc_vs_champion_red_and_blue": "Disco de Música",
-	"item.mubble.music_disc_battlefield.desc": "Super Smash Bros. Ultimate - Battlefield",
-	"item.mubble.music_disc_champions_road.desc": "Super Mario 3D World - Champion's Road",
-	"item.mubble.music_disc_confronting_myself.desc": "Celeste - Confronting Myself",
-	"item.mubble.music_disc_electroplankton_medley.desc": "Electroplankton Medley (SBBU)",
-	"item.mubble.music_disc_fields_of_hopes_and_dreams.desc": "DELTARUNE - Fields of Hopes and Dreams",
-	"item.mubble.music_disc_kass_theme.desc": "The Legend of Zelda: Breath of the Wild - Kass' Theme (SSBU)",
-	"item.mubble.music_disc_lost_painting.desc": "Castlevania: Symphony of the Night - Lost Painting (SSBU)",
-	"item.mubble.music_disc_mad_mew_mew.desc": "UNDERTALE - Mad Mew Mew",
-	"item.mubble.music_disc_megalovania.desc": "UNDERTALE - Megalovania",
-	"item.mubble.music_disc_popple_battle.desc": "Mario and Luigi: Superstar Saga + Bowser's Minions - Popple Battle",
-	"item.mubble.music_disc_reflection.desc": "Celeste - Reflection",
-	"item.mubble.music_disc_rude_buster.desc": "DELTARUNE - Rude Buster",
-	"item.mubble.music_disc_shark_bytes.desc": "Splatoon 2 - Shark Bytes",
-	"item.mubble.music_disc_sound_stage.desc": "Super Mario Party - Sound Stage",
-	"item.mubble.music_disc_studiopolis_act1.desc": "Sonic Mania - Studiopolis [Act 1]",
-	"item.mubble.music_disc_the_grand_finale.desc": "Mario & Luigi: Bowser’s Inside Story + Bowser Jr.’s Journey - The Grand Finale",
-	"item.mubble.music_disc_type_a.desc": "Tetris 99 - Type A",
-	"item.mubble.music_disc_vampire_killer.desc": "Castlevania Judgement - Vampire Killer",
-	"item.mubble.music_disc_vs_champion_red_and_blue.desc": "Pokémon Sun & Moon - VS. Champion Red & Blue",
-	"item.mubble.remix_disc_nb_beware_the_forest_mushrooms": "Disco de Música",
-	"item.mubble.remix_disc_nb_buoy_base_galaxy": "Disco de Música",
-	"item.mubble.remix_disc_nb_fly_octo_fly": "Disco de Música",
-	"item.mubble.remix_disc_nb_harvest_hazards": "Disco de Música",
-	"item.mubble.remix_disc_nb_sweden": "Disco de Música",
-	"item.mubble.remix_disc_nb_waluigi_pinball": "Disco de Música",
-	"item.mubble.remix_disc_nb_beware_the_forest_mushrooms.desc": "Super Mario RPG: Legend of the Seven Stars - Beware the Forest's Mushrooms (NoteBlock Remix)",
-	"item.mubble.remix_disc_nb_buoy_base_galaxy.desc": "Super Mario Galaxy - Buoy Base Galaxy (NoteBlock Remix)",
-	"item.mubble.remix_disc_nb_fly_octo_fly.desc": "Splatoon 2 - Fly Octo Fly (NoteBlock Remix)",
-	"item.mubble.remix_disc_nb_harvest_hazards.desc": "Donkey Kong Country: Tropical Freeze - Harvest Hazards (NoteBlock Remix)",
-	"item.mubble.remix_disc_nb_sweden.desc": "C418 - Sweden (NoteBlock Remix)",
-	"item.mubble.remix_disc_nb_waluigi_pinball.desc": "Mario Kart DS - Waluigi Pinball (NoteBlock Remix)",
+
 	"item.mubble.duck_spawn_egg": "Ovo de Gerar Pato",
 	"item.mubble.chincho_spawn_egg": "Ovo de Gerar Chincho",
 	"item.mubble.goomba_spawn_egg": "Ovo de Gerar Goomba",
 	"item.mubble.toad_spawn_egg": "Ovo de Gerar Toad",
 	"item.mubble.zombie_cowman_spawn_egg": "Ovo de Gerar Vaqueiro Zumbi",
+	
 	"comment": "COSTUMES",
 	"item.mubble.headphones": "Fones de Ouvido",
+
 	"item.mubble.white_virtual_googles": "Óculos Virtuais Brancos",
 	"item.mubble.light_gray_virtual_googles": "Óculos Virtuais Cinza Claros",
 	"item.mubble.gray_virtual_googles": "Óculos Virtuais Cinza",
@@ -1136,7 +1165,9 @@
 	"item.mubble.purple_virtual_googles": "Óculos Virtuais Roxos",
 	"item.mubble.magenta_virtual_googles": "Óculos Virtuais Magenta",
 	"item.mubble.pink_virtual_googles": "Óculos Virtuais Rosas",
+
 	"item.mubble.christmas_hat": "Chapéu de Natal",
+
 	"item.mubble.cappy": "Cappy",
 	"item.mubble.luigi_cap": "Boné do Luigi",
 	"item.mubble.wario_cap": "Boné do Wario",
@@ -1154,24 +1185,35 @@
 	"item.mubble.mario_wedding_hat": "Chapéu de Casamento do Mario",
 	"item.mubble.boo_hat": "Chapéu de Boo",
 	"item.mubble.broque_monsieur_head": "Cabeça de Broque Monsieur",
+
 	"item.mubble.bandana": "Bandana",
+
 	"item.mubble.pikachu_ears": "Orelhas de Pikachu",
 	"item.mubble.snorlax_hat": "Chapéu de Snorlax",
+
 	"item.mubble.top_hat": "Cartola",
+
 	"item.mubble.ralsei_hat": "Chapéu de Ralsei",
 	"item.mubble.king_round_mask": "Máscara de King Round",
-	"item.mubble.kid_hat": "Chapéu de Kid",
+
+	"item.mubble.kid_hat": "Chapéu de Hat Kid",
+
 	"item.mubble.baldi_head": "Cabeça de Baldi",
+
 	"item.mubble.guardian_mask": "Máscara de Guardião",
+
 	"item.mubble.mayro_cap": "Boné de Mayro",
 	"item.mubble.noteblock_head": "Cabeça de Noteblock",
+	
 	"comment": "ENCHANTMENTS",
 	"enchantment.mubble.telekinesis": "Telecinese",
 	"//enchantment.mubble.ignorance_curse": "Curse of Ignorance",
+	
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Dispensador",
 	"container.mubble.timeswap_table": "Mesa Troca-Tempo",
 	"container.mubble.present": "Presente",
+	
 	"comment": "ENTITIES",
 	"entity.mubble.duck": "Pato",
 	"entity.mubble.zombie_cowman": "Vaqueiro Zumbi",
@@ -1183,9 +1225,11 @@
 	"entity.mubble.fireball": "Bola-de-Fogo",
 	"entity.mubble.iceball": "Bola-de-Gelo",
 	"entity.mubble.kirby_ball": "Kirby Ball",
+	
 	"comment": "EFFECTS",
 	"//effect.mubble.heaviness": "Heaviness",
 	"//effect.mubble.hiccup": "Hiccup",
+	
 	"comment": "BIOMES",
 	"biome.mubble.pumpkin_pastures": "Pastagens de Abóbora",
 	"biome.mubble.pink_cherry_oak_forest": "Floresta de Carvalho Cereja Rosa",
@@ -1197,6 +1241,7 @@
 	"//biome.mubble.protanopian_gallery": "Protanopian Gallery",
 	"biome.mubble.press_garden": "Press Garden",
 	"biome.mubble.scarlet_forest": "Floresta de Escarlate",
+	
 	"comment": "SUBTITLES",
 	"subtitles.mubble.block.question_block.loot.power_up": "Bloco de ? dropou um power up",
 	"subtitles.mubble.block.question_block.loot.coin": "Bloco de ? dropa uma moeda",
@@ -1230,6 +1275,7 @@
 	"subtitles.mubble.entity.zombie_cowman.hurt": "Vaqueiro Zumbi sente dor",
 	"subtitles.mubble.entity.zombie_cowman.angry": "Vaqueiro Zumbi se enfurece",
 	"subtitles.mubble.entity.zombie_cowman.death": "Vaqueiro Zumbi morre",
+	
 	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "Uma grande nova jornada",
@@ -1249,6 +1295,7 @@
 	"advancements.mubble.get_timeswap_table.description": "Craftou uma Mesa de Troca-Tempo",
 	"advancements.mubble.get_tetris_block.title": "Está Tudo Conectado",
 	"advancements.mubble.get_tetris_block.description": "Definiu em sua mão um Bloco de Tetris",
+	
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Deu %s pontos de comida para %s",
 	"commands.foodbar.add.food.success.multiple": "Deu %s pontos de comida para %s entidades",
@@ -1266,6 +1313,7 @@
 	"commands.motion.add.success.multiple": "Adicionado %s, %s, %s ao movimente de %s entidades",
 	"commands.motion.set.success.single": "Definiu %s, %s, %s para o movimento de %s",
 	"commands.motion.set.success.multiple": "Definiu %s, %s, %s para o movimento de %s entidades",
+	
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "Aquilo é para você, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Oi! Eu pensei que você já tinha isso em sua cabeça, §6Evan§r!",
