@@ -8,6 +8,8 @@ import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleFeatures;
 import hugman.mubble.init.world.MubbleGenerators;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
+import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -39,9 +41,8 @@ public class Mubble implements ModInitializer {
 	}
 
 	private void initGenerators() {
-		MubbleGenerators.registerOres();
-		MubbleGenerators.registerTrees();
-		MubbleGenerators.registerSpawns();
+		Registry.BIOME.forEach(MubbleGenerators::handleBiome);
+		RegistryEntryAddedCallback.event(Registry.BIOME).register((i, identifier, biome) -> MubbleGenerators.handleBiome(biome));
 	}
 	
 	/*private void initSpawnRestrictions()
