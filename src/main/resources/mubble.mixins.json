@@ -11,7 +11,8 @@
 	"client": [
 		"client.ClientPlayNetworkHandlerMixin",
 		"client.GameRendererAccessor",
-		"client.ItemStackMixin"
+		"client.ItemStackMixin",
+		"client.ItemRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
