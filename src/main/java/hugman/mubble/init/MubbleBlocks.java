@@ -38,9 +38,9 @@ public class MubbleBlocks {
 
 	/* Templates */
 	protected static final Block.Settings pLeaves = FabricBlockSettings.of(Material.LEAVES).hardness(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque();
-	protected static final Block.Settings pWoodenButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(true).hardness(0.5F).sounds(BlockSoundGroup.WOOD);
-	protected static final Block.Settings pStemButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(true).hardness(0.5F).sounds(BlockSoundGroup.NETHER_STEM);
-	protected static final Block.Settings pStoneButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(true).hardness(0.5F);
+	protected static final Block.Settings pWoodenButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD);
+	protected static final Block.Settings pStemButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.NETHER_STEM);
+	protected static final Block.Settings pStoneButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F);
 
 	/* MUBBLE */
 	public static final Block OAK_VERTICAL_SLAB = register("oak_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.OAK_SLAB)), ItemGroup.BUILDING_BLOCKS, 5, 20);
