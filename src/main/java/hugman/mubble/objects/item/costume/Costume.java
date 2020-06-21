@@ -89,7 +89,7 @@ public class Costume extends Item {
 		}
 		if(!world.isClient && effects != null) {
 			for(StatusEffectInstance effect : effects) {
-				((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 5, effect.getAmplifier(), false, true));
+				((LivingEntity) entity).addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 200, effect.getAmplifier(), false, false, true));
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-package hugman.mubble.objects.world.biome.nether;
+package hugman.mubble.objects.world.biome.the_nether;
 
 import hugman.mubble.init.world.MubbleFeatureConfigs;
 import hugman.mubble.init.world.MubbleFeatures;

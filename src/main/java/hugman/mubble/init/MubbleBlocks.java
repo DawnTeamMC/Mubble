@@ -208,20 +208,6 @@ public class MubbleBlocks {
 	public static final Block POLISHED_BLUNITE_VERTICAL_SLAB = register("polished_blunite_vertical_slab", new VerticalSlabBlock(Settings.copy(POLISHED_BLUNITE)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block POLISHED_CARBONITE_VERTICAL_SLAB = register("polished_carbonite_vertical_slab", new VerticalSlabBlock(Settings.copy(POLISHED_CARBONITE)), ItemGroup.BUILDING_BLOCKS);
 
-	public static final Block PERMAROCK = register("permarock", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.4F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PERMAFROST_BRICKS = register("permafrost_bricks", new Block(Settings.copy(Blocks.NETHER_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PERMAFROST_BRICK_STAIRS = register("permafrost_brick_stairs", new StairsBlock(PERMAFROST_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PERMAFROST_BRICK_SLAB = register("permafrost_brick_slab", new SlabBlock(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PERMAFROST_BRICK_VERTICAL_SLAB = register("permafrost_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PERMAFROST_BRICK_FENCE = register("permafrost_brick_fence", new FenceBlock(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.DECORATIONS);
-	public static final Block BLUE_PERMAFROST_BRICKS = register("blue_permafrost_bricks", new Block(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUE_PERMAFROST_BRICK_STAIRS = register("blue_permafrost_brick_stairs", new StairsBlock(BLUE_PERMAFROST_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUE_PERMAFROST_BRICK_SLAB = register("blue_permafrost_brick_slab", new SlabBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUE_PERMAFROST_BRICK_VERTICAL_SLAB = register("blue_permafrost_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUE_PERMAFROST_BRICK_WALL = register("blue_permafrost_brick_wall", new WallBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.DECORATIONS);
-	public static final Block PERMAFROST_BISMUTH_ORE = register("permafrost_bismuth_ore", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.3F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block FROZEN_OBSIDIAN = register("frozen_obsidian", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).strength(75.0F, 1800.0F)), ItemGroup.BUILDING_BLOCKS);
-
 	public static final Block VANADIUM_ORE = register("vanadium_ore", new OreBlock(Settings.copy(Blocks.DIAMOND_ORE)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block VANADIUM_BLOCK = register("vanadium_block", new Block(Settings.copy(Blocks.DIAMOND_BLOCK)), ItemGroup.BUILDING_BLOCKS);
 
@@ -813,6 +799,20 @@ public class MubbleBlocks {
 	public static final Block CORNFLOWER_PILE = register("cornflower_pile", new PileBlock(FabricBlockSettings.of(Material.PLANT).hardness(0.0F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block LILY_OF_THE_VALLEY_PILE = register("lily_of_the_valley_pile", new PileBlock(FabricBlockSettings.of(Material.PLANT).hardness(0.0F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block WITHER_ROSE_PILE = register("wither_rose_pile", new WitherRosePileBlock(FabricBlockSettings.of(Material.PLANT).hardness(0.0F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
+	
+	public static final Block PERMAROCK = register("permarock", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.4F)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block PERMAFROST_BRICKS = register("permafrost_bricks", new Block(Settings.copy(Blocks.NETHER_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block PERMAFROST_BRICK_STAIRS = register("permafrost_brick_stairs", new StairsBlock(PERMAFROST_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final Block PERMAFROST_BRICK_SLAB = register("permafrost_brick_slab", new SlabBlock(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block PERMAFROST_BRICK_VERTICAL_SLAB = register("permafrost_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block PERMAFROST_BRICK_FENCE = register("permafrost_brick_fence", new FenceBlock(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.DECORATIONS);
+	public static final Block BLUE_PERMAFROST_BRICKS = register("blue_permafrost_bricks", new Block(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block BLUE_PERMAFROST_BRICK_STAIRS = register("blue_permafrost_brick_stairs", new StairsBlock(BLUE_PERMAFROST_BRICKS), ItemGroup.BUILDING_BLOCKS);
+	public static final Block BLUE_PERMAFROST_BRICK_SLAB = register("blue_permafrost_brick_slab", new SlabBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block BLUE_PERMAFROST_BRICK_VERTICAL_SLAB = register("blue_permafrost_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block BLUE_PERMAFROST_BRICK_WALL = register("blue_permafrost_brick_wall", new WallBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.DECORATIONS);
+	public static final Block PERMAFROST_BISMUTH_ORE = register("permafrost_bismuth_ore", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.3F)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block FROZEN_OBSIDIAN = register("frozen_obsidian", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).strength(75.0F, 1800.0F)), ItemGroup.BUILDING_BLOCKS);
 
 	/* SUPER MARIO (MAKER) */
 	public static final Block SMB_QUESTION_BLOCK = register("smb_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS);

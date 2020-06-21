@@ -41,7 +41,7 @@ public abstract class LivingEntityMixin {
 		ItemStack headItem = entity.getEquippedStack(EquipmentSlot.HEAD);
 		if(!world.isClient) {
 			if(MubbleTags.Items.WEIGHT_HEAVY.contains(headItem.getItem())) {
-				entity.addStatusEffect(new StatusEffectInstance(MubbleEffects.HEAVINESS, 25, 0));
+				entity.addStatusEffect(new StatusEffectInstance(MubbleEffects.HEAVINESS, 200, 0, false, false, true));
 			}
 		}
 	}

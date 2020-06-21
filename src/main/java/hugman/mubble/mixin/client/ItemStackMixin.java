@@ -35,6 +35,7 @@ public class ItemStackMixin {
 			ItemStack.appendEnchantments(tooltip, enchantments);
 		}
 	}
+
 	@Redirect(method = "getTooltip", at = @At(value = "INVOKE",target = "isDamaged"))
 	public boolean appearsDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
