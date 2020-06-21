@@ -6,7 +6,8 @@
 		"AxeItemMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
-		"PlayerEntityMixin"
+		"PlayerEntityMixin",
+		"TreeFeatureMixin"
 	],
 	"client": [
 		"client.ClientPlayNetworkHandlerMixin",
