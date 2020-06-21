@@ -195,7 +195,7 @@ public class VerticalSlabBlock extends Block implements Waterloggable {
 			case LAND:
 				return false;
 			case WATER:
-				return worldIn.getFluidState(pos).matches(FluidTags.WATER);
+				return worldIn.getFluidState(pos).isIn(FluidTags.WATER);
 			case AIR:
 				return false;
 			default:

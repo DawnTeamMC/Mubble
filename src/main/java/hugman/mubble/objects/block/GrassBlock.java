@@ -24,7 +24,7 @@ public class GrassBlock extends net.minecraft.block.GrassBlock {
 
 	private static boolean canSpread(BlockState state, WorldView worldView, BlockPos pos) {
 		BlockPos blockpos = pos.up();
-		return worldView.getLightLevel(blockpos) >= 4 && worldView.getBlockState(blockpos).getOpacity(worldView, blockpos) < worldView.getMaxLightLevel() && !worldView.getFluidState(blockpos).matches(FluidTags.WATER);
+		return worldView.getLightLevel(blockpos) >= 4 && worldView.getBlockState(blockpos).getOpacity(worldView, blockpos) < worldView.getMaxLightLevel() && !worldView.getFluidState(blockpos).isIn(FluidTags.WATER);
 	}
 
 	@Override

@@ -2,31 +2,24 @@ package hugman.mubble.objects.world.gen.feature;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.ServerWorldAccess;
-import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.StructureAccessor;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.gen.feature.BoulderFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
-import net.minecraft.world.gen.feature.WeepingVinesFeature;
+import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
 
 import java.util.Iterator;
 import java.util.Random;
 
-public class EnderBoulderFeature extends Feature<BoulderFeatureConfig> {
-	public EnderBoulderFeature(Codec<BoulderFeatureConfig> codec) {
+public class EnderBoulderFeature extends Feature<ForestRockFeatureConfig> {
+	public EnderBoulderFeature(Codec<ForestRockFeatureConfig> codec) {
 		super(codec);
 	}
 
 	@Override
-	public boolean generate(ServerWorldAccess serverWorldAccess, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, BoulderFeatureConfig boulderFeatureConfig) {
+	public boolean generate(ServerWorldAccess serverWorldAccess, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, ForestRockFeatureConfig boulderFeatureConfig) {
 		while(true) {
 			label48: {
 				if (blockPos.getY() > 3) {

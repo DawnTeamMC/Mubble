@@ -43,7 +43,7 @@ public class CappyCostume extends HeadCostume {
 		Random rand = new Random();
 		World world = entity.world;
 		if(rand.nextInt(201) == 0) {
-			if(world.getFluidState(entity.getBlockPos()).matches(FluidTags.WATER)) {
+			if(world.getFluidState(entity.getBlockPos()).isIn(FluidTags.WATER)) {
 				world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
 			}
 			else {

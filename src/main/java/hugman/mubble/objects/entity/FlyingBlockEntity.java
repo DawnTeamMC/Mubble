@@ -126,11 +126,11 @@ public class FlyingBlockEntity extends Entity {
 			if(!this.world.isClient) {
 				blockPos2 = this.getBlockPos();
 				boolean bl = this.block.getBlock() instanceof ConcretePowderBlock;
-				boolean bl2 = bl && this.world.getFluidState(blockPos2).matches(FluidTags.WATER);
+				boolean bl2 = bl && this.world.getFluidState(blockPos2).isIn(FluidTags.WATER);
 				double d = this.getVelocity().lengthSquared();
 				if(bl && d > 1.0D) {
 					BlockHitResult blockHitResult = this.world.rayTrace(new RayTraceContext(new Vec3d(this.prevX, this.prevY, this.prevZ), this.getPos(), ShapeType.COLLIDER, FluidHandling.SOURCE_ONLY, this));
-					if(blockHitResult.getType() != Type.MISS && this.world.getFluidState(blockHitResult.getBlockPos()).matches(FluidTags.WATER)) {
+					if(blockHitResult.getType() != Type.MISS && this.world.getFluidState(blockHitResult.getBlockPos()).isIn(FluidTags.WATER)) {
 						blockPos2 = blockHitResult.getBlockPos();
 						bl2 = true;
 					}

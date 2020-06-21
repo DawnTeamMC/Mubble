@@ -14,10 +14,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.BeeEntity;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.PassiveEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -26,15 +23,15 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.village.TradeOffer;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
-public class ToadEntity extends AnimalEntity {
+public class ToadEntity extends AbstractTraderEntity {
 	private static final TrackedData<Integer> VARIANT = DataTracker.registerData(ToadEntity.class, TrackedDataHandlerRegistry.INTEGER);
-	private static final Ingredient TEMPTATION_ITEMS = Ingredient.fromTag(MubbleTags.Items.TOAD_FEEDING);
 
 	public ToadEntity(EntityType<? extends ToadEntity> type, World worldIn) {
 		super(type, worldIn);
@@ -55,9 +52,6 @@ public class ToadEntity extends AnimalEntity {
 		this.goalSelector.add(1, new FleeEntityGoal<>(this, LivingEntity.class, checkedEntity -> MubbleTags.Items.TOAD_FEAR.contains(checkedEntity.getEquippedStack(EquipmentSlot.HEAD).getItem()), 10f, 1.2f, 1.45f, EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR::test));
 		this.goalSelector.add(1, new LongDoorInteractGoal(this, true));
 		this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.6D));
-		this.goalSelector.add(2, new AnimalMateGoal(this, 1.0D));
-		this.goalSelector.add(3, new TemptGoal(this, 1.4D, false, TEMPTATION_ITEMS));
-		this.goalSelector.add(4, new FollowParentGoal(this, 1.1D));
 		this.goalSelector.add(4, new EscapeDangerGoal(this, 1.0D));
 		this.goalSelector.add(4, new LookAtEntityGoal(this, BeeEntity.class, 10.0F, 0.08F));
 		this.goalSelector.add(5, new LookAtEntityGoal(this, ChickenEntity.class, 10.0F));
@@ -114,6 +108,9 @@ public class ToadEntity extends AnimalEntity {
 		this.dataTracker.startTracking(VARIANT, 0);
 	}
 
+	@Override protected void afterUsing(TradeOffer offer) {
+	}
+
 	@Override
 	public void writeCustomDataToTag(CompoundTag compound) {
 		super.writeCustomDataToTag(compound);
@@ -124,6 +121,9 @@ public class ToadEntity extends AnimalEntity {
 	public void readCustomDataFromTag(CompoundTag compound) {
 		super.readCustomDataFromTag(compound);
 		this.setVariant(compound.getInt("Variant"));
+	}
+
+	@Override protected void fillRecipes() {
 	}
 
 	@Override
@@ -180,11 +180,6 @@ public class ToadEntity extends AnimalEntity {
 		ToadEntity childToad = new ToadEntity(MubbleEntities.TOAD, this.world);
 		childToad.setVariant(this.world.random.nextInt(16));
 		return childToad;
-	}
-
-	@Override
-	public boolean isBreedingItem(ItemStack stack) {
-		return TEMPTATION_ITEMS.test(stack);
 	}
 
 	public static boolean canSpawn(EntityType<ToadEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand) {

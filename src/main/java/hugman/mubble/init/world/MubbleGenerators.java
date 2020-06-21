@@ -3,7 +3,6 @@ package hugman.mubble.init.world;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.objects.entity.DuckEntity;
-import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.world.biome.Biome;
@@ -14,8 +13,8 @@ import net.minecraft.world.gen.decorator.CountDecoratorConfig;
 import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
-import net.minecraft.world.gen.feature.BoulderFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 public class MubbleGenerators {
@@ -36,7 +35,7 @@ public class MubbleGenerators {
 		}
 
 		if(biome == Biomes.END_MIDLANDS) {
-			biome.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, MubbleFeatures.ENDER_BOULDER.configure(new BoulderFeatureConfig(Blocks.OBSIDIAN.getDefaultState(), 0)).createDecoratedFeature(Decorator.FOREST_ROCK.configure(new CountDecoratorConfig(3))));
+			biome.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, MubbleFeatures.ENDER_BOULDER.configure(new ForestRockFeatureConfig(Blocks.OBSIDIAN.getDefaultState(), 0)).createDecoratedFeature(Decorator.FOREST_ROCK.configure(new CountDecoratorConfig(3))));
 		}
 	}
 }
