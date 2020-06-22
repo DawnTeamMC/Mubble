@@ -1,9 +1,23 @@
 {
 	"replace": false,
 	"values": [
+		"mubble:oak_wood_stairs",
+		"mubble:spruce_wood_stairs",
+		"mubble:birch_wood_stairs",
+		"mubble:jungle_wood_stairs",
+		"mubble:acacia_wood_stairs",
+		"mubble:dark_oak_wood_stairs",
+		"mubble:crimson_hyphae_stairs",
+		"mubble:warped_hyphae_stairs",
 		"mubble:cherry_oak_stairs",
+		"mubble:cherry_oak_wood_stairs",
 		"mubble:palm_stairs",
+		"mubble:palm_wood_stairs",
 		"mubble:press_garden_stairs",
-		"mubble:scarlet_stairs"
+		"mubble:press_garden_wood_stairs",
+		"mubble:scarlet_stairs",
+		"mubble:scarlet_wood_stairs",
+		"mubble:dark_amaranth_stairs",
+		"mubble:dark_amaranth_hyphae_stairs"
 	]
 }

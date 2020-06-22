@@ -1,0 +1,7 @@
+{
+	"replace": false,
+	"values": [
+		"#mubble:concrete/buttons",
+		"#mubble:terracotta/buttons"
+	]
+}

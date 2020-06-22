@@ -1,0 +1,9 @@
+{
+	"replace": false,
+	"values": [
+		"#mubble:cherry_oak_logs",
+		"#mubble:palm_logs",
+		"#mubble:press_garden_logs",
+		"#mubble:scarlet_logs"
+	]
+}

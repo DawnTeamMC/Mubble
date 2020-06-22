@@ -1,0 +1,12 @@
+{
+	"replace": false,
+	"values": [
+		"mubble:fire_flower",
+		"mubble:ice_flower",
+		"mubble:boomerang_flower",
+		"mubble:cloud_flower",
+		"mubble:gold_flower",
+		"mubble:scarlet_orchid",
+		"mubble:potato_flower"
+	]
+}

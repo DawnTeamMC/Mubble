@@ -1,0 +1,31 @@
+{
+	"replace": false,
+	"values": [
+		"mubble:crimson_hyphae_stairs",
+		"mubble:crimson_hyphae_slab",
+		"mubble:crimson_hyphae_vertical_slab",
+		"mubble:crimson_hyphae_button",
+		"mubble:warped_hyphae_stairs",
+		"mubble:warped_hyphae_slab",
+		"mubble:warped_hyphae_vertical_slab",
+		"mubble:warped_hyphae_button",
+		"mubble:dark_amaranth_stem",
+		"mubble:stripped_dark_amaranth_stem",
+		"mubble:dark_amaranth_hyphae",
+		"mubble:stripped_dark_amaranth_hyphae",
+		"mubble:dark_amaranth_planks",
+		"mubble:dark_amaranth_slab",
+		"mubble:dark_amaranth_vertical_slab",
+		"mubble:dark_amaranth_pressure_plate",
+		"mubble:dark_amaranth_fence",
+		"mubble:dark_amaranth_trapdoor",
+		"mubble:dark_amaranth_fence_gate",
+		"mubble:dark_amaranth_stairs",
+		"mubble:dark_amaranth_button",
+		"mubble:dark_amaranth_door",
+		"mubble:dark_amaranth_hyphae_stairs",
+		"mubble:dark_amaranth_hyphae_slab",
+		"mubble:dark_amaranth_hyphae_vertical_slab",
+		"mubble:dark_amaranth_hyphae_button"
+	]
+}

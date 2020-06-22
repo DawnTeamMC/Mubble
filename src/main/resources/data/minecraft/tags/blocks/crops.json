@@ -1,6 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"#mubble:dark_amaranth_stems"
+		"mubble:tomatoes",
+		"mubble:salad"
 	]
 }

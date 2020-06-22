@@ -1,9 +1,23 @@
 {
 	"replace": false,
 	"values": [
+		"mubble:oak_wood_vertical_slab",
+		"mubble:spruce_wood_vertical_slab",
+		"mubble:birch_wood_vertical_slab",
+		"mubble:jungle_wood_vertical_slab",
+		"mubble:acacia_wood_vertical_slab",
+		"mubble:dark_oak_wood_vertical_slab",
+		"mubble:crimson_hyphae_vertical_slab",
+		"mubble:warped_hyphae_vertical_slab",
 		"mubble:cherry_oak_vertical_slab",
+		"mubble:cherry_oak_wood_vertical_slab",
 		"mubble:palm_vertical_slab",
+		"mubble:palm_wood_vertical_slab",
 		"mubble:press_garden_vertical_slab",
-		"mubble:scarlet_vertical_slab"
+		"mubble:press_garden_wood_vertical_slab",
+		"mubble:scarlet_vertical_slab",
+		"mubble:scarlet_wood_vertical_slab",
+		"mubble:dark_amaranth_vertical_slab",
+		"mubble:dark_amaranth_hyphae_vertical_slab"
 	]
 }

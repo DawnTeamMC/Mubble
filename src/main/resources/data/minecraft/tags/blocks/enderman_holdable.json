@@ -1,0 +1,11 @@
+{
+	"replace": false,
+	"values": [
+		"mubble:green_hill_dirt",
+		"mubble:green_hill_grass_block",
+		"#mubble:mushrooms",
+		"mubble:dark_amaranth_fungus",
+		"mubble:amaranth_dylium",
+		"mubble:amaranth_roots"
+	]
+}
