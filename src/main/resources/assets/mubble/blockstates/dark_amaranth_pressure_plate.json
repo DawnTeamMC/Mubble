@@ -1,0 +1,10 @@
+{
+	"variants": {
+		"powered=false": {
+			"model": "mubble:block/dark_amaranth_pressure_plate/unpressed"
+		},
+		"powered=true": {
+			"model": "mubble:block/dark_amaranth_pressure_plate/pressed"
+		}
+	}
+}

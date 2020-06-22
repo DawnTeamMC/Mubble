@@ -13,8 +13,8 @@ import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
 import java.util.Iterator;
 import java.util.Random;
 
-public class EnderBoulderFeature extends Feature<ForestRockFeatureConfig> {
-	public EnderBoulderFeature(Codec<ForestRockFeatureConfig> codec) {
+public class EndBoulderFeature extends Feature<ForestRockFeatureConfig> {
+	public EndBoulderFeature(Codec<ForestRockFeatureConfig> codec) {
 		super(codec);
 	}
 

@@ -2,23 +2,27 @@ package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.init.data.MubbleSoundTypes;
+import hugman.mubble.init.world.MubbleFeatureConfigs;
 import hugman.mubble.objects.block.CakeBlock;
 import hugman.mubble.objects.block.DoorBlock;
+import hugman.mubble.objects.block.FungusBlock;
 import hugman.mubble.objects.block.GrassBlock;
 import hugman.mubble.objects.block.MushroomPlantBlock;
 import hugman.mubble.objects.block.NoteBlock;
 import hugman.mubble.objects.block.OreBlock;
 import hugman.mubble.objects.block.PressurePlateBlock;
+import hugman.mubble.objects.block.RootsBlock;
 import hugman.mubble.objects.block.SaplingBlock;
 import hugman.mubble.objects.block.StairsBlock;
 import hugman.mubble.objects.block.StoneButtonBlock;
+import hugman.mubble.objects.block.TrapdoorBlock;
 import hugman.mubble.objects.block.WoodButtonBlock;
 import hugman.mubble.objects.block.*;
 import hugman.mubble.objects.block.sapling_generator.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.*;
+import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.BlockItem;
@@ -28,6 +32,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.gen.feature.Feature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +43,6 @@ public class MubbleBlocks {
 
 	/* Templates */
 	protected static final Block.Settings pLeaves = FabricBlockSettings.of(Material.LEAVES).hardness(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque();
-	protected static final Block.Settings pWoodenButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD);
-	protected static final Block.Settings pStemButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.NETHER_STEM);
-	protected static final Block.Settings pStoneButton = FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F);
 
 	/* MUBBLE */
 	public static final Block OAK_VERTICAL_SLAB = register("oak_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.OAK_SLAB)), ItemGroup.BUILDING_BLOCKS, 5, 20);
@@ -112,14 +114,14 @@ public class MubbleBlocks {
 	public static final Block CRIMSON_HYPHAE_VERTICAL_SLAB = register("crimson_hyphae_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.CRIMSON_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block WARPED_HYPHAE_VERTICAL_SLAB = register("warped_hyphae_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.WARPED_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
 
-	public static final Block OAK_WOOD_BUTTON = register("oak_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
-	public static final Block SPRUCE_WOOD_BUTTON = register("spruce_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
-	public static final Block BIRCH_WOOD_BUTTON = register("birch_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
-	public static final Block JUNGLE_WOOD_BUTTON = register("jungle_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
-	public static final Block ACACIA_WOOD_BUTTON = register("acacia_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
-	public static final Block DARK_OAK_WOOD_BUTTON = register("dark_oak_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
-	public static final Block CRIMSON_HYPHAE_BUTTON = register("crimson_hyphae_button", new WoodButtonBlock(pStemButton), ItemGroup.REDSTONE);
-	public static final Block WARPED_HYPHAE_BUTTON = register("warped_hyphae_button", new WoodButtonBlock(pStemButton), ItemGroup.REDSTONE);
+	public static final Block OAK_WOOD_BUTTON = register("oak_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final Block SPRUCE_WOOD_BUTTON = register("spruce_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final Block BIRCH_WOOD_BUTTON = register("birch_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final Block JUNGLE_WOOD_BUTTON = register("jungle_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final Block ACACIA_WOOD_BUTTON = register("acacia_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final Block DARK_OAK_WOOD_BUTTON = register("dark_oak_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final Block CRIMSON_HYPHAE_BUTTON = register("crimson_hyphae_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.NETHER_STEM)), ItemGroup.REDSTONE);
+	public static final Block WARPED_HYPHAE_BUTTON = register("warped_hyphae_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.NETHER_STEM)), ItemGroup.REDSTONE);
 
 	public static final Block OAK_LEAF_PILE = register("oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block SPRUCE_LEAF_PILE = register("spruce_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
@@ -230,8 +232,8 @@ public class MubbleBlocks {
 	public static final Block WHITE_CHERRY_OAK_LEAVES = register("white_cherry_oak_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, 30, 60);
 	public static final Block WHITE_CHERRY_OAK_LEAF_PILE = register("white_cherry_oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block CHERRY_OAK_PRESSURE_PLATE = register("cherry_oak_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.copy(MubbleBlocks.CHERRY_OAK_PLANKS).strength(0.5F, 0.0F).noCollision()), ItemGroup.REDSTONE);
-	public static final Block CHERRY_OAK_TRAPDOOR = register("cherry_oak_trapdoor", new TrapDoorBlock(Settings.copy(MubbleBlocks.CHERRY_OAK_PLANKS)), ItemGroup.REDSTONE);
-	public static final Block CHERRY_OAK_BUTTON = register("cherry_oak_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
+	public static final Block CHERRY_OAK_TRAPDOOR = register("cherry_oak_trapdoor", new TrapdoorBlock(Settings.copy(MubbleBlocks.CHERRY_OAK_PLANKS)), ItemGroup.REDSTONE);
+	public static final Block CHERRY_OAK_BUTTON = register("cherry_oak_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 	public static final Block CHERRY_OAK_STAIRS = register("cherry_oak_stairs", new StairsBlock(CHERRY_OAK_PLANKS), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block CHERRY_OAK_SLAB = register("cherry_oak_slab", new SlabBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block CHERRY_OAK_VERTICAL_SLAB = register("cherry_oak_vertical_slab", new VerticalSlabBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
@@ -241,7 +243,7 @@ public class MubbleBlocks {
 	public static final Block CHERRY_OAK_WOOD_STAIRS = register("cherry_oak_wood_stairs", new StairsBlock(CHERRY_OAK_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block CHERRY_OAK_WOOD_SLAB = register("cherry_oak_wood_slab", new SlabBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block CHERRY_OAK_WOOD_VERTICAL_SLAB = register("cherry_oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CHERRY_OAK_WOOD_BUTTON = register("cherry_oak_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
+	public static final Block CHERRY_OAK_WOOD_BUTTON = register("cherry_oak_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 
 	public static final Block PALM_PLANKS = register("palm_planks", new Block(Settings.copy(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PALM_SAPLING = registerPotable("palm_sapling", new SaplingBlock(new PalmSaplingGenerator()), ItemGroup.DECORATIONS);
@@ -252,8 +254,8 @@ public class MubbleBlocks {
 	public static final Block PALM_LEAVES = register("palm_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, 30, 60);
 	public static final Block PALM_LEAF_PILE = register("palm_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block PALM_PRESSURE_PLATE = register("palm_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.copy(MubbleBlocks.PALM_PLANKS).noCollision().strength(0.5F, 0.0F)), ItemGroup.REDSTONE);
-	public static final Block PALM_TRAPDOOR = register("palm_trapdoor", new TrapDoorBlock(Settings.copy(MubbleBlocks.PALM_PLANKS)), ItemGroup.REDSTONE);
-	public static final Block PALM_BUTTON = register("palm_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
+	public static final Block PALM_TRAPDOOR = register("palm_trapdoor", new TrapdoorBlock(Settings.copy(MubbleBlocks.PALM_PLANKS)), ItemGroup.REDSTONE);
+	public static final Block PALM_BUTTON = register("palm_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 	public static final Block PALM_STAIRS = register("palm_stairs", new StairsBlock(PALM_PLANKS), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PALM_SLAB = register("palm_slab", new SlabBlock(Settings.copy(PALM_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PALM_VERTICAL_SLAB = register("palm_vertical_slab", new VerticalSlabBlock(Settings.copy(PALM_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
@@ -263,7 +265,7 @@ public class MubbleBlocks {
 	public static final Block PALM_WOOD_STAIRS = register("palm_wood_stairs", new StairsBlock(PALM_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PALM_WOOD_SLAB = register("palm_wood_slab", new SlabBlock(Settings.copy(PALM_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PALM_WOOD_VERTICAL_SLAB = register("palm_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(PALM_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block PALM_WOOD_BUTTON = register("palm_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
+	public static final Block PALM_WOOD_BUTTON = register("palm_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 
 	public static final Block WHITE_BRICKS = register("white_bricks", new Block(Settings.copy(Blocks.BRICKS)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block LIGHT_GRAY_BRICKS = register("light_gray_bricks", new Block(Settings.copy(Blocks.BRICKS)), ItemGroup.BUILDING_BLOCKS);
@@ -440,23 +442,23 @@ public class MubbleBlocks {
 	public static final Block MAGENTA_TERRACOTTA_PRESSURE_PLATE = register("magenta_terracotta_pressure_plate", new PressurePlateBlock(ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.MAGENTA_TERRACOTTA).noCollision().strength(0.5F, 0.0F)), ItemGroup.REDSTONE);
 	public static final Block PINK_TERRACOTTA_PRESSURE_PLATE = register("pink_terracotta_pressure_plate", new PressurePlateBlock(ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.PINK_TERRACOTTA).noCollision().strength(0.5F, 0.0F)), ItemGroup.REDSTONE);
 
-	public static final Block TERRACOTTA_BUTTON = register("terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block WHITE_TERRACOTTA_BUTTON = register("white_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block LIGHT_GRAY_TERRACOTTA_BUTTON = register("light_gray_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block GRAY_TERRACOTTA_BUTTON = register("gray_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block BLACK_TERRACOTTA_BUTTON = register("black_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block BROWN_TERRACOTTA_BUTTON = register("brown_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block RED_TERRACOTTA_BUTTON = register("red_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block ORANGE_TERRACOTTA_BUTTON = register("orange_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block YELLOW_TERRACOTTA_BUTTON = register("yellow_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block LIME_TERRACOTTA_BUTTON = register("lime_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block GREEN_TERRACOTTA_BUTTON = register("green_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block CYAN_TERRACOTTA_BUTTON = register("cyan_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block LIGHT_BLUE_TERRACOTTA_BUTTON = register("light_blue_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block BLUE_TERRACOTTA_BUTTON = register("blue_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block PURPLE_TERRACOTTA_BUTTON = register("purple_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block MAGENTA_TERRACOTTA_BUTTON = register("magenta_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block PINK_TERRACOTTA_BUTTON = register("pink_terracotta_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
+	public static final Block TERRACOTTA_BUTTON = register("terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block WHITE_TERRACOTTA_BUTTON = register("white_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block LIGHT_GRAY_TERRACOTTA_BUTTON = register("light_gray_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block GRAY_TERRACOTTA_BUTTON = register("gray_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block BLACK_TERRACOTTA_BUTTON = register("black_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block BROWN_TERRACOTTA_BUTTON = register("brown_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block RED_TERRACOTTA_BUTTON = register("red_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block ORANGE_TERRACOTTA_BUTTON = register("orange_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block YELLOW_TERRACOTTA_BUTTON = register("yellow_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block LIME_TERRACOTTA_BUTTON = register("lime_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block GREEN_TERRACOTTA_BUTTON = register("green_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block CYAN_TERRACOTTA_BUTTON = register("cyan_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block LIGHT_BLUE_TERRACOTTA_BUTTON = register("light_blue_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block BLUE_TERRACOTTA_BUTTON = register("blue_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block PURPLE_TERRACOTTA_BUTTON = register("purple_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block MAGENTA_TERRACOTTA_BUTTON = register("magenta_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block PINK_TERRACOTTA_BUTTON = register("pink_terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
 
 	public static final Block WHITE_DARK_PRISMARINE = register("white_dark_prismarine", new Block(Settings.copy(Blocks.DARK_PRISMARINE)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block LIGHT_GRAY_DARK_PRISMARINE = register("light_gray_dark_prismarine", new Block(Settings.copy(Blocks.DARK_PRISMARINE)), ItemGroup.BUILDING_BLOCKS);
@@ -628,22 +630,22 @@ public class MubbleBlocks {
 	public static final Block MAGENTA_CONCRETE_PRESSURE_PLATE = register("magenta_concrete_pressure_plate", new PressurePlateBlock(ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.MAGENTA_CONCRETE).noCollision().strength(0.5F, 0.0F)), ItemGroup.REDSTONE);
 	public static final Block PINK_CONCRETE_PRESSURE_PLATE = register("pink_concrete_pressure_plate", new PressurePlateBlock(ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.PINK_CONCRETE).noCollision().strength(0.5F, 0.0F)), ItemGroup.REDSTONE);
 
-	public static final Block WHITE_CONCRETE_BUTTON = register("white_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block LIGHT_GRAY_CONCRETE_BUTTON = register("light_gray_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block GRAY_CONCRETE_BUTTON = register("gray_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block BLACK_CONCRETE_BUTTON = register("black_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block BROWN_CONCRETE_BUTTON = register("brown_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block RED_CONCRETE_BUTTON = register("red_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block ORANGE_CONCRETE_BUTTON = register("orange_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block YELLOW_CONCRETE_BUTTON = register("yellow_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block LIME_CONCRETE_BUTTON = register("lime_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block GREEN_CONCRETE_BUTTON = register("green_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block CYAN_CONCRETE_BUTTON = register("cyan_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block LIGHT_BLUE_CONCRETE_BUTTON = register("light_blue_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block BLUE_CONCRETE_BUTTON = register("blue_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block PURPLE_CONCRETE_BUTTON = register("purple_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block MAGENTA_CONCRETE_BUTTON = register("magenta_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
-	public static final Block PINK_CONCRETE_BUTTON = register("pink_concrete_button", new StoneButtonBlock(pStoneButton), ItemGroup.REDSTONE);
+	public static final Block WHITE_CONCRETE_BUTTON = register("white_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block LIGHT_GRAY_CONCRETE_BUTTON = register("light_gray_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block GRAY_CONCRETE_BUTTON = register("gray_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block BLACK_CONCRETE_BUTTON = register("black_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block BROWN_CONCRETE_BUTTON = register("brown_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block RED_CONCRETE_BUTTON = register("red_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block ORANGE_CONCRETE_BUTTON = register("orange_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block YELLOW_CONCRETE_BUTTON = register("yellow_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block LIME_CONCRETE_BUTTON = register("lime_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block GREEN_CONCRETE_BUTTON = register("green_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block CYAN_CONCRETE_BUTTON = register("cyan_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block LIGHT_BLUE_CONCRETE_BUTTON = register("light_blue_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block BLUE_CONCRETE_BUTTON = register("blue_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block PURPLE_CONCRETE_BUTTON = register("purple_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block MAGENTA_CONCRETE_BUTTON = register("magenta_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
+	public static final Block PINK_CONCRETE_BUTTON = register("pink_concrete_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
 
 	public static final Block WHITE_QUARTZ_PAVING = register("white_quartz_paving", new Block(Settings.copy(Blocks.QUARTZ_BLOCK)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block LIGHT_GRAY_QUARTZ_PAVING = register("light_gray_quartz_paving", new Block(Settings.copy(Blocks.QUARTZ_BLOCK)), ItemGroup.BUILDING_BLOCKS);
@@ -799,20 +801,46 @@ public class MubbleBlocks {
 	public static final Block CORNFLOWER_PILE = register("cornflower_pile", new PileBlock(FabricBlockSettings.of(Material.PLANT).hardness(0.0F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block LILY_OF_THE_VALLEY_PILE = register("lily_of_the_valley_pile", new PileBlock(FabricBlockSettings.of(Material.PLANT).hardness(0.0F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block WITHER_ROSE_PILE = register("wither_rose_pile", new WitherRosePileBlock(FabricBlockSettings.of(Material.PLANT).hardness(0.0F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
-	
+
 	public static final Block PERMAROCK = register("permarock", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.4F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PERMAFROST_BRICKS = register("permafrost_bricks", new Block(Settings.copy(Blocks.NETHER_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block PERMAFROST_BRICKS = register("permafrost_bricks", new Block(FabricBlockSettings.copy(Blocks.NETHER_BRICKS)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block PERMAFROST_BRICK_STAIRS = register("permafrost_brick_stairs", new StairsBlock(PERMAFROST_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PERMAFROST_BRICK_SLAB = register("permafrost_brick_slab", new SlabBlock(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PERMAFROST_BRICK_VERTICAL_SLAB = register("permafrost_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PERMAFROST_BRICK_FENCE = register("permafrost_brick_fence", new FenceBlock(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.DECORATIONS);
-	public static final Block BLUE_PERMAFROST_BRICKS = register("blue_permafrost_bricks", new Block(Settings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block PERMAFROST_BRICK_SLAB = register("permafrost_brick_slab", new SlabBlock(FabricBlockSettings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block PERMAFROST_BRICK_VERTICAL_SLAB = register("permafrost_brick_vertical_slab", new VerticalSlabBlock(FabricBlockSettings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block PERMAFROST_BRICK_FENCE = register("permafrost_brick_fence", new FenceBlock(FabricBlockSettings.copy(PERMAFROST_BRICKS)), ItemGroup.DECORATIONS);
+	public static final Block BLUE_PERMAFROST_BRICKS = register("blue_permafrost_bricks", new Block(FabricBlockSettings.copy(PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block BLUE_PERMAFROST_BRICK_STAIRS = register("blue_permafrost_brick_stairs", new StairsBlock(BLUE_PERMAFROST_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUE_PERMAFROST_BRICK_SLAB = register("blue_permafrost_brick_slab", new SlabBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block BLUE_PERMAFROST_BRICK_SLAB = register("blue_permafrost_brick_slab", new SlabBlock(FabricBlockSettings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block BLUE_PERMAFROST_BRICK_VERTICAL_SLAB = register("blue_permafrost_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUE_PERMAFROST_BRICK_WALL = register("blue_permafrost_brick_wall", new WallBlock(Settings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.DECORATIONS);
+	public static final Block BLUE_PERMAFROST_BRICK_WALL = register("blue_permafrost_brick_wall", new WallBlock(FabricBlockSettings.copy(BLUE_PERMAFROST_BRICKS)), ItemGroup.DECORATIONS);
 	public static final Block PERMAFROST_BISMUTH_ORE = register("permafrost_bismuth_ore", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.3F)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block FROZEN_OBSIDIAN = register("frozen_obsidian", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).strength(75.0F, 1800.0F)), ItemGroup.BUILDING_BLOCKS);
+
+	public static final Block AMARANTH_DYLIUM = register("amaranth_dylium", new DyliumBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.field_25702).requiresTool().strength(3.0F, 9.0F).sounds(BlockSoundGroup.NYLIUM).ticksRandomly()), ItemGroup.BUILDING_BLOCKS);
+	public static final Block AMARANTH_ROOTS = register("amaranth_roots", new RootsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MaterialColor.CYAN).noCollision().breakInstantly().sounds(BlockSoundGroup.ROOTS)), ItemGroup.DECORATIONS);
+
+	public static final Block DARK_AMARANTH_PLANKS = register("dark_amaranth_planks", new Block(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.field_25706).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block DARK_AMARANTH_FUNGUS = register("dark_amaranth_fungus", new FungusBlock(FabricBlockSettings.of(Material.PLANT, MaterialColor.CYAN).breakInstantly().noCollision().sounds(BlockSoundGroup.FUNGUS), () -> {
+		return Feature.HUGE_FUNGUS.configure(MubbleFeatureConfigs.AMARANTH_FUNGUS_CONFIG);
+	}), ItemGroup.DECORATIONS);
+	public static final Block DARK_AMARANTH_STEM = register("dark_amaranth_stem", new PillarBlock(FabricBlockSettings.copy(Blocks.CRIMSON_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block STRIPPED_DARK_AMARANTH_STEM = register("stripped_dark_amaranth_stem", new PillarBlock(FabricBlockSettings.copy(Blocks.STRIPPED_CRIMSON_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block DARK_AMARANTH_HYPHAE = register("dark_amaranth_hyphae", new PillarBlock(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.field_25707).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block STRIPPED_DARK_AMARANTH_HYPHAE = register("stripped_dark_amaranth_hyphae", new PillarBlock(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.field_25707).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block AMARANTH_WART_BLOCK = register("amaranth_wart_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block DARK_AMARANTH_PRESSURE_PLATE = register("dark_amaranth_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.CYAN).noCollision().strength(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final Block DARK_AMARANTH_TRAPDOOR = register("dark_amaranth_trapdoor", new TrapdoorBlock(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.CYAN).strength(3.0F).sounds(BlockSoundGroup.WOOD).nonOpaque()), ItemGroup.REDSTONE);
+	public static final Block DARK_AMARANTH_BUTTON = register("dark_amaranth_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).noCollision().strength(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final Block DARK_AMARANTH_STAIRS = register("dark_amaranth_stairs", new StairsBlock(DARK_AMARANTH_PLANKS), ItemGroup.BUILDING_BLOCKS);
+	public static final Block DARK_AMARANTH_SLAB = register("dark_amaranth_slab", new SlabBlock(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.CYAN).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block DARK_AMARANTH_VERTICAL_SLAB = register("dark_amaranth_vertical_slab", new VerticalSlabBlock(Settings.copy(DARK_AMARANTH_PLANKS)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block DARK_AMARANTH_FENCE_GATE = register("dark_amaranth_fence_gate", new FenceGateBlock(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.CYAN).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final Block DARK_AMARANTH_FENCE = register("dark_amaranth_fence", new FenceBlock(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.CYAN).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
+	public static final Block DARK_AMARANTH_DOOR = register("dark_amaranth_door", new DoorBlock(FabricBlockSettings.of(Material.NETHER_WOOD, DARK_AMARANTH_PLANKS.getDefaultMaterialColor()).strength(3.0F).sounds(BlockSoundGroup.WOOD).nonOpaque()), ItemGroup.REDSTONE);
+	public static final Block DARK_AMARANTH_HYPHAE_STAIRS = register("dark_amaranth_hyphae_stairs", new StairsBlock(DARK_AMARANTH_HYPHAE), ItemGroup.BUILDING_BLOCKS);
+	public static final Block DARK_AMARANTH_HYPHAE_SLAB = register("dark_amaranth_hyphae_slab", new SlabBlock(FabricBlockSettings.copy(DARK_AMARANTH_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block DARK_AMARANTH_HYPHAE_VERTICAL_SLAB = register("dark_amaranth_hyphae_vertical_slab", new VerticalSlabBlock(FabricBlockSettings.copy(DARK_AMARANTH_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block DARK_AMARANTH_HYPHAE_BUTTON = register("dark_amaranth_hyphae_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.NETHER_STEM)), ItemGroup.REDSTONE);
 
 	/* SUPER MARIO (MAKER) */
 	public static final Block SMB_QUESTION_BLOCK = register("smb_question_block", new QuestionBlock(), ItemGroup.BUILDING_BLOCKS);
@@ -1022,8 +1050,8 @@ public class MubbleBlocks {
 	public static final Block PINK_PRESS_GARDEN_LEAVES = register("pink_press_garden_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, 30, 60);
 	public static final Block PINK_PRESS_GARDEN_LEAF_PILE = register("pink_press_garden_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block PRESS_GARDEN_PRESSURE_PLATE = register("press_garden_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.copy(MubbleBlocks.PRESS_GARDEN_PLANKS).noCollision().strength(0.5F, 0.0F)), ItemGroup.REDSTONE);
-	public static final Block PRESS_GARDEN_TRAPDOOR = register("press_garden_trapdoor", new TrapDoorBlock(Settings.copy(MubbleBlocks.PRESS_GARDEN_PLANKS)), ItemGroup.REDSTONE);
-	public static final Block PRESS_GARDEN_BUTTON = register("press_garden_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
+	public static final Block PRESS_GARDEN_TRAPDOOR = register("press_garden_trapdoor", new TrapdoorBlock(Settings.copy(MubbleBlocks.PRESS_GARDEN_PLANKS)), ItemGroup.REDSTONE);
+	public static final Block PRESS_GARDEN_BUTTON = register("press_garden_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 	public static final Block PRESS_GARDEN_STAIRS = register("press_garden_stairs", new StairsBlock(PRESS_GARDEN_PLANKS), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PRESS_GARDEN_SLAB = register("press_garden_slab", new SlabBlock(Settings.copy(PRESS_GARDEN_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PRESS_GARDEN_VERTICAL_SLAB = register("press_garden_vertical_slab", new VerticalSlabBlock(Settings.copy(PRESS_GARDEN_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
@@ -1033,7 +1061,7 @@ public class MubbleBlocks {
 	public static final Block PRESS_GARDEN_WOOD_STAIRS = register("press_garden_wood_stairs", new StairsBlock(PRESS_GARDEN_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PRESS_GARDEN_WOOD_SLAB = register("press_garden_wood_slab", new SlabBlock(Settings.copy(PRESS_GARDEN_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PRESS_GARDEN_WOOD_VERTICAL_SLAB = register("press_garden_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(PRESS_GARDEN_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block PRESS_GARDEN_WOOD_BUTTON = register("press_garden_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
+	public static final Block PRESS_GARDEN_WOOD_BUTTON = register("press_garden_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 
 	public static final Block SPRING = register("spring", new SpringBlock(FabricBlockSettings.of(Material.METAL).hardness(4f)), ItemGroup.TRANSPORTATION);
 
@@ -1047,8 +1075,8 @@ public class MubbleBlocks {
 	public static final Block SCARLET_LEAVES = register("scarlet_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, 30, 60);
 	public static final Block SCARLET_LEAF_PILE = register("scarlet_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block SCARLET_PRESSURE_PLATE = register("scarlet_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.copy(SCARLET_PLANKS).noCollision().strength(0.5F, 0.0F)), ItemGroup.REDSTONE);
-	public static final Block SCARLET_TRAPDOOR = register("scarlet_trapdoor", new TrapDoorBlock(Settings.copy(SCARLET_PLANKS)), ItemGroup.REDSTONE);
-	public static final Block SCARLET_BUTTON = register("scarlet_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
+	public static final Block SCARLET_TRAPDOOR = register("scarlet_trapdoor", new TrapdoorBlock(Settings.copy(SCARLET_PLANKS)), ItemGroup.REDSTONE);
+	public static final Block SCARLET_BUTTON = register("scarlet_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 	public static final Block SCARLET_STAIRS = register("scarlet_stairs", new StairsBlock(SCARLET_PLANKS), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block SCARLET_SLAB = register("scarlet_slab", new SlabBlock(Settings.copy(SCARLET_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block SCARLET_VERTICAL_SLAB = register("scarlet_vertical_slab", new VerticalSlabBlock(Settings.copy(SCARLET_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
@@ -1058,7 +1086,7 @@ public class MubbleBlocks {
 	public static final Block SCARLET_WOOD_STAIRS = register("scarlet_wood_stairs", new StairsBlock(SCARLET_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block SCARLET_WOOD_SLAB = register("scarlet_wood_slab", new SlabBlock(Settings.copy(SCARLET_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block SCARLET_WOOD_VERTICAL_SLAB = register("scarlet_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(SCARLET_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block SCARLET_WOOD_BUTTON = register("scarlet_wood_button", new WoodButtonBlock(pWoodenButton), ItemGroup.REDSTONE);
+	public static final Block SCARLET_WOOD_BUTTON = register("scarlet_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 	public static final Block SCARLET_MUSHROOM = registerPotable("scarlet_mushroom", new MushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7)), ItemGroup.DECORATIONS);
 	public static final Block SCARLET_ORCHID = registerPotable("scarlet_orchid", new FlowerBlock(StatusEffects.GLOWING, 8, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7)), ItemGroup.DECORATIONS, 60, 100);
 

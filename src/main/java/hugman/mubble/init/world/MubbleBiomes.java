@@ -2,6 +2,8 @@ package hugman.mubble.init.world;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.world.biome.SMWDesertBiome;
+import hugman.mubble.objects.world.biome.the_end.DarkAmaranthForest;
+import hugman.mubble.objects.world.biome.the_end.TallDarkAmaranthForest;
 import hugman.mubble.objects.world.biome.the_nether.*;
 import hugman.mubble.objects.world.biome.overworld.*;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
@@ -21,6 +23,8 @@ public class MubbleBiomes {
 	public static final Biome TRITANOPIAN_GALLERY = register("tritanopian_gallery", new TritanopianGalleryBiome());
 	public static final Biome ACHROMATOPSIAN_GALLERY = register("achromatopsian_gallery", new AchromatopsianGalleryBiome());
 	public static final Biome PROTANOPIAN_GALLERY = register("protanopian_gallery", new ProtanopianGalleryBiome());
+	public static final Biome DARK_AMARANTH_FOREST = register("dark_amaranth_forest", new DarkAmaranthForest());
+	public static final Biome TALL_DARK_AMARANTH_FOREST = register("tall_dark_amaranth_forest", new TallDarkAmaranthForest());
 
 	public static final Biome SMW_DESERT = register("smw_desert", new SMWDesertBiome());
 

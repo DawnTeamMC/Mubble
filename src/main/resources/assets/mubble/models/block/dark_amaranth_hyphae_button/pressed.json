@@ -1,0 +1,6 @@
+{
+	"parent": "block/button_pressed",
+	"textures": {
+		"texture": "mubble:block/dark_amaranth_stem/side"
+	}
+}

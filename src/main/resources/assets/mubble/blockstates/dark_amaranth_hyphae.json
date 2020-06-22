@@ -1,0 +1,16 @@
+{
+	"variants": {
+		"axis=y": {
+			"model": "mubble:block/dark_amaranth_hyphae"
+		},
+		"axis=z": {
+			"model": "mubble:block/dark_amaranth_hyphae",
+			"x": 90
+		},
+		"axis=x": {
+			"model": "mubble:block/dark_amaranth_hyphae",
+			"x": 90,
+			"y": 90
+		}
+	}
+}

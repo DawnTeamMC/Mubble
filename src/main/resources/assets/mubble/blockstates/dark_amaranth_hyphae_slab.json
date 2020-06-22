@@ -1,0 +1,13 @@
+{
+	"variants": {
+		"type=bottom": {
+			"model": "mubble:block/dark_amaranth_hyphae_slab/bottom"
+		},
+		"type=top": {
+			"model": "mubble:block/dark_amaranth_hyphae_slab/top"
+		},
+		"type=double": {
+			"model": "mubble:block/dark_amaranth_hyphae"
+		}
+	}
+}

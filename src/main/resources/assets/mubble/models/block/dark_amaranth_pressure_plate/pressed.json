@@ -1,0 +1,6 @@
+{
+	"parent": "block/pressure_plate_down",
+	"textures": {
+		"texture": "mubble:block/dark_amaranth_planks"
+	}
+}

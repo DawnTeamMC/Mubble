@@ -1,0 +1,6 @@
+{
+	"parent": "block/fence_side",
+	"textures": {
+		"texture": "mubble:block/dark_amaranth_planks"
+	}
+}

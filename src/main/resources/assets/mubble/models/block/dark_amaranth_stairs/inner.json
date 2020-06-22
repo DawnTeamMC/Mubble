@@ -1,0 +1,8 @@
+{
+	"parent": "block/inner_stairs",
+	"textures": {
+		"bottom": "mubble:block/dark_amaranth_planks",
+		"top": "mubble:block/dark_amaranth_planks",
+		"side": "mubble:block/dark_amaranth_planks"
+	}
+}

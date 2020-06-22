@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"group": "mubble:hyphae_button",
+	"pattern": [
+		"#"
+	],
+	"key": {
+		"#": {
+			"item": "mubble:dark_amaranth_hyphae"
+		}
+	},
+	"result": {
+		"item": "mubble:dark_amaranth_hyphae_button"
+	}
+}

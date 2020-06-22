@@ -1,0 +1,6 @@
+{
+	"parent": "block/cube_all",
+	"textures": {
+		"all": "mubble:block/dark_amaranth_planks"
+	}
+}

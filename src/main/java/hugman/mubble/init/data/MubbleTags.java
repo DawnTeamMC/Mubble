@@ -34,8 +34,6 @@ public class MubbleTags {
 		public static final Tag<Item> WEIGHT_HEAVY = register("weight/heavy");
 		public static final Tag<Item> WEIGHT_LIGHT = register("weight/light");
 		public static final Tag<Item> TOAD_FEAR = register("fear/toad");
-		public static final Tag<Item> TOAD_FEEDING = register("feeding/toad");
-		public static final Tag<Item> DUCK_FEEDING = register("feeding/duck");
 
 		public static final Tag<Item> GEMS_BISMUTH = register("gems/bismuth");
 		public static final Tag<Item> GEMS_KYBER = register("gems/kyber");

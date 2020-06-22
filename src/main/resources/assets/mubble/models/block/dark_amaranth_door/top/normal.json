@@ -1,0 +1,7 @@
+{
+	"parent": "block/door_top",
+	"textures": {
+		"bottom": "mubble:block/dark_amaranth_door/bottom",
+		"top": "mubble:block/dark_amaranth_door/top"
+	}
+}

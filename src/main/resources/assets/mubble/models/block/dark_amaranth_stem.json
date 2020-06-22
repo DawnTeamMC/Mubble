@@ -1,0 +1,7 @@
+{
+	"parent": "block/cube_column",
+	"textures": {
+		"end": "mubble:block/dark_amaranth_stem/top",
+		"side": "mubble:block/dark_amaranth_stem/side"
+	}
+}

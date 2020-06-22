@@ -1,0 +1,6 @@
+{
+	"parent": "mubble:block/vertical_slab/west",
+	"textures": {
+		"block": "mubble:block/dark_amaranth_planks"
+	}
+}
