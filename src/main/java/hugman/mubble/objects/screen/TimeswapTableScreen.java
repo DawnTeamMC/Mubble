@@ -22,7 +22,6 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandler> {
-	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");
 	private static final Identifier TEXTURE = new Identifier(Mubble.MOD_ID, "textures/gui/container/timeswap_table.png");
 	private float scrollAmount;
 	private boolean mouseClicked;
@@ -30,7 +29,7 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 	private boolean canCraft;
 
 	public TimeswapTableScreen(TimeswapTableScreenHandler handler, PlayerInventory inventory, Text title) {
-		super(handler, inventory, CONTAINER_NAME);
+		super(handler, inventory, title);
 		handler.setContentsChangedListener(this::onInventoryChange);
 	}
 

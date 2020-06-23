@@ -3,6 +3,7 @@ package hugman.mubble.objects.screen.screen_handler;
 import com.google.common.collect.Lists;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleSounds;
+import hugman.mubble.init.data.MubbleScreenHandlers;
 import hugman.mubble.init.data.MubbleTags;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -16,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.screen.Property;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.tag.Tag;
@@ -116,6 +118,11 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 	@Override
 	public boolean canUse(PlayerEntity player) {
 		return canUse(this.context, player, MubbleBlocks.TIMESWAP_TABLE);
+	}
+
+	@Override
+	public ScreenHandlerType<?> getType() {
+		return MubbleScreenHandlers.TIMESWAP_TABLE;
 	}
 
 	@Override

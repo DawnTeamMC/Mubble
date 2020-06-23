@@ -26,8 +26,7 @@ public enum MubbleItemTiers implements ToolMaterial {
 	private final float attackDamage;
 	private final int enchantability;
 	private final Lazy<Ingredient> repairIngredient;
-
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	
 	MubbleItemTiers(int miningLevel, int itemDurability, float miningSpeed, float attackDamage, int enchantibility, Supplier<Ingredient> repairIngredient) {
 		this.miningLevel = miningLevel;
 		this.itemDurability = itemDurability;

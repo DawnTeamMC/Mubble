@@ -2,7 +2,7 @@ package hugman.mubble;
 
 import hugman.mubble.init.*;
 import hugman.mubble.init.data.MubbleCommands;
-import hugman.mubble.init.data.MubbleContainerTypes;
+import hugman.mubble.init.data.MubbleScreenHandlers;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleFeatures;
@@ -32,7 +32,7 @@ public class Mubble implements ModInitializer {
 		// Data
 		new MubbleTileEntityTypes();
 		MubbleCommands.init();
-		MubbleContainerTypes.init();
+		new MubbleScreenHandlers();
 		// World
 		new MubbleBiomes();
 		new MubbleFeatures();
