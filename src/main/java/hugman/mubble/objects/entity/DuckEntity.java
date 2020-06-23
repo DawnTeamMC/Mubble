@@ -54,7 +54,7 @@ public class DuckEntity extends AnimalEntity {
 	}
 
 	@Override
-	public EntityData initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, net.minecraft.entity.EntityData data, CompoundTag compound) {
+	public EntityData initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason reason, EntityData data, CompoundTag compound) {
 		Biome biome = world.getBiome(this.getBlockPos());
 		DuckEntity.Type type = DuckEntity.Type.getTypeByBiome(biome);
 		if(data instanceof DuckEntity.DuckData) {
@@ -63,8 +63,8 @@ public class DuckEntity extends AnimalEntity {
 		else {
 			data = new DuckEntity.DuckData(type);
 		}
-		this.setVariantType(type);
-		return super.initialize(world, difficulty, spawnReason, data, compound);
+		this.setVariant(type);
+		return super.initialize(world, difficulty, reason, data, compound);
 	}
 
 	@Override
@@ -82,13 +82,13 @@ public class DuckEntity extends AnimalEntity {
 	@Override
 	public void writeCustomDataToTag(CompoundTag compound) {
 		super.writeCustomDataToTag(compound);
-		compound.putString("Type", this.getVariantType().getName());
+		compound.putString("Type", this.getVariant().getName());
 	}
 
 	@Override
 	public void readCustomDataFromTag(CompoundTag compound) {
 		super.readCustomDataFromTag(compound);
-		this.setVariantType(DuckEntity.Type.getTypeByName(compound.getString("Type")));
+		this.setVariant(DuckEntity.Type.getTypeByName(compound.getString("Type")));
 	}
 
 	public static Builder createDuckAttributes() {
@@ -146,10 +146,10 @@ public class DuckEntity extends AnimalEntity {
 	}
 
 	@Override
-	public DuckEntity createChild(PassiveEntity parent) {
-		DuckEntity entity = MubbleEntities.DUCK.create(this.world);
-		entity.setVariantType(((DuckEntity) parent).getVariantType());
-		return entity;
+	public DuckEntity createChild(PassiveEntity mate) {
+		DuckEntity child = MubbleEntities.DUCK.create(this.world);
+		child.setVariant(this.random.nextFloat() < 0.5f ? ((DuckEntity)(mate)).getVariant() : this.getVariant());
+		return child;
 	}
 
 	@Override
@@ -177,11 +177,11 @@ public class DuckEntity extends AnimalEntity {
 		}
 	}
 
-	public DuckEntity.Type getVariantType() {
+	public DuckEntity.Type getVariant() {
 		return DuckEntity.Type.getTypeByIndex(this.dataTracker.get(DUCK_TYPE));
 	}
 
-	private void setVariantType(DuckEntity.Type type) {
+	private void setVariant(DuckEntity.Type type) {
 		this.dataTracker.set(DUCK_TYPE, type.getIndex());
 	}
 

@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:entity",
+	"pools": [
+		{
+			"name": "normal",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "loot_table",
+					"name": "mubble:entities/toad/normal",
+					"weight": 1
+				}
+			]
+		}
+	]
+}

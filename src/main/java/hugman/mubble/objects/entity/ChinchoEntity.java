@@ -51,11 +51,6 @@ public class ChinchoEntity extends MobEntityWithAi {
 		return EntityGroup.UNDEAD;
 	}
 
-	@Override
-	public float getEyeHeight(EntityPose pose) {
-		return 1f;
-	}
-
 	protected boolean shouldBurnInDay() {
 		return true;
 	}

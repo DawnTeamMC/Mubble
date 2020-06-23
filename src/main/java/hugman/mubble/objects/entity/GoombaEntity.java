@@ -59,11 +59,6 @@ public class GoombaEntity extends MobEntityWithAi {
 	}
 
 	@Override
-	public float getEyeHeight(EntityPose pose) {
-		return 0.375F;
-	}
-
-	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return MubbleSounds.ENTITY_GOOMBA_HURT;
 	}

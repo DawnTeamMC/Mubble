@@ -14,8 +14,8 @@ public class GoombaEntityModel<T extends Entity> extends CompositeEntityModel<T>
 	private final ModelPart head;
 	private final ModelPart top;
 	private final ModelPart bottom;
-	private final ModelPart left_foot;
-	private final ModelPart right_foot;
+	private final ModelPart leftFoot;
+	private final ModelPart rightFoot;
 
 	public GoombaEntityModel() {
 		textureWidth = 64;
@@ -34,14 +34,14 @@ public class GoombaEntityModel<T extends Entity> extends CompositeEntityModel<T>
 		bottom.setPivot(0.0F, 0.0F, 0.0F);
 		head.addChild(bottom);
 		bottom.setTextureOffset(0, 0).addCuboid(-4.0F, -1.0F, -4.0F, 8, 2, 8, 0.0F, false);
-		left_foot = new ModelPart(this);
-		left_foot.setPivot(0.0F, 23.0F, 0.0F);
-		setRotationAngle(left_foot, 0.0F, -0.1745F, 0.0F);
-		left_foot.setTextureOffset(0, 19).addCuboid(1.0F, -1.0F, -4.0F, 3, 2, 5, 0.0F, false);
-		right_foot = new ModelPart(this);
-		right_foot.setPivot(0.0F, 23.0F, 0.0F);
-		setRotationAngle(right_foot, 0.0F, 0.1745F, 0.0F);
-		right_foot.setTextureOffset(20, 11).addCuboid(-4.0F, -1.0F, -4.0F, 3, 2, 5, 0.0F, false);
+		leftFoot = new ModelPart(this);
+		leftFoot.setPivot(0.0F, 23.0F, 0.0F);
+		setRotationAngle(leftFoot, 0.0F, -0.1745F, 0.0F);
+		leftFoot.setTextureOffset(0, 19).addCuboid(1.0F, -1.0F, -4.0F, 3, 2, 5, 0.0F, false);
+		rightFoot = new ModelPart(this);
+		rightFoot.setPivot(0.0F, 23.0F, 0.0F);
+		setRotationAngle(rightFoot, 0.0F, 0.1745F, 0.0F);
+		rightFoot.setTextureOffset(20, 11).addCuboid(-4.0F, -1.0F, -4.0F, 3, 2, 5, 0.0F, false);
 	}
 
 	private void setRotationAngle(ModelPart modelPart, float x, float y, float z) {
@@ -52,14 +52,14 @@ public class GoombaEntityModel<T extends Entity> extends CompositeEntityModel<T>
 
 	@Override
 	public void setAngles(T entityIn, float limbSwing, float limbSwingAmount, float customAngle, float netHeadYaw, float headPitch) {
-		left_foot.pitch = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		right_foot.pitch = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
+		leftFoot.pitch = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+		rightFoot.pitch = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 		body.yaw = netHeadYaw * 0.017453292F;
 		body.pitch = headPitch * 0.017453292F;
 	}
 
 	@Override
 	public Iterable<ModelPart> getParts() {
-		return ImmutableList.of(this.body, this.left_foot, this.right_foot);
+		return ImmutableList.of(this.body, this.leftFoot, this.rightFoot);
 	}
 }
