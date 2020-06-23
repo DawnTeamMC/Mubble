@@ -1,6 +1,7 @@
 package hugman.mubble.objects.block;
 
 import hugman.mubble.init.data.MubbleBlockStateProperties;
+import hugman.mubble.init.data.MubbleStats;
 import hugman.mubble.objects.block.block_entity.PresentBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -60,7 +61,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if(blockEntity instanceof PresentBlockEntity) {
 				player.openHandledScreen((PresentBlockEntity) blockEntity);
-				//TODO player.incrementStat(Stats.OPEN_BARREL);
+				player.incrementStat(MubbleStats.OPEN_PRESENT);
 			}
 		}
 		return ActionResult.SUCCESS;

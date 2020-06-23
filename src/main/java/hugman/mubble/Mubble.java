@@ -3,6 +3,7 @@ package hugman.mubble;
 import hugman.mubble.init.*;
 import hugman.mubble.init.data.MubbleCommands;
 import hugman.mubble.init.data.MubbleScreenHandlers;
+import hugman.mubble.init.data.MubbleStats;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleFeatures;
@@ -31,6 +32,7 @@ public class Mubble implements ModInitializer {
 		new MubbleSounds();
 		// Data
 		new MubbleTileEntityTypes();
+		new MubbleStats();
 		MubbleCommands.init();
 		new MubbleScreenHandlers();
 		// World

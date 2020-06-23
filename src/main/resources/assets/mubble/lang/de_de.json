@@ -1309,6 +1309,12 @@
 	"advancements.mubble.get_tetris_block.title": "Es Ist Alles Verbunden",
 	"advancements.mubble.get_tetris_block.description": "Halte deine Hand auf den Tetris-Block",
 
+	"comment": "STATS",
+	"//stat.mubble.inspect_placer": "Placers Searched",
+	"//stat.mubble.interact_with_timeswap_table": "Interactions with Timeswap Table",
+	"//stat.mubble.open_present": "Presents Opened",
+	"//stat.mubble.talked_to_toad": "Talked to Toads",
+
 	"comment": "COMMANDS",
 	"commands.foodbar.add.food.success.single": "Gebe %s Nahrungspunkt(e) an %s",
 	"commands.foodbar.add.food.success.multiple": "Gebe %s Nahrungspunkt(e) an %s Wesen",

@@ -4,6 +4,7 @@ import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleSounds;
+import hugman.mubble.init.data.MubbleStats;
 import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.util.CalendarEvents;
 import net.fabricmc.api.EnvType;
@@ -166,8 +167,7 @@ public class ToadEntity extends AbstractTraderEntity {
 		ItemStack itemStack = player.getStackInHand(hand);
 		if(itemStack.getItem() != MubbleItems.TOAD_SPAWN_EGG && this.isAlive() && !this.hasCustomer() && !this.isBaby()) {
 			if(hand == Hand.MAIN_HAND) {
-				// TODO
-				player.incrementStat(Stats.TALKED_TO_VILLAGER);
+				player.incrementStat(MubbleStats.TALKED_TO_TOAD);
 			}
 			if(!this.getOffers().isEmpty()) {
 				if(!this.world.isClient) {
