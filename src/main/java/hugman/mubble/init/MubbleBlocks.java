@@ -818,6 +818,7 @@ public class MubbleBlocks {
 
 	public static final Block AMARANTH_DYLIUM = register("amaranth_dylium", new DyliumBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.field_25702).requiresTool().strength(3.0F, 9.0F).sounds(BlockSoundGroup.NYLIUM).ticksRandomly()), ItemGroup.BUILDING_BLOCKS);
 	public static final Block AMARANTH_ROOTS = register("amaranth_roots", new RootsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MaterialColor.CYAN).noCollision().breakInstantly().sounds(BlockSoundGroup.ROOTS)), ItemGroup.DECORATIONS);
+	public static final Block AMARANTH_WART_BLOCK = register("amaranth_wart_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK)), ItemGroup.BUILDING_BLOCKS);
 
 	public static final Block DARK_AMARANTH_PLANKS = register("dark_amaranth_planks", new Block(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.field_25706).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block DARK_AMARANTH_FUNGUS = register("dark_amaranth_fungus", new FungusBlock(FabricBlockSettings.of(Material.PLANT, MaterialColor.CYAN).breakInstantly().noCollision().sounds(BlockSoundGroup.FUNGUS), () -> {
@@ -827,7 +828,6 @@ public class MubbleBlocks {
 	public static final Block STRIPPED_DARK_AMARANTH_STEM = register("stripped_dark_amaranth_stem", new PillarBlock(FabricBlockSettings.copy(Blocks.STRIPPED_CRIMSON_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block DARK_AMARANTH_HYPHAE = register("dark_amaranth_hyphae", new PillarBlock(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.field_25707).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block STRIPPED_DARK_AMARANTH_HYPHAE = register("stripped_dark_amaranth_hyphae", new PillarBlock(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.field_25707).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block AMARANTH_WART_BLOCK = register("amaranth_wart_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block DARK_AMARANTH_PRESSURE_PLATE = register("dark_amaranth_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.CYAN).noCollision().strength(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 	public static final Block DARK_AMARANTH_TRAPDOOR = register("dark_amaranth_trapdoor", new TrapdoorBlock(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.CYAN).strength(3.0F).sounds(BlockSoundGroup.WOOD).nonOpaque()), ItemGroup.REDSTONE);
 	public static final Block DARK_AMARANTH_BUTTON = register("dark_amaranth_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).noCollision().strength(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);

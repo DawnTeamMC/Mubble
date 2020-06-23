@@ -34,8 +34,6 @@ public class MubbleGenerators {
 			biome.getEntitySpawnList(SpawnGroup.CREATURE).add(new Biome.SpawnEntry(MubbleEntities.DUCK, 10, 4, 4));
 		}
 
-		if(biome == Biomes.END_MIDLANDS) {
-			biome.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, MubbleFeatures.ENDER_BOULDER.configure(new ForestRockFeatureConfig(Blocks.OBSIDIAN.getDefaultState(), 0)).createDecoratedFeature(Decorator.FOREST_ROCK.configure(new CountDecoratorConfig(3))));
-		}
+		Biomes.END_MIDLANDS.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, MubbleFeatures.ENDER_BOULDER.configure(new ForestRockFeatureConfig(Blocks.OBSIDIAN.getDefaultState(), 0)).createDecoratedFeature(Decorator.FOREST_ROCK.configure(new CountDecoratorConfig(3))));
 	}
 }
