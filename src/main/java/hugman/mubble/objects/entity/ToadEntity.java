@@ -7,6 +7,7 @@ import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleStats;
 import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.util.CalendarEvents;
+import hugman.mubble.util.trade_offers.ToadTradeOffers;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.*;
@@ -25,10 +26,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.stat.Stats;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.village.TradeOffer;
@@ -95,6 +98,11 @@ public class ToadEntity extends AbstractTraderEntity {
 	}
 
 	@Override
+	protected float getActiveEyeHeight(EntityPose pose, EntityDimensions size) {
+		return this.isBaby() ? size.height * 0.85F : size.height * 0.77F;
+	}
+
+	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return MubbleSounds.ENTITY_TOAD_HURT;
 	}
@@ -125,41 +133,38 @@ public class ToadEntity extends AbstractTraderEntity {
 	@Override
 	public PassiveEntity createChild(PassiveEntity mate) {
 		ToadEntity child = new ToadEntity(MubbleEntities.TOAD, this.world);
-		child.setVariant(this.random.nextFloat() < 0.5f ? ((ToadEntity)(mate)).getVariant() : this.getVariant());
+		child.setVariant(this.random.nextFloat() < 0.5f ? ((ToadEntity) (mate)).getVariant() : this.getVariant());
 		return child;
 	}
 
 	@Environment(EnvType.CLIENT)
 	public Vec3d method_29919() {
-		return new Vec3d(0.0D, (double)(0.6F * this.getStandingEyeHeight()), (double)(this.getWidth() * 0.4F));
+		return new Vec3d(0.0D, 0.6F * this.getStandingEyeHeight(), this.getWidth() * 0.4F);
 	}
 
 	public static boolean canSpawn(EntityType<ToadEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand) {
 		return true;
 	}
-
 	// TRADING STUFF
 
 	@Override
-	public boolean isLevelledTrader() {
+	public boolean isLeveledTrader() {
 		return false;
 	}
 
 	@Override
 	protected void fillRecipes() {
-		TradeOffers.Factory[] factory1 = TradeOffers.WANDERING_TRADER_TRADES.get(1);
-		TradeOffers.Factory[] factory2 = TradeOffers.WANDERING_TRADER_TRADES.get(2);
-		if(factory1 != null && factory2 != null) {
-			TraderOfferList traderOfferList = this.getOffers();
-			this.fillRecipesFromPool(traderOfferList, factory1, 5);
-			int i = this.random.nextInt(factory2.length);
-			TradeOffers.Factory factory = factory2[i];
-			TradeOffer tradeOffer = factory.create(this, this.random);
-			if(tradeOffer != null) {
-				traderOfferList.add(tradeOffer);
+		TraderOfferList traderOfferList = this.getOffers();
+		for(Pair<TradeOffers.Factory[], Integer> tradeEntry : this.getVariant().getTrades()) {
+			if(tradeEntry.getLeft() != null) {
+				this.fillRecipesFromPool(traderOfferList, tradeEntry.getLeft(), tradeEntry.getRight());
 			}
-
 		}
+	}
+
+	@Override
+	protected Text getDefaultName() {
+		return new TranslatableText(this.getType().getTranslationKey() + '.' + this.getVariant().getName().replace("/", "."));
 	}
 
 	@Override
@@ -174,7 +179,6 @@ public class ToadEntity extends AbstractTraderEntity {
 					this.setCurrentCustomer(player);
 					this.sendOffers(player, this.getDisplayName(), 1);
 				}
-
 			}
 			return ActionResult.success(this.world.isClient);
 		}
@@ -230,16 +234,17 @@ public class ToadEntity extends AbstractTraderEntity {
 		PURPLE(13, "species/purple"),
 		MAGENTA(14, "species/magenta"),
 		PINK(15, "species/pink"),
-		CAPTAIN_TOAD(100, "brigade/captain_toad"),
-		BRIGADIER_HINT_TOAD(101, "brigade/hint_toad"),
-		BRIGADIER_BANKTOAD(102, "brigade/banktoad"),
-		BRIGADIER_YELLOW(103, "brigade/yellow"),
-		BRIGADIER_MAILTOAD(104, "brigade/mailtoad"),
-		PARTY(105, "party"),
-		KISEKAE(106, "kisekae");
+		CAPTAIN_TOAD(16, "brigade/captain_toad"),
+		BRIGADIER_HINT_TOAD(17, "brigade/hint_toad"),
+		BRIGADIER_BANKTOAD(18, "brigade/banktoad"),
+		BRIGADIER_YELLOW(19, "brigade/yellow"),
+		BRIGADIER_MAILTOAD(20, "brigade/mailtoad"),
+		PARTY(21, "party"),
+		KISEKAE(22, "kisekae");
 
 		private final int index;
 		private final String name;
+		private final List<Pair<TradeOffers.Factory[], Integer>> trades;
 		private static final ToadEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(ToadEntity.Type::getIndex)).toArray((index) ->
 		{
 			return new ToadEntity.Type[index];
@@ -249,9 +254,19 @@ public class ToadEntity extends AbstractTraderEntity {
 			return type;
 		}));
 
+		Type(int index, String name, Pair<TradeOffers.Factory[], Integer>... tradeEntries) {
+			this.index = index;
+			this.name = name;
+			this.trades = Arrays.asList(tradeEntries);
+		}
+
 		Type(int index, String name) {
 			this.index = index;
 			this.name = name;
+			this.trades = Arrays.asList(
+					new Pair<>(ToadTradeOffers.COIN_TRADES, 3),
+					new Pair<>(ToadTradeOffers.PRIMARY_COSTUMES_TRADES, 3),
+					new Pair<>(ToadTradeOffers.SECONDARY_COSTUMES_TRADES, 1));
 		}
 
 		public String getName() {
@@ -260,6 +275,10 @@ public class ToadEntity extends AbstractTraderEntity {
 
 		public int getIndex() {
 			return this.index;
+		}
+
+		public List<Pair<TradeOffers.Factory[], Integer>> getTrades() {
+			return this.trades;
 		}
 
 		public static ToadEntity.Type getTypeByName(String name) {
