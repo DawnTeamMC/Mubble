@@ -821,7 +821,7 @@ public class MubbleBlocks {
 	public static final Block AMARANTH_WART_BLOCK = register("amaranth_wart_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK)), ItemGroup.BUILDING_BLOCKS);
 
 	public static final Block DARK_AMARANTH_PLANKS = register("dark_amaranth_planks", new Block(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.field_25706).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DARK_AMARANTH_FUNGUS = register("dark_amaranth_fungus", new FungusBlock(FabricBlockSettings.of(Material.PLANT, MaterialColor.CYAN).breakInstantly().noCollision().sounds(BlockSoundGroup.FUNGUS), () -> {
+	public static final Block DARK_AMARANTH_FUNGUS = registerPotable("dark_amaranth_fungus", new FungusBlock(FabricBlockSettings.of(Material.PLANT, MaterialColor.CYAN).breakInstantly().noCollision().sounds(BlockSoundGroup.FUNGUS), () -> {
 		return Feature.HUGE_FUNGUS.configure(MubbleFeatureConfigs.AMARANTH_FUNGUS_CONFIG);
 	}), ItemGroup.DECORATIONS);
 	public static final Block DARK_AMARANTH_STEM = register("dark_amaranth_stem", new PillarBlock(FabricBlockSettings.copy(Blocks.CRIMSON_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
