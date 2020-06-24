@@ -36,7 +36,7 @@ public class ItemStackMixin {
 		}
 	}
 
-	@Redirect(method = "getTooltip", at = @At(value = "INVOKE",target = "isDamaged"))
+	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "isDamaged"))
 	public boolean mubble_isDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
 		if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {

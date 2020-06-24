@@ -2,7 +2,6 @@ package hugman.mubble.objects.entity;
 
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.*;

@@ -1,6 +1,5 @@
 package hugman.mubble.objects.world.biome.the_end;
 
-import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.init.world.MubbleFeatureConfigs;
 import hugman.mubble.init.world.MubbleFeatures;
 import hugman.mubble.init.world.MubbleSurfaceBuilders;

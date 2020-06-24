@@ -148,7 +148,7 @@ public class DuckEntity extends AnimalEntity {
 	@Override
 	public DuckEntity createChild(PassiveEntity mate) {
 		DuckEntity child = MubbleEntities.DUCK.create(this.world);
-		child.setVariant(this.random.nextFloat() < 0.5f ? ((DuckEntity)(mate)).getVariant() : this.getVariant());
+		child.setVariant(this.random.nextFloat() < 0.5f ? ((DuckEntity) (mate)).getVariant() : this.getVariant());
 		return child;
 	}
 

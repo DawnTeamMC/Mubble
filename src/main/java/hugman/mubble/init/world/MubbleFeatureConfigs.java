@@ -2,7 +2,6 @@ package hugman.mubble.init.world;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.objects.world.gen.feature.HugeNetherMushroomFeatureConfig;
 import net.minecraft.block.Block;
@@ -106,10 +105,12 @@ public class MubbleFeatureConfigs {
 	public static final HugeNetherMushroomFeatureConfig GRAY_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(4, 7, MubbleBlocks.GRAY_MUSHROOM_BLOCK.getDefaultState(), 3, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.01F, 0.0F);
 	public static final HugeNetherMushroomFeatureConfig BLACK_HUGE_NETHER_MUSHROOM = new HugeNetherMushroomFeatureConfig(6, 2, MubbleBlocks.BLACK_MUSHROOM_BLOCK.getDefaultState(), 2, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.01F, 0.0F);
 
-	public static final HugeFungusFeatureConfig AMARANTH_FUNGUS_CONFIG = new HugeFungusFeatureConfig(MubbleBlocks.AMARANTH_DYLIUM.getDefaultState(), MubbleBlocks.DARK_AMARANTH_STEM.getDefaultState(), MubbleBlocks.AMARANTH_WART_BLOCK.getDefaultState(), Blocks.COBWEB.getDefaultState(), true);;
+	public static final HugeFungusFeatureConfig AMARANTH_FUNGUS_CONFIG = new HugeFungusFeatureConfig(MubbleBlocks.AMARANTH_DYLIUM.getDefaultState(), MubbleBlocks.DARK_AMARANTH_STEM.getDefaultState(), MubbleBlocks.AMARANTH_WART_BLOCK.getDefaultState(), Blocks.COBWEB.getDefaultState(), true);
+	;
 	public static final HugeFungusFeatureConfig AMARANTH_FUNGUS_NOT_PLANTED_CONFIG = new HugeFungusFeatureConfig(AMARANTH_FUNGUS_CONFIG.validBaseBlock, AMARANTH_FUNGUS_CONFIG.stemState, AMARANTH_FUNGUS_CONFIG.hatState, AMARANTH_FUNGUS_CONFIG.decorationState, false);
 
-	public static final BlockPileFeatureConfig AMARANTH_ROOTS_CONFIG = new BlockPileFeatureConfig((new WeightedBlockStateProvider()).addState(MubbleBlocks.AMARANTH_ROOTS.getDefaultState(), 87).addState(MubbleBlocks.DARK_AMARANTH_FUNGUS.getDefaultState(), 11));;
+	public static final BlockPileFeatureConfig AMARANTH_ROOTS_CONFIG = new BlockPileFeatureConfig((new WeightedBlockStateProvider()).addState(MubbleBlocks.AMARANTH_ROOTS.getDefaultState(), 87).addState(MubbleBlocks.DARK_AMARANTH_FUNGUS.getDefaultState(), 11));
+	;
 
 	/* SONIC */
 	public static final TreeFeatureConfig RED_PRESS_GARDEN_TREE = (new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(PRESS_GARDEN_LOG), new SimpleBlockStateProvider(RED_PRESS_GARDEN_LEAVES), new BlobFoliagePlacer(2, 0, 0, 0, 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build();

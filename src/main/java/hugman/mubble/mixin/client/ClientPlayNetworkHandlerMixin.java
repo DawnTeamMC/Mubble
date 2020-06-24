@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ClientPlayNetworkHandlerMixin {
 	@Shadow
 	private ClientWorld world;
-	
+
 	@Inject(method = "onEntitySpawn", at = @At(value = "HEAD"), cancellable = true)
 	private void mubble_onEntitySpawn(EntitySpawnS2CPacket packet, CallbackInfo info) {
 		ClientPlayNetworkHandler cpnh = (ClientPlayNetworkHandler) (Object) this;

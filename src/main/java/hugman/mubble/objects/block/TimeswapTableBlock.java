@@ -19,15 +19,17 @@ import net.minecraft.world.World;
 
 public class TimeswapTableBlock extends Block {
 	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");
+
 	public TimeswapTableBlock(Block.Settings builder) {
 		super(builder);
 	}
 
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (world.isClient) {
+		if(world.isClient) {
 			return ActionResult.SUCCESS;
-		} else {
+		}
+		else {
 			player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
 			player.incrementStat(MubbleStats.INTERACT_WITH_TIMESWAP_TABLE);
 			return ActionResult.CONSUME;

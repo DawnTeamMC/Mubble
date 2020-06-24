@@ -7,9 +7,9 @@ import hugman.mubble.objects.world.gen.feature.HugeNetherMushroomFeatureConfig;
 import hugman.mubble.objects.world.gen.feature.TallHugeFungusFeature;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.ForestRockFeatureConfig;
 import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
 public class MubbleFeatures {
