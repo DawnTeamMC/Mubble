@@ -26,6 +26,8 @@ public class AxeItem extends net.minecraft.item.AxeItem {
 				.put(MubbleBlocks.CHERRY_OAK_WOOD, MubbleBlocks.STRIPPED_CHERRY_OAK_WOOD)
 				.put(MubbleBlocks.PRESS_GARDEN_LOG, MubbleBlocks.STRIPPED_PRESS_GARDEN_LOG)
 				.put(MubbleBlocks.PRESS_GARDEN_WOOD, MubbleBlocks.STRIPPED_PRESS_GARDEN_WOOD)
+				.put(MubbleBlocks.DARK_AMARANTH_STEM, MubbleBlocks.STRIPPED_DARK_AMARANTH_STEM)
+				.put(MubbleBlocks.DARK_AMARANTH_HYPHAE, MubbleBlocks.STRIPPED_DARK_AMARANTH_HYPHAE)
 				.build();
 	}
 }
