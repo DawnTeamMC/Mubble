@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(AxeItem.class)
 public class AxeItemMixin {
 	@Inject(method = "useOnBlock", at = @At(value = "HEAD"), cancellable = true)
-	private void useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
+	private void mubble_useOnBlock(ItemUsageContext context, CallbackInfoReturnable<ActionResult> info) {
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos();
 		BlockState state = world.getBlockState(pos);

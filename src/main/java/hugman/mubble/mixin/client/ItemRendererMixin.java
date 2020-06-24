@@ -19,7 +19,7 @@ public class ItemRendererMixin {
 	private static final String String = "Ljava/lang/String;";
 
 	@Redirect(method = "renderGuiItemOverlay(" + TextRenderer + ItemStack + "II" + String + ")V", at = @At(value = "INVOKE",target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"))
-	public boolean appearsDamaged(ItemStack stack) {
+	public boolean mubble_appearsDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
 		if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
 			return false;

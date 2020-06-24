@@ -47,7 +47,7 @@ import static net.minecraft.world.gen.feature.Feature.isDirt;
 @Mixin(TreeFeature.class)
 public abstract class TreeFeatureMixin {
 	@Redirect(method = "generate", at = @At(value = "INVOKE", target = "isDirtOrGrass"))
-	private boolean isSand(TestableWorld testableWorld, BlockPos blockPos, ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> logPositions, Set<BlockPos> leavesPositions, BlockBox box, TreeFeatureConfig config) {
+	private boolean mubble_isDirtOrGrass(TestableWorld testableWorld, BlockPos blockPos, ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> logPositions, Set<BlockPos> leavesPositions, BlockBox box, TreeFeatureConfig config) {
 		if(config == MubbleFeatureConfigs.PALM_TREE)
 		{
 			return testableWorld.testBlockState(blockPos, (state) -> {

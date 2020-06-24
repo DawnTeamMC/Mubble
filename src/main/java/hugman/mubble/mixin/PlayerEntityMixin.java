@@ -24,7 +24,7 @@ public class PlayerEntityMixin {
 	private ItemStack selectedItem;
 
 	@Inject(method = "interact", at = @At(value = "TAIL"), cancellable = true)
-	private void interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> info) {
+	private void mubble_interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> info) {
 		PlayerEntity player = (PlayerEntity) (Object) this;
 		ItemStack stack = player.getStackInHand(hand);
 		if(stack.getItem() == Items.CARROT && entity.getType() == EntityType.PUFFERFISH) {
@@ -41,7 +41,7 @@ public class PlayerEntityMixin {
 	}
 
 	@Inject(method = "tick", at = @At(value = "HEAD"), cancellable = true)
-	private void tick(CallbackInfo info) {
+	private void mubble_tick(CallbackInfo info) {
 		PlayerEntity player = (PlayerEntity) (Object) this;
 		World world = player.getEntityWorld();
 		ItemStack itemStack = player.getMainHandStack();

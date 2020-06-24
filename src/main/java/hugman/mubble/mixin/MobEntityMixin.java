@@ -24,7 +24,7 @@ import java.util.Random;
 @Mixin(MobEntity.class)
 public class MobEntityMixin {
 	@Inject(method = "getPreferredEquipmentSlot", at = @At(value = "TAIL"), cancellable = true)
-	private static void getPreferredEquipmentSlot(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> info) {
+	private static void mubble_getPreferredEquipmentSlot(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> info) {
 		Item item = stack.getItem();
 		if(item instanceof Costume) {
 			Costume costume = (Costume) item;
@@ -37,7 +37,7 @@ public class MobEntityMixin {
 	}
 
 	@Inject(method = "initialize", at = @At(value = "TAIL"), cancellable = true)
-	private void initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason spawnType, EntityData entityData, CompoundTag entityTag, CallbackInfoReturnable<EntityData> info) {
+	private void mubble_initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason spawnType, EntityData entityData, CompoundTag entityTag, CallbackInfoReturnable<EntityData> info) {
 		MobEntity entity = (MobEntity) (Object) this;
 		Random rand = new Random();
 		if(MubbleTags.EntityTypes.CAN_WEAR_HELMET.contains(entity.getType())) {

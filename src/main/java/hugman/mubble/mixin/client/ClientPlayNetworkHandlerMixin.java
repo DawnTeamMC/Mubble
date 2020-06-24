@@ -21,10 +21,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ClientPlayNetworkHandlerMixin {
 	@Shadow
 	private ClientWorld world;
-
-	@SuppressWarnings("rawtypes")
+	
 	@Inject(method = "onEntitySpawn", at = @At(value = "HEAD"), cancellable = true)
-	private void onEntitySpawn(EntitySpawnS2CPacket packet, CallbackInfo info) {
+	private void mubble_onEntitySpawn(EntitySpawnS2CPacket packet, CallbackInfo info) {
 		ClientPlayNetworkHandler cpnh = (ClientPlayNetworkHandler) (Object) this;
 		MinecraftClient client = MinecraftClient.getInstance();
 		NetworkThreadUtils.forceMainThread(packet, cpnh, client);

@@ -20,7 +20,7 @@ import java.util.List;
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
 	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "appendEnchantments"))
-	public void checkEnchantments(List<Text> tooltip, ListTag enchantments, @Nullable PlayerEntity playerEntity, TooltipContext context) {
+	public void mubble_appendEnchantments(List<Text> tooltip, ListTag enchantments, @Nullable PlayerEntity playerEntity, TooltipContext context) {
 		ItemStack stack = (ItemStack) (Object) this;
 		if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, stack)) {
 			if(playerEntity != null) {
@@ -37,7 +37,7 @@ public class ItemStackMixin {
 	}
 
 	@Redirect(method = "getTooltip", at = @At(value = "INVOKE",target = "isDamaged"))
-	public boolean appearsDamaged(ItemStack stack) {
+	public boolean mubble_isDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
 		if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
 			return false;

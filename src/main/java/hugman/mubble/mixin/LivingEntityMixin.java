@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
 	@Inject(method = "jump", at = @At(value = "TAIL"), cancellable = true)
-	private void jump(CallbackInfo info) {
+	private void mubble_jump(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		if(entity.hasStatusEffect(MubbleEffects.HEAVINESS)) {
 			Vec3d vec3d = entity.getVelocity();
@@ -35,7 +35,7 @@ public abstract class LivingEntityMixin {
 	}
 
 	@Inject(method = "tick", at = @At(value = "TAIL"), cancellable = true)
-	private void tick(CallbackInfo info) {
+	private void mubble_tick(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		World world = entity.getEntityWorld();
 		ItemStack headItem = entity.getEquippedStack(EquipmentSlot.HEAD);
@@ -47,7 +47,7 @@ public abstract class LivingEntityMixin {
 	}
 
 	@Inject(method = "swingHand", at = @At(value = "TAIL"), cancellable = true)
-	private void swingHand(Hand hand, CallbackInfo info) {
+	private void mubble_swingHand(Hand hand, CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		ItemStack stack = entity.getMainHandStack();
 		if(stack.getItem() instanceof LightsaberItem) {
@@ -56,7 +56,7 @@ public abstract class LivingEntityMixin {
 	}
 
 	@Inject(method = "dropLoot", at = @At(value = "HEAD"), cancellable = true)
-	private void dropLoot(DamageSource source, boolean causedByPlayer, CallbackInfo info) {
+	private void mubble_dropLoot(DamageSource source, boolean causedByPlayer, CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		World world = entity.getEntityWorld();
 		if(causedByPlayer && source.getAttacker() instanceof PlayerEntity) {
@@ -73,7 +73,7 @@ public abstract class LivingEntityMixin {
 	}
 
 	@Inject(method = "dropXp", at = @At(value = "HEAD"), cancellable = true)
-	private void dropXp(CallbackInfo info) {
+	private void mubble_dropXp(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 		LivingEntity attacker = entity.getAttacker();
 		if(attacker instanceof PlayerEntity) {
