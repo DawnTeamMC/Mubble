@@ -1,6 +1,5 @@
 package hugman.mubble.objects.block;
 
-import com.sun.istack.internal.Nullable;
 import hugman.mubble.Mubble;
 import hugman.mubble.init.data.MubbleStats;
 import hugman.mubble.objects.screen.screen_handler.TimeswapTableScreenHandler;
@@ -16,6 +15,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import javax.annotation.Nullable;
 
 public class TimeswapTableBlock extends Block {
 	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");

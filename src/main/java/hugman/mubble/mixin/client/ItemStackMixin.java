@@ -1,6 +1,5 @@
 package hugman.mubble.mixin.client;
 
-import com.sun.istack.internal.Nullable;
 import hugman.mubble.init.MubbleEnchantments;
 import hugman.mubble.util.EnchantmentUtil;
 import net.minecraft.client.MinecraftClient;
@@ -14,12 +13,16 @@ import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
-	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "appendEnchantments"))
+	private static final String List = "Ljava/util/List;";
+	private static final String ListTag = "Lnet/minecraft/nbt/ListTag;";
+
+	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;appendEnchantments(" + List + ListTag +")V"))
 	public void mubble_appendEnchantments(List<Text> tooltip, ListTag enchantments, @Nullable PlayerEntity playerEntity, TooltipContext context) {
 		ItemStack stack = (ItemStack) (Object) this;
 		if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, stack)) {
@@ -36,7 +39,7 @@ public class ItemStackMixin {
 		}
 	}
 
-	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "isDamaged"))
+	@Redirect(method = "getTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"))
 	public boolean mubble_isDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
 		if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {

@@ -20,7 +20,10 @@ import static net.minecraft.world.gen.feature.Feature.isSoil;
 
 @Mixin(TreeFeature.class)
 public abstract class TreeFeatureMixin {
-	@Redirect(method = "generate", at = @At(value = "INVOKE", target = "isDirtOrGrass"))
+	private static final String TestableWorld = "Lnet/minecraft/world/TestableWorld;";
+	private static final String BlockPos = "Lnet/minecraft/util/math/BlockPos;";
+
+	@Redirect(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/feature/TreeFeature;isDirtOrGrass(" + TestableWorld + BlockPos + ")Z"))
 	private boolean mubble_isDirtOrGrass(TestableWorld testableWorld, BlockPos blockPos, ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> logPositions, Set<BlockPos> leavesPositions, BlockBox box, TreeFeatureConfig config) {
 		if(config == MubbleFeatureConfigs.PALM_TREE) {
 			return testableWorld.testBlockState(blockPos, (state) -> {
