@@ -492,21 +492,37 @@
 			"mubble:entity/toad/ambient/1",
 			"mubble:entity/toad/ambient/2",
 			"mubble:entity/toad/ambient/3",
-			"mubble:entity/toad/ambient/4",
-			"mubble:entity/toad/ambient/5",
-			"mubble:entity/toad/ambient/6",
-			"mubble:entity/toad/ambient/7",
-			"mubble:entity/toad/ambient/8",
-			"mubble:entity/toad/ambient/9",
-			"mubble:entity/toad/ambient/10",
-			"mubble:entity/toad/ambient/11",
-			"mubble:entity/toad/ambient/12"
+			"mubble:entity/toad/bup"
 		]
 	},
 	"entity.toad.bup": {
 		"subtitle": "subtitles.mubble.entity.toad.ambient",
 		"sounds": [
-			"mubble:entity/toad/ambient/bup"
+			"mubble:entity/toad/bup"
+		]
+	},
+	"entity.toad.no": {
+		"subtitle": "subtitles.mubble.entity.toad.no",
+		"sounds": [
+			"mubble:entity/toad/no/1",
+			"mubble:entity/toad/no/2",
+			"mubble:entity/toad/no/3"
+		]
+	},
+	"entity.toad.trade": {
+		"subtitle": "subtitles.mubble.entity.toad.trade",
+		"sounds": [
+			"mubble:entity/toad/trade/1",
+			"mubble:entity/toad/trade/2",
+			"mubble:entity/toad/trade/3"
+		]
+	},
+	"entity.toad.yes": {
+		"subtitle": "subtitles.mubble.entity.toad.yes",
+		"sounds": [
+			"mubble:entity/toad/yes/1",
+			"mubble:entity/toad/yes/2",
+			"mubble:entity/toad/yes/3"
 		]
 	},
 	"entity.toad.hurt": {

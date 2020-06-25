@@ -2,7 +2,7 @@ package hugman.mubble.objects.entity.render;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.GoombaEntity;
-import hugman.mubble.objects.entity.render.model.GoombaEntityModel;
+import hugman.mubble.objects.entity.model.GoombaEntityModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;

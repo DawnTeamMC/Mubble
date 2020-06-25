@@ -26,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
@@ -93,8 +94,18 @@ public class ToadEntity extends AbstractTraderEntity {
 			return MubbleSounds.ENTITY_TOAD_BUP;
 		}
 		else {
-			return MubbleSounds.ENTITY_TOAD_AMBIENT;
+			return this.hasCustomer() ? MubbleSounds.ENTITY_TOAD_TRADE : MubbleSounds.ENTITY_TOAD_AMBIENT;
 		}
+	}
+
+	@Override
+	public SoundEvent getYesSound() {
+		return MubbleSounds.ENTITY_TOAD_YES;
+	}
+
+	@Override
+	protected SoundEvent getTradingSound(boolean sold) {
+		return sold ? SoundEvents.ENTITY_VILLAGER_YES : SoundEvents.ENTITY_VILLAGER_NO;
 	}
 
 	@Override
@@ -170,20 +181,40 @@ public class ToadEntity extends AbstractTraderEntity {
 	@Override
 	protected ActionResult interactMob(PlayerEntity player, Hand hand) {
 		ItemStack itemStack = player.getStackInHand(hand);
-		if(itemStack.getItem() != MubbleItems.TOAD_SPAWN_EGG && this.isAlive() && !this.hasCustomer() && !this.isBaby()) {
-			if(hand == Hand.MAIN_HAND) {
-				player.incrementStat(MubbleStats.TALKED_TO_TOAD);
+		if(itemStack.getItem() != MubbleItems.TOAD_SPAWN_EGG && this.isAlive() && !this.hasCustomer()) {
+			if(this.isBaby()) {
+				this.sayNo();
+				return ActionResult.success(this.world.isClient);
 			}
-			if(!this.getOffers().isEmpty()) {
-				if(!this.world.isClient) {
-					this.setCurrentCustomer(player);
-					this.sendOffers(player, this.getDisplayName(), 1);
+			else {
+				boolean bl = this.getOffers().isEmpty();
+				if(hand == Hand.MAIN_HAND) {
+					if(bl && !this.world.isClient) {
+						this.sayNo();
+					}
+					player.incrementStat(MubbleStats.TALKED_TO_TOAD);
+				}
+				if(bl) {
+					return ActionResult.success(this.world.isClient);
+				}
+				else {
+					if(!this.world.isClient && !this.offers.isEmpty()) {
+						this.setCurrentCustomer(player);
+						this.sendOffers(player, this.getDisplayName(), 1);
+					}
+					return ActionResult.success(this.world.isClient);
 				}
 			}
-			return ActionResult.success(this.world.isClient);
 		}
 		else {
 			return super.interactMob(player, hand);
+		}
+	}
+
+	private void sayNo() {
+		this.setHeadRollingTimeLeft(40);
+		if(!this.world.isClient()) {
+			this.playSound(MubbleSounds.ENTITY_TOAD_NO, this.getSoundVolume(), this.getSoundPitch());
 		}
 	}
 

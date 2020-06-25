@@ -18,10 +18,10 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class DarkAmaranthForest extends Biome {
 	public DarkAmaranthForest() {
-		super((new Biome.Settings())
+		super((new Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, MubbleSurfaceBuilders.AMARANTH_DYLIUM_SURFACE)
-				.precipitation(Biome.Precipitation.NONE)
-				.category(Biome.Category.THEEND)
+				.precipitation(Precipitation.NONE)
+				.category(Category.THEEND)
 				.depth(0.1F)
 				.scale(0.2F)
 				.temperature(0.5F)
@@ -36,8 +36,8 @@ public class DarkAmaranthForest extends Biome {
 		this.addStructureFeature(DefaultBiomeFeatures.END_CITY);
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.HUGE_FUNGUS.configure(MubbleFeatureConfigs.AMARANTH_FUNGUS_NOT_PLANTED_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(8))));
 		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.NETHER_FOREST_VEGETATION.configure(MubbleFeatureConfigs.AMARANTH_ROOTS_CONFIG).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP.configure(new CountDecoratorConfig(6))));
-		this.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.SPIDER, 10, 4, 4));
-		this.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.CAVE_SPIDER, 10, 4, 4));
+		this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.SPIDER, 10, 4, 4));
+		this.addSpawn(SpawnGroup.MONSTER, new SpawnEntry(EntityType.CAVE_SPIDER, 10, 4, 4));
 	}
 
 	@Environment(EnvType.CLIENT)

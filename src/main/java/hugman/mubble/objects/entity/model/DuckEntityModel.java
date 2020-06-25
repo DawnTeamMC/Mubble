@@ -1,4 +1,4 @@
-package hugman.mubble.objects.entity.render.model;
+package hugman.mubble.objects.entity.model;
 
 import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;

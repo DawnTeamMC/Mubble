@@ -95,6 +95,9 @@ public class MubbleSounds {
 	public static final SoundEvent ENTITY_KIRBY_BALL_THROW = register("entity.kirby_ball.throw");
 	public static final SoundEvent ENTITY_TOAD_AMBIENT = register("entity.toad.ambient");
 	public static final SoundEvent ENTITY_TOAD_BUP = register("entity.toad.bup");
+	public static final SoundEvent ENTITY_TOAD_NO = register("entity.toad.no");
+	public static final SoundEvent ENTITY_TOAD_TRADE = register("entity.toad.trade");
+	public static final SoundEvent ENTITY_TOAD_YES = register("entity.toad.yes");
 	public static final SoundEvent ENTITY_TOAD_HURT = register("entity.toad.hurt");
 	public static final SoundEvent ENTITY_TOAD_DEATH = register("entity.toad.death");
 	public static final SoundEvent ENTITY_GOOMBA_STEP = register("entity.goomba.step");
@@ -109,34 +112,6 @@ public class MubbleSounds {
 	public static final SoundEvent ENTITY_ZOMBIE_COWMAN_DEATH = register("entity.zombie_cowman.death");
 
 	public static final SoundEvent UI_TIMESWAP_TABLE_TAKE_RESULT = register("ui.timeswap_table.take_result");
-	
-	/*
-	public static final SoundEvent MUSIC_DISC_BATTLEFIELD = register("music_disc.battlefield");
-	public static final SoundEvent MUSIC_DISC_CHAMPIONS_ROAD = register("music_disc.champions_road");
-	public static final SoundEvent MUSIC_DISC_CONFRONTING_MYSELF = register("music_disc.confronting_myself");
-	public static final SoundEvent MUSIC_DISC_ELECTROPLANKTON_MELDEY = register("music_disc.electroplankton_medley");
-	public static final SoundEvent MUSIC_DISC_FIELDS_OF_HOPES_AND_DREAMS = register("music_disc.fields_of_hopes_and_dreams");
-	public static final SoundEvent MUSIC_DISC_KASS_THEME = register("music_disc.kass_theme");
-	public static final SoundEvent MUSIC_DISC_LOST_PAINTING = register("music_disc.lost_painting");
-	public static final SoundEvent MUSIC_DISC_MAD_MEW_MEW = register("music_disc.mad_mew_mew");
-	public static final SoundEvent MUSIC_DISC_MEGALOVANIA = register("music_disc.megalovania");
-	public static final SoundEvent MUSIC_DISC_POPPLE_BATTLE = register("music_disc.popple_battle");
-	public static final SoundEvent MUSIC_DISC_REFLECTION = register("music_disc.reflection");
-	public static final SoundEvent MUSIC_DISC_RUDE_BUSTER = register("music_disc.rude_buster");
-	public static final SoundEvent MUSIC_DISC_SHARK_BYTES = register("music_disc.shark_bytes");
-	public static final SoundEvent MUSIC_DISC_SOUND_STAGE = register("music_disc.sound_stage");
-	public static final SoundEvent MUSIC_DISC_STUDIOPOLIS_ACT1 = register("music_disc.studiopolis_act1");
-	public static final SoundEvent MUSIC_DISC_THE_GRAND_FINALE = register("music_disc.the_grand_finale");
-	public static final SoundEvent MUSIC_DISC_TYPE_A = register("music_disc.type_a");
-	public static final SoundEvent MUSIC_DISC_VAMPIRE_KILLER = register("music_disc.vampire_killer");
-	public static final SoundEvent MUSIC_DISC_VS_CHAMPION_RED_AND_BLUE = register("music_disc.vs_champion_red_and_blue");
-	public static final SoundEvent REMIX_DISC_NB_BEWARE_THE_FOREST_MUSHROOMS = register("remix_disc.nb.beware_the_forest_mushrooms");
-	public static final SoundEvent REMIX_DISC_NB_BUOY_BASE_GALAXY = register("remix_disc.nb.buoy_base_galaxy");
-	public static final SoundEvent REMIX_DISC_NB_FLY_OCTO_FLY = register("remix_disc.nb.fly_octo_fly");
-	public static final SoundEvent REMIX_DISC_NB_HARVEST_HAZARDS = register("remix_disc.nb.harvest_hazards");
-	public static final SoundEvent REMIX_DISC_NB_SWEDEN = register("remix_disc.nb.sweden");
-	public static final SoundEvent REMIX_DISC_NB_WALUIGI_PINBALL = register("remix_disc.nb.waluigi_pinball");
-	*/
 
 	private static SoundEvent register(String name) {
 		Identifier path = new Identifier(Mubble.MOD_ID, name);

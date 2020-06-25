@@ -2,7 +2,7 @@ package hugman.mubble.objects.entity.render;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.objects.entity.ChinchoEntity;
-import hugman.mubble.objects.entity.render.model.ChinchoEntityModel;
+import hugman.mubble.objects.entity.model.ChinchoEntityModel;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
