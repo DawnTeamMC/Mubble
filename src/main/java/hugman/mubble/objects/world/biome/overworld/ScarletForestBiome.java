@@ -34,7 +34,7 @@ public class ScarletForestBiome extends Biome {
 						.moodSound(BiomeMoodSound.CAVE)
 						.build())
 				.parent(null));
-		DefaultBiomeFeatures.method_28440(this);
+		DefaultBiomeFeatures.addDefaultUndergroundStructures(this);
 		this.addStructureFeature(DefaultBiomeFeatures.STANDARD_RUINED_PORTAL);
 		DefaultBiomeFeatures.addLandCarvers(this);
 		DefaultBiomeFeatures.addDefaultLakes(this);
