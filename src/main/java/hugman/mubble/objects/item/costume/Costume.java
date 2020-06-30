@@ -69,12 +69,12 @@ public class Costume extends Item {
 		if(world.isClient && entity instanceof PlayerEntity) {
 			GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
 			PlayerEntity player = (PlayerEntity) entity;
+			ShaderEffect shaderEffect = renderer.getShader();
+			Identifier shader = this.getShader();
 			if(player.inventory.getArmorStack(3).equals(stack)) {
-				ShaderEffect shaderGroup = renderer.getShader();
-				Identifier shader = this.getShader();
 				if(shader != null) {
-					if(shaderGroup != null) {
-						if(!shaderGroup.getName().equals(shader.toString())) {
+					if(shaderEffect != null) {
+						if(!shaderEffect.getName().equals(shader.toString())) {
 							((GameRendererAccessor) renderer).invokeLoadShader(shader);
 						}
 					}
@@ -82,9 +82,6 @@ public class Costume extends Item {
 						((GameRendererAccessor) renderer).invokeLoadShader(shader);
 					}
 				}
-			}
-			else {
-				renderer.disableShader();
 			}
 		}
 		if(!world.isClient && effects != null) {
@@ -102,26 +99,26 @@ public class Costume extends Item {
 	};
 
 	@Override
-	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack itemstack = playerIn.getStackInHand(handIn);
-		ItemStack itemstack1 = playerIn.getEquippedStack(this.armorType);
-		if(itemstack1.isEmpty()) {
-			playerIn.equipStack(armorType, itemstack.copy());
-			itemstack.decrement(1);
-			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
-			if(this == MubbleCostumes.MAYRO_CAP && playerIn.getGameProfile().getId().toString() == "8cf61519-4ac2-4d60-9d65-d0c7abcf4524") {
-				playerIn.sendMessage(new TranslatableText("item.mubble.mayro_cap.secret_status", new Object[0]), true);
+	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+		ItemStack itemStack = player.getStackInHand(hand);
+		ItemStack itemStack1 = player.getEquippedStack(this.armorType);
+		if(itemStack1.isEmpty()) {
+			player.equipStack(armorType, itemStack.copy());
+			itemStack.decrement(1);
+			world.playSound(null, player.getX(), player.getY(), player.getZ(), this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
+			if(this == MubbleCostumes.MAYRO_CAP && player.getGameProfile().getId().toString() == "8cf61519-4ac2-4d60-9d65-d0c7abcf4524") {
+				player.sendMessage(new TranslatableText("item.mubble.mayro_cap.secret_status", new Object[0]), true);
 			}
-			else if(this == MubbleCostumes.NOTEBLOCK_HEAD && playerIn.getGameProfile().getId().toString() == "5a68af56-e293-44e9-bbf8-21d58300b3f3") {
-				playerIn.sendMessage(new TranslatableText("item.mubble.noteblock_head.secret_status", new Object[0]), true);
+			else if(this == MubbleCostumes.NOTEBLOCK_HEAD && player.getGameProfile().getId().toString() == "5a68af56-e293-44e9-bbf8-21d58300b3f3") {
+				player.sendMessage(new TranslatableText("item.mubble.noteblock_head.secret_status", new Object[0]), true);
 			}
-			else if(this == MubbleCostumes.BANDANA && playerIn.getGameProfile().getId().toString() == "1805e857-329e-463e-8ca8-122fcc686996") {
-				playerIn.sendMessage(new TranslatableText("item.mubble.bandana.secret_status", new Object[0]), true);
+			else if(this == MubbleCostumes.BANDANA && player.getGameProfile().getId().toString() == "1805e857-329e-463e-8ca8-122fcc686996") {
+				player.sendMessage(new TranslatableText("item.mubble.bandana.secret_status", new Object[0]), true);
 			}
-			return new TypedActionResult<>(ActionResult.SUCCESS, itemstack);
+			return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);
 		}
 		else {
-			return new TypedActionResult<>(ActionResult.FAIL, itemstack);
+			return new TypedActionResult<>(ActionResult.FAIL, itemStack);
 		}
 	}
 

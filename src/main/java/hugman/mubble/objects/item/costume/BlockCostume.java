@@ -29,16 +29,16 @@ public class BlockCostume extends BlockItem {
 	protected final SoundEvent sound;
 	protected final Identifier shader;
 
-	public BlockCostume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Block base_block) {
-		super(base_block, builder);
+	public BlockCostume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Block baseBlock) {
+		super(baseBlock, builder);
 		this.sound = sound;
 		this.armorType = armorType;
 		this.shader = null;
 		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
 	}
 
-	public BlockCostume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Block base_block, Identifier shader) {
-		super(base_block, builder);
+	public BlockCostume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Block baseBlock, Identifier shader) {
+		super(baseBlock, builder);
 		this.sound = sound;
 		this.armorType = armorType;
 		this.shader = shader;
@@ -50,12 +50,12 @@ public class BlockCostume extends BlockItem {
 		if(world.isClient && entity instanceof PlayerEntity) {
 			GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
 			PlayerEntity player = (PlayerEntity) entity;
+			ShaderEffect shaderEffect = renderer.getShader();
+			Identifier shader = this.getShader();
 			if(player.inventory.getArmorStack(3).equals(stack)) {
-				ShaderEffect shaderGroup = renderer.getShader();
-				Identifier shader = this.getShader();
 				if(shader != null) {
-					if(shaderGroup != null) {
-						if(!shaderGroup.getName().equals(shader.toString())) {
+					if(shaderEffect != null) {
+						if(!shaderEffect.getName().equals(shader.toString())) {
 							((GameRendererAccessor) renderer).invokeLoadShader(shader);
 						}
 					}
@@ -63,9 +63,6 @@ public class BlockCostume extends BlockItem {
 						((GameRendererAccessor) renderer).invokeLoadShader(shader);
 					}
 				}
-			}
-			else {
-				renderer.disableShader();
 			}
 		}
 	}
@@ -82,13 +79,13 @@ public class BlockCostume extends BlockItem {
 	}
 
 	@Override
-	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack itemstack = playerIn.getStackInHand(handIn);
-		ItemStack itemstack1 = playerIn.getEquippedStack(EquipmentSlot.HEAD);
+	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+		ItemStack itemstack = player.getStackInHand(hand);
+		ItemStack itemstack1 = player.getEquippedStack(EquipmentSlot.HEAD);
 		if(itemstack1.isEmpty()) {
-			playerIn.equipStack(EquipmentSlot.HEAD, new ItemStack(this));
+			player.equipStack(EquipmentSlot.HEAD, new ItemStack(this));
 			itemstack.decrement(1);
-			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), this.sound, SoundCategory.PLAYERS, 1f, 1f);
+			world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.PLAYERS, 1f, 1f);
 			return new TypedActionResult<>(ActionResult.SUCCESS, itemstack);
 		}
 		else {

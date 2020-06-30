@@ -54,11 +54,11 @@ public class CappyCostume extends HeadCostume {
 	}
 
 	@Override
-	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack itemstack1 = playerIn.getEquippedStack(armorType);
+	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+		ItemStack itemstack1 = player.getEquippedStack(armorType);
 		if(itemstack1.isEmpty()) {
-			worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
+			world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
 		}
-		return super.use(worldIn, playerIn, handIn);
+		return super.use(world, player, hand);
 	}
 }

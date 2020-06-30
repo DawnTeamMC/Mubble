@@ -2,14 +2,21 @@ package hugman.mubble.mixin;
 
 import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.objects.item.LightsaberItem;
+import hugman.mubble.objects.item.costume.BlockCostume;
+import hugman.mubble.objects.item.costume.Costume;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gl.ShaderEffect;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.passive.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,14 +51,36 @@ public class PlayerEntityMixin {
 	private void mubble_tick(CallbackInfo info) {
 		PlayerEntity player = (PlayerEntity) (Object) this;
 		World world = player.getEntityWorld();
-		ItemStack itemStack = player.getMainHandStack();
-		if(!ItemStack.areEqual(selectedItem, itemStack)) {
-			if(!ItemStack.areItemsEqual(selectedItem, itemStack)) {
-				if(itemStack.getItem() instanceof LightsaberItem) {
-					((LightsaberItem) itemStack.getItem()).onPullOut(player, world);
+		ItemStack mainHandStack = player.getMainHandStack();
+		ItemStack headStack = player.getEquippedStack(EquipmentSlot.HEAD);
+		if(!ItemStack.areEqual(selectedItem, mainHandStack)) {
+			if(!ItemStack.areItemsEqual(selectedItem, mainHandStack)) {
+				if(mainHandStack.getItem() instanceof LightsaberItem) {
+					((LightsaberItem) mainHandStack.getItem()).onPullOut(player, world);
 				}
 				if(selectedItem.getItem() instanceof LightsaberItem) {
 					((LightsaberItem) selectedItem.getItem()).onPullIn(player, world);
+				}
+			}
+		}
+		if(world.isClient) {
+			GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
+			ShaderEffect shaderEffect = renderer.getShader();
+			if(!(headStack.getItem() instanceof Costume) && !(headStack.getItem() instanceof BlockCostume)) {
+				if(shaderEffect != null) {
+					renderer.disableShader();
+				}
+			}
+			if(headStack.getItem() instanceof Costume) {
+				Identifier shader = ((Costume) headStack.getItem()).getShader();
+				if(shaderEffect != null && shader == null) {
+					renderer.disableShader();
+				}
+			}
+			if(headStack.getItem() instanceof BlockCostume) {
+				Identifier shader = ((BlockCostume) headStack.getItem()).getShader();
+				if(shaderEffect != null && shader == null) {
+					renderer.disableShader();
 				}
 			}
 		}
