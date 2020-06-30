@@ -78,7 +78,7 @@ public class ToadEntity extends AbstractTraderEntity {
 		this.goalSelector.add(1, new LookAtCustomerGoal(this));
 		this.goalSelector.add(4, new GoToWalkTargetGoal(this, 1.45D));
 		this.goalSelector.add(8, new WanderAroundFarGoal(this, 1.45D));
-		this.goalSelector.add(9, new GoToEntityGoal(this, PlayerEntity.class, 3.0F, 1.0F));
+		this.goalSelector.add(9, new StopAndLookAtEntityGoal(this, PlayerEntity.class, 3.0F, 1.0F));
 		this.goalSelector.add(10, new LookAtEntityGoal(this, MobEntity.class, 8.0F));
 	}
 

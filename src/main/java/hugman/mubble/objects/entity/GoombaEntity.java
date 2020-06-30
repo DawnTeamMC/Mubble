@@ -11,8 +11,8 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +28,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
-public class GoombaEntity extends MobEntityWithAi {
+public class GoombaEntity extends HostileEntity {
 	private static final TrackedData<Integer> VARIANT = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
 	public GoombaEntity(EntityType<? extends GoombaEntity> type, World worldIn) {

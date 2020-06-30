@@ -9,8 +9,8 @@ import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer.Builder;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.MobEntityWithAi;
 import net.minecraft.entity.passive.OcelotEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ import net.minecraft.world.WorldAccess;
 
 import java.util.Random;
 
-public class ChinchoEntity extends MobEntityWithAi {
+public class ChinchoEntity extends HostileEntity {
 	public ChinchoEntity(EntityType<? extends ChinchoEntity> type, World worldIn) {
 		super(type, worldIn);
 	}
