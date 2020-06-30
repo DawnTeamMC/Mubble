@@ -1,30 +1,57 @@
 {
 	"variants": {
-		"facing=up": {
+		"face=floor,facing=east": {
+			"model": "mubble:block/spring",
+			"y": 90
+		},
+		"face=floor,facing=west": {
+			"model": "mubble:block/spring",
+			"y": 270
+		},
+		"face=floor,facing=south": {
+			"model": "mubble:block/spring",
+			"y": 180
+		},
+		"face=floor,facing=north": {
 			"model": "mubble:block/spring"
 		},
-		"facing=down": {
+		"face=wall,facing=east": {
 			"model": "mubble:block/spring",
-			"x": 180
+			"x": 270,
+			"y": 270
 		},
-		"facing=north": {
-			"model": "mubble:block/spring",
-			"y": 180,
-			"x": 270
-		},
-		"facing=south": {
-			"model": "mubble:block/spring",
-			"x": 270
-		},
-		"facing=west": {
+		"face=wall,facing=west": {
 			"model": "mubble:block/spring",
 			"y": 90,
 			"x": 270
 		},
-		"facing=east": {
+		"face=wall,facing=south": {
 			"model": "mubble:block/spring",
-			"y": 270,
 			"x": 270
+		},
+		"face=wall,facing=north": {
+			"model": "mubble:block/spring",
+			"x": 270,
+			"y": 180
+		},
+		"face=ceiling,facing=east": {
+			"model": "mubble:block/spring",
+			"x": 180,
+			"y": 270
+		},
+		"face=ceiling,facing=west": {
+			"model": "mubble:block/spring",
+			"x": 180,
+			"y": 90
+		},
+		"face=ceiling,facing=south": {
+			"model": "mubble:block/spring",
+			"x": 180
+		},
+		"face=ceiling,facing=north": {
+			"model": "mubble:block/spring",
+			"x": 180,
+			"y": 180
 		}
 	}
 }
