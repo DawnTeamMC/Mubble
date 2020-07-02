@@ -24,33 +24,33 @@ public class TallHugeFungusFeature extends Feature<HugeFungusFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ServerWorldAccess serverWorldAccess, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockPos blockPos, HugeFungusFeatureConfig hugeFungusFeatureConfig) {
+	public boolean generate(ServerWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, HugeFungusFeatureConfig hugeFungusFeatureConfig) {
 		Block block = hugeFungusFeatureConfig.validBaseBlock.getBlock();
-		BlockPos blockPos2 = null;
+		BlockPos pos2 = null;
 		if(hugeFungusFeatureConfig.planted) {
-			Block block2 = serverWorldAccess.getBlockState(blockPos.down()).getBlock();
+			Block block2 = world.getBlockState(pos.down()).getBlock();
 			if(block2 == block) {
-				blockPos2 = blockPos;
+				pos2 = pos;
 			}
 		}
 		else {
-			blockPos2 = getStartPos(serverWorldAccess, blockPos, block);
+			pos2 = getStartPos(world, pos, block);
 		}
-		if(blockPos2 == null) {
+		if(pos2 == null) {
 			return false;
 		}
 		else {
 			int i = MathHelper.nextInt(random, 8, 16) * 2;
 			if(!hugeFungusFeatureConfig.planted) {
-				int j = serverWorldAccess.getDimensionHeight();
-				if(blockPos2.getY() + i + 1 >= j) {
+				int j = world.getDimensionHeight();
+				if(pos2.getY() + i + 1 >= j) {
 					return false;
 				}
 			}
 			boolean bl = !hugeFungusFeatureConfig.planted && random.nextFloat() < 0.16F;
-			serverWorldAccess.setBlockState(blockPos, Blocks.AIR.getDefaultState(), 4);
-			this.generateStem(serverWorldAccess, random, hugeFungusFeatureConfig, blockPos2, i, bl);
-			this.generateHat(serverWorldAccess, random, hugeFungusFeatureConfig, blockPos2, i, bl);
+			world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
+			this.generateStem(world, random, hugeFungusFeatureConfig, pos2, i, bl);
+			this.generateHat(world, random, hugeFungusFeatureConfig, pos2, i, bl);
 			return true;
 		}
 	}

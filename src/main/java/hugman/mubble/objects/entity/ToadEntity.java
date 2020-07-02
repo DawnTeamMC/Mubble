@@ -10,6 +10,7 @@ import hugman.mubble.util.CalendarEvents;
 import hugman.mubble.util.trade_offers.ToadTradeOffers;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.class_5425;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer.Builder;
@@ -25,6 +26,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
@@ -42,6 +44,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -53,16 +56,16 @@ public class ToadEntity extends AbstractTraderEntity {
 	}
 
 	@Override
-	public EntityData initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason reason, EntityData data, CompoundTag compound) {
+	public EntityData initialize(class_5425 world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
 		ToadEntity.Type type = ToadEntity.Type.getTypeByIndex(this.world.random.nextInt(16));
-		if(data instanceof ToadEntity.ToadData) {
-			type = ((ToadEntity.ToadData) data).type;
+		if(entityData instanceof ToadEntity.ToadData) {
+			type = ((ToadEntity.ToadData) entityData).type;
 		}
 		else {
-			data = new ToadEntity.ToadData(type);
+			entityData = new ToadEntity.ToadData(type);
 		}
 		this.setVariant(type);
-		return super.initialize(world, difficulty, reason, data, compound);
+		return super.initialize(world, difficulty, spawnReason, entityData, entityTag);
 	}
 
 	@Override
@@ -142,7 +145,7 @@ public class ToadEntity extends AbstractTraderEntity {
 	}
 
 	@Override
-	public PassiveEntity createChild(PassiveEntity mate) {
+	public PassiveEntity createChild(ServerWorld world, PassiveEntity mate) {
 		ToadEntity child = new ToadEntity(MubbleEntities.TOAD, this.world);
 		child.setVariant(this.random.nextFloat() < 0.5f ? ((ToadEntity) (mate)).getVariant() : this.getVariant());
 		return child;

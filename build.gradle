@@ -15,6 +15,7 @@ minecraft {
 
 repositories {
 	maven { url 'https://jitpack.io' }
+	maven { url 'https://maven.blamejared.com' }
 }
 
 dependencies {
@@ -23,6 +24,10 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	modImplementation "vazkii.patchouli:Patchouli_1.16-fabric:${patchouli_version}-FABRIC"
+
+	modImplementation "io.github.prospector:modmenu:${modmenu_version}"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }

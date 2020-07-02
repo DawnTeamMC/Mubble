@@ -3,6 +3,7 @@ package hugman.mubble.objects.entity;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.BlockState;
+import net.minecraft.class_5425;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -20,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.Ingredient;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -30,6 +32,7 @@ import net.minecraft.world.WorldAccess;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -54,17 +57,17 @@ public class DuckEntity extends AnimalEntity {
 	}
 
 	@Override
-	public EntityData initialize(WorldAccess world, LocalDifficulty difficulty, SpawnReason reason, EntityData data, CompoundTag compound) {
+	public EntityData initialize(class_5425 world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
 		Biome biome = world.getBiome(this.getBlockPos());
 		DuckEntity.Type type = DuckEntity.Type.getTypeByBiome(biome);
-		if(data instanceof DuckEntity.DuckData) {
-			type = ((DuckEntity.DuckData) data).type;
+		if(entityData instanceof DuckEntity.DuckData) {
+			type = ((DuckEntity.DuckData) entityData).type;
 		}
 		else {
-			data = new DuckEntity.DuckData(type);
+			entityData = new DuckEntity.DuckData(type);
 		}
 		this.setVariant(type);
-		return super.initialize(world, difficulty, reason, data, compound);
+		return super.initialize(world, difficulty, spawnReason, entityData, entityTag);
 	}
 
 	@Override
@@ -145,8 +148,9 @@ public class DuckEntity extends AnimalEntity {
 		this.playSound(MubbleSounds.ENTITY_DUCK_STEP, 0.15F, 1.0F);
 	}
 
+	@Nullable
 	@Override
-	public DuckEntity createChild(PassiveEntity mate) {
+	public DuckEntity createChild(ServerWorld serverWorld, PassiveEntity mate) {
 		DuckEntity child = MubbleEntities.DUCK.create(this.world);
 		child.setVariant(this.random.nextFloat() < 0.5f ? ((DuckEntity) (mate)).getVariant() : this.getVariant());
 		return child;

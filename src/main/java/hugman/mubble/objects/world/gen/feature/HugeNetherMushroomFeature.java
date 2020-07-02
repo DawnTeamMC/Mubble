@@ -23,7 +23,8 @@ public class HugeNetherMushroomFeature extends Feature<HugeNetherMushroomFeature
 		super(codec);
 	}
 
-	public boolean generate(ServerWorldAccess world, StructureAccessor structureAccessor, ChunkGenerator chunkGenerator, Random random, BlockPos pos, HugeNetherMushroomFeatureConfig config) {
+	@Override
+	public boolean generate(ServerWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, HugeNetherMushroomFeatureConfig config) {
 		int stemHeight = getStemHeight(random, config);
 		int hatSize = getHatSize(random, config);
 		BlockPos origin = getOrigin(world, pos, stemHeight, config);
