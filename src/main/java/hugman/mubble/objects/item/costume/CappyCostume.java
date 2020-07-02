@@ -38,22 +38,6 @@ public class CappyCostume extends HeadCostume {
 	}
 
 	@Override
-	public ActionResult useOnEntity(ItemStack stack, PlayerEntity player, LivingEntity living, Hand hand) {
-		ItemEntity entity = (ItemEntity) EntityType.ITEM.spawnFromItemStack(player.world, stack, player, player.getBlockPos(), SpawnReason.DISPENSER, true, false);
-		Random rand = new Random();
-		World world = entity.world;
-		if(rand.nextInt(201) == 0) {
-			if(world.getFluidState(entity.getBlockPos()).isIn(FluidTags.WATER)) {
-				world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), MubbleSounds.COSTUME_CAPPY_HELP_WATER, SoundCategory.VOICE, 1f, 1f);
-			}
-			else {
-				world.playSound(null, entity.getX(), entity.getY(), entity.getZ(), MubbleSounds.COSTUME_CAPPY_HELP, SoundCategory.VOICE, 1f, 1f);
-			}
-		}
-		return super.useOnEntity(stack, player, living, hand);
-	}
-
-	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack itemstack1 = player.getEquippedStack(armorType);
 		if(itemstack1.isEmpty()) {
