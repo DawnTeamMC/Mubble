@@ -3,7 +3,7 @@ package hugman.mubble.objects.event;
 import hugman.mubble.objects.item.LightsaberItem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.event.client.ClientTickCallback;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.ItemStack;
@@ -12,7 +12,7 @@ import net.minecraft.util.ActionResult;
 @Environment(EnvType.CLIENT)
 public class LightsaberEvents {
 	public static void init() {
-		ClientTickCallback.EVENT.register(event ->
+		ClientTickEvents.END_CLIENT_TICK.register(event ->
 		{
 			if(LightsaberItem.idleTimer <= 95) {
 				LightsaberItem.idleTimer++;

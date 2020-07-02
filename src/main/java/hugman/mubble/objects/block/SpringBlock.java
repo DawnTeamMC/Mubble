@@ -163,9 +163,7 @@ public class SpringBlock extends WallMountedBlock implements Waterloggable {
 				break;
 		}
 		entityIn.fallDistance = 0f;
-		if (!world.isClient)
-		{
-
+		if(!world.isClient) {
 			world.playSound(null, pos, MubbleSounds.BLOCK_SPRING_TRIGGER, SoundCategory.BLOCKS, 0.6f, 1f);
 		}
 	}
