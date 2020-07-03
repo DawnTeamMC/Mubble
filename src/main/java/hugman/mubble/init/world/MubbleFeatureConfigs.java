@@ -47,7 +47,7 @@ public class MubbleFeatureConfigs {
 	private static final BlockState SCARLET_ORCHID = MubbleBlocks.SCARLET_ORCHID.getDefaultState();
 
 	private static final BlockState PALM_LOG = MubbleBlocks.PALM_LOGS.getLog().getDefaultState();
-	private static final BlockState PALM_LEAVES = MubbleBlocks.PALM_LEAVES.getDefaultState();
+	private static final BlockState PALM_LEAVES = MubbleBlocks.PALM_LEAVES.getLeaves().getDefaultState();
 
 	private static final BlockState BLUEBERRY_BUSH = MubbleBlocks.BLUEBERRY_BUSH.getDefaultState();
 

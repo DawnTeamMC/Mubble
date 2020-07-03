@@ -2,6 +2,7 @@ package hugman.mubble.util.entry.block;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.Direction;
 
@@ -16,7 +17,7 @@ public class LogsEntry extends BlockEntry {
 
 	private final boolean isNether;
 
-	public LogsEntry(String name, Block baseBlock, MaterialColor insideMaterialColor, MaterialColor barkMaterialColor, boolean isNether) {
+	public LogsEntry(String name, MaterialColor insideMaterialColor, MaterialColor barkMaterialColor, boolean isNether) {
 		String logSuffix = isNether ? "_stem" : "_log";
 		String woodSuffix = isNether ? "_hyphae" : "_wood";
 		this.isNether = isNether;
@@ -25,8 +26,8 @@ public class LogsEntry extends BlockEntry {
 		this.wood = registerBlock(createLog(barkMaterialColor), name + woodSuffix);
 		this.strippedWood = registerBlock(createLog(insideMaterialColor), "stripped_" + name + woodSuffix);
 		for(Block block : getLogs()) {
-			registerBlockItem(block, baseBlock);
-			copyFlammability(block, baseBlock);
+			registerBlockItem(block, ItemGroup.BUILDING_BLOCKS);
+			if(!isNether) setFlammability(block, 5, 5);
 		}
 	}
 

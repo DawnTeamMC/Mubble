@@ -15,7 +15,13 @@ public class SaplingEntry extends BlockEntry {
 	private final Block pottedPlant;
 
 	public SaplingEntry(String name, SaplingGenerator generator) {
-		sapling = registerBlock(new SaplingBlock(generator, FabricBlockSettings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS)), name);
+		sapling = registerBlock(
+				new SaplingBlock(generator, FabricBlockSettings
+						.of(Material.PLANT)
+						.noCollision()
+						.ticksRandomly()
+						.breakInstantly()
+						.sounds(BlockSoundGroup.GRASS)), name + "_sapling");
 		BlockRenderLayerMap.INSTANCE.putBlock(this.getSapling(), RenderLayer.getCutout());
 		registerBlockItem(this.getSapling(), ItemGroup.DECORATIONS);
 		pottedPlant = createPottedPlant(this.getSapling());

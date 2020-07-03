@@ -10,7 +10,7 @@ public class SimpleBlockEntry extends BlockEntry {
 	public SimpleBlockEntry(String name, Block baseBlock, MaterialColor color) {
 		this.block = registerBlock(new Block(FabricBlockSettings.copyOf(baseBlock).materialColor(color)), name);
 		registerBlockItem(this.getBlock(), baseBlock);
-		copyFlammability(this.getBlock(), baseBlock);
+		setFlammability(this.getBlock(), baseBlock);
 	}
 
 	public Block getBlock() {
