@@ -14,7 +14,7 @@
 		"issues": "https://github.com/Hugman76/Mubble/issues"
 	},
 	"license": "MIT",
-	"icon": "icon.png",
+	"icon": "assets/mubble/textures/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

@@ -818,7 +818,7 @@ public class MubbleBlocks {
 
 	public static final Block AMARANTH_DYLIUM = register("amaranth_dylium", new DyliumBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.field_25702).requiresTool().strength(3.0F, 9.0F).sounds(BlockSoundGroup.NYLIUM).ticksRandomly()), ItemGroup.BUILDING_BLOCKS);
 	public static final Block AMARANTH_ROOTS = register("amaranth_roots", new RootsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MaterialColor.CYAN).noCollision().breakInstantly().sounds(BlockSoundGroup.ROOTS)), ItemGroup.DECORATIONS);
-	public static final Block AMARANTH_WART_BLOCK = register("amaranth_wart_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK)), ItemGroup.BUILDING_BLOCKS);
+	public static final Block AMARANTH_WART_BLOCK = register("amaranth_wart_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).breakByTool(FabricToolTags.HOES).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK)), ItemGroup.BUILDING_BLOCKS);
 
 	public static final Block DARK_AMARANTH_PLANKS = register("dark_amaranth_planks", new Block(FabricBlockSettings.of(Material.NETHER_WOOD, MaterialColor.field_25706).strength(2.0F, 3.0F).sounds(BlockSoundGroup.WOOD)), ItemGroup.BUILDING_BLOCKS);
 	public static final Block DARK_AMARANTH_FUNGUS = registerPotable("dark_amaranth_fungus", new FungusBlock(FabricBlockSettings.of(Material.PLANT, MaterialColor.CYAN).breakInstantly().noCollision().sounds(BlockSoundGroup.FUNGUS), () -> {
