@@ -18,8 +18,8 @@ public class AxeItem extends net.minecraft.item.AxeItem {
 	static {
 		BLOCK_STRIPPING_MAP = (new Builder<Block, Block>())
 				.putAll(STRIPPED_BLOCKS)
-				.put(MubbleBlocks.PALM_LOG, MubbleBlocks.STRIPPED_PALM_LOG)
-				.put(MubbleBlocks.PALM_WOOD, MubbleBlocks.STRIPPED_PALM_WOOD)
+				.put(MubbleBlocks.PALM_LOGS.getLog(), MubbleBlocks.PALM_LOGS.getStrippedLog())
+				.put(MubbleBlocks.PALM_LOGS.getWood(), MubbleBlocks.PALM_LOGS.getStrippedWood())
 				.put(MubbleBlocks.SCARLET_LOG, MubbleBlocks.STRIPPED_SCARLET_LOG)
 				.put(MubbleBlocks.SCARLET_WOOD, MubbleBlocks.STRIPPED_SCARLET_WOOD)
 				.put(MubbleBlocks.CHERRY_OAK_LOG, MubbleBlocks.STRIPPED_CHERRY_OAK_LOG)

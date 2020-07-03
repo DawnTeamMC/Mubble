@@ -40,10 +40,7 @@ public class MubbleRenderLayers {
 				MubbleBlocks.AMARANTH_ROOTS
 		);
 		// Saplings
-		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), MubbleBlocks.AUTUMN_BIRCH_SAPLING,
-				MubbleBlocks.AUTUMN_OAK_SAPLING, MubbleBlocks.PALM_SAPLING, MubbleBlocks.PINK_CHERRY_OAK_SAPLING,
-				MubbleBlocks.PINK_PRESS_GARDEN_SAPLING, MubbleBlocks.RED_PRESS_GARDEN_SAPLING,
-				MubbleBlocks.SCARLET_SAPLING, MubbleBlocks.WHITE_CHERRY_OAK_SAPLING, MubbleBlocks.DARK_AMARANTH_FUNGUS
+		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), MubbleBlocks.DARK_AMARANTH_FUNGUS
 		);
 		// Mushrooms
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), MubbleBlocks.BLACK_MUSHROOM,
