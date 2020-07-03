@@ -1,8 +1,8 @@
 package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.enchantment.IgnoranceCurseEnchantment;
-import hugman.mubble.objects.enchantment.TelekinesisEnchantment;
+import hugman.mubble.object.enchantment.IgnoranceCurseEnchantment;
+import hugman.mubble.object.enchantment.TelekinesisEnchantment;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Identifier;

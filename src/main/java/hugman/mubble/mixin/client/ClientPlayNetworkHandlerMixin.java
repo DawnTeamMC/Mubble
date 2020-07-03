@@ -1,9 +1,9 @@
 package hugman.mubble.mixin.client;
 
 import hugman.mubble.init.MubbleEntities;
-import hugman.mubble.objects.entity.FireballEntity;
-import hugman.mubble.objects.entity.IceballEntity;
-import hugman.mubble.objects.entity.KirbyBallEntity;
+import hugman.mubble.object.entity.FireballEntity;
+import hugman.mubble.object.entity.IceballEntity;
+import hugman.mubble.object.entity.KirbyBallEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.world.ClientWorld;

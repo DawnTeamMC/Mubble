@@ -2,8 +2,8 @@ package hugman.mubble.mixin;
 
 import hugman.mubble.init.MubbleCostumes;
 import hugman.mubble.init.data.MubbleTags;
-import hugman.mubble.objects.item.costume.BlockCostume;
-import hugman.mubble.objects.item.costume.Costume;
+import hugman.mubble.object.item.costume.BlockCostume;
+import hugman.mubble.object.item.costume.Costume;
 import hugman.mubble.util.CalendarEvents;
 import net.minecraft.class_5425;
 import net.minecraft.entity.EntityData;

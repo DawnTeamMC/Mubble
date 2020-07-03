@@ -1,27 +1,27 @@
 package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.entry.block.BasedBlockEntry;
+import hugman.mubble.entry.block.LeavesEntry;
+import hugman.mubble.entry.block.LogsEntry;
+import hugman.mubble.entry.block.SaplingEntry;
 import hugman.mubble.init.data.MubbleSoundTypes;
 import hugman.mubble.init.world.MubbleFeatureConfigs;
-import hugman.mubble.objects.block.CakeBlock;
-import hugman.mubble.objects.block.DoorBlock;
-import hugman.mubble.objects.block.FungusBlock;
-import hugman.mubble.objects.block.GrassBlock;
-import hugman.mubble.objects.block.MushroomPlantBlock;
-import hugman.mubble.objects.block.NoteBlock;
-import hugman.mubble.objects.block.OreBlock;
-import hugman.mubble.objects.block.PressurePlateBlock;
-import hugman.mubble.objects.block.RootsBlock;
-import hugman.mubble.objects.block.StairsBlock;
-import hugman.mubble.objects.block.StoneButtonBlock;
-import hugman.mubble.objects.block.TrapdoorBlock;
-import hugman.mubble.objects.block.WoodButtonBlock;
-import hugman.mubble.objects.block.*;
-import hugman.mubble.objects.block.sapling_generator.*;
-import hugman.mubble.util.entry.block.LeavesEntry;
-import hugman.mubble.util.entry.block.LogsEntry;
-import hugman.mubble.util.entry.block.SaplingEntry;
-import hugman.mubble.util.entry.block.SimpleBlockEntry;
+import hugman.mubble.object.block.CakeBlock;
+import hugman.mubble.object.block.DoorBlock;
+import hugman.mubble.object.block.FungusBlock;
+import hugman.mubble.object.block.GrassBlock;
+import hugman.mubble.object.block.MushroomPlantBlock;
+import hugman.mubble.object.block.NoteBlock;
+import hugman.mubble.object.block.OreBlock;
+import hugman.mubble.object.block.PressurePlateBlock;
+import hugman.mubble.object.block.RootsBlock;
+import hugman.mubble.object.block.StairsBlock;
+import hugman.mubble.object.block.StoneButtonBlock;
+import hugman.mubble.object.block.TrapdoorBlock;
+import hugman.mubble.object.block.WoodButtonBlock;
+import hugman.mubble.object.block.*;
+import hugman.mubble.object.block.sapling_generator.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
@@ -215,15 +215,13 @@ public class MubbleBlocks {
 	public static final Block POLISHED_CARBONITE_VERTICAL_SLAB = register("polished_carbonite_vertical_slab", new VerticalSlabBlock(Settings.copy(POLISHED_CARBONITE)), ItemGroup.BUILDING_BLOCKS);
 
 	public static final Block VANADIUM_ORE = register("vanadium_ore", new OreBlock(Settings.copy(Blocks.DIAMOND_ORE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block VANADIUM_BLOCK = register("vanadium_block", new Block(Settings.copy(Blocks.DIAMOND_BLOCK)), ItemGroup.BUILDING_BLOCKS);
+	public static final BasedBlockEntry VANADIUM_BLOCK = new BasedBlockEntry("vanadium_block", Blocks.DIAMOND_BLOCK, MaterialColor.MAGENTA);
 
 
 	public static final SaplingEntry AUTUMN_OAK_SAPLING = new SaplingEntry("autumn_oak", new AutumnOakSaplingGenerator());
-	public static final Block AUTUMN_OAK_LEAVES = register("autumn_oak_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block AUTUMN_OAK_LEAF_PILE = register("autumn_oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
+	public static final LeavesEntry AUTUMN_OAK_LEAVES = new LeavesEntry("autumn_oak");
 	public static final SaplingEntry AUTUMN_BIRCH_SAPLING = new SaplingEntry("autumn_birch", new AutumnBirchSaplingGenerator());
-	public static final Block AUTUMN_BIRCH_LEAVES = register("autumn_birch_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block AUTUMN_BIRCH_LEAF_PILE = register("autumn_birch_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
+	public static final LeavesEntry AUTUMN_BIRCH_LEAVES = new LeavesEntry("autumn_birch");
 
 	public static final Block CHERRY_OAK_PLANKS = register("cherry_oak_planks", new Block(Settings.copy(Blocks.DARK_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final SaplingEntry PINK_CHERRY_OAK_SAPLING = new SaplingEntry("pink_cherry_oak", new PinkCherryOakSaplingGenerator());
@@ -250,7 +248,7 @@ public class MubbleBlocks {
 	public static final Block CHERRY_OAK_WOOD_VERTICAL_SLAB = register("cherry_oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block CHERRY_OAK_WOOD_BUTTON = register("cherry_oak_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 
-	public static final SimpleBlockEntry PALM_PLANKS = new SimpleBlockEntry("palm_planks", Blocks.OAK_PLANKS, MaterialColor.ORANGE);
+	public static final BasedBlockEntry PALM_PLANKS = new BasedBlockEntry("palm_planks", Blocks.OAK_PLANKS, MaterialColor.ORANGE);
 	public static final SaplingEntry PALM_SAPLING = new SaplingEntry("palm", new PalmSaplingGenerator());
 	public static final LogsEntry PALM_LOGS = new LogsEntry("palm", MaterialColor.ORANGE, MaterialColor.CYAN_TERRACOTTA, false);
 	public static final LeavesEntry PALM_LEAVES = new LeavesEntry("palm");

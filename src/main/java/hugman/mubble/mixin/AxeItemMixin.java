@@ -23,7 +23,7 @@ public class AxeItemMixin {
 		World world = context.getWorld();
 		BlockPos pos = context.getBlockPos();
 		BlockState state = world.getBlockState(pos);
-		Block block = hugman.mubble.objects.item.AxeItem.BLOCK_STRIPPING_MAP.get(state.getBlock());
+		Block block = hugman.mubble.object.item.AxeItem.BLOCK_STRIPPING_MAP.get(state.getBlock());
 		PlayerEntity player = context.getPlayer();
 		if(block != null) {
 			world.playSound(player, pos, SoundEvents.ITEM_AXE_STRIP, SoundCategory.BLOCKS, 1.0F, 1.0F);

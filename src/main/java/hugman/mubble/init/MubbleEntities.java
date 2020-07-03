@@ -1,7 +1,7 @@
 package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.entity.*;
+import hugman.mubble.object.entity.*;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;

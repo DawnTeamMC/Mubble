@@ -3,7 +3,7 @@ package hugman.mubble.mixin;
 import hugman.mubble.init.MubbleEffects;
 import hugman.mubble.init.MubbleEnchantments;
 import hugman.mubble.init.data.MubbleTags;
-import hugman.mubble.objects.item.LightsaberItem;
+import hugman.mubble.object.item.LightsaberItem;
 import hugman.mubble.util.EnchantmentUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;

@@ -1,8 +1,8 @@
 package hugman.mubble.init.data;
 
-import hugman.mubble.objects.block.block_state_property.FluidLog;
-import hugman.mubble.objects.block.block_state_property.Princess;
-import hugman.mubble.objects.block.block_state_property.VerticalSlabType;
+import hugman.mubble.object.block.block_state_property.FluidLog;
+import hugman.mubble.object.block.block_state_property.Princess;
+import hugman.mubble.object.block.block_state_property.VerticalSlabType;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 

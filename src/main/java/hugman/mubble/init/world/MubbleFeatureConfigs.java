@@ -3,7 +3,7 @@ package hugman.mubble.init.world;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.objects.world.gen.feature.HugeNetherMushroomFeatureConfig;
+import hugman.mubble.object.world.gen.feature.HugeNetherMushroomFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;

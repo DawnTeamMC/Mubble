@@ -1,8 +1,8 @@
 package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.effect.HiccupEffect;
-import hugman.mubble.objects.effect.SimpleEffect;
+import hugman.mubble.object.effect.HiccupEffect;
+import hugman.mubble.object.effect.SimpleEffect;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.util.Identifier;

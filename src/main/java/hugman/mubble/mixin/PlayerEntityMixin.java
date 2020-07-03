@@ -1,9 +1,9 @@
 package hugman.mubble.mixin;
 
 import hugman.mubble.init.MubbleSounds;
-import hugman.mubble.objects.item.LightsaberItem;
-import hugman.mubble.objects.item.costume.BlockCostume;
-import hugman.mubble.objects.item.costume.Costume;
+import hugman.mubble.object.item.LightsaberItem;
+import hugman.mubble.object.item.costume.BlockCostume;
+import hugman.mubble.object.item.costume.Costume;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderEffect;
 import net.minecraft.client.render.GameRenderer;

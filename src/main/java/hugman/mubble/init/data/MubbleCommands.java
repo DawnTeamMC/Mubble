@@ -1,8 +1,8 @@
 package hugman.mubble.init.data;
 
-import hugman.mubble.objects.command.FoodbarCommand;
-import hugman.mubble.objects.command.HealthCommand;
-import hugman.mubble.objects.command.MotionCommand;
+import hugman.mubble.object.command.FoodbarCommand;
+import hugman.mubble.object.command.HealthCommand;
+import hugman.mubble.object.command.MotionCommand;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 
 public class MubbleCommands {

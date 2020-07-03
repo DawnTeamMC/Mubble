@@ -2,8 +2,8 @@ package hugman.mubble.init.data;
 
 import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleBlocks;
-import hugman.mubble.objects.block.block_entity.PlacerBlockEntity;
-import hugman.mubble.objects.block.block_entity.PresentBlockEntity;
+import hugman.mubble.object.block.block_entity.PlacerBlockEntity;
+import hugman.mubble.object.block.block_entity.PresentBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.DispenserBlockEntity;

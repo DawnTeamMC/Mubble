@@ -1,11 +1,11 @@
 package hugman.mubble.init.world;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.objects.world.biome.SMWDesertBiome;
-import hugman.mubble.objects.world.biome.overworld.*;
-import hugman.mubble.objects.world.biome.the_end.DarkAmaranthForest;
-import hugman.mubble.objects.world.biome.the_end.TallDarkAmaranthForest;
-import hugman.mubble.objects.world.biome.the_nether.*;
+import hugman.mubble.object.world.biome.SMWDesertBiome;
+import hugman.mubble.object.world.biome.overworld.*;
+import hugman.mubble.object.world.biome.the_end.DarkAmaranthForest;
+import hugman.mubble.object.world.biome.the_end.TallDarkAmaranthForest;
+import hugman.mubble.object.world.biome.the_nether.*;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;

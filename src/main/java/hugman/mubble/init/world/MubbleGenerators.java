@@ -2,7 +2,7 @@ package hugman.mubble.init.world;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
-import hugman.mubble.objects.entity.DuckEntity;
+import hugman.mubble.object.entity.DuckEntity;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.SpawnGroup;
