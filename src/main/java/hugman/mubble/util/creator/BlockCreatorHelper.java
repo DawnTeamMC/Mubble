@@ -2,11 +2,9 @@ package hugman.mubble.util.creator;
 
 import hugman.mubble.Mubble;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -58,7 +56,4 @@ public class BlockCreatorHelper {
 	public static boolean never(BlockState state, BlockView world, BlockPos pos) {
 		return false;
 	}
-	// Default settings
-
-	public static final FabricBlockSettings defaultButtonSettings = FabricBlockSettings.of(Material.SUPPORTED).noCollision().hardness(0.5F);
 }

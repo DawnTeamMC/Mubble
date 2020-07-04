@@ -1,10 +1,10 @@
 package hugman.mubble.util.creator;
 
-import hugman.mubble.object.block.*;
 import hugman.mubble.object.block.PressurePlateBlock;
 import hugman.mubble.object.block.StairsBlock;
 import hugman.mubble.object.block.StoneButtonBlock;
 import hugman.mubble.object.block.WoodButtonBlock;
+import hugman.mubble.object.block.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
@@ -19,7 +19,8 @@ public enum BlockTemplate {
 	WALL("wall", ItemGroup.DECORATIONS),
 	STONE_BUTTON("button", ItemGroup.REDSTONE),
 	WOOD_BUTTON("button", ItemGroup.REDSTONE),
-	PRESSURE_PLATE("pressure_plate", ItemGroup.REDSTONE),
+	STONE_PRESSURE_PLATE("pressure_plate", ItemGroup.REDSTONE),
+	WOOD_PRESSURE_PLATE("pressure_plate", ItemGroup.REDSTONE),
 	LEAVES("leaves", ItemGroup.DECORATIONS, RenderLayer.getCutoutMipped()),
 	LEAF_PILE("leaf_pile", ItemGroup.DECORATIONS, RenderLayer.getCutoutMipped());
 
@@ -67,12 +68,14 @@ public enum BlockTemplate {
 				return new VerticalSlabBlock(settings);
 			case WALL:
 				return new WallBlock(settings);
-			case PRESSURE_PLATE:
-				return new PressurePlateBlock(net.minecraft.block.PressurePlateBlock.ActivationRule.MOBS, settings);
+			case STONE_PRESSURE_PLATE:
+				return new PressurePlateBlock(net.minecraft.block.PressurePlateBlock.ActivationRule.MOBS, settings.noCollision().strength(0.5F));
+			case WOOD_PRESSURE_PLATE:
+				return new PressurePlateBlock(net.minecraft.block.PressurePlateBlock.ActivationRule.EVERYTHING, settings.noCollision().strength(0.5F));
 			case STONE_BUTTON:
-				return new StoneButtonBlock(settings);
+				return new StoneButtonBlock(settings.noCollision().hardness(0.5F));
 			case WOOD_BUTTON:
-				return new WoodButtonBlock(settings);
+				return new WoodButtonBlock(settings.noCollision().hardness(0.5F));
 			case LEAVES:
 				return new LeavesBlock(settings);
 			case LEAF_PILE:

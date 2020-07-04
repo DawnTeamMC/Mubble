@@ -1,6 +1,5 @@
 package hugman.mubble.util.creator.block;
 
-import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.util.creator.BlockCreatorHelper;
 import hugman.mubble.util.creator.BlockEntry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -17,17 +16,15 @@ public class LogCreator extends BlockCreatorHelper {
 
 	private final boolean isNether;
 
-	private final FabricBlockSettings defaultNormalLogSettings = FabricBlockSettings.of(Material.WOOD).strength(2.0F).sounds(BlockSoundGroup.WOOD);
-	private final FabricBlockSettings defaultNetherLogSettings = FabricBlockSettings.of(Material.NETHER_WOOD).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM);
-	private static final int defaultNormalLogBurnValue = 5;
-	private static final int defaultNormalLogBurnSpread = 5;
+	public final FabricBlockSettings defaultNormalLogSettings = FabricBlockSettings.of(Material.WOOD).strength(2.0F).sounds(BlockSoundGroup.WOOD);
+	public final FabricBlockSettings defaultNetherLogSettings = FabricBlockSettings.of(Material.NETHER_WOOD).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM);
+	public static final int defaultNormalLogBurnValue = 5;
+	public static final int defaultNormalLogBurnSpread = 5;
 
 	public LogCreator(String name, MaterialColor insideMaterialColor, MaterialColor barkMaterialColor, boolean isNether) {
 		String logSuffix = isNether ? "_stem" : "_log";
 		String woodSuffix = isNether ? "_hyphae" : "_wood";
-
 		this.isNether = isNether;
-
 		this.log = new BlockEntry(name + logSuffix, createLog(insideMaterialColor, barkMaterialColor)).setItemGroup(ItemGroup.BUILDING_BLOCKS).setFlammability(defaultNormalLogBurnValue, defaultNormalLogBurnSpread);
 		this.strippedLog = new BlockEntry("stripped_" + name + logSuffix, createLog(insideMaterialColor)).setItemGroup(ItemGroup.BUILDING_BLOCKS).setFlammability(defaultNormalLogBurnValue, defaultNormalLogBurnSpread);
 		this.wood = new BlockEntry(name + woodSuffix, createLog(barkMaterialColor)).setItemGroup(ItemGroup.BUILDING_BLOCKS).setFlammability(defaultNormalLogBurnValue, defaultNormalLogBurnSpread);

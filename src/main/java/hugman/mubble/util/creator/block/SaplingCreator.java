@@ -8,7 +8,7 @@ import net.minecraft.block.sapling.SaplingGenerator;
 import net.minecraft.sound.BlockSoundGroup;
 
 public class SaplingCreator extends PottedPlantCreator {
-	private static final FabricBlockSettings defaultSaplingSettings = FabricBlockSettings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS);
+	public static final FabricBlockSettings defaultSaplingSettings = FabricBlockSettings.of(Material.PLANT).noCollision().ticksRandomly().breakInstantly().sounds(BlockSoundGroup.GRASS);
 
 	public SaplingCreator(String name, SaplingGenerator generator) {
 		super(name + "_sapling", new SaplingBlock(generator, defaultSaplingSettings));

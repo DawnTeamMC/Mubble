@@ -1,6 +1,5 @@
 package hugman.mubble.util.creator.block;
 
-import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.util.creator.BlockCreatorHelper;
 import hugman.mubble.util.creator.BlockEntry;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

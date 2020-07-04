@@ -1,7 +1,6 @@
 package hugman.mubble.util.creator.block;
 
 import com.google.common.collect.ImmutableMap;
-import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.util.MoreWordUtils;
 import hugman.mubble.util.creator.BlockCreatorHelper;
 import hugman.mubble.util.creator.BlockEntry;

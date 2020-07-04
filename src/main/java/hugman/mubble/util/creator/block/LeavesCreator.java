@@ -1,6 +1,5 @@
 package hugman.mubble.util.creator.block;
 
-import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.util.creator.BlockCreatorHelper;
 import hugman.mubble.util.creator.BlockEntry;
 import hugman.mubble.util.creator.BlockTemplate;
@@ -13,10 +12,10 @@ public class LeavesCreator {
 	private final BlockEntry leaves;
 	private final BlockEntry leafPile;
 
-	private static final FabricBlockSettings defaultLeavesSettings = FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(BlockCreatorHelper::canSpawnOnLeaves).suffocates(BlockCreatorHelper::never).blockVision(BlockCreatorHelper::never);
-	private static final FabricBlockSettings defaultLeafPileSettings = FabricBlockSettings.of(Material.LEAVES).strength(0.1F).ticksRandomly().sounds(BlockSoundGroup.GRASS).noCollision().nonOpaque().suffocates(BlockCreatorHelper::never).blockVision(BlockCreatorHelper::never);
-	private static final int defaultLeavesBurnValue = 30;
-	private static final int defaultLeavesBurnSpread = 60;
+	public static final FabricBlockSettings defaultLeavesSettings = FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(BlockCreatorHelper::canSpawnOnLeaves).suffocates(BlockCreatorHelper::never).blockVision(BlockCreatorHelper::never);
+	public static final FabricBlockSettings defaultLeafPileSettings = FabricBlockSettings.of(Material.LEAVES).strength(0.1F).ticksRandomly().sounds(BlockSoundGroup.GRASS).noCollision().nonOpaque().suffocates(BlockCreatorHelper::never).blockVision(BlockCreatorHelper::never);
+	public static final int defaultLeavesBurnValue = 60;
+	public static final int defaultLeavesBurnSpread = 30;
 
 	public LeavesCreator(String name) {
 		this.leaves = new BlockEntry(name, BlockTemplate.LEAVES, defaultLeavesSettings).setFlammability(defaultLeavesBurnValue, defaultLeavesBurnSpread);

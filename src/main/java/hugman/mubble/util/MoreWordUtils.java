@@ -20,11 +20,12 @@ public class MoreWordUtils {
 		}
 	}
 
-	public static String parseShapeName(String name, BlockTemplate shape)
-	{
-		if(shape != BlockTemplate.CUBE && name.endsWith("bricks")){
+	public static String parseShapeName(String name, BlockTemplate shape) {
+		if(shape != BlockTemplate.CUBE && name.endsWith("bricks")) {
 			return name.substring(0, name.length() - 1);
 		}
-		else return name;
+		else {
+			return name;
+		}
 	}
 }

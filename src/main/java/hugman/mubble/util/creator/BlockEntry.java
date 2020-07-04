@@ -13,7 +13,6 @@ public class BlockEntry {
 	private final ItemGroup itemGroup;
 	private final int burn;
 	private final int spread;
-
 	// Internal builders
 
 	private BlockEntry(String name, Block block, RenderLayer renderLayer, ItemGroup itemGroup, int burn, int spread) {
@@ -32,7 +31,6 @@ public class BlockEntry {
 	private BlockEntry(String name, BlockTemplate template, FabricBlockSettings settings, int burn, int spread) {
 		this(name + template.getSuffix(), template.getBlock(settings), template.getRenderLayer(), template.getItemGroup(), burn, spread);
 	}
-
 	// Public builders
 
 	public BlockEntry(String name, Block block) {
@@ -50,7 +48,6 @@ public class BlockEntry {
 	public BlockEntry(String name, BlockTemplate template, Block baseBlock) {
 		this(name, template, FabricBlockSettings.copyOf(baseBlock), baseBlock);
 	}
-
 	// Additional constructors
 
 	public BlockEntry setRenderLayer(RenderLayer renderLayer) {
@@ -72,7 +69,6 @@ public class BlockEntry {
 	public BlockEntry setFlammability(Block baseBlock) {
 		return new BlockEntry(this.name, this.block, this.renderLayer, this.itemGroup, BlockCreatorHelper.getFlammabilityBurn(baseBlock), BlockCreatorHelper.getFlammabilitySpread(baseBlock));
 	}
-
 	// Getters
 
 	public String getName() {
