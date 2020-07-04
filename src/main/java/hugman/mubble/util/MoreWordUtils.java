@@ -1,5 +1,7 @@
 package hugman.mubble.util;
 
+import hugman.mubble.util.creator.BlockTemplate;
+
 public class MoreWordUtils {
 	public static String numerate(int number, String text) {
 		if(number == 0) {
@@ -16,5 +18,13 @@ public class MoreWordUtils {
 				return number + " " + text + "s";
 			}
 		}
+	}
+
+	public static String parseShapeName(String name, BlockTemplate shape)
+	{
+		if(shape != BlockTemplate.CUBE && name.endsWith("bricks")){
+			return name.substring(0, name.length() - 1);
+		}
+		else return name;
 	}
 }

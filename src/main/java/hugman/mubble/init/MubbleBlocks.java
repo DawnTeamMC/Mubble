@@ -1,7 +1,6 @@
 package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.entry.block.*;
 import hugman.mubble.init.data.MubbleSoundTypes;
 import hugman.mubble.init.world.MubbleFeatureConfigs;
 import hugman.mubble.object.block.CakeBlock;
@@ -14,12 +13,12 @@ import hugman.mubble.object.block.OreBlock;
 import hugman.mubble.object.block.PressurePlateBlock;
 import hugman.mubble.object.block.RootsBlock;
 import hugman.mubble.object.block.StairsBlock;
-import hugman.mubble.object.block.StoneButtonBlock;
 import hugman.mubble.object.block.TrapdoorBlock;
 import hugman.mubble.object.block.WoodButtonBlock;
 import hugman.mubble.object.block.*;
 import hugman.mubble.object.block.sapling_generator.*;
-import hugman.mubble.util.creator.BlockShape;
+import hugman.mubble.util.creator.BlockTemplate;
+import hugman.mubble.util.creator.block.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
@@ -89,41 +88,14 @@ public class MubbleBlocks {
 
 	public static final Block DARK_PRISMARINE_WALL = register("dark_prismarine_wall", new WallBlock(Settings.copy(Blocks.DARK_PRISMARINE)), ItemGroup.DECORATIONS);
 
-	public static final Block OAK_WOOD_STAIRS = register("oak_wood_stairs", new StairsBlock(Blocks.OAK_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block SPRUCE_WOOD_STAIRS = register("spruce_wood_stairs", new StairsBlock(Blocks.SPRUCE_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block BIRCH_WOOD_STAIRS = register("birch_wood_stairs", new StairsBlock(Blocks.BIRCH_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block JUNGLE_WOOD_STAIRS = register("jungle_wood_stairs", new StairsBlock(Blocks.JUNGLE_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block ACACIA_WOOD_STAIRS = register("acacia_wood_stairs", new StairsBlock(Blocks.ACACIA_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block DARK_OAK_WOOD_STAIRS = register("dark_oak_wood_stairs", new StairsBlock(Blocks.DARK_OAK_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CRIMSON_HYPHAE_STAIRS = register("crimson_hyphae_stairs", new StairsBlock(Blocks.CRIMSON_HYPHAE), ItemGroup.BUILDING_BLOCKS);
-	public static final Block WARPED_HYPHAE_STAIRS = register("warped_hyphae_stairs", new StairsBlock(Blocks.WARPED_HYPHAE), ItemGroup.BUILDING_BLOCKS);
-
-	public static final Block OAK_WOOD_SLAB = register("oak_wood_slab", new SlabBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block SPRUCE_WOOD_SLAB = register("spruce_wood_slab", new SlabBlock(Settings.copy(Blocks.SPRUCE_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block BIRCH_WOOD_SLAB = register("birch_wood_slab", new SlabBlock(Settings.copy(Blocks.BIRCH_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block JUNGLE_WOOD_SLAB = register("jungle_wood_slab", new SlabBlock(Settings.copy(Blocks.JUNGLE_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block ACACIA_WOOD_SLAB = register("acacia_wood_slab", new SlabBlock(Settings.copy(Blocks.ACACIA_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block DARK_OAK_WOOD_SLAB = register("dark_oak_wood_slab", new SlabBlock(Settings.copy(Blocks.DARK_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CRIMSON_HYPHAE_SLAB = register("crimson_hyphae_slab", new SlabBlock(Settings.copy(Blocks.CRIMSON_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block WARPED_HYPHAE_SLAB = register("warped_hyphae_slab", new SlabBlock(Settings.copy(Blocks.WARPED_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
-
-	public static final Block OAK_WOOD_VERTICAL_SLAB = register("oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block SPRUCE_WOOD_VERTICAL_SLAB = register("spruce_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.SPRUCE_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block BIRCH_WOOD_VERTICAL_SLAB = register("birch_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.BIRCH_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block JUNGLE_WOOD_VERTICAL_SLAB = register("jungle_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.JUNGLE_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block ACACIA_WOOD_VERTICAL_SLAB = register("acacia_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.ACACIA_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block DARK_OAK_WOOD_VERTICAL_SLAB = register("dark_oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.DARK_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CRIMSON_HYPHAE_VERTICAL_SLAB = register("crimson_hyphae_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.CRIMSON_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block WARPED_HYPHAE_VERTICAL_SLAB = register("warped_hyphae_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.WARPED_HYPHAE)), ItemGroup.BUILDING_BLOCKS);
-
-	public static final Block OAK_WOOD_BUTTON = register("oak_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
-	public static final Block SPRUCE_WOOD_BUTTON = register("spruce_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
-	public static final Block BIRCH_WOOD_BUTTON = register("birch_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
-	public static final Block JUNGLE_WOOD_BUTTON = register("jungle_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
-	public static final Block ACACIA_WOOD_BUTTON = register("acacia_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
-	public static final Block DARK_OAK_WOOD_BUTTON = register("dark_oak_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
-	public static final Block CRIMSON_HYPHAE_BUTTON = register("crimson_hyphae_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.NETHER_STEM)), ItemGroup.REDSTONE);
-	public static final Block WARPED_HYPHAE_BUTTON = register("warped_hyphae_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.NETHER_STEM)), ItemGroup.REDSTONE);
+	public static final MSBlockCreator OAK_WOOD = new MSBlockCreator("oak_wood", Blocks.OAK_WOOD, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.STONE_BUTTON);
+	public static final MSBlockCreator SPRUCE_WOOD = new MSBlockCreator("spruce_wood", Blocks.SPRUCE_WOOD, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.STONE_BUTTON);
+	public static final MSBlockCreator BIRCH_WOOD = new MSBlockCreator("birch_wood", Blocks.BIRCH_WOOD, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.STONE_BUTTON);
+	public static final MSBlockCreator JUNGLE_WOOD = new MSBlockCreator("jungle_wood", Blocks.JUNGLE_WOOD, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.STONE_BUTTON);
+	public static final MSBlockCreator ACACIA_WOOD = new MSBlockCreator("acacia_wood", Blocks.ACACIA_WOOD, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.STONE_BUTTON);
+	public static final MSBlockCreator DARK_OAK_WOOD = new MSBlockCreator("dark_oak_wood", Blocks.DARK_OAK_WOOD, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.STONE_BUTTON);
+	public static final MSBlockCreator CRIMSON_HYPHAE = new MSBlockCreator("crimson_hyphae", Blocks.CRIMSON_HYPHAE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.STONE_BUTTON);
+	public static final MSBlockCreator WARPED_HYPHAE = new MSBlockCreator("warped_hyphae", Blocks.WARPED_HYPHAE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.STONE_BUTTON);
 
 	public static final Block OAK_LEAF_PILE = register("oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block SPRUCE_LEAF_PILE = register("spruce_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
@@ -132,98 +104,38 @@ public class MubbleBlocks {
 	public static final Block ACACIA_LEAF_PILE = register("acacia_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 	public static final Block DARK_OAK_LEAF_PILE = register("dark_oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
 
-	public static final Block COBBLESTONE_BRICKS = register("cobblestone_bricks", new Block(Settings.copy(Blocks.COBBLESTONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block COBBLESTONE_BRICK_STAIRS = register("cobblestone_brick_stairs", new StairsBlock(COBBLESTONE_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block COBBLESTONE_BRICK_SLAB = register("cobblestone_brick_slab", new SlabBlock(Settings.copy(COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block COBBLESTONE_BRICK_VERTICAL_SLAB = register("cobblestone_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block COBBLESTONE_BRICK_WALL = register("cobblestone_brick_wall", new WallBlock(Settings.copy(COBBLESTONE_BRICKS)), ItemGroup.DECORATIONS);
-	public static final Block MOSSY_COBBLESTONE_BRICKS = register("mossy_cobblestone_bricks", new Block(Settings.copy(Blocks.MOSSY_COBBLESTONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MOSSY_COBBLESTONE_BRICK_STAIRS = register("mossy_cobblestone_brick_stairs", new StairsBlock(MOSSY_COBBLESTONE_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MOSSY_COBBLESTONE_BRICK_SLAB = register("mossy_cobblestone_brick_slab", new SlabBlock(Settings.copy(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MOSSY_COBBLESTONE_BRICK_VERTICAL_SLAB = register("mossy_cobblestone_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MOSSY_COBBLESTONE_BRICK_WALL = register("mossy_cobblestone_brick_wall", new WallBlock(Settings.copy(MOSSY_COBBLESTONE_BRICKS)), ItemGroup.DECORATIONS);
-	public static final Block GRANITE_BRICKS = register("granite_bricks", new Block(Settings.copy(Blocks.GRANITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block GRANITE_BRICK_STAIRS = register("granite_brick_stairs", new StairsBlock(GRANITE_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block GRANITE_BRICK_SLAB = register("granite_brick_slab", new SlabBlock(Settings.copy(GRANITE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block GRANITE_BRICK_VERTICAL_SLAB = register("granite_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(GRANITE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block GRANITE_BRICK_WALL = register("granite_brick_wall", new WallBlock(Settings.copy(GRANITE_BRICKS)), ItemGroup.DECORATIONS);
-	public static final Block DIORITE_BRICKS = register("diorite_bricks", new Block(Settings.copy(Blocks.DIORITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DIORITE_BRICK_STAIRS = register("diorite_brick_stairs", new StairsBlock(DIORITE_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DIORITE_BRICK_SLAB = register("diorite_brick_slab", new SlabBlock(Settings.copy(DIORITE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DIORITE_BRICK_VERTICAL_SLAB = register("diorite_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(DIORITE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DIORITE_BRICK_WALL = register("diorite_brick_wall", new WallBlock(Settings.copy(DIORITE_BRICKS)), ItemGroup.DECORATIONS);
-	public static final Block ANDESITE_BRICKS = register("andesite_bricks", new Block(Settings.copy(Blocks.ANDESITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block ANDESITE_BRICK_STAIRS = register("andesite_brick_stairs", new StairsBlock(ANDESITE_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block ANDESITE_BRICK_SLAB = register("andesite_brick_slab", new SlabBlock(Settings.copy(ANDESITE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block ANDESITE_BRICK_VERTICAL_SLAB = register("andesite_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(ANDESITE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block ANDESITE_BRICK_WALL = register("andesite_brick_wall", new WallBlock(Settings.copy(ANDESITE_BRICKS)), ItemGroup.DECORATIONS);
+	public static final MSBlockCreator COBBLESTONE_BRICKS = new MSBlockCreator("cobblestone_bricks", Blocks.MOSSY_COBBLESTONE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator MOSSY_COBBLESTONE_BRICKS = new MSBlockCreator("mossy_cobblestone_bricks", Blocks.MOSSY_COBBLESTONE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator GRANITE_BRICKS = new MSBlockCreator("granite_bricks", Blocks.GRANITE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator DIORITE_BRICKS = new MSBlockCreator("diorite_bricks", Blocks.DIORITE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator ANDESITE_BRICKS = new MSBlockCreator("andesite_bricks", Blocks.ANDESITE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
 
-	public static final Block SANDSTONE_BRICKS = register("sandstone_bricks", new Block(Settings.copy(Blocks.SANDSTONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SANDSTONE_BRICK_STAIRS = register("sandstone_brick_stairs", new StairsBlock(SANDSTONE_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SANDSTONE_BRICK_SLAB = register("sandstone_brick_slab", new SlabBlock(Settings.copy(SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SANDSTONE_BRICK_VERTICAL_SLAB = register("sandstone_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SANDSTONE_BRICK_WALL = register("sandstone_brick_wall", new WallBlock(Settings.copy(SANDSTONE_BRICKS)), ItemGroup.DECORATIONS);
-	public static final Block POLISHED_SANDSTONE = register("polished_sandstone", new Block(Settings.copy(Blocks.SANDSTONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_SANDSTONE_STAIRS = register("polished_sandstone_stairs", new StairsBlock(POLISHED_SANDSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_SANDSTONE_SLAB = register("polished_sandstone_slab", new SlabBlock(Settings.copy(POLISHED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_SANDSTONE_VERTICAL_SLAB = register("polished_sandstone_vertical_slab", new VerticalSlabBlock(Settings.copy(POLISHED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block RED_SANDSTONE_BRICKS = register("red_sandstone_bricks", new Block(Settings.copy(Blocks.RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block RED_SANDSTONE_BRICK_STAIRS = register("red_sandstone_brick_stairs", new StairsBlock(RED_SANDSTONE_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block RED_SANDSTONE_BRICK_SLAB = register("red_sandstone_brick_slab", new SlabBlock(Settings.copy(RED_SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block RED_SANDSTONE_BRICK_VERTICAL_SLAB = register("red_sandstone_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(RED_SANDSTONE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block RED_SANDSTONE_BRICK_WALL = register("red_sandstone_brick_wall", new WallBlock(Settings.copy(RED_SANDSTONE_BRICKS)), ItemGroup.DECORATIONS);
-	public static final Block POLISHED_RED_SANDSTONE = register("polished_red_sandstone", new Block(Settings.copy(Blocks.RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_RED_SANDSTONE_STAIRS = register("polished_red_sandstone_stairs", new StairsBlock(POLISHED_RED_SANDSTONE), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_RED_SANDSTONE_SLAB = register("polished_red_sandstone_slab", new SlabBlock(Settings.copy(POLISHED_RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_RED_SANDSTONE_VERTICAL_SLAB = register("polished_red_sandstone_vertical_slab", new VerticalSlabBlock(Settings.copy(POLISHED_RED_SANDSTONE)), ItemGroup.BUILDING_BLOCKS);
+	public static final MSBlockCreator SANDSTONE_BRICKS = new MSBlockCreator("sandstone_bricks", Blocks.SANDSTONE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator POLISHED_SANDSTONE = new MSBlockCreator("polished_sandstone", Blocks.SANDSTONE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB);
+	public static final MSBlockCreator RED_SANDSTONE_BRICKS = new MSBlockCreator("red_sandstone_bricks", Blocks.RED_SANDSTONE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator POLISHED_RED_SANDSTONE = new MSBlockCreator("polished_red_sandstone", Blocks.RED_SANDSTONE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB);
 
-	public static final Block SMOOTH_STONE_PAVING = register("smooth_stone_paving", new Block(Settings.copy(Blocks.SMOOTH_STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SMOOTH_STONE_PAVING_STAIRS = register("smooth_stone_paving_stairs", new StairsBlock(SMOOTH_STONE_PAVING), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SMOOTH_STONE_PAVING_SLAB = register("smooth_stone_paving_slab", new SlabBlock(Settings.copy(SMOOTH_STONE_PAVING)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block SMOOTH_STONE_PAVING_VERTICAL_SLAB = register("smooth_stone_paving_vertical_slab", new VerticalSlabBlock(Settings.copy(SMOOTH_STONE_PAVING)), ItemGroup.BUILDING_BLOCKS);
+	public static final MSBlockCreator SMOOTH_STONE_PAVING = new MSBlockCreator("smooth_stone_paving", Blocks.SMOOTH_STONE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB);
+	public static final MSBlockCreator CHISELED_PRISMARINE = new MSBlockCreator("chiseled_prismarine", Blocks.PRISMARINE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator PRISMARINE_BRICK_PAVING = new MSBlockCreator("prismarine_brick_paving", Blocks.PRISMARINE_BRICKS, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB);
 
-	public static final Block CHISELED_PRISMARINE = register("chiseled_prismarine", new Block(Settings.copy(Blocks.PRISMARINE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CHISELED_PRISMARINE_STAIRS = register("chiseled_prismarine_stairs", new StairsBlock(CHISELED_PRISMARINE), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CHISELED_PRISMARINE_SLAB = register("chiseled_prismarine_slab", new SlabBlock(Settings.copy(CHISELED_PRISMARINE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CHISELED_PRISMARINE_VERTICAL_SLAB = register("chiseled_prismarine_vertical_slab", new VerticalSlabBlock(Settings.copy(CHISELED_PRISMARINE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CHISELED_PRISMARINE_WALL = register("chiseled_prismarine_wall", new WallBlock(Settings.copy(CHISELED_PRISMARINE)), ItemGroup.DECORATIONS);
-
-	public static final Block PRISMARINE_BRICK_PAVING = register("prismarine_brick_paving", new Block(Settings.copy(Blocks.PRISMARINE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PRISMARINE_BRICK_PAVING_STAIRS = register("prismarine_brick_paving_stairs", new StairsBlock(PRISMARINE_BRICK_PAVING), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PRISMARINE_BRICK_PAVING_SLAB = register("prismarine_brick_paving_slab", new SlabBlock(Settings.copy(PRISMARINE_BRICK_PAVING)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PRISMARINE_BRICK_PAVING_VERTICAL_SLAB = register("prismarine_brick_paving_vertical_slab", new VerticalSlabBlock(Settings.copy(PRISMARINE_BRICK_PAVING)), ItemGroup.BUILDING_BLOCKS);
-
-	public static final Block BLUNITE = register("blunite", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.LIGHT_BLUE_TERRACOTTA).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CARBONITE = register("carbonite", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUNITE_STAIRS = register("blunite_stairs", new StairsBlock(BLUNITE), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CARBONITE_STAIRS = register("carbonite_stairs", new StairsBlock(CARBONITE), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUNITE_SLAB = register("blunite_slab", new SlabBlock(Settings.copy(BLUNITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CARBONITE_SLAB = register("carbonite_slab", new SlabBlock(Settings.copy(CARBONITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUNITE_VERTICAL_SLAB = register("blunite_vertical_slab", new VerticalSlabBlock(Settings.copy(BLUNITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CARBONITE_VERTICAL_SLAB = register("carbonite_vertical_slab", new VerticalSlabBlock(Settings.copy(CARBONITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUNITE_WALL = register("blunite_wall", new WallBlock(Settings.copy(BLUNITE)), ItemGroup.DECORATIONS);
-	public static final Block CARBONITE_WALL = register("carbonite_wall", new WallBlock(Settings.copy(CARBONITE)), ItemGroup.DECORATIONS);
-	public static final Block POLISHED_BLUNITE = register("polished_blunite", new Block(Settings.copy(BLUNITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_CARBONITE = register("polished_carbonite", new Block(Settings.copy(CARBONITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_BLUNITE_STAIRS = register("polished_blunite_stairs", new StairsBlock(POLISHED_BLUNITE), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_CARBONITE_STAIRS = register("polished_carbonite_stairs", new StairsBlock(POLISHED_CARBONITE), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_BLUNITE_SLAB = register("polished_blunite_slab", new SlabBlock(Settings.copy(POLISHED_BLUNITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_CARBONITE_SLAB = register("polished_carbonite_slab", new SlabBlock(Settings.copy(POLISHED_CARBONITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_BLUNITE_VERTICAL_SLAB = register("polished_blunite_vertical_slab", new VerticalSlabBlock(Settings.copy(POLISHED_BLUNITE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block POLISHED_CARBONITE_VERTICAL_SLAB = register("polished_carbonite_vertical_slab", new VerticalSlabBlock(Settings.copy(POLISHED_CARBONITE)), ItemGroup.BUILDING_BLOCKS);
+	public static final MSBlockCreator BLUNITE = new MSBlockCreator("blunite", MaterialColor.LIGHT_BLUE_TERRACOTTA, Blocks.ANDESITE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator CARBONITE = new MSBlockCreator("carbonite", MaterialColor.BLACK, Blocks.ANDESITE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator POLISHED_BLUNITE = new MSBlockCreator("polished_blunite", MubbleBlocks.BLUNITE.getBlock(BlockTemplate.CUBE), BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB);
+	public static final MSBlockCreator POLISHED_CARBONITE = new MSBlockCreator("polished_carbonite", MubbleBlocks.CARBONITE.getBlock(BlockTemplate.CUBE), BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB);
 
 	public static final Block VANADIUM_ORE = register("vanadium_ore", new OreBlock(Settings.copy(Blocks.DIAMOND_ORE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BasedBlockEntry VANADIUM_BLOCK = new BasedBlockEntry("vanadium_block", Blocks.DIAMOND_BLOCK, MaterialColor.MAGENTA);
+	public static final SimpleBlockCreator VANADIUM_BLOCK = new SimpleBlockCreator("vanadium_block", Blocks.DIAMOND_BLOCK, MaterialColor.MAGENTA);
 
 
-	public static final SaplingEntry AUTUMN_OAK_SAPLING = new SaplingEntry("autumn_oak", new AutumnOakSaplingGenerator());
-	public static final LeavesEntry AUTUMN_OAK_LEAVES = new LeavesEntry("autumn_oak");
-	public static final SaplingEntry AUTUMN_BIRCH_SAPLING = new SaplingEntry("autumn_birch", new AutumnBirchSaplingGenerator());
-	public static final LeavesEntry AUTUMN_BIRCH_LEAVES = new LeavesEntry("autumn_birch");
+	public static final SaplingCreator AUTUMN_OAK_SAPLING = new SaplingCreator("autumn_oak", new AutumnOakSaplingGenerator());
+	public static final LeavesCreator AUTUMN_OAK_LEAVES = new LeavesCreator("autumn_oak");
+	public static final SaplingCreator AUTUMN_BIRCH_SAPLING = new SaplingCreator("autumn_birch", new AutumnBirchSaplingGenerator());
+	public static final LeavesCreator AUTUMN_BIRCH_LEAVES = new LeavesCreator("autumn_birch");
 
 	public static final Block CHERRY_OAK_PLANKS = register("cherry_oak_planks", new Block(Settings.copy(Blocks.DARK_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final SaplingEntry PINK_CHERRY_OAK_SAPLING = new SaplingEntry("pink_cherry_oak", new PinkCherryOakSaplingGenerator());
-	public static final SaplingEntry WHITE_CHERRY_OAK_SAPLING = new SaplingEntry("white_cherry_oak", new WhiteCherryOakSaplingGenerator());
+	public static final SaplingCreator PINK_CHERRY_OAK_SAPLING = new SaplingCreator("pink_cherry_oak", new PinkCherryOakSaplingGenerator());
+	public static final SaplingCreator WHITE_CHERRY_OAK_SAPLING = new SaplingCreator("white_cherry_oak", new WhiteCherryOakSaplingGenerator());
 	public static final Block CHERRY_OAK_LOG = register("cherry_oak_log", new PillarBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 5);
 	public static final Block STRIPPED_CHERRY_OAK_LOG = register("stripped_cherry_oak_log", new PillarBlock(Settings.copy(CHERRY_OAK_LOG)), ItemGroup.BUILDING_BLOCKS, 5, 5);
 	public static final Block CHERRY_OAK_WOOD = register("cherry_oak_wood", new PillarBlock(Settings.copy(CHERRY_OAK_LOG)), ItemGroup.BUILDING_BLOCKS, 5, 5);
@@ -246,10 +158,10 @@ public class MubbleBlocks {
 	public static final Block CHERRY_OAK_WOOD_VERTICAL_SLAB = register("cherry_oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block CHERRY_OAK_WOOD_BUTTON = register("cherry_oak_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 
-	public static final BasedBlockEntry PALM_PLANKS = new BasedBlockEntry("palm_planks", Blocks.OAK_PLANKS, MaterialColor.ORANGE);
-	public static final SaplingEntry PALM_SAPLING = new SaplingEntry("palm", new PalmSaplingGenerator());
-	public static final LogsEntry PALM_LOGS = new LogsEntry("palm", MaterialColor.ORANGE, MaterialColor.CYAN_TERRACOTTA, false);
-	public static final LeavesEntry PALM_LEAVES = new LeavesEntry("palm");
+	public static final SimpleBlockCreator PALM_PLANKS = new SimpleBlockCreator("palm_planks", Blocks.OAK_PLANKS, MaterialColor.ORANGE);
+	public static final SaplingCreator PALM_SAPLING = new SaplingCreator("palm", new PalmSaplingGenerator());
+	public static final LogCreator PALM_LOGS = new LogCreator("palm", MaterialColor.ORANGE, MaterialColor.CYAN_TERRACOTTA, false);
+	public static final LeavesCreator PALM_LEAVES = new LeavesCreator("palm");
 	public static final Block PALM_PRESSURE_PLATE = register("palm_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.copy(MubbleBlocks.PALM_PLANKS.getBlock()).noCollision().strength(0.5F, 0.0F)), ItemGroup.REDSTONE);
 	public static final Block PALM_TRAPDOOR = register("palm_trapdoor", new TrapdoorBlock(Settings.copy(PALM_PLANKS.getBlock())), ItemGroup.REDSTONE);
 	public static final Block PALM_BUTTON = register("palm_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
@@ -264,42 +176,12 @@ public class MubbleBlocks {
 	public static final Block PALM_WOOD_VERTICAL_SLAB = register("palm_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(PALM_PLANKS.getBlock())), ItemGroup.BUILDING_BLOCKS, 5, 20);
 	public static final Block PALM_WOOD_BUTTON = register("palm_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
 
-	public static final ColoredBlockEntry STAINED_BRICKS = new ColoredBlockEntry("bricks", BlockShape.CUBE, Blocks.BRICKS);
-	public static final ColoredBlockEntry STAINED_BRICK_STAIRS = new ColoredBlockEntry("brick", BlockShape.STAIRS, Blocks.BRICK_STAIRS);
-	public static final ColoredBlockEntry STAINED_BRICK_SLABS = new ColoredBlockEntry("brick", BlockShape.SLAB, Blocks.BRICK_SLAB);
-	public static final ColoredBlockEntry STAINED_BRICK_VERTICAL_SLABS = new ColoredBlockEntry("brick", BlockShape.VERTICAL_SLAB, MubbleBlocks.BRICK_VERTICAL_SLAB);
-	public static final ColoredBlockEntry STAINED_BRICK_WALLS = new ColoredBlockEntry("brick", BlockShape.WALL, Blocks.BRICK_WALL);
-
-	public static final Block TERRACOTTA_STAIRS = register("terracotta_stairs", new StairsBlock(Blocks.TERRACOTTA), ItemGroup.BUILDING_BLOCKS);
-	public static final Block TERRACOTTA_SLAB = register("terracotta_slab", new SlabBlock(Settings.copy(Blocks.TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block TERRACOTTA_VERTICAL_SLAB = register("terracotta_vertical_slab", new VerticalSlabBlock(Settings.copy(Blocks.WHITE_TERRACOTTA)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block TERRACOTTA_WALL = register("terracotta_wall", new WallBlock(Settings.copy(Blocks.TERRACOTTA)), ItemGroup.DECORATIONS);
-	public static final Block TERRACOTTA_PRESSURE_PLATE = register("terracotta_pressure_plate", new PressurePlateBlock(ActivationRule.MOBS, FabricBlockSettings.copy(Blocks.TERRACOTTA).noCollision().strength(0.5F, 0.0F)), ItemGroup.REDSTONE);
-	public static final Block TERRACOTTA_BUTTON = register("terracotta_button", new StoneButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F)), ItemGroup.REDSTONE);
-	public static final ColoredBlockEntry STAINED_TERRACOTTA_STAIRS = new ColoredBlockEntry("terracotta", BlockShape.STAIRS, Blocks.TERRACOTTA);
-	public static final ColoredBlockEntry STAINED_TERRACOTTA_SLABS = new ColoredBlockEntry("terracotta", BlockShape.SLAB, Blocks.TERRACOTTA);
-	public static final ColoredBlockEntry STAINED_TERRACOTTA_VERTICAL_SLABS = new ColoredBlockEntry("terracotta", BlockShape.VERTICAL_SLAB, Blocks.TERRACOTTA);
-	public static final ColoredBlockEntry STAINED_TERRACOTTA_WALLS = new ColoredBlockEntry("terracotta", BlockShape.WALL, Blocks.BLACKSTONE_WALL, FabricBlockSettings.copyOf(Blocks.TERRACOTTA));
-	public static final ColoredBlockEntry STAINED_TERRACOTTA_PRESSURE_PLATES = new ColoredBlockEntry("terracotta", BlockShape.PRESSURE_PLATE, Blocks.STONE_PRESSURE_PLATE);
-	public static final ColoredBlockEntry STAINED_TERRACOTTA_BUTTONS = new ColoredBlockEntry("terracotta", BlockShape.BUTTON, Blocks.STONE_BUTTON);
-
-	public static final ColoredBlockEntry STAINED_DARK_PRISMARINES = new ColoredBlockEntry("dark_prismarine", BlockShape.CUBE, Blocks.DARK_PRISMARINE);
-	public static final ColoredBlockEntry STAINED_DARK_PRISMARINE_STAIRS = new ColoredBlockEntry("dark_prismarine", BlockShape.STAIRS, Blocks.DARK_PRISMARINE_STAIRS);
-	public static final ColoredBlockEntry STAINED_DARK_PRISMARINE_SLABS = new ColoredBlockEntry("dark_prismarine", BlockShape.SLAB, Blocks.DARK_PRISMARINE_SLAB);
-	public static final ColoredBlockEntry STAINED_DARK_PRISMARINE_VERTICAL_SLABS = new ColoredBlockEntry("dark_prismarine", BlockShape.VERTICAL_SLAB, MubbleBlocks.DARK_PRISMARINE_VERTICAL_SLAB);
-	public static final ColoredBlockEntry STAINED_DARK_PRISMARINE_WALLS = new ColoredBlockEntry("dark_prismarine", BlockShape.WALL, MubbleBlocks.DARK_PRISMARINE_WALL);
-
-	public static final ColoredBlockEntry CONCRETE_STAIRS = new ColoredBlockEntry("concrete", BlockShape.STAIRS, Blocks.BLUE_CONCRETE);
-	public static final ColoredBlockEntry CONCRETE_SLABS = new ColoredBlockEntry("concrete", BlockShape.SLAB, Blocks.BLUE_CONCRETE);
-	public static final ColoredBlockEntry CONCRETE_VERTICAL_SLABS = new ColoredBlockEntry("concrete", BlockShape.VERTICAL_SLAB, Blocks.BLUE_CONCRETE);
-	public static final ColoredBlockEntry CONCRETE_WALLS = new ColoredBlockEntry("concrete", BlockShape.WALL, Blocks.BLACKSTONE_WALL, FabricBlockSettings.copyOf(Blocks.BLUE_CONCRETE));
-	public static final ColoredBlockEntry CONCRETE_PRESSURE_PLATES = new ColoredBlockEntry("concrete", BlockShape.PRESSURE_PLATE, Blocks.STONE_PRESSURE_PLATE);
-	public static final ColoredBlockEntry CONCRETE_BUTTONS = new ColoredBlockEntry("concrete", BlockShape.BUTTON, Blocks.STONE_BUTTON);
-
-	public static final ColoredBlockEntry QUARTZ_PAVINGS = new ColoredBlockEntry("quartz_paving", BlockShape.CUBE, Blocks.QUARTZ_BLOCK);
-	public static final ColoredBlockEntry QUARTZ_PAVING_STAIRS = new ColoredBlockEntry("quartz_paving", BlockShape.STAIRS, Blocks.QUARTZ_STAIRS);
-	public static final ColoredBlockEntry QUARTZ_PAVING_SLABS = new ColoredBlockEntry("quartz_paving", BlockShape.SLAB, Blocks.QUARTZ_SLAB);
-	public static final ColoredBlockEntry QUARTZ_PAVING_VERTICAL_SLABS = new ColoredBlockEntry("quartz_paving", BlockShape.VERTICAL_SLAB, MubbleBlocks.QUARTZ_VERTICAL_SLAB);
+	public static final MSCBlockCreator STAINED_BRICKS = new MSCBlockCreator("bricks", Blocks.BRICKS, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator TERRACOTTA = new MSBlockCreator("terracotta", Blocks.TERRACOTTA, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL, BlockTemplate.PRESSURE_PLATE, BlockTemplate.STONE_BUTTON);
+	public static final MSCBlockCreator STAINED_TERRACOTTA = new MSCBlockCreator("terracotta", Blocks.TERRACOTTA, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL, BlockTemplate.PRESSURE_PLATE, BlockTemplate.STONE_BUTTON);
+	public static final MSCBlockCreator DARK_PRISMARINE = new MSCBlockCreator("dark_prismarine", Blocks.DARK_PRISMARINE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSCBlockCreator CONCRETE = new MSCBlockCreator("concrete", Blocks.BLUE_CONCRETE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL, BlockTemplate.PRESSURE_PLATE, BlockTemplate.STONE_BUTTON);
+	public static final MSCBlockCreator QUARTZ_PAVING = new MSCBlockCreator("quartz_paving", Blocks.QUARTZ_BLOCK, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB);
 
 	public static final Block BLUE_CHRISTMAS_BAUBLE = register("blue_christmas_bauble", new Block(FabricBlockSettings.of(Material.GLASS, MaterialColor.BLUE_TERRACOTTA).hardness(0.3F).sounds(BlockSoundGroup.GLASS)), ItemGroup.DECORATIONS);
 	public static final Block LIGHT_BLUE_CHRISTMAS_BAUBLE = register("light_blue_christmas_bauble", new Block(FabricBlockSettings.of(Material.GLASS, MaterialColor.LIGHT_BLUE_TERRACOTTA).hardness(0.3F).sounds(BlockSoundGroup.GLASS)), ItemGroup.DECORATIONS);
@@ -625,8 +507,8 @@ public class MubbleBlocks {
 	public static final Block BLUE_STUDIOPOLIS_CLAPPER = register("blue_studiopolis_clapper", new DirectionalBlock(Settings.copy(Blocks.IRON_BLOCK)), ItemGroup.DECORATIONS);
 
 	public static final Block PRESS_GARDEN_PLANKS = register("press_garden_planks", new Block(Settings.copy(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final SaplingEntry RED_PRESS_GARDEN_SAPLING = new SaplingEntry("red_press_garden", new RedPressGardenSaplingGenerator());
-	public static final SaplingEntry PINK_PRESS_GARDEN_SAPLING = new SaplingEntry("pink_press_garden", new PinkPressGardenSaplingGenerator());
+	public static final SaplingCreator RED_PRESS_GARDEN_SAPLING = new SaplingCreator("red_press_garden", new RedPressGardenSaplingGenerator());
+	public static final SaplingCreator PINK_PRESS_GARDEN_SAPLING = new SaplingCreator("pink_press_garden", new PinkPressGardenSaplingGenerator());
 	public static final Block PRESS_GARDEN_LOG = register("press_garden_log", new PillarBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 5);
 	public static final Block STRIPPED_PRESS_GARDEN_LOG = register("stripped_press_garden_log", new PillarBlock(Settings.copy(PRESS_GARDEN_LOG)), ItemGroup.BUILDING_BLOCKS, 5, 5);
 	public static final Block PRESS_GARDEN_WOOD = register("press_garden_wood", new PillarBlock(Settings.copy(PRESS_GARDEN_LOG)), ItemGroup.BUILDING_BLOCKS, 5, 5);
@@ -653,7 +535,7 @@ public class MubbleBlocks {
 
 	/* UNDERTALE / DELTARUNE */
 	public static final Block SCARLET_PLANKS = register("scarlet_planks", new Block(Settings.copy(Blocks.OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final SaplingEntry SCARLET_SAPLING = new SaplingEntry("scarlet", new ScarletSaplingGenerator());
+	public static final SaplingCreator SCARLET_SAPLING = new SaplingCreator("scarlet", new ScarletSaplingGenerator());
 	public static final Block SCARLET_LOG = register("scarlet_log", new PillarBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 5);
 	public static final Block STRIPPED_SCARLET_LOG = register("stripped_scarlet_log", new PillarBlock(Settings.copy(SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, 5, 5);
 	public static final Block SCARLET_WOOD = register("scarlet_wood", new PillarBlock(Settings.copy(SCARLET_LOG)), ItemGroup.BUILDING_BLOCKS, 5, 5);
