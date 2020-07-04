@@ -11,7 +11,7 @@ For more information, please visit the [**Mubble Website**](https://sites.google
 ## Links
 + [Website](https://sites.google.com/view/mubblemc)
 + [YouTube](https://www.youtube.com/playlist?list=PLQZh1eKFZNpHPdA5yZ6aEAIBl1hcLachq)
-+ [Discord](https://discord.gg/h2BaAx5)
++ [Discord](https://discord.gg/8ksTVJu)
 + [Twitter](https://twitter.com/MubbleMC)
 + [Wiki](https://ftb.gamepedia.com/Mubble)
 + [GameBanana](https://gamebanana.com/gamefiles/8104)
