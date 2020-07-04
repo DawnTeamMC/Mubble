@@ -5,9 +5,10 @@ import hugman.mubble.util.creator.BlockCreatorUtil;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Material;
 import net.minecraft.block.sapling.SaplingGenerator;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 
-public class SaplingEntry extends PottedPlantEntry{
+public class SaplingEntry extends PottedPlantEntry {
 	public SaplingEntry(String name, SaplingGenerator generator) {
 		super(BlockCreatorUtil.registerBlock(
 				new SaplingBlock(generator, FabricBlockSettings
@@ -15,6 +16,6 @@ public class SaplingEntry extends PottedPlantEntry{
 						.noCollision()
 						.ticksRandomly()
 						.breakInstantly()
-						.sounds(BlockSoundGroup.GRASS)), name + "_sapling"));
+						.sounds(BlockSoundGroup.GRASS)), name + "_sapling", ItemGroup.DECORATIONS));
 	}
 }

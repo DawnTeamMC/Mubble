@@ -7,7 +7,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.FlowerPotBlock;
 import net.minecraft.block.Material;
 import net.minecraft.client.render.RenderLayer;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.registry.Registry;
 
 public class PottedPlantEntry {
@@ -23,7 +22,6 @@ public class PottedPlantEntry {
 				.lightLevel(plant.getDefaultState().getLuminance())), "potted_" + Registry.BLOCK.getId(getPlant()).getPath());
 		BlockRenderLayerMap.INSTANCE.putBlock(pottedPlant, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(this.getPlant(), RenderLayer.getCutout());
-		BlockCreatorUtil.registerBlockItem(this.getPlant(), ItemGroup.DECORATIONS);
 	}
 
 	public Block getPlant() {

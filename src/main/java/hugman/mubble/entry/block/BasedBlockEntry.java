@@ -9,9 +9,7 @@ public class BasedBlockEntry {
 	private final Block block;
 
 	public BasedBlockEntry(String name, Block baseBlock, MaterialColor color) {
-		this.block = BlockCreatorUtil.registerBlock(new Block(FabricBlockSettings.copyOf(baseBlock).materialColor(color)), name);
-		BlockCreatorUtil.registerBlockItem(this.getBlock(), baseBlock);
-		BlockCreatorUtil.setFlammability(this.getBlock(), baseBlock);
+		this.block = BlockCreatorUtil.registerBlock(new Block(FabricBlockSettings.copyOf(baseBlock).materialColor(color)), name, baseBlock);
 	}
 
 	public Block getBlock() {

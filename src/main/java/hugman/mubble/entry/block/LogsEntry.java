@@ -7,9 +7,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.Direction;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LogsEntry extends BlockCreatorUtil {
 	private final Block log;
 	private final Block strippedLog;
@@ -22,13 +19,18 @@ public class LogsEntry extends BlockCreatorUtil {
 		String logSuffix = isNether ? "_stem" : "_log";
 		String woodSuffix = isNether ? "_hyphae" : "_wood";
 		this.isNether = isNether;
-		this.log = BlockCreatorUtil.registerBlock(createLog(insideMaterialColor, barkMaterialColor), name + logSuffix);
-		this.strippedLog = BlockCreatorUtil.registerBlock(createLog(insideMaterialColor), "stripped_" + name + logSuffix);
-		this.wood = BlockCreatorUtil.registerBlock(createLog(barkMaterialColor), name + woodSuffix);
-		this.strippedWood = BlockCreatorUtil.registerBlock(createLog(insideMaterialColor), "stripped_" + name + woodSuffix);
-		for(Block block : getLogs()) {
-			registerBlockItem(block, ItemGroup.BUILDING_BLOCKS);
-			if(!isNether) setFlammability(block, 5, 5);
+		this.log = BlockCreatorUtil.registerBlock(createLog(insideMaterialColor, barkMaterialColor), name + logSuffix, ItemGroup.BUILDING_BLOCKS, 5, 5);
+		this.strippedLog = BlockCreatorUtil.registerBlock(createLog(insideMaterialColor), "stripped_" + name + logSuffix, ItemGroup.BUILDING_BLOCKS, 5, 5);
+		this.wood = BlockCreatorUtil.registerBlock(createLog(barkMaterialColor), name + woodSuffix, ItemGroup.BUILDING_BLOCKS, 5, 5);
+		this.strippedWood = registerLog(createLog(insideMaterialColor), "stripped_" + name + woodSuffix);
+	}
+
+	public Block registerLog(Block block, String name) {
+		if(!isNether) {
+			return BlockCreatorUtil.registerBlock(block, name, ItemGroup.BUILDING_BLOCKS, 5, 5);
+		}
+		else {
+			return BlockCreatorUtil.registerBlock(block, name, ItemGroup.BUILDING_BLOCKS);
 		}
 	}
 
@@ -63,14 +65,5 @@ public class LogsEntry extends BlockCreatorUtil {
 
 	public Block getWood() {
 		return wood;
-	}
-
-	public List<Block> getLogs() {
-		List<Block> list = new ArrayList<>();
-		list.add(getLog());
-		list.add(getStrippedLog());
-		list.add(getStrippedWood());
-		list.add(getWood());
-		return list;
 	}
 }
