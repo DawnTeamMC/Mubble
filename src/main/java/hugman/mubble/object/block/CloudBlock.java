@@ -22,17 +22,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class CloudBlock extends AbstractGlassBlock implements Stainable {
-	private final DyeColor color;
-
-	public CloudBlock(DyeColor colorIn) {
-		super(FabricBlockSettings.of(Material.LEAVES, colorIn).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision());
-		this.color = colorIn;
-	}
-
-	@Override
-	public DyeColor getColor() {
-		return this.color;
+public class CloudBlock extends AbstractGlassBlock {
+	public CloudBlock(Settings settings) {
+		super(settings);
 	}
 
 	@Override

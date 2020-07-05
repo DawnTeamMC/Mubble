@@ -42,19 +42,19 @@ public class NoteBlock extends Block {
 		if(entityIn instanceof LivingEntity) {
 			SoundEvent lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
 			SoundEvent highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
-			if(this == MubbleBlocks.SMB_NOTE_BLOCK || this == MubbleBlocks.SMB_SUPER_NOTE_BLOCK) {
+			if(this == MubbleBlocks.SMB_NOTE_BLOCK.getBlock() || this == MubbleBlocks.SMB_SUPER_NOTE_BLOCK.getBlock()) {
 				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
 				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
 			}
-			else if(this == MubbleBlocks.SMB3_NOTE_BLOCK || this == MubbleBlocks.SMB3_SUPER_NOTE_BLOCK) {
+			else if(this == MubbleBlocks.SMB3_NOTE_BLOCK.getBlock() || this == MubbleBlocks.SMB3_SUPER_NOTE_BLOCK.getBlock()) {
 				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB3;
 				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB3;
 			}
-			else if(this == MubbleBlocks.SMW_NOTE_BLOCK || this == MubbleBlocks.SMW_SUPER_NOTE_BLOCK) {
+			else if(this == MubbleBlocks.SMW_NOTE_BLOCK.getBlock() || this == MubbleBlocks.SMW_SUPER_NOTE_BLOCK.getBlock()) {
 				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMW;
 				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMW;
 			}
-			else if(this == MubbleBlocks.NSMBU_NOTE_BLOCK || this == MubbleBlocks.NSMBU_SUPER_NOTE_BLOCK) {
+			else if(this == MubbleBlocks.NSMBU_NOTE_BLOCK.getBlock() || this == MubbleBlocks.NSMBU_SUPER_NOTE_BLOCK.getBlock()) {
 				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_LOW_NSMBU;
 				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_HIGH_NSMBU;
 			}

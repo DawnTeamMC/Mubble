@@ -1,6 +1,7 @@
 package hugman.mubble.object.block;
 
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
 import java.util.function.Supplier;

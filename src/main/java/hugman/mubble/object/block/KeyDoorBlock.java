@@ -48,16 +48,16 @@ public class KeyDoorBlock extends DoorBlock {
 	}
 
 	public SoundEvent getOpenSound(Block block) {
-		if(block == MubbleBlocks.SMB_KEY_DOOR) {
+		if(block == MubbleBlocks.SMB_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_OPEN_SMB;
 		}
-		else if(block == MubbleBlocks.SMB3_KEY_DOOR) {
+		else if(block == MubbleBlocks.SMB3_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_OPEN_SMB3;
 		}
-		else if(block == MubbleBlocks.SMW_KEY_DOOR) {
+		else if(block == MubbleBlocks.SMW_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_OPEN_SMW;
 		}
-		else if(block == MubbleBlocks.NSMBU_KEY_DOOR) {
+		else if(block == MubbleBlocks.NSMBU_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_OPEN_NSMBU;
 		}
 		else {
@@ -66,16 +66,16 @@ public class KeyDoorBlock extends DoorBlock {
 	}
 
 	public SoundEvent getCloseSound(Block block) {
-		if(block == MubbleBlocks.SMB_KEY_DOOR) {
+		if(block == MubbleBlocks.SMB_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_CLOSE_SMB;
 		}
-		else if(block == MubbleBlocks.SMB3_KEY_DOOR) {
+		else if(block == MubbleBlocks.SMB3_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_CLOSE_SMB3;
 		}
-		else if(block == MubbleBlocks.SMW_KEY_DOOR) {
+		else if(block == MubbleBlocks.SMW_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_CLOSE_SMW;
 		}
-		else if(block == MubbleBlocks.NSMBU_KEY_DOOR) {
+		else if(block == MubbleBlocks.NSMBU_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_CLOSE_NSMBU;
 		}
 		else {
@@ -84,16 +84,16 @@ public class KeyDoorBlock extends DoorBlock {
 	}
 
 	public SoundEvent getKeyFailSound(Block block) {
-		if(block == MubbleBlocks.SMB_KEY_DOOR) {
+		if(block == MubbleBlocks.SMB_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_KEY_FAIL_SMB;
 		}
-		else if(block == MubbleBlocks.SMB3_KEY_DOOR) {
+		else if(block == MubbleBlocks.SMB3_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_KEY_FAIL_SMB3;
 		}
-		else if(block == MubbleBlocks.SMW_KEY_DOOR) {
+		else if(block == MubbleBlocks.SMW_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_KEY_FAIL_SMW;
 		}
-		else if(block == MubbleBlocks.NSMBU_KEY_DOOR) {
+		else if(block == MubbleBlocks.NSMBU_KEY_DOOR.getBlock()) {
 			return MubbleSounds.BLOCK_DOOR_KEY_FAIL_NSMBU;
 		}
 		else {

@@ -5,10 +5,7 @@ import hugman.mubble.init.MubbleSounds;
 import hugman.mubble.init.data.MubbleLootTables;
 import hugman.mubble.init.data.MubbleTags;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Material;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
@@ -30,8 +27,8 @@ import java.util.List;
 public class QuestionBlock extends Block {
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
 
-	public QuestionBlock() {
-		super(FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(1.5F, 6.0F));
+	public QuestionBlock(AbstractBlock.Settings settings) {
+		super(settings);
 	}
 
 	@Override
@@ -60,28 +57,28 @@ public class QuestionBlock extends Block {
 
 	public void loot(World worldIn, BlockPos pos) {
 		if(!worldIn.isClient) {
-			BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+			BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getBlock().getDefaultState();
 			SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB;
 			SoundEvent powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-			if(this == MubbleBlocks.SMB_QUESTION_BLOCK) {
+			if(this == MubbleBlocks.SMB_QUESTION_BLOCK.getBlock()) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB;
 				powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-				emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+				emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getBlock().getDefaultState();
 			}
-			else if(this == MubbleBlocks.SMB3_QUESTION_BLOCK) {
+			else if(this == MubbleBlocks.SMB3_QUESTION_BLOCK.getBlock()) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB3;
 				powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
-				emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
+				emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getBlock().getDefaultState();
 			}
-			else if(this == MubbleBlocks.SMW_QUESTION_BLOCK) {
+			else if(this == MubbleBlocks.SMW_QUESTION_BLOCK.getBlock()) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMW;
 				powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
-				emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
+				emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getBlock().getDefaultState();
 			}
-			else if(this == MubbleBlocks.NSMBU_QUESTION_BLOCK) {
+			else if(this == MubbleBlocks.NSMBU_QUESTION_BLOCK.getBlock()) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_NSMBU;
 				powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
-				emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
+				emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getBlock().getDefaultState();
 			}
 			final double x = pos.getX() + 0.5D;
 			final double y = pos.getY() + 0.5D + 0.6D;

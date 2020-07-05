@@ -23,8 +23,8 @@ import net.minecraft.world.gen.feature.FeatureConfig;
 import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
 
 public class SMWDesertBiome extends Biome {
-	private static final BlockState SMW_DESERT_TOP = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getDefaultState().with(MubbleBlockStateProperties.OVER, true);
-	private static final BlockState SMW_DESERT_DIRT = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getDefaultState().with(MubbleBlockStateProperties.OVER, false);
+	private static final BlockState SMW_DESERT_TOP = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getBlock().getDefaultState().with(MubbleBlockStateProperties.OVER, true);
+	private static final BlockState SMW_DESERT_DIRT = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getBlock().getDefaultState().with(MubbleBlockStateProperties.OVER, false);
 
 	public SMWDesertBiome() {
 		super((new Biome.Settings())

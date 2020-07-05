@@ -12,11 +12,11 @@ import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 public class MubbleSurfaceBuilders {
-	private static final BlockState SMW_GROUND_TOP = MubbleBlocks.SMW_GROUND_GROUND_BLOCK.getDefaultState().with(MubbleBlockStateProperties.OVER, true);
-	private static final BlockState SMW_GROUND_DIRT = MubbleBlocks.SMW_GROUND_GROUND_BLOCK.getDefaultState().with(MubbleBlockStateProperties.OVER, false);
-	private static final BlockState SMW_DESERT_TOP = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getDefaultState().with(MubbleBlockStateProperties.OVER, true);
-	private static final BlockState SMW_DESERT_DIRT = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getDefaultState().with(MubbleBlockStateProperties.OVER, false);
-	private static final BlockState AMARANTH_DYLIUM = MubbleBlocks.AMARANTH_DYLIUM.getDefaultState();
+	private static final BlockState SMW_GROUND_TOP = MubbleBlocks.SMW_GROUND_GROUND_BLOCK.getBlock().getDefaultState().with(MubbleBlockStateProperties.OVER, true);
+	private static final BlockState SMW_GROUND_DIRT = MubbleBlocks.SMW_GROUND_GROUND_BLOCK.getBlock().getDefaultState().with(MubbleBlockStateProperties.OVER, false);
+	private static final BlockState SMW_DESERT_TOP = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getBlock().getDefaultState().with(MubbleBlockStateProperties.OVER, true);
+	private static final BlockState SMW_DESERT_DIRT = MubbleBlocks.SMW_DESERT_GROUND_BLOCK.getBlock().getDefaultState().with(MubbleBlockStateProperties.OVER, false);
+	private static final BlockState AMARANTH_DYLIUM = MubbleBlocks.AMARANTH_DYLIUM.getBlock().getDefaultState();
 	private static final BlockState END_STONE = Blocks.END_STONE.getDefaultState();
 	private static final BlockState DIRT = Blocks.DIRT.getDefaultState();
 

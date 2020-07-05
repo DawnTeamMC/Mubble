@@ -60,10 +60,10 @@ public class MubbleItems {
 	public static final Item YELLOW_COIN = register("yellow_coin", new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
 	public static final Item RED_COIN = register("red_coin", new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
 	public static final Item BLUE_COIN = register("blue_coin", new Item(new Item.Settings().group(ItemGroup.MATERIALS)));
-	public static final Item SMB_KEY = register("smb_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.SMB_KEY_DOOR));
-	public static final Item SMB3_KEY = register("smb3_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.SMB3_KEY_DOOR));
-	public static final Item SMW_KEY = register("smw_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.SMW_KEY_DOOR));
-	public static final Item NSMBU_KEY = register("nsmbu_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.NSMBU_KEY_DOOR));
+	public static final Item SMB_KEY = register("smb_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.SMB_KEY_DOOR.getBlock()));
+	public static final Item SMB3_KEY = register("smb3_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.SMB3_KEY_DOOR.getBlock()));
+	public static final Item SMW_KEY = register("smw_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.SMW_KEY_DOOR.getBlock()));
+	public static final Item NSMBU_KEY = register("nsmbu_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.NSMBU_KEY_DOOR.getBlock()));
 
 	/* KIRBY */
 	public static final Item KIRBY_BALL = register("kirby_ball", new KirbyBallItem(new Item.Settings().group(ItemGroup.COMBAT)));

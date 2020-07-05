@@ -1,97 +1,112 @@
 package hugman.mubble.util.creator;
 
+import hugman.mubble.Mubble;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.block.MaterialColor;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class BlockEntry {
-	private final String name;
-	private final Block block;
-	private final RenderLayer renderLayer;
-	private final ItemGroup itemGroup;
-	private final int burn;
-	private final int spread;
-	// Internal builders
+	private Block block;
 
-	private BlockEntry(String name, Block block, RenderLayer renderLayer, ItemGroup itemGroup, int burn, int spread) {
+	private final String name;
+	private final Block baseBlock;
+	private RenderLayer renderLayer;
+	private ItemGroup itemGroup;
+	private int burn;
+	private int spread;
+	private boolean noItem;
+
+	private BlockEntry(String name, Block baseBlock, RenderLayer renderLayer, ItemGroup itemGroup, int burn, int spread, boolean noItem) {
 		this.name = name;
-		this.block = block;
+		this.baseBlock = baseBlock;
 		this.renderLayer = renderLayer;
 		this.itemGroup = itemGroup;
 		this.burn = burn;
 		this.spread = spread;
+		this.noItem = noItem;
 	}
 
-	private BlockEntry(String name, BlockTemplate template, FabricBlockSettings settings, Block baseBlock) {
-		this(name, template, settings, BlockCreatorHelper.getFlammabilityBurn(baseBlock), BlockCreatorHelper.getFlammabilitySpread(baseBlock));
+	public BlockEntry register()
+	{
+		this.block = Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), baseBlock);
+		BlockRenderLayerMap.INSTANCE.putBlock(block, renderLayer);
+		if(!noItem) Registry.register(Registry.ITEM, Registry.BLOCK.getId(block), new BlockItem(block, new Item.Settings().group(itemGroup)));
+		FlammableBlockRegistry.getDefaultInstance().add(block, burn, spread);
+		return this;
 	}
 
-	private BlockEntry(String name, BlockTemplate template, FabricBlockSettings settings, int burn, int spread) {
-		this(name + template.getSuffix(), template.getBlock(settings), template.getRenderLayer(), template.getItemGroup(), burn, spread);
-	}
-	// Public builders
+	public static class Builder {
+		private final String name;
+		private final Block baseBlock;
+		private RenderLayer renderLayer;
+		private ItemGroup itemGroup;
+		private int burn;
+		private int spread;
+		private boolean noItem;
 
-	public BlockEntry(String name, Block block) {
-		this(name, block, RenderLayer.getSolid(), null, 0, 0);
-	}
+		public Builder(String name, Block block) {
+			this.name = name;
+			this.baseBlock = block;
+			this.renderLayer = RenderLayer.getSolid();
+			this.itemGroup = null;
+			this.burn = 0;
+			this.spread = 0;
+			this.noItem = false;
+		}
 
-	public BlockEntry(String name, BlockTemplate template, FabricBlockSettings settings) {
-		this(name + template.getSuffix(), template.getBlock(settings), template.getRenderLayer(), template.getItemGroup(), 0, 0);
-	}
+		public Builder(String name, BlockTemplate template, FabricBlockSettings settings) {
+			this(name + template.getSuffix(), template.getBlock(settings));
+		}
 
-	public BlockEntry(String name, BlockTemplate template, Block baseBlock, MaterialColor color) {
-		this(name, template, FabricBlockSettings.copyOf(baseBlock).materialColor(color), baseBlock);
-	}
+		public Builder setRenderLayer(RenderLayer renderLayer) {
+			this.renderLayer = renderLayer;
+			return this;
+		}
 
-	public BlockEntry(String name, BlockTemplate template, Block baseBlock) {
-		this(name, template, FabricBlockSettings.copyOf(baseBlock), baseBlock);
-	}
-	// Additional constructors
+		public Builder setItemGroup(ItemGroup itemGroup) {
+			this.itemGroup = itemGroup;
+			return this;
+		}
 
-	public BlockEntry setRenderLayer(RenderLayer renderLayer) {
-		return new BlockEntry(this.name, this.block, renderLayer, this.itemGroup, this.burn, this.spread);
-	}
+		public Builder setFlammability(int burn, int spread) {
+			this.burn = burn;
+			this.spread = spread;
+			return this;
+		}
 
-	public BlockEntry setItemGroup(ItemGroup itemGroup) {
-		return new BlockEntry(this.name, this.block, this.renderLayer, itemGroup, this.burn, this.spread);
-	}
+		public Builder noItem() {
+			this.noItem = true;
+			return this;
+		}
 
-	public BlockEntry setItemGroup(Block baseBlock) {
-		return new BlockEntry(this.name, this.block, this.renderLayer, baseBlock.asItem().getGroup(), this.burn, this.spread);
-	}
+		public Builder copy(BlockTemplate template) {
+			this.renderLayer = template.getRenderLayer();
+			this.itemGroup = template.getItemGroup();
+			return this;
+		}
 
-	public BlockEntry setFlammability(int burn, int spread) {
-		return new BlockEntry(this.name, this.block, this.renderLayer, this.itemGroup, burn, spread);
-	}
+		public Builder copy(Block baseBlock) {
+			this.renderLayer = RenderLayers.getBlockLayer(baseBlock.getDefaultState());
+			this.itemGroup = baseBlock.asItem().getGroup();
+			this.burn = BlockCreatorHelper.getFlammabilityBurn(baseBlock);
+			this.spread = BlockCreatorHelper.getFlammabilitySpread(baseBlock);
+			return this;
+		}
 
-	public BlockEntry setFlammability(Block baseBlock) {
-		return new BlockEntry(this.name, this.block, this.renderLayer, this.itemGroup, BlockCreatorHelper.getFlammabilityBurn(baseBlock), BlockCreatorHelper.getFlammabilitySpread(baseBlock));
-	}
-	// Getters
-
-	public String getName() {
-		return name;
+		public BlockEntry build() {
+			return new BlockEntry(this.name, this.baseBlock, this.renderLayer, this.itemGroup, this.burn, this.spread, this.noItem).register();
+		}
 	}
 
 	public Block getBlock() {
 		return block;
-	}
-
-	public RenderLayer getRenderLayer() {
-		return renderLayer;
-	}
-
-	public ItemGroup getItemGroup() {
-		return itemGroup;
-	}
-
-	public int getBurn() {
-		return burn;
-	}
-
-	public int getSpread() {
-		return spread;
 	}
 }

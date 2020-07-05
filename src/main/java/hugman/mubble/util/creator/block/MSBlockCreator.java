@@ -2,25 +2,24 @@ package hugman.mubble.util.creator.block;
 
 import com.google.common.collect.ImmutableMap;
 import hugman.mubble.util.MoreWordUtils;
-import hugman.mubble.util.creator.BlockCreatorHelper;
 import hugman.mubble.util.creator.BlockEntry;
 import hugman.mubble.util.creator.BlockTemplate;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
 
 import java.util.Map;
 
 public class MSBlockCreator {
-	private final Map<BlockTemplate, BlockEntry> SHAPE_MAP;
+	private final Map<BlockTemplate, BlockEntry> blocks;
 
 	public MSBlockCreator(String name, MaterialColor color, Block baseBlock, BlockTemplate... templates) {
 		ImmutableMap.Builder builder = new ImmutableMap.Builder<BlockTemplate, Block>();
 		for(BlockTemplate template : templates) {
-			BlockEntry entry = new BlockEntry(MoreWordUtils.parseShapeName(name, template), template, baseBlock, color);
+			BlockEntry entry = new BlockEntry.Builder(MoreWordUtils.parseShapeName(name, template), template, FabricBlockSettings.copyOf(baseBlock).materialColor(color)).copy(baseBlock).copy(template).build();
 			builder.put(template, entry);
-			BlockCreatorHelper.addEntries(entry);
 		}
-		SHAPE_MAP = builder.build();
+		blocks = builder.build();
 	}
 
 	public MSBlockCreator(String name, Block baseBlock, BlockTemplate... templates) {
@@ -28,6 +27,6 @@ public class MSBlockCreator {
 	}
 
 	public Block getBlock(BlockTemplate shape) {
-		return SHAPE_MAP.get(shape).getBlock();
+		return blocks.get(shape).getBlock();
 	}
 }

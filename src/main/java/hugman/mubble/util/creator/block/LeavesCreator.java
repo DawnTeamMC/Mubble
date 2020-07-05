@@ -1,33 +1,25 @@
 package hugman.mubble.util.creator.block;
 
-import hugman.mubble.util.creator.BlockCreatorHelper;
 import hugman.mubble.util.creator.BlockEntry;
 import hugman.mubble.util.creator.BlockTemplate;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
-import net.minecraft.block.Material;
-import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
 
 public class LeavesCreator {
-	private final BlockEntry leaves;
-	private final BlockEntry leafPile;
-
-	public static final FabricBlockSettings defaultLeavesSettings = FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(BlockCreatorHelper::canSpawnOnLeaves).suffocates(BlockCreatorHelper::never).blockVision(BlockCreatorHelper::never);
-	public static final FabricBlockSettings defaultLeafPileSettings = FabricBlockSettings.of(Material.LEAVES).strength(0.1F).ticksRandomly().sounds(BlockSoundGroup.GRASS).noCollision().nonOpaque().suffocates(BlockCreatorHelper::never).blockVision(BlockCreatorHelper::never);
-	public static final int defaultLeavesBurnValue = 60;
-	public static final int defaultLeavesBurnSpread = 30;
+	private final BlockEntry leavesEntry;
+	private final BlockEntry leafPileEntry;
 
 	public LeavesCreator(String name) {
-		this.leaves = new BlockEntry(name, BlockTemplate.LEAVES, defaultLeavesSettings).setFlammability(defaultLeavesBurnValue, defaultLeavesBurnSpread);
-		this.leafPile = new BlockEntry(name, BlockTemplate.LEAF_PILE, defaultLeafPileSettings).setFlammability(defaultLeavesBurnValue, defaultLeavesBurnSpread);
-		BlockCreatorHelper.addEntries(this.leaves, this.leafPile);
+		this.leavesEntry = new BlockEntry.Builder(name, BlockTemplate.LEAVES, BlockTemplate.leavesSettings).copy(Blocks.OAK_LEAVES).setItemGroup(ItemGroup.DECORATIONS).build();
+		this.leafPileEntry = new BlockEntry.Builder(name, BlockTemplate.LEAF_PILE, BlockTemplate.leafPileSettings).copy(Blocks.OAK_LEAVES).setItemGroup(ItemGroup.DECORATIONS).build();
 	}
 
 	public Block getLeaves() {
-		return leaves.getBlock();
+		return leavesEntry.getBlock();
 	}
 
 	public Block getLeafPile() {
-		return leafPile.getBlock();
+		return leafPileEntry.getBlock();
 	}
 }

@@ -83,25 +83,25 @@ public class BrickBlock extends Block {
 
 	public void loot(World worldIn, BlockPos pos) {
 		if(!worldIn.isClient) {
-			BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+			BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getBlock().getDefaultState();
 			SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-			if(this == MubbleBlocks.SMB_GROUND_BRICK_BLOCK
-					|| this == MubbleBlocks.SMB_UNDERGROUND_BRICK_BLOCK
-					|| this == MubbleBlocks.SMB_CASTLE_BRICK_BLOCK) {
+			if(this == MubbleBlocks.SMB_GROUND_BRICK_BLOCK.getBlock()
+					|| this == MubbleBlocks.SMB_UNDERGROUND_BRICK_BLOCK.getBlock()
+					|| this == MubbleBlocks.SMB_CASTLE_BRICK_BLOCK.getBlock()) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-				emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+				emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getBlock().getDefaultState();
 			}
-			else if(this == MubbleBlocks.SMB3_BRICK_BLOCK) {
+			else if(this == MubbleBlocks.SMB3_BRICK_BLOCK.getBlock()) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
-				emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
+				emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getBlock().getDefaultState();
 			}
-			else if(this == MubbleBlocks.SMW_BRICK_BLOCK) {
+			else if(this == MubbleBlocks.SMW_BRICK_BLOCK.getBlock()) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
-				emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
+				emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getBlock().getDefaultState();
 			}
-			else if(this == MubbleBlocks.NSMBU_BRICK_BLOCK) {
+			else if(this == MubbleBlocks.NSMBU_BRICK_BLOCK.getBlock()) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
-				emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
+				emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getBlock().getDefaultState();
 			}
 			final double x = pos.getX() + 0.5D;
 			final double y = pos.getY() + 0.5D + 0.6D;

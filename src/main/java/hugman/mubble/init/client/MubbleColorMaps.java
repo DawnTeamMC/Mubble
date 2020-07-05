@@ -26,7 +26,7 @@ public class MubbleColorMaps {
 		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) ->
 		{
 			return pos != null && world != null ? BiomeColors.getFoliageColor(pos, world) : FoliageColors.getDefaultColor();
-		}, MubbleBlocks.OAK_LEAF_PILE, MubbleBlocks.JUNGLE_LEAF_PILE, MubbleBlocks.ACACIA_LEAF_PILE, MubbleBlocks.DARK_OAK_LEAF_PILE, MubbleBlocks.PALM_LEAVES.getLeaves(), MubbleBlocks.PALM_LEAVES.getLeafPile());
+		}, MubbleBlocks.OAK_LEAF_PILE, MubbleBlocks.JUNGLE_LEAF_PILE, MubbleBlocks.ACACIA_LEAF_PILE, MubbleBlocks.DARK_OAK_LEAF_PILE, MubbleBlocks.PALM_WOOD.getLeaves(), MubbleBlocks.PALM_WOOD.getLeafPile());
 		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) ->
 		{
 			return 15232304;
@@ -46,22 +46,22 @@ public class MubbleColorMaps {
 		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) ->
 		{
 			return 15218768;
-		}, MubbleBlocks.RED_PRESS_GARDEN_LEAVES, MubbleBlocks.RED_PRESS_GARDEN_LEAF_PILE);
+		}, MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getLeaves(), MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getLeafPile());
 		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) ->
 		{
 			return 15771888;
-		}, MubbleBlocks.PINK_PRESS_GARDEN_LEAVES, MubbleBlocks.PINK_PRESS_GARDEN_LEAF_PILE);
+		}, MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getLeaves(), MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getLeafPile());
 		ColorProviderRegistry.BLOCK.register((block, pos, world, layer) ->
 		{
 			return 10622269;
-		}, MubbleBlocks.SCARLET_LEAVES, MubbleBlocks.SCARLET_LEAF_PILE);
+		}, MubbleBlocks.SCARLET_WOOD.getLeaves(), MubbleBlocks.SCARLET_WOOD.getLeafPile());
 	}
 
 	public static void registerItemColors() {
 		ColorProviderRegistry.ITEM.register((item, layer) ->
 		{
 			return GrassColors.getColor(0.5D, 1.0D);
-		}, MubbleBlocks.OAK_LEAF_PILE, MubbleBlocks.SPRUCE_LEAF_PILE, MubbleBlocks.BIRCH_LEAF_PILE, MubbleBlocks.JUNGLE_LEAF_PILE, MubbleBlocks.ACACIA_LEAF_PILE, MubbleBlocks.DARK_OAK_LEAF_PILE, MubbleBlocks.PALM_LEAVES.getLeaves(), MubbleBlocks.PALM_LEAVES.getLeafPile(), MubbleBlocks.GREEN_HILL_GRASS_BLOCK);
+		}, MubbleBlocks.OAK_LEAF_PILE, MubbleBlocks.SPRUCE_LEAF_PILE, MubbleBlocks.BIRCH_LEAF_PILE, MubbleBlocks.JUNGLE_LEAF_PILE, MubbleBlocks.ACACIA_LEAF_PILE, MubbleBlocks.DARK_OAK_LEAF_PILE, MubbleBlocks.PALM_WOOD.getLeaves(), MubbleBlocks.PALM_WOOD.getLeafPile(), MubbleBlocks.GREEN_HILL_GRASS_BLOCK);
 		ColorProviderRegistry.ITEM.register((item, layer) ->
 		{
 			return 15232304;
@@ -81,14 +81,14 @@ public class MubbleColorMaps {
 		ColorProviderRegistry.ITEM.register((item, layer) ->
 		{
 			return 15218768;
-		}, MubbleBlocks.RED_PRESS_GARDEN_LEAVES, MubbleBlocks.RED_PRESS_GARDEN_LEAF_PILE);
+		}, MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getLeaves(), MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getLeafPile());
 		ColorProviderRegistry.ITEM.register((item, layer) ->
 		{
 			return 15771888;
-		}, MubbleBlocks.PINK_PRESS_GARDEN_LEAVES, MubbleBlocks.PINK_PRESS_GARDEN_LEAF_PILE);
+		}, MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getLeaves(), MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getLeafPile());
 		ColorProviderRegistry.ITEM.register((item, layer) ->
 		{
 			return 10622269;
-		}, MubbleBlocks.SCARLET_LEAVES, MubbleBlocks.SCARLET_LEAF_PILE);
+		}, MubbleBlocks.SCARLET_WOOD.getLeaves(), MubbleBlocks.SCARLET_WOOD.getLeafPile());
 	}
 }
