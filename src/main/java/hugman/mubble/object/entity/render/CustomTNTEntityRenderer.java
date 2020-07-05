@@ -37,7 +37,7 @@ public class CustomTNTEntityRenderer extends EntityRenderer<CustomTNTEntity> {
 		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-90.0F));
 		matrixStack.translate(-0.5D, -0.5D, 0.5D);
 		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(90.0F));
-		TntMinecartEntityRenderer.method_23190(blockState, matrixStack, vertexConsumerProvider, light, entity.getFuse() / 5 % 2 == 0);
+		TntMinecartEntityRenderer.renderFlashingBlock(blockState, matrixStack, vertexConsumerProvider, light, entity.getFuse() / 5 % 2 == 0);
 		matrixStack.pop();
 		super.render(entity, entityYaw, partialTicks, matrixStack, vertexConsumerProvider, light);
 	}

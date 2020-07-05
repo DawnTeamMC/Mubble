@@ -23,7 +23,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
 	modImplementation "vazkii.patchouli:Patchouli_1.16-fabric:${patchouli_version}-FABRIC"
 
