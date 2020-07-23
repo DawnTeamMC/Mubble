@@ -34,10 +34,11 @@ public class Mubble implements ModInitializer {
 		MubbleCommands.init();
 		new MubbleScreenHandlers();
 		// World
-		new MubbleBiomes();
+		// new MubbleBiomes();
 		new MubbleFeatures();
-		MubbleBiomes.initBiomeGeneration();
-		MubbleGenerators.init();
+		MubbleBiomes.addNetherBiome("tall_crimson_forest");
+		// MubbleBiomes.initBiomeGeneration();
+		// MubbleGenerators.init();
 	}
 	
 	/*private void initSpawnRestrictions()

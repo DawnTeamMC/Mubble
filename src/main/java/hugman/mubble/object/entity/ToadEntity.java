@@ -246,7 +246,7 @@ public class ToadEntity extends AbstractTraderEntity {
 		public final ToadEntity.Type type;
 
 		public ToadData(ToadEntity.Type typeIn) {
-			this.setBabyAllowed(false);
+			super(false);
 			this.type = typeIn;
 		}
 	}

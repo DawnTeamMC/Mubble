@@ -199,7 +199,7 @@ public class FlyingBlockEntity extends Entity {
 		if(this.hurtEntities) {
 			int i = MathHelper.ceil(fallDistance - 1.0F);
 			if(i > 0) {
-				List<Entity> list = Lists.newArrayList(this.world.getEntities(this, this.getBoundingBox()));
+				List<Entity> list = Lists.newArrayList(this.world.getOtherEntities(this, this.getBoundingBox()));
 				boolean bl = this.block.isIn(BlockTags.ANVIL);
 				DamageSource damageSource = bl ? DamageSource.ANVIL : DamageSource.FALLING_BLOCK;
 				Iterator var7 = list.iterator();

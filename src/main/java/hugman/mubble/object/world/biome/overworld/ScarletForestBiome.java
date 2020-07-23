@@ -1,23 +1,7 @@
 package hugman.mubble.object.world.biome.overworld;
 
-import com.google.common.collect.ImmutableList;
-import hugman.mubble.init.world.MubbleFeatureConfigs;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.sound.BiomeMoodSound;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.DecoratorConfig;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.RandomFeatureConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-
-public class ScarletForestBiome extends Biome {
+public class ScarletForestBiome {
+	/*
 	public ScarletForestBiome() {
 		super((new Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
@@ -39,13 +23,13 @@ public class ScarletForestBiome extends Biome {
 		DefaultBiomeFeatures.addLandCarvers(this);
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		DefaultBiomeFeatures.addDungeons(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(Feature.TREE.configure(MubbleFeatureConfigs.HUGE_SCARLET_TREE).withChance(0.6666667F), Feature.TREE.configure(MubbleFeatureConfigs.FANCY_SCARLET_TREE).withChance(0.1F), Feature.TREE.configure(MubbleFeatureConfigs.SCARLET_GROUND_BUSH).withChance(0.1F)), Feature.TREE.configure(MubbleFeatureConfigs.SCARLET_TREE))).createDecoratedFeature(Decorator.DARK_OAK_TREE.configure(DecoratorConfig.DEFAULT)));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(Feature.TREE.configure(MubbleConfiguredFeatures.HUGE_SCARLET_TREE).withChance(0.6666667F), Feature.TREE.configure(MubbleConfiguredFeatures.FANCY_SCARLET_TREE).withChance(0.1F), Feature.TREE.configure(MubbleConfiguredFeatures.SCARLET_GROUND_BUSH).withChance(0.1F)), Feature.TREE.configure(MubbleConfiguredFeatures.SCARLET_TREE))).createDecoratedFeature(Decorator.DARK_OAK_TREE.configure(DecoratorConfig.DEFAULT)));
 		DefaultBiomeFeatures.addMineables(this);
 		DefaultBiomeFeatures.addDefaultOres(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(MubbleFeatureConfigs.SCARLET_ORCHID_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.FLOWER.configure(MubbleConfiguredFeatures.SCARLET_ORCHID_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_32.configure(new CountDecoratorConfig(4))));
 		DefaultBiomeFeatures.addForestGrass(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.SCARLET_LEAF_PILE_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.SCARLET_MUSHROOM_PATCHES).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleConfiguredFeatures.SCARLET_LEAF_PILE_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleConfiguredFeatures.SCARLET_MUSHROOM_PATCHES).createDecoratedFeature(Decorator.CHANCE_HEIGHTMAP_DOUBLE.configure(new ChanceDecoratorConfig(8))));
 		DefaultBiomeFeatures.addDefaultVegetation(this);
 		DefaultBiomeFeatures.addSprings(this);
 		DefaultBiomeFeatures.addFrozenTopLayer(this);
@@ -73,4 +57,6 @@ public class ScarletForestBiome extends Biome {
 	public int getFoliageColor() {
 		return 10622269;
 	}
+
+	 */
 }

@@ -175,7 +175,7 @@ public class DuckEntity extends AnimalEntity {
 		public final DuckEntity.Type type;
 
 		public DuckData(DuckEntity.Type typeIn) {
-			this.setBabyAllowed(false);
+			super(false);
 			this.type = typeIn;
 		}
 	}

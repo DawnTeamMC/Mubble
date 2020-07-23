@@ -27,7 +27,7 @@ public class HugeNetherMushroomFeatureConfig implements FeatureConfig {
 		}), Codec.INT.fieldOf("hat_random_size").forGetter((config) ->
 		{
 			return config.hatRandomSize;
-		}), Codec.BOOL.fieldOf("flat_hat").withDefault(false).forGetter((config) ->
+		}), Codec.BOOL.fieldOf("flat_hat").orElse(false).forGetter((config) ->
 		{
 			return config.flatHat;
 		}), BlockState.CODEC.fieldOf("decor_state").forGetter((config) ->
@@ -39,7 +39,7 @@ public class HugeNetherMushroomFeatureConfig implements FeatureConfig {
 		}), Codec.DOUBLE.fieldOf("vine_chance").forGetter((config) ->
 		{
 			return config.vineChance;
-		}), Codec.BOOL.fieldOf("upside_down").withDefault(false).forGetter((config) ->
+		}), Codec.BOOL.fieldOf("upside_down").orElse(false).forGetter((config) ->
 		{
 			return config.upsideDown;
 		})).apply(instance, HugeNetherMushroomFeatureConfig::new);

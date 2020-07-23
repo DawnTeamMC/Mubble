@@ -1,28 +1,7 @@
 package hugman.mubble.object.world.biome.the_nether;
 
-import com.google.common.collect.ImmutableList;
-import hugman.mubble.init.world.MubbleFeatures;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.sound.MusicType;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.sound.BiomeAdditionsSound;
-import net.minecraft.sound.BiomeMoodSound;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.BiomeParticleConfig;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.ProbabilityConfig;
-import net.minecraft.world.gen.carver.Carver;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
-import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-
-public class TallWarpedForestBiome extends Biome {
+public class TallWarpedForestBiome {
+	/*
 	public TallWarpedForestBiome() {
 		super((new Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.NETHER_FOREST, SurfaceBuilder.WARPED_NYLIUM_CONFIG)
@@ -66,4 +45,6 @@ public class TallWarpedForestBiome extends Biome {
 		this.addSpawn(SpawnGroup.CREATURE, new SpawnEntry(EntityType.STRIDER, 60, 1, 2));
 		this.addSpawnDensity(EntityType.ENDERMAN, 1.0D, 0.12D);
 	}
+
+	 */
 }

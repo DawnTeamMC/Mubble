@@ -1,22 +1,7 @@
 package hugman.mubble.object.world.biome.overworld;
 
-import com.google.common.collect.ImmutableList;
-import hugman.mubble.init.world.MubbleFeatureConfigs;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.sound.BiomeMoodSound;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.CountDecoratorConfig;
-import net.minecraft.world.gen.decorator.CountExtraChanceDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.RandomFeatureConfig;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-
-public class PressGardenBiome extends Biome {
+public class PressGardenBiome {
+	/*
 	public PressGardenBiome() {
 		super((new Settings())
 				.configureSurfaceBuilder(SurfaceBuilder.DEFAULT, SurfaceBuilder.GRASS_CONFIG)
@@ -40,16 +25,16 @@ public class PressGardenBiome extends Biome {
 		DefaultBiomeFeatures.addDefaultLakes(this);
 		DefaultBiomeFeatures.addDungeons(this);
 		DefaultBiomeFeatures.addLargeFerns(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(Feature.TREE.configure(MubbleFeatureConfigs.PINK_PRESS_GARDEN_TREE).withChance(0.1F), Feature.TREE.configure(MubbleFeatureConfigs.PINK_PRESS_GARDEN_GROUND_BUSH_PATCHES).withChance(0.3F), Feature.TREE.configure(MubbleFeatureConfigs.MEGA_RED_PRESS_GARDEN_TREE).withChance(0.6F)), Feature.TREE.configure(MubbleFeatureConfigs.RED_PRESS_GARDEN_TREE))).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(50, 0.1F, 1))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(Feature.TREE.configure(MubbleConfiguredFeatures.PINK_PRESS_GARDEN_TREE).withChance(0.1F), Feature.TREE.configure(MubbleConfiguredFeatures.PINK_PRESS_GARDEN_GROUND_BUSH_PATCHES).withChance(0.3F), Feature.TREE.configure(MubbleConfiguredFeatures.MEGA_RED_PRESS_GARDEN_TREE).withChance(0.6F)), Feature.TREE.configure(MubbleConfiguredFeatures.RED_PRESS_GARDEN_TREE))).createDecoratedFeature(Decorator.COUNT_EXTRA_HEIGHTMAP.configure(new CountExtraChanceDecoratorConfig(50, 0.1F, 1))));
 		DefaultBiomeFeatures.addMineables(this);
 		DefaultBiomeFeatures.addDefaultOres(this);
 		DefaultBiomeFeatures.addDefaultDisks(this);
 		DefaultBiomeFeatures.addDefaultFlowers(this);
 		DefaultBiomeFeatures.addDefaultMushrooms(this);
 		DefaultBiomeFeatures.addDefaultVegetation(this);
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.RED_PRESS_GARDEN_LEAF_PILE_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.PINK_PRESS_GARDEN_LEAF_PILE_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(2))));
-		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleFeatureConfigs.BLUEBERRY_BUSH_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(1))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleConfiguredFeatures.RED_PRESS_GARDEN_LEAF_PILE_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(4))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleConfiguredFeatures.PINK_PRESS_GARDEN_LEAF_PILE_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(2))));
+		this.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Feature.RANDOM_PATCH.configure(MubbleConfiguredFeatures.BLUEBERRY_BUSH_PATCHES).createDecoratedFeature(Decorator.COUNT_HEIGHTMAP_DOUBLE.configure(new CountDecoratorConfig(1))));
 		DefaultBiomeFeatures.addFrozenTopLayer(this);
 		this.addSpawn(SpawnGroup.CREATURE, new SpawnEntry(EntityType.SHEEP, 12, 4, 4));
 		this.addSpawn(SpawnGroup.CREATURE, new SpawnEntry(EntityType.PIG, 10, 4, 4));
@@ -78,4 +63,6 @@ public class PressGardenBiome extends Biome {
 	public int getGrassColorAt(double x, double z) {
 		return 15594485;
 	}
+
+	 */
 }
