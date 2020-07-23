@@ -11,6 +11,6 @@ import java.util.Random;
 public class WhiteCherryOakSaplingGenerator extends SaplingGenerator {
 	@Override
 	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive) {
-		return random.nextInt(10) == 0 ? Feature.TREE.configure(beeHive ? MubbleConfiguredFeatures.FANCY_WHITE_CHERRY_OAK_TREE_B1 : MubbleConfiguredFeatures.FANCY_WHITE_CHERRY_OAK_TREE) : Feature.TREE.configure(beeHive ? MubbleConfiguredFeatures.WHITE_CHERRY_OAK_TREE_B1 : MubbleConfiguredFeatures.WHITE_CHERRY_OAK_TREE);
+		return random.nextInt(10) == 0 ? beeHive ? MubbleConfiguredFeatures.FANCY_WHITE_CHERRY_OAK_BEES_005 : MubbleConfiguredFeatures.FANCY_WHITE_CHERRY_OAK : beeHive ? MubbleConfiguredFeatures.WHITE_CHERRY_OAK_BEES_005 : MubbleConfiguredFeatures.WHITE_CHERRY_OAK;
 	}
 }

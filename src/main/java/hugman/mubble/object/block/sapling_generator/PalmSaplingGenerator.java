@@ -11,6 +11,6 @@ import java.util.Random;
 public class PalmSaplingGenerator extends SaplingGenerator {
 	@Override
 	protected ConfiguredFeature<TreeFeatureConfig, ?> createTreeFeature(Random random, boolean beeHive) {
-		return Feature.TREE.configure(MubbleConfiguredFeatures.PALM_TREE);
+		return MubbleConfiguredFeatures.PALM;
 	}
 }

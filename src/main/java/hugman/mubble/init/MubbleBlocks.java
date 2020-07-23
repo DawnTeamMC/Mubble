@@ -249,12 +249,9 @@ public class MubbleBlocks {
 	public static final BlockCreator AMARANTH_DYLIUM = new BlockCreator("amaranth_dylium", new DyliumBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.field_25702).requiresTool().strength(3.0F, 9.0F).sounds(BlockSoundGroup.NYLIUM).ticksRandomly()), ItemGroup.BUILDING_BLOCKS);
 	public static final SimpleBlockCreator AMARANTH_WART_BLOCK = new SimpleBlockCreator("amaranth_wart_block", FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).breakByTool(FabricToolTags.HOES).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK));
 	public static final BlockCreator AMARANTH_ROOTS = new BlockCreator("amaranth_roots", new RootsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MaterialColor.CYAN).noCollision().breakInstantly().sounds(BlockSoundGroup.ROOTS)), ItemGroup.DECORATIONS);
-	/*
 	public static final NetherWoodTypeCreator DARK_AMARANTH_WOOD = new NetherWoodTypeCreator("dark_amaranth", () -> {
-		return Feature.HUGE_FUNGUS.configure(MubbleConfiguredFeatures.AMARANTH_FUNGUS_CONFIG);
+		return Feature.HUGE_FUNGUS.configure(MubbleConfiguredFeatures.AMARANTH_FUNGI_PLANTED);
 	}, MaterialColor.LIGHT_GRAY, MaterialColor.field_25707);
-
-	 */
 
 
 	/* SUPER MARIO (MAKER) */

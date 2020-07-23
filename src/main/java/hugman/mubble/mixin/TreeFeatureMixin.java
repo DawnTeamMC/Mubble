@@ -25,7 +25,7 @@ public abstract class TreeFeatureMixin {
 
 	@Redirect(method = "generate", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/gen/feature/TreeFeature;isDirtOrGrass(" + TestableWorld + BlockPos + ")Z"))
 	private boolean mubble_isDirtOrGrass(TestableWorld testableWorld, BlockPos blockPos, ModifiableTestableWorld world, Random random, BlockPos pos, Set<BlockPos> logPositions, Set<BlockPos> leavesPositions, BlockBox box, TreeFeatureConfig config) {
-		if(config == MubbleConfiguredFeatures.PALM_TREE) {
+		if(config == MubbleConfiguredFeatures.PALM) {
 			return testableWorld.testBlockState(blockPos, (state) -> {
 				Block block = state.getBlock();
 				return block == Blocks.SAND || block == Blocks.RED_SAND;
