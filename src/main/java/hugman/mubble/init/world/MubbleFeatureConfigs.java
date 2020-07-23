@@ -26,8 +26,8 @@ public class MubbleFeatureConfigs {
 
 	private static final BlockState AUTUMN_OAK_LEAVES = MubbleBlocks.AUTUMN_OAK_LEAVES.getLeaves().getDefaultState();
 	private static final BlockState AUTUMN_OAK_LEAF_PILE = MubbleBlocks.AUTUMN_OAK_LEAVES.getLeafPile().getDefaultState();
-	private static final BlockState AUTUMN_BIRCH_LEAVES = MubbleBlocks.AUTUMN_OAK_LEAVES.getLeaves().getDefaultState();
-	private static final BlockState AUTUMN_BIRCH_LEAF_PILE = MubbleBlocks.AUTUMN_OAK_LEAVES.getLeafPile().getDefaultState();
+	private static final BlockState AUTUMN_BIRCH_LEAVES = MubbleBlocks.AUTUMN_BIRCH_LEAVES.getLeaves().getDefaultState();
+	private static final BlockState AUTUMN_BIRCH_LEAF_PILE = MubbleBlocks.AUTUMN_BIRCH_LEAVES.getLeafPile().getDefaultState();
 
 	private static final BlockState CHERRY_OAK_LOG = MubbleBlocks.CHERRY_OAK_LOG.getDefaultState();
 	private static final BlockState PINK_CHERRY_OAK_LEAVES = MubbleBlocks.PINK_CHERRY_OAK_LEAVES.getDefaultState();
