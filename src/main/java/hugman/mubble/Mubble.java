@@ -6,22 +6,27 @@ import hugman.mubble.init.data.MubbleScreenHandlers;
 import hugman.mubble.init.data.MubbleStats;
 import hugman.mubble.init.data.MubbleTileEntityTypes;
 import hugman.mubble.init.world.MubbleBiomes;
+import hugman.mubble.init.world.MubbleConfiguredFeatures;
 import hugman.mubble.init.world.MubbleFeatures;
 import hugman.mubble.init.world.MubbleGenerators;
+import hugman.mubble.util.DataWriter;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class Mubble implements ModInitializer {
 	public static final String MOD_ID = "mubble";
 	public static final Logger LOGGER = LogManager.getLogger();
-	public static final boolean IS_DEBUG = false;
 
 	@Override
 	public void onInitialize() {
+		DataWriter.setup();
+
 		new MubbleBlocks();
+		new MubbleConfiguredFeatures();
 		new MubbleCostumes();
-		new MubbleEffects();
+		new MubbleStatusEffects();
 		new MubbleEnchantments();
 		new MubbleEntities();
 		MubbleEntities.registerEntityAttributes();
@@ -37,6 +42,11 @@ public class Mubble implements ModInitializer {
 		new MubbleBiomes();
 		new MubbleFeatures();
 		MubbleGenerators.init();
+	}
+
+	public static Identifier id(String name)
+	{
+		return new Identifier(Mubble.MOD_ID, name);
 	}
 	
 	/*private void initSpawnRestrictions()

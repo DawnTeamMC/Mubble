@@ -1,12 +1,12 @@
-package hugman.mubble.util.creator;
+package hugman.mubble.util.entry;
 
-import com.google.common.base.Preconditions;
 import hugman.mubble.Mubble;
+import hugman.mubble.init.MubbleBlocks;
+import hugman.mubble.util.DataWriter;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
-import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.client.render.RenderLayer;
@@ -16,12 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.biome.Biome;
 
-public class BlockEntry {
-	protected Block block;
-
-	protected final String name;
+public class BlockEntry extends Entry<Block> {
 	protected final Block baseBlock;
 	protected final RenderLayer renderLayer;
 	protected final ItemGroup itemGroup;
@@ -31,7 +27,7 @@ public class BlockEntry {
 	protected final boolean noItem;
 
 	private BlockEntry(String name, Block baseBlock, RenderLayer renderLayer, ItemGroup itemGroup, int flammabilityBurn, int flammabilitySpread, int cookTime, boolean noItem) {
-		this.name = name;
+		super(name);
 		this.baseBlock = baseBlock;
 		this.renderLayer = renderLayer;
 		this.itemGroup = itemGroup;
@@ -41,15 +37,22 @@ public class BlockEntry {
 		this.noItem = noItem;
 	}
 
-	private BlockEntry register() {
-		this.block = Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), baseBlock);
-		BlockRenderLayerMap.INSTANCE.putBlock(block, renderLayer);
-		if(flammabilityBurn != 0 && flammabilitySpread != 0) FlammableBlockRegistry.getDefaultInstance().add(block, flammabilityBurn, flammabilitySpread);
+	@Override
+	protected Block register() {
+		value = Registry.register(Registry.BLOCK, Mubble.id(name), baseBlock);
+		BlockRenderLayerMap.INSTANCE.putBlock(value, renderLayer);
+		FlammableBlockRegistry.getDefaultInstance().add(value, flammabilityBurn, flammabilitySpread);
 		if(!noItem) {
-			Registry.register(Registry.ITEM, Registry.BLOCK.getId(block), new BlockItem(block, new Item.Settings().group(itemGroup)));
-			if(cookTime != 0) FuelRegistry.INSTANCE.add(block, cookTime);
+			Item item = Registry.register(Registry.ITEM, Registry.BLOCK.getId(value), new BlockItem(value, new Item.Settings().group(itemGroup)));
+			((BlockItem)item).appendBlocks(Item.BLOCK_ITEMS, item);
+			DataWriter.entryNamesData.block_items.add(Mubble.id(name).toString());
+			DataWriter.entryCountsData.block_items++;
+			FuelRegistry.INSTANCE.add(value, cookTime);
 		}
-		return this;
+		DataWriter.entryNamesData.blocks.add(Mubble.id(name).toString());
+		DataWriter.entryCountsData.blocks++;
+		DataWriter.save();
+		return value;
 	}
 
 	public static class Builder {
@@ -62,9 +65,15 @@ public class BlockEntry {
 		protected int cookTime;
 		protected boolean noItem;
 
-		public Builder() {
-			this.name = null;
-			this.baseBlock = null;
+		/**
+		 * Creates a simple block with an item but no item group, flammability or cook time and is rendered has a solid block.
+		 *
+		 * @param name  The name of the block.
+		 * @param block The block itself.
+		 */
+		public Builder(String name, Block block) {
+			this.name = name;
+			this.baseBlock = block;
 			this.renderLayer = RenderLayer.getSolid();
 			this.itemGroup = null;
 			this.flammabilityBurn = 0;
@@ -73,22 +82,16 @@ public class BlockEntry {
 			this.noItem = false;
 		}
 
-		public Builder(String name, Block block) {
-			this();
-			this.name = name;
-			this.baseBlock = block;
-		}
-
 		/**
 		 * Creates a block copying some properties from a template and a block.
 		 * <p>Template -> (block class, render layer, item group)
 		 * <p>Block -> (block settings, flammability, cook time)
 		 *
-		 * @param name The name of the block.
+		 * @param suffix     The suffix of the block.
 		 * @param template The template to copy properties from.
 		 */
-		public Builder(String name, BlockTemplate template, FabricBlockSettings settings) {
-			this(name + template.getSuffix(), template.getBlock(settings));
+		public Builder(String suffix, BlockTemplate template, FabricBlockSettings settings) {
+			this(suffix + template.getSuffix(), template.getBlock(settings));
 		}
 
 		/**
@@ -96,12 +99,12 @@ public class BlockEntry {
 		 * <p>Template -> (block class, render layer, item group)
 		 * <p>Block -> (block settings, flammability, cook time)</p>
 		 *
-		 * @param name The name of the block.
-		 * @param template The template to copy properties from.
+		 * @param suffix      The suffix of the block.
+		 * @param template  The template to copy properties from.
 		 * @param baseBlock The block to copy properties from.
 		 */
-		public Builder(String name, BlockTemplate template, Block baseBlock) {
-			this(name, template, FabricBlockSettings.copyOf(baseBlock));
+		public Builder(String suffix, BlockTemplate template, Block baseBlock) {
+			this(suffix, template, FabricBlockSettings.copyOf(baseBlock));
 			copy(template, baseBlock);
 		}
 
@@ -110,13 +113,13 @@ public class BlockEntry {
 		 * <p>Template -> (block class, render layer, item group)
 		 * <p>Block -> (block settings, flammability, cook time)
 		 *
-		 * @param name The name of the block.
-		 * @param template The template to copy properties from.
+		 * @param suffix      The suffix of the block.
+		 * @param template  The template to copy properties from.
 		 * @param baseBlock The block to copy properties from.
-		 * @param color The material color of the block.
+		 * @param color     The material color of the block.
 		 */
-		public Builder(String name, BlockTemplate template, Block baseBlock, MaterialColor color) {
-			this(name, template, FabricBlockSettings.copyOf(baseBlock).materialColor(color));
+		public Builder(String suffix, BlockTemplate template, Block baseBlock, MaterialColor color) {
+			this(suffix, template, FabricBlockSettings.copyOf(baseBlock).materialColor(color));
 			copy(template, baseBlock);
 		}
 
@@ -125,9 +128,8 @@ public class BlockEntry {
 			return this;
 		}
 
-		public Builder setBaseBlock(Block baseBlock) {
-			this.baseBlock = baseBlock;
-			return this;
+		public String getName() {
+			return name;
 		}
 
 		public Builder setRenderLayer(RenderLayer renderLayer) {
@@ -161,6 +163,7 @@ public class BlockEntry {
 
 		/**
 		 * Copies some properties from a template. (render layer, item group)
+		 *
 		 * @param template The template to copy properties from.
 		 */
 		public Builder copy(BlockTemplate template) {
@@ -171,12 +174,13 @@ public class BlockEntry {
 
 		/**
 		 * Copies some properties from a block. (render layer, item group, flammability, cook time)
+		 *
 		 * @param baseBlock The block to copy properties from.
 		 */
 		public Builder copy(Block baseBlock) {
 			setRenderLayer(RenderLayers.getBlockLayer(baseBlock.getDefaultState()));
 			setItemGroup(baseBlock.asItem().getGroup());
-			setFlammability(CreatorHelper.getFlammabilityBurn(baseBlock), CreatorHelper.getFlammabilitySpread(baseBlock));
+			setFlammability(EntryHelper.getFlammabilityBurn(baseBlock), EntryHelper.getFlammabilitySpread(baseBlock));
 			//setCookTime(CreatorHelper.getCookTime(baseBlock));
 			return this;
 		}
@@ -186,7 +190,7 @@ public class BlockEntry {
 		 * <p>Block -> (flammability, cook time)</p>
 		 * <p>Template -> (render layer, item group)</p>
 		 *
-		 * @param template The template to copy properties from.
+		 * @param template  The template to copy properties from.
 		 * @param baseBlock The block to copy properties from.
 		 */
 		public Builder copy(BlockTemplate template, Block baseBlock) {
@@ -198,18 +202,8 @@ public class BlockEntry {
 		/**
 		 * Builds the entry and registers the block with all its settings.
 		 */
-		public BlockEntry build() {
-			Preconditions.checkArgument(name != null, "Name is null");
-			Preconditions.checkArgument(baseBlock != null, "Base block is null");
+		public Block build() {
 			return new BlockEntry(this.name, this.baseBlock, this.renderLayer, this.itemGroup, this.flammabilityBurn, this.flammabilitySpread, this.cookTime, this.noItem).register();
 		}
-	}
-
-	public Block getBlock() {
-		return block;
-	}
-
-	public String getName() {
-		return name;
 	}
 }

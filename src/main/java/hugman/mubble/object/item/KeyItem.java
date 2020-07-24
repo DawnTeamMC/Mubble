@@ -45,16 +45,16 @@ public class KeyItem extends Item {
 	}
 
 	public SoundEvent getKeySuccessSound(Block block, boolean success) {
-		if(block == MubbleBlocks.SMB_KEY_DOOR.getBlock()) {
+		if(block == MubbleBlocks.SMB_KEY_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
 		}
-		else if(block == MubbleBlocks.SMB3_KEY_DOOR.getBlock()) {
+		else if(block == MubbleBlocks.SMB3_KEY_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB3;
 		}
-		else if(block == MubbleBlocks.SMW_KEY_DOOR.getBlock()) {
+		else if(block == MubbleBlocks.SMW_KEY_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMW;
 		}
-		else if(block == MubbleBlocks.NSMBU_KEY_DOOR.getBlock()) {
+		else if(block == MubbleBlocks.NSMBU_KEY_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_NSMBU;
 		}
 		else {

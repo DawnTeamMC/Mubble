@@ -1,6 +1,6 @@
 package hugman.mubble.util;
 
-import hugman.mubble.util.creator.BlockTemplate;
+import hugman.mubble.util.entry.BlockTemplate;
 
 public class MoreWordUtils {
 	public static String numerate(int number, String text) {

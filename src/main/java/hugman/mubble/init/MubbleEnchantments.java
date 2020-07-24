@@ -3,6 +3,7 @@ package hugman.mubble.init;
 import hugman.mubble.Mubble;
 import hugman.mubble.object.enchantment.IgnoranceCurseEnchantment;
 import hugman.mubble.object.enchantment.TelekinesisEnchantment;
+import hugman.mubble.util.DataWriter;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Identifier;
@@ -13,6 +14,9 @@ public class MubbleEnchantments {
 	public static final Enchantment IGNORANCE_CURSE = register("ignorance_curse", new IgnoranceCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.values()));
 
 	private static Enchantment register(String name, Enchantment enchantment) {
-		return Registry.register(Registry.ENCHANTMENT, new Identifier(Mubble.MOD_ID, name), enchantment);
+		DataWriter.entryNamesData.enchantments.add(Mubble.id(name).toString());
+		DataWriter.entryCountsData.enchantments++;
+		DataWriter.save();
+		return Registry.register(Registry.ENCHANTMENT, Mubble.id(name), enchantment);
 	}
 }

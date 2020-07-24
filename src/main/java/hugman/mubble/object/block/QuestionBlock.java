@@ -58,28 +58,28 @@ public class QuestionBlock extends Block {
 
 	public void loot(World worldIn, BlockPos pos) {
 		if(!worldIn.isClient) {
-			BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getBlock().getDefaultState();
+			BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
 			SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB;
 			SoundEvent powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-			if(this == MubbleBlocks.SMB_QUESTION_BLOCK.getBlock()) {
+			if(this == MubbleBlocks.SMB_QUESTION_BLOCK) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB;
 				powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-				emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getBlock().getDefaultState();
+				emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
 			}
-			else if(this == MubbleBlocks.SMB3_QUESTION_BLOCK.getBlock()) {
+			else if(this == MubbleBlocks.SMB3_QUESTION_BLOCK) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMB3;
 				powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
-				emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getBlock().getDefaultState();
+				emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
 			}
-			else if(this == MubbleBlocks.SMW_QUESTION_BLOCK.getBlock()) {
+			else if(this == MubbleBlocks.SMW_QUESTION_BLOCK) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_SMW;
 				powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
-				emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getBlock().getDefaultState();
+				emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
 			}
-			else if(this == MubbleBlocks.NSMBU_QUESTION_BLOCK.getBlock()) {
+			else if(this == MubbleBlocks.NSMBU_QUESTION_BLOCK) {
 				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_COIN_NSMBU;
 				powerUpLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
-				emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getBlock().getDefaultState();
+				emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
 			}
 			final double x = pos.getX() + 0.5D;
 			final double y = pos.getY() + 0.5D + 0.6D;

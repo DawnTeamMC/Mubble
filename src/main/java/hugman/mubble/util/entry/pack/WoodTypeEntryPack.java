@@ -1,21 +1,21 @@
-package hugman.mubble.util.creator.block;
+package hugman.mubble.util.entry.pack;
 
-import hugman.mubble.util.creator.BlockEntry;
-import hugman.mubble.util.creator.BlockTemplate;
+import hugman.mubble.util.entry.BlockEntry;
+import hugman.mubble.util.entry.BlockTemplate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
 
-public class WoodTypeCreator {
-	private final BlockEntry planksEntry;
-	private final LogCreator logCreator;
-	private final MSBlockCreator planksBlocksCreator;
-	private final MSBlockCreator woodBlocksCreator;
+public class WoodTypeEntryPack {
+	private final Block planks;
+	private final LogsEntryPack logsEntryPack;
+	private final MSBlockEntryPack planksBlocksCreator;
+	private final MSBlockEntryPack woodBlocksCreator;
 
-	public WoodTypeCreator(String name, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
-		this.planksEntry = new BlockEntry.Builder(name, BlockTemplate.PLANKS, isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS, planksColor).build();
-		this.logCreator = new LogCreator(name, insideColor, barkColor, isNether);
-		this.planksBlocksCreator = new MSBlockCreator(name, this.planksEntry.getBlock(),
+	public WoodTypeEntryPack(String name, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
+		this.planks = new BlockEntry.Builder(name, BlockTemplate.PLANKS, isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS, planksColor).build();
+		this.logsEntryPack = new LogsEntryPack(name, insideColor, barkColor, isNether);
+		this.planksBlocksCreator = new MSBlockEntryPack(name, this.planks,
 				BlockTemplate.STAIRS,
 				BlockTemplate.SLAB,
 				BlockTemplate.VERTICAL_SLAB,
@@ -25,7 +25,7 @@ public class WoodTypeCreator {
 				BlockTemplate.FENCE,
 				BlockTemplate.FENCE_GATE,
 				BlockTemplate.DOOR);
-		this.woodBlocksCreator = new MSBlockCreator(name + logCreator.getWoodSuffix(), logCreator.getWood(),
+		this.woodBlocksCreator = new MSBlockEntryPack(name + logsEntryPack.getWoodSuffix(), logsEntryPack.getWood(),
 				BlockTemplate.STAIRS,
 				BlockTemplate.SLAB,
 				BlockTemplate.VERTICAL_SLAB,
@@ -33,23 +33,23 @@ public class WoodTypeCreator {
 	}
 
 	public Block getPlanks() {
-		return planksEntry.getBlock();
+		return planks;
 	}
 
 	public Block getLog() {
-		return logCreator.getLog();
+		return logsEntryPack.getLog();
 	}
 
 	public Block getStrippedLog() {
-		return logCreator.getStrippedLog();
+		return logsEntryPack.getStrippedLog();
 	}
 
 	public Block getWood() {
-		return logCreator.getWood();
+		return logsEntryPack.getWood();
 	}
 
 	public Block getStrippedWood() {
-		return logCreator.getStrippedWood();
+		return logsEntryPack.getStrippedWood();
 	}
 
 	public Block getWoodStairs() {

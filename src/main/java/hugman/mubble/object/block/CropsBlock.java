@@ -17,10 +17,10 @@ public class CropsBlock extends CropBlock {
 
 	@Override
 	protected ItemConvertible getSeedsItem() {
-		if(this == MubbleBlocks.TOMATOES.getBlock()) {
+		if(this == MubbleBlocks.TOMATOES) {
 			return MubbleItems.TOMATO;
 		}
-		if(this == MubbleBlocks.SALAD.getBlock()) {
+		if(this == MubbleBlocks.SALAD) {
 			return MubbleItems.SALAD;
 		}
 		else {

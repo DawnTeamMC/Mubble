@@ -117,7 +117,7 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 
 	@Override
 	public boolean canUse(PlayerEntity player) {
-		return canUse(this.context, player, MubbleBlocks.TIMESWAP_TABLE.getBlock());
+		return canUse(this.context, player, MubbleBlocks.TIMESWAP_TABLE);
 	}
 
 	@Override

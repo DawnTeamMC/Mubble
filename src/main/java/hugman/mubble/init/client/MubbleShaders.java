@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MubbleShaders {
-	public static final List<Identifier> SHADERS = new ArrayList<Identifier>();
-	public static final List<Identifier> RETRO_SHADERS = new ArrayList<Identifier>();
+	public static final List<Identifier> SHADERS = new ArrayList<>();
+	public static final List<Identifier> RETRO_SHADERS = new ArrayList<>();
 
 	public static final Identifier ANTIALIAS = register("minecraft", "antialias");
 	public static final Identifier ART = register("minecraft", "art");

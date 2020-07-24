@@ -59,21 +59,21 @@ public class GoldenBrickBlock extends Block {
 	public void loot(World worldIn, BlockPos pos) {
 		BlockState emptyBlock = Blocks.AIR.getDefaultState();
 		SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-		if(this == MubbleBlocks.SMB_GOLDEN_BRICK_BLOCK.getBlock()) {
+		if(this == MubbleBlocks.SMB_GOLDEN_BRICK_BLOCK) {
 			coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-			emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getBlock().getDefaultState();
+			emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
 		}
-		else if(this == MubbleBlocks.SMB3_GOLDEN_BRICK_BLOCK.getBlock()) {
+		else if(this == MubbleBlocks.SMB3_GOLDEN_BRICK_BLOCK) {
 			coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
-			emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getBlock().getDefaultState();
+			emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
 		}
-		else if(this == MubbleBlocks.SMW_GOLDEN_BRICK_BLOCK.getBlock()) {
+		else if(this == MubbleBlocks.SMW_GOLDEN_BRICK_BLOCK) {
 			coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
-			emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getBlock().getDefaultState();
+			emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
 		}
-		else if(this == MubbleBlocks.NSMBU_GOLDEN_BRICK_BLOCK.getBlock()) {
+		else if(this == MubbleBlocks.NSMBU_GOLDEN_BRICK_BLOCK) {
 			coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
-			emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getBlock().getDefaultState();
+			emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
 		}
 		final double x = pos.getX() + 0.5D;
 		final double y = pos.getY() + 0.5D + 0.6D;

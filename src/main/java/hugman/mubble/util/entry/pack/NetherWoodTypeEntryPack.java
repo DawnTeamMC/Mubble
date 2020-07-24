@@ -1,4 +1,4 @@
-package hugman.mubble.util.creator.block;
+package hugman.mubble.util.entry.pack;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
@@ -7,16 +7,16 @@ import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
 import java.util.function.Supplier;
 
-public class NetherWoodTypeCreator extends WoodTypeCreator {
-	private final FungusCreator fungusCreator;
+public class NetherWoodTypeEntryPack extends WoodTypeEntryPack {
+	private final FungusEntryPack fungusCreator;
 
-	public NetherWoodTypeCreator(String name, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> supplier, MaterialColor planksColor, MaterialColor barkColor) {
+	public NetherWoodTypeEntryPack(String name, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> supplier, MaterialColor planksColor, MaterialColor barkColor) {
 		this(name, supplier, planksColor, planksColor, barkColor);
 	}
 
-	public NetherWoodTypeCreator(String name, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> supplier, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor) {
+	public NetherWoodTypeEntryPack(String name, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> supplier, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor) {
 		super(name, planksColor, insideColor, barkColor, true);
-		this.fungusCreator = new FungusCreator(name, supplier);
+		this.fungusCreator = new FungusEntryPack(name, supplier);
 	}
 
 	public Block getStem() {

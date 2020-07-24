@@ -46,7 +46,7 @@ public class ToadTradeOffers {
 			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 4, MubbleCostumes.KORETATO_BLOCK)
 	};
 	public static final TradeOffers.Factory[] BLOCK_TRADES = new TradeOffers.Factory[]{
-			new ToadTradeOffers.SellItemFactory(BLUE_COIN, 1, MubbleBlocks.NSMBU_QUESTION_BLOCK.getBlock().asItem(), 3, 10)
+			new ToadTradeOffers.SellItemFactory(BLUE_COIN, 1, MubbleBlocks.NSMBU_QUESTION_BLOCK.asItem(), 3, 10)
 	};
 
 	static class SellItemFactory implements TradeOffers.Factory {

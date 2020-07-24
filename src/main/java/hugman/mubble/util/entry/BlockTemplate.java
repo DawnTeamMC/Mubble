@@ -1,4 +1,4 @@
-package hugman.mubble.util.creator;
+package hugman.mubble.util.entry;
 
 import hugman.mubble.object.block.DoorBlock;
 import hugman.mubble.object.block.PressurePlateBlock;
@@ -12,7 +12,6 @@ import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.util.DyeColor;
 
 public enum BlockTemplate {
 	CUBE("", ItemGroup.BUILDING_BLOCKS),
@@ -33,6 +32,7 @@ public enum BlockTemplate {
 	LEAVES("leaves", ItemGroup.DECORATIONS, RenderLayer.getCutoutMipped()),
 	PILE("leaf_pile", ItemGroup.DECORATIONS, RenderLayer.getCutoutMipped()),
 	CLOUD_BLOCK("cloud_block", ItemGroup.DECORATIONS, RenderLayer.getTranslucent()),
+	BALLOON("balloon", ItemGroup.DECORATIONS, RenderLayer.getTranslucent()),
 	MUSHROOM_BLOCK("mushroom_block", ItemGroup.DECORATIONS),
 	MUSHROOM("mushroom", ItemGroup.DECORATIONS),
 	QUESTION_BLOCK("question_block", ItemGroup.BUILDING_BLOCKS),
@@ -106,29 +106,12 @@ public enum BlockTemplate {
 				return new PileBlock(settings);
 			case CLOUD_BLOCK:
 				return new CloudBlock(settings);
+			case BALLOON:
+				return new BalloonBlock(settings);
 			case MUSHROOM_BLOCK:
 				return new MushroomBlock(settings);
 			case TETRIS_BLOCK:
 				return new FallingBlock(settings);
 		}
 	}
-
-	public static final FabricBlockSettings NORMAL_LOG_SETTINGS = FabricBlockSettings.of(Material.WOOD).strength(2.0F).sounds(BlockSoundGroup.WOOD);
-	public static final FabricBlockSettings STEM_SETTINGS = FabricBlockSettings.of(Material.NETHER_WOOD).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM);
-
-	public static final FabricBlockSettings LEAVES_SETTINGS = FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(CreatorHelper::canSpawnOnLeaves).suffocates(CreatorHelper::never).blockVision(CreatorHelper::never);
-	public static final FabricBlockSettings LEAF_PILE_SETTINGS = FabricBlockSettings.of(Material.LEAVES).strength(0.1F).ticksRandomly().sounds(BlockSoundGroup.GRASS).noCollision().nonOpaque();
-	public static final FabricBlockSettings FLOWER_PILE_SETTINGS = FabricBlockSettings.of(Material.PLANT).breakInstantly().sounds(BlockSoundGroup.GRASS).noCollision();
-	public static final FabricBlockSettings SAPLING_SETTINGS = FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.GRASS).breakInstantly().noCollision().ticksRandomly();
-	public static final FabricBlockSettings FUNGUS_SETTINGS = FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.FUNGUS).breakInstantly().noCollision();
-	public static final FabricBlockSettings POTTED_PLANT_SETTINGS = FabricBlockSettings.of(Material.SUPPORTED).breakInstantly().nonOpaque();
-
-	public static final FabricBlockSettings MUSHROOM_BLOCK_SETTINGS = FabricBlockSettings.of(Material.WOOD).hardness(0.2F).sounds(BlockSoundGroup.WOOD);
-	public static final FabricBlockSettings MUSHROOM_SETTINGS = FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1);
-
-	public static final FabricBlockSettings QUESTION_BLOCK_SETTINGS = FabricBlockSettings.of(Material.METAL).sounds(BlockSoundGroup.METAL).strength(1.5F, 6.0F);
-
-	public static final FabricBlockSettings TETRIS_BLOCK_SETTINGS = FabricBlockSettings.of(Material.STONE).strength(1.5F, 6.0F);
-
-	public static final FabricBlockSettings CANDY_CANE_BLOCK_SETTINGS = FabricBlockSettings.of(Material.STONE).hardness(0.2F);
 }

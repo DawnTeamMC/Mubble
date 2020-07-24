@@ -1,4 +1,4 @@
-package hugman.mubble.util.creator;
+package hugman.mubble.util.entry;
 
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
@@ -9,7 +9,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 
-public class CreatorHelper {
+public class EntryHelper {
 	public static int getFlammabilityBurn(Block block) {
 		return FlammableBlockRegistry.getDefaultInstance().get(block).getBurnChance();
 	}

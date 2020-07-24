@@ -30,8 +30,8 @@ public class GrassBlock extends net.minecraft.block.GrassBlock {
 	@Override
 	public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
 		Block dirt = Blocks.DIRT;
-		if(this == MubbleBlocks.GREEN_HILL_GRASS_BLOCK.getBlock()) {
-			dirt = MubbleBlocks.GREEN_HILL_DIRT.getBlock();
+		if(this == MubbleBlocks.GREEN_HILL_GRASS_BLOCK) {
+			dirt = MubbleBlocks.GREEN_HILL_DIRT;
 		}
 		if(!worldIn.isClient) {
 			if(!worldIn.isChunkLoaded(pos)) {

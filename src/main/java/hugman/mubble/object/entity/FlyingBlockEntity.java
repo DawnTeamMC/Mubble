@@ -26,6 +26,7 @@ import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.state.property.Properties;
 import net.minecraft.tag.BlockTags;
 import net.minecraft.tag.FluidTags;
+import net.minecraft.util.DyeColor;
 import net.minecraft.util.crash.CrashReportSection;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult.Type;
@@ -252,7 +253,7 @@ public class FlyingBlockEntity extends Entity {
 			this.blockEntityData = compound.getCompound("TileEntityData");
 		}
 		if(this.block.getBlock() instanceof AirBlock) {
-			this.block = MubbleBlocks.WHITE_BALLOON.getBlock().getDefaultState();
+			this.block = MubbleBlocks.BALLOONS.getBlock(DyeColor.WHITE).getDefaultState();
 		}
 
 	}

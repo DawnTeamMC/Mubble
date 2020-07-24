@@ -12,7 +12,7 @@ public class OreBlock extends net.minecraft.block.OreBlock {
 
 	@Override
 	protected int getExperienceWhenMined(Random rand) {
-		if(this == MubbleBlocks.VANADIUM_ORE.getBlock()) {
+		if(this == MubbleBlocks.VANADIUM_ORE) {
 			return MathHelper.nextInt(rand, 4, 8);
 		}
 		return super.getExperienceWhenMined(rand);

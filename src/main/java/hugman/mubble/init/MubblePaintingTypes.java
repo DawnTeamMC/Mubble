@@ -1,6 +1,7 @@
 package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.util.DataWriter;
 import net.minecraft.entity.decoration.painting.PaintingMotive;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -23,6 +24,9 @@ public class MubblePaintingTypes {
 	public static final PaintingMotive SSBU_ROSTER = register("ssbu_roster", 384, 64);
 
 	private static PaintingMotive register(String name, int width, int height) {
-		return Registry.register(Registry.PAINTING_MOTIVE, new Identifier(Mubble.MOD_ID, name), new PaintingMotive(width, height));
+		DataWriter.entryNamesData.painting_types.add(Mubble.id(name).toString());
+		DataWriter.entryCountsData.painting_types++;
+		DataWriter.save();
+		return Registry.register(Registry.PAINTING_MOTIVE, Mubble.id(name), new PaintingMotive(width, height));
 	}
 }

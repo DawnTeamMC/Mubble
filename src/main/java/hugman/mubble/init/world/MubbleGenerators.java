@@ -3,7 +3,7 @@ package hugman.mubble.init.world;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.object.entity.DuckEntity;
-import hugman.mubble.util.creator.BlockTemplate;
+import hugman.mubble.util.entry.BlockTemplate;
 import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.SpawnGroup;
@@ -21,9 +21,9 @@ import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 public class MubbleGenerators {
 	public static void handleBiome(Biome biome) {
 		if(!biome.getCategory().equals(Biome.Category.NETHER) && !biome.getCategory().equals(Biome.Category.THEEND)) {
-			biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.BLUNITE_BLOCKS.getBlock(BlockTemplate.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
-			biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.CARBONITE_BLOCKS.getBlock(BlockTemplate.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
-			biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.VANADIUM_ORE.getBlock().getDefaultState(), 6)).method_30377(80).spreadHorizontally().repeat(10));
+			biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, MubbleConfiguredFeatures.ORE_BLUNITE);
+			biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, MubbleConfiguredFeatures.ORE_CARBONITE);
+			biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, MubbleConfiguredFeatures.ORE_VANADIUM);
 		}
 		if(biome.getCategory().equals(Biome.Category.DESERT)) {
 			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PALM.decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(0, 0.12F, 1))));
@@ -34,7 +34,7 @@ public class MubbleGenerators {
 		if(DuckEntity.getSpawnBiomes().contains(biome)) {
 			biome.getEntitySpawnList(SpawnGroup.CREATURE).add(new Biome.SpawnEntry(MubbleEntities.DUCK, 10, 4, 4));
 		}
-		Biomes.END_MIDLANDS.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, MubbleFeatures.ENDER_BOULDER.configure(new SingleStateFeatureConfig(Blocks.OBSIDIAN.getDefaultState())).decorate(ConfiguredFeatures.Decorators.field_26165).repeatRandomly(2));
+		Biomes.END_MIDLANDS.addFeature(GenerationStep.Feature.LOCAL_MODIFICATIONS, MubbleConfiguredFeatures.ENDER_BOULDER);
 	}
 
 	public static void init() {

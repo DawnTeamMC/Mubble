@@ -1,6 +1,8 @@
-package hugman.mubble.util.creator;
+package hugman.mubble.util.entry;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.init.world.MubbleBiomes;
+import hugman.mubble.util.DataWriter;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
@@ -10,10 +12,7 @@ import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 
-public class BiomeEntry {
-	private Biome biome;
-
-	private final String name;
+public class BiomeEntry extends Entry<Biome> {
 	private final Biome baseBiome;
 	private final SpawnDimension spawnDimension;
 
@@ -24,7 +23,7 @@ public class BiomeEntry {
 	private final Biome.MixedNoisePoint noises;
 
 	private BiomeEntry(String name, Biome baseBiome, SpawnDimension spawnDimension, OverworldClimate climate, double weight, boolean isSpawnBiome, Biome.MixedNoisePoint noises) {
-		this.name = name;
+		super(name);
 		this.baseBiome = baseBiome;
 		this.spawnDimension = spawnDimension;
 		this.climate = climate;
@@ -33,20 +32,24 @@ public class BiomeEntry {
 		this.noises = noises;
 	}
 
-	private BiomeEntry register() {
-		this.biome = Registry.register(BuiltinRegistries.BIOME, new Identifier(Mubble.MOD_ID, name), baseBiome);
+	@Override
+	protected Biome register() {
+		value = Registry.register(BuiltinRegistries.BIOME, Mubble.id(name), baseBiome);
 		switch(this.spawnDimension)
 		{
 			case NONE:
 			default:
 				break;
 			case OVERWORLD_CONTINENTAL:
-				OverworldBiomes.addContinentalBiome(biome, climate, weight);
-				if(isSpawnBiome) FabricBiomes.addSpawnBiome(biome);
+				OverworldBiomes.addContinentalBiome(value, climate, weight);
+				if(isSpawnBiome) FabricBiomes.addSpawnBiome(value);
 			case THE_NETHER:
-				NetherBiomes.addNetherBiome(biome, noises);
+				NetherBiomes.addNetherBiome(value, noises);
 		}
-		return this;
+		DataWriter.entryNamesData.biomes.add(Mubble.id(name).toString());
+		DataWriter.entryCountsData.biomes++;
+		DataWriter.save();
+		return value;
 	}
 
 	public static class Builder {
@@ -60,6 +63,11 @@ public class BiomeEntry {
 
 		private Biome.MixedNoisePoint noises;
 
+		/**
+		 * Creates a simple biome that won't spawn in any dimension.
+		 * @param name The name of the biome.
+		 * @param baseBiome The biome itself.
+		 */
 		public Builder(String name, Biome baseBiome) {
 			this.name = name;
 			this.baseBiome = baseBiome;
@@ -96,13 +104,9 @@ public class BiomeEntry {
 		/**
 		 * Builds the entry and registers the biome with all its settings.
 		 */
-		public BiomeEntry build() {
+		public Biome build() {
 			return new BiomeEntry(this.name, this.baseBiome, this.spawnDimension, this.climate, this.weight, this.isSpawnBiome, this.noises).register();
 		}
-	}
-
-	public Biome getBiome() {
-		return biome;
 	}
 
 	public enum SpawnDimension {

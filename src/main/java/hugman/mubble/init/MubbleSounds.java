@@ -1,6 +1,7 @@
 package hugman.mubble.init;
 
 import hugman.mubble.Mubble;
+import hugman.mubble.util.DataWriter;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -114,7 +115,9 @@ public class MubbleSounds {
 	public static final SoundEvent UI_TIMESWAP_TABLE_TAKE_RESULT = register("ui.timeswap_table.take_result");
 
 	private static SoundEvent register(String name) {
-		Identifier path = new Identifier(Mubble.MOD_ID, name);
-		return Registry.register(Registry.SOUND_EVENT, path, new SoundEvent(path));
+		DataWriter.entryNamesData.sounds.add(Mubble.id(name).toString());
+		DataWriter.entryCountsData.sounds++;
+		DataWriter.save();
+		return Registry.register(Registry.SOUND_EVENT, Mubble.id(name), new SoundEvent(Mubble.id(name)));
 	}
 }

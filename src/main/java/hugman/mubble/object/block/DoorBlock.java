@@ -63,7 +63,7 @@ public class DoorBlock extends net.minecraft.block.DoorBlock {
 	}
 
 	private boolean isSmm2Door() {
-		return this == MubbleBlocks.SMB_DOOR.getBlock() || this == MubbleBlocks.SMB3_DOOR.getBlock() || this == MubbleBlocks.SMW_DOOR.getBlock() || this == MubbleBlocks.NSMBU_DOOR.getBlock();
+		return this == MubbleBlocks.SMB_DOOR || this == MubbleBlocks.SMB3_DOOR || this == MubbleBlocks.SMW_DOOR || this == MubbleBlocks.NSMBU_DOOR;
 	}
 
 	public void playToggleSound(World worldIn, BlockPos pos, boolean flag) {
@@ -71,16 +71,16 @@ public class DoorBlock extends net.minecraft.block.DoorBlock {
 	}
 
 	public SoundEvent getOpenSound(Block block) {
-		if(block == MubbleBlocks.SMB_DOOR.getBlock()) {
+		if(block == MubbleBlocks.SMB_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_OPEN_SMB;
 		}
-		else if(block == MubbleBlocks.SMB3_DOOR.getBlock()) {
+		else if(block == MubbleBlocks.SMB3_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_OPEN_SMB3;
 		}
-		else if(block == MubbleBlocks.SMW_DOOR.getBlock()) {
+		else if(block == MubbleBlocks.SMW_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_OPEN_SMW;
 		}
-		else if(block == MubbleBlocks.NSMBU_DOOR.getBlock()) {
+		else if(block == MubbleBlocks.NSMBU_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_OPEN_NSMBU;
 		}
 		else {
@@ -89,16 +89,16 @@ public class DoorBlock extends net.minecraft.block.DoorBlock {
 	}
 
 	public SoundEvent getCloseSound(Block block) {
-		if(block == MubbleBlocks.SMB_DOOR.getBlock()) {
+		if(block == MubbleBlocks.SMB_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_CLOSE_SMB;
 		}
-		else if(block == MubbleBlocks.SMB3_DOOR.getBlock()) {
+		else if(block == MubbleBlocks.SMB3_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_CLOSE_SMB3;
 		}
-		else if(block == MubbleBlocks.SMW_DOOR.getBlock()) {
+		else if(block == MubbleBlocks.SMW_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_CLOSE_SMW;
 		}
-		else if(block == MubbleBlocks.NSMBU_DOOR.getBlock()) {
+		else if(block == MubbleBlocks.NSMBU_DOOR) {
 			return MubbleSounds.BLOCK_DOOR_CLOSE_NSMBU;
 		}
 		else {

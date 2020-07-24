@@ -1,6 +1,6 @@
 package hugman.mubble.mixin;
 
-import hugman.mubble.init.MubbleEffects;
+import hugman.mubble.init.MubbleStatusEffects;
 import hugman.mubble.init.MubbleEnchantments;
 import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.object.item.LightsaberItem;
@@ -28,9 +28,9 @@ public abstract class LivingEntityMixin {
 	@Inject(method = "jump", at = @At(value = "TAIL"), cancellable = true)
 	private void mubble_jump(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
-		if(entity.hasStatusEffect(MubbleEffects.HEAVINESS)) {
+		if(entity.hasStatusEffect(MubbleStatusEffects.HEAVINESS)) {
 			Vec3d vec3d = entity.getVelocity();
-			entity.setVelocity(vec3d.x, vec3d.y - (float) (entity.getStatusEffect(MubbleEffects.HEAVINESS).getAmplifier() + 1) * 0.05F, vec3d.z);
+			entity.setVelocity(vec3d.x, vec3d.y - (float) (entity.getStatusEffect(MubbleStatusEffects.HEAVINESS).getAmplifier() + 1) * 0.05F, vec3d.z);
 		}
 	}
 
@@ -41,7 +41,7 @@ public abstract class LivingEntityMixin {
 		ItemStack headItem = entity.getEquippedStack(EquipmentSlot.HEAD);
 		if(!world.isClient) {
 			if(MubbleTags.Items.WEIGHT_HEAVY.contains(headItem.getItem())) {
-				entity.addStatusEffect(new StatusEffectInstance(MubbleEffects.HEAVINESS, 200, 0, false, false, true));
+				entity.addStatusEffect(new StatusEffectInstance(MubbleStatusEffects.HEAVINESS, 200, 0, false, false, true));
 			}
 		}
 	}
