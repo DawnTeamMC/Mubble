@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 
 public class MubbleFeatures {
-	public static final Feature<HugeFungusFeatureConfig> TALL_HUGE_FUNGUS = register("tall_huge_fungus", new TallHugeFungusFeature(HugeFungusFeatureConfig.CODEC));
+	public static final Feature<HugeFungusFeatureConfig> TALL_HUGE_FUNGI = register("tall_huge_fungus", new TallHugeFungusFeature(HugeFungusFeatureConfig.CODEC));
 	public static final Feature<HugeNetherMushroomFeatureConfig> HUGE_NETHER_MUSHROOM = register("huge_nether_mushroom", new HugeNetherMushroomFeature(HugeNetherMushroomFeatureConfig.CODEC));
 	public static final Feature<SingleStateFeatureConfig> ENDER_BOULDER = register("ender_boulder", new EndBoulderFeature(SingleStateFeatureConfig.CODEC));
 

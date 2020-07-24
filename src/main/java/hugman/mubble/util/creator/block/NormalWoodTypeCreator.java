@@ -18,23 +18,19 @@ public class NormalWoodTypeCreator extends WoodTypeCreator {
 		this.leavesCreator = new LeavesCreator(name);
 	}
 
-	public Block getSapling()
-	{
+	public Block getSapling() {
 		return saplingCreator.getSapling();
 	}
 
-	public Block getPottedSapling()
-	{
+	public Block getPottedSapling() {
 		return saplingCreator.getPottedPlant();
 	}
 
-	public Block getLeaves()
-	{
+	public Block getLeaves() {
 		return leavesCreator.getLeaves();
 	}
 
-	public Block getLeafPile()
-	{
+	public Block getLeafPile() {
 		return leavesCreator.getLeafPile();
 	}
 }

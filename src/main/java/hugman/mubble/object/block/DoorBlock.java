@@ -22,16 +22,16 @@ public class DoorBlock extends net.minecraft.block.DoorBlock {
 	}
 
 	@Override
-	public void setOpen(World worldIn, BlockPos pos, boolean open) {
+	public void setOpen(World world, BlockState state, BlockPos pos, boolean open) {
 		if(isSmm2Door()) {
-			BlockState blockstate = worldIn.getBlockState(pos);
+			BlockState blockstate = world.getBlockState(pos);
 			if(blockstate.getBlock() == this && blockstate.get(OPEN) != open) {
-				worldIn.setBlockState(pos, blockstate.with(OPEN, Boolean.valueOf(open)), 10);
-				this.playToggleSound(worldIn, pos, open);
+				world.setBlockState(pos, blockstate.with(OPEN, Boolean.valueOf(open)), 10);
+				this.playToggleSound(world, pos, open);
 			}
 		}
 		else {
-			super.setOpen(worldIn, pos, open);
+			super.setOpen(world, state, pos, open);
 		}
 	}
 

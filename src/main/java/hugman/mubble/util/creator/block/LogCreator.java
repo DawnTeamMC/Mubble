@@ -1,7 +1,7 @@
 package hugman.mubble.util.creator.block;
 
 import hugman.mubble.object.item.AxeItem;
-import hugman.mubble.util.creator.BlockCreatorHelper;
+import hugman.mubble.util.creator.CreatorHelper;
 import hugman.mubble.util.creator.BlockEntry;
 import hugman.mubble.util.creator.BlockTemplate;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -9,7 +9,7 @@ import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.math.Direction;
 
-public class LogCreator extends BlockCreatorHelper {
+public class LogCreator extends CreatorHelper {
 	private final BlockEntry logEntry;
 	private final BlockEntry strippedLogEntry;
 	private final BlockEntry woodEntry;

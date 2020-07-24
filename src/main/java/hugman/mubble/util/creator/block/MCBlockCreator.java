@@ -2,7 +2,6 @@ package hugman.mubble.util.creator.block;
 
 import com.google.common.collect.ImmutableMap;
 import com.mojang.datafixers.util.Pair;
-import hugman.mubble.util.MoreWordUtils;
 import hugman.mubble.util.creator.BlockEntry;
 import hugman.mubble.util.creator.BlockTemplate;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

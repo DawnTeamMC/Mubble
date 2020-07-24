@@ -3,7 +3,6 @@ package hugman.mubble.util.creator.block;
 import net.minecraft.block.Block;
 import net.minecraft.block.MaterialColor;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
 import java.util.function.Supplier;
@@ -52,13 +51,11 @@ public class NetherWoodTypeCreator extends WoodTypeCreator {
 		return getWoodButton();
 	}
 
-	public Block getFungus()
-	{
+	public Block getFungus() {
 		return fungusCreator.getFungus();
 	}
 
-	public Block getPottedFungus()
-	{
+	public Block getPottedFungus() {
 		return fungusCreator.getPottedPlant();
 	}
 }

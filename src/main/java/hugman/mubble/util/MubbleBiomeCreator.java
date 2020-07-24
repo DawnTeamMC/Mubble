@@ -2,45 +2,78 @@ package hugman.mubble.util;
 
 import com.google.common.collect.ImmutableList;
 import hugman.mubble.init.world.MubbleConfiguredFeatures;
-import hugman.mubble.init.world.MubbleFeatures;
-import net.minecraft.client.sound.MusicType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
-import net.minecraft.sound.BiomeAdditionsSound;
-import net.minecraft.sound.BiomeMoodSound;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEffects;
+import net.minecraft.world.biome.Biomes;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.carver.ConfiguredCarvers;
-import net.minecraft.world.gen.decorator.CountDecorator;
-import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.feature.*;
-import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
 
 public class MubbleBiomeCreator {
+	private static class Util {
+		private static Biome.Settings copyBiomeSettings(Biome biome) {
+			return new Biome.Settings()
+					.surfaceBuilder(biome.getSurfaceBuilder())
+					.precipitation(biome.getPrecipitation())
+					.category(biome.getCategory())
+					.depth(biome.getDepth())
+					.scale(biome.getScale())
+					.temperature(biome.getTemperature())
+					.downfall(biome.getDownfall())
+					.effects(biome.getEffects());
+		}
 
-	public static Biome createGallery() {
-		Biome biome = new Biome((new Biome.Settings())
-				.surfaceBuilder(ConfiguredSurfaceBuilders.NETHER)
-				.precipitation(Biome.Precipitation.NONE)
-				.category(Biome.Category.NETHER)
-				.depth(0.1F)
-				.scale(0.2F)
-				.temperature(2.0F)
-				.downfall(0.0F)
-				.effects((new BiomeEffects.Builder())
-						.waterColor(4159204)
-						.waterFogColor(329011)
-						.fogColor(3344392)
-						.method_30820(getSkyColor(2.0F))
-						.loopSound(SoundEvents.AMBIENT_NETHER_WASTES_LOOP)
-						.moodSound(new BiomeMoodSound(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0D))
-						.additionsSound(new BiomeAdditionsSound(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS, 0.0111D))
-						.music(MusicType.createIngameMusic(SoundEvents.MUSIC_NETHER_NETHER_WASTES))
-						.build())
-				.parent((String)null));
+		private static int getSkyColor(float f) {
+			float g = f / 3.0F;
+			g = MathHelper.clamp(g, -1.0F, 1.0F);
+			return MathHelper.hsvToRgb(0.62222224F - g * 0.05F, 0.5F + g * 0.1F, 1.0F);
+		}
+	}
+
+	public static Biome createTallNetherForest(boolean isWarped) {
+		Biome baseBiome = isWarped ? Biomes.WARPED_FOREST : Biomes.CRIMSON_FOREST;
+		Biome biome = new Biome(Util.copyBiomeSettings(baseBiome).depth(baseBiome.getDepth() * 2).scale(baseBiome.getScale() * 2));
+		biome.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER);
+		biome.addCarver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE);
+		biome.addStructureFeature(ConfiguredStructureFeatures.FORTRESS);
+		biome.addStructureFeature(ConfiguredStructureFeatures.BASTION_REMNANT);
+		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SPRING_LAVA);
+		DefaultBiomeFeatures.addDefaultMushrooms(biome);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_OPEN);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_FIRE);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE_EXTRA);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.ORE_MAGMA);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_CLOSED);
+		DefaultBiomeFeatures.addNetherMineables(biome);
+		if(isWarped)
+		{
+			biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_SOUL_FIRE);
+			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.TALL_WARPED_FUNGI);
+			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.WARPED_FOREST_VEGETATION);
+			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.NETHER_SPROUTS);
+			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.TWISTING_VINES);
+			biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
+			biome.addSpawn(SpawnGroup.CREATURE, new Biome.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
+			biome.addSpawnDensity(EntityType.ENDERMAN, 1.0D, 0.12D);
+		}
+		else
+		{
+			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.WEEPING_VINES);
+			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.TALL_CRIMSON_FUNGI);
+			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.CRIMSON_FOREST_VEGETATION);
+			biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.ZOMBIFIED_PIGLIN, 1, 2, 4));
+			biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.HOGLIN, 9, 3, 4));
+			biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.PIGLIN, 5, 3, 4));
+			biome.addSpawn(SpawnGroup.CREATURE, new Biome.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
+		}
+		return biome;
+	}
+
+	private static Biome createGallery() {
+		Biome biome = new Biome(Util.copyBiomeSettings(Biomes.NETHER_WASTES).parent(Biomes.NETHER_WASTES.toString()));
 		biome.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER);
 		biome.addStructureFeature(ConfiguredStructureFeatures.FORTRESS);
 		biome.addStructureFeature(ConfiguredStructureFeatures.BASTION_REMNANT);
@@ -60,6 +93,62 @@ public class MubbleBiomeCreator {
 		biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
 		biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
 		biome.addSpawn(SpawnGroup.CREATURE, new Biome.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
+		return biome;
+	}
+
+	public static Biome createTritanopianGallery() {
+		Biome biome = createGallery();
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_MUSHROOM_NETHER);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_CYAN_MUSHROOM_NETHER);
+		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_PINK,
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN))
+						.decorate(ConfiguredFeatures.Decorators.field_26165));
+		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_PINK_FLAT,
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN_FLAT))
+						.decorate(ConfiguredFeatures.Decorators.field_26165));
+		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_PINK_UPSIDE,
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN_UPSIDE))
+						.decorate(ConfiguredFeatures.Decorators.field_26165));
+		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_PINK_UPSIDE_FLAT,
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN_UPSIDE_FLAT))
+						.decorate(ConfiguredFeatures.Decorators.field_26165));
+		return biome;
+	}
+
+	public static Biome createAchromatopsianGallery() {
+		Biome biome = createGallery();
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_MUSHROOM_NETHER);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_LIGHT_GRAY_MUSHROOM_NETHER);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_GRAY_MUSHROOM_NETHER);
+		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_BLACK_MUSHROOM_NETHER);
+		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_GRAY,
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BLACK))
+						.decorate(ConfiguredFeatures.Decorators.field_26165));
+		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_GRAY_FLAT,
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BLACK_FLAT))
+						.decorate(ConfiguredFeatures.Decorators.field_26165));
+		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_WHITE_UPSIDE,
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_LIGHT_GRAY_UPSIDE))
+						.decorate(ConfiguredFeatures.Decorators.field_26165));
+		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_WHITE_UPSIDE_FLAT,
+						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_LIGHT_GRAY_UPSIDE_FLAT))
+						.decorate(ConfiguredFeatures.Decorators.field_26165));
 		return biome;
 	}
 
@@ -96,11 +185,5 @@ public class MubbleBiomeCreator {
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BLUE_UPSIDE_FLAT))
 						.decorate(ConfiguredFeatures.Decorators.field_26165));
 		return biome;
-	}
-
-	private static int getSkyColor(float f) {
-		float g = f / 3.0F;
-		g = MathHelper.clamp(g, -1.0F, 1.0F);
-		return MathHelper.hsvToRgb(0.62222224F - g * 0.05F, 0.5F + g * 0.1F, 1.0F);
 	}
 }

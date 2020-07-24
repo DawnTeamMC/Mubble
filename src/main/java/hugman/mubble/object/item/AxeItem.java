@@ -1,11 +1,8 @@
 package hugman.mubble.object.item;
 
 import com.google.common.collect.ImmutableMap.Builder;
-import hugman.mubble.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.ToolMaterial;
-
-import java.util.Map;
 
 public class AxeItem extends net.minecraft.item.AxeItem {
 	public static final Builder<Block, Block> BLOCK_STRIPPING_MAP = new Builder<Block, Block>().putAll(STRIPPED_BLOCKS);

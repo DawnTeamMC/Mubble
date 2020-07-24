@@ -31,9 +31,9 @@ public class PileBlock extends PlantBlock {
 	}
 
 	@Override
-	public boolean canPlaceAt(BlockState state, WorldView worldIn, BlockPos pos) {
+	public boolean canPlaceAt(BlockState state, WorldView world, BlockPos pos) {
 		BlockPos blockpos = pos.offset(Direction.DOWN);
-		BlockState blockstate = worldIn.getBlockState(blockpos);
-		return Block.isSideSolidFullSquare(blockstate, worldIn, blockpos, Direction.UP);
+		BlockState blockState = world.getBlockState(blockpos);
+		return Block.isFaceFullSquare(blockState.getCollisionShape(world, blockpos), Direction.UP);
 	}
 }

@@ -30,16 +30,12 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 	public TimeswapTableScreen(TimeswapTableScreenHandler handler, PlayerInventory inventory, Text title) {
 		super(handler, inventory, title);
 		handler.setContentsChangedListener(this::onInventoryChange);
+		--this.titleY;
 	}
 
 	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
 		super.render(matrices, mouseX, mouseY, delta);
 		this.drawMouseoverTooltip(matrices, mouseX, mouseY);
-	}
-
-	protected void drawForeground(MatrixStack matrices, int mouseX, int mouseY) {
-		this.textRenderer.draw(matrices, this.title, 8.0F, 4.0F, 4210752);
-		this.textRenderer.draw(matrices, this.playerInventory.getDisplayName(), 8.0F, (float) (this.backgroundHeight - 94), 4210752);
 	}
 
 	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {

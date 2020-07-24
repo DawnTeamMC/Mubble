@@ -36,7 +36,6 @@ public class Mubble implements ModInitializer {
 		// World
 		new MubbleBiomes();
 		new MubbleFeatures();
-		MubbleBiomes.initBiomeGeneration();
 		MubbleGenerators.init();
 	}
 	

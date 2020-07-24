@@ -1,5 +1,7 @@
 package hugman.mubble.object.block;
 
+import hugman.mubble.init.MubbleBlocks;
+import hugman.mubble.init.world.MubbleConfiguredFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.NyliumBlock;
@@ -8,9 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.chunk.light.ChunkLightProvider;
-import net.minecraft.world.gen.feature.DefaultBiomeFeatures;
 import net.minecraft.world.gen.feature.NetherForestVegetationFeature;
-import net.minecraft.world.gen.feature.TwistingVinesFeature;
 
 import java.util.Random;
 
@@ -35,16 +35,8 @@ public class DyliumBlock extends NyliumBlock {
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		BlockState blockState = world.getBlockState(pos);
 		BlockPos blockPos = pos.up();
-		// TODO
-		if(blockState.isOf(Blocks.CRIMSON_NYLIUM)) {
-			NetherForestVegetationFeature.method_26264(world, random, blockPos, DefaultBiomeFeatures.CRIMSON_ROOTS_CONFIG, 3, 1);
-		}
-		else if(blockState.isOf(Blocks.WARPED_NYLIUM)) {
-			NetherForestVegetationFeature.method_26264(world, random, blockPos, DefaultBiomeFeatures.WARPED_ROOTS_CONFIG, 3, 1);
-			NetherForestVegetationFeature.method_26264(world, random, blockPos, DefaultBiomeFeatures.NETHER_SPROUTS_CONFIG, 3, 1);
-			if(random.nextInt(8) == 0) {
-				TwistingVinesFeature.method_26265(world, random, blockPos, 3, 1, 2);
-			}
+		if(blockState.isOf(MubbleBlocks.AMARANTH_DYLIUM.getBlock())) {
+			NetherForestVegetationFeature.method_26264(world, random, blockPos, MubbleConfiguredFeatures.Configs.AMARANTH_ROOTS, 3, 1);
 		}
 	}
 }

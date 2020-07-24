@@ -4,7 +4,6 @@ import hugman.mubble.object.block.FungusBlock;
 import hugman.mubble.util.creator.BlockTemplate;
 import net.minecraft.block.Block;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
 
 import java.util.function.Supplier;

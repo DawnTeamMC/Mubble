@@ -25,9 +25,9 @@ dependencies {
 
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-	modImplementation "vazkii.patchouli:Patchouli_1.16-fabric:${patchouli_version}-FABRIC"
+	//modImplementation "vazkii.patchouli:Patchouli_1.16-fabric:${patchouli_version}-FABRIC"
 
-	modImplementation "io.github.prospector:modmenu:${modmenu_version}"
+	//modImplementation "io.github.prospector:modmenu:${modmenu_version}"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
