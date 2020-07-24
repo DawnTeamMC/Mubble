@@ -11,12 +11,12 @@ public class PottedPlantCreator {
 	private final BlockEntry plantEntry;
 	private final BlockEntry pottedPlantEntry;
 
-	protected PottedPlantCreator(String name, Block plantBlock) {
-		this.plantEntry = new BlockEntry.Builder(name, plantBlock).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
-		this.pottedPlantEntry = new BlockEntry.Builder("potted_" + name, new FlowerPotBlock(getPlant(), BlockTemplate.pottedPlantSettings.lightLevel(plantBlock.getDefaultState().getLuminance()))).setRenderLayer(RenderLayer.getCutout()).noItem().build();
+	public PottedPlantCreator(BlockEntry entry) {
+		this.plantEntry = entry;
+		this.pottedPlantEntry = new BlockEntry.Builder("potted_" + entry.getName(), new FlowerPotBlock(getPlant(), BlockTemplate.POTTED_PLANT_SETTINGS.lightLevel(entry.getBlock().getDefaultState().getLuminance()))).setRenderLayer(RenderLayer.getCutout()).noItem().build();
 	}
 
-	protected Block getPlant() {
+	public Block getPlant() {
 		return this.plantEntry.getBlock();
 	}
 

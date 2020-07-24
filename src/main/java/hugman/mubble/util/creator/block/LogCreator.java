@@ -32,7 +32,7 @@ public class LogCreator extends CreatorHelper {
 	}
 
 	protected Block createLog(MaterialColor color) {
-		FabricBlockSettings settings = isNether ? BlockTemplate.stemSettings : BlockTemplate.normalLogSettings;
+		FabricBlockSettings settings = isNether ? BlockTemplate.STEM_SETTINGS : BlockTemplate.NORMAL_LOG_SETTINGS;
 		return new PillarBlock(settings.materialColor(color));
 	}
 

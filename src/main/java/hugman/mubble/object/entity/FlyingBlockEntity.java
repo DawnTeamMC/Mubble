@@ -252,7 +252,7 @@ public class FlyingBlockEntity extends Entity {
 			this.blockEntityData = compound.getCompound("TileEntityData");
 		}
 		if(this.block.getBlock() instanceof AirBlock) {
-			this.block = MubbleBlocks.WHITE_BALLOON.getDefaultState();
+			this.block = MubbleBlocks.WHITE_BALLOON.getBlock().getDefaultState();
 		}
 
 	}

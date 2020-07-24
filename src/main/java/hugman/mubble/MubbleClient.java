@@ -2,7 +2,6 @@ package hugman.mubble;
 
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.client.MubbleColorMaps;
-import hugman.mubble.init.client.MubbleRenderLayers;
 import hugman.mubble.init.client.MubbleScreens;
 import hugman.mubble.object.entity.render.*;
 import hugman.mubble.object.event.LightsaberEvents;
@@ -16,7 +15,6 @@ public class MubbleClient implements ClientModInitializer {
 		MubbleScreens.init();
 		MubbleColorMaps.registerBlockColors();
 		MubbleColorMaps.registerItemColors();
-		MubbleRenderLayers.init();
 		registerEntityRenders();
 		LightsaberEvents.init();
 	}

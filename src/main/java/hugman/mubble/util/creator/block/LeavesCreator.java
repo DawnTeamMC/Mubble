@@ -10,8 +10,8 @@ public class LeavesCreator {
 	private final BlockEntry leafPileEntry;
 
 	public LeavesCreator(String name) {
-		this.leavesEntry = new BlockEntry.Builder(name, BlockTemplate.LEAVES, BlockTemplate.leavesSettings).copy(Blocks.OAK_LEAVES).build();
-		this.leafPileEntry = new BlockEntry.Builder(name, BlockTemplate.PILE, BlockTemplate.leafPileSettings).copy(Blocks.OAK_LEAVES).build();
+		this.leavesEntry = new BlockEntry.Builder(name, BlockTemplate.LEAVES, BlockTemplate.LEAVES_SETTINGS).copy(Blocks.OAK_LEAVES).build();
+		this.leafPileEntry = new BlockEntry.Builder(name, BlockTemplate.PILE, BlockTemplate.LEAF_PILE_SETTINGS).copy(Blocks.OAK_LEAVES).build();
 	}
 
 	public Block getLeaves() {

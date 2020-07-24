@@ -1,20 +1,21 @@
 package hugman.mubble.util.creator.block;
 
+import hugman.mubble.util.creator.BlockEntry;
 import hugman.mubble.util.creator.BlockTemplate;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MaterialColor;
 
 public class WoodTypeCreator {
-	private final BlockCreator planksCreator;
+	private final BlockEntry planksEntry;
 	private final LogCreator logCreator;
 	private final MSBlockCreator planksBlocksCreator;
 	private final MSBlockCreator woodBlocksCreator;
 
 	public WoodTypeCreator(String name, MaterialColor planksColor, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
-		this.planksCreator = new BlockCreator(name, BlockTemplate.PLANKS, isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS, planksColor);
+		this.planksEntry = new BlockEntry.Builder(name, BlockTemplate.PLANKS, isNether ? Blocks.CRIMSON_PLANKS : Blocks.OAK_PLANKS, planksColor).build();
 		this.logCreator = new LogCreator(name, insideColor, barkColor, isNether);
-		this.planksBlocksCreator = new MSBlockCreator(name, this.planksCreator.getBlock(),
+		this.planksBlocksCreator = new MSBlockCreator(name, this.planksEntry.getBlock(),
 				BlockTemplate.STAIRS,
 				BlockTemplate.SLAB,
 				BlockTemplate.VERTICAL_SLAB,
@@ -32,7 +33,7 @@ public class WoodTypeCreator {
 	}
 
 	public Block getPlanks() {
-		return planksCreator.getBlock();
+		return planksEntry.getBlock();
 	}
 
 	public Block getLog() {

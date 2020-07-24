@@ -3,7 +3,6 @@ package hugman.mubble.init.world;
 import hugman.mubble.Mubble;
 import hugman.mubble.util.MubbleBiomeCreator;
 import hugman.mubble.util.creator.BiomeEntry;
-import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;

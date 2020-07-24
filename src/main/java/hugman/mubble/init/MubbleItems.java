@@ -15,13 +15,13 @@ import net.minecraft.util.registry.Registry;
 public class MubbleItems {
 	/* MUBBLE */
 	public static final Item WHEAT_FLOUR = register("wheat_flour", new Item(new Item.Settings().group(ItemGroup.FOOD)));
-	public static final Item TOMATO = register("tomato", new BlockItem(MubbleBlocks.TOMATOES, new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.TOMATO)));
-	public static final Item SALAD = register("salad", new BlockItem(MubbleBlocks.SALAD, new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.SALAD)));
+	public static final Item TOMATO = register("tomato", new BlockItem(MubbleBlocks.TOMATOES.getBlock(), new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.TOMATO)));
+	public static final Item SALAD = register("salad", new BlockItem(MubbleBlocks.SALAD.getBlock(), new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.SALAD)));
 	public static final Item CHEESE = register("cheese", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.CHEESE)));
 	public static final Item BANANA = register("banana", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.BANANA)));
 	public static final Item APRICOT = register("apricot", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.APRICOT)));
 	public static final Item MANGO = register("mango", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.MANGO)));
-	public static final Item BLUEBERRIES = register("blueberries", new BlockItem(MubbleBlocks.BLUEBERRY_BUSH, new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.BLUEBERRIES)));
+	public static final Item BLUEBERRIES = register("blueberries", new BlockItem(MubbleBlocks.BLUEBERRY_BUSH.getBlock(), new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.BLUEBERRIES)));
 	public static final Item DUCK = register("duck", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.DUCK)));
 	public static final Item COOKED_DUCK = register("cooked_duck", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.COOKED_DUCK)));
 	public static final Item CARAMEL_CUBE = register("caramel_cube", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.CARAMEL_CUBE)));

@@ -14,8 +14,8 @@ import org.apache.logging.log4j.Logger;
 
 public class Mubble implements ModInitializer {
 	public static final String MOD_ID = "mubble";
-	public static final String MOD_PREFIX = MOD_ID + ":";
 	public static final Logger LOGGER = LogManager.getLogger();
+	public static final boolean IS_DEBUG = false;
 
 	@Override
 	public void onInitialize() {

@@ -1,19 +1,14 @@
 package hugman.mubble.init;
 
-import hugman.mubble.Mubble;
 import hugman.mubble.init.data.MubbleSoundTypes;
 import hugman.mubble.init.world.MubbleConfiguredFeatures;
 import hugman.mubble.object.block.CakeBlock;
-import hugman.mubble.object.block.DoorBlock;
 import hugman.mubble.object.block.GrassBlock;
 import hugman.mubble.object.block.MushroomPlantBlock;
 import hugman.mubble.object.block.NoteBlock;
 import hugman.mubble.object.block.OreBlock;
-import hugman.mubble.object.block.PressurePlateBlock;
 import hugman.mubble.object.block.RootsBlock;
-import hugman.mubble.object.block.StairsBlock;
-import hugman.mubble.object.block.TrapdoorBlock;
-import hugman.mubble.object.block.WoodButtonBlock;
+import hugman.mubble.object.block.SaplingBlock;
 import hugman.mubble.object.block.*;
 import hugman.mubble.object.block.sapling_generator.*;
 import hugman.mubble.util.creator.BlockEntry;
@@ -21,20 +16,14 @@ import hugman.mubble.util.creator.BlockEntry.Builder;
 import hugman.mubble.util.creator.BlockTemplate;
 import hugman.mubble.util.creator.block.*;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.AbstractBlock.Settings;
 import net.minecraft.block.*;
-import net.minecraft.block.PressurePlateBlock.ActivationRule;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.DyeColor;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,12 +87,12 @@ public class MubbleBlocks {
 	public static final MSBlockCreator CRIMSON_HYPHAE_BLOCKS = new MSBlockCreator("crimson_hyphae", Blocks.CRIMSON_HYPHAE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WOOD_BUTTON);
 	public static final MSBlockCreator WARPED_HYPHAE_BLOCKS = new MSBlockCreator("warped_hyphae", Blocks.WARPED_HYPHAE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WOOD_BUTTON);
 
-	public static final BlockEntry OAK_LEAF_PILE = new Builder("oak", BlockTemplate.PILE, BlockTemplate.leafPileSettings).copy(Blocks.OAK_LEAVES).build();
-	public static final BlockEntry SPRUCE_LEAF_PILE = new Builder("spruce", BlockTemplate.PILE, BlockTemplate.leafPileSettings).copy(Blocks.OAK_LEAVES).build();
-	public static final BlockEntry BIRCH_LEAF_PILE = new Builder("birch", BlockTemplate.PILE, BlockTemplate.leafPileSettings).copy(Blocks.OAK_LEAVES).build();
-	public static final BlockEntry JUNGLE_LEAF_PILE = new Builder("jungle", BlockTemplate.PILE, BlockTemplate.leafPileSettings).copy(Blocks.OAK_LEAVES).build();
-	public static final BlockEntry ACACIA_LEAF_PILE = new Builder("acacia", BlockTemplate.PILE, BlockTemplate.leafPileSettings).copy(Blocks.OAK_LEAVES).build();
-	public static final BlockEntry DARK_OAK_LEAF_PILE = new Builder("dark_oak", BlockTemplate.PILE, BlockTemplate.leafPileSettings).copy(Blocks.OAK_LEAVES).build();
+	public static final BlockEntry OAK_LEAF_PILE = new Builder("oak", BlockTemplate.PILE, BlockTemplate.LEAF_PILE_SETTINGS).copy(Blocks.OAK_LEAVES).build();
+	public static final BlockEntry SPRUCE_LEAF_PILE = new Builder("spruce", BlockTemplate.PILE, BlockTemplate.LEAF_PILE_SETTINGS).copy(Blocks.OAK_LEAVES).build();
+	public static final BlockEntry BIRCH_LEAF_PILE = new Builder("birch", BlockTemplate.PILE, BlockTemplate.LEAF_PILE_SETTINGS).copy(Blocks.OAK_LEAVES).build();
+	public static final BlockEntry JUNGLE_LEAF_PILE = new Builder("jungle", BlockTemplate.PILE, BlockTemplate.LEAF_PILE_SETTINGS).copy(Blocks.OAK_LEAVES).build();
+	public static final BlockEntry ACACIA_LEAF_PILE = new Builder("acacia", BlockTemplate.PILE, BlockTemplate.LEAF_PILE_SETTINGS).copy(Blocks.OAK_LEAVES).build();
+	public static final BlockEntry DARK_OAK_LEAF_PILE = new Builder("dark_oak", BlockTemplate.PILE, BlockTemplate.LEAF_PILE_SETTINGS).copy(Blocks.OAK_LEAVES).build();
 
 	public static final MSBlockCreator COBBLESTONE_BRICKS = new MSBlockCreator("cobblestone_bricks", Blocks.MOSSY_COBBLESTONE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
 	public static final MSBlockCreator MOSSY_COBBLESTONE_BRICKS = new MSBlockCreator("mossy_cobblestone_bricks", Blocks.MOSSY_COBBLESTONE, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
@@ -128,35 +117,16 @@ public class MubbleBlocks {
 	public static final BlockEntry VANADIUM_ORE = new Builder("vanadium_ore", new OreBlock(Settings.copy(Blocks.DIAMOND_ORE))).copy(Blocks.DIAMOND_ORE).build();
 	public static final BlockEntry VANADIUM_BLOCK = new Builder("vanadium_block", BlockTemplate.CUBE, Blocks.DIAMOND_BLOCK, MaterialColor.MAGENTA).build();
 
-	public static final SaplingCreator AUTUMN_OAK_SAPLING = new SaplingCreator("autumn_oak", new AutumnOakSaplingGenerator());
+	public static final PottedPlantCreator AUTUMN_OAK_SAPLING = new PottedPlantCreator(new Builder("autumn_oak_sapling", new SaplingBlock(new AutumnOakSaplingGenerator(), BlockTemplate.SAPLING_SETTINGS)).build());
 	public static final LeavesCreator AUTUMN_OAK_LEAVES = new LeavesCreator("autumn_oak");
-	public static final SaplingCreator AUTUMN_BIRCH_SAPLING = new SaplingCreator("autumn_birch", new AutumnBirchSaplingGenerator());
+	public static final PottedPlantCreator AUTUMN_BIRCH_SAPLING = new PottedPlantCreator(new Builder("autumn_birch_sapling", new SaplingBlock(new AutumnBirchSaplingGenerator(), BlockTemplate.SAPLING_SETTINGS)).build());
 	public static final LeavesCreator AUTUMN_BIRCH_LEAVES = new LeavesCreator("autumn_birch");
 
-	public static final Block CHERRY_OAK_PLANKS = register("cherry_oak_planks", new Block(Settings.copy(Blocks.DARK_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final SaplingCreator PINK_CHERRY_OAK_SAPLING = new SaplingCreator("pink_cherry_oak", new PinkCherryOakSaplingGenerator());
-	public static final SaplingCreator WHITE_CHERRY_OAK_SAPLING = new SaplingCreator("white_cherry_oak", new WhiteCherryOakSaplingGenerator());
-	public static final Block CHERRY_OAK_LOG = register("cherry_oak_log", new PillarBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 5);
-	public static final Block STRIPPED_CHERRY_OAK_LOG = register("stripped_cherry_oak_log", new PillarBlock(Settings.copy(CHERRY_OAK_LOG)), ItemGroup.BUILDING_BLOCKS, 5, 5);
-	public static final Block CHERRY_OAK_WOOD = register("cherry_oak_wood", new PillarBlock(Settings.copy(CHERRY_OAK_LOG)), ItemGroup.BUILDING_BLOCKS, 5, 5);
-	public static final Block STRIPPED_CHERRY_OAK_WOOD = register("stripped_cherry_oak_wood", new PillarBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 5);
-	public static final Block PINK_CHERRY_OAK_LEAVES = register("pink_cherry_oak_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block PINK_CHERRY_OAK_LEAF_PILE = register("pink_cherry_oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
-	public static final Block WHITE_CHERRY_OAK_LEAVES = register("white_cherry_oak_leaves", new LeavesBlock(pLeaves), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block WHITE_CHERRY_OAK_LEAF_PILE = register("white_cherry_oak_leaf_pile", new PileBlock(FabricBlockSettings.of(Material.LEAVES).hardness(0.1F).sounds(BlockSoundGroup.GRASS).noCollision()), ItemGroup.DECORATIONS, 60, 20);
-	public static final Block CHERRY_OAK_PRESSURE_PLATE = register("cherry_oak_pressure_plate", new PressurePlateBlock(ActivationRule.EVERYTHING, FabricBlockSettings.copy(MubbleBlocks.CHERRY_OAK_PLANKS).strength(0.5F, 0.0F).noCollision()), ItemGroup.REDSTONE);
-	public static final Block CHERRY_OAK_TRAPDOOR = register("cherry_oak_trapdoor", new TrapdoorBlock(Settings.copy(MubbleBlocks.CHERRY_OAK_PLANKS)), ItemGroup.REDSTONE);
-	public static final Block CHERRY_OAK_BUTTON = register("cherry_oak_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
-	public static final Block CHERRY_OAK_STAIRS = register("cherry_oak_stairs", new StairsBlock(CHERRY_OAK_PLANKS), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CHERRY_OAK_SLAB = register("cherry_oak_slab", new SlabBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CHERRY_OAK_VERTICAL_SLAB = register("cherry_oak_vertical_slab", new VerticalSlabBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CHERRY_OAK_FENCE_GATE = register("cherry_oak_fence_gate", new FenceGateBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.REDSTONE, 5, 20);
-	public static final Block CHERRY_OAK_FENCE = register("cherry_oak_fence", new FenceBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.DECORATIONS, 5, 20);
-	public static final Block CHERRY_OAK_DOOR = register("cherry_oak_door", new DoorBlock(Settings.copy(CHERRY_OAK_PLANKS)), ItemGroup.REDSTONE);
-	public static final Block CHERRY_OAK_WOOD_STAIRS = register("cherry_oak_wood_stairs", new StairsBlock(CHERRY_OAK_WOOD), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CHERRY_OAK_WOOD_SLAB = register("cherry_oak_wood_slab", new SlabBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CHERRY_OAK_WOOD_VERTICAL_SLAB = register("cherry_oak_wood_vertical_slab", new VerticalSlabBlock(Settings.copy(CHERRY_OAK_WOOD)), ItemGroup.BUILDING_BLOCKS, 5, 20);
-	public static final Block CHERRY_OAK_WOOD_BUTTON = register("cherry_oak_wood_button", new WoodButtonBlock(FabricBlockSettings.of(Material.SUPPORTED).collidable(false).hardness(0.5F).sounds(BlockSoundGroup.WOOD)), ItemGroup.REDSTONE);
+	public static final WoodTypeCreator CHERRY_OAK_WOOD = new WoodTypeCreator("cherry_oak", MaterialColor.field_25702, MaterialColor.field_25703, MaterialColor.field_25707, false);
+	public static final PottedPlantCreator PINK_CHERRY_OAK_SAPLING = new PottedPlantCreator(new Builder("pink_cherry_oak_sapling", new SaplingBlock(new PinkCherryOakSaplingGenerator(), BlockTemplate.SAPLING_SETTINGS)).build());
+	public static final PottedPlantCreator WHITE_CHERRY_OAK_SAPLING = new PottedPlantCreator(new Builder("white_cherry_oak_sapling", new SaplingBlock(new WhiteCherryOakSaplingGenerator(), BlockTemplate.SAPLING_SETTINGS)).build());
+	public static final LeavesCreator PINK_CHERRY_OAK_LEAVES = new LeavesCreator("pink_cherry_oak");
+	public static final LeavesCreator WHITE_CHERRY_OAK_LEAVES = new LeavesCreator("white_cherry_oak");
 
 	public static final NormalWoodTypeCreator PALM_WOOD = new NormalWoodTypeCreator("palm", new PalmSaplingGenerator(), MaterialColor.ORANGE, MaterialColor.CYAN_TERRACOTTA);
 
@@ -178,358 +148,311 @@ public class MubbleBlocks {
 	public static final BlockEntry GREEN_CHRISTMAS_BAUBLE = new Builder("green_christmas_bauble", new Block(FabricBlockSettings.of(Material.GLASS, MaterialColor.GREEN_TERRACOTTA).hardness(0.3F).sounds(BlockSoundGroup.GLASS))).setItemGroup(ItemGroup.DECORATIONS).build();
 	public static final BlockEntry WHITE_CHRISTMAS_BAUBLE = new Builder("white_christmas_bauble", new Block(FabricBlockSettings.of(Material.GLASS, MaterialColor.WHITE_TERRACOTTA).hardness(0.3F).sounds(BlockSoundGroup.GLASS))).setItemGroup(ItemGroup.DECORATIONS).build();
 
-	public static final BlockEntry RED_SHINY_GARLAND = new Builder("red_shiny_garland", new GarlandBlock(FabricBlockSettings.of(Material.LEAVES, MaterialColor.RED).hardness(0.2F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).build();
-	public static final BlockEntry SILVER_SHINY_GARLAND = new Builder("silver_shiny_garland", new GarlandBlock(FabricBlockSettings.of(Material.LEAVES, MaterialColor.CLAY).hardness(0.2F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).build();
-	public static final BlockEntry GOLD_SHINY_GARLAND = new Builder("gold_shiny_garland", new GarlandBlock(FabricBlockSettings.of(Material.LEAVES, MaterialColor.GOLD).hardness(0.2F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).build();
+	public static final BlockEntry RED_SHINY_GARLAND = new Builder("red_shiny_garland", new GarlandBlock(FabricBlockSettings.of(Material.LEAVES, MaterialColor.RED).hardness(0.2F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry SILVER_SHINY_GARLAND = new Builder("silver_shiny_garland", new GarlandBlock(FabricBlockSettings.of(Material.LEAVES, MaterialColor.CLAY).hardness(0.2F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry GOLD_SHINY_GARLAND = new Builder("gold_shiny_garland", new GarlandBlock(FabricBlockSettings.of(Material.LEAVES, MaterialColor.GOLD).hardness(0.2F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
 
-	public static final BlockEntry WHITE_PRESENT = new Builder("white_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).build();
-	public static final BlockEntry BLACK_PRESENT = new Builder("black_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.BLACK_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).build();
-	public static final BlockEntry BLUE_PRESENT = new Builder("blue_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.BLUE_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).build();
-	public static final BlockEntry GREEN_PRESENT = new Builder("green_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.GREEN_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).build();
-	public static final BlockEntry YELLOW_PRESENT = new Builder("yellow_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.YELLOW_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).build();
-	public static final BlockEntry RED_PRESENT = new Builder("red_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.RED_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).build();
-	public static final BlockEntry PURPLE_PRESENT = new Builder("purple_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.PURPLE_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).build();
-	public static final BlockEntry GOLDEN_PRESENT = new Builder("golden_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.GOLD).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).build();
+	public static final BlockEntry WHITE_PRESENT = new Builder("white_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.WHITE_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry BLACK_PRESENT = new Builder("black_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.BLACK_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry BLUE_PRESENT = new Builder("blue_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.BLUE_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry GREEN_PRESENT = new Builder("green_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.GREEN_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry YELLOW_PRESENT = new Builder("yellow_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.YELLOW_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry RED_PRESENT = new Builder("red_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.RED_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry PURPLE_PRESENT = new Builder("purple_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.PURPLE_TERRACOTTA).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry GOLDEN_PRESENT = new Builder("golden_present", new PresentBlock(FabricBlockSettings.of(Material.WOOD, MaterialColor.GOLD).hardness(0.8F).sounds(BlockSoundGroup.WOOD))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 60).setRenderLayer(RenderLayer.getCutoutMipped()).build();
 
-	public static final CubeBlockCreator FOOTBLOCK = new CubeBlockCreator("footblock", Blocks.WHITE_WOOL, ItemGroup.DECORATIONS);
+	public static final BlockEntry FOOTBLOCK = new Builder("footblock", BlockTemplate.CUBE, Blocks.WHITE_WOOL).setItemGroup(ItemGroup.DECORATIONS).build();
 
 	public static final MCBlockCreator CLOUD_BLOCKS = new MCBlockCreator(BlockTemplate.CLOUD_BLOCK, FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision());
 
-	public static final Block TOMATOES = register("tomatoes", new CropsBlock());
-	public static final Block SALAD = register("salad", new CropsBlock());
+	public static final BlockEntry TOMATOES = new Builder("tomatoes", new CropsBlock()).setRenderLayer(RenderLayer.getCutout()).noItem().build();
+	public static final BlockEntry SALAD = new Builder("salad", new CropsBlock()).setRenderLayer(RenderLayer.getCutout()).noItem().build();
 
-	public static final Block BLUEBERRY_BUSH = register("blueberry_bush", new BerryBushBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH)), 60, 100);
-	public static final Block CHEESE_BLOCK = register("cheese_block", new Block(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.YELLOW).hardness(0.5f).sounds(BlockSoundGroup.SNOW)), ItemGroup.FOOD, 60, 60);
-	public static final Block CHOCOLATE_CAKE = register("chocolate_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL)), ItemGroup.FOOD);
-	public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = register("minecraft_10th_anniversary_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL)), ItemGroup.FOOD);
+	public static final BlockEntry BLUEBERRY_BUSH = new Builder("blueberry_bush", new BerryBushBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH))).setFlammability(60, 100).setRenderLayer(RenderLayer.getCutout()).noItem().build();
+	public static final BlockEntry CHEESE_BLOCK = new Builder("cheese_block", new Block(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.YELLOW).hardness(0.5f).sounds(BlockSoundGroup.SNOW))).setFlammability(60, 60).setItemGroup(ItemGroup.FOOD).build();
+	public static final BlockEntry CHOCOLATE_CAKE = new Builder("chocolate_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).setItemGroup(ItemGroup.FOOD).build();
+	public static final BlockEntry MINECRAFT_10TH_ANNIVERSARY_CAKE = new Builder("minecraft_10th_anniversary_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).setItemGroup(ItemGroup.FOOD).build();
 
-	public static final Block WHITE_BALLOON = register("white_balloon", new BalloonBlock(DyeColor.WHITE), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block LIGHT_GRAY_BALLOON = register("light_gray_balloon", new BalloonBlock(DyeColor.LIGHT_GRAY), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block GRAY_BALLOON = register("gray_balloon", new BalloonBlock(DyeColor.GRAY), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block BLACK_BALLOON = register("black_balloon", new BalloonBlock(DyeColor.BLACK), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block BROWN_BALLOON = register("brown_balloon", new BalloonBlock(DyeColor.BROWN), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block RED_BALLOON = register("red_balloon", new BalloonBlock(DyeColor.RED), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block ORANGE_BALLOON = register("orange_balloon", new BalloonBlock(DyeColor.ORANGE), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block YELLOW_BALLOON = register("yellow_balloon", new BalloonBlock(DyeColor.YELLOW), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block LIME_BALLOON = register("lime_balloon", new BalloonBlock(DyeColor.LIME), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block GREEN_BALLOON = register("green_balloon", new BalloonBlock(DyeColor.GREEN), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block CYAN_BALLOON = register("cyan_balloon", new BalloonBlock(DyeColor.CYAN), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block LIGHT_BLUE_BALLOON = register("light_blue_balloon", new BalloonBlock(DyeColor.LIGHT_BLUE), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block BLUE_BALLOON = register("blue_balloon", new BalloonBlock(DyeColor.BLUE), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block PURPLE_BALLOON = register("purple_balloon", new BalloonBlock(DyeColor.PURPLE), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block MAGENTA_BALLOON = register("magenta_balloon", new BalloonBlock(DyeColor.MAGENTA), ItemGroup.DECORATIONS, 30, 60);
-	public static final Block PINK_BALLOON = register("pink_balloon", new BalloonBlock(DyeColor.PINK), ItemGroup.DECORATIONS, 30, 60);
+	public static final BlockEntry WHITE_BALLOON = new Builder("white_balloon", new BalloonBlock(DyeColor.WHITE)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry LIGHT_GRAY_BALLOON = new Builder("light_gray_balloon", new BalloonBlock(DyeColor.LIGHT_GRAY)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry GRAY_BALLOON = new Builder("gray_balloon", new BalloonBlock(DyeColor.GRAY)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry BLACK_BALLOON = new Builder("black_balloon", new BalloonBlock(DyeColor.BLACK)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry BROWN_BALLOON = new Builder("brown_balloon", new BalloonBlock(DyeColor.BROWN)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry RED_BALLOON = new Builder("red_balloon", new BalloonBlock(DyeColor.RED)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry ORANGE_BALLOON = new Builder("orange_balloon", new BalloonBlock(DyeColor.ORANGE)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry YELLOW_BALLOON = new Builder("yellow_balloon", new BalloonBlock(DyeColor.YELLOW)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry LIME_BALLOON = new Builder("lime_balloon", new BalloonBlock(DyeColor.LIME)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry GREEN_BALLOON = new Builder("green_balloon", new BalloonBlock(DyeColor.GREEN)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry CYAN_BALLOON = new Builder("cyan_balloon", new BalloonBlock(DyeColor.CYAN)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry LIGHT_BLUE_BALLOON = new Builder("light_blue_balloon", new BalloonBlock(DyeColor.LIGHT_BLUE)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry BLUE_BALLOON = new Builder("blue_balloon", new BalloonBlock(DyeColor.BLUE)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry PURPLE_BALLOON = new Builder("purple_balloon", new BalloonBlock(DyeColor.PURPLE)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry MAGENTA_BALLOON = new Builder("magenta_balloon", new BalloonBlock(DyeColor.MAGENTA)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry PINK_BALLOON = new Builder("pink_balloon", new BalloonBlock(DyeColor.PINK)).setItemGroup(ItemGroup.DECORATIONS).setFlammability(30, 60).setRenderLayer(RenderLayer.getTranslucent()).build();
 
-	public static final BlockCreator UNSTABLE_STONE = new BlockCreator("unstable_stone", new UnstableBlock(FabricBlockSettings.copy(Blocks.STONE).strength(0.1F, 0.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator FLUID_TANK = new BlockCreator("fluid_tank", new FluidTankBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).nonOpaque()), ItemGroup.REDSTONE, RenderLayer.getCutoutMipped());
-	public static final BlockCreator PLACER = new BlockCreator("placer", new PlacerBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F)), ItemGroup.REDSTONE);
-	public static final BlockCreator TIMESWAP_TABLE = new BlockCreator("timeswap_table", new TimeswapTableBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F)), ItemGroup.DECORATIONS);
+	public static final BlockEntry UNSTABLE_STONE = new Builder("unstable_stone", new UnstableBlock(FabricBlockSettings.copy(Blocks.STONE).strength(0.1F, 0.0F))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry FLUID_TANK = new Builder("fluid_tank", new FluidTankBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).nonOpaque())).setItemGroup(ItemGroup.REDSTONE).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry PLACER = new Builder("placer", new PlacerBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F))).setItemGroup(ItemGroup.REDSTONE).build();
+	public static final BlockEntry TIMESWAP_TABLE = new Builder("timeswap_table", new TimeswapTableBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F))).setItemGroup(ItemGroup.DECORATIONS).build();
 
-	public static final BlockCreator DANDELION_PILE = new BlockCreator("dandelion_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator POPPY_PILE = new BlockCreator("poppy_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator BLUE_ORCHID_PILE = new BlockCreator("blue_orchid_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator ALLIUM_PILE = new BlockCreator("allium_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator AZURE_BLUET_PILE = new BlockCreator("azure_bluet_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator RED_TULIP_PILE = new BlockCreator("red_tulip_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator ORANGE_TULIP_PILE = new BlockCreator("orange_tulip_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator WHITE_TULIP_PILE = new BlockCreator("white_tulip_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator PINK_TULIP_PILE = new BlockCreator("pink_tulip_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator OXEYE_DAISY_PILE = new BlockCreator("oxeye_daisy_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator CORNFLOWER_PILE = new BlockCreator("cornflower_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator LILY_OF_THE_VALLEY_PILE = new BlockCreator("lily_of_the_valley_pile", new PileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
-	public static final BlockCreator WITHER_ROSE_PILE = new BlockCreator("wither_rose_pile", new WitherRosePileBlock(BlockTemplate.flowerPileSettings.noCollision()), ItemGroup.DECORATIONS, 60, 100);
+	public static final BlockEntry DANDELION_PILE = new Builder("dandelion_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry POPPY_PILE = new Builder("poppy_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry BLUE_ORCHID_PILE = new Builder("blue_orchid_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry ALLIUM_PILE = new Builder("allium_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry AZURE_BLUET_PILE = new Builder("azure_bluet_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry RED_TULIP_PILE = new Builder("red_tulip_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry ORANGE_TULIP_PILE = new Builder("orange_tulip_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry WHITE_TULIP_PILE = new Builder("white_tulip_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry PINK_TULIP_PILE = new Builder("pink_tulip_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry OXEYE_DAISY_PILE = new Builder("oxeye_daisy_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry CORNFLOWER_PILE = new Builder("cornflower_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry LILY_OF_THE_VALLEY_PILE = new Builder("lily_of_the_valley_pile", new PileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
+	public static final BlockEntry WITHER_ROSE_PILE = new Builder("wither_rose_pile", new WitherRosePileBlock(BlockTemplate.FLOWER_PILE_SETTINGS.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build();
 
-	public static final CubeBlockCreator PERMAROCK = new CubeBlockCreator("permarock", FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.4F));
+	public static final BlockEntry PERMAROCK = new Builder("permarock", BlockTemplate.CUBE, FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.4F)).build();
 	public static final MSBlockCreator PERMAFROST_BRICKS = new MSBlockCreator("permafrost_bricks", Blocks.NETHER_BRICKS, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.FENCE);
 	public static final MSBlockCreator BLUE_PERMAFROST_BRICKS = new MSBlockCreator("blue_permafrost_bricks", Blocks.RED_NETHER_BRICKS, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
-	public static final CubeBlockCreator PERMAFROST_BISMUTH_ORE = new CubeBlockCreator("permafrost_bismuth_ore", FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.3F));
-	public static final CubeBlockCreator FROZEN_OBSIDIAN = new CubeBlockCreator("frozen_obsidian", FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).strength(75.0F, 1800.0F));
+	public static final BlockEntry PERMAFROST_BISMUTH_ORE = new Builder("permafrost_bismuth_ore", BlockTemplate.CUBE, FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.3F)).build();
+	public static final BlockEntry FROZEN_OBSIDIAN = new Builder("frozen_obsidian", BlockTemplate.CUBE, FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).strength(75.0F, 1800.0F)).build();
 
-	public static final BlockCreator AMARANTH_DYLIUM = new BlockCreator("amaranth_dylium", new DyliumBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.field_25702).requiresTool().strength(3.0F, 9.0F).sounds(BlockSoundGroup.NYLIUM).ticksRandomly()), ItemGroup.BUILDING_BLOCKS);
-	public static final CubeBlockCreator AMARANTH_WART_BLOCK = new CubeBlockCreator("amaranth_wart_block", FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).breakByTool(FabricToolTags.HOES).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK));
-	public static final BlockCreator AMARANTH_ROOTS = new BlockCreator("amaranth_roots", new RootsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MaterialColor.CYAN).noCollision().breakInstantly().sounds(BlockSoundGroup.ROOTS)), ItemGroup.DECORATIONS);
+	public static final BlockEntry AMARANTH_DYLIUM = new Builder("amaranth_dylium", new DyliumBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.field_25702).requiresTool().strength(3.0F, 9.0F).sounds(BlockSoundGroup.NYLIUM).ticksRandomly())).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry AMARANTH_WART_BLOCK = new Builder("amaranth_wart_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).breakByTool(FabricToolTags.HOES).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK))).build();
+	public static final BlockEntry AMARANTH_ROOTS = new Builder("amaranth_roots", new RootsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MaterialColor.CYAN).noCollision().breakInstantly().sounds(BlockSoundGroup.ROOTS))).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
 	public static final NetherWoodTypeCreator DARK_AMARANTH_WOOD = new NetherWoodTypeCreator("dark_amaranth", () -> {
 		return MubbleConfiguredFeatures.AMARANTH_FUNGI_PLANTED;
 	}, MaterialColor.LIGHT_GRAY, MaterialColor.field_25707);
 
 
 	/* SUPER MARIO (MAKER) */
-	public static final BlockCreator SMB_QUESTION_BLOCK = new BlockCreator("smb", BlockTemplate.QUESTION_BLOCK, BlockTemplate.questionBlockSettings);
-	public static final BlockCreator SMB3_QUESTION_BLOCK = new BlockCreator("smb3", BlockTemplate.QUESTION_BLOCK, BlockTemplate.questionBlockSettings);
-	public static final BlockCreator SMW_QUESTION_BLOCK = new BlockCreator("smw", BlockTemplate.QUESTION_BLOCK, BlockTemplate.questionBlockSettings);
-	public static final BlockCreator NSMBU_QUESTION_BLOCK = new BlockCreator("nsmbu", BlockTemplate.QUESTION_BLOCK, BlockTemplate.questionBlockSettings);
-	public static final CubeBlockCreator SMB_GROUND_GROUND_BLOCK = new CubeBlockCreator("smb_ground_ground_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_UNDERGROUND_GROUND_BLOCK = new CubeBlockCreator("smb_underground_ground_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_UNDERWATER_GROUND_BLOCK = new CubeBlockCreator("smb_underwater_ground_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_GHOST_HOUSE_GROUND_BLOCK = new CubeBlockCreator("smb_ghost_house_ground_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_AIRSHIP_GROUND_BLOCK = new CubeBlockCreator("smb_airship_ground_block", Blocks.IRON_BLOCK);
-	public static final CubeBlockCreator SMB_NIGHT_AIRSHIP_GROUND_BLOCK = new CubeBlockCreator("smb_night_airship_ground_block", Blocks.IRON_BLOCK);
-	public static final CubeBlockCreator SMB_CASTLE_GROUND_BLOCK = new CubeBlockCreator("smb_castle_ground_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_DESERT_GROUND_BLOCK = new CubeBlockCreator("smb_desert_ground_block", Blocks.SAND);
-	public static final CubeBlockCreator SMB_FOREST_GROUND_BLOCK = new CubeBlockCreator("smb_forest_ground_block", Blocks.STONE);
-	public static final BlockCreator SMB_SNOW_GROUND_BLOCK = new BlockCreator("smb_snow_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_NIGHT_SNOW_GROUND_BLOCK = new BlockCreator("smb_night_snow_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final CubeBlockCreator SMB_SKY_GROUND_BLOCK = new CubeBlockCreator("smb_sky_ground_block", Blocks.WHITE_WOOL, ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_GROUND_GROUND_BLOCK = new BlockCreator("smb3_ground_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_UNDERGROUND_GROUND_BLOCK = new BlockCreator("smb3_underground_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_UNDERWATER_GROUND_BLOCK = new BlockCreator("smb3_underwater_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_GHOST_HOUSE_GROUND_BLOCK = new BlockCreator("smb3_ghost_house_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final CubeBlockCreator SMB3_AIRSHIP_GROUND_BLOCK = new CubeBlockCreator("smb3_airship_ground_block", Blocks.OAK_WOOD);
-	public static final CubeBlockCreator SMB3_NIGHT_AIRSHIP_GROUND_BLOCK = new CubeBlockCreator("smb3_night_airship_ground_block", Blocks.OAK_WOOD);
-	public static final CubeBlockCreator SMB3_CASTLE_GROUND_BLOCK = new CubeBlockCreator("smb3_castle_ground_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB3_NIGHT_CASTLE_GROUND_BLOCK = new CubeBlockCreator("smb3_night_castle_ground_block", Blocks.STONE);
-	public static final BlockCreator SMB3_DESERT_GROUND_BLOCK = new BlockCreator("smb3_desert_ground_block", new OverBlock(Settings.copy(Blocks.SAND)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_SNOW_GROUND_BLOCK = new BlockCreator("smb3_snow_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_NIGHT_SNOW_GROUND_BLOCK = new BlockCreator("smb3_night_snow_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_SKY_GROUND_BLOCK = new BlockCreator("smb3_sky_ground_block", new OverBlock(Settings.copy(Blocks.WHITE_WOOL)), ItemGroup.BUILDING_BLOCKS, 30, 60);
-	public static final BlockCreator SMW_GROUND_GROUND_BLOCK = new BlockCreator("smw_ground_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_UNDERGROUND_GROUND_BLOCK = new BlockCreator("smw_underground_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_UNDERWATER_GROUND_BLOCK = new BlockCreator("smw_underwater_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_GHOST_HOUSE_GROUND_BLOCK = new BlockCreator("smw_ghost_house_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_AIRSHIP_GROUND_BLOCK = new BlockCreator("smw_airship_ground_block", new OverBlock(Settings.copy(Blocks.OAK_WOOD)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_CASTLE_GROUND_BLOCK = new BlockCreator("smw_castle_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_DESERT_GROUND_BLOCK = new BlockCreator("smw_desert_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_FOREST_GROUND_BLOCK = new BlockCreator("smw_forest_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_SNOW_GROUND_BLOCK = new BlockCreator("smw_snow_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_NIGHT_SNOW_GROUND_BLOCK = new BlockCreator("smw_night_snow_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_SKY_GROUND_BLOCK = new BlockCreator("smw_sky_ground_block", new OverBlock(Settings.copy(Blocks.WHITE_WOOL)), ItemGroup.BUILDING_BLOCKS, 30, 60);
-	public static final BlockCreator NSMBU_GROUND_GROUND_BLOCK = new BlockCreator("nsmbu_ground_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_UNDERGROUND_GROUND_BLOCK = new BlockCreator("nsmbu_underground_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_UNDERWATER_GROUND_BLOCK = new BlockCreator("nsmbu_underwater_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_GHOST_HOUSE_GROUND_BLOCK = new BlockCreator("nsmbu_ghost_house_ground_block", new OverBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final CubeBlockCreator NSMBU_CASTLE_GROUND_BLOCK = new CubeBlockCreator("nsmbu_castle_ground_block", Blocks.STONE);
-	public static final BlockCreator NSMBU_DESERT_GROUND_BLOCK = new BlockCreator("nsmbu_desert_ground_block", new OverBlock(Settings.copy(Blocks.SAND)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_FOREST_GROUND_BLOCK = new BlockCreator("nsmbu_forest_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_SNOW_GROUND_BLOCK = new BlockCreator("nsmbu_snow_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_NIGHT_SNOW_GROUND_BLOCK = new BlockCreator("nsmbu_night_snow_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_SKY_GROUND_BLOCK = new BlockCreator("nsmbu_sky_ground_block", new OverBlock(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_EMPTY_BLOCK = new BlockCreator("smb_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_EMPTY_BLOCK = new BlockCreator("smb3_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_EMPTY_BLOCK = new BlockCreator("smw_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_EMPTY_BLOCK = new BlockCreator("nsmbu_empty_block", new EmptyBlock(), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_ROTATING_BLOCK = new BlockCreator("smb_rotating_block", new RotatingBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_ROTATING_BLOCK = new BlockCreator("smb3_rotating_block", new RotatingBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_ROTATING_BLOCK = new BlockCreator("smw_rotating_block", new RotatingBlock(MubbleSoundTypes.SMW_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_ROTATING_BLOCK = new BlockCreator("nsmbu_rotating_block", new RotatingBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final CubeBlockCreator LIGHT_BLOCK = new CubeBlockCreator("light_block", FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).lightLevel(15));
-	public static final BlockCreator SMB_GROUND_BRICK_BLOCK = new BlockCreator("smb_ground_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_UNDERGROUND_BRICK_BLOCK = new BlockCreator("smb_underground_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_CASTLE_BRICK_BLOCK = new BlockCreator("smb_castle_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_SNOW_BRICK_BLOCK = new BlockCreator("smb_snow_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_NIGHT_SNOW_BRICK_BLOCK = new BlockCreator("smb_night_snow_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_BRICK_BLOCK = new BlockCreator("smb3_brick_block", new BrickBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_BRICK_BLOCK = new BlockCreator("smw_brick_block", new BrickBlock(MubbleSoundTypes.SMW_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_BRICK_BLOCK = new BlockCreator("nsmbu_brick_block", new BrickBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_GOLDEN_BRICK_BLOCK = new BlockCreator("smb_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_GOLDEN_BRICK_BLOCK = new BlockCreator("smb3_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_GOLDEN_BRICK_BLOCK = new BlockCreator("smw_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMW_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_GOLDEN_BRICK_BLOCK = new BlockCreator("nsmbu_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK), ItemGroup.BUILDING_BLOCKS);
-	public static final CubeBlockCreator SMB_GROUND_HARD_BLOCK = new CubeBlockCreator("smb_ground_hard_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_UNDERGROUND_HARD_BLOCK = new CubeBlockCreator("smb_underground_hard_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_UNDERWATER_HARD_BLOCK = new CubeBlockCreator("smb_underwater_hard_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_CASTLE_HARD_BLOCK = new CubeBlockCreator("smb_castle_hard_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_SNOW_HARD_BLOCK = new CubeBlockCreator("smb_snow_hard_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_NIGHT_SNOW_HARD_BLOCK = new CubeBlockCreator("smb_night_snow_hard_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB3_HARD_BLOCK = new CubeBlockCreator("smb3_hard_block", Blocks.STONE);
-	public static final CubeBlockCreator SMW_STONE_HARD_BLOCK = new CubeBlockCreator("smw_stone_hard_block", Blocks.STONE);
-	public static final CubeBlockCreator SMW_WOOD_HARD_BLOCK = new CubeBlockCreator("smw_wood_hard_block", Blocks.OAK_PLANKS);
-	public static final CubeBlockCreator NSMBU_HARD_BLOCK = new CubeBlockCreator("nsmbu_hard_block", Blocks.STONE);
-	public static final CubeBlockCreator SMB_ICE_BLOCK = new CubeBlockCreator("smb_ice_block", Blocks.PACKED_ICE);
-	public static final CubeBlockCreator SMB3_ICE_BLOCK = new CubeBlockCreator("smb3_ice_block", Blocks.PACKED_ICE);
-	public static final CubeBlockCreator SMW_ICE_BLOCK = new CubeBlockCreator("smw_ice_block", Blocks.PACKED_ICE);
-	public static final CubeBlockCreator NSMBU_ICE_BLOCK = new CubeBlockCreator("nsmbu_ice_block", Blocks.PACKED_ICE);
-	public static final BlockCreator SMB_NOTE_BLOCK = new BlockCreator("smb_note_block", new NoteBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_NOTE_BLOCK = new BlockCreator("smb3_note_block", new NoteBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_NOTE_BLOCK = new BlockCreator("smw_note_block", new NoteBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_NOTE_BLOCK = new BlockCreator("nsmbu_note_block", new NoteBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_SUPER_NOTE_BLOCK = new BlockCreator("smb_super_note_block", new SuperNoteBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB3_SUPER_NOTE_BLOCK = new BlockCreator("smb3_super_note_block", new SuperNoteBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMW_SUPER_NOTE_BLOCK = new BlockCreator("smw_super_note_block", new SuperNoteBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator NSMBU_SUPER_NOTE_BLOCK = new BlockCreator("nsmbu_super_note_block", new SuperNoteBlock(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final BlockCreator SMB_DOOR = new BlockCreator("smb", BlockTemplate.DOOR, Blocks.OAK_DOOR);
-	public static final BlockCreator SMB3_DOOR = new BlockCreator("smb3", BlockTemplate.DOOR, Blocks.OAK_DOOR);
-	public static final BlockCreator SMW_DOOR = new BlockCreator("smw", BlockTemplate.DOOR, Blocks.OAK_DOOR);
-	public static final BlockCreator NSMBU_DOOR = new BlockCreator("nsmbu", BlockTemplate.DOOR, Blocks.OAK_DOOR);
-	public static final BlockCreator SMB_KEY_DOOR = new BlockCreator("smb", BlockTemplate.KEY_DOOR, Blocks.IRON_DOOR);
-	public static final BlockCreator SMB3_KEY_DOOR = new BlockCreator("smb3", BlockTemplate.KEY_DOOR, Blocks.IRON_DOOR);
-	public static final BlockCreator SMW_KEY_DOOR = new BlockCreator("smw", BlockTemplate.KEY_DOOR, Blocks.IRON_DOOR);
-	public static final BlockCreator NSMBU_KEY_DOOR = new BlockCreator("nsmbu", BlockTemplate.KEY_DOOR, Blocks.IRON_DOOR);
+	public static final BlockEntry SMB_QUESTION_BLOCK = new Builder("smb", BlockTemplate.QUESTION_BLOCK, BlockTemplate.QUESTION_BLOCK_SETTINGS).build();
+	public static final BlockEntry SMB3_QUESTION_BLOCK = new Builder("smb3", BlockTemplate.QUESTION_BLOCK, BlockTemplate.QUESTION_BLOCK_SETTINGS).build();
+	public static final BlockEntry SMW_QUESTION_BLOCK = new Builder("smw", BlockTemplate.QUESTION_BLOCK, BlockTemplate.QUESTION_BLOCK_SETTINGS).build();
+	public static final BlockEntry NSMBU_QUESTION_BLOCK = new Builder("nsmbu", BlockTemplate.QUESTION_BLOCK, BlockTemplate.QUESTION_BLOCK_SETTINGS).build();
+	public static final BlockEntry SMB_GROUND_GROUND_BLOCK = new Builder("smb_ground_ground_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_UNDERGROUND_GROUND_BLOCK = new Builder("smb_underground_ground_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_UNDERWATER_GROUND_BLOCK = new Builder("smb_underwater_ground_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_GHOST_HOUSE_GROUND_BLOCK = new Builder("smb_ghost_house_ground_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_AIRSHIP_GROUND_BLOCK = new Builder("smb_airship_ground_block", BlockTemplate.CUBE, Blocks.IRON_BLOCK).build();
+	public static final BlockEntry SMB_NIGHT_AIRSHIP_GROUND_BLOCK = new Builder("smb_night_airship_ground_block", BlockTemplate.CUBE, Blocks.IRON_BLOCK).build();
+	public static final BlockEntry SMB_CASTLE_GROUND_BLOCK = new Builder("smb_castle_ground_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_DESERT_GROUND_BLOCK = new Builder("smb_desert_ground_block", BlockTemplate.CUBE, Blocks.SAND).build();
+	public static final BlockEntry SMB_FOREST_GROUND_BLOCK = new Builder("smb_forest_ground_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_SNOW_GROUND_BLOCK = new Builder("smb_snow_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_NIGHT_SNOW_GROUND_BLOCK = new Builder("smb_night_snow_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_SKY_GROUND_BLOCK = new Builder("smb_sky_ground_block", BlockTemplate.CUBE, Blocks.WHITE_WOOL).build();
+	public static final BlockEntry SMB3_GROUND_GROUND_BLOCK = new Builder("smb3_ground_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_UNDERGROUND_GROUND_BLOCK = new Builder("smb3_underground_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_UNDERWATER_GROUND_BLOCK = new Builder("smb3_underwater_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_GHOST_HOUSE_GROUND_BLOCK = new Builder("smb3_ghost_house_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_AIRSHIP_GROUND_BLOCK = new Builder("smb3_airship_ground_block", BlockTemplate.CUBE, Blocks.OAK_WOOD).build();
+	public static final BlockEntry SMB3_NIGHT_AIRSHIP_GROUND_BLOCK = new Builder("smb3_night_airship_ground_block", BlockTemplate.CUBE, Blocks.OAK_WOOD).build();
+	public static final BlockEntry SMB3_CASTLE_GROUND_BLOCK = new Builder("smb3_castle_ground_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB3_NIGHT_CASTLE_GROUND_BLOCK = new Builder("smb3_night_castle_ground_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB3_DESERT_GROUND_BLOCK = new Builder("smb3_desert_ground_block", new OverBlock(Settings.copy(Blocks.SAND))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_SNOW_GROUND_BLOCK = new Builder("smb3_snow_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_NIGHT_SNOW_GROUND_BLOCK = new Builder("smb3_night_snow_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_SKY_GROUND_BLOCK = new Builder("smb3_sky_ground_block", new OverBlock(Settings.copy(Blocks.WHITE_WOOL))).setItemGroup(ItemGroup.BUILDING_BLOCKS).setFlammability(30, 60).build();
+	public static final BlockEntry SMW_GROUND_GROUND_BLOCK = new Builder("smw_ground_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_UNDERGROUND_GROUND_BLOCK = new Builder("smw_underground_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_UNDERWATER_GROUND_BLOCK = new Builder("smw_underwater_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_GHOST_HOUSE_GROUND_BLOCK = new Builder("smw_ghost_house_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_AIRSHIP_GROUND_BLOCK = new Builder("smw_airship_ground_block", new OverBlock(Settings.copy(Blocks.OAK_WOOD))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_CASTLE_GROUND_BLOCK = new Builder("smw_castle_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_DESERT_GROUND_BLOCK = new Builder("smw_desert_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_FOREST_GROUND_BLOCK = new Builder("smw_forest_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_SNOW_GROUND_BLOCK = new Builder("smw_snow_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_NIGHT_SNOW_GROUND_BLOCK = new Builder("smw_night_snow_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_SKY_GROUND_BLOCK = new Builder("smw_sky_ground_block", new OverBlock(Settings.copy(Blocks.WHITE_WOOL))).setItemGroup(ItemGroup.BUILDING_BLOCKS).setFlammability(30, 60).build();
+	public static final BlockEntry NSMBU_GROUND_GROUND_BLOCK = new Builder("nsmbu_ground_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_UNDERGROUND_GROUND_BLOCK = new Builder("nsmbu_underground_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_UNDERWATER_GROUND_BLOCK = new Builder("nsmbu_underwater_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_GHOST_HOUSE_GROUND_BLOCK = new Builder("nsmbu_ghost_house_ground_block", new OverBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_CASTLE_GROUND_BLOCK = new Builder("nsmbu_castle_ground_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry NSMBU_DESERT_GROUND_BLOCK = new Builder("nsmbu_desert_ground_block", new OverBlock(Settings.copy(Blocks.SAND))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_FOREST_GROUND_BLOCK = new Builder("nsmbu_forest_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_SNOW_GROUND_BLOCK = new Builder("nsmbu_snow_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_NIGHT_SNOW_GROUND_BLOCK = new Builder("nsmbu_night_snow_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_SKY_GROUND_BLOCK = new Builder("nsmbu_sky_ground_block", new OverBlock(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_EMPTY_BLOCK = new Builder("smb_empty_block", new EmptyBlock()).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_EMPTY_BLOCK = new Builder("smb3_empty_block", new EmptyBlock()).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_EMPTY_BLOCK = new Builder("smw_empty_block", new EmptyBlock()).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_EMPTY_BLOCK = new Builder("nsmbu_empty_block", new EmptyBlock()).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_ROTATING_BLOCK = new Builder("smb_rotating_block", new RotatingBlock(MubbleSoundTypes.SMB_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_ROTATING_BLOCK = new Builder("smb3_rotating_block", new RotatingBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_ROTATING_BLOCK = new Builder("smw_rotating_block", new RotatingBlock(MubbleSoundTypes.SMW_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_ROTATING_BLOCK = new Builder("nsmbu_rotating_block", new RotatingBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry LIGHT_BLOCK = new Builder("light_block", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).lightLevel(15))).build();
+	public static final BlockEntry SMB_GROUND_BRICK_BLOCK = new Builder("smb_ground_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_UNDERGROUND_BRICK_BLOCK = new Builder("smb_underground_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_CASTLE_BRICK_BLOCK = new Builder("smb_castle_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_SNOW_BRICK_BLOCK = new Builder("smb_snow_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_NIGHT_SNOW_BRICK_BLOCK = new Builder("smb_night_snow_brick_block", new BrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_BRICK_BLOCK = new Builder("smb3_brick_block", new BrickBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_BRICK_BLOCK = new Builder("smw_brick_block", new BrickBlock(MubbleSoundTypes.SMW_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_BRICK_BLOCK = new Builder("nsmbu_brick_block", new BrickBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_GOLDEN_BRICK_BLOCK = new Builder("smb_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_GOLDEN_BRICK_BLOCK = new Builder("smb3_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_GOLDEN_BRICK_BLOCK = new Builder("smw_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.SMW_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_GOLDEN_BRICK_BLOCK = new Builder("nsmbu_golden_brick_block", new GoldenBrickBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK)).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_GROUND_HARD_BLOCK = new Builder("smb_ground_hard_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_UNDERGROUND_HARD_BLOCK = new Builder("smb_underground_hard_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_UNDERWATER_HARD_BLOCK = new Builder("smb_underwater_hard_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_CASTLE_HARD_BLOCK = new Builder("smb_castle_hard_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_SNOW_HARD_BLOCK = new Builder("smb_snow_hard_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_NIGHT_SNOW_HARD_BLOCK = new Builder("smb_night_snow_hard_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB3_HARD_BLOCK = new Builder("smb3_hard_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMW_STONE_HARD_BLOCK = new Builder("smw_stone_hard_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMW_WOOD_HARD_BLOCK = new Builder("smw_wood_hard_block", BlockTemplate.CUBE, Blocks.OAK_PLANKS).build();
+	public static final BlockEntry NSMBU_HARD_BLOCK = new Builder("nsmbu_hard_block", BlockTemplate.CUBE, Blocks.STONE).build();
+	public static final BlockEntry SMB_ICE_BLOCK = new Builder("smb_ice_block", BlockTemplate.CUBE, Blocks.PACKED_ICE).build();
+	public static final BlockEntry SMB3_ICE_BLOCK = new Builder("smb3_ice_block", BlockTemplate.CUBE, Blocks.PACKED_ICE).build();
+	public static final BlockEntry SMW_ICE_BLOCK = new Builder("smw_ice_block", BlockTemplate.CUBE, Blocks.PACKED_ICE).build();
+	public static final BlockEntry NSMBU_ICE_BLOCK = new Builder("nsmbu_ice_block", BlockTemplate.CUBE, Blocks.PACKED_ICE).build();
+	public static final BlockEntry SMB_NOTE_BLOCK = new Builder("smb_note_block", new NoteBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_NOTE_BLOCK = new Builder("smb3_note_block", new NoteBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_NOTE_BLOCK = new Builder("smw_note_block", new NoteBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_NOTE_BLOCK = new Builder("nsmbu_note_block", new NoteBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_SUPER_NOTE_BLOCK = new Builder("smb_super_note_block", new SuperNoteBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB3_SUPER_NOTE_BLOCK = new Builder("smb3_super_note_block", new SuperNoteBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMW_SUPER_NOTE_BLOCK = new Builder("smw_super_note_block", new SuperNoteBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry NSMBU_SUPER_NOTE_BLOCK = new Builder("nsmbu_super_note_block", new SuperNoteBlock(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry SMB_DOOR = new Builder("smb", BlockTemplate.DOOR, Blocks.OAK_DOOR).build();
+	public static final BlockEntry SMB3_DOOR = new Builder("smb3", BlockTemplate.DOOR, Blocks.OAK_DOOR).build();
+	public static final BlockEntry SMW_DOOR = new Builder("smw", BlockTemplate.DOOR, Blocks.OAK_DOOR).build();
+	public static final BlockEntry NSMBU_DOOR = new Builder("nsmbu", BlockTemplate.DOOR, Blocks.OAK_DOOR).build();
+	public static final BlockEntry SMB_KEY_DOOR = new Builder("smb", BlockTemplate.KEY_DOOR, Blocks.IRON_DOOR).build();
+	public static final BlockEntry SMB3_KEY_DOOR = new Builder("smb3", BlockTemplate.KEY_DOOR, Blocks.IRON_DOOR).build();
+	public static final BlockEntry SMW_KEY_DOOR = new Builder("smw", BlockTemplate.KEY_DOOR, Blocks.IRON_DOOR).build();
+	public static final BlockEntry NSMBU_KEY_DOOR = new Builder("nsmbu", BlockTemplate.KEY_DOOR, Blocks.IRON_DOOR).build();
 
 	/* SUPER MARIO (OTHERS) */
-	public static final Block FIRE_FLOWER = registerPotable("fire_flower", new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS)), ItemGroup.DECORATIONS, 60, 100);
-	public static final Block ICE_FLOWER = registerPotable("ice_flower", new FlowerBlock(StatusEffects.MINING_FATIGUE, 7, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS)), ItemGroup.DECORATIONS, 60, 100);
-	public static final Block BOOMERANG_FLOWER = registerPotable("boomerang_flower", new FlowerBlock(StatusEffects.HASTE, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS)), ItemGroup.DECORATIONS, 60, 100);
-	public static final Block CLOUD_FLOWER = registerPotable("cloud_flower", new CloudFlowerBlock(StatusEffects.SLOW_FALLING, 7, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS)), ItemGroup.DECORATIONS, 60, 100);
-	public static final Block GOLD_FLOWER = registerPotable("gold_flower", new FlowerBlock(MubbleEffects.HEAVINESS, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(5)), ItemGroup.DECORATIONS, 60, 100);
-	public static final Block WHITE_MUSHROOM_BLOCK = register("white_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.WHITE).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block LIGHT_GRAY_MUSHROOM_BLOCK = register("light_gray_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.LIGHT_GRAY).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block GRAY_MUSHROOM_BLOCK = register("gray_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.GRAY).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block BLACK_MUSHROOM_BLOCK = register("black_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.BLACK).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block ORANGE_MUSHROOM_BLOCK = register("orange_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.ORANGE).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block YELLOW_MUSHROOM_BLOCK = register("yellow_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.YELLOW).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block LIME_MUSHROOM_BLOCK = register("lime_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.LIME).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block GREEN_MUSHROOM_BLOCK = register("green_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.GREEN).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block CYAN_MUSHROOM_BLOCK = register("cyan_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.CYAN).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block LIGHT_BLUE_MUSHROOM_BLOCK = register("light_blue_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.LIGHT_BLUE).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block BLUE_MUSHROOM_BLOCK = register("blue_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.BLUE).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block PURPLE_MUSHROOM_BLOCK = register("purple_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.PURPLE).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block MAGENTA_MUSHROOM_BLOCK = register("magenta_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.MAGENTA).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block PINK_MUSHROOM_BLOCK = register("pink_mushroom_block", new MushroomBlock(FabricBlockSettings.of(Material.WOOD, DyeColor.PINK).hardness(0.2F).sounds(BlockSoundGroup.WOOD)), ItemGroup.DECORATIONS);
-	public static final Block WHITE_MUSHROOM = registerPotable("white_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), WHITE_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block LIGHT_GRAY_MUSHROOM = registerPotable("light_gray_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), LIGHT_GRAY_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block GRAY_MUSHROOM = registerPotable("gray_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), GRAY_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block BLACK_MUSHROOM = registerPotable("black_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), BLACK_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block ORANGE_MUSHROOM = registerPotable("orange_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), ORANGE_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block YELLOW_MUSHROOM = registerPotable("yellow_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), YELLOW_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block LIME_MUSHROOM = registerPotable("lime_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), LIME_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block GREEN_MUSHROOM = registerPotable("green_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), GREEN_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block CYAN_MUSHROOM = registerPotable("cyan_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), CYAN_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block LIGHT_BLUE_MUSHROOM = registerPotable("light_blue_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), LIGHT_BLUE_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block BLUE_MUSHROOM = registerPotable("blue_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), BLUE_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block PURPLE_MUSHROOM = registerPotable("purple_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), PURPLE_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block MAGENTA_MUSHROOM = registerPotable("magenta_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), MAGENTA_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
-	public static final Block PINK_MUSHROOM = registerPotable("pink_mushroom", new GrowableMushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(1), PINK_MUSHROOM_BLOCK), ItemGroup.DECORATIONS);
+	public static final PottedPlantCreator FIRE_FLOWER = new PottedPlantCreator(new Builder("fire_flower", new FlowerBlock(StatusEffects.FIRE_RESISTANCE, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).setRenderLayer(RenderLayer.getCutout()).build());
+	public static final PottedPlantCreator ICE_FLOWER = new PottedPlantCreator(new Builder("ice_flower", new FlowerBlock(StatusEffects.MINING_FATIGUE, 7, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).setRenderLayer(RenderLayer.getCutout()).build());
+	public static final PottedPlantCreator BOOMERANG_FLOWER = new PottedPlantCreator(new Builder("boomerang_flower", new FlowerBlock(StatusEffects.HASTE, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).setRenderLayer(RenderLayer.getCutout()).build());
+	public static final PottedPlantCreator CLOUD_FLOWER = new PottedPlantCreator(new Builder("cloud_flower", new CloudFlowerBlock(StatusEffects.SLOW_FALLING, 7, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).setRenderLayer(RenderLayer.getCutout()).build());
+	public static final PottedPlantCreator GOLD_FLOWER = new PottedPlantCreator(new Builder("gold_flower", new FlowerBlock(MubbleEffects.HEAVINESS, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(5))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).setRenderLayer(RenderLayer.getCutout()).build());
+
+	public static final BlockEntry WHITE_MUSHROOM_BLOCK = new Builder("white", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.WHITE)).build();
+	public static final BlockEntry LIGHT_GRAY_MUSHROOM_BLOCK = new Builder("light_gray", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.LIGHT_GRAY)).build();
+	public static final BlockEntry GRAY_MUSHROOM_BLOCK = new Builder("gray", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.GRAY)).build();
+	public static final BlockEntry BLACK_MUSHROOM_BLOCK = new Builder("black", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.BLACK)).build();
+	public static final BlockEntry ORANGE_MUSHROOM_BLOCK = new Builder("orange", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.ORANGE)).build();
+	public static final BlockEntry YELLOW_MUSHROOM_BLOCK = new Builder("yellow", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.YELLOW)).build();
+	public static final BlockEntry LIME_MUSHROOM_BLOCK = new Builder("lime", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.LIME)).build();
+	public static final BlockEntry GREEN_MUSHROOM_BLOCK = new Builder("green", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.GREEN)).build();
+	public static final BlockEntry CYAN_MUSHROOM_BLOCK = new Builder("cyan", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.CYAN)).build();
+	public static final BlockEntry LIGHT_BLUE_MUSHROOM_BLOCK = new Builder("light_blue", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.LIGHT_BLUE)).build();
+	public static final BlockEntry BLUE_MUSHROOM_BLOCK = new Builder("blue", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.BLUE)).build();
+	public static final BlockEntry PURPLE_MUSHROOM_BLOCK = new Builder("purple", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.PURPLE)).build();
+	public static final BlockEntry MAGENTA_MUSHROOM_BLOCK = new Builder("magenta", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.MAGENTA)).build();
+	public static final BlockEntry PINK_MUSHROOM_BLOCK = new Builder("pink", BlockTemplate.MUSHROOM_BLOCK, BlockTemplate.MUSHROOM_BLOCK_SETTINGS.materialColor(DyeColor.PINK)).build();
+	public static final BlockEntry WHITE_MUSHROOM = new Builder("white_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, WHITE_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry LIGHT_GRAY_MUSHROOM = new Builder("light_gray_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, LIGHT_GRAY_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry GRAY_MUSHROOM = new Builder("gray_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, GRAY_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry BLACK_MUSHROOM = new Builder("black_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, BLACK_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry ORANGE_MUSHROOM = new Builder("orange_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, ORANGE_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry YELLOW_MUSHROOM = new Builder("yellow_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, YELLOW_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry LIME_MUSHROOM = new Builder("lime_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, LIME_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry GREEN_MUSHROOM = new Builder("green_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, GREEN_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry CYAN_MUSHROOM = new Builder("cyan_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, CYAN_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry LIGHT_BLUE_MUSHROOM = new Builder("light_blue_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, LIGHT_BLUE_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry BLUE_MUSHROOM = new Builder("blue_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, BLUE_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry PURPLE_MUSHROOM = new Builder("purple_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, PURPLE_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry MAGENTA_MUSHROOM = new Builder("magenta_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, MAGENTA_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
+	public static final BlockEntry PINK_MUSHROOM = new Builder("pink_mushroom", new GrowableMushroomPlantBlock(BlockTemplate.MUSHROOM_SETTINGS, PINK_MUSHROOM_BLOCK.getBlock())).setItemGroup(ItemGroup.DECORATIONS).setRenderLayer(RenderLayer.getCutout()).build();
 
 	/* KIRBY */
-	public static final Block KIRBY_BLOCK = register("kirby_block", new DirectionalBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.PINK).hardness(0.5F).sounds(BlockSoundGroup.WOOL)), ItemGroup.DECORATIONS);
+	public static final BlockEntry KIRBY_BLOCK = new Builder("kirby_block", new DirectionalBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.PINK).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).setItemGroup(ItemGroup.DECORATIONS).build();
 
 	/* TETRIS */
-	public static final Block WHITE_TETRIS_BLOCK = register("white_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.WHITE).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block LIGHT_GRAY_TETRIS_BLOCK = register("light_gray_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.LIGHT_GRAY).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block GRAY_TETRIS_BLOCK = register("gray_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.GRAY).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLACK_TETRIS_BLOCK = register("black_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.BLACK).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BROWN_TETRIS_BLOCK = register("brown_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.BROWN).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block RED_TETRIS_BLOCK = register("red_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.RED).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block ORANGE_TETRIS_BLOCK = register("orange_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.ORANGE).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block YELLOW_TETRIS_BLOCK = register("yellow_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.YELLOW).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block LIME_TETRIS_BLOCK = register("lime_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.LIME).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block GREEN_TETRIS_BLOCK = register("green_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.GREEN).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block CYAN_TETRIS_BLOCK = register("cyan_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.CYAN).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block LIGHT_BLUE_TETRIS_BLOCK = register("light_blue_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.LIGHT_BLUE).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block BLUE_TETRIS_BLOCK = register("blue_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.BLUE).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PURPLE_TETRIS_BLOCK = register("purple_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.PURPLE).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MAGENTA_TETRIS_BLOCK = register("magenta_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.MAGENTA).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block PINK_TETRIS_BLOCK = register("pink_tetris_block", new FallingBlock(FabricBlockSettings.of(Material.STONE, DyeColor.PINK).strength(1.5F, 6.0F)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block TETRIS_GLASS = register("tetris_glass", new TetrisGlassBlock(Settings.copy(Blocks.GLASS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block JAPANESE_TETRIS_CUSHION = register("japanese_tetris_cushion", new FallingBlock(Settings.copy(Blocks.RED_WOOL)), ItemGroup.BUILDING_BLOCKS, 30, 60);
-	public static final Block RAINBOW_TETRIS_SCAFFOLDING = register("rainbow_tetris_scaffolding", new FallingBlock(Settings.copy(Blocks.IRON_BLOCK)), ItemGroup.DECORATIONS);
-	public static final Block MONOCHROME_TETRIS_SCAFFOLDING = register("monochrome_tetris_scaffolding", new FallingBlock(Settings.copy(Blocks.IRON_BLOCK)), ItemGroup.DECORATIONS);
+	public static final BlockEntry WHITE_TETRIS_BLOCK = new Builder("white", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.WHITE)).build();
+	public static final BlockEntry LIGHT_GRAY_TETRIS_BLOCK = new Builder("light_gray", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.LIGHT_GRAY)).build();
+	public static final BlockEntry GRAY_TETRIS_BLOCK = new Builder("gray", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.GRAY)).build();
+	public static final BlockEntry BLACK_TETRIS_BLOCK = new Builder("black", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.BLACK)).build();
+	public static final BlockEntry BROWN_TETRIS_BLOCK = new Builder("brown", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.BROWN)).build();
+	public static final BlockEntry RED_TETRIS_BLOCK = new Builder("red", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.RED)).build();
+	public static final BlockEntry ORANGE_TETRIS_BLOCK = new Builder("orange", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.ORANGE)).build();
+	public static final BlockEntry YELLOW_TETRIS_BLOCK = new Builder("yellow", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.YELLOW)).build();
+	public static final BlockEntry LIME_TETRIS_BLOCK = new Builder("lime", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.LIME)).build();
+	public static final BlockEntry GREEN_TETRIS_BLOCK = new Builder("green", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.GREEN)).build();
+	public static final BlockEntry CYAN_TETRIS_BLOCK = new Builder("cyan", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.CYAN)).build();
+	public static final BlockEntry LIGHT_BLUE_TETRIS_BLOCK = new Builder("light_blue", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.LIGHT_BLUE)).build();
+	public static final BlockEntry BLUE_TETRIS_BLOCK = new Builder("blue", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.BLUE)).build();
+	public static final BlockEntry PURPLE_TETRIS_BLOCK = new Builder("purple", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.PURPLE)).build();
+	public static final BlockEntry MAGENTA_TETRIS_BLOCK = new Builder("magenta", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.MAGENTA)).build();
+	public static final BlockEntry PINK_TETRIS_BLOCK = new Builder("pink", BlockTemplate.TETRIS_BLOCK, BlockTemplate.TETRIS_BLOCK_SETTINGS.materialColor(DyeColor.PINK)).build();
+	public static final BlockEntry TETRIS_GLASS = new Builder("tetris_glass", new TetrisGlassBlock(Settings.copy(Blocks.GLASS))).setItemGroup(ItemGroup.BUILDING_BLOCKS).setRenderLayer(RenderLayer.getTranslucent()).build();
+	public static final BlockEntry JAPANESE_TETRIS_CUSHION = new Builder("japanese_tetris_cushion", new FallingBlock(Settings.copy(Blocks.RED_WOOL))).setItemGroup(ItemGroup.BUILDING_BLOCKS).setFlammability(30, 60).build();
+	public static final BlockEntry RAINBOW_TETRIS_SCAFFOLDING = new Builder("rainbow_tetris_scaffolding", new FallingBlock(Settings.copy(Blocks.IRON_BLOCK))).setItemGroup(ItemGroup.DECORATIONS).build();
+	public static final BlockEntry MONOCHROME_TETRIS_SCAFFOLDING = new Builder("monochrome_tetris_scaffolding", new FallingBlock(Settings.copy(Blocks.IRON_BLOCK))).setItemGroup(ItemGroup.DECORATIONS).build();
 
 	/* CASTLEVANIA */
-	public static final Block VAMPIRE_STONE = register("vampire_stone", new Block(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
+	public static final BlockEntry VAMPIRE_STONE = new Builder("vampire_stone", new Block(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
 
-	public static final Block MEDUSA_STONE = register("medusa_stone", new Block(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MEDUSA_BRICKS = register("medusa_bricks", new Block(Settings.copy(Blocks.STONE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MEDUSA_BRICK_STAIRS = register("medusa_brick_stairs", new StairsBlock(MEDUSA_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MEDUSA_BRICK_SLAB = register("medusa_brick_slab", new SlabBlock(Settings.copy(MEDUSA_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MEDUSA_BRICK_VERTICAL_SLAB = register("medusa_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(MEDUSA_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MEDUSA_BRICK_WALL = register("medusa_brick_wall", new WallBlock(Settings.copy(MubbleBlocks.MEDUSA_BRICKS)), ItemGroup.DECORATIONS);
+	public static final BlockEntry MEDUSA_STONE = new Builder("medusa_stone", new Block(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final MSBlockCreator MEDUSA_BRICKS = new MSBlockCreator("medusa_bricks", Blocks.STONE_BRICKS, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
 
-	public static final Block WHITE_CANDY_CANE_PILLAR = register("white_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.WHITE).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block LIGHT_GRAY_CANDY_CANE_PILLAR = register("light_gray_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.LIGHT_GRAY).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block GRAY_CANDY_CANE_PILLAR = register("gray_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.GRAY).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block BLACK_CANDY_CANE_PILLAR = register("black_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.BLACK).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block BROWN_CANDY_CANE_PILLAR = register("brown_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.BROWN).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block RED_CANDY_CANE_PILLAR = register("red_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.RED).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block ORANGE_CANDY_CANE_PILLAR = register("orange_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.ORANGE).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block YELLOW_CANDY_CANE_PILLAR = register("yellow_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.YELLOW).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block LIME_CANDY_CANE_PILLAR = register("lime_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.LIME).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block GREEN_CANDY_CANE_PILLAR = register("green_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.GREEN).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block CYAN_CANDY_CANE_PILLAR = register("cyan_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.CYAN).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block LIGHT_BLUE_CANDY_CANE_PILLAR = register("light_blue_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.LIGHT_BLUE).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block BLUE_CANDY_CANE_PILLAR = register("blue_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.BLUE).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block PURPLE_CANDY_CANE_PILLAR = register("purple_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.PURPLE).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block MAGENTA_CANDY_CANE_PILLAR = register("magenta_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.MAGENTA).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
-	public static final Block PINK_CANDY_CANE_PILLAR = register("pink_candy_cane_pillar", new PillarBlock(FabricBlockSettings.of(Material.STONE, DyeColor.PINK).hardness(0.2F)), ItemGroup.DECORATIONS, 5, 10);
+	public static final BlockEntry WHITE_CANDY_CANE_PILLAR = new Builder("white_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.WHITE))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry LIGHT_GRAY_CANDY_CANE_PILLAR = new Builder("light_gray_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.LIGHT_GRAY))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry GRAY_CANDY_CANE_PILLAR = new Builder("gray_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.GRAY))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry BLACK_CANDY_CANE_PILLAR = new Builder("black_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.BLACK))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry BROWN_CANDY_CANE_PILLAR = new Builder("brown_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.BROWN))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry RED_CANDY_CANE_PILLAR = new Builder("red_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.RED))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry ORANGE_CANDY_CANE_PILLAR = new Builder("orange_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.ORANGE))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry YELLOW_CANDY_CANE_PILLAR = new Builder("yellow_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.YELLOW))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry LIME_CANDY_CANE_PILLAR = new Builder("lime_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.LIME))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry GREEN_CANDY_CANE_PILLAR = new Builder("green_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.GREEN))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry CYAN_CANDY_CANE_PILLAR = new Builder("cyan_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.CYAN))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry LIGHT_BLUE_CANDY_CANE_PILLAR = new Builder("light_blue_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.LIGHT_BLUE))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry BLUE_CANDY_CANE_PILLAR = new Builder("blue_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.BLUE))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry PURPLE_CANDY_CANE_PILLAR = new Builder("purple_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.PURPLE))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry MAGENTA_CANDY_CANE_PILLAR = new Builder("magenta_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.MAGENTA))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
+	public static final BlockEntry PINK_CANDY_CANE_PILLAR = new Builder("pink_candy_cane_pillar", new PillarBlock(BlockTemplate.CANDY_CANE_BLOCK_SETTINGS.materialColor(DyeColor.PINK))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(5, 10).build();
 
 	/* SONIC */
-	public static final Block GREEN_HILL_GRASS_BLOCK = register("green_hill_grass_block", new GrassBlock(Settings.copy(Blocks.GRASS_BLOCK)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block GREEN_HILL_DIRT = register("green_hill_dirt", new Block(Settings.copy(Blocks.DIRT)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MARBLE_ZONE_STONE = register("marble_zone_stone", new Block(Settings.copy(Blocks.STONE)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block YELLOW_STUDIOPOLIS_CLAPPER = register("yellow_studiopolis_clapper", new DirectionalBlock(Settings.copy(Blocks.IRON_BLOCK)), ItemGroup.DECORATIONS);
-	public static final Block BLUE_STUDIOPOLIS_CLAPPER = register("blue_studiopolis_clapper", new DirectionalBlock(Settings.copy(Blocks.IRON_BLOCK)), ItemGroup.DECORATIONS);
+	public static final BlockEntry GREEN_HILL_GRASS_BLOCK = new Builder("green_hill_grass_block", new GrassBlock(Settings.copy(Blocks.GRASS_BLOCK))).setItemGroup(ItemGroup.BUILDING_BLOCKS).setRenderLayer(RenderLayer.getCutoutMipped()).build();
+	public static final BlockEntry GREEN_HILL_DIRT = new Builder("green_hill_dirt", new Block(Settings.copy(Blocks.DIRT))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry MARBLE_ZONE_STONE = new Builder("marble_zone_stone", new Block(Settings.copy(Blocks.STONE))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry YELLOW_STUDIOPOLIS_CLAPPER = new Builder("yellow_studiopolis_clapper", new DirectionalBlock(Settings.copy(Blocks.IRON_BLOCK))).setItemGroup(ItemGroup.DECORATIONS).build();
+	public static final BlockEntry BLUE_STUDIOPOLIS_CLAPPER = new Builder("blue_studiopolis_clapper", new DirectionalBlock(Settings.copy(Blocks.IRON_BLOCK))).setItemGroup(ItemGroup.DECORATIONS).build();
 
 	public static final WoodTypeCreator PRESS_GARDEN_WOOD = new WoodTypeCreator("press_garden", MaterialColor.field_25702, MaterialColor.field_25703, MaterialColor.field_25707, false);
-	public static final SaplingCreator RED_PRESS_GARDEN_SAPLING = new SaplingCreator("red_press_garden", new RedPressGardenSaplingGenerator());
-	public static final SaplingCreator PINK_PRESS_GARDEN_SAPLING = new SaplingCreator("pink_press_garden", new PinkPressGardenSaplingGenerator());
+	public static final PottedPlantCreator RED_PRESS_GARDEN_SAPLING = new PottedPlantCreator(new Builder("red_press_garden_sapling", new SaplingBlock(new RedPressGardenSaplingGenerator(), BlockTemplate.SAPLING_SETTINGS)).build());
+	public static final PottedPlantCreator PINK_PRESS_GARDEN_SAPLING = new PottedPlantCreator(new Builder("pink_press_garden_sapling", new SaplingBlock(new PinkPressGardenSaplingGenerator(), BlockTemplate.SAPLING_SETTINGS)).build());
 	public static final LeavesCreator RED_PRESS_GARDEN_LEAVES = new LeavesCreator("red_press_garden");
 	public static final LeavesCreator PINK_PRESS_GARDEN_LEAVES = new LeavesCreator("pink_press_garden");
 
-	public static final Block SPRING = register("spring", new SpringBlock(FabricBlockSettings.of(Material.METAL).hardness(4f)), ItemGroup.TRANSPORTATION);
+	public static final BlockEntry SPRING = new Builder("spring", new SpringBlock(FabricBlockSettings.of(Material.METAL).hardness(4f))).setItemGroup(ItemGroup.TRANSPORTATION).build();
 
 	/* UNDERTALE / DELTARUNE */
 	public static final NormalWoodTypeCreator SCARLET_WOOD = new NormalWoodTypeCreator("scarlet", new ScarletSaplingGenerator(), MaterialColor.field_25702, MaterialColor.field_25703, MaterialColor.field_25707);
-	public static final Block SCARLET_MUSHROOM = registerPotable("scarlet_mushroom", new MushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7)), ItemGroup.DECORATIONS);
-	public static final Block SCARLET_ORCHID = registerPotable("scarlet_orchid", new FlowerBlock(StatusEffects.GLOWING, 8, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7)), ItemGroup.DECORATIONS, 60, 100);
+	public static final PottedPlantCreator SCARLET_MUSHROOM = new PottedPlantCreator(new Builder("scarlet_mushroom", new MushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7))).setItemGroup(ItemGroup.DECORATIONS).build());
+	public static final PottedPlantCreator SCARLET_ORCHID = new PottedPlantCreator(new Builder("scarlet_orchid", new FlowerBlock(StatusEffects.GLOWING, 8, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).build());
 
 	/* CELESTE */
-	public static final Block GIRDER = register("girder", new Block(Settings.copy(Blocks.IRON_BLOCK)), ItemGroup.BUILDING_BLOCKS);
+	public static final BlockEntry GIRDER = new Builder("girder", new Block(Settings.copy(Blocks.IRON_BLOCK))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
 
-	public static final Block MIRROR_TEMPLE_BRICKS = register("mirror_temple_bricks", new Block(Settings.copy(Blocks.BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MIRROR_TEMPLE_BRICK_STAIRS = register("mirror_temple_brick_stairs", new StairsBlock(MIRROR_TEMPLE_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MIRROR_TEMPLE_BRICK_SLAB = register("mirror_temple_brick_slab", new SlabBlock(Settings.copy(MIRROR_TEMPLE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MIRROR_TEMPLE_BRICK_VERTICAL_SLAB = register("mirror_temple_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(MIRROR_TEMPLE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block MIRROR_TEMPLE_BRICK_WALL = register("mirror_temple_brick_wall", new WallBlock(Settings.copy(MIRROR_TEMPLE_BRICKS)), ItemGroup.DECORATIONS);
+	public static final MSBlockCreator MIRROR_TEMPLE_BRICKS = new MSBlockCreator("mirror_temple_bricks", Blocks.BRICKS, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
+	public static final MSBlockCreator OLD_SITE_BRICKS = new MSBlockCreator("old_site_bricks", Blocks.BRICKS, BlockTemplate.CUBE, BlockTemplate.STAIRS, BlockTemplate.SLAB, BlockTemplate.VERTICAL_SLAB, BlockTemplate.WALL);
 
-	public static final Block OLD_SITE_BRICKS = register("old_site_bricks", new Block(Settings.copy(Blocks.BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block OLD_SITE_BRICK_STAIRS = register("old_site_brick_stairs", new StairsBlock(OLD_SITE_BRICKS), ItemGroup.BUILDING_BLOCKS);
-	public static final Block OLD_SITE_BRICK_SLAB = register("old_site_brick_slab", new SlabBlock(Settings.copy(OLD_SITE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block OLD_SITE_BRICK_VERTICAL_SLAB = register("old_site_brick_vertical_slab", new VerticalSlabBlock(Settings.copy(OLD_SITE_BRICKS)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block OLD_SITE_BRICK_WALL = register("old_site_brick_wall", new WallBlock(Settings.copy(OLD_SITE_BRICKS)), ItemGroup.DECORATIONS);
-
-	public static final Block ELDER_PEBBLES = register("elder_pebbles", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.RED).strength(2.0F, 6.0F).lightLevel(5)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DREAM_BLOCK = register("dream_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC).hardness(0.4f).sounds(MubbleSoundTypes.DREAM_BLOCK)), ItemGroup.BUILDING_BLOCKS);
-	public static final Block DREAM_BEDROCK = register("dream_bedrock", new Block(FabricBlockSettings.of(Material.STONE).strength(-1.0F, 3600000.0F).dropsNothing()), ItemGroup.BUILDING_BLOCKS);
+	public static final BlockEntry ELDER_PEBBLES = new Builder("elder_pebbles", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.RED).strength(2.0F, 6.0F).lightLevel(5))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry DREAM_BLOCK = new Builder("dream_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC).hardness(0.4f).sounds(MubbleSoundTypes.DREAM_BLOCK))).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
+	public static final BlockEntry DREAM_BEDROCK = new Builder("dream_bedrock", new Block(FabricBlockSettings.of(Material.STONE).strength(-1.0F, 3600000.0F).dropsNothing())).setItemGroup(ItemGroup.BUILDING_BLOCKS).build();
 
 	/* PUYO PUYO */
-	public static final Block RED_PUYO = register("red_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.RED).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME)));
-	public static final Block YELLOW_PUYO = register("yellow_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.YELLOW).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME)));
-	public static final Block GREEN_PUYO = register("green_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.GREEN).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME)));
-	public static final Block TURQUOISE_PUYO = register("turquoise_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.EMERALD).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME)));
-	public static final Block BLUE_PUYO = register("blue_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.BLUE).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME)));
-	public static final Block PURPLE_PUYO = register("purple_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.PURPLE).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME)));
-	public static final Block GRAY_PUYO = register("gray_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.GRAY).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME)));
-	public static final Block GARBAGE_PUYO = register("garbage_puyo", new DirectionalBlock(Settings.copy(Blocks.STONE)));
-	public static final Block POINT_PUYO = register("point_puyo", new DirectionalBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).lightLevel(10)));
-	public static final Block HARD_PUYO = register("hard_puyo", new DirectionalBlock(Settings.copy(Blocks.STONE)));
-	public static final Block IRON_PUYO = register("iron_puyo", new DirectionalBlock(Settings.copy(Blocks.IRON_BLOCK)));
+	public static final BlockEntry RED_PUYO = new Builder("red_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.RED).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME))).noItem().build();
+	public static final BlockEntry YELLOW_PUYO = new Builder("yellow_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.YELLOW).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME))).noItem().build();
+	public static final BlockEntry GREEN_PUYO = new Builder("green_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.GREEN).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME))).noItem().build();
+	public static final BlockEntry TURQUOISE_PUYO = new Builder("turquoise_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.EMERALD).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME))).noItem().build();
+	public static final BlockEntry BLUE_PUYO = new Builder("blue_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.BLUE).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME))).noItem().build();
+	public static final BlockEntry PURPLE_PUYO = new Builder("purple_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.PURPLE).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME))).noItem().build();
+	public static final BlockEntry GRAY_PUYO = new Builder("gray_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.GRAY).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME))).noItem().build();
+	public static final BlockEntry GARBAGE_PUYO = new Builder("garbage_puyo", new DirectionalBlock(Settings.copy(Blocks.STONE))).noItem().build();
+	public static final BlockEntry POINT_PUYO = new Builder("point_puyo", new DirectionalBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).lightLevel(10))).noItem().build();
+	public static final BlockEntry HARD_PUYO = new Builder("hard_puyo", new DirectionalBlock(Settings.copy(Blocks.STONE))).noItem().build();
+	public static final BlockEntry IRON_PUYO = new Builder("iron_puyo", new DirectionalBlock(Settings.copy(Blocks.IRON_BLOCK))).noItem().build();
 
 	/* YOUTUBE */
-	public static final Block KORETATO_BLOCK = register("koretato_block", new KoretatoBlock());
-	public static final Block POTATO_FLOWER = registerPotable("potato_flower", new FlowerBlock(StatusEffects.HUNGER, 9, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS)), ItemGroup.DECORATIONS, 60, 100);
-
-	private static Block register(String name, Block block) {
-		return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
-	}
-
-	private static Block register(String name, Block block, ItemGroup group) {
-		Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), new BlockItem(block, new Item.Settings().group(group)));
-		return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
-	}
-
-	private static Block register(String name, Block block, int fireEncouragement, int flammability) {
-		FlammableBlockRegistry.getDefaultInstance().add(block, fireEncouragement, flammability);
-		return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
-	}
-
-	private static Block register(String name, Block block, ItemGroup group, int fireEncouragement, int flammability) {
-		Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), new BlockItem(block, new Item.Settings().group(group)));
-		FlammableBlockRegistry.getDefaultInstance().add(block, fireEncouragement, flammability);
-		return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
-	}
-
-	private static Block registerPotable(String name, Block block, ItemGroup group) {
-		Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, "potted_" + name), new FlowerPotBlock(block, FabricBlockSettings.of(Material.SUPPORTED).breakInstantly().nonOpaque().lightLevel(block.getDefaultState().getLuminance())));
-		POTTED_PLANTS.add(Registry.BLOCK.get(new Identifier(Mubble.MOD_ID, "potted_" + name)));
-		Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), new BlockItem(block, new Item.Settings().group(group)));
-		return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
-	}
-
-	private static Block registerPotable(String name, Block block, ItemGroup group, int fireEncouragement, int flammability) {
-		Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, "potted_" + name), new FlowerPotBlock(block, FabricBlockSettings.of(Material.SUPPORTED).breakInstantly().nonOpaque().lightLevel(block.getDefaultState().getLuminance())));
-		POTTED_PLANTS.add(Registry.BLOCK.get(new Identifier(Mubble.MOD_ID, "potted_" + name)));
-		Registry.register(Registry.ITEM, new Identifier(Mubble.MOD_ID, name), new BlockItem(block, new Item.Settings().group(group)));
-		FlammableBlockRegistry.getDefaultInstance().add(block, fireEncouragement, flammability);
-		return Registry.register(Registry.BLOCK, new Identifier(Mubble.MOD_ID, name), block);
-	}
+	public static final BlockEntry KORETATO_BLOCK = new Builder("koretato_block", new KoretatoBlock()).noItem().build();
+	public static final PottedPlantCreator POTATO_FLOWER = new PottedPlantCreator(new Builder("potato_flower", new FlowerBlock(StatusEffects.HUNGER, 9, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).setRenderLayer(RenderLayer.getCutout()).build());
 }
