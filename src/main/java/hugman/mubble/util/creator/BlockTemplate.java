@@ -30,7 +30,7 @@ public enum BlockTemplate {
 	FENCE("fence", ItemGroup.DECORATIONS),
 	FENCE_GATE("fence_gate", ItemGroup.REDSTONE),
 	LEAVES("leaves", ItemGroup.DECORATIONS, RenderLayer.getCutoutMipped()),
-	LEAF_PILE("leaf_pile", ItemGroup.DECORATIONS, RenderLayer.getCutoutMipped()),
+	PILE("leaf_pile", ItemGroup.DECORATIONS, RenderLayer.getCutoutMipped()),
 	CLOUD_BLOCK("cloud_block", ItemGroup.DECORATIONS, RenderLayer.getTranslucent()),
 	QUESTION_BLOCK("question_block", ItemGroup.BUILDING_BLOCKS);
 
@@ -98,7 +98,7 @@ public enum BlockTemplate {
 				return new FenceGateBlock(settings);
 			case LEAVES:
 				return new LeavesBlock(settings);
-			case LEAF_PILE:
+			case PILE:
 				return new PileBlock(settings);
 			case CLOUD_BLOCK:
 				return new CloudBlock(settings);
@@ -108,7 +108,7 @@ public enum BlockTemplate {
 	public static final FabricBlockSettings normalLogSettings = FabricBlockSettings.of(Material.WOOD).strength(2.0F).sounds(BlockSoundGroup.WOOD);
 	public static final FabricBlockSettings stemSettings = FabricBlockSettings.of(Material.NETHER_WOOD).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM);
 
-	public static final FabricBlockSettings leavesSettings = FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(BlockCreatorHelper::canSpawnOnLeaves).suffocates(BlockCreatorHelper::never).blockVision(BlockCreatorHelper::never);
+	public static final FabricBlockSettings leavesSettings = FabricBlockSettings.of(Material.LEAVES).strength(0.2F).ticksRandomly().sounds(BlockSoundGroup.GRASS).nonOpaque().allowsSpawning(CreatorHelper::canSpawnOnLeaves).suffocates(CreatorHelper::never).blockVision(CreatorHelper::never);
 	public static final FabricBlockSettings leafPileSettings = FabricBlockSettings.of(Material.LEAVES).strength(0.1F).ticksRandomly().sounds(BlockSoundGroup.GRASS).noCollision().nonOpaque();
 	public static final FabricBlockSettings flowerPileSettings = FabricBlockSettings.of(Material.PLANT).breakInstantly().sounds(BlockSoundGroup.GRASS).noCollision();
 	public static final FabricBlockSettings saplingSettings = FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.GRASS).breakInstantly().noCollision().ticksRandomly();
