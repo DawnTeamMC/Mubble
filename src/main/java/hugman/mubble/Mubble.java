@@ -21,7 +21,7 @@ public class Mubble implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		DataWriter.setup();
+		new DataWriter();
 
 		new MubbleBlocks();
 		new MubbleConfiguredFeatures();

@@ -115,9 +115,7 @@ public class MubbleSounds {
 	public static final SoundEvent UI_TIMESWAP_TABLE_TAKE_RESULT = register("ui.timeswap_table.take_result");
 
 	private static SoundEvent register(String name) {
-		DataWriter.entryNamesData.sounds.add(Mubble.id(name).toString());
-		DataWriter.entryCountsData.sounds++;
-		DataWriter.save();
+		DataWriter.soundsEntries.add(Mubble.id(name));
 		return Registry.register(Registry.SOUND_EVENT, Mubble.id(name), new SoundEvent(Mubble.id(name)));
 	}
 }

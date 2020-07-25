@@ -27,9 +27,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin {
-	@Shadow
-	private ItemStack selectedItem;
-
 	@Inject(method = "interact", at = @At(value = "TAIL"), cancellable = true)
 	private void mubble_interact(Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> info) {
 		PlayerEntity player = (PlayerEntity) (Object) this;
@@ -43,45 +40,6 @@ public class PlayerEntityMixin {
 				player.swingHand(hand);
 				pufferfish.playSound(MubbleSounds.ENTITY_PUFFERFISH_AEUGH, 0.6F, 1.0F);
 				info.setReturnValue(ActionResult.SUCCESS);
-			}
-		}
-	}
-
-	@Inject(method = "tick", at = @At(value = "HEAD"), cancellable = true)
-	private void mubble_tick(CallbackInfo info) {
-		PlayerEntity player = (PlayerEntity) (Object) this;
-		World world = player.getEntityWorld();
-		ItemStack mainHandStack = player.getMainHandStack();
-		ItemStack headStack = player.getEquippedStack(EquipmentSlot.HEAD);
-		if(!ItemStack.areEqual(selectedItem, mainHandStack)) {
-			if(!ItemStack.areItemsEqual(selectedItem, mainHandStack)) {
-				if(mainHandStack.getItem() instanceof LightsaberItem) {
-					((LightsaberItem) mainHandStack.getItem()).onPullOut(player, world);
-				}
-				if(selectedItem.getItem() instanceof LightsaberItem) {
-					((LightsaberItem) selectedItem.getItem()).onPullIn(player, world);
-				}
-			}
-		}
-		if(world.isClient) {
-			GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
-			ShaderEffect shaderEffect = renderer.getShader();
-			if(!(headStack.getItem() instanceof Costume) && !(headStack.getItem() instanceof BlockCostume)) {
-				if(shaderEffect != null) {
-					renderer.disableShader();
-				}
-			}
-			if(headStack.getItem() instanceof Costume) {
-				Identifier shader = ((Costume) headStack.getItem()).getShader();
-				if(shaderEffect != null && shader == null) {
-					renderer.disableShader();
-				}
-			}
-			if(headStack.getItem() instanceof BlockCostume) {
-				Identifier shader = ((BlockCostume) headStack.getItem()).getShader();
-				if(shaderEffect != null && shader == null) {
-					renderer.disableShader();
-				}
 			}
 		}
 	}

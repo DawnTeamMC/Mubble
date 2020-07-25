@@ -4,7 +4,6 @@ import hugman.mubble.Mubble;
 import hugman.mubble.util.DataWriter;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class ItemEntry extends Entry<Item> {
@@ -21,9 +20,7 @@ public class ItemEntry extends Entry<Item> {
 	protected Item register() {
 		value = Registry.register(Registry.ITEM, Mubble.id(name), baseItem);
 		if(cookTime != 0) FuelRegistry.INSTANCE.add(value, cookTime);
-		DataWriter.entryNamesData.items.add(Mubble.id(name).toString());
-		DataWriter.entryCountsData.items++;
-		DataWriter.save();
+		DataWriter.itemsEntries.add(Mubble.id(name));
 		return value;
 	}
 

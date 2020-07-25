@@ -16,9 +16,7 @@ import java.util.List;
 
 public class MubbleStatusEffects {
 	private static StatusEffect register(String name, StatusEffect statusEffect) {
-		DataWriter.entryNamesData.status_effects.add(Mubble.id(name).toString());
-		DataWriter.entryCountsData.status_effects++;
-		DataWriter.save();
+		DataWriter.statusEffectsEntries.add(Mubble.id(name));
 		return Registry.register(Registry.STATUS_EFFECT, new Identifier(Mubble.MOD_ID, name), statusEffect);
 	}
 

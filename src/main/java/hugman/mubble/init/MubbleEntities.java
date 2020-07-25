@@ -32,9 +32,7 @@ public class MubbleEntities {
 	public static final EntityType<KirbyBallEntity> KIRBY_BALL = register("kirby_ball", FabricEntityTypeBuilder.<KirbyBallEntity>create(SpawnGroup.MISC, KirbyBallEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackable(4, 10).build());
 
 	public static <T extends Entity> EntityType<T> register(String name, EntityType<T> builder) {
-		DataWriter.entryNamesData.entities.add(Mubble.id(name).toString());
-		DataWriter.entryCountsData.entities++;
-		DataWriter.save();
+		DataWriter.entitiesEntries.add(Mubble.id(name));
 		return Registry.register(Registry.ENTITY_TYPE, new Identifier(Mubble.MOD_ID, name), builder);
 	}
 

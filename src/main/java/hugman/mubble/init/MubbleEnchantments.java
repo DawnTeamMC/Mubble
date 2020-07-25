@@ -14,9 +14,7 @@ public class MubbleEnchantments {
 	public static final Enchantment IGNORANCE_CURSE = register("ignorance_curse", new IgnoranceCurseEnchantment(Enchantment.Rarity.VERY_RARE, EquipmentSlot.values()));
 
 	private static Enchantment register(String name, Enchantment enchantment) {
-		DataWriter.entryNamesData.enchantments.add(Mubble.id(name).toString());
-		DataWriter.entryCountsData.enchantments++;
-		DataWriter.save();
+		DataWriter.enchantmentsEntries.add(Mubble.id(name));
 		return Registry.register(Registry.ENCHANTMENT, Mubble.id(name), enchantment);
 	}
 }

@@ -24,9 +24,7 @@ public class MubblePaintingTypes {
 	public static final PaintingMotive SSBU_ROSTER = register("ssbu_roster", 384, 64);
 
 	private static PaintingMotive register(String name, int width, int height) {
-		DataWriter.entryNamesData.painting_types.add(Mubble.id(name).toString());
-		DataWriter.entryCountsData.painting_types++;
-		DataWriter.save();
+		DataWriter.paintingTypesEntries.add(Mubble.id(name));
 		return Registry.register(Registry.PAINTING_MOTIVE, Mubble.id(name), new PaintingMotive(width, height));
 	}
 }

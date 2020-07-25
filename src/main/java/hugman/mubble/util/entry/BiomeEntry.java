@@ -43,12 +43,12 @@ public class BiomeEntry extends Entry<Biome> {
 			case OVERWORLD_CONTINENTAL:
 				OverworldBiomes.addContinentalBiome(value, climate, weight);
 				if(isSpawnBiome) FabricBiomes.addSpawnBiome(value);
+				break;
 			case THE_NETHER:
 				NetherBiomes.addNetherBiome(value, noises);
+				break;
 		}
-		DataWriter.entryNamesData.biomes.add(Mubble.id(name).toString());
-		DataWriter.entryCountsData.biomes++;
-		DataWriter.save();
+		DataWriter.biomesEntries.add(Mubble.id(name));
 		return value;
 	}
 

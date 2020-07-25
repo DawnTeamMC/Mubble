@@ -45,13 +45,10 @@ public class BlockEntry extends Entry<Block> {
 		if(!noItem) {
 			Item item = Registry.register(Registry.ITEM, Registry.BLOCK.getId(value), new BlockItem(value, new Item.Settings().group(itemGroup)));
 			((BlockItem)item).appendBlocks(Item.BLOCK_ITEMS, item);
-			DataWriter.entryNamesData.block_items.add(Mubble.id(name).toString());
-			DataWriter.entryCountsData.block_items++;
+			DataWriter.blockItemsEntries.add(Mubble.id(name));
 			FuelRegistry.INSTANCE.add(value, cookTime);
 		}
-		DataWriter.entryNamesData.blocks.add(Mubble.id(name).toString());
-		DataWriter.entryCountsData.blocks++;
-		DataWriter.save();
+		DataWriter.blockEntries.add(Mubble.id(name));
 		return value;
 	}
 

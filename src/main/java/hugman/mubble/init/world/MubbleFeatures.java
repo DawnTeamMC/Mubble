@@ -20,9 +20,7 @@ public class MubbleFeatures {
 	public static final Feature<SingleStateFeatureConfig> ENDER_BOULDER = register("ender_boulder", new EndBoulderFeature(SingleStateFeatureConfig.CODEC));
 
 	private static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature) {
-		DataWriter.entryNamesData.features.add(Mubble.id(name).toString());
-		DataWriter.entryCountsData.features++;
-		DataWriter.save();
-		return Registry.register(Registry.FEATURE, new Identifier(Mubble.MOD_ID, name), feature);
+		DataWriter.featuresEntries.add(Mubble.id(name));
+		return Registry.register(Registry.FEATURE, Mubble.id(name), feature);
 	}
 }
