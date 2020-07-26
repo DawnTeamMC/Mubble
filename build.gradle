@@ -23,10 +23,9 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
 	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	//modCompile "com.github.Hugman76:CommonExpansion:master-SNAPSHOT"
-	//modCompile "io.github.prospector:modmenu:${modmenu_version}"
+	//modCompile "com.github.Hugman76:Dawn:master-SNAPSHOT"
 
-	//include "com.github.Hugman76:CommonExpansion:master-SNAPSHOT"
+	//include "com.github.Hugman76:Dawn:master-SNAPSHOT"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }

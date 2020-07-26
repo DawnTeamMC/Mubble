@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "hugman.mubble.mixin",
+	"package": "com.hugman.mubble.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
 		"AxeItemMixin",
@@ -10,8 +10,11 @@
 		"TreeFeatureMixin"
 	],
 	"client": [
-		"client.ClientPlayNetworkHandlerMixin", "client.GameRendererAccessor", "client.ItemRendererMixin",
-		"client.ItemStackMixin", "client.PlayerEntityMixin"
+		"client.ClientPlayNetworkHandlerMixin",
+		"client.GameRendererAccessor",
+		"client.ItemRendererMixin",
+		"client.ItemStackMixin",
+		"client.PlayerEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
