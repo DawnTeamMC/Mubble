@@ -1,7 +1,6 @@
 package hugman.mubble.util.entry;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.util.DataWriter;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -14,7 +13,6 @@ import net.minecraft.client.render.RenderLayers;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class BlockEntry extends Entry<Block> {
@@ -44,7 +42,7 @@ public class BlockEntry extends Entry<Block> {
 		FlammableBlockRegistry.getDefaultInstance().add(value, flammabilityBurn, flammabilitySpread);
 		if(!noItem) {
 			Item item = Registry.register(Registry.ITEM, Registry.BLOCK.getId(value), new BlockItem(value, new Item.Settings().group(itemGroup)));
-			((BlockItem)item).appendBlocks(Item.BLOCK_ITEMS, item);
+			((BlockItem) item).appendBlocks(Item.BLOCK_ITEMS, item);
 			DataWriter.blockItemsEntries.add(Mubble.id(name));
 			FuelRegistry.INSTANCE.add(value, cookTime);
 		}
@@ -84,7 +82,7 @@ public class BlockEntry extends Entry<Block> {
 		 * <p>Template -> (block class, render layer, item group)
 		 * <p>Block -> (block settings, flammability, cook time)
 		 *
-		 * @param suffix     The suffix of the block.
+		 * @param suffix   The suffix of the block.
 		 * @param template The template to copy properties from.
 		 */
 		public Builder(String suffix, BlockTemplate template, FabricBlockSettings settings) {
@@ -96,7 +94,7 @@ public class BlockEntry extends Entry<Block> {
 		 * <p>Template -> (block class, render layer, item group)
 		 * <p>Block -> (block settings, flammability, cook time)</p>
 		 *
-		 * @param suffix      The suffix of the block.
+		 * @param suffix    The suffix of the block.
 		 * @param template  The template to copy properties from.
 		 * @param baseBlock The block to copy properties from.
 		 */
@@ -110,7 +108,7 @@ public class BlockEntry extends Entry<Block> {
 		 * <p>Template -> (block class, render layer, item group)
 		 * <p>Block -> (block settings, flammability, cook time)
 		 *
-		 * @param suffix      The suffix of the block.
+		 * @param suffix    The suffix of the block.
 		 * @param template  The template to copy properties from.
 		 * @param baseBlock The block to copy properties from.
 		 * @param color     The material color of the block.

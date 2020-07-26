@@ -1,7 +1,6 @@
 package hugman.mubble.util.entry.pack;
 
 import com.google.common.collect.ImmutableMap;
-import hugman.mubble.Mubble;
 import hugman.mubble.util.entry.BlockEntry;
 import hugman.mubble.util.entry.BlockTemplate;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -15,6 +14,7 @@ public class MCBlockEntryPack {
 
 	/**
 	 * Creates an entry pack containing blocks of 16 different colors.
+	 *
 	 * @param template The template to use.
 	 * @param settings The settings.
 	 */

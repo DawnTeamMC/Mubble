@@ -6,7 +6,6 @@ import hugman.mubble.object.enchantment.TelekinesisEnchantment;
 import hugman.mubble.util.DataWriter;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class MubbleEnchantments {

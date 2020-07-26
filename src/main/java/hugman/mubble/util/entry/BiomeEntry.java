@@ -1,13 +1,11 @@
 package hugman.mubble.util.entry;
 
 import hugman.mubble.Mubble;
-import hugman.mubble.init.world.MubbleBiomes;
 import hugman.mubble.util.DataWriter;
 import net.fabricmc.fabric.api.biomes.v1.FabricBiomes;
 import net.fabricmc.fabric.api.biomes.v1.NetherBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -35,14 +33,15 @@ public class BiomeEntry extends Entry<Biome> {
 	@Override
 	protected Biome register() {
 		value = Registry.register(BuiltinRegistries.BIOME, Mubble.id(name), baseBiome);
-		switch(this.spawnDimension)
-		{
+		switch(this.spawnDimension) {
 			case NONE:
 			default:
 				break;
 			case OVERWORLD_CONTINENTAL:
 				OverworldBiomes.addContinentalBiome(value, climate, weight);
-				if(isSpawnBiome) FabricBiomes.addSpawnBiome(value);
+				if(isSpawnBiome) {
+					FabricBiomes.addSpawnBiome(value);
+				}
 				break;
 			case THE_NETHER:
 				NetherBiomes.addNetherBiome(value, noises);
@@ -65,7 +64,8 @@ public class BiomeEntry extends Entry<Biome> {
 
 		/**
 		 * Creates a simple biome that won't spawn in any dimension.
-		 * @param name The name of the biome.
+		 *
+		 * @param name      The name of the biome.
 		 * @param baseBiome The biome itself.
 		 */
 		public Builder(String name, Biome baseBiome) {
@@ -80,8 +80,9 @@ public class BiomeEntry extends Entry<Biome> {
 
 		/**
 		 * Adds the biome to the overworld continental generation.
-		 * @param climate The biome climate.
-		 * @param weight The biome weight.
+		 *
+		 * @param climate      The biome climate.
+		 * @param weight       The biome weight.
 		 * @param isSpawnBiome Defines if the player should be able to naturally spawn in the biome.
 		 */
 		public Builder addToOverworldContinental(OverworldClimate climate, double weight, boolean isSpawnBiome) {

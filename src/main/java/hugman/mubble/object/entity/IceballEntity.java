@@ -1,9 +1,9 @@
 package hugman.mubble.object.entity;
 
-import hugman.mubble.init.MubbleStatusEffects;
 import hugman.mubble.init.MubbleEntities;
 import hugman.mubble.init.MubbleItems;
 import hugman.mubble.init.MubbleSounds;
+import hugman.mubble.init.MubbleStatusEffects;
 import hugman.mubble.init.data.MubbleTags;
 import net.minecraft.block.AirBlock;
 import net.minecraft.block.Block;

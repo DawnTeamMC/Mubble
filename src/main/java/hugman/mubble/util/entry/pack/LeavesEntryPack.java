@@ -12,6 +12,7 @@ public class LeavesEntryPack {
 
 	/**
 	 * Creates an entry pack containing a leaves entry and its leaf pile variant.
+	 *
 	 * @param suffix The suffix of the leaves.
 	 */
 	public LeavesEntryPack(String suffix) {

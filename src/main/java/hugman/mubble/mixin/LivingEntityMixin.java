@@ -1,7 +1,7 @@
 package hugman.mubble.mixin;
 
-import hugman.mubble.init.MubbleStatusEffects;
 import hugman.mubble.init.MubbleEnchantments;
+import hugman.mubble.init.MubbleStatusEffects;
 import hugman.mubble.init.data.MubbleTags;
 import hugman.mubble.object.item.LightsaberItem;
 import hugman.mubble.util.EnchantmentUtil;

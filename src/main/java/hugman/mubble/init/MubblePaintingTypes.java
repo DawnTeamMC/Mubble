@@ -3,7 +3,6 @@ package hugman.mubble.init;
 import hugman.mubble.Mubble;
 import hugman.mubble.util.DataWriter;
 import net.minecraft.entity.decoration.painting.PaintingMotive;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class MubblePaintingTypes {

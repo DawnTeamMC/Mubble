@@ -6,12 +6,10 @@ import hugman.mubble.Mubble;
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.object.world.gen.feature.HugeNetherMushroomFeatureConfig;
 import hugman.mubble.util.DataWriter;
-import hugman.mubble.util.MoreWordUtils;
 import hugman.mubble.util.entry.BlockTemplate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.Heightmap;
@@ -28,8 +26,6 @@ import net.minecraft.world.gen.stateprovider.SimpleBlockStateProvider;
 import net.minecraft.world.gen.stateprovider.WeightedBlockStateProvider;
 import net.minecraft.world.gen.trunk.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.OptionalInt;
 import java.util.Set;
 

@@ -12,7 +12,8 @@ import java.util.function.Supplier;
 public class FungusEntryPack extends PottedPlantEntryPack {
 	/**
 	 * Creates an entry pack containing a fungus entry and its potted variant.
-	 * @param suffix The suffix of the fungus plant.
+	 *
+	 * @param suffix   The suffix of the fungus plant.
 	 * @param supplier The supplier for the huge fungus feature.
 	 */
 	public FungusEntryPack(String suffix, Supplier<ConfiguredFeature<HugeFungusFeatureConfig, ?>> supplier) {

@@ -4,15 +4,10 @@ import hugman.mubble.Mubble;
 import hugman.mubble.object.effect.HiccupEffect;
 import hugman.mubble.object.effect.SimpleEffect;
 import hugman.mubble.util.DataWriter;
-import hugman.mubble.util.MoreWordUtils;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MubbleStatusEffects {
 	private static StatusEffect register(String name, StatusEffect statusEffect) {

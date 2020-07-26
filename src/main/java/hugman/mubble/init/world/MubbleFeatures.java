@@ -6,13 +6,11 @@ import hugman.mubble.object.world.gen.feature.HugeNetherMushroomFeature;
 import hugman.mubble.object.world.gen.feature.HugeNetherMushroomFeatureConfig;
 import hugman.mubble.object.world.gen.feature.TallHugeFungusFeature;
 import hugman.mubble.util.DataWriter;
-import hugman.mubble.util.MoreWordUtils;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.feature.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.FeatureConfig;
+import net.minecraft.world.gen.feature.HugeFungusFeatureConfig;
+import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 
 public class MubbleFeatures {
 	public static final Feature<HugeFungusFeatureConfig> TALL_HUGE_FUNGI = register("tall_huge_fungus", new TallHugeFungusFeature(HugeFungusFeatureConfig.CODEC));

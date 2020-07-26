@@ -2,8 +2,8 @@ package hugman.mubble.util.entry.pack;
 
 import hugman.mubble.init.MubbleBlocks;
 import hugman.mubble.object.item.AxeItem;
-import hugman.mubble.util.entry.EntryHelper;
 import hugman.mubble.util.entry.BlockEntry;
+import hugman.mubble.util.entry.EntryHelper;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
@@ -21,10 +21,11 @@ public class LogsEntryPack extends EntryHelper {
 
 	/**
 	 * Creates an entry pack containing a log and wood block and their stripped variants.
-	 * @param suffix The suffix of the leaves.
+	 *
+	 * @param suffix      The suffix of the leaves.
 	 * @param insideColor The inside color of the log block.
-	 * @param barkColor The bark color of the log block.
-	 * @param isNether Defines if the the blocks are used for nether trees. (changes the name, sounds and materials)
+	 * @param barkColor   The bark color of the log block.
+	 * @param isNether    Defines if the the blocks are used for nether trees. (changes the name, sounds and materials)
 	 */
 	public LogsEntryPack(String suffix, MaterialColor insideColor, MaterialColor barkColor, boolean isNether) {
 		this.logSuffix = isNether ? "_stem" : "_log";

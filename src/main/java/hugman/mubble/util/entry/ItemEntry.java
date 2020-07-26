@@ -19,7 +19,9 @@ public class ItemEntry extends Entry<Item> {
 	@Override
 	protected Item register() {
 		value = Registry.register(Registry.ITEM, Mubble.id(name), baseItem);
-		if(cookTime != 0) FuelRegistry.INSTANCE.add(value, cookTime);
+		if(cookTime != 0) {
+			FuelRegistry.INSTANCE.add(value, cookTime);
+		}
 		DataWriter.itemsEntries.add(Mubble.id(name));
 		return value;
 	}
@@ -31,7 +33,8 @@ public class ItemEntry extends Entry<Item> {
 
 		/**
 		 * Creates a simple item with no cook time.
-		 * @param name The name of the item.
+		 *
+		 * @param name     The name of the item.
 		 * @param baseItem The item itself.
 		 */
 		public Builder(String name, Item baseItem) {

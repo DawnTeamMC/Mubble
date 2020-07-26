@@ -11,7 +11,6 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.sound.BlockSoundGroup;
 
 public enum BlockTemplate {
 	CUBE("", ItemGroup.BUILDING_BLOCKS),

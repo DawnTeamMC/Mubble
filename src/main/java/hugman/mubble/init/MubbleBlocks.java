@@ -430,7 +430,7 @@ public class MubbleBlocks {
 	/* YOUTUBE */
 	public static final Block KORETATO_BLOCK = new Builder("koretato_block", new KoretatoBlock()).noItem().build();
 	public static final PottedPlantEntryPack POTATO_FLOWER = new PottedPlantEntryPack(new Builder("potato_flower", new FlowerBlock(StatusEffects.HUNGER, 9, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100).setRenderLayer(RenderLayer.getCutout()).build());
-	
+
 	public static class Settings {
 		public static final FabricBlockSettings LOG = FabricBlockSettings.of(Material.WOOD).strength(2.0F).sounds(BlockSoundGroup.WOOD);
 		public static final FabricBlockSettings STEM = FabricBlockSettings.of(Material.NETHER_WOOD).strength(2.0F).sounds(BlockSoundGroup.NETHER_STEM);

@@ -1,18 +1,15 @@
 package hugman.mubble.init;
 
-import hugman.mubble.Mubble;
 import hugman.mubble.init.client.MubbleShaders;
 import hugman.mubble.object.block.block_state_property.Princess;
 import hugman.mubble.object.item.costume.*;
+import hugman.mubble.util.entry.ItemEntry.Builder;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import hugman.mubble.util.entry.ItemEntry.Builder;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class MubbleCostumes {
 	/* Templates */

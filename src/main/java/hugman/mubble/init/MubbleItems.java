@@ -1,20 +1,14 @@
 package hugman.mubble.init;
 
-import hugman.mubble.Mubble;
 import hugman.mubble.init.data.MubbleFoods;
 import hugman.mubble.init.data.MubbleItemTiers;
 import hugman.mubble.object.item.AxeItem;
 import hugman.mubble.object.item.HoeItem;
 import hugman.mubble.object.item.PickaxeItem;
 import hugman.mubble.object.item.*;
-import hugman.mubble.util.MoreWordUtils;
-import hugman.mubble.util.entry.ItemEntry;
 import hugman.mubble.util.entry.ItemEntry.Builder;
 import net.minecraft.item.*;
 import net.minecraft.util.Rarity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MubbleItems {
 	/* MUBBLE */

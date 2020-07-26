@@ -22,7 +22,6 @@ public class Mubble implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		new DataWriter();
-
 		new MubbleBlocks();
 		new MubbleConfiguredFeatures();
 		new MubbleCostumes();
@@ -44,8 +43,7 @@ public class Mubble implements ModInitializer {
 		MubbleGenerators.init();
 	}
 
-	public static Identifier id(String name)
-	{
+	public static Identifier id(String name) {
 		return new Identifier(Mubble.MOD_ID, name);
 	}
 	

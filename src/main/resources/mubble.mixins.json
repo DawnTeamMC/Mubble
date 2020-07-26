@@ -10,11 +10,8 @@
 		"TreeFeatureMixin"
 	],
 	"client": [
-		"client.ClientPlayNetworkHandlerMixin",
-		"client.GameRendererAccessor",
-		"client.ItemStackMixin",
-		"client.ItemRendererMixin",
-		"client.PlayerEntityMixin"
+		"client.ClientPlayNetworkHandlerMixin", "client.GameRendererAccessor", "client.ItemRendererMixin",
+		"client.ItemStackMixin", "client.PlayerEntityMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
