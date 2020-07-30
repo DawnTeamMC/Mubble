@@ -1,5 +1,5 @@
 {
-	"parent": "mubble:block/vertical_slab/west",
+	"parent": "dawn:block/vertical_slab/west",
 	"textures": {
 		"block": "mubble:block/pink_quartz_paving"
 	}

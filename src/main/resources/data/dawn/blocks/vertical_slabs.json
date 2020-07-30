@@ -1,0 +1,30 @@
+{
+	"replace": false,
+	"values": [
+		"#mubble:brick/vertical_slabs",
+		"#mubble:concrete/vertical_slabs",
+		"#mubble:dark_prismarine/vertical_slabs",
+		"#mubble:terracotta/vertical_slabs",
+		"mubble:cobblestone_brick_vertical_slab",
+		"mubble:mossy_cobblestone_brick_vertical_slab",
+		"mubble:granite_brick_vertical_slab",
+		"mubble:diorite_brick_vertical_slab",
+		"mubble:andesite_brick_vertical_slab",
+		"mubble:sandstone_brick_vertical_slab",
+		"mubble:polished_sandstone_vertical_slab",
+		"mubble:red_sandstone_brick_vertical_slab",
+		"mubble:polished_red_sandstone_vertical_slab",
+		"mubble:smooth_stone_paving_vertical_slab",
+		"mubble:chiseled_prismarine_vertical_slab",
+		"mubble:prismarine_brick_paving_vertical_slab",
+		"mubble:blunite_vertical_slab",
+		"mubble:polished_blunite_vertical_slab",
+		"mubble:carbonite_vertical_slab",
+		"mubble:polished_carbonite_vertical_slab",
+		"mubble:permafrost_brick_vertical_slab",
+		"mubble:blue_permafrost_brick_vertical_slab",
+		"mubble:medusa_brick_vertical_slab",
+		"mubble:mirror_temple_brick_vertical_slab",
+		"mubble:old_site_brick_vertical_slab"
+	]
+}

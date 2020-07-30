@@ -1,7 +1,6 @@
 package com.hugman.mubble.init;
 
 import com.hugman.mubble.Mubble;
-import com.hugman.mubble.util.DataWriter;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.registry.Registry;
 
@@ -114,7 +113,6 @@ public class MubbleSounds {
 	public static final SoundEvent UI_TIMESWAP_TABLE_TAKE_RESULT = register("ui.timeswap_table.take_result");
 
 	private static SoundEvent register(String name) {
-		DataWriter.soundsEntries.add(Mubble.id(name));
 		return Registry.register(Registry.SOUND_EVENT, Mubble.id(name), new SoundEvent(Mubble.id(name)));
 	}
 }

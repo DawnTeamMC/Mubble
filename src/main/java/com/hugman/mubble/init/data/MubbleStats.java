@@ -1,7 +1,6 @@
 package com.hugman.mubble.init.data;
 
 import com.hugman.mubble.Mubble;
-import com.hugman.mubble.util.DataWriter;
 import net.minecraft.stat.StatFormatter;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
@@ -14,7 +13,6 @@ public class MubbleStats {
 	public static final Identifier TALKED_TO_TOAD = register("talked_to_toad", StatFormatter.DEFAULT);
 
 	private static Identifier register(String name, StatFormatter statFormatter) {
-		DataWriter.statsEntries.add(Mubble.id(name));
 		Registry.register(Registry.CUSTOM_STAT, Mubble.id(name), Mubble.id(name));
 		Stats.CUSTOM.getOrCreateStat(Mubble.id(name), statFormatter);
 		return Mubble.id(name);

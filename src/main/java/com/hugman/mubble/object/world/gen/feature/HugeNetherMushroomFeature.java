@@ -8,7 +8,7 @@ import net.minecraft.block.MushroomBlock;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
@@ -23,7 +23,7 @@ public class HugeNetherMushroomFeature extends Feature<HugeNetherMushroomFeature
 	}
 
 	@Override
-	public boolean generate(ServerWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, HugeNetherMushroomFeatureConfig config) {
+	public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, HugeNetherMushroomFeatureConfig config) {
 		int stemHeight = getStemHeight(random, config);
 		int hatSize = getHatSize(random, config);
 		BlockPos origin = getOrigin(world, pos, stemHeight, config);

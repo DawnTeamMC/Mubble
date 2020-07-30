@@ -1,7 +1,9 @@
 package com.hugman.mubble.mixin.client;
 
+import com.hugman.dawn.api.util.EnchantmentUtil;
 import com.hugman.mubble.init.MubbleEnchantments;
-import com.hugman.mubble.util.EnchantmentUtil;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.render.item.ItemRenderer;
@@ -10,6 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+@Environment(EnvType.CLIENT)
 @Mixin(ItemRenderer.class)
 public class ItemRendererMixin {
 	private static final String ItemStack = "Lnet/minecraft/item/ItemStack;";

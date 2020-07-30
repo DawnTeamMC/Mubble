@@ -1,7 +1,9 @@
 package com.hugman.mubble.mixin.client;
 
+import com.hugman.dawn.api.util.EnchantmentUtil;
 import com.hugman.mubble.init.MubbleEnchantments;
-import com.hugman.mubble.util.EnchantmentUtil;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -17,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import javax.annotation.Nullable;
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 @Mixin(ItemStack.class)
 public class ItemStackMixin {
 	private static final String List = "Ljava/util/List;";

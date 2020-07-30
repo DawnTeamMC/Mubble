@@ -3,7 +3,6 @@ package com.hugman.mubble.object.entity;
 import com.hugman.mubble.init.MubbleEntities;
 import com.hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.class_5425;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.ai.pathing.PathNodeType;
@@ -27,6 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biomes;
@@ -56,7 +56,7 @@ public class DuckEntity extends AnimalEntity {
 	}
 
 	@Override
-	public EntityData initialize(class_5425 world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
+	public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
 		Biome biome = world.getBiome(this.getBlockPos());
 		DuckEntity.Type type = DuckEntity.Type.getTypeByBiome(biome);
 		if(entityData instanceof DuckEntity.DuckData) {

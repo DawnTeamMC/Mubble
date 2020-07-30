@@ -10,7 +10,7 @@
 			"item": "minecraft:glass_pane"
 		},
 		"O": {
-			"tag": "c:stone"
+			"item": "minecraft:obsidian"
 		}
 	},
 	"result": {

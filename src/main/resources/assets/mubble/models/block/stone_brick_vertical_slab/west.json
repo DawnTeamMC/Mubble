@@ -1,6 +1,0 @@
-{
-	"parent": "mubble:block/vertical_slab/west",
-	"textures": {
-		"block": "minecraft:block/stone_bricks"
-	}
-}

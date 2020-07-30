@@ -2,11 +2,10 @@ package com.hugman.mubble.init.world;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.hugman.dawn.api.util.DefaultBlockGetter;
 import com.hugman.mubble.Mubble;
 import com.hugman.mubble.init.MubbleBlocks;
 import com.hugman.mubble.object.world.gen.feature.HugeNetherMushroomFeatureConfig;
-import com.hugman.mubble.util.DataWriter;
-import com.hugman.mubble.util.entry.BlockTemplate;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -31,12 +30,11 @@ import java.util.Set;
 
 public class MubbleConfiguredFeatures {
 	private static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String name, ConfiguredFeature<FC, ?> feature) {
-		DataWriter.configuredFeaturesEntries.add(Mubble.id(name));
 		return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Mubble.id(name), feature);
 	}
 
-	public static final ConfiguredFeature<?, ?> ORE_BLUNITE = register("ore_blunite", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.BLUNITE_BLOCKS.getBlock(BlockTemplate.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
-	public static final ConfiguredFeature<?, ?> ORE_CARBONITE = register("ore_carbonite", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.CARBONITE_BLOCKS.getBlock(BlockTemplate.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
+	public static final ConfiguredFeature<?, ?> ORE_BLUNITE = register("ore_blunite", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.BLUNITE_BLOCKS.getBlock(DefaultBlockGetter.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
+	public static final ConfiguredFeature<?, ?> ORE_CARBONITE = register("ore_carbonite", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.CARBONITE_BLOCKS.getBlock(DefaultBlockGetter.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
 	public static final ConfiguredFeature<?, ?> ORE_VANADIUM = register("ore_vanadium", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.VANADIUM_ORE.getDefaultState(), 6)).method_30377(80).spreadHorizontally().repeat(10));
 
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> AUTUMN_OAK = register("autumn_oak", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.OAK_LOG), new SimpleBlockStateProvider(States.AUTUMN_OAK_LEAVES), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
@@ -51,7 +49,7 @@ public class MubbleConfiguredFeatures {
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> FANCY_AUTUMN_BIRCH_BEES_002 = register("fancy_autumn_birch_bees_002", Feature.TREE.configure(FANCY_AUTUMN_BIRCH.getConfig().setTreeDecorators(ImmutableList.of(ConfiguredFeatures.Decorators.REGULAR_BEEHIVES_TREES))));
 	public static final ConfiguredFeature<?, ?> PATCH_AUTUMN_BIRCH_LEAF_PILE = register("patch_autumn_birch_leaf_pile", Configs.patch(States.AUTUMN_BIRCH_LEAF_PILE, 32));
 
-	public static final ConfiguredFeature<?, ?> PUMPKIN_PASTURES_TREES = register("pumpkin_pastures_trees", Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(AUTUMN_OAK_BEES_002.withChance(0.2F), FANCY_AUTUMN_BIRCH_BEES_002.withChance(0.1F)), AUTUMN_BIRCH_BEES_002)).decorate(ConfiguredFeatures.Decorators.field_26165).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(10, 0.1F, 1))));
+	public static final ConfiguredFeature<?, ?> PUMPKIN_PASTURES_TREES = register("pumpkin_pastures_trees", Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(AUTUMN_OAK_BEES_002.withChance(0.2F), FANCY_AUTUMN_BIRCH_BEES_002.withChance(0.1F)), AUTUMN_BIRCH_BEES_002)).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(10, 0.1F, 1))));
 
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> PINK_CHERRY_OAK = register("pink_cherry_oak", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.CHERRY_OAK_LOG), new SimpleBlockStateProvider(States.PINK_CHERRY_OAK_LEAVES), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(5, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> PINK_CHERRY_OAK_BEES_005 = register("pink_cherry_oak_bees_005", Feature.TREE.configure(PINK_CHERRY_OAK.getConfig().setTreeDecorators(ImmutableList.of(ConfiguredFeatures.Decorators.MORE_BEEHIVES_TREES))));
@@ -65,8 +63,8 @@ public class MubbleConfiguredFeatures {
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> FANCY_WHITE_CHERRY_OAK_BEES_005 = register("fancy_white_cherry_oak_bees_005", Feature.TREE.configure(FANCY_WHITE_CHERRY_OAK.getConfig().setTreeDecorators(ImmutableList.of(ConfiguredFeatures.Decorators.MORE_BEEHIVES_TREES))));
 	public static final ConfiguredFeature<?, ?> PATCH_WHITE_CHERRY_OAK_LEAF_PILE = register("patch_white_cherry_oak_leaf_pile", Configs.patch(States.WHITE_CHERRY_OAK_LEAF_PILE, 32));
 
-	public static final ConfiguredFeature<?, ?> PINK_CHERRY_OAK_FOREST_TREES = register("pink_cherry_oak_forest_trees", Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(WHITE_CHERRY_OAK.withChance(0.2F), FANCY_PINK_CHERRY_OAK.withChance(0.1F)), PINK_CHERRY_OAK)).decorate(ConfiguredFeatures.Decorators.field_26165).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(10, 0.1F, 1))));
-	public static final ConfiguredFeature<?, ?> WHITE_CHERRY_OAK_FOREST_TREES = register("white_cherry_oak_forest_trees", Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(PINK_CHERRY_OAK.withChance(0.2F), FANCY_WHITE_CHERRY_OAK.withChance(0.1F)), WHITE_CHERRY_OAK)).decorate(ConfiguredFeatures.Decorators.field_26165).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(10, 0.1F, 1))));
+	public static final ConfiguredFeature<?, ?> PINK_CHERRY_OAK_FOREST_TREES = register("pink_cherry_oak_forest_trees", Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(WHITE_CHERRY_OAK.withChance(0.2F), FANCY_PINK_CHERRY_OAK.withChance(0.1F)), PINK_CHERRY_OAK)).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(10, 0.1F, 1))));
+	public static final ConfiguredFeature<?, ?> WHITE_CHERRY_OAK_FOREST_TREES = register("white_cherry_oak_forest_trees", Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(PINK_CHERRY_OAK.withChance(0.2F), FANCY_WHITE_CHERRY_OAK.withChance(0.1F)), WHITE_CHERRY_OAK)).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(10, 0.1F, 1))));
 
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> PALM = register("palm", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.PALM_LOG), new SimpleBlockStateProvider(States.PALM_LEAVES), new AcaciaFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0)), new ForkingTrunkPlacer(16, 2, 2), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
 
@@ -84,16 +82,16 @@ public class MubbleConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> PATCH_GRAY_MUSHROOM = register("patch_gray_mushroom", Configs.patch(States.GRAY_MUSHROOM, 64));
 	public static final ConfiguredFeature<?, ?> PATCH_BLACK_MUSHROOM = register("patch_black_mushroom", Configs.patch(States.BLACK_MUSHROOM, 64));
 
-	public static final ConfiguredFeature<?, ?> PATCH_BLUE_MUSHROOM_NORMAL = register("patch_blue_mushroom_normal", PATCH_BLUE_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_CYAN_MUSHROOM_NORMAL = register("patch_cyan_mushroom_normal", PATCH_CYAN_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_YELLOW_MUSHROOM_NORMAL = register("patch_yellow_mushroom_normal", PATCH_YELLOW_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_ORANGE_MUSHROOM_NORMAL = register("patch_orange_mushroom_normal", PATCH_ORANGE_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_PINK_MUSHROOM_NORMAL = register("patch_pink_mushroom_normal", PATCH_PINK_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_MAGENTA_MUSHROOM_NORMAL = register("patch_magenta_mushroom_normal", PATCH_MAGENTA_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_WHITE_MUSHROOM_NORMAL = register("patch_white_mushroom_normal", PATCH_WHITE_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_LIGHT_GRAY_MUSHROOM_NORMAL = register("patch_light_gray_mushroom_normal", PATCH_LIGHT_GRAY_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_GRAY_MUSHROOM_NORMAL = register("patch_gray_mushroom_normal", PATCH_GRAY_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_BLACK_MUSHROOM_NORMAL = register("patch_black_mushroom_normal", PATCH_BLACK_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_BLUE_MUSHROOM_NORMAL = register("patch_blue_mushroom_normal", PATCH_BLUE_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_CYAN_MUSHROOM_NORMAL = register("patch_cyan_mushroom_normal", PATCH_CYAN_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_YELLOW_MUSHROOM_NORMAL = register("patch_yellow_mushroom_normal", PATCH_YELLOW_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_ORANGE_MUSHROOM_NORMAL = register("patch_orange_mushroom_normal", PATCH_ORANGE_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_PINK_MUSHROOM_NORMAL = register("patch_pink_mushroom_normal", PATCH_PINK_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_MAGENTA_MUSHROOM_NORMAL = register("patch_magenta_mushroom_normal", PATCH_MAGENTA_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_WHITE_MUSHROOM_NORMAL = register("patch_white_mushroom_normal", PATCH_WHITE_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_LIGHT_GRAY_MUSHROOM_NORMAL = register("patch_light_gray_mushroom_normal", PATCH_LIGHT_GRAY_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_GRAY_MUSHROOM_NORMAL = register("patch_gray_mushroom_normal", PATCH_GRAY_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_BLACK_MUSHROOM_NORMAL = register("patch_black_mushroom_normal", PATCH_BLACK_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
 
 	public static final ConfiguredFeature<?, ?> PATCH_BLUE_MUSHROOM_NETHER = register("patch_blue_mushroom_nether", PATCH_BLUE_MUSHROOM.method_30377(128)).applyChance(2);
 	public static final ConfiguredFeature<?, ?> PATCH_CYAN_MUSHROOM_NETHER = register("patch_cyan_mushroom_nether", PATCH_CYAN_MUSHROOM.method_30377(128)).applyChance(2);
@@ -150,7 +148,7 @@ public class MubbleConfiguredFeatures {
 	public static final ConfiguredFeature<HugeFungusFeatureConfig, ?> AMARANTH_FUNGI_PLANTED = register("amaranth_fungi_planted", Feature.HUGE_FUNGUS.configure(new HugeFungusFeatureConfig(States.AMARANTH_DYLIUM, States.DARK_AMARANTH_STEM, States.AMARANTH_WART_BLOCK, States.COBWEB, true)));
 	public static final ConfiguredFeature<?, ?> AMARANTH_FOREST_VEGETATION = register("amaranth_forest_vegetation", Feature.NETHER_FOREST_VEGETATION.configure(ConfiguredFeatures.Configs.WARPED_ROOTS_CONFIG).decorate(Decorator.COUNT_MULTILAYER.configure(new CountConfig(6))));
 
-	public static final ConfiguredFeature<?, ?> ENDER_BOULDER = register("ender_boulder", MubbleFeatures.ENDER_BOULDER.configure(new SingleStateFeatureConfig(Blocks.OBSIDIAN.getDefaultState())).decorate(ConfiguredFeatures.Decorators.field_26165).repeatRandomly(2));
+	public static final ConfiguredFeature<?, ?> ENDER_BOULDER = register("ender_boulder", MubbleFeatures.ENDER_BOULDER.configure(new SingleStateFeatureConfig(Blocks.OBSIDIAN.getDefaultState())).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).repeatRandomly(2));
 
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> RED_PRESS_GARDEN_TREE = register("red_press_garden_tree", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.PRESS_GARDEN_LOG), new SimpleBlockStateProvider(States.RED_PRESS_GARDEN_LEAVES), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> FANCY_RED_PRESS_GARDEN_TREE = register("fancy_red_press_garden_tree", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.PRESS_GARDEN_LOG), new SimpleBlockStateProvider(States.RED_PRESS_GARDEN_LEAVES), new LargeOakFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(4), 4), new LargeOakTrunkPlacer(3, 11, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
@@ -163,7 +161,7 @@ public class MubbleConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> PINK_PRESS_GARDEN_BUSH = register("pink_press_garden_bush", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.PRESS_GARDEN_LOG), new SimpleBlockStateProvider(States.PINK_PRESS_GARDEN_LEAVES), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(1), 2), new StraightTrunkPlacer(1, 0, 0), new TwoLayersFeatureSize(0, 0, 0))).heightmap(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES).build()));
 
 	public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH = register("patch_blueberry_bush", Configs.patch(States.BLUEBERRY_BUSH, 64, ImmutableSet.of(States.GRASS_BLOCK.getBlock())));
-	public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH_SPARSE = register("patch_blueberry_bush_sparse", PATCH_BLUEBERRY_BUSH.decorate(ConfiguredFeatures.Decorators.field_26166));
+	public static final ConfiguredFeature<?, ?> PATCH_BLUEBERRY_BUSH_SPARSE = register("patch_blueberry_bush_sparse", PATCH_BLUEBERRY_BUSH.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE));
 
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> SCARLET_TREE = register("scarlet_tree", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.SCARLET_LOG), new SimpleBlockStateProvider(States.SCARLET_LEAVES), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> FANCY_SCARLET_TREE = register("fancy_scarlet_tree", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.SCARLET_LOG), new SimpleBlockStateProvider(States.SCARLET_LEAVES), new LargeOakFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(4), 4), new LargeOakTrunkPlacer(3, 11, 0), new TwoLayersFeatureSize(0, 0, 0, OptionalInt.of(4)))).ignoreVines().heightmap(Heightmap.Type.MOTION_BLOCKING).build()));
@@ -172,8 +170,8 @@ public class MubbleConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> SCARLET_BUSH = register("scarlet_bush", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.SCARLET_LOG), new SimpleBlockStateProvider(States.SCARLET_LEAVES), new BushFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(1), 2), new StraightTrunkPlacer(1, 0, 0), new TwoLayersFeatureSize(0, 0, 0))).heightmap(Heightmap.Type.MOTION_BLOCKING_NO_LEAVES).build()));
 
 	public static final ConfiguredFeature<?, ?> PATCH_SCARLET_MUSHROOM = register("patch_scarlet_mushroom", Configs.patch(States.SCARLET_MUSHROOM, 64));
-	public static final ConfiguredFeature<?, ?> PATCH_SCARLET_MUSHROOM_NORMAL = register("patch_scarlet_mushroom_normal", PATCH_SCARLET_MUSHROOM.decorate(ConfiguredFeatures.Decorators.field_26166).applyChance(4));
-	public static final ConfiguredFeature<?, ?> PATCH_SCARLET_ORCHID = register("patch_scarlet_orchid", Feature.FLOWER.configure(Configs.patch(States.SCARLET_ORCHID, 64).getConfig()).decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE).decorate(ConfiguredFeatures.Decorators.field_26165).repeat(4));
+	public static final ConfiguredFeature<?, ?> PATCH_SCARLET_MUSHROOM_NORMAL = register("patch_scarlet_mushroom_normal", PATCH_SCARLET_MUSHROOM.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP_SPREAD_DOUBLE).applyChance(4));
+	public static final ConfiguredFeature<?, ?> PATCH_SCARLET_ORCHID = register("patch_scarlet_orchid", Feature.FLOWER.configure(Configs.patch(States.SCARLET_ORCHID, 64).getConfig()).decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).repeat(4));
 
 	public static final class Configs {
 		protected static final HugeNetherMushroomFeatureConfig HUGE_NETHER_MUSHROOM_BLUE = new HugeNetherMushroomFeatureConfig(13, 8, States.BLUE_MUSHROOM_BLOCK, 3, 3, States.SHROOMLIGHT, 0.1F, 0.05F);

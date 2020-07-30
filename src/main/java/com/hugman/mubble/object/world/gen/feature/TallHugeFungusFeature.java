@@ -8,7 +8,7 @@ import net.minecraft.block.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.WorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
@@ -23,7 +23,7 @@ public class TallHugeFungusFeature extends Feature<HugeFungusFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ServerWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, HugeFungusFeatureConfig hugeFungusFeatureConfig) {
+	public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, HugeFungusFeatureConfig hugeFungusFeatureConfig) {
 		Block block = hugeFungusFeatureConfig.validBaseBlock.getBlock();
 		BlockPos pos2 = null;
 		if(hugeFungusFeatureConfig.planted) {

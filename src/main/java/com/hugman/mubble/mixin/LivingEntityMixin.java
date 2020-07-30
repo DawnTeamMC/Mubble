@@ -1,10 +1,10 @@
 package com.hugman.mubble.mixin;
 
+import com.hugman.dawn.api.util.EnchantmentUtil;
 import com.hugman.mubble.init.MubbleEnchantments;
 import com.hugman.mubble.init.MubbleStatusEffects;
 import com.hugman.mubble.init.data.MubbleTags;
 import com.hugman.mubble.object.item.LightsaberItem;
-import com.hugman.mubble.util.EnchantmentUtil;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;

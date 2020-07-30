@@ -1,6 +1,0 @@
-{
-	"parent": "mubble:block/pile",
-	"textures": {
-		"pile": "minecraft:block/jungle_leaves"
-	}
-}

@@ -3,7 +3,6 @@
 	"package": "com.hugman.mubble.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
-		"AxeItemMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
 		"PlayerEntityMixin",

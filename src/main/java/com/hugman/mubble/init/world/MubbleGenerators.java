@@ -1,17 +1,7 @@
 package com.hugman.mubble.init.world;
 
-import com.hugman.mubble.init.MubbleEntities;
-import com.hugman.mubble.object.entity.DuckEntity;
-import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
-import net.minecraft.entity.SpawnGroup;
-import net.minecraft.util.registry.BuiltinRegistries;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-import net.minecraft.world.gen.GenerationStep;
-import net.minecraft.world.gen.decorator.CountExtraDecoratorConfig;
-import net.minecraft.world.gen.decorator.Decorator;
-
 public class MubbleGenerators {
+	/* TODO
 	public static void handleBiome(Biome biome) {
 		if(!biome.getCategory().equals(Biome.Category.NETHER) && !biome.getCategory().equals(Biome.Category.THEEND)) {
 			biome.addFeature(GenerationStep.Feature.UNDERGROUND_ORES, MubbleConfiguredFeatures.ORE_BLUNITE);
@@ -34,4 +24,6 @@ public class MubbleGenerators {
 		BuiltinRegistries.BIOME.forEach(MubbleGenerators::handleBiome);
 		RegistryEntryAddedCallback.event(BuiltinRegistries.BIOME).register((i, identifier, biome) -> MubbleGenerators.handleBiome(biome));
 	}
+
+	 */
 }

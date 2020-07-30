@@ -10,7 +10,6 @@ import com.hugman.mubble.util.CalendarEvents;
 import com.hugman.mubble.util.trade_offer.ToadTradeOffers;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.class_5425;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer.Builder;
@@ -41,6 +40,7 @@ import net.minecraft.village.TradeOffer;
 import net.minecraft.village.TradeOffers;
 import net.minecraft.village.TraderOfferList;
 import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
@@ -56,7 +56,7 @@ public class ToadEntity extends AbstractTraderEntity {
 	}
 
 	@Override
-	public EntityData initialize(class_5425 world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
+	public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
 		ToadEntity.Type type = ToadEntity.Type.getTypeByIndex(this.world.random.nextInt(16));
 		if(entityData instanceof ToadEntity.ToadData) {
 			type = ((ToadEntity.ToadData) entityData).type;

@@ -1,7 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"mubble:brick_vertical_slab",
+		"dawn:brick_vertical_slab",
 		"mubble:white_brick_vertical_slab",
 		"mubble:light_gray_brick_vertical_slab",
 		"mubble:gray_brick_vertical_slab",

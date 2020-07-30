@@ -1,5 +1,5 @@
 {
-	"parent": "mubble:block/pile",
+	"parent": "dawn:block/pile",
 	"textures": {
 		"pile": "mubble:block/dandelion_pile"
 	}

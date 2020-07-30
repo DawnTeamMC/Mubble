@@ -2,257 +2,355 @@ package com.hugman.mubble.util;
 
 import com.google.common.collect.ImmutableList;
 import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
-import net.minecraft.client.color.world.GrassColors;
+import net.minecraft.client.sound.MusicType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.BiomeAdditionsSound;
 import net.minecraft.sound.BiomeMoodSound;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeEffects;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.*;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.carver.ConfiguredCarvers;
 import net.minecraft.world.gen.feature.*;
+import net.minecraft.world.gen.surfacebuilder.ConfiguredSurfaceBuilders;
 
 public class MubbleBiomeCreator {
-	private static class Helper {
-		private static Biome.Settings copyBiomeSettings(Biome biome) {
-			return new Biome.Settings()
-					.surfaceBuilder(biome.getSurfaceBuilder())
-					.precipitation(biome.getPrecipitation())
-					.category(biome.getCategory())
-					.depth(biome.getDepth())
-					.scale(biome.getScale())
-					.temperature(biome.getTemperature())
-					.downfall(biome.getDownfall())
-					.effects(biome.getEffects());
-		}
-
-		private static int getSkyColor(float f) {
-			float g = f / 3.0F;
-			g = MathHelper.clamp(g, -1.0F, 1.0F);
-			return MathHelper.hsvToRgb(0.62222224F - g * 0.05F, 0.5F + g * 0.1F, 1.0F);
-		}
+	private static int getSkyColor(float temperature) {
+		float g = temperature / 3.0F;
+		g = MathHelper.clamp(g, -1.0F, 1.0F);
+		return MathHelper.hsvToRgb(0.62222224F - g * 0.05F, 0.5F + g * 0.1F, 1.0F);
 	}
 
 	public static Biome createPumpkinPastures() {
-		Biome biome = createForest(0.8F, 0.9F, 155336, 541, 15232304, 15443554);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PUMPKIN_PASTURES_TREES);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_BIRCH_LEAF_PILE);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_OAK_LEAF_PILE);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_YELLOW_MUSHROOM_NORMAL);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_ORANGE_MUSHROOM_NORMAL);
-		return biome;
+		GenerationSettings.Builder generationBuilder = createForestGenerationSettings();
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PUMPKIN_PASTURES_TREES);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_BIRCH_LEAF_PILE);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_OAK_LEAF_PILE);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_YELLOW_MUSHROOM_NORMAL);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_ORANGE_MUSHROOM_NORMAL);
+		BiomeEffects.Builder effectBuilder = new BiomeEffects.Builder();
+		effectBuilder.fogColor(12638463);
+		effectBuilder.skyColor(getSkyColor(0.8F));
+		effectBuilder.waterColor(155336);
+		effectBuilder.waterFogColor(541);
+		effectBuilder.moodSound(BiomeMoodSound.CAVE);
+		effectBuilder.foliageColor(15232304);
+		effectBuilder.grassColor(15443554);
+		return createForest(generationBuilder.build(), effectBuilder.build(), 0.8F, 0.9F);
 	}
 
 	public static Biome createCherryOakForest(boolean isPink) {
-		Biome biome = createForest(0.6F, 0.4F, 6459391, 2170954, 15768259);
+		GenerationSettings.Builder generationBuilder = createForestGenerationSettings();
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PUMPKIN_PASTURES_TREES);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_BIRCH_LEAF_PILE);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_OAK_LEAF_PILE);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_YELLOW_MUSHROOM_NORMAL);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_ORANGE_MUSHROOM_NORMAL);
 		if(isPink) {
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PINK_CHERRY_OAK_FOREST_TREES);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_CHERRY_OAK_LEAF_PILE);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_MUSHROOM_NORMAL);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_MAGENTA_MUSHROOM_NORMAL);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PINK_CHERRY_OAK_FOREST_TREES);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_CHERRY_OAK_LEAF_PILE);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_MUSHROOM_NORMAL);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_MAGENTA_MUSHROOM_NORMAL);
 		}
 		else {
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.WHITE_CHERRY_OAK_FOREST_TREES);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_CHERRY_OAK_LEAF_PILE);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_MUSHROOM_NORMAL);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_LIGHT_GRAY_MUSHROOM_NORMAL);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.WHITE_CHERRY_OAK_FOREST_TREES);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_CHERRY_OAK_LEAF_PILE);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_MUSHROOM_NORMAL);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_LIGHT_GRAY_MUSHROOM_NORMAL);
 		}
-		return biome;
+		BiomeEffects.Builder effectBuilder = new BiomeEffects.Builder();
+		effectBuilder.fogColor(12638463);
+		effectBuilder.skyColor(getSkyColor(0.6F));
+		effectBuilder.waterColor(6459391);
+		effectBuilder.waterFogColor(2170954);
+		effectBuilder.moodSound(BiomeMoodSound.CAVE);
+		effectBuilder.foliageColor(15768259);
+		return createForest(generationBuilder.build(), effectBuilder.build(), 0.6F, 0.4F);
 	}
 
-	private static Biome createForest(float temperature, float downfall, int waterColor, int waterFogColor, int foliageColor, int grassColor) {
-		Biome biome = new Biome(Helper.copyBiomeSettings(Biomes.FOREST)
-				.temperature(temperature)
-				.downfall(downfall)
-				.effects((new BiomeEffects.Builder())
-						.waterColor(waterColor)
-						.waterFogColor(waterFogColor)
-						.fogColor(12638463)
-						.skyColor(Helper.getSkyColor(temperature))
-						.grassColor(grassColor)
-						.foliageColor(foliageColor)
-						.moodSound(BiomeMoodSound.CAVE)
-						.build())
-				.parent(null));
-		DefaultBiomeFeatures.addDefaultUndergroundStructures(biome);
-		biome.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
-		DefaultBiomeFeatures.addLandCarvers(biome);
-		DefaultBiomeFeatures.addDefaultLakes(biome);
-		DefaultBiomeFeatures.addDungeons(biome);
-		DefaultBiomeFeatures.addForestFlowers(biome);
-		DefaultBiomeFeatures.addMineables(biome);
-		DefaultBiomeFeatures.addDefaultOres(biome);
-		DefaultBiomeFeatures.addDefaultDisks(biome);
-		DefaultBiomeFeatures.addDefaultFlowers(biome);
-		DefaultBiomeFeatures.addForestGrass(biome);
-		DefaultBiomeFeatures.addDefaultMushrooms(biome);
-		DefaultBiomeFeatures.addDefaultVegetation(biome);
-		DefaultBiomeFeatures.addSprings(biome);
-		DefaultBiomeFeatures.addFrozenTopLayer(biome);
-		DefaultBiomeFeatures.addFarmAnimals(biome);
-		DefaultBiomeFeatures.addBatsAndMonsters(biome);
-		biome.addSpawn(SpawnGroup.CREATURE, new Biome.SpawnEntry(EntityType.WOLF, 5, 4, 4));
-		return biome;
+	public static Biome createForest(GenerationSettings generationBuilder, float temperature, float downfall, int waterColor, int waterFogColor) {
+		BiomeEffects.Builder effectBuilder = new BiomeEffects.Builder();
+		effectBuilder.fogColor(12638463);
+		effectBuilder.skyColor(getSkyColor(temperature));
+		effectBuilder.waterColor(waterColor);
+		effectBuilder.waterFogColor(waterFogColor);
+		effectBuilder.moodSound(BiomeMoodSound.CAVE);
+		return createForest(generationBuilder, effectBuilder.build(), temperature, downfall);
 	}
 
-	private static Biome createForest(float temperature, float downfall, int waterColor, int waterFogColor, int foliageColor) {
-		double d = MathHelper.clamp(temperature, 0.0F, 1.0F);
-		double e = MathHelper.clamp(downfall, 0.0F, 1.0F);
-		return createForest(temperature, downfall, waterColor, waterFogColor, foliageColor, GrassColors.getColor(d, e));
+	public static Biome createForest(GenerationSettings generationBuilder, BiomeEffects effectBuilder, float temperature, float downfall) {
+		SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
+		DefaultBiomeFeatures.addFarmAnimals(spawnBuilder);
+		DefaultBiomeFeatures.addBatsAndMonsters(spawnBuilder);
+		spawnBuilder.spawners(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.WOLF, 5, 4, 4));
+		Biome.Settings settings = new Biome.Settings();
+		settings.depth(0.1F);
+		settings.scale(0.2F);
+		settings.temperature(temperature);
+		settings.downfall(downfall);
+		settings.precipitation(Biome.Precipitation.RAIN);
+		settings.category(Biome.Category.FOREST);
+		settings.effects(effectBuilder);
+		settings.spawnSettings(spawnBuilder.build());
+		settings.generationSettings(generationBuilder);
+		return settings.build();
 	}
 
-	public static Biome createTallNetherForest(boolean isWarped) {
-		Biome baseBiome = isWarped ? Biomes.WARPED_FOREST : Biomes.CRIMSON_FOREST;
-		Biome biome = new Biome(Helper.copyBiomeSettings(baseBiome).depth(baseBiome.getDepth() * 2).scale(baseBiome.getScale() * 2));
-		biome.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER);
-		biome.addCarver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE);
-		biome.addStructureFeature(ConfiguredStructureFeatures.FORTRESS);
-		biome.addStructureFeature(ConfiguredStructureFeatures.BASTION_REMNANT);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SPRING_LAVA);
-		DefaultBiomeFeatures.addDefaultMushrooms(biome);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_OPEN);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_FIRE);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE_EXTRA);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.ORE_MAGMA);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_CLOSED);
-		DefaultBiomeFeatures.addNetherMineables(biome);
-		if(isWarped) {
-			biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_SOUL_FIRE);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.TALL_WARPED_FUNGI);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.WARPED_FOREST_VEGETATION);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.NETHER_SPROUTS);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.TWISTING_VINES);
-			biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
-			biome.addSpawn(SpawnGroup.CREATURE, new Biome.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
-			biome.addSpawnDensity(EntityType.ENDERMAN, 1.0D, 0.12D);
-		}
-		else {
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.WEEPING_VINES);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.TALL_CRIMSON_FUNGI);
-			biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.CRIMSON_FOREST_VEGETATION);
-			biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.ZOMBIFIED_PIGLIN, 1, 2, 4));
-			biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.HOGLIN, 9, 3, 4));
-			biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.PIGLIN, 5, 3, 4));
-			biome.addSpawn(SpawnGroup.CREATURE, new Biome.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
-		}
-		return biome;
+	private static GenerationSettings.Builder createForestGenerationSettings() {
+		GenerationSettings.Builder builder = new GenerationSettings.Builder();
+		builder.surfaceBuilder(ConfiguredSurfaceBuilders.GRASS);
+		builder.structureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
+		DefaultBiomeFeatures.addDefaultUndergroundStructures(builder);
+		DefaultBiomeFeatures.addLandCarvers(builder);
+		DefaultBiomeFeatures.addDefaultLakes(builder);
+		DefaultBiomeFeatures.addDungeons(builder);
+		DefaultBiomeFeatures.addForestFlowers(builder);
+		DefaultBiomeFeatures.addMineables(builder);
+		DefaultBiomeFeatures.addDefaultOres(builder);
+		DefaultBiomeFeatures.addDefaultDisks(builder);
+		DefaultBiomeFeatures.addDefaultFlowers(builder);
+		DefaultBiomeFeatures.addForestGrass(builder);
+		DefaultBiomeFeatures.addDefaultMushrooms(builder);
+		DefaultBiomeFeatures.addDefaultVegetation(builder);
+		DefaultBiomeFeatures.addSprings(builder);
+		DefaultBiomeFeatures.addFrozenTopLayer(builder);
+		return builder;
 	}
 
-	private static Biome createGallery() {
-		Biome biome = new Biome(Helper.copyBiomeSettings(Biomes.NETHER_WASTES).parent(Biomes.NETHER_WASTES.toString()));
-		biome.addStructureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER);
-		biome.addStructureFeature(ConfiguredStructureFeatures.FORTRESS);
-		biome.addStructureFeature(ConfiguredStructureFeatures.BASTION_REMNANT);
-		biome.addCarver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SPRING_LAVA);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_OPEN);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_FIRE);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_SOUL_FIRE);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE_EXTRA);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.ORE_MAGMA);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_CLOSED);
-		DefaultBiomeFeatures.addNetherMineables(biome);
-		biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.GHAST, 50, 4, 4));
-		biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.ZOMBIFIED_PIGLIN, 100, 4, 4));
-		biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.MAGMA_CUBE, 2, 4, 4));
-		biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
-		biome.addSpawn(SpawnGroup.MONSTER, new Biome.SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
-		biome.addSpawn(SpawnGroup.CREATURE, new Biome.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
-		return biome;
+	public static Biome createTallCrimsonForest() {
+		SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
+		spawnBuilder.spawners(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIFIED_PIGLIN, 1, 2, 4));
+		spawnBuilder.spawners(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.HOGLIN, 9, 3, 4));
+		spawnBuilder.spawners(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.PIGLIN, 5, 3, 4));
+		spawnBuilder.spawners(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
+		GenerationSettings.Builder generationBuilder = new GenerationSettings.Builder();
+		generationBuilder.surfaceBuilder(ConfiguredSurfaceBuilders.CRIMSON_FOREST);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER);
+		generationBuilder.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.FORTRESS);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.BASTION_REMNANT);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SPRING_LAVA);
+		DefaultBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_OPEN);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_FIRE);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE_EXTRA);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.ORE_MAGMA);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_CLOSED);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.WEEPING_VINES);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.TALL_CRIMSON_FUNGI);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.CRIMSON_FOREST_VEGETATION);
+		DefaultBiomeFeatures.addNetherMineables(generationBuilder);
+		BiomeEffects.Builder effectBuilder = new BiomeEffects.Builder();
+		effectBuilder.waterColor(4159204);
+		effectBuilder.waterFogColor(329011);
+		effectBuilder.fogColor(3343107);
+		effectBuilder.skyColor(getSkyColor(2.0F));
+		effectBuilder.particleConfig(new BiomeParticleConfig(ParticleTypes.CRIMSON_SPORE, 0.025F));
+		effectBuilder.loopSound(SoundEvents.AMBIENT_CRIMSON_FOREST_LOOP);
+		effectBuilder.moodSound(new BiomeMoodSound(SoundEvents.AMBIENT_CRIMSON_FOREST_MOOD, 6000, 8, 2.0D));
+		effectBuilder.additionsSound(new BiomeAdditionsSound(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS, 0.0111D));
+		effectBuilder.music(MusicType.createIngameMusic(SoundEvents.MUSIC_NETHER_CRIMSON_FOREST));
+		Biome.Settings settings = new Biome.Settings();
+		settings.precipitation(Biome.Precipitation.NONE);
+		settings.category(Biome.Category.NETHER);
+		settings.depth(0.2F);
+		settings.scale(0.4F);
+		settings.temperature(2.0F);
+		settings.downfall(0.0F);
+		settings.scale(0.2F);
+		settings.effects(effectBuilder.build());
+		settings.spawnSettings(spawnBuilder.build());
+		settings.generationSettings(generationBuilder.build());
+		settings.parent(null);
+		return settings.build();
 	}
 
-	public static Biome createTritanopianGallery() {
-		Biome biome = createGallery();
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_CYAN_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+	public static Biome createTallWarpedForest() {
+		SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
+		spawnBuilder.spawners(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
+		spawnBuilder.spawners(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
+		spawnBuilder.spawnCosts(EntityType.ENDERMAN, 1.0D, 0.12D).build();
+		GenerationSettings.Builder generationBuilder = new GenerationSettings.Builder();
+		generationBuilder.surfaceBuilder(ConfiguredSurfaceBuilders.WARPED_FOREST);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.FORTRESS);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.BASTION_REMNANT);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER);
+		generationBuilder.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SPRING_LAVA);
+		DefaultBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_OPEN);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_FIRE);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_SOUL_FIRE);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE_EXTRA);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.ORE_MAGMA);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_CLOSED);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.TALL_WARPED_FUNGI);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.WARPED_FOREST_VEGETATION);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.NETHER_SPROUTS);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.TWISTING_VINES);
+		DefaultBiomeFeatures.addNetherMineables(generationBuilder);
+		BiomeEffects.Builder effectBuilder = new BiomeEffects.Builder();
+		effectBuilder.waterColor(4159204);
+		effectBuilder.waterFogColor(329011);
+		effectBuilder.fogColor(1705242);
+		effectBuilder.skyColor(getSkyColor(2.0F));
+		effectBuilder.particleConfig(new BiomeParticleConfig(ParticleTypes.WARPED_SPORE, 0.01428F));
+		effectBuilder.loopSound(SoundEvents.AMBIENT_WARPED_FOREST_LOOP);
+		effectBuilder.moodSound(new BiomeMoodSound(SoundEvents.AMBIENT_WARPED_FOREST_MOOD, 6000, 8, 2.0D));
+		effectBuilder.additionsSound(new BiomeAdditionsSound(SoundEvents.AMBIENT_WARPED_FOREST_ADDITIONS, 0.0111D));
+		effectBuilder.music(MusicType.createIngameMusic(SoundEvents.MUSIC_NETHER_WARPED_FOREST));
+		Biome.Settings settings = new Biome.Settings();
+		settings.precipitation(Biome.Precipitation.NONE);
+		settings.category(Biome.Category.NETHER);
+		settings.depth(0.2F);
+		settings.scale(0.4F);
+		settings.temperature(2.0F);
+		settings.downfall(0.0F);
+		settings.effects(effectBuilder.build());
+		settings.spawnSettings(spawnBuilder.build());
+		settings.generationSettings(generationBuilder.build());
+		settings.parent(null);
+		return settings.build();
+	}
+
+	public static Biome createGallery(GenerationSettings.Builder generationBuilder) {
+		SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
+		spawnBuilder.spawners(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.GHAST, 50, 4, 4));
+		spawnBuilder.spawners(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ZOMBIFIED_PIGLIN, 100, 4, 4));
+		spawnBuilder.spawners(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.MAGMA_CUBE, 2, 4, 4));
+		spawnBuilder.spawners(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.ENDERMAN, 1, 4, 4));
+		spawnBuilder.spawners(SpawnGroup.MONSTER, new SpawnSettings.SpawnEntry(EntityType.PIGLIN, 15, 4, 4));
+		spawnBuilder.spawners(SpawnGroup.CREATURE, new SpawnSettings.SpawnEntry(EntityType.STRIDER, 60, 1, 2));
+		generationBuilder.surfaceBuilder(ConfiguredSurfaceBuilders.NETHER);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.RUINED_PORTAL_NETHER);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.FORTRESS);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.BASTION_REMNANT);
+		generationBuilder.carver(GenerationStep.Carver.AIR, ConfiguredCarvers.NETHER_CAVE);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, ConfiguredFeatures.SPRING_LAVA);
+		DefaultBiomeFeatures.addDefaultMushrooms(generationBuilder);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_OPEN);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_FIRE);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.PATCH_SOUL_FIRE);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE_EXTRA);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.GLOWSTONE);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.ORE_MAGMA);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.SPRING_CLOSED);
+		DefaultBiomeFeatures.addNetherMineables(generationBuilder);
+		BiomeEffects.Builder effectBuilder = new BiomeEffects.Builder();
+		effectBuilder.waterColor(4159204);
+		effectBuilder.waterFogColor(329011);
+		effectBuilder.fogColor(3344392);
+		effectBuilder.skyColor(getSkyColor(2.0F));
+		effectBuilder.loopSound(SoundEvents.AMBIENT_NETHER_WASTES_LOOP);
+		effectBuilder.moodSound(new BiomeMoodSound(SoundEvents.AMBIENT_NETHER_WASTES_MOOD, 6000, 8, 2.0D));
+		effectBuilder.additionsSound(new BiomeAdditionsSound(SoundEvents.AMBIENT_NETHER_WASTES_ADDITIONS, 0.0111D));
+		effectBuilder.music(MusicType.createIngameMusic(SoundEvents.MUSIC_NETHER_NETHER_WASTES));
+		Biome.Settings settings = new Biome.Settings();
+		settings.precipitation(Biome.Precipitation.NONE);
+		settings.category(Biome.Category.NETHER);
+		settings.depth(0.1F);
+		settings.scale(0.2F);
+		settings.temperature(2.0F);
+		settings.downfall(0.0F);
+		settings.effects(effectBuilder.build());
+		settings.spawnSettings(spawnBuilder.build());
+		settings.generationSettings(generationBuilder.build());
+		settings.parent(null);
+		return settings.build();
+	}
+
+	public static GenerationSettings.Builder createTritanopianGalleryGenerationSettings() {
+		GenerationSettings.Builder generationBuilder = new GenerationSettings.Builder();
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_CYAN_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_PINK,
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_PINK_FLAT,
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN_FLAT))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_PINK_UPSIDE,
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN_UPSIDE))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_PINK_UPSIDE_FLAT,
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN_UPSIDE_FLAT))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		return biome;
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		return generationBuilder;
 	}
 
-	public static Biome createAchromatopsianGallery() {
-		Biome biome = createGallery();
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_LIGHT_GRAY_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_GRAY_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_BLACK_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+	public static GenerationSettings.Builder createAchromatopsianGalleryGenerationSettings() {
+		GenerationSettings.Builder generationBuilder = new GenerationSettings.Builder();
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_LIGHT_GRAY_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_GRAY_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_BLACK_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_GRAY,
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BLACK))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_GRAY_FLAT,
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BLACK_FLAT))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_WHITE_UPSIDE,
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_LIGHT_GRAY_UPSIDE))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.configure(new RandomBooleanFeatureConfig(
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_WHITE_UPSIDE_FLAT,
 						() -> MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_LIGHT_GRAY_UPSIDE_FLAT))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		return biome;
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		return generationBuilder;
 	}
 
-	public static Biome createProtanopianGallery() {
-		Biome biome = createGallery();
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.BROWN_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_YELLOW_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_CYAN_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_BLUE_MUSHROOM_NETHER);
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+	public static GenerationSettings.Builder createProtanopianGalleryGenerationSettings() {
+		GenerationSettings.Builder generationBuilder = new GenerationSettings.Builder();
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, ConfiguredFeatures.BROWN_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_YELLOW_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_CYAN_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.UNDERGROUND_DECORATION, MubbleConfiguredFeatures.PATCH_BLUE_MUSHROOM_NETHER);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BROWN_FLAT.withChance(0.25F),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_YELLOW.withChance(0.25F),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN.withChance(0.25F)),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BLUE))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BROWN_UPSIDE_FLAT.withChance(0.25F),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_YELLOW_UPSIDE.withChance(0.25F),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN_UPSIDE.withChance(0.25F)),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BLUE_UPSIDE))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_YELLOW_FLAT.withChance(1F / 3F),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN_FLAT.withChance(1F / 3F)),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BLUE_FLAT))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION,
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION,
 				Feature.RANDOM_SELECTOR.configure(new RandomFeatureConfig(ImmutableList.of(
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_YELLOW_UPSIDE_FLAT.withChance(1F / 3F),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_CYAN_UPSIDE_FLAT.withChance(1F / 3F)),
 						MubbleConfiguredFeatures.HUGE_NETHER_MUSHROOM_BLUE_UPSIDE_FLAT))
-						.decorate(ConfiguredFeatures.Decorators.field_26165));
-		return biome;
+						.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP));
+		return generationBuilder;
 	}
 }

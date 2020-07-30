@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
@@ -18,7 +18,7 @@ public class EndBoulderFeature extends Feature<SingleStateFeatureConfig> {
 	}
 
 	@Override
-	public boolean generate(ServerWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, SingleStateFeatureConfig config) {
+	public boolean generate(StructureWorldAccess world, ChunkGenerator chunkGenerator, Random random, BlockPos pos, SingleStateFeatureConfig config) {
 		for(; pos.getY() > 3; pos = pos.down()) {
 			if(!world.isAir(pos.down())) {
 				Block block = world.getBlockState(pos.down()).getBlock();

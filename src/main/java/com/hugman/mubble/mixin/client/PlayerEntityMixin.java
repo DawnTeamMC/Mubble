@@ -3,6 +3,8 @@ package com.hugman.mubble.mixin.client;
 import com.hugman.mubble.object.item.LightsaberItem;
 import com.hugman.mubble.object.item.costume.BlockCostume;
 import com.hugman.mubble.object.item.costume.Costume;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderEffect;
 import net.minecraft.client.render.GameRenderer;
@@ -17,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+@Environment(EnvType.CLIENT)
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin {
 	@Shadow

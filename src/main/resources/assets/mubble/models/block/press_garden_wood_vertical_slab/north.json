@@ -1,5 +1,5 @@
 {
-	"parent": "mubble:block/vertical_slab/north",
+	"parent": "dawn:block/vertical_slab/north",
 	"textures": {
 		"block": "mubble:block/press_garden_log/side"
 	}

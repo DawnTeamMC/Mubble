@@ -2,7 +2,6 @@ package com.hugman.mubble.init;
 
 import com.hugman.mubble.Mubble;
 import com.hugman.mubble.object.entity.*;
-import com.hugman.mubble.util.DataWriter;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
@@ -32,7 +31,6 @@ public class MubbleEntities {
 	public static final EntityType<KirbyBallEntity> KIRBY_BALL = register("kirby_ball", FabricEntityTypeBuilder.<KirbyBallEntity>create(SpawnGroup.MISC, KirbyBallEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackable(4, 10).build());
 
 	public static <T extends Entity> EntityType<T> register(String name, EntityType<T> builder) {
-		DataWriter.entitiesEntries.add(Mubble.id(name));
 		return Registry.register(Registry.ENTITY_TYPE, new Identifier(Mubble.MOD_ID, name), builder);
 	}
 
