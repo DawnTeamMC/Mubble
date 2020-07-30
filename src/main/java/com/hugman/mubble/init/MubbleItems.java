@@ -1,11 +1,7 @@
 package com.hugman.mubble.init;
 
 import com.hugman.dawn.api.creator.ItemCreator.Builder;
-import com.hugman.dawn.api.creator.pack.Pack;
-import com.hugman.dawn.api.creator.pack.PackBuilder;
 import com.hugman.dawn.api.object.item.AxeItem;
-import com.hugman.dawn.api.util.CreatorBuilder;
-import com.hugman.mubble.Mubble;
 import com.hugman.mubble.init.data.MubbleFoods;
 import com.hugman.mubble.init.data.MubbleItemTiers;
 import com.hugman.mubble.object.item.HoeItem;
@@ -14,15 +10,7 @@ import com.hugman.mubble.object.item.*;
 import net.minecraft.item.*;
 import net.minecraft.util.Rarity;
 
-public class MubbleItems extends Pack {
-	protected static <V, B extends CreatorBuilder> V register(B creatorBuilder) {
-		return add(creatorBuilder, Mubble.MOD_DATA);
-	}
-
-	protected static <P extends Pack, B extends PackBuilder> P register(B packBuilder) {
-		return add(packBuilder, Mubble.MOD_DATA);
-	}
-
+public class MubbleItems extends MubblePack {
 	/* MUBBLE */
 	public static final Item WHEAT_FLOUR = register(new Builder("wheat_flour", new Item(new Item.Settings().group(ItemGroup.FOOD))));
 	public static final Item TOMATO = register(new Builder("tomato", new BlockItem(MubbleBlocks.TOMATOES, new Item.Settings().group(ItemGroup.FOOD).food(MubbleFoods.TOMATO))));

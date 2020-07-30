@@ -5,7 +5,6 @@ import com.hugman.mubble.init.*;
 import com.hugman.mubble.init.data.MubbleCommands;
 import com.hugman.mubble.init.data.MubbleScreenHandlers;
 import com.hugman.mubble.init.data.MubbleStats;
-import com.hugman.mubble.init.data.MubbleTileEntityTypes;
 import com.hugman.mubble.init.world.MubbleBiomes;
 import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
 import com.hugman.mubble.init.world.MubbleFeatures;
@@ -24,15 +23,13 @@ public class Mubble implements ModInitializer {
 		new MubbleBlocks();
 		new MubbleConfiguredFeatures();
 		new MubbleCostumes();
-		new MubbleStatusEffects();
+		new MubbleEffects();
 		new MubbleEnchantments();
 		new MubbleEntities();
-		MubbleEntities.registerEntityAttributes();
 		new MubbleItems();
 		new MubblePaintingTypes();
 		new MubbleSounds();
 		// Data
-		new MubbleTileEntityTypes();
 		new MubbleStats();
 		MubbleCommands.init();
 		new MubbleScreenHandlers();

@@ -1,8 +1,8 @@
 package com.hugman.mubble.object.block.block_entity;
 
 import com.hugman.mubble.Mubble;
+import com.hugman.mubble.init.MubbleBlocks;
 import com.hugman.mubble.init.MubbleSounds;
-import com.hugman.mubble.init.data.MubbleTileEntityTypes;
 import com.hugman.mubble.object.block.PresentBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -26,7 +26,7 @@ public class PresentBlockEntity extends LootableContainerBlockEntity {
 	private int viewerCount;
 
 	public PresentBlockEntity() {
-		super(MubbleTileEntityTypes.PRESENT);
+		super(MubbleBlocks.PRESENT_ENTITY);
 		this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
 	}
 

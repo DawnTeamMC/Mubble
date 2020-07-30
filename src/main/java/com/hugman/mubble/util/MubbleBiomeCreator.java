@@ -26,8 +26,8 @@ public class MubbleBiomeCreator {
 	public static Biome createPumpkinPastures() {
 		GenerationSettings.Builder generationBuilder = createForestGenerationSettings();
 		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PUMPKIN_PASTURES_TREES);
-		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_BIRCH_LEAF_PILE);
-		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_OAK_LEAF_PILE);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_BIRCH_LEAF_PILE_NORMAL);
+		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_OAK_LEAF_PILE_NORMAL);
 		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_YELLOW_MUSHROOM_NORMAL);
 		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_ORANGE_MUSHROOM_NORMAL);
 		BiomeEffects.Builder effectBuilder = new BiomeEffects.Builder();
@@ -43,20 +43,15 @@ public class MubbleBiomeCreator {
 
 	public static Biome createCherryOakForest(boolean isPink) {
 		GenerationSettings.Builder generationBuilder = createForestGenerationSettings();
-		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PUMPKIN_PASTURES_TREES);
-		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_BIRCH_LEAF_PILE);
-		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_AUTUMN_OAK_LEAF_PILE);
-		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_YELLOW_MUSHROOM_NORMAL);
-		generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_ORANGE_MUSHROOM_NORMAL);
 		if(isPink) {
 			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PINK_CHERRY_OAK_FOREST_TREES);
-			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_CHERRY_OAK_LEAF_PILE);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_CHERRY_OAK_LEAF_PILE_NORMAL);
 			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_PINK_MUSHROOM_NORMAL);
 			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_MAGENTA_MUSHROOM_NORMAL);
 		}
 		else {
 			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.WHITE_CHERRY_OAK_FOREST_TREES);
-			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_CHERRY_OAK_LEAF_PILE);
+			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_CHERRY_OAK_LEAF_PILE_NORMAL);
 			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_WHITE_MUSHROOM_NORMAL);
 			generationBuilder.feature(GenerationStep.Feature.VEGETAL_DECORATION, MubbleConfiguredFeatures.PATCH_LIGHT_GRAY_MUSHROOM_NORMAL);
 		}

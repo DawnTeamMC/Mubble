@@ -28,7 +28,8 @@
 		"mubble.mixins.json"
 	],
 	"depends": {
-		"fabric": "*"
+		"fabric": "*",
+		"dawn": "*"
 	},
 	"custom": {
 		"modupdater": {

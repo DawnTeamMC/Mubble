@@ -1,23 +1,12 @@
 package com.hugman.mubble.init.world;
 
 import com.hugman.dawn.api.creator.BiomeCreator.Builder;
-import com.hugman.dawn.api.creator.pack.Pack;
-import com.hugman.dawn.api.creator.pack.PackBuilder;
-import com.hugman.dawn.api.util.CreatorBuilder;
-import com.hugman.mubble.Mubble;
+import com.hugman.mubble.init.MubblePack;
 import com.hugman.mubble.util.MubbleBiomeCreator;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.world.biome.Biome;
 
-public class MubbleBiomes extends Pack {
-	protected static <V, B extends CreatorBuilder> V register(B creatorBuilder) {
-		return add(creatorBuilder, Mubble.MOD_DATA);
-	}
-
-	protected static <P extends Pack, B extends PackBuilder> P register(B packBuilder) {
-		return add(packBuilder, Mubble.MOD_DATA);
-	}
-
+public class MubbleBiomes extends MubblePack {
 	public static final Biome PUMPKIN_PASTURES = register(new Builder("pumpkin_pastures", MubbleBiomeCreator.createPumpkinPastures()).addToOverworldContinental(OverworldClimate.TEMPERATE, 1D, true));
 	public static final Biome PINK_CHERRY_OAK_FOREST = register(new Builder("pink_cherry_oak_forest", MubbleBiomeCreator.createCherryOakForest(true)).addToOverworldContinental(OverworldClimate.COOL, 1D, true));
 	public static final Biome WHITE_CHERRY_OAK_FOREST = register(new Builder("white_cherry_oak_forest", MubbleBiomeCreator.createCherryOakForest(false)).addToOverworldContinental(OverworldClimate.COOL, 1D, true));

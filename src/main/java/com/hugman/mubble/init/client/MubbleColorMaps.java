@@ -52,6 +52,10 @@ public class MubbleColorMaps {
 	public static void registerItemColors() {
 		ColorProviderRegistry.ITEM.register((item, layer) ->
 		{
+			return GrassColors.getColor(0.5D, 1.0D);
+		}, MubbleBlocks.PALM_WOOD.getLeaves(), MubbleBlocks.PALM_WOOD.getLeafPile(), MubbleBlocks.GREEN_HILL_GRASS_BLOCK);
+		ColorProviderRegistry.ITEM.register((item, layer) ->
+		{
 			return 15232304;
 		}, MubbleBlocks.AUTUMN_OAK_LEAVES.getLeaves(), MubbleBlocks.AUTUMN_OAK_LEAVES.getLeafPile());
 		ColorProviderRegistry.ITEM.register((item, layer) ->

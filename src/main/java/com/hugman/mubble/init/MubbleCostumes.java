@@ -1,10 +1,6 @@
 package com.hugman.mubble.init;
 
 import com.hugman.dawn.api.creator.ItemCreator.Builder;
-import com.hugman.dawn.api.creator.pack.Pack;
-import com.hugman.dawn.api.creator.pack.PackBuilder;
-import com.hugman.dawn.api.util.CreatorBuilder;
-import com.hugman.mubble.Mubble;
 import com.hugman.mubble.init.client.MubbleShaders;
 import com.hugman.mubble.object.block.block_state_property.Princess;
 import com.hugman.mubble.object.item.costume.*;
@@ -15,15 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.SoundEvents;
 
-public class MubbleCostumes extends Pack {
-	protected static <V, B extends CreatorBuilder> V register(B creatorBuilder) {
-		return add(creatorBuilder, Mubble.MOD_DATA);
-	}
-
-	protected static <P extends Pack, B extends PackBuilder> P register(B packBuilder) {
-		return add(packBuilder, Mubble.MOD_DATA);
-	}
-
+public class MubbleCostumes extends MubblePack {
 	/* MINECRAFT */
 	public static final Item HEADPHONES = register(new Builder("headphones", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
 
