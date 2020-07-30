@@ -22,29 +22,14 @@ dependencies {
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modCompile "net.fabricmc:fabric-loader:${project.loader_version}"
-	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	//modCompile "com.github.Hugman76:Dawn:master-SNAPSHOT"
-
-	//include "com.github.Hugman76:Dawn:master-SNAPSHOT"
+	modCompile "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	modCompile "com.github.Hugman76:DawnAPI:1.16-SNAPSHOT"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }
 
 configurations.all {
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-}
-
-processResources {
-	inputs.property "version", project.version
-
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
-		expand "version": project.version
-	}
-
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
-	}
 }
 
 processResources {
