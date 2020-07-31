@@ -12,8 +12,8 @@
 	],
 	"contact": {
 		"homepage": "https://www.curseforge.com/minecraft/mc-mods/mubble-fabric",
-		"sources": "https://github.com/Hugman76/Mubble",
-		"issues": "https://github.com/Hugman76/Mubble/issues"
+		"sources": "https://github.com/DawnTeamMC/Mubble",
+		"issues": "https://github.com/DawnTeamMC/Mubble/issues"
 	},
 	"environment": "*",
 	"entrypoints": {
