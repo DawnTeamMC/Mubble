@@ -21,19 +21,20 @@ public class Mubble implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		new MubbleBlocks();
-		new MubbleConfiguredFeatures();
+		new MubbleItems();
 		new MubbleCostumes();
-		new MubbleEffects();
 		new MubbleEnchantments();
 		new MubbleEntities();
-		new MubbleItems();
+		new MubbleEffects();
 		new MubblePaintingTypes();
 		new MubbleSounds();
+		new MubbleTabs();
 		// Data
 		new MubbleStats();
 		MubbleCommands.init();
 		new MubbleScreenHandlers();
 		// World
+		new MubbleConfiguredFeatures();
 		new MubbleBiomes();
 		new MubbleFeatures();
 		//MubbleGenerators.init();

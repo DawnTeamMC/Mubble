@@ -1,7 +1,6 @@
 package com.hugman.mubble.init;
 
 import com.hugman.dawn.api.creator.ItemCreator.Builder;
-import com.hugman.mubble.init.client.MubbleShaders;
 import com.hugman.mubble.object.block.block_state_property.Princess;
 import com.hugman.mubble.object.item.costume.*;
 import net.minecraft.entity.EquipmentSlot;

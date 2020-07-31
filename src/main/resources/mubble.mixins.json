@@ -3,6 +3,7 @@
 	"package": "com.hugman.mubble.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
+		"DefaultBiomeFeaturesMixin",
 		"LivingEntityMixin",
 		"MobEntityMixin",
 		"PlayerEntityMixin",

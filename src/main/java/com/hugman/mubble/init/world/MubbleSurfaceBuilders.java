@@ -1,14 +1,9 @@
 package com.hugman.mubble.init.world;
 
-import com.hugman.mubble.Mubble;
 import com.hugman.mubble.init.MubbleBlocks;
 import com.hugman.mubble.init.data.MubbleBlockStateProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
-import net.minecraft.world.gen.surfacebuilder.SurfaceBuilder;
-import net.minecraft.world.gen.surfacebuilder.SurfaceConfig;
 import net.minecraft.world.gen.surfacebuilder.TernarySurfaceConfig;
 
 public class MubbleSurfaceBuilders {
@@ -23,8 +18,4 @@ public class MubbleSurfaceBuilders {
 	public static final TernarySurfaceConfig SMW_GROUND_SURFACE = new TernarySurfaceConfig(SMW_GROUND_TOP, SMW_GROUND_DIRT, SMW_GROUND_DIRT);
 	public static final TernarySurfaceConfig SMW_DESERT_SURFACE = new TernarySurfaceConfig(SMW_DESERT_TOP, SMW_DESERT_DIRT, DIRT);
 	public static final TernarySurfaceConfig AMARANTH_DYLIUM_SURFACE = new TernarySurfaceConfig(AMARANTH_DYLIUM, END_STONE, END_STONE);
-
-	private static <C extends SurfaceConfig, F extends SurfaceBuilder<C>> F register(String name, F surfaceBuilder) {
-		return Registry.register(Registry.SURFACE_BUILDER, new Identifier(Mubble.MOD_ID, name), surfaceBuilder);
-	}
 }

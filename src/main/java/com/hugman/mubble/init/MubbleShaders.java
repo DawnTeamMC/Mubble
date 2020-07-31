@@ -1,4 +1,4 @@
-package com.hugman.mubble.init.client;
+package com.hugman.mubble.init;
 
 import com.hugman.mubble.Mubble;
 import net.minecraft.util.Identifier;
