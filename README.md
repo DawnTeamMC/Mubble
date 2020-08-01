@@ -1,21 +1,44 @@
-[![](https://raw.githubusercontent.com/Hugman76/MyAssets/master/mubble/logos/Mubble.png)](https://sites.google.com/view/mubblemc)
-## Presentation
-**Mubble** is a mod for **Forge** and **Fabric** that aims at creating new content that would fit pretty well with the vanilla environment. It also adds an astronomic amount of content coming from other video games.
+[![Mubble](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/mubble/header.png)](https://www.curseforge.com/minecraft/mc-mods/mubble)
 
-With over 1000 features, **Mubble** adds new decorative blocks, items, costumes, biomes, and way more! A large portion of the mod also focuses on Nintendo content, and also features indie games. We are very open to community requests. The journey won't be done soon, as we will be updating Mubble for a very long time, featuring more and more franchises as well as unique features!
+<p align="center">
+	Mubble is a mod for Minecraft 1.16 that brings Nintendo and some gaming franchises to your world. Super Mario, Tetris, Castlevania, Celeste, Sonic, Pokémon, and way more universes await. Mubble adds varieties of new blocks, items, entities.<br>
+	<a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api"><img title="Requires Fabric API" height="50" src="https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/fabric_api/required.png"></a>
+	<a href="https://www.curseforge.com/minecraft/mc-mods/dawn"><img title="Requires Dawn API" height="50" src="https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/dawn_api/required.png"></a><br>
+</p>
 
-Mubble is available in English, French, Spanish, German, Dutch, Chinese and Brazilian Portuguese.
+<h5 align="center">
+	Mubble requires <a href="https://fabricmc.net/use/">Fabric Loader</a>, <a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api">Fabric API</a> and <a href="https://www.curseforge.com/minecraft/mc-mods/dawn">Dawn API</a><br>
+	Join the Dawn Town discord for support or to chat about the mods: <a href="https://discord.gg/8ksTVJu">https://discord.gg/8ksTVJu</a><br>
+</h5>
 
-For more information, please visit the [**Mubble Website**](https://sites.google.com/view/mubblemc).
+#### Features:
 
-## Links
-+ [Website](https://sites.google.com/view/mubblemc)
-+ [YouTube](https://www.youtube.com/playlist?list=PLQZh1eKFZNpHPdA5yZ6aEAIBl1hcLachq)
-+ [Discord](https://discord.gg/8ksTVJu)
-+ [Twitter](https://twitter.com/MubbleMC)
-+ [Wiki](https://ftb.gamepedia.com/Mubble)
-+ [GameBanana](https://gamebanana.com/gamefiles/8104)
-+ [GitHub](https://github.com/Hugman76/Mubble)
+* Super Mario Maker 2 content, such as ? blocks, empty blocks, ground blocks, brick Blocks, note blocks, doors, key doors and way more!
+* Flowers from Super Mario
+* Tetris blocks
+* Vampire stone, Medusa's stone and bricks from Castlevania
+* Sonic blocks, such as green hill grass and springs
+* Press garden from Sonic
+* Scarlet forest from Deltarune
+* Puyos
+* Virtual googles that alter your vision with a retro style
+* Caps and crown costumes from Super Mario
+* Many other costumes from different franchises
+* Toads and Goombas
+* The fireball and iceball from Super Mario
+* Coins from Super Mario
+* Lightsabers from Star Wars
 
-[![](https://raw.githubusercontent.com/Hugman76/MyAssets/master/mubble/curse/download.png)](https://sites.google.com/view/mubblemc/download)
-[![](https://raw.githubusercontent.com/Hugman76/MyAssets/master/mubble/curse/credits.png)](https://sites.google.com/view/mubblemc/credits)
+##### Images of the added features can be found on the CurseForge [Images page](https://www.curseforge.com/minecraft/mc-mods/mubble/screenshots).
+
+
+#### Other Mods by the Dawn Team:
+<p align="center">
+	<strong>Check out our other mod <a href="https://www.curseforge.com/minecraft/mc-mods/nookbuild">NookBuild</a>:</strong><br>
+	<a href="https://www.curseforge.com/minecraft/mc-mods/nookbuild"><img title="NookBuild" height="100" src="https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/nookbuild/header.png"></a><br>
+</p>
+
+<h5 align="center">
+	Mubble is made for Fabric, and there are no plans to port the newer version to Forge.<br>
+	However, <a href="https://www.curseforge.com/minecraft/mc-mods/mubble-forge">an outdated version for Forge</a> exists (it has less features).<br>
+</h5>
