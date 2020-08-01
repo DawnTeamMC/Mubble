@@ -2,9 +2,10 @@ package com.hugman.mubble.init;
 
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.BlockEntityCreator;
-import com.hugman.dawn.api.creator.ItemCreator;
 import com.hugman.dawn.api.creator.ScreenHandlerCreator;
 import com.hugman.dawn.api.creator.pack.block.*;
+import com.hugman.dawn.api.object.block.DirectionalBlock;
+import com.hugman.dawn.api.object.block.RootsBlock;
 import com.hugman.dawn.api.object.block.SaplingBlock;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.DefaultBlockGetter;
@@ -13,14 +14,12 @@ import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
 import com.hugman.mubble.object.block.GrassBlock;
 import com.hugman.mubble.object.block.NoteBlock;
 import com.hugman.mubble.object.block.OreBlock;
-import com.hugman.mubble.object.block.RootsBlock;
 import com.hugman.mubble.object.block.*;
 import com.hugman.mubble.object.block.block_entity.PlacerBlockEntity;
 import com.hugman.mubble.object.block.block_entity.PresentBlockEntity;
 import com.hugman.mubble.object.block.block_state_property.FluidLog;
 import com.hugman.mubble.object.block.block_state_property.Princess;
 import com.hugman.mubble.object.block.sapling_generator.*;
-import com.hugman.mubble.object.item.costume.BlockCostume;
 import com.hugman.mubble.object.screen.screen_handler.TimeswapTableScreenHandler;
 import com.hugman.mubble.util.MubbleBlockGetter;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -28,98 +27,16 @@ import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.DispenserBlockEntity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.DyeColor;
 
 public class MubbleBlockPack extends MubblePack {
 	/* MUBBLE */
-	public static final MSBlockPack OAK_WOOD_BLOCKS = register(new MSBlockPack.Builder("oak_wood", Blocks.OAK_WOOD, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WOOD_BUTTON));
-	public static final MSBlockPack SPRUCE_WOOD_BLOCKS = register(new MSBlockPack.Builder("spruce_wood", Blocks.SPRUCE_WOOD, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WOOD_BUTTON));
-	public static final MSBlockPack BIRCH_WOOD_BLOCKS = register(new MSBlockPack.Builder("birch_wood", Blocks.BIRCH_WOOD, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WOOD_BUTTON));
-	public static final MSBlockPack JUNGLE_WOOD_BLOCKS = register(new MSBlockPack.Builder("jungle_wood", Blocks.JUNGLE_WOOD, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WOOD_BUTTON));
-	public static final MSBlockPack ACACIA_WOOD_BLOCKS = register(new MSBlockPack.Builder("acacia_wood", Blocks.ACACIA_WOOD, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WOOD_BUTTON));
-	public static final MSBlockPack DARK_OAK_WOOD_BLOCKS = register(new MSBlockPack.Builder("dark_oak_wood", Blocks.DARK_OAK_WOOD, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WOOD_BUTTON));
-	public static final MSBlockPack CRIMSON_HYPHAE_BLOCKS = register(new MSBlockPack.Builder("crimson_hyphae", Blocks.CRIMSON_HYPHAE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WOOD_BUTTON));
-	public static final MSBlockPack WARPED_HYPHAE_BLOCKS = register(new MSBlockPack.Builder("warped_hyphae", Blocks.WARPED_HYPHAE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WOOD_BUTTON));
-
-	public static final MSBlockPack COBBLESTONE_BRICKS = register(new MSBlockPack.Builder("cobblestone_bricks", Blocks.MOSSY_COBBLESTONE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-	public static final MSBlockPack MOSSY_COBBLESTONE_BRICKS = register(new MSBlockPack.Builder("mossy_cobblestone_bricks", Blocks.MOSSY_COBBLESTONE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-	public static final MSBlockPack GRANITE_BRICKS = register(new MSBlockPack.Builder("granite_bricks", Blocks.GRANITE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-	public static final MSBlockPack DIORITE_BRICKS = register(new MSBlockPack.Builder("diorite_bricks", Blocks.DIORITE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-	public static final MSBlockPack ANDESITE_BRICKS = register(new MSBlockPack.Builder("andesite_bricks", Blocks.ANDESITE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-
-	public static final MSBlockPack SANDSTONE_BRICKS = register(new MSBlockPack.Builder("sandstone_bricks", Blocks.SANDSTONE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-	public static final MSBlockPack POLISHED_SANDSTONE = register(new MSBlockPack.Builder("polished_sandstone", Blocks.SANDSTONE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB));
-	public static final MSBlockPack RED_SANDSTONE_BRICKS = register(new MSBlockPack.Builder("red_sandstone_bricks", Blocks.RED_SANDSTONE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-	public static final MSBlockPack POLISHED_RED_SANDSTONE = register(new MSBlockPack.Builder("polished_red_sandstone", Blocks.RED_SANDSTONE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB));
-
-	public static final MSBlockPack SMOOTH_STONE_PAVING = register(new MSBlockPack.Builder("smooth_stone_paving", Blocks.SMOOTH_STONE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB));
-	public static final MSBlockPack CHISELED_PRISMARINE = register(new MSBlockPack.Builder("chiseled_prismarine", Blocks.PRISMARINE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-	public static final MSBlockPack PRISMARINE_BRICK_PAVING = register(new MSBlockPack.Builder("prismarine_brick_paving", Blocks.PRISMARINE_BRICKS, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB));
-
-	public static final MSCBlockPack STAINED_BRICK_BLOCKS = register(new MSCBlockPack.Builder("bricks", Blocks.BRICKS, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-	public static final MSBlockPack TERRACOTTA_BLOCKS = register(new MSBlockPack.Builder("terracotta", Blocks.TERRACOTTA, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL, DefaultBlockGetter.STONE_PRESSURE_PLATE, DefaultBlockGetter.STONE_BUTTON));
-	public static final MSCBlockPack STAINED_TERRACOTTA_BLOCKS = register(new MSCBlockPack.Builder("terracotta", Blocks.TERRACOTTA, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL, DefaultBlockGetter.STONE_PRESSURE_PLATE, DefaultBlockGetter.STONE_BUTTON));
-	public static final MSCBlockPack DARK_PRISMARINE_BLOCKS = register(new MSCBlockPack.Builder("dark_prismarine", Blocks.DARK_PRISMARINE, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
-	public static final MSCBlockPack CONCRETE_BLOCKS = register(new MSCBlockPack.Builder("concrete", Blocks.BLUE_CONCRETE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL, DefaultBlockGetter.STONE_PRESSURE_PLATE, DefaultBlockGetter.STONE_BUTTON));
-	public static final MSCBlockPack QUARTZ_PAVING_BLOCKS = register(new MSCBlockPack.Builder("quartz_paving", Blocks.QUARTZ_BLOCK, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB));
-
-	public static final MSBlockPack BLUNITE_BLOCKS = register(new MSBlockPack.Builder("blunite", FabricBlockSettings.copyOf(Blocks.ANDESITE).materialColor(MaterialColor.LIGHT_BLUE_TERRACOTTA), DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL).copy(Blocks.ANDESITE));
-	public static final MSBlockPack CARBONITE_BLOCKS = register(new MSBlockPack.Builder("carbonite", FabricBlockSettings.copyOf(Blocks.ANDESITE).materialColor(MaterialColor.BLACK), DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL).copy(Blocks.ANDESITE));
-	public static final MSBlockPack POLISHED_BLUNITE = register(new MSBlockPack.Builder("polished_blunite", MubbleBlockPack.BLUNITE_BLOCKS.getBlock(DefaultBlockGetter.CUBE), DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB));
-	public static final MSBlockPack POLISHED_CARBONITE = register(new MSBlockPack.Builder("polished_carbonite", MubbleBlockPack.CARBONITE_BLOCKS.getBlock(DefaultBlockGetter.CUBE), DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB));
-
-	public static final Block DANDELION_PILE = register(new BlockCreator.Builder("dandelion_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block POPPY_PILE = register(new BlockCreator.Builder("poppy_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block BLUE_ORCHID_PILE = register(new BlockCreator.Builder("blue_orchid_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block ALLIUM_PILE = register(new BlockCreator.Builder("allium_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block AZURE_BLUET_PILE = register(new BlockCreator.Builder("azure_bluet_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block RED_TULIP_PILE = register(new BlockCreator.Builder("red_tulip_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block ORANGE_TULIP_PILE = register(new BlockCreator.Builder("orange_tulip_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block WHITE_TULIP_PILE = register(new BlockCreator.Builder("white_tulip_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block PINK_TULIP_PILE = register(new BlockCreator.Builder("pink_tulip_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block OXEYE_DAISY_PILE = register(new BlockCreator.Builder("oxeye_daisy_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block CORNFLOWER_PILE = register(new BlockCreator.Builder("cornflower_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block LILY_OF_THE_VALLEY_PILE = register(new BlockCreator.Builder("lily_of_the_valley_pile", new PileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-	public static final Block WITHER_ROSE_PILE = register(new BlockCreator.Builder("wither_rose_pile", new WitherRosePileBlock(BlockSettings.FLOWER_PILE.noCollision())).setItemGroup(ItemGroup.DECORATIONS).setFlammability(60, 100));
-
-	public static final Block WHITE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("white", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.WHITE)));
-	public static final Block LIGHT_GRAY_MUSHROOM_BLOCK = register(new BlockCreator.Builder("light_gray", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.LIGHT_GRAY)));
-	public static final Block GRAY_MUSHROOM_BLOCK = register(new BlockCreator.Builder("gray", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.GRAY)));
-	public static final Block BLACK_MUSHROOM_BLOCK = register(new BlockCreator.Builder("black", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.BLACK)));
-	public static final Block ORANGE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("orange", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.ORANGE)));
-	public static final Block YELLOW_MUSHROOM_BLOCK = register(new BlockCreator.Builder("yellow", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.YELLOW)));
-	public static final Block LIME_MUSHROOM_BLOCK = register(new BlockCreator.Builder("lime", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.LIME)));
-	public static final Block GREEN_MUSHROOM_BLOCK = register(new BlockCreator.Builder("green", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.GREEN)));
-	public static final Block CYAN_MUSHROOM_BLOCK = register(new BlockCreator.Builder("cyan", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.CYAN)));
-	public static final Block LIGHT_BLUE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("light_blue", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.LIGHT_BLUE)));
-	public static final Block BLUE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("blue", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.BLUE)));
-	public static final Block PURPLE_MUSHROOM_BLOCK = register(new BlockCreator.Builder("purple", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.PURPLE)));
-	public static final Block MAGENTA_MUSHROOM_BLOCK = register(new BlockCreator.Builder("magenta", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.MAGENTA)));
-	public static final Block PINK_MUSHROOM_BLOCK = register(new BlockCreator.Builder("pink", DefaultBlockGetter.MUSHROOM_BLOCK, BlockSettings.MUSHROOM_BLOCK.materialColor(DyeColor.PINK)));
-	public static final Block WHITE_MUSHROOM = register(new BlockCreator.Builder("white_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, WHITE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block LIGHT_GRAY_MUSHROOM = register(new BlockCreator.Builder("light_gray_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, LIGHT_GRAY_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block GRAY_MUSHROOM = register(new BlockCreator.Builder("gray_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, GRAY_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block BLACK_MUSHROOM = register(new BlockCreator.Builder("black_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, BLACK_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block ORANGE_MUSHROOM = register(new BlockCreator.Builder("orange_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, ORANGE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block YELLOW_MUSHROOM = register(new BlockCreator.Builder("yellow_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, YELLOW_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block LIME_MUSHROOM = register(new BlockCreator.Builder("lime_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, LIME_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block GREEN_MUSHROOM = register(new BlockCreator.Builder("green_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, GREEN_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block CYAN_MUSHROOM = register(new BlockCreator.Builder("cyan_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, CYAN_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block LIGHT_BLUE_MUSHROOM = register(new BlockCreator.Builder("light_blue_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, LIGHT_BLUE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block BLUE_MUSHROOM = register(new BlockCreator.Builder("blue_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, BLUE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block PURPLE_MUSHROOM = register(new BlockCreator.Builder("purple_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, PURPLE_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block MAGENTA_MUSHROOM = register(new BlockCreator.Builder("magenta_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, MAGENTA_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final Block PINK_MUSHROOM = register(new BlockCreator.Builder("pink_mushroom", new GrowableMushroomPlantBlock(BlockSettings.MUSHROOM, PINK_MUSHROOM_BLOCK)).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-
 	public static final Block VANADIUM_ORE = register(new BlockCreator.Builder("vanadium_ore", new OreBlock(FabricBlockSettings.copy(Blocks.DIAMOND_ORE))).copy(Blocks.DIAMOND_ORE));
 	public static final Block VANADIUM_BLOCK = register(new BlockCreator.Builder("vanadium_block", DefaultBlockGetter.CUBE, FabricBlockSettings.copyOf(Blocks.DIAMOND_BLOCK).materialColor(MaterialColor.MAGENTA)));
 

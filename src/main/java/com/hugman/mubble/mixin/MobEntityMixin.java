@@ -1,7 +1,6 @@
 package com.hugman.mubble.mixin;
 
 import com.hugman.mubble.init.MubbleCostumePack;
-import com.hugman.mubble.init.MubbleItemPack;
 import com.hugman.mubble.init.data.MubbleTags;
 import com.hugman.mubble.object.item.costume.BlockCostume;
 import com.hugman.mubble.object.item.costume.Costume;

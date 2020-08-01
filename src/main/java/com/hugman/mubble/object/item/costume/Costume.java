@@ -1,7 +1,6 @@
 package com.hugman.mubble.object.item.costume;
 
 import com.hugman.mubble.init.MubbleCostumePack;
-import com.hugman.mubble.init.MubbleItemPack;
 import com.hugman.mubble.init.MubbleShaders;
 import com.hugman.mubble.mixin.client.GameRendererAccessor;
 import com.hugman.mubble.util.CalendarEvents;

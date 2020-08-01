@@ -1,14 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		"mubble:oak_wood_slab",
-		"mubble:spruce_wood_slab",
-		"mubble:birch_wood_slab",
-		"mubble:jungle_wood_slab",
-		"mubble:acacia_wood_slab",
-		"mubble:dark_oak_wood_slab",
-		"mubble:crimson_hyphae_slab",
-		"mubble:warped_hyphae_slab",
 		"mubble:cherry_oak_slab",
 		"mubble:cherry_oak_wood_slab",
 		"mubble:palm_slab",

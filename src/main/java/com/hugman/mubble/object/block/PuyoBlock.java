@@ -1,5 +1,6 @@
 package com.hugman.mubble.object.block;
 
+import com.hugman.dawn.api.object.block.DirectionalBlock;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;

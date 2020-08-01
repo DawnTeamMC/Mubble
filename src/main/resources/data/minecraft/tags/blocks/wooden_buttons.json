@@ -1,14 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		"mubble:oak_wood_button",
-		"mubble:spruce_wood_button",
-		"mubble:birch_wood_button",
-		"mubble:jungle_wood_button",
-		"mubble:acacia_wood_button",
-		"mubble:dark_oak_wood_button",
-		"mubble:crimson_hyphae_button",
-		"mubble:warped_hyphae_button",
 		"mubble:cherry_oak_button",
 		"mubble:cherry_oak_wood_button",
 		"mubble:palm_button",

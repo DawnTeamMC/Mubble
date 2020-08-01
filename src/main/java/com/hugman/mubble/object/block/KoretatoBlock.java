@@ -1,5 +1,6 @@
 package com.hugman.mubble.object.block;
 
+import com.hugman.dawn.api.object.block.DirectionalBlock;
 import com.hugman.mubble.init.MubbleBlockPack;
 import com.hugman.mubble.object.block.block_state_property.Princess;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;

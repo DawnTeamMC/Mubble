@@ -1,7 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"#mubble:concrete/pressure_plates",
-		"#mubble:terracotta/pressure_plates"
-	]
-}
