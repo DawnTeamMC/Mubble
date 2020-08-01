@@ -18,7 +18,7 @@
 			"entries": [
 				{
 					"type": "item",
-					"name": "mubble:light_gray_mushroom",
+					"name": "dawn:light_gray_mushroom",
 					"weight": 1,
 					"functions": [
 						{

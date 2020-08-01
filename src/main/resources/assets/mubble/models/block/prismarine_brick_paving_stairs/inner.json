@@ -1,8 +1,0 @@
-{
-	"parent": "block/inner_stairs",
-	"textures": {
-		"bottom": "mubble:block/prismarine_brick_paving",
-		"top": "mubble:block/prismarine_brick_paving",
-		"side": "mubble:block/prismarine_brick_paving"
-	}
-}

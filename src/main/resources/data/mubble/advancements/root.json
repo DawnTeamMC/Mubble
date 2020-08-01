@@ -1,7 +1,7 @@
 {
 	"display": {
 		"icon": {
-			"item": "mubble:nsmbu_question_block"
+			"item": "mubble:super_mushroom"
 		},
 		"title": {
 			"translate": "advancements.mubble.root.title"
@@ -12,22 +12,22 @@
 		"background": "mubble:textures/gui/advancements/backgrounds/mubble.png"
 	},
 	"criteria": {
-		"has_blunite": {
+		"has_super_mushroom": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{
-						"item": "mubble:blunite"
+						"item": "mubble:super_mushroom"
 					}
 				]
 			}
 		},
-		"has_carbonite": {
+		"has_coin": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{
-						"item": "mubble:carbonite"
+						"tag": "mubble:coins"
 					}
 				]
 			}
@@ -35,8 +35,8 @@
 	},
 	"requirements": [
 		[
-			"has_blunite",
-			"has_carbonite"
+			"has_super_mushroom",
+			"has_coin"
 		]
 	]
 }

@@ -1,8 +1,0 @@
-{
-	"parent": "block/outer_stairs",
-	"textures": {
-		"bottom": "minecraft:block/pink_concrete",
-		"top": "minecraft:block/pink_concrete",
-		"side": "minecraft:block/pink_concrete"
-	}
-}

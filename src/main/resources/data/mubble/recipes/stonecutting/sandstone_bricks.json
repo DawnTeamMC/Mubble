@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "minecraft:sandstone"
-	},
-	"result": "mubble:sandstone_bricks",
-	"count": 1
-}

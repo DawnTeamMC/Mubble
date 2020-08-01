@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "minecraft:pink_terracotta"
-	},
-	"result": "mubble:pink_terracotta_slab",
-	"count": 2
-}

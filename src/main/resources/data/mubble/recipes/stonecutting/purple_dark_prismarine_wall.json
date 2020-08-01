@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "mubble:purple_dark_prismarine"
-	},
-	"result": "mubble:purple_dark_prismarine_wall",
-	"count": 1
-}

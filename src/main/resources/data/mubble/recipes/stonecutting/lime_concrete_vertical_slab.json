@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "minecraft:lime_concrete"
-	},
-	"result": "mubble:lime_concrete_vertical_slab",
-	"count": 2
-}

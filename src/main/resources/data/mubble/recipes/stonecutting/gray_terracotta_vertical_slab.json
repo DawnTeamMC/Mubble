@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "minecraft:gray_terracotta"
-	},
-	"result": "mubble:gray_terracotta_vertical_slab",
-	"count": 2
-}

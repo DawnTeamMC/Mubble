@@ -1,6 +1,0 @@
-{
-	"parent": "block/template_wall_side_tall",
-	"textures": {
-		"wall": "mubble:block/lime_dark_prismarine"
-	}
-}

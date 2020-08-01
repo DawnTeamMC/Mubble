@@ -11,7 +11,7 @@
 			"conditions": {
 				"items": [
 					{
-						"tag": "mubble:brick/blocks"
+						"item": "minecraft:bricks"
 					}
 				]
 			}

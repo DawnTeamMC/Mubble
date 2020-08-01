@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "mubble:carbonite"
-	},
-	"result": "mubble:carbonite_stairs",
-	"count": 1
-}

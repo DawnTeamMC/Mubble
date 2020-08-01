@@ -1,6 +1,0 @@
-{
-	"parent": "block/button",
-	"textures": {
-		"texture": "minecraft:block/gray_terracotta"
-	}
-}

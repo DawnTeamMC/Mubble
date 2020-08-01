@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "mubble:yellow_bricks"
-	},
-	"result": "mubble:yellow_brick_slab",
-	"count": 2
-}

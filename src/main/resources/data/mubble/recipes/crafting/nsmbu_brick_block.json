@@ -7,7 +7,7 @@
 	],
 	"key": {
 		"X": {
-			"tag": "mubble:brick/blocks"
+			"item": "minecraft:bricks"
 		},
 		"O": {
 			"item": "mubble:yellow_coin"

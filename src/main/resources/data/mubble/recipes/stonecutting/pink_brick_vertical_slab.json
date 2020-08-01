@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "mubble:pink_bricks"
-	},
-	"result": "mubble:pink_brick_vertical_slab",
-	"count": 2
-}

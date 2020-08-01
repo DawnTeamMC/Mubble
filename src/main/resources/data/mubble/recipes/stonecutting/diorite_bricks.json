@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "minecraft:diorite"
-	},
-	"result": "mubble:diorite_bricks",
-	"count": 1
-}

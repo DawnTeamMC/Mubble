@@ -1,8 +1,0 @@
-{
-	"parent": "block/stairs",
-	"textures": {
-		"bottom": "minecraft:block/acacia_log",
-		"top": "minecraft:block/acacia_log",
-		"side": "minecraft:block/acacia_log"
-	}
-}

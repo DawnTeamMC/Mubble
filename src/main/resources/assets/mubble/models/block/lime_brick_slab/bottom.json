@@ -1,8 +1,0 @@
-{
-	"parent": "block/slab",
-	"textures": {
-		"bottom": "mubble:block/lime_bricks",
-		"top": "mubble:block/lime_bricks",
-		"side": "mubble:block/lime_bricks"
-	}
-}

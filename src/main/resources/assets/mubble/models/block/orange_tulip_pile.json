@@ -1,6 +1,0 @@
-{
-	"parent": "dawn:block/pile",
-	"textures": {
-		"pile": "mubble:block/orange_tulip_pile"
-	}
-}

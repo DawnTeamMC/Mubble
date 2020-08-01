@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "mubble:blue_quartz_paving"
-	},
-	"result": "mubble:blue_quartz_paving_vertical_slab",
-	"count": 2
-}

@@ -1,8 +1,0 @@
-{
-	"parent": "block/stairs",
-	"textures": {
-		"bottom": "mubble:block/brown_quartz_paving",
-		"top": "mubble:block/brown_quartz_paving",
-		"side": "mubble:block/brown_quartz_paving"
-	}
-}

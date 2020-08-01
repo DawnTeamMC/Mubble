@@ -1,8 +1,0 @@
-{
-	"parent": "block/stairs",
-	"textures": {
-		"bottom": "mubble:block/red_dark_prismarine",
-		"top": "mubble:block/red_dark_prismarine",
-		"side": "mubble:block/red_dark_prismarine"
-	}
-}
