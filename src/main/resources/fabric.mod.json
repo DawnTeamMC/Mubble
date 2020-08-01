@@ -2,7 +2,7 @@
 	"name": "Mubble",
 	"id": "mubble",
 	"version": "${version}",
-	"icon": "assets/mubble/textures/icon.png",
+	"icon": "assets/mubble/textures/logo.png",
 	"description": "Expand your world with features from the Nintendo universe, and way more.",
 	"authors": [
 		"Hugman"

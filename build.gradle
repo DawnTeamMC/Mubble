@@ -26,9 +26,6 @@ dependencies {
 	modCompile "com.github.DawnTeamMC:DawnAPI:1.16-SNAPSHOT"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
-
-	//modImplementation "io.github.prospector:modmenu:${project.modmenu_version}"
-	//modImplementation "vazkii.patchouli:Patchouli_1.16-fabric:${project.patchouli_version}"
 }
 
 configurations.all {
