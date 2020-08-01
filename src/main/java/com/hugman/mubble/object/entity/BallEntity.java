@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.entity;
 
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleSoundPack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.Entity;
@@ -69,7 +69,7 @@ public abstract class BallEntity extends ThrownItemEntity {
 				this.remove();
 			}
 			if(!removeOnImpact && cantRebound) {
-				this.world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+				this.world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			}
 		}
 		else {

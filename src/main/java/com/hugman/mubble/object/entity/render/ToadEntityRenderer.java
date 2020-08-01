@@ -17,6 +17,6 @@ public class ToadEntityRenderer extends MobEntityRenderer<ToadEntity, ToadEntity
 
 	@Override
 	public Identifier getTexture(ToadEntity entity) {
-		return new Identifier(Mubble.MOD_ID, "textures/entity/toad/" + entity.getVariant().getName() + ".png");
+		return Mubble.MOD_DATA.id("textures/entity/toad/" + entity.getVariant().getName() + ".png");
 	}
 }

@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.SingleStateFeatureConfig;
 
 public class MubbleFeatures {
 	private static <C extends FeatureConfig, F extends Feature<C>> F register(String name, F feature) {
-		return Registry.register(Registry.FEATURE, Mubble.id(name), feature);
+		return Registry.register(Registry.FEATURE, Mubble.MOD_DATA.id(name), feature);
 	}
 
 	public static final Feature<HugeFungusFeatureConfig> TALL_HUGE_FUNGI = register("tall_huge_fungus", new TallHugeFungusFeature(HugeFungusFeatureConfig.CODEC));

@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleSoundPack;
 import net.minecraft.block.*;
 import net.minecraft.block.enums.WallMountLocation;
 import net.minecraft.block.piston.PistonBehavior;
@@ -164,7 +164,7 @@ public class SpringBlock extends WallMountedBlock implements Waterloggable {
 		}
 		entityIn.fallDistance = 0f;
 		if(!world.isClient) {
-			world.playSound(null, pos, MubbleSounds.BLOCK_SPRING_TRIGGER, SoundCategory.BLOCKS, 0.6f, 1f);
+			world.playSound(null, pos, MubbleSoundPack.BLOCK_SPRING_TRIGGER, SoundCategory.BLOCKS, 0.6f, 1f);
 		}
 	}
 

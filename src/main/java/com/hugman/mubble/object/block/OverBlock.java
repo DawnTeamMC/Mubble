@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.data.MubbleBlockStateProperties;
+import com.hugman.mubble.init.MubbleBlockPack;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class OverBlock extends Block {
-	public static final BooleanProperty OVER = MubbleBlockStateProperties.OVER;
+	public static final BooleanProperty OVER = MubbleBlockPack.Properties.OVER;
 
 	public OverBlock(Block.Settings builder) {
 		super(builder);

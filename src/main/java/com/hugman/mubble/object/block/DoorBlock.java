@@ -1,7 +1,7 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleBlocks;
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.MubbleSoundPack;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.enums.DoubleBlockHalf;
@@ -63,7 +63,7 @@ public class DoorBlock extends net.minecraft.block.DoorBlock {
 	}
 
 	private boolean isSmm2Door() {
-		return this == MubbleBlocks.SMB_DOOR || this == MubbleBlocks.SMB3_DOOR || this == MubbleBlocks.SMW_DOOR || this == MubbleBlocks.NSMBU_DOOR;
+		return this == MubbleBlockPack.SMB_DOOR || this == MubbleBlockPack.SMB3_DOOR || this == MubbleBlockPack.SMW_DOOR || this == MubbleBlockPack.NSMBU_DOOR;
 	}
 
 	public void playToggleSound(World worldIn, BlockPos pos, boolean flag) {
@@ -71,38 +71,38 @@ public class DoorBlock extends net.minecraft.block.DoorBlock {
 	}
 
 	public SoundEvent getOpenSound(Block block) {
-		if(block == MubbleBlocks.SMB_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_OPEN_SMB;
+		if(block == MubbleBlockPack.SMB_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_OPEN_SMB;
 		}
-		else if(block == MubbleBlocks.SMB3_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_OPEN_SMB3;
+		else if(block == MubbleBlockPack.SMB3_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_OPEN_SMB3;
 		}
-		else if(block == MubbleBlocks.SMW_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_OPEN_SMW;
+		else if(block == MubbleBlockPack.SMW_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_OPEN_SMW;
 		}
-		else if(block == MubbleBlocks.NSMBU_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_OPEN_NSMBU;
+		else if(block == MubbleBlockPack.NSMBU_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_OPEN_NSMBU;
 		}
 		else {
-			return MubbleSounds.BLOCK_DOOR_OPEN_SMB;
+			return MubbleSoundPack.BLOCK_DOOR_OPEN_SMB;
 		}
 	}
 
 	public SoundEvent getCloseSound(Block block) {
-		if(block == MubbleBlocks.SMB_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_CLOSE_SMB;
+		if(block == MubbleBlockPack.SMB_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_CLOSE_SMB;
 		}
-		else if(block == MubbleBlocks.SMB3_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_CLOSE_SMB3;
+		else if(block == MubbleBlockPack.SMB3_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_CLOSE_SMB3;
 		}
-		else if(block == MubbleBlocks.SMW_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_CLOSE_SMW;
+		else if(block == MubbleBlockPack.SMW_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_CLOSE_SMW;
 		}
-		else if(block == MubbleBlocks.NSMBU_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_CLOSE_NSMBU;
+		else if(block == MubbleBlockPack.NSMBU_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_CLOSE_NSMBU;
 		}
 		else {
-			return MubbleSounds.BLOCK_DOOR_CLOSE_SMB;
+			return MubbleSoundPack.BLOCK_DOOR_CLOSE_SMB;
 		}
 	}
 }

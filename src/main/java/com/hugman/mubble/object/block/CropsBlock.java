@@ -1,7 +1,7 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleBlocks;
-import com.hugman.mubble.init.MubbleItems;
+import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.MubbleItemPack;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.Material;
@@ -17,11 +17,11 @@ public class CropsBlock extends CropBlock {
 
 	@Override
 	protected ItemConvertible getSeedsItem() {
-		if(this == MubbleBlocks.TOMATOES) {
-			return MubbleItems.TOMATO;
+		if(this == MubbleBlockPack.TOMATOES) {
+			return MubbleItemPack.TOMATO;
 		}
-		if(this == MubbleBlocks.SALAD) {
-			return MubbleItems.SALAD;
+		if(this == MubbleBlockPack.SALAD) {
+			return MubbleItemPack.SALAD;
 		}
 		else {
 			return null;

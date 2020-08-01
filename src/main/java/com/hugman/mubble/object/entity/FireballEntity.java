@@ -1,8 +1,8 @@
 package com.hugman.mubble.object.entity;
 
-import com.hugman.mubble.init.MubbleEntities;
-import com.hugman.mubble.init.MubbleItems;
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleEntityPack;
+import com.hugman.mubble.init.MubbleItemPack;
+import com.hugman.mubble.init.MubbleSoundPack;
 import com.hugman.mubble.init.data.MubbleTags;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -28,21 +28,21 @@ public class FireballEntity extends BallEntity {
 	}
 
 	public FireballEntity(World world, LivingEntity owner) {
-		super(MubbleEntities.FIREBALL, world, owner);
+		super(MubbleEntityPack.FIREBALL, world, owner);
 	}
 
 	public FireballEntity(World world, double x, double y, double z) {
-		super(MubbleEntities.FIREBALL, world, x, y, z);
+		super(MubbleEntityPack.FIREBALL, world, x, y, z);
 	}
 
 	@Override
 	protected Item getDefaultItem() {
-		return MubbleItems.FIREBALL;
+		return MubbleItemPack.FIREBALL;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK;
+		return MubbleSoundPack.ENTITY_FIREBALL_HIT_BLOCK;
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class FireballEntity extends BallEntity {
 		if(!entity.isFireImmune()) {
 			entity.setOnFireFor(5);
 		}
-		world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return true;
 	}
 
@@ -91,7 +91,7 @@ public class FireballEntity extends BallEntity {
 					world.updateNeighbor(pos, resultBlock, pos);
 				}
 			}
-			world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+			world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
 		if(state.method_27851(BlockTags.CAMPFIRES, (abstractBlockState) ->
@@ -102,7 +102,7 @@ public class FireballEntity extends BallEntity {
 				if(!world.isClient) {
 					world.setBlockState(pos, state.with(CampfireBlock.LIT, true));
 				}
-				world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+				world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 				return true;
 			}
 		}
@@ -128,7 +128,7 @@ public class FireballEntity extends BallEntity {
 			return false;
 		}
 		else {
-			world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+			world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
 	}

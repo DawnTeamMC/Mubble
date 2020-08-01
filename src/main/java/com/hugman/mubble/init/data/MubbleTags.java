@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.Item;
 import net.minecraft.tag.Tag;
-import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +21,12 @@ public class MubbleTags {
 		public static final Tag<Block> PALM_SAPLING_VALID_GROUND = register("valid_ground/palm_sapling");
 
 		private static Tag<Block> register(String name) {
-			return TagRegistry.block(new Identifier(Mubble.MOD_ID, name));
+			return TagRegistry.block(Mubble.MOD_DATA.id(name));
 		}
 	}
 
 	public static class Items {
-		public static final List<Tag<Item>> TIMESWAP_TAGS = new ArrayList<Tag<Item>>();
+		public static final List<Tag<Item>> TIMESWAP_TAGS = new ArrayList<>();
 
 		public static final Tag<Item> COINS = register("coins");
 		public static final Tag<Item> CROWNS = register("crowns");
@@ -54,11 +53,11 @@ public class MubbleTags {
 		public static final Tag<Item> TIMESWAP_KEYS = registerTimeswap("timeswap/keys");
 
 		private static Tag<Item> register(String name) {
-			return TagRegistry.item(new Identifier(Mubble.MOD_ID, name));
+			return TagRegistry.item(Mubble.MOD_DATA.id(name));
 		}
 
 		private static Tag<Item> registerTimeswap(String name) {
-			Tag<Item> fTag = TagRegistry.item(new Identifier(Mubble.MOD_ID, name));
+			Tag<Item> fTag = TagRegistry.item(Mubble.MOD_DATA.id(name));
 			TIMESWAP_TAGS.add(fTag);
 			return fTag;
 		}
@@ -68,7 +67,7 @@ public class MubbleTags {
 		public static final Tag<EntityType<?>> CAN_WEAR_HELMET = register("can_wear_helmet");
 
 		private static Tag<EntityType<?>> register(String name) {
-			return TagRegistry.entityType(new Identifier(Mubble.MOD_ID, name));
+			return TagRegistry.entityType(Mubble.MOD_DATA.id(name));
 		}
 	}
 
@@ -76,7 +75,7 @@ public class MubbleTags {
 		public static final Tag<Fluid> FREEZABLE_TO_ICE = register("freezable/ice");
 
 		private static Tag<Fluid> register(String name) {
-			return TagRegistry.fluid(new Identifier(Mubble.MOD_ID, name));
+			return TagRegistry.fluid(Mubble.MOD_DATA.id(name));
 		}
 	}
 }

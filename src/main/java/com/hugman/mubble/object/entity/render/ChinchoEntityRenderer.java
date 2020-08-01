@@ -11,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class ChinchoEntityRenderer extends MobEntityRenderer<ChinchoEntity, ChinchoEntityModel<ChinchoEntity>> {
-	private static final Identifier CHINCHO_TEXTURES = new Identifier(Mubble.MOD_ID, "textures/entity/chincho.png");
+	private static final Identifier CHINCHO_TEXTURES = Mubble.MOD_DATA.id("textures/entity/chincho.png");
 
 	public ChinchoEntityRenderer(EntityRenderDispatcher dispatcher) {
 		super(dispatcher, new ChinchoEntityModel<>(), 0.5F);

@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.data.MubbleBlockStateProperties;
+import com.hugman.mubble.init.MubbleBlockPack;
 import com.hugman.mubble.object.block.block_state_property.FluidLog;
 import net.minecraft.block.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -32,7 +32,7 @@ public class FluidTankBlock extends Block implements FluidDrainable, FluidFillab
 	public static final BooleanProperty EAST = Properties.EAST;
 	public static final BooleanProperty SOUTH = Properties.SOUTH;
 	public static final BooleanProperty WEST = Properties.WEST;
-	public static final EnumProperty<FluidLog> FLUIDLOG = MubbleBlockStateProperties.FLUIDLOG;
+	public static final EnumProperty<FluidLog> FLUIDLOG = MubbleBlockPack.Properties.FLUIDLOG;
 
 	private static final VoxelShape GLASS_UP = Block.createCuboidShape(1.0D, 15.0D, 1.0D, 15.0D, 16.0D, 15.0D);
 	private static final VoxelShape GLASS_DOWN = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 1.0D, 15.0D);

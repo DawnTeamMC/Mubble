@@ -1,7 +1,7 @@
 package com.hugman.mubble.mixin.client;
 
 import com.hugman.dawn.api.util.EnchantmentUtil;
-import com.hugman.mubble.init.MubbleEnchantments;
+import com.hugman.mubble.init.MubbleEnchantmentPack;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -22,7 +22,7 @@ public class ItemRendererMixin {
 	@Redirect(method = "renderGuiItemOverlay(" + TextRenderer + ItemStack + "II" + String + ")V", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isDamaged()Z"))
 	public boolean mubble_appearsDamaged(ItemStack stack) {
 		ClientPlayerEntity clientPlayerEntity = MinecraftClient.getInstance().player;
-		if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
+		if(EnchantmentUtil.hasEnchantment(MubbleEnchantmentPack.IGNORANCE_CURSE, stack) && !clientPlayerEntity.isCreative()) {
 			return false;
 		}
 		return stack.isDamaged();

@@ -1,8 +1,8 @@
 package com.hugman.mubble.mixin;
 
 import com.hugman.dawn.api.util.EnchantmentUtil;
-import com.hugman.mubble.init.MubbleEffects;
-import com.hugman.mubble.init.MubbleEnchantments;
+import com.hugman.mubble.init.MubbleEffectPack;
+import com.hugman.mubble.init.MubbleEnchantmentPack;
 import com.hugman.mubble.init.data.MubbleTags;
 import com.hugman.mubble.object.item.LightsaberItem;
 import net.minecraft.entity.EquipmentSlot;
@@ -28,9 +28,9 @@ public abstract class LivingEntityMixin {
 	@Inject(method = "jump", at = @At(value = "TAIL"), cancellable = true)
 	private void mubble_jump(CallbackInfo info) {
 		LivingEntity entity = (LivingEntity) (Object) this;
-		if(entity.hasStatusEffect(MubbleEffects.HEAVINESS)) {
+		if(entity.hasStatusEffect(MubbleEffectPack.HEAVINESS)) {
 			Vec3d vec3d = entity.getVelocity();
-			entity.setVelocity(vec3d.x, vec3d.y - (float) (entity.getStatusEffect(MubbleEffects.HEAVINESS).getAmplifier() + 1) * 0.05F, vec3d.z);
+			entity.setVelocity(vec3d.x, vec3d.y - (float) (entity.getStatusEffect(MubbleEffectPack.HEAVINESS).getAmplifier() + 1) * 0.05F, vec3d.z);
 		}
 	}
 
@@ -41,7 +41,7 @@ public abstract class LivingEntityMixin {
 		ItemStack headItem = entity.getEquippedStack(EquipmentSlot.HEAD);
 		if(!world.isClient) {
 			if(MubbleTags.Items.WEIGHT_HEAVY.contains(headItem.getItem())) {
-				entity.addStatusEffect(new StatusEffectInstance(MubbleEffects.HEAVINESS, 200, 0, false, false, true));
+				entity.addStatusEffect(new StatusEffectInstance(MubbleEffectPack.HEAVINESS, 200, 0, false, false, true));
 			}
 		}
 	}
@@ -63,7 +63,7 @@ public abstract class LivingEntityMixin {
 			PlayerEntity player = (PlayerEntity) source.getAttacker();
 			LootTable lootTable = world.getServer().getLootManager().getTable(entity.getLootTable());
 			LootContext.Builder builder = this.getLootContextBuilder(causedByPlayer, source);
-			if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.TELEKINESIS, player.getMainHandStack())) {
+			if(EnchantmentUtil.hasEnchantment(MubbleEnchantmentPack.TELEKINESIS, player.getMainHandStack())) {
 				for(ItemStack stack : lootTable.generateLoot(builder.build(LootContextTypes.ENTITY))) {
 					player.inventory.insertStack(stack);
 				}
@@ -79,7 +79,7 @@ public abstract class LivingEntityMixin {
 		if(attacker instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity) attacker;
 			if(!player.getMainHandStack().isEmpty()) {
-				if(EnchantmentUtil.hasEnchantment(MubbleEnchantments.TELEKINESIS, player.getMainHandStack())) {
+				if(EnchantmentUtil.hasEnchantment(MubbleEnchantmentPack.TELEKINESIS, player.getMainHandStack())) {
 					player.addExperience(this.getCurrentExperience(player));
 					info.cancel();
 				}

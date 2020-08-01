@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.entity;
 
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleSoundPack;
 import net.minecraft.entity.EntityGroup;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
@@ -85,17 +85,17 @@ public class ChinchoEntity extends HostileEntity {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return MubbleSounds.ENTITY_CHINCHO_AMBIENT;
+		return MubbleSoundPack.ENTITY_CHINCHO_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return MubbleSounds.ENTITY_CHINCHO_HURT;
+		return MubbleSoundPack.ENTITY_CHINCHO_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return MubbleSounds.ENTITY_CHINCHO_DEATH;
+		return MubbleSoundPack.ENTITY_CHINCHO_DEATH;
 	}
 
 	public static boolean canSpawn(EntityType<ChinchoEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand) {

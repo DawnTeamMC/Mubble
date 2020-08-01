@@ -18,7 +18,7 @@ public class DuckEntityRenderer extends MobEntityRenderer<DuckEntity, DuckEntity
 
 	@Override
 	public Identifier getTexture(DuckEntity entity) {
-		return new Identifier(Mubble.MOD_ID, "textures/entity/duck/" + entity.getVariant().getName() + ".png");
+		return Mubble.MOD_DATA.id("textures/entity/duck/" + entity.getVariant().getName() + ".png");
 	}
 
 	protected float getAnimationProgress(DuckEntity entity, float p_77044_2_) {

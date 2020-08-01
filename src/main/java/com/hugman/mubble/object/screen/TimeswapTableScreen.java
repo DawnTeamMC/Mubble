@@ -21,7 +21,7 @@ import java.util.List;
 
 @Environment(EnvType.CLIENT)
 public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandler> {
-	private static final Identifier TEXTURE = new Identifier(Mubble.MOD_ID, "textures/gui/container/timeswap_table.png");
+	private static final Identifier TEXTURE = Mubble.MOD_DATA.id("textures/gui/container/timeswap_table.png");
 	private float scrollAmount;
 	private boolean mouseClicked;
 	private int scrollOffset;

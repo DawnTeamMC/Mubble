@@ -36,22 +36,22 @@ public class MubbleShaders {
 	public static final Identifier SPIDER = register("minecraft", "spider");
 	public static final Identifier WOBBLE = register("minecraft", "wobble");
 
-	public static final Identifier WHITE_RETRO = register(Mubble.MOD_ID, "retro/white", RETRO_SHADERS);
-	public static final Identifier LIGHT_GRAY_RETRO = register(Mubble.MOD_ID, "retro/light_gray", RETRO_SHADERS);
-	public static final Identifier GRAY_RETRO = register(Mubble.MOD_ID, "retro/gray", RETRO_SHADERS);
-	public static final Identifier BLACK_RETRO = register(Mubble.MOD_ID, "retro/black", RETRO_SHADERS);
-	public static final Identifier BROWN_RETRO = register(Mubble.MOD_ID, "retro/brown", RETRO_SHADERS);
-	public static final Identifier RED_RETRO = register(Mubble.MOD_ID, "retro/red", RETRO_SHADERS);
-	public static final Identifier ORANGE_RETRO = register(Mubble.MOD_ID, "retro/orange", RETRO_SHADERS);
-	public static final Identifier YELLOW_RETRO = register(Mubble.MOD_ID, "retro/yellow", RETRO_SHADERS);
-	public static final Identifier LIME_RETRO = register(Mubble.MOD_ID, "retro/lime", RETRO_SHADERS);
-	public static final Identifier GREEN_RETRO = register(Mubble.MOD_ID, "retro/green", RETRO_SHADERS);
-	public static final Identifier CYAN_RETRO = register(Mubble.MOD_ID, "retro/cyan", RETRO_SHADERS);
-	public static final Identifier LIGHT_BLUE_RETRO = register(Mubble.MOD_ID, "retro/light_blue", RETRO_SHADERS);
-	public static final Identifier BLUE_RETRO = register(Mubble.MOD_ID, "retro/blue", RETRO_SHADERS);
-	public static final Identifier PURPLE_RETRO = register(Mubble.MOD_ID, "retro/purple", RETRO_SHADERS);
-	public static final Identifier MAGENTA_RETRO = register(Mubble.MOD_ID, "retro/magenta", RETRO_SHADERS);
-	public static final Identifier PINK_RETRO = register(Mubble.MOD_ID, "retro/pink", RETRO_SHADERS);
+	public static final Identifier WHITE_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/white", RETRO_SHADERS);
+	public static final Identifier LIGHT_GRAY_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/light_gray", RETRO_SHADERS);
+	public static final Identifier GRAY_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/gray", RETRO_SHADERS);
+	public static final Identifier BLACK_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/black", RETRO_SHADERS);
+	public static final Identifier BROWN_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/brown", RETRO_SHADERS);
+	public static final Identifier RED_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/red", RETRO_SHADERS);
+	public static final Identifier ORANGE_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/orange", RETRO_SHADERS);
+	public static final Identifier YELLOW_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/yellow", RETRO_SHADERS);
+	public static final Identifier LIME_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/lime", RETRO_SHADERS);
+	public static final Identifier GREEN_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/green", RETRO_SHADERS);
+	public static final Identifier CYAN_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/cyan", RETRO_SHADERS);
+	public static final Identifier LIGHT_BLUE_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/light_blue", RETRO_SHADERS);
+	public static final Identifier BLUE_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/blue", RETRO_SHADERS);
+	public static final Identifier PURPLE_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/purple", RETRO_SHADERS);
+	public static final Identifier MAGENTA_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/magenta", RETRO_SHADERS);
+	public static final Identifier PINK_RETRO = register(Mubble.MOD_DATA.getModName(), "retro/pink", RETRO_SHADERS);
 
 	private static Identifier register(String namespace, String name) {
 		Identifier shaderRL = new Identifier(namespace, "shaders/post/" + name + ".json");

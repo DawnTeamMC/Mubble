@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.item;
 
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleSoundPack;
 import com.hugman.mubble.object.entity.IceballEntity;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -26,7 +26,7 @@ public class IceballItem extends Item {
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack stack = player.getStackInHand(hand);
-		world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.ENTITY_ICEBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSoundPack.ENTITY_ICEBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		if(!world.isClient) {
 			IceballEntity entity = new IceballEntity(world, player);
 			entity.setItem(stack);

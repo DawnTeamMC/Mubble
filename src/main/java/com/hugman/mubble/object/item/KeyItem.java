@@ -1,7 +1,7 @@
 package com.hugman.mubble.object.item;
 
-import com.hugman.mubble.init.MubbleBlocks;
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.MubbleSoundPack;
 import com.hugman.mubble.object.block.KeyDoorBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -45,20 +45,20 @@ public class KeyItem extends Item {
 	}
 
 	public SoundEvent getKeySuccessSound(Block block, boolean success) {
-		if(block == MubbleBlocks.SMB_KEY_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
+		if(block == MubbleBlockPack.SMB_KEY_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_KEY_SUCCESS_SMB;
 		}
-		else if(block == MubbleBlocks.SMB3_KEY_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB3;
+		else if(block == MubbleBlockPack.SMB3_KEY_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_KEY_SUCCESS_SMB3;
 		}
-		else if(block == MubbleBlocks.SMW_KEY_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMW;
+		else if(block == MubbleBlockPack.SMW_KEY_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_KEY_SUCCESS_SMW;
 		}
-		else if(block == MubbleBlocks.NSMBU_KEY_DOOR) {
-			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_NSMBU;
+		else if(block == MubbleBlockPack.NSMBU_KEY_DOOR) {
+			return MubbleSoundPack.BLOCK_DOOR_KEY_SUCCESS_NSMBU;
 		}
 		else {
-			return MubbleSounds.BLOCK_DOOR_KEY_SUCCESS_SMB;
+			return MubbleSoundPack.BLOCK_DOOR_KEY_SUCCESS_SMB;
 		}
 	}
 }

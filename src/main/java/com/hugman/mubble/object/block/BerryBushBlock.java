@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleItems;
+import com.hugman.mubble.init.MubbleItemPack;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SweetBerryBushBlock;
 import net.minecraft.entity.player.PlayerEntity;
@@ -22,7 +22,7 @@ public class BerryBushBlock extends SweetBerryBushBlock {
 
 	@Override
 	public ItemStack getPickStack(BlockView worldIn, BlockPos pos, BlockState state) {
-		return new ItemStack(MubbleItems.BLUEBERRIES);
+		return new ItemStack(MubbleItemPack.BLUEBERRIES);
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class BerryBushBlock extends SweetBerryBushBlock {
 		}
 		else if(i > 1) {
 			int j = 1 + worldIn.random.nextInt(2);
-			dropStack(worldIn, pos, new ItemStack(MubbleItems.BLUEBERRIES, j + (flag ? 1 : 0)));
+			dropStack(worldIn, pos, new ItemStack(MubbleItemPack.BLUEBERRIES, j + (flag ? 1 : 0)));
 			worldIn.playSound(null, pos, SoundEvents.ITEM_SWEET_BERRIES_PICK_FROM_BUSH, SoundCategory.BLOCKS, 1.0F, 0.8F + worldIn.random.nextFloat() * 0.4F);
 			worldIn.setBlockState(pos, state.with(AGE, Integer.valueOf(1)), 2);
 			return ActionResult.SUCCESS;

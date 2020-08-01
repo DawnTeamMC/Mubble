@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.entity;
 
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleSoundPack;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
@@ -59,16 +59,16 @@ public class GoombaEntity extends HostileEntity {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return MubbleSounds.ENTITY_GOOMBA_HURT;
+		return MubbleSoundPack.ENTITY_GOOMBA_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return MubbleSounds.ENTITY_GOOMBA_DEATH;
+		return MubbleSoundPack.ENTITY_GOOMBA_DEATH;
 	}
 
 	protected SoundEvent getStepSound() {
-		return MubbleSounds.ENTITY_GOOMBA_STEP;
+		return MubbleSoundPack.ENTITY_GOOMBA_STEP;
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class GoombaEntity extends HostileEntity {
 			((ServerPlayerEntity) playerIn).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(playerIn));
 			playerIn.fallDistance = 0.0F;
 			this.damage(DamageSource.player(playerIn), Float.MAX_VALUE);
-			this.playSound(MubbleSounds.ENTITY_GOOMBA_CRUSH, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
+			this.playSound(MubbleSoundPack.ENTITY_GOOMBA_CRUSH, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 		}
 	}
 

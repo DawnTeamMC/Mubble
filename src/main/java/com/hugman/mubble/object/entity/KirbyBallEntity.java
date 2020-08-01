@@ -1,8 +1,8 @@
 package com.hugman.mubble.object.entity;
 
-import com.hugman.mubble.init.MubbleEntities;
-import com.hugman.mubble.init.MubbleItems;
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleEntityPack;
+import com.hugman.mubble.init.MubbleItemPack;
+import com.hugman.mubble.init.MubbleSoundPack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -25,23 +25,23 @@ public class KirbyBallEntity extends BallEntity {
 	}
 
 	public KirbyBallEntity(World world, LivingEntity owner) {
-		super(MubbleEntities.KIRBY_BALL, world, owner);
+		super(MubbleEntityPack.KIRBY_BALL, world, owner);
 		reboundingAmount = 10;
 	}
 
 	public KirbyBallEntity(World world, double x, double y, double z) {
-		super(MubbleEntities.KIRBY_BALL, world, x, y, z);
+		super(MubbleEntityPack.KIRBY_BALL, world, x, y, z);
 		reboundingAmount = 10;
 	}
 
 	@Override
 	protected Item getDefaultItem() {
-		return MubbleItems.KIRBY_BALL;
+		return MubbleItemPack.KIRBY_BALL;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return MubbleSounds.ENTITY_KIRBY_BALL_HIT_BLOCK;
+		return MubbleSoundPack.ENTITY_KIRBY_BALL_HIT_BLOCK;
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class KirbyBallEntity extends BallEntity {
 		if(flag) {
 			this.dealDamage((LivingEntity) this.getOwner(), entity);
 		}
-		world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_KIRBY_BALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return true;
 	}
 
@@ -80,7 +80,7 @@ public class KirbyBallEntity extends BallEntity {
 			motion = motion.subtract(0.0D, 0.0D, getVelocity().z * 1.25D);
 		}
 		setVelocity(motion);
-		world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_KIRBY_BALL_REBOUND, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_KIRBY_BALL_REBOUND, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		return false;
 	}
 }

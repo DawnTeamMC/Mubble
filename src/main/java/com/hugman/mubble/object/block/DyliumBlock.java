@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleBlocks;
+import com.hugman.mubble.init.MubbleBlockPack;
 import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -35,7 +35,7 @@ public class DyliumBlock extends NyliumBlock {
 	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		BlockState blockState = world.getBlockState(pos);
 		BlockPos blockPos = pos.up();
-		if(blockState.isOf(MubbleBlocks.AMARANTH_DYLIUM)) {
+		if(blockState.isOf(MubbleBlockPack.AMARANTH_DYLIUM)) {
 			NetherForestVegetationFeature.method_26264(world, random, blockPos, MubbleConfiguredFeatures.Configs.AMARANTH_ROOTS, 3, 1);
 		}
 	}

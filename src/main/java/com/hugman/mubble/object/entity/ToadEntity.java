@@ -1,10 +1,9 @@
 package com.hugman.mubble.object.entity;
 
 import com.hugman.mubble.Mubble;
-import com.hugman.mubble.init.MubbleEntities;
-import com.hugman.mubble.init.MubbleItems;
-import com.hugman.mubble.init.MubbleSounds;
-import com.hugman.mubble.init.data.MubbleStats;
+import com.hugman.mubble.init.MubbleEntityPack;
+import com.hugman.mubble.init.MubbleSoundPack;
+import com.hugman.mubble.init.data.MubbleStatPack;
 import com.hugman.mubble.init.data.MubbleTags;
 import com.hugman.mubble.util.CalendarEvents;
 import com.hugman.mubble.util.trade_offer.ToadTradeOffers;
@@ -94,16 +93,16 @@ public class ToadEntity extends AbstractTraderEntity {
 	@Override
 	protected SoundEvent getAmbientSound() {
 		if(CalendarEvents.isAprilFools) {
-			return MubbleSounds.ENTITY_TOAD_BUP;
+			return MubbleSoundPack.ENTITY_TOAD_BUP;
 		}
 		else {
-			return this.hasCustomer() ? MubbleSounds.ENTITY_TOAD_TRADE : MubbleSounds.ENTITY_TOAD_AMBIENT;
+			return this.hasCustomer() ? MubbleSoundPack.ENTITY_TOAD_TRADE : MubbleSoundPack.ENTITY_TOAD_AMBIENT;
 		}
 	}
 
 	@Override
 	public SoundEvent getYesSound() {
-		return MubbleSounds.ENTITY_TOAD_YES;
+		return MubbleSoundPack.ENTITY_TOAD_YES;
 	}
 
 	@Override
@@ -118,12 +117,12 @@ public class ToadEntity extends AbstractTraderEntity {
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return MubbleSounds.ENTITY_TOAD_HURT;
+		return MubbleSoundPack.ENTITY_TOAD_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return MubbleSounds.ENTITY_TOAD_DEATH;
+		return MubbleSoundPack.ENTITY_TOAD_DEATH;
 	}
 
 	@Override
@@ -146,7 +145,7 @@ public class ToadEntity extends AbstractTraderEntity {
 
 	@Override
 	public PassiveEntity createChild(ServerWorld world, PassiveEntity mate) {
-		ToadEntity child = new ToadEntity(MubbleEntities.TOAD, this.world);
+		ToadEntity child = new ToadEntity(MubbleEntityPack.TOAD, this.world);
 		child.setVariant(this.random.nextFloat() < 0.5f ? ((ToadEntity) (mate)).getVariant() : this.getVariant());
 		return child;
 	}
@@ -184,7 +183,7 @@ public class ToadEntity extends AbstractTraderEntity {
 	@Override
 	protected ActionResult interactMob(PlayerEntity player, Hand hand) {
 		ItemStack itemStack = player.getStackInHand(hand);
-		if(itemStack.getItem() != MubbleItems.TOAD_SPAWN_EGG && this.isAlive() && !this.hasCustomer()) {
+		if(itemStack.getItem() != MubbleEntityPack.TOAD_SPAWN_EGG && this.isAlive() && !this.hasCustomer()) {
 			if(this.isBaby()) {
 				this.sayNo();
 				return ActionResult.success(this.world.isClient);
@@ -195,7 +194,7 @@ public class ToadEntity extends AbstractTraderEntity {
 					if(bl && !this.world.isClient) {
 						this.sayNo();
 					}
-					player.incrementStat(MubbleStats.TALKED_TO_TOAD);
+					player.incrementStat(MubbleStatPack.TALKED_TO_TOAD);
 				}
 				if(bl) {
 					return ActionResult.success(this.world.isClient);
@@ -217,7 +216,7 @@ public class ToadEntity extends AbstractTraderEntity {
 	private void sayNo() {
 		this.setHeadRollingTimeLeft(40);
 		if(!this.world.isClient()) {
-			this.playSound(MubbleSounds.ENTITY_TOAD_NO, this.getSoundVolume(), this.getSoundPitch());
+			this.playSound(MubbleSoundPack.ENTITY_TOAD_NO, this.getSoundVolume(), this.getSoundPitch());
 		}
 	}
 
@@ -239,7 +238,7 @@ public class ToadEntity extends AbstractTraderEntity {
 
 	@Override
 	protected Identifier getLootTableId() {
-		return new Identifier(Mubble.MOD_ID, "entities/toad/" + getVariant().getName());
+		return Mubble.MOD_DATA.id("entities/toad/" + getVariant().getName());
 	}
 
 	public static class ToadData extends PassiveEntity.PassiveData {

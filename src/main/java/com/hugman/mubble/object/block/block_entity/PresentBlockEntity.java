@@ -1,8 +1,8 @@
 package com.hugman.mubble.object.block.block_entity;
 
 import com.hugman.mubble.Mubble;
-import com.hugman.mubble.init.MubbleBlocks;
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.MubbleSoundPack;
 import com.hugman.mubble.object.block.PresentBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.ChestBlockEntity;
@@ -26,7 +26,7 @@ public class PresentBlockEntity extends LootableContainerBlockEntity {
 	private int viewerCount;
 
 	public PresentBlockEntity() {
-		super(MubbleBlocks.PRESENT_ENTITY);
+		super(MubbleBlockPack.PRESENT_ENTITY);
 		this.inventory = DefaultedList.ofSize(27, ItemStack.EMPTY);
 	}
 
@@ -83,7 +83,7 @@ public class PresentBlockEntity extends LootableContainerBlockEntity {
 			boolean flag2 = blockstate.get(PresentBlock.EMPTY);
 			if(!flag1) {
 				if(!flag2) {
-					this.playSound(blockstate, MubbleSounds.BLOCK_PRESENT_OPEN);
+					this.playSound(blockstate, MubbleSoundPack.BLOCK_PRESENT_OPEN);
 				}
 				this.setOpenProperty(blockstate, true);
 			}
@@ -114,7 +114,7 @@ public class PresentBlockEntity extends LootableContainerBlockEntity {
 			}
 			if(flag1) {
 				if(!flag2) {
-					this.playSound(blockstate, MubbleSounds.BLOCK_PRESENT_CLOSE);
+					this.playSound(blockstate, MubbleSoundPack.BLOCK_PRESENT_CLOSE);
 				}
 				this.setOpenProperty(blockstate.with(PresentBlock.EMPTY, flag2), false);
 			}
@@ -145,6 +145,6 @@ public class PresentBlockEntity extends LootableContainerBlockEntity {
 
 	@Override
 	protected Text getContainerName() {
-		return new TranslatableText("container." + Mubble.MOD_ID + ".present");
+		return new TranslatableText("container." + Mubble.MOD_DATA.getModName() + ".present");
 	}
 }

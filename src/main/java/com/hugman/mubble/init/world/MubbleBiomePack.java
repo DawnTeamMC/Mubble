@@ -6,7 +6,7 @@ import com.hugman.mubble.util.MubbleBiomeCreator;
 import net.fabricmc.fabric.api.biomes.v1.OverworldClimate;
 import net.minecraft.world.biome.Biome;
 
-public class MubbleBiomes extends MubblePack {
+public class MubbleBiomePack extends MubblePack {
 	public static final Biome PUMPKIN_PASTURES = register(new Builder("pumpkin_pastures", MubbleBiomeCreator.createPumpkinPastures()).addToOverworldContinental(OverworldClimate.TEMPERATE, 1D, true));
 	public static final Biome PINK_CHERRY_OAK_FOREST = register(new Builder("pink_cherry_oak_forest", MubbleBiomeCreator.createCherryOakForest(true)).addToOverworldContinental(OverworldClimate.COOL, 1D, true));
 	public static final Biome WHITE_CHERRY_OAK_FOREST = register(new Builder("white_cherry_oak_forest", MubbleBiomeCreator.createCherryOakForest(false)).addToOverworldContinental(OverworldClimate.COOL, 1D, true));

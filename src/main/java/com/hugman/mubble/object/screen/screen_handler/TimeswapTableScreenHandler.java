@@ -1,9 +1,8 @@
 package com.hugman.mubble.object.screen.screen_handler;
 
 import com.google.common.collect.Lists;
-import com.hugman.mubble.init.MubbleBlocks;
-import com.hugman.mubble.init.MubbleSounds;
-import com.hugman.mubble.init.data.MubbleScreenHandlers;
+import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.MubbleSoundPack;
 import com.hugman.mubble.init.data.MubbleTags;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -74,7 +73,7 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 				{
 					long l = world.getTime();
 					if(TimeswapTableScreenHandler.this.lastTakeTime != l) {
-						world.playSound(null, blockPos, MubbleSounds.UI_TIMESWAP_TABLE_TAKE_RESULT,
+						world.playSound(null, blockPos, MubbleSoundPack.UI_TIMESWAP_TABLE_TAKE_RESULT,
 								SoundCategory.BLOCKS, 1.0F, 1.0F);
 						TimeswapTableScreenHandler.this.lastTakeTime = l;
 					}
@@ -117,12 +116,12 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 
 	@Override
 	public boolean canUse(PlayerEntity player) {
-		return canUse(this.context, player, MubbleBlocks.TIMESWAP_TABLE);
+		return canUse(this.context, player, MubbleBlockPack.TIMESWAP_TABLE);
 	}
 
 	@Override
 	public ScreenHandlerType<?> getType() {
-		return MubbleScreenHandlers.TIMESWAP_TABLE;
+		return MubbleBlockPack.TIMESWAP_TABLE_SCREEN_HANDLER;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package com.hugman.mubble.object.block;
 
 import com.hugman.mubble.Mubble;
-import com.hugman.mubble.init.data.MubbleStats;
+import com.hugman.mubble.init.data.MubbleStatPack;
 import com.hugman.mubble.object.screen.screen_handler.TimeswapTableScreenHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 
 public class TimeswapTableBlock extends Block {
-	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_ID + ".timeswap_table");
+	private static final TranslatableText CONTAINER_NAME = new TranslatableText("container." + Mubble.MOD_DATA.getModName() + ".timeswap_table");
 
 	public TimeswapTableBlock(Block.Settings builder) {
 		super(builder);
@@ -32,7 +32,7 @@ public class TimeswapTableBlock extends Block {
 		}
 		else {
 			player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
-			player.incrementStat(MubbleStats.INTERACT_WITH_TIMESWAP_TABLE);
+			player.incrementStat(MubbleStatPack.INTERACT_WITH_TIMESWAP_TABLE);
 			return ActionResult.CONSUME;
 		}
 	}

@@ -1,6 +1,7 @@
 package com.hugman.mubble.object.item.costume;
 
-import com.hugman.mubble.init.MubbleCostumes;
+import com.hugman.mubble.init.MubbleCostumePack;
+import com.hugman.mubble.init.MubbleItemPack;
 import com.hugman.mubble.init.MubbleShaders;
 import com.hugman.mubble.mixin.client.GameRendererAccessor;
 import com.hugman.mubble.util.CalendarEvents;
@@ -106,13 +107,13 @@ public class Costume extends Item {
 			player.equipStack(armorType, itemStack.copy());
 			itemStack.decrement(1);
 			world.playSound(null, player.getX(), player.getY(), player.getZ(), this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
-			if(this == MubbleCostumes.MAYRO_CAP && player.getGameProfile().getId().toString() == "8cf61519-4ac2-4d60-9d65-d0c7abcf4524") {
+			if(this == MubbleCostumePack.MAYRO_CAP && player.getGameProfile().getId().toString() == "8cf61519-4ac2-4d60-9d65-d0c7abcf4524") {
 				player.sendMessage(new TranslatableText("item.mubble.mayro_cap.secret_status", new Object[0]), true);
 			}
-			else if(this == MubbleCostumes.NOTEBLOCK_HEAD && player.getGameProfile().getId().toString() == "5a68af56-e293-44e9-bbf8-21d58300b3f3") {
+			else if(this == MubbleCostumePack.NOTEBLOCK_HEAD && player.getGameProfile().getId().toString() == "5a68af56-e293-44e9-bbf8-21d58300b3f3") {
 				player.sendMessage(new TranslatableText("item.mubble.noteblock_head.secret_status", new Object[0]), true);
 			}
-			else if(this == MubbleCostumes.BANDANA && player.getGameProfile().getId().toString() == "1805e857-329e-463e-8ca8-122fcc686996") {
+			else if(this == MubbleCostumePack.BANDANA && player.getGameProfile().getId().toString() == "1805e857-329e-463e-8ca8-122fcc686996") {
 				player.sendMessage(new TranslatableText("item.mubble.bandana.secret_status", new Object[0]), true);
 			}
 			return new TypedActionResult<>(ActionResult.SUCCESS, itemStack);

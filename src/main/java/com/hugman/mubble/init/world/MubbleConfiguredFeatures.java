@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.hugman.dawn.api.util.DefaultBlockGetter;
 import com.hugman.mubble.Mubble;
-import com.hugman.mubble.init.MubbleBlocks;
+import com.hugman.mubble.init.MubbleBlockPack;
 import com.hugman.mubble.object.world.gen.feature.HugeNetherMushroomFeatureConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -30,12 +30,12 @@ import java.util.Set;
 
 public class MubbleConfiguredFeatures {
 	private static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String name, ConfiguredFeature<FC, ?> feature) {
-		return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Mubble.id(name), feature);
+		return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Mubble.MOD_DATA.id(name), feature);
 	}
 
-	public static final ConfiguredFeature<?, ?> ORE_BLUNITE = register("ore_blunite", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.BLUNITE_BLOCKS.getBlock(DefaultBlockGetter.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
-	public static final ConfiguredFeature<?, ?> ORE_CARBONITE = register("ore_carbonite", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.CARBONITE_BLOCKS.getBlock(DefaultBlockGetter.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
-	public static final ConfiguredFeature<?, ?> ORE_VANADIUM = register("ore_vanadium", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlocks.VANADIUM_ORE.getDefaultState(), 6)).method_30377(80).spreadHorizontally().repeat(10));
+	public static final ConfiguredFeature<?, ?> ORE_BLUNITE = register("ore_blunite", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlockPack.BLUNITE_BLOCKS.getBlock(DefaultBlockGetter.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
+	public static final ConfiguredFeature<?, ?> ORE_CARBONITE = register("ore_carbonite", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlockPack.CARBONITE_BLOCKS.getBlock(DefaultBlockGetter.CUBE).getDefaultState(), 33)).method_30377(80).spreadHorizontally().repeat(10));
+	public static final ConfiguredFeature<?, ?> ORE_VANADIUM = register("ore_vanadium", Feature.ORE.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD, MubbleBlockPack.VANADIUM_ORE.getDefaultState(), 6)).method_30377(80).spreadHorizontally().repeat(10));
 
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> AUTUMN_OAK = register("autumn_oak", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.OAK_LOG), new SimpleBlockStateProvider(States.AUTUMN_OAK_LEAVES), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> AUTUMN_OAK_BEES_002 = register("autumn_oak_bees_002", Feature.TREE.configure(AUTUMN_OAK.getConfig().setTreeDecorators(ImmutableList.of(ConfiguredFeatures.Decorators.REGULAR_BEEHIVES_TREES))));
@@ -192,7 +192,7 @@ public class MubbleConfiguredFeatures {
 		protected static final HugeNetherMushroomFeatureConfig HUGE_NETHER_MUSHROOM_GRAY = new HugeNetherMushroomFeatureConfig(4, 7, States.GRAY_MUSHROOM_BLOCK, 3, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.01F, 0.0F);
 		protected static final HugeNetherMushroomFeatureConfig HUGE_NETHER_MUSHROOM_BLACK = new HugeNetherMushroomFeatureConfig(6, 2, States.BLACK_MUSHROOM_BLOCK, 2, 1, Blocks.SHROOMLIGHT.getDefaultState(), 0.01F, 0.0F);
 
-		public static final BlockPileFeatureConfig AMARANTH_ROOTS = new BlockPileFeatureConfig((new WeightedBlockStateProvider()).addState(MubbleBlocks.AMARANTH_ROOTS.getDefaultState(), 87).addState(MubbleBlocks.DARK_AMARANTH_WOOD.getFungus().getDefaultState(), 11));
+		public static final BlockPileFeatureConfig AMARANTH_ROOTS = new BlockPileFeatureConfig((new WeightedBlockStateProvider()).addState(MubbleBlockPack.AMARANTH_ROOTS.getDefaultState(), 87).addState(MubbleBlockPack.DARK_AMARANTH_WOOD.getFungus().getDefaultState(), 11));
 
 		protected final static ConfiguredFeature<RandomPatchFeatureConfig, ?> patch(BlockState blockState, int tries) {
 			return Feature.RANDOM_PATCH.configure((new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(blockState), SimpleBlockPlacer.INSTANCE)).tries(tries).cannotProject().build());
@@ -207,65 +207,65 @@ public class MubbleConfiguredFeatures {
 		protected static final BlockState GRASS_BLOCK = Blocks.GRASS_BLOCK.getDefaultState();
 
 		protected static final BlockState OAK_LOG = Blocks.OAK_LOG.getDefaultState();
-		protected static final BlockState AUTUMN_OAK_LEAVES = MubbleBlocks.AUTUMN_OAK_LEAVES.getLeaves().getDefaultState();
-		protected static final BlockState AUTUMN_OAK_LEAF_PILE = MubbleBlocks.AUTUMN_OAK_LEAVES.getLeafPile().getDefaultState();
+		protected static final BlockState AUTUMN_OAK_LEAVES = MubbleBlockPack.AUTUMN_OAK_LEAVES.getLeaves().getDefaultState();
+		protected static final BlockState AUTUMN_OAK_LEAF_PILE = MubbleBlockPack.AUTUMN_OAK_LEAVES.getLeafPile().getDefaultState();
 
 		protected static final BlockState BIRCH_LOG = Blocks.BIRCH_LOG.getDefaultState();
-		protected static final BlockState AUTUMN_BIRCH_LEAVES = MubbleBlocks.AUTUMN_BIRCH_LEAVES.getLeaves().getDefaultState();
-		protected static final BlockState AUTUMN_BIRCH_LEAF_PILE = MubbleBlocks.AUTUMN_BIRCH_LEAVES.getLeafPile().getDefaultState();
+		protected static final BlockState AUTUMN_BIRCH_LEAVES = MubbleBlockPack.AUTUMN_BIRCH_LEAVES.getLeaves().getDefaultState();
+		protected static final BlockState AUTUMN_BIRCH_LEAF_PILE = MubbleBlockPack.AUTUMN_BIRCH_LEAVES.getLeafPile().getDefaultState();
 
-		protected static final BlockState CHERRY_OAK_LOG = MubbleBlocks.CHERRY_OAK_WOOD.getLog().getDefaultState();
-		protected static final BlockState PINK_CHERRY_OAK_LEAVES = MubbleBlocks.PINK_CHERRY_OAK_LEAVES.getLeaves().getDefaultState();
-		protected static final BlockState PINK_CHERRY_OAK_LEAF_PILE = MubbleBlocks.PINK_CHERRY_OAK_LEAVES.getLeafPile().getDefaultState();
-		protected static final BlockState WHITE_CHERRY_OAK_LEAVES = MubbleBlocks.WHITE_CHERRY_OAK_LEAVES.getLeaves().getDefaultState();
-		protected static final BlockState WHITE_CHERRY_OAK_LEAF_PILE = MubbleBlocks.WHITE_CHERRY_OAK_LEAVES.getLeafPile().getDefaultState();
+		protected static final BlockState CHERRY_OAK_LOG = MubbleBlockPack.CHERRY_OAK_WOOD.getLog().getDefaultState();
+		protected static final BlockState PINK_CHERRY_OAK_LEAVES = MubbleBlockPack.PINK_CHERRY_OAK_LEAVES.getLeaves().getDefaultState();
+		protected static final BlockState PINK_CHERRY_OAK_LEAF_PILE = MubbleBlockPack.PINK_CHERRY_OAK_LEAVES.getLeafPile().getDefaultState();
+		protected static final BlockState WHITE_CHERRY_OAK_LEAVES = MubbleBlockPack.WHITE_CHERRY_OAK_LEAVES.getLeaves().getDefaultState();
+		protected static final BlockState WHITE_CHERRY_OAK_LEAF_PILE = MubbleBlockPack.WHITE_CHERRY_OAK_LEAVES.getLeafPile().getDefaultState();
 
-		protected static final BlockState PALM_LOG = MubbleBlocks.PALM_WOOD.getLog().getDefaultState();
-		protected static final BlockState PALM_LEAVES = MubbleBlocks.PALM_WOOD.getLeaves().getDefaultState();
+		protected static final BlockState PALM_LOG = MubbleBlockPack.PALM_WOOD.getLog().getDefaultState();
+		protected static final BlockState PALM_LEAVES = MubbleBlockPack.PALM_WOOD.getLeaves().getDefaultState();
 
-		protected static final BlockState PRESS_GARDEN_LOG = MubbleBlocks.PRESS_GARDEN_WOOD.getLog().getDefaultState();
-		protected static final BlockState RED_PRESS_GARDEN_LEAVES = MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getLeaves().getDefaultState();
-		protected static final BlockState RED_PRESS_GARDEN_LEAF_PILE = MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getLeafPile().getDefaultState();
-		protected static final BlockState PINK_PRESS_GARDEN_LEAVES = MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getLeaves().getDefaultState();
-		protected static final BlockState PINK_PRESS_GARDEN_LEAF_PILE = MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getLeafPile().getDefaultState();
+		protected static final BlockState PRESS_GARDEN_LOG = MubbleBlockPack.PRESS_GARDEN_WOOD.getLog().getDefaultState();
+		protected static final BlockState RED_PRESS_GARDEN_LEAVES = MubbleBlockPack.RED_PRESS_GARDEN_LEAVES.getLeaves().getDefaultState();
+		protected static final BlockState RED_PRESS_GARDEN_LEAF_PILE = MubbleBlockPack.RED_PRESS_GARDEN_LEAVES.getLeafPile().getDefaultState();
+		protected static final BlockState PINK_PRESS_GARDEN_LEAVES = MubbleBlockPack.PINK_PRESS_GARDEN_LEAVES.getLeaves().getDefaultState();
+		protected static final BlockState PINK_PRESS_GARDEN_LEAF_PILE = MubbleBlockPack.PINK_PRESS_GARDEN_LEAVES.getLeafPile().getDefaultState();
 
-		protected static final BlockState BLUEBERRY_BUSH = MubbleBlocks.BLUEBERRY_BUSH.getDefaultState();
+		protected static final BlockState BLUEBERRY_BUSH = MubbleBlockPack.BLUEBERRY_BUSH.getDefaultState();
 
-		protected static final BlockState AMARANTH_DYLIUM = MubbleBlocks.AMARANTH_DYLIUM.getDefaultState();
-		protected static final BlockState DARK_AMARANTH_STEM = MubbleBlocks.DARK_AMARANTH_WOOD.getStem().getDefaultState();
-		protected static final BlockState AMARANTH_WART_BLOCK = MubbleBlocks.AMARANTH_WART_BLOCK.getDefaultState();
+		protected static final BlockState AMARANTH_DYLIUM = MubbleBlockPack.AMARANTH_DYLIUM.getDefaultState();
+		protected static final BlockState DARK_AMARANTH_STEM = MubbleBlockPack.DARK_AMARANTH_WOOD.getStem().getDefaultState();
+		protected static final BlockState AMARANTH_WART_BLOCK = MubbleBlockPack.AMARANTH_WART_BLOCK.getDefaultState();
 		protected static final BlockState COBWEB = Blocks.COBWEB.getDefaultState();
 
-		protected static final BlockState SCARLET_LOG = MubbleBlocks.SCARLET_WOOD.getLog().getDefaultState();
-		protected static final BlockState SCARLET_LEAVES = MubbleBlocks.SCARLET_WOOD.getLeaves().getDefaultState();
-		protected static final BlockState SCARLET_LEAF_PILE = MubbleBlocks.SCARLET_WOOD.getLeafPile().getDefaultState();
-		protected static final BlockState SCARLET_ORCHID = MubbleBlocks.SCARLET_ORCHID.getPlant().getDefaultState();
+		protected static final BlockState SCARLET_LOG = MubbleBlockPack.SCARLET_WOOD.getLog().getDefaultState();
+		protected static final BlockState SCARLET_LEAVES = MubbleBlockPack.SCARLET_WOOD.getLeaves().getDefaultState();
+		protected static final BlockState SCARLET_LEAF_PILE = MubbleBlockPack.SCARLET_WOOD.getLeafPile().getDefaultState();
+		protected static final BlockState SCARLET_ORCHID = MubbleBlockPack.SCARLET_ORCHID.getPlant().getDefaultState();
 
-		protected static final BlockState BLUE_MUSHROOM = MubbleBlocks.BLUE_MUSHROOM.getDefaultState();
-		protected static final BlockState CYAN_MUSHROOM = MubbleBlocks.CYAN_MUSHROOM.getDefaultState();
-		protected static final BlockState YELLOW_MUSHROOM = MubbleBlocks.YELLOW_MUSHROOM.getDefaultState();
-		protected static final BlockState ORANGE_MUSHROOM = MubbleBlocks.ORANGE_MUSHROOM.getDefaultState();
-		protected static final BlockState PINK_MUSHROOM = MubbleBlocks.PINK_MUSHROOM.getDefaultState();
-		protected static final BlockState MAGENTA_MUSHROOM = MubbleBlocks.MAGENTA_MUSHROOM.getDefaultState();
-		protected static final BlockState WHITE_MUSHROOM = MubbleBlocks.WHITE_MUSHROOM.getDefaultState();
-		protected static final BlockState LIGHT_GRAY_MUSHROOM = MubbleBlocks.LIGHT_GRAY_MUSHROOM.getDefaultState();
-		protected static final BlockState GRAY_MUSHROOM = MubbleBlocks.GRAY_MUSHROOM.getDefaultState();
-		protected static final BlockState BLACK_MUSHROOM = MubbleBlocks.BLACK_MUSHROOM.getDefaultState();
+		protected static final BlockState BLUE_MUSHROOM = MubbleBlockPack.BLUE_MUSHROOM.getDefaultState();
+		protected static final BlockState CYAN_MUSHROOM = MubbleBlockPack.CYAN_MUSHROOM.getDefaultState();
+		protected static final BlockState YELLOW_MUSHROOM = MubbleBlockPack.YELLOW_MUSHROOM.getDefaultState();
+		protected static final BlockState ORANGE_MUSHROOM = MubbleBlockPack.ORANGE_MUSHROOM.getDefaultState();
+		protected static final BlockState PINK_MUSHROOM = MubbleBlockPack.PINK_MUSHROOM.getDefaultState();
+		protected static final BlockState MAGENTA_MUSHROOM = MubbleBlockPack.MAGENTA_MUSHROOM.getDefaultState();
+		protected static final BlockState WHITE_MUSHROOM = MubbleBlockPack.WHITE_MUSHROOM.getDefaultState();
+		protected static final BlockState LIGHT_GRAY_MUSHROOM = MubbleBlockPack.LIGHT_GRAY_MUSHROOM.getDefaultState();
+		protected static final BlockState GRAY_MUSHROOM = MubbleBlockPack.GRAY_MUSHROOM.getDefaultState();
+		protected static final BlockState BLACK_MUSHROOM = MubbleBlockPack.BLACK_MUSHROOM.getDefaultState();
 
-		protected static final BlockState BLUE_MUSHROOM_BLOCK = MubbleBlocks.BLUE_MUSHROOM_BLOCK.getDefaultState();
-		protected static final BlockState CYAN_MUSHROOM_BLOCK = MubbleBlocks.CYAN_MUSHROOM_BLOCK.getDefaultState();
-		protected static final BlockState YELLOW_MUSHROOM_BLOCK = MubbleBlocks.YELLOW_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState BLUE_MUSHROOM_BLOCK = MubbleBlockPack.BLUE_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState CYAN_MUSHROOM_BLOCK = MubbleBlockPack.CYAN_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState YELLOW_MUSHROOM_BLOCK = MubbleBlockPack.YELLOW_MUSHROOM_BLOCK.getDefaultState();
 		protected static final BlockState BROWN_MUSHROOM_BLOCK = Blocks.BROWN_MUSHROOM_BLOCK.getDefaultState();
-		protected static final BlockState ORANGE_MUSHROOM_BLOCK = MubbleBlocks.ORANGE_MUSHROOM_BLOCK.getDefaultState();
-		protected static final BlockState PINK_MUSHROOM_BLOCK = MubbleBlocks.PINK_MUSHROOM_BLOCK.getDefaultState();
-		protected static final BlockState MAGENTA_MUSHROOM_BLOCK = MubbleBlocks.MAGENTA_MUSHROOM_BLOCK.getDefaultState();
-		protected static final BlockState WHITE_MUSHROOM_BLOCK = MubbleBlocks.WHITE_MUSHROOM_BLOCK.getDefaultState();
-		protected static final BlockState LIGHT_GRAY_MUSHROOM_BLOCK = MubbleBlocks.LIGHT_GRAY_MUSHROOM_BLOCK.getDefaultState();
-		protected static final BlockState GRAY_MUSHROOM_BLOCK = MubbleBlocks.GRAY_MUSHROOM_BLOCK.getDefaultState();
-		protected static final BlockState BLACK_MUSHROOM_BLOCK = MubbleBlocks.BLACK_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState ORANGE_MUSHROOM_BLOCK = MubbleBlockPack.ORANGE_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState PINK_MUSHROOM_BLOCK = MubbleBlockPack.PINK_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState MAGENTA_MUSHROOM_BLOCK = MubbleBlockPack.MAGENTA_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState WHITE_MUSHROOM_BLOCK = MubbleBlockPack.WHITE_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState LIGHT_GRAY_MUSHROOM_BLOCK = MubbleBlockPack.LIGHT_GRAY_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState GRAY_MUSHROOM_BLOCK = MubbleBlockPack.GRAY_MUSHROOM_BLOCK.getDefaultState();
+		protected static final BlockState BLACK_MUSHROOM_BLOCK = MubbleBlockPack.BLACK_MUSHROOM_BLOCK.getDefaultState();
 
 		protected static final BlockState SHROOMLIGHT = Blocks.SHROOMLIGHT.getDefaultState();
 
-		protected static final BlockState SCARLET_MUSHROOM = MubbleBlocks.SCARLET_MUSHROOM.getPlant().getDefaultState();
+		protected static final BlockState SCARLET_MUSHROOM = MubbleBlockPack.SCARLET_MUSHROOM.getPlant().getDefaultState();
 	}
 }

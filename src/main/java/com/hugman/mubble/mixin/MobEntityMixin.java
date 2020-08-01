@@ -1,6 +1,7 @@
 package com.hugman.mubble.mixin;
 
-import com.hugman.mubble.init.MubbleCostumes;
+import com.hugman.mubble.init.MubbleCostumePack;
+import com.hugman.mubble.init.MubbleItemPack;
 import com.hugman.mubble.init.data.MubbleTags;
 import com.hugman.mubble.object.item.costume.BlockCostume;
 import com.hugman.mubble.object.item.costume.Costume;
@@ -44,7 +45,7 @@ public class MobEntityMixin {
 		if(MubbleTags.EntityTypes.CAN_WEAR_HELMET.contains(entity.getType())) {
 			if(entity.getEquippedStack(EquipmentSlot.HEAD).isEmpty() && CalendarEvents.isChristmasSeason) {
 				if(rand.nextFloat() < (float) CalendarEvents.getDayToday() / 25.0f) {
-					entity.equipStack(EquipmentSlot.HEAD, new ItemStack(MubbleCostumes.CHRISTMAS_HAT));
+					entity.equipStack(EquipmentSlot.HEAD, new ItemStack(MubbleCostumePack.CHRISTMAS_HAT));
 					entity.setEquipmentDropChance(EquipmentSlot.HEAD, 0.0F);
 				}
 			}

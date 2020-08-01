@@ -11,7 +11,7 @@
 		"Yanis48"
 	],
 	"contact": {
-		"homepage": "https://www.curseforge.com/minecraft/mc-mods/mubble-fabric",
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/mubble",
 		"sources": "https://github.com/DawnTeamMC/Mubble",
 		"issues": "https://github.com/DawnTeamMC/Mubble/issues"
 	},
@@ -25,7 +25,7 @@
 		]
 	},
 	"mixins": [
-		"mubble.mixins.json"
+		"mixins.json"
 	],
 	"depends": {
 		"fabric": "*",

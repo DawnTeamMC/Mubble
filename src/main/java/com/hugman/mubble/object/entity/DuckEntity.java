@@ -1,7 +1,7 @@
 package com.hugman.mubble.object.entity;
 
-import com.hugman.mubble.init.MubbleEntities;
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleEntityPack;
+import com.hugman.mubble.init.MubbleSoundPack;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
@@ -129,28 +129,28 @@ public class DuckEntity extends AnimalEntity {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return MubbleSounds.ENTITY_DUCK_AMBIENT;
+		return MubbleSoundPack.ENTITY_DUCK_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
-		return MubbleSounds.ENTITY_DUCK_HURT;
+		return MubbleSoundPack.ENTITY_DUCK_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return MubbleSounds.ENTITY_DUCK_DEATH;
+		return MubbleSoundPack.ENTITY_DUCK_DEATH;
 	}
 
 	@Override
 	protected void playStepSound(BlockPos pos, BlockState state) {
-		this.playSound(MubbleSounds.ENTITY_DUCK_STEP, 0.15F, 1.0F);
+		this.playSound(MubbleSoundPack.ENTITY_DUCK_STEP, 0.15F, 1.0F);
 	}
 
 	@Nullable
 	@Override
 	public DuckEntity createChild(ServerWorld serverWorld, PassiveEntity mate) {
-		DuckEntity child = MubbleEntities.DUCK.create(this.world);
+		DuckEntity child = MubbleEntityPack.DUCK.create(this.world);
 		child.setVariant(this.random.nextFloat() < 0.5f ? ((DuckEntity) (mate)).getVariant() : this.getVariant());
 		return child;
 	}

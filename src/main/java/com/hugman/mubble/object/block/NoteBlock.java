@@ -1,7 +1,7 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleBlocks;
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.MubbleSoundPack;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -40,23 +40,23 @@ public class NoteBlock extends Block {
 	public void launch(World worldIn, Entity entityIn) {
 		Vec3d vec3d = entityIn.getVelocity();
 		if(entityIn instanceof LivingEntity) {
-			SoundEvent lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
-			SoundEvent highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
-			if(this == MubbleBlocks.SMB_NOTE_BLOCK || this == MubbleBlocks.SMB_SUPER_NOTE_BLOCK) {
-				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
-				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
+			SoundEvent lowJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_SMB;
+			SoundEvent highJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_SMB;
+			if(this == MubbleBlockPack.SMB_NOTE_BLOCK || this == MubbleBlockPack.SMB_SUPER_NOTE_BLOCK) {
+				lowJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_SMB;
+				highJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_SMB;
 			}
-			else if(this == MubbleBlocks.SMB3_NOTE_BLOCK || this == MubbleBlocks.SMB3_SUPER_NOTE_BLOCK) {
-				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB3;
-				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB3;
+			else if(this == MubbleBlockPack.SMB3_NOTE_BLOCK || this == MubbleBlockPack.SMB3_SUPER_NOTE_BLOCK) {
+				lowJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_SMB3;
+				highJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_SMB3;
 			}
-			else if(this == MubbleBlocks.SMW_NOTE_BLOCK || this == MubbleBlocks.SMW_SUPER_NOTE_BLOCK) {
-				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMW;
-				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMW;
+			else if(this == MubbleBlockPack.SMW_NOTE_BLOCK || this == MubbleBlockPack.SMW_SUPER_NOTE_BLOCK) {
+				lowJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_SMW;
+				highJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_SMW;
 			}
-			else if(this == MubbleBlocks.NSMBU_NOTE_BLOCK || this == MubbleBlocks.NSMBU_SUPER_NOTE_BLOCK) {
-				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_LOW_NSMBU;
-				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_HIGH_NSMBU;
+			else if(this == MubbleBlockPack.NSMBU_NOTE_BLOCK || this == MubbleBlockPack.NSMBU_SUPER_NOTE_BLOCK) {
+				lowJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_LOW_NSMBU;
+				highJumpSound = MubbleSoundPack.BLOCK_NOTE_BLOCK_JUMP_HIGH_NSMBU;
 			}
 			BlockPos pos = entityIn.getBlockPos().down();
 			final double x = pos.getX() + 0.5D;

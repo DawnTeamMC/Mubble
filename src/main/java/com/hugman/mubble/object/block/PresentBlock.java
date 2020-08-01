@@ -1,7 +1,7 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.data.MubbleBlockStateProperties;
-import com.hugman.mubble.init.data.MubbleStats;
+import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.data.MubbleStatPack;
 import com.hugman.mubble.object.block.block_entity.PresentBlockEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
@@ -31,7 +31,7 @@ import java.util.Random;
 
 public class PresentBlock extends BlockWithEntity implements Waterloggable {
 	public static final BooleanProperty OPEN = Properties.OPEN;
-	public static final BooleanProperty EMPTY = MubbleBlockStateProperties.EMPTY;
+	public static final BooleanProperty EMPTY = MubbleBlockPack.Properties.EMPTY;
 
 	public static final BooleanProperty WATERLOGGED = Properties.WATERLOGGED;
 	protected static final VoxelShape EMPTY_SHAPE = Block.createCuboidShape(1.0D, 0.0D, 1.0D, 15.0D, 12.0D, 15.0D);
@@ -61,7 +61,7 @@ public class PresentBlock extends BlockWithEntity implements Waterloggable {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if(blockEntity instanceof PresentBlockEntity) {
 				player.openHandledScreen((PresentBlockEntity) blockEntity);
-				player.incrementStat(MubbleStats.OPEN_PRESENT);
+				player.incrementStat(MubbleStatPack.OPEN_PRESENT);
 			}
 		}
 		return ActionResult.SUCCESS;

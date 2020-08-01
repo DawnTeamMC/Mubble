@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.entity;
 
-import com.hugman.mubble.init.MubbleSounds;
+import com.hugman.mubble.init.MubbleSoundPack;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.FollowTargetGoal;
 import net.minecraft.entity.ai.goal.RevengeGoal;
@@ -47,22 +47,22 @@ public class ZombieCowmanEntity extends ZombifiedPiglinEntity {
 
 	@Override
 	protected SoundEvent getAmbientSound() {
-		return MubbleSounds.ENTITY_ZOMBIE_COWMAN_AMBIENT;
+		return MubbleSoundPack.ENTITY_ZOMBIE_COWMAN_AMBIENT;
 	}
 
 	@Override
 	protected SoundEvent getStepSound() {
-		return MubbleSounds.ENTITY_ZOMBIE_COWMAN_STEP;
+		return MubbleSoundPack.ENTITY_ZOMBIE_COWMAN_STEP;
 	}
 
 	@Override
 	protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-		return MubbleSounds.ENTITY_ZOMBIE_COWMAN_HURT;
+		return MubbleSoundPack.ENTITY_ZOMBIE_COWMAN_HURT;
 	}
 
 	@Override
 	protected SoundEvent getDeathSound() {
-		return MubbleSounds.ENTITY_ZOMBIE_COWMAN_DEATH;
+		return MubbleSoundPack.ENTITY_ZOMBIE_COWMAN_DEATH;
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class ZombieCowmanEntity extends ZombifiedPiglinEntity {
 			iattributeinstance.removeModifier(ATTACKING_SPEED_BOOST);
 		}
 		if(this.randomSoundDelay > 0 && --this.randomSoundDelay == 0) {
-			this.playSound(MubbleSounds.ENTITY_ZOMBIE_COWMAN_ANGRY, this.getSoundVolume() * 2.0F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F) * 1.8F);
+			this.playSound(MubbleSoundPack.ENTITY_ZOMBIE_COWMAN_ANGRY, this.getSoundVolume() * 2.0F, ((this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F) * 1.8F);
 		}
 		if(this.angerLevel > 0 && this.angerTargetUUID != null && this.getAttacker() == null) {
 			PlayerEntity entityplayer = this.world.getPlayerByUuid(this.angerTargetUUID);
