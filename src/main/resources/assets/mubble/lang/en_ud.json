@@ -4,9 +4,6 @@
 	"//itemGroup.mubble.instruments": "Instruments",
 
 	"comment": "BLOCKS",
-	"block.mubble.vanadium_ore": "ǝɹO ɯnᴉpɐuɐΛ",
-	"block.mubble.vanadium_block": "ɯnᴉpɐuɐᗺ ɟo ʞɔolᗺ",
-
 	"block.mubble.autumn_oak_sapling": "ƃuᴉldɐS ʞɐO uɯnʇn∀",
 	"block.mubble.autumn_oak_leaves": "sǝʌɐǝ˥ ʞɐO uɯnʇn∀",
 	"block.mubble.autumn_oak_leaf_pile": "ʇǝdɹɐƆ sǝʌɐǝ˥ ʞɐO uɯnʇn∀",
@@ -437,7 +434,6 @@
 
 	"comment": "ITEMS",
 	"item.mubble.baguette": "ǝʇʇǝnƃɐq",
-	"item.mubble.vanadium": "ɯnᴉpɐuɐΛ",
 	"//item.mubble.bismuth_dust": "Bismuth Dust",
 	"//item.mubble.crystallized_bismuth": "Crystallized Bismuth",
 	"//item.mubble.bismuth_sword": "Bismuth Sword",
@@ -682,8 +678,6 @@
 	"advancements.mubble.get_all_crowns.description": "suʍoɹɔ ǝɥʇ llɐ ʇǝפ",
 	"advancements.mubble.get_all_caps.title": "sɹɐʇS-ɹǝdnS",
 	"advancements.mubble.get_all_caps.description": "sdɐɔ ǝɥʇ llɐ ʇǝפ",
-	"advancements.mubble.get_vanadium.title": "¡sɯnᴉpɐuɐΛ",
-	"advancements.mubble.get_vanadium.description": "sɯnᴉpɐuɐʌ ǝɹᴉnbɔ∀",
 	"//advancements.mubble.get_timeswap_table.title": "Retroactive",
 	"//advancements.mubble.get_timeswap_table.description": "Craft a Timeswap Table",
 	"advancements.mubble.get_tetris_block.title": "pǝʇɔǝuuoƆ ll∀ s,ʇI",

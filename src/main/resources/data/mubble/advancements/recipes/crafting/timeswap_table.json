@@ -16,12 +16,12 @@
 				]
 			}
 		},
-		"has_vanadium": {
+		"has_diamond": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{
-						"item": "mubble:vanadium"
+						"item": "minecraft:diamond"
 					}
 				]
 			}
@@ -36,7 +36,7 @@
 	"requirements": [
 		[
 			"has_clock",
-			"has_vanadium",
+			"has_diamond",
 			"has_the_recipe"
 		]
 	]

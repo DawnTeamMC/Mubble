@@ -4,9 +4,6 @@
 	"itemGroup.mubble.instruments": "Instrumentos",
 
 	"comment": "BLOCKS",
-	"block.mubble.vanadium_ore": "Minério de Vanadium",
-	"block.mubble.vanadium_block": "Bloco de Vanadium",
-
 	"block.mubble.autumn_oak_sapling": "Muda de Carvalho de Outono",
 	"block.mubble.autumn_oak_leaves": "Folhas de Carvalho de Outono",
 	"block.mubble.autumn_oak_leaf_pile": "Tapete de Folhas de Carvalho de Outono",
@@ -437,7 +434,6 @@
 
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
-	"item.mubble.vanadium": "Vanadium",
 	"item.mubble.bismuth_dust": "Pó de Bismuto",
 	"item.mubble.crystallized_bismuth": "Bismuto Cristalizado",
 	"item.mubble.bismuth_sword": "Espada de Bismuto",
@@ -682,8 +678,6 @@
 	"advancements.mubble.get_all_crowns.description": "Obtenha todas as coroas",
 	"advancements.mubble.get_all_caps.title": "Super-Estrelas",
 	"advancements.mubble.get_all_caps.description": "Obtenha todos os bonés",
-	"advancements.mubble.get_vanadium.title": "Vanadiums!",
-	"advancements.mubble.get_vanadium.description": "Adquiriu vanadiums",
 	"advancements.mubble.get_timeswap_table.title": "Retroativo",
 	"advancements.mubble.get_timeswap_table.description": "Craftou uma Mesa de Troca-Tempo",
 	"advancements.mubble.get_tetris_block.title": "Está Tudo Conectado",

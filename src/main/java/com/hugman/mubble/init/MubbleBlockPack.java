@@ -13,7 +13,6 @@ import com.hugman.mubble.init.data.MubbleSoundTypes;
 import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
 import com.hugman.mubble.object.block.GrassBlock;
 import com.hugman.mubble.object.block.NoteBlock;
-import com.hugman.mubble.object.block.OreBlock;
 import com.hugman.mubble.object.block.*;
 import com.hugman.mubble.object.block.block_entity.PlacerBlockEntity;
 import com.hugman.mubble.object.block.block_entity.PresentBlockEntity;
@@ -37,9 +36,6 @@ import net.minecraft.util.DyeColor;
 
 public class MubbleBlockPack extends MubblePack {
 	/* MUBBLE */
-	public static final Block VANADIUM_ORE = register(new BlockCreator.Builder("vanadium_ore", new OreBlock(FabricBlockSettings.copy(Blocks.DIAMOND_ORE))).copy(Blocks.DIAMOND_ORE));
-	public static final Block VANADIUM_BLOCK = register(new BlockCreator.Builder("vanadium_block", DefaultBlockGetter.CUBE, FabricBlockSettings.copyOf(Blocks.DIAMOND_BLOCK).materialColor(MaterialColor.MAGENTA)));
-
 	public static final PottedPlantPack AUTUMN_OAK_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("autumn_oak_sapling", new SaplingBlock(new AutumnOakSaplingGenerator(), BlockSettings.SAPLING))));
 	public static final LeavesPack AUTUMN_OAK_LEAVES = register(new LeavesPack.Builder("autumn_oak"));
 	public static final PottedPlantPack AUTUMN_BIRCH_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("autumn_birch_sapling", new SaplingBlock(new AutumnBirchSaplingGenerator(), BlockSettings.SAPLING))));

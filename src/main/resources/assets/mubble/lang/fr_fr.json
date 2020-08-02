@@ -4,9 +4,6 @@
 	"itemGroup.mubble.instruments": "Instruments",
 
 	"comment": "BLOCKS",
-	"block.mubble.vanadium_ore": "Minerai de vanadium",
-	"block.mubble.vanadium_block": "Bloc de vanadium",
-
 	"block.mubble.autumn_oak_sapling": "Pousse de chêne d'automne",
 	"block.mubble.autumn_oak_leaves": "Feuilles de chêne d'automne",
 	"block.mubble.autumn_oak_leaf_pile": "Pile de feuilles de chêne d'automne",
@@ -437,7 +434,6 @@
 
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
-	"item.mubble.vanadium": "Vanadium",
 	"item.mubble.bismuth_dust": "Poudre de bismuth",
 	"item.mubble.crystallized_bismuth": "Bismuth cristallisé",
 	"item.mubble.bismuth_sword": "Épée en bismuth",
@@ -682,8 +678,6 @@
 	"advancements.mubble.get_all_crowns.description": "Obtenez toutes les couronnes",
 	"advancements.mubble.get_all_caps.title": "Super Étoiles",
 	"advancements.mubble.get_all_caps.description": "Obtenez toutes les casquettes",
-	"advancements.mubble.get_vanadium.title": "Du vanadium !",
-	"advancements.mubble.get_vanadium.description": "Obtenez du vanadium",
 	"advancements.mubble.get_timeswap_table.title": "Rétroactif",
 	"advancements.mubble.get_timeswap_table.description": "Fabriquez une table d'échange temporel",
 	"advancements.mubble.get_tetris_block.title": "Connectés à travers l'espace",

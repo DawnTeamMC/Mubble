@@ -1,5 +1,5 @@
 {
-	"parent": "mubble:get_vanadium",
+	"parent": "mubble:get_coin",
 	"display": {
 		"icon": {
 			"item": "mubble:timeswap_table"
@@ -12,7 +12,7 @@
 		}
 	},
 	"criteria": {
-		"has_vanadium": {
+		"has_timeswap_table": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
