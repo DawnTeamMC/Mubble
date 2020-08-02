@@ -1,7 +1,7 @@
 [![Mubble](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/mubble/header.png)](https://www.curseforge.com/minecraft/mc-mods/mubble)
 
 <p align="center">
-	Mubble is a mod for Minecraft 1.16 that brings Nintendo and some gaming franchises to your world. Super Mario, Tetris, Castlevania, Celeste, Sonic, Pokémon, and way more universes await. Mubble adds varieties of new blocks, items, entities.<br>
+	Mubble is a mod for Minecraft 1.16 that brings Nintendo and some gaming franchises to your world. Super Mario, Tetris, Castlevania, Celeste, Sonic, Pokémon, and way more universes await. Mubble adds varieties of new blocks, items, entities.<br><br>
 	<a href="https://www.curseforge.com/minecraft/mc-mods/fabric-api"><img title="Requires Fabric API" height="50" src="https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/fabric_api/required.png"></a>
 	<a href="https://www.curseforge.com/minecraft/mc-mods/dawn"><img title="Requires Dawn API" height="50" src="https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/dawn_api/required.png"></a><br>
 </p>
