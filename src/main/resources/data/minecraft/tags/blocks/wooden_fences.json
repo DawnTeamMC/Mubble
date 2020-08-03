@@ -1,10 +1,7 @@
 {
 	"replace": false,
 	"values": [
-		"mubble:cherry_oak_fence",
-		"mubble:palm_fence",
 		"mubble:press_garden_fence",
-		"mubble:scarlet_fence",
-		"mubble:dark_amaranth_fence"
+		"mubble:scarlet_fence"
 	]
 }

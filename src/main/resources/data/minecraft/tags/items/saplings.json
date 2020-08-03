@@ -1,10 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		"mubble:autumn_birch_sapling",
-		"mubble:pink_cherry_oak_sapling",
-		"mubble:white_cherry_oak_sapling",
-		"mubble:palm_sapling",
 		"mubble:red_press_garden_sapling",
 		"mubble:pink_press_garden_sapling",
 		"mubble:scarlet_sapling"

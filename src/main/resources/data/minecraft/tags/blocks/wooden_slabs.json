@@ -1,15 +1,9 @@
 {
 	"replace": false,
 	"values": [
-		"mubble:cherry_oak_slab",
-		"mubble:cherry_oak_wood_slab",
-		"mubble:palm_slab",
-		"mubble:palm_wood_slab",
 		"mubble:press_garden_slab",
 		"mubble:press_garden_wood_slab",
 		"mubble:scarlet_slab",
-		"mubble:scarlet_wood_slab",
-		"mubble:dark_amaranth_slab",
-		"mubble:dark_amaranth_hyphae_slab"
+		"mubble:scarlet_wood_slab"
 	]
 }

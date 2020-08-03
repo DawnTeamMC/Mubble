@@ -1,6 +1,0 @@
-{
-	"parent": "block/flower_pot_cross",
-	"textures": {
-		"plant": "mubble:block/pink_cherry_oak_sapling"
-	}
-}

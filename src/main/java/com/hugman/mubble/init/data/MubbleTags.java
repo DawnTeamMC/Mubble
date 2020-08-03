@@ -18,7 +18,6 @@ public class MubbleTags {
 		public static final Tag<Block> MELTABLE_TO_ICE = register("meltable/ice");
 		public static final Tag<Block> MELTABLE_TO_WATER = register("meltable/water");
 		public static final Tag<Block> CLOUD_BLOCKS = register("cloud_blocks");
-		public static final Tag<Block> PALM_SAPLING_VALID_GROUND = register("valid_ground/palm_sapling");
 
 		private static Tag<Block> register(String name) {
 			return TagRegistry.block(Mubble.MOD_DATA.id(name));

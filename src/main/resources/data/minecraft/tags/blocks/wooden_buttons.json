@@ -1,15 +1,9 @@
 {
 	"replace": false,
 	"values": [
-		"mubble:cherry_oak_button",
-		"mubble:cherry_oak_wood_button",
-		"mubble:palm_button",
-		"mubble:palm_wood_button",
 		"mubble:press_garden_button",
 		"mubble:press_garden_wood_button",
 		"mubble:scarlet_button",
-		"mubble:scarlet_wood_button",
-		"mubble:dark_amaranth_button",
-		"mubble:dark_amaranth_hyphae_button"
+		"mubble:scarlet_wood_button"
 	]
 }

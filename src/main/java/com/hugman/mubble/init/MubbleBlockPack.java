@@ -5,12 +5,10 @@ import com.hugman.dawn.api.creator.BlockEntityCreator;
 import com.hugman.dawn.api.creator.ScreenHandlerCreator;
 import com.hugman.dawn.api.creator.pack.block.*;
 import com.hugman.dawn.api.object.block.DirectionalBlock;
-import com.hugman.dawn.api.object.block.RootsBlock;
 import com.hugman.dawn.api.object.block.SaplingBlock;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.DefaultBlockGetter;
 import com.hugman.mubble.init.data.MubbleSoundTypes;
-import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
 import com.hugman.mubble.object.block.GrassBlock;
 import com.hugman.mubble.object.block.NoteBlock;
 import com.hugman.mubble.object.block.*;
@@ -18,11 +16,12 @@ import com.hugman.mubble.object.block.block_entity.PlacerBlockEntity;
 import com.hugman.mubble.object.block.block_entity.PresentBlockEntity;
 import com.hugman.mubble.object.block.block_state_property.FluidLog;
 import com.hugman.mubble.object.block.block_state_property.Princess;
-import com.hugman.mubble.object.block.sapling_generator.*;
+import com.hugman.mubble.object.block.sapling_generator.PinkPressGardenSaplingGenerator;
+import com.hugman.mubble.object.block.sapling_generator.RedPressGardenSaplingGenerator;
+import com.hugman.mubble.object.block.sapling_generator.ScarletSaplingGenerator;
 import com.hugman.mubble.object.screen.screen_handler.TimeswapTableScreenHandler;
 import com.hugman.mubble.util.MubbleBlockGetter;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.DispenserBlockEntity;
@@ -36,19 +35,6 @@ import net.minecraft.util.DyeColor;
 
 public class MubbleBlockPack extends MubblePack {
 	/* MUBBLE */
-	public static final PottedPlantPack AUTUMN_OAK_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("autumn_oak_sapling", new SaplingBlock(new AutumnOakSaplingGenerator(), BlockSettings.SAPLING))));
-	public static final LeavesPack AUTUMN_OAK_LEAVES = register(new LeavesPack.Builder("autumn_oak"));
-	public static final PottedPlantPack AUTUMN_BIRCH_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("autumn_birch_sapling", new SaplingBlock(new AutumnBirchSaplingGenerator(), BlockSettings.SAPLING))));
-	public static final LeavesPack AUTUMN_BIRCH_LEAVES = register(new LeavesPack.Builder("autumn_birch"));
-
-	public static final WoodPack CHERRY_OAK_WOOD = register(new WoodPack.Builder("cherry_oak", MaterialColor.field_25702, MaterialColor.field_25703, MaterialColor.field_25707, false));
-	public static final PottedPlantPack PINK_CHERRY_OAK_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("pink_cherry_oak_sapling", new SaplingBlock(new PinkCherryOakSaplingGenerator(), BlockSettings.SAPLING))));
-	public static final PottedPlantPack WHITE_CHERRY_OAK_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("white_cherry_oak_sapling", new SaplingBlock(new WhiteCherryOakSaplingGenerator(), BlockSettings.SAPLING))));
-	public static final LeavesPack PINK_CHERRY_OAK_LEAVES = register(new LeavesPack.Builder("pink_cherry_oak"));
-	public static final LeavesPack WHITE_CHERRY_OAK_LEAVES = register(new LeavesPack.Builder("white_cherry_oak"));
-
-	public static final NormalWoodPack PALM_WOOD = register(new NormalWoodPack.Builder("palm", new PalmSaplingGenerator(), MaterialColor.ORANGE, MaterialColor.CYAN_TERRACOTTA));
-
 	public static final Block BLUE_CHRISTMAS_BAUBLE = register(new BlockCreator.Builder("blue_christmas_bauble", new Block(Settings.CHRISTMAS_BAUBLE.materialColor(MaterialColor.BLUE_TERRACOTTA))).setItemGroup(ItemGroup.DECORATIONS));
 	public static final Block LIGHT_BLUE_CHRISTMAS_BAUBLE = register(new BlockCreator.Builder("light_blue_christmas_bauble", new Block(Settings.CHRISTMAS_BAUBLE.materialColor(MaterialColor.LIGHT_BLUE_TERRACOTTA))).setItemGroup(ItemGroup.DECORATIONS));
 	public static final Block PURPLE_CHRISTMAS_BAUBLE = register(new BlockCreator.Builder("purple_christmas_bauble", new Block(Settings.CHRISTMAS_BAUBLE.materialColor(MaterialColor.PURPLE_TERRACOTTA))).setItemGroup(ItemGroup.DECORATIONS));
@@ -77,11 +63,6 @@ public class MubbleBlockPack extends MubblePack {
 	public static final Block FOOTBLOCK = register(new BlockCreator.Builder("footblock", DefaultBlockGetter.CUBE, Blocks.WHITE_WOOL).setItemGroup(ItemGroup.DECORATIONS));
 
 	public static final MCBlockPack CLOUD_BLOCKS = register(new MCBlockPack.Builder("", MubbleBlockGetter.CLOUD_BLOCK, FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision()));
-
-	public static final Block TOMATOES = register(new BlockCreator.Builder("tomatoes", new CropsBlock()).setRender(BlockCreator.Render.CUTOUT).noItem());
-	public static final Block SALAD = register(new BlockCreator.Builder("salad", new CropsBlock()).setRender(BlockCreator.Render.CUTOUT).noItem());
-
-	public static final Block BLUEBERRY_BUSH = register(new BlockCreator.Builder("blueberry_bush", new BerryBushBlock(FabricBlockSettings.of(Material.PLANT).ticksRandomly().noCollision().sounds(BlockSoundGroup.SWEET_BERRY_BUSH))).setFlammability(60, 100).setRender(BlockCreator.Render.CUTOUT).noItem());
 	public static final Block CHEESE_BLOCK = register(new BlockCreator.Builder("cheese_block", new Block(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.YELLOW).hardness(0.5f).sounds(BlockSoundGroup.SNOW))).setFlammability(60, 60).setItemGroup(ItemGroup.FOOD));
 	public static final Block CHOCOLATE_CAKE = register(new BlockCreator.Builder("chocolate_cake", new com.hugman.mubble.object.block.CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).setItemGroup(ItemGroup.FOOD));
 	public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = register(new BlockCreator.Builder("minecraft_10th_anniversary_cake", new com.hugman.mubble.object.block.CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).setItemGroup(ItemGroup.FOOD));
@@ -100,14 +81,6 @@ public class MubbleBlockPack extends MubblePack {
 	public static final MSBlockPack BLUE_PERMAFROST_BRICKS = register(new MSBlockPack.Builder("blue_permafrost_bricks", Blocks.RED_NETHER_BRICKS, DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.VERTICAL_SLAB, DefaultBlockGetter.WALL));
 	public static final Block PERMAFROST_BISMUTH_ORE = register(new BlockCreator.Builder("permafrost_bismuth_ore", DefaultBlockGetter.CUBE, FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.3F)));
 	public static final Block FROZEN_OBSIDIAN = register(new BlockCreator.Builder("frozen_obsidian", DefaultBlockGetter.CUBE, FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).strength(75.0F, 1800.0F)));
-
-	public static final Block AMARANTH_DYLIUM = register(new BlockCreator.Builder("amaranth_dylium", new DyliumBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.field_25702).requiresTool().strength(3.0F, 9.0F).sounds(BlockSoundGroup.NYLIUM).ticksRandomly())).setItemGroup(ItemGroup.BUILDING_BLOCKS));
-	public static final Block AMARANTH_WART_BLOCK = register(new BlockCreator.Builder("amaranth_wart_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC, MaterialColor.field_25708).breakByTool(FabricToolTags.HOES).strength(1.0F).sounds(BlockSoundGroup.WART_BLOCK))));
-	public static final Block AMARANTH_ROOTS = register(new BlockCreator.Builder("amaranth_roots", new RootsBlock(FabricBlockSettings.of(Material.REPLACEABLE_PLANT, MaterialColor.CYAN).noCollision().breakInstantly().sounds(BlockSoundGroup.ROOTS))).setItemGroup(ItemGroup.DECORATIONS).setRender(BlockCreator.Render.CUTOUT));
-	public static final NetherWoodPack DARK_AMARANTH_WOOD = register(new NetherWoodPack.Builder("dark_amaranth", () -> {
-		return MubbleConfiguredFeatures.AMARANTH_FUNGI_PLANTED;
-	}, MaterialColor.LIGHT_GRAY, MaterialColor.field_25707));
-
 
 	/* SUPER MARIO (MAKER) */
 	public static final Block SMB_QUESTION_BLOCK = register(new BlockCreator.Builder("smb", MubbleBlockGetter.QUESTION_BLOCK, Settings.QUESTION_BLOCK));

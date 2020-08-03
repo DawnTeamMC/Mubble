@@ -1,6 +1,0 @@
-{
-	"parent": "minecraft:block/cross",
-	"textures": {
-		"cross": "mubble:block/amaranth_roots"
-	}
-}
