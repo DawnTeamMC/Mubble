@@ -25,7 +25,7 @@
 		]
 	},
 	"mixins": [
-		"mixins.json"
+		"mubble.mixins.json"
 	],
 	"depends": {
 		"fabric": "*",
