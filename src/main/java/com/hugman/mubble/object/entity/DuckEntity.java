@@ -25,11 +25,12 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
+import net.minecraft.world.biome.BuiltinBiomes;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -188,18 +189,18 @@ public class DuckEntity extends AnimalEntity {
 		this.dataTracker.set(DUCK_TYPE, type.getIndex());
 	}
 
-	public static List<Biome> getSpawnBiomes() {
-		ArrayList<Biome> biomeList = new ArrayList<Biome>();
+	public static List<RegistryKey<Biome>> getSpawnBiomes() {
+		ArrayList<RegistryKey<Biome>> biomeList = new ArrayList<>();
 		for(DuckEntity.Type type : Type.typeList) {
 			biomeList.addAll(type.getSpawnBiomes());
 		}
-		List<Biome> fBiomeList = biomeList.stream().distinct().collect(Collectors.toList());
+		List<RegistryKey<Biome>> fBiomeList = biomeList.stream().distinct().collect(Collectors.toList());
 		return fBiomeList;
 	}
 
 	public enum Type {
-		PEKIN(0, "pekin", Biomes.PLAINS, Biomes.FOREST),
-		MALLARD(1, "mallard", Biomes.PLAINS, Biomes.RIVER, Biomes.SWAMP);
+		PEKIN(0, "pekin", BuiltinBiomes.PLAINS, BuiltinBiomes.FOREST),
+		MALLARD(1, "mallard", BuiltinBiomes.PLAINS, BuiltinBiomes.RIVER, BuiltinBiomes.SWAMP);
 
 		private static final DuckEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(DuckEntity.Type::getIndex)).toArray((index) ->
 		{
@@ -211,9 +212,9 @@ public class DuckEntity extends AnimalEntity {
 		}));
 		private final int index;
 		private final String name;
-		private final List<Biome> spawnBiomes;
+		private final List<RegistryKey<Biome>> spawnBiomes;
 
-		Type(int indexIn, String nameIn, Biome... spawnBiomesIn) {
+		Type(int indexIn, String nameIn, RegistryKey<Biome>... spawnBiomesIn) {
 			this.index = indexIn;
 			this.name = nameIn;
 			this.spawnBiomes = Arrays.asList(spawnBiomesIn);
@@ -223,7 +224,7 @@ public class DuckEntity extends AnimalEntity {
 			return this.name;
 		}
 
-		public List<Biome> getSpawnBiomes() {
+		public List<RegistryKey<Biome>> getSpawnBiomes() {
 			return this.spawnBiomes;
 		}
 

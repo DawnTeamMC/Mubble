@@ -17,6 +17,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -81,7 +82,7 @@ public class GoldenBrickBlock extends Block {
 		LootTable lootTable = worldIn.getServer().getLootManager().getTable(MubbleLootTables.BRICK_BLOCK);
 		LootContext lootContext = new LootContext.Builder((ServerWorld) worldIn)
 				.parameter(LootContextParameters.BLOCK_STATE, this.getDefaultState())
-				.parameter(LootContextParameters.POSITION, pos)
+				.parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
 				.parameter(LootContextParameters.TOOL, ItemStack.EMPTY)
 				.build(LootContextTypes.BLOCK);
 		List<ItemStack> items = lootTable.generateLoot(lootContext);
