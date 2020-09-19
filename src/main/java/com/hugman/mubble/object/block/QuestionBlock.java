@@ -86,11 +86,7 @@ public class QuestionBlock extends Block {
 			final double y = pos.getY() + 0.5D + 0.6D;
 			final double z = pos.getZ() + 0.5D;
 			LootTable lootTable = worldIn.getServer().getLootManager().getTable(MubbleLootTables.QUESTION_BLOCK);
-			LootContext lootContext = new LootContext.Builder((ServerWorld) worldIn)
-					.parameter(LootContextParameters.BLOCK_STATE, this.getDefaultState())
-					.parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
-					.parameter(LootContextParameters.TOOL, ItemStack.EMPTY)
-					.build(LootContextTypes.BLOCK);
+			LootContext lootContext = new LootContext.Builder((ServerWorld) worldIn).parameter(LootContextParameters.BLOCK_STATE, this.getDefaultState()).parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos)).parameter(LootContextParameters.TOOL, ItemStack.EMPTY).build(LootContextTypes.BLOCK);
 			List<ItemStack> items = lootTable.generateLoot(lootContext);
 			for(ItemStack item : items) {
 				worldIn.spawnEntity(new ItemEntity(worldIn, x, y, z, item));

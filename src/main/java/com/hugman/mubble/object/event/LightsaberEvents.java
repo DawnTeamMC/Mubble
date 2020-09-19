@@ -12,8 +12,7 @@ import net.minecraft.util.ActionResult;
 @Environment(EnvType.CLIENT)
 public class LightsaberEvents {
 	public static void init() {
-		ClientTickEvents.END_CLIENT_TICK.register(event ->
-		{
+		ClientTickEvents.END_CLIENT_TICK.register(event -> {
 			if(LightsaberItem.idleTimer <= 95) {
 				LightsaberItem.idleTimer++;
 			}
@@ -21,8 +20,7 @@ public class LightsaberEvents {
 				LightsaberItem.idleTimer = 0;
 			}
 		});
-		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) ->
-		{
+		AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
 			ItemStack stack = player.getMainHandStack();
 			if(stack.getItem() instanceof LightsaberItem) {
 				((LightsaberItem) stack.getItem()).onSwing(player, entity.isAttackable() && !entity.isInvulnerableTo(DamageSource.player(player)) && entity.isAlive());

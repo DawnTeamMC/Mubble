@@ -16,10 +16,7 @@ public class GarlandBlock extends Block {
 	protected static final VoxelShape SELECTION_SHAPE = Block.createCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D);
 
 	public GarlandBlock(Settings properties) {
-		super(properties.lightLevel((state) ->
-		{
-			return state.get(ILLUMINATED) ? 10 : 0;
-		}));
+		super(properties.luminance((state) -> state.get(ILLUMINATED) ? 10 : 0));
 		this.setDefaultState(this.stateManager.getDefaultState().with(ILLUMINATED, false));
 	}
 

@@ -32,17 +32,12 @@ public class FlyingBlockEntityRenderer extends EntityRenderer<FlyingBlockEntity>
 		BlockState blockState = entity.getBlockState();
 		if(blockState.getRenderType() == BlockRenderType.MODEL) {
 			World world = entity.getWorldClient();
-			if(blockState != world.getBlockState(entity.getBlockPos())
-					&& blockState.getRenderType() != BlockRenderType.INVISIBLE) {
+			if(blockState != world.getBlockState(entity.getBlockPos()) && blockState.getRenderType() != BlockRenderType.INVISIBLE) {
 				matrixStack.push();
-				BlockPos blockPos = new BlockPos(entity.getX(), entity.getBoundingBox().maxY,
-						entity.getZ());
+				BlockPos blockPos = new BlockPos(entity.getX(), entity.getBoundingBox().maxY, entity.getZ());
 				matrixStack.translate(-0.5D, 0.0D, -0.5D);
 				BlockRenderManager blockRenderManager = MinecraftClient.getInstance().getBlockRenderManager();
-				blockRenderManager.getModelRenderer().render(world, blockRenderManager.getModel(blockState), blockState,
-						blockPos, matrixStack, vertexConsumerProvider.getBuffer(RenderLayers.getBlockLayer(blockState)),
-						false, new Random(), blockState.getRenderingSeed(entity.getFallingBlockPos()),
-						OverlayTexture.DEFAULT_UV);
+				blockRenderManager.getModelRenderer().render(world, blockRenderManager.getModel(blockState), blockState, blockPos, matrixStack, vertexConsumerProvider.getBuffer(RenderLayers.getBlockLayer(blockState)), false, new Random(), blockState.getRenderingSeed(entity.getFallingBlockPos()), OverlayTexture.DEFAULT_UV);
 				matrixStack.pop();
 				super.render(entity, entityYaw, partialTicks, matrixStack, vertexConsumerProvider, light);
 			}
@@ -51,6 +46,6 @@ public class FlyingBlockEntityRenderer extends EntityRenderer<FlyingBlockEntity>
 
 	@Override
 	public Identifier getTexture(FlyingBlockEntity entity) {
-		return SpriteAtlasTexture.BLOCK_ATLAS_TEX;
+		return SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE;
 	}
 }

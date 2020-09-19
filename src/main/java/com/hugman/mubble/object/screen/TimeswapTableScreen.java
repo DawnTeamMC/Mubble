@@ -74,8 +74,7 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 	}
 
 	private void renderRecipeBackground(MatrixStack matrixStack, int i, int j, int k, int l, int m) {
-		for(int n = this.scrollOffset; n < m
-				&& n < this.handler.getAvailableRecipeCount(); ++n) {
+		for(int n = this.scrollOffset; n < m && n < this.handler.getAvailableRecipeCount(); ++n) {
 			int o = n - this.scrollOffset;
 			int p = k + o % 4 * 16;
 			int q = o / 4;

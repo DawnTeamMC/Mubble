@@ -94,8 +94,7 @@ public class FireballEntity extends BallEntity {
 			world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
-		if(state.method_27851(BlockTags.CAMPFIRES, (abstractBlockState) ->
-		{
+		if(state.method_27851(BlockTags.CAMPFIRES, (abstractBlockState) -> {
 			return abstractBlockState.contains(CampfireBlock.LIT) && abstractBlockState.contains(CampfireBlock.WATERLOGGED);
 		})) {
 			if(!state.get(CampfireBlock.LIT) && !state.get(CampfireBlock.WATERLOGGED)) {

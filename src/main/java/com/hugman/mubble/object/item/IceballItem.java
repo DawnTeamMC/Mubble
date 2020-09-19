@@ -43,8 +43,7 @@ public class IceballItem extends Item {
 	public static final ItemDispenserBehavior DISPENSER_BEHAVIOR = new ProjectileDispenserBehavior() {
 		@Override
 		protected ProjectileEntity createProjectile(World world, Position pos, ItemStack stack) {
-			return Util.make(new IceballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) ->
-			{
+			return Util.make(new IceballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) -> {
 				entity.setItem(stack);
 			});
 		}

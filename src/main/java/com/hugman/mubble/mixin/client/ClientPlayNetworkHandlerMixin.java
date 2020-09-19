@@ -4,8 +4,6 @@ import com.hugman.mubble.init.MubbleEntityPack;
 import com.hugman.mubble.object.entity.FireballEntity;
 import com.hugman.mubble.object.entity.IceballEntity;
 import com.hugman.mubble.object.entity.KirbyBallEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.world.ClientWorld;

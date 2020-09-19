@@ -30,7 +30,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BuiltinBiomes;
+import net.minecraft.world.biome.BiomeKeys;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -58,8 +58,8 @@ public class DuckEntity extends AnimalEntity {
 
 	@Override
 	public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
-		Biome biome = world.getBiome(this.getBlockPos());
-		DuckEntity.Type type = DuckEntity.Type.getTypeByBiome(biome);
+		Optional<RegistryKey<Biome>> biome = world.method_31081(this.getBlockPos());
+		DuckEntity.Type type = DuckEntity.Type.fromBiome(biome);
 		if(entityData instanceof DuckEntity.DuckData) {
 			type = ((DuckEntity.DuckData) entityData).type;
 		}
@@ -91,13 +91,11 @@ public class DuckEntity extends AnimalEntity {
 	@Override
 	public void readCustomDataFromTag(CompoundTag compound) {
 		super.readCustomDataFromTag(compound);
-		this.setVariant(DuckEntity.Type.getTypeByName(compound.getString("Type")));
+		this.setVariant(DuckEntity.Type.byName(compound.getString("Type")));
 	}
 
 	public static Builder createDuckAttributes() {
-		return MobEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0D)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
+		return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
 	}
 
 	@Override
@@ -182,7 +180,7 @@ public class DuckEntity extends AnimalEntity {
 	}
 
 	public DuckEntity.Type getVariant() {
-		return DuckEntity.Type.getTypeByIndex(this.dataTracker.get(DUCK_TYPE));
+		return DuckEntity.Type.fromId(this.dataTracker.get(DUCK_TYPE));
 	}
 
 	private void setVariant(DuckEntity.Type type) {
@@ -194,22 +192,15 @@ public class DuckEntity extends AnimalEntity {
 		for(DuckEntity.Type type : Type.typeList) {
 			biomeList.addAll(type.getSpawnBiomes());
 		}
-		List<RegistryKey<Biome>> fBiomeList = biomeList.stream().distinct().collect(Collectors.toList());
-		return fBiomeList;
+		return biomeList.stream().distinct().collect(Collectors.toList());
 	}
 
 	public enum Type {
-		PEKIN(0, "pekin", BuiltinBiomes.PLAINS, BuiltinBiomes.FOREST),
-		MALLARD(1, "mallard", BuiltinBiomes.PLAINS, BuiltinBiomes.RIVER, BuiltinBiomes.SWAMP);
+		PEKIN(0, "pekin", BiomeKeys.PLAINS, BiomeKeys.FOREST),
+		MALLARD(1, "mallard", BiomeKeys.PLAINS, BiomeKeys.RIVER, BiomeKeys.SWAMP);
 
-		private static final DuckEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(DuckEntity.Type::getIndex)).toArray((index) ->
-		{
-			return new DuckEntity.Type[index];
-		});
-		private static final Map<String, DuckEntity.Type> TYPES_BY_NAME = Arrays.stream(values()).collect(Collectors.toMap(DuckEntity.Type::getName, (type) ->
-		{
-			return type;
-		}));
+		private static final DuckEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(DuckEntity.Type::getIndex)).toArray(Type[]::new);
+		private static final Map<String, DuckEntity.Type> TYPES_BY_NAME = Arrays.stream(values()).collect(Collectors.toMap(DuckEntity.Type::getName, (type) -> type));
 		private final int index;
 		private final String name;
 		private final List<RegistryKey<Biome>> spawnBiomes;
@@ -232,26 +223,25 @@ public class DuckEntity extends AnimalEntity {
 			return this.index;
 		}
 
-		public static DuckEntity.Type getTypeByName(String name) {
+		public static DuckEntity.Type byName(String name) {
 			return TYPES_BY_NAME.getOrDefault(name, PEKIN);
 		}
 
-		public static DuckEntity.Type getTypeByIndex(int index) {
+		public static DuckEntity.Type fromId(int index) {
 			if(index < 0 || index > typeList.length) {
 				index = 0;
 			}
 			return typeList[index];
 		}
 
-		public static DuckEntity.Type getTypeByBiome(Biome biome) {
+		public static DuckEntity.Type fromBiome(Optional<RegistryKey<Biome>> optional) {
 			List<Type> shuffledList = Arrays.asList(typeList.clone());
 			Collections.shuffle(shuffledList);
-			for(DuckEntity.Type type : shuffledList) {
-				if(type.getSpawnBiomes().contains(biome)) {
-					return type;
-				}
-				else {
-					continue;
+			if(optional.isPresent()) {
+				for(DuckEntity.Type type : shuffledList) {
+					if(type.getSpawnBiomes().contains(optional.get())) {
+						return type;
+					}
 				}
 			}
 			return PEKIN;

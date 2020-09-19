@@ -18,7 +18,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AbstractTraderEntity;
+import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -36,8 +36,8 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.village.TradeOffer;
+import net.minecraft.village.TradeOfferList;
 import net.minecraft.village.TradeOffers;
-import net.minecraft.village.TraderOfferList;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -47,7 +47,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class ToadEntity extends AbstractTraderEntity {
+public class ToadEntity extends MerchantEntity {
 	private static final TrackedData<Integer> TOAD_VARIANT = DataTracker.registerData(ToadEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
 	public ToadEntity(EntityType<? extends ToadEntity> type, World worldIn) {
@@ -85,9 +85,7 @@ public class ToadEntity extends AbstractTraderEntity {
 	}
 
 	public static Builder createToadAttributes() {
-		return MobEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, 9.0D)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
+		return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 9.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
 	}
 
 	@Override
@@ -161,16 +159,16 @@ public class ToadEntity extends AbstractTraderEntity {
 	// TRADING STUFF
 
 	@Override
-	public boolean isLeveledTrader() {
+	public boolean isLeveledMerchant() {
 		return false;
 	}
 
 	@Override
 	protected void fillRecipes() {
-		TraderOfferList traderOfferList = this.getOffers();
+		TradeOfferList tradeOfferList = this.getOffers();
 		for(Pair<TradeOffers.Factory[], Integer> tradeEntry : this.getVariant().getTrades()) {
 			if(tradeEntry.getLeft() != null) {
-				this.fillRecipesFromPool(traderOfferList, tradeEntry.getLeft(), tradeEntry.getRight());
+				this.fillRecipesFromPool(tradeOfferList, tradeEntry.getLeft(), tradeEntry.getRight());
 			}
 		}
 	}
@@ -196,16 +194,13 @@ public class ToadEntity extends AbstractTraderEntity {
 					}
 					player.incrementStat(MubbleStatPack.TALKED_TO_TOAD);
 				}
-				if(bl) {
-					return ActionResult.success(this.world.isClient);
-				}
-				else {
+				if(!bl) {
 					if(!this.world.isClient && !this.offers.isEmpty()) {
 						this.setCurrentCustomer(player);
 						this.sendOffers(player, this.getDisplayName(), 1);
 					}
-					return ActionResult.success(this.world.isClient);
 				}
+				return ActionResult.success(this.world.isClient);
 			}
 		}
 		else {
@@ -278,12 +273,10 @@ public class ToadEntity extends AbstractTraderEntity {
 		private final int index;
 		private final String name;
 		private final List<Pair<TradeOffers.Factory[], Integer>> trades;
-		private static final ToadEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(ToadEntity.Type::getIndex)).toArray((index) ->
-		{
+		private static final ToadEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(ToadEntity.Type::getIndex)).toArray((index) -> {
 			return new ToadEntity.Type[index];
 		});
-		private static final Map<String, ToadEntity.Type> TYPES_BY_NAME = Arrays.stream(values()).collect(Collectors.toMap(ToadEntity.Type::getName, (type) ->
-		{
+		private static final Map<String, ToadEntity.Type> TYPES_BY_NAME = Arrays.stream(values()).collect(Collectors.toMap(ToadEntity.Type::getName, (type) -> {
 			return type;
 		}));
 
@@ -296,10 +289,7 @@ public class ToadEntity extends AbstractTraderEntity {
 		Type(int index, String name) {
 			this.index = index;
 			this.name = name;
-			this.trades = Arrays.asList(
-					new Pair<>(ToadTradeOffers.COIN_TRADES, 3),
-					new Pair<>(ToadTradeOffers.PRIMARY_COSTUMES_TRADES, 3),
-					new Pair<>(ToadTradeOffers.SECONDARY_COSTUMES_TRADES, 1));
+			this.trades = Arrays.asList(new Pair<>(ToadTradeOffers.COIN_TRADES, 3), new Pair<>(ToadTradeOffers.PRIMARY_COSTUMES_TRADES, 3), new Pair<>(ToadTradeOffers.SECONDARY_COSTUMES_TRADES, 1));
 		}
 
 		public String getName() {

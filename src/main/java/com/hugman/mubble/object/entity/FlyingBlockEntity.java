@@ -35,9 +35,9 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.RayTraceContext;
-import net.minecraft.world.RayTraceContext.FluidHandling;
-import net.minecraft.world.RayTraceContext.ShapeType;
+import net.minecraft.world.RaycastContext;
+import net.minecraft.world.RaycastContext.FluidHandling;
+import net.minecraft.world.RaycastContext.ShapeType;
 import net.minecraft.world.World;
 
 import java.util.Iterator;
@@ -130,7 +130,7 @@ public class FlyingBlockEntity extends Entity {
 				boolean bl2 = bl && this.world.getFluidState(blockPos2).isIn(FluidTags.WATER);
 				double d = this.getVelocity().lengthSquared();
 				if(bl && d > 1.0D) {
-					BlockHitResult blockHitResult = this.world.rayTrace(new RayTraceContext(new Vec3d(this.prevX, this.prevY, this.prevZ), this.getPos(), ShapeType.COLLIDER, FluidHandling.SOURCE_ONLY, this));
+					BlockHitResult blockHitResult = this.world.raycast(new RaycastContext(new Vec3d(this.prevX, this.prevY, this.prevZ), this.getPos(), ShapeType.COLLIDER, FluidHandling.SOURCE_ONLY, this));
 					if(blockHitResult.getType() != Type.MISS && this.world.getFluidState(blockHitResult.getBlockPos()).isIn(FluidTags.WATER)) {
 						blockPos2 = blockHitResult.getBlockPos();
 						bl2 = true;

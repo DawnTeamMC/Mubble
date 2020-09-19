@@ -34,8 +34,7 @@ public class AymrItem extends Item {
 
 	@Override
 	public boolean postHit(ItemStack stack, LivingEntity victim, LivingEntity sender) {
-		stack.damage(2, sender, (entity) ->
-		{
+		stack.damage(2, sender, (entity) -> {
 			entity.sendEquipmentBreakStatus(EquipmentSlot.MAINHAND);
 		});
 		return true;

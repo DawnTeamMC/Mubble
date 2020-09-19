@@ -41,8 +41,7 @@ public class ZombieCowmanEntity extends ZombifiedPiglinEntity {
 	}
 
 	public static DefaultAttributeContainer.Builder createZombieCowmanAttributes() {
-		return ZombifiedPiglinEntity.createZombifiedPiglinAttributes()
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35D);
+		return ZombifiedPiglinEntity.createZombifiedPiglinAttributes().add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.35D);
 	}
 
 	@Override

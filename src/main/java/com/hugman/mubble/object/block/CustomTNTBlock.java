@@ -103,8 +103,7 @@ public class CustomTNTBlock extends Block {
 			world.setBlockState(pos, Blocks.AIR.getDefaultState(), 11);
 			if(!player.isCreative()) {
 				if(item == Items.FLINT_AND_STEEL) {
-					itemstack.damage(1, player, (entity) ->
-					{
+					itemstack.damage(1, player, (entity) -> {
 						entity.sendToolBreakStatus(hand);
 					});
 				}

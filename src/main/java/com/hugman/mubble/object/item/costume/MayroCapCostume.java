@@ -16,7 +16,7 @@ public class MayroCapCostume extends HeadCostume {
 	@Override
 	public void usageTick(World world, LivingEntity entity, ItemStack stack, int remainingUseTicks) {
 		if(entity instanceof PlayerEntity) {
-			((PlayerEntity) entity).inventory.method_29280(item -> MubbleTags.Items.COINS.contains(item.getItem()), 1, ((PlayerEntity) entity).playerScreenHandler.method_29281());
+			((PlayerEntity) entity).inventory.remove(item -> MubbleTags.Items.COINS.contains(item.getItem()), 1, ((PlayerEntity) entity).playerScreenHandler.method_29281());
 		}
 		super.usageTick(world, entity, stack, remainingUseTicks);
 	}

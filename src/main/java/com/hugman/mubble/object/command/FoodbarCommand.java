@@ -15,49 +15,17 @@ import java.util.Collection;
 
 public class FoodbarCommand {
 	public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
-		dispatcher.register(
-				LiteralArgumentBuilder.<ServerCommandSource>literal("foodbar")
-						.requires((source) ->
-						{
-							return source.hasPermissionLevel(2);
-						})
-						.then(CommandManager.literal("add")
-								.then(CommandManager.literal("food")
-										.then(CommandManager.argument("targets", EntityArgumentType.players())
-												.then(CommandManager.argument("amount", IntegerArgumentType.integer())
-														.executes((source) ->
-														{
-															return setFood(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), IntegerArgumentType.getInteger(source, "amount"), true);
-														})
-												)))
-								.then(CommandManager.literal("saturation")
-										.then(CommandManager.argument("targets", EntityArgumentType.players())
-												.then(CommandManager.argument("amount", FloatArgumentType.floatArg())
-														.executes((source) ->
-														{
-															return setSaturation(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true);
-														})
-												)))
-						)
-						.then(CommandManager.literal("set")
-								.then(CommandManager.literal("food")
-										.then(CommandManager.argument("targets", EntityArgumentType.players())
-												.then(CommandManager.argument("amount", IntegerArgumentType.integer(0, 20))
-														.executes((source) ->
-														{
-															return setFood(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), IntegerArgumentType.getInteger(source, "amount"), false);
-														})
-												)))
-								.then(CommandManager.literal("saturation")
-										.then(CommandManager.argument("targets", EntityArgumentType.players())
-												.then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f))
-														.executes((source) ->
-														{
-															return setSaturation(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false);
-														})
-												)))
-						)
-		);
+		dispatcher.register(LiteralArgumentBuilder.<ServerCommandSource>literal("foodbar").requires((source) -> {
+			return source.hasPermissionLevel(2);
+		}).then(CommandManager.literal("add").then(CommandManager.literal("food").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", IntegerArgumentType.integer()).executes((source) -> {
+			return setFood(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), IntegerArgumentType.getInteger(source, "amount"), true);
+		})))).then(CommandManager.literal("saturation").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", FloatArgumentType.floatArg()).executes((source) -> {
+			return setSaturation(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), FloatArgumentType.getFloat(source, "amount"), true);
+		}))))).then(CommandManager.literal("set").then(CommandManager.literal("food").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", IntegerArgumentType.integer(0, 20)).executes((source) -> {
+			return setFood(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), IntegerArgumentType.getInteger(source, "amount"), false);
+		})))).then(CommandManager.literal("saturation").then(CommandManager.argument("targets", EntityArgumentType.players()).then(CommandManager.argument("amount", FloatArgumentType.floatArg(0.0f)).executes((source) -> {
+			return setSaturation(source.getSource(), EntityArgumentType.getPlayers(source, "targets"), FloatArgumentType.getFloat(source, "amount"), false);
+		}))))));
 	}
 
 	private static int setFood(ServerCommandSource source, Collection<ServerPlayerEntity> targets, int amount, boolean sum) {

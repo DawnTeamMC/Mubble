@@ -40,7 +40,7 @@ public class MubbleItemPack extends MubblePack {
 
 	/* SUPER MARIO */
 	public static final Item SUPER_MUSHROOM = register(new Builder("super_mushroom", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SUPER_MUSHROOM))));
-	public static final Item PEACH = register(new Builder("peach", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.PEACH))).copy(Items.APPLE));
+	public static final Item PEACH = register(new Builder("peach", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.PEACH))));
 	public static final Item FIREBALL = register(new Builder("fireball", new FireballItem(new Item.Settings().group(ItemGroup.COMBAT))));
 	public static final Item ICEBALL = register(new Builder("iceball", new IceballItem(new Item.Settings().group(ItemGroup.COMBAT))));
 	public static final Item CAPE_FEATHER = register(new Builder("cape_feather", new CapeFeatherItem(new Item.Settings().group(ItemGroup.TRANSPORTATION))));

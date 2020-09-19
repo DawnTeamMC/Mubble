@@ -86,9 +86,7 @@ public class BrickBlock extends Block {
 		if(!worldIn.isClient) {
 			BlockState emptyBlock = MubbleBlockPack.SMB_EMPTY_BLOCK.getDefaultState();
 			SoundEvent coinLootSound = MubbleSoundPack.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-			if(this == MubbleBlockPack.SMB_GROUND_BRICK_BLOCK
-					|| this == MubbleBlockPack.SMB_UNDERGROUND_BRICK_BLOCK
-					|| this == MubbleBlockPack.SMB_CASTLE_BRICK_BLOCK) {
+			if(this == MubbleBlockPack.SMB_GROUND_BRICK_BLOCK || this == MubbleBlockPack.SMB_UNDERGROUND_BRICK_BLOCK || this == MubbleBlockPack.SMB_CASTLE_BRICK_BLOCK) {
 				coinLootSound = MubbleSoundPack.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
 				emptyBlock = MubbleBlockPack.SMB_EMPTY_BLOCK.getDefaultState();
 			}
@@ -108,11 +106,7 @@ public class BrickBlock extends Block {
 			final double y = pos.getY() + 0.5D + 0.6D;
 			final double z = pos.getZ() + 0.5D;
 			LootTable lootTable = worldIn.getServer().getLootManager().getTable(MubbleLootTables.BRICK_BLOCK);
-			LootContext lootContext = new LootContext.Builder((ServerWorld) worldIn)
-					.parameter(LootContextParameters.BLOCK_STATE, this.getDefaultState())
-					.parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos))
-					.parameter(LootContextParameters.TOOL, ItemStack.EMPTY)
-					.build(LootContextTypes.BLOCK);
+			LootContext lootContext = new LootContext.Builder((ServerWorld) worldIn).parameter(LootContextParameters.BLOCK_STATE, this.getDefaultState()).parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos)).parameter(LootContextParameters.TOOL, ItemStack.EMPTY).build(LootContextTypes.BLOCK);
 			List<ItemStack> items = lootTable.generateLoot(lootContext);
 			for(ItemStack item : items) {
 				worldIn.spawnEntity(new ItemEntity(worldIn, x, y, z, item));

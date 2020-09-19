@@ -45,16 +45,12 @@ public class GoombaEntity extends HostileEntity {
 		this.goalSelector.add(4, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
 		this.goalSelector.add(4, new LookAroundGoal(this));
 		this.targetSelector.add(1, new RevengeGoal(this, GoombaEntity.class));
-		this.targetSelector.add(3, new FollowTargetGoal<>(this, PlayerEntity.class, true));
-		this.targetSelector.add(3, new FollowTargetGoal<>(this, ToadEntity.class, true));
+		this.targetSelector.add(3, new FollowTargetGoal(this, PlayerEntity.class, true));
+		this.targetSelector.add(3, new FollowTargetGoal(this, ToadEntity.class, true));
 	}
 
 	public static Builder createGoombaAttributes() {
-		return MobEntity.createMobAttributes()
-				.add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0D)
-				.add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3D)
-				.add(EntityAttributes.GENERIC_FOLLOW_RANGE, 25.0D)
-				.add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
+		return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3D).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 25.0D).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
 	}
 
 	@Override

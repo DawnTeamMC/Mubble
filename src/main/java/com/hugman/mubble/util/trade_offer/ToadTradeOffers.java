@@ -16,38 +16,10 @@ public class ToadTradeOffers {
 	public static final Item RED_COIN = MubbleItemPack.RED_COIN;
 	public static final Item BLUE_COIN = MubbleItemPack.BLUE_COIN;
 
-	public static final TradeOffers.Factory[] COIN_TRADES = new TradeOffers.Factory[]{
-			new ToadTradeOffers.SellItemFactory(YELLOW_COIN, 6, MubbleItemPack.RED_COIN, 1, 32),
-			new ToadTradeOffers.SellItemFactory(RED_COIN, 2, MubbleItemPack.BLUE_COIN, 1, 16),
-			new ToadTradeOffers.SellItemFactory(RED_COIN, 1, MubbleItemPack.YELLOW_COIN, 5, 32),
-			new ToadTradeOffers.SellItemFactory(BLUE_COIN, 1, MubbleItemPack.RED_COIN, 2, 32),
-			new ToadTradeOffers.SellItemFactory(BLUE_COIN, 1, MubbleItemPack.YELLOW_COIN, 9, 24)
-	};
-	public static final TradeOffers.Factory[] PRIMARY_COSTUMES_TRADES = new TradeOffers.Factory[]{
-			new ToadTradeOffers.SellCostumeFactory(BLUE_COIN, 2, MubbleCostumePack.CAPPY),
-			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.LUIGI_CAP),
-			new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.WARIO_CAP),
-			new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.WALUIGI_CAP),
-			new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.GOOIGI_CAP),
-			new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.MARIO_WEDDING_HAT),
-			new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 10, MubbleCostumePack.BOO_HAT, 4),
-			new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.BROQUE_MONSIEUR_HEAD),
-			new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.MAYRO_CAP)
-	};
-	public static final TradeOffers.Factory[] SECONDARY_COSTUMES_TRADES = new TradeOffers.Factory[]{
-			new ToadTradeOffers.SellCostumeFactory(BLUE_COIN, 12, MubbleCostumePack.VANISH_CAP, 3),
-			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 4, MubbleCostumePack.GOLD_MARIO_CAP),
-			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 4, MubbleCostumePack.SILVER_LUIGI_CAP),
-			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.PRINCESS_PEACH_CROWN),
-			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.PRINCESS_DAISY_CROWN),
-			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.ROSALINA_CROWN),
-			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.PINK_GOLD_PEACH_CROWN),
-			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 4, MubbleCostumePack.SUPER_CROWN),
-			new ToadTradeOffers.SellCostumeFactory(RED_COIN, 4, MubbleCostumePack.KORETATO_BLOCK)
-	};
-	public static final TradeOffers.Factory[] BLOCK_TRADES = new TradeOffers.Factory[]{
-			new ToadTradeOffers.SellItemFactory(BLUE_COIN, 1, MubbleBlockPack.NSMBU_QUESTION_BLOCK.asItem(), 3, 10)
-	};
+	public static final TradeOffers.Factory[] COIN_TRADES = new TradeOffers.Factory[]{new ToadTradeOffers.SellItemFactory(YELLOW_COIN, 6, MubbleItemPack.RED_COIN, 1, 32), new ToadTradeOffers.SellItemFactory(RED_COIN, 2, MubbleItemPack.BLUE_COIN, 1, 16), new ToadTradeOffers.SellItemFactory(RED_COIN, 1, MubbleItemPack.YELLOW_COIN, 5, 32), new ToadTradeOffers.SellItemFactory(BLUE_COIN, 1, MubbleItemPack.RED_COIN, 2, 32), new ToadTradeOffers.SellItemFactory(BLUE_COIN, 1, MubbleItemPack.YELLOW_COIN, 9, 24)};
+	public static final TradeOffers.Factory[] PRIMARY_COSTUMES_TRADES = new TradeOffers.Factory[]{new ToadTradeOffers.SellCostumeFactory(BLUE_COIN, 2, MubbleCostumePack.CAPPY), new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.LUIGI_CAP), new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.WARIO_CAP), new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.WALUIGI_CAP), new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.GOOIGI_CAP), new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.MARIO_WEDDING_HAT), new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 10, MubbleCostumePack.BOO_HAT, 4), new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.BROQUE_MONSIEUR_HEAD), new ToadTradeOffers.SellCostumeFactory(YELLOW_COIN, 5, MubbleCostumePack.MAYRO_CAP)};
+	public static final TradeOffers.Factory[] SECONDARY_COSTUMES_TRADES = new TradeOffers.Factory[]{new ToadTradeOffers.SellCostumeFactory(BLUE_COIN, 12, MubbleCostumePack.VANISH_CAP, 3), new ToadTradeOffers.SellCostumeFactory(RED_COIN, 4, MubbleCostumePack.GOLD_MARIO_CAP), new ToadTradeOffers.SellCostumeFactory(RED_COIN, 4, MubbleCostumePack.SILVER_LUIGI_CAP), new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.PRINCESS_PEACH_CROWN), new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.PRINCESS_DAISY_CROWN), new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.ROSALINA_CROWN), new ToadTradeOffers.SellCostumeFactory(RED_COIN, 5, MubbleCostumePack.PINK_GOLD_PEACH_CROWN), new ToadTradeOffers.SellCostumeFactory(RED_COIN, 4, MubbleCostumePack.SUPER_CROWN), new ToadTradeOffers.SellCostumeFactory(RED_COIN, 4, MubbleCostumePack.KORETATO_BLOCK)};
+	public static final TradeOffers.Factory[] BLOCK_TRADES = new TradeOffers.Factory[]{new ToadTradeOffers.SellItemFactory(BLUE_COIN, 1, MubbleBlockPack.NSMBU_QUESTION_BLOCK.asItem(), 3, 10)};
 
 	static class SellItemFactory implements TradeOffers.Factory {
 		private final Item priceItem;

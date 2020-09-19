@@ -45,8 +45,7 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 		this.selectedRecipe = Property.create();
 		this.availableRecipes = Lists.newArrayList();
 		this.inputStack = ItemStack.EMPTY;
-		this.contentsChangedListener = () ->
-		{
+		this.contentsChangedListener = () -> {
 		};
 		this.input = new SimpleInventory(1) {
 			public void markDirty() {
@@ -69,12 +68,10 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 					TimeswapTableScreenHandler.this.populateResult();
 				}
 				stack.getItem().onCraft(stack, player.world, player);
-				context.run((world, blockPos) ->
-				{
+				context.run((world, blockPos) -> {
 					long l = world.getTime();
 					if(TimeswapTableScreenHandler.this.lastTakeTime != l) {
-						world.playSound(null, blockPos, MubbleSoundPack.UI_TIMESWAP_TABLE_TAKE_RESULT,
-								SoundCategory.BLOCKS, 1.0F, 1.0F);
+						world.playSound(null, blockPos, MubbleSoundPack.UI_TIMESWAP_TABLE_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
 						TimeswapTableScreenHandler.this.lastTakeTime = l;
 					}
 
@@ -232,8 +229,7 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 	public void close(PlayerEntity player) {
 		super.close(player);
 		this.output.removeStack(1);
-		this.context.run((world, blockPos) ->
-		{
+		this.context.run((world, blockPos) -> {
 			this.dropInventory(player, player.world, this.input);
 		});
 	}

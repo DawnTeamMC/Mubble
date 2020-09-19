@@ -23,8 +23,7 @@ public class WingCapCostume extends HeadCostume {
 	@Override
 	public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks) {
 		if(isUsable(stack) && player.isSprinting()) {
-			stack.damage(1, player, (p_214023_1_) ->
-			{
+			stack.damage(1, player, (p_214023_1_) -> {
 				p_214023_1_.sendEquipmentBreakStatus(EquipmentSlot.HEAD);
 			});
 		}
