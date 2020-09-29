@@ -7,7 +7,10 @@ import com.hugman.dawn.api.object.item.PickaxeItem;
 import com.hugman.mubble.init.data.MubbleFood;
 import com.hugman.mubble.init.data.MubbleItemTiers;
 import com.hugman.mubble.object.item.*;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ShovelItem;
+import net.minecraft.item.SwordItem;
 import net.minecraft.util.Rarity;
 
 public class MubbleItemPack extends MubblePack {

@@ -13,17 +13,6 @@
 			]
 		},
 		{
-			"name": "red",
-			"rolls": 1,
-			"entries": [
-				{
-					"type": "loot_table",
-					"name": "mubble:entities/toad/species/red",
-					"weight": 1
-				}
-			]
-		},
-		{
 			"name": "plus",
 			"rolls": 1,
 			"entries": [

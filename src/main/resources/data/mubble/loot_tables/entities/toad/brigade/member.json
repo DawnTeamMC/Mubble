@@ -7,7 +7,7 @@
 			"entries": [
 				{
 					"type": "loot_table",
-					"name": "mubble:entities/toad/normal",
+					"name": "mubble:entities/toad",
 					"weight": 1
 				}
 			]

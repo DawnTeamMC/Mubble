@@ -233,7 +233,17 @@ public class ToadEntity extends MerchantEntity {
 
 	@Override
 	protected Identifier getLootTableId() {
-		return Mubble.MOD_DATA.id("entities/toad/" + getVariant().getName());
+		switch(getVariant()) {
+			case CAPTAIN_TOAD:
+				return Mubble.MOD_DATA.id("entities/toad/brigade/captain_toad");
+			case BRIGADIER_MAILTOAD:
+			case BRIGADIER_HINT_TOAD:
+			case BRIGADIER_BANKTOAD:
+			case BRIGADIER_YELLOW:
+				return Mubble.MOD_DATA.id("entities/toad/brigade/member");
+			default:
+				return Mubble.MOD_DATA.id("entities/toad");
+		}
 	}
 
 	public static class ToadData extends PassiveEntity.PassiveData {
@@ -273,12 +283,8 @@ public class ToadEntity extends MerchantEntity {
 		private final int index;
 		private final String name;
 		private final List<Pair<TradeOffers.Factory[], Integer>> trades;
-		private static final ToadEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(ToadEntity.Type::getIndex)).toArray((index) -> {
-			return new ToadEntity.Type[index];
-		});
-		private static final Map<String, ToadEntity.Type> TYPES_BY_NAME = Arrays.stream(values()).collect(Collectors.toMap(ToadEntity.Type::getName, (type) -> {
-			return type;
-		}));
+		private static final ToadEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(ToadEntity.Type::getIndex)).toArray(Type[]::new);
+		private static final Map<String, ToadEntity.Type> TYPES_BY_NAME = Arrays.stream(values()).collect(Collectors.toMap(ToadEntity.Type::getName, (type) -> type));
 
 		Type(int index, String name, Pair<TradeOffers.Factory[], Integer>... tradeEntries) {
 			this.index = index;
