@@ -66,7 +66,7 @@ public class TimeswapTableScreen extends HandledScreen<TimeswapTableScreenHandle
 				int n = i + m % 4 * 16;
 				int o = j + m / 4 * 18 + 2;
 				if(x >= n && x < n + 16 && y >= o && y < o + 18) {
-					this.renderTooltip(matrices, new ItemStack(list.get(i)), x, y);
+					this.renderTooltip(matrices, new ItemStack(list.get(l)), x, y);
 				}
 			}
 		}
