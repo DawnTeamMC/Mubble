@@ -1,5 +1,7 @@
 package com.hugman.mubble.init;
 
+import com.hugman.dawn.api.object.block.CakeBlock;
+import com.hugman.dawn.mod.init.DawnEffectPack;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.BlockEntityCreator;
 import com.hugman.dawn.api.creator.ScreenHandlerCreator;
@@ -64,8 +66,8 @@ public class MubbleBlockPack extends MubblePack {
 
 	public static final MCBlockPack CLOUD_BLOCKS = register(new MCBlockPack.Builder("", MubbleBlockGetter.CLOUD_BLOCK, FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision()));
 	public static final Block CHEESE_BLOCK = register(new BlockCreator.Builder("cheese_block", new Block(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.YELLOW).hardness(0.5f).sounds(BlockSoundGroup.SNOW))).flammability(60, 60).itemGroup(ItemGroup.FOOD));
-	public static final Block CHOCOLATE_CAKE = register(new BlockCreator.Builder("chocolate_cake", new com.hugman.mubble.object.block.CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.FOOD));
-	public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = register(new BlockCreator.Builder("minecraft_10th_anniversary_cake", new com.hugman.mubble.object.block.CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.FOOD));
+	public static final Block CHOCOLATE_CAKE = register(new BlockCreator.Builder("chocolate_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.FOOD));
+	public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = register(new BlockCreator.Builder("minecraft_10th_anniversary_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.FOOD));
 
 	public static final MCBlockPack BALLOONS = register(new MCBlockPack.Builder("", MubbleBlockGetter.BALLOON, FabricBlockSettings.of(Material.WOOL).hardness(0F).sounds(BlockSoundGroup.WOOL).nonOpaque()));
 
@@ -189,7 +191,7 @@ public class MubbleBlockPack extends MubblePack {
 	public static final PottedPlantPack ICE_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("ice_flower", new FlowerBlock(StatusEffects.MINING_FATIGUE, 7, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
 	public static final PottedPlantPack BOOMERANG_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("boomerang_flower", new FlowerBlock(StatusEffects.HASTE, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
 	public static final PottedPlantPack CLOUD_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("cloud_flower", new CloudFlowerBlock(StatusEffects.SLOW_FALLING, 7, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
-	public static final PottedPlantPack GOLD_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("gold_flower", new FlowerBlock(MubbleEffectPack.HEAVINESS, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(5))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack GOLD_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("gold_flower", new FlowerBlock(DawnEffectPack.HEAVINESS, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(5))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
 
 	/* KIRBY */
 	public static final Block KIRBY_BLOCK = register(new BlockCreator.Builder("kirby_block", new DirectionalBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.PINK).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.DECORATIONS));

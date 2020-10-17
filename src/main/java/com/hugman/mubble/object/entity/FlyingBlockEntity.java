@@ -113,7 +113,7 @@ public class FlyingBlockEntity extends Entity {
 			if(this.timeFlying++ == 0) {
 				blockPos2 = this.getBlockPos();
 				if(this.world.getBlockState(blockPos2).isOf(block)) {
-					this.world.removeBlock(blockPos2, false);
+					this.world.breakBlock(blockPos2, false);
 				}
 				else if(!this.world.isClient) {
 					this.remove();

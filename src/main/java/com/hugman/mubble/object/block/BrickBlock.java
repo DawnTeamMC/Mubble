@@ -46,37 +46,37 @@ public class BrickBlock extends Block {
 					loot(worldIn, pos);
 					break;
 				case 1:
-					worldIn.removeBlock(pos, false);
+					worldIn.breakBlock(pos, false);
 					break;
 			}
 		}
 	}
 
 	@Override
-	public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean p_220069_6_) {
-		if(!worldIn.isClient && worldIn.isReceivingRedstonePower(pos)) {
+	public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
+		if(!world.isClient && world.isReceivingRedstonePower(pos)) {
 			Random rand = new Random();
 			switch(rand.nextInt(2)) {
 				case 0:
-					loot(worldIn, pos);
+					loot(world, pos);
 					break;
 				case 1:
-					worldIn.removeBlock(pos, false);
+					world.breakBlock(pos, false);
 					break;
 			}
 		}
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-		if(!worldIn.isClient && entityIn.getVelocity().y > 0.0D) {
+	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
+		if(!world.isClient && entity.getVelocity().y > 0.0D) {
 			Random rand = new Random();
 			switch(rand.nextInt(2)) {
 				case 0:
-					loot(worldIn, pos);
+					loot(world, pos);
 					break;
 				case 1:
-					worldIn.removeBlock(pos, false);
+					world.breakBlock(pos, false, entity);
 					break;
 			}
 		}

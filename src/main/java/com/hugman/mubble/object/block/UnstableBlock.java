@@ -11,9 +11,9 @@ public class UnstableBlock extends Block {
 	}
 
 	@Override
-	public void onSteppedOn(World worldIn, BlockPos pos, Entity entityIn) {
-		if(!worldIn.isClient && worldIn.random.nextInt(8) == 0) {
-			worldIn.removeBlock(pos, false);
+	public void onSteppedOn(World world, BlockPos pos, Entity entity) {
+		if(!world.isClient && world.random.nextInt(8) == 0) {
+			world.breakBlock(pos, false, entity);
 		}
 	}
 }

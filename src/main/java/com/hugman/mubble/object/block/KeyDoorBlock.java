@@ -108,7 +108,7 @@ public class KeyDoorBlock extends DoorBlock {
 		worldIn.playSound(null, pos, this.getKeyFailSound(this), SoundCategory.BLOCKS, 1.0F, 1.0F);
 	}
 
-	public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+	public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
 		BlockPos otherBlockPos = pos.offset(state.get(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN);
 		BlockState otherBlockState = worldIn.getBlockState(otherBlockPos);
 		boolean flag1 = worldIn.isReceivingRedstonePower(pos) || worldIn.isReceivingRedstonePower(otherBlockPos);
@@ -119,13 +119,13 @@ public class KeyDoorBlock extends DoorBlock {
 		else {
 			flag2 = !state.get(LOCKED);
 		}
-		if(blockIn != this && flag1 != state.get(POWERED) && !state.get(LOCKED)) {
+		if(block != this && flag1 != state.get(POWERED) && !state.get(LOCKED)) {
 			if(flag1 != state.get(OPEN)) {
 				this.playToggleSound(worldIn, pos, flag1);
 			}
 			worldIn.setBlockState(pos, state.with(POWERED, Boolean.valueOf(flag1)).with(OPEN, Boolean.valueOf(flag1)).with(LOCKED, Boolean.valueOf(!flag2)), 2);
 		}
-		else if(blockIn != this) {
+		else if(block != this) {
 			worldIn.setBlockState(pos, state.with(LOCKED, Boolean.valueOf(!flag2)), 2);
 		}
 	}

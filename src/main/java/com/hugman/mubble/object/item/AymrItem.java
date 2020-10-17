@@ -51,7 +51,7 @@ public class AymrItem extends Item {
 			}
 			world.addParticle(ParticleTypes.EXPLOSION, pos.getX(), pos.getY(), pos.getZ(), 1.0D, 0.0D, 0.0D);
 			world.addParticle(ParticleTypes.EXPLOSION_EMITTER, pos.getX(), pos.getY(), pos.getZ(), 1.0D, 0.0D, 0.0D);
-			world.removeBlock(pos, true);
+			world.breakBlock(pos, true, player);
 			return ActionResult.SUCCESS;
 		}
 		return ActionResult.FAIL;

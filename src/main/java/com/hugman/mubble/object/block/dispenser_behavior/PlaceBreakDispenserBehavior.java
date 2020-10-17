@@ -32,7 +32,7 @@ public class PlaceBreakDispenserBehavior extends BlockPlacementDispenserBehavior
 				}
 			}
 			if(this.isSuccess()) {
-				world.removeBlock(pos, true);
+				world.breakBlock(pos, true);
 				stack.damage(1, world.getRandom(), null);
 			}
 		}

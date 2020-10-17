@@ -15,19 +15,19 @@ import net.minecraft.util.Rarity;
 
 public class MubbleItemPack extends MubblePack {
 	/* MUBBLE */
-	public static final Item WHEAT_FLOUR = register(new Builder("wheat_flour", new Item(new Item.Settings().group(ItemGroup.FOOD))).setCompostingChance(0.3F));
-	public static final Item CHEESE = register(new Builder("cheese", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CHEESE))).setCompostingChance(0.5F));
+	public static final Item WHEAT_FLOUR = register(new Builder("wheat_flour", new Item(new Item.Settings().group(ItemGroup.FOOD))).compostingChance(0.3F));
+	public static final Item CHEESE = register(new Builder("cheese", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CHEESE))).compostingChance(0.5F));
 	public static final Item DUCK = register(new Builder("duck", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.DUCK))));
 	public static final Item COOKED_DUCK = register(new Builder("cooked_duck", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.COOKED_DUCK))));
 	public static final Item CARAMEL_CUBE = register(new Builder("caramel_cube", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CARAMEL_CUBE))));
-	public static final Item BAGUETTE = register(new Builder("baguette", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.BAGUETTE))).setCompostingChance(0.85F));
-	public static final Item CREPE = register(new Builder("crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CREPE))).setCompostingChance(0.65F));
-	public static final Item SUGAR_CREPE = register(new Builder("sugar_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SUGAR_CREPE))).setCompostingChance(0.85F));
-	public static final Item CHOCOLATE_CREPE = register(new Builder("chocolate_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CHOCOLATE_CREPE))).setCompostingChance(0.85F));
-	public static final Item CARAMEL_CREPE = register(new Builder("caramel_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CARAMEL_CREPE))).setCompostingChance(0.85F));
-	public static final Item HONEY_CREPE = register(new Builder("honey_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.HONEY_CREPE))).setCompostingChance(0.85F));
-	public static final Item SWEET_BERRY_CREPE = register(new Builder("sweet_berry_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SWEET_BERRY_CREPE))).setCompostingChance(0.85F));
-	public static final Item CANDY_CANE = register(new Builder("candy_cane", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CANDY_CANE))).setCompostingChance(0.85F));
+	public static final Item BAGUETTE = register(new Builder("baguette", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.BAGUETTE))).compostingChance(0.85F));
+	public static final Item CREPE = register(new Builder("crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CREPE))).compostingChance(0.65F));
+	public static final Item SUGAR_CREPE = register(new Builder("sugar_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SUGAR_CREPE))).compostingChance(0.85F));
+	public static final Item CHOCOLATE_CREPE = register(new Builder("chocolate_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CHOCOLATE_CREPE))).compostingChance(0.85F));
+	public static final Item CARAMEL_CREPE = register(new Builder("caramel_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CARAMEL_CREPE))).compostingChance(0.85F));
+	public static final Item HONEY_CREPE = register(new Builder("honey_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.HONEY_CREPE))).compostingChance(0.85F));
+	public static final Item SWEET_BERRY_CREPE = register(new Builder("sweet_berry_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SWEET_BERRY_CREPE))).compostingChance(0.85F));
+	public static final Item CANDY_CANE = register(new Builder("candy_cane", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CANDY_CANE))).compostingChance(0.85F));
 	public static final Item SMALL_BULB = register(new Builder("small_bulb", new SmallBulbItem(new Item.Settings().group(ItemGroup.MATERIALS))));
 	public static final Item JINGLE_BELLS = register(new Builder("jingle_bells", new ShakeInstrumentItem(new Item.Settings().group(MubbleItemGroups.INSTRUMENTS_GROUP).maxCount(1), MubbleSoundPack.ITEM_JINGLE_BELLS_USE)));
 	public static final Item BISMUTH_DUST = register(new Builder("bismuth_dust", new Item(new Item.Settings().group(ItemGroup.MATERIALS))));

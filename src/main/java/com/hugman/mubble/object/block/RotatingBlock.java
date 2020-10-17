@@ -27,7 +27,7 @@ public class RotatingBlock extends Block {
 		Vec3d vec3d = entity.getVelocity();
 		if(entity.isSneaking() && vec3d.y < -0.1) {
 			if(!entity.world.isClient) {
-				entity.world.removeBlock(entity.getBlockPos().down(), false);
+				entity.world.breakBlock(entity.getBlockPos().down(), false, entity);
 			}
 			entity.setVelocity(vec3d.x, 0.625D, vec3d.z);
 		}
@@ -39,14 +39,14 @@ public class RotatingBlock extends Block {
 	@Override
 	public void neighborUpdate(BlockState state, World world, BlockPos pos, Block block, BlockPos fromPos, boolean moved) {
 		if(!world.isClient && world.isReceivingRedstonePower(pos)) {
-			world.removeBlock(pos, false);
+			world.breakBlock(pos, false);
 		}
 	}
 
 	@Override
 	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
 		if(!world.isClient && entity.getVelocity().y > 0.0D) {
-			world.removeBlock(pos, false);
+			world.breakBlock(pos, false, entity);
 		}
 	}
 }

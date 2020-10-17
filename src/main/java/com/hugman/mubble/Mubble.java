@@ -2,7 +2,6 @@ package com.hugman.mubble;
 
 import com.hugman.dawn.api.creator.ModData;
 import com.hugman.mubble.init.*;
-import com.hugman.mubble.init.data.MubbleCommands;
 import com.hugman.mubble.init.data.MubbleStatPack;
 import com.hugman.mubble.init.world.MubbleBiomePack;
 import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
@@ -19,14 +18,11 @@ public class Mubble implements ModInitializer {
 		new MubbleBlockPack();
 		new MubbleItemPack();
 		new MubbleCostumePack();
-		new MubbleEnchantmentPack();
 		new MubbleEntityPack();
-		new MubbleEffectPack();
 		new MubblePaintingPack();
 		new MubbleSoundPack();
 		// Data
 		new MubbleStatPack();
-		MubbleCommands.init();
 		// World
 		new MubbleConfiguredFeatures();
 		new MubbleBiomePack();

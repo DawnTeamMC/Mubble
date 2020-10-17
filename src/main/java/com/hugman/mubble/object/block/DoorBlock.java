@@ -15,8 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class DoorBlock extends net.minecraft.block.DoorBlock {
-	/* Extension for internal publicity */
+public class DoorBlock extends com.hugman.dawn.api.object.block.DoorBlock {
 	public DoorBlock(Block.Settings builder) {
 		super(builder);
 	}
@@ -26,7 +25,7 @@ public class DoorBlock extends net.minecraft.block.DoorBlock {
 		if(isSmm2Door()) {
 			BlockState blockstate = world.getBlockState(pos);
 			if(blockstate.getBlock() == this && blockstate.get(OPEN) != open) {
-				world.setBlockState(pos, blockstate.with(OPEN, Boolean.valueOf(open)), 10);
+				world.setBlockState(pos, blockstate.with(OPEN, open), 10);
 				this.playToggleSound(world, pos, open);
 			}
 		}
@@ -36,18 +35,18 @@ public class DoorBlock extends net.minecraft.block.DoorBlock {
 	}
 
 	@Override
-	public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
+	public void neighborUpdate(BlockState state, World worldIn, BlockPos pos, Block block, BlockPos fromPos, boolean isMoving) {
 		if(isSmm2Door()) {
 			boolean flag = worldIn.isReceivingRedstonePower(pos) || worldIn.isReceivingRedstonePower(pos.offset(state.get(HALF) == DoubleBlockHalf.LOWER ? Direction.UP : Direction.DOWN));
-			if(blockIn != this && flag != state.get(POWERED)) {
+			if(block != this && flag != state.get(POWERED)) {
 				if(flag != state.get(OPEN)) {
 					this.playToggleSound(worldIn, pos, flag);
 				}
-				worldIn.setBlockState(pos, state.with(POWERED, Boolean.valueOf(flag)).with(OPEN, Boolean.valueOf(flag)), 2);
+				worldIn.setBlockState(pos, state.with(POWERED, flag).with(OPEN, flag), 2);
 			}
 		}
 		else {
-			super.neighborUpdate(state, worldIn, pos, blockIn, fromPos, isMoving);
+			super.neighborUpdate(state, worldIn, pos, block, fromPos, isMoving);
 		}
 	}
 

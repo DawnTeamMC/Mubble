@@ -474,10 +474,6 @@
 	"item.mubble.mayro_cap": "Boné de Mayro",
 	"item.mubble.noteblock_head": "Cabeça de Noteblock",
 
-	"comment": "ENCHANTMENTS",
-	"enchantment.mubble.telekinesis": "Telecinese",
-	"//enchantment.mubble.ignorance_curse": "Curse of Ignorance",
-
 	"comment": "CONTAINERS",
 	"container.mubble.placer": "Dispensador",
 	"container.mubble.timeswap_table": "Mesa Troca-Tempo",
@@ -517,10 +513,6 @@
 	"entity.mubble.fireball": "Bola-de-Fogo",
 	"entity.mubble.iceball": "Bola-de-Gelo",
 	"entity.mubble.kirby_ball": "Kirby Ball",
-
-	"comment": "EFFECTS",
-	"//effect.mubble.heaviness": "Heaviness",
-	"//effect.mubble.hiccup": "Hiccup",
 
 	"comment": "BIOMES",
 	"biome.mubble.press_garden": "Press Garden",
@@ -583,24 +575,6 @@
 	"//stat.mubble.interact_with_timeswap_table": "Interactions with Timeswap Table",
 	"//stat.mubble.open_present": "Presents Opened",
 	"//stat.mubble.talked_to_toad": "Talked to Toads",
-
-	"comment": "COMMANDS",
-	"commands.foodbar.add.food.success.single": "Deu %s pontos de comida para %s",
-	"commands.foodbar.add.food.success.multiple": "Deu %s pontos de comida para %s entidades",
-	"commands.foodbar.set.food.success.single": "Definiu %s pontos de comida em %s",
-	"commands.foodbar.set.food.success.multiple": "Definiu %s pontos de comida em %s entidades",
-	"commands.foodbar.add.saturation.success.single": "Deu %s pontos de saturação para %s",
-	"commands.foodbar.add.saturation.success.multiple": "Deu %s pontos de saturação para %s entidades",
-	"commands.foodbar.set.saturation.success.single": "Definiu %s pontos de saturação em %s",
-	"commands.foodbar.set.saturation.success.multiple": "Definiu %s pontos de saturação em %s entidades",
-	"commands.health.add.success.single": "Deu %s pontos de saúde para %s",
-	"commands.health.add.success.multiple": "Deu %s pontos de saúde para %s entidades",
-	"commands.health.set.success.single": "Definiu %s pontos de saúde em %s",
-	"commands.health.set.success.multiple": "Definiu %s pontos de saúde em %s entidades",
-	"commands.motion.add.success.single": "Adicionado %s, %s, %s ao movimente de %s",
-	"commands.motion.add.success.multiple": "Adicionado %s, %s, %s ao movimente de %s entidades",
-	"commands.motion.set.success.single": "Definiu %s, %s, %s para o movimento de %s",
-	"commands.motion.set.success.multiple": "Definiu %s, %s, %s para o movimento de %s entidades",
 
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "Aquilo é para você, §6Pixel§r!",

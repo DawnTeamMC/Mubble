@@ -4,6 +4,7 @@ import com.hugman.mubble.init.MubbleEntityPack;
 import com.hugman.mubble.init.MubbleItemPack;
 import com.hugman.mubble.init.MubbleSoundPack;
 import com.hugman.mubble.init.data.MubbleTags;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -94,9 +95,7 @@ public class FireballEntity extends BallEntity {
 			world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 			return true;
 		}
-		if(state.method_27851(BlockTags.CAMPFIRES, (abstractBlockState) -> {
-			return abstractBlockState.contains(CampfireBlock.LIT) && abstractBlockState.contains(CampfireBlock.WATERLOGGED);
-		})) {
+		if(state.method_27851(BlockTags.CAMPFIRES, (abstractBlockState) -> abstractBlockState.contains(CampfireBlock.LIT) && abstractBlockState.contains(CampfireBlock.WATERLOGGED))) {
 			if(!state.get(CampfireBlock.LIT) && !state.get(CampfireBlock.WATERLOGGED)) {
 				if(!world.isClient) {
 					world.setBlockState(pos, state.with(CampfireBlock.LIT, true));
@@ -105,18 +104,15 @@ public class FireballEntity extends BallEntity {
 				return true;
 			}
 		}
-		/* TODO
-		if(fire.isFlammable(state))
-		{
+		FlammableBlockRegistry.Entry flammableEntry = FlammableBlockRegistry.getDefaultInstance().get(state.getBlock());
+		if(flammableEntry.getBurnChance() > 0 || flammableEntry.getSpreadChance() > 0) {
 			BlockPos firePos = pos.offset(face);
-            if(this.world.isAir(firePos) && !world.isClient)
-            {
-               this.world.setBlockState(firePos, AbstractFireBlock.getState(world, pos));
-            }
-			world.playSound((PlayerEntity) null, getX(), getY(), getZ(), MubbleSounds.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-            return true;
+			if(this.world.isAir(firePos) && !world.isClient) {
+				this.world.setBlockState(firePos, AbstractFireBlock.getState(world, firePos));
+			}
+			world.playSound(null, getX(), getY(), getZ(), MubbleSoundPack.ENTITY_FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+			return true;
 		}
-		*/
 		if(face == Direction.UP) {
 			Vec3d motion = this.getVelocity().subtract(0.0D, this.getVelocity().y * 1.25D, 0.0D);
 			double minY = 0.3D;

@@ -10,8 +10,6 @@
 	"client": [
 		"client.ClientPlayNetworkHandlerMixin",
 		"client.GameRendererAccessor",
-		"client.ItemRendererMixin",
-		"client.ItemStackMixin",
 		"client.PlayerEntityMixin"
 	],
 	"injectors": {
