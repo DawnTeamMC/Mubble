@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.item;
 
-import com.hugman.mubble.init.MubbleSoundPack;
+import com.hugman.mubble.init.MubbleSounds;
 import com.hugman.mubble.object.entity.FireballEntity;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -26,7 +26,7 @@ public class FireballItem extends Item {
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack stack = player.getStackInHand(hand);
-		world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSoundPack.ENTITY_FIREBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.ENTITY_FIREBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		if(!world.isClient) {
 			FireballEntity entity = new FireballEntity(world, player);
 			entity.setItem(stack);

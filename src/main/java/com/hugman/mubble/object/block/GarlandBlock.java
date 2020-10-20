@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ShapeContext;
@@ -11,7 +11,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 
 public class GarlandBlock extends Block {
-	public static final BooleanProperty ILLUMINATED = MubbleBlockPack.Properties.ILLUMINATED;
+	public static final BooleanProperty ILLUMINATED = MubbleBlocks.Properties.ILLUMINATED;
 	protected static final VoxelShape SHAPE = Block.createCuboidShape(3.0D, 3.0D, 3.0D, 10.0D, 10.0D, 10.0D);
 	protected static final VoxelShape SELECTION_SHAPE = Block.createCuboidShape(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D);
 

@@ -20,8 +20,6 @@ public class MubbleFood {
 	public static final FoodComponent SWEET_BERRY_CREPE = (new FoodComponent.Builder()).hunger(crepeHunger + 2).saturationModifier(crepeSaturation + 0.1f).build();
 	public static final FoodComponent BLUEBERRY_CREPE = (new FoodComponent.Builder()).hunger(crepeHunger + 2).saturationModifier(crepeSaturation + 0.1f).build();
 	public static final FoodComponent CANDY_CANE = (new FoodComponent.Builder()).hunger(3).saturationModifier(0.6F).build();
-	public static final FoodComponent DUCK = (new FoodComponent.Builder()).hunger(2).saturationModifier(0.3F).statusEffect(new StatusEffectInstance(StatusEffects.HUNGER, 600, 0), 0.3F).meat().build();
-	public static final FoodComponent COOKED_DUCK = (new FoodComponent.Builder()).hunger(6).saturationModifier(0.6F).meat().build();
 
 	public static final FoodComponent SUPER_MUSHROOM = (new FoodComponent.Builder()).hunger(3).saturationModifier(0.5F).alwaysEdible().statusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 550, 1), 1.0F).build();
 	public static final FoodComponent PEACH = (new FoodComponent.Builder()).hunger(3).saturationModifier(0.5F).build();

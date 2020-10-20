@@ -1,8 +1,8 @@
 package com.hugman.mubble.object.entity;
 
 import com.google.common.collect.Lists;
-import com.hugman.mubble.init.MubbleBlockPack;
-import com.hugman.mubble.init.MubbleEntityPack;
+import com.hugman.mubble.init.MubbleBlocks;
+import com.hugman.mubble.init.MubbleEntities;
 import com.hugman.mubble.object.block.FlyingBlock;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -63,7 +63,7 @@ public class FlyingBlockEntity extends Entity {
 	}
 
 	public FlyingBlockEntity(World world, double x, double y, double z, BlockState block) {
-		this(MubbleEntityPack.FLYING_BLOCK, world);
+		this(MubbleEntities.FLYING_BLOCK, world);
 		this.block = block;
 		this.inanimate = true;
 		this.updatePosition(x, y + (double) ((1.0F - this.getHeight()) / 2.0F), z);
@@ -253,7 +253,7 @@ public class FlyingBlockEntity extends Entity {
 			this.blockEntityData = compound.getCompound("TileEntityData");
 		}
 		if(this.block.getBlock() instanceof AirBlock) {
-			this.block = MubbleBlockPack.BALLOONS.getBlock(DyeColor.WHITE).getDefaultState();
+			this.block = MubbleBlocks.BALLOONS.getBlock(DyeColor.WHITE).getDefaultState();
 		}
 
 	}

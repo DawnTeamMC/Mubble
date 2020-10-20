@@ -398,36 +398,6 @@
 			"mubble:entity/chincho/death"
 		]
 	},
-	"entity.duck.ambient": {
-		"subtitle": "subtitles.mubble.entity.duck.ambient",
-		"sounds": [
-			"mubble:entity/duck/ambient/1",
-			"mubble:entity/duck/ambient/2",
-			"mubble:entity/duck/ambient/3",
-			"mubble:entity/duck/ambient/4"
-		]
-	},
-	"entity.duck.hurt": {
-		"subtitle": "subtitles.mubble.entity.duck.hurt",
-		"sounds": [
-			"mubble:entity/duck/hurt/1",
-			"mubble:entity/duck/hurt/2",
-			"mubble:entity/duck/hurt/3"
-		]
-	},
-	"entity.duck.death": {
-		"subtitle": "subtitles.mubble.entity.duck.death",
-		"sounds": [
-			"mubble:entity/duck/death"
-		]
-	},
-	"entity.duck.step": {
-		"subtitle": "subtitles.block.generic.footsteps",
-		"sounds": [
-			"minecraft:mob/chicken/step1",
-			"minecraft:mob/chicken/step2"
-		]
-	},
 	"entity.fireball.hit.block": {
 		"sounds": [
 			"mubble:entity/fireball/hit/block"
@@ -579,45 +549,6 @@
 	"entity.pufferfish.aeugh": {
 		"sounds": [
 			"mubble:entity/pufferfish/aeugh"
-		]
-	},
-	"entity.zombie_cowman.ambient": {
-		"subtitle": "subtitles.mubble.entity.zombie_cowman.ambient",
-		"sounds": [
-			"mubble:entity/zombie_cowman/ambient/1",
-			"mubble:entity/zombie_cowman/ambient/2",
-			"mubble:entity/zombie_cowman/ambient/3"
-		]
-	},
-	"entity.zombie_cowman.step": {
-		"subtitle": "subtitles.block.generic.footsteps",
-		"sounds": [
-			"mubble:entity/zombie_cowman/step/1",
-			"mubble:entity/zombie_cowman/step/2",
-			"mubble:entity/zombie_cowman/step/3",
-			"mubble:entity/zombie_cowman/step/4"
-		]
-	},
-	"entity.zombie_cowman.angry": {
-		"subtitle": "subtitles.mubble.entity.zombie_cowman.angry",
-		"sounds": [
-			"mubble:entity/zombie_cowman/step/1",
-			"mubble:entity/zombie_cowman/step/2",
-			"mubble:entity/zombie_cowman/step/3",
-			"mubble:entity/zombie_cowman/step/4"
-		]
-	},
-	"entity.zombie_cowman.hurt": {
-		"subtitle": "subtitles.mubble.entity.zombie_cowman.hurt",
-		"sounds": [
-			"mubble:entity/zombie_cowman/hurt/1",
-			"mubble:entity/zombie_cowman/hurt/2"
-		]
-	},
-	"entity.zombie_cowman.death": {
-		"subtitle": "subtitles.mubble.entity.zombie_cowman.death",
-		"sounds": [
-			"mubble:entity/zombie_cowman/death"
 		]
 	},
 	"costume.cappy.ambient": {

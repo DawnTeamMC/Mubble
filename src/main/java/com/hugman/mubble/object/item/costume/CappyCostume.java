@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.item.costume;
 
-import com.hugman.mubble.init.MubbleSoundPack;
+import com.hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -23,10 +23,10 @@ public class CappyCostume extends HeadCostume {
 		if(!world.isClient && rand.nextInt(301) == 0) {
 			int random = rand.nextInt(5);
 			if(world.getDimension().isUltrawarm() && random <= 3) {
-				world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSoundPack.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
+				world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT_NETHER, SoundCategory.VOICE, 1f, 1f);
 			}
 			else {
-				world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSoundPack.COSTUME_CAPPY_AMBIENT, SoundCategory.VOICE, 1f, 1f);
+				world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_AMBIENT, SoundCategory.VOICE, 1f, 1f);
 			}
 		}
 		super.usageTick(world, player, stack, remainingUseTicks);
@@ -36,7 +36,7 @@ public class CappyCostume extends HeadCostume {
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack itemstack1 = player.getEquippedStack(armorType);
 		if(itemstack1.isEmpty()) {
-			world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSoundPack.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
+			world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
 		}
 		return super.use(world, player, hand);
 	}

@@ -1,7 +1,7 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleBlockPack;
-import com.hugman.mubble.init.MubbleSoundPack;
+import com.hugman.mubble.init.MubbleBlocks;
+import com.hugman.mubble.init.MubbleSounds;
 import com.hugman.mubble.init.data.MubbleLootTables;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
@@ -84,23 +84,23 @@ public class BrickBlock extends Block {
 
 	public void loot(World worldIn, BlockPos pos) {
 		if(!worldIn.isClient) {
-			BlockState emptyBlock = MubbleBlockPack.SMB_EMPTY_BLOCK.getDefaultState();
-			SoundEvent coinLootSound = MubbleSoundPack.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-			if(this == MubbleBlockPack.SMB_GROUND_BRICK_BLOCK || this == MubbleBlockPack.SMB_UNDERGROUND_BRICK_BLOCK || this == MubbleBlockPack.SMB_CASTLE_BRICK_BLOCK) {
-				coinLootSound = MubbleSoundPack.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-				emptyBlock = MubbleBlockPack.SMB_EMPTY_BLOCK.getDefaultState();
+			BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
+			SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
+			if(this == MubbleBlocks.SMB_GROUND_BRICK_BLOCK || this == MubbleBlocks.SMB_UNDERGROUND_BRICK_BLOCK || this == MubbleBlocks.SMB_CASTLE_BRICK_BLOCK) {
+				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
+				emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
 			}
-			else if(this == MubbleBlockPack.SMB3_BRICK_BLOCK) {
-				coinLootSound = MubbleSoundPack.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
-				emptyBlock = MubbleBlockPack.SMB3_EMPTY_BLOCK.getDefaultState();
+			else if(this == MubbleBlocks.SMB3_BRICK_BLOCK) {
+				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
+				emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
 			}
-			else if(this == MubbleBlockPack.SMW_BRICK_BLOCK) {
-				coinLootSound = MubbleSoundPack.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
-				emptyBlock = MubbleBlockPack.SMW_EMPTY_BLOCK.getDefaultState();
+			else if(this == MubbleBlocks.SMW_BRICK_BLOCK) {
+				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
+				emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
 			}
-			else if(this == MubbleBlockPack.NSMBU_BRICK_BLOCK) {
-				coinLootSound = MubbleSoundPack.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
-				emptyBlock = MubbleBlockPack.NSMBU_EMPTY_BLOCK.getDefaultState();
+			else if(this == MubbleBlocks.NSMBU_BRICK_BLOCK) {
+				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
+				emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
 			}
 			final double x = pos.getX() + 0.5D;
 			final double y = pos.getY() + 0.5D + 0.6D;

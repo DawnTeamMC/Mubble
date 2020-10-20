@@ -1,6 +1,6 @@
 package com.hugman.mubble.mixin.client;
 
-import com.hugman.mubble.init.MubbleEntityPack;
+import com.hugman.mubble.init.MubbleEntities;
 import com.hugman.mubble.object.entity.FireballEntity;
 import com.hugman.mubble.object.entity.IceballEntity;
 import com.hugman.mubble.object.entity.KirbyBallEntity;
@@ -32,13 +32,13 @@ public class ClientPlayNetworkHandlerMixin {
 		double z = packet.getZ();
 		EntityType<?> entityType = packet.getEntityTypeId();
 		Object entity = null;
-		if(entityType == MubbleEntityPack.FIREBALL) {
+		if(entityType == MubbleEntities.FIREBALL) {
 			entity = new FireballEntity(this.world, x, y, z);
 		}
-		else if(entityType == MubbleEntityPack.ICEBALL) {
+		else if(entityType == MubbleEntities.ICEBALL) {
 			entity = new IceballEntity(this.world, x, y, z);
 		}
-		else if(entityType == MubbleEntityPack.KIRBY_BALL) {
+		else if(entityType == MubbleEntities.KIRBY_BALL) {
 			entity = new KirbyBallEntity(this.world, x, y, z);
 		}
 		if(entity != null) {

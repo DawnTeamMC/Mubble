@@ -1,7 +1,7 @@
 package com.hugman.mubble.init.world;
 
 import com.hugman.mubble.Mubble;
-import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.util.registry.BuiltinRegistries;
@@ -61,17 +61,17 @@ public class MubbleConfiguredFeatures {
 	}
 
 	public static final class States {
-		protected static final BlockState PRESS_GARDEN_LOG = MubbleBlockPack.PRESS_GARDEN_WOOD.getLog().getDefaultState();
-		protected static final BlockState RED_PRESS_GARDEN_LEAVES = MubbleBlockPack.RED_PRESS_GARDEN_LEAVES.getLeaves().getDefaultState();
-		protected static final BlockState RED_PRESS_GARDEN_LEAF_PILE = MubbleBlockPack.RED_PRESS_GARDEN_LEAVES.getLeafPile().getDefaultState();
-		protected static final BlockState PINK_PRESS_GARDEN_LEAVES = MubbleBlockPack.PINK_PRESS_GARDEN_LEAVES.getLeaves().getDefaultState();
-		protected static final BlockState PINK_PRESS_GARDEN_LEAF_PILE = MubbleBlockPack.PINK_PRESS_GARDEN_LEAVES.getLeafPile().getDefaultState();
+		protected static final BlockState PRESS_GARDEN_LOG = MubbleBlocks.PRESS_GARDEN_WOOD.getLog().getDefaultState();
+		protected static final BlockState RED_PRESS_GARDEN_LEAVES = MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getLeaves().getDefaultState();
+		protected static final BlockState RED_PRESS_GARDEN_LEAF_PILE = MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getLeafPile().getDefaultState();
+		protected static final BlockState PINK_PRESS_GARDEN_LEAVES = MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getLeaves().getDefaultState();
+		protected static final BlockState PINK_PRESS_GARDEN_LEAF_PILE = MubbleBlocks.PINK_PRESS_GARDEN_LEAVES.getLeafPile().getDefaultState();
 
-		protected static final BlockState SCARLET_LOG = MubbleBlockPack.SCARLET_WOOD.getLog().getDefaultState();
-		protected static final BlockState SCARLET_LEAVES = MubbleBlockPack.SCARLET_WOOD.getLeaves().getDefaultState();
-		protected static final BlockState SCARLET_LEAF_PILE = MubbleBlockPack.SCARLET_WOOD.getLeafPile().getDefaultState();
-		protected static final BlockState SCARLET_ORCHID = MubbleBlockPack.SCARLET_ORCHID.getPlant().getDefaultState();
+		protected static final BlockState SCARLET_LOG = MubbleBlocks.SCARLET_WOOD.getLog().getDefaultState();
+		protected static final BlockState SCARLET_LEAVES = MubbleBlocks.SCARLET_WOOD.getLeaves().getDefaultState();
+		protected static final BlockState SCARLET_LEAF_PILE = MubbleBlocks.SCARLET_WOOD.getLeafPile().getDefaultState();
+		protected static final BlockState SCARLET_ORCHID = MubbleBlocks.SCARLET_ORCHID.getPlant().getDefaultState();
 
-		protected static final BlockState SCARLET_MUSHROOM = MubbleBlockPack.SCARLET_MUSHROOM.getPlant().getDefaultState();
+		protected static final BlockState SCARLET_MUSHROOM = MubbleBlocks.SCARLET_MUSHROOM.getPlant().getDefaultState();
 	}
 }

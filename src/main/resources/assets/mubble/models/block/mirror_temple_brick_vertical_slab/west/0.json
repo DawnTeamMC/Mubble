@@ -1,6 +1,0 @@
-{
-	"parent": "dawn:block/vertical_slab/west",
-	"textures": {
-		"block": "mubble:block/mirror_temple_bricks/0"
-	}
-}

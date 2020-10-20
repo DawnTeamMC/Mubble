@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.entity;
 
-import com.hugman.mubble.init.MubbleEntityPack;
+import com.hugman.mubble.init.MubbleEntities;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -33,7 +33,7 @@ public class CustomTNTEntity extends Entity {
 	}
 
 	public CustomTNTEntity(BlockState customTileIn, World worldIn, double x, double y, double z, int fuse, float strength, LivingEntity igniter) {
-		this(MubbleEntityPack.CUSTOM_TNT, worldIn);
+		this(MubbleEntities.CUSTOM_TNT, worldIn);
 		this.customTile = customTileIn;
 		this.updatePosition(x, y, z);
 		float f = (float) (Math.random() * (double) ((float) Math.PI * 2F));

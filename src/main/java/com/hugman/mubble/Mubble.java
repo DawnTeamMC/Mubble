@@ -2,8 +2,8 @@ package com.hugman.mubble;
 
 import com.hugman.dawn.api.creator.ModData;
 import com.hugman.mubble.init.*;
-import com.hugman.mubble.init.data.MubbleStatPack;
-import com.hugman.mubble.init.world.MubbleBiomePack;
+import com.hugman.mubble.init.data.MubbleStats;
+import com.hugman.mubble.init.world.MubbleBiomes;
 import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
@@ -15,17 +15,17 @@ public class Mubble implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		new MubbleBlockPack();
-		new MubbleItemPack();
-		new MubbleCostumePack();
-		new MubbleEntityPack();
-		new MubblePaintingPack();
-		new MubbleSoundPack();
+		new MubbleBlocks();
+		new MubbleItems();
+		new MubbleCostumes();
+		new MubbleEntities();
+		new MubblePaintings();
+		new MubbleSounds();
 		// Data
-		new MubbleStatPack();
+		new MubbleStats();
 		// World
 		new MubbleConfiguredFeatures();
-		new MubbleBiomePack();
+		new MubbleBiomes();
 		//MubbleGenerators.init();
 	}
 }

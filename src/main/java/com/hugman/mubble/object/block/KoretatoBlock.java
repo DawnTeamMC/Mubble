@@ -1,7 +1,7 @@
 package com.hugman.mubble.object.block;
 
 import com.hugman.dawn.api.object.block.DirectionalBlock;
-import com.hugman.mubble.init.MubbleBlockPack;
+import com.hugman.mubble.init.MubbleBlocks;
 import com.hugman.mubble.object.block.block_state_property.Princess;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -17,7 +17,7 @@ import net.minecraft.util.BlockRotation;
 import net.minecraft.util.math.Direction;
 
 public class KoretatoBlock extends DirectionalBlock {
-	public static final EnumProperty<Princess> PRINCESS = MubbleBlockPack.Properties.PRINCESS;
+	public static final EnumProperty<Princess> PRINCESS = MubbleBlocks.Properties.PRINCESS;
 
 	public KoretatoBlock() {
 		super(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.YELLOW_TERRACOTTA).strength(0.4f, 2f).sounds(BlockSoundGroup.SNOW));

@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.item;
 
-import com.hugman.mubble.init.MubbleSoundPack;
+import com.hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,12 +19,12 @@ public class SuperStarItem extends Item {
 	public ItemStack finishUsing(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 		if(!worldIn.isClient) {
 			ServerWorld serverWorldIn = (ServerWorld) worldIn;
-			StopSoundS2CPacket sstopsoundpacket = new StopSoundS2CPacket(MubbleSoundPack.ITEM_SUPER_STAR_THEME.getId(), SoundCategory.PLAYERS);
+			StopSoundS2CPacket sstopsoundpacket = new StopSoundS2CPacket(MubbleSounds.ITEM_SUPER_STAR_THEME.getId(), SoundCategory.PLAYERS);
 			for(ServerPlayerEntity serverplayerentity : serverWorldIn.getPlayers()) {
 				serverplayerentity.networkHandler.sendPacket(sstopsoundpacket);
 			}
 		}
-		worldIn.playSoundFromEntity(null, entityLiving, MubbleSoundPack.ITEM_SUPER_STAR_THEME, SoundCategory.PLAYERS, 1.0F, 1.0F);
+		worldIn.playSoundFromEntity(null, entityLiving, MubbleSounds.ITEM_SUPER_STAR_THEME, SoundCategory.PLAYERS, 1.0F, 1.0F);
 		return super.finishUsing(stack, worldIn, entityLiving);
 	}
 }

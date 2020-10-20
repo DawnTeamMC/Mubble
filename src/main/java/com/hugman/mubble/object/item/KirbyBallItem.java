@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.item;
 
-import com.hugman.mubble.init.MubbleSoundPack;
+import com.hugman.mubble.init.MubbleSounds;
 import com.hugman.mubble.object.entity.KirbyBallEntity;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.ItemDispenserBehavior;
@@ -26,7 +26,7 @@ public class KirbyBallItem extends Item {
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack stack = player.getStackInHand(hand);
-		world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSoundPack.ENTITY_KIRBY_BALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.ENTITY_KIRBY_BALL_THROW, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		if(!world.isClient) {
 			KirbyBallEntity entity = new KirbyBallEntity(world, player);
 			entity.setItem(stack);

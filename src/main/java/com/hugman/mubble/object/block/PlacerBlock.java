@@ -1,6 +1,6 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.data.MubbleStatPack;
+import com.hugman.mubble.init.data.MubbleStats;
 import com.hugman.mubble.object.block.block_entity.PlacerBlockEntity;
 import com.hugman.mubble.object.block.dispenser_behavior.PlaceBreakDispenserBehavior;
 import net.minecraft.block.BlockState;
@@ -42,7 +42,7 @@ public class PlacerBlock extends DispenserBlock {
 		else {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			player.openHandledScreen((DispenserBlockEntity) blockEntity);
-			player.incrementStat(MubbleStatPack.INSPECT_PLACER);
+			player.incrementStat(MubbleStats.INSPECT_PLACER);
 		}
 		return ActionResult.CONSUME;
 	}

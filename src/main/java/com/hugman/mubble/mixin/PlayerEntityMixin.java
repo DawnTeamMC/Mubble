@@ -1,6 +1,6 @@
 package com.hugman.mubble.mixin;
 
-import com.hugman.mubble.init.MubbleSoundPack;
+import com.hugman.mubble.init.MubbleSounds;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.passive.PufferfishEntity;
@@ -27,7 +27,7 @@ public class PlayerEntityMixin {
 					stack.decrement(1);
 				}
 				player.swingHand(hand);
-				pufferfish.playSound(MubbleSoundPack.ENTITY_PUFFERFISH_AEUGH, 0.6F, 1.0F);
+				pufferfish.playSound(MubbleSounds.ENTITY_PUFFERFISH_AEUGH, 0.6F, 1.0F);
 				info.setReturnValue(ActionResult.SUCCESS);
 			}
 		}
