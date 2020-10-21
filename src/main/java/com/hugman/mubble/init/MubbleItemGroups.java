@@ -6,6 +6,10 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
 public class MubbleItemGroups {
+	public static void init() {
+
+	}
+
 	public static final ItemGroup COSTUMES_GROUP = FabricItemGroupBuilder.build(Mubble.MOD_DATA.id("costumes"), () -> new ItemStack(MubbleCostumes.CAPPY));
 	public static final ItemGroup INSTRUMENTS_GROUP = FabricItemGroupBuilder.build(Mubble.MOD_DATA.id("instruments"), () -> new ItemStack(MubbleItems.JINGLE_BELLS));
 }

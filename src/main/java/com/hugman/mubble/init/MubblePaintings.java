@@ -4,6 +4,10 @@ import com.hugman.dawn.api.creator.PaintingCreator;
 import net.minecraft.entity.decoration.painting.PaintingMotive;
 
 public class MubblePaintings extends MubblePack {
+	public static void init() {
+
+	}
+
 	public static final PaintingMotive THE_GREAT_WAVE_OFF_KANAGAWA = register(new PaintingCreator.Builder("the_great_wave_off_kanagawa", 64, 64));
 	public static final PaintingMotive THE_SCREAM = register(new PaintingCreator.Builder("the_scream", 16, 32));
 	public static final PaintingMotive THE_STARRY_NIGHT = register(new PaintingCreator.Builder("the_starry_night", 64, 48));

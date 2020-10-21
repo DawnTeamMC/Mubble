@@ -4,6 +4,10 @@ import com.hugman.dawn.api.creator.SoundCreator;
 import net.minecraft.sound.SoundEvent;
 
 public class MubbleSounds extends MubblePack {
+	public static void init() {
+
+	}
+
 	public static final SoundEvent BLOCK_PRESENT_CLOSE = register(new SoundCreator.Builder("block.present.close"));
 	public static final SoundEvent BLOCK_PRESENT_OPEN = register(new SoundCreator.Builder("block.present.open"));
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB = register(new SoundCreator.Builder("block.question_block.loot.power_up.smb"));

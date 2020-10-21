@@ -23,6 +23,10 @@ import java.util.OptionalInt;
 import java.util.Set;
 
 public class MubbleConfiguredFeatures {
+	public static void init() {
+
+	}
+
 	private static <FC extends FeatureConfig> ConfiguredFeature<FC, ?> register(String name, ConfiguredFeature<FC, ?> feature) {
 		return Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, Mubble.MOD_DATA.id(name), feature);
 	}
@@ -51,11 +55,11 @@ public class MubbleConfiguredFeatures {
 	public static final ConfiguredFeature<?, ?> PATCH_SCARLET_ORCHID = register("patch_scarlet_orchid", Feature.FLOWER.configure(Configs.patch(States.SCARLET_ORCHID, 64).getConfig()).decorate(ConfiguredFeatures.Decorators.SPREAD_32_ABOVE).decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).repeat(4));
 
 	public static final class Configs {
-		protected final static ConfiguredFeature<RandomPatchFeatureConfig, ?> patch(BlockState blockState, int tries) {
+		protected static ConfiguredFeature<RandomPatchFeatureConfig, ?> patch(BlockState blockState, int tries) {
 			return Feature.RANDOM_PATCH.configure((new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(blockState), SimpleBlockPlacer.INSTANCE)).tries(tries).cannotProject().build());
 		}
 
-		protected final static ConfiguredFeature<RandomPatchFeatureConfig, ?> patch(BlockState blockState, int tries, Set<Block> whitelist) {
+		protected static ConfiguredFeature<RandomPatchFeatureConfig, ?> patch(BlockState blockState, int tries, Set<Block> whitelist) {
 			return Feature.RANDOM_PATCH.configure((new RandomPatchFeatureConfig.Builder(new SimpleBlockStateProvider(blockState), SimpleBlockPlacer.INSTANCE)).tries(tries).whitelist(whitelist).cannotProject().build());
 		}
 	}

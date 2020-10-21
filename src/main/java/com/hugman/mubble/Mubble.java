@@ -15,17 +15,15 @@ public class Mubble implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		new MubbleBlocks();
-		new MubbleItems();
-		new MubbleCostumes();
-		new MubbleEntities();
-		new MubblePaintings();
-		new MubbleSounds();
-		// Data
-		new MubbleStats();
-		// World
-		new MubbleConfiguredFeatures();
-		new MubbleBiomes();
-		//MubbleGenerators.init();
+		MubbleBlocks.init();
+		MubbleItems.init();
+		MubbleCostumes.init();
+		MubbleEntities.init();
+		MubblePaintings.init();
+		MubbleSounds.init();
+		MubbleItemGroups.init();
+		MubbleStats.init();
+		MubbleConfiguredFeatures.init();
+		MubbleBiomes.init();
 	}
 }

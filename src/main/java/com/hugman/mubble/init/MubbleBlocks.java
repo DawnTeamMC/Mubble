@@ -36,6 +36,10 @@ import net.minecraft.state.property.EnumProperty;
 import net.minecraft.util.DyeColor;
 
 public class MubbleBlocks extends MubblePack {
+	public static void init() {
+
+	}
+
 	/* MUBBLE */
 	public static final Block BLUE_CHRISTMAS_BAUBLE = register(new BlockCreator.Builder("blue_christmas_bauble", new Block(Settings.CHRISTMAS_BAUBLE.materialColor(MaterialColor.BLUE_TERRACOTTA))).itemGroup(ItemGroup.DECORATIONS));
 	public static final Block LIGHT_BLUE_CHRISTMAS_BAUBLE = register(new BlockCreator.Builder("light_blue_christmas_bauble", new Block(Settings.CHRISTMAS_BAUBLE.materialColor(MaterialColor.LIGHT_BLUE_TERRACOTTA))).itemGroup(ItemGroup.DECORATIONS));

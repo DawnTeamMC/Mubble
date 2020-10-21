@@ -14,6 +14,10 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.util.Rarity;
 
 public class MubbleItems extends MubblePack {
+	public static void init() {
+
+	}
+
 	/* MUBBLE */
 	public static final Item WHEAT_FLOUR = register(new Builder("wheat_flour", new Item(new Item.Settings().group(ItemGroup.FOOD))).compostingChance(0.3F));
 	public static final Item CHEESE = register(new Builder("cheese", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CHEESE))).compostingChance(0.5F));

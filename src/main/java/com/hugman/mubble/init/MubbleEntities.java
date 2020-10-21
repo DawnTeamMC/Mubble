@@ -11,6 +11,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 
 public class MubbleEntities extends MubblePack {
+	public static void init() {
+
+	}
+
 	/* MUBBLE */
 	public static final EntityType<CustomTNTEntity> CUSTOM_TNT = register(new EntityCreator.Builder("custom_tnt", FabricEntityTypeBuilder.<CustomTNTEntity>create(SpawnGroup.MISC, CustomTNTEntity::new).fireImmune().dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackRangeChunks(10).trackedUpdateRate(10).build()));
 	public static final EntityType<FlyingBlockEntity> FLYING_BLOCK = register(new EntityCreator.Builder("flying_block", FabricEntityTypeBuilder.<FlyingBlockEntity>create(SpawnGroup.MISC, FlyingBlockEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackRangeChunks(10).trackedUpdateRate(20).build()));

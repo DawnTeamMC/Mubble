@@ -12,6 +12,10 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.SoundEvents;
 
 public class MubbleCostumes extends MubblePack {
+	public static void init() {
+
+	}
+
 	/* MUBBLE */
 	public static final Item HEADPHONES = register(new Builder("headphones", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
 
