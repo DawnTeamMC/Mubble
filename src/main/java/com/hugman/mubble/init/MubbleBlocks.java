@@ -253,8 +253,8 @@ public class MubbleBlocks extends MubblePack {
 	public static final Block BLUE_STUDIOPOLIS_CLAPPER = register(new BlockCreator.Builder("blue_studiopolis_clapper", new DirectionalBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK))).itemGroup(ItemGroup.DECORATIONS));
 
 	public static final WoodPack PRESS_GARDEN_WOOD = register(new WoodPack.Builder("press_garden", MaterialColor.field_25702, MaterialColor.field_25703, MaterialColor.field_25707, false));
-	public static final PottedPlantPack RED_PRESS_GARDEN_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("red_press_garden_sapling", new SaplingBlock(new RedPressGardenSaplingGenerator(), BlockSettings.SAPLING))));
-	public static final PottedPlantPack PINK_PRESS_GARDEN_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("pink_press_garden_sapling", new SaplingBlock(new PinkPressGardenSaplingGenerator(), BlockSettings.SAPLING))));
+	public static final PottedPlantPack RED_PRESS_GARDEN_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("red_press_garden_sapling", new SaplingBlock(new RedPressGardenSaplingGenerator(), BlockSettings.SAPLING)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack PINK_PRESS_GARDEN_SAPLING = register(new PottedPlantPack.Builder(new BlockCreator.Builder("pink_press_garden_sapling", new SaplingBlock(new PinkPressGardenSaplingGenerator(), BlockSettings.SAPLING)).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT)));
 	public static final LeavesPack RED_PRESS_GARDEN_LEAVES = register(new LeavesPack.Builder("red_press_garden"));
 	public static final LeavesPack PINK_PRESS_GARDEN_LEAVES = register(new LeavesPack.Builder("pink_press_garden"));
 
@@ -262,8 +262,8 @@ public class MubbleBlocks extends MubblePack {
 
 	/* UNDERTALE / DELTARUNE */
 	public static final NormalWoodPack SCARLET_WOOD = register(new NormalWoodPack.Builder("scarlet", new ScarletSaplingGenerator(), MaterialColor.field_25702, MaterialColor.field_25703, MaterialColor.field_25707));
-	public static final PottedPlantPack SCARLET_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("scarlet_mushroom", new MushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7))).itemGroup(ItemGroup.DECORATIONS)));
-	public static final PottedPlantPack SCARLET_ORCHID = register(new PottedPlantPack.Builder(new BlockCreator.Builder("scarlet_orchid", new FlowerBlock(StatusEffects.GLOWING, 8, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100)));
+	public static final PottedPlantPack SCARLET_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("scarlet_mushroom", new MushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7))).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack SCARLET_ORCHID = register(new PottedPlantPack.Builder(new BlockCreator.Builder("scarlet_orchid", new FlowerBlock(StatusEffects.GLOWING, 8, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
 
 	/* CELESTE */
 	public static final Block GIRDER = register(new BlockCreator.Builder("girder", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK))).itemGroup(ItemGroup.BUILDING_BLOCKS));
