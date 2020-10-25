@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.hugman.mubble.init.MubbleBlocks;
 import com.hugman.mubble.init.MubbleSounds;
 import com.hugman.mubble.init.data.MubbleTags;
+import com.hugman.mubble.util.MubbleBiomeCreator;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
@@ -204,12 +205,12 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 					return ItemStack.EMPTY;
 				}
 			}
-			else if(index >= 2 && index < 29) {
+			else if(index < 29) {
 				if(!this.insertItem(itemstack1, 29, 38, false)) {
 					return ItemStack.EMPTY;
 				}
 			}
-			else if(index >= 29 && index < 38 && !this.insertItem(itemstack1, 2, 29, false)) {
+			else if(index < 38 && !this.insertItem(itemstack1, 2, 29, false)) {
 				return ItemStack.EMPTY;
 			}
 			if(itemstack1.isEmpty()) {
@@ -238,9 +239,6 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 		for(Tag<Item> tag : MubbleTags.Items.TIMESWAP_TAGS) {
 			if(item.isIn(tag)) {
 				return tag;
-			}
-			else {
-				continue;
 			}
 		}
 		return null;

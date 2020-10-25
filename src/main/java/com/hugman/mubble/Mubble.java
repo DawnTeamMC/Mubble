@@ -1,6 +1,6 @@
 package com.hugman.mubble;
 
-import com.hugman.dawn.api.creator.ModData;
+import com.hugman.dawn.api.util.ModData;
 import com.hugman.mubble.init.*;
 import com.hugman.mubble.init.data.MubbleStats;
 import com.hugman.mubble.init.world.MubbleBiomes;
@@ -25,5 +25,6 @@ public class Mubble implements ModInitializer {
 		MubbleStats.init();
 		MubbleConfiguredFeatures.init();
 		MubbleBiomes.init();
+		MOD_DATA.registerEverything();
 	}
 }
