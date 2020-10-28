@@ -6,12 +6,12 @@
 		]
 	},
 	"criteria": {
-		"has_wheat_flour": {
+		"has_wheat": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions": {
 				"items": [
 					{
-						"item": "mubble:wheat_flour"
+						"item": "minecraft:wheat"
 					}
 				]
 			}
@@ -25,7 +25,7 @@
 	},
 	"requirements": [
 		[
-			"has_wheat_flour",
+			"has_wheat",
 			"has_the_recipe"
 		]
 	]

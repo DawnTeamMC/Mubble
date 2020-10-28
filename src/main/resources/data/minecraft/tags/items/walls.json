@@ -1,7 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		"mubble:blue_permafrost_brick_wall",
 		"mubble:medusa_brick_wall",
 		"mubble:mirror_temple_brick_wall",
 		"mubble:old_site_brick_wall"

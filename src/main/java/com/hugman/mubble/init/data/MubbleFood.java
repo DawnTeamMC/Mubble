@@ -8,7 +8,6 @@ public class MubbleFood {
 	public static final int crepeHunger = 3;
 	public static final float crepeSaturation = 0.5f;
 
-	public static final FoodComponent CHEESE = (new FoodComponent.Builder()).hunger(2).saturationModifier(0.4F).build();
 	public static final FoodComponent CARAMEL_CUBE = (new FoodComponent.Builder()).hunger(4).saturationModifier(0.2F).build();
 	public static final FoodComponent BAGUETTE = (new FoodComponent.Builder()).hunger(7).saturationModifier(0.7F).build();
 	public static final FoodComponent BURGER = (new FoodComponent.Builder()).hunger(9).saturationModifier(0.9F).build();

@@ -7,14 +7,8 @@ import net.minecraft.util.Lazy;
 import java.util.function.Supplier;
 
 public enum MubbleItemTiers implements ToolMaterial {
-	VANADIUM(3, 1756, 10.0F, 3.5F, 12, () -> {
-		return Ingredient.fromTag(MubbleTags.Items.GEMS_KYBER);
-	}),
 	KYBER(3, 1932, 10.0F, 4.5F, 16, () -> {
 		return Ingredient.fromTag(MubbleTags.Items.GEMS_KYBER);
-	}),
-	BISMUTH(4, 2145, 12.0F, 4F, 22, () -> {
-		return Ingredient.fromTag(MubbleTags.Items.GEMS_BISMUTH);
 	});
 
 	private final int miningLevel;

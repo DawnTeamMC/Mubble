@@ -22,6 +22,9 @@
 		],
 		"client": [
 			"com.hugman.mubble.MubbleClient"
+		],
+		"modmenu": [
+			"com.hugman.mubble.config.MubbleModMenuIntegration"
 		]
 	},
 	"mixins": [

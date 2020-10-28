@@ -19,8 +19,6 @@ public class MubbleItems extends MubblePack {
 	}
 
 	/* MUBBLE */
-	public static final Item WHEAT_FLOUR = register(new ItemCreator.Builder("wheat_flour", new Item(new Item.Settings().group(ItemGroup.FOOD))).compostingChance(0.3F));
-	public static final Item CHEESE = register(new ItemCreator.Builder("cheese", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CHEESE))).compostingChance(0.5F));
 	public static final Item CARAMEL_CUBE = register(new ItemCreator.Builder("caramel_cube", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CARAMEL_CUBE))));
 	public static final Item BAGUETTE = register(new ItemCreator.Builder("baguette", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.BAGUETTE))).compostingChance(0.85F));
 	public static final Item CREPE = register(new ItemCreator.Builder("crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CREPE))).compostingChance(0.65F));
@@ -32,16 +30,7 @@ public class MubbleItems extends MubblePack {
 	public static final Item CANDY_CANE = register(new ItemCreator.Builder("candy_cane", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CANDY_CANE))).compostingChance(0.85F));
 	public static final Item SMALL_BULB = register(new ItemCreator.Builder("small_bulb", new SmallBulbItem(new Item.Settings().group(ItemGroup.MATERIALS))));
 	public static final Item JINGLE_BELLS = register(new ItemCreator.Builder("jingle_bells", new ShakeInstrumentItem(new Item.Settings().group(MubbleItemGroups.INSTRUMENTS_GROUP).maxCount(1), MubbleSounds.ITEM_JINGLE_BELLS_USE)));
-	public static final Item BISMUTH_DUST = register(new ItemCreator.Builder("bismuth_dust", new Item(new Item.Settings().group(ItemGroup.MATERIALS))));
-	public static final Item CRYSTALLIZED_BISMUTH = register(new ItemCreator.Builder("crystallized_bismuth", new Item(new Item.Settings().group(ItemGroup.MATERIALS))));
-	public static final Item BISMUTH_SWORD = register(new ItemCreator.Builder("bismuth_sword", new SwordItem(MubbleItemTiers.BISMUTH, 4, -2.4F, new Item.Settings().group(ItemGroup.COMBAT))));
-	public static final Item BISMUTH_SHOVEL = register(new ItemCreator.Builder("bismuth_shovel", new ShovelItem(MubbleItemTiers.BISMUTH, 1.5F, -3.0F, new Item.Settings().group(ItemGroup.TOOLS))));
-	public static final Item BISMUTH_PICKAXE = register(new ItemCreator.Builder("bismuth_pickaxe", new PickaxeItem(MubbleItemTiers.BISMUTH, 1, -2.4F, new Item.Settings().group(ItemGroup.TOOLS))));
-	public static final Item BISMUTH_AXE = register(new ItemCreator.Builder("bismuth_axe", new AxeItem(MubbleItemTiers.BISMUTH, 4.5F, -2.5F, new Item.Settings().group(ItemGroup.TOOLS))));
-	public static final Item BISMUTH_HOE = register(new ItemCreator.Builder("bismuth_hoe", new HoeItem(MubbleItemTiers.BISMUTH, -1, 0.0F, new Item.Settings().group(ItemGroup.TOOLS))));
-	public static final Item PERMAFROST_BRICK = register(new ItemCreator.Builder("permafrost_brick", new Item(new Item.Settings().group(ItemGroup.MATERIALS))));
 	public static final Item BANDAGE = register(new ItemCreator.Builder("bandage", new BandageItem(new Item.Settings().group(ItemGroup.MISC).maxCount(16))));
-	public static final Item TOTEM_OF_ASCENDING = register(new ItemCreator.Builder("totem_of_ascending", new TotemOfAscendingItem(new Item.Settings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.UNCOMMON))));
 
 	/* SUPER MARIO */
 	public static final Item SUPER_MUSHROOM = register(new ItemCreator.Builder("super_mushroom", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SUPER_MUSHROOM))));

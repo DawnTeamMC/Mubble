@@ -69,24 +69,16 @@ public class MubbleBlocks extends MubblePack {
 	public static final Block FOOTBLOCK = register(new BlockCreator.Builder("footblock", DefaultBlockGetter.CUBE, FabricBlockSettings.copyOf(Blocks.WHITE_WOOL)).itemGroup(ItemGroup.DECORATIONS));
 
 	public static final MCBlockPack CLOUD_BLOCKS = register(new MCBlockPack.Builder("", MubbleBlockGetter.CLOUD_BLOCK, FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision()));
-	public static final Block CHEESE_BLOCK = register(new BlockCreator.Builder("cheese_block", new Block(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.YELLOW).hardness(0.5f).sounds(BlockSoundGroup.SNOW))).flammability(60, 60).itemGroup(ItemGroup.FOOD));
 	public static final Block CHOCOLATE_CAKE = register(new BlockCreator.Builder("chocolate_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.FOOD));
 	public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = register(new BlockCreator.Builder("minecraft_10th_anniversary_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.FOOD));
 
 	public static final MCBlockPack BALLOONS = register(new MCBlockPack.Builder("", MubbleBlockGetter.BALLOON, FabricBlockSettings.of(Material.WOOL).hardness(0F).sounds(BlockSoundGroup.WOOL).nonOpaque()));
 
 	public static final Block UNSTABLE_STONE = register(new BlockCreator.Builder("unstable_stone", new UnstableBlock(FabricBlockSettings.copy(Blocks.STONE).strength(0.1F, 0.0F))).itemGroup(ItemGroup.BUILDING_BLOCKS));
-	public static final Block FLUID_TANK = register(new BlockCreator.Builder("fluid_tank", new FluidTankBlock(FabricBlockSettings.copy(Blocks.OBSIDIAN).nonOpaque())).itemGroup(ItemGroup.REDSTONE).render(BlockCreator.Render.CUTOUT_MIPPED));
 	public static final Block PLACER = register(new BlockCreator.Builder("placer", new PlacerBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F))).itemGroup(ItemGroup.REDSTONE));
 	public static final BlockEntityType<DispenserBlockEntity> PLACER_ENTITY = register(new BlockEntityCreator.Builder<>("placer", BlockEntityType.Builder.create(PlacerBlockEntity::new, MubbleBlocks.PLACER)));
 	public static final Block TIMESWAP_TABLE = register(new BlockCreator.Builder("timeswap_table", new TimeswapTableBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F))).itemGroup(ItemGroup.DECORATIONS));
 	public static final ScreenHandlerType<TimeswapTableScreenHandler> TIMESWAP_TABLE_SCREEN_HANDLER = register(new ScreenHandlerCreator.Builder<>("timeswap_table", TimeswapTableScreenHandler::new));
-
-	public static final Block PERMAROCK = register(new BlockCreator.Builder("permarock", DefaultBlockGetter.CUBE, FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.4F)));
-	public static final MSBlockPack PERMAFROST_BRICKS = register(new MSBlockPack.Builder("permafrost_bricks", FabricBlockSettings.copyOf(Blocks.NETHER_BRICKS), DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.FENCE));
-	public static final MSBlockPack BLUE_PERMAFROST_BRICKS = register(new MSBlockPack.Builder("blue_permafrost_bricks", FabricBlockSettings.copyOf(Blocks.RED_NETHER_BRICKS), DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.WALL));
-	public static final Block PERMAFROST_BISMUTH_ORE = register(new BlockCreator.Builder("permafrost_bismuth_ore", DefaultBlockGetter.CUBE, FabricBlockSettings.of(Material.STONE, MaterialColor.ICE).hardness(0.3F)));
-	public static final Block FROZEN_OBSIDIAN = register(new BlockCreator.Builder("frozen_obsidian", DefaultBlockGetter.CUBE, FabricBlockSettings.of(Material.STONE, MaterialColor.BLACK).strength(75.0F, 1800.0F)));
 
 	/* SUPER MARIO (MAKER) */
 	public static final Block SMB_QUESTION_BLOCK = register(new BlockCreator.Builder("smb", MubbleBlockGetter.QUESTION_BLOCK, Settings.QUESTION_BLOCK));

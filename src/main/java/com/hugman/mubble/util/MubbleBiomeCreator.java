@@ -59,10 +59,9 @@ public class MubbleBiomeCreator {
 
 	public static Biome createPressGarden() {
 		SpawnSettings.Builder spawnBuilder = new SpawnSettings.Builder();
-		DefaultBiomeFeatures.addFarmAnimals(spawnBuilder);
-		DefaultBiomeFeatures.addBatsAndMonsters(spawnBuilder);
+		DefaultBiomeFeatures.addSnowyMobs(spawnBuilder);
 		GenerationSettings.Builder generationBuilder = new GenerationSettings.Builder().surfaceBuilder(ConfiguredSurfaceBuilders.GRASS);
-		generationBuilder.structureFeature(ConfiguredStructureFeatures.MANSION);
+		generationBuilder.structureFeature(ConfiguredStructureFeatures.IGLOO);
 		DefaultBiomeFeatures.addDefaultUndergroundStructures(generationBuilder);
 		generationBuilder.structureFeature(ConfiguredStructureFeatures.RUINED_PORTAL);
 		DefaultBiomeFeatures.addLandCarvers(generationBuilder);
@@ -84,17 +83,17 @@ public class MubbleBiomeCreator {
 		effectBuilder.waterColor(4020182);
 		effectBuilder.waterFogColor(329011);
 		effectBuilder.fogColor(12638463);
-		effectBuilder.skyColor(getSkyColor(0.3f));
+		effectBuilder.skyColor(getSkyColor(0.0f));
 		effectBuilder.grassColor(15594485);
 		effectBuilder.foliageColor(15594485);
 		effectBuilder.moodSound(BiomeMoodSound.CAVE);
 		Biome.Builder builder = new Biome.Builder();
 		builder.precipitation(Biome.Precipitation.SNOW);
-		builder.category(Biome.Category.TAIGA);
+		builder.category(Biome.Category.ICY);
 		builder.depth(0.2f);
 		builder.scale(0.2f);
-		builder.temperature(0.3f);
-		builder.downfall(0.4f);
+		builder.temperature(0.0f);
+		builder.downfall(0.6f);
 		builder.effects(effectBuilder.build());
 		builder.spawnSettings(spawnBuilder.build());
 		builder.generationSettings(generationBuilder.build()).build();

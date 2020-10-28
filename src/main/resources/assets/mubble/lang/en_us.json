@@ -557,5 +557,11 @@
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "That's for you, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! I thought you already had this on your head, §6Evan§r!",
-	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?"
+	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?",
+
+	"comment": "CONFIG",
+	"text.autoconfig.mubble.title": "Mubble Configuration",
+	"text.autoconfig.mubble.category.biomes": "Biomes",
+	"text.autoconfig.mubble.option.biomes.press_garden": "Generate Press Gardens",
+	"text.autoconfig.mubble.option.biomes.scarlet_forest": "Generate Scarlet Forests"
 }
