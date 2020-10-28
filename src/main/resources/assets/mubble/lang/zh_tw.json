@@ -47,7 +47,6 @@
 	"//block.mubble.gray_cloud_block": "<newline>",
 	"//block.mubble.black_cloud_block": "<newline>",
 
-	"//block.mubble.cheese_block": "<newline>",
 	"//block.mubble.chocolate_cake": "Chocolate Cake",
 	"//block.mubble.minecraft_10th_anniversary_cake": "Minecraft's 10th Anniversary Cake",
 
@@ -69,21 +68,8 @@
 	"//block.mubble.black_balloon": "<newline>",
 
 	"//block.mubble.unstable_stone": "Unstable Stone",
-	"//block.mubble.fluid_tank": "Fluid Tank",
 	"//block.mubble.placer": "Placer",
 	"//block.mubble.timeswap_table": "Timeswap Table",
-
-	"//block.mubble.permarock": "Permarock",
-	"//block.mubble.permafrost_bricks": "Permafrost Bricks",
-	"//block.mubble.permafrost_brick_stairs": "Permafrost Brick Stairs",
-	"//block.mubble.permafrost_brick_slab": "Permafrost Brick Slab",
-	"//block.mubble.permafrost_brick_fence": "Permafrost Brick Fence",
-	"//block.mubble.blue_permafrost_bricks": "Blue Permafrost Bricks",
-	"//block.mubble.blue_permafrost_brick_stairs": "Blue Permafrost Brick Stairs",
-	"//block.mubble.blue_permafrost_brick_slab": "Blue Permafrost Brick Slab",
-	"//block.mubble.blue_permafrost_brick_wall": "Blue Permafrost Brick Wall",
-	"//block.mubble.permafrost_bismuth_ore": "Permafrost Bismuth Ore",
-	"//block.mubble.frozen_obsidian": "Frozen Obsidian",
 
 	"//block.mubble.smb_question_block": "? Block (SMB)",
 	"//block.mubble.smb3_question_block": "? Block (SMB3)",
@@ -338,17 +324,7 @@
 
 	"comment": "ITEMS",
 	"//item.mubble.baguette": "Baguette",
-	"//item.mubble.bismuth_dust": "Bismuth Dust",
-	"//item.mubble.crystallized_bismuth": "Crystallized Bismuth",
-	"//item.mubble.bismuth_sword": "Bismuth Sword",
-	"//item.mubble.bismuth_shovel": "Bismuth Shovel",
-	"//item.mubble.bismuth_pickaxe": "Bismuth Pickaxe",
-	"//item.mubble.bismuth_axe": "Bismuth Axe",
-	"//item.mubble.bismuth_hoe": "Bismuth Hoe",
-	"//item.mubble.diamond_stick": "Diamond Stick",
-	"//item.mubble.permafrost_brick": "Permafrost Brick",
 	"item.mubble.bandage": "繃帶",
-	"item.mubble.wheat_flour": "小麥麵粉",
 	"item.mubble.caramel_cube": "焦糖塊",
 	"item.mubble.crepe": "可麗餅",
 	"//item.mubble.sugar_crepe": "Sugar Crêpe",
@@ -357,9 +333,6 @@
 	"//item.mubble.honey_crepe": "Honey Crêpe",
 	"//item.mubble.sweet_berry_crepe": "Sweet Berry Crêpe",
 	"item.mubble.candy_cane": "拐杖糖",
-	"//item.mubble.cheese": "<newline>",
-	"//item.mubble.duck": "Duck",
-	"//item.mubble.cooked_duck": "Cooked Duck",
 	"//item.mubble.jingle_bells": "Jingle Bells",
 	"//item.mubble.small_bulb": "Small Bulb",
 	"//item.mubble.totem_of_ascending": "<newline>",
@@ -400,7 +373,6 @@
 	"//item.mubble.magenta_lightsaber": "Magenta Lightsaber",
 	"//item.mubble.pink_lightsaber": "Pink Lightsaber",
 
-	"//item.mubble.duck_spawn_egg": "Duck Spawn Egg",
 	"//item.mubble.chincho_spawn_egg": "Chincho Spawn Egg",
 	"//item.mubble.goomba_spawn_egg": "Goomba Spawn Egg",
 	"//item.mubble.toad_spawn_egg": "Toad Spawn Egg",
@@ -470,7 +442,6 @@
 	"//container.mubble.present": "Present",
 
 	"comment": "ENTITIES",
-	"//entity.mubble.duck": "Duck",
 	"//entity.mubble.custom_tnt": "Custom TNT",
 	"//entity.mubble.flying_block": "Flying Block",
 	"entity.mubble.chincho": "欽喬",
@@ -524,9 +495,6 @@
 	"//subtitles.mubble.entity.chincho.ambient": "Chincho talks",
 	"//subtitles.mubble.entity.chincho.hurt": "Chincho hurts",
 	"//subtitles.mubble.entity.chincho.death": "Chincho dies",
-	"//subtitles.mubble.entity.duck.ambient": "Duck quacks",
-	"//subtitles.mubble.entity.duck.hurt": "Duck hurts",
-	"//subtitles.mubble.entity.duck.death": "Duck dies",
 	"//subtitles.mubble.entity.fireball.throw": "Fireball flies",
 	"//subtitles.mubble.entity.iceball.throw": "Iceball flies",
 	"//subtitles.mubble.entity.kirby_ball.throw": "Kirby Ball flies",
@@ -564,5 +532,11 @@
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "That's for you, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! I thought you already had this on your head, §6Evan§r!",
-	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?"
+	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?",
+
+	"comment": "CONFIG",
+	"//text.autoconfig.mubble.title": "Mubble Configuration",
+	"//text.autoconfig.mubble.category.biomes": "Biomes",
+	"//text.autoconfig.mubble.option.biomes.press_garden": "Generate Press Gardens",
+	"//text.autoconfig.mubble.option.biomes.scarlet_forest": "Generate Scarlet Forests"
 }

@@ -47,7 +47,6 @@
 	"block.mubble.gray_cloud_block": "Grey Cloud Block",
 	"block.mubble.black_cloud_block": "Black Cloud Block",
 
-	"block.mubble.cheese_block": "Cheese Block",
 	"block.mubble.chocolate_cake": "Chocolate Cake",
 	"block.mubble.minecraft_10th_anniversary_cake": "Minecraft's 10th Anniversary Cake",
 
@@ -69,21 +68,8 @@
 	"block.mubble.black_balloon": "Black Balloon",
 
 	"block.mubble.unstable_stone": "Unstable Stone",
-	"block.mubble.fluid_tank": "Fluid Tank",
 	"block.mubble.placer": "Placer",
 	"block.mubble.timeswap_table": "Timeswap Table",
-
-	"block.mubble.permarock": "Permarock",
-	"block.mubble.permafrost_bricks": "Permafrost Bricks",
-	"block.mubble.permafrost_brick_stairs": "Permafrost Brick Stairs",
-	"block.mubble.permafrost_brick_slab": "Permafrost Brick Slab",
-	"block.mubble.permafrost_brick_fence": "Permafrost Brick Fence",
-	"block.mubble.blue_permafrost_bricks": "Blue Permafrost Bricks",
-	"block.mubble.blue_permafrost_brick_stairs": "Blue Permafrost Brick Stairs",
-	"block.mubble.blue_permafrost_brick_slab": "Blue Permafrost Brick Slab",
-	"block.mubble.blue_permafrost_brick_wall": "Blue Permafrost Brick Wall",
-	"block.mubble.permafrost_bismuth_ore": "Permafrost Bismuth Ore",
-	"block.mubble.frozen_obsidian": "Frozen Obsidian",
 
 	"block.mubble.smb_question_block": "? Block (SMB)",
 	"block.mubble.smb3_question_block": "? Block (SMB3)",
@@ -338,17 +324,7 @@
 
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
-	"item.mubble.bismuth_dust": "Bismuth Dust",
-	"item.mubble.crystallized_bismuth": "Crystallized Bismuth",
-	"item.mubble.bismuth_sword": "Bismuth Sword",
-	"item.mubble.bismuth_shovel": "Bismuth Shovel",
-	"item.mubble.bismuth_pickaxe": "Bismuth Pickaxe",
-	"item.mubble.bismuth_axe": "Bismuth Axe",
-	"item.mubble.bismuth_hoe": "Bismuth Hoe",
-	"item.mubble.diamond_stick": "Diamond Stick",
-	"item.mubble.permafrost_brick": "Permafrost Brick",
 	"item.mubble.bandage": "Bandage",
-	"item.mubble.wheat_flour": "Wheat Flour",
 	"item.mubble.caramel_cube": "Caramel Cube",
 	"item.mubble.crepe": "Crêpe",
 	"item.mubble.sugar_crepe": "Sugar Crêpe",
@@ -357,7 +333,6 @@
 	"item.mubble.honey_crepe": "Honey Crêpe",
 	"item.mubble.sweet_berry_crepe": "Sweet Berry Crêpe",
 	"item.mubble.candy_cane": "Candy Cane",
-	"item.mubble.cheese": "Cheese",
 	"item.mubble.jingle_bells": "Jingle Bells",
 	"item.mubble.small_bulb": "Small Bulb",
 	"item.mubble.totem_of_ascending": "Totem of Ascending",
@@ -557,5 +532,11 @@
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "That's for you, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! I thought you already had this on your head, §6Evan§r!",
-	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?"
+	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?",
+
+	"comment": "CONFIG",
+	"//text.autoconfig.mubble.title": "Mubble Configuration",
+	"//text.autoconfig.mubble.category.biomes": "Biomes",
+	"//text.autoconfig.mubble.option.biomes.press_garden": "Generate Press Gardens",
+	"//text.autoconfig.mubble.option.biomes.scarlet_forest": "Generate Scarlet Forests"
 }

@@ -47,7 +47,6 @@
 	"block.mubble.gray_cloud_block": "Grijzewolkblok",
 	"block.mubble.black_cloud_block": "Zwartewolkblok",
 
-	"block.mubble.cheese_block": "Kaasblok",
 	"block.mubble.chocolate_cake": "Chocolade taart",
 	"block.mubble.minecraft_10th_anniversary_cake": "Minecraft's tiende jubileum's taart",
 
@@ -69,21 +68,8 @@
 	"block.mubble.black_balloon": "Zwarte ballon",
 
 	"block.mubble.unstable_stone": "Unstabiel steen",
-	"block.mubble.fluid_tank": "Vloeistoftank",
 	"block.mubble.placer": "Plaatser",
 	"block.mubble.timeswap_table": "Tijdwisselstafel",
-
-	"block.mubble.permarock": "Permasteen",
-	"block.mubble.permafrost_bricks": "Permafrostbakstenen",
-	"block.mubble.permafrost_brick_stairs": "Permafrostbakstenen trap",
-	"block.mubble.permafrost_brick_slab": "Permafrostbakstenen plaat",
-	"block.mubble.permafrost_brick_fence": "Permafrostbakstenen hek",
-	"block.mubble.blue_permafrost_bricks": "Blauwe permafrostbakstenen",
-	"block.mubble.blue_permafrost_brick_stairs": "Blauwe permafrostbakstenen trap",
-	"block.mubble.blue_permafrost_brick_slab": "Blauwe permafrostbakstenen plaat",
-	"block.mubble.blue_permafrost_brick_wall": "Blauwe permafrostbakstenenmuur",
-	"block.mubble.permafrost_bismuth_ore": "Permafrost bismutherts",
-	"block.mubble.frozen_obsidian": "Bevroren obsidiaan",
 
 	"block.mubble.smb_question_block": "?-blok (SMB)",
 	"block.mubble.smb3_question_block": "?-blok (SMB3)",
@@ -338,17 +324,7 @@
 
 	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
-	"item.mubble.bismuth_dust": "Bismuthstof",
-	"item.mubble.crystallized_bismuth": "Gekristalliseerde bismuth",
-	"item.mubble.bismuth_sword": "Bismuth zwaart",
-	"item.mubble.bismuth_shovel": "Bismuth schep",
-	"item.mubble.bismuth_pickaxe": "Bismuth houweel",
-	"item.mubble.bismuth_axe": "Bismuth bijl",
-	"item.mubble.bismuth_hoe": "Bismuth schoffel",
-	"item.mubble.diamond_stick": "Diamante stok",
-	"item.mubble.permafrost_brick": "Permafrostbaksteen",
 	"item.mubble.bandage": "Verband",
-	"item.mubble.wheat_flour": "Tarwemeel",
 	"item.mubble.caramel_cube": "Karamel kubus",
 	"item.mubble.crepe": "Crêpe",
 	"item.mubble.sugar_crepe": "suiker crêpe",
@@ -357,7 +333,6 @@
 	"item.mubble.honey_crepe": "Honing crêpe",
 	"item.mubble.sweet_berry_crepe": "Zoetebessen crêpe",
 	"item.mubble.candy_cane": "Zuurstok",
-	"item.mubble.cheese": "Kaas",
 	"item.mubble.jingle_bells": "Jingle bellen",
 	"item.mubble.small_bulb": "Kleine lamp",
 	"item.mubble.totem_of_ascending": "Totem der opstijging",
@@ -557,5 +532,11 @@
 	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "Dat is voor jou, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! Ik dacht dat je dit al op je hoofd had, §6Evan§r!",
-	"item.mubble.mayro_cap.secret_status": "Kom op, jij bent de laatste die dit nodig heeft, of niet, \"§6Sossie§r\"?"
+	"item.mubble.mayro_cap.secret_status": "Kom op, jij bent de laatste die dit nodig heeft, of niet, \"§6Sossie§r\"?",
+
+	"comment": "CONFIG",
+	"//text.autoconfig.mubble.title": "Mubble Configuration",
+	"//text.autoconfig.mubble.category.biomes": "Biomes",
+	"//text.autoconfig.mubble.option.biomes.press_garden": "Generate Press Gardens",
+	"//text.autoconfig.mubble.option.biomes.scarlet_forest": "Generate Scarlet Forests"
 }
