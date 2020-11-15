@@ -27,6 +27,14 @@ public class ChinchoEntity extends HostileEntity {
 		super(type, worldIn);
 	}
 
+	public static Builder createChinchoAttributes() {
+		return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3D).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 25.0D).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
+	}
+
+	public static boolean canSpawn(EntityType<ChinchoEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand) {
+		return world.getDifficulty() != Difficulty.PEACEFUL;
+	}
+
 	@Override
 	protected void initGoals() {
 		this.goalSelector.add(0, new SwimGoal(this));
@@ -39,10 +47,6 @@ public class ChinchoEntity extends HostileEntity {
 		this.targetSelector.add(1, new RevengeGoal(this, ChinchoEntity.class));
 		this.targetSelector.add(3, new FollowTargetGoal<>(this, PlayerEntity.class, true));
 		this.targetSelector.add(3, new FollowTargetGoal<>(this, ToadEntity.class, true));
-	}
-
-	public static Builder createChinchoAttributes() {
-		return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 12.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.3D).add(EntityAttributes.GENERIC_FOLLOW_RANGE, 25.0D).add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0D);
 	}
 
 	@Override
@@ -92,9 +96,5 @@ public class ChinchoEntity extends HostileEntity {
 	@Override
 	protected SoundEvent getDeathSound() {
 		return MubbleSounds.ENTITY_CHINCHO_DEATH;
-	}
-
-	public static boolean canSpawn(EntityType<ChinchoEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand) {
-		return world.getDifficulty() != Difficulty.PEACEFUL;
 	}
 }

@@ -11,13 +11,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.SoundEvents;
 
 public class MubbleCostumes extends MubblePack {
-	public static void init() {
-
-	}
-
 	/* MUBBLE */
 	public static final Item HEADPHONES = register(new ItemCreator.Builder("headphones", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
-
 	public static final Item WHITE_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("white_virtual_googles", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.WHITE_RETRO)));
 	public static final Item LIGHT_GRAY_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("light_gray_virtual_googles", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.LIGHT_GRAY_RETRO)));
 	public static final Item GRAY_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("gray_virtual_googles", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.GRAY_RETRO)));
@@ -34,9 +29,7 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item PURPLE_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("purple_virtual_googles", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.PURPLE_RETRO)));
 	public static final Item MAGENTA_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("magenta_virtual_googles", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.MAGENTA_RETRO)));
 	public static final Item PINK_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("pink_virtual_googles", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.PINK_RETRO)));
-
 	public static final Item CHRISTMAS_HAT = register(new ItemCreator.Builder("christmas_hat", new ChristmasHatCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-
 	/* SUPER MARIO */
 	public static final Item CAPPY = register(new ItemCreator.Builder("cappy", new CappyCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
 	public static final Item LUIGI_CAP = register(new ItemCreator.Builder("luigi_cap", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 0), new StatusEffectInstance(StatusEffects.SPEED, 5, 0))));
@@ -55,24 +48,18 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item MARIO_WEDDING_HAT = register(new ItemCreator.Builder("mario_wedding_hat", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
 	public static final Item BOO_HAT = register(new ItemCreator.Builder("boo_hat", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
 	public static final Item BROQUE_MONSIEUR_HEAD = register(new ItemCreator.Builder("broque_monsieur_head", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
-
 	/* KIRBY */
 	public static final Item BANDANA = register(new ItemCreator.Builder("bandana", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-
 	/* POKEMON */
 	public static final Item PIKACHU_EARS = register(new ItemCreator.Builder("pikachu_ears", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
 	public static final Item SNORLAX_HAT = register(new ItemCreator.Builder("snorlax_hat", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-
 	/* PROFESSOR LAYTON */
 	public static final Item TOP_HAT = register(new ItemCreator.Builder("top_hat", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-
 	/* UNDERTALE / DELTARUNE */
 	public static final Item RALSEI_HAT = register(new ItemCreator.Builder("ralsei_hat", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
 	public static final Item KING_ROUND_MASK = register(new ItemCreator.Builder("king_round_mask", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-
 	/* A HAT IN TIME */
 	public static final Item KID_HAT = register(new ItemCreator.Builder("kid_hat", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-
 	/* PUYO PUYO */
 	public static final Item RED_PUYO = register(new ItemCreator.Builder("red_puyo", new BlockCostume(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.RED_PUYO)));
 	public static final Item YELLOW_PUYO = register(new ItemCreator.Builder("yellow_puyo", new BlockCostume(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.YELLOW_PUYO)));
@@ -85,17 +72,18 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item POINT_PUYO = register(new ItemCreator.Builder("point_puyo", new BlockCostume(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlot.HEAD, MubbleBlocks.POINT_PUYO)));
 	public static final Item HARD_PUYO = register(new ItemCreator.Builder("hard_puyo", new BlockCostume(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlot.HEAD, MubbleBlocks.HARD_PUYO)));
 	public static final Item IRON_PUYO = register(new ItemCreator.Builder("iron_puyo", new BlockCostume(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_METAL_PLACE, EquipmentSlot.HEAD, MubbleBlocks.IRON_PUYO)));
-
 	/* BALDI'S BASICS IN EDUCATION AND LEARNING */
 	public static final Item BALDI_HEAD = register(new ItemCreator.Builder("baldi_head", new HeadCostume(Settings.COSTUME, SoundEvents.ENTITY_PARROT_IMITATE_VEX)));
-
 	/* PETSCOP */
 	public static final Item GUARDIAN_MASK = register(new ItemCreator.Builder("guardian_mask", new GuardianMaskCostume(Settings.COSTUME)));
-
 	/* YOUTUBE */
 	public static final Item MAYRO_CAP = register(new ItemCreator.Builder("mayro_cap", new MayroCapCostume(Settings.COSTUME)));
 	public static final Item KORETATO_BLOCK = register(new ItemCreator.Builder("koretato_block", new BlockCostume(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SNOW_PLACE, EquipmentSlot.HEAD, MubbleBlocks.KORETATO_BLOCK)));
 	public static final Item NOTEBLOCK_HEAD = register(new ItemCreator.Builder("noteblock_head", new HeadCostume(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
+
+	public static void init() {
+
+	}
 
 	public static class Settings {
 		protected static final Item.Settings COSTUME = new Item.Settings().group(MubbleItemGroups.COSTUMES_GROUP).maxCount(1);

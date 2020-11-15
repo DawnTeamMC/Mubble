@@ -18,6 +18,12 @@ public class FlyingBlock extends Block {
 		super(builder);
 	}
 
+	public static boolean canFlyThrough(BlockState state) {
+		Block block = state.getBlock();
+		Material material = state.getMaterial();
+		return block instanceof AirBlock || block == Blocks.FIRE || block.isIn(MubbleTags.Blocks.CLOUD_BLOCKS) || material.isLiquid() || material.isReplaceable();
+	}
+
 	@Override
 	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
 		world.getBlockTickScheduler().schedule(pos, this, this.getFlyDelay());
@@ -43,12 +49,6 @@ public class FlyingBlock extends Block {
 
 	protected int getFlyDelay() {
 		return 2;
-	}
-
-	public static boolean canFlyThrough(BlockState state) {
-		Block block = state.getBlock();
-		Material material = state.getMaterial();
-		return block instanceof AirBlock || block == Blocks.FIRE || block.isIn(MubbleTags.Blocks.CLOUD_BLOCKS) || material.isLiquid() || material.isReplaceable();
 	}
 
 	public void onLanding(World world, BlockPos pos, BlockState flyingBlockState, BlockState currentStateInPos, FlyingBlockEntity flyingBlockEntity) {

@@ -1,9 +1,7 @@
 {
-	"comment": "CREATIVE TABS",
 	"itemGroup.mubble.costumes": "Costumes",
 	"itemGroup.mubble.instruments": "Instruments",
 
-	"comment": "BLOCKS",
 	"block.mubble.red_christmas_bauble": "Red Christmas Bauble",
 	"block.mubble.orange_christmas_bauble": "Orange Christmas Bauble",
 	"block.mubble.yellow_christmas_bauble": "Yellow Christmas Bauble",
@@ -322,7 +320,6 @@
 	"block.mubble.potted_scarlet_orchid": "Potted Scarlet Orchid",
 	"block.mubble.potted_potato_flower": "Potted Potato Flower",
 
-	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.bandage": "Bandage",
 	"item.mubble.caramel_cube": "Caramel Cube",
@@ -377,7 +374,6 @@
 	"item.mubble.goomba_spawn_egg": "Goomba Spawn Egg",
 	"item.mubble.toad_spawn_egg": "Toad Spawn Egg",
 
-	"comment": "COSTUMES",
 	"item.mubble.headphones": "Headphones",
 
 	"item.mubble.white_virtual_googles": "White Virtual Googles",
@@ -436,12 +432,10 @@
 	"item.mubble.mayro_cap": "Mayro's Cap",
 	"item.mubble.noteblock_head": "NoteBlock's Head",
 
-	"comment": "CONTAINERS",
 	"container.mubble.placer": "Placer",
 	"container.mubble.timeswap_table": "Timeswap Table",
 	"container.mubble.present": "Present",
 
-	"comment": "ENTITIES",
 	"entity.mubble.custom_tnt": "Custom TNT",
 	"entity.mubble.flying_block": "Flying Block",
 	"entity.mubble.chincho": "Chincho",
@@ -474,11 +468,9 @@
 	"entity.mubble.iceball": "Iceball",
 	"entity.mubble.kirby_ball": "Kirby Ball",
 
-	"comment": "BIOMES",
 	"biome.mubble.press_garden": "Press Garden",
 	"biome.mubble.scarlet_forest": "Scarlet Forest",
 
-	"comment": "SUBTITLES",
 	"subtitles.mubble.block.question_block.loot.power_up": "? Block drops power up",
 	"subtitles.mubble.block.question_block.loot.coin": "? Block drops coin",
 	"subtitles.mubble.block.note_block.jump": "Note Block used",
@@ -505,7 +497,6 @@
 	"subtitles.mubble.entity.toad.hurt": "Toad hurts",
 	"subtitles.mubble.entity.toad.death": "Toad dies",
 
-	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "A grand new journey",
 	"advancements.mubble.get_coin.title": "It's mine! Gold!",
@@ -523,18 +514,15 @@
 	"advancements.mubble.get_tetris_block.title": "It's All Connected",
 	"advancements.mubble.get_tetris_block.description": "Get your hand on a Tetris Block",
 
-	"comment": "STATS",
 	"stat.mubble.inspect_placer": "Placers Searched",
 	"stat.mubble.interact_with_timeswap_table": "Interactions with Timeswap Table",
 	"stat.mubble.open_present": "Presents Opened",
 	"stat.mubble.talked_to_toad": "Talked to Toads",
 
-	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "That's for you, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! I thought you already had this on your head, §6Evan§r!",
 	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?",
 
-	"comment": "CONFIG",
 	"text.autoconfig.mubble.title": "Mubble Configuration",
 	"text.autoconfig.mubble.category.biomes": "Biomes",
 	"text.autoconfig.mubble.option.biomes.press_garden": "Generate Press Gardens",

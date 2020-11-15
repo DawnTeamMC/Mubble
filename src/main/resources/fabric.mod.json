@@ -5,7 +5,8 @@
 	"icon": "assets/mubble/textures/logo.png",
 	"description": "Expand your world with features from the Nintendo universe, and way more.",
 	"authors": [
-		"Hugman"
+		"Hugman",
+		"Dawn Team"
 	],
 	"contributors": [
 		"Yanis48"
@@ -31,6 +32,7 @@
 		"mubble.mixins.json"
 	],
 	"depends": {
+		"minecraft": "*",
 		"fabric": "*",
 		"dawn": "*"
 	},

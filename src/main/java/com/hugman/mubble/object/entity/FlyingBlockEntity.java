@@ -44,15 +44,15 @@ import java.util.Iterator;
 import java.util.List;
 
 public class FlyingBlockEntity extends Entity {
-	private BlockState block;
+	protected static final TrackedData<BlockPos> BLOCK_POS = DataTracker.registerData(FlyingBlockEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
+	private final float flyHurtAmount;
 	public int timeFlying;
 	public boolean dropItem;
+	public CompoundTag blockEntityData;
+	private BlockState block;
 	private boolean destroyedOnLanding;
 	private boolean hurtEntities;
 	private int flyHurtMax;
-	private final float flyHurtAmount;
-	public CompoundTag blockEntityData;
-	protected static final TrackedData<BlockPos> BLOCK_POS = DataTracker.registerData(FlyingBlockEntity.class, TrackedDataHandlerRegistry.BLOCK_POS);
 
 	public FlyingBlockEntity(EntityType<? extends FlyingBlockEntity> type, World world) {
 		super(type, world);

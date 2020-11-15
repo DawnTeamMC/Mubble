@@ -4,10 +4,6 @@ import com.hugman.dawn.api.creator.SoundCreator;
 import net.minecraft.sound.SoundEvent;
 
 public class MubbleSounds extends MubblePack {
-	public static void init() {
-
-	}
-
 	public static final SoundEvent BLOCK_PRESENT_CLOSE = register(new SoundCreator.Builder("block.present.close"));
 	public static final SoundEvent BLOCK_PRESENT_OPEN = register(new SoundCreator.Builder("block.present.open"));
 	public static final SoundEvent BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB = register(new SoundCreator.Builder("block.question_block.loot.power_up.smb"));
@@ -53,13 +49,11 @@ public class MubbleSounds extends MubblePack {
 	public static final SoundEvent BLOCK_DREAM_BLOCK_HIT = register(new SoundCreator.Builder("block.dream_block.hit"));
 	public static final SoundEvent BLOCK_DREAM_BLOCK_STEP = register(new SoundCreator.Builder("block.dream_block.step"));
 	public static final SoundEvent BLOCK_SPRING_TRIGGER = register(new SoundCreator.Builder("block.spring.trigger"));
-
 	public static final SoundEvent ITEM_CAPE_FEATHER_USE = register(new SoundCreator.Builder("item.cape_feather.use"));
 	public static final SoundEvent ITEM_JINGLE_BELLS_USE = register(new SoundCreator.Builder("item.jingle_bells.use"));
 	public static final SoundEvent ITEM_SMASH_BALL_USE = register(new SoundCreator.Builder("item.smash_ball.use"));
 	public static final SoundEvent ITEM_SUPER_MUSHROOM_CONSUME = register(new SoundCreator.Builder("item.super_mushroom.consume"));
 	public static final SoundEvent ITEM_SUPER_STAR_THEME = register(new SoundCreator.Builder("item.super_star.theme"));
-
 	public static final SoundEvent ITEM_LIGHTSABER_BLOCK = register(new SoundCreator.Builder("item.lightsaber.block"));
 	public static final SoundEvent ITEM_LIGHTSABER_HIT = register(new SoundCreator.Builder("item.lightsaber.hit"));
 	public static final SoundEvent ITEM_LIGHTSABER_IDLE = register(new SoundCreator.Builder("item.lightsaber.idle"));
@@ -69,14 +63,12 @@ public class MubbleSounds extends MubblePack {
 	public static final SoundEvent ITEM_LIGHTSABER_SWIPE = register(new SoundCreator.Builder("item.lightsaber.swipe"));
 	public static final SoundEvent ITEM_LIGHTSABER_THROW_FAR = register(new SoundCreator.Builder("item.lightsaber.throw.far"));
 	public static final SoundEvent ITEM_LIGHTSABER_THROW_NEAR = register(new SoundCreator.Builder("item.lightsaber.throw.near"));
-
 	public static final SoundEvent COSTUME_CAPPY_AMBIENT = register(new SoundCreator.Builder("costume.cappy.ambient"));
 	public static final SoundEvent COSTUME_CAPPY_AMBIENT_NETHER = register(new SoundCreator.Builder("costume.cappy.ambient.nether"));
 	public static final SoundEvent COSTUME_CAPPY_EQUIP = register(new SoundCreator.Builder("costume.cappy.equip"));
 	public static final SoundEvent COSTUME_CAPPY_HAPPY = register(new SoundCreator.Builder("costume.cappy.happy"));
 	public static final SoundEvent COSTUME_CAPPY_HELP = register(new SoundCreator.Builder("costume.cappy.help"));
 	public static final SoundEvent COSTUME_CAPPY_HELP_WATER = register(new SoundCreator.Builder("costume.cappy.help.water"));
-
 	public static final SoundEvent ENTITY_CHINCHO_AMBIENT = register(new SoundCreator.Builder("entity.chincho.ambient"));
 	public static final SoundEvent ENTITY_CHINCHO_HURT = register(new SoundCreator.Builder("entity.chincho.hurt"));
 	public static final SoundEvent ENTITY_CHINCHO_DEATH = register(new SoundCreator.Builder("entity.chincho.death"));
@@ -103,6 +95,9 @@ public class MubbleSounds extends MubblePack {
 	public static final SoundEvent ENTITY_GOOMBA_HURT = register(new SoundCreator.Builder("entity.goomba.hurt"));
 	public static final SoundEvent ENTITY_GOOMBA_DEATH = register(new SoundCreator.Builder("entity.goomba.death"));
 	public static final SoundEvent ENTITY_PUFFERFISH_AEUGH = register(new SoundCreator.Builder("entity.pufferfish.aeugh"));
-
 	public static final SoundEvent UI_TIMESWAP_TABLE_TAKE_RESULT = register(new SoundCreator.Builder("ui.timeswap_table.take_result"));
+
+	public static void init() {
+
+	}
 }

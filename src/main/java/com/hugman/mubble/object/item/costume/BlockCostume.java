@@ -25,6 +25,12 @@ import net.minecraft.util.math.BlockPointer;
 import net.minecraft.world.World;
 
 public class BlockCostume extends BlockItem {
+	public static final DispenserBehavior DISPENSER_BEHAVIOR = new ItemDispenserBehavior() {
+		@Override
+		public ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
+			return ArmorItem.dispenseArmor(source, stack) ? stack : super.dispenseSilently(source, stack);
+		}
+	};
 	protected final EquipmentSlot armorType;
 	protected final SoundEvent sound;
 	protected final Identifier shader;
@@ -43,6 +49,10 @@ public class BlockCostume extends BlockItem {
 		this.armorType = armorType;
 		this.shader = shader;
 		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
+	}
+
+	public static boolean isUsable(ItemStack stack) {
+		return stack.getDamage() < stack.getMaxDamage() - 1;
 	}
 
 	@Override
@@ -67,13 +77,6 @@ public class BlockCostume extends BlockItem {
 		}
 	}
 
-	public static final DispenserBehavior DISPENSER_BEHAVIOR = new ItemDispenserBehavior() {
-		@Override
-		public ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
-			return ArmorItem.dispenseArmor(source, stack) ? stack : super.dispenseSilently(source, stack);
-		}
-	};
-
 	public EquipmentSlot getArmorType() {
 		return this.armorType;
 	}
@@ -95,9 +98,5 @@ public class BlockCostume extends BlockItem {
 
 	public Identifier getShader() {
 		return this.shader;
-	}
-
-	public static boolean isUsable(ItemStack stack) {
-		return stack.getDamage() < stack.getMaxDamage() - 1;
 	}
 }

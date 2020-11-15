@@ -54,6 +54,14 @@ public class ToadEntity extends MerchantEntity {
 		super(type, worldIn);
 	}
 
+	public static Builder createToadAttributes() {
+		return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 9.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
+	}
+
+	public static boolean canSpawn(EntityType<ToadEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand) {
+		return true;
+	}
+
 	@Override
 	public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
 		ToadEntity.Type type = ToadEntity.Type.getTypeByIndex(this.world.random.nextInt(16));
@@ -82,10 +90,6 @@ public class ToadEntity extends MerchantEntity {
 		this.goalSelector.add(8, new WanderAroundFarGoal(this, 1.45D));
 		this.goalSelector.add(9, new StopAndLookAtEntityGoal(this, PlayerEntity.class, 3.0F, 1.0F));
 		this.goalSelector.add(10, new LookAtEntityGoal(this, MobEntity.class, 8.0F));
-	}
-
-	public static Builder createToadAttributes() {
-		return MobEntity.createMobAttributes().add(EntityAttributes.GENERIC_MAX_HEALTH, 9.0D).add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25D);
 	}
 
 	@Override
@@ -151,10 +155,6 @@ public class ToadEntity extends MerchantEntity {
 	@Environment(EnvType.CLIENT)
 	public Vec3d method_29919() {
 		return new Vec3d(0.0D, 0.6F * this.getStandingEyeHeight(), this.getWidth() * 0.4F);
-	}
-
-	public static boolean canSpawn(EntityType<ToadEntity> entity, WorldAccess world, SpawnReason reason, BlockPos pos, Random rand) {
-		return true;
 	}
 	// TRADING STUFF
 
@@ -223,12 +223,12 @@ public class ToadEntity extends MerchantEntity {
 		}
 	}
 
-	private void setVariant(ToadEntity.Type type) {
-		this.dataTracker.set(TOAD_VARIANT, type.getIndex());
-	}
-
 	public ToadEntity.Type getVariant() {
 		return ToadEntity.Type.getTypeByIndex(this.dataTracker.get(TOAD_VARIANT));
+	}
+
+	private void setVariant(ToadEntity.Type type) {
+		this.dataTracker.set(TOAD_VARIANT, type.getIndex());
 	}
 
 	@Override
@@ -243,15 +243,6 @@ public class ToadEntity extends MerchantEntity {
 				return Mubble.MOD_DATA.id("entities/toad/brigade/member");
 			default:
 				return Mubble.MOD_DATA.id("entities/toad");
-		}
-	}
-
-	public static class ToadData extends PassiveEntity.PassiveData {
-		public final ToadEntity.Type type;
-
-		public ToadData(ToadEntity.Type typeIn) {
-			super(false);
-			this.type = typeIn;
 		}
 	}
 
@@ -280,11 +271,11 @@ public class ToadEntity extends MerchantEntity {
 		PARTY(21, "party"),
 		KISEKAE(22, "kisekae");
 
+		private static final ToadEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(ToadEntity.Type::getIndex)).toArray(Type[]::new);
+		private static final Map<String, ToadEntity.Type> TYPES_BY_NAME = Arrays.stream(values()).collect(Collectors.toMap(ToadEntity.Type::getName, (type) -> type));
 		private final int index;
 		private final String name;
 		private final List<Pair<TradeOffers.Factory[], Integer>> trades;
-		private static final ToadEntity.Type[] typeList = Arrays.stream(values()).sorted(Comparator.comparingInt(ToadEntity.Type::getIndex)).toArray(Type[]::new);
-		private static final Map<String, ToadEntity.Type> TYPES_BY_NAME = Arrays.stream(values()).collect(Collectors.toMap(ToadEntity.Type::getName, (type) -> type));
 
 		Type(int index, String name, Pair<TradeOffers.Factory[], Integer>... tradeEntries) {
 			this.index = index;
@@ -298,6 +289,17 @@ public class ToadEntity extends MerchantEntity {
 			this.trades = Arrays.asList(new Pair<>(ToadTradeOffers.COIN_TRADES, 3), new Pair<>(ToadTradeOffers.PRIMARY_COSTUMES_TRADES, 3), new Pair<>(ToadTradeOffers.SECONDARY_COSTUMES_TRADES, 1));
 		}
 
+		public static ToadEntity.Type getTypeByName(String name) {
+			return TYPES_BY_NAME.getOrDefault(name, RED);
+		}
+
+		public static ToadEntity.Type getTypeByIndex(int index) {
+			if(index < 0 || index > typeList.length) {
+				index = 0;
+			}
+			return typeList[index];
+		}
+
 		public String getName() {
 			return this.name;
 		}
@@ -309,16 +311,14 @@ public class ToadEntity extends MerchantEntity {
 		public List<Pair<TradeOffers.Factory[], Integer>> getTrades() {
 			return this.trades;
 		}
+	}
 
-		public static ToadEntity.Type getTypeByName(String name) {
-			return TYPES_BY_NAME.getOrDefault(name, RED);
-		}
+	public static class ToadData extends PassiveEntity.PassiveData {
+		public final ToadEntity.Type type;
 
-		public static ToadEntity.Type getTypeByIndex(int index) {
-			if(index < 0 || index > typeList.length) {
-				index = 0;
-			}
-			return typeList[index];
+		public ToadData(ToadEntity.Type typeIn) {
+			super(false);
+			this.type = typeIn;
 		}
 	}
 }

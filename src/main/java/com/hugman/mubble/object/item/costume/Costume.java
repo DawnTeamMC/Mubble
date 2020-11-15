@@ -31,6 +31,12 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class Costume extends Item {
+	public static final DispenserBehavior DISPENSER_BEHAVIOR = new ItemDispenserBehavior() {
+		@Override
+		public ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
+			return ArmorItem.dispenseArmor(source, stack) ? stack : super.dispenseSilently(source, stack);
+		}
+	};
 	protected final EquipmentSlot armorType;
 	protected final SoundEvent equipSound;
 	protected final StatusEffectInstance[] effects;
@@ -58,6 +64,10 @@ public class Costume extends Item {
 			this.shader = shader;
 		}
 		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
+	}
+
+	public static boolean isUsable(ItemStack stack) {
+		return stack.getDamage() < stack.getMaxDamage() - 1;
 	}
 
 	public EquipmentSlot getArmorType() {
@@ -91,13 +101,6 @@ public class Costume extends Item {
 		}
 	}
 
-	public static final DispenserBehavior DISPENSER_BEHAVIOR = new ItemDispenserBehavior() {
-		@Override
-		public ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
-			return ArmorItem.dispenseArmor(source, stack) ? stack : super.dispenseSilently(source, stack);
-		}
-	};
-
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack itemStack = player.getStackInHand(hand);
@@ -120,10 +123,6 @@ public class Costume extends Item {
 		else {
 			return new TypedActionResult<>(ActionResult.FAIL, itemStack);
 		}
-	}
-
-	public static boolean isUsable(ItemStack stack) {
-		return stack.getDamage() < stack.getMaxDamage() - 1;
 	}
 
 	public SoundEvent getEquipSound() {

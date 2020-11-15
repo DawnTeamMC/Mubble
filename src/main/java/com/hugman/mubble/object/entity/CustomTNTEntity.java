@@ -112,26 +112,26 @@ public class CustomTNTEntity extends Entity {
 		return this.causingEntity;
 	}
 
+	public int getFuse() {
+		return this.fuse;
+	}
+
 	public void setFuse(int fuseIn) {
 		this.dataTracker.set(FUSE, fuseIn);
 		this.fuse = fuseIn;
-	}
-
-	public int getFuse() {
-		return this.fuse;
 	}
 
 	public BlockState getBlockState() {
 		return this.customTile;
 	}
 
+	public float getStrenght() {
+		return this.strenght;
+	}
+
 	public void setStrenght(float strenghtIn) {
 		this.dataTracker.set(STRENGHT, strenghtIn);
 		this.strenght = strenghtIn;
-	}
-
-	public float getStrenght() {
-		return this.strenght;
 	}
 
 	@Override

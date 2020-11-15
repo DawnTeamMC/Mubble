@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.hugman.mubble.init.MubbleBlocks;
 import com.hugman.mubble.init.MubbleSounds;
 import com.hugman.mubble.init.data.MubbleTags;
-import com.hugman.mubble.util.MubbleBiomeCreator;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,16 +25,16 @@ import net.minecraft.util.registry.Registry;
 import java.util.List;
 
 public class TimeswapTableScreenHandler extends ScreenHandler {
+	public final Inventory input;
+	final Slot inputSlot;
+	final Slot outputSlot;
 	private final ScreenHandlerContext context;
 	private final Property selectedRecipe;
+	private final CraftingResultInventory output;
 	private List<Item> availableRecipes;
 	private ItemStack inputStack;
 	private long lastTakeTime;
-	final Slot inputSlot;
-	final Slot outputSlot;
 	private Runnable contentsChangedListener;
-	public final Inventory input;
-	private final CraftingResultInventory output;
 
 	public TimeswapTableScreenHandler(int syncId, PlayerInventory playerInventory) {
 		this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -90,6 +89,15 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 			this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
 		}
 		this.addProperty(this.selectedRecipe);
+	}
+
+	private static Tag<Item> correspondingTag(Item item) {
+		for(Tag<Item> tag : MubbleTags.Items.TIMESWAP_TAGS) {
+			if(item.isIn(tag)) {
+				return tag;
+			}
+		}
+		return null;
 	}
 
 	@Environment(EnvType.CLIENT)
@@ -233,14 +241,5 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 		this.context.run((world, blockPos) -> {
 			this.dropInventory(player, player.world, this.input);
 		});
-	}
-
-	private static Tag<Item> correspondingTag(Item item) {
-		for(Tag<Item> tag : MubbleTags.Items.TIMESWAP_TAGS) {
-			if(item.isIn(tag)) {
-				return tag;
-			}
-		}
-		return null;
 	}
 }

@@ -18,6 +18,16 @@ import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
 
 public class IceballItem extends Item {
+	public static final ItemDispenserBehavior DISPENSER_BEHAVIOR = new ProjectileDispenserBehavior() {
+		@Override
+		protected ProjectileEntity createProjectile(World world, Position pos, ItemStack stack) {
+			return Util.make(new IceballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) -> {
+				entity.setItem(stack);
+			});
+		}
+
+	};
+
 	public IceballItem(Settings builder) {
 		super(builder);
 		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
@@ -39,14 +49,4 @@ public class IceballItem extends Item {
 		}
 		return TypedActionResult.success(stack);
 	}
-
-	public static final ItemDispenserBehavior DISPENSER_BEHAVIOR = new ProjectileDispenserBehavior() {
-		@Override
-		protected ProjectileEntity createProjectile(World world, Position pos, ItemStack stack) {
-			return Util.make(new IceballEntity(world, pos.getX(), pos.getY(), pos.getZ()), (entity) -> {
-				entity.setItem(stack);
-			});
-		}
-
-	};
 }

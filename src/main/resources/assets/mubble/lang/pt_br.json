@@ -1,9 +1,7 @@
 {
-	"comment": "CREATIVE TABS",
 	"itemGroup.mubble.costumes": "Trajes",
 	"itemGroup.mubble.instruments": "Instrumentos",
 
-	"comment": "BLOCKS",
 	"block.mubble.red_christmas_bauble": "Enfeites de Natal Vermelho",
 	"block.mubble.orange_christmas_bauble": "Enfeites de Natal Laranja",
 	"block.mubble.yellow_christmas_bauble": "Enfeites de Natal Amarelo",
@@ -322,7 +320,6 @@
 	"block.mubble.potted_scarlet_orchid": "Vaso de Orquidea Escarlate",
 	"block.mubble.potted_potato_flower": "Vaso de Flor de Batata",
 
-	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.bandage": "Bandagem",
 	"item.mubble.caramel_cube": "Cubo de Caramelo",
@@ -377,7 +374,6 @@
 	"item.mubble.goomba_spawn_egg": "Ovo de Gerar Goomba",
 	"item.mubble.toad_spawn_egg": "Ovo de Gerar Toad",
 
-	"comment": "COSTUMES",
 	"item.mubble.headphones": "Fones de Ouvido",
 
 	"item.mubble.white_virtual_googles": "Óculos Virtuais Brancos",
@@ -436,49 +432,22 @@
 	"item.mubble.mayro_cap": "Boné de Mayro",
 	"item.mubble.noteblock_head": "Cabeça de Noteblock",
 
-	"comment": "CONTAINERS",
 	"container.mubble.placer": "Dispensador",
 	"container.mubble.timeswap_table": "Mesa Troca-Tempo",
 	"container.mubble.present": "Presente",
 
-	"comment": "ENTITIES",
 	"entity.mubble.custom_tnt": "TNT Personalizado",
 	"entity.mubble.flying_block": "Bloco Voador",
 	"entity.mubble.chincho": "Chincho",
 	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.toad": "Toad",
-	"//entity.mubble.toad.species.white": "White Toad",
-	"//entity.mubble.toad.species.light_gray": "Light Gray Toad",
-	"//entity.mubble.toad.species.gray": "Gray Toad",
-	"//entity.mubble.toad.species.black": "Black Toad",
-	"//entity.mubble.toad.species.brown": "Brown Toad",
-	"//entity.mubble.toad.species.red": "Red Toad",
-	"//entity.mubble.toad.species.orange": "Orange Toad",
-	"//entity.mubble.toad.species.yellow": "Yellow Toad",
-	"//entity.mubble.toad.species.lime": "Lime Toad",
-	"//entity.mubble.toad.species.green": "Green Toad",
-	"//entity.mubble.toad.species.cyan": "Cyan Toad",
-	"//entity.mubble.toad.species.light_blue": "Light Blue Toad",
-	"//entity.mubble.toad.species.blue": "Blue Toad",
-	"//entity.mubble.toad.species.purple": "Purple Toad",
-	"//entity.mubble.toad.species.magenta": "Magenta Toad",
-	"//entity.mubble.toad.species.pink": "Pink Toad",
-	"//entity.mubble.toad.brigade.captain_toad": "Captain Toad",
-	"//entity.mubble.toad.brigade.hint_toad": "Hint Toad",
-	"//entity.mubble.toad.brigade.banktoad": "Banktoad",
-	"//entity.mubble.toad.brigade.yellow": "Yellow Toad",
-	"//entity.mubble.toad.brigade.mailtoad": "Mailtoad",
-	"//entity.mubble.toad.party": "Party Toad",
-	"//entity.mubble.toad.kisekae": "Kisekae Toad",
 	"entity.mubble.fireball": "Bola-de-Fogo",
 	"entity.mubble.iceball": "Bola-de-Gelo",
 	"entity.mubble.kirby_ball": "Kirby Ball",
 
-	"comment": "BIOMES",
 	"biome.mubble.press_garden": "Press Garden",
 	"biome.mubble.scarlet_forest": "Floresta de Escarlate",
 
-	"comment": "SUBTITLES",
 	"subtitles.mubble.block.question_block.loot.power_up": "Bloco de ? dropou um power up",
 	"subtitles.mubble.block.question_block.loot.coin": "Bloco de ? dropa uma moeda",
 	"subtitles.mubble.block.note_block.jump": "Bloco de Nota usado",
@@ -505,7 +474,6 @@
 	"subtitles.mubble.entity.toad.hurt": "Toad senti dor",
 	"subtitles.mubble.entity.toad.death": "Toad morre",
 
-	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "Uma grande nova jornada",
 	"advancements.mubble.get_coin.title": "É meu! Ouro!",
@@ -523,20 +491,7 @@
 	"advancements.mubble.get_tetris_block.title": "Está Tudo Conectado",
 	"advancements.mubble.get_tetris_block.description": "Definiu em sua mão um Bloco de Tetris",
 
-	"comment": "STATS",
-	"//stat.mubble.inspect_placer": "Placers Searched",
-	"//stat.mubble.interact_with_timeswap_table": "Interactions with Timeswap Table",
-	"//stat.mubble.open_present": "Presents Opened",
-	"//stat.mubble.talked_to_toad": "Talked to Toads",
-
-	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "Aquilo é para você, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Oi! Eu pensei que você já tinha isso em sua cabeça, §6Evan§r!",
-	"item.mubble.mayro_cap.secret_status": "Venha, você é quem menos precisa, né, \"§6Sossie§r\"?",
-
-	"comment": "CONFIG",
-	"//text.autoconfig.mubble.title": "Mubble Configuration",
-	"//text.autoconfig.mubble.category.biomes": "Biomes",
-	"//text.autoconfig.mubble.option.biomes.press_garden": "Generate Press Gardens",
-	"//text.autoconfig.mubble.option.biomes.scarlet_forest": "Generate Scarlet Forests"
+	"item.mubble.mayro_cap.secret_status": "Venha, você é quem menos precisa, né, \"§6Sossie§r\"?"
 }

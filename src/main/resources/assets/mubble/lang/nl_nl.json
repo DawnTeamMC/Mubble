@@ -1,9 +1,7 @@
 {
-	"comment": "CREATIVE TABS",
 	"itemGroup.mubble.costumes": "Kostuums",
 	"itemGroup.mubble.instruments": "Instrumenten",
 
-	"comment": "BLOCKS",
 	"block.mubble.red_christmas_bauble": "Rode kerstbal",
 	"block.mubble.orange_christmas_bauble": "Orange kerstbal",
 	"block.mubble.yellow_christmas_bauble": "Gele kerstbal",
@@ -322,7 +320,6 @@
 	"block.mubble.potted_scarlet_orchid": "Gepotte scharlake orchidee",
 	"block.mubble.potted_potato_flower": "Gepotte aardappelbloem",
 
-	"comment": "ITEMS",
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.bandage": "Verband",
 	"item.mubble.caramel_cube": "Karamel kubus",
@@ -377,7 +374,6 @@
 	"item.mubble.goomba_spawn_egg": "Goombaspawnei",
 	"item.mubble.toad_spawn_egg": "Toadspawnei",
 
-	"comment": "COSTUMES",
 	"item.mubble.headphones": "Koptelefoon",
 
 	"item.mubble.white_virtual_googles": "witte virtuele bril",
@@ -436,12 +432,10 @@
 	"item.mubble.mayro_cap": "Mayro's pet",
 	"item.mubble.noteblock_head": "NoteBlock's hoofd",
 
-	"comment": "CONTAINERS",
 	"container.mubble.placer": "Plaatser",
 	"container.mubble.timeswap_table": "Tijdwisselstafel",
 	"container.mubble.present": "Cadeau",
 
-	"comment": "ENTITIES",
 	"entity.mubble.custom_tnt": "Aangepaste TNT",
 	"entity.mubble.flying_block": "Vliegend blok",
 	"entity.mubble.chincho": "Chincho",
@@ -474,11 +468,9 @@
 	"entity.mubble.iceball": "IJsbal",
 	"entity.mubble.kirby_ball": "Kirby bal",
 
-	"comment": "BIOMES",
 	"biome.mubble.press_garden": "Perstuin",
 	"biome.mubble.scarlet_forest": "Scharlake bos",
 
-	"comment": "SUBTITLES",
 	"subtitles.mubble.block.question_block.loot.power_up": "?-blok laat power up vallen",
 	"subtitles.mubble.block.question_block.loot.coin": "?-blok laat munt vallen",
 	"subtitles.mubble.block.note_block.jump": "Nootblock wordt gebruikt",
@@ -505,7 +497,6 @@
 	"subtitles.mubble.entity.toad.hurt": "Toad heeft pijn",
 	"subtitles.mubble.entity.toad.death": "Toad sterft",
 
-	"comment": "ADVANCEMENTS",
 	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "Een grandioos nieuw avontuur",
 	"advancements.mubble.get_coin.title": "Het is van mij! Goud!",
@@ -523,20 +514,12 @@
 	"advancements.mubble.get_tetris_block.title": "Het is allemaal verbonden",
 	"advancements.mubble.get_tetris_block.description": "Krijg je handen aan een Tetris blok",
 
-	"comment": "STATS",
 	"stat.mubble.inspect_placer": "Plaaatsers doorzocht",
 	"stat.mubble.interact_with_timeswap_table": "Interacties met tijdwisselstafel",
 	"stat.mubble.open_present": "Cadeaus geopend",
 	"stat.mubble.talked_to_toad": "Met Toads gepraat",
 
-	"comment": "OTHER",
 	"item.mubble.bandana.secret_status": "Dat is voor jou, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! Ik dacht dat je dit al op je hoofd had, §6Evan§r!",
-	"item.mubble.mayro_cap.secret_status": "Kom op, jij bent de laatste die dit nodig heeft, of niet, \"§6Sossie§r\"?",
-
-	"comment": "CONFIG",
-	"//text.autoconfig.mubble.title": "Mubble Configuration",
-	"//text.autoconfig.mubble.category.biomes": "Biomes",
-	"//text.autoconfig.mubble.option.biomes.press_garden": "Generate Press Gardens",
-	"//text.autoconfig.mubble.option.biomes.scarlet_forest": "Generate Scarlet Forests"
+	"item.mubble.mayro_cap.secret_status": "Kom op, jij bent de laatste die dit nodig heeft, of niet, \"§6Sossie§r\"?"
 }
