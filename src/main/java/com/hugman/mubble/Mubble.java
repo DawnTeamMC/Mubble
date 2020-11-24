@@ -31,5 +31,6 @@ public class Mubble implements ModInitializer {
 		MubbleConfiguredFeatures.init();
 		MubbleBiomes.init();
 		MOD_DATA.registerCreators();
+		MubbleBiomes.addToGen();
 	}
 }
