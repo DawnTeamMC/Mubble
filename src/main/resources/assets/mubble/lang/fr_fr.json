@@ -1,7 +1,6 @@
 {
 	"itemGroup.mubble.costumes": "Costumes",
 	"itemGroup.mubble.instruments": "Instruments",
-
 	"block.mubble.red_christmas_bauble": "Boule de Noël rouge",
 	"block.mubble.orange_christmas_bauble": "Boule de Noël orange",
 	"block.mubble.yellow_christmas_bauble": "Boule de Noël jaune",
@@ -12,11 +11,9 @@
 	"block.mubble.light_blue_christmas_bauble": "Boule de Noël bleu clair",
 	"block.mubble.green_christmas_bauble": "Boule de Noël verte",
 	"block.mubble.white_christmas_bauble": "Boule de Noël blanche",
-
 	"block.mubble.red_shiny_garland": "Guirlande brillante rouge",
 	"block.mubble.silver_shiny_garland": "Guirlande brillante argentée",
 	"block.mubble.gold_shiny_garland": "Guirlande brillante dorée",
-
 	"block.mubble.white_present": "Cadeau blanc",
 	"block.mubble.black_present": "Cadeau noir",
 	"block.mubble.blue_present": "Cadeau bleu",
@@ -25,9 +22,7 @@
 	"block.mubble.red_present": "Cadeau rouge",
 	"block.mubble.purple_present": "Cadeau violet",
 	"block.mubble.golden_present": "Cadeau doré",
-
 	"block.mubble.footblock": "Bloc de foot",
-
 	"block.mubble.blue_cloud_block": "Bloc de nuage bleu",
 	"block.mubble.light_blue_cloud_block": "Bloc de nuage bleu clair",
 	"block.mubble.cyan_cloud_block": "Bloc de nuage cyan",
@@ -44,10 +39,8 @@
 	"block.mubble.light_gray_cloud_block": "Bloc de nuage gris clair",
 	"block.mubble.gray_cloud_block": "Bloc de nuage gris",
 	"block.mubble.black_cloud_block": "Bloc de nuage noir",
-
 	"block.mubble.chocolate_cake": "Gâteau au chocolat",
 	"block.mubble.minecraft_10th_anniversary_cake": "Gâteau d'anniversaire des 10 ans de Minecraft",
-
 	"block.mubble.blue_balloon": "Ballon bleu",
 	"block.mubble.light_blue_balloon": "Ballon bleu clair",
 	"block.mubble.cyan_balloon": "Ballon cyan",
@@ -64,11 +57,9 @@
 	"block.mubble.light_gray_balloon": "Ballon gris clair",
 	"block.mubble.gray_balloon": "Ballon gris",
 	"block.mubble.black_balloon": "Ballon noir",
-
 	"block.mubble.unstable_stone": "Roche instable",
 	"block.mubble.placer": "Placeur",
 	"block.mubble.timeswap_table": "Table d'échange temporel",
-
 	"block.mubble.smb_question_block": "Bloc ? (SMB)",
 	"block.mubble.smb3_question_block": "Bloc ? (SMB3)",
 	"block.mubble.smw_question_block": "Bloc ? (SMW)",
@@ -169,15 +160,12 @@
 	"block.mubble.smb3_key_door": "Porte verrouillée (SMB3)",
 	"block.mubble.smw_key_door": "Porte verrouillée (SMW)",
 	"block.mubble.nsmbu_key_door": "Porte verrouillée (NSMBU)",
-
 	"block.mubble.fire_flower": "Fleur de feu",
 	"block.mubble.ice_flower": "Fleur de glace",
 	"block.mubble.boomerang_flower": "Fleur boomerang",
 	"block.mubble.cloud_flower": "Fleur nuage",
 	"block.mubble.gold_flower": "Fleur d'or",
-
 	"block.mubble.kirby_block": "Bloc Kirby",
-
 	"block.mubble.blue_tetris_block": "Bloc Tetris bleu",
 	"block.mubble.light_blue_tetris_block": "Bloc Tetris bleu clair",
 	"block.mubble.cyan_tetris_block": "Bloc Tetris cyan",
@@ -198,15 +186,12 @@
 	"block.mubble.japanese_tetris_cushion": "Coussin Tetris japonais",
 	"block.mubble.rainbow_tetris_scaffolding": "Échafaudage Tetris multicolore",
 	"block.mubble.monochrome_tetris_scaffolding": "Échafaudage Tetris monochrome",
-
 	"block.mubble.vampire_stone": "Roche Vampire",
-
 	"block.mubble.medusa_stone": "Roche de Méduse",
 	"block.mubble.medusa_bricks": "Briques de Méduse",
 	"block.mubble.medusa_brick_stairs": "Escalier en briques de Méduse",
 	"block.mubble.medusa_brick_slab": "Dalle en briques de Méduse",
 	"block.mubble.medusa_brick_wall": "Muret en briques de Méduse",
-
 	"block.mubble.blue_candy_cane_pillar": "Pilier de sucre d'orge bleu",
 	"block.mubble.light_blue_candy_cane_pillar": "Pilier de sucre d'orge bleu clair",
 	"block.mubble.cyan_candy_cane_pillar": "Pilier de sucre d'orge cyan",
@@ -223,24 +208,22 @@
 	"block.mubble.light_gray_candy_cane_pillar": "Pilier de sucre d'orge gris clair",
 	"block.mubble.gray_candy_cane_pillar": "Pilier de sucre d'orge gris",
 	"block.mubble.black_candy_cane_pillar": "Pilier de sucre d'orge noir",
-
 	"block.mubble.green_hill_grass_block": "Bloc d'herbe de Green Hill",
 	"block.mubble.green_hill_dirt": "Terre de Green Hill",
 	"block.mubble.marble_zone_stone": "Pierre de la zone Marble",
 	"block.mubble.yellow_studiopolis_clapper": "Clap jaune de Studiopolis",
 	"block.mubble.blue_studiopolis_clapper": "Clap bleu de Studiopolis",
-
 	"block.mubble.press_garden_planks": "Planches de Press Garden",
-	"block.mubble.red_press_garden_sapling": "Pousse rouge de Press Garden",
 	"block.mubble.pink_press_garden_sapling": "Pousse rose de Press Garden",
+	"block.mubble.red_press_garden_sapling": "Pousse rouge de Press Garden",
 	"block.mubble.press_garden_log": "Bûche de Press Garden",
 	"block.mubble.stripped_press_garden_log": "Bûche écorcée de Press Garden",
 	"block.mubble.press_garden_wood": "Bois de Press Garden",
 	"block.mubble.stripped_press_garden_wood": "Bois écorcé de Press Garden",
-	"block.mubble.red_press_garden_leaves": "Feuilles rouges de Press Garden",
-	"block.mubble.red_press_garden_leaf_pile": "Pile de feuilles rouges de Press Garden",
 	"block.mubble.pink_press_garden_leaves": "Feuilles roses de Press Garden",
 	"block.mubble.pink_press_garden_leaf_pile": "Pile de feuilles roses de Press Garden",
+	"block.mubble.red_press_garden_leaves": "Feuilles rouges de Press Garden",
+	"block.mubble.red_press_garden_leaf_pile": "Pile de feuilles rouges de Press Garden",
 	"block.mubble.press_garden_pressure_plate": "Plaque de pression en planches de Press Garden",
 	"block.mubble.press_garden_trapdoor": "Trappe en planches de Press Garden",
 	"block.mubble.press_garden_button": "Bouton en planches de Press Garden",
@@ -252,9 +235,7 @@
 	"block.mubble.press_garden_wood_stairs": "Escalier en bois de Press Garden",
 	"block.mubble.press_garden_wood_slab": "Dalle en bois de Press Garden",
 	"block.mubble.press_garden_wood_button": "Bouton en bois de Press Garden",
-
 	"block.mubble.spring": "Ressort",
-
 	"block.mubble.scarlet_planks": "Planches écarlate",
 	"block.mubble.scarlet_sapling": "Pousse écarlate",
 	"block.mubble.scarlet_log": "Bûche écarlate",
@@ -276,23 +257,18 @@
 	"block.mubble.scarlet_wood_button": "Bouton en bois écarlate",
 	"block.mubble.scarlet_mushroom": "Champignon écarlate",
 	"block.mubble.scarlet_orchid": "Orchidée écarlate",
-
 	"block.mubble.girder": "Poutre",
-
 	"block.mubble.mirror_temple_bricks": "Briques du temple miroir",
 	"block.mubble.mirror_temple_brick_stairs": "Escalier en brique du temple miroir",
 	"block.mubble.mirror_temple_brick_slab": "Dalle en brique du temple miroir",
 	"block.mubble.mirror_temple_brick_wall": "Muret en brique du temple miroir",
-
 	"block.mubble.old_site_bricks": "Briques du vieux site",
 	"block.mubble.old_site_brick_stairs": "Escalier en brique du vieux site",
 	"block.mubble.old_site_brick_slab": "Dalle en brique du vieux site",
 	"block.mubble.old_site_brick_wall": "Muret en brique du vieux site",
-
 	"block.mubble.elder_pebbles": "Anciens galets",
 	"block.mubble.dream_block": "Bloc de rêve",
 	"block.mubble.dream_bedrock": "Bedrock de rêve",
-
 	"block.mubble.blue_puyo": "Puyo bleu",
 	"block.mubble.turquoise_puyo": "Puyo turquoise",
 	"block.mubble.green_puyo": "Puyo vert",
@@ -301,25 +277,22 @@
 	"block.mubble.purple_puyo": "Puyo violet",
 	"block.mubble.gray_puyo": "Puyo gris",
 	"block.mubble.garbage_puyo": "Déchet Puyo",
-	"block.mubble.point_puyo": "Point Puyo",
+	"block.mubble.point_puyo": "Puyo point",
 	"block.mubble.hard_puyo": "Puyo dur",
 	"block.mubble.iron_puyo": "Puyo de fer",
-
 	"block.mubble.koretato_block": "Bloc Koretato",
 	"block.mubble.potato_flower": "Fleur patate",
-
 	"block.mubble.potted_fire_flower": "Fleur de feu en pot",
 	"block.mubble.potted_ice_flower": "Fleur de glace en pot",
 	"block.mubble.potted_boomerang_flower": "Fleur boomerang en pot",
 	"block.mubble.potted_cloud_flower": "Fleur nuage en pot",
 	"block.mubble.potted_gold_flower": "Fleur d'or en pot",
-	"block.mubble.potted_red_press_garden_sapling": "Pousse rouge de Press Garden en pot",
 	"block.mubble.potted_pink_press_garden_sapling": "Pousse rose de Press Garden en pot",
+	"block.mubble.potted_red_press_garden_sapling": "Pousse rouge de Press Garden en pot",
 	"block.mubble.potted_scarlet_sapling": "Pousse écarlate en pot",
 	"block.mubble.potted_scarlet_mushroom": "Champignon écarlate en pot",
 	"block.mubble.potted_scarlet_orchid": "Orchidée écarlate en pot",
 	"block.mubble.potted_potato_flower": "Fleur patate en pot",
-
 	"item.mubble.baguette": "Baguette",
 	"item.mubble.bandage": "Bandage",
 	"item.mubble.caramel_cube": "Cube de caramel",
@@ -333,7 +306,6 @@
 	"item.mubble.jingle_bells": "Grelots",
 	"item.mubble.small_bulb": "Petite ampoule",
 	"item.mubble.totem_of_ascending": "Totem d'ascendance",
-
 	"item.mubble.super_mushroom": "Super champignon",
 	"item.mubble.peach": "Pêche",
 	"item.mubble.fireball": "Boule de feu",
@@ -348,11 +320,8 @@
 	"item.mubble.smb3_key": "Clé (SMB3)",
 	"item.mubble.smw_key": "Clé (SMW)",
 	"item.mubble.nsmbu_key": "Clé (NSMBU)",
-
 	"item.mubble.kirby_ball": "Balle Kirby",
-
 	"item.mubble.smash_ball": "Balle Smash",
-
 	"item.mubble.white_lightsaber": "Sabre laser blanc",
 	"item.mubble.light_gray_lightsaber": "Sabre laser gris clair",
 	"item.mubble.gray_lightsaber": "Sabre laser gris",
@@ -369,32 +338,27 @@
 	"item.mubble.purple_lightsaber": "Sabre laser violet",
 	"item.mubble.magenta_lightsaber": "Sabre laser magenta",
 	"item.mubble.pink_lightsaber": "Sabre laser rose",
-
 	"item.mubble.chincho_spawn_egg": "Oeuf d'apparition de Chincho",
 	"item.mubble.goomba_spawn_egg": "Oeuf d'apparition de Goomba",
 	"item.mubble.toad_spawn_egg": "Oeuf d'apparition de Toad",
-
 	"item.mubble.headphones": "Casque audio",
-
-	"item.mubble.blue_virtual_googles": "Lunettes virtuelles bleues",
-	"item.mubble.light_blue_virtual_googles": "Lunettes virtuelles bleu clairs",
-	"item.mubble.cyan_virtual_googles": "Lunettes virtuelles cyans",
-	"item.mubble.green_virtual_googles": "Lunettes virtuelles vertes",
-	"item.mubble.lime_virtual_googles": "Lunettes virtuelles vert clairs",
-	"item.mubble.orange_virtual_googles": "Lunettes virtuelles jaunes",
-	"item.mubble.yellow_virtual_googles": "Lunettes virtuelles oranges",
-	"item.mubble.red_virtual_googles": "Lunettes virtuelles rouges",
-	"item.mubble.pink_virtual_googles": "Lunettes virtuelles roses",
-	"item.mubble.magenta_virtual_googles": "Lunettes virtuelles magentas",
-	"item.mubble.purple_virtual_googles": "Lunettes virtuelles violettes",
-	"item.mubble.brown_virtual_googles": "Lunettes virtuelles marrons",
 	"item.mubble.white_virtual_googles": "Lunettes virtuelles blanches",
 	"item.mubble.light_gray_virtual_googles": "Lunettes virtuelles gris clairs",
 	"item.mubble.gray_virtual_googles": "Lunettes virtuelles grises",
 	"item.mubble.black_virtual_googles": "Lunettes virtuelles noires",
-
+	"item.mubble.brown_virtual_googles": "Lunettes virtuelles marrons",
+	"item.mubble.red_virtual_googles": "Lunettes virtuelles rouges",
+	"item.mubble.orange_virtual_googles": "Lunettes virtuelles jaunes",
+	"item.mubble.yellow_virtual_googles": "Lunettes virtuelles oranges",
+	"item.mubble.lime_virtual_googles": "Lunettes virtuelles vert clairs",
+	"item.mubble.green_virtual_googles": "Lunettes virtuelles vertes",
+	"item.mubble.cyan_virtual_googles": "Lunettes virtuelles cyans",
+	"item.mubble.light_blue_virtual_googles": "Lunettes virtuelles bleu clairs",
+	"item.mubble.blue_virtual_googles": "Lunettes virtuelles bleues",
+	"item.mubble.purple_virtual_googles": "Lunettes virtuelles violettes",
+	"item.mubble.magenta_virtual_googles": "Lunettes virtuelles magentas",
+	"item.mubble.pink_virtual_googles": "Lunettes virtuelles roses",
 	"item.mubble.christmas_hat": "Bonnet de Noël",
-
 	"item.mubble.cappy": "Cappy",
 	"item.mubble.luigi_cap": "Casquette de Luigi",
 	"item.mubble.wario_cap": "Casquette de Wario",
@@ -412,42 +376,53 @@
 	"item.mubble.mario_wedding_hat": "Chapeau de mariage de Mario",
 	"item.mubble.boo_hat": "Chapeau Boo",
 	"item.mubble.broque_monsieur_head": "Tête de Charlie Bloc",
-
 	"item.mubble.bandana": "Bandana",
-
 	"item.mubble.pikachu_ears": "Oreilles de Pikachu",
 	"item.mubble.snorlax_hat": "Chapeau Ronflex",
-
 	"item.mubble.top_hat": "Haut-de-forme",
-
 	"item.mubble.ralsei_hat": "Chapeau de Ralsei",
 	"item.mubble.king_round_mask": "Masque King Round",
-
 	"item.mubble.kid_hat": "Haut-de-forme de Hat Kid",
-
 	"item.mubble.baldi_head": "Tête de Baldi",
-
 	"item.mubble.guardian_mask": "Masque du Gardien",
-
 	"item.mubble.mayro_cap": "Casquette de Mayro",
 	"item.mubble.noteblock_head": "Tête de Noteblock",
-
 	"container.mubble.placer": "Placeur",
 	"container.mubble.timeswap_table": "Table d'échange temporel",
 	"container.mubble.present": "Cadeau",
-
 	"entity.mubble.custom_tnt": "TNT personalisée",
 	"entity.mubble.flying_block": "Bloc volant",
 	"entity.mubble.chincho": "Chincho",
 	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.toad": "Toad",
+	"entity.mubble.toad.species.white": "Toad blanc",
+	"entity.mubble.toad.species.light_gray": "Toad gris clair",
+	"entity.mubble.toad.species.gray": "Toad gris",
+	"entity.mubble.toad.species.black": "Toad noir",
+	"entity.mubble.toad.species.brown": "Toad marron",
+	"entity.mubble.toad.species.red": "Toad rouge",
+	"entity.mubble.toad.species.orange": "Toad orange",
+	"entity.mubble.toad.species.yellow": "Toad jaune",
+	"entity.mubble.toad.species.lime": "Toad vert clair",
+	"entity.mubble.toad.species.green": "Toad vert",
+	"entity.mubble.toad.species.cyan": "Toad cyan",
+	"entity.mubble.toad.species.light_blue": "Toad bleu clair",
+	"entity.mubble.toad.species.blue": "Toad bleu",
+	"entity.mubble.toad.species.purple": "Toad violet",
+	"entity.mubble.toad.species.magenta": "Toad magenta",
+	"entity.mubble.toad.species.pink": "Toad rose",
+	"entity.mubble.toad.brigade.captain_toad": "Capitaine Toad",
+	"entity.mubble.toad.brigade.hint_toad": "Toad l'astuce",
+	"entity.mubble.toad.brigade.banktoad": "Toad banquier",
+	"entity.mubble.toad.brigade.yellow": "Toad jaune",
+	"entity.mubble.toad.brigade.mailtoad": "Toad livreur",
+	"entity.mubble.toad.party": "Toad de fête",
+	"entity.mubble.toad.kisekae": "Toad Kisekae",
 	"entity.mubble.fireball": "Boule de feu",
 	"entity.mubble.iceball": "Boule de glace",
 	"entity.mubble.kirby_ball": "Balle Kirby",
-
 	"biome.mubble.press_garden": "Jardin de presse",
 	"biome.mubble.scarlet_forest": "Forêt écarlate",
-
 	"subtitles.mubble.block.question_block.loot.power_up": "Objet sorti d'un bloc ?",
 	"subtitles.mubble.block.question_block.loot.coin": "Pièce sortie d'un bloc ?",
 	"subtitles.mubble.block.note_block.jump": "Bloc note utilisé",
@@ -473,7 +448,6 @@
 	"subtitles.mubble.entity.toad.ambient": "Marmonnement de Toad",
 	"subtitles.mubble.entity.toad.hurt": "Toad blessé",
 	"subtitles.mubble.entity.toad.death": "Toad qui meurt",
-
 	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "Un tout nouveau voyage",
 	"advancements.mubble.get_coin.title": "C'est à moi ! De l'or !",
@@ -490,8 +464,15 @@
 	"advancements.mubble.get_timeswap_table.description": "Fabriquez une table d'échange temporel",
 	"advancements.mubble.get_tetris_block.title": "Connectés à travers l'espace",
 	"advancements.mubble.get_tetris_block.description": "Attrapez un bloc Tetris",
-
+	"stat.mubble.inspect_placer": "Placeurs inspectés",
+	"stat.mubble.interact_with_timeswap_table": "Interactions avec une table d'échange temporel",
+	"stat.mubble.open_present": "Cadeaux ouverts",
+	"stat.mubble.talked_to_toad": "Toads abordés",
 	"item.mubble.bandana.secret_status": "C'est pour toi, §6Pixel§r !",
 	"item.mubble.noteblock_head.secret_status": "Hé ! Je croyais que tu avais déjà ça sur la tête, §6Evan§r !",
-	"item.mubble.mayro_cap.secret_status": "Franchement, t'es le seul à en avoir le moins besoin, n'est-ce pas, \"§6Sossie§r\" ?"
+	"item.mubble.mayro_cap.secret_status": "Franchement, t'es le seul à en avoir le moins besoin, n'est-ce pas, \"§6Sossie§r\" ?",
+	"text.autoconfig.mubble.title": "Configuration de Mubble",
+	"text.autoconfig.mubble.category.biomes": "Biomes",
+	"text.autoconfig.mubble.option.biomes.press_garden": "Générer les jardins de presse",
+	"text.autoconfig.mubble.option.biomes.scarlet_forest": "Générer les forêts écarlates"
 }

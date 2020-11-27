@@ -1,40 +1,30 @@
 {
-
 	"block.mubble.footblock": "足球块",
-
 	"block.mubble.fire_flower": "火花",
 	"block.mubble.ice_flower": "冰花",
 	"block.mubble.boomerang_flower": "回旋镖花",
 	"block.mubble.cloud_flower": "云花",
 	"block.mubble.gold_flower": "金花",
-
 	"block.mubble.tetris_glass": "俄罗斯方块玻璃",
 	"block.mubble.japanese_tetris_cushion": "日式俄罗斯方块坐垫",
 	"block.mubble.rainbow_tetris_scaffolding": "彩虹俄罗斯方块脚手架",
 	"block.mubble.monochrome_tetris_scaffolding": "黑白俄罗斯方块脚手架",
-
 	"block.mubble.vampire_stone": "吸血鬼之石",
-
 	"block.mubble.medusa_stone": "美杜莎之石",
 	"block.mubble.medusa_bricks": "美杜莎砖块",
-
 	"block.mubble.blue_candy_cane_pillar": "蓝色拐杖糖支柱",
 	"block.mubble.green_candy_cane_pillar": "绿色拐杖糖支柱",
 	"block.mubble.yellow_candy_cane_pillar": "黄色拐杖糖支柱",
 	"block.mubble.red_candy_cane_pillar": "红色拐杖糖支柱",
 	"block.mubble.purple_candy_cane_pillar": "紫色拐杖糖支柱",
-
 	"block.mubble.elder_pebbles": "远古鹅卵石",
-
 	"block.mubble.koretato_block": "Koretato块",
-
 	"item.mubble.bandage": "绷带",
 	"item.mubble.caramel_cube": "焦糖块",
 	"item.mubble.crepe": "可丽饼",
 	"item.mubble.chocolate_crepe": "巧克力可丽饼",
 	"item.mubble.caramel_crepe": "焦糖可丽饼",
 	"item.mubble.candy_cane": "拐杖糖",
-
 	"item.mubble.super_mushroom": "超级蘑菇",
 	"item.mubble.peach": "桃子",
 	"item.mubble.cape_feather": "披风羽毛",
@@ -42,11 +32,8 @@
 	"item.mubble.yellow_coin": "黄币",
 	"item.mubble.red_coin": "红币",
 	"item.mubble.blue_coin": "蓝币",
-
 	"item.mubble.smash_ball": "粉碎球",
-
 	"item.mubble.headphones": "耳机",
-
 	"item.mubble.cappy": "凯皮",
 	"item.mubble.luigi_cap": "路易的帽子",
 	"item.mubble.wario_cap": "瓦里奥的帽子",
@@ -58,22 +45,18 @@
 	"item.mubble.princess_daisy_crown": "黛西公主的王冠",
 	"item.mubble.pink_gold_peach_crown": "碧奇公主的粉金王冠",
 	"item.mubble.super_crown": "超级王冠",
-
 	"item.mubble.bandana": "手帕",
-
 	"item.mubble.mayro_cap": "Mayro的帽子",
 	"item.mubble.noteblock_head": "NoteBlock的头",
-
 	"entity.mubble.chincho": "钦乔",
+	"entity.mubble.goomba": "栗子小子",
 	"entity.mubble.toad": "奇诺比奥",
-
 	"subtitles.mubble.block.question_block.loot.coin": "问号块:掉落硬币",
 	"subtitles.mubble.item.cape_feather.use": "披风羽毛:被使用",
 	"subtitles.mubble.item.smash_ball.use": "粉碎球:被使用",
 	"subtitles.mubble.entity.toad.ambient": "奇诺比奥:咕哝",
 	"subtitles.mubble.entity.toad.hurt": "奇诺比奥:受伤",
 	"subtitles.mubble.entity.toad.death": "奇诺比奥:死亡",
-
 	"advancements.mubble.root.title": "任天堂领域",
 	"advancements.mubble.root.description": "一次崭新伟大的旅程",
 	"advancements.mubble.get_coin.title": "宝藏都是我的！",

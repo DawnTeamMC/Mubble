@@ -1,7 +1,6 @@
 {
 	"itemGroup.mubble.costumes": "Kostüme",
 	"itemGroup.mubble.instruments": "Instrumente",
-
 	"block.mubble.red_christmas_bauble": "Rote Weihnachtskugel",
 	"block.mubble.orange_christmas_bauble": "Orange Weihnachtskugel",
 	"block.mubble.yellow_christmas_bauble": "Gelbe Weihnachtskugel",
@@ -12,11 +11,9 @@
 	"block.mubble.light_blue_christmas_bauble": "Hellblaue Weihnachtskugel",
 	"block.mubble.green_christmas_bauble": "Grüne Weihnachtskugel",
 	"block.mubble.white_christmas_bauble": "Weiße Weihnachtskugel",
-
 	"block.mubble.red_shiny_garland": "Rote Glänzende Girlande",
 	"block.mubble.silver_shiny_garland": "Silberne Glänzende Girlande",
 	"block.mubble.gold_shiny_garland": "Goldene Glänzende Girlande",
-
 	"block.mubble.white_present": "Weißes Geschenk",
 	"block.mubble.black_present": "Schwarzes Geschenk",
 	"block.mubble.blue_present": "Blaues Geschenk",
@@ -25,9 +22,7 @@
 	"block.mubble.red_present": "Rotes Geschenk",
 	"block.mubble.purple_present": "Víolettes Geschenk",
 	"block.mubble.golden_present": "Goldenes Geschenk",
-
 	"block.mubble.footblock": "Fußblock",
-
 	"block.mubble.blue_cloud_block": "Blauer Wolkenblock",
 	"block.mubble.light_blue_cloud_block": "Hellblauer Wolkenblock",
 	"block.mubble.cyan_cloud_block": "Türkiser Wolkenblock",
@@ -44,10 +39,8 @@
 	"block.mubble.light_gray_cloud_block": "Hellgrauer Wolkenblock",
 	"block.mubble.gray_cloud_block": "Grauer Wolkenblock",
 	"block.mubble.black_cloud_block": "Schwarzer Wolkenblock",
-
 	"block.mubble.chocolate_cake": "Schokoladenkuchen",
 	"block.mubble.minecraft_10th_anniversary_cake": "Minecrafts Torte zum 10-jährigen Jubiläum",
-
 	"block.mubble.blue_balloon": "Blauer Luftballon",
 	"block.mubble.light_blue_balloon": "Hellblauer Luftballon",
 	"block.mubble.cyan_balloon": "Türkiser Luftballon",
@@ -64,11 +57,9 @@
 	"block.mubble.light_gray_balloon": "Hellgrauer Luftballon",
 	"block.mubble.gray_balloon": "Grauer Luftballon",
 	"block.mubble.black_balloon": "Schwarzer Luftballon",
-
 	"block.mubble.unstable_stone": "Instabiler Stein",
 	"block.mubble.placer": "Platzierer",
 	"block.mubble.timeswap_table": "Zeitvertauschungstisch",
-
 	"block.mubble.smb_question_block": "?-Block (SMB)",
 	"block.mubble.smb3_question_block": "?-Block (SMB3)",
 	"block.mubble.smw_question_block": "?-Block (SMW)",
@@ -169,15 +160,12 @@
 	"block.mubble.smb3_key_door": "Verriegelte Tür (SMB3)",
 	"block.mubble.smw_key_door": "Verriegelte Tür (SMW)",
 	"block.mubble.nsmbu_key_door": "Verriegelte Tür (NSMBU)",
-
 	"block.mubble.fire_flower": "Feuerblume",
 	"block.mubble.ice_flower": "Eisblume",
 	"block.mubble.boomerang_flower": "Bumerangblume",
 	"block.mubble.cloud_flower": "Wolkenblume",
 	"block.mubble.gold_flower": "Goldeneblume",
-
 	"block.mubble.kirby_block": "Kirbyblock",
-
 	"block.mubble.blue_tetris_block": "Blauer Tetrisblock",
 	"block.mubble.light_blue_tetris_block": "Hellblauer Tetrisblock",
 	"block.mubble.cyan_tetris_block": "Türkiser Tetrisblock",
@@ -198,15 +186,12 @@
 	"block.mubble.japanese_tetris_cushion": "Japanischer Tetris-Kissen",
 	"block.mubble.rainbow_tetris_scaffolding": "Regenbogen-Tetris-Gerüst",
 	"block.mubble.monochrome_tetris_scaffolding": "Einfarbiger Tetris-Gerüst",
-
 	"block.mubble.vampire_stone": "Vampirstein",
-
 	"block.mubble.medusa_stone": "Medusas Stein",
 	"block.mubble.medusa_bricks": "Medusas Ziegelsteine",
 	"block.mubble.medusa_brick_stairs": "Medusas Ziegeltreppe",
 	"block.mubble.medusa_brick_slab": "Medusas Ziegelstufe",
 	"block.mubble.medusa_brick_wall": "Medusas Ziegelmauer",
-
 	"block.mubble.blue_candy_cane_pillar": "Blaue Zuckerstangensäule",
 	"block.mubble.light_blue_candy_cane_pillar": "Hellblaue Zuckerstangensäule",
 	"block.mubble.cyan_candy_cane_pillar": "Türkise Zuckerstangensäule",
@@ -223,13 +208,11 @@
 	"block.mubble.light_gray_candy_cane_pillar": "Hellgraue Zuckerstangensäule",
 	"block.mubble.gray_candy_cane_pillar": "Graue Zuckerstangensäule",
 	"block.mubble.black_candy_cane_pillar": "Schwarze Zuckerstangensäule",
-
 	"block.mubble.green_hill_grass_block": "Grüner Hügelgrassblock",
 	"block.mubble.green_hill_dirt": "Grüne Hügelerde",
 	"block.mubble.marble_zone_stone": "Marmorzonenstein",
 	"block.mubble.yellow_studiopolis_clapper": "Gelbe Studiopolis-Filmklappe",
 	"block.mubble.blue_studiopolis_clapper": "Blaue Studiopolis-Filmklappe",
-
 	"block.mubble.press_garden_planks": "Holzbretter aus Press Garden",
 	"block.mubble.pink_press_garden_sapling": "Rosa Setzlinge aus Press Garden",
 	"block.mubble.red_press_garden_sapling": "Rote Setzlinge aus Press Garden",
@@ -249,9 +232,7 @@
 	"block.mubble.press_garden_fence_gate": "Holzzauntor aus Press Garden",
 	"block.mubble.press_garden_fence": "Holzzaun aus Press Garden",
 	"block.mubble.press_garden_door": "Holztür aus Press Garden",
-
 	"block.mubble.spring": "Feder",
-
 	"block.mubble.scarlet_planks": "Scharlachholzbretter",
 	"block.mubble.scarlet_sapling": "Scharlachsetzling",
 	"block.mubble.scarlet_log": "Scharlachstamm",
@@ -270,23 +251,18 @@
 	"block.mubble.scarlet_door": "Scharlachholztür",
 	"block.mubble.scarlet_mushroom": "Scharlachroter Pilz",
 	"block.mubble.scarlet_orchid": "Scharlachrote Orchidee",
-
 	"block.mubble.girder": "Träger",
-
 	"block.mubble.mirror_temple_bricks": "Spiegel-Tempelziegel",
 	"block.mubble.mirror_temple_brick_stairs": "Spiegel-Tempelziegeltreppe",
 	"block.mubble.mirror_temple_brick_slab": "Spiegel-Tempelziegelstufe",
 	"block.mubble.mirror_temple_brick_wall": "Spiegel-Tempelziegelmauer",
-
 	"block.mubble.old_site_bricks": "Ziegel aus der alten Anlage",
 	"block.mubble.old_site_brick_stairs": "Ziegeltreppe aus der alten Anlage",
 	"block.mubble.old_site_brick_slab": "Ziegelstufe aus der alten Anlage",
 	"block.mubble.old_site_brick_wall": "Ziegelmauer aus der alten Anlage",
-
 	"block.mubble.elder_pebbles": "Ältester Kieselstein",
 	"block.mubble.dream_block": "Traumblock",
 	"block.mubble.dream_bedrock": "Traumgrundgestein",
-
 	"block.mubble.blue_puyo": "Blauer Puyo",
 	"block.mubble.turquoise_puyo": "Türkiser Puyo",
 	"block.mubble.green_puyo": "Grüner Puyo",
@@ -298,10 +274,8 @@
 	"block.mubble.point_puyo": "Punktepuyo",
 	"block.mubble.hard_puyo": "Harter Puyo",
 	"block.mubble.iron_puyo": "Eisenpuyo",
-
 	"block.mubble.koretato_block": "Koretatoblock",
 	"block.mubble.potato_flower": "Kartoffelblume",
-
 	"block.mubble.potted_fire_flower": "Eingetopfte Feuerblume",
 	"block.mubble.potted_ice_flower": "Eingetopfte Eisblume",
 	"block.mubble.potted_boomerang_flower": "Eingetopfte Bumerangblume",
@@ -313,7 +287,6 @@
 	"block.mubble.potted_scarlet_mushroom": "Eingetopfter Scharlachpilz",
 	"block.mubble.potted_scarlet_orchid": "Eingetopfte Scharlachrote Orchidee",
 	"block.mubble.potted_potato_flower": "Eingetopfte Kartoffelblume",
-
 	"item.mubble.baguette": "Stangenweißbrot",
 	"item.mubble.bandage": "Verband",
 	"item.mubble.caramel_cube": "Karamellwürfel",
@@ -327,7 +300,6 @@
 	"item.mubble.jingle_bells": "Klingelglocken",
 	"item.mubble.small_bulb": "Kleine Glühbirne",
 	"item.mubble.totem_of_ascending": "Totem des Aufsteigends",
-
 	"item.mubble.super_mushroom": "Superpilz",
 	"item.mubble.peach": "Pfirsich",
 	"item.mubble.fireball": "Feuerball",
@@ -341,9 +313,7 @@
 	"item.mubble.smb3_key": "Schlüssel (SMB3)",
 	"item.mubble.smw_key": "Schlüssel (SMW)",
 	"item.mubble.nsmbu_key": "Schlüssel (NSMBU)",
-
 	"item.mubble.smash_ball": "Smash-Ball",
-
 	"item.mubble.white_lightsaber": "Weißes Lichtschwert",
 	"item.mubble.light_gray_lightsaber": "Hellgrünes Lichtschwert",
 	"item.mubble.gray_lightsaber": "Graues Lichtschwert",
@@ -360,13 +330,10 @@
 	"item.mubble.purple_lightsaber": "Violettes Lichtschwert",
 	"item.mubble.magenta_lightsaber": "Magenta Lichtschwert",
 	"item.mubble.pink_lightsaber": "Rosa Lichtschwert",
-
 	"item.mubble.chincho_spawn_egg": "Chincho-Spawn-Ei",
 	"item.mubble.goomba_spawn_egg": "Goomba-Spawn-Ei",
 	"item.mubble.toad_spawn_egg": "Toad-Spawn-Ei",
-
 	"item.mubble.headphones": "Kopfhörer",
-
 	"item.mubble.white_virtual_googles": "Weiße Virtuelle Brille",
 	"item.mubble.light_gray_virtual_googles": "Hellgraue Virtuelle Brille",
 	"item.mubble.gray_virtual_googles": "Graue Virtuelle Brille",
@@ -383,10 +350,7 @@
 	"item.mubble.purple_virtual_googles": "Violette Virtuelle Brille",
 	"item.mubble.magenta_virtual_googles": "Magenta Virtuelle Brille",
 	"item.mubble.pink_virtual_googles": "Rosa Virtuelle Brille",
-
 	"item.mubble.christmas_hat": "Weihnachtshut",
-
-	"item.mubble.cappy": "Cappy",
 	"item.mubble.luigi_cap": "Luigis Mütze",
 	"item.mubble.wario_cap": "Warios Mütze",
 	"item.mubble.waluigi_cap": "Waluigis Mütze",
@@ -403,39 +367,23 @@
 	"item.mubble.mario_wedding_hat": "Marios Hochzeitshut",
 	"item.mubble.boo_hat": "Boos Hut",
 	"item.mubble.broque_monsieur_head": "Broque Monsieurs Kopf",
-
 	"item.mubble.bandana": "Kopftuch",
-
 	"item.mubble.pikachu_ears": "Pikachus Ohren",
 	"item.mubble.snorlax_hat": "Snorlaxs Hut",
-
 	"item.mubble.top_hat": "Zylinderhut",
-
 	"item.mubble.ralsei_hat": "Ralseis Hut",
 	"item.mubble.king_round_mask": "Maske von König Round",
-
 	"item.mubble.kid_hat": "Kinderhut",
-
 	"item.mubble.baldi_head": "Baldis Hut",
-
 	"item.mubble.guardian_mask": "Guardians Maske",
-
 	"item.mubble.mayro_cap": "Mayros Mütze",
 	"item.mubble.noteblock_head": "Notenblocks Kopf",
-
 	"container.mubble.placer": "Platzierer",
 	"container.mubble.timeswap_table": "Zeitvertauschungstisch",
 	"container.mubble.present": "Geschenk",
-
 	"entity.mubble.custom_tnt": "Benutzerdefinierter TNT",
 	"entity.mubble.flying_block": "Fliegender Block",
-	"entity.mubble.chincho": "Chincho",
-	"entity.mubble.goomba": "Goomba",
-	"entity.mubble.toad": "Toad",
-
-	"biome.mubble.press_garden": "Press Garden",
 	"biome.mubble.scarlet_forest": "Scharlachwald",
-
 	"subtitles.mubble.block.question_block.loot.power_up": "?-Block gibt Power-Up",
 	"subtitles.mubble.block.question_block.loot.coin": "?-Block gibt Münze",
 	"subtitles.mubble.block.note_block.jump": "Notenblock genutzt",
@@ -458,8 +406,6 @@
 	"subtitles.mubble.entity.toad.ambient": "Toad murmelt",
 	"subtitles.mubble.entity.toad.hurt": "Toad nimmt Schaden",
 	"subtitles.mubble.entity.toad.death": "Toad stirbt",
-
-	"advancements.mubble.root.title": "Mubble",
 	"advancements.mubble.root.description": "Eine großartige neue Reise",
 	"advancements.mubble.get_coin.title": "Es schürft! Gold!",
 	"advancements.mubble.get_coin.description": "Finde Münzen",
@@ -475,7 +421,6 @@
 	"advancements.mubble.get_timeswap_table.description": "Stelle einen Zeitvertauschungstisch her",
 	"advancements.mubble.get_tetris_block.title": "Es Ist Alles Verbunden",
 	"advancements.mubble.get_tetris_block.description": "Halte deine Hand auf den Tetris-Block",
-
 	"item.mubble.bandana.secret_status": "Das ist für dich, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! Ich dachte, du hättest das schon auf dem Kopf, §6Evan§r!",
 	"item.mubble.mayro_cap.secret_status": "Komm schon, du bist der jenige der es am wenigsten braucht. Bist du nicht \"§6Sossie§r\"?"
