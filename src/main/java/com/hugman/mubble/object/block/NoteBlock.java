@@ -16,8 +16,17 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class NoteBlock extends Block {
-	public NoteBlock(Settings builder) {
+	private final SoundEvent lowJumpSound;
+	private final SoundEvent highJumpSound;
+
+	public NoteBlock(SoundEvent lowJumpSound, SoundEvent highJumpSound, Settings builder) {
 		super(builder);
+		this.lowJumpSound = lowJumpSound;
+		this.highJumpSound = highJumpSound;
+	}
+
+	public NoteBlock(SoundEvent jumpSound, Settings builder) {
+		this(jumpSound, jumpSound , builder);
 	}
 
 	@Override
@@ -40,38 +49,20 @@ public class NoteBlock extends Block {
 	public void launch(World worldIn, Entity entityIn) {
 		Vec3d vec3d = entityIn.getVelocity();
 		if(entityIn instanceof LivingEntity) {
-			SoundEvent lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
-			SoundEvent highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
-			if(this == MubbleBlocks.SMB_NOTE_BLOCK || this == MubbleBlocks.SMB_SUPER_NOTE_BLOCK) {
-				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
-				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB;
-			}
-			else if(this == MubbleBlocks.SMB3_NOTE_BLOCK || this == MubbleBlocks.SMB3_SUPER_NOTE_BLOCK) {
-				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB3;
-				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMB3;
-			}
-			else if(this == MubbleBlocks.SMW_NOTE_BLOCK || this == MubbleBlocks.SMW_SUPER_NOTE_BLOCK) {
-				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMW;
-				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_SMW;
-			}
-			else if(this == MubbleBlocks.NSMBU_NOTE_BLOCK || this == MubbleBlocks.NSMBU_SUPER_NOTE_BLOCK) {
-				lowJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_LOW_NSMBU;
-				highJumpSound = MubbleSounds.BLOCK_NOTE_BLOCK_JUMP_HIGH_NSMBU;
-			}
 			BlockPos pos = entityIn.getBlockPos().down();
 			final double x = pos.getX() + 0.5D;
 			final double y = pos.getY() + 0.5D;
 			final double z = pos.getZ() + 0.5D;
 			Random rand = new Random();
 			if(!entityIn.isSneaking()) {
-				worldIn.playSound(null, x, y, z, highJumpSound, SoundCategory.BLOCKS, 1f, 1f);
+				worldIn.playSound(null, x, y, z, this.highJumpSound, SoundCategory.BLOCKS, 1f, 1f);
 				for(int i = 0; i < rand.nextInt(5) + 1; i++) {
 					worldIn.addParticle(ParticleTypes.NOTE, x + (rand.nextInt(7) - 3) / 10D, y + 0.6D, z + (rand.nextInt(7) - 3) / 10D, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D);
 				}
 				entityIn.setVelocity(vec3d.x, getProperLaunchMotion(), vec3d.z);
 			}
 			else {
-				worldIn.playSound(null, x, y, z, lowJumpSound, SoundCategory.BLOCKS, 1f, 1f);
+				worldIn.playSound(null, x, y, z, this.lowJumpSound, SoundCategory.BLOCKS, 1f, 1f);
 				for(int i = 0; i < rand.nextInt(1) + 1; i++) {
 					worldIn.addParticle(ParticleTypes.NOTE, x, y + 0.6D, z, (rand.nextInt(7) - 3) / 10D, 0.2D, (rand.nextInt(7) - 3) / 10D);
 				}

@@ -24,16 +24,14 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class GoldenBrickBlock extends Block {
-	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
+public class GoldenBrickBlock extends HittableBlock {
+	private final Block emptyBlock;
+	private final SoundEvent coinSound;
 
-	public GoldenBrickBlock(BlockSoundGroup soundType) {
-		super(FabricBlockSettings.of(Material.STONE, MaterialColor.RED).strength(2.0F, 6.0F).sounds(soundType));
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context) {
-		return SHAPE;
+	public GoldenBrickBlock(Block emptyBlock, SoundEvent coinSound, Settings settings) {
+		super(settings);
+		this.emptyBlock = emptyBlock;
+		this.coinSound = coinSound;
 	}
 
 	@Override
@@ -51,31 +49,13 @@ public class GoldenBrickBlock extends Block {
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-		if(!worldIn.isClient && entityIn.getVelocity().y > 0.0D) {
+	public void onHit(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
+		if(!worldIn.isClient) {
 			loot(worldIn, pos);
 		}
 	}
 
 	public void loot(World worldIn, BlockPos pos) {
-		BlockState emptyBlock = Blocks.AIR.getDefaultState();
-		SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-		if(this == MubbleBlocks.SMB_GOLDEN_BRICK_BLOCK) {
-			coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-			emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
-		}
-		else if(this == MubbleBlocks.SMB3_GOLDEN_BRICK_BLOCK) {
-			coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
-			emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
-		}
-		else if(this == MubbleBlocks.SMW_GOLDEN_BRICK_BLOCK) {
-			coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
-			emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
-		}
-		else if(this == MubbleBlocks.NSMBU_GOLDEN_BRICK_BLOCK) {
-			coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
-			emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
-		}
 		final double x = pos.getX() + 0.5D;
 		final double y = pos.getY() + 0.5D + 0.6D;
 		final double z = pos.getZ() + 0.5D;
@@ -84,8 +64,8 @@ public class GoldenBrickBlock extends Block {
 		List<ItemStack> items = lootTable.generateLoot(lootContext);
 		for(ItemStack item : items) {
 			worldIn.spawnEntity(new ItemEntity(worldIn, x, y, z, item));
-			worldIn.playSound(null, x, y - 0.6D, z, coinLootSound, SoundCategory.BLOCKS, 1f, 1f);
+			worldIn.playSound(null, x, y - 0.6D, z, this.coinSound, SoundCategory.BLOCKS, 1f, 1f);
 		}
-		worldIn.setBlockState(pos, emptyBlock);
+		worldIn.setBlockState(pos, this.emptyBlock.getDefaultState());
 	}
 }

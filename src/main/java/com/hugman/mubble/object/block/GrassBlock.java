@@ -12,9 +12,10 @@ import net.minecraft.world.WorldView;
 import java.util.Random;
 
 public class GrassBlock extends net.minecraft.block.GrassBlock {
-	/* Extension for missing features */
-	public GrassBlock(Settings builder) {
+	private final Block dirt;
+	public GrassBlock(Block dirt, Settings builder) {
 		super(builder);
+		this.dirt = dirt;
 	}
 
 	private static boolean canSurvive(BlockState state, WorldView worldView, BlockPos pos) {
@@ -29,16 +30,12 @@ public class GrassBlock extends net.minecraft.block.GrassBlock {
 
 	@Override
 	public void scheduledTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
-		Block dirt = Blocks.DIRT;
-		if(this == MubbleBlocks.GREEN_HILL_GRASS_BLOCK) {
-			dirt = MubbleBlocks.GREEN_HILL_DIRT;
-		}
 		if(!worldIn.isClient) {
 			if(!worldIn.isChunkLoaded(pos)) {
 				return;
 			}
 			if(!canSurvive(state, worldIn, pos)) {
-				worldIn.setBlockState(pos, dirt.getDefaultState());
+				worldIn.setBlockState(pos, this.dirt.getDefaultState());
 			}
 			else {
 				if(worldIn.getLightLevel(pos.up()) >= 9) {

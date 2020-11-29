@@ -10,26 +10,24 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class RotatingBlock extends Block {
-	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
-
+public class RotatingBlock extends HittableBlock {
 	public RotatingBlock(BlockSoundGroup soundType) {
 		super(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).sounds(soundType));
 	}
 
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return SHAPE;
+		return COLLISION_SHAPE;
 	}
 
 	@Override
 	public void onEntityLand(BlockView world, Entity entity) {
-		Vec3d vec3d = entity.getVelocity();
-		if(entity.isSneaking() && vec3d.y < -0.1) {
+		Vec3d velocity = entity.getVelocity();
+		if(entity.isSneaking() && velocity.y < -0.1) {
 			if(!entity.world.isClient) {
 				entity.world.breakBlock(entity.getBlockPos().down(), false, entity);
 			}
-			entity.setVelocity(vec3d.x, 0.625D, vec3d.z);
+			entity.setVelocity(velocity.x, 0.625D, velocity.z);
 		}
 		else {
 			super.onEntityLand(world, entity);
@@ -44,8 +42,8 @@ public class RotatingBlock extends Block {
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-		if(!world.isClient && entity.getVelocity().y > 0.0D) {
+	public void onHit(BlockState state, World world, BlockPos pos, Entity entity) {
+		if(!world.isClient) {
 			world.breakBlock(pos, false, entity);
 		}
 	}

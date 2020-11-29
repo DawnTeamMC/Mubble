@@ -5,6 +5,7 @@ import com.hugman.dawn.api.util.BlockGetter;
 import com.hugman.mubble.object.block.BalloonBlock;
 import com.hugman.mubble.object.block.CloudBlock;
 import com.hugman.mubble.object.block.KeyDoorBlock;
+import com.hugman.mubble.object.block.QuestionBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.FallingBlock;
@@ -14,7 +15,6 @@ public enum MubbleBlockGetter implements BlockGetter {
 	KEY_DOOR("key_door", ItemGroup.REDSTONE, Render.CUTOUT),
 	CLOUD_BLOCK("cloud_block", ItemGroup.DECORATIONS, Render.TRANSLUCENT),
 	BALLOON("balloon", ItemGroup.DECORATIONS, Render.TRANSLUCENT),
-	QUESTION_BLOCK("question_block", ItemGroup.BUILDING_BLOCKS),
 	TETRIS_BLOCK("tetris_block", ItemGroup.BUILDING_BLOCKS);
 
 	private final String suffix;

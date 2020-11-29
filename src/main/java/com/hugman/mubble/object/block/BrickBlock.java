@@ -25,16 +25,14 @@ import net.minecraft.world.World;
 import java.util.List;
 import java.util.Random;
 
-public class BrickBlock extends Block {
-	protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.05D, 0.0D, 16.0D, 16.0D, 16.0D);
+public class BrickBlock extends HittableBlock {
+	private final Block emptyBlock;
+	private final SoundEvent coinSound;
 
-	public BrickBlock(BlockSoundGroup soundType) {
-		super(FabricBlockSettings.of(Material.STONE, MaterialColor.RED).strength(2.0F, 6.0F).sounds(soundType));
-	}
-
-	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView worldIn, BlockPos pos, ShapeContext context) {
-		return SHAPE;
+	public BrickBlock(Block emptyBlock, SoundEvent coinSound, Settings settings) {
+		super(settings);
+		this.emptyBlock = emptyBlock;
+		this.coinSound = coinSound;
 	}
 
 	@Override
@@ -68,8 +66,8 @@ public class BrickBlock extends Block {
 	}
 
 	@Override
-	public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity) {
-		if(!world.isClient && entity.getVelocity().y > 0.0D) {
+	public void onHit(BlockState state, World world, BlockPos pos, Entity entity) {
+		if(!world.isClient) {
 			Random rand = new Random();
 			switch(rand.nextInt(2)) {
 				case 0:
@@ -84,35 +82,17 @@ public class BrickBlock extends Block {
 
 	public void loot(World worldIn, BlockPos pos) {
 		if(!worldIn.isClient) {
-			BlockState emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
-			SoundEvent coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-			if(this == MubbleBlocks.SMB_GROUND_BRICK_BLOCK || this == MubbleBlocks.SMB_UNDERGROUND_BRICK_BLOCK || this == MubbleBlocks.SMB_CASTLE_BRICK_BLOCK) {
-				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB;
-				emptyBlock = MubbleBlocks.SMB_EMPTY_BLOCK.getDefaultState();
-			}
-			else if(this == MubbleBlocks.SMB3_BRICK_BLOCK) {
-				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMB3;
-				emptyBlock = MubbleBlocks.SMB3_EMPTY_BLOCK.getDefaultState();
-			}
-			else if(this == MubbleBlocks.SMW_BRICK_BLOCK) {
-				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_SMW;
-				emptyBlock = MubbleBlocks.SMW_EMPTY_BLOCK.getDefaultState();
-			}
-			else if(this == MubbleBlocks.NSMBU_BRICK_BLOCK) {
-				coinLootSound = MubbleSounds.BLOCK_QUESTION_BLOCK_LOOT_POWER_UP_NSMBU;
-				emptyBlock = MubbleBlocks.NSMBU_EMPTY_BLOCK.getDefaultState();
-			}
 			final double x = pos.getX() + 0.5D;
-			final double y = pos.getY() + 0.5D + 0.6D;
+			final double y = pos.getY() + 0.5D;
 			final double z = pos.getZ() + 0.5D;
 			LootTable lootTable = worldIn.getServer().getLootManager().getTable(MubbleLootTables.BRICK_BLOCK);
 			LootContext lootContext = new LootContext.Builder((ServerWorld) worldIn).parameter(LootContextParameters.BLOCK_STATE, this.getDefaultState()).parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(pos)).parameter(LootContextParameters.TOOL, ItemStack.EMPTY).build(LootContextTypes.BLOCK);
 			List<ItemStack> items = lootTable.generateLoot(lootContext);
 			for(ItemStack item : items) {
-				worldIn.spawnEntity(new ItemEntity(worldIn, x, y, z, item));
-				worldIn.playSound(null, x, y - 0.6D, z, coinLootSound, SoundCategory.BLOCKS, 1f, 1f);
+				worldIn.spawnEntity(new ItemEntity(worldIn, x, y + 0.6D, z, item));
+				worldIn.playSound(null, x, y, z, this.coinSound, SoundCategory.BLOCKS, 1f, 1f);
 			}
-			worldIn.setBlockState(pos, emptyBlock);
+			worldIn.setBlockState(pos, this.emptyBlock.getDefaultState());
 		}
 	}
 }
