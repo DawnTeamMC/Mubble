@@ -1,6 +1,10 @@
 package com.hugman.mubble.object.item.costume;
 
 import com.hugman.mubble.mixin.client.GameRendererAccessor;
+import dev.emi.trinkets.api.SlotGroups;
+import dev.emi.trinkets.api.Slots;
+import dev.emi.trinkets.api.Trinket;
+import dev.emi.trinkets.api.TrinketItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
 import net.minecraft.block.dispenser.DispenserBehavior;
@@ -24,7 +28,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.world.World;
 
-public class BlockCostume extends BlockItem {
+public class BlockCostume extends BlockItem implements Trinket {
 	public static final DispenserBehavior DISPENSER_BEHAVIOR = new ItemDispenserBehavior() {
 		@Override
 		public ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
@@ -40,7 +44,7 @@ public class BlockCostume extends BlockItem {
 		this.sound = sound;
 		this.armorType = armorType;
 		this.shader = null;
-		DispenserBlock.registerBehavior(this, DISPENSER_BEHAVIOR);
+		DispenserBlock.registerBehavior(this, TrinketItem.TRINKET_DISPENSER_BEHAVIOR);
 	}
 
 	public BlockCostume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Block baseBlock, Identifier shader) {
@@ -81,22 +85,16 @@ public class BlockCostume extends BlockItem {
 		return this.armorType;
 	}
 
-	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-		ItemStack itemstack = player.getStackInHand(hand);
-		ItemStack itemstack1 = player.getEquippedStack(EquipmentSlot.HEAD);
-		if(itemstack1.isEmpty()) {
-			player.equipStack(EquipmentSlot.HEAD, new ItemStack(this));
-			itemstack.decrement(1);
-			world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.PLAYERS, 1f, 1f);
-			return new TypedActionResult<>(ActionResult.SUCCESS, itemstack);
-		}
-		else {
-			return new TypedActionResult<>(ActionResult.FAIL, itemstack);
-		}
+		return Trinket.equipTrinket(player, hand);
 	}
 
 	public Identifier getShader() {
 		return this.shader;
+	}
+
+	@Override
+	public boolean canWearInSlot(String group, String slot) {
+		return group.equals(SlotGroups.HEAD) && slot.equals(Slots.MASK);
 	}
 }

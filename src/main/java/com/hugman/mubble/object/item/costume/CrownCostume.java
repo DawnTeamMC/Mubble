@@ -13,7 +13,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class CrownCostume extends HeadCostume {
+public class CrownCostume extends HatItem {
 	protected final Princess princess;
 
 	public CrownCostume(Item.Settings builder, Princess princess) {
@@ -24,16 +24,16 @@ public class CrownCostume extends HeadCostume {
 	@Override
 	public ActionResult useOnBlock(ItemUsageContext context) {
 		World world = context.getWorld();
-		BlockPos blockPos = context.getBlockPos();
-		BlockState iblockstate = world.getBlockState(blockPos);
-		if(iblockstate.getBlock() == MubbleBlocks.KORETATO_BLOCK && iblockstate.get(KoretatoBlock.PRINCESS) == Princess.NONE) {
-			world.addParticle(ParticleTypes.HEART, (float) blockPos.getX() + 0.5F, (float) blockPos.getY() + 1.1F, (float) blockPos.getZ() + 0.5F, 0.0D, 0.0D, 0.0D);
+		BlockPos pos = context.getBlockPos();
+		BlockState state = world.getBlockState(pos);
+		if(state.getBlock() == MubbleBlocks.KORETATO_BLOCK && state.get(KoretatoBlock.PRINCESS) == Princess.NONE) {
+			world.addParticle(ParticleTypes.HEART, (float) pos.getX() + 0.5F, (float) pos.getY() + 1.1F, (float) pos.getZ() + 0.5F, 0.0D, 0.0D, 0.0D);
 			if(!world.isClient) {
-				BlockState blockState1 = iblockstate.with(KoretatoBlock.PRINCESS, princess);
-				world.setBlockState(blockPos, blockState1, 2);
+				BlockState blockState1 = state.with(KoretatoBlock.PRINCESS, princess);
+				world.setBlockState(pos, blockState1, 2);
 				context.getStack().decrement(1);
-				world.playSound(null, blockPos, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1.0F, 1.0F);
-				world.playSound(null, blockPos, this.getEquipSound(), SoundCategory.BLOCKS, 1.0F, 1.0F);
+				world.playSound(null, pos, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, SoundCategory.BLOCKS, 1.0F, 1.0F);
+				world.playSound(null, pos, this.equipSound, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
 			return ActionResult.SUCCESS;
 		}

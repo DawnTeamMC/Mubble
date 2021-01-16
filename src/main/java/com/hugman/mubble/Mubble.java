@@ -26,6 +26,7 @@ public class Mubble implements ModInitializer {
 		MubbleEntities.init();
 		MubblePaintings.init();
 		MubbleSounds.init();
+		MubbleSlots.init();
 		MubbleItemGroups.init();
 		MubbleStats.init();
 		MubbleConfiguredFeatures.init();

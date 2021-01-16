@@ -8,17 +8,16 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.world.World;
 
-public class GuardianMaskCostume extends HeadCostume {
+public class GuardianMaskCostume extends MaskItem {
 	public GuardianMaskCostume(Item.Settings builder) {
 		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 
 	@Override
-	public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks) {
-		if(player.isSneaking() && ((PlayerEntity) player).getItemCooldownManager().getCooldownProgress(this, 0) == 0) {
-			((PlayerEntity) player).getItemCooldownManager().set(this, 25);
-			((PlayerEntity) player).incrementStat(Stats.USED.getOrCreateStat(this));
+	public void tick(PlayerEntity player, ItemStack stack) {
+		if(player.isSneaking() && player.getItemCooldownManager().getCooldownProgress(this, 0) == 0) {
+			player.getItemCooldownManager().set(this, 25);
+			player.incrementStat(Stats.USED.getOrCreateStat(this));
 		}
-		super.usageTick(world, player, stack, remainingUseTicks);
 	}
 }

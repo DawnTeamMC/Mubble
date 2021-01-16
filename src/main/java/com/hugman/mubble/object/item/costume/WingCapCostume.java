@@ -4,33 +4,29 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
-public class WingCapCostume extends HeadCostume {
+public class WingCapCostume extends HatItem {
 	public WingCapCostume(Item.Settings builder) {
 		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 
 	@Override
-	public boolean canRepair(ItemStack toRepair, ItemStack repair) {
-		return repair.getItem() == Items.FEATHER;
+	public boolean canRepair(ItemStack stack, ItemStack ingredient) {
+		return ingredient.getItem() == Items.FEATHER;
 	}
 
 	@Override
-	public void usageTick(World world, LivingEntity player, ItemStack stack, int remainingUseTicks) {
+	public void tick(PlayerEntity player, ItemStack stack) {
 		if(isUsable(stack) && player.isSprinting()) {
-			stack.damage(1, player, (p_214023_1_) -> {
-				p_214023_1_.sendEquipmentBreakStatus(EquipmentSlot.HEAD);
-			});
-		}
-		if(!world.isClient && isUsable(stack) && player.isSprinting()) {
+			stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
 			player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 1, 2));
 			player.fallDistance = 0f;
 		}
-		super.usageTick(world, player, stack, remainingUseTicks);
 	}
 }
