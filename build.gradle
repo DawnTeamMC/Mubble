@@ -1,91 +1,20 @@
-buildscript {
-    dependencies {
-        classpath "de.guntram.mcmod:crowdin-translate:${crowdin_translate_version}"
-    }
-    repositories {
-        maven { url "https://minecraft.guntram.de/maven/" }
-    }
-}
-
-plugins {
-    id 'fabric-loom' version '0.5-SNAPSHOT'
-    id 'maven-publish'
-}
-
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
-
-archivesBaseName = project.mod_id
-version = project.mod_version
-group = "com.github.DawnTeam"
-
-apply plugin: 'de.guntram.mcmod.crowdin-translate'
-crowdintranslate.setCrowdinProjectname 'dawnteam'
-crowdintranslate.setMinecraftProjectName project.mod_id
-crowdintranslate.setJsonSourceName project.mod_id
+apply from: 'https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/build_template.gradle'
 
 repositories {
     jcenter()
     mavenLocal()
     maven { url 'https://jitpack.io' }
+    maven { url 'http://maven.terraformersmc.com/' }
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings "net.fabricmc:yarn:${yarn_mappings}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${loader_version}"
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
-    modApi "com.github.DawnTeamMC:DawnAPI:${dawn_version}"
+    modApi "com.github.DawnTeamMC:DawnAPI:v${dawn_version}"
     modApi "com.github.emilyploszaj:trinkets:${trinkets_version}"
 
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
-}
-
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.encoding = "UTF-8"
-
-    def targetVersion = 8
-    if (JavaVersion.current().isJava9Compatible()) {
-        it.options.release = targetVersion
-    }
-}
-
-java {
-    withSourcesJar()
-}
-
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
-    }
-}
-
-build {
-    dependsOn downloadTranslations
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-
-            afterEvaluate {
-                artifact remapJar
-            }
-        }
-    }
-
-    repositories {
-    }
 }

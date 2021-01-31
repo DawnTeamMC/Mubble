@@ -1,8 +1,9 @@
 {
-	"name": "Mubble",
-	"id": "mubble",
+	"schemaVersion": 1,
+	"name": "${mod_name}",
+	"id": "${mod_id}",
 	"version": "${version}",
-	"icon": "assets/mubble/textures/logo.png",
+	"icon": "assets/${mod_id}/textures/logo.png",
 	"description": "Expand your world with features from the Nintendo universe, and way more.",
 	"authors": [
 		"Hugman",
@@ -12,9 +13,9 @@
 		"Yanis48"
 	],
 	"contact": {
-		"homepage": "https://www.curseforge.com/minecraft/mc-mods/mubble",
-		"sources": "https://github.com/DawnTeamMC/Mubble",
-		"issues": "https://github.com/DawnTeamMC/Mubble/issues"
+		"homepage": "https://www.curseforge.com/minecraft/mc-mods/${curseforge_slug}",
+		"sources": "https://github.com/DawnTeamMC/${github_name}",
+		"issues": "https://github.com/DawnTeamMC/${github_name}/issues"
 	},
 	"environment": "*",
 	"entrypoints": {
@@ -42,6 +43,5 @@
 			"projectID": 390135
 		}
 	},
-	"license": "MIT",
-	"schemaVersion": 1
+	"license": "MIT"
 }
