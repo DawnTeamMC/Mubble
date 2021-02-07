@@ -11,8 +11,8 @@ import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
-public class WingCapCostume extends HatItem {
-	public WingCapCostume(Item.Settings builder) {
+public class WingCapItem extends HatItem {
+	public WingCapItem(Item.Settings builder) {
 		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 

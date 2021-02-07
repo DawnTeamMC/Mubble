@@ -28,7 +28,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.BlockPointer;
 import net.minecraft.world.World;
 
-public class BlockCostume extends BlockItem implements Trinket {
+public class WearableBlockItem extends BlockItem implements Trinket {
 	public static final DispenserBehavior DISPENSER_BEHAVIOR = new ItemDispenserBehavior() {
 		@Override
 		public ItemStack dispenseSilently(BlockPointer source, ItemStack stack) {
@@ -39,7 +39,7 @@ public class BlockCostume extends BlockItem implements Trinket {
 	protected final SoundEvent sound;
 	protected final Identifier shader;
 
-	public BlockCostume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Block baseBlock) {
+	public WearableBlockItem(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Block baseBlock) {
 		super(baseBlock, builder);
 		this.sound = sound;
 		this.armorType = armorType;
@@ -47,7 +47,7 @@ public class BlockCostume extends BlockItem implements Trinket {
 		DispenserBlock.registerBehavior(this, TrinketItem.TRINKET_DISPENSER_BEHAVIOR);
 	}
 
-	public BlockCostume(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Block baseBlock, Identifier shader) {
+	public WearableBlockItem(Item.Settings builder, SoundEvent sound, EquipmentSlot armorType, Block baseBlock, Identifier shader) {
 		super(baseBlock, builder);
 		this.sound = sound;
 		this.armorType = armorType;

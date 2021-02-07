@@ -13,8 +13,8 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class GooigiCapCostume extends HatItem {
-	public GooigiCapCostume(Item.Settings builder, SoundEvent sound) {
+public class GooigiCapItem extends HatItem {
+	public GooigiCapItem(Item.Settings builder, SoundEvent sound) {
 		super(builder, sound);
 	}
 

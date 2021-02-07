@@ -4,6 +4,7 @@ import com.hugman.mubble.init.MubbleSounds;
 import dev.emi.trinkets.api.Trinket;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -36,9 +37,10 @@ public class CappyItem extends HatItem {
 
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-		if(Trinket.equipTrinket(player, hand).getResult() == ActionResult.SUCCESS) {
+		TypedActionResult<ItemStack> typedActionResult = Trinket.equipTrinket(player, hand);
+		if(typedActionResult.getResult() == ActionResult.SUCCESS) {
 			world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
 		}
-		return super.use(world, player, hand);
+		return typedActionResult;
 	}
 }

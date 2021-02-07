@@ -1,4 +1,5 @@
 {
+	"modmenu.descriptionTranslation.mubble": "Expand your world with features from the Nintendo universe, and way more.",
 	"itemGroup.mubble.costumes": "Costumes",
 	"itemGroup.mubble.instruments": "Instruments",
 
@@ -435,6 +436,8 @@
 	"container.mubble.placer": "Placer",
 	"container.mubble.timeswap_table": "Timeswap Table",
 	"container.mubble.present": "Present",
+
+	"trinkets.slot.head.hat": "Hat",
 
 	"entity.mubble.custom_tnt": "Custom TNT",
 	"entity.mubble.flying_block": "Flying Block",

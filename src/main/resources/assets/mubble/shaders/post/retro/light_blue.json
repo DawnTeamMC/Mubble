@@ -10,27 +10,15 @@
 			"uniforms": [
 				{
 					"name": "RedMatrix",
-					"values": [
-						0.0,
-						0.0,
-						0.0
-					]
+					"values": [0.0, 0.0, 0.0]
 				},
 				{
 					"name": "GreenMatrix",
-					"values": [
-						0.3,
-						0.3,
-						0.1
-					]
+					"values": [0.3, 0.3, 0.1]
 				},
 				{
 					"name": "BlueMatrix",
-					"values": [
-						0.3,
-						0.3,
-						0.1
-					]
+					"values": [0.3, 0.3, 0.1]
 				}
 			]
 		},
@@ -41,15 +29,11 @@
 			"uniforms": [
 				{
 					"name": "Resolution",
-					"values": [
-						32.0
-					]
+					"values": [32.0]
 				},
 				{
 					"name": "MosaicSize",
-					"values": [
-						4.0
-					]
+					"values": [4.0]
 				}
 			]
 		}

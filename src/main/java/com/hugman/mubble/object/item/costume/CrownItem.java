@@ -13,10 +13,10 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class CrownCostume extends HatItem {
+public class CrownItem extends HatItem {
 	protected final Princess princess;
 
-	public CrownCostume(Item.Settings builder, Princess princess) {
+	public CrownItem(Item.Settings builder, Princess princess) {
 		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
 		this.princess = princess;
 	}

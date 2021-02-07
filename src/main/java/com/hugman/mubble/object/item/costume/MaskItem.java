@@ -13,13 +13,19 @@ import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class MaskItem extends WearableItem {
-	public MaskItem(Settings settings, SoundEvent equipSound) {
-		super(settings, equipSound, SlotGroups.HEAD, Slots.MASK);
+	public MaskItem(Settings settings, SoundEvent equipSound, Identifier shader, StatusEffectInstance... potionEffects) {
+		super(SlotGroups.HEAD, Slots.MASK, settings, equipSound, shader);
+	}
+
+	public MaskItem(Settings settings, SoundEvent equipSound, StatusEffectInstance... potionEffects) {
+		this(settings, equipSound, null, potionEffects);
 	}
 
 	@Override
@@ -27,9 +33,8 @@ public class MaskItem extends WearableItem {
 		ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 		Trinket.translateToFace(matrixStack, model, player, headYaw, headPitch);
 		matrixStack.scale(0.6F, 0.6F, 0.6F);
-		matrixStack.translate(0.0D, 16.0D, 0.475D);
+		matrixStack.translate(0.0D, 0.0D, 0.475D);
 		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180));
 		itemRenderer.renderItem(new ItemStack(this), ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
-		itemRenderer.renderItem(new ItemStack(this), ModelTransformation.Mode.HEAD, false, matrixStack, vcp, light, OverlayTexture.DEFAULT_UV, itemRenderer.getModels().getModelManager().getModel(new ModelIdentifier(Registry.ITEM.getId(this), "costume")));
 	}
 }

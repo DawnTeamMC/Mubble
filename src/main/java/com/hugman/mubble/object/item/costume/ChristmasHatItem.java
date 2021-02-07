@@ -11,8 +11,8 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class ChristmasHatCostume extends HatItem {
-	public ChristmasHatCostume(Item.Settings builder, SoundEvent sound) {
+public class ChristmasHatItem extends HatItem {
+	public ChristmasHatItem(Item.Settings builder, SoundEvent sound) {
 		super(builder, sound);
 	}
 

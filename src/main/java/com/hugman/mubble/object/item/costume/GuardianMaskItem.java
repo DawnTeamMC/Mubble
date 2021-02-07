@@ -8,8 +8,8 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.world.World;
 
-public class GuardianMaskCostume extends MaskItem {
-	public GuardianMaskCostume(Item.Settings builder) {
+public class GuardianMaskItem extends MaskItem {
+	public GuardianMaskItem(Item.Settings builder) {
 		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
 	}
 

@@ -1,8 +1,8 @@
 package com.hugman.mubble.mixin.client;
 
 import com.hugman.mubble.object.item.LightsaberItem;
-import com.hugman.mubble.object.item.costume.BlockCostume;
-import com.hugman.mubble.object.item.costume.Costume;
+import com.hugman.mubble.object.item.costume.WearableBlockItem;
+import com.hugman.mubble.object.item.costume.WearableItem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderEffect;
 import net.minecraft.client.render.GameRenderer;
@@ -35,27 +35,6 @@ public class PlayerEntityMixin {
 				}
 				if(selectedItem.getItem() instanceof LightsaberItem) {
 					((LightsaberItem) selectedItem.getItem()).onPullIn(player, world);
-				}
-			}
-		}
-		if(world.isClient) {
-			GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
-			ShaderEffect shaderEffect = renderer.getShader();
-			if(!(headStack.getItem() instanceof Costume) && !(headStack.getItem() instanceof BlockCostume)) {
-				if(shaderEffect != null) {
-					renderer.disableShader();
-				}
-			}
-			if(headStack.getItem() instanceof Costume) {
-				Identifier shader = ((Costume) headStack.getItem()).getShader();
-				if(shaderEffect != null && shader == null) {
-					renderer.disableShader();
-				}
-			}
-			if(headStack.getItem() instanceof BlockCostume) {
-				Identifier shader = ((BlockCostume) headStack.getItem()).getShader();
-				if(shaderEffect != null && shader == null) {
-					renderer.disableShader();
 				}
 			}
 		}

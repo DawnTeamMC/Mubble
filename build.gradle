@@ -1,7 +1,11 @@
+plugins {
+    id 'fabric-loom' version '0.5-SNAPSHOT' apply false
+    id 'maven-publish'
+}
+
 apply from: 'https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/build_template.gradle'
 
 repositories {
-    jcenter()
     mavenLocal()
     maven { url 'https://jitpack.io' }
     maven { url 'http://maven.terraformersmc.com/' }
