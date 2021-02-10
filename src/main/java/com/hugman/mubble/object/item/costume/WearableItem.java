@@ -32,9 +32,14 @@ public abstract class WearableItem extends TrinketItem {
 	}
 
 	@Override
+	public boolean canWearInSlot(String group, String slot) {
+		return group.equals(this.group) && slot.equals(this.slot);
+	}
+
+	@Override
 	public void onEquip(PlayerEntity player, ItemStack stack) {
 		World world = player.getEntityWorld();
-		//player.getEntityWorld().playSound(null, player.getX(), player.getY(), player.getZ(), this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
+		player.getEntityWorld().playSound(null, player.getX(), player.getY(), player.getZ(), this.equipSound, SoundCategory.PLAYERS, 1f, 1f);
 		if(world.isClient) {
 			GameRenderer renderer = MinecraftClient.getInstance().gameRenderer;
 			ShaderEffect shaderEffect = renderer.getShader();
@@ -69,11 +74,6 @@ public abstract class WearableItem extends TrinketItem {
 				player.addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 200, effect.getAmplifier(), false, false, true));
 			}
 		}
-	}
-
-	@Override
-	public boolean canWearInSlot(String group, String slot) {
-		return group.equals(this.group) && slot.equals(this.slot);
 	}
 
 	public static boolean isUsable(ItemStack stack) {

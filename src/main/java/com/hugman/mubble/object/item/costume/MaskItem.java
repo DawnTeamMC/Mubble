@@ -35,6 +35,8 @@ public class MaskItem extends WearableItem {
 		matrixStack.scale(0.6F, 0.6F, 0.6F);
 		matrixStack.translate(0.0D, 0.0D, 0.475D);
 		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180));
-		itemRenderer.renderItem(new ItemStack(this), ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
+		ItemStack stack = new ItemStack(this);
+		stack.getOrCreateTag().putInt("trinket", 2);
+		itemRenderer.renderItem(stack, ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
 	}
 }

@@ -69,17 +69,17 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item KID_HAT = register(new ItemCreator.Builder("kid_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
 
 	/* PUYO PUYO */
-	public static final Item RED_PUYO = register(new ItemCreator.Builder("red_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.RED_PUYO)));
-	public static final Item YELLOW_PUYO = register(new ItemCreator.Builder("yellow_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.YELLOW_PUYO)));
-	public static final Item GREEN_PUYO = register(new ItemCreator.Builder("green_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.GREEN_PUYO)));
-	public static final Item TURQUOISE_PUYO = register(new ItemCreator.Builder("turquoise_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.TURQUOISE_PUYO)));
-	public static final Item BLUE_PUYO = register(new ItemCreator.Builder("blue_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.BLUE_PUYO)));
-	public static final Item PURPLE_PUYO = register(new ItemCreator.Builder("purple_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.PURPLE_PUYO)));
-	public static final Item GRAY_PUYO = register(new ItemCreator.Builder("gray_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, EquipmentSlot.HEAD, MubbleBlocks.GRAY_PUYO)));
-	public static final Item GARBAGE_PUYO = register(new ItemCreator.Builder("garbage_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlot.HEAD, MubbleBlocks.GARBAGE_PUYO)));
-	public static final Item POINT_PUYO = register(new ItemCreator.Builder("point_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlot.HEAD, MubbleBlocks.POINT_PUYO)));
-	public static final Item HARD_PUYO = register(new ItemCreator.Builder("hard_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE, EquipmentSlot.HEAD, MubbleBlocks.HARD_PUYO)));
-	public static final Item IRON_PUYO = register(new ItemCreator.Builder("iron_puyo", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_METAL_PLACE, EquipmentSlot.HEAD, MubbleBlocks.IRON_PUYO)));
+	public static final Item RED_PUYO = register(new ItemCreator.Builder("red_puyo", new WearableBlockItem(MubbleBlocks.RED_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE)));
+	public static final Item YELLOW_PUYO = register(new ItemCreator.Builder("yellow_puyo", new WearableBlockItem(MubbleBlocks.YELLOW_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE)));
+	public static final Item GREEN_PUYO = register(new ItemCreator.Builder("green_puyo", new WearableBlockItem(MubbleBlocks.GREEN_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE)));
+	public static final Item TURQUOISE_PUYO = register(new ItemCreator.Builder("turquoise_puyo", new WearableBlockItem(MubbleBlocks.TURQUOISE_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE)));
+	public static final Item BLUE_PUYO = register(new ItemCreator.Builder("blue_puyo", new WearableBlockItem(MubbleBlocks.BLUE_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE)));
+	public static final Item PURPLE_PUYO = register(new ItemCreator.Builder("purple_puyo", new WearableBlockItem(MubbleBlocks.PURPLE_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE)));
+	public static final Item GRAY_PUYO = register(new ItemCreator.Builder("gray_puyo", new WearableBlockItem(MubbleBlocks.GRAY_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE)));
+	public static final Item GARBAGE_PUYO = register(new ItemCreator.Builder("garbage_puyo", new WearableBlockItem(MubbleBlocks.GARBAGE_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE)));
+	public static final Item POINT_PUYO = register(new ItemCreator.Builder("point_puyo", new WearableBlockItem(MubbleBlocks.POINT_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE)));
+	public static final Item HARD_PUYO = register(new ItemCreator.Builder("hard_puyo", new WearableBlockItem(MubbleBlocks.HARD_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE)));
+	public static final Item IRON_PUYO = register(new ItemCreator.Builder("iron_puyo", new WearableBlockItem(MubbleBlocks.IRON_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_METAL_PLACE)));
 
 	/* BALDI'S BASICS IN EDUCATION AND LEARNING */
 	public static final Item BALDI_HEAD = register(new ItemCreator.Builder("baldi_head", new HatItem(Settings.COSTUME, SoundEvents.ENTITY_PARROT_IMITATE_VEX)));
@@ -89,7 +89,7 @@ public class MubbleCostumes extends MubblePack {
 
 	/* YOUTUBE */
 	public static final Item MAYRO_CAP = register(new ItemCreator.Builder("mayro_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-	public static final Item KORETATO_BLOCK = register(new ItemCreator.Builder("koretato_block", new WearableBlockItem(Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SNOW_PLACE, EquipmentSlot.HEAD, MubbleBlocks.KORETATO_BLOCK)));
+	public static final Item KORETATO_BLOCK = register(new ItemCreator.Builder("koretato_block", new WearableBlockItem(MubbleBlocks.KORETATO_BLOCK, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SNOW_PLACE)));
 	public static final Item NOTEBLOCK_HEAD = register(new ItemCreator.Builder("noteblock_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
 
 	public static void init() {

@@ -34,13 +34,9 @@ public class CappyItem extends HatItem {
 			}
 		}
 	}
-
 	@Override
-	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
-		TypedActionResult<ItemStack> typedActionResult = Trinket.equipTrinket(player, hand);
-		if(typedActionResult.getResult() == ActionResult.SUCCESS) {
-			world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
-		}
-		return typedActionResult;
+	public void onEquip(PlayerEntity player, ItemStack stack) {
+		player.getEntityWorld().playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);
+		super.onEquip(player, stack);
 	}
 }

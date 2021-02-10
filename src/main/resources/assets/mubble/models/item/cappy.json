@@ -2,5 +2,13 @@
 	"parent": "item/generated",
 	"textures": {
 		"layer0": "mubble:item/cappy"
-	}
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "mubble:trinket": 1
+            },
+            "model": "mubble:costume/cappy"
+        }
+    ]
 }

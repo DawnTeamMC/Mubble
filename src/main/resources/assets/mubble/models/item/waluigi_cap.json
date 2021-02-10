@@ -1,6 +1,14 @@
 {
-	"parent": "mubble:item/cap",
+	"parent": "item/generated",
 	"textures": {
-		"cap": "mubble:costume/waluigi_cap"
-	}
+		"layer0": "mubble:item/waluigi_cap"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "mubble:trinket": 1
+            },
+            "model": "mubble:costume/waluigi_cap"
+        }
+    ]
 }

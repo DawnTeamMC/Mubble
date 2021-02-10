@@ -1,6 +1,14 @@
 {
-	"parent": "mubble:item/cap",
+	"parent": "item/generated",
 	"textures": {
-		"cap": "mubble:costume/wario_cap"
-	}
+		"layer0": "mubble:item/wario_cap"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "mubble:trinket": 1
+            },
+            "model": "mubble:costume/wario_cap"
+        }
+    ]
 }

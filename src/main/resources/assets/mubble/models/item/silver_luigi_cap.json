@@ -1,6 +1,14 @@
 {
-	"parent": "mubble:item/cap",
+	"parent": "item/generated",
 	"textures": {
-		"cap": "minecraft:block/iron_block"
-	}
+		"layer0": "mubble:item/silver_luigi_cap"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "mubble:trinket": 1
+            },
+            "model": "mubble:costume/silver_luigi_cap"
+        }
+    ]
 }

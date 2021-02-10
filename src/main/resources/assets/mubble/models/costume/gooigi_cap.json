@@ -1,0 +1,6 @@
+{
+	"parent": "mubble:costume/cap",
+	"textures": {
+		"cap": "minecraft:block/slime_block"
+	}
+}

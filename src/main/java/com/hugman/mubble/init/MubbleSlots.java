@@ -12,5 +12,6 @@ public class MubbleSlots {
 	public static void init() {
 		TrinketSlots.addSlot(SlotGroups.HEAD, MubbleSlots.HAT, Mubble.MOD_DATA.id("textures/item/empty_trinket_slot_hat.png"));
 		TrinketSlots.addSlot(SlotGroups.HEAD, Slots.MASK, new Identifier("trinkets", "textures/item/empty_trinket_slot_mask.png"));
+		TrinketSlots.addSlot(SlotGroups.CHEST, Slots.NECKLACE, new Identifier("trinkets", "textures/item/empty_trinket_slot_necklace.png"));
 	}
 }

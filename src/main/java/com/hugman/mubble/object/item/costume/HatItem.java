@@ -1,22 +1,16 @@
 package com.hugman.mubble.object.item.costume;
 
-import com.hugman.mubble.Mubble;
 import com.hugman.mubble.init.MubbleCostumes;
 import com.hugman.mubble.init.MubbleSlots;
 import dev.emi.trinkets.api.SlotGroups;
-import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.Trinket;
-import net.fabricmc.fabric.api.renderer.v1.RendererAccess;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import net.minecraft.client.render.item.ItemModels;
 import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.EquipmentSlot;
@@ -27,7 +21,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class HatItem extends WearableItem {
 	public HatItem(Settings settings, SoundEvent equipSound, Identifier shader, StatusEffectInstance... potionEffects) {
@@ -63,11 +56,8 @@ public class HatItem extends WearableItem {
 			matrixStack.scale(1.1F, 1.1F, 1.1F);
 		}
 		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180));
-		//itemRenderer.renderItem(new ItemStack(this), ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
-
-		//BakedModel bakedModel = itemRenderer.getModels().getModel(this);
-		BakedModel bakedModel = itemRenderer.getModels().getModelManager().getModel(new ModelIdentifier("mubble:" + Registry.ITEM.getId(this).getPath() + "#inventory"));
-		itemRenderer.renderItem(new ItemStack(this), ModelTransformation.Mode.HEAD, false, matrixStack, vcp, light, OverlayTexture.DEFAULT_UV, bakedModel);
-		//itemRenderer.renderItem(new ItemStack(this), ModelTransformation.Mode.HEAD, false, matrixStack, vcp, light, OverlayTexture.DEFAULT_UV, itemRenderer.getModels().getModelManager().getModel(new ModelIdentifier(Registry.ITEM.getId(this), "costume")));
+		ItemStack stack = new ItemStack(this);
+		stack.getOrCreateTag().putInt("Trinket", 1);
+		itemRenderer.renderItem(stack, ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
 	}
 }

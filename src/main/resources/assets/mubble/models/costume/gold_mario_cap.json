@@ -1,0 +1,6 @@
+{
+	"parent": "mubble:costume/cap",
+	"textures": {
+		"cap": "minecraft:block/gold_block"
+	}
+}

@@ -9,6 +9,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.client.model.FabricModelPredicateProviderRegistry;
 import net.minecraft.client.render.entity.FlyingItemEntityRenderer;
 
 @Environment(EnvType.CLIENT)
@@ -19,6 +20,11 @@ public class MubbleClient implements ClientModInitializer {
 		MubbleColorMaps.registerColors();
 		registerEntityRenders();
 		LightsaberEvents.init();
+
+		FabricModelPredicateProviderRegistry.register(Mubble.MOD_DATA.id("trinket"), (stack, world, entity) -> {
+			if(entity == null && stack.getOrCreateTag().contains("Trinket")) return stack.getOrCreateTag().getInt("Trinket");
+			return 0;
+		});
 	}
 
 	private void registerEntityRenders() {
