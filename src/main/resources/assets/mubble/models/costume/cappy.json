@@ -1,7 +1,8 @@
 {
 	"parent": "mubble:costume/cap",
 	"textures": {
-		"cap": "mubble:costume/cappy"
+		"eyes": "mubble:costume/cappy/eyes",
+		"cap": "mubble:costume/cappy/cap"
 	},
 	"elements": [
 		{
@@ -31,11 +32,11 @@
 			"from": [2.75, 1, 0],
 			"to": [8, 8, 1],
 			"faces": {
-				"north": {"uv": [14, 0, 16, 3], "texture": "#cap"},
+				"north": {"uv": [8, 0, 16, 12], "texture": "#eyes"},
 				"east": {"uv": [14, 0, 14.5, 3], "texture": "#cap"},
-				"south": {"uv": [14, 3, 16, 6], "texture": "#cap"},
-				"west": {"uv": [15.5, 0, 16, 3], "texture": "#cap"},
-				"up": {"uv": [14, 0, 16, 0.5], "texture": "#cap"},
+				"south": {"uv": [10.5, 0, 12.5, 3], "texture": "#cap"},
+				"west": {"uv": [12, 0, 12.5, 3], "texture": "#cap"},
+				"up": {"uv": [10.5, 0, 12.5, 0.5], "texture": "#cap"},
 				"down": {"uv": [14, 2.5, 16, 3], "texture": "#cap"}
 			}
 		},
@@ -43,11 +44,11 @@
 			"from": [8, 1, 0],
 			"to": [13.25, 8, 1],
 			"faces": {
-				"north": {"uv": [12, 0, 14, 3], "texture": "#cap"},
-				"east": {"uv": [12, 0, 12.5, 3], "texture": "#cap"},
-				"south": {"uv": [12, 3, 14, 6], "texture": "#cap"},
+				"north": {"uv": [0, 0, 8, 12], "texture": "#eyes"},
+				"east": {"uv": [8.5, 0, 9, 3], "texture": "#cap"},
+				"south": {"uv": [8.5, 0, 10.5, 3], "texture": "#cap"},
 				"west": {"uv": [13.5, 0, 14, 3], "texture": "#cap"},
-				"up": {"uv": [12, 0, 14, 0.5], "texture": "#cap"},
+				"up": {"uv": [8.5, 0, 10.5, 0.5], "texture": "#cap"},
 				"down": {"uv": [12, 2.5, 14, 3], "texture": "#cap"}
 			}
 		},

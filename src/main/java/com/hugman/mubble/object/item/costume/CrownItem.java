@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 public class CrownItem extends HatItem {
 	protected final Princess princess;
 
-	public CrownItem(Item.Settings builder, Princess princess) {
-		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_IRON);
+	public CrownItem(Settings builder, Princess princess) {
+		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false);
 		this.princess = princess;
 	}
 

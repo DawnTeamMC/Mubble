@@ -7,13 +7,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
 public class ChristmasHatItem extends HatItem {
-	public ChristmasHatItem(Item.Settings builder, SoundEvent sound) {
-		super(builder, sound);
+	public ChristmasHatItem(Settings builder) {
+		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false);
 	}
 
 	@Override

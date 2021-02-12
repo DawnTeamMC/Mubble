@@ -23,12 +23,14 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class HatItem extends WearableItem {
-	public HatItem(Settings settings, SoundEvent equipSound, Identifier shader, StatusEffectInstance... potionEffects) {
+	protected final boolean isHeadSet;
+	public HatItem(Settings settings, SoundEvent equipSound, boolean isHeadSet, Identifier shader, StatusEffectInstance... potionEffects) {
 		super(SlotGroups.HEAD, MubbleSlots.HAT, settings, equipSound, shader);
+		this.isHeadSet = isHeadSet;
 	}
 
-	public HatItem(Settings settings, SoundEvent equipSound, StatusEffectInstance... potionEffects) {
-		this(settings, equipSound, null, potionEffects);
+	public HatItem(Settings settings, SoundEvent equipSound, boolean isHeadSet, StatusEffectInstance... potionEffects) {
+		this(settings, equipSound, isHeadSet, null, potionEffects);
 	}
 
 	@Override
@@ -51,11 +53,16 @@ public class HatItem extends WearableItem {
 		Trinket.translateToFace(matrixStack, model, player, headYaw, headPitch);
 		matrixStack.scale(0.6F, 0.6F, 0.6F);
 		matrixStack.translate(0.0D, 0.0D, 0.475D);
-		if(player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem) {
-			matrixStack.translate(0.0D, -0.1D, 0.0D);
-			matrixStack.scale(1.1F, 1.1F, 1.1F);
-		}
 		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180));
+		if(!isHeadSet) {
+			if(player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem) {
+				matrixStack.translate(0.0D, 0.1D, 0.0D);
+				matrixStack.scale(1.1F, 1.1F, 1.1F);
+			}
+			if(!player.isFallFlying()) {
+				matrixStack.translate(0.0D, - Math.min(0.0D, (player.getVelocity().getY() + 0.6D) * 0.45D), 0.0D);
+			}
+		}
 		ItemStack stack = new ItemStack(this);
 		stack.getOrCreateTag().putInt("Trinket", 1);
 		itemRenderer.renderItem(stack, ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);

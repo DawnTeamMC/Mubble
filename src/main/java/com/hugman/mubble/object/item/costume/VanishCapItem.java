@@ -9,7 +9,7 @@ import net.minecraft.sound.SoundEvents;
 
 public class VanishCapItem extends HatItem {
 	public VanishCapItem(Item.Settings builder) {
-		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER);
+		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false);
 	}
 
 	@Override

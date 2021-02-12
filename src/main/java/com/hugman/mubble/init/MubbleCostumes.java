@@ -13,7 +13,7 @@ import net.minecraft.sound.SoundEvents;
 
 public class MubbleCostumes extends MubblePack {
 	/* MUBBLE */
-	public static final Item HEADPHONES = register(new ItemCreator.Builder("headphones", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
+	public static final Item HEADPHONES = register(new ItemCreator.Builder("headphones", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item WHITE_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("white_virtual_googles", new MaskItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.WHITE_RETRO)));
 	public static final Item LIGHT_GRAY_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("light_gray_virtual_googles", new MaskItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.LIGHT_GRAY_RETRO)));
 	public static final Item GRAY_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("gray_virtual_googles", new MaskItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.GRAY_RETRO)));
@@ -30,43 +30,43 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item PURPLE_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("purple_virtual_googles", new MaskItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.PURPLE_RETRO)));
 	public static final Item MAGENTA_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("magenta_virtual_googles", new MaskItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.MAGENTA_RETRO)));
 	public static final Item PINK_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("pink_virtual_googles", new MaskItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.PINK_RETRO)));
-	public static final Item CHRISTMAS_HAT = register(new ItemCreator.Builder("christmas_hat", new ChristmasHatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
+	public static final Item CHRISTMAS_HAT = register(new ItemCreator.Builder("christmas_hat", new ChristmasHatItem(Settings.COSTUME)));
 
 	/* SUPER MARIO */
-	public static final Item CAPPY = register(new ItemCreator.Builder("cappy", new CappyItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-	public static final Item LUIGI_CAP = register(new ItemCreator.Builder("luigi_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 0), new StatusEffectInstance(StatusEffects.SPEED, 5, 0))));
-	public static final Item WARIO_CAP = register(new ItemCreator.Builder("wario_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new StatusEffectInstance(StatusEffects.SLOWNESS, 5, 0), new StatusEffectInstance(StatusEffects.STRENGTH, 5, 0))));
-	public static final Item WALUIGI_CAP = register(new ItemCreator.Builder("waluigi_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 1))));
+	public static final Item CAPPY = register(new ItemCreator.Builder("cappy", new CappyItem(Settings.COSTUME)));
+	public static final Item LUIGI_CAP = register(new ItemCreator.Builder("luigi_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 0), new StatusEffectInstance(StatusEffects.SPEED, 5, 0))));
+	public static final Item WARIO_CAP = register(new ItemCreator.Builder("wario_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.SLOWNESS, 5, 0), new StatusEffectInstance(StatusEffects.STRENGTH, 5, 0))));
+	public static final Item WALUIGI_CAP = register(new ItemCreator.Builder("waluigi_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 1))));
 	public static final Item VANISH_CAP = register(new ItemCreator.Builder("vanish_cap", new VanishCapItem(Settings.COSTUME)));
 	public static final Item WING_CAP = register(new ItemCreator.Builder("wing_cap", new WingCapItem(Settings.COSTUME.maxDamageIfAbsent(600))));
-	public static final Item GOOIGI_CAP = register(new ItemCreator.Builder("gooigi_cap", new GooigiCapItem(Settings.COSTUME, SoundEvents.BLOCK_SLIME_BLOCK_PLACE)));
-	public static final Item GOLD_MARIO_CAP = register(new ItemCreator.Builder("gold_mario_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_GOLD)));
-	public static final Item SILVER_LUIGI_CAP = register(new ItemCreator.Builder("silver_luigi_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
+	public static final Item GOOIGI_CAP = register(new ItemCreator.Builder("gooigi_cap", new GooigiCapItem(Settings.COSTUME)));
+	public static final Item GOLD_MARIO_CAP = register(new ItemCreator.Builder("gold_mario_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, false)));
+	public static final Item SILVER_LUIGI_CAP = register(new ItemCreator.Builder("silver_luigi_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item PRINCESS_PEACH_CROWN = register(new ItemCreator.Builder("princess_peach_crown", new CrownItem(Settings.COSTUME, Princess.PEACH)));
 	public static final Item PRINCESS_DAISY_CROWN = register(new ItemCreator.Builder("princess_daisy_crown", new CrownItem(Settings.COSTUME, Princess.DAISY)));
-	public static final Item ROSALINA_CROWN = register(new ItemCreator.Builder("rosalina_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
-	public static final Item PINK_GOLD_PEACH_CROWN = register(new ItemCreator.Builder("pink_gold_peach_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
-	public static final Item SUPER_CROWN = register(new ItemCreator.Builder("super_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
-	public static final Item MARIO_WEDDING_HAT = register(new ItemCreator.Builder("mario_wedding_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-	public static final Item BOO_HAT = register(new ItemCreator.Builder("boo_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-	public static final Item BROQUE_MONSIEUR_HEAD = register(new ItemCreator.Builder("broque_monsieur_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
+	public static final Item ROSALINA_CROWN = register(new ItemCreator.Builder("rosalina_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
+	public static final Item PINK_GOLD_PEACH_CROWN = register(new ItemCreator.Builder("pink_gold_peach_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
+	public static final Item SUPER_CROWN = register(new ItemCreator.Builder("super_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
+	public static final Item MARIO_WEDDING_HAT = register(new ItemCreator.Builder("mario_wedding_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
+	public static final Item BOO_HAT = register(new ItemCreator.Builder("boo_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
+	public static final Item BROQUE_MONSIEUR_HEAD = register(new ItemCreator.Builder("broque_monsieur_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 
 	/* KIRBY */
-	public static final Item BANDANA = register(new ItemCreator.Builder("bandana", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
+	public static final Item BANDANA = register(new ItemCreator.Builder("bandana", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 
 	/* POKEMON */
-	public static final Item PIKACHU_EARS = register(new ItemCreator.Builder("pikachu_ears", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-	public static final Item SNORLAX_HAT = register(new ItemCreator.Builder("snorlax_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
+	public static final Item PIKACHU_EARS = register(new ItemCreator.Builder("pikachu_ears", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
+	public static final Item SNORLAX_HAT = register(new ItemCreator.Builder("snorlax_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, true)));
 
 	/* PROFESSOR LAYTON */
-	public static final Item TOP_HAT = register(new ItemCreator.Builder("top_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
+	public static final Item TOP_HAT = register(new ItemCreator.Builder("top_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 
 	/* UNDERTALE / DELTARUNE */
-	public static final Item RALSEI_HAT = register(new ItemCreator.Builder("ralsei_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
-	public static final Item KING_ROUND_MASK = register(new ItemCreator.Builder("king_round_mask", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
+	public static final Item RALSEI_HAT = register(new ItemCreator.Builder("ralsei_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
+	public static final Item KING_ROUND_MASK = register(new ItemCreator.Builder("king_round_mask", new MaskItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
 
 	/* A HAT IN TIME */
-	public static final Item KID_HAT = register(new ItemCreator.Builder("kid_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
+	public static final Item KID_HAT = register(new ItemCreator.Builder("kid_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 
 	/* PUYO PUYO */
 	public static final Item RED_PUYO = register(new ItemCreator.Builder("red_puyo", new WearableBlockItem(MubbleBlocks.RED_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SLIME_BLOCK_PLACE)));
@@ -82,15 +82,15 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item IRON_PUYO = register(new ItemCreator.Builder("iron_puyo", new WearableBlockItem(MubbleBlocks.IRON_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_METAL_PLACE)));
 
 	/* BALDI'S BASICS IN EDUCATION AND LEARNING */
-	public static final Item BALDI_HEAD = register(new ItemCreator.Builder("baldi_head", new HatItem(Settings.COSTUME, SoundEvents.ENTITY_PARROT_IMITATE_VEX)));
+	public static final Item BALDI_HEAD = register(new ItemCreator.Builder("baldi_head", new HatItem(Settings.COSTUME, SoundEvents.ENTITY_PARROT_IMITATE_VEX, true)));
 
 	/* PETSCOP */
 	public static final Item GUARDIAN_MASK = register(new ItemCreator.Builder("guardian_mask", new GuardianMaskItem(Settings.COSTUME)));
 
 	/* YOUTUBE */
-	public static final Item MAYRO_CAP = register(new ItemCreator.Builder("mayro_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER)));
+	public static final Item MAYRO_CAP = register(new ItemCreator.Builder("mayro_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 	public static final Item KORETATO_BLOCK = register(new ItemCreator.Builder("koretato_block", new WearableBlockItem(MubbleBlocks.KORETATO_BLOCK, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_SNOW_PLACE)));
-	public static final Item NOTEBLOCK_HEAD = register(new ItemCreator.Builder("noteblock_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON)));
+	public static final Item NOTEBLOCK_HEAD = register(new ItemCreator.Builder("noteblock_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, true)));
 
 	public static void init() {
 

@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -16,8 +17,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class CappyItem extends HatItem {
-	public CappyItem(Settings builder, SoundEvent sound) {
-		super(builder, sound);
+	public CappyItem(Settings builder) {
+		super(builder, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false);
 	}
 
 	@Override

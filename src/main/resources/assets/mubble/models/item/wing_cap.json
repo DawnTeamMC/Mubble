@@ -8,7 +8,19 @@
             "predicate": {
                 "mubble:trinket": 1
             },
-            "model": "mubble:costume/wing_cap"
+            "model": "mubble:costume/mario_cap"
+        },
+        {
+            "predicate": {
+                "mubble:trinket": 2
+            },
+            "model": "mubble:costume/wing_right"
+        },
+        {
+            "predicate": {
+                "mubble:trinket": 3
+            },
+            "model": "mubble:costume/wing_left"
         }
     ]
 }

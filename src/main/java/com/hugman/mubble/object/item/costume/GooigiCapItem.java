@@ -14,8 +14,8 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class GooigiCapItem extends HatItem {
-	public GooigiCapItem(Item.Settings builder, SoundEvent sound) {
-		super(builder, sound);
+	public GooigiCapItem(Settings builder) {
+		super(builder, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, false);
 	}
 
 	@Override
