@@ -1,6 +1,14 @@
 {
-	"parent": "mubble:item/crown",
+	"parent": "item/generated",
 	"textures": {
-		"crown": "mubble:costume/rosalina_crown"
-	}
+		"layer0": "mubble:item/rosalina_crown"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "mubble:trinket": 1
+            },
+            "model": "mubble:costume/rosalina_crown"
+        }
+    ]
 }

@@ -52,7 +52,7 @@ public class HatItem extends WearableItem {
 		ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 		Trinket.translateToFace(matrixStack, model, player, headYaw, headPitch);
 		matrixStack.scale(0.6F, 0.6F, 0.6F);
-		matrixStack.translate(0.0D, 0.0D, 0.475D);
+		matrixStack.translate(0.0D, 0.0D, 0.45D);
 		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180));
 		if(!isHeadSet) {
 			if(player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem) {

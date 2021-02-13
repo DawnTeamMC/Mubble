@@ -49,7 +49,7 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item SUPER_CROWN = register(new ItemCreator.Builder("super_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item MARIO_WEDDING_HAT = register(new ItemCreator.Builder("mario_wedding_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 	public static final Item BOO_HAT = register(new ItemCreator.Builder("boo_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
-	public static final Item BROQUE_MONSIEUR_HEAD = register(new ItemCreator.Builder("broque_monsieur_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
+	public static final Item BROQUE_MONSIEUR_HEAD = register(new ItemCreator.Builder("broque_monsieur_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, true)));
 
 	/* KIRBY */
 	public static final Item BANDANA = register(new ItemCreator.Builder("bandana", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));

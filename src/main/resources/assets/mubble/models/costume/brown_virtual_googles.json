@@ -1,0 +1,6 @@
+{
+	"parent": "mubble:costume/virtual_googles",
+	"textures": {
+		"glass": "mubble:costume/virtual_googles/glass/brown"
+	}
+}

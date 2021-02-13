@@ -1,6 +1,14 @@
 {
-	"parent": "mubble:item/crown",
+	"parent": "item/generated",
 	"textures": {
-		"crown": "mubble:costume/pink_gold_peach_crown"
-	}
+		"layer0": "mubble:item/pink_gold_peach_crown"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "mubble:trinket": 1
+            },
+            "model": "mubble:costume/pink_gold_peach_crown"
+        }
+    ]
 }

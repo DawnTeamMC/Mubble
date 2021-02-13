@@ -1,6 +1,14 @@
 {
-	"parent": "mubble:item/virtual_googles",
+	"parent": "item/generated",
 	"textures": {
-		"glass": "mubble:costume/virtual_googles/glass/black"
-	}
+		"layer0": "mubble:item/black_virtual_googles"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "mubble:trinket": 1
+            },
+            "model": "mubble:costume/black_virtual_googles"
+        }
+    ]
 }

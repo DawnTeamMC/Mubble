@@ -1,6 +1,14 @@
 {
-	"parent": "mubble:item/crown",
+	"parent": "item/generated",
 	"textures": {
-		"crown": "mubble:costume/princess_daisy_crown"
-	}
+		"layer0": "mubble:item/princess_daisy_crown"
+	},
+	"overrides": [
+        {
+            "predicate": {
+                "mubble:trinket": 1
+            },
+            "model": "mubble:costume/princess_daisy_crown"
+        }
+    ]
 }

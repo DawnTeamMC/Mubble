@@ -1,0 +1,6 @@
+{
+	"parent": "mubble:costume/crown",
+	"textures": {
+		"crown": "mubble:costume/rosalina_crown"
+	}
+}
