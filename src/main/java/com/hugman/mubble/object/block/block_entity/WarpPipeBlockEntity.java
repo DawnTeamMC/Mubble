@@ -4,13 +4,11 @@ import com.hugman.mubble.init.MubbleBlocks;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.util.ActionResult;
 
 public class WarpPipeBlockEntity extends BlockEntity {
     private int destinationX;
     private int destinationY;
     private int destinationZ;
-    private boolean linkStarted;
 
     public WarpPipeBlockEntity() {
         super(MubbleBlocks.WARP_PIPE_ENTITY);
@@ -23,7 +21,6 @@ public class WarpPipeBlockEntity extends BlockEntity {
         tag.putInt("destinationX", destinationX);
         tag.putInt("destinationY", destinationY);
         tag.putInt("destinationZ", destinationZ);
-        tag.putBoolean("link_started", linkStarted);
 
         return tag;
     }
@@ -35,7 +32,14 @@ public class WarpPipeBlockEntity extends BlockEntity {
         destinationY = tag.getInt("destinationY");
         destinationZ = tag.getInt("destinationZ");
 
-        linkStarted = tag.getBoolean("link_started");
+    }
+    public int getDestinationX() {
+        return this.destinationX;
+    }
+    public int getDestinationY() {
+        return this.destinationY;
+    }
+    public int getDestinationZ() {
+        return this.destinationZ;
     }
 }
-
