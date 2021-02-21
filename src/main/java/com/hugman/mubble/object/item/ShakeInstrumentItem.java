@@ -17,7 +17,7 @@ public class ShakeInstrumentItem extends InstrumentItem {
 	@Override
 	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity player, Hand handIn) {
 		player.swingHand(handIn);
-		player.playSound(getInstrumentSound(), 0.5F, 1F);
+		player.playSound(getInstrumentSound(), 0.5F, player.getPitch(1.0F) / -90.0F + 1.0F);
 		player.incrementStat(Stats.USED.getOrCreateStat(this));
 		return TypedActionResult.success(player.getStackInHand(handIn));
 	}
