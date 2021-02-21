@@ -32,11 +32,11 @@ public class MaskItem extends WearableItem {
 	public void render(String slot, MatrixStack matrixStack, VertexConsumerProvider vcp, int light, PlayerEntityModel<AbstractClientPlayerEntity> model, AbstractClientPlayerEntity player, float headYaw, float headPitch) {
 		ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 		Trinket.translateToFace(matrixStack, model, player, headYaw, headPitch);
-		matrixStack.scale(0.6F, 0.6F, 0.6F);
-		matrixStack.translate(0.0D, 0.0D, 0.475D);
+		matrixStack.scale(0.625F, 0.625F, 0.625F);
+		matrixStack.translate(0.0D, 0.0D, 0.48D);
 		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180));
 		ItemStack stack = new ItemStack(this);
-		stack.getOrCreateTag().putInt("trinket", 1);
+		stack.getOrCreateTag().putInt("Trinket", 1);
 		itemRenderer.renderItem(stack, ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
 	}
 }

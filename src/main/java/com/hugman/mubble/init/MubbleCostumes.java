@@ -12,6 +12,8 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.SoundEvents;
 
 public class MubbleCostumes extends MubblePack {
+	public static final Item DUMMY = register(new ItemCreator.Builder("dummy", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
+
 	/* MUBBLE */
 	public static final Item HEADPHONES = register(new ItemCreator.Builder("headphones", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item WHITE_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("white_virtual_googles", new MaskItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.WHITE_RETRO)));

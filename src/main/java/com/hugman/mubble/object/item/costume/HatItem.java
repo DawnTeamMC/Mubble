@@ -51,16 +51,12 @@ public class HatItem extends WearableItem {
 	public void render(String slot, MatrixStack matrixStack, VertexConsumerProvider vcp, int light, PlayerEntityModel<AbstractClientPlayerEntity> model, AbstractClientPlayerEntity player, float headYaw, float headPitch) {
 		ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 		Trinket.translateToFace(matrixStack, model, player, headYaw, headPitch);
-		matrixStack.scale(0.6F, 0.6F, 0.6F);
-		matrixStack.translate(0.0D, 0.0D, 0.45D);
+		matrixStack.scale(0.625F, 0.625F, 0.625F);
+		matrixStack.translate(0.0D, 0.0D, 0.48D);
 		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180));
 		if(!isHeadSet) {
 			if(player.getEquippedStack(EquipmentSlot.HEAD).getItem() instanceof ArmorItem) {
-				matrixStack.translate(0.0D, 0.1D, 0.0D);
-				matrixStack.scale(1.1F, 1.1F, 1.1F);
-			}
-			if(!player.isFallFlying()) {
-				matrixStack.translate(0.0D, - Math.min(0.0D, (player.getVelocity().getY() + 0.6D) * 0.45D), 0.0D);
+				matrixStack.scale(1.253F, 1.253F, 1.253F);
 			}
 		}
 		ItemStack stack = new ItemStack(this);
