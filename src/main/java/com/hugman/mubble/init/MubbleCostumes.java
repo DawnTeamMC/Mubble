@@ -12,8 +12,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.sound.SoundEvents;
 
 public class MubbleCostumes extends MubblePack {
-	public static final Item DUMMY = register(new ItemCreator.Builder("dummy", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
-
 	/* MUBBLE */
 	public static final Item HEADPHONES = register(new ItemCreator.Builder("headphones", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item WHITE_VIRTUAL_GOOGLES = register(new ItemCreator.Builder("white_virtual_googles", new MaskItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, MubbleShaders.WHITE_RETRO)));
@@ -49,6 +47,7 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item ROSALINA_CROWN = register(new ItemCreator.Builder("rosalina_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item PINK_GOLD_PEACH_CROWN = register(new ItemCreator.Builder("pink_gold_peach_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item SUPER_CROWN = register(new ItemCreator.Builder("super_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
+	public static final Item PROPELLER_BOX = register(new ItemCreator.Builder("propeller_box", new PropellerBoxItem(Settings.COSTUME)));
 	public static final Item MARIO_WEDDING_HAT = register(new ItemCreator.Builder("mario_wedding_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 	public static final Item BOO_HAT = register(new ItemCreator.Builder("boo_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 	public static final Item BROQUE_MONSIEUR_HEAD = register(new ItemCreator.Builder("broque_monsieur_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, true)));

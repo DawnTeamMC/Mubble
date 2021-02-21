@@ -14,13 +14,13 @@
             "predicate": {
                 "mubble:trinket": 2
             },
-            "model": "mubble:costume/wing_right"
+            "model": "mubble:costume/wing_cap/right_wing"
         },
         {
             "predicate": {
                 "mubble:trinket": 3
             },
-            "model": "mubble:costume/wing_left"
+            "model": "mubble:costume/wing_cap/left_wing"
         }
     ]
 }
