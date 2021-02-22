@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/super_crown"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/super_crown"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/super_crown"
+		}
+	]
 }

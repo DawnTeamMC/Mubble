@@ -1,9 +1,8 @@
 package com.hugman.mubble.mixin.client;
 
 import com.hugman.mubble.init.MubbleEntities;
-import com.hugman.mubble.object.entity.FireballEntity;
-import com.hugman.mubble.object.entity.IceballEntity;
-import com.hugman.mubble.object.entity.KirbyBallEntity;
+import com.hugman.mubble.object.entity.*;
+import net.minecraft.block.Block;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.world.ClientWorld;
@@ -32,7 +31,13 @@ public class ClientPlayNetworkHandlerMixin {
 		double z = packet.getZ();
 		EntityType<?> entityType = packet.getEntityTypeId();
 		Object entity = null;
-		if(entityType == MubbleEntities.FIREBALL) {
+		if(entityType == MubbleEntities.CUSTOM_TNT) {
+			entity = new CustomTNTEntity(this.world, x, y, z, Block.getStateFromRawId(packet.getEntityData()), 0, 0, null);
+		}
+		else if(entityType == MubbleEntities.FLYING_BLOCK) {
+			entity = new FlyingBlockEntity(this.world, x, y, z, Block.getStateFromRawId(packet.getEntityData()));
+		}
+		else if(entityType == MubbleEntities.FIREBALL) {
 			entity = new FireballEntity(this.world, x, y, z);
 		}
 		else if(entityType == MubbleEntities.ICEBALL) {

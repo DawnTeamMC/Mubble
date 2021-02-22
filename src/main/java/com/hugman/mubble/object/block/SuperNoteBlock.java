@@ -6,6 +6,7 @@ public class SuperNoteBlock extends NoteBlock {
 	public SuperNoteBlock(SoundEvent lowJumpSound, SoundEvent highJumpSound, Settings builder) {
 		super(lowJumpSound, highJumpSound, builder);
 	}
+
 	public SuperNoteBlock(SoundEvent jumpSound, Settings builder) {
 		super(jumpSound, builder);
 	}

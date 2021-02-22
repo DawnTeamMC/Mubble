@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/king_round_mask"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/king_round_mask"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/king_round_mask"
+		}
+	]
 }

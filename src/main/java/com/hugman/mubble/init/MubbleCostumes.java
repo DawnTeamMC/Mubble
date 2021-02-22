@@ -2,9 +2,7 @@ package com.hugman.mubble.init;
 
 import com.hugman.dawn.api.creator.ItemCreator;
 import com.hugman.mubble.object.block.block_state_property.Princess;
-import com.hugman.mubble.object.item.costume.HatItem;
 import com.hugman.mubble.object.item.costume.*;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.Item;

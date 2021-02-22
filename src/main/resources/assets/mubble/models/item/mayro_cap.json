@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/mayro_cap"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/mayro_cap"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/mayro_cap"
+		}
+	]
 }

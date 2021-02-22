@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/gooigi_cap"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/gooigi_cap"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/gooigi_cap"
+		}
+	]
 }

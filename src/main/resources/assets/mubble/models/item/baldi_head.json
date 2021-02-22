@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/baldi_head"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/baldi_head"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/baldi_head"
+		}
+	]
 }

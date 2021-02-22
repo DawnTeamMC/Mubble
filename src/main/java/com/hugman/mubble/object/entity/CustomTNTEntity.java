@@ -1,6 +1,7 @@
 package com.hugman.mubble.object.entity;
 
 import com.hugman.mubble.init.MubbleEntities;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
@@ -21,10 +22,10 @@ import net.minecraft.world.explosion.Explosion;
 
 public class CustomTNTEntity extends Entity {
 	private static final TrackedData<Integer> FUSE = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.INTEGER);
-	private static final TrackedData<Float> STRENGHT = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.FLOAT);
-	private BlockState customTile = Blocks.SAND.getDefaultState();
+	private static final TrackedData<Float> STRENGTH = DataTracker.registerData(CustomTNTEntity.class, TrackedDataHandlerRegistry.FLOAT);
+	private BlockState state = Blocks.SAND.getDefaultState();
 	private int fuse = 80;
-	private float strenght = 4.0F;
+	private float strength = 4.0F;
 	private LivingEntity causingEntity;
 
 	public CustomTNTEntity(EntityType<? extends CustomTNTEntity> type, World worldIn) {
@@ -32,14 +33,14 @@ public class CustomTNTEntity extends Entity {
 		this.inanimate = true;
 	}
 
-	public CustomTNTEntity(BlockState customTileIn, World worldIn, double x, double y, double z, int fuse, float strength, LivingEntity igniter) {
-		this(MubbleEntities.CUSTOM_TNT, worldIn);
-		this.customTile = customTileIn;
+	public CustomTNTEntity(World world, double x, double y, double z, BlockState state, int fuse, float strength, LivingEntity igniter) {
+		this(MubbleEntities.CUSTOM_TNT, world);
+		this.state = state;
 		this.updatePosition(x, y, z);
 		float f = (float) (Math.random() * (double) ((float) Math.PI * 2F));
 		this.setVelocity(-((float) Math.sin(f)) * 0.02F, 0.2F, -((float) Math.cos(f)) * 0.02F);
 		this.setFuse(fuse);
-		this.setStrenght(strength);
+		this.setStrength(strength);
 		this.prevX = x;
 		this.prevY = y;
 		this.prevZ = z;
@@ -49,7 +50,7 @@ public class CustomTNTEntity extends Entity {
 	@Override
 	protected void initDataTracker() {
 		this.dataTracker.startTracking(FUSE, fuse);
-		this.dataTracker.startTracking(STRENGHT, strenght);
+		this.dataTracker.startTracking(STRENGTH, strength);
 	}
 
 	@Override
@@ -88,24 +89,24 @@ public class CustomTNTEntity extends Entity {
 	}
 
 	private void explode() {
-		this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), this.strenght, Explosion.DestructionType.BREAK);
+		this.world.createExplosion(this, this.getX(), this.getBodyY(0.0625D), this.getZ(), this.strength, Explosion.DestructionType.BREAK);
 	}
 
 	@Override
 	protected void writeCustomDataToTag(CompoundTag compound) {
-		compound.put("BlockState", NbtHelper.fromBlockState(this.customTile));
+		compound.put("BlockState", NbtHelper.fromBlockState(this.state));
 		compound.putShort("Fuse", (short) this.getFuse());
-		compound.putFloat("Strenght", this.getStrenght());
+		compound.putFloat("Strength", this.getStrength());
 	}
 
 	@Override
 	protected void readCustomDataFromTag(CompoundTag compound) {
-		this.customTile = NbtHelper.toBlockState(compound.getCompound("BlockState"));
-		if(this.customTile.getBlock() == Blocks.AIR) {
-			this.customTile = Blocks.TNT.getDefaultState();
+		this.state = NbtHelper.toBlockState(compound.getCompound("BlockState"));
+		if(this.state.getBlock() == Blocks.AIR) {
+			this.state = Blocks.TNT.getDefaultState();
 		}
 		this.setFuse(compound.getShort("Fuse"));
-		this.setStrenght(compound.getFloat("Strenght"));
+		this.setStrength(compound.getFloat("Strength"));
 	}
 
 	public LivingEntity getCausingEntity() {
@@ -122,16 +123,16 @@ public class CustomTNTEntity extends Entity {
 	}
 
 	public BlockState getBlockState() {
-		return this.customTile;
+		return this.state;
 	}
 
-	public float getStrenght() {
-		return this.strenght;
+	public float getStrength() {
+		return this.strength;
 	}
 
-	public void setStrenght(float strenghtIn) {
-		this.dataTracker.set(STRENGHT, strenghtIn);
-		this.strenght = strenghtIn;
+	public void setStrength(float strengthIn) {
+		this.dataTracker.set(STRENGTH, strengthIn);
+		this.strength = strengthIn;
 	}
 
 	@Override
@@ -148,11 +149,11 @@ public class CustomTNTEntity extends Entity {
 	@Override
 	public void populateCrashReport(CrashReportSection category) {
 		super.populateCrashReport(category);
-		category.add("Immitating BlockState", this.customTile.toString());
+		category.add("Imitating BlockState", this.state.toString());
 	}
 
 	@Override
 	public Packet<?> createSpawnPacket() {
-		return new EntitySpawnS2CPacket(this);
+		return new EntitySpawnS2CPacket(this, Block.getRawIdFromState(this.getBlockState()));
 	}
 }

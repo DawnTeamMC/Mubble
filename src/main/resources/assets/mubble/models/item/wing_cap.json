@@ -4,23 +4,23 @@
 		"layer0": "mubble:item/wing_cap"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/mario_cap"
-        },
-        {
-            "predicate": {
-                "mubble:trinket": 2
-            },
-            "model": "mubble:costume/wing_cap/right_wing"
-        },
-        {
-            "predicate": {
-                "mubble:trinket": 3
-            },
-            "model": "mubble:costume/wing_cap/left_wing"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/mario_cap"
+		},
+		{
+			"predicate": {
+				"mubble:trinket": 2
+			},
+			"model": "mubble:costume/wing_cap/right_wing"
+		},
+		{
+			"predicate": {
+				"mubble:trinket": 3
+			},
+			"model": "mubble:costume/wing_cap/left_wing"
+		}
+	]
 }

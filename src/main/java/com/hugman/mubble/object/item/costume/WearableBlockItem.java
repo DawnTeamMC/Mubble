@@ -3,13 +3,10 @@ package com.hugman.mubble.object.item.costume;
 import com.hugman.mubble.init.MubbleSlots;
 import com.hugman.mubble.mixin.client.GameRendererAccessor;
 import dev.emi.trinkets.api.SlotGroups;
-import dev.emi.trinkets.api.Slots;
 import dev.emi.trinkets.api.Trinket;
 import dev.emi.trinkets.api.TrinketItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.dispenser.DispenserBehavior;
-import net.minecraft.block.dispenser.ItemDispenserBehavior;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderEffect;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -18,27 +15,18 @@ import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.BlockPointer;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public class WearableBlockItem extends BlockItem implements Trinket {
@@ -56,6 +44,10 @@ public class WearableBlockItem extends BlockItem implements Trinket {
 
 	public WearableBlockItem(Block baseBlock, Settings settings, SoundEvent equipSound, StatusEffectInstance... potionEffects) {
 		this(baseBlock, settings, equipSound, null, potionEffects);
+	}
+
+	public static boolean isUsable(ItemStack stack) {
+		return stack.getDamage() < stack.getMaxDamage() - 1;
 	}
 
 	@Override
@@ -116,10 +108,6 @@ public class WearableBlockItem extends BlockItem implements Trinket {
 		matrixStack.translate(0.0D, 0.0D, 0.475D);
 		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180));
 		itemRenderer.renderItem(new ItemStack(this), ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
-	}
-
-	public static boolean isUsable(ItemStack stack) {
-		return stack.getDamage() < stack.getMaxDamage() - 1;
 	}
 
 	public SoundEvent getEquipSound() {

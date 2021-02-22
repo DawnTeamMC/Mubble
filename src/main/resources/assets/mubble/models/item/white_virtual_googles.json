@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/white_virtual_googles"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/white_virtual_googles"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/white_virtual_googles"
+		}
+	]
 }

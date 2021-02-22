@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/dummy"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/dummy"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/dummy"
+		}
+	]
 }

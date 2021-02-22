@@ -24,6 +24,7 @@ import net.minecraft.util.Identifier;
 
 public class HatItem extends CostumeItem {
 	protected final boolean isHeadSet;
+
 	public HatItem(Settings settings, SoundEvent equipSound, boolean isHeadSet, Identifier shader, StatusEffectInstance... potionEffects) {
 		super(SlotGroups.HEAD, MubbleSlots.HAT, settings, equipSound, shader, potionEffects);
 		this.isHeadSet = isHeadSet;

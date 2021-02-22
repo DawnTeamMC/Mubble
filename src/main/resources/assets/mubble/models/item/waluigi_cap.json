@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/waluigi_cap"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/waluigi_cap"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/waluigi_cap"
+		}
+	]
 }

@@ -30,5 +30,6 @@ public abstract class HittableBlock extends Block {
 			this.onHit(state, world, pos, entity);
 		}
 	}
+
 	public abstract void onHit(BlockState state, World world, BlockPos pos, Entity entity);
 }

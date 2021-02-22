@@ -37,7 +37,7 @@ public class FlyingBlock extends Block {
 
 	@Override
 	public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-		if(canFlyThrough(world.getBlockState(pos.down())) && pos.getY() >= 0) {
+		if(canFlyThrough(world.getBlockState(pos.up())) && pos.getX() <= world.getDimensionHeight()) {
 			FlyingBlockEntity flyingBlockEntity = new FlyingBlockEntity(world, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, world.getBlockState(pos));
 			this.configureFlyingBlockEntity(flyingBlockEntity);
 			world.spawnEntity(flyingBlockEntity);

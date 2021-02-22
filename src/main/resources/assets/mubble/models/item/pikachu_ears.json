@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/pikachu_ears"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/pikachu_ears"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/pikachu_ears"
+		}
+	]
 }

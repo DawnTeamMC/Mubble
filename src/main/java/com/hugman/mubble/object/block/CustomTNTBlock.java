@@ -26,20 +26,20 @@ import net.minecraft.world.explosion.Explosion;
 public class CustomTNTBlock extends Block {
 	public static final BooleanProperty UNSTABLE = Properties.UNSTABLE;
 	public final int fuse;
-	public final float strenght;
+	public final float strength;
 
-	public CustomTNTBlock(Settings builder, int fuseIn, float strenghtIn) {
+	public CustomTNTBlock(Settings builder, int fuseIn, float strengthIn) {
 		super(builder);
 		fuse = fuseIn;
-		strenght = strenghtIn;
-		this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
+		strength = strengthIn;
+		this.setDefaultState(this.getDefaultState().with(UNSTABLE, false));
 	}
 
 	public CustomTNTBlock(Settings builder, float multiplier) {
 		super(builder);
 		fuse = Math.round(80.0F * (multiplier * 0.75F));
-		strenght = 4.0F * multiplier;
-		this.setDefaultState(this.getDefaultState().with(UNSTABLE, Boolean.valueOf(false)));
+		strength = 4.0F * multiplier;
+		this.setDefaultState(this.getDefaultState().with(UNSTABLE, false));
 	}
 
 	@Override
@@ -73,9 +73,9 @@ public class CustomTNTBlock extends Block {
 	@Override
 	public void onDestroyedByExplosion(World world, BlockPos pos, Explosion explosion) {
 		if(!world.isClient) {
-			CustomTNTEntity tntentity = new CustomTNTEntity(this.getDefaultState(), world, (float) pos.getX() + 0.5F, pos.getY(), (float) pos.getZ() + 0.5F, fuse, strenght, explosion.getCausingEntity());
-			tntentity.setFuse((short) (world.random.nextInt(tntentity.getFuse() / 4) + tntentity.getFuse() / 8));
-			world.spawnEntity(tntentity);
+			CustomTNTEntity tntEntity = new CustomTNTEntity(world, (float) pos.getX() + 0.5F, pos.getY(), (float) pos.getZ() + 0.5F, this.getDefaultState(), fuse, strength, explosion.getCausingEntity());
+			tntEntity.setFuse((short) (world.random.nextInt(tntEntity.getFuse() / 4) + tntEntity.getFuse() / 8));
+			world.spawnEntity(tntEntity);
 		}
 	}
 
@@ -85,9 +85,9 @@ public class CustomTNTBlock extends Block {
 
 	private void primeTnt(World world, BlockPos pos, LivingEntity igniter) {
 		if(!world.isClient) {
-			CustomTNTEntity tntentity = new CustomTNTEntity(this.getDefaultState(), world, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, fuse, strenght, igniter);
-			world.spawnEntity(tntentity);
-			world.playSound(null, tntentity.getX(), tntentity.getY(), tntentity.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
+			CustomTNTEntity tntEntity = new CustomTNTEntity(world, (double) pos.getX() + 0.5D, pos.getY(), (double) pos.getZ() + 0.5D, this.getDefaultState(), fuse, strength, igniter);
+			world.spawnEntity(tntEntity);
+			world.playSound(null, tntEntity.getX(), tntEntity.getY(), tntEntity.getZ(), SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		}
 	}
 

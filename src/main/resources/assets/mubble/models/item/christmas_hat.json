@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/christmas_hat"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/christmas_hat"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/christmas_hat"
+		}
+	]
 }

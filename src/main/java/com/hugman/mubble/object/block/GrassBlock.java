@@ -1,9 +1,7 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +11,7 @@ import java.util.Random;
 
 public class GrassBlock extends net.minecraft.block.GrassBlock {
 	private final Block dirt;
+
 	public GrassBlock(Block dirt, Settings builder) {
 		super(builder);
 		this.dirt = dirt;

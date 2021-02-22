@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/vanish_cap"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/vanish_cap"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/vanish_cap"
+		}
+	]
 }

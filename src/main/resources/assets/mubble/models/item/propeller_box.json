@@ -4,17 +4,17 @@
 		"layer0": "mubble:item/propeller_box"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/propeller_box/base"
-        },
-        {
-            "predicate": {
-                "mubble:trinket": 2
-            },
-            "model": "mubble:costume/propeller_box/wing"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/propeller_box/base"
+		},
+		{
+			"predicate": {
+				"mubble:trinket": 2
+			},
+			"model": "mubble:costume/propeller_box/wing"
+		}
+	]
 }

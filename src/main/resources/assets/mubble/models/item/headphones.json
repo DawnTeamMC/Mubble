@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/headphones"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/headphones"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/headphones"
+		}
+	]
 }

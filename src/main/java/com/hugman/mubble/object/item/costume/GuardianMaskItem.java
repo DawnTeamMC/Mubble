@@ -1,15 +1,10 @@
 package com.hugman.mubble.object.item.costume;
 
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.stat.Stats;
-import net.minecraft.world.World;
 
 public class GuardianMaskItem extends MaskItem {
 	public GuardianMaskItem(Item.Settings builder) {

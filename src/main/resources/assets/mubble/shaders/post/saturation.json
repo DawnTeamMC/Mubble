@@ -10,7 +10,9 @@
 			"uniforms": [
 				{
 					"name": "Saturation",
-					"values": [50]
+					"values": [
+						50
+					]
 				}
 			]
 		},

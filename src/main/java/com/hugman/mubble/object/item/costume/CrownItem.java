@@ -4,7 +4,6 @@ import com.hugman.mubble.init.MubbleBlocks;
 import com.hugman.mubble.object.block.KoretatoBlock;
 import com.hugman.mubble.object.block.block_state_property.Princess;
 import net.minecraft.block.BlockState;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;

@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/snorlax_hat"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/snorlax_hat"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/snorlax_hat"
+		}
+	]
 }

@@ -1,7 +1,5 @@
 package com.hugman.mubble.object.block;
 
-import com.hugman.mubble.init.MubbleBlocks;
-import com.hugman.mubble.init.MubbleSounds;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -26,7 +24,7 @@ public class NoteBlock extends Block {
 	}
 
 	public NoteBlock(SoundEvent jumpSound, Settings builder) {
-		this(jumpSound, jumpSound , builder);
+		this(jumpSound, jumpSound, builder);
 	}
 
 	@Override

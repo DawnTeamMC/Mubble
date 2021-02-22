@@ -4,27 +4,143 @@
 	},
 	"elements": [
 		{
-			"from": [5.5, 0, 5.5],
-			"to": [10.5, 7, 10.5],
+			"from": [
+				5.5,
+				0,
+				5.5
+			],
+			"to": [
+				10.5,
+				7,
+				10.5
+			],
 			"faces": {
-				"north": {"uv": [0.5, 12, 3.5, 15.5], "texture": "#propeller_box"},
-				"east": {"uv": [0.5, 12, 3.5, 15.5], "texture": "#propeller_box"},
-				"south": {"uv": [0.5, 12, 3.5, 15.5], "texture": "#propeller_box"},
-				"west": {"uv": [0.5, 12, 3.5, 15.5], "texture": "#propeller_box"},
-				"up": {"uv": [4.5, 12.5, 7.5, 15.5], "rotation": 180, "texture": "#propeller_box"},
-				"down": {"uv": [4.5, 12.5, 7.5, 15.5], "rotation": 180, "texture": "#propeller_box"}
+				"north": {
+					"uv": [
+						0.5,
+						12,
+						3.5,
+						15.5
+					],
+					"texture": "#propeller_box"
+				},
+				"east": {
+					"uv": [
+						0.5,
+						12,
+						3.5,
+						15.5
+					],
+					"texture": "#propeller_box"
+				},
+				"south": {
+					"uv": [
+						0.5,
+						12,
+						3.5,
+						15.5
+					],
+					"texture": "#propeller_box"
+				},
+				"west": {
+					"uv": [
+						0.5,
+						12,
+						3.5,
+						15.5
+					],
+					"texture": "#propeller_box"
+				},
+				"up": {
+					"uv": [
+						4.5,
+						12.5,
+						7.5,
+						15.5
+					],
+					"rotation": 180,
+					"texture": "#propeller_box"
+				},
+				"down": {
+					"uv": [
+						4.5,
+						12.5,
+						7.5,
+						15.5
+					],
+					"rotation": 180,
+					"texture": "#propeller_box"
+				}
 			}
 		},
 		{
-			"from": [-2, 2, 6.5],
-			"to": [17, 5, 9.5],
+			"from": [
+				-2,
+				2,
+				6.5
+			],
+			"to": [
+				17,
+				5,
+				9.5
+			],
 			"faces": {
-				"north": {"uv": [8, 12, 12, 13.5], "texture": "#propeller_box"},
-				"east": {"uv": [8, 8, 9.5, 9.5], "texture": "#propeller_box"},
-				"south": {"uv": [8, 12, 12, 13.5], "texture": "#propeller_box"},
-				"west": {"uv": [8, 8, 9.5, 9.5], "texture": "#propeller_box"},
-				"up": {"uv": [8, 12, 12, 13.5], "rotation": 180, "texture": "#propeller_box"},
-				"down": {"uv": [8, 12, 12, 13.5], "rotation": 180, "texture": "#propeller_box"}
+				"north": {
+					"uv": [
+						8,
+						12,
+						12,
+						13.5
+					],
+					"texture": "#propeller_box"
+				},
+				"east": {
+					"uv": [
+						8,
+						8,
+						9.5,
+						9.5
+					],
+					"texture": "#propeller_box"
+				},
+				"south": {
+					"uv": [
+						8,
+						12,
+						12,
+						13.5
+					],
+					"texture": "#propeller_box"
+				},
+				"west": {
+					"uv": [
+						8,
+						8,
+						9.5,
+						9.5
+					],
+					"texture": "#propeller_box"
+				},
+				"up": {
+					"uv": [
+						8,
+						12,
+						12,
+						13.5
+					],
+					"rotation": 180,
+					"texture": "#propeller_box"
+				},
+				"down": {
+					"uv": [
+						8,
+						12,
+						12,
+						13.5
+					],
+					"rotation": 180,
+					"texture": "#propeller_box"
+				}
 			}
 		}
 	]

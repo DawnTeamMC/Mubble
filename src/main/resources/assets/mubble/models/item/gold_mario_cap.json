@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/gold_mario_cap"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/gold_mario_cap"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/gold_mario_cap"
+		}
+	]
 }

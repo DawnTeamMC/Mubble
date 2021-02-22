@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/guardian_mask"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/guardian_mask"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/guardian_mask"
+		}
+	]
 }

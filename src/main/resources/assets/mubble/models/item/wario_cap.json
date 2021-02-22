@@ -4,11 +4,11 @@
 		"layer0": "mubble:item/wario_cap"
 	},
 	"overrides": [
-        {
-            "predicate": {
-                "mubble:trinket": 1
-            },
-            "model": "mubble:costume/wario_cap"
-        }
-    ]
+		{
+			"predicate": {
+				"mubble:trinket": 1
+			},
+			"model": "mubble:costume/wario_cap"
+		}
+	]
 }
