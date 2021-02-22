@@ -33,8 +33,6 @@ public class MubbleClient implements ClientModInitializer {
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.CHINCHO, (dispatcher, context) -> new ChinchoEntityRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.GOOMBA, (dispatcher, context) -> new GoombaEntityRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.TOAD, (dispatcher, context) -> new ToadEntityRenderer(dispatcher));
-		EntityRendererRegistry.INSTANCE.register(MubbleEntities.CUSTOM_TNT, (dispatcher, context) -> new CustomTNTEntityRenderer(dispatcher));
-		EntityRendererRegistry.INSTANCE.register(MubbleEntities.FLYING_BLOCK, (dispatcher, context) -> new FlyingBlockEntityRenderer(dispatcher));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.FIREBALL, (dispatcher, context) -> new FlyingItemEntityRenderer<>(dispatcher, context.getItemRenderer()));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.ICEBALL, (dispatcher, context) -> new FlyingItemEntityRenderer<>(dispatcher, context.getItemRenderer()));
 		EntityRendererRegistry.INSTANCE.register(MubbleEntities.KIRBY_BALL, (dispatcher, context) -> new FlyingItemEntityRenderer<>(dispatcher, context.getItemRenderer()));

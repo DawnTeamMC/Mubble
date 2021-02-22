@@ -11,10 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 
 public class MubbleEntities extends MubblePack {
-	/* MUBBLE */
-	public static final EntityType<CustomTNTEntity> CUSTOM_TNT = register(new EntityCreator.Builder<>("custom_tnt", FabricEntityTypeBuilder.<CustomTNTEntity>create(SpawnGroup.MISC, CustomTNTEntity::new).fireImmune().dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackRangeChunks(10).trackedUpdateRate(10).forceTrackedVelocityUpdates(true).build()));
-	public static final EntityType<FlyingBlockEntity> FLYING_BLOCK = register(new EntityCreator.Builder<>("flying_block", FabricEntityTypeBuilder.<FlyingBlockEntity>create(SpawnGroup.MISC, FlyingBlockEntity::new).dimensions(EntityDimensions.fixed(0.98F, 0.98F)).trackRangeChunks(10).trackedUpdateRate(20).forceTrackedVelocityUpdates(true).build()));
-
 	/* SUPER MARIO */
 	public static final EntityType<ChinchoEntity> CHINCHO = register(new EntityCreator.Builder<>("chincho", FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ChinchoEntity::new).dimensions(EntityDimensions.fixed(0.6F, 1.2F)).trackRangeChunks(8).trackedUpdateRate(3).build()).attributes(ChinchoEntity.createChinchoAttributes()));
 	public static final Item CHINCHO_SPAWN_EGG = register(new ItemCreator.Builder("chincho_spawn_egg", new SpawnEggItem(MubbleEntities.CHINCHO, 7527671, 4903, MubbleItems.Settings.SPAWN_EGG)));

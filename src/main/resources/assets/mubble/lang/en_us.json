@@ -1,5 +1,6 @@
 {
 	"modmenu.descriptionTranslation.mubble": "Expand your world with features from the Nintendo universe, and way more.",
+
 	"itemGroup.mubble.costumes": "Costumes",
 	"itemGroup.mubble.instruments": "Instruments",
 
@@ -440,8 +441,6 @@
 
 	"trinkets.slot.head.hat": "Hat",
 
-	"entity.mubble.custom_tnt": "Custom TNT",
-	"entity.mubble.flying_block": "Flying Block",
 	"entity.mubble.chincho": "Chincho",
 	"entity.mubble.goomba": "Goomba",
 	"entity.mubble.toad": "Toad",

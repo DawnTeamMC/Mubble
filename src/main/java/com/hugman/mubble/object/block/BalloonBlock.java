@@ -1,5 +1,6 @@
 package com.hugman.mubble.object.block;
 
+import com.hugman.dawn.mod.object.block.FlyingBlock;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;

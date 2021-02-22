@@ -30,14 +30,8 @@ public class ClientPlayNetworkHandlerMixin {
 		double y = packet.getY();
 		double z = packet.getZ();
 		EntityType<?> entityType = packet.getEntityTypeId();
-		Object entity = null;
-		if(entityType == MubbleEntities.CUSTOM_TNT) {
-			entity = new CustomTNTEntity(this.world, x, y, z, Block.getStateFromRawId(packet.getEntityData()), 0, 0, null);
-		}
-		else if(entityType == MubbleEntities.FLYING_BLOCK) {
-			entity = new FlyingBlockEntity(this.world, x, y, z, Block.getStateFromRawId(packet.getEntityData()));
-		}
-		else if(entityType == MubbleEntities.FIREBALL) {
+		Entity entity = null;
+		if(entityType == MubbleEntities.FIREBALL) {
 			entity = new FireballEntity(this.world, x, y, z);
 		}
 		else if(entityType == MubbleEntities.ICEBALL) {
@@ -48,12 +42,12 @@ public class ClientPlayNetworkHandlerMixin {
 		}
 		if(entity != null) {
 			int i = packet.getId();
-			((Entity) entity).updateTrackedPosition(x, y, z);
-			((Entity) entity).pitch = (float) (packet.getPitch() * 360) / 256.0F;
-			((Entity) entity).yaw = (float) (packet.getYaw() * 360) / 256.0F;
-			((Entity) entity).setEntityId(i);
-			((Entity) entity).setUuid(packet.getUuid());
-			this.world.addEntity(i, (Entity) entity);
+			entity.updateTrackedPosition(x, y, z);
+			entity.pitch = (float) (packet.getPitch() * 360) / 256.0F;
+			entity.yaw = (float) (packet.getYaw() * 360) / 256.0F;
+			entity.setEntityId(i);
+			entity.setUuid(packet.getUuid());
+			this.world.addEntity(i, entity);
 		}
 	}
 }
