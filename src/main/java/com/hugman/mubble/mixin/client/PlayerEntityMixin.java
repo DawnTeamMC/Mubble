@@ -1,15 +1,9 @@
 package com.hugman.mubble.mixin.client;
 
 import com.hugman.mubble.object.item.LightsaberItem;
-import com.hugman.mubble.object.item.costume.WearableBlockItem;
-import com.hugman.mubble.object.item.costume.WearableItem;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gl.ShaderEffect;
-import net.minecraft.client.render.GameRenderer;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

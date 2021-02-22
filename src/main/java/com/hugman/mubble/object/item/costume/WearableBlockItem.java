@@ -43,14 +43,14 @@ import net.minecraft.world.World;
 
 public class WearableBlockItem extends BlockItem implements Trinket {
 	protected final SoundEvent equipSound;
-	protected final StatusEffectInstance[] effects;
 	protected final Identifier shader;
+	protected final StatusEffectInstance[] effects;
 
 	public WearableBlockItem(Block baseBlock, Settings settings, SoundEvent equipSound, Identifier shader, StatusEffectInstance... potionEffects) {
 		super(baseBlock, settings);
 		this.equipSound = equipSound;
-		this.effects = potionEffects;
 		this.shader = shader;
+		this.effects = potionEffects;
 		DispenserBlock.registerBehavior(this, TrinketItem.TRINKET_DISPENSER_BEHAVIOR);
 	}
 

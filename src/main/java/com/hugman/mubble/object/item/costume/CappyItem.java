@@ -35,6 +35,7 @@ public class CappyItem extends HatItem {
 			}
 		}
 	}
+
 	@Override
 	public void onEquip(PlayerEntity player, ItemStack stack) {
 		player.getEntityWorld().playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.COSTUME_CAPPY_EQUIP, SoundCategory.PLAYERS, 1f, 1f);

@@ -22,10 +22,10 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
-public class HatItem extends WearableItem {
+public class HatItem extends CostumeItem {
 	protected final boolean isHeadSet;
 	public HatItem(Settings settings, SoundEvent equipSound, boolean isHeadSet, Identifier shader, StatusEffectInstance... potionEffects) {
-		super(SlotGroups.HEAD, MubbleSlots.HAT, settings, equipSound, shader);
+		super(SlotGroups.HEAD, MubbleSlots.HAT, settings, equipSound, shader, potionEffects);
 		this.isHeadSet = isHeadSet;
 	}
 

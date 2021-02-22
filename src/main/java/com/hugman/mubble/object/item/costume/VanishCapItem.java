@@ -1,5 +1,6 @@
 package com.hugman.mubble.object.item.costume;
 
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -13,7 +14,13 @@ public class VanishCapItem extends HatItem {
 	}
 
 	@Override
-	public void tick(PlayerEntity player, ItemStack stack) {
-		if(player.isSneaking()) player.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, 19, 0));
+	public int getAbilityCooldown(PlayerEntity player, ItemStack stack) {
+		return 10;
+	}
+
+	@Override
+	public void onAbilityUsage(PlayerEntity player, ItemStack stack) {
+		stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+		player.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, (int) (getAbilityCooldown(player, stack) * 1.5D), 0, false, false));
 	}
 }

@@ -523,6 +523,8 @@
 	"stat.mubble.open_present": "Presents Opened",
 	"stat.mubble.talked_to_toad": "Talked to Toads",
 
+	"key.mubble.use_costume_ability": "Use Costume Ability",
+
 	"item.mubble.bandana.secret_status": "That's for you, §6Pixel§r!",
 	"item.mubble.noteblock_head.secret_status": "Hey! I thought you already had this on your head, §6Evan§r!",
 	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?",

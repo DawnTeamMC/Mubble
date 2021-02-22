@@ -5,24 +5,23 @@ import dev.emi.trinkets.api.TrinketItem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.ShaderEffect;
 import net.minecraft.client.render.GameRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
-public abstract class WearableItem extends TrinketItem {
+public abstract class CostumeItem extends TrinketItem {
 	protected final String group;
 	protected final String slot;
 	protected final SoundEvent equipSound;
 	protected final StatusEffectInstance[] effects;
 	protected final Identifier shader;
 
-	public WearableItem(String group, String slot, Settings settings, SoundEvent equipSound, Identifier shader, StatusEffectInstance... potionEffects) {
+	public CostumeItem(String group, String slot, Settings settings, SoundEvent equipSound, Identifier shader, StatusEffectInstance... potionEffects) {
 		super(settings);
 		this.group = group;
 		this.slot = slot;
@@ -66,8 +65,19 @@ public abstract class WearableItem extends TrinketItem {
 		}
 	}
 
-	@Override
-	public void tick(PlayerEntity player, ItemStack stack) {
+	public int getAbilityCooldown(PlayerEntity player, ItemStack stack) {
+		return effects.length == 0 ? 0 : 500;
+	}
+
+	public void useAbility(PlayerEntity player, ItemStack stack) {
+		if(isUsable(player, stack)) {
+			player.getItemCooldownManager().set(this, getAbilityCooldown(player, stack));
+			player.incrementStat(Stats.USED.getOrCreateStat(this));
+			onAbilityUsage(player, stack);
+		}
+	}
+
+	public void onAbilityUsage(PlayerEntity player, ItemStack stack) {
 		World world = player.getEntityWorld();
 		if(!world.isClient && effects != null) {
 			for(StatusEffectInstance effect : effects) {
@@ -76,8 +86,12 @@ public abstract class WearableItem extends TrinketItem {
 		}
 	}
 
-	public static boolean isUsable(ItemStack stack) {
-		return stack.getDamage() < stack.getMaxDamage() - 1;
+	public boolean isUsable(PlayerEntity player, ItemStack stack) {
+		return stack.getDamage() < stack.getMaxDamage() - 1 && player.getItemCooldownManager().getCooldownProgress(this, 0) == 0;
+	}
+
+	public boolean isBeingUsed(PlayerEntity player) {
+		return player.getItemCooldownManager().isCoolingDown(this);
 	}
 
 	public SoundEvent getEquipSound() {

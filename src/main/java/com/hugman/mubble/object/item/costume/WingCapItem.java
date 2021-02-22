@@ -30,20 +30,30 @@ public class WingCapItem extends HatItem {
 	}
 
 	@Override
-	public void tick(PlayerEntity player, ItemStack stack) {
-		if(isUsable(stack) && player.isSprinting()) {
-			stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
-			player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, 1, 2));
-			player.fallDistance = 0f;
-		}
+	public int getAbilityCooldown(PlayerEntity player, ItemStack stack) {
+		return 10;
+	}
+
+	@Override
+	public void onAbilityUsage(PlayerEntity player, ItemStack stack) {
+		stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+		player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, (int) (getAbilityCooldown(player, stack) * 1.5D), 2, false, false));
+		player.fallDistance = 0f;
 	}
 
 	@Override
 	public void render(String slot, MatrixStack matrixStack, VertexConsumerProvider vcp, int light, PlayerEntityModel<AbstractClientPlayerEntity> model, AbstractClientPlayerEntity player, float headYaw, float headPitch) {
 		super.render(slot, matrixStack, vcp, light, model, player, headYaw, headPitch);
-		float j = MathHelper.sin((float) player.age / 3) * 10 + 12;
 		ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 		ItemStack stack = new ItemStack(this);
+
+		int k = 5;
+		if(isBeingUsed(player)) {
+			k = 1;
+		}
+
+		float j = MathHelper.sin((float) player.age / k) * 10 + 12;
+
 		matrixStack.push();
 		matrixStack.translate(0.475D, 0.0D, -0.275D);
 		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(j));

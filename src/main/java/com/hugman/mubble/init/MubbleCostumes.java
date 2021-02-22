@@ -34,12 +34,12 @@ public class MubbleCostumes extends MubblePack {
 
 	/* SUPER MARIO */
 	public static final Item CAPPY = register(new ItemCreator.Builder("cappy", new CappyItem(Settings.COSTUME)));
-	public static final Item LUIGI_CAP = register(new ItemCreator.Builder("luigi_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 0), new StatusEffectInstance(StatusEffects.SPEED, 5, 0))));
-	public static final Item WARIO_CAP = register(new ItemCreator.Builder("wario_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.SLOWNESS, 5, 0), new StatusEffectInstance(StatusEffects.STRENGTH, 5, 0))));
-	public static final Item WALUIGI_CAP = register(new ItemCreator.Builder("waluigi_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 5, 1))));
-	public static final Item VANISH_CAP = register(new ItemCreator.Builder("vanish_cap", new VanishCapItem(Settings.COSTUME)));
+	public static final Item LUIGI_CAP = register(new ItemCreator.Builder("luigi_cap", new HatItem(Settings.COSTUME.maxDamageIfAbsent(25), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 10), new StatusEffectInstance(StatusEffects.SPEED, 10))));
+	public static final Item WARIO_CAP = register(new ItemCreator.Builder("wario_cap", new HatItem(Settings.COSTUME.maxDamageIfAbsent(25), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.SLOWNESS, 10), new StatusEffectInstance(StatusEffects.STRENGTH, 10))));
+	public static final Item WALUIGI_CAP = register(new ItemCreator.Builder("waluigi_cap", new HatItem(Settings.COSTUME.maxDamageIfAbsent(25), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 10, 1))));
+	public static final Item VANISH_CAP = register(new ItemCreator.Builder("vanish_cap", new VanishCapItem(Settings.COSTUME.maxDamageIfAbsent(600))));
 	public static final Item WING_CAP = register(new ItemCreator.Builder("wing_cap", new WingCapItem(Settings.COSTUME.maxDamageIfAbsent(600))));
-	public static final Item GOOIGI_CAP = register(new ItemCreator.Builder("gooigi_cap", new GooigiCapItem(Settings.COSTUME)));
+	public static final Item GOOIGI_CAP = register(new ItemCreator.Builder("gooigi_cap", new GooigiCapItem(Settings.COSTUME.maxDamageIfAbsent(600))));
 	public static final Item GOLD_MARIO_CAP = register(new ItemCreator.Builder("gold_mario_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, false)));
 	public static final Item SILVER_LUIGI_CAP = register(new ItemCreator.Builder("silver_luigi_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item PRINCESS_PEACH_CROWN = register(new ItemCreator.Builder("princess_peach_crown", new CrownItem(Settings.COSTUME, Princess.PEACH)));
@@ -47,7 +47,7 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item ROSALINA_CROWN = register(new ItemCreator.Builder("rosalina_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item PINK_GOLD_PEACH_CROWN = register(new ItemCreator.Builder("pink_gold_peach_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item SUPER_CROWN = register(new ItemCreator.Builder("super_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
-	public static final Item PROPELLER_BOX = register(new ItemCreator.Builder("propeller_box", new PropellerBoxItem(Settings.COSTUME)));
+	public static final Item PROPELLER_BOX = register(new ItemCreator.Builder("propeller_box", new PropellerBoxItem(Settings.COSTUME.maxDamageIfAbsent(30))));
 	public static final Item MARIO_WEDDING_HAT = register(new ItemCreator.Builder("mario_wedding_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 	public static final Item BOO_HAT = register(new ItemCreator.Builder("boo_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 	public static final Item BROQUE_MONSIEUR_HEAD = register(new ItemCreator.Builder("broque_monsieur_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, true)));

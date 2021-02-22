@@ -1,6 +1,9 @@
 package com.hugman.mubble.object.item.costume;
 
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,10 +17,12 @@ public class GuardianMaskItem extends MaskItem {
 	}
 
 	@Override
-	public void tick(PlayerEntity player, ItemStack stack) {
-		if(player.isSneaking() && player.getItemCooldownManager().getCooldownProgress(this, 0) == 0) {
-			player.getItemCooldownManager().set(this, 25);
-			player.incrementStat(Stats.USED.getOrCreateStat(this));
-		}
+	public int getAbilityCooldown(PlayerEntity player, ItemStack stack) {
+		return 30;
+	}
+
+	@Override
+	public void onAbilityUsage(PlayerEntity player, ItemStack stack) {
+		stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
 	}
 }

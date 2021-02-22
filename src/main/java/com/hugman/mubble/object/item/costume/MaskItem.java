@@ -10,18 +10,16 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
-import net.minecraft.client.util.ModelIdentifier;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
-public class MaskItem extends WearableItem {
+public class MaskItem extends CostumeItem {
 	public MaskItem(Settings settings, SoundEvent equipSound, Identifier shader, StatusEffectInstance... potionEffects) {
-		super(SlotGroups.HEAD, Slots.MASK, settings, equipSound, shader);
+		super(SlotGroups.HEAD, Slots.MASK, settings, equipSound, shader, potionEffects);
 	}
 
 	public MaskItem(Settings settings, SoundEvent equipSound, StatusEffectInstance... potionEffects) {
