@@ -71,15 +71,16 @@ public abstract class CostumeItem extends TrinketItem {
 
 	public void useAbility(PlayerEntity player, ItemStack stack) {
 		if(isUsable(player, stack)) {
-			player.getItemCooldownManager().set(this, getAbilityCooldown(player, stack));
-			player.incrementStat(Stats.USED.getOrCreateStat(this));
+			if(!player.getEntityWorld().isClient()) {
+				player.getItemCooldownManager().set(this, getAbilityCooldown(player, stack));
+				player.incrementStat(Stats.USED.getOrCreateStat(this));
+			}
 			onAbilityUsage(player, stack);
 		}
 	}
 
 	public void onAbilityUsage(PlayerEntity player, ItemStack stack) {
-		World world = player.getEntityWorld();
-		if(!world.isClient && effects != null) {
+		if(!player.getEntityWorld().isClient && effects != null) {
 			for(StatusEffectInstance effect : effects) {
 				player.addStatusEffect(new StatusEffectInstance(effect.getEffectType(), 200, effect.getAmplifier(), false, false, true));
 			}
@@ -87,7 +88,7 @@ public abstract class CostumeItem extends TrinketItem {
 	}
 
 	public boolean isUsable(PlayerEntity player, ItemStack stack) {
-		return stack.getDamage() < stack.getMaxDamage() - 1 && player.getItemCooldownManager().getCooldownProgress(this, 0) == 0;
+		return player.getItemCooldownManager().getCooldownProgress(this, 0) == 0;
 	}
 
 	public boolean isBeingUsed(PlayerEntity player) {

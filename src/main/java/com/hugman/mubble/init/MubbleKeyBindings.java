@@ -21,6 +21,15 @@ public class MubbleKeyBindings {
 		ClientTickEvents.END_CLIENT_TICK.register(client -> {
 			if(USE_COSTUME_ABILITY.isPressed()) {
 				ClientPlayNetworking.send(Mubble.MOD_DATA.id("costume_ability"), PacketByteBufs.empty());
+				for(TrinketSlots.Slot slot : TrinketSlots.getAllSlots()) {
+					ItemStack stack = TrinketsApi.getTrinketComponent(client.player).getStack(slot.getSlotGroup().getName(), slot.getName());
+					if(!stack.isEmpty()) {
+						if(stack.getItem() instanceof CostumeItem) {
+							CostumeItem item = (CostumeItem) stack.getItem();
+							item.useAbility(client.player, stack);
+						}
+					}
+				}
 			}
 		});
 	}

@@ -14,7 +14,13 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 
 public class PropellerBoxItem extends HatItem {
 	public PropellerBoxItem(Settings builder) {
@@ -27,13 +33,24 @@ public class PropellerBoxItem extends HatItem {
 	}
 
 	@Override
+	public boolean isUsable(PlayerEntity player, ItemStack stack) {
+		return !player.isFallFlying() && super.isUsable(player, stack);
+	}
+
+	@Override
 	public void onAbilityUsage(PlayerEntity player, ItemStack stack) {
-		stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
-		player.setVelocity(0.0D, 1.4D, 0.0D);
-		player.velocityModified = true;
-		player.setOnGround(false);
-		player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, getAbilityCooldown(player, stack), 4, false, false));
-		player.fallDistance = 0f;
+		World world = player.getEntityWorld();
+		if(!world.isClient()) {
+			stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+			player.setVelocity(0.0D, 1.4D, 0.0D);
+			((ServerPlayerEntity) player).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(player));
+			player.setOnGround(false);
+			player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, getAbilityCooldown(player, stack), 4, false, false));
+			player.fallDistance = 0f;
+		}
+		for(int l = 0; l < 8; ++l) {
+			world.addParticle(ParticleTypes.CLOUD, player.getParticleX(0.75D), player.getY(), player.getParticleZ(0.75D), 0.0D, -0.05D, 0.0D);
+		}
 	}
 
 	@Override

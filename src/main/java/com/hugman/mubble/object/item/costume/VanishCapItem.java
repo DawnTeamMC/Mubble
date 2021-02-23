@@ -20,7 +20,9 @@ public class VanishCapItem extends HatItem {
 
 	@Override
 	public void onAbilityUsage(PlayerEntity player, ItemStack stack) {
-		stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
-		player.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, (int) (getAbilityCooldown(player, stack) * 1.5D), 0, false, false));
+		if(!player.getEntityWorld().isClient()) {
+			stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+			player.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY, (int) (getAbilityCooldown(player, stack) * 1.5D), 0, false, false));
+		}
 	}
 }

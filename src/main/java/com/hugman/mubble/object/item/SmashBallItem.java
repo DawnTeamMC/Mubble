@@ -21,23 +21,23 @@ public class SmashBallItem extends Item {
 	}
 
 	@Override
-	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		ItemStack stack = playerIn.getStackInHand(handIn);
-		Random rand = new Random();
-		worldIn.playSound(null, playerIn.getBlockPos(), MubbleSounds.ITEM_SMASH_BALL_USE, SoundCategory.PLAYERS, 1f, 1f);
+	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
+		ItemStack stack = player.getStackInHand(hand);
+		Random rand = player.getRandom();
+		world.playSound(null, player.getBlockPos(), MubbleSounds.ITEM_SMASH_BALL_USE, SoundCategory.PLAYERS, 1f, 1f);
 		for(int i = 0; i < rand.nextInt(21) + 10; i++) {
-			worldIn.addParticle(ParticleTypes.FLAME, playerIn.getX() + (rand.nextInt(11) - 5) / 10F, playerIn.getY() + rand.nextInt(21) / 10F, playerIn.getZ() + (rand.nextInt(11) - 5) / 10F, (rand.nextInt(21) - 10) / 120F, (rand.nextInt(2) + 0.1) / 11F, (rand.nextInt(21) - 10) / 120F);
+			world.addParticle(ParticleTypes.FLAME, player.getX() + (rand.nextInt(11) - 5) / 10F, player.getY() + rand.nextInt(21) / 10F, player.getZ() + (rand.nextInt(11) - 5) / 10F, (rand.nextInt(21) - 10) / 120F, (rand.nextInt(2) + 0.1) / 11F, (rand.nextInt(21) - 10) / 120F);
 		}
-		playerIn.getVelocity().add(0.0D, 0.25, 0.0D);
-		playerIn.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 25, 0));
-		playerIn.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 25, 0));
-		playerIn.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 900, 3));
-		playerIn.addStatusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 900, 4));
-		if(!playerIn.abilities.creativeMode) {
+		player.getVelocity().add(0.0D, 0.25, 0.0D);
+		player.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 25, 0));
+		player.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS, 25, 0));
+		player.addStatusEffect(new StatusEffectInstance(StatusEffects.STRENGTH, 900, 3));
+		player.addStatusEffect(new StatusEffectInstance(StatusEffects.HEALTH_BOOST, 900, 4));
+		if(!player.abilities.creativeMode) {
 			stack.decrement(1);
 		}
-		playerIn.getItemCooldownManager().set(this, 25);
-		playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
+		player.getItemCooldownManager().set(this, 25);
+		player.incrementStat(Stats.USED.getOrCreateStat(this));
 		return TypedActionResult.success(stack);
 	}
 }

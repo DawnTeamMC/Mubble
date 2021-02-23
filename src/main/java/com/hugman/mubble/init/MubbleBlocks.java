@@ -62,7 +62,6 @@ public class MubbleBlocks extends MubblePack {
 	public static final Block FOOTBLOCK = register(new BlockCreator.Builder("footblock", DefaultBlockGetter.CUBE, FabricBlockSettings.copyOf(Blocks.WHITE_WOOL)).itemGroup(ItemGroup.DECORATIONS));
 	public static final MCBlockPack CLOUD_BLOCKS = register(new MCBlockPack.Builder("", MubbleBlockGetter.CLOUD_BLOCK, FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision()));
 	public static final Block CHOCOLATE_CAKE = register(new BlockCreator.Builder("chocolate_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.FOOD));
-	public static final Block MINECRAFT_10TH_ANNIVERSARY_CAKE = register(new BlockCreator.Builder("minecraft_10th_anniversary_cake", new CakeBlock(FabricBlockSettings.of(Material.CAKE).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.FOOD));
 	public static final MCBlockPack BALLOONS = register(new MCBlockPack.Builder("", MubbleBlockGetter.BALLOON, FabricBlockSettings.of(Material.WOOL).hardness(0F).sounds(BlockSoundGroup.WOOL).nonOpaque()));
 	public static final Block UNSTABLE_STONE = register(new BlockCreator.Builder("unstable_stone", new UnstableBlock(FabricBlockSettings.copy(Blocks.STONE).strength(0.1F, 0.0F))).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final Block PLACER = register(new BlockCreator.Builder("placer", new PlacerBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F))).itemGroup(ItemGroup.REDSTONE));

@@ -18,6 +18,8 @@ public class GuardianMaskItem extends MaskItem {
 
 	@Override
 	public void onAbilityUsage(PlayerEntity player, ItemStack stack) {
-		stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+		if(!player.getEntityWorld().isClient()) {
+			stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
+		}
 	}
 }

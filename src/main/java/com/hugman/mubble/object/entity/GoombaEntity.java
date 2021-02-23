@@ -103,14 +103,14 @@ public class GoombaEntity extends HostileEntity {
 	}
 
 	@Override
-	public void onPlayerCollision(PlayerEntity playerIn) {
-		Box hitbox = this.getBoundingBox().shrink(0, -1, 0).expand(-0.4, 0, -0.4);
-		Vec3d velocity = playerIn.getVelocity();
-		if(!this.world.isClient() && !playerIn.isSpectator() && hitbox.intersects(playerIn.getBoundingBox()) && velocity.y < 0.3D && this.isAlive()) {
-			playerIn.setVelocity(velocity.x, 0.5D, velocity.z);
-			((ServerPlayerEntity) playerIn).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(playerIn));
-			playerIn.fallDistance = 0.0F;
-			this.damage(DamageSource.player(playerIn), Float.MAX_VALUE);
+	public void onPlayerCollision(PlayerEntity player) {
+		Box hitbox = this.getBoundingBox().shrink(0.0D, -1.4D, 0.0D).expand(0.1D, 0.0D, 0.1D);
+		Vec3d velocity = player.getVelocity();
+		if(!this.world.isClient() && !player.isSpectator() && !player.isOnGround() && hitbox.intersects(player.getBoundingBox()) && velocity.y < 0.3D && this.isAlive()) {
+			player.setVelocity(velocity.x, 0.5D, velocity.z);
+			((ServerPlayerEntity) player).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(player));
+			player.fallDistance = 0.0F;
+			this.damage(DamageSource.player(player), this.getHealth());
 			this.playSound(MubbleSounds.ENTITY_GOOMBA_CRUSH, this.getSoundVolume(), (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
 		}
 	}

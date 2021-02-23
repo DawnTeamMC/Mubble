@@ -4,50 +4,53 @@ import com.google.common.collect.ImmutableList;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.ModelPart;
+import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.CompositeEntityModel;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
 public class GoombaEntityModel<T extends Entity> extends CompositeEntityModel<T> {
-	private final ModelPart body;
-	private final ModelPart head;
-	private final ModelPart top;
-	private final ModelPart bottom;
-	private final ModelPart leftFoot;
-	private final ModelPart rightFoot;
+	private final ModelPart body = new ModelPart(this);
+	private final ModelPart head = new ModelPart(this, 0, 11);
+	private final ModelPart top = new ModelPart(this, 32, 0);
+	private final ModelPart bottom = new ModelPart(this, 0, 0);
+	private final ModelPart leftFoot = new ModelPart(this, 0, 19);
+	private final ModelPart rightFoot = new ModelPart(this, 20, 11);
 
 	public GoombaEntityModel() {
-		textureWidth = 64;
-		textureHeight = 64;
-		body = new ModelPart(this);
-		body.setPivot(0.0F, 21.0F, 0.0F);
-		head = new ModelPart(this);
-		head.setPivot(0.0F, -2.0F, 0.0F);
-		body.addChild(head);
-		head.setTextureOffset(0, 11).addCuboid(-2.5F, 1.0F, -2.5F, 5, 3, 5, 0.0F, false);
-		top = new ModelPart(this);
-		top.setPivot(0.0F, 0.0F, 0.0F);
-		head.addChild(top);
-		top.setTextureOffset(32, 0).addCuboid(-3.5F, -5.0F, -3.5F, 7, 4, 7, 0.0F, false);
-		bottom = new ModelPart(this);
-		bottom.setPivot(0.0F, 0.0F, 0.0F);
-		head.addChild(bottom);
-		bottom.setTextureOffset(0, 0).addCuboid(-4.0F, -1.0F, -4.0F, 8, 2, 8, 0.0F, false);
-		leftFoot = new ModelPart(this);
-		leftFoot.setPivot(0.0F, 23.0F, 0.0F);
-		setRotationAngle(leftFoot, 0.0F, -0.1745F, 0.0F);
-		leftFoot.setTextureOffset(0, 19).addCuboid(1.0F, -1.0F, -4.0F, 3, 2, 5, 0.0F, false);
-		rightFoot = new ModelPart(this);
-		rightFoot.setPivot(0.0F, 23.0F, 0.0F);
-		setRotationAngle(rightFoot, 0.0F, 0.1745F, 0.0F);
-		rightFoot.setTextureOffset(20, 11).addCuboid(-4.0F, -1.0F, -4.0F, 3, 2, 5, 0.0F, false);
+		this.textureWidth = 128;
+		this.textureHeight = 64;
+		this.body.setPivot(0.0F, 21.0F, 0.0F);
+		this.body.addChild(head);
+		this.head.addCuboid(-2.5F, 1.0F, -2.5F, 5, 3, 5);
+		this.head.setPivot(0.0F, -2.0F, 0.0F);
+		this.head.addChild(top);
+		this.head.addChild(bottom);
+		this.top.addCuboid(-3.5F, -5.0F, -3.5F, 7, 4, 7);
+		this.top.setPivot(0.0F, 0.0F, 0.0F);
+		this.bottom.addCuboid(-4.0F, -1.0F, -4.0F, 8, 2, 8);
+		this.bottom.setPivot(0.0F, 0.0F, 0.0F);
+		this.leftFoot.addCuboid(1.0F, -1.0F, -4.0F, 3, 2, 5);
+		this.leftFoot.setPivot(0.0F, 23.0F, 0.0F);
+		this.setRotationAngle(leftFoot, 0.0F, -0.1745F, 0.0F);
+		this.rightFoot.addCuboid(-4.0F, -1.0F, -4.0F, 3, 2, 5);
+		this.rightFoot.setPivot(0.0F, 23.0F, 0.0F);
+		this.setRotationAngle(rightFoot, 0.0F, 0.1745F, 0.0F);
 	}
 
 	private void setRotationAngle(ModelPart modelPart, float x, float y, float z) {
 		modelPart.pitch = x;
 		modelPart.yaw = y;
 		modelPart.roll = z;
+	}
+
+	@Override
+	public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
+		matrices.scale(1.5F, 1.5F, 1.5F);
+		matrices.translate(0.0D, -0.5D, 0.0D);
+		super.render(matrices, vertices, light, overlay, red, green, blue, alpha);
 	}
 
 	@Override

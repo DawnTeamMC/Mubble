@@ -15,7 +15,7 @@ public class GoombaEntityRenderer extends MobEntityRenderer<GoombaEntity, Goomba
 	private static final Identifier GOLDEN_GOOMBA_TEXTURES = Mubble.MOD_DATA.id("textures/entity/goomba/golden.png");
 
 	public GoombaEntityRenderer(EntityRenderDispatcher dispatcher) {
-		super(dispatcher, new GoombaEntityModel<>(), 0.3F);
+		super(dispatcher, new GoombaEntityModel<>(), 0.6F);
 	}
 
 	@Override
