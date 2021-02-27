@@ -9,18 +9,10 @@ import net.minecraft.util.Rarity;
 
 public class MubbleItems extends MubblePack {
 	/* MUBBLE */
-	public static final Item CARAMEL_CUBE = register(new ItemCreator.Builder("caramel_cube", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CARAMEL_CUBE))));
-	public static final Item BAGUETTE = register(new ItemCreator.Builder("baguette", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.BAGUETTE))).compostingChance(0.85F));
-	public static final Item CREPE = register(new ItemCreator.Builder("crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CREPE))).compostingChance(0.65F));
-	public static final Item SUGAR_CREPE = register(new ItemCreator.Builder("sugar_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SUGAR_CREPE))).compostingChance(0.85F));
-	public static final Item CHOCOLATE_CREPE = register(new ItemCreator.Builder("chocolate_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CHOCOLATE_CREPE))).compostingChance(0.85F));
-	public static final Item CARAMEL_CREPE = register(new ItemCreator.Builder("caramel_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CARAMEL_CREPE))).compostingChance(0.85F));
-	public static final Item HONEY_CREPE = register(new ItemCreator.Builder("honey_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.HONEY_CREPE))).compostingChance(0.85F));
-	public static final Item SWEET_BERRY_CREPE = register(new ItemCreator.Builder("sweet_berry_crepe", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SWEET_BERRY_CREPE))).compostingChance(0.85F));
 	public static final Item CANDY_CANE = register(new ItemCreator.Builder("candy_cane", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.CANDY_CANE))).compostingChance(0.85F));
 	public static final Item SMALL_BULB = register(new ItemCreator.Builder("small_bulb", new SmallBulbItem(new Item.Settings().group(ItemGroup.MATERIALS))));
 	public static final Item JINGLE_BELLS = register(new ItemCreator.Builder("jingle_bells", new ShakeInstrumentItem(new Item.Settings().group(MubbleItemGroups.INSTRUMENTS_GROUP).maxCount(1), MubbleSounds.ITEM_JINGLE_BELLS_USE)));
-	public static final Item BANDAGE = register(new ItemCreator.Builder("bandage", new BandageItem(new Item.Settings().group(ItemGroup.MISC).maxCount(16))));
+
 	/* SUPER MARIO */
 	public static final Item SUPER_MUSHROOM = register(new ItemCreator.Builder("super_mushroom", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SUPER_MUSHROOM))));
 	public static final Item PEACH = register(new ItemCreator.Builder("peach", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.PEACH))));
@@ -36,13 +28,16 @@ public class MubbleItems extends MubblePack {
 	public static final Item SMB3_KEY = register(new ItemCreator.Builder("smb3_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.SMB3_KEY_DOOR)));
 	public static final Item SMW_KEY = register(new ItemCreator.Builder("smw_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.SMW_KEY_DOOR)));
 	public static final Item NSMBU_KEY = register(new ItemCreator.Builder("nsmbu_key", new KeyItem(new Item.Settings().group(ItemGroup.MATERIALS), MubbleBlocks.NSMBU_KEY_DOOR)));
+
 	/* KIRBY */
 	public static final Item KIRBY_BALL = register(new ItemCreator.Builder("kirby_ball", new KirbyBallItem(new Item.Settings().group(ItemGroup.COMBAT))));
+
 	/* SUPER SMASH BROS. */
 	public static final Item SMASH_BALL = register(new ItemCreator.Builder("smash_ball", new SmashBallItem(new Item.Settings().group(ItemGroup.COMBAT).maxCount(1).rarity(Rarity.RARE))));
 
 	/* FIRE EMBLEM */
 	//public static final Item AYMR = register(new ItemCreator.Builder("aymr", new AymrItem(new Item.Settings().group(ItemGroup.COMBAT))));
+
 	/* STAR WARS */
 	public static final Item WHITE_LIGHTSABER = register(new ItemCreator.Builder("white_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))));
 	public static final Item LIGHT_GRAY_LIGHTSABER = register(new ItemCreator.Builder("light_gray_lightsaber", new LightsaberItem(new Item.Settings().group(ItemGroup.COMBAT).rarity(Rarity.EPIC))));

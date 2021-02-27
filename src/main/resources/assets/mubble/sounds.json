@@ -10,52 +10,57 @@
 			"minecraft:block/barrel/open2"
 		]
 	},
-	"block.question_block.loot.power_up.smb": {
-		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
+	"block.lootable_punch_block.change_loot": {
 		"sounds": [
-			"mubble:block/question_block/loot/power_up/smb"
+			"mubble:block/lootable_punch_block/change_loot"
 		]
 	},
-	"block.question_block.loot.power_up.smb3": {
-		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
+	"block.lootable_punch_block.loot.smb": {
+		"subtitle": "subtitles.mubble.block.lootable_punch_block.loot",
 		"sounds": [
-			"mubble:block/question_block/loot/power_up/smb3"
+			"mubble:block/lootable_punch_block/loot/smb"
 		]
 	},
-	"block.question_block.loot.power_up.smw": {
-		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
+	"block.lootable_punch_block.loot.smb3": {
+		"subtitle": "subtitles.mubble.block.lootable_punch_block.loot",
 		"sounds": [
-			"mubble:block/question_block/loot/power_up/smw"
+			"mubble:block/lootable_punch_block/loot/smb3"
 		]
 	},
-	"block.question_block.loot.power_up.nsmbu": {
-		"subtitle": "subtitles.mubble.block.question_block.loot.power_up",
+	"block.lootable_punch_block.loot.smw": {
+		"subtitle": "subtitles.mubble.block.lootable_punch_block.loot",
 		"sounds": [
-			"mubble:block/question_block/loot/power_up/nsmbu"
+			"mubble:block/lootable_punch_block/loot/smw"
 		]
 	},
-	"block.question_block.loot.coin.smb": {
-		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
+	"block.lootable_punch_block.loot.nsmbu": {
+		"subtitle": "subtitles.mubble.block.lootable_punch_block.loot",
 		"sounds": [
-			"mubble:block/question_block/loot/coin/smb"
+			"mubble:block/lootable_punch_block/loot/nsmbu"
 		]
 	},
-	"block.question_block.loot.coin.smb3": {
-		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
+	"block.lootable_punch_block.loot.coin.smb": {
+		"subtitle": "subtitles.mubble.block.lootable_punch_block.loot.coin",
 		"sounds": [
-			"mubble:block/question_block/loot/coin/smb3"
+			"mubble:block/lootable_punch_block/loot/coin/smb"
 		]
 	},
-	"block.question_block.loot.coin.smw": {
-		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
+	"block.lootable_punch_block.loot.coin.smb3": {
+		"subtitle": "subtitles.mubble.block.lootable_punch_block.loot.coin",
 		"sounds": [
-			"mubble:block/question_block/loot/coin/smw"
+			"mubble:block/lootable_punch_block/loot/coin/smb3"
 		]
 	},
-	"block.question_block.loot.coin.nsmbu": {
-		"subtitle": "subtitles.mubble.block.question_block.loot.coin",
+	"block.lootable_punch_block.loot.coin.smw": {
+		"subtitle": "subtitles.mubble.block.lootable_punch_block.loot.coin",
 		"sounds": [
-			"mubble:block/question_block/loot/coin/nsmbu"
+			"mubble:block/lootable_punch_block/loot/coin/smw"
+		]
+	},
+	"block.lootable_punch_block.loot.coin.nsmbu": {
+		"subtitle": "subtitles.mubble.block.lootable_punch_block.loot.coin",
+		"sounds": [
+			"mubble:block/lootable_punch_block/loot/coin/nsmbu"
 		]
 	},
 	"block.brick_block.break.smb": {
@@ -619,6 +624,22 @@
 			"mubble:costume/cappy/help/water/2",
 			"mubble:costume/cappy/help/water/3",
 			"mubble:costume/cappy/help/water/4"
+		]
+	},
+	"costume.propeller_box.use": {
+		"subtitle": "subtitles.mubble.costume.propeller_box.use",
+		"sounds": [
+			"mubble:costume/propeller_box/use/1",
+			"mubble:costume/propeller_box/use/2",
+			"mubble:costume/propeller_box/use/3"
+		]
+	},
+	"costume.propeller_box.fall": {
+		"sounds": [
+			"mubble:costume/propeller_box/fall/1",
+			"mubble:costume/propeller_box/fall/2",
+			"mubble:costume/propeller_box/fall/3",
+			"mubble:costume/propeller_box/fall/4"
 		]
 	},
 	"ui.timeswap_table.take_result": {

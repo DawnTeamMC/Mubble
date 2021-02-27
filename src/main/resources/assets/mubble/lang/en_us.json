@@ -474,8 +474,8 @@
 	"biome.mubble.press_garden": "Press Garden",
 	"biome.mubble.scarlet_forest": "Scarlet Forest",
 
-	"subtitles.mubble.block.question_block.loot.power_up": "? Block drops power up",
-	"subtitles.mubble.block.question_block.loot.coin": "? Block drops coin",
+	"subtitles.mubble.block.lootable_punch_block.loot": "Block dropped item",
+	"subtitles.mubble.block.lootable_punch_block.loot.coin": "Block dropped coin",
 	"subtitles.mubble.block.note_block.jump": "Note Block used",
 	"subtitles.mubble.block.door.key.success": "Key used",
 	"subtitles.mubble.block.spring.trigger": "Spring triggered",
@@ -487,6 +487,7 @@
 	"subtitles.mubble.costume.cappy.equip": "Cappy equiped",
 	"subtitles.mubble.costume.cappy.happy": "Cappy enjoingly mumbles",
 	"subtitles.mubble.costume.cappy.help": "Cappy asks for help",
+	"subtitles.mubble.costume.propeller_box.use": "Propeller Box used",
 	"subtitles.mubble.entity.chincho.ambient": "Chincho talks",
 	"subtitles.mubble.entity.chincho.hurt": "Chincho hurts",
 	"subtitles.mubble.entity.chincho.death": "Chincho dies",
@@ -523,10 +524,6 @@
 	"stat.mubble.talked_to_toad": "Talked to Toads",
 
 	"key.mubble.use_costume_ability": "Use Costume Ability",
-
-	"item.mubble.bandana.secret_status": "That's for you, §6Pixel§r!",
-	"item.mubble.noteblock_head.secret_status": "Hey! I thought you already had this on your head, §6Evan§r!",
-	"item.mubble.mayro_cap.secret_status": "Come on, you're the one who needs it the least, aren't you, \"§6Sossie§r\"?",
 
 	"text.autoconfig.mubble.title": "Mubble Configuration",
 	"text.autoconfig.mubble.category.biomes": "Biomes",

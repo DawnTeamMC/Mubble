@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.hugman.dawn.api.creator.ConfiguredFeatureCreator;
 import com.hugman.mubble.init.MubbleBlocks;
 import com.hugman.mubble.init.MubblePack;
+import com.hugman.mubble.object.world.gen.foliage.CatFoliagePlacer;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -27,7 +28,7 @@ import java.util.OptionalInt;
 import java.util.Set;
 
 public class MubbleConfiguredFeatures extends MubblePack {
-	public static final ConfiguredFeature<TreeFeatureConfig, ?> YELLOW_CAT_TREE = register("yellow_cat_tree", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.BIRCH_LOG), new SimpleBlockStateProvider(States.YELLOW_CONCRETE), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(6, 3, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
+	public static final ConfiguredFeature<TreeFeatureConfig, ?> YELLOW_CAT_TREE = register("yellow_cat_tree", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.CAT_LOG), new SimpleBlockStateProvider(States.YELLOW_CAT_LEAVES), new CatFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(6, 3, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
 	public static final ConfiguredFeature<?, ?> SCAMPER_SHORES_TREES = register("scamper_shores_trees", YELLOW_CAT_TREE.decorate(ConfiguredFeatures.Decorators.SQUARE_HEIGHTMAP).decorate(Decorator.COUNT_EXTRA.configure(new CountExtraDecoratorConfig(10, 0.1F, 1))));
 
 	public static final ConfiguredFeature<TreeFeatureConfig, ?> RED_PRESS_GARDEN_TREE = register("red_press_garden_tree", Feature.TREE.configure((new TreeFeatureConfig.Builder(new SimpleBlockStateProvider(States.PRESS_GARDEN_LOG), new SimpleBlockStateProvider(States.RED_PRESS_GARDEN_LEAVES), new BlobFoliagePlacer(UniformIntDistribution.of(2), UniformIntDistribution.of(0), 3), new StraightTrunkPlacer(4, 2, 0), new TwoLayersFeatureSize(1, 0, 1))).ignoreVines().build()));
@@ -73,8 +74,8 @@ public class MubbleConfiguredFeatures extends MubblePack {
 	}
 
 	public static final class States {
-		protected static final BlockState BIRCH_LOG = Blocks.BIRCH_LOG.getDefaultState();
-		protected static final BlockState YELLOW_CONCRETE = Blocks.YELLOW_CONCRETE.getDefaultState();
+		protected static final BlockState CAT_LOG = Blocks.STRIPPED_BIRCH_LOG.getDefaultState();
+		protected static final BlockState YELLOW_CAT_LEAVES = Blocks.YELLOW_WOOL.getDefaultState();
 
 		protected static final BlockState PRESS_GARDEN_LOG = MubbleBlocks.PRESS_GARDEN_WOOD.getLog().getDefaultState();
 		protected static final BlockState RED_PRESS_GARDEN_LEAVES = MubbleBlocks.RED_PRESS_GARDEN_LEAVES.getLeaves().getDefaultState();

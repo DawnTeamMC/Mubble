@@ -3,12 +3,17 @@ package com.hugman.mubble.object.block;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class EmptyBlock extends HittableBlock {
+public class EmptyBlock extends PunchBlock {
 	private final SoundEvent hitSound;
 
 	public EmptyBlock(SoundEvent hitSound, AbstractBlock.Settings settings) {
@@ -17,9 +22,9 @@ public class EmptyBlock extends HittableBlock {
 	}
 
 	@Override
-	public void onHit(BlockState state, World worldIn, BlockPos pos, Entity entityIn) {
-		if(!worldIn.isClient) {
-			worldIn.playSound(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, this.hitSound, SoundCategory.BLOCKS, 1f, 1f);
+	public void onPunch(BlockState state, World world, BlockPos pos, Entity entity) {
+		if(!world.isClient) {
+			world.playSound(null, pos.add(0.5D, 0.5D, 0.5D), this.hitSound, SoundCategory.BLOCKS, 1f, 1f);
 		}
 	}
 }

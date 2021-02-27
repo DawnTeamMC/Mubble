@@ -38,7 +38,7 @@ public class WingCapItem extends HatItem {
 	public void onAbilityUsage(PlayerEntity player, ItemStack stack) {
 		if(!player.getEntityWorld().isClient()) {
 			stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
-			player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, (int) (getAbilityCooldown(player, stack) * 1.5D), 2, false, false));
+			player.addStatusEffect(new StatusEffectInstance(StatusEffects.LEVITATION, (int) (getAbilityCooldown(player, stack) * 1.25D), 2, false, false));
 			player.fallDistance = 0f;
 		}
 	}

@@ -25,7 +25,7 @@ public class GooigiCapItem extends HatItem {
 		if(!world.isClient()) {
 			world.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.BLOCK_SLIME_BLOCK_HIT, SoundCategory.PLAYERS, 1f, 1f);
 			stack.damage(1, player, (p) -> p.sendEquipmentBreakStatus(EquipmentSlot.HEAD));
-			player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, getAbilityCooldown(player, stack), player.getRandom().nextInt(3)));
+			player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, getAbilityCooldown(player, stack), player.getRandom().nextInt(3), false, false, true));
 			player.fallDistance = 0f;
 		}
 	}

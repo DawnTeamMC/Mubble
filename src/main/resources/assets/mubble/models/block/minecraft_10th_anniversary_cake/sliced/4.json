@@ -1,9 +1,0 @@
-{
-	"parent": "mubble:block/cake/sliced/4",
-	"textures": {
-		"bottom": "mubble:block/minecraft_10th_anniversary_cake/bottom",
-		"top": "mubble:block/minecraft_10th_anniversary_cake/top",
-		"side": "mubble:block/minecraft_10th_anniversary_cake/side",
-		"inside": "mubble:block/minecraft_10th_anniversary_cake/inside"
-	}
-}

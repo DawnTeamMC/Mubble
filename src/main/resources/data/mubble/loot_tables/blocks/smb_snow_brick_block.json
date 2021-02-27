@@ -6,7 +6,35 @@
 			"entries": [
 				{
 					"type": "minecraft:item",
-					"name": "mubble:smb_snow_brick_block"
+					"name": "mubble:smb_snow_brick_block",
+					"functions": [
+						{
+							"function": "minecraft:copy_nbt",
+							"source": "block_entity",
+							"ops": [
+								{
+									"source": "LootItem",
+									"target": "BlockEntityTag.LootItem",
+									"op": "replace"
+								},
+								{
+									"source": "LootTable",
+									"target": "BlockEntityTag.LootTable",
+									"op": "replace"
+								},
+								{
+									"source": "LootTableSeed",
+									"target": "BlockEntityTag.LootTableSeed",
+									"op": "replace"
+								},
+								{
+									"source": "BreakChance",
+									"target": "BlockEntityTag.BreakChance",
+									"op": "replace"
+								}
+							]
+						}
+					]
 				}
 			],
 			"conditions": [

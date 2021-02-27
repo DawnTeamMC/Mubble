@@ -10,7 +10,7 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class RotatingBlock extends HittableBlock {
+public class RotatingBlock extends PunchBlock {
 	public RotatingBlock(BlockSoundGroup soundType) {
 		super(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).sounds(soundType));
 	}
@@ -42,7 +42,7 @@ public class RotatingBlock extends HittableBlock {
 	}
 
 	@Override
-	public void onHit(BlockState state, World world, BlockPos pos, Entity entity) {
+	public void onPunch(BlockState state, World world, BlockPos pos, Entity entity) {
 		if(!world.isClient) {
 			world.breakBlock(pos, false, entity);
 		}

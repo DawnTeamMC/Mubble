@@ -32,11 +32,6 @@
 							}
 						}
 					]
-				},
-				{
-					"type": "item",
-					"name": "mubble:bandage",
-					"weight": 3
 				}
 			]
 		}

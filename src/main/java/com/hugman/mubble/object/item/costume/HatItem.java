@@ -35,20 +35,6 @@ public class HatItem extends CostumeItem {
 	}
 
 	@Override
-	public void onEquip(PlayerEntity player, ItemStack stack) {
-		if(this == MubbleCostumes.MAYRO_CAP && player.getGameProfile().getId().toString().equals("8cf61519-4ac2-4d60-9d65-d0c7abcf4524")) {
-			player.sendMessage(new TranslatableText("item.mubble.mayro_cap.secret_status"), true);
-		}
-		else if(this == MubbleCostumes.NOTEBLOCK_HEAD && player.getGameProfile().getId().toString().equals("5a68af56-e293-44e9-bbf8-21d58300b3f3")) {
-			player.sendMessage(new TranslatableText("item.mubble.noteblock_head.secret_status"), true);
-		}
-		else if(this == MubbleCostumes.BANDANA && player.getGameProfile().getId().toString().equals("1805e857-329e-463e-8ca8-122fcc686996")) {
-			player.sendMessage(new TranslatableText("item.mubble.bandana.secret_status"), true);
-		}
-		super.onEquip(player, stack);
-	}
-
-	@Override
 	public void render(String slot, MatrixStack matrixStack, VertexConsumerProvider vcp, int light, PlayerEntityModel<AbstractClientPlayerEntity> model, AbstractClientPlayerEntity player, float headYaw, float headPitch) {
 		ItemRenderer itemRenderer = MinecraftClient.getInstance().getItemRenderer();
 		Trinket.translateToFace(matrixStack, model, player, headYaw, headPitch);

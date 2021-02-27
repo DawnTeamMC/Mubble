@@ -6,6 +6,7 @@ import com.hugman.mubble.init.*;
 import com.hugman.mubble.init.data.MubbleStats;
 import com.hugman.mubble.init.world.MubbleBiomes;
 import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
+import com.hugman.mubble.init.world.MubbleFoliagePlacerTypes;
 import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.GsonConfigSerializer;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.PartitioningSerializer;
@@ -30,6 +31,7 @@ public class Mubble implements ModInitializer {
 		MubbleItemGroups.init();
 		MubbleStats.init();
 		MubbleConfiguredFeatures.init();
+		MubbleFoliagePlacerTypes.init();
 		MubbleBiomes.init();
 		MOD_DATA.registerCreators();
 		MubbleBiomes.addToGen();

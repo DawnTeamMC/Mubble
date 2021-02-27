@@ -1,9 +1,0 @@
-{
-	"parent": "mubble:block/cake/sliced/2",
-	"textures": {
-		"bottom": "mubble:block/chocolate_cake/bottom",
-		"top": "mubble:block/chocolate_cake/top",
-		"side": "mubble:block/chocolate_cake/side",
-		"inside": "mubble:block/chocolate_cake/inside"
-	}
-}

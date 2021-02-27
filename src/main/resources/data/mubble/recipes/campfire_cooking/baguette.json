@@ -1,9 +1,0 @@
-{
-	"type": "minecraft:campfire_cooking",
-	"ingredient": {
-		"item": "minecraft:bread"
-	},
-	"result": "mubble:baguette",
-	"experience": 0.35,
-	"cookingtime": 200
-}

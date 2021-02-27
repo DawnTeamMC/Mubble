@@ -4,7 +4,7 @@ import com.hugman.dawn.api.creator.BiomeCreator;
 import com.hugman.mubble.Mubble;
 import com.hugman.mubble.config.MubbleConfig;
 import com.hugman.mubble.init.MubblePack;
-import com.hugman.mubble.util.MubbleBiomeCreator;
+import com.hugman.mubble.object.world.gen.MubbleBiomeCreator;
 import net.fabricmc.fabric.api.biome.v1.OverworldBiomes;
 import net.fabricmc.fabric.api.biome.v1.OverworldClimate;
 import net.minecraft.util.registry.RegistryKey;

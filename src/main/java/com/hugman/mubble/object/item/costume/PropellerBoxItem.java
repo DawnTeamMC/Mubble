@@ -1,5 +1,6 @@
 package com.hugman.mubble.object.item.costume;
 
+import com.hugman.mubble.init.MubbleSounds;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
@@ -17,7 +18,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -51,15 +54,27 @@ public class PropellerBoxItem extends HatItem {
 		for(int l = 0; l < 8; ++l) {
 			world.addParticle(ParticleTypes.CLOUD, player.getParticleX(0.75D), player.getY(), player.getParticleZ(0.75D), 0.0D, -0.05D, 0.0D);
 		}
+		world.playSoundFromEntity(null, player, MubbleSounds.COSTUME_PROPELLER_BOX_USE, SoundCategory.PLAYERS, 1f, 1f);
 	}
 
 	@Override
 	public void tick(PlayerEntity player, ItemStack stack) {
-		if(!player.world.isClient() && isBeingUsed(player) && player.isOnGround()) {
+		World world = player.getEntityWorld();
+		if(!world.isClient() && isBeingUsed(player) && player.isOnGround()) {
 			player.getItemCooldownManager().set(this, 0);
 			if(player.hasStatusEffect(StatusEffects.SLOW_FALLING)) {
 				if(player.getStatusEffect(StatusEffects.SLOW_FALLING).getAmplifier() == 4) {
 					player.removeStatusEffect(StatusEffects.SLOW_FALLING);
+				}
+			}
+		}
+		if(isBeingUsed(player)) {
+			if(player.getVelocity().getY() > 0) {
+				world.addParticle(ParticleTypes.CLOUD, player.getParticleX(0.25D), player.getY(), player.getParticleZ(0.25D), 0.0D, -0.05D, 0.0D);
+			}
+			else {
+				if(MathHelper.floor(player.getItemCooldownManager().getCooldownProgress(this, 0.0F) * 100) % 3 == 0) {
+					world.playSound(player, player.getBlockPos(), MubbleSounds.COSTUME_PROPELLER_BOX_FALL, SoundCategory.PLAYERS, 1.0f, 1.0f);
 				}
 			}
 		}
