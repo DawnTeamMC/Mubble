@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class KeyDoorBlock extends DoorBlock {
+public class  KeyDoorBlock extends DoorBlock {
 	public static final BooleanProperty LOCKED = MubbleBlocks.Properties.LOCKED;
 
 	public KeyDoorBlock(Block.Settings builder) {

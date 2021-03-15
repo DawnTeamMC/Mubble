@@ -6,9 +6,9 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.CompoundTag;
 
 public class WarpPipeBlockEntity extends BlockEntity {
-    private int destinationX;
-    private int destinationY;
-    private int destinationZ;
+    private int destinationX = 0;
+    private int destinationY = 0;
+    private int destinationZ = 0;
 
     public WarpPipeBlockEntity() {
         super(MubbleBlocks.WARP_PIPE_ENTITY);
@@ -37,9 +37,17 @@ public class WarpPipeBlockEntity extends BlockEntity {
         return this.destinationX;
     }
     public int getDestinationY() {
-        return this.destinationY;
+        return this.destinationY + 1;
     }
     public int getDestinationZ() {
         return this.destinationZ;
+    }
+
+    public void setDestinationX(int newPos) { this.destinationX = newPos; }
+    public void setDestinationY(int newPos) {
+        this.destinationY = newPos;
+    }
+    public void setDestinationZ(int newPos) {
+        this.destinationZ = newPos;
     }
 }

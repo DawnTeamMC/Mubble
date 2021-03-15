@@ -22,6 +22,7 @@ public class MubbleItems extends MubblePack {
 	public static final Item JINGLE_BELLS = register(new ItemCreator.Builder("jingle_bells", new ShakeInstrumentItem(new Item.Settings().group(MubbleItemGroups.INSTRUMENTS_GROUP).maxCount(1), MubbleSounds.ITEM_JINGLE_BELLS_USE)));
 	public static final Item BANDAGE = register(new ItemCreator.Builder("bandage", new BandageItem(new Item.Settings().group(ItemGroup.MISC).maxCount(16))));
 	/* SUPER MARIO */
+	public static final Item WARP_PIPE_LINK = register(new ItemCreator.Builder("warp_pipe_link", new WarpPipeLinkItem(new Item.Settings().group(ItemGroup.TOOLS))));
 	public static final Item SUPER_MUSHROOM = register(new ItemCreator.Builder("super_mushroom", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.SUPER_MUSHROOM))));
 	public static final Item PEACH = register(new ItemCreator.Builder("peach", new Item(new Item.Settings().group(ItemGroup.FOOD).food(MubbleFood.PEACH))));
 	public static final Item FIREBALL = register(new ItemCreator.Builder("fireball", new FireballItem(new Item.Settings().group(ItemGroup.COMBAT))));
