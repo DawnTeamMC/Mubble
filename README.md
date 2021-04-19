@@ -1,2 +1,3 @@
-![Check Build](https://github.com/DawnTeamMC/Mubble/workflows/Check%20Build/badge.svg)
-[![Mubble](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/mubble/header.png)](https://www.curseforge.com/minecraft/mc-mods/mubble)
+# Mubble [![Latest release](https://img.shields.io/github/release/DawnTeamMC/Mubble.svg)](https://github.com/DawnTeamMC/Mubble/releases/latest) [![License](https://img.shields.io/github/license/DawnTeamMC/Mubble.svg)](https://github.com/DawnTeamMC/Mubble/blob/master/LICENSE)
+
+[![Mubble](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/mubble/header.png)](https://github.com/DawnTeamMC/Mubble/wiki)
