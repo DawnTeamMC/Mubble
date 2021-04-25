@@ -1,7 +1,6 @@
 package com.hugman.mubble.mixin.client;
 
 import com.hugman.mubble.object.item.LightsaberItem;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

@@ -9,7 +9,6 @@ import net.minecraft.world.gen.foliage.FoliagePlacerType;
 
 public class MubbleFoliagePlacerTypes {
 	public static final FoliagePlacerType<CatFoliagePlacer> CAT_FOLIAGE_PLACER = register("cat_foliage_placer", CatFoliagePlacer.CODEC);
-	;
 
 	public static void init() {
 
