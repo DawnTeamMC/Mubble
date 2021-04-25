@@ -32,7 +32,8 @@
 	"depends": {
 		"minecraft": "*",
 		"fabric": "*",
-		"dawn": "*"
+		"dawn": "*",
+		"trinkets": "*"
 	},
 	"custom": {
 		"modmenu": {

@@ -15,7 +15,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.BlockView;
@@ -44,12 +43,12 @@ public class LootablePunchBlockEntity extends BlockEntity {
 		}
 	}
 
-	public void setLootItemStack(ItemStack stack) {
-		this.lootItemStack = stack;
-	}
-
 	public ItemStack getLootItemStack() {
 		return lootItemStack;
+	}
+
+	public void setLootItemStack(ItemStack stack) {
+		this.lootItemStack = stack;
 	}
 
 	public void setLootTable(Identifier id, long seed) {
@@ -65,12 +64,12 @@ public class LootablePunchBlockEntity extends BlockEntity {
 		return this.lootTableSeed;
 	}
 
-	public void setBreakChance(float breakChance) {
-		this.breakChance = breakChance;
-	}
-
 	public float getBreakChance() {
 		return breakChance;
+	}
+
+	public void setBreakChance(float breakChance) {
+		this.breakChance = breakChance;
 	}
 
 	public boolean canBreak(Random random) {
@@ -108,14 +107,14 @@ public class LootablePunchBlockEntity extends BlockEntity {
 
 	public List<ItemStack> getLoot(BlockState state, World world, @Nullable Entity entity) {
 		List<ItemStack> itemStacks = new ArrayList<>();
-		if (this.lootTableId != null && this.world.getServer() != null) {
+		if(this.lootTableId != null && this.world.getServer() != null) {
 			LootTable lootTable = world.getServer().getLootManager().getTable(this.lootTableId);
-			if (entity instanceof ServerPlayerEntity) {
-				Criteria.PLAYER_GENERATES_CONTAINER_LOOT.test((ServerPlayerEntity)entity, this.lootTableId);
+			if(entity instanceof ServerPlayerEntity) {
+				Criteria.PLAYER_GENERATES_CONTAINER_LOOT.test((ServerPlayerEntity) entity, this.lootTableId);
 			}
 			LootContext.Builder builder = new LootContext.Builder((ServerWorld) world).parameter(LootContextParameters.BLOCK_STATE, state).parameter(LootContextParameters.ORIGIN, Vec3d.ofCenter(this.pos)).random(this.lootTableSeed).parameter(LootContextParameters.TOOL, ItemStack.EMPTY);
-			if (entity != null) {
-				if (entity instanceof PlayerEntity) {
+			if(entity != null) {
+				if(entity instanceof PlayerEntity) {
 					builder.luck(((PlayerEntity) entity).getLuck());
 				}
 				builder.parameter(LootContextParameters.THIS_ENTITY, entity);

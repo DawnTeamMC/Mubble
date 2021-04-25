@@ -2,7 +2,6 @@ package com.hugman.mubble.object.world.gen;
 
 import com.hugman.mubble.init.MubbleEntities;
 import com.hugman.mubble.init.world.MubbleConfiguredFeatures;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.sound.BiomeMoodSound;
 import net.minecraft.util.math.MathHelper;

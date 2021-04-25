@@ -1,6 +1,5 @@
 package com.hugman.mubble.object.item.costume;
 
-import com.hugman.mubble.init.MubbleCostumes;
 import com.hugman.mubble.init.MubbleSlots;
 import dev.emi.trinkets.api.SlotGroups;
 import dev.emi.trinkets.api.Trinket;
@@ -15,11 +14,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class HatItem extends CostumeItem {

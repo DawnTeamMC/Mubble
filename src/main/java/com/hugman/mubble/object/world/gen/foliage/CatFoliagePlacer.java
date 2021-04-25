@@ -1,12 +1,10 @@
 package com.hugman.mubble.object.world.gen.foliage;
 
 import com.hugman.mubble.init.world.MubbleFoliagePlacerTypes;
-import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.util.math.BlockBox;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3i;
 import net.minecraft.world.ModifiableTestableWorld;
 import net.minecraft.world.gen.UniformIntDistribution;
 import net.minecraft.world.gen.feature.TreeFeature;
@@ -53,9 +51,9 @@ public class CatFoliagePlacer extends FoliagePlacer {
 
 	protected void generateBlock(ModifiableTestableWorld world, Random random, TreeFeatureConfig config, BlockPos pos, Set<BlockPos> leaves, int y, boolean giantTrunk, BlockBox box) {
 		BlockPos.Mutable mutable = new BlockPos.Mutable();
-		if (!this.isPositionInvalid(random, 0, y, 0, 1, giantTrunk)) {
+		if(!this.isPositionInvalid(random, 0, y, 0, 1, giantTrunk)) {
 			mutable.set(pos, 0, y, 0);
-			if (TreeFeature.canReplace(world, mutable)) {
+			if(TreeFeature.canReplace(world, mutable)) {
 				world.setBlockState(mutable, config.leavesProvider.getBlockState(random, mutable), 19);
 				box.encompass(new BlockBox(mutable, mutable));
 				leaves.add(mutable.toImmutable());

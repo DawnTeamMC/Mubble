@@ -3,19 +3,21 @@ package com.hugman.mubble.init;
 import com.hugman.dawn.api.creator.BlockCreator;
 import com.hugman.dawn.api.creator.BlockEntityCreator;
 import com.hugman.dawn.api.creator.ScreenHandlerCreator;
-import com.hugman.dawn.api.creator.pack.block.*;
+import com.hugman.dawn.api.creator.pack.block.LeavesPack;
+import com.hugman.dawn.api.creator.pack.block.MCBlockPack;
+import com.hugman.dawn.api.creator.pack.block.MSBlockPack;
+import com.hugman.dawn.api.creator.pack.block.NormalWoodPack;
+import com.hugman.dawn.api.creator.pack.block.PottedPlantPack;
+import com.hugman.dawn.api.creator.pack.block.WoodPack;
 import com.hugman.dawn.api.object.block.DirectionalBlock;
 import com.hugman.dawn.api.object.block.SaplingBlock;
 import com.hugman.dawn.api.util.BlockSettings;
 import com.hugman.dawn.api.util.DefaultBlockGetter;
-import com.hugman.dawn.mod.init.DawnEffects;
 import com.hugman.mubble.init.data.MubbleSoundTypes;
-import com.hugman.mubble.object.block.GrassBlock;
-import com.hugman.mubble.object.block.NoteBlock;
 import com.hugman.mubble.object.block.*;
+import com.hugman.mubble.object.block.block_entity.LootablePunchBlockEntity;
 import com.hugman.mubble.object.block.block_entity.PlacerBlockEntity;
 import com.hugman.mubble.object.block.block_entity.PresentBlockEntity;
-import com.hugman.mubble.object.block.block_entity.LootablePunchBlockEntity;
 import com.hugman.mubble.object.block.block_state_property.FluidLog;
 import com.hugman.mubble.object.block.block_state_property.Princess;
 import com.hugman.mubble.object.block.sapling_generator.PinkPressGardenSaplingGenerator;
@@ -24,7 +26,14 @@ import com.hugman.mubble.object.block.sapling_generator.ScarletSaplingGenerator;
 import com.hugman.mubble.object.screen.screen_handler.TimeswapTableScreenHandler;
 import com.hugman.mubble.util.MubbleBlockGetter;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FallingBlock;
+import net.minecraft.block.FlowerBlock;
+import net.minecraft.block.Material;
+import net.minecraft.block.MaterialColor;
+import net.minecraft.block.MushroomPlantBlock;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.entity.effect.StatusEffects;
@@ -61,7 +70,6 @@ public class MubbleBlocks extends MubblePack {
 	public static final BlockEntityType<PresentBlockEntity> PRESENT_ENTITY = register(new BlockEntityCreator.Builder<>("present", BlockEntityType.Builder.create(PresentBlockEntity::new, MubbleBlocks.WHITE_PRESENT, MubbleBlocks.BLACK_PRESENT, MubbleBlocks.BLUE_PRESENT, MubbleBlocks.GREEN_PRESENT, MubbleBlocks.YELLOW_PRESENT, MubbleBlocks.RED_PRESENT, MubbleBlocks.PURPLE_PRESENT, MubbleBlocks.GOLDEN_PRESENT)));
 	public static final MCBlockPack CLOUD_BLOCKS = register(new MCBlockPack.Builder("", MubbleBlockGetter.CLOUD_BLOCK, FabricBlockSettings.of(Material.LEAVES).sounds(BlockSoundGroup.WOOL).hardness(0f).noCollision()));
 	public static final MCBlockPack BALLOONS = register(new MCBlockPack.Builder("", MubbleBlockGetter.BALLOON, FabricBlockSettings.of(Material.WOOL).hardness(0F).sounds(BlockSoundGroup.WOOL).nonOpaque()));
-	public static final Block UNSTABLE_STONE = register(new BlockCreator.Builder("unstable_stone", new UnstableBlock(FabricBlockSettings.copy(Blocks.STONE).strength(0.1F, 0.0F))).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final Block PLACER = register(new BlockCreator.Builder("placer", new PlacerBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F))).itemGroup(ItemGroup.REDSTONE));
 	public static final BlockEntityType<DispenserBlockEntity> PLACER_ENTITY = register(new BlockEntityCreator.Builder<>("placer", BlockEntityType.Builder.create(PlacerBlockEntity::new, MubbleBlocks.PLACER)));
 	public static final Block TIMESWAP_TABLE = register(new BlockCreator.Builder("timeswap_table", new TimeswapTableBlock(FabricBlockSettings.of(Material.STONE).hardness(3.5F))).itemGroup(ItemGroup.DECORATIONS));
@@ -124,7 +132,7 @@ public class MubbleBlocks extends MubblePack {
 	public static final Block SMB3_ROTATING_BLOCK = register(new BlockCreator.Builder("smb3_rotating_block", new RotatingBlock(MubbleSoundTypes.SMB3_BRICK_BLOCK)).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final Block SMW_ROTATING_BLOCK = register(new BlockCreator.Builder("smw_rotating_block", new RotatingBlock(MubbleSoundTypes.SMW_BRICK_BLOCK)).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final Block NSMBU_ROTATING_BLOCK = register(new BlockCreator.Builder("nsmbu_rotating_block", new RotatingBlock(MubbleSoundTypes.NSMBU_BRICK_BLOCK)).itemGroup(ItemGroup.BUILDING_BLOCKS));
-	public static final Block LIGHT_BLOCK = register(new BlockCreator.Builder("light_block", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).lightLevel(15))));
+	public static final Block LIGHT_BLOCK = register(new BlockCreator.Builder("light_block", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).luminance(15))));
 	public static final Block SMB_GROUND_BRICK_BLOCK = register(new BlockCreator.Builder("smb_ground_brick_block", new LootablePunchBlock(SMB_EMPTY_BLOCK, MubbleSounds.BLOCK_LOOTABLE_PUNCH_BLOCK_LOOT_COIN_SMB, MubbleSounds.BLOCK_LOOTABLE_PUNCH_BLOCK_LOOT_SMB, Settings.BRICK_BLOCK.sounds(MubbleSoundTypes.SMB_BRICK_BLOCK))).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final Block SMB_UNDERGROUND_BRICK_BLOCK = register(new BlockCreator.Builder("smb_underground_brick_block", new LootablePunchBlock(SMB_EMPTY_BLOCK, MubbleSounds.BLOCK_LOOTABLE_PUNCH_BLOCK_LOOT_COIN_SMB, MubbleSounds.BLOCK_LOOTABLE_PUNCH_BLOCK_LOOT_SMB, Settings.BRICK_BLOCK.sounds(MubbleSoundTypes.SMB_BRICK_BLOCK))).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final Block SMB_CASTLE_BRICK_BLOCK = register(new BlockCreator.Builder("smb_castle_brick_block", new LootablePunchBlock(SMB_EMPTY_BLOCK, MubbleSounds.BLOCK_LOOTABLE_PUNCH_BLOCK_LOOT_COIN_SMB, MubbleSounds.BLOCK_LOOTABLE_PUNCH_BLOCK_LOOT_SMB, Settings.BRICK_BLOCK.sounds(MubbleSoundTypes.SMB_BRICK_BLOCK))).itemGroup(ItemGroup.BUILDING_BLOCKS));
@@ -177,7 +185,7 @@ public class MubbleBlocks extends MubblePack {
 	public static final PottedPlantPack ICE_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("ice_flower", new FlowerBlock(StatusEffects.MINING_FATIGUE, 7, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
 	public static final PottedPlantPack BOOMERANG_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("boomerang_flower", new FlowerBlock(StatusEffects.HASTE, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
 	public static final PottedPlantPack CLOUD_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("cloud_flower", new CloudFlowerBlock(StatusEffects.SLOW_FALLING, 7, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
-	public static final PottedPlantPack GOLD_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("gold_flower", new FlowerBlock(DawnEffects.HEAVINESS, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(5))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack GOLD_FLOWER = register(new PottedPlantPack.Builder(new BlockCreator.Builder("gold_flower", new FlowerBlock(StatusEffects.GLOWING, 6, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).luminance(5))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
 	/* KIRBY */
 	public static final Block KIRBY_BLOCK = register(new BlockCreator.Builder("kirby_block", new DirectionalBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, MaterialColor.PINK).hardness(0.5F).sounds(BlockSoundGroup.WOOL))).itemGroup(ItemGroup.DECORATIONS));
 	/* TETRIS */
@@ -235,13 +243,13 @@ public class MubbleBlocks extends MubblePack {
 	public static final Block SPRING = register(new BlockCreator.Builder("spring", new SpringBlock(FabricBlockSettings.of(Material.METAL).hardness(4f))).itemGroup(ItemGroup.TRANSPORTATION));
 	/* UNDERTALE / DELTARUNE */
 	public static final NormalWoodPack SCARLET_WOOD = register(new NormalWoodPack.Builder("scarlet", new ScarletSaplingGenerator(), MaterialColor.field_25702, MaterialColor.field_25703, MaterialColor.field_25707));
-	public static final PottedPlantPack SCARLET_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("scarlet_mushroom", new MushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7))).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT)));
-	public static final PottedPlantPack SCARLET_ORCHID = register(new PottedPlantPack.Builder(new BlockCreator.Builder("scarlet_orchid", new FlowerBlock(StatusEffects.GLOWING, 8, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).lightLevel(7))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack SCARLET_MUSHROOM = register(new PottedPlantPack.Builder(new BlockCreator.Builder("scarlet_mushroom", new MushroomPlantBlock(FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).luminance(7))).itemGroup(ItemGroup.DECORATIONS).render(BlockCreator.Render.CUTOUT)));
+	public static final PottedPlantPack SCARLET_ORCHID = register(new PottedPlantPack.Builder(new BlockCreator.Builder("scarlet_orchid", new FlowerBlock(StatusEffects.GLOWING, 8, FabricBlockSettings.of(Material.PLANT).noCollision().hardness(0.0F).sounds(BlockSoundGroup.GRASS).luminance(7))).itemGroup(ItemGroup.DECORATIONS).flammability(60, 100).render(BlockCreator.Render.CUTOUT)));
 	/* CELESTE */
 	public static final Block GIRDER = register(new BlockCreator.Builder("girder", new Block(FabricBlockSettings.copy(Blocks.IRON_BLOCK))).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final MSBlockPack MIRROR_TEMPLE_BRICKS = register(new MSBlockPack.Builder("mirror_temple_bricks", FabricBlockSettings.copyOf(Blocks.BRICKS), DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.WALL));
 	public static final MSBlockPack OLD_SITE_BRICKS = register(new MSBlockPack.Builder("old_site_bricks", FabricBlockSettings.copyOf(Blocks.BRICKS), DefaultBlockGetter.CUBE, DefaultBlockGetter.STAIRS, DefaultBlockGetter.SLAB, DefaultBlockGetter.WALL));
-	public static final Block ELDER_PEBBLES = register(new BlockCreator.Builder("elder_pebbles", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.RED).strength(2.0F, 6.0F).lightLevel(5))).itemGroup(ItemGroup.BUILDING_BLOCKS));
+	public static final Block ELDER_PEBBLES = register(new BlockCreator.Builder("elder_pebbles", new Block(FabricBlockSettings.of(Material.STONE, MaterialColor.RED).strength(2.0F, 6.0F).luminance(5))).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final Block DREAM_BLOCK = register(new BlockCreator.Builder("dream_block", new Block(FabricBlockSettings.of(Material.SOLID_ORGANIC).hardness(0.4f).sounds(MubbleSoundTypes.DREAM_BLOCK))).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	public static final Block DREAM_BEDROCK = register(new BlockCreator.Builder("dream_bedrock", new Block(FabricBlockSettings.of(Material.STONE).strength(-1.0F, 3600000.0F).dropsNothing())).itemGroup(ItemGroup.BUILDING_BLOCKS));
 	/* PUYO PUYO */
@@ -253,7 +261,7 @@ public class MubbleBlocks extends MubblePack {
 	public static final Block PURPLE_PUYO = register(new BlockCreator.Builder("purple_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.PURPLE).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME))).noItem());
 	public static final Block GRAY_PUYO = register(new BlockCreator.Builder("gray_puyo", new PuyoBlock(FabricBlockSettings.of(Material.ORGANIC_PRODUCT, DyeColor.GRAY).slipperiness(0.8F).sounds(BlockSoundGroup.SLIME))).noItem());
 	public static final Block GARBAGE_PUYO = register(new BlockCreator.Builder("garbage_puyo", new DirectionalBlock(FabricBlockSettings.copy(Blocks.STONE))).noItem());
-	public static final Block POINT_PUYO = register(new BlockCreator.Builder("point_puyo", new DirectionalBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).lightLevel(10))).noItem());
+	public static final Block POINT_PUYO = register(new BlockCreator.Builder("point_puyo", new DirectionalBlock(FabricBlockSettings.of(Material.STONE, MaterialColor.STONE).strength(1.5F, 6.0F).luminance(10))).noItem());
 	public static final Block HARD_PUYO = register(new BlockCreator.Builder("hard_puyo", new DirectionalBlock(FabricBlockSettings.copy(Blocks.STONE))).noItem());
 	public static final Block IRON_PUYO = register(new BlockCreator.Builder("iron_puyo", new DirectionalBlock(FabricBlockSettings.copy(Blocks.IRON_BLOCK))).noItem());
 	/* YOUTUBE */

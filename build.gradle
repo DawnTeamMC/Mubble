@@ -9,6 +9,7 @@ repositories {
     mavenLocal()
     maven { url 'https://jitpack.io' }
     maven { url 'http://maven.terraformersmc.com/' }
+    maven { url 'https://maven.shedaniel.me/' }
 }
 
 dependencies {
@@ -18,7 +19,7 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
     modApi "com.github.DawnTeamMC:DawnAPI:v${dawn_version}"
-    includeMod "dev.emi:trinkets:${trinkets_version}"
+    modApi "dev.emi:trinkets:${trinkets_version}"
 
     compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 }

@@ -16,21 +16,16 @@ public class PlayerEntityMixin {
 	@Shadow
 	private ItemStack selectedItem;
 
-	@Inject(method = "tick", at = @At(value = "HEAD"), cancellable = true)
+	@Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;resetLastAttackedTicks()V"), cancellable = true)
 	private void mubble_tick(CallbackInfo info) {
 		PlayerEntity player = (PlayerEntity) (Object) this;
 		World world = player.getEntityWorld();
 		ItemStack mainHandStack = player.getMainHandStack();
-		ItemStack headStack = player.getEquippedStack(EquipmentSlot.HEAD);
-		if(!ItemStack.areEqual(selectedItem, mainHandStack)) {
-			if(!ItemStack.areItemsEqual(selectedItem, mainHandStack)) {
-				if(mainHandStack.getItem() instanceof LightsaberItem) {
-					((LightsaberItem) mainHandStack.getItem()).onPullOut(player, world);
-				}
-				if(selectedItem.getItem() instanceof LightsaberItem) {
-					((LightsaberItem) selectedItem.getItem()).onPullIn(player, world);
-				}
-			}
+		if(mainHandStack.getItem() instanceof LightsaberItem) {
+			((LightsaberItem) mainHandStack.getItem()).onPullOut(player, world);
+		}
+		if(selectedItem.getItem() instanceof LightsaberItem) {
+			((LightsaberItem) selectedItem.getItem()).onPullIn(player, world);
 		}
 	}
 }

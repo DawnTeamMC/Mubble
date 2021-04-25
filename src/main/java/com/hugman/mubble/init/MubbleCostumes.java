@@ -1,8 +1,6 @@
 package com.hugman.mubble.init;
 
 import com.hugman.dawn.api.creator.ItemCreator;
-import com.hugman.dawn.mod.init.DawnEffects;
-import com.hugman.dawn.mod.init.DawnEntities;
 import com.hugman.mubble.object.block.block_state_property.Princess;
 import com.hugman.mubble.object.item.costume.*;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -35,7 +33,7 @@ public class MubbleCostumes extends MubblePack {
 	/* SUPER MARIO */
 	public static final Item CAPPY = register(new ItemCreator.Builder("cappy", new CappyItem(Settings.COSTUME)));
 	public static final Item LUIGI_CAP = register(new ItemCreator.Builder("luigi_cap", new HatItem(Settings.COSTUME.maxDamageIfAbsent(25), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 10, 0, false, false, true), new StatusEffectInstance(StatusEffects.SPEED, 10, 0, false, false, true))));
-	public static final Item WARIO_CAP = register(new ItemCreator.Builder("wario_cap", new HatItem(Settings.COSTUME.maxDamageIfAbsent(25), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(DawnEffects.HEAVINESS, 10, 0, false, false, true), new StatusEffectInstance(StatusEffects.STRENGTH, 10, 0, false, false, true))));
+	public static final Item WARIO_CAP = register(new ItemCreator.Builder("wario_cap", new HatItem(Settings.COSTUME.maxDamageIfAbsent(25), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.SLOWNESS, 10, 0, false, false, true), new StatusEffectInstance(StatusEffects.STRENGTH, 10, 0, false, false, true))));
 	public static final Item WALUIGI_CAP = register(new ItemCreator.Builder("waluigi_cap", new HatItem(Settings.COSTUME.maxDamageIfAbsent(25), SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false, new StatusEffectInstance(StatusEffects.JUMP_BOOST, 10, 1, false, false, true))));
 	public static final Item VANISH_CAP = register(new ItemCreator.Builder("vanish_cap", new VanishCapItem(Settings.COSTUME.maxDamageIfAbsent(600))));
 	public static final Item WING_CAP = register(new ItemCreator.Builder("wing_cap", new WingCapItem(Settings.COSTUME.maxDamageIfAbsent(600))));
@@ -49,7 +47,6 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item SUPER_CROWN = register(new ItemCreator.Builder("super_crown", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, false)));
 	public static final Item PROPELLER_BOX = register(new ItemCreator.Builder("propeller_box", new PropellerBoxItem(Settings.COSTUME.maxDamageIfAbsent(30))));
 	public static final Item MARIO_WEDDING_HAT = register(new ItemCreator.Builder("mario_wedding_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
-	public static final Item BOO_HAT = register(new ItemCreator.Builder("boo_hat", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));
 	public static final Item BROQUE_MONSIEUR_HEAD = register(new ItemCreator.Builder("broque_monsieur_head", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_IRON, true)));
 
 	/* POKEMON */
@@ -78,12 +75,6 @@ public class MubbleCostumes extends MubblePack {
 	public static final Item POINT_PUYO = register(new ItemCreator.Builder("point_puyo", new WearableBlockItem(MubbleBlocks.POINT_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE)));
 	public static final Item HARD_PUYO = register(new ItemCreator.Builder("hard_puyo", new WearableBlockItem(MubbleBlocks.HARD_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_STONE_PLACE)));
 	public static final Item IRON_PUYO = register(new ItemCreator.Builder("iron_puyo", new WearableBlockItem(MubbleBlocks.IRON_PUYO, Settings.DECORATION_BLOCK, SoundEvents.BLOCK_METAL_PLACE)));
-
-	/* BALDI'S BASICS IN EDUCATION AND LEARNING */
-	public static final Item BALDI_HEAD = register(new ItemCreator.Builder("baldi_head", new HatItem(Settings.COSTUME, SoundEvents.ENTITY_PARROT_IMITATE_VEX, true)));
-
-	/* PETSCOP */
-	public static final Item GUARDIAN_MASK = register(new ItemCreator.Builder("guardian_mask", new GuardianMaskItem(Settings.COSTUME)));
 
 	/* YOUTUBE */
 	public static final Item MAYRO_CAP = register(new ItemCreator.Builder("mayro_cap", new HatItem(Settings.COSTUME, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, false)));

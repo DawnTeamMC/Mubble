@@ -1,6 +1,5 @@
 package com.hugman.mubble.object.entity;
 
-import com.hugman.dawn.mod.init.DawnEffects;
 import com.hugman.mubble.init.MubbleEntities;
 import com.hugman.mubble.init.MubbleItems;
 import com.hugman.mubble.init.MubbleSounds;
@@ -68,7 +67,6 @@ public class IceballEntity extends BallEntity {
 			if(!(entity instanceof SnowGolemEntity) && entity instanceof LivingEntity) {
 				LivingEntity livingEntity = (LivingEntity) entity;
 				livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 1));
-				livingEntity.addStatusEffect(new StatusEffectInstance(DawnEffects.HEAVINESS, 40));
 			}
 		}
 		world.playSound(null, getX(), getY(), getZ(), MubbleSounds.ENTITY_ICEBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);

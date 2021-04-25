@@ -22,7 +22,7 @@ public class MubbleBiomes extends MubblePack {
 	}
 
 	public static void addToGen() {
-		OverworldBiomes.addContinentalBiome(SCAMPER_SHORES, OverworldClimate.TEMPERATE, 0.6D);
+		//OverworldBiomes.addContinentalBiome(SCAMPER_SHORES, OverworldClimate.TEMPERATE, 0.6D);
 		if(CONFIG.press_garden) OverworldBiomes.addContinentalBiome(PRESS_GARDEN, OverworldClimate.SNOWY, 0.25D);
 		if(CONFIG.scarlet_forest) OverworldBiomes.addContinentalBiome(SCARLET_FOREST, OverworldClimate.COOL, 1D);
 	}
