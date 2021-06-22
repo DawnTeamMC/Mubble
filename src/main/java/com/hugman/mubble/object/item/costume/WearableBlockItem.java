@@ -17,7 +17,6 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
@@ -27,6 +26,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 
 public class WearableBlockItem extends BlockItem implements Trinket {
@@ -106,7 +106,7 @@ public class WearableBlockItem extends BlockItem implements Trinket {
 		Trinket.translateToFace(matrixStack, model, player, headYaw, headPitch);
 		matrixStack.scale(0.6F, 0.6F, 0.6F);
 		matrixStack.translate(0.0D, 0.0D, 0.475D);
-		matrixStack.multiply(Vector3f.POSITIVE_Z.getDegreesQuaternion(180));
+		matrixStack.multiply(Vec3f.POSITIVE_Z.getDegreesQuaternion(180));
 		itemRenderer.renderItem(new ItemStack(this), ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
 	}
 

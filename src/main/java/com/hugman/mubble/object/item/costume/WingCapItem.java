@@ -1,5 +1,7 @@
 package com.hugman.mubble.object.item.costume;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.OverlayTexture;
@@ -8,7 +10,6 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -18,6 +19,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3f;
 
 public class WingCapItem extends HatItem {
 	public WingCapItem(Item.Settings builder) {
@@ -58,14 +60,14 @@ public class WingCapItem extends HatItem {
 
 		matrixStack.push();
 		matrixStack.translate(0.475D, 0.0D, -0.275D);
-		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(j));
+		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(j));
 		stack.getOrCreateTag().putInt("Trinket", 2);
 		itemRenderer.renderItem(stack, ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
 		matrixStack.pop();
 
 		matrixStack.push();
 		matrixStack.translate(-0.475D, 0.0D, -0.275D);
-		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(-j));
+		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(-j));
 		stack.getOrCreateTag().putInt("Trinket", 3);
 		itemRenderer.renderItem(stack, ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
 		matrixStack.pop();

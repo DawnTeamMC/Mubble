@@ -8,7 +8,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,7 +22,7 @@ import java.util.Random;
 @Mixin(MobEntity.class)
 public class MobEntityMixin {
 	@Inject(method = "initialize", at = @At(value = "TAIL"), cancellable = true)
-	private void mubble_initialize(ServerWorldAccess arg, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag, CallbackInfoReturnable<EntityData> info) {
+	private void mubble_initialize(ServerWorldAccess arg, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag, CallbackInfoReturnable<EntityData> info) {
 		MobEntity entity = (MobEntity) (Object) this;
 		Random rand = new Random();
 		if(MubbleTags.EntityTypes.CAN_WEAR_HELMET.contains(entity.getType())) {

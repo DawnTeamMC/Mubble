@@ -31,7 +31,7 @@ public class PlaceBreakDispenserBehavior extends BlockPlacementDispenserBehavior
 			this.setSuccess(blockItem.place(new AutomaticItemPlacementContext(source.getWorld(), pos, direction, stack, direction)) == ActionResult.SUCCESS);
 		}
 		else if(item instanceof ToolItem) {
-			if(item.isEffectiveOn(state) || state.getHardness(world, pos) <= 0.6f) {
+			if(item.isSuitableFor(state) || state.getHardness(world, pos) <= 0.6f) {
 				if(block instanceof AirBlock || block instanceof FluidBlock) {
 					this.setSuccess(false);
 				}

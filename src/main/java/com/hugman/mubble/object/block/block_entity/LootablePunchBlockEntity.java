@@ -11,7 +11,7 @@ import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.loot.context.LootContextTypes;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -77,8 +77,8 @@ public class LootablePunchBlockEntity extends BlockEntity {
 	}
 
 	@Override
-	public CompoundTag toTag(CompoundTag tag) {
-		super.toTag(tag);
+	public NbtCompound writeNbt(NbtCompound tag) {
+		super.writeNbt(tag);
 		if(this.lootTableId != null) {
 			tag.putString("LootTable", this.lootTableId.toString());
 			if(this.lootTableSeed != 0L) {
@@ -86,21 +86,21 @@ public class LootablePunchBlockEntity extends BlockEntity {
 			}
 		}
 		if(this.lootItemStack != null) {
-			tag.put("LootItem", lootItemStack.toTag(new CompoundTag()));
+			tag.put("LootItem", lootItemStack.writeNbt(new NbtCompound()));
 		}
 		tag.putFloat("BreakChance", this.breakChance);
 		return tag;
 	}
 
 	@Override
-	public void fromTag(BlockState state, CompoundTag tag) {
+	public void fromTag(BlockState state, NbtCompound tag) {
 		super.fromTag(state, tag);
 		if(tag.contains("LootTable", 8)) {
 			this.lootTableId = new Identifier(tag.getString("LootTable"));
 			this.lootTableSeed = tag.getLong("LootTableSeed");
 		}
 		if(tag.contains("LootItem", 10)) {
-			this.lootItemStack = ItemStack.fromTag(tag.getCompound("LootItem"));
+			this.lootItemStack = ItemStack.fromNbt(tag.getCompound("LootItem"));
 		}
 		this.breakChance = tag.getFloat("BreakChance");
 	}

@@ -9,7 +9,6 @@ import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.json.ModelTransformation;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.client.util.math.Vector3f;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -21,6 +20,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 
 public class PropellerBoxItem extends HatItem {
@@ -94,7 +94,7 @@ public class PropellerBoxItem extends HatItem {
 
 		matrixStack.push();
 		matrixStack.translate(0.0D, 1.125D, 0.0D);
-		matrixStack.multiply(Vector3f.POSITIVE_Y.getDegreesQuaternion(j));
+		matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(j));
 		itemRenderer.renderItem(stack, ModelTransformation.Mode.HEAD, light, OverlayTexture.DEFAULT_UV, matrixStack, vcp);
 		matrixStack.pop();
 	}

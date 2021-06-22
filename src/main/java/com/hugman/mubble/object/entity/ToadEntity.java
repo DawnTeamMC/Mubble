@@ -29,7 +29,7 @@ import net.minecraft.entity.passive.MerchantEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
@@ -74,7 +74,7 @@ public class ToadEntity extends MerchantEntity {
 	}
 
 	@Override
-	public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable CompoundTag entityTag) {
+	public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason spawnReason, @Nullable EntityData entityData, @Nullable NbtCompound entityTag) {
 		ToadEntity.Type type = ToadEntity.Type.getTypeByIndex(this.world.random.nextInt(16));
 		if(entityData instanceof ToadEntity.ToadData) {
 			type = ((ToadEntity.ToadData) entityData).type;
@@ -145,14 +145,14 @@ public class ToadEntity extends MerchantEntity {
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag compound) {
-		super.writeCustomDataToTag(compound);
+	public void writeCustomDataToNbt(NbtCompound compound) {
+		super.writeCustomDataToNbt(compound);
 		compound.putString("Type", this.getVariant().getName());
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag compound) {
-		super.readCustomDataFromTag(compound);
+	public void readCustomDataFromNbt(NbtCompound compound) {
+		super.readCustomDataFromNbt(compound);
 		this.setVariant(ToadEntity.Type.getTypeByName(compound.getString("Type")));
 	}
 

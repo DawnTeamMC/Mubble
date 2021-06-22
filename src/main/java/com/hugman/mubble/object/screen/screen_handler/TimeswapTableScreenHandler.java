@@ -201,7 +201,7 @@ public class TimeswapTableScreenHandler extends ScreenHandler {
 				if(!this.insertItem(itemstack1, 2, 38, true)) {
 					return ItemStack.EMPTY;
 				}
-				slot.onStackChanged(itemstack1, itemstack);
+				slot.onQuickTransfer(itemstack1, itemstack);
 			}
 			else if(index == 0) {
 				if(!this.insertItem(itemstack1, 2, 38, false)) {

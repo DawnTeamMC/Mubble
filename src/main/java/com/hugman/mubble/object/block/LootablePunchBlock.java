@@ -16,7 +16,7 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.MutableText;
@@ -62,7 +62,7 @@ public class LootablePunchBlock extends PunchBlock implements BlockEntityProvide
 	@Override
 	public void onPlaced(World world, BlockPos pos, BlockState state, @org.jetbrains.annotations.Nullable LivingEntity placer, ItemStack stack) {
 		super.onPlaced(world, pos, state, placer, stack);
-		CompoundTag itemTag = stack.getOrCreateTag();
+		NbtCompound itemTag = stack.getOrCreateTag();
 		if(!itemTag.contains("BlockEntityTag")) {
 			BlockEntity blockEntity = world.getBlockEntity(pos);
 			if(blockEntity instanceof LootablePunchBlockEntity) {
@@ -131,10 +131,10 @@ public class LootablePunchBlock extends PunchBlock implements BlockEntityProvide
 	@Override
 	@Environment(EnvType.CLIENT)
 	public void appendTooltip(ItemStack stack, @Nullable BlockView world, List<Text> tooltip, TooltipContext context) {
-		CompoundTag tag = stack.getSubTag("BlockEntityTag");
+		NbtCompound tag = stack.getSubTag("BlockEntityTag");
 		if(tag != null) {
 			if(tag.contains("LootItem")) {
-				ItemStack lootItemStack = ItemStack.fromTag(tag.getCompound("LootItem"));
+				ItemStack lootItemStack = ItemStack.fromNbt(tag.getCompound("LootItem"));
 				MutableText mutableText = lootItemStack.getName().shallowCopy();
 				mutableText.append(" x").append(String.valueOf(lootItemStack.getCount()));
 				tooltip.add(mutableText);

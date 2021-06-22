@@ -22,7 +22,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.BeeEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
@@ -98,14 +98,14 @@ public class GoombaEntity extends HostileEntity {
 	}
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag compound) {
-		super.writeCustomDataToTag(compound);
+	public void writeCustomDataToNbt(NbtCompound compound) {
+		super.writeCustomDataToNbt(compound);
 		compound.putInt("Variant", this.getVariant());
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag compound) {
-		super.readCustomDataFromTag(compound);
+	public void readCustomDataFromNbt(NbtCompound compound) {
+		super.readCustomDataFromNbt(compound);
 		this.setVariant(compound.getInt("Variant"));
 	}
 

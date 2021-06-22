@@ -7,7 +7,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleEffect;
@@ -42,14 +42,14 @@ public abstract class BallEntity extends ThrownItemEntity {
 	protected abstract boolean onBlockImpact(BlockHitResult result);
 
 	@Override
-	public void writeCustomDataToTag(CompoundTag compound) {
-		super.writeCustomDataToTag(compound);
+	public void writeCustomDataToNbt(NbtCompound compound) {
+		super.writeCustomDataToNbt(compound);
 		compound.putInt("ReboundingAmount", reboundingAmount);
 	}
 
 	@Override
-	public void readCustomDataFromTag(CompoundTag compound) {
-		super.readCustomDataFromTag(compound);
+	public void readCustomDataFromNbt(NbtCompound compound) {
+		super.readCustomDataFromNbt(compound);
 		this.reboundingAmount = compound.getInt("ReboundingAmount");
 	}
 
