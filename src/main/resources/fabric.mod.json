@@ -11,6 +11,7 @@
 		"Yanis48"
 	],
 	"contact": {
+		"homepage": "https://dawnteammc.github.io/${mod_id}",
 		"sources": "https://github.com/DawnTeamMC/${github_name}",
 		"issues": "https://github.com/DawnTeamMC/${github_name}/issues"
 	},
