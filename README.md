@@ -9,7 +9,7 @@
 [![Discord user count](https://img.shields.io/discord/504608980799062036.svg?logoColor=FFFFFF&logo=discord&color=7289DA&style=flat-square)](https://discord.gg/8ksTVJu)
 [![Twitter followers](https://img.shields.io/twitter/follow/DawnTeamMC.svg?logo=twitter&label=twitter&style=flat-square)](https://twitter.com/DawnTeamMC)
 
-Mubble is a mod for the latest version of Minecraft that adds a ton of features to the game related to pop culture. It is the ultimate crossover mod for Minecraft, but is mainly focused on Nintendo content.  
+Mubble is a mod for Minecraft 1.16 that adds a ton of features to the game related to pop culture. It is the ultimate crossover mod for Minecraft, but is mainly focused on Nintendo content.  
 **⚠ Mubble is outdated and will be split into multiple mods for each pop culture universe in 2022. ⚠**
 
 **You can visit the [official website for Mubble for more information](https://dawnteammc.github.io/mubble).**
