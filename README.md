@@ -1,6 +1,6 @@
 [![Mubble](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/mubble/header.png)](https://dawnteammc.github.io/mubble)
 
-# 🍄 Mubble
+# 🌈 Mubble
 [![Latest release](https://img.shields.io/github/release/DawnTeamMC/Mubble.svg)](https://github.com/DawnTeamMC/Mubble/releases/latest)
 [![CurseForge downloads](http://cf.way2muchnoise.eu/full_mubble_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/mubble)
 [![License (LGPL v3.0)](https://img.shields.io/badge/code%20license-LGPL%20v3.0-green.svg?style=flat-square)](https://www.gnu.org/licenses/lgpl-3.0.en.html)
