@@ -1,12 +1,14 @@
-![](https://dawnteammc.github.io/mubble/images/header.png)
+[![Mubble](https://dawnteammc.github.io/mubble/images/header.png)](https://dawnteammc.github.io/mubble)
 
-Mubble brings Nintendo and some gaming franchises to your world. Super Mario, Tetris, Castlevania, Celeste, Sonic, Pokémon, and way more universes await.
+[![Discord user count](https://img.shields.io/discord/504608980799062036?label=&color=424549&labelColor=7289da&style=for-the-badge&logo=Discord&logoColor=DDE4EF)](https://discord.gg/8ksTVJu)
+[![Twitter followers](https://img.shields.io/twitter/follow/DawnTeamMC?label=&color=424549&labelColor=1DA1F2&style=for-the-badge&logo=Twitter&logoColor=DDE4EF)](https://twitter.com/DawnTeamMC)
 
-Mubble requires [Fabric Loader](https://fabricmc.net/use/), [Fabric API](https://www.curseforge.com/minecraft/mc-mods/fabric-api) and [Dawn API](https://modrinth.com/mod/dawn)
+Mubble is a mod for Minecraft 1.16 that adds a ton of features to the game related to pop culture. It is the ultimate crossover mod for Minecraft, but is mainly focused on Nintendo content.  
+**⚠ Mubble is outdated and will be split into multiple mods for each pop culture universe in 2022. ⚠**
 
-Want to help with the translations of our mods? Check out our [Crowdin project](https://crowdin.com/project/dawnteam)!
+**You can visit the [official website for Mubble for more information](https://dawnteammc.github.io/mubble).**
 
-## Features
+## 👾 Features
 - Super Mario Maker 2 content, such as ? blocks, empty blocks, ground blocks, brick blocks, note blocks, doors, key doors and way more!
 - Flowers from Super Mario
 - Tetris blocks
@@ -23,26 +25,26 @@ Want to help with the translations of our mods? Check out our [Crowdin project](
 - Coins from Super Mario
 - Lightsabers from Star Wars
 
-More information and screenshots of all the added features can be found on the [Wiki](https://github.com/DawnTeamMC/Mubble/wiki)
+## 📦 Download
+### Required mods
+⚠ Mubble **needs** the following mods to be installed:
 
-## Screenshots
-![Toads](https://dawnteammc.github.io/mubble/images/screenshots/toads_camping.png)
-![SMB blocks](https://dawnteammc.github.io/mubble/images/screenshots/smm2_smb.png)
-![SMB3 blocks](https://dawnteammc.github.io/mubble/images/screenshots/smm2_smb3.png)
-![SMW blocks](https://dawnteammc.github.io/mubble/images/screenshots/smm2_smw.png)
-![NSMBU blocks](https://dawnteammc.github.io/mubble/images/screenshots/smm2_nsmbu.png)
-![Viewpoint using red virtual googles](https://dawnteammc.github.io/mubble/images/screenshots/virtual_googles_1.png)
-![Various blocks from gaming universes](https://dawnteammc.github.io/mubble/images/screenshots/various_games.png)
-Including Tetris, Celeste, Sonic and Castlevania 
-![Create your own Mario levels!](https://dawnteammc.github.io/mubble/images/screenshots/super_mario_bros.png)
-![Cap costumes](https://dawnteammc.github.io/mubble/images/screenshots/costumes_1.png)
-From Super Mario 64 to Odyssey, and even Luigi's Mansion 3!
-![Crown costumes](https://dawnteammc.github.io/mubble/images/screenshots/costumes_2.png)
-![Costumes from various franchises](https://dawnteammc.github.io/mubble/images/screenshots/costumes_3.png)
-Pokémon, A Hat in Time, Deltarune, Professor Layton, Petscop, Baldi's Basics...
-![And even more costumes!](https://dawnteammc.github.io/mubble/images/screenshots/costumes_4.png)
-Virtual googles, christmas hats, headphones
+- Fabric API: [GitHub](https://github.com/FabricMC/fabric) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) / [Modrinth](https://modrinth.com/mod/fabric-api)
+- Dawn API: [GitHub](https://github.com/DawnTeamMC/DawnTeamMC) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dawn) / [Modrinth](https://modrinth.com/mod/dawn)
+- Trinkets: [GitHub](https://github.com/emilyploszaj/trinkets) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/trinkets-fabric)
 
-*Mubble is made for Fabric, and there are no current plans to port the newer versions to Forge.*
+## ❤️ Support
+[![Patreon supporters](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3DHugman%26type%3Dpatrons&style=flat-square)](https://patreon.com/Hugman)
 
-*However, [an outdated version for Forge](https://www.curseforge.com/minecraft/mc-mods/mubble-forge) exists (it has less features).*
+You can support Mubble on the [Patreon page of the founder, main developer and maintainer of the Dawn Team mods (Hugman)](https://patreon.com/Hugman).
+
+By supporting Hugman, you can get access to the following:
+
+- Vote for the next features to be added to the Dawn Team mods
+- Get exclusive screenshots of the next features to be added to Dawn Team mods
+- Get early access to the latest beta versions of Dawn Team mods with new features
+- Get early access to new mods from the Dawn Team mods
+
+**We do not want to lock any in-game feature of the Dawn Team mods behind a paywall, because we believe that any Minecraft mod should forever remain free to download and fully exploit/use.**  
+Supporting via Patreon is a more of way to help Hugman to continue to improve the mods and show the gratitude you might have towards Hugman's work.
+Some money you donate may be used to pay for new features, such as music or art, but not all of it.
