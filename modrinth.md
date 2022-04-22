@@ -30,7 +30,7 @@ Mubble is a mod for Minecraft 1.16 that adds a ton of features to the game relat
 ⚠ Mubble **needs** the following mods to be installed:
 
 - Fabric API: [GitHub](https://github.com/FabricMC/fabric) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) / [Modrinth](https://modrinth.com/mod/fabric-api)
-- Dawn API: [GitHub](https://github.com/DawnTeamMC/DawnTeamMC) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dawn) / [Modrinth](https://modrinth.com/mod/dawn)
+- Dawn API: [GitHub](https://github.com/DawnTeamMC/DawnAPI) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dawn) / [Modrinth](https://modrinth.com/mod/dawn)
 - Trinkets: [GitHub](https://github.com/emilyploszaj/trinkets) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/trinkets-fabric)
 
 ## ❤️ Support
