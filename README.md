@@ -1,4 +1,4 @@
-[![Mubble](https://raw.githubusercontent.com/DawnTeamMC/DawnTeamMC/master/mubble/header.png)](https://dawnteammc.github.io/mubble)
+[![Mubble](https://dawnteammc.github.io/mubble/images/header.png)](https://dawnteammc.github.io/mubble)
 
 # 🌈 Mubble
 [![Latest release](https://img.shields.io/github/release/DawnTeamMC/Mubble.svg)](https://github.com/DawnTeamMC/Mubble/releases/latest)
