@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-apply from: 'https://dawnteammc.github.io/images/build_template/1.16.gradle'
+apply from: 'https://dawnteammc.github.io/resources/gradle_scripts/fabric-1.16.gradle'
 
 repositories {
     mavenLocal()
