@@ -1,8 +1,0 @@
-{
-	"parent": "block/cube_bottom_top",
-	"textures": {
-		"top": "mubble:block/question_block/nsmbu/top",
-		"side": "mubble:block/question_block/nsmbu/side",
-		"bottom": "mubble:block/question_block/nsmbu/bottom"
-	}
-}

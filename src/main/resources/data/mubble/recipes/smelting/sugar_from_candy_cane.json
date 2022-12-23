@@ -1,9 +1,0 @@
-{
-	"type": "minecraft:smelting",
-	"ingredient": {
-		"item": "mubble:candy_cane"
-	},
-	"result": "minecraft:sugar",
-	"experience": 0.35,
-	"cookingtime": 200
-}

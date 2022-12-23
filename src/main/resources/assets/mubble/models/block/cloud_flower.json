@@ -1,6 +1,0 @@
-{
-	"parent": "block/cross",
-	"textures": {
-		"cross": "mubble:block/cloud_flower"
-	}
-}

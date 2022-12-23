@@ -1,6 +1,0 @@
-{
-	"parent": "mubble:block/garland",
-	"textures": {
-		"all": "mubble:block/red_shiny_garland/illuminated"
-	}
-}

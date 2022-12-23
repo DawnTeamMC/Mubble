@@ -1,6 +1,0 @@
-{
-	"parent": "minecraft:block/leaves",
-	"textures": {
-		"all": "mubble:block/press_garden_leaves"
-	}
-}

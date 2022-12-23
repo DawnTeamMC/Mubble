@@ -1,6 +1,0 @@
-{
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "mubble:block/mirror_temple_bricks/1"
-	}
-}

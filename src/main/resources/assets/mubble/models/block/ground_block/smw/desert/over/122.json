@@ -1,8 +1,0 @@
-{
-	"parent": "block/cube_bottom_top",
-	"textures": {
-		"top": "mubble:block/ground_block/smw/desert/over/top/1",
-		"side": "mubble:block/ground_block/smw/desert/over/side/2",
-		"bottom": "mubble:block/ground_block/smw/desert/block/2"
-	}
-}

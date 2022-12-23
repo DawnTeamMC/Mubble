@@ -1,9 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"mubble:smb_empty_block",
-		"mubble:smb3_empty_block",
-		"mubble:smw_empty_block",
-		"mubble:nsmbu_empty_block"
-	]
-}

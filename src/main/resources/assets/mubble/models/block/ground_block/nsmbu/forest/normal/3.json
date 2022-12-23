@@ -1,6 +1,0 @@
-{
-	"parent": "block/cube_all",
-	"textures": {
-		"all": "mubble:block/ground_block/nsmbu/forest/block/3"
-	}
-}

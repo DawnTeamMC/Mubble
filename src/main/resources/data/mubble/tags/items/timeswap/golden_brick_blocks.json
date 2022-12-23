@@ -1,9 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"mubble:smb_golden_brick_block",
-		"mubble:smb3_golden_brick_block",
-		"mubble:smw_golden_brick_block",
-		"mubble:nsmbu_golden_brick_block"
-	]
-}

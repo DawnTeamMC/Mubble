@@ -1,8 +1,0 @@
-{
-	"parent": "block/cube_bottom_top",
-	"textures": {
-		"top": "mubble:block/ground_block/smw/ghost_house/over/top",
-		"side": "mubble:block/ground_block/smw/ghost_house/over/side",
-		"bottom": "mubble:block/ground_block/smw/ghost_house/block"
-	}
-}

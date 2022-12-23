@@ -1,6 +1,0 @@
-{
-	"parent": "mubble:costume/crown",
-	"textures": {
-		"crown": "mubble:costume/princess_peach_crown"
-	}
-}

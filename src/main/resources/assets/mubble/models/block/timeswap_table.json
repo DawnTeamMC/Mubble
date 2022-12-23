@@ -1,8 +1,0 @@
-{
-	"parent": "minecraft:block/cube_bottom_top",
-	"textures": {
-		"top": "mubble:block/timeswap_table/top",
-		"side": "mubble:block/timeswap_table/side",
-		"bottom": "minecraft:block/andesite"
-	}
-}

@@ -20,7 +20,7 @@ body:
     attributes:
       label: Dawn API version
       description: What version of the Dawn API are you using?
-      placeholder: ex. 3.3.0
+      placeholder: ex. 4.0.0
     validations:
       required: true
   - type: input
@@ -28,7 +28,7 @@ body:
     attributes:
       label: Fabric API version
       description: What version of the Fabric API are you using?
-      placeholder: ex. 0.51.0+1.18.2
+      placeholder: ex. 0.69.3+1.19.3
     validations:
       required: false
   - type: textarea

@@ -18,23 +18,16 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.hugman.mubble.Mubble"
+			"fr.hugman.mubble.Mubble"
 		],
 		"client": [
-			"com.hugman.mubble.MubbleClient"
-		],
-		"modmenu": [
-			"com.hugman.mubble.config.MubbleModMenuIntegration"
+			"fr.hugman.mubble.MubbleClient"
 		]
 	},
-	"mixins": [
-		"mubble.mixins.json"
-	],
 	"depends": {
 		"minecraft": "*",
 		"fabric": "*",
-		"dawn": "*",
-		"trinkets": "*"
+		"dawn": "*"
 	},
 	"custom": {
 		"modmenu": {

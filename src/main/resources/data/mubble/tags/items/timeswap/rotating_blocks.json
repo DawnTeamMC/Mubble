@@ -1,9 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"mubble:smb_rotating_block",
-		"mubble:smb3_rotating_block",
-		"mubble:smw_rotating_block",
-		"mubble:nsmbu_rotating_block"
-	]
-}

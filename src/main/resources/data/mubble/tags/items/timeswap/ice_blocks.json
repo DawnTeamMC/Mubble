@@ -1,9 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"mubble:smb_ice_block",
-		"mubble:smb3_ice_block",
-		"mubble:smw_ice_block",
-		"mubble:nsmbu_ice_block"
-	]
-}

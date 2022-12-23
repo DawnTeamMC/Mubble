@@ -1,9 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"mubble:smb_key",
-		"mubble:smb3_key",
-		"mubble:smw_key",
-		"mubble:nsmbu_key"
-	]
-}

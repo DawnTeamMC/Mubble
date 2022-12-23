@@ -1,9 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"mubble:smb_note_block",
-		"mubble:smb3_note_block",
-		"mubble:smw_note_block",
-		"mubble:nsmbu_note_block"
-	]
-}

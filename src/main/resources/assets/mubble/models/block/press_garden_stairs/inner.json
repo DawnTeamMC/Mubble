@@ -1,8 +1,0 @@
-{
-	"parent": "block/inner_stairs",
-	"textures": {
-		"bottom": "mubble:block/press_garden_planks",
-		"top": "mubble:block/press_garden_planks",
-		"side": "mubble:block/press_garden_planks"
-	}
-}

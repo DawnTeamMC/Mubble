@@ -1,9 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"mubble:press_garden_button",
-		"mubble:press_garden_wood_button",
-		"mubble:scarlet_button",
-		"mubble:scarlet_wood_button"
-	]
-}

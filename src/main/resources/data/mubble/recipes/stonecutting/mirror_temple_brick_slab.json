@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "mubble:mirror_temple_bricks"
-	},
-	"result": "mubble:mirror_temple_brick_slab",
-	"count": 2
-}

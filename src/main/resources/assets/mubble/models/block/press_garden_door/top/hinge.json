@@ -1,7 +1,0 @@
-{
-	"parent": "block/door_top_rh",
-	"textures": {
-		"bottom": "mubble:block/press_garden_door/bottom",
-		"top": "mubble:block/press_garden_door/top"
-	}
-}

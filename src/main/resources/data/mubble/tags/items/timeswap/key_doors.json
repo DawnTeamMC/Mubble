@@ -1,9 +1,0 @@
-{
-	"replace": false,
-	"values": [
-		"mubble:smb_key_door",
-		"mubble:smb3_key_door",
-		"mubble:smw_key_door",
-		"mubble:nsmbu_key_door"
-	]
-}

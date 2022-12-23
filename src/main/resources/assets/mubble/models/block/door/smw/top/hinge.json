@@ -1,7 +1,0 @@
-{
-	"parent": "block/door_top_rh",
-	"textures": {
-		"bottom": "mubble:block/door/smw/bottom",
-		"top": "mubble:block/door/smw/top"
-	}
-}

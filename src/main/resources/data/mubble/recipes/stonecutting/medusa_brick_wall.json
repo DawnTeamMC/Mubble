@@ -1,8 +1,0 @@
-{
-	"type": "minecraft:stonecutting",
-	"ingredient": {
-		"item": "mubble:medusa_bricks"
-	},
-	"result": "mubble:medusa_brick_wall",
-	"count": 1
-}
