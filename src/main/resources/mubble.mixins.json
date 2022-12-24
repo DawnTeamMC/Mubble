@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": ["EntityMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

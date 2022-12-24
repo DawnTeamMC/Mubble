@@ -25,6 +25,9 @@
 			"fr.hugman.mubble.MubbleClient"
 		]
 	},
+	"mixins": [
+		"mubble.mixins.json"
+	],
 	"depends": {
 		"minecraft": "*",
 		"fabric": "*",

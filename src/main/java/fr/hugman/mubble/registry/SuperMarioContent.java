@@ -3,6 +3,7 @@ package fr.hugman.mubble.registry;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.block.QuestionBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -12,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 
 public class SuperMarioContent {
-	public static final Block QUESTION_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
+	public static final QuestionBlock QUESTION_BLOCK = new QuestionBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
 	public static final Block EMPTY_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
 	public static final Block BRICK_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
 	public static final Block GOLD_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
