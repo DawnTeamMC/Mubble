@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "mubble:question_block",
-    "mubble:empty_block"
+    "mubble:empty_block",
+    "mubble:brick_block",
+    "mubble:gold_block"
   ]
 }

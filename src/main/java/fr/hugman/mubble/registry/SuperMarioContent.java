@@ -14,10 +14,14 @@ import net.minecraft.text.Text;
 public class SuperMarioContent {
 	public static final Block QUESTION_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
 	public static final Block EMPTY_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
+	public static final Block BRICK_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
+	public static final Block GOLD_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
 
 	public static void init() {
 		Registrar.add(Mubble.id("question_block"), QUESTION_BLOCK);
 		Registrar.add(Mubble.id("empty_block"), EMPTY_BLOCK);
+		Registrar.add(Mubble.id("brick_block"),BRICK_BLOCK);
+		Registrar.add(Mubble.id("gold_block"),GOLD_BLOCK);
 	}
 
 	public static final ItemGroup GROUP = FabricItemGroup.builder(Mubble.id("super_mario"))
@@ -26,6 +30,9 @@ public class SuperMarioContent {
 			.entries((enabledFeatures, entries, operatorEnabled) -> {
 				entries.add(SuperMarioContent.QUESTION_BLOCK);
 				entries.add(SuperMarioContent.EMPTY_BLOCK);
+				entries.add(SuperMarioContent.BRICK_BLOCK);
+				entries.add(SuperMarioContent.GOLD_BLOCK);
+
 			})
 			.build();
 }
