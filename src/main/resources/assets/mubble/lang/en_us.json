@@ -3,5 +3,6 @@
 
   "item_group.mubble.super_mario": "Super Mario",
 
-  "block.mubble.question_block": "? Block"
+  "block.mubble.question_block": "? Block",
+  "block.mubble.empty_question_block": "Empty ? Block"
 }

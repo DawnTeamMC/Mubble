@@ -17,12 +17,17 @@ public class SuperMarioContent {
 			.icon(() -> new ItemStack(SuperMarioContent.QUESTION_BLOCK))
 			.entries((enabledFeatures, entries, operatorEnabled) -> {
 				entries.add(SuperMarioContent.QUESTION_BLOCK);
+				entries.add(SuperMarioContent.EMPTY_QUESTION_BLOCK);
 			})
 			.build();
 
 	public static final Block QUESTION_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
 
+	public static final Block EMPTY_QUESTION_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
+
 	public static void init() {
 		Registrar.add(Mubble.id("question_block"), QUESTION_BLOCK);
+		Registrar.add(Mubble.id("empty_question_block"), EMPTY_QUESTION_BLOCK);
 	}
+
 }
