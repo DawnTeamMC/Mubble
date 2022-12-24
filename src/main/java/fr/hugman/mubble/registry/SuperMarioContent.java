@@ -12,6 +12,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 
 public class SuperMarioContent {
+	public static final Block QUESTION_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
+	public static final Block EMPTY_QUESTION_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
+
+	public static void init() {
+		Registrar.add(Mubble.id("question_block"), QUESTION_BLOCK);
+		Registrar.add(Mubble.id("empty_question_block"), EMPTY_QUESTION_BLOCK);
+	}
+
 	public static final ItemGroup GROUP = FabricItemGroup.builder(Mubble.id("super_mario"))
 			.displayName(Text.translatable("item_group.mubble.super_mario"))
 			.icon(() -> new ItemStack(SuperMarioContent.QUESTION_BLOCK))
@@ -20,14 +28,4 @@ public class SuperMarioContent {
 				entries.add(SuperMarioContent.EMPTY_QUESTION_BLOCK);
 			})
 			.build();
-
-	public static final Block QUESTION_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
-
-	public static final Block EMPTY_QUESTION_BLOCK = new Block(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
-
-	public static void init() {
-		Registrar.add(Mubble.id("question_block"), QUESTION_BLOCK);
-		Registrar.add(Mubble.id("empty_question_block"), EMPTY_QUESTION_BLOCK);
-	}
-
 }
