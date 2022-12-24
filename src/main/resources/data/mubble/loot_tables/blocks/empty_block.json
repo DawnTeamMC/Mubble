@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mubble:empty_question_block"
+          "name": "mubble:empty_block"
         }
       ],
       "conditions": [
