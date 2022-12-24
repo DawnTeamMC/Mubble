@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mubble:question_block"
+    "mubble:question_block",
+    "mubble:empty_question_block"
   ]
 }
