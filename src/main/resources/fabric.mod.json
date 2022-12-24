@@ -5,7 +5,8 @@
 	"version": "${version}",
 	"icon": "assets/${mod_id}/textures/logo.png",
 	"authors": [
-		"Hugman"
+		"Hugman",
+		"Napero"
 	],
 	"contributors": [
 		"Yanis48"
