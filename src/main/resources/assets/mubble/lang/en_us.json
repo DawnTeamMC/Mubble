@@ -2,10 +2,11 @@
   "modmenu.descriptionTranslation.mubble": "The perfect mod for Nintendo fans!",
 
   "item_group.mubble.super_mario": "Super Mario",
-
+  
   "block.mubble.question_block": "? Block",
   "block.mubble.empty_block": "Empty Block",
   "block.mubble.brick_block": "Brick Block",
   "block.mubble.gold_block": "Gold Block",
+  "block.mubble.note_block": "Note Block"
   "block.mubble.bumped_block": "Bumped Block"
 }
