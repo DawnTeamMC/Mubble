@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mubble:red_beep_block"
+          "name": "mubble:blue_beep_block"
         }
       ],
       "conditions": [

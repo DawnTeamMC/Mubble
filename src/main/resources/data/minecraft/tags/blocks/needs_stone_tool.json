@@ -8,6 +8,6 @@
     "mubble:note_block",
     "mubble:snake_block",
     "mubble:red_beep_block",
-    "mubble:beep_block_frame"
+    "mubble:blue_beep_block"
   ]
 }

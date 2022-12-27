@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "mubble:block/blue_beep_block"
+  }
+}
+
