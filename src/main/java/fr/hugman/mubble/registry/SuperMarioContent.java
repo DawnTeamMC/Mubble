@@ -3,6 +3,8 @@ package fr.hugman.mubble.registry;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.block.BeepBlock;
+import fr.hugman.mubble.block.BeepBlockFrame;
 import fr.hugman.mubble.block.QuestionBlock;
 import fr.hugman.mubble.block.SnakeBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -19,6 +21,8 @@ public class SuperMarioContent {
 	public static final Block BRICK_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
 	public static final Block GOLD_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
 	public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
+	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(DawnBlockSettings.copy(Blocks.GLASS).mapColor(MapColor.RED).item());
+	public static final BeepBlockFrame BEEP_BLOCK_FRAME = new BeepBlockFrame(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIGHT_GRAY).nonOpaque().noCollision().item());
 
 	public static void init() {
 		Registrar.add(Mubble.id("question_block"), QUESTION_BLOCK);
@@ -26,6 +30,8 @@ public class SuperMarioContent {
 		Registrar.add(Mubble.id("brick_block"),BRICK_BLOCK);
 		Registrar.add(Mubble.id("gold_block"),GOLD_BLOCK);
 		Registrar.add(Mubble.id("snake_block"),SNAKE_BLOCK);
+		Registrar.add(Mubble.id("red_beep_block"),RED_BEEP_BLOCK);
+		Registrar.add(Mubble.id("beep_block_frame"),BEEP_BLOCK_FRAME);
 	}
 
 	public static final ItemGroup GROUP = FabricItemGroup.builder(Mubble.id("super_mario"))
@@ -37,6 +43,7 @@ public class SuperMarioContent {
 				entries.add(SuperMarioContent.BRICK_BLOCK);
 				entries.add(SuperMarioContent.GOLD_BLOCK);
 				entries.add(SuperMarioContent.SNAKE_BLOCK);
+				entries.add(SuperMarioContent.RED_BEEP_BLOCK);
 
 			})
 			.build();
