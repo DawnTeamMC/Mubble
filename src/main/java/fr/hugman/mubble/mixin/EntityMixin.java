@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(Entity.class)
 public class EntityMixin {
-	// inject right before the second call of setPosition() in the method move()
+	// Inject right before the second call of setPosition() in the method move()
 	@Inject(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;setPosition(DDD)V", ordinal = 1))
 	private void mubble$move(MovementType type, Vec3d movement, CallbackInfo ci) {
 		Entity thisEntity = (Entity) (Object) this;
@@ -32,7 +32,7 @@ public class EntityMixin {
 				BlockPos blockPos = hit.getBlockPos();
 				BlockState state = world.getBlockState(blockPos);
 				if(state.getBlock() instanceof UnderHittableBlock underHittableBlock) {
-					underHittableBlock.onHitFromUnder(state, world, blockPos, hit);
+					underHittableBlock.onHitFromUnder(state, world, blockPos, hit, thisEntity);
 				}
 			}
 		}
