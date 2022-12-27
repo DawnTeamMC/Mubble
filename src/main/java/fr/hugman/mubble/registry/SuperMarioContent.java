@@ -3,13 +3,19 @@ package fr.hugman.mubble.registry;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.block.BumpedBlock;
 import fr.hugman.mubble.block.QuestionBlock;
+import fr.hugman.mubble.block.entity.BumpedBlockEntity;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
 
 public class SuperMarioContent {
@@ -18,11 +24,19 @@ public class SuperMarioContent {
 	public static final Block BRICK_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
 	public static final Block GOLD_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
 
+	public static final Block BUMPED_BLOCK = new BumpedBlock(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).strength(-1, 3600000).dropsNothing().nonOpaque());
+	public static final BlockEntityType<BumpedBlockEntity> BUMPED_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder
+		.create(BumpedBlockEntity::new, BUMPED_BLOCK)
+		.build();
+
 	public static void init() {
 		Registrar.add(Mubble.id("question_block"), QUESTION_BLOCK);
 		Registrar.add(Mubble.id("empty_block"), EMPTY_BLOCK);
 		Registrar.add(Mubble.id("brick_block"),BRICK_BLOCK);
 		Registrar.add(Mubble.id("gold_block"),GOLD_BLOCK);
+		Registrar.add(Mubble.id("bumped_block"), BUMPED_BLOCK);
+
+		Registry.register(Registries.BLOCK_ENTITY_TYPE, Mubble.id("bumped_block"), BUMPED_BLOCK_ENTITY_TYPE);
 	}
 
 	public static final ItemGroup GROUP = FabricItemGroup.builder(Mubble.id("super_mario"))
