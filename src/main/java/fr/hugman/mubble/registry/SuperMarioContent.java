@@ -4,6 +4,7 @@ import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.BumpedBlock;
+import fr.hugman.mubble.block.NoteBlock;
 import fr.hugman.mubble.block.QuestionBlock;
 import fr.hugman.mubble.block.entity.BumpedBlockEntity;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
