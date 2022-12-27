@@ -1,24 +1,22 @@
 package fr.hugman.mubble.block;
 
-import net.minecraft.block.Block;
+import fr.hugman.mubble.block.entity.BumpedBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
-
-public class NoteBlock extends Block implements UnderHittableBlock {
-
+public class NoteBlock extends BumpableBlock {
     private final SoundEvent lowJumpSound;
     private final SoundEvent highJumpSound;
 
@@ -29,46 +27,70 @@ public class NoteBlock extends Block implements UnderHittableBlock {
     }
 
     @Override
-    public void onHitFromUnder(BlockState state, World world, BlockPos pos, BlockHitResult hitResult) {
+    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+        // Do not apply fall damage
+    }
+
+    @Override
+    public void onEntityLand(BlockView view, Entity entity) {
+        World world = entity.getEntityWorld();
+        BlockPos pos = entity.getBlockPos().down();
+
         if(!world.isClient()) {
-            this.trigger(world, pos, lowJumpSound);
+            BumpedBlockEntity.bump(world, pos, new BlockHitResult(entity.getPos(), Direction.UP, pos, false));
         }
     }
 
     @Override
-    public void onEntityLand(BlockView worldIn, Entity entityIn) {
-        launch(entityIn.world, entityIn);
+    protected SoundEvent getBumpSound(BumpedBlockEntity entity) {
+        //TODO
+        return SoundEvents.BLOCK_NOTE_BLOCK_BANJO.value();
     }
 
-    public void trigger(World worldIn, BlockPos pos, SoundEvent sound) {
-        final double x = pos.getX() + 0.5D;
-        final double y = pos.getY() + 0.5D;
-        final double z = pos.getZ() + 0.5D;
-        final int rand = worldIn.random.nextInt(16);
-        if (worldIn instanceof ServerWorld) {
-            worldIn.playSound(null, x, y, z, sound, SoundCategory.BLOCKS, 1F, 1F);
-            ((ServerWorld) worldIn).spawnParticles(ParticleTypes.NOTE, x, y + 0.6F, z, 3, 0.2F, 0.1F, 0.2F, 0.0D);
+    @Override
+    @Nullable
+    protected BlockState getBumpedState(BumpedBlockEntity entity) {
+        return null;
+    }
+
+    @Override
+    public void onBumpPeak(World world, BlockPos pos, BlockState state, BumpedBlockEntity blockEntity) {
+        super.onBumpPeak(world, pos, state, blockEntity);
+        if(blockEntity.getBumpDirection() == Direction.DOWN) {
+            this.addParticles(world, pos);
         }
     }
 
-    public void launch(World worldIn, Entity entityIn) {
-        Vec3d vec3d = entityIn.getVelocity();
-        if(entityIn instanceof LivingEntity) {
-            BlockPos pos = entityIn.getBlockPos().down();
-            if(!entityIn.isSneaking()) {
-                trigger(worldIn, pos, highJumpSound);
-                entityIn.setVelocity(vec3d.x, getProperLaunchMotion(), vec3d.z);
-            }
-            else {
-                trigger(worldIn, pos, lowJumpSound);
-                entityIn.setVelocity(vec3d.x, 0.5D, vec3d.z);
+    @Override
+    protected double getBumpYVelocity(World world, BlockPos pos, BlockState blockState, BumpedBlockEntity blockEntity, Entity entity) {
+        return entity.isSneaking() ? 0.5D : 0.9D;
+    }
+
+    @Override
+    public void launchEntitiesOnTop(World world, BlockPos pos, BlockState state, BumpedBlockEntity blockEntity) {
+        super.launchEntitiesOnTop(world, pos, state, blockEntity);
+
+        // Only play high sound if all entities are sneaking
+        boolean shouldPlayHighSound = false;
+        for(Entity entity : this.getEntitiesOnTop(world, pos)) {
+            if(!entity.isSneaking()) {
+                shouldPlayHighSound = true;
+                break;
             }
         }
+        Vec3d center = pos.toCenterPos();
+        world.playSound(null, center.getX(), center.getY(), center.getZ(), shouldPlayHighSound ? this.highJumpSound : this.lowJumpSound, SoundCategory.BLOCKS, 1F, 1F);
     }
 
-    public double getProperLaunchMotion() {
-        return 0.9D;
+    public void addParticles(World world, BlockPos blockPos) {
+        Vec3d center = blockPos.toCenterPos();
+        Random random = world.getRandom();
+        for(int i = 0; i < random.nextInt(5) + 1; i++) {
+            double x = center.getX() + (random.nextInt(7) - 3) / 10D;
+            double y = center.getY() + 0.6F;
+            double z = center.getZ() + (random.nextInt(7) - 3) / 10D;
+            double color = random.nextInt(2) * 0.2D + 0.1D;
+            world.addParticle(ParticleTypes.NOTE, x, y, z, color, 1.0D, 1.0D);
+        }
     }
-
-
 }

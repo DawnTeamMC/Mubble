@@ -3,6 +3,8 @@ package fr.hugman.mubble.block;
 import fr.hugman.mubble.block.entity.BumpedBlockEntity;
 import fr.hugman.mubble.registry.SuperMarioContent;
 import net.minecraft.block.BlockState;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 
 public class QuestionBlock extends BumpableBlock {
 	public QuestionBlock(Settings settings) {
@@ -10,7 +12,13 @@ public class QuestionBlock extends BumpableBlock {
 	}
 
 	@Override
-	public BlockState onBumpCompleted(BumpedBlockEntity entity) {
+	protected SoundEvent getBumpSound(BumpedBlockEntity entity) {
+		//TODO
+		return SoundEvents.BLOCK_NOTE_BLOCK_BANJO.value();
+	}
+
+	@Override
+	public BlockState getBumpedState(BumpedBlockEntity entity) {
 		return SuperMarioContent.EMPTY_BLOCK.getDefaultState();
 	}
 }

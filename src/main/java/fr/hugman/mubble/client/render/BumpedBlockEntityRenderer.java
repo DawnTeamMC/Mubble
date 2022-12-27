@@ -15,6 +15,7 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
@@ -38,7 +39,7 @@ public class BumpedBlockEntityRenderer implements BlockEntityRenderer<BumpedBloc
 
 		// Transformations
 		matrices.push();
-		this.applyTransformations(matrices, bumpTicks);
+		this.applyTransformations(matrices, bumpTicks, entity.getBumpDirection());
 
 		// Get parameters
 		BakedModel model = this.renderManager.getModel(state);
@@ -52,12 +53,20 @@ public class BumpedBlockEntityRenderer implements BlockEntityRenderer<BumpedBloc
 		matrices.pop();
 	}
 
-	private void applyTransformations(MatrixStack matrices, float bumpTicks) {
-		double y = -0.04 * Math.pow(bumpTicks, 2) + 0.2 * bumpTicks;
-		float scale = (float) y + 1;
+	private void applyTransformations(MatrixStack matrices, float bumpTicks, Direction direction) {
+		double i = -0.04 * Math.pow(bumpTicks, 2) + 0.2 * bumpTicks;
+		float scale = (float) i + 1;
 
-		matrices.translate(0.5, y, 0.5);
+		double x2 = (1 - direction.getOffsetX()) * 0.5;
+		double y2 = (1 - direction.getOffsetY()) * 0.5;
+		double z2 = (1 - direction.getOffsetZ()) * 0.5;
+
+		double x = direction.getOffsetX() * i + x2;
+		double y = direction.getOffsetY() * i + y2;
+		double z = direction.getOffsetZ() * i + z2;
+
+		matrices.translate(x, y, z);
 		matrices.scale(scale, scale, scale);
-		matrices.translate(-0.5, 0, -0.5);
+		matrices.translate(-x2, -y2, -z2);
 	}
 }

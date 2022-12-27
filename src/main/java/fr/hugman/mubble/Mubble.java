@@ -1,5 +1,6 @@
 package fr.hugman.mubble;
 
+import fr.hugman.mubble.registry.SplatoonContent;
 import fr.hugman.mubble.registry.SuperMarioContent;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
@@ -13,6 +14,7 @@ public class Mubble implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		SuperMarioContent.init();
+		SplatoonContent.init();
 	}
 
 	public static Identifier id(String path) {
