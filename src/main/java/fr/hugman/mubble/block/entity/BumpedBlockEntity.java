@@ -113,7 +113,7 @@ public class BumpedBlockEntity extends BlockEntity {
 	public static void tick(World world, BlockPos pos, BlockState state, BumpedBlockEntity entity) {
 		entity.bumpTicks++;
 
-		if(entity.bumpTicks == PEAK_TICK / 2) {
+		if(entity.bumpTicks == PEAK_TICK) {
 			if(entity.getBlockState().getBlock() instanceof BumpableBlock block) {
 				block.onBumpPeak(world, pos, state, entity);
 			}
