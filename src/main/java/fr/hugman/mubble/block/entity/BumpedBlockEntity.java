@@ -105,7 +105,7 @@ public class BumpedBlockEntity extends BlockEntity {
 			entity.setBlockState(state);
 			entity.setBumpDirection(hit.getSide().getOpposite());
 			if(state.getBlock() instanceof BumpableBlock block) {
-				block.onBump(world, pos, state, entity, hit);
+				block.onBump(entity, hit);
 			}
 		});
 	}
@@ -115,13 +115,21 @@ public class BumpedBlockEntity extends BlockEntity {
 
 		if(entity.bumpTicks == PEAK_TICK) {
 			if(entity.getBlockState().getBlock() instanceof BumpableBlock block) {
-				block.onBumpPeak(world, pos, state, entity);
+				block.onBumpPeak(entity);
 			}
 		}
 
 		if(entity.bumpTicks > ANIMATION_TICKS) {
 			if(entity.getBlockState().getBlock() instanceof BumpableBlock block) {
-				block.onBumpCompleted(world, pos, state, entity);
+				BlockState newState = block.onBumpCompleted(entity);
+				if(!world.isClient()) {
+					if(newState != null) {
+						world.setBlockState(pos, newState);
+					}
+					else {
+						world.setBlockState(pos, Blocks.AIR.getDefaultState());
+					}
+				}
 			}
 			else {
 				if(!world.isClient()) {

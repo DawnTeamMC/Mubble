@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -14,9 +13,8 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-public class NoteBlock extends BumpableBlock {
+public class NoteBlock extends MarioBumpableBlock {
     private final SoundEvent lowJumpSound;
     private final SoundEvent highJumpSound;
 
@@ -42,33 +40,21 @@ public class NoteBlock extends BumpableBlock {
     }
 
     @Override
-    protected SoundEvent getBumpSound(BumpedBlockEntity entity) {
-        //TODO
-        return SoundEvents.BLOCK_NOTE_BLOCK_BANJO.value();
+    public BlockState onBumpCompleted(BumpedBlockEntity entity) {
+        return entity.getBlockState();
     }
 
     @Override
-    @Nullable
-    protected BlockState getBumpedState(BumpedBlockEntity entity) {
-        return null;
-    }
-
-    @Override
-    public void onBumpPeak(World world, BlockPos pos, BlockState state, BumpedBlockEntity blockEntity) {
-        super.onBumpPeak(world, pos, state, blockEntity);
-        if(blockEntity.getBumpDirection() == Direction.DOWN) {
-            this.addParticles(world, pos);
+    public void onBumpPeak(BumpedBlockEntity entity) {
+        this.launchEntitiesOnTop(entity.getWorld(), entity.getPos());
+        if(entity.getWorld() != null && entity.getBumpDirection() == Direction.DOWN) {
+            this.addParticles(entity.getWorld(), entity.getPos());
         }
     }
 
     @Override
-    protected double getBumpYVelocity(World world, BlockPos pos, BlockState blockState, BumpedBlockEntity blockEntity, Entity entity) {
-        return entity.isSneaking() ? 0.5D : 0.9D;
-    }
-
-    @Override
-    public void launchEntitiesOnTop(World world, BlockPos pos, BlockState state, BumpedBlockEntity blockEntity) {
-        super.launchEntitiesOnTop(world, pos, state, blockEntity);
+    public void launchEntitiesOnTop(World world, BlockPos pos) {
+        super.launchEntitiesOnTop(world, pos);
 
         // Only play high sound if all entities are sneaking
         boolean shouldPlayHighSound = false;
@@ -80,6 +66,12 @@ public class NoteBlock extends BumpableBlock {
         }
         Vec3d center = pos.toCenterPos();
         world.playSound(null, center.getX(), center.getY(), center.getZ(), shouldPlayHighSound ? this.highJumpSound : this.lowJumpSound, SoundCategory.BLOCKS, 1F, 1F);
+    }
+
+    public void launchEntity(Entity entity) {
+        Vec3d vec3d = entity.getVelocity();
+        entity.setVelocity(vec3d.x, entity.isSneaking() ? 0.5D : 0.9D, vec3d.z);
+        entity.velocityDirty = true;
     }
 
     public void addParticles(World world, BlockPos blockPos) {
