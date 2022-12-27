@@ -5,6 +5,9 @@
     "mubble:empty_block",
     "mubble:brick_block",
     "mubble:gold_block",
-    "mubble:note_block"
+    "mubble:note_block",
+    "mubble:snake_block",
+    "mubble:red_beep_block",
+    "mubble:beep_block_frame"
   ]
 }
