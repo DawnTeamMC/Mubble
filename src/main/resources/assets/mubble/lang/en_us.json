@@ -2,6 +2,7 @@
   "modmenu.descriptionTranslation.mubble": "The perfect mod for Nintendo fans!",
 
   "item_group.mubble.super_mario": "Super Mario",
+  "item_group.mubble.splatoon": "Splatoon",
 
   "item.mubble.maker_glove": "Maker Glove",
 
@@ -19,6 +20,9 @@
 
   "item.mubble.cape_feather": "Cape Feather",
   "item.mubble.super_cape_feather": "Super Cape Feather",
+
+  "item.mubble.splattershot": "Splattershot",
+  "item.mubble.dot_96_gal": ".96 Gal",
 
   "subtitles.mubble.block.bumpable_block.bump": "Block bumped",
   "subtitles.mubble.block.bumpable_block.change_loot": "Block filled",
