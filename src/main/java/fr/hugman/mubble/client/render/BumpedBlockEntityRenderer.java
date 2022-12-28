@@ -19,6 +19,11 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
+/**
+ * @author haykam
+ * @author Hugman
+ * @since v4.0.0
+ */
 @Environment(EnvType.CLIENT)
 public class BumpedBlockEntityRenderer implements BlockEntityRenderer<BumpedBlockEntity> {
 	private final BlockRenderManager renderManager;

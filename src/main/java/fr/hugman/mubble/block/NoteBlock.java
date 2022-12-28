@@ -14,6 +14,11 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
+/**
+ * @author Napero
+ * @author Hugman
+ * @since v4.0.0
+ */
 public class NoteBlock extends MarioBumpableBlock {
     private final SoundEvent lowJumpSound;
     private final SoundEvent highJumpSound;

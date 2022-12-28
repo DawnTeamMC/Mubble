@@ -11,8 +11,16 @@
   "block.mubble.snake_block": "Snake Block",
   "block.mubble.red_beep_block": "Red Beep Block",
   "block.mubble.blue_beep_block": "Blue Beep Block",
-
   "block.mubble.bumped_block": "Bumped Block",
+
+  "item.mubble.cape_feather": "Cape Feather",
+  "item.mubble.super_cape_feather": "Super Cape Feather",
+
+  "subtitles.mubble.block.bumpable_block.change_loot": "Block filled",
+  "subtitles.mubble.block.bumpable_block.loot": "Block dropped item",
+  "subtitles.mubble.block.bumpable_block.loot.coin": "Block dropped coin",
+  "subtitles.mubble.block.note_block.jump": "Note Block used",
+  "subtitles.mubble.item.cape_feather.use": "Cape Feather used",
 
   "gamerule.beepBlockCooldown": "Beep Block cooldown"
 }

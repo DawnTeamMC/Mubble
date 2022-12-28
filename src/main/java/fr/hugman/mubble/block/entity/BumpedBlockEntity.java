@@ -19,6 +19,11 @@ import net.minecraft.world.World;
 
 import java.util.Optional;
 
+/**
+ * @author haykam
+ * @author Hugman
+ * @since v4.0.0
+ */
 public class BumpedBlockEntity extends BlockEntity {
 	public static final int ANIMATION_TICKS = SharedConstants.TICKS_PER_SECOND / 4;
 	public static final int PEAK_TICK = ANIMATION_TICKS / 2;

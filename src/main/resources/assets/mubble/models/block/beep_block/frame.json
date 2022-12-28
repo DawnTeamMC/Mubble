@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "mubble:block/red_beep_block"
+    "all": "mubble:block/beep_block/frame"
   }
 }
 

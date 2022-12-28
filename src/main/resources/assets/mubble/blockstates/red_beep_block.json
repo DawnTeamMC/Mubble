@@ -1,7 +1,10 @@
 {
   "variants": {
-    "frame=false": { "model": "mubble:block/red_beep_block" },
-    "frame=true": { "model": "mubble:block/beep_block_frame" }
+    "frame=false": {
+      "model": "mubble:block/beep_block/red"
+    },
+    "frame=true": {
+      "model": "mubble:block/beep_block/frame"
+    }
   }
 }
-

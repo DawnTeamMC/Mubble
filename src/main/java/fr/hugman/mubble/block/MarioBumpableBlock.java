@@ -6,8 +6,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -22,8 +20,6 @@ import java.util.List;
  * @since v4.0.0
  */
 public abstract class MarioBumpableBlock extends Block implements BumpableBlock, UnderHittableBlock {
-	private static final SoundEvent DEFAULT_BUMP_SOUND = SoundEvents.BLOCK_NOTE_BLOCK_COW_BELL.value();
-
 	public MarioBumpableBlock(Settings settings) {
 		super(settings);
 	}
@@ -36,11 +32,15 @@ public abstract class MarioBumpableBlock extends Block implements BumpableBlock,
 		}
 	}
 
+	public void playBumpSound(World world, Vec3d pos) {
+		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SuperMarioContent.BUMPABLE_BLOCK_BUMP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	}
+
 	@Override
 	public void onBump(BumpedBlockEntity entity, BlockHitResult hit) {
 		Vec3d soundPos = entity.getPos().toCenterPos();
-		if(entity.getWorld() != null && DEFAULT_BUMP_SOUND != null) {
-			entity.getWorld().playSound(null, soundPos.getX(), soundPos.getY(), soundPos.getZ(), DEFAULT_BUMP_SOUND, SoundCategory.BLOCKS, 1F, 1F);
+		if(entity.getWorld() != null) {
+			playBumpSound(entity.getWorld(), soundPos);
 		}
 	}
 
