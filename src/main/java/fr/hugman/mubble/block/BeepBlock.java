@@ -1,15 +1,17 @@
 package fr.hugman.mubble.block;
 
+import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.mubble.world.MubbleGamerules;
 import net.minecraft.SharedConstants;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -35,6 +37,33 @@ public class BeepBlock extends Block {
 		this.setDefaultState(getDefaultState().with(FRAME, false));
 	}
 
+	public BeepBlock(MapColor mapColor, boolean offset) {
+		this(makeSettings(mapColor), offset);
+
+	}
+
+	public static Settings makeSettings(MapColor mapColor) {
+		return DawnBlockSettings.of(Material.STONE, mapColor)
+				.sounds(BlockSoundGroup.AMETHYST_BLOCK)
+				.strength(1.5f).requiresTool().item()
+				.allowsSpawning(BeepBlock::isNotFrame)
+				.solidBlock(BeepBlock::isNotFrame)
+				.suffocates(BeepBlock::isNotFrame)
+				.blockVision(BeepBlock::isNotFrame);
+	}
+
+	private static boolean isFrame(BlockState state) {
+		return state.get(FRAME);
+	}
+
+	private static boolean isNotFrame(BlockState state, BlockView world, BlockPos pos) {
+		return !isFrame(state);
+	}
+
+	private static boolean isNotFrame(BlockState state, BlockView world, BlockPos pos, EntityType<?> type) {
+		return !isFrame(state);
+	}
+
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 		builder.add(FRAME);
@@ -42,17 +71,21 @@ public class BeepBlock extends Block {
 
 	@Override
 	public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
-		return state.get(FRAME);
+		return isFrame(state);
+	}
+	@Override
+	public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
+		return isFrame(state) ? VoxelShapes.empty() : VoxelShapes.fullCube();
 	}
 
 	@Override
-	public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-		return state.get(FRAME) ? VoxelShapes.empty() : VoxelShapes.fullCube();
+	public VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
+		return isFrame(state) ? VoxelShapes.empty() : VoxelShapes.fullCube();
 	}
 
 	@Override
 	public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
-		return state.get(FRAME) ? 1.0F : super.getAmbientOcclusionLightLevel(state, world, pos);
+		return isFrame(state) ? 1.0F : 0.2f;
 	}
 
 	@Nullable

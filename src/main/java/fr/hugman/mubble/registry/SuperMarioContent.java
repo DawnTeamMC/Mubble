@@ -10,12 +10,14 @@ import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
+import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Rarity;
@@ -30,8 +32,8 @@ public class SuperMarioContent {
 	public static final SoundEvent NOTE_BLOCK_JUMP_HIGH = SoundEvent.of(Mubble.id("block.note_block.jump.high"));
 	public static final NoteBlock NOTE_BLOCK = new NoteBlock(NOTE_BLOCK_JUMP_LOW, NOTE_BLOCK_JUMP_HIGH, DawnBlockSettings.copy(Blocks.QUARTZ_BLOCK).mapColor(MapColor.WHITE).item());
 	public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
-	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(DawnBlockSettings.copy(Blocks.GLASS).mapColor(MapColor.RED).item(), false);
-	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(DawnBlockSettings.copy(Blocks.GLASS).mapColor(MapColor.BLUE).item(), true);
+	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
+	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
 
 	public static final BumpedBlock BUMPED_BLOCK = new BumpedBlock(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).strength(-1, 3600000).dropsNothing().nonOpaque());
 	public static final BlockEntityType<BumpedBlockEntity> BUMPED_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder
