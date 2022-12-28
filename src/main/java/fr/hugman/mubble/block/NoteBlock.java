@@ -35,6 +35,14 @@ public class NoteBlock extends MarioBumpableBlock {
     }
 
     @Override
+    public void onBump(BumpedBlockEntity entity, BlockHitResult hit) {
+        // Only play the sound if the block has been hit from under
+        if(entity.getBumpDirection() == Direction.UP) {
+            super.onBump(entity, hit);
+        }
+    }
+
+    @Override
     public void onEntityLand(BlockView view, Entity entity) {
         World world = entity.getEntityWorld();
         BlockPos pos = entity.getBlockPos().down();
@@ -51,15 +59,16 @@ public class NoteBlock extends MarioBumpableBlock {
 
     @Override
     public void onBumpPeak(BumpedBlockEntity entity) {
-        this.launchEntitiesOnTop(entity.getWorld(), entity.getPos());
+        super.onBumpPeak(entity);
         if(entity.getWorld() != null && entity.getBumpDirection() == Direction.DOWN) {
-            this.addParticles(entity.getWorld(), entity.getPos());
+            this.launchEntitiesOnTop(entity.getWorld(), entity.getPos());
         }
     }
 
     @Override
     public void launchEntitiesOnTop(World world, BlockPos pos) {
         super.launchEntitiesOnTop(world, pos);
+        // TODO: add falling blocks
 
         // Only play high sound if all entities are sneaking
         boolean shouldPlayHighSound = false;
@@ -70,6 +79,7 @@ public class NoteBlock extends MarioBumpableBlock {
             }
         }
         Vec3d center = pos.toCenterPos();
+        this.addParticles(world, pos);
         world.playSound(null, center.getX(), center.getY(), center.getZ(), shouldPlayHighSound ? this.highJumpSound : this.lowJumpSound, SoundCategory.BLOCKS, 1F, 1F);
     }
 

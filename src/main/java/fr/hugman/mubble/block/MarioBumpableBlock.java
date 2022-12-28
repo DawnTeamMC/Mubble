@@ -9,6 +9,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -46,8 +47,9 @@ public abstract class MarioBumpableBlock extends Block implements BumpableBlock,
 
 	@Override
 	public void onBumpPeak(BumpedBlockEntity entity) {
-		// TODO : add a gamerule for this
-		this.launchEntitiesOnTop(entity.getWorld(), entity.getPos());
+		if(entity.getWorld() != null && entity.getBumpDirection() == Direction.UP) {
+			this.launchEntitiesOnTop(entity.getWorld(), entity.getPos());
+		}
 	}
 
 	@Override
@@ -75,5 +77,6 @@ public abstract class MarioBumpableBlock extends Block implements BumpableBlock,
 		Vec3d vec3d = entity.getVelocity();
 		entity.setVelocity(vec3d.x, 0.3D, vec3d.z);
 		entity.velocityDirty = true;
+		// TODO : add a gamerule for harming entities
 	}
 }
