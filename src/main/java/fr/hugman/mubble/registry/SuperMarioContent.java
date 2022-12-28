@@ -1,10 +1,14 @@
 package fr.hugman.mubble.registry;
 
-import fr.hugman.dawn.DawnFactory;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.block.*;
+import fr.hugman.mubble.block.BeepBlock;
+import fr.hugman.mubble.block.BumpedBlock;
+import fr.hugman.mubble.block.EmptyBlock;
+import fr.hugman.mubble.block.NoteBlock;
+import fr.hugman.mubble.block.QuestionBlock;
+import fr.hugman.mubble.block.SnakeBlock;
 import fr.hugman.mubble.block.entity.BumpedBlockEntity;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
@@ -23,16 +27,16 @@ public class SuperMarioContent {
 	public static final QuestionBlock QUESTION_BLOCK = new QuestionBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
 	public static final Block EMPTY_BLOCK = new EmptyBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
 	public static final Block BRICK_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
-    public static final Block GOLD_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.YELLOW).item());
+	public static final Block GOLD_BLOCK = new Block(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.YELLOW).item());
 	public static final NoteBlock NOTE_BLOCK = new NoteBlock(SoundEvents.BLOCK_NOTE_BLOCK_HARP.value(), SoundEvents.BLOCK_NOTE_BLOCK_HARP.value(), DawnBlockSettings.copy(Blocks.QUARTZ_BLOCK).mapColor(MapColor.WHITE).item());
-	public static final Block BUMPED_BLOCK = new BumpedBlock(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).strength(-1, 3600000).dropsNothing().nonOpaque());
-    public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
-	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(DawnBlockSettings.copy(Blocks.GLASS).mapColor(MapColor.RED).item(), 0);
-	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(DawnBlockSettings.copy(Blocks.GLASS).mapColor(MapColor.BLUE).item(), 80);
+	public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
+	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(DawnBlockSettings.copy(Blocks.GLASS).mapColor(MapColor.RED).item(), false);
+	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(DawnBlockSettings.copy(Blocks.GLASS).mapColor(MapColor.BLUE).item(), true);
 
+	public static final Block BUMPED_BLOCK = new BumpedBlock(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).strength(-1, 3600000).dropsNothing().nonOpaque());
 	public static final BlockEntityType<BumpedBlockEntity> BUMPED_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder
-		.create(BumpedBlockEntity::new, BUMPED_BLOCK)
-		.build();
+			.create(BumpedBlockEntity::new, BUMPED_BLOCK)
+			.build();
 
 	public static void init() {
 		Registrar.add(Mubble.id("question_block"), QUESTION_BLOCK);

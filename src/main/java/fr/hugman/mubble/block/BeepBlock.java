@@ -1,7 +1,6 @@
 package fr.hugman.mubble.block;
 
-//Komerish is a cool dude. (sometimes (all the ((some)time))
-
+import fr.hugman.mubble.world.MubbleGamerules;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -19,12 +18,12 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class BeepBlock extends Block {
-    private static final int COOLDOWN = SharedConstants.TICKS_PER_SECOND * 4;
+    public static final int DEFAULT_COOLDOWN = SharedConstants.TICKS_PER_SECOND * 4;
     public static final BooleanProperty FRAME = BooleanProperty.of("frame");
 
-    public final int offset;
+    public final boolean offset;
 
-    public BeepBlock(Settings settings, int offset) {
+    public BeepBlock(Settings settings, boolean offset) {
         super(settings);
         this.offset = offset;
         this.setDefaultState(getDefaultState().with(FRAME, false));
@@ -46,12 +45,6 @@ public class BeepBlock extends Block {
     }
 
     @Override
-    public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        if(context.isHolding(this.asItem())) return VoxelShapes.fullCube();
-        return state.get(FRAME) ? VoxelShapes.empty() : VoxelShapes.fullCube();
-    }
-
-    @Override
     public float getAmbientOcclusionLightLevel(BlockState state, BlockView world, BlockPos pos) {
         return state.get(FRAME) ? 1.0F : super.getAmbientOcclusionLightLevel(state, world, pos);
     }
@@ -59,31 +52,41 @@ public class BeepBlock extends Block {
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return getStateAtTime(ctx.getWorld().getTime());
+        return getStateAtTime(ctx.getWorld());
     }
 
     @Override
     public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean notify) {
-        world.scheduleBlockTick(pos, state.getBlock(), this.getNextUpdateTickDelta(world.getTime()));
+        this.refreshState(world, pos);
+        this.scheduleTick(world, pos, state.getBlock());
     }
 
     @Override
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if(!world.isClient()) {
-            long worldTime = world.getTime();
-            world.setBlockState(pos, getStateAtTime(worldTime));
-            world.scheduleBlockTick(pos, state.getBlock(), this.getNextUpdateTickDelta(worldTime));
+            this.refreshState(world, pos);
+            this.scheduleTick(world, pos, state.getBlock());
         }
     }
 
-    public int getNextUpdateTickDelta(long worldTime) {
-        int delta = (int) (COOLDOWN - worldTime);
-        if(delta == 0) return COOLDOWN;
-        else return delta % COOLDOWN;
+    public void refreshState(World world, BlockPos pos) {
+        world.setBlockState(pos, getStateAtTime(world));
     }
 
-    public BlockState getStateAtTime(long worldTime) {
-        boolean frame = (int) ((worldTime + this.offset) % (COOLDOWN * 2)) < COOLDOWN;
+    public void scheduleTick(World world, BlockPos pos, Block block) {
+        int cooldown = world.getGameRules().getInt(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
+        if(cooldown > 0) {
+            long worldTime = world.getTime();
+            int delta = (int) (cooldown - worldTime);
+            world.scheduleBlockTick(pos, block, (delta == 0) ? cooldown : delta % cooldown);
+        }
+    }
+
+    public BlockState getStateAtTime(World world) {
+        int cooldown = world.getGameRules().getInt(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
+        if(cooldown <= 0) return getDefaultState().with(FRAME, this.offset);
+        long worldTime = world.getTime();
+        boolean frame = (int) ((worldTime + (this.offset ? cooldown : 0)) % (cooldown * 2)) < cooldown;
         return this.getDefaultState().with(FRAME, frame);
     }
 }

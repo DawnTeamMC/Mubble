@@ -8,8 +8,11 @@
   "block.mubble.brick_block": "Brick Block",
   "block.mubble.gold_block": "Gold Block",
   "block.mubble.note_block": "Note Block",
-  "block.mubble.bumped_block": "Bumped Block",
   "block.mubble.snake_block": "Snake Block",
   "block.mubble.red_beep_block": "Red Beep Block",
-  "block.mubble.blue_beep_block": "Blue Beep Block"
+  "block.mubble.blue_beep_block": "Blue Beep Block",
+
+  "block.mubble.bumped_block": "Bumped Block",
+
+  "gamerule.beepBlockCooldown": "Beep Block cooldown"
 }
