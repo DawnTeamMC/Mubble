@@ -34,6 +34,7 @@ public class SuperMarioContent {
 	public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
+	public static final QuestionBlock EXCLAMATION_BLOCK = new QuestionBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BLUE).item());
 
 	public static final BumpedBlock BUMPED_BLOCK = new BumpedBlock(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).strength(-1, 3600000).dropsNothing().nonOpaque());
 	public static final BlockEntityType<BumpedBlockEntity> BUMPED_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder
@@ -60,6 +61,7 @@ public class SuperMarioContent {
 		Registrar.add(Mubble.id("snake_block"), SNAKE_BLOCK);
 		Registrar.add(Mubble.id("red_beep_block"), RED_BEEP_BLOCK);
 		Registrar.add(Mubble.id("blue_beep_block"), BLUE_BEEP_BLOCK);
+		Registrar.add(Mubble.id("exclamation_block"), EXCLAMATION_BLOCK);
 
 		Registrar.add(Mubble.id("bumped_block"), BUMPED_BLOCK);
 		Registry.register(Registries.BLOCK_ENTITY_TYPE, Mubble.id("bumped_block"), BUMPED_BLOCK_ENTITY_TYPE);
@@ -87,6 +89,7 @@ public class SuperMarioContent {
 				entries.add(SuperMarioContent.BLUE_BEEP_BLOCK);
 				entries.add(SuperMarioContent.CAPE_FEATHER);
 				entries.add(SuperMarioContent.SUPER_CAPE_FEATHER);
+				entries.add(SuperMarioContent.EXCLAMATION_BLOCK);
 			})
 			.build();
 }
