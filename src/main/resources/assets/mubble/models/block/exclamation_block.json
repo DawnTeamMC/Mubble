@@ -1,7 +1,8 @@
 {
-  "parent": "minecraft:block/cube_column",
+  "parent": "mubble:block/cube_column_alternating",
   "textures": {
-    "side": "mubble:block/exclamation_block/side1",
-    "end": "mubble:block/exclamation_block/end"
+    "end": "mubble:block/exclamation_block/end",
+    "side1": "mubble:block/exclamation_block/side1",
+    "side2": "mubble:block/exclamation_block/side2"
   }
 }

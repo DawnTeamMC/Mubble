@@ -24,6 +24,7 @@ import net.minecraft.util.Rarity;
 
 public class SuperMarioContent {
 	public static final QuestionBlock QUESTION_BLOCK = new QuestionBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
+	public static final QuestionBlock EXCLAMATION_BLOCK = new QuestionBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BLUE).item());
 	public static final EmptyBlock EMPTY_BLOCK = new EmptyBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
 	public static final BrickBlock BRICK_BLOCK = new BrickBlock(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
 	public static final SoundEvent BRICK_BLOCK_BREAK = SoundEvent.of(Mubble.id("block.brick_block.break"));
@@ -34,7 +35,6 @@ public class SuperMarioContent {
 	public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
-	public static final QuestionBlock EXCLAMATION_BLOCK = new QuestionBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BLUE).item());
 
 	public static final BumpedBlock BUMPED_BLOCK = new BumpedBlock(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).strength(-1, 3600000).dropsNothing().nonOpaque());
 	public static final BlockEntityType<BumpedBlockEntity> BUMPED_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder.create(BumpedBlockEntity::new, BUMPED_BLOCK).build();
@@ -49,6 +49,7 @@ public class SuperMarioContent {
 
 	public static void init(Registrar r) {
 		r.add("question_block", QUESTION_BLOCK);
+		r.add("exclamation_block", EXCLAMATION_BLOCK);
 		r.add("empty_block", EMPTY_BLOCK);
 		r.add("brick_block", BRICK_BLOCK);
 		r.add(BRICK_BLOCK_BREAK);
@@ -59,7 +60,6 @@ public class SuperMarioContent {
 		r.add("snake_block", SNAKE_BLOCK);
 		r.add("red_beep_block", RED_BEEP_BLOCK);
 		r.add("blue_beep_block", BLUE_BEEP_BLOCK);
-		r.add("exclamation_block", EXCLAMATION_BLOCK);
 
 		r.add("bumped_block", BUMPED_BLOCK);
 		r.add("bumped_block", BUMPED_BLOCK_ENTITY_TYPE);
@@ -82,12 +82,12 @@ public class SuperMarioContent {
 				entries.add(SuperMarioContent.BRICK_BLOCK);
 				entries.add(SuperMarioContent.GOLD_BLOCK);
 				entries.add(SuperMarioContent.NOTE_BLOCK);
+				entries.add(SuperMarioContent.EXCLAMATION_BLOCK);
 				entries.add(SuperMarioContent.SNAKE_BLOCK);
 				entries.add(SuperMarioContent.RED_BEEP_BLOCK);
 				entries.add(SuperMarioContent.BLUE_BEEP_BLOCK);
 				entries.add(SuperMarioContent.CAPE_FEATHER);
 				entries.add(SuperMarioContent.SUPER_CAPE_FEATHER);
-				entries.add(SuperMarioContent.EXCLAMATION_BLOCK);
 			})
 			.build();
 }
