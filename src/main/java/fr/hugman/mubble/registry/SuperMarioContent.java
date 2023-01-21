@@ -37,9 +37,7 @@ public class SuperMarioContent {
 	public static final QuestionBlock EXCLAMATION_BLOCK = new QuestionBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BLUE).item());
 
 	public static final BumpedBlock BUMPED_BLOCK = new BumpedBlock(DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).strength(-1, 3600000).dropsNothing().nonOpaque());
-	public static final BlockEntityType<BumpedBlockEntity> BUMPED_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder
-			.create(BumpedBlockEntity::new, BUMPED_BLOCK)
-			.build();
+	public static final BlockEntityType<BumpedBlockEntity> BUMPED_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder.create(BumpedBlockEntity::new, BUMPED_BLOCK).build();
 	public static final SoundEvent BUMPABLE_BLOCK_BUMP = SoundEvent.of(Mubble.id("block.bumpable_block.bump"));
 	public static final SoundEvent BUMPABLE_BLOCK_CHANGE_LOOT = SoundEvent.of(Mubble.id("block.bumpable_block.change_loot"));
 	public static final SoundEvent BUMPABLE_BLOCK_LOOT = SoundEvent.of(Mubble.id("block.bumpable_block.loot"));
@@ -49,30 +47,30 @@ public class SuperMarioContent {
 	public static final CapeFeatherItem SUPER_CAPE_FEATHER = new CapeFeatherItem(new Item.Settings().rarity(Rarity.EPIC), true);
 	public static final SoundEvent CAPE_FEATHER_USE = SoundEvent.of(Mubble.id("item.cape_feather.use"));
 
-	public static void init() {
-		Registrar.add(Mubble.id("question_block"), QUESTION_BLOCK);
-		Registrar.add(Mubble.id("empty_block"), EMPTY_BLOCK);
-		Registrar.add(Mubble.id("brick_block"), BRICK_BLOCK);
-		Registrar.add(BRICK_BLOCK_BREAK);
-		Registrar.add(Mubble.id("gold_block"), GOLD_BLOCK);
-		Registrar.add(Mubble.id("note_block"), NOTE_BLOCK);
-		Registrar.add(NOTE_BLOCK_JUMP_LOW);
-		Registrar.add(NOTE_BLOCK_JUMP_HIGH);
-		Registrar.add(Mubble.id("snake_block"), SNAKE_BLOCK);
-		Registrar.add(Mubble.id("red_beep_block"), RED_BEEP_BLOCK);
-		Registrar.add(Mubble.id("blue_beep_block"), BLUE_BEEP_BLOCK);
-		Registrar.add(Mubble.id("exclamation_block"), EXCLAMATION_BLOCK);
+	public static void init(Registrar r) {
+		r.add("question_block", QUESTION_BLOCK);
+		r.add("empty_block", EMPTY_BLOCK);
+		r.add("brick_block", BRICK_BLOCK);
+		r.add(BRICK_BLOCK_BREAK);
+		r.add("gold_block", GOLD_BLOCK);
+		r.add("note_block", NOTE_BLOCK);
+		r.add(NOTE_BLOCK_JUMP_LOW);
+		r.add(NOTE_BLOCK_JUMP_HIGH);
+		r.add("snake_block", SNAKE_BLOCK);
+		r.add("red_beep_block", RED_BEEP_BLOCK);
+		r.add("blue_beep_block", BLUE_BEEP_BLOCK);
+		r.add("exclamation_block", EXCLAMATION_BLOCK);
 
-		Registrar.add(Mubble.id("bumped_block"), BUMPED_BLOCK);
-		Registry.register(Registries.BLOCK_ENTITY_TYPE, Mubble.id("bumped_block"), BUMPED_BLOCK_ENTITY_TYPE);
-		Registrar.add(BUMPABLE_BLOCK_CHANGE_LOOT);
-		Registrar.add(BUMPABLE_BLOCK_BUMP);
-		Registrar.add(BUMPABLE_BLOCK_LOOT);
-		Registrar.add(BUMPABLE_BLOCK_LOOT_COIN);
+		r.add("bumped_block", BUMPED_BLOCK);
+		r.add("bumped_block", BUMPED_BLOCK_ENTITY_TYPE);
+		r.add(BUMPABLE_BLOCK_CHANGE_LOOT);
+		r.add(BUMPABLE_BLOCK_BUMP);
+		r.add(BUMPABLE_BLOCK_LOOT);
+		r.add(BUMPABLE_BLOCK_LOOT_COIN);
 
-		Registrar.add(Mubble.id("cape_feather"), CAPE_FEATHER);
-		Registrar.add(Mubble.id("super_cape_feather"), SUPER_CAPE_FEATHER);
-		Registrar.add(CAPE_FEATHER_USE);
+		r.add("cape_feather", CAPE_FEATHER);
+		r.add("super_cape_feather", SUPER_CAPE_FEATHER);
+		r.add(CAPE_FEATHER_USE);
 	}
 
 	public static final ItemGroup GROUP = FabricItemGroup.builder(Mubble.id("super_mario"))
