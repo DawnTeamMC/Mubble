@@ -1,6 +1,6 @@
 package fr.hugman.mubble.mixin;
 
-import fr.hugman.mubble.block.UnderHittableBlock;
+import fr.hugman.mubble.block.HittableBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
@@ -31,8 +31,8 @@ public class EntityMixin {
 			if(hit.getType() == HitResult.Type.BLOCK && hit.getSide() == Direction.DOWN) {
 				BlockPos blockPos = hit.getBlockPos();
 				BlockState state = world.getBlockState(blockPos);
-				if(state.getBlock() instanceof UnderHittableBlock underHittableBlock) {
-					underHittableBlock.onHitFromUnder(state, world, blockPos, hit, thisEntity);
+				if(state.getBlock() instanceof HittableBlock hittableBlock) {
+					hittableBlock.onHit(world, blockPos, state, thisEntity, hit);
 				}
 			}
 		}

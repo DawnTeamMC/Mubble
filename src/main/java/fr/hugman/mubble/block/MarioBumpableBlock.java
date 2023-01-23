@@ -1,12 +1,12 @@
 package fr.hugman.mubble.block;
 
-import fr.hugman.mubble.block.entity.BumpedBlockEntity;
-import fr.hugman.mubble.registry.SuperMarioContent;
-import net.minecraft.block.Block;
+import fr.hugman.mubble.block.bump.BumpConfig;
+import fr.hugman.mubble.block.entity.BumpableBlockEntity;
+import fr.hugman.mubble.registry.MubbleSounds;
+import fr.hugman.mubble.registry.SuperMario;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
@@ -16,59 +16,44 @@ import net.minecraft.world.World;
 import java.util.List;
 
 /**
+ * Generic Super Mario bumpable block.
  * @author haykam
  * @author Hugman
  * @since v4.0.0
  */
-public abstract class MarioBumpableBlock extends Block implements BumpableBlock, UnderHittableBlock {
-	public MarioBumpableBlock(Settings settings) {
-		super(settings);
+public class MarioBumpableBlock extends BumpableBlock {
+	public MarioBumpableBlock(BumpConfig defaultBumpConfig, Settings settings) {
+		super(defaultBumpConfig, settings);
 	}
 
 	@Override
-	public void onHitFromUnder(BlockState state, World world, BlockPos pos, BlockHitResult hit, Entity entity) {
-		if(!world.isClient()) {
-			// The hit direction should always be up in this case
-			BumpedBlockEntity.bump(world, pos, hit);
+	public void onBump(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+		super.onBump(world, pos, state, blockEntity);
+		this.playGenericBumpSound(blockEntity);
+	}
+
+	@Override
+	public void onBumpMiddle(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+		super.onBumpMiddle(world, pos, state, blockEntity);
+		if(blockEntity.getWorld() != null && blockEntity.getBumpDirection() == Direction.UP) {
+			this.launchEntitiesOnTop(blockEntity.getWorld(), blockEntity.getPos());
 		}
 	}
 
-	public void playBumpSound(World world, Vec3d pos) {
-		world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SuperMarioContent.BUMPABLE_BLOCK_BUMP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-	}
-
-	@Override
-	public void onBump(BumpedBlockEntity entity, BlockHitResult hit) {
-		Vec3d soundPos = entity.getPos().toCenterPos();
-		if(entity.getWorld() != null) {
-			playBumpSound(entity.getWorld(), soundPos);
+	public void playGenericBumpSound(BumpableBlockEntity entity) {
+		World world = entity.getWorld();
+		Vec3d pos = entity.getPos().toCenterPos();
+		if(world != null) {
+			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundCategory.BLOCKS, 1.0F, 1.0F);
 		}
-	}
-
-	@Override
-	public void onBumpPeak(BumpedBlockEntity entity) {
-		if(entity.getWorld() != null && entity.getBumpDirection() == Direction.UP) {
-			this.launchEntitiesOnTop(entity.getWorld(), entity.getPos());
-		}
-	}
-
-	@Override
-	public BlockState onBumpCompleted(BumpedBlockEntity entity) {
-		return SuperMarioContent.EMPTY_BLOCK.getDefaultState();
-	}
-
-	/**
-	 * @return the entities on top of the block
-	 */
-	public List<Entity> getEntitiesOnTop(World world, BlockPos pos) {
-		return world.getOtherEntities(null, new Box(pos.up()));
 	}
 
 	/**
 	 * Launches entities on top of the block.
 	 */
 	public void launchEntitiesOnTop(World world, BlockPos pos) {
-		for(Entity entity : getEntitiesOnTop(world, pos)) {
+		List<Entity> entities = world.getOtherEntities(null, new Box(pos.up()));
+		for(Entity entity : entities ) {
 			launchEntity(entity);
 		}
 	}

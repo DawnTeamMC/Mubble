@@ -17,7 +17,9 @@
   "item.mubble.cape_feather": "Cape Feather",
   "item.mubble.super_cape_feather": "Super Cape Feather",
 
+  "subtitles.mubble.block.bumpable_block.bump": "Block bumped",
   "subtitles.mubble.block.bumpable_block.change_loot": "Block filled",
+  "subtitles.mubble.block.bumpable_block.destroy": "Block destroyed",
   "subtitles.mubble.block.bumpable_block.loot": "Block dropped item",
   "subtitles.mubble.block.bumpable_block.loot.coin": "Block dropped coin",
   "subtitles.mubble.block.note_block.jump": "Note Block used",

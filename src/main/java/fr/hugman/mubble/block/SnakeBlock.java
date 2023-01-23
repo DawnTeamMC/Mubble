@@ -1,6 +1,6 @@
 package fr.hugman.mubble.block;
 
-import fr.hugman.mubble.registry.SuperMarioContent;
+import fr.hugman.mubble.registry.SuperMario;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -38,7 +38,7 @@ public class SnakeBlock extends Block {
 			x = 1;
 		}
 		if (world.getBlockState(pos.add(x, 0, z)).isAir()) {
-			world.setBlockState(pos.add(x, 0, z), SuperMarioContent.SNAKE_BLOCK.getDefaultState());
+			world.setBlockState(pos.add(x, 0, z), SuperMario.SNAKE_BLOCK.getDefaultState());
 			world.playSound(null, entity.getX(), entity.getY() + 0.5, entity.getZ() + 0.5, SoundEvents.BLOCK_NOTE_BLOCK_XYLOPHONE, SoundCategory.RECORDS, 3.0f, 1.0F, world.random.nextLong());
 		}
 	}

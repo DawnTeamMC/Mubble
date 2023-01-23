@@ -11,6 +11,12 @@
       "mubble:block/bumpable_block/change_loot"
     ]
   },
+  "block.bumpable_block.destroy": {
+    "subtitle": "subtitles.mubble.block.bumpable_block.destroy",
+    "sounds": [
+      "mubble:block/bumpable_block/destroy"
+    ]
+  },
   "block.bumpable_block.loot": {
     "subtitle": "subtitles.mubble.block.bumpable_block.loot",
     "sounds": [
@@ -21,12 +27,6 @@
     "subtitle": "subtitles.mubble.block.bumpable_block.loot_coin",
     "sounds": [
       "mubble:block/bumpable_block/loot_coin"
-    ]
-  },
-  "block.brick_block.break": {
-    "subtitle": "subtitles.block.generic.break",
-    "sounds": [
-      "mubble:block/brick_block/break"
     ]
   },
   "block.note_block.jump.high": {

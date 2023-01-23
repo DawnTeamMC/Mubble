@@ -1,8 +1,10 @@
 package fr.hugman.mubble.client.render;
 
-import fr.hugman.mubble.block.entity.BumpedBlockEntity;
+import fr.hugman.mubble.block.BumpableBlock;
+import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.loader.impl.lib.sat4j.core.Vec;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.OverlayTexture;
@@ -16,6 +18,7 @@ import net.minecraft.client.render.model.BakedModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
 
@@ -25,30 +28,35 @@ import net.minecraft.world.World;
  * @since v4.0.0
  */
 @Environment(EnvType.CLIENT)
-public class BumpedBlockEntityRenderer implements BlockEntityRenderer<BumpedBlockEntity> {
+public class BumpableBlockEntityRenderer implements BlockEntityRenderer<BumpableBlockEntity> {
 	private final BlockRenderManager renderManager;
 
-	public BumpedBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
+	public BumpableBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
 		this.renderManager = context.getRenderManager();
 	}
 
 	@Override
-	public void render(BumpedBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
-		BlockState state = entity.getBlockState();
-		if (state.getRenderType() != BlockRenderType.MODEL) return;
-
+	public void render(BumpableBlockEntity entity, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay) {
 		World world = entity.getWorld();
 		BlockPos pos = entity.getPos();
 
-		float bumpTicks = Math.min(entity.getBumpTicks() + tickDelta, BumpedBlockEntity.ANIMATION_TICKS);
+		BlockState state = entity.getCachedState();
+
+		matrices.push();
 
 		// Transformations
-		matrices.push();
-		this.applyTransformations(matrices, bumpTicks, entity.getBumpDirection());
+		VertexConsumer buffer;
+		if(entity.isBumping()) {
+			float bumpTicks = Math.min(entity.getBumpTicks() + tickDelta, BumpableBlockEntity.ANIMATION_TICKS);
+			this.applyTransformations(matrices, bumpTicks, entity.getBumpDirection().getVector());
+			buffer = vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(state));
+		}
+		else {
+			buffer = vertexConsumers.getBuffer(RenderLayers.getBlockLayer(state));
+		}
 
 		// Get parameters
 		BakedModel model = this.renderManager.getModel(state);
-		VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(state));
 
 		Random random = Random.create();
 		long seed = state.getRenderingSeed(pos);
@@ -58,17 +66,17 @@ public class BumpedBlockEntityRenderer implements BlockEntityRenderer<BumpedBloc
 		matrices.pop();
 	}
 
-	private void applyTransformations(MatrixStack matrices, float bumpTicks, Direction direction) {
+	private void applyTransformations(MatrixStack matrices, float bumpTicks, Vec3i vector) {
 		double i = -0.04 * Math.pow(bumpTicks, 2) + 0.2 * bumpTicks;
 		float scale = (float) i + 1;
 
-		double x2 = (1 - direction.getOffsetX()) * 0.5;
-		double y2 = (1 - direction.getOffsetY()) * 0.5;
-		double z2 = (1 - direction.getOffsetZ()) * 0.5;
+		double x2 = (1 - vector.getX()) * 0.5;
+		double y2 = (1 - vector.getY()) * 0.5;
+		double z2 = (1 - vector.getZ()) * 0.5;
 
-		double x = direction.getOffsetX() * i + x2;
-		double y = direction.getOffsetY() * i + y2;
-		double z = direction.getOffsetZ() * i + z2;
+		double x = vector.getX() * i + x2;
+		double y = vector.getY() * i + y2;
+		double z = vector.getZ() * i + z2;
 
 		matrices.translate(x, y, z);
 		matrices.scale(scale, scale, scale);
