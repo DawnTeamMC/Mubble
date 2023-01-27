@@ -63,7 +63,7 @@ public class SuperMario {
 		r.add("red_beep_block", RED_BEEP_BLOCK);
 		r.add("blue_beep_block", BLUE_BEEP_BLOCK);
 
-		Registry.register(Registries.SCREEN_HANDLER, r.id("bump_config"), BUMPABLE_BLOCK_SCREEN_HANDLER); //TODO: create a registrar method for screen handlers in Dawn API
+		Registry.register(Registries.SCREEN_HANDLER, r.id("bumpable_block"), BUMPABLE_BLOCK_SCREEN_HANDLER); //TODO: create a registrar method for screen handlers in Dawn API
 		r.add("bumpable_block", BUMPABLE_BLOCK_ENTITY_TYPE);
 
 		r.add("cape_feather", CAPE_FEATHER);
