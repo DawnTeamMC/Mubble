@@ -1,16 +1,17 @@
 package fr.hugman.mubble.registry;
 
+import fr.hugman.dawn.DawnFactory;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.BeepBlock;
 import fr.hugman.mubble.block.EmptyBlock;
-import fr.hugman.mubble.block.MarioBumpableBlock;
+import fr.hugman.mubble.block.DecoratedBumpableBlock;
 import fr.hugman.mubble.block.NoteBlock;
 import fr.hugman.mubble.block.SnakeBlock;
-import fr.hugman.mubble.block.bump.BumpConfig;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.item.CapeFeatherItem;
+import fr.hugman.mubble.screen.BumpableBlockScreenHandler;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Blocks;
@@ -19,23 +20,30 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.tag.TagKey;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Rarity;
 
 public class SuperMario {
 	// BLOCKS
 	public static final EmptyBlock EMPTY_BLOCK = new EmptyBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
-	public static final MarioBumpableBlock QUESTION_BLOCK = new MarioBumpableBlock(BumpConfig.DROP_COIN, DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
-	public static final MarioBumpableBlock BRICK_BLOCK = new MarioBumpableBlock(BumpConfig.DESTROY, DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
-	public static final MarioBumpableBlock GOLD_BLOCK = new MarioBumpableBlock(BumpConfig.DROP_COIN, DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.YELLOW).item());
+	public static final DecoratedBumpableBlock QUESTION_BLOCK = new DecoratedBumpableBlock(new ItemStack(Items.GOLD_NUGGET), EMPTY_BLOCK.getDefaultState(), DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
+	public static final DecoratedBumpableBlock BRICK_BLOCK = new DecoratedBumpableBlock(ItemStack.EMPTY, Blocks.AIR.getDefaultState(), DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
+	public static final DecoratedBumpableBlock GOLD_BLOCK = new DecoratedBumpableBlock(new ItemStack(Items.GOLD_NUGGET), Blocks.AIR.getDefaultState(), DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.GOLD).item());
 	public static final NoteBlock NOTE_BLOCK = new NoteBlock(MubbleSounds.NOTE_BLOCK_JUMP_LOW, MubbleSounds.NOTE_BLOCK_JUMP_HIGH, DawnBlockSettings.copy(Blocks.QUARTZ_BLOCK).mapColor(MapColor.WHITE).item());
-	public static final MarioBumpableBlock EXCLAMATION_BLOCK = new MarioBumpableBlock(BumpConfig.NOTHING, DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BLUE).item());
+	public static final DecoratedBumpableBlock EXCLAMATION_BLOCK = new DecoratedBumpableBlock(ItemStack.EMPTY, null, DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BLUE).item());
 	public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
 
+	public static final ScreenHandlerType<BumpableBlockScreenHandler> BUMPABLE_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableBlockScreenHandler::new);
 	public static final BlockEntityType<BumpableBlockEntity> BUMPABLE_BLOCK_ENTITY_TYPE =
-			FabricBlockEntityTypeBuilder.create(BumpableBlockEntity::new, QUESTION_BLOCK, EXCLAMATION_BLOCK, BRICK_BLOCK, GOLD_BLOCK, NOTE_BLOCK).build();
+			FabricBlockEntityTypeBuilder.create(BumpableBlockEntity::new, QUESTION_BLOCK, BRICK_BLOCK, GOLD_BLOCK, NOTE_BLOCK, EXCLAMATION_BLOCK).build();
+	public static final TagKey<Item> CAN_OPEN_BUMPABLE_BLOCKS = DawnFactory.itemTag(Mubble.id("can_open_bumpable_blocks"));
 
 	public static final CapeFeatherItem CAPE_FEATHER = new CapeFeatherItem(new Item.Settings(), false);
 	public static final CapeFeatherItem SUPER_CAPE_FEATHER = new CapeFeatherItem(new Item.Settings().rarity(Rarity.EPIC), true);
@@ -51,6 +59,7 @@ public class SuperMario {
 		r.add("red_beep_block", RED_BEEP_BLOCK);
 		r.add("blue_beep_block", BLUE_BEEP_BLOCK);
 
+		Registry.register(Registries.SCREEN_HANDLER, r.id("bump_config"), BUMPABLE_BLOCK_SCREEN_HANDLER); //TODO: create a registrar method for screen handlers in Dawn API
 		r.add("bumpable_block", BUMPABLE_BLOCK_ENTITY_TYPE);
 
 		r.add("cape_feather", CAPE_FEATHER);

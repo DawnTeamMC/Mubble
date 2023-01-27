@@ -3,7 +3,11 @@ package fr.hugman.mubble.block;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.mubble.world.MubbleGamerules;
 import net.minecraft.SharedConstants;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.MapColor;
+import net.minecraft.block.Material;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
@@ -72,6 +76,7 @@ public class BeepBlock extends Block {
 	public boolean isTranslucent(BlockState state, BlockView world, BlockPos pos) {
 		return isFrame(state);
 	}
+
 	@Override
 	public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
 		return isFrame(state) ? VoxelShapes.empty() : VoxelShapes.fullCube();

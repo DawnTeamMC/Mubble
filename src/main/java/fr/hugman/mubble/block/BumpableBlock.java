@@ -1,6 +1,5 @@
 package fr.hugman.mubble.block;
 
-import fr.hugman.mubble.block.bump.BumpConfig;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.registry.MubbleSounds;
 import fr.hugman.mubble.registry.SuperMario;
@@ -11,17 +10,24 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -30,14 +36,16 @@ import java.util.Optional;
  * @author Hugman
  * @since v4.0.0
  */
-public abstract class BumpableBlock extends BlockWithEntity implements HittableBlock {
+public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 	public static final BooleanProperty BUMPING = BooleanProperty.of("bumping");
 
-	private final BumpConfig defaultBumpConfig;
+	private final ItemStack defaultStack;
+	private final @Nullable BlockState defaultBumpedState;
 
-	public BumpableBlock(BumpConfig defaultBumpConfig, Settings settings) {
+	public BumpableBlock(ItemStack defaultStack, @Nullable BlockState defaultBumpedState, Settings settings) {
 		super(settings);
-		this.defaultBumpConfig = defaultBumpConfig;
+		this.defaultStack = defaultStack;
+		this.defaultBumpedState = defaultBumpedState;
 		this.setDefaultState(this.stateManager.getDefaultState().with(BUMPING, false));
 	}
 
@@ -54,8 +62,13 @@ public abstract class BumpableBlock extends BlockWithEntity implements HittableB
 	/*  GETTERS  */
 	/*===========*/
 
-	public BumpConfig getDefaultBumpConfigInstance() {
-		return defaultBumpConfig.copy();
+	public ItemStack getDefaultStack() {
+		return defaultStack;
+	}
+
+	@Nullable
+	public BlockState getDefaultBumpedState() {
+		return defaultBumpedState;
 	}
 
 	/*================*/
@@ -64,12 +77,28 @@ public abstract class BumpableBlock extends BlockWithEntity implements HittableB
 
 	@Override
 	public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-		return new BumpableBlockEntity(pos, state, this.getDefaultBumpConfigInstance());
+		return new BumpableBlockEntity(pos, state, this.getDefaultStack().copy(), this.getDefaultBumpedState());
 	}
 
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
 		return checkType(type, SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, (w, p, s, e) -> e.tick(w, p, s));
+	}
+
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if(!player.getStackInHand(hand).isIn(SuperMario.CAN_OPEN_BUMPABLE_BLOCKS)) {
+			return ActionResult.PASS;
+		}
+		if (world.isClient) {
+			return ActionResult.SUCCESS;
+		}
+		if (world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpableEntity) {
+			player.openHandledScreen(bumpableEntity);
+			// TODO: add stat for inspecting bumpable blocks
+			//player.incrementStat(Stats.INSPECT_HOPPER);
+		}
+		return ActionResult.CONSUME;
 	}
 
 	/*=============*/
@@ -91,6 +120,7 @@ public abstract class BumpableBlock extends BlockWithEntity implements HittableB
 	 * @return true if the block should be bumped, false otherwise
 	 */
 	public boolean canBump(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity, Entity entity, BlockHitResult hit) {
+		// TODO: check if the block is locked (vanilla locks to players only)
 		return !state.get(BUMPING);
 	}
 
@@ -112,7 +142,7 @@ public abstract class BumpableBlock extends BlockWithEntity implements HittableB
 	 */
 	public void onBumpMiddle(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
 		if(world != null && !world.isClient()) {
-			if(blockEntity.getBumpConfig().shouldDestroy()) {
+			if(blockEntity.getBumpedState() != null && blockEntity.getBumpedState().isAir()) {
 				Vec3d center = blockEntity.getPos().toCenterPos();
 
 				this.loot(world, pos, state, blockEntity);
@@ -127,19 +157,19 @@ public abstract class BumpableBlock extends BlockWithEntity implements HittableB
 	 */
 	public void onBumpEnd(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
 		if(world != null && !world.isClient()) {
-			this.loot(world, pos, state, blockEntity);
-			if(blockEntity.getBumpConfig().shouldDestroy()) {
+			if(blockEntity.getBumpedState() != null && blockEntity.getBumpedState().isAir()) {
 				// this should never happen since it already happened in onBumpMiddle
 				world.breakBlock(blockEntity.getPos(), false);
 				return;
 			}
-			var newState = blockEntity.getBumpConfig().state();
+			var newState = blockEntity.getBumpedState();
 			if(newState != null) {
 				world.setBlockState(pos, newState);
 			}
 			else {
 				world.setBlockState(pos, state.with(BUMPING, false));
 			}
+			this.loot(world, pos, state, blockEntity);
 		}
 	}
 
@@ -159,30 +189,24 @@ public abstract class BumpableBlock extends BlockWithEntity implements HittableB
 	}
 
 	public void loot(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
-		var config = blockEntity.getBumpConfig();
-		var stack = config.stack();
-		if(stack == null) {
+		if(blockEntity.isEmpty()) {
 			return;
 		}
-
 		var actualState = world.getBlockState(pos);
-
-		// TODO
-		// if there is no block at the position, drop in the center of the block like a regular drop
-		// else, drop at the center of the block but apply the direction offset
-
 		var center = pos.toCenterPos();
 		if(actualState.isAir()) {
-			ItemScatterer.spawn(world, center.getX(), center.getY(), center.getZ(), stack);
+			ItemScatterer.spawn(world, pos, blockEntity);
 		}
 		else {
 			var direction = blockEntity.getBumpDirection();
 			var x = center.getX() + direction.getOffsetX() * 0.75D;
 			var y = center.getY() + direction.getOffsetY() * 0.75D;
 			var z = center.getZ() + direction.getOffsetZ() * 0.75D;
-			ItemScatterer.spawn(world, x, y, z, stack);
+			for(int i = 0; i < blockEntity.size(); ++i) {
+				ItemScatterer.spawn(world, x, y, z, blockEntity.getStack(i));
+			}
 		}
-		blockEntity.setBumpConfig(config.withStack(null));
 		world.playSound(null, center.getX(), center.getY(), center.getZ(), MubbleSounds.BUMPABLE_BLOCK_LOOT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+		blockEntity.clear();
 	}
 }

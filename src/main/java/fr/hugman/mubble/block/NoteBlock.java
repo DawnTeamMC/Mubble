@@ -1,9 +1,9 @@
 package fr.hugman.mubble.block;
 
-import fr.hugman.mubble.block.bump.BumpConfig;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -23,12 +23,12 @@ import java.util.List;
  * @author Hugman
  * @since v4.0.0
  */
-public class NoteBlock extends MarioBumpableBlock {
+public class NoteBlock extends DecoratedBumpableBlock {
 	private final SoundEvent lowJumpSound;
 	private final SoundEvent highJumpSound;
 
 	public NoteBlock(SoundEvent lowJumpSound, SoundEvent highJumpSound, Settings settings) {
-		super(BumpConfig.NOTHING, settings);
+		super(ItemStack.EMPTY, null, settings);
 		this.lowJumpSound = lowJumpSound;
 		this.highJumpSound = highJumpSound;
 	}

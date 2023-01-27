@@ -1,29 +1,31 @@
 package fr.hugman.mubble.block;
 
-import fr.hugman.mubble.block.bump.BumpConfig;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.registry.MubbleSounds;
-import fr.hugman.mubble.registry.SuperMario;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 /**
- * Generic Super Mario bumpable block.
+ * Generic bumpable block with an additional sound effect when bumped.
+ * <p>It also launches entities on top of the block when bumped from the bottom.
+ *
  * @author haykam
  * @author Hugman
  * @since v4.0.0
  */
-public class MarioBumpableBlock extends BumpableBlock {
-	public MarioBumpableBlock(BumpConfig defaultBumpConfig, Settings settings) {
-		super(defaultBumpConfig, settings);
+public class DecoratedBumpableBlock extends BumpableBlock {
+	public DecoratedBumpableBlock(ItemStack defaultStack, @Nullable BlockState defaultBumpedState, Settings settings) {
+		super(defaultStack, defaultBumpedState, settings);
 	}
 
 	@Override
@@ -53,7 +55,7 @@ public class MarioBumpableBlock extends BumpableBlock {
 	 */
 	public void launchEntitiesOnTop(World world, BlockPos pos) {
 		List<Entity> entities = world.getOtherEntities(null, new Box(pos.up()));
-		for(Entity entity : entities ) {
+		for(Entity entity : entities) {
 			launchEntity(entity);
 		}
 	}
@@ -62,6 +64,6 @@ public class MarioBumpableBlock extends BumpableBlock {
 		Vec3d vec3d = entity.getVelocity();
 		entity.setVelocity(vec3d.x, 0.3D, vec3d.z);
 		entity.velocityDirty = true;
-		// TODO : add a gamerule for harming entities
+		// TODO: add a gamerule for harming entities
 	}
 }

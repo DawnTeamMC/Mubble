@@ -8,6 +8,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 //TODO: move this to the Dawn API
+
 /**
  * Represents blocks that can be hit physically. The hit method will be triggered by:
  * <ul>
@@ -16,8 +17,8 @@ import net.minecraft.world.World;
  * Projectile hits are not handled by this interface.
  *
  * @author Hugman
- * @since v4.0.0
  * @see Block#onProjectileHit
+ * @since v4.0.0
  */
 public interface HittableBlock {
 	void onHit(World world, BlockPos pos, BlockState state, Entity entity, BlockHitResult hit);

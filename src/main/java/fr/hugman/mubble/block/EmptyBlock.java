@@ -1,7 +1,6 @@
 package fr.hugman.mubble.block;
 
 import fr.hugman.mubble.registry.MubbleSounds;
-import fr.hugman.mubble.registry.SuperMario;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;

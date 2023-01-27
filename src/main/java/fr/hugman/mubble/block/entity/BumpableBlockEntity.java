@@ -1,15 +1,26 @@
 package fr.hugman.mubble.block.entity;
 
 import fr.hugman.mubble.block.BumpableBlock;
-import fr.hugman.mubble.block.bump.BumpConfig;
 import fr.hugman.mubble.registry.SuperMario;
+import fr.hugman.mubble.screen.BumpableBlockScreenHandler;
 import net.minecraft.SharedConstants;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventories;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
+import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.Text;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -24,53 +35,96 @@ import java.util.UUID;
  * @author haykam
  * @since v4.0.0
  */
-public class BumpableBlockEntity extends BlockEntity {
+public class BumpableBlockEntity extends LootableContainerBlockEntity {
 	public static final int ANIMATION_TICKS = SharedConstants.TICKS_PER_SECOND / 4;
 	public static final int PEAK_TICK = ANIMATION_TICKS / 2;
 
-	private static final String BUMP_CONFIG_KEY = "BumpConfig";
+	private static final String BUMPED_STATE_KEY = "BumpedState";
 	private static final String BUMP_TICKS_KEY = "BumpTicks";
 	private static final String BUMP_AUTHOR_KEY = "BumpAuthor";
 	private static final String BUMP_DIRECTION_KEY = "BumpDirection";
 
-	private @NotNull BumpConfig bumpConfig;
+	private DefaultedList<ItemStack> inventory;
+	private @Nullable BlockState bumpedState;
 	private int bumpTicks = -1;
-	private UUID bumpAuthorUuid;
-	private Entity bumpAuthor;
+	private @Nullable UUID bumpAuthorUuid;
+	private @Nullable Entity bumpAuthor;
 	private Direction bumpDirection = Direction.UP;
 
-	public BumpableBlockEntity(BlockPos pos, BlockState state) {
-		this(pos, state, BumpConfig.NOTHING);
+
+	private BumpableBlockEntity(BlockPos pos, BlockState state, DefaultedList<ItemStack> inventory) {
+		super(SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, pos, state);
+		this.inventory = inventory;
 	}
 
-	public BumpableBlockEntity(BlockPos pos, BlockState state, @NotNull BumpConfig bumpConfig) {
-		super(SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, pos, state);
-		this.bumpConfig = bumpConfig;
+	public BumpableBlockEntity(BlockPos pos, BlockState state) {
+		this(pos, state, DefaultedList.ofSize(1, ItemStack.EMPTY));
+	}
+
+	public BumpableBlockEntity(BlockPos pos, BlockState state, @NotNull ItemStack stack, @Nullable BlockState bumpedState) {
+		this(pos, state, DefaultedList.ofSize(1, stack));
+		this.bumpedState = bumpedState;
+	}
+
+	/*=======*/
+	/*  NBT  */
+	/*=======*/
+
+	@Override
+	protected void writeNbt(NbtCompound nbt) {
+		if(!this.serializeLootTable(nbt)) {
+			Inventories.writeNbt(nbt, this.inventory);
+		}
+		if(this.bumpedState != null) {
+			nbt.put(BUMPED_STATE_KEY, NbtHelper.fromBlockState(this.bumpedState));
+		}
+		if(this.bumpAuthorUuid != null) {
+			nbt.putUuid(BUMP_AUTHOR_KEY, this.bumpAuthorUuid);
+		}
+		this.writeClientNbt(nbt);
+	}
+
+	protected void writeClientNbt(NbtCompound nbt) {
+		nbt.putInt(BUMP_TICKS_KEY, this.bumpTicks);
+		nbt.putInt(BUMP_DIRECTION_KEY, this.bumpDirection.getId());
+	}
+
+	@Override
+	public void readNbt(NbtCompound nbt) {
+		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
+		if(!this.deserializeLootTable(nbt)) {
+			Inventories.readNbt(nbt, this.inventory);
+		}
+		if(this.world != null && nbt.contains(BUMPED_STATE_KEY)) {
+			RegistryWrapper<Block> registry = this.world.createCommandRegistryWrapper(RegistryKeys.BLOCK);
+			this.bumpedState = NbtHelper.toBlockState(registry, nbt.getCompound(BUMPED_STATE_KEY));
+		}
+
+		this.bumpTicks = Math.max(-1, nbt.getInt(BUMP_TICKS_KEY));
+		if(nbt.containsUuid(BUMP_AUTHOR_KEY)) {
+			this.bumpAuthorUuid = nbt.getUuid(BUMP_AUTHOR_KEY);
+		}
+		this.bumpDirection = Direction.byId(nbt.getInt(BUMP_DIRECTION_KEY));
+		if(this.bumpDirection == null) {
+			this.bumpDirection = Direction.UP;
+		}
 	}
 
 	/*=====================*/
 	/*  GETTERS & SETTERS  */
 	/*=====================*/
 
-	@NotNull
-	public BumpConfig getBumpConfig() {
-		return this.bumpConfig;
+	@Nullable
+	public BlockState getBumpedState() {
+		return bumpedState;
 	}
 
-	public void setBumpConfig(BumpConfig bumpConfig) {
-		this.bumpConfig = bumpConfig;
-		this.markDirty();
+	public void setBumpedState(@Nullable BlockState bumpedState) {
+		this.bumpedState = bumpedState;
 	}
 
 	public int getBumpTicks() {
 		return this.bumpTicks;
-	}
-
-	public void setBumpAuthor(@Nullable Entity entity) {
-		if(entity != null) {
-			this.bumpAuthorUuid = entity.getUuid();
-			this.bumpAuthor = entity;
-		}
 	}
 
 	@Nullable
@@ -85,6 +139,13 @@ public class BumpableBlockEntity extends BlockEntity {
 		return null;
 	}
 
+	public void setBumpAuthor(@Nullable Entity entity) {
+		if(entity != null) {
+			this.bumpAuthorUuid = entity.getUuid();
+			this.bumpAuthor = entity;
+		}
+	}
+
 	public Direction getBumpDirection() {
 		return this.bumpDirection;
 	}
@@ -92,6 +153,46 @@ public class BumpableBlockEntity extends BlockEntity {
 	public boolean isBumping() {
 		return this.bumpTicks >= 0 && this.bumpTicks <= BumpableBlockEntity.ANIMATION_TICKS;
 	}
+
+	@Override
+	protected Text getContainerName() {
+		return Text.translatable(getCachedState().getBlock().getTranslationKey());
+	}
+
+	@Override
+	protected DefaultedList<ItemStack> getInvStackList() {
+		return this.inventory;
+	}
+
+	@Override
+	protected void setInvStackList(DefaultedList<ItemStack> list) {
+		this.inventory = list;
+	}
+
+	@Override
+	public int size() {
+		return this.inventory.size();
+	}
+
+	/*========*/
+	/*  MENU  */
+	/*========*/
+
+	@Nullable
+	@Override
+	public ScreenHandler createMenu(int syncId, PlayerInventory playerInv, PlayerEntity player) {
+		return new BumpableBlockScreenHandler(syncId, playerInv, this);
+	}
+
+	@Override
+	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
+		return new BumpableBlockScreenHandler(syncId, playerInventory, this);
+	}
+
+
+	/*============*/
+	/*  BEHAVIOR  */
+	/*============*/
 
 	/**
 	 * Bumps the block.
@@ -112,10 +213,6 @@ public class BumpableBlockEntity extends BlockEntity {
 		}
 	}
 
-	/*============*/
-	/*  BEHAVIOR  */
-	/*============*/
-
 	public void tick(World world, BlockPos pos, BlockState state) {
 		if(isBumping()) this.bumpTicks++;
 
@@ -132,41 +229,6 @@ public class BumpableBlockEntity extends BlockEntity {
 				this.markDirty();
 				bumpable.onBumpEnd(world, pos, state, this);
 			}
-		}
-	}
-
-	/*=======*/
-	/*  NBT  */
-	/*=======*/
-
-	protected void writeClientNbt(NbtCompound nbt) {
-		nbt.putInt(BUMP_TICKS_KEY, this.bumpTicks);
-		nbt.putInt(BUMP_DIRECTION_KEY, this.bumpDirection.getId());
-	}
-
-	@Override
-	protected void writeNbt(NbtCompound nbt) {
-		if(this.bumpConfig != null) {
-			nbt.put(BUMP_CONFIG_KEY, this.bumpConfig.toNbt());
-		}
-		if(this.bumpAuthorUuid != null) {
-			nbt.putUuid(BUMP_AUTHOR_KEY, this.bumpAuthorUuid);
-		}
-		this.writeClientNbt(nbt);
-	}
-
-	@Override
-	public void readNbt(NbtCompound nbt) {
-		this.bumpTicks = Math.max(-1, nbt.getInt(BUMP_TICKS_KEY));
-		if(nbt.contains(BUMP_CONFIG_KEY)) {
-			this.bumpConfig = BumpConfig.fromNbt(nbt.getCompound(BUMP_CONFIG_KEY), this.world);
-		}
-		if(nbt.containsUuid(BUMP_AUTHOR_KEY)) {
-			this.bumpAuthorUuid = nbt.getUuid(BUMP_AUTHOR_KEY);
-		}
-		this.bumpDirection = Direction.byId(nbt.getInt(BUMP_DIRECTION_KEY));
-		if(this.bumpDirection == null) {
-			this.bumpDirection = Direction.UP;
 		}
 	}
 
