@@ -4,6 +4,7 @@ import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.VertexConsumer;
@@ -37,17 +38,23 @@ public class BumpableBlockEntityRenderer implements BlockEntityRenderer<Bumpable
 		BlockPos pos = entity.getPos();
 
 		BlockState state = entity.getCachedState();
+		boolean fancy = MinecraftClient.isFancyGraphicsOrBetter();
 
-		if(!entity.isBumping()) {
+		if(!fancy && !entity.isBumping()) {
 			return;
 		}
 
 		matrices.push();
 
-		// Transformations
-		float bumpTicks = Math.min(entity.getBumpTicks() + tickDelta, BumpableBlockEntity.ANIMATION_TICKS);
-		this.applyTransformations(matrices, bumpTicks, entity.getBumpDirection().getVector());
-		VertexConsumer buffer = vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(state));
+		VertexConsumer buffer;
+		if(entity.isBumping()) {
+			buffer = vertexConsumers.getBuffer(RenderLayers.getMovingBlockLayer(state));
+			float bumpTicks = Math.min(entity.getBumpTicks() + tickDelta, BumpableBlockEntity.ANIMATION_TICKS);
+			this.applyTransformations(matrices, bumpTicks, entity.getBumpDirection().getVector());
+		}
+		else {
+			buffer = vertexConsumers.getBuffer(RenderLayers.getBlockLayer(state));
+		}
 
 		// Get parameters
 		BakedModel model = this.renderManager.getModel(state);

@@ -3,6 +3,8 @@ package fr.hugman.mubble.block;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.registry.MubbleSounds;
 import fr.hugman.mubble.registry.SuperMario;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -10,13 +12,11 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.HopperBlockEntity;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.stat.Stats;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
@@ -90,10 +90,10 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 		if(!player.getStackInHand(hand).isIn(SuperMario.CAN_OPEN_BUMPABLE_BLOCKS)) {
 			return ActionResult.PASS;
 		}
-		if (world.isClient) {
+		if(world.isClient) {
 			return ActionResult.SUCCESS;
 		}
-		if (world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpableEntity) {
+		if(world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpableEntity) {
 			player.openHandledScreen(bumpableEntity);
 			// TODO: add stat for inspecting bumpable blocks
 			//player.incrementStat(Stats.INSPECT_HOPPER);
@@ -106,7 +106,9 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 	/*=============*/
 
 	@Override
+	@Environment(EnvType.CLIENT)
 	public BlockRenderType getRenderType(BlockState state) {
+		if(MinecraftClient.isFancyGraphicsOrBetter()) return BlockRenderType.ENTITYBLOCK_ANIMATED;
 		return state.get(BUMPING) ? BlockRenderType.ENTITYBLOCK_ANIMATED : BlockRenderType.MODEL;
 	}
 
