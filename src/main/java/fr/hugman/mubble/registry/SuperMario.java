@@ -81,6 +81,8 @@ public class SuperMario {
 				entries.add(SuperMario.NOTE_BLOCK);
 				entries.add(SuperMario.EXCLAMATION_BLOCK);
 				entries.add(SuperMario.SNAKE_BLOCK);
+				entries.add(SuperMario.FAST_SNAKE_BLOCK);
+				entries.add(SuperMario.SLOW_SNAKE_BLOCK);
 				entries.add(SuperMario.RED_BEEP_BLOCK);
 				entries.add(SuperMario.BLUE_BEEP_BLOCK);
 				entries.add(SuperMario.CAPE_FEATHER);
