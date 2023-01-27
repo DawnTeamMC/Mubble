@@ -37,6 +37,8 @@ public class SuperMario {
 	public static final NoteBlock NOTE_BLOCK = new NoteBlock(MubbleSounds.NOTE_BLOCK_JUMP_LOW, MubbleSounds.NOTE_BLOCK_JUMP_HIGH, DawnBlockSettings.copy(Blocks.QUARTZ_BLOCK).mapColor(MapColor.WHITE).item());
 	public static final DecoratedBumpableBlock EXCLAMATION_BLOCK = new DecoratedBumpableBlock(ItemStack.EMPTY, null, DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BLUE).item());
 	public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
+	public static final SnakeBlock FAST_SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LAPIS_BLUE).item());
+	public static final SnakeBlock SLOW_SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.RED).item());
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
 
@@ -56,6 +58,8 @@ public class SuperMario {
 		r.add("note_block", NOTE_BLOCK);
 		r.add("exclamation_block", EXCLAMATION_BLOCK);
 		r.add("snake_block", SNAKE_BLOCK);
+		r.add("fast_snake_block", FAST_SNAKE_BLOCK);
+		r.add("slow_snake_block", SLOW_SNAKE_BLOCK);
 		r.add("red_beep_block", RED_BEEP_BLOCK);
 		r.add("blue_beep_block", BLUE_BEEP_BLOCK);
 

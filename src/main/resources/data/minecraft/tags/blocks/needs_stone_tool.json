@@ -8,6 +8,8 @@
     "mubble:gold_block",
     "mubble:note_block",
     "mubble:snake_block",
+    "mubble:fast_snake_block",
+    "mubble:slow_snake_block",
     "mubble:red_beep_block",
     "mubble:blue_beep_block"
   ]

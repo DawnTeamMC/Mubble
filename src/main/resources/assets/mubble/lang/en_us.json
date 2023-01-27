@@ -10,9 +10,10 @@
   "block.mubble.gold_block": "Gold Block",
   "block.mubble.note_block": "Note Block",
   "block.mubble.snake_block": "Snake Block",
+  "block.mubble.fast_snake_block": "Fast Snake Block",
+  "block.mubble.slow_snake_block": "Slow Snake Block",
   "block.mubble.red_beep_block": "Red Beep Block",
   "block.mubble.blue_beep_block": "Blue Beep Block",
-  "block.mubble.bumped_block": "Bumped Block",
 
   "item.mubble.cape_feather": "Cape Feather",
   "item.mubble.super_cape_feather": "Super Cape Feather",

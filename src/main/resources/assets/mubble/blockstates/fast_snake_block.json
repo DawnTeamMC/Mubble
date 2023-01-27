@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "mubble:block/fast_snake_block"
+    }
+  }
+}

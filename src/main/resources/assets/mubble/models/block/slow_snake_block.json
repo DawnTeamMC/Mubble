@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "mubble:block/snake_block/slow/side",
+    "end": "mubble:block/snake_block/slow/end"
+  }
+}
