@@ -3,6 +3,8 @@
 
   "item_group.mubble.super_mario": "Super Mario",
 
+  "item.mubble.maker_glove": "Maker Glove",
+
   "block.mubble.question_block": "? Block",
   "block.mubble.exclamation_block": "! Block",
   "block.mubble.empty_block": "Empty Block",

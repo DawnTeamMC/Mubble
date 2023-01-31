@@ -29,6 +29,9 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Rarity;
 
 public class SuperMario {
+	// ITEMS
+	public static final Item MAKER_GLOVE = new Item(new DawnItemSettings().maxCount(1));
+
 	// BLOCKS
 	public static final EmptyBlock EMPTY_BLOCK = new EmptyBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
 	public static final DecoratedBumpableBlock QUESTION_BLOCK = new DecoratedBumpableBlock(new ItemStack(Items.GOLD_NUGGET), EMPTY_BLOCK.getDefaultState(), DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
@@ -51,6 +54,8 @@ public class SuperMario {
 	public static final CapeFeatherItem SUPER_CAPE_FEATHER = new CapeFeatherItem(new Item.Settings().rarity(Rarity.EPIC), true);
 
 	public static void init(Registrar r) {
+		r.add("maker_glove", MAKER_GLOVE);
+
 		r.add("empty_block", EMPTY_BLOCK);
 		r.add("question_block", QUESTION_BLOCK);
 		r.add("brick_block", BRICK_BLOCK);
@@ -74,6 +79,7 @@ public class SuperMario {
 			.displayName(Text.translatable("item_group.mubble.super_mario"))
 			.icon(() -> new ItemStack(SuperMario.QUESTION_BLOCK))
 			.entries((enabledFeatures, entries, operatorEnabled) -> {
+				entries.add(SuperMario.MAKER_GLOVE);
 				entries.add(SuperMario.QUESTION_BLOCK);
 				entries.add(SuperMario.EMPTY_BLOCK);
 				entries.add(SuperMario.BRICK_BLOCK);

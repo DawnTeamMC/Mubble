@@ -12,10 +12,14 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -87,7 +91,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 
 	@Override
 	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if(!player.getStackInHand(hand).isIn(SuperMario.CAN_OPEN_BUMPABLE_BLOCKS)) {
+		if(!player.getStackInHand(hand).isOf(SuperMario.MAKER_GLOVE)) {
 			return ActionResult.PASS;
 		}
 		if(world.isClient) {
@@ -99,6 +103,36 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 			//player.incrementStat(Stats.INSPECT_HOPPER);
 		}
 		return ActionResult.CONSUME;
+	}
+
+	@Override
+	public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
+		if(stack.hasCustomName() && world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpable) {
+			bumpable.setCustomName(stack.getName());
+		}
+	}
+
+	@Override
+	public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+		if (state.isOf(newState.getBlock())) {
+			return;
+		}
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (blockEntity instanceof BumpableBlockEntity bumpable) {
+			ItemScatterer.spawn(world, pos, bumpable);
+			world.updateComparators(pos, this);
+		}
+		super.onStateReplaced(state, world, pos, newState, moved);
+	}
+
+	@Override
+	public boolean hasComparatorOutput(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
+		return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
 	}
 
 	/*=============*/
