@@ -1,31 +1,39 @@
 package fr.hugman.mubble.screen;
 
+import fr.hugman.mubble.block.BumpableDropMode;
+import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.registry.SuperMario;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.ArrayPropertyDelegate;
+import net.minecraft.screen.LecternScreenHandler;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
-public class BumpableBlockScreenHandler extends ScreenHandler {
+public class BumpableScreenHandler extends ScreenHandler {
 	private final Inventory inventory;
+	private final PropertyDelegate propertyDelegate;
 
-	public BumpableBlockScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, new SimpleInventory(1));
+	public BumpableScreenHandler(int syncId, PlayerInventory playerInventory) {
+		this(syncId, playerInventory, new SimpleInventory(1), new ArrayPropertyDelegate(1));
 	}
 
-	public BumpableBlockScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory) {
+	public BumpableScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
 		super(SuperMario.BUMPABLE_BLOCK_SCREEN_HANDLER, syncId);
+		ScreenHandler.checkSize(inventory, 1);
+		ScreenHandler.checkDataCount(propertyDelegate, 1);
 		this.inventory = inventory;
-		ScreenHandler.checkSize(this.inventory, 1);
+		this.propertyDelegate = propertyDelegate;
 		this.inventory.onOpen(playerInventory.player);
 
 		// block inventory
-		this.addSlot(new Slot(inventory, 0, 8 + 4 * 18, 20));
+		this.addSlot(new Slot(inventory, 0, 26, 18));
 
-		int playerInventoryOffset = 51;
+		int playerInventoryOffset = 52;
 
 		// player inventory
 		for(int line = 0; line < 3; line++) {
@@ -37,6 +45,8 @@ public class BumpableBlockScreenHandler extends ScreenHandler {
 		for(int column = 0; column < 9; column++) {
 			this.addSlot(new Slot(playerInventory, column, 8 + column * 18, playerInventoryOffset + 58));
 		}
+
+		this.addProperties(propertyDelegate);
 	}
 
 	@Override
@@ -64,6 +74,28 @@ public class BumpableBlockScreenHandler extends ScreenHandler {
 		return this.inventory.canPlayerUse(player);
 	}
 
+	@Override
+	public boolean onButtonClick(PlayerEntity player, int id) {
+		if(id == 0) {
+			this.setDropMode(this.getDropMode().next());
+			return true;
+		}
+		return false;
+	}
+
+	public void setDropMode(BumpableDropMode mode) {
+		this.setProperty(0, mode.getIndex());
+	}
+
+	public BumpableDropMode getDropMode() {
+		return BumpableDropMode.get(this.propertyDelegate.get(0));
+	}
+
+	@Override
+	public void setProperty(int id, int value) {
+		super.setProperty(id, value);
+		this.sendContentUpdates();
+	}
 
 	@Override
 	public void close(PlayerEntity player) {

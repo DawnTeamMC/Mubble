@@ -28,5 +28,10 @@
   "subtitles.mubble.block.note_block.jump": "Note Block used",
   "subtitles.mubble.item.cape_feather.use": "Cape Feather used",
 
-  "gamerule.beepBlockCooldown": "Beep Block cooldown"
+  "gamerule.beepBlockCooldown": "Beep Block cooldown",
+
+  "bumpable.drop.all": "Drop all",
+  "bumpable.drop.all.description": "The block will drop the entire stack when bumped",
+  "bumpable.drop.one": "Drop one",
+  "bumpable.drop.one.description": "The block will drop one item per bump"
 }

@@ -12,12 +12,12 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
@@ -181,7 +181,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 			if(blockEntity.getBumpedState() != null && blockEntity.getBumpedState().isAir()) {
 				Vec3d center = blockEntity.getPos().toCenterPos();
 
-				this.loot(world, pos, state, blockEntity);
+				this.loot(world, pos, state, blockEntity, true);
 				world.breakBlock(blockEntity.getPos(), false);
 				world.playSound(null, center.getX(), center.getY(), center.getZ(), MubbleSounds.BUMPABLE_BLOCK_DESTROY, SoundCategory.BLOCKS, 1.0F, 1.0F);
 			}
@@ -195,17 +195,19 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 		if(world != null && !world.isClient()) {
 			if(blockEntity.getBumpedState() != null && blockEntity.getBumpedState().isAir()) {
 				// this should never happen since it already happened in onBumpMiddle
+				this.loot(world, pos, state, blockEntity, true);
 				world.breakBlock(blockEntity.getPos(), false);
 				return;
 			}
 			var newState = blockEntity.getBumpedState();
 			if(newState != null) {
+				this.loot(world, pos, state, blockEntity, false);
 				world.setBlockState(pos, newState);
 			}
 			else {
+				this.loot(world, pos, state, blockEntity, false);
 				world.setBlockState(pos, state.with(BUMPING, false));
 			}
-			this.loot(world, pos, state, blockEntity);
 		}
 	}
 
@@ -224,25 +226,44 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 		});
 	}
 
-	public void loot(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+	public void loot(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity, boolean atCenter) {
 		if(blockEntity.isEmpty()) {
 			return;
 		}
-		var actualState = world.getBlockState(pos);
 		var center = pos.toCenterPos();
-		if(actualState.isAir()) {
-			ItemScatterer.spawn(world, pos, blockEntity);
+		BumpableDropMode dropMode = blockEntity.getDropMode();
+		if(atCenter) {
+			switch(dropMode) {
+				case ALL -> ItemScatterer.spawn(world, pos, blockEntity);
+				case ONE -> {
+					var stack = blockEntity.getStack(0);
+					stack.decrement(1);
+					ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), stack.copyWithCount(1));
+				}
+			}
 		}
 		else {
 			var direction = blockEntity.getBumpDirection();
 			var x = center.getX() + direction.getOffsetX() * 0.75D;
 			var y = center.getY() + direction.getOffsetY() * 0.75D;
 			var z = center.getZ() + direction.getOffsetZ() * 0.75D;
-			for(int i = 0; i < blockEntity.size(); ++i) {
-				ItemScatterer.spawn(world, x, y, z, blockEntity.getStack(i));
+
+			switch(dropMode) {
+				case ALL -> {
+					for(int i = 0; i < blockEntity.size(); ++i) {
+						ItemScatterer.spawn(world, x, y, z, blockEntity.getStack(i));
+					}
+				}
+				case ONE -> {
+					var stack = blockEntity.getStack(0);
+					stack.decrement(1);
+					ItemScatterer.spawn(world, x, y, z, stack.copyWithCount(1));
+				}
 			}
 		}
 		world.playSound(null, center.getX(), center.getY(), center.getZ(), MubbleSounds.BUMPABLE_BLOCK_LOOT, SoundCategory.BLOCKS, 1.0F, 1.0F);
-		blockEntity.clear();
+		if(blockEntity.size() <= 0) {
+			blockEntity.clear();
+		}
 	}
 }
