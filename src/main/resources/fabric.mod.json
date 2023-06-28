@@ -29,8 +29,8 @@
 		"mubble.mixins.json"
 	],
 	"depends": {
-		"minecraft": "1.19.3",
-		"dawn": ">=4.0.0",
+		"minecraft": "1.20.x",
+		"dawn": ">=5.0.0",
 		"fabric-api": "*"
 	},
 	"custom": {

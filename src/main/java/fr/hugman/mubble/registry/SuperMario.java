@@ -3,6 +3,7 @@ package fr.hugman.mubble.registry;
 import fr.hugman.dawn.DawnFactory;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
+import fr.hugman.dawn.item.DawnItemSettings;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.BeepBlock;
 import fr.hugman.mubble.block.EmptyBlock;
@@ -23,7 +24,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Rarity;
@@ -45,13 +49,16 @@ public class SuperMario {
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
 
-	public static final ScreenHandlerType<BumpableBlockScreenHandler> BUMPABLE_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableBlockScreenHandler::new);
+	public static final ScreenHandlerType<BumpableBlockScreenHandler> BUMPABLE_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableBlockScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
 	public static final BlockEntityType<BumpableBlockEntity> BUMPABLE_BLOCK_ENTITY_TYPE =
 			FabricBlockEntityTypeBuilder.create(BumpableBlockEntity::new, QUESTION_BLOCK, BRICK_BLOCK, GOLD_BLOCK, NOTE_BLOCK, EXCLAMATION_BLOCK).build();
 	public static final TagKey<Item> CAN_OPEN_BUMPABLE_BLOCKS = DawnFactory.itemTag(Mubble.id("can_open_bumpable_blocks"));
 
 	public static final CapeFeatherItem CAPE_FEATHER = new CapeFeatherItem(new Item.Settings(), false);
 	public static final CapeFeatherItem SUPER_CAPE_FEATHER = new CapeFeatherItem(new Item.Settings().rarity(Rarity.EPIC), true);
+
+	// ITEM GROUP
+	public static final RegistryKey<ItemGroup> ITEM_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, Mubble.id("super_mario"));
 
 	public static void init(Registrar r) {
 		r.add("maker_glove", MAKER_GLOVE);
@@ -73,26 +80,30 @@ public class SuperMario {
 
 		r.add("cape_feather", CAPE_FEATHER);
 		r.add("super_cape_feather", SUPER_CAPE_FEATHER);
+
+		appendItemGroups();
 	}
 
-	public static final ItemGroup GROUP = FabricItemGroup.builder(Mubble.id("super_mario"))
-			.displayName(Text.translatable("item_group.mubble.super_mario"))
-			.icon(() -> new ItemStack(SuperMario.QUESTION_BLOCK))
-			.entries((enabledFeatures, entries, operatorEnabled) -> {
-				entries.add(SuperMario.MAKER_GLOVE);
-				entries.add(SuperMario.QUESTION_BLOCK);
-				entries.add(SuperMario.EMPTY_BLOCK);
-				entries.add(SuperMario.BRICK_BLOCK);
-				entries.add(SuperMario.GOLD_BLOCK);
-				entries.add(SuperMario.NOTE_BLOCK);
-				entries.add(SuperMario.EXCLAMATION_BLOCK);
-				entries.add(SuperMario.SNAKE_BLOCK);
-				entries.add(SuperMario.FAST_SNAKE_BLOCK);
-				entries.add(SuperMario.SLOW_SNAKE_BLOCK);
-				entries.add(SuperMario.RED_BEEP_BLOCK);
-				entries.add(SuperMario.BLUE_BEEP_BLOCK);
-				entries.add(SuperMario.CAPE_FEATHER);
-				entries.add(SuperMario.SUPER_CAPE_FEATHER);
-			})
-			.build();
+	public static void appendItemGroups() {
+		Registry.register(Registries.ITEM_GROUP, ITEM_GROUP, FabricItemGroup.builder()
+				.displayName(Text.translatable("item_group.mubble.super_mario"))
+				.icon(() -> new ItemStack(SuperMario.QUESTION_BLOCK))
+				.entries((displayContext, entries) -> {
+					entries.add(SuperMario.MAKER_GLOVE);
+					entries.add(SuperMario.QUESTION_BLOCK);
+					entries.add(SuperMario.EMPTY_BLOCK);
+					entries.add(SuperMario.BRICK_BLOCK);
+					entries.add(SuperMario.GOLD_BLOCK);
+					entries.add(SuperMario.NOTE_BLOCK);
+					entries.add(SuperMario.EXCLAMATION_BLOCK);
+					entries.add(SuperMario.SNAKE_BLOCK);
+					entries.add(SuperMario.FAST_SNAKE_BLOCK);
+					entries.add(SuperMario.SLOW_SNAKE_BLOCK);
+					entries.add(SuperMario.RED_BEEP_BLOCK);
+					entries.add(SuperMario.BLUE_BEEP_BLOCK);
+					entries.add(SuperMario.CAPE_FEATHER);
+					entries.add(SuperMario.SUPER_CAPE_FEATHER);
+				})
+				.build());
+	}
 }
