@@ -9,27 +9,12 @@
 [![Discord user count](https://img.shields.io/discord/504608980799062036.svg?logoColor=FFFFFF&logo=discord&color=7289DA&style=flat-square)](https://discord.gg/8ksTVJu)
 [![Twitter followers](https://img.shields.io/twitter/follow/DawnTeamMC.svg?logo=twitter&label=twitter&style=flat-square)](https://twitter.com/DawnTeamMC)
 
-Mubble is a mod for Minecraft 1.16 that adds a ton of features to the game related to pop culture. It is the ultimate crossover mod for Minecraft, but is mainly focused on Nintendo content.  
-**⚠ Mubble is outdated and will be split into multiple mods for each pop culture universe in 2022. ⚠**
+Mubble is a mod for the latest version of Minecraft that adds a ton of features to the game related to pop culture. It is the ultimate crossover mod, mainly focusing on Nintendo licenses.
 
 **You can visit the [official website for Mubble for more information](https://dawnteammc.github.io/mubble).**
 
 ## 👾 Features
-- Super Mario Maker 2 content, such as ? blocks, empty blocks, ground blocks, brick blocks, note blocks, doors, key doors and way more!
-- Flowers from Super Mario
-- Tetris blocks
-- Vampire stone, Medusa's stone and bricks from Castlevania
-- Sonic blocks, such as green hill grass and springs
-- Press garden from Sonic
-- Scarlet forest from Deltarune
-- Puyos
-- Virtual googles that alter your vision with a retro style
-- Caps and crown costumes from Super Mario
-- Many other costumes from different franchises
-- Toads and Goombas
-- The fireball and iceball from Super Mario
-- Coins from Super Mario
-- Lightsabers from Star Wars
+Work in progress!
 
 ## 📦 Download
 We use [CurseForge](https://www.curseforge.com/minecraft/mc-mods/mubble) and [Modrinth](https://modrinth.com/mod/mubble) to publish **stable builds** of Mubble for Minecraft.
@@ -41,7 +26,6 @@ You can download the latest stable builds from both pages without signing up for
 
 - Fabric API: [GitHub](https://github.com/FabricMC/fabric) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/fabric-api) / [Modrinth](https://modrinth.com/mod/fabric-api)
 - Dawn API: [GitHub](https://github.com/DawnTeamMC/DawnAPI) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/dawn) / [Modrinth](https://modrinth.com/mod/dawn)
-- Trinkets: [GitHub](https://github.com/emilyploszaj/trinkets) / [CurseForge](https://www.curseforge.com/minecraft/mc-mods/trinkets-fabric)
 
 ## 🐛 Reporting bugs
 If you're running into bugs or other problems, feel free to open an issue on our [issue tracker](https://github.com/DawnTeamMC/Mubble/issues).
