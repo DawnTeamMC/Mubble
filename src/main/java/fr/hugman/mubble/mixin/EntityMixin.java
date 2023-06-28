@@ -25,7 +25,7 @@ public class EntityMixin {
 	@Inject(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;setPosition(DDD)V", ordinal = 1))
 	private void mubble$move(MovementType type, Vec3d movement, CallbackInfo ci) {
 		Entity thisEntity = (Entity) (Object) this;
-		World world = thisEntity.world;
+		World world = thisEntity.getWorld();
 		Vec3d vec3d = this.adjustMovementForCollisions(movement);
 		if(vec3d != null && vec3d.getY() > 0) {
 			Vec3d headPos = thisEntity.getPos().add(0, thisEntity.getHeight(), 0);

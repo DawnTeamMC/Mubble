@@ -1,9 +1,9 @@
 {
 	"schemaVersion": 1,
-	"name": "${mod_name}",
-	"id": "${mod_id}",
+	"name": "Mubble",
+	"id": "mubble",
 	"version": "${version}",
-	"icon": "assets/${mod_id}/textures/logo.png",
+	"icon": "assets/mubble/textures/logo.png",
 	"authors": [
 		"Hugman",
 		"Napero"
@@ -12,9 +12,9 @@
 		"Yanis48"
 	],
 	"contact": {
-		"homepage": "https://dawnteammc.github.io/${mod_id}",
-		"sources": "https://github.com/DawnTeamMC/${github_name}",
-		"issues": "https://github.com/DawnTeamMC/${github_name}/issues"
+		"homepage": "https://dawnteammc.github.io/mubble",
+		"sources": "https://github.com/DawnTeamMC/Mubble",
+		"issues": "https://github.com/DawnTeamMC/Mubble/issues"
 	},
 	"environment": "*",
 	"entrypoints": {
@@ -29,25 +29,33 @@
 		"mubble.mixins.json"
 	],
 	"depends": {
-		"minecraft": "*",
-		"fabric": "*",
-		"dawn": "*"
+		"minecraft": "1.20.x",
+		"dawn": ">=5.0.0",
+		"fabric-api": "*"
 	},
 	"custom": {
 		"modmenu": {
 			"links": {
 				"modmenu.twitter": "https://twitter.com/DawnTeamMC",
 				"modmenu.discord": "https://discord.gg/8ksTVJu",
-				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/${curseforge_slug}",
-				"modmenu.modrinth": "https://modrinth.com/mod/${modrinth_slug}",
-				"modmenu.github_releases": "https://github.com/DawnTeamMC/${github_name}/releases/",
+				"modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/mubble",
+				"modmenu.modrinth": "https://modrinth.com/mod/mubble",
+				"modmenu.github_releases": "https://github.com/DawnTeamMC/Mubble/releases/",
 				"modmenu.crowdin": "https://crowdin.com/project/dawnteam",
-				"modmenu.wiki": "https://github.com/DawnTeamMC/${github_name}/wiki/"
+				"modmenu.wiki": "https://github.com/DawnTeamMC/Mubble/wiki/"
 			}
 		},
 		"modupdater": {
 			"strategy": "curseforge",
 			"projectID": 390135
+		},
+		"mc-publish": {
+			"curseforge": 390135,
+			"modrinth": "k2LrJU0X",
+			"loaders": [
+				"fabric",
+				"quilt"
+			]
 		}
 	},
 	"license": "LGPL v3.0"
