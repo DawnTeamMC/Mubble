@@ -30,8 +30,8 @@
 
   "gamerule.beepBlockCooldown": "Beep Block cooldown",
 
-  "bumpable.drop.all": "Drop all",
-  "bumpable.drop.all.description": "The block will drop the entire stack when bumped",
-  "bumpable.drop.one": "Drop one",
-  "bumpable.drop.one.description": "The block will drop one item per bump"
+  "block.mubble.bumpable.drop.all": "Drop all",
+  "block.mubble.bumpable.drop.all.description": "The block will drop the entire item stack when bumped",
+  "block.mubble.bumpable.drop.one": "Drop one",
+  "block.mubble.bumpable.drop.one.description": "The block will drop one item per bump"
 }

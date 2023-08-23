@@ -7,6 +7,7 @@ import fr.hugman.mubble.screen.BumpableScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.enums.StructureBlockMode;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.LecternScreen;
 import net.minecraft.client.gui.tooltip.Tooltip;
@@ -30,18 +31,18 @@ public class BumpableScreen extends HandledScreen<BumpableScreenHandler> {
 	public BumpableScreen(BumpableScreenHandler handler, PlayerInventory inventory, Text title) {
 		super(handler, inventory, title);
 
-		this.passEvents = false;
 		this.backgroundHeight = 134;
 		this.playerInventoryTitleY = this.backgroundHeight - 94;
 
-		handler.addListener(new ScreenHandlerListener(){
+		handler.addListener(new ScreenHandlerListener() {
 			@Override
 			public void onSlotUpdate(ScreenHandler handler, int slotId, ItemStack stack) {}
 
 			@Override
 			public void onPropertyUpdate(ScreenHandler handler, int property, int value) {
-				if (property == 0) {
-					BumpableScreen.this.updateMode();
+				switch (property) {
+					case 0 -> BumpableScreen.this.updateMode();
+					case 1 -> BumpableScreen.this.updateModeLock();
 				}
 			}
 		});
@@ -57,6 +58,7 @@ public class BumpableScreen extends HandledScreen<BumpableScreenHandler> {
 				.dimensions(backgroundX + 51, backgroundY + 16, 100, 20)
 				.tooltip(Tooltip.of(mode.getDescription()))
 				.build();
+		this.button.active = !this.handler.isDropModeLocked();
 		this.addDrawableChild(this.button);
 	}
 
@@ -65,20 +67,19 @@ public class BumpableScreen extends HandledScreen<BumpableScreenHandler> {
 	}
 
 	@Override
-	public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-		this.renderBackground(matrices);
-		super.render(matrices, mouseX, mouseY, delta);
-		this.drawMouseoverTooltip(matrices, mouseX, mouseY);
+	public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+		this.renderBackground(context);
+		super.render(context, mouseX, mouseY, delta);
+		this.drawMouseoverTooltip(context, mouseX, mouseY);
 	}
 
 	@Override
-	protected void drawBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
+	protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
 		RenderSystem.setShader(GameRenderer::getPositionTexProgram);
 		RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
-		RenderSystem.setShaderTexture(0, TEXTURE);
 		int i = (this.width - this.backgroundWidth) / 2;
 		int j = (this.height - this.backgroundHeight) / 2;
-		this.drawTexture(matrices, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
+		context.drawTexture(TEXTURE, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
 	}
 
 	@Override
@@ -90,6 +91,10 @@ public class BumpableScreen extends HandledScreen<BumpableScreenHandler> {
 		BumpableDropMode mode = this.handler.getDropMode();
 		this.button.setMessage(mode.getName());
 		this.button.setTooltip(Tooltip.of(mode.getDescription()));
+	}
+
+	void updateModeLock() {
+		this.button.active = !this.handler.isDropModeLocked();
 	}
 
 	private void finishEditing() {

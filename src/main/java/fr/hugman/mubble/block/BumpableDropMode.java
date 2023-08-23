@@ -5,8 +5,7 @@ import net.minecraft.util.StringIdentifiable;
 
 public enum BumpableDropMode implements StringIdentifiable {
 	ALL(0, "all"),
-	ONE(1, "one"),
-	FORCED_ALL(2, "all");
+	ONE(1, "one");
 
 	public static final Codec<BumpableDropMode> CODEC = StringIdentifiable.createCodec(BumpableDropMode::values);
 	private final int index;
@@ -17,8 +16,8 @@ public enum BumpableDropMode implements StringIdentifiable {
 	BumpableDropMode(int index, String id) {
 		this.index = index;
 		this.id = id;
-		this.name = Text.translatable("bumpable.drop." + id);
-		this.description = Text.translatable("bumpable.drop." + id + ".description");
+		this.name = Text.translatable("block.mubble.bumpable.drop." + id);
+		this.description = Text.translatable("block.mubble.bumpable.drop." + id + ".description");
 	}
 
 	public static BumpableDropMode get(int index) {
@@ -40,14 +39,7 @@ public enum BumpableDropMode implements StringIdentifiable {
 	}
 
 	public BumpableDropMode next() {
-		if(this == FORCED_ALL) {
-			return this;
-		}
-		BumpableDropMode dropMode = get((index + 1) % values().length);
-		if(dropMode == FORCED_ALL) {
-			return get((index + 1) % values().length);
-		}
-		return dropMode;
+		return get((index + 1) % values().length);
 	}
 
 	public int getIndex() {

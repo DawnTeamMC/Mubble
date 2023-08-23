@@ -50,6 +50,7 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 
 	private DefaultedList<ItemStack> inventory;
 	private BumpableDropMode dropMode = BumpableDropMode.ALL;
+	private boolean dropModeLocked = false;
 	private @Nullable BlockState bumpedState;
 	private int bumpTicks = -1;
 	private @Nullable UUID bumpAuthorUuid;
@@ -59,19 +60,24 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 	private final PropertyDelegate propertyDelegate = new PropertyDelegate(){
 		@Override
 		public int get(int index) {
-			return index == 0 ? BumpableBlockEntity.this.dropMode.getIndex() : 0;
+			return switch(index) {
+				case 0 -> BumpableBlockEntity.this.dropMode.getIndex();
+				case 1 -> BumpableBlockEntity.this.dropModeLocked ? 1 : 0;
+				default -> 0;
+			};
 		}
 
 		@Override
 		public void set(int index, int value) {
-			if (index == 0) {
-				BumpableBlockEntity.this.dropMode = BumpableDropMode.get(value);
+			switch(index) {
+				case 0 -> BumpableBlockEntity.this.dropMode = BumpableDropMode.get(value);
+				case 1 -> BumpableBlockEntity.this.dropModeLocked = value == 1;
 			}
 		}
 
 		@Override
 		public int size() {
-			return 1;
+			return 2;
 		}
 	};
 
@@ -148,21 +154,20 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 		return dropMode;
 	}
 
-	public void setDropMode(@NotNull BumpableDropMode dropMode) {
-		if(canChangeDropMode()) {
-			this.dropMode = dropMode == BumpableDropMode.FORCED_ALL ? BumpableDropMode.ALL : dropMode;
-		}
-		else {
-			this.dropMode = BumpableDropMode.FORCED_ALL;
-		}
+	public void setDropMode(@NotNull BumpableDropMode dropMode, boolean locked) {
+		this.dropMode = dropMode;
+		this.dropModeLocked = locked;
 		this.markDirty();
 	}
 
-	public boolean canChangeDropMode() {
-		if(this.bumpedState == null) {
-			return true;
-		}
-		return !this.bumpedState.isAir();
+	public void setDropMode(@NotNull BumpableDropMode dropMode) {
+		this.dropMode = dropMode;
+		this.markDirty();
+	}
+
+	public void setDropModeLocked(boolean dropModeLocked) {
+		this.dropModeLocked = dropModeLocked;
+		this.markDirty();
 	}
 
 	@Nullable
@@ -172,15 +177,15 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 
 	public void setBumpedState(@Nullable BlockState bumpedState) {
 		this.bumpedState = bumpedState;
-		if(bumpedState != null && bumpedState.isAir()) {
-			this.setDropMode(BumpableDropMode.FORCED_ALL);
-		}
-		else {
-			if(this.getDropMode() == BumpableDropMode.FORCED_ALL) {
-				this.setDropMode(BumpableDropMode.ALL);
-			}
+		if(this.shouldBreak()) {
+			this.dropMode = BumpableDropMode.ALL;
+			this.dropModeLocked = true;
 		}
 		this.markDirty();
+	}
+
+	public boolean shouldBreak() {
+		return bumpedState != null && bumpedState.isAir();
 	}
 
 	public int getBumpTicks() {

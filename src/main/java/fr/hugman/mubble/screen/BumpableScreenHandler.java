@@ -19,13 +19,13 @@ public class BumpableScreenHandler extends ScreenHandler {
 	private final PropertyDelegate propertyDelegate;
 
 	public BumpableScreenHandler(int syncId, PlayerInventory playerInventory) {
-		this(syncId, playerInventory, new SimpleInventory(1), new ArrayPropertyDelegate(1));
+		this(syncId, playerInventory, new SimpleInventory(1), new ArrayPropertyDelegate(2));
 	}
 
 	public BumpableScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
 		super(SuperMario.BUMPABLE_BLOCK_SCREEN_HANDLER, syncId);
 		ScreenHandler.checkSize(inventory, 1);
-		ScreenHandler.checkDataCount(propertyDelegate, 1);
+		ScreenHandler.checkDataCount(propertyDelegate, 2);
 		this.inventory = inventory;
 		this.propertyDelegate = propertyDelegate;
 		this.inventory.onOpen(playerInventory.player);
@@ -77,6 +77,9 @@ public class BumpableScreenHandler extends ScreenHandler {
 	@Override
 	public boolean onButtonClick(PlayerEntity player, int id) {
 		if(id == 0) {
+			if(this.isDropModeLocked()) {
+				return true;
+			}
 			this.setDropMode(this.getDropMode().next());
 			return true;
 		}
@@ -89,6 +92,10 @@ public class BumpableScreenHandler extends ScreenHandler {
 
 	public BumpableDropMode getDropMode() {
 		return BumpableDropMode.get(this.propertyDelegate.get(0));
+	}
+
+	public boolean isDropModeLocked() {
+		return this.propertyDelegate.get(1) != 0;
 	}
 
 	@Override
