@@ -1,0 +1,64 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "mubble:block/ink"
+      },
+      "when": {
+        "down": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "mubble:block/ink",
+        "uvlock": true,
+        "x": 180
+      },
+      "when": {
+        "up": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "mubble:block/ink",
+        "uvlock": true,
+        "x": 270
+      },
+      "when": {
+        "north": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "mubble:block/ink",
+        "uvlock": true,
+        "x": 90
+      },
+      "when": {
+        "south": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "mubble:block/ink",
+        "uvlock": true,
+        "x": 90,
+        "y": 90
+      },
+      "when": {
+        "west": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "mubble:block/ink",
+        "uvlock": true,
+        "x": 90,
+        "y": 270
+      },
+      "when": {
+        "east": "true"
+      }
+    }
+  ]
+}

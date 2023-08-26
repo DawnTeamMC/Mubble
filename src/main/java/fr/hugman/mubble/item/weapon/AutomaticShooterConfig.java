@@ -1,16 +1,15 @@
-package fr.hugman.mubble.item.weapon.stats;
+package fr.hugman.mubble.item.weapon;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.codec.MubbleCodecs;
-import fr.hugman.mubble.item.weapon.AutomaticShooterItem;
-import fr.hugman.mubble.item.weapon.stats.bullet.ShooterBulletConfig;
+import fr.hugman.mubble.entity.projectile.ShooterInkBulletConfig;
 import fr.hugman.mubble.util.SplatConversions;
 
 /**
  * This class is used to store the configuration of an {@link AutomaticShooterItem}.
  *
- * <p>Here's how the object's fields are used:
+ * <p>Here's how the config's fields are used:
  * <ul>
  *   <li> The weapon will shoot a bullet every x ticks.
  *   <li> The shots will deviate from the center of the screen by a certain amount when standing, and by a (supposedly greater) amount when moving.
@@ -21,18 +20,18 @@ import fr.hugman.mubble.util.SplatConversions;
  */
 public class AutomaticShooterConfig {
 	public static final Codec<AutomaticShooterConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			ShooterBulletConfig.CODEC.fieldOf("bullet_config").forGetter(config -> config.bulletConfig),
+			ShooterInkBulletConfig.CODEC.fieldOf("ink_bullet_config").forGetter(config -> config.bulletConfig),
 			MubbleCodecs.NONNEGATIVE_LONG.fieldOf("cooldown").forGetter(config -> config.cooldown),
 			MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("angle_deviation").forGetter(config -> config.angleDeviation),
 			MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("jumping_angle_deviation").forGetter(config -> config.jumpingAngleDeviation)
-	).apply(instance, AutomaticShooterConfig::new));
+	).apply(instance, AutomaticShooterConfig::of));
 
-	private final ShooterBulletConfig bulletConfig;
+	private final ShooterInkBulletConfig bulletConfig;
 	private final long cooldown;
 	private final float angleDeviation;
 	private final float jumpingAngleDeviation;
 
-	private AutomaticShooterConfig(ShooterBulletConfig bulletConfig, long cooldown, float angleDeviation, float jumpingAngleDeviation) {
+	private AutomaticShooterConfig(ShooterInkBulletConfig bulletConfig, long cooldown, float angleDeviation, float jumpingAngleDeviation) {
 		this.bulletConfig = bulletConfig;
 		this.cooldown = cooldown;
 		this.angleDeviation = angleDeviation;
@@ -51,7 +50,7 @@ public class AutomaticShooterConfig {
 	 * @param angleDeviation        the angle deviation of the weapon, in degrees
 	 * @param jumpingAngleDeviation the angle deviation of the weapon while jumping, in degrees
 	 */
-	public static AutomaticShooterConfig of(ShooterBulletConfig bulletConfig, long cooldown, float angleDeviation, float jumpingAngleDeviation) {
+	public static AutomaticShooterConfig of(ShooterInkBulletConfig bulletConfig, long cooldown, float angleDeviation, float jumpingAngleDeviation) {
 		if(cooldown < 0) {
 			throw new IllegalArgumentException("Weapon cooldown must be non-negative.");
 		}
@@ -73,7 +72,8 @@ public class AutomaticShooterConfig {
 	 * @param jumpDegSwerve  the angle deviation of the weapon while jumping, in degrees
 	 * @param standDegSwerve the angle deviation of the weapon while standing, in degrees
 	 */
-	public static AutomaticShooterConfig ofSplat(ShooterBulletConfig bulletConfig, int repeatFrame, float jumpDegSwerve, float standDegSwerve) {
+	public static AutomaticShooterConfig ofSplat(ShooterInkBulletConfig bulletConfig, int repeatFrame, float jumpDegSwerve, float standDegSwerve) {
+		//TODO: the cooldown (RepeatFrame) seems to be missing from some weapon data (splattershot). Wiki mentions it is 6
 		return of(
 				bulletConfig,
 				SplatConversions.tps(repeatFrame),
@@ -86,7 +86,7 @@ public class AutomaticShooterConfig {
 	/*  GETTERS  */
 	/*===========*/
 
-	public ShooterBulletConfig bulletConfig() {
+	public ShooterInkBulletConfig bulletConfig() {
 		return bulletConfig;
 	}
 

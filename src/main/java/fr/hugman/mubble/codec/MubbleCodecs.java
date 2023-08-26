@@ -24,7 +24,7 @@ public class MubbleCodecs {
 			if(((Comparable) value).compareTo(min) >= 0 && ((Comparable) value).compareTo(max) <= 0) {
 				return DataResult.success(value);
 			}
-			return DataResult.error((String) messageFactory.apply(value));
+			return DataResult.error(() -> messageFactory.apply(value));
 		};
 	}
 }

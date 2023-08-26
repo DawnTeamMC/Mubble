@@ -3,8 +3,7 @@ package fr.hugman.mubble;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.mubble.registry.MubbleSounds;
 import fr.hugman.mubble.registry.SuperMario;
-import fr.hugman.mubble.registry.SplatoonContent;
-import fr.hugman.mubble.registry.SuperMarioContent;
+import fr.hugman.mubble.registry.Splatoon;
 import fr.hugman.mubble.world.MubbleGamerules;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
@@ -21,8 +20,7 @@ public class Mubble implements ModInitializer {
 		MubbleSounds.init();
 
 		SuperMario.init(REGISTRAR);
-		SuperMarioContent.init();
-		SplatoonContent.init();
+		Splatoon.init(REGISTRAR);
 	}
 
 	public static Identifier id(String path) {
