@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.codec.MubbleCodecs;
 import fr.hugman.mubble.entity.projectile.ShooterInkBulletConfig;
-import fr.hugman.mubble.util.SplatConversions;
+import fr.hugman.mubble.util.SplatoonConversions;
 
 /**
  * This class is used to store the configuration of an {@link AutomaticShooterItem}.
@@ -76,7 +76,7 @@ public class AutomaticShooterConfig {
 		//TODO: the cooldown (RepeatFrame) seems to be missing from some weapon data (splattershot). Wiki mentions it is 6
 		return of(
 				bulletConfig,
-				SplatConversions.tps(repeatFrame),
+				SplatoonConversions.time(repeatFrame),
 				standDegSwerve,
 				jumpDegSwerve
 		);

@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.codec.MubbleCodecs;
-import fr.hugman.mubble.util.SplatConversions;
+import fr.hugman.mubble.util.SplatoonConversions;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.DynamicRegistryManager;
@@ -115,21 +115,22 @@ public class ShooterInkBulletConfig {
      * @param valueMax                    the maximum damage of the bullet
      * @param valueMin                    the minimum damage of the bullet
      * @param goStraightStateEndMaxSpeed  the maximum speed of the bullet when braking, in units per second
-     * @param goStraightToBrakeStateFrame the tick at which the bullet brakes
+     * @param goStraightToBrakeStateFrame the frame at which the bullet brakes
      * @param spawnSpeed                  the initial speed of the bullet, in units per second
      * @param freeGravity                 the speed threshold at which the bullet will start to free fall after it braked, in units per second
      */
     public static ShooterInkBulletConfig ofSplat(int reduceEndFrame, int reduceStartFrame, int valueMax, int valueMin, float goStraightStateEndMaxSpeed, int goStraightToBrakeStateFrame, float spawnSpeed, float freeGravity) {
-        //TODO: calculate the straight line distance correctly
+        var brakeTick = SplatoonConversions.time(goStraightToBrakeStateFrame);
+        var initialSpeed = SplatoonConversions.distance(goStraightToBrakeStateFrame * spawnSpeed) / brakeTick;
         return of(
-                SplatConversions.damage(valueMax),
-                SplatConversions.damage(valueMin),
-                SplatConversions.tps(reduceStartFrame),
-                SplatConversions.tps(reduceEndFrame),
-                SplatConversions.unitsToBlocks(spawnSpeed),
-                SplatConversions.tps(goStraightToBrakeStateFrame),
-                SplatConversions.unitsToBlocks(goStraightStateEndMaxSpeed),
-                SplatConversions.unitsToBlocks(freeGravity)
+                SplatoonConversions.damage(valueMax),
+                SplatoonConversions.damage(valueMin),
+                SplatoonConversions.time(reduceStartFrame),
+                SplatoonConversions.time(reduceEndFrame),
+                initialSpeed,
+                brakeTick,
+                SplatoonConversions.speed(goStraightStateEndMaxSpeed),
+                SplatoonConversions.speed(freeGravity)
         );
     }
 

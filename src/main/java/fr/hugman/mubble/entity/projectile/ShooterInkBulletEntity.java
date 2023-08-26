@@ -26,7 +26,6 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
     public static final String LIFE_KEY = "life";
     public static final String CONFIG_KEY = "config";
     public static final String FREE_GRAVITY_KEY = "free_gravity";
-    public static final float GRAVITY = 0.03f;
 
     private int life;
     private boolean freeGravity;
@@ -173,6 +172,6 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
     public float getGravity() {
         // the high jump splatoon challenge mode has a different gravity I think
         // so we can change this later
-        return GRAVITY;
+        return 0.15f;
     }
 }
