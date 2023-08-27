@@ -99,17 +99,21 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
                 velocity = this.getVelocity();
                 this.setVelocity(velocity.x, velocity.y - this.getGravity(), velocity.z);
             }
+            /*
             if(!this.freeGravity) {
-                if(this.getSpeed() > this.config.freeGravityThreshold()) {
-                    var currentVel = this.getVelocity();
-                    boolean affectY = currentVel.y > 0;
+                var currentVel = this.getVelocity();
+                boolean ignoreY = currentVel.y < 0;
+                var speed = ignoreY ? this.getHorizontalSpeed() : this.getSpeed();
+                if(speed > this.config.freeGravityThreshold()) {
                     var newVel = this.getVelocity().multiply(0.36); // it seems arbitrary, but it's the same with all shooter weapons I checked so IDK
-                    this.setVelocity(newVel.x, affectY ? newVel.y : currentVel.y, newVel.z);
+                    this.setVelocity(newVel.x, ignoreY ? currentVel.y : newVel.y, newVel.z);
                 }
                 else {
                     this.freeGravity = true;
                 }
             }
+
+             */
         }
 
 
@@ -167,6 +171,10 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
 
     protected void setSpeed(double speed) {
         this.setVelocity(this.getVelocity().normalize().multiply(speed));
+    }
+
+    protected double getHorizontalSpeed() {
+        return Math.sqrt(this.getVelocity().x * this.getVelocity().x + this.getVelocity().z * this.getVelocity().z);
     }
 
     public float getGravity() {

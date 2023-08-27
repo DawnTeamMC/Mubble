@@ -19,7 +19,7 @@ import net.minecraft.SharedConstants;
  */
 public final class SplatoonConversions {
     public static final float TICK_RATIO = (float) SharedConstants.TICKS_PER_SECOND / 60;
-    public static final float DAMAGE_RATIO = 20.0F / 100.0f * 10;
+    public static final float DAMAGE_RATIO = 20.0F / (100 * 10);
     public static final float DISTANCE_RATIO = 1.0f / 10f;
     public static final float SPEED_RATIO = DISTANCE_RATIO / TICK_RATIO;
 
