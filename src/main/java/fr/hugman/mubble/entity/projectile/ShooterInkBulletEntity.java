@@ -3,6 +3,9 @@ package fr.hugman.mubble.entity.projectile;
 import fr.hugman.mubble.registry.Splatoon;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.nbt.NbtCompound;
@@ -25,11 +28,11 @@ import org.jetbrains.annotations.Nullable;
 public class ShooterInkBulletEntity extends ProjectileEntity {
     public static final String LIFE_KEY = "life";
     public static final String CONFIG_KEY = "config";
-    public static final String FREE_GRAVITY_KEY = "free_gravity";
 
     private int life;
-    private boolean freeGravity;
     private ShooterInkBulletConfig config;
+    private static final TrackedData<Boolean> FREE_GRAVITY = DataTracker.registerData(ShooterInkBulletEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> BRAKED = DataTracker.registerData(ShooterInkBulletEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public ShooterInkBulletEntity(EntityType<? extends ProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -64,9 +67,27 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
 
     @Override
     public void tick() {
-        this.life++;
-        if (this.config == null) {
-            this.config = ShooterInkBulletConfig.DEFAULT.copy();
+        if (!this.getWorld().isClient()) {
+            if (this.config == null) {
+                return;
+            }
+            var brakeTick = this.config.brakeTick();
+            this.life++;
+            if (this.life == brakeTick) {
+                this.dataTracker.set(BRAKED, true);
+                var maxSpeed = this.config.brakeMaxSpeed();
+                if (this.getSpeed() > maxSpeed) {
+                    this.setSpeed(maxSpeed);
+                }
+            }
+            if (!this.isFreeGravity()) {
+                var currentVel = this.getVelocity();
+                boolean ignoreY = currentVel.y < 0;
+                var speed = ignoreY ? this.getHorizontalSpeed() : this.getSpeed();
+                if (speed <= this.config.freeGravityThreshold()) {
+                    this.dataTracker.set(FREE_GRAVITY, true);
+                }
+            }
         }
 
         HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
@@ -87,42 +108,33 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
         double posZ = this.getZ() + velocity.z;
         this.setPosition(posX, posY, posZ);
 
-        var brakeTick = this.config.brakeTick();
-        if(this.life >= brakeTick) {
-            if(this.life == brakeTick) {
-                var maxSpeed = this.config.brakeMaxSpeed();
-                if(this.getSpeed() > maxSpeed) {
-                    this.setSpeed(maxSpeed);
-                }
-            }
+        if (this.hasBraked()) {
             if (!this.hasNoGravity()) {
                 velocity = this.getVelocity();
                 this.setVelocity(velocity.x, velocity.y - this.getGravity(), velocity.z);
             }
-            /*
-            if(!this.freeGravity) {
+            if (!this.isFreeGravity()) {
                 var currentVel = this.getVelocity();
                 boolean ignoreY = currentVel.y < 0;
-                var speed = ignoreY ? this.getHorizontalSpeed() : this.getSpeed();
-                if(speed > this.config.freeGravityThreshold()) {
-                    var newVel = this.getVelocity().multiply(0.36); // it seems arbitrary, but it's the same with all shooter weapons I checked so IDK
-                    this.setVelocity(newVel.x, ignoreY ? currentVel.y : newVel.y, newVel.z);
-                }
-                else {
-                    this.freeGravity = true;
-                }
+                var newVel = this.getVelocity().multiply(0.36); // it seems arbitrary, but it's the same with all shooter weapons I checked so IDK
+                this.setVelocity(newVel.x, ignoreY ? currentVel.y : newVel.y, newVel.z);
             }
-
-             */
         }
-
-
         super.tick();
     }
 
     @Override
     protected void initDataTracker() {
-        //TODO: idk?
+        this.dataTracker.startTracking(BRAKED, false);
+        this.dataTracker.startTracking(FREE_GRAVITY, false);
+    }
+
+    public boolean hasBraked() {
+        return this.dataTracker.get(BRAKED);
+    }
+
+    public boolean isFreeGravity() {
+        return this.dataTracker.get(FREE_GRAVITY);
     }
 
     @Override
@@ -131,8 +143,7 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
         if (this.config != null) {
             nbt.put(CONFIG_KEY, this.config.toNbt(this.getWorld().getRegistryManager()));
         }
-        nbt.putShort(LIFE_KEY, (short)this.life);
-        nbt.putBoolean(FREE_GRAVITY_KEY, this.freeGravity);
+        nbt.putShort(LIFE_KEY, (short) this.life);
     }
 
     @Override
@@ -142,7 +153,6 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
             this.config = ShooterInkBulletConfig.fromNbt(this.getWorld().getRegistryManager(), nbt.get(CONFIG_KEY));
         }
         this.life = nbt.getShort(LIFE_KEY);
-        this.freeGravity = nbt.getBoolean(FREE_GRAVITY_KEY);
     }
 
     @Override
