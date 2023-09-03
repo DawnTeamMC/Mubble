@@ -42,6 +42,7 @@ public class Splatoon {
 	// WEAPONS
 	public static final AutomaticShooterItem SPLATTERSHOT = new AutomaticShooterItem(AutomaticShooterConfig.ofSplat(ShooterInkBulletConfig.ofSplat(40, 8, 360, 180, 1.4495F, 4, 2.2F, 0.016f), 6, 12.0F, 6.0F));
 	public static final AutomaticShooterItem DOT_96_GAL = new AutomaticShooterItem(AutomaticShooterConfig.ofSplat(ShooterInkBulletConfig.ofSplat(25, 9, 620, 350, 2.377F, 5, 2.45F, 0.016f), 12, 11.3511F, 4.0F));
+	public static final AutomaticShooterItem TEST_SHOOTER = new AutomaticShooterItem(AutomaticShooterConfig.of(ShooterInkBulletConfig.of(10.0F, 5.0F, 2, 5, 1.0f, 10, 3.0f, 0.1f), 2, 0.0F, 0.0F));
 
 	// ENTITIES
 	public static final EntityType<ShooterInkBulletEntity> SHOOTER_INK_BULLET = FabricEntityTypeBuilder.<ShooterInkBulletEntity>create(SpawnGroup.MISC, ShooterInkBulletEntity::new)
@@ -56,6 +57,7 @@ public class Splatoon {
 
 		r.add("splattershot", SPLATTERSHOT);
 		r.add("dot_96_gal", DOT_96_GAL);
+		r.add("test_shooter", TEST_SHOOTER);
 
 		r.add("shooter_ink_bullet", SHOOTER_INK_BULLET);
 
