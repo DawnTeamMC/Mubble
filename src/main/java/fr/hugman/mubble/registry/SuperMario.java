@@ -5,11 +5,7 @@ import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.dawn.item.DawnItemSettings;
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.block.BeepBlock;
-import fr.hugman.mubble.block.EmptyBlock;
-import fr.hugman.mubble.block.DecoratedBumpableBlock;
-import fr.hugman.mubble.block.NoteBlock;
-import fr.hugman.mubble.block.SnakeBlock;
+import fr.hugman.mubble.block.*;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.item.CapeFeatherItem;
 import fr.hugman.mubble.screen.BumpableBlockScreenHandler;
@@ -48,6 +44,7 @@ public class SuperMario {
 	public static final SnakeBlock SLOW_SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.RED).item());
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
+	public static final WarpBlock WARP_PIPE = new WarpBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.GREEN).item());
 
 	public static final ScreenHandlerType<BumpableBlockScreenHandler> BUMPABLE_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableBlockScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
 	public static final BlockEntityType<BumpableBlockEntity> BUMPABLE_BLOCK_ENTITY_TYPE =
@@ -74,6 +71,7 @@ public class SuperMario {
 		r.add("slow_snake_block", SLOW_SNAKE_BLOCK);
 		r.add("red_beep_block", RED_BEEP_BLOCK);
 		r.add("blue_beep_block", BLUE_BEEP_BLOCK);
+		r.add("warp_pipe", WARP_PIPE);
 
 		Registry.register(Registries.SCREEN_HANDLER, r.id("bumpable_block"), BUMPABLE_BLOCK_SCREEN_HANDLER); //TODO: create a registrar method for screen handlers in Dawn API
 		r.add("bumpable_block", BUMPABLE_BLOCK_ENTITY_TYPE);
