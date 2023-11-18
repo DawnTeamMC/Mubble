@@ -7,6 +7,7 @@ import fr.hugman.dawn.item.DawnItemSettings;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.*;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
+import fr.hugman.mubble.block.entity.WarpBlockEntity;
 import fr.hugman.mubble.item.CapeFeatherItem;
 import fr.hugman.mubble.screen.BumpableBlockScreenHandler;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -49,6 +50,8 @@ public class SuperMario {
 	public static final ScreenHandlerType<BumpableBlockScreenHandler> BUMPABLE_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableBlockScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
 	public static final BlockEntityType<BumpableBlockEntity> BUMPABLE_BLOCK_ENTITY_TYPE =
 			FabricBlockEntityTypeBuilder.create(BumpableBlockEntity::new, QUESTION_BLOCK, BRICK_BLOCK, GOLD_BLOCK, NOTE_BLOCK, EXCLAMATION_BLOCK).build();
+	public static final BlockEntityType<WarpBlockEntity> WARP_BLOCK_ENTITY_TYPE =
+			FabricBlockEntityTypeBuilder.create(WarpBlockEntity::new, WARP_PIPE).build();
 	public static final TagKey<Item> CAN_OPEN_BUMPABLE_BLOCKS = DawnFactory.itemTag(Mubble.id("can_open_bumpable_blocks"));
 
 	public static final CapeFeatherItem CAPE_FEATHER = new CapeFeatherItem(new Item.Settings(), false);
