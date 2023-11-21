@@ -6,6 +6,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 /**
  * @author MaxBrick
@@ -22,7 +23,7 @@ public class WarpBlockEntity extends BlockEntity {
 
     @Override
     public void writeNbt(NbtCompound nbt) {
-        nbt.put("DestinationPos", NbtHelper.fromBlockPos(destinationPos));
+        nbt.put("DestinationPos", NbtHelper.fromBlockPos(this.destinationPos));
 
         super.writeNbt(nbt);
     }
@@ -30,7 +31,9 @@ public class WarpBlockEntity extends BlockEntity {
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
-        destinationPos = (BlockPos) nbt.get("DestinationPos");
+        if(this.world != null && nbt.contains("DestinationPos")) {
+            this.destinationPos = NbtHelper.toBlockPos(nbt.getCompound("DestinationPos"));
+        }
     }
 
     /*=====================*/
