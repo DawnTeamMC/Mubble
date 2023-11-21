@@ -18,14 +18,8 @@ public class WarpBlockEntity extends BlockEntity {
     private BlockPos destinationPos = pos;
 
     //Copied code from BumpableBlockEntity. Sorry, Hugman X)
-    private DefaultedList<ItemStack> inventory;
-    private WarpBlockEntity(BlockPos pos, BlockState state, DefaultedList<ItemStack> inventory) {
-        super(SuperMario.WARP_BLOCK_ENTITY_TYPE, pos, state);
-        this.inventory = inventory;
-    }
-
     public WarpBlockEntity(BlockPos pos, BlockState state) {
-        this(pos, state, DefaultedList.ofSize(1, ItemStack.EMPTY));
+        super(SuperMario.WARP_BLOCK_ENTITY_TYPE, pos, state);
     }
 
     @Override
