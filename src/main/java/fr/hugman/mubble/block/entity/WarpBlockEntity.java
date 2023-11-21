@@ -3,7 +3,10 @@ package fr.hugman.mubble.block.entity;
 import fr.hugman.mubble.registry.SuperMario;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtHelper;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 
 /**
@@ -12,20 +15,22 @@ import net.minecraft.util.math.BlockPos;
  */
 
 public class WarpBlockEntity extends BlockEntity {
-    // Destination position defaults to the block above warp pipe's current position
-    public int destX = pos.getX();
-    public int destY = pos.getY() + 1;
-    public int destZ = pos.getZ();
+    private BlockPos destinationPos = pos;
+
+    //Copied code from BumpableBlockEntity. Sorry, Hugman X)
+    private DefaultedList<ItemStack> inventory;
+    private WarpBlockEntity(BlockPos pos, BlockState state, DefaultedList<ItemStack> inventory) {
+        super(SuperMario.WARP_BLOCK_ENTITY_TYPE, pos, state);
+        this.inventory = inventory;
+    }
 
     public WarpBlockEntity(BlockPos pos, BlockState state) {
-        super(SuperMario.WARP_BLOCK_ENTITY_TYPE, pos, state);
+        this(pos, state, DefaultedList.ofSize(1, ItemStack.EMPTY));
     }
 
     @Override
     public void writeNbt(NbtCompound nbt) {
-        nbt.putInt("destx", destX);
-        nbt.putInt("desty", destY);
-        nbt.putInt("destz", destZ);
+        nbt.put("DestinationPos", NbtHelper.fromBlockPos(destinationPos));
 
         super.writeNbt(nbt);
     }
@@ -33,9 +38,19 @@ public class WarpBlockEntity extends BlockEntity {
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
-        destX = nbt.getInt("destx");
-        destY = nbt.getInt("desty");
-        destZ = nbt.getInt("destz");
+        destinationPos = (BlockPos) nbt.get("DestinationPos");
     }
+
+    /*=====================*/
+    /*  GETTERS & SETTERS  */
+    /*=====================*/
+
+    public BlockPos getDestinationPos() {
+        return destinationPos;
+    }
+    public void setDestinationPos(BlockPos pos) {
+        destinationPos = pos;
+    }
+
 
 }

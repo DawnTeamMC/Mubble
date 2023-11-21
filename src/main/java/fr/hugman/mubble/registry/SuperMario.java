@@ -46,7 +46,7 @@ public class SuperMario {
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
 	public static final WarpBlock WARP_PIPE = new WarpBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.GREEN).item());
-
+	public static final ScreenHandlerType<BumpableBlockScreenHandler> WARP_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableBlockScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
 	public static final ScreenHandlerType<BumpableBlockScreenHandler> BUMPABLE_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableBlockScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
 	public static final BlockEntityType<BumpableBlockEntity> BUMPABLE_BLOCK_ENTITY_TYPE =
 			FabricBlockEntityTypeBuilder.create(BumpableBlockEntity::new, QUESTION_BLOCK, BRICK_BLOCK, GOLD_BLOCK, NOTE_BLOCK, EXCLAMATION_BLOCK).build();
@@ -75,6 +75,9 @@ public class SuperMario {
 		r.add("red_beep_block", RED_BEEP_BLOCK);
 		r.add("blue_beep_block", BLUE_BEEP_BLOCK);
 		r.add("warp_pipe", WARP_PIPE);
+
+		Registry.register(Registries.SCREEN_HANDLER, r.id("warp_block"), WARP_BLOCK_SCREEN_HANDLER);
+		r.add("warp_block", WARP_BLOCK_ENTITY_TYPE);
 
 		Registry.register(Registries.SCREEN_HANDLER, r.id("bumpable_block"), BUMPABLE_BLOCK_SCREEN_HANDLER); //TODO: create a registrar method for screen handlers in Dawn API
 		r.add("bumpable_block", BUMPABLE_BLOCK_ENTITY_TYPE);
