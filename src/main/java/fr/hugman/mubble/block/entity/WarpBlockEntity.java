@@ -40,10 +40,11 @@ public class WarpBlockEntity extends BlockEntity {
     /*=====================*/
 
     public BlockPos getDestinationPos() {
-        return destinationPos;
+        return this.destinationPos;
     }
     public void setDestinationPos(BlockPos pos) {
-        destinationPos = pos;
+        this.destinationPos = pos;
+        markDirty();
     }
 
 
