@@ -30,9 +30,7 @@ public class WarpBlockEntity extends BlockEntity {
     public void readNbt(NbtCompound nbt) {
         super.readNbt(nbt);
 
-        if(this.world != null && nbt.contains("DestinationPos")) {
-            this.destinationPos = NbtHelper.toBlockPos(nbt.getCompound("DestinationPos"));
-        }
+        this.destinationPos = NbtHelper.toBlockPos(nbt.getCompound("DestinationPos"));
     }
 
     /*=====================*/
@@ -44,8 +42,5 @@ public class WarpBlockEntity extends BlockEntity {
     }
     public void setDestinationPos(BlockPos pos) {
         this.destinationPos = pos;
-        markDirty();
     }
-
-
 }

@@ -53,6 +53,8 @@ public class WarpBlock extends Block implements BlockEntityProvider {
 
             } else if (!NbtHelper.toBlockPos(Objects.requireNonNull(itemStack.getSubNbt("DestinationPos"))).equals(warpBlockEntity.getPos())) {
                 warpBlockEntity.setDestinationPos(NbtHelper.toBlockPos(Objects.requireNonNull(itemStack.getSubNbt("DestinationPos"))));
+                warpBlockEntity.markDirty();
+
                 itemStack.removeSubNbt("DestinationPos");
 
                 player.sendMessage(Text.of("Destination set from your Maker Glove"), true);
@@ -84,7 +86,7 @@ public class WarpBlock extends Block implements BlockEntityProvider {
                 ) {
                     entity.teleport(
                             warpBlockEntity.getDestinationPos().getX() + 0.5,
-                            warpBlockEntity.getDestinationPos().getY() + 0.51,
+                            warpBlockEntity.getDestinationPos().getY() + 0.126,
                             warpBlockEntity.getDestinationPos().getZ() + 0.5
                     );
                 }
@@ -107,7 +109,7 @@ public class WarpBlock extends Block implements BlockEntityProvider {
                 ) {
                     entity.teleport(
                             warpBlockEntity.getDestinationPos().getX() + 0.5,
-                            warpBlockEntity.getDestinationPos().getY() + 0.51,
+                            warpBlockEntity.getDestinationPos().getY() + 0.126,
                             warpBlockEntity.getDestinationPos().getZ() + 0.5
                     );
                 }
