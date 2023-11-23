@@ -1,4 +1,4 @@
 {
-  "parent": "tutorial:block/warp_block/warp_pipe"
+  "parent": "mubble:block/warp_pipe"
 }
 
