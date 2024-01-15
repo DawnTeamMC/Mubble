@@ -23,7 +23,8 @@ public class BeanstalkEntity extends Entity {
     //This will determine how high the entity will grow. It should be set upon spawning
     public int growth = 0;
 
-    public int spawnHeight = (int) this.getY();
+    //This should always be set to its y position when spawned
+    private final int spawnHeight = (int) this.getY();
 
     private int travelDistance = 0;
 
@@ -49,26 +50,24 @@ public class BeanstalkEntity extends Entity {
             this.discard();
         }
 
+        //Checks if its current position is one block higher than where it previously was before placing block
         if(this.getY() > spawnHeight + travelDistance + 1 && this.getWorld().getBlockState(this.getBlockPos()).isAir()) {
             travelDistance++;
 
             this.getWorld().setBlockState(this.getBlockPos(), SuperMario.BEANSTALK.getDefaultState());
 
             growth--;
-
         }
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
         nbt.putInt("Growth", this.growth);
-        nbt.putInt("SpawnHeight", this.spawnHeight);
     }
 
     @Override
     protected void readCustomDataFromNbt(NbtCompound nbt) {
         this.growth = nbt.getInt("Growth");
-        this.spawnHeight = nbt.getInt("SpawnHeight");
     }
 
     public boolean isAttackable() {

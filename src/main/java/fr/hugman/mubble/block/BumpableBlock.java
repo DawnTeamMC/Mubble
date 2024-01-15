@@ -235,20 +235,27 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 		var actualState = world.getBlockState(pos);
 		var center = pos.toCenterPos();
 
-		if(blockEntity.getStack(0) == SuperMario.BEANSTALK.asItem().getDefaultStack() && !world.isClient()) {
-			SuperMario.BEANSTALK_ENTITY.spawn(world.getServer().getWorld(world.getRegistryKey()), pos, SpawnReason.TRIGGERED).growth = blockEntity.count(SuperMario.BEANSTALK.asItem());
-			return;
-		}
+
 
 		if(actualState.isAir()) {
 			ItemScatterer.spawn(world, pos, blockEntity);
 		}
 		else {
+			//TODO: make this actually work
+			//This should check if the container has a beanstalk.
+			//Then it should spawn the beanstalk entity,
+			//set its growth value to the quantity of beanstalks in the container,
+			if(blockEntity.getStack(0).isOf(SuperMario.BEANSTALK.asItem())) {
+				Objects.requireNonNull(SuperMario.BEANSTALK_ENTITY.spawn(world.getServer().getWorld(world.getRegistryKey()), pos, SpawnReason.TRIGGERED)).growth = blockEntity.count(SuperMario.BEANSTALK.asItem());
+				return;
+			}
 			var direction = blockEntity.getBumpDirection();
 			var x = center.getX() + direction.getOffsetX() * 0.75D;
 			var y = center.getY() + direction.getOffsetY() * 0.75D;
 			var z = center.getZ() + direction.getOffsetZ() * 0.75D;
 			for(int i = 0; i < blockEntity.size(); ++i) {
+				Objects.requireNonNull(SuperMario.BEANSTALK_ENTITY.spawn(world.getServer().getWorld(world.getRegistryKey()), pos, SpawnReason.TRIGGERED)).growth = blockEntity.count(SuperMario.BEANSTALK.asItem());
+
 				ItemScatterer.spawn(world, x, y, z, blockEntity.getStack(i));
 			}
 		}

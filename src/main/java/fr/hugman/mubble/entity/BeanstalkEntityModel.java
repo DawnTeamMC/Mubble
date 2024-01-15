@@ -13,6 +13,7 @@ import net.minecraft.client.util.math.MatrixStack;
  */
 
 //I have no idea what I'm doing!
+//TODO: fix the model so it's identical to BeanstalkBlock's model
 public class BeanstalkEntityModel extends EntityModel<BeanstalkEntity>{
     private final ModelPart base;
 
