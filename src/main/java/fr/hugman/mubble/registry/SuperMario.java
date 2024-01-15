@@ -61,6 +61,8 @@ public class SuperMario {
 	public static final CapeFeatherItem CAPE_FEATHER = new CapeFeatherItem(new Item.Settings(), false);
 	public static final CapeFeatherItem SUPER_CAPE_FEATHER = new CapeFeatherItem(new Item.Settings().rarity(Rarity.EPIC), true);
 	// ENTITY
+
+	//This probably should be changed to be more consistent with the rest of the registries
 	public static final EntityType<BeanstalkEntity> BEANSTALK_ENTITY = Registry.register(
 			Registries.ENTITY_TYPE,
 			new Identifier("mubble", "beanstalk"),
@@ -94,8 +96,6 @@ public class SuperMario {
 		r.add("cape_feather", CAPE_FEATHER);
 		r.add("super_cape_feather", SUPER_CAPE_FEATHER);
 
-		FabricDefaultAttributeRegistry.register(BEANSTALK_ENTITY, BeanstalkEntity.createMobAttributes());
-
 		appendItemGroups();
 	}
 
@@ -116,6 +116,7 @@ public class SuperMario {
 					entries.add(SuperMario.SLOW_SNAKE_BLOCK);
 					entries.add(SuperMario.RED_BEEP_BLOCK);
 					entries.add(SuperMario.BLUE_BEEP_BLOCK);
+					entries.add(SuperMario.BEANSTALK);
 					entries.add(SuperMario.CAPE_FEATHER);
 					entries.add(SuperMario.SUPER_CAPE_FEATHER);
 				})

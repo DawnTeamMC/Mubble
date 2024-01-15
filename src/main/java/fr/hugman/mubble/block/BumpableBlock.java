@@ -1,6 +1,7 @@
 package fr.hugman.mubble.block;
 
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
+import fr.hugman.mubble.entity.BeanstalkEntity;
 import fr.hugman.mubble.registry.MubbleSounds;
 import fr.hugman.mubble.registry.SuperMario;
 import net.fabricmc.api.EnvType;
@@ -16,6 +17,7 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -33,11 +35,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
  * @author haykam
  * @author Hugman
+ * @author MaxBrick
  * @since v4.0.0
  */
 public class BumpableBlock extends BlockWithEntity implements HittableBlock {
@@ -230,6 +234,12 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 		}
 		var actualState = world.getBlockState(pos);
 		var center = pos.toCenterPos();
+
+		if(blockEntity.getStack(0) == SuperMario.BEANSTALK.asItem().getDefaultStack() && !world.isClient()) {
+			SuperMario.BEANSTALK_ENTITY.spawn(world.getServer().getWorld(world.getRegistryKey()), pos, SpawnReason.TRIGGERED).growth = blockEntity.count(SuperMario.BEANSTALK.asItem());
+			return;
+		}
+
 		if(actualState.isAir()) {
 			ItemScatterer.spawn(world, pos, blockEntity);
 		}

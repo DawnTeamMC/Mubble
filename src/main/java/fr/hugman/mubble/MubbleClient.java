@@ -33,7 +33,7 @@ public class MubbleClient implements ClientModInitializer {
 		BlockEntityRendererFactories.register(SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, BumpableBlockEntityRenderer::new);
 
 		EntityRendererRegistry.register(SuperMario.BEANSTALK_ENTITY, BeanstalkEntityRenderer::new);
-		// In 1.17, use EntityRendererRegistry.register (seen below) instead of EntityRendererRegistry.INSTANCE.register (seen above)
+
 		EntityRendererRegistry.register(SuperMario.BEANSTALK_ENTITY, BeanstalkEntityRenderer::new);
 
 		EntityModelLayerRegistry.registerModelLayer(MODEL_CUBE_LAYER, BeanstalkEntityModel::getTexturedModelData);

@@ -74,7 +74,7 @@ public class BeanstalkBlock extends Block implements Fertilizable {
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos);
     }
 
-    //This function as well as the count functions are ripped from BambooBlock.java
+    //This function as well as the count functions are ripped from BambooBlock.class
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
         int i = this.countBeanstalksAbove(world, pos);
         int j = this.countBeanstalksBelow(world, pos);
@@ -85,7 +85,7 @@ public class BeanstalkBlock extends Block implements Fertilizable {
         return true;
     }
 
-    //Here I took the logic I needed from BambooBlock.java
+    //Here I took the logic I needed from BambooBlock.class
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         int i = this.countBeanstalksAbove(world, pos);
         int j = this.countBeanstalksBelow(world, pos);
