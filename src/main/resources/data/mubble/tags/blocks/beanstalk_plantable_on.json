@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "mubble:empty_block",
+    "mubble:beanstalk",
+    "mubble:exclamation_block",
+    "mubble:note_block",
+    "#minecraft:dirt",
+    "#minecraft:base_stone_overworld",
+    "#minecraft:sand",
+    "#minecraft:snow",
+    "minecraft:gravel",
+    "minecraft:suspicious_gravel"
+  ]
+}

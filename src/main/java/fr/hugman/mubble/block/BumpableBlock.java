@@ -1,6 +1,7 @@
 package fr.hugman.mubble.block;
 
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
+import fr.hugman.mubble.entity.BeanstalkEntity;
 import fr.hugman.mubble.registry.MubbleSounds;
 import fr.hugman.mubble.registry.SuperMario;
 import net.fabricmc.api.EnvType;
@@ -16,6 +17,7 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
@@ -33,11 +35,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
  * @author haykam
  * @author Hugman
+ * @author MaxBrick
  * @since v4.0.0
  */
 public class BumpableBlock extends BlockWithEntity implements HittableBlock {
@@ -199,13 +203,15 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 				return;
 			}
 			var newState = blockEntity.getBumpedState();
-			if(newState != null) {
-				world.setBlockState(pos, newState);
+
+            this.loot(world, pos, state, blockEntity);
+
+            if(newState != null) {
+                world.setBlockState(pos, newState);
 			}
 			else {
-				world.setBlockState(pos, state.with(BUMPING, false));
+                world.setBlockState(pos, state.with(BUMPING, false));
 			}
-			this.loot(world, pos, state, blockEntity);
 		}
 	}
 
@@ -230,15 +236,36 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 		}
 		var actualState = world.getBlockState(pos);
 		var center = pos.toCenterPos();
+
+
+
 		if(actualState.isAir()) {
 			ItemScatterer.spawn(world, pos, blockEntity);
 		}
 		else {
+
 			var direction = blockEntity.getBumpDirection();
 			var x = center.getX() + direction.getOffsetX() * 0.75D;
 			var y = center.getY() + direction.getOffsetY() * 0.75D;
 			var z = center.getZ() + direction.getOffsetZ() * 0.75D;
 			for(int i = 0; i < blockEntity.size(); ++i) {
+				/*
+				  This should check if the container holds beanstalks.
+				  If it does, and blockEntity.getBumpedState() is not air,
+				  it will spawn a beanstalk, setting its growth value
+				  to the amount of beanstalks in the container,
+				  and finally empties the blockEntity.
+				 */
+				if(
+				    blockEntity.getStack(i).isOf(SuperMario.BEANSTALK.asItem()) && (blockEntity.getBumpedState() == null || !blockEntity.getBumpedState().isAir())
+				) {
+					Objects.requireNonNull(SuperMario.BEANSTALK_ENTITY.spawn(world.getServer().getWorld(world.getRegistryKey()), pos, SpawnReason.TRIGGERED)).growth = blockEntity.count(SuperMario.BEANSTALK.asItem());
+					//TODO: make custom sound for beanstalk
+					world.playSound(null, center.getX(), center.getY(), center.getZ(), MubbleSounds.BUMPABLE_BLOCK_LOOT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					blockEntity.clear();
+					return;
+				}
+
 				ItemScatterer.spawn(world, x, y, z, blockEntity.getStack(i));
 			}
 		}

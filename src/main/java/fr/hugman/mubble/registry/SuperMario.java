@@ -5,19 +5,21 @@ import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.dawn.item.DawnItemSettings;
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.block.BeepBlock;
-import fr.hugman.mubble.block.EmptyBlock;
-import fr.hugman.mubble.block.DecoratedBumpableBlock;
-import fr.hugman.mubble.block.NoteBlock;
-import fr.hugman.mubble.block.SnakeBlock;
+import fr.hugman.mubble.block.*;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
+import fr.hugman.mubble.entity.BeanstalkEntity;
 import fr.hugman.mubble.item.CapeFeatherItem;
 import fr.hugman.mubble.screen.BumpableBlockScreenHandler;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -30,6 +32,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
 
 public class SuperMario {
@@ -48,6 +51,7 @@ public class SuperMario {
 	public static final SnakeBlock SLOW_SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.RED).item());
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
+	public static final BeanstalkBlock BEANSTALK = new BeanstalkBlock(DawnBlockSettings.copy(Blocks.SUGAR_CANE).mapColor(MapColor.GREEN).item().nonOpaque());
 
 	public static final ScreenHandlerType<BumpableBlockScreenHandler> BUMPABLE_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableBlockScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
 	public static final BlockEntityType<BumpableBlockEntity> BUMPABLE_BLOCK_ENTITY_TYPE =
@@ -56,6 +60,16 @@ public class SuperMario {
 
 	public static final CapeFeatherItem CAPE_FEATHER = new CapeFeatherItem(new Item.Settings(), false);
 	public static final CapeFeatherItem SUPER_CAPE_FEATHER = new CapeFeatherItem(new Item.Settings().rarity(Rarity.EPIC), true);
+	// ENTITY
+
+	//This probably should be changed to be more consistent with the rest of the registries
+	public static final EntityType<BeanstalkEntity> BEANSTALK_ENTITY = Registry.register(
+			Registries.ENTITY_TYPE,
+			new Identifier("mubble", "beanstalk"),
+			FabricEntityTypeBuilder.create(
+					SpawnGroup.MISC, BeanstalkEntity::new).dimensions(EntityDimensions.fixed(1.0f, 1.0f)
+			).build()
+	);
 
 	// ITEM GROUP
 	public static final RegistryKey<ItemGroup> ITEM_GROUP = RegistryKey.of(RegistryKeys.ITEM_GROUP, Mubble.id("super_mario"));
@@ -74,6 +88,7 @@ public class SuperMario {
 		r.add("slow_snake_block", SLOW_SNAKE_BLOCK);
 		r.add("red_beep_block", RED_BEEP_BLOCK);
 		r.add("blue_beep_block", BLUE_BEEP_BLOCK);
+		r.add("beanstalk", BEANSTALK);
 
 		Registry.register(Registries.SCREEN_HANDLER, r.id("bumpable_block"), BUMPABLE_BLOCK_SCREEN_HANDLER); //TODO: create a registrar method for screen handlers in Dawn API
 		r.add("bumpable_block", BUMPABLE_BLOCK_ENTITY_TYPE);
@@ -101,6 +116,7 @@ public class SuperMario {
 					entries.add(SuperMario.SLOW_SNAKE_BLOCK);
 					entries.add(SuperMario.RED_BEEP_BLOCK);
 					entries.add(SuperMario.BLUE_BEEP_BLOCK);
+					entries.add(SuperMario.BEANSTALK);
 					entries.add(SuperMario.CAPE_FEATHER);
 					entries.add(SuperMario.SUPER_CAPE_FEATHER);
 				})
