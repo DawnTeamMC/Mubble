@@ -203,13 +203,15 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 				return;
 			}
 			var newState = blockEntity.getBumpedState();
-			if(newState != null) {
-				world.setBlockState(pos, newState);
+
+            this.loot(world, pos, state, blockEntity);
+
+            if(newState != null) {
+                world.setBlockState(pos, newState);
 			}
 			else {
-				world.setBlockState(pos, state.with(BUMPING, false));
+                world.setBlockState(pos, state.with(BUMPING, false));
 			}
-			this.loot(world, pos, state, blockEntity);
 		}
 	}
 
@@ -247,12 +249,16 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 			var y = center.getY() + direction.getOffsetY() * 0.75D;
 			var z = center.getZ() + direction.getOffsetZ() * 0.75D;
 			for(int i = 0; i < blockEntity.size(); ++i) {
-				//TODO: make this work for ? blocks
-				//This should check if the container has a beanstalk.
-				//Then it should spawn the beanstalk entity,
-				//set its growth value to the quantity of beanstalks in the container,
-				//and empty its contents.
-				if(blockEntity.getStack(i).isOf(SuperMario.BEANSTALK.asItem())) {
+				/*
+				  This should check if the container holds beanstalks.
+				  If it does, and blockEntity.getBumpedState() is not air,
+				  it will spawn a beanstalk, setting its growth value
+				  to the amount of beanstalks in the container,
+				  and finally empties the blockEntity.
+				 */
+				if(
+				    blockEntity.getStack(i).isOf(SuperMario.BEANSTALK.asItem()) && (blockEntity.getBumpedState() == null || !blockEntity.getBumpedState().isAir())
+				) {
 					Objects.requireNonNull(SuperMario.BEANSTALK_ENTITY.spawn(world.getServer().getWorld(world.getRegistryKey()), pos, SpawnReason.TRIGGERED)).growth = blockEntity.count(SuperMario.BEANSTALK.asItem());
 					//TODO: make custom sound for beanstalk
 					world.playSound(null, center.getX(), center.getY(), center.getZ(), MubbleSounds.BUMPABLE_BLOCK_LOOT, SoundCategory.BLOCKS, 1.0F, 1.0F);

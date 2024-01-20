@@ -43,7 +43,7 @@ public class BeanstalkEntity extends Entity {
 
     public void tick() {
         //I don't know why, but I have to use the move function to actually make it move
-        this.setVelocity(0.0, 0.3, 0.0);
+        this.setVelocity(0.0D, 0.3D, 0.0D);
         this.move(MovementType.SELF, this.getVelocity());
 
         if(!this.getWorld().getBlockState(this.getBlockPos().up()).isAir() || growth < 1) {

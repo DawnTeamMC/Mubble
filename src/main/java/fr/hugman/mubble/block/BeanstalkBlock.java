@@ -9,10 +9,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
-import net.minecraft.world.BlockView;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldAccess;
-import net.minecraft.world.WorldView;
+import net.minecraft.world.*;
 
 /**
  * Most of the functions of this code were
@@ -38,8 +35,6 @@ public class BeanstalkBlock extends Block implements Fertilizable {
     public VoxelShape getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return VoxelShapes.empty();
     }
-
-
 
     public void scheduledTick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
         if (!state.canPlaceAt(world, pos)) {
@@ -103,6 +98,5 @@ public class BeanstalkBlock extends Block implements Fertilizable {
             ++i;
             ++k;
         }
-
     }
 }

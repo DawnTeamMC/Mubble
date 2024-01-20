@@ -29,7 +29,14 @@ public class BeanstalkEntityModel extends EntityModel<BeanstalkEntity>{
                         0, 0
                 ).cuboid(
                         -8F, 8F, -8F, 16F, 16F, 16F
-                ), ModelTransform.pivot(0F, 0F, 0F)
+                ), ModelTransform.pivot(8F, 0F, 8F)
+        );
+        modelPartData.addChild(
+                EntityModelPartNames.CUBE, ModelPartBuilder.create().uv(
+                        0, 0
+                ).cuboid(
+                        -8F, 8F, -8F, 16F, 16F, 16F
+                ), ModelTransform.pivot(-8F, 0F, -8F)
         );
         return TexturedModelData.of(modelData, 16, 16);
     }
