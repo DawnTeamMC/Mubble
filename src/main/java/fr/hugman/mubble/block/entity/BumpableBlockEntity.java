@@ -114,11 +114,6 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 		this.writeClientNbt(nbt);
 	}
 
-	protected void writeClientNbt(NbtCompound nbt) {
-		nbt.putInt(BUMP_TICKS_KEY, this.bumpTicks);
-		nbt.putInt(BUMP_DIRECTION_KEY, this.bumpDirection.getId());
-	}
-
 	@Override
 	public void readNbt(NbtCompound nbt) {
 		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
@@ -144,6 +139,11 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 		if(this.bumpDirection == null) {
 			this.bumpDirection = Direction.UP;
 		}
+	}
+
+	protected void writeClientNbt(NbtCompound nbt) {
+		nbt.putInt(BUMP_TICKS_KEY, this.bumpTicks);
+		nbt.putInt(BUMP_DIRECTION_KEY, this.bumpDirection.getId());
 	}
 
 	/*=====================*/

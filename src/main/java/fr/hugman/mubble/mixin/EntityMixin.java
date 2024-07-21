@@ -34,7 +34,7 @@ public class EntityMixin {
 				BlockPos blockPos = hit.getBlockPos();
 				BlockState state = world.getBlockState(blockPos);
 				if(state.getBlock() instanceof HittableBlock hittableBlock) {
-					hittableBlock.onHit(world, blockPos, state, thisEntity, hit);
+					hittableBlock.onHit(world, state, thisEntity, hit);
 				}
 			}
 		}

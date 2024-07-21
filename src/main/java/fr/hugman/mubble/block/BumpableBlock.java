@@ -14,8 +14,12 @@ import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
@@ -26,6 +30,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
@@ -98,7 +103,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
         if (world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpableEntity) {
             player.openHandledScreen(bumpableEntity);
             // TODO: add stat for inspecting bumpable blocks
-            //player.incrementStat(Stats.INSPECT_HOPPER);
+            //player.incrementStat(MubbleStats.INSPECT_BUMPABLE);
         }
         return ActionResult.CONSUME;
     }
@@ -199,7 +204,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
             }
             var newState = blockEntity.getBumpedState();
             this.loot(world, pos, blockEntity, false);
-            if (newState != null) {
+            if (newState != null && blockEntity.isEmpty()) {
                 world.setBlockState(pos, newState);
             } else {
                 world.setBlockState(pos, state.with(BUMPING, false));
@@ -209,15 +214,29 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 
 
     @Override
-    public void onHit(World world, BlockPos pos, BlockState state, Entity entity, BlockHitResult hit) {
+    public void onHit(World world, BlockState state, Entity entity, BlockHitResult hit) {
         if (world.isClient()) {
             return;
         }
 
-        Optional<BumpableBlockEntity> opt = world.getBlockEntity(pos, SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE);
-        opt.ifPresent(blockEntity -> {
+        BlockPos pos = hit.getBlockPos();
+        world.getBlockEntity(pos, SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE).ifPresent(blockEntity -> {
             if (this.canBump(world, pos, state, blockEntity, entity, hit)) {
                 blockEntity.bump(world, pos, state, entity, hit.getSide().getOpposite());
+            }
+        });
+    }
+
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+        if (world.isClient()) {
+            return;
+        }
+
+        BlockPos pos = hit.getBlockPos();
+        world.getBlockEntity(pos, SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE).ifPresent(blockEntity -> {
+            if (this.canBump(world, pos, state, blockEntity, projectile, hit)) {
+                blockEntity.bump(world, pos, state, projectile, hit.getSide().getOpposite());
             }
         });
     }
@@ -230,36 +249,49 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
         BumpableDropMode dropMode = blockEntity.getDropMode();
         if (atCenter) {
             switch (dropMode) {
-                case ALL -> ItemScatterer.spawn(world, pos, blockEntity);
-                case ONE -> {
-                    var stack = blockEntity.getStack(0);
-                    ItemScatterer.spawn(world, pos.getX(), pos.getY(), pos.getZ(), stack.split(1));
-                }
+                case ALL -> spawnItems(world, center, null, blockEntity);
+                case ONE -> spawnItem(world, center, null, blockEntity.getStack(0).split(1));
             }
         } else {
             var direction = blockEntity.getBumpDirection();
-            var x = center.getX() + direction.getOffsetX() * 0.75D;
-            var y = center.getY() + direction.getOffsetY() * 0.75D;
-            var z = center.getZ() + direction.getOffsetZ() * 0.75D;
-
             switch (dropMode) {
-                case ALL -> {
-                    for (int i = 0; i < blockEntity.size(); ++i) {
-                        //TODO: change velocity
-                        ItemScatterer.spawn(world, x, y, z, blockEntity.getStack(i));
-                    }
-                }
-                case ONE -> {
-                    var stack = blockEntity.getStack(0);
-                    stack.decrement(1);
-                    //TODO: change velocity
-                    ItemScatterer.spawn(world, x, y, z, stack.copyWithCount(1));
-                }
+                case ALL -> spawnItems(world, center, direction, blockEntity);
+                case ONE -> spawnItem(world, center, direction, blockEntity.getStack(0).split(1));
             }
         }
         world.playSound(null, center.getX(), center.getY(), center.getZ(), MubbleSounds.BUMPABLE_BLOCK_LOOT, SoundCategory.BLOCKS, 1.0F, 1.0F);
         if (blockEntity.size() <= 0) {
             blockEntity.clear();
+        }
+    }
+
+    private static void spawnItems(World world, Vec3d pos, @Nullable Direction direction, Inventory inventory) {
+        for (int i = 0; i < inventory.size(); ++i) {
+            spawnItem(world, pos, direction, inventory.getStack(i));
+        }
+    }
+
+    private static void spawnItem(World world, Vec3d pos, @Nullable Direction direction, ItemStack stack) {
+        pos = pos.offset(direction, 0.75D);
+
+        double entityWidth = EntityType.ITEM.getWidth();
+        double e = 1.0 - entityWidth;
+        double f = entityWidth / 2.0;
+
+        double x = Math.floor(pos.getX()) + world.random.nextDouble() * e + f;
+        double y = Math.floor(pos.getY()) + world.random.nextDouble() * (1.0 - EntityType.ITEM.getHeight());
+        double z = Math.floor(pos.getZ()) + world.random.nextDouble() * e + f;
+
+        while(!stack.isEmpty()) {
+            ItemEntity itemEntity = new ItemEntity(world, x, y, z, stack.split(1));
+            float i = 0.2f;
+            float j = 0.11485000171139836f;
+            itemEntity.setVelocity(
+                    (i * (direction == null ? 0 : direction.getOffsetX())) + world.random.nextTriangular(0.0, j),
+                    (i * (direction == null ? 0 : direction.getOffsetY())) + world.random.nextTriangular(0.0, j),
+                    (i * (direction == null ? 0 : direction.getOffsetZ())) + world.random.nextTriangular(0.0, j)
+            );
+            world.spawnEntity(itemEntity);
         }
     }
 }
