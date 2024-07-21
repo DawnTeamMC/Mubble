@@ -1,8 +1,10 @@
 package fr.hugman.mubble.block.entity;
 
 import fr.hugman.mubble.block.BumpableBlock;
+import fr.hugman.mubble.block.BumpableDropMode;
+import fr.hugman.mubble.nbt.MubbleNbtHelper;
 import fr.hugman.mubble.registry.SuperMario;
-import fr.hugman.mubble.screen.BumpableBlockScreenHandler;
+import fr.hugman.mubble.screen.BumpableScreenHandler;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -17,6 +19,7 @@ import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
@@ -40,17 +43,43 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 	public static final int PEAK_TICK = ANIMATION_TICKS / 2;
 
 	private static final String BUMPED_STATE_KEY = "BumpedState";
+	private static final String DROP_MODE_KEY = "DropMode";
 	private static final String BUMP_TICKS_KEY = "BumpTicks";
 	private static final String BUMP_AUTHOR_KEY = "BumpAuthor";
 	private static final String BUMP_DIRECTION_KEY = "BumpDirection";
 
 	private DefaultedList<ItemStack> inventory;
+	private BumpableDropMode dropMode = BumpableDropMode.ALL;
+	private boolean dropModeLocked = false;
 	private @Nullable BlockState bumpedState;
 	private int bumpTicks = -1;
 	private @Nullable UUID bumpAuthorUuid;
 	private @Nullable Entity bumpAuthor;
 	private Direction bumpDirection = Direction.UP;
 
+	private final PropertyDelegate propertyDelegate = new PropertyDelegate(){
+		@Override
+		public int get(int index) {
+			return switch(index) {
+				case 0 -> BumpableBlockEntity.this.dropMode.getIndex();
+				case 1 -> BumpableBlockEntity.this.dropModeLocked ? 1 : 0;
+				default -> 0;
+			};
+		}
+
+		@Override
+		public void set(int index, int value) {
+			switch(index) {
+				case 0 -> BumpableBlockEntity.this.dropMode = BumpableDropMode.get(value);
+				case 1 -> BumpableBlockEntity.this.dropModeLocked = value == 1;
+			}
+		}
+
+		@Override
+		public int size() {
+			return 2;
+		}
+	};
 
 	private BumpableBlockEntity(BlockPos pos, BlockState state, DefaultedList<ItemStack> inventory) {
 		super(SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, pos, state);
@@ -63,7 +92,7 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 
 	public BumpableBlockEntity(BlockPos pos, BlockState state, @NotNull ItemStack stack, @Nullable BlockState bumpedState) {
 		this(pos, state, DefaultedList.ofSize(1, stack));
-		this.bumpedState = bumpedState;
+		this.setBumpedState(bumpedState);
 	}
 
 	/*=======*/
@@ -75,6 +104,7 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 		if(!this.serializeLootTable(nbt)) {
 			Inventories.writeNbt(nbt, this.inventory);
 		}
+		nbt.putInt(DROP_MODE_KEY, this.dropMode.getIndex());
 		if(this.bumpedState != null) {
 			nbt.put(BUMPED_STATE_KEY, NbtHelper.fromBlockState(this.bumpedState));
 		}
@@ -84,22 +114,23 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 		this.writeClientNbt(nbt);
 	}
 
-	protected void writeClientNbt(NbtCompound nbt) {
-		nbt.putInt(BUMP_TICKS_KEY, this.bumpTicks);
-		nbt.putInt(BUMP_DIRECTION_KEY, this.bumpDirection.getId());
-	}
-
 	@Override
 	public void readNbt(NbtCompound nbt) {
 		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
 		if(!this.deserializeLootTable(nbt)) {
 			Inventories.readNbt(nbt, this.inventory);
 		}
-		if(this.world != null && nbt.contains(BUMPED_STATE_KEY)) {
-			RegistryWrapper<Block> registry = this.world.createCommandRegistryWrapper(RegistryKeys.BLOCK);
-			this.bumpedState = NbtHelper.toBlockState(registry, nbt.getCompound(BUMPED_STATE_KEY));
+		if(nbt.contains(BUMPED_STATE_KEY)) {
+			if(this.world == null) {
+				this.bumpedState = MubbleNbtHelper.toBlockStateNoWrapper(nbt.getCompound(BUMPED_STATE_KEY));
+			}
+			else {
+				RegistryWrapper<Block> registry = this.world.createCommandRegistryWrapper(RegistryKeys.BLOCK);
+				this.bumpedState = NbtHelper.toBlockState(registry, nbt.getCompound(BUMPED_STATE_KEY));
+			}
 		}
 
+		this.dropMode = BumpableDropMode.get(nbt.getInt(DROP_MODE_KEY));
 		this.bumpTicks = Math.max(-1, nbt.getInt(BUMP_TICKS_KEY));
 		if(nbt.containsUuid(BUMP_AUTHOR_KEY)) {
 			this.bumpAuthorUuid = nbt.getUuid(BUMP_AUTHOR_KEY);
@@ -110,9 +141,34 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 		}
 	}
 
+	protected void writeClientNbt(NbtCompound nbt) {
+		nbt.putInt(BUMP_TICKS_KEY, this.bumpTicks);
+		nbt.putInt(BUMP_DIRECTION_KEY, this.bumpDirection.getId());
+	}
+
 	/*=====================*/
 	/*  GETTERS & SETTERS  */
 	/*=====================*/
+
+	public BumpableDropMode getDropMode() {
+		return dropMode;
+	}
+
+	public void setDropMode(@NotNull BumpableDropMode dropMode, boolean locked) {
+		this.dropMode = dropMode;
+		this.dropModeLocked = locked;
+		this.markDirty();
+	}
+
+	public void setDropMode(@NotNull BumpableDropMode dropMode) {
+		this.dropMode = dropMode;
+		this.markDirty();
+	}
+
+	public void setDropModeLocked(boolean dropModeLocked) {
+		this.dropModeLocked = dropModeLocked;
+		this.markDirty();
+	}
 
 	@Nullable
 	public BlockState getBumpedState() {
@@ -121,6 +177,15 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 
 	public void setBumpedState(@Nullable BlockState bumpedState) {
 		this.bumpedState = bumpedState;
+		if(this.shouldBreak()) {
+			this.dropMode = BumpableDropMode.ALL;
+			this.dropModeLocked = true;
+		}
+		this.markDirty();
+	}
+
+	public boolean shouldBreak() {
+		return bumpedState != null && bumpedState.isAir();
 	}
 
 	public int getBumpTicks() {
@@ -181,12 +246,12 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 	@Nullable
 	@Override
 	public ScreenHandler createMenu(int syncId, PlayerInventory playerInv, PlayerEntity player) {
-		return new BumpableBlockScreenHandler(syncId, playerInv, this);
+		return new BumpableScreenHandler(syncId, playerInv, this, propertyDelegate);
 	}
 
 	@Override
 	protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
-		return new BumpableBlockScreenHandler(syncId, playerInventory, this);
+		return new BumpableScreenHandler(syncId, playerInventory, this, propertyDelegate);
 	}
 
 

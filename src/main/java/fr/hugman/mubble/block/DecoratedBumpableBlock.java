@@ -64,6 +64,6 @@ public class DecoratedBumpableBlock extends BumpableBlock {
 		Vec3d vec3d = entity.getVelocity();
 		entity.setVelocity(vec3d.x, 0.3D, vec3d.z);
 		entity.velocityDirty = true;
-		// TODO: add a gamerule for harming entities
+		// TODO: add a damage type and a gamerule for harming entities
 	}
 }

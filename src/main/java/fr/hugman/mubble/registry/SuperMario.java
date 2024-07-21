@@ -1,18 +1,17 @@
 package fr.hugman.mubble.registry;
 
-import fr.hugman.dawn.DawnFactory;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.dawn.item.DawnItemSettings;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.BeepBlock;
-import fr.hugman.mubble.block.EmptyBlock;
 import fr.hugman.mubble.block.DecoratedBumpableBlock;
+import fr.hugman.mubble.block.EmptyBlock;
 import fr.hugman.mubble.block.NoteBlock;
 import fr.hugman.mubble.block.SnakeBlock;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.item.CapeFeatherItem;
-import fr.hugman.mubble.screen.BumpableBlockScreenHandler;
+import fr.hugman.mubble.screen.BumpableScreenHandler;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.block.Blocks;
@@ -49,10 +48,9 @@ public class SuperMario {
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
 
-	public static final ScreenHandlerType<BumpableBlockScreenHandler> BUMPABLE_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableBlockScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
+	public static final ScreenHandlerType<BumpableScreenHandler> BUMPABLE_BLOCK_SCREEN_HANDLER = new ScreenHandlerType<>(BumpableScreenHandler::new, FeatureFlags.VANILLA_FEATURES);
 	public static final BlockEntityType<BumpableBlockEntity> BUMPABLE_BLOCK_ENTITY_TYPE =
 			FabricBlockEntityTypeBuilder.create(BumpableBlockEntity::new, QUESTION_BLOCK, BRICK_BLOCK, GOLD_BLOCK, NOTE_BLOCK, EXCLAMATION_BLOCK).build();
-	public static final TagKey<Item> CAN_OPEN_BUMPABLE_BLOCKS = DawnFactory.itemTag(Mubble.id("can_open_bumpable_blocks"));
 
 	public static final CapeFeatherItem CAPE_FEATHER = new CapeFeatherItem(new Item.Settings(), false);
 	public static final CapeFeatherItem SUPER_CAPE_FEATHER = new CapeFeatherItem(new Item.Settings().rarity(Rarity.EPIC), true);
