@@ -19,7 +19,7 @@ public class EmptyBlock extends Block implements HittableBlock {
 	}
 
 	@Override
-	public void onHit(World world, BlockPos blockPos, BlockState state, Entity entity, BlockHitResult hit) {
+	public void onHit(World world, BlockState state, Entity entity, BlockHitResult hit) {
 		var pos = hit.getPos();
 		if(world != null) {
 			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundCategory.BLOCKS, 1.0F, 1.0F);

@@ -1,5 +1,7 @@
 package fr.hugman.mubble.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.registry.MubbleSounds;
 import net.minecraft.block.BlockState;
@@ -24,8 +26,18 @@ import java.util.List;
  * @since v4.0.0
  */
 public class DecoratedBumpableBlock extends BumpableBlock {
-	public DecoratedBumpableBlock(ItemStack defaultStack, @Nullable BlockState defaultBumpedState, Settings settings) {
-		super(defaultStack, defaultBumpedState, settings);
+	public static final MapCodec<DecoratedBumpableBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+			BlockState.CODEC.fieldOf("default_bumped_state").forGetter((block) -> block.defaultBumpedState),
+			createSettingsCodec()
+	).apply(instance, DecoratedBumpableBlock::new));
+
+	public DecoratedBumpableBlock(@Nullable BlockState defaultBumpedState, Settings settings) {
+		super(defaultBumpedState, settings);
+	}
+
+	@Override
+	protected MapCodec<? extends DecoratedBumpableBlock> getCodec() {
+		return CODEC;
 	}
 
 	@Override

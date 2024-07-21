@@ -18,7 +18,7 @@ public class MubbleNbtHelper {
 		if (!nbt.contains("Name", NbtElement.STRING_TYPE)) {
 			return Blocks.AIR.getDefaultState();
 		}
-		Identifier identifier = new Identifier(nbt.getString("Name"));
+		Identifier identifier = Identifier.of(nbt.getString("Name"));
 		Block block = Registries.BLOCK.get(identifier);
 		BlockState state = block.getDefaultState();
 		if (nbt.contains("Properties", NbtElement.COMPOUND_TYPE)) {

@@ -1,5 +1,7 @@
 package fr.hugman.mubble.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.registry.MubbleSounds;
 import fr.hugman.mubble.registry.SuperMario;
@@ -16,7 +18,6 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.inventory.Inventory;
@@ -25,8 +26,8 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -36,24 +37,29 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Optional;
-
 /**
  * @author haykam
  * @author Hugman
  * @since v4.0.0
  */
 public class BumpableBlock extends BlockWithEntity implements HittableBlock {
+    public static final MapCodec<BumpableBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            BlockState.CODEC.fieldOf("default_bumped_state").forGetter((block) -> block.defaultBumpedState),
+            createSettingsCodec()
+    ).apply(instance, BumpableBlock::new));
     public static final BooleanProperty BUMPING = BooleanProperty.of("bumping");
 
-    private final ItemStack defaultStack;
-    private final @Nullable BlockState defaultBumpedState;
+    protected final @Nullable BlockState defaultBumpedState;
 
-    public BumpableBlock(ItemStack defaultStack, @Nullable BlockState defaultBumpedState, Settings settings) {
+    public BumpableBlock(@Nullable BlockState defaultBumpedState, Settings settings) {
         super(settings);
-        this.defaultStack = defaultStack;
         this.defaultBumpedState = defaultBumpedState;
         this.setDefaultState(this.stateManager.getDefaultState().with(BUMPING, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BumpableBlock> getCodec() {
+        return CODEC;
     }
 
     /*==========*/
@@ -69,10 +75,6 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
     /*  GETTERS  */
     /*===========*/
 
-    public ItemStack getDefaultStack() {
-        return defaultStack;
-    }
-
     @Nullable
     public BlockState getDefaultBumpedState() {
         return defaultBumpedState;
@@ -84,35 +86,29 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return new BumpableBlockEntity(pos, state, this.getDefaultStack().copy(), this.getDefaultBumpedState());
+        return new BumpableBlockEntity(pos, state, this.getDefaultBumpedState());
     }
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, (w, p, s, e) -> e.tick(w, p, s));
+        return validateTicker(type, SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, (w, p, s, e) -> e.tick(w, p, s));
     }
 
     @Override
-    public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!player.getStackInHand(hand).isOf(SuperMario.MAKER_GLOVE)) {
-            return ActionResult.PASS;
+            return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
+
         if (world.isClient) {
-            return ActionResult.SUCCESS;
+            return ItemActionResult.SUCCESS;
         }
         if (world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpableEntity) {
             player.openHandledScreen(bumpableEntity);
             // TODO: add stat for inspecting bumpable blocks
             //player.incrementStat(MubbleStats.INSPECT_BUMPABLE);
         }
-        return ActionResult.CONSUME;
-    }
-
-    @Override
-    public void onPlaced(World world, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-        if (stack.hasCustomName() && world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpable) {
-            bumpable.setCustomName(stack.getName());
-        }
+        return ItemActionResult.CONSUME;
     }
 
     @Override
@@ -282,7 +278,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
         double y = Math.floor(pos.getY()) + world.random.nextDouble() * (1.0 - EntityType.ITEM.getHeight());
         double z = Math.floor(pos.getZ()) + world.random.nextDouble() * e + f;
 
-        while(!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             ItemEntity itemEntity = new ItemEntity(world, x, y, z, stack.split(1));
             float i = 0.2f;
             float j = 0.11485000171139836f;

@@ -1,6 +1,5 @@
 package fr.hugman.mubble.block;
 
-import fr.hugman.dawn.block.DawnBlockSettings;
 import fr.hugman.mubble.world.MubbleGamerules;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.*;
@@ -42,7 +41,7 @@ public class BeepBlock extends Block {
     }
 
     public static Settings makeSettings(MapColor mapColor) {
-        return DawnBlockSettings.create().mapColor(mapColor)
+        return AbstractBlock.Settings.create().mapColor(mapColor)
                 .sounds(BlockSoundGroup.AMETHYST_BLOCK)
                 .strength(1.5f).requiresTool().item()
                 .allowsSpawning(BeepBlock::isNotFrame)

@@ -1,5 +1,6 @@
 package fr.hugman.mubble.block;
 
+import com.mojang.serialization.Codec;
 import net.minecraft.text.Text;
 import net.minecraft.util.StringIdentifiable;
 

@@ -28,7 +28,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
 	private final SoundEvent highJumpSound;
 
 	public NoteBlock(SoundEvent lowJumpSound, SoundEvent highJumpSound, Settings settings) {
-		super(ItemStack.EMPTY, null, settings);
+		super(null, settings);
 		this.lowJumpSound = lowJumpSound;
 		this.highJumpSound = highJumpSound;
 	}

@@ -5,6 +5,7 @@ import fr.hugman.mubble.block.BumpableDropMode;
 import fr.hugman.mubble.nbt.MubbleNbtHelper;
 import fr.hugman.mubble.registry.SuperMario;
 import fr.hugman.mubble.screen.BumpableScreenHandler;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.SharedConstants;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -90,8 +91,8 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 		this(pos, state, DefaultedList.ofSize(1, ItemStack.EMPTY));
 	}
 
-	public BumpableBlockEntity(BlockPos pos, BlockState state, @NotNull ItemStack stack, @Nullable BlockState bumpedState) {
-		this(pos, state, DefaultedList.ofSize(1, stack));
+	public BumpableBlockEntity(BlockPos pos, BlockState state, @Nullable BlockState bumpedState) {
+		this(pos, state, DefaultedList.ofSize(1, ItemStack.EMPTY));
 		this.setBumpedState(bumpedState);
 	}
 
@@ -100,9 +101,10 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 	/*=======*/
 
 	@Override
-	protected void writeNbt(NbtCompound nbt) {
-		if(!this.serializeLootTable(nbt)) {
-			Inventories.writeNbt(nbt, this.inventory);
+	protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+		super.writeNbt(nbt, registryLookup);
+		if (!this.writeLootTable(nbt)) {
+			Inventories.writeNbt(nbt, this.inventory, registryLookup);
 		}
 		nbt.putInt(DROP_MODE_KEY, this.dropMode.getIndex());
 		if(this.bumpedState != null) {
@@ -115,10 +117,11 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 	}
 
 	@Override
-	public void readNbt(NbtCompound nbt) {
+	protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
+		super.readNbt(nbt, registryLookup);
 		this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-		if(!this.deserializeLootTable(nbt)) {
-			Inventories.readNbt(nbt, this.inventory);
+		if (!this.readLootTable(nbt)) {
+			Inventories.readNbt(nbt, this.inventory, registryLookup);
 		}
 		if(nbt.contains(BUMPED_STATE_KEY)) {
 			if(this.world == null) {
@@ -225,13 +228,13 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 	}
 
 	@Override
-	protected DefaultedList<ItemStack> getInvStackList() {
+	protected DefaultedList<ItemStack> getHeldStacks() {
 		return this.inventory;
 	}
 
 	@Override
-	protected void setInvStackList(DefaultedList<ItemStack> list) {
-		this.inventory = list;
+	protected void setHeldStacks(DefaultedList<ItemStack> inventory) {
+		this.inventory = inventory;
 	}
 
 	@Override
@@ -303,7 +306,7 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 	}
 
 	@Override
-	public NbtCompound toInitialChunkDataNbt() {
+	public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
 		NbtCompound nbt = new NbtCompound();
 		this.writeClientNbt(nbt);
 		return nbt;

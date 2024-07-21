@@ -1,8 +1,6 @@
 package fr.hugman.mubble.registry;
 
 import fr.hugman.dawn.Registrar;
-import fr.hugman.dawn.block.DawnBlockSettings;
-import fr.hugman.dawn.item.DawnItemSettings;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.BeepBlock;
 import fr.hugman.mubble.block.DecoratedBumpableBlock;
@@ -14,9 +12,12 @@ import fr.hugman.mubble.item.CapeFeatherItem;
 import fr.hugman.mubble.screen.BumpableScreenHandler;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -25,7 +26,6 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.resource.featuretoggle.FeatureFlags;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.text.Text;
@@ -33,18 +33,18 @@ import net.minecraft.util.Rarity;
 
 public class SuperMario {
 	// ITEMS
-	public static final Item MAKER_GLOVE = new Item(new DawnItemSettings().maxCount(1));
+	public static final Item MAKER_GLOVE = new Item(new Item.Settings().maxCount(1));
 
 	// BLOCKS
-	public static final EmptyBlock EMPTY_BLOCK = new EmptyBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
-	public static final DecoratedBumpableBlock QUESTION_BLOCK = new DecoratedBumpableBlock(new ItemStack(Items.GOLD_NUGGET), EMPTY_BLOCK.getDefaultState(), DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item());
-	public static final DecoratedBumpableBlock BRICK_BLOCK = new DecoratedBumpableBlock(ItemStack.EMPTY, Blocks.AIR.getDefaultState(), DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item());
-	public static final DecoratedBumpableBlock GOLD_BLOCK = new DecoratedBumpableBlock(new ItemStack(Items.GOLD_NUGGET), Blocks.AIR.getDefaultState(), DawnBlockSettings.copy(Blocks.BRICKS).mapColor(MapColor.GOLD).item());
-	public static final NoteBlock NOTE_BLOCK = new NoteBlock(MubbleSounds.NOTE_BLOCK_JUMP_LOW, MubbleSounds.NOTE_BLOCK_JUMP_HIGH, DawnBlockSettings.copy(Blocks.QUARTZ_BLOCK).mapColor(MapColor.WHITE).item());
-	public static final DecoratedBumpableBlock EXCLAMATION_BLOCK = new DecoratedBumpableBlock(ItemStack.EMPTY, null, DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BLUE).item());
-	public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
-	public static final SnakeBlock FAST_SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LAPIS_BLUE).item());
-	public static final SnakeBlock SLOW_SNAKE_BLOCK = new SnakeBlock(DawnBlockSettings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.RED).item());
+	public static final EmptyBlock EMPTY_BLOCK = new EmptyBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BROWN).item());
+	public static final DecoratedBumpableBlock QUESTION_BLOCK = new DecoratedBumpableBlock(EMPTY_BLOCK.getDefaultState(), AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.YELLOW).item(new Item.Settings().component(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)));
+	public static final DecoratedBumpableBlock BRICK_BLOCK = new DecoratedBumpableBlock(Blocks.AIR.getDefaultState(), AbstractBlock.Settings.copy(Blocks.BRICKS).mapColor(MapColor.BROWN).item(new Item.Settings().component(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)));
+	public static final DecoratedBumpableBlock GOLD_BLOCK = new DecoratedBumpableBlock(Blocks.AIR.getDefaultState(), AbstractBlock.Settings.copy(Blocks.BRICKS).mapColor(MapColor.GOLD).item(new Item.Settings().component(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)));
+	public static final NoteBlock NOTE_BLOCK = new NoteBlock(MubbleSounds.NOTE_BLOCK_JUMP_LOW, MubbleSounds.NOTE_BLOCK_JUMP_HIGH, AbstractBlock.Settings.copy(Blocks.QUARTZ_BLOCK).mapColor(MapColor.WHITE).item(new Item.Settings().component(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)));
+	public static final DecoratedBumpableBlock EXCLAMATION_BLOCK = new DecoratedBumpableBlock(null, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.BLUE).item(new Item.Settings().component(DataComponentTypes.CONTAINER, ContainerComponent.DEFAULT)));
+	public static final SnakeBlock SNAKE_BLOCK = new SnakeBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LIME).item());
+	public static final SnakeBlock FAST_SNAKE_BLOCK = new SnakeBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.LAPIS_BLUE).item());
+	public static final SnakeBlock SLOW_SNAKE_BLOCK = new SnakeBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.RED).item());
 	public static final BeepBlock RED_BEEP_BLOCK = new BeepBlock(MapColor.RED, false);
 	public static final BeepBlock BLUE_BEEP_BLOCK = new BeepBlock(MapColor.BLUE, true);
 
