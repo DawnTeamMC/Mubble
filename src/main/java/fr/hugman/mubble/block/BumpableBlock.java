@@ -3,8 +3,8 @@ package fr.hugman.mubble.block;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
-import fr.hugman.mubble.registry.MubbleSounds;
-import fr.hugman.mubble.registry.SuperMario;
+import fr.hugman.mubble.item.MubbleItems;
+import fr.hugman.mubble.sound.MubbleSounds;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
@@ -91,12 +91,12 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return validateTicker(type, SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, (w, p, s, e) -> e.tick(w, p, s));
+        return validateTicker(type, MubbleBlockEntityTypes.BUMPABLE_BLOCK, (w, p, s, e) -> e.tick(w, p, s));
     }
 
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        if (!player.getStackInHand(hand).isOf(SuperMario.MAKER_GLOVE)) {
+        if (!player.getStackInHand(hand).isOf(MubbleItems.MAKER_GLOVE)) {
             return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
@@ -216,7 +216,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
         }
 
         BlockPos pos = hit.getBlockPos();
-        world.getBlockEntity(pos, SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE).ifPresent(blockEntity -> {
+        world.getBlockEntity(pos, MubbleBlockEntityTypes.BUMPABLE_BLOCK).ifPresent(blockEntity -> {
             if (this.canBump(world, pos, state, blockEntity, entity, hit)) {
                 blockEntity.bump(world, pos, state, entity, hit.getSide().getOpposite());
             }
@@ -225,16 +225,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
 
     @Override
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-        if (world.isClient()) {
-            return;
-        }
-
-        BlockPos pos = hit.getBlockPos();
-        world.getBlockEntity(pos, SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE).ifPresent(blockEntity -> {
-            if (this.canBump(world, pos, state, blockEntity, projectile, hit)) {
-                blockEntity.bump(world, pos, state, projectile, hit.getSide().getOpposite());
-            }
-        });
+        this.onHit(world, state, projectile, hit);
     }
 
     public void loot(World world, BlockPos pos, BumpableBlockEntity blockEntity, boolean atCenter) {

@@ -1,8 +1,10 @@
 package fr.hugman.mubble;
 
+import fr.hugman.mubble.block.MubbleBlockEntityTypes;
+import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.client.gui.screen.BumpableScreen;
 import fr.hugman.mubble.client.render.BumpableBlockEntityRenderer;
-import fr.hugman.mubble.registry.SuperMario;
+import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -13,12 +15,23 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
 @Environment(EnvType.CLIENT)
 public class MubbleClient implements ClientModInitializer {
-	@Override
-	public void onInitializeClient() {
-		BlockRenderLayerMap.INSTANCE.putBlock(SuperMario.RED_BEEP_BLOCK, RenderLayer.getCutout());
-		BlockRenderLayerMap.INSTANCE.putBlock(SuperMario.BLUE_BEEP_BLOCK, RenderLayer.getCutout());
+    @Override
+    public void onInitializeClient() {
+        registerBlockRenderLayers();
+        registerHandledScreens();
+        registerBlockEntityRenderers();
+    }
 
-		HandledScreens.register(SuperMario.BUMPABLE_BLOCK_SCREEN_HANDLER, BumpableScreen::new);
-		BlockEntityRendererFactories.register(SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, BumpableBlockEntityRenderer::new);
-	}
+    private static void registerBlockRenderLayers() {
+        BlockRenderLayerMap.INSTANCE.putBlock(MubbleBlocks.RED_BEEP_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.INSTANCE.putBlock(MubbleBlocks.BLUE_BEEP_BLOCK, RenderLayer.getCutout());
+    }
+
+    private static void registerHandledScreens() {
+        HandledScreens.register(MubbleScreenHandlerTypes.BUMPABLE_BLOCK, BumpableScreen::new);
+    }
+
+    private static void registerBlockEntityRenderers() {
+        BlockEntityRendererFactories.register(MubbleBlockEntityTypes.BUMPABLE_BLOCK, BumpableBlockEntityRenderer::new);
+    }
 }

@@ -1,6 +1,6 @@
 package fr.hugman.mubble.item;
 
-import fr.hugman.mubble.registry.MubbleSounds;
+import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
