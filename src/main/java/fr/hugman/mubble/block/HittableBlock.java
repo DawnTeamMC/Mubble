@@ -21,5 +21,7 @@ import net.minecraft.world.World;
  * @since v4.0.0
  */
 public interface HittableBlock {
-	void onHit(World world, BlockPos pos, BlockState state, Entity entity, BlockHitResult hit);
+	double HIT_Y_OFFSET = 0.001;
+
+	void onHit(World world, BlockState state, Entity entity, BlockHitResult hit);
 }

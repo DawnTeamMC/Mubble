@@ -1,10 +1,11 @@
 package fr.hugman.mubble.block;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
-import fr.hugman.mubble.registry.MubbleSounds;
+import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -24,8 +25,18 @@ import java.util.List;
  * @since v4.0.0
  */
 public class DecoratedBumpableBlock extends BumpableBlock {
-	public DecoratedBumpableBlock(ItemStack defaultStack, @Nullable BlockState defaultBumpedState, Settings settings) {
-		super(defaultStack, defaultBumpedState, settings);
+	public static final MapCodec<DecoratedBumpableBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+			BlockState.CODEC.fieldOf("default_bumped_state").forGetter((block) -> block.defaultBumpedState),
+			createSettingsCodec()
+	).apply(instance, DecoratedBumpableBlock::new));
+
+	public DecoratedBumpableBlock(@Nullable BlockState defaultBumpedState, Settings settings) {
+		super(defaultBumpedState, settings);
+	}
+
+	@Override
+	protected MapCodec<? extends DecoratedBumpableBlock> getCodec() {
+		return CODEC;
 	}
 
 	@Override
@@ -64,6 +75,6 @@ public class DecoratedBumpableBlock extends BumpableBlock {
 		Vec3d vec3d = entity.getVelocity();
 		entity.setVelocity(vec3d.x, 0.3D, vec3d.z);
 		entity.velocityDirty = true;
-		// TODO: add a gamerule for harming entities
+		// TODO: add a damage type and a gamerule for harming entities
 	}
 }

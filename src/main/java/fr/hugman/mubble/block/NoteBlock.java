@@ -28,7 +28,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
 	private final SoundEvent highJumpSound;
 
 	public NoteBlock(SoundEvent lowJumpSound, SoundEvent highJumpSound, Settings settings) {
-		super(ItemStack.EMPTY, null, settings);
+		super(null, settings);
 		this.lowJumpSound = lowJumpSound;
 		this.highJumpSound = highJumpSound;
 	}
@@ -43,13 +43,15 @@ public class NoteBlock extends DecoratedBumpableBlock {
 		// TODO: make a new interface for falling hittable blocks
 		World world = entity.getEntityWorld();
 		if(world.isClient()) {
-			return;
+			super.onEntityLand(view, entity);
 		}
 
 		BlockPos pos = entity.getBlockPos().down();
 		BlockState state = world.getBlockState(pos);
 
-		this.onHit(world, pos, state, entity, new BlockHitResult(entity.getPos(), Direction.UP, pos, false));
+		this.onHit(world, state, entity, new BlockHitResult(entity.getPos(), Direction.UP, pos, false));
+
+		super.onEntityLand(view, entity);
 	}
 
 	@Override
