@@ -169,12 +169,4 @@ public class ShooterInkBulletConfig {
     public ShooterInkBulletConfig copy() {
         return of(this.maxDamage, this.minDamage, this.startReduceTick, this.endReduceTick, this.initialSpeed, this.brakeTick, this.brakeMaxSpeed, this.freeGravityThreshold);
     }
-
-    public static ShooterInkBulletConfig fromNbt(DynamicRegistryManager registryManager, NbtElement element) {
-        return CODEC.parse(RegistryOps.of(NbtOps.INSTANCE, registryManager), element).getOrThrow(false, System.err::println);
-    }
-
-    public NbtElement toNbt(DynamicRegistryManager registryManager) {
-        return CODEC.encodeStart(RegistryOps.of(NbtOps.INSTANCE, registryManager), this).resultOrPartial(Mubble.LOGGER::error).orElse(null);
-    }
 }

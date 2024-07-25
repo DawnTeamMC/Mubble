@@ -15,6 +15,10 @@ public class MubbleItemGroups {
             .displayName(Text.translatable("item_group.mubble.super_mario"))
             .icon(() -> new ItemStack(MubbleBlocks.QUESTION_BLOCK))
             .build());
+    public static final ItemGroup SPLATOON = of(MubbleItemGroupKeys.SPLATOON, FabricItemGroup.builder()
+            .displayName(Text.translatable("item_group.mubble.splatoon"))
+            .icon(() -> new ItemStack(MubbleItems.SPLATTERSHOT))
+            .build());
 
     private static ItemGroup of(RegistryKey<ItemGroup> key, ItemGroup itemGroup) {
         return Registry.register(Registries.ITEM_GROUP, key, itemGroup);
@@ -36,6 +40,11 @@ public class MubbleItemGroups {
             itemGroup.add(MubbleBlocks.BLUE_BEEP_BLOCK);
             itemGroup.add(MubbleItems.CAPE_FEATHER);
             itemGroup.add(MubbleItems.SUPER_CAPE_FEATHER);
+        });
+        ItemGroupEvents.modifyEntriesEvent(MubbleItemGroupKeys.SPLATOON).register(itemGroup -> {
+            itemGroup.add(MubbleItems.TEST_SHOOTER);
+            itemGroup.add(MubbleItems.SPLATTERSHOT);
+            itemGroup.add(MubbleItems.DOT_96_GAL);
         });
     }
 }

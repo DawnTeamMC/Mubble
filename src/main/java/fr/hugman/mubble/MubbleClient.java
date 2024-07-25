@@ -5,10 +5,8 @@ import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.client.gui.screen.BumpableScreen;
 import fr.hugman.mubble.client.render.BumpableBlockEntityRenderer;
 import fr.hugman.mubble.client.render.entity.ShooterInkBulletRenderer;
-import fr.hugman.mubble.registry.Splatoon;
+import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
-import fr.hugman.mubble.client.render.entity.ShooterInkBulletRenderer;
-import fr.hugman.mubble.entity.projectile.ShooterInkBulletEntity;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -29,7 +27,7 @@ public class MubbleClient implements ClientModInitializer {
     }
 
     public static void registerEntityRenderers() {
-        EntityRendererRegistry.register(Splatoon.SHOOTER_INK_BULLET, ShooterInkBulletRenderer::new);
+        EntityRendererRegistry.register(MubbleEntityTypes.SHOOTER_INK_BULLET, ShooterInkBulletRenderer::new);
     }
 
     private static void registerBlockRenderLayers() {
@@ -41,7 +39,7 @@ public class MubbleClient implements ClientModInitializer {
     }
 
     public static void registerBlockEntitiesRenderers() {
-        BlockEntityRendererFactories.register(SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, BumpableBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(MubbleBlockEntityTypes.BUMPABLE_BLOCK, BumpableBlockEntityRenderer::new);
     }
 
     private static void registerHandledScreens() {

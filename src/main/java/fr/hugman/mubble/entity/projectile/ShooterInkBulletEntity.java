@@ -1,6 +1,8 @@
 package fr.hugman.mubble.entity.projectile;
 
-import fr.hugman.mubble.registry.Splatoon;
+import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.block.MubbleBlocks;
+import fr.hugman.mubble.entity.MubbleEntityTypes;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
@@ -9,6 +11,8 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.util.Util;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
@@ -39,7 +43,7 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
     }
 
     public ShooterInkBulletEntity(World world, LivingEntity shooter, @Nullable ShooterInkBulletConfig config, float angleDeviation) {
-        this(Splatoon.SHOOTER_INK_BULLET, world);
+        this(MubbleEntityTypes.SHOOTER_INK_BULLET, world);
 
         var random = shooter.getEntityWorld().getRandom();
 
@@ -124,9 +128,9 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        this.dataTracker.startTracking(BRAKED, false);
-        this.dataTracker.startTracking(FREE_GRAVITY, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        builder.add(FREE_GRAVITY, false);
+        builder.add(BRAKED, false);
     }
 
     public boolean hasBraked() {
@@ -141,7 +145,8 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
     protected void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
         if (this.config != null) {
-            nbt.put(CONFIG_KEY, this.config.toNbt(this.getWorld().getRegistryManager()));
+            ShooterInkBulletConfig.CODEC.encodeStart(NbtOps.INSTANCE, this.config)
+                    .ifSuccess(nbtElement -> nbt.put(CONFIG_KEY, nbtElement));
         }
         nbt.putShort(LIFE_KEY, (short) this.life);
     }
@@ -150,7 +155,10 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
     protected void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
         if (nbt.contains(CONFIG_KEY)) {
-            this.config = ShooterInkBulletConfig.fromNbt(this.getWorld().getRegistryManager(), nbt.get(CONFIG_KEY));
+            ShooterInkBulletConfig.CODEC
+                    .decode(NbtOps.INSTANCE, nbt.get(CONFIG_KEY))
+                    .resultOrPartial(Util.addPrefix("Shooter ink bullet", Mubble.LOGGER::error))
+                    .ifPresent(pair -> this.config = pair.getFirst());
         }
         this.life = nbt.getShort(LIFE_KEY);
     }
@@ -164,7 +172,7 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
         if (!this.getWorld().isClient) {
             var inkPos = pos.offset(side);
             var currentState = world.getBlockState(inkPos);
-            var inkState = Splatoon.INK_BLOCK.withDirection(currentState, side.getOpposite());
+            var inkState = MubbleBlocks.INK_BLOCK.withDirection(currentState, side.getOpposite());
 
             // TODO: check more here
             if (inkState.canPlaceAt(world, inkPos)) {
@@ -187,9 +195,9 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
         return Math.sqrt(this.getVelocity().x * this.getVelocity().x + this.getVelocity().z * this.getVelocity().z);
     }
 
-    public float getGravity() {
+    public double getGravity() {
         // the high jump splatoon challenge mode has a different gravity I think
         // so we can change this later
-        return 0.15f;
+        return 0.15d;
     }
 }

@@ -11,6 +11,11 @@ public class MubbleItemKeys {
     public static final RegistryKey<Item> CAPE_FEATHER = of("cape_feather");
     public static final RegistryKey<Item> SUPER_CAPE_FEATHER = of("super_cape_feather");
 
+    // SPLATOON
+    public static final RegistryKey<Item> SPLATTERSHOT = of("splattershot");
+    public static final RegistryKey<Item> DOT_96_GAL = of("dot_96_gal");
+    public static final RegistryKey<Item> TEST_SHOOTER = of("test_shooter");
+
     private static RegistryKey<Item> of(String path) {
         return RegistryKey.of(RegistryKeys.ITEM, Mubble.id(path));
     }

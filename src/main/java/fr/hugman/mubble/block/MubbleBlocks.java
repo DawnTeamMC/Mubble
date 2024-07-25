@@ -5,6 +5,7 @@ import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
+import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ContainerComponent;
 import net.minecraft.item.BlockItem;
@@ -12,6 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.sound.BlockSoundGroup;
 
 public class MubbleBlocks {
     // SUPER MARIO
@@ -26,6 +28,9 @@ public class MubbleBlocks {
     public static final SnakeBlock SLOW_SNAKE_BLOCK = ofWithItem(MubbleBlockKeys.SLOW_SNAKE_BLOCK, new SnakeBlock(AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).mapColor(MapColor.RED)));
     public static final BeepBlock RED_BEEP_BLOCK = ofWithItem(MubbleBlockKeys.RED_BEEP_BLOCK, new BeepBlock(BeepBlock.settings(MapColor.RED), false));
     public static final BeepBlock BLUE_BEEP_BLOCK = ofWithItem(MubbleBlockKeys.BLUE_BEEP_BLOCK, new BeepBlock(BeepBlock.settings(MapColor.BLUE), true));
+
+    // SPLATOON
+    public static final InkBlock INK_BLOCK = of(MubbleBlockKeys.INK, new InkBlock(AbstractBlock.Settings.create().mapColor(MapColor.WATER_BLUE).replaceable().noCollision().strength(100.0f).pistonBehavior(PistonBehavior.DESTROY).dropsNothing().sounds(BlockSoundGroup.INTENTIONALLY_EMPTY)));
 
     private static <O extends Block> O of(RegistryKey<Block> key, O block) {
         return Registry.register(Registries.BLOCK, key, block);

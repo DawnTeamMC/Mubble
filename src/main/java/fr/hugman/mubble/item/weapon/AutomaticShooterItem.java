@@ -60,7 +60,7 @@ public class AutomaticShooterItem extends Item {
 	}
 
 	@Override
-	public int getMaxUseTime(ItemStack stack) {
+	public int getMaxUseTime(ItemStack stack, LivingEntity user) {
 		return 72000;
 	}
 }
