@@ -1,13 +1,16 @@
 package fr.hugman.mubble.item.weapon;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.codec.MubbleCodecs;
 import fr.hugman.mubble.entity.projectile.ShooterInkBulletConfig;
 import fr.hugman.mubble.util.SplatoonConversions;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 
 /**
- * This class is used to store the configuration of an {@link AutomaticShooterItem}.
+ * This class is used to store the configuration of an {@link SplatoonWeaponItem}.
  *
  * <p>Here's how the config's fields are used:
  * <ul>
@@ -18,13 +21,21 @@ import fr.hugman.mubble.util.SplatoonConversions;
  * @author Hugman
  * @since v4.0.0
  */
-public class AutomaticShooterConfig {
-	public static final Codec<AutomaticShooterConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+public class AutomaticShooterConfig extends SplatoonWeapon {
+	public static final MapCodec<AutomaticShooterConfig> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
 			ShooterInkBulletConfig.CODEC.fieldOf("ink_bullet_config").forGetter(config -> config.bulletConfig),
 			MubbleCodecs.NONNEGATIVE_LONG.fieldOf("cooldown").forGetter(config -> config.cooldown),
 			MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("angle_deviation").forGetter(config -> config.angleDeviation),
 			MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("jumping_angle_deviation").forGetter(config -> config.jumpingAngleDeviation)
 	).apply(instance, AutomaticShooterConfig::of));
+
+	public static final PacketCodec<RegistryByteBuf, AutomaticShooterConfig> PACKET_CODEC = PacketCodec.tuple(
+			ShooterInkBulletConfig.PACKET_CODEC, AutomaticShooterConfig::bulletConfig,
+			PacketCodecs.VAR_LONG, AutomaticShooterConfig::cooldown,
+			PacketCodecs.FLOAT, AutomaticShooterConfig::angleDeviation,
+			PacketCodecs.FLOAT, AutomaticShooterConfig::jumpingAngleDeviation,
+			AutomaticShooterConfig::new
+	);
 
 	private final ShooterInkBulletConfig bulletConfig;
 	private final long cooldown;
@@ -36,6 +47,11 @@ public class AutomaticShooterConfig {
 		this.cooldown = cooldown;
 		this.angleDeviation = angleDeviation;
 		this.jumpingAngleDeviation = jumpingAngleDeviation;
+	}
+
+	@Override
+	protected SplatoonWeaponType<?> getType() {
+		return SplatoonWeaponTypes.AUTOMATIC_SHOOTER;
 	}
 
 	/*===========*/
@@ -81,9 +97,9 @@ public class AutomaticShooterConfig {
 				jumpDegSwerve
 		);
 	}
-
 	/*===========*/
 	/*  GETTERS  */
+
 	/*===========*/
 
 	public ShooterInkBulletConfig bulletConfig() {

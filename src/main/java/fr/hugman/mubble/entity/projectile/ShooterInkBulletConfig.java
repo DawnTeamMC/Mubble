@@ -2,13 +2,12 @@ package fr.hugman.mubble.entity.projectile;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.codec.MubbleCodecs;
+import fr.hugman.mubble.codec.PacketCodecXL;
 import fr.hugman.mubble.util.SplatoonConversions;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.RegistryOps;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
 
 /**
  * This class is used to store the configuration of a shooter's ink bullet.
@@ -37,6 +36,18 @@ public class ShooterInkBulletConfig {
             MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("brake_max_speed").forGetter(config -> config.brakeMaxSpeed),
             MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("free_gravity_threshold").forGetter(config -> config.freeGravityThreshold)
     ).apply(instance, ShooterInkBulletConfig::of));
+
+    public static final PacketCodec<RegistryByteBuf, ShooterInkBulletConfig> PACKET_CODEC = PacketCodecXL.tuple(
+            PacketCodecs.FLOAT, ShooterInkBulletConfig::maxDamage,
+            PacketCodecs.FLOAT, ShooterInkBulletConfig::minDamage,
+            PacketCodecs.VAR_LONG, ShooterInkBulletConfig::startReduceTick,
+            PacketCodecs.VAR_LONG, ShooterInkBulletConfig::endReduceTick,
+            PacketCodecs.FLOAT, ShooterInkBulletConfig::initialSpeed,
+            PacketCodecs.VAR_LONG, ShooterInkBulletConfig::brakeTick,
+            PacketCodecs.FLOAT, ShooterInkBulletConfig::brakeMaxSpeed,
+            PacketCodecs.FLOAT, ShooterInkBulletConfig::freeGravityThreshold,
+            ShooterInkBulletConfig::new
+    );
 
     public static final ShooterInkBulletConfig DEFAULT = ShooterInkBulletConfig.ofSplat(40, 8, 360, 180, 1.4495F, 4, 2.2F, 0.016f);
 
