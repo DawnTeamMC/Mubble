@@ -47,5 +47,37 @@
     "sounds": [
       "mubble:item/cape_feather/use"
     ]
+  },
+  "block.ink.splash": {
+    "subtitle": "subtitles.mubble.block.ink.splash",
+    "sounds": [
+      "mubble:block/ink/place/1",
+      "mubble:block/ink/place/2",
+      "mubble:block/ink/place/3",
+      "mubble:block/ink/place/4",
+      "mubble:block/ink/place/5",
+      "mubble:block/ink/place/6",
+      "mubble:block/ink/place/7",
+      "mubble:block/ink/place/8",
+      "mubble:block/ink/place/9",
+      "mubble:block/ink/place/10",
+      "mubble:block/ink/place/11",
+      "mubble:block/ink/place/12",
+      "mubble:block/ink/place/13",
+      "mubble:block/ink/place/14",
+      "mubble:block/ink/place/15",
+      "mubble:block/ink/place/16",
+      "mubble:block/ink/place/17",
+      "mubble:block/ink/place/18",
+      "mubble:block/ink/place/19",
+      "mubble:block/ink/place/20",
+      "mubble:block/ink/place/21"
+    ]
+  },
+  "item.splattershot.shoot": {
+    "subtitle": "subtitles.mubble.item.splattershot.shoot",
+    "sounds": [
+      "mubble:item/splattershot/shoot/1"
+    ]
   }
 }

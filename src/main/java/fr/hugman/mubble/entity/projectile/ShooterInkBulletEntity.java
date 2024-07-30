@@ -3,6 +3,7 @@ package fr.hugman.mubble.entity.projectile;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
+import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
@@ -178,7 +179,7 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
             if (inkState.canPlaceAt(world, inkPos)) {
                 world.setBlockState(inkPos, inkState);
             }
-
+            this.playSound(MubbleSounds.INK_SPLASH, 0.3F, 1.0f);
             this.discard();
         }
     }

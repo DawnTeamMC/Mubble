@@ -18,16 +18,24 @@ import net.minecraft.SharedConstants;
  * @since 4.0.0
  */
 public final class SplatoonConversions {
-    public static final float TICK_RATIO = (float) SharedConstants.TICKS_PER_SECOND / 60;
-    public static final float DAMAGE_RATIO = 20.0F / (100 * 10);
-    public static final float DISTANCE_RATIO = 1.0f / 10f;
-    public static final float SPEED_RATIO = DISTANCE_RATIO / TICK_RATIO;
+    public static final int MINECRAFT_TPS = SharedConstants.TICKS_PER_SECOND;
+    public static final int SPLATOON_TPS = 60;
+    public static final float MINECRAFT_METER = 1.0f;
+    public static final float SPLATOON_METER = 1.0f;
+    public static final int MINECRAFT_FULL_HEALTH = 20;
+    public static final int SPLATOON_FULL_HEALTH = 1000;
+
+    public static final float TPS_RATIO = (float) MINECRAFT_TPS / SPLATOON_TPS;
+    public static final float DISTANCE_RATIO = MINECRAFT_METER / SPLATOON_METER;
+    public static final float DAMAGE_RATIO = (float) MINECRAFT_FULL_HEALTH / SPLATOON_FULL_HEALTH;
+
+    public static final float SPEED_RATIO = (MINECRAFT_METER/MINECRAFT_TPS) / (SPLATOON_METER/SPLATOON_TPS);
 
     /**
      * Converts Splatoon 3 frames to Minecraft ticks.
      */
     public static long time(int frames) {
-        return (long) (frames * TICK_RATIO);
+        return (long) (frames * TPS_RATIO);
     }
 
     /**

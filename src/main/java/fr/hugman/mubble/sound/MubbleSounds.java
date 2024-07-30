@@ -18,6 +18,10 @@ public class MubbleSounds {
     public static final SoundEvent NOTE_BLOCK_JUMP_HIGH = of("block.note_block.jump.high");
     public static final SoundEvent CAPE_FEATHER_USE = of("item.cape_feather.use");
 
+    // SPLATOON
+    public static final SoundEvent INK_SPLASH = of("block.ink.splash");
+    public static final SoundEvent SPLATTERSHOT_SHOOT = of("item.splattershot.shoot");
+
     private static SoundEvent of(String path) {
         Identifier id = Mubble.id(path);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));

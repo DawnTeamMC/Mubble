@@ -131,15 +131,13 @@ public class ShooterInkBulletConfig {
      * @param freeGravity                 the speed threshold at which the bullet will start to free fall after it braked, in units per second
      */
     public static ShooterInkBulletConfig ofSplat(int reduceEndFrame, int reduceStartFrame, int valueMax, int valueMin, float goStraightStateEndMaxSpeed, int goStraightToBrakeStateFrame, float spawnSpeed, float freeGravity) {
-        var brakeTick = SplatoonConversions.time(goStraightToBrakeStateFrame);
-        var initialSpeed = SplatoonConversions.distance(goStraightToBrakeStateFrame * spawnSpeed) / brakeTick;
         return of(
                 SplatoonConversions.damage(valueMax),
                 SplatoonConversions.damage(valueMin),
                 SplatoonConversions.time(reduceStartFrame),
                 SplatoonConversions.time(reduceEndFrame),
-                initialSpeed,
-                brakeTick,
+                SplatoonConversions.speed(spawnSpeed),
+                SplatoonConversions.time(goStraightToBrakeStateFrame),
                 SplatoonConversions.speed(goStraightStateEndMaxSpeed),
                 SplatoonConversions.speed(freeGravity)
         );

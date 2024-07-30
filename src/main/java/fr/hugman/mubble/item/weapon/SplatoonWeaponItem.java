@@ -1,12 +1,19 @@
 package fr.hugman.mubble.item.weapon;
 
+import com.mojang.serialization.DataResult;
+import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.component.MubbleDataComponentsTypes;
 import fr.hugman.mubble.entity.projectile.ShooterInkBulletEntity;
+import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
@@ -34,6 +41,9 @@ public class SplatoonWeaponItem extends Item {
 	@Override
 	public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
 		RegistryEntry<SplatoonWeapon> weaponEntry = stack.get(MubbleDataComponentsTypes.SPLATOON_WEAPON);
+
+		DataResult<NbtElement> dataResult = SplatoonWeapon.ENTRY_CODEC.encode(weaponEntry, NbtOps.INSTANCE, new NbtCompound());
+		Mubble.LOGGER.info(dataResult.getOrThrow().asString());
 		if(weaponEntry == null) {
 			return;
 		}
@@ -43,8 +53,7 @@ public class SplatoonWeaponItem extends Item {
 
 			if(weapon instanceof AutomaticShooterConfig config) {
 				if (!player.getItemCooldownManager().isCoolingDown(this)) {
-					//world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
-					//TODO: custom sound
+					world.playSound(null, user.getX(), user.getY(), user.getZ(), MubbleSounds.SPLATTERSHOT_SHOOT, SoundCategory.PLAYERS, 0.5f, 1.0F);
 					player.getItemCooldownManager().set(this, (int) config.cooldown());
 					if (!world.isClient) {
 						float angleDeviation = (user.isOnGround() ? config.angleDeviation() : config.jumpingAngleDeviation());
