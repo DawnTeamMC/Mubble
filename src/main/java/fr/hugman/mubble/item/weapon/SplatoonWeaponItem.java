@@ -41,9 +41,6 @@ public class SplatoonWeaponItem extends Item {
 	@Override
 	public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
 		RegistryEntry<SplatoonWeapon> weaponEntry = stack.get(MubbleDataComponentsTypes.SPLATOON_WEAPON);
-
-		DataResult<NbtElement> dataResult = SplatoonWeapon.ENTRY_CODEC.encode(weaponEntry, NbtOps.INSTANCE, new NbtCompound());
-		Mubble.LOGGER.info(dataResult.getOrThrow().asString());
 		if(weaponEntry == null) {
 			return;
 		}
