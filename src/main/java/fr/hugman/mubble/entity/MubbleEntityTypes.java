@@ -11,6 +11,7 @@ import net.minecraft.registry.RegistryKey;
 public class MubbleEntityTypes {
     public static final EntityType<ShooterInkBulletEntity> SHOOTER_INK_BULLET = of(MubbleEntityTypeKeys.SHOOTER_INK_BULLET, EntityType.Builder.<ShooterInkBulletEntity>create(ShooterInkBulletEntity::new, SpawnGroup.MISC)
             .dimensions(0.5f, 0.5f)
+            .eyeHeight(0.25f)
             .maxTrackingRange(4)
             .trackingTickInterval(20)
             .alwaysUpdateVelocity(true));

@@ -46,8 +46,6 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
     public ShooterInkBulletEntity(World world, LivingEntity shooter, @Nullable ShooterInkBulletConfig config, float angleDeviation) {
         this(MubbleEntityTypes.SHOOTER_INK_BULLET, world);
 
-        var random = shooter.getEntityWorld().getRandom();
-
         // owner
         this.setOwner(shooter);
 
@@ -56,7 +54,7 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
         this.config = config.copy();
 
         // position
-        this.setPosition(shooter.getX(), shooter.getEyeY() - (double) 0.1f, shooter.getZ());
+        this.setPosition(shooter.getX(), shooter.getEyeY() - 0.1f, shooter.getZ());
 
         // velocity stuff
         float pitch = shooter.getPitch() + (random.nextFloat() - random.nextFloat()) * angleDeviation;
@@ -129,6 +127,14 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
     }
 
     @Override
+    protected void updateRotation() {
+        Vec3d vec3d = this.getVelocity();
+        double d = vec3d.horizontalLength();
+        this.setPitch((float)(MathHelper.atan2(vec3d.getY(), d) * 180.0F / (float)Math.PI));
+        this.setYaw((float)(MathHelper.atan2(vec3d.getX(), vec3d.getZ()) * 180.0F / (float)Math.PI));
+    }
+
+    @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         builder.add(FREE_GRAVITY, false);
         builder.add(BRAKED, false);
@@ -184,7 +190,7 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
         }
     }
 
-    protected double getSpeed() {
+    public double getSpeed() {
         return this.getVelocity().length();
     }
 

@@ -1,10 +1,12 @@
 package fr.hugman.mubble;
 
+import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.block.MubbleBlockEntityTypes;
 import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.client.gui.screen.BumpableScreen;
 import fr.hugman.mubble.client.render.BumpableBlockEntityRenderer;
 import fr.hugman.mubble.client.render.entity.ShooterInkBulletRenderer;
+import fr.hugman.mubble.client.render.entity.model.MubbleEntityModelLayers;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import net.fabricmc.api.ClientModInitializer;
@@ -20,6 +22,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 public class MubbleClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        Reflection.initialize(MubbleEntityModelLayers.class);
+
         registerEntityRenderers();
         registerBlockRenderLayers();
         registerHandledScreens();

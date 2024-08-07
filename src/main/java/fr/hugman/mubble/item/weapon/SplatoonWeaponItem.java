@@ -1,7 +1,5 @@
 package fr.hugman.mubble.item.weapon;
 
-import com.mojang.serialization.DataResult;
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.component.MubbleDataComponentsTypes;
 import fr.hugman.mubble.entity.projectile.ShooterInkBulletEntity;
 import fr.hugman.mubble.sound.MubbleSounds;
@@ -9,9 +7,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
@@ -47,21 +42,24 @@ public class SplatoonWeaponItem extends Item {
 		var weapon = weaponEntry.value();
 
 		if(user instanceof PlayerEntity player) {
-
 			if(weapon instanceof AutomaticShooterConfig config) {
 				if (!player.getItemCooldownManager().isCoolingDown(this)) {
-					world.playSound(null, user.getX(), user.getY(), user.getZ(), MubbleSounds.SPLATTERSHOT_SHOOT, SoundCategory.PLAYERS, 0.5f, 1.0F);
-					player.getItemCooldownManager().set(this, (int) config.cooldown());
-					if (!world.isClient) {
-						float angleDeviation = (user.isOnGround() ? config.angleDeviation() : config.jumpingAngleDeviation());
-						var bullet = new ShooterInkBulletEntity(world, user, config.bulletConfig(), angleDeviation);
-						world.spawnEntity(bullet);
-					}
-					player.incrementStat(Stats.USED.getOrCreateStat(this));
+					this.shootShooterInkBullet(world, player, config);
 					super.usageTick(world, user, stack, remainingUseTicks);
 				}
 			}
 		}
+	}
+
+	private void shootShooterInkBullet(World world, PlayerEntity player, AutomaticShooterConfig config) {
+		world.playSound(null, player.getX(), player.getY(), player.getZ(), MubbleSounds.SPLATTERSHOT_SHOOT, SoundCategory.PLAYERS, 0.5f, 1.0F);
+		player.getItemCooldownManager().set(this, (int) config.cooldown());
+		if (!world.isClient) {
+			float angleDeviation = (player.isOnGround() ? config.angleDeviation() : config.jumpingAngleDeviation());
+			var bullet = new ShooterInkBulletEntity(world, player, config.bulletConfig(), angleDeviation);
+			world.spawnEntity(bullet);
+		}
+		player.incrementStat(Stats.USED.getOrCreateStat(this));
 	}
 
 	@Override
