@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "mubble:block/exclamation_block"
+      "model": "mubble:block/exclamation_block/blue"
     }
   }
 }

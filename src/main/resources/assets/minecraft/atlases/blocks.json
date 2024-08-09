@@ -1,0 +1,27 @@
+{
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "mubble:block/bolted_block/normal",
+        "mubble:block/bolted_block/question",
+        "mubble:block/smooth_block/note",
+        "mubble:block/smooth_block/marimba",
+        "mubble:block/dotted_block/normal1",
+        "mubble:block/dotted_block/exclamation1",
+        "mubble:block/dotted_block/exclamation2",
+        "mubble:block/smooth_block/straight",
+        "mubble:block/smooth_block/wavy"
+      ],
+      "palette_key": "mubble:color_palettes/mario_blocks",
+      "permutations": {
+        "blue": "mubble:color_palettes/mario_blocks/blue",
+        "green": "mubble:color_palettes/mario_blocks/green",
+        "yellow": "mubble:color_palettes/mario_blocks/yellow",
+        "red": "mubble:color_palettes/mario_blocks/red",
+        "purple": "mubble:color_palettes/mario_blocks/purple",
+        "brown": "mubble:color_palettes/mario_blocks/brown"
+      }
+    }
+  ]
+}
