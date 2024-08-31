@@ -1,8 +1,9 @@
 {
   "sources": [
     {
-      "type": "paletted_permutations",
+      "type": "minecraft:paletted_permutations",
       "textures": [
+        "mubble:block/brick_block",
         "mubble:block/bolted_block/normal",
         "mubble:block/bolted_block/question",
         "mubble:block/smooth_block/note",
@@ -11,16 +12,26 @@
         "mubble:block/dotted_block/exclamation1",
         "mubble:block/dotted_block/exclamation2",
         "mubble:block/smooth_block/straight",
-        "mubble:block/smooth_block/wavy"
+        "mubble:block/smooth_block/wavy",
+        "mubble:block/egg_block"
       ],
       "palette_key": "mubble:color_palettes/mario_blocks",
       "permutations": {
         "blue": "mubble:color_palettes/mario_blocks/blue",
         "green": "mubble:color_palettes/mario_blocks/green",
         "yellow": "mubble:color_palettes/mario_blocks/yellow",
+        "orange": "mubble:color_palettes/mario_blocks/orange",
         "red": "mubble:color_palettes/mario_blocks/red",
         "purple": "mubble:color_palettes/mario_blocks/purple",
-        "brown": "mubble:color_palettes/mario_blocks/brown"
+        "magenta": "mubble:color_palettes/mario_blocks/magenta",
+        "brown": "mubble:color_palettes/mario_blocks/brown",
+        "white": "mubble:color_palettes/mario_blocks/white",
+        "black": "mubble:color_palettes/mario_blocks/black",
+        "iron": "mubble:color_palettes/mario_blocks/iron",
+        "gold": "mubble:color_palettes/mario_blocks/gold",
+        "diamond": "mubble:color_palettes/mario_blocks/diamond",
+        "emerald": "mubble:color_palettes/mario_blocks/emerald",
+        "amethyst": "mubble:color_palettes/mario_blocks/amethyst"
       }
     }
   ]
