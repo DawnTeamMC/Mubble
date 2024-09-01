@@ -4,6 +4,9 @@ import fr.hugman.mubble.block.MubbleBlockEntityTypes;
 import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.client.gui.screen.BumpableScreen;
 import fr.hugman.mubble.client.render.BumpableBlockEntityRenderer;
+import fr.hugman.mubble.client.render.MubbleRenderLayers;
+import fr.hugman.mubble.client.render.MubbleRenderers;
+import fr.hugman.mubble.entity.MubbleEntities;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -19,7 +22,9 @@ public class MubbleClient implements ClientModInitializer {
     public void onInitializeClient() {
         registerBlockRenderLayers();
         registerHandledScreens();
-        registerBlockEntityRenderers();
+        MubbleRenderers.registerEntities();
+        MubbleRenderers.registerBlockEntities();
+        MubbleRenderLayers.registerLayers();
     }
 
     private static void registerBlockRenderLayers() {
@@ -29,9 +34,5 @@ public class MubbleClient implements ClientModInitializer {
 
     private static void registerHandledScreens() {
         HandledScreens.register(MubbleScreenHandlerTypes.BUMPABLE_BLOCK, BumpableScreen::new);
-    }
-
-    private static void registerBlockEntityRenderers() {
-        BlockEntityRendererFactories.register(MubbleBlockEntityTypes.BUMPABLE_BLOCK, BumpableBlockEntityRenderer::new);
     }
 }
