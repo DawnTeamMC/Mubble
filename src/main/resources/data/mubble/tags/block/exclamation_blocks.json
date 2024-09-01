@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "mubble:blue_exclamation_block",
+    "mubble:green_exclamation_block",
+    "mubble:yellow_exclamation_block",
+    "mubble:red_exclamation_block"
+  ]
+}

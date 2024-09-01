@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "mubble:snake_block",
+    "mubble:fast_snake_block",
+    "mubble:slow_snake_block"
+  ]
+}

@@ -2,15 +2,24 @@
   "modmenu.descriptionTranslation.mubble": "The perfect mod for Nintendo fans!",
 
   "item_group.mubble.super_mario": "Super Mario",
+  "item_group.mubble.yoshi_island": "Yoshi's Island",
 
   "item.mubble.maker_glove": "Maker Glove",
 
   "block.mubble.question_block": "? Block",
-  "block.mubble.exclamation_block": "! Block",
+  "block.mubble.blue_exclamation_block": "Blue ! Block",
+  "block.mubble.green_exclamation_block": "Green ! Block",
+  "block.mubble.yellow_exclamation_block": "Yellow ! Block",
+  "block.mubble.red_exclamation_block": "Red ! Block",
   "block.mubble.empty_block": "Empty Block",
   "block.mubble.brick_block": "Brick Block",
+  "block.mubble.crystal_block": "Crystal Block",
   "block.mubble.gold_block": "Gold Block",
   "block.mubble.note_block": "Note Block",
+  "block.mubble.blue_marimba_block": "Blue Marimba Block",
+  "block.mubble.green_marimba_block": "Green Marimba Block",
+  "block.mubble.yellow_marimba_block": "Yellow Marimba Block",
+  "block.mubble.red_marimba_block": "Red Marimba Block",
   "block.mubble.snake_block": "Snake Block",
   "block.mubble.fast_snake_block": "Fast Snake Block",
   "block.mubble.slow_snake_block": "Slow Snake Block",
@@ -19,6 +28,16 @@
 
   "item.mubble.cape_feather": "Cape Feather",
   "item.mubble.super_cape_feather": "Super Cape Feather",
+
+  "block.mubble.blue_egg_block": "Blue Egg Block",
+  "block.mubble.cyan_egg_block": "Cyan Egg Block",
+  "block.mubble.green_egg_block": "Green Egg Block",
+  "block.mubble.yellow_egg_block": "Yellow Egg Block",
+  "block.mubble.orange_egg_block": "Orange Egg Block",
+  "block.mubble.red_egg_block": "Red Egg Block",
+  "block.mubble.pink_egg_block": "Pink Egg Block",
+  "block.mubble.black_egg_block": "Black Egg Block",
+  "block.mubble.white_egg_block": "White Egg Block",
 
   "subtitles.mubble.block.bumpable_block.bump": "Block bumped",
   "subtitles.mubble.block.bumpable_block.change_loot": "Block filled",

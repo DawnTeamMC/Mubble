@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mubble:exclamation_block"
+          "name": "mubble:blue_exclamation_block"
         }
       ],
       "conditions": [

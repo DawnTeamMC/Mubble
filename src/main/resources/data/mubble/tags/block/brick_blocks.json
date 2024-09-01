@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "mubble:brick_block",
+    "mubble:crystal_block",
+    "mubble:gold_block"
+  ]
+}
