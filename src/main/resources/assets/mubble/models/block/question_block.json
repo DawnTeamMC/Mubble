@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_column",
   "textures": {
-    "side": "mubble:block/question_block/side",
-    "end": "mubble:block/question_block/end"
+    "side": "mubble:block/bolted_block/question_yellow",
+    "end": "mubble:block/bolted_block/normal_yellow"
   }
 }

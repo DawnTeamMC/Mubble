@@ -1,0 +1,8 @@
+{
+  "parent": "mubble:block/cube_column_alternating",
+  "textures": {
+    "end": "mubble:block/dotted_block/normal1_red",
+    "side1": "mubble:block/dotted_block/exclamation1_red",
+    "side2": "mubble:block/dotted_block/exclamation2_red"
+  }
+}
