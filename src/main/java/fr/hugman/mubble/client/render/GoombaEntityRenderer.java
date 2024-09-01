@@ -8,7 +8,6 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 
 public class GoombaEntityRenderer extends MobEntityRenderer<GoombaEntity, GoombaEntityModel> {
-
     public GoombaEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new GoombaEntityModel(context.getPart(MubbleRenderLayers.GOOMBA)), 0.5f);
     }

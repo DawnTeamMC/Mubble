@@ -10,7 +10,6 @@ public class MubbleRenderers {
         EntityRendererRegistry.register(MubbleEntities.GOOMBA, GoombaEntityRenderer::new);
     }
 
-
     public static void registerBlockEntities() {
         BlockEntityRendererFactories.register(MubbleBlockEntityTypes.BUMPABLE_BLOCK, BumpableBlockEntityRenderer::new);
     }
