@@ -1,6 +1,6 @@
-package fr.hugman.mubble.client.render.animation;
+package fr.hugman.mubble.client.render.entity.animation;
 
-import fr.hugman.mubble.client.render.model.GoombaEntityModel;
+import fr.hugman.mubble.client.render.entity.model.GoombaModel;
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.animation.Keyframe;
@@ -185,24 +185,24 @@ public class GoombaAnimations {
                     new Keyframe(0.125F, AnimationHelper.createScalingVector(1.1F, 1.1F, 1.1F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.2917F, AnimationHelper.createScalingVector(1.0F, 1.0F, 1.0F), Transformation.Interpolations.CUBIC)
             ))
-            .addBoneAnimation(GoombaEntityModel.RIGHT_EYEBROW, new Transformation(Transformation.Targets.ROTATE,
+            .addBoneAnimation(GoombaModel.RIGHT_EYEBROW, new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.25F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 10.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.4167F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 10.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC)
             ))
-            .addBoneAnimation(GoombaEntityModel.RIGHT_EYEBROW, new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation(GoombaModel.RIGHT_EYEBROW, new Transformation(Transformation.Targets.TRANSLATE,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(-0.5F, 1.0F, 0.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.4167F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC)
             ))
-            .addBoneAnimation(GoombaEntityModel.LEFT_EYEBROW, new Transformation(Transformation.Targets.ROTATE,
+            .addBoneAnimation(GoombaModel.LEFT_EYEBROW, new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.25F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -10.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.4167F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -10.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC)
             ))
-            .addBoneAnimation(GoombaEntityModel.LEFT_EYEBROW, new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation(GoombaModel.LEFT_EYEBROW, new Transformation(Transformation.Targets.TRANSLATE,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(0.5F, 1.0F, 0.0F), Transformation.Interpolations.CUBIC),
                     new Keyframe(0.4167F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC)

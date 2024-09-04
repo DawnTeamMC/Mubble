@@ -1,6 +1,6 @@
-package fr.hugman.mubble.client.render.model;
+package fr.hugman.mubble.client.render.entity.model;
 
-import fr.hugman.mubble.client.render.animation.GoombaAnimations;
+import fr.hugman.mubble.client.render.entity.animation.GoombaAnimations;
 import fr.hugman.mubble.entity.GoombaEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -8,7 +8,7 @@ import net.minecraft.client.render.entity.model.EntityModelPartNames;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 
-public class GoombaEntityModel extends SinglePartEntityModel<GoombaEntity> {
+public class GoombaModel extends SinglePartEntityModel<GoombaEntity> {
     private static final float BABY_SCALE = 0.6f;
     private static final float BABY_Y_OFFSET = 1.0f;
 
@@ -18,7 +18,7 @@ public class GoombaEntityModel extends SinglePartEntityModel<GoombaEntity> {
     private final ModelPart root;
     private final ModelPart head;
 
-    public GoombaEntityModel(ModelPart part) {
+    public GoombaModel(ModelPart part) {
         this.root = part.getChild(EntityModelPartNames.ROOT);
         this.head = this.root.getChild(EntityModelPartNames.HEAD);
     }
@@ -45,7 +45,8 @@ public class GoombaEntityModel extends SinglePartEntityModel<GoombaEntity> {
     @Override
     public void setAngles(GoombaEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.animateMovement(GoombaAnimations.WALKING, limbAngle, limbDistance, 1.0f, 1.0f);
+        this.animateMovement(GoombaAnimations.WALKING, limbAngle, limbDistance, 3.0F, 2.5F);
+        this.updateAnimation(entity.surprisedAnimationState, GoombaAnimations.SURPRISE, animationProgress);
     }
 
     @Override

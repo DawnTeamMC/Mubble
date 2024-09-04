@@ -16,6 +16,6 @@ public final class MubbleEntityTypes {
     }
 
     public static void registerAttributes() {
-        FabricDefaultAttributeRegistry.register(GOOMBA, GoombaEntity.createMobAttributes());
+        FabricDefaultAttributeRegistry.register(GOOMBA, GoombaEntity.createGoombaAttributes());
     }
 }
