@@ -15,6 +15,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
@@ -82,7 +83,7 @@ public class GoombaEntity extends HostileEntity {
             hitBox = hitBox.withMaxY(hitBox.maxY + 0.5D);
 
             if (!this.getWorld().isClient) {
-                List<Entity> list = this.getWorld().getOtherEntities(this, hitBox);
+                List<Entity> list = this.getWorld().getOtherEntities(this, hitBox, EntityPredicates.EXCEPT_SPECTATOR.and(entity -> entity.getType().isIn(MubbleEntityTypeTags.CAN_JUMP_BUMP)));
                 if (!list.isEmpty()) {
                     List<Entity> list2 = Lists.newArrayList();
 

@@ -15,7 +15,7 @@ public class MubbleItems {
     public static final CapeFeatherItem CAPE_FEATHER = of(MubbleItemKeys.CAPE_FEATHER, new CapeFeatherItem(new Item.Settings(), false));
     public static final CapeFeatherItem SUPER_CAPE_FEATHER = of(MubbleItemKeys.SUPER_CAPE_FEATHER, new CapeFeatherItem(new Item.Settings().rarity(Rarity.EPIC), true));
 
-    public static final Item GOOMBA_SPAWN_EGG = of(MubbleItemKeys.GOOMBA_SPAWN_EGG, new SpawnEggItem(MubbleEntityTypes.GOOMBA, 11366765, 8538184, new Item.Settings()));
+    public static final Item GOOMBA_SPAWN_EGG = of(MubbleItemKeys.GOOMBA_SPAWN_EGG, new SpawnEggItem(MubbleEntityTypes.GOOMBA, 0x96664f, 0xf3dca6, new Item.Settings()));
 
     private static <O extends Item> O of(RegistryKey<Item> key, O item) {
         return Registry.register(Registries.ITEM, key, item);

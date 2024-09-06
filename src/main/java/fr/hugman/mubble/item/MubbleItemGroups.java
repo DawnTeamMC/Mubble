@@ -56,6 +56,8 @@ public class MubbleItemGroups {
             itemGroup.add(MubbleItems.GOOMBA_SPAWN_EGG);
         });
 
+        appendSpawnEgg(MubbleItems.GOOMBA_SPAWN_EGG);
+
         ItemGroupEvents.modifyEntriesEvent(MubbleItemGroupKeys.YOSHI_ISLAND).register(itemGroup -> {
             itemGroup.add(MubbleBlocks.BLUE_EGG_BLOCK);
             itemGroup.add(MubbleBlocks.CYAN_EGG_BLOCK);
