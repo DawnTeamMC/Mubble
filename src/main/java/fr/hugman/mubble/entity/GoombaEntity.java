@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -34,6 +35,7 @@ public class GoombaEntity extends HostileEntity {
     public static final int SURPRISE_LENGTH = 10; // animation length
 
     public AnimationState surprisedAnimationState = new AnimationState();
+    public AnimationState crushAnimationState = new AnimationState();
 
     protected GoombaEntity(EntityType<? extends GoombaEntity> entityType, World world) {
         super(entityType, world);
@@ -111,6 +113,13 @@ public class GoombaEntity extends HostileEntity {
 
     public boolean canMove() {
         return !this.isSurprised();
+    }
+
+    @Override
+    public void onDeath(DamageSource damageSource) {
+        super.onDeath(damageSource);
+        // TODO: check for damage source
+        this.crushAnimationState.start(this.age);
     }
 
     // DATA TRACKER
