@@ -23,6 +23,35 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
+//TODO: add mini variant
+//TODO: add paragoomba variant
+//TODO: add blue, gray variants
+//TODO: add spiky variant
+//TODO: add jack O'Goomba variant
+//TODO: add tanoomba variant
+//TODO: add goombrat variant
+//TODO: add tail goomba variant
+//TODO: add gold goomba variant
+//TODO: add bone goomba variant
+//TODO: add octoomba variant
+//TODO: add choomba variant
+//TODO: add Goomdiver variant
+//TODO: add Gritty Goomba variant
+//TODO: add Dreamy Goomba variant
+//TODO: add Headbonk Goomba variant
+//TODO: add Goombeetle variant
+
+//TODO: add Goombette variant
+//TODO: add Goombario variant
+//TODO: add Goombella variant
+//TODO: add Professor Frankly variant
+//TODO: add Private Goomp variant
+
+//TODO: add hat support
+//TODO: add shoe support
+
+//TODO: add swim navigation and animation
+//TODO: add sleeping behavior
 public class GoombaEntity extends HostileEntity {
     private static final TrackedData<Byte> GOOMBA_FLAGS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.BYTE);
     private static final TrackedData<Integer> SURPRISE_PROGRESS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -46,6 +75,7 @@ public class GoombaEntity extends HostileEntity {
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(1, new PowderSnowJumpGoal(this, this.getWorld()));
+        // TODO: add attack animation (bite)
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0, false));
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
@@ -79,6 +109,8 @@ public class GoombaEntity extends HostileEntity {
         super.tickMovement();
 
         // TODO: implement this behaviour in an interface or abstract class
+        // TODO: disable all this if the entity is being ridden
+        // TODO: stack eachother ontop?
         if (this.getHealth() > 0.0F && !this.isSpectator()) {
             Box hitBox = this.getBoundingBox();
             hitBox = hitBox.withMinY(hitBox.maxY - (0.2D * (hitBox.maxY - hitBox.minY)));
