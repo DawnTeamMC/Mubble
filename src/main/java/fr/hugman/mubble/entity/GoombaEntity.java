@@ -1,11 +1,9 @@
 package fr.hugman.mubble.entity;
 
-import com.google.common.collect.Lists;
+import fr.hugman.mubble.entity.ai.control.StunnableMoveControl;
 import fr.hugman.mubble.entity.ai.goal.SurprisedActiveTargetGoal;
 import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.ai.control.MoveControl;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -15,13 +13,7 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 //TODO: add mini variant
 //TODO: add paragoomba variant
@@ -52,7 +44,7 @@ import java.util.List;
 
 //TODO: add swim navigation and animation
 //TODO: add sleeping behavior
-public class GoombaEntity extends HostileEntity {
+public class GoombaEntity extends BumpableHostileEntity implements Surprisable, Stunnable {
     private static final TrackedData<Byte> GOOMBA_FLAGS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.BYTE);
     private static final TrackedData<Integer> SURPRISE_PROGRESS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
@@ -68,7 +60,7 @@ public class GoombaEntity extends HostileEntity {
 
     protected GoombaEntity(EntityType<? extends GoombaEntity> entityType, World world) {
         super(entityType, world);
-        this.moveControl = new GoombaEntity.GoombaMoveControl(this);
+        this.moveControl = new StunnableMoveControl(this);
     }
 
     @Override
@@ -104,47 +96,8 @@ public class GoombaEntity extends HostileEntity {
         }
     }
 
-    @Override
-    public void tickMovement() {
-        super.tickMovement();
-
-        // TODO: implement this behaviour in an interface or abstract class
-        // TODO: disable all this if the entity is being ridden
-        // TODO: stack eachother ontop?
-        if (this.getHealth() > 0.0F && !this.isSpectator()) {
-            Box hitBox = this.getBoundingBox();
-            hitBox = hitBox.withMinY(hitBox.maxY - (0.2D * (hitBox.maxY - hitBox.minY)));
-            hitBox = hitBox.withMaxY(hitBox.maxY + 0.5D);
-
-            if (!this.getWorld().isClient) {
-                List<Entity> list = this.getWorld().getOtherEntities(this, hitBox, EntityPredicates.EXCEPT_SPECTATOR.and(entity -> entity.getType().isIn(MubbleEntityTypeTags.CAN_JUMP_BUMP)));
-                if (!list.isEmpty()) {
-                    List<Entity> list2 = Lists.newArrayList();
-
-                    for (Entity entity : list) {
-                        if (!entity.isOnGround() && entity.getVelocity().getY() < 0.3D && entity.isAlive()) {
-                            list2.add(entity);
-                        }
-                    }
-
-                    if (!list2.isEmpty()) {
-                        // TODO: set damage source to first entity in list
-                        this.damage(this.getDamageSources().genericKill(), Float.MAX_VALUE);
-                        for (Entity entity : list) {
-                            entity.setVelocity(entity.getVelocity().x, 0.5D, entity.getVelocity().z);
-                            if (entity instanceof PlayerEntity player) {
-                                ((ServerPlayerEntity) player).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(player));
-                            }
-                            entity.fallDistance = 0.0F;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public boolean canMove() {
-        return !this.isSurprised();
+    public boolean isStunned() {
+        return this.isSurprised();
     }
 
     @Override
@@ -205,22 +158,4 @@ public class GoombaEntity extends HostileEntity {
     public void setSurpriseProgress(int i) {
         this.dataTracker.set(SURPRISE_PROGRESS, i);
     }
-
-    //TODO: implement this in a standalone class with an interface for the entity
-    static class GoombaMoveControl extends MoveControl {
-        private final GoombaEntity goomba;
-
-        public GoombaMoveControl(GoombaEntity goomba) {
-            super(goomba);
-            this.goomba = goomba;
-        }
-
-        @Override
-        public void tick() {
-            if (this.goomba.canMove()) {
-                super.tick();
-            }
-        }
-    }
-
 }

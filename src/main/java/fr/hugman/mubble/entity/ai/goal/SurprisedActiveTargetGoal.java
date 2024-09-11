@@ -2,7 +2,7 @@ package fr.hugman.mubble.entity.ai.goal;
 
 import java.util.function.Predicate;
 
-import fr.hugman.mubble.entity.GoombaEntity;
+import fr.hugman.mubble.entity.Surprisable;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
@@ -37,10 +37,10 @@ public class SurprisedActiveTargetGoal<T extends LivingEntity> extends ActiveTar
 	@Override
 	public void start() {
 		super.start();
-		if(this.mob instanceof GoombaEntity goomba) {
-			goomba.setSurprised(true);
-			if(goomba.getTarget() != null) {
-				goomba.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, goomba.getTarget().getPos());
+		if(this.mob instanceof Surprisable surprisable) {
+			surprisable.setSurprised(true);
+			if(mob.getTarget() != null) {
+				mob.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, mob.getTarget().getPos());
 			}
 		}
 	}
