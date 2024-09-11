@@ -6,6 +6,7 @@ import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.item.MubbleItemGroups;
 import fr.hugman.mubble.item.MubbleItems;
+import fr.hugman.mubble.registry.MubbleRegistries;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.world.MubbleGamerules;
@@ -30,6 +31,8 @@ public class Mubble implements ModInitializer {
         MubbleItemGroups.appendItemGroups();
 
         MubbleGamerules.init();
+
+        MubbleRegistries.register();
     }
 
     public static Identifier id(String path) {

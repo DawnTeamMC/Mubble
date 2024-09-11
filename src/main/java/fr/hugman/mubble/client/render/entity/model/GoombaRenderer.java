@@ -1,6 +1,5 @@
 package fr.hugman.mubble.client.render.entity.model;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.client.render.MubbleRenderLayers;
 import fr.hugman.mubble.entity.GoombaEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -16,10 +15,7 @@ public class GoombaRenderer extends MobEntityRenderer<GoombaEntity, GoombaModel>
 
     @Override
     public Identifier getTexture(GoombaEntity entity) {
-        if(entity.isSurprised()) {
-            return Mubble.id("textures/entity/goomba/brown/surprised.png");
-        }
-        return Mubble.id("textures/entity/goomba/brown/normal.png");
+        return entity.getTexture();
     }
 
     @Override

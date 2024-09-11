@@ -2,8 +2,9 @@ package fr.hugman.mubble.entity;
 
 import fr.hugman.mubble.entity.ai.control.StunnableMoveControl;
 import fr.hugman.mubble.entity.ai.goal.SurprisedActiveTargetGoal;
-import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.EntityType;
+import fr.hugman.mubble.entity.data.MubbleTrackedData;
+import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -13,7 +14,13 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
+
+import java.util.Optional;
 
 //TODO: add mini variant
 //TODO: add paragoomba variant
@@ -44,7 +51,10 @@ import net.minecraft.world.World;
 
 //TODO: add swim navigation and animation
 //TODO: add sleeping behavior
-public class GoombaEntity extends BumpableHostileEntity implements Surprisable, Stunnable {
+public class GoombaEntity extends BumpableHostileEntity implements Surprisable, Stunnable, VariantHolder<RegistryEntry<GoombaVariant>> {
+    public static final String VARIANT_KEY = "variant";
+
+    private static final TrackedData<RegistryEntry<GoombaVariant>> VARIANT = DataTracker.registerData(GoombaEntity.class, MubbleTrackedData.GOOMBA_VARIANT);
     private static final TrackedData<Byte> GOOMBA_FLAGS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.BYTE);
     private static final TrackedData<Integer> SURPRISE_PROGRESS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
@@ -62,6 +72,8 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         super(entityType, world);
         this.moveControl = new StunnableMoveControl(this);
     }
+
+    // BEHAVIOR
 
     @Override
     protected void initGoals() {
@@ -96,6 +108,7 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         }
     }
 
+    @Override
     public boolean isStunned() {
         return this.isSurprised();
     }
@@ -114,6 +127,7 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         super.initDataTracker(builder);
         builder.add(GOOMBA_FLAGS, (byte)0);
         builder.add(SURPRISE_PROGRESS, 0);
+        builder.add(VARIANT, this.getRegistryManager().get(MubbleRegistryKeys.GOOMBA_VARIANT).entryOf(GoombaVariants.BROWN));
     }
 
     @Override
@@ -125,6 +139,29 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         }
 
         super.onTrackedDataSet(data);
+    }
+
+    @Override
+    public void setVariant(RegistryEntry<GoombaVariant> variant) {
+        this.dataTracker.set(VARIANT, variant);
+    }
+
+    @Override
+    public RegistryEntry<GoombaVariant> getVariant() {
+        return this.dataTracker.get(VARIANT);
+    }
+
+    @Override
+    public boolean isSurprised() {
+        return this.hasGoombaFlag(SURPRISED_FLAG);
+    }
+
+    @Override
+    public void setSurprised(boolean b) {
+        this.setGoombaFlag(SURPRISED_FLAG, b);
+        if (!b) {
+            this.setSurpriseProgress(0);
+        }
     }
 
     private void setGoombaFlag(int mask, boolean value) {
@@ -140,22 +177,37 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         return (this.dataTracker.get(GOOMBA_FLAGS) & bitmask) != 0;
     }
 
-    public boolean isSurprised() {
-        return this.hasGoombaFlag(SURPRISED_FLAG);
-    }
-
-    public void setSurprised(boolean b) {
-        this.setGoombaFlag(SURPRISED_FLAG, b);
-        if (!b) {
-            this.setSurpriseProgress(0);
-        }
-    }
-
     public int getSurpriseProgress() {
         return this.dataTracker.get(SURPRISE_PROGRESS);
     }
 
     public void setSurpriseProgress(int i) {
         this.dataTracker.set(SURPRISE_PROGRESS, i);
+    }
+
+    // NBT DATA
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putString(VARIANT_KEY, (this.getVariant().getKey().orElse(GoombaVariants.BROWN)).getValue().toString());
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        Optional.ofNullable(Identifier.tryParse(nbt.getString(VARIANT_KEY)))
+                .map(variantId -> RegistryKey.of(MubbleRegistryKeys.GOOMBA_VARIANT, variantId))
+                .flatMap(variantKey -> this.getRegistryManager().get(MubbleRegistryKeys.GOOMBA_VARIANT).getEntry(variantKey))
+                .ifPresent(this::setVariant);
+    }
+
+    // TEXTURE
+
+    public Identifier getTexture() {
+        if(this.isSurprised()) {
+            return this.getVariant().value().surprisedTexture();
+        }
+        return this.getVariant().value().texture();
     }
 }
