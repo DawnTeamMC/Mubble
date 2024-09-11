@@ -18,7 +18,10 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
+import net.minecraft.world.LocalDifficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -144,6 +147,7 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
     @Override
     public void setVariant(RegistryEntry<GoombaVariant> variant) {
         this.dataTracker.set(VARIANT, variant);
+        this.getAttributeInstance(EntityAttributes.GENERIC_SCALE).setBaseValue(variant.value().scale());
     }
 
     @Override
