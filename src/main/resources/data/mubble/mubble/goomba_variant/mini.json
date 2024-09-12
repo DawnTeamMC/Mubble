@@ -1,5 +1,5 @@
 {
-  "texture": "mubble:entity/goomba/brown/normal",
-  "surprised_texture": "mubble:entity/goomba/brown/surprised",
+  "texture": "mubble:entity/goomba/mini/normal",
+  "surprised_texture": "mubble:entity/goomba/mini/surprised",
   "scale": 0.5
 }
