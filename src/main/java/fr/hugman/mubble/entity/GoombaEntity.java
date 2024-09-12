@@ -17,15 +17,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.LocalDifficulty;
-import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-//TODO: add mini variant
 //TODO: add paragoomba variant
 //TODO: add blue, gray variants
 //TODO: add spiky variant
@@ -79,6 +76,19 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
     // BEHAVIOR
 
     @Override
+    protected Text getDefaultName() {
+        return this.getVariant().value().name().orElse(super.getDefaultName());
+    }
+
+    public static DefaultAttributeContainer.Builder createGoombaAttributes() {
+        return HostileEntity.createHostileAttributes()
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 10.0)
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.5);
+    }
+
+    @Override
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
         this.goalSelector.add(1, new PowderSnowJumpGoal(this, this.getWorld()));
@@ -89,14 +99,6 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         this.goalSelector.add(8, new LookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this).setGroupRevenge());
         this.targetSelector.add(2, new SurprisedActiveTargetGoal<>(this, PlayerEntity.class, true));
-    }
-
-
-    public static DefaultAttributeContainer.Builder createGoombaAttributes() {
-        return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 5.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 2.0);
     }
 
     @Override
@@ -130,7 +132,7 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         super.initDataTracker(builder);
         builder.add(GOOMBA_FLAGS, (byte)0);
         builder.add(SURPRISE_PROGRESS, 0);
-        builder.add(VARIANT, this.getRegistryManager().get(MubbleRegistryKeys.GOOMBA_VARIANT).entryOf(GoombaVariants.BROWN));
+        builder.add(VARIANT, this.getRegistryManager().get(MubbleRegistryKeys.GOOMBA_VARIANT).entryOf(GoombaVariants.NORMAL));
     }
 
     @Override
@@ -147,7 +149,7 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
     @Override
     public void setVariant(RegistryEntry<GoombaVariant> variant) {
         this.dataTracker.set(VARIANT, variant);
-        this.getAttributeInstance(EntityAttributes.GENERIC_SCALE).setBaseValue(variant.value().scale());
+        this.getVariant().value().applyAttributes(this); //TODO: only apply attributes when entity is summoned/spawns
     }
 
     @Override
@@ -194,7 +196,7 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putString(VARIANT_KEY, (this.getVariant().getKey().orElse(GoombaVariants.BROWN)).getValue().toString());
+        nbt.putString(VARIANT_KEY, (this.getVariant().getKey().orElse(GoombaVariants.NORMAL)).getValue().toString());
     }
 
     @Override

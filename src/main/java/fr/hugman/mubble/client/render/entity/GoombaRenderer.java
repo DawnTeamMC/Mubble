@@ -1,6 +1,7 @@
-package fr.hugman.mubble.client.render.entity.model;
+package fr.hugman.mubble.client.render.entity;
 
 import fr.hugman.mubble.client.render.MubbleRenderLayers;
+import fr.hugman.mubble.client.render.entity.model.GoombaModel;
 import fr.hugman.mubble.entity.GoombaEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -10,7 +11,7 @@ import net.minecraft.util.Identifier;
 
 public class GoombaRenderer extends MobEntityRenderer<GoombaEntity, GoombaModel> {
     public GoombaRenderer(EntityRendererFactory.Context context) {
-        super(context, new GoombaModel(context.getPart(MubbleRenderLayers.GOOMBA)), 0.5f);
+        super(context, new GoombaModel(context.getPart(MubbleRenderLayers.GOOMBA)), 0.4f);
     }
 
     @Override

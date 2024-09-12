@@ -45,7 +45,7 @@ public class GoombaModel extends SinglePartEntityModel<GoombaEntity> {
     @Override
     public void setAngles(GoombaEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
         this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.animateMovement(GoombaAnimations.WALKING, limbAngle, limbDistance, 3.0F, 2.5F);
+        this.animateMovement(GoombaAnimations.WALKING, limbAngle, limbDistance, 4.0F, 2.5F);
         this.updateAnimation(entity.surprisedAnimationState, GoombaAnimations.SURPRISE, animationProgress);
         this.updateAnimation(entity.crushAnimationState, GoombaAnimations.CRUSH, animationProgress);
     }
