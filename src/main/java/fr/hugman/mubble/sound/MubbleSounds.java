@@ -18,6 +18,12 @@ public class MubbleSounds {
     public static final SoundEvent NOTE_BLOCK_JUMP_HIGH = of("block.note_block.jump.high");
     public static final SoundEvent CAPE_FEATHER_USE = of("item.cape_feather.use");
 
+    public static final SoundEvent GOOMBA_WALK_STEP = of("entity.goomba.walk_step");
+    public static final SoundEvent GOOMBA_RUN_STEP = of("entity.goomba.run_step");
+    public static final SoundEvent GOOMBA_FIND_TARGET = of("entity.goomba.find_target");
+    public static final SoundEvent GOOMBA_DEATH = of("entity.goomba.death");
+    public static final SoundEvent GOOMBA_STOMP = of("entity.goomba.stomp");
+
     private static SoundEvent of(String path) {
         Identifier id = Mubble.id(path);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));

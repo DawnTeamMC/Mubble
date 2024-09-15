@@ -4,6 +4,8 @@ import fr.hugman.mubble.entity.ai.control.StunnableMoveControl;
 import fr.hugman.mubble.entity.ai.goal.SurprisedActiveTargetGoal;
 import fr.hugman.mubble.entity.data.MubbleTrackedData;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import fr.hugman.mubble.sound.MubbleSounds;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
@@ -17,8 +19,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Optional;
@@ -94,7 +98,7 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         this.goalSelector.add(1, new PowderSnowJumpGoal(this, this.getWorld()));
         // TODO: add attack animation (bite)
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0, false));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0));
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.6));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(8, new LookAroundGoal(this));
         this.targetSelector.add(1, new RevengeGoal(this).setGroupRevenge());
@@ -123,6 +127,35 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         super.onDeath(damageSource);
         // TODO: check for damage source
         this.crushAnimationState.start(this.age);
+    }
+
+    // SOUNDS
+
+
+    @Override
+    protected BlockPos getStepSoundPos(BlockPos pos) {
+        return super.getStepSoundPos(pos);
+    }
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return MubbleSounds.GOOMBA_STOMP;
+    }
+
+    @Override
+    protected void playStepSound(BlockPos pos, BlockState state) {
+        if(this.getTarget() != null) {
+            this.playSound(MubbleSounds.GOOMBA_RUN_STEP, 1.0F, 1.0F);
+        }
+        else {
+            this.playSound(MubbleSounds.GOOMBA_WALK_STEP, 1.0F, 1.0F);
+        }
+    }
+
+    @Override
+    protected float calculateNextStepSoundDistance() {
+        //TODO: involve entity size maybe?
+        return this.distanceTraveled + 0.3f;
     }
 
     // DATA TRACKER
