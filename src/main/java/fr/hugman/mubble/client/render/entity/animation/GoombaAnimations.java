@@ -8,35 +8,6 @@ import net.minecraft.client.render.entity.animation.Transformation;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 
 public class GoombaAnimations {
-    public static final Animation IDLE = Animation.Builder.create(2.0F).looping()
-            .addBoneAnimation(EntityModelPartNames.ROOT, new Transformation(Transformation.Targets.ROTATE,
-                    new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
-            ))
-            .addBoneAnimation(EntityModelPartNames.RIGHT_FOOT, new Transformation(Transformation.Targets.ROTATE,
-                    new Keyframe(0.5417F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(0.7083F, AnimationHelper.createRotationalVector(-2.5F, 4.5F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(0.875F, AnimationHelper.createRotationalVector(0.0F, 5.0F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(1.4167F, AnimationHelper.createRotationalVector(0.0F, 5.0F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(1.5833F, AnimationHelper.createRotationalVector(-2.5F, 4.5F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(1.75F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC)
-            ))
-            .addBoneAnimation(EntityModelPartNames.LEFT_FOOT, new Transformation(Transformation.Targets.ROTATE,
-                    new Keyframe(0.25F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(0.4167F, AnimationHelper.createRotationalVector(-2.5F, -4.5F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(0.5833F, AnimationHelper.createRotationalVector(0.0F, -5.0F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(1.125F, AnimationHelper.createRotationalVector(0.0F, -5.0F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(1.2917F, AnimationHelper.createRotationalVector(-2.5F, -4.5F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(1.4583F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC)
-            ))
-            .addBoneAnimation(EntityModelPartNames.HEAD, new Transformation(Transformation.Targets.ROTATE,
-                    new Keyframe(0.0F, AnimationHelper.createRotationalVector(2.5F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -1.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(1.0F, AnimationHelper.createRotationalVector(-2.5F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(1.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 1.0F), Transformation.Interpolations.CUBIC),
-                    new Keyframe(2.0F, AnimationHelper.createRotationalVector(2.5F, 0.0F, 0.0F), Transformation.Interpolations.CUBIC)
-            ))
-            .build();
-
     public static final Animation WALKING = Animation.Builder.create(1.0F).looping()
             .addBoneAnimation(EntityModelPartNames.ROOT, new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, -10.0F), Transformation.Interpolations.CUBIC),
