@@ -11,9 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class LivingEntityRendererMixin {
     @Redirect(method = "setupTransforms", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/LivingEntity;deathTime:I"))
     private int redirectDeathTime(LivingEntity entity) {
-        if(entity instanceof GoombaEntity) {
-            // this is required to play custom death animations
-            // TODO: check for damage source
+        if(entity instanceof GoombaEntity goomba && goomba.isStomped()) {
             return 0;
         }
         return entity.deathTime;

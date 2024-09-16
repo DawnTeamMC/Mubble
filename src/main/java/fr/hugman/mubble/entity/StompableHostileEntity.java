@@ -2,6 +2,9 @@ package fr.hugman.mubble.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
@@ -14,13 +17,15 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Represents a hostile entity that can be bumped on top of.
+ * Represents a hostile entity that can be stomped on.
  *
  * @author Hugman
  * @since v4.0.0
  */
-abstract public class BumpableHostileEntity extends HostileEntity {
-    protected BumpableHostileEntity(EntityType<? extends HostileEntity> entityType, World world) {
+abstract public class StompableHostileEntity extends HostileEntity {
+    protected static final TrackedData<Boolean> STOMPED = DataTracker.registerData(StompableHostileEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+
+    protected StompableHostileEntity(EntityType<? extends HostileEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -28,30 +33,40 @@ abstract public class BumpableHostileEntity extends HostileEntity {
     public void tickMovement() {
         super.tickMovement();
 
-        // TODO: disable all this if the entity is being ridden
-        // TODO: stack eachother ontop?
-        if (isBumpable()) {
-            Box hitBox = this.getBumpBox();
-            if (!this.getWorld().isClient) {
-                List<Entity> list = this.getWorld().getOtherEntities(this, hitBox, this.getBumpableOnBy());
-                if (!list.isEmpty()) {
-                    this.onBumpedOnTopBy(list);
+        if (this.canBeStomped()) {
+            Box hitBox = this.getStompBox();
+            List<Entity> list = this.getWorld().getOtherEntities(this, hitBox, this.getStompableBy());
+            if (!list.isEmpty()) {
+                this.stomp(true);
+                if (!this.getWorld().isClient) {
+                    this.onStompedBy(list);
                 }
             }
         }
     }
 
-    /**
-     * Returns whether this entity can be bumped on top of.
-     */
-    public boolean isBumpable() {
-        return this.getHealth() > 0.0F && !this.isSpectator();
+    @Override
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(STOMPED, false);
+    }
+
+    public boolean isStomped() {
+        return this.dataTracker.get(STOMPED);
+    }
+
+    public void stomp(boolean b) {
+        this.dataTracker.set(STOMPED, b);
+    }
+
+    public boolean canBeStomped() {
+        return this.getHealth() > 0.0F && !this.isSpectator() && !this.hasPassengers();
     }
 
     /**
      * Returns the box that is used to check if an entity can bump on top of this entity.
      */
-    public Box getBumpBox() {
+    public Box getStompBox() {
         Box hitBox = this.getBoundingBox();
         hitBox = hitBox.withMinY(hitBox.maxY - (0.2D * (hitBox.maxY - hitBox.minY)));
         hitBox = hitBox.withMaxY(hitBox.maxY + 0.5D);
@@ -62,7 +77,7 @@ abstract public class BumpableHostileEntity extends HostileEntity {
     /**
      * Returns a predicate that determines if an entity can bump on top of this entity.
      */
-    public Predicate<? super Entity> getBumpableOnBy() {
+    public Predicate<? super Entity> getStompableBy() {
         return EntityPredicates.EXCEPT_SPECTATOR.and(entity ->
                 entity.getType().isIn(MubbleEntityTypeTags.CAN_JUMP_BUMP) &&
                 !entity.isOnGround() &&
@@ -74,7 +89,7 @@ abstract public class BumpableHostileEntity extends HostileEntity {
      * Called when this entity is bumped on top by another entity. Fired on the server side only.
      * @param entities the entities that bumped on top of this entity
      */
-    public void onBumpedOnTopBy(List<Entity> entities) {
+    public void onStompedBy(List<Entity> entities) {
         // TODO: set damage source to first entity in list
         this.damage(this.getDamageSources().genericKill(), Float.MAX_VALUE);
         for (Entity entity : entities) {

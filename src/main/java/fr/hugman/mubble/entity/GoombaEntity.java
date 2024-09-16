@@ -55,12 +55,13 @@ import java.util.Optional;
 
 //TODO: add swim navigation and animation
 //TODO: add sleeping behavior
-public class GoombaEntity extends BumpableHostileEntity implements Surprisable, Stunnable, VariantHolder<RegistryEntry<GoombaVariant>> {
+//TODO: stack eachother ontop?
+public class GoombaEntity extends StompableHostileEntity implements Surprisable, Stunnable, VariantHolder<RegistryEntry<GoombaVariant>> {
     public static final String VARIANT_KEY = "variant";
 
-    private static final TrackedData<RegistryEntry<GoombaVariant>> VARIANT = DataTracker.registerData(GoombaEntity.class, MubbleTrackedData.GOOMBA_VARIANT);
-    private static final TrackedData<Byte> GOOMBA_FLAGS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.BYTE);
-    private static final TrackedData<Integer> SURPRISE_PROGRESS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    protected static final TrackedData<RegistryEntry<GoombaVariant>> VARIANT = DataTracker.registerData(GoombaEntity.class, MubbleTrackedData.GOOMBA_VARIANT);
+    protected static final TrackedData<Byte> GOOMBA_FLAGS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.BYTE);
+    protected static final TrackedData<Integer> SURPRISE_PROGRESS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     private static final int SURPRISED_FLAG = 2;
     private static final int UNUSED1_FLAG = 4;
@@ -125,21 +126,16 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
-        // TODO: check for damage source
-        this.crushAnimationState.start(this.age);
+        if(this.isStomped()) {
+            this.crushAnimationState.startIfNotRunning(this.age);
+        }
     }
 
     // SOUNDS
 
-
-    @Override
-    protected BlockPos getStepSoundPos(BlockPos pos) {
-        return super.getStepSoundPos(pos);
-    }
-
     @Override
     protected SoundEvent getDeathSound() {
-        return MubbleSounds.GOOMBA_STOMP;
+        return this.isStomped() ? MubbleSounds.GOOMBA_STOMP : MubbleSounds.GOOMBA_DEATH;
     }
 
     @Override
@@ -175,6 +171,11 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
                 this.surprisedAnimationState.start(this.age);
             }
         }
+        if(STOMPED.equals(data)) {
+            if(this.isStomped() && this.dead) {
+                this.crushAnimationState.startIfNotRunning(this.age);
+            }
+        }
 
         super.onTrackedDataSet(data);
     }
@@ -190,19 +191,6 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
         return this.dataTracker.get(VARIANT);
     }
 
-    @Override
-    public boolean isSurprised() {
-        return this.hasGoombaFlag(SURPRISED_FLAG);
-    }
-
-    @Override
-    public void setSurprised(boolean b) {
-        this.setGoombaFlag(SURPRISED_FLAG, b);
-        if (!b) {
-            this.setSurpriseProgress(0);
-        }
-    }
-
     private void setGoombaFlag(int mask, boolean value) {
         byte b = this.dataTracker.get(GOOMBA_FLAGS);
         if (value) {
@@ -214,6 +202,19 @@ public class GoombaEntity extends BumpableHostileEntity implements Surprisable, 
 
     private boolean hasGoombaFlag(int bitmask) {
         return (this.dataTracker.get(GOOMBA_FLAGS) & bitmask) != 0;
+    }
+
+    @Override
+    public boolean isSurprised() {
+        return this.hasGoombaFlag(SURPRISED_FLAG);
+    }
+
+    @Override
+    public void setSurprised(boolean b) {
+        this.setGoombaFlag(SURPRISED_FLAG, b);
+        if (!b) {
+            this.setSurpriseProgress(0);
+        }
     }
 
     public int getSurpriseProgress() {
