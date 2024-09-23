@@ -1,18 +1,21 @@
 package fr.hugman.mubble.entity;
 
-import net.minecraft.block.BlockState;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
+import net.minecraft.block.*;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.MovementType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.util.crash.CrashException;
-import net.minecraft.util.crash.CrashReport;
-import net.minecraft.util.crash.CrashReportSection;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.entity.projectile.thrown.ThrownEntity;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.World;
 
 public class KoopaShellEntity extends ProjectileEntity {
@@ -25,82 +28,78 @@ public class KoopaShellEntity extends ProjectileEntity {
 
     }
 
-    @Override
-    public void tick() {
-        this.applyGravity();
-        var currentMovement = this.getVelocity();
-        this.move(MovementType.SELF, currentMovement);
-        this.checkBlockCollision(currentMovement);
-    }
 
     @Override
     protected double getGravity() {
-        return 0.08D;
+        return 0.08;
     }
 
-    protected void checkBlockCollision(Vec3d previousMovement) {
-        Box shellBox = this.getBoundingBox().expand(1.0E-4, 0, 1.0E-4);
-        var minPos = BlockPos.ofFloored(shellBox.minX, shellBox.minY, shellBox.minZ);
-        var maxPos = BlockPos.ofFloored(shellBox.maxX, shellBox.maxY, shellBox.maxZ);
-        if (this.getWorld().isRegionLoaded(minPos, maxPos)) {
-            BlockPos.Mutable mutable = new BlockPos.Mutable();
-            double xDiff = 0;
-            double zDiff = 0;
-            reboundLoop:
-            for (int x = minPos.getX(); x <= maxPos.getX(); x++) {
-                for (int y = minPos.getY(); y <= maxPos.getY(); y++) {
-                    for (int z = minPos.getZ(); z <= maxPos.getZ(); z++) {
-                        if (!this.isAlive()) {
-                            return;
-                        }
-
-                        mutable.set(x, y, z);
-                        BlockState blockState = this.getWorld().getBlockState(mutable);
-                        VoxelShape voxelShape = blockState.getCollisionShape(this.getWorld(), minPos);
-                        if (!voxelShape.isEmpty()) {
-                            Box collisionBox = null;
-                            for (Box box : voxelShape.getBoundingBoxes()) {
-                                var offsetBox = box.offset(minPos);
-                                if (offsetBox.intersects(shellBox)) {
-                                    collisionBox = offsetBox;
-                                    break;
-                                }
-                            }
-                            if (collisionBox != null) {
-                                if (previousMovement.x > 0.0D && collisionBox.maxX > shellBox.minX) {
-                                    xDiff = Math.abs(shellBox.minX - collisionBox.maxX);
-                                }
-                                if (previousMovement.x < 0.0D && collisionBox.minX < shellBox.maxX) {
-                                    xDiff = Math.abs(collisionBox.minX - shellBox.maxX);
-                                }
-                                if (previousMovement.z > 0.0D && collisionBox.maxZ > shellBox.minZ) {
-                                    zDiff = Math.abs(shellBox.minZ - collisionBox.maxZ);
-                                }
-                                if (previousMovement.z < 0.0D && collisionBox.minZ < shellBox.maxZ) {
-                                    zDiff = Math.abs(collisionBox.minZ - shellBox.maxZ);
-                                }
-                                try {
-                                    blockState.onEntityCollision(this.getWorld(), mutable, this);
-                                    this.onBlockCollision(blockState);
-                                } catch (Throwable var12) {
-                                    CrashReport crashReport = CrashReport.create(var12, "Colliding entity with block");
-                                    CrashReportSection crashReportSection = crashReport.addElement("Block being collided with");
-                                    CrashReportSection.addBlockInfo(crashReportSection, this.getWorld(), mutable, blockState);
-                                    throw new CrashException(crashReport);
-                                }
-                                break reboundLoop;
-                            }
-                        }
-                    }
-                }
-            }
-            if (xDiff > zDiff) {
-                this.setVelocity(previousMovement.multiply(-1, 1, 1));
-            }
-            if (zDiff > xDiff) {
-                this.setVelocity(previousMovement.multiply(1, 1, -1));
-            }
-            //TODO: play sound
+    @Override
+    public void tick() {
+        super.tick();
+        HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
+        if (hitResult.getType() != HitResult.Type.MISS) {
+            this.hitOrDeflect(hitResult);
         }
+
+        this.checkBlockCollision();
+        Vec3d vec3d = this.getVelocity();
+        double d = this.getX() + vec3d.x;
+        double e = this.getY() + vec3d.y;
+        double f = this.getZ() + vec3d.z;
+        this.updateRotation();
+        if (this.isTouchingWater()) {
+            for (int i = 0; i < 4; i++) {
+                float g = 0.25F;
+                this.getWorld().addParticle(ParticleTypes.BUBBLE, d - vec3d.x * g, e - vec3d.y * g, f - vec3d.z * g, vec3d.x, vec3d.y, vec3d.z);
+            }
+        }
+
+        this.applyGravity();
+        this.setPosition(d, e, f);
+    }
+
+    @Override
+    protected void onCollision(HitResult result) {
+        boolean removeOnImpact = true;
+        if (result.getType() == HitResult.Type.ENTITY) {
+            removeOnImpact = onEntityImpact((EntityHitResult) result);
+        } else if (result.getType() == HitResult.Type.BLOCK) {
+            removeOnImpact = onBlockImpact((BlockHitResult) result);
+        }
+        if (removeOnImpact) {
+            if (!this.getWorld().isClient) {
+                this.getWorld().sendEntityStatus(this, (byte) 3);
+                this.remove(RemovalReason.KILLED);
+            }
+        }
+    }
+
+    protected boolean onBlockImpact(BlockHitResult result) {
+        Direction face = result.getSide();
+        switch (face) {
+            case UP -> {
+                this.setVelocity(this.getVelocity().multiply(1.0D, -0.5D, 1.0D));
+                return false;
+            }
+            case NORTH, SOUTH -> {
+                this.setVelocity(this.getVelocity().multiply(1.0D, 1.0D, -1.0D));
+                return false;
+            }
+            case EAST, WEST -> {
+                this.setVelocity(this.getVelocity().multiply(-1.0D, 1.0D, 1.0D));
+                return false;
+            }
+            case null, default -> {
+                return false;
+            }
+        }
+    }
+
+    protected boolean onEntityImpact(EntityHitResult result) {
+        Entity entity = result.getEntity();
+        entity.damage(this.getDamageSources().thrown(this, this.getOwner()), 2.0F);
+        // TODO: PLAY SOUND
+        return true;
     }
 }
