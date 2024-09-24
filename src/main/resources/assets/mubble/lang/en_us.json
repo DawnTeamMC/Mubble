@@ -4,6 +4,8 @@
   "item_group.mubble.super_mario": "Super Mario",
   "item_group.mubble.yoshi_island": "Yoshi's Island",
 
+  "item.mubble.green_koopa_shell": "Green Koopa Shell",
+  "item.mubble.red_koopa_shell": "Red Koopa Shell",
   "item.mubble.maker_glove": "Maker Glove",
 
   "block.mubble.question_block": "? Block",

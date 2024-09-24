@@ -31,6 +31,8 @@ public class MubbleItemGroups {
 
     public static void appendItemGroups() {
         ItemGroupEvents.modifyEntriesEvent(MubbleItemGroupKeys.SUPER_MARIO).register(itemGroup -> {
+            itemGroup.add(MubbleItems.GREEN_KOOPA_SHELL);
+            itemGroup.add(MubbleItems.RED_KOOPA_SHELL);
             itemGroup.add(MubbleItems.MAKER_GLOVE);
             itemGroup.add(MubbleBlocks.QUESTION_BLOCK);
             itemGroup.add(MubbleBlocks.EMPTY_BLOCK);
