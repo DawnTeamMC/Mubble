@@ -1,5 +1,6 @@
 package fr.hugman.mubble.client.render.entity.model;
 
+import com.google.common.collect.ImmutableList;
 import fr.hugman.mubble.entity.KoopaShellEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
@@ -21,7 +22,7 @@ public class KoopaShellModel extends EntityModel<KoopaShellEntity> {
 
     @Override
     public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-
+        ImmutableList.of(this.base).forEach((modelRenderer) -> modelRenderer.render(matrices, vertices, light, overlay, color));
     }
 
     public static TexturedModelData getTexturedModelData() {

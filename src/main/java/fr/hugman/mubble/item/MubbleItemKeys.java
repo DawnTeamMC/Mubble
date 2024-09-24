@@ -8,6 +8,8 @@ import net.minecraft.registry.RegistryKeys;
 public class MubbleItemKeys {
     // SUPER MARIO
     public static final RegistryKey<Item> MAKER_GLOVE = of("maker_glove");
+    public static final RegistryKey<Item> GREEN_KOOPA_SHELL = of("green_koopa_shell");
+    public static final RegistryKey<Item> RED_KOOPA_SHELL = of("red_koopa_shell");
 
     public static final RegistryKey<Item> MINI_MUSHROOM = of("mini_mushroom");
     public static final RegistryKey<Item> MEGA_MUSHROOM = of("mega_mushroom");
