@@ -27,35 +27,6 @@ import net.minecraft.world.World;
 
 import java.util.Optional;
 
-//TODO: add paragoomba variant
-//TODO: add blue, gray variants
-//TODO: add spiky variant
-//TODO: add jack O'Goomba variant
-//TODO: add tanoomba variant
-//TODO: add goombrat variant
-//TODO: add tail goomba variant
-//TODO: add gold goomba variant
-//TODO: add bone goomba variant
-//TODO: add octoomba variant
-//TODO: add choomba variant
-//TODO: add Goomdiver variant
-//TODO: add Gritty Goomba variant
-//TODO: add Dreamy Goomba variant
-//TODO: add Headbonk Goomba variant
-//TODO: add Goombeetle variant
-
-//TODO: add Goombette variant
-//TODO: add Goombario variant
-//TODO: add Goombella variant
-//TODO: add Professor Frankly variant
-//TODO: add Private Goomp variant
-
-//TODO: add hat support
-//TODO: add shoe support
-
-//TODO: add swim navigation and animation
-//TODO: add sleeping behavior
-//TODO: stack eachother ontop?
 public class GoombaEntity extends StompableHostileEntity implements Surprisable, Stunnable, VariantHolder<RegistryEntry<GoombaVariant>> {
     public static final String VARIANT_KEY = "variant";
 
@@ -140,6 +111,7 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
+        //TODO: make pitch depend on variant or size
         if(this.getTarget() != null) {
             this.playSound(MubbleSounds.GOOMBA_RUN_STEP, 1.0F, 1.0F);
         }
@@ -150,7 +122,7 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
 
     @Override
     protected float calculateNextStepSoundDistance() {
-        //TODO: involve entity size maybe?
+        //TODO: involve entity size or variant maybe? or even add it in the animation directly to make it as accurate as possible
         return this.distanceTraveled + 0.3f;
     }
 
