@@ -28,6 +28,10 @@
 
   "item.mubble.cape_feather": "Cape Feather",
   "item.mubble.super_cape_feather": "Super Cape Feather",
+  "item.mubble.goomba_spawn_egg": "Goomba Spawn Egg",
+
+  "entity.mubble.goomba": "Goomba",
+  "entity.mubble.mini_goomba": "Mini Goomba",
 
   "block.mubble.blue_egg_block": "Blue Egg Block",
   "block.mubble.cyan_egg_block": "Cyan Egg Block",

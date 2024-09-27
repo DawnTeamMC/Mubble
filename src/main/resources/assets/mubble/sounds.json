@@ -47,5 +47,35 @@
     "sounds": [
       "mubble:item/cape_feather/use"
     ]
+  },
+  "entity.goomba.walk_step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "mubble:entity/goomba/walk_step"
+    ]
+  },
+  "entity.goomba.run_step": {
+    "subtitle": "subtitles.block.generic.footsteps",
+    "sounds": [
+      "mubble:entity/goomba/run_step"
+    ]
+  },
+  "entity.goomba.find_target": {
+    "subtitle": "subtitles.mubble.goomba.find_target",
+    "sounds": [
+      "mubble:entity/goomba/find_target"
+    ]
+  },
+  "entity.goomba.death": {
+    "subtitle": "subtitles.mubble.goomba.death",
+    "sounds": [
+      "mubble:entity/goomba/death"
+    ]
+  },
+  "entity.goomba.stomp": {
+    "subtitle": "subtitles.mubble.goomba.stomp",
+    "sounds": [
+      "mubble:entity/goomba/stomp"
+    ]
   }
 }

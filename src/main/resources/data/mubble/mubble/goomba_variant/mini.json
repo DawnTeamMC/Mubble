@@ -1,0 +1,15 @@
+{
+  "name": {
+    "translate": "entity.mubble.mini_goomba"
+  },
+  "texture": "mubble:entity/goomba/mini/normal",
+  "surprised_texture": "mubble:entity/goomba/mini/surprised",
+  "base_attribute_values": {
+    "minecraft:generic.max_health": 2.0,
+    "minecraft:generic.scale": 0.5,
+    "minecraft:generic.movement_speed": 0.25,
+    "minecraft:generic.attack_damage": 0.75,
+    "minecraft:generic.jump_strength": 0.65,
+    "minecraft:generic.gravity": 0.12
+  }
+}
