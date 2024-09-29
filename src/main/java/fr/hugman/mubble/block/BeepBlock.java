@@ -63,7 +63,7 @@ public class BeepBlock extends Block {
     }
 
     @Override
-    public boolean isTransparent(BlockState state, BlockView world, BlockPos pos) {
+    protected boolean isTransparent(BlockState state) {
         return isFrame(state);
     }
 
@@ -73,7 +73,7 @@ public class BeepBlock extends Block {
     }
 
     @Override
-    public VoxelShape getCullingShape(BlockState state, BlockView world, BlockPos pos) {
+    protected VoxelShape getCullingShape(BlockState state) {
         return isFrame(state) ? VoxelShapes.empty() : VoxelShapes.fullCube();
     }
 
@@ -107,19 +107,25 @@ public class BeepBlock extends Block {
     }
 
     public void scheduleTick(World world, BlockPos pos, Block block) {
-        int cooldown = world.getGameRules().getInt(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
-        if (cooldown > 0) {
-            long worldTime = world.getTime();
-            int delta = (int) (cooldown - worldTime);
-            world.scheduleBlockTick(pos, block, (delta == 0) ? cooldown : delta % cooldown);
+        if (world instanceof ServerWorld serverWorld) {
+            int cooldown = serverWorld.getGameRules().getInt(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
+            if (cooldown > 0) {
+                long worldTime = world.getTime();
+                int delta = (int) (cooldown - worldTime);
+                world.scheduleBlockTick(pos, block, (delta == 0) ? cooldown : delta % cooldown);
+            }
         }
     }
 
     public BlockState getStateAtTime(World world) {
-        int cooldown = world.getGameRules().getInt(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
-        if (cooldown <= 0) return getDefaultState().with(FRAME, this.offset);
-        long worldTime = world.getTime();
-        boolean frame = (int) ((worldTime + (this.offset ? cooldown : 0)) % (cooldown * 2)) < cooldown;
-        return this.getDefaultState().with(FRAME, frame);
+        if (world instanceof ServerWorld serverWorld) {
+            int cooldown = serverWorld.getGameRules().getInt(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
+            if (cooldown > 0) {
+                long worldTime = world.getTime();
+                boolean frame = (int) ((worldTime + (this.offset ? cooldown : 0)) % (cooldown * 2)) < cooldown;
+                return this.getDefaultState().with(FRAME, frame);
+            }
+        }
+        return getDefaultState().with(FRAME, this.offset);
     }
 }

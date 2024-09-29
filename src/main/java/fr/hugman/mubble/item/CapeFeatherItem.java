@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.stat.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -23,7 +23,7 @@ public class CapeFeatherItem extends Item {
 	}
 
 	@Override
-	public TypedActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn) {
+	public ActionResult use(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack stack = playerIn.getStackInHand(handIn);
 		Random rand = new Random();
 		Vec3d vec3d = playerIn.getVelocity();
@@ -37,6 +37,6 @@ public class CapeFeatherItem extends Item {
 			stack.decrement(1);
 		}
 		playerIn.incrementStat(Stats.USED.getOrCreateStat(this));
-		return TypedActionResult.success(stack);
+		return ActionResult.SUCCESS.withNewHandStack(stack);
 	}
 }

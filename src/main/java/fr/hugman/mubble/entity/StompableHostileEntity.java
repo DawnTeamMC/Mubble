@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Box;
 import net.minecraft.world.World;
 
@@ -38,8 +39,8 @@ abstract public class StompableHostileEntity extends HostileEntity {
             List<Entity> list = this.getWorld().getOtherEntities(this, hitBox, this.getStompableBy());
             if (!list.isEmpty()) {
                 this.stomp(true);
-                if (!this.getWorld().isClient) {
-                    this.onStompedBy(list);
+                if (this.getWorld() instanceof ServerWorld serverWorld) {
+                    this.onStompedBy(serverWorld, list);
                 }
             }
         }
@@ -89,9 +90,14 @@ abstract public class StompableHostileEntity extends HostileEntity {
      * Called when this entity is bumped on top by another entity. Fired on the server side only.
      * @param entities the entities that bumped on top of this entity
      */
-    public void onStompedBy(List<Entity> entities) {
-        // TODO: set damage source to first entity in list
-        this.damage(this.getDamageSources().genericKill(), Float.MAX_VALUE);
+    public void onStompedBy(ServerWorld serverWorld, List<Entity> entities) {
+        if(!entities.isEmpty()) {
+            // TODO: custom damage source
+            this.damage(serverWorld, this.getDamageSources().fallingBlock(entities.getFirst()), Float.MAX_VALUE);
+        }
+        else {
+            this.damage(serverWorld, this.getDamageSources().genericKill(), Float.MAX_VALUE);
+        }
         for (Entity entity : entities) {
             entity.setVelocity(entity.getVelocity().x, 0.5D, entity.getVelocity().z);
             if (entity instanceof PlayerEntity player) {

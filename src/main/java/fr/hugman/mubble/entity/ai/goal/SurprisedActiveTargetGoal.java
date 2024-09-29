@@ -6,6 +6,7 @@ import fr.hugman.mubble.entity.Surprisable;
 import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.mob.MobEntity;
 import org.jetbrains.annotations.Nullable;
@@ -15,7 +16,7 @@ public class SurprisedActiveTargetGoal<T extends LivingEntity> extends ActiveTar
 		super(mob, targetClass, 10, checkVisibility, false, null);
 	}
 
-	public SurprisedActiveTargetGoal(MobEntity mob, Class<T> targetClass, boolean checkVisibility, Predicate<LivingEntity> targetPredicate) {
+	public SurprisedActiveTargetGoal(MobEntity mob, Class<T> targetClass, boolean checkVisibility, TargetPredicate.EntityPredicate targetPredicate) {
 		super(mob, targetClass, 10, checkVisibility, false, targetPredicate);
 	}
 
@@ -29,7 +30,7 @@ public class SurprisedActiveTargetGoal<T extends LivingEntity> extends ActiveTar
 			int reciprocalChance,
 			boolean checkVisibility,
 			boolean checkCanNavigate,
-			@Nullable Predicate<LivingEntity> targetPredicate
+			@Nullable TargetPredicate.EntityPredicate targetPredicate
 	) {
 		super(mob, targetClass, reciprocalChance, checkVisibility, checkCanNavigate, targetPredicate);
 	}

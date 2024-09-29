@@ -4,6 +4,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.sound.MubbleSounds;
+import net.minecraft.block.AbstractBlock;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.sound.SoundCategory;
@@ -15,6 +17,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Generic bumpable block with an additional sound effect when bumped.
@@ -32,6 +35,14 @@ public class DecoratedBumpableBlock extends BumpableBlock {
 
 	public DecoratedBumpableBlock(@Nullable BlockState defaultBumpedState, Settings settings) {
 		super(defaultBumpedState, settings);
+	}
+
+	public static Function<Settings, DecoratedBumpableBlock> of(BlockState defaultBumpedState) {
+		return s -> new DecoratedBumpableBlock(defaultBumpedState, s);
+	}
+
+	public static Function<Settings, DecoratedBumpableBlock> of(Block block) {
+		return s -> new DecoratedBumpableBlock(block.getDefaultState(), s);
 	}
 
 	@Override

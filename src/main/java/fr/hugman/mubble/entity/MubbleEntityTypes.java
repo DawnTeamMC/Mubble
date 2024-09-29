@@ -12,7 +12,7 @@ public final class MubbleEntityTypes {
     public static final EntityType<GoombaEntity> GOOMBA = of(MubbleEntityTypeKeys.GOOMBA, EntityType.Builder.create(GoombaEntity::new, SpawnGroup.CREATURE).dimensions(0.6f, 0.755f).eyeHeight(0.53125f));
 
     private static <T extends Entity> EntityType<T> of(RegistryKey<EntityType<?>> id, EntityType.Builder<T> type) {
-        return Registry.register(Registries.ENTITY_TYPE, id, type.build(id.toString()));
+        return Registry.register(Registries.ENTITY_TYPE, id, type.build(id));
     }
 
     public static void registerAttributes() {
