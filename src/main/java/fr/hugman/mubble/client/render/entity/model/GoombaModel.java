@@ -7,19 +7,11 @@ import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
 
 public class GoombaModel extends EntityModel<GoombaEntityRenderState> {
-    private static final float BABY_SCALE = 0.6f;
-    private static final float BABY_Y_OFFSET = 1.0f;
-
     public static final String LEFT_EYEBROW = "left_eyebrow";
     public static final String RIGHT_EYEBROW = "right_eyebrow";
 
-    private final ModelPart root;
-    private final ModelPart head;
-
     public GoombaModel(ModelPart part) {
-        super(part);
-        this.root = part.getChild(EntityModelPartNames.ROOT);
-        this.head = this.root.getChild(EntityModelPartNames.HEAD);
+        super(part.getChild(EntityModelPartNames.ROOT));
     }
 
     public static TexturedModelData getTexturedModelData() {
