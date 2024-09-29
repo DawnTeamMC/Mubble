@@ -58,10 +58,10 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
 
     public static DefaultAttributeContainer.Builder createGoombaAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, 10.0)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 4.0)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.5);
+                .add(EntityAttributes.FOLLOW_RANGE, 10.0)
+                .add(EntityAttributes.MAX_HEALTH, 4.0)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.25)
+                .add(EntityAttributes.ATTACK_DAMAGE, 1.5);
     }
 
     @Override
@@ -133,7 +133,7 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
         super.initDataTracker(builder);
         builder.add(GOOMBA_FLAGS, (byte)0);
         builder.add(SURPRISE_PROGRESS, 0);
-        builder.add(VARIANT, this.getRegistryManager().get(MubbleRegistryKeys.GOOMBA_VARIANT).entryOf(GoombaVariants.NORMAL));
+        builder.add(VARIANT, this.getRegistryManager().getOrThrow(MubbleRegistryKeys.GOOMBA_VARIANT).getOrThrow(GoombaVariants.NORMAL));
     }
 
     @Override
@@ -210,7 +210,7 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
         super.readCustomDataFromNbt(nbt);
         Optional.ofNullable(Identifier.tryParse(nbt.getString(VARIANT_KEY)))
                 .map(variantId -> RegistryKey.of(MubbleRegistryKeys.GOOMBA_VARIANT, variantId))
-                .flatMap(variantKey -> this.getRegistryManager().get(MubbleRegistryKeys.GOOMBA_VARIANT).getEntry(variantKey))
+                .flatMap(variantKey -> this.getRegistryManager().getOrThrow(MubbleRegistryKeys.GOOMBA_VARIANT).getOptional(variantKey))
                 .ifPresent(this::setVariant);
     }
 
