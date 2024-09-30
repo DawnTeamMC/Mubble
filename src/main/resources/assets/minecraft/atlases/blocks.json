@@ -13,11 +13,13 @@
         "mubble:block/dotted_block/exclamation2",
         "mubble:block/smooth_block/straight",
         "mubble:block/smooth_block/wavy",
-        "mubble:block/egg_block"
+        "mubble:block/egg_block/side",
+        "mubble:block/egg_block/end"
       ],
       "palette_key": "mubble:color_palettes/mario_blocks",
       "permutations": {
         "blue": "mubble:color_palettes/mario_blocks/blue",
+        "cyan": "mubble:color_palettes/mario_blocks/cyan",
         "green": "mubble:color_palettes/mario_blocks/green",
         "yellow": "mubble:color_palettes/mario_blocks/yellow",
         "orange": "mubble:color_palettes/mario_blocks/orange",

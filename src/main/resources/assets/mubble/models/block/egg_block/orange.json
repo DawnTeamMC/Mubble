@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "mubble:block/egg_block",
   "textures": {
-    "all": "mubble:block/egg_block_orange"
+    "side": "mubble:block/egg_block/side_orange",
+    "end": "mubble:block/egg_block/end_orange"
   }
 }

@@ -126,7 +126,7 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
         if (nbt.contains(BUMPED_STATE_KEY)) {
             RegistryEntryLookup<Block> registryEntryLookup = this.world != null
                     ? this.world.createCommandRegistryWrapper(RegistryKeys.BLOCK)
-                    : Registries.BLOCK.getReadOnlyWrapper();
+                    : Registries.BLOCK;
             this.bumpedState = NbtHelper.toBlockState(registryEntryLookup, nbt.getCompound(BUMPED_STATE_KEY));
         }
 

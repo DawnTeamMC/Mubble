@@ -1,26 +1,17 @@
 package fr.hugman.mubble.client.render.entity.model;
 
 import fr.hugman.mubble.client.render.entity.animation.GoombaAnimations;
-import fr.hugman.mubble.entity.GoombaEntity;
+import fr.hugman.mubble.client.render.entity.state.GoombaEntityRenderState;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelPartNames;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
 
-public class GoombaModel extends SinglePartEntityModel<GoombaEntity> {
-    private static final float BABY_SCALE = 0.6f;
-    private static final float BABY_Y_OFFSET = 1.0f;
-
+public class GoombaModel extends EntityModel<GoombaEntityRenderState> {
     public static final String LEFT_EYEBROW = "left_eyebrow";
     public static final String RIGHT_EYEBROW = "right_eyebrow";
 
-    private final ModelPart root;
-    private final ModelPart head;
-
     public GoombaModel(ModelPart part) {
-        this.root = part.getChild(EntityModelPartNames.ROOT);
-        this.head = this.root.getChild(EntityModelPartNames.HEAD);
+        super(part.getChild(EntityModelPartNames.ROOT));
     }
 
     public static TexturedModelData getTexturedModelData() {
@@ -43,28 +34,10 @@ public class GoombaModel extends SinglePartEntityModel<GoombaEntity> {
     }
 
     @Override
-    public void setAngles(GoombaEntity entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-        this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.animateMovement(GoombaAnimations.WALKING, limbAngle, limbDistance, 4.0F, 2.5F);
-        this.updateAnimation(entity.surprisedAnimationState, GoombaAnimations.SURPRISE, animationProgress);
-        this.updateAnimation(entity.crushAnimationState, GoombaAnimations.CRUSH, animationProgress);
-    }
-
-    @Override
-    public ModelPart getPart() {
-        return this.root;
-    }
-
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, int color) {
-        if (this.child) {
-            matrices.push();
-            matrices.scale(BABY_SCALE, BABY_SCALE, BABY_SCALE);
-            matrices.translate(0.0F, BABY_Y_OFFSET, 0.0F);
-            this.getPart().render(matrices, vertices, light, overlay, color);
-            matrices.pop();
-        } else {
-            this.getPart().render(matrices, vertices, light, overlay, color);
-        }
+    public void setAngles(GoombaEntityRenderState renderState) {
+        super.setAngles(renderState);
+        this.animateWalking(GoombaAnimations.WALKING, renderState.limbFrequency, renderState.limbAmplitudeMultiplier, 4.0F, 2.5F);
+        this.animate(renderState.surprisedAnimationState, GoombaAnimations.SURPRISE, renderState.age);
+        this.animate(renderState.crushAnimationState, GoombaAnimations.CRUSH, renderState.age);
     }
 }

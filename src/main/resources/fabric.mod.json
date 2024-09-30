@@ -29,7 +29,7 @@
 		"mubble.mixins.json"
 	],
 	"depends": {
-		"minecraft": "1.21.x",
+		"minecraft": "*",
 		"fabric-api": "*"
 	},
 	"custom": {
