@@ -1,6 +1,9 @@
 {
   "name": {
-    "translate": "entity.mubble.mini_goomba"
+    "translate": "entity.mubble.goomba.mini"
+  },
+  "spawn_egg_name": {
+    "translate": "item.mubble.goomba_spawn_egg.mini"
   },
   "texture": "mubble:entity/goomba/mini/normal",
   "surprised_texture": "mubble:entity/goomba/mini/surprised",

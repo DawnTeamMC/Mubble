@@ -2,10 +2,13 @@ package fr.hugman.mubble.entity;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fr.hugman.mubble.item.MubbleItems;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
@@ -23,36 +26,36 @@ public class GoombaVariant {
             TextCodecs.CODEC.optionalFieldOf("name").forGetter(v -> v.name),
             Identifier.CODEC.fieldOf("texture").forGetter(v -> v.texture),
             Identifier.CODEC.fieldOf("surprised_texture").forGetter(v -> v.surprisedTexture),
-            Codec.unboundedMap(EntityAttribute.CODEC, Codec.DOUBLE).optionalFieldOf("base_attribute_values", Map.of()).forGetter(v -> v.baseAttributes)
+            Codec.unboundedMap(EntityAttribute.CODEC, Codec.DOUBLE).optionalFieldOf("base_attribute_values", Map.of()).forGetter(v -> v.baseAttributes),
+            TextCodecs.CODEC.optionalFieldOf("spawn_egg_name").forGetter(v -> v.spawnEggName)
     ).apply(instance, GoombaVariant::new));
+    public static final Codec<RegistryEntry<GoombaVariant>> ENTRY_CODEC = RegistryElementCodec.of(MubbleRegistryKeys.GOOMBA_VARIANT, CODEC);
 
     public static final PacketCodec<RegistryByteBuf, GoombaVariant> PACKET_CODEC = PacketCodec.tuple(
             TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, (v -> v.name),
             Identifier.PACKET_CODEC, (v -> v.texture),
             Identifier.PACKET_CODEC, (v -> v.surprisedTexture),
             PacketCodecs.map(Object2ObjectOpenHashMap::new, EntityAttribute.PACKET_CODEC, PacketCodecs.DOUBLE), (v -> v.baseAttributes),
+            TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, (v -> v.spawnEggName),
             GoombaVariant::new
     );
-
-    public static final Codec<RegistryEntry<GoombaVariant>> ENTRY_CODEC = RegistryElementCodec.of(MubbleRegistryKeys.GOOMBA_VARIANT, CODEC);
-
-    public static final PacketCodec<RegistryByteBuf, RegistryEntry<GoombaVariant>> ENTRY_PACKET_CODEC = PacketCodecs.registryEntry(
-            MubbleRegistryKeys.GOOMBA_VARIANT, PACKET_CODEC
-    );
+    public static final PacketCodec<RegistryByteBuf, RegistryEntry<GoombaVariant>> ENTRY_PACKET_CODEC = PacketCodecs.registryEntry(MubbleRegistryKeys.GOOMBA_VARIANT, PACKET_CODEC);
 
     private final Optional<Text> name;
     private final Identifier texture;
     private final Identifier surprisedTexture;
     private final Map<RegistryEntry<EntityAttribute>, Double> baseAttributes;
+    private final Optional<Text> spawnEggName;
 
     private final Identifier texturePath;
     private final Identifier surprisedTexturePath;
 
-    public GoombaVariant(Optional<Text> name, Identifier texture, Identifier surprisedTexture, Map<RegistryEntry<EntityAttribute>, Double> baseAttributes) {
+    public GoombaVariant(Optional<Text> name, Identifier texture, Identifier surprisedTexture, Map<RegistryEntry<EntityAttribute>, Double> baseAttributes, Optional<Text> spawnEggName) {
         this.name = name;
         this.texture = texture;
         this.surprisedTexture = surprisedTexture;
         this.baseAttributes = baseAttributes;
+        this.spawnEggName = spawnEggName;
 
         this.texturePath = getTexturePath(texture);
         this.surprisedTexturePath = getTexturePath(surprisedTexture);
@@ -70,12 +73,18 @@ public class GoombaVariant {
         return surprisedTexturePath;
     }
 
-    public Map<RegistryEntry<EntityAttribute>, Double> baseAttributes() {
-        return this.baseAttributes;
+    public void applyAttributes(LivingEntity livingEntity) {
+        baseAttributes.forEach((attribute, value) -> livingEntity.getAttributeInstance(attribute).setBaseValue(value));
     }
 
-    public void applyAttributes(LivingEntity livingEntity) {
-        this.baseAttributes.forEach((attribute, value) -> livingEntity.getAttributeInstance(attribute).setBaseValue(value));
+    public Optional<Text> spawnEggName() {
+        return spawnEggName;
+    }
+
+    public ItemStack getSpawnEggStack() {
+        ItemStack stack = new ItemStack(MubbleItems.GOOMBA_SPAWN_EGG);
+        spawnEggName.ifPresent(name -> stack.set(DataComponentTypes.ITEM_NAME, name));
+        return stack;
     }
 
     //TODO: move to utility class

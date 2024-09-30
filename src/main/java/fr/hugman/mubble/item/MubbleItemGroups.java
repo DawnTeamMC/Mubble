@@ -3,6 +3,7 @@ package fr.hugman.mubble.item;
 import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.entity.GoombaEntity;
 import fr.hugman.mubble.entity.GoombaVariant;
+import fr.hugman.mubble.entity.GoombaVariants;
 import fr.hugman.mubble.entity.MubbleEntityTypeKeys;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -62,16 +63,16 @@ public class MubbleItemGroups {
             entries.add(MubbleBlocks.BLUE_BEEP_BLOCK);
             entries.add(MubbleItems.CAPE_FEATHER);
             entries.add(MubbleItems.SUPER_CAPE_FEATHER);
+            entries.add(MubbleItems.GOOMBA_SPAWN_EGG);
             context.lookup()
                     .getOptional(MubbleRegistryKeys.GOOMBA_VARIANT)
-                    .ifPresent(registryWrapper -> addGoombaSpawnEggs(
+                    .ifPresent(registryWrapper -> addGoombaVariantsSpawnEggs(
                             entries,
                             context.lookup(),
                             registryWrapper,
                             registryEntry -> true,
                             ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS
                     ));
-
         });
 
         appendSpawnEgg(MubbleItems.GOOMBA_SPAWN_EGG);
@@ -117,7 +118,7 @@ public class MubbleItemGroups {
         append(ItemGroups.SPAWN_EGGS, e -> e.addAfter(predicate, Collections.singleton(new ItemStack(spawnEgg)), ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS));
     }
 
-    private static void addGoombaSpawnEggs(
+    private static void addGoombaVariantsSpawnEggs(
             ItemGroup.Entries entries,
             RegistryWrapper.WrapperLookup registries,
             RegistryWrapper.Impl<GoombaVariant> registryWrapper,
@@ -129,14 +130,20 @@ public class MubbleItemGroups {
                 .filter(filter)
                 //TODO: sort?
                 .forEach(
-                        goombaVariantEntry -> {
-                            ItemStack itemStack = new ItemStack(MubbleItems.GOOMBA_SPAWN_EGG);
-                            itemStack.set(DataComponentTypes.ENTITY_DATA, NbtComponent.DEFAULT
-                                    .with(registryOps, GoombaEntity.VARIANT_MAP_CODEC, goombaVariantEntry)
-                                    .getOrThrow()
-                                    .apply(nbt -> nbt.putString("id", MubbleEntityTypeKeys.GOOMBA.getValue().toString())));
-                            goombaVariantEntry.value().name().ifPresent(text -> itemStack.set(DataComponentTypes.ITEM_NAME, text)); //TODO: add a proper field for spawn egg name
-                            entries.add(itemStack, stackVisibility);
+                        entry -> {
+                            if (GoombaVariants.NORMAL.getValue().equals(entry.registryKey().getValue())) {
+                                return;
+                            }
+                            var stack = new ItemStack(MubbleItems.GOOMBA_SPAWN_EGG);
+                            entry.value().spawnEggName().ifPresent(name -> stack.set(DataComponentTypes.ITEM_NAME, name));
+                            if (stack.isEmpty()) {
+                                return;
+                            }
+                            stack.set(DataComponentTypes.ENTITY_DATA, NbtComponent.DEFAULT
+                                    .apply(nbt -> nbt.putString("id", MubbleEntityTypeKeys.GOOMBA.getValue().toString()))
+                                    .with(registryOps, GoombaEntity.VARIANT_MAP_CODEC, entry)
+                                    .getOrThrow());
+                            entries.add(stack, stackVisibility);
                         }
                 );
     }
