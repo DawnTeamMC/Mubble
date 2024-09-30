@@ -81,21 +81,21 @@ abstract public class StompableHostileEntity extends HostileEntity {
     public Predicate<? super Entity> getStompableBy() {
         return EntityPredicates.EXCEPT_SPECTATOR.and(entity ->
                 entity.getType().isIn(MubbleEntityTypeTags.CAN_JUMP_BUMP) &&
-                !entity.isOnGround() &&
-                entity.getVelocity().getY() < 0.3D &&
-                entity.isAlive());
+                        !entity.isOnGround() &&
+                        entity.getVelocity().getY() < 0.3D &&
+                        entity.isAlive());
     }
 
     /**
      * Called when this entity is bumped on top by another entity. Fired on the server side only.
+     *
      * @param entities the entities that bumped on top of this entity
      */
     public void onStompedBy(ServerWorld serverWorld, List<Entity> entities) {
-        if(!entities.isEmpty()) {
+        if (!entities.isEmpty()) {
             // TODO: custom damage source
             this.damage(serverWorld, this.getDamageSources().fallingBlock(entities.getFirst()), Float.MAX_VALUE);
-        }
-        else {
+        } else {
             this.damage(serverWorld, this.getDamageSources().genericKill(), Float.MAX_VALUE);
         }
         for (Entity entity : entities) {

@@ -4,16 +4,10 @@ import fr.hugman.mubble.client.render.MubbleRenderLayers;
 import fr.hugman.mubble.client.render.entity.model.GoombaModel;
 import fr.hugman.mubble.client.render.entity.state.GoombaEntityRenderState;
 import fr.hugman.mubble.entity.GoombaEntity;
-import fr.hugman.mubble.entity.GoombaVariant;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.state.CamelEntityRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.passive.CamelEntity;
-import net.minecraft.entity.passive.FrogVariant;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
@@ -42,7 +36,7 @@ public class GoombaRenderer extends MobEntityRenderer<GoombaEntity, GoombaEntity
         state.stomped = goomba.isStomped();
 
         // Force the rotation when the Goomba is surprised
-        if(state.surprised) {
+        if (state.surprised) {
             state.bodyYaw = goomba.headYaw;
             state.yawDegrees = MathHelper.wrapDegrees(goomba.headYaw - goomba.bodyYaw);
             state.pitch = goomba.getPitch();

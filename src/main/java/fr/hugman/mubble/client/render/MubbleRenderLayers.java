@@ -7,7 +7,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 
 public class MubbleRenderLayers {
     public static final EntityModelLayer GOOMBA = createModelLayer("goomba");
-    
+
     public static void registerLayers() {
         EntityModelLayerRegistry.registerModelLayer(GOOMBA, GoombaModel::getTexturedModelData);
     }

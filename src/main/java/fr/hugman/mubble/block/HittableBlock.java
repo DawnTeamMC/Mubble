@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 //TODO: move this to the Dawn API
@@ -21,7 +20,7 @@ import net.minecraft.world.World;
  * @since v4.0.0
  */
 public interface HittableBlock {
-	double HIT_Y_OFFSET = 0.001;
+    double HIT_Y_OFFSET = 0.001;
 
-	void onHit(World world, BlockState state, Entity entity, BlockHitResult hit);
+    void onHit(World world, BlockState state, Entity entity, BlockHitResult hit);
 }

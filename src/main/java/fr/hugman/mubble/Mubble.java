@@ -11,7 +11,6 @@ import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.world.MubbleGamerules;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

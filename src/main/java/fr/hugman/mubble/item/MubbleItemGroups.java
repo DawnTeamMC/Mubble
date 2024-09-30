@@ -135,7 +135,7 @@ public class MubbleItemGroups {
                                     .with(registryOps, GoombaEntity.VARIANT_MAP_CODEC, goombaVariantEntry)
                                     .getOrThrow()
                                     .apply(nbt -> nbt.putString("id", MubbleEntityTypeKeys.GOOMBA.getValue().toString())));
-                            goombaVariantEntry.value().name().ifPresent(text -> itemStack.set(DataComponentTypes.ITEM_NAME, text));
+                            goombaVariantEntry.value().name().ifPresent(text -> itemStack.set(DataComponentTypes.ITEM_NAME, text)); //TODO: add a proper field for spawn egg name
                             entries.add(itemStack, stackVisibility);
                         }
                 );
