@@ -1,8 +1,8 @@
 package fr.hugman.mubble.registry;
 
+import fr.hugman.mubble.entity.GoombaVariant;
 import fr.hugman.mubble.item.weapon.SplatoonWeapon;
 import fr.hugman.mubble.item.weapon.SplatoonWeaponType;
-import fr.hugman.mubble.entity.GoombaVariant;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.registry.Registry;

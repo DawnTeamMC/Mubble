@@ -1,7 +1,7 @@
 package fr.hugman.mubble.client.render.entity;
 
-import fr.hugman.mubble.client.render.MubbleRenderLayers;
 import fr.hugman.mubble.client.render.entity.model.GoombaModel;
+import fr.hugman.mubble.client.render.entity.model.MubbleModelLayers;
 import fr.hugman.mubble.client.render.entity.state.GoombaEntityRenderState;
 import fr.hugman.mubble.entity.GoombaEntity;
 import net.fabricmc.api.EnvType;
@@ -14,7 +14,7 @@ import net.minecraft.util.math.MathHelper;
 @Environment(EnvType.CLIENT)
 public class GoombaRenderer extends MobEntityRenderer<GoombaEntity, GoombaEntityRenderState, GoombaModel> {
     public GoombaRenderer(EntityRendererFactory.Context context) {
-        super(context, new GoombaModel(context.getPart(MubbleRenderLayers.GOOMBA)), 0.4f);
+        super(context, new GoombaModel(context.getPart(MubbleModelLayers.GOOMBA)), 0.4f);
     }
 
     @Override

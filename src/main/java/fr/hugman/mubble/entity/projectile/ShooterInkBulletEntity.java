@@ -98,7 +98,7 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
             this.onCollision(hitResult);
         }
 
-        this.checkBlockCollision();
+        this.tickBlockCollision();
         this.updateRotation();
         if (this.isTouchingWater()) {
             this.discard();
@@ -130,8 +130,8 @@ public class ShooterInkBulletEntity extends ProjectileEntity {
     protected void updateRotation() {
         Vec3d vec3d = this.getVelocity();
         double d = vec3d.horizontalLength();
-        this.setPitch((float)(MathHelper.atan2(vec3d.getY(), d) * 180.0F / (float)Math.PI));
-        this.setYaw((float)(MathHelper.atan2(vec3d.getX(), vec3d.getZ()) * 180.0F / (float)Math.PI));
+        this.setPitch((float) (MathHelper.atan2(vec3d.getY(), d) * 180.0F / (float) Math.PI));
+        this.setYaw((float) (MathHelper.atan2(vec3d.getX(), vec3d.getZ()) * 180.0F / (float) Math.PI));
     }
 
     @Override

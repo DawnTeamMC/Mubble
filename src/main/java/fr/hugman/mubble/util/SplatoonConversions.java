@@ -29,7 +29,7 @@ public final class SplatoonConversions {
     public static final float DISTANCE_RATIO = MINECRAFT_METER / SPLATOON_METER;
     public static final float DAMAGE_RATIO = (float) MINECRAFT_FULL_HEALTH / SPLATOON_FULL_HEALTH;
 
-    public static final float SPEED_RATIO = (MINECRAFT_METER/MINECRAFT_TPS) / (SPLATOON_METER/SPLATOON_TPS);
+    public static final float SPEED_RATIO = (MINECRAFT_METER / MINECRAFT_TPS) / (SPLATOON_METER / SPLATOON_TPS);
 
     /**
      * Converts Splatoon 3 frames to Minecraft ticks.

@@ -1,19 +1,18 @@
 package fr.hugman.mubble.client.render.entity.model;
 
+import fr.hugman.mubble.client.render.entity.state.ShooterInkBulletRenderState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.render.entity.model.EntityModel;
 
 @Environment(EnvType.CLIENT)
-public class InkBulletEntityModel<T extends Entity> extends SinglePartEntityModel<T> {
+public class InkBulletEntityModel extends EntityModel<ShooterInkBulletRenderState> {
     public static final String MAIN = "main";
     public static final float SIZE = 1;
-    private final ModelPart root;
 
     public InkBulletEntityModel(ModelPart root) {
-        this.root = root;
+        super(root);
     }
 
     public static TexturedModelData getTexturedModelData() {
@@ -27,14 +26,5 @@ public class InkBulletEntityModel<T extends Entity> extends SinglePartEntityMode
                 ModelTransform.pivot(0F, 0F, 0F)
         );
         return TexturedModelData.of(modelData, 16, 16);
-    }
-
-    @Override
-    public void setAngles(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch) {
-    }
-
-    @Override
-    public ModelPart getPart() {
-        return this.root;
     }
 }

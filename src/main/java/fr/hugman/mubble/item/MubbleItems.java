@@ -1,6 +1,7 @@
 package fr.hugman.mubble.item;
 
 import fr.hugman.mubble.component.MubbleDataComponentsTypes;
+import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.entity.projectile.ShooterInkBulletConfig;
 import fr.hugman.mubble.item.weapon.AutomaticShooterConfig;
 import fr.hugman.mubble.item.weapon.SplatoonWeapon;

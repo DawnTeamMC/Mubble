@@ -14,6 +14,6 @@ public class MubbleDataComponentsTypes {
             builder.codec(SplatoonWeapon.ENTRY_CODEC).packetCodec(SplatoonWeapon.ENTRY_PACKET_CODEC).cache());
 
     private static <T> ComponentType<T> of(String path, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
-        return Registry.register(Registries.DATA_COMPONENT_TYPE, Mubble.id(path), ((ComponentType.Builder)builderOperator.apply(ComponentType.builder())).build());
+        return Registry.register(Registries.DATA_COMPONENT_TYPE, Mubble.id(path), ((ComponentType.Builder) builderOperator.apply(ComponentType.builder())).build());
     }
 }

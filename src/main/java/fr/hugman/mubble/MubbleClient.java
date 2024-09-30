@@ -1,17 +1,15 @@
 package fr.hugman.mubble;
 
+import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.client.gui.screen.BumpableScreen;
-import fr.hugman.mubble.client.render.MubbleRenderLayers;
 import fr.hugman.mubble.client.render.MubbleRenderers;
-import fr.hugman.mubble.client.render.entity.ShooterInkBulletRenderer;
-import fr.hugman.mubble.entity.MubbleEntityTypes;
+import fr.hugman.mubble.client.render.entity.model.MubbleModelLayers;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 
@@ -19,16 +17,12 @@ import net.minecraft.client.render.RenderLayer;
 public class MubbleClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
+        Reflection.initialize(MubbleModelLayers.class);
+
         registerBlockRenderLayers();
         registerHandledScreens();
         MubbleRenderers.registerEntities();
         MubbleRenderers.registerBlockEntities();
-        MubbleRenderLayers.registerLayers();
-    }
-
-    //TODO: move to MubbleRenderers
-    public static void registerEntityRenderers() {
-        EntityRendererRegistry.register(MubbleEntityTypes.SHOOTER_INK_BULLET, ShooterInkBulletRenderer::new);
     }
 
     private static void registerBlockRenderLayers() {
