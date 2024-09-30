@@ -1,0 +1,18 @@
+{
+  "name": {
+    "translate": "entity.mubble.goomba.mini"
+  },
+  "spawn_egg_name": {
+    "translate": "item.mubble.goomba_spawn_egg.mini"
+  },
+  "texture": "mubble:entity/goomba/mini/normal",
+  "surprised_texture": "mubble:entity/goomba/mini/surprised",
+  "base_attribute_values": {
+    "minecraft:max_health": 2.0,
+    "minecraft:scale": 0.5,
+    "minecraft:movement_speed": 0.25,
+    "minecraft:attack_damage": 0.75,
+    "minecraft:jump_strength": 0.65,
+    "minecraft:gravity": 0.12
+  }
+}

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "mubble:block/empty_block"
+    "all": "mubble:block/bolted_block/normal_brown"
   }
 }
 

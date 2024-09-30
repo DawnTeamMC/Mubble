@@ -7,8 +7,8 @@ import fr.hugman.mubble.component.MubbleDataComponentsTypes;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.item.MubbleItemGroups;
 import fr.hugman.mubble.item.MubbleItems;
-import fr.hugman.mubble.item.weapon.SplatoonWeaponTypes;
 import fr.hugman.mubble.registry.MubbleRegistries;
+import fr.hugman.mubble.item.weapon.SplatoonWeaponTypes;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.world.MubbleGamerules;
@@ -26,11 +26,11 @@ public class Mubble implements ModInitializer {
         Reflection.initialize(MubbleBlocks.class);
         Reflection.initialize(MubbleItems.class);
         Reflection.initialize(MubbleBlockEntityTypes.class);
-        Reflection.initialize(MubbleEntityTypes.class);
         Reflection.initialize(MubbleSounds.class);
         Reflection.initialize(MubbleRegistries.class);
         Reflection.initialize(MubbleDataComponentsTypes.class);
         Reflection.initialize(MubbleScreenHandlerTypes.class);
+        MubbleEntityTypes.registerAttributes();
 
         Reflection.initialize(SplatoonWeaponTypes.class);
 

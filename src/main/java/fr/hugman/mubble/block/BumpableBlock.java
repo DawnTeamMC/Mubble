@@ -26,8 +26,8 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -95,20 +95,20 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
     }
 
     @Override
-    protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!player.getStackInHand(hand).isOf(MubbleItems.MAKER_GLOVE)) {
-            return ItemActionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
 
         if (world.isClient) {
-            return ItemActionResult.SUCCESS;
+            return ActionResult.SUCCESS;
         }
         if (world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpableEntity) {
             player.openHandledScreen(bumpableEntity);
             // TODO: add stat for inspecting bumpable blocks
             //player.incrementStat(MubbleStats.INSPECT_BUMPABLE);
         }
-        return ItemActionResult.CONSUME;
+        return ActionResult.CONSUME;
     }
 
     @Override

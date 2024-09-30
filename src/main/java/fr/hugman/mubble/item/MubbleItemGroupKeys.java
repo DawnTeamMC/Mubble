@@ -7,6 +7,7 @@ import net.minecraft.registry.RegistryKeys;
 
 public class MubbleItemGroupKeys {
     public static final RegistryKey<ItemGroup> SUPER_MARIO = of("super_mario");
+    public static final RegistryKey<ItemGroup> YOSHI_ISLAND = of("yoshi_island");
     public static final RegistryKey<ItemGroup> SPLATOON = of("splatoon");
 
     private static RegistryKey<ItemGroup> of(String path) {

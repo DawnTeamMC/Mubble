@@ -6,6 +6,10 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 
 public class MubbleEntityTypeKeys {
+    // SUPER MARIO
+    public static final RegistryKey<EntityType<?>> GOOMBA = of("goomba");
+
+    // SPLATOON
     public static final RegistryKey<EntityType<?>> SHOOTER_INK_BULLET = of("shooter_ink_bullet");
 
     private static RegistryKey<EntityType<?>> of(String path) {

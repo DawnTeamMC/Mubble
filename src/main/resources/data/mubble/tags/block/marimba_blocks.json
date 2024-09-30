@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "mubble:blue_marimba_block",
+    "mubble:green_marimba_block",
+    "mubble:yellow_marimba_block",
+    "mubble:red_marimba_block"
+  ]
+}

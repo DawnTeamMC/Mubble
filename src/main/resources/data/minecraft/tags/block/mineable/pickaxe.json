@@ -2,15 +2,13 @@
   "replace": false,
   "values": [
     "mubble:question_block",
-    "mubble:exclamation_block",
+    "#mubble:exclamation_blocks",
     "mubble:empty_block",
-    "mubble:brick_block",
-    "mubble:gold_block",
+    "#mubble:brick_blocks",
     "mubble:note_block",
-    "mubble:snake_block",
-    "mubble:fast_snake_block",
-    "mubble:slow_snake_block",
-    "mubble:red_beep_block",
-    "mubble:blue_beep_block"
+    "#mubble:marimba_blocks",
+    "#mubble:snake_blocks",
+    "#mubble:beep_blocks",
+    "#mubble:egg_blocks"
   ]
 }

@@ -13,15 +13,15 @@ import net.minecraft.world.World;
  * @since v4.0.0
  */
 public class EmptyBlock extends Block implements HittableBlock {
-	public EmptyBlock(Settings settings) {
-		super(settings);
-	}
+    public EmptyBlock(Settings settings) {
+        super(settings);
+    }
 
-	@Override
-	public void onHit(World world, BlockState state, Entity entity, BlockHitResult hit) {
-		var pos = hit.getPos();
-		if(world != null) {
-			world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundCategory.BLOCKS, 1.0F, 1.0F);
-		}
-	}
+    @Override
+    public void onHit(World world, BlockState state, Entity entity, BlockHitResult hit) {
+        var pos = hit.getPos();
+        if (world != null) {
+            world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+        }
+    }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "mubble:block/egg_block",
+  "textures": {
+    "side": "mubble:block/egg_block/side_white",
+    "end": "mubble:block/egg_block/end_white"
+  }
+}

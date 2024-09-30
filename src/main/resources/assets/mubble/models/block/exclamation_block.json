@@ -1,8 +1,0 @@
-{
-  "parent": "mubble:block/cube_column_alternating",
-  "textures": {
-    "end": "mubble:block/exclamation_block/end",
-    "side1": "mubble:block/exclamation_block/side1",
-    "side2": "mubble:block/exclamation_block/side2"
-  }
-}

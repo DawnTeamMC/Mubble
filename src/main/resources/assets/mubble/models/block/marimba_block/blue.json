@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "mubble:block/smooth_block/marimba_blue",
+    "end": "mubble:block/smooth_block/wavy_blue"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "mubble:blue_egg_block",
+    "mubble:cyan_egg_block",
+    "mubble:green_egg_block",
+    "mubble:yellow_egg_block",
+    "mubble:orange_egg_block",
+    "mubble:red_egg_block",
+    "mubble:pink_egg_block",
+    "mubble:black_egg_block",
+    "mubble:white_egg_block"
+  ]
+}
