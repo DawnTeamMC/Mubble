@@ -1,8 +1,8 @@
 package fr.hugman.mubble.client.render.entity;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.client.render.MubbleRenderLayers;
 import fr.hugman.mubble.client.render.entity.model.KoopaShellModel;
+import fr.hugman.mubble.client.render.entity.state.KoopaShellEntityRenderState;
 import fr.hugman.mubble.entity.KoopaShellEntity;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
@@ -12,12 +12,9 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-public class KoopaShellRenderer extends EntityRenderer<KoopaShellEntity> {
+public class KoopaShellRenderer extends EntityRenderer<KoopaShellEntity, KoopaShellEntityRenderState> {
     protected KoopaShellModel model;
 
     public KoopaShellRenderer(EntityRendererFactory.Context context) {
@@ -27,42 +24,46 @@ public class KoopaShellRenderer extends EntityRenderer<KoopaShellEntity> {
     }
 
     @Override
-    public void render(KoopaShellEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
+    public KoopaShellEntityRenderState getRenderState() {
+        return new KoopaShellEntityRenderState();
+    }
+
+    @Override
+    public void render(KoopaShellEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         matrices.push();
 
         matrices.scale(-1.0F, -1.0F, 1.0F);
         matrices.translate(0.0F, -1.501F, 0.0F);
 
-        MinecraftClient minecraftClient = MinecraftClient.getInstance();
-        boolean showBody = !entity.isInvisible();
-        boolean translucent = !showBody && !entity.isInvisibleTo(minecraftClient.player);
-        boolean outline = minecraftClient.hasOutline(entity);
-        RenderLayer renderLayer = this.getRenderLayer(entity, showBody, translucent, outline);
+        boolean showBody = !state.invisible;
+        boolean translucent = !showBody && !state.invisibleToPlayer;
+        RenderLayer renderLayer = this.getRenderLayer(state, showBody, translucent, state.hasOutline);
         if (renderLayer != null) {
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(renderLayer);
             int q = OverlayTexture.packUv(OverlayTexture.getU(0.0f), OverlayTexture.getV(false));
             this.model.render(matrices, vertexConsumer, light, q, translucent ? 654311423 : -1);
         }
 
-
         matrices.pop();
-        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
+        super.render(state, matrices, vertexConsumers, light);
     }
 
     @Nullable
-    protected RenderLayer getRenderLayer(KoopaShellEntity entity, boolean showBody, boolean translucent, boolean showOutline) {
-        Identifier identifier = this.getTexture(entity);
+    protected RenderLayer getRenderLayer(KoopaShellEntityRenderState state, boolean showBody, boolean translucent, boolean showOutline) {
         if (translucent) {
-            return RenderLayer.getItemEntityTranslucentCull(identifier);
+            return RenderLayer.getItemEntityTranslucentCull(state.texture);
         } else if (showBody) {
-            return this.model.getLayer(identifier);
+            return this.model.getLayer(state.texture);
         } else {
-            return showOutline ? RenderLayer.getOutline(identifier) : null;
+            return showOutline ? RenderLayer.getOutline(state.texture) : null;
         }
     }
 
     @Override
-    public Identifier getTexture(KoopaShellEntity entity) {
-        return Mubble.id("textures/entity/koopa_shell/green.png");
+    public void updateRenderState(KoopaShellEntity entity, KoopaShellEntityRenderState state, float tickDelta) {
+        super.updateRenderState(entity, state, tickDelta);
+        MinecraftClient minecraftClient = MinecraftClient.getInstance();
+        state.invisibleToPlayer = state.invisible && entity.isInvisibleTo(minecraftClient.player);
+        state.hasOutline = minecraftClient.hasOutline(entity);
     }
 }
