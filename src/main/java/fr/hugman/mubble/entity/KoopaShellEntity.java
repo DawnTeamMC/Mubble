@@ -1,6 +1,5 @@
 package fr.hugman.mubble.entity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
@@ -31,7 +30,6 @@ public class KoopaShellEntity extends ProjectileEntity {
 
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
-
     }
 
     @Override
@@ -47,7 +45,7 @@ public class KoopaShellEntity extends ProjectileEntity {
             this.hitOrDeflect(hitResult);
         }
 
-        this.checkBlockCollision();
+        this.tickBlockCollision();
         Vec3d vec3d = this.getVelocity();
         double x = this.getX() + vec3d.x;
         double y = this.getY() + vec3d.y;
@@ -79,8 +77,7 @@ public class KoopaShellEntity extends ProjectileEntity {
     @Override
     protected void onEntityHit(EntityHitResult result) {
         super.onEntityHit(result);
-        Entity entity = result.getEntity();
-        entity.damage(this.getDamageSources().thrown(this, this.getOwner()), 2.0F);
+        result.getEntity().serverDamage(this.getDamageSources().thrown(this, this.getOwner()), 2.0F);
         // TODO: PLAY SOUND
     }
 }
