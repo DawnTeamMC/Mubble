@@ -2,8 +2,14 @@ package fr.hugman.mubble.entity;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.network.RegistryByteBuf;
+import net.minecraft.network.codec.PacketCodec;
+import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
@@ -19,6 +25,20 @@ public class GoombaVariant {
             Identifier.CODEC.fieldOf("surprised_texture").forGetter(v -> v.surprisedTexture),
             Codec.unboundedMap(EntityAttribute.CODEC, Codec.DOUBLE).optionalFieldOf("base_attribute_values", Map.of()).forGetter(v -> v.baseAttributes)
     ).apply(instance, GoombaVariant::new));
+
+    public static final PacketCodec<RegistryByteBuf, GoombaVariant> PACKET_CODEC = PacketCodec.tuple(
+            TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, (v -> v.name),
+            Identifier.PACKET_CODEC, (v -> v.texture),
+            Identifier.PACKET_CODEC, (v -> v.surprisedTexture),
+            PacketCodecs.map(Object2ObjectOpenHashMap::new, EntityAttribute.PACKET_CODEC, PacketCodecs.DOUBLE), (v -> v.baseAttributes),
+            GoombaVariant::new
+    );
+
+    public static final Codec<RegistryEntry<GoombaVariant>> ENTRY_CODEC = RegistryElementCodec.of(MubbleRegistryKeys.GOOMBA_VARIANT, CODEC);
+
+    public static final PacketCodec<RegistryByteBuf, RegistryEntry<GoombaVariant>> ENTRY_PACKET_CODEC = PacketCodecs.registryEntry(
+            MubbleRegistryKeys.GOOMBA_VARIANT, PACKET_CODEC
+    );
 
     private final Optional<Text> name;
     private final Identifier texture;

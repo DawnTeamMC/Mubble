@@ -1,12 +1,16 @@
 package fr.hugman.mubble.entity;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import fr.hugman.mubble.entity.ai.control.StunnableMoveControl;
 import fr.hugman.mubble.entity.ai.goal.SurprisedActiveTargetGoal;
 import fr.hugman.mubble.entity.data.MubbleTrackedData;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.*;
+import net.minecraft.entity.AnimationState;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.VariantHolder;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -17,7 +21,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
@@ -25,10 +29,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.Optional;
-
 public class GoombaEntity extends StompableHostileEntity implements Surprisable, Stunnable, VariantHolder<RegistryEntry<GoombaVariant>> {
     public static final String VARIANT_KEY = "variant";
+
+    public static final MapCodec<RegistryEntry<GoombaVariant>> VARIANT_MAP_CODEC = GoombaVariant.ENTRY_CODEC.fieldOf(VARIANT_KEY);
+    public static final Codec<RegistryEntry<GoombaVariant>> VARIANT_ENTRY_CODEC = VARIANT_MAP_CODEC.codec();
 
     protected static final TrackedData<RegistryEntry<GoombaVariant>> VARIANT = DataTracker.registerData(GoombaEntity.class, MubbleTrackedData.GOOMBA_VARIANT);
     protected static final TrackedData<Byte> GOOMBA_FLAGS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.BYTE);
@@ -97,7 +102,7 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
     @Override
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
-        if(this.isStomped()) {
+        if (this.isStomped()) {
             this.crushAnimationState.startIfNotRunning(this.age);
         }
     }
@@ -112,10 +117,9 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         //TODO: make pitch depend on variant or size
-        if(this.getTarget() != null) {
+        if (this.getTarget() != null) {
             this.playSound(MubbleSounds.GOOMBA_RUN_STEP, 1.0F, 1.0F);
-        }
-        else {
+        } else {
             this.playSound(MubbleSounds.GOOMBA_WALK_STEP, 1.0F, 1.0F);
         }
     }
@@ -131,7 +135,7 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
-        builder.add(GOOMBA_FLAGS, (byte)0);
+        builder.add(GOOMBA_FLAGS, (byte) 0);
         builder.add(SURPRISE_PROGRESS, 0);
         builder.add(VARIANT, this.getRegistryManager().getOrThrow(MubbleRegistryKeys.GOOMBA_VARIANT).getOrThrow(GoombaVariants.NORMAL));
     }
@@ -143,8 +147,8 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
                 this.surprisedAnimationState.start(this.age);
             }
         }
-        if(STOMPED.equals(data)) {
-            if(this.isStomped() && this.dead) {
+        if (STOMPED.equals(data)) {
+            if (this.isStomped() && this.dead) {
                 this.crushAnimationState.startIfNotRunning(this.age);
             }
         }
@@ -166,9 +170,9 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
     private void setGoombaFlag(int mask, boolean value) {
         byte b = this.dataTracker.get(GOOMBA_FLAGS);
         if (value) {
-            this.dataTracker.set(GOOMBA_FLAGS, (byte)(b | mask));
+            this.dataTracker.set(GOOMBA_FLAGS, (byte) (b | mask));
         } else {
-            this.dataTracker.set(GOOMBA_FLAGS, (byte)(b & ~mask));
+            this.dataTracker.set(GOOMBA_FLAGS, (byte) (b & ~mask));
         }
     }
 
@@ -202,22 +206,19 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
     @Override
     public void writeCustomDataToNbt(NbtCompound nbt) {
         super.writeCustomDataToNbt(nbt);
-        nbt.putString(VARIANT_KEY, (this.getVariant().getKey().orElse(GoombaVariants.NORMAL)).getValue().toString());
+        VARIANT_ENTRY_CODEC.encodeStart(this.getRegistryManager().getOps(NbtOps.INSTANCE), this.getVariant()).ifSuccess(nbtElement -> nbt.copyFrom((NbtCompound) nbtElement));
     }
 
     @Override
     public void readCustomDataFromNbt(NbtCompound nbt) {
         super.readCustomDataFromNbt(nbt);
-        Optional.ofNullable(Identifier.tryParse(nbt.getString(VARIANT_KEY)))
-                .map(variantId -> RegistryKey.of(MubbleRegistryKeys.GOOMBA_VARIANT, variantId))
-                .flatMap(variantKey -> this.getRegistryManager().getOrThrow(MubbleRegistryKeys.GOOMBA_VARIANT).getOptional(variantKey))
-                .ifPresent(this::setVariant);
+        VARIANT_ENTRY_CODEC.parse(this.getRegistryManager().getOps(NbtOps.INSTANCE), nbt).ifSuccess(this::setVariant);
     }
 
     // TEXTURE
 
     public Identifier getTexture() {
-        if(this.isSurprised()) {
+        if (this.isSurprised()) {
             return this.getVariant().value().surprisedTexture();
         }
         return this.getVariant().value().texture();

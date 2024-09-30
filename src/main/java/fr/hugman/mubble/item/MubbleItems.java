@@ -1,7 +1,6 @@
 package fr.hugman.mubble.item;
 
 import fr.hugman.mubble.entity.MubbleEntityTypes;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
@@ -18,7 +17,6 @@ public class MubbleItems {
     public static final CapeFeatherItem SUPER_CAPE_FEATHER = of(MubbleItemKeys.SUPER_CAPE_FEATHER, s -> new CapeFeatherItem(s.rarity(Rarity.EPIC), true));
 
     public static final Item GOOMBA_SPAWN_EGG = of(MubbleItemKeys.GOOMBA_SPAWN_EGG, s -> new SpawnEggItem(MubbleEntityTypes.GOOMBA, 0x96664f, 0xf3dca6, s));
-
 
     private static <O extends Item> O of(RegistryKey<Item> key, Function<Item.Settings, O> factory, Item.Settings settings) {
         return Registry.register(Registries.ITEM, key, factory.apply(settings.registryKey(key)));
