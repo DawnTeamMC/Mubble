@@ -34,6 +34,7 @@ public class KoopaShellRenderer extends EntityRenderer<KoopaShellEntity, KoopaSh
 
         matrices.scale(-1.0F, -1.0F, 1.0F);
         matrices.translate(0.0F, -1.501F, 0.0F);
+        this.model.setAngles(state);
 
         boolean showBody = !state.invisible;
         boolean translucent = !showBody && !state.invisibleToPlayer;
@@ -65,5 +66,6 @@ public class KoopaShellRenderer extends EntityRenderer<KoopaShellEntity, KoopaSh
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         state.invisibleToPlayer = state.invisible && entity.isInvisibleTo(minecraftClient.player);
         state.hasOutline = minecraftClient.hasOutline(entity);
+        state.horizontalRotation = state.age * (float) entity.getVelocity().horizontalLength();
     }
 }
