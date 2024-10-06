@@ -26,10 +26,10 @@ public class BoxUtil {
      * a vector indicating the bounce direction. If there is no collision,
      * it returns null.
      *
-     * @param originBox the box for which the bouncing multiplier is calculated
+     * @param originBox  the box for which the bouncing multiplier is calculated
      * @param otherBoxes a list of other boxes to check for collisions against
      * @return a {@link Vec3d} representing the bouncing multiplier direction,
-     *         or null if no collision is detected
+     * or null if no collision is detected
      */
     @Nullable
     public static Vec3d calculateBouncingMultiplier(Box originBox, List<Box> otherBoxes) {
@@ -39,7 +39,7 @@ public class BoxUtil {
         for (Box box : otherBoxes) {
             // Check for collision between the origin box and the other box
             if (originBox.maxX > box.minX && originBox.minX < box.maxX &&
-                originBox.maxZ > box.minZ && originBox.minZ < box.maxZ) {
+                    originBox.maxZ > box.minZ && originBox.minZ < box.maxZ) {
 
                 // Calculate the distances to the closest edges of the box
                 double distanceX = Math.min(originBox.maxX - box.minX, box.maxX - originBox.minX);
