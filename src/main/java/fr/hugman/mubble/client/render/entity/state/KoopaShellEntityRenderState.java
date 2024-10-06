@@ -13,4 +13,5 @@ public class KoopaShellEntityRenderState extends EntityRenderState {
     public Identifier texture = DEFAULT_TEXTURE;
     public boolean invisibleToPlayer;
     public boolean hasOutline;
+    public float horizontalRotation;
 }

@@ -1,5 +1,6 @@
 package fr.hugman.mubble.entity;
 
+import fr.hugman.mubble.item.MubbleItems;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.util.BoxUtil;
 import net.minecraft.block.BlockState;
@@ -10,7 +11,6 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -53,7 +53,7 @@ public class KoopaShellEntity extends ProjectileEntity {
     protected void playStepSound(BlockPos pos, BlockState state) {
         //TODO: attach the sound to the entity
         // see MovingMinecartSoundInstance
-        this.playSound(MubbleSounds.KOOPA_SHELL_SLIDE, 1.0F, 1.0F);
+        //this.playSound(MubbleSounds.KOOPA_SHELL_SLIDE, 1.0F, 1.0F);
     }
 
     @Override
@@ -103,9 +103,8 @@ public class KoopaShellEntity extends ProjectileEntity {
         }
     }
 
-
     @Override
     public ItemStack getPickBlockStack() {
-        return new ItemStack(Items.ARMOR_STAND);
+        return new ItemStack(MubbleItems.GREEN_KOOPA_SHELL);
     }
 }
