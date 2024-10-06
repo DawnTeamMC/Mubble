@@ -1,17 +1,21 @@
 package fr.hugman.mubble.entity;
 
+import fr.hugman.mubble.Mubble;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.MovementType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 public class KoopaShellEntity extends ProjectileEntity {
     public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world) {
@@ -40,37 +44,25 @@ public class KoopaShellEntity extends ProjectileEntity {
     @Override
     public void tick() {
         super.tick();
-        HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
-        if (hitResult.getType() != HitResult.Type.MISS) {
-            this.hitOrDeflect(hitResult);
-        }
 
-        this.tickBlockCollision();
-        Vec3d vec3d = this.getVelocity();
-        double x = this.getX() + vec3d.x;
-        double y = this.getY() + vec3d.y;
-        double z = this.getZ() + vec3d.z;
-        this.updateRotation();
-        if (this.isTouchingWater()) {
-            for (int i = 0; i < 4; i++) {
-                float g = 0.25F;
-                this.getWorld().addParticle(ParticleTypes.BUBBLE, x - vec3d.x * g, y - vec3d.y * g, z - vec3d.z * g, vec3d.x, vec3d.y, vec3d.z);
-            }
-        }
+        HitResult hitResult = ProjectileUtil.getCollision(this, this::canHit);
+        this.hitOrDeflect(hitResult);
 
         this.applyGravity();
-        this.setPosition(x, y, z);
-    }
+        var multiplier = this.calculateBouncingMultiplier();
+        var prevVelocity = this.getVelocity();
+        this.move(MovementType.SELF, prevVelocity);
+        if(multiplier != null) {
+            prevVelocity = prevVelocity.multiply(multiplier);
+            // TODO: PLAY SOUND
+            // TODO: PLAY PARTICLES
 
-    @Override
-    protected void onBlockHit(BlockHitResult result) {
-        super.onBlockHit(result);
-        Direction face = result.getSide();
-        switch (face) {
-            case NORTH, SOUTH -> this.setVelocity(this.getVelocity().multiply(1.0D, 1.0D, -1.0D));
-            case EAST, WEST -> this.setVelocity(this.getVelocity().multiply(-1.0D, 1.0D, 1.0D));
-            case null, default -> {
-            }
+        }
+        this.setVelocity(prevVelocity.getX(), this.getVelocity().getY(), prevVelocity.getZ());
+
+        this.tickBlockCollision();
+        if (this.isOnGround()) {
+            this.setVelocity(this.getVelocity().multiply(1.0D, -0.5, 1.0D));
         }
     }
 
@@ -79,5 +71,48 @@ public class KoopaShellEntity extends ProjectileEntity {
         super.onEntityHit(result);
         result.getEntity().serverDamage(this.getDamageSources().thrown(this, this.getOwner()), 2.0F);
         // TODO: PLAY SOUND
+    }
+
+    @Nullable
+    public Vec3d calculateBouncingMultiplier() {
+        var shellBox = this.getBoundingBox().offset(this.getVelocity().x > 0 ? 0.01d : -0.01d, 0.0d, this.getVelocity().z > 0 ? 0.01d : -0.01d).shrink(0.0d, 0.01d, 0.0d);
+        var shellCenter = shellBox.getCenter();
+        var radius = (Math.sqrt(2) / 2.0d) * this.getWidth();
+
+        Iterable<BlockPos> iterable = BlockPos.iterate(shellBox);
+
+        double minDistanceX = Double.MAX_VALUE;
+        double minDistanceZ = Double.MAX_VALUE;
+
+        for (BlockPos pos : iterable) {
+            var boundingBoxes = this.getWorld().getBlockState(pos).getCollisionShape(this.getWorld(), pos).offset(Vec3d.of(pos)).getBoundingBoxes();
+            for(Box box : boundingBoxes) {
+                double closestX = MathHelper.clamp(shellCenter.getX(), box.minX, box.maxX);
+                double closestZ = MathHelper.clamp(shellCenter.getZ(), box.minZ, box.maxZ);
+                double distanceX = shellCenter.getX() - closestX;
+                double distanceZ = shellCenter.getZ() - closestZ;
+                if(Math.sqrt(MathHelper.square(distanceX) + MathHelper.square(distanceZ)) > radius) {
+                    continue;
+                }
+                if(Math.abs(distanceX) < Math.abs(minDistanceX)) {
+                    minDistanceX = Math.abs(distanceX);
+                }
+                if(Math.abs(distanceZ) < Math.abs(minDistanceZ)) {
+                    minDistanceZ = Math.abs(distanceZ);
+                }
+            }
+        }
+        if(minDistanceX == Double.MAX_VALUE && minDistanceZ == Double.MAX_VALUE) {
+            return null;
+        }
+
+        if (minDistanceX == minDistanceZ) {
+            return new Vec3d(-1.0, 1.0D, -1.0D);
+        }
+        if (minDistanceX > minDistanceZ) {
+            return new Vec3d(-1.0, 1.0D, 1.0D);
+        } else {
+            return new Vec3d(1.0, 1.0D, -1.0D);
+        }
     }
 }
