@@ -13,11 +13,15 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public abstract class KoopaShellEntity extends ProjectileEntity {
     private static final float TARGET_SPEED = 0.5f;
+    private float horizontalRotation;
 
     public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world) {
         super(entityType, world);
@@ -115,4 +119,12 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     }
 
     public abstract Identifier getTexture();
+
+    public float getHorizontalRotation() {
+        return horizontalRotation;
+    }
+
+    public void setHorizontalRotation(float horizontalRotation) {
+        this.horizontalRotation = horizontalRotation;
+    }
 }
