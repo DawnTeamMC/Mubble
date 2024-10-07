@@ -2,7 +2,6 @@ package fr.hugman.mubble.entity;
 
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.util.BoxUtil;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.MovementType;
@@ -13,7 +12,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -44,20 +42,6 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     @Override
     protected double getGravity() {
         return 0.08;
-    }
-
-    @Override
-    protected float calculateNextStepSoundDistance() {
-        //TODO: this should depend on the speed
-        return (float) ((int) this.distanceTraveled + 3);
-    }
-
-    @Override
-    protected void playStepSound(BlockPos pos, BlockState state) {
-        //TODO: attach the sound to the entity
-        // see MovingMinecartSoundInstance
-
-        //this.playSound(MubbleSounds.KOOPA_SHELL_SLIDE, 1.0F, 1.0F);
     }
 
     @Override
