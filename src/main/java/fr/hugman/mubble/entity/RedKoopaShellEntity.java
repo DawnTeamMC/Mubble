@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -17,7 +16,7 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
     private static final Identifier TEXTURE = Mubble.id("textures/entity/koopa_shell/red.png");
     private LivingEntity target;
 
-    private static final double MAX_TARGET_DISTANCE = 48.0;
+    private static final double MAX_TARGET_DISTANCE = 16.0;
     private static final double MAX_TARGET_DISTANCE_SQUARE = MAX_TARGET_DISTANCE * MAX_TARGET_DISTANCE;
     private static final TargetPredicate TARGET_PREDICATE = TargetPredicate.createAttackable()
             .setBaseMaxDistance(MAX_TARGET_DISTANCE)
@@ -57,18 +56,28 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
             this.target = null;
         }
 
-        if (this.target != null) {
-            Vec3d vec3d = new Vec3d(
-                    this.target.getX() - this.getX(), this.target.getY() + (double) this.target.getStandingEyeHeight() / 2.0 - this.getY(), this.target.getZ() - this.getZ()
-            );
-            double d = vec3d.lengthSquared();
-            if (d < MAX_TARGET_DISTANCE) {
-                double e = 1.0 - Math.sqrt(d) / 16.0;
-                this.setVelocity(this.getVelocity().add(vec3d.normalize().withAxis(Direction.Axis.Y, 0.0D).multiply(e * e * 0.1)));
-            }
+        if (this.target != null && !this.getWorld().isClient) {
+            Vec3d currentPosition = this.getPos();
+            Vec3d targetPosition = this.target.getPos();
+            Vec3d desiredVelocity = targetPosition.subtract(currentPosition).normalize().multiply(0.5);
+
+            Vec3d currentVelocity = this.getVelocity();
+            Vec3d velocityError = desiredVelocity.subtract(currentVelocity);
+            double pGain = 0.1;
+            double dGain = 0.05;
+
+            Vec3d controlSignal = velocityError.multiply(pGain).add(velocityError.subtract(currentVelocity).multiply(dGain));
+            this.setVelocity(currentVelocity.add(controlSignal).normalize().multiply(currentVelocity.length()));
         }
 
         super.tick();
+    }
+
+    @Override
+    public void targetSpeed(float targetSpeed) {
+        if(this.target == null) {
+            super.targetSpeed(targetSpeed);
+        }
     }
 
     private void expensiveUpdate() {

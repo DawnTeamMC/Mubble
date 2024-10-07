@@ -1,6 +1,5 @@
 package fr.hugman.mubble.entity;
 
-import fr.hugman.mubble.item.MubbleItems;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.util.BoxUtil;
 import net.minecraft.block.BlockState;
@@ -10,17 +9,16 @@ import net.minecraft.entity.MovementType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 
 public abstract class KoopaShellEntity extends ProjectileEntity {
+    private static final float TARGET_SPEED = 0.5f;
+
     public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -54,6 +52,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     protected void playStepSound(BlockPos pos, BlockState state) {
         //TODO: attach the sound to the entity
         // see MovingMinecartSoundInstance
+
         //this.playSound(MubbleSounds.KOOPA_SHELL_SLIDE, 1.0F, 1.0F);
     }
 
@@ -85,7 +84,18 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
         this.setVelocity(prevVelocity.getX(), this.getVelocity().getY(), prevVelocity.getZ());
 
         if (this.isOnGround()) {
-            this.setVelocity(this.getVelocity().multiply(1.0D, -0.5, 1.0D));
+            //TODO: make this changeable
+            this.targetSpeed(TARGET_SPEED);
+        }
+    }
+
+    public void targetSpeed(float targetSpeed) {
+        Vec3d velocity = this.getVelocity();
+        double currentSpeed = Math.sqrt(velocity.getX() * velocity.getX() + velocity.getZ() * velocity.getZ());
+
+        if (currentSpeed < targetSpeed) {
+            double scale = Math.min(currentSpeed + 0.01, targetSpeed) / currentSpeed;
+            this.setVelocity(velocity.getX() * scale, velocity.getY(), velocity.getZ() * scale);
         }
     }
 
@@ -102,11 +112,6 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
         if (blockHitResult.getSide().getAxis() != Direction.Axis.Y) {
             super.onBlockHit(blockHitResult);
         }
-    }
-
-    @Override
-    public ItemStack getPickBlockStack() {
-        return new ItemStack(MubbleItems.GREEN_KOOPA_SHELL);
     }
 
     public abstract Identifier getTexture();
