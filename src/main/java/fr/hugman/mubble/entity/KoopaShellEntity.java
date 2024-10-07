@@ -11,6 +11,7 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -19,18 +20,18 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class KoopaShellEntity extends ProjectileEntity {
+public abstract class KoopaShellEntity extends ProjectileEntity {
     public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    public KoopaShellEntity(World world, double x, double y, double z) {
-        super(MubbleEntityTypes.KOOPA_SHELL, world);
+    public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world, double x, double y, double z) {
+        this(entityType, world);
         this.setPosition(x, y, z);
     }
 
-    public KoopaShellEntity(World world, LivingEntity owner) {
-        this(world, owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
+    public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world, LivingEntity owner) {
+        this(entityType, world, owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
         this.setOwner(owner);
     }
 
@@ -107,4 +108,6 @@ public class KoopaShellEntity extends ProjectileEntity {
     public ItemStack getPickBlockStack() {
         return new ItemStack(MubbleItems.GREEN_KOOPA_SHELL);
     }
+
+    public abstract Identifier getTexture();
 }

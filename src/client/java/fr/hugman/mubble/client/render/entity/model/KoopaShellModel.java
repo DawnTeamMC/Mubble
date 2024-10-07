@@ -27,7 +27,6 @@ public class KoopaShellModel extends EntityModel<KoopaShellEntityRenderState> {
     @Override
     public void setAngles(KoopaShellEntityRenderState state) {
         super.setAngles(state);
-        // TODO: depend on speed
         this.root.yaw = state.horizontalRotation;
     }
 }

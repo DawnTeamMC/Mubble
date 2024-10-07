@@ -10,7 +10,8 @@ import net.minecraft.registry.RegistryKey;
 
 public final class MubbleEntityTypes {
     public static final EntityType<GoombaEntity> GOOMBA = of(MubbleEntityTypeKeys.GOOMBA, EntityType.Builder.create(GoombaEntity::new, SpawnGroup.CREATURE).dimensions(0.6f, 0.755f).eyeHeight(0.53125f));
-    public static final EntityType<KoopaShellEntity> KOOPA_SHELL = of(MubbleEntityTypeKeys.KOOPA_SHELL, EntityType.Builder.<KoopaShellEntity>create(KoopaShellEntity::new, SpawnGroup.MISC).dimensions(10 / 16f, 7 / 16f));
+    public static final EntityType<GreenKoopaShellEntity> GREEN_KOOPA_SHELL = of(MubbleEntityTypeKeys.GREEN_KOOPA_SHELL, EntityType.Builder.<GreenKoopaShellEntity>create(GreenKoopaShellEntity::new, SpawnGroup.MISC).dimensions(10 / 16f, 7 / 16f));
+    public static final EntityType<RedKoopaShellEntity> RED_KOOPA_SHELL = of(MubbleEntityTypeKeys.RED_KOOPA_SHELL, EntityType.Builder.<RedKoopaShellEntity>create(RedKoopaShellEntity::new, SpawnGroup.MISC).dimensions(10 / 16f, 7 / 16f));
     public static final EntityType<FireballEntity> FIREBALL = of(MubbleEntityTypeKeys.FIREBALL, EntityType.Builder.<FireballEntity>create(FireballEntity::new, SpawnGroup.MISC).dimensions(0.4F, 0.4F).maxTrackingRange(4).trackingTickInterval(10));
     public static final EntityType<IceballEntity> ICEBALL = of(MubbleEntityTypeKeys.ICEBALL, EntityType.Builder.<IceballEntity>create(IceballEntity::new, SpawnGroup.MISC).dimensions(0.4F, 0.4F).maxTrackingRange(4).trackingTickInterval(10));
 

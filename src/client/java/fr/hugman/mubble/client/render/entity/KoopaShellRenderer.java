@@ -14,7 +14,7 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import org.jetbrains.annotations.Nullable;
 
-public class KoopaShellRenderer extends EntityRenderer<KoopaShellEntity, KoopaShellEntityRenderState> {
+public class KoopaShellRenderer<K extends KoopaShellEntity> extends EntityRenderer<K, KoopaShellEntityRenderState> {
     protected KoopaShellModel model;
 
     public KoopaShellRenderer(EntityRendererFactory.Context context) {
@@ -61,11 +61,12 @@ public class KoopaShellRenderer extends EntityRenderer<KoopaShellEntity, KoopaSh
     }
 
     @Override
-    public void updateRenderState(KoopaShellEntity entity, KoopaShellEntityRenderState state, float tickDelta) {
+    public void updateRenderState(K entity, KoopaShellEntityRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         state.invisibleToPlayer = state.invisible && entity.isInvisibleTo(minecraftClient.player);
         state.hasOutline = minecraftClient.hasOutline(entity);
         state.horizontalRotation = state.age * (float) entity.getVelocity().horizontalLength();
+        state.texture = entity.getTexture();
     }
 }
