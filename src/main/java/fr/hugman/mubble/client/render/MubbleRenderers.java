@@ -10,7 +10,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 public class MubbleRenderers {
     public static void registerEntities() {
         EntityRendererRegistry.register(MubbleEntityTypes.GOOMBA, GoombaRenderer::new);
-        EntityRendererRegistry.register(MubbleEntityTypes.KOOPA_SHELL, KoopaShellRenderer::new);
+        EntityRendererRegistry.register(MubbleEntityTypes.GREEN_KOOPA_SHELL, KoopaShellRenderer::new);
+        EntityRendererRegistry.register(MubbleEntityTypes.RED_KOOPA_SHELL, KoopaShellRenderer::new);
     }
 
     public static void registerBlockEntities() {
