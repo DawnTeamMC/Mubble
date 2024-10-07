@@ -4,15 +4,26 @@ import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.item.MubbleItems;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class RedKoopaShellEntity extends KoopaShellEntity {
     private static final Identifier TEXTURE = Mubble.id("textures/entity/koopa_shell/red.png");
-    private PlayerEntity target;
+    private LivingEntity target;
+
+    private static final double MAX_TARGET_DISTANCE = 48.0;
+    private static final double MAX_TARGET_DISTANCE_SQUARE = MAX_TARGET_DISTANCE * MAX_TARGET_DISTANCE;
+    private static final TargetPredicate TARGET_PREDICATE = TargetPredicate.createAttackable()
+            .setBaseMaxDistance(MAX_TARGET_DISTANCE)
+            .ignoreVisibility()
+            .ignoreDistanceScalingFactor()
+            .setPredicate((target, w) -> target.isMobOrPlayer());
 
     public RedKoopaShellEntity(EntityType<? extends RedKoopaShellEntity> entityType, World world) {
         super(entityType, world);
@@ -51,9 +62,9 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
                     this.target.getX() - this.getX(), this.target.getY() + (double) this.target.getStandingEyeHeight() / 2.0 - this.getY(), this.target.getZ() - this.getZ()
             );
             double d = vec3d.lengthSquared();
-            if (d < 64.0) {
-                double e = 1.0 - Math.sqrt(d) / 8.0;
-                this.setVelocity(this.getVelocity().add(vec3d.normalize().multiply(e * e * 0.1)));
+            if (d < MAX_TARGET_DISTANCE) {
+                double e = 1.0 - Math.sqrt(d) / 16.0;
+                this.setVelocity(this.getVelocity().add(vec3d.normalize().withAxis(Direction.Axis.Y, 0.0D).multiply(e * e * 0.1)));
             }
         }
 
@@ -61,8 +72,21 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
     }
 
     private void expensiveUpdate() {
-        if (this.target == null || this.target.squaredDistanceTo(this) > 64.0) {
-            this.target = this.getWorld().getClosestPlayer(this, 16.0);
+        var world = this.getWorld();
+        if (world instanceof ServerWorld serverWorld && this.getOwner() instanceof LivingEntity livingOwner) {
+            if (this.target == null || this.target.squaredDistanceTo(this) > MAX_TARGET_DISTANCE_SQUARE) {
+                this.target = serverWorld.getClosestEntity(
+                        this.getWorld().getEntitiesByClass(LivingEntity.class, this.getSearchBox(MAX_TARGET_DISTANCE), livingEntity -> true),
+                        TARGET_PREDICATE,
+                        livingOwner,
+                        this.getX(),
+                        this.getEyeY(),
+                        this.getZ());
+            }
         }
+    }
+
+    protected Box getSearchBox(double distance) {
+        return this.getBoundingBox().expand(distance, distance, distance);
     }
 }
