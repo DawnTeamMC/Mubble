@@ -75,7 +75,7 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
 
     @Override
     public void targetSpeed(float targetSpeed) {
-        if(this.target == null) {
+        if (this.target == null) {
             super.targetSpeed(targetSpeed);
         }
     }

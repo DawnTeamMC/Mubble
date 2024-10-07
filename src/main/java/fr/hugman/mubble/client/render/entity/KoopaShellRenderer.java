@@ -12,6 +12,7 @@ import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
 public class KoopaShellRenderer<K extends KoopaShellEntity> extends EntityRenderer<K, KoopaShellEntityRenderState> {
@@ -63,10 +64,17 @@ public class KoopaShellRenderer<K extends KoopaShellEntity> extends EntityRender
     @Override
     public void updateRenderState(K entity, KoopaShellEntityRenderState state, float tickDelta) {
         super.updateRenderState(entity, state, tickDelta);
+
+        state.texture = entity.getTexture();
+
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         state.invisibleToPlayer = state.invisible && entity.isInvisibleTo(minecraftClient.player);
         state.hasOutline = minecraftClient.hasOutline(entity);
-        state.horizontalRotation = state.age * (float) entity.getVelocity().horizontalLength();
-        state.texture = entity.getTexture();
+
+        float velocityLength = (float) entity.getVelocity().horizontalLength();
+        float increment = velocityLength * 0.35f; // Adjust the scaling factor as needed
+        float newRotation = MathHelper.lerp(tickDelta, entity.getHorizontalRotation(), entity.getHorizontalRotation() + increment);
+        entity.setHorizontalRotation(newRotation);
+        state.horizontalRotation = newRotation;
     }
 }
