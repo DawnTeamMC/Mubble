@@ -1,5 +1,6 @@
 package fr.hugman.mubble.entity;
 
+import fr.hugman.mubble.entity.damage.MubbleDamageTypeKeys;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.util.BoxUtil;
 import net.minecraft.entity.EntityType;
@@ -90,8 +91,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     @Override
     protected void onEntityHit(EntityHitResult result) {
         super.onEntityHit(result);
-        // TODO: change death message
-        result.getEntity().serverDamage(this.getDamageSources().thrown(this, this.getOwner()), 2.0F);
+        result.getEntity().serverDamage(this.getDamageSources().create(MubbleDamageTypeKeys.KOOPA_SHELL, this, this.getOwner()), 2.0F);
         // TODO: play sound
     }
 
