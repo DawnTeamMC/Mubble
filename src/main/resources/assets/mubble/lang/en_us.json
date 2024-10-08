@@ -35,6 +35,8 @@
 
   "entity.mubble.goomba": "Goomba",
   "entity.mubble.goomba.mini": "Mini Goomba",
+  "entity.mubble.green_koopa_shell": "Green Koopa Shell",
+  "entity.mubble.red_koopa_shell": "Red Koopa Shell",
 
   "block.mubble.blue_egg_block": "Blue Egg Block",
   "block.mubble.cyan_egg_block": "Cyan Egg Block",
@@ -59,5 +61,8 @@
   "block.mubble.bumpable.drop.all": "Drop all",
   "block.mubble.bumpable.drop.all.description": "The block will drop the entire item stack when bumped",
   "block.mubble.bumpable.drop.one": "Drop one",
-  "block.mubble.bumpable.drop.one.description": "The block will drop one item per bump"
+  "block.mubble.bumpable.drop.one.description": "The block will drop one item per bump",
+
+  "death.attack.mubble.koopa_shell": "%1$s was shelled by %2$s",
+  "death.attack.mubble.koopa_shell.item": "%1$s was shelled by %2$s using %3$s"
 }
