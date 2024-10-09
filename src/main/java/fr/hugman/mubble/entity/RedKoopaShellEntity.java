@@ -12,6 +12,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+// TODO: break on impact
 public class RedKoopaShellEntity extends KoopaShellEntity {
     private static final Identifier TEXTURE = Mubble.id("textures/entity/koopa_shell/red.png");
     private LivingEntity target;
@@ -68,6 +69,7 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
 
             Vec3d controlSignal = velocityError.multiply(pGain).add(velocityError.subtract(currentVelocity).multiply(dGain));
             this.setVelocity(currentVelocity.add(controlSignal).normalize().multiply(currentVelocity.length()));
+            this.velocityDirty = true;
         }
 
         super.tick();

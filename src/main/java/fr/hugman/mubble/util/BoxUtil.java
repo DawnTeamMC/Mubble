@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class BoxUtil {
     /**
-     * Calculates the bouncing multiplier vector based on the collision of
+     * Calculates the horizontal bouncing multiplier vector based on the collision of
      * the given origin box with a list of other boxes.
      * <p>
      * This method checks for collisions in both the X and Z axes. If a
@@ -27,12 +27,12 @@ public class BoxUtil {
      * it returns null.
      *
      * @param originBox  the box for which the bouncing multiplier is calculated
-     * @param otherBoxes a list of other boxes to check for collisions against
+     * @param otherBoxes other boxes to check for collisions against
      * @return a {@link Vec3d} representing the bouncing multiplier direction,
      * or null if no collision is detected
      */
     @Nullable
-    public static Vec3d calculateBouncingMultiplier(Box originBox, List<Box> otherBoxes) {
+    public static Vec3d calculateHorizontalBouncingMultiplier(Box originBox, Box... otherBoxes) {
         double minDistanceX = Double.MAX_VALUE;
         double minDistanceZ = Double.MAX_VALUE;
 
@@ -64,6 +64,25 @@ public class BoxUtil {
         return (minDistanceX < minDistanceZ)
                 ? new Vec3d(-1.0, 1.0, 1.0)  // Bounce in the x-axis
                 : new Vec3d(1.0, 1.0, -1.0);  // Bounce in the z-axis
+    }
+
+    /**
+     * Calculates the horizontal bouncing multiplier vector based on the collision of
+     * the given origin box with a list of other boxes.
+     * <p>
+     * This method checks for collisions in both the X and Z axes. If a
+     * collision is detected, it computes the minimum distance to the
+     * closest edge of the colliding boxes in both axes. The method returns
+     * a vector indicating the bounce direction. If there is no collision,
+     * it returns null.
+     *
+     * @param originBox  the box for which the bouncing multiplier is calculated
+     * @param otherBoxes a list of other boxes to check for collisions against
+     * @return a {@link Vec3d} representing the bouncing multiplier direction,
+     * or null if no collision is detected
+     */
+    public static Vec3d calculateHorizontalBouncingMultiplier(Box originBox, List<Box> otherBoxes) {
+        return calculateHorizontalBouncingMultiplier(originBox, otherBoxes.toArray(new Box[0]));
     }
 
     /**
