@@ -9,6 +9,7 @@ import net.minecraft.entity.MovementType;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
@@ -18,6 +19,8 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+// TODO: tweak with ProjectileUtil for better collision detection (square projection instead of center?)
+// TODO: add a max amount of bounces
 public abstract class KoopaShellEntity extends ProjectileEntity {
     private static final float TARGET_SPEED = 0.5f;
     private float previousHorizontalRotation;
@@ -54,20 +57,20 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
 
         Box hitBox = this.getBoundingBox().offset(this.getVelocity().x > 0 ? 0.01d : -0.01d, 0.0d, this.getVelocity().z > 0 ? 0.01d : -0.01d);
 
-        var multiplier = BoxUtil.calculateBouncingMultiplier(hitBox, BoxUtil.collectPotentialBlockCollisions(this.getWorld(), hitBox));
+        var multiplier = BoxUtil.calculateHorizontalBouncingMultiplier(hitBox, BoxUtil.collectPotentialBlockCollisions(this.getWorld(), hitBox));
         var prevVelocity = this.getVelocity();
         this.move(MovementType.SELF, prevVelocity);
         if (multiplier != null) {
             prevVelocity = prevVelocity.multiply(multiplier);
-            this.playSound(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, 1.0F, 1.0F);
-            this.spawnBumpParticles(prevVelocity);
+            this.playBumpEffects(prevVelocity.negate());
         }
         this.setVelocity(prevVelocity.getX(), this.getVelocity().getY(), prevVelocity.getZ());
 
         if (this.isOnGround()) {
-            //TODO: make this changeable
+            //TODO: make this configurable
             this.targetSpeed(TARGET_SPEED);
         }
+        this.velocityDirty = true;
 
         if (this.getWorld().isClient) {
             this.tickRotation();
@@ -94,10 +97,22 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     protected void onEntityHit(EntityHitResult result) {
         super.onEntityHit(result);
         result.getEntity().serverDamage(this.getDamageSources().create(MubbleDamageTypeKeys.KOOPA_SHELL, this, this.getOwner()), 2.0F);
-        // TODO:play sound
-        //   velocity: if x > z, then x =-x
-        //   if z > x, then z =-z
-        //   play sound + particles
+
+        // TODO: make this behaviour configurable
+        Vec3d multiplier;
+        // ugly code!!
+        if (Math.abs(this.getVelocity().x) > Math.abs(this.getVelocity().y)) {
+            multiplier = new Vec3d(-1.0, 1.0, 1.0);
+        } else if (Math.abs(this.getVelocity().x) < Math.abs(this.getVelocity().y)) {
+            multiplier = new Vec3d(1.0, 1.0, -1.0);
+        } else {
+            multiplier = new Vec3d(1.0, 1.0, 1.0);
+        }
+
+        var vel = this.getVelocity().multiply(multiplier);
+        this.setVelocity(vel);
+        this.velocityDirty = true;
+        this.playBumpEffects(vel.negate());
     }
 
     @Override
@@ -117,9 +132,12 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
         return !this.isSpectator() && !this.isInLava() && this.isAlive();
     }
 
-    protected void spawnBumpParticles(Vec3d velocity) {
-        // spawn hit particles in the opposite direction of the velocity
-
+    protected void playBumpEffects(Vec3d direction) {
+        var center = this.getBoundingBox().getCenter();
+        this.playSound(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, 1.0F, 1.0F);
+        for (int l = 0; l < 8; l++) {
+            this.getWorld().addParticle(ParticleTypes.CRIT, center.x, center.y, center.z, direction.x + Math.random() - 0.5, direction.y + Math.random() - 0.5, direction.z + Math.random() - 0.5);
+        }
     }
 
     public float getHorizontalRotation() {
