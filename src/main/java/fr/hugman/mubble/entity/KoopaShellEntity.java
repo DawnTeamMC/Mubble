@@ -20,6 +20,7 @@ import net.minecraft.world.World;
 
 public abstract class KoopaShellEntity extends ProjectileEntity {
     private static final float TARGET_SPEED = 0.5f;
+    private float previousHorizontalRotation;
     private float horizontalRotation;
 
     public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world) {
@@ -76,6 +77,16 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
             //TODO: make this changeable
             this.targetSpeed(TARGET_SPEED);
         }
+
+        if (this.getWorld().isClient) {
+            this.tickRotation();
+        }
+    }
+
+    public void tickRotation() {
+        float velocityLength = (float) this.getVelocity().horizontalLength();
+        this.previousHorizontalRotation = this.horizontalRotation;
+        this.horizontalRotation = this.previousHorizontalRotation + velocityLength * 0.35f;
     }
 
     public void targetSpeed(float targetSpeed) {
@@ -105,10 +116,10 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     public abstract Identifier getTexture();
 
     public float getHorizontalRotation() {
-        return horizontalRotation;
+        return this.horizontalRotation;
     }
 
-    public void setHorizontalRotation(float horizontalRotation) {
-        this.horizontalRotation = horizontalRotation;
+    public float getPreviousHorizontalRotation() {
+        return this.previousHorizontalRotation;
     }
 }

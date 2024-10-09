@@ -71,10 +71,6 @@ public class KoopaShellRenderer<K extends KoopaShellEntity> extends EntityRender
         state.invisibleToPlayer = state.invisible && entity.isInvisibleTo(minecraftClient.player);
         state.hasOutline = minecraftClient.hasOutline(entity);
 
-        float velocityLength = (float) entity.getVelocity().horizontalLength();
-        float increment = velocityLength * 0.35f; // Adjust the scaling factor as needed
-        float newRotation = MathHelper.lerp(tickDelta, entity.getHorizontalRotation(), entity.getHorizontalRotation() + increment);
-        entity.setHorizontalRotation(newRotation);
-        state.horizontalRotation = newRotation;
+        state.horizontalRotation = MathHelper.lerp(tickDelta, entity.getPreviousHorizontalRotation(), entity.getHorizontalRotation());
     }
 }
