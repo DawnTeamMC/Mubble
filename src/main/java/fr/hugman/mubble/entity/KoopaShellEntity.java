@@ -41,15 +41,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     protected void initDataTracker(DataTracker.Builder builder) {
     }
 
-    @Override
-    protected double getGravity() {
-        return 0.08;
-    }
-
-    @Override
-    public boolean shouldSpawnSprintingParticles() {
-        return !this.isSpectator() && !this.isInLava() && this.isAlive();
-    }
+    public abstract Identifier getTexture();
 
     @Override
     public void tick() {
@@ -68,8 +60,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
         if (multiplier != null) {
             prevVelocity = prevVelocity.multiply(multiplier);
             this.playSound(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, 1.0F, 1.0F);
-            // TODO: spawn particles
-
+            this.spawnBumpParticles(prevVelocity);
         }
         this.setVelocity(prevVelocity.getX(), this.getVelocity().getY(), prevVelocity.getZ());
 
@@ -103,7 +94,10 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     protected void onEntityHit(EntityHitResult result) {
         super.onEntityHit(result);
         result.getEntity().serverDamage(this.getDamageSources().create(MubbleDamageTypeKeys.KOOPA_SHELL, this, this.getOwner()), 2.0F);
-        // TODO: play sound
+        // TODO:play sound
+        //   velocity: if x > z, then x =-x
+        //   if z > x, then z =-z
+        //   play sound + particles
     }
 
     @Override
@@ -113,7 +107,20 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
         }
     }
 
-    public abstract Identifier getTexture();
+    @Override
+    protected double getGravity() {
+        return 0.08;
+    }
+
+    @Override
+    public boolean shouldSpawnSprintingParticles() {
+        return !this.isSpectator() && !this.isInLava() && this.isAlive();
+    }
+
+    protected void spawnBumpParticles(Vec3d velocity) {
+        // spawn hit particles in the opposite direction of the velocity
+
+    }
 
     public float getHorizontalRotation() {
         return this.horizontalRotation;
