@@ -5,11 +5,13 @@
 	"version": "${version}",
 	"icon": "assets/mubble/textures/logo.png",
 	"authors": [
-		"Hugman",
-		"Napero"
+		"Hugman"
 	],
 	"contributors": [
-		"Yanis48"
+		"Yanis48",
+		"Napero",
+		"Valbrimi",
+		"haykam"
 	],
 	"contact": {
 		"homepage": "https://dawnteammc.github.io/mubble",
