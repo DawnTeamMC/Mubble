@@ -1,4 +1,4 @@
-package fr.hugman.mubble.mixin;
+package fr.hugman.mubble.mixin.client;
 
 import fr.hugman.mubble.client.render.entity.state.GoombaEntityRenderState;
 import net.minecraft.client.render.entity.LivingEntityRenderer;

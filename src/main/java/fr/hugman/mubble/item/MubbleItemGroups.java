@@ -41,6 +41,8 @@ public class MubbleItemGroups {
         ItemGroupEvents.modifyEntriesEvent(MubbleItemGroupKeys.SUPER_MARIO).register(entries -> {
             var context = entries.getContext();
 
+            entries.add(MubbleItems.GREEN_KOOPA_SHELL);
+            entries.add(MubbleItems.RED_KOOPA_SHELL);
             entries.add(MubbleItems.MAKER_GLOVE);
             entries.add(MubbleBlocks.QUESTION_BLOCK);
             entries.add(MubbleBlocks.EMPTY_BLOCK);

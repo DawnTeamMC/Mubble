@@ -9,6 +9,8 @@
     "defaultRequire": 1
   },
   "client": [
-    "LivingEntityRendererMixin"
+    "client.LivingEntityRendererMixin",
+    "client.ClientCommonNetworkHandlerAccessor",
+    "client.ClientPlayNetworkHandlerMixin"
   ]
 }
