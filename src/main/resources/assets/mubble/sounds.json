@@ -72,10 +72,28 @@
       "mubble:entity/goomba/death"
     ]
   },
-  "entity.goomba.stomp": {
-    "subtitle": "subtitles.mubble.goomba.stomp",
+  "power_up.obtain": {
+    "subtitle": "subtitles.mubble.power_up.obtain",
     "sounds": [
-      "mubble:entity/goomba/stomp"
+      "mubble:power_up/obtain"
+    ]
+  },
+  "power_up.obtain.mini": {
+    "subtitle": "subtitles.mubble.power_up.obtain",
+    "sounds": [
+      "mubble:power_up/obtain/mini"
+    ]
+  },
+  "power_up.obtain.super_star": {
+    "subtitle": "subtitles.mubble.power_up.obtain",
+    "sounds": [
+      "mubble:power_up/obtain/super_star"
+    ]
+  },
+  "power_up.loose": {
+    "subtitle": "subtitles.mubble.power_up.loose",
+    "sounds": [
+      "mubble:power_up/loose"
     ]
   }
 }

@@ -3,7 +3,9 @@
   "package": "fr.hugman.mubble.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "EntityMixin"
+    "ArgumentTypesMixin",
+    "EntityMixin",
+    "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

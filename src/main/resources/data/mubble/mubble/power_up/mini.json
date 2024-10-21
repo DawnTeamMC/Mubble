@@ -1,0 +1,80 @@
+{
+  "name": {
+    "translate": "power_up.mubble.mini"
+  },
+  "obtain_sound": "mubble:power_up.obtain.mini",
+  "attribute_modifiers": [
+    {
+      "type": "minecraft:scale",
+      "id": "mubble:powerup/scale",
+      "operation": "add_multiplied_base",
+      "amount": -0.67
+    },
+    {
+      "type": "minecraft:step_height",
+      "id": "mubble:powerup/step_height",
+      "operation": "add_multiplied_base",
+      "amount": -0.67
+    },
+    {
+      "type": "minecraft:jump_strength",
+      "id": "mubble:powerup/jump_strength",
+      "operation": "add_multiplied_base",
+      "amount": 0.25
+    },
+    {
+      "type": "minecraft:safe_fall_distance",
+      "id": "mubble:powerup/safe_fall_distance",
+      "operation": "add_value",
+      "amount": 6
+    },
+    {
+      "type": "minecraft:fall_damage_multiplier",
+      "id": "mubble:powerup/fall_damage_multiplier",
+      "operation": "add_multiplied_base",
+      "amount": -0.4
+    },
+    {
+      "type": "minecraft:gravity",
+      "id": "mubble:powerup/gravity",
+      "operation": "add_multiplied_base",
+      "amount": -0.3
+    },
+    {
+      "type": "minecraft:max_health",
+      "id": "mubble:powerup/max_health",
+      "operation": "add_multiplied_base",
+      "amount": -0.4
+    },
+    {
+      "type": "minecraft:attack_damage",
+      "id": "mubble:powerup/attack_damage",
+      "operation": "add_multiplied_base",
+      "amount": -0.4
+    },
+    {
+      "type": "minecraft:attack_speed",
+      "id": "mubble:powerup/attack_speed",
+      "operation": "add_multiplied_base",
+      "amount": 0.4
+    },
+    {
+      "type": "minecraft:block_break_speed",
+      "id": "mubble:powerup/block_break_speed",
+      "operation": "add_multiplied_base",
+      "amount": -0.35
+    },
+    {
+      "type": "minecraft:block_interaction_range",
+      "id": "mubble:powerup/block_interaction_range",
+      "operation": "add_multiplied_base",
+      "amount": -0.4
+    },
+    {
+      "type": "minecraft:entity_interaction_range",
+      "id": "mubble:powerup/entity_interaction_range",
+      "operation": "add_multiplied_base",
+      "amount": -0.4
+    }
+  ]
+}

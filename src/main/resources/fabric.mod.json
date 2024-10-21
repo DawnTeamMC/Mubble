@@ -57,6 +57,11 @@
 				"fabric",
 				"quilt"
 			]
+		},
+		"loom:injected_interfaces": {
+			"net/minecraft/class_1657": [
+				"fr/hugman/mubble/power_up/PowerUpHolder"
+			]
 		}
 	},
 	"license": "LGPL v3.0"
