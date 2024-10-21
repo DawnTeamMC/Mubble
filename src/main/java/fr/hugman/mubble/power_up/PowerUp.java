@@ -31,7 +31,8 @@ public record PowerUp(
         Optional<RegistryEntry<PowerUpAction>> action,
         Optional<List<EntityAttributeEntry>> attributesModifiers,
         RegistryEntry<SoundEvent> obtainSound,
-        RegistryEntry<SoundEvent> looseSound
+        RegistryEntry<SoundEvent> looseSound,
+        boolean canSprintOnWater
 ) {
     //TODO: add icon texture path
     //TODO: add a predicate to determine if you can lose it on damage
@@ -41,7 +42,8 @@ public record PowerUp(
             PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
             SoundEvent.ENTRY_CODEC.optionalFieldOf("obtain_sound", RegistryEntry.of(MubbleSounds.POWER_UP_OBTAIN)).forGetter(PowerUp::obtainSound),
-            SoundEvent.ENTRY_CODEC.optionalFieldOf("loose_sound", RegistryEntry.of(MubbleSounds.POWER_UP_LOOSE)).forGetter(PowerUp::looseSound)
+            SoundEvent.ENTRY_CODEC.optionalFieldOf("loose_sound", RegistryEntry.of(MubbleSounds.POWER_UP_LOOSE)).forGetter(PowerUp::looseSound),
+            Codec.BOOL.optionalFieldOf("can_sprint_on_water", false).forGetter(PowerUp::canSprintOnWater)
     ).apply(instance, PowerUp::new));
 
     public static final Codec<RegistryEntry<PowerUp>> ENTRY_CODEC = RegistryElementCodec.of(MubbleRegistryKeys.POWER_UP, CODEC);
@@ -53,6 +55,7 @@ public record PowerUp(
             EntityAttributeEntry.OPTIONAL_LIST_PACKET_CODEC, PowerUp::attributesModifiers,
             SoundEvent.ENTRY_PACKET_CODEC, PowerUp::obtainSound,
             SoundEvent.ENTRY_PACKET_CODEC, PowerUp::looseSound,
+            PacketCodecs.BOOL, PowerUp::canSprintOnWater,
             PowerUp::new
     );
     public static final PacketCodec<RegistryByteBuf, RegistryEntry<PowerUp>> ENTRY_PACKET_CODEC = PacketCodecs.registryEntry(MubbleRegistryKeys.POWER_UP, PACKET_CODEC);

@@ -5,12 +5,13 @@
   "mixins": [
     "ArgumentTypesMixin",
     "EntityMixin",
+    "AbstractBlockStateMixin",
     "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "LivingEntityRendererMixin"
+    "client.LivingEntityRendererMixin"
   ]
 }

@@ -3,6 +3,7 @@
     "translate": "power_up.mubble.mini"
   },
   "obtain_sound": "mubble:power_up.obtain.mini",
+  "can_sprint_on_water": true,
   "attribute_modifiers": [
     {
       "type": "minecraft:scale",
