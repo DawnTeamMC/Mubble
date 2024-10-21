@@ -44,7 +44,6 @@ public class PowerUpCommand {
         var previousPowerUp = target.getPowerUp();
 
         if (previousPowerUp.isPresent()) {
-            //TODO: doesn't work
             if (previousPowerUp.get().matches(powerUp)) {
                 throw UNCHANGED_POWER_UP_EXCEPTION.create();
             }

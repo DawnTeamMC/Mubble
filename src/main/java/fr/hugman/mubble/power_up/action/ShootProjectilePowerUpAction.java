@@ -23,12 +23,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class ShootProjectilePowerUpAction extends PowerUpAction {
-    public static final MapCodec<ShootProjectilePowerUpAction> CODEC = RecordCodecBuilder.mapCodec(
-            instance -> instance.group(
-                    Registries.ENTITY_TYPE.getEntryCodec().fieldOf("projectile").forGetter(action -> action.projectile),
-                    SoundEvent.ENTRY_CODEC.fieldOf("sound").forGetter(action -> action.sound)
-            ).apply(instance, ShootProjectilePowerUpAction::new)
-    );
+    public static final MapCodec<ShootProjectilePowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            Registries.ENTITY_TYPE.getEntryCodec().fieldOf("projectile").forGetter(action -> action.projectile),
+            SoundEvent.ENTRY_CODEC.fieldOf("sound").forGetter(action -> action.sound)
+    ).apply(instance, ShootProjectilePowerUpAction::new));
 
     public static final PacketCodec<RegistryByteBuf, ShootProjectilePowerUpAction> PACKET_CODEC = PacketCodec.tuple(
             PacketCodecs.registryEntry(RegistryKeys.ENTITY_TYPE), (action -> action.projectile),

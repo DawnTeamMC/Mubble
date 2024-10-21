@@ -72,6 +72,12 @@
       "mubble:entity/goomba/death"
     ]
   },
+  "entity.goomba.stomp": {
+    "subtitle": "subtitles.mubble.goomba.stomp",
+    "sounds": [
+      "mubble:entity/goomba/stomp"
+    ]
+  },
   "power_up.obtain": {
     "subtitle": "subtitles.mubble.power_up.obtain",
     "sounds": [

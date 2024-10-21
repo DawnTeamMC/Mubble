@@ -13,6 +13,7 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
+import net.minecraft.registry.RegistryPair;
 import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.MinecraftServer;
@@ -36,25 +37,27 @@ public record PowerUp(
     //TODO: add a predicate to determine if you can lose it on damage
 
     public static final Codec<PowerUp> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            TextCodecs.CODEC.optionalFieldOf("name").forGetter(powerUp -> powerUp.name),
-            PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(powerUp -> powerUp.action),
-            EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(powerUp -> powerUp.attributesModifiers),
-            SoundEvent.ENTRY_CODEC.optionalFieldOf("obtain_sound", RegistryEntry.of(MubbleSounds.POWER_UP_OBTAIN)).forGetter(powerUp -> powerUp.obtainSound),
-            SoundEvent.ENTRY_CODEC.optionalFieldOf("loose_sound", RegistryEntry.of(MubbleSounds.POWER_UP_LOOSE)).forGetter(powerUp -> powerUp.looseSound)
+            TextCodecs.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
+            PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
+            EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
+            SoundEvent.ENTRY_CODEC.optionalFieldOf("obtain_sound", RegistryEntry.of(MubbleSounds.POWER_UP_OBTAIN)).forGetter(PowerUp::obtainSound),
+            SoundEvent.ENTRY_CODEC.optionalFieldOf("loose_sound", RegistryEntry.of(MubbleSounds.POWER_UP_LOOSE)).forGetter(PowerUp::looseSound)
     ).apply(instance, PowerUp::new));
 
     public static final Codec<RegistryEntry<PowerUp>> ENTRY_CODEC = RegistryElementCodec.of(MubbleRegistryKeys.POWER_UP, CODEC);
+    public static final Codec<RegistryPair<PowerUp>> PAIR_CODEC = RegistryPair.createCodec(MubbleRegistryKeys.POWER_UP, ENTRY_CODEC);
 
     public static final PacketCodec<RegistryByteBuf, PowerUp> PACKET_CODEC = PacketCodec.tuple(
-            TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, (powerUp -> powerUp.name),
-            PowerUpAction.OPTIONAL_ENTRY_PACKET_CODEC, (powerUp -> powerUp.action),
-            EntityAttributeEntry.OPTIONAL_LIST_PACKET_CODEC, (powerUp -> powerUp.attributesModifiers),
-            SoundEvent.ENTRY_PACKET_CODEC, (powerUp -> powerUp.obtainSound),
-            SoundEvent.ENTRY_PACKET_CODEC, (powerUp -> powerUp.looseSound),
+            TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, PowerUp::name,
+            PowerUpAction.OPTIONAL_ENTRY_PACKET_CODEC, PowerUp::action,
+            EntityAttributeEntry.OPTIONAL_LIST_PACKET_CODEC, PowerUp::attributesModifiers,
+            SoundEvent.ENTRY_PACKET_CODEC, PowerUp::obtainSound,
+            SoundEvent.ENTRY_PACKET_CODEC, PowerUp::looseSound,
             PowerUp::new
     );
     public static final PacketCodec<RegistryByteBuf, RegistryEntry<PowerUp>> ENTRY_PACKET_CODEC = PacketCodecs.registryEntry(MubbleRegistryKeys.POWER_UP, PACKET_CODEC);
     public static final PacketCodec<RegistryByteBuf, Optional<RegistryEntry<PowerUp>>> OPTIONAL_ENTRY_PACKET_CODEC = PacketCodecs.optional(ENTRY_PACKET_CODEC);
+    public static final PacketCodec<RegistryByteBuf, RegistryPair<PowerUp>> PAIR_PACKET_CODEC = RegistryPair.createPacketCodec(MubbleRegistryKeys.POWER_UP, ENTRY_PACKET_CODEC);
 
     public void trigger(MinecraftServer server, ServerPlayerEntity player) {
         this.action.ifPresent(entry -> entry.value().onTrigger(server, player));

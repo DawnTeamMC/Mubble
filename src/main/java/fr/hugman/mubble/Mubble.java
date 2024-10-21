@@ -7,6 +7,7 @@ import fr.hugman.mubble.command.MubbleCommands;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.item.MubbleItemGroups;
 import fr.hugman.mubble.item.MubbleItems;
+import fr.hugman.mubble.item.consume.MubbleConsumeEffectTypes;
 import fr.hugman.mubble.network.MubbleServerReceivers;
 import fr.hugman.mubble.network.payload.MubblePayloads;
 import fr.hugman.mubble.power_up.action.PowerUpActionTypes;
@@ -30,6 +31,7 @@ public class Mubble implements ModInitializer {
         Reflection.initialize(MubbleItems.class);
         Reflection.initialize(MubbleSounds.class);
         Reflection.initialize(MubbleScreenHandlerTypes.class);
+        Reflection.initialize(MubbleConsumeEffectTypes.class);
         MubbleEntityTypes.registerAttributes();
 
         MubbleItemGroups.appendItemGroups();
