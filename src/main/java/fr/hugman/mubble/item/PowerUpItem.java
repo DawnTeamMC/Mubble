@@ -42,7 +42,8 @@ public class PowerUpItem extends Item {
             user.setCurrentHand(hand);
             if (new ChangePowerUpConsumeEffect(powerUpComponent.powerUp()).onConsume(world, stack, user)) {
                 user.incrementStat(Stats.USED.getOrCreateStat(this));
-                return ActionResult.CONSUME;
+                stack.decrementUnlessCreative(1, user);
+                return ActionResult.SUCCESS;
             }
         }
 

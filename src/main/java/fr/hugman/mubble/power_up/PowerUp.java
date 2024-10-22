@@ -6,6 +6,7 @@ import fr.hugman.mubble.attribute.EntityAttributeEntry;
 import fr.hugman.mubble.power_up.action.PowerUpAction;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import fr.hugman.mubble.sound.MubbleSounds;
+import net.minecraft.client.texture.MissingSprite;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -21,6 +22,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
+import net.minecraft.util.Identifier;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,8 +36,9 @@ public record PowerUp(
         RegistryEntry<SoundEvent> looseSound,
         boolean canSprintOnWater
 ) {
-    //TODO: add icon texture path
-    //TODO: add a predicate to determine if you can lose it on damage
+    //TODO: add custom icon texture path
+    //TODO: add a predicate/damage tag to determine if you can lose it to damage
+    //TODO: add custom music
 
     public static final Codec<PowerUp> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TextCodecs.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
@@ -91,6 +94,11 @@ public record PowerUp(
         } else
             next.ifPresent(powerUpRegistryEntry -> entity.playSound(powerUpRegistryEntry.value().obtainSound.value(), 1.0F, 1.0F));
 
+        //TODO: create event?
         //TODO: particles
+    }
+
+    public static Identifier getSpriteId(RegistryEntry<PowerUp> entry) {
+        return entry.getKey().flatMap(key -> Optional.of(key.getValue())).orElse(MissingSprite.getMissingSpriteId());
     }
 }

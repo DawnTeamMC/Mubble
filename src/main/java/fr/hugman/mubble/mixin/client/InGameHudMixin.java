@@ -22,6 +22,7 @@ public class InGameHudMixin {
 
     @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/LayeredDrawer;addSubDrawer(Lnet/minecraft/client/gui/LayeredDrawer;Ljava/util/function/BooleanSupplier;)Lnet/minecraft/client/gui/LayeredDrawer;", ordinal = 0))
     private void addCustomLayer(MinecraftClient client, CallbackInfo ci) {
+        //TODO: create event and add layer with it
         this.layeredDrawer.addLayer((context, tickCounter) -> PowerUpHudRendering.renderPowerUpLayer(this.client, context, tickCounter));
     }
 }
