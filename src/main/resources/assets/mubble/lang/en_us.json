@@ -124,7 +124,7 @@
   "commands.mubble.power_up.set.success": "Changed %s's power-up",
   "commands.mubble.power_up.set.success_named": "Changed %s's power-up to %s",
   "commands.mubble.power_up.set.unchanged": "Nothing changed. The player already has this power-up",
-  "commands.mubble.power_up.remove.success": "Successfully removed the power-up from %s",
-  "commands.mubble.power_up.remove.success_named": "Successfully removed the %s's %s power-up",
+  "commands.mubble.power_up.remove.success": "Successfully removed %s's power-up",
+  "commands.mubble.power_up.remove.success_named": "Successfully removed %s's %s power-up",
   "commands.mubble.power_up.remove.no_power_up": "Nothing changed. The player doesn't have any power-up to remove"
 }
