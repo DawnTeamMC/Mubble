@@ -3,15 +3,16 @@
   "package": "fr.hugman.mubble.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "AbstractBlockStateMixin",
     "ArgumentTypesMixin",
     "EntityMixin",
-    "AbstractBlockStateMixin",
     "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
+    "client.InGameHudMixin",
     "client.LivingEntityRendererMixin"
   ]
 }
