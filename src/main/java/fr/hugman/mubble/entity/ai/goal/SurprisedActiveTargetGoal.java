@@ -1,7 +1,6 @@
 package fr.hugman.mubble.entity.ai.goal;
 
 import fr.hugman.mubble.entity.Surprisable;
-import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.TargetPredicate;
@@ -40,8 +39,7 @@ public class SurprisedActiveTargetGoal<T extends LivingEntity> extends ActiveTar
         if (this.mob instanceof Surprisable surprisable) {
             if (mob.getTarget() != null) {
                 surprisable.setSurprised(true);
-                mob.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, mob.getTarget().getPos());
-                mob.playSound(MubbleSounds.GOOMBA_FIND_TARGET, 1.0F, 1.0F);
+                surprisable.onSurprised();
             }
         }
     }

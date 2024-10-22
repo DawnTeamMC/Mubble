@@ -9,13 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 // TODO: break on impact
 public class RedKoopaShellEntity extends KoopaShellEntity {
     private static final Identifier TEXTURE = Mubble.id("textures/entity/koopa_shell/red.png");
-    private LivingEntity target;
 
     private static final double MAX_TARGET_DISTANCE = 16.0;
     private static final double MAX_TARGET_DISTANCE_SQUARE = MAX_TARGET_DISTANCE * MAX_TARGET_DISTANCE;
@@ -24,6 +24,8 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
             .ignoreVisibility()
             .ignoreDistanceScalingFactor()
             .setPredicate((target, w) -> target.isMobOrPlayer());
+
+    private LivingEntity target;
 
     public RedKoopaShellEntity(EntityType<? extends RedKoopaShellEntity> entityType, World world) {
         super(entityType, world);
@@ -50,7 +52,7 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
     @Override
     public void tick() {
         if (this.age % 20 == 1) {
-            this.expensiveUpdate();
+            this.searchTarget();
         }
 
         if (this.target != null && (this.target.isSpectator() || this.target.isDead())) {
@@ -60,7 +62,7 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
         if (this.target != null && !this.getWorld().isClient) {
             Vec3d currentPosition = this.getPos();
             Vec3d targetPosition = this.target.getPos();
-            Vec3d desiredVelocity = targetPosition.subtract(currentPosition).normalize().multiply(0.5);
+            Vec3d desiredVelocity = targetPosition.subtract(currentPosition).withAxis(Direction.Axis.Y, 0).normalize().multiply(0.5);
 
             Vec3d currentVelocity = this.getVelocity();
             Vec3d velocityError = desiredVelocity.subtract(currentVelocity);
@@ -76,13 +78,13 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
     }
 
     @Override
-    public void targetSpeed(float targetSpeed) {
+    public void targetHorizontalSpeed(float targetSpeed, float acceleration) {
         if (this.target == null) {
-            super.targetSpeed(targetSpeed);
+            super.targetHorizontalSpeed(targetSpeed, acceleration);
         }
     }
 
-    private void expensiveUpdate() {
+    private void searchTarget() {
         var world = this.getWorld();
         if (world instanceof ServerWorld serverWorld && this.getOwner() instanceof LivingEntity livingOwner) {
             if (this.target == null || this.target.squaredDistanceTo(this) > MAX_TARGET_DISTANCE_SQUARE) {
