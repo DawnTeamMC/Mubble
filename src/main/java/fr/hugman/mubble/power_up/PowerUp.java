@@ -30,18 +30,19 @@ import java.util.function.BiConsumer;
 
 public record PowerUp(
         Optional<Text> name,
+        Optional<Identifier> spriteId,
         Optional<RegistryEntry<PowerUpAction>> action,
         Optional<List<EntityAttributeEntry>> attributesModifiers,
         RegistryEntry<SoundEvent> obtainSound,
         RegistryEntry<SoundEvent> looseSound,
         boolean canSprintOnWater
 ) {
-    //TODO: add custom icon texture path
     //TODO: add a predicate/damage tag to determine if you can lose it to damage
     //TODO: add custom music
 
     public static final Codec<PowerUp> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TextCodecs.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
+            Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
             PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
             SoundEvent.ENTRY_CODEC.optionalFieldOf("obtain_sound", RegistryEntry.of(MubbleSounds.POWER_UP_OBTAIN)).forGetter(PowerUp::obtainSound),
@@ -54,6 +55,7 @@ public record PowerUp(
 
     public static final PacketCodec<RegistryByteBuf, PowerUp> PACKET_CODEC = PacketCodec.tuple(
             TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, PowerUp::name,
+            Identifier.PACKET_CODEC.collect(PacketCodecs::optional), PowerUp::spriteId,
             PowerUpAction.OPTIONAL_ENTRY_PACKET_CODEC, PowerUp::action,
             EntityAttributeEntry.OPTIONAL_LIST_PACKET_CODEC, PowerUp::attributesModifiers,
             SoundEvent.ENTRY_PACKET_CODEC, PowerUp::obtainSound,
@@ -99,6 +101,6 @@ public record PowerUp(
     }
 
     public static Identifier getSpriteId(RegistryEntry<PowerUp> entry) {
-        return entry.getKey().flatMap(key -> Optional.of(key.getValue())).orElse(MissingSprite.getMissingSpriteId());
+        return entry.value().spriteId().orElse(entry.getKey().flatMap(key -> Optional.of(key.getValue())).orElse(MissingSprite.getMissingSpriteId()));
     }
 }
