@@ -29,20 +29,13 @@ public record ChangePowerUpConsumeEffect(RegistryPair<PowerUp> powerUp) implemen
     @Override
     public boolean onConsume(World world, ItemStack stack, LivingEntity user) {
         if (user instanceof PlayerEntity player) {
-            var previousPowerUp = player.getPowerUp();
-            var entry = this.powerUp.getEntry(world.getRegistryManager());
-
-            if (entry.isEmpty()) {
-                return false;
-            }
-
-            if (previousPowerUp.isPresent()) {
-                if (previousPowerUp.get().matches(entry.get())) {
-                    return false;
+            var entry = powerUp.getEntry(world.getRegistryManager());
+            if (entry.isPresent()) {
+                if (PowerUp.canChange(user, entry.get())) {
+                    player.setPowerUp(entry.get());
+                    return true;
                 }
             }
-            player.setPowerUp(entry.get());
-            return true;
         }
         return false;
     }

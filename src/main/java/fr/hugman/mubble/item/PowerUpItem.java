@@ -2,13 +2,14 @@ package fr.hugman.mubble.item;
 
 import fr.hugman.mubble.component.MubbleComponentTypes;
 import fr.hugman.mubble.component.PowerUpComponent;
-import fr.hugman.mubble.item.consume.ChangePowerUpConsumeEffect;
+import fr.hugman.mubble.power_up.PowerUp;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -40,7 +41,11 @@ public class PowerUpItem extends Item {
         PowerUpComponent powerUpComponent = stack.get(MubbleComponentTypes.POWER_UP);
         if (null != powerUpComponent) {
             user.setCurrentHand(hand);
-            if (new ChangePowerUpConsumeEffect(powerUpComponent.powerUp()).onConsume(world, stack, user)) {
+            var opt = powerUpComponent.powerUp().getEntry(world.getRegistryManager());
+            if (opt.isPresent() && PowerUp.canChange(user, opt.get())) {
+                if (world instanceof ServerWorld) {
+                    user.setPowerUp(opt.get());
+                }
                 user.incrementStat(Stats.USED.getOrCreateStat(this));
                 stack.decrementUnlessCreative(1, user);
                 return ActionResult.SUCCESS;

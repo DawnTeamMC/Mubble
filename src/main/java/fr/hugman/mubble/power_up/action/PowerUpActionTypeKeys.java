@@ -6,6 +6,7 @@ import net.minecraft.registry.RegistryKey;
 
 public class PowerUpActionTypeKeys {
     public static final RegistryKey<PowerUpActionType<?>> SHOOT_PROJECTILE = of("shoot_projectile");
+    public static final RegistryKey<PowerUpActionType<?>> FLOAT = of("float");
 
     private static RegistryKey<PowerUpActionType<?>> of(String path) {
         return RegistryKey.of(MubbleRegistryKeys.POWER_UP_ACTION_TYPE, Mubble.id(path));

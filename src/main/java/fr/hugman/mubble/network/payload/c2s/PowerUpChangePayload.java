@@ -18,7 +18,7 @@ public record PowerUpChangePayload(Optional<RegistryEntry<PowerUp>> previous,
     );
 
     @Override
-    public Id<? extends CustomPayload> getId() {
+    public Id<? extends PowerUpChangePayload> getId() {
         return MubblePayloads.POWER_UP_CHANGE;
     }
 }

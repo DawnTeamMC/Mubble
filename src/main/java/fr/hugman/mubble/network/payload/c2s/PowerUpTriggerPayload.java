@@ -10,7 +10,7 @@ public class PowerUpTriggerPayload implements CustomPayload {
     public static final PacketCodec<RegistryByteBuf, PowerUpTriggerPayload> PACKET_CODEC = PacketCodec.unit(INSTANCE);
 
     @Override
-    public CustomPayload.Id<? extends CustomPayload> getId() {
+    public Id<? extends PowerUpTriggerPayload> getId() {
         return MubblePayloads.POWER_UP_TRIGGER;
     }
 }

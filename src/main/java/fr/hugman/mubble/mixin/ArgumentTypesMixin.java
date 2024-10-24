@@ -20,7 +20,7 @@ public abstract class ArgumentTypesMixin {
     }
 
     @Inject(method = "register(Lnet/minecraft/registry/Registry;)Lnet/minecraft/command/argument/serialize/ArgumentSerializer;", at = @At("HEAD"))
-    private static void register(Registry<ArgumentSerializer<?, ?>> registry, CallbackInfoReturnable<ArgumentSerializer<?, ?>> ci) {
+    private static void mubble$register(Registry<ArgumentSerializer<?, ?>> registry, CallbackInfoReturnable<ArgumentSerializer<?, ?>> ci) {
         register(registry, "power_up", PowerUpArgumentType.class, ConstantArgumentSerializer.of(PowerUpArgumentType::of));
     }
 }

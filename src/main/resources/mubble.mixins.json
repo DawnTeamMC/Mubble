@@ -6,14 +6,15 @@
     "AbstractBlockStateMixin",
     "ArgumentTypesMixin",
     "EntityMixin",
+    "LivingEntityMixin",
     "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "client.MinecraftClientMixin",
     "client.InGameHudMixin",
-    "client.LivingEntityRendererMixin"
+    "client.LivingEntityRendererMixin",
+    "client.MinecraftClientMixin"
   ]
 }

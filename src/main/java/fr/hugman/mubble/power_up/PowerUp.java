@@ -11,6 +11,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
@@ -32,6 +33,7 @@ public record PowerUp(
         Optional<Text> name,
         Optional<Identifier> spriteId,
         Optional<RegistryEntry<PowerUpAction>> action,
+        Optional<RegistryEntry<PowerUpAction>> jumpAction,
         Optional<List<EntityAttributeEntry>> attributesModifiers,
         RegistryEntry<SoundEvent> obtainSound,
         RegistryEntry<SoundEvent> looseSound,
@@ -44,6 +46,7 @@ public record PowerUp(
             TextCodecs.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
             PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
+            PowerUpAction.ENTRY_CODEC.optionalFieldOf("jump_action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
             SoundEvent.ENTRY_CODEC.optionalFieldOf("obtain_sound", RegistryEntry.of(MubbleSounds.POWER_UP_OBTAIN)).forGetter(PowerUp::obtainSound),
             SoundEvent.ENTRY_CODEC.optionalFieldOf("loose_sound", RegistryEntry.of(MubbleSounds.POWER_UP_LOOSE)).forGetter(PowerUp::looseSound),
@@ -57,6 +60,7 @@ public record PowerUp(
             TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, PowerUp::name,
             Identifier.PACKET_CODEC.collect(PacketCodecs::optional), PowerUp::spriteId,
             PowerUpAction.OPTIONAL_ENTRY_PACKET_CODEC, PowerUp::action,
+            PowerUpAction.OPTIONAL_ENTRY_PACKET_CODEC, PowerUp::jumpAction,
             EntityAttributeEntry.OPTIONAL_LIST_PACKET_CODEC, PowerUp::attributesModifiers,
             SoundEvent.ENTRY_PACKET_CODEC, PowerUp::obtainSound,
             SoundEvent.ENTRY_PACKET_CODEC, PowerUp::looseSound,
@@ -71,8 +75,26 @@ public record PowerUp(
         this.action.ifPresent(entry -> entry.value().onTrigger(server, player));
     }
 
+    public void jumpTrigger(MinecraftServer server, ServerPlayerEntity player) {
+        this.jumpAction.ifPresent(entry -> entry.value().onTrigger(server, player));
+    }
+
     public void applyModifiers(BiConsumer<RegistryEntry<EntityAttribute>, EntityAttributeModifier> attributeConsumer) {
         this.attributesModifiers.ifPresent(entries -> entries.forEach(entry -> attributeConsumer.accept(entry.attribute(), entry.modifier())));
+    }
+
+    /**
+     * @return whether the power-up can be triggered with the "power-up trigger" key.
+     */
+    public boolean canBeTriggered() {
+        return this.action.isPresent();
+    }
+
+    /**
+     * @return whether the power-up can be triggered with the jump key while airborne.
+     */
+    public boolean canBeTriggeredByAirborneJump() {
+        return true;
     }
 
     public static void onChange(LivingEntity entity, Optional<RegistryEntry<PowerUp>> previous, Optional<RegistryEntry<PowerUp>> next) {
@@ -98,6 +120,13 @@ public record PowerUp(
 
         //TODO: create event?
         //TODO: particles
+    }
+
+    public static boolean canChange(LivingEntity entity, RegistryEntry<PowerUp> entry) {
+        if (entity instanceof PlayerEntity player) {
+            return player.getPowerUp().map(power -> !power.matches(entry)).orElse(true);
+        }
+        return false;
     }
 
     public static Identifier getSpriteId(RegistryEntry<PowerUp> entry) {
