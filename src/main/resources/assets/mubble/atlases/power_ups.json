@@ -1,0 +1,39 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "power_up",
+      "prefix": ""
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/super_mushroom",
+      "sprite": "mubble:super"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/mini_mushroom",
+      "sprite": "mubble:mini"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/mega_mushroom",
+      "sprite": "mubble:mega"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/bee_mushroom",
+      "sprite": "mubble:bee"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/boo_mushroom",
+      "sprite": "mubble:boo"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/spring_mushroom",
+      "sprite": "mubble:spring"
+    }
+  ]
+}
