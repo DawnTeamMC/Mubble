@@ -18,12 +18,13 @@ public class GoombaRenderer extends MobEntityRenderer<GoombaEntity, GoombaEntity
     }
 
     @Override
-    public Identifier getTexture(GoombaEntityRenderState state) {
-        return state.texture;
+    public GoombaEntityRenderState createRenderState() {
+        return new GoombaEntityRenderState();
     }
 
-    public GoombaEntityRenderState getRenderState() {
-        return new GoombaEntityRenderState();
+    @Override
+    public Identifier getTexture(GoombaEntityRenderState state) {
+        return state.texture;
     }
 
     @Override
