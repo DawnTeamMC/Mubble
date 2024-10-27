@@ -25,7 +25,7 @@ public class KoopaShellRenderer<K extends KoopaShellEntity> extends EntityRender
     }
 
     @Override
-    public KoopaShellEntityRenderState getRenderState() {
+    public KoopaShellEntityRenderState createRenderState() {
         return new KoopaShellEntityRenderState();
     }
 
