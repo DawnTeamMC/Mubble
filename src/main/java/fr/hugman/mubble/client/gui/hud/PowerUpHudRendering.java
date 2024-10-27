@@ -28,7 +28,7 @@ public class PowerUpHudRendering {
         if (powerUpOpt.isPresent()) {
             context.drawGuiTexture(RenderLayer::getGuiTextured, EFFECT_BACKGROUND_TEXTURE, OFFSET_FROM_SCREEN_BORDER, OFFSET_FROM_SCREEN_BORDER, BACKGROUND_TEXTURE_SIZE, BACKGROUND_TEXTURE_SIZE);
             Sprite sprite = PowerUpSpriteManager.INSTANCE.getSprite(powerUpOpt.get());
-            context.drawSprite(RenderLayer::getGuiTextured, sprite, ITEM_OFFSET, ITEM_OFFSET, ITEM_TEXTURE_SIZE, ITEM_TEXTURE_SIZE, ColorHelper.getWhite(1.0f));
+            context.drawSpriteStretched(RenderLayer::getGuiTextured, sprite, ITEM_OFFSET, ITEM_OFFSET, ITEM_TEXTURE_SIZE, ITEM_TEXTURE_SIZE, ColorHelper.getWhite(1.0f));
         }
     }
 }
