@@ -33,7 +33,7 @@ public class ShooterInkBulletRenderer extends EntityRenderer<ShooterInkBulletEnt
     }
 
     @Override
-    public ShooterInkBulletRenderState getRenderState() {
+    public ShooterInkBulletRenderState createRenderState() {
         return new ShooterInkBulletRenderState();
     }
 
