@@ -13,6 +13,8 @@ public class LivingEntityMixin {
     private void mubble$float(Vec3d movementInput, CallbackInfo ci) {
         var this_ = (LivingEntity) (Object) this;
         var velocity = this_.getVelocity();
-        //this_.setVelocity(velocity.x, velocity.y + 0.1, velocity.z);
+        var d = velocity.y;
+        d += (0.05 * 1 - velocity.y) * 0.2;
+        //this_.setVelocity(velocity.x, d, velocity.z);
     }
 }

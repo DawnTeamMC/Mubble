@@ -33,7 +33,7 @@ public record ShootProjectilePowerUpAction(
 
     @Override
     public PowerUpActionType<?> getType() {
-        return PowerUpActionTypes.FLOAT;
+        return PowerUpActionTypes.SHOOT_PROJECTILE;
     }
 
     @Override
