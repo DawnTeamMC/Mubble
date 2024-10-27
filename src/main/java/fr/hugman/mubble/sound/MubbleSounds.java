@@ -24,6 +24,9 @@ public class MubbleSounds {
     public static final SoundEvent GOOMBA_DEATH = of("entity.goomba.death");
     public static final SoundEvent GOOMBA_STOMP = of("entity.goomba.stomp");
 
+    public static final SoundEvent KOOPA_SHELL_SLIDE = of("entity.koopa_shell.slide");
+    public static final SoundEvent KOOPA_SHELL_HIT_BLOCK = of("entity.koopa_shell.hit_block");
+
     private static SoundEvent of(String path) {
         Identifier id = Mubble.id(path);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));

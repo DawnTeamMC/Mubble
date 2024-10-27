@@ -4,10 +4,12 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import fr.hugman.mubble.entity.ai.control.StunnableMoveControl;
 import fr.hugman.mubble.entity.ai.goal.SurprisedActiveTargetGoal;
+import fr.hugman.mubble.entity.damage.MubbleDamageTypeTags;
 import fr.hugman.mubble.entity.data.MubbleTrackedData;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.block.BlockState;
+import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.VariantHolder;
@@ -23,13 +25,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class GoombaEntity extends StompableHostileEntity implements Surprisable, Stunnable, VariantHolder<RegistryEntry<GoombaVariant>> {
+public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, Stunnable, VariantHolder<RegistryEntry<GoombaVariant>> {
     public static final String VARIANT_KEY = "variant";
 
     public static final MapCodec<RegistryEntry<GoombaVariant>> VARIANT_MAP_CODEC = GoombaVariant.ENTRY_CODEC.fieldOf(VARIANT_KEY);
@@ -100,11 +103,21 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
     }
 
     @Override
-    public void onDeath(DamageSource damageSource) {
-        super.onDeath(damageSource);
-        if (this.isStomped()) {
-            this.crushAnimationState.startIfNotRunning(this.age);
+    public void onSurprised() {
+        this.playSound(MubbleSounds.GOOMBA_FIND_TARGET, 1.0F, 1.0F);
+        if(null != this.getTarget()) {
+            this.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.getTarget().getPos());
         }
+    }
+
+    @Override
+    public AnimationState getStompDeathAnimationState() {
+        return this.crushAnimationState;
+    }
+
+    @Override
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
+        return super.damage(world, source, source.isIn(MubbleDamageTypeTags.INSTANT_KILLS_GOOMBAS) ? Float.MAX_VALUE : amount);
     }
 
     // SOUNDS
@@ -147,12 +160,6 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
                 this.surprisedAnimationState.start(this.age);
             }
         }
-        if (STOMPED.equals(data)) {
-            if (this.isStomped() && this.dead) {
-                this.crushAnimationState.startIfNotRunning(this.age);
-            }
-        }
-
         super.onTrackedDataSet(data);
     }
 

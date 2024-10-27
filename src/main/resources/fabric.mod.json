@@ -57,6 +57,9 @@
 				"fabric",
 				"quilt"
 			]
+		},
+		"loom:injected_interfaces": {
+			"net/minecraft/class_1297": ["fr/hugman/mubble/entity/Stompable"]
 		}
 	},
 	"license": "LGPL v3.0"

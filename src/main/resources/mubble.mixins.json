@@ -3,12 +3,15 @@
   "package": "fr.hugman.mubble.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "EntityMixin"
+    "EntityMixin",
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "LivingEntityRendererMixin"
+    "client.ClientCommonNetworkHandlerAccessor",
+    "client.ClientPlayNetworkHandlerMixin",
+    "client.LivingEntityRendererMixin"
   ]
 }
