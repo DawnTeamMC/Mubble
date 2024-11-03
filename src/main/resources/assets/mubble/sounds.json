@@ -101,5 +101,26 @@
     "sounds": [
       "mubble:power_up/loose"
     ]
+  },
+  "entity.fireball.throw": {
+    "subtitle": "subtitles.mubble.entity.fireball.throw",
+    "sounds": [
+      "mubble:entity/fireball/throw"
+    ]
+  },
+  "entity.fireball.hit.block": {
+    "sounds": [
+      "mubble:entity/fireball/hit/block"
+    ]
+  },
+  "entity.fireball.hit.entity": {
+    "sounds": [
+      "mubble:entity/fireball/hit/entity"
+    ]
+  },
+  "entity.fireball.hit.meltable": {
+    "sounds": [
+      "mubble:entity/fireball/hit/meltable"
+    ]
   }
 }

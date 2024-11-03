@@ -11,6 +11,7 @@ public class MubbleItemKeys {
 
     public static final RegistryKey<Item> MINI_MUSHROOM = of("mini_mushroom");
     public static final RegistryKey<Item> MEGA_MUSHROOM = of("mega_mushroom");
+    public static final RegistryKey<Item> FIRE_FLOWER = of("fire_flower");
 
     public static final RegistryKey<Item> CAPE_FEATHER = of("cape_feather");
     public static final RegistryKey<Item> SUPER_CAPE_FEATHER = of("super_cape_feather");

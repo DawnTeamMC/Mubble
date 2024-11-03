@@ -24,6 +24,7 @@ public class MubbleItems {
 
     public static final PowerUpItem MINI_MUSHROOM = powerUp(MubbleItemKeys.MINI_MUSHROOM, MubblePowerUps.MINI);
     public static final PowerUpItem MEGA_MUSHROOM = powerUp(MubbleItemKeys.MEGA_MUSHROOM, MubblePowerUps.MEGA);
+    public static final PowerUpItem FIRE_FLOWER = powerUp(MubbleItemKeys.FIRE_FLOWER, MubblePowerUps.FIRE);
 
     public static final CapeFeatherItem CAPE_FEATHER = of(MubbleItemKeys.CAPE_FEATHER, s -> new CapeFeatherItem(s, false));
     public static final CapeFeatherItem SUPER_CAPE_FEATHER = of(MubbleItemKeys.SUPER_CAPE_FEATHER, s -> new CapeFeatherItem(s.rarity(Rarity.EPIC), true));

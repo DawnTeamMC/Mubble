@@ -1,0 +1,10 @@
+{
+  "name": {
+    "translate": "power_up.mubble.fire"
+  },
+  "action": {
+    "type": "mubble:shoot_projectile",
+    "sound": "mubble:entity.fireball.throw",
+    "projectile": "mubble:fireball"
+  }
+}

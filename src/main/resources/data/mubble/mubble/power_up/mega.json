@@ -2,7 +2,6 @@
   "name": {
     "translate": "power_up.mubble.mega"
   },
-  "obtain_sound": "mubble:power_up.obtain",
   "attribute_modifiers": [
     {
       "type": "minecraft:scale",

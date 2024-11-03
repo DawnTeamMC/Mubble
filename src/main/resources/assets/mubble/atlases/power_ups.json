@@ -12,6 +12,36 @@
     },
     {
       "type": "single",
+      "resource": "mubble:item/fire_flower",
+      "sprite": "mubble:fire"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/ice_flower",
+      "sprite": "mubble:ice"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/gold_flower",
+      "sprite": "mubble:gold"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/cloud_flower",
+      "sprite": "mubble:cloud"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/boomerang_flower",
+      "sprite": "mubble:boomerang"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/bubble_flower",
+      "sprite": "mubble:bubble"
+    },
+    {
+      "type": "single",
       "resource": "mubble:item/mini_mushroom",
       "sprite": "mubble:mini"
     },
@@ -34,6 +64,11 @@
       "type": "single",
       "resource": "mubble:item/spring_mushroom",
       "sprite": "mubble:spring"
+    },
+    {
+      "type": "single",
+      "resource": "mubble:item/propeller_mushroom",
+      "sprite": "mubble:propeller"
     }
   ]
 }
