@@ -22,8 +22,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class FireballEntity extends BallEntity {
-    public static final Logger LOGGER = LogManager.getLogger();
-
     public FireballEntity(EntityType<? extends FireballEntity> type, World world) {
         super(type, world);
     }
@@ -34,6 +32,11 @@ public class FireballEntity extends BallEntity {
 
     public FireballEntity(double x, double y, double z, World world) {
         super(MubbleEntityTypes.FIREBALL, x, y, z, world);
+    }
+
+    @Override
+    protected double getGravity() {
+        return 0.08;
     }
 
     @Override
@@ -115,9 +118,9 @@ public class FireballEntity extends BallEntity {
         }
         if (face == Direction.UP) {
             Vec3d motion = this.getVelocity().subtract(0.0D, this.getVelocity().y * 1.25D, 0.0D);
-            double minY = 0.3D;
+            double minY = 0.4D;
             if (motion.y < minY) {
-                motion = new Vec3d(motion.x, minY, motion.z);
+                motion = motion.withAxis(Direction.Axis.Y, minY);
             }
             this.setVelocity(motion);
         } else {

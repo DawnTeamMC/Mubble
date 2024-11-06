@@ -1,9 +1,11 @@
 package fr.hugman.mubble.power_up.action;
 
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.Ownable;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -24,18 +26,21 @@ import net.minecraft.util.math.Vec3d;
 
 public record ShootProjectilePowerUpAction(
         RegistryEntry<EntityType<?>> projectile,
-        RegistryEntry<SoundEvent> sound
+        RegistryEntry<SoundEvent> sound,
+        float speed
         //TODO: add shooting algorithm
         //TODO: add projectile NBT
 ) implements PowerUpAction {
     public static final MapCodec<ShootProjectilePowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Registries.ENTITY_TYPE.getEntryCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
-            SoundEvent.ENTRY_CODEC.fieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound)
+            SoundEvent.ENTRY_CODEC.fieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
+            Codec.FLOAT.optionalFieldOf("speed", 1.5F).forGetter(ShootProjectilePowerUpAction::speed)
     ).apply(instance, ShootProjectilePowerUpAction::new));
 
     public static final PacketCodec<RegistryByteBuf, ShootProjectilePowerUpAction> PACKET_CODEC = PacketCodec.tuple(
             PacketCodecs.registryEntry(RegistryKeys.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
             SoundEvent.ENTRY_PACKET_CODEC, (ShootProjectilePowerUpAction::sound),
+            PacketCodecs.FLOAT, (ShootProjectilePowerUpAction::speed),
             ShootProjectilePowerUpAction::new
     );
 
@@ -49,28 +54,15 @@ public record ShootProjectilePowerUpAction(
         var world = player.getServerWorld();
         world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
         var entity = this.projectile.value().create(world, SpawnReason.TRIGGERED);
-        switch (entity) {
-            case ThrownItemEntity thrownItemEntity -> ProjectileEntity.spawnWithVelocity((world2, shooter, stack) -> {
-                thrownItemEntity.setOwner(shooter);
-                thrownItemEntity.setItem(stack);
-                thrownItemEntity.setPosition(shooter.getX(), shooter.getEyeY() - 0.1F, shooter.getZ());
-                return thrownItemEntity;
-            }, world, new ItemStack(Items.SNOWBALL), player, 0.0F, 1.5F, 1.0F);
-            case ProjectileEntity projectile -> ProjectileEntity.spawnWithVelocity((world2, shooter, stack) -> {
-                projectile.setOwner(shooter);
-                projectile.setPosition(shooter.getX(), shooter.getEyeY() - 0.1F, shooter.getZ());
-                return projectile;
-            }, world, new ItemStack(Items.SNOWBALL), player, 0.0F, 1.5F, 1.0F);
-            case null -> {
-                //idk
-            }
-            default -> {
-                //idk
-                entity.setPosition(player.getX(), player.getEyeY() - 0.1F, player.getZ());
-                setVelocity(entity, player, player.getPitch(), player.getYaw(), 0.0F, 1.5F, 1.0F);
-                world.spawnEntity(entity);
-            }
+        if(null == entity) {
+            return;
         }
+        if(entity instanceof ProjectileEntity projectileEntity) {
+            projectileEntity.setOwner(player);
+        }
+        entity.setPosition(player.getX(), player.getEyeY() - 0.1F, player.getZ());
+        setVelocity(entity, player, player.getPitch(), player.getYaw(), 0.0F, this.speed, 1.0F);
+        world.spawnEntity(entity);
     }
 
     public void setVelocity(Entity projectile, Entity shooter, float pitch, float yaw, float roll, float speed, float divergence) {

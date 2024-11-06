@@ -5,6 +5,7 @@
   "action": {
     "type": "mubble:shoot_projectile",
     "sound": "mubble:entity.fireball.throw",
-    "projectile": "mubble:fireball"
+    "projectile": "mubble:fireball",
+    "speed": 0.4
   }
 }
