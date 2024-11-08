@@ -41,7 +41,9 @@ public class MubbleItemGroups {
         ItemGroupEvents.modifyEntriesEvent(MubbleItemGroupKeys.SUPER_MARIO).register(entries -> {
             var context = entries.getContext();
 
-            entries.add(MubbleItems.MAKER_GLOVE);
+            entries.add(MubbleItems.FIRE_FLOWER);
+            entries.add(MubbleItems.MINI_MUSHROOM);
+            entries.add(MubbleItems.MEGA_MUSHROOM);
             entries.add(MubbleBlocks.QUESTION_BLOCK);
             entries.add(MubbleBlocks.EMPTY_BLOCK);
             entries.add(MubbleBlocks.BRICK_BLOCK);
@@ -61,8 +63,10 @@ public class MubbleItemGroups {
             entries.add(MubbleBlocks.SLOW_SNAKE_BLOCK);
             entries.add(MubbleBlocks.RED_BEEP_BLOCK);
             entries.add(MubbleBlocks.BLUE_BEEP_BLOCK);
-            entries.add(MubbleItems.CAPE_FEATHER);
-            entries.add(MubbleItems.SUPER_CAPE_FEATHER);
+            entries.add(MubbleItems.MAKER_GLOVE);
+            //outdated
+            //entries.add(MubbleItems.CAPE_FEATHER);
+            //entries.add(MubbleItems.SUPER_CAPE_FEATHER);
             entries.add(MubbleItems.GOOMBA_SPAWN_EGG);
             context.lookup()
                     .getOptional(MubbleRegistryKeys.GOOMBA_VARIANT)

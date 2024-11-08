@@ -24,6 +24,17 @@ public class MubbleSounds {
     public static final SoundEvent GOOMBA_DEATH = of("entity.goomba.death");
     public static final SoundEvent GOOMBA_STOMP = of("entity.goomba.stomp");
 
+    public static final SoundEvent POWER_UP_OBTAIN_MINI = of("power_up.obtain.mini");
+    public static final SoundEvent POWER_UP_OBTAIN_SUPER_STAR = of("power_up.obtain.super_star");
+    public static final SoundEvent POWER_UP_OBTAIN = of("power_up.obtain");
+    public static final SoundEvent POWER_UP_LOOSE = of("power_up.loose");
+
+    public static final SoundEvent FIREBALL_HIT_BLOCK = of("entity.fireball.hit.block");
+    public static final SoundEvent FIREBALL_HIT_ENTITY = of("entity.fireball.hit.entity");
+    public static final SoundEvent FIREBALL_HIT_MELTABLE = of("entity.fireball.hit.meltable");
+    public static final SoundEvent FIREBALL_THROW = of("entity.fireball.throw");
+
+
     private static SoundEvent of(String path) {
         Identifier id = Mubble.id(path);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));

@@ -77,5 +77,50 @@
     "sounds": [
       "mubble:entity/goomba/stomp"
     ]
+  },
+  "power_up.obtain": {
+    "subtitle": "subtitles.mubble.power_up.obtain",
+    "sounds": [
+      "mubble:power_up/obtain"
+    ]
+  },
+  "power_up.obtain.mini": {
+    "subtitle": "subtitles.mubble.power_up.obtain",
+    "sounds": [
+      "mubble:power_up/obtain/mini"
+    ]
+  },
+  "power_up.obtain.super_star": {
+    "subtitle": "subtitles.mubble.power_up.obtain",
+    "sounds": [
+      "mubble:power_up/obtain/super_star"
+    ]
+  },
+  "power_up.loose": {
+    "subtitle": "subtitles.mubble.power_up.loose",
+    "sounds": [
+      "mubble:power_up/loose"
+    ]
+  },
+  "entity.fireball.throw": {
+    "subtitle": "subtitles.mubble.entity.fireball.throw",
+    "sounds": [
+      "mubble:entity/fireball/throw"
+    ]
+  },
+  "entity.fireball.hit.block": {
+    "sounds": [
+      "mubble:entity/fireball/hit/block"
+    ]
+  },
+  "entity.fireball.hit.entity": {
+    "sounds": [
+      "mubble:entity/fireball/hit/entity"
+    ]
+  },
+  "entity.fireball.hit.meltable": {
+    "sounds": [
+      "mubble:entity/fireball/hit/meltable"
+    ]
   }
 }
