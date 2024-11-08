@@ -23,5 +23,5 @@ public interface PowerUpAction {
 
     PowerUpActionType<?> getType();
 
-    void onTrigger(MinecraftServer server, ServerPlayerEntity player);
+    void tick(MinecraftServer server, ServerPlayerEntity player);
 }

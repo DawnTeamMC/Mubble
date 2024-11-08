@@ -50,7 +50,7 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
-    public void onTrigger(MinecraftServer server, ServerPlayerEntity player) {
+    public void tick(MinecraftServer server, ServerPlayerEntity player) {
         var world = player.getServerWorld();
         world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
         var entity = this.projectile.value().create(world, SpawnReason.TRIGGERED);

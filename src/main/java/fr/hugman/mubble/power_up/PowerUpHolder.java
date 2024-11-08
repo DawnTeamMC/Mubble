@@ -14,4 +14,8 @@ public interface PowerUpHolder {
 
     default void clearPowerUp() {
     }
+
+    default PowerUpProperties getPowerUpProperties() {
+        return null;
+    }
 }

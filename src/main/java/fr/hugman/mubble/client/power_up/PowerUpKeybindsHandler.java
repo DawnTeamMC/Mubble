@@ -14,9 +14,11 @@ public class PowerUpKeybindsHandler {
                 // it's great to check the power-up allows certain actions on the client first
                 // to avoid unnecessary network traffic.
                 // let's utilize Minecraft's registry sync to my advantage
-                if (powerUp.canBeTriggered() && MubbleKeyBindings.TRIGGER_POWER_UP.isPressed()) {
-                    //TODO: check for cooldown
-                    ClientPlayNetworking.send(PowerUpTriggerPayload.INSTANCE);
+                if(powerUp.canBeTriggered()) {
+                    while(MubbleKeyBindings.TRIGGER_POWER_UP.wasPressed()) {
+                        //TODO: check for cooldown
+                        ClientPlayNetworking.send(PowerUpTriggerPayload.INSTANCE);
+                    }
                 }
             }
         }

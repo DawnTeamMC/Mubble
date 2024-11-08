@@ -6,6 +6,7 @@ import fr.hugman.mubble.entity.data.MubbleTrackedData;
 import fr.hugman.mubble.network.payload.c2s.PowerUpChangePayload;
 import fr.hugman.mubble.power_up.PowerUp;
 import fr.hugman.mubble.power_up.PowerUpHolder;
+import fr.hugman.mubble.power_up.PowerUpProperties;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -36,6 +37,9 @@ public class PlayerMixin implements PowerUpHolder {
     @Unique
     private static final Codec<RegistryEntry<PowerUp>> POWER_UP_ENTRY_CODEC = POWER_UP_MAP_CODEC.codec();
 
+    @Unique
+    private final PowerUpProperties powerUpProperties = new PowerUpProperties();
+
     @Inject(method = "initDataTracker", at = @At("TAIL"))
     protected void mubble$initDataTracker(DataTracker.Builder builder, CallbackInfo ci) {
         builder.add(POWER_UP, Optional.empty());
@@ -57,6 +61,12 @@ public class PlayerMixin implements PowerUpHolder {
     public Optional<RegistryEntry<PowerUp>> getPowerUp() {
         var this_ = (PlayerEntity) (Object) this;
         return this_.getDataTracker().get(POWER_UP);
+    }
+
+
+    @Override
+    public PowerUpProperties getPowerUpProperties() {
+        return this.powerUpProperties;
     }
 
     @Override

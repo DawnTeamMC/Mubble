@@ -69,7 +69,7 @@ public record PowerUp(
     public static final PacketCodec<RegistryByteBuf, RegistryPair<PowerUp>> PAIR_PACKET_CODEC = RegistryPair.createPacketCodec(MubbleRegistryKeys.POWER_UP, ENTRY_PACKET_CODEC);
 
     public void trigger(MinecraftServer server, ServerPlayerEntity player) {
-        this.action.ifPresent(entry -> entry.value().onTrigger(server, player));
+        this.action.ifPresent(entry -> entry.value().tick(server, player));
     }
 
     public void applyModifiers(BiConsumer<RegistryEntry<EntityAttribute>, EntityAttributeModifier> attributeConsumer) {
