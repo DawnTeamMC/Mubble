@@ -1,5 +1,6 @@
 package fr.hugman.mubble.block;
 
+import com.mojang.authlib.minecraft.client.MinecraftClient;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
@@ -14,7 +15,6 @@ import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
@@ -141,7 +141,6 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
     @Override
     @Environment(EnvType.CLIENT)
     public BlockRenderType getRenderType(BlockState state) {
-        if (MinecraftClient.isFancyGraphicsOrBetter()) return BlockRenderType.ENTITYBLOCK_ANIMATED;
         return state.get(BUMPING) ? BlockRenderType.ENTITYBLOCK_ANIMATED : BlockRenderType.MODEL;
     }
 

@@ -6,7 +6,6 @@ import fr.hugman.mubble.attribute.EntityAttributeEntry;
 import fr.hugman.mubble.power_up.action.PowerUpAction;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import fr.hugman.mubble.sound.MubbleSounds;
-import net.minecraft.client.texture.MissingSprite;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -115,7 +114,7 @@ public record PowerUp(
         return false;
     }
 
-    public static Identifier getSpriteId(RegistryEntry<PowerUp> entry) {
-        return entry.value().spriteId().orElse(entry.getKey().flatMap(key -> Optional.of(key.getValue())).orElse(MissingSprite.getMissingSpriteId()));
+    public static Optional<Identifier> getSpriteId(RegistryEntry<PowerUp> entry) {
+        return entry.value().spriteId().or(() -> entry.getKey().flatMap(key -> Optional.of(key.getValue())));
     }
 }

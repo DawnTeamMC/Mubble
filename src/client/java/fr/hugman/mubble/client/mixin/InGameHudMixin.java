@@ -1,4 +1,4 @@
-package fr.hugman.mubble.mixin.client;
+package fr.hugman.mubble.client.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;

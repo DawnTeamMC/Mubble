@@ -60,11 +60,11 @@ public class FireballEntity extends BallEntity {
             livingEntity.onAttacking(entity);
         }
 
-        entity.serverDamage(this.getDamageSources().thrown(this, this.getOwner()), damage);
         if (!entity.isFireImmune()) {
             entity.setOnFireFor(5);
         }
         this.getWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+		entity.serverDamage(this.getDamageSources().thrown(this, this.getOwner()), damage);
         this.finalHit();
     }
 

@@ -24,11 +24,15 @@
       "fr.hugman.mubble.Mubble"
     ],
     "client": [
-      "fr.hugman.mubble.MubbleClient"
+      "fr.hugman.mubble.client.MubbleClient"
     ]
   },
   "mixins": [
-    "mubble.mixins.json"
+    "mubble.mixins.json",
+    {
+      "config": "mubble.client.mixins.json",
+      "environment": "client"
+    }
   ],
   "depends": {
     "minecraft": "*",

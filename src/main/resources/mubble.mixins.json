@@ -10,10 +10,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "client": [
-    "client.InGameHudMixin",
-    "client.LivingEntityRendererMixin",
-    "client.MinecraftClientMixin"
-  ]
+  }
 }

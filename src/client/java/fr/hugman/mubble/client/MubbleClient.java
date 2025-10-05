@@ -1,4 +1,4 @@
-package fr.hugman.mubble;
+package fr.hugman.mubble.client;
 
 import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.block.MubbleBlocks;
@@ -7,7 +7,7 @@ import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
 import fr.hugman.mubble.client.render.MubbleRenderers;
 import fr.hugman.mubble.client.render.entity.model.MubbleModelLayers;
 import fr.hugman.mubble.client.texture.MubbleSpriteManagers;
-import fr.hugman.mubble.network.MubbleClientReceivers;
+import fr.hugman.mubble.client.network.MubbleClientReceivers;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;

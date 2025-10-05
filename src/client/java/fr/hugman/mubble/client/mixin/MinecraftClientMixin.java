@@ -1,4 +1,4 @@
-package fr.hugman.mubble.mixin.client;
+package fr.hugman.mubble.client.mixin;
 
 import fr.hugman.mubble.client.texture.MubbleSpriteManagers;
 import net.minecraft.client.MinecraftClient;

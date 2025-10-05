@@ -1,4 +1,4 @@
-package fr.hugman.mubble.network;
+package fr.hugman.mubble.client.network;
 
 import fr.hugman.mubble.network.payload.MubblePayloads;
 import fr.hugman.mubble.power_up.PowerUp;

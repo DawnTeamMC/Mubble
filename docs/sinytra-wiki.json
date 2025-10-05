@@ -1,0 +1,9 @@
+{
+  "id": "mubble",
+  "modid": "mubble",
+  "platforms": {
+    "modrinth": "mubble",
+    "curseforge": "mubble"
+  },
+  "slug": "mubble"
+}

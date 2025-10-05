@@ -5,6 +5,7 @@ import fr.hugman.mubble.power_up.PowerUp;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener;
+import net.minecraft.client.texture.MissingSprite;
 import net.minecraft.client.texture.Sprite;
 import net.minecraft.client.texture.SpriteAtlasHolder;
 import net.minecraft.client.texture.TextureManager;
@@ -20,7 +21,7 @@ public class PowerUpSpriteManager extends SpriteAtlasHolder implements Identifia
     }
 
     public Sprite getSprite(RegistryEntry<PowerUp> powerUp) {
-        return this.getSprite(PowerUp.getSpriteId(powerUp));
+        return this.getSprite(PowerUp.getSpriteId(powerUp).orElse(MissingSprite.getMissingSpriteId()));
     }
 
     @Override
