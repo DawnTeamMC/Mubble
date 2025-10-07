@@ -1,10 +1,9 @@
 {
   "required": true,
-  "package": "fr.hugman.mubble.mixin",
+  "package": "fr.hugman.mubble.client.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "EntityMixin",
-    "LivingEntityMixin"
+  "client": [
+    "LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,4 +1,4 @@
-package fr.hugman.mubble.mixin.client;
+package fr.hugman.mubble.client.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientCommonNetworkHandler;

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "name": "Mubble Data Generation",
+  "id": "mubble-datagen",
+  "version": "1.0.0",
+  "authors": [
+    "Hugman"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "fr.hugman.mubble.data.MubbleDataGenerator"
+    ]
+  }
+}

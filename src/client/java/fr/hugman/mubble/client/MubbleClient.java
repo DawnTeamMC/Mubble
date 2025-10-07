@@ -1,4 +1,4 @@
-package fr.hugman.mubble;
+package fr.hugman.mubble.client;
 
 import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.client.gui.screen.BumpableScreen;
