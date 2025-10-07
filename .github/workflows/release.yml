@@ -35,8 +35,13 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
 
+      - name: Generate data files
+        run: ./gradlew clean runDatagen
+
       - name: Build with Gradle
-        run: ./gradlew clean build -Pversion=${{ github.event.release.tag_name }}
+        run: |
+          VERSION=${{ github.event.release.tag_name }}
+          ./gradlew build -Pversion=${VERSION#v}
 
       - name: Read Gradle properties
         id: gradle_properties
@@ -54,7 +59,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
           changelog: ${{ github.event.release.body }}
-          java: 17
+          java: 21
 
           modrinth-featured: false
 
