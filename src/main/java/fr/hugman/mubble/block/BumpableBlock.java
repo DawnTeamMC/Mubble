@@ -23,6 +23,7 @@ import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
@@ -100,7 +101,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
             return ActionResult.PASS_TO_DEFAULT_BLOCK_ACTION;
         }
 
-        if (world.isClient) {
+        if (world.isClient()) {
             return ActionResult.SUCCESS;
         }
         if (world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpableEntity) {
@@ -111,28 +112,29 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
         return ActionResult.CONSUME;
     }
 
-    @Override
-    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
-        if (state.isOf(newState.getBlock())) {
-            return;
-        }
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof BumpableBlockEntity bumpable) {
-            ItemScatterer.spawn(world, pos, bumpable);
-            world.updateComparators(pos, this);
-        }
-        super.onStateReplaced(state, world, pos, newState, moved);
-    }
+	@Override
+	protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
+		var newState = world.getBlockState(pos);
+		if (state.isOf(newState.getBlock())) {
+			return;
+		}
+		BlockEntity blockEntity = world.getBlockEntity(pos);
+		if (blockEntity instanceof BumpableBlockEntity bumpable) {
+			ItemScatterer.spawn(world, pos, bumpable);
+			world.updateComparators(pos, this);
+		}
+		super.onStateReplaced(state, world, pos, moved);
+	}
 
     @Override
     public boolean hasComparatorOutput(BlockState state) {
         return true;
     }
 
-    @Override
-    public int getComparatorOutput(BlockState state, World world, BlockPos pos) {
-        return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
-    }
+	@Override
+	protected int getComparatorOutput(BlockState state, World world, BlockPos pos, Direction direction) {
+		return ScreenHandler.calculateComparatorOutput(world.getBlockEntity(pos));
+	}
 
     /*=============*/
     /*  RENDERING  */
@@ -141,7 +143,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
     @Override
     @Environment(EnvType.CLIENT)
     public BlockRenderType getRenderType(BlockState state) {
-        return state.get(BUMPING) ? BlockRenderType.ENTITYBLOCK_ANIMATED : BlockRenderType.MODEL;
+        return state.get(BUMPING) ? BlockRenderType.INVISIBLE : BlockRenderType.MODEL;
     }
 
     /*============*/
@@ -164,7 +166,7 @@ public class BumpableBlock extends BlockWithEntity implements HittableBlock {
     public void onBump(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
         var bumpAuthor = blockEntity.getBumpAuthor();
         //TODO: change the game event to something more appropriate
-        world.emitGameEvent(bumpAuthor, GameEvent.BLOCK_OPEN, pos);
+        world.emitGameEvent(bumpAuthor, GameEvent.BLOCK_ACTIVATE, pos);
         if (bumpAuthor instanceof PlayerEntity player) {
             //TODO: create a new "Bumped Blocks" stat
             //player.incrementStat(MubbleStats.BUMPED_BLOCKS);

@@ -125,10 +125,11 @@ public class MubbleItemGroups {
             Predicate<RegistryEntry<GoombaVariant>> filter,
             ItemGroup.StackVisibility stackVisibility
     ) {
+		//TODO reimplement
+		/*
         RegistryOps<NbtElement> registryOps = registries.getOps(NbtOps.INSTANCE);
         registryWrapper.streamEntries()
                 .filter(filter)
-                //TODO: sort?
                 .forEach(
                         entry -> {
                             if (GoombaVariants.NORMAL.getValue().equals(entry.registryKey().getValue())) {
@@ -146,6 +147,8 @@ public class MubbleItemGroups {
                             entries.add(stack, stackVisibility);
                         }
                 );
+
+		 */
     }
 
 }

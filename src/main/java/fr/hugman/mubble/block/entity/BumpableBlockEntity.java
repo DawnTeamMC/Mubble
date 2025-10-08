@@ -4,34 +4,29 @@ import fr.hugman.mubble.block.BumpableBlock;
 import fr.hugman.mubble.block.BumpableDropMode;
 import fr.hugman.mubble.block.MubbleBlockEntityTypes;
 import fr.hugman.mubble.screen.BumpableScreenHandler;
-import net.minecraft.SharedConstants;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LazyEntityReference;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtHelper;
 import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryEntryLookup;
-import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.screen.PropertyDelegate;
 import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.UUID;
 
 
 /**
@@ -40,23 +35,24 @@ import java.util.UUID;
  * @since v4.0.0
  */
 public class BumpableBlockEntity extends LootableContainerBlockEntity {
-    public static final int ANIMATION_TICKS = SharedConstants.TICKS_PER_SECOND / 4;
-    public static final int PEAK_TICK = ANIMATION_TICKS / 2;
+    public static final float BUMP_SPEED = 1/5f;
 
-    private static final String BUMPED_STATE_KEY = "BumpedState";
-    private static final String DROP_MODE_KEY = "DropMode";
-    private static final String BUMP_TICKS_KEY = "BumpTicks";
-    private static final String BUMP_AUTHOR_KEY = "BumpAuthor";
-    private static final String BUMP_DIRECTION_KEY = "BumpDirection";
+    private static final String BUMPED_STATE_KEY = "bumped_state";
+    private static final String DROP_MODE_KEY = "drop_mode";
+    private static final String BUMP_PROGRESS_KEY = "bump_progress";
+    private static final String BUMP_AUTHOR_KEY = "bump_author";
+    private static final String BUMP_DIRECTION_KEY = "bump_direction";
 
     private DefaultedList<ItemStack> inventory;
     private BumpableDropMode dropMode = BumpableDropMode.ALL;
     private boolean dropModeLocked = false;
     private @Nullable BlockState bumpedState;
-    private int bumpTicks = -1;
-    private @Nullable UUID bumpAuthorUuid;
-    private @Nullable Entity bumpAuthor;
-    private Direction bumpDirection = Direction.UP;
+	private float bumpProgress = Integer.MIN_VALUE;
+	private float lastBumpProgress = 0.0F;
+	@Nullable
+	private LazyEntityReference<Entity> bumpAuthor;
+	@Nullable
+    private Direction bumpDirection;
 
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
@@ -96,57 +92,41 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
         this.setBumpedState(bumpedState);
     }
 
-    /*=======*/
-    /*  NBT  */
-    /*=======*/
+    /*========*/
+    /*  DATA  */
+    /*========*/
 
-    @Override
-    protected void writeNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        super.writeNbt(nbt, registryLookup);
-        if (!this.writeLootTable(nbt)) {
-            Inventories.writeNbt(nbt, this.inventory, registryLookup);
+	@Override
+    protected void writeData(WriteView view) {
+        super.writeData(view);
+        if (!this.writeLootTable(view)) {
+            Inventories.writeData(view, this.inventory);
         }
-        nbt.putInt(DROP_MODE_KEY, this.dropMode.getIndex());
+		view.put(DROP_MODE_KEY, BumpableDropMode.CODEC, this.dropMode);
         if (this.bumpedState != null) {
-            nbt.put(BUMPED_STATE_KEY, NbtHelper.fromBlockState(this.bumpedState));
+			view.put(BUMPED_STATE_KEY, BlockState.CODEC, this.bumpedState);
         }
-        if (this.bumpAuthorUuid != null) {
-            nbt.putUuid(BUMP_AUTHOR_KEY, this.bumpAuthorUuid);
-        }
-        this.writeClientNbt(nbt);
+		LazyEntityReference.writeData(this.bumpAuthor, view, BUMP_AUTHOR_KEY);
+		view.putFloat(BUMP_PROGRESS_KEY, this.lastBumpProgress);
+		view.putNullable(BUMP_DIRECTION_KEY, Direction.INDEX_CODEC, this.bumpDirection);
     }
 
-    @Override
-    protected void readNbt(NbtCompound nbt, RegistryWrapper.WrapperLookup registryLookup) {
-        super.readNbt(nbt, registryLookup);
+	@Override
+	protected void readData(ReadView view) {
+        super.readData(view);
         this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (!this.readLootTable(nbt)) {
-            Inventories.readNbt(nbt, this.inventory, registryLookup);
+        if (!this.readLootTable(view)) {
+            Inventories.readData(view, this.inventory);
         }
-        if (nbt.contains(BUMPED_STATE_KEY)) {
-            RegistryEntryLookup<Block> registryEntryLookup = this.world != null
-                    ? this.world.createCommandRegistryWrapper(RegistryKeys.BLOCK)
-                    : Registries.BLOCK;
-            this.bumpedState = NbtHelper.toBlockState(registryEntryLookup, nbt.getCompound(BUMPED_STATE_KEY));
-        }
+		view.read(BUMPED_STATE_KEY, BlockState.CODEC).ifPresent(this::setBumpedState);
 
-        this.dropMode = BumpableDropMode.get(nbt.getInt(DROP_MODE_KEY));
-        this.bumpTicks = Math.max(-1, nbt.getInt(BUMP_TICKS_KEY));
-        if (nbt.containsUuid(BUMP_AUTHOR_KEY)) {
-            this.bumpAuthorUuid = nbt.getUuid(BUMP_AUTHOR_KEY);
-        }
-        this.bumpDirection = Direction.byId(nbt.getInt(BUMP_DIRECTION_KEY));
-        if (this.bumpDirection == null) {
-            this.bumpDirection = Direction.UP;
-        }
+        this.dropMode = view.read(DROP_MODE_KEY, BumpableDropMode.CODEC).orElse(BumpableDropMode.ALL);
+		this.bumpProgress = view.getFloat(BUMP_PROGRESS_KEY, 0.0F);
+		view.read(BUMP_DIRECTION_KEY, Direction.INDEX_CODEC).ifPresent(this::setBumpDirection);
+		this.bumpAuthor = LazyEntityReference.fromData(view, BUMP_AUTHOR_KEY);
     }
 
-    protected void writeClientNbt(NbtCompound nbt) {
-        nbt.putInt(BUMP_TICKS_KEY, this.bumpTicks);
-        nbt.putInt(BUMP_DIRECTION_KEY, this.bumpDirection.getId());
-    }
-
-    /*=====================*/
+	/*=====================*/
     /*  GETTERS & SETTERS  */
     /*=====================*/
 
@@ -188,35 +168,31 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
         return bumpedState != null && bumpedState.isAir();
     }
 
-    public int getBumpTicks() {
-        return this.bumpTicks;
-    }
+	public float getBumpProgress(float tickProgress) {
+		if (tickProgress > 1.0F) {
+			tickProgress = 1.0F;
+		}
+
+		return MathHelper.lerp(tickProgress, this.lastBumpProgress, this.bumpProgress);
+	}
 
     @Nullable
     public Entity getBumpAuthor() {
-        if (this.bumpAuthor != null && !this.bumpAuthor.isRemoved()) {
-            return this.bumpAuthor;
-        }
-        if (this.bumpAuthorUuid != null && this.world instanceof ServerWorld) {
-            this.bumpAuthor = ((ServerWorld) this.world).getEntity(this.bumpAuthorUuid);
-            return this.bumpAuthor;
-        }
-        return null;
+		return LazyEntityReference.getEntity(this.bumpAuthor, this.getWorld());
     }
 
     public void setBumpAuthor(@Nullable Entity entity) {
         if (entity != null) {
-            this.bumpAuthorUuid = entity.getUuid();
-            this.bumpAuthor = entity;
+            this.bumpAuthor = LazyEntityReference.of(entity);
         }
     }
 
-    public Direction getBumpDirection() {
-        return this.bumpDirection;
-    }
+	public void setBumpDirection(@Nullable Direction bumpDirection) {
+		this.bumpDirection = bumpDirection;
+	}
 
-    public boolean isBumping() {
-        return this.bumpTicks >= 0 && this.bumpTicks <= BumpableBlockEntity.ANIMATION_TICKS;
+	public @Nullable Direction getBumpDirection() {
+        return this.bumpDirection;
     }
 
     @Override
@@ -264,10 +240,10 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
      *
      * @param direction the direction of the bump
      * @param entity    the entity that bumped the block
-     * @return true if the block was bumped, false if it was already bumping
      */
     public void bump(World world, BlockPos pos, BlockState state, Entity entity, Direction direction) {
-        this.bumpTicks = 0;
+        this.bumpProgress = 0.0F;
+		this.lastBumpProgress = 0.0F;
         this.bumpDirection = direction;
         this.setBumpAuthor(entity);
         this.markDirty();
@@ -278,22 +254,32 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
     }
 
     public void tick(World world, BlockPos pos, BlockState state) {
-        if (isBumping()) this.bumpTicks++;
+		this.lastBumpProgress = this.bumpProgress;
 
-        if (this.getBumpTicks() == BumpableBlockEntity.PEAK_TICK) {
-            if (state.getBlock() instanceof BumpableBlock bumpable) {
-                bumpable.onBumpMiddle(world, pos, state, this);
-            }
-        }
+		if(!state.get(BumpableBlock.BUMPING)) {
+			return;
+		}
 
-        if (this.getBumpTicks() > BumpableBlockEntity.ANIMATION_TICKS) {
-            if (state.getBlock() instanceof BumpableBlock bumpable) {
-                this.bumpTicks = -1;
-                this.setBumpAuthor(null);
-                this.markDirty();
-                bumpable.onBumpEnd(world, pos, state, this);
-            }
-        }
+		if (this.lastBumpProgress == 1.0F) {
+			if (state.getBlock() instanceof BumpableBlock bumpable) {
+				this.setBumpAuthor(null);
+				this.markDirty();
+				bumpable.onBumpEnd(world, pos, state, this);
+				this.bumpProgress = Integer.MIN_VALUE;
+			}
+		}
+		else {
+			this.bumpProgress += BUMP_SPEED;
+			if (this.bumpProgress >= 1.0F) {
+				this.bumpProgress = 1.0F;
+			}
+
+			if(Math.abs(this.bumpProgress - 0.5f) < BUMP_SPEED) {
+				if (state.getBlock() instanceof BumpableBlock bumpable) {
+					bumpable.onBumpMiddle(world, pos, state, this);
+				}
+			}
+		}
     }
 
     @Override
@@ -304,7 +290,8 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
     @Override
     public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registryLookup) {
         NbtCompound nbt = new NbtCompound();
-        this.writeClientNbt(nbt);
+		nbt.putFloat(BUMP_PROGRESS_KEY, this.bumpProgress);
+		nbt.putNullable(BUMP_DIRECTION_KEY, Direction.INDEX_CODEC, this.bumpDirection);
         return nbt;
     }
 }

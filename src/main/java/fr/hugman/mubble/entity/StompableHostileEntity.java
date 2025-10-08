@@ -36,10 +36,10 @@ abstract public class StompableHostileEntity extends HostileEntity {
 
         if (this.canBeStomped()) {
             Box hitBox = this.getStompBox();
-            List<Entity> list = this.getWorld().getOtherEntities(this, hitBox, this.getStompableBy());
+            List<Entity> list = this.getEntityWorld().getOtherEntities(this, hitBox, this.getStompableBy());
             if (!list.isEmpty()) {
                 this.stomp(true);
-                if (this.getWorld() instanceof ServerWorld serverWorld) {
+                if (this.getEntityWorld() instanceof ServerWorld serverWorld) {
                     this.onStompedBy(serverWorld, list);
                 }
             }

@@ -8,9 +8,9 @@ import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
-import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.BlockRenderLayer;
 
 @Environment(EnvType.CLIENT)
 public class MubbleClient implements ClientModInitializer {
@@ -24,8 +24,8 @@ public class MubbleClient implements ClientModInitializer {
     }
 
     private static void registerBlockRenderLayers() {
-        BlockRenderLayerMap.INSTANCE.putBlock(MubbleBlocks.RED_BEEP_BLOCK, RenderLayer.getCutout());
-        BlockRenderLayerMap.INSTANCE.putBlock(MubbleBlocks.BLUE_BEEP_BLOCK, RenderLayer.getCutout());
+        BlockRenderLayerMap.putBlock(MubbleBlocks.RED_BEEP_BLOCK, BlockRenderLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(MubbleBlocks.BLUE_BEEP_BLOCK, BlockRenderLayer.CUTOUT);
     }
 
     private static void registerHandledScreens() {

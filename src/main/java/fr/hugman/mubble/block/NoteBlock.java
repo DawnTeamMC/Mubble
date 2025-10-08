@@ -32,10 +32,10 @@ public class NoteBlock extends DecoratedBumpableBlock {
         this.highJumpSound = highJumpSound;
     }
 
-    @Override
-    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        // Do not apply fall damage
-    }
+	@Override
+	public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+		super.onLandedUpon(world, state, pos, entity, fallDistance);
+	}
 
     @Override
     public void onEntityLand(BlockView view, Entity entity) {
@@ -48,7 +48,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
         BlockPos pos = entity.getBlockPos().down();
         BlockState state = world.getBlockState(pos);
 
-        this.onHit(world, state, entity, new BlockHitResult(entity.getPos(), Direction.UP, pos, false));
+        this.onHit(world, state, entity, new BlockHitResult(entity.getEntityPos(), Direction.UP, pos, false));
 
         super.onEntityLand(view, entity);
     }
@@ -102,7 +102,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
             double y = center.getY() + 0.6F;
             double z = center.getZ() + (random.nextInt(7) - 3) / 10D;
             double color = random.nextInt(2) * 0.2D + 0.1D;
-            world.addParticle(ParticleTypes.NOTE, x, y, z, color, 1.0D, 1.0D);
+            world.addParticleClient(ParticleTypes.NOTE, x, y, z, color, 1.0D, 1.0D);
         }
     }
 }
