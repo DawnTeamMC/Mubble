@@ -6,8 +6,9 @@ import net.minecraft.client.data.TextureKey;
 
 import java.util.Optional;
 
-public class PromenadeModels {
+public class MubbleModels {
     public static final Model EGG_BLOCK = block("egg_block", TextureKey.SIDE, TextureKey.END);
+    public static final Model CUBE_COLUMN_ALTERNATING = block("cube_column_alternating", MubbleTextureKeys.SIDE_1, MubbleTextureKeys.SIDE_2, TextureKey.END);
 
     private static Model make(TextureKey... requiredTextureKeys) {
         return new Model(Optional.empty(), Optional.empty(), requiredTextureKeys);
@@ -20,7 +21,6 @@ public class PromenadeModels {
     private static Model item(String parent, TextureKey... requiredTextureKeys) {
         return new Model(Optional.of(Mubble.id("item/" + parent)), Optional.empty(), requiredTextureKeys);
     }
-
 
     private static Model block(String parent, String variant, TextureKey... requiredTextureKeys) {
         return new Model(Optional.of(Mubble.id("block/" + parent)), Optional.of(variant), requiredTextureKeys);
