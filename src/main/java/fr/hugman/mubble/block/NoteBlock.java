@@ -34,7 +34,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
 
 	@Override
 	public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
-		super.onLandedUpon(world, state, pos, entity, fallDistance);
+		// No fall damage
 	}
 
     @Override
@@ -53,15 +53,16 @@ public class NoteBlock extends DecoratedBumpableBlock {
         super.onEntityLand(view, entity);
     }
 
-    @Override
-    public void onBump(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
-        // Only play the sound if the block is not going to bounce up
-        if (blockEntity.getBumpDirection() != Direction.DOWN) {
-            this.playGenericBumpSound(blockEntity);
-        }
-    }
+	@Override
+	public void playGenericBumpSound(BumpableBlockEntity entity) {
+		// Only play the sound if the block is not going to bounce up
+		if (entity.getBumpDirection() == Direction.DOWN) {
+			return;
+		}
+		super.playGenericBumpSound(entity);
+	}
 
-    @Override
+	@Override
     public void onBumpMiddle(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
         if (blockEntity.getWorld() != null && blockEntity.getBumpDirection() == Direction.DOWN) {
             this.launchEntitiesOnTop(blockEntity.getWorld(), blockEntity.getPos());

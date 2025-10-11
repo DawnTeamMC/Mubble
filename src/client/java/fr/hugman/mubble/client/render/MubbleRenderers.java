@@ -9,10 +9,10 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 
 public class MubbleRenderers {
     public static void registerEntities() {
-        EntityRendererRegistry.register(MubbleEntityTypes.GOOMBA, GoombaRenderer::new);
+		EntityRendererRegistry.register(MubbleEntityTypes.GOOMBA, GoombaRenderer::new);
     }
 
     public static void registerBlockEntities() {
-        BlockEntityRendererFactories.register(MubbleBlockEntityTypes.BUMPABLE_BLOCK, BumpableBlockEntityRenderer::new);
+        BlockEntityRendererFactories.register(MubbleBlockEntityTypes.BUMPABLE_BLOCK, context -> new BumpableBlockEntityRenderer());
     }
 }

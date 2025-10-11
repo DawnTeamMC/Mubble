@@ -7,7 +7,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.block.MovingBlockRenderState;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.client.render.block.entity.BlockEntityRendererFactory;
 import net.minecraft.client.render.command.ModelCommandRenderer;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.state.CameraRenderState;
@@ -27,9 +26,6 @@ import org.jetbrains.annotations.Nullable;
  */
 @Environment(EnvType.CLIENT)
 public class BumpableBlockEntityRenderer implements BlockEntityRenderer<BumpableBlockEntity, BumpableBlockEntityRenderState> {
-    public BumpableBlockEntityRenderer(BlockEntityRendererFactory.Context context) {
-    }
-
 	@Override
 	public BumpableBlockEntityRenderState createRenderState() {
 		return new BumpableBlockEntityRenderState();
@@ -38,15 +34,15 @@ public class BumpableBlockEntityRenderer implements BlockEntityRenderer<Bumpable
 	@Override
 	public void updateRenderState(BumpableBlockEntity blockEntity, BumpableBlockEntityRenderState state, float tickProgress, Vec3d cameraPos, @Nullable ModelCommandRenderer.CrumblingOverlayCommand crumblingOverlay) {
 		BlockEntityRenderer.super.updateRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
-		state.bumpProgress = blockEntity.getBumpProgress(tickProgress);
+		state.bumping = blockEntity.isBumping();
+		state.bumpTicks = blockEntity.getBumpTicks() + tickProgress;
 		if(blockEntity.getBumpDirection() != null) {
 			state.bumpVector = blockEntity.getBumpDirection().getVector();
 		}
 
 		state.movingState = null;
-
 		var world = blockEntity.getWorld();
-		if(world != null && state.isBumping()) {
+		if(world != null) {
 			var pos = blockEntity.getPos();
 			state.movingState = renderModel(pos, blockEntity.getCachedState(), world.getBiome(pos), world);
 		}
@@ -54,20 +50,28 @@ public class BumpableBlockEntityRenderer implements BlockEntityRenderer<Bumpable
 
 	@Override
 	public void render(BumpableBlockEntityRenderState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
-		if (state.movingState != null) {
-			matrices.push();
-			this.applyTransformations(matrices, state.bumpProgress, state.bumpVector);
-			queue.submitMovingBlock(matrices, state.movingState);
-			matrices.pop();
+		matrices.push();
+		if(state.bumping) {
+			applyTransformations(matrices, state.bumpTicks, BumpableBlockEntity.BUMP_LENGTH, 0.25f, state.bumpVector);
 		}
+		queue.submitMovingBlock(matrices, state.movingState);
+		matrices.pop();
 	}
 
-    private void applyTransformations(MatrixStack matrices, float bumpProgress, @Nullable Vec3i vector) {
-		var amplitude = 1;
-        double i = -amplitude * Math.pow(bumpProgress, 2) + amplitude * bumpProgress;
+    private void applyTransformations(
+			MatrixStack matrices,
+			float ticks,
+			float totalTicks,
+			float amplitude,
+			@Nullable Vec3i vector
+	) {
+		double i = amplitude * Math.sin((ticks / totalTicks) * Math.PI);
         float scale = (float) i + 1;
 
 		if(vector == null) {
+			matrices.translate(
+				0.5 * i, 0.5 * i, 0.5 * i
+			);
 			matrices.scale(scale, scale, scale);
 			return;
 		}

@@ -50,8 +50,8 @@ public class DecoratedBumpableBlock extends BumpableBlock {
     }
 
     @Override
-    public void onBump(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
-        super.onBump(world, pos, state, blockEntity);
+    public void onBumpStart(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+        super.onBumpStart(world, pos, state, blockEntity);
         this.playGenericBumpSound(blockEntity);
     }
 

@@ -6,8 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
 
-//TODO: move this to the Dawn API
-
 /**
  * Represents blocks that can be hit physically. The hit method will be triggered by:
  * <ul>
