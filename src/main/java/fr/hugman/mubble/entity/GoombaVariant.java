@@ -2,93 +2,47 @@ package fr.hugman.mubble.entity;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.hugman.mubble.item.MubbleItems;
+import fr.hugman.mubble.item.spawn_egg.VariantSpawnEggInfo;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryFixedCodec;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
-import net.minecraft.util.Identifier;
+import net.minecraft.util.AssetInfo;
 
 import java.util.Map;
 import java.util.Optional;
 
-public class GoombaVariant {
-    public static final Codec<GoombaVariant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            TextCodecs.CODEC.optionalFieldOf("name").forGetter(v -> v.name),
-            Identifier.CODEC.fieldOf("texture").forGetter(v -> v.texture),
-            Identifier.CODEC.fieldOf("surprised_texture").forGetter(v -> v.surprisedTexture),
-            Codec.unboundedMap(EntityAttribute.CODEC, Codec.DOUBLE).optionalFieldOf("base_attribute_values", Map.of()).forGetter(v -> v.baseAttributes),
-            TextCodecs.CODEC.optionalFieldOf("spawn_egg_name").forGetter(v -> v.spawnEggName)
-    ).apply(instance, GoombaVariant::new));
-    public static final Codec<RegistryEntry<GoombaVariant>> ENTRY_CODEC = RegistryElementCodec.of(MubbleRegistryKeys.GOOMBA_VARIANT, CODEC);
+public record GoombaVariant(
+		Optional<Text> name,
+		GoombaAssetInfo assetInfo,
+		Map<RegistryEntry<EntityAttribute>, Double> baseAttributes,
+		Optional<VariantSpawnEggInfo> spawnEggInfo
+) {
+	public static final Codec<GoombaVariant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+			TextCodecs.CODEC.optionalFieldOf("name").forGetter(GoombaVariant::name),
+			GoombaAssetInfo.CODEC.fieldOf("assets").forGetter(GoombaVariant::assetInfo),
+			Codec.unboundedMap(EntityAttribute.CODEC, Codec.DOUBLE).optionalFieldOf("base_attribute_values", Map.of()).forGetter(GoombaVariant::baseAttributes),
+			VariantSpawnEggInfo.CODEC.optionalFieldOf("spawn_egg").forGetter(GoombaVariant::spawnEggInfo)
+	).apply(instance, GoombaVariant::new));
 
-    public static final PacketCodec<RegistryByteBuf, GoombaVariant> PACKET_CODEC = PacketCodec.tuple(
-            TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, (v -> v.name),
-            Identifier.PACKET_CODEC, (v -> v.texture),
-            Identifier.PACKET_CODEC, (v -> v.surprisedTexture),
-            PacketCodecs.map(Object2ObjectOpenHashMap::new, EntityAttribute.PACKET_CODEC, PacketCodecs.DOUBLE), (v -> v.baseAttributes),
-            TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, (v -> v.spawnEggName),
-            GoombaVariant::new
-    );
-    public static final PacketCodec<RegistryByteBuf, RegistryEntry<GoombaVariant>> ENTRY_PACKET_CODEC = PacketCodecs.registryEntry(MubbleRegistryKeys.GOOMBA_VARIANT, PACKET_CODEC);
+	public static final Codec<RegistryEntry<GoombaVariant>> ENTRY_CODEC = RegistryFixedCodec.of(MubbleRegistryKeys.GOOMBA_VARIANT);
+	public static final PacketCodec<RegistryByteBuf, RegistryEntry<GoombaVariant>> ENTRY_PACKET_CODEC = PacketCodecs.registryEntry(MubbleRegistryKeys.GOOMBA_VARIANT);
 
-    private final Optional<Text> name;
-    private final Identifier texture;
-    private final Identifier surprisedTexture;
-    private final Map<RegistryEntry<EntityAttribute>, Double> baseAttributes;
-    private final Optional<Text> spawnEggName;
+	public void applyAttributes(LivingEntity livingEntity) {
+		baseAttributes.forEach((attribute, value) -> livingEntity.getAttributeInstance(attribute).setBaseValue(value));
+	}
 
-    private final Identifier texturePath;
-    private final Identifier surprisedTexturePath;
-
-    public GoombaVariant(Optional<Text> name, Identifier texture, Identifier surprisedTexture, Map<RegistryEntry<EntityAttribute>, Double> baseAttributes, Optional<Text> spawnEggName) {
-        this.name = name;
-        this.texture = texture;
-        this.surprisedTexture = surprisedTexture;
-        this.baseAttributes = baseAttributes;
-        this.spawnEggName = spawnEggName;
-
-        this.texturePath = getTexturePath(texture);
-        this.surprisedTexturePath = getTexturePath(surprisedTexture);
-    }
-
-    public Optional<Text> name() {
-        return name;
-    }
-
-    public Identifier texture() {
-        return texturePath;
-    }
-
-    public Identifier surprisedTexture() {
-        return surprisedTexturePath;
-    }
-
-    public void applyAttributes(LivingEntity livingEntity) {
-        baseAttributes.forEach((attribute, value) -> livingEntity.getAttributeInstance(attribute).setBaseValue(value));
-    }
-
-    public Optional<Text> spawnEggName() {
-        return spawnEggName;
-    }
-
-    public ItemStack getSpawnEggStack() {
-        ItemStack stack = new ItemStack(MubbleItems.GOOMBA_SPAWN_EGG);
-        spawnEggName.ifPresent(name -> stack.set(DataComponentTypes.ITEM_NAME, name));
-        return stack;
-    }
-
-    //TODO: move to utility class
-    private static Identifier getTexturePath(Identifier id) {
-        return id.withPath(oldPath -> "textures/" + oldPath + ".png");
-    }
+	public record GoombaAssetInfo(AssetInfo.TextureAssetInfo texture, AssetInfo.TextureAssetInfo surprised) {
+		public static final Codec<GoombaAssetInfo> CODEC = RecordCodecBuilder.create(
+				instance -> instance.group(
+						AssetInfo.TextureAssetInfo.CODEC.fieldOf("texture").forGetter(GoombaAssetInfo::texture),
+						AssetInfo.TextureAssetInfo.CODEC.fieldOf("surprised").forGetter(GoombaAssetInfo::surprised)
+				).apply(instance, GoombaAssetInfo::new));
+	}
 }

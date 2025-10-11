@@ -3,6 +3,7 @@ package fr.hugman.mubble;
 import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.block.MubbleBlockEntityTypes;
 import fr.hugman.mubble.block.MubbleBlocks;
+import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.item.MubbleItemGroups;
 import fr.hugman.mubble.item.MubbleItems;
@@ -23,6 +24,7 @@ public class Mubble implements ModInitializer {
     public void onInitialize() {
         Reflection.initialize(MubbleBlocks.class);
         Reflection.initialize(MubbleBlockEntityTypes.class);
+        Reflection.initialize(MubbleDataComponentTypes.class);
         Reflection.initialize(MubbleItems.class);
         Reflection.initialize(MubbleSounds.class);
         Reflection.initialize(MubbleScreenHandlerTypes.class);

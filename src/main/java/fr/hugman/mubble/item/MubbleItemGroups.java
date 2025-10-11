@@ -1,21 +1,17 @@
 package fr.hugman.mubble.item;
 
 import fr.hugman.mubble.block.MubbleBlocks;
-import fr.hugman.mubble.entity.GoombaEntity;
+import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.entity.GoombaVariant;
 import fr.hugman.mubble.entity.GoombaVariants;
-import fr.hugman.mubble.entity.MubbleEntityTypeKeys;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.NbtComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.*;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
@@ -68,10 +64,8 @@ public class MubbleItemGroups {
                     .getOptional(MubbleRegistryKeys.GOOMBA_VARIANT)
                     .ifPresent(registryWrapper -> addGoombaVariantsSpawnEggs(
                             entries,
-                            context.lookup(),
-                            registryWrapper,
-                            registryEntry -> true,
-                            ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS
+							registryWrapper,
+                            registryEntry -> true
                     ));
         });
 
@@ -120,35 +114,24 @@ public class MubbleItemGroups {
 
     private static void addGoombaVariantsSpawnEggs(
             ItemGroup.Entries entries,
-            RegistryWrapper.WrapperLookup registries,
-            RegistryWrapper.Impl<GoombaVariant> registryWrapper,
-            Predicate<RegistryEntry<GoombaVariant>> filter,
-            ItemGroup.StackVisibility stackVisibility
+			RegistryWrapper.Impl<GoombaVariant> registryWrapper,
+            Predicate<RegistryEntry<GoombaVariant>> filter
     ) {
-		//TODO reimplement
-		/*
-        RegistryOps<NbtElement> registryOps = registries.getOps(NbtOps.INSTANCE);
-        registryWrapper.streamEntries()
+		registryWrapper.streamEntries()
                 .filter(filter)
-                .forEach(
-                        entry -> {
-                            if (GoombaVariants.NORMAL.getValue().equals(entry.registryKey().getValue())) {
+                .forEach(entry -> {
+                            if (GoombaVariants.NORMAL.getValue().equals(entry.registryKey().getValue()) || entry.value().spawnEggInfo().isEmpty()) {
                                 return;
                             }
                             var stack = new ItemStack(MubbleItems.GOOMBA_SPAWN_EGG);
-                            entry.value().spawnEggName().ifPresent(name -> stack.set(DataComponentTypes.ITEM_NAME, name));
+							var spawnEgg = entry.value().spawnEggInfo().get();
+							stack.set(DataComponentTypes.ITEM_NAME, spawnEgg.name());
                             if (stack.isEmpty()) {
                                 return;
                             }
-                            stack.set(DataComponentTypes.ENTITY_DATA, NbtComponent.DEFAULT
-                                    .apply(nbt -> nbt.putString("id", MubbleEntityTypeKeys.GOOMBA.getValue().toString()))
-                                    .with(registryOps, GoombaEntity.VARIANT_MAP_CODEC, entry)
-                                    .getOrThrow());
-                            entries.add(stack, stackVisibility);
+							stack.set(MubbleDataComponentTypes.GOOMBA_VARIANT, entry);
+                            entries.add(stack, spawnEgg.onlyInSearch() ? ItemGroup.StackVisibility.SEARCH_TAB_ONLY : ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS);
                         }
                 );
-
-		 */
     }
-
 }

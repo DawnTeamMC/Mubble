@@ -9,16 +9,23 @@ import fr.hugman.mubble.item.MubbleItems;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.data.*;
+import net.minecraft.client.render.item.model.ItemModel;
 import net.minecraft.client.render.model.json.WeightedVariant;
+import net.minecraft.item.Item;
+import net.minecraft.registry.RegistryWrapper;
+
+import java.util.concurrent.CompletableFuture;
 
 import static net.minecraft.client.data.BlockStateModelGenerator.createBooleanModelMap;
 import static net.minecraft.client.data.BlockStateModelGenerator.createWeightedVariant;
 
 public class MubbleModelProvider extends FabricModelProvider {
-	public MubbleModelProvider(FabricDataOutput output) {
+	private final CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture;
+
+	public MubbleModelProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
 		super(output);
+		this.registriesFuture = registriesFuture;
 	}
 
 	@Override
@@ -69,5 +76,30 @@ public class MubbleModelProvider extends FabricModelProvider {
 		WeightedVariant normal = createWeightedVariant(MubbleTexturedModels.beepBlock(color).upload(block, gen.modelCollector));
 		WeightedVariant frame = createWeightedVariant(Mubble.id("block/beep_block/frame"));
 		gen.blockStateCollector.accept(VariantsBlockModelDefinitionCreator.of(block).with(createBooleanModelMap(BeepBlock.FRAME, frame, normal)));
+	}
+
+	private void registerGoombaVariantSpawnEggs(ItemModelGenerator gen, Item item) {
+		//TODO figure this out
+		ItemModel.Unbaked unbaked = ItemModels.basic(ModelIds.getItemModelId(item));
+
+		var miniId = Mubble.id("item/mini_goomba_spawn_egg");
+		ItemModel.Unbaked mini = ItemModels.basic(Models.GENERATED.upload(miniId,
+				TextureMap.layer0(miniId),
+				gen.modelCollector
+		));
+
+		/*
+		this.registriesFuture.thenAccept(registries -> {
+			var variant = registries.getOrThrow(MubbleRegistryKeys.GOOMBA_VARIANT).getOrThrow(GoombaVariants.MINI);
+			SelectItemModel.SwitchCase<RegistryEntry<GoombaVariant>> switchCase = ItemModels.switchCase(variant, mini);
+			ItemModel.Unbaked model = ItemModels.select(
+					new ComponentSelectProperty<>(MubbleDataComponentTypes.GOOMBA_VARIANT),
+					unbaked,
+					switchCase
+			);
+			gen.output.accept(item, model);
+		});:
+		 */
+		gen.output.accept(item, unbaked);
 	}
 }
