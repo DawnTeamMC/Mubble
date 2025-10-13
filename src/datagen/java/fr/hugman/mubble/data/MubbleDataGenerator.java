@@ -15,6 +15,7 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
 
 		// Resource Pack
 		pack.addProvider(MubbleModelProvider::new);
+		pack.addProvider(MubbleAtlasProvider::new);
 
 		// Data Pack
 
