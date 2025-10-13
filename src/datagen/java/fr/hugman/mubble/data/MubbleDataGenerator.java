@@ -2,6 +2,7 @@ package fr.hugman.mubble.data;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.data.provider.MubbleBlockLootTableProvider;
+import fr.hugman.mubble.data.provider.MubbleBlockTagProvider;
 import fr.hugman.mubble.data.provider.MubbleGoombaVariantProvider;
 import fr.hugman.mubble.data.provider.MubbleModelProvider;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
@@ -25,6 +26,9 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
 
 		// - Variants
 		pack.addProvider(MubbleGoombaVariantProvider::new);
+
+		// - Tags
+		pack.addProvider(MubbleBlockTagProvider::new);
 	}
 
 	@Override
