@@ -1,5 +1,6 @@
 package fr.hugman.mubble.entity;
 
+import fr.hugman.mubble.tag.MubbleEntityTypeTags;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.data.DataTracker;
@@ -80,7 +81,7 @@ abstract public class StompableHostileEntity extends HostileEntity {
      */
     public Predicate<? super Entity> getStompableBy() {
         return EntityPredicates.EXCEPT_SPECTATOR.and(entity ->
-                entity.getType().isIn(MubbleEntityTypeTags.CAN_JUMP_BUMP) &&
+                entity.getType().isIn(MubbleEntityTypeTags.CAN_STOMP) &&
                         !entity.isOnGround() &&
                         entity.getVelocity().getY() < 0.3D &&
                         entity.isAlive());

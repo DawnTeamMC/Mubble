@@ -1,9 +1,10 @@
-package fr.hugman.mubble.item;
+package fr.hugman.mubble.item_group;
 
 import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.entity.GoombaVariant;
 import fr.hugman.mubble.entity.GoombaVariants;
+import fr.hugman.mubble.item.MubbleItems;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;

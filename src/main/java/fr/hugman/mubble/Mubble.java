@@ -5,7 +5,7 @@ import fr.hugman.mubble.block.MubbleBlockEntityTypes;
 import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
-import fr.hugman.mubble.item.MubbleItemGroups;
+import fr.hugman.mubble.item_group.MubbleItemGroups;
 import fr.hugman.mubble.item.MubbleItems;
 import fr.hugman.mubble.registry.MubbleRegistries;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;

@@ -1,4 +1,4 @@
-package fr.hugman.mubble.item;
+package fr.hugman.mubble.item_group;
 
 import fr.hugman.mubble.Mubble;
 import net.minecraft.item.ItemGroup;

@@ -1,10 +1,7 @@
 package fr.hugman.mubble.data;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.data.provider.MubbleBlockLootTableProvider;
-import fr.hugman.mubble.data.provider.MubbleBlockTagProvider;
-import fr.hugman.mubble.data.provider.MubbleGoombaVariantProvider;
-import fr.hugman.mubble.data.provider.MubbleModelProvider;
+import fr.hugman.mubble.data.provider.*;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -29,6 +26,7 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
 
 		// - Tags
 		pack.addProvider(MubbleBlockTagProvider::new);
+		pack.addProvider(MubbleEntityTypeTagProvider::new);
 	}
 
 	@Override
