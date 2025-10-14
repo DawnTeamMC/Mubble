@@ -118,6 +118,6 @@ public record PowerUp(
     }
 
     public static Optional<Identifier> getSpriteId(RegistryEntry<PowerUp> entry) {
-        return entry.value().spriteId().or(() -> entry.getKey().flatMap(key -> Optional.of(key.getValue())));
+        return entry.value().spriteId().or(() -> entry.getKey().flatMap(key -> Optional.of(key.getValue().withPrefixedPath("power_up/"))));
     }
 }

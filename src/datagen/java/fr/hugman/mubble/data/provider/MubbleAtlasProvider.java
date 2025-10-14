@@ -42,7 +42,7 @@ public class MubbleAtlasProvider extends FabricCodecDataProvider<List<AtlasSourc
 						FULL_MAP
                 )
         ));
-        provider.accept(Mubble.id("power_ups"), powerUpsAtlasSources());
+        provider.accept(Identifier.ofVanilla("gui"), powerUpsAtlasSources());
     }
 
 	private static Map<String, Identifier> makeFullPalette() {
@@ -73,11 +73,10 @@ public class MubbleAtlasProvider extends FabricCodecDataProvider<List<AtlasSourc
 
     private static List<AtlasSource> powerUpsAtlasSources() {
         var list = new ArrayList<AtlasSource>();
-        list.add(new DirectoryAtlasSource("power_up", ""));
         PowerUpItems.forEach(entry -> list.add(new SingleAtlasSource(
             Identifier.of(entry.item().getValue().getNamespace(), "item/" + entry.item().getValue().getPath()),
-            Optional.of(Identifier.of(entry.powerUp().getValue().getNamespace(), entry.powerUp().getValue().getPath()))
-        )));
+            Optional.of(entry.powerUp().getValue().withPrefixedPath("power_up/")))
+        ));
         return list;
     }
 
