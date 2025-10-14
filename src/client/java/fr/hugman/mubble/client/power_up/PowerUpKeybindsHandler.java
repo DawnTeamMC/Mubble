@@ -18,6 +18,7 @@ public class PowerUpKeybindsHandler {
                     while(MubbleKeyBindings.TRIGGER_POWER_UP.wasPressed()) {
                         //TODO: check for cooldown
                         ClientPlayNetworking.send(PowerUpTriggerPayload.INSTANCE);
+                        powerUp.trigger(client.player);
                     }
                 }
             }

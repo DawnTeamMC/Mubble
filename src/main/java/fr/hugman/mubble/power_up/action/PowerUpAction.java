@@ -3,6 +3,7 @@ package fr.hugman.mubble.power_up.action;
 import com.mojang.serialization.Codec;
 import fr.hugman.mubble.registry.MubbleRegistries;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
@@ -23,5 +24,5 @@ public interface PowerUpAction {
 
     PowerUpActionType<?> getType();
 
-    void tick(MinecraftServer server, ServerPlayerEntity player);
+    void trigger(PlayerEntity player);
 }

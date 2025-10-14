@@ -7,7 +7,6 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.thrown.ThrownEntity;
-import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
@@ -50,6 +49,9 @@ public abstract class BallEntity extends ThrownEntity {
         }
     }
 
+    /**
+     * Triggers after the ball has hit and can no longer rebound.
+     */
     protected void finalHit() {
         if (!this.getEntityWorld().isClient()) {
             this.getEntityWorld().sendEntityStatus(this, EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES);

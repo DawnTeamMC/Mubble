@@ -70,8 +70,8 @@ public record PowerUp(
     public static final PacketCodec<RegistryByteBuf, Optional<RegistryEntry<PowerUp>>> OPTIONAL_ENTRY_PACKET_CODEC = PacketCodecs.optional(ENTRY_PACKET_CODEC);
     public static final PacketCodec<RegistryByteBuf, LazyRegistryEntryReference<PowerUp>> LAZY_ENTRY_PACKET_CODEC = LazyRegistryEntryReference.createPacketCodec(MubbleRegistryKeys.POWER_UP, ENTRY_PACKET_CODEC);
 
-    public void trigger(MinecraftServer server, ServerPlayerEntity player) {
-        this.action.ifPresent(entry -> entry.value().tick(server, player));
+    public void trigger(PlayerEntity player) {
+        this.action.ifPresent(entry -> entry.value().trigger(player));
     }
 
     public void applyModifiers(BiConsumer<RegistryEntry<EntityAttribute>, EntityAttributeModifier> attributeConsumer) {
@@ -86,20 +86,22 @@ public record PowerUp(
     }
 
     public static void onChange(LivingEntity entity, Optional<RegistryEntry<PowerUp>> previous, Optional<RegistryEntry<PowerUp>> next) {
-        var container = entity.getAttributes();
-        previous.ifPresent(e -> e.value().applyModifiers((attribute, modifier) -> {
-            EntityAttributeInstance entityAttributeInstance = container.getCustomInstance(attribute);
-            if (entityAttributeInstance != null) {
-                entityAttributeInstance.removeModifier(modifier);
-            }
-        }));
-        next.ifPresent(e -> e.value().applyModifiers((attribute, modifier) -> {
-            EntityAttributeInstance entityAttributeInstance = container.getCustomInstance(attribute);
-            if (entityAttributeInstance != null) {
-                entityAttributeInstance.removeModifier(modifier);
-                entityAttributeInstance.addPersistentModifier(modifier);
-            }
-        }));
+        if(!entity.getEntityWorld().isClient()) {
+            var container = entity.getAttributes();
+            previous.ifPresent(e -> e.value().applyModifiers((attribute, modifier) -> {
+                EntityAttributeInstance entityAttributeInstance = container.getCustomInstance(attribute);
+                if (entityAttributeInstance != null) {
+                    entityAttributeInstance.removeModifier(modifier);
+                }
+            }));
+            next.ifPresent(e -> e.value().applyModifiers((attribute, modifier) -> {
+                EntityAttributeInstance entityAttributeInstance = container.getCustomInstance(attribute);
+                if (entityAttributeInstance != null) {
+                    entityAttributeInstance.removeModifier(modifier);
+                    entityAttributeInstance.addPersistentModifier(modifier);
+                }
+            }));
+        }
 
         if (previous.isPresent() && next.isEmpty()) {
             entity.playSound(previous.get().value().looseSound.value(), 1.0F, 1.0F);

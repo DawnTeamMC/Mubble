@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -13,10 +14,9 @@ import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
@@ -46,20 +46,24 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
-    public void tick(MinecraftServer server, ServerPlayerEntity player) {
+    public void trigger(PlayerEntity player) {
         var world = player.getEntityWorld();
-        world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-        var entity = this.projectile.create(world, SpawnReason.TRIGGERED);
-        if(null == entity) {
-            return;
+        if(!world.isClient()) {
+            world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            var entity = this.projectile.create(world, SpawnReason.TRIGGERED);
+            if(null == entity) {
+                return;
+            }
+            if(entity instanceof ProjectileEntity projectileEntity) {
+                projectileEntity.setOwner(player);
+            }
+            entity.setPosition(player.getX(), player.getEyeY() - 0.1F, player.getZ());
+            setVelocity(entity, player, player.getPitch(), player.getYaw(), 0.0F, this.speed, 1.0F);
+            world.spawnEntity(entity);
         }
-        if(entity instanceof ProjectileEntity projectileEntity) {
-            projectileEntity.setOwner(player);
-        }
-        entity.setPosition(player.getX(), player.getEyeY() - 0.1F, player.getZ());
-        setVelocity(entity, player, player.getPitch(), player.getYaw(), 0.0F, this.speed, 1.0F);
-        world.spawnEntity(entity);
+        player.swingHand(Hand.MAIN_HAND);
     }
+
 
     public void setVelocity(Entity projectile, Entity shooter, float pitch, float yaw, float roll, float speed, float divergence) {
         float f = -MathHelper.sin(yaw * (float) (Math.PI / 180.0)) * MathHelper.cos(pitch * (float) (Math.PI / 180.0));

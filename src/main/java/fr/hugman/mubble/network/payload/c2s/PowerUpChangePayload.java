@@ -9,8 +9,10 @@ import net.minecraft.registry.entry.RegistryEntry;
 
 import java.util.Optional;
 
-public record PowerUpChangePayload(Optional<RegistryEntry<PowerUp>> previous,
-                                   Optional<RegistryEntry<PowerUp>> next) implements CustomPayload {
+public record PowerUpChangePayload(
+        Optional<RegistryEntry<PowerUp>> previous,
+        Optional<RegistryEntry<PowerUp>> next
+) implements CustomPayload {
     public static final PacketCodec<RegistryByteBuf, PowerUpChangePayload> PACKET_CODEC = PacketCodec.tuple(
             PowerUp.OPTIONAL_ENTRY_PACKET_CODEC, (powerUpChangePayload -> powerUpChangePayload.previous),
             PowerUp.OPTIONAL_ENTRY_PACKET_CODEC, (powerUpChangePayload -> powerUpChangePayload.next),
