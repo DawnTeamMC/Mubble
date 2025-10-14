@@ -42,6 +42,16 @@ public class MubbleSoundsProvider extends FabricSoundsProvider {
 		soundExporter.add(MubbleSounds.GOOMBA_FIND_TARGET, variantSoundBuilder(MubbleSounds.GOOMBA_FIND_TARGET, 1).category(SoundCategory.HOSTILE));
 		soundExporter.add(MubbleSounds.GOOMBA_DEATH, variantSoundBuilder(MubbleSounds.GOOMBA_DEATH, 1).category(SoundCategory.HOSTILE));
 		soundExporter.add(MubbleSounds.GOOMBA_STOMP, variantSoundBuilder(MubbleSounds.GOOMBA_STOMP, 1).category(SoundCategory.HOSTILE));
+		soundExporter.add(MubbleSounds.FIREBALL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE));
+		soundExporter.add(MubbleSounds.FIREBALL_HIT_ENTITY, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_ENTITY, 1).category(SoundCategory.HOSTILE).subtitle(null));
+		soundExporter.add(MubbleSounds.FIREBALL_HIT_MELTABLE, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_MELTABLE, 1).category(SoundCategory.HOSTILE).subtitle(null));
+		soundExporter.add(MubbleSounds.FIREBALL_THROW, variantSoundBuilder(MubbleSounds.FIREBALL_THROW, 1).category(SoundCategory.HOSTILE).subtitle(null));
+
+		// Power-Up
+		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN,1).category(SoundCategory.PLAYERS));
+		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN_MINI, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN_MINI,1).category(SoundCategory.PLAYERS).subtitle("subtitles.mubble.power_up.obtain"));
+		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN_SUPER_STAR, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN_SUPER_STAR,1).category(SoundCategory.PLAYERS).subtitle("subtitles.mubble.power_up.obtain"));
+		soundExporter.add(MubbleSounds.POWER_UP_LOOSE, variantSoundBuilder(MubbleSounds.POWER_UP_LOOSE,1).category(SoundCategory.PLAYERS));
 	}
 
 	private SoundTypeBuilder variantSoundBuilder(SoundEvent soundEvent, int count) {

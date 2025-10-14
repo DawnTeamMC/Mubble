@@ -1,6 +1,6 @@
 package fr.hugman.mubble.item;
 
-import fr.hugman.mubble.component.MubbleComponentTypes;
+import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.component.PowerUpComponent;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.power_up.MubblePowerUps;
@@ -13,7 +13,7 @@ import net.minecraft.item.SpawnEggItem;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryPair;
+import net.minecraft.registry.entry.LazyRegistryEntryReference;
 import net.minecraft.util.Rarity;
 
 import java.util.Optional;
@@ -50,7 +50,7 @@ public class MubbleItems {
 
     private static PowerUpItem powerUp(RegistryKey<Item> key, RegistryKey<PowerUp> powerUp) {
         return of(key, PowerUpItem::new, new Item.Settings()
-                .component(MubbleComponentTypes.POWER_UP, new PowerUpComponent(new RegistryPair<>(powerUp)))
+                .component(MubbleDataComponentTypes.POWER_UP, new PowerUpComponent(new LazyRegistryEntryReference<>(powerUp)))
                 .component(DataComponentTypes.USE_COOLDOWN, new UseCooldownComponent(1.0f, Optional.of(MubbleCooldownGroups.POWER_UPS))));
     }
 }

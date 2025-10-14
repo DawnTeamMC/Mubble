@@ -1,16 +1,17 @@
 package fr.hugman.mubble.component;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.attribute.EntityAttributeEntry;
 import fr.hugman.mubble.power_up.PowerUp;
+import net.minecraft.component.ComponentsAccess;
 import net.minecraft.component.type.AttributeModifiersComponent;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.Item;
+import net.minecraft.item.tooltip.TooltipAppender;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.RegistryPair;
+import net.minecraft.registry.entry.LazyRegistryEntryReference;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -18,35 +19,21 @@ import net.minecraft.util.Formatting;
 import java.util.List;
 import java.util.function.Consumer;
 
-public record PowerUpComponent(RegistryPair<PowerUp> powerUp, boolean showInTooltip) {
-    private static final Codec<PowerUpComponent> BASE_CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            PowerUp.PAIR_CODEC.fieldOf("power_up").forGetter(PowerUpComponent::powerUp),
-            Codec.BOOL.optionalFieldOf("show_in_tooltip", true).forGetter(PowerUpComponent::showInTooltip)
-    ).apply(instance, PowerUpComponent::new));
-    public static final Codec<PowerUpComponent> CODEC = Codec.withAlternative(
-            BASE_CODEC, PowerUp.PAIR_CODEC, attributeModifiers -> new PowerUpComponent(attributeModifiers, true)
-    );
-    public static final PacketCodec<RegistryByteBuf, PowerUpComponent> PACKET_CODEC = PacketCodec.tuple(
-            PowerUp.PAIR_PACKET_CODEC, PowerUpComponent::powerUp,
-            PacketCodecs.BOOL, PowerUpComponent::showInTooltip,
-            PowerUpComponent::new
-    );
+public record PowerUpComponent(LazyRegistryEntryReference<PowerUp> powerUp) implements TooltipAppender {
+	public static final Codec<PowerUpComponent> CODEC = PowerUp.LAZY_ENTRY_CODEC.xmap(PowerUpComponent::new, PowerUpComponent::powerUp);
+    public static final PacketCodec<RegistryByteBuf, PowerUpComponent> PACKET_CODEC = PowerUp.LAZY_ENTRY_PACKET_CODEC.xmap(PowerUpComponent::new, PowerUpComponent::powerUp);
 
-    public PowerUpComponent(RegistryPair<PowerUp> powerUp) {
-        this(powerUp, true);
-    }
+	@Override
+	public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
+		var registryLookup = context.getRegistryLookup();
+		if (registryLookup != null) {
+			this.powerUp.resolveEntry(registryLookup)
+					.flatMap(power -> power.value().attributesModifiers())
+					.ifPresent(entityAttributeEntries -> buildTooltip(entityAttributeEntries, textConsumer));
+		}
+	}
 
-    public void buildTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, float durationMultiplier, float tickRate) {
-        var registryLookup = context.getRegistryLookup();
-        if (registryLookup != null) {
-            this.powerUp.getEntry(registryLookup).flatMap(power -> power.value().attributesModifiers()).ifPresent(entityAttributeEntries -> buildTooltip(entityAttributeEntries, textConsumer, durationMultiplier, tickRate));
-        } else {
-            this.powerUp.entry().flatMap(power -> power.value().attributesModifiers()).ifPresent(entityAttributeEntries -> buildTooltip(entityAttributeEntries, textConsumer, durationMultiplier, tickRate));
-
-        }
-    }
-
-    public static void buildTooltip(List<EntityAttributeEntry> attributes, Consumer<Text> textConsumer, float durationMultiplier, float tickRate) {
+    public static void buildTooltip(List<EntityAttributeEntry> attributes, Consumer<Text> textConsumer) {
         if (!attributes.isEmpty()) {
             textConsumer.accept(ScreenTexts.EMPTY);
             textConsumer.accept(Text.translatable("potion.whenDrank").formatted(Formatting.DARK_PURPLE));

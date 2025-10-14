@@ -23,7 +23,7 @@ public class FireballEntityModel extends EntityModel<FireballRenderState> {
                 ModelPartBuilder.create()
                         .uv(0, 0)
                         .cuboid(-SIZE / 2, -SIZE / 2, -SIZE / 2, SIZE, SIZE, SIZE),
-                ModelTransform.pivot(0F, 0F, 0F)
+                ModelTransform.origin(0F, 0F, 0F)
         );
         return TexturedModelData.of(modelData, 16, 16);
     }

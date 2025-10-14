@@ -1,6 +1,6 @@
 package fr.hugman.mubble.item;
 
-import fr.hugman.mubble.component.MubbleComponentTypes;
+import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.component.PowerUpComponent;
 import fr.hugman.mubble.power_up.PowerUp;
 import net.minecraft.component.DataComponentTypes;
@@ -23,25 +23,27 @@ public class PowerUpItem extends Item {
         super(settings);
     }
 
+	/*
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
-        PowerUpComponent powerUpComponent = stack.get(MubbleComponentTypes.POWER_UP);
+        PowerUpComponent powerUpComponent = stack.get(MubbleDataComponentTypes.POWER_UP);
         if (powerUpComponent != null) {
-            powerUpComponent.buildTooltip(context, tooltip::add, 1.0F, context.getUpdateTickRate());
+            powerUpComponent.buildTooltip(context, tooltip::add, context.getUpdateTickRate());
         }
     }
+	 */
 
-    @Override
+	@Override
     public ActionResult use(World world, PlayerEntity user, Hand hand) {
         ItemStack stack = user.getStackInHand(hand);
         ConsumableComponent consumableComponent = stack.get(DataComponentTypes.CONSUMABLE);
         if (null != consumableComponent) {
             return super.use(world, user, hand);
         }
-        PowerUpComponent powerUpComponent = stack.get(MubbleComponentTypes.POWER_UP);
+        PowerUpComponent powerUpComponent = stack.get(MubbleDataComponentTypes.POWER_UP);
         if (null != powerUpComponent) {
             user.setCurrentHand(hand);
-            var opt = powerUpComponent.powerUp().getEntry(world.getRegistryManager());
+            var opt = powerUpComponent.powerUp().resolveEntry(world.getRegistryManager());
             if (opt.isPresent() && PowerUp.canChange(user, opt.get())) {
                 if (world instanceof ServerWorld) {
                     user.setPowerUp(opt.get());

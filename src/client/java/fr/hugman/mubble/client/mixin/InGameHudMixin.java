@@ -1,11 +1,10 @@
 package fr.hugman.mubble.client.mixin;
 
-import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import fr.hugman.mubble.client.gui.hud.PowerUpHudRendering;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.LayeredDrawer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.render.RenderTickCounter;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -15,13 +14,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
-    @Final
-    @Shadow
-    private MinecraftClient client;
+	@Final
+	@Shadow
+	private MinecraftClient client;
 
-    @Inject(method = "<init>", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/LayeredDrawer;addLayer(Lnet/minecraft/client/gui/LayeredDrawer$Layer;)Lnet/minecraft/client/gui/LayeredDrawer;", ordinal = 6))
-    private void mubble$addPowerUpLayer(MinecraftClient client, CallbackInfo ci, @Local(ordinal = 0) LocalRef<LayeredDrawer> layeredDrawer) {
-        //TODO: create event and add layer with it
-        layeredDrawer.set(layeredDrawer.get().addLayer((context, tickCounter) -> PowerUpHudRendering.renderPowerUpLayer(this.client, context, tickCounter)));
-    }
+	@Inject(method="render", at=@At(value="INVOKE", target="Lnet/minecraft/client/gui/hud/InGameHud;renderBossBarHud(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V"))
+	private void mubble$addPowerUpLayer(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+		PowerUpHudRendering.renderPowerUpLayer(this.client, context, tickCounter);
+	}
 }

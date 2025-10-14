@@ -6,7 +6,6 @@ import fr.hugman.mubble.client.gui.screen.BumpableScreen;
 import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
 import fr.hugman.mubble.client.render.MubbleRenderers;
 import fr.hugman.mubble.client.render.entity.model.MubbleModelLayers;
-import fr.hugman.mubble.client.texture.MubbleSpriteManagers;
 import fr.hugman.mubble.client.network.MubbleClientReceivers;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import net.fabricmc.api.ClientModInitializer;
@@ -23,7 +22,6 @@ public class MubbleClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         Reflection.initialize(MubbleModelLayers.class);
-        ClientLifecycleEvents.CLIENT_STOPPING.register(MubbleClient::onClientStop);
 
         registerBlockRenderLayers();
         registerHandledScreens();
@@ -40,9 +38,5 @@ public class MubbleClient implements ClientModInitializer {
 
     private static void registerHandledScreens() {
         HandledScreens.register(MubbleScreenHandlerTypes.BUMPABLE_BLOCK, BumpableScreen::new);
-    }
-
-    private static void onClientStop(MinecraftClient client) {
-        MubbleSpriteManagers.stopSpriteManagers();
     }
 }

@@ -51,7 +51,7 @@ public record ShootProjectilePowerUpAction(
 
     @Override
     public void tick(MinecraftServer server, ServerPlayerEntity player) {
-        var world = player.getServerWorld();
+        var world = player.getEntityWorld();
         world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
         var entity = this.projectile.value().create(world, SpawnReason.TRIGGERED);
         if(null == entity) {
@@ -81,8 +81,8 @@ public record ShootProjectilePowerUpAction(
         double d = vec3d.horizontalLength();
         projectile.setYaw((float) (MathHelper.atan2(vec3d.x, vec3d.z) * 180.0F / (float) Math.PI));
         projectile.setPitch((float) (MathHelper.atan2(vec3d.y, d) * 180.0F / (float) Math.PI));
-        projectile.prevYaw = projectile.getYaw();
-        projectile.prevPitch = projectile.getPitch();
+        projectile.lastYaw = projectile.getYaw();
+        projectile.lastPitch = projectile.getPitch();
     }
 
     public static Vec3d calculateVelocity(Entity projectile, double x, double y, double z, float power, float uncertainty) {

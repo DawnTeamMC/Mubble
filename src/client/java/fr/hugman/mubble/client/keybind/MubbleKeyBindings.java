@@ -11,9 +11,9 @@ import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
 public class MubbleKeyBindings {
-    public static final KeyBinding TRIGGER_POWER_UP = of(GLFW.GLFW_KEY_R, "key.mubble.trigger_power_up", KeyBinding.GAMEPLAY_CATEGORY);
+    public static final KeyBinding TRIGGER_POWER_UP = of(GLFW.GLFW_KEY_R, "key.mubble.trigger_power_up", KeyBinding.Category.GAMEPLAY);
 
-    public static KeyBinding of(int code, String translationKey, String categoryTranslationKey) {
+    public static KeyBinding of(int code, String translationKey, KeyBinding.Category categoryTranslationKey) {
         return KeyBindingHelper.registerKeyBinding(new KeyBinding(translationKey, InputUtil.Type.KEYSYM, code, categoryTranslationKey));
     }
 

@@ -14,7 +14,7 @@ import java.util.Optional;
 
 public class MubbleTrackedData {
     public static final TrackedDataHandler<RegistryEntry<GoombaVariant>> GOOMBA_VARIANT = of("goomba_variant", GoombaVariant.ENTRY_PACKET_CODEC);
-    public static final TrackedDataHandler<Optional<RegistryEntry<PowerUp>>> OPTIONAL_POWER_UP = of(PowerUp.ENTRY_PACKET_CODEC.collect(PacketCodecs::optional));
+    public static final TrackedDataHandler<Optional<RegistryEntry<PowerUp>>> OPTIONAL_POWER_UP = of("optional_power_up", PowerUp.ENTRY_PACKET_CODEC.collect(PacketCodecs::optional));
 
 	public static <T> TrackedDataHandler<T> of(String name, PacketCodec<? super RegistryByteBuf, T> codec) {
 		var handler = TrackedDataHandler.create(codec);

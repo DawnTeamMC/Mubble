@@ -3,9 +3,9 @@
   "package": "fr.hugman.mubble.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "LivingEntityRendererMixin",
+    "AtlasManagerMixin",
     "InGameHudMixin",
-    "MinecraftClientMixin"
+    "LivingEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

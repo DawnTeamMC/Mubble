@@ -10,8 +10,10 @@ import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
@@ -20,7 +22,6 @@ import net.minecraft.util.math.RotationAxis;
 @Environment(EnvType.CLIENT)
 public class FireballRenderer extends EntityRenderer<FireballEntity, FireballRenderState> {
     private static final Identifier TEXTURE = Identifier.ofVanilla("textures/block/orange_concrete.png");
-    private static final RenderLayer LAYER = RenderLayer.getEntityTranslucent(TEXTURE);
 
     private final FireballEntityModel model;
     private final float MIN_SQUISH = 0.45f;
@@ -37,31 +38,40 @@ public class FireballRenderer extends EntityRenderer<FireballEntity, FireballRen
         return new FireballRenderState();
     }
 
-    @Override
-    public void render(FireballRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
-        matrices.push();
+	@Override
+	public void render(FireballRenderState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
+		matrices.push();
 
-        matrices.translate(0.0D, state.height / 2.0D, 0.0D);
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(state.yaw - 90.0F));
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(state.pitch));
-        matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.sin(state.age * 0.15F) * 360.0F));
+		matrices.translate(0.0D, state.height / 2.0D, 0.0D);
+		matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(state.yaw - 90.0F));
+		matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(state.pitch));
+		matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.sin(state.age * 0.15F) * 360.0F));
 
-        var newScale = (state.width * 2) / (FireballEntityModel.SIZE / 16) - MAX_SQUISH * 2;
-        matrices.scale(newScale, newScale, newScale);
+		var newScale = (state.width * 2) / (FireballEntityModel.SIZE / 16) - MAX_SQUISH * 2;
+		matrices.scale(newScale, newScale, newScale);
 
-        float squish = (float) Math.max(Math.min(1 - state.speed * SPEED_SQUISH_SCALE, MAX_SQUISH), MIN_SQUISH);
-        matrices.scale(1 / squish, squish, squish);
+		float squish = (float) Math.max(Math.min(1 - state.speed * SPEED_SQUISH_SCALE, MAX_SQUISH), MIN_SQUISH);
+		matrices.scale(1 / squish, squish, squish);
 
-        this.model.setAngles(state);
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(this.model.getLayer(TEXTURE));
-        this.model.render(matrices, vertexConsumer, light, OverlayTexture.DEFAULT_UV);
+		this.model.setAngles(state);
+		queue.submitModel(
+				this.model,
+				state,
+				matrices,
+				this.model.getLayer(TEXTURE),
+				state.light,
+				OverlayTexture.DEFAULT_UV,
+				state.outlineColor,
+				null
+		);
 
-        matrices.pop();
 
-        super.render(state, matrices, vertexConsumers, light);
-    }
+		matrices.pop();
 
-    @Override
+		super.render(state, matrices, queue, cameraState);
+	}
+
+	@Override
     public void updateRenderState(FireballEntity bullet, FireballRenderState state, float f) {
         super.updateRenderState(bullet, state, f);
         state.pitch = bullet.getLerpedPitch(f);

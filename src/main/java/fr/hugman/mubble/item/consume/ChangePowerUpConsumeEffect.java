@@ -9,15 +9,15 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.consume.ConsumeEffect;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.registry.RegistryPair;
+import net.minecraft.registry.entry.LazyRegistryEntryReference;
 import net.minecraft.world.World;
 
-public record ChangePowerUpConsumeEffect(RegistryPair<PowerUp> powerUp) implements ConsumeEffect {
+public record ChangePowerUpConsumeEffect(LazyRegistryEntryReference<PowerUp> powerUp) implements ConsumeEffect {
     public static final MapCodec<ChangePowerUpConsumeEffect> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            PowerUp.PAIR_CODEC.fieldOf("power_up").forGetter(ChangePowerUpConsumeEffect::powerUp)
+            PowerUp.LAZY_ENTRY_CODEC.fieldOf("power_up").forGetter(ChangePowerUpConsumeEffect::powerUp)
     ).apply(instance, ChangePowerUpConsumeEffect::new));
     public static final PacketCodec<RegistryByteBuf, ChangePowerUpConsumeEffect> PACKET_CODEC = PacketCodec.tuple(
-            PowerUp.PAIR_PACKET_CODEC, ChangePowerUpConsumeEffect::powerUp,
+            PowerUp.LAZY_ENTRY_PACKET_CODEC, ChangePowerUpConsumeEffect::powerUp,
             ChangePowerUpConsumeEffect::new
     );
 
@@ -29,7 +29,7 @@ public record ChangePowerUpConsumeEffect(RegistryPair<PowerUp> powerUp) implemen
     @Override
     public boolean onConsume(World world, ItemStack stack, LivingEntity user) {
         if (user instanceof PlayerEntity player) {
-            var entry = powerUp.getEntry(world.getRegistryManager());
+            var entry = powerUp.resolveEntry(world.getRegistryManager());
             if (entry.isPresent()) {
                 if (PowerUp.canChange(user, entry.get())) {
                     player.setPowerUp(entry.get());

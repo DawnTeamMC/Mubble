@@ -67,6 +67,9 @@ public class MubbleModelProvider extends FabricModelProvider {
 	public void generateItemModels(ItemModelGenerator gen) {
 		// SUPER MARIO
 		gen.register(MubbleItems.MAKER_GLOVE, Models.GENERATED);
+		gen.register(MubbleItems.MINI_MUSHROOM, Models.GENERATED);
+		gen.register(MubbleItems.MEGA_MUSHROOM, Models.GENERATED);
+		gen.register(MubbleItems.FIRE_FLOWER, Models.GENERATED);
 		gen.register(MubbleItems.CAPE_FEATHER, Models.GENERATED);
 		gen.register(MubbleItems.SUPER_CAPE_FEATHER, Models.GENERATED);
 		gen.register(MubbleItems.GOOMBA_SPAWN_EGG, Models.GENERATED);

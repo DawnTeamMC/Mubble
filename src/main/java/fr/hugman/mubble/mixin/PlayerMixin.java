@@ -1,7 +1,5 @@
 package fr.hugman.mubble.mixin;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.MapCodec;
 import fr.hugman.mubble.entity.data.MubbleTrackedData;
 import fr.hugman.mubble.network.payload.c2s.PowerUpChangePayload;
 import fr.hugman.mubble.power_up.PowerUp;
@@ -11,10 +9,10 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,12 +30,6 @@ public class PlayerMixin implements PowerUpHolder {
     private static final String POWER_UP_KEY = "power_up";
 
     @Unique
-    private static final MapCodec<RegistryEntry<PowerUp>> POWER_UP_MAP_CODEC = PowerUp.ENTRY_CODEC.fieldOf(POWER_UP_KEY);
-
-    @Unique
-    private static final Codec<RegistryEntry<PowerUp>> POWER_UP_ENTRY_CODEC = POWER_UP_MAP_CODEC.codec();
-
-    @Unique
     private final PowerUpProperties powerUpProperties = new PowerUpProperties();
 
     @Inject(method = "initDataTracker", at = @At("TAIL"))
@@ -45,16 +37,17 @@ public class PlayerMixin implements PowerUpHolder {
         builder.add(POWER_UP, Optional.empty());
     }
 
-    @Inject(method = "writeCustomDataToNbt", at = @At("TAIL"))
-    private void mubble$writeCustomDataToNbt(NbtCompound nbt, CallbackInfo ci) {
+    @Inject(method = "writeCustomData", at = @At("TAIL"))
+    private void mubble$writeCustomData(WriteView view, CallbackInfo ci) {
         var this_ = (PlayerEntity) ((Object) this);
-        this_.getPowerUp().ifPresent(entry -> POWER_UP_ENTRY_CODEC.encodeStart(this_.getRegistryManager().getOps(NbtOps.INSTANCE), entry).ifSuccess(nbtElement -> nbt.copyFrom((NbtCompound) nbtElement)));
+
+		this_.getPowerUp().ifPresent(entry -> view.put(POWER_UP_KEY, PowerUp.ENTRY_CODEC, entry));
     }
 
-    @Inject(method = "readCustomDataFromNbt", at = @At("TAIL"))
-    private void mubble$readCustomDataFromNbt(NbtCompound nbt, CallbackInfo ci) {
+    @Inject(method = "readCustomData", at = @At("TAIL"))
+    private void mubble$readCustomData(ReadView view, CallbackInfo ci) {
         var this_ = (PlayerEntity) (Object) this;
-        POWER_UP_ENTRY_CODEC.parse(this_.getRegistryManager().getOps(NbtOps.INSTANCE), nbt).ifSuccess(entry -> this_.getDataTracker().set(POWER_UP, Optional.of(entry)));
+		view.read(POWER_UP_KEY, PowerUp.ENTRY_CODEC).ifPresent(entry -> this_.getDataTracker().set(POWER_UP, Optional.of(entry)));
     }
 
     @Override

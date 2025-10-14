@@ -12,13 +12,8 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.command.ServerCommandSource;
 
 public class PowerUpArgumentType extends RegistryEntryArgumentType<PowerUp> {
-    public static final SuggestionProvider<ServerCommandSource> SUGGESTION_PROVIDER = (context, builder) -> {
-        ReloadableRegistries.Lookup lookup = context.getSource().getServer().getReloadableRegistries();
-        return CommandSource.suggestIdentifiers(lookup.getIds(MubbleRegistryKeys.POWER_UP), builder);
-    };
-
     protected PowerUpArgumentType(CommandRegistryAccess registryAccess) {
-        super(registryAccess, MubbleRegistryKeys.POWER_UP, PowerUp.ENTRY_CODEC);
+        super(registryAccess, MubbleRegistryKeys.POWER_UP, PowerUp.CODEC);
     }
 
     public static PowerUpArgumentType of(CommandRegistryAccess registryAccess) {

@@ -14,7 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.RegistryPair;
+import net.minecraft.registry.entry.LazyRegistryEntryReference;
 import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.MinecraftServer;
@@ -51,7 +51,7 @@ public record PowerUp(
     ).apply(instance, PowerUp::new));
 
     public static final Codec<RegistryEntry<PowerUp>> ENTRY_CODEC = RegistryElementCodec.of(MubbleRegistryKeys.POWER_UP, CODEC);
-    public static final Codec<RegistryPair<PowerUp>> PAIR_CODEC = RegistryPair.createCodec(MubbleRegistryKeys.POWER_UP, ENTRY_CODEC);
+    public static final Codec<LazyRegistryEntryReference<PowerUp>> LAZY_ENTRY_CODEC = LazyRegistryEntryReference.createCodec(MubbleRegistryKeys.POWER_UP, ENTRY_CODEC);
 
     public static final PacketCodec<RegistryByteBuf, PowerUp> PACKET_CODEC = PacketCodec.tuple(
             TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, PowerUp::name,
@@ -60,12 +60,12 @@ public record PowerUp(
             EntityAttributeEntry.OPTIONAL_LIST_PACKET_CODEC, PowerUp::attributesModifiers,
             SoundEvent.ENTRY_PACKET_CODEC, PowerUp::obtainSound,
             SoundEvent.ENTRY_PACKET_CODEC, PowerUp::looseSound,
-            PacketCodecs.BOOL, PowerUp::canSprintOnWater,
+            PacketCodecs.BOOLEAN, PowerUp::canSprintOnWater,
             PowerUp::new
     );
     public static final PacketCodec<RegistryByteBuf, RegistryEntry<PowerUp>> ENTRY_PACKET_CODEC = PacketCodecs.registryEntry(MubbleRegistryKeys.POWER_UP, PACKET_CODEC);
     public static final PacketCodec<RegistryByteBuf, Optional<RegistryEntry<PowerUp>>> OPTIONAL_ENTRY_PACKET_CODEC = PacketCodecs.optional(ENTRY_PACKET_CODEC);
-    public static final PacketCodec<RegistryByteBuf, RegistryPair<PowerUp>> PAIR_PACKET_CODEC = RegistryPair.createPacketCodec(MubbleRegistryKeys.POWER_UP, ENTRY_PACKET_CODEC);
+    public static final PacketCodec<RegistryByteBuf, LazyRegistryEntryReference<PowerUp>> LAZY_ENTRY_PACKET_CODEC = LazyRegistryEntryReference.createPacketCodec(MubbleRegistryKeys.POWER_UP, ENTRY_PACKET_CODEC);
 
     public void trigger(MinecraftServer server, ServerPlayerEntity player) {
         this.action.ifPresent(entry -> entry.value().tick(server, player));

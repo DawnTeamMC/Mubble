@@ -63,7 +63,7 @@ public class FireballEntity extends BallEntity {
         if (!entity.isFireImmune()) {
             entity.setOnFireFor(5);
         }
-        this.getWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+        this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
 		entity.serverDamage(this.getDamageSources().thrown(this, this.getOwner()), damage);
         this.finalHit();
     }
@@ -72,7 +72,7 @@ public class FireballEntity extends BallEntity {
     protected void onBlockHit(BlockHitResult result) {
         super.onBlockHit(result);
         BlockPos pos = result.getBlockPos();
-        BlockState state = this.getWorld().getBlockState(pos);
+        BlockState state = this.getEntityWorld().getBlockState(pos);
         Direction face = result.getSide();
         //AbstractFireBlock fire = (AbstractFireBlock) Blocks.FIRE;
         Block resultBlock = null;
@@ -84,24 +84,24 @@ public class FireballEntity extends BallEntity {
             resultBlock = Blocks.WATER;
         }
         if (resultBlock != null) {
-            if (!this.getWorld().isClient) {
-                if (this.getWorld().getDimension().ultrawarm() || resultBlock instanceof AirBlock) {
-                    this.getWorld().removeBlock(pos, false);
+            if (!this.getEntityWorld().isClient()) {
+                if (this.getEntityWorld().getDimension().ultrawarm() || resultBlock instanceof AirBlock) {
+                    this.getEntityWorld().removeBlock(pos, false);
                 } else {
-                    this.getWorld().setBlockState(pos, resultBlock.getDefaultState());
-                    //this.getWorld().updateNeighborsAlways(pos, resultBlock);
+                    this.getEntityWorld().setBlockState(pos, resultBlock.getDefaultState());
+                    //this.getEntityWorld().updateNeighborsAlways(pos, resultBlock);
                 }
             }
-            this.getWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }
         if (state.isIn(BlockTags.CAMPFIRES, (abstractBlockState) -> abstractBlockState.contains(CampfireBlock.LIT) && abstractBlockState.contains(CampfireBlock.WATERLOGGED))) {
             if (!state.get(CampfireBlock.LIT) && !state.get(CampfireBlock.WATERLOGGED)) {
-                if (!this.getWorld().isClient) {
-                    this.getWorld().setBlockState(pos, state.with(CampfireBlock.LIT, true));
+                if (!this.getEntityWorld().isClient()) {
+                    this.getEntityWorld().setBlockState(pos, state.with(CampfireBlock.LIT, true));
                 }
-                this.getWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+                this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
                 this.finalHit();
                 return;
             }
@@ -109,10 +109,10 @@ public class FireballEntity extends BallEntity {
         FlammableBlockRegistry.Entry flammableEntry = FlammableBlockRegistry.getDefaultInstance().get(state.getBlock());
         if (flammableEntry.getBurnChance() > 0 || flammableEntry.getSpreadChance() > 0) {
             BlockPos firePos = pos.offset(face);
-            if (this.getWorld().isAir(firePos) && !this.getWorld().isClient) {
-                this.getWorld().setBlockState(firePos, AbstractFireBlock.getState(this.getWorld(), firePos));
+            if (this.getEntityWorld().isAir(firePos) && !this.getEntityWorld().isClient()) {
+                this.getEntityWorld().setBlockState(firePos, AbstractFireBlock.getState(this.getEntityWorld(), firePos));
             }
-            this.getWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }
@@ -124,7 +124,7 @@ public class FireballEntity extends BallEntity {
             }
             this.setVelocity(motion);
         } else {
-            this.getWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
         }
     }

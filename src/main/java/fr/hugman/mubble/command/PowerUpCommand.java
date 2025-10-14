@@ -33,7 +33,7 @@ public class PowerUpCommand {
                 .requires(sc -> sc.hasPermissionLevel(2))
                 .then(CommandManager.literal(SET_ARG)
                         .then(CommandManager.argument(TARGET_ARG, EntityArgumentType.player())
-                                .then(CommandManager.argument(POWER_UP_ARG, PowerUpArgumentType.of(registryAccess)).suggests(PowerUpArgumentType.SUGGESTION_PROVIDER)
+                                .then(CommandManager.argument(POWER_UP_ARG, PowerUpArgumentType.of(registryAccess))
                                         .executes(cc -> setPowerUp(cc.getSource(), EntityArgumentType.getPlayer(cc, TARGET_ARG), PowerUpArgumentType.getPowerUp(cc, POWER_UP_ARG))))))
                 .then(CommandManager.literal(REMOVE_ARG)
                         .then(CommandManager.argument(TARGET_ARG, EntityArgumentType.player())
