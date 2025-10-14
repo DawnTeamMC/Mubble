@@ -1,0 +1,21 @@
+{
+  "output_path": "wiki_exporter",
+  "enabled": [
+    "metadata",
+    "render"
+  ],
+  "modules": {
+    "metadata": {
+      "namespaces": [
+        "mubble"
+      ]
+    },
+    "render": {
+      "namespaces": [
+        "mubble"
+      ],
+      "resolution": 128,
+      "png": true
+    }
+  }
+}

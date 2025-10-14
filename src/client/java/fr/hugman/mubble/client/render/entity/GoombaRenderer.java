@@ -39,7 +39,7 @@ public class GoombaRenderer extends MobEntityRenderer<GoombaEntity, GoombaEntity
         // Force the rotation when the Goomba is surprised
         if (state.surprised) {
             state.bodyYaw = goomba.headYaw;
-            state.yawDegrees = MathHelper.wrapDegrees(goomba.headYaw - goomba.bodyYaw);
+            state.relativeHeadYaw = MathHelper.wrapDegrees(goomba.headYaw - goomba.bodyYaw);
             state.pitch = goomba.getPitch();
         }
     }

@@ -32,10 +32,10 @@ public class NoteBlock extends DecoratedBumpableBlock {
         this.highJumpSound = highJumpSound;
     }
 
-    @Override
-    public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
-        // Do not apply fall damage
-    }
+	@Override
+	public void onLandedUpon(World world, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
+		// No fall damage
+	}
 
     @Override
     public void onEntityLand(BlockView view, Entity entity) {
@@ -48,20 +48,21 @@ public class NoteBlock extends DecoratedBumpableBlock {
         BlockPos pos = entity.getBlockPos().down();
         BlockState state = world.getBlockState(pos);
 
-        this.onHit(world, state, entity, new BlockHitResult(entity.getPos(), Direction.UP, pos, false));
+        this.onHit(world, state, entity, new BlockHitResult(entity.getEntityPos(), Direction.UP, pos, false));
 
         super.onEntityLand(view, entity);
     }
 
-    @Override
-    public void onBump(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
-        // Only play the sound if the block is not going to bounce up
-        if (blockEntity.getBumpDirection() != Direction.DOWN) {
-            this.playGenericBumpSound(blockEntity);
-        }
-    }
+	@Override
+	public void playGenericBumpSound(BumpableBlockEntity entity) {
+		// Only play the sound if the block is not going to bounce up
+		if (entity.getBumpDirection() == Direction.DOWN) {
+			return;
+		}
+		super.playGenericBumpSound(entity);
+	}
 
-    @Override
+	@Override
     public void onBumpMiddle(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
         if (blockEntity.getWorld() != null && blockEntity.getBumpDirection() == Direction.DOWN) {
             this.launchEntitiesOnTop(blockEntity.getWorld(), blockEntity.getPos());
@@ -102,7 +103,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
             double y = center.getY() + 0.6F;
             double z = center.getZ() + (random.nextInt(7) - 3) / 10D;
             double color = random.nextInt(2) * 0.2D + 0.1D;
-            world.addParticle(ParticleTypes.NOTE, x, y, z, color, 1.0D, 1.0D);
+            world.addParticleClient(ParticleTypes.NOTE, x, y, z, color, 1.0D, 1.0D);
         }
     }
 }

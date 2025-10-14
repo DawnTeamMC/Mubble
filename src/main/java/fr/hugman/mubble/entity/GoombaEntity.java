@@ -1,16 +1,19 @@
 package fr.hugman.mubble.entity;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.entity.ai.control.StunnableMoveControl;
 import fr.hugman.mubble.entity.ai.goal.SurprisedActiveTargetGoal;
 import fr.hugman.mubble.entity.data.MubbleTrackedData;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.block.BlockState;
+import net.minecraft.component.ComponentType;
+import net.minecraft.component.ComponentsAccess;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.VariantHolder;
+import net.minecraft.entity.Variants;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -20,20 +23,20 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
-public class GoombaEntity extends StompableHostileEntity implements Surprisable, Stunnable, VariantHolder<RegistryEntry<GoombaVariant>> {
+public class GoombaEntity extends StompableHostileEntity implements Surprisable, Stunnable {
     public static final String VARIANT_KEY = "variant";
 
     public static final MapCodec<RegistryEntry<GoombaVariant>> VARIANT_MAP_CODEC = GoombaVariant.ENTRY_CODEC.fieldOf(VARIANT_KEY);
-    public static final Codec<RegistryEntry<GoombaVariant>> VARIANT_ENTRY_CODEC = VARIANT_MAP_CODEC.codec();
 
     protected static final TrackedData<RegistryEntry<GoombaVariant>> VARIANT = DataTracker.registerData(GoombaEntity.class, MubbleTrackedData.GOOMBA_VARIANT);
     protected static final TrackedData<Byte> GOOMBA_FLAGS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.BYTE);
@@ -72,7 +75,7 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
     @Override
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(1, new PowderSnowJumpGoal(this, this.getWorld()));
+        this.goalSelector.add(1, new PowderSnowJumpGoal(this, this.getEntityWorld()));
         // TODO: add attack animation (bite)
         this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0, false));
         this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.6));
@@ -156,13 +159,11 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
         super.onTrackedDataSet(data);
     }
 
-    @Override
     public void setVariant(RegistryEntry<GoombaVariant> variant) {
         this.dataTracker.set(VARIANT, variant);
         this.getVariant().value().applyAttributes(this); //TODO: only apply attributes when entity is summoned/spawns
     }
 
-    @Override
     public RegistryEntry<GoombaVariant> getVariant() {
         return this.dataTracker.get(VARIANT);
     }
@@ -203,24 +204,46 @@ public class GoombaEntity extends StompableHostileEntity implements Surprisable,
 
     // NBT DATA
 
-    @Override
-    public void writeCustomDataToNbt(NbtCompound nbt) {
-        super.writeCustomDataToNbt(nbt);
-        VARIANT_ENTRY_CODEC.encodeStart(this.getRegistryManager().getOps(NbtOps.INSTANCE), this.getVariant()).ifSuccess(nbtElement -> nbt.copyFrom((NbtCompound) nbtElement));
-    }
+	@Override
+	protected void writeCustomData(WriteView view) {
+		super.writeCustomData(view);
+		Variants.writeVariantToNbt(view, this.getVariant());
+	}
 
-    @Override
-    public void readCustomDataFromNbt(NbtCompound nbt) {
-        super.readCustomDataFromNbt(nbt);
-        VARIANT_ENTRY_CODEC.parse(this.getRegistryManager().getOps(NbtOps.INSTANCE), nbt).ifSuccess(this::setVariant);
-    }
+	@Override
+	protected void readCustomData(ReadView view) {
+		super.readCustomData(view);
+		Variants.readVariantFromNbt(view, MubbleRegistryKeys.GOOMBA_VARIANT).ifPresent(this::setVariant);
+	}
 
     // TEXTURE
 
     public Identifier getTexture() {
         if (this.isSurprised()) {
-            return this.getVariant().value().surprisedTexture();
+            return this.getVariant().value().assetInfo().surprised().texturePath();
         }
-        return this.getVariant().value().texture();
+        return this.getVariant().value().assetInfo().texture().texturePath();
     }
+
+	@Nullable
+	@Override
+	public <T> T get(ComponentType<? extends T> type) {
+		return type == MubbleDataComponentTypes.GOOMBA_VARIANT ? castComponentValue((ComponentType<T>)type, this.getVariant()) : super.get(type);
+	}
+
+	@Override
+	protected void copyComponentsFrom(ComponentsAccess from) {
+		this.copyComponentFrom(from, MubbleDataComponentTypes.GOOMBA_VARIANT);
+		super.copyComponentsFrom(from);
+	}
+
+	@Override
+	protected <T> boolean setApplicableComponent(ComponentType<T> type, T value) {
+		if (type == MubbleDataComponentTypes.GOOMBA_VARIANT) {
+			this.setVariant(castComponentValue(MubbleDataComponentTypes.GOOMBA_VARIANT, value));
+			return true;
+		} else {
+			return super.setApplicableComponent(type, value);
+		}
+	}
 }

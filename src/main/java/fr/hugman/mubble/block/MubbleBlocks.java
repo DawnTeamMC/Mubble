@@ -91,6 +91,6 @@ public class MubbleBlocks {
 
     private static DecoratedBumpableBlock eggBlock(RegistryKey<Block> key, MapColor mapColor) {
         //TODO: change settings
-        return decoratedBumpableBlock(key, AbstractBlock.Settings.copy(Blocks.IRON_BLOCK).mapColor(mapColor));
+        return decoratedBumpableBlock(key, AbstractBlock.Settings.copy(Blocks.STONE).mapColor(mapColor));
     }
 }

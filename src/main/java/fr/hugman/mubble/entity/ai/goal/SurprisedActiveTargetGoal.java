@@ -40,7 +40,7 @@ public class SurprisedActiveTargetGoal<T extends LivingEntity> extends ActiveTar
         if (this.mob instanceof Surprisable surprisable) {
             if (mob.getTarget() != null) {
                 surprisable.setSurprised(true);
-                mob.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, mob.getTarget().getPos());
+                mob.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, mob.getTarget().getEntityPos());
                 mob.playSound(MubbleSounds.GOOMBA_FIND_TARGET, 1.0F, 1.0F);
             }
         }

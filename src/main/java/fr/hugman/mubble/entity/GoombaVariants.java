@@ -7,6 +7,7 @@ import net.minecraft.util.Identifier;
 
 public class GoombaVariants {
     public static final RegistryKey<GoombaVariant> NORMAL = of("normal");
+    public static final RegistryKey<GoombaVariant> MINI = of("mini");
 
     private static RegistryKey<GoombaVariant> of(String path) {
         return of(Mubble.id(path));
