@@ -3,7 +3,6 @@
   "package": "fr.hugman.mubble.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "AtlasManagerMixin",
     "InGameHudMixin",
     "LivingEntityRendererMixin"
   ],

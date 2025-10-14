@@ -1,7 +1,7 @@
 package fr.hugman.mubble.entity;
 
-import fr.hugman.mubble.block.MubbleBlockTags;
 import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.tag.MubbleBlockTags;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -18,8 +18,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class FireballEntity extends BallEntity {
     public FireballEntity(EntityType<? extends FireballEntity> type, World world) {

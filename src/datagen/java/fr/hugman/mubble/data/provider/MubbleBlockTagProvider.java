@@ -2,6 +2,7 @@ package fr.hugman.mubble.data.provider;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 
@@ -17,6 +18,10 @@ public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
 	@Override
 	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+        valueLookupBuilder(MELTABLE_TO_AIR);
+        valueLookupBuilder(MELTABLE_TO_WATER).add(Blocks.ICE);
+        valueLookupBuilder(MELTABLE_TO_ICE).add(Blocks.PACKED_ICE);
+
 		// SUPER MARIO
 		valueLookupBuilder(BRICK_BLOCKS).add(BRICK_BLOCK, CRYSTAL_BLOCK, GOLD_BLOCK);
 		valueLookupBuilder(EXCLAMATION_BLOCKS).add(
@@ -32,6 +37,7 @@ public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 				RED_MARIMBA_BLOCK
 		);
 		valueLookupBuilder(SNAKE_BLOCKS).add(SNAKE_BLOCK, FAST_SNAKE_BLOCK, SLOW_SNAKE_BLOCK);
+		valueLookupBuilder(BEEP_BLOCKS).add(RED_BEEP_BLOCK, BLUE_BEEP_BLOCK);
 		valueLookupBuilder(BEEP_BLOCKS).add(RED_BEEP_BLOCK, BLUE_BEEP_BLOCK);
 
 		// YOSHI'S ISLAND
