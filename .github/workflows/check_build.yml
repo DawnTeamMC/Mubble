@@ -1,5 +1,4 @@
 name: Check Build
-
 on:
   pull_request:
     branches: [ main, dev ]
