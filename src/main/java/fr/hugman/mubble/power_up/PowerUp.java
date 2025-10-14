@@ -40,13 +40,16 @@ public record PowerUp(
     //TODO: add a predicate/damage tag to determine if you can lose it to damage
     //TODO: add custom music
 
+    public static final RegistryEntry<SoundEvent> DEFAULT_OBTAIN_SOUND = MubbleSounds.POWER_UP_OBTAIN;
+    public static final RegistryEntry<SoundEvent> DEFAULT_LOOSE_SOUND = MubbleSounds.POWER_UP_LOOSE;
+
     public static final Codec<PowerUp> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             TextCodecs.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
             PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
-            SoundEvent.ENTRY_CODEC.optionalFieldOf("obtain_sound", RegistryEntry.of(MubbleSounds.POWER_UP_OBTAIN)).forGetter(PowerUp::obtainSound),
-            SoundEvent.ENTRY_CODEC.optionalFieldOf("loose_sound", RegistryEntry.of(MubbleSounds.POWER_UP_LOOSE)).forGetter(PowerUp::looseSound),
+            SoundEvent.ENTRY_CODEC.optionalFieldOf("obtain_sound", DEFAULT_OBTAIN_SOUND).forGetter(PowerUp::obtainSound),
+            SoundEvent.ENTRY_CODEC.optionalFieldOf("loose_sound", DEFAULT_LOOSE_SOUND).forGetter(PowerUp::looseSound),
             Codec.BOOL.optionalFieldOf("can_sprint_on_water", false).forGetter(PowerUp::canSprintOnWater)
     ).apply(instance, PowerUp::new));
 

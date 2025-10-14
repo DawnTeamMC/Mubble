@@ -20,6 +20,6 @@ public class InGameHudMixin {
 
 	@Inject(method="render", at=@At(value="INVOKE", target="Lnet/minecraft/client/gui/hud/InGameHud;renderBossBarHud(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V"))
 	private void mubble$addPowerUpLayer(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-		PowerUpHudRendering.renderPowerUpLayer(this.client, context, tickCounter);
+		PowerUpHudRendering.renderPowerUpLayer(this.client, context);
 	}
 }

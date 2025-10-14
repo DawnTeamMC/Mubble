@@ -3,7 +3,7 @@ package fr.hugman.mubble.item;
 import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.component.PowerUpComponent;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
-import fr.hugman.mubble.power_up.MubblePowerUps;
+import fr.hugman.mubble.power_up.PowerUps;
 import fr.hugman.mubble.power_up.PowerUp;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.UseCooldownComponent;
@@ -23,9 +23,9 @@ public class MubbleItems {
     // SUPER MARIO
     public static final Item MAKER_GLOVE = of(MubbleItemKeys.MAKER_GLOVE, new Item.Settings().maxCount(1));
 
-    public static final PowerUpItem MINI_MUSHROOM = powerUp(MubbleItemKeys.MINI_MUSHROOM, MubblePowerUps.MINI);
-    public static final PowerUpItem MEGA_MUSHROOM = powerUp(MubbleItemKeys.MEGA_MUSHROOM, MubblePowerUps.MEGA);
-    public static final PowerUpItem FIRE_FLOWER = powerUp(MubbleItemKeys.FIRE_FLOWER, MubblePowerUps.FIRE);
+    public static final PowerUpItem MINI_MUSHROOM = powerUp(MubbleItemKeys.MINI_MUSHROOM, PowerUps.MINI);
+    public static final PowerUpItem MEGA_MUSHROOM = powerUp(MubbleItemKeys.MEGA_MUSHROOM, PowerUps.MEGA);
+    public static final PowerUpItem FIRE_FLOWER = powerUp(MubbleItemKeys.FIRE_FLOWER, PowerUps.FIRE);
 
     public static final CapeFeatherItem CAPE_FEATHER = of(MubbleItemKeys.CAPE_FEATHER, s -> new CapeFeatherItem(s, false));
     public static final CapeFeatherItem SUPER_CAPE_FEATHER = of(MubbleItemKeys.SUPER_CAPE_FEATHER, s -> new CapeFeatherItem(s.rarity(Rarity.EPIC), true));

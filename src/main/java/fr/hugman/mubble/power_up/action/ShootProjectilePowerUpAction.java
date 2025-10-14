@@ -5,12 +5,8 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Ownable;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
@@ -25,20 +21,20 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public record ShootProjectilePowerUpAction(
-        RegistryEntry<EntityType<?>> projectile,
+        EntityType<?> projectile,
         RegistryEntry<SoundEvent> sound,
         float speed
         //TODO: add shooting algorithm
         //TODO: add projectile NBT
 ) implements PowerUpAction {
     public static final MapCodec<ShootProjectilePowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Registries.ENTITY_TYPE.getEntryCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
+            Registries.ENTITY_TYPE.getCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
             SoundEvent.ENTRY_CODEC.fieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
             Codec.FLOAT.optionalFieldOf("speed", 1.5F).forGetter(ShootProjectilePowerUpAction::speed)
     ).apply(instance, ShootProjectilePowerUpAction::new));
 
     public static final PacketCodec<RegistryByteBuf, ShootProjectilePowerUpAction> PACKET_CODEC = PacketCodec.tuple(
-            PacketCodecs.registryEntry(RegistryKeys.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
+            PacketCodecs.registryValue(RegistryKeys.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
             SoundEvent.ENTRY_PACKET_CODEC, (ShootProjectilePowerUpAction::sound),
             PacketCodecs.FLOAT, (ShootProjectilePowerUpAction::speed),
             ShootProjectilePowerUpAction::new
@@ -53,7 +49,7 @@ public record ShootProjectilePowerUpAction(
     public void tick(MinecraftServer server, ServerPlayerEntity player) {
         var world = player.getEntityWorld();
         world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-        var entity = this.projectile.value().create(world, SpawnReason.TRIGGERED);
+        var entity = this.projectile.create(world, SpawnReason.TRIGGERED);
         if(null == entity) {
             return;
         }

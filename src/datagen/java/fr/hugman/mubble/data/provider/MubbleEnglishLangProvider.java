@@ -2,6 +2,7 @@ package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.item_group.MubbleItemGroupKeys;
+import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.Registry;
@@ -46,8 +47,17 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("subtitles.mubble.entity.goomba.find_target", "Goomba finds target");
 		builder.add("subtitles.mubble.entity.goomba.death", "Goomba dies");
 		builder.add("subtitles.mubble.entity.goomba.stomp", "Goomba stomped");
+		builder.add("subtitles.mubble.power_up.obtain", "Power-up obtained");
+		builder.add("subtitles.mubble.power_up.loose", "Power-up lost");
 
 		builder.add("gamerule.beepBlockCooldown", "Beep Block cooldown");
+
+        builder.add("commands.mubble.power_up.set.success", "Changed %s's power-up");
+        builder.add("commands.mubble.power_up.set.success_named", "Changed %s's power-up to %s");
+        builder.add("commands.mubble.power_up.set.unchanged", "Nothing changed. The player already has this power-up");
+        builder.add("commands.mubble.power_up.remove.success", "Successfully removed %s's power-up");
+        builder.add("commands.mubble.power_up.remove.success_named", "Successfully removed %s's %s power-up");
+        builder.add("commands.mubble.power_up.remove.no_power_up", "Nothing changed. The player doesn't have any power-up to remove");
 
 		builder.add("modmenu.descriptionTranslation.mubble", "Ultimate crossover mod with all your favorite franchises! Mainly focused on Nintendo.");
 	}
@@ -111,7 +121,16 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 			var id = itemGroup.registryKey().getValue();
 			try {
 				builder.add(Util.createTranslationKey("item_group", id), snakeToTitleCase(id.getPath()));
-			}catch (RuntimeException ignored) {}
+			}
+            catch (RuntimeException ignored) {}
+		}
+
+		for (var powerUp : getRegistryEntries(wrapperLookup, MubbleRegistryKeys.POWER_UP)) {
+			var id = powerUp.registryKey().getValue();
+			try {
+				builder.add(Util.createTranslationKey("power_up", id), snakeToTitleCase(id.getPath()));
+			}
+            catch (RuntimeException ignored) {}
 		}
 	}
 

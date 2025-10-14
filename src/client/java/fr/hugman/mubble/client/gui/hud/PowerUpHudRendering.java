@@ -8,7 +8,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.RenderPipelines;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.client.texture.MissingSprite;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.ColorHelper;
@@ -23,7 +22,7 @@ public class PowerUpHudRendering {
     private static final int ITEM_OFFSET = OFFSET_FROM_SCREEN_BORDER + (BACKGROUND_TEXTURE_SIZE - ITEM_TEXTURE_SIZE) / 2;
     private static final Identifier EFFECT_BACKGROUND_TEXTURE = Mubble.id("hud/power_up_background");
 
-    public static void renderPowerUpLayer(MinecraftClient client, DrawContext context, RenderTickCounter tickCounter) {
+    public static void renderPowerUpLayer(MinecraftClient client, DrawContext context) {
         var powerUpOpt = Optional.ofNullable(client.player).flatMap(PowerUpHolder::getPowerUp);
         if (powerUpOpt.isPresent()) {
             context.drawGuiTexture(RenderPipelines.GUI_TEXTURED, EFFECT_BACKGROUND_TEXTURE, OFFSET_FROM_SCREEN_BORDER, OFFSET_FROM_SCREEN_BORDER, BACKGROUND_TEXTURE_SIZE, BACKGROUND_TEXTURE_SIZE);
