@@ -30,6 +30,10 @@ public class MubbleSounds {
     public static final SoundEvent FIREBALL_HIT_MELTABLE = of("entity.fireball.hit.meltable");
     public static final RegistryEntry.Reference<SoundEvent> FIREBALL_THROW = ofRef("entity.fireball.throw");
 
+    public static final SoundEvent ICEBALL_HIT_BLOCK = of("entity.iceball.hit.block");
+    public static final SoundEvent ICEBALL_HIT_ENTITY = of("entity.iceball.hit.entity");
+    public static final RegistryEntry.Reference<SoundEvent> ICEBALL_THROW = ofRef("entity.iceball.throw");
+
 	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_OBTAIN = ofRef("power_up.obtain");
 	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_OBTAIN_MINI = ofRef("power_up.obtain.mini");
 	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_OBTAIN_SUPER_STAR = ofRef("power_up.obtain.super_star");

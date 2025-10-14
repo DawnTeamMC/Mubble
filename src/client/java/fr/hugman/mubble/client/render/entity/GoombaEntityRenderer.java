@@ -12,8 +12,8 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class GoombaRenderer extends MobEntityRenderer<GoombaEntity, GoombaEntityRenderState, GoombaModel> {
-    public GoombaRenderer(EntityRendererFactory.Context context) {
+public class GoombaEntityRenderer extends MobEntityRenderer<GoombaEntity, GoombaEntityRenderState, GoombaModel> {
+    public GoombaEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new GoombaModel(context.getPart(MubbleModelLayers.GOOMBA)), 0.4f);
     }
 

@@ -39,6 +39,7 @@ public class MubbleItemGroups {
             var context = entries.getContext();
 
             entries.add(MubbleItems.FIRE_FLOWER);
+            entries.add(MubbleItems.ICE_FLOWER);
             entries.add(MubbleItems.MINI_MUSHROOM);
             entries.add(MubbleItems.MEGA_MUSHROOM);
             entries.add(MubbleBlocks.QUESTION_BLOCK);

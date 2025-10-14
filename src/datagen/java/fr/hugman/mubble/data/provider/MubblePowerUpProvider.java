@@ -75,5 +75,13 @@ public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
                         0.4f
                 )))
                 .build());
+        registerable.register(ICE, new PowerUpBuilder()
+                .name(ICE)
+                .action(RegistryEntry.of(new ShootProjectilePowerUpAction(
+                        MubbleEntityTypes.ICEBALL,
+                        MubbleSounds.ICEBALL_THROW,
+                        0.4f
+                )))
+                .build());
     }
 }

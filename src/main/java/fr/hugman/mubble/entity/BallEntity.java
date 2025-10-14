@@ -12,6 +12,8 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
+import net.minecraft.util.AssetInfo;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
@@ -88,4 +90,10 @@ public abstract class BallEntity extends ThrownEntity {
             this.getEntityWorld().addParticleClient(this.getDeathParticle(), this.getX(), this.getY(), this.getZ(), s1, s2, s3);
         }
     }
+
+    public double getSpeed() {
+        return this.getVelocity().length();
+    }
+
+    abstract public AssetInfo.TextureAssetInfo getTexture();
 }

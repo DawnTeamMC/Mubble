@@ -9,6 +9,7 @@ public class MubbleBlockTags {
     public static final TagKey<Block> MELTABLE_TO_AIR = of("meltable/air");
     public static final TagKey<Block> MELTABLE_TO_ICE = of("meltable/ice");
     public static final TagKey<Block> MELTABLE_TO_WATER = of("meltable/water");
+    public static final TagKey<Block> FREEZABLE_TO_PACKED_ICE = of("freezable/to_packed_ice");
 
 	// SUPER MARIO
 	public static final TagKey<Block> BRICK_BLOCKS = of("brick_blocks");

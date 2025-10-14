@@ -15,7 +15,8 @@ public class PowerUpItems {
     public static final List<Entry> ENTRIES = List.of(
             new Entry(MubbleItemKeys.MINI_MUSHROOM, PowerUps.MINI),
             new Entry(MubbleItemKeys.MEGA_MUSHROOM, PowerUps.MEGA),
-            new Entry(MubbleItemKeys.FIRE_FLOWER, PowerUps.FIRE)
+            new Entry(MubbleItemKeys.FIRE_FLOWER, PowerUps.FIRE),
+            new Entry(MubbleItemKeys.ICE_FLOWER, PowerUps.ICE)
     );
 
     public static RegistryKey<Item> getItem(RegistryKey<PowerUp> powerUp) {

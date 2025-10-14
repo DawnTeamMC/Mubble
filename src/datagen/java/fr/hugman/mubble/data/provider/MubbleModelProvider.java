@@ -71,6 +71,7 @@ public class MubbleModelProvider extends FabricModelProvider {
 		gen.register(MubbleItems.MINI_MUSHROOM, Models.GENERATED);
 		gen.register(MubbleItems.MEGA_MUSHROOM, Models.GENERATED);
 		gen.register(MubbleItems.FIRE_FLOWER, Models.GENERATED);
+		gen.register(MubbleItems.ICE_FLOWER, Models.GENERATED);
 
 		gen.register(MubbleItems.CAPE_FEATHER, Models.GENERATED);
 		gen.register(MubbleItems.SUPER_CAPE_FEATHER, Models.GENERATED);

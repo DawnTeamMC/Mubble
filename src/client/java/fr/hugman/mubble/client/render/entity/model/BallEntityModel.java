@@ -1,17 +1,17 @@
 package fr.hugman.mubble.client.render.entity.model;
 
-import fr.hugman.mubble.client.render.entity.state.FireballRenderState;
+import fr.hugman.mubble.client.render.entity.state.BallRenderState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.entity.model.EntityModel;
 
 @Environment(EnvType.CLIENT)
-public class FireballEntityModel extends EntityModel<FireballRenderState> {
+public class BallEntityModel extends EntityModel<BallRenderState> {
     public static final String MAIN = "main";
     public static final float SIZE = 1;
 
-    public FireballEntityModel(ModelPart root) {
+    public BallEntityModel(ModelPart root) {
         super(root);
     }
 

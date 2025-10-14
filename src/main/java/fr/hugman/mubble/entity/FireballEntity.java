@@ -9,17 +9,21 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.util.AssetInfo;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.event.GameEvent;
 
 public class FireballEntity extends BallEntity {
+    private static final AssetInfo.TextureAssetInfo TEXTURE = new AssetInfo.TextureAssetInfo(Identifier.ofVanilla("block/orange_concrete"));
+
     public FireballEntity(EntityType<? extends FireballEntity> type, World world) {
         super(type, world);
     }
@@ -72,7 +76,6 @@ public class FireballEntity extends BallEntity {
         BlockPos pos = result.getBlockPos();
         BlockState state = this.getEntityWorld().getBlockState(pos);
         Direction face = result.getSide();
-        //AbstractFireBlock fire = (AbstractFireBlock) Blocks.FIRE;
         Block resultBlock = null;
         if (state.isIn(MubbleBlockTags.MELTABLE_TO_AIR)) {
             resultBlock = Blocks.AIR;
@@ -87,22 +90,18 @@ public class FireballEntity extends BallEntity {
                     this.getEntityWorld().removeBlock(pos, false);
                 } else {
                     this.getEntityWorld().setBlockState(pos, resultBlock.getDefaultState());
-                    //this.getEntityWorld().updateNeighborsAlways(pos, resultBlock);
                 }
             }
             this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }
-        if (state.isIn(BlockTags.CAMPFIRES, (abstractBlockState) -> abstractBlockState.contains(CampfireBlock.LIT) && abstractBlockState.contains(CampfireBlock.WATERLOGGED))) {
-            if (!state.get(CampfireBlock.LIT) && !state.get(CampfireBlock.WATERLOGGED)) {
-                if (!this.getEntityWorld().isClient()) {
-                    this.getEntityWorld().setBlockState(pos, state.with(CampfireBlock.LIT, true));
-                }
-                this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-                this.finalHit();
-                return;
-            }
+        if(CampfireBlock.canBeLit(state) || CandleBlock.canBeLit(state) || CandleCakeBlock.canBeLit(state)) {
+            this.getEntityWorld().setBlockState(pos, state.with(CampfireBlock.LIT, true));
+            this.getEntityWorld().emitGameEvent(this.getOwner(), GameEvent.BLOCK_CHANGE, pos);
+            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.finalHit();
+            return;
         }
         FlammableBlockRegistry.Entry flammableEntry = FlammableBlockRegistry.getDefaultInstance().get(state.getBlock());
         if (flammableEntry.getBurnChance() > 0 || flammableEntry.getSpreadChance() > 0) {
@@ -127,7 +126,8 @@ public class FireballEntity extends BallEntity {
         }
     }
 
-    public double getSpeed() {
-        return this.getVelocity().length();
+    @Override
+    public AssetInfo.TextureAssetInfo getTexture() {
+        return TEXTURE;
     }
 }

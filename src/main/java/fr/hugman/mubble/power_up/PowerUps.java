@@ -8,6 +8,7 @@ public class PowerUps {
     public static final RegistryKey<PowerUp> MINI = of("mini");
     public static final RegistryKey<PowerUp> MEGA = of("mega");
     public static final RegistryKey<PowerUp> FIRE = of("fire");
+    public static final RegistryKey<PowerUp> ICE = of("ice");
 
     private static RegistryKey<PowerUp> of(String path) {
         return RegistryKey.of(MubbleRegistryKeys.POWER_UP, Mubble.id(path));

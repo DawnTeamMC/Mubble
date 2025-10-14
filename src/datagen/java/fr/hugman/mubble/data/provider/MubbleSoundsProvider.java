@@ -49,6 +49,10 @@ public class MubbleSoundsProvider extends FabricSoundsProvider {
 		soundExporter.add(MubbleSounds.FIREBALL_HIT_MELTABLE, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_MELTABLE, 1).category(SoundCategory.HOSTILE).subtitle(null));
 		soundExporter.add(MubbleSounds.FIREBALL_THROW, variantSoundBuilder(MubbleSounds.FIREBALL_THROW, 1).category(SoundCategory.HOSTILE).subtitle(null));
 
+		soundExporter.add(MubbleSounds.ICEBALL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.ICEBALL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE).subtitle(null));
+		soundExporter.add(MubbleSounds.ICEBALL_HIT_ENTITY, variantSoundBuilder(MubbleSounds.ICEBALL_HIT_ENTITY, 1).category(SoundCategory.HOSTILE).subtitle(null));
+		soundExporter.add(MubbleSounds.ICEBALL_THROW, variantSoundBuilder(MubbleSounds.ICEBALL_THROW, 1).category(SoundCategory.HOSTILE).subtitle(null));
+
 		// Power-Up
 		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN, 1).category(SoundCategory.PLAYERS));
 		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN_MINI, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN_MINI, 1).category(SoundCategory.PLAYERS).subtitle("subtitles.mubble.power_up.obtain"));

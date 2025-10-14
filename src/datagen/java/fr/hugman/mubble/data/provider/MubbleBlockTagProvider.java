@@ -21,6 +21,7 @@ public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         valueLookupBuilder(MELTABLE_TO_AIR);
         valueLookupBuilder(MELTABLE_TO_WATER).add(Blocks.ICE);
         valueLookupBuilder(MELTABLE_TO_ICE).add(Blocks.PACKED_ICE);
+        valueLookupBuilder(FREEZABLE_TO_PACKED_ICE).add(Blocks.ICE);
 
 		// SUPER MARIO
 		valueLookupBuilder(BRICK_BLOCKS).add(BRICK_BLOCK, CRYSTAL_BLOCK, GOLD_BLOCK);
