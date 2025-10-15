@@ -13,12 +13,12 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.AssetInfo;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.world.World;
 
 public abstract class BallEntity extends ThrownEntity {
-    protected int reboundingAmount = 3;
+	public static final String REBOUNDS_KEY = "rebounds";
+    protected int rebounds = 3;
 
     protected BallEntity(EntityType<? extends BallEntity> type, World world) {
         super(type, world);
@@ -42,11 +42,16 @@ public abstract class BallEntity extends ThrownEntity {
 
     protected abstract ParticleEffect getDeathParticle();
 
+	@Override
+	protected double getGravity() {
+		return 0.08;
+	}
+
     @Override
     protected void onCollision(HitResult result) {
-        this.reboundingAmount--;
+        this.rebounds--;
         super.onCollision(result);
-        if (this.isAlive() && this.reboundingAmount < 0) {
+        if (this.isAlive() && this.rebounds < 0) {
             this.finalHit();
         }
     }
@@ -65,13 +70,13 @@ public abstract class BallEntity extends ThrownEntity {
 	@Override
 	protected void writeCustomData(WriteView view) {
 		super.writeCustomData(view);
-		view.putInt("ReboundingAmount", reboundingAmount);
+		view.putInt(REBOUNDS_KEY, rebounds);
 	}
 
 	@Override
 	protected void readCustomData(ReadView view) {
 		super.readCustomData(view);
-		this.reboundingAmount = view.getInt("ReboundingAmount", 3);
+		this.rebounds = view.getInt(REBOUNDS_KEY, 3);
 	}
 
     @Environment(EnvType.CLIENT)

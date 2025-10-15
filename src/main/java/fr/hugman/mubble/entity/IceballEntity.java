@@ -40,11 +40,6 @@ public class IceballEntity extends BallEntity {
     }
 
     @Override
-    protected double getGravity() {
-        return 0.08;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MubbleSounds.ICEBALL_HIT_BLOCK;
     }

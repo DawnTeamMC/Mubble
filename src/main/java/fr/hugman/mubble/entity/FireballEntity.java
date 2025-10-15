@@ -37,11 +37,6 @@ public class FireballEntity extends BallEntity {
     }
 
     @Override
-    protected double getGravity() {
-        return 0.08;
-    }
-
-    @Override
     protected SoundEvent getDeathSound() {
         return MubbleSounds.FIREBALL_HIT_BLOCK;
     }
