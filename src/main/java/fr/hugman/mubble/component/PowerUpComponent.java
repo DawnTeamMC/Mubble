@@ -16,29 +16,33 @@ import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public record PowerUpComponent(LazyRegistryEntryReference<PowerUp> powerUp) implements TooltipAppender {
-	public static final Codec<PowerUpComponent> CODEC = PowerUp.LAZY_ENTRY_CODEC.xmap(PowerUpComponent::new, PowerUpComponent::powerUp);
+    public static final Codec<PowerUpComponent> CODEC = PowerUp.LAZY_ENTRY_CODEC.xmap(PowerUpComponent::new, PowerUpComponent::powerUp);
     public static final PacketCodec<RegistryByteBuf, PowerUpComponent> PACKET_CODEC = PowerUp.LAZY_ENTRY_PACKET_CODEC.xmap(PowerUpComponent::new, PowerUpComponent::powerUp);
 
-	@Override
-	public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
-		var registryLookup = context.getRegistryLookup();
-		if (registryLookup != null) {
-			this.powerUp.resolveEntry(registryLookup)
-					.flatMap(power -> power.value().attributesModifiers())
-					.ifPresent(entityAttributeEntries -> buildTooltip(entityAttributeEntries, textConsumer));
-		}
-	}
+    @Override
+    public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
+        var registryLookup = context.getRegistryLookup();
+        if (registryLookup != null) {
+            this.powerUp.resolveEntry(registryLookup)
+                    .ifPresent(entityAttributeEntries -> buildAutomaticTooltip(entityAttributeEntries.value(), context, textConsumer, type, components));
+        }
+    }
 
-    public static void buildTooltip(List<EntityAttributeEntry> attributes, Consumer<Text> textConsumer) {
-        if (!attributes.isEmpty()) {
+    public static void buildAutomaticTooltip(PowerUp powerUp, Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
+        if (powerUp.action().isPresent()) {
+            var action = powerUp.action().get().value();
+            if(action instanceof TooltipAppender tooltipAppender) {
+                tooltipAppender.appendTooltip(context, textConsumer, type, components);
+            }
+        }
+        if (powerUp.attributesModifiers().isPresent() && !powerUp.attributesModifiers().get().isEmpty()) {
             textConsumer.accept(ScreenTexts.EMPTY);
             textConsumer.accept(Text.translatable("potion.whenDrank").formatted(Formatting.DARK_PURPLE));
 
-            for (EntityAttributeEntry entry : attributes) {
+            for (EntityAttributeEntry entry : powerUp.attributesModifiers().get()) {
                 EntityAttributeModifier entityAttributeModifier = entry.modifier();
                 double d = entityAttributeModifier.value();
                 double e;

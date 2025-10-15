@@ -66,6 +66,8 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
         builder.add("commands.mubble.power_up.remove.success_named", "Successfully removed %s's %s power-up");
         builder.add("commands.mubble.power_up.remove.no_power_up", "Nothing changed. The player doesn't have any power-up to remove");
 
+        builder.add("power_up_action_type.mubble.shoot_projectile.description", "Press %s to shoot %s");
+
 		builder.add("modmenu.descriptionTranslation.mubble", "Ultimate crossover mod with all your favorite franchises! Mainly focused on Nintendo.");
 	}
 

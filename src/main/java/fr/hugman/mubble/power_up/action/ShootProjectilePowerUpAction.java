@@ -3,11 +3,16 @@ package fr.hugman.mubble.power_up.action;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fr.hugman.mubble.keybind.MubbleKeyBindingsKeys;
+import net.minecraft.component.ComponentsAccess;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.tooltip.TooltipAppender;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
@@ -16,9 +21,14 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+
+import java.util.function.Consumer;
+
 
 public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
@@ -26,7 +36,7 @@ public record ShootProjectilePowerUpAction(
         float speed
         //TODO: add shooting algorithm
         //TODO: add projectile NBT
-) implements PowerUpAction {
+) implements PowerUpAction, TooltipAppender {
     public static final MapCodec<ShootProjectilePowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Registries.ENTITY_TYPE.getCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
             SoundEvent.ENTRY_CODEC.fieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
@@ -48,13 +58,13 @@ public record ShootProjectilePowerUpAction(
     @Override
     public void trigger(PlayerEntity player) {
         var world = player.getEntityWorld();
-        if(!world.isClient()) {
+        if (!world.isClient()) {
             world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             var entity = this.projectile.create(world, SpawnReason.TRIGGERED);
-            if(null == entity) {
+            if (null == entity) {
                 return;
             }
-            if(entity instanceof ProjectileEntity projectileEntity) {
+            if (entity instanceof ProjectileEntity projectileEntity) {
                 projectileEntity.setOwner(player);
             }
             entity.setPosition(player.getX(), player.getEyeY() - 0.1F, player.getZ());
@@ -94,5 +104,14 @@ public record ShootProjectilePowerUpAction(
                         projectile.getRandom().nextTriangular(0.0, 0.0172275 * (double) uncertainty)
                 )
                 .multiply(power);
+    }
+
+    @Override
+    public void appendTooltip(Item.TooltipContext context, Consumer<Text> textConsumer, TooltipType type, ComponentsAccess components) {
+        this.getTranslationKey().ifPresent(s -> textConsumer.accept(Text.translatable(
+                s + ".description",
+                        Text.keybind(MubbleKeyBindingsKeys.TRIGGER_POWER_UP),
+                        Text.translatable(projectile.getTranslationKey())
+                ).formatted(Formatting.GRAY)));
     }
 }

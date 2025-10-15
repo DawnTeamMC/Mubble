@@ -6,6 +6,7 @@
     "AbstractBlockStateMixin",
     "ArgumentTypesMixin",
     "EntityMixin",
+    "ItemStackMixin",
     "PlayerMixin"
   ],
   "injectors": {
