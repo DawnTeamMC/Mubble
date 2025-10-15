@@ -37,6 +37,8 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("block.mubble.bumpable.drop.one", "Drop one");
 		builder.add("block.mubble.bumpable.drop.one.description", "The block will drop one item per bump");
 
+		builder.add("key.mubble.trigger_power_up", "Trigger Power-Up");
+
 		builder.add("subtitles.mubble.block.bumpable_block.bump", "Block bumped");
 		builder.add("subtitles.mubble.block.bumpable_block.change_loot", "Block filled");
 		builder.add("subtitles.mubble.block.bumpable_block.destroy", "Block destroyed");
