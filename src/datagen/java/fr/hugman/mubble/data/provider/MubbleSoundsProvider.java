@@ -44,14 +44,14 @@ public class MubbleSoundsProvider extends FabricSoundsProvider {
 		soundExporter.add(MubbleSounds.GOOMBA_STOMP, variantSoundBuilder(MubbleSounds.GOOMBA_STOMP, 1).category(SoundCategory.HOSTILE));
 
         //TODO: fireballs should have subtitles
-		soundExporter.add(MubbleSounds.FIREBALL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE).subtitle(null));
-		soundExporter.add(MubbleSounds.FIREBALL_HIT_ENTITY, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_ENTITY, 1).category(SoundCategory.HOSTILE).subtitle(null));
-		soundExporter.add(MubbleSounds.FIREBALL_HIT_MELTABLE, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_MELTABLE, 1).category(SoundCategory.HOSTILE).subtitle(null));
-		soundExporter.add(MubbleSounds.FIREBALL_THROW, variantSoundBuilder(MubbleSounds.FIREBALL_THROW, 1).category(SoundCategory.HOSTILE).subtitle(null));
+		soundExporter.add(MubbleSounds.FIREBALL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.fireball.hit"));
+		soundExporter.add(MubbleSounds.FIREBALL_HIT_ENTITY, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_ENTITY, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.fireball.hit"));
+		soundExporter.add(MubbleSounds.FIREBALL_MELT_BLOCK, variantSoundBuilder(MubbleSounds.FIREBALL_MELT_BLOCK, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.fireball.melt_block"));
+		soundExporter.add(MubbleSounds.FIREBALL_THROW, variantSoundBuilder(MubbleSounds.FIREBALL_THROW, 1).category(SoundCategory.HOSTILE));
 
-		soundExporter.add(MubbleSounds.ICEBALL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.ICEBALL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE).subtitle(null));
-		soundExporter.add(MubbleSounds.ICEBALL_HIT_ENTITY, variantSoundBuilder(MubbleSounds.ICEBALL_HIT_ENTITY, 1).category(SoundCategory.HOSTILE).subtitle(null));
-		soundExporter.add(MubbleSounds.ICEBALL_THROW, variantSoundBuilder(MubbleSounds.ICEBALL_THROW, 1).category(SoundCategory.HOSTILE).subtitle(null));
+		soundExporter.add(MubbleSounds.ICEBALL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.ICEBALL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.iceball.hit"));
+		soundExporter.add(MubbleSounds.ICEBALL_HIT_ENTITY, variantSoundBuilder(MubbleSounds.ICEBALL_HIT_ENTITY, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.iceball.hit"));
+		soundExporter.add(MubbleSounds.ICEBALL_THROW, variantSoundBuilder(MubbleSounds.ICEBALL_THROW, 1).category(SoundCategory.HOSTILE));
 
 		// Power-Up
 		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN, 1).category(SoundCategory.PLAYERS));

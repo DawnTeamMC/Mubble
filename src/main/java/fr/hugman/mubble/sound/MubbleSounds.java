@@ -27,7 +27,7 @@ public class MubbleSounds {
 
     public static final SoundEvent FIREBALL_HIT_BLOCK = of("entity.fireball.hit.block");
     public static final SoundEvent FIREBALL_HIT_ENTITY = of("entity.fireball.hit.entity");
-    public static final SoundEvent FIREBALL_HIT_MELTABLE = of("entity.fireball.hit.meltable");
+    public static final SoundEvent FIREBALL_MELT_BLOCK = of("entity.fireball.hit.melt_block");
     public static final RegistryEntry.Reference<SoundEvent> FIREBALL_THROW = ofRef("entity.fireball.throw");
 
     public static final SoundEvent ICEBALL_HIT_BLOCK = of("entity.iceball.hit.block");

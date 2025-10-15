@@ -92,7 +92,7 @@ public class FireballEntity extends BallEntity {
                     this.getEntityWorld().setBlockState(pos, resultBlock.getDefaultState());
                 }
             }
-            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_MELTABLE, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_MELT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }

@@ -39,7 +39,6 @@ public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 		);
 		valueLookupBuilder(SNAKE_BLOCKS).add(SNAKE_BLOCK, FAST_SNAKE_BLOCK, SLOW_SNAKE_BLOCK);
 		valueLookupBuilder(BEEP_BLOCKS).add(RED_BEEP_BLOCK, BLUE_BEEP_BLOCK);
-		valueLookupBuilder(BEEP_BLOCKS).add(RED_BEEP_BLOCK, BLUE_BEEP_BLOCK);
 
 		// YOSHI'S ISLAND
 		valueLookupBuilder(EGG_BLOCKS).add(
