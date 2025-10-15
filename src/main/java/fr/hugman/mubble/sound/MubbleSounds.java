@@ -3,6 +3,7 @@ package fr.hugman.mubble.sound;
 import fr.hugman.mubble.Mubble;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 
@@ -24,8 +25,28 @@ public class MubbleSounds {
     public static final SoundEvent GOOMBA_DEATH = of("entity.goomba.death");
     public static final SoundEvent GOOMBA_STOMP = of("entity.goomba.stomp");
 
+    public static final SoundEvent FIREBALL_HIT_BLOCK = of("entity.fireball.hit.block");
+    public static final SoundEvent FIREBALL_HIT_ENTITY = of("entity.fireball.hit.entity");
+    public static final SoundEvent FIREBALL_MELT_BLOCK = of("entity.fireball.hit.melt_block");
+    public static final RegistryEntry.Reference<SoundEvent> FIREBALL_THROW = ofRef("entity.fireball.throw");
+
+    public static final SoundEvent ICEBALL_HIT_BLOCK = of("entity.iceball.hit.block");
+    public static final SoundEvent ICEBALL_HIT_ENTITY = of("entity.iceball.hit.entity");
+    public static final RegistryEntry.Reference<SoundEvent> ICEBALL_THROW = ofRef("entity.iceball.throw");
+
+	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_OBTAIN = ofRef("power_up.obtain");
+	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_OBTAIN_MINI = ofRef("power_up.obtain.mini");
+	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_OBTAIN_SUPER_STAR = ofRef("power_up.obtain.super_star");
+	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_LOOSE = ofRef("power_up.loose");
+
+
     private static SoundEvent of(String path) {
         Identifier id = Mubble.id(path);
         return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+    }
+
+    private static RegistryEntry.Reference<SoundEvent> ofRef(String path) {
+        Identifier id = Mubble.id(path);
+        return Registry.registerReference(Registries.SOUND_EVENT, id, SoundEvent.of(id));
     }
 }

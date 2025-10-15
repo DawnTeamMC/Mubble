@@ -2,6 +2,7 @@ package fr.hugman.mubble.data.provider;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.minecraft.block.Blocks;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.tag.BlockTags;
 
@@ -17,6 +18,11 @@ public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
 	@Override
 	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+        valueLookupBuilder(MELTABLE_TO_AIR);
+        valueLookupBuilder(MELTABLE_TO_WATER).add(Blocks.ICE);
+        valueLookupBuilder(MELTABLE_TO_ICE).add(Blocks.PACKED_ICE);
+        valueLookupBuilder(FREEZABLE_TO_PACKED_ICE).add(Blocks.ICE);
+
 		// SUPER MARIO
 		valueLookupBuilder(BRICK_BLOCKS).add(BRICK_BLOCK, CRYSTAL_BLOCK, GOLD_BLOCK);
 		valueLookupBuilder(EXCLAMATION_BLOCKS).add(

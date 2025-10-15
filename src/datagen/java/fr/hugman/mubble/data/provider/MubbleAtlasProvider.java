@@ -1,19 +1,15 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.data.PowerUpItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricCodecDataProvider;
-import net.minecraft.client.texture.atlas.AtlasSource;
-import net.minecraft.client.texture.atlas.AtlasSourceManager;
-import net.minecraft.client.texture.atlas.PalettedPermutationsAtlasSource;
+import net.minecraft.client.texture.atlas.*;
 import net.minecraft.data.DataOutput;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
@@ -46,6 +42,7 @@ public class MubbleAtlasProvider extends FabricCodecDataProvider<List<AtlasSourc
 						FULL_MAP
                 )
         ));
+        provider.accept(Identifier.ofVanilla("gui"), powerUpsAtlasSources());
     }
 
 	private static Map<String, Identifier> makeFullPalette() {
@@ -73,6 +70,15 @@ public class MubbleAtlasProvider extends FabricCodecDataProvider<List<AtlasSourc
 		}
 		return map;
 	}
+
+    private static List<AtlasSource> powerUpsAtlasSources() {
+        var list = new ArrayList<AtlasSource>();
+        PowerUpItems.forEach(entry -> list.add(new SingleAtlasSource(
+            Identifier.of(entry.item().getValue().getNamespace(), "item/" + entry.item().getValue().getPath()),
+            Optional.of(entry.powerUp().getValue().withPrefixedPath("power_up/")))
+        ));
+        return list;
+    }
 
     @Override
     public String getName() {

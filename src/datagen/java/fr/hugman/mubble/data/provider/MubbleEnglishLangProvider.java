@@ -2,6 +2,7 @@ package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.item_group.MubbleItemGroupKeys;
+import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.Registry;
@@ -36,6 +37,8 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("block.mubble.bumpable.drop.one", "Drop one");
 		builder.add("block.mubble.bumpable.drop.one.description", "The block will drop one item per bump");
 
+		builder.add("key.mubble.trigger_power_up", "Trigger Power-Up");
+
 		builder.add("subtitles.mubble.block.bumpable_block.bump", "Block bumped");
 		builder.add("subtitles.mubble.block.bumpable_block.change_loot", "Block filled");
 		builder.add("subtitles.mubble.block.bumpable_block.destroy", "Block destroyed");
@@ -46,8 +49,24 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("subtitles.mubble.entity.goomba.find_target", "Goomba finds target");
 		builder.add("subtitles.mubble.entity.goomba.death", "Goomba dies");
 		builder.add("subtitles.mubble.entity.goomba.stomp", "Goomba stomped");
+		builder.add("subtitles.mubble.entity.fireball.hit", "Fireball hits");
+		builder.add("subtitles.mubble.entity.fireball.melt_block", "Fireball melts block");
+		builder.add("subtitles.mubble.entity.fireball.throw", "Fireball thrown");
+		builder.add("subtitles.mubble.entity.iceball.hit", "Iceball hits");
+		builder.add("subtitles.mubble.entity.iceball.throw", "Fireball thrown");
+		builder.add("subtitles.mubble.power_up.obtain", "Power-up obtained");
+		builder.add("subtitles.mubble.power_up.loose", "Power-up lost");
 
 		builder.add("gamerule.beepBlockCooldown", "Beep Block cooldown");
+
+        builder.add("commands.mubble.power_up.set.success", "Changed %s's power-up");
+        builder.add("commands.mubble.power_up.set.success_named", "Changed %s's power-up to %s");
+        builder.add("commands.mubble.power_up.set.unchanged", "Nothing changed. The player already has this power-up");
+        builder.add("commands.mubble.power_up.remove.success", "Successfully removed %s's power-up");
+        builder.add("commands.mubble.power_up.remove.success_named", "Successfully removed %s's %s power-up");
+        builder.add("commands.mubble.power_up.remove.no_power_up", "Nothing changed. The player doesn't have any power-up to remove");
+
+        builder.add("power_up_action_type.mubble.shoot_projectile.description", "Press %s to shoot %s");
 
 		builder.add("modmenu.descriptionTranslation.mubble", "Ultimate crossover mod with all your favorite franchises! Mainly focused on Nintendo.");
 	}
@@ -111,7 +130,16 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 			var id = itemGroup.registryKey().getValue();
 			try {
 				builder.add(Util.createTranslationKey("item_group", id), snakeToTitleCase(id.getPath()));
-			}catch (RuntimeException ignored) {}
+			}
+            catch (RuntimeException ignored) {}
+		}
+
+		for (var powerUp : getRegistryEntries(wrapperLookup, MubbleRegistryKeys.POWER_UP)) {
+			var id = powerUp.registryKey().getValue();
+			try {
+				builder.add(Util.createTranslationKey("power_up", id), snakeToTitleCase(id.getPath()));
+			}
+            catch (RuntimeException ignored) {}
 		}
 	}
 

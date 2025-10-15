@@ -27,6 +27,9 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
 		// - Variants
 		pack.addProvider(MubbleGoombaVariantProvider::new);
 
+        // - Power-Ups
+        pack.addProvider(MubblePowerUpProvider::new);
+
 		// - Tags
 		pack.addProvider(MubbleBlockTagProvider::new);
 		pack.addProvider(MubbleEntityTypeTagProvider::new);
@@ -35,6 +38,7 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void buildRegistry(RegistryBuilder registryBuilder) {
 		registryBuilder.addRegistry(MubbleRegistryKeys.GOOMBA_VARIANT, MubbleGoombaVariantProvider::register);
+		registryBuilder.addRegistry(MubbleRegistryKeys.POWER_UP, MubblePowerUpProvider::register);
 	}
 
 	@Override

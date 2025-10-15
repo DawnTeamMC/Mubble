@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(LivingEntityRenderer.class)
 public class LivingEntityRendererMixin {
     @Redirect(method = "setupTransforms", at = @At(value = "FIELD", target = "Lnet/minecraft/client/render/entity/state/LivingEntityRenderState;deathTime:F"))
-    private float redirectDeathTime(LivingEntityRenderState state) {
+    private float mubble$blockDeathAnimation(LivingEntityRenderState state) {
         if (state instanceof GoombaEntityRenderState goombaState && goombaState.stomped) {
             return 0;
         }
