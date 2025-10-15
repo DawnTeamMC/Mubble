@@ -4,14 +4,12 @@ import fr.hugman.mubble.client.render.entity.model.BallEntityModel;
 import fr.hugman.mubble.client.render.entity.model.MubbleModelLayers;
 import fr.hugman.mubble.client.render.entity.state.BallRenderState;
 import fr.hugman.mubble.entity.BallEntity;
-import fr.hugman.mubble.entity.FireballEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.entity.state.CowEntityRenderState;
 import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
@@ -27,7 +25,7 @@ public class BallEntityRenderer extends EntityRenderer<BallEntity, BallRenderSta
 
     public BallEntityRenderer(EntityRendererFactory.Context ctx) {
         super(ctx);
-        this.model = new BallEntityModel(ctx.getPart(MubbleModelLayers.FIREBALL));
+        this.model = new BallEntityModel(ctx.getPart(MubbleModelLayers.BALL));
     }
 
     @Override
