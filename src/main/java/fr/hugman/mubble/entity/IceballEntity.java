@@ -1,5 +1,6 @@
 package fr.hugman.mubble.entity;
 
+import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.tag.MubbleBlockTags;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -25,7 +26,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class IceballEntity extends BallEntity {
-    private static final AssetInfo.TextureAssetInfo TEXTURE = new AssetInfo.TextureAssetInfo(Identifier.ofVanilla("block/light_blue_concrete"));
+    private static final AssetInfo.TextureAssetInfo TEXTURE = new AssetInfo.TextureAssetInfo(Mubble.id("entity/iceball"));
 
     public IceballEntity(EntityType<? extends IceballEntity> type, World world) {
         super(type, world);

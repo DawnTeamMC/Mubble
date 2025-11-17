@@ -1,5 +1,6 @@
 package fr.hugman.mubble.entity;
 
+import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.tag.MubbleBlockTags;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.event.GameEvent;
 
 public class FireballEntity extends BallEntity {
-    private static final AssetInfo.TextureAssetInfo TEXTURE = new AssetInfo.TextureAssetInfo(Identifier.ofVanilla("block/orange_concrete"));
+    private static final AssetInfo.TextureAssetInfo TEXTURE = new AssetInfo.TextureAssetInfo(Mubble.id("entity/fireball"));
 
     public FireballEntity(EntityType<? extends FireballEntity> type, World world) {
         super(type, world);

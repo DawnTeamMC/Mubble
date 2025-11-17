@@ -14,6 +14,8 @@ import net.minecraft.storage.ReadView;
 import net.minecraft.storage.WriteView;
 import net.minecraft.util.AssetInfo;
 import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public abstract class BallEntity extends ThrownEntity {
@@ -34,8 +36,17 @@ public abstract class BallEntity extends ThrownEntity {
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
+    protected void initDataTracker(DataTracker.Builder builder) {}
 
+    @Override
+    public void tick() {
+        super.tick();
+        Vec3d vec3d = this.getVelocity();
+
+        float f = (float)(MathHelper.atan2(-vec3d.x, -vec3d.z) * 180.0F / (float)Math.PI);
+        float g = (float)(MathHelper.atan2(vec3d.y, vec3d.horizontalLength()) * 180.0F / (float)Math.PI);
+        this.setPitch(updateRotation(this.getPitch(), g));
+        this.setYaw(updateRotation(this.getYaw(), f));
     }
 
     protected abstract SoundEvent getDeathSound();
