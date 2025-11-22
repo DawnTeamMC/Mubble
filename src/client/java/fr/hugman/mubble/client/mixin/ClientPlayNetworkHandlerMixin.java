@@ -1,6 +1,7 @@
 package fr.hugman.mubble.client.mixin;
 
 import fr.hugman.mubble.client.MubbleClient;
+import fr.hugman.mubble.client.sound.MovingKoopaShellSoundInstance;
 import fr.hugman.mubble.entity.KoopaShellEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -18,7 +19,7 @@ public class ClientPlayNetworkHandlerMixin {
     private void onPlaySpawnSound(Entity entity, CallbackInfo ci) {
         ClientCommonNetworkHandlerAccessor accessor = (ClientCommonNetworkHandlerAccessor) this;
         if (entity instanceof KoopaShellEntity koopaShell) {
-            accessor.getClient().getSoundManager().play(new MubbleClient.MovingKoopaShellSoundInstance(koopaShell));
+            accessor.getClient().getSoundManager().play(new MovingKoopaShellSoundInstance(koopaShell));
         }
     }
 }
