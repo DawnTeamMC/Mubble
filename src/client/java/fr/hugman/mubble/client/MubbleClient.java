@@ -77,7 +77,7 @@ public class MubbleClient implements ClientModInitializer {
                 this.y = ((float) this.shell.getY());
                 this.z = ((float) this.shell.getZ());
                 float f = (float) this.shell.getVelocity().horizontalLength();
-                if (f >= 0.01F && this.shell.getWorld().getTickManager().shouldTick()) {
+                if (f >= 0.01F && this.shell.getEntityWorld().getTickManager().shouldTick()) {
                     this.distance = MathHelper.clamp(this.distance + 0.0025F, 0.0F, 1.0F);
                     this.volume = MathHelper.lerp(MathHelper.clamp(f, 0.0F, 0.5F), 0.0F, 0.7F);
                 } else {

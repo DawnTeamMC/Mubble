@@ -109,7 +109,7 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
     public void onSurprised() {
         this.playSound(MubbleSounds.GOOMBA_FIND_TARGET, 1.0F, 1.0F);
         if(null != this.getTarget()) {
-            this.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.getTarget().getPos());
+            this.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.getTarget().getEntityPos());
         }
     }
 

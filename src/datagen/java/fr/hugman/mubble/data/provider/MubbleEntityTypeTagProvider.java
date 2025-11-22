@@ -19,7 +19,9 @@ public class MubbleEntityTypeTagProvider extends FabricTagProvider.EntityTypeTag
 	@Override
 	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
 		// Mubble
-		valueLookupBuilder(CAN_STOMP).add(PLAYER);
+		valueLookupBuilder(KOOPA_SHELLS).add(GREEN_KOOPA_SHELL, RED_KOOPA_SHELL);
+        valueLookupBuilder(CAN_STOMP).add(PLAYER);
+        valueLookupBuilder(STOMPABLE).add(GOOMBA).addTag(KOOPA_SHELLS);
 
 		// Vanilla
 		valueLookupBuilder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA);

@@ -71,7 +71,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
 
         var prevVelocity = this.getVelocity();
         this.move(MovementType.SELF, prevVelocity);
-        var multiplier = BoxUtil.calculateHorizontalBouncingMultiplier(hitBox, BoxUtil.collectPotentialBlockCollisions(this.getWorld(), hitBox));
+        var multiplier = BoxUtil.calculateHorizontalBouncingMultiplier(hitBox, BoxUtil.collectPotentialBlockCollisions(this.getEntityWorld(), hitBox));
         if (!isStopped) {
             if (multiplier != null) {
                 prevVelocity = prevVelocity.multiply(multiplier);
@@ -85,7 +85,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
             this.velocityDirty = true;
         }
 
-        if (this.getWorld().isClient) {
+        if (this.getEntityWorld().isClient()) {
             this.tickRotation();
         }
     }
@@ -151,13 +151,13 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     @Override
     public void onStompedBy(List<Entity> entities) {
         super.onStompedBy(entities);
-        if (this.getWorld() instanceof ServerWorld) {
+        if (this.getEntityWorld() instanceof ServerWorld) {
             Mubble.LOGGER.info(this.getVelocity().horizontalLength());
 
             if (this.isStopped()) {
                 var vec3d = entities.getFirst().getVelocity();
                 if (vec3d.horizontalLength() == 0.0D) {
-                    vec3d = this.getPos().subtract(entities.getFirst().getPos()).normalize();
+                    vec3d = this.getEntityPos().subtract(entities.getFirst().getEntityPos()).normalize();
                 }
                 //TODO: if still stopped, make it random
                 this.setVelocity(vec3d.x, 0.0d, vec3d.z);
@@ -183,7 +183,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
         var center = this.getBoundingBox().getCenter();
         this.playSound(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, 1.0F, 1.0F);
         for (int l = 0; l < 8; l++) {
-            this.getWorld().addParticle(ParticleTypes.CRIT, center.x, center.y, center.z, direction.x + Math.random() - 0.5, direction.y + Math.random() - 0.5, direction.z + Math.random() - 0.5);
+            this.getEntityWorld().addParticleClient(ParticleTypes.CRIT, center.x, center.y, center.z, direction.x + Math.random() - 0.5, direction.y + Math.random() - 0.5, direction.z + Math.random() - 0.5);
         }
     }
 

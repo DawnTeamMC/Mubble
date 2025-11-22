@@ -13,6 +13,4 @@ public interface Surprisable {
 
     default void onSurprised() {
     }
-
-    ;
 }

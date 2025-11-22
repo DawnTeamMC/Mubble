@@ -1,9 +1,9 @@
 package fr.hugman.mubble.mixin;
 
 import fr.hugman.mubble.block.HittableBlock;
-import fr.hugman.mubble.entity.MubbleEntityTypeTags;
 import fr.hugman.mubble.entity.Stompable;
 import fr.hugman.mubble.entity.damage.MubbleDamageTypeKeys;
+import fr.hugman.mubble.tag.MubbleEntityTypeTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
@@ -56,7 +56,7 @@ public class EntityMixin implements Stompable {
         if (this.canBeStomped()) {
             Box hitBox = this.getStompBox();
             if (hitBox != null) {
-                List<Entity> list = thisEntity.getWorld().getOtherEntities(thisEntity, hitBox, this.getStompableBy());
+                List<Entity> list = thisEntity.getEntityWorld().getOtherEntities(thisEntity, hitBox, this.getStompableBy());
                 if (!list.isEmpty()) {
                     this.onStompedBy(list);
                 }
@@ -98,7 +98,7 @@ public class EntityMixin implements Stompable {
     public void onStompedBy(List<Entity> entities) {
         var thisEntity = ((Entity) (Object) this);
         //TODO: display particles!
-        if (thisEntity.getWorld() instanceof ServerWorld serverWorld) {
+        if (thisEntity.getEntityWorld() instanceof ServerWorld serverWorld) {
             //TODO: calculate damage using boots?
             thisEntity.damage(serverWorld, thisEntity.getDamageSources().create(MubbleDamageTypeKeys.STOMP, entities.getFirst()), 2.0F);
             for (Entity entity : entities) {
