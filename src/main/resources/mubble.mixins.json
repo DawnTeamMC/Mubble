@@ -7,6 +7,7 @@
     "ArgumentTypesMixin",
     "EntityMixin",
     "ItemStackMixin",
+    "LivingEntityMixin",
     "PlayerMixin"
   ],
   "injectors": {

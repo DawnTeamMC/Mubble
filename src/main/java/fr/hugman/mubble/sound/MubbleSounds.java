@@ -25,6 +25,9 @@ public class MubbleSounds {
     public static final SoundEvent GOOMBA_DEATH = of("entity.goomba.death");
     public static final SoundEvent GOOMBA_STOMP = of("entity.goomba.stomp");
 
+    public static final SoundEvent KOOPA_SHELL_SLIDE = of("entity.koopa_shell.slide");
+    public static final SoundEvent KOOPA_SHELL_HIT_BLOCK = of("entity.koopa_shell.hit_block");
+
     public static final SoundEvent FIREBALL_HIT_BLOCK = of("entity.fireball.hit.block");
     public static final SoundEvent FIREBALL_HIT_ENTITY = of("entity.fireball.hit.entity");
     public static final SoundEvent FIREBALL_MELT_BLOCK = of("entity.fireball.hit.melt_block");

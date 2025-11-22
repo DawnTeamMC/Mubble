@@ -10,4 +10,7 @@ public interface Surprisable {
     boolean isSurprised();
 
     void setSurprised(boolean b);
+
+    default void onSurprised() {
+    }
 }

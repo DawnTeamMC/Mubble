@@ -4,6 +4,7 @@ import fr.hugman.mubble.block.MubbleBlockEntityTypes;
 import fr.hugman.mubble.client.render.entity.BallEntityRenderer;
 import fr.hugman.mubble.client.render.block.BumpableBlockEntityRenderer;
 import fr.hugman.mubble.client.render.entity.GoombaEntityRenderer;
+import fr.hugman.mubble.client.render.entity.KoopaShellRenderer;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
@@ -11,6 +12,8 @@ import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 public class MubbleRenderers {
     public static void registerEntities() {
 		EntityRendererRegistry.register(MubbleEntityTypes.GOOMBA, GoombaEntityRenderer::new);
+        EntityRendererRegistry.register(MubbleEntityTypes.GREEN_KOOPA_SHELL, KoopaShellRenderer::new);
+        EntityRendererRegistry.register(MubbleEntityTypes.RED_KOOPA_SHELL, KoopaShellRenderer::new);
         EntityRendererRegistry.register(MubbleEntityTypes.FIREBALL, BallEntityRenderer::new);
         EntityRendererRegistry.register(MubbleEntityTypes.ICEBALL, BallEntityRenderer::new);
     }
