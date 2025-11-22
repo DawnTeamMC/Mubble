@@ -19,7 +19,7 @@ public class KoopaShellModel extends EntityModel<KoopaShellEntityRenderState> {
                         .cuboid(-5.0F, -3.25F, -5.0F, 10.0F, 7.0F, 10.0F)
                         .uv(0, 17)
                         .cuboid(-6.0F, -1.25F, -6.0F, 12.0F, 2.0F, 12.0F),
-                ModelTransform.pivot(0.0F, 20.25F, 0.0F)
+                ModelTransform.origin(0.0F, 20.25F, 0.0F)
         );
         return TexturedModelData.of(modelData, 64, 32);
     }

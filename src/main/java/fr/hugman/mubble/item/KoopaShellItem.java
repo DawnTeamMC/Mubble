@@ -32,7 +32,7 @@ public class KoopaShellItem extends Item implements ProjectileItem {
         world.playSound(
                 null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F)
         );
-        if (!world.isClient) {
+        if (!world.isClient()) {
             KoopaShellEntity koopaShellEntity = isRed ? new RedKoopaShellEntity(world, user) : new GreenKoopaShellEntity(world, user);
             koopaShellEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 0.5F, 1.0F);
             world.spawnEntity(koopaShellEntity);

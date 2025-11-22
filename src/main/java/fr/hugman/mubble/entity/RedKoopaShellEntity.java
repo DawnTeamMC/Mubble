@@ -56,9 +56,9 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
             this.target = null;
         }
 
-        if (this.target != null && !this.getWorld().isClient) {
-            Vec3d currentPosition = this.getPos();
-            Vec3d targetPosition = this.target.getPos();
+        if (this.target != null && !this.getEntityWorld().isClient()) {
+            Vec3d currentPosition = this.getEntityPos();
+            Vec3d targetPosition = this.target.getEntityPos();
             Vec3d desiredVelocity = targetPosition.subtract(currentPosition).normalize().multiply(0.5);
 
             Vec3d currentVelocity = this.getVelocity();
@@ -81,11 +81,11 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
     }
 
     private void expensiveUpdate() {
-        var world = this.getWorld();
+        var world = this.getEntityWorld();
         if (world instanceof ServerWorld serverWorld && this.getOwner() instanceof LivingEntity livingOwner) {
             if (this.target == null || this.target.squaredDistanceTo(this) > MAX_TARGET_DISTANCE_SQUARE) {
                 this.target = serverWorld.getClosestEntity(
-                        this.getWorld().getEntitiesByClass(LivingEntity.class, this.getSearchBox(MAX_TARGET_DISTANCE), livingEntity -> true),
+                        this.getEntityWorld().getEntitiesByClass(LivingEntity.class, this.getSearchBox(MAX_TARGET_DISTANCE), livingEntity -> true),
                         TARGET_PREDICATE,
                         livingOwner,
                         this.getX(),

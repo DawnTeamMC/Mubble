@@ -10,6 +10,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 public class MubbleModelLayers {
     public static final EntityModelLayer GOOMBA = of("goomba", GoombaModel::getTexturedModelData);
     public static final EntityModelLayer BALL = of("ball", BallEntityModel::getTexturedModelData);
+    public static final EntityModelLayer KOOPA_SHELL = of("ball", KoopaShellModel::getTexturedModelData);
 
     private static EntityModelLayer of(String path, String layerName, EntityModelLayerRegistry.TexturedModelDataProvider provider) {
         var layer = new EntityModelLayer(Mubble.id(path), layerName);
