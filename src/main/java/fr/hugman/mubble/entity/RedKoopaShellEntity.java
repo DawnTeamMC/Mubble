@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 
 // TODO: break on impact
 public class RedKoopaShellEntity extends KoopaShellEntity {
-    private static final Identifier TEXTURE = Mubble.id("textures/entity/koopa_shell/red.png");
+    private static final Identifier TEXTURE = Mubble.id("textures/entity/red_koopa_shell.png");
 
     private static final double MAX_TARGET_DISTANCE = 16.0;
     private static final double MAX_TARGET_DISTANCE_SQUARE = MAX_TARGET_DISTANCE * MAX_TARGET_DISTANCE;

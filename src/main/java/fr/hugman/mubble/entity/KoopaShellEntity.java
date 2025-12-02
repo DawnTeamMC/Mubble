@@ -1,7 +1,7 @@
 package fr.hugman.mubble.entity;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.entity.damage.MubbleDamageTypeKeys;
+import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.util.BoxUtil;
 import net.minecraft.entity.Entity;
@@ -114,7 +114,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     @Override
     protected void onEntityHit(EntityHitResult result) {
         super.onEntityHit(result);
-        result.getEntity().serverDamage(this.getDamageSources().create(MubbleDamageTypeKeys.KOOPA_SHELL, this, this.getOwner()), 2.0F);
+        result.getEntity().serverDamage(this.getDamageSources().create(MubbleDamageTypes.KOOPA_SHELL, this, this.getOwner()), 2.0F);
 
         var bounce = true;
 

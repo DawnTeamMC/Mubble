@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class GreenKoopaShellEntity extends KoopaShellEntity {
-    private static final Identifier TEXTURE = Mubble.id("textures/entity/koopa_shell/green.png");
+    private static final Identifier TEXTURE = Mubble.id("textures/entity/green_koopa_shell.png");
 
     public GreenKoopaShellEntity(EntityType<? extends GreenKoopaShellEntity> entityType, World world) {
         super(entityType, world);

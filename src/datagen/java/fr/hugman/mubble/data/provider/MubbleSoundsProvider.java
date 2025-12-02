@@ -43,6 +43,9 @@ public class MubbleSoundsProvider extends FabricSoundsProvider {
 		soundExporter.add(MubbleSounds.GOOMBA_DEATH, variantSoundBuilder(MubbleSounds.GOOMBA_DEATH, 1).category(SoundCategory.HOSTILE));
 		soundExporter.add(MubbleSounds.GOOMBA_STOMP, variantSoundBuilder(MubbleSounds.GOOMBA_STOMP, 1).category(SoundCategory.HOSTILE));
 
+		soundExporter.add(MubbleSounds.KOOPA_SHELL_SLIDE, variantSoundBuilder(MubbleSounds.KOOPA_SHELL_SLIDE, 1).category(SoundCategory.HOSTILE));
+		soundExporter.add(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE));
+
 		soundExporter.add(MubbleSounds.FIREBALL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.fireball.hit"));
 		soundExporter.add(MubbleSounds.FIREBALL_HIT_ENTITY, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_ENTITY, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.fireball.hit"));
 		soundExporter.add(MubbleSounds.FIREBALL_MELT_BLOCK, variantSoundBuilder(MubbleSounds.FIREBALL_MELT_BLOCK, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.fireball.melt_block"));

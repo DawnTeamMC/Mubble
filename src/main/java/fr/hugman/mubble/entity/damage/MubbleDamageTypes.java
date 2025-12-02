@@ -5,7 +5,7 @@ import net.minecraft.entity.damage.DamageType;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 
-public class MubbleDamageTypeKeys {
+public class MubbleDamageTypes {
     // SUPER MARIO
     public static final RegistryKey<DamageType> STOMP = of("stomp");
     public static final RegistryKey<DamageType> KOOPA_SHELL = of("koopa_shell");

@@ -1,4 +1,4 @@
-package fr.hugman.mubble.entity.damage;
+package fr.hugman.mubble.tag;
 
 import fr.hugman.mubble.Mubble;
 import net.minecraft.entity.damage.DamageType;
@@ -12,5 +12,4 @@ public class MubbleDamageTypeTags {
     private static TagKey<DamageType> of(String path) {
         return TagKey.of(RegistryKeys.DAMAGE_TYPE, Mubble.id(path));
     }
-
 }

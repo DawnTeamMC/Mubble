@@ -3,6 +3,7 @@ package fr.hugman.mubble.data.provider;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.item_group.MubbleItemGroupKeys;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import fr.hugman.mubble.sound.MubbleSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.registry.Registry;
@@ -49,6 +50,8 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("subtitles.mubble.entity.goomba.find_target", "Goomba finds a target");
 		builder.add("subtitles.mubble.entity.goomba.death", "Goomba dies");
 		builder.add("subtitles.mubble.entity.goomba.stomp", "Goomba stomped");
+		builder.add(MubbleSounds.KOOPA_SHELL_SLIDE, "Koopa Shell slides");
+		builder.add(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, "Koopa Shell hits block");
 		builder.add("subtitles.mubble.entity.fireball.hit", "Fireball hits");
 		builder.add("subtitles.mubble.entity.fireball.melt_block", "Fireball melts block");
 		builder.add("subtitles.mubble.entity.fireball.throw", "Fireball thrown");

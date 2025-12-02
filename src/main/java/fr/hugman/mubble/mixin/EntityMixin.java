@@ -2,7 +2,7 @@ package fr.hugman.mubble.mixin;
 
 import fr.hugman.mubble.block.HittableBlock;
 import fr.hugman.mubble.entity.Stompable;
-import fr.hugman.mubble.entity.damage.MubbleDamageTypeKeys;
+import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.tag.MubbleEntityTypeTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -100,7 +100,7 @@ public class EntityMixin implements Stompable {
         //TODO: display particles!
         if (thisEntity.getEntityWorld() instanceof ServerWorld serverWorld) {
             //TODO: calculate damage using boots?
-            thisEntity.damage(serverWorld, thisEntity.getDamageSources().create(MubbleDamageTypeKeys.STOMP, entities.getFirst()), 2.0F);
+            thisEntity.damage(serverWorld, thisEntity.getDamageSources().create(MubbleDamageTypes.STOMP, entities.getFirst()), 2.0F);
             for (Entity entity : entities) {
                 entity.setVelocity(entity.getVelocity().x, 0.5D, entity.getVelocity().z);
                 if (entity instanceof PlayerEntity player) {
