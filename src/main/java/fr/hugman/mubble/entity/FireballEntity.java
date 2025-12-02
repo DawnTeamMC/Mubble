@@ -1,6 +1,7 @@
 package fr.hugman.mubble.entity;
 
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.tag.MubbleBlockTags;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -62,7 +63,7 @@ public class FireballEntity extends BallEntity {
             entity.setOnFireFor(5);
         }
         this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-		entity.serverDamage(this.getDamageSources().thrown(this, this.getOwner()), damage);
+		entity.serverDamage(this.getDamageSources().create(MubbleDamageTypes.FIREBALL, this, this.getOwner()), damage);
         this.finalHit();
     }
 

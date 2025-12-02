@@ -62,6 +62,14 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 
 		builder.add("gamerule.beepBlockCooldown", "Beep Block cooldown");
 
+		builder.add("death.attack.mubble.stomp", "%1$s was stomped by %2$s");
+		builder.add("death.attack.mubble.koopa_shell", "%1$s was shelled by %2$s");
+		builder.add("death.attack.mubble.koopa_shell.player", "%1$s was shelled while fighting %2$s");
+		builder.add("death.attack.mubble.fireball", "%1$s was fireballed by %2$s");
+        builder.add("death.attack.mubble.fireball.player", "%1$s was fireballed while fighting %2$s");
+        builder.add("death.attack.mubble.iceball", "%1$s was iceballed by %2$s");
+        builder.add("death.attack.mubble.iceball.player", "%1$s was iceballed while fighting %2$s");
+
         builder.add("commands.mubble.power_up.set.success", "Changed %s's power-up");
         builder.add("commands.mubble.power_up.set.success_named", "Changed %s's power-up to %s");
         builder.add("commands.mubble.power_up.set.unchanged", "Nothing changed. The player already has this power-up");

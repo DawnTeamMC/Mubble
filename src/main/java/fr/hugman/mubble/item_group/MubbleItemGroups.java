@@ -61,10 +61,9 @@ public class MubbleItemGroups {
             entries.add(MubbleBlocks.SLOW_SNAKE_BLOCK);
             entries.add(MubbleBlocks.RED_BEEP_BLOCK);
             entries.add(MubbleBlocks.BLUE_BEEP_BLOCK);
+            entries.add(MubbleItems.GREEN_KOOPA_SHELL);
+            entries.add(MubbleItems.RED_KOOPA_SHELL);
             entries.add(MubbleItems.MAKER_GLOVE);
-            //outdated
-            //entries.add(MubbleItems.CAPE_FEATHER);
-            //entries.add(MubbleItems.SUPER_CAPE_FEATHER);
             entries.add(MubbleItems.GOOMBA_SPAWN_EGG);
             context.lookup()
                     .getOptional(MubbleRegistryKeys.GOOMBA_VARIANT)

@@ -9,9 +9,10 @@ public class MubbleDamageTypes {
     // SUPER MARIO
     public static final RegistryKey<DamageType> STOMP = of("stomp");
     public static final RegistryKey<DamageType> KOOPA_SHELL = of("koopa_shell");
+    public static final RegistryKey<DamageType> FIREBALL = of("fireball");
+    public static final RegistryKey<DamageType> ICEBALL = of("iceball");
 
     private static RegistryKey<DamageType> of(String path) {
         return RegistryKey.of(RegistryKeys.DAMAGE_TYPE, Mubble.id(path));
     }
-
 }

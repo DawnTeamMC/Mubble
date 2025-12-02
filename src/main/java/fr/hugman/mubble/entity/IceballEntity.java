@@ -1,6 +1,7 @@
 package fr.hugman.mubble.entity;
 
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.tag.MubbleBlockTags;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -68,7 +69,7 @@ public class IceballEntity extends BallEntity {
         }
 
         this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.ICEBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-		entity.serverDamage(this.getDamageSources().thrown(this, this.getOwner()), damage);
+        entity.serverDamage(this.getDamageSources().create(MubbleDamageTypes.ICEBALL, this, this.getOwner()), damage);
         this.finalHit();
     }
 

@@ -3,6 +3,7 @@ package fr.hugman.mubble.data.provider;
 import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
+import net.minecraft.entity.damage.DamageEffects;
 import net.minecraft.entity.damage.DamageScaling;
 import net.minecraft.entity.damage.DamageType;
 import net.minecraft.registry.Registerable;
@@ -27,7 +28,9 @@ public class MubbleDamageTypeProvider extends FabricDynamicRegistryProvider {
     }
 
     public static void register(Registerable<DamageType> registerable) {
-		registerable.register(MubbleDamageTypes.STOMP, new DamageType("mubble.stomp", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f));
-		registerable.register(MubbleDamageTypes.KOOPA_SHELL, new DamageType("mubble.koopa_shell", DamageScaling.WHEN_CAUSED_BY_LIVING_NON_PLAYER, 0.1f));
+		registerable.register(MubbleDamageTypes.STOMP, new DamageType("mubble.stomp", 0.1f));
+		registerable.register(MubbleDamageTypes.KOOPA_SHELL, new DamageType("mubble.koopa_shell", 0.1f));
+		registerable.register(MubbleDamageTypes.FIREBALL, new DamageType("mubble.fireball", 0.1f, DamageEffects.BURNING));
+		registerable.register(MubbleDamageTypes.ICEBALL, new DamageType("mubble.iceball", 0.1f, DamageEffects.FREEZING));
     }
 }
