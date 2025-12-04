@@ -50,6 +50,12 @@ public class PlayerMixin implements PowerUpHolder {
 		view.read(POWER_UP_KEY, PowerUp.ENTRY_CODEC).ifPresent(entry -> this_.getDataTracker().set(POWER_UP, Optional.of(entry)));
     }
 
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void mubble$tick(CallbackInfo ci) {
+        var this_ = (PlayerEntity) (Object) this;
+        this_.getPowerUp().ifPresent(entry -> this.powerUpProperties.tick());
+    }
+
     @Override
     public Optional<RegistryEntry<PowerUp>> getPowerUp() {
         var this_ = (PlayerEntity) (Object) this;

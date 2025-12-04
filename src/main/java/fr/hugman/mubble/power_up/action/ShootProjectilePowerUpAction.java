@@ -22,31 +22,39 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
+import java.util.Optional;
 import java.util.function.Consumer;
 
 
 public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
         RegistryEntry<SoundEvent> sound,
-        float speed
+        float speed,
+        Optional<Integer> maxProjectiles,
+        Optional<Integer> cooldown
         //TODO: add shooting algorithm
         //TODO: add projectile NBT
 ) implements PowerUpAction, TooltipAppender {
     public static final MapCodec<ShootProjectilePowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             Registries.ENTITY_TYPE.getCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
             SoundEvent.ENTRY_CODEC.fieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
-            Codec.FLOAT.optionalFieldOf("speed", 1.5F).forGetter(ShootProjectilePowerUpAction::speed)
+            Codec.FLOAT.optionalFieldOf("speed", 1.5F).forGetter(ShootProjectilePowerUpAction::speed),
+            Codec.INT.optionalFieldOf("max_projectiles").forGetter(ShootProjectilePowerUpAction::maxProjectiles),
+            Codec.INT.optionalFieldOf("cooldown").forGetter(ShootProjectilePowerUpAction::cooldown)
     ).apply(instance, ShootProjectilePowerUpAction::new));
 
     public static final PacketCodec<RegistryByteBuf, ShootProjectilePowerUpAction> PACKET_CODEC = PacketCodec.tuple(
             PacketCodecs.registryValue(RegistryKeys.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
             SoundEvent.ENTRY_PACKET_CODEC, (ShootProjectilePowerUpAction::sound),
             PacketCodecs.FLOAT, (ShootProjectilePowerUpAction::speed),
+            PacketCodecs.optional(PacketCodecs.INTEGER), (ShootProjectilePowerUpAction::maxProjectiles),
+            PacketCodecs.optional(PacketCodecs.INTEGER), (ShootProjectilePowerUpAction::cooldown),
             ShootProjectilePowerUpAction::new
     );
 
@@ -56,13 +64,29 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
-    public void trigger(PlayerEntity player) {
+    public ActionResult trigger(PlayerEntity player) {
+        var properties = player.getPowerUpProperties();
+
         var world = player.getEntityWorld();
+        if (!world.isClient()) {
+            properties.removeInvalidProjectiles(world);
+        }
+        if(maxProjectiles.isPresent() && properties.projectiles.size() >= maxProjectiles.get()) {
+            return ActionResult.FAIL;
+        }
+
+        player.swingHand(Hand.MAIN_HAND);
+
+        if (player.getEntityWorld().isClient()) {
+            //TODO once powerup properties are synced, have a check on the client
+            return ActionResult.SUCCESS;
+        }
+
         if (!world.isClient()) {
             world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             var entity = this.projectile.create(world, SpawnReason.TRIGGERED);
             if (null == entity) {
-                return;
+                return ActionResult.FAIL;
             }
             if (entity instanceof ProjectileEntity projectileEntity) {
                 projectileEntity.setOwner(player);
@@ -70,8 +94,10 @@ public record ShootProjectilePowerUpAction(
             entity.setPosition(player.getX(), player.getEyeY() - 0.1F, player.getZ());
             setVelocity(entity, player, player.getPitch(), player.getYaw(), 0.0F, this.speed, 1.0F);
             world.spawnEntity(entity);
+            properties.projectiles.add(entity.getUuid());
+            properties.cooldown = cooldown.orElse(0);
         }
-        player.swingHand(Hand.MAIN_HAND);
+        return ActionResult.SUCCESS;
     }
 
 

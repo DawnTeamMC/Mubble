@@ -4,6 +4,7 @@ import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
 import fr.hugman.mubble.network.payload.c2s.PowerUpTriggerPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.ActionResult;
 
 public class PowerUpKeybindsHandler {
     public static void tick(MinecraftClient client) {
@@ -16,9 +17,9 @@ public class PowerUpKeybindsHandler {
                 // let's utilize Minecraft's registry sync to my advantage
                 if(powerUp.canBeTriggered()) {
                     while(MubbleKeyBindings.TRIGGER_POWER_UP.wasPressed()) {
-                        //TODO: check for cooldown
-                        ClientPlayNetworking.send(PowerUpTriggerPayload.INSTANCE);
-                        powerUp.trigger(client.player);
+                        if(powerUp.trigger(client.player) == ActionResult.SUCCESS) {
+                            ClientPlayNetworking.send(PowerUpTriggerPayload.INSTANCE);
+                        }
                     }
                 }
             }

@@ -22,6 +22,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextCodecs;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -70,8 +71,8 @@ public record PowerUp(
     public static final PacketCodec<RegistryByteBuf, Optional<RegistryEntry<PowerUp>>> OPTIONAL_ENTRY_PACKET_CODEC = PacketCodecs.optional(ENTRY_PACKET_CODEC);
     public static final PacketCodec<RegistryByteBuf, LazyRegistryEntryReference<PowerUp>> LAZY_ENTRY_PACKET_CODEC = LazyRegistryEntryReference.createPacketCodec(MubbleRegistryKeys.POWER_UP, ENTRY_PACKET_CODEC);
 
-    public void trigger(PlayerEntity player) {
-        this.action.ifPresent(entry -> entry.value().trigger(player));
+    public ActionResult trigger(PlayerEntity player) {
+        return this.action.map(entry -> entry.value().trigger(player)).orElse(ActionResult.PASS);
     }
 
     public void applyModifiers(BiConsumer<RegistryEntry<EntityAttribute>, EntityAttributeModifier> attributeConsumer) {
@@ -106,7 +107,12 @@ public record PowerUp(
         if (previous.isPresent() && next.isEmpty()) {
             entity.playSound(previous.get().value().looseSound.value(), 1.0F, 1.0F);
         } else
-            next.ifPresent(powerUpRegistryEntry -> entity.playSound(powerUpRegistryEntry.value().obtainSound.value(), 1.0F, 1.0F));
+            next.ifPresent(powerUpRegistryEntry -> {
+                entity.playSound(powerUpRegistryEntry.value().obtainSound.value(), 1.0F, 1.0F);
+                if (entity instanceof PowerUpHolder powerUpHolder) {
+                    powerUpHolder.getPowerUpProperties().reset();
+                }
+            });
 
         //TODO: create event?
         //TODO: particles

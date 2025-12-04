@@ -9,6 +9,7 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.network.codec.PacketCodecs;
 import net.minecraft.registry.entry.RegistryElementCodec;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Util;
 
 import java.util.Optional;
@@ -23,7 +24,7 @@ public interface PowerUpAction {
 
     PowerUpActionType<?> getType();
 
-    void trigger(PlayerEntity player);
+    ActionResult trigger(PlayerEntity player);
 
     default Optional<String> getTranslationKey() {
         return MubbleRegistries.POWER_UP_ACTION_TYPE

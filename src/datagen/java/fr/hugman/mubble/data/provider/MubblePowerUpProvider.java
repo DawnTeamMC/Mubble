@@ -13,6 +13,7 @@ import net.minecraft.registry.Registerable;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.registry.entry.RegistryEntry;
 
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import static fr.hugman.mubble.power_up.PowerUps.*;
@@ -72,7 +73,9 @@ public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
                 .action(RegistryEntry.of(new ShootProjectilePowerUpAction(
                         MubbleEntityTypes.FIREBALL,
                         MubbleSounds.FIREBALL_THROW,
-                        0.4f
+                        0.4f,
+                        Optional.of(3),
+                        Optional.empty()
                 )))
                 .build());
         registerable.register(ICE, new PowerUpBuilder()
@@ -80,7 +83,9 @@ public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
                 .action(RegistryEntry.of(new ShootProjectilePowerUpAction(
                         MubbleEntityTypes.ICEBALL,
                         MubbleSounds.ICEBALL_THROW,
-                        0.4f
+                        0.4f,
+                        Optional.of(3),
+                        Optional.empty()
                 )))
                 .build());
     }
