@@ -35,12 +35,5 @@ public class GoombaEntityRenderer extends MobEntityRenderer<GoombaEntity, Goomba
         state.texture = goomba.getTexture();
         state.surprised = goomba.isSurprised();
         state.stomped = goomba.isStomped();
-
-        // Force the rotation when the Goomba is surprised
-        if (state.surprised) {
-            state.bodyYaw = goomba.headYaw;
-            state.relativeHeadYaw = MathHelper.wrapDegrees(goomba.headYaw - goomba.bodyYaw);
-            state.pitch = goomba.getPitch();
-        }
     }
 }

@@ -161,6 +161,9 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
             if (this.getSurpriseProgress() == 1) {
                 this.surprisedAnimationState.start(this.age);
             }
+            this.lastHeadYaw = this.headYaw;
+            this.bodyYaw = this.headYaw;
+            this.lastBodyYaw = this.bodyYaw;
         }
         super.onTrackedDataSet(data);
     }
