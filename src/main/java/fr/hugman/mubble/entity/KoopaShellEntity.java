@@ -4,46 +4,51 @@ import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.util.BoxUtil;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
+import net.minecraft.entity.*;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.storage.ReadView;
+import net.minecraft.storage.WriteView;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 // TODO: tweak with ProjectileUtil for better collision detection (square projection instead of center?)
-// TODO: add a max amount of bounces
 public abstract class KoopaShellEntity extends ProjectileEntity {
-    private static final float TARGET_SPEED = 0.5f;
-    private static final float TARGET_SPEED_ACCELERATION = 0.1f;
+    public static final String REBOUNDS_KEY = "rebounds";
+    protected static final float TARGET_SPEED = 0.5f;
+    protected static final float TARGET_SPEED_ACCELERATION = 0.1f;
+
+    protected int rebounds;
     private float previousHorizontalRotation;
     private float horizontalRotation;
 
-    public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world) {
+    public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world, int rebounds) {
         super(entityType, world);
+        this.rebounds = rebounds;
     }
 
-    public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world, double x, double y, double z) {
-        this(entityType, world);
-        this.setPosition(x, y, z);
+    @Override
+    protected void writeCustomData(WriteView view) {
+        super.writeCustomData(view);
+        view.putInt(REBOUNDS_KEY, rebounds);
     }
 
-    public KoopaShellEntity(EntityType<? extends KoopaShellEntity> entityType, World world, LivingEntity owner) {
-        this(entityType, world, owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
-        this.setOwner(owner);
+    @Override
+    protected void readCustomData(ReadView view) {
+        super.readCustomData(view);
+        this.rebounds = view.getInt(REBOUNDS_KEY, 3);
     }
 
     @Override
@@ -51,10 +56,6 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     }
 
     public abstract Identifier getTexture();
-
-    public boolean isStopped() {
-        return this.getVelocity().horizontalLength() == 0.0;
-    }
 
     @Override
     public void tick() {
@@ -75,6 +76,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
         if (!isStopped) {
             if (multiplier != null) {
                 prevVelocity = prevVelocity.multiply(multiplier);
+                this.rebounds--;
                 this.playBumpEffects(prevVelocity.negate());
             }
             this.setVelocity(prevVelocity.getX(), this.getVelocity().getY(), prevVelocity.getZ());
@@ -87,6 +89,10 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
 
         if (this.getEntityWorld().isClient()) {
             this.tickRotation();
+        }
+
+        if (this.rebounds <= 0) {
+            this.finalHit();
         }
     }
 
@@ -114,6 +120,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     @Override
     protected void onEntityHit(EntityHitResult result) {
         super.onEntityHit(result);
+        this.rebounds--;
         result.getEntity().serverDamage(this.getDamageSources().create(MubbleDamageTypes.KOOPA_SHELL, this, this.getOwner()), 2.0F);
 
         var bounce = true;
@@ -148,25 +155,20 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
         }
     }
 
-    @Override
-    public void onStompedBy(List<Entity> entities) {
-        super.onStompedBy(entities);
-        if (this.getEntityWorld() instanceof ServerWorld) {
-            Mubble.LOGGER.info(this.getVelocity().horizontalLength());
+    public boolean isStopped() {
+        return this.getVelocity().horizontalLength() == 0.0;
+    }
 
-            if (this.isStopped()) {
-                var vec3d = entities.getFirst().getVelocity();
-                if (vec3d.horizontalLength() == 0.0D) {
-                    vec3d = this.getEntityPos().subtract(entities.getFirst().getEntityPos()).normalize();
-                }
-                //TODO: if still stopped, make it random
-                this.setVelocity(vec3d.x, 0.0d, vec3d.z);
-                this.targetHorizontalSpeed(TARGET_SPEED, Float.MAX_VALUE);
-                this.velocityDirty = true;
-            } else {
-                this.setVelocity(Vec3d.ZERO);
-            }
+    /**
+     * Triggers when the shell hits for the final time and should be removed.
+     */
+    protected void finalHit() {
+        if (!this.getEntityWorld().isClient()) {
+            this.getEntityWorld().sendEntityStatus(this, EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES);
+            this.remove(RemovalReason.DISCARDED);
         }
+        this.playSound(MubbleSounds.KOOPA_SHELL_BREAK, 0.4F, 1.0F);
+        //TODO: add particles
     }
 
     @Override
@@ -187,11 +189,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
         }
     }
 
-    public float getHorizontalRotation() {
-        return this.horizontalRotation;
-    }
-
-    public float getPreviousHorizontalRotation() {
-        return this.previousHorizontalRotation;
+    public float getHorizontalRotation(float tickDelta) {
+        return MathHelper.lerp(tickDelta, previousHorizontalRotation, horizontalRotation);
     }
 }

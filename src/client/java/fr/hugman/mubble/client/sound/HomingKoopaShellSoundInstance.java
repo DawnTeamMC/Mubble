@@ -10,12 +10,12 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class MovingKoopaShellSoundInstance extends MovingSoundInstance {
+public class HomingKoopaShellSoundInstance extends MovingSoundInstance {
     private final KoopaShellEntity shell;
     private float distance = 0.0F;
 
-    public MovingKoopaShellSoundInstance(KoopaShellEntity shell) {
-        super(MubbleSounds.KOOPA_SHELL_SLIDE, SoundCategory.NEUTRAL, SoundInstance.createRandom());
+    public HomingKoopaShellSoundInstance(KoopaShellEntity shell) {
+        super(MubbleSounds.KOOPA_SHELL_HOMING, SoundCategory.NEUTRAL, SoundInstance.createRandom());
         this.shell = shell;
         this.repeat = true;
         this.repeatDelay = 0;

@@ -44,7 +44,10 @@ public class MubbleSoundsProvider extends FabricSoundsProvider {
 		soundExporter.add(MubbleSounds.GOOMBA_STOMP, variantSoundBuilder(MubbleSounds.GOOMBA_STOMP, 1).category(SoundCategory.HOSTILE));
 
 		soundExporter.add(MubbleSounds.KOOPA_SHELL_SLIDE, variantSoundBuilder(MubbleSounds.KOOPA_SHELL_SLIDE, 1).category(SoundCategory.HOSTILE));
+		soundExporter.add(MubbleSounds.KOOPA_SHELL_HOMING, variantSoundBuilder(MubbleSounds.KOOPA_SHELL_HOMING, 1).category(SoundCategory.HOSTILE));
 		soundExporter.add(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE));
+		soundExporter.add(MubbleSounds.KOOPA_SHELL_BREAK, variantSoundBuilder(MubbleSounds.KOOPA_SHELL_BREAK, 1).category(SoundCategory.HOSTILE));
+		soundExporter.add(MubbleSounds.KOOPA_SHELL_KICK, variantSoundBuilder(MubbleSounds.KOOPA_SHELL_KICK, 1).category(SoundCategory.HOSTILE));
 
 		soundExporter.add(MubbleSounds.FIREBALL_HIT_BLOCK, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_BLOCK, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.fireball.hit"));
 		soundExporter.add(MubbleSounds.FIREBALL_HIT_ENTITY, variantSoundBuilder(MubbleSounds.FIREBALL_HIT_ENTITY, 1).category(SoundCategory.HOSTILE).subtitle("subtitles.mubble.entity.fireball.hit"));

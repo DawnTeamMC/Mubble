@@ -8,12 +8,12 @@ import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-// TODO: break on impact
 public class RedKoopaShellEntity extends KoopaShellEntity {
     private static final Identifier TEXTURE = Mubble.id("textures/entity/red_koopa_shell.png");
 
@@ -28,15 +28,17 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
     private LivingEntity target;
 
     public RedKoopaShellEntity(EntityType<? extends RedKoopaShellEntity> entityType, World world) {
-        super(entityType, world);
+        super(entityType, world, 1);
     }
 
     public RedKoopaShellEntity(World world, double x, double y, double z) {
-        super(MubbleEntityTypes.RED_KOOPA_SHELL, world, x, y, z);
+        this(MubbleEntityTypes.RED_KOOPA_SHELL, world);
+        this.setPosition(x, y, z);
     }
 
     public RedKoopaShellEntity(World world, LivingEntity owner) {
-        super(MubbleEntityTypes.RED_KOOPA_SHELL, world, owner);
+        this(world, owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
+        this.setOwner(owner);
     }
 
     @Override

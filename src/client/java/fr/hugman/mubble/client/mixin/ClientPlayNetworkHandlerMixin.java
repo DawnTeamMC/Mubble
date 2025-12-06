@@ -1,8 +1,9 @@
 package fr.hugman.mubble.client.mixin;
 
-import fr.hugman.mubble.client.MubbleClient;
-import fr.hugman.mubble.client.sound.MovingKoopaShellSoundInstance;
+import fr.hugman.mubble.client.sound.HomingKoopaShellSoundInstance;
+import fr.hugman.mubble.client.sound.SlidingKoopaShellSoundInstance;
 import fr.hugman.mubble.entity.KoopaShellEntity;
+import fr.hugman.mubble.entity.RedKoopaShellEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
@@ -18,8 +19,11 @@ public class ClientPlayNetworkHandlerMixin {
     @Inject(method = "playSpawnSound", at = @At("HEAD"))
     private void onPlaySpawnSound(Entity entity, CallbackInfo ci) {
         ClientCommonNetworkHandlerAccessor accessor = (ClientCommonNetworkHandlerAccessor) this;
-        if (entity instanceof KoopaShellEntity koopaShell) {
-            accessor.getClient().getSoundManager().play(new MovingKoopaShellSoundInstance(koopaShell));
+        if (entity instanceof RedKoopaShellEntity koopaShell) {
+            accessor.getClient().getSoundManager().play(new HomingKoopaShellSoundInstance(koopaShell));
+        }
+        else if (entity instanceof KoopaShellEntity koopaShell) {
+            accessor.getClient().getSoundManager().play(new SlidingKoopaShellSoundInstance(koopaShell));
         }
     }
 }

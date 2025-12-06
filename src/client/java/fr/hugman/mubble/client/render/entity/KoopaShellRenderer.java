@@ -74,6 +74,6 @@ public class KoopaShellRenderer<K extends KoopaShellEntity> extends EntityRender
         state.invisibleToPlayer = state.invisible && entity.isInvisibleTo(minecraftClient.player);
         state.hasOutline = minecraftClient.hasOutline(entity);
 
-        state.horizontalRotation = MathHelper.lerp(tickDelta, entity.getPreviousHorizontalRotation(), entity.getHorizontalRotation());
+        state.horizontalRotation = entity.getHorizontalRotation(tickDelta);
     }
 }

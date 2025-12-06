@@ -54,7 +54,10 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("subtitles.mubble.entity.goomba.death", "Goomba dies");
 		builder.add("subtitles.mubble.entity.goomba.stomp", "Goomba stomped");
 		builder.add(MubbleSounds.KOOPA_SHELL_SLIDE, "Koopa Shell slides");
+		builder.add(MubbleSounds.KOOPA_SHELL_HOMING, "Koopa Shell homing");
 		builder.add(MubbleSounds.KOOPA_SHELL_HIT_BLOCK, "Koopa Shell hits block");
+		builder.add(MubbleSounds.KOOPA_SHELL_BREAK, "Koopa Shell breaks");
+		builder.add(MubbleSounds.KOOPA_SHELL_KICK, "Koopa Shell kicked");
 		builder.add("subtitles.mubble.entity.fireball.hit", "Fireball hits");
 		builder.add("subtitles.mubble.entity.fireball.melt_block", "Fireball melts block");
 		builder.add("subtitles.mubble.entity.fireball.throw", "Fireball thrown");
