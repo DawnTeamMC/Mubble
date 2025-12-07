@@ -13,7 +13,7 @@ import java.util.UUID;
 public final class PowerUpProperties {
     private boolean dirty;
     private int cooldown;
-    public List<UUID> projectiles;
+    public final List<UUID> projectiles;
 
     public static final PacketCodec<RegistryByteBuf, PowerUpProperties> PACKET_CODEC = PacketCodec.tuple(
             PacketCodecs.INTEGER, powerUpProperties -> powerUpProperties.cooldown,

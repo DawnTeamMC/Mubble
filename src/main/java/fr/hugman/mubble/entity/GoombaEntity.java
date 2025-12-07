@@ -51,8 +51,8 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
 
     public static final int SURPRISE_LENGTH = 10; // animation length
 
-    public AnimationState surprisedAnimationState = new AnimationState();
-    public AnimationState crushAnimationState = new AnimationState();
+    public final AnimationState surprisedAnimationState = new AnimationState();
+    public final AnimationState crushAnimationState = new AnimationState();
 
     protected GoombaEntity(EntityType<? extends GoombaEntity> entityType, World world) {
         super(entityType, world);

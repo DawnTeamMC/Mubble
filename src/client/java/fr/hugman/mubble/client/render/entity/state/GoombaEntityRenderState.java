@@ -11,9 +11,8 @@ import net.minecraft.util.Identifier;
 public class GoombaEntityRenderState extends LivingEntityRenderState {
     private static final Identifier DEFAULT_TEXTURE = Mubble.id("textures/entity/goomba/normal/normal.png");
 
-    public AnimationState surprisedAnimationState = new AnimationState();
-    public AnimationState crushAnimationState = new AnimationState();
+    public final AnimationState surprisedAnimationState = new AnimationState();
+    public final AnimationState crushAnimationState = new AnimationState();
     public Identifier texture = DEFAULT_TEXTURE;
-    public boolean surprised = false;
     public boolean stomped = false;
 }

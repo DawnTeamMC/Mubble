@@ -33,7 +33,6 @@ public class GoombaEntityRenderer extends MobEntityRenderer<GoombaEntity, Goomba
         state.surprisedAnimationState.copyFrom(goomba.surprisedAnimationState);
         state.crushAnimationState.copyFrom(goomba.crushAnimationState);
         state.texture = goomba.getTexture();
-        state.surprised = goomba.isSurprised();
         state.stomped = goomba.isStomped();
     }
 }

@@ -36,14 +36,6 @@ public class DecoratedBumpableBlock extends BumpableBlock {
         super(defaultBumpedState, settings);
     }
 
-    public static Function<Settings, DecoratedBumpableBlock> of(BlockState defaultBumpedState) {
-        return s -> new DecoratedBumpableBlock(defaultBumpedState, s);
-    }
-
-    public static Function<Settings, DecoratedBumpableBlock> of(Block block) {
-        return s -> new DecoratedBumpableBlock(block.getDefaultState(), s);
-    }
-
     @Override
     protected MapCodec<? extends DecoratedBumpableBlock> getCodec() {
         return CODEC;

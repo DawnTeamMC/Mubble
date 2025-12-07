@@ -39,6 +39,6 @@ public class MubbleBlockEntityTypes {
 
     private static <T extends BlockEntity> BlockEntityType<T> of(String path, FabricBlockEntityTypeBuilder<T> blockEntityType) {
         Type<?> type = Util.getChoiceType(TypeReferences.BLOCK_ENTITY, path);
-        return Registry.register(Registries.BLOCK_ENTITY_TYPE, Mubble.id(path), blockEntityType.build(type));
+        return Registry.register(Registries.BLOCK_ENTITY_TYPE, Mubble.id(path), blockEntityType.build());
     }
 }

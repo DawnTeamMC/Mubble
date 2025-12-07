@@ -20,7 +20,7 @@ import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
 public class KoopaShellRenderer<K extends KoopaShellEntity> extends EntityRenderer<K, KoopaShellEntityRenderState> {
-    protected KoopaShellModel model;
+    protected final KoopaShellModel model;
 
     public KoopaShellRenderer(EntityRendererFactory.Context context) {
         super(context);
