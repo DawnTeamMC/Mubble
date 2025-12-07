@@ -9,13 +9,13 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Colors;
-import net.minecraft.util.math.MathHelper;
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)
@@ -56,11 +56,11 @@ public class KoopaShellRenderer<K extends KoopaShellEntity> extends EntityRender
     @Nullable
     protected RenderLayer getRenderLayer(KoopaShellEntityRenderState state, boolean showBody, boolean translucent, boolean showOutline) {
         if (translucent) {
-            return RenderLayer.getItemEntityTranslucentCull(state.texture);
+            return RenderLayers.itemEntityTranslucentCull(state.texture);
         } else if (showBody) {
             return this.model.getLayer(state.texture);
         } else {
-            return showOutline ? RenderLayer.getOutline(state.texture) : null;
+            return showOutline ? RenderLayers.outlineNoCull(state.texture) : null;
         }
     }
 

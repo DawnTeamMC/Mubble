@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.event.GameEvent;
 
 public class FireballEntity extends BallEntity {
@@ -83,7 +84,7 @@ public class FireballEntity extends BallEntity {
         }
         if (resultBlock != null) {
             if (!this.getEntityWorld().isClient()) {
-                if (this.getEntityWorld().getDimension().ultrawarm() || resultBlock instanceof AirBlock) {
+                if (this.getEntityWorld().getEnvironmentAttributes().getAttributeValue(EnvironmentAttributes.WATER_EVAPORATES_GAMEPLAY) || resultBlock instanceof AirBlock) {
                     this.getEntityWorld().removeBlock(pos, false);
                 } else {
                     this.getEntityWorld().setBlockState(pos, resultBlock.getDefaultState());

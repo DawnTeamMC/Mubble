@@ -30,7 +30,7 @@ public class PowerUpCommand {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
         dispatcher.register(CommandManager.literal(POWER_UP)
-                .requires(sc -> sc.hasPermissionLevel(2))
+                .requires(CommandManager.requirePermissionLevel(CommandManager.GAMEMASTERS_CHECK))
                 .then(CommandManager.literal(SET_ARG)
                         .then(CommandManager.argument(TARGET_ARG, EntityArgumentType.player())
                                 .then(CommandManager.argument(POWER_UP_ARG, PowerUpArgumentType.of(registryAccess))

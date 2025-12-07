@@ -8,6 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.client.render.RenderLayers;
 import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -36,7 +37,7 @@ public class BallEntityRenderer extends EntityRenderer<BallEntity, BallRenderSta
 		matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(state.pitch));
         var size = 4;
         matrices.scale(state.width * size, state.height * size, state.width * size);
-		queue.submitModel(this.model, state, matrices, RenderLayer.getEntityCutout(state.texture.texturePath()), state.light, OverlayTexture.DEFAULT_UV, state.outlineColor, null);
+		queue.submitModel(this.model, state, matrices, RenderLayers.entityCutout(state.texture.texturePath()), state.light, OverlayTexture.DEFAULT_UV, state.outlineColor, null);
 		matrices.pop();
 
 		super.render(state, matrices, queue, cameraState);

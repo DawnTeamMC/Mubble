@@ -66,7 +66,9 @@
       "net/minecraft/class_1657": [
         "fr/hugman/mubble/power_up/PowerUpHolder"
       ],
-      "net/minecraft/class_1297": ["fr/hugman/mubble/entity/Stompable"]
+      "net/minecraft/class_1297": [
+        "fr/hugman/mubble/entity/Stompable"
+      ]
 	}
   },
   "license": "LGPL v3.0"

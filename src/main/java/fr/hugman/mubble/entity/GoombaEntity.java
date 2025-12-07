@@ -216,13 +216,13 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
 	@Override
 	protected void writeCustomData(WriteView view) {
 		super.writeCustomData(view);
-		Variants.writeVariantToNbt(view, this.getVariant());
+		Variants.writeData(view, this.getVariant());
 	}
 
 	@Override
 	protected void readCustomData(ReadView view) {
 		super.readCustomData(view);
-		Variants.readVariantFromNbt(view, MubbleRegistryKeys.GOOMBA_VARIANT).ifPresent(this::setVariant);
+		Variants.fromData(view, MubbleRegistryKeys.GOOMBA_VARIANT).ifPresent(this::setVariant);
 	}
 
     // TEXTURE

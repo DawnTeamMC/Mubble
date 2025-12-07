@@ -108,7 +108,7 @@ public class BeepBlock extends Block {
 
     public void scheduleTick(World world, BlockPos pos, Block block) {
         if (world instanceof ServerWorld serverWorld) {
-            int cooldown = serverWorld.getGameRules().getInt(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
+            int cooldown = serverWorld.getGameRules().getValue(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
             if (cooldown > 0) {
                 long worldTime = world.getTime();
                 int delta = (int) (cooldown - worldTime);
@@ -119,7 +119,7 @@ public class BeepBlock extends Block {
 
     public BlockState getStateAtTime(World world) {
         if (world instanceof ServerWorld serverWorld) {
-            int cooldown = serverWorld.getGameRules().getInt(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
+            int cooldown = serverWorld.getGameRules().getValue(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
             if (cooldown > 0) {
                 long worldTime = world.getTime();
                 boolean frame = (int) ((worldTime + (this.offset ? cooldown : 0)) % (cooldown * 2)) < cooldown;

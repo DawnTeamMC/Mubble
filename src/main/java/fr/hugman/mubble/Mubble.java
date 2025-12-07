@@ -34,11 +34,10 @@ public class Mubble implements ModInitializer {
         Reflection.initialize(MubbleSounds.class);
         Reflection.initialize(MubbleScreenHandlerTypes.class);
         Reflection.initialize(MubbleConsumeEffectTypes.class);
+        Reflection.initialize(MubbleGamerules.class);
         MubbleEntityTypes.registerAttributes();
 
         MubbleItemGroups.appendItemGroups();
-
-        MubbleGamerules.init();
 
         Reflection.initialize(PowerUpActionTypes.class);
 
