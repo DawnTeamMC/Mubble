@@ -21,7 +21,7 @@ public class MubbleEntityTypeTagProvider extends FabricTagProvider.EntityTypeTag
 		// Mubble
 		valueLookupBuilder(KOOPA_SHELLS).add(GREEN_KOOPA_SHELL, RED_KOOPA_SHELL);
         valueLookupBuilder(CAN_STOMP).add(PLAYER);
-        valueLookupBuilder(STOMPABLE).add(GOOMBA).addTag(KOOPA_SHELLS);
+        valueLookupBuilder(STOMPABLE).add(GOOMBA, GREEN_KOOPA_SHELL);
 
 		// Vanilla
 		valueLookupBuilder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA);
