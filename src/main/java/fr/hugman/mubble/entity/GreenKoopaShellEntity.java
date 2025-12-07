@@ -45,7 +45,11 @@ public class GreenKoopaShellEntity extends KoopaShellEntity {
                 this.targetHorizontalSpeed(TARGET_SPEED, Float.MAX_VALUE);
                 this.velocityDirty = true;
                 this.playSound(MubbleSounds.KOOPA_SHELL_KICK, 0.4F, 1.0F);
+                if (entities.getFirst() instanceof Entity owner) {
+                    this.setOwner(owner);
+                }
                 //TODO: add particles
+                //TODO: reset rebound count? configurable?
             } else {
                 this.setVelocity(Vec3d.ZERO);
                 this.playSound(MubbleSounds.KOOPA_SHELL_KICK, 0.4F, 1.2F);
