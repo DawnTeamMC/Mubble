@@ -3,10 +3,12 @@ package fr.hugman.mubble.mixin;
 import fr.hugman.mubble.block.HittableBlock;
 import fr.hugman.mubble.entity.Stompable;
 import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
+import fr.hugman.mubble.power_up.PowerUpHolder;
 import fr.hugman.mubble.tag.MubbleEntityTypeTags;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.MovementType;
+import net.minecraft.entity.Ownable;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.predicate.entity.EntityPredicates;
@@ -34,17 +36,17 @@ public class EntityMixin implements Stompable {
     // Inject right before the second call of setPosition() in the method move()
     @Inject(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;setPosition(Lnet/minecraft/util/math/Vec3d;)V", ordinal = 0))
     private void mubble$move(MovementType type, Vec3d movement, CallbackInfo ci) {
-        Entity thisEntity = (Entity) (Object) this;
-        World world = thisEntity.getEntityWorld();
+        Entity this_ = (Entity) (Object) this;
+        World world = this_.getEntityWorld();
         Vec3d vec3d = this.adjustMovementForCollisions(movement);
         if (vec3d != null && vec3d.getY() > 0) {
-            Vec3d headPos = thisEntity.getEntityPos().add(0, thisEntity.getHeight(), 0);
-            BlockHitResult hit = world.raycast(new RaycastContext(headPos, headPos.add(vec3d).add(0, HittableBlock.HIT_Y_OFFSET, 0), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, thisEntity));
+            Vec3d headPos = this_.getEntityPos().add(0, this_.getHeight(), 0);
+            BlockHitResult hit = world.raycast(new RaycastContext(headPos, headPos.add(vec3d).add(0, HittableBlock.HIT_Y_OFFSET, 0), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, this_));
             if (hit.getType() == HitResult.Type.BLOCK && hit.getSide() == Direction.DOWN) {
                 BlockPos blockPos = hit.getBlockPos();
                 BlockState state = world.getBlockState(blockPos);
                 if (state.getBlock() instanceof HittableBlock hittableBlock) {
-                    hittableBlock.onHit(world, state, thisEntity, hit);
+                    hittableBlock.onHit(world, state, this_, hit);
                 }
             }
         }
@@ -52,15 +54,24 @@ public class EntityMixin implements Stompable {
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void mubble$tick(CallbackInfo ci) {
-        Entity thisEntity = (Entity) (Object) this;
+        Entity this_ = (Entity) (Object) this;
         if (this.canBeStomped()) {
             Box hitBox = this.getStompBox();
             if (hitBox != null) {
-                List<Entity> list = thisEntity.getEntityWorld().getOtherEntities(thisEntity, hitBox, this.getStompableBy());
+                List<Entity> list = this_.getEntityWorld().getOtherEntities(this_, hitBox, this.getStompableBy());
                 if (!list.isEmpty()) {
                     this.onStompedBy(list);
                 }
             }
+        }
+    }
+
+    @Inject(method = "onRemove", at = @At("HEAD"))
+    private void mubble$onRemove(CallbackInfo ci) {
+        Entity this_ = (Entity) (Object) this;
+        if(this_ instanceof Ownable ownable && ownable.getOwner() instanceof PowerUpHolder powerUpHolder) {
+            // if the projectile isn't in the properties it won't set dirty so it's okay to not check for it
+            powerUpHolder.getPowerUpProperties().removeProjectile(this_.getUuid());
         }
     }
 
@@ -71,14 +82,14 @@ public class EntityMixin implements Stompable {
 
     @Override
     public boolean canBeStomped() {
-        var thisEntity = ((Entity) (Object) this);
-        return thisEntity.getType().isIn(MubbleEntityTypeTags.STOMPABLE) && !thisEntity.isSpectator() && !thisEntity.hasPassengers();
+        var this_ = ((Entity) (Object) this);
+        return this_.getType().isIn(MubbleEntityTypeTags.STOMPABLE) && !this_.isSpectator() && !this_.hasPassengers();
     }
 
     @Override
     public Box getStompBox() {
-        var thisEntity = ((Entity) (Object) this);
-        Box hitBox = thisEntity.getBoundingBox();
+        var this_ = ((Entity) (Object) this);
+        Box hitBox = this_.getBoundingBox();
         hitBox = hitBox.withMinY(hitBox.maxY - (0.2D * (hitBox.maxY - hitBox.minY)));
         hitBox = hitBox.withMaxY(hitBox.maxY + 0.5D);
 
@@ -96,11 +107,11 @@ public class EntityMixin implements Stompable {
 
     @Override
     public void onStompedBy(List<Entity> entities) {
-        var thisEntity = ((Entity) (Object) this);
+        var this_ = ((Entity) (Object) this);
         //TODO: display particles!
-        if (thisEntity.getEntityWorld() instanceof ServerWorld serverWorld) {
+        if (this_.getEntityWorld() instanceof ServerWorld serverWorld) {
             //TODO: calculate damage using boots?
-            thisEntity.damage(serverWorld, thisEntity.getDamageSources().create(MubbleDamageTypes.STOMP, entities.getFirst()), 2.0F);
+            this_.damage(serverWorld, this_.getDamageSources().create(MubbleDamageTypes.STOMP, entities.getFirst()), 2.0F);
             for (Entity entity : entities) {
                 entity.setVelocity(entity.getVelocity().x, 0.5D, entity.getVelocity().z);
                 if (entity instanceof PlayerEntity player) {

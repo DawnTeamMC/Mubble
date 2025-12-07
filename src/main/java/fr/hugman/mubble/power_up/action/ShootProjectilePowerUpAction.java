@@ -71,7 +71,7 @@ public record ShootProjectilePowerUpAction(
         if (!world.isClient()) {
             properties.removeInvalidProjectiles(world);
         }
-        if(maxProjectiles.isPresent() && properties.projectiles.size() >= maxProjectiles.get()) {
+        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
             return ActionResult.FAIL;
         }
 
@@ -94,8 +94,8 @@ public record ShootProjectilePowerUpAction(
             entity.setPosition(player.getX(), player.getEyeY() - 0.1F, player.getZ());
             setVelocity(entity, player, player.getPitch(), player.getYaw(), 0.0F, this.speed, 1.0F);
             world.spawnEntity(entity);
-            properties.projectiles.add(entity.getUuid());
-            properties.cooldown = cooldown.orElse(0);
+            properties.addProjectile(entity.getUuid());
+            properties.setCooldown(cooldown.orElse(0));
         }
         return ActionResult.SUCCESS;
     }

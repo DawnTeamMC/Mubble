@@ -1,6 +1,7 @@
 package fr.hugman.mubble.client.mixin;
 
 import fr.hugman.mubble.client.gui.hud.PowerUpHudRendering;
+import fr.hugman.mubble.client.gui.hud.PowerUpPropertiesHudRendering;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
@@ -21,5 +22,10 @@ public class InGameHudMixin {
 	@Inject(method="render", at=@At(value="INVOKE", target="Lnet/minecraft/client/gui/hud/InGameHud;renderBossBarHud(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V"))
 	private void mubble$addPowerUpLayer(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
 		PowerUpHudRendering.renderPowerUpLayer(this.client, context);
+	}
+
+	@Inject(method="render", at=@At(value="INVOKE", target="Lnet/minecraft/client/gui/hud/InGameHud;renderCrosshair(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/client/render/RenderTickCounter;)V"))
+	private void mubble$addPowerUpPropertiesLayer(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
+		PowerUpPropertiesHudRendering.renderProjectilesLayer(this.client, context);
 	}
 }

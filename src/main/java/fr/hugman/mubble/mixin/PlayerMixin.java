@@ -19,22 +19,22 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Mixin(PlayerEntity.class)
 public class PlayerMixin implements PowerUpHolder {
     @Unique
     private static final TrackedData<Optional<RegistryEntry<PowerUp>>> POWER_UP = DataTracker.registerData(PlayerEntity.class, MubbleTrackedData.OPTIONAL_POWER_UP);
+    private static final TrackedData<PowerUpProperties> POWER_UP_PROPERTIES = DataTracker.registerData(PlayerEntity.class, MubbleTrackedData.POWER_UP_PROPERTIES);
 
     @Unique
     private static final String POWER_UP_KEY = "power_up";
 
-    @Unique
-    private final PowerUpProperties powerUpProperties = new PowerUpProperties();
-
     @Inject(method = "initDataTracker", at = @At("TAIL"))
     protected void mubble$initDataTracker(DataTracker.Builder builder, CallbackInfo ci) {
         builder.add(POWER_UP, Optional.empty());
+        builder.add(POWER_UP_PROPERTIES, new PowerUpProperties(0, new ArrayList<>()));
     }
 
     @Inject(method = "writeCustomData", at = @At("TAIL"))
@@ -53,7 +53,19 @@ public class PlayerMixin implements PowerUpHolder {
     @Inject(method = "tick", at = @At("TAIL"))
     private void mubble$tick(CallbackInfo ci) {
         var this_ = (PlayerEntity) (Object) this;
-        this_.getPowerUp().ifPresent(entry -> this.powerUpProperties.tick());
+        if(this_.getEntityWorld().isClient()) {
+            return;
+        }
+        this_.getPowerUp().ifPresent(entry -> {
+            this.getPowerUpProperties().tick();
+            // safe check
+            if(this_.age % 20 == 0) {
+                this.getPowerUpProperties().doSoftChecks(this_);
+            }
+            if(this.getPowerUpProperties().checkDirty()) {
+                this_.getDataTracker().set(POWER_UP_PROPERTIES, this_.getPowerUpProperties(), true);
+            }
+        });
     }
 
     @Override
@@ -62,10 +74,10 @@ public class PlayerMixin implements PowerUpHolder {
         return this_.getDataTracker().get(POWER_UP);
     }
 
-
     @Override
     public PowerUpProperties getPowerUpProperties() {
-        return this.powerUpProperties;
+        var this_ = (PlayerEntity) (Object) this;
+        return this_.getDataTracker().get(POWER_UP_PROPERTIES);
     }
 
     @Override
