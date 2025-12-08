@@ -99,7 +99,7 @@ public abstract class KoopaShellEntity extends ProjectileEntity {
     public void tickRotation() {
         float velocityLength = (float) this.getVelocity().horizontalLength();
         this.previousHorizontalRotation = this.horizontalRotation;
-        this.horizontalRotation = this.previousHorizontalRotation + velocityLength * 0.35f;
+        this.horizontalRotation = this.previousHorizontalRotation + velocityLength * 0.45f;
     }
 
     public void targetHorizontalSpeed(float targetSpeed, float acceleration) {

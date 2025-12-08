@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -32,30 +33,48 @@ public class GreenKoopaShellEntity extends KoopaShellEntity {
     }
 
     @Override
+    public void tick() {
+        super.tick();
+
+        if(this.getEntityWorld().isClient() || !this.isStopped()) {
+            return;
+        }
+        var entities = this.getEntityWorld().getNonSpectatingEntities(LivingEntity.class, this.getBoundingBox());
+        if (!entities.isEmpty()) {
+            this.kickShell(entities.getFirst());
+        }
+    }
+
+    @Override
+    public boolean canBeStomped() {
+        return super.canBeStomped() && !this.isStopped();
+    }
+
+    @Override
     public void onStompedBy(List<Entity> entities) {
         super.onStompedBy(entities);
         if (this.getEntityWorld() instanceof ServerWorld) {
-            if (this.isStopped()) {
-                var vec3d = entities.getFirst().getVelocity();
-                if (vec3d.horizontalLength() == 0.0D) {
-                    vec3d = this.getEntityPos().subtract(entities.getFirst().getEntityPos()).normalize();
-                }
-                //TODO: if still stopped, make it random
-                this.setVelocity(vec3d.x, 0.0d, vec3d.z);
-                this.targetHorizontalSpeed(TARGET_SPEED, Float.MAX_VALUE);
-                this.velocityDirty = true;
-                this.playSound(MubbleSounds.KOOPA_SHELL_KICK, 0.4F, 1.0F);
-                if (entities.getFirst() instanceof Entity owner) {
-                    this.setOwner(owner);
-                }
-                //TODO: add particles
-                //TODO: reset rebound count? configurable?
-            } else {
+            if (!this.isStopped()) {
                 this.setVelocity(Vec3d.ZERO);
                 this.playSound(MubbleSounds.KOOPA_SHELL_KICK, 0.4F, 1.2F);
                 //TODO: add particles
             }
         }
+    }
+
+    public void kickShell(Entity kicker) {
+        var vec3d = kicker.getMovement();
+        if (vec3d.horizontalLength() == 0.0D) {
+            vec3d = this.getEntityPos().subtract(kicker.getEntityPos()).normalize();
+        }
+        //TODO: if still stopped, make it random
+        this.setVelocity(vec3d.x, 0.0d, vec3d.z);
+        this.targetHorizontalSpeed(TARGET_SPEED, Float.MAX_VALUE);
+        this.velocityDirty = true;
+        this.playSound(MubbleSounds.KOOPA_SHELL_KICK, 0.4F, 1.0F);
+        this.setOwner(owner);
+        //TODO: add particles
+        //TODO: reset rebound count? configurable?
     }
 
     @Override

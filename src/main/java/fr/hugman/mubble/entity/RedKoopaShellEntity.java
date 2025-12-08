@@ -53,9 +53,7 @@ public class RedKoopaShellEntity extends KoopaShellEntity {
 
     @Override
     public void tick() {
-        if (this.age % 20 == 1) {
-            this.searchTarget();
-        }
+        this.searchTarget();
 
         if (this.target != null && (this.target.isSpectator() || this.target.isDead())) {
             this.target = null;
