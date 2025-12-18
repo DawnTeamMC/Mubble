@@ -15,7 +15,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-import static fr.hugman.mubble.power_up.PowerUps.*;
+import static fr.hugman.mubble.references.PowerUps.*;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.*;
 
 public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {

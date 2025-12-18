@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version "${loom_version}"
+    id 'net.fabricmc.fabric-loom' version "${loom_version}"
     id 'org.moddedmc.wiki.toolkit' version '0.3.2'
 }
 
@@ -11,15 +11,16 @@ base {
 
 dependencies {
     minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    mappings loom.officialMojangMappings()
-    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
     // Version list: https://maven.su5ed.dev/#/releases/org/sinytra/wiki-exporter-fabric
-    modRuntimeOnly ("org.sinytra:wiki-exporter-fabric:2.2.1+1.21.8") {
+    /*
+    runtimeOnly ("org.sinytra:wiki-exporter-fabric:2.2.1+1.21.11") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+    */
 }
 
 loom {
@@ -66,14 +67,14 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
-    it.options.release = 21
+    it.options.release = 25
 }
 
 java {
     withSourcesJar()
 
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
 }
 
 jar {

@@ -7,7 +7,7 @@ import net.minecraft.tags.EntityTypeTags;
 import java.util.concurrent.CompletableFuture;
 
 import static fr.hugman.mubble.entity.MubbleEntityTypes.*;
-import static fr.hugman.mubble.tag.MubbleEntityTypeTags.*;
+import static fr.hugman.mubble.tags.MubbleEntityTypeTags.*;
 import static net.minecraft.world.entity.EntityType.*;
 
 public class MubbleEntityTypeTagProvider extends FabricTagProvider.EntityTypeTagProvider {

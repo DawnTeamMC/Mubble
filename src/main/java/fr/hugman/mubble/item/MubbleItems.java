@@ -3,7 +3,7 @@ package fr.hugman.mubble.item;
 import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.component.PowerUpComponent;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
-import fr.hugman.mubble.power_up.PowerUps;
+import fr.hugman.mubble.references.PowerUps;
 import fr.hugman.mubble.power_up.PowerUp;
 import fr.hugman.mubble.item.helper.ItemFactory;
 import java.util.Optional;

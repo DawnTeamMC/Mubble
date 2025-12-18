@@ -1,7 +1,7 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
-import fr.hugman.mubble.tag.MubbleDamageTypeTags;
+import fr.hugman.mubble.tags.MubbleDamageTypeTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;

@@ -2,7 +2,7 @@ package fr.hugman.mubble.world;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.sound.MubbleSounds;
-import fr.hugman.mubble.tag.MubbleBlockTags;
+import fr.hugman.mubble.tags.MubbleBlockTags;
 import fr.hugman.mubble.world.attribute.BlockTransform;
 import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributes;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;

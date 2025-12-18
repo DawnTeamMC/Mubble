@@ -82,7 +82,7 @@ public class FireballEntity extends BallEntity {
 
         BlockState resultState = null;
         Holder<SoundEvent> resultSound = null;
-        var transform = BlockTransform.testList(this.level().environmentAttributes().getValue(MubbleEnvironmentAttributes.FIREBALL_MELTS, pos), state.getBlockHolder());
+        var transform = BlockTransform.testList(this.level().environmentAttributes().getValue(MubbleEnvironmentAttributes.FIREBALL_MELTS, pos), state.typeHolder());
         if (transform != null) {
             resultState = transform.result();
             resultSound = transform.sound().orElse(null);

@@ -1,9 +1,8 @@
 package fr.hugman.mubble.entity;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
-import fr.hugman.mubble.util.BoxUtil;
+import fr.hugman.mubble.world.phys.AABBUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -23,7 +22,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import java.util.List;
 
 // TODO: tweak with ProjectileUtil for better collision detection (square projection instead of center?)
 public abstract class KoopaShellEntity extends Projectile {
@@ -73,7 +71,7 @@ public abstract class KoopaShellEntity extends Projectile {
 
         var prevVelocity = this.getDeltaMovement();
         this.move(MoverType.SELF, prevVelocity);
-        var multiplier = BoxUtil.calculateHorizontalBouncingMultiplier(hitBox, BoxUtil.collectPotentialBlockCollisions(this.level(), hitBox));
+        var multiplier = AABBUtil.calculateHorizontalBouncingMultiplier(hitBox, AABBUtil.collectPotentialBlockCollisions(this.level(), hitBox));
         if (!isStopped) {
             if (multiplier != null) {
                 prevVelocity = prevVelocity.multiply(multiplier);

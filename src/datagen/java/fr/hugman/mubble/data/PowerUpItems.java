@@ -1,7 +1,7 @@
 package fr.hugman.mubble.data;
 
 import fr.hugman.mubble.item.MubbleItemKeys;
-import fr.hugman.mubble.power_up.PowerUps;
+import fr.hugman.mubble.references.PowerUps;
 import fr.hugman.mubble.power_up.PowerUp;
 import java.util.List;
 import java.util.function.Consumer;

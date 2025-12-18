@@ -3,6 +3,7 @@ package fr.hugman.mubble.block;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
+import fr.hugman.mubble.block.entity.MubbleBlockEntityTypes;
 import fr.hugman.mubble.item.MubbleItems;
 import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.core.BlockPos;
@@ -247,18 +248,18 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
         double e = 1.0 - entityWidth;
         double f = entityWidth / 2.0;
 
-        double x = Math.floor(pos.x()) + world.random.nextDouble() * e + f;
-        double y = Math.floor(pos.y()) + world.random.nextDouble() * (1.0 - EntityType.ITEM.getHeight());
-        double z = Math.floor(pos.z()) + world.random.nextDouble() * e + f;
+        double x = Math.floor(pos.x()) + world.getRandom().nextDouble() * e + f;
+        double y = Math.floor(pos.y()) + world.getRandom().nextDouble() * (1.0 - EntityType.ITEM.getHeight());
+        double z = Math.floor(pos.z()) + world.getRandom().nextDouble() * e + f;
 
         while (!stack.isEmpty()) {
             ItemEntity itemEntity = new ItemEntity(world, x, y, z, stack.split(1));
             float i = 0.2f;
             float j = 0.11485000171139836f;
             itemEntity.setDeltaMovement(
-                    (i * (direction == null ? 0 : direction.getStepX())) + world.random.triangle(0.0, j),
-                    (i * (direction == null ? 0 : direction.getStepY())) + world.random.triangle(0.0, j),
-                    (i * (direction == null ? 0 : direction.getStepZ())) + world.random.triangle(0.0, j)
+                    (i * (direction == null ? 0 : direction.getStepX())) + world.getRandom().triangle(0.0, j),
+                    (i * (direction == null ? 0 : direction.getStepY())) + world.getRandom().triangle(0.0, j),
+                    (i * (direction == null ? 0 : direction.getStepZ())) + world.getRandom().triangle(0.0, j)
             );
             world.addFreshEntity(itemEntity);
         }

@@ -82,7 +82,7 @@ public class IceballEntity extends BallEntity {
 
         BlockState resultState = null;
         Holder<SoundEvent> resultSound = null;
-        var transform = BlockTransform.testList(this.level().environmentAttributes().getValue(MubbleEnvironmentAttributes.ICEBALL_FREEZES, pos), state.getBlockHolder());
+        var transform = BlockTransform.testList(this.level().environmentAttributes().getValue(MubbleEnvironmentAttributes.ICEBALL_FREEZES, pos), state.typeHolder());
         if (transform != null) {
             resultState = transform.result();
             resultSound = transform.sound().orElse(null);

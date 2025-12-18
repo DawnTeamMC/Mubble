@@ -24,9 +24,8 @@ public class BumpableScreen extends AbstractContainerScreen<BumpableScreenHandle
     private Button button;
 
     public BumpableScreen(BumpableScreenHandler handler, Inventory inventory, Component title) {
-        super(handler, inventory, title);
+        super(handler, inventory, title, 176, 134);
 
-        this.imageHeight = 134;
         this.inventoryLabelY = this.imageHeight - 94;
 
         handler.addSlotListener(new ContainerListener() {

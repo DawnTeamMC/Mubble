@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 import static fr.hugman.mubble.item.MubbleItems.*;
-import static fr.hugman.mubble.tag.MubbleItemTags.*;
+import static fr.hugman.mubble.tags.MubbleItemTags.*;
 
 public class MubbleItemTagProvider extends FabricTagProvider.ItemTagProvider {
 	public MubbleItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, @Nullable BlockTagProvider blockTagProvider) {

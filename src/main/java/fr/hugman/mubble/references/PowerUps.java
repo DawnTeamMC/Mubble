@@ -1,6 +1,7 @@
-package fr.hugman.mubble.power_up;
+package fr.hugman.mubble.references;
 
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.power_up.PowerUp;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import net.minecraft.resources.ResourceKey;
 

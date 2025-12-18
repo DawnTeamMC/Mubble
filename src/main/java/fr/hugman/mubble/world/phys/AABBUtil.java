@@ -1,4 +1,4 @@
-package fr.hugman.mubble.util;
+package fr.hugman.mubble.world.phys;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +15,7 @@ import net.minecraft.world.phys.Vec3;
  * @author Hugman
  * @since v4.0.0
  */
-public class BoxUtil {
+public class AABBUtil {
     /**
      * Calculates the horizontal bouncing multiplier vector based on the collision of
      * the given origin box with a list of other boxes.

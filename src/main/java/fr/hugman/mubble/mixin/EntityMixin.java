@@ -4,7 +4,7 @@ import fr.hugman.mubble.block.HittableBlock;
 import fr.hugman.mubble.entity.Stompable;
 import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.power_up.PowerUpHolder;
-import fr.hugman.mubble.tag.MubbleEntityTypeTags;
+import fr.hugman.mubble.tags.MubbleEntityTypeTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -83,7 +83,7 @@ public class EntityMixin implements Stompable {
     @Override
     public boolean canBeStomped() {
         var this_ = ((Entity) (Object) this);
-        return this_.getType().is(MubbleEntityTypeTags.STOMPABLE) && !this_.isSpectator() && !this_.isVehicle();
+        return this_.is(MubbleEntityTypeTags.STOMPABLE) && !this_.isSpectator() && !this_.isVehicle();
     }
 
     @Override
@@ -99,7 +99,7 @@ public class EntityMixin implements Stompable {
     @Override
     public Predicate<? super Entity> getStompableBy() {
         return EntitySelector.NO_SPECTATORS.and(entity ->
-                entity.getType().is(MubbleEntityTypeTags.CAN_STOMP) &&
+                entity.is(MubbleEntityTypeTags.CAN_STOMP) &&
                         !entity.onGround() &&
                         entity.getDeltaMovement().y() < 0.3D &&
                         entity.isAlive());

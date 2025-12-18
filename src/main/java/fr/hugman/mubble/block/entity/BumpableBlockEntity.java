@@ -2,7 +2,6 @@ package fr.hugman.mubble.block.entity;
 
 import fr.hugman.mubble.block.BumpableBlock;
 import fr.hugman.mubble.block.BumpableDropMode;
-import fr.hugman.mubble.block.MubbleBlockEntityTypes;
 import fr.hugman.mubble.screen.BumpableScreenHandler;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;

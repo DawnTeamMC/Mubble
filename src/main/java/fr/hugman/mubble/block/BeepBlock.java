@@ -1,6 +1,6 @@
 package fr.hugman.mubble.block;
 
-import fr.hugman.mubble.world.MubbleGamerules;
+import fr.hugman.mubble.world.level.gamerules.MubbleGameRules;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -112,7 +112,7 @@ public class BeepBlock extends Block {
 
     public void scheduleTick(Level world, BlockPos pos, Block block) {
         if (world instanceof ServerLevel serverWorld) {
-            int cooldown = serverWorld.getGameRules().get(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
+            int cooldown = serverWorld.getGameRules().get(MubbleGameRules.BEEP_BLOCK_COOLDOWN);
             if (cooldown > 0) {
                 long worldTime = world.getGameTime();
                 int delta = (int) (cooldown - worldTime);
@@ -123,7 +123,7 @@ public class BeepBlock extends Block {
 
     public BlockState getStateAtTime(Level world) {
         if (world instanceof ServerLevel serverWorld) {
-            int cooldown = serverWorld.getGameRules().get(MubbleGamerules.BEEP_BLOCK_COOLDOWN);
+            int cooldown = serverWorld.getGameRules().get(MubbleGameRules.BEEP_BLOCK_COOLDOWN);
             if (cooldown > 0) {
                 long worldTime = world.getGameTime();
                 boolean frame = (int) ((worldTime + (this.offset ? cooldown : 0)) % (cooldown * 2)) < cooldown;

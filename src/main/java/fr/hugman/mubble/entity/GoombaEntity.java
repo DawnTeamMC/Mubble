@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import fr.hugman.mubble.component.MubbleDataComponentTypes;
 import fr.hugman.mubble.entity.ai.control.StunnableMoveControl;
 import fr.hugman.mubble.entity.ai.goal.SurprisedActiveTargetGoal;
-import fr.hugman.mubble.tag.MubbleDamageTypeTags;
+import fr.hugman.mubble.tags.MubbleDamageTypeTags;
 import fr.hugman.mubble.entity.data.MubbleTrackedData;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import fr.hugman.mubble.sound.MubbleSounds;
