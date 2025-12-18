@@ -18,7 +18,6 @@ public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 
 	@Override
 	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
-        valueLookupBuilder(MELTABLE_TO_AIR);
         valueLookupBuilder(MELTABLE_TO_WATER).add(Blocks.ICE);
         valueLookupBuilder(MELTABLE_TO_ICE).add(Blocks.PACKED_ICE);
         valueLookupBuilder(FREEZABLE_TO_PACKED_ICE).add(Blocks.ICE);

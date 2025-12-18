@@ -3,7 +3,8 @@ package fr.hugman.mubble.entity;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
-import fr.hugman.mubble.tag.MubbleBlockTags;
+import fr.hugman.mubble.world.attribute.BlockTransform;
+import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributes;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.block.*;
 import net.minecraft.entity.Entity;
@@ -11,17 +12,16 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.AssetInfo;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.event.GameEvent;
 
 public class FireballEntity extends BallEntity {
@@ -64,7 +64,7 @@ public class FireballEntity extends BallEntity {
             entity.setOnFireFor(5);
         }
         this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-		entity.serverDamage(this.getDamageSources().create(MubbleDamageTypes.FIREBALL, this, this.getOwner()), damage);
+        entity.serverDamage(this.getDamageSources().create(MubbleDamageTypes.FIREBALL, this, this.getOwner()), damage);
         this.finalHit();
     }
 
@@ -74,27 +74,27 @@ public class FireballEntity extends BallEntity {
         BlockPos pos = result.getBlockPos();
         BlockState state = this.getEntityWorld().getBlockState(pos);
         Direction face = result.getSide();
-        Block resultBlock = null;
-        if (state.isIn(MubbleBlockTags.MELTABLE_TO_AIR)) {
-            resultBlock = Blocks.AIR;
-        } else if (state.isIn(MubbleBlockTags.MELTABLE_TO_ICE)) {
-            resultBlock = Blocks.ICE;
-        } else if (state.isIn(MubbleBlockTags.MELTABLE_TO_WATER)) {
-            resultBlock = Blocks.WATER;
+
+        BlockState resultState = null;
+        RegistryEntry<SoundEvent> resultSound = null;
+        var transform = BlockTransform.testList(this.getEntityWorld().getEnvironmentAttributes().getAttributeValue(MubbleEnvironmentAttributes.FIREBALL_MELTS, pos), state.getRegistryEntry());
+        if (transform != null) {
+            resultState = transform.result();
+            resultSound = transform.sound().orElse(null);
         }
-        if (resultBlock != null) {
+        if (resultState != null) {
             if (!this.getEntityWorld().isClient()) {
-                if (this.getEntityWorld().getEnvironmentAttributes().getAttributeValue(EnvironmentAttributes.WATER_EVAPORATES_GAMEPLAY) || resultBlock instanceof AirBlock) {
+                if (resultState.getBlock() instanceof AirBlock) {
                     this.getEntityWorld().removeBlock(pos, false);
                 } else {
-                    this.getEntityWorld().setBlockState(pos, resultBlock.getDefaultState());
+                    this.getEntityWorld().setBlockState(pos, resultState);
                 }
             }
-            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_MELT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), resultSound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }
-        if(CampfireBlock.canBeLit(state) || CandleBlock.canBeLit(state) || CandleCakeBlock.canBeLit(state)) {
+        if (CampfireBlock.canBeLit(state) || CandleBlock.canBeLit(state) || CandleCakeBlock.canBeLit(state)) {
             this.getEntityWorld().setBlockState(pos, state.with(CampfireBlock.LIT, true));
             this.getEntityWorld().emitGameEvent(this.getOwner(), GameEvent.BLOCK_CHANGE, pos);
             this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);

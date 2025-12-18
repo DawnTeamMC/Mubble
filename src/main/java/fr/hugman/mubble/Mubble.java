@@ -15,7 +15,10 @@ import fr.hugman.mubble.power_up.action.PowerUpActionTypes;
 import fr.hugman.mubble.registry.MubbleRegistries;
 import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.world.MubbleBiomeModifications;
 import fr.hugman.mubble.world.MubbleGamerules;
+import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributeTypes;
+import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributes;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
@@ -35,6 +38,8 @@ public class Mubble implements ModInitializer {
         Reflection.initialize(MubbleScreenHandlerTypes.class);
         Reflection.initialize(MubbleConsumeEffectTypes.class);
         Reflection.initialize(MubbleGamerules.class);
+        Reflection.initialize(MubbleEnvironmentAttributeTypes.class);
+        Reflection.initialize(MubbleEnvironmentAttributes.class);
         MubbleEntityTypes.registerAttributes();
 
         MubbleItemGroups.appendItemGroups();
@@ -46,6 +51,8 @@ public class Mubble implements ModInitializer {
         MubblePayloads.registerTypes();
         MubbleServerReceivers.register();
         MubbleCommands.register();
+
+        MubbleBiomeModifications.register();
     }
 
     public static Identifier id(String path) {

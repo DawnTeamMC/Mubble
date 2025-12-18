@@ -3,9 +3,10 @@ package fr.hugman.mubble.entity;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
-import fr.hugman.mubble.tag.MubbleBlockTags;
-import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.minecraft.block.*;
+import fr.hugman.mubble.world.attribute.BlockTransform;
+import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributes;
+import net.minecraft.block.AirBlock;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -14,11 +15,10 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.SnowGolemEntity;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.tag.BlockTags;
+import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.AssetInfo;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -43,7 +43,7 @@ public class IceballEntity extends BallEntity {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return MubbleSounds.ICEBALL_HIT_BLOCK;
+        return MubbleSounds.ICEBALL_HIT_BLOCK.value();
     }
 
     @Override
@@ -61,8 +61,8 @@ public class IceballEntity extends BallEntity {
         if (owner instanceof LivingEntity livingEntity) {
             livingEntity.onAttacking(entity);
         }
-        if(!this.getEntityWorld().isClient()) {
-            if(!(entity instanceof SnowGolemEntity) && entity instanceof LivingEntity) {
+        if (!this.getEntityWorld().isClient()) {
+            if (!(entity instanceof SnowGolemEntity) && entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;
                 livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 1));
             }
@@ -79,19 +79,24 @@ public class IceballEntity extends BallEntity {
         BlockPos pos = result.getBlockPos();
         BlockState state = this.getEntityWorld().getBlockState(pos);
         Direction face = result.getSide();
-        Block resultBlock = null;
-        if (state.isIn(MubbleBlockTags.FREEZABLE_TO_PACKED_ICE)) {
-            resultBlock = Blocks.PACKED_ICE;
+
+        BlockState resultState = null;
+        RegistryEntry<SoundEvent> resultSound = null;
+        var transform = BlockTransform.testList(this.getEntityWorld().getEnvironmentAttributes().getAttributeValue(MubbleEnvironmentAttributes.ICEBALL_FREEZES, pos), state.getRegistryEntry());
+        if (transform != null) {
+            resultState = transform.result();
+            resultSound = transform.sound().orElse(null);
         }
-        if (resultBlock != null) {
+
+        if (resultState != null) {
             if (!this.getEntityWorld().isClient()) {
-                if (resultBlock instanceof AirBlock) {
+                if (resultState.getBlock() instanceof AirBlock) {
                     this.getEntityWorld().removeBlock(pos, false);
                 } else {
-                    this.getEntityWorld().setBlockState(pos, resultBlock.getDefaultState());
+                    this.getEntityWorld().setBlockState(pos, resultState);
                 }
             }
-            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), resultSound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }

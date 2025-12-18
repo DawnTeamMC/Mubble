@@ -6,7 +6,6 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 
 public class MubbleBlockTags {
-    public static final TagKey<Block> MELTABLE_TO_AIR = of("meltable/air");
     public static final TagKey<Block> MELTABLE_TO_ICE = of("meltable/ice");
     public static final TagKey<Block> MELTABLE_TO_WATER = of("meltable/water");
     public static final TagKey<Block> FREEZABLE_TO_PACKED_ICE = of("freezable/to_packed_ice");
