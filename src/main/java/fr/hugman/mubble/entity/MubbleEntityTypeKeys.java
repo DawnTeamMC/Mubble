@@ -1,19 +1,19 @@
 package fr.hugman.mubble.entity;
 
 import fr.hugman.mubble.Mubble;
-import net.minecraft.entity.EntityType;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EntityType;
 
 public class MubbleEntityTypeKeys {
     // SUPER MARIO
-    public static final RegistryKey<EntityType<?>> GOOMBA = of("goomba");
-    public static final RegistryKey<EntityType<?>> GREEN_KOOPA_SHELL = of("green_koopa_shell");
-    public static final RegistryKey<EntityType<?>> RED_KOOPA_SHELL = of("red_koopa_shell");
-    public static final RegistryKey<EntityType<?>> FIREBALL = of("fireball");
-    public static final RegistryKey<EntityType<?>> ICEBALL = of("iceball");
+    public static final ResourceKey<EntityType<?>> GOOMBA = of("goomba");
+    public static final ResourceKey<EntityType<?>> GREEN_KOOPA_SHELL = of("green_koopa_shell");
+    public static final ResourceKey<EntityType<?>> RED_KOOPA_SHELL = of("red_koopa_shell");
+    public static final ResourceKey<EntityType<?>> FIREBALL = of("fireball");
+    public static final ResourceKey<EntityType<?>> ICEBALL = of("iceball");
 
-    private static RegistryKey<EntityType<?>> of(String path) {
-        return RegistryKey.of(RegistryKeys.ENTITY_TYPE, Mubble.id(path));
+    private static ResourceKey<EntityType<?>> of(String path) {
+        return ResourceKey.create(Registries.ENTITY_TYPE, Mubble.id(path));
     }
 }

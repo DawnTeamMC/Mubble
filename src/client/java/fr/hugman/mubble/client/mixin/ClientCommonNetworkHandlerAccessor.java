@@ -1,12 +1,12 @@
 package fr.hugman.mubble.client.mixin;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientCommonNetworkHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
-@Mixin(ClientCommonNetworkHandler.class)
+@Mixin(ClientCommonPacketListenerImpl.class)
 public interface ClientCommonNetworkHandlerAccessor {
-    @Accessor("client")
-    MinecraftClient getClient();
+    @Accessor("minecraft")
+    Minecraft getClient();
 }

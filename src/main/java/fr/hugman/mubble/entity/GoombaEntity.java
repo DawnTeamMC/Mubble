@@ -8,41 +8,47 @@ import fr.hugman.mubble.tag.MubbleDamageTypeTags;
 import fr.hugman.mubble.entity.data.MubbleTrackedData;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import fr.hugman.mubble.sound.MubbleSounds;
-import net.minecraft.block.BlockState;
-import net.minecraft.command.argument.EntityAnchorArgumentType;
-import net.minecraft.component.ComponentType;
-import net.minecraft.component.ComponentsAccess;
-import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Variants;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.data.TrackedData;
-import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.commands.arguments.EntityAnchorArgument;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentGetter;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.ClimbOnTopOfPowderSnowGoal;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.variant.VariantUtils;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, Stunnable {
     public static final String VARIANT_KEY = "variant";
 
-    public static final MapCodec<RegistryEntry<GoombaVariant>> VARIANT_MAP_CODEC = GoombaVariant.ENTRY_CODEC.fieldOf(VARIANT_KEY);
+    public static final MapCodec<Holder<GoombaVariant>> VARIANT_MAP_CODEC = GoombaVariant.ENTRY_CODEC.fieldOf(VARIANT_KEY);
 
-    protected static final TrackedData<RegistryEntry<GoombaVariant>> VARIANT = DataTracker.registerData(GoombaEntity.class, MubbleTrackedData.GOOMBA_VARIANT);
-    protected static final TrackedData<Byte> GOOMBA_FLAGS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.BYTE);
-    protected static final TrackedData<Integer> SURPRISE_PROGRESS = DataTracker.registerData(GoombaEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    protected static final EntityDataAccessor<Holder<GoombaVariant>> VARIANT = SynchedEntityData.defineId(GoombaEntity.class, MubbleTrackedData.GOOMBA_VARIANT);
+    protected static final EntityDataAccessor<Byte> GOOMBA_FLAGS = SynchedEntityData.defineId(GoombaEntity.class, EntityDataSerializers.BYTE);
+    protected static final EntityDataAccessor<Integer> SURPRISE_PROGRESS = SynchedEntityData.defineId(GoombaEntity.class, EntityDataSerializers.INT);
 
     private static final int SURPRISED_FLAG = 2;
     private static final int UNUSED1_FLAG = 4;
@@ -54,7 +60,7 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
     public final AnimationState surprisedAnimationState = new AnimationState();
     public final AnimationState crushAnimationState = new AnimationState();
 
-    protected GoombaEntity(EntityType<? extends GoombaEntity> entityType, World world) {
+    protected GoombaEntity(EntityType<? extends GoombaEntity> entityType, Level world) {
         super(entityType, world);
         this.moveControl = new StunnableMoveControl(this);
     }
@@ -62,29 +68,29 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
     // BEHAVIOR
 
     @Override
-    protected Text getDefaultName() {
-        return this.getVariant().value().name().orElse(super.getDefaultName());
+    protected Component getTypeName() {
+        return this.getVariant().value().name().orElse(super.getTypeName());
     }
 
-    public static DefaultAttributeContainer.Builder createGoombaAttributes() {
-        return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.FOLLOW_RANGE, 10.0)
-                .add(EntityAttributes.MAX_HEALTH, 4.0)
-                .add(EntityAttributes.MOVEMENT_SPEED, 0.25)
-                .add(EntityAttributes.ATTACK_DAMAGE, 1.5);
+    public static AttributeSupplier.Builder createGoombaAttributes() {
+        return Monster.createMonsterAttributes()
+                .add(Attributes.FOLLOW_RANGE, 10.0)
+                .add(Attributes.MAX_HEALTH, 4.0)
+                .add(Attributes.MOVEMENT_SPEED, 0.25)
+                .add(Attributes.ATTACK_DAMAGE, 1.5);
     }
 
     @Override
-    protected void initGoals() {
-        this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(1, new PowderSnowJumpGoal(this, this.getEntityWorld()));
+    protected void registerGoals() {
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(1, new ClimbOnTopOfPowderSnowGoal(this, this.level()));
         // TODO: add attack animation (bite)
-        this.goalSelector.add(2, new MeleeAttackGoal(this, 1.0, false));
-        this.goalSelector.add(3, new WanderAroundFarGoal(this, 0.6));
-        this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(8, new LookAroundGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this).setGroupRevenge());
-        this.targetSelector.add(2, new SurprisedActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.0, false));
+        this.goalSelector.addGoal(3, new WaterAvoidingRandomStrollGoal(this, 0.6));
+        this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
+        this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
+        this.targetSelector.addGoal(2, new SurprisedActiveTargetGoal<>(this, Player.class, true));
     }
 
     @Override
@@ -108,7 +114,7 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
     public void onSurprised() {
         this.playSound(MubbleSounds.GOOMBA_FIND_TARGET, 1.0F, 1.0F);
         if(null != this.getTarget()) {
-            this.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, this.getTarget().getEntityPos());
+            this.lookAt(EntityAnchorArgument.Anchor.EYES, this.getTarget().position());
         }
     }
 
@@ -118,8 +124,8 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
     }
 
     @Override
-    public boolean damage(ServerWorld world, DamageSource source, float amount) {
-        return super.damage(world, source, source.isIn(MubbleDamageTypeTags.INSTANT_KILLS_GOOMBAS) ? Float.MAX_VALUE : amount);
+    public boolean hurtServer(ServerLevel world, DamageSource source, float amount) {
+        return super.hurtServer(world, source, source.is(MubbleDamageTypeTags.INSTANT_KILLS_GOOMBAS) ? Float.MAX_VALUE : amount);
     }
 
     // SOUNDS
@@ -140,54 +146,54 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
     }
 
     @Override
-    protected float calculateNextStepSoundDistance() {
+    protected float nextStep() {
         //TODO: involve entity size or variant maybe? or even add it in the animation directly to make it as accurate as possible
-        return this.distanceTraveled + 0.3f;
+        return this.moveDist + 0.3f;
     }
 
     // DATA TRACKER
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {
-        super.initDataTracker(builder);
-        builder.add(GOOMBA_FLAGS, (byte) 0);
-        builder.add(SURPRISE_PROGRESS, 0);
-        builder.add(VARIANT, this.getRegistryManager().getOrThrow(MubbleRegistryKeys.GOOMBA_VARIANT).getOrThrow(GoombaVariants.NORMAL));
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(GOOMBA_FLAGS, (byte) 0);
+        builder.define(SURPRISE_PROGRESS, 0);
+        builder.define(VARIANT, this.registryAccess().lookupOrThrow(MubbleRegistryKeys.GOOMBA_VARIANT).getOrThrow(GoombaVariants.NORMAL));
     }
 
     @Override
-    public void onTrackedDataSet(TrackedData<?> data) {
+    public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
         if (SURPRISE_PROGRESS.equals(data)) {
             if (this.getSurpriseProgress() == 1) {
-                this.surprisedAnimationState.start(this.age);
+                this.surprisedAnimationState.start(this.tickCount);
             }
-            this.lastHeadYaw = this.headYaw;
-            this.bodyYaw = this.headYaw;
-            this.lastBodyYaw = this.bodyYaw;
+            this.yHeadRotO = this.yHeadRot;
+            this.yBodyRot = this.yHeadRot;
+            this.yBodyRotO = this.yBodyRot;
         }
-        super.onTrackedDataSet(data);
+        super.onSyncedDataUpdated(data);
     }
 
-    public void setVariant(RegistryEntry<GoombaVariant> variant) {
-        this.dataTracker.set(VARIANT, variant);
+    public void setVariant(Holder<GoombaVariant> variant) {
+        this.entityData.set(VARIANT, variant);
         this.getVariant().value().applyAttributes(this); //TODO: only apply attributes when entity is summoned/spawns
     }
 
-    public RegistryEntry<GoombaVariant> getVariant() {
-        return this.dataTracker.get(VARIANT);
+    public Holder<GoombaVariant> getVariant() {
+        return this.entityData.get(VARIANT);
     }
 
     private void setGoombaFlag(int mask, boolean value) {
-        byte b = this.dataTracker.get(GOOMBA_FLAGS);
+        byte b = this.entityData.get(GOOMBA_FLAGS);
         if (value) {
-            this.dataTracker.set(GOOMBA_FLAGS, (byte) (b | mask));
+            this.entityData.set(GOOMBA_FLAGS, (byte) (b | mask));
         } else {
-            this.dataTracker.set(GOOMBA_FLAGS, (byte) (b & ~mask));
+            this.entityData.set(GOOMBA_FLAGS, (byte) (b & ~mask));
         }
     }
 
     private boolean hasGoombaFlag(int bitmask) {
-        return (this.dataTracker.get(GOOMBA_FLAGS) & bitmask) != 0;
+        return (this.entityData.get(GOOMBA_FLAGS) & bitmask) != 0;
     }
 
     @Override
@@ -204,25 +210,25 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
     }
 
     public int getSurpriseProgress() {
-        return this.dataTracker.get(SURPRISE_PROGRESS);
+        return this.entityData.get(SURPRISE_PROGRESS);
     }
 
     public void setSurpriseProgress(int i) {
-        this.dataTracker.set(SURPRISE_PROGRESS, i);
+        this.entityData.set(SURPRISE_PROGRESS, i);
     }
 
     // NBT DATA
 
 	@Override
-	protected void writeCustomData(WriteView view) {
-		super.writeCustomData(view);
-		Variants.writeData(view, this.getVariant());
+	protected void addAdditionalSaveData(ValueOutput view) {
+		super.addAdditionalSaveData(view);
+		VariantUtils.writeVariant(view, this.getVariant());
 	}
 
 	@Override
-	protected void readCustomData(ReadView view) {
-		super.readCustomData(view);
-		Variants.fromData(view, MubbleRegistryKeys.GOOMBA_VARIANT).ifPresent(this::setVariant);
+	protected void readAdditionalSaveData(ValueInput view) {
+		super.readAdditionalSaveData(view);
+		VariantUtils.readVariant(view, MubbleRegistryKeys.GOOMBA_VARIANT).ifPresent(this::setVariant);
 	}
 
     // TEXTURE
@@ -236,23 +242,23 @@ public class GoombaEntity extends SuperMarioEnemyEntity implements Surprisable, 
 
 	@Nullable
 	@Override
-	public <T> T get(ComponentType<? extends T> type) {
-		return type == MubbleDataComponentTypes.GOOMBA_VARIANT ? castComponentValue((ComponentType<T>)type, this.getVariant()) : super.get(type);
+	public <T> T get(DataComponentType<? extends T> type) {
+		return type == MubbleDataComponentTypes.GOOMBA_VARIANT ? castComponentValue((DataComponentType<T>)type, this.getVariant()) : super.get(type);
 	}
 
 	@Override
-	protected void copyComponentsFrom(ComponentsAccess from) {
-		this.copyComponentFrom(from, MubbleDataComponentTypes.GOOMBA_VARIANT);
-		super.copyComponentsFrom(from);
+	protected void applyImplicitComponents(DataComponentGetter from) {
+		this.applyImplicitComponentIfPresent(from, MubbleDataComponentTypes.GOOMBA_VARIANT);
+		super.applyImplicitComponents(from);
 	}
 
 	@Override
-	protected <T> boolean setApplicableComponent(ComponentType<T> type, T value) {
+	protected <T> boolean applyImplicitComponent(DataComponentType<T> type, T value) {
 		if (type == MubbleDataComponentTypes.GOOMBA_VARIANT) {
 			this.setVariant(castComponentValue(MubbleDataComponentTypes.GOOMBA_VARIANT, value));
 			return true;
 		} else {
-			return super.setApplicableComponent(type, value);
+			return super.applyImplicitComponent(type, value);
 		}
 	}
 }

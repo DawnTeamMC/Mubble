@@ -20,7 +20,7 @@ import fr.hugman.mubble.world.MubbleGamerules;
 import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributeTypes;
 import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributes;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -56,6 +56,6 @@ public class Mubble implements ModInitializer {
     }
 
     public static Identifier id(String path) {
-        return Identifier.of(MOD_ID, path);
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 }

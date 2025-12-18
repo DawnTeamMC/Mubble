@@ -3,38 +3,37 @@ package fr.hugman.mubble.power_up;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.attribute.EntityAttributeEntry;
 import fr.hugman.mubble.power_up.action.PowerUpAction;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
 public class PowerUpBuilder {
-    private Optional<Text> name = Optional.empty();
+    private Optional<Component> name = Optional.empty();
     private Optional<Identifier> spriteId = Optional.empty();
-    private Optional<RegistryEntry<PowerUpAction>> action = Optional.empty();
+    private Optional<Holder<PowerUpAction>> action = Optional.empty();
     private List<EntityAttributeEntry> attributesModifiers = new ArrayList<>();
-    private RegistryEntry<SoundEvent> obtainSound = PowerUp.DEFAULT_OBTAIN_SOUND;
-    private RegistryEntry<SoundEvent> looseSound = PowerUp.DEFAULT_LOOSE_SOUND;
+    private Holder<SoundEvent> obtainSound = PowerUp.DEFAULT_OBTAIN_SOUND;
+    private Holder<SoundEvent> looseSound = PowerUp.DEFAULT_LOOSE_SOUND;
     private boolean canSprintOnWater = false;
 
-    public PowerUpBuilder name(Text name) {
+    public PowerUpBuilder name(Component name) {
         this.name = Optional.ofNullable(name);
         return this;
     }
 
     public PowerUpBuilder name(Identifier id) {
-        return this.name(Text.translatable("power_up." + id.getNamespace() + "." + id.getPath()));
+        return this.name(Component.translatable("power_up." + id.getNamespace() + "." + id.getPath()));
     }
 
-    public PowerUpBuilder name(RegistryKey<PowerUp> key) {
-        return name(key.getValue());
+    public PowerUpBuilder name(ResourceKey<PowerUp> key) {
+        return name(key.identifier());
     }
 
     public PowerUpBuilder spriteId(Identifier spriteId) {
@@ -42,7 +41,7 @@ public class PowerUpBuilder {
         return this;
     }
 
-    public PowerUpBuilder action(RegistryEntry<PowerUpAction> action) {
+    public PowerUpBuilder action(Holder<PowerUpAction> action) {
         this.action = Optional.ofNullable(action);
         return this;
     }
@@ -52,17 +51,17 @@ public class PowerUpBuilder {
         return this;
     }
 
-    public PowerUpBuilder attributesModifier(RegistryEntry<EntityAttribute> attribute, double value, EntityAttributeModifier.Operation operation) {
-        var path = attribute.getKey().map(key -> key.getValue().getPath()).orElse("unknown");
-        return this.attributesModifier(new EntityAttributeEntry(attribute, new EntityAttributeModifier(Mubble.id("power_up/" + path), value, operation)));
+    public PowerUpBuilder attributesModifier(Holder<Attribute> attribute, double value, AttributeModifier.Operation operation) {
+        var path = attribute.unwrapKey().map(key -> key.identifier().getPath()).orElse("unknown");
+        return this.attributesModifier(new EntityAttributeEntry(attribute, new AttributeModifier(Mubble.id("power_up/" + path), value, operation)));
     }
 
-    public PowerUpBuilder obtainSound(RegistryEntry<SoundEvent> obtainSound) {
+    public PowerUpBuilder obtainSound(Holder<SoundEvent> obtainSound) {
         this.obtainSound = obtainSound;
         return this;
     }
 
-    public PowerUpBuilder looseSound(RegistryEntry<SoundEvent> looseSound) {
+    public PowerUpBuilder looseSound(Holder<SoundEvent> looseSound) {
         this.looseSound = looseSound;
         return this;
     }

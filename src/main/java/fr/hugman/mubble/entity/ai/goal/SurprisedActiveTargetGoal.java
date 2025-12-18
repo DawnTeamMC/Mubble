@@ -1,33 +1,32 @@
 package fr.hugman.mubble.entity.ai.goal;
 
 import fr.hugman.mubble.entity.Surprisable;
-import net.minecraft.command.argument.EntityAnchorArgumentType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.TargetPredicate;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import org.jetbrains.annotations.Nullable;
 
-public class SurprisedActiveTargetGoal<T extends LivingEntity> extends ActiveTargetGoal<T> {
-    public SurprisedActiveTargetGoal(MobEntity mob, Class<T> targetClass, boolean checkVisibility) {
+public class SurprisedActiveTargetGoal<T extends LivingEntity> extends NearestAttackableTargetGoal<T> {
+    public SurprisedActiveTargetGoal(Mob mob, Class<T> targetClass, boolean checkVisibility) {
         super(mob, targetClass, 10, checkVisibility, false, null);
     }
 
-    public SurprisedActiveTargetGoal(MobEntity mob, Class<T> targetClass, boolean checkVisibility, TargetPredicate.EntityPredicate targetPredicate) {
+    public SurprisedActiveTargetGoal(Mob mob, Class<T> targetClass, boolean checkVisibility, TargetingConditions.Selector targetPredicate) {
         super(mob, targetClass, 10, checkVisibility, false, targetPredicate);
     }
 
-    public SurprisedActiveTargetGoal(MobEntity mob, Class<T> targetClass, boolean checkVisibility, boolean checkCanNavigate) {
+    public SurprisedActiveTargetGoal(Mob mob, Class<T> targetClass, boolean checkVisibility, boolean checkCanNavigate) {
         super(mob, targetClass, 10, checkVisibility, checkCanNavigate, null);
     }
 
     public SurprisedActiveTargetGoal(
-            MobEntity mob,
+            Mob mob,
             Class<T> targetClass,
             int reciprocalChance,
             boolean checkVisibility,
             boolean checkCanNavigate,
-            @Nullable TargetPredicate.EntityPredicate targetPredicate
+            @Nullable TargetingConditions.Selector targetPredicate
     ) {
         super(mob, targetClass, reciprocalChance, checkVisibility, checkCanNavigate, targetPredicate);
     }

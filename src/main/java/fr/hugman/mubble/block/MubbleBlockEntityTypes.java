@@ -4,12 +4,12 @@ import com.mojang.datafixers.types.Type;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
-import net.minecraft.datafixer.TypeReferences;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.Util;
+import net.minecraft.util.datafix.fixes.References;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class MubbleBlockEntityTypes {
     public static final BlockEntityType<BumpableBlockEntity> BUMPABLE_BLOCK = of("bumpable_block", FabricBlockEntityTypeBuilder.create(BumpableBlockEntity::new,
@@ -38,7 +38,7 @@ public class MubbleBlockEntityTypes {
     ));
 
     private static <T extends BlockEntity> BlockEntityType<T> of(String path, FabricBlockEntityTypeBuilder<T> blockEntityType) {
-        Type<?> type = Util.getChoiceType(TypeReferences.BLOCK_ENTITY, path);
-        return Registry.register(Registries.BLOCK_ENTITY_TYPE, Mubble.id(path), blockEntityType.build());
+        Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, path);
+        return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, Mubble.id(path), blockEntityType.build());
     }
 }

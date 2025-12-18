@@ -5,25 +5,24 @@ import fr.hugman.mubble.component.PowerUpComponent;
 import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.power_up.PowerUps;
 import fr.hugman.mubble.power_up.PowerUp;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.UseCooldownComponent;
 import fr.hugman.mubble.item.helper.ItemFactory;
-import net.minecraft.item.Item;
-import net.minecraft.item.SpawnEggItem;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.entry.LazyRegistryEntryReference;
-import net.minecraft.util.Rarity;
-
 import java.util.Optional;
 import java.util.function.Function;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.EitherHolder;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.component.UseCooldown;
 
 public class MubbleItems {
     // SUPER MARIO
-    public static final Item MAKER_GLOVE = of(MubbleItemKeys.MAKER_GLOVE, new Item.Settings().maxCount(1));
-    public static final KoopaShellItem GREEN_KOOPA_SHELL = of(MubbleItemKeys.GREEN_KOOPA_SHELL, s -> new KoopaShellItem(s, false), new Item.Settings().maxCount(3));
-    public static final KoopaShellItem RED_KOOPA_SHELL = of(MubbleItemKeys.RED_KOOPA_SHELL, s -> new KoopaShellItem(s, true), new Item.Settings().maxCount(3));
+    public static final Item MAKER_GLOVE = of(MubbleItemKeys.MAKER_GLOVE, new Item.Properties().stacksTo(1));
+    public static final KoopaShellItem GREEN_KOOPA_SHELL = of(MubbleItemKeys.GREEN_KOOPA_SHELL, s -> new KoopaShellItem(s, false), new Item.Properties().stacksTo(3));
+    public static final KoopaShellItem RED_KOOPA_SHELL = of(MubbleItemKeys.RED_KOOPA_SHELL, s -> new KoopaShellItem(s, true), new Item.Properties().stacksTo(3));
 
     public static final PowerUpItem MINI_MUSHROOM = powerUp(MubbleItemKeys.MINI_MUSHROOM, PowerUps.MINI);
     public static final PowerUpItem MEGA_MUSHROOM = powerUp(MubbleItemKeys.MEGA_MUSHROOM, PowerUps.MEGA);
@@ -34,25 +33,25 @@ public class MubbleItems {
 
     public static final SpawnEggItem GOOMBA_SPAWN_EGG = of(MubbleItemKeys.GOOMBA_SPAWN_EGG, ItemFactory.spawnEgg(MubbleEntityTypes.GOOMBA));
 
-    private static <O extends Item> O of(RegistryKey<Item> key, Function<Item.Settings, O> factory, Item.Settings settings) {
-        return Registry.register(Registries.ITEM, key, factory.apply(settings.registryKey(key)));
+    private static <O extends Item> O of(ResourceKey<Item> key, Function<Item.Properties, O> factory, Item.Properties settings) {
+        return Registry.register(BuiltInRegistries.ITEM, key, factory.apply(settings.setId(key)));
     }
 
-    private static <O extends Item> O of(RegistryKey<Item> key, Function<Item.Settings, O> factory) {
-        return of(key, factory, new Item.Settings());
+    private static <O extends Item> O of(ResourceKey<Item> key, Function<Item.Properties, O> factory) {
+        return of(key, factory, new Item.Properties());
     }
 
-    private static Item of(RegistryKey<Item> key, Item.Settings settings) {
-        return of(key, Item::new, settings.registryKey(key));
+    private static Item of(ResourceKey<Item> key, Item.Properties settings) {
+        return of(key, Item::new, settings.setId(key));
     }
 
-    private static Item of(RegistryKey<Item> key) {
-        return of(key, new Item.Settings());
+    private static Item of(ResourceKey<Item> key) {
+        return of(key, new Item.Properties());
     }
 
-    private static PowerUpItem powerUp(RegistryKey<Item> key, RegistryKey<PowerUp> powerUp) {
-        return of(key, PowerUpItem::new, new Item.Settings()
-                .component(MubbleDataComponentTypes.POWER_UP, new PowerUpComponent(new LazyRegistryEntryReference<>(powerUp)))
-                .component(DataComponentTypes.USE_COOLDOWN, new UseCooldownComponent(1.0f, Optional.of(MubbleCooldownGroups.POWER_UPS))));
+    private static PowerUpItem powerUp(ResourceKey<Item> key, ResourceKey<PowerUp> powerUp) {
+        return of(key, PowerUpItem::new, new Item.Properties()
+                .component(MubbleDataComponentTypes.POWER_UP, new PowerUpComponent(new EitherHolder<>(powerUp)))
+                .component(DataComponents.USE_COOLDOWN, new UseCooldown(1.0f, Optional.of(MubbleCooldownGroups.POWER_UPS))));
     }
 }

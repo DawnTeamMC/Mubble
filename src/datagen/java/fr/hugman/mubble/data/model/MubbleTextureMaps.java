@@ -1,17 +1,17 @@
 package fr.hugman.mubble.data.model;
 
-import net.minecraft.client.data.TextureKey;
-import net.minecraft.client.data.TextureMap;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.resources.Identifier;
 
 public class MubbleTextureMaps {
-    public static TextureMap all(Identifier all) {
-        return new TextureMap().put(TextureKey.ALL, all.withPrefixedPath("block/"));
+    public static TextureMapping all(Identifier all) {
+        return new TextureMapping().put(TextureSlot.ALL, all.withPrefix("block/"));
     }
 
-    public static TextureMap sideEnd(Identifier side, Identifier end) {
-        return new TextureMap()
-                .put(TextureKey.SIDE, side.withPrefixedPath("block/"))
-                .put(TextureKey.END, end.withPrefixedPath("block/"));
+    public static TextureMapping sideEnd(Identifier side, Identifier end) {
+        return new TextureMapping()
+                .put(TextureSlot.SIDE, side.withPrefix("block/"))
+                .put(TextureSlot.END, end.withPrefix("block/"));
     }
 }

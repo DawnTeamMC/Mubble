@@ -6,13 +6,13 @@ import fr.hugman.mubble.power_up.action.PowerUpAction;
 import fr.hugman.mubble.power_up.action.PowerUpActionType;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
 
 public class MubbleRegistries {
     public static final Registry<PowerUpActionType<?>> POWER_UP_ACTION_TYPE = of(MubbleRegistryKeys.POWER_UP_ACTION_TYPE);
 
-    private static <T> Registry<T> of(RegistryKey<Registry<T>> key) {
+    private static <T> Registry<T> of(ResourceKey<Registry<T>> key) {
         return FabricRegistryBuilder.createSimple(key).buildAndRegister();
     }
 

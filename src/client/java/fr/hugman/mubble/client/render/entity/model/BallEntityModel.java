@@ -4,7 +4,13 @@ import fr.hugman.mubble.client.render.entity.state.BallRenderState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.EntityModel;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 
 @Environment(EnvType.CLIENT)
 public class BallEntityModel extends EntityModel<BallRenderState> {
@@ -15,17 +21,17 @@ public class BallEntityModel extends EntityModel<BallRenderState> {
         super(root);
     }
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.addChild(MAIN,
-                ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, new Dilation(0.0F)),
-                ModelTransform.NONE
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = new MeshDefinition();
+        PartDefinition modelPartData = modelData.getRoot();
+        modelPartData.addOrReplaceChild(MAIN,
+                CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.ZERO
         );
-        modelPartData.addChild(TRAIL,
-                ModelPartBuilder.create().uv(0, 8).cuboid(-2.0F, -2.0F, 2.0F, 4.0F, 4.0F, 4.0F, new Dilation(0.0F)),
-                ModelTransform.NONE
+        modelPartData.addOrReplaceChild(TRAIL,
+                CubeListBuilder.create().texOffs(0, 8).addBox(-2.0F, -2.0F, 2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
+                PartPose.ZERO
         );
-        return TexturedModelData.of(modelData, 16, 16);
+        return LayerDefinition.create(modelData, 16, 16);
     }
 }

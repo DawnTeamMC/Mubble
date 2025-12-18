@@ -2,66 +2,66 @@ package fr.hugman.mubble.entity;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.entity.EntityStatuses;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.data.DataTracker;
-import net.minecraft.entity.projectile.thrown.ThrownEntity;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.util.AssetInfo;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.core.ClientAsset;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.EntityEvent;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.ThrowableProjectile;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
-public abstract class BallEntity extends ThrownEntity {
+public abstract class BallEntity extends ThrowableProjectile {
 	public static final String REBOUNDS_KEY = "rebounds";
     protected int rebounds = 3;
 
-    protected BallEntity(EntityType<? extends BallEntity> type, World world) {
+    protected BallEntity(EntityType<? extends BallEntity> type, Level world) {
         super(type, world);
     }
 
-    protected BallEntity(EntityType<? extends BallEntity> type, World world, LivingEntity owner) {
+    protected BallEntity(EntityType<? extends BallEntity> type, Level world, LivingEntity owner) {
         super(type, world);
         this.setOwner(owner);
     }
 
-    protected BallEntity(EntityType<? extends BallEntity> type, double x, double y, double z, World world) {
+    protected BallEntity(EntityType<? extends BallEntity> type, double x, double y, double z, Level world) {
         super(type, x, y, z, world);
     }
 
     @Override
-    protected void initDataTracker(DataTracker.Builder builder) {}
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {}
 
     @Override
     public void tick() {
         super.tick();
-        Vec3d vec3d = this.getVelocity();
+        Vec3 vec3d = this.getDeltaMovement();
 
-        float f = (float)(MathHelper.atan2(-vec3d.x, -vec3d.z) * 180.0F / (float)Math.PI);
-        float g = (float)(MathHelper.atan2(vec3d.y, vec3d.horizontalLength()) * 180.0F / (float)Math.PI);
-        this.setPitch(updateRotation(this.getPitch(), g));
-        this.setYaw(updateRotation(this.getYaw(), f));
+        float f = (float)(Mth.atan2(-vec3d.x, -vec3d.z) * 180.0F / (float)Math.PI);
+        float g = (float)(Mth.atan2(vec3d.y, vec3d.horizontalDistance()) * 180.0F / (float)Math.PI);
+        this.setXRot(lerpRotation(this.getXRot(), g));
+        this.setYRot(lerpRotation(this.getYRot(), f));
     }
 
     protected abstract SoundEvent getDeathSound();
 
-    protected abstract ParticleEffect getDeathParticle();
+    protected abstract ParticleOptions getDeathParticle();
 
 	@Override
-	protected double getGravity() {
+	protected double getDefaultGravity() {
 		return 0.08;
 	}
 
     @Override
-    protected void onCollision(HitResult result) {
+    protected void onHit(HitResult result) {
         this.rebounds--;
-        super.onCollision(result);
+        super.onHit(result);
         if (this.isAlive() && this.rebounds < 0) {
             this.finalHit();
         }
@@ -71,28 +71,28 @@ public abstract class BallEntity extends ThrownEntity {
      * Triggers after the ball has hit and can no longer rebound.
      */
     protected void finalHit() {
-        if (!this.getEntityWorld().isClient()) {
-            this.getEntityWorld().sendEntityStatus(this, EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES);
+        if (!this.level().isClientSide()) {
+            this.level().broadcastEntityEvent(this, EntityEvent.DEATH);
             this.remove(RemovalReason.DISCARDED);
         }
-        this.getEntityWorld().playSound(null, getX(), getY(), getZ(), this.getDeathSound(), SoundCategory.NEUTRAL, 0.5F, 1.0F);
+        this.level().playSound(null, getX(), getY(), getZ(), this.getDeathSound(), SoundSource.NEUTRAL, 0.5F, 1.0F);
     }
 
 	@Override
-	protected void writeCustomData(WriteView view) {
-		super.writeCustomData(view);
+	protected void addAdditionalSaveData(ValueOutput view) {
+		super.addAdditionalSaveData(view);
 		view.putInt(REBOUNDS_KEY, rebounds);
 	}
 
 	@Override
-	protected void readCustomData(ReadView view) {
-		super.readCustomData(view);
-		this.rebounds = view.getInt(REBOUNDS_KEY, 3);
+	protected void readAdditionalSaveData(ValueInput view) {
+		super.readAdditionalSaveData(view);
+		this.rebounds = view.getIntOr(REBOUNDS_KEY, 3);
 	}
 
     @Environment(EnvType.CLIENT)
     @Override
-    public void handleStatus(byte state) {
+    public void handleEntityEvent(byte state) {
         if (state == 3) {
             this.spawnDeathParticles();
         }
@@ -103,13 +103,13 @@ public abstract class BallEntity extends ThrownEntity {
             float s1 = random.nextFloat() * 0.2F - 0.1F;
             float s2 = random.nextFloat() * 0.2F - 0.1F;
             float s3 = random.nextFloat() * 0.2F - 0.1F;
-            this.getEntityWorld().addParticleClient(this.getDeathParticle(), this.getX(), this.getY(), this.getZ(), s1, s2, s3);
+            this.level().addParticle(this.getDeathParticle(), this.getX(), this.getY(), this.getZ(), s1, s2, s3);
         }
     }
 
     public double getSpeed() {
-        return this.getVelocity().length();
+        return this.getDeltaMovement().length();
     }
 
-    abstract public AssetInfo.TextureAssetInfo getTexture();
+    abstract public ClientAsset.ResourceTexture getTexture();
 }

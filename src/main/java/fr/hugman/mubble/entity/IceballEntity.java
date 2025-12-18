@@ -5,39 +5,39 @@ import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
 import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.world.attribute.BlockTransform;
 import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributes;
-import net.minecraft.block.AirBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.SnowGolemEntity;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.AssetInfo;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.ClientAsset;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.golem.SnowGolem;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class IceballEntity extends BallEntity {
-    private static final AssetInfo.TextureAssetInfo TEXTURE = new AssetInfo.TextureAssetInfo(Mubble.id("entity/iceball"));
+    private static final ClientAsset.ResourceTexture TEXTURE = new ClientAsset.ResourceTexture(Mubble.id("entity/iceball"));
 
-    public IceballEntity(EntityType<? extends IceballEntity> type, World world) {
+    public IceballEntity(EntityType<? extends IceballEntity> type, Level world) {
         super(type, world);
     }
 
-    public IceballEntity(World world, LivingEntity owner) {
+    public IceballEntity(Level world, LivingEntity owner) {
         super(MubbleEntityTypes.ICEBALL, world, owner);
     }
 
-    public IceballEntity(double x, double y, double z, World world) {
+    public IceballEntity(double x, double y, double z, Level world) {
         super(MubbleEntityTypes.ICEBALL, x, y, z, world);
     }
 
@@ -47,74 +47,74 @@ public class IceballEntity extends BallEntity {
     }
 
     @Override
-    protected ParticleEffect getDeathParticle() {
+    protected ParticleOptions getDeathParticle() {
         return ParticleTypes.CLOUD;
     }
 
     @Override
-    protected void onEntityHit(EntityHitResult result) {
-        super.onEntityHit(result);
+    protected void onHitEntity(EntityHitResult result) {
+        super.onHitEntity(result);
         Entity entity = result.getEntity();
         Entity owner = this.getOwner();
-        float damage = entity instanceof SnowGolemEntity ? 1.0F : 3.0F;
+        float damage = entity instanceof SnowGolem ? 1.0F : 3.0F;
 
         if (owner instanceof LivingEntity livingEntity) {
-            livingEntity.onAttacking(entity);
+            livingEntity.setLastHurtMob(entity);
         }
-        if (!this.getEntityWorld().isClient()) {
-            if (!(entity instanceof SnowGolemEntity) && entity instanceof LivingEntity) {
+        if (!this.level().isClientSide()) {
+            if (!(entity instanceof SnowGolem) && entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;
-                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 40, 1));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 1));
             }
         }
 
-        this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.ICEBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-        entity.serverDamage(this.getDamageSources().create(MubbleDamageTypes.ICEBALL, this, this.getOwner()), damage);
+        this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.ICEBALL_HIT_ENTITY, SoundSource.NEUTRAL, 0.5F, 1.0F);
+        entity.hurt(this.damageSources().source(MubbleDamageTypes.ICEBALL, this, this.getOwner()), damage);
         this.finalHit();
     }
 
     @Override
-    protected void onBlockHit(BlockHitResult result) {
-        super.onBlockHit(result);
+    protected void onHitBlock(BlockHitResult result) {
+        super.onHitBlock(result);
         BlockPos pos = result.getBlockPos();
-        BlockState state = this.getEntityWorld().getBlockState(pos);
-        Direction face = result.getSide();
+        BlockState state = this.level().getBlockState(pos);
+        Direction face = result.getDirection();
 
         BlockState resultState = null;
-        RegistryEntry<SoundEvent> resultSound = null;
-        var transform = BlockTransform.testList(this.getEntityWorld().getEnvironmentAttributes().getAttributeValue(MubbleEnvironmentAttributes.ICEBALL_FREEZES, pos), state.getRegistryEntry());
+        Holder<SoundEvent> resultSound = null;
+        var transform = BlockTransform.testList(this.level().environmentAttributes().getValue(MubbleEnvironmentAttributes.ICEBALL_FREEZES, pos), state.getBlockHolder());
         if (transform != null) {
             resultState = transform.result();
             resultSound = transform.sound().orElse(null);
         }
 
         if (resultState != null) {
-            if (!this.getEntityWorld().isClient()) {
+            if (!this.level().isClientSide()) {
                 if (resultState.getBlock() instanceof AirBlock) {
-                    this.getEntityWorld().removeBlock(pos, false);
+                    this.level().removeBlock(pos, false);
                 } else {
-                    this.getEntityWorld().setBlockState(pos, resultState);
+                    this.level().setBlockAndUpdate(pos, resultState);
                 }
             }
-            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), resultSound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.level().playSound(null, getX(), getY(), getZ(), resultSound, SoundSource.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }
         if (face == Direction.UP) {
-            Vec3d motion = this.getVelocity().subtract(0.0D, this.getVelocity().y * 1.25D, 0.0D);
+            Vec3 motion = this.getDeltaMovement().subtract(0.0D, this.getDeltaMovement().y * 1.25D, 0.0D);
             double minY = 0.4D;
             if (motion.y < minY) {
-                motion = motion.withAxis(Direction.Axis.Y, minY);
+                motion = motion.with(Direction.Axis.Y, minY);
             }
-            this.setVelocity(motion);
+            this.setDeltaMovement(motion);
         } else {
-            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.ICEBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.ICEBALL_HIT_BLOCK, SoundSource.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
         }
     }
 
     @Override
-    public AssetInfo.TextureAssetInfo getTexture() {
+    public ClientAsset.ResourceTexture getTexture() {
         return TEXTURE;
     }
 }

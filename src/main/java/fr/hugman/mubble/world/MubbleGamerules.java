@@ -3,8 +3,8 @@ package fr.hugman.mubble.world;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.BeepBlock;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleBuilder;
-import net.minecraft.world.rule.GameRule;
-import net.minecraft.world.rule.GameRuleCategory;
+import net.minecraft.world.level.gamerules.GameRule;
+import net.minecraft.world.level.gamerules.GameRuleCategory;
 
 public class MubbleGamerules {
     // SUPER MARIO

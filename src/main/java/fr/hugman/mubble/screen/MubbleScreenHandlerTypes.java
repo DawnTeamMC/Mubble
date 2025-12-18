@@ -1,17 +1,17 @@
 package fr.hugman.mubble.screen;
 
 import fr.hugman.mubble.Mubble;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.resource.featuretoggle.FeatureFlags;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.flag.FeatureFlags;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 
 public class MubbleScreenHandlerTypes {
     // SUPER MARIO
-    public static final ScreenHandlerType<BumpableScreenHandler> BUMPABLE_BLOCK = of("bumpable_block", new ScreenHandlerType<>(BumpableScreenHandler::new, FeatureFlags.VANILLA_FEATURES));
+    public static final MenuType<BumpableScreenHandler> BUMPABLE_BLOCK = of("bumpable_block", new MenuType<>(BumpableScreenHandler::new, FeatureFlags.VANILLA_SET));
 
-    private static <T extends ScreenHandler> ScreenHandlerType<T> of(String path, ScreenHandlerType<T> screenHandlerType) {
-        return Registry.register(Registries.SCREEN_HANDLER, Mubble.id(path), screenHandlerType);
+    private static <T extends AbstractContainerMenu> MenuType<T> of(String path, MenuType<T> screenHandlerType) {
+        return Registry.register(BuiltInRegistries.MENU, Mubble.id(path), screenHandlerType);
     }
 }

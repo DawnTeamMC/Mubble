@@ -2,36 +2,35 @@ package fr.hugman.mubble.attribute;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
-
 import java.util.List;
 import java.util.Optional;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 
-public record EntityAttributeEntry(RegistryEntry<EntityAttribute> attribute, EntityAttributeModifier modifier) {
+public record EntityAttributeEntry(Holder<Attribute> attribute, AttributeModifier modifier) {
     public static final Codec<EntityAttributeEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                    EntityAttribute.CODEC.fieldOf("type").forGetter(EntityAttributeEntry::attribute),
-                    EntityAttributeModifier.MAP_CODEC.forGetter(EntityAttributeEntry::modifier)
+                    Attribute.CODEC.fieldOf("type").forGetter(EntityAttributeEntry::attribute),
+                    AttributeModifier.MAP_CODEC.forGetter(EntityAttributeEntry::modifier)
             ).apply(instance, EntityAttributeEntry::new)
     );
 
-    public static final PacketCodec<RegistryByteBuf, EntityAttributeEntry> PACKET_CODEC = PacketCodec.tuple(
-            EntityAttribute.PACKET_CODEC,
+    public static final StreamCodec<RegistryFriendlyByteBuf, EntityAttributeEntry> PACKET_CODEC = StreamCodec.composite(
+            Attribute.STREAM_CODEC,
             EntityAttributeEntry::attribute,
-            EntityAttributeModifier.PACKET_CODEC,
+            AttributeModifier.STREAM_CODEC,
             EntityAttributeEntry::modifier,
             EntityAttributeEntry::new
     );
 
-    public static final PacketCodec<RegistryByteBuf, List<EntityAttributeEntry>> LIST_PACKET_CODEC = PACKET_CODEC.collect(PacketCodecs.toList());
-    public static final PacketCodec<RegistryByteBuf, Optional<List<EntityAttributeEntry>>> OPTIONAL_LIST_PACKET_CODEC = LIST_PACKET_CODEC.collect(PacketCodecs::optional);
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<EntityAttributeEntry>> LIST_PACKET_CODEC = PACKET_CODEC.apply(ByteBufCodecs.list());
+    public static final StreamCodec<RegistryFriendlyByteBuf, Optional<List<EntityAttributeEntry>>> OPTIONAL_LIST_PACKET_CODEC = LIST_PACKET_CODEC.apply(ByteBufCodecs::optional);
 
-    public boolean matches(RegistryEntry<EntityAttribute> attribute, Identifier modifierId) {
-        return attribute.equals(this.attribute) && this.modifier.idMatches(modifierId);
+    public boolean matches(Holder<Attribute> attribute, Identifier modifierId) {
+        return attribute.equals(this.attribute) && this.modifier.is(modifierId);
     }
 }

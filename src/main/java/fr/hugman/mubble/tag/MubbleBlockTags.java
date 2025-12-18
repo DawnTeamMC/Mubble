@@ -1,9 +1,9 @@
 package fr.hugman.mubble.tag;
 
 import fr.hugman.mubble.Mubble;
-import net.minecraft.block.Block;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.tag.TagKey;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 
 public class MubbleBlockTags {
     public static final TagKey<Block> MELTABLE_TO_ICE = of("meltable/ice");
@@ -21,6 +21,6 @@ public class MubbleBlockTags {
 	public static final TagKey<Block> EGG_BLOCKS = of("egg_blocks");
 
 	public static TagKey<Block> of(String path) {
-		return TagKey.of(RegistryKeys.BLOCK, Mubble.id(path));
+		return TagKey.create(Registries.BLOCK, Mubble.id(path));
 	}
 }

@@ -1,8 +1,8 @@
 package fr.hugman.mubble.world.attribute;
 
 import fr.hugman.mubble.Mubble;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.attribute.EnvironmentAttribute;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public interface MubbleEnvironmentAttributes {
 
     private static <Value> EnvironmentAttribute<Value> register(String path, EnvironmentAttribute.Builder<Value> builder) {
         var environmentAttribute = builder.build();
-        Registry.register(Registries.ENVIRONMENTAL_ATTRIBUTE, Mubble.id(path), environmentAttribute);
+        Registry.register(BuiltInRegistries.ENVIRONMENT_ATTRIBUTE, Mubble.id(path), environmentAttribute);
         return environmentAttribute;
     }
 }

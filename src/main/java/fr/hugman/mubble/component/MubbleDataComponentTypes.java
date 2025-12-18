@@ -2,22 +2,19 @@ package fr.hugman.mubble.component;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.entity.GoombaVariant;
-import net.minecraft.component.ComponentType;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.dynamic.Codecs;
-
 import java.util.function.UnaryOperator;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.BuiltInRegistries;
 
 public class MubbleDataComponentTypes {
-	public static final ComponentType<PowerUpComponent> POWER_UP = register("power_up", builder -> builder.codec(PowerUpComponent.CODEC).packetCodec(PowerUpComponent.PACKET_CODEC).cache());
-	public static final ComponentType<RegistryEntry<GoombaVariant>> GOOMBA_VARIANT = register(
-			"goomba/variant", builder -> builder.codec(GoombaVariant.ENTRY_CODEC).packetCodec(GoombaVariant.ENTRY_PACKET_CODEC)
+	public static final DataComponentType<PowerUpComponent> POWER_UP = register("power_up", builder -> builder.persistent(PowerUpComponent.CODEC).networkSynchronized(PowerUpComponent.PACKET_CODEC).cacheEncoding());
+	public static final DataComponentType<Holder<GoombaVariant>> GOOMBA_VARIANT = register(
+			"goomba/variant", builder -> builder.persistent(GoombaVariant.ENTRY_CODEC).networkSynchronized(GoombaVariant.ENTRY_PACKET_CODEC)
 	);
 
-	private static <T> ComponentType<T> register(String path, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
-		return Registry.register(Registries.DATA_COMPONENT_TYPE, Mubble.id(path), builderOperator.apply(ComponentType.builder()).build());
+	private static <T> DataComponentType<T> register(String path, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
+		return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, Mubble.id(path), builderOperator.apply(DataComponentType.builder()).build());
 	}
 }

@@ -1,17 +1,17 @@
 package fr.hugman.mubble.entity.ai.control;
 
 import fr.hugman.mubble.entity.Stunnable;
-import net.minecraft.entity.ai.control.MoveControl;
-import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.control.MoveControl;
 
 public class StunnableMoveControl extends MoveControl {
-    public StunnableMoveControl(MobEntity entity) {
+    public StunnableMoveControl(Mob entity) {
         super(entity);
     }
 
     @Override
     public void tick() {
-        if (this.entity instanceof Stunnable stunnable && !stunnable.isStunned()) {
+        if (this.mob instanceof Stunnable stunnable && !stunnable.isStunned()) {
             super.tick();
         }
     }

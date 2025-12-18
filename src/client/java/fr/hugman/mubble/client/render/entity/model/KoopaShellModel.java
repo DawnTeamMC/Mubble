@@ -2,31 +2,36 @@ package fr.hugman.mubble.client.render.entity.model;
 
 import fr.hugman.mubble.client.render.entity.state.KoopaShellEntityRenderState;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class KoopaShellModel extends EntityModel<KoopaShellEntityRenderState> {
     public KoopaShellModel(ModelPart part) {
-        super(part.getChild(EntityModelPartNames.CUBE));
+        super(part.getChild(PartNames.CUBE));
     }
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
-        modelPartData.addChild(EntityModelPartNames.CUBE,
-                ModelPartBuilder.create()
-                        .uv(0, 0)
-                        .cuboid(-5.0F, -3.25F, -5.0F, 10.0F, 7.0F, 10.0F)
-                        .uv(0, 17)
-                        .cuboid(-6.0F, -1.25F, -6.0F, 12.0F, 2.0F, 12.0F),
-                ModelTransform.origin(0.0F, 20.25F, 0.0F)
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = new MeshDefinition();
+        PartDefinition modelPartData = modelData.getRoot();
+        modelPartData.addOrReplaceChild(PartNames.CUBE,
+                CubeListBuilder.create()
+                        .texOffs(0, 0)
+                        .addBox(-5.0F, -3.25F, -5.0F, 10.0F, 7.0F, 10.0F)
+                        .texOffs(0, 17)
+                        .addBox(-6.0F, -1.25F, -6.0F, 12.0F, 2.0F, 12.0F),
+                PartPose.offset(0.0F, 20.25F, 0.0F)
         );
-        return TexturedModelData.of(modelData, 64, 32);
+        return LayerDefinition.create(modelData, 64, 32);
     }
 
     @Override
-    public void setAngles(KoopaShellEntityRenderState state) {
-        super.setAngles(state);
-        this.root.yaw = state.horizontalRotation;
+    public void setupAnim(KoopaShellEntityRenderState koopaShellRenderState) {
+        super.setupAnim(koopaShellRenderState);
+        this.root.yRot = koopaShellRenderState.horizontalRotation;
     }
 }

@@ -1,28 +1,27 @@
 package fr.hugman.mubble.client.render.entity;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import fr.hugman.mubble.client.render.entity.model.BallEntityModel;
 import fr.hugman.mubble.client.render.entity.model.MubbleModelLayers;
 import fr.hugman.mubble.client.render.entity.state.BallRenderState;
 import fr.hugman.mubble.entity.BallEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.RenderLayers;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.entity.EntityRenderer;
-import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.state.CameraRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.math.RotationAxis;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 
 @Environment(EnvType.CLIENT)
 public class BallEntityRenderer extends EntityRenderer<BallEntity, BallRenderState> {
     private final BallEntityModel model;
 
-    public BallEntityRenderer(EntityRendererFactory.Context ctx) {
+    public BallEntityRenderer(EntityRendererProvider.Context ctx) {
         super(ctx);
-        this.model = new BallEntityModel(ctx.getPart(MubbleModelLayers.BALL));
+        this.model = new BallEntityModel(ctx.bakeLayer(MubbleModelLayers.BALL));
     }
 
     @Override
@@ -30,25 +29,25 @@ public class BallEntityRenderer extends EntityRenderer<BallEntity, BallRenderSta
         return new BallRenderState();
     }
 
-	@Override
-	public void render(BallRenderState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
-		matrices.push();
-		matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(state.yaw - 90.0F));
-		matrices.multiply(RotationAxis.POSITIVE_X.rotationDegrees(state.pitch));
+    @Override
+    public void extractRenderState(BallEntity ball, BallRenderState state, float f) {
+        super.extractRenderState(ball, state, f);
+        state.xRot = ball.getXRot(f);
+        state.yRot = ball.getYRot(f);
+        state.texture = ball.getTexture();
+        state.lightCoords = 15728880;
+    }
+
+    @Override
+    public void submit(BallRenderState entityRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+        poseStack.pushPose();
+        poseStack.mulPose(Axis.YP.rotationDegrees(entityRenderState.yRot - 90.0F));
+        poseStack.mulPose(Axis.XP.rotationDegrees(entityRenderState.xRot));
         var size = 4;
-        matrices.scale(state.width * size, state.height * size, state.width * size);
-		queue.submitModel(this.model, state, matrices, RenderLayers.entityCutout(state.texture.texturePath()), state.light, OverlayTexture.DEFAULT_UV, state.outlineColor, null);
-		matrices.pop();
+        poseStack.scale(entityRenderState.boundingBoxWidth * size, entityRenderState.boundingBoxHeight * size, entityRenderState.boundingBoxWidth * size);
+        submitNodeCollector.submitModel(this.model, entityRenderState, poseStack, RenderTypes.entityCutout(entityRenderState.texture.texturePath()), entityRenderState.lightCoords, OverlayTexture.NO_OVERLAY, entityRenderState.outlineColor, null);
+        poseStack.popPose();
 
-		super.render(state, matrices, queue, cameraState);
-	}
-
-	@Override
-    public void updateRenderState(BallEntity bullet, BallRenderState state, float f) {
-        super.updateRenderState(bullet, state, f);
-        state.pitch = bullet.getLerpedPitch(f);
-        state.yaw = bullet.getLerpedYaw(f);
-        state.texture = bullet.getTexture();
-        state.light = 15728880;
+        super.submit(entityRenderState, poseStack, submitNodeCollector, cameraRenderState);
     }
 }

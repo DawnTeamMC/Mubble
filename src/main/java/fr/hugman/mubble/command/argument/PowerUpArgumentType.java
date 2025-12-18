@@ -4,27 +4,25 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import fr.hugman.mubble.power_up.PowerUp;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
-import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.command.CommandSource;
-import net.minecraft.command.argument.RegistryEntryArgumentType;
-import net.minecraft.registry.ReloadableRegistries;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.commands.CommandBuildContext;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.ResourceOrIdArgument;
+import net.minecraft.core.Holder;
 
-public class PowerUpArgumentType extends RegistryEntryArgumentType<PowerUp> {
-    protected PowerUpArgumentType(CommandRegistryAccess registryAccess) {
+public class PowerUpArgumentType extends ResourceOrIdArgument<PowerUp> {
+    protected PowerUpArgumentType(CommandBuildContext registryAccess) {
         super(registryAccess, MubbleRegistryKeys.POWER_UP, PowerUp.CODEC);
     }
 
-    public static PowerUpArgumentType of(CommandRegistryAccess registryAccess) {
+    public static PowerUpArgumentType of(CommandBuildContext registryAccess) {
         return new PowerUpArgumentType(registryAccess);
     }
 
-    public static RegistryEntry<PowerUp> getPowerUp(CommandContext<ServerCommandSource> context, String argument) {
-        return getArgument(context, argument);
+    public static Holder<PowerUp> getPowerUp(CommandContext<CommandSourceStack> context, String argument) {
+        return getResource(context, argument);
     }
 
-    private static <T> RegistryEntry<T> getArgument(CommandContext<ServerCommandSource> context, String argument) {
-        return context.getArgument(argument, RegistryEntry.class);
+    private static <T> Holder<T> getResource(CommandContext<CommandSourceStack> context, String argument) {
+        return context.getArgument(argument, Holder.class);
     }
 }

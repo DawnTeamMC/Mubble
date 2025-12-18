@@ -2,52 +2,58 @@ package fr.hugman.mubble.client.render.entity.model;
 
 import fr.hugman.mubble.client.render.entity.animation.GoombaAnimations;
 import fr.hugman.mubble.client.render.entity.state.GoombaEntityRenderState;
+import net.minecraft.client.animation.KeyframeAnimation;
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.entity.animation.Animation;
-import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.entity.model.EntityModelPartNames;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartNames;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.CubeDeformation;
+import net.minecraft.client.model.geom.builders.CubeListBuilder;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.model.geom.builders.MeshDefinition;
+import net.minecraft.client.model.geom.builders.PartDefinition;
 
 public class GoombaModel extends EntityModel<GoombaEntityRenderState> {
     public static final String LEFT_EYEBROW = "left_eyebrow";
     public static final String RIGHT_EYEBROW = "right_eyebrow";
 
-	private final Animation walkingAnimation;
-	private final Animation surprisedAnimation;
-	private final Animation crushAnimation;
+	private final KeyframeAnimation walkingAnimation;
+	private final KeyframeAnimation surprisedAnimation;
+	private final KeyframeAnimation crushAnimation;
 
 
     public GoombaModel(ModelPart part) {
-        super(part.getChild(EntityModelPartNames.ROOT));
-		this.walkingAnimation = GoombaAnimations.WALKING.createAnimation(this.root);
-		this.surprisedAnimation = GoombaAnimations.SURPRISE.createAnimation(this.root);
-		this.crushAnimation = GoombaAnimations.CRUSH.createAnimation(this.root);
+        super(part.getChild(PartNames.ROOT));
+		this.walkingAnimation = GoombaAnimations.WALKING.bake(this.root);
+		this.surprisedAnimation = GoombaAnimations.SURPRISE.bake(this.root);
+		this.crushAnimation = GoombaAnimations.CRUSH.bake(this.root);
     }
 
-    public static TexturedModelData getTexturedModelData() {
-        ModelData modelData = new ModelData();
-        ModelPartData modelPartData = modelData.getRoot();
+    public static LayerDefinition getTexturedModelData() {
+        MeshDefinition modelData = new MeshDefinition();
+        PartDefinition modelPartData = modelData.getRoot();
 
-        ModelPartData root = modelPartData.addChild(EntityModelPartNames.ROOT, ModelPartBuilder.create().uv(0, 22).cuboid(-2.5F, -1.5F, -2.5F, 5.0F, 3.0F, 5.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, 21.5F, 1.0F));
-        root.addChild(EntityModelPartNames.RIGHT_FOOT, ModelPartBuilder.create().uv(0, 30).cuboid(-2.5F, -1.0F, -4.5F, 3.0F, 2.0F, 5.0F, new Dilation(0.0F)), ModelTransform.origin(-2.0F, 1.5F, 1.0F));
-        root.addChild(EntityModelPartNames.LEFT_FOOT, ModelPartBuilder.create().uv(16, 30).cuboid(-0.5F, -1.0F, -4.5F, 3.0F, 2.0F, 5.0F, new Dilation(0.0F)), ModelTransform.origin(2.0F, 1.5F, 1.0F));
-        ModelPartData head = root.addChild(EntityModelPartNames.HEAD, ModelPartBuilder.create().uv(0, 7).cuboid(-5.0F, -6.0F, -4.0F, 10.0F, 7.0F, 8.0F, new Dilation(0.0F)).uv(0, 0).cuboid(-4.0F, -7.0F, -3.0F, 8.0F, 1.0F, 6.0F, new Dilation(0.0F)), ModelTransform.origin(0.0F, -2.0F, 0.0F));
-        head.addChild("teeth_r1", ModelPartBuilder.create().uv(0, 37).cuboid(-3.0F, -2.0F, 0.0F, 6.0F, 2.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, -4.0F, 0.3927F, 0.0F, 0.0F));
+        PartDefinition root = modelPartData.addOrReplaceChild(PartNames.ROOT, CubeListBuilder.create().texOffs(0, 22).addBox(-2.5F, -1.5F, -2.5F, 5.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 21.5F, 1.0F));
+        root.addOrReplaceChild(PartNames.RIGHT_FOOT, CubeListBuilder.create().texOffs(0, 30).addBox(-2.5F, -1.0F, -4.5F, 3.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(-2.0F, 1.5F, 1.0F));
+        root.addOrReplaceChild(PartNames.LEFT_FOOT, CubeListBuilder.create().texOffs(16, 30).addBox(-0.5F, -1.0F, -4.5F, 3.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(2.0F, 1.5F, 1.0F));
+        PartDefinition head = root.addOrReplaceChild(PartNames.HEAD, CubeListBuilder.create().texOffs(0, 7).addBox(-5.0F, -6.0F, -4.0F, 10.0F, 7.0F, 8.0F, new CubeDeformation(0.0F)).texOffs(0, 0).addBox(-4.0F, -7.0F, -3.0F, 8.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.0F, 0.0F));
+        head.addOrReplaceChild("teeth_r1", CubeListBuilder.create().texOffs(0, 37).addBox(-3.0F, -2.0F, 0.0F, 6.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -4.0F, 0.3927F, 0.0F, 0.0F));
 
-        ModelPartData leftEyebrow = head.addChild(LEFT_EYEBROW, ModelPartBuilder.create(), ModelTransform.origin(0.0F, -4.4962F, -4.2372F));
-        leftEyebrow.addChild("left_eyebrow_r1", ModelPartBuilder.create().uv(20, 22).cuboid(0.0F, -3.4943F, 0.1307F, 6.0F, 4.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.088F, 0.1304F, 0.0115F));
+        PartDefinition leftEyebrow = head.addOrReplaceChild(LEFT_EYEBROW, CubeListBuilder.create(), PartPose.offset(0.0F, -4.4962F, -4.2372F));
+        leftEyebrow.addOrReplaceChild("left_eyebrow_r1", CubeListBuilder.create().texOffs(20, 22).addBox(0.0F, -3.4943F, 0.1307F, 6.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.088F, 0.1304F, 0.0115F));
 
-        ModelPartData rightEyebrow = head.addChild(RIGHT_EYEBROW, ModelPartBuilder.create(), ModelTransform.origin(0.0F, -4.4962F, -4.2372F));
-        rightEyebrow.addChild("right_eyebrow_r1", ModelPartBuilder.create().uv(20, 26).cuboid(-6.0F, -3.4981F, 0.0436F, 6.0F, 4.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -0.0038F, 0.0872F, 0.0876F, -0.0869F, -0.0076F));
+        PartDefinition rightEyebrow = head.addOrReplaceChild(RIGHT_EYEBROW, CubeListBuilder.create(), PartPose.offset(0.0F, -4.4962F, -4.2372F));
+        rightEyebrow.addOrReplaceChild("right_eyebrow_r1", CubeListBuilder.create().texOffs(20, 26).addBox(-6.0F, -3.4981F, 0.0436F, 6.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -0.0038F, 0.0872F, 0.0876F, -0.0869F, -0.0076F));
 
-        return TexturedModelData.of(modelData, 64, 64);
+        return LayerDefinition.create(modelData, 64, 64);
     }
 
     @Override
-    public void setAngles(GoombaEntityRenderState state) {
-        super.setAngles(state);
-		this.walkingAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude, 4.0F, 2.5F);
+    public void setupAnim(GoombaEntityRenderState goombaRenderState) {
+        super.setupAnim(goombaRenderState);
+        this.walkingAnimation.applyWalk(goombaRenderState.walkAnimationPos, goombaRenderState.walkAnimationSpeed, 4.0F, 2.5F);
 
-        this.surprisedAnimation.apply(state.surprisedAnimationState, state.age);
-        this.crushAnimation.apply(state.crushAnimationState, state.age);
+        this.surprisedAnimation.apply(goombaRenderState.surprisedAnimationState, goombaRenderState.ageInTicks);
+        this.crushAnimation.apply(goombaRenderState.crushAnimationState, goombaRenderState.ageInTicks);
     }
 }

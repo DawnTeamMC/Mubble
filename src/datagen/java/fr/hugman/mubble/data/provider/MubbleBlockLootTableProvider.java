@@ -3,45 +3,44 @@ package fr.hugman.mubble.data.provider;
 import fr.hugman.mubble.block.MubbleBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
-import net.minecraft.registry.RegistryWrapper;
-
+import net.minecraft.core.HolderLookup;
 import java.util.concurrent.CompletableFuture;
 
 public class MubbleBlockLootTableProvider extends FabricBlockLootTableProvider {
-	public MubbleBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+	public MubbleBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
 		super(dataOutput, registryLookup);
 	}
 
 	@Override
 	public void generate() {
-		addDrop(MubbleBlocks.EMPTY_BLOCK);
-		addDrop(MubbleBlocks.QUESTION_BLOCK);
-		addDrop(MubbleBlocks.BRICK_BLOCK);
-		addDrop(MubbleBlocks.CRYSTAL_BLOCK);
-		addDrop(MubbleBlocks.GOLD_BLOCK);
-		addDrop(MubbleBlocks.BLUE_EXCLAMATION_BLOCK);
-		addDrop(MubbleBlocks.GREEN_EXCLAMATION_BLOCK);
-		addDrop(MubbleBlocks.YELLOW_EXCLAMATION_BLOCK);
-		addDrop(MubbleBlocks.RED_EXCLAMATION_BLOCK);
-		addDrop(MubbleBlocks.NOTE_BLOCK);
-		addDrop(MubbleBlocks.BLUE_MARIMBA_BLOCK);
-		addDrop(MubbleBlocks.GREEN_MARIMBA_BLOCK);
-		addDrop(MubbleBlocks.YELLOW_MARIMBA_BLOCK);
-		addDrop(MubbleBlocks.RED_MARIMBA_BLOCK);
-		addDrop(MubbleBlocks.SNAKE_BLOCK);
-		addDrop(MubbleBlocks.FAST_SNAKE_BLOCK);
-		addDrop(MubbleBlocks.SLOW_SNAKE_BLOCK);
-		addDrop(MubbleBlocks.RED_BEEP_BLOCK);
-		addDrop(MubbleBlocks.BLUE_BEEP_BLOCK);
+		dropSelf(MubbleBlocks.EMPTY_BLOCK);
+		dropSelf(MubbleBlocks.QUESTION_BLOCK);
+		dropSelf(MubbleBlocks.BRICK_BLOCK);
+		dropSelf(MubbleBlocks.CRYSTAL_BLOCK);
+		dropSelf(MubbleBlocks.GOLD_BLOCK);
+		dropSelf(MubbleBlocks.BLUE_EXCLAMATION_BLOCK);
+		dropSelf(MubbleBlocks.GREEN_EXCLAMATION_BLOCK);
+		dropSelf(MubbleBlocks.YELLOW_EXCLAMATION_BLOCK);
+		dropSelf(MubbleBlocks.RED_EXCLAMATION_BLOCK);
+		dropSelf(MubbleBlocks.NOTE_BLOCK);
+		dropSelf(MubbleBlocks.BLUE_MARIMBA_BLOCK);
+		dropSelf(MubbleBlocks.GREEN_MARIMBA_BLOCK);
+		dropSelf(MubbleBlocks.YELLOW_MARIMBA_BLOCK);
+		dropSelf(MubbleBlocks.RED_MARIMBA_BLOCK);
+		dropSelf(MubbleBlocks.SNAKE_BLOCK);
+		dropSelf(MubbleBlocks.FAST_SNAKE_BLOCK);
+		dropSelf(MubbleBlocks.SLOW_SNAKE_BLOCK);
+		dropSelf(MubbleBlocks.RED_BEEP_BLOCK);
+		dropSelf(MubbleBlocks.BLUE_BEEP_BLOCK);
 
-		addDrop(MubbleBlocks.BLUE_EGG_BLOCK);
-		addDrop(MubbleBlocks.CYAN_EGG_BLOCK);
-		addDrop(MubbleBlocks.GREEN_EGG_BLOCK);
-		addDrop(MubbleBlocks.YELLOW_EGG_BLOCK);
-		addDrop(MubbleBlocks.ORANGE_EGG_BLOCK);
-		addDrop(MubbleBlocks.RED_EGG_BLOCK);
-		addDrop(MubbleBlocks.PINK_EGG_BLOCK);
-		addDrop(MubbleBlocks.BLACK_EGG_BLOCK);
-		addDrop(MubbleBlocks.WHITE_EGG_BLOCK);
+		dropSelf(MubbleBlocks.BLUE_EGG_BLOCK);
+		dropSelf(MubbleBlocks.CYAN_EGG_BLOCK);
+		dropSelf(MubbleBlocks.GREEN_EGG_BLOCK);
+		dropSelf(MubbleBlocks.YELLOW_EGG_BLOCK);
+		dropSelf(MubbleBlocks.ORANGE_EGG_BLOCK);
+		dropSelf(MubbleBlocks.RED_EGG_BLOCK);
+		dropSelf(MubbleBlocks.PINK_EGG_BLOCK);
+		dropSelf(MubbleBlocks.BLACK_EGG_BLOCK);
+		dropSelf(MubbleBlocks.WHITE_EGG_BLOCK);
 	}
 }

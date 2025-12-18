@@ -5,24 +5,24 @@ import fr.hugman.mubble.block.BumpableDropMode;
 import fr.hugman.mubble.block.MubbleBlockEntityTypes;
 import fr.hugman.mubble.screen.BumpableScreenHandler;
 import net.minecraft.SharedConstants;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.LootableContainerBlockEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LazyEntityReference;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventories;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.storage.ReadView;
-import net.minecraft.storage.WriteView;
-import net.minecraft.text.Text;
-import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityReference;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
  * @author haykam
  * @since v4.0.0
  */
-public class BumpableBlockEntity extends LootableContainerBlockEntity {
+public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
 	public static final int BUMP_LENGTH = SharedConstants.TICKS_PER_SECOND / 4;
 	public static final int BUMP_MIDDLE_TICK = BUMP_LENGTH / 2;
 
@@ -42,7 +42,7 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
     private static final String BUMP_AUTHOR_KEY = "bump_author";
     private static final String BUMP_DIRECTION_KEY = "bump_direction";
 
-    private DefaultedList<ItemStack> inventory;
+    private NonNullList<ItemStack> inventory;
     private BumpableDropMode dropMode = BumpableDropMode.ALL;
     private boolean dropModeLocked = false;
     private @Nullable BlockState bumpedState;
@@ -52,9 +52,9 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 	@Nullable
 	private Direction bumpDirection;
 	@Nullable
-	private LazyEntityReference<Entity> bumpAuthor;
+	private EntityReference<Entity> bumpAuthor;
 
-    private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
+    private final ContainerData propertyDelegate = new ContainerData() {
         @Override
         public int get(int index) {
             return switch (index) {
@@ -73,22 +73,22 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
         }
 
         @Override
-        public int size() {
+        public int getCount() {
             return 2;
         }
     };
 
-    private BumpableBlockEntity(BlockPos pos, BlockState state, DefaultedList<ItemStack> inventory) {
+    private BumpableBlockEntity(BlockPos pos, BlockState state, NonNullList<ItemStack> inventory) {
         super(MubbleBlockEntityTypes.BUMPABLE_BLOCK, pos, state);
         this.inventory = inventory;
     }
 
     public BumpableBlockEntity(BlockPos pos, BlockState state) {
-        this(pos, state, DefaultedList.ofSize(1, ItemStack.EMPTY));
+        this(pos, state, NonNullList.withSize(1, ItemStack.EMPTY));
     }
 
     public BumpableBlockEntity(BlockPos pos, BlockState state, @Nullable BlockState bumpedState) {
-        this(pos, state, DefaultedList.ofSize(1, ItemStack.EMPTY));
+        this(pos, state, NonNullList.withSize(1, ItemStack.EMPTY));
         this.setBumpedState(bumpedState);
     }
 
@@ -97,33 +97,33 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
     /*========*/
 
 	@Override
-    protected void writeData(WriteView view) {
-        super.writeData(view);
-        if (!this.writeLootTable(view)) {
-            Inventories.writeData(view, this.inventory);
+    protected void saveAdditional(ValueOutput view) {
+        super.saveAdditional(view);
+        if (!this.trySaveLootTable(view)) {
+            ContainerHelper.saveAllItems(view, this.inventory);
         }
-		view.put(DROP_MODE_KEY, BumpableDropMode.CODEC, this.dropMode);
+		view.store(DROP_MODE_KEY, BumpableDropMode.CODEC, this.dropMode);
         if (this.bumpedState != null) {
-			view.put(BUMPED_STATE_KEY, BlockState.CODEC, this.bumpedState);
+			view.store(BUMPED_STATE_KEY, BlockState.CODEC, this.bumpedState);
         }
-		LazyEntityReference.writeData(this.bumpAuthor, view, BUMP_AUTHOR_KEY);
+		EntityReference.store(this.bumpAuthor, view, BUMP_AUTHOR_KEY);
 		view.putInt(BUMP_TICKS_KEY, this.bumpTicks);
-		view.putNullable(BUMP_DIRECTION_KEY, Direction.INDEX_CODEC, this.bumpDirection);
+		view.storeNullable(BUMP_DIRECTION_KEY, Direction.LEGACY_ID_CODEC, this.bumpDirection);
     }
 
 	@Override
-	protected void readData(ReadView view) {
-        super.readData(view);
-        this.inventory = DefaultedList.ofSize(this.size(), ItemStack.EMPTY);
-        if (!this.readLootTable(view)) {
-            Inventories.readData(view, this.inventory);
+	protected void loadAdditional(ValueInput view) {
+        super.loadAdditional(view);
+        this.inventory = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        if (!this.tryLoadLootTable(view)) {
+            ContainerHelper.loadAllItems(view, this.inventory);
         }
 		view.read(BUMPED_STATE_KEY, BlockState.CODEC).ifPresent(this::setBumpedState);
 
         this.dropMode = view.read(DROP_MODE_KEY, BumpableDropMode.CODEC).orElse(BumpableDropMode.ALL);
-		this.bumpTicks = view.getInt(BUMP_TICKS_KEY, 0);
-		view.read(BUMP_DIRECTION_KEY, Direction.INDEX_CODEC).ifPresent(this::setBumpDirection);
-		this.bumpAuthor = LazyEntityReference.fromData(view, BUMP_AUTHOR_KEY);
+		this.bumpTicks = view.getIntOr(BUMP_TICKS_KEY, 0);
+		view.read(BUMP_DIRECTION_KEY, Direction.LEGACY_ID_CODEC).ifPresent(this::setBumpDirection);
+		this.bumpAuthor = EntityReference.read(view, BUMP_AUTHOR_KEY);
     }
 
 	/*=====================*/
@@ -145,17 +145,17 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
     public void setDropMode(@NotNull BumpableDropMode dropMode, boolean locked) {
         this.dropMode = dropMode;
         this.dropModeLocked = locked;
-        this.markDirty();
+        this.setChanged();
     }
 
     public void setDropMode(@NotNull BumpableDropMode dropMode) {
         this.dropMode = dropMode;
-        this.markDirty();
+        this.setChanged();
     }
 
     public void setDropModeLocked(boolean dropModeLocked) {
         this.dropModeLocked = dropModeLocked;
-        this.markDirty();
+        this.setChanged();
     }
 
     @Nullable
@@ -169,7 +169,7 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
             this.dropMode = BumpableDropMode.ALL;
             this.dropModeLocked = true;
         }
-        this.markDirty();
+        this.setChanged();
     }
 
     public boolean shouldBreak() {
@@ -178,12 +178,12 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 
     @Nullable
     public Entity getBumpAuthor() {
-		return LazyEntityReference.getEntity(this.bumpAuthor, this.getWorld());
+		return EntityReference.getEntity(this.bumpAuthor, this.getLevel());
     }
 
     public void setBumpAuthor(@Nullable Entity entity) {
         if (entity != null) {
-            this.bumpAuthor = LazyEntityReference.of(entity);
+            this.bumpAuthor = EntityReference.of(entity);
         }
     }
 
@@ -196,22 +196,22 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
     }
 
     @Override
-    protected Text getContainerName() {
-        return Text.translatable(getCachedState().getBlock().getTranslationKey());
+    protected Component getDefaultName() {
+        return Component.translatable(getBlockState().getBlock().getDescriptionId());
     }
 
     @Override
-    protected DefaultedList<ItemStack> getHeldStacks() {
+    protected NonNullList<ItemStack> getItems() {
         return this.inventory;
     }
 
     @Override
-    protected void setHeldStacks(DefaultedList<ItemStack> inventory) {
+    protected void setItems(NonNullList<ItemStack> inventory) {
         this.inventory = inventory;
     }
 
     @Override
-    public int size() {
+    public int getContainerSize() {
         return this.inventory.size();
     }
 
@@ -221,12 +221,12 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 
     @Nullable
     @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory playerInv, PlayerEntity player) {
+    public AbstractContainerMenu createMenu(int syncId, Inventory playerInv, Player player) {
         return new BumpableScreenHandler(syncId, playerInv, this, propertyDelegate);
     }
 
     @Override
-    protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
+    protected AbstractContainerMenu createMenu(int syncId, Inventory playerInventory) {
         return new BumpableScreenHandler(syncId, playerInventory, this, propertyDelegate);
     }
 
@@ -235,14 +235,14 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
     /*  BEHAVIOR  */
     /*============*/
 
-	public boolean onSyncedBlockEvent(int type, int data) {
+	public boolean triggerEvent(int type, int data) {
 		if (type == 1) {
 			this.bumping = true;
 			this.bumpTicks = 0;
-			this.bumpDirection = Direction.byIndex(data);
+			this.bumpDirection = Direction.from3DDataValue(data);
 			return true;
 		} else {
-			return super.onSyncedBlockEvent(type, data);
+			return super.triggerEvent(type, data);
 		}
 	}
 
@@ -253,13 +253,13 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
      * @param entity    the entity that bumped the block
      */
     public void bump(BlockPos pos, Entity entity, Direction direction) {
-		if(this.world == null || this.world.isClient()) return;
-		this.world.addSyncedBlockEvent(pos, this.getCachedState().getBlock(), 1, direction.getIndex());
+		if(this.level == null || this.level.isClientSide()) return;
+		this.level.blockEvent(pos, this.getBlockState().getBlock(), 1, direction.get3DDataValue());
 		this.setBumpAuthor(entity);
-		this.markDirty();
+		this.setChanged();
     }
 
-    public void tick(World world, BlockPos pos, BlockState state) {
+    public void tick(Level world, BlockPos pos, BlockState state) {
 		if(this.bumping && this.bumpTicks < BUMP_LENGTH) {
 			this.bumpTicks++;
 		}
@@ -275,14 +275,14 @@ public class BumpableBlockEntity extends LootableContainerBlockEntity {
 				this.bumping = false;
 				this.bumpTicks = 0;
 				this.setBumpAuthor(null);
-				this.markDirty();
+				this.setChanged();
 				bumpable.onBumpEnd(world, pos, state, this);
 			}
 		}
     }
 
     @Override
-    public BlockEntityUpdateS2CPacket toUpdatePacket() {
-        return BlockEntityUpdateS2CPacket.create(this);
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 }

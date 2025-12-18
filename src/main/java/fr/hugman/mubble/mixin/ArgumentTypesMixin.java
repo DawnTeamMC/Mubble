@@ -2,25 +2,25 @@ package fr.hugman.mubble.mixin;
 
 import com.mojang.brigadier.arguments.ArgumentType;
 import fr.hugman.mubble.command.argument.PowerUpArgumentType;
-import net.minecraft.command.argument.ArgumentTypes;
-import net.minecraft.command.argument.serialize.ArgumentSerializer;
-import net.minecraft.command.argument.serialize.ConstantArgumentSerializer;
-import net.minecraft.registry.Registry;
+import net.minecraft.commands.synchronization.ArgumentTypeInfo;
+import net.minecraft.commands.synchronization.ArgumentTypeInfos;
+import net.minecraft.commands.synchronization.SingletonArgumentInfo;
+import net.minecraft.core.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ArgumentTypes.class)
+@Mixin(ArgumentTypeInfos.class)
 public abstract class ArgumentTypesMixin {
     @Shadow
-    private static <A extends ArgumentType<?>, T extends ArgumentSerializer.ArgumentTypeProperties<A>> ArgumentSerializer<A, T> register(Registry<ArgumentSerializer<?, ?>> registry, String string, Class<? extends A> clazz, ArgumentSerializer<A, T> argumentSerializer) {
+    private static <A extends ArgumentType<?>, T extends ArgumentTypeInfo.Template<A>> ArgumentTypeInfo<A, T> register(Registry<ArgumentTypeInfo<?, ?>> registry, String string, Class<? extends A> clazz, ArgumentTypeInfo<A, T> argumentSerializer) {
         throw new AssertionError("Nope.");
     }
 
-    @Inject(method = "register(Lnet/minecraft/registry/Registry;)Lnet/minecraft/command/argument/serialize/ArgumentSerializer;", at = @At("HEAD"))
-    private static void mubble$register(Registry<ArgumentSerializer<?, ?>> registry, CallbackInfoReturnable<ArgumentSerializer<?, ?>> ci) {
-        register(registry, "power_up", PowerUpArgumentType.class, ConstantArgumentSerializer.of(PowerUpArgumentType::of));
+    @Inject(method = "bootstrap(Lnet/minecraft/core/Registry;)Lnet/minecraft/commands/synchronization/ArgumentTypeInfo;", at = @At("HEAD"))
+    private static void mubble$register(Registry<ArgumentTypeInfo<?, ?>> registry, CallbackInfoReturnable<ArgumentTypeInfo<?, ?>> ci) {
+        register(registry, "power_up", PowerUpArgumentType.class, SingletonArgumentInfo.contextAware(PowerUpArgumentType::of));
     }
 }

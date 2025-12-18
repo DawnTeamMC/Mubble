@@ -4,19 +4,18 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.sound.MubbleSounds;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Function;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Generic bumpable block with an additional sound effect when bumped.
@@ -29,54 +28,54 @@ import java.util.function.Function;
 public class DecoratedBumpableBlock extends BumpableBlock {
     public static final MapCodec<DecoratedBumpableBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             BlockState.CODEC.fieldOf("default_bumped_state").forGetter((block) -> block.defaultBumpedState),
-            createSettingsCodec()
+            propertiesCodec()
     ).apply(instance, DecoratedBumpableBlock::new));
 
-    public DecoratedBumpableBlock(@Nullable BlockState defaultBumpedState, Settings settings) {
+    public DecoratedBumpableBlock(@Nullable BlockState defaultBumpedState, Properties settings) {
         super(defaultBumpedState, settings);
     }
 
     @Override
-    protected MapCodec<? extends DecoratedBumpableBlock> getCodec() {
+    protected MapCodec<? extends DecoratedBumpableBlock> codec() {
         return CODEC;
     }
 
     @Override
-    public void onBumpStart(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+    public void onBumpStart(Level world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
         super.onBumpStart(world, pos, state, blockEntity);
         this.playGenericBumpSound(blockEntity);
     }
 
     @Override
-    public void onBumpMiddle(World world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+    public void onBumpMiddle(Level world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
         super.onBumpMiddle(world, pos, state, blockEntity);
-        if (blockEntity.getWorld() != null && blockEntity.getBumpDirection() == Direction.UP) {
-            this.launchEntitiesOnTop(blockEntity.getWorld(), blockEntity.getPos());
+        if (blockEntity.getLevel() != null && blockEntity.getBumpDirection() == Direction.UP) {
+            this.launchEntitiesOnTop(blockEntity.getLevel(), blockEntity.getBlockPos());
         }
     }
 
     public void playGenericBumpSound(BumpableBlockEntity entity) {
-        World world = entity.getWorld();
-        Vec3d pos = entity.getPos().toCenterPos();
+        Level world = entity.getLevel();
+        Vec3 pos = entity.getBlockPos().getCenter();
         if (world != null) {
-            world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(null, pos.x(), pos.y(), pos.z(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
     }
 
     /**
      * Launches entities on top of the block.
      */
-    public void launchEntitiesOnTop(World world, BlockPos pos) {
-        List<Entity> entities = world.getOtherEntities(null, new Box(pos.up()));
+    public void launchEntitiesOnTop(Level world, BlockPos pos) {
+        List<Entity> entities = world.getEntities(null, new AABB(pos.above()));
         for (Entity entity : entities) {
             launchEntity(entity);
         }
     }
 
     public void launchEntity(Entity entity) {
-        Vec3d vec3d = entity.getVelocity();
-        entity.setVelocity(vec3d.x, 0.3D, vec3d.z);
-        entity.velocityDirty = true;
+        Vec3 vec3d = entity.getDeltaMovement();
+        entity.setDeltaMovement(vec3d.x, 0.3D, vec3d.z);
+        entity.needsSync = true;
         // TODO: add a damage type and a gamerule for harming entities
     }
 }

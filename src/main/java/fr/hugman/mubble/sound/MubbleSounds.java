@@ -1,11 +1,11 @@
 package fr.hugman.mubble.sound;
 
 import fr.hugman.mubble.Mubble;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.Identifier;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvent;
 
 public class MubbleSounds {
     // SUPER MARIO
@@ -33,26 +33,26 @@ public class MubbleSounds {
 
     public static final SoundEvent FIREBALL_HIT_BLOCK = of("entity.fireball.hit.block");
     public static final SoundEvent FIREBALL_HIT_ENTITY = of("entity.fireball.hit.entity");
-    public static final RegistryEntry.Reference<SoundEvent> FIREBALL_MELT_BLOCK = ofRef("entity.fireball.hit.melt_block");
-    public static final RegistryEntry.Reference<SoundEvent> FIREBALL_THROW = ofRef("entity.fireball.throw");
+    public static final Holder.Reference<SoundEvent> FIREBALL_MELT_BLOCK = ofRef("entity.fireball.hit.melt_block");
+    public static final Holder.Reference<SoundEvent> FIREBALL_THROW = ofRef("entity.fireball.throw");
 
-    public static final RegistryEntry.Reference<SoundEvent> ICEBALL_HIT_BLOCK = ofRef("entity.iceball.hit.block");
+    public static final Holder.Reference<SoundEvent> ICEBALL_HIT_BLOCK = ofRef("entity.iceball.hit.block");
     public static final SoundEvent ICEBALL_HIT_ENTITY = of("entity.iceball.hit.entity");
-    public static final RegistryEntry.Reference<SoundEvent> ICEBALL_THROW = ofRef("entity.iceball.throw");
+    public static final Holder.Reference<SoundEvent> ICEBALL_THROW = ofRef("entity.iceball.throw");
 
-	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_OBTAIN = ofRef("power_up.obtain");
-	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_OBTAIN_MINI = ofRef("power_up.obtain.mini");
-	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_OBTAIN_SUPER_STAR = ofRef("power_up.obtain.super_star");
-	public static final RegistryEntry.Reference<SoundEvent> POWER_UP_LOOSE = ofRef("power_up.loose");
+	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN = ofRef("power_up.obtain");
+	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_MINI = ofRef("power_up.obtain.mini");
+	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_SUPER_STAR = ofRef("power_up.obtain.super_star");
+	public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE = ofRef("power_up.loose");
 
 
     private static SoundEvent of(String path) {
         Identifier id = Mubble.id(path);
-        return Registry.register(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+        return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 
-    private static RegistryEntry.Reference<SoundEvent> ofRef(String path) {
+    private static Holder.Reference<SoundEvent> ofRef(String path) {
         Identifier id = Mubble.id(path);
-        return Registry.registerReference(Registries.SOUND_EVENT, id, SoundEvent.of(id));
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
     }
 }

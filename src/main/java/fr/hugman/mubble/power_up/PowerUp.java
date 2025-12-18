@@ -6,76 +6,74 @@ import fr.hugman.mubble.attribute.EntityAttributeEntry;
 import fr.hugman.mubble.power_up.action.PowerUpAction;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import fr.hugman.mubble.sound.MubbleSounds;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.registry.entry.LazyRegistryEntryReference;
-import net.minecraft.registry.entry.RegistryElementCodec;
-import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextCodecs;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.EitherHolder;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
 public record PowerUp(
-        Optional<Text> name,
+        Optional<Component> name,
         Optional<Identifier> spriteId,
-        Optional<RegistryEntry<PowerUpAction>> action,
+        Optional<Holder<PowerUpAction>> action,
         Optional<List<EntityAttributeEntry>> attributesModifiers,
-        RegistryEntry<SoundEvent> obtainSound,
-        RegistryEntry<SoundEvent> looseSound,
+        Holder<SoundEvent> obtainSound,
+        Holder<SoundEvent> looseSound,
         boolean canSprintOnWater
 ) {
     //TODO: add a predicate/damage tag to determine if you can lose it to damage
     //TODO: add custom music
 
-    public static final RegistryEntry<SoundEvent> DEFAULT_OBTAIN_SOUND = MubbleSounds.POWER_UP_OBTAIN;
-    public static final RegistryEntry<SoundEvent> DEFAULT_LOOSE_SOUND = MubbleSounds.POWER_UP_LOOSE;
+    public static final Holder<SoundEvent> DEFAULT_OBTAIN_SOUND = MubbleSounds.POWER_UP_OBTAIN;
+    public static final Holder<SoundEvent> DEFAULT_LOOSE_SOUND = MubbleSounds.POWER_UP_LOOSE;
 
     public static final Codec<PowerUp> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            TextCodecs.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
+            ComponentSerialization.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
             PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
-            SoundEvent.ENTRY_CODEC.optionalFieldOf("obtain_sound", DEFAULT_OBTAIN_SOUND).forGetter(PowerUp::obtainSound),
-            SoundEvent.ENTRY_CODEC.optionalFieldOf("loose_sound", DEFAULT_LOOSE_SOUND).forGetter(PowerUp::looseSound),
+            SoundEvent.CODEC.optionalFieldOf("obtain_sound", DEFAULT_OBTAIN_SOUND).forGetter(PowerUp::obtainSound),
+            SoundEvent.CODEC.optionalFieldOf("loose_sound", DEFAULT_LOOSE_SOUND).forGetter(PowerUp::looseSound),
             Codec.BOOL.optionalFieldOf("can_sprint_on_water", false).forGetter(PowerUp::canSprintOnWater)
     ).apply(instance, PowerUp::new));
 
-    public static final Codec<RegistryEntry<PowerUp>> ENTRY_CODEC = RegistryElementCodec.of(MubbleRegistryKeys.POWER_UP, CODEC);
-    public static final Codec<LazyRegistryEntryReference<PowerUp>> LAZY_ENTRY_CODEC = LazyRegistryEntryReference.createCodec(MubbleRegistryKeys.POWER_UP, ENTRY_CODEC);
+    public static final Codec<Holder<PowerUp>> ENTRY_CODEC = RegistryFileCodec.create(MubbleRegistryKeys.POWER_UP, CODEC);
+    public static final Codec<EitherHolder<PowerUp>> LAZY_ENTRY_CODEC = EitherHolder.codec(MubbleRegistryKeys.POWER_UP, ENTRY_CODEC);
 
-    public static final PacketCodec<RegistryByteBuf, PowerUp> PACKET_CODEC = PacketCodec.tuple(
-            TextCodecs.OPTIONAL_UNLIMITED_REGISTRY_PACKET_CODEC, PowerUp::name,
-            Identifier.PACKET_CODEC.collect(PacketCodecs::optional), PowerUp::spriteId,
+    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUp> PACKET_CODEC = StreamCodec.composite(
+            ComponentSerialization.TRUSTED_OPTIONAL_STREAM_CODEC, PowerUp::name,
+            Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::spriteId,
             PowerUpAction.OPTIONAL_ENTRY_PACKET_CODEC, PowerUp::action,
             EntityAttributeEntry.OPTIONAL_LIST_PACKET_CODEC, PowerUp::attributesModifiers,
-            SoundEvent.ENTRY_PACKET_CODEC, PowerUp::obtainSound,
-            SoundEvent.ENTRY_PACKET_CODEC, PowerUp::looseSound,
-            PacketCodecs.BOOLEAN, PowerUp::canSprintOnWater,
+            SoundEvent.STREAM_CODEC, PowerUp::obtainSound,
+            SoundEvent.STREAM_CODEC, PowerUp::looseSound,
+            ByteBufCodecs.BOOL, PowerUp::canSprintOnWater,
             PowerUp::new
     );
-    public static final PacketCodec<RegistryByteBuf, RegistryEntry<PowerUp>> ENTRY_PACKET_CODEC = PacketCodecs.registryEntry(MubbleRegistryKeys.POWER_UP, PACKET_CODEC);
-    public static final PacketCodec<RegistryByteBuf, Optional<RegistryEntry<PowerUp>>> OPTIONAL_ENTRY_PACKET_CODEC = PacketCodecs.optional(ENTRY_PACKET_CODEC);
-    public static final PacketCodec<RegistryByteBuf, LazyRegistryEntryReference<PowerUp>> LAZY_ENTRY_PACKET_CODEC = LazyRegistryEntryReference.createPacketCodec(MubbleRegistryKeys.POWER_UP, ENTRY_PACKET_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUp>> ENTRY_PACKET_CODEC = ByteBufCodecs.holder(MubbleRegistryKeys.POWER_UP, PACKET_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUp>>> OPTIONAL_ENTRY_PACKET_CODEC = ByteBufCodecs.optional(ENTRY_PACKET_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, EitherHolder<PowerUp>> LAZY_ENTRY_PACKET_CODEC = EitherHolder.streamCodec(MubbleRegistryKeys.POWER_UP, ENTRY_PACKET_CODEC);
 
-    public ActionResult trigger(PlayerEntity player) {
-        return this.action.map(entry -> entry.value().trigger(player)).orElse(ActionResult.PASS);
+    public InteractionResult trigger(Player player) {
+        return this.action.map(entry -> entry.value().trigger(player)).orElse(InteractionResult.PASS);
     }
 
-    public void applyModifiers(BiConsumer<RegistryEntry<EntityAttribute>, EntityAttributeModifier> attributeConsumer) {
+    public void applyModifiers(BiConsumer<Holder<Attribute>, AttributeModifier> attributeConsumer) {
         this.attributesModifiers.ifPresent(entries -> entries.forEach(entry -> attributeConsumer.accept(entry.attribute(), entry.modifier())));
     }
 
@@ -86,20 +84,20 @@ public record PowerUp(
         return this.action.isPresent();
     }
 
-    public static void onChange(LivingEntity entity, Optional<RegistryEntry<PowerUp>> previous, Optional<RegistryEntry<PowerUp>> next) {
-        if(!entity.getEntityWorld().isClient()) {
+    public static void onChange(LivingEntity entity, Optional<Holder<PowerUp>> previous, Optional<Holder<PowerUp>> next) {
+        if(!entity.level().isClientSide()) {
             var container = entity.getAttributes();
             previous.ifPresent(e -> e.value().applyModifiers((attribute, modifier) -> {
-                EntityAttributeInstance entityAttributeInstance = container.getCustomInstance(attribute);
+                AttributeInstance entityAttributeInstance = container.getInstance(attribute);
                 if (entityAttributeInstance != null) {
                     entityAttributeInstance.removeModifier(modifier);
                 }
             }));
             next.ifPresent(e -> e.value().applyModifiers((attribute, modifier) -> {
-                EntityAttributeInstance entityAttributeInstance = container.getCustomInstance(attribute);
+                AttributeInstance entityAttributeInstance = container.getInstance(attribute);
                 if (entityAttributeInstance != null) {
                     entityAttributeInstance.removeModifier(modifier);
-                    entityAttributeInstance.addPersistentModifier(modifier);
+                    entityAttributeInstance.addPermanentModifier(modifier);
                 }
             }));
         }
@@ -118,14 +116,14 @@ public record PowerUp(
         //TODO: particles
     }
 
-    public static boolean canChange(LivingEntity entity, RegistryEntry<PowerUp> entry) {
-        if (entity instanceof PlayerEntity player) {
-            return player.getPowerUp().map(power -> !power.matches(entry)).orElse(true);
+    public static boolean canChange(LivingEntity entity, Holder<PowerUp> entry) {
+        if (entity instanceof Player player) {
+            return player.getPowerUp().map(power -> !power.is(entry)).orElse(true);
         }
         return false;
     }
 
-    public static Optional<Identifier> getSpriteId(RegistryEntry<PowerUp> entry) {
-        return entry.value().spriteId().or(() -> entry.getKey().flatMap(key -> Optional.of(key.getValue().withPrefixedPath("power_up/"))));
+    public static Optional<Identifier> getSpriteId(Holder<PowerUp> entry) {
+        return entry.value().spriteId().or(() -> entry.unwrapKey().flatMap(key -> Optional.of(key.identifier().withPrefix("power_up/"))));
     }
 }

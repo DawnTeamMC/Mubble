@@ -1,13 +1,13 @@
 package fr.hugman.mubble.util;
 
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Utility class for box collision calculations.
@@ -28,15 +28,15 @@ public class BoxUtil {
      *
      * @param originBox  the box for which the bouncing multiplier is calculated
      * @param otherBoxes other boxes to check for collisions against
-     * @return a {@link Vec3d} representing the bouncing multiplier direction,
+     * @return a {@link Vec3} representing the bouncing multiplier direction,
      * or null if no collision is detected
      */
     @Nullable
-    public static Vec3d calculateHorizontalBouncingMultiplier(Box originBox, Box... otherBoxes) {
+    public static Vec3 calculateHorizontalBouncingMultiplier(AABB originBox, AABB... otherBoxes) {
         double minDistanceX = Double.MAX_VALUE;
         double minDistanceZ = Double.MAX_VALUE;
 
-        for (Box box : otherBoxes) {
+        for (AABB box : otherBoxes) {
             // Check for collision between the origin box and the other box
             if (originBox.maxX > box.minX && originBox.minX < box.maxX &&
                     originBox.maxZ > box.minZ && originBox.minZ < box.maxZ) {
@@ -62,8 +62,8 @@ public class BoxUtil {
 
         // Determine which axis the collision is on
         return (minDistanceX < minDistanceZ)
-                ? new Vec3d(-1.0, 1.0, 1.0)  // Bounce in the x-axis
-                : new Vec3d(1.0, 1.0, -1.0);  // Bounce in the z-axis
+                ? new Vec3(-1.0, 1.0, 1.0)  // Bounce in the x-axis
+                : new Vec3(1.0, 1.0, -1.0);  // Bounce in the z-axis
     }
 
     /**
@@ -78,11 +78,11 @@ public class BoxUtil {
      *
      * @param originBox  the box for which the bouncing multiplier is calculated
      * @param otherBoxes a list of other boxes to check for collisions against
-     * @return a {@link Vec3d} representing the bouncing multiplier direction,
+     * @return a {@link Vec3} representing the bouncing multiplier direction,
      * or null if no collision is detected
      */
-    public static Vec3d calculateHorizontalBouncingMultiplier(Box originBox, List<Box> otherBoxes) {
-        return calculateHorizontalBouncingMultiplier(originBox, otherBoxes.toArray(new Box[0]));
+    public static Vec3 calculateHorizontalBouncingMultiplier(AABB originBox, List<AABB> otherBoxes) {
+        return calculateHorizontalBouncingMultiplier(originBox, otherBoxes.toArray(new AABB[0]));
     }
 
     /**
@@ -93,15 +93,15 @@ public class BoxUtil {
      * position.
      *
      * @param originBox the box to check for potential collisions
-     * @return a list of {@link Box} objects representing the potential collisions
+     * @return a list of {@link AABB} objects representing the potential collisions
      */
-    public static List<Box> collectPotentialBlockCollisions(World world, Box originBox) {
-        Iterable<BlockPos> iterable = BlockPos.iterate(originBox);
-        List<Box> boundingBoxes = new ArrayList<>();
+    public static List<AABB> collectPotentialBlockCollisions(Level world, AABB originBox) {
+        Iterable<BlockPos> iterable = BlockPos.betweenClosed(originBox);
+        List<AABB> boundingBoxes = new ArrayList<>();
         for (BlockPos pos : iterable) {
             // Collect bounding boxes from collision shapes directly
             boundingBoxes.addAll(world.getBlockState(pos).getCollisionShape(world, pos)
-                    .offset(Vec3d.of(pos)).getBoundingBoxes());
+                    .move(Vec3.atLowerCornerOf(pos)).toAabbs());
         }
         return boundingBoxes;
     }

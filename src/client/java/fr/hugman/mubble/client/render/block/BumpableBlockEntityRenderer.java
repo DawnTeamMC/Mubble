@@ -1,22 +1,22 @@
 package fr.hugman.mubble.client.render.block;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.client.render.block.state.BumpableBlockEntityRenderState;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.block.BlockState;
-import net.minecraft.client.render.block.MovingBlockRenderState;
-import net.minecraft.client.render.block.entity.BlockEntityRenderer;
-import net.minecraft.client.render.command.ModelCommandRenderer;
-import net.minecraft.client.render.command.OrderedRenderCommandQueue;
-import net.minecraft.client.render.state.CameraRenderState;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
-import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.block.MovingBlockRenderState;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.Vec3i;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -32,34 +32,34 @@ public class BumpableBlockEntityRenderer implements BlockEntityRenderer<Bumpable
 	}
 
 	@Override
-	public void updateRenderState(BumpableBlockEntity blockEntity, BumpableBlockEntityRenderState state, float tickProgress, Vec3d cameraPos, @Nullable ModelCommandRenderer.CrumblingOverlayCommand crumblingOverlay) {
-		BlockEntityRenderer.super.updateRenderState(blockEntity, state, tickProgress, cameraPos, crumblingOverlay);
-		state.bumping = blockEntity.isBumping();
-		state.bumpTicks = blockEntity.getBumpTicks() + tickProgress;
+	public void extractRenderState(BumpableBlockEntity blockEntity, BumpableBlockEntityRenderState bumpableBlockRenderState, float f, Vec3 vec3, @Nullable ModelFeatureRenderer.CrumblingOverlay crumblingOverlay) {
+		BlockEntityRenderer.super.extractRenderState(blockEntity, bumpableBlockRenderState, f, vec3, crumblingOverlay);
+		bumpableBlockRenderState.bumping = blockEntity.isBumping();
+		bumpableBlockRenderState.bumpTicks = blockEntity.getBumpTicks() + f;
 		if(blockEntity.getBumpDirection() != null) {
-			state.bumpVector = blockEntity.getBumpDirection().getVector();
+				bumpableBlockRenderState.bumpVector = blockEntity.getBumpDirection().getUnitVec3i();
 		}
 
-		state.movingState = null;
-		var world = blockEntity.getWorld();
+		bumpableBlockRenderState.movingState = null;
+		var world = blockEntity.getLevel();
 		if(world != null) {
-			var pos = blockEntity.getPos();
-			state.movingState = renderModel(pos, blockEntity.getCachedState(), world.getBiome(pos), world);
+			var pos = blockEntity.getBlockPos();
+			bumpableBlockRenderState.movingState = renderModel(pos, blockEntity.getBlockState(), world.getBiome(pos), world);
 		}
 	}
 
 	@Override
-	public void render(BumpableBlockEntityRenderState state, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
-		matrices.push();
-		if(state.bumping) {
-			applyTransformations(matrices, state.bumpTicks, BumpableBlockEntity.BUMP_LENGTH, 0.25f, state.bumpVector);
+	public void submit(BumpableBlockEntityRenderState bumpableBlockRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+		poseStack.pushPose();
+		if(bumpableBlockRenderState.bumping) {
+			applyTransformations(poseStack, bumpableBlockRenderState.bumpTicks, BumpableBlockEntity.BUMP_LENGTH, 0.25f, bumpableBlockRenderState.bumpVector);
 		}
-		queue.submitMovingBlock(matrices, state.movingState);
-		matrices.pop();
+		submitNodeCollector.submitMovingBlock(poseStack, bumpableBlockRenderState.movingState);
+		poseStack.popPose();
 	}
 
     private void applyTransformations(
-			MatrixStack matrices,
+			PoseStack matrices,
 			float ticks,
 			float totalTicks,
 			float amplitude,
@@ -89,13 +89,13 @@ public class BumpableBlockEntityRenderer implements BlockEntityRenderer<Bumpable
         matrices.translate(-x2, -y2, -z2);
     }
 
-	private static MovingBlockRenderState renderModel(BlockPos pos, BlockState state, RegistryEntry<Biome> biome, World world) {
+	private static MovingBlockRenderState renderModel(BlockPos pos, BlockState state, Holder<Biome> biome, Level world) {
 		MovingBlockRenderState movingBlockRenderState = new MovingBlockRenderState();
-		movingBlockRenderState.fallingBlockPos = pos;
-		movingBlockRenderState.entityBlockPos = pos;
+		movingBlockRenderState.randomSeedPos = pos;
+		movingBlockRenderState.blockPos = pos;
 		movingBlockRenderState.blockState = state;
 		movingBlockRenderState.biome = biome;
-		movingBlockRenderState.world = world;
+		movingBlockRenderState.level = world;
 		return movingBlockRenderState;
 	}
 }

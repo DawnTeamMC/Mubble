@@ -1,11 +1,10 @@
 package fr.hugman.mubble.entity;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.util.math.Box;
-
 import java.util.List;
 import java.util.function.Predicate;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.phys.AABB;
 
 /**
  * Represents an entity that can be stomped (be jumped on).
@@ -18,12 +17,12 @@ public interface Stompable {
         return false;
     }
 
-    default Box getStompBox() {
+    default AABB getStompBox() {
         return null;
     }
 
     default Predicate<? super Entity> getStompableBy() {
-        return EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR;
+        return EntitySelector.NO_CREATIVE_OR_SPECTATOR;
     }
 
     default void onStompedBy(List<Entity> entities) {

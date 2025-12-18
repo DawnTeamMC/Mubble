@@ -4,21 +4,21 @@ import fr.hugman.mubble.Mubble;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 
 @Environment(EnvType.CLIENT)
 public class MubbleModelLayers {
-    public static final EntityModelLayer GOOMBA = of("goomba", GoombaModel::getTexturedModelData);
-    public static final EntityModelLayer BALL = of("ball", BallEntityModel::getTexturedModelData);
-    public static final EntityModelLayer KOOPA_SHELL = of("koopa_shell", KoopaShellModel::getTexturedModelData);
+    public static final ModelLayerLocation GOOMBA = of("goomba", GoombaModel::getTexturedModelData);
+    public static final ModelLayerLocation BALL = of("ball", BallEntityModel::getTexturedModelData);
+    public static final ModelLayerLocation KOOPA_SHELL = of("koopa_shell", KoopaShellModel::getTexturedModelData);
 
-    private static EntityModelLayer of(String path, String layerName, EntityModelLayerRegistry.TexturedModelDataProvider provider) {
-        var layer = new EntityModelLayer(Mubble.id(path), layerName);
+    private static ModelLayerLocation of(String path, String layerName, EntityModelLayerRegistry.TexturedModelDataProvider provider) {
+        var layer = new ModelLayerLocation(Mubble.id(path), layerName);
         EntityModelLayerRegistry.registerModelLayer(layer, provider);
         return layer;
     }
 
-    private static EntityModelLayer of(String path, EntityModelLayerRegistry.TexturedModelDataProvider provider) {
+    private static ModelLayerLocation of(String path, EntityModelLayerRegistry.TexturedModelDataProvider provider) {
         return of(path, "main", provider);
     }
 }

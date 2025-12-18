@@ -3,31 +3,29 @@ package fr.hugman.mubble.entity;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.item.MubbleItems;
 import fr.hugman.mubble.sound.MubbleSounds;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-
 import java.util.List;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 
 public class GreenKoopaShellEntity extends KoopaShellEntity {
     private static final Identifier TEXTURE = Mubble.id("textures/entity/green_koopa_shell.png");
 
-    public GreenKoopaShellEntity(EntityType<? extends GreenKoopaShellEntity> entityType, World world) {
+    public GreenKoopaShellEntity(EntityType<? extends GreenKoopaShellEntity> entityType, Level world) {
         super(entityType, world, 5);
     }
 
-    public GreenKoopaShellEntity(World world, double x, double y, double z) {
+    public GreenKoopaShellEntity(Level world, double x, double y, double z) {
         this(MubbleEntityTypes.GREEN_KOOPA_SHELL, world);
-        this.setPosition(x, y, z);
+        this.setPos(x, y, z);
     }
 
-    public GreenKoopaShellEntity(World world, LivingEntity owner) {
+    public GreenKoopaShellEntity(Level world, LivingEntity owner) {
         this(world, owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
         this.setOwner(owner);
     }
@@ -36,10 +34,10 @@ public class GreenKoopaShellEntity extends KoopaShellEntity {
     public void tick() {
         super.tick();
 
-        if(this.getEntityWorld().isClient() || !this.isStopped()) {
+        if(this.level().isClientSide() || !this.isStopped()) {
             return;
         }
-        var entities = this.getEntityWorld().getNonSpectatingEntities(LivingEntity.class, this.getBoundingBox());
+        var entities = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox());
         if (!entities.isEmpty()) {
             this.kickShell(entities.getFirst());
         }
@@ -53,9 +51,9 @@ public class GreenKoopaShellEntity extends KoopaShellEntity {
     @Override
     public void onStompedBy(List<Entity> entities) {
         super.onStompedBy(entities);
-        if (this.getEntityWorld() instanceof ServerWorld) {
+        if (this.level() instanceof ServerLevel) {
             if (!this.isStopped()) {
-                this.setVelocity(Vec3d.ZERO);
+                this.setDeltaMovement(Vec3.ZERO);
                 this.playSound(MubbleSounds.KOOPA_SHELL_KICK, 0.4F, 1.2F);
                 //TODO: add particles
             }
@@ -63,14 +61,14 @@ public class GreenKoopaShellEntity extends KoopaShellEntity {
     }
 
     public void kickShell(Entity kicker) {
-        var vec3d = kicker.getMovement();
-        if (vec3d.horizontalLength() == 0.0D) {
-            vec3d = this.getEntityPos().subtract(kicker.getEntityPos()).normalize();
+        var vec3d = kicker.getKnownMovement();
+        if (vec3d.horizontalDistance() == 0.0D) {
+            vec3d = this.position().subtract(kicker.position()).normalize();
         }
         //TODO: if still stopped, make it random
-        this.setVelocity(vec3d.x, 0.0d, vec3d.z);
+        this.setDeltaMovement(vec3d.x, 0.0d, vec3d.z);
         this.targetHorizontalSpeed(TARGET_SPEED, Float.MAX_VALUE);
-        this.velocityDirty = true;
+        this.needsSync = true;
         this.playSound(MubbleSounds.KOOPA_SHELL_KICK, 0.4F, 1.0F);
         this.setOwner(owner);
         //TODO: add particles
@@ -78,7 +76,7 @@ public class GreenKoopaShellEntity extends KoopaShellEntity {
     }
 
     @Override
-    public ItemStack getPickBlockStack() {
+    public ItemStack getPickResult() {
         return new ItemStack(MubbleItems.GREEN_KOOPA_SHELL);
     }
 

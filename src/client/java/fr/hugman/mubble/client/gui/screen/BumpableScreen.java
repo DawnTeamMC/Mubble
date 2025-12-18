@@ -5,38 +5,37 @@ import fr.hugman.mubble.block.BumpableDropMode;
 import fr.hugman.mubble.screen.BumpableScreenHandler;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.gl.RenderPipelines;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.gui.tooltip.Tooltip;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerListener;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Tooltip;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerListener;
+import net.minecraft.world.item.ItemStack;
 
 @Environment(EnvType.CLIENT)
-public class BumpableScreen extends HandledScreen<BumpableScreenHandler> {
+public class BumpableScreen extends AbstractContainerScreen<BumpableScreenHandler> {
     private static final Identifier TEXTURE = Mubble.id("textures/gui/container/bumpable.png");
 
-    private ButtonWidget button;
+    private Button button;
 
-    public BumpableScreen(BumpableScreenHandler handler, PlayerInventory inventory, Text title) {
+    public BumpableScreen(BumpableScreenHandler handler, Inventory inventory, Component title) {
         super(handler, inventory, title);
 
-        this.backgroundHeight = 134;
-        this.playerInventoryTitleY = this.backgroundHeight - 94;
+        this.imageHeight = 134;
+        this.inventoryLabelY = this.imageHeight - 94;
 
-        handler.addListener(new ScreenHandlerListener() {
+        handler.addSlotListener(new ContainerListener() {
             @Override
-            public void onSlotUpdate(ScreenHandler handler, int slotId, ItemStack stack) {
+            public void slotChanged(AbstractContainerMenu handler, int slotId, ItemStack stack) {
             }
 
             @Override
-            public void onPropertyUpdate(ScreenHandler handler, int property, int value) {
+            public void dataChanged(AbstractContainerMenu handler, int property, int value) {
                 switch (property) {
                     case 0 -> BumpableScreen.this.updateMode();
                     case 1 -> BumpableScreen.this.updateModeLock();
@@ -48,53 +47,53 @@ public class BumpableScreen extends HandledScreen<BumpableScreenHandler> {
     @Override
     protected void init() {
         super.init();
-        int backgroundX = (this.width - this.backgroundWidth) / 2;
-        int backgroundY = (this.height - this.backgroundHeight) / 2;
-        BumpableDropMode mode = this.handler.getDropMode();
-        this.button = ButtonWidget.builder(mode.getName(), btn -> this.sendButtonPressPacket(0))
-                .dimensions(backgroundX + 51, backgroundY + 16, 100, 20)
-                .tooltip(Tooltip.of(mode.getDescription()))
+        int backgroundX = (this.width - this.imageWidth) / 2;
+        int backgroundY = (this.height - this.imageHeight) / 2;
+        BumpableDropMode mode = this.menu.getDropMode();
+        this.button = Button.builder(mode.getName(), btn -> this.sendButtonPressPacket(0))
+                .bounds(backgroundX + 51, backgroundY + 16, 100, 20)
+                .tooltip(Tooltip.create(mode.getDescription()))
                 .build();
-        this.button.active = !this.handler.isDropModeLocked();
-        this.addDrawableChild(this.button);
+        this.button.active = !this.menu.isDropModeLocked();
+        this.addRenderableWidget(this.button);
     }
 
     private void sendButtonPressPacket(int id) {
-        this.client.interactionManager.clickButton(this.handler.syncId, id);
+        this.minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, id);
     }
 
     @Override
-    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
-        this.drawMouseoverTooltip(context, mouseX, mouseY);
+        this.renderTooltip(context, mouseX, mouseY);
     }
 
     @Override
-    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
-        int i = (this.width - this.backgroundWidth) / 2;
-        int j = (this.height - this.backgroundHeight) / 2;
-        context.drawTexture(RenderPipelines.GUI_TEXTURED, TEXTURE, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight, 256, 256);
+    protected void renderBg(GuiGraphics context, float delta, int mouseX, int mouseY) {
+        int i = (this.width - this.imageWidth) / 2;
+        int j = (this.height - this.imageHeight) / 2;
+        context.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, i, j, 0, 0, this.imageWidth, this.imageHeight, 256, 256);
     }
 
     @Override
-    public void close() {
+    public void onClose() {
         this.finishEditing();
     }
 
     void updateMode() {
-        BumpableDropMode mode = this.handler.getDropMode();
+        BumpableDropMode mode = this.menu.getDropMode();
         this.button.setMessage(mode.getName());
-        this.button.setTooltip(Tooltip.of(mode.getDescription()));
+        this.button.setTooltip(Tooltip.create(mode.getDescription()));
     }
 
     void updateModeLock() {
-        this.button.active = !this.handler.isDropModeLocked();
+        this.button.active = !this.menu.isDropModeLocked();
     }
 
     private void finishEditing() {
-        this.handler.sendContentUpdates();
-        if (this.client != null) {
-            this.client.setScreen(null);
+        this.menu.broadcastChanges();
+        if (this.minecraft != null) {
+            this.minecraft.setScreen(null);
         }
     }
 }

@@ -2,25 +2,24 @@ package fr.hugman.mubble.network.payload.c2s;
 
 import fr.hugman.mubble.network.payload.MubblePayloads;
 import fr.hugman.mubble.power_up.PowerUp;
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.packet.CustomPayload;
-import net.minecraft.registry.entry.RegistryEntry;
-
 import java.util.Optional;
+import net.minecraft.core.Holder;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 public record PowerUpChangePayload(
-        Optional<RegistryEntry<PowerUp>> previous,
-        Optional<RegistryEntry<PowerUp>> next
-) implements CustomPayload {
-    public static final PacketCodec<RegistryByteBuf, PowerUpChangePayload> PACKET_CODEC = PacketCodec.tuple(
+        Optional<Holder<PowerUp>> previous,
+        Optional<Holder<PowerUp>> next
+) implements CustomPacketPayload {
+    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpChangePayload> PACKET_CODEC = StreamCodec.composite(
             PowerUp.OPTIONAL_ENTRY_PACKET_CODEC, (powerUpChangePayload -> powerUpChangePayload.previous),
             PowerUp.OPTIONAL_ENTRY_PACKET_CODEC, (powerUpChangePayload -> powerUpChangePayload.next),
             PowerUpChangePayload::new
     );
 
     @Override
-    public Id<? extends PowerUpChangePayload> getId() {
+    public Type<? extends PowerUpChangePayload> type() {
         return MubblePayloads.POWER_UP_CHANGE;
     }
 }

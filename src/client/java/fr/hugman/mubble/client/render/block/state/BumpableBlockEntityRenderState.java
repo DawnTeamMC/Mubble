@@ -2,9 +2,9 @@ package fr.hugman.mubble.client.render.block.state;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.render.block.MovingBlockRenderState;
-import net.minecraft.client.render.block.entity.state.BlockEntityRenderState;
-import net.minecraft.util.math.Vec3i;
+import net.minecraft.client.renderer.block.MovingBlockRenderState;
+import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
+import net.minecraft.core.Vec3i;
 import org.jetbrains.annotations.Nullable;
 
 @Environment(EnvType.CLIENT)

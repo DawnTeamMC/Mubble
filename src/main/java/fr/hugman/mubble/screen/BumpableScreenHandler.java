@@ -1,31 +1,31 @@
 package fr.hugman.mubble.screen;
 
 import fr.hugman.mubble.block.BumpableDropMode;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.screen.ArrayPropertyDelegate;
-import net.minecraft.screen.PropertyDelegate;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.slot.Slot;
+import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 
-public class BumpableScreenHandler extends ScreenHandler {
-    private final Inventory inventory;
-    private final PropertyDelegate propertyDelegate;
+public class BumpableScreenHandler extends AbstractContainerMenu {
+    private final Container inventory;
+    private final ContainerData propertyDelegate;
 
-    public BumpableScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(1), new ArrayPropertyDelegate(2));
+    public BumpableScreenHandler(int syncId, Inventory playerInventory) {
+        this(syncId, playerInventory, new SimpleContainer(1), new SimpleContainerData(2));
     }
 
-    public BumpableScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, PropertyDelegate propertyDelegate) {
+    public BumpableScreenHandler(int syncId, Inventory playerInventory, Container inventory, ContainerData propertyDelegate) {
         super(MubbleScreenHandlerTypes.BUMPABLE_BLOCK, syncId);
-        ScreenHandler.checkSize(inventory, 1);
-        ScreenHandler.checkDataCount(propertyDelegate, 2);
+        AbstractContainerMenu.checkContainerSize(inventory, 1);
+        AbstractContainerMenu.checkContainerDataCount(propertyDelegate, 2);
         this.inventory = inventory;
         this.propertyDelegate = propertyDelegate;
-        this.inventory.onOpen(playerInventory.player);
+        this.inventory.startOpen(playerInventory.player);
 
         // block inventory
         this.addSlot(new Slot(inventory, 0, 26, 18));
@@ -43,35 +43,35 @@ public class BumpableScreenHandler extends ScreenHandler {
             this.addSlot(new Slot(playerInventory, column, 8 + column * 18, playerInventoryOffset + 58));
         }
 
-        this.addProperties(propertyDelegate);
+        this.addDataSlots(propertyDelegate);
     }
 
     @Override
-    public ItemStack quickMove(PlayerEntity player, int index) {
+    public ItemStack quickMoveStack(Player player, int index) {
         ItemStack ogStack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
-        if (slot.hasStack()) {
-            ItemStack stack = slot.getStack();
+        if (slot.hasItem()) {
+            ItemStack stack = slot.getItem();
             ogStack = stack.copy();
-            if (index < this.inventory.size() ? !this.insertItem(stack, this.inventory.size(), this.slots.size(), true) : !this.insertItem(stack, 0, this.inventory.size(), false)) {
+            if (index < this.inventory.getContainerSize() ? !this.moveItemStackTo(stack, this.inventory.getContainerSize(), this.slots.size(), true) : !this.moveItemStackTo(stack, 0, this.inventory.getContainerSize(), false)) {
                 return ItemStack.EMPTY;
             }
             if (stack.isEmpty()) {
-                slot.setStack(ItemStack.EMPTY);
+                slot.setByPlayer(ItemStack.EMPTY);
             } else {
-                slot.markDirty();
+                slot.setChanged();
             }
         }
         return ogStack;
     }
 
     @Override
-    public boolean canUse(PlayerEntity player) {
-        return this.inventory.canPlayerUse(player);
+    public boolean stillValid(Player player) {
+        return this.inventory.stillValid(player);
     }
 
     @Override
-    public boolean onButtonClick(PlayerEntity player, int id) {
+    public boolean clickMenuButton(Player player, int id) {
         if (id == 0) {
             if (this.isDropModeLocked()) {
                 return true;
@@ -83,7 +83,7 @@ public class BumpableScreenHandler extends ScreenHandler {
     }
 
     public void setDropMode(BumpableDropMode mode) {
-        this.setProperty(0, mode.getIndex());
+        this.setData(0, mode.getIndex());
     }
 
     public BumpableDropMode getDropMode() {
@@ -95,14 +95,14 @@ public class BumpableScreenHandler extends ScreenHandler {
     }
 
     @Override
-    public void setProperty(int id, int value) {
-        super.setProperty(id, value);
-        this.sendContentUpdates();
+    public void setData(int id, int value) {
+        super.setData(id, value);
+        this.broadcastChanges();
     }
 
     @Override
-    public void onClosed(PlayerEntity player) {
-        super.onClosed(player);
-        this.inventory.onClose(player);
+    public void removed(Player player) {
+        super.removed(player);
+        this.inventory.stopOpen(player);
     }
 }

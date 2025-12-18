@@ -6,36 +6,41 @@ import fr.hugman.mubble.sound.MubbleSounds;
 import fr.hugman.mubble.world.attribute.BlockTransform;
 import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributes;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
-import net.minecraft.block.*;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.util.AssetInfo;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.EntityHitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.ClientAsset;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AirBlock;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.CampfireBlock;
+import net.minecraft.world.level.block.CandleBlock;
+import net.minecraft.world.level.block.CandleCakeBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class FireballEntity extends BallEntity {
-    private static final AssetInfo.TextureAssetInfo TEXTURE = new AssetInfo.TextureAssetInfo(Mubble.id("entity/fireball"));
+    private static final ClientAsset.ResourceTexture TEXTURE = new ClientAsset.ResourceTexture(Mubble.id("entity/fireball"));
 
-    public FireballEntity(EntityType<? extends FireballEntity> type, World world) {
+    public FireballEntity(EntityType<? extends FireballEntity> type, Level world) {
         super(type, world);
     }
 
-    public FireballEntity(World world, LivingEntity owner) {
+    public FireballEntity(Level world, LivingEntity owner) {
         super(MubbleEntityTypes.FIREBALL, world, owner);
     }
 
-    public FireballEntity(double x, double y, double z, World world) {
+    public FireballEntity(double x, double y, double z, Level world) {
         super(MubbleEntityTypes.FIREBALL, x, y, z, world);
     }
 
@@ -45,87 +50,87 @@ public class FireballEntity extends BallEntity {
     }
 
     @Override
-    protected ParticleEffect getDeathParticle() {
+    protected ParticleOptions getDeathParticle() {
         return ParticleTypes.FLAME;
     }
 
     @Override
-    protected void onEntityHit(EntityHitResult result) {
-        super.onEntityHit(result);
+    protected void onHitEntity(EntityHitResult result) {
+        super.onHitEntity(result);
         Entity entity = result.getEntity();
         Entity owner = this.getOwner();
-        float damage = entity.isFireImmune() ? 1.0F : 3.0F;
+        float damage = entity.fireImmune() ? 1.0F : 3.0F;
 
         if (owner instanceof LivingEntity livingEntity) {
-            livingEntity.onAttacking(entity);
+            livingEntity.setLastHurtMob(entity);
         }
 
-        if (!entity.isFireImmune()) {
-            entity.setOnFireFor(5);
+        if (!entity.fireImmune()) {
+            entity.igniteForSeconds(5);
         }
-        this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_ENTITY, SoundCategory.NEUTRAL, 0.5F, 1.0F);
-        entity.serverDamage(this.getDamageSources().create(MubbleDamageTypes.FIREBALL, this, this.getOwner()), damage);
+        this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_ENTITY, SoundSource.NEUTRAL, 0.5F, 1.0F);
+        entity.hurt(this.damageSources().source(MubbleDamageTypes.FIREBALL, this, this.getOwner()), damage);
         this.finalHit();
     }
 
     @Override
-    protected void onBlockHit(BlockHitResult result) {
-        super.onBlockHit(result);
+    protected void onHitBlock(BlockHitResult result) {
+        super.onHitBlock(result);
         BlockPos pos = result.getBlockPos();
-        BlockState state = this.getEntityWorld().getBlockState(pos);
-        Direction face = result.getSide();
+        BlockState state = this.level().getBlockState(pos);
+        Direction face = result.getDirection();
 
         BlockState resultState = null;
-        RegistryEntry<SoundEvent> resultSound = null;
-        var transform = BlockTransform.testList(this.getEntityWorld().getEnvironmentAttributes().getAttributeValue(MubbleEnvironmentAttributes.FIREBALL_MELTS, pos), state.getRegistryEntry());
+        Holder<SoundEvent> resultSound = null;
+        var transform = BlockTransform.testList(this.level().environmentAttributes().getValue(MubbleEnvironmentAttributes.FIREBALL_MELTS, pos), state.getBlockHolder());
         if (transform != null) {
             resultState = transform.result();
             resultSound = transform.sound().orElse(null);
         }
         if (resultState != null) {
-            if (!this.getEntityWorld().isClient()) {
+            if (!this.level().isClientSide()) {
                 if (resultState.getBlock() instanceof AirBlock) {
-                    this.getEntityWorld().removeBlock(pos, false);
+                    this.level().removeBlock(pos, false);
                 } else {
-                    this.getEntityWorld().setBlockState(pos, resultState);
+                    this.level().setBlockAndUpdate(pos, resultState);
                 }
             }
-            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), resultSound, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.level().playSound(null, getX(), getY(), getZ(), resultSound, SoundSource.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }
-        if (CampfireBlock.canBeLit(state) || CandleBlock.canBeLit(state) || CandleCakeBlock.canBeLit(state)) {
-            this.getEntityWorld().setBlockState(pos, state.with(CampfireBlock.LIT, true));
-            this.getEntityWorld().emitGameEvent(this.getOwner(), GameEvent.BLOCK_CHANGE, pos);
-            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+        if (CampfireBlock.canLight(state) || CandleBlock.canLight(state) || CandleCakeBlock.canLight(state)) {
+            this.level().setBlockAndUpdate(pos, state.setValue(CampfireBlock.LIT, true));
+            this.level().gameEvent(this.getOwner(), GameEvent.BLOCK_CHANGE, pos);
+            this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundSource.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }
         FlammableBlockRegistry.Entry flammableEntry = FlammableBlockRegistry.getDefaultInstance().get(state.getBlock());
         if (flammableEntry.getBurnChance() > 0 || flammableEntry.getSpreadChance() > 0) {
-            BlockPos firePos = pos.offset(face);
-            if (this.getEntityWorld().isAir(firePos) && !this.getEntityWorld().isClient()) {
-                this.getEntityWorld().setBlockState(firePos, AbstractFireBlock.getState(this.getEntityWorld(), firePos));
+            BlockPos firePos = pos.relative(face);
+            if (this.level().isEmptyBlock(firePos) && !this.level().isClientSide()) {
+                this.level().setBlockAndUpdate(firePos, BaseFireBlock.getState(this.level(), firePos));
             }
-            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundSource.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
             return;
         }
         if (face == Direction.UP) {
-            Vec3d motion = this.getVelocity().subtract(0.0D, this.getVelocity().y * 1.25D, 0.0D);
+            Vec3 motion = this.getDeltaMovement().subtract(0.0D, this.getDeltaMovement().y * 1.25D, 0.0D);
             double minY = 0.4D;
             if (motion.y < minY) {
-                motion = motion.withAxis(Direction.Axis.Y, minY);
+                motion = motion.with(Direction.Axis.Y, minY);
             }
-            this.setVelocity(motion);
+            this.setDeltaMovement(motion);
         } else {
-            this.getEntityWorld().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundCategory.NEUTRAL, 0.5F, 1.0F);
+            this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_BLOCK, SoundSource.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
         }
     }
 
     @Override
-    public AssetInfo.TextureAssetInfo getTexture() {
+    public ClientAsset.ResourceTexture getTexture() {
         return TEXTURE;
     }
 }

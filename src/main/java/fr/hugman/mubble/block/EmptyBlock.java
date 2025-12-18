@@ -1,27 +1,27 @@
 package fr.hugman.mubble.block;
 
 import fr.hugman.mubble.sound.MubbleSounds;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.world.World;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 /**
  * @author Hugman
  * @since v4.0.0
  */
 public class EmptyBlock extends Block implements HittableBlock {
-    public EmptyBlock(Settings settings) {
+    public EmptyBlock(Properties settings) {
         super(settings);
     }
 
     @Override
-    public void onHit(World world, BlockState state, Entity entity, BlockHitResult hit) {
-        var pos = hit.getPos();
+    public void onHit(Level world, BlockState state, Entity entity, BlockHitResult hit) {
+        var pos = hit.getLocation();
         if (world != null) {
-            world.playSound(null, pos.getX(), pos.getY(), pos.getZ(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(null, pos.x(), pos.y(), pos.z(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
     }
 }

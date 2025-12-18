@@ -8,65 +8,67 @@ import fr.hugman.mubble.item.MubbleItems;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.component.DataComponentTypes;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemGroups;
-import net.minecraft.item.ItemStack;
-import net.minecraft.registry.*;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.text.Text;
-
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import java.util.Collections;
 import java.util.function.Predicate;
 
 public class MubbleItemGroups {
-    public static final ItemGroup SUPER_MARIO = of(MubbleItemGroupKeys.SUPER_MARIO, FabricItemGroup.builder()
-            .displayName(Text.translatable("item_group.mubble.super_mario"))
+    public static final CreativeModeTab SUPER_MARIO = of(MubbleItemGroupKeys.SUPER_MARIO, FabricItemGroup.builder()
+            .title(Component.translatable("item_group.mubble.super_mario"))
             .icon(() -> new ItemStack(MubbleBlocks.QUESTION_BLOCK))
             .build());
-    public static final ItemGroup YOSHI_ISLAND = of(MubbleItemGroupKeys.YOSHI_ISLAND, FabricItemGroup.builder()
-            .displayName(Text.translatable("item_group.mubble.yoshi_island"))
+    public static final CreativeModeTab YOSHI_ISLAND = of(MubbleItemGroupKeys.YOSHI_ISLAND, FabricItemGroup.builder()
+            .title(Component.translatable("item_group.mubble.yoshi_island"))
             .icon(() -> new ItemStack(MubbleBlocks.GREEN_EGG_BLOCK))
             .build());
 
-    private static ItemGroup of(RegistryKey<ItemGroup> key, ItemGroup itemGroup) {
-        return Registry.register(Registries.ITEM_GROUP, key, itemGroup);
+    private static CreativeModeTab of(ResourceKey<CreativeModeTab> key, CreativeModeTab itemGroup) {
+        return Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, key, itemGroup);
     }
 
     public static void appendItemGroups() {
         ItemGroupEvents.modifyEntriesEvent(MubbleItemGroupKeys.SUPER_MARIO).register(entries -> {
             var context = entries.getContext();
 
-            entries.add(MubbleItems.FIRE_FLOWER);
-            entries.add(MubbleItems.ICE_FLOWER);
-            entries.add(MubbleItems.MINI_MUSHROOM);
-            entries.add(MubbleItems.MEGA_MUSHROOM);
-            entries.add(MubbleBlocks.QUESTION_BLOCK);
-            entries.add(MubbleBlocks.EMPTY_BLOCK);
-            entries.add(MubbleBlocks.BRICK_BLOCK);
-            entries.add(MubbleBlocks.CRYSTAL_BLOCK);
-            entries.add(MubbleBlocks.GOLD_BLOCK);
-            entries.add(MubbleBlocks.BLUE_EXCLAMATION_BLOCK);
-            entries.add(MubbleBlocks.GREEN_EXCLAMATION_BLOCK);
-            entries.add(MubbleBlocks.YELLOW_EXCLAMATION_BLOCK);
-            entries.add(MubbleBlocks.RED_EXCLAMATION_BLOCK);
-            entries.add(MubbleBlocks.NOTE_BLOCK);
-            entries.add(MubbleBlocks.BLUE_MARIMBA_BLOCK);
-            entries.add(MubbleBlocks.GREEN_MARIMBA_BLOCK);
-            entries.add(MubbleBlocks.YELLOW_MARIMBA_BLOCK);
-            entries.add(MubbleBlocks.RED_MARIMBA_BLOCK);
-            entries.add(MubbleBlocks.SNAKE_BLOCK);
-            entries.add(MubbleBlocks.FAST_SNAKE_BLOCK);
-            entries.add(MubbleBlocks.SLOW_SNAKE_BLOCK);
-            entries.add(MubbleBlocks.RED_BEEP_BLOCK);
-            entries.add(MubbleBlocks.BLUE_BEEP_BLOCK);
-            entries.add(MubbleItems.GREEN_KOOPA_SHELL);
-            entries.add(MubbleItems.RED_KOOPA_SHELL);
-            entries.add(MubbleItems.MAKER_GLOVE);
-            entries.add(MubbleItems.GOOMBA_SPAWN_EGG);
-            context.lookup()
-                    .getOptional(MubbleRegistryKeys.GOOMBA_VARIANT)
+            entries.accept(MubbleItems.FIRE_FLOWER);
+            entries.accept(MubbleItems.ICE_FLOWER);
+            entries.accept(MubbleItems.MINI_MUSHROOM);
+            entries.accept(MubbleItems.MEGA_MUSHROOM);
+            entries.accept(MubbleBlocks.QUESTION_BLOCK);
+            entries.accept(MubbleBlocks.EMPTY_BLOCK);
+            entries.accept(MubbleBlocks.BRICK_BLOCK);
+            entries.accept(MubbleBlocks.CRYSTAL_BLOCK);
+            entries.accept(MubbleBlocks.GOLD_BLOCK);
+            entries.accept(MubbleBlocks.BLUE_EXCLAMATION_BLOCK);
+            entries.accept(MubbleBlocks.GREEN_EXCLAMATION_BLOCK);
+            entries.accept(MubbleBlocks.YELLOW_EXCLAMATION_BLOCK);
+            entries.accept(MubbleBlocks.RED_EXCLAMATION_BLOCK);
+            entries.accept(MubbleBlocks.NOTE_BLOCK);
+            entries.accept(MubbleBlocks.BLUE_MARIMBA_BLOCK);
+            entries.accept(MubbleBlocks.GREEN_MARIMBA_BLOCK);
+            entries.accept(MubbleBlocks.YELLOW_MARIMBA_BLOCK);
+            entries.accept(MubbleBlocks.RED_MARIMBA_BLOCK);
+            entries.accept(MubbleBlocks.SNAKE_BLOCK);
+            entries.accept(MubbleBlocks.FAST_SNAKE_BLOCK);
+            entries.accept(MubbleBlocks.SLOW_SNAKE_BLOCK);
+            entries.accept(MubbleBlocks.RED_BEEP_BLOCK);
+            entries.accept(MubbleBlocks.BLUE_BEEP_BLOCK);
+            entries.accept(MubbleItems.GREEN_KOOPA_SHELL);
+            entries.accept(MubbleItems.RED_KOOPA_SHELL);
+            entries.accept(MubbleItems.MAKER_GLOVE);
+            entries.accept(MubbleItems.GOOMBA_SPAWN_EGG);
+            context.holders()
+                    .lookup(MubbleRegistryKeys.GOOMBA_VARIANT)
                     .ifPresent(registryWrapper -> addGoombaVariantsSpawnEggs(
                             entries,
 							registryWrapper,
@@ -77,34 +79,34 @@ public class MubbleItemGroups {
         appendSpawnEgg(MubbleItems.GOOMBA_SPAWN_EGG);
 
         ItemGroupEvents.modifyEntriesEvent(MubbleItemGroupKeys.YOSHI_ISLAND).register(entries -> {
-            entries.add(MubbleBlocks.BLUE_EGG_BLOCK);
-            entries.add(MubbleBlocks.CYAN_EGG_BLOCK);
-            entries.add(MubbleBlocks.GREEN_EGG_BLOCK);
-            entries.add(MubbleBlocks.YELLOW_EGG_BLOCK);
-            entries.add(MubbleBlocks.ORANGE_EGG_BLOCK);
-            entries.add(MubbleBlocks.RED_EGG_BLOCK);
-            entries.add(MubbleBlocks.PINK_EGG_BLOCK);
-            entries.add(MubbleBlocks.BLACK_EGG_BLOCK);
-            entries.add(MubbleBlocks.WHITE_EGG_BLOCK);
+            entries.accept(MubbleBlocks.BLUE_EGG_BLOCK);
+            entries.accept(MubbleBlocks.CYAN_EGG_BLOCK);
+            entries.accept(MubbleBlocks.GREEN_EGG_BLOCK);
+            entries.accept(MubbleBlocks.YELLOW_EGG_BLOCK);
+            entries.accept(MubbleBlocks.ORANGE_EGG_BLOCK);
+            entries.accept(MubbleBlocks.RED_EGG_BLOCK);
+            entries.accept(MubbleBlocks.PINK_EGG_BLOCK);
+            entries.accept(MubbleBlocks.BLACK_EGG_BLOCK);
+            entries.accept(MubbleBlocks.WHITE_EGG_BLOCK);
         });
     }
 
-    public static void append(RegistryKey<ItemGroup> group, ItemGroupEvents.ModifyEntries modifier) {
+    public static void append(ResourceKey<CreativeModeTab> group, ItemGroupEvents.ModifyEntries modifier) {
         ItemGroupEvents.modifyEntriesEvent(group).register(modifier);
     }
 
     public static void appendSpawnEgg(Item spawnEgg) {
-        var itemGroup = Registries.ITEM_GROUP.get(ItemGroups.SPAWN_EGGS);
-        String path = Registries.ITEM.getId(spawnEgg).getPath();
+        var itemGroup = BuiltInRegistries.CREATIVE_MODE_TAB.getValue(CreativeModeTabs.SPAWN_EGGS);
+        String path = BuiltInRegistries.ITEM.getKey(spawnEgg).getPath();
 
         if (itemGroup == null) {
             return;
         }
 
         Predicate<ItemStack> predicate = stack1 -> {
-            String path1 = Registries.ITEM.getId(stack1.getItem()).getPath();
-            for (ItemStack stack2 : itemGroup.getDisplayStacks()) {
-                String path2 = Registries.ITEM.getId(stack2.getItem()).getPath();
+            String path1 = BuiltInRegistries.ITEM.getKey(stack1.getItem()).getPath();
+            for (ItemStack stack2 : itemGroup.getDisplayItems()) {
+                String path2 = BuiltInRegistries.ITEM.getKey(stack2.getItem()).getPath();
                 if (path1.matches(".*_spawn_egg") && path2.matches(".*_spawn_egg")) {
                     // check if path is lexicographically between path1 and path2
                     if (path.compareTo(path1) > 0 && path.compareTo(path2) < 0) {
@@ -114,28 +116,28 @@ public class MubbleItemGroups {
             }
             return false;
         };
-        append(ItemGroups.SPAWN_EGGS, e -> e.addAfter(predicate, Collections.singleton(new ItemStack(spawnEgg)), ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS));
+        append(CreativeModeTabs.SPAWN_EGGS, e -> e.addAfter(predicate, Collections.singleton(new ItemStack(spawnEgg)), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
     }
 
     private static void addGoombaVariantsSpawnEggs(
-            ItemGroup.Entries entries,
-			RegistryWrapper.Impl<GoombaVariant> registryWrapper,
-            Predicate<RegistryEntry<GoombaVariant>> filter
+            CreativeModeTab.Output entries,
+			HolderLookup.RegistryLookup<GoombaVariant> registryWrapper,
+            Predicate<Holder<GoombaVariant>> filter
     ) {
-		registryWrapper.streamEntries()
+		registryWrapper.listElements()
                 .filter(filter)
                 .forEach(entry -> {
-                            if (GoombaVariants.NORMAL.getValue().equals(entry.registryKey().getValue()) || entry.value().spawnEggInfo().isEmpty()) {
+                            if (GoombaVariants.NORMAL.identifier().equals(entry.key().identifier()) || entry.value().spawnEggInfo().isEmpty()) {
                                 return;
                             }
                             var stack = new ItemStack(MubbleItems.GOOMBA_SPAWN_EGG);
 							var spawnEgg = entry.value().spawnEggInfo().get();
-							stack.set(DataComponentTypes.ITEM_NAME, spawnEgg.name());
+							stack.set(DataComponents.ITEM_NAME, spawnEgg.name());
                             if (stack.isEmpty()) {
                                 return;
                             }
 							stack.set(MubbleDataComponentTypes.GOOMBA_VARIANT, entry);
-                            entries.add(stack, spawnEgg.onlyInSearch() ? ItemGroup.StackVisibility.SEARCH_TAB_ONLY : ItemGroup.StackVisibility.PARENT_AND_SEARCH_TABS);
+                            entries.accept(stack, spawnEgg.onlyInSearch() ? CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY : CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
                         }
                 );
     }

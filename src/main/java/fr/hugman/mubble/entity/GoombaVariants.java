@@ -2,18 +2,18 @@ package fr.hugman.mubble.entity;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.registry.MubbleRegistryKeys;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.util.Identifier;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 
 public class GoombaVariants {
-    public static final RegistryKey<GoombaVariant> NORMAL = of("normal");
-    public static final RegistryKey<GoombaVariant> MINI = of("mini");
+    public static final ResourceKey<GoombaVariant> NORMAL = of("normal");
+    public static final ResourceKey<GoombaVariant> MINI = of("mini");
 
-    private static RegistryKey<GoombaVariant> of(String path) {
+    private static ResourceKey<GoombaVariant> of(String path) {
         return of(Mubble.id(path));
     }
 
-    public static RegistryKey<GoombaVariant> of(Identifier id) {
-        return RegistryKey.of(MubbleRegistryKeys.GOOMBA_VARIANT, id);
+    public static ResourceKey<GoombaVariant> of(Identifier id) {
+        return ResourceKey.create(MubbleRegistryKeys.GOOMBA_VARIANT, id);
     }
 }

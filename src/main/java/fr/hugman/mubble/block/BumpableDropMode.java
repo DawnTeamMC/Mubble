@@ -1,24 +1,24 @@
 package fr.hugman.mubble.block;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.text.Text;
-import net.minecraft.util.StringIdentifiable;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.StringRepresentable;
 
-public enum BumpableDropMode implements StringIdentifiable {
+public enum BumpableDropMode implements StringRepresentable {
     ALL(0, "all"),
     ONE(1, "one");
 
-    public static final Codec<BumpableDropMode> CODEC = StringIdentifiable.createCodec(BumpableDropMode::values);
+    public static final Codec<BumpableDropMode> CODEC = StringRepresentable.fromEnum(BumpableDropMode::values);
     private final int index;
     private final String id;
-    private final Text name;
-    private final Text description;
+    private final Component name;
+    private final Component description;
 
     BumpableDropMode(int index, String id) {
         this.index = index;
         this.id = id;
-        this.name = Text.translatable("block.mubble.bumpable.drop." + id);
-        this.description = Text.translatable("block.mubble.bumpable.drop." + id + ".description");
+        this.name = Component.translatable("block.mubble.bumpable.drop." + id);
+        this.description = Component.translatable("block.mubble.bumpable.drop." + id + ".description");
     }
 
     public static BumpableDropMode get(int index) {
@@ -47,16 +47,16 @@ public enum BumpableDropMode implements StringIdentifiable {
         return index;
     }
 
-    public Text getName() {
+    public Component getName() {
         return name;
     }
 
-    public Text getDescription() {
+    public Component getDescription() {
         return description;
     }
 
     @Override
-    public String asString() {
+    public String getSerializedName() {
         return this.id;
     }
 }

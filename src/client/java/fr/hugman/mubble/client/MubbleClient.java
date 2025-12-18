@@ -14,12 +14,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
-import net.minecraft.client.gui.screen.ingame.HandledScreens;
-import net.minecraft.client.render.BlockRenderLayer;
-import net.minecraft.client.sound.MovingSoundInstance;
-import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 
 @Environment(EnvType.CLIENT)
 public class MubbleClient implements ClientModInitializer {
@@ -36,11 +32,11 @@ public class MubbleClient implements ClientModInitializer {
     }
 
     private static void registerBlockRenderLayers() {
-        BlockRenderLayerMap.putBlock(MubbleBlocks.RED_BEEP_BLOCK, BlockRenderLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(MubbleBlocks.BLUE_BEEP_BLOCK, BlockRenderLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(MubbleBlocks.RED_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(MubbleBlocks.BLUE_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
     }
 
     private static void registerHandledScreens() {
-        HandledScreens.register(MubbleScreenHandlerTypes.BUMPABLE_BLOCK, BumpableScreen::new);
+        MenuScreens.register(MubbleScreenHandlerTypes.BUMPABLE_BLOCK, BumpableScreen::new);
     }
 }
