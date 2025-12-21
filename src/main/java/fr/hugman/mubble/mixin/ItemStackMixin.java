@@ -1,6 +1,6 @@
 package fr.hugman.mubble.mixin;
 
-import fr.hugman.mubble.component.MubbleDataComponentTypes;
+import fr.hugman.mubble.core.component.MubbleDataComponents;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,6 +20,6 @@ public class ItemStackMixin {
     @Inject(method = "addDetailsToTooltip", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;addToTooltip(Lnet/minecraft/core/component/DataComponentType;Lnet/minecraft/world/item/Item$TooltipContext;Lnet/minecraft/world/item/component/TooltipDisplay;Ljava/util/function/Consumer;Lnet/minecraft/world/item/TooltipFlag;)V", ordinal = 12))
     private void onAppendTooltip(Item.TooltipContext context, TooltipDisplay displayComponent, @Nullable Player player, TooltipFlag type, Consumer<Component> textConsumer, CallbackInfo ci) {
         var this_ = (ItemStack) (Object) this;
-        this_.addToTooltip(MubbleDataComponentTypes.POWER_UP, context, displayComponent, textConsumer, type);
+        this_.addToTooltip(MubbleDataComponents.POWER_UP, context, displayComponent, textConsumer, type);
     }
 }

@@ -1,15 +1,13 @@
 package fr.hugman.mubble.client;
 
 import com.google.common.reflect.Reflection;
-import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.client.gui.screen.BumpableScreen;
 import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
-import fr.hugman.mubble.client.render.MubbleRenderers;
-import fr.hugman.mubble.client.render.entity.model.MubbleModelLayers;
+import fr.hugman.mubble.client.renderer.MubbleRenderers;
+import fr.hugman.mubble.client.model.MubbleModelLayers;
 import fr.hugman.mubble.client.network.MubbleClientReceivers;
-import fr.hugman.mubble.entity.KoopaShellEntity;
-import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.world.inventory.MubbleMenuTypes;
+import fr.hugman.mubble.world.level.block.MubbleBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -37,6 +35,6 @@ public class MubbleClient implements ClientModInitializer {
     }
 
     private static void registerHandledScreens() {
-        MenuScreens.register(MubbleScreenHandlerTypes.BUMPABLE_BLOCK, BumpableScreen::new);
+        MenuScreens.register(MubbleMenuTypes.BUMPABLE_BLOCK, BumpableScreen::new);
     }
 }

@@ -6,7 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.EntityTypeTags;
 import java.util.concurrent.CompletableFuture;
 
-import static fr.hugman.mubble.entity.MubbleEntityTypes.*;
+import static fr.hugman.mubble.world.entity.MubbleEntityTypes.*;
 import static fr.hugman.mubble.tags.MubbleEntityTypeTags.*;
 import static net.minecraft.world.entity.EntityType.*;
 

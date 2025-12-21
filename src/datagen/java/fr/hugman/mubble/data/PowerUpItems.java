@@ -1,10 +1,11 @@
 package fr.hugman.mubble.data;
 
-import fr.hugman.mubble.item.MubbleItemKeys;
 import fr.hugman.mubble.references.PowerUps;
 import fr.hugman.mubble.power_up.PowerUp;
 import java.util.List;
 import java.util.function.Consumer;
+
+import fr.hugman.mubble.world.item.MubbleItemKeys;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 

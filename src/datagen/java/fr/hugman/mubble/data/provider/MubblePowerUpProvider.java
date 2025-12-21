@@ -1,11 +1,11 @@
 package fr.hugman.mubble.data.provider;
 
-import fr.hugman.mubble.entity.MubbleEntityTypes;
 import fr.hugman.mubble.power_up.PowerUpBuilder;
 import fr.hugman.mubble.power_up.PowerUp;
 import fr.hugman.mubble.power_up.action.ShootProjectilePowerUpAction;
-import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.Holder;
@@ -25,7 +25,7 @@ public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
-        entries.addAll(registries.lookupOrThrow(MubbleRegistryKeys.POWER_UP));
+        entries.addAll(registries.lookupOrThrow(MubbleRegistries.POWER_UP));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package fr.hugman.mubble.client.sound;
 
-import fr.hugman.mubble.entity.KoopaShellEntity;
+import fr.hugman.mubble.world.entity.projectile.KoopaShell;
 import fr.hugman.mubble.sound.MubbleSounds;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -11,10 +11,10 @@ import net.minecraft.util.Mth;
 
 @Environment(EnvType.CLIENT)
 public class SlidingKoopaShellSoundInstance extends AbstractTickableSoundInstance {
-    private final KoopaShellEntity shell;
+    private final KoopaShell shell;
     private float distance = 0.0F;
 
-    public SlidingKoopaShellSoundInstance(KoopaShellEntity shell) {
+    public SlidingKoopaShellSoundInstance(KoopaShell shell) {
         super(MubbleSounds.KOOPA_SHELL_SLIDE, SoundSource.NEUTRAL, SoundInstance.createUnseededRandom());
         this.shell = shell;
         this.looping = true;

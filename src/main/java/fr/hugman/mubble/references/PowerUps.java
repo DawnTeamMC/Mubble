@@ -2,7 +2,7 @@ package fr.hugman.mubble.references;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.power_up.PowerUp;
-import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import fr.hugman.mubble.core.registries.MubbleRegistries;
 import net.minecraft.resources.ResourceKey;
 
 public class PowerUps {
@@ -12,6 +12,6 @@ public class PowerUps {
     public static final ResourceKey<PowerUp> ICE = of("ice");
 
     private static ResourceKey<PowerUp> of(String path) {
-        return ResourceKey.create(MubbleRegistryKeys.POWER_UP, Mubble.id(path));
+        return ResourceKey.create(MubbleRegistries.POWER_UP, Mubble.id(path));
     }
 }

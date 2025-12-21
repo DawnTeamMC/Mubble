@@ -7,8 +7,8 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import java.util.concurrent.CompletableFuture;
 
-import static fr.hugman.mubble.block.MubbleBlocks.*;
 import static fr.hugman.mubble.tags.MubbleBlockTags.*;
+import static fr.hugman.mubble.world.level.block.MubbleBlocks.*;
 
 public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 	public MubbleBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {

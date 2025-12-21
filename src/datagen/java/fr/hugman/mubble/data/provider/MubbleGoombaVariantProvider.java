@@ -1,10 +1,10 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.entity.GoombaVariant;
-import fr.hugman.mubble.entity.GoombaVariants;
-import fr.hugman.mubble.item.spawn_egg.VariantSpawnEggInfo;
-import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariant;
+import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariants;
+import fr.hugman.mubble.core.registries.MubbleRegistries;
+import fr.hugman.mubble.world.item.spawn_egg.VariantSpawnEggInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.ClientAsset;
@@ -23,7 +23,7 @@ public class MubbleGoombaVariantProvider extends FabricDynamicRegistryProvider {
 
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
-        entries.addAll(registries.lookupOrThrow(MubbleRegistryKeys.GOOMBA_VARIANT));
+        entries.addAll(registries.lookupOrThrow(MubbleRegistries.GOOMBA_VARIANT));
     }
 
     @Override

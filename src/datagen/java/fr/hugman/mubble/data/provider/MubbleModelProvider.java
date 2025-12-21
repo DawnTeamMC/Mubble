@@ -1,14 +1,13 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.block.BeepBlock;
-import fr.hugman.mubble.block.MubbleBlocks;
 import fr.hugman.mubble.data.model.MubbleTexturedModels;
 import fr.hugman.mubble.data.model.MubbleTextureMaps;
-import fr.hugman.mubble.item.MubbleItems;
+import fr.hugman.mubble.world.item.MubbleItems;
+import fr.hugman.mubble.world.level.block.BeepBlock;
+import fr.hugman.mubble.world.level.block.MubbleBlocks;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.minecraft.client.data.*;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;

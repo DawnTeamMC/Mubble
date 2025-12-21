@@ -1,6 +1,6 @@
 package fr.hugman.mubble.mixin;
 
-import fr.hugman.mubble.entity.data.MubbleTrackedData;
+import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.payload.c2s.PowerUpChangePayload;
 import fr.hugman.mubble.power_up.PowerUp;
 import fr.hugman.mubble.power_up.PowerUpHolder;
@@ -25,8 +25,8 @@ import java.util.Optional;
 @Mixin(Player.class)
 public class PlayerMixin implements PowerUpHolder {
     @Unique
-    private static final EntityDataAccessor<Optional<Holder<PowerUp>>> POWER_UP = SynchedEntityData.defineId(Player.class, MubbleTrackedData.OPTIONAL_POWER_UP);
-    private static final EntityDataAccessor<PowerUpProperties> POWER_UP_PROPERTIES = SynchedEntityData.defineId(Player.class, MubbleTrackedData.POWER_UP_PROPERTIES);
+    private static final EntityDataAccessor<Optional<Holder<PowerUp>>> POWER_UP = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.OPTIONAL_POWER_UP);
+    private static final EntityDataAccessor<PowerUpProperties> POWER_UP_PROPERTIES = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.POWER_UP_PROPERTIES);
 
     @Unique
     private static final String POWER_UP_KEY = "power_up";

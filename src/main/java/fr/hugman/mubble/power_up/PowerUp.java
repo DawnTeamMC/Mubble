@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.attribute.EntityAttributeEntry;
 import fr.hugman.mubble.power_up.action.PowerUpAction;
-import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.sound.MubbleSounds;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -14,7 +14,6 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -52,8 +51,8 @@ public record PowerUp(
             Codec.BOOL.optionalFieldOf("can_sprint_on_water", false).forGetter(PowerUp::canSprintOnWater)
     ).apply(instance, PowerUp::new));
 
-    public static final Codec<Holder<PowerUp>> ENTRY_CODEC = RegistryFileCodec.create(MubbleRegistryKeys.POWER_UP, CODEC);
-    public static final Codec<EitherHolder<PowerUp>> LAZY_ENTRY_CODEC = EitherHolder.codec(MubbleRegistryKeys.POWER_UP, ENTRY_CODEC);
+    public static final Codec<Holder<PowerUp>> ENTRY_CODEC = RegistryFileCodec.create(MubbleRegistries.POWER_UP, CODEC);
+    public static final Codec<EitherHolder<PowerUp>> LAZY_ENTRY_CODEC = EitherHolder.codec(MubbleRegistries.POWER_UP, ENTRY_CODEC);
 
     public static final StreamCodec<RegistryFriendlyByteBuf, PowerUp> PACKET_CODEC = StreamCodec.composite(
             ComponentSerialization.TRUSTED_OPTIONAL_STREAM_CODEC, PowerUp::name,
@@ -65,9 +64,9 @@ public record PowerUp(
             ByteBufCodecs.BOOL, PowerUp::canSprintOnWater,
             PowerUp::new
     );
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUp>> ENTRY_PACKET_CODEC = ByteBufCodecs.holder(MubbleRegistryKeys.POWER_UP, PACKET_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUp>> ENTRY_PACKET_CODEC = ByteBufCodecs.holder(MubbleRegistries.POWER_UP, PACKET_CODEC);
     public static final StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUp>>> OPTIONAL_ENTRY_PACKET_CODEC = ByteBufCodecs.optional(ENTRY_PACKET_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, EitherHolder<PowerUp>> LAZY_ENTRY_PACKET_CODEC = EitherHolder.streamCodec(MubbleRegistryKeys.POWER_UP, ENTRY_PACKET_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, EitherHolder<PowerUp>> LAZY_ENTRY_PACKET_CODEC = EitherHolder.streamCodec(MubbleRegistries.POWER_UP, ENTRY_PACKET_CODEC);
 
     public InteractionResult trigger(Player player) {
         return this.action.map(entry -> entry.value().trigger(player)).orElse(InteractionResult.PASS);

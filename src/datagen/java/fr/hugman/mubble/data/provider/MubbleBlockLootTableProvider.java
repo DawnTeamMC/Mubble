@@ -1,6 +1,6 @@
 package fr.hugman.mubble.data.provider;
 
-import fr.hugman.mubble.block.MubbleBlocks;
+import fr.hugman.mubble.world.level.block.MubbleBlocks;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
 import net.minecraft.core.HolderLookup;

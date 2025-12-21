@@ -1,8 +1,8 @@
 package fr.hugman.mubble.client.gui.screen;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.block.BumpableDropMode;
-import fr.hugman.mubble.screen.BumpableScreenHandler;
+import fr.hugman.mubble.world.inventory.BumpableScreenHandler;
+import fr.hugman.mubble.world.level.block.BumpableDropMode;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.GuiGraphics;

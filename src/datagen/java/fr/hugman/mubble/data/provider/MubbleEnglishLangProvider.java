@@ -1,8 +1,8 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.item_group.MubbleItemGroupKeys;
-import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import fr.hugman.mubble.references.MubbleCreativeModeTabs;
+import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.sound.MubbleSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
@@ -28,7 +28,7 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 
 	@Override
 	public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
-		builder.add(Util.makeDescriptionId("item_group", MubbleItemGroupKeys.YOSHI_ISLAND.identifier()), "Yoshi's Island");
+		builder.add(Util.makeDescriptionId("item_group", MubbleCreativeModeTabs.YOSHI_ISLAND.identifier()), "Yoshi's Island");
 
 		this.generateAutomaticTranslations(wrapperLookup, builder);
 
@@ -150,7 +150,7 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
             catch (RuntimeException ignored) {}
 		}
 
-		for (var powerUp : getRegistryEntries(wrapperLookup, MubbleRegistryKeys.POWER_UP)) {
+		for (var powerUp : getRegistryEntries(wrapperLookup, MubbleRegistries.POWER_UP)) {
 			var id = powerUp.key().identifier();
 			try {
 				builder.add(Util.makeDescriptionId("power_up", id), snakeToTitleCase(id.getPath()));

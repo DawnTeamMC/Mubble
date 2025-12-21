@@ -2,7 +2,7 @@ package fr.hugman.mubble.data;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.data.provider.*;
-import fr.hugman.mubble.registry.MubbleRegistryKeys;
+import fr.hugman.mubble.core.registries.MubbleRegistries;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.minecraft.core.RegistrySetBuilder;
@@ -42,8 +42,8 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
 	@Override
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {
 		registryBuilder.add(Registries.DAMAGE_TYPE, MubbleDamageTypeProvider::register);
-		registryBuilder.add(MubbleRegistryKeys.GOOMBA_VARIANT, MubbleGoombaVariantProvider::register);
-		registryBuilder.add(MubbleRegistryKeys.POWER_UP, MubblePowerUpProvider::register);
+		registryBuilder.add(MubbleRegistries.GOOMBA_VARIANT, MubbleGoombaVariantProvider::register);
+		registryBuilder.add(MubbleRegistries.POWER_UP, MubblePowerUpProvider::register);
 	}
 
 	@Override
