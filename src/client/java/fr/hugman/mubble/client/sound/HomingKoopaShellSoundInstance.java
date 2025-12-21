@@ -1,7 +1,7 @@
 package fr.hugman.mubble.client.sound;
 
 import fr.hugman.mubble.world.entity.projectile.KoopaShell;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;

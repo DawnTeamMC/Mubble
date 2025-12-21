@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.world.item.MubbleItems;
 import fr.hugman.mubble.world.level.block.entity.BumpableBlockEntity;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.world.level.block.entity.MubbleBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -75,20 +75,20 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level world, BlockState state, BlockEntityType<T> type) {
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return createTickerHelper(type, MubbleBlockEntityTypes.BUMPABLE_BLOCK, (w, p, s, e) -> e.tick(w, p, s));
     }
 
 	@Override
-    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!player.getItemInHand(hand).is(MubbleItems.MAKER_GLOVE)) {
             return InteractionResult.TRY_WITH_EMPTY_HAND;
         }
 
-        if (world.isClientSide()) {
+        if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
-        if (world.getBlockEntity(pos) instanceof BumpableBlockEntity bumpableEntity) {
+        if (level.getBlockEntity(pos) instanceof BumpableBlockEntity bumpableEntity) {
             player.openMenu(bumpableEntity);
             // TODO: add stat for inspecting bumpable blocks
             //player.incrementStat(MubbleStats.INSPECT_BUMPABLE);
@@ -97,17 +97,17 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     }
 
 	@Override
-	protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel world, BlockPos pos, boolean moved) {
-		var newState = world.getBlockState(pos);
+	protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean moved) {
+		var newState = level.getBlockState(pos);
 		if (state.is(newState.getBlock())) {
 			return;
 		}
-		BlockEntity blockEntity = world.getBlockEntity(pos);
+		BlockEntity blockEntity = level.getBlockEntity(pos);
 		if (blockEntity instanceof BumpableBlockEntity bumpable) {
-			Containers.dropContents(world, pos, bumpable);
-			world.updateNeighbourForOutputSignal(pos, this);
+			Containers.dropContents(level, pos, bumpable);
+			level.updateNeighbourForOutputSignal(pos, this);
 		}
-		super.affectNeighborsAfterRemoval(state, world, pos, moved);
+		super.affectNeighborsAfterRemoval(state, level, pos, moved);
 	}
 
     @Override
@@ -116,8 +116,8 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     }
 
 	@Override
-	protected int getAnalogOutputSignal(BlockState state, Level world, BlockPos pos, Direction direction) {
-		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(world.getBlockEntity(pos));
+	protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
+		return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
 	}
 
     /*=============*/
@@ -138,7 +138,7 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
      *
      * @return true if the block should be bumped, false otherwise
      */
-    public boolean canBump(Level world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity, Entity entity, BlockHitResult hit) {
+    public boolean canBump(Level level, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity, Entity entity, BlockHitResult hit) {
         // TODO: check if the block is locked (vanilla locks to players only)
         return !blockEntity.isBumping();
     }
@@ -146,10 +146,10 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     /**
      * Called when the block is getting bumped.
      */
-    public void onBumpStart(Level world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+    public void onBumpStart(Level level, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
         var bumpAuthor = blockEntity.getBumpAuthor();
         //TODO: change the game event to something more appropriate
-		world.gameEvent(bumpAuthor, GameEvent.BLOCK_ACTIVATE, pos);
+		level.gameEvent(bumpAuthor, GameEvent.BLOCK_ACTIVATE, pos);
         if (bumpAuthor instanceof Player player) {
             //TODO: create a new "Bumped Blocks" stat
             //player.incrementStat(MubbleStats.BUMPED_BLOCKS);
@@ -159,14 +159,14 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     /**
      * Called when a block is at the middle of being bumped.
      */
-    public void onBumpMiddle(Level world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
-        if (world != null && !world.isClientSide()) {
+    public void onBumpMiddle(Level level, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+        if (level != null && !level.isClientSide()) {
             if (blockEntity.shouldBreak()) {
                 Vec3 center = blockEntity.getBlockPos().getCenter();
 
-                this.loot(world, pos, blockEntity, true);
-                world.destroyBlock(blockEntity.getBlockPos(), false);
-                world.playSound(null, center.x(), center.y(), center.z(), MubbleSounds.BUMPABLE_BLOCK_DESTROY, SoundSource.BLOCKS, 1.0F, 1.0F);
+                this.loot(level, pos, blockEntity, true);
+                level.destroyBlock(blockEntity.getBlockPos(), false);
+                level.playSound(null, center.x(), center.y(), center.z(), MubbleSounds.BUMPABLE_BLOCK_DESTROY, SoundSource.BLOCKS, 1.0F, 1.0F);
             }
         }
     }
@@ -174,44 +174,44 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     /**
      * Called when a block finishes being bumped.
      */
-    public void onBumpEnd(Level world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
-        if (world != null && !world.isClientSide()) {
+    public void onBumpEnd(Level level, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+        if (level != null && !level.isClientSide()) {
             if (blockEntity.shouldBreak()) {
                 // this should never happen since it already happened in onBumpMiddle
-                this.loot(world, pos, blockEntity, true);
-                world.destroyBlock(blockEntity.getBlockPos(), false);
+                this.loot(level, pos, blockEntity, true);
+                level.destroyBlock(blockEntity.getBlockPos(), false);
                 return;
             }
             var newState = blockEntity.getBumpedState();
-            this.loot(world, pos, blockEntity, false);
+            this.loot(level, pos, blockEntity, false);
             if (newState != null && blockEntity.isEmpty()) {
-                world.setBlockAndUpdate(pos, newState);
+                level.setBlockAndUpdate(pos, newState);
             }
         }
     }
 
 
     @Override
-    public void onHit(Level world, BlockState state, Entity entity, BlockHitResult hit) {
-        if (world.isClientSide()) {
+    public void onHit(Level level, BlockState state, Entity entity, BlockHitResult hit) {
+        if (level.isClientSide()) {
             return;
         }
 
         BlockPos pos = hit.getBlockPos();
-        world.getBlockEntity(pos, MubbleBlockEntityTypes.BUMPABLE_BLOCK).ifPresent(blockEntity -> {
-            if (this.canBump(world, pos, state, blockEntity, entity, hit)) {
+        level.getBlockEntity(pos, MubbleBlockEntityTypes.BUMPABLE_BLOCK).ifPresent(blockEntity -> {
+            if (this.canBump(level, pos, state, blockEntity, entity, hit)) {
                 blockEntity.bump(pos, entity, hit.getDirection().getOpposite());
-				onBumpStart(world, pos, state, blockEntity);
+				onBumpStart(level, pos, state, blockEntity);
             }
         });
     }
 
     @Override
-    public void onProjectileHit(Level world, BlockState state, BlockHitResult hit, Projectile projectile) {
-        this.onHit(world, state, projectile, hit);
+    public void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
+        this.onHit(level, state, projectile, hit);
     }
 
-    public void loot(Level world, BlockPos pos, BumpableBlockEntity blockEntity, boolean atCenter) {
+    public void loot(Level level, BlockPos pos, BumpableBlockEntity blockEntity, boolean atCenter) {
         if (blockEntity.isEmpty()) {
             return;
         }
@@ -219,49 +219,49 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
         BumpableDropMode dropMode = blockEntity.getDropMode();
         if (atCenter) {
             switch (dropMode) {
-                case ALL -> spawnItems(world, center, null, blockEntity);
-                case ONE -> spawnItem(world, center, null, blockEntity.getItem(0).split(1));
+                case ALL -> spawnItems(level, center, null, blockEntity);
+                case ONE -> spawnItem(level, center, null, blockEntity.getItem(0).split(1));
             }
         } else {
             var direction = blockEntity.getBumpDirection();
             switch (dropMode) {
-                case ALL -> spawnItems(world, center, direction, blockEntity);
-                case ONE -> spawnItem(world, center, direction, blockEntity.getItem(0).split(1));
+                case ALL -> spawnItems(level, center, direction, blockEntity);
+                case ONE -> spawnItem(level, center, direction, blockEntity.getItem(0).split(1));
             }
         }
-        world.playSound(null, center.x(), center.y(), center.z(), MubbleSounds.BUMPABLE_BLOCK_LOOT, SoundSource.BLOCKS, 1.0F, 1.0F);
+        level.playSound(null, center.x(), center.y(), center.z(), MubbleSounds.BUMPABLE_BLOCK_LOOT, SoundSource.BLOCKS, 1.0F, 1.0F);
         if (blockEntity.getContainerSize() <= 0) {
             blockEntity.clearContent();
         }
     }
 
-    private static void spawnItems(Level world, Vec3 pos, @Nullable Direction direction, Container inventory) {
+    private static void spawnItems(Level level, Vec3 pos, @Nullable Direction direction, Container inventory) {
         for (int i = 0; i < inventory.getContainerSize(); ++i) {
-            spawnItem(world, pos, direction, inventory.getItem(i));
+            spawnItem(level, pos, direction, inventory.getItem(i));
         }
     }
 
-    private static void spawnItem(Level world, Vec3 pos, @Nullable Direction direction, ItemStack stack) {
+    private static void spawnItem(Level level, Vec3 pos, @Nullable Direction direction, ItemStack stack) {
         pos = pos.relative(direction, 0.75D);
 
         double entityWidth = EntityType.ITEM.getWidth();
         double e = 1.0 - entityWidth;
         double f = entityWidth / 2.0;
 
-        double x = Math.floor(pos.x()) + world.getRandom().nextDouble() * e + f;
-        double y = Math.floor(pos.y()) + world.getRandom().nextDouble() * (1.0 - EntityType.ITEM.getHeight());
-        double z = Math.floor(pos.z()) + world.getRandom().nextDouble() * e + f;
+        double x = Math.floor(pos.x()) + level.getRandom().nextDouble() * e + f;
+        double y = Math.floor(pos.y()) + level.getRandom().nextDouble() * (1.0 - EntityType.ITEM.getHeight());
+        double z = Math.floor(pos.z()) + level.getRandom().nextDouble() * e + f;
 
         while (!stack.isEmpty()) {
-            ItemEntity itemEntity = new ItemEntity(world, x, y, z, stack.split(1));
+            ItemEntity itemEntity = new ItemEntity(level, x, y, z, stack.split(1));
             float i = 0.2f;
             float j = 0.11485000171139836f;
             itemEntity.setDeltaMovement(
-                    (i * (direction == null ? 0 : direction.getStepX())) + world.getRandom().triangle(0.0, j),
-                    (i * (direction == null ? 0 : direction.getStepY())) + world.getRandom().triangle(0.0, j),
-                    (i * (direction == null ? 0 : direction.getStepZ())) + world.getRandom().triangle(0.0, j)
+                    (i * (direction == null ? 0 : direction.getStepX())) + level.getRandom().triangle(0.0, j),
+                    (i * (direction == null ? 0 : direction.getStepY())) + level.getRandom().triangle(0.0, j),
+                    (i * (direction == null ? 0 : direction.getStepZ())) + level.getRandom().triangle(0.0, j)
             );
-            world.addFreshEntity(itemEntity);
+            level.addFreshEntity(itemEntity);
         }
     }
 }

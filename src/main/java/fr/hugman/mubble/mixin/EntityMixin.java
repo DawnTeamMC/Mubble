@@ -3,7 +3,7 @@ package fr.hugman.mubble.mixin;
 import fr.hugman.mubble.power_up.PowerUpHolder;
 import fr.hugman.mubble.tags.MubbleEntityTypeTags;
 import fr.hugman.mubble.world.entity.Stompable;
-import fr.hugman.mubble.world.entity.damage.MubbleDamageTypes;
+import fr.hugman.mubble.references.MubbleDamageTypeKeys;
 import fr.hugman.mubble.world.level.block.HittableBlock;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -37,16 +37,16 @@ public class EntityMixin implements Stompable {
     @Inject(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;setPos(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 0))
     private void mubble$move(MoverType type, Vec3 movement, CallbackInfo ci) {
         Entity this_ = (Entity) (Object) this;
-        Level world = this_.level();
+        Level level = this_.level();
         Vec3 vec3d = this.collide(movement);
         if (vec3d != null && vec3d.y() > 0) {
             Vec3 headPos = this_.position().add(0, this_.getBbHeight(), 0);
-            BlockHitResult hit = world.clip(new ClipContext(headPos, headPos.add(vec3d).add(0, HittableBlock.HIT_Y_OFFSET, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this_));
+            BlockHitResult hit = level.clip(new ClipContext(headPos, headPos.add(vec3d).add(0, HittableBlock.HIT_Y_OFFSET, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this_));
             if (hit.getType() == HitResult.Type.BLOCK && hit.getDirection() == Direction.DOWN) {
                 BlockPos blockPos = hit.getBlockPos();
-                BlockState state = world.getBlockState(blockPos);
+                BlockState state = level.getBlockState(blockPos);
                 if (state.getBlock() instanceof HittableBlock hittableBlock) {
-                    hittableBlock.onHit(world, state, this_, hit);
+                    hittableBlock.onHit(level, state, this_, hit);
                 }
             }
         }
@@ -109,9 +109,9 @@ public class EntityMixin implements Stompable {
     public void onStompedBy(List<Entity> entities) {
         var this_ = ((Entity) (Object) this);
         //TODO: display particles!
-        if (this_.level() instanceof ServerLevel serverWorld) {
+        if (this_.level() instanceof ServerLevel serverLevel) {
             //TODO: calculate damage using boots?
-            this_.hurtServer(serverWorld, this_.damageSources().source(MubbleDamageTypes.STOMP, entities.getFirst()), 2.0F);
+            this_.hurtServer(serverLevel, this_.damageSources().source(MubbleDamageTypeKeys.STOMP, entities.getFirst()), 2.0F);
             for (Entity entity : entities) {
                 entity.setDeltaMovement(entity.getDeltaMovement().x, 0.5D, entity.getDeltaMovement().z);
                 if (entity instanceof Player player) {

@@ -1,11 +1,11 @@
 package fr.hugman.mubble.data;
 
-import fr.hugman.mubble.references.PowerUps;
+import fr.hugman.mubble.references.PowerUpsKeys;
 import fr.hugman.mubble.power_up.PowerUp;
 import java.util.List;
 import java.util.function.Consumer;
 
-import fr.hugman.mubble.world.item.MubbleItemKeys;
+import fr.hugman.mubble.references.MubbleItemsKeys;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
@@ -13,10 +13,10 @@ public class PowerUpItems {
     public record Entry(ResourceKey<Item> item, ResourceKey<PowerUp> powerUp) { }
 
     public static final List<Entry> ENTRIES = List.of(
-            new Entry(MubbleItemKeys.MINI_MUSHROOM, PowerUps.MINI),
-            new Entry(MubbleItemKeys.MEGA_MUSHROOM, PowerUps.MEGA),
-            new Entry(MubbleItemKeys.FIRE_FLOWER, PowerUps.FIRE),
-            new Entry(MubbleItemKeys.ICE_FLOWER, PowerUps.ICE)
+            new Entry(MubbleItemsKeys.MINI_MUSHROOM, PowerUpsKeys.MINI),
+            new Entry(MubbleItemsKeys.MEGA_MUSHROOM, PowerUpsKeys.MEGA),
+            new Entry(MubbleItemsKeys.FIRE_FLOWER, PowerUpsKeys.FIRE),
+            new Entry(MubbleItemsKeys.ICE_FLOWER, PowerUpsKeys.ICE)
     );
 
     public static ResourceKey<Item> getItem(ResourceKey<PowerUp> powerUp) {

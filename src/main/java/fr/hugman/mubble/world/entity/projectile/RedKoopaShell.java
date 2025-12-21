@@ -27,17 +27,17 @@ public class RedKoopaShell extends KoopaShell {
 
     private LivingEntity target;
 
-    public RedKoopaShell(EntityType<? extends RedKoopaShell> entityType, Level world) {
-        super(entityType, world, 1);
+    public RedKoopaShell(EntityType<? extends RedKoopaShell> entityType, Level level) {
+        super(entityType, level, 1);
     }
 
-    public RedKoopaShell(Level world, double x, double y, double z) {
-        this(MubbleEntityTypes.RED_KOOPA_SHELL, world);
+    public RedKoopaShell(Level level, double x, double y, double z) {
+        this(MubbleEntityTypes.RED_KOOPA_SHELL, level);
         this.setPos(x, y, z);
     }
 
-    public RedKoopaShell(Level world, LivingEntity owner) {
-        this(world, owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
+    public RedKoopaShell(Level level, LivingEntity owner) {
+        this(level, owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
         this.setOwner(owner);
     }
 
@@ -86,9 +86,9 @@ public class RedKoopaShell extends KoopaShell {
 
     private void searchTarget() {
         var world = this.level();
-        if (world instanceof ServerLevel serverWorld && this.getOwner() instanceof LivingEntity livingOwner) {
+        if (world instanceof ServerLevel serverLevel && this.getOwner() instanceof LivingEntity livingOwner) {
             if (this.target == null || this.target.distanceToSqr(this) > MAX_TARGET_DISTANCE_SQUARE) {
-                this.target = serverWorld.getNearestEntity(
+                this.target = serverLevel.getNearestEntity(
                         this.level().getEntitiesOfClass(LivingEntity.class, this.getSearchBox(MAX_TARGET_DISTANCE), livingEntity -> true),
                         TARGET_PREDICATE,
                         livingOwner,

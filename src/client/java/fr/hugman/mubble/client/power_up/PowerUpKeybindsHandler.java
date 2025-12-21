@@ -1,7 +1,7 @@
 package fr.hugman.mubble.client.power_up;
 
 import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
-import fr.hugman.mubble.network.payload.c2s.PowerUpTriggerPayload;
+import fr.hugman.mubble.network.protocol.common.custom.PowerUpTriggerPayload;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionResult;

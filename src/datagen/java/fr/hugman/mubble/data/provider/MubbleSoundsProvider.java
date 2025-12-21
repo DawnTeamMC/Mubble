@@ -1,6 +1,6 @@
 package fr.hugman.mubble.data.provider;
 
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import net.fabricmc.fabric.api.client.datagen.v1.builder.SoundTypeBuilder;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricSoundsProvider;
 import net.minecraft.core.Holder;

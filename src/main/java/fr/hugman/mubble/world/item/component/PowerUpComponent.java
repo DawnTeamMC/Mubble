@@ -1,7 +1,7 @@
 package fr.hugman.mubble.world.item.component;
 
 import com.mojang.serialization.Codec;
-import fr.hugman.mubble.attribute.EntityAttributeEntry;
+import fr.hugman.mubble.world.entity.ai.attributes.EntityAttributeEntry;
 import fr.hugman.mubble.power_up.PowerUp;
 import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;

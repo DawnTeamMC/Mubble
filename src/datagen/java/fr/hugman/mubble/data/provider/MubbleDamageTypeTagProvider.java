@@ -1,7 +1,7 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.tags.MubbleDamageTypeTags;
-import fr.hugman.mubble.world.entity.damage.MubbleDamageTypes;
+import fr.hugman.mubble.references.MubbleDamageTypeKeys;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.core.HolderLookup;
@@ -25,10 +25,10 @@ public class MubbleDamageTypeTagProvider extends FabricTagProvider<DamageType> {
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
         this.builder(DamageTypeTags.IS_PROJECTILE)
-                .add(MubbleDamageTypes.KOOPA_SHELL);
+                .add(MubbleDamageTypeKeys.KOOPA_SHELL);
 
         this.builder(MubbleDamageTypeTags.INSTANT_KILLS_GOOMBAS)
-                .add(MubbleDamageTypes.STOMP)
-                .add(MubbleDamageTypes.KOOPA_SHELL);
+                .add(MubbleDamageTypeKeys.STOMP)
+                .add(MubbleDamageTypeKeys.KOOPA_SHELL);
 	}
 }

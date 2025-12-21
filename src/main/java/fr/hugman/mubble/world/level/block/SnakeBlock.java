@@ -16,7 +16,7 @@ public class SnakeBlock extends Block {
     }
 
     @Override
-    public void stepOn(Level world, BlockPos pos, BlockState state, Entity entity) {
-        super.stepOn(world, pos, state, entity);
+    public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
+        super.stepOn(level, pos, state, entity);
     }
 }

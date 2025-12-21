@@ -21,27 +21,27 @@ import net.minecraft.world.level.Level;
 abstract public class SuperMarioEnemy extends Monster {
     protected static final EntityDataAccessor<Boolean> STOMPED = SynchedEntityData.defineId(SuperMarioEnemy.class, EntityDataSerializers.BOOLEAN);
 
-    protected SuperMarioEnemy(EntityType<? extends Monster> entityType, Level world) {
-        super(entityType, world);
+    protected SuperMarioEnemy(EntityType<? extends Monster> type, Level level) {
+        super(type, level);
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(STOMPED, false);
+    protected void defineSynchedData(SynchedEntityData.Builder entityData) {
+        super.defineSynchedData(entityData);
+        entityData.define(STOMPED, false);
     }
 
     @Override
-    public void die(DamageSource damageSource) {
-        super.die(damageSource);
+    public void die(DamageSource source) {
+        super.die(source);
         if (this.isStomped()) {
             this.getStompDeathAnimationState().startIfStopped(this.tickCount);
         }
     }
 
     @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
-        if (STOMPED.equals(data)) {
+    public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
+        if (STOMPED.equals(accessor)) {
             if (this.isStomped() && this.dead) {
                 this.getStompDeathAnimationState().startIfStopped(this.tickCount);
             }

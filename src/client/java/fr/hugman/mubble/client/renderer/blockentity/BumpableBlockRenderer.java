@@ -89,13 +89,13 @@ public class BumpableBlockRenderer implements BlockEntityRenderer<BumpableBlockE
         matrices.translate(-x2, -y2, -z2);
     }
 
-	private static MovingBlockRenderState renderModel(BlockPos pos, BlockState state, Holder<Biome> biome, Level world) {
+	private static MovingBlockRenderState renderModel(BlockPos pos, BlockState state, Holder<Biome> biome, Level level) {
 		MovingBlockRenderState movingBlockRenderState = new MovingBlockRenderState();
 		movingBlockRenderState.randomSeedPos = pos;
 		movingBlockRenderState.blockPos = pos;
 		movingBlockRenderState.blockState = state;
 		movingBlockRenderState.biome = biome;
-		movingBlockRenderState.level = world;
+		movingBlockRenderState.level = level;
 		return movingBlockRenderState;
 	}
 }

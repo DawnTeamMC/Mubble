@@ -86,7 +86,7 @@ public class AABBUtil {
     }
 
     /**
-     * Collects potential block collisions in the world for the given origin box.
+     * Collects potential block collisions in the level for the given origin box.
      * <p>
      * This method iterates over all block positions within the bounds of
      * the origin box and retrieves the collision shapes for each block
@@ -95,12 +95,12 @@ public class AABBUtil {
      * @param originBox the box to check for potential collisions
      * @return a list of {@link AABB} objects representing the potential collisions
      */
-    public static List<AABB> collectPotentialBlockCollisions(Level world, AABB originBox) {
+    public static List<AABB> collectPotentialBlockCollisions(Level level, AABB originBox) {
         Iterable<BlockPos> iterable = BlockPos.betweenClosed(originBox);
         List<AABB> boundingBoxes = new ArrayList<>();
         for (BlockPos pos : iterable) {
             // Collect bounding boxes from collision shapes directly
-            boundingBoxes.addAll(world.getBlockState(pos).getCollisionShape(world, pos)
+            boundingBoxes.addAll(level.getBlockState(pos).getCollisionShape(level, pos)
                     .move(Vec3.atLowerCornerOf(pos)).toAabbs());
         }
         return boundingBoxes;

@@ -20,18 +20,18 @@ public class PowerUpItem extends Item {
     }
 
     @Override
-    public InteractionResult use(Level world, Player user, InteractionHand hand) {
+    public InteractionResult use(Level level, Player user, InteractionHand hand) {
         ItemStack stack = user.getItemInHand(hand);
         Consumable consumableComponent = stack.get(DataComponents.CONSUMABLE);
         if (null != consumableComponent) {
-            return super.use(world, user, hand);
+            return super.use(level, user, hand);
         }
         PowerUpComponent powerUpComponent = stack.get(MubbleDataComponents.POWER_UP);
         if (null != powerUpComponent) {
             user.startUsingItem(hand);
-            var opt = powerUpComponent.powerUp().unwrap(world.registryAccess());
+            var opt = powerUpComponent.powerUp().unwrap(level.registryAccess());
             if (opt.isPresent() && PowerUp.canChange(user, opt.get())) {
-                if (world instanceof ServerLevel) {
+                if (level instanceof ServerLevel) {
                     user.setPowerUp(opt.get());
                 }
                 user.awardStat(Stats.ITEM_USED.get(this));

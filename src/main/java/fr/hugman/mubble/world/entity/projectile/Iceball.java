@@ -1,11 +1,11 @@
 package fr.hugman.mubble.world.entity.projectile;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.world.attribute.BlockTransform;
 import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributes;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
-import fr.hugman.mubble.world.entity.damage.MubbleDamageTypes;
+import fr.hugman.mubble.references.MubbleDamageTypeKeys;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.ClientAsset;
 import net.minecraft.core.Direction;
@@ -30,16 +30,16 @@ import net.minecraft.world.phys.Vec3;
 public class Iceball extends Ball {
     private static final ClientAsset.ResourceTexture TEXTURE = new ClientAsset.ResourceTexture(Mubble.id("entity/iceball"));
 
-    public Iceball(EntityType<? extends Iceball> type, Level world) {
-        super(type, world);
+    public Iceball(EntityType<? extends Iceball> type, Level level) {
+        super(type, level);
     }
 
-    public Iceball(Level world, LivingEntity owner) {
-        super(MubbleEntityTypes.ICEBALL, world, owner);
+    public Iceball(Level level, LivingEntity owner) {
+        super(MubbleEntityTypes.ICEBALL, level, owner);
     }
 
-    public Iceball(double x, double y, double z, Level world) {
-        super(MubbleEntityTypes.ICEBALL, x, y, z, world);
+    public Iceball(double x, double y, double z, Level level) {
+        super(MubbleEntityTypes.ICEBALL, x, y, z, level);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Iceball extends Ball {
         }
 
         this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.ICEBALL_HIT_ENTITY, SoundSource.NEUTRAL, 0.5F, 1.0F);
-        entity.hurt(this.damageSources().source(MubbleDamageTypes.ICEBALL, this, this.getOwner()), damage);
+        entity.hurt(this.damageSources().source(MubbleDamageTypeKeys.ICEBALL, this, this.getOwner()), damage);
         this.finalHit();
     }
 

@@ -74,8 +74,8 @@ public final class PowerUpProperties {
     /**
      * Refreshes the projectiles list by removing invalid projectiles.
      */
-    public void removeInvalidProjectiles(Level world) {
-        if (this.projectiles.removeIf(uuid -> world.getEntity(uuid) == null)) {
+    public void removeInvalidProjectiles(Level level) {
+        if (this.projectiles.removeIf(uuid -> level.getEntity(uuid) == null)) {
             this.dirty = true;
         }
     }

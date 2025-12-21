@@ -1,7 +1,7 @@
 package fr.hugman.mubble.power_up;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.attribute.EntityAttributeEntry;
+import fr.hugman.mubble.world.entity.ai.attributes.EntityAttributeEntry;
 import fr.hugman.mubble.power_up.action.PowerUpAction;
 import java.util.ArrayList;
 import java.util.List;

@@ -258,14 +258,14 @@ public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
 		this.setChanged();
     }
 
-    public void tick(Level world, BlockPos pos, BlockState state) {
+    public void tick(Level level, BlockPos pos, BlockState state) {
 		if(this.bumping && this.bumpTicks < BUMP_LENGTH) {
 			this.bumpTicks++;
 		}
 
 		if (this.bumpTicks == BUMP_MIDDLE_TICK) {
 			if (state.getBlock() instanceof BumpableBlock bumpable) {
-				bumpable.onBumpMiddle(world, pos, state, this);
+				bumpable.onBumpMiddle(level, pos, state, this);
 			}
 		}
 
@@ -275,7 +275,7 @@ public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
 				this.bumpTicks = 0;
 				this.setBumpAuthor(null);
 				this.setChanged();
-				bumpable.onBumpEnd(world, pos, state, this);
+				bumpable.onBumpEnd(level, pos, state, this);
 			}
 		}
     }

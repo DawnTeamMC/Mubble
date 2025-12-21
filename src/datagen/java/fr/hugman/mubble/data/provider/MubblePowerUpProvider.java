@@ -4,7 +4,7 @@ import fr.hugman.mubble.power_up.PowerUpBuilder;
 import fr.hugman.mubble.power_up.PowerUp;
 import fr.hugman.mubble.power_up.action.ShootProjectilePowerUpAction;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
@@ -15,7 +15,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-import static fr.hugman.mubble.references.PowerUps.*;
+import static fr.hugman.mubble.references.PowerUpsKeys.*;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.*;
 
 public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
@@ -33,8 +33,8 @@ public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
         return "Power-Ups";
     }
 
-    public static void register(BootstrapContext<PowerUp> registerable) {
-        registerable.register(MINI, new PowerUpBuilder()
+    public static void bootstrap(BootstrapContext<PowerUp> context) {
+        context.register(MINI, new PowerUpBuilder()
                 .name(MINI)
                 .obtainSound(MubbleSounds.POWER_UP_OBTAIN_MINI)
                 .canSprintOnWater(true)
@@ -51,7 +51,7 @@ public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
                 .attributesModifier(Attributes.BLOCK_INTERACTION_RANGE, -0.4, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.ENTITY_INTERACTION_RANGE, -0.4, ADD_MULTIPLIED_BASE)
                 .build());
-        registerable.register(MEGA, new PowerUpBuilder()
+        context.register(MEGA, new PowerUpBuilder()
                 .name(MEGA)
                 .attributesModifier(Attributes.SCALE, 2, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.GRAVITY, 0.5, ADD_MULTIPLIED_BASE)
@@ -67,7 +67,7 @@ public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
                 .attributesModifier(Attributes.BLOCK_INTERACTION_RANGE, 1.2, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.ENTITY_INTERACTION_RANGE, 1.2, ADD_MULTIPLIED_BASE)
                 .build());
-        registerable.register(FIRE, new PowerUpBuilder()
+        context.register(FIRE, new PowerUpBuilder()
                 .name(FIRE)
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         MubbleEntityTypes.FIREBALL,
@@ -77,7 +77,7 @@ public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.empty()
                 )))
                 .build());
-        registerable.register(ICE, new PowerUpBuilder()
+        context.register(ICE, new PowerUpBuilder()
                 .name(ICE)
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         MubbleEntityTypes.ICEBALL,

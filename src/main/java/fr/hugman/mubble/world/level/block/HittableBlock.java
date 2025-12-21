@@ -20,5 +20,5 @@ import net.minecraft.world.phys.BlockHitResult;
 public interface HittableBlock {
     double HIT_Y_OFFSET = 0.001;
 
-    void onHit(Level world, BlockState state, Entity entity, BlockHitResult hit);
+    void onHit(Level level, BlockState state, Entity entity, BlockHitResult hit);
 }

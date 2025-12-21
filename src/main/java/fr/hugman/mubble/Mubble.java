@@ -1,18 +1,18 @@
 package fr.hugman.mubble;
 
 import com.google.common.reflect.Reflection;
-import fr.hugman.mubble.command.MubbleCommands;
+import fr.hugman.mubble.commands.MubbleCommands;
 import fr.hugman.mubble.core.component.MubbleDataComponents;
-import fr.hugman.mubble.item_group.MubbleCreativeModeTabs;
-import fr.hugman.mubble.network.MubbleServerReceivers;
-import fr.hugman.mubble.network.payload.MubblePayloads;
+import fr.hugman.mubble.world.item.MubbleCreativeModeTabs;
+import fr.hugman.mubble.network.protocol.MubbleServerReceivers;
+import fr.hugman.mubble.network.protocol.common.custom.MubblePayloadTypes;
 import fr.hugman.mubble.power_up.action.PowerUpActionTypes;
 import fr.hugman.mubble.core.registries.MubbleBuiltInRegistries;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import fr.hugman.mubble.world.inventory.MubbleMenuTypes;
 import fr.hugman.mubble.world.item.MubbleItems;
-import fr.hugman.mubble.world.item.consume.MubbleConsumeEffectTypes;
+import fr.hugman.mubble.world.item.consume_effects.MubbleConsumeEffectTypes;
 import fr.hugman.mubble.world.level.biome.MubbleBiomeModifications;
 import fr.hugman.mubble.world.level.block.MubbleBlocks;
 import fr.hugman.mubble.world.level.block.entity.MubbleBlockEntityTypes;
@@ -48,7 +48,7 @@ public class Mubble implements ModInitializer {
 
         MubbleBuiltInRegistries.register();
 
-        MubblePayloads.registerTypes();
+        MubblePayloadTypes.registerTypes();
         MubbleServerReceivers.register();
         MubbleCommands.register();
 

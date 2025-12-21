@@ -1,9 +1,9 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.references.MubbleCreativeModeTabs;
+import fr.hugman.mubble.references.MubbleCreativeModeTabsKeys;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.Holder;
@@ -28,7 +28,7 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 
 	@Override
 	public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
-		builder.add(Util.makeDescriptionId("item_group", MubbleCreativeModeTabs.YOSHI_ISLAND.identifier()), "Yoshi's Island");
+		builder.add(Util.makeDescriptionId("item_group", MubbleCreativeModeTabsKeys.YOSHI_ISLAND.identifier()), "Yoshi's Island");
 
 		this.generateAutomaticTranslations(wrapperLookup, builder);
 

@@ -1,11 +1,11 @@
 package fr.hugman.mubble.world.entity.projectile;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.world.attribute.BlockTransform;
 import fr.hugman.mubble.world.attribute.MubbleEnvironmentAttributes;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
-import fr.hugman.mubble.world.entity.damage.MubbleDamageTypes;
+import fr.hugman.mubble.references.MubbleDamageTypeKeys;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.ClientAsset;
@@ -33,16 +33,16 @@ import net.minecraft.world.phys.Vec3;
 public class Fireball extends Ball {
     private static final ClientAsset.ResourceTexture TEXTURE = new ClientAsset.ResourceTexture(Mubble.id("entity/fireball"));
 
-    public Fireball(EntityType<? extends Fireball> type, Level world) {
-        super(type, world);
+    public Fireball(EntityType<? extends Fireball> type, Level level) {
+        super(type, level);
     }
 
-    public Fireball(Level world, LivingEntity owner) {
-        super(MubbleEntityTypes.FIREBALL, world, owner);
+    public Fireball(Level level, LivingEntity owner) {
+        super(MubbleEntityTypes.FIREBALL, level, owner);
     }
 
-    public Fireball(double x, double y, double z, Level world) {
-        super(MubbleEntityTypes.FIREBALL, x, y, z, world);
+    public Fireball(double x, double y, double z, Level level) {
+        super(MubbleEntityTypes.FIREBALL, x, y, z, level);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class Fireball extends Ball {
             entity.igniteForSeconds(5);
         }
         this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_ENTITY, SoundSource.NEUTRAL, 0.5F, 1.0F);
-        entity.hurt(this.damageSources().source(MubbleDamageTypes.FIREBALL, this, this.getOwner()), damage);
+        entity.hurt(this.damageSources().source(MubbleDamageTypeKeys.FIREBALL, this, this.getOwner()), damage);
         this.finalHit();
     }
 

@@ -1,6 +1,6 @@
 package fr.hugman.mubble.world.level.block;
 
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -18,10 +18,10 @@ public class EmptyBlock extends Block implements HittableBlock {
     }
 
     @Override
-    public void onHit(Level world, BlockState state, Entity entity, BlockHitResult hit) {
+    public void onHit(Level level, BlockState state, Entity entity, BlockHitResult hit) {
         var pos = hit.getLocation();
-        if (world != null) {
-            world.playSound(null, pos.x(), pos.y(), pos.z(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundSource.BLOCKS, 1.0F, 1.0F);
+        if (level != null) {
+            level.playSound(null, pos.x(), pos.y(), pos.z(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
     }
 }

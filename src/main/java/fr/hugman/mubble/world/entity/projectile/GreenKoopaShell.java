@@ -1,7 +1,7 @@
 package fr.hugman.mubble.world.entity.projectile;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import java.util.List;
 
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
@@ -18,17 +18,17 @@ import net.minecraft.world.phys.Vec3;
 public class GreenKoopaShell extends KoopaShell {
     private static final Identifier TEXTURE = Mubble.id("textures/entity/green_koopa_shell.png");
 
-    public GreenKoopaShell(EntityType<? extends GreenKoopaShell> entityType, Level world) {
-        super(entityType, world, 5);
+    public GreenKoopaShell(EntityType<? extends GreenKoopaShell> entityType, Level level) {
+        super(entityType, level, 5);
     }
 
-    public GreenKoopaShell(Level world, double x, double y, double z) {
-        this(MubbleEntityTypes.GREEN_KOOPA_SHELL, world);
+    public GreenKoopaShell(Level level, double x, double y, double z) {
+        this(MubbleEntityTypes.GREEN_KOOPA_SHELL, level);
         this.setPos(x, y, z);
     }
 
-    public GreenKoopaShell(Level world, LivingEntity owner) {
-        this(world, owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
+    public GreenKoopaShell(Level level, LivingEntity owner) {
+        this(level, owner.getX(), owner.getEyeY() - 0.1F, owner.getZ());
         this.setOwner(owner);
     }
 

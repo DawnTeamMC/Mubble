@@ -2,10 +2,11 @@ package fr.hugman.mubble.world.entity.monster.goomba;
 
 import com.mojang.serialization.MapCodec;
 import fr.hugman.mubble.core.component.MubbleDataComponents;
+import fr.hugman.mubble.references.GoombaVariantKeys;
 import fr.hugman.mubble.tags.MubbleDamageTypeTags;
 import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.world.entity.Stunnable;
 import fr.hugman.mubble.world.entity.Surprisable;
 import fr.hugman.mubble.world.entity.ai.control.StunnableMoveControl;
@@ -63,8 +64,8 @@ public class Goomba extends SuperMarioEnemy implements Surprisable, Stunnable {
     public final AnimationState surprisedAnimationState = new AnimationState();
     public final AnimationState crushAnimationState = new AnimationState();
 
-    public Goomba(EntityType<? extends Goomba> entityType, Level world) {
-        super(entityType, world);
+    public Goomba(EntityType<? extends Goomba> type, Level level) {
+        super(type, level);
         this.moveControl = new StunnableMoveControl(this);
     }
 
@@ -127,8 +128,8 @@ public class Goomba extends SuperMarioEnemy implements Surprisable, Stunnable {
     }
 
     @Override
-    public boolean hurtServer(ServerLevel world, DamageSource source, float amount) {
-        return super.hurtServer(world, source, source.is(MubbleDamageTypeTags.INSTANT_KILLS_GOOMBAS) ? Float.MAX_VALUE : amount);
+    public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
+        return super.hurtServer(level, source, source.is(MubbleDamageTypeTags.INSTANT_KILLS_GOOMBAS) ? Float.MAX_VALUE : amount);
     }
 
     // SOUNDS
@@ -157,16 +158,16 @@ public class Goomba extends SuperMarioEnemy implements Surprisable, Stunnable {
     // DATA TRACKER
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        super.defineSynchedData(builder);
-        builder.define(GOOMBA_FLAGS, (byte) 0);
-        builder.define(SURPRISE_PROGRESS, 0);
-        builder.define(VARIANT, this.registryAccess().lookupOrThrow(MubbleRegistries.GOOMBA_VARIANT).getOrThrow(GoombaVariants.NORMAL));
+    protected void defineSynchedData(SynchedEntityData.Builder entityData) {
+        super.defineSynchedData(entityData);
+        entityData.define(GOOMBA_FLAGS, (byte) 0);
+        entityData.define(SURPRISE_PROGRESS, 0);
+        entityData.define(VARIANT, this.registryAccess().lookupOrThrow(MubbleRegistries.GOOMBA_VARIANT).getOrThrow(GoombaVariantKeys.NORMAL));
     }
 
     @Override
-    public void onSyncedDataUpdated(EntityDataAccessor<?> data) {
-        if (SURPRISE_PROGRESS.equals(data)) {
+    public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
+        if (SURPRISE_PROGRESS.equals(accessor)) {
             if (this.getSurpriseProgress() == 1) {
                 this.surprisedAnimationState.start(this.tickCount);
             }
@@ -174,7 +175,7 @@ public class Goomba extends SuperMarioEnemy implements Surprisable, Stunnable {
             this.yBodyRot = this.yHeadRot;
             this.yBodyRotO = this.yBodyRot;
         }
-        super.onSyncedDataUpdated(data);
+        super.onSyncedDataUpdated(accessor);
     }
 
     public void setVariant(Holder<GoombaVariant> variant) {
@@ -223,15 +224,15 @@ public class Goomba extends SuperMarioEnemy implements Surprisable, Stunnable {
     // NBT DATA
 
 	@Override
-	protected void addAdditionalSaveData(ValueOutput view) {
-		super.addAdditionalSaveData(view);
-		VariantUtils.writeVariant(view, this.getVariant());
+	protected void addAdditionalSaveData(ValueOutput output) {
+		super.addAdditionalSaveData(output);
+		VariantUtils.writeVariant(output, this.getVariant());
 	}
 
 	@Override
-	protected void readAdditionalSaveData(ValueInput view) {
-		super.readAdditionalSaveData(view);
-		VariantUtils.readVariant(view, MubbleRegistries.GOOMBA_VARIANT).ifPresent(this::setVariant);
+	protected void readAdditionalSaveData(ValueInput input) {
+		super.readAdditionalSaveData(input);
+		VariantUtils.readVariant(input, MubbleRegistries.GOOMBA_VARIANT).ifPresent(this::setVariant);
 	}
 
     // TEXTURE
@@ -250,9 +251,9 @@ public class Goomba extends SuperMarioEnemy implements Surprisable, Stunnable {
 	}
 
 	@Override
-	protected void applyImplicitComponents(DataComponentGetter from) {
-		this.applyImplicitComponentIfPresent(from, MubbleDataComponents.GOOMBA_VARIANT);
-		super.applyImplicitComponents(from);
+	protected void applyImplicitComponents(DataComponentGetter components) {
+		this.applyImplicitComponentIfPresent(components, MubbleDataComponents.GOOMBA_VARIANT);
+		super.applyImplicitComponents(components);
 	}
 
 	@Override

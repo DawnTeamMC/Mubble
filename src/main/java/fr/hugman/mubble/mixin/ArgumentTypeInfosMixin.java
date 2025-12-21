@@ -1,7 +1,7 @@
 package fr.hugman.mubble.mixin;
 
 import com.mojang.brigadier.arguments.ArgumentType;
-import fr.hugman.mubble.command.argument.PowerUpArgumentType;
+import fr.hugman.mubble.commands.argument.PowerUpArgumentType;
 import net.minecraft.commands.synchronization.ArgumentTypeInfo;
 import net.minecraft.commands.synchronization.ArgumentTypeInfos;
 import net.minecraft.commands.synchronization.SingletonArgumentInfo;

@@ -22,17 +22,17 @@ public abstract class Ball extends ThrowableProjectile {
 	public static final String REBOUNDS_KEY = "rebounds";
     protected int rebounds = 3;
 
-    protected Ball(EntityType<? extends Ball> type, Level world) {
-        super(type, world);
+    protected Ball(EntityType<? extends Ball> type, Level level) {
+        super(type, level);
     }
 
-    protected Ball(EntityType<? extends Ball> type, Level world, LivingEntity owner) {
-        super(type, world);
+    protected Ball(EntityType<? extends Ball> type, Level level, LivingEntity owner) {
+        super(type, level);
         this.setOwner(owner);
     }
 
-    protected Ball(EntityType<? extends Ball> type, double x, double y, double z, Level world) {
-        super(type, x, y, z, world);
+    protected Ball(EntityType<? extends Ball> type, double x, double y, double z, Level level) {
+        super(type, x, y, z, level);
     }
 
     @Override

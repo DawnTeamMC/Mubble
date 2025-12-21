@@ -3,7 +3,7 @@ package fr.hugman.mubble.world.level.block;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.world.level.block.entity.BumpableBlockEntity;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -41,32 +41,32 @@ public class DecoratedBumpableBlock extends BumpableBlock {
     }
 
     @Override
-    public void onBumpStart(Level world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
-        super.onBumpStart(world, pos, state, blockEntity);
+    public void onBumpStart(Level level, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+        super.onBumpStart(level, pos, state, blockEntity);
         this.playGenericBumpSound(blockEntity);
     }
 
     @Override
-    public void onBumpMiddle(Level world, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
-        super.onBumpMiddle(world, pos, state, blockEntity);
+    public void onBumpMiddle(Level level, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
+        super.onBumpMiddle(level, pos, state, blockEntity);
         if (blockEntity.getLevel() != null && blockEntity.getBumpDirection() == Direction.UP) {
             this.launchEntitiesOnTop(blockEntity.getLevel(), blockEntity.getBlockPos());
         }
     }
 
     public void playGenericBumpSound(BumpableBlockEntity entity) {
-        Level world = entity.getLevel();
+        Level level = entity.getLevel();
         Vec3 pos = entity.getBlockPos().getCenter();
-        if (world != null) {
-            world.playSound(null, pos.x(), pos.y(), pos.z(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundSource.BLOCKS, 1.0F, 1.0F);
+        if (level != null) {
+            level.playSound(null, pos.x(), pos.y(), pos.z(), MubbleSounds.BUMPABLE_BLOCK_BUMP, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
     }
 
     /**
      * Launches entities on top of the block.
      */
-    public void launchEntitiesOnTop(Level world, BlockPos pos) {
-        List<Entity> entities = world.getEntities(null, new AABB(pos.above()));
+    public void launchEntitiesOnTop(Level level, BlockPos pos) {
+        List<Entity> entities = level.getEntities(null, new AABB(pos.above()));
         for (Entity entity : entities) {
             launchEntity(entity);
         }

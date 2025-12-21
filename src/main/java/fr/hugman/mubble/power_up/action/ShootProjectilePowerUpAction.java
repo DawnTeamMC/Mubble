@@ -66,9 +66,9 @@ public record ShootProjectilePowerUpAction(
     public InteractionResult trigger(Player player) {
         var properties = player.getPowerUpProperties();
 
-        var world = player.level();
-        if (!world.isClientSide()) {
-            properties.removeInvalidProjectiles(world);
+        var level = player.level();
+        if (!level.isClientSide()) {
+            properties.removeInvalidProjectiles(level);
         }
         if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
             return InteractionResult.FAIL;
@@ -81,9 +81,9 @@ public record ShootProjectilePowerUpAction(
             return InteractionResult.SUCCESS;
         }
 
-        if (!world.isClientSide()) {
-            world.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 0.5F, 1.0F);
-            var entity = this.projectile.create(world, EntitySpawnReason.TRIGGERED);
+        if (!level.isClientSide()) {
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 0.5F, 1.0F);
+            var entity = this.projectile.create(level, EntitySpawnReason.TRIGGERED);
             if (null == entity) {
                 return InteractionResult.FAIL;
             }
@@ -92,7 +92,7 @@ public record ShootProjectilePowerUpAction(
             }
             entity.setPos(player.getX(), player.getEyeY() - 0.1F, player.getZ());
             setVelocity(entity, player, player.getXRot(), player.getYRot(), 0.0F, this.speed, 1.0F);
-            world.addFreshEntity(entity);
+            level.addFreshEntity(entity);
             properties.addProjectile(entity.getUUID());
             properties.setCooldown(cooldown.orElse(0));
         }

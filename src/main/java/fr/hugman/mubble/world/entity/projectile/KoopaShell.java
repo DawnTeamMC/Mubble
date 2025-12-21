@@ -1,7 +1,7 @@
 package fr.hugman.mubble.world.entity.projectile;
 
-import fr.hugman.mubble.sound.MubbleSounds;
-import fr.hugman.mubble.world.entity.damage.MubbleDamageTypes;
+import fr.hugman.mubble.sounds.MubbleSounds;
+import fr.hugman.mubble.references.MubbleDamageTypeKeys;
 import fr.hugman.mubble.world.phys.AABBUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -33,8 +33,8 @@ public abstract class KoopaShell extends Projectile {
     private float previousHorizontalRotation;
     private float horizontalRotation;
 
-    public KoopaShell(EntityType<? extends KoopaShell> entityType, Level world, int rebounds) {
-        super(entityType, world);
+    public KoopaShell(EntityType<? extends KoopaShell> type, Level level, int rebounds) {
+        super(type, level);
         this.rebounds = rebounds;
     }
 
@@ -120,7 +120,7 @@ public abstract class KoopaShell extends Projectile {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         this.rebounds--;
-        result.getEntity().hurt(this.damageSources().source(MubbleDamageTypes.KOOPA_SHELL, this, this.getOwner()), 2.0F);
+        result.getEntity().hurt(this.damageSources().source(MubbleDamageTypeKeys.KOOPA_SHELL, this, this.getOwner()), 2.0F);
 
         var bounce = true;
 

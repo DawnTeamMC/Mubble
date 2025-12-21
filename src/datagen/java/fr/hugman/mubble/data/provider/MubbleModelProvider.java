@@ -1,8 +1,8 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.data.model.MubbleTexturedModels;
-import fr.hugman.mubble.data.model.MubbleTextureMaps;
+import fr.hugman.mubble.data.models.MubbleTexturedModels;
+import fr.hugman.mubble.data.models.MubbleTextureMaps;
 import fr.hugman.mubble.world.item.MubbleItems;
 import fr.hugman.mubble.world.level.block.BeepBlock;
 import fr.hugman.mubble.world.level.block.MubbleBlocks;

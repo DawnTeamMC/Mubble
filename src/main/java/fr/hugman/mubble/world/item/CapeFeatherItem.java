@@ -1,6 +1,6 @@
 package fr.hugman.mubble.world.item;
 
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import java.util.Random;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;
@@ -22,13 +22,13 @@ public class CapeFeatherItem extends Item {
     }
 
     @Override
-    public InteractionResult use(Level worldIn, Player playerIn, InteractionHand handIn) {
-        ItemStack stack = playerIn.getItemInHand(handIn);
+    public InteractionResult use(Level level, Player playerIn, InteractionHand hand) {
+        ItemStack stack = playerIn.getItemInHand(hand);
         Random rand = new Random();
         Vec3 vec3d = playerIn.getDeltaMovement();
-        worldIn.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), MubbleSounds.CAPE_FEATHER_USE, SoundSource.PLAYERS, 0.5F, 1F);
+        level.playSound(null, playerIn.getX(), playerIn.getY(), playerIn.getZ(), MubbleSounds.CAPE_FEATHER_USE, SoundSource.PLAYERS, 0.5F, 1F);
         for (int i = 0; i < rand.nextInt(6) + 1; i++) {
-            worldIn.addParticle(ParticleTypes.CLOUD, playerIn.getX() + (rand.nextInt(11) - 5) / 10F, playerIn.getY(), playerIn.getZ() + (rand.nextInt(11) - 5) / 10F, 0.0D, (rand.nextInt(3) + 1) / 10F, 0);
+            level.addParticle(ParticleTypes.CLOUD, playerIn.getX() + (rand.nextInt(11) - 5) / 10F, playerIn.getY(), playerIn.getZ() + (rand.nextInt(11) - 5) / 10F, 0.0D, (rand.nextInt(3) + 1) / 10F, 0);
         }
         playerIn.setDeltaMovement(vec3d.x, 0.7D, vec3d.z);
         playerIn.fallDistance = 0f;

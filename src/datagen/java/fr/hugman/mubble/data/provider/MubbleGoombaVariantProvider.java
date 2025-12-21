@@ -2,7 +2,7 @@ package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariant;
-import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariants;
+import fr.hugman.mubble.references.GoombaVariantKeys;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.world.item.spawn_egg.VariantSpawnEggInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -31,8 +31,8 @@ public class MubbleGoombaVariantProvider extends FabricDynamicRegistryProvider {
         return "Goomba Variants";
     }
 
-    public static void register(BootstrapContext<GoombaVariant> registerable) {
-		registerable.register(GoombaVariants.NORMAL, new GoombaVariant(
+    public static void bootstrap(BootstrapContext<GoombaVariant> context) {
+		context.register(GoombaVariantKeys.NORMAL, new GoombaVariant(
 				Optional.empty(),
 				new GoombaVariant.GoombaAssetInfo(
 						new ClientAsset.ResourceTexture(Mubble.id("entity/goomba/normal/normal")),
@@ -41,7 +41,7 @@ public class MubbleGoombaVariantProvider extends FabricDynamicRegistryProvider {
 				Map.of(),
 				Optional.empty()
 		));
-		registerable.register(GoombaVariants.MINI, new GoombaVariant(
+		context.register(GoombaVariantKeys.MINI, new GoombaVariant(
 				Optional.of(Component.translatable("entity.mubble.goomba.mini")),
 				new GoombaVariant.GoombaAssetInfo(
 						new ClientAsset.ResourceTexture(Mubble.id("entity/goomba/mini/normal")),

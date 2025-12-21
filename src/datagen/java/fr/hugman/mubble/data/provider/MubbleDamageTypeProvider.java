@@ -1,6 +1,6 @@
 package fr.hugman.mubble.data.provider;
 
-import fr.hugman.mubble.world.entity.damage.MubbleDamageTypes;
+import fr.hugman.mubble.references.MubbleDamageTypeKeys;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
@@ -25,10 +25,10 @@ public class MubbleDamageTypeProvider extends FabricDynamicRegistryProvider {
         return "Damage Types";
     }
 
-    public static void register(BootstrapContext<DamageType> registerable) {
-		registerable.register(MubbleDamageTypes.STOMP, new DamageType("mubble.stomp", 0.1f));
-		registerable.register(MubbleDamageTypes.KOOPA_SHELL, new DamageType("mubble.koopa_shell", 0.1f));
-		registerable.register(MubbleDamageTypes.FIREBALL, new DamageType("mubble.fireball", 0.1f, DamageEffects.BURNING));
-		registerable.register(MubbleDamageTypes.ICEBALL, new DamageType("mubble.iceball", 0.1f, DamageEffects.FREEZING));
+    public static void bootstrap(BootstrapContext<DamageType> context) {
+		context.register(MubbleDamageTypeKeys.STOMP, new DamageType("mubble.stomp", 0.1f));
+		context.register(MubbleDamageTypeKeys.KOOPA_SHELL, new DamageType("mubble.koopa_shell", 0.1f));
+		context.register(MubbleDamageTypeKeys.FIREBALL, new DamageType("mubble.fireball", 0.1f, DamageEffects.BURNING));
+		context.register(MubbleDamageTypeKeys.ICEBALL, new DamageType("mubble.iceball", 0.1f, DamageEffects.FREEZING));
     }
 }

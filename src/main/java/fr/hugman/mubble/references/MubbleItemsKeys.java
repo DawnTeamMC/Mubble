@@ -1,0 +1,26 @@
+package fr.hugman.mubble.references;
+
+import fr.hugman.mubble.Mubble;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
+
+public class MubbleItemsKeys {
+    // SUPER MARIO
+    public static final ResourceKey<Item> MAKER_GLOVE = createKey("maker_glove");
+    public static final ResourceKey<Item> GREEN_KOOPA_SHELL = createKey("green_koopa_shell");
+    public static final ResourceKey<Item> RED_KOOPA_SHELL = createKey("red_koopa_shell");
+
+    public static final ResourceKey<Item> MINI_MUSHROOM = createKey("mini_mushroom");
+    public static final ResourceKey<Item> MEGA_MUSHROOM = createKey("mega_mushroom");
+    public static final ResourceKey<Item> FIRE_FLOWER = createKey("fire_flower");
+    public static final ResourceKey<Item> ICE_FLOWER = createKey("ice_flower");
+
+    public static final ResourceKey<Item> CAPE_FEATHER = createKey("cape_feather");
+    public static final ResourceKey<Item> SUPER_CAPE_FEATHER = createKey("super_cape_feather");
+    public static final ResourceKey<Item> GOOMBA_SPAWN_EGG = createKey("goomba_spawn_egg");
+
+    private static ResourceKey<Item> createKey(String path) {
+        return ResourceKey.create(Registries.ITEM, Mubble.id(path));
+    }
+}

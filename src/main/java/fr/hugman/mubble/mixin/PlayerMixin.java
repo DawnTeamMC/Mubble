@@ -1,7 +1,7 @@
 package fr.hugman.mubble.mixin;
 
 import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
-import fr.hugman.mubble.network.payload.c2s.PowerUpChangePayload;
+import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
 import fr.hugman.mubble.power_up.PowerUp;
 import fr.hugman.mubble.power_up.PowerUpHolder;
 import fr.hugman.mubble.power_up.PowerUpProperties;

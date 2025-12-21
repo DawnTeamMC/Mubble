@@ -93,39 +93,39 @@ public class BeepBlock extends Block {
     }
 
     @Override
-    public void onPlace(BlockState state, Level world, BlockPos pos, BlockState oldState, boolean notify) {
-        this.refreshState(world, pos);
-        this.scheduleTick(world, pos, state.getBlock());
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean notify) {
+        this.refreshState(level, pos);
+        this.scheduleTick(level, pos, state.getBlock());
     }
 
     @Override
-    public void tick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (!world.isClientSide()) {
-            this.refreshState(world, pos);
-            this.scheduleTick(world, pos, state.getBlock());
+    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!level.isClientSide()) {
+            this.refreshState(level, pos);
+            this.scheduleTick(level, pos, state.getBlock());
         }
     }
 
-    public void refreshState(Level world, BlockPos pos) {
-        world.setBlockAndUpdate(pos, getStateAtTime(world));
+    public void refreshState(Level level, BlockPos pos) {
+        level.setBlockAndUpdate(pos, getStateAtTime(level));
     }
 
-    public void scheduleTick(Level world, BlockPos pos, Block block) {
-        if (world instanceof ServerLevel serverWorld) {
-            int cooldown = serverWorld.getGameRules().get(MubbleGameRules.BEEP_BLOCK_COOLDOWN);
+    public void scheduleTick(Level level, BlockPos pos, Block block) {
+        if (level instanceof ServerLevel serverLevel) {
+            int cooldown = serverLevel.getGameRules().get(MubbleGameRules.BEEP_BLOCK_COOLDOWN);
             if (cooldown > 0) {
-                long worldTime = world.getGameTime();
+                long worldTime = level.getGameTime();
                 int delta = (int) (cooldown - worldTime);
-                world.scheduleTick(pos, block, (delta == 0) ? cooldown : delta % cooldown);
+                level.scheduleTick(pos, block, (delta == 0) ? cooldown : delta % cooldown);
             }
         }
     }
 
-    public BlockState getStateAtTime(Level world) {
-        if (world instanceof ServerLevel serverWorld) {
-            int cooldown = serverWorld.getGameRules().get(MubbleGameRules.BEEP_BLOCK_COOLDOWN);
+    public BlockState getStateAtTime(Level level) {
+        if (level instanceof ServerLevel serverLevel) {
+            int cooldown = serverLevel.getGameRules().get(MubbleGameRules.BEEP_BLOCK_COOLDOWN);
             if (cooldown > 0) {
-                long worldTime = world.getGameTime();
+                long worldTime = level.getGameTime();
                 boolean frame = (int) ((worldTime + (this.offset ? cooldown : 0)) % (cooldown * 2)) < cooldown;
                 return this.defaultBlockState().setValue(FRAME, frame);
             }

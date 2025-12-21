@@ -26,16 +26,16 @@ public class KoopaShellItem extends Item implements ProjectileItem {
     }
 
     @Override
-    public InteractionResult use(Level world, Player user, InteractionHand hand) {
+    public InteractionResult use(Level level, Player user, InteractionHand hand) {
         ItemStack itemStack = user.getItemInHand(hand);
         //TODO: sound from Mario Kart?
-        world.playSound(
-                null, user.getX(), user.getY(), user.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F)
+        level.playSound(
+                null, user.getX(), user.getY(), user.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F)
         );
-        if (!world.isClientSide()) {
-            KoopaShell koopaShell = isRed ? new RedKoopaShell(world, user) : new GreenKoopaShell(world, user);
+        if (!level.isClientSide()) {
+            KoopaShell koopaShell = isRed ? new RedKoopaShell(level, user) : new GreenKoopaShell(level, user);
             koopaShell.shootFromRotation(user, user.getXRot(), user.getYRot(), 0.0F, 0.5F, 1.0F);
-            world.addFreshEntity(koopaShell);
+            level.addFreshEntity(koopaShell);
         }
 
         user.awardStat(Stats.ITEM_USED.get(this));
@@ -44,8 +44,8 @@ public class KoopaShellItem extends Item implements ProjectileItem {
     }
 
     @Override
-    public Projectile asProjectile(Level world, Position pos, ItemStack stack, Direction direction) {
-        return isRed ? new RedKoopaShell(world, pos.x(), pos.y(), pos.z()) :
-                new GreenKoopaShell(world, pos.x(), pos.y(), pos.z());
+    public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
+        return isRed ? new RedKoopaShell(level, pos.x(), pos.y(), pos.z()) :
+                new GreenKoopaShell(level, pos.x(), pos.y(), pos.z());
     }
 }

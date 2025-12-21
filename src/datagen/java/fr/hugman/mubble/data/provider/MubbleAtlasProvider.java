@@ -23,7 +23,7 @@ public class MubbleAtlasProvider extends FabricCodecDataProvider<List<SpriteSour
     }
 
     @Override
-    protected void configure(BiConsumer<Identifier, List<SpriteSource>> provider, HolderLookup.Provider lookup) {
+    protected void configure(BiConsumer<Identifier, List<SpriteSource>> provider, HolderLookup.Provider registries) {
         provider.accept(Identifier.withDefaultNamespace("blocks"), List.of(
                 new PalettedPermutations(
 						List.of(

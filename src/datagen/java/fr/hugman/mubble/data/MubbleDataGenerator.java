@@ -41,9 +41,9 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
 
 	@Override
 	public void buildRegistry(RegistrySetBuilder registryBuilder) {
-		registryBuilder.add(Registries.DAMAGE_TYPE, MubbleDamageTypeProvider::register);
-		registryBuilder.add(MubbleRegistries.GOOMBA_VARIANT, MubbleGoombaVariantProvider::register);
-		registryBuilder.add(MubbleRegistries.POWER_UP, MubblePowerUpProvider::register);
+		registryBuilder.add(Registries.DAMAGE_TYPE, MubbleDamageTypeProvider::bootstrap);
+		registryBuilder.add(MubbleRegistries.GOOMBA_VARIANT, MubbleGoombaVariantProvider::bootstrap);
+		registryBuilder.add(MubbleRegistries.POWER_UP, MubblePowerUpProvider::bootstrap);
 	}
 
 	@Override
