@@ -30,8 +30,8 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
 
-      - name: Generate data files
-        run: ./gradlew runDatagen
-
       - name: Build
         run: ./gradlew build
+
+      - name: Generate data files
+        run: ./gradlew runDatagen
