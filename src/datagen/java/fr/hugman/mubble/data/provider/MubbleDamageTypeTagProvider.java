@@ -1,35 +1,34 @@
 package fr.hugman.mubble.data.provider;
 
-import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
-import fr.hugman.mubble.tag.MubbleDamageTypeTags;
+import fr.hugman.mubble.tags.MubbleDamageTypeTags;
+import fr.hugman.mubble.references.MubbleDamageTypeKeys;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.data.tag.ProvidedTagBuilder;
-import net.minecraft.entity.damage.DamageType;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.registry.tag.TagKey;
-
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.tags.TagAppender;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.damagesource.DamageType;
 import java.util.concurrent.CompletableFuture;
 
 public class MubbleDamageTypeTagProvider extends FabricTagProvider<DamageType> {
-	public MubbleDamageTypeTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-		super(output, RegistryKeys.DAMAGE_TYPE, registriesFuture);
+	public MubbleDamageTypeTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+		super(output, Registries.DAMAGE_TYPE, registriesFuture);
 	}
 
-    protected ProvidedTagBuilder<RegistryKey<DamageType>, DamageType> builder(TagKey<DamageType> tag) {
-        return ProvidedTagBuilder.of(this.getTagBuilder(tag));
+    protected TagAppender<ResourceKey<DamageType>, DamageType> builder(TagKey<DamageType> tag) {
+        return TagAppender.forBuilder(this.getOrCreateRawBuilder(tag));
     }
 
 	@Override
-	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+	protected void addTags(HolderLookup.Provider wrapperLookup) {
         this.builder(DamageTypeTags.IS_PROJECTILE)
-                .add(MubbleDamageTypes.KOOPA_SHELL);
+                .add(MubbleDamageTypeKeys.KOOPA_SHELL);
 
         this.builder(MubbleDamageTypeTags.INSTANT_KILLS_GOOMBAS)
-                .add(MubbleDamageTypes.STOMP)
-                .add(MubbleDamageTypes.KOOPA_SHELL);
+                .add(MubbleDamageTypeKeys.STOMP)
+                .add(MubbleDamageTypeKeys.KOOPA_SHELL);
 	}
 }

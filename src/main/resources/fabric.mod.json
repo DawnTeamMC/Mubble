@@ -63,11 +63,11 @@
       ]
     },
     "loom:injected_interfaces": {
-      "net/minecraft/class_1657": [
-        "fr/hugman/mubble/power_up/PowerUpHolder"
+      "net/minecraft/world/entity/player/Player": [
+        "fr/hugman/mubble/world/power_up/PowerUpHolder"
       ],
-      "net/minecraft/class_1297": [
-        "fr/hugman/mubble/entity/Stompable"
+      "net/minecraft/world/entity/Entity": [
+        "fr/hugman/mubble/world/entity/Stompable"
       ]
 	}
   },

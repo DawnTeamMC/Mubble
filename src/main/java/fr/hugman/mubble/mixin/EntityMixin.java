@@ -1,27 +1,10 @@
 package fr.hugman.mubble.mixin;
 
-import fr.hugman.mubble.block.HittableBlock;
-import fr.hugman.mubble.entity.Stompable;
-import fr.hugman.mubble.entity.damage.MubbleDamageTypes;
-import fr.hugman.mubble.power_up.PowerUpHolder;
-import fr.hugman.mubble.tag.MubbleEntityTypeTags;
-import net.minecraft.block.BlockState;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.MovementType;
-import net.minecraft.entity.Ownable;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.hit.BlockHitResult;
-import net.minecraft.util.hit.HitResult;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.RaycastContext;
-import net.minecraft.world.World;
+import fr.hugman.mubble.tags.MubbleEntityTypeTags;
+import fr.hugman.mubble.world.entity.Stompable;
+import fr.hugman.mubble.references.MubbleDamageTypeKeys;
+import fr.hugman.mubble.world.level.block.HittableBlock;
+import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,23 +13,40 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 import java.util.function.Predicate;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.TraceableEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 @Mixin(Entity.class)
 public class EntityMixin implements Stompable {
     // Inject right before the second call of setPosition() in the method move()
-    @Inject(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;setPosition(Lnet/minecraft/util/math/Vec3d;)V", ordinal = 0))
-    private void mubble$move(MovementType type, Vec3d movement, CallbackInfo ci) {
+    @Inject(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;setPos(Lnet/minecraft/world/phys/Vec3;)V", ordinal = 0))
+    private void mubble$move(MoverType type, Vec3 movement, CallbackInfo ci) {
         Entity this_ = (Entity) (Object) this;
-        World world = this_.getEntityWorld();
-        Vec3d vec3d = this.adjustMovementForCollisions(movement);
-        if (vec3d != null && vec3d.getY() > 0) {
-            Vec3d headPos = this_.getEntityPos().add(0, this_.getHeight(), 0);
-            BlockHitResult hit = world.raycast(new RaycastContext(headPos, headPos.add(vec3d).add(0, HittableBlock.HIT_Y_OFFSET, 0), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, this_));
-            if (hit.getType() == HitResult.Type.BLOCK && hit.getSide() == Direction.DOWN) {
+        Level level = this_.level();
+        Vec3 vec3d = this.collide(movement);
+        if (vec3d != null && vec3d.y() > 0) {
+            Vec3 headPos = this_.position().add(0, this_.getBbHeight(), 0);
+            BlockHitResult hit = level.clip(new ClipContext(headPos, headPos.add(vec3d).add(0, HittableBlock.HIT_Y_OFFSET, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this_));
+            if (hit.getType() == HitResult.Type.BLOCK && hit.getDirection() == Direction.DOWN) {
                 BlockPos blockPos = hit.getBlockPos();
-                BlockState state = world.getBlockState(blockPos);
+                BlockState state = level.getBlockState(blockPos);
                 if (state.getBlock() instanceof HittableBlock hittableBlock) {
-                    hittableBlock.onHit(world, state, this_, hit);
+                    hittableBlock.onHit(level, state, this_, hit);
                 }
             }
         }
@@ -56,9 +56,9 @@ public class EntityMixin implements Stompable {
     private void mubble$tick(CallbackInfo ci) {
         Entity this_ = (Entity) (Object) this;
         if (this.canBeStomped()) {
-            Box hitBox = this.getStompBox();
+            AABB hitBox = this.getStompBox();
             if (hitBox != null) {
-                List<Entity> list = this_.getEntityWorld().getOtherEntities(this_, hitBox, this.getStompableBy());
+                List<Entity> list = this_.level().getEntities(this_, hitBox, this.getStompableBy());
                 if (!list.isEmpty()) {
                     this.onStompedBy(list);
                 }
@@ -66,42 +66,42 @@ public class EntityMixin implements Stompable {
         }
     }
 
-    @Inject(method = "onRemove", at = @At("HEAD"))
+    @Inject(method = "onRemoval", at = @At("HEAD"))
     private void mubble$onRemove(CallbackInfo ci) {
         Entity this_ = (Entity) (Object) this;
-        if(this_ instanceof Ownable ownable && ownable.getOwner() instanceof PowerUpHolder powerUpHolder) {
+        if(this_ instanceof TraceableEntity ownable && ownable.getOwner() instanceof PowerUpHolder powerUpHolder) {
             // if the projectile isn't in the properties it won't set dirty so it's okay to not check for it
-            powerUpHolder.getPowerUpProperties().removeProjectile(this_.getUuid());
+            powerUpHolder.getPowerUpProperties().removeProjectile(this_.getUUID());
         }
     }
 
     @Shadow
-    private Vec3d adjustMovementForCollisions(Vec3d movement) {
+    private Vec3 collide(Vec3 movement) {
         return null;
     }
 
     @Override
     public boolean canBeStomped() {
         var this_ = ((Entity) (Object) this);
-        return this_.getType().isIn(MubbleEntityTypeTags.STOMPABLE) && !this_.isSpectator() && !this_.hasPassengers();
+        return this_.is(MubbleEntityTypeTags.STOMPABLE) && !this_.isSpectator() && !this_.isVehicle();
     }
 
     @Override
-    public Box getStompBox() {
+    public AABB getStompBox() {
         var this_ = ((Entity) (Object) this);
-        Box hitBox = this_.getBoundingBox();
-        hitBox = hitBox.withMinY(hitBox.maxY - (0.2D * (hitBox.maxY - hitBox.minY)));
-        hitBox = hitBox.withMaxY(hitBox.maxY + 0.5D);
+        AABB hitBox = this_.getBoundingBox();
+        hitBox = hitBox.setMinY(hitBox.maxY - (0.2D * (hitBox.maxY - hitBox.minY)));
+        hitBox = hitBox.setMaxY(hitBox.maxY + 0.5D);
 
         return hitBox;
     }
 
     @Override
     public Predicate<? super Entity> getStompableBy() {
-        return EntityPredicates.EXCEPT_SPECTATOR.and(entity ->
-                entity.getType().isIn(MubbleEntityTypeTags.CAN_STOMP) &&
-                        !entity.isOnGround() &&
-                        entity.getVelocity().getY() < 0.3D &&
+        return EntitySelector.NO_SPECTATORS.and(entity ->
+                entity.is(MubbleEntityTypeTags.CAN_STOMP) &&
+                        !entity.onGround() &&
+                        entity.getDeltaMovement().y() < 0.3D &&
                         entity.isAlive());
     }
 
@@ -109,13 +109,13 @@ public class EntityMixin implements Stompable {
     public void onStompedBy(List<Entity> entities) {
         var this_ = ((Entity) (Object) this);
         //TODO: display particles!
-        if (this_.getEntityWorld() instanceof ServerWorld serverWorld) {
+        if (this_.level() instanceof ServerLevel serverLevel) {
             //TODO: calculate damage using boots?
-            this_.damage(serverWorld, this_.getDamageSources().create(MubbleDamageTypes.STOMP, entities.getFirst()), 2.0F);
+            this_.hurtServer(serverLevel, this_.damageSources().source(MubbleDamageTypeKeys.STOMP, entities.getFirst()), 2.0F);
             for (Entity entity : entities) {
-                entity.setVelocity(entity.getVelocity().x, 0.5D, entity.getVelocity().z);
-                if (entity instanceof PlayerEntity player) {
-                    ((ServerPlayerEntity) player).networkHandler.sendPacket(new EntityVelocityUpdateS2CPacket(player));
+                entity.setDeltaMovement(entity.getDeltaMovement().x, 0.5D, entity.getDeltaMovement().z);
+                if (entity instanceof Player player) {
+                    ((ServerPlayer) player).connection.send(new ClientboundSetEntityMotionPacket(player));
                 }
                 entity.fallDistance = 0.0F;
             }

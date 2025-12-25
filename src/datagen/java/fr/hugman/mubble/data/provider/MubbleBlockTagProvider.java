@@ -2,22 +2,21 @@ package fr.hugman.mubble.data.provider;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.block.Blocks;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.tag.BlockTags;
-
+import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import java.util.concurrent.CompletableFuture;
 
-import static fr.hugman.mubble.block.MubbleBlocks.*;
-import static fr.hugman.mubble.tag.MubbleBlockTags.*;
+import static fr.hugman.mubble.tags.MubbleBlockTags.*;
+import static fr.hugman.mubble.world.level.block.MubbleBlocks.*;
 
 public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-	public MubbleBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+	public MubbleBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 
 	@Override
-	protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+	protected void addTags(HolderLookup.Provider wrapperLookup) {
         valueLookupBuilder(MELTABLE_TO_WATER).add(Blocks.ICE);
         valueLookupBuilder(MELTABLE_TO_ICE).add(Blocks.PACKED_ICE);
         valueLookupBuilder(FREEZABLE_TO_PACKED_ICE).add(Blocks.ICE);
@@ -63,7 +62,7 @@ public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
 				.addTag(SNAKE_BLOCKS)
 				.addTag(BEEP_BLOCKS)
 				.addTag(EGG_BLOCKS);
-		valueLookupBuilder(BlockTags.PICKAXE_MINEABLE)
+		valueLookupBuilder(BlockTags.MINEABLE_WITH_PICKAXE)
 				.add(EMPTY_BLOCK)
 				.add(QUESTION_BLOCK)
 				.addTag(BRICK_BLOCKS)

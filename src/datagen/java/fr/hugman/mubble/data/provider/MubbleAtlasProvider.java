@@ -4,26 +4,28 @@ import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.data.PowerUpItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricCodecDataProvider;
-import net.minecraft.client.texture.atlas.*;
-import net.minecraft.data.DataOutput;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.util.Identifier;
-
+import net.minecraft.client.renderer.texture.atlas.SpriteSource;
+import net.minecraft.client.renderer.texture.atlas.SpriteSources;
+import net.minecraft.client.renderer.texture.atlas.sources.PalettedPermutations;
+import net.minecraft.client.renderer.texture.atlas.sources.SingleFile;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
-public class MubbleAtlasProvider extends FabricCodecDataProvider<List<AtlasSource>> {
+public class MubbleAtlasProvider extends FabricCodecDataProvider<List<SpriteSource>> {
 	private static final Map<String, Identifier> FULL_MAP = makeFullPalette();
 
-    public MubbleAtlasProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
-        super(dataOutput, registriesFuture, DataOutput.OutputType.RESOURCE_PACK, "atlases", AtlasSourceManager.LIST_CODEC);
+    public MubbleAtlasProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(dataOutput, registriesFuture, PackOutput.Target.RESOURCE_PACK, "atlases", SpriteSources.FILE_CODEC);
     }
 
     @Override
-    protected void configure(BiConsumer<Identifier, List<AtlasSource>> provider, RegistryWrapper.WrapperLookup lookup) {
-        provider.accept(Identifier.ofVanilla("blocks"), List.of(
-                new PalettedPermutationsAtlasSource(
+    protected void configure(BiConsumer<Identifier, List<SpriteSource>> provider, HolderLookup.Provider registries) {
+        provider.accept(Identifier.withDefaultNamespace("blocks"), List.of(
+                new PalettedPermutations(
 						List.of(
 								Mubble.id("block/brick_block"),
 								Mubble.id("block/bolted_block/normal"),
@@ -42,7 +44,7 @@ public class MubbleAtlasProvider extends FabricCodecDataProvider<List<AtlasSourc
 						FULL_MAP
                 )
         ));
-        provider.accept(Identifier.ofVanilla("gui"), powerUpsAtlasSources());
+        provider.accept(Identifier.withDefaultNamespace("gui"), powerUpsAtlasSources());
     }
 
 	private static Map<String, Identifier> makeFullPalette() {
@@ -71,11 +73,11 @@ public class MubbleAtlasProvider extends FabricCodecDataProvider<List<AtlasSourc
 		return map;
 	}
 
-    private static List<AtlasSource> powerUpsAtlasSources() {
-        var list = new ArrayList<AtlasSource>();
-        PowerUpItems.forEach(entry -> list.add(new SingleAtlasSource(
-            Identifier.of(entry.item().getValue().getNamespace(), "item/" + entry.item().getValue().getPath()),
-            Optional.of(entry.powerUp().getValue().withPrefixedPath("power_up/")))
+    private static List<SpriteSource> powerUpsAtlasSources() {
+        var list = new ArrayList<SpriteSource>();
+        PowerUpItems.forEach(entry -> list.add(new SingleFile(
+            Identifier.fromNamespaceAndPath(entry.item().identifier().getNamespace(), "item/" + entry.item().identifier().getPath()),
+            Optional.of(entry.powerUp().identifier().withPrefix("power_up/")))
         ));
         return list;
     }

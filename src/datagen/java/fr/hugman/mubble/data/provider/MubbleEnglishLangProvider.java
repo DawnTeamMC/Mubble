@@ -1,19 +1,18 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.item_group.MubbleItemGroupKeys;
-import fr.hugman.mubble.registry.MubbleRegistryKeys;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.references.MubbleCreativeModeTabKeys;
+import fr.hugman.mubble.core.registries.MubbleRegistries;
+import fr.hugman.mubble.sounds.MubbleSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.RegistryKeys;
-import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.DyeColor;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Util;
-
+import net.minecraft.world.item.DyeColor;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
@@ -23,13 +22,13 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 			"of", "the", "and", "a", "an", "in", "on", "for", "to", "at", "by", "from", "with"
 	);
 
-	public MubbleEnglishLangProvider(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+	public MubbleEnglishLangProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
 		super(dataOutput, "en_us", registryLookup);
 	}
 
 	@Override
-	public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder builder) {
-		builder.add(Util.createTranslationKey("item_group", MubbleItemGroupKeys.YOSHI_ISLAND.getValue()), "Yoshi's Island");
+	public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
+		builder.add(Util.makeDescriptionId("item_group", MubbleCreativeModeTabKeys.YOSHI_ISLAND.identifier()), "Yoshi's Island");
 
 		this.generateAutomaticTranslations(wrapperLookup, builder);
 
@@ -88,9 +87,9 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("modmenu.descriptionTranslation.mubble", "Ultimate crossover mod with all your favorite franchises! Mainly focused on Nintendo.");
 	}
 
-	private void generateAutomaticTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder builder) {
-		for (var block : getRegistryEntries(wrapperLookup, RegistryKeys.BLOCK)) {
-			var path = block.registryKey().getValue().getPath()
+	private void generateAutomaticTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
+		for (var block : getRegistryEntries(wrapperLookup, Registries.BLOCK)) {
+			var path = block.key().identifier().getPath()
 					.replaceAll("exclamation", "!")
 					.replaceAll("question", "?");
 			try {
@@ -98,11 +97,11 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 			} catch (RuntimeException ignored) {}
 		}
 
-		for (var item : getRegistryEntries(wrapperLookup, RegistryKeys.ITEM)) {
-			if (item.value().getTranslationKey().startsWith("block.")) {
+		for (var item : getRegistryEntries(wrapperLookup, Registries.ITEM)) {
+			if (item.value().getDescriptionId().startsWith("block.")) {
 				continue;
 			}
-			var path = item.registryKey().getValue().getPath();
+			var path = item.key().identifier().getPath();
 			if (path.endsWith("_chest_boat")) {
 				path = path.replace("_chest_boat", "_boat_with_chest");
 			}
@@ -111,58 +110,58 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 			} catch (RuntimeException ignored) {}
 		}
 
-		for (var entity : getRegistryEntries(wrapperLookup, RegistryKeys.ENTITY_TYPE)) {
-			var path = entity.registryKey().getValue().getPath();
+		for (var entity : getRegistryEntries(wrapperLookup, Registries.ENTITY_TYPE)) {
+			var path = entity.key().identifier().getPath();
 			if (path.endsWith("_chest_boat")) {
 				path = path.replace("_chest_boat", "_boat_with_chest");
 			}
 			builder.add(entity.value(), snakeToTitleCase(path));
 		}
 
-		for (var biome : getRegistryEntries(wrapperLookup, RegistryKeys.BIOME)) {
-			var id = biome.registryKey().getValue();
-			builder.add(Util.createTranslationKey("biome", id), snakeToTitleCase(id.getPath()));
+		for (var biome : getRegistryEntries(wrapperLookup, Registries.BIOME)) {
+			var id = biome.key().identifier();
+			builder.add(Util.makeDescriptionId("biome", id), snakeToTitleCase(id.getPath()));
 		}
 
-		for (var bannerPattern : getRegistryEntries(wrapperLookup, RegistryKeys.BANNER_PATTERN)) {
-			var id = bannerPattern.registryKey().getValue();
+		for (var bannerPattern : getRegistryEntries(wrapperLookup, Registries.BANNER_PATTERN)) {
+			var id = bannerPattern.key().identifier();
 			builder.add(
-					Util.createTranslationKey("item", id.withPath(s -> s + "_banner_pattern.desc")),
+					Util.makeDescriptionId("item", id.withPath(s -> s + "_banner_pattern.desc")),
 					snakeToTitleCase(id.getPath())
 			);
 			for (DyeColor color : DyeColor.values()) {
 				builder.add(
-						Util.createTranslationKey("block", id.withPath(s -> "banner." + s + "." + color.getId())),
-						snakeToTitleCase(color.getId() + "_" + id.getPath())
+						Util.makeDescriptionId("block", id.withPath(s -> "banner." + s + "." + color.getName())),
+						snakeToTitleCase(color.getName() + "_" + id.getPath())
 				);
 			}
 		}
 
-		for (var paintingVariant : getRegistryEntries(wrapperLookup, RegistryKeys.PAINTING_VARIANT)) {
-			var id = paintingVariant.registryKey().getValue();
-			builder.add(Util.createTranslationKey("painting", id) + ".title", snakeToTitleCase(id.getPath()));
+		for (var paintingVariant : getRegistryEntries(wrapperLookup, Registries.PAINTING_VARIANT)) {
+			var id = paintingVariant.key().identifier();
+			builder.add(Util.makeDescriptionId("painting", id) + ".title", snakeToTitleCase(id.getPath()));
 		}
 
-		for (var itemGroup : getRegistryEntries(wrapperLookup, RegistryKeys.ITEM_GROUP)) {
-			var id = itemGroup.registryKey().getValue();
+		for (var itemGroup : getRegistryEntries(wrapperLookup, Registries.CREATIVE_MODE_TAB)) {
+			var id = itemGroup.key().identifier();
 			try {
-				builder.add(Util.createTranslationKey("item_group", id), snakeToTitleCase(id.getPath()));
+				builder.add(Util.makeDescriptionId("item_group", id), snakeToTitleCase(id.getPath()));
 			}
             catch (RuntimeException ignored) {}
 		}
 
-		for (var powerUp : getRegistryEntries(wrapperLookup, MubbleRegistryKeys.POWER_UP)) {
-			var id = powerUp.registryKey().getValue();
+		for (var powerUp : getRegistryEntries(wrapperLookup, MubbleRegistries.POWER_UP)) {
+			var id = powerUp.key().identifier();
 			try {
-				builder.add(Util.createTranslationKey("power_up", id), snakeToTitleCase(id.getPath()));
+				builder.add(Util.makeDescriptionId("power_up", id), snakeToTitleCase(id.getPath()));
 			}
             catch (RuntimeException ignored) {}
 		}
 	}
 
-	private static <O> List<RegistryEntry.Reference<O>> getRegistryEntries(RegistryWrapper.WrapperLookup wrapperLookup, RegistryKey<? extends Registry<O>> registryKey) {
-		return wrapperLookup.getOrThrow(registryKey).streamEntries()
-				.filter(entry -> entry.registryKey().getValue().getNamespace().equals(Mubble.MOD_ID))
+	private static <O> List<Holder.Reference<O>> getRegistryEntries(HolderLookup.Provider wrapperLookup, ResourceKey<? extends Registry<O>> registryKey) {
+		return wrapperLookup.lookupOrThrow(registryKey).listElements()
+				.filter(entry -> entry.key().identifier().getNamespace().equals(Mubble.MOD_ID))
 				.toList();
 	}
 

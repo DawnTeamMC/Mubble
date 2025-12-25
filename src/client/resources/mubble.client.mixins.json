@@ -3,9 +3,9 @@
   "package": "fr.hugman.mubble.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "ClientCommonNetworkHandlerAccessor",
-    "ClientPlayNetworkHandlerMixin",
-    "InGameHudMixin",
+    "ClientCommonPacketListenerImplAccessor",
+    "ClientPacketListenerMixin",
+    "GuiMixin",
     "LivingEntityRendererMixin"
   ],
   "injectors": {

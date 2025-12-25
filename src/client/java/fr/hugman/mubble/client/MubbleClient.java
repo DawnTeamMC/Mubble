@@ -1,25 +1,19 @@
 package fr.hugman.mubble.client;
 
 import com.google.common.reflect.Reflection;
-import fr.hugman.mubble.block.MubbleBlocks;
-import fr.hugman.mubble.client.gui.screen.BumpableScreen;
+import fr.hugman.mubble.client.gui.screens.inventory.BumpableScreen;
 import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
-import fr.hugman.mubble.client.render.MubbleRenderers;
-import fr.hugman.mubble.client.render.entity.model.MubbleModelLayers;
+import fr.hugman.mubble.client.renderer.MubbleRenderers;
+import fr.hugman.mubble.client.model.MubbleModelLayers;
 import fr.hugman.mubble.client.network.MubbleClientReceivers;
-import fr.hugman.mubble.entity.KoopaShellEntity;
-import fr.hugman.mubble.screen.MubbleScreenHandlerTypes;
-import fr.hugman.mubble.sound.MubbleSounds;
+import fr.hugman.mubble.world.inventory.MubbleMenuTypes;
+import fr.hugman.mubble.world.level.block.MubbleBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
-import net.minecraft.client.gui.screen.ingame.HandledScreens;
-import net.minecraft.client.render.BlockRenderLayer;
-import net.minecraft.client.sound.MovingSoundInstance;
-import net.minecraft.client.sound.SoundInstance;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 
 @Environment(EnvType.CLIENT)
 public class MubbleClient implements ClientModInitializer {
@@ -36,11 +30,11 @@ public class MubbleClient implements ClientModInitializer {
     }
 
     private static void registerBlockRenderLayers() {
-        BlockRenderLayerMap.putBlock(MubbleBlocks.RED_BEEP_BLOCK, BlockRenderLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(MubbleBlocks.BLUE_BEEP_BLOCK, BlockRenderLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(MubbleBlocks.RED_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
+        BlockRenderLayerMap.putBlock(MubbleBlocks.BLUE_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
     }
 
     private static void registerHandledScreens() {
-        HandledScreens.register(MubbleScreenHandlerTypes.BUMPABLE_BLOCK, BumpableScreen::new);
+        MenuScreens.register(MubbleMenuTypes.BUMPABLE_BLOCK, BumpableScreen::new);
     }
 }

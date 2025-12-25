@@ -3,8 +3,8 @@
   "package": "fr.hugman.mubble.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "AbstractBlockStateMixin",
-    "ArgumentTypesMixin",
+    "BlockStateBaseMixin",
+    "ArgumentTypeInfosMixin",
     "EntityMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
