@@ -43,8 +43,9 @@ public class MubbleCreativeModeTabs {
             entries.accept(MubbleItems.FIRE_FLOWER);
             entries.accept(MubbleItems.ICE_FLOWER);
             entries.accept(MubbleItems.MINI_MUSHROOM);
-            entries.accept(MubbleItems.MEGA_MUSHROOM);
-            entries.accept(MubbleBlocks.QUESTION_BLOCK);
+			entries.accept(MubbleItems.MEGA_MUSHROOM);
+			entries.accept(MubbleItems.GOLD_FLOWER);
+			entries.accept(MubbleBlocks.QUESTION_BLOCK);
             entries.accept(MubbleBlocks.EMPTY_BLOCK);
             entries.accept(MubbleBlocks.BRICK_BLOCK);
             entries.accept(MubbleBlocks.CRYSTAL_BLOCK);

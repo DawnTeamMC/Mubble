@@ -16,7 +16,8 @@ public class PowerUpItems {
             new Entry(MubbleItemKeys.MINI_MUSHROOM, PowerUpKeys.MINI),
             new Entry(MubbleItemKeys.MEGA_MUSHROOM, PowerUpKeys.MEGA),
             new Entry(MubbleItemKeys.FIRE_FLOWER, PowerUpKeys.FIRE),
-            new Entry(MubbleItemKeys.ICE_FLOWER, PowerUpKeys.ICE)
+            new Entry(MubbleItemKeys.ICE_FLOWER, PowerUpKeys.ICE),
+            new Entry(MubbleItemKeys.GOLD_FLOWER, PowerUpKeys.GOLD)
     );
 
     public static ResourceKey<Item> getItem(ResourceKey<PowerUp> powerUp) {

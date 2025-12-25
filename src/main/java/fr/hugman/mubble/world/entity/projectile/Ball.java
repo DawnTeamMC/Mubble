@@ -70,7 +70,7 @@ public abstract class Ball extends ThrowableProjectile {
 	/**
 	 * Triggers after the ball has hit and can no longer rebound.
 	 */
-	protected void finalHit() {
+	protected final void finalHit() {
 		this.finalHit(this.getDeathSound());
 	}
 

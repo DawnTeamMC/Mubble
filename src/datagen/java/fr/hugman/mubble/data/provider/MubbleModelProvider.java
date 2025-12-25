@@ -81,6 +81,7 @@ public class MubbleModelProvider extends FabricModelProvider {
 		gen.generateFlatItem(MubbleItems.MEGA_MUSHROOM, ModelTemplates.FLAT_ITEM);
 		gen.generateFlatItem(MubbleItems.FIRE_FLOWER, ModelTemplates.FLAT_ITEM);
 		gen.generateFlatItem(MubbleItems.ICE_FLOWER, ModelTemplates.FLAT_ITEM);
+		gen.generateFlatItem(MubbleItems.GOLD_FLOWER, ModelTemplates.FLAT_ITEM);
 
 		gen.generateFlatItem(MubbleItems.CAPE_FEATHER, ModelTemplates.FLAT_ITEM);
 		gen.generateFlatItem(MubbleItems.SUPER_CAPE_FEATHER, ModelTemplates.FLAT_ITEM);

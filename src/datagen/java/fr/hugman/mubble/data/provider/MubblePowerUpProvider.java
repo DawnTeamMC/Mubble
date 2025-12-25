@@ -87,5 +87,15 @@ public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.empty()
                 )))
                 .build());
+        context.register(GOLD, new PowerUpBuilder()
+                .name(GOLD)
+                .action(Holder.direct(new ShootProjectilePowerUpAction(
+                        MubbleEntityTypes.GOLD_FIREBALL,
+                        MubbleSounds.FIREBALL_THROW, // TODO change
+                        0.4f,
+                        Optional.of(3),
+                        Optional.empty()
+                )))
+                .build());
     }
 }

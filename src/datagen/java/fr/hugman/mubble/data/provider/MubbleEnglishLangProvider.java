@@ -74,6 +74,8 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
         builder.add("death.attack.mubble.fireball.player", "%1$s was fireballed while fighting %2$s");
         builder.add("death.attack.mubble.iceball", "%1$s was iceballed by %2$s");
         builder.add("death.attack.mubble.iceball.player", "%1$s was iceballed while fighting %2$s");
+		builder.add("death.attack.mubble.gold_fireball", "%1$s was gold-blasted by %2$s");
+		builder.add("death.attack.mubble.gold_fireball.player", "%1$s was gold-blasted while fighting %2$s");
 
         builder.add("commands.mubble.power_up.set.success", "Changed %s's power-up");
         builder.add("commands.mubble.power_up.set.success_named", "Changed %s's power-up to %s");

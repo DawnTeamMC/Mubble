@@ -30,5 +30,6 @@ public class MubbleDamageTypeProvider extends FabricDynamicRegistryProvider {
 		context.register(MubbleDamageTypeKeys.KOOPA_SHELL, new DamageType("mubble.koopa_shell", 0.1f));
 		context.register(MubbleDamageTypeKeys.FIREBALL, new DamageType("mubble.fireball", 0.1f, DamageEffects.BURNING));
 		context.register(MubbleDamageTypeKeys.ICEBALL, new DamageType("mubble.iceball", 0.1f, DamageEffects.FREEZING));
+		context.register(MubbleDamageTypeKeys.GOLD_FIREBALL, new DamageType("mubble.gold_fireball", 0.1f));
     }
 }

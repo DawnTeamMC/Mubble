@@ -30,6 +30,7 @@ public class MubbleItems {
     public static final PowerUpItem MEGA_MUSHROOM = registerPowerUp(MubbleItemKeys.MEGA_MUSHROOM, PowerUpKeys.MEGA);
     public static final PowerUpItem FIRE_FLOWER = registerPowerUp(MubbleItemKeys.FIRE_FLOWER, PowerUpKeys.FIRE);
     public static final PowerUpItem ICE_FLOWER = registerPowerUp(MubbleItemKeys.ICE_FLOWER, PowerUpKeys.ICE);
+    public static final PowerUpItem GOLD_FLOWER = registerPowerUp(MubbleItemKeys.GOLD_FLOWER, PowerUpKeys.GOLD);
     public static final CapeFeatherItem CAPE_FEATHER = register(MubbleItemKeys.CAPE_FEATHER, s -> new CapeFeatherItem(s, false));
     public static final CapeFeatherItem SUPER_CAPE_FEATHER = register(MubbleItemKeys.SUPER_CAPE_FEATHER, s -> new CapeFeatherItem(s.rarity(Rarity.EPIC), true));
 

@@ -16,6 +16,7 @@ public class MubbleRenderers {
         EntityRenderers.register(MubbleEntityTypes.RED_KOOPA_SHELL, KoopaShellRenderer::new);
         EntityRenderers.register(MubbleEntityTypes.FIREBALL, BallRenderer::new);
         EntityRenderers.register(MubbleEntityTypes.ICEBALL, BallRenderer::new);
+        EntityRenderers.register(MubbleEntityTypes.GOLD_FIREBALL, BallRenderer::new);
     }
 
     public static void registerBlockEntities() {
