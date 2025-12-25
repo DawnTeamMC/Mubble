@@ -67,15 +67,22 @@ public abstract class Ball extends ThrowableProjectile {
         }
     }
 
+	/**
+	 * Triggers after the ball has hit and can no longer rebound.
+	 */
+	protected void finalHit() {
+		this.finalHit(this.getDeathSound());
+	}
+
     /**
      * Triggers after the ball has hit and can no longer rebound.
      */
-    protected void finalHit() {
+    protected void finalHit(SoundEvent deathSound) {
         if (!this.level().isClientSide()) {
             this.level().broadcastEntityEvent(this, EntityEvent.DEATH);
             this.remove(RemovalReason.DISCARDED);
         }
-        this.level().playSound(null, getX(), getY(), getZ(), this.getDeathSound(), SoundSource.NEUTRAL, 0.5F, 1.0F);
+        this.level().playSound(null, getX(), getY(), getZ(), deathSound, SoundSource.NEUTRAL, 0.5F, 1.0F);
     }
 
 	@Override

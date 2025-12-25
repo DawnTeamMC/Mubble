@@ -69,9 +69,8 @@ public class Fireball extends Ball {
         if (!entity.fireImmune()) {
             entity.igniteForSeconds(5);
         }
-        this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.FIREBALL_HIT_ENTITY, SoundSource.NEUTRAL, 0.5F, 1.0F);
         entity.hurt(this.damageSources().source(MubbleDamageTypeKeys.FIREBALL, this, this.getOwner()), damage);
-        this.finalHit();
+        this.finalHit(MubbleSounds.FIREBALL_HIT_ENTITY);
     }
 
     @Override

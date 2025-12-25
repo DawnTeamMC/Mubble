@@ -69,9 +69,8 @@ public class Iceball extends Ball {
             }
         }
 
-        this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.ICEBALL_HIT_ENTITY, SoundSource.NEUTRAL, 0.5F, 1.0F);
         entity.hurt(this.damageSources().source(MubbleDamageTypeKeys.ICEBALL, this, this.getOwner()), damage);
-        this.finalHit();
+        this.finalHit(MubbleSounds.ICEBALL_HIT_ENTITY);
     }
 
     @Override
