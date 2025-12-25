@@ -109,7 +109,6 @@ public class Iceball extends Ball {
             }
             this.setDeltaMovement(motion);
         } else {
-            this.level().playSound(null, getX(), getY(), getZ(), MubbleSounds.ICEBALL_HIT_BLOCK, SoundSource.NEUTRAL, 0.5F, 1.0F);
             this.finalHit();
         }
     }
