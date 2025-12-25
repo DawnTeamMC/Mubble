@@ -1,10 +1,10 @@
 package fr.hugman.mubble.mixin;
 
-import fr.hugman.mubble.power_up.PowerUpHolder;
 import fr.hugman.mubble.tags.MubbleEntityTypeTags;
 import fr.hugman.mubble.world.entity.Stompable;
 import fr.hugman.mubble.references.MubbleDamageTypeKeys;
 import fr.hugman.mubble.world.level.block.HittableBlock;
+import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

@@ -1,4 +1,4 @@
-package fr.hugman.mubble.client.gui.screen;
+package fr.hugman.mubble.client.gui.screens.inventory;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.world.inventory.BumpableScreenHandler;

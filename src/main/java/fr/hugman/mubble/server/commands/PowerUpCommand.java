@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import fr.hugman.mubble.commands.argument.PowerUpArgumentType;
-import fr.hugman.mubble.power_up.PowerUp;
+import fr.hugman.mubble.world.power_up.PowerUp;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;

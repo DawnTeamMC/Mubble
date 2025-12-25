@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
-public class MubbleItemsKeys {
+public class MubbleItemKeys {
     // SUPER MARIO
     public static final ResourceKey<Item> MAKER_GLOVE = createKey("maker_glove");
     public static final ResourceKey<Item> GREEN_KOOPA_SHELL = createKey("green_koopa_shell");

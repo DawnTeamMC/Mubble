@@ -1,7 +1,7 @@
 package fr.hugman.mubble.client;
 
 import com.google.common.reflect.Reflection;
-import fr.hugman.mubble.client.gui.screen.BumpableScreen;
+import fr.hugman.mubble.client.gui.screens.inventory.BumpableScreen;
 import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
 import fr.hugman.mubble.client.renderer.MubbleRenderers;
 import fr.hugman.mubble.client.model.MubbleModelLayers;

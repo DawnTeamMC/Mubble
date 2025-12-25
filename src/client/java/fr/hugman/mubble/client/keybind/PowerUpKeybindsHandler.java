@@ -1,4 +1,4 @@
-package fr.hugman.mubble.client.power_up;
+package fr.hugman.mubble.client.keybind;
 
 import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpTriggerPayload;

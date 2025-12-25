@@ -2,9 +2,9 @@ package fr.hugman.mubble.mixin;
 
 import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
-import fr.hugman.mubble.power_up.PowerUp;
-import fr.hugman.mubble.power_up.PowerUpHolder;
-import fr.hugman.mubble.power_up.PowerUpProperties;
+import fr.hugman.mubble.world.power_up.PowerUp;
+import fr.hugman.mubble.world.power_up.PowerUpHolder;
+import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.Holder;
 import net.minecraft.network.syncher.EntityDataAccessor;

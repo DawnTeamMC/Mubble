@@ -1,4 +1,4 @@
-package fr.hugman.mubble.power_up;
+package fr.hugman.mubble.world.power_up;
 
 import java.util.List;
 import java.util.UUID;

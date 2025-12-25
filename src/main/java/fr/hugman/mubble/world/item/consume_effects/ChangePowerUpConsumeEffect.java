@@ -2,7 +2,7 @@ package fr.hugman.mubble.world.item.consume_effects;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import fr.hugman.mubble.power_up.PowerUp;
+import fr.hugman.mubble.world.power_up.PowerUp;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.LivingEntity;

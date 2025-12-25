@@ -1,4 +1,4 @@
-package fr.hugman.mubble.power_up.action;
+package fr.hugman.mubble.world.power_up.action;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.network.RegistryFriendlyByteBuf;

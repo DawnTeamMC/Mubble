@@ -1,7 +1,7 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.references.MubbleCreativeModeTabsKeys;
+import fr.hugman.mubble.references.MubbleCreativeModeTabKeys;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.sounds.MubbleSounds;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -28,7 +28,7 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 
 	@Override
 	public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
-		builder.add(Util.makeDescriptionId("item_group", MubbleCreativeModeTabsKeys.YOSHI_ISLAND.identifier()), "Yoshi's Island");
+		builder.add(Util.makeDescriptionId("item_group", MubbleCreativeModeTabKeys.YOSHI_ISLAND.identifier()), "Yoshi's Island");
 
 		this.generateAutomaticTranslations(wrapperLookup, builder);
 

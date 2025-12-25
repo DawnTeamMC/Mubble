@@ -1,11 +1,12 @@
-package fr.hugman.mubble.power_up;
+package fr.hugman.mubble.world.power_up;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.world.entity.ai.attributes.EntityAttributeEntry;
-import fr.hugman.mubble.power_up.action.PowerUpAction;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;

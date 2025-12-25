@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 
-public class MubbleEntityTypesKeys {
+public class MubbleEntityTypeKeys {
     // SUPER MARIO
     public static final ResourceKey<EntityType<?>> GOOMBA = createKey("goomba");
     public static final ResourceKey<EntityType<?>> GREEN_KOOPA_SHELL = createKey("green_koopa_shell");

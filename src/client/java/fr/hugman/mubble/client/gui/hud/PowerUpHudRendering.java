@@ -1,8 +1,8 @@
 package fr.hugman.mubble.client.gui.hud;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.power_up.PowerUp;
-import fr.hugman.mubble.power_up.PowerUpHolder;
+import fr.hugman.mubble.world.power_up.PowerUp;
+import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

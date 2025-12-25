@@ -1,7 +1,7 @@
 package fr.hugman.mubble.client.gui.hud;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.power_up.action.ShootProjectilePowerUpAction;
+import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;

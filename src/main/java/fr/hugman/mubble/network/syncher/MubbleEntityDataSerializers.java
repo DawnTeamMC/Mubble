@@ -2,8 +2,8 @@ package fr.hugman.mubble.network.syncher;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariant;
-import fr.hugman.mubble.power_up.PowerUp;
-import fr.hugman.mubble.power_up.PowerUpProperties;
+import fr.hugman.mubble.world.power_up.PowerUp;
+import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricTrackedDataRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;

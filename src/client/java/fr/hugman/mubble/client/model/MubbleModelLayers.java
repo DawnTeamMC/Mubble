@@ -8,17 +8,17 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 
 @Environment(EnvType.CLIENT)
 public class MubbleModelLayers {
-    public static final ModelLayerLocation GOOMBA = of("goomba", GoombaModel::getTexturedModelData);
-    public static final ModelLayerLocation BALL = of("ball", BallModel::getTexturedModelData);
-    public static final ModelLayerLocation KOOPA_SHELL = of("koopa_shell", KoopaShellModel::getTexturedModelData);
+    public static final ModelLayerLocation GOOMBA = register("goomba", GoombaModel::getTexturedModelData);
+    public static final ModelLayerLocation BALL = register("ball", BallModel::getTexturedModelData);
+    public static final ModelLayerLocation KOOPA_SHELL = register("koopa_shell", KoopaShellModel::getTexturedModelData);
 
-    private static ModelLayerLocation of(String path, String layerName, EntityModelLayerRegistry.TexturedModelDataProvider provider) {
+    private static ModelLayerLocation register(String path, String layerName, EntityModelLayerRegistry.TexturedModelDataProvider provider) {
         var layer = new ModelLayerLocation(Mubble.id(path), layerName);
         EntityModelLayerRegistry.registerModelLayer(layer, provider);
         return layer;
     }
 
-    private static ModelLayerLocation of(String path, EntityModelLayerRegistry.TexturedModelDataProvider provider) {
-        return of(path, "main", provider);
+    private static ModelLayerLocation register(String path, EntityModelLayerRegistry.TexturedModelDataProvider provider) {
+        return register(path, "main", provider);
     }
 }

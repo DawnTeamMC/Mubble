@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 
-public class MubbleCreativeModeTabsKeys {
+public class MubbleCreativeModeTabKeys {
     public static final ResourceKey<CreativeModeTab> SUPER_MARIO = createKey("super_mario");
     public static final ResourceKey<CreativeModeTab> YOSHI_ISLAND = createKey("yoshi_island");
 

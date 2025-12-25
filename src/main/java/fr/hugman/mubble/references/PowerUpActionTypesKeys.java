@@ -2,7 +2,7 @@ package fr.hugman.mubble.references;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
-import fr.hugman.mubble.power_up.action.PowerUpActionType;
+import fr.hugman.mubble.world.power_up.action.PowerUpActionType;
 import net.minecraft.resources.ResourceKey;
 
 public class PowerUpActionTypesKeys {

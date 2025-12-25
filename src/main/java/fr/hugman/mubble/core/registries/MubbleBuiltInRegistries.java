@@ -1,9 +1,9 @@
 package fr.hugman.mubble.core.registries;
 
 import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariant;
-import fr.hugman.mubble.power_up.PowerUp;
-import fr.hugman.mubble.power_up.action.PowerUpAction;
-import fr.hugman.mubble.power_up.action.PowerUpActionType;
+import fr.hugman.mubble.world.power_up.PowerUp;
+import fr.hugman.mubble.world.power_up.action.PowerUpAction;
+import fr.hugman.mubble.world.power_up.action.PowerUpActionType;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
 import net.minecraft.core.Registry;

@@ -1,7 +1,7 @@
 package fr.hugman.mubble.world.item;
 
 import fr.hugman.mubble.core.component.MubbleDataComponents;
-import fr.hugman.mubble.references.MubbleCreativeModeTabsKeys;
+import fr.hugman.mubble.references.MubbleCreativeModeTabKeys;
 import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariant;
 import fr.hugman.mubble.references.GoombaVariantKeys;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
@@ -23,11 +23,11 @@ import java.util.Collections;
 import java.util.function.Predicate;
 
 public class MubbleCreativeModeTabs {
-    public static final CreativeModeTab SUPER_MARIO = register(MubbleCreativeModeTabsKeys.SUPER_MARIO, FabricItemGroup.builder()
+    public static final CreativeModeTab SUPER_MARIO = register(MubbleCreativeModeTabKeys.SUPER_MARIO, FabricItemGroup.builder()
             .title(Component.translatable("item_group.mubble.super_mario"))
             .icon(() -> new ItemStack(MubbleBlocks.QUESTION_BLOCK))
             .build());
-    public static final CreativeModeTab YOSHI_ISLAND = register(MubbleCreativeModeTabsKeys.YOSHI_ISLAND, FabricItemGroup.builder()
+    public static final CreativeModeTab YOSHI_ISLAND = register(MubbleCreativeModeTabKeys.YOSHI_ISLAND, FabricItemGroup.builder()
             .title(Component.translatable("item_group.mubble.yoshi_island"))
             .icon(() -> new ItemStack(MubbleBlocks.GREEN_EGG_BLOCK))
             .build());
@@ -37,7 +37,7 @@ public class MubbleCreativeModeTabs {
     }
 
     public static void appendItemGroups() {
-        ItemGroupEvents.modifyEntriesEvent(MubbleCreativeModeTabsKeys.SUPER_MARIO).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(MubbleCreativeModeTabKeys.SUPER_MARIO).register(entries -> {
             var context = entries.getContext();
 
             entries.accept(MubbleItems.FIRE_FLOWER);
@@ -78,7 +78,7 @@ public class MubbleCreativeModeTabs {
 
         appendSpawnEgg(MubbleItems.GOOMBA_SPAWN_EGG);
 
-        ItemGroupEvents.modifyEntriesEvent(MubbleCreativeModeTabsKeys.YOSHI_ISLAND).register(entries -> {
+        ItemGroupEvents.modifyEntriesEvent(MubbleCreativeModeTabKeys.YOSHI_ISLAND).register(entries -> {
             entries.accept(MubbleBlocks.BLUE_EGG_BLOCK);
             entries.accept(MubbleBlocks.CYAN_EGG_BLOCK);
             entries.accept(MubbleBlocks.GREEN_EGG_BLOCK);

@@ -1,7 +1,8 @@
 package fr.hugman.mubble.network.protocol.common.custom;
 
-import fr.hugman.mubble.power_up.PowerUp;
 import java.util.Optional;
+
+import fr.hugman.mubble.world.power_up.PowerUp;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

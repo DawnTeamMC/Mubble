@@ -2,7 +2,7 @@ package fr.hugman.mubble.world.item;
 
 import fr.hugman.mubble.core.component.MubbleDataComponents;
 import fr.hugman.mubble.world.item.component.PowerUpComponent;
-import fr.hugman.mubble.power_up.PowerUp;
+import fr.hugman.mubble.world.power_up.PowerUp;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;

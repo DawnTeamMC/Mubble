@@ -1,8 +1,8 @@
 package fr.hugman.mubble.commands.argument;
 
 import com.mojang.brigadier.context.CommandContext;
-import fr.hugman.mubble.power_up.PowerUp;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
+import fr.hugman.mubble.world.power_up.PowerUp;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.ResourceOrIdArgument;

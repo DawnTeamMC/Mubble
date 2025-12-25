@@ -1,11 +1,11 @@
-package fr.hugman.mubble.power_up;
+package fr.hugman.mubble.world.power_up;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.world.entity.ai.attributes.EntityAttributeEntry;
-import fr.hugman.mubble.power_up.action.PowerUpAction;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.sounds.MubbleSounds;
+import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
