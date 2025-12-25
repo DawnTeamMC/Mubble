@@ -1,11 +1,11 @@
 package fr.hugman.mubble.data.provider;
 
-import fr.hugman.mubble.power_up.PowerUpBuilder;
-import fr.hugman.mubble.power_up.PowerUp;
-import fr.hugman.mubble.power_up.action.ShootProjectilePowerUpAction;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import fr.hugman.mubble.world.power_up.PowerUp;
+import fr.hugman.mubble.world.power_up.PowerUpBuilder;
+import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.Holder;
