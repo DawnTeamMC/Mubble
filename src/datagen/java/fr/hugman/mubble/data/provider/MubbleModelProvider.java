@@ -72,7 +72,10 @@ public class MubbleModelProvider extends FabricModelProvider {
 	@Override
 	public void generateItemModels(ItemModelGenerators gen) {
 		// SUPER MARIO
-		gen.generateFlatItem(MubbleItems.MAKER_GLOVE, ModelTemplates.FLAT_ITEM);
+		gen.generateFlatItem(MubbleItems.COIN, ModelTemplates.FLAT_ITEM);
+		gen.generateFlatItem(MubbleItems.RED_COIN, ModelTemplates.FLAT_ITEM);
+		gen.generateFlatItem(MubbleItems.BLUE_COIN, ModelTemplates.FLAT_ITEM);
+		gen.generateFlatItem(MubbleItems.FLOWER_COIN, ModelTemplates.FLAT_ITEM);
 
 		gen.generateFlatItem(MubbleItems.GREEN_KOOPA_SHELL, ModelTemplates.FLAT_ITEM);
 		gen.generateFlatItem(MubbleItems.RED_KOOPA_SHELL, ModelTemplates.FLAT_ITEM);
@@ -84,6 +87,8 @@ public class MubbleModelProvider extends FabricModelProvider {
 
 		gen.generateFlatItem(MubbleItems.CAPE_FEATHER, ModelTemplates.FLAT_ITEM);
 		gen.generateFlatItem(MubbleItems.SUPER_CAPE_FEATHER, ModelTemplates.FLAT_ITEM);
+
+		gen.generateFlatItem(MubbleItems.MAKER_GLOVE, ModelTemplates.FLAT_ITEM);
 
 		gen.generateFlatItem(MubbleItems.GOOMBA_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
 	}
