@@ -3,11 +3,11 @@ package fr.hugman.mubble.world.entity.projectile;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.ClientAsset;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,12 +41,6 @@ public abstract class Ball extends ThrowableProjectile {
     @Override
     public void tick() {
         super.tick();
-        Vec3 vec3d = this.getDeltaMovement();
-
-        float f = (float)(Mth.atan2(-vec3d.x, -vec3d.z) * 180.0F / (float)Math.PI);
-        float g = (float)(Mth.atan2(vec3d.y, vec3d.horizontalDistance()) * 180.0F / (float)Math.PI);
-        this.setXRot(lerpRotation(this.getXRot(), g));
-        this.setYRot(lerpRotation(this.getYRot(), f));
     }
 
     protected abstract SoundEvent getDeathSound();
@@ -66,6 +60,15 @@ public abstract class Ball extends ThrowableProjectile {
             this.finalHit();
         }
     }
+
+	public void reboundUp() {
+		Vec3 motion = this.getDeltaMovement().subtract(0.0D, this.getDeltaMovement().y * 1.25D, 0.0D);
+		double minY = 0.5D;
+		if (motion.y < minY) {
+			motion = motion.with(Direction.Axis.Y, minY);
+		}
+		this.setDeltaMovement(motion);
+	}
 
 	/**
 	 * Triggers after the ball has hit and can no longer rebound.

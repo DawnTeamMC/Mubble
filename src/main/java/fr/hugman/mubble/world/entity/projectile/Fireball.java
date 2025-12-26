@@ -28,7 +28,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
 
 public class Fireball extends Ball {
     private static final ClientAsset.ResourceTexture TEXTURE = new ClientAsset.ResourceTexture(Mubble.id("entity/fireball"));
@@ -117,12 +116,7 @@ public class Fireball extends Ball {
             return;
         }
         if (face == Direction.UP) {
-            Vec3 motion = this.getDeltaMovement().subtract(0.0D, this.getDeltaMovement().y * 1.25D, 0.0D);
-            double minY = 0.4D;
-            if (motion.y < minY) {
-                motion = motion.with(Direction.Axis.Y, minY);
-            }
-            this.setDeltaMovement(motion);
+            this.reboundUp();
         } else {
             this.finalHit();
         }
