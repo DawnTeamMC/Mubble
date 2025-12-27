@@ -22,10 +22,10 @@ import net.minecraft.world.item.component.UseCooldown;
 
 public class MubbleItems {
     // SUPER MARIO
-	public static final Item COIN = register(MubbleItemKeys.COIN);
-	public static final Item RED_COIN = register(MubbleItemKeys.RED_COIN);
-	public static final Item BLUE_COIN = register(MubbleItemKeys.BLUE_COIN);
-	public static final Item FLOWER_COIN = register(MubbleItemKeys.FLOWER_COIN);
+	public static final Item COIN = register(MubbleItemKeys.COIN, CollectibleItem::new);
+	public static final Item RED_COIN = register(MubbleItemKeys.RED_COIN, CollectibleItem::new);
+	public static final Item BLUE_COIN = register(MubbleItemKeys.BLUE_COIN, CollectibleItem::new);
+	public static final Item FLOWER_COIN = register(MubbleItemKeys.FLOWER_COIN, CollectibleItem::new);
     public static final KoopaShellItem GREEN_KOOPA_SHELL = register(MubbleItemKeys.GREEN_KOOPA_SHELL, s -> new KoopaShellItem(s, false), new Item.Properties().stacksTo(3));
     public static final KoopaShellItem RED_KOOPA_SHELL = register(MubbleItemKeys.RED_KOOPA_SHELL, s -> new KoopaShellItem(s, true), new Item.Properties().stacksTo(3));
 
