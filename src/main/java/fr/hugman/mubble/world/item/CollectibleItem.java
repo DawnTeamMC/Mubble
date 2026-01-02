@@ -1,5 +1,6 @@
 package fr.hugman.mubble.world.item;
 
+import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import fr.hugman.mubble.world.entity.item.CollectibleEntity;
 import net.minecraft.core.BlockPos;
@@ -7,6 +8,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -39,6 +41,9 @@ public class CollectibleItem extends Item {
 			if (level.noCollision(null, box) && level.getEntities(null, box).isEmpty()) {
 				if (level instanceof ServerLevel serverLevel) {
 					CollectibleEntity entity = new CollectibleEntity(serverLevel, pos.x(), pos.y(), pos.z(), itemStack.copyWithCount(1));
+					entity.setPickupSound(MubbleSounds.COIN_COLLECT);
+					entity.setPickupSoundVolume(ConstantFloat.of(0.2f));
+					entity.setPickupSoundPitch(ConstantFloat.of(1.0f));
 					EntityType.createDefaultStackConfig(serverLevel, itemStack, context.getPlayer()).accept(entity);
 					if (entity == null) {
 						return InteractionResult.FAIL;
