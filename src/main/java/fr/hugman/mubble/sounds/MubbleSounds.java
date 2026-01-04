@@ -19,6 +19,7 @@ public class MubbleSounds {
     public static final SoundEvent NOTE_BLOCK_JUMP_HIGH = register("block.note_block.jump.high");
 
     public static final Holder.Reference<SoundEvent> COIN_COLLECT = registerForHolder("item.coin.collect");
+    public static final Holder.Reference<SoundEvent> COIN_BOUNCE = registerForHolder("item.coin.bounce");
     public static final SoundEvent CAPE_FEATHER_USE = register("item.cape_feather.use");
 
     public static final SoundEvent GOOMBA_WALK_STEP = register("entity.goomba.walk_step");

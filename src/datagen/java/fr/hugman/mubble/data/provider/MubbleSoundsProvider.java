@@ -34,6 +34,7 @@ public class MubbleSoundsProvider extends FabricSoundsProvider {
 
 		// Items
 		soundExporter.add(MubbleSounds.COIN_COLLECT, variantSoundBuilder(MubbleSounds.COIN_COLLECT, 1));
+		soundExporter.add(MubbleSounds.COIN_BOUNCE, variantSoundBuilder(MubbleSounds.COIN_BOUNCE, 1).subtitle(null));
 		soundExporter.add(MubbleSounds.CAPE_FEATHER_USE, variantSoundBuilder(MubbleSounds.CAPE_FEATHER_USE,1).category(SoundSource.PLAYERS));
 
 		// Entities
