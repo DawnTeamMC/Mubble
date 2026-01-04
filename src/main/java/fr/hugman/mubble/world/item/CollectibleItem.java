@@ -1,7 +1,9 @@
 package fr.hugman.mubble.world.item;
 
+import fr.hugman.mubble.sounds.MubbleSounds;
+import fr.hugman.mubble.sounds.SoundConfig;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
-import fr.hugman.mubble.world.entity.item.CollectibleEntity;
+import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -38,7 +40,9 @@ public class CollectibleItem extends Item {
             AABB box = dimensions.makeBoundingBox(pos.x(), pos.y(), pos.z());
             if (level.noCollision(null, box) && level.getEntities(null, box).isEmpty()) {
                 if (level instanceof ServerLevel serverLevel) {
-                    CollectibleEntity entity = CollectibleEntity.coin(serverLevel, pos.x(), pos.y(), pos.z(), itemStack.copyWithCount(1));
+                    CollectibleEntity entity = new CollectibleEntity(serverLevel, pos.x(), pos.y(), pos.z(), itemStack.copyWithCount(1));
+                    entity.setCollectSound(new SoundConfig(MubbleSounds.COIN_COLLECT, 0.2f, 1.0f));
+                    entity.setBounceSound(new SoundConfig(MubbleSounds.COIN_BOUNCE, 1.0f, 1.0f));
                     EntityType.createDefaultStackConfig(serverLevel, itemStack, context.getPlayer()).accept(entity);
                     if (entity == null) {
                         return InteractionResult.FAIL;

@@ -3,7 +3,7 @@ package fr.hugman.mubble.mixin;
 import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
-import fr.hugman.mubble.world.entity.item.CollectibleEntity;
+import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;

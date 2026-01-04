@@ -1,7 +1,7 @@
 package fr.hugman.mubble.world.entity;
 
 import fr.hugman.mubble.references.MubbleEntityTypeKeys;
-import fr.hugman.mubble.world.entity.item.CollectibleEntity;
+import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.entity.monster.goomba.Goomba;
 import fr.hugman.mubble.world.entity.projectile.Fireball;
 import fr.hugman.mubble.world.entity.projectile.GreenKoopaShell;

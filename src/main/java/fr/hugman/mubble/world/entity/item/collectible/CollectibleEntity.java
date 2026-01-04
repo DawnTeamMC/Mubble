@@ -1,21 +1,20 @@
-package fr.hugman.mubble.world.entity.item;
+package fr.hugman.mubble.world.entity.item.collectible;
 
-import fr.hugman.mubble.sounds.MubbleSounds;
+import fr.hugman.mubble.sounds.SoundConfig;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
+import net.minecraft.util.Util;
 import net.minecraft.util.valueproviders.ConstantFloat;
-import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -33,16 +32,21 @@ import org.jspecify.annotations.Nullable;
 
 public class CollectibleEntity extends Entity {
     private static final String TAG_ITEM = "item";
-    private static final String TAG_PICKUP_SOUND = "pickup_sound";
-    private static final String TAG_PICKUP_SOUND_VOLUME = "pickup_sound_volume";
-    private static final String TAG_PICKUP_SOUND_PITCH = "pickup_sound_pitch";
+    private static final String TAG_COLLECT_SOUND = "collect_sound";
+    private static final String TAG_BOUNCE_SOUND = "bounce_sound";
     private static final String TAG_IS_FIXED = "is_fixed";
     private static final EntityDataAccessor<ItemStack> DATA_ITEM = SynchedEntityData.defineId(CollectibleEntity.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Boolean> DATA_IS_FIXED = SynchedEntityData.defineId(CollectibleEntity.class, EntityDataSerializers.BOOLEAN);
 
-    protected Holder<SoundEvent> pickupSound;
-    protected FloatProvider pickupSoundVolume;
-    protected FloatProvider pickupSoundPitch;
+    protected SoundConfig collectSound;
+    protected SoundConfig bounceSound;
+
+    private float clientXRot;
+    private float clientXRotO;
+    private float clientYRot;
+    private float clientYRotO;
+    private float clientZRot;
+    private float clientZRotO;
 
     public CollectibleEntity(EntityType<?> type, Level level) {
         super(type, level);
@@ -55,14 +59,6 @@ public class CollectibleEntity extends Entity {
         this.setFixed(true);
     }
 
-    public static CollectibleEntity coin(Level level, double x, double y, double z, ItemStack stack) {
-        var collectible = new CollectibleEntity(level, x, y, z, stack);
-        collectible.setPickupSound(MubbleSounds.COIN_COLLECT);
-        collectible.setPickupSoundVolume(ConstantFloat.of(0.2f));
-        collectible.setPickupSoundPitch(ConstantFloat.of(1.0f));
-        return collectible;
-    }
-
     public ItemStack getItem() {
         return this.getEntityData().get(DATA_ITEM);
     }
@@ -71,28 +67,22 @@ public class CollectibleEntity extends Entity {
         this.getEntityData().set(DATA_ITEM, itemStack);
     }
 
-    public Holder<SoundEvent> getPickupSound() {
-        return pickupSound;
+    @Nullable
+    public SoundConfig getCollectSound() {
+        return collectSound;
     }
 
-    public void setPickupSound(Holder<SoundEvent> pickupSound) {
-        this.pickupSound = pickupSound;
+    public void setCollectSound(@Nullable SoundConfig collectSound) {
+        this.collectSound = collectSound;
     }
 
-    public FloatProvider getPickupSoundVolume() {
-        return pickupSoundVolume;
+    @Nullable
+    public SoundConfig getBounceSound() {
+        return bounceSound;
     }
 
-    public void setPickupSoundVolume(FloatProvider pickupSoundVolume) {
-        this.pickupSoundVolume = pickupSoundVolume;
-    }
-
-    public FloatProvider getPickupSoundPitch() {
-        return pickupSoundPitch;
-    }
-
-    public void setPickupSoundPitch(FloatProvider pickupSoundPitch) {
-        this.pickupSoundPitch = pickupSoundPitch;
+    public void setBounceSound(@Nullable SoundConfig bounceSound) {
+        this.bounceSound = bounceSound;
     }
 
     /**
@@ -104,6 +94,75 @@ public class CollectibleEntity extends Entity {
 
     public void setFixed(boolean fixed) {
         this.getEntityData().set(DATA_IS_FIXED, fixed);
+    }
+
+    public float getClientXRot() {
+        return clientXRot;
+    }
+
+    public float getClientYRot() {
+        return clientYRot;
+    }
+
+    public float getClientZRot() {
+        return this.clientZRot;
+    }
+
+    public void setClientXRot(float rot) {
+        if (!Float.isFinite(rot)) {
+            Util.logAndPauseIfInIde("Invalid entity rotation: " + rot + ", discarding.");
+        } else {
+            this.clientXRot = rot  % 360.0F;
+        }
+    }
+
+    public void setClientYRot(float rot) {
+        if (!Float.isFinite(rot)) {
+            Util.logAndPauseIfInIde("Invalid entity rotation: " + rot + ", discarding.");
+        } else {
+            this.clientYRot = rot  % 360.0F;
+        }
+    }
+
+    public void setClientZRot(final float rot) {
+        if (!Float.isFinite(rot)) {
+            Util.logAndPauseIfInIde("Invalid entity rotation: " + rot + ", discarding.");
+        } else {
+            this.clientZRot = rot  % 360.0F;
+        }
+    }
+
+    public float getClientXRot(final float partialTicks) {
+        return partialTicks == 1.0F ? this.getClientXRot() : Mth.rotLerp(partialTicks, this.clientXRotO, this.getClientXRot());
+    }
+
+    public float getClientYRot(final float partialTicks) {
+        return partialTicks == 1.0F ? this.getClientYRot() : Mth.rotLerp(partialTicks, this.clientYRotO, this.getClientYRot());
+    }
+
+    public float getClientZRot(final float partialTicks) {
+        return partialTicks == 1.0F ? this.getClientZRot() : Mth.rotLerp(partialTicks, this.clientZRotO, this.getClientZRot());
+    }
+
+    public void updateClientRotation() {
+        this.clientXRotO = this.getClientXRot();
+        this.clientYRotO = this.getClientYRot();
+        this.clientZRotO = this.getClientZRot();
+
+        var rotateSpeed = 10;
+        var freeRotateSpeed = 20;
+
+        this.setClientYRot(this.getClientYRot() + rotateSpeed);
+        var movement = this.getDeltaMovement();
+        var speed = movement.lengthSqr();
+        if(this.isFixed() || this.onGround() || speed < 0.001) {
+            this.setClientXRot(Mth.rotLerp(0.2f, this.getClientXRot(), 0.0f));
+            this.setClientZRot(Mth.rotLerp(0.2f, this.getClientZRot(), 0.0f));
+        }
+        else {
+            this.setClientXRot((this.getClientXRot() + (float) (movement.length() * freeRotateSpeed)));
+            this.setClientZRot((this.getClientZRot() + (float) (movement.length() * freeRotateSpeed * 1.3)));
+        }
     }
 
     @Override
@@ -162,11 +221,15 @@ public class CollectibleEntity extends Entity {
                     if (!wasOnGround) {
                         var y = oldY * -0.85D;
                         if (y > 0.025D) {
-                            Vec3 movement = this.getDeltaMovement().add(0.0D, y, 0.0D);
-                            this.setDeltaMovement(movement);
-                            this.setOnGround(false);
-                            this.level().playSound(null, this.getX(), this.getY(), this.getZ(), MubbleSounds.COIN_BOUNCE, this.getSoundSource(), Math.min(1.0f, (float) y), 1.0f);
-                            this.needsSync = true;
+                            if(!this.level().isClientSide()) {
+                                Vec3 movement = this.getDeltaMovement().add(0.0D, y, 0.0D);
+                                this.setDeltaMovement(movement);
+                                this.setOnGround(false);
+                                if(this.getBounceSound() != null) {
+                                    this.getBounceSound().volume(ConstantFloat.of(Math.min(1.0f, (float) y)));
+                                    this.getBounceSound().play(this.random, this.level(), this.getX(), this.getY(), this.getZ(), this.getSoundSource());
+                                }
+                            }
                         }
                     } else {
                         friction = this.level().getBlockState(this.getBlockPosBelowThatAffectsMyMovement()).getBlock().getFriction() * 0.98F;
@@ -189,6 +252,10 @@ public class CollectibleEntity extends Entity {
                     this.needsSync = true;
                 }
             }
+        }
+
+        if(this.level().isClientSide()) {
+            updateClientRotation();
         }
 
         super.tick();
@@ -239,9 +306,8 @@ public class CollectibleEntity extends Entity {
     protected void addAdditionalSaveData(ValueOutput output) {
         if (!this.getItem().isEmpty()) {
             output.store(TAG_ITEM, ItemStack.CODEC, this.getItem());
-            output.store(TAG_PICKUP_SOUND, SoundEvent.CODEC, this.pickupSound);
-            output.store(TAG_PICKUP_SOUND_VOLUME, FloatProvider.CODEC, this.pickupSoundVolume);
-            output.store(TAG_PICKUP_SOUND_PITCH, FloatProvider.CODEC, this.pickupSoundPitch);
+            output.storeNullable(TAG_COLLECT_SOUND, SoundConfig.CODEC, this.getCollectSound());
+            output.storeNullable(TAG_BOUNCE_SOUND, SoundConfig.CODEC, this.getBounceSound());
             output.putBoolean(TAG_IS_FIXED, this.isFixed());
         }
     }
@@ -249,10 +315,9 @@ public class CollectibleEntity extends Entity {
     @Override
     protected void readAdditionalSaveData(ValueInput input) {
         this.setItem(input.read(TAG_ITEM, ItemStack.CODEC).orElse(ItemStack.EMPTY));
-        this.setPickupSound(input.read(TAG_PICKUP_SOUND, SoundEvent.CODEC).orElse(Holder.direct(SoundEvents.ITEM_PICKUP)));
-        this.setPickupSoundVolume(input.read(TAG_PICKUP_SOUND_VOLUME, FloatProvider.CODEC).orElse(ConstantFloat.of(1.0F)));
-        this.setPickupSoundPitch(input.read(TAG_PICKUP_SOUND_PITCH, FloatProvider.CODEC).orElse(ConstantFloat.of(1.0F)));
-        this.setFixed(input.getBooleanOr(TAG_IS_FIXED, false));
+        this.setCollectSound(input.read(TAG_COLLECT_SOUND, SoundConfig.CODEC).orElse(new SoundConfig(SoundEvents.ITEM_PICKUP, 1.0F, 1.0F)));
+        this.setBounceSound(input.read(TAG_BOUNCE_SOUND, SoundConfig.CODEC).orElse(null));
+        this.setFixed(input.getBooleanOr(TAG_IS_FIXED, true));
         if (this.getItem().isEmpty()) {
             this.discard();
         }
@@ -290,7 +355,9 @@ public class CollectibleEntity extends Entity {
                 }
 
                 player.awardStat(Stats.ITEM_PICKED_UP.get(item), orgCount);
-                this.level().playSound(null, this.getX(), this.getY(), this.getZ(), getPickupSound(), SoundSource.PLAYERS, this.getPickupSoundVolume().sample(this.random), this.getPickupSoundPitch().sample(this.random));
+                if(this.getCollectSound() != null) {
+                    this.getCollectSound().play(this.random, this.level(), this.getX(), this.getY(), this.getZ(), SoundSource.PLAYERS);
+                }
             }
         }
     }
