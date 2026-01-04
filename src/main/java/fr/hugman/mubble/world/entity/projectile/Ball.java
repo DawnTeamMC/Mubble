@@ -62,12 +62,12 @@ public abstract class Ball extends ThrowableProjectile {
     }
 
 	public void reboundUp() {
-		Vec3 motion = this.getDeltaMovement().subtract(0.0D, this.getDeltaMovement().y * 1.25D, 0.0D);
+		Vec3 movement = this.getDeltaMovement().multiply(1.0D, -0.65D, 1.0D);
 		double minY = 0.5D;
-		if (motion.y < minY) {
-			motion = motion.with(Direction.Axis.Y, minY);
+		if (movement.y < minY) {
+			movement = movement.with(Direction.Axis.Y, minY);
 		}
-		this.setDeltaMovement(motion);
+		this.setDeltaMovement(movement);
 	}
 
 	/**
