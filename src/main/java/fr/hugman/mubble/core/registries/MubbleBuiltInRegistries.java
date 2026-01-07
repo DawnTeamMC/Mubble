@@ -13,7 +13,7 @@ public class MubbleBuiltInRegistries {
     public static final Registry<PowerUpActionType<?>> POWER_UP_ACTION_TYPE = register(MubbleRegistries.POWER_UP_ACTION_TYPE);
 
     private static <T> Registry<T> register(ResourceKey<Registry<T>> key) {
-        return FabricRegistryBuilder.createSimple(key).buildAndRegister();
+        return FabricRegistryBuilder.create(key).buildAndRegister();
     }
 
     public static void register() {

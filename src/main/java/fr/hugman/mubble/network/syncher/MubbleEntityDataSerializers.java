@@ -4,7 +4,7 @@ import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariant;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
-import net.fabricmc.fabric.api.object.builder.v1.entity.FabricTrackedDataRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityDataRegistry;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -18,7 +18,7 @@ public class MubbleEntityDataSerializers {
 
 	public static <T> EntityDataSerializer<T> register(String name, StreamCodec<? super RegistryFriendlyByteBuf, T> codec) {
 		var handler = EntityDataSerializer.forValueType(codec);
-		FabricTrackedDataRegistry.register(Mubble.id(name), handler);
+		FabricEntityDataRegistry.register(Mubble.id(name), handler);
 		return handler;
 	}
 }
