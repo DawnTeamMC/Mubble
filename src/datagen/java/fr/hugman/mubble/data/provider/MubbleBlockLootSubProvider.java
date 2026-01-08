@@ -1,14 +1,14 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.world.level.block.MubbleBlocks;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootTableProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockLootSubProvider;
 import net.minecraft.core.HolderLookup;
 import java.util.concurrent.CompletableFuture;
 
-public class MubbleBlockLootTableProvider extends FabricBlockLootTableProvider {
-	public MubbleBlockLootTableProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
-		super(dataOutput, registryLookup);
+public class MubbleBlockLootSubProvider extends FabricBlockLootSubProvider {
+	public MubbleBlockLootSubProvider(FabricPackOutput packOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+		super(packOutput, registryLookup);
 	}
 
 	@Override

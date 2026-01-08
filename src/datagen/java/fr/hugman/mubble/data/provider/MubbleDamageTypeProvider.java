@@ -1,7 +1,7 @@
 package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.references.MubbleDamageTypeKeys;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -11,7 +11,7 @@ import net.minecraft.world.damagesource.DamageType;
 import java.util.concurrent.CompletableFuture;
 
 public class MubbleDamageTypeProvider extends FabricDynamicRegistryProvider {
-    public MubbleDamageTypeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public MubbleDamageTypeProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

@@ -5,7 +5,7 @@ import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariant;
 import fr.hugman.mubble.references.GoombaVariantKeys;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.world.item.spawn_egg.VariantSpawnEggInfo;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.ClientAsset;
 import net.minecraft.core.HolderLookup;
@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class MubbleGoombaVariantProvider extends FabricDynamicRegistryProvider {
-    public MubbleGoombaVariantProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public MubbleGoombaVariantProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 

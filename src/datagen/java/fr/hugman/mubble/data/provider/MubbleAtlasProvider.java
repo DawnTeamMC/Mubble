@@ -2,7 +2,7 @@ package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.data.PowerUpItems;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricCodecDataProvider;
 import net.minecraft.client.renderer.texture.atlas.SpriteSource;
 import net.minecraft.client.renderer.texture.atlas.SpriteSources;
@@ -18,8 +18,8 @@ import java.util.function.BiConsumer;
 public class MubbleAtlasProvider extends FabricCodecDataProvider<List<SpriteSource>> {
 	private static final Map<String, Identifier> FULL_MAP = makeFullPalette();
 
-    public MubbleAtlasProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
-        super(dataOutput, registriesFuture, PackOutput.Target.RESOURCE_PACK, "atlases", SpriteSources.FILE_CODEC);
+    public MubbleAtlasProvider(FabricPackOutput packOutput, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+        super(packOutput, registriesFuture, PackOutput.Target.RESOURCE_PACK, "atlases", SpriteSources.FILE_CODEC);
     }
 
     @Override

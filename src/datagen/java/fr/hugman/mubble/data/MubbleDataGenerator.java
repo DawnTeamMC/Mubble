@@ -24,7 +24,7 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(MubbleDamageTypeProvider::new);
 
 		// - Loot tables
-		pack.addProvider(MubbleBlockLootTableProvider::new);
+		pack.addProvider(MubbleBlockLootSubProvider::new);
 
 		// - Variants
 		pack.addProvider(MubbleGoombaVariantProvider::new);
@@ -33,10 +33,10 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
         pack.addProvider(MubblePowerUpProvider::new);
 
 		// - Tags
-		var blockTags = pack.addProvider(MubbleBlockTagProvider::new);
+		var blockTags = pack.addProvider(MubbleBlockTagsProvider::new);
 		pack.addProvider((output, registriesFuture) -> new MubbleItemTagProvider(output, registriesFuture, blockTags));
-		pack.addProvider(MubbleEntityTypeTagProvider::new);
-		pack.addProvider(MubbleDamageTypeTagProvider::new);
+		pack.addProvider(MubbleEntityTypeTagsProvider::new);
+		pack.addProvider(MubbleDamageTypeTagsProvider::new);
 	}
 
 	@Override
