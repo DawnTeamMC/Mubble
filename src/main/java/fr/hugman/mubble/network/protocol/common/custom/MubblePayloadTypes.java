@@ -13,7 +13,7 @@ public class MubblePayloadTypes {
     }
 
     public static void registerTypes() {
-        PayloadTypeRegistry.playC2S().register(MubblePayloadTypes.POWER_UP_TRIGGER, PowerUpTriggerPayload.PACKET_CODEC);
-        PayloadTypeRegistry.playS2C().register(MubblePayloadTypes.POWER_UP_CHANGE, PowerUpChangePayload.PACKET_CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(MubblePayloadTypes.POWER_UP_TRIGGER, PowerUpTriggerPayload.PACKET_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.POWER_UP_CHANGE, PowerUpChangePayload.PACKET_CODEC);
     }
 }

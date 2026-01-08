@@ -106,7 +106,7 @@ public class Fireball extends Ball {
             return;
         }
         FlammableBlockRegistry.Entry flammableEntry = FlammableBlockRegistry.getDefaultInstance().get(state.getBlock());
-        if (flammableEntry.getBurnChance() > 0 || flammableEntry.getSpreadChance() > 0) {
+        if (flammableEntry.getBurnOdds() > 0 || flammableEntry.getIgniteOdds() > 0) {
             BlockPos firePos = pos.relative(face);
             if (this.level().isEmptyBlock(firePos) && !this.level().isClientSide()) {
                 this.level().setBlockAndUpdate(firePos, BaseFireBlock.getState(this.level(), firePos));

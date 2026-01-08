@@ -7,7 +7,7 @@ import fr.hugman.mubble.world.item.MubbleItems;
 import fr.hugman.mubble.world.level.block.BeepBlock;
 import fr.hugman.mubble.world.level.block.MubbleBlocks;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
@@ -29,7 +29,7 @@ import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant
 public class MubbleModelProvider extends FabricModelProvider {
 	private final CompletableFuture<HolderLookup.Provider> registriesFuture;
 
-	public MubbleModelProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+	public MubbleModelProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output);
 		this.registriesFuture = registriesFuture;
 	}

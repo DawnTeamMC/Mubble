@@ -1,7 +1,7 @@
 package fr.hugman.mubble.data.provider;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.ItemTags;
 import org.jetbrains.annotations.Nullable;
@@ -11,8 +11,8 @@ import java.util.concurrent.CompletableFuture;
 import static fr.hugman.mubble.world.item.MubbleItems.*;
 import static fr.hugman.mubble.tags.MubbleItemTags.*;
 
-public class MubbleItemTagProvider extends FabricTagProvider.ItemTagProvider {
-	public MubbleItemTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, @Nullable BlockTagProvider blockTagProvider) {
+public class MubbleItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
+	public MubbleItemTagProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture, @Nullable BlockTagsProvider blockTagProvider) {
 		super(output, registriesFuture, blockTagProvider);
 	}
 

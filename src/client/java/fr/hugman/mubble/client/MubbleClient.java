@@ -11,7 +11,7 @@ import fr.hugman.mubble.world.level.block.MubbleBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.rendering.v1.ChunkSectionLayerMap;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 
@@ -30,8 +30,8 @@ public class MubbleClient implements ClientModInitializer {
     }
 
     private static void registerBlockRenderLayers() {
-        BlockRenderLayerMap.putBlock(MubbleBlocks.RED_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
-        BlockRenderLayerMap.putBlock(MubbleBlocks.BLUE_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
+        ChunkSectionLayerMap.putBlock(MubbleBlocks.RED_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
+        ChunkSectionLayerMap.putBlock(MubbleBlocks.BLUE_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
     }
 
     private static void registerHandledScreens() {

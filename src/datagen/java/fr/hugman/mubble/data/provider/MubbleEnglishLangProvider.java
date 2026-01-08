@@ -4,7 +4,7 @@ import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.references.MubbleCreativeModeTabKeys;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.sounds.MubbleSounds;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -22,8 +22,8 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 			"of", "the", "and", "a", "an", "in", "on", "for", "to", "at", "by", "from", "with"
 	);
 
-	public MubbleEnglishLangProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
-		super(dataOutput, "en_us", registryLookup);
+	public MubbleEnglishLangProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+		super(output, "en_us", registryLookup);
 	}
 
 	@Override

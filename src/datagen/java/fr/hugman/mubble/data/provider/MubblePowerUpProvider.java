@@ -6,7 +6,7 @@ import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -19,7 +19,7 @@ import static fr.hugman.mubble.references.PowerUpKeys.*;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.*;
 
 public class MubblePowerUpProvider extends FabricDynamicRegistryProvider {
-    public MubblePowerUpProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+    public MubblePowerUpProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
         super(output, registriesFuture);
     }
 
