@@ -1,8 +1,10 @@
 package fr.hugman.mubble.world.entity.item.collectible;
 
+import fr.hugman.mubble.core.particles.MubbleParticleTypes;
 import fr.hugman.mubble.sounds.SoundConfig;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -343,7 +345,7 @@ public class CollectibleEntity extends Entity {
     }
 
     public void collect(final Player player) {
-        if (!this.level().isClientSide()) {
+        if (this.level() instanceof ServerLevel serverLevel) {
             ItemStack itemStack = this.getItem();
             Item item = itemStack.getItem();
             int orgCount = itemStack.getCount();
@@ -358,6 +360,7 @@ public class CollectibleEntity extends Entity {
                 if(this.getCollectSound() != null) {
                     this.getCollectSound().play(this.random, this.level(), this.getX(), this.getY(), this.getZ(), SoundSource.PLAYERS);
                 }
+                serverLevel.sendParticles(MubbleParticleTypes.GOLD_SPARK, this.getX(), this.getY(), this.getZ(), 1, 0.0, 0.0, 0.0, 1);
             }
         }
     }
