@@ -1,10 +1,11 @@
 package fr.hugman.mubble.world.entity.item.collectible;
 
-import fr.hugman.mubble.core.particles.MubbleParticleTypes;
+import fr.hugman.mubble.network.protocol.common.custom.CollectCollectiblePayload;
 import fr.hugman.mubble.sounds.SoundConfig;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -18,10 +19,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -345,12 +343,17 @@ public class CollectibleEntity extends Entity {
     }
 
     public void collect(final Player player) {
-        if (this.level() instanceof ServerLevel serverLevel) {
+        if (!this.level().isClientSide()) {
             ItemStack itemStack = this.getItem();
             Item item = itemStack.getItem();
             int orgCount = itemStack.getCount();
             if (player.getInventory().add(itemStack)) {
                 player.take(this, orgCount);
+                if (!this.isRemoved()) {
+                    for(var tracking : PlayerLookup.tracking(this)) {
+                        ServerPlayNetworking.send(tracking, new CollectCollectiblePayload(this.getId(), player.getId(), orgCount));
+                    }
+                }
                 if (itemStack.isEmpty()) {
                     this.discard();
                     itemStack.setCount(orgCount);
@@ -360,7 +363,6 @@ public class CollectibleEntity extends Entity {
                 if(this.getCollectSound() != null) {
                     this.getCollectSound().play(this.random, this.level(), this.getX(), this.getY(), this.getZ(), SoundSource.PLAYERS);
                 }
-                serverLevel.sendParticles(MubbleParticleTypes.GOLD_SPARK, this.getX(), this.getY(), this.getZ(), 1, 0.0, 0.0, 0.0, 1);
             }
         }
     }
