@@ -4,10 +4,12 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
 public class GoldSparkParticle extends SingleQuadParticle {
-	protected boolean rollDirection;
+	protected boolean rollDirection = false;
+	protected float rollAcceleration = 0.0f;
 	protected float rollSpeed;
 
 	protected GoldSparkParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite sprite) {
@@ -22,7 +24,7 @@ public class GoldSparkParticle extends SingleQuadParticle {
 		roll += rollSpeed;
 
 		var progress = age / (float) lifetime;
-		rollSpeed = (1 - progress) * 0.5f * (rollDirection ? -1 : 1);
+		rollSpeed = (1 - progress) * rollAcceleration * (rollDirection ? -1 : 1);
 	}
 
 	@Override
@@ -30,7 +32,19 @@ public class GoldSparkParticle extends SingleQuadParticle {
 		return SingleQuadParticle.Layer.OPAQUE;
 	}
 
-	public static class Provider implements ParticleProvider<SimpleParticleType> {
+    @Override
+    public float getQuadSize(float partialTickTime) {
+		var quadSize = super.getQuadSize(partialTickTime);
+        if(age == 0) {
+            return Mth.lerp(partialTickTime, 0, quadSize);
+        }
+        if(age == lifetime) {
+            return Mth.lerp(partialTickTime, quadSize, 0);
+        }
+		return quadSize;
+    }
+
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
 		private final SpriteSet sprite;
 
 		public Provider(final SpriteSet sprite) {
@@ -51,12 +65,14 @@ public class GoldSparkParticle extends SingleQuadParticle {
 			var particle = new GoldSparkParticle(level, x, y, z, this.sprite.get(random));
 
 			particle.hasPhysics = false;
-			particle.lifetime = 5 + random.nextInt(8);
+			particle.lifetime = 5 + random.nextInt(3);
 			particle.rollDirection = random.nextBoolean();
+			particle.rollAcceleration = 0.5f;
 			particle.roll = random.nextFloat() * (float) (Math.PI * 2);
+			particle.oRoll = particle.roll - particle.rollAcceleration * (particle.rollDirection ? -1 : 1);
 
-			particle.xd = random.nextGaussian() * 0.03;
-			particle.zd = random.nextGaussian() * 0.03;
+			particle.xd = random.nextGaussian() * 0.05;
+			particle.zd = random.nextGaussian() * 0.05;
 			particle.yd = 0.04 + random.nextFloat() * 0.025;
 
 			return particle;

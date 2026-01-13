@@ -24,8 +24,9 @@ public class CollectCollectiblePayloadReceiver implements ClientPlayNetworking.P
             if (from != null) {
                 //EntityRenderState itemState = context.client().getEntityRenderDispatcher().extractEntity(from, 1.0F);
                 //context.client().particleEngine.add(new ItemPickupParticle(level, itemState, to, from.getDeltaMovement()));
-                for (int i = 0; i < 4; i++) {
-                    level.addParticle(MubbleParticleTypes.GOLD_SPARK, from.getX(), from.getY() + (from.getBbHeight() / 2), from.getZ(), 0,0,0);
+                var particleCount = 5 + from.getRandom().nextInt(2);
+                for (int i = 0; i < particleCount; i++) {
+                    level.addParticle(MubbleParticleTypes.GOLD_SPARK, from.getRandomX(0.5), from.getY() + (from.getBbHeight() / 2), from.getRandomZ(0.5), 0,0,0);
                 }
                 if (from instanceof CollectibleEntity collectible) {
                     ItemStack itemStack = collectible.getItem();
