@@ -351,7 +351,7 @@ public class CollectibleEntity extends Entity {
                 player.take(this, orgCount);
                 if (!this.isRemoved()) {
                     for(var tracking : PlayerLookup.tracking(this)) {
-                        ServerPlayNetworking.send(tracking, new CollectCollectiblePayload(this.getId(), player.getId(), orgCount));
+                        ServerPlayNetworking.send(tracking, new CollectCollectiblePayload(this.getId(), orgCount));
                     }
                 }
                 if (itemStack.isEmpty()) {

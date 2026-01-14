@@ -7,6 +7,9 @@ public class MubbleParticleResources {
 	public static void register() {
 		var instance = ParticleProviderRegistry.getInstance();
 
-		instance.register(MubbleParticleTypes.GOLD_SPARK, GoldSparkParticle.Provider::new);
+		instance.register(MubbleParticleTypes.COIN_SPARKLE, CoinSparkleParticle.Provider::new);
+		instance.register(MubbleParticleTypes.RED_COIN_SPARKLE, CoinSparkleParticle.Provider::new);
+		instance.register(MubbleParticleTypes.BLUE_COIN_SPARKLE, CoinSparkleParticle.Provider::new);
+		instance.register(MubbleParticleTypes.FLOWER_COIN_SPARKLE, CoinSparkleParticle.Provider::new);
 	}
 }

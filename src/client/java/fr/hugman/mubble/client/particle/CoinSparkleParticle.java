@@ -7,12 +7,12 @@ import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
-public class GoldSparkParticle extends SingleQuadParticle {
+public class CoinSparkleParticle extends SingleQuadParticle {
 	protected boolean rollDirection = false;
 	protected float rollAcceleration = 0.0f;
 	protected float rollSpeed;
 
-	protected GoldSparkParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite sprite) {
+	protected CoinSparkleParticle(ClientLevel level, double x, double y, double z, TextureAtlasSprite sprite) {
 		super(level, x, y, z, sprite);
 	}
 
@@ -62,7 +62,7 @@ public class GoldSparkParticle extends SingleQuadParticle {
 				double zAux,
 				RandomSource random
 		) {
-			var particle = new GoldSparkParticle(level, x, y, z, this.sprite.get(random));
+			var particle = new CoinSparkleParticle(level, x, y, z, this.sprite.get(random));
 
 			particle.hasPhysics = false;
 			particle.lifetime = 5 + random.nextInt(3);

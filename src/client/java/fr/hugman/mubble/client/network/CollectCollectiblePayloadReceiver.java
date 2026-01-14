@@ -3,9 +3,10 @@ package fr.hugman.mubble.client.network;
 import fr.hugman.mubble.core.particles.MubbleParticleTypes;
 import fr.hugman.mubble.network.protocol.common.custom.CollectCollectiblePayload;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
+import fr.hugman.mubble.world.item.MubbleItems;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
 public class CollectCollectiblePayloadReceiver implements ClientPlayNetworking.PlayPayloadHandler<CollectCollectiblePayload> {
@@ -16,22 +17,34 @@ public class CollectCollectiblePayloadReceiver implements ClientPlayNetworking.P
         context.client().execute(() -> {
             var level = context.client().level;
             Entity from = level.getEntity(payload.itemId());
-            LivingEntity to = (LivingEntity)level.getEntity(payload.playerId());
-            if (to == null) {
-                to = context.client().player;
-            }
 
             if (from != null) {
-                //EntityRenderState itemState = context.client().getEntityRenderDispatcher().extractEntity(from, 1.0F);
-                //context.client().particleEngine.add(new ItemPickupParticle(level, itemState, to, from.getDeltaMovement()));
-                var particleCount = 5 + from.getRandom().nextInt(2);
-                for (int i = 0; i < particleCount; i++) {
-                    level.addParticle(MubbleParticleTypes.GOLD_SPARK, from.getRandomX(0.5), from.getY() + (from.getBbHeight() / 2), from.getRandomZ(0.5), 0,0,0);
-                }
                 if (from instanceof CollectibleEntity collectible) {
                     ItemStack itemStack = collectible.getItem();
+
+                    //TODO: make customizable
+                    ParticleOptions particle = null;
+                    if(itemStack.is(MubbleItems.COIN)) {
+                        particle = MubbleParticleTypes.COIN_SPARKLE;
+                    }
+                    if(itemStack.is(MubbleItems.RED_COIN)) {
+                        particle = MubbleParticleTypes.RED_COIN_SPARKLE;
+                    }
+                    if(itemStack.is(MubbleItems.BLUE_COIN)) {
+                        particle = MubbleParticleTypes.BLUE_COIN_SPARKLE;
+                    }
+                    if(itemStack.is(MubbleItems.FLOWER_COIN)) {
+                        particle = MubbleParticleTypes.FLOWER_COIN_SPARKLE;
+                    }
+
                     if (!itemStack.isEmpty()) {
                         itemStack.shrink(payload.amount());
+                    }
+                    if(particle != null) {
+                        var particleCount = 5 + from.getRandom().nextInt(2);
+                        for (int i = 0; i < particleCount; i++) {
+                            level.addParticle(particle, from.getRandomX(0.5), from.getY() + (from.getBbHeight() / 2), from.getRandomZ(0.5), 0,0,0);
+                        }
                     }
 
                     if (itemStack.isEmpty()) {
