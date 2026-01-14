@@ -20,19 +20,34 @@ import net.minecraft.world.phys.Vec3;
 
 public abstract class Ball extends ThrowableProjectile {
 	public static final String REBOUNDS_KEY = "rebounds";
+
     protected int rebounds = 3;
+    private boolean rotateClockwards = false;
 
     protected Ball(EntityType<? extends Ball> type, Level level) {
         super(type, level);
+        initialize();
     }
 
     protected Ball(EntityType<? extends Ball> type, Level level, LivingEntity owner) {
         super(type, level);
+        initialize();
         this.setOwner(owner);
     }
 
     protected Ball(EntityType<? extends Ball> type, double x, double y, double z, Level level) {
         super(type, x, y, z, level);
+        initialize();
+    }
+
+    public void initialize() {
+        if(this.level().isClientSide()) {
+            this.rotateClockwards = this.level().getRandom().nextBoolean();
+        }
+    }
+
+    public boolean rotatesClockwards() {
+        return rotateClockwards;
     }
 
     @Override

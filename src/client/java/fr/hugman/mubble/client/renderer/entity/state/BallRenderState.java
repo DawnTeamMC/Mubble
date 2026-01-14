@@ -11,4 +11,5 @@ public class BallRenderState extends EntityRenderState {
     public float yRot;
     public double speed;
     public ClientAsset.ResourceTexture texture;
+    public boolean rotateClockwards;
 }

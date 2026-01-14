@@ -36,18 +36,20 @@ public class BallRenderer extends EntityRenderer<Ball, BallRenderState> {
         state.yRot = ball.getYRot(f);
         state.texture = ball.getTexture();
         state.lightCoords = 15728880;
+        state.rotateClockwards = ball.rotatesClockwards();
     }
 
     @Override
-    public void submit(BallRenderState entityRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
+    public void submit(BallRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         poseStack.pushPose();
-		poseStack.mulPose(Axis.YP.rotationDegrees(entityRenderState.yRot + 180.0F));
-		poseStack.mulPose(Axis.XP.rotationDegrees(entityRenderState.xRot));
+		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot + 180.0F));
+		poseStack.mulPose(Axis.XP.rotationDegrees(state.xRot));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(state.ageInTicks * (state.rotateClockwards ? -20.0F : 20.0F)));
 		var size = 4;
-		poseStack.scale(entityRenderState.boundingBoxWidth * size, entityRenderState.boundingBoxHeight * size, entityRenderState.boundingBoxWidth * size);
-		submitNodeCollector.submitModel(this.model, entityRenderState, poseStack, RenderTypes.entityCutout(entityRenderState.texture.texturePath()), entityRenderState.lightCoords, OverlayTexture.NO_OVERLAY, entityRenderState.outlineColor, null);
+		poseStack.scale(state.boundingBoxWidth * size, state.boundingBoxHeight * size, state.boundingBoxWidth * size);
+		submitNodeCollector.submitModel(this.model, state, poseStack, RenderTypes.entityCutout(state.texture.texturePath()), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
         poseStack.popPose();
 
-        super.submit(entityRenderState, poseStack, submitNodeCollector, cameraRenderState);
+        super.submit(state, poseStack, submitNodeCollector, cameraRenderState);
     }
 }
