@@ -7,7 +7,7 @@ import fr.hugman.mubble.world.item.MubbleItems;
 import fr.hugman.mubble.world.level.block.BeepBlock;
 import fr.hugman.mubble.world.level.block.MubbleBlocks;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
@@ -29,7 +29,7 @@ import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant
 public class MubbleModelProvider extends FabricModelProvider {
 	private final CompletableFuture<HolderLookup.Provider> registriesFuture;
 
-	public MubbleModelProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+	public MubbleModelProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output);
 		this.registriesFuture = registriesFuture;
 	}
@@ -72,7 +72,10 @@ public class MubbleModelProvider extends FabricModelProvider {
 	@Override
 	public void generateItemModels(ItemModelGenerators gen) {
 		// SUPER MARIO
-		gen.generateFlatItem(MubbleItems.MAKER_GLOVE, ModelTemplates.FLAT_ITEM);
+		gen.generateFlatItem(MubbleItems.COIN, ModelTemplates.FLAT_ITEM);
+		gen.generateFlatItem(MubbleItems.RED_COIN, ModelTemplates.FLAT_ITEM);
+		gen.generateFlatItem(MubbleItems.BLUE_COIN, ModelTemplates.FLAT_ITEM);
+		gen.generateFlatItem(MubbleItems.FLOWER_COIN, ModelTemplates.FLAT_ITEM);
 
 		gen.generateFlatItem(MubbleItems.GREEN_KOOPA_SHELL, ModelTemplates.FLAT_ITEM);
 		gen.generateFlatItem(MubbleItems.RED_KOOPA_SHELL, ModelTemplates.FLAT_ITEM);
@@ -85,6 +88,8 @@ public class MubbleModelProvider extends FabricModelProvider {
 
 		gen.generateFlatItem(MubbleItems.CAPE_FEATHER, ModelTemplates.FLAT_ITEM);
 		gen.generateFlatItem(MubbleItems.SUPER_CAPE_FEATHER, ModelTemplates.FLAT_ITEM);
+
+		gen.generateFlatItem(MubbleItems.MAKER_GLOVE, ModelTemplates.FLAT_ITEM);
 
 		gen.generateFlatItem(MubbleItems.GOOMBA_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
 	}

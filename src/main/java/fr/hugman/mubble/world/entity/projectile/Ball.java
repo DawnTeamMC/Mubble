@@ -3,11 +3,11 @@ package fr.hugman.mubble.world.entity.projectile;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.core.ClientAsset;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,19 +20,34 @@ import net.minecraft.world.phys.Vec3;
 
 public abstract class Ball extends ThrowableProjectile {
 	public static final String REBOUNDS_KEY = "rebounds";
+
     protected int rebounds = 3;
+    private boolean rotateClockwards = false;
 
     protected Ball(EntityType<? extends Ball> type, Level level) {
         super(type, level);
+        initialize();
     }
 
     protected Ball(EntityType<? extends Ball> type, Level level, LivingEntity owner) {
         super(type, level);
+        initialize();
         this.setOwner(owner);
     }
 
     protected Ball(EntityType<? extends Ball> type, double x, double y, double z, Level level) {
         super(type, x, y, z, level);
+        initialize();
+    }
+
+    public void initialize() {
+        if(this.level().isClientSide()) {
+            this.rotateClockwards = this.level().getRandom().nextBoolean();
+        }
+    }
+
+    public boolean rotatesClockwards() {
+        return rotateClockwards;
     }
 
     @Override
@@ -41,12 +56,6 @@ public abstract class Ball extends ThrowableProjectile {
     @Override
     public void tick() {
         super.tick();
-        Vec3 vec3d = this.getDeltaMovement();
-
-        float f = (float)(Mth.atan2(-vec3d.x, -vec3d.z) * 180.0F / (float)Math.PI);
-        float g = (float)(Mth.atan2(vec3d.y, vec3d.horizontalDistance()) * 180.0F / (float)Math.PI);
-        this.setXRot(lerpRotation(this.getXRot(), g));
-        this.setYRot(lerpRotation(this.getYRot(), f));
     }
 
     protected abstract SoundEvent getDeathSound();
@@ -66,6 +75,15 @@ public abstract class Ball extends ThrowableProjectile {
             this.finalHit();
         }
     }
+
+	public void reboundUp() {
+		Vec3 movement = this.getDeltaMovement().multiply(1.0D, -0.65D, 1.0D);
+		double minY = 0.5D;
+		if (movement.y < minY) {
+			movement = movement.with(Direction.Axis.Y, minY);
+		}
+		this.setDeltaMovement(movement);
+	}
 
 	/**
 	 * Triggers after the ball has hit and can no longer rebound.

@@ -6,8 +6,8 @@ import fr.hugman.mubble.world.entity.monster.goomba.GoombaVariant;
 import fr.hugman.mubble.references.GoombaVariantKeys;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.world.level.block.MubbleBlocks;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -23,11 +23,11 @@ import java.util.Collections;
 import java.util.function.Predicate;
 
 public class MubbleCreativeModeTabs {
-    public static final CreativeModeTab SUPER_MARIO = register(MubbleCreativeModeTabKeys.SUPER_MARIO, FabricItemGroup.builder()
+    public static final CreativeModeTab SUPER_MARIO = register(MubbleCreativeModeTabKeys.SUPER_MARIO, FabricCreativeModeTab.builder()
             .title(Component.translatable("item_group.mubble.super_mario"))
             .icon(() -> new ItemStack(MubbleBlocks.QUESTION_BLOCK))
             .build());
-    public static final CreativeModeTab YOSHI_ISLAND = register(MubbleCreativeModeTabKeys.YOSHI_ISLAND, FabricItemGroup.builder()
+    public static final CreativeModeTab YOSHI_ISLAND = register(MubbleCreativeModeTabKeys.YOSHI_ISLAND, FabricCreativeModeTab.builder()
             .title(Component.translatable("item_group.mubble.yoshi_island"))
             .icon(() -> new ItemStack(MubbleBlocks.GREEN_EGG_BLOCK))
             .build());
@@ -37,9 +37,13 @@ public class MubbleCreativeModeTabs {
     }
 
     public static void appendItemGroups() {
-        ItemGroupEvents.modifyEntriesEvent(MubbleCreativeModeTabKeys.SUPER_MARIO).register(entries -> {
+        CreativeModeTabEvents.modifyOutputEvent(MubbleCreativeModeTabKeys.SUPER_MARIO).register(entries -> {
             var context = entries.getContext();
 
+			entries.accept(MubbleItems.COIN);
+			entries.accept(MubbleItems.RED_COIN);
+			entries.accept(MubbleItems.BLUE_COIN);
+			entries.accept(MubbleItems.FLOWER_COIN);
             entries.accept(MubbleItems.FIRE_FLOWER);
             entries.accept(MubbleItems.ICE_FLOWER);
             entries.accept(MubbleItems.MINI_MUSHROOM);
@@ -79,7 +83,7 @@ public class MubbleCreativeModeTabs {
 
         appendSpawnEgg(MubbleItems.GOOMBA_SPAWN_EGG);
 
-        ItemGroupEvents.modifyEntriesEvent(MubbleCreativeModeTabKeys.YOSHI_ISLAND).register(entries -> {
+        CreativeModeTabEvents.modifyOutputEvent(MubbleCreativeModeTabKeys.YOSHI_ISLAND).register(entries -> {
             entries.accept(MubbleBlocks.BLUE_EGG_BLOCK);
             entries.accept(MubbleBlocks.CYAN_EGG_BLOCK);
             entries.accept(MubbleBlocks.GREEN_EGG_BLOCK);
@@ -92,8 +96,8 @@ public class MubbleCreativeModeTabs {
         });
     }
 
-    public static void append(ResourceKey<CreativeModeTab> group, ItemGroupEvents.ModifyEntries modifier) {
-        ItemGroupEvents.modifyEntriesEvent(group).register(modifier);
+    public static void append(ResourceKey<CreativeModeTab> group, CreativeModeTabEvents.ModifyOutput modifier) {
+        CreativeModeTabEvents.modifyOutputEvent(group).register(modifier);
     }
 
     public static void appendSpawnEgg(Item spawnEgg) {
@@ -117,7 +121,7 @@ public class MubbleCreativeModeTabs {
             }
             return false;
         };
-        append(CreativeModeTabs.SPAWN_EGGS, e -> e.addAfter(predicate, Collections.singleton(new ItemStack(spawnEgg)), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
+        append(CreativeModeTabs.SPAWN_EGGS, e -> e.insertAfter(predicate, Collections.singleton(new ItemStack(spawnEgg)), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
     }
 
     private static void addGoombaVariantsSpawnEggs(

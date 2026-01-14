@@ -7,9 +7,12 @@ import net.minecraft.world.item.Item;
 
 public class MubbleItemKeys {
     // SUPER MARIO
-    public static final ResourceKey<Item> MAKER_GLOVE = createKey("maker_glove");
+    public static final ResourceKey<Item> COIN = createKey("coin");
+    public static final ResourceKey<Item> RED_COIN = createKey("red_coin");
+    public static final ResourceKey<Item> BLUE_COIN = createKey("blue_coin");
+    public static final ResourceKey<Item> FLOWER_COIN = createKey("flower_coin");
     public static final ResourceKey<Item> GREEN_KOOPA_SHELL = createKey("green_koopa_shell");
-    public static final ResourceKey<Item> RED_KOOPA_SHELL = createKey("red_koopa_shell");
+	public static final ResourceKey<Item> RED_KOOPA_SHELL = createKey("red_koopa_shell");
 
     public static final ResourceKey<Item> MINI_MUSHROOM = createKey("mini_mushroom");
     public static final ResourceKey<Item> MEGA_MUSHROOM = createKey("mega_mushroom");
@@ -20,6 +23,8 @@ public class MubbleItemKeys {
     public static final ResourceKey<Item> CAPE_FEATHER = createKey("cape_feather");
     public static final ResourceKey<Item> SUPER_CAPE_FEATHER = createKey("super_cape_feather");
     public static final ResourceKey<Item> GOOMBA_SPAWN_EGG = createKey("goomba_spawn_egg");
+
+	public static final ResourceKey<Item> MAKER_GLOVE = createKey("maker_glove");
 
     private static ResourceKey<Item> createKey(String path) {
         return ResourceKey.create(Registries.ITEM, Mubble.id(path));

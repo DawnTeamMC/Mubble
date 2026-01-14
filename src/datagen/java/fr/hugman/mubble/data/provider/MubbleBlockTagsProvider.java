@@ -1,7 +1,7 @@
 package fr.hugman.mubble.data.provider;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
@@ -10,8 +10,8 @@ import java.util.concurrent.CompletableFuture;
 import static fr.hugman.mubble.tags.MubbleBlockTags.*;
 import static fr.hugman.mubble.world.level.block.MubbleBlocks.*;
 
-public class MubbleBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-	public MubbleBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+public class MubbleBlockTagsProvider extends FabricTagsProvider.BlockTagsProvider {
+	public MubbleBlockTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
 		super(output, registriesFuture);
 	}
 

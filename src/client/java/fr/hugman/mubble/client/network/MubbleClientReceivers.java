@@ -11,5 +11,6 @@ public class MubbleClientReceivers {
         ClientPlayNetworking.registerGlobalReceiver(MubblePayloadTypes.POWER_UP_CHANGE, ((payload, context) -> context.client().execute(() -> {
             PowerUp.onChange(context.player(), payload.previous(), payload.next());
         })));
+        ClientPlayNetworking.registerGlobalReceiver(MubblePayloadTypes.COLLECT_COLLECTIBLE, CollectCollectiblePayloadReceiver.INSTANCE);
     }
 }

@@ -4,7 +4,7 @@ import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.references.MubbleCreativeModeTabKeys;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.sounds.MubbleSounds;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -22,8 +22,8 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 			"of", "the", "and", "a", "an", "in", "on", "for", "to", "at", "by", "from", "with"
 	);
 
-	public MubbleEnglishLangProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
-		super(dataOutput, "en_us", registryLookup);
+	public MubbleEnglishLangProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+		super(output, "en_us", registryLookup);
 	}
 
 	@Override
@@ -48,6 +48,7 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("subtitles.mubble.block.bumpable_block.loot", "Block dropped item");
 		builder.add("subtitles.mubble.block.bumpable_block.loot.coin", "Block dropped coin");
 		builder.add("subtitles.mubble.block.note_block.jump", "Note Block used");
+		builder.add(MubbleSounds.COIN_COLLECT.value(), "Coin collected");
 		builder.add("subtitles.mubble.item.cape_feather.use", "Cape Feather used");
 		builder.add("subtitles.mubble.entity.goomba.find_target", "Goomba finds a target");
 		builder.add("subtitles.mubble.entity.goomba.death", "Goomba dies");

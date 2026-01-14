@@ -2,6 +2,8 @@ package fr.hugman.mubble.mixin;
 
 import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
+import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
@@ -13,6 +15,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.AABB;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Mixin(Player.class)
@@ -66,6 +70,28 @@ public class PlayerMixin implements PowerUpHolder {
                 this_.getEntityData().set(POWER_UP_PROPERTIES, this_.getPowerUpProperties(), true);
             }
         });
+    }
+
+    @Inject(method = "aiStep", at = @At("TAIL"))
+    private void mubble$aiStep(CallbackInfo ci) {
+        var this_ = (Player) (Object) this;
+
+        if (this_.getHealth() > 0.0F && !this_.isSpectator()) {
+            AABB collectArea;
+            if (this_.isPassenger() && !this_.getVehicle().isRemoved()) {
+                collectArea = this_.getBoundingBox().minmax(this_.getVehicle().getBoundingBox());
+            } else {
+                collectArea = this_.getBoundingBox();
+            }
+
+            List<CollectibleEntity> collectibles = this_.level().getEntities(MubbleEntityTypes.COLLECTIBLE, collectArea, _ -> true);
+
+            for (var collectible : collectibles) {
+                if (!collectible.isRemoved()) {
+                    collectible.collect(this_);
+                }
+            }
+        }
     }
 
     @Override
