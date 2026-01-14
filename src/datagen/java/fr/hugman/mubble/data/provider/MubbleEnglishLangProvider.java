@@ -48,6 +48,7 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("subtitles.mubble.block.bumpable_block.loot", "Block dropped item");
 		builder.add("subtitles.mubble.block.bumpable_block.loot.coin", "Block dropped coin");
 		builder.add("subtitles.mubble.block.note_block.jump", "Note Block used");
+		builder.add(MubbleSounds.COIN_COLLECT.value(), "Coin collected");
 		builder.add("subtitles.mubble.item.cape_feather.use", "Cape Feather used");
 		builder.add("subtitles.mubble.entity.goomba.find_target", "Goomba finds a target");
 		builder.add("subtitles.mubble.entity.goomba.death", "Goomba dies");

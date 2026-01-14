@@ -3,6 +3,7 @@ package fr.hugman.mubble.data.provider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.tags.ItemTags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,6 +18,8 @@ public class MubbleItemTagProvider extends FabricTagsProvider.ItemTagsProvider {
 
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
+		valueLookupBuilder(COINS).add(COIN, RED_COIN, BLUE_COIN, FLOWER_COIN);
 		valueLookupBuilder(KOOPA_SHELLS).add(GREEN_KOOPA_SHELL, RED_KOOPA_SHELL);
+		valueLookupBuilder(ItemTags.PIGLIN_LOVED).add(COIN);
 	}
 }

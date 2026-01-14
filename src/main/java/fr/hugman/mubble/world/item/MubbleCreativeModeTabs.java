@@ -40,6 +40,10 @@ public class MubbleCreativeModeTabs {
         CreativeModeTabEvents.modifyOutputEvent(MubbleCreativeModeTabKeys.SUPER_MARIO).register(entries -> {
             var context = entries.getContext();
 
+			entries.accept(MubbleItems.COIN);
+			entries.accept(MubbleItems.RED_COIN);
+			entries.accept(MubbleItems.BLUE_COIN);
+			entries.accept(MubbleItems.FLOWER_COIN);
             entries.accept(MubbleItems.FIRE_FLOWER);
             entries.accept(MubbleItems.ICE_FLOWER);
             entries.accept(MubbleItems.MINI_MUSHROOM);

@@ -22,7 +22,10 @@ import net.minecraft.world.item.component.UseCooldown;
 
 public class MubbleItems {
     // SUPER MARIO
-    public static final Item MAKER_GLOVE = register(MubbleItemKeys.MAKER_GLOVE, new Item.Properties().stacksTo(1));
+	public static final Item COIN = register(MubbleItemKeys.COIN, CollectibleItem::new);
+	public static final Item RED_COIN = register(MubbleItemKeys.RED_COIN, CollectibleItem::new);
+	public static final Item BLUE_COIN = register(MubbleItemKeys.BLUE_COIN, CollectibleItem::new);
+	public static final Item FLOWER_COIN = register(MubbleItemKeys.FLOWER_COIN, CollectibleItem::new);
     public static final KoopaShellItem GREEN_KOOPA_SHELL = register(MubbleItemKeys.GREEN_KOOPA_SHELL, s -> new KoopaShellItem(s, false), new Item.Properties().stacksTo(3));
     public static final KoopaShellItem RED_KOOPA_SHELL = register(MubbleItemKeys.RED_KOOPA_SHELL, s -> new KoopaShellItem(s, true), new Item.Properties().stacksTo(3));
 
@@ -33,7 +36,9 @@ public class MubbleItems {
     public static final CapeFeatherItem CAPE_FEATHER = register(MubbleItemKeys.CAPE_FEATHER, s -> new CapeFeatherItem(s, false));
     public static final CapeFeatherItem SUPER_CAPE_FEATHER = register(MubbleItemKeys.SUPER_CAPE_FEATHER, s -> new CapeFeatherItem(s.rarity(Rarity.EPIC), true));
 
-    public static final SpawnEggItem GOOMBA_SPAWN_EGG = register(MubbleItemKeys.GOOMBA_SPAWN_EGG, ItemFactory.spawnEgg(MubbleEntityTypes.GOOMBA));
+	public static final Item MAKER_GLOVE = register(MubbleItemKeys.MAKER_GLOVE, new Item.Properties().stacksTo(1));
+
+	public static final SpawnEggItem GOOMBA_SPAWN_EGG = register(MubbleItemKeys.GOOMBA_SPAWN_EGG, ItemFactory.spawnEgg(MubbleEntityTypes.GOOMBA));
 
     private static <O extends Item> O register(ResourceKey<Item> key, Function<Item.Properties, O> factory, Item.Properties settings) {
         return Registry.register(BuiltInRegistries.ITEM, key, factory.apply(settings.setId(key)));

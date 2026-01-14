@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 
 public class MubbleItemTags {
 	// SUPER MARIO
+	public static final TagKey<Item> COINS = bind("coins");
 	public static final TagKey<Item> KOOPA_SHELLS = bind("koopa_shells");
 
 	public static TagKey<Item> bind(String path) {
