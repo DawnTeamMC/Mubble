@@ -10,7 +10,7 @@ import net.minecraft.core.Holder;
 
 public class PowerUpArgumentType extends ResourceOrIdArgument<PowerUp> {
     protected PowerUpArgumentType(CommandBuildContext registryAccess) {
-        super(registryAccess, MubbleRegistries.POWER_UP, PowerUp.CODEC);
+        super(registryAccess, MubbleRegistries.POWER_UP, PowerUp.DIRECT_CODEC);
     }
 
     public static PowerUpArgumentType of(CommandBuildContext registryAccess) {

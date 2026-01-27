@@ -21,7 +21,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.EitherHolder;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
@@ -41,7 +40,7 @@ public record PowerUp(
     public static final Holder<SoundEvent> DEFAULT_OBTAIN_SOUND = MubbleSounds.POWER_UP_OBTAIN;
     public static final Holder<SoundEvent> DEFAULT_LOOSE_SOUND = MubbleSounds.POWER_UP_LOOSE;
 
-    public static final Codec<PowerUp> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+    public static final Codec<PowerUp> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ComponentSerialization.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
             PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
@@ -51,10 +50,9 @@ public record PowerUp(
             Codec.BOOL.optionalFieldOf("can_sprint_on_water", false).forGetter(PowerUp::canSprintOnWater)
     ).apply(instance, PowerUp::new));
 
-    public static final Codec<Holder<PowerUp>> ENTRY_CODEC = RegistryFileCodec.create(MubbleRegistries.POWER_UP, CODEC);
-    public static final Codec<EitherHolder<PowerUp>> LAZY_ENTRY_CODEC = EitherHolder.codec(MubbleRegistries.POWER_UP, ENTRY_CODEC);
+    public static final Codec<Holder<PowerUp>> CODEC = RegistryFileCodec.create(MubbleRegistries.POWER_UP, DIRECT_CODEC);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUp> PACKET_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUp> DIRECT_STREAM_CODEC = StreamCodec.composite(
             ComponentSerialization.TRUSTED_OPTIONAL_STREAM_CODEC, PowerUp::name,
             Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::spriteId,
             PowerUpAction.OPTIONAL_ENTRY_PACKET_CODEC, PowerUp::action,
@@ -64,9 +62,8 @@ public record PowerUp(
             ByteBufCodecs.BOOL, PowerUp::canSprintOnWater,
             PowerUp::new
     );
-    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUp>> ENTRY_PACKET_CODEC = ByteBufCodecs.holder(MubbleRegistries.POWER_UP, PACKET_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUp>>> OPTIONAL_ENTRY_PACKET_CODEC = ByteBufCodecs.optional(ENTRY_PACKET_CODEC);
-    public static final StreamCodec<RegistryFriendlyByteBuf, EitherHolder<PowerUp>> LAZY_ENTRY_PACKET_CODEC = EitherHolder.streamCodec(MubbleRegistries.POWER_UP, ENTRY_PACKET_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUp>> STREAM_CODEC = ByteBufCodecs.holder(MubbleRegistries.POWER_UP, DIRECT_STREAM_CODEC);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUp>>> OPTIONAL_STREAM_CODEC = ByteBufCodecs.optional(STREAM_CODEC);
 
     public InteractionResult trigger(Player player) {
         return this.action.map(entry -> entry.value().trigger(player)).orElse(InteractionResult.PASS);

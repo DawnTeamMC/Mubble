@@ -6,28 +6,27 @@ import java.util.function.Consumer;
 
 import fr.hugman.mubble.world.power_up.PowerUp;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.item.EitherHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.TooltipProvider;
 
-public record PowerUpComponent(EitherHolder<PowerUp> powerUp) implements TooltipProvider {
-    public static final Codec<PowerUpComponent> CODEC = PowerUp.LAZY_ENTRY_CODEC.xmap(PowerUpComponent::new, PowerUpComponent::powerUp);
-    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpComponent> PACKET_CODEC = PowerUp.LAZY_ENTRY_PACKET_CODEC.map(PowerUpComponent::new, PowerUpComponent::powerUp);
+public record PowerUpComponent(Holder<PowerUp> powerUp) implements TooltipProvider {
+    public static final Codec<PowerUpComponent> CODEC = PowerUp.CODEC.xmap(PowerUpComponent::new, PowerUpComponent::powerUp);
+    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpComponent> PACKET_CODEC = PowerUp.STREAM_CODEC.map(PowerUpComponent::new, PowerUpComponent::powerUp);
 
     @Override
     public void addToTooltip(Item.TooltipContext context, Consumer<Component> textConsumer, TooltipFlag type, DataComponentGetter components) {
         var registryLookup = context.registries();
         if (registryLookup != null) {
-            this.powerUp.unwrap(registryLookup)
-                    .ifPresent(entityAttributeEntries -> buildAutomaticTooltip(entityAttributeEntries.value(), context, textConsumer, type, components));
+            buildAutomaticTooltip(this.powerUp.value(), context, textConsumer, type, components);
         }
     }
 

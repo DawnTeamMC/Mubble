@@ -13,8 +13,8 @@ public record PowerUpChangePayload(
         Optional<Holder<PowerUp>> next
 ) implements CustomPacketPayload {
     public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpChangePayload> PACKET_CODEC = StreamCodec.composite(
-            PowerUp.OPTIONAL_ENTRY_PACKET_CODEC, (powerUpChangePayload -> powerUpChangePayload.previous),
-            PowerUp.OPTIONAL_ENTRY_PACKET_CODEC, (powerUpChangePayload -> powerUpChangePayload.next),
+            PowerUp.OPTIONAL_STREAM_CODEC, (powerUpChangePayload -> powerUpChangePayload.previous),
+            PowerUp.OPTIONAL_STREAM_CODEC, (powerUpChangePayload -> powerUpChangePayload.next),
             PowerUpChangePayload::new
     );
 

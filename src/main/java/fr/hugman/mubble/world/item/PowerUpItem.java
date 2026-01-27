@@ -29,10 +29,9 @@ public class PowerUpItem extends Item {
         PowerUpComponent powerUpComponent = stack.get(MubbleDataComponents.POWER_UP);
         if (null != powerUpComponent) {
             user.startUsingItem(hand);
-            var opt = powerUpComponent.powerUp().unwrap(level.registryAccess());
-            if (opt.isPresent() && PowerUp.canChange(user, opt.get())) {
+            if (PowerUp.canChange(user, powerUpComponent.powerUp())) {
                 if (level instanceof ServerLevel) {
-                    user.setPowerUp(opt.get());
+                    user.setPowerUp(powerUpComponent.powerUp());
                 }
                 user.awardStat(Stats.ITEM_USED.get(this));
                 stack.consume(1, user);
