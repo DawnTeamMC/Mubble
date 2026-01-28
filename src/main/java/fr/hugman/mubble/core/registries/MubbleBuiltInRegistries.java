@@ -18,7 +18,7 @@ public class MubbleBuiltInRegistries {
 
     public static void register() {
         DynamicRegistries.registerSynced(MubbleRegistries.GOOMBA_VARIANT, GoombaVariant.CODEC);
-        DynamicRegistries.registerSynced(MubbleRegistries.POWER_UP, PowerUp.CODEC);
+        DynamicRegistries.registerSynced(MubbleRegistries.POWER_UP, PowerUp.DIRECT_CODEC);
         DynamicRegistries.registerSynced(MubbleRegistries.POWER_UP_ACTION, PowerUpAction.TYPE_CODEC);
     }
 }

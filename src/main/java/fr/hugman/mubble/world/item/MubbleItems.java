@@ -14,7 +14,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.EitherHolder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.SpawnEggItem;
@@ -59,7 +58,7 @@ public class MubbleItems {
 
     private static PowerUpItem registerPowerUp(ResourceKey<Item> key, ResourceKey<PowerUp> powerUp) {
         return register(key, PowerUpItem::new, new Item.Properties()
-                .component(MubbleDataComponents.POWER_UP, new PowerUpComponent(new EitherHolder<>(powerUp)))
+                .delayedComponent(MubbleDataComponents.POWER_UP, (context) -> new PowerUpComponent(context.getOrThrow(powerUp)))
                 .component(DataComponents.USE_COOLDOWN, new UseCooldown(1.0f, Optional.of(MubbleCooldownGroups.POWER_UPS))));
     }
 }

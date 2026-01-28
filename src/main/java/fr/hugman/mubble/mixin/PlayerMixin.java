@@ -45,13 +45,13 @@ public class PlayerMixin implements PowerUpHolder {
     private void mubble$writeCustomData(ValueOutput view, CallbackInfo ci) {
         var this_ = (Player) ((Object) this);
 
-		this_.getPowerUp().ifPresent(entry -> view.store(POWER_UP_KEY, PowerUp.ENTRY_CODEC, entry));
+		this_.getPowerUp().ifPresent(entry -> view.store(POWER_UP_KEY, PowerUp.CODEC, entry));
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void mubble$readCustomData(ValueInput view, CallbackInfo ci) {
         var this_ = (Player) (Object) this;
-		view.read(POWER_UP_KEY, PowerUp.ENTRY_CODEC).ifPresent(entry -> this_.getEntityData().set(POWER_UP, Optional.of(entry)));
+		view.read(POWER_UP_KEY, PowerUp.CODEC).ifPresent(entry -> this_.getEntityData().set(POWER_UP, Optional.of(entry)));
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
