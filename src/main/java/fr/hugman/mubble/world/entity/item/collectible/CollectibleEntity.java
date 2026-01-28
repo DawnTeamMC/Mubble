@@ -3,6 +3,7 @@ package fr.hugman.mubble.world.entity.item.collectible;
 import fr.hugman.mubble.network.protocol.common.custom.CollectCollectiblePayload;
 import fr.hugman.mubble.sounds.SoundConfig;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import fr.hugman.mubble.world.level.GoldenServerExplosion;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -57,6 +59,17 @@ public class CollectibleEntity extends Entity {
         this.setPos(x, y, z);
         this.setItem(stack);
         this.setFixed(true);
+    }
+
+    @Nullable
+    public static Vec3 placePos(Level level, BlockPos blockPos) {
+        var dimensions = MubbleEntityTypes.COLLECTIBLE.getDimensions();
+        Vec3 pos = Vec3.atBottomCenterOf(blockPos).add(0, Math.clamp((1 - dimensions.height()) / 2, 0.0f, 0.5f), 0);
+        AABB box = dimensions.makeBoundingBox(pos.x(), pos.y(), pos.z());
+        if (level.noCollision(null, box) && level.getEntities(null, box).isEmpty()) {
+            return pos;
+        }
+        return null;
     }
 
     public ItemStack getItem() {
@@ -282,6 +295,10 @@ public class CollectibleEntity extends Entity {
     public boolean ignoreExplosion(final Explosion explosion) {
         if (!this.isFixed()) {
             return false;
+        }
+        if(explosion instanceof GoldenServerExplosion) {
+            //TODO: make this more dynamic...
+            return true;
         }
         return explosion.shouldAffectBlocklikeEntities() ? super.ignoreExplosion(explosion) : true;
     }

@@ -27,6 +27,7 @@
       "fr.hugman.mubble.client.MubbleClient"
     ]
   },
+  "accessWidener": "mubble.accesswidener",
   "mixins": [
     "mubble.mixins.json",
     {

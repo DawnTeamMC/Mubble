@@ -24,6 +24,8 @@ dependencies {
 }
 
 loom {
+    accessWidenerPath = file("src/main/resources/mubble.accesswidener")
+
     splitEnvironmentSourceSets()
 
     mods {
