@@ -253,7 +253,7 @@ public class GoldenServerExplosion implements Explosion {
                     if (!(dist > 1.0)) {
                         Vec3 entityOrigin = entity instanceof PrimedTnt ? entity.position() : entity.getEyePosition();
                         Vec3 direction = entityOrigin.subtract(this.center).normalize();
-                        boolean shouldDamageEntity = this.damageCalculator.shouldDamageEntity(this, entity);
+                        boolean shouldDamageEntity = this.getIndirectSourceEntity() != entity && this.damageCalculator.shouldDamageEntity(this, entity);
                         float knockbackMultiplier = this.damageCalculator.getKnockbackMultiplier(entity);
                         float exposure = !shouldDamageEntity && knockbackMultiplier == 0.0F ? 0.0F : getExposure(this.center, entity);
 
