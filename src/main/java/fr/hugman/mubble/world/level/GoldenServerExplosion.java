@@ -48,7 +48,7 @@ import java.util.*;
 
 public class GoldenServerExplosion implements Explosion {
     private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR = new ExplosionDamageCalculator();
-    private static final WeightedList<ExplosionParticleInfo> DEFAULT_EXPLOSION_BLOCK_PARTICLES = WeightedList.<ExplosionParticleInfo>builder()
+    private static final WeightedList<ExplosionParticleInfo> DEFAULT_EXPLOSION_BLOCK_PARTICLES = WeightedList.<ExplosionParticleInfo>builder() //TODO change these
             .add(new ExplosionParticleInfo(ParticleTypes.POOF, 0.5F, 1.0F))
             .add(new ExplosionParticleInfo(ParticleTypes.SMOKE, 1.0F, 1.0F))
             .build();
@@ -274,6 +274,8 @@ public class GoldenServerExplosion implements Explosion {
                         }
 
                         entity.onExplosionHit(this.source);
+
+                        //TODO: if the entity dies, reward source with coins (or loot said coins if source is not player)
                     }
                 }
             }
