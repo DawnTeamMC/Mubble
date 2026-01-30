@@ -350,7 +350,7 @@ public class GoldenServerExplosion implements Explosion {
                 ParticleTypes.EXPLOSION,
                 ParticleTypes.EXPLOSION_EMITTER,
                 DEFAULT_EXPLOSION_BLOCK_PARTICLES,
-                SoundEvents.GENERIC_EXPLODE
+                MubbleSounds.GOLDEN_EXPLOSION
         );
     }
 
@@ -378,7 +378,7 @@ public class GoldenServerExplosion implements Explosion {
                 ParticleTypes.EXPLOSION,
                 ParticleTypes.EXPLOSION_EMITTER,
                 DEFAULT_EXPLOSION_BLOCK_PARTICLES,
-                SoundEvents.GENERIC_EXPLODE
+                MubbleSounds.GOLDEN_EXPLOSION
         );
     }
 

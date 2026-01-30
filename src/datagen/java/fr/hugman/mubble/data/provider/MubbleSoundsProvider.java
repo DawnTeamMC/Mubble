@@ -8,7 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
+
 import java.util.concurrent.CompletableFuture;
 
 public class MubbleSoundsProvider extends FabricSoundsProvider {
@@ -38,6 +38,8 @@ public class MubbleSoundsProvider extends FabricSoundsProvider {
 		soundExporter.add(MubbleSounds.CAPE_FEATHER_USE, variantSoundBuilder(MubbleSounds.CAPE_FEATHER_USE,1));
 
 		// Entities
+		soundExporter.add(MubbleSounds.GOLDEN_EXPLOSION, variantSoundBuilder(MubbleSounds.GOLDEN_EXPLOSION, 1));
+
 		soundExporter.add(MubbleSounds.GOOMBA_WALK_STEP, variantSoundBuilder(MubbleSounds.GOOMBA_WALK_STEP, 1).subtitle("subtitles.block.generic.footsteps"));
 		soundExporter.add(MubbleSounds.GOOMBA_RUN_STEP, variantSoundBuilder(MubbleSounds.GOOMBA_RUN_STEP, 1).subtitle("subtitles.block.generic.footsteps"));
 		soundExporter.add(MubbleSounds.GOOMBA_FIND_TARGET, variantSoundBuilder(MubbleSounds.GOOMBA_FIND_TARGET, 1));
@@ -59,10 +61,13 @@ public class MubbleSoundsProvider extends FabricSoundsProvider {
 		soundExporter.add(MubbleSounds.ICEBALL_HIT_ENTITY, variantSoundBuilder(MubbleSounds.ICEBALL_HIT_ENTITY, 1).subtitle("subtitles.mubble.entity.iceball.hit"));
 		soundExporter.add(MubbleSounds.ICEBALL_THROW, variantSoundBuilder(MubbleSounds.ICEBALL_THROW, 1));
 
+		soundExporter.add(MubbleSounds.GOLD_FIREBALL_THROW, variantSoundBuilder(MubbleSounds.GOLD_FIREBALL_THROW, 1).sound(SoundTypeBuilder.RegistrationBuilder.ofEvent(MubbleSounds.FIREBALL_THROW)));
+
 		// Power-Up
 		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN, 1));
 		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN_MINI, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN_MINI, 1).subtitle("subtitles.mubble.power_up.obtain"));
 		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN_SUPER_STAR, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN_SUPER_STAR, 1).subtitle("subtitles.mubble.power_up.obtain"));
+		soundExporter.add(MubbleSounds.POWER_UP_OBTAIN_GOLD, variantSoundBuilder(MubbleSounds.POWER_UP_OBTAIN_GOLD, 1).subtitle("subtitles.mubble.power_up.obtain"));
 		soundExporter.add(MubbleSounds.POWER_UP_LOOSE, variantSoundBuilder(MubbleSounds.POWER_UP_LOOSE, 1));
 	}
 

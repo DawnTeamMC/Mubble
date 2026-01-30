@@ -50,6 +50,7 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("subtitles.mubble.block.note_block.jump", "Note Block used");
 		builder.add(MubbleSounds.COIN_COLLECT.value(), "Coin collected");
 		builder.add("subtitles.mubble.item.cape_feather.use", "Cape Feather used");
+		builder.add(MubbleSounds.GOLDEN_EXPLOSION.value(), "Golden explosion");
 		builder.add("subtitles.mubble.entity.goomba.find_target", "Goomba finds a target");
 		builder.add("subtitles.mubble.entity.goomba.death", "Goomba dies");
 		builder.add("subtitles.mubble.entity.goomba.stomp", "Goomba stomped");
@@ -63,6 +64,7 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 		builder.add("subtitles.mubble.entity.fireball.throw", "Fireball thrown");
 		builder.add("subtitles.mubble.entity.iceball.hit", "Iceball hits");
 		builder.add("subtitles.mubble.entity.iceball.throw", "Iceball thrown");
+		builder.add(MubbleSounds.GOLD_FIREBALL_THROW.value(), "Gold Fireball thrown");
 		builder.add("subtitles.mubble.power_up.obtain", "Power-up obtained");
 		builder.add("subtitles.mubble.power_up.loose", "Power-up lost");
 
