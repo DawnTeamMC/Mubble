@@ -45,35 +45,11 @@ public class GoldFireball extends Ball {
     }
 
     @Override
-    protected void onHitEntity(EntityHitResult result) {
-        super.onHitEntity(result);
-        Entity entity = result.getEntity();
-        Entity owner = this.getOwner();
-        float damage = entity.fireImmune() ? 1.0F : 3.0F;
-
-        if (owner instanceof LivingEntity livingEntity) {
-            livingEntity.setLastHurtMob(entity);
-        }
-
-        if (!entity.fireImmune()) {
-            entity.igniteForSeconds(5);
-        }
-        entity.hurt(this.damageSources().source(MubbleDamageTypeKeys.GOLD_FIREBALL, this, this.getOwner()), damage);
-		//TODO change sound
-		this.finalHit(MubbleSounds.FIREBALL_HIT_ENTITY);
-    }
-
-    @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
         Direction face = result.getDirection();
         if (face == Direction.UP) {
-            Vec3 motion = this.getDeltaMovement().subtract(0.0D, this.getDeltaMovement().y * 1.25D, 0.0D);
-            double minY = 0.4D;
-            if (motion.y < minY) {
-                motion = motion.with(Direction.Axis.Y, minY);
-            }
-            this.setDeltaMovement(motion);
+            this.reboundUp();
         } else {
             this.finalHit();
         }
