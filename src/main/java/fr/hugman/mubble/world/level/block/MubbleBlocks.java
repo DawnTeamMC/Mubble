@@ -24,8 +24,8 @@ public class MubbleBlocks {
     // SUPER MARIO
     public static final EmptyBlock EMPTY_BLOCK = register(MubbleBlockKeys.EMPTY_BLOCK, EmptyBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_BROWN));
     public static final DecoratedBumpableBlock QUESTION_BLOCK = registerBumpableBlock(MubbleBlockKeys.QUESTION_BLOCK, EMPTY_BLOCK, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_YELLOW));
-    public static final DecoratedBumpableBlock BRICK_BLOCK = registerBumpableBlock(MubbleBlockKeys.BRICK_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).mapColor(MapColor.COLOR_BROWN));
-    public static final DecoratedBumpableBlock CRYSTAL_BLOCK = registerBumpableBlock(MubbleBlockKeys.CRYSTAL_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).sound(SoundType.AMETHYST).mapColor(MapColor.COLOR_PURPLE));
+    public static final DecoratedBumpableBlock BRICK_BLOCK = registerBumpableBlock(MubbleBlockKeys.BRICK_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).explosionResistance(0).mapColor(MapColor.COLOR_BROWN));
+    public static final DecoratedBumpableBlock CRYSTAL_BLOCK = registerBumpableBlock(MubbleBlockKeys.CRYSTAL_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).explosionResistance(0).sound(SoundType.AMETHYST).mapColor(MapColor.COLOR_PURPLE));
     public static final DecoratedBumpableBlock GOLD_BLOCK = registerBumpableBlock(MubbleBlockKeys.GOLD_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).mapColor(MapColor.GOLD));
     public static final DecoratedBumpableBlock BLUE_EXCLAMATION_BLOCK = registerExclamationBlock(MubbleBlockKeys.BLUE_EXCLAMATION_BLOCK, MapColor.COLOR_BLUE);
     public static final DecoratedBumpableBlock GREEN_EXCLAMATION_BLOCK = registerExclamationBlock(MubbleBlockKeys.GREEN_EXCLAMATION_BLOCK, MapColor.COLOR_GREEN);
