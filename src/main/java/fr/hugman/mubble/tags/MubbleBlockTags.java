@@ -17,6 +17,8 @@ public class MubbleBlockTags {
 	public static final TagKey<Block> SNAKE_BLOCKS = bind("snake_blocks");
 	public static final TagKey<Block> BEEP_BLOCKS = bind("beep_blocks");
 
+	public static final TagKey<Block> GOLD_EXPLOSION_SENSITIVE = bind("gold_explosion_sensitive");
+
 	// YOSHI'S ISLAND
 	public static final TagKey<Block> EGG_BLOCKS = bind("egg_blocks");
 

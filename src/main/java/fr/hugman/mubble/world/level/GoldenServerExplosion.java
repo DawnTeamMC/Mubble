@@ -2,8 +2,10 @@ package fr.hugman.mubble.world.level;
 
 import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.sounds.SoundConfig;
+import fr.hugman.mubble.tags.MubbleBlockTags;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.item.MubbleItems;
+import fr.hugman.mubble.world.level.block.entity.BumpableBlockEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -210,6 +212,14 @@ public class GoldenServerExplosion implements Explosion {
             var state = this.level.getBlockState(blockPos);
             if (!state.isAir() && this.getBlockInteraction() != BlockInteraction.TRIGGER_BLOCK) {
                 // TODO add custom explosion block interaction. Loot parameters and stuff
+                if(!state.is(MubbleBlockTags.GOLD_EXPLOSION_SENSITIVE)) {
+                    continue;
+                }
+                if(level.getBlockEntity(blockPos) instanceof BumpableBlockEntity bumpable && !bumpable.isEmpty()) {
+                    // TODO if not empty make them loot
+                    continue;
+                }
+
                 this.level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
                 Vec3 pos = CollectibleEntity.placePos(level, blockPos);
                 if (pos != null) {
