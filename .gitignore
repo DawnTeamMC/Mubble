@@ -28,10 +28,11 @@ bin/
 
 *.DS_Store
 
-# fabric
+# Generated sources
+**/src/generated/*
 
-run/
-src/main/generated/
+# Debug artifacts
+run
 
 # java
 
