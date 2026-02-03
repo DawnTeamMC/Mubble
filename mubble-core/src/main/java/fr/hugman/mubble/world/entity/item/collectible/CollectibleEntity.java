@@ -341,14 +341,6 @@ public class CollectibleEntity extends Entity {
     }
 
     @Override
-    public void onSyncedDataUpdated(final EntityDataAccessor<?> accessor) {
-        super.onSyncedDataUpdated(accessor);
-        if (DATA_ITEM.equals(accessor)) {
-            this.getItem().setEntityRepresentation(this);
-        }
-    }
-
-    @Override
     public boolean isAttackable() {
         return false;
     }

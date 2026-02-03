@@ -56,7 +56,7 @@ public class KoopaShellRenderer<K extends KoopaShell> extends EntityRenderer<K, 
     @Nullable
     protected RenderType getRenderType(KoopaShellRenderState state, boolean showBody, boolean translucent, boolean showOutline) {
         if (translucent) {
-            return RenderTypes.itemEntityTranslucentCull(state.texture);
+            return RenderTypes.entityTranslucentCullItemTarget(state.texture);
         } else if (showBody) {
             return this.model.renderType(state.texture);
         } else {
