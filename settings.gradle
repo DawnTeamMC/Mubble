@@ -7,3 +7,10 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+rootProject.name = 'mubble'
+
+include 'mubble-bom'
+
+include 'mubble-core'
+include 'mubble-super_mario'

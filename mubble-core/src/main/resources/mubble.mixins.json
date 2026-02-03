@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "BlockStateBaseMixin",
+    "ArgumentTypeInfosMixin",
+    "EntityMixin",
+    "ItemStackMixin",
+    "PlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

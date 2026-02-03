@@ -1,4 +1,5 @@
 name: Check Build
+
 on:
   pull_request:
     branches: [ main, dev ]
@@ -30,8 +31,8 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
 
-      - name: Build
-        run: ./gradlew build
-
       - name: Generate data files
         run: ./gradlew runDatagen
+
+      - name: Build
+        run: ./gradlew build

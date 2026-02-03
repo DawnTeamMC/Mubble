@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "name": "Mubble",
+  "id": "mubble",
+  "version": "${version}",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.hugman.mubble.Mubble"
+    ],
+    "client": [
+      "fr.hugman.mubble.client.MubbleClient"
+    ]
+  },
+  "mixins": [
+    "mubble.mixins.json",
+    {
+      "config": "mubble.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "minecraft": "*",
+    "fabric-api": "*"
+  },
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/world/entity/player/Player": [
+        "fr/hugman/mubble/world/power_up/PowerUpHolder"
+      ]
+	}
+  },
+  "license": "LGPL v3.0"
+}

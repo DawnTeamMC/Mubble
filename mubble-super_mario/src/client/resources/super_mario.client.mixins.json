@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.super_mario.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ClientCommonPacketListenerImplAccessor",
+    "ClientPacketListenerMixin",
+    "LivingEntityRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

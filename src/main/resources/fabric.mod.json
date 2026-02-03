@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "name": "Mubble",
-  "id": "mubble",
+  "id": "mubble-main",
   "version": "${version}",
-  "icon": "assets/mubble/textures/logo.png",
+  "icon": "assets/mubble/logo.png",
   "authors": [
     "Hugman"
   ],
@@ -19,21 +19,6 @@
     "issues": "https://github.com/DawnTeamMC/Mubble/issues"
   },
   "environment": "*",
-  "entrypoints": {
-    "main": [
-      "fr.hugman.mubble.Mubble"
-    ],
-    "client": [
-      "fr.hugman.mubble.client.MubbleClient"
-    ]
-  },
-  "mixins": [
-    "mubble.mixins.json",
-    {
-      "config": "mubble.client.mixins.json",
-      "environment": "client"
-    }
-  ],
   "depends": {
     "minecraft": "*",
     "fabric-api": "*"
@@ -61,15 +46,7 @@
         "fabric",
         "quilt"
       ]
-    },
-    "loom:injected_interfaces": {
-      "net/minecraft/world/entity/player/Player": [
-        "fr/hugman/mubble/world/power_up/PowerUpHolder"
-      ],
-      "net/minecraft/world/entity/Entity": [
-        "fr/hugman/mubble/world/entity/Stompable"
-      ]
-	}
+    }
   },
   "license": "LGPL v3.0"
 }

@@ -1,0 +1,22 @@
+plugins {
+	id 'java-platform'
+}
+
+version = rootProject.version
+
+tasks.withType(GenerateModuleMetadata) {
+	// todo: RemoteSignJar fails when this is false (as set by parent build script)
+	enabled = true
+}
+
+dependencies {
+	constraints {
+		for (proj in rootProject.allprojects) {
+			if (proj == project) { // the bom itself
+				continue
+			}
+
+			api(project(proj.path))
+		}
+	}
+}

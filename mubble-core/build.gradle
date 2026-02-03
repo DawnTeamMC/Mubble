@@ -1,0 +1,19 @@
+version = getSubprojectVersion(project)
+
+fabricApi {
+    configureDataGeneration() {
+        outputDirectory = file("src/generated/resources")
+        modId = "mubble-datagen"
+        createSourceSet = true
+        client = true
+    }
+}
+
+loom {
+    runs {
+        datagen {
+            name "Data Generation"
+            ideConfigGenerated = true
+        }
+    }
+}
