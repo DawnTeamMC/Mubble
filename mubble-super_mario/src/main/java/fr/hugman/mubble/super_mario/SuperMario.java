@@ -2,6 +2,7 @@ package fr.hugman.mubble.super_mario;
 
 import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.super_mario.core.component.SuperMarioDataComponents;
+import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.core.registries.SuperMarioBuiltInRegistries;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.attribute.SuperMarioEnvironmentAttributes;
@@ -32,6 +33,7 @@ public class SuperMario implements ModInitializer {
         Reflection.initialize(SuperMarioSounds.class);
         Reflection.initialize(SuperMarioMenuTypes.class);
         Reflection.initialize(SuperMarioGameRules.class);
+        Reflection.initialize(SuperMarioParticleTypes.class);
         Reflection.initialize(MubbleAttributeTypes.class);
         Reflection.initialize(SuperMarioEnvironmentAttributes.class);
         SuperMarioEntityTypes.registerAttributes();

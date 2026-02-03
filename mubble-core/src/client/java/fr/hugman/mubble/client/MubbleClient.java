@@ -15,6 +15,7 @@ public class MubbleClient implements ClientModInitializer {
     public void onInitializeClient() {
         Reflection.initialize(MubbleModelLayers.class);
 
+        MubbleRenderers.registerEntities();
         MubbleKeyBindings.registerEvents();
         MubbleClientReceivers.register();
     }

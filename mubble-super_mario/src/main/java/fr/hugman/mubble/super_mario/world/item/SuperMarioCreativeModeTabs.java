@@ -81,7 +81,9 @@ public class SuperMarioCreativeModeTabs {
                     ));
         });
 
-        appendSpawnEgg(SuperMarioItems.GOOMBA_SPAWN_EGG);
+        CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
+            entries.accept(SuperMarioItems.GOOMBA_SPAWN_EGG);
+        });
 
         CreativeModeTabEvents.modifyOutputEvent(SuperMarioCreativeModeTabKeys.YOSHI_ISLAND).register(entries -> {
             entries.accept(SuperMarioBlocks.BLUE_EGG_BLOCK);
@@ -98,30 +100,6 @@ public class SuperMarioCreativeModeTabs {
 
     public static void append(ResourceKey<CreativeModeTab> group, CreativeModeTabEvents.ModifyOutput modifier) {
         CreativeModeTabEvents.modifyOutputEvent(group).register(modifier);
-    }
-
-    public static void appendSpawnEgg(Item spawnEgg) {
-        var itemGroup = BuiltInRegistries.CREATIVE_MODE_TAB.getValue(CreativeModeTabs.SPAWN_EGGS);
-        String path = BuiltInRegistries.ITEM.getKey(spawnEgg).getPath();
-
-        if (itemGroup == null) {
-            return;
-        }
-
-        Predicate<ItemStack> predicate = stack1 -> {
-            String path1 = BuiltInRegistries.ITEM.getKey(stack1.getItem()).getPath();
-            for (ItemStack stack2 : itemGroup.getDisplayItems()) {
-                String path2 = BuiltInRegistries.ITEM.getKey(stack2.getItem()).getPath();
-                if (path1.matches(".*_spawn_egg") && path2.matches(".*_spawn_egg")) {
-                    // check if path is lexicographically between path1 and path2
-                    if (path.compareTo(path1) > 0 && path.compareTo(path2) < 0) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        };
-        append(CreativeModeTabs.SPAWN_EGGS, e -> e.insertAfter(predicate, Collections.singleton(new ItemStack(spawnEgg)), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
     }
 
     private static void addGoombaVariantsSpawnEggs(

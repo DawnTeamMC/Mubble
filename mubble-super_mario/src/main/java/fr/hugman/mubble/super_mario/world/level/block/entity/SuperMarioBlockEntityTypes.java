@@ -39,7 +39,7 @@ public class SuperMarioBlockEntityTypes {
     ));
 
     private static <T extends BlockEntity> BlockEntityType<T> register(String path, FabricBlockEntityTypeBuilder<T> blockEntityType) {
-        Type<?> type = Util.fetchChoiceType(References.BLOCK_ENTITY, path);
+        Util.fetchChoiceType(References.BLOCK_ENTITY, path);
         return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, SuperMario.id(path), blockEntityType.build());
     }
 }
