@@ -1,99 +1,174 @@
+import org.apache.commons.codec.digest.DigestUtils
+
 plugins {
-    id 'net.fabricmc.fabric-loom' version "${loom_version}"
+    id 'net.fabricmc.fabric-loom' version "${loom_version}" apply false
     id 'org.moddedmc.wiki.toolkit' version '0.3.2'
 }
 
-group = "com.github.hugman"
+def metaProjects = [
+    'mubble-bom',
+]
 
-base {
-    archivesName = project.mod_id
+def getSubprojectVersion(Project project) {
+    return "local" //TODO
+}
+
+def moduleDependencies(project, List<String> depNames) {
+    def deps = depNames.iterator().collect { project.dependencies.project(path: ":$it") }
+    def clientOutputs = depNames.iterator().collect { findProject(":$it").sourceSets.client.output }
+
+    project.dependencies {
+        deps.each {
+            api it
+        }
+
+        clientOutputs.each {
+            clientImplementation it
+        }
+    }
+
+    def depNodes = deps.collect {
+        [
+                groupId: it.group,
+                artifactId: it.name,
+                version: getSubprojectVersion(project.project(":" + it.name)),
+                scope: "compile"
+        ]
+    }
+}
+
+allprojects {
+    group = "fr.hugman"
+
+    if (metaProjects.contains(it.name)) {
+        return
+    }
+
+
+    apply plugin: "net.fabricmc.fabric-loom"
+
+    tasks.withType(JavaCompile).configureEach {
+        it.options.release = 25
+    }
+
+    java {
+        // Must be added before the split source sets are setup.
+        withSourcesJar()
+    }
+
+    loom {
+        splitEnvironmentSourceSets()
+    }
+
+    loom {
+        runs {
+            exportClient {
+                client()
+                name = "Wiki Export Client"
+                property "wiki_exporter.enabled", "true"
+                property "wiki_exporter.config.path", "${projectDir}/wiki_exporter_config.json"
+            }
+            exportServer {
+                server()
+                name = "Wiki Export Server"
+                property "wiki_exporter.enabled", "true"
+                property "wiki_exporter.config.path", "${projectDir}/wiki_exporter_config.json"
+            }
+        }
+    }
+
+    allprojects.each { p ->
+        if (metaProjects.contains(p.name)) {
+            return
+        }
+
+        loom.mods.register(p.name) {
+            sourceSet p.sourceSets.main
+            sourceSet p.sourceSets.client
+        }
+    }
+
+    dependencies {
+        minecraft "com.mojang:minecraft:$rootProject.minecraft_version"
+        implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+        implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    }
+
+    tasks.withType(ProcessResources).configureEach {
+        inputs.property "version", project.version
+
+        filesMatching("fabric.mod.json") {
+            expand "version": inputs.properties.version
+        }
+    }
+
+    String archivesName = project.base.archivesName.get()
+    [jar, sourcesJar].each {
+        it.from(rootProject.file("LICENSE")) {
+            rename { "${it}-${archivesName}"}
+        }
+    }
+}
+
+subprojects {
+    if (metaProjects.contains(it.name)) {
+        return
+    }
+
+    base {
+        archivesName = project.name
+    }
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${project.minecraft_version}"
-    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-
-    // Version list: https://maven.su5ed.dev/#/releases/org/sinytra/wiki-exporter-fabric
-    /*
-    runtimeOnly ("org.sinytra:wiki-exporter-fabric:2.2.1+1.21.11") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
-    */
-}
-
-loom {
-    accessWidenerPath = file("src/main/resources/mubble.accesswidener")
-
-    splitEnvironmentSourceSets()
-
-    mods {
-        "mubble" {
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
+    subprojects.each {
+        if (metaProjects.contains(it.name)) {
+            return
         }
-    }
 
-    runs {
-        exportClient {
-            client()
-            name = "Wiki Export Client"
-            property "wiki_exporter.enabled", "true"
-            property "wiki_exporter.config.path", "${projectDir}/wiki_exporter_config.json"
+        api project(path: "${it.path}")
+        clientImplementation project("${it.path}:").sourceSets.client.output
+    }
+}
+
+configurations {
+    nestedJars {
+        transitive = false
+    }
+}
+
+dependencies {
+    subprojects.each {
+        if (metaProjects.contains(it.name)) {
+            return
         }
-        exportServer {
-            server()
-            name = "Wiki Export Server"
-            property "wiki_exporter.enabled", "true"
-            property "wiki_exporter.config.path", "${projectDir}/wiki_exporter_config.json"
-        }
+
+        nestedJars project("${it.path}")
     }
 }
 
-fabricApi {
-    configureDataGeneration() {
-        modId = "mubble-datagen"
-        createSourceSet = true
-        client = true
+loom.nestJars(tasks.named("jar"), configurations.nestedJars)
+
+// Attempt to create a single jar with all files from all nested jars, this will fail if there are duplicate files.
+tasks.register("checkNoDuplicateFiles", Zip) {
+    inputs.files configurations.nestedJars
+    destinationDirectory = layout.buildDirectory.dir("test")
+
+    from {
+        configurations.nestedJars.files.collect { zipTree(it) }
     }
+
+    // We expect these files to be duplicated, so exclude them.
+    exclude 'META-INF/**'
+    exclude 'fabric.mod.json'
 }
 
-processResources {
-    inputs.property "version", project.version
-
-    filesMatching("fabric.mod.json") {
-        expand "version": project.version
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    it.options.encoding = "UTF-8"
-    it.options.release = 25
-}
-
-java {
-    withSourcesJar()
-
-    sourceCompatibility = JavaVersion.VERSION_25
-    targetCompatibility = JavaVersion.VERSION_25
-}
-
-jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
-    }
-}
-
-// for JitPack
-configurations.configureEach {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-}
+check.dependsOn "checkNoDuplicateFiles"
 
 wiki {
     docs {
         mubble {
-            root = file('docs')
+            root = rootProject.file('docs')
         }
     }
 }

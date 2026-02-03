@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "name": "Super Mario (Data Generation)",
+  "id": "super_mario-datagen",
+  "version": "1.0.0",
+  "authors": [
+    "Hugman"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "fr.hugman.mubble.super_mario.data.SuperMarioDataGenerator"
+    ]
+  }
+}

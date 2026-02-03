@@ -3,9 +3,12 @@ api_token_env: "CROWDIN_PERSONAL_TOKEN"
 preserve_hierarchy: true
 
 files:
-  - source: "src/main/generated/assets/mubble/lang/en_us.json"
-    translation: "src/main/generated/assets/mubble/lang/%locale_with_underscore%.json"
-    dest: "mubble.json"
+  - source: "mubble-core/src/generated/resources/assets/mubble/lang/en_us.json"
+    translation: "mubble-core/src/generated/resources/assets/mubble/lang/%locale_with_underscore%.json"
+    dest: "mubble/core.json"
+  - source: "mubble-super_mario/src/generated/resources/assets/super_mario/lang/en_us.json"
+    translation: "mubble-super_mario/src/generated/resources/assets/super_mario/lang/%locale_with_underscore%.json"
+    dest: "mubble/super_mario.json"
   - source: "docs/**/*.*"
     ignore:
       - "docs/.assets/**/*"

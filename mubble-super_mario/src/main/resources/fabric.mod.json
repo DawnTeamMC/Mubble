@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "name": "Super Mario",
+  "id": "super_mario",
+  "version": "${version}",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.hugman.mubble.super_mario.SuperMario"
+    ],
+    "client": [
+      "fr.hugman.mubble.super_mario.client.SuperMarioClient"
+    ]
+  },
+  "mixins": [
+    "super_mario.mixins.json",
+    {
+      "config": "super_mario.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "minecraft": "*",
+    "fabric-api": "*",
+    "mubble": "*"
+  },
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/world/entity/Entity": [
+        "fr/hugman/mubble/super_mario/world/entity/Stompable"
+      ]
+	}
+  },
+  "license": "LGPL v3.0"
+}
