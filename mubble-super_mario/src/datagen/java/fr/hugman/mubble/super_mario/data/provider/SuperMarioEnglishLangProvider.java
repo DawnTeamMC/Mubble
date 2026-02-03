@@ -39,6 +39,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.note_block.jump", "Note Block used");
         builder.add(SuperMarioSounds.COIN_COLLECT.value(), "Coin collected");
         builder.add("subtitles." + SuperMario.MOD_ID + ".item.cape_feather.use", "Cape Feather used");
+        builder.add(SuperMarioSounds.GOLDEN_EXPLOSION.value(), "Golden explosion");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.find_target", "Goomba finds a target");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.death", "Goomba dies");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.stomp", "Goomba stomped");
@@ -52,6 +53,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.fireball.throw", "Fireball thrown");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.iceball.hit", "Iceball hits");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.iceball.throw", "Iceball thrown");
+        builder.add(SuperMarioSounds.GOLD_FIREBALL_THROW.value(), "Gold Fireball thrown");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
 
@@ -64,5 +66,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("death.attack." + SuperMario.MOD_ID + ".fireball.player", "%1$s was fireballed while fighting %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".iceball", "%1$s was iceballed by %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".iceball.player", "%1$s was iceballed while fighting %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".gold_fireball", "%1$s was gold-blasted by %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".gold_fireball.player", "%1$s was gold-blasted while fighting %2$s");
     }
 }

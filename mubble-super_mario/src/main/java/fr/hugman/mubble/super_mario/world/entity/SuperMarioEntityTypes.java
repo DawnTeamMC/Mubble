@@ -2,10 +2,7 @@ package fr.hugman.mubble.super_mario.world.entity;
 
 import fr.hugman.mubble.super_mario.references.SuperMarioEntityTypeKeys;
 import fr.hugman.mubble.super_mario.world.entity.monster.goomba.Goomba;
-import fr.hugman.mubble.super_mario.world.entity.projectile.Fireball;
-import fr.hugman.mubble.super_mario.world.entity.projectile.GreenKoopaShell;
-import fr.hugman.mubble.super_mario.world.entity.projectile.Iceball;
-import fr.hugman.mubble.super_mario.world.entity.projectile.RedKoopaShell;
+import fr.hugman.mubble.super_mario.world.entity.projectile.*;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,6 +17,7 @@ public final class SuperMarioEntityTypes {
     public static final EntityType<RedKoopaShell> RED_KOOPA_SHELL = of(SuperMarioEntityTypeKeys.RED_KOOPA_SHELL, EntityType.Builder.<RedKoopaShell>of(RedKoopaShell::new, MobCategory.MISC).sized(10 / 16f, 7 / 16f));
     public static final EntityType<Fireball> FIREBALL = of(SuperMarioEntityTypeKeys.FIREBALL, EntityType.Builder.<Fireball>of(Fireball::new, MobCategory.MISC).sized(0.4F, 0.4F).clientTrackingRange(4).updateInterval(10));
     public static final EntityType<Iceball> ICEBALL = of(SuperMarioEntityTypeKeys.ICEBALL, EntityType.Builder.<Iceball>of(Iceball::new, MobCategory.MISC).sized(0.4F, 0.4F).clientTrackingRange(4).updateInterval(10));
+    public static final EntityType<GoldFireball> GOLD_FIREBALL = of(SuperMarioEntityTypeKeys.GOLD_FIREBALL, EntityType.Builder.<GoldFireball>of(GoldFireball::new, MobCategory.MISC).sized(0.4F, 0.4F).clientTrackingRange(4).updateInterval(10));
 
     private static <T extends Entity> EntityType<T> of(ResourceKey<EntityType<?>> id, EntityType.Builder<T> type) {
         return Registry.register(BuiltInRegistries.ENTITY_TYPE, id, type.build(id));

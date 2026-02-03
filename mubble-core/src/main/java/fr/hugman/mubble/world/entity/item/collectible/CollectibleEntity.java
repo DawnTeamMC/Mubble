@@ -3,7 +3,6 @@ package fr.hugman.mubble.world.entity.item.collectible;
 import fr.hugman.mubble.network.protocol.common.custom.CollectCollectiblePayload;
 import fr.hugman.mubble.sounds.SoundConfig;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
-import fr.hugman.mubble.world.level.GoldenServerExplosion;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
@@ -28,6 +27,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerExplosion;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
@@ -311,7 +311,7 @@ public class CollectibleEntity extends Entity {
         if (!this.isFixed()) {
             return false;
         }
-        if(explosion instanceof GoldenServerExplosion) {
+        if(!(explosion instanceof ServerExplosion)) {
             //TODO: make this more dynamic...
             return true;
         }

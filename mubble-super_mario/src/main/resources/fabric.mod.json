@@ -19,6 +19,7 @@
       "environment": "client"
     }
   ],
+  "accessWidener": "super_mario.accesswidener",
   "depends": {
     "minecraft": "*",
     "fabric-api": "*",

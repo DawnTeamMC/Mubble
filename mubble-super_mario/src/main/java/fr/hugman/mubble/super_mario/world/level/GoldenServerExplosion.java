@@ -1,11 +1,12 @@
-package fr.hugman.mubble.world.level;
+package fr.hugman.mubble.super_mario.world.level;
 
-import fr.hugman.mubble.sounds.MubbleSounds;
 import fr.hugman.mubble.sounds.SoundConfig;
-import fr.hugman.mubble.tags.MubbleBlockTags;
+import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
+import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
+import fr.hugman.mubble.super_mario.tags.SuperMarioBlockTags;
+import fr.hugman.mubble.super_mario.world.item.SuperMarioItems;
+import fr.hugman.mubble.super_mario.world.level.block.entity.BumpableBlockEntity;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
-import fr.hugman.mubble.world.item.MubbleItems;
-import fr.hugman.mubble.world.level.block.entity.BumpableBlockEntity;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -212,10 +213,10 @@ public class GoldenServerExplosion implements Explosion {
             var state = this.level.getBlockState(blockPos);
             if (!state.isAir() && this.getBlockInteraction() != BlockInteraction.TRIGGER_BLOCK) {
                 // TODO add custom explosion block interaction. Loot parameters and stuff
-                if(!state.is(MubbleBlockTags.GOLD_EXPLOSION_SENSITIVE)) {
+                if (!state.is(SuperMarioBlockTags.GOLD_EXPLOSION_SENSITIVE)) {
                     continue;
                 }
-                if(level.getBlockEntity(blockPos) instanceof BumpableBlockEntity bumpable && !bumpable.isEmpty()) {
+                if (level.getBlockEntity(blockPos) instanceof BumpableBlockEntity bumpable && !bumpable.isEmpty()) {
                     // TODO if not empty make them loot
                     continue;
                 }
@@ -223,10 +224,11 @@ public class GoldenServerExplosion implements Explosion {
                 this.level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
                 Vec3 pos = CollectibleEntity.placePos(level, blockPos);
                 if (pos != null) {
-                    var itemStack = new ItemStack(MubbleItems.COIN);
+                    var itemStack = new ItemStack(SuperMarioItems.COIN);
                     CollectibleEntity entity = new CollectibleEntity(level, pos.x(), pos.y(), pos.z(), itemStack.copyWithCount(1));
-                    entity.setCollectSound(new SoundConfig(MubbleSounds.COIN_COLLECT, 0.2f, 1.0f));
-                    entity.setBounceSound(new SoundConfig(MubbleSounds.COIN_BOUNCE, 1.0f, 1.0f));
+                    entity.setCollectSound(new SoundConfig(SuperMarioSounds.COIN_COLLECT, 0.2f, 1.0f));
+                    entity.setBounceSound(new SoundConfig(SuperMarioSounds.COIN_BOUNCE, 1.0f, 1.0f));
+                    entity.setCollectParticle(SuperMarioParticleTypes.COIN_SPARKLE);
                     EntityType.createDefaultStackConfig(level, itemStack, null).accept(entity);
                     if (entity != null) {
                         entity.snapTo(entity.getX(), entity.getY(), entity.getZ(), 0.0f, 0.0F);
@@ -362,7 +364,7 @@ public class GoldenServerExplosion implements Explosion {
                 ParticleTypes.EXPLOSION,
                 ParticleTypes.EXPLOSION_EMITTER,
                 DEFAULT_EXPLOSION_BLOCK_PARTICLES,
-                MubbleSounds.GOLDEN_EXPLOSION
+                SuperMarioSounds.GOLDEN_EXPLOSION
         );
     }
 
@@ -390,7 +392,7 @@ public class GoldenServerExplosion implements Explosion {
                 ParticleTypes.EXPLOSION,
                 ParticleTypes.EXPLOSION_EMITTER,
                 DEFAULT_EXPLOSION_BLOCK_PARTICLES,
-                MubbleSounds.GOLDEN_EXPLOSION
+                SuperMarioSounds.GOLDEN_EXPLOSION
         );
     }
 

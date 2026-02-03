@@ -86,12 +86,11 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.empty()
                 )))
                 .build());
-        context.register(GOLD, new PowerUpBuilder()
-                .name(GOLD)
-                .obtainSound(MubbleSounds.POWER_UP_OBTAIN_GOLD)
+        context.register(GOLD, create(GOLD)
+                .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_GOLD)
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
-                        MubbleEntityTypes.GOLD_FIREBALL,
-                        MubbleSounds.GOLD_FIREBALL_THROW,
+                        SuperMarioEntityTypes.GOLD_FIREBALL,
+                        SuperMarioSounds.GOLD_FIREBALL_THROW,
                         0.4f,
                         Optional.of(3),
                         Optional.empty()

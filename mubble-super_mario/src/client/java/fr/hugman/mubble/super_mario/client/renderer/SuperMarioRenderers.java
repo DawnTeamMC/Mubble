@@ -16,6 +16,7 @@ public class SuperMarioRenderers {
         EntityRenderers.register(SuperMarioEntityTypes.RED_KOOPA_SHELL, KoopaShellRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.FIREBALL, BallRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.ICEBALL, BallRenderer::new);
+        EntityRenderers.register(SuperMarioEntityTypes.GOLD_FIREBALL, BallRenderer::new);
     }
 
     public static void registerBlockEntities() {

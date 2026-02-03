@@ -34,6 +34,8 @@ public class SuperMarioBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
         valueLookupBuilder(SNAKE_BLOCKS).add(SNAKE_BLOCK, FAST_SNAKE_BLOCK, SLOW_SNAKE_BLOCK);
         valueLookupBuilder(BEEP_BLOCKS).add(RED_BEEP_BLOCK, BLUE_BEEP_BLOCK);
 
+        valueLookupBuilder(GOLD_EXPLOSION_SENSITIVE).add(BRICK_BLOCK, CRYSTAL_BLOCK);
+
         valueLookupBuilder(EGG_BLOCKS).add(
                 BLUE_EGG_BLOCK,
                 CYAN_EGG_BLOCK,
