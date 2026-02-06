@@ -6,6 +6,6 @@ import net.minecraft.network.codec.StreamCodec;
 
 public record SplatoonWeaponType<P extends SplatoonWeapon>(
         MapCodec<P> codec,
-        StreamCodec<? super RegistryFriendlyByteBuf, P> packetCodec
+        StreamCodec<? super RegistryFriendlyByteBuf, P> streamCodec
 ) {
 }

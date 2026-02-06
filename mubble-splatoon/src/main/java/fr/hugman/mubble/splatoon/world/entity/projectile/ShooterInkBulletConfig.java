@@ -37,7 +37,7 @@ public class ShooterInkBulletConfig {
             MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("free_gravity_threshold").forGetter(config -> config.freeGravityThreshold)
     ).apply(instance, ShooterInkBulletConfig::of));
 
-    public static final StreamCodec<ByteBuf, ShooterInkBulletConfig> PACKET_CODEC = StreamCodecXL.composite(
+    public static final StreamCodec<ByteBuf, ShooterInkBulletConfig> STREAM_CODEC = StreamCodecXL.composite(
             ByteBufCodecs.FLOAT, ShooterInkBulletConfig::maxDamage,
             ByteBufCodecs.FLOAT, ShooterInkBulletConfig::minDamage,
             ByteBufCodecs.VAR_LONG, ShooterInkBulletConfig::startReduceTick,

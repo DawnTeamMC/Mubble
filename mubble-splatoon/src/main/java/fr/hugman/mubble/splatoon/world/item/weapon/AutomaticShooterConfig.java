@@ -31,7 +31,7 @@ public class AutomaticShooterConfig implements SplatoonWeapon {
     ).apply(instance, AutomaticShooterConfig::of));
 
     public static final StreamCodec<ByteBuf, AutomaticShooterConfig> STREAM_CODEC = StreamCodec.composite(
-            ShooterInkBulletConfig.PACKET_CODEC, AutomaticShooterConfig::bulletConfig,
+            ShooterInkBulletConfig.STREAM_CODEC, AutomaticShooterConfig::bulletConfig,
             ByteBufCodecs.VAR_LONG, AutomaticShooterConfig::cooldown,
             ByteBufCodecs.FLOAT, AutomaticShooterConfig::angleDeviation,
             ByteBufCodecs.FLOAT, AutomaticShooterConfig::jumpingAngleDeviation,
