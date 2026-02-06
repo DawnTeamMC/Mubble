@@ -20,7 +20,7 @@ import net.minecraft.world.item.component.TooltipProvider;
 
 public record PowerUpComponent(Holder<PowerUp> powerUp) implements TooltipProvider {
     public static final Codec<PowerUpComponent> CODEC = PowerUp.CODEC.xmap(PowerUpComponent::new, PowerUpComponent::powerUp);
-    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpComponent> PACKET_CODEC = PowerUp.STREAM_CODEC.map(PowerUpComponent::new, PowerUpComponent::powerUp);
+    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpComponent> STREAM_CODEC = PowerUp.STREAM_CODEC.map(PowerUpComponent::new, PowerUpComponent::powerUp);
 
     @Override
     public void addToTooltip(Item.TooltipContext context, Consumer<Component> textConsumer, TooltipFlag type, DataComponentGetter components) {

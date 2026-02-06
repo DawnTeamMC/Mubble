@@ -8,7 +8,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 public class MubbleDataComponents {
-	public static final DataComponentType<PowerUpComponent> POWER_UP = register("power_up", builder -> builder.persistent(PowerUpComponent.CODEC).networkSynchronized(PowerUpComponent.PACKET_CODEC).cacheEncoding());
+	public static final DataComponentType<PowerUpComponent> POWER_UP = register("power_up", builder -> builder.persistent(PowerUpComponent.CODEC).networkSynchronized(PowerUpComponent.STREAM_CODEC).cacheEncoding());
 
 	private static <T> DataComponentType<T> register(String path, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
 		return Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, Mubble.id(path), builderOperator.apply(DataComponentType.builder()).build());

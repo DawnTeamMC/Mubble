@@ -11,7 +11,7 @@ import java.util.function.UnaryOperator;
 
 public class SuperMarioDataComponents {
     public static final DataComponentType<Holder<GoombaVariant>> GOOMBA_VARIANT = register(
-            "goomba/variant", builder -> builder.persistent(GoombaVariant.ENTRY_CODEC).networkSynchronized(GoombaVariant.ENTRY_PACKET_CODEC)
+            "goomba/variant", builder -> builder.persistent(GoombaVariant.CODEC).networkSynchronized(GoombaVariant.STREAM_CODEC)
     );
 
     private static <T> DataComponentType<T> register(String path, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
