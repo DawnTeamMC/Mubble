@@ -93,7 +93,7 @@ public class SuperMarioBlocks {
     }
 
     private static DecoratedBumpableBlock registerEggBlock(ResourceKey<Block> key, MapColor mapColor) {
-        //TODO: change settings
-        return registerBumpableBlock(key, BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).mapColor(mapColor));
+        //TODO: change sounds
+        return registerBumpableBlock(key, BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).mapColor(mapColor));
     }
 }

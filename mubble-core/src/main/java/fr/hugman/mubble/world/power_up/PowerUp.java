@@ -40,7 +40,7 @@ public record PowerUp(
     public static final Codec<PowerUp> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ComponentSerialization.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
-            PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
+            PowerUpAction.CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
             SoundEvent.CODEC.optionalFieldOf("obtain_sound").forGetter(PowerUp::obtainSound),
             SoundEvent.CODEC.optionalFieldOf("loose_sound").forGetter(PowerUp::looseSound),
@@ -52,8 +52,8 @@ public record PowerUp(
     public static final StreamCodec<RegistryFriendlyByteBuf, PowerUp> DIRECT_STREAM_CODEC = StreamCodec.composite(
             ComponentSerialization.TRUSTED_OPTIONAL_STREAM_CODEC, PowerUp::name,
             Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::spriteId,
-            PowerUpAction.OPTIONAL_ENTRY_PACKET_CODEC, PowerUp::action,
-            EntityAttributeEntry.OPTIONAL_LIST_PACKET_CODEC, PowerUp::attributesModifiers,
+            PowerUpAction.OPTIONAL_STREAM_CODEC, PowerUp::action,
+            EntityAttributeEntry.OPTIONAL_LIST_STREAM_CODEC, PowerUp::attributesModifiers,
             SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::obtainSound,
             SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::looseSound,
             ByteBufCodecs.BOOL, PowerUp::canSprintOnWater,

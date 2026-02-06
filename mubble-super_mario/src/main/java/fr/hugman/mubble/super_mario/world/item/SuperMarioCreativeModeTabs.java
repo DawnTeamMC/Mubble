@@ -98,10 +98,6 @@ public class SuperMarioCreativeModeTabs {
         });
     }
 
-    public static void append(ResourceKey<CreativeModeTab> group, CreativeModeTabEvents.ModifyOutput modifier) {
-        CreativeModeTabEvents.modifyOutputEvent(group).register(modifier);
-    }
-
     private static void addGoombaVariantsSpawnEggs(
             CreativeModeTab.Output entries,
 			HolderLookup.RegistryLookup<GoombaVariant> registryWrapper,

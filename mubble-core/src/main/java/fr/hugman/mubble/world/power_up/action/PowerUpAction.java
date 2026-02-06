@@ -15,11 +15,11 @@ import java.util.Optional;
 
 public interface PowerUpAction {
     Codec<PowerUpAction> TYPE_CODEC = MubbleBuiltInRegistries.POWER_UP_ACTION_TYPE.byNameCodec().dispatch(PowerUpAction::getType, PowerUpActionType::codec);
-    StreamCodec<RegistryFriendlyByteBuf, PowerUpAction> TYPE_PACKET_CODEC = ByteBufCodecs.registry(MubbleRegistries.POWER_UP_ACTION_TYPE).dispatch(PowerUpAction::getType, PowerUpActionType::packetCodec);
+    StreamCodec<RegistryFriendlyByteBuf, PowerUpAction> TYPE_STREAM_CODEC = ByteBufCodecs.registry(MubbleRegistries.POWER_UP_ACTION_TYPE).dispatch(PowerUpAction::getType, PowerUpActionType::streamCodec);
 
-    Codec<Holder<PowerUpAction>> ENTRY_CODEC = RegistryFileCodec.create(MubbleRegistries.POWER_UP_ACTION, TYPE_CODEC);
-    StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUpAction>> ENTRY_PACKET_CODEC = ByteBufCodecs.holder(MubbleRegistries.POWER_UP_ACTION, TYPE_PACKET_CODEC);
-    StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUpAction>>> OPTIONAL_ENTRY_PACKET_CODEC = ENTRY_PACKET_CODEC.apply(ByteBufCodecs::optional);
+    Codec<Holder<PowerUpAction>> CODEC = RegistryFileCodec.create(MubbleRegistries.POWER_UP_ACTION, TYPE_CODEC);
+    StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUpAction>> STREAM_CODEC = ByteBufCodecs.holder(MubbleRegistries.POWER_UP_ACTION, TYPE_STREAM_CODEC);
+    StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUpAction>>> OPTIONAL_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs::optional);
 
     PowerUpActionType<?> getType();
 

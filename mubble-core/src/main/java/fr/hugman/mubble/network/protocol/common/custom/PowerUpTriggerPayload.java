@@ -6,7 +6,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
 public class PowerUpTriggerPayload implements CustomPacketPayload {
     public static final PowerUpTriggerPayload INSTANCE = new PowerUpTriggerPayload();
-    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpTriggerPayload> PACKET_CODEC = StreamCodec.unit(INSTANCE);
+    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpTriggerPayload> STREAM_CODEC = StreamCodec.unit(INSTANCE);
 
     @Override
     public Type<? extends PowerUpTriggerPayload> type() {
