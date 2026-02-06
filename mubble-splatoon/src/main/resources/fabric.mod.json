@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "name": "Splatoon",
+  "id": "splatoon",
+  "version": "${version}",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.hugman.mubble.splatoon.Splatoon"
+    ],
+    "client": [
+      "fr.hugman.mubble.splatoon.client.SplatoonClient"
+    ]
+  },
+  "depends": {
+    "minecraft": "*",
+    "fabric-api": "*",
+    "mubble": "*"
+  },
+  "license": "LGPL v3.0"
+}
