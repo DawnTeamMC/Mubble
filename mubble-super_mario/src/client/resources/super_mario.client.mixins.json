@@ -5,7 +5,8 @@
   "client": [
     "ClientCommonPacketListenerImplAccessor",
     "ClientPacketListenerMixin",
-    "LivingEntityRendererMixin"
+    "LivingEntityRendererMixin",
+    "AvatarRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
