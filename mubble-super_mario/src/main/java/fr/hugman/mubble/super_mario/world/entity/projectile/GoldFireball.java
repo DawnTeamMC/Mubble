@@ -17,6 +17,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 
 public class GoldFireball extends Ball {
     private static final ClientAsset.ResourceTexture TEXTURE = new ClientAsset.ResourceTexture(SuperMario.id("entity/gold_fireball"));
@@ -41,6 +42,12 @@ public class GoldFireball extends Ball {
     @Override
     protected ParticleOptions getDeathParticle() {
         return ParticleTypes.FLAME; //TODO change
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult hitResult) {
+        super.onHitEntity(hitResult);
+        this.finalHit();
     }
 
     @Override
