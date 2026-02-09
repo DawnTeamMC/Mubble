@@ -50,8 +50,8 @@ public class SuperMarioSounds {
 	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_MINI = registerForHolder("power_up.obtain.mini");
 	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_SUPER_STAR = registerForHolder("power_up.obtain.super_star");
 	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_GOLD = registerForHolder("power_up.obtain.gold");
-	public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE = registerForHolder("power_up.loose");
-
+    public static final Holder.Reference<SoundEvent> POWER_UP_EMIT_GOLD = registerForHolder("power_up.emit.gold");
+    public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE = registerForHolder("power_up.loose");
 
     private static SoundEvent register(String path) {
         Identifier id = SuperMario.id(path);

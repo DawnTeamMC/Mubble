@@ -71,6 +71,7 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_MINI, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_MINI, 1).subtitle(obtainSub));
         soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, 1).subtitle(obtainSub));
         soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_GOLD, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_GOLD, 1).subtitle(obtainSub));
+        soundExporter.add(SuperMarioSounds.POWER_UP_EMIT_GOLD, variantSoundBuilder(SuperMarioSounds.POWER_UP_EMIT_GOLD, 1).subtitle(null));
         soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE, 1));
     }
 
