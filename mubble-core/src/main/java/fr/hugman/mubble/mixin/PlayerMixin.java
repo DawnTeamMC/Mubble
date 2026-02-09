@@ -92,6 +92,12 @@ public class PlayerMixin implements PowerUpHolder {
                 }
             }
         }
+
+        var powerUp = this_.getPowerUp();
+        if(powerUp.isPresent()) {
+            var particle = powerUp.get().value().cosmectics().particle();
+            particle.ifPresent(particleOptions -> this_.level().addParticle(particleOptions, this_.getRandomX(0.6), this_.getRandomY(), this_.getRandomZ(0.6), 0.0, 0.0, 0.0));
+        }
     }
 
     @Override

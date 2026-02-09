@@ -14,7 +14,7 @@ public final class PowerUpProperties {
     private int cooldown;
     public final List<UUID> projectiles;
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpProperties> PACKET_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpProperties> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, powerUpProperties -> powerUpProperties.cooldown,
             UUIDUtil.STREAM_CODEC.apply(ByteBufCodecs.list()), powerUpProperties -> powerUpProperties.projectiles,
             PowerUpProperties::new

@@ -14,7 +14,7 @@ public record CollectCollectiblePayload(
         int amount,
         Optional<ParticleOptions> particle
 ) implements CustomPacketPayload {
-    public static final StreamCodec<RegistryFriendlyByteBuf, CollectCollectiblePayload> PACKET_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, CollectCollectiblePayload> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.VAR_INT, CollectCollectiblePayload::itemId,
             ByteBufCodecs.VAR_INT, CollectCollectiblePayload::amount,
             ParticleTypes.STREAM_CODEC.apply(ByteBufCodecs::optional), CollectCollectiblePayload::particle,

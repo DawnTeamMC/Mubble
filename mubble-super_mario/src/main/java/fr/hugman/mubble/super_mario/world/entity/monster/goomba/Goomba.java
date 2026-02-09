@@ -48,7 +48,7 @@ import org.jetbrains.annotations.Nullable;
 public class Goomba extends SuperMarioEnemy implements Surprisable, Stunnable {
     public static final String VARIANT_KEY = "variant";
 
-    public static final MapCodec<Holder<GoombaVariant>> VARIANT_MAP_CODEC = GoombaVariant.ENTRY_CODEC.fieldOf(VARIANT_KEY);
+    public static final MapCodec<Holder<GoombaVariant>> VARIANT_MAP_CODEC = GoombaVariant.CODEC.fieldOf(VARIANT_KEY);
 
     protected static final EntityDataAccessor<Holder<GoombaVariant>> VARIANT = SynchedEntityData.defineId(Goomba.class, SuperMarioEntityDataSerializers.GOOMBA_VARIANT);
     protected static final EntityDataAccessor<Byte> GOOMBA_FLAGS = SynchedEntityData.defineId(Goomba.class, EntityDataSerializers.BYTE);

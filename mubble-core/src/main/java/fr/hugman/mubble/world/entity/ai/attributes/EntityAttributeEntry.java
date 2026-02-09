@@ -19,7 +19,7 @@ public record EntityAttributeEntry(Holder<Attribute> attribute, AttributeModifie
             ).apply(instance, EntityAttributeEntry::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, EntityAttributeEntry> PACKET_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, EntityAttributeEntry> STREAM_CODEC = StreamCodec.composite(
             Attribute.STREAM_CODEC,
             EntityAttributeEntry::attribute,
             AttributeModifier.STREAM_CODEC,
@@ -27,8 +27,8 @@ public record EntityAttributeEntry(Holder<Attribute> attribute, AttributeModifie
             EntityAttributeEntry::new
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, List<EntityAttributeEntry>> LIST_PACKET_CODEC = PACKET_CODEC.apply(ByteBufCodecs.list());
-    public static final StreamCodec<RegistryFriendlyByteBuf, Optional<List<EntityAttributeEntry>>> OPTIONAL_LIST_PACKET_CODEC = LIST_PACKET_CODEC.apply(ByteBufCodecs::optional);
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<EntityAttributeEntry>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+    public static final StreamCodec<RegistryFriendlyByteBuf, Optional<List<EntityAttributeEntry>>> OPTIONAL_LIST_STREAM_CODEC = LIST_STREAM_CODEC.apply(ByteBufCodecs::optional);
 
     public boolean matches(Holder<Attribute> attribute, Identifier modifierId) {
         return attribute.equals(this.attribute) && this.modifier.is(modifierId);

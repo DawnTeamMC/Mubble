@@ -8,24 +8,28 @@ import java.util.Optional;
 
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import org.jspecify.annotations.Nullable;
 
 public class PowerUpBuilder {
-    private Optional<Component> name = Optional.empty();
-    private Optional<Identifier> spriteId = Optional.empty();
-    private Optional<Holder<PowerUpAction>> action = Optional.empty();
-    private List<EntityAttributeEntry> attributesModifiers = new ArrayList<>();
-    private Optional<Holder<SoundEvent>> obtainSound;
-    private Optional<Holder<SoundEvent>> looseSound;
+    private @Nullable Component name;
+    private @Nullable Identifier spriteId;
+    private @Nullable Holder<PowerUpAction> action;
+    private final List<EntityAttributeEntry> attributesModifiers = new ArrayList<>();
+    private @Nullable Holder<SoundEvent> obtainSound;
+    private @Nullable Holder<SoundEvent> emitSound;
+    private @Nullable Holder<SoundEvent> looseSound;
+    private @Nullable ParticleOptions particle;
     private boolean canSprintOnWater = false;
 
     public PowerUpBuilder name(Component name) {
-        this.name = Optional.ofNullable(name);
+        this.name = name;
         return this;
     }
 
@@ -38,12 +42,12 @@ public class PowerUpBuilder {
     }
 
     public PowerUpBuilder spriteId(Identifier spriteId) {
-        this.spriteId = Optional.ofNullable(spriteId);
+        this.spriteId = spriteId;
         return this;
     }
 
     public PowerUpBuilder action(Holder<PowerUpAction> action) {
-        this.action = Optional.ofNullable(action);
+        this.action = action;
         return this;
     }
 
@@ -57,13 +61,23 @@ public class PowerUpBuilder {
         return this.attributesModifier(new EntityAttributeEntry(attribute, new AttributeModifier(Mubble.id("power_up/" + path), value, operation)));
     }
 
+    public PowerUpBuilder particle(ParticleOptions particle) {
+        this.particle = particle;
+        return this;
+    }
+
     public PowerUpBuilder obtainSound(Holder<SoundEvent> obtainSound) {
-        this.obtainSound = Optional.of(obtainSound);
+        this.obtainSound = obtainSound;
+        return this;
+    }
+
+    public PowerUpBuilder emitSound(Holder<SoundEvent> emitSound) {
+        this.emitSound = emitSound;
         return this;
     }
 
     public PowerUpBuilder looseSound(Holder<SoundEvent> looseSound) {
-        this.looseSound = Optional.of(looseSound);
+        this.looseSound = looseSound;
         return this;
     }
 
@@ -73,14 +87,17 @@ public class PowerUpBuilder {
     }
 
     public PowerUp build() {
-        if(attributesModifiers.isEmpty()) attributesModifiers = null;
         return new PowerUp(
-                name,
-                spriteId,
-                action,
-                Optional.ofNullable(attributesModifiers),
-                obtainSound,
-                looseSound,
+                Optional.ofNullable(name),
+                Optional.ofNullable(spriteId),
+                Optional.ofNullable(action),
+                Optional.ofNullable(attributesModifiers.isEmpty() ? null : attributesModifiers),
+                new PowerUpCosmectics(
+                        Optional.ofNullable(this.particle),
+                        Optional.ofNullable(this.obtainSound),
+                        Optional.ofNullable(this.emitSound),
+                        Optional.ofNullable(this.looseSound)
+                ),
                 canSprintOnWater
         );
     }

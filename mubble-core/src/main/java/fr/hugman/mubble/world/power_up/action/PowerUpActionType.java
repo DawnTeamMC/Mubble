@@ -6,6 +6,6 @@ import net.minecraft.network.codec.StreamCodec;
 
 public record PowerUpActionType<P extends PowerUpAction>(
 		MapCodec<P> codec,
-		StreamCodec<? super RegistryFriendlyByteBuf, P> packetCodec
+		StreamCodec<? super RegistryFriendlyByteBuf, P> streamCodec
 ) {
 }

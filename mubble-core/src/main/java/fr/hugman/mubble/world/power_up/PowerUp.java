@@ -30,8 +30,7 @@ public record PowerUp(
         Optional<Identifier> spriteId,
         Optional<Holder<PowerUpAction>> action,
         Optional<List<EntityAttributeEntry>> attributesModifiers,
-        Optional<Holder<SoundEvent>> obtainSound,
-        Optional<Holder<SoundEvent>> looseSound,
+        PowerUpCosmectics cosmectics,
         boolean canSprintOnWater
 ) {
     //TODO: add a predicate/damage tag to determine if you can lose it to damage
@@ -40,10 +39,9 @@ public record PowerUp(
     public static final Codec<PowerUp> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ComponentSerialization.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
-            PowerUpAction.ENTRY_CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
+            PowerUpAction.CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
-            SoundEvent.CODEC.optionalFieldOf("obtain_sound").forGetter(PowerUp::obtainSound),
-            SoundEvent.CODEC.optionalFieldOf("loose_sound").forGetter(PowerUp::looseSound),
+            PowerUpCosmectics.CODEC.optionalFieldOf("cosmetics", PowerUpCosmectics.EMPTY).forGetter(PowerUp::cosmectics),
             Codec.BOOL.optionalFieldOf("can_sprint_on_water", false).forGetter(PowerUp::canSprintOnWater)
     ).apply(instance, PowerUp::new));
 
@@ -52,10 +50,9 @@ public record PowerUp(
     public static final StreamCodec<RegistryFriendlyByteBuf, PowerUp> DIRECT_STREAM_CODEC = StreamCodec.composite(
             ComponentSerialization.TRUSTED_OPTIONAL_STREAM_CODEC, PowerUp::name,
             Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::spriteId,
-            PowerUpAction.OPTIONAL_ENTRY_PACKET_CODEC, PowerUp::action,
-            EntityAttributeEntry.OPTIONAL_LIST_PACKET_CODEC, PowerUp::attributesModifiers,
-            SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::obtainSound,
-            SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::looseSound,
+            PowerUpAction.OPTIONAL_STREAM_CODEC, PowerUp::action,
+            EntityAttributeEntry.OPTIONAL_LIST_STREAM_CODEC, PowerUp::attributesModifiers,
+            PowerUpCosmectics.STREAM_CODEC, PowerUp::cosmectics,
             ByteBufCodecs.BOOL, PowerUp::canSprintOnWater,
             PowerUp::new
     );
@@ -96,10 +93,10 @@ public record PowerUp(
         }
 
         if (previous.isPresent() && next.isEmpty()) {
-            previous.get().value().looseSound.ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
+            previous.get().value().cosmectics().looseSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
         } else {
             next.ifPresent(powerUpRegistryEntry -> {
-                powerUpRegistryEntry.value().obtainSound.ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
+                powerUpRegistryEntry.value().cosmectics().obtainSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
                 if (entity instanceof PowerUpHolder powerUpHolder) {
                     powerUpHolder.getPowerUpProperties().reset();
                 }

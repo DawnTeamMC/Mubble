@@ -24,15 +24,15 @@ public record GoombaVariant(
 		Map<Holder<Attribute>, Double> baseAttributes,
 		Optional<VariantSpawnEggInfo> spawnEggInfo
 ) {
-	public static final Codec<GoombaVariant> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+	public static final Codec<GoombaVariant> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			ComponentSerialization.CODEC.optionalFieldOf("name").forGetter(GoombaVariant::name),
 			GoombaAssetInfo.CODEC.fieldOf("assets").forGetter(GoombaVariant::assetInfo),
 			Codec.unboundedMap(Attribute.CODEC, Codec.DOUBLE).optionalFieldOf("base_attribute_values", Map.of()).forGetter(GoombaVariant::baseAttributes),
 			VariantSpawnEggInfo.CODEC.optionalFieldOf("spawn_egg").forGetter(GoombaVariant::spawnEggInfo)
 	).apply(instance, GoombaVariant::new));
 
-	public static final Codec<Holder<GoombaVariant>> ENTRY_CODEC = RegistryFixedCodec.create(SuperMarioRegistries.GOOMBA_VARIANT);
-	public static final StreamCodec<RegistryFriendlyByteBuf, Holder<GoombaVariant>> ENTRY_PACKET_CODEC = ByteBufCodecs.holderRegistry(SuperMarioRegistries.GOOMBA_VARIANT);
+	public static final Codec<Holder<GoombaVariant>> CODEC = RegistryFixedCodec.create(SuperMarioRegistries.GOOMBA_VARIANT);
+	public static final StreamCodec<RegistryFriendlyByteBuf, Holder<GoombaVariant>> STREAM_CODEC = ByteBufCodecs.holderRegistry(SuperMarioRegistries.GOOMBA_VARIANT);
 
 	public void applyAttributes(LivingEntity livingEntity) {
 		baseAttributes.forEach((attribute, value) -> livingEntity.getAttribute(attribute).setBaseValue(value));

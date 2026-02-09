@@ -14,8 +14,8 @@ public class MubblePayloadTypes {
     }
 
     public static void registerTypes() {
-        PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.COLLECT_COLLECTIBLE, CollectCollectiblePayload.PACKET_CODEC);
-        PayloadTypeRegistry.serverboundPlay().register(MubblePayloadTypes.POWER_UP_TRIGGER, PowerUpTriggerPayload.PACKET_CODEC);
-        PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.POWER_UP_CHANGE, PowerUpChangePayload.PACKET_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.COLLECT_COLLECTIBLE, CollectCollectiblePayload.STREAM_CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(MubblePayloadTypes.POWER_UP_TRIGGER, PowerUpTriggerPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.POWER_UP_CHANGE, PowerUpChangePayload.STREAM_CODEC);
     }
 }

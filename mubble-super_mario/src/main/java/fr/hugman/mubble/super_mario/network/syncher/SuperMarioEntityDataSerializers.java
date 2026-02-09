@@ -9,7 +9,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.syncher.EntityDataSerializer;
 
 public class SuperMarioEntityDataSerializers {
-    public static final EntityDataSerializer<Holder<GoombaVariant>> GOOMBA_VARIANT = register("goomba_variant", GoombaVariant.ENTRY_PACKET_CODEC);
+    public static final EntityDataSerializer<Holder<GoombaVariant>> GOOMBA_VARIANT = register("goomba_variant", GoombaVariant.STREAM_CODEC);
 
 	public static <T> EntityDataSerializer<T> register(String name, StreamCodec<? super RegistryFriendlyByteBuf, T> codec) {
 		var handler = EntityDataSerializer.forValueType(codec);

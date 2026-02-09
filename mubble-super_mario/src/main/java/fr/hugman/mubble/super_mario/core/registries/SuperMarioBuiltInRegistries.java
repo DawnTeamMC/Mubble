@@ -12,6 +12,6 @@ public class SuperMarioBuiltInRegistries {
     }
 
     public static void register() {
-        DynamicRegistries.registerSynced(SuperMarioRegistries.GOOMBA_VARIANT, GoombaVariant.CODEC);
+        DynamicRegistries.registerSynced(SuperMarioRegistries.GOOMBA_VARIANT, GoombaVariant.DIRECT_CODEC);
     }
 }

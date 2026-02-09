@@ -12,7 +12,7 @@ import net.minecraft.world.item.consume_effects.ConsumeEffect;
 public class MubbleConsumeEffectTypes {
     public static final ConsumeEffect.Type<ChangePowerUpConsumeEffect> CHANGE_POWER_UP = register(MubbleConsumeEffectTypeKeys.CHANGE_POWER_UP, ChangePowerUpConsumeEffect.CODEC, ChangePowerUpConsumeEffect.STREAM_CODEC);
 
-    private static <T extends ConsumeEffect> ConsumeEffect.Type<T> register(ResourceKey<ConsumeEffect.Type<?>> key, MapCodec<T> codec, StreamCodec<RegistryFriendlyByteBuf, T> packetCodec) {
-        return Registry.register(BuiltInRegistries.CONSUME_EFFECT_TYPE, key, new ConsumeEffect.Type<>(codec, packetCodec));
+    private static <T extends ConsumeEffect> ConsumeEffect.Type<T> register(ResourceKey<ConsumeEffect.Type<?>> key, MapCodec<T> codec, StreamCodec<RegistryFriendlyByteBuf, T> streamCodec) {
+        return Registry.register(BuiltInRegistries.CONSUME_EFFECT_TYPE, key, new ConsumeEffect.Type<>(codec, streamCodec));
     }
 }

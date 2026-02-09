@@ -48,7 +48,7 @@ public record ShootProjectilePowerUpAction(
             Codec.INT.optionalFieldOf("cooldown").forGetter(ShootProjectilePowerUpAction::cooldown)
     ).apply(instance, ShootProjectilePowerUpAction::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, ShootProjectilePowerUpAction> PACKET_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, ShootProjectilePowerUpAction> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.registry(Registries.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
             SoundEvent.STREAM_CODEC, (ShootProjectilePowerUpAction::sound),
             ByteBufCodecs.FLOAT, (ShootProjectilePowerUpAction::speed),
