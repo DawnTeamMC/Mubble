@@ -17,6 +17,7 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 public abstract class Ball extends ThrowableProjectile {
 	public static final String REBOUNDS_KEY = "rebounds";
@@ -58,6 +59,7 @@ public abstract class Ball extends ThrowableProjectile {
         super.tick();
     }
 
+    @Nullable
     protected abstract SoundEvent getDeathSound();
 
     protected abstract ParticleOptions getDeathParticle();
@@ -95,12 +97,14 @@ public abstract class Ball extends ThrowableProjectile {
     /**
      * Triggers after the ball has hit and can no longer rebound.
      */
-    protected void finalHit(SoundEvent deathSound) {
+    protected void finalHit(@Nullable SoundEvent deathSound) {
         if (!this.level().isClientSide()) {
             this.level().broadcastEntityEvent(this, EntityEvent.DEATH);
             this.remove(RemovalReason.DISCARDED);
         }
-        this.level().playSound(null, getX(), getY(), getZ(), deathSound, SoundSource.NEUTRAL, 0.5F, 1.0F);
+        if(deathSound != null) {
+            this.level().playSound(null, getX(), getY(), getZ(), deathSound, SoundSource.NEUTRAL, 0.5F, 1.0F);
+        }
     }
 
 	@Override

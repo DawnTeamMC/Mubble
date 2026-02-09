@@ -1,16 +1,14 @@
 package fr.hugman.mubble.super_mario.world.entity.projectile;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.super_mario.SuperMario;
+import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeKeys;
-import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.level.GoldenServerExplosion;
 import fr.hugman.mubble.world.entity.projectile.Ball;
 import net.minecraft.core.ClientAsset;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.EntityType;
@@ -36,12 +34,12 @@ public class GoldFireball extends Ball {
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SuperMarioSounds.FIREBALL_HIT_BLOCK; //TODO change
+        return null;
     }
 
     @Override
     protected ParticleOptions getDeathParticle() {
-        return ParticleTypes.FLAME; //TODO change
+        return SuperMarioParticleTypes.COIN_SPARKLE; //TODO change
     }
 
     @Override
@@ -61,15 +59,15 @@ public class GoldFireball extends Ball {
         }
     }
 
-	@Override
-	protected void finalHit(SoundEvent deathSound) {
-		super.finalHit(deathSound);
-        if(this.level() instanceof ServerLevel serverLevel) {
+    @Override
+    protected void finalHit(SoundEvent deathSound) {
+        super.finalHit(deathSound);
+        if (this.level() instanceof ServerLevel serverLevel) {
             GoldenServerExplosion.create(serverLevel, this, this.damageSources().source(SuperMarioDamageTypeKeys.GOLD_FIREBALL, this, this.getOwner()), null, this.getX(), this.getY(0.0625F), this.getZ(), 3.0F, Level.ExplosionInteraction.MOB);
         }
-	}
+    }
 
-	@Override
+    @Override
     public ClientAsset.ResourceTexture getTexture() {
         return TEXTURE;
     }
