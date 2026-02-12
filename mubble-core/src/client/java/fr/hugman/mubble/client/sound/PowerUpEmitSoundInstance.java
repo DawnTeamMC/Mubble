@@ -18,7 +18,7 @@ public class PowerUpEmitSoundInstance<E extends Entity & PowerUpHolder> extends 
         this.entity = entity;
         this.looping = true;
         this.delay = 0;
-        this.volume = 0.2F;
+        this.volume = 0.05F;
     }
 
     @Override

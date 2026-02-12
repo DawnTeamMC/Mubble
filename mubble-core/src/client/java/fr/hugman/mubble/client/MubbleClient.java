@@ -3,7 +3,7 @@ package fr.hugman.mubble.client;
 import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
 import fr.hugman.mubble.client.model.MubbleModelLayers;
-import fr.hugman.mubble.client.network.MubbleClientReceivers;
+import fr.hugman.mubble.client.network.MubbleClientPayloadReceivers;
 import fr.hugman.mubble.client.renderer.MubbleRenderers;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -17,6 +17,6 @@ public class MubbleClient implements ClientModInitializer {
 
         MubbleRenderers.registerEntities();
         MubbleKeyBindings.registerEvents();
-        MubbleClientReceivers.register();
+        MubbleClientPayloadReceivers.register();
     }
 }
