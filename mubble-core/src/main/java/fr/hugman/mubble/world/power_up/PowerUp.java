@@ -13,7 +13,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -60,7 +60,22 @@ public record PowerUp(
     public static final StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUp>>> OPTIONAL_STREAM_CODEC = ByteBufCodecs.optional(STREAM_CODEC);
 
     public InteractionResult trigger(Player player) {
-        return this.action.map(entry -> entry.value().trigger(player)).orElse(InteractionResult.PASS);
+        if(this.action.isEmpty()) {
+            return InteractionResult.PASS;
+        }
+        var result = this.action.get().value().trigger(player);
+        if(result == InteractionResult.SUCCESS && this.action.get().value().shouldSwingOtherHand()) {
+            // swing the empty hand or main hand if both are occupied
+            player.swing(!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && player.getItemInHand(InteractionHand.OFF_HAND).isEmpty() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+        }
+        return result;
+    }
+
+    /**
+     * @return true if the power-up will swing the other hand when used.
+     */
+    public boolean shouldDisplayOtherHand() {
+        return this.canBeTriggered() && this.action.map(action -> action.value().shouldSwingOtherHand()).orElse(false);
     }
 
     public void applyModifiers(BiConsumer<Holder<Attribute>, AttributeModifier> attributeConsumer) {

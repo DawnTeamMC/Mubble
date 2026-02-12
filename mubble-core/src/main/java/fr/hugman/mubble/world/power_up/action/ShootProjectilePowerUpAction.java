@@ -74,8 +74,6 @@ public record ShootProjectilePowerUpAction(
             return InteractionResult.FAIL;
         }
 
-        player.swing(InteractionHand.MAIN_HAND);
-
         if (player.level().isClientSide()) {
             //TODO once powerup properties are synced, have a check on the client
             return InteractionResult.SUCCESS;
@@ -99,6 +97,10 @@ public record ShootProjectilePowerUpAction(
         return InteractionResult.SUCCESS;
     }
 
+    @Override
+    public boolean shouldSwingOtherHand() {
+        return true;
+    }
 
     public void setVelocity(Entity projectile, Entity shooter, float pitch, float yaw, float roll, float speed, float divergence) {
         float f = -Mth.sin(yaw * (float) (Math.PI / 180.0)) * Mth.cos(pitch * (float) (Math.PI / 180.0));
