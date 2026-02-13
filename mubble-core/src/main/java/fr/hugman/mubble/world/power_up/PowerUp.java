@@ -13,7 +13,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.RegistryFileCodec;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -30,8 +30,7 @@ public record PowerUp(
         Optional<Identifier> spriteId,
         Optional<Holder<PowerUpAction>> action,
         Optional<List<EntityAttributeEntry>> attributesModifiers,
-        PowerUpCosmectics cosmectics,
-        boolean canSprintOnWater
+        PowerUpCosmectics cosmectics
 ) {
     //TODO: add a predicate/damage tag to determine if you can lose it to damage
     //TODO: add custom music
@@ -41,8 +40,7 @@ public record PowerUp(
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
             PowerUpAction.CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
-            PowerUpCosmectics.CODEC.optionalFieldOf("cosmetics", PowerUpCosmectics.EMPTY).forGetter(PowerUp::cosmectics),
-            Codec.BOOL.optionalFieldOf("can_sprint_on_water", false).forGetter(PowerUp::canSprintOnWater)
+            PowerUpCosmectics.CODEC.optionalFieldOf("cosmetics", PowerUpCosmectics.EMPTY).forGetter(PowerUp::cosmectics)
     ).apply(instance, PowerUp::new));
 
     public static final Codec<Holder<PowerUp>> CODEC = RegistryFileCodec.create(MubbleRegistries.POWER_UP, DIRECT_CODEC);
@@ -53,25 +51,39 @@ public record PowerUp(
             PowerUpAction.OPTIONAL_STREAM_CODEC, PowerUp::action,
             EntityAttributeEntry.OPTIONAL_LIST_STREAM_CODEC, PowerUp::attributesModifiers,
             PowerUpCosmectics.STREAM_CODEC, PowerUp::cosmectics,
-            ByteBufCodecs.BOOL, PowerUp::canSprintOnWater,
             PowerUp::new
     );
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUp>> STREAM_CODEC = ByteBufCodecs.holder(MubbleRegistries.POWER_UP, DIRECT_STREAM_CODEC);
     public static final StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUp>>> OPTIONAL_STREAM_CODEC = ByteBufCodecs.optional(STREAM_CODEC);
 
+    /**
+     * @return whether the power-up can be triggered with the "power-up trigger" key.
+     */
+    public boolean canBeTriggered(Player player) {
+        return this.action.map(action -> action.value().canBeTriggered(player)).orElse(false);
+    }
+
     public InteractionResult trigger(Player player) {
-        return this.action.map(entry -> entry.value().trigger(player)).orElse(InteractionResult.PASS);
+        if(this.action.isEmpty()) {
+            return InteractionResult.PASS;
+        }
+        var result = this.action.get().value().trigger(player);
+        if(result == InteractionResult.SUCCESS && this.action.get().value().shouldSwingOtherHand()) {
+            // swing the empty hand or main hand if both are occupied
+            player.swing(!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && player.getItemInHand(InteractionHand.OFF_HAND).isEmpty() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+        }
+        return result;
+    }
+
+    /**
+     * @return true if the power-up will swing the other hand when used.
+     */
+    public boolean shouldDisplayOtherHand(Player player) {
+        return this.canBeTriggered(player) && this.action.map(action -> action.value().shouldSwingOtherHand()).orElse(false);
     }
 
     public void applyModifiers(BiConsumer<Holder<Attribute>, AttributeModifier> attributeConsumer) {
         this.attributesModifiers.ifPresent(entries -> entries.forEach(entry -> attributeConsumer.accept(entry.attribute(), entry.modifier())));
-    }
-
-    /**
-     * @return whether the power-up can be triggered with the "power-up trigger" key.
-     */
-    public boolean canBeTriggered() {
-        return this.action.isPresent();
     }
 
     public static void onChange(LivingEntity entity, Optional<Holder<PowerUp>> previous, Optional<Holder<PowerUp>> next) {

@@ -63,6 +63,20 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
+    public boolean canBeTriggered(Player player) {
+        var properties = player.getPowerUpProperties();
+
+        var level = player.level();
+        if (!level.isClientSide()) {
+            properties.removeInvalidProjectiles(level);
+        }
+        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public InteractionResult trigger(Player player) {
         var properties = player.getPowerUpProperties();
 
@@ -73,8 +87,6 @@ public record ShootProjectilePowerUpAction(
         if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
             return InteractionResult.FAIL;
         }
-
-        player.swing(InteractionHand.MAIN_HAND);
 
         if (player.level().isClientSide()) {
             //TODO once powerup properties are synced, have a check on the client
@@ -99,6 +111,10 @@ public record ShootProjectilePowerUpAction(
         return InteractionResult.SUCCESS;
     }
 
+    @Override
+    public boolean shouldSwingOtherHand() {
+        return true;
+    }
 
     public void setVelocity(Entity projectile, Entity shooter, float pitch, float yaw, float roll, float speed, float divergence) {
         float f = -Mth.sin(yaw * (float) (Math.PI / 180.0)) * Mth.cos(pitch * (float) (Math.PI / 180.0));

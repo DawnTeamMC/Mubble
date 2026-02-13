@@ -1,5 +1,6 @@
 package fr.hugman.mubble.mixin;
 
+import fr.hugman.mubble.tags.MubblePowerUpTags;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,7 +24,7 @@ public class BlockStateBaseMixin {
         var state = (BlockBehaviour.BlockStateBase) (Object) this;
         if (context instanceof EntityCollisionContext entityShapeContext
                 && entityShapeContext.getEntity() instanceof Player player
-                && player.getPowerUp().flatMap(power -> Optional.of(power.value().canSprintOnWater())).orElse(false)
+                && player.getPowerUp().flatMap(power -> Optional.of(power.is(MubblePowerUpTags.CAN_RUN_ON_WATER))).orElse(false)
                 && player.isSprinting()
         ) {
             var fluidState = state.getFluidState();

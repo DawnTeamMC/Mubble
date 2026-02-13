@@ -23,7 +23,15 @@ public interface PowerUpAction {
 
     PowerUpActionType<?> getType();
 
+    default boolean canBeTriggered(Player player) {
+        return true;
+    }
+
     InteractionResult trigger(Player player);
+
+    default boolean shouldSwingOtherHand() {
+        return false;
+    }
 
     default Optional<String> getTranslationKey() {
         return MubbleBuiltInRegistries.POWER_UP_ACTION_TYPE

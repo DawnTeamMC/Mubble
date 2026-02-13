@@ -26,7 +26,6 @@ public class PowerUpBuilder {
     private @Nullable Holder<SoundEvent> emitSound;
     private @Nullable Holder<SoundEvent> looseSound;
     private @Nullable ParticleOptions particle;
-    private boolean canSprintOnWater = false;
 
     public PowerUpBuilder name(Component name) {
         this.name = name;
@@ -81,11 +80,6 @@ public class PowerUpBuilder {
         return this;
     }
 
-    public PowerUpBuilder canSprintOnWater(boolean canSprintOnWater) {
-        this.canSprintOnWater = canSprintOnWater;
-        return this;
-    }
-
     public PowerUp build() {
         return new PowerUp(
                 Optional.ofNullable(name),
@@ -97,8 +91,7 @@ public class PowerUpBuilder {
                         Optional.ofNullable(this.obtainSound),
                         Optional.ofNullable(this.emitSound),
                         Optional.ofNullable(this.looseSound)
-                ),
-                canSprintOnWater
+                )
         );
     }
 }
