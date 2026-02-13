@@ -23,6 +23,10 @@ public interface PowerUpAction {
 
     PowerUpActionType<?> getType();
 
+    default boolean canBeTriggered(Player player) {
+        return true;
+    }
+
     InteractionResult trigger(Player player);
 
     default boolean shouldSwingOtherHand() {

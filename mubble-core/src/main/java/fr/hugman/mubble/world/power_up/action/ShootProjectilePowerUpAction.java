@@ -63,6 +63,20 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
+    public boolean canBeTriggered(Player player) {
+        var properties = player.getPowerUpProperties();
+
+        var level = player.level();
+        if (!level.isClientSide()) {
+            properties.removeInvalidProjectiles(level);
+        }
+        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
     public InteractionResult trigger(Player player) {
         var properties = player.getPowerUpProperties();
 

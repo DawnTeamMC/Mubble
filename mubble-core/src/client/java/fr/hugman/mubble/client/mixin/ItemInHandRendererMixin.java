@@ -34,7 +34,7 @@ public class ItemInHandRendererMixin {
 				&& !player.isInvisible()
 				&& hand == InteractionHand.OFF_HAND
 				&& player.getPowerUp().isPresent()
-				&& player.getPowerUp().get().value().shouldDisplayOtherHand()
+				&& player.getPowerUp().get().value().shouldDisplayOtherHand(player)
 				&& !player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty()
 		) {
 			this.renderPlayerArm(poseStack, submitNodeCollector, lightCoords, inverseArmHeight, attack, player.getMainArm().getOpposite());

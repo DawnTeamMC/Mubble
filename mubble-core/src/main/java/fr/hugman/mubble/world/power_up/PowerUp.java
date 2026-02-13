@@ -56,6 +56,13 @@ public record PowerUp(
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUp>> STREAM_CODEC = ByteBufCodecs.holder(MubbleRegistries.POWER_UP, DIRECT_STREAM_CODEC);
     public static final StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUp>>> OPTIONAL_STREAM_CODEC = ByteBufCodecs.optional(STREAM_CODEC);
 
+    /**
+     * @return whether the power-up can be triggered with the "power-up trigger" key.
+     */
+    public boolean canBeTriggered(Player player) {
+        return this.action.map(action -> action.value().canBeTriggered(player)).orElse(false);
+    }
+
     public InteractionResult trigger(Player player) {
         if(this.action.isEmpty()) {
             return InteractionResult.PASS;
@@ -71,19 +78,12 @@ public record PowerUp(
     /**
      * @return true if the power-up will swing the other hand when used.
      */
-    public boolean shouldDisplayOtherHand() {
-        return this.canBeTriggered() && this.action.map(action -> action.value().shouldSwingOtherHand()).orElse(false);
+    public boolean shouldDisplayOtherHand(Player player) {
+        return this.canBeTriggered(player) && this.action.map(action -> action.value().shouldSwingOtherHand()).orElse(false);
     }
 
     public void applyModifiers(BiConsumer<Holder<Attribute>, AttributeModifier> attributeConsumer) {
         this.attributesModifiers.ifPresent(entries -> entries.forEach(entry -> attributeConsumer.accept(entry.attribute(), entry.modifier())));
-    }
-
-    /**
-     * @return whether the power-up can be triggered with the "power-up trigger" key.
-     */
-    public boolean canBeTriggered() {
-        return this.action.isPresent();
     }
 
     public static void onChange(LivingEntity entity, Optional<Holder<PowerUp>> previous, Optional<Holder<PowerUp>> next) {
