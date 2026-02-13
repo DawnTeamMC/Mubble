@@ -39,7 +39,6 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
     public static void bootstrap(BootstrapContext<PowerUp> context) {
         context.register(MINI, create(MINI)
                 .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_MINI)
-                .canSprintOnWater(true)
                 .attributesModifier(Attributes.SCALE, -0.67, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.GRAVITY, -0.3, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.JUMP_STRENGTH, 0.25, ADD_MULTIPLIED_BASE)

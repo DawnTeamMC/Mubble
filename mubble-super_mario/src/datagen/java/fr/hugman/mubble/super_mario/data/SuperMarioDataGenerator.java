@@ -38,6 +38,7 @@ public class SuperMarioDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider((output, registriesFuture) -> new SuperMarioItemTagProvider(output, registriesFuture, blockTags));
 		pack.addProvider(SuperMarioEntityTypeTagsProvider::new);
 		pack.addProvider(SuperMarioDamageTypeTagsProvider::new);
+		pack.addProvider(SuperMarioPowerUpTagsProvider::new);
 	}
 
 	@Override

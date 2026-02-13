@@ -30,8 +30,7 @@ public record PowerUp(
         Optional<Identifier> spriteId,
         Optional<Holder<PowerUpAction>> action,
         Optional<List<EntityAttributeEntry>> attributesModifiers,
-        PowerUpCosmectics cosmectics,
-        boolean canSprintOnWater
+        PowerUpCosmectics cosmectics
 ) {
     //TODO: add a predicate/damage tag to determine if you can lose it to damage
     //TODO: add custom music
@@ -41,8 +40,7 @@ public record PowerUp(
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
             PowerUpAction.CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
-            PowerUpCosmectics.CODEC.optionalFieldOf("cosmetics", PowerUpCosmectics.EMPTY).forGetter(PowerUp::cosmectics),
-            Codec.BOOL.optionalFieldOf("can_sprint_on_water", false).forGetter(PowerUp::canSprintOnWater)
+            PowerUpCosmectics.CODEC.optionalFieldOf("cosmetics", PowerUpCosmectics.EMPTY).forGetter(PowerUp::cosmectics)
     ).apply(instance, PowerUp::new));
 
     public static final Codec<Holder<PowerUp>> CODEC = RegistryFileCodec.create(MubbleRegistries.POWER_UP, DIRECT_CODEC);
@@ -53,7 +51,6 @@ public record PowerUp(
             PowerUpAction.OPTIONAL_STREAM_CODEC, PowerUp::action,
             EntityAttributeEntry.OPTIONAL_LIST_STREAM_CODEC, PowerUp::attributesModifiers,
             PowerUpCosmectics.STREAM_CODEC, PowerUp::cosmectics,
-            ByteBufCodecs.BOOL, PowerUp::canSprintOnWater,
             PowerUp::new
     );
     public static final StreamCodec<RegistryFriendlyByteBuf, Holder<PowerUp>> STREAM_CODEC = ByteBufCodecs.holder(MubbleRegistries.POWER_UP, DIRECT_STREAM_CODEC);
