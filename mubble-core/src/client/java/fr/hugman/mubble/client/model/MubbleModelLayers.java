@@ -12,8 +12,8 @@ import net.minecraft.client.renderer.entity.ArmorModelSet;
 
 @Environment(EnvType.CLIENT)
 public class MubbleModelLayers {
-    private static final CubeDeformation OUTER_ARMOR_DEFORMATION = new CubeDeformation(1.0F);
-    private static final CubeDeformation INNER_ARMOR_DEFORMATION = new CubeDeformation(0.5F);
+    private static final CubeDeformation OUTER_ARMOR_DEFORMATION = new CubeDeformation(0.3F);
+    private static final CubeDeformation INNER_ARMOR_DEFORMATION = new CubeDeformation(0.15F);
 
     public static final ArmorModelSet<ModelLayerLocation> PLAYER_POWERUP = registerArmorSet("player_powerup", () -> PlayerModel.createArmorMeshSet(INNER_ARMOR_DEFORMATION, OUTER_ARMOR_DEFORMATION)
             .map(mesh -> LayerDefinition.create(mesh, 64, 32)));

@@ -18,15 +18,16 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import org.jspecify.annotations.Nullable;
 
 public class PowerUpBuilder {
-    private @Nullable Component name;
-    private @Nullable Identifier spriteId;
-    private @Nullable Holder<PowerUpAction> action;
+    private @Nullable Component name = null;
+    private @Nullable Identifier spriteId = null;
+    private @Nullable Holder<PowerUpAction> action = null;
     private final List<EntityAttributeEntry> attributesModifiers = new ArrayList<>();
-    private @Nullable Holder<SoundEvent> obtainSound;
-    private @Nullable Holder<SoundEvent> emitSound;
-    private @Nullable Holder<SoundEvent> looseSound;
-    private @Nullable ParticleOptions particle;
-    private Identifier humanoidOverlayAssetId;
+    private @Nullable Holder<SoundEvent> obtainSound = null;
+    private @Nullable Holder<SoundEvent> emitSound = null;
+    private @Nullable Holder<SoundEvent> looseSound = null;
+    private @Nullable ParticleOptions particle = null;
+    private @Nullable Identifier humanoidOverlayAssetId = null;
+    private boolean emissiveOverlay = false;
 
     public PowerUpBuilder name(Component name) {
         this.name = name;
@@ -90,6 +91,11 @@ public class PowerUpBuilder {
         return this.humanoidOverlay(key.identifier().withPath(s -> "entity/power_up/humanoid/" + s));
     }
 
+    public PowerUpBuilder emissiveOverlay() {
+        this.emissiveOverlay = true;
+        return this;
+    }
+
     public PowerUp build() {
         return new PowerUp(
                 Optional.ofNullable(name),
@@ -101,7 +107,8 @@ public class PowerUpBuilder {
                         Optional.ofNullable(this.obtainSound),
                         Optional.ofNullable(this.emitSound),
                         Optional.ofNullable(this.looseSound),
-                        Optional.ofNullable(this.humanoidOverlayAssetId)
+                        Optional.ofNullable(this.humanoidOverlayAssetId),
+                        this.emissiveOverlay
                 )
         );
     }

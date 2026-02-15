@@ -68,8 +68,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .attributesModifier(Attributes.BLOCK_INTERACTION_RANGE, 1.2, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.ENTITY_INTERACTION_RANGE, 1.2, ADD_MULTIPLIED_BASE)
                 .build());
-        context.register(FIRE, builder(FIRE)
-                .humanoidOverlay(FIRE)
+        context.register(FIRE, builder(FIRE, true)
+                .emissiveOverlay()
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.FIREBALL,
                         SuperMarioSounds.FIREBALL_THROW,
@@ -78,7 +78,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.empty()
                 )))
                 .build());
-        context.register(ICE, builder(ICE)
+        context.register(ICE, builder(ICE, true)
+                .emissiveOverlay()
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.ICEBALL,
                         SuperMarioSounds.ICEBALL_THROW,
@@ -87,7 +88,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.empty()
                 )))
                 .build());
-        context.register(GOLD, builder(GOLD)
+        context.register(GOLD, builder(GOLD, true)
+                .emissiveOverlay()
                 .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_GOLD)
                 .emitSound(SuperMarioSounds.POWER_UP_EMIT_GOLD)
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
@@ -101,10 +103,18 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .build());
     }
 
-    public static PowerUpBuilder builder(ResourceKey<PowerUp> key) {
-        return new PowerUpBuilder()
+    public static PowerUpBuilder builder(ResourceKey<PowerUp> key, boolean withOverlay) {
+        var builder = new PowerUpBuilder()
             .name(key)
             .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN)
             .looseSound(SuperMarioSounds.POWER_UP_LOOSE);
+        if(withOverlay) {
+            builder.humanoidOverlay(key);
+        }
+        return builder;
+    }
+
+    public static PowerUpBuilder builder(ResourceKey<PowerUp> key) {
+        return builder(key, false);
     }
 }

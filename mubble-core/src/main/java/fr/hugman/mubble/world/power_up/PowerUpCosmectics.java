@@ -18,16 +18,18 @@ public record PowerUpCosmectics(
         Optional<Holder<SoundEvent>> obtainSound,
         Optional<Holder<SoundEvent>> emitSound,
         Optional<Holder<SoundEvent>> looseSound,
-        Optional<Identifier> humanoidOverlayAssetId
+        Optional<Identifier> humanoidOverlayAssetId,
+        boolean emissiveOverlay
 ) {
-    public static final PowerUpCosmectics EMPTY = new PowerUpCosmectics(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public static final PowerUpCosmectics EMPTY = new PowerUpCosmectics(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), false);
 
     public static final Codec<PowerUpCosmectics> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ParticleTypes.CODEC.optionalFieldOf("particle").forGetter(PowerUpCosmectics::particle),
             SoundEvent.CODEC.optionalFieldOf("obtain_sound").forGetter(PowerUpCosmectics::obtainSound),
             SoundEvent.CODEC.optionalFieldOf("emit_sound").forGetter(PowerUpCosmectics::emitSound),
             SoundEvent.CODEC.optionalFieldOf("loose_sound").forGetter(PowerUpCosmectics::looseSound),
-            Identifier.CODEC.optionalFieldOf("humanoid_overlay_asset_id").forGetter(PowerUpCosmectics::humanoidOverlayAssetId)
+            Identifier.CODEC.optionalFieldOf("humanoid_overlay_asset_id").forGetter(PowerUpCosmectics::humanoidOverlayAssetId),
+            Codec.BOOL.optionalFieldOf("emissive_overlay", false).forGetter(PowerUpCosmectics::emissiveOverlay)
     ).apply(instance, PowerUpCosmectics::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpCosmectics> STREAM_CODEC = StreamCodec.composite(
@@ -36,6 +38,7 @@ public record PowerUpCosmectics(
             SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::emitSound,
             SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::looseSound,
             Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::humanoidOverlayAssetId,
+            ByteBufCodecs.BOOL, PowerUpCosmectics::emissiveOverlay,
             PowerUpCosmectics::new
     );
 }

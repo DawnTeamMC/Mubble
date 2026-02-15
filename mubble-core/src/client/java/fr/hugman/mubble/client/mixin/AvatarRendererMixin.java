@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.EquipmentSlot;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,36 +31,42 @@ public class AvatarRendererMixin<AvatarlikeEntity extends Avatar & ClientAvatarE
 
     @Inject(method = "renderLeftHand", at = @At("TAIL"))
     private void mubble$renderLeftHand(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, Identifier skinTexture, boolean hasSleeve, CallbackInfo ci) {
-        var powerUp = Minecraft.getInstance().player.getPowerUp();
-        var texture = powerUp.flatMap(powerUpHolder -> powerUpHolder.value().cosmectics().humanoidOverlayAssetId().map(id -> id.withPath(s -> "textures/" + s + ".png")));
-        if(texture.isEmpty()) {
-            return;
-        }
         for (RenderLayer<AvatarRenderState, PlayerModel> layer : this.layers) {
             if(layer instanceof PowerUpHumanoidLayer<?, ?, ?> humanoidLayer) {
+                var powerUp = Minecraft.getInstance().player.getPowerUp();
+                if(powerUp.isEmpty()) {
+                    return;
+                }
+                var texture = powerUp.get().value().cosmectics().humanoidOverlayAssetId().map(id -> id.withPath(s -> "textures/" + s + ".png"));
+                if(texture.isEmpty()) {
+                    return;
+                }
                 var model = humanoidLayer.getModelSet().get(EquipmentSlot.CHEST);
                 model.leftArm.resetPose();
                 model.leftArm.visible = true;
                 model.leftArm.zRot = -0.1F;
-                submitNodeCollector.submitModelPart(model.leftArm, poseStack, RenderTypes.entityTranslucent(texture.get()), lightCoords, OverlayTexture.NO_OVERLAY, null);
+                submitNodeCollector.submitModelPart(model.leftArm, poseStack, RenderTypes.entityTranslucent(texture.get()), powerUp.get().value().cosmectics().emissiveOverlay() ? LightCoordsUtil.FULL_BRIGHT : lightCoords, OverlayTexture.NO_OVERLAY, null);
             }
         }
     }
 
     @Inject(method = "renderRightHand", at = @At("TAIL"))
     private void mubble$renderRightHand(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, Identifier skinTexture, boolean hasSleeve, CallbackInfo ci) {
-        var powerUp = Minecraft.getInstance().player.getPowerUp();
-        var texture = powerUp.flatMap(powerUpHolder -> powerUpHolder.value().cosmectics().humanoidOverlayAssetId().map(id -> id.withPath(s -> "textures/" + s + ".png")));
-        if(texture.isEmpty()) {
-            return;
-        }
         for (RenderLayer<AvatarRenderState, PlayerModel> layer : this.layers) {
             if(layer instanceof PowerUpHumanoidLayer<?, ?, ?> humanoidLayer) {
+                var powerUp = Minecraft.getInstance().player.getPowerUp();
+                if(powerUp.isEmpty()) {
+                    return;
+                }
+                var texture = powerUp.get().value().cosmectics().humanoidOverlayAssetId().map(id -> id.withPath(s -> "textures/" + s + ".png"));
+                if(texture.isEmpty()) {
+                    return;
+                }
                 var model = humanoidLayer.getModelSet().get(EquipmentSlot.CHEST);
                 model.rightArm.resetPose();
                 model.rightArm.visible = true;
                 model.rightArm.zRot = 0.1F;
-                submitNodeCollector.submitModelPart(model.rightArm, poseStack, RenderTypes.entityTranslucent(texture.get()), lightCoords, OverlayTexture.NO_OVERLAY, null);
+                submitNodeCollector.submitModelPart(model.rightArm, poseStack, RenderTypes.entityTranslucent(texture.get()), powerUp.get().value().cosmectics().emissiveOverlay() ? LightCoordsUtil.FULL_BRIGHT : lightCoords, OverlayTexture.NO_OVERLAY, null);
             }
         }
     }

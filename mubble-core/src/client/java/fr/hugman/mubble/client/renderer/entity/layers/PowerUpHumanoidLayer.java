@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.state.HumanoidRenderState;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.entity.EquipmentSlot;
 
 public class PowerUpHumanoidLayer<S extends HumanoidRenderState, M extends HumanoidModel<S>, A extends HumanoidModel<S>> extends RenderLayer<S, M> {
@@ -41,6 +42,7 @@ public class PowerUpHumanoidLayer<S extends HumanoidRenderState, M extends Human
         if(texture.isEmpty()) {
             return;
         }
+        lightCoords = powerUp.value().cosmectics().emissiveOverlay() ? LightCoordsUtil.FULL_BRIGHT : lightCoords;
         this.renderPowerUp(poseStack, submitNodeCollector, EquipmentSlot.HEAD, lightCoords, state, texture.get());
         this.renderPowerUp(poseStack, submitNodeCollector, EquipmentSlot.CHEST, lightCoords, state, texture.get());
         this.renderPowerUp(poseStack, submitNodeCollector, EquipmentSlot.LEGS, lightCoords, state, texture.get());
