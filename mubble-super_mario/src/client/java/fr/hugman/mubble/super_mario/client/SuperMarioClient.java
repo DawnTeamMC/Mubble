@@ -24,16 +24,10 @@ public class SuperMarioClient implements ClientModInitializer {
         Reflection.initialize(SuperMarioRenderPipelines.class);
         Reflection.initialize(SuperMarioRenderTypes.class);
 
-        registerBlockRenderLayers();
         registerHandledScreens();
         SuperMarioRenderers.registerEntities();
         SuperMarioRenderers.registerBlockEntities();
         SuperMarioParticleResources.register();
-    }
-
-    private static void registerBlockRenderLayers() {
-        ChunkSectionLayerMap.putBlock(SuperMarioBlocks.RED_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
-        ChunkSectionLayerMap.putBlock(SuperMarioBlocks.BLUE_BEEP_BLOCK, ChunkSectionLayer.CUTOUT);
     }
 
     private static void registerHandledScreens() {
