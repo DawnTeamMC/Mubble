@@ -19,6 +19,7 @@ import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.EquipmentSlot;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -31,42 +32,36 @@ public class AvatarRendererMixin<AvatarlikeEntity extends Avatar & ClientAvatarE
 
     @Inject(method = "renderLeftHand", at = @At("TAIL"))
     private void mubble$renderLeftHand(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, Identifier skinTexture, boolean hasSleeve, CallbackInfo ci) {
-        for (RenderLayer<AvatarRenderState, PlayerModel> layer : this.layers) {
-            if(layer instanceof PowerUpHumanoidLayer<?, ?, ?> humanoidLayer) {
-                var powerUp = Minecraft.getInstance().player.getPowerUp();
-                if(powerUp.isEmpty()) {
-                    return;
-                }
-                var texture = powerUp.get().value().cosmectics().humanoidOverlayAssetId().map(id -> id.withPath(s -> "textures/" + s + ".png"));
-                if(texture.isEmpty()) {
-                    return;
-                }
-                var model = humanoidLayer.getModelSet().get(EquipmentSlot.CHEST);
-                model.leftArm.resetPose();
-                model.leftArm.visible = true;
-                model.leftArm.zRot = -0.1F;
-                submitNodeCollector.submitModelPart(model.leftArm, poseStack, RenderTypes.entityTranslucent(texture.get()), powerUp.get().value().cosmectics().emissiveOverlay() ? LightCoordsUtil.FULL_BRIGHT : lightCoords, OverlayTexture.NO_OVERLAY, null);
-            }
-        }
+        this.mubble$renderHand(poseStack, submitNodeCollector, lightCoords, true);
     }
 
     @Inject(method = "renderRightHand", at = @At("TAIL"))
     private void mubble$renderRightHand(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, Identifier skinTexture, boolean hasSleeve, CallbackInfo ci) {
+        this.mubble$renderHand(poseStack, submitNodeCollector, lightCoords, false);
+    }
+
+    @Unique
+    private void mubble$renderHand(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, boolean left) {
+        var powerUp = Minecraft.getInstance().player.getPowerUp();
+        if(powerUp.isEmpty()) {
+            return;
+        }
+
+        var texture = powerUp.get().value().cosmectics().humanoidOverlayAssetId().map(id -> id.withPath(s -> "textures/" + s + ".png"));
+        if(texture.isEmpty()) {
+            return;
+        }
+
         for (RenderLayer<AvatarRenderState, PlayerModel> layer : this.layers) {
-            if(layer instanceof PowerUpHumanoidLayer<?, ?, ?> humanoidLayer) {
-                var powerUp = Minecraft.getInstance().player.getPowerUp();
-                if(powerUp.isEmpty()) {
-                    return;
-                }
-                var texture = powerUp.get().value().cosmectics().humanoidOverlayAssetId().map(id -> id.withPath(s -> "textures/" + s + ".png"));
-                if(texture.isEmpty()) {
-                    return;
-                }
+            if (layer instanceof PowerUpHumanoidLayer<?, ?, ?> humanoidLayer) {
                 var model = humanoidLayer.getModelSet().get(EquipmentSlot.CHEST);
-                model.rightArm.resetPose();
-                model.rightArm.visible = true;
-                model.rightArm.zRot = 0.1F;
-                submitNodeCollector.submitModelPart(model.rightArm, poseStack, RenderTypes.entityTranslucent(texture.get()), powerUp.get().value().cosmectics().emissiveOverlay() ? LightCoordsUtil.FULL_BRIGHT : lightCoords, OverlayTexture.NO_OVERLAY, null);
+                var arm = left ? model.leftArm : model.rightArm;
+
+                arm.resetPose();
+                arm.visible = true;
+                arm.zRot = left ? -0.1F : 0.1F;
+
+                submitNodeCollector.submitModelPart(arm, poseStack, RenderTypes.entityTranslucent(texture.get()), powerUp.get().value().cosmectics().emissiveOverlay() ? LightCoordsUtil.FULL_BRIGHT : lightCoords, OverlayTexture.NO_OVERLAY, null);
             }
         }
     }
