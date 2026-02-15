@@ -1,2 +1,0 @@
-accessWidener	v1	official
-accessible method net/minecraft/server/level/ServerLevel getDestroyType (Lnet/minecraft/world/level/gamerules/GameRule;)Lnet/minecraft/world/level/Explosion$BlockInteraction;
