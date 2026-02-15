@@ -21,6 +21,8 @@ public class SuperMarioSounds {
     public static final Holder.Reference<SoundEvent> COIN_BOUNCE = registerForHolder("item.coin.bounce");
     public static final SoundEvent CAPE_FEATHER_USE = register("item.cape_feather.use");
 
+    public static final Holder.Reference<SoundEvent> GOLDEN_EXPLOSION = registerForHolder("entity.generic.golden_explosion");
+
     public static final SoundEvent GOOMBA_WALK_STEP = register("entity.goomba.walk_step");
     public static final SoundEvent GOOMBA_RUN_STEP = register("entity.goomba.run_step");
     public static final SoundEvent GOOMBA_FIND_TARGET = register("entity.goomba.find_target");
@@ -42,11 +44,14 @@ public class SuperMarioSounds {
     public static final SoundEvent ICEBALL_HIT_ENTITY = register("entity.iceball.hit.entity");
     public static final Holder.Reference<SoundEvent> ICEBALL_THROW = registerForHolder("entity.iceball.throw");
 
+    public static final Holder.Reference<SoundEvent> GOLD_FIREBALL_THROW = registerForHolder("entity.gold_fireball.throw");
+
 	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN = registerForHolder("power_up.obtain");
 	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_MINI = registerForHolder("power_up.obtain.mini");
 	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_SUPER_STAR = registerForHolder("power_up.obtain.super_star");
-	public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE = registerForHolder("power_up.loose");
-
+	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_GOLD = registerForHolder("power_up.obtain.gold");
+    public static final Holder.Reference<SoundEvent> POWER_UP_EMIT_GOLD = registerForHolder("power_up.emit.gold");
+    public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE = registerForHolder("power_up.loose");
 
     private static SoundEvent register(String path) {
         Identifier id = SuperMario.id(path);

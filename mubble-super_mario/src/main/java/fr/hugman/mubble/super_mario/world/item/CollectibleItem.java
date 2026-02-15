@@ -38,10 +38,8 @@ public class CollectibleItem extends Item {
             BlockPlaceContext placeContext = new BlockPlaceContext(context);
             BlockPos blockPos = placeContext.getClickedPos();
             ItemStack itemStack = context.getItemInHand();
-            var dimensions = MubbleEntityTypes.COLLECTIBLE.getDimensions();
-            Vec3 pos = Vec3.atBottomCenterOf(blockPos).add(0, Math.clamp((1 - dimensions.height()) / 2, 0.0f, 0.5f), 0);
-            AABB box = dimensions.makeBoundingBox(pos.x(), pos.y(), pos.z());
-            if (level.noCollision(null, box) && level.getEntities(null, box).isEmpty()) {
+            Vec3 pos = CollectibleEntity.placePos(level, blockPos);
+            if (pos != null) {
                 if (level instanceof ServerLevel serverLevel) {
                     CollectibleEntity entity = new CollectibleEntity(serverLevel, pos.x(), pos.y(), pos.z(), itemStack.copyWithCount(1));
                     entity.setCollectSound(new SoundConfig(SuperMarioSounds.COIN_COLLECT, 0.2f, 1.0f));

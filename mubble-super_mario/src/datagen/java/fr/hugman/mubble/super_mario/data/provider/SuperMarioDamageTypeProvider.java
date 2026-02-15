@@ -32,5 +32,6 @@ public class SuperMarioDamageTypeProvider extends FabricDynamicRegistryProvider 
 		context.register(SuperMarioDamageTypeKeys.KOOPA_SHELL, new DamageType(SuperMario.MOD_ID + ".koopa_shell", 0.1f));
 		context.register(SuperMarioDamageTypeKeys.FIREBALL, new DamageType(SuperMario.MOD_ID + ".fireball", 0.1f, DamageEffects.BURNING));
 		context.register(SuperMarioDamageTypeKeys.ICEBALL, new DamageType(SuperMario.MOD_ID + ".iceball", 0.1f, DamageEffects.FREEZING));
+        context.register(SuperMarioDamageTypeKeys.GOLD_FIREBALL, new DamageType(SuperMario.MOD_ID + ".gold_fireball", 0.1f));
     }
 }

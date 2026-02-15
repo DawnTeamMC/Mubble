@@ -10,6 +10,7 @@ public class SuperMarioEntityTypeKeys {
     public static final ResourceKey<EntityType<?>> RED_KOOPA_SHELL = createKey("red_koopa_shell");
     public static final ResourceKey<EntityType<?>> FIREBALL = createKey("fireball");
     public static final ResourceKey<EntityType<?>> ICEBALL = createKey("iceball");
+    public static final ResourceKey<EntityType<?>> GOLD_FIREBALL = createKey("gold_fireball");
 
     private static ResourceKey<EntityType<?>> createKey(String path) {
         return ResourceKey.create(Registries.ENTITY_TYPE, SuperMario.id(path));

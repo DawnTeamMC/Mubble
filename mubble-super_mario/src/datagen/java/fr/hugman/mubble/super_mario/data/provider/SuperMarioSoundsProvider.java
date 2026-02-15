@@ -39,6 +39,8 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.CAPE_FEATHER_USE, variantSoundBuilder(SuperMarioSounds.CAPE_FEATHER_USE, 1));
 
         // Entities
+        soundExporter.add(SuperMarioSounds.GOLDEN_EXPLOSION, variantSoundBuilder(SuperMarioSounds.GOLDEN_EXPLOSION, 1));
+
         soundExporter.add(SuperMarioSounds.GOOMBA_WALK_STEP, variantSoundBuilder(SuperMarioSounds.GOOMBA_WALK_STEP, 1).subtitle("subtitles.block.generic.footsteps"));
         soundExporter.add(SuperMarioSounds.GOOMBA_RUN_STEP, variantSoundBuilder(SuperMarioSounds.GOOMBA_RUN_STEP, 1).subtitle("subtitles.block.generic.footsteps"));
         soundExporter.add(SuperMarioSounds.GOOMBA_FIND_TARGET, variantSoundBuilder(SuperMarioSounds.GOOMBA_FIND_TARGET, 1));
@@ -60,10 +62,16 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.ICEBALL_HIT_ENTITY, variantSoundBuilder(SuperMarioSounds.ICEBALL_HIT_ENTITY, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.iceball.hit"));
         soundExporter.add(SuperMarioSounds.ICEBALL_THROW, variantSoundBuilder(SuperMarioSounds.ICEBALL_THROW, 1));
 
+        soundExporter.add(SuperMarioSounds.GOLD_FIREBALL_THROW, variantSoundBuilder(SuperMarioSounds.FIREBALL_THROW, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.gold_fireball.throw"));
+
         // Power-Up
+        var obtainSub = "subtitles." + SuperMario.MOD_ID + ".power_up.obtain";
+
         soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN, 1));
-        soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_MINI, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_MINI, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.obtain"));
-        soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.obtain"));
+        soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_MINI, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_MINI, 1).subtitle(obtainSub));
+        soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, 1).subtitle(obtainSub));
+        soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_GOLD, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_GOLD, 1).subtitle(obtainSub));
+        soundExporter.add(SuperMarioSounds.POWER_UP_EMIT_GOLD, variantSoundBuilder(SuperMarioSounds.POWER_UP_EMIT_GOLD, 1).subtitle(null));
         soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE, 1));
     }
 

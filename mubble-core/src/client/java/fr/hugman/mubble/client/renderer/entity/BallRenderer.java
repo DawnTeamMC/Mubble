@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.util.LightCoordsUtil;
 
 @Environment(EnvType.CLIENT)
 public class BallRenderer extends EntityRenderer<Ball, BallRenderState> {
@@ -35,7 +36,7 @@ public class BallRenderer extends EntityRenderer<Ball, BallRenderState> {
         state.xRot = ball.getXRot(f);
         state.yRot = ball.getYRot(f);
         state.texture = ball.getTexture();
-        state.lightCoords = 15728880;
+        state.lightCoords = LightCoordsUtil.FULL_BRIGHT;
         state.rotateClockwards = ball.rotatesClockwards();
     }
 

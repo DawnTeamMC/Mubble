@@ -23,8 +23,8 @@ import java.util.function.Function;
 public class SuperMarioBlocks {
     public static final EmptyBlock EMPTY_BLOCK = register(SuperMarioBlockKeys.EMPTY_BLOCK, EmptyBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_BROWN));
     public static final DecoratedBumpableBlock QUESTION_BLOCK = registerBumpableBlock(SuperMarioBlockKeys.QUESTION_BLOCK, EMPTY_BLOCK, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_YELLOW));
-    public static final DecoratedBumpableBlock BRICK_BLOCK = registerBumpableBlock(SuperMarioBlockKeys.BRICK_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).mapColor(MapColor.COLOR_BROWN));
-    public static final DecoratedBumpableBlock CRYSTAL_BLOCK = registerBumpableBlock(SuperMarioBlockKeys.CRYSTAL_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).sound(SoundType.AMETHYST).mapColor(MapColor.COLOR_PURPLE));
+    public static final DecoratedBumpableBlock BRICK_BLOCK = registerBumpableBlock(SuperMarioBlockKeys.BRICK_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).explosionResistance(0).mapColor(MapColor.COLOR_BROWN));
+    public static final DecoratedBumpableBlock CRYSTAL_BLOCK = registerBumpableBlock(SuperMarioBlockKeys.CRYSTAL_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).explosionResistance(0).sound(SoundType.AMETHYST).mapColor(MapColor.COLOR_PURPLE));
     public static final DecoratedBumpableBlock GOLD_BLOCK = registerBumpableBlock(SuperMarioBlockKeys.GOLD_BLOCK, Blocks.AIR, BlockBehaviour.Properties.ofFullCopy(Blocks.BRICKS).mapColor(MapColor.GOLD));
     public static final DecoratedBumpableBlock BLUE_EXCLAMATION_BLOCK = registerExclamationBlock(SuperMarioBlockKeys.BLUE_EXCLAMATION_BLOCK, MapColor.COLOR_BLUE);
     public static final DecoratedBumpableBlock GREEN_EXCLAMATION_BLOCK = registerExclamationBlock(SuperMarioBlockKeys.GREEN_EXCLAMATION_BLOCK, MapColor.COLOR_GREEN);

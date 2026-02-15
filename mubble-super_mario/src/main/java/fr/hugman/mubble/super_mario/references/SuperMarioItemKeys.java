@@ -17,6 +17,7 @@ public class SuperMarioItemKeys {
     public static final ResourceKey<Item> MEGA_MUSHROOM = createKey("mega_mushroom");
     public static final ResourceKey<Item> FIRE_FLOWER = createKey("fire_flower");
     public static final ResourceKey<Item> ICE_FLOWER = createKey("ice_flower");
+    public static final ResourceKey<Item> GOLD_FLOWER = createKey("gold_flower");
 
     public static final ResourceKey<Item> CAPE_FEATHER = createKey("cape_feather");
     public static final ResourceKey<Item> SUPER_CAPE_FEATHER = createKey("super_cape_feather");
