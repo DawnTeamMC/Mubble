@@ -69,6 +69,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .attributesModifier(Attributes.ENTITY_INTERACTION_RANGE, 1.2, ADD_MULTIPLIED_BASE)
                 .build());
         context.register(FIRE, builder(FIRE)
+                .humanoidOverlay(FIRE)
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.FIREBALL,
                         SuperMarioSounds.FIREBALL_THROW,

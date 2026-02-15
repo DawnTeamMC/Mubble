@@ -26,6 +26,7 @@ public class PowerUpBuilder {
     private @Nullable Holder<SoundEvent> emitSound;
     private @Nullable Holder<SoundEvent> looseSound;
     private @Nullable ParticleOptions particle;
+    private Identifier humanoidOverlayAssetId;
 
     public PowerUpBuilder name(Component name) {
         this.name = name;
@@ -80,6 +81,15 @@ public class PowerUpBuilder {
         return this;
     }
 
+    public PowerUpBuilder humanoidOverlay(Identifier assetId) {
+        this.humanoidOverlayAssetId = assetId;
+        return this;
+    }
+
+    public PowerUpBuilder humanoidOverlay(ResourceKey<PowerUp> key) {
+        return this.humanoidOverlay(key.identifier().withPath(s -> "entity/power_up/humanoid/" + s));
+    }
+
     public PowerUp build() {
         return new PowerUp(
                 Optional.ofNullable(name),
@@ -90,7 +100,8 @@ public class PowerUpBuilder {
                         Optional.ofNullable(this.particle),
                         Optional.ofNullable(this.obtainSound),
                         Optional.ofNullable(this.emitSound),
-                        Optional.ofNullable(this.looseSound)
+                        Optional.ofNullable(this.looseSound),
+                        Optional.ofNullable(this.humanoidOverlayAssetId)
                 )
         );
     }
