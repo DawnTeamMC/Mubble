@@ -13,6 +13,7 @@ public class SuperMarioItemKeys {
     public static final ResourceKey<Item> GREEN_KOOPA_SHELL = createKey("green_koopa_shell");
 	public static final ResourceKey<Item> RED_KOOPA_SHELL = createKey("red_koopa_shell");
 
+    public static final ResourceKey<Item> SUPER_MUSHROOM = createKey("super_mushroom");
     public static final ResourceKey<Item> MINI_MUSHROOM = createKey("mini_mushroom");
     public static final ResourceKey<Item> MEGA_MUSHROOM = createKey("mega_mushroom");
     public static final ResourceKey<Item> FIRE_FLOWER = createKey("fire_flower");

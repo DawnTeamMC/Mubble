@@ -18,15 +18,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import java.util.Collections;
+
 import java.util.function.Predicate;
 
 public class SuperMarioCreativeModeTabs {
     public static final CreativeModeTab SUPER_MARIO = register(SuperMarioCreativeModeTabKeys.SUPER_MARIO, FabricCreativeModeTab.builder()
             .title(Component.translatable("item_group."+ SuperMario.MOD_ID +".super_mario"))
-            .icon(() -> new ItemStack(SuperMarioBlocks.QUESTION_BLOCK))
+            .icon(() -> new ItemStack(SuperMarioItems.SUPER_MUSHROOM))
             .build());
     public static final CreativeModeTab YOSHI_ISLAND = register(SuperMarioCreativeModeTabKeys.YOSHI_ISLAND, FabricCreativeModeTab.builder()
             .title(Component.translatable("item_group." + SuperMario.MOD_ID +".yoshi_island"))
@@ -45,6 +44,7 @@ public class SuperMarioCreativeModeTabs {
 			entries.accept(SuperMarioItems.RED_COIN);
 			entries.accept(SuperMarioItems.BLUE_COIN);
 			entries.accept(SuperMarioItems.FLOWER_COIN);
+            entries.accept(SuperMarioItems.SUPER_MUSHROOM);
             entries.accept(SuperMarioItems.FIRE_FLOWER);
             entries.accept(SuperMarioItems.ICE_FLOWER);
             entries.accept(SuperMarioItems.GOLD_FLOWER);

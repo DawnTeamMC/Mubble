@@ -4,6 +4,7 @@ import fr.hugman.mubble.core.component.MubbleDataComponents;
 import fr.hugman.mubble.super_mario.references.SuperMarioItemKeys;
 import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.item.component.SuperMarioConsumables;
 import fr.hugman.mubble.world.item.MubbleCooldownGroups;
 import fr.hugman.mubble.world.item.PowerUpItem;
 import fr.hugman.mubble.world.item.component.PowerUpComponent;
@@ -30,6 +31,7 @@ public class SuperMarioItems {
     public static final KoopaShellItem GREEN_KOOPA_SHELL = register(SuperMarioItemKeys.GREEN_KOOPA_SHELL, s -> new KoopaShellItem(s, false), new Item.Properties().stacksTo(3));
     public static final KoopaShellItem RED_KOOPA_SHELL = register(SuperMarioItemKeys.RED_KOOPA_SHELL, s -> new KoopaShellItem(s, true), new Item.Properties().stacksTo(3));
 
+    public static final Item SUPER_MUSHROOM = register(SuperMarioItemKeys.SUPER_MUSHROOM, new Item.Properties().component(DataComponents.CONSUMABLE, SuperMarioConsumables.SUPER_MUSHROOM));
     public static final PowerUpItem MINI_MUSHROOM = registerPowerUp(SuperMarioItemKeys.MINI_MUSHROOM, SuperMarioPowerUpKeys.MINI);
     public static final PowerUpItem MEGA_MUSHROOM = registerPowerUp(SuperMarioItemKeys.MEGA_MUSHROOM, SuperMarioPowerUpKeys.MEGA);
     public static final PowerUpItem FIRE_FLOWER = registerPowerUp(SuperMarioItemKeys.FIRE_FLOWER, SuperMarioPowerUpKeys.FIRE);
