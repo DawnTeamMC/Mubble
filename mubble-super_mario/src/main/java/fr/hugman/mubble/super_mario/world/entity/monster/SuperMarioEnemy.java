@@ -1,6 +1,5 @@
 package fr.hugman.mubble.super_mario.world.entity.monster;
 
-import java.util.List;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -57,9 +56,9 @@ abstract public class SuperMarioEnemy extends Monster {
     }
 
     @Override
-    public void onStompedBy(List<Entity> entities) {
+    public void onStompedBy(Entity entity) {
         this.setStomped(true);
-        super.onStompedBy(entities);
+        super.onStompedBy(entity);
     }
 
     abstract public AnimationState getStompDeathAnimationState();

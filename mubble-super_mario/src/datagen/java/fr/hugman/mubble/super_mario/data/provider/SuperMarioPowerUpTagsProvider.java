@@ -9,6 +9,7 @@ import net.minecraft.data.tags.TagAppender;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 
+import static fr.hugman.mubble.super_mario.tags.SuperMarioPowerUpTags.*;
 import static fr.hugman.mubble.tags.MubblePowerUpTags.*;
 import static fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys.*;
 
@@ -25,7 +26,7 @@ public class SuperMarioPowerUpTagsProvider extends FabricTagsProvider<PowerUp> {
 
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
-		this.builder(CAN_RUN_ON_WATER)
-				.add(MINI);
+		this.builder(CAN_RUN_ON_WATER).add(MINI);
+		this.builder(DISABLES_STOMPING).add(MINI);
 	}
 }

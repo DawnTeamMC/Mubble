@@ -1,6 +1,5 @@
 package fr.hugman.mubble.super_mario.world.entity.projectile;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import java.util.List;
@@ -52,8 +51,8 @@ public class GreenKoopaShell extends KoopaShell {
     }
 
     @Override
-    public void onStompedBy(List<Entity> entities) {
-        super.onStompedBy(entities);
+    public void onStompedBy(Entity entity) {
+        super.onStompedBy(entity);
         if (this.level() instanceof ServerLevel) {
             if (!this.isStopped()) {
                 this.setDeltaMovement(Vec3.ZERO);
