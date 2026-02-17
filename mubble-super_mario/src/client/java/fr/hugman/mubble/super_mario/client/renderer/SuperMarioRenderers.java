@@ -8,6 +8,7 @@ import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.NoopRenderer;
 
 public class SuperMarioRenderers {
     public static void registerEntities() {
@@ -17,6 +18,7 @@ public class SuperMarioRenderers {
         EntityRenderers.register(SuperMarioEntityTypes.FIREBALL, BallRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.ICEBALL, BallRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.GOLD_FIREBALL, BallRenderer::new);
+        EntityRenderers.register(SuperMarioEntityTypes.CLOUD_PLATFORM, NoopRenderer::new);
     }
 
     public static void registerBlockEntities() {

@@ -67,8 +67,12 @@ public record PowerUp(
         if(this.action.isEmpty()) {
             return InteractionResult.PASS;
         }
-        var result = this.action.get().value().trigger(player);
-        if(result == InteractionResult.SUCCESS && this.action.get().value().shouldSwingOtherHand()) {
+        var action = this.action.get().value();
+        if(!action.canBeTriggered(player)) {
+            return InteractionResult.PASS;
+        }
+        var result = action.trigger(player);
+        if(result == InteractionResult.SUCCESS && action.shouldSwingOtherHand()) {
             // swing the empty hand or main hand if both are occupied
             player.swing(!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && player.getItemInHand(InteractionHand.OFF_HAND).isEmpty() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
         }

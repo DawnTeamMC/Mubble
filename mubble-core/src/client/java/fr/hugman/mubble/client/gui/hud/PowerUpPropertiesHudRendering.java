@@ -21,7 +21,7 @@ public class PowerUpPropertiesHudRendering {
     private static final int MARGIN_FROM_CROSSHAIR = 5;
     private static final Identifier PROJECTILE_TEXTURE = Mubble.id("hud/power_up_projectile");
     private static final Identifier PROJECTILE_EMPTY_TEXTURE = Mubble.id("hud/power_up_projectile_empty");
-    private static final int MAX_PROJECTILES = 6;
+    private static final int MAX_PROJECTILES_DISPLAY = 6;
 
     public static void renderProjectilesLayer(Minecraft client, GuiGraphics context) {
         if (client.player == null) {
@@ -46,12 +46,12 @@ public class PowerUpPropertiesHudRendering {
                 return;
             }
             var projectileCount = projectilesMax - properties.getProjectiles().size();
-            if(projectileCount > MAX_PROJECTILES) {
+            if(projectileCount > MAX_PROJECTILES_DISPLAY) {
                 return;
             }
             int startX = (context.guiWidth() + 8) / 2 + MARGIN_FROM_CROSSHAIR;
             int y = (context.guiHeight() - PROJECTILE_HEIGHT) / 2;
-            for (int i = Math.min(MAX_PROJECTILES, projectilesMax) - 1; i >= 0; i--) {
+            for (int i = Math.min(MAX_PROJECTILES_DISPLAY, projectilesMax) - 1; i >= 0; i--) {
                 int x = startX + (i * (PROJECTILE_WIDTH + PROJECTILE_PADDING));
                 context.blitSprite(RenderPipelines.CROSSHAIR, i < projectileCount ? PROJECTILE_TEXTURE : PROJECTILE_EMPTY_TEXTURE, x, y, PROJECTILE_WIDTH, PROJECTILE_HEIGHT);
             }

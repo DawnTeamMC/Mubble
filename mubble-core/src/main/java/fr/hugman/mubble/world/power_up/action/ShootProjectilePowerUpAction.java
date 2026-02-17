@@ -79,21 +79,13 @@ public record ShootProjectilePowerUpAction(
     @Override
     public InteractionResult trigger(Player player) {
         var properties = player.getPowerUpProperties();
-
         var level = player.level();
-        if (!level.isClientSide()) {
-            properties.removeInvalidProjectiles(level);
-        }
-        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
-            return InteractionResult.FAIL;
-        }
 
-        if (player.level().isClientSide()) {
+        if (level.isClientSide()) {
             //TODO once powerup properties are synced, have a check on the client
             return InteractionResult.SUCCESS;
         }
-
-        if (!level.isClientSide()) {
+        else {
             level.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 0.5F, 1.0F);
             var entity = this.projectile.create(level, EntitySpawnReason.TRIGGERED);
             if (null == entity) {
