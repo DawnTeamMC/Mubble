@@ -6,6 +6,7 @@ import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.core.registries.SuperMarioBuiltInRegistries;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.attribute.SuperMarioEnvironmentAttributes;
+import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityEvents;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.inventory.SuperMarioMenuTypes;
 import fr.hugman.mubble.super_mario.world.item.SuperMarioCreativeModeTabs;
@@ -46,6 +47,8 @@ public class SuperMario implements ModInitializer {
 
         SuperMarioBiomeModifications.register();
 
+        // Events
+        SuperMarioEntityEvents.register();
     }
 
     public static Identifier id(String path) {
