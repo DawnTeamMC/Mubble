@@ -15,7 +15,10 @@ public class EntityMixin {
         Entity this_ = (Entity) (Object) this;
         if (this_ instanceof TraceableEntity ownable && ownable.getOwner() instanceof PowerUpHolder powerUpHolder) {
             // if the projectile isn't in the properties it won't set dirty so it's okay to not check for it
-            powerUpHolder.getPowerUpProperties().removeEntity(this_.getUUID());
+            var properties = powerUpHolder.getPowerUpProperties();
+            if (properties != null) {
+                properties.removeEntity(this_.getUUID());
+            }
         }
     }
 }

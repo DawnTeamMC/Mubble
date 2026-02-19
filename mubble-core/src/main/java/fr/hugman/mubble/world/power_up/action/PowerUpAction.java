@@ -12,6 +12,8 @@ import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.util.Util;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import org.jspecify.annotations.Nullable;
+
 import java.util.Optional;
 
 public interface PowerUpAction {
@@ -24,7 +26,10 @@ public interface PowerUpAction {
 
     PowerUpActionType<?> getType();
 
-    default void setUpProperties(PowerUpProperties properties) {}
+    @Nullable
+    default PowerUpProperties setUpProperties() {
+        return null;
+    }
 
     default boolean canBeTriggered(Player player) {
         return true;

@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class MubbleEntityDataSerializers {
     public static final EntityDataSerializer<Optional<Holder<PowerUp>>> OPTIONAL_POWER_UP = register("optional_power_up", PowerUp.OPTIONAL_STREAM_CODEC);
-    public static final EntityDataSerializer<PowerUpProperties> POWER_UP_PROPERTIES = register("power_up_properties", PowerUpProperties.STREAM_CODEC);
+    public static final EntityDataSerializer<Optional<PowerUpProperties>> POWER_UP_PROPERTIES = register("optional_power_up_properties", PowerUpProperties.OPTIONAL_STREAM_CODEC);
 
 	public static <T> EntityDataSerializer<T> register(String name, StreamCodec<? super RegistryFriendlyByteBuf, T> codec) {
 		var handler = EntityDataSerializer.forValueType(codec);

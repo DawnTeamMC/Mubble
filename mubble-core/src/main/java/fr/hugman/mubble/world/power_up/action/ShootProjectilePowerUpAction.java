@@ -64,14 +64,18 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
-    public void setUpProperties(PowerUpProperties properties) {
-        properties.chargeCounting = PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES;
-        properties.maxCharges = maxProjectiles.orElse(Integer.MAX_VALUE);
+    public PowerUpProperties setUpProperties() {
+        return new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, maxProjectiles.orElse(Integer.MAX_VALUE));
     }
 
     @Override
     public boolean canBeTriggered(Player player) {
         var properties = player.getPowerUpProperties();
+
+        if(properties == null) {
+            properties = setUpProperties();
+            player.setPowerUpProperties(properties);
+        }
 
         var level = player.level();
         if (!level.isClientSide()) {
@@ -83,6 +87,11 @@ public record ShootProjectilePowerUpAction(
     @Override
     public InteractionResult trigger(Player player) {
         var properties = player.getPowerUpProperties();
+
+        if(properties == null) {
+            properties = setUpProperties();
+            player.setPowerUpProperties(properties);
+        }
         var level = player.level();
 
         if (level.isClientSide()) {

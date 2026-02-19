@@ -37,9 +37,11 @@ public class PowerUpPropertiesHudRendering {
         if (client.debugEntries.isCurrentlyEnabled(DebugScreenEntries.THREE_DIMENSIONAL_CROSSHAIR)) {
             return;
         }
+        if(client.player.getPowerUp().isEmpty()) {
+            return;
+        }
         var properties = client.player.getPowerUpProperties();
         if(properties == null) {
-            //TODO: log a warning?
             return;
         }
         int chargesMax = properties.maxCharges;

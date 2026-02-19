@@ -113,13 +113,20 @@ public record PowerUp(
         } else {
             next.ifPresent(powerUp -> {
                 powerUp.value().cosmectics().obtainSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
-                if (entity instanceof PowerUpHolder powerUpHolder) {
+                if (entity instanceof PowerUpHolder holder) {
+                    PowerUpProperties properties = null;
                     if(powerUp.value().action().isPresent()) {
-                        powerUpHolder.getPowerUpProperties().reset();
-                        powerUp.value().action().get().value().setUpProperties(powerUpHolder.getPowerUpProperties());
+                        properties = powerUp.value().action().get().value().setUpProperties();
                     }
+                    holder.setPowerUpProperties(properties);
                 }
             });
+        }
+
+        if(next.isEmpty()) {
+            if (entity instanceof PowerUpHolder holder) {
+                holder.setPowerUpProperties(null);
+            }
         }
 
         //TODO: create event?

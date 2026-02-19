@@ -16,29 +16,32 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.AABB;
+import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Mixin(Player.class)
 public class PlayerMixin implements PowerUpHolder {
     @Unique
+    private static final EntityDataAccessor<Optional<PowerUpProperties>> POWER_UP_PROPERTIES = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.POWER_UP_PROPERTIES);
+    @Unique
     private static final EntityDataAccessor<Optional<Holder<PowerUp>>> POWER_UP = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.OPTIONAL_POWER_UP);
-    private static final EntityDataAccessor<PowerUpProperties> POWER_UP_PROPERTIES = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.POWER_UP_PROPERTIES);
 
     @Unique
     private static final String POWER_UP_KEY = "power_up";
+    @Unique
+    private static final String POWER_UP_PROPERTIES_KEY = "power_up_properties";
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     protected void mubble$initDataTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
         builder.define(POWER_UP, Optional.empty());
-        builder.define(POWER_UP_PROPERTIES, new PowerUpProperties(0, new ArrayList<>()));
+        builder.define(POWER_UP_PROPERTIES, Optional.empty());
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -46,12 +49,14 @@ public class PlayerMixin implements PowerUpHolder {
         var this_ = (Player) ((Object) this);
 
 		this_.getPowerUp().ifPresent(entry -> view.store(POWER_UP_KEY, PowerUp.CODEC, entry));
+        view.storeNullable(POWER_UP_PROPERTIES_KEY, PowerUpProperties.CODEC, this_.getPowerUpProperties());
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void mubble$readCustomData(ValueInput view, CallbackInfo ci) {
         var this_ = (Player) (Object) this;
 		view.read(POWER_UP_KEY, PowerUp.CODEC).ifPresent(entry -> this_.getEntityData().set(POWER_UP, Optional.of(entry)));
+        view.read(POWER_UP_PROPERTIES_KEY, PowerUpProperties.CODEC).ifPresent(properties -> this_.getEntityData().set(POWER_UP_PROPERTIES, Optional.of(properties)));
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
@@ -61,13 +66,16 @@ public class PlayerMixin implements PowerUpHolder {
             return;
         }
         this_.getPowerUp().ifPresent(entry -> {
-            this.getPowerUpProperties().tick();
-            // safe check
-            if(this_.tickCount % 20 == 0) {
-                this.getPowerUpProperties().doSoftChecks(this_);
-            }
-            if(this.getPowerUpProperties().checkDirty()) {
-                this_.getEntityData().set(POWER_UP_PROPERTIES, this_.getPowerUpProperties(), true);
+            var properties = this.getPowerUpProperties();
+            if(properties != null) {
+                properties.tick();
+                // safe check
+                if(this_.tickCount % 20 == 0) {
+                    properties.doSoftChecks(this_);
+                }
+                if(properties.checkDirty()) {
+                    this_.getEntityData().set(POWER_UP_PROPERTIES, Optional.ofNullable(this_.getPowerUpProperties()), true);
+                }
             }
         });
     }
@@ -107,9 +115,16 @@ public class PlayerMixin implements PowerUpHolder {
     }
 
     @Override
+    @Nullable
     public PowerUpProperties getPowerUpProperties() {
         var this_ = (Player) (Object) this;
-        return this_.getEntityData().get(POWER_UP_PROPERTIES);
+        return this_.getEntityData().get(POWER_UP_PROPERTIES).orElse(null);
+    }
+
+    @Override
+    public void setPowerUpProperties(PowerUpProperties properties) {
+        var this_ = (Player) (Object) this;
+        this_.getEntityData().set(POWER_UP_PROPERTIES, Optional.ofNullable(properties));
     }
 
     @Override
