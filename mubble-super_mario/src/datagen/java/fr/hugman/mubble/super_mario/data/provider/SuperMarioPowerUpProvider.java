@@ -4,10 +4,10 @@ import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowerUpAction;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
-import fr.hugman.mubble.world.power_up.action.SummonEntityAtPlayerPowerUpAction;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.Holder;
@@ -105,7 +105,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .build());
         //TODO: the cloud power-up should be lost when touching water
         context.register(CLOUD, builder(CLOUD)
-                .action(Holder.direct(new SummonEntityAtPlayerPowerUpAction(SuperMarioEntityTypes.CLOUD_PLATFORM, -1, Optional.of(3))))
+                .action(Holder.direct(new SpawnCloudPlatformPowerUpAction(SuperMarioEntityTypes.CLOUD_PLATFORM, Optional.of(3))))
                 .attributesModifier(Attributes.GRAVITY, -0.5, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.JUMP_STRENGTH, 0.35, ADD_MULTIPLIED_BASE)
                 .build());

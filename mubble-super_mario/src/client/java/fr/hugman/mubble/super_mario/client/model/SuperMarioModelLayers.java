@@ -1,5 +1,6 @@
 package fr.hugman.mubble.super_mario.client.model;
 
+import fr.hugman.mubble.client.model.BallModel;
 import fr.hugman.mubble.super_mario.SuperMario;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -10,6 +11,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 public class SuperMarioModelLayers {
     public static final ModelLayerLocation GOOMBA = register("goomba", GoombaModel::getTexturedModelData);
     public static final ModelLayerLocation KOOPA_SHELL = register("koopa_shell", KoopaShellModel::getTexturedModelData);
+    public static final ModelLayerLocation CLOUD_PLATFORM = register("cloud_platform", CloudPlatformModel::getTexturedModelData);
 
     private static ModelLayerLocation register(String path, String layerName, ModelLayerRegistry.TexturedLayerDefinitionProvider provider) {
         var layer = new ModelLayerLocation(SuperMario.id(path), layerName);

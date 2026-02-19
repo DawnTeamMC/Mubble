@@ -1,6 +1,5 @@
 package fr.hugman.mubble.super_mario.client.gui.screens.inventory;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.world.inventory.BumpableScreenHandler;
 import fr.hugman.mubble.super_mario.world.level.block.BumpableDropMode;

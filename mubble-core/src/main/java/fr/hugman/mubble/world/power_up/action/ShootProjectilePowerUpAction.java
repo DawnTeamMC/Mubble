@@ -6,6 +6,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.keybind.MubbleKeyBindingsKeys;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
@@ -18,7 +20,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -30,7 +31,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.phys.Vec3;
 
-
+//TODO: cooldown is not yet implemented
 public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
         Holder<SoundEvent> sound,
@@ -63,17 +64,20 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
+    public void setUpProperties(PowerUpProperties properties) {
+        properties.chargeCounting = PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES;
+        properties.maxCharges = maxProjectiles.orElse(Integer.MAX_VALUE);
+    }
+
+    @Override
     public boolean canBeTriggered(Player player) {
         var properties = player.getPowerUpProperties();
 
         var level = player.level();
         if (!level.isClientSide()) {
-            properties.removeInvalidProjectiles(level);
+            properties.doSoftChecks(player);
         }
-        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
-            return false;
-        }
-        return true;
+        return properties.getChargeCount() > 0;
     }
 
     @Override
@@ -97,7 +101,7 @@ public record ShootProjectilePowerUpAction(
             entity.setPos(player.getX(), player.getEyeY() - 0.1F, player.getZ());
             setVelocity(entity, player, player.getXRot(), player.getYRot(), 0.0F, this.speed, 1.0F);
             level.addFreshEntity(entity);
-            properties.addProjectile(entity.getUUID());
+            properties.addEntity(entity.getUUID());
             properties.setCooldown(cooldown.orElse(0));
         }
         return InteractionResult.SUCCESS;

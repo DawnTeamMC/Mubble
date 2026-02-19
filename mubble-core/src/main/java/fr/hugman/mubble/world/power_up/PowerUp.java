@@ -111,13 +111,17 @@ public record PowerUp(
         if (previous.isPresent() && next.isEmpty()) {
             previous.get().value().cosmectics().looseSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
         } else {
-            next.ifPresent(powerUpRegistryEntry -> {
-                powerUpRegistryEntry.value().cosmectics().obtainSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
+            next.ifPresent(powerUp -> {
+                powerUp.value().cosmectics().obtainSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
                 if (entity instanceof PowerUpHolder powerUpHolder) {
-                    powerUpHolder.getPowerUpProperties().reset();
+                    if(powerUp.value().action().isPresent()) {
+                        powerUpHolder.getPowerUpProperties().reset();
+                        powerUp.value().action().get().value().setUpProperties(powerUpHolder.getPowerUpProperties());
+                    }
                 }
             });
         }
+
         //TODO: create event?
         //TODO: particles
     }

@@ -1,8 +1,11 @@
-package fr.hugman.mubble.world.power_up.action;
+package fr.hugman.mubble.super_mario.world.power_up.action;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fr.hugman.mubble.world.power_up.PowerUpProperties;
+import fr.hugman.mubble.world.power_up.action.PowerUpAction;
+import fr.hugman.mubble.world.power_up.action.PowerUpActionType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -18,27 +21,30 @@ import net.minecraft.world.entity.player.Player;
 import java.util.Optional;
 
 
-public record SummonEntityAtPlayerPowerUpAction(
+public record SpawnCloudPlatformPowerUpAction(
         EntityType<?> entity,
-        int yOffset,
-        Optional<Integer> maxProjectiles
+        Optional<Integer> max
 ) implements PowerUpAction {
-    public static final MapCodec<SummonEntityAtPlayerPowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(SummonEntityAtPlayerPowerUpAction::entity),
-            Codec.INT.fieldOf("y_offset").forGetter(SummonEntityAtPlayerPowerUpAction::yOffset),
-            Codec.INT.optionalFieldOf("max_projectiles").forGetter(SummonEntityAtPlayerPowerUpAction::maxProjectiles)
-    ).apply(instance, SummonEntityAtPlayerPowerUpAction::new));
+    public static final MapCodec<SpawnCloudPlatformPowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(SpawnCloudPlatformPowerUpAction::entity),
+            Codec.INT.optionalFieldOf("max").forGetter(SpawnCloudPlatformPowerUpAction::max)
+    ).apply(instance, SpawnCloudPlatformPowerUpAction::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, SummonEntityAtPlayerPowerUpAction> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.registry(Registries.ENTITY_TYPE), (SummonEntityAtPlayerPowerUpAction::entity),
-            ByteBufCodecs.INT, SummonEntityAtPlayerPowerUpAction::yOffset,
-            ByteBufCodecs.optional(ByteBufCodecs.INT), (SummonEntityAtPlayerPowerUpAction::maxProjectiles),
-            SummonEntityAtPlayerPowerUpAction::new
+    public static final StreamCodec<RegistryFriendlyByteBuf, SpawnCloudPlatformPowerUpAction> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.registry(Registries.ENTITY_TYPE), (SpawnCloudPlatformPowerUpAction::entity),
+            ByteBufCodecs.optional(ByteBufCodecs.INT), (SpawnCloudPlatformPowerUpAction::max),
+            SpawnCloudPlatformPowerUpAction::new
     );
 
     @Override
     public PowerUpActionType<?> getType() {
-        return PowerUpActionTypes.SUMMON_ENTITY_AT_PLAYER;
+        return SuperMarioPowerUpActionTypes.SPAWN_CLOUD_PLATFORM;
+    }
+
+    @Override
+    public void setUpProperties(PowerUpProperties properties) {
+        properties.chargeCounting = PowerUpProperties.ChargeCounting.ONLY_DECREASE;
+        properties.maxCharges = max.orElse(Integer.MAX_VALUE);
     }
 
     @Override
@@ -47,27 +53,17 @@ public record SummonEntityAtPlayerPowerUpAction(
 
         var level = player.level();
         if (!level.isClientSide()) {
-            properties.removeInvalidProjectiles(level);
+            properties.doSoftChecks(player);
         }
-        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
-            return false;
-        }
-        return true;
+        return properties.getChargeCount() > 0;
     }
 
     @Override
     public InteractionResult trigger(Player player) {
         var properties = player.getPowerUpProperties();
-
         var level = player.level();
-        if (!level.isClientSide()) {
-            properties.removeInvalidProjectiles(level);
-        }
-        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
-            return InteractionResult.FAIL;
-        }
 
-        if (player.level().isClientSide()) {
+        if (level.isClientSide()) {
             //TODO once powerup properties are synced, have a check on the client
             return InteractionResult.SUCCESS;
         }
@@ -77,8 +73,9 @@ public record SummonEntityAtPlayerPowerUpAction(
             if (null == entity) {
                 return InteractionResult.FAIL;
             }
-            entity.setPos(player.getX(), player.getY() + this.yOffset, player.getZ());
+            entity.setPos(player.getX(), player.getY() - 0.5f - entity.getBbHeight(), player.getZ());
             level.addFreshEntity(entity);
+            properties.addEntity(entity.getUUID());
 
             player.setDeltaMovement(player.getDeltaMovement().x, 0.2D, player.getDeltaMovement().z);
             ((ServerPlayer) player).connection.send(new ClientboundSetEntityMotionPacket(player));
