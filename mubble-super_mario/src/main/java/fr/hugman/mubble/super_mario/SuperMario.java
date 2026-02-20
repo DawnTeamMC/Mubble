@@ -15,7 +15,6 @@ import fr.hugman.mubble.super_mario.world.level.biome.SuperMarioBiomeModificatio
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import fr.hugman.mubble.super_mario.world.level.gamerules.SuperMarioGameRules;
 import fr.hugman.mubble.super_mario.world.power_up.action.SuperMarioPowerUpActionTypes;
-import fr.hugman.mubble.world.attribute.MubbleAttributeTypes;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionTypes;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.Identifier;
@@ -50,7 +49,7 @@ public class SuperMario implements ModInitializer {
         SuperMarioBiomeModifications.register();
 
         // Events
-        SuperMarioEntityEvents.register();
+        SuperMarioEntityEvents.registerListeners();
     }
 
     public static Identifier id(String path) {

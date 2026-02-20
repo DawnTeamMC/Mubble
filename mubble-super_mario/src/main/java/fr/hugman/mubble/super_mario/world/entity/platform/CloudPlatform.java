@@ -1,7 +1,7 @@
 package fr.hugman.mubble.super_mario.world.entity.platform;
 
-import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys;
+import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -92,6 +92,10 @@ public class CloudPlatform extends Entity implements TraceableEntity {
 
     @Override
     public void tick() {
+        if(this.firstTick) {
+            this.playSound(SuperMarioSounds.CLOUD_PLATFORM_APPEAR.value());
+        }
+
         super.tick();
 
         this.oScale = this.scale;
@@ -114,6 +118,11 @@ public class CloudPlatform extends Entity implements TraceableEntity {
         }
     }
 
+    @Override
+    public void onRemoval(RemovalReason reason) {
+        this.playSound(SuperMarioSounds.CLOUD_PLATFORM_DISAPPEAR.value());
+        super.onRemoval(reason);
+    }
 
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {

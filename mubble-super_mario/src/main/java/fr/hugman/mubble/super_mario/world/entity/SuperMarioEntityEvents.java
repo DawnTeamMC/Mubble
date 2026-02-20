@@ -7,7 +7,7 @@ import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
 import net.minecraft.server.level.ServerLevel;
 
 public class SuperMarioEntityEvents {
-	public static void register() {
+	public static void registerListeners() {
 		ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
 			if(source.getEntity() instanceof PowerUpHolder powerUpHolder && entity.level() instanceof ServerLevel serverLevel) {
 				var powerUp = powerUpHolder.getPowerUp();

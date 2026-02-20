@@ -90,13 +90,6 @@ public final class PowerUpProperties {
         this.dirty = true;
     }
 
-    public void clear() {
-        this.cooldown = 0;
-        this.chargeCount = this.maxCharges;
-        this.chargeEntities.clear();
-        this.dirty = true;
-    }
-
     public void tick() {
         if (this.chargeCounting == ChargeCounting.FROM_ACTIVE_ENTITIES) {
             this.chargeCount = this.maxCharges - this.chargeEntities.size();

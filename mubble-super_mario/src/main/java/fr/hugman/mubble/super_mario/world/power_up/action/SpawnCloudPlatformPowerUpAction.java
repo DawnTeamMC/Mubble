@@ -3,6 +3,7 @@ package fr.hugman.mubble.super_mario.world.power_up.action;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionType;
@@ -13,6 +14,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -43,7 +45,7 @@ public record SpawnCloudPlatformPowerUpAction(
 
     @Override
     public PowerUpProperties setUpProperties() {
-        return new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, max.orElse(Integer.MAX_VALUE));
+        return new PowerUpProperties(PowerUpProperties.ChargeCounting.ONLY_DECREASE, max.orElse(Integer.MAX_VALUE));
     }
 
     @Override
@@ -78,6 +80,7 @@ public record SpawnCloudPlatformPowerUpAction(
         }
 
         if (!level.isClientSide()) {
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), SuperMarioSounds.POWER_UP_SPIN_ATTACK, SoundSource.PLAYERS, 0.5F, 1.0F);
             var entity = this.entity().create(level, EntitySpawnReason.TRIGGERED);
             if (null == entity) {
                 return InteractionResult.FAIL;
