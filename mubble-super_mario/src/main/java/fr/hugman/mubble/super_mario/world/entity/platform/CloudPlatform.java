@@ -1,7 +1,7 @@
 package fr.hugman.mubble.super_mario.world.entity.platform;
 
-import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
+import fr.hugman.mubble.super_mario.tags.SuperMarioPowerUpTags;
 import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -17,6 +17,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
+//TODO: platform should despawn even if not occupied
 //TODO: spin quickly when just spawned via power-up
 public class CloudPlatform extends Entity implements TraceableEntity {
     private static final EntityDataAccessor<Boolean> IS_OCCUPIED = SynchedEntityData.defineId(CloudPlatform.class, EntityDataSerializers.BOOLEAN);
@@ -41,8 +42,8 @@ public class CloudPlatform extends Entity implements TraceableEntity {
     public CloudPlatform(EntityType<?> type, Level level) {
         super(type, level);
         this.setRequiresPrecisePosition(true);
-        this.setDuration(100);
-        this.setDurationDelay(100);
+        this.setDuration(120);
+        this.setDurationDelay(120);
     }
 
     public int getDuration() {
@@ -196,7 +197,7 @@ public class CloudPlatform extends Entity implements TraceableEntity {
         // entity must have the cloud power-up
         return entity instanceof PowerUpHolder powerUpHolder
                 && powerUpHolder.getPowerUp().isPresent()
-                && powerUpHolder.getPowerUp().get().is(SuperMarioPowerUpKeys.CLOUD);
+                && powerUpHolder.getPowerUp().get().is(SuperMarioPowerUpTags.CAN_WALK_ON_CLOUDS);
     }
 
     /**

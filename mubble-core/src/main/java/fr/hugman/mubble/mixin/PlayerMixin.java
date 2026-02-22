@@ -2,12 +2,14 @@ package fr.hugman.mubble.mixin;
 
 import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
+import fr.hugman.mubble.tags.MubblePowerUpTags;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -66,6 +68,13 @@ public class PlayerMixin implements PowerUpHolder {
             return;
         }
         this_.getPowerUp().ifPresent(entry -> {
+            BlockPos pos = this_.blockPosition();
+            if(entry.is(MubblePowerUpTags.LOST_TO_RAIN) && (this_.level().isRainingAt(pos) || this_.level().isRainingAt(BlockPos.containing(pos.getX(), this_.getBoundingBox().maxY, pos.getZ())))) {
+                this_.clearPowerUp();
+            }
+            if(entry.is(MubblePowerUpTags.LOST_TO_WATER) && this_.isInWater()) {
+                this_.clearPowerUp();
+            }
             var properties = this.getPowerUpProperties();
             if(properties != null) {
                 properties.tick();
