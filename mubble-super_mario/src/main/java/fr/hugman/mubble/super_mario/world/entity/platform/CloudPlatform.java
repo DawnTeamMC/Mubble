@@ -17,14 +17,17 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
-//TODO: platform should despawn even if not occupied
 //TODO: spin quickly when just spawned via power-up
 public class CloudPlatform extends Entity implements TraceableEntity {
+    private static final int SHRINK_DURATION = 20;
+
     private static final EntityDataAccessor<Boolean> IS_OCCUPIED = SynchedEntityData.defineId(CloudPlatform.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> ALWAYS_SHRINKS = SynchedEntityData.defineId(CloudPlatform.class, EntityDataSerializers.BOOLEAN);
 
     private static final String AGE_KEY = "age";
     private static final String DURATION_KEY = "duration";
     private static final String DURATION_DELAY_KEY = "duration_delay";
+    private static final String ALWAYS_SHRINKS_KEY = "always_shrinks";
 
     public static final int INFINITE_DURATION = -1;
 
@@ -44,6 +47,7 @@ public class CloudPlatform extends Entity implements TraceableEntity {
         this.setRequiresPrecisePosition(true);
         this.setDuration(120);
         this.setDurationDelay(120);
+        this.setAlwaysShrinks(true);
     }
 
     public int getDuration() {
@@ -62,13 +66,12 @@ public class CloudPlatform extends Entity implements TraceableEntity {
         this.durationDelay = durationDelay;
     }
 
-    @Nullable
-    public LivingEntity getOwner() {
-        return EntityReference.getLivingEntity(this.owner, this.level());
+    public boolean alwaysShrinks() {
+        return this.entityData.get(ALWAYS_SHRINKS);
     }
 
-    public void setOwner(@Nullable final LivingEntity owner) {
-        this.owner = EntityReference.of(owner);
+    public void setAlwaysShrinks(boolean alwaysShrinks) {
+        this.entityData.set(ALWAYS_SHRINKS, alwaysShrinks);
     }
 
     public boolean isOccupied() {
@@ -79,16 +82,25 @@ public class CloudPlatform extends Entity implements TraceableEntity {
         this.entityData.set(IS_OCCUPIED, occupied);
     }
 
+    @Nullable
+    public LivingEntity getOwner() {
+        return EntityReference.getLivingEntity(this.owner, this.level());
+    }
+
+    public void setOwner(@Nullable final LivingEntity owner) {
+        this.owner = EntityReference.of(owner);
+    }
+
     public int getTicksSinceLastOccupied() {
         return this.tickCount - this.lastOccupiedTick;
     }
 
     public boolean isShrinking() {
-        if(this.duration == INFINITE_DURATION || this.isOccupied()) {
+        if(this.duration == INFINITE_DURATION || (!this.alwaysShrinks() && this.isOccupied())) {
             return false;
         }
         int timeLeft = this.duration - this.tickCount;
-        return timeLeft < 40;
+        return timeLeft < SHRINK_DURATION;
     }
 
     @Override
@@ -101,7 +113,7 @@ public class CloudPlatform extends Entity implements TraceableEntity {
 
         this.oScale = this.scale;
         if (isShrinking()) {
-            float progress = Math.clamp((this.duration - this.tickCount) / 40f, 0f, 1f);
+            float progress = Math.clamp((float) (this.duration - this.tickCount) / SHRINK_DURATION, 0f, 1f);
             this.scale = progress * progress * (3 - 2 * progress);
             this.refreshDimensions();
         }
@@ -110,7 +122,7 @@ public class CloudPlatform extends Entity implements TraceableEntity {
         }
 
         if(!this.level().isClientSide()) {
-            if (this.duration != INFINITE_DURATION && !this.isOccupied()) {
+            if (this.duration != INFINITE_DURATION && (this.alwaysShrinks() || !this.isOccupied())) {
                 if(this.tickCount >= this.duration) {
                     this.discard();
                 }
@@ -128,18 +140,22 @@ public class CloudPlatform extends Entity implements TraceableEntity {
     @Override
     public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
         if(IS_OCCUPIED.equals(accessor)) {
-            if(this.isOccupied()) {
-                this.refreshDimensions();
-            } else {
-                this.duration = this.tickCount + this.durationDelay;
-            }
             this.lastOccupiedTick = this.tickCount;
+
+            if(!this.alwaysShrinks()) {
+                if(this.isOccupied()) {
+                    this.refreshDimensions();
+                } else {
+                    this.duration = this.tickCount + this.durationDelay;
+                }
+            }
         }
     }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder entityData) {
         entityData.define(IS_OCCUPIED, false);
+        entityData.define(ALWAYS_SHRINKS, false);
     }
 
     @Override
@@ -152,6 +168,7 @@ public class CloudPlatform extends Entity implements TraceableEntity {
         this.tickCount = input.getIntOr(AGE_KEY, 0);
         this.duration = input.getIntOr(DURATION_KEY, -1);
         this.durationDelay = input.getIntOr(DURATION_DELAY_KEY, -1);
+        this.setAlwaysShrinks(input.getBooleanOr(ALWAYS_SHRINKS_KEY, false));
     }
 
     @Override
@@ -159,6 +176,7 @@ public class CloudPlatform extends Entity implements TraceableEntity {
         output.putInt(AGE_KEY, this.tickCount);
         output.putInt(DURATION_KEY, this.duration);
         output.putInt(DURATION_DELAY_KEY, this.durationDelay);
+        output.putBoolean(ALWAYS_SHRINKS_KEY, this.alwaysShrinks());
     }
 
     @Override
@@ -179,6 +197,7 @@ public class CloudPlatform extends Entity implements TraceableEntity {
 
     @Override
     public boolean canBeCollidedWith(@Nullable Entity other) {
+        // TODO: whitelist the cloud flower item entity
         // entity must have the cloud power-up
         if(!canOccupy(other)) {
             return false;
