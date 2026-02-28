@@ -147,7 +147,7 @@ public record PowerUp(
 
     public static boolean canRefill(Player player, Holder<PowerUp> entry) {
         boolean hasProperties = entry.value().action()
-                .map(a -> a.value().supportsProperties())
+                .map(a -> a.value().canBeRefilled())
                 .orElse(false);
         if (!hasProperties) {
             return false;

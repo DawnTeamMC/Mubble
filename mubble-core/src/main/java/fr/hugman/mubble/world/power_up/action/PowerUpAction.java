@@ -31,7 +31,7 @@ public interface PowerUpAction {
         return null;
     }
 
-    default boolean supportsProperties() {
+    default boolean canBeRefilled() {
         return false;
     }
 

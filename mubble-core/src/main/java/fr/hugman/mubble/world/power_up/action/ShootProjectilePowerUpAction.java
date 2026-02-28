@@ -64,7 +64,7 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
-    public boolean supportsProperties() {
+    public boolean canBeRefilled() {
         return true;
     }
 

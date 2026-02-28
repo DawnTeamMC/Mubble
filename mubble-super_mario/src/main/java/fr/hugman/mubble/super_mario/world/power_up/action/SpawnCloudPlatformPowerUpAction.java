@@ -44,7 +44,7 @@ public record SpawnCloudPlatformPowerUpAction(
     }
 
     @Override
-    public boolean supportsProperties() {
+    public boolean canBeRefilled() {
         return true;
     }
 
