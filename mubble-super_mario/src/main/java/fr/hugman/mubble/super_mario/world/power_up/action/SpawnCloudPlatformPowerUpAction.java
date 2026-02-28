@@ -44,6 +44,11 @@ public record SpawnCloudPlatformPowerUpAction(
     }
 
     @Override
+    public boolean canBeRefilled() {
+        return true;
+    }
+
+    @Override
     public PowerUpProperties setUpProperties() {
         return new PowerUpProperties(PowerUpProperties.ChargeCounting.ONLY_DECREASE, max.orElse(Integer.MAX_VALUE));
     }
@@ -75,7 +80,6 @@ public record SpawnCloudPlatformPowerUpAction(
         }
 
         if (level.isClientSide()) {
-            //TODO once powerup properties are synced, have a check on the client
             return InteractionResult.SUCCESS;
         }
 

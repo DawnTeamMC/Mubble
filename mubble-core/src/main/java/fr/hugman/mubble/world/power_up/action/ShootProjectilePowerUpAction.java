@@ -64,6 +64,11 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
+    public boolean canBeRefilled() {
+        return true;
+    }
+
+    @Override
     public PowerUpProperties setUpProperties() {
         return new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, maxProjectiles.orElse(Integer.MAX_VALUE));
     }
@@ -95,7 +100,6 @@ public record ShootProjectilePowerUpAction(
         var level = player.level();
 
         if (level.isClientSide()) {
-            //TODO once powerup properties are synced, have a check on the client
             return InteractionResult.SUCCESS;
         }
         else {

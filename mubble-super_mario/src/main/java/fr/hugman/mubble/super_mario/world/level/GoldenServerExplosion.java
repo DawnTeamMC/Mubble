@@ -276,8 +276,6 @@ public class GoldenServerExplosion implements Explosion {
                         }
 
                         entity.onExplosionHit(this.source);
-
-                        //TODO: if the entity dies, reward source with coins (or loot said coins if source is not player)
                     }
                 }
             }

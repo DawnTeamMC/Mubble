@@ -58,6 +58,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add(SuperMarioSounds.GOLD_FIREBALL_THROW.value(), "Gold Fireball thrown");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.refill", "Power-up refilled");
 
         builder.add("gamerule.beepBlockCooldown", "Beep Block cooldown");
 
