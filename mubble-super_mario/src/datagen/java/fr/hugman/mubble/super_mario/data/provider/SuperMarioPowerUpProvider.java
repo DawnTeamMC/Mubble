@@ -103,7 +103,6 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 )))
                 .particle(SuperMarioParticleTypes.COIN_SPARKLE)
                 .build());
-        //TODO: the cloud power-up should be lost when touching water
         context.register(CLOUD, builder(CLOUD)
                 .action(Holder.direct(new SpawnCloudPlatformPowerUpAction(SuperMarioEntityTypes.CLOUD_PLATFORM, Optional.of(3))))
                 .attributesModifier(Attributes.GRAVITY, -0.5, ADD_MULTIPLIED_BASE)
@@ -115,6 +114,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
         var builder = new PowerUpBuilder()
                 .name(key)
                 .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN)
+                .refillSound(SuperMarioSounds.POWER_UP_REFILL)
                 .looseSound(SuperMarioSounds.POWER_UP_LOOSE);
         if (withOverlay) {
             builder.humanoidOverlay(key);

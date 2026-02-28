@@ -34,24 +34,14 @@ public record PowerUpCosmectics(
             Codec.BOOL.optionalFieldOf("emissive_overlay", false).forGetter(PowerUpCosmectics::emissiveOverlay)
     ).apply(instance, PowerUpCosmectics::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpCosmectics> STREAM_CODEC = StreamCodec.of(
-            (buf, c) -> {
-                ParticleTypes.STREAM_CODEC.apply(ByteBufCodecs::optional).encode(buf, c.particle());
-                SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).encode(buf, c.obtainSound());
-                SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).encode(buf, c.emitSound());
-                SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).encode(buf, c.looseSound());
-                SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).encode(buf, c.refillSound());
-                Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional).encode(buf, c.humanoidOverlayAssetId());
-                ByteBufCodecs.BOOL.encode(buf, c.emissiveOverlay());
-            },
-            buf -> new PowerUpCosmectics(
-                    ParticleTypes.STREAM_CODEC.apply(ByteBufCodecs::optional).decode(buf),   // particle
-                    SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).decode(buf),      // obtainSound
-                    SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).decode(buf),      // emitSound
-                    SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).decode(buf),      // looseSound
-                    SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional).decode(buf),      // refillSound
-                    Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional).decode(buf),      // humanoidOverlayAssetId
-                    ByteBufCodecs.BOOL.decode(buf)                                            // emissiveOverlay
-            )
+    public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpCosmectics> STREAM_CODEC = StreamCodec.composite(
+            ParticleTypes.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::particle,
+            SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::obtainSound,
+            SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::emitSound,
+            SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::refillSound,
+            SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::looseSound,
+            Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::humanoidOverlayAssetId,
+            ByteBufCodecs.BOOL, PowerUpCosmectics::emissiveOverlay,
+            PowerUpCosmectics::new
     );
 }

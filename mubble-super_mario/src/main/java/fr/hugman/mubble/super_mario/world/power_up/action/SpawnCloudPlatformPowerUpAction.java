@@ -80,7 +80,6 @@ public record SpawnCloudPlatformPowerUpAction(
         }
 
         if (level.isClientSide()) {
-            //TODO once powerup properties are synced, have a check on the client
             return InteractionResult.SUCCESS;
         }
 
