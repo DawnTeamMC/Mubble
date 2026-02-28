@@ -64,6 +64,11 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
+    public boolean supportsProperties() {
+        return true;
+    }
+
+    @Override
     public PowerUpProperties setUpProperties() {
         return new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, maxProjectiles.orElse(Integer.MAX_VALUE));
     }

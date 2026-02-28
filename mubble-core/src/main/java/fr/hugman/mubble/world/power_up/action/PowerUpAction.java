@@ -31,6 +31,10 @@ public interface PowerUpAction {
         return null;
     }
 
+    default boolean supportsProperties() {
+        return false;
+    }
+
     default boolean canBeTriggered(Player player) {
         return true;
     }

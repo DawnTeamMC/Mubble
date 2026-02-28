@@ -111,8 +111,13 @@ public record PowerUp(
         if (previous.isPresent() && next.isEmpty()) {
             previous.get().value().cosmectics().looseSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
         } else {
+            boolean isRefill = previous.isPresent() && next.isPresent() && previous.get().is(next.get());
             next.ifPresent(powerUp -> {
-                powerUp.value().cosmectics().obtainSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
+                if (isRefill) {
+                    powerUp.value().cosmectics().refillSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
+                } else {
+                    powerUp.value().cosmectics().obtainSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
+                }
                 if (entity instanceof PowerUpHolder holder) {
                     PowerUpProperties properties = null;
                     if(powerUp.value().action().isPresent()) {
@@ -141,10 +146,10 @@ public record PowerUp(
     }
 
     public static boolean canRefill(Player player, Holder<PowerUp> entry) {
-        PowerUpProperties newProperties = entry.value().action()
-                .map(a -> a.value().setUpProperties())
-                .orElse(null);
-        if (newProperties == null) {
+        boolean hasProperties = entry.value().action()
+                .map(a -> a.value().supportsProperties())
+                .orElse(false);
+        if (!hasProperties) {
             return false;
         }
         if (player instanceof PowerUpHolder holder) {

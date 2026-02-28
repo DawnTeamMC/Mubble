@@ -44,6 +44,11 @@ public record SpawnCloudPlatformPowerUpAction(
     }
 
     @Override
+    public boolean supportsProperties() {
+        return true;
+    }
+
+    @Override
     public PowerUpProperties setUpProperties() {
         return new PowerUpProperties(PowerUpProperties.ChargeCounting.ONLY_DECREASE, max.orElse(Integer.MAX_VALUE));
     }
