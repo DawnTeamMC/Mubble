@@ -84,6 +84,10 @@ public final class PowerUpProperties {
         return false;
     }
 
+    public boolean isAtMax() {
+        return this.chargeCount >= this.maxCharges && this.cooldown == 0;
+    }
+
     public void addEntity(UUID uuid) {
         this.chargeEntities.add(uuid);
         this.chargeCount--;

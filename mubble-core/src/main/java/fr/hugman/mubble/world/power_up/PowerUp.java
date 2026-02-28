@@ -135,7 +135,21 @@ public record PowerUp(
 
     public static boolean canChange(LivingEntity entity, Holder<PowerUp> entry) {
         if (entity instanceof Player player) {
-            return player.getPowerUp().map(power -> !power.is(entry)).orElse(true);
+            return player.getPowerUp().map(power -> !power.is(entry) || canRefill(player, entry)).orElse(true);
+        }
+        return false;
+    }
+
+    public static boolean canRefill(Player player, Holder<PowerUp> entry) {
+        PowerUpProperties newProperties = entry.value().action()
+                .map(a -> a.value().setUpProperties())
+                .orElse(null);
+        if (newProperties == null) {
+            return false;
+        }
+        if (player instanceof PowerUpHolder holder) {
+            PowerUpProperties current = holder.getPowerUpProperties();
+            return current != null && !current.isAtMax();
         }
         return false;
     }
