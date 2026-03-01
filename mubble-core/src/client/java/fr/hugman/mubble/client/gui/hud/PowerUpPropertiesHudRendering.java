@@ -18,9 +18,8 @@ public class PowerUpPropertiesHudRendering {
     private static final int CHARGE_HEIGHT = 4;
     private static final int CHARGE_PADDING = 1;
     private static final int MARGIN_FROM_CROSSHAIR = 5;
-    //TODO: change paths
-    private static final Identifier CHARGE_TEXTURE = Mubble.id("hud/power_up_projectile");
-    private static final Identifier CHARGE_EMPTY_TEXTURE = Mubble.id("hud/power_up_projectile_empty");
+    private static final Identifier CHARGE_TEXTURE = Mubble.id("hud/power_up_charge");
+    private static final Identifier CHARGE_EMPTY_TEXTURE = Mubble.id("hud/power_up_charge_empty");
     private static final int MAX_CHARGE_DISPLAY = 6;
 
     public static void renderChargesLayer(Minecraft client, GuiGraphics context) {
