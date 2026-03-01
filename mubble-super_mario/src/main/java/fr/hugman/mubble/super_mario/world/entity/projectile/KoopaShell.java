@@ -32,13 +32,17 @@ public abstract class KoopaShell extends Projectile {
     protected static final float TARGET_SPEED = 0.5f;
     protected static final float TARGET_SPEED_ACCELERATION = 0.1f;
 
+    protected static final int OWNER_STOMP_COOLDOWN_TICKS = 20;
+
     protected int rebounds;
+    private int ownerStompCooldown;
     private float previousHorizontalRotation;
     private float horizontalRotation;
 
     public KoopaShell(EntityType<? extends KoopaShell> type, Level level, int rebounds) {
         super(type, level);
         this.rebounds = rebounds;
+        this.ownerStompCooldown = OWNER_STOMP_COOLDOWN_TICKS;
     }
 
     @Override
@@ -62,6 +66,10 @@ public abstract class KoopaShell extends Projectile {
     @Override
     public void tick() {
         super.tick();
+
+        if (!this.level().isClientSide() && this.ownerStompCooldown > 0) {
+            this.ownerStompCooldown--;
+        }
 
         boolean isStopped = this.isStopped();
 
@@ -166,7 +174,7 @@ public abstract class KoopaShell extends Projectile {
 
     @Override
     public Predicate<? super Entity> getStompableBy() {
-        return super.getStompableBy().and(entity -> !entity.equals(this.getOwner()));
+        return super.getStompableBy().and(entity -> this.ownerStompCooldown <= 0 || !entity.equals(this.getOwner()));
     }
 
     /**
