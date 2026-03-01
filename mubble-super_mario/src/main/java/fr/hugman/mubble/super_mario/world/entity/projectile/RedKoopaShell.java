@@ -19,6 +19,7 @@ public class RedKoopaShell extends KoopaShell {
 
     private static final double MAX_TARGET_DISTANCE = 16.0;
     private static final double MAX_TARGET_DISTANCE_SQUARE = MAX_TARGET_DISTANCE * MAX_TARGET_DISTANCE;
+    private static final double HOMING_TURN_RATE = 0.25;
     private static final TargetingConditions TARGET_PREDICATE = TargetingConditions.forCombat()
             .range(MAX_TARGET_DISTANCE)
             .ignoreLineOfSight()
@@ -60,20 +61,15 @@ public class RedKoopaShell extends KoopaShell {
         }
 
         if (this.target != null && !this.level().isClientSide()) {
-            Vec3 currentPosition = this.position();
-            Vec3 targetPosition = this.target.position();
-            Vec3 desiredVelocity = targetPosition.subtract(currentPosition).with(Direction.Axis.Y, 0).normalize().scale(TARGET_SPEED);
+            Vec3 desiredVelocity = this.target.position().subtract(this.position()).with(Direction.Axis.Y, 0).normalize().scale(TARGET_SPEED);
 
             Vec3 currentVelocity = this.getDeltaMovement();
-            Vec3 velocityError = desiredVelocity.subtract(currentVelocity.multiply(1, 0, 1));
-            double pGain = 0.1;
-
-            Vec3 newHorizontalVelocity = currentVelocity.multiply(1, 0, 1).add(velocityError.scale(pGain));
-            double horizontalSpeed = newHorizontalVelocity.length();
-            if (horizontalSpeed > 0) {
-                newHorizontalVelocity = newHorizontalVelocity.normalize().scale(TARGET_SPEED);
-            } else {
+            Vec3 currentHorizontal = currentVelocity.multiply(1, 0, 1);
+            Vec3 newHorizontalVelocity = currentHorizontal.add(desiredVelocity.subtract(currentHorizontal).scale(HOMING_TURN_RATE));
+            if (newHorizontalVelocity.lengthSqr() < 1e-10) {
                 newHorizontalVelocity = desiredVelocity;
+            } else {
+                newHorizontalVelocity = newHorizontalVelocity.normalize().scale(TARGET_SPEED);
             }
             this.setDeltaMovement(newHorizontalVelocity.x(), currentVelocity.y(), newHorizontalVelocity.z());
             this.needsSync = true;
@@ -106,5 +102,10 @@ public class RedKoopaShell extends KoopaShell {
 
     protected AABB getSearchBox(double distance) {
         return this.getBoundingBox().inflate(distance, distance, distance);
+    }
+
+    @Override
+    public float maxUpStep() {
+        return 1.0f;
     }
 }
