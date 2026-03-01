@@ -25,6 +25,7 @@ public class PowerUpBuilder {
     private @Nullable Holder<SoundEvent> obtainSound = null;
     private @Nullable Holder<SoundEvent> emitSound = null;
     private @Nullable Holder<SoundEvent> looseSound = null;
+    private @Nullable Holder<SoundEvent> refillSound = null;
     private @Nullable ParticleOptions particle = null;
     private @Nullable Identifier humanoidOverlayAssetId = null;
     private boolean emissiveOverlay = false;
@@ -82,6 +83,11 @@ public class PowerUpBuilder {
         return this;
     }
 
+    public PowerUpBuilder refillSound(Holder<SoundEvent> refillSound) {
+        this.refillSound = refillSound;
+        return this;
+    }
+
     public PowerUpBuilder humanoidOverlay(Identifier assetId) {
         this.humanoidOverlayAssetId = assetId;
         return this;
@@ -107,6 +113,7 @@ public class PowerUpBuilder {
                         Optional.ofNullable(this.obtainSound),
                         Optional.ofNullable(this.emitSound),
                         Optional.ofNullable(this.looseSound),
+                        Optional.ofNullable(this.refillSound),
                         Optional.ofNullable(this.humanoidOverlayAssetId),
                         this.emissiveOverlay
                 )

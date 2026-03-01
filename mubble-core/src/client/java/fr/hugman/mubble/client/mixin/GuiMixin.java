@@ -24,6 +24,6 @@ public class GuiMixin {
 
 	@Inject(method="render", at=@At(value="INVOKE", target="Lnet/minecraft/client/gui/Gui;renderCrosshair(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"))
 	private void mubble$addPowerUpPropertiesLayer(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
-		PowerUpPropertiesHudRendering.renderProjectilesLayer(this.minecraft, context);
+		PowerUpPropertiesHudRendering.renderChargesLayer(this.minecraft, context);
 	}
 }

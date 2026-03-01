@@ -41,6 +41,9 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         // Entities
         soundExporter.add(SuperMarioSounds.GOLDEN_EXPLOSION, variantSoundBuilder(SuperMarioSounds.GOLDEN_EXPLOSION, 1));
 
+        soundExporter.add(SuperMarioSounds.CLOUD_PLATFORM_APPEAR, variantSoundBuilder(SuperMarioSounds.CLOUD_PLATFORM_APPEAR, 1));
+        soundExporter.add(SuperMarioSounds.CLOUD_PLATFORM_DISAPPEAR, variantSoundBuilder(SuperMarioSounds.CLOUD_PLATFORM_DISAPPEAR, 1));
+
         soundExporter.add(SuperMarioSounds.GOOMBA_WALK_STEP, variantSoundBuilder(SuperMarioSounds.GOOMBA_WALK_STEP, 1).subtitle("subtitles.block.generic.footsteps"));
         soundExporter.add(SuperMarioSounds.GOOMBA_RUN_STEP, variantSoundBuilder(SuperMarioSounds.GOOMBA_RUN_STEP, 1).subtitle("subtitles.block.generic.footsteps"));
         soundExporter.add(SuperMarioSounds.GOOMBA_FIND_TARGET, variantSoundBuilder(SuperMarioSounds.GOOMBA_FIND_TARGET, 1));
@@ -72,7 +75,9 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, 1).subtitle(obtainSub));
         soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_GOLD, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_GOLD, 1).subtitle(obtainSub));
         soundExporter.add(SuperMarioSounds.POWER_UP_EMIT_GOLD, variantSoundBuilder(SuperMarioSounds.POWER_UP_EMIT_GOLD, 1).subtitle(null));
+        soundExporter.add(SuperMarioSounds.POWER_UP_SPIN_ATTACK, variantSoundBuilder(SuperMarioSounds.POWER_UP_SPIN_ATTACK, 1).subtitle(null));
         soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE, 1));
+        soundExporter.add(SuperMarioSounds.POWER_UP_REFILL, variantSoundBuilder(SuperMarioSounds.POWER_UP_REFILL, 1));
     }
 
     private SoundTypeBuilder variantSoundBuilder(Holder<SoundEvent> soundEvent, int count) {

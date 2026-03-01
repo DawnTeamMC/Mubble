@@ -6,6 +6,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.keybind.MubbleKeyBindingsKeys;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
@@ -18,7 +20,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -30,7 +31,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.phys.Vec3;
 
-
+//TODO: cooldown is not yet implemented
 public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
         Holder<SoundEvent> sound,
@@ -63,37 +64,45 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
+    public boolean canBeRefilled() {
+        return true;
+    }
+
+    @Override
+    public PowerUpProperties setUpProperties() {
+        return new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, maxProjectiles.orElse(Integer.MAX_VALUE));
+    }
+
+    @Override
     public boolean canBeTriggered(Player player) {
         var properties = player.getPowerUpProperties();
 
+        if(properties == null) {
+            properties = setUpProperties();
+            player.setPowerUpProperties(properties);
+        }
+
         var level = player.level();
         if (!level.isClientSide()) {
-            properties.removeInvalidProjectiles(level);
+            properties.doSoftChecks(player);
         }
-        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
-            return false;
-        }
-        return true;
+        return properties.getChargeCount() > 0;
     }
 
     @Override
     public InteractionResult trigger(Player player) {
         var properties = player.getPowerUpProperties();
 
+        if(properties == null) {
+            properties = setUpProperties();
+            player.setPowerUpProperties(properties);
+        }
         var level = player.level();
-        if (!level.isClientSide()) {
-            properties.removeInvalidProjectiles(level);
-        }
-        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
-            return InteractionResult.FAIL;
-        }
 
-        if (player.level().isClientSide()) {
-            //TODO once powerup properties are synced, have a check on the client
+        if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
-
-        if (!level.isClientSide()) {
+        else {
             level.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 0.5F, 1.0F);
             var entity = this.projectile.create(level, EntitySpawnReason.TRIGGERED);
             if (null == entity) {
@@ -105,7 +114,7 @@ public record ShootProjectilePowerUpAction(
             entity.setPos(player.getX(), player.getEyeY() - 0.1F, player.getZ());
             setVelocity(entity, player, player.getXRot(), player.getYRot(), 0.0F, this.speed, 1.0F);
             level.addFreshEntity(entity);
-            properties.addProjectile(entity.getUUID());
+            properties.addEntity(entity.getUUID());
             properties.setCooldown(cooldown.orElse(0));
         }
         return InteractionResult.SUCCESS;

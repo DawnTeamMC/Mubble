@@ -40,6 +40,8 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add(SuperMarioSounds.COIN_COLLECT.value(), "Coin collected");
         builder.add("subtitles." + SuperMario.MOD_ID + ".item.cape_feather.use", "Cape Feather used");
         builder.add(SuperMarioSounds.GOLDEN_EXPLOSION.value(), "Golden explosion");
+        builder.add(SuperMarioSounds.CLOUD_PLATFORM_APPEAR.value(), "Cloud Platform appears");
+        builder.add(SuperMarioSounds.CLOUD_PLATFORM_DISAPPEAR.value(), "Cloud Platform disappears");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.find_target", "Goomba finds a target");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.death", "Goomba dies");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.stomp", "Goomba stomped");
@@ -56,6 +58,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add(SuperMarioSounds.GOLD_FIREBALL_THROW.value(), "Gold Fireball thrown");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.refill", "Power-up refilled");
 
         builder.add("gamerule.beepBlockCooldown", "Beep Block cooldown");
 

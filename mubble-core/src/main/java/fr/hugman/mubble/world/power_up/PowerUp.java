@@ -67,8 +67,12 @@ public record PowerUp(
         if(this.action.isEmpty()) {
             return InteractionResult.PASS;
         }
-        var result = this.action.get().value().trigger(player);
-        if(result == InteractionResult.SUCCESS && this.action.get().value().shouldSwingOtherHand()) {
+        var action = this.action.get().value();
+        if(!action.canBeTriggered(player)) {
+            return InteractionResult.PASS;
+        }
+        var result = action.trigger(player);
+        if(result == InteractionResult.SUCCESS && action.shouldSwingOtherHand()) {
             // swing the empty hand or main hand if both are occupied
             player.swing(!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && player.getItemInHand(InteractionHand.OFF_HAND).isEmpty() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
         }
@@ -107,20 +111,50 @@ public record PowerUp(
         if (previous.isPresent() && next.isEmpty()) {
             previous.get().value().cosmectics().looseSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
         } else {
-            next.ifPresent(powerUpRegistryEntry -> {
-                powerUpRegistryEntry.value().cosmectics().obtainSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
-                if (entity instanceof PowerUpHolder powerUpHolder) {
-                    powerUpHolder.getPowerUpProperties().reset();
+            boolean isRefill = previous.isPresent() && next.isPresent() && previous.get().is(next.get());
+            next.ifPresent(powerUp -> {
+                if (isRefill) {
+                    powerUp.value().cosmectics().refillSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
+                } else {
+                    powerUp.value().cosmectics().obtainSound().ifPresent(sound -> entity.playSound(sound.value(), 1.0F, 1.0F));
+                }
+                if (entity instanceof PowerUpHolder holder) {
+                    PowerUpProperties properties = null;
+                    if(powerUp.value().action().isPresent()) {
+                        properties = powerUp.value().action().get().value().setUpProperties();
+                    }
+                    holder.setPowerUpProperties(properties);
                 }
             });
         }
+
+        if(next.isEmpty()) {
+            if (entity instanceof PowerUpHolder holder) {
+                holder.setPowerUpProperties(null);
+            }
+        }
+
         //TODO: create event?
         //TODO: particles
     }
 
     public static boolean canChange(LivingEntity entity, Holder<PowerUp> entry) {
         if (entity instanceof Player player) {
-            return player.getPowerUp().map(power -> !power.is(entry)).orElse(true);
+            return player.getPowerUp().map(power -> !power.is(entry) || canRefill(player, entry)).orElse(true);
+        }
+        return false;
+    }
+
+    public static boolean canRefill(Player player, Holder<PowerUp> entry) {
+        boolean hasProperties = entry.value().action()
+                .map(a -> a.value().canBeRefilled())
+                .orElse(false);
+        if (!hasProperties) {
+            return false;
+        }
+        if (player instanceof PowerUpHolder holder) {
+            PowerUpProperties current = holder.getPowerUpProperties();
+            return current != null && !current.isAtMax();
         }
         return false;
     }

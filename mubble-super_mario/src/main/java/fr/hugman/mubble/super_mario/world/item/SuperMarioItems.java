@@ -37,6 +37,7 @@ public class SuperMarioItems {
     public static final PowerUpItem FIRE_FLOWER = registerPowerUp(SuperMarioItemKeys.FIRE_FLOWER, SuperMarioPowerUpKeys.FIRE);
     public static final PowerUpItem ICE_FLOWER = registerPowerUp(SuperMarioItemKeys.ICE_FLOWER, SuperMarioPowerUpKeys.ICE);
     public static final PowerUpItem GOLD_FLOWER = registerPowerUp(SuperMarioItemKeys.GOLD_FLOWER, SuperMarioPowerUpKeys.GOLD);
+    public static final PowerUpItem CLOUD_FLOWER = registerPowerUp(SuperMarioItemKeys.CLOUD_FLOWER, SuperMarioPowerUpKeys.CLOUD);
     public static final CapeFeatherItem CAPE_FEATHER = register(SuperMarioItemKeys.CAPE_FEATHER, s -> new CapeFeatherItem(s, false));
     public static final CapeFeatherItem SUPER_CAPE_FEATHER = register(SuperMarioItemKeys.SUPER_CAPE_FEATHER, s -> new CapeFeatherItem(s.rarity(Rarity.EPIC), true));
 

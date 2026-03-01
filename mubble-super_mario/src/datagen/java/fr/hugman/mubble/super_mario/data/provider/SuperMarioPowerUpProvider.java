@@ -4,6 +4,7 @@ import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowerUpAction;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
@@ -38,6 +39,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
     }
 
     public static void bootstrap(BootstrapContext<PowerUp> context) {
+        //TODO: some power-ups should be lost when taking too much damage
         context.register(MINI, builder(MINI)
                 .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_MINI)
                 .attributesModifier(Attributes.SCALE, -0.67, ADD_MULTIPLIED_BASE)
@@ -56,7 +58,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
         context.register(MEGA, builder(MEGA)
                 .attributesModifier(Attributes.SCALE, 2, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.GRAVITY, 0.5, ADD_MULTIPLIED_BASE)
-                .attributesModifier(Attributes.MOVEMENT_SPEED, 2, ADD_MULTIPLIED_BASE)
+                .attributesModifier(Attributes.MOVEMENT_SPEED, 1.75, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.JUMP_STRENGTH, 2, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.SAFE_FALL_DISTANCE, 12, ADD_VALUE)
                 .attributesModifier(Attributes.MAX_HEALTH, 0.6, ADD_MULTIPLIED_BASE)
@@ -101,14 +103,20 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 )))
                 .particle(SuperMarioParticleTypes.COIN_SPARKLE)
                 .build());
+        context.register(CLOUD, builder(CLOUD)
+                .action(Holder.direct(new SpawnCloudPlatformPowerUpAction(SuperMarioEntityTypes.CLOUD_PLATFORM, Optional.of(3))))
+                .attributesModifier(Attributes.GRAVITY, -0.5, ADD_MULTIPLIED_BASE)
+                .attributesModifier(Attributes.JUMP_STRENGTH, 0.35, ADD_MULTIPLIED_BASE)
+                .build());
     }
 
     public static PowerUpBuilder builder(ResourceKey<PowerUp> key, boolean withOverlay) {
         var builder = new PowerUpBuilder()
-            .name(key)
-            .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN)
-            .looseSound(SuperMarioSounds.POWER_UP_LOOSE);
-        if(withOverlay) {
+                .name(key)
+                .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN)
+                .refillSound(SuperMarioSounds.POWER_UP_REFILL)
+                .looseSound(SuperMarioSounds.POWER_UP_LOOSE);
+        if (withOverlay) {
             builder.humanoidOverlay(key);
         }
         return builder;

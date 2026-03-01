@@ -83,6 +83,7 @@ public class SuperMarioModelProvider extends FabricModelProvider {
         gen.generateFlatItem(SuperMarioItems.FIRE_FLOWER, ModelTemplates.FLAT_ITEM);
         gen.generateFlatItem(SuperMarioItems.ICE_FLOWER, ModelTemplates.FLAT_ITEM);
         gen.generateFlatItem(SuperMarioItems.GOLD_FLOWER, ModelTemplates.FLAT_ITEM);
+        gen.generateFlatItem(SuperMarioItems.CLOUD_FLOWER, ModelTemplates.FLAT_ITEM);
 
         gen.generateFlatItem(SuperMarioItems.CAPE_FEATHER, ModelTemplates.FLAT_ITEM);
         gen.generateFlatItem(SuperMarioItems.SUPER_CAPE_FEATHER, ModelTemplates.FLAT_ITEM);
