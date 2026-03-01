@@ -1,6 +1,5 @@
 package fr.hugman.mubble.super_mario.world.entity.projectile;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.item.SuperMarioItems;
@@ -63,15 +62,20 @@ public class RedKoopaShell extends KoopaShell {
         if (this.target != null && !this.level().isClientSide()) {
             Vec3 currentPosition = this.position();
             Vec3 targetPosition = this.target.position();
-            Vec3 desiredVelocity = targetPosition.subtract(currentPosition).with(Direction.Axis.Y, 0).normalize().scale(0.5);
+            Vec3 desiredVelocity = targetPosition.subtract(currentPosition).with(Direction.Axis.Y, 0).normalize().scale(TARGET_SPEED);
 
             Vec3 currentVelocity = this.getDeltaMovement();
-            Vec3 velocityError = desiredVelocity.subtract(currentVelocity);
+            Vec3 velocityError = desiredVelocity.subtract(currentVelocity.multiply(1, 0, 1));
             double pGain = 0.1;
-            double dGain = 0.05;
 
-            Vec3 controlSignal = velocityError.scale(pGain).add(velocityError.subtract(currentVelocity).scale(dGain));
-            this.setDeltaMovement(currentVelocity.add(controlSignal).normalize().scale(currentVelocity.length()));
+            Vec3 newHorizontalVelocity = currentVelocity.multiply(1, 0, 1).add(velocityError.scale(pGain));
+            double horizontalSpeed = newHorizontalVelocity.length();
+            if (horizontalSpeed > 0) {
+                newHorizontalVelocity = newHorizontalVelocity.normalize().scale(TARGET_SPEED);
+            } else {
+                newHorizontalVelocity = desiredVelocity;
+            }
+            this.setDeltaMovement(newHorizontalVelocity.x(), currentVelocity.y(), newHorizontalVelocity.z());
             this.needsSync = true;
         }
 

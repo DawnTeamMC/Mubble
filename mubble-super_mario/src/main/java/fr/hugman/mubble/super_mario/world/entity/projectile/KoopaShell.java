@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,6 +23,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+
+import java.util.function.Predicate;
 
 // TODO: tweak with ProjectileUtil for better collision detection (square projection instead of center?)
 public abstract class KoopaShell extends Projectile {
@@ -107,12 +110,16 @@ public abstract class KoopaShell extends Projectile {
             return;
         }
         double currentSpeed = velocity.horizontalDistance();
-        double scale;
-        if (currentSpeed > targetSpeed) {
-            scale = Math.min(currentSpeed + acceleration, targetSpeed) / currentSpeed;
-        } else {
-            scale = Math.max(currentSpeed - acceleration, targetSpeed) / currentSpeed;
+        if (currentSpeed < 1e-10) {
+            return;
         }
+        double newSpeed;
+        if (currentSpeed > targetSpeed) {
+            newSpeed = Math.max(currentSpeed - acceleration, targetSpeed);
+        } else {
+            newSpeed = Math.min(currentSpeed + acceleration, targetSpeed);
+        }
+        double scale = newSpeed / currentSpeed;
         this.setDeltaMovement(velocity.x() * scale, velocity.y(), velocity.z() * scale);
     }
 
@@ -131,13 +138,12 @@ public abstract class KoopaShell extends Projectile {
         if (bounce) {
             // TODO: make this behaviour configurable
             Vec3 multiplier;
-            // TODO: this is ugly
-            if (Math.abs(this.getDeltaMovement().x) > Math.abs(this.getDeltaMovement().y)) {
+            if (Math.abs(this.getDeltaMovement().x) > Math.abs(this.getDeltaMovement().z)) {
                 multiplier = new Vec3(-1.0, 1.0, 1.0);
-            } else if (Math.abs(this.getDeltaMovement().x) < Math.abs(this.getDeltaMovement().y)) {
+            } else if (Math.abs(this.getDeltaMovement().x) < Math.abs(this.getDeltaMovement().z)) {
                 multiplier = new Vec3(1.0, 1.0, -1.0);
             } else {
-                multiplier = new Vec3(1.0, 1.0, 1.0);
+                multiplier = new Vec3(-1.0, 1.0, -1.0);
             }
 
             var vel = this.getDeltaMovement().multiply(multiplier);
@@ -156,6 +162,11 @@ public abstract class KoopaShell extends Projectile {
 
     public boolean isStopped() {
         return this.getDeltaMovement().horizontalDistance() == 0.0;
+    }
+
+    @Override
+    public Predicate<? super Entity> getStompableBy() {
+        return super.getStompableBy().and(entity -> !entity.equals(this.getOwner()));
     }
 
     /**
@@ -184,7 +195,7 @@ public abstract class KoopaShell extends Projectile {
         var center = this.getBoundingBox().getCenter();
         this.playSound(SuperMarioSounds.KOOPA_SHELL_HIT_BLOCK, 1.0F, 1.0F);
         for (int l = 0; l < 8; l++) {
-            this.level().addParticle(ParticleTypes.CRIT, center.x, center.y, center.z, direction.x + Math.random() - 0.5, direction.y + Math.random() - 0.5, direction.z + Math.random() - 0.5);
+            this.level().addParticle(ParticleTypes.CRIT, center.x, center.y, center.z, direction.x + Math.random() - 0.5, Math.random() * 0.1, direction.z + Math.random() - 0.5);
         }
     }
 

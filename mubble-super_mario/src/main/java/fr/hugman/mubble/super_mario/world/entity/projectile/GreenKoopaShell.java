@@ -65,14 +65,20 @@ public class GreenKoopaShell extends KoopaShell {
     public void kickShell(Entity kicker) {
         var vec3d = kicker.getKnownMovement();
         if (vec3d.horizontalDistance() == 0.0D) {
-            vec3d = this.position().subtract(kicker.position()).normalize();
+            vec3d = this.position().subtract(kicker.position());
+            if (vec3d.horizontalDistance() == 0.0D) {
+                // Kicker is exactly at the shell's position; pick a random horizontal direction
+                double angle = this.random.nextDouble() * 2 * Math.PI;
+                vec3d = new Vec3(Math.cos(angle), 0.0D, Math.sin(angle));
+            } else {
+                vec3d = vec3d.normalize();
+            }
         }
-        //TODO: if still stopped, make it random
         this.setDeltaMovement(vec3d.x, 0.0d, vec3d.z);
         this.targetHorizontalSpeed(KoopaShell.TARGET_SPEED, Float.MAX_VALUE);
         this.needsSync = true;
         this.playSound(SuperMarioSounds.KOOPA_SHELL_KICK, 0.4F, 1.0F);
-        this.setOwner(owner);
+        this.setOwner(kicker);
         //TODO: add particles
         //TODO: reset rebound count? configurable?
     }
