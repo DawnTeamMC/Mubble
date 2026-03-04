@@ -34,27 +34,30 @@ import net.minecraft.world.phys.Vec3;
 //TODO: cooldown is not yet implemented
 public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
-        Holder<SoundEvent> sound,
+        Optional<Holder<SoundEvent>> sound,
         float speed,
         Optional<Integer> maxProjectiles,
-        Optional<Integer> cooldown
+        Optional<Integer> cooldown,
+        Optional<Integer> rechargeInterval
         //TODO: add shooting algorithm
         //TODO: add projectile NBT
 ) implements PowerUpAction, TooltipProvider {
     public static final MapCodec<ShootProjectilePowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
-            SoundEvent.CODEC.fieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
+            SoundEvent.CODEC.optionalFieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
             Codec.FLOAT.optionalFieldOf("speed", 1.5F).forGetter(ShootProjectilePowerUpAction::speed),
             Codec.INT.optionalFieldOf("max_projectiles").forGetter(ShootProjectilePowerUpAction::maxProjectiles),
-            Codec.INT.optionalFieldOf("cooldown").forGetter(ShootProjectilePowerUpAction::cooldown)
+            Codec.INT.optionalFieldOf("cooldown").forGetter(ShootProjectilePowerUpAction::cooldown),
+            Codec.INT.optionalFieldOf("recharge_interval").forGetter(ShootProjectilePowerUpAction::rechargeInterval)
     ).apply(instance, ShootProjectilePowerUpAction::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ShootProjectilePowerUpAction> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.registry(Registries.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
-            SoundEvent.STREAM_CODEC, (ShootProjectilePowerUpAction::sound),
+            ByteBufCodecs.optional(SoundEvent.STREAM_CODEC), (ShootProjectilePowerUpAction::sound),
             ByteBufCodecs.FLOAT, (ShootProjectilePowerUpAction::speed),
             ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::maxProjectiles),
             ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::cooldown),
+            ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::rechargeInterval),
             ShootProjectilePowerUpAction::new
     );
 
@@ -70,7 +73,10 @@ public record ShootProjectilePowerUpAction(
 
     @Override
     public PowerUpProperties setUpProperties() {
-        return new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, maxProjectiles.orElse(Integer.MAX_VALUE));
+        return rechargeInterval
+                .filter(i -> i > 0)
+                .map(ri -> new PowerUpProperties(PowerUpProperties.ChargeCounting.TIMED_RECHARGE, maxProjectiles.orElse(3), ri))
+                .orElseGet(() -> new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, maxProjectiles.orElse(Integer.MAX_VALUE)));
     }
 
     @Override
@@ -103,7 +109,7 @@ public record ShootProjectilePowerUpAction(
             return InteractionResult.SUCCESS;
         }
         else {
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 0.5F, 1.0F);
+            this.sound.ifPresent(s -> level.playSound(null, player.getX(), player.getY(), player.getZ(), s, SoundSource.NEUTRAL, 0.5F, 1.0F));
             var entity = this.projectile.create(level, EntitySpawnReason.TRIGGERED);
             if (null == entity) {
                 return InteractionResult.FAIL;

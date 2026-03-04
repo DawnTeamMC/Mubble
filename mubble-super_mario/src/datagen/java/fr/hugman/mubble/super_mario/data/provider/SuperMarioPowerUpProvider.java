@@ -4,7 +4,6 @@ import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
-import fr.hugman.mubble.super_mario.world.power_up.action.ShootBubblePowerUpAction;
 import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowerUpAction;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
@@ -75,9 +74,10 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .emissiveOverlay()
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.FIREBALL,
-                        SuperMarioSounds.FIREBALL_THROW,
+                        Optional.of(SuperMarioSounds.FIREBALL_THROW),
                         0.4f,
                         Optional.of(3),
+                        Optional.empty(),
                         Optional.empty()
                 )))
                 .build());
@@ -85,9 +85,10 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .emissiveOverlay()
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.ICEBALL,
-                        SuperMarioSounds.ICEBALL_THROW,
+                        Optional.of(SuperMarioSounds.ICEBALL_THROW),
                         0.4f,
                         Optional.of(3),
+                        Optional.empty(),
                         Optional.empty()
                 )))
                 .build());
@@ -97,9 +98,10 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .emitSound(SuperMarioSounds.POWER_UP_EMIT_GOLD)
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.GOLD_FIREBALL,
-                        SuperMarioSounds.GOLD_FIREBALL_THROW,
+                        Optional.of(SuperMarioSounds.GOLD_FIREBALL_THROW),
                         0.4f,
                         Optional.of(3),
+                        Optional.empty(),
                         Optional.empty()
                 )))
                 .particle(SuperMarioParticleTypes.COIN_SPARKLE)
@@ -111,9 +113,13 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .build());
         context.register(BUBBLE, builder(BUBBLE)
                 .emissiveOverlay()
-                .action(Holder.direct(new ShootBubblePowerUpAction(
-                        ShootBubblePowerUpAction.DEFAULT_MAX_CHARGES,
-                        ShootBubblePowerUpAction.DEFAULT_RECHARGE_INTERVAL
+                .action(Holder.direct(new ShootProjectilePowerUpAction(
+                        SuperMarioEntityTypes.BUBBLE,
+                        Optional.empty(),
+                        0.4f,
+                        Optional.of(3),
+                        Optional.empty(),
+                        Optional.of(60)
                 )))
                 .build());
     }
