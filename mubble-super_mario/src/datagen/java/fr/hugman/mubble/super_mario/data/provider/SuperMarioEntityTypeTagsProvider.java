@@ -23,6 +23,13 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
         valueLookupBuilder(CAN_STOMP).add(PLAYER);
         valueLookupBuilder(STOMPABLE).add(GOOMBA, GREEN_KOOPA_SHELL);
 
+        // All super_mario entities
+        valueLookupBuilder(ALL).add(GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE);
+
+        // Bubble trapping rules
+        valueLookupBuilder(BUBBLE_CANNOT_TRAP).add(PLAYER);
+        // bubble_can_trap is intentionally left empty - entities are added via data packs or other modules
+
 		// Vanilla
 		valueLookupBuilder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA);
 		valueLookupBuilder(EntityTypeTags.NOT_SCARY_FOR_PUFFERFISH).add(GOOMBA);

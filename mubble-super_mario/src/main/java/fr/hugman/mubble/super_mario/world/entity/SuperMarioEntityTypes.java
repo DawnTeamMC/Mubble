@@ -20,6 +20,7 @@ public final class SuperMarioEntityTypes {
     public static final EntityType<Iceball> ICEBALL = register(SuperMarioEntityTypeKeys.ICEBALL, EntityType.Builder.<Iceball>of(Iceball::new, MobCategory.MISC).sized(0.4F, 0.4F).clientTrackingRange(4).updateInterval(10));
     public static final EntityType<GoldFireball> GOLD_FIREBALL = register(SuperMarioEntityTypeKeys.GOLD_FIREBALL, EntityType.Builder.<GoldFireball>of(GoldFireball::new, MobCategory.MISC).sized(0.4F, 0.4F).clientTrackingRange(4).updateInterval(10));
     public static final EntityType<CloudPlatform> CLOUD_PLATFORM = register(SuperMarioEntityTypeKeys.CLOUD_PLATFORM, EntityType.Builder.of(CloudPlatform::new, MobCategory.MISC).sized(4.0F, 1.0F).clientTrackingRange(10));
+    public static final EntityType<Bubble> BUBBLE = register(SuperMarioEntityTypeKeys.BUBBLE, EntityType.Builder.<Bubble>of(Bubble::new, MobCategory.MISC).sized(0.75F, 0.75F).clientTrackingRange(4).updateInterval(2));
 
     private static <T extends Entity> EntityType<T> register(ResourceKey<EntityType<?>> id, EntityType.Builder<T> type) {
         return Registry.register(BuiltInRegistries.ENTITY_TYPE, id, type.build(id));

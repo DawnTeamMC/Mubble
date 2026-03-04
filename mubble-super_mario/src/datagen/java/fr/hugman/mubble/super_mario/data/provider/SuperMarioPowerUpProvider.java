@@ -4,6 +4,7 @@ import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.power_up.action.ShootBubblePowerUpAction;
 import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowerUpAction;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
@@ -107,6 +108,13 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .action(Holder.direct(new SpawnCloudPlatformPowerUpAction(SuperMarioEntityTypes.CLOUD_PLATFORM, Optional.of(3))))
                 .attributesModifier(Attributes.GRAVITY, -0.5, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.JUMP_STRENGTH, 0.35, ADD_MULTIPLIED_BASE)
+                .build());
+        context.register(BUBBLE, builder(BUBBLE)
+                .emissiveOverlay()
+                .action(Holder.direct(new ShootBubblePowerUpAction(
+                        ShootBubblePowerUpAction.DEFAULT_MAX_CHARGES,
+                        ShootBubblePowerUpAction.DEFAULT_RECHARGE_INTERVAL
+                )))
                 .build());
     }
 

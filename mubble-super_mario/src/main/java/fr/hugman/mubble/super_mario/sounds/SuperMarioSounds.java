@@ -58,6 +58,11 @@ public class SuperMarioSounds {
     public static final Holder.Reference<SoundEvent> POWER_UP_REFILL = registerForHolder("power_up.refill");
     public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE = registerForHolder("power_up.loose");
 
+    public static final Holder.Reference<SoundEvent> BUBBLE_APPEAR = registerForHolder("entity.bubble.appear");
+    public static final Holder.Reference<SoundEvent> BUBBLE_POP = registerForHolder("entity.bubble.pop");
+    public static final Holder.Reference<SoundEvent> BUBBLE_REBOUND = registerForHolder("entity.bubble.rebound");
+    public static final Holder.Reference<SoundEvent> BUBBLE_FILL = registerForHolder("entity.bubble.fill");
+
     private static SoundEvent register(String path) {
         Identifier id = SuperMario.id(path);
         return Registry.register(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));

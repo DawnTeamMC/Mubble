@@ -12,6 +12,7 @@ public class SuperMarioModelLayers {
     public static final ModelLayerLocation GOOMBA = register("goomba", GoombaModel::getTexturedModelData);
     public static final ModelLayerLocation KOOPA_SHELL = register("koopa_shell", KoopaShellModel::getTexturedModelData);
     public static final ModelLayerLocation CLOUD_PLATFORM = register("cloud_platform", CloudPlatformModel::getTexturedModelData);
+    public static final ModelLayerLocation BUBBLE = register("bubble", BallModel::getTexturedModelData);
 
     private static ModelLayerLocation register(String path, String layerName, ModelLayerRegistry.TexturedLayerDefinitionProvider provider) {
         var layer = new ModelLayerLocation(SuperMario.id(path), layerName);

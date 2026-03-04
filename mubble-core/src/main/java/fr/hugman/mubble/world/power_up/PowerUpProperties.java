@@ -23,6 +23,7 @@ public final class PowerUpProperties {
 
     public ChargeCounting chargeCounting;
     public int maxCharges;
+    public int rechargeInterval;
 
     private int cooldown;
     private int chargeCount;
@@ -31,6 +32,7 @@ public final class PowerUpProperties {
     public static final Codec<PowerUpProperties> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ChargeCounting.CODEC.fieldOf("charge_counting").forGetter(p -> p.chargeCounting),
             Codec.INT.fieldOf("max_charges").forGetter(p -> p.maxCharges),
+            Codec.INT.optionalFieldOf("recharge_interval", 0).forGetter(p -> p.rechargeInterval),
             Codec.INT.fieldOf("cooldown").forGetter(p -> p.cooldown),
             Codec.INT.fieldOf("charge_count").forGetter(p -> p.chargeCount),
             Codec.list(UUIDUtil.CODEC).fieldOf("charge_entities").forGetter(p -> p.chargeEntities)
@@ -39,6 +41,7 @@ public final class PowerUpProperties {
     public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpProperties> STREAM_CODEC = StreamCodec.composite(
             ChargeCounting.STREAM_CODEC, p -> p.chargeCounting,
             ByteBufCodecs.INT, p -> p.maxCharges,
+            ByteBufCodecs.INT, p -> p.rechargeInterval,
             ByteBufCodecs.INT, p -> p.cooldown,
             ByteBufCodecs.INT, p -> p.chargeCount,
             UUIDUtil.STREAM_CODEC.apply(ByteBufCodecs.list()), p -> p.chargeEntities,
@@ -50,18 +53,28 @@ public final class PowerUpProperties {
             ChargeCounting chargeCounting,
             int maxCharges
     ) {
-        this(chargeCounting, maxCharges, 0, maxCharges, new ArrayList<>());
+        this(chargeCounting, maxCharges, 0, 0, maxCharges, new ArrayList<>());
     }
 
     public PowerUpProperties(
             ChargeCounting chargeCounting,
             int maxCharges,
+            int rechargeInterval
+    ) {
+        this(chargeCounting, maxCharges, rechargeInterval, 0, maxCharges, new ArrayList<>());
+    }
+
+    public PowerUpProperties(
+            ChargeCounting chargeCounting,
+            int maxCharges,
+            int rechargeInterval,
             int cooldown,
             int chargeCount,
             List<UUID> chargeEntities
     ) {
         this.chargeCounting = chargeCounting;
         this.maxCharges = maxCharges;
+        this.rechargeInterval = rechargeInterval;
         this.cooldown = cooldown;
         this.chargeCount = chargeCount;
         this.chargeEntities = new ArrayList<>(chargeEntities);
@@ -98,10 +111,17 @@ public final class PowerUpProperties {
         if (this.chargeCounting == ChargeCounting.FROM_ACTIVE_ENTITIES) {
             this.chargeCount = this.maxCharges - this.chargeEntities.size();
         }
+        // Auto-start the cooldown for timed recharge when below max charges
+        if (this.chargeCounting == ChargeCounting.TIMED_RECHARGE && this.chargeCount < this.maxCharges && this.cooldown == 0 && this.rechargeInterval > 0) {
+            this.cooldown = this.rechargeInterval;
+            this.dirty = true;
+        }
         if (this.cooldown > 0) {
             this.cooldown--;
-            if (this.cooldown == 0 && this.chargeCounting == ChargeCounting.COOLDOWN_RECHARGE) {
-                this.chargeCount++;
+            if (this.cooldown == 0) {
+                if (this.chargeCounting == ChargeCounting.COOLDOWN_RECHARGE || this.chargeCounting == ChargeCounting.TIMED_RECHARGE) {
+                    this.chargeCount = Math.min(this.chargeCount + 1, this.maxCharges);
+                }
             }
             this.dirty = true;
         }
@@ -133,7 +153,8 @@ public final class PowerUpProperties {
         NONE(0, "none"),
         FROM_ACTIVE_ENTITIES(1, "from_active_entities"), // based on the number of active entities tied to the power-up trigger
         ONLY_DECREASE(2, "only_decrease"),               // never increases once the power-up is triggered
-        COOLDOWN_RECHARGE(3, "cooldown_recharge");       // charges up once the cooldown is over
+        COOLDOWN_RECHARGE(3, "cooldown_recharge"),       // charges up once the cooldown is over
+        TIMED_RECHARGE(4, "timed_recharge");             // charges up one at a time at a fixed interval
 
         public static final IntFunction<ChargeCounting> BY_ID = ByIdMap.continuous(ChargeCounting::ordinal, values(), ByIdMap.OutOfBoundsStrategy.WRAP);
         public static final Codec<ChargeCounting> CODEC = StringRepresentable.fromEnum(ChargeCounting::values);

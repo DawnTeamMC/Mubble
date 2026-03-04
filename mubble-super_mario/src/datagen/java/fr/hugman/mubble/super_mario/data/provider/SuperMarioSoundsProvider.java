@@ -78,6 +78,12 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.POWER_UP_SPIN_ATTACK, variantSoundBuilder(SuperMarioSounds.POWER_UP_SPIN_ATTACK, 1).subtitle(null));
         soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE, 1));
         soundExporter.add(SuperMarioSounds.POWER_UP_REFILL, variantSoundBuilder(SuperMarioSounds.POWER_UP_REFILL, 1));
+
+        // Bubble
+        soundExporter.add(SuperMarioSounds.BUBBLE_APPEAR, variantSoundBuilder(SuperMarioSounds.BUBBLE_APPEAR, 1));
+        soundExporter.add(SuperMarioSounds.BUBBLE_POP, variantSoundBuilder(SuperMarioSounds.BUBBLE_POP, 1));
+        soundExporter.add(SuperMarioSounds.BUBBLE_REBOUND, variantSoundBuilder(SuperMarioSounds.BUBBLE_REBOUND, 1));
+        soundExporter.add(SuperMarioSounds.BUBBLE_FILL, variantSoundBuilder(SuperMarioSounds.BUBBLE_FILL, 1));
     }
 
     private SoundTypeBuilder variantSoundBuilder(Holder<SoundEvent> soundEvent, int count) {
