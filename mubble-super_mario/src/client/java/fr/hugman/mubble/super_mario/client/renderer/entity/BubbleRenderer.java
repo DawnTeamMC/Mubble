@@ -36,14 +36,18 @@ public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
     @Override
     public void submit(BubbleRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         poseStack.pushPose();
+        // Translate to the vertical center of the bounding box so the sprite is centered
+        poseStack.translate(0.0f, state.boundingBoxHeight / 2.0f, 0.0f);
+        // Apply camera orientation to make the quad always face the camera (billboard)
         poseStack.mulPose(cameraRenderState.orientation);
-        poseStack.scale(0.5f, 0.5f, 0.5f);
+        // Scale to fill the entity's bounding box exactly
+        poseStack.scale(state.boundingBoxWidth, state.boundingBoxHeight, state.boundingBoxWidth);
         int light = state.lightCoords;
         submitNodeCollector.submitCustomGeometry(poseStack, RenderTypes.entityTranslucent(state.texture.texturePath()), (pose, consumer) -> {
             vertex(consumer, pose, -0.5f, -0.5f, 0.0f, 1.0f, light);
-            vertex(consumer, pose, 0.5f, -0.5f, 1.0f, 1.0f, light);
-            vertex(consumer, pose, 0.5f, 0.5f, 1.0f, 0.0f, light);
-            vertex(consumer, pose, -0.5f, 0.5f, 0.0f, 0.0f, light);
+            vertex(consumer, pose,  0.5f, -0.5f, 1.0f, 1.0f, light);
+            vertex(consumer, pose,  0.5f,  0.5f, 1.0f, 0.0f, light);
+            vertex(consumer, pose, -0.5f,  0.5f, 0.0f, 0.0f, light);
         });
         poseStack.popPose();
 

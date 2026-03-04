@@ -14,10 +14,13 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -58,10 +61,14 @@ public class Bubble extends Projectile implements Stompable {
     public static final float MAX_TRAPPABLE_SIZE = 2.0f;
     // Air friction applied each tick
     public static final double AIR_FRICTION = 0.98;
-    // Upward float speed when horizontal is slow
-    public static final double FLOAT_HORIZONTAL_SPEED = 0.03;
-    // Horizontal speed threshold for floating
-    public static final double FLOAT_THRESHOLD = 0.15;
+    // Float force factor: upward push = horizontalSpeed * FLOAT_FACTOR (inverse-gravity while moving)
+    public static final double FLOAT_FACTOR = 0.08;
+    // Max upward velocity from floating
+    public static final double FLOAT_MAX_UP = 0.1;
+    // Base bounding box size (matches entity registration)
+    public static final float BASE_SIZE = 0.75f;
+    // Extra padding added around a trapped entity's bounding box
+    public static final float TRAPPED_PADDING = 0.25f;
 
     private static final String SPAWN_TIME_KEY = "spawn_time";
     private static final String CATCH_TIME_KEY = "catch_time";
@@ -142,6 +149,14 @@ public class Bubble extends Projectile implements Stompable {
         // Apply air friction
         movement = movement.multiply(AIR_FRICTION, AIR_FRICTION, AIR_FRICTION);
 
+        // Float slightly upward proportional to horizontal speed (inverse-gravity effect).
+        // When horizontal motion stops the bubble stays still vertically.
+        double horizontalSpeed = movement.horizontalDistance();
+        if (horizontalSpeed > 0.01) {
+            double floatForce = horizontalSpeed * FLOAT_FACTOR;
+            double newY = Math.min(movement.y() + floatForce, FLOAT_MAX_UP);
+            movement = new Vec3(movement.x(), newY, movement.z());
+        }
 
         this.setDeltaMovement(movement);
 
@@ -165,8 +180,9 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     private void attractToNearbyEntities() {
+        Entity owner = this.getOwner();
         AABB attractBox = this.getBoundingBox().inflate(ATTRACT_RADIUS);
-        List<Entity> nearby = this.level().getEntities(this, attractBox, e -> canTrap(e) && e.isAlive());
+        List<Entity> nearby = this.level().getEntities(this, attractBox, e -> e != owner && canTrap(e) && e.isAlive());
         if (!nearby.isEmpty()) {
             Entity target = nearby.getFirst();
             Vec3 dir = target.position().add(0, target.getBbHeight() / 2, 0)
@@ -181,7 +197,6 @@ public class Bubble extends Projectile implements Stompable {
         AABB bb = this.getBoundingBox();
         List<Entity> entities = this.level().getEntities(this, bb, Entity::isAlive);
         Entity owner = this.getOwner();
-        int age = this.tickCount;
 
         for (Entity entity : entities) {
             // Skip passengers
@@ -227,7 +242,6 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     public boolean canTrap(Entity entity) {
-        if(entity == this.getOwner()) return false;
         if (!(entity instanceof LivingEntity living)) return false;
         if (entity.is(SuperMarioEntityTypeTags.BUBBLE_CANNOT_TRAP)) return false;
         if (isBoss(entity)) return false;
@@ -240,19 +254,28 @@ public class Bubble extends Projectile implements Stompable {
 
     public void trapEntity(Entity entity) {
         if (this.level().isClientSide()) return;
-        if (!entity.startRiding(this, true, true)) return;
+        if (!entity.startRiding(this, true)) return;
 
         this.trappedEntityUUID = entity.getUUID();
         this.catchTime = this.tickCount;
         this.setHasTrappedEntity(true);
 
-        // Resize the bubble slightly to fit the entity
+        // Disable AI so the trapped entity cannot move or attack
+        if (entity instanceof Mob mob) {
+            mob.setNoAi(true);
+        }
+
+        // Resize the bubble to fit the entity
         this.refreshDimensions();
 
         this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SuperMarioSounds.BUBBLE_FILL.value(), this.getSoundSource(), 0.5F, 1.0F);
     }
 
     public void clearTrappedEntity() {
+        Entity trapped = this.getTrappedEntity();
+        if (trapped instanceof Mob mob) {
+            mob.setNoAi(false);
+        }
         this.trappedEntityUUID = null;
         this.catchTime = -1;
         this.setHasTrappedEntity(false);
@@ -261,8 +284,11 @@ public class Bubble extends Projectile implements Stompable {
 
     public void pop() {
         if (!this.level().isClientSide()) {
-            // Eject any trapped entity
+            // Re-enable AI and eject any trapped entity
             Entity trapped = this.getTrappedEntity();
+            if (trapped instanceof Mob mob) {
+                mob.setNoAi(false);
+            }
             if (trapped != null) {
                 trapped.stopRiding();
             }
@@ -329,25 +355,51 @@ public class Bubble extends Projectile implements Stompable {
 
     @Override
     public Predicate<? super Entity> getStompableBy() {
-        return EntitySelector.NO_SPECTATORS.and(e -> !e.onGround() && e.getDeltaMovement().y() < 0.0 && e.isAlive());
+        Entity owner = this.getOwner();
+        // Only stomp when genuinely falling (y < -0.15 to avoid triggering on gravity ticks)
+        return EntitySelector.NO_SPECTATORS.and(e ->
+                e != owner &&
+                !e.onGround() &&
+                e.getDeltaMovement().y() < -0.15 &&
+                e.isAlive()
+        );
     }
 
     @Override
     public void onStompedBy(Entity entity) {
-        /*
-
         if (this.level() instanceof ServerLevel) {
-            // Give stomp boost to the stomper
             entity.setDeltaMovement(entity.getDeltaMovement().x, 0.5, entity.getDeltaMovement().z);
             entity.fallDistance = 0.0F;
             this.pop();
         }
-         */
     }
 
     @Override
     public Vec3 getPassengerRidingPosition(Entity passenger) {
-        return this.position().add(0.0, this.getBbHeight() * 0.5, 0.0);
+        // Center the passenger inside the bubble
+        return this.position().add(0.0, (this.getBbHeight() - passenger.getBbHeight()) / 2.0, 0.0);
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose pose) {
+        if (this.hasTrappedEntity()) {
+            Entity trapped = this.getTrappedEntity();
+            if (trapped != null) {
+                // Resize to a cube that fits the trapped entity with some padding
+                float size = Math.max(
+                        Math.max(trapped.getBbWidth(), trapped.getBbHeight()) + TRAPPED_PADDING,
+                        BASE_SIZE
+                );
+                return EntityDimensions.fixed(size, size);
+            }
+        }
+        return EntityDimensions.fixed(BASE_SIZE, BASE_SIZE);
+    }
+
+    @Override
+    protected boolean canHitEntity(Entity target) {
+        // Entity collisions are handled manually in checkEntityCollisions()
+        return false;
     }
 
     @Override
