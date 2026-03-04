@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.keybind.MubbleKeyBindingsKeys;
-import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.entity.projectile.Bubble;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
@@ -16,7 +15,6 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +24,6 @@ import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.util.Mth;
 
-import java.util.Optional;
 import java.util.function.Consumer;
 
 /**
@@ -95,8 +92,6 @@ public record ShootBubblePowerUpAction(
         if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
-
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), SuperMarioSounds.BUBBLE_APPEAR.value(), SoundSource.NEUTRAL, 0.5F, 1.0F);
 
         var entity = SuperMarioEntityTypes.BUBBLE.create(level, EntitySpawnReason.TRIGGERED);
         if (entity == null) {
