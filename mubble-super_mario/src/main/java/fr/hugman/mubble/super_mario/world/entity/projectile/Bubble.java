@@ -6,6 +6,7 @@ import fr.hugman.mubble.super_mario.tags.SuperMarioEntityTypeTags;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.entity.Stompable;
 import net.minecraft.core.ClientAsset;
+import net.minecraft.core.Direction;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -19,7 +20,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
@@ -40,8 +40,6 @@ import java.util.function.Predicate;
 /**
  * A bubble entity that can be shot by the Bubble Flower power-up.
  * It travels forward, rebounds off blocks, and can trap small entities.
- *
- * @author Copilot
  */
 public class Bubble extends Projectile implements Stompable {
     public static final ClientAsset.ResourceTexture TEXTURE = new ClientAsset.ResourceTexture(SuperMario.id("entity/bubble"));
@@ -61,7 +59,7 @@ public class Bubble extends Projectile implements Stompable {
     // Air friction applied each tick
     public static final double AIR_FRICTION = 0.98;
     // Upward float speed when horizontal is slow
-    public static final double FLOAT_SPEED = 0.03;
+    public static final double FLOAT_HORIZONTAL_SPEED = 0.03;
     // Horizontal speed threshold for floating
     public static final double FLOAT_THRESHOLD = 0.15;
 
@@ -144,10 +142,6 @@ public class Bubble extends Projectile implements Stompable {
         // Apply air friction
         movement = movement.multiply(AIR_FRICTION, AIR_FRICTION, AIR_FRICTION);
 
-        // Slightly float upward when horizontal speed is low
-        if (movement.horizontalDistance() < FLOAT_THRESHOLD) {
-            movement = movement.add(0.0, FLOAT_SPEED, 0.0);
-        }
 
         this.setDeltaMovement(movement);
 
@@ -187,25 +181,28 @@ public class Bubble extends Projectile implements Stompable {
         AABB bb = this.getBoundingBox();
         List<Entity> entities = this.level().getEntities(this, bb, Entity::isAlive);
         Entity owner = this.getOwner();
-        int age = this.tickCount - this.spawnTime;
+        int age = this.tickCount;
 
         for (Entity entity : entities) {
             // Skip passengers
             if (entity.isPassengerOfSameVehicle(this)) continue;
 
             if (this.isEmpty()) {
+                if (entity == owner) {
+                    if(this.tickCount < OWNER_POP_DELAY) {
+                        continue;
+                    }
+                    this.pop();
+                    return;
+                }
                 // Boss or blacklisted → pop
-                if (isBoss(entity) || entity.getType().is(SuperMarioEntityTypeTags.BUBBLE_CANNOT_TRAP)) {
+                if (isBoss(entity) || entity.is(SuperMarioEntityTypeTags.BUBBLE_CANNOT_TRAP)) {
                     this.pop();
                     return;
                 }
                 // Owner (after delay) → pop
-                if (entity == owner && age >= OWNER_POP_DELAY) {
-                    this.pop();
-                    return;
-                }
                 // Super Mario entity → insert coin (coin spawns inside bubble as passenger)
-                if (entity.getType().is(SuperMarioEntityTypeTags.ALL)) {
+                if (entity.is(SuperMarioEntityTypeTags.ALL)) {
                     // Just pop for now – TODO: create coin inside bubble
                     this.pop();
                     return;
@@ -230,10 +227,11 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     public boolean canTrap(Entity entity) {
+        if(entity == this.getOwner()) return false;
         if (!(entity instanceof LivingEntity living)) return false;
-        if (entity.getType().is(SuperMarioEntityTypeTags.BUBBLE_CANNOT_TRAP)) return false;
+        if (entity.is(SuperMarioEntityTypeTags.BUBBLE_CANNOT_TRAP)) return false;
         if (isBoss(entity)) return false;
-        if (entity.getType().is(SuperMarioEntityTypeTags.BUBBLE_CAN_TRAP)) return true;
+        if (entity.is(SuperMarioEntityTypeTags.BUBBLE_CAN_TRAP)) return true;
         // Auto-trappable if small enough and low enough HP
         return entity.getBbWidth() <= MAX_TRAPPABLE_SIZE
                 && entity.getBbHeight() <= MAX_TRAPPABLE_SIZE
@@ -242,7 +240,7 @@ public class Bubble extends Projectile implements Stompable {
 
     public void trapEntity(Entity entity) {
         if (this.level().isClientSide()) return;
-        if (!entity.startRiding(this, true)) return;
+        if (!entity.startRiding(this, true, true)) return;
 
         this.trappedEntityUUID = entity.getUUID();
         this.catchTime = this.tickCount;
@@ -298,11 +296,6 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     @Override
-    public boolean canBeCollidedWith(@Nullable Entity other) {
-        return other != null && !other.isSpectator() && this.isAlive();
-    }
-
-    @Override
     public boolean hurtServer(ServerLevel level, DamageSource source, float amount) {
         // Bubble has no health, but can be destroyed by projectiles
         if (source.getDirectEntity() instanceof Projectile) {
@@ -341,17 +334,20 @@ public class Bubble extends Projectile implements Stompable {
 
     @Override
     public void onStompedBy(Entity entity) {
+        /*
+
         if (this.level() instanceof ServerLevel) {
             // Give stomp boost to the stomper
             entity.setDeltaMovement(entity.getDeltaMovement().x, 0.5, entity.getDeltaMovement().z);
             entity.fallDistance = 0.0F;
             this.pop();
         }
+         */
     }
 
     @Override
     public Vec3 getPassengerRidingPosition(Entity passenger) {
-        return this.position().add(0.0, this.getBbHeight() * 0.5 - passenger.getRidingOffset(this), 0.0);
+        return this.position().add(0.0, this.getBbHeight() * 0.5, 0.0);
     }
 
     @Override

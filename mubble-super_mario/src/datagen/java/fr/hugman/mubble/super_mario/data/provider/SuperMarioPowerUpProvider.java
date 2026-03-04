@@ -119,7 +119,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         0.4f,
                         Optional.of(3),
                         Optional.empty(),
-                        Optional.of(60)
+                        Optional.of(20)
                 )))
                 .build());
     }

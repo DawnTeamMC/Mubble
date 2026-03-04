@@ -18,7 +18,8 @@ public class PowerUpItems {
             new Entry(SuperMarioItemKeys.FIRE_FLOWER, SuperMarioPowerUpKeys.FIRE),
             new Entry(SuperMarioItemKeys.ICE_FLOWER, SuperMarioPowerUpKeys.ICE),
             new Entry(SuperMarioItemKeys.GOLD_FLOWER, SuperMarioPowerUpKeys.GOLD),
-            new Entry(SuperMarioItemKeys.CLOUD_FLOWER, SuperMarioPowerUpKeys.CLOUD)
+            new Entry(SuperMarioItemKeys.CLOUD_FLOWER, SuperMarioPowerUpKeys.CLOUD),
+            new Entry(SuperMarioItemKeys.BUBBLE_FLOWER, SuperMarioPowerUpKeys.BUBBLE)
     );
 
     public static ResourceKey<Item> getItem(ResourceKey<PowerUp> powerUp) {
