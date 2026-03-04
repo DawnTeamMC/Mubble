@@ -16,6 +16,11 @@ public class MubbleSounds {
 	public static final SoundEvent NOTE_BLOCK_JUMP_HIGH = SoundEvent.of(Mubble.id("block.note_block.jump.high"));
 	public static final SoundEvent CAPE_FEATHER_USE = SoundEvent.of(Mubble.id("item.cape_feather.use"));
 
+	public static final SoundEvent BUBBLE_SHOOT = SoundEvent.of(Mubble.id("entity.bubble.shoot"));
+	public static final SoundEvent BUBBLE_POP = SoundEvent.of(Mubble.id("entity.bubble.pop"));
+	public static final SoundEvent BUBBLE_REBOUND = SoundEvent.of(Mubble.id("entity.bubble.rebound"));
+	public static final SoundEvent BUBBLE_FILL = SoundEvent.of(Mubble.id("entity.bubble.fill"));
+
 	public static void init() {
 		Registrar.add(NOTE_BLOCK_JUMP_LOW);
 		Registrar.add(NOTE_BLOCK_JUMP_HIGH);
@@ -25,5 +30,10 @@ public class MubbleSounds {
 		Registrar.add(BUMPABLE_BLOCK_LOOT);
 		Registrar.add(BUMPABLE_BLOCK_LOOT_COIN);
 		Registrar.add(CAPE_FEATHER_USE);
+
+		Registrar.add(BUBBLE_SHOOT);
+		Registrar.add(BUBBLE_POP);
+		Registrar.add(BUBBLE_REBOUND);
+		Registrar.add(BUBBLE_FILL);
 	}
 }

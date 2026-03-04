@@ -3,6 +3,7 @@ package fr.hugman.mubble.registry;
 import fr.hugman.dawn.DawnFactory;
 import fr.hugman.dawn.Registrar;
 import fr.hugman.dawn.block.DawnBlockSettings;
+import fr.hugman.dawn.item.DawnItemSettings;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.block.BeepBlock;
 import fr.hugman.mubble.block.EmptyBlock;
@@ -10,13 +11,19 @@ import fr.hugman.mubble.block.DecoratedBumpableBlock;
 import fr.hugman.mubble.block.NoteBlock;
 import fr.hugman.mubble.block.SnakeBlock;
 import fr.hugman.mubble.block.entity.BumpableBlockEntity;
+import fr.hugman.mubble.entity.BubbleEntity;
+import fr.hugman.mubble.item.BubbleFlowerItem;
 import fr.hugman.mubble.item.CapeFeatherItem;
 import fr.hugman.mubble.screen.BumpableBlockScreenHandler;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -53,6 +60,15 @@ public class SuperMario {
 	public static final CapeFeatherItem CAPE_FEATHER = new CapeFeatherItem(new Item.Settings(), false);
 	public static final CapeFeatherItem SUPER_CAPE_FEATHER = new CapeFeatherItem(new Item.Settings().rarity(Rarity.EPIC), true);
 
+	public static final BubbleFlowerItem BUBBLE_FLOWER = new BubbleFlowerItem(new Item.Settings().maxCount(1));
+
+	public static final EntityType<BubbleEntity> BUBBLE_ENTITY_TYPE =
+			FabricEntityTypeBuilder.create(SpawnGroup.MISC, BubbleEntity::new)
+					.dimensions(EntityDimensions.fixed(BubbleEntity.DEFAULT_BUBBLE_SIZE * 2, BubbleEntity.DEFAULT_BUBBLE_SIZE * 2))
+					.trackRangeBlocks(64)
+					.trackedUpdateRate(1)
+					.build();
+
 	public static void init(Registrar r) {
 		r.add("maker_glove", MAKER_GLOVE);
 
@@ -73,6 +89,9 @@ public class SuperMario {
 
 		r.add("cape_feather", CAPE_FEATHER);
 		r.add("super_cape_feather", SUPER_CAPE_FEATHER);
+
+		r.add("bubble_flower", BUBBLE_FLOWER);
+		r.add("bubble", BUBBLE_ENTITY_TYPE);
 	}
 
 	public static final ItemGroup GROUP = FabricItemGroup.builder(Mubble.id("super_mario"))
@@ -93,6 +112,7 @@ public class SuperMario {
 				entries.add(SuperMario.BLUE_BEEP_BLOCK);
 				entries.add(SuperMario.CAPE_FEATHER);
 				entries.add(SuperMario.SUPER_CAPE_FEATHER);
+				entries.add(SuperMario.BUBBLE_FLOWER);
 			})
 			.build();
 }

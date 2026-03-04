@@ -47,5 +47,29 @@
     "sounds": [
       "mubble:item/cape_feather/use"
     ]
+  },
+  "entity.bubble.shoot": {
+    "subtitle": "subtitles.mubble.entity.bubble.shoot",
+    "sounds": [
+      "mubble:entity/bubble/shoot"
+    ]
+  },
+  "entity.bubble.pop": {
+    "subtitle": "subtitles.mubble.entity.bubble.pop",
+    "sounds": [
+      "mubble:entity/bubble/pop"
+    ]
+  },
+  "entity.bubble.rebound": {
+    "subtitle": "subtitles.mubble.entity.bubble.rebound",
+    "sounds": [
+      "mubble:entity/bubble/rebound"
+    ]
+  },
+  "entity.bubble.fill": {
+    "subtitle": "subtitles.mubble.entity.bubble.fill",
+    "sounds": [
+      "mubble:entity/bubble/fill"
+    ]
   }
 }

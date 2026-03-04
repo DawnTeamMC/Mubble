@@ -2,6 +2,7 @@ package fr.hugman.mubble;
 
 import fr.hugman.mubble.client.gui.screen.BumpableBlockScreen;
 import fr.hugman.mubble.client.render.BumpableBlockEntityRenderer;
+import fr.hugman.mubble.client.render.entity.BubbleEntityRenderer;
 import fr.hugman.mubble.registry.SuperMario;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -10,6 +11,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
+import net.minecraft.client.render.entity.EntityRendererRegistry;
 
 @Environment(EnvType.CLIENT)
 public class MubbleClient implements ClientModInitializer {
@@ -20,5 +22,7 @@ public class MubbleClient implements ClientModInitializer {
 
 		HandledScreens.register(SuperMario.BUMPABLE_BLOCK_SCREEN_HANDLER, BumpableBlockScreen::new);
 		BlockEntityRendererFactories.register(SuperMario.BUMPABLE_BLOCK_ENTITY_TYPE, BumpableBlockEntityRenderer::new);
+
+		EntityRendererRegistry.register(SuperMario.BUBBLE_ENTITY_TYPE, BubbleEntityRenderer::new);
 	}
 }
