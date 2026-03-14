@@ -273,7 +273,7 @@ public class CollectibleEntity extends Entity {
                 }
             }
 
-            this.needsSync = this.needsSync | this.updateInWaterStateAndDoFluidPushing();
+            this.needsSync = this.needsSync | this.updateFluidInteraction();
             if (!this.level().isClientSide()) {
                 double movementLength = this.getDeltaMovement().subtract(oldMovement).lengthSqr();
                 if (movementLength > 0.01) {

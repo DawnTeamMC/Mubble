@@ -3,7 +3,7 @@ package fr.hugman.mubble.client.mixin;
 import fr.hugman.mubble.client.gui.hud.PowerUpHudRendering;import fr.hugman.mubble.client.gui.hud.PowerUpPropertiesHudRendering;import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,13 +17,13 @@ public class GuiMixin {
 	@Shadow
 	private Minecraft minecraft;
 
-	@Inject(method="render", at=@At(value="INVOKE", target="Lnet/minecraft/client/gui/Gui;renderBossOverlay(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"))
-	private void mubble$addPowerUpLayer(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
-		PowerUpHudRendering.renderPowerUpLayer(this.minecraft, context);
+	@Inject(method="extractRenderState", at=@At(value="INVOKE", target="Lnet/minecraft/client/gui/Gui;extractBossOverlay(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"))
+	private void mubble$addPowerUpLayer(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+		PowerUpHudRendering.renderPowerUpLayer(this.minecraft, graphics);
 	}
 
-	@Inject(method="render", at=@At(value="INVOKE", target="Lnet/minecraft/client/gui/Gui;renderCrosshair(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V"))
-	private void mubble$addPowerUpPropertiesLayer(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
-		PowerUpPropertiesHudRendering.renderChargesLayer(this.minecraft, context);
+	@Inject(method="extractRenderState", at=@At(value="INVOKE", target="Lnet/minecraft/client/gui/Gui;extractCrosshair(Lnet/minecraft/client/gui/GuiGraphicsExtractor;Lnet/minecraft/client/DeltaTracker;)V"))
+	private void mubble$addPowerUpPropertiesLayer(GuiGraphicsExtractor graphics, DeltaTracker deltaTracker, CallbackInfo ci) {
+		PowerUpPropertiesHudRendering.renderChargesLayer(this.minecraft, graphics);
 	}
 }
