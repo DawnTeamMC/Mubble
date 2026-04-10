@@ -8,6 +8,7 @@ import net.minecraft.util.Util;
 import java.util.function.BiFunction;
 
 public class SuperMarioRenderTypes {
+    // Based on RenderTypes#ENTITY_TRANSLUCENT
     public static final BiFunction<Identifier, Boolean, RenderType> GOLDEN_ENTITY = Util.memoize(
             (texture, affectsOutline) -> {
         RenderSetup state = RenderSetup.builder(SuperMarioRenderPipelines.GOLDEN_ENTITY_PIPELINE)

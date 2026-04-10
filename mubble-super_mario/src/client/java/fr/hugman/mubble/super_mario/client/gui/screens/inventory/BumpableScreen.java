@@ -93,7 +93,7 @@ public class BumpableScreen extends AbstractContainerScreen<BumpableScreenHandle
     private void finishEditing() {
         this.menu.broadcastChanges();
         if (this.minecraft != null) {
-            this.minecraft.setScreen(null);
+            this.minecraft.gui.setScreen(null);
         }
     }
 }

@@ -60,19 +60,19 @@ void main() {
     }
     #endif
 
+    #ifdef PER_FACE_LIGHTING
+    vec4 geometryLight = gl_FrontFacing ? vertexPerFaceColorFront : vertexPerFaceColorBack;
+    #else
+    vec4 geometryLight = vertexColor;
+    #endif
+
     float luma = dot(color.rgb, vec3(0.299, 0.587, 0.114));
 
     vec3 goldColor = getGoldGradient(luma);
 
     color = vec4(goldColor, color.a);
 
-    #ifdef PER_FACE_LIGHTING
-    vec4 faceVertexColor = gl_FrontFacing ? vertexPerFaceColorFront : vertexPerFaceColorBack;
-    #else
-    vec4 faceVertexColor = vertexColor;
-    #endif
-
-    color *= faceVertexColor * ColorModulator;
+    color *= geometryLight * ColorModulator;
 
     #ifndef NO_OVERLAY
     color.rgb = mix(overlayColor.rgb, color.rgb, overlayColor.a);
