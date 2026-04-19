@@ -1,7 +1,7 @@
 package fr.hugman.mubble.super_mario.data.provider;
 
 import fr.hugman.mubble.super_mario.SuperMario;
-import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
 import net.minecraft.core.HolderLookup;
@@ -28,10 +28,10 @@ public class SuperMarioDamageTypeProvider extends FabricDynamicRegistryProvider 
     }
 
     public static void bootstrap(BootstrapContext<DamageType> context) {
-		context.register(SuperMarioDamageTypeKeys.STOMP, new DamageType(SuperMario.MOD_ID + ".stomp", 0.1f));
-		context.register(SuperMarioDamageTypeKeys.KOOPA_SHELL, new DamageType(SuperMario.MOD_ID + ".koopa_shell", 0.1f));
-		context.register(SuperMarioDamageTypeKeys.FIREBALL, new DamageType(SuperMario.MOD_ID + ".fireball", 0.1f, DamageEffects.BURNING));
-		context.register(SuperMarioDamageTypeKeys.ICEBALL, new DamageType(SuperMario.MOD_ID + ".iceball", 0.1f, DamageEffects.FREEZING));
-        context.register(SuperMarioDamageTypeKeys.GOLD_FIREBALL, new DamageType(SuperMario.MOD_ID + ".gold_fireball", 0.1f));
+		context.register(SuperMarioDamageTypeIds.STOMP, new DamageType(SuperMario.MOD_ID + ".stomp", 0.1f));
+		context.register(SuperMarioDamageTypeIds.KOOPA_SHELL, new DamageType(SuperMario.MOD_ID + ".koopa_shell", 0.1f));
+		context.register(SuperMarioDamageTypeIds.FIREBALL, new DamageType(SuperMario.MOD_ID + ".fireball", 0.1f, DamageEffects.BURNING));
+		context.register(SuperMarioDamageTypeIds.ICEBALL, new DamageType(SuperMario.MOD_ID + ".iceball", 0.1f, DamageEffects.FREEZING));
+        context.register(SuperMarioDamageTypeIds.GOLD_FIREBALL, new DamageType(SuperMario.MOD_ID + ".gold_fireball", 0.1f));
     }
 }

@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
-public class SuperMarioItemKeys {
+public class SuperMarioItemIds {
     public static final ResourceKey<Item> COIN = createKey("coin");
     public static final ResourceKey<Item> RED_COIN = createKey("red_coin");
     public static final ResourceKey<Item> BLUE_COIN = createKey("blue_coin");

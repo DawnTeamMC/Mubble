@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import fr.hugman.mubble.super_mario.core.component.SuperMarioDataComponents;
 import fr.hugman.mubble.super_mario.core.registries.SuperMarioRegistries;
 import fr.hugman.mubble.super_mario.network.syncher.SuperMarioEntityDataSerializers;
-import fr.hugman.mubble.super_mario.references.GoombaVariantKeys;
+import fr.hugman.mubble.super_mario.references.GoombaVariantIds;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.tags.SuperMarioDamageTypeTags;
 import fr.hugman.mubble.super_mario.world.entity.monster.SuperMarioEnemy;
@@ -162,7 +162,7 @@ public class Goomba extends SuperMarioEnemy implements Surprisable, Stunnable {
         super.defineSynchedData(entityData);
         entityData.define(GOOMBA_FLAGS, (byte) 0);
         entityData.define(SURPRISE_PROGRESS, 0);
-        entityData.define(VARIANT, this.registryAccess().lookupOrThrow(SuperMarioRegistries.GOOMBA_VARIANT).getOrThrow(GoombaVariantKeys.NORMAL));
+        entityData.define(VARIANT, this.registryAccess().lookupOrThrow(SuperMarioRegistries.GOOMBA_VARIANT).getOrThrow(GoombaVariantIds.NORMAL));
     }
 
     @Override

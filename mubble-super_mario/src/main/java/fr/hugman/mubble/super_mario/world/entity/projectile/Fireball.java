@@ -1,8 +1,7 @@
 package fr.hugman.mubble.super_mario.world.entity.projectile;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.super_mario.SuperMario;
-import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.attribute.SuperMarioEnvironmentAttributes;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
@@ -70,7 +69,7 @@ public class Fireball extends Ball {
         if (!entity.fireImmune()) {
             entity.igniteForSeconds(5);
         }
-        entity.hurt(this.damageSources().source(SuperMarioDamageTypeKeys.FIREBALL, this, this.getOwner()), damage);
+        entity.hurt(this.damageSources().source(SuperMarioDamageTypeIds.FIREBALL, this, this.getOwner()), damage);
         this.finalHit(SuperMarioSounds.FIREBALL_HIT_ENTITY);
     }
 

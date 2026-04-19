@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.damagesource.DamageType;
 
-public class SuperMarioDamageTypeKeys {
+public class SuperMarioDamageTypeIds {
     public static final ResourceKey<DamageType> STOMP = createKey("stomp");
     public static final ResourceKey<DamageType> KOOPA_SHELL = createKey("koopa_shell");
     public static final ResourceKey<DamageType> FIREBALL = createKey("fireball");

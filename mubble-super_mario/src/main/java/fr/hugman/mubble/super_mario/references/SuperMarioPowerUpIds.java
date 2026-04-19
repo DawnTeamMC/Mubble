@@ -5,7 +5,7 @@ import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import net.minecraft.resources.ResourceKey;
 
-public class SuperMarioPowerUpKeys {
+public class SuperMarioPowerUpIds {
     public static final ResourceKey<PowerUp> MINI = createKey("mini");
     public static final ResourceKey<PowerUp> MEGA = createKey("mega");
     public static final ResourceKey<PowerUp> FIRE = createKey("fire");

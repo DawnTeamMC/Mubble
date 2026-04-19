@@ -2,7 +2,7 @@ package fr.hugman.mubble.super_mario.client.mixin;
 
 import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderTypes;
 import fr.hugman.mubble.super_mario.client.renderer.entity.state.GoombaRenderState;
-import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
@@ -35,7 +35,7 @@ public class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingE
     private void super_mario$getRenderType(S state, boolean isBodyVisible, boolean forceTransparent, boolean appearGlowing, CallbackInfoReturnable<RenderType> cir) {
         var powerUp = state.getData(fr.hugman.mubble.client.references.MubbleRenderStateDataKeys.POWER_UP);
         //TODO: make this more dynamic
-        if(powerUp != null && powerUp.is(SuperMarioPowerUpKeys.GOLD)) {
+        if(powerUp != null && powerUp.is(SuperMarioPowerUpIds.GOLD)) {
             Identifier texture = this.getTextureLocation(state);
             //TODO: do the vanillas checks and add translucency support
             cir.setReturnValue(SuperMarioRenderTypes.getGoldenEntity(texture));
