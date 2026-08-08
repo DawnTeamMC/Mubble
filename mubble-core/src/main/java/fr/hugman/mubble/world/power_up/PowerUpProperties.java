@@ -81,12 +81,22 @@ public final class PowerUpProperties {
     }
 
     public void setCooldown(int cooldown) {
-        this.cooldown = cooldown;
-        this.dirty = true;
+        if (this.cooldown != cooldown) {
+            this.cooldown = cooldown;
+            this.dirty = true;
+        }
     }
 
     public int getChargeCount() {
         return this.chargeCount;
+    }
+
+    private void setChargeCount(int chargeCount) {
+        int clamped = Math.clamp(chargeCount, 0, this.maxCharges);
+        if (this.chargeCount != clamped) {
+            this.chargeCount = clamped;
+            this.dirty = true;
+        }
     }
 
     public boolean checkDirty() {
@@ -101,29 +111,43 @@ public final class PowerUpProperties {
         return this.chargeCount >= this.maxCharges && this.cooldown == 0;
     }
 
-    public void addEntity(UUID uuid) {
+    /**
+     * Spends one charge.
+     */
+    public void useCharge() {
+        this.setChargeCount(this.chargeCount - 1);
+    }
+
+    /**
+     * Ties a charge to the lifetime of an entity. Only has an effect in {@link ChargeCounting#FROM_ACTIVE_ENTITIES},
+     * where the charge comes back once the entity is gone.
+     */
+    public void trackEntity(UUID uuid) {
+        if (this.chargeCounting != ChargeCounting.FROM_ACTIVE_ENTITIES) {
+            return;
+        }
         this.chargeEntities.add(uuid);
-        this.chargeCount--;
         this.dirty = true;
     }
 
     public void tick() {
         if (this.chargeCounting == ChargeCounting.FROM_ACTIVE_ENTITIES) {
-            this.chargeCount = this.maxCharges - this.chargeEntities.size();
+            this.setChargeCount(this.maxCharges - this.chargeEntities.size());
         }
-        // Auto-start the cooldown for timed recharge when below max charges
-        if (this.chargeCounting == ChargeCounting.TIMED_RECHARGE && this.chargeCount < this.maxCharges && this.cooldown == 0 && this.rechargeInterval > 0) {
+        // A timed recharge always keeps a countdown running while charges are missing.
+        if (this.chargeCounting == ChargeCounting.TIMED_RECHARGE && this.rechargeInterval > 0 && this.cooldown <= 0 && this.chargeCount < this.maxCharges) {
             this.cooldown = this.rechargeInterval;
-            this.dirty = true;
         }
         if (this.cooldown > 0) {
             this.cooldown--;
             if (this.cooldown == 0) {
+                // The cooldown hitting zero is observable through isAtMax(), so it has to be synced.
+                // Only that transition is: syncing every single tick of the countdown would be pure spam.
+                this.dirty = true;
                 if (this.chargeCounting == ChargeCounting.COOLDOWN_RECHARGE || this.chargeCounting == ChargeCounting.TIMED_RECHARGE) {
-                    this.chargeCount = Math.min(this.chargeCount + 1, this.maxCharges);
+                    this.setChargeCount(this.chargeCount + 1);
                 }
             }
-            this.dirty = true;
         }
     }
 

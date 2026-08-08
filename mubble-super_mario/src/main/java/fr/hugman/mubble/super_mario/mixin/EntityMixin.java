@@ -114,7 +114,10 @@ public class EntityMixin implements Stompable {
 			else {
 				// TODO: play sound
 			}
-			entity.setDeltaMovement(entity.getDeltaMovement().x, 0.5D, entity.getDeltaMovement().z);
+			// A player's real momentum only lives on their client; the server-side delta is stale, and sending it
+			// back would kill the horizontal speed they came in with. getKnownMovement() is what the client reported.
+			Vec3 momentum = entity.getKnownMovement();
+			entity.setDeltaMovement(momentum.x(), 0.5D, momentum.z());
 			if (entity instanceof Player player) {
 				((ServerPlayer) player).connection.send(new ClientboundSetEntityMotionPacket(player));
 			}

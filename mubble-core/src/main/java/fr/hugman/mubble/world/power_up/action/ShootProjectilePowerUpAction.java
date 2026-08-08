@@ -31,7 +31,6 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.phys.Vec3;
 
-//TODO: cooldown is not yet implemented
 public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
         Optional<Holder<SoundEvent>> sound,
@@ -117,11 +116,15 @@ public record ShootProjectilePowerUpAction(
             if (entity instanceof Projectile projectileEntity) {
                 projectileEntity.setOwner(player);
             }
-            entity.setPos(player.getX(), player.getEyeY() - 0.1F, player.getZ());
+            // setPos places the bottom of the bounding box, so the projectile has to be lowered by half its
+            // height to actually come out centered on the eye line.
+            entity.setPos(player.getX(), player.getEyeY() - 0.1F - entity.getBbHeight() / 2.0F, player.getZ());
             setVelocity(entity, player, player.getXRot(), player.getYRot(), 0.0F, this.speed, 1.0F);
             level.addFreshEntity(entity);
-            properties.addEntity(entity.getUUID());
-            properties.setCooldown(cooldown.orElse(0));
+            properties.useCharge();
+            properties.trackEntity(entity.getUUID());
+            // Only override the cooldown when this action drives it: a timed recharge runs its own countdown.
+            this.cooldown.ifPresent(properties::setCooldown);
         }
         return InteractionResult.SUCCESS;
     }

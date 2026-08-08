@@ -112,14 +112,13 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .attributesModifier(Attributes.JUMP_STRENGTH, 0.35, ADD_MULTIPLIED_BASE)
                 .build());
         context.register(BUBBLE, builder(BUBBLE)
-                .emissiveOverlay()
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.BUBBLE,
-                        Optional.empty(),
+                        Optional.empty(), // the bubble plays its own "appear" sound as it spawns
                         0.4f,
                         Optional.of(3),
                         Optional.empty(),
-                        Optional.of(20)
+                        Optional.of(60)
                 )))
                 .build());
     }

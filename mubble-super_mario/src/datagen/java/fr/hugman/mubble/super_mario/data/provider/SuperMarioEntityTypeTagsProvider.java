@@ -26,6 +26,11 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 
         valueLookupBuilder(ALL).add(GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE);
 
+        // Bosses and anything too big to make sense inside a bubble. Players are here on purpose: they fit the
+        // automatic size and health criteria, but getting stuck inside someone else's bubble is not the point.
+        // BUBBLE_CAN_TRAP is deliberately left empty: it is the data pack hook for the opposite exception.
+        valueLookupBuilder(BUBBLE_CANNOT_TRAP).add(PLAYER, ENDER_DRAGON, WITHER, WARDEN, ELDER_GUARDIAN, RAVAGER, IRON_GOLEM);
+
 		// Vanilla
 		valueLookupBuilder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA);
 		valueLookupBuilder(EntityTypeTags.NOT_SCARY_FOR_PUFFERFISH).add(GOOMBA);

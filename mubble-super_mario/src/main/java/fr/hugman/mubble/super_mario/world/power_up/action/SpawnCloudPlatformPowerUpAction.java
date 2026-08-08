@@ -91,7 +91,8 @@ public record SpawnCloudPlatformPowerUpAction(
             }
             entity.setPos(player.getX(), player.getY() - 0.5f - entity.getBbHeight(), player.getZ());
             level.addFreshEntity(entity);
-            properties.addEntity(entity.getUUID());
+            properties.useCharge();
+            properties.trackEntity(entity.getUUID());
 
             player.setDeltaMovement(player.getDeltaMovement().x, 0.2D, player.getDeltaMovement().z);
             ((ServerPlayer) player).connection.send(new ClientboundSetEntityMotionPacket(player));

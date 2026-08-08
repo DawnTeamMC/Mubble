@@ -20,6 +20,7 @@ public class SuperMarioItemTagProvider extends FabricTagsProvider.ItemTagsProvid
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
 		valueLookupBuilder(COINS).add(COIN, RED_COIN, BLUE_COIN, FLOWER_COIN);
 		valueLookupBuilder(KOOPA_SHELLS).add(GREEN_KOOPA_SHELL, RED_KOOPA_SHELL);
+		valueLookupBuilder(SPAWNS_AS_COLLECTIBLE).addTag(COINS);
 		valueLookupBuilder(ItemTags.PIGLIN_LOVED).add(COIN);
 	}
 }
