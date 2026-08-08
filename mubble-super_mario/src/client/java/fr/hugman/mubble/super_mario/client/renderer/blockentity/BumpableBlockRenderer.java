@@ -5,11 +5,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import fr.hugman.mubble.super_mario.world.level.block.entity.BumpableBlockEntity;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.block.MovingBlockRenderState;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
-import net.minecraft.client.renderer.state.CameraRenderState;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
@@ -42,9 +43,9 @@ public class BumpableBlockRenderer implements BlockEntityRenderer<BumpableBlockE
 
 		bumpableBlockRenderState.movingState = null;
 		var world = blockEntity.getLevel();
-		if(world != null) {
+		if(blockEntity.getLevel() instanceof ClientLevel level) {
 			var pos = blockEntity.getBlockPos();
-			bumpableBlockRenderState.movingState = renderModel(pos, blockEntity.getBlockState(), world.getBiome(pos), world);
+			bumpableBlockRenderState.movingState = renderModel(pos, blockEntity.getBlockState(), world.getBiome(pos), level);
 		}
 	}
 
@@ -89,13 +90,14 @@ public class BumpableBlockRenderer implements BlockEntityRenderer<BumpableBlockE
         matrices.translate(-x2, -y2, -z2);
     }
 
-	private static MovingBlockRenderState renderModel(BlockPos pos, BlockState state, Holder<Biome> biome, Level level) {
+	private static MovingBlockRenderState renderModel(BlockPos pos, BlockState state, Holder<Biome> biome, ClientLevel level) {
 		MovingBlockRenderState movingBlockRenderState = new MovingBlockRenderState();
 		movingBlockRenderState.randomSeedPos = pos;
 		movingBlockRenderState.blockPos = pos;
 		movingBlockRenderState.blockState = state;
 		movingBlockRenderState.biome = biome;
-		movingBlockRenderState.level = level;
+		movingBlockRenderState.cardinalLighting = level.cardinalLighting();
+		movingBlockRenderState.lightEngine = level.getLightEngine();
 		return movingBlockRenderState;
 	}
 }

@@ -6,7 +6,7 @@ import fr.hugman.mubble.super_mario.world.entity.monster.goomba.GoombaVariant;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 
-public class GoombaVariantKeys {
+public class GoombaVariantIds {
     public static final ResourceKey<GoombaVariant> NORMAL = createKey("normal");
     public static final ResourceKey<GoombaVariant> MINI = createKey("mini");
 

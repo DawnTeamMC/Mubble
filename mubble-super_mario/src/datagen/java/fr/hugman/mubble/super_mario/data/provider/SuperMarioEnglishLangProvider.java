@@ -1,7 +1,7 @@
 package fr.hugman.mubble.super_mario.data.provider;
 
 import fr.hugman.mubble.data.AutomaticEnglish;
-import fr.hugman.mubble.super_mario.references.SuperMarioCreativeModeTabKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioCreativeModeTabIds;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.SuperMario;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -19,7 +19,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
-        builder.add(Util.makeDescriptionId("item_group", SuperMarioCreativeModeTabKeys.YOSHI_ISLAND.identifier()), "Yoshi's Island");
+        builder.add(Util.makeDescriptionId("item_group", SuperMarioCreativeModeTabIds.YOSHI_ISLAND.identifier()), "Yoshi's Island");
 
         AutomaticEnglish.generateAutomaticTranslations(SuperMario.MOD_ID, wrapperLookup, builder);
 

@@ -2,7 +2,7 @@ package fr.hugman.mubble.super_mario.world.entity.projectile;
 
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
-import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.level.GoldenServerExplosion;
 import fr.hugman.mubble.world.entity.projectile.Ball;
@@ -63,7 +63,7 @@ public class GoldFireball extends Ball {
     protected void finalHit(SoundEvent deathSound) {
         super.finalHit(deathSound);
         if (this.level() instanceof ServerLevel serverLevel) {
-            GoldenServerExplosion.create(serverLevel, this, this.damageSources().source(SuperMarioDamageTypeKeys.GOLD_FIREBALL, this, this.getOwner()), null, this.getX(), this.getY(0.0625F), this.getZ(), 3.0F, Level.ExplosionInteraction.MOB);
+            GoldenServerExplosion.create(serverLevel, this, this.damageSources().source(SuperMarioDamageTypeIds.GOLD_FIREBALL, this, this.getOwner()), null, this.getX(), this.getY(0.0625F), this.getZ(), 3.0F, Level.ExplosionInteraction.MOB);
         }
     }
 

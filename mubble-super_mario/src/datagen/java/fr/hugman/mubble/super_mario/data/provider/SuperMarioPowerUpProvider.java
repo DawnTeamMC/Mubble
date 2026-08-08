@@ -19,7 +19,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-import static fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys.*;
+import static fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds.*;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE;
 

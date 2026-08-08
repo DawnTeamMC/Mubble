@@ -1,6 +1,6 @@
 package fr.hugman.mubble.super_mario.mixin;
 
-import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
 import fr.hugman.mubble.super_mario.tags.SuperMarioEntityTypeTags;
 import fr.hugman.mubble.super_mario.tags.SuperMarioPowerUpTags;
 import fr.hugman.mubble.super_mario.world.entity.Stompable;
@@ -109,7 +109,7 @@ public class EntityMixin implements Stompable {
 				damage = 0.0f;
 			}
 			if(damage > 0) {
-				this_.hurtServer(serverLevel, this_.damageSources().source(SuperMarioDamageTypeKeys.STOMP, entity), 2.0F);
+				this_.hurtServer(serverLevel, this_.damageSources().source(SuperMarioDamageTypeIds.STOMP, entity), 2.0F);
 			}
 			else {
 				// TODO: play sound
