@@ -21,7 +21,6 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -37,7 +36,9 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -46,6 +47,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -231,6 +233,9 @@ public class Bubble extends Projectile implements Stompable {
 
         this.setDeltaMovement(movement);
         this.move(MoverType.SELF, movement);
+        // move() only records which blocks were crossed; this is what actually runs their "entity inside"
+        // behaviour. Without it the bubble ignores portals, pressure plates and every other trigger block.
+        this.applyEffectsFromBlocks();
         this.reboundOffBlocks(movement);
         this.needsSync = true;
     }
@@ -270,7 +275,28 @@ public class Bubble extends Projectile implements Stompable {
         if (!this.level().isClientSide()) {
             this.level().broadcastEntityEvent(this, squishEvent(axis));
             this.playSound(SuperMarioSounds.BUBBLE_REBOUND.value(), 0.5F, 1.0F);
+            this.notifyBlockHit(axis, switch (axis) {
+                case X -> requested.x();
+                case Y -> requested.y();
+                case Z -> requested.z();
+            });
         }
+    }
+
+    /**
+     * Lets the block the bubble bounced against react as it would to any thrown projectile. Target blocks, and
+     * anything else keyed on projectile hits, come from here.
+     */
+    private void notifyBlockHit(Direction.Axis axis, double requestedOnAxis) {
+        Direction direction = Direction.get(requestedOnAxis > 0.0 ? Direction.AxisDirection.POSITIVE : Direction.AxisDirection.NEGATIVE, axis);
+        Vec3 from = this.getBoundingBox().getCenter();
+        Vec3 to = from.add(Vec3.atLowerCornerOf(direction.getUnitVec3i()).scale(this.getBbWidth() / 2.0 + 0.25));
+        BlockHitResult hit = this.level().clip(new ClipContext(from, to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+        if (hit.getType() != HitResult.Type.BLOCK) {
+            return;
+        }
+        BlockState state = this.level().getBlockState(hit.getBlockPos());
+        state.onProjectileHit(this.level(), state, hit, this);
     }
 
     private static boolean blocked(double requested, double actual) {
@@ -364,6 +390,12 @@ public class Bubble extends Projectile implements Stompable {
             }
             if (entity.is(SuperMarioEntityTypeTags.ALL)) {
                 this.absorb(entity);
+                return;
+            }
+            // Arrows and the like pop the bubble. Checked from here rather than left to hurtServer, so that it
+            // does not hinge on the projectile deciding to deal damage to a target with no health.
+            if (entity instanceof Projectile) {
+                this.pop();
                 return;
             }
             if (this.canTrap(entity)) {
@@ -519,13 +551,13 @@ public class Bubble extends Projectile implements Stompable {
         if (this.isRemoved()) {
             return false;
         }
-        // No health, like paintings: projectiles pop it, and so do damaging explosions.
-        // Wind charges deal no damage, so they only blow the bubble around.
-        if (source.getDirectEntity() instanceof Projectile || (source.is(DamageTypeTags.IS_EXPLOSION) && amount > 0.0F)) {
-            this.pop();
-            return true;
+        // No health, like paintings: anything that lands a real hit pops it, whether that is an arrow, a sword
+        // or a bare fist. Wind charges deal no damage, so they only blow the bubble around.
+        if (amount <= 0.0F) {
+            return false;
         }
-        return false;
+        this.pop();
+        return true;
     }
 
     @Override
