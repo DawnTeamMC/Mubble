@@ -11,6 +11,8 @@ import net.minecraft.core.Direction;
 public class BubbleRenderState extends EntityRenderState {
     public final ItemStackRenderState item = new ItemStackRenderState();
     public ClientAsset.ResourceTexture texture;
+    /** Side of the bubble's cube, taken from the entity rather than from its cached bounding box. */
+    public float size;
     /** How flattened the bubble is against a block, from 0 (round) to 1 (fully squished). */
     public float squish;
     public Direction.Axis squishAxis = Direction.Axis.Y;

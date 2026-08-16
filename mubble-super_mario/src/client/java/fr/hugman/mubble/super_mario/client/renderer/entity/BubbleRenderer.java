@@ -42,6 +42,7 @@ public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
     public void extractRenderState(Bubble bubble, BubbleRenderState state, float partialTicks) {
         super.extractRenderState(bubble, state, partialTicks);
         state.texture = bubble.getTexture();
+        state.size = bubble.getRenderSize(partialTicks);
         state.lightCoords = LightCoordsUtil.FULL_BRIGHT;
         state.squish = bubble.getSquish(partialTicks);
         state.squishAxis = bubble.getSquishAxis();
@@ -50,14 +51,14 @@ public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
 
     @Override
     public void submit(BubbleRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
-        // The entity origin sits at the bottom of the bounding box, the sprite has to be centered on it.
-        float centerY = state.boundingBoxHeight / 2.0F;
+        // The entity origin sits at the bottom of the cube, the sprite has to be centered on it.
+        float centerY = state.size / 2.0F;
 
         if (!state.item.isEmpty()) {
             poseStack.pushPose();
             poseStack.translate(0.0F, centerY, 0.0F);
             poseStack.mulPose(cameraRenderState.orientation);
-            float itemScale = Math.min(state.boundingBoxWidth, state.boundingBoxHeight) * HELD_ITEM_SCALE;
+            float itemScale = state.size * HELD_ITEM_SCALE;
             poseStack.scale(itemScale, itemScale, itemScale);
             state.item.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
             poseStack.popPose();
@@ -73,9 +74,9 @@ public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
         float bulge = 1.0F + SQUISH_BULGE * state.squish;
         boolean vertical = state.squishAxis == Direction.Axis.Y;
         poseStack.scale(
-                state.boundingBoxWidth * (vertical ? bulge : flatten),
-                state.boundingBoxHeight * (vertical ? flatten : bulge),
-                state.boundingBoxWidth
+                state.size * (vertical ? bulge : flatten),
+                state.size * (vertical ? flatten : bulge),
+                state.size
         );
 
         int light = state.lightCoords;

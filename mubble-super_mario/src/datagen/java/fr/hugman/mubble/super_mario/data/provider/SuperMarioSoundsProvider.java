@@ -82,7 +82,6 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         // Bubble
         soundExporter.add(SuperMarioSounds.BUBBLE_APPEAR, variantSoundBuilder(SuperMarioSounds.BUBBLE_APPEAR, 1));
         soundExporter.add(SuperMarioSounds.BUBBLE_POP, variantSoundBuilder(SuperMarioSounds.BUBBLE_POP, 1));
-        soundExporter.add(SuperMarioSounds.BUBBLE_REBOUND, variantSoundBuilder(SuperMarioSounds.BUBBLE_REBOUND, 1));
         soundExporter.add(SuperMarioSounds.BUBBLE_FILL, variantSoundBuilder(SuperMarioSounds.BUBBLE_FILL, 1));
     }
 

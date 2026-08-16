@@ -32,6 +32,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -53,6 +54,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 /**
  * A bubble shot by the Bubble Flower power-up.
@@ -64,7 +66,15 @@ import java.util.function.Predicate;
  * @since v4.0.0
  */
 public class Bubble extends Projectile implements Stompable {
-    public static final ClientAsset.ResourceTexture TEXTURE = new ClientAsset.ResourceTexture(SuperMario.id("entity/bubble"));
+    /**
+     * The looks a bubble can take. Picked at random on spawn and kept for the bubble's whole life, so that a
+     * volley does not look stamped out of the same mould. Deliberately a plain index rather than a registry of
+     * variants: nothing else varies with it, and it stays settable from a command.
+     */
+    private static final List<ClientAsset.ResourceTexture> TEXTURES = IntStream.rangeClosed(1, 4)
+            .mapToObj(i -> new ClientAsset.ResourceTexture(SuperMario.id("entity/bubble" + i)))
+            .toList();
+    public static final int TEXTURE_COUNT = TEXTURES.size();
 
     /** Ticks before an empty bubble pops on its own. */
     public static final int DEFAULT_LIFETIME = 100;
@@ -72,6 +82,11 @@ public class Bubble extends Projectile implements Stompable {
     public static final int DEFAULT_FILLED_LIFETIME = 100;
     /** Grace period during which the bubble ignores its owner, so it does not pop right where it spawned. */
     public static final int OWNER_POP_DELAY = 20;
+    /**
+     * Grace period during which the owner cannot stomp their own bubble. Without it, shooting one while airborne
+     * hands out a free bounce straight away, which is enough to fly forever.
+     */
+    public static final int OWNER_STOMP_DELAY = 10;
     /** Ticks the capture animation lasts before the caught entity turns into its loot. */
     public static final int ABSORB_DURATION = 12;
     /** Ticks the squish animation lasts after rebounding against a block. */
@@ -98,6 +113,8 @@ public class Bubble extends Projectile implements Stompable {
     /** Cosine of the half-angle of the cone the target has to be in. Roughly 55 degrees. */
     private static final double AIM_ASSIST_MIN_DOT = 0.57;
     private static final float STOMP_BOOST = 0.7f;
+    /** How fast the drawn size catches up with the real one when the bubble swallows or releases something. */
+    private static final float SIZE_LERP = 0.4F;
 
     // Entity events, well above the vanilla range.
     private static final byte EVENT_SQUISH_X = 100;
@@ -111,9 +128,11 @@ public class Bubble extends Projectile implements Stompable {
     private static final String ITEM_KEY = "item";
     private static final String ABSORB_TICKS_KEY = "absorb_ticks";
     private static final String TRAPPED_NO_AI_KEY = "trapped_no_ai";
+    private static final String TEXTURE_KEY = "texture";
 
     private static final EntityDataAccessor<ItemStack> DATA_ITEM = SynchedEntityData.defineId(Bubble.class, EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Boolean> DATA_ABSORBING = SynchedEntityData.defineId(Bubble.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Integer> DATA_TEXTURE = SynchedEntityData.defineId(Bubble.class, EntityDataSerializers.INT);
 
     private int age;
     private int filledAge;
@@ -128,13 +147,21 @@ public class Bubble extends Projectile implements Stompable {
     private Direction.Axis squishAxis = Direction.Axis.Y;
     private int absorbClientTicks;
     private int absorbClientTicksO;
+    /** Client-side eased size. Negative until the first tick, which is how the initial snap is detected. */
+    private float renderSize = -1.0F;
+    private float renderSizeO = -1.0F;
 
     public Bubble(EntityType<? extends Bubble> type, Level level) {
         super(type, level);
+        if (!level.isClientSide()) {
+            // Rolled here rather than on the first tick so the choice ships with the spawn packet and the
+            // bubble never shows up wearing one texture and swapping to another.
+            this.setTextureIndex(this.random.nextInt(TEXTURE_COUNT) + 1);
+        }
     }
 
     public Bubble(Level level, LivingEntity owner) {
-        super(SuperMarioEntityTypes.BUBBLE, level);
+        this(SuperMarioEntityTypes.BUBBLE, level);
         this.setOwner(owner);
     }
 
@@ -142,6 +169,7 @@ public class Bubble extends Projectile implements Stompable {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(DATA_ITEM, ItemStack.EMPTY);
         builder.define(DATA_ABSORBING, false);
+        builder.define(DATA_TEXTURE, 1);
     }
 
     // ---------------------------------------------------------------- state
@@ -273,8 +301,8 @@ public class Bubble extends Projectile implements Stompable {
 
         this.setDeltaMovement(x, y, z);
         if (!this.level().isClientSide()) {
+            // No sound on rebound: bubbles bounce often enough that it turns into noise. The squish carries it.
             this.level().broadcastEntityEvent(this, squishEvent(axis));
-            this.playSound(SuperMarioSounds.BUBBLE_REBOUND.value(), 0.5F, 1.0F);
             this.notifyBlockHit(axis, switch (axis) {
                 case X -> requested.x();
                 case Y -> requested.y();
@@ -356,9 +384,14 @@ public class Bubble extends Projectile implements Stompable {
      * Checks entities overlapping the bubble, in the priority order defined by the Bubble Flower design.
      */
     private void checkEntityCollisions() {
+        // A bubble carrying an entity is not fragile: it keeps flying and goes out on its own timer, on a stomp,
+        // or when something damages it. Otherwise it bursts the moment it drifts past anything.
+        if (this.getTrappedEntity() != null) {
+            return;
+        }
         Entity owner = this.getOwner();
-        Entity trapped = this.getTrappedEntity();
-        List<Entity> entities = this.level().getEntities(this, this.getBoundingBox(), entity -> entity != trapped && !entity.isSpectator() && entity.isAlive());
+        boolean holdsItem = !this.getItem().isEmpty();
+        List<Entity> entities = this.level().getEntities(this, this.getBoundingBox(), entity -> !entity.isSpectator() && entity.isAlive());
 
         for (Entity entity : entities) {
             // Bubbles pass through one another: they are in the module tag, but popping or swallowing each other
@@ -366,9 +399,9 @@ public class Bubble extends Projectile implements Stompable {
             if (entity instanceof Bubble) {
                 continue;
             }
-            // A filled bubble pops for anything that touches it. Whoever touches it first gets what is inside.
-            if (!this.isEmpty()) {
-                if (entity instanceof Player player && !this.getItem().isEmpty()) {
+            // A bubble holding an item is a collectible: whoever touches it takes what is inside.
+            if (holdsItem) {
+                if (entity instanceof Player player) {
                     this.collectItem(player);
                 } else {
                     this.pop();
@@ -390,12 +423,6 @@ public class Bubble extends Projectile implements Stompable {
             }
             if (entity.is(SuperMarioEntityTypeTags.ALL)) {
                 this.absorb(entity);
-                return;
-            }
-            // Arrows and the like pop the bubble. Checked from here rather than left to hurtServer, so that it
-            // does not hinge on the projectile deciding to deal damage to a target with no health.
-            if (entity instanceof Projectile) {
-                this.pop();
                 return;
             }
             if (this.canTrap(entity)) {
@@ -424,9 +451,12 @@ public class Bubble extends Projectile implements Stompable {
         if (!(entity instanceof LivingEntity living)) {
             return false;
         }
+        // Health is read from the base attribute, not from getMaxHealth(): a leader zombie carries a
+        // "leader_zombie_bonus" modifier that can take it past 90 HP, but it is still an ordinary zombie as far
+        // as a bubble is concerned. Size stays as measured, since fitting inside really is a physical limit.
         return entity.getBbWidth() < MAX_TRAPPABLE_SIZE
                 && entity.getBbHeight() < MAX_TRAPPABLE_SIZE
-                && living.getMaxHealth() <= MAX_TRAPPABLE_HEALTH;
+                && living.getAttributeBaseValue(Attributes.MAX_HEALTH) <= MAX_TRAPPABLE_HEALTH;
     }
 
     /**
@@ -469,10 +499,19 @@ public class Bubble extends Projectile implements Stompable {
         if (--this.absorbTicks > 0) {
             return;
         }
+        this.finishAbsorption();
+    }
+
+    /**
+     * Turns whatever is being swallowed into its capture loot right away, without waiting for the animation.
+     */
+    private void finishAbsorption() {
         Entity absorbed = this.getTrappedEntity();
         this.entityData.set(DATA_ABSORBING, false);
         this.absorbTicks = 0;
-        if (absorbed == null) {
+        // A dying entity stays aboard for the length of its death animation, which outlasts the swallow. If it
+        // was killed on the way, there is nothing left in there to turn into loot.
+        if (absorbed == null || !absorbed.isAlive()) {
             return;
         }
         ItemStack loot = this.level() instanceof ServerLevel serverLevel ? this.rollCaptureLoot(serverLevel, absorbed) : ItemStack.EMPTY;
@@ -510,6 +549,10 @@ public class Bubble extends Projectile implements Stompable {
     public void pop() {
         if (this.level().isClientSide() || this.isRemoved()) {
             return;
+        }
+        // Popping a bubble mid-swallow does not rescue the enemy, it just finishes the job early.
+        if (this.isAbsorbing()) {
+            this.finishAbsorption();
         }
         Entity trapped = this.getTrappedEntity();
         if (trapped != null) {
@@ -611,19 +654,44 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     @Override
+    protected void positionRider(Entity passenger, Entity.MoveFunction callback) {
+        // The passenger's vehicle attachment point is deliberately skipped. Entity types declare it so riders sit
+        // properly on boats and horses -- zombies use ridingOffset(-0.7), which vanilla then subtracts, dropping
+        // them 0.7 blocks below where they were put. A bubble centres what it holds, whatever the type asks for.
+        Vec3 pos = this.getPassengerRidingPosition(passenger);
+        callback.accept(passenger, pos.x(), pos.y(), pos.z());
+    }
+
+    @Override
     public Vec3 getPassengerRidingPosition(Entity passenger) {
-        return new Vec3(this.getX(), this.getY() + (this.getBbHeight() - passenger.getBbHeight()) / 2.0, this.getZ());
+        // Derived from the passenger rather than from getBbHeight(): the cached dimensions are only refreshed
+        // once the passenger list has been applied, and reading them too early drops the rider under the bubble.
+        return new Vec3(this.getX(), this.getY() + (sizeFor(passenger) - passenger.getBbHeight()) / 2.0, this.getZ());
     }
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
-        Entity trapped = this.getFirstPassenger();
-        if (trapped == null) {
-            return EntityDimensions.fixed(BASE_SIZE, BASE_SIZE);
-        }
-        // Always stays a cube, just slightly bigger than whatever is inside.
-        float size = Math.clamp(Math.max(trapped.getBbWidth(), trapped.getBbHeight()) + TRAPPED_PADDING, BASE_SIZE, MAX_SIZE);
+        // Always a cube, whatever is inside.
+        float size = sizeFor(this.getFirstPassenger());
         return EntityDimensions.fixed(size, size);
+    }
+
+    /**
+     * @return the side of the bubble's cube. Read straight from what it holds rather than from the cached
+     * dimensions, so the sprite can never be drawn a tick behind the entity it contains.
+     */
+    public float getSize() {
+        return sizeFor(this.getFirstPassenger());
+    }
+
+    /**
+     * @return the side of the bubble's cube, always a little bigger than what it holds.
+     */
+    private static float sizeFor(@Nullable Entity trapped) {
+        if (trapped == null) {
+            return BASE_SIZE;
+        }
+        return Math.clamp(Math.max(trapped.getBbWidth(), trapped.getBbHeight()) + TRAPPED_PADDING, BASE_SIZE, MAX_SIZE);
     }
 
     // ---------------------------------------------------------------- stomping
@@ -642,7 +710,11 @@ public class Bubble extends Projectile implements Stompable {
     @Override
     public Predicate<? super Entity> getStompableBy() {
         Entity trapped = this.getTrappedEntity();
+        Entity owner = this.getOwner();
         return EntitySelector.NO_SPECTATORS.and(entity -> entity != trapped
+                // Bubbles drift into each other constantly; they must not bounce off one another.
+                && !(entity instanceof Bubble)
+                && (entity != owner || this.age >= OWNER_STOMP_DELAY)
                 && entity.isAlive()
                 && !entity.onGround()
                 && entity.getDeltaMovement().y() < 0.0D);
@@ -675,6 +747,8 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     private void tickClientAnimations() {
+        this.tickRenderSize();
+
         this.squishTicksO = this.squishTicks;
         if (this.squishTicks > 0) {
             this.squishTicks--;
@@ -687,6 +761,29 @@ public class Bubble extends Projectile implements Stompable {
             this.absorbClientTicks = 0;
             this.absorbClientTicksO = 0;
         }
+    }
+
+    private void tickRenderSize() {
+        float target = this.getSize();
+        // First tick snaps: a bubble loading in already holding something must not inflate from nothing.
+        if (this.renderSize < 0.0F) {
+            this.renderSize = target;
+            this.renderSizeO = target;
+            return;
+        }
+        this.renderSizeO = this.renderSize;
+        this.renderSize = Mth.lerp(SIZE_LERP, this.renderSize, target);
+    }
+
+    /**
+     * @return the size to draw the bubble at, eased so that swallowing something grows it smoothly. The hitbox
+     * itself still changes in one step, since that side is gameplay.
+     */
+    public float getRenderSize(float partialTicks) {
+        if (this.renderSize < 0.0F) {
+            return this.getSize();
+        }
+        return Mth.lerp(partialTicks, this.renderSizeO, this.renderSize);
     }
 
     /**
@@ -748,8 +845,19 @@ public class Bubble extends Projectile implements Stompable {
         }
     }
 
+    /**
+     * @return which of the bubble looks this one wears, from 1 to {@link #TEXTURE_COUNT}.
+     */
+    public int getTextureIndex() {
+        return this.entityData.get(DATA_TEXTURE);
+    }
+
+    public void setTextureIndex(int index) {
+        this.entityData.set(DATA_TEXTURE, Math.clamp(index, 1, TEXTURE_COUNT));
+    }
+
     public ClientAsset.ResourceTexture getTexture() {
-        return TEXTURE;
+        return TEXTURES.get(this.getTextureIndex() - 1);
     }
 
     // ---------------------------------------------------------------- serialization
@@ -764,6 +872,8 @@ public class Bubble extends Projectile implements Stompable {
         this.absorbTicks = input.getIntOr(ABSORB_TICKS_KEY, 0);
         this.trappedNoAi = input.getBooleanOr(TRAPPED_NO_AI_KEY, false);
         this.setItem(input.read(ITEM_KEY, ItemStack.CODEC).orElse(ItemStack.EMPTY));
+        // Falls back to whatever was rolled on construction, so a bubble summoned without the tag still varies.
+        this.setTextureIndex(input.getIntOr(TEXTURE_KEY, this.getTextureIndex()));
         this.entityData.set(DATA_ABSORBING, this.absorbTicks > 0);
     }
 
@@ -776,6 +886,7 @@ public class Bubble extends Projectile implements Stompable {
         output.putInt(FILLED_LIFETIME_KEY, this.filledLifetime);
         output.putInt(ABSORB_TICKS_KEY, this.absorbTicks);
         output.putBoolean(TRAPPED_NO_AI_KEY, this.trappedNoAi);
+        output.putInt(TEXTURE_KEY, this.getTextureIndex());
         if (!this.getItem().isEmpty()) {
             output.store(ITEM_KEY, ItemStack.CODEC, this.getItem());
         }

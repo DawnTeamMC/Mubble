@@ -60,7 +60,6 @@ public class SuperMarioSounds {
 
     public static final Holder.Reference<SoundEvent> BUBBLE_APPEAR = registerForHolder("entity.bubble.appear");
     public static final Holder.Reference<SoundEvent> BUBBLE_POP = registerForHolder("entity.bubble.pop");
-    public static final Holder.Reference<SoundEvent> BUBBLE_REBOUND = registerForHolder("entity.bubble.rebound");
     public static final Holder.Reference<SoundEvent> BUBBLE_FILL = registerForHolder("entity.bubble.fill");
 
     private static SoundEvent register(String path) {

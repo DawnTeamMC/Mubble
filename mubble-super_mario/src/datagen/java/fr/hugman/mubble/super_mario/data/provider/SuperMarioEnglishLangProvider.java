@@ -58,7 +58,6 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add(SuperMarioSounds.GOLD_FIREBALL_THROW.value(), "Gold Fireball thrown");
         builder.add(SuperMarioSounds.BUBBLE_APPEAR.value(), "Bubble appears");
         builder.add(SuperMarioSounds.BUBBLE_POP.value(), "Bubble pops");
-        builder.add(SuperMarioSounds.BUBBLE_REBOUND.value(), "Bubble rebounds");
         builder.add(SuperMarioSounds.BUBBLE_FILL.value(), "Bubble fills");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
