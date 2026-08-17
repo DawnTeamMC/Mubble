@@ -180,9 +180,7 @@ public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
     }
 
     public void setBumpAuthor(@Nullable Entity entity) {
-        if (entity != null) {
-            this.bumpAuthor = EntityReference.of(entity);
-        }
+        this.bumpAuthor = EntityReference.of(entity);
     }
 
 	public void setBumpDirection(@Nullable Direction bumpDirection) {
