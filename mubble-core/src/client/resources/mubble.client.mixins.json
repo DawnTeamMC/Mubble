@@ -5,7 +5,7 @@
   "client": [
     "AvatarRendererMixin",
     "ClientPacketListenerMixin",
-    "GuiMixin",
+    "HudMixin",
     "ItemInHandRendererMixin",
     "LivingEntityRendererMixin"
   ],

@@ -8,13 +8,10 @@ import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderTypes;
 import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderers;
 import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.super_mario.world.inventory.SuperMarioMenuTypes;
-import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.rendering.v1.ChunkSectionLayerMap;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 
 @Environment(EnvType.CLIENT)
 public class SuperMarioClient implements ClientModInitializer {

@@ -35,23 +35,10 @@ public class NoteBlock extends DecoratedBumpableBlock {
 	@Override
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
 		// No fall damage
-	}
-
-    @Override
-    public void updateEntityMovementAfterFallOn(BlockGetter view, Entity entity) {
-        // TODO: make a new interface for falling hittable blocks
-        Level level = entity.level();
-        if (level.isClientSide()) {
-            super.updateEntityMovementAfterFallOn(view, entity);
+        if (!level.isClientSide()) {
+            this.onHit(level, state, entity, new BlockHitResult(entity.position(), Direction.UP, pos, false));
         }
-
-        BlockPos pos = entity.blockPosition().below();
-        BlockState state = level.getBlockState(pos);
-
-        this.onHit(level, state, entity, new BlockHitResult(entity.position(), Direction.UP, pos, false));
-
-        super.updateEntityMovementAfterFallOn(view, entity);
-    }
+	}
 
 	@Override
 	public void playGenericBumpSound(BumpableBlockEntity entity) {

@@ -6,12 +6,11 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.tags.TagAppender;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
 
 import static fr.hugman.mubble.super_mario.tags.SuperMarioPowerUpTags.*;
 import static fr.hugman.mubble.tags.MubblePowerUpTags.*;
-import static fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys.*;
+import static fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds.*;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,7 +19,7 @@ public class SuperMarioPowerUpTagsProvider extends FabricTagsProvider<PowerUp> {
 		super(output, MubbleRegistries.POWER_UP, registriesFuture);
 	}
 
-	protected TagAppender<ResourceKey<PowerUp>, PowerUp> builder(TagKey<PowerUp> tag) {
+	protected TagAppender<PowerUp> builder(TagKey<PowerUp> tag) {
 		return TagAppender.forBuilder(this.getOrCreateRawBuilder(tag));
 	}
 

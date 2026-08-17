@@ -16,6 +16,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -244,12 +245,12 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     private static void spawnItem(Level level, Vec3 pos, @Nullable Direction direction, ItemStack stack) {
         pos = pos.relative(direction, 0.75D);
 
-        double entityWidth = EntityType.ITEM.getWidth();
+        double entityWidth = EntityTypes.ITEM.getWidth();
         double e = 1.0 - entityWidth;
         double f = entityWidth / 2.0;
 
         double x = Math.floor(pos.x()) + level.getRandom().nextDouble() * e + f;
-        double y = Math.floor(pos.y()) + level.getRandom().nextDouble() * (1.0 - EntityType.ITEM.getHeight());
+        double y = Math.floor(pos.y()) + level.getRandom().nextDouble() * (1.0 - EntityTypes.ITEM.getHeight());
         double z = Math.floor(pos.z()) + level.getRandom().nextDouble() * e + f;
 
         while (!stack.isEmpty()) {

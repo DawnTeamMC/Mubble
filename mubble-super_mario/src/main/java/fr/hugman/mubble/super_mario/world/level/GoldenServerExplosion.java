@@ -27,6 +27,7 @@ import net.minecraft.util.random.WeightedList;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.PrimedTnt;
@@ -120,14 +121,14 @@ public class GoldenServerExplosion implements Explosion {
         if (this.blockInteraction != Explosion.BlockInteraction.TRIGGER_BLOCK) {
             return false;
         } else {
-            return this.source != null && this.source.is(EntityType.BREEZE_WIND_CHARGE) ? this.level.getGameRules().get(GameRules.MOB_GRIEFING) : true;
+            return this.source != null && this.source.is(EntityTypes.BREEZE_WIND_CHARGE) ? this.level.getGameRules().get(GameRules.MOB_GRIEFING) : true;
         }
     }
 
     @Override
     public boolean shouldAffectBlocklikeEntities() {
         boolean mobGriefingEnabled = this.level.getGameRules().get(GameRules.MOB_GRIEFING);
-        boolean isNotWindCharge = this.source == null || !this.source.is(EntityType.BREEZE_WIND_CHARGE) && !this.source.is(EntityType.WIND_CHARGE);
+        boolean isNotWindCharge = this.source == null || !this.source.is(EntityTypes.BREEZE_WIND_CHARGE) && !this.source.is(EntityTypes.WIND_CHARGE);
         return mobGriefingEnabled ? isNotWindCharge : this.blockInteraction.shouldAffectBlocklikeEntities() && isNotWindCharge;
     }
 

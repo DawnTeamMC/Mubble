@@ -1,7 +1,7 @@
 package fr.hugman.mubble.super_mario.client.mixin;
 
 import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderTypes;
-import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.rendertype.RenderType;
@@ -17,7 +17,7 @@ public class AvatarRendererMixin {
     private RenderType super_mario$renderHand(Identifier texture) {
         var powerUp = Minecraft.getInstance().player.getPowerUp();
         if (powerUp.isPresent()) {
-            if (powerUp.get().is(SuperMarioPowerUpKeys.GOLD)) {
+            if (powerUp.get().is(SuperMarioPowerUpIds.GOLD)) {
                 return SuperMarioRenderTypes.getGoldenEntity(texture);
             }
         }

@@ -6,7 +6,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.debug.DebugScreenEntries;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
@@ -22,7 +22,7 @@ public class PowerUpPropertiesHudRendering {
     private static final Identifier CHARGE_EMPTY_TEXTURE = Mubble.id("hud/power_up_charge_empty");
     private static final int MAX_CHARGE_DISPLAY = 6;
 
-    public static void renderChargesLayer(Minecraft client, GuiGraphics context) {
+    public static void renderChargesLayer(Minecraft client, GuiGraphicsExtractor graphics) {
         if (client.player == null) {
             //TODO: log a warning?
             return;
@@ -50,15 +50,15 @@ public class PowerUpPropertiesHudRendering {
             if(chargeCount > MAX_CHARGE_DISPLAY) {
                 return;
             }
-            int startX = (context.guiWidth() + 8) / 2 + MARGIN_FROM_CROSSHAIR;
-            int y = (context.guiHeight() - CHARGE_HEIGHT) / 2;
+            int startX = (graphics.guiWidth() + 8) / 2 + MARGIN_FROM_CROSSHAIR;
+            int y = (graphics.guiHeight() - CHARGE_HEIGHT) / 2;
             for (int i = Math.min(MAX_CHARGE_DISPLAY, chargesMax) - 1; i >= 0; i--) {
                 boolean isCharged = i < chargeCount;
                 if (!isCharged && properties.chargeCounting == PowerUpProperties.ChargeCounting.ONLY_DECREASE) {
                     continue;
                 }
                 int x = startX + (i * (CHARGE_WIDTH + CHARGE_PADDING));
-                context.blitSprite(RenderPipelines.CROSSHAIR, isCharged ? CHARGE_TEXTURE : CHARGE_EMPTY_TEXTURE, x, y, CHARGE_WIDTH, CHARGE_HEIGHT);
+                graphics.blitSprite(RenderPipelines.CROSSHAIR, isCharged ? CHARGE_TEXTURE : CHARGE_EMPTY_TEXTURE, x, y, CHARGE_WIDTH, CHARGE_HEIGHT);
             }
         }
     }

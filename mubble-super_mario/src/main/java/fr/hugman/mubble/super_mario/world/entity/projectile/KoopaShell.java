@@ -1,6 +1,6 @@
 package fr.hugman.mubble.super_mario.world.entity.projectile;
 
-import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.world.phys.AABBUtil;
 import net.minecraft.core.Direction;
@@ -135,7 +135,7 @@ public abstract class KoopaShell extends Projectile {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         this.rebounds--;
-        result.getEntity().hurt(this.damageSources().source(SuperMarioDamageTypeKeys.KOOPA_SHELL, this, this.getOwner()), 2.0F);
+        result.getEntity().hurt(this.damageSources().source(SuperMarioDamageTypeIds.KOOPA_SHELL, this, this.getOwner()), 2.0F);
 
         var bounce = true;
 

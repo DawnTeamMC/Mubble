@@ -8,8 +8,8 @@ import net.minecraft.tags.EntityTypeTags;
 import java.util.concurrent.CompletableFuture;
 
 import static fr.hugman.mubble.super_mario.tags.SuperMarioEntityTypeTags.*;
-import static fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes.*;
-import static net.minecraft.world.entity.EntityType.*;
+import static fr.hugman.mubble.super_mario.references.SuperMarioEntityTypeIds.*;
+import static net.minecraft.world.entity.EntityTypeIds.*;
 
 public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityTypeTagsProvider {
 	public SuperMarioEntityTypeTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
@@ -19,12 +19,12 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
 		// Mod
-		valueLookupBuilder(KOOPA_SHELLS).add(GREEN_KOOPA_SHELL, RED_KOOPA_SHELL);
-        valueLookupBuilder(CAN_STOMP).add(PLAYER);
-        valueLookupBuilder(STOMPABLE).add(GOOMBA, GREEN_KOOPA_SHELL);
+		builder(KOOPA_SHELLS).add(GREEN_KOOPA_SHELL, RED_KOOPA_SHELL);
+		builder(CAN_STOMP).add(PLAYER);
+		builder(STOMPABLE).add(GOOMBA, GREEN_KOOPA_SHELL);
 
 		// Vanilla
-		valueLookupBuilder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA);
-		valueLookupBuilder(EntityTypeTags.NOT_SCARY_FOR_PUFFERFISH).add(GOOMBA);
+		builder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA);
+		builder(EntityTypeTags.NOT_SCARY_FOR_PUFFERFISH).add(GOOMBA);
 	}
 }

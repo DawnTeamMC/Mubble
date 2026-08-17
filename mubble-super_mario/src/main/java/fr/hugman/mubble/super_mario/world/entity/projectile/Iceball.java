@@ -1,8 +1,7 @@
 package fr.hugman.mubble.super_mario.world.entity.projectile;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.super_mario.SuperMario;
-import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.attribute.SuperMarioEnvironmentAttributes;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
@@ -70,7 +69,7 @@ public class Iceball extends Ball {
             }
         }
 
-        entity.hurt(this.damageSources().source(SuperMarioDamageTypeKeys.ICEBALL, this, this.getOwner()), damage);
+        entity.hurt(this.damageSources().source(SuperMarioDamageTypeIds.ICEBALL, this, this.getOwner()), damage);
         this.finalHit(SuperMarioSounds.ICEBALL_HIT_ENTITY);
     }
 
