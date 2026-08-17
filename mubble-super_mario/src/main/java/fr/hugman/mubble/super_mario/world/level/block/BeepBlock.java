@@ -109,10 +109,6 @@ public class BeepBlock extends Block {
         level.setBlockAndUpdate(pos, getStateAtTime(level));
     }
 
-    /**
-     * Schedules the next state change, which happens whenever the world time reaches a multiple of the
-     * cooldown -- the very times {@link #getStateAtTime} flips the state at.
-     */
     public void scheduleTick(Level level, BlockPos pos, Block block) {
         if (level instanceof ServerLevel serverLevel) {
             int cooldown = serverLevel.getGameRules().get(SuperMarioGameRules.BEEP_BLOCK_COOLDOWN);

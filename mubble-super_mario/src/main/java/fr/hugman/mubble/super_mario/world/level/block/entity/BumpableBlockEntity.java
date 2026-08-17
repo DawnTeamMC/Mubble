@@ -179,14 +179,6 @@ public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
 		return EntityReference.getEntity(this.bumpAuthor, this.getLevel());
     }
 
-	/**
-	 * Sets the entity a bump is credited to, {@code null} clearing it once the bump is over.
-	 * <p>
-	 * Clearing it matters: an {@link EntityReference} built from an entity holds that entity itself, and only
-	 * ever gives it up for its UUID when it is read back after the entity has been removed. A block keeping
-	 * its last bumper forever therefore keeps whatever that entity holds on to -- a whole player, connection
-	 * and inventory included, long after they disconnected.
-	 */
     public void setBumpAuthor(@Nullable Entity entity) {
         this.bumpAuthor = EntityReference.of(entity);
     }
