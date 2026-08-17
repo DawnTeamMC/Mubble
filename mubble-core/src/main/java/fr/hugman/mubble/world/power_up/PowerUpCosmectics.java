@@ -38,8 +38,8 @@ public record PowerUpCosmectics(
             ParticleTypes.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::particle,
             SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::obtainSound,
             SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::emitSound,
-            SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::refillSound,
             SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::looseSound,
+            SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::refillSound,
             Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpCosmectics::humanoidOverlayAssetId,
             ByteBufCodecs.BOOL, PowerUpCosmectics::emissiveOverlay,
             PowerUpCosmectics::new
