@@ -14,3 +14,7 @@ include 'mubble-bom'
 
 include 'mubble-core'
 include 'mubble-super_mario'
+
+// Single module holding the tests of every other module. Must stay last so that
+// the modules it depends on are already evaluated.
+include 'mubble-test'

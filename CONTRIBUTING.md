@@ -15,6 +15,28 @@ We strongly recommend you use [IntelliJ IDEA Community Edition](https://www.jetb
 
 If you have any questions or issues, or would just like to discuss Mubble development, feel free to [join us on Discord](https://discord.gg/8ksTVJu).
 
+### Running the tests
+All the tests of the project live in the `mubble-test` module, which is never shipped nor published.
+They come in two flavours:
+
+- **Unit tests** (`mubble-test/src/test`) run on plain JUnit 5, with Minecraft bootstrapped by
+  [`fabric-loader-junit`](https://docs.fabricmc.net/develop/automatic-testing/unit-tests) but no
+  world loaded. Use them for logic that does not need a level.
+- **Game tests** (`mubble-test/src/gametest`) run inside a headless Minecraft server through the
+  [Fabric Game Test API](https://docs.fabricmc.net/develop/automatic-testing/game-tests). Use them
+  for in-game behaviour such as blocks, entities or projectiles. Each test method is annotated with
+  `@GameTest` and must be listed (through its class) in `mubble-test/src/gametest/resources/fabric.mod.json`.
+
+```sh
+./gradlew runDatagen   # game tests load the generated data pack, so generate it first
+./gradlew test         # unit tests
+./gradlew runGameTest  # game tests
+```
+
+`./gradlew build` runs both suites, but it still needs `runDatagen` to have been run once beforehand,
+since a data pack cannot be generated and consumed within the same invocation. This is why the CI
+workflow keeps them as two separate steps.
+
 ### Creating pull requests
 Please make sure before opening a pull request that:
 

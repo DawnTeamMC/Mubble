@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "name": "Mubble (Game Tests)",
+  "id": "mubble-gametest",
+  "version": "1.0.0",
+  "authors": [
+    "Hugman"
+  ],
+  "environment": "*",
+  "entrypoints": {
+    "fabric-gametest": [
+      "fr.hugman.mubble.test.gametest.super_mario.BallGameTest"
+    ]
+  },
+  "depends": {
+    "fabric-gametest-api-v1": "*",
+    "mubble": "*",
+    "super_mario": "*"
+  }
+}

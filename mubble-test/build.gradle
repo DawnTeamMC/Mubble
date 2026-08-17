@@ -1,0 +1,68 @@
+version = getSubprojectVersion(project)
+
+// Every module is tested from here, so that a single test module covers the whole project.
+moduleDependencies(project, [
+    'mubble-core',
+    'mubble-super_mario',
+])
+
+// Creates the `gametest` source set and the `runGameTest` task, and hooks the latter into `check`.
+// See https://docs.fabricmc.net/develop/automatic-testing/game-tests
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = 'mubble-gametest'
+        eula = true
+        enableGameTests = true
+        // Client game tests need a real window, which CI does not have.
+        enableClientGameTests = false
+    }
+}
+
+// JUnit XML report of the game tests, so that CI can publish it next to the unit test one.
+def gameTestReport = layout.buildDirectory.file('test-results/gametest/results.xml')
+
+loom {
+    runs {
+        named('gameTest') {
+            property 'fabric-api.gametest.report-file', gameTestReport.get().asFile.absolutePath
+        }
+    }
+}
+
+tasks.named('runGameTest') {
+    doFirst {
+        gameTestReport.get().asFile.parentFile.mkdirs()
+    }
+}
+
+dependencies {
+    // Boots Knot (mixins, mod discovery, remapping) around JUnit so tests can touch Minecraft classes.
+    // See https://docs.fabricmc.net/develop/automatic-testing/unit-tests
+    testImplementation "net.fabricmc:fabric-loader-junit:${project.loader_version}"
+}
+
+test {
+    useJUnitPlatform()
+
+    // Minecraft's log4j setup writes next to the working directory: keep it out of the sources.
+    workingDir = layout.buildDirectory.dir('test-run').get().asFile
+    doFirst {
+        workingDir.mkdirs()
+    }
+
+    testLogging {
+        events "failed"
+        exceptionFormat "full"
+    }
+}
+
+// Game tests load the mod's data pack (damage types, power-ups, tags...), which is generated into
+// `src/generated/resources` and picked up by `processResources`. Since `runDatagen` itself needs the
+// processed resources, the two cannot be ordered inside a single invocation: run `./gradlew runDatagen`
+// once beforehand, exactly like the CI workflow does.
+
+// Nothing to ship from this module.
+tasks.matching { it.name in ['jar', 'sourcesJar', 'remapJar', 'remapSourcesJar'] }.configureEach {
+    enabled = false
+}

@@ -16,6 +16,10 @@ dependencies {
 				continue
 			}
 
+			if (rootProject.ext.testProjects.contains(proj.name)) { // test-only modules are not published
+				continue
+			}
+
 			api(project(proj.path))
 		}
 	}
