@@ -45,8 +45,15 @@ public class RedKoopaShell extends KoopaShell {
     /** Height the shell climbs over on its own, so that terrain does not stop it a block into its course. */
     private static final float STEP_HEIGHT = 1.0f;
 
+    /**
+     * Conditions a candidate has to meet to be worth homing in on, beyond being within reach.
+     * <p>
+     * Deliberately no {@link TargetingConditions#range}: it is measured from the entity handed over to
+     * {@link ServerLevel#getNearestEntity}, which here is the owner rather than the shell, so it would rule
+     * out everything more than {@link #MAX_TARGET_DISTANCE} away from whoever threw the shell. Distance is
+     * checked from the shell itself in {@link #isValidTarget} instead.
+     */
     private static final TargetingConditions TARGET_PREDICATE = TargetingConditions.forCombat()
-            .range(MAX_TARGET_DISTANCE)
             .ignoreLineOfSight()
             .ignoreInvisibilityTesting()
             .selector((target, w) -> target.attackable());
@@ -155,7 +162,11 @@ public class RedKoopaShell extends KoopaShell {
         }
         // an owner-less shell, thrown by a dispenser for instance, still homes in: it just has no one to spare
         Entity owner = this.getOwner();
-        var candidates = serverLevel.getEntitiesOfClass(LivingEntity.class, this.getSearchBox(MAX_TARGET_DISTANCE), candidate -> candidate != owner);
+        // the search box is a cube, so its corners reach further than the shell is willing to home in from:
+        // filtering on the same conditions the target is later kept on avoids locking onto one of those, only
+        // to drop it on the very next tick
+        var candidates = serverLevel.getEntitiesOfClass(LivingEntity.class, this.getSearchBox(MAX_TARGET_DISTANCE),
+                candidate -> candidate != owner && this.isValidTarget(candidate));
         return serverLevel.getNearestEntity(
                 candidates,
                 TARGET_PREDICATE,

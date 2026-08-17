@@ -115,6 +115,8 @@ public abstract class KoopaShell extends Projectile {
         var previousPosition = this.position();
         this.move(MoverType.SELF, requestedMovement);
 
+        this.applyEffectsFromBlocks();
+
         if (!wasStopped) {
             this.bounceOffWalls(requestedMovement, this.position().subtract(previousPosition));
             if (this.isRemoved()) {
