@@ -37,6 +37,32 @@ They come in two flavours:
 since a data pack cannot be generated and consumed within the same invocation. This is why the CI
 workflow keeps them as two separate steps.
 
+Game tests also load data written by hand in `mubble-test/src/gametest/resources/data`, under the
+`mubble-gametest` namespace. That is where the entries a test needs but no module ships belong:
+power-ups with every field left out, actions referenced by id rather than inlined... Writing them by
+hand rather than generating them is deliberate, since it puts them through the very same loading path
+as a third-party data pack. Their keys are declared in `PowerUpFixtures`.
+
+### Running the test mod
+The `mubble-testmod` module is a sandbox: a mod of its own, sitting on top of every shipped module
+and registering content meant to be played with by hand. Like `mubble-test`, it is never shipped,
+nested in the release jar nor published.
+
+```sh
+./gradlew :mubble-testmod:runClient
+./gradlew :mubble-testmod:runServer
+```
+
+Whatever a data pack can define is defined in `src/main/resources/data`; only the items and the
+creative tab, which the registries alone can hold, are in code. It currently has a snowball power-up
+along with the flower granting it, on a placeholder texture recoloured from the fire flower. Note
+that a power-up also needs its HUD sprite declared in `assets/minecraft/atlases/gui.json`, or it
+renders as a missing texture.
+
+The test module deliberately does **not** depend on it. The sandbox is there to make a state easy to
+reach while playing, not to be exhaustive, and the tests must run against the shipped modules plus
+their own data — never against content no player will ever get.
+
 ### Creating pull requests
 Please make sure before opening a pull request that:
 

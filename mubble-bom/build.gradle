@@ -16,7 +16,7 @@ dependencies {
 				continue
 			}
 
-			if (rootProject.ext.testProjects.contains(proj.name)) { // test-only modules are not published
+			if (rootProject.ext.unshippedProjects.contains(proj.name)) { // test-only and dev-only modules are not published
 				continue
 			}
 

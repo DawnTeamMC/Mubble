@@ -1,0 +1,33 @@
+version = getSubprojectVersion(project)
+
+// The sandbox sits on top of every shipped module, so that it can build on all of them.
+moduleDependencies(project, [
+    'mubble-core',
+    'mubble-super_mario',
+])
+
+loom {
+    // Dev-only modules are skipped by the mod registration of the root build script, so this one has
+    // to register itself for its own runs.
+    mods.register(project.name) {
+        sourceSet sourceSets.main
+        sourceSet sourceSets.client
+    }
+
+    runs {
+        client {
+            name = "Minecraft Client with Test Mod"
+            ideConfigGenerated = true
+        }
+        server {
+            name = "Minecraft Server with Test Mod"
+            ideConfigGenerated = true
+        }
+    }
+}
+
+// Note: no data generation here on purpose. The data pack is small enough to be written by hand,
+// and doing so keeps the sandbox content editable without a build.
+
+// Its jars are still built, so that the module behaves like any other, but the root build script
+// keeps them out of the BOM, out of the release jar and out of anything published.

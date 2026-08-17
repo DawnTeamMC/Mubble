@@ -9,7 +9,8 @@
   "environment": "*",
   "entrypoints": {
     "fabric-gametest": [
-      "fr.hugman.mubble.test.gametest.super_mario.BallGameTest"
+      "fr.hugman.mubble.test.gametest.super_mario.BallGameTest",
+      "fr.hugman.mubble.test.gametest.datapack.DataPackPowerUpGameTest"
     ]
   },
   "depends": {
