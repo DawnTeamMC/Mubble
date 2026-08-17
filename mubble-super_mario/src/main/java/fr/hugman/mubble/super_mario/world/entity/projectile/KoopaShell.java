@@ -43,6 +43,13 @@ public abstract class KoopaShell extends Projectile {
      * collision. Mirrors the tolerance vanilla itself uses to flag horizontal collisions.
      */
     private static final double COLLISION_TOLERANCE = 1.0e-4;
+    /**
+     * Movement below this length, squared, counts as none at all for the purpose of scanning for hits.
+     * <p>
+     * A shell resting on the ground sits at exactly zero: gravity is cancelled by the ground on the very tick
+     * it is applied, so the movement left over at the start of the next tick is nothing.
+     */
+    private static final double IDLE_MOVEMENT_THRESHOLD = 1.0e-8;
 
     private static final float FULL_TURN = (float) (Math.PI * 2.0);
     /** Radians the shell model spins by per block travelled. */
@@ -91,10 +98,15 @@ public abstract class KoopaShell extends Projectile {
         // a shell at a standstill only falls: it neither bounces nor tries to reach its cruising speed
         boolean wasStopped = this.isStopped();
 
-        HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
-        this.hitTargetOrDeflectSelf(hitResult);
-        if (this.isRemoved()) {
-            return;
+        // a shell that is not going anywhere cannot run into anything, and scanning for what it would run
+        // into is not free: it sweeps every entity within a block of it. Shells never despawn, so without
+        // this a world slowly fills up with resting shells that each keep paying for that sweep every tick.
+        if (this.getDeltaMovement().lengthSqr() > IDLE_MOVEMENT_THRESHOLD) {
+            HitResult hitResult = ProjectileUtil.getHitResultOnMoveVector(this, this::canHitEntity);
+            this.hitTargetOrDeflectSelf(hitResult);
+            if (this.isRemoved()) {
+                return;
+            }
         }
 
         this.applyGravity();
