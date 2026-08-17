@@ -109,13 +109,20 @@ public class BeepBlock extends Block {
         level.setBlockAndUpdate(pos, getStateAtTime(level));
     }
 
+    /**
+     * Schedules the next state change, which happens whenever the world time reaches a multiple of the
+     * cooldown -- the very times {@link #getStateAtTime} flips the state at.
+     */
     public void scheduleTick(Level level, BlockPos pos, Block block) {
         if (level instanceof ServerLevel serverLevel) {
             int cooldown = serverLevel.getGameRules().get(SuperMarioGameRules.BEEP_BLOCK_COOLDOWN);
             if (cooldown > 0) {
                 long worldTime = level.getGameTime();
-                int delta = (int) (cooldown - worldTime);
-                level.scheduleTick(pos, block, (delta == 0) ? cooldown : delta % cooldown);
+                // floorMod, as the world time is past the cooldown within the first seconds of a world:
+                // the remainder of a plain modulo would be negative from then on, which schedules the tick
+                // in the past and has every beep block tick again on the very next tick, forever.
+                int delay = Math.floorMod(-worldTime, cooldown);
+                level.scheduleTick(pos, block, (delay == 0) ? cooldown : delay);
             }
         }
     }
