@@ -1,7 +1,6 @@
 package fr.hugman.mubble.super_mario.client.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import fr.hugman.mubble.super_mario.client.references.SuperMarioRenderStateDataKeys;
 import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderTypes;
 import fr.hugman.mubble.super_mario.client.renderer.entity.state.GoombaRenderState;
@@ -12,7 +11,10 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.state.LivingEntityRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
+import org.joml.Quaternionf;
+import org.joml.Vector3fc;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -44,15 +46,50 @@ public class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingE
             return;
         }
         float ticks = entity.tickCount + partialTicks;
+        // Every entity gets its own phase, so two things caught at once do not tumble in lockstep.
         float seed = entity.getId() * 0.7F;
         float absorb = bubble.getAbsorbProgress(partialTicks);
-        // Being swallowed adds a whirl on top of the idle tumble. It ramps up from zero so nothing snaps.
-        float whirl = absorb * absorb * 6.0F;
-        state.setData(SuperMarioRenderStateDataKeys.BUBBLE_RIDE, new SuperMarioRenderStateDataKeys.BubbleRide(
-                ticks * 0.11F + seed + whirl,
-                ticks * 0.077F + seed * 1.3F + whirl * 1.4F,
-                1.0F - absorb
-        ));
+        float settle = bubble.getSettleProgress(partialTicks);
+        float spin = 1.0F - settle;
+        // Being swallowed spins it up on top of the idle tumble. Ramped from zero so nothing snaps.
+        float whirl = absorb * absorb * 7.0F;
+
+        // The bubble's heading when it caught this leans the tumble: something scooped up at speed rolls end
+        // over end along the way the bubble was going, and rolls faster the harder it was hit.
+        Vector3fc caught = bubble.getCaptureMotion();
+        float heading = Mth.sqrt(caught.x() * caught.x() + caught.z() * caught.z());
+        float rate = 0.06F + heading * 0.35F;
+        // The roll is rounded to a whole number of turns. Landing on one at the end means the final rotation,
+        // by then around the upright axis, is the identity: the captive is drawn exactly where it will be
+        // standing once the bubble lets go, so nothing jumps at the moment it pops.
+        int turns = Math.max(1, Math.round(rate * bubble.getFilledLifetime() * 0.5F / Mth.TWO_PI));
+        // Eases in with a rate falling linearly to nothing, so it keeps advancing the whole way instead of
+        // turning at full speed and then stopping dead. It never runs backwards.
+        float rolled = turns * Mth.TWO_PI * (2.0F * settle - settle * settle) + whirl;
+
+        // The axis the roll happens around leans from horizontal to vertical as the captive settles, so the
+        // tumble turns into a plain spin on the spot and leaves it standing upright. Unwinding the roll
+        // instead would have to pick a direction to unwind in, and that choice flips once the roll passes
+        // half a turn, which reads as a snap. rotateAxis normalises, so the axis only has to point right.
+        float leanX = 0.0F;
+        float leanZ = 0.0F;
+        if (heading > 1.0E-4F) {
+            leanX = -caught.z() / heading * spin;
+            leanZ = caught.x() / heading * spin;
+        } else {
+            leanX = spin;
+        }
+
+        // No yaw of its own: any leftover turn would have to be unwound at the end, and the whole point is
+        // that the last frame of the tumble already matches the orientation the entity keeps after the pop.
+        Quaternionf rotation = new Quaternionf().rotateAxis(rolled, leanX, settle, leanZ);
+        // Drifts at rates that share no common period, so the tumble never settles into a visible loop. They
+        // fade out as it comes to rest.
+        rotation.rotateX(Mth.sin(ticks * 0.023F + seed * 1.7F) * 0.9F * spin);
+        rotation.rotateZ(Mth.cos(ticks * 0.019F + seed * 0.6F) * 0.6F * spin);
+
+        state.setData(SuperMarioRenderStateDataKeys.BUBBLE_RIDE,
+                new SuperMarioRenderStateDataKeys.BubbleRide(rotation, 1.0F - absorb));
     }
 
     @Inject(method = "setupRotations", at = @At("TAIL"))
@@ -64,8 +101,7 @@ public class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingE
         // Tumble and shrink around the middle of the entity rather than around its feet.
         float centerY = state.boundingBoxHeight / 2.0F;
         poseStack.translate(0.0F, centerY, 0.0F);
-        poseStack.mulPose(Axis.XP.rotation(ride.xRot()));
-        poseStack.mulPose(Axis.ZP.rotation(ride.zRot()));
+        poseStack.mulPose(ride.rotation());
         poseStack.scale(ride.scale(), ride.scale(), ride.scale());
         poseStack.translate(0.0F, -centerY, 0.0F);
     }

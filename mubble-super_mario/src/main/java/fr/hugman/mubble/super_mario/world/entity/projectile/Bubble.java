@@ -5,6 +5,7 @@ import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.tags.SuperMarioEntityTypeTags;
 import fr.hugman.mubble.super_mario.tags.SuperMarioItemTags;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.entity.FallGraced;
 import fr.hugman.mubble.super_mario.world.entity.Stompable;
 import fr.hugman.mubble.super_mario.world.entity.item.SuperMarioCollectibles;
 import fr.hugman.mubble.super_mario.world.level.storage.loot.SuperMarioBuiltInLootTables;
@@ -20,7 +21,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -50,6 +50,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
+import org.joml.Vector3fc;
 import org.jspecify.annotations.Nullable;
 
 import java.util.List;
@@ -91,6 +93,8 @@ public class Bubble extends Projectile implements Stompable {
     public static final int ABSORB_DURATION = 12;
     /** Ticks the squish animation lasts after rebounding against a block. */
     public static final int SQUISH_DURATION = 6;
+    /** Ticks the wobble lasts after the bubble closes around something. */
+    public static final int CAPTURE_WOBBLE_DURATION = 10;
 
     public static final double ATTRACT_RADIUS = 2.0;
     public static final float MAX_TRAPPABLE_SIZE = 2.0f;
@@ -113,31 +117,41 @@ public class Bubble extends Projectile implements Stompable {
     /** Cosine of the half-angle of the cone the target has to be in. Roughly 55 degrees. */
     private static final double AIM_ASSIST_MIN_DOT = 0.57;
     private static final float STOMP_BOOST = 0.7f;
+    /**
+     * Blocks of free fall handed out by a bounce. Vanilla clamps accumulated fall to one block when a
+     * wind charge throws you up; a bubble is kinder than that and starts the next fall in credit, so that
+     * chaining bounces does not end in a broken ankle.
+     */
+    private static final double BOUNCE_FALL_GRACE = 2.0;
     /** How fast the drawn size catches up with the real one when the bubble swallows or releases something. */
     private static final float SIZE_LERP = 0.4F;
+    /** Peak of the squash-and-stretch that runs when the bubble closes around something. */
+    private static final float CAPTURE_WOBBLE_AMOUNT = 0.3F;
 
     // Entity events, well above the vanilla range.
     private static final byte EVENT_SQUISH_X = 100;
     private static final byte EVENT_SQUISH_Y = 101;
     private static final byte EVENT_SQUISH_Z = 102;
+    private static final byte EVENT_CAPTURE_WOBBLE = 103;
 
     private static final String AGE_KEY = "age";
     private static final String FILLED_AGE_KEY = "filled_age";
     private static final String LIFETIME_KEY = "lifetime";
     private static final String FILLED_LIFETIME_KEY = "filled_lifetime";
-    private static final String ITEM_KEY = "item";
+    private static final String CAPTURE_MOTION_KEY = "capture_motion";
     private static final String ABSORB_TICKS_KEY = "absorb_ticks";
     private static final String TRAPPED_NO_AI_KEY = "trapped_no_ai";
     private static final String TEXTURE_KEY = "texture";
 
-    private static final EntityDataAccessor<ItemStack> DATA_ITEM = SynchedEntityData.defineId(Bubble.class, EntityDataSerializers.ITEM_STACK);
+    private static final EntityDataAccessor<Vector3fc> DATA_CAPTURE_MOTION = SynchedEntityData.defineId(Bubble.class, EntityDataSerializers.VECTOR3);
     private static final EntityDataAccessor<Boolean> DATA_ABSORBING = SynchedEntityData.defineId(Bubble.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Integer> DATA_TEXTURE = SynchedEntityData.defineId(Bubble.class, EntityDataSerializers.INT);
+    /** Synced because the client paces the settling animation over it. */
+    private static final EntityDataAccessor<Integer> DATA_FILLED_LIFETIME = SynchedEntityData.defineId(Bubble.class, EntityDataSerializers.INT);
 
     private int age;
     private int filledAge;
     private int lifetime = DEFAULT_LIFETIME;
-    private int filledLifetime = DEFAULT_FILLED_LIFETIME;
     private int absorbTicks;
     /** Whether the trapped mob already had its AI disabled before it got caught. */
     private boolean trappedNoAi;
@@ -147,6 +161,10 @@ public class Bubble extends Projectile implements Stompable {
     private Direction.Axis squishAxis = Direction.Axis.Y;
     private int absorbClientTicks;
     private int absorbClientTicksO;
+    private int captiveClientTicks;
+    private int captiveClientTicksO;
+    private int captureWobbleTicks;
+    private int captureWobbleTicksO;
     /** Client-side eased size. Negative until the first tick, which is how the initial snap is detected. */
     private float renderSize = -1.0F;
     private float renderSizeO = -1.0F;
@@ -167,19 +185,20 @@ public class Bubble extends Projectile implements Stompable {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
-        builder.define(DATA_ITEM, ItemStack.EMPTY);
+        builder.define(DATA_CAPTURE_MOTION, new Vector3f());
         builder.define(DATA_ABSORBING, false);
         builder.define(DATA_TEXTURE, 1);
+        builder.define(DATA_FILLED_LIFETIME, DEFAULT_FILLED_LIFETIME);
     }
 
     // ---------------------------------------------------------------- state
 
-    public ItemStack getItem() {
-        return this.entityData.get(DATA_ITEM);
-    }
-
-    public void setItem(ItemStack stack) {
-        this.entityData.set(DATA_ITEM, stack);
+    /**
+     * @return the motion the bubble had at the moment it caught what it holds. Purely cosmetic: it tilts the
+     * way the contents tumble, so something caught by a fast bubble spins along the bubble's flight path.
+     */
+    public Vector3fc getCaptureMotion() {
+        return this.entityData.get(DATA_CAPTURE_MOTION);
     }
 
     public boolean isAbsorbing() {
@@ -195,10 +214,10 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     /**
-     * @return whether the bubble holds neither an entity nor an item.
+     * @return whether the bubble holds nothing at all.
      */
     public boolean isEmpty() {
-        return this.getTrappedEntity() == null && this.getItem().isEmpty();
+        return this.getTrappedEntity() == null;
     }
 
     public int getLifetime() {
@@ -210,11 +229,11 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     public int getFilledLifetime() {
-        return this.filledLifetime;
+        return this.entityData.get(DATA_FILLED_LIFETIME);
     }
 
     public void setFilledLifetime(int filledLifetime) {
-        this.filledLifetime = filledLifetime;
+        this.entityData.set(DATA_FILLED_LIFETIME, filledLifetime);
     }
 
     // ---------------------------------------------------------------- ticking
@@ -339,7 +358,8 @@ public class Bubble extends Projectile implements Stompable {
             return;
         }
         this.filledAge++;
-        if (this.filledLifetime >= 0 && this.filledAge >= this.filledLifetime) {
+        int filledLifetime = this.getFilledLifetime();
+        if (filledLifetime >= 0 && this.filledAge >= filledLifetime) {
             this.pop();
         }
     }
@@ -384,14 +404,14 @@ public class Bubble extends Projectile implements Stompable {
      * Checks entities overlapping the bubble, in the priority order defined by the Bubble Flower design.
      */
     private void checkEntityCollisions() {
-        // A bubble carrying an entity is not fragile: it keeps flying and goes out on its own timer, on a stomp,
+        Entity held = this.getTrappedEntity();
+        // A bubble carrying a captive is not fragile: it keeps flying and goes out on its own timer, on a stomp,
         // or when something damages it. Otherwise it bursts the moment it drifts past anything.
-        if (this.getTrappedEntity() != null) {
+        if (held != null && !isReward(held)) {
             return;
         }
         Entity owner = this.getOwner();
-        boolean holdsItem = !this.getItem().isEmpty();
-        List<Entity> entities = this.level().getEntities(this, this.getBoundingBox(), entity -> !entity.isSpectator() && entity.isAlive());
+        List<Entity> entities = this.level().getEntities(this, this.getBoundingBox(), entity -> entity != held && !entity.isSpectator() && entity.isAlive());
 
         for (Entity entity : entities) {
             // Bubbles pass through one another: they are in the module tag, but popping or swallowing each other
@@ -399,13 +419,12 @@ public class Bubble extends Projectile implements Stompable {
             if (entity instanceof Bubble) {
                 continue;
             }
-            // A bubble holding an item is a collectible: whoever touches it takes what is inside.
-            if (holdsItem) {
-                if (entity instanceof Player player) {
-                    this.collectItem(player);
-                } else {
-                    this.pop();
+            // A bubble holding a reward is a collectible: whoever touches it takes what is inside.
+            if (held != null) {
+                if (entity instanceof Player player && held instanceof CollectibleEntity collectible) {
+                    collectible.collect(player);
                 }
+                this.pop();
                 return;
             }
             // The owner is checked before the blacklist: players are blacklisted, but the owner still needs its
@@ -489,6 +508,8 @@ public class Bubble extends Projectile implements Stompable {
         if (!entity.startRiding(this, true, true)) {
             return false;
         }
+        this.entityData.set(DATA_CAPTURE_MOTION, this.getDeltaMovement().toVector3f());
+        this.level().broadcastEntityEvent(this, EVENT_CAPTURE_WOBBLE);
         if (entity instanceof Mob mob) {
             mob.setNoAi(true);
         }
@@ -517,7 +538,7 @@ public class Bubble extends Projectile implements Stompable {
         ItemStack loot = this.level() instanceof ServerLevel serverLevel ? this.rollCaptureLoot(serverLevel, absorbed) : ItemStack.EMPTY;
         absorbed.stopRiding();
         absorbed.discard();
-        this.setItem(loot);
+        this.holdReward(loot);
         this.refreshDimensions();
     }
 
@@ -531,19 +552,36 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     /**
-     * Hands the item held inside over to a player, the same way a collectible would.
+     * Puts the capture loot inside the bubble as a real entity rather than as a stored stack, so that a coin
+     * keeps a coin's size and its own spinning animation.
      */
-    private void collectItem(Player player) {
-        // Copied, because the inventory shrinks the stack it is handed and the synced one must not be touched.
-        ItemStack stack = this.getItem().copy();
-        int count = stack.getCount();
-        if (player.getInventory().add(stack)) {
-            player.take(this, count - stack.getCount());
-            SuperMarioCollectibles.collectSound().play(this.random, this.level(), this.getX(), this.getY(), this.getZ(), SoundSource.PLAYERS);
+    private void holdReward(ItemStack loot) {
+        if (loot.isEmpty()) {
+            return;
         }
-        // Whatever did not fit stays inside and gets spawned back by pop().
-        this.setItem(stack);
-        this.pop();
+        Entity reward = createReward(this.level(), loot);
+        Vec3 center = this.getBoundingBox().getCenter();
+        reward.setPos(center.x(), center.y(), center.z());
+        this.level().addFreshEntity(reward);
+        reward.startRiding(this, true, true);
+    }
+
+    private static Entity createReward(Level level, ItemStack stack) {
+        if (stack.is(SuperMarioItemTags.SPAWNS_AS_COLLECTIBLE)) {
+            CollectibleEntity collectible = new CollectibleEntity(level, 0.0, 0.0, 0.0, stack);
+            SuperMarioCollectibles.configure(collectible, stack);
+            // Held still by the bubble; it only starts falling once the bubble lets go of it.
+            collectible.setFixed(true);
+            return collectible;
+        }
+        return new ItemEntity(level, 0.0, 0.0, 0.0, stack);
+    }
+
+    /**
+     * @return whether what the bubble holds is loot to hand out rather than a captive to carry.
+     */
+    private static boolean isReward(Entity held) {
+        return held instanceof CollectibleEntity || held instanceof ItemEntity;
     }
 
     public void pop() {
@@ -557,36 +595,24 @@ public class Bubble extends Projectile implements Stompable {
         Entity trapped = this.getTrappedEntity();
         if (trapped != null) {
             trapped.stopRiding();
+            this.releaseReward(trapped);
         }
-        this.dropItem();
         this.level().broadcastEntityEvent(this, EntityEvent.DEATH);
         this.playSound(SuperMarioSounds.BUBBLE_POP.value(), 0.5F, 1.0F);
         this.discard();
     }
 
     /**
-     * Spawns whatever the bubble was holding. Items tagged as collectibles come back as such, so that a coin
-     * bubble popped by a stray arrow still leaves a coin behind rather than a plain item stack.
+     * Lets a reward drop out of a popping bubble instead of leaving it hanging where the bubble was.
      */
-    private void dropItem() {
-        ItemStack stack = this.getItem();
-        if (stack.isEmpty()) {
+    private void releaseReward(Entity reward) {
+        if (!isReward(reward)) {
             return;
         }
-        this.setItem(ItemStack.EMPTY);
-        Vec3 center = this.getBoundingBox().getCenter();
-
-        if (stack.is(SuperMarioItemTags.SPAWNS_AS_COLLECTIBLE)) {
-            CollectibleEntity collectible = new CollectibleEntity(this.level(), center.x(), center.y(), center.z(), stack);
-            SuperMarioCollectibles.configure(collectible, stack);
+        if (reward instanceof CollectibleEntity collectible) {
             collectible.setFixed(false);
-            collectible.setDeltaMovement(this.getDeltaMovement().scale(0.5));
-            this.level().addFreshEntity(collectible);
-            return;
         }
-        ItemEntity item = new ItemEntity(this.level(), center.x(), center.y(), center.z(), stack);
-        item.setDeltaMovement(this.getDeltaMovement().scale(0.5));
-        this.level().addFreshEntity(item);
+        reward.setDeltaMovement(this.getDeltaMovement().scale(0.5));
     }
 
     @Override
@@ -732,7 +758,13 @@ public class Bubble extends Projectile implements Stompable {
         if (entity instanceof ServerPlayer player) {
             player.connection.send(new ClientboundSetEntityMotionPacket(player));
         }
+        // Wipes the fall that led into the bounce, the way being thrown up by a wind charge does.
         entity.fallDistance = 0.0F;
+        // The couple of blocks of credit on top cannot be written here: the server resets a player's fall
+        // distance on the way up. It is handed over instead, and taken off once the fall actually starts.
+        if (entity instanceof FallGraced graced) {
+            graced.grantFallGrace(BOUNCE_FALL_GRACE);
+        }
         this.pop();
     }
 
@@ -754,6 +786,11 @@ public class Bubble extends Projectile implements Stompable {
             this.squishTicks--;
         }
 
+        this.captureWobbleTicksO = this.captureWobbleTicks;
+        if (this.captureWobbleTicks > 0) {
+            this.captureWobbleTicks--;
+        }
+
         this.absorbClientTicksO = this.absorbClientTicks;
         if (this.isAbsorbing()) {
             this.absorbClientTicks = Math.min(this.absorbClientTicks + 1, ABSORB_DURATION);
@@ -761,6 +798,27 @@ public class Bubble extends Projectile implements Stompable {
             this.absorbClientTicks = 0;
             this.absorbClientTicksO = 0;
         }
+
+        this.captiveClientTicksO = this.captiveClientTicks;
+        if (this.getTrappedEntity() != null) {
+            this.captiveClientTicks = Math.min(this.captiveClientTicks + 1, Math.max(this.getFilledLifetime(), 0));
+        } else {
+            this.captiveClientTicks = 0;
+            this.captiveClientTicksO = 0;
+        }
+    }
+
+    /**
+     * @return how far the contents have settled, from 0 right after being caught to 1 by the time the bubble
+     * is due to pop. Counted on the client, since nothing but the animation depends on it.
+     */
+    public float getSettleProgress(float partialTicks) {
+        int span = this.getFilledLifetime();
+        if (span <= 0) {
+            // A bubble set to hold on forever never settles.
+            return 0.0F;
+        }
+        return Math.clamp(Mth.lerp(partialTicks, this.captiveClientTicksO, this.captiveClientTicks) / span, 0.0F, 1.0F);
     }
 
     private void tickRenderSize() {
@@ -805,6 +863,21 @@ public class Bubble extends Projectile implements Stompable {
         return Mth.sin((ticks / SQUISH_DURATION) * (Mth.PI / 2.0F));
     }
 
+    /**
+     * @return how the bubble is squashed by having just closed around something, negative while it is flattened
+     * and positive while it rebounds taller than it should be. Zero at both ends, so it blends in and out.
+     */
+    public float getCaptureWobble(float partialTicks) {
+        float ticks = Mth.lerp(partialTicks, this.captureWobbleTicksO, this.captureWobbleTicks);
+        if (ticks <= 0.0F) {
+            return 0.0F;
+        }
+        // Counts down, so this runs from 0 to 1 over the wobble.
+        float progress = 1.0F - ticks / CAPTURE_WOBBLE_DURATION;
+        // One squash, one overshoot, damped to nothing: the classic squash and stretch.
+        return -Mth.sin(progress * Mth.TWO_PI) * (1.0F - progress) * CAPTURE_WOBBLE_AMOUNT;
+    }
+
     public Direction.Axis getSquishAxis() {
         return this.squishAxis;
     }
@@ -816,6 +889,7 @@ public class Bubble extends Projectile implements Stompable {
             case EVENT_SQUISH_X -> this.startSquish(Direction.Axis.X);
             case EVENT_SQUISH_Y -> this.startSquish(Direction.Axis.Y);
             case EVENT_SQUISH_Z -> this.startSquish(Direction.Axis.Z);
+            case EVENT_CAPTURE_WOBBLE -> this.startCaptureWobble();
             case EntityEvent.DEATH -> this.spawnPopParticles();
             default -> super.handleEntityEvent(state);
         }
@@ -826,6 +900,12 @@ public class Bubble extends Projectile implements Stompable {
         this.squishAxis = axis;
         this.squishTicks = SQUISH_DURATION;
         this.squishTicksO = SQUISH_DURATION;
+    }
+
+    @Environment(EnvType.CLIENT)
+    private void startCaptureWobble() {
+        this.captureWobbleTicks = CAPTURE_WOBBLE_DURATION;
+        this.captureWobbleTicksO = CAPTURE_WOBBLE_DURATION;
     }
 
     @Environment(EnvType.CLIENT)
@@ -868,10 +948,10 @@ public class Bubble extends Projectile implements Stompable {
         this.age = input.getIntOr(AGE_KEY, 0);
         this.filledAge = input.getIntOr(FILLED_AGE_KEY, 0);
         this.lifetime = input.getIntOr(LIFETIME_KEY, DEFAULT_LIFETIME);
-        this.filledLifetime = input.getIntOr(FILLED_LIFETIME_KEY, DEFAULT_FILLED_LIFETIME);
+        this.setFilledLifetime(input.getIntOr(FILLED_LIFETIME_KEY, DEFAULT_FILLED_LIFETIME));
         this.absorbTicks = input.getIntOr(ABSORB_TICKS_KEY, 0);
         this.trappedNoAi = input.getBooleanOr(TRAPPED_NO_AI_KEY, false);
-        this.setItem(input.read(ITEM_KEY, ItemStack.CODEC).orElse(ItemStack.EMPTY));
+        input.read(CAPTURE_MOTION_KEY, Vec3.CODEC).ifPresent(motion -> this.entityData.set(DATA_CAPTURE_MOTION, motion.toVector3f()));
         // Falls back to whatever was rolled on construction, so a bubble summoned without the tag still varies.
         this.setTextureIndex(input.getIntOr(TEXTURE_KEY, this.getTextureIndex()));
         this.entityData.set(DATA_ABSORBING, this.absorbTicks > 0);
@@ -883,12 +963,11 @@ public class Bubble extends Projectile implements Stompable {
         output.putInt(AGE_KEY, this.age);
         output.putInt(FILLED_AGE_KEY, this.filledAge);
         output.putInt(LIFETIME_KEY, this.lifetime);
-        output.putInt(FILLED_LIFETIME_KEY, this.filledLifetime);
+        output.putInt(FILLED_LIFETIME_KEY, this.getFilledLifetime());
         output.putInt(ABSORB_TICKS_KEY, this.absorbTicks);
         output.putBoolean(TRAPPED_NO_AI_KEY, this.trappedNoAi);
         output.putInt(TEXTURE_KEY, this.getTextureIndex());
-        if (!this.getItem().isEmpty()) {
-            output.store(ITEM_KEY, ItemStack.CODEC, this.getItem());
-        }
+        Vector3fc motion = this.getCaptureMotion();
+        output.store(CAPTURE_MOTION_KEY, Vec3.CODEC, new Vec3(motion.x(), motion.y(), motion.z()));
     }
 }

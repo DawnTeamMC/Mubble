@@ -9,13 +9,11 @@ import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.Direction;
 import net.minecraft.util.LightCoordsUtil;
-import net.minecraft.world.item.ItemDisplayContext;
 
 @Environment(EnvType.CLIENT)
 public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
@@ -23,14 +21,9 @@ public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
     private static final float SQUISH_FLATTEN = 0.35F;
     /** How much it bulges along the other axis, to keep it looking like it conserves its volume. */
     private static final float SQUISH_BULGE = 0.25F;
-    /** The item held inside sits at a fraction of the bubble size, so it never pokes through the sprite. */
-    private static final float HELD_ITEM_SCALE = 0.6F;
-
-    private final ItemModelResolver itemModelResolver;
 
     public BubbleRenderer(EntityRendererProvider.Context ctx) {
         super(ctx);
-        this.itemModelResolver = ctx.getItemModelResolver();
     }
 
     @Override
@@ -46,7 +39,7 @@ public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
         state.lightCoords = LightCoordsUtil.FULL_BRIGHT;
         state.squish = bubble.getSquish(partialTicks);
         state.squishAxis = bubble.getSquishAxis();
-        this.itemModelResolver.updateForNonLiving(state.item, bubble.getItem(), ItemDisplayContext.GROUND, bubble);
+        state.captureWobble = bubble.getCaptureWobble(partialTicks);
     }
 
     @Override
@@ -54,17 +47,7 @@ public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
         // The entity origin sits at the bottom of the cube, the sprite has to be centered on it.
         float centerY = state.size / 2.0F;
 
-        if (!state.item.isEmpty()) {
-            poseStack.pushPose();
-            poseStack.translate(0.0F, centerY, 0.0F);
-            poseStack.mulPose(cameraRenderState.orientation);
-            float itemScale = state.size * HELD_ITEM_SCALE;
-            poseStack.scale(itemScale, itemScale, itemScale);
-            state.item.submit(poseStack, submitNodeCollector, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
-            poseStack.popPose();
-        }
-
-        // The sprite is translucent, so it is drawn after whatever it contains.
+        // Whatever the bubble holds is a passenger, so the entity renderer draws it on its own.
         poseStack.pushPose();
         poseStack.translate(0.0F, centerY, 0.0F);
         poseStack.mulPose(cameraRenderState.orientation);
@@ -73,10 +56,14 @@ public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
         float flatten = 1.0F - SQUISH_FLATTEN * state.squish;
         float bulge = 1.0F + SQUISH_BULGE * state.squish;
         boolean vertical = state.squishAxis == Direction.Axis.Y;
+        // Closing around something squashes the bubble on the spot, on top of any block rebound. It keeps
+        // roughly the same volume, so the sides push out while the top comes down and the other way round.
+        float wobbleY = 1.0F + state.captureWobble;
+        float wobbleX = 1.0F - state.captureWobble * 0.5F;
         poseStack.scale(
-                state.size * (vertical ? bulge : flatten),
-                state.size * (vertical ? flatten : bulge),
-                state.size
+                state.size * (vertical ? bulge : flatten) * wobbleX,
+                state.size * (vertical ? flatten : bulge) * wobbleY,
+                state.size * wobbleX
         );
 
         int light = state.lightCoords;
@@ -97,6 +84,10 @@ public class BubbleRenderer extends EntityRenderer<Bubble, BubbleRenderState> {
                 .setUv(u, v)
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(light)
-                .setNormal(pose, 0.0f, 1.0f, 0.0f);
+                // Written straight through instead of through the pose: the pose carries the billboard's
+                // camera orientation, so a transformed normal swings around with the camera and the entity
+                // shader dims the sprite accordingly -- most visibly when looking straight down. A fixed
+                // upright normal keeps the shading even from every angle.
+                .setNormal(0.0f, 1.0f, 0.0f);
     }
 }
