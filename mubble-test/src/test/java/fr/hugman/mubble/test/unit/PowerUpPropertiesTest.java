@@ -1,7 +1,10 @@
 package fr.hugman.mubble.test.unit;
 
 import com.mojang.serialization.JsonOps;
+import fr.hugman.mubble.test.unit.support.TestBootstrap;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
+import io.netty.buffer.Unpooled;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -119,6 +122,46 @@ public class PowerUpPropertiesTest {
             assertEquals(properties.getChargeCount(), decoded.getChargeCount());
             assertEquals(properties.chargeCounting, decoded.chargeCounting);
             assertEquals(properties.maxCharges, decoded.maxCharges);
+        }
+
+        @Test
+        @DisplayName("keeps every field through a network round trip")
+        void roundTripsThroughTheNetwork() {
+            // Every number is distinct: a cooldown and a charge count swapped would survive equal values.
+            var properties = new PowerUpProperties(
+                    PowerUpProperties.ChargeCounting.COOLDOWN_RECHARGE,
+                    9,
+                    4,
+                    2,
+                    List.of(UUID.fromString("f7e5b26e-9e4d-4b6f-9f7c-6c1f0f8f2a11"))
+            );
+
+            var buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), TestBootstrap.registries());
+            PowerUpProperties.STREAM_CODEC.encode(buf, properties);
+            var decoded = PowerUpProperties.STREAM_CODEC.decode(buf);
+
+            assertEquals(0, buf.readableBytes(), "the decoder left unread bytes behind");
+            assertEquals(properties.chargeCounting, decoded.chargeCounting, "charge counting");
+            assertEquals(properties.maxCharges, decoded.maxCharges, "max charges");
+            assertEquals(properties.getChargeCount(), decoded.getChargeCount(), "charge count");
+            assertEquals(
+                    PowerUpProperties.CODEC.encodeStart(JsonOps.INSTANCE, properties).getOrThrow(),
+                    PowerUpProperties.CODEC.encodeStart(JsonOps.INSTANCE, decoded).getOrThrow(),
+                    "the network form and the data form disagree"
+            );
+        }
+
+        @Test
+        @DisplayName("survives a round trip with no charge entity at all")
+        void roundTripsWithoutEntities() {
+            var properties = new PowerUpProperties(PowerUpProperties.ChargeCounting.ONLY_DECREASE, 1);
+
+            var buf = new RegistryFriendlyByteBuf(Unpooled.buffer(), TestBootstrap.registries());
+            PowerUpProperties.STREAM_CODEC.encode(buf, properties);
+            var decoded = PowerUpProperties.STREAM_CODEC.decode(buf);
+
+            assertEquals(1, decoded.getChargeCount(), "charge count");
+            assertTrue(decoded.isAtMax(), "a fresh set of properties should come back fully charged");
         }
     }
 }

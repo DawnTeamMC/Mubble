@@ -13,6 +13,7 @@ import fr.hugman.mubble.super_mario.world.item.SuperMarioCreativeModeTabs;
 import fr.hugman.mubble.super_mario.world.item.SuperMarioItems;
 import fr.hugman.mubble.super_mario.world.level.biome.SuperMarioBiomeModifications;
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
+import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes;
 import fr.hugman.mubble.super_mario.world.level.gamerules.SuperMarioGameRules;
 import fr.hugman.mubble.super_mario.world.power_up.action.SuperMarioPowerUpActionTypes;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionTypes;
@@ -28,6 +29,7 @@ public class SuperMario implements ModInitializer {
     @Override
     public void onInitialize() {
         Reflection.initialize(SuperMarioBlocks.class);
+        Reflection.initialize(SuperMarioBlockEntityTypes.class);
         Reflection.initialize(SuperMarioEntityTypes.class);
         Reflection.initialize(SuperMarioDataComponents.class);
         Reflection.initialize(SuperMarioItems.class);

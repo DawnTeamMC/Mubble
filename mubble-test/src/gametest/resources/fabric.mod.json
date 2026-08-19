@@ -10,7 +10,26 @@
   "entrypoints": {
     "fabric-gametest": [
       "fr.hugman.mubble.test.gametest.super_mario.BallGameTest",
-      "fr.hugman.mubble.test.gametest.datapack.DataPackPowerUpGameTest"
+      "fr.hugman.mubble.test.gametest.datapack.DataPackPowerUpGameTest",
+      "fr.hugman.mubble.test.gametest.datapack.DynamicContentGameTest",
+      "fr.hugman.mubble.test.gametest.network.NetworkPayloadGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.PowerUpHolderGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.PowerUpPersistenceGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.PowerUpLossGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.ShootProjectileActionGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.PowerUpCommandGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.PowerUpItemGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.RunOnWaterGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.StompGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.GoombaGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.KoopaShellGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.CloudPlatformGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.BlockTransformGameTest",
+      "fr.hugman.mubble.test.gametest.collectible.CollectibleEntityGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.BumpableBlockGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.NoteBlockGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.BeepBlockGameTest",
+      "fr.hugman.mubble.test.gametest.datapack.GeneratedDataGameTest"
     ]
   },
   "depends": {

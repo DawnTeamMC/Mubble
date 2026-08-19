@@ -1,0 +1,12 @@
+{
+  "action": {
+    "type": "mubble:shoot_projectile",
+    "projectile": "minecraft:snowball",
+    "sound": "minecraft:entity.snowball.throw",
+    "speed": 0.4,
+    "max_projectiles": 2
+  },
+  "name": {
+    "translate": "power_up.mubble-gametest.shooter"
+  }
+}
