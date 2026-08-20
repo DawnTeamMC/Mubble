@@ -27,8 +27,8 @@ public class ItemInHandRendererMixin {
 	@Unique
     private boolean oDisplayPowerUpInOtherHand;
 
-	@Inject(method="renderArmWithItem", at=@At("TAIL"))
-	private void mubble$renderArmWithItem(
+	@Inject(method="submitArmWithItem", at=@At("TAIL"))
+	private void mubble$submitArmWithItem(
 			AbstractClientPlayer player,
 			float frameInterp,
 			float xRot,
