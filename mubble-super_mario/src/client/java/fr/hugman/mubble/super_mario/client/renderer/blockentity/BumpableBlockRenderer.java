@@ -55,7 +55,7 @@ public class BumpableBlockRenderer implements BlockEntityRenderer<BumpableBlockE
 		if(bumpableBlockRenderState.bumping) {
 			applyTransformations(poseStack, bumpableBlockRenderState.bumpTicks, BumpableBlockEntity.BUMP_LENGTH, 0.25f, bumpableBlockRenderState.bumpVector);
 		}
-		submitNodeCollector.submitMovingBlock(poseStack, bumpableBlockRenderState.movingState);
+		submitNodeCollector.submitMovingBlock(poseStack, bumpableBlockRenderState.movingState, 0);
 		poseStack.popPose();
 	}
 

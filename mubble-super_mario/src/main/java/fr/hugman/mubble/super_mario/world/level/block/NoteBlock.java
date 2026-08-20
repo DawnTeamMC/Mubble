@@ -71,7 +71,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
                 break;
             }
         }
-        Vec3 center = pos.getCenter();
+        Vec3 center = Vec3.atCenterOf(pos);
         this.addParticles(level, pos);
         level.playSound(null, center.x(), center.y(), center.z(), shouldPlayHighSound ? this.highJumpSound : this.lowJumpSound, SoundSource.BLOCKS, 1F, 1F);
     }
@@ -83,7 +83,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
     }
 
     public void addParticles(Level level, BlockPos blockPos) {
-        Vec3 center = blockPos.getCenter();
+        Vec3 center = Vec3.atCenterOf(blockPos);
         RandomSource random = level.getRandom();
         for (int i = 0; i < random.nextInt(5) + 1; i++) {
             double x = center.x() + (random.nextInt(7) - 3) / 10D;

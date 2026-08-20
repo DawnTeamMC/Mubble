@@ -58,7 +58,7 @@ public class CollectibleItem extends Item {
                         particle = SuperMarioParticleTypes.FLOWER_COIN_SPARKLE;
                     }
                     entity.setCollectParticle(particle);
-                    EntityType.createDefaultStackConfig(serverLevel, itemStack, context.getPlayer()).accept(entity);
+                    EntityType.createDefaultStackConfig(serverLevel, itemStack, context.getPlayer()).apply(entity);
                     if (entity == null) {
                         return InteractionResult.FAIL;
                     }
