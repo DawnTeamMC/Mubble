@@ -55,6 +55,20 @@ diverge immediately: `NETWORK_CODEC` carries the attributes and nothing else, an
 `EnvironmentAttributeMap.NETWORK_CODEC` additionally drops any attribute vanilla marks
 non-syncable. There is a unit test asserting the server-only fields do not cross the wire.
 
+**The two must keep the same shape, though.** Registry sync does not promise both ends use the same
+codec: an entry read from disk with the file codec can be handed to the network codec. The first
+version of this made `NETWORK_CODEC` a bare attribute map, which read the whole profile object as a
+map of attribute ids and crashed the client on join with
+
+```
+Unknown registry key in ResourceKey[minecraft:root / minecraft:environment_attribute]: minecraft:attributes
+```
+
+— and in the other direction silently decoded to an empty profile, because every field is optional.
+So both codecs read and write an object with an `attributes` field, and differ only in which fields
+they carry. Two tests cover the crossings, and they assert the attributes *survive* rather than just
+that parsing succeeded.
+
 ## Schema
 
 ```json
