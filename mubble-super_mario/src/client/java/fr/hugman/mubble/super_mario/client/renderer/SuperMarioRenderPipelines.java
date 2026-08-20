@@ -15,7 +15,10 @@ public class SuperMarioRenderPipelines {
                     .withShaderDefine("ALPHA_CUTOUT", 0.1F)
                     .withShaderDefine("PER_FACE_LIGHTING")
                     .withFragmentShader(SuperMario.id("core/golden_entity"))
-                    .withBindGroupLayout(BindGroupLayouts.SAMPLER0_SAMPLER1)
+                    // ENTITY_SNIPPET already binds SAMPLER0_SAMPLER2, so only the overlay sampler is
+                    // left to add. Binding Sampler0 a second time is a duplicate bind name, not an
+                    // override. This mirrors RenderPipelines.ENTITY_TRANSLUCENT exactly.
+                    .withBindGroupLayout(BindGroupLayouts.SAMPLER1)
                     .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
                     .withCull(false)
                     .build()
