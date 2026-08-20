@@ -28,6 +28,9 @@
     "loom:injected_interfaces": {
       "net/minecraft/world/entity/player/Player": [
         "fr/hugman/mubble/world/power_up/PowerUpHolder"
+      ],
+      "net/minecraft/world/level/Level": [
+        "fr/hugman/mubble/world/level/EnvironmentOverridable"
       ]
 	}
   },

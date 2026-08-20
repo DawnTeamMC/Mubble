@@ -4,6 +4,8 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.LongArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import fr.hugman.mubble.core.registries.MubbleRegistries;
+import fr.hugman.mubble.world.voyage.environment.EnvironmentController;
 import fr.hugman.mubble.world.voyage.level.TrialInstance;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldHandle;
 import fr.hugman.mubble.world.voyage.level.fantasy.VoyageWorlds;
@@ -13,11 +15,15 @@ import java.util.Set;
 import java.util.UUID;
 
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.IdentifierArgument;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.Identifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.attribute.EnvironmentAttributeMap;
 import net.minecraft.world.level.block.Blocks;
 
 /**
@@ -26,6 +32,10 @@ import net.minecraft.world.level.block.Blocks;
  * <p>{@code /voyagespike open [seed]} builds a level, drops a stone platform under the player and
  * teleports them onto it. {@code /voyagespike close} brings them back to where they were and
  * deletes the level. {@code /voyagespike status} reports what is open.
+ *
+ * <p>{@code /voyagespike environment <profile>} applies an environment profile to whatever level the
+ * player is standing in, and {@code /voyagespike environment clear} takes it away. Phase 2 attaches
+ * profiles to trials properly; until then this is how the profile stack gets exercised in-game.
  *
  * <p>Deliberately throwaway. Phase 3 owns player state and phase 4 owns the real {@code /voyage}
  * command; this exists only so the level lifecycle can be exercised in-game on its own, and should
@@ -61,7 +71,16 @@ public final class VoyageSpikeCommand {
                 .then(Commands.literal("close")
                         .executes(cc -> close(cc.getSource().getPlayerOrException())))
                 .then(Commands.literal("status")
-                        .executes(cc -> status(cc.getSource()))));
+                        .executes(cc -> status(cc.getSource())))
+                .then(Commands.literal("environment")
+                        .then(Commands.literal("clear")
+                                .executes(cc -> clearEnvironment(cc.getSource().getPlayerOrException())))
+                        .then(Commands.argument("profile", IdentifierArgument.id())
+                                .suggests((cc, builder) -> SharedSuggestionProvider.suggestResource(
+                                        cc.getSource().registryAccess().lookupOrThrow(MubbleRegistries.ENVIRONMENT_PROFILE).keySet(), builder))
+                                .executes(cc -> setEnvironment(
+                                        cc.getSource().getPlayerOrException(),
+                                        IdentifierArgument.getId(cc, "profile"))))));
     }
 
     private static int open(ServerPlayer player, long seed) throws CommandSyntaxException {
@@ -99,6 +118,18 @@ public final class VoyageSpikeCommand {
         VoyageWorlds.get(player.level().getServer()).close(session.handle());
 
         player.sendSystemMessage(Component.literal("Closed " + session.handle().dimension().identifier()));
+        return 1;
+    }
+
+    private static int setEnvironment(ServerPlayer player, Identifier profile) {
+        EnvironmentController.apply(player.level(), profile, EnvironmentAttributeMap.EMPTY);
+        player.sendSystemMessage(Component.literal("Applied environment " + profile));
+        return 1;
+    }
+
+    private static int clearEnvironment(ServerPlayer player) {
+        EnvironmentController.clear(player.level());
+        player.sendSystemMessage(Component.literal("Cleared environment"));
         return 1;
     }
 
