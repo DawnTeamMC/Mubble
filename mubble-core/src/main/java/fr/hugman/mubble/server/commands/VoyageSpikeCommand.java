@@ -3,6 +3,7 @@ package fr.hugman.mubble.server.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.LongArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.brigadier.exceptions.Dynamic2CommandExceptionType;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.world.voyage.environment.EnvironmentController;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.Commands;
@@ -48,6 +50,9 @@ public final class VoyageSpikeCommand {
     private static final SimpleCommandExceptionType NOTHING_OPEN = new SimpleCommandExceptionType(
             Component.literal("You have no spike level open")
     );
+    private static final Dynamic2CommandExceptionType UNKNOWN_PROFILE = new Dynamic2CommandExceptionType(
+            (profile, loaded) -> Component.literal("No environment profile '" + profile + "'. " + loaded)
+    );
 
     private static final int PLATFORM_RADIUS = 4;
     private static final int PLATFORM_Y = 64;
@@ -59,6 +64,18 @@ public final class VoyageSpikeCommand {
     private static final Map<UUID, Session> SESSIONS = new HashMap<>();
 
     private VoyageSpikeCommand() {
+    }
+
+    /**
+     * Forgets every session when the server stops.
+     *
+     * <p>{@link #SESSIONS} is static, so without this it survives into the next server in the same
+     * JVM — quit to title, load a world again, and the spike still believes you are inside a level
+     * that was deleted on shutdown. Phase 3 replaces this with saved data keyed by player UUID,
+     * which has to survive a restart rather than be discarded by one.
+     */
+    public static void register() {
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> SESSIONS.clear());
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -121,8 +138,10 @@ public final class VoyageSpikeCommand {
         return 1;
     }
 
-    private static int setEnvironment(ServerPlayer player, Identifier profile) {
-        EnvironmentController.apply(player.level(), profile, EnvironmentAttributeMap.EMPTY);
+    private static int setEnvironment(ServerPlayer player, Identifier profile) throws CommandSyntaxException {
+        if (!EnvironmentController.apply(player.level(), profile, EnvironmentAttributeMap.EMPTY)) {
+            throw UNKNOWN_PROFILE.create(profile, EnvironmentController.describeLoaded(player.level().getServer()));
+        }
         player.sendSystemMessage(Component.literal("Applied environment " + profile));
         return 1;
     }
@@ -134,6 +153,9 @@ public final class VoyageSpikeCommand {
     }
 
     private static int status(CommandSourceStack source) {
+        source.sendSuccess(() -> Component.literal(
+                "Environment profiles: " + EnvironmentController.describeLoaded(source.getServer())), false);
+
         if (SESSIONS.isEmpty()) {
             source.sendSuccess(() -> Component.literal("No spike levels open"), false);
             return 0;

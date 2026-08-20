@@ -55,14 +55,16 @@ public final class EnvironmentController {
      * Applies a profile to a level and pushes it to everyone in that level.
      *
      * @param overrides per-instance values resolved by the caller, layered on top of the profile
+     * @return whether the profile existed; {@code false} leaves the level untouched
      */
-    public static void apply(ServerLevel level, Identifier profileId, EnvironmentAttributeMap overrides) {
+    public static boolean apply(ServerLevel level, Identifier profileId, EnvironmentAttributeMap overrides) {
         EnvironmentProfile profile = lookup(level.getServer(), profileId);
         if (profile == null) {
             // Loud, and no fallback: a missing profile is an authoring bug, and quietly rendering a
             // default sky is how that bug reaches players.
-            Mubble.LOGGER.error("No environment profile '{}' — trial in {} will render unmodified", profileId, level.dimension().identifier());
-            return;
+            Mubble.LOGGER.error("No environment profile '{}' — trial in {} will render unmodified. {}",
+                    profileId, level.dimension().identifier(), describeLoaded(level.getServer()));
+            return false;
         }
 
         ACTIVE.put(level, new Applied(profileId, profile, overrides));
@@ -72,6 +74,17 @@ public final class EnvironmentController {
         for (ServerPlayer player : level.players()) {
             ServerPlayNetworking.send(player, payload);
         }
+        return true;
+    }
+
+    /** {@return how many profiles are loaded, and which} — the useful half of a "profile not found" */
+    public static String describeLoaded(MinecraftServer server) {
+        List<Identifier> ids = List.copyOf(server.registryAccess()
+                .lookupOrThrow(MubbleRegistries.ENVIRONMENT_PROFILE).keySet());
+        if (ids.isEmpty()) {
+            return "No environment profiles are loaded at all, so no data pack defining them is active.";
+        }
+        return ids.size() + " loaded: " + ids;
     }
 
     /** Drops the override from a level and tells everyone in it to go back to vanilla resolution. */
