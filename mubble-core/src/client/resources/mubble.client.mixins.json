@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "client": [
     "AvatarRendererMixin",
+    "ClientLevelMixin",
     "ClientPacketListenerMixin",
     "HudMixin",
     "ItemInHandRendererMixin",

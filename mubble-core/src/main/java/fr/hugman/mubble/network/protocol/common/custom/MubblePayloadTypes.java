@@ -8,6 +8,8 @@ public class MubblePayloadTypes {
     public static final CustomPacketPayload.Type<CollectCollectiblePayload> COLLECT_COLLECTIBLE = of("collectible/collect");
     public static final CustomPacketPayload.Type<PowerUpTriggerPayload> POWER_UP_TRIGGER = of("power_up/trigger");
     public static final CustomPacketPayload.Type<PowerUpChangePayload> POWER_UP_CHANGE = of("power_up/change");
+    public static final CustomPacketPayload.Type<ActiveEnvironmentPayload> ACTIVE_ENVIRONMENT = of("environment/active");
+    public static final CustomPacketPayload.Type<EnvironmentProfileSyncPayload> ENVIRONMENT_PROFILE_SYNC = of("environment/profile_sync");
 
     public static <T extends CustomPacketPayload> CustomPacketPayload.Type<T> of(String path) {
         return new CustomPacketPayload.Type<>(Mubble.id(path));
@@ -17,5 +19,7 @@ public class MubblePayloadTypes {
         PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.COLLECT_COLLECTIBLE, CollectCollectiblePayload.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(MubblePayloadTypes.POWER_UP_TRIGGER, PowerUpTriggerPayload.STREAM_CODEC);
         PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.POWER_UP_CHANGE, PowerUpChangePayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.ACTIVE_ENVIRONMENT, ActiveEnvironmentPayload.STREAM_CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.ENVIRONMENT_PROFILE_SYNC, EnvironmentProfileSyncPayload.STREAM_CODEC);
     }
 }
