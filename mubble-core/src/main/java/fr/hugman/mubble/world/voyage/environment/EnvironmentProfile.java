@@ -60,9 +60,18 @@ public record EnvironmentProfile(
      *
      * <p>{@link EnvironmentAttributeMap#NETWORK_CODEC} additionally drops attributes vanilla marks
      * as not syncable, so purely server-side entries never leave the server.
+     *
+     * <p><strong>Same shape as {@link #DIRECT_CODEC}, on purpose.</strong> Registry sync does not
+     * promise that both ends use the same codec — an entry read from disk with the file codec can be
+     * handed to the network codec. So the two differ only in which fields they carry, never in the
+     * structure around them. Making this a bare attribute map instead reads the whole profile object
+     * as a map of attribute ids and fails with "Unknown registry key ... minecraft:attributes",
+     * or worse, silently decodes to an empty profile in the other direction. There are tests for
+     * both crossings.
      */
-    public static final Codec<EnvironmentProfile> NETWORK_CODEC = EnvironmentAttributeMap.NETWORK_CODEC
-            .xmap(attributes -> new EnvironmentProfile(attributes, Optional.empty(), Optional.empty()), EnvironmentProfile::attributes);
+    public static final Codec<EnvironmentProfile> NETWORK_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            EnvironmentAttributeMap.NETWORK_CODEC.optionalFieldOf("attributes", EnvironmentAttributeMap.EMPTY).forGetter(EnvironmentProfile::attributes)
+    ).apply(instance, attributes -> new EnvironmentProfile(attributes, Optional.empty(), Optional.empty())));
 
     /** For referencing a profile by id from another datapack file. */
     public static final Codec<Holder<EnvironmentProfile>> CODEC =

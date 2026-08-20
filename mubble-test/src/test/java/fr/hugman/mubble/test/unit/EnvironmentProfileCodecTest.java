@@ -121,6 +121,41 @@ public class EnvironmentProfileCodecTest {
                         """));
     }
 
+    @Test
+    @DisplayName("the network codec can read what the file codec wrote")
+    void networkCodecReadsFileCodecOutput() {
+        var ops = TestBootstrap.registries().createSerializationContext(JsonOps.INSTANCE);
+
+        // Registry sync does not guarantee that the same codec is used on both ends: an entry loaded
+        // through the file codec can be handed to the network codec. The two must therefore agree on
+        // the *shape* of a profile, and differ only in which fields they carry.
+        var written = EnvironmentProfile.DIRECT_CODEC.encodeStart(ops, fullyPopulated())
+                .getOrThrow(error -> new AssertionError("could not encode: " + error));
+
+        var read = EnvironmentProfile.NETWORK_CODEC.parse(ops, written);
+        assertTrue(read.isSuccess(),
+                () -> "the network codec could not read the file codec's output: " + read.error().map(Object::toString).orElse(""));
+        assertTrue(read.getOrThrow().attributes().contains(EnvironmentAttributes.SKY_COLOR),
+                "the attributes were lost in the crossover");
+    }
+
+    @Test
+    @DisplayName("the file codec can read what the network codec wrote")
+    void fileCodecReadsNetworkCodecOutput() {
+        var ops = TestBootstrap.registries().createSerializationContext(JsonOps.INSTANCE);
+
+        var written = EnvironmentProfile.NETWORK_CODEC.encodeStart(ops, fullyPopulated())
+                .getOrThrow(error -> new AssertionError("could not encode: " + error));
+
+        var read = EnvironmentProfile.DIRECT_CODEC.parse(ops, written);
+        assertTrue(read.isSuccess(),
+                () -> "the file codec could not read the network codec's output: " + read.error().map(Object::toString).orElse(""));
+        // Every field being optional means a shape mismatch decodes to an empty profile rather than
+        // failing, so success alone proves nothing here.
+        assertTrue(read.getOrThrow().attributes().contains(EnvironmentAttributes.SKY_COLOR),
+                "the attributes were silently dropped in the crossover");
+    }
+
     private static EnvironmentProfile fullyPopulated() {
         return new EnvironmentProfile(
                 EnvironmentAttributeMap.builder()
