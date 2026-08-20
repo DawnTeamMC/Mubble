@@ -7,7 +7,6 @@
     "ArgumentTypeInfosMixin",
     "EntityMixin",
     "ItemStackMixin",
-    "MinecraftServerMixin",
     "PlayerMixin"
   ],
   "injectors": {

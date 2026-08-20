@@ -19,7 +19,7 @@ Fabric loader `0.19.3`, Fabric API `0.158.0+26.2`.
 |---|---|
 | Can we create, tick, enter and destroy a `ServerLevel` at runtime with no restart? | **Yes.** No blockers found. |
 | Does the client tolerate a brand-new dimension id? | **Yes**, provided the *dimension type* is one it already knows. Verified by reading the packet handler, not assumed. |
-| Fantasy, or our own? | **Our own**, ~250 lines in one package. Reasoning below — it is close, and the reasons are about this project's release cadence, not about code quality. |
+| Fantasy, or our own? | **Fantasy.** Reasoning below. (The spike first recommended our own on release-cadence grounds; that argument turned out not to apply — see §3.) |
 
 Everything below marked **(read)** was verified by reading the decompiled sources for this exact
 version. Everything marked **(built)** is verified by the compiler or by a Gradle check.
@@ -31,6 +31,10 @@ Everything marked **(unverified)** needs a human in-game — see [Manual test](#
 
 Vanilla builds its levels once, in `MinecraftServer.createLevels()`, and never adds another. It does
 not, however, *prevent* another. **(read)**
+
+> Fantasy does all of this for us now (§3). This section stays because it is what to re-derive if
+> Fantasy ever has to be debugged or replaced, and because §2's constraint is ours to respect
+> regardless of who creates the level.
 
 The recipe is a direct copy of what `createLevels` does for the nether and the end:
 
@@ -86,37 +90,19 @@ right-clicks are handled) sits *after* the level loop closes. Confirmed in bytec
 But "safe by accident" stops being true the moment phase 3 ends a voyage from a player tick, a
 timer, or a death.
 
-So `MinecraftServerMixin` redirects that one call and ticks an immutable copy:
+**Fantasy already fixes this**, with a `@Redirect` on `tickChildren` that snapshots the collection
+before iterating (`SafeIterator`). We do not need our own.
 
-```java
-@Redirect(method = "tickChildren",
-          at = @At(value = "INVOKE",
-                   target = "Lnet/minecraft/server/MinecraftServer;getAllLevels()Ljava/lang/Iterable;"))
-private Iterable<ServerLevel> mubble$snapshotLevelsBeforeTicking(MinecraftServer server) {
-    return ImmutableList.copyOf(server.getAllLevels());
-}
-```
+One thing to know about their fix: it carries `require = 0`, so if a future Minecraft version stops
+calling `getAllLevels()` there, the redirect silently does not apply and the hazard comes back as an
+intermittent crash rather than a load failure. Worth an upstream issue, and worth checking after
+every port. A one-line smoke test — open and close a level from inside a player tick — would catch
+it.
 
-Cost is one small array per tick. A level added mid-tick starts ticking next tick.
+### Access wideners
 
-Two deliberate choices here. It targets `getAllLevels()` rather than `Iterable.iterator()` with an
-ordinal — `tickChildren` contains exactly one such call **(read)**, so the target is unambiguous and
-does not shift if Mojang adds another loop above it. And it does **not** set `require = 0`: if a
-future version stops calling `getAllLevels()` there, mixin should fail loudly at load rather than
-quietly reintroduce the hazard. (Fantasy uses `require = 0` on the equivalent redirect, which trades
-a hard failure for a silent one. On a project that tracks snapshots I would rather have the crash at
-load.)
-
-### Access widener
-
-Two fields, in `mubble-core/src/main/resources/mubble.accesswidener`, validated by Gradle's
-`validateAccessWidener` task **(built)**:
-
-- `MinecraftServer.levels` — the map we add to and remove from.
-- `MinecraftServer.storageSource` — needed by the `ServerLevel` constructor and to locate the
-  directory to delete.
-
-`executor` did not need widening: it is assigned `Util.backgroundExecutor()`, which is public. **(read)**
+None. The bespoke provider needed `MinecraftServer.levels` and `MinecraftServer.storageSource`;
+Fantasy ships its own access widener and we touch neither.
 
 ---
 
@@ -148,56 +134,60 @@ client-side `/execute in` suggestions won't list voyage dimensions. `ClientSugge
 
 ## 3. Fantasy, or our own?
 
-Fantasy is a live option, not a dead one — `0.8.2+26.2` was published in June 2026 and is a proper
-port, not a stale artifact. I read its sources rather than judging it by reputation.
+**Decision: Fantasy** (`xyz.nucleoid:fantasy:0.8.2+26.2`), bundled as a nested jar.
 
-**It is good.** It solves the same problems in the same places, and in two spots it solves problems I
-had not yet reached:
+I read its sources rather than judging it by reputation, and it is good. It solves the same problems
+in the same places, and in three spots it solves problems this spike had not reached:
 
-- `SafeIterator` + a `tickChildren` redirect — the same CME hazard, found independently.
+- A `tickChildren` redirect that snapshots the level list — the same concurrent-modification hazard
+  described in §1, found independently.
 - `RuntimeLevel.save()` suppresses saving for temporary levels, so closing does not write chunks it
   is about to delete.
-- `RuntimeClockManager` — a per-level clock. **This is how per-level time works in 26.x** and it will
-  matter for `fixed_time` in phase 1.
-- Per-level `GameRules` via `DelegatingGameRules` — which is roughly what a Ruleset will want later.
+- `RuntimeClockManager` and `RuntimeLevelConfig.setClockTime(clock, time, paused)` — a per-level
+  clock. **This is how per-level time works in 26.x**, and it is what phase 1's `fixed_time` needs.
+- Per-level `GameRules` via `DelegatingGameRules`, which is roughly what a Ruleset will want later.
 
-**Correcting one of the issue's caveats:** Fantasy is not "purely server-side" in the sense that
-would hurt us. Its `fabric.mod.json` declares `environment: "*"`, and nothing about our client needs
-it, because — per section 2 — the client learns about a runtime level purely through vanilla packets.
-That caveat does not bite. It is also LGPLv3, same as Mubble, so bundling is clean.
+Two of the issue's caveats do not hold up:
 
-**The reason I still recommend our own is release cadence, and only that.** Mubble tracks Minecraft
-*snapshots*, and Fantasy ships against releases. Fantasy mixes
-into `tickChildren`, `ChunkMap`, `ServerChunkCache`, `ServerLevel`, `ServerClockManager` and the
-registry internals. That is a wide surface against a moving target, and when it breaks, Mubble's
-port is blocked until someone else ships. Our own version needs one mixin and two widened fields,
-and when *that* breaks we fix it the same afternoon.
+- **"Purely server-side."** Its `fabric.mod.json` declares `environment: "*"`, and nothing about our
+  client needs it, because — per §2 — the client learns about a runtime level purely through vanilla
+  packets. It is also LGPLv3, same as Mubble, so bundling is clean.
+- **"A reputation for instability."** `0.8.2+26.2` is a current, maintained port that handles the new
+  clock system. Whatever the reputation was built on, it is not this version.
 
-**Be honest about the timing, though:** right now we are *on* `26.2` release, where Fantasy is
-version-matched and would work today. The cadence argument is about the next port, not this one —
-and `26.3` snapshots already exist, so "the next port" is not far off. If Mubble ever settles on
-tracking releases only, this decision should flip.
+### How this decision moved
 
-The scoreboard, honestly:
+The spike originally recommended writing our own, on one argument: Mubble tracks Minecraft
+*snapshots*, Fantasy ships against releases, and Fantasy's 13 mixins are a wide surface against a
+moving target — so a snapshot bump could block Mubble's port on someone else's release.
 
-| | Fantasy | Our own |
+That argument is void: Hugman is a Fantasy contributor, so the ports are not someone else's to wait
+on, and a fork is available if a release ever lags. With the cadence risk gone there is nothing left
+on the other side of the scale — Fantasy does strictly more, is already correct on the things that
+are easy to get subtly wrong, and deletes code we would otherwise own.
+
+**What this bought us**, concretely, versus the bespoke implementation this spike shipped first:
+
+| | Bespoke (removed) | Fantasy |
 |---|---|---|
-| Time to a working POC | Hours | ~250 lines, done |
-| Mixin surface | 13 mixins | 1 |
-| Snapshot breakage | Blocks us until upstream ports | We fix it |
-| Per-level clocks / gamerules | Already solved | Not yet needed |
-| Save-file contamination | Prevented by a mixin | Prevented by not registering |
+| Our mixins | 1 (`tickChildren` snapshot) | 0 |
+| Our access wideners | 2 fields | 0 |
+| Per-level clocks | Not implemented | `setClockTime` |
+| Per-level gamerules | Not implemented | `setGameRule` |
+| Save-suppression for temp levels | Not implemented (wrote then deleted) | Built in |
 
-**This decision should be revisited at phase 1** if `fixed_time` turns out to need a per-level
-`ServerClockManager`. Rebuilding `RuntimeClockManager` is a genuinely larger job than everything in
-this spike put together, and if we need it, adopting Fantasy wholesale becomes the better trade. The
-seam exists so that switch stays a one-class change.
+The bespoke provider, its mixin and its access widener are gone. If Fantasy ever has to go, the
+implementation is recoverable from history and the seam means it is a one-class swap.
 
 **The pooled fallback** the issue describes is not needed and is not implemented. It remains the
-right escape hatch and costs one class implementing `VoyageWorldProvider`; nothing outside
-`…voyage.level.runtime` touches the server's level map, so nothing else would change.
+right escape hatch and costs one class implementing `VoyageWorldProvider`.
 
----
+### What we still own
+
+§1 and §2 are not obsolete — they are why the Fantasy integration is shaped the way it is, and they
+are what to re-derive if Fantasy ever has to be replaced or debugged. In particular the constraint
+in §2 (reuse a known dimension type; never invent one at runtime) is ours to respect: Fantasy will
+happily let you register a new dimension type and it would break connected clients.
 
 ## 4. The abstraction
 
@@ -214,29 +204,22 @@ public interface VoyageWorldProvider {
 `level()` after a close. `TrialInstance` is a phase-0 placeholder carrying an id and a node path;
 phase 2 fills it in.
 
-The implementation lives in `…voyage.level.runtime` and is the only code in the mod that touches
-`server.levels`.
+The implementation lives in `…voyage.level.fantasy` and is the only code in the mod that names
+Fantasy.
 
 ### What the implementation guarantees
 
 - **Server thread only.** `open` and `close` throw if called off-thread.
-- **Deletes, does not leak.** Close removes the map entry, calls `ServerLevel.close()`, and deletes
-  the dimension directory.
+- **Deletes, does not leak.** Close calls `RuntimeLevelHandle.delete()`, which unregisters the level
+  and removes its directory.
 - **No stranded players.** `close` evacuates anyone still inside to the overworld and logs an error.
   The caller is supposed to move them first; this is a backstop, not the mechanism.
-- **Crash cleanup.** Leftover directories are purged at server start, so the world folder does not
-  grow after a hard kill.
 - **Shutdown cleanup.** `SERVER_STOPPING` closes every open handle before vanilla walks the level map.
+- **Void levels.** Fantasy's `VoidChunkGenerator` over `minecraft:the_void`, so a trial starts from
+  nothing and phase 2 builds its platform on top.
 - **No randomness.** Level ids come from a counter, not `UUID.randomUUID()` — the design doc's §6.9
   rule is about voyage reproducibility, but the acceptance criterion is written as an absolute and
   there is no reason to spend the exception here.
-
-### Known imperfection
-
-`ServerChunkCache.close()` calls `save(true)` **(read)**, so closing a level writes chunks to disk
-milliseconds before we delete the directory. Wasteful, not incorrect. Fantasy avoids it by
-overriding `ServerLevel.save()` in a subclass; we can do the same if the write cost shows up, but I
-would rather not subclass `ServerLevel` for a POC.
 
 ---
 
