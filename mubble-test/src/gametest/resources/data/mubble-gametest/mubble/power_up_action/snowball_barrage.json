@@ -1,0 +1,7 @@
+{
+  "type": "mubble:shoot_projectile",
+  "projectile": "minecraft:snowball",
+  "sound": "minecraft:entity.snowball.throw",
+  "speed": 1.0,
+  "max_projectiles": 5
+}

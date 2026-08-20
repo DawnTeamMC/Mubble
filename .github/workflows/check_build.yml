@@ -32,8 +32,30 @@ jobs:
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
 
+      # Must stay a separate invocation: the game tests read the generated data pack, and it can only
+      # be picked up by `processResources` once it has been written to disk.
       - name: Generate data files
         run: ./gradlew runDatagen
 
       - name: Build
-        run: ./gradlew build
+        run: ./gradlew build -x test -x runGameTest
+
+      # Plain JUnit tests, running against a bootstrapped Minecraft but without any world.
+      - name: Run unit tests
+        run: ./gradlew test
+
+      # Game tests, running inside a headless Minecraft server.
+      - name: Run game tests
+        run: ./gradlew runGameTest
+
+      - name: Upload test reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports-java${{ matrix.java }}-${{ matrix.os }}
+          path: |
+            mubble-test/build/reports/tests/
+            mubble-test/build/test-results/
+            mubble-test/build/run/gameTest/logs/
+          if-no-files-found: ignore
+          retention-days: 7
