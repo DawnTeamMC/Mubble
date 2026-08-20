@@ -19,6 +19,7 @@
       "environment": "client"
     }
   ],
+  "accessWidener": "mubble.accesswidener",
   "depends": {
     "minecraft": "*",
     "fabric-api": "*"
