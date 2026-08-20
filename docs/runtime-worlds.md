@@ -1,7 +1,12 @@
 # Runtime worlds — phase 0 spike
 
-Findings for [#119](https://github.com/DawnTeamMC/Mubble/issues/119). Target: Minecraft `26.2-snapshot-3`,
-Fabric loader `0.19.2`, Fabric API `0.146.1+26.2`.
+Findings for [#119](https://github.com/DawnTeamMC/Mubble/issues/119). Target: Minecraft `26.2`,
+Fabric loader `0.19.3`, Fabric API `0.158.0+26.2`.
+
+> Originally written against `26.2-snapshot-3`. Every claim below was re-checked against the `26.2`
+> release: the `ServerLevel` constructor, the two widened fields, the mixin target and its bytecode
+> offsets, the client respawn path and the `LEVEL_STEM` consumer set are all unchanged. Two findings
+> in section 6 did change and are marked.
 
 > **Note on placement.** `docs/` is the published Sinytra wiki root (`build.gradle` → `wiki.docs.mubble`).
 > This is an internal engineering note, not player documentation. It is here because the issue asked for
@@ -162,11 +167,16 @@ it, because — per section 2 — the client learns about a runtime level purely
 That caveat does not bite. It is also LGPLv3, same as Mubble, so bundling is clean.
 
 **The reason I still recommend our own is release cadence, and only that.** Mubble tracks Minecraft
-*snapshots* — the repo is on `26.2-snapshot-3` while Fantasy targets `26.2` release. Fantasy mixes
+*snapshots*, and Fantasy ships against releases. Fantasy mixes
 into `tickChildren`, `ChunkMap`, `ServerChunkCache`, `ServerLevel`, `ServerClockManager` and the
 registry internals. That is a wide surface against a moving target, and when it breaks, Mubble's
 port is blocked until someone else ships. Our own version needs one mixin and two widened fields,
 and when *that* breaks we fix it the same afternoon.
+
+**Be honest about the timing, though:** right now we are *on* `26.2` release, where Fantasy is
+version-matched and would work today. The cadence argument is about the next port, not this one —
+and `26.3` snapshots already exist, so "the next port" is not far off. If Mubble ever settles on
+tracking releases only, this decision should flip.
 
 The scoreboard, honestly:
 
@@ -296,12 +306,15 @@ the way the issue assumes. Needs confirming during phase 1.
 **`fixed_time` will need a per-level clock.** 26.x routes time through `ServerClockManager` /
 `WorldClock`. That is why Fantasy needed `RuntimeClockManager`. See the revisit note in section 3.
 
-**There is no testmod module.** `settings.gradle` includes only `mubble-bom`, `mubble-core` and
-`mubble-super_mario`. `mubble-testmod/` and `mubble-test/` exist on disk as build output and
-uncommitted, partly-deleted sources, and are in neither the build nor git history. Phase 2 puts
-"three trial JSONs, three environment profile JSONs, one voyage JSON" in a testmod that currently
-does not exist, so phase 2 starts with reinstating that module. Flagging early because it is a
-prerequisite, not a detail.
+**~~There is no testmod module.~~ Resolved.** This was true when the spike was written; `mubble-testmod`
+and `mubble-test` landed on `dev` in #115 and are now in `settings.gradle`. Phase 2's content has a
+home: hand-written datapack JSON under `mubble-testmod/src/main/resources/data/mubble-testmod/`
+(the module deliberately has no data generation), and `mubble-test` carries both unit tests and
+gametests.
+
+Note for phase 2: `mubble-testmod` declares its own mod id, so its datapack namespace is
+`mubble-testmod`, not `testmod` as the issue's examples write it (`testmod:trial_dawn`). The real ids
+will be `mubble-testmod:trial_dawn` unless we want to change the module's mod id.
 
 **The design doc is at `design/story_roguelike.md`**, not `design/design-document.md` as the issue's
 Reference section says. Same document.
