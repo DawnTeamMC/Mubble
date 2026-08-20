@@ -16,6 +16,10 @@ dependencies {
 				continue
 			}
 
+			if (rootProject.ext.unshippedProjects.contains(proj.name)) { // test-only and dev-only modules are not published
+				continue
+			}
+
 			api(project(proj.path))
 		}
 	}

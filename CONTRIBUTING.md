@@ -15,6 +15,54 @@ We strongly recommend you use [IntelliJ IDEA Community Edition](https://www.jetb
 
 If you have any questions or issues, or would just like to discuss Mubble development, feel free to [join us on Discord](https://discord.gg/8ksTVJu).
 
+### Running the tests
+All the tests of the project live in the `mubble-test` module, which is never shipped nor published.
+They come in two flavours:
+
+- **Unit tests** (`mubble-test/src/test`) run on plain JUnit 5, with Minecraft bootstrapped by
+  [`fabric-loader-junit`](https://docs.fabricmc.net/develop/automatic-testing/unit-tests) but no
+  world loaded. Use them for logic that does not need a level.
+- **Game tests** (`mubble-test/src/gametest`) run inside a headless Minecraft server through the
+  [Fabric Game Test API](https://docs.fabricmc.net/develop/automatic-testing/game-tests). Use them
+  for in-game behaviour such as blocks, entities or projectiles. Each test method is annotated with
+  `@GameTest` and must be listed (through its class) in `mubble-test/src/gametest/resources/fabric.mod.json`.
+
+```sh
+./gradlew runDatagen   # game tests load the generated data pack, so generate it first
+./gradlew test         # unit tests
+./gradlew runGameTest  # game tests
+```
+
+`./gradlew build` runs both suites, but it still needs `runDatagen` to have been run once beforehand,
+since a data pack cannot be generated and consumed within the same invocation. This is why the CI
+workflow keeps them as two separate steps.
+
+Game tests also load data written by hand in `mubble-test/src/gametest/resources/data`, under the
+`mubble-gametest` namespace. That is where the entries a test needs but no module ships belong:
+power-ups with every field left out, actions referenced by id rather than inlined... Writing them by
+hand rather than generating them is deliberate, since it puts them through the very same loading path
+as a third-party data pack. Their keys are declared in `PowerUpFixtures`.
+
+### Running the test mod
+The `mubble-testmod` module is a sandbox: a mod of its own, sitting on top of every shipped module
+and registering content meant to be played with by hand. Like `mubble-test`, it is never shipped,
+nested in the release jar nor published.
+
+```sh
+./gradlew :mubble-testmod:runClient
+./gradlew :mubble-testmod:runServer
+```
+
+Whatever a data pack can define is defined in `src/main/resources/data`; only the items and the
+creative tab, which the registries alone can hold, are in code. It currently has a snowball power-up
+along with the flower granting it, on a placeholder texture recoloured from the fire flower. Note
+that a power-up also needs its HUD sprite declared in `assets/minecraft/atlases/gui.json`, or it
+renders as a missing texture.
+
+The test module deliberately does **not** depend on it. The sandbox is there to make a state easy to
+reach while playing, not to be exhaustive, and the tests must run against the shipped modules plus
+their own data — never against content no player will ever get.
+
 ### Creating pull requests
 Please make sure before opening a pull request that:
 
