@@ -1,0 +1,151 @@
+package fr.hugman.mubble.world.voyage.level.fantasy;
+
+import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.world.voyage.level.TrialInstance;
+import fr.hugman.mubble.world.voyage.level.VoyageWorldHandle;
+import fr.hugman.mubble.world.voyage.level.VoyageWorldProvider;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
+
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import xyz.nucleoid.fantasy.Fantasy;
+import xyz.nucleoid.fantasy.RuntimeLevelConfig;
+import xyz.nucleoid.fantasy.RuntimeLevelHandle;
+import xyz.nucleoid.fantasy.util.VoidChunkGenerator;
+
+/**
+ * Opens voyage levels through <a href="https://github.com/NucleoidMC/fantasy">Fantasy</a>.
+ *
+ * <p>Fantasy owns the whole runtime-dimension lifecycle: creating the level, registering it with the
+ * server, keeping the tick loop safe against a level appearing or vanishing mid-tick, and deleting
+ * the directory on close. See {@code docs/runtime-worlds.md} for what that involves and why we are
+ * not doing it ourselves.
+ *
+ * <p>This class is the only place in the mod that knows Fantasy exists. Everything else talks to
+ * {@link VoyageWorldProvider}.
+ */
+public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
+    /** All voyage levels live under this path, so they are recognisable in logs and on disk. */
+    public static final String LEVEL_PATH_PREFIX = "voyage/";
+
+    private final MinecraftServer server;
+    private final AtomicLong nextId = new AtomicLong();
+    private final List<Handle> open = new ArrayList<>();
+
+    public FantasyVoyageWorldProvider(MinecraftServer server) {
+        this.server = server;
+    }
+
+    @Override
+    public VoyageWorldHandle open(TrialInstance trial, long seed) {
+        this.assertServerThread();
+
+        RuntimeLevelConfig config = new RuntimeLevelConfig()
+                // Dimension types reach the client as registry references during configuration, so a
+                // type invented at runtime could not be named to a connected client. Reuse the
+                // overworld's; trials differentiate themselves through environment profiles.
+                .setDimensionType(BuiltinDimensionTypes.OVERWORLD)
+                .setGenerator(new VoidChunkGenerator(this.server, Biomes.THE_VOID))
+                .setSeed(seed)
+                .setShouldTickTime(false);
+
+        RuntimeLevelHandle fantasyHandle = Fantasy.get(this.server).openTemporaryLevel(this.freshLevelId(), config);
+
+        Handle handle = new Handle(fantasyHandle);
+        this.open.add(handle);
+        Mubble.LOGGER.debug("Opened voyage level {} for trial {} (seed {})", handle.dimension().identifier(), trial.id(), seed);
+        return handle;
+    }
+
+    @Override
+    public void close(VoyageWorldHandle handle) {
+        this.assertServerThread();
+
+        if (!(handle instanceof Handle voyageHandle)) {
+            throw new IllegalArgumentException("Handle was not opened by this provider: " + handle);
+        }
+        if (!voyageHandle.open) {
+            return;
+        }
+
+        ServerLevel level = voyageHandle.fantasyHandle.asLevel();
+        Identifier id = voyageHandle.dimension().identifier();
+
+        // Nobody should still be here — the session is meant to pull players out first — but a
+        // stranded player is far worse than a noisy log, so evacuate rather than trust the caller.
+        List<ServerPlayer> stranded = List.copyOf(level.players());
+        if (!stranded.isEmpty()) {
+            Mubble.LOGGER.error("Closing voyage level {} with {} player(s) still inside; evacuating to spawn", id, stranded.size());
+            for (ServerPlayer player : stranded) {
+                player.teleportTo(this.server.overworld(),
+                        player.getX(), player.getY(), player.getZ(), Set.of(), player.getYRot(), player.getXRot(), false);
+            }
+        }
+
+        voyageHandle.open = false;
+        this.open.remove(voyageHandle);
+        voyageHandle.fantasyHandle.delete();
+        Mubble.LOGGER.debug("Closed voyage level {}", id);
+    }
+
+    /** Closes every handle this provider still holds. Called on server shutdown. */
+    public void closeAll() {
+        for (VoyageWorldHandle handle : List.copyOf(this.open)) {
+            this.close(handle);
+        }
+    }
+
+    private Identifier freshLevelId() {
+        // A counter rather than a random id: voyage code paths must stay free of live randomness
+        // (design doc §6.9). Fantasy deletes temporary levels on close and on startup, so the
+        // counter cannot collide with a directory left over from a previous run.
+        while (true) {
+            Identifier id = Mubble.id(LEVEL_PATH_PREFIX + this.nextId.getAndIncrement());
+            if (this.server.getLevel(ResourceKey.create(net.minecraft.core.registries.Registries.DIMENSION, id)) == null) {
+                return id;
+            }
+        }
+    }
+
+    private void assertServerThread() {
+        if (!this.server.isSameThread()) {
+            throw new IllegalStateException("Voyage levels may only be opened or closed on the server thread");
+        }
+    }
+
+    private static final class Handle implements VoyageWorldHandle {
+        private final RuntimeLevelHandle fantasyHandle;
+        private boolean open = true;
+
+        private Handle(RuntimeLevelHandle fantasyHandle) {
+            this.fantasyHandle = fantasyHandle;
+        }
+
+        @Override
+        public ServerLevel level() {
+            if (!this.open) {
+                throw new IllegalStateException("Voyage level " + this.dimension().identifier() + " has been closed");
+            }
+            return this.fantasyHandle.asLevel();
+        }
+
+        @Override
+        public ResourceKey<Level> dimension() {
+            return this.fantasyHandle.getRegistryKey();
+        }
+
+        @Override
+        public boolean isOpen() {
+            return this.open;
+        }
+    }
+}

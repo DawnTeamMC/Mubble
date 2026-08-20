@@ -19,10 +19,10 @@
       "environment": "client"
     }
   ],
-  "accessWidener": "mubble.accesswidener",
   "depends": {
     "minecraft": "*",
-    "fabric-api": "*"
+    "fabric-api": "*",
+    "fantasy": "*"
   },
   "custom": {
     "loom:injected_interfaces": {

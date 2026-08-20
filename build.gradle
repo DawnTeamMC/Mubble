@@ -65,6 +65,16 @@ allprojects {
 
     apply plugin: "net.fabricmc.fabric-loom"
 
+    repositories {
+        maven {
+            name = 'Nucleoid'
+            url = 'https://maven.nucleoid.xyz/'
+            content {
+                includeGroup 'xyz.nucleoid'
+            }
+        }
+    }
+
     tasks.withType(JavaCompile).configureEach {
         it.options.release = 25
     }

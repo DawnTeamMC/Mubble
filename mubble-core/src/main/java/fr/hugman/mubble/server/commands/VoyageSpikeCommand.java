@@ -6,7 +6,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import fr.hugman.mubble.world.voyage.level.TrialInstance;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldHandle;
-import fr.hugman.mubble.world.voyage.level.runtime.VoyageWorlds;
+import fr.hugman.mubble.world.voyage.level.fantasy.VoyageWorlds;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;

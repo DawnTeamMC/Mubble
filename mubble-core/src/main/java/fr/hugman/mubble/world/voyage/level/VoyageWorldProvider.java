@@ -4,16 +4,12 @@ package fr.hugman.mubble.world.voyage.level;
  * Supplies the levels that voyage trials run in.
  *
  * <p>Vanilla has no notion of a temporary world, so this is the seam that hides whichever trick we
- * use to get one. Two implementations are plausible and must remain interchangeable:
+ * use to get one. Today that is Fantasy (see
+ * {@code fr.hugman.mubble.world.voyage.level.fantasy}); the alternative, if runtime dimensions ever
+ * stop being viable, is leasing from a fixed pool of pre-declared levels cleared between uses.
  *
- * <ul>
- *     <li>creating and destroying a {@link net.minecraft.server.level.ServerLevel} per trial
- *     (see {@code fr.hugman.mubble.world.voyage.level.runtime}), and</li>
- *     <li>leasing from a fixed pool of pre-declared levels that get cleared between uses.</li>
- * </ul>
- *
- * <p>Nothing outside the implementation package may touch the server's level map, so that swapping
- * strategies stays a one-class change. See {@code docs/runtime-worlds.md}.
+ * <p>Nothing outside the implementation package may name Fantasy or touch the server's level map, so
+ * that swapping strategies stays a one-class change. See {@code docs/runtime-worlds.md}.
  */
 public interface VoyageWorldProvider {
     /**

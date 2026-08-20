@@ -1,8 +1,0 @@
-accessWidener	v1	official
-
-# Runtime voyage levels (see docs/runtime-worlds.md).
-# The level map is the server's registry of live dimensions; a runtime level provider
-# has to add and remove entries in it. storageSource is needed to build a ServerLevel
-# and to locate the dimension folder for deletion.
-accessible	field	net/minecraft/server/MinecraftServer	levels	Ljava/util/Map;
-accessible	field	net/minecraft/server/MinecraftServer	storageSource	Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;

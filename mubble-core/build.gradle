@@ -1,5 +1,12 @@
 version = getSubprojectVersion(project)
 
+dependencies {
+    // Runtime dimension lifecycle. Vanilla cannot create or destroy a level after boot, and voyages
+    // need one temporary level per trial. See docs/runtime-worlds.md.
+    implementation "xyz.nucleoid:fantasy:${fantasy_version}"
+    include "xyz.nucleoid:fantasy:${fantasy_version}"
+}
+
 fabricApi {
     configureDataGeneration() {
         outputDirectory = file("src/generated/resources")
@@ -10,8 +17,6 @@ fabricApi {
 }
 
 loom {
-    accessWidenerPath = file("src/main/resources/mubble.accesswidener")
-
     runs {
         datagen {
             name "Data Generation"
