@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
@@ -85,9 +86,17 @@ public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
         List<ServerPlayer> stranded = List.copyOf(level.players());
         if (!stranded.isEmpty()) {
             Mubble.LOGGER.error("Closing voyage level {} with {} player(s) still inside; evacuating to spawn", id, stranded.size());
+
+            // World spawn, not the coordinates they happen to be standing on. A trial platform sits
+            // at whatever position suited the trial, and copying that into the overworld drops people
+            // inside terrain or in mid-air — which is how a player ends up somewhere baffling after a
+            // shutdown mid-trial. Restoring the *right* position is the session's job, not ours; all
+            // this owes anyone is somewhere survivable.
+            ServerLevel overworld = this.server.overworld();
+            BlockPos spawn = this.server.getRespawnData().pos();
             for (ServerPlayer player : stranded) {
-                player.teleportTo(this.server.overworld(),
-                        player.getX(), player.getY(), player.getZ(), Set.of(), player.getYRot(), player.getXRot(), false);
+                player.teleportTo(overworld, spawn.getX() + 0.5D, spawn.getY(), spawn.getZ() + 0.5D,
+                        Set.of(), player.getYRot(), player.getXRot(), false);
             }
         }
 

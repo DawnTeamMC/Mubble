@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.SharedSuggestionProvider;
@@ -76,6 +77,18 @@ public final class VoyageSpikeCommand {
      */
     public static void register() {
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> SESSIONS.clear());
+
+        // Dying takes you out of the level without going through close(), which used to leave the
+        // session open: the level stayed alive, /voyagespike open refused to start another, and a
+        // later close() teleported you from wherever you respawned back to where you had been
+        // standing before the spike. Vanilla has already chosen where a dead player goes, so this
+        // only destroys the level and forgets the session — it does not move anyone.
+        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+            Session session = SESSIONS.remove(newPlayer.getUUID());
+            if (session != null) {
+                VoyageWorlds.get(newPlayer.level().getServer()).close(session.handle());
+            }
+        });
     }
 
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
@@ -153,9 +166,6 @@ public final class VoyageSpikeCommand {
     }
 
     private static int status(CommandSourceStack source) {
-        source.sendSuccess(() -> Component.literal(
-                "Environment profiles: " + EnvironmentController.describeLoaded(source.getServer())), false);
-
         if (SESSIONS.isEmpty()) {
             source.sendSuccess(() -> Component.literal("No spike levels open"), false);
             return 0;
