@@ -1,0 +1,14 @@
+{
+  "display_name": "POC Voyage",
+  "trials": [
+    "mubble-testmod:trial_dawn",
+    "mubble-testmod:trial_shifting",
+    "mubble-testmod:trial_toxic"
+  ],
+  "completion_rewards": [
+    {
+      "count": 1,
+      "item": "minecraft:carrot"
+    }
+  ]
+}

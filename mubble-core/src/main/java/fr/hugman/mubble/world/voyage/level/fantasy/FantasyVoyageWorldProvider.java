@@ -1,7 +1,7 @@
 package fr.hugman.mubble.world.voyage.level.fantasy;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.world.voyage.level.TrialInstance;
+import fr.hugman.mubble.world.voyage.trial.TrialInstance;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldHandle;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldProvider;
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.clock.WorldClocks;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import xyz.nucleoid.fantasy.Fantasy;
@@ -47,7 +48,7 @@ public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
     }
 
     @Override
-    public VoyageWorldHandle open(TrialInstance trial, long seed) {
+    public VoyageWorldHandle open(TrialInstance trial) {
         this.assertServerThread();
 
         RuntimeLevelConfig config = new RuntimeLevelConfig()
@@ -56,14 +57,22 @@ public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
                 // overworld's; trials differentiate themselves through environment profiles.
                 .setDimensionType(BuiltinDimensionTypes.OVERWORLD)
                 .setGenerator(new VoidChunkGenerator(this.server, Biomes.THE_VOID))
-                .setSeed(seed)
+                .setSeed(trial.nodeSeed())
                 .setShouldTickTime(false);
+
+        // The one thing an environment profile cannot express as a layer. Vanilla's clock manager
+        // belongs to the server, so /time and anything built on it moves every level at once; Fantasy
+        // gives a runtime level its own, but only at creation. Paused as well as set, so a trial that
+        // asks for dusk stays at dusk. WorldClocks.OVERWORLD is the default clock of the dimension
+        // type chosen above — the two have to agree.
+        trial.definition().fixedTime().ifPresent(time -> config.setClockTime(WorldClocks.OVERWORLD, time, true));
 
         RuntimeLevelHandle fantasyHandle = Fantasy.get(this.server).openTemporaryLevel(this.freshLevelId(), config);
 
         Handle handle = new Handle(fantasyHandle);
         this.open.add(handle);
-        Mubble.LOGGER.debug("Opened voyage level {} for trial {} (seed {})", handle.dimension().identifier(), trial.id(), seed);
+        Mubble.LOGGER.debug("Opened voyage level {} for trial {} at node '{}' (seed {})",
+                handle.dimension().identifier(), trial.id(), trial.nodePath(), trial.nodeSeed());
         return handle;
     }
 

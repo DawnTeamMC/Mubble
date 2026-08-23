@@ -1,0 +1,9 @@
+{
+  "display_name": "Dawn Platform",
+  "environment": "mubble-testmod:env_dawn",
+  "platform": {
+    "block": "minecraft:smooth_sandstone",
+    "radius": 8,
+    "spawn_y": 65
+  }
+}

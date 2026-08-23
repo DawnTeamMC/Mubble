@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.WeakHashMap;
 
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -27,10 +28,21 @@ import net.minecraft.world.level.Level;
  * on exit; everything else here is keeping already-connected clients honest.
  */
 public final class EnvironmentController {
-    /** Which profile each voyage level is currently showing, so a reload can re-send it. */
-    private static final Map<Level, Applied> ACTIVE = new HashMap<>();
+    /**
+     * Which profile each voyage level is currently showing, so a reload can re-send it.
+     *
+     * <p>Weak keys. Whoever closes a trial level is expected to {@link #clear} it first, but a
+     * voyage level is deleted outright rather than merely emptied, and one forgotten call would
+     * otherwise pin a whole deleted level and its chunks in memory for as long as the server runs.
+     */
+    private static final Map<Level, Applied> ACTIVE = new WeakHashMap<>();
 
-    private record Applied(Identifier profileId, EnvironmentProfile profile, EnvironmentAttributeMap overrides) {
+    /**
+     * The seed is kept, not the map it resolved to. {@code /reload} replaces the profile object, and
+     * re-resolving the new one against the same node seed is what makes an edited candidate list
+     * take effect without the trial silently changing which candidate it had picked.
+     */
+    private record Applied(Identifier profileId, long nodeSeed, EnvironmentAttributeMap overrides) {
     }
 
     private EnvironmentController() {
@@ -54,10 +66,11 @@ public final class EnvironmentController {
     /**
      * Applies a profile to a level and pushes it to everyone in that level.
      *
+     * @param nodeSeed  the seed any candidate lists in the profile resolve against
      * @param overrides per-instance values resolved by the caller, layered on top of the profile
      * @return whether the profile existed; {@code false} leaves the level untouched
      */
-    public static boolean apply(ServerLevel level, Identifier profileId, EnvironmentAttributeMap overrides) {
+    public static boolean apply(ServerLevel level, Identifier profileId, long nodeSeed, EnvironmentAttributeMap overrides) {
         EnvironmentProfile profile = lookup(level.getServer(), profileId);
         if (profile == null) {
             // Loud, and no fallback: a missing profile is an authoring bug, and quietly rendering a
@@ -67,14 +80,30 @@ public final class EnvironmentController {
             return false;
         }
 
-        ACTIVE.put(level, new Applied(profileId, profile, overrides));
-        applyServerSide(level, profile, overrides);
+        ACTIVE.put(level, new Applied(profileId, nodeSeed, overrides));
 
-        ActiveEnvironmentPayload payload = new ActiveEnvironmentPayload(Optional.of(profileId), overrides);
+        // Resolved once, here, and then used for both sides. The client is sent the same two layers
+        // the server stacks, so a mistake shows up as the wrong sky rather than as a desync where
+        // only one of them is wrong.
+        EnvironmentAttributeMap resolved = resolveOverrides(profile, nodeSeed, overrides);
+        applyServerSide(level, profile, resolved);
+
+        ActiveEnvironmentPayload payload = new ActiveEnvironmentPayload(Optional.of(profileId), resolved);
         for (ServerPlayer player : level.players()) {
             ServerPlayNetworking.send(player, payload);
         }
         return true;
+    }
+
+    /**
+     * {@return the layer that goes on top of the profile}: whatever its candidate lists resolved to,
+     * with the caller's per-instance overrides winning over both.
+     */
+    private static EnvironmentAttributeMap resolveOverrides(EnvironmentProfile profile, long nodeSeed, EnvironmentAttributeMap overrides) {
+        return EnvironmentAttributeMap.builder()
+                .putAll(profile.attributes().resolveCandidates(nodeSeed))
+                .putAll(overrides)
+                .build();
     }
 
     /** {@return how many profiles are loaded, and which} — the useful half of a "profile not found" */
@@ -105,16 +134,35 @@ public final class EnvironmentController {
      */
     public static void sendTo(ServerPlayer player) {
         Applied applied = ACTIVE.get(player.level());
-        ServerPlayNetworking.send(player, applied == null
-                ? ActiveEnvironmentPayload.clear()
-                : new ActiveEnvironmentPayload(Optional.of(applied.profileId()), applied.overrides()));
+        if (applied == null) {
+            ServerPlayNetworking.send(player, ActiveEnvironmentPayload.clear());
+            return;
+        }
+
+        EnvironmentProfile profile = lookup(player.level().getServer(), applied.profileId());
+        if (profile == null) {
+            // The profile was applied and has since gone away, which only happens if a reload dropped
+            // it. Better an unmodified sky than a payload naming something the client cannot resolve.
+            Mubble.LOGGER.error("Environment profile '{}' is active in {} but no longer loaded",
+                    applied.profileId(), player.level().dimension().identifier());
+            ServerPlayNetworking.send(player, ActiveEnvironmentPayload.clear());
+            return;
+        }
+
+        ServerPlayNetworking.send(player, new ActiveEnvironmentPayload(Optional.of(applied.profileId()),
+                resolveOverrides(profile, applied.nodeSeed(), applied.overrides())));
     }
 
-    private static void applyServerSide(ServerLevel level, EnvironmentProfile profile, EnvironmentAttributeMap overrides) {
-        ((EnvironmentOverridable) level).setEnvironmentOverrides(List.of(profile.attributes(), overrides));
+    private static void applyServerSide(ServerLevel level, EnvironmentProfile profile, EnvironmentAttributeMap resolved) {
+        ((EnvironmentOverridable) level).setEnvironmentOverrides(List.of(profile.attributes().fixed(), resolved));
 
-        // fixed_time and weather are not attributes and cannot be expressed as layers; see
-        // docs/environment-profiles.md for why, and what they currently do.
+        // fixed_time is not applied here. It is a clock, and a clock can only be given to a level
+        // when the level is created, so the trial's level provider reads it off the definition; see
+        // TrialDefinition#fixedTime. Nothing sets it for a level that already exists, which is why
+        // /voyagespike environment cannot change the time.
+        //
+        // weather is not an attribute either, and worse: it is server-global in 26.2, so this leaks
+        // out of the trial. See docs/environment-profiles.md.
         profile.weather().ifPresent(weather -> applyWeather(level, weather));
     }
 
@@ -149,7 +197,7 @@ public final class EnvironmentController {
         Map<Level, Applied> snapshot = Map.copyOf(ACTIVE);
         snapshot.forEach((level, applied) -> {
             if (level instanceof ServerLevel serverLevel) {
-                apply(serverLevel, applied.profileId(), applied.overrides());
+                apply(serverLevel, applied.profileId(), applied.nodeSeed(), applied.overrides());
             }
         });
     }
