@@ -3,6 +3,7 @@ package fr.hugman.mubble.world.voyage.level.fantasy;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.world.voyage.trial.TrialInstance;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldHandle;
+import fr.hugman.mubble.world.level.WeatherOverridable;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldProvider;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.clock.WorldClocks;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.minecraft.world.level.gamerules.GameRules;
+import net.minecraft.world.level.saveddata.WeatherData;
 import xyz.nucleoid.fantasy.Fantasy;
 import xyz.nucleoid.fantasy.RuntimeLevelConfig;
 import xyz.nucleoid.fantasy.RuntimeLevelHandle;
@@ -58,7 +61,11 @@ public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
                 .setDimensionType(BuiltinDimensionTypes.OVERWORLD)
                 .setGenerator(new VoidChunkGenerator(this.server, Biomes.THE_VOID))
                 .setSeed(trial.nodeSeed())
-                .setShouldTickTime(false);
+                .setShouldTickTime(false)
+                // A trial's weather is whatever its environment profile says and nothing else. The
+                // level owns its weather (see below), so leaving the cycle running would have it
+                // drift off on its own timers halfway through a trial.
+                .setGameRule(GameRules.ADVANCE_WEATHER, false);
 
         // The one thing an environment profile cannot express as a layer. Vanilla's clock manager
         // belongs to the server, so /time and anything built on it moves every level at once; Fantasy
@@ -68,6 +75,7 @@ public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
         trial.definition().fixedTime().ifPresent(time -> config.setClockTime(WorldClocks.OVERWORLD, time, true));
 
         RuntimeLevelHandle fantasyHandle = Fantasy.get(this.server).openTemporaryLevel(this.freshLevelId(), config);
+        this.isolateWeather(fantasyHandle.asLevel());
 
         Handle handle = new Handle(fantasyHandle);
         this.open.add(handle);
@@ -113,6 +121,23 @@ public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
         this.open.remove(voyageHandle);
         voyageHandle.fantasyHandle.delete();
         Mubble.LOGGER.debug("Closed voyage level {}", id);
+    }
+
+    /**
+     * Gives a fresh level its own weather, so a trial is sealed off from the rest of the server.
+     *
+     * <p>Weather is one object on the server in 26.2, shared by every level, so without this a
+     * thunderstorm in a trial rains on someone's overworld build and {@code /weather clear} outside
+     * cancels the storm a trial asked for. A new {@link WeatherData} is clear.
+     *
+     * <p>The rain and thunder levels are zeroed as well. They are already per level, but the
+     * constructor primed them from the <em>server's</em> weather, so a level created during a storm
+     * would open mid-downpour and then spend a hundred ticks fading out.
+     */
+    private void isolateWeather(ServerLevel level) {
+        ((WeatherOverridable) level).setOwnWeather(new WeatherData());
+        level.setRainLevel(0.0F);
+        level.setThunderLevel(0.0F);
     }
 
     /** Closes every handle this provider still holds. Called on server shutdown. */

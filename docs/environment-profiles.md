@@ -176,13 +176,14 @@ The issue asks for an honest account of which Tier B fields the profile layer ge
 | `visual/ambient_light_color`, `visual/block_light_tint`, `visual/sky_light_color` | **Real**, client-side rendering. |
 | Gameplay booleans (`monsters_burn`, `piglins_zombify`, `water_evaporates`, …) | **Real**, server-side, and free — they are attributes like any other. The issue did not ask for these; they arrive with the vocabulary. |
 | `fixed_time` | **Real since phase 2**, with one limit. Not an attribute, and `ServerClockManager` hangs off the **server**, not the level — `/time` moves every level at once. Fantasy gives a runtime level its own clock manager, so `RuntimeLevelConfig.setClockTime(clock, time, paused)` at creation is the only per-trial way to set one. That is where it is applied, from `TrialDefinition#fixedTime`. The limit follows from the mechanism: a profile applied to a level that already exists cannot change its time, so `/voyagespike environment` never will. |
-| `weather` | **Coarse, and wrong at the edges.** Not an attribute. `WeatherData` is **server-global** in 26.x — `ServerLevel`'s constructor calls `prepareWeather(server.getWeatherData())` — so `MinecraftServer.setWeatherParameters` changes the weather for *everyone on the server*, not just the trial. Implemented because it is what exists, but it must not ship this way: a player entering a stormy trial should not rain on someone's Overworld build. Needs either a per-level `WeatherData` or dropping the field. |
+| `weather` | **Real since phase 2.** Not an attribute, and `WeatherData` is one object on the server that every level reads through `ServerLevel#getWeatherData`. Trial levels are handed their own, so a trial is isolated in both directions: its storm does not rain on someone's Overworld build, and `/weather` outside cannot cancel it. Applied to a level that does *not* own its weather, the field is refused with a warning rather than written to the server's — that is `/voyagespike environment` in the Overworld. See `trials-and-voyages.md`. |
 | ceiling / skylight | **Not available.** `hasCeiling` and `hasSkyLight` are `DimensionType` fields, not attributes, and the dimension type is shared across all trials by necessity (see `runtime-worlds.md` §2). A trial cannot change them without owning a dimension type, which would break connected clients. |
 
-The short version: **Tier A is fully real, and most of Tier B turned out to be real too** — because
-they are all just attributes. The two fields that are genuinely not attributes, `fixed_time` and
-`weather`, are exactly the two that remain unfinished, and both for structural reasons rather than
-effort.
+The short version: **Tier A and Tier B are both fully real**, and mostly for free — they are all just
+attributes. The two fields that are genuinely not attributes, `fixed_time` and `weather`, were the
+last two to work, and both needed the level to be opened by a trial rather than merely decorated by a
+profile. Both landed in phase 2, and both carry the same limit as a result: they apply to a level
+being created, not to one already running.
 
 ## Manual test
 
@@ -222,5 +223,6 @@ voyage level to see it.
   of the `ActiveEnvironment` payload. See `trials-and-voyages.md`.
 - **`fixed_time`** — **done in phase 2**, wired through Fantasy's clock config at level creation, as
   this note predicted. It only applies to a level being opened, never to one already running.
-- **`weather`** wants a decision: per-level weather, or drop the field. It is the last field that
-  leaks out of a trial, and it should not ship as it is.
+
+- **`weather`** — **done in phase 2**, per-level rather than dropped. Nothing in a profile leaks out
+  of a trial any more.

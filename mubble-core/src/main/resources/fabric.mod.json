@@ -31,6 +31,9 @@
       ],
       "net/minecraft/world/level/Level": [
         "fr/hugman/mubble/world/level/EnvironmentOverridable"
+      ],
+      "net/minecraft/server/level/ServerLevel": [
+        "fr/hugman/mubble/world/level/WeatherOverridable"
       ]
 	}
   },
