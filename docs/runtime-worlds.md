@@ -212,8 +212,11 @@ Fantasy.
 - **Server thread only.** `open` and `close` throw if called off-thread.
 - **Deletes, does not leak.** Close calls `RuntimeLevelHandle.delete()`, which unregisters the level
   and removes its directory.
-- **No stranded players.** `close` evacuates anyone still inside to the overworld and logs an error.
-  The caller is supposed to move them first; this is a backstop, not the mechanism.
+- **No stranded players.** `close` evacuates anyone still inside to the **overworld's world spawn**
+  and logs an error. The caller is supposed to move them first; this is a backstop, not the
+  mechanism. It deliberately does not reuse the player's current coordinates — a trial platform sits
+  wherever suited the trial, and copying that position into the overworld drops people inside terrain
+  or in mid-air. Restoring the *correct* position belongs to the session, not here.
 - **Shutdown cleanup.** `SERVER_STOPPING` closes every open handle before vanilla walks the level map.
 - **Void levels.** Fantasy's `VoidChunkGenerator` over `minecraft:the_void`, so a trial starts from
   nothing and phase 2 builds its platform on top.
@@ -250,9 +253,10 @@ What to check:
 3. **`<world>/dimensions/mubble/voyage/` is empty** after `close`. Open and close ten times; the
    folder must not accumulate.
 4. **Two players can each have one open** simultaneously without interfering.
-5. **Kill the server while inside** (not a clean stop), restart, and confirm the leftover directory
-   is gone from the log line `Deleted N orphaned voyage level(s)`. Note that the *player* recovery
-   path is phase 3's job, not this spike's — expect to be stranded, that is the bug phase 3 fixes.
+5. **Quit to title while inside**, then load the world again. You come back at the overworld's world
+   spawn, because shutdown evacuates you before saving. Landing back where you *started the spike*
+   needs the stash to be persisted, which is phase 3's job and one of its acceptance criteria — the
+   spike deliberately does not attempt it.
 
 `VoyageSpikeCommand` is throwaway. Phase 4's `/voyage` replaces it and it should be deleted then.
 
