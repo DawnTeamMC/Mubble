@@ -12,7 +12,7 @@ import fr.hugman.mubble.world.voyage.VoyageDefinition;
 import fr.hugman.mubble.world.voyage.VoyageSeeds;
 import fr.hugman.mubble.world.voyage.environment.EnvironmentController;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldHandle;
-import fr.hugman.mubble.world.voyage.level.fantasy.VoyageWorlds;
+import fr.hugman.mubble.world.voyage.session.VoyageSessions;
 import fr.hugman.mubble.world.voyage.trial.TrialDefinition;
 import fr.hugman.mubble.world.voyage.trial.TrialInstance;
 import java.util.HashMap;
@@ -65,6 +65,12 @@ public final class VoyageSpikeCommand {
     );
     private static final Dynamic2CommandExceptionType UNKNOWN_DEFINITION = new Dynamic2CommandExceptionType(
             (what, id) -> Component.literal("No " + what + " '" + id + "' is loaded")
+    );
+    private static final SimpleCommandExceptionType ALREADY_IN_VOYAGE = new SimpleCommandExceptionType(
+            Component.literal("You are already in a voyage")
+    );
+    private static final SimpleCommandExceptionType NOT_IN_VOYAGE = new SimpleCommandExceptionType(
+            Component.literal("You are not in a voyage")
     );
 
     /**
@@ -127,6 +133,16 @@ public final class VoyageSpikeCommand {
                         .then(Commands.argument("voyage", IdentifierArgument.id())
                                 .suggests((cc, builder) -> suggest(cc.getSource(), MubbleRegistries.VOYAGE, builder))
                                 .executes(cc -> describeVoyage(cc.getSource(), IdentifierArgument.getId(cc, "voyage")))))
+                .then(Commands.literal("run")
+                        .then(Commands.argument("voyage", IdentifierArgument.id())
+                                .suggests((cc, builder) -> suggest(cc.getSource(), MubbleRegistries.VOYAGE, builder))
+                                .executes(cc -> run(cc.getSource().getPlayerOrException(),
+                                        IdentifierArgument.getId(cc, "voyage"), VoyageSeeds.random()))
+                                .then(Commands.argument("seed", LongArgumentType.longArg())
+                                        .executes(cc -> run(cc.getSource().getPlayerOrException(),
+                                                IdentifierArgument.getId(cc, "voyage"), LongArgumentType.getLong(cc, "seed"))))))
+                .then(Commands.literal("quit")
+                        .executes(cc -> quit(cc.getSource().getPlayerOrException())))
                 .then(Commands.literal("environment")
                         .then(Commands.literal("clear")
                                 .executes(cc -> clearEnvironment(cc.getSource().getPlayerOrException())))
@@ -147,7 +163,7 @@ public final class VoyageSpikeCommand {
         TrialDefinition definition = lookup(player.level().getServer(), MubbleRegistries.TRIAL, trialId, "trial");
         TrialInstance trial = TrialInstance.of(trialId, SPIKE_NODE_PATH, definition, seed);
 
-        VoyageWorldHandle handle = VoyageWorlds.get(player.level().getServer()).open(trial);
+        VoyageWorldHandle handle = VoyageSessions.get(player.level().getServer()).worlds().open(trial);
         ServerLevel level = handle.level();
         definition.platform().place(level, 0, 0);
 
@@ -198,7 +214,7 @@ public final class VoyageSpikeCommand {
         if (handle.isOpen()) {
             EnvironmentController.clear(handle.level());
         }
-        VoyageWorlds.get(server).close(handle);
+        VoyageSessions.get(server).worlds().close(handle);
     }
 
     private static int setEnvironment(ServerPlayer player, Identifier profile, long seed) throws CommandSyntaxException {
@@ -215,7 +231,34 @@ public final class VoyageSpikeCommand {
         return 1;
     }
 
-    /** Reads a voyage back out. Running one is phase 3; this only proves the file parsed. */
+    /**
+     * Starts a real voyage session.
+     *
+     * <p>Phase 4's {@code /voyage start} replaces this, including the part where an omitted seed is
+     * generated and echoed. Here so that phase 3 can be driven in-game before that command exists.
+     */
+    private static int run(ServerPlayer player, Identifier voyageId, long seed) throws CommandSyntaxException {
+        VoyageSessions sessions = VoyageSessions.get(player.level().getServer());
+        if (sessions.isInVoyage(player)) {
+            throw ALREADY_IN_VOYAGE.create();
+        }
+        VoyageDefinition voyage = lookup(player.level().getServer(), MubbleRegistries.VOYAGE, voyageId, "voyage");
+
+        sessions.start(player, voyageId, voyage, seed);
+        return 1;
+    }
+
+    /** Ends a running voyage as an abandonment, which is phase 4's {@code /voyage abandon}. */
+    private static int quit(ServerPlayer player) throws CommandSyntaxException {
+        VoyageSessions sessions = VoyageSessions.get(player.level().getServer());
+        if (!sessions.isInVoyage(player)) {
+            throw NOT_IN_VOYAGE.create();
+        }
+        sessions.abandon(player);
+        return 1;
+    }
+
+    /** Reads a voyage back out without running it. */
     private static int describeVoyage(CommandSourceStack source, Identifier voyageId) throws CommandSyntaxException {
         VoyageDefinition voyage = lookup(source.getServer(), MubbleRegistries.VOYAGE, voyageId, "voyage");
 
