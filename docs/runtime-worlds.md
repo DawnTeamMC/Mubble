@@ -88,7 +88,7 @@ Today's triggers are safe by accident: `tickConnection()` (where command executi
 right-clicks are handled) sits *after* the level loop closes. Confirmed in bytecode — the
 `getAllLevels()` call is at offset 118 and `tickConnection()` at 233 of the same method. **(read)**
 But "safe by accident" stops being true the moment phase 3 ends a voyage from a player tick, a
-timer, or a death.
+timer, or a death — which it now does, on all three.
 
 **Fantasy already fixes this**, with a `@Redirect` on `tickChildren` that snapshots the collection
 before iterating (`SafeIterator`). We do not need our own.
@@ -206,7 +206,8 @@ phase 2 filled in what phase 0 left as a placeholder, and the seed moved inside 
 travelling as a second argument, so there is no way for two call sites to disagree about it.
 
 The implementation lives in `…voyage.level.fantasy` and is the only code in the mod that names
-Fantasy.
+Fantasy. It is owned by `VoyageSessions` since phase 3, which is what the phase-0 scaffolding said
+would happen; the `VoyageWorlds` holder that stood in for it is gone.
 
 ### What the implementation guarantees
 
@@ -264,9 +265,9 @@ What to check:
    folder must not accumulate.
 4. **Two players can each have one open** simultaneously without interfering.
 5. **Quit to title while inside**, then load the world again. You come back at the overworld's world
-   spawn, because shutdown evacuates you before saving. Landing back where you *started the spike*
-   needs the stash to be persisted, which is phase 3's job and one of its acceptance criteria — the
-   spike deliberately does not attempt it.
+   spawn, because shutdown evacuates you before saving. Landing back where you *started* is a
+   property of a voyage session and not of a bare trial level; `/voyagespike open` has no stash, so
+   it still cannot do it. See `voyage-sessions.md`.
 
 `VoyageSpikeCommand` is throwaway. Phase 4's `/voyage` replaces it and it should be deleted then.
 

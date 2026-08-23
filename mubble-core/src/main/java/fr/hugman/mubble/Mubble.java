@@ -9,7 +9,7 @@ import fr.hugman.mubble.network.protocol.common.custom.MubblePayloadTypes;
 import fr.hugman.mubble.world.attribute.MubbleAttributeTypes;
 import fr.hugman.mubble.server.commands.VoyageSpikeCommand;
 import fr.hugman.mubble.world.voyage.environment.EnvironmentController;
-import fr.hugman.mubble.world.voyage.level.fantasy.VoyageWorlds;
+import fr.hugman.mubble.world.voyage.session.VoyageSessions;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import fr.hugman.mubble.world.item.consume_effects.MubbleConsumeEffectTypes;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionTypes;
@@ -36,7 +36,7 @@ public class Mubble implements ModInitializer {
         MubblePayloadTypes.registerTypes();
         MubbleServerReceivers.register();
         MubbleCommands.register();
-        VoyageWorlds.register();
+        VoyageSessions.register();
         EnvironmentController.register();
         VoyageSpikeCommand.register();
     }

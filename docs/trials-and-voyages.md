@@ -16,8 +16,8 @@ Two datapack registries and one general capability:
 | `mubble:voyage` | an ordered list of trials, plus what completing them pays |
 | candidate lists | any environment attribute may name several values and pick one by seed |
 
-Nothing runs a voyage yet. Phase 3 owns the session that walks one; this phase is the data it will
-walk, plus the resolver it will call.
+Nothing ran a voyage as of this phase — this is the data, plus the resolver. Phase 3 added the
+session that walks it; see `voyage-sessions.md`.
 
 ## Schema
 
@@ -213,8 +213,9 @@ platform is somewhere sane to stand.
 
 ## Still open
 
-- **Running a voyage** is phase 3: the session, the player-state stash, and walking node to node.
-  `VoyageDefinition.nodePath(int)` is the addressing this phase leaves behind for it.
+- **Running a voyage** was phase 3: the session, the player-state stash, and walking node to node.
+  `VoyageDefinition.nodePath(int)` is the addressing this phase left behind for it, and is what the
+  session now derives each trial's node seed from.
 - **Rulesets and objectives** are deliberately absent from `TrialDefinition` rather than stubbed. Both
   would be optional fields when they arrive, so adding them breaks no existing file — whereas an
   empty registry designed now would have to be designed wrong.

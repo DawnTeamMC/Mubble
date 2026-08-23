@@ -1,6 +1,7 @@
 package fr.hugman.mubble.world.voyage;
 
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Derives every random-looking value a voyage needs from its one seed.
@@ -20,6 +21,18 @@ public final class VoyageSeeds {
     private static final long FNV_PRIME = 0x100000001B3L;
 
     private VoyageSeeds() {
+    }
+
+    /**
+     * {@return a fresh voyage seed}
+     *
+     * <p>The single point in all of this where a random number is drawn, and it is not a roll
+     * <em>inside</em> a voyage — it is the choice of which voyage to run. Once this returns, the
+     * whole run is determined, which is exactly what makes the number worth sharing. A player who
+     * supplies their own seed never reaches this.
+     */
+    public static long random() {
+        return ThreadLocalRandom.current().nextLong();
     }
 
     /**
