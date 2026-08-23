@@ -1,0 +1,9 @@
+{
+  "display_name": "Shifting Platform",
+  "environment": "mubble-testmod:env_shifting",
+  "platform": {
+    "block": "minecraft:deepslate_tiles",
+    "radius": 6,
+    "spawn_y": 80
+  }
+}

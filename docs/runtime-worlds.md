@@ -195,14 +195,15 @@ happily let you register a new dimension type and it would break connected clien
 
 ```java
 public interface VoyageWorldProvider {
-    VoyageWorldHandle open(TrialInstance trial, long seed);
+    VoyageWorldHandle open(TrialInstance trial);
     void close(VoyageWorldHandle handle);   // must delete, not leak
 }
 ```
 
 `VoyageWorldHandle` exposes `level()`, `dimension()` and `isOpen()`, and throws if you touch
-`level()` after a close. `TrialInstance` is a phase-0 placeholder carrying an id and a node path;
-phase 2 fills it in.
+`level()` after a close. `TrialInstance` carries the definition, the node path and the node seed —
+phase 2 filled in what phase 0 left as a placeholder, and the seed moved inside it rather than
+travelling as a second argument, so there is no way for two call sites to disagree about it.
 
 The implementation lives in `…voyage.level.fantasy` and is the only code in the mod that names
 Fantasy.
@@ -219,7 +220,11 @@ Fantasy.
   or in mid-air. Restoring the *correct* position belongs to the session, not here.
 - **Shutdown cleanup.** `SERVER_STOPPING` closes every open handle before vanilla walks the level map.
 - **Void levels.** Fantasy's `VoidChunkGenerator` over `minecraft:the_void`, so a trial starts from
-  nothing and phase 2 builds its platform on top.
+  nothing. The caller builds the platform: `open` returns an empty level, because what a trial
+  contains is not this seam's business.
+- **Its own clock.** If the trial's environment names a `fixed_time`, the level is created with its
+  clock set there and paused. It has to happen at creation: vanilla's clock manager belongs to the
+  server, so anything applied afterwards would move every level at once.
 - **No randomness.** Level ids come from a counter, not `UUID.randomUUID()` — the design doc's §6.9
   rule is about voyage reproducibility, but the acceptance criterion is written as an absolute and
   there is no reason to spend the exception here.
@@ -233,11 +238,13 @@ reading this version's sources and from the build; the runtime behaviour below i
 your eyes.
 
 ```
-/voyagespike open [seed]
+/voyagespike open <trial> [seed]
 ```
 
-Creates a level, lays a 9×9 stone platform at y=64 and teleports you onto it. Chat reports the
-dimension id.
+Creates a level, builds the trial's platform, applies its environment and teleports you onto it.
+Chat reports the dimension id, the trial name and the node seed. Tab-completion lists the loaded
+trials; the testmod ships `mubble-testmod:trial_dawn`, `trial_shifting`, `trial_toxic` and
+`trial_plain`.
 
 ```
 /voyagespike status

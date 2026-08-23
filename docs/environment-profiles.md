@@ -51,9 +51,9 @@ DynamicRegistries.registerSynced(MubbleRegistries.ENVIRONMENT_PROFILE,
 ```
 
 The issue asks for "a network codec distinct from its file codec if the two ever diverge". They
-diverge immediately: `NETWORK_CODEC` carries the attributes and nothing else, and
-`EnvironmentAttributeMap.NETWORK_CODEC` additionally drops any attribute vanilla marks
-non-syncable. There is a unit test asserting the server-only fields do not cross the wire.
+diverge immediately: `NETWORK_CODEC` carries the attributes and nothing else, drops any attribute
+vanilla marks non-syncable, and (since phase 2) drops every seed-resolved candidate list. There are
+unit tests asserting none of those cross the wire.
 
 **The two must keep the same shape, though.** Registry sync does not promise both ends use the same
 codec: an entry read from disk with the file codec can be handed to the network codec. The first
@@ -107,6 +107,9 @@ vocabulary, and modifiers beyond plain override —
 ```
 
 An empty file (`{}`) is a valid no-op profile.
+
+Since phase 2, any attribute may also name a list of seed-resolved candidates in place of a value.
+That is documented in `trials-and-voyages.md`, because what it resolves against belongs to a trial.
 
 ## Where the layer goes in
 
@@ -172,7 +175,7 @@ The issue asks for an honest account of which Tier B fields the profile layer ge
 | `gameplay/sky_light_level` | **Real.** An attribute; applied on both sides, so lighting and mob spawning see it. `updateSkyBrightness()` is called on apply so it takes effect immediately. |
 | `visual/ambient_light_color`, `visual/block_light_tint`, `visual/sky_light_color` | **Real**, client-side rendering. |
 | Gameplay booleans (`monsters_burn`, `piglins_zombify`, `water_evaporates`, …) | **Real**, server-side, and free — they are attributes like any other. The issue did not ask for these; they arrive with the vocabulary. |
-| `fixed_time` | **Partial.** Not an attribute. Time in 26.x runs through `ServerClockManager`/`WorldClock`, which is per level. Currently parsed and stored but **not applied** — the right implementation is Fantasy's `RuntimeLevelConfig.setClockTime(clock, time, paused)` at level creation, which means it belongs to whoever opens the level (phase 2/3), not to a profile applied afterwards. Flagged rather than faked. |
+| `fixed_time` | **Real since phase 2**, with one limit. Not an attribute, and `ServerClockManager` hangs off the **server**, not the level — `/time` moves every level at once. Fantasy gives a runtime level its own clock manager, so `RuntimeLevelConfig.setClockTime(clock, time, paused)` at creation is the only per-trial way to set one. That is where it is applied, from `TrialDefinition#fixedTime`. The limit follows from the mechanism: a profile applied to a level that already exists cannot change its time, so `/voyagespike environment` never will. |
 | `weather` | **Coarse, and wrong at the edges.** Not an attribute. `WeatherData` is **server-global** in 26.x — `ServerLevel`'s constructor calls `prepareWeather(server.getWeatherData())` — so `MinecraftServer.setWeatherParameters` changes the weather for *everyone on the server*, not just the trial. Implemented because it is what exists, but it must not ship this way: a player entering a stormy trial should not rain on someone's Overworld build. Needs either a per-level `WeatherData` or dropping the field. |
 | ceiling / skylight | **Not available.** `hasCeiling` and `hasSkyLight` are `DimensionType` fields, not attributes, and the dimension type is shared across all trials by necessity (see `runtime-worlds.md` §2). A trial cannot change them without owning a dimension type, which would break connected clients. |
 
@@ -212,12 +215,12 @@ voyage level to see it.
 5. **Unknown id is loud.** `/voyagespike environment mubble:nope` should log an error naming the
    profile and leave the sky untouched.
 
-## Still open for phase 2
+## Still open
 
-- **Seed-resolved candidate lists** (`"sky_color": [a, b, c, d]`). Not built — the issue places it in
-  phase 2 alongside the node-seed derivation it depends on. It needs our own codec wrapping
-  `EnvironmentAttributeMap`'s dispatched map, since vanilla's entry codec has no list form. The
-  `overrides` half of the `ActiveEnvironment` payload already exists to carry the resolved result,
-  so phase 2 fills in the resolver, not the transport.
-- **`fixed_time`** wants wiring at level creation via Fantasy's clock config.
-- **`weather`** wants a decision: per-level weather, or drop the field.
+- **Seed-resolved candidate lists** — **done in phase 2**, and it landed where this note predicted:
+  our own codec wrapping the dispatched map, with the resolved result riding in the `overrides` half
+  of the `ActiveEnvironment` payload. See `trials-and-voyages.md`.
+- **`fixed_time`** — **done in phase 2**, wired through Fantasy's clock config at level creation, as
+  this note predicted. It only applies to a level being opened, never to one already running.
+- **`weather`** wants a decision: per-level weather, or drop the field. It is the last field that
+  leaks out of a trial, and it should not ship as it is.

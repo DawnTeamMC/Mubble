@@ -1,0 +1,9 @@
+{
+  "display_name": "Seeded Trial",
+  "environment": "mubble-gametest:seeded_sky",
+  "platform": {
+    "block": "minecraft:deepslate_tiles",
+    "radius": 2,
+    "spawn_y": 70
+  }
+}

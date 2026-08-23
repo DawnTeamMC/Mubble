@@ -57,7 +57,7 @@ public class EnvironmentProfileGameTest {
         var overridable = (EnvironmentOverridable) level;
 
         try {
-            overridable.setEnvironmentOverrides(List.of(profile.attributes(), EnvironmentAttributeMap.EMPTY));
+            overridable.setEnvironmentOverrides(List.of(profile.attributes().fixed(), EnvironmentAttributeMap.EMPTY));
 
             helper.assertValueEqual(
                     level.environmentAttributes().getDimensionValue(EnvironmentAttributes.SKY_COLOR),

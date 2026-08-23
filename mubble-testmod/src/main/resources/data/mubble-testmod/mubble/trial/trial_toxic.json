@@ -1,0 +1,9 @@
+{
+  "display_name": "Toxic Platform",
+  "environment": "mubble-testmod:env_toxic",
+  "platform": {
+    "block": "minecraft:moss_block",
+    "radius": 10,
+    "spawn_y": 65
+  }
+}

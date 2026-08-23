@@ -4,6 +4,7 @@ import com.google.gson.JsonParser;
 import com.mojang.serialization.JsonOps;
 import fr.hugman.mubble.test.unit.support.CodecAssertions;
 import fr.hugman.mubble.test.unit.support.TestBootstrap;
+import fr.hugman.mubble.world.voyage.environment.EnvironmentAttributeChoices;
 import fr.hugman.mubble.world.voyage.environment.EnvironmentProfile;
 import fr.hugman.mubble.world.voyage.environment.WeatherState;
 import java.util.Optional;
@@ -63,8 +64,8 @@ public class EnvironmentProfileCodecTest {
         var parsed = EnvironmentProfile.DIRECT_CODEC.parse(ops, json)
                 .getOrThrow(error -> new AssertionError("could not parse: " + error));
 
-        assertEquals(0xFF7B9FFF, parsed.attributes().applyModifier(EnvironmentAttributes.SKY_COLOR, 0));
-        assertEquals(0xFFC0C0FF, parsed.attributes().applyModifier(EnvironmentAttributes.FOG_COLOR, 0));
+        assertEquals(0xFF7B9FFF, parsed.attributes().resolve(0L).applyModifier(EnvironmentAttributes.SKY_COLOR, 0));
+        assertEquals(0xFFC0C0FF, parsed.attributes().resolve(0L).applyModifier(EnvironmentAttributes.FOG_COLOR, 0));
     }
 
     @Test
@@ -78,12 +79,12 @@ public class EnvironmentProfileCodecTest {
         var parsed = EnvironmentProfile.DIRECT_CODEC.parse(ops, json)
                 .getOrThrow(error -> new AssertionError("could not parse: " + error));
 
-        assertTrue(parsed.attributes().contains(EnvironmentAttributes.SKY_COLOR));
-        assertFalse(parsed.attributes().contains(EnvironmentAttributes.FOG_COLOR),
+        assertTrue(parsed.attributes().resolve(0L).contains(EnvironmentAttributes.SKY_COLOR));
+        assertFalse(parsed.attributes().resolve(0L).contains(EnvironmentAttributes.FOG_COLOR),
                 "a profile that sets only sky_color must leave fog_color to the layer below");
 
         // Fall-through is per field: an attribute the profile does not name comes back untouched.
-        assertEquals(4242, parsed.attributes().applyModifier(EnvironmentAttributes.FOG_COLOR, 4242));
+        assertEquals(4242, parsed.attributes().resolve(0L).applyModifier(EnvironmentAttributes.FOG_COLOR, 4242));
     }
 
     @Test
@@ -100,7 +101,7 @@ public class EnvironmentProfileCodecTest {
                 "fixed_time is applied server-side; the client learns the time from the clock packets");
         assertEquals(Optional.empty(), decoded.weather(),
                 "weather is server state; the client learns it from the weather packets");
-        assertTrue(decoded.attributes().contains(EnvironmentAttributes.SKY_COLOR),
+        assertTrue(decoded.attributes().resolve(0L).contains(EnvironmentAttributes.SKY_COLOR),
                 "the attributes are the whole point of syncing a profile");
     }
 
@@ -135,7 +136,7 @@ public class EnvironmentProfileCodecTest {
         var read = EnvironmentProfile.NETWORK_CODEC.parse(ops, written);
         assertTrue(read.isSuccess(),
                 () -> "the network codec could not read the file codec's output: " + read.error().map(Object::toString).orElse(""));
-        assertTrue(read.getOrThrow().attributes().contains(EnvironmentAttributes.SKY_COLOR),
+        assertTrue(read.getOrThrow().attributes().resolve(0L).contains(EnvironmentAttributes.SKY_COLOR),
                 "the attributes were lost in the crossover");
     }
 
@@ -152,17 +153,17 @@ public class EnvironmentProfileCodecTest {
                 () -> "the file codec could not read the network codec's output: " + read.error().map(Object::toString).orElse(""));
         // Every field being optional means a shape mismatch decodes to an empty profile rather than
         // failing, so success alone proves nothing here.
-        assertTrue(read.getOrThrow().attributes().contains(EnvironmentAttributes.SKY_COLOR),
+        assertTrue(read.getOrThrow().attributes().resolve(0L).contains(EnvironmentAttributes.SKY_COLOR),
                 "the attributes were silently dropped in the crossover");
     }
 
     private static EnvironmentProfile fullyPopulated() {
         return new EnvironmentProfile(
-                EnvironmentAttributeMap.builder()
+                EnvironmentAttributeChoices.of(EnvironmentAttributeMap.builder()
                         .set(EnvironmentAttributes.SKY_COLOR, 0xFFFFA120)
                         .set(EnvironmentAttributes.FOG_COLOR, 0xFFFFB574)
                         .set(EnvironmentAttributes.SKY_LIGHT_LEVEL, 12.0F)
-                        .build(),
+                        .build()),
                 Optional.of(23000),
                 Optional.of(WeatherState.CLEAR)
         );

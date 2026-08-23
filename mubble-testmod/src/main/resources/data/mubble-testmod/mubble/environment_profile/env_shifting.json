@@ -1,7 +1,17 @@
 {
   "attributes": {
-    "visual/sky_color": "#ff2244",
-    "visual/fog_color": "#222222",
+    "visual/sky_color": [
+      "#ff2244",
+      "#3cb043",
+      "#ffe000",
+      "#7b2fff"
+    ],
+    "visual/fog_color": [
+      "#220011",
+      "#001a00",
+      "#221a00",
+      "#0d0022"
+    ],
     "visual/fog_start_distance": 30.0,
     "visual/fog_end_distance": 200.0,
     "gameplay/sky_light_level": 7.0

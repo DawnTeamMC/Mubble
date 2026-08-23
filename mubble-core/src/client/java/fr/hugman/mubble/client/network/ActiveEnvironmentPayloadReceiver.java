@@ -43,7 +43,9 @@ public class ActiveEnvironmentPayloadReceiver implements ClientPlayNetworking.Pl
                 return;
             }
 
-            ((EnvironmentOverridable) level).setEnvironmentOverrides(List.of(profile.attributes(), payload.overrides()));
+            // fixed(), not resolve(): a synced profile has no candidate lists left in it, and asking
+            // for a resolution here would need a seed the client is deliberately never given.
+            ((EnvironmentOverridable) level).setEnvironmentOverrides(List.of(profile.attributes().fixed(), payload.overrides()));
         });
     }
 }
