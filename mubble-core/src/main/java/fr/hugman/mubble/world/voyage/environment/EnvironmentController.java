@@ -5,6 +5,7 @@ import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.network.protocol.common.custom.ActiveEnvironmentPayload;
 import fr.hugman.mubble.network.protocol.common.custom.EnvironmentProfileSyncPayload;
 import fr.hugman.mubble.world.level.EnvironmentOverridable;
+import fr.hugman.mubble.world.level.WeatherOverridable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.attribute.EnvironmentAttributeMap;
+import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.WeatherData;
 
 /**
  * Applies environment profiles to levels and tells the affected clients about it.
@@ -161,17 +164,55 @@ public final class EnvironmentController {
         // TrialDefinition#fixedTime. Nothing sets it for a level that already exists, which is why
         // /voyagespike environment cannot change the time.
         //
-        // weather is not an attribute either, and worse: it is server-global in 26.2, so this leaks
-        // out of the trial. See docs/environment-profiles.md.
+        // weather is not an attribute either. It is a level's own since we gave trial levels their
+        // own WeatherData; see WeatherOverridable.
         profile.weather().ifPresent(weather -> applyWeather(level, weather));
     }
 
+    /**
+     * Sets the weather of one level, and only that level.
+     *
+     * <p>Deliberately not {@code MinecraftServer#setWeatherParameters}, which is what this used to
+     * call: that writes the server's shared weather, so a stormy trial rained on everyone. A level
+     * that has been given its own {@link WeatherData} can be changed on its own.
+     */
     private static void applyWeather(ServerLevel level, WeatherState weather) {
-        MinecraftServer server = level.getServer();
-        switch (weather) {
-            case CLEAR -> server.setWeatherParameters(6000, 0, false, false);
-            case RAIN -> server.setWeatherParameters(0, 6000, true, false);
-            case THUNDER -> server.setWeatherParameters(0, 6000, true, true);
+        WeatherData data = ((WeatherOverridable) level).getOwnWeather();
+        if (data == null) {
+            // Refused rather than applied to the server's weather. A profile is allowed to be used
+            // anywhere, but "make it storm here" must never turn into "make it storm everywhere",
+            // and silently doing nothing would leave someone hunting for why.
+            Mubble.LOGGER.warn("Ignoring the '{}' weather of an environment profile: {} shares the server's weather, "
+                            + "and changing it would change everyone's. Only trial levels have their own.",
+                    weather.getSerializedName(), level.dimension().identifier());
+            return;
+        }
+
+        boolean raining = weather != WeatherState.CLEAR;
+        boolean thundering = weather == WeatherState.THUNDER;
+
+        data.setRaining(raining);
+        data.setThundering(thundering);
+        // The timers are dead state while a trial level has ADVANCE_WEATHER off, which is how the
+        // weather is held still. Zeroing them means that turning the gamerule back on picks fresh
+        // durations rather than flipping the weather on the next tick.
+        data.setClearWeatherTime(0);
+        data.setRainTime(0);
+        data.setThunderTime(0);
+
+        // Snap rather than let the cycle ramp over five seconds — a trial should look like itself on
+        // arrival. The ramp is also what normally broadcasts the change, so snapping means telling
+        // whoever is already here by hand. Players arriving later are covered by
+        // PlayerList#sendLevelInfo, which reads these levels on a dimension change.
+        level.setRainLevel(raining ? 1.0F : 0.0F);
+        level.setThunderLevel(thundering ? 1.0F : 0.0F);
+        for (ServerPlayer player : level.players()) {
+            player.connection.send(new ClientboundGameEventPacket(
+                    raining ? ClientboundGameEventPacket.START_RAINING : ClientboundGameEventPacket.STOP_RAINING, 0.0F));
+            player.connection.send(new ClientboundGameEventPacket(
+                    ClientboundGameEventPacket.RAIN_LEVEL_CHANGE, level.getRainLevel(1.0F)));
+            player.connection.send(new ClientboundGameEventPacket(
+                    ClientboundGameEventPacket.THUNDER_LEVEL_CHANGE, level.getThunderLevel(1.0F)));
         }
     }
 

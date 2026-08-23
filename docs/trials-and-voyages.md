@@ -140,6 +140,34 @@ value, a non-syncable attribute, and the long `{"modifier": …, "argument": …
 and asserts the results are equal. If Mojang changes the shape, that test fails instead of data packs
 quietly changing meaning.
 
+## What a trial level owns
+
+Two fields on an environment profile are not attributes and cannot be layers, so they are applied to
+the level rather than resolved into it. Both were only fixable once a level was opened *from a trial
+definition*, which is what this phase added.
+
+**`fixed_time`.** Clocks hang off the server — `/time` moves every level at once. Fantasy gives a
+runtime level its own clock manager, but only at creation, so the level is created with its clock set
+and paused, from `TrialDefinition#fixedTime`.
+
+**`weather`.** Same shape of problem, different fix. `WeatherData` is one object on the server that
+every level reads through `ServerLevel#getWeatherData`, so a trial's storm used to rain on everyone.
+Two things made it cheap to fix properly rather than drop the field:
+
+- levels already keep their own rain and thunder *levels*; only the shared `WeatherData` was global;
+- Fantasy already redirects the rain packets in `advanceWeatherCycle` to the dimension they came
+  from, so nothing bleeds across levels on the wire.
+
+So a one-method override — `WeatherOverridable`, injected onto `ServerLevel` — is the whole fix.
+Trial levels are handed a fresh `WeatherData` at creation and have `advance_weather` off, which makes
+them clear by default, exactly what the profile asked for after that, and unreachable from
+`/weather` outside.
+
+Both carry the same limit: they belong to a level being **created**. A profile applied to a level
+that already exists cannot change either, so `/voyagespike environment` will never change the time,
+and it refuses to change the weather with a warning rather than quietly writing to the server's.
+That refusal is the point — "make it storm here" must never become "make it storm everywhere".
+
 ## Acceptance criteria
 
 | Criterion | State |
@@ -174,7 +202,14 @@ platform is somewhere sane to stand.
    than vanilla's, which is server-wide, so it is the piece most worth a suspicious look.
 5. **`trial_plain` works**, landing you on the default 17×17 stone slab with an unmodified sky. It is
    the fourth trial, added with no Java.
-6. **`/voyagespike voyage mubble-testmod:voyage_poc`** lists three trials in order and one carrot.
+6. **Weather stays in the trial.** `env_toxic` asks for `thunder` and the other two for `clear`, so:
+   enter `trial_toxic` and it storms; leave, and the overworld is however you left it. Then
+   `/weather clear` outside, enter `trial_toxic` again — it must still storm in there. And with
+   `/weather rain` outside, `trial_dawn` must still be dry. Isolation in both directions is the whole
+   change.
+7. **`/voyagespike environment <profile>` in the overworld says no to weather.** It applies the
+   colours and logs a warning that it is ignoring the weather, rather than changing everyone's.
+8. **`/voyagespike voyage mubble-testmod:voyage_poc`** lists three trials in order and one carrot.
 
 ## Still open
 
@@ -185,7 +220,7 @@ platform is somewhere sane to stand.
   empty registry designed now would have to be designed wrong.
 - **Branching.** The flat `trials` list is a stand-in for three-choice Waystations. Nothing consumes
   the list positionally except the node path, which is already a tree address.
-- **`weather`** is still where phase 1 left it: server-global, so it leaks out of the trial. It is
-  the last field that must not ship as it is. `fixed_time` is no longer on this list — opening the
-  level from a trial definition is exactly what it was waiting for, and it is applied at creation
-  through Fantasy's clock config.
+- Nothing from an environment profile leaks out of a trial any more. `fixed_time` and `weather` were
+  the last two, and both were waiting on the same thing: a level opened *by a trial* rather than a
+  profile applied to a level that already existed. See the weather section above and
+  `environment-profiles.md` for the two limits that follow from that.

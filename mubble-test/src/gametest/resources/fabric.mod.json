@@ -14,6 +14,7 @@
       "fr.hugman.mubble.test.gametest.datapack.DynamicContentGameTest",
       "fr.hugman.mubble.test.gametest.datapack.EnvironmentProfileGameTest",
       "fr.hugman.mubble.test.gametest.voyage.TrialDefinitionGameTest",
+      "fr.hugman.mubble.test.gametest.voyage.LevelWeatherGameTest",
       "fr.hugman.mubble.test.gametest.network.NetworkPayloadGameTest",
       "fr.hugman.mubble.test.gametest.power_up.PowerUpHolderGameTest",
       "fr.hugman.mubble.test.gametest.power_up.PowerUpPersistenceGameTest",

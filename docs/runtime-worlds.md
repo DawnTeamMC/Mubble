@@ -225,6 +225,9 @@ Fantasy.
 - **Its own clock.** If the trial's environment names a `fixed_time`, the level is created with its
   clock set there and paused. It has to happen at creation: vanilla's clock manager belongs to the
   server, so anything applied afterwards would move every level at once.
+- **Its own weather.** Every trial level gets a fresh `WeatherData` and has `advance_weather` turned
+  off, so it starts clear, stays whatever its profile asked for, and neither reads nor writes the
+  weather everyone else is standing in.
 - **No randomness.** Level ids come from a counter, not `UUID.randomUUID()` — the design doc's §6.9
   rule is about voyage reproducibility, but the acceptance criterion is written as an absolute and
   there is no reason to spend the exception here.
@@ -296,6 +299,10 @@ plan unnecessary.
 `this.prepareWeather(server.getWeatherData())`, with `WeatherData` living on the server. **(read)** If
 that means weather is no longer per-level, the profile's `weather` field cannot be a Tier B field in
 the way the issue assumes. Needs confirming during phase 1.
+
+> **Confirmed, and since fixed in phase 2.** It was global. Levels already keep their own rain and
+> thunder *levels*, though, and the shared `WeatherData` is reached through one overridable method,
+> so giving trial levels their own was enough — see `WeatherOverridable`.
 
 **`fixed_time` will need a per-level clock.** 26.x routes time through `ServerClockManager` /
 `WorldClock`. That is why Fantasy needed `RuntimeClockManager`. See the revisit note in section 3.
