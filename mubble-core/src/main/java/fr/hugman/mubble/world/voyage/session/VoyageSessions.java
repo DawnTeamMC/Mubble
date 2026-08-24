@@ -195,8 +195,14 @@ public final class VoyageSessions {
             this.end(player, Outcome.COMPLETED);
             return;
         }
-        this.closeCurrentTrial(session);
+
+        // The player leaves before the old level is destroyed, which means opening the next one
+        // first. Closing first evacuated them to world spawn on the way past — invisible, because
+        // the next teleport happened in the same tick, but it logged an error every trial and it is
+        // exactly the kind of thing that stops being invisible when something else goes wrong.
+        VoyageWorldHandle previous = session.handle();
         this.enterNextTrial(session, player);
+        this.closeTrialLevel(previous);
     }
 
     private void enterNextTrial(VoyageSession session, ServerPlayer player) {
@@ -224,10 +230,15 @@ public final class VoyageSessions {
 
     private void closeCurrentTrial(VoyageSession session) {
         VoyageWorldHandle handle = session.handle();
+        session.setHandle(null);
+        this.closeTrialLevel(handle);
+    }
+
+    /** Drops a trial level's environment, then deletes it. Both, in that order, every time. */
+    private void closeTrialLevel(@Nullable VoyageWorldHandle handle) {
         if (handle == null) {
             return;
         }
-        session.setHandle(null);
         if (handle.isOpen()) {
             // The controller holds levels until told otherwise; deleting one first would leave an
             // entry for a level nobody can reach.
