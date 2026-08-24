@@ -1,0 +1,18 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:slime_ball"
+    },
+    "title": "Held My Breath",
+    "description": "Complete the toxic trial.",
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "cleared": {
+      "trigger": "mubble:trial_completed",
+      "conditions": {
+        "trial": "mubble-testmod:trial_toxic"
+      }
+    }
+  }
+}

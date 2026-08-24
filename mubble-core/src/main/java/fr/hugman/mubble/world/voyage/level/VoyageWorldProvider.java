@@ -1,6 +1,6 @@
 package fr.hugman.mubble.world.voyage.level;
 
-import fr.hugman.mubble.world.voyage.trial.TrialInstance;
+import fr.hugman.mubble.world.voyage.NodeInstance;
 
 /**
  * Supplies the levels that voyage trials run in.
@@ -15,16 +15,16 @@ import fr.hugman.mubble.world.voyage.trial.TrialInstance;
  */
 public interface VoyageWorldProvider {
     /**
-     * Opens a level for a trial.
+     * Opens a level for one node of a voyage.
      *
      * <p>The returned level is live and tickable by the time this returns, so the caller can
-     * teleport into it immediately. The level is empty: building the trial's platform in it is the
-     * caller's job, because what a trial contains is not this seam's business.
+     * teleport into it immediately. The level is empty: building the platform in it is the caller's
+     * job, because what a node contains is not this seam's business.
      *
-     * @param trial the trial that will run in the level; it carries its own node seed
+     * @param node the voyage node that will run in the level; it carries its own node seed
      * @return an open handle the caller must eventually pass to {@link #close}
      */
-    VoyageWorldHandle open(TrialInstance trial);
+    VoyageWorldHandle open(NodeInstance node);
 
     /**
      * Releases a handle.

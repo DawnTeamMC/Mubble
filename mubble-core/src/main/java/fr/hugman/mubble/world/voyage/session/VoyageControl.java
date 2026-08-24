@@ -1,6 +1,8 @@
 package fr.hugman.mubble.world.voyage.session;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import java.util.Optional;
 
 import net.minecraft.util.StringRepresentable;
 
@@ -14,23 +16,42 @@ import net.minecraft.util.StringRepresentable;
  * <p>Not synced to the client. The client needs the item's name to know what it is holding, and
  * that is a vanilla custom name; the marker is only read where the decision is made, which is the
  * server.
+ *
+ * @param kind        finish the node, or give up
+ * @param destination which route to take, when the node offers more than one; empty means the only
+ *                    one there is
  */
-public enum VoyageControl implements StringRepresentable {
-    /** Finishes the current trial: on to the next one, or the end of the voyage if it was the last. */
-    ADVANCE("advance"),
-    /** Ends the voyage as a loss, immediately. */
-    FAIL("fail");
+public record VoyageControl(VoyageControl.Kind kind, Optional<String> destination) {
+    public static final Codec<VoyageControl> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Kind.CODEC.fieldOf("kind").forGetter(VoyageControl::kind),
+            Codec.STRING.optionalFieldOf("destination").forGetter(VoyageControl::destination)
+    ).apply(instance, VoyageControl::new));
 
-    public static final Codec<VoyageControl> CODEC = StringRepresentable.fromEnum(VoyageControl::values);
+    public static final VoyageControl ADVANCE = new VoyageControl(Kind.ADVANCE, Optional.empty());
+    public static final VoyageControl FAIL = new VoyageControl(Kind.FAIL, Optional.empty());
 
-    private final String name;
-
-    VoyageControl(String name) {
-        this.name = name;
+    /** Finishes the node and takes the route to {@code destination}. */
+    public static VoyageControl route(String destination) {
+        return new VoyageControl(Kind.ADVANCE, Optional.of(destination));
     }
 
-    @Override
-    public String getSerializedName() {
-        return this.name;
+    public enum Kind implements StringRepresentable {
+        /** Finishes the current node: on to the next, or the end of the voyage if there is none. */
+        ADVANCE("advance"),
+        /** Ends the voyage as a loss, immediately. */
+        FAIL("fail");
+
+        public static final Codec<Kind> CODEC = StringRepresentable.fromEnum(Kind::values);
+
+        private final String name;
+
+        Kind(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name;
+        }
     }
 }

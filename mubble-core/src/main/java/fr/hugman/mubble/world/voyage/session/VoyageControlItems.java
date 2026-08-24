@@ -1,6 +1,9 @@
 package fr.hugman.mubble.world.voyage.session;
 
 import fr.hugman.mubble.core.component.MubbleDataComponents;
+import fr.hugman.mubble.world.voyage.VoyageDefinition;
+import fr.hugman.mubble.world.voyage.VoyageNode;
+import java.util.List;
 
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.ChatFormatting;
@@ -13,24 +16,23 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 
 /**
- * The two items a player holds during a trial.
+ * The items a player holds inside a voyage node.
  *
  * <p>Ordinary vanilla items carrying a {@link VoyageControl} marker and a name. Nothing subclasses
  * {@link net.minecraft.world.item.Item} and nothing is registered, because the marker is what the
  * behaviour reads — an emerald that has been through a furnace hopper is still just an emerald.
  *
- * <p>A placeholder for real trial objectives. Phase 2 left objectives deliberately unbuilt, so
- * "the player decides when the trial is over" is the stand-in, and these two items are how they say
- * so.
+ * <p>A node with one way out gives one emerald. A node with several gives one per route, named after
+ * where it goes, and the player picks by using one. Both are placeholders: the real thing ends a
+ * trial with an objective and picks a route by walking through a door.
  */
 public final class VoyageControlItems {
-    private static final int ADVANCE_SLOT = 0;
     private static final int FAIL_SLOT = 8;
 
     private VoyageControlItems() {
     }
 
-    /** Hooks up right-clicking either item. Ordinary items fall straight through. */
+    /** Hooks up right-clicking a control item. Ordinary items fall straight through. */
     public static void register() {
         UseItemCallback.EVENT.register((player, level, hand) -> {
             ItemStack stack = player.getItemInHand(hand);
@@ -56,19 +58,42 @@ public final class VoyageControlItems {
                 Component.literal("Forfeit Voyage").withStyle(ChatFormatting.RED));
     }
 
-    /** Puts a fresh pair in the hotbar. Called on entering each trial. */
-    public static void give(ServerPlayer player) {
+    /** An item that finishes this node and takes the route to {@code destination}. */
+    public static ItemStack route(String destination, Component where) {
+        return marked(new ItemStack(Items.ENDER_PEARL), VoyageControl.route(destination),
+                Component.literal("Go to ").append(where).withStyle(ChatFormatting.AQUA));
+    }
+
+    /**
+     * Puts a fresh set in the hotbar: one way out per route, and the forfeit.
+     *
+     * <p>Called on entering each node, so what the player is holding always matches where they can
+     * actually go from where they are standing.
+     */
+    public static void give(ServerPlayer player, VoyageDefinition voyage, VoyageNode node) {
         Inventory inventory = player.getInventory();
-        inventory.setItem(ADVANCE_SLOT, advance());
+        List<String> routes = node.next();
+
+        if (routes.size() <= 1) {
+            // One way on, or none and this is the last node — either way the emerald ends the node
+            // and the session works out what that means.
+            inventory.setItem(0, advance());
+        } else {
+            for (int slot = 0; slot < routes.size(); slot++) {
+                String destination = routes.get(slot);
+                inventory.setItem(slot, route(destination, voyage.node(destination).content().displayName()));
+            }
+        }
+
         inventory.setItem(FAIL_SLOT, fail());
-        inventory.setSelectedSlot(ADVANCE_SLOT);
+        inventory.setSelectedSlot(0);
         player.containerMenu.broadcastChanges();
     }
 
     /**
      * Removes every control item the player is holding.
      *
-     * <p>Sweeps the whole inventory rather than the two slots they were put in, because a player can
+     * <p>Sweeps the whole inventory rather than the slots they were put in, because a player can
      * move them, and a control item surviving a voyage is an item that ends someone else's.
      */
     public static void strip(ServerPlayer player) {

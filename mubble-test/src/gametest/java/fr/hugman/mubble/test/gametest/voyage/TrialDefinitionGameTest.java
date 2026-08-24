@@ -4,9 +4,10 @@ import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.world.voyage.VoyageDefinition;
 import fr.hugman.mubble.world.voyage.VoyageSeeds;
 import fr.hugman.mubble.world.voyage.trial.TrialDefinition;
-import fr.hugman.mubble.world.voyage.trial.TrialInstance;
+import fr.hugman.mubble.world.voyage.NodeInstance;
 import fr.hugman.mubble.world.voyage.trial.TrialPlatform;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
@@ -57,9 +58,12 @@ public class TrialDefinitionGameTest {
         VoyageDefinition voyage = voyages(helper).getValue(TWO_TRIALS);
         helper.assertTrue(voyage != null, TWO_TRIALS + " was not loaded from the data pack");
 
-        helper.assertValueEqual(voyage.trials().size(), 2, "the number of trials");
-        helper.assertValueEqual(voyage.trials().getFirst().unwrapKey().orElseThrow().identifier(), SEEDED, "the first trial");
-        helper.assertValueEqual(voyage.trials().get(1).unwrapKey().orElseThrow().identifier(), DEFAULTED, "the second trial");
+        helper.assertValueEqual(voyage.nodes().size(), 2, "the number of nodes");
+        helper.assertValueEqual(voyage.start(), "first", "the node the voyage starts at");
+        helper.assertValueEqual(voyage.node("first").contentId(), SEEDED, "the first trial");
+        helper.assertValueEqual(voyage.node("first").next(), List.of("second"), "where the first node leads");
+        helper.assertValueEqual(voyage.node("second").contentId(), DEFAULTED, "the second trial");
+        helper.assertTrue(voyage.node("second").next().isEmpty(), "the last node should lead nowhere");
         helper.assertValueEqual(voyage.completionRewards().size(), 1, "the number of rewards");
 
         helper.succeed();
@@ -98,11 +102,11 @@ public class TrialDefinitionGameTest {
         TrialDefinition seeded = trials(helper).getValue(SEEDED);
         helper.assertTrue(seeded != null, SEEDED + " was not loaded from the data pack");
 
-        long first = TrialInstance.of(SEEDED, VoyageDefinition.nodePath(0), seeded, 99L).nodeSeed();
-        long second = TrialInstance.of(SEEDED, VoyageDefinition.nodePath(1), seeded, 99L).nodeSeed();
+        long first = NodeInstance.of(SEEDED, "first", seeded, 99L).nodeSeed();
+        long second = NodeInstance.of(SEEDED, "second", seeded, 99L).nodeSeed();
 
         helper.assertTrue(first != second, "the same trial at two nodes of one voyage got the same seed");
-        helper.assertValueEqual(first, VoyageSeeds.node(99L, "0"), "the node seed of the first trial");
+        helper.assertValueEqual(first, VoyageSeeds.node(99L, "first"), "the node seed of the first node");
 
         helper.succeed();
     }
@@ -133,7 +137,7 @@ public class TrialDefinitionGameTest {
     }
 
     private static int skyFor(TrialDefinition trial, long voyageSeed) {
-        TrialInstance instance = TrialInstance.of(SEEDED, VoyageDefinition.nodePath(0), trial, voyageSeed);
+        NodeInstance instance = NodeInstance.of(SEEDED, "first", trial, voyageSeed);
         return trial.environment().value().attributes()
                 .resolveCandidates(instance.nodeSeed())
                 .applyModifier(EnvironmentAttributes.SKY_COLOR, 0);

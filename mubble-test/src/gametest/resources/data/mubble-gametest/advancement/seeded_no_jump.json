@@ -1,0 +1,19 @@
+{
+  "criteria": {
+    "cleared": {
+      "trigger": "mubble:trial_completed",
+      "conditions": {
+        "trial": "mubble-gametest:seeded",
+        "stats": [
+          {
+            "type": "minecraft:custom",
+            "stat": "minecraft:jump",
+            "value": {
+              "max": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}

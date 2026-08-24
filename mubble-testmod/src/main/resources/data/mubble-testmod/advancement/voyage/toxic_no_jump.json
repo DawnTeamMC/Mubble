@@ -1,0 +1,28 @@
+{
+  "parent": "mubble-testmod:voyage/toxic_cleared",
+  "display": {
+    "icon": {
+      "id": "minecraft:feather"
+    },
+    "title": "Feet On The Ground",
+    "description": "Complete the toxic trial without jumping.",
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "cleared": {
+      "trigger": "mubble:trial_completed",
+      "conditions": {
+        "trial": "mubble-testmod:trial_toxic",
+        "stats": [
+          {
+            "type": "minecraft:custom",
+            "stat": "minecraft:jump",
+            "value": {
+              "max": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}

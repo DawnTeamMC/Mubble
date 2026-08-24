@@ -1,0 +1,9 @@
+{
+  "display_name": "Crossroads",
+  "environment": "mubble-testmod:env_empty",
+  "platform": {
+    "block": "minecraft:polished_andesite",
+    "radius": 5,
+    "spawn_y": 65
+  }
+}
