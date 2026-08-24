@@ -67,8 +67,8 @@ yet while dynamic registries load. Using it fails the whole data pack with
 Item minecraft:carrot does not have components yet
 ```
 
-An item and a count are all a reward needs to name, and `toStack()` turns one into a stack when
-phase 5 actually hands it over. This also happens to be the spelling the issue used.
+An item and a count are all a reward needs to name, and it becomes a stack only when phase 5 hands it
+over. This also happens to be the spelling the issue used.
 
 ## Seed-resolved candidates
 
