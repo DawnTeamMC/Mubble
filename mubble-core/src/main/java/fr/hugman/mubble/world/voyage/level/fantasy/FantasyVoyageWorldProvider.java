@@ -32,8 +32,8 @@ import xyz.nucleoid.fantasy.util.VoidChunkGenerator;
  *
  * <p>Fantasy owns the whole runtime-dimension lifecycle: creating the level, registering it with the
  * server, keeping the tick loop safe against a level appearing or vanishing mid-tick, and deleting
- * the directory on close. See {@code docs/runtime-worlds.md} for what that involves and why we are
- * not doing it ourselves.
+ * the directory on close. See {@code design/voyages_poc/implementation.md} for why we are not doing
+ * it ourselves.
  *
  * <p>This class is the only place in the mod that knows Fantasy exists. Everything else talks to
  * {@link VoyageWorldProvider}.

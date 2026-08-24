@@ -13,7 +13,7 @@ import net.minecraft.world.phys.Vec3;
 /**
  * The ground a trial gives the player to stand on.
  *
- * <p>Trial levels are generated void (see {@code docs/runtime-worlds.md}), so a trial that builds
+ * <p>Trial levels are generated void (see {@code design/voyages_poc/implementation.md}), so a trial that builds
  * nothing is a trial the player falls out of. For the POC that ground is a square slab of one block
  * type; the real thing will place a structure, and this is the seam it will replace.
  *
