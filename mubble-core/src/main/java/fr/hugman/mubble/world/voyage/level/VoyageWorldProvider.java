@@ -11,7 +11,7 @@ import fr.hugman.mubble.world.voyage.trial.TrialInstance;
  * stop being viable, is leasing from a fixed pool of pre-declared levels cleared between uses.
  *
  * <p>Nothing outside the implementation package may name Fantasy or touch the server's level map, so
- * that swapping strategies stays a one-class change. See {@code docs/runtime-worlds.md}.
+ * that swapping strategies stays a one-class change. See {@code design/voyages_poc/implementation.md}.
  */
 public interface VoyageWorldProvider {
     /**

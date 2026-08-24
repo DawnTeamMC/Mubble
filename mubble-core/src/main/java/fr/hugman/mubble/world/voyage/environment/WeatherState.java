@@ -9,7 +9,7 @@ import net.minecraft.util.StringRepresentable;
  * <p>Not an environment attribute. Weather in 26.x is server state driven by
  * {@link net.minecraft.world.level.saveddata.WeatherData}, and it contributes its own layers to the
  * attribute system rather than being one — so a profile cannot express it the way it expresses a sky
- * colour. See {@code docs/environment-profiles.md}.
+ * colour. See {@code design/voyages_poc/implementation.md}.
  */
 public enum WeatherState implements StringRepresentable {
     CLEAR("clear"),
