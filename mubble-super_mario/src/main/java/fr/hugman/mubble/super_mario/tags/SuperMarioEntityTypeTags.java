@@ -11,6 +11,14 @@ public class SuperMarioEntityTypeTags {
     public static final TagKey<EntityType<?>> CAN_STOMP = bind("can_stomp");
     public static final TagKey<EntityType<?>> STOMPABLE = bind("stompable");
 
+    /**
+     * Entities an ice ball cannot trap at all, and only hurts.
+     * <p>
+     * Everything else is judged on its bulk alone: see {@link
+     * fr.hugman.mubble.super_mario.world.entity.freeze.Freezing#isBig}.
+     */
+    public static final TagKey<EntityType<?>> FREEZE_IMMUNE = bind("freeze_immune");
+
     private static TagKey<EntityType<?>> bind(String path) {
         return TagKey.create(Registries.ENTITY_TYPE, SuperMario.id(path));
     }

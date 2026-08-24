@@ -23,6 +23,9 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 		builder(CAN_STOMP).add(PLAYER);
 		builder(STOMPABLE).add(GOOMBA, GREEN_KOOPA_SHELL);
 
+		// bosses shrug an ice ball off; every other mob is judged on its bulk alone
+		builder(FREEZE_IMMUNE).add(ENDER_DRAGON, WITHER);
+
 		// Vanilla
 		builder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA);
 		builder(EntityTypeTags.NOT_SCARY_FOR_PUFFERFISH).add(GOOMBA);

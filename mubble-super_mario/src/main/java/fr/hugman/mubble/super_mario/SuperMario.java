@@ -3,7 +3,10 @@ package fr.hugman.mubble.super_mario;
 import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.super_mario.core.component.SuperMarioDataComponents;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
+import fr.hugman.mubble.super_mario.core.attachment.SuperMarioAttachmentTypes;
 import fr.hugman.mubble.super_mario.core.registries.SuperMarioBuiltInRegistries;
+import fr.hugman.mubble.super_mario.network.protocol.SuperMarioServerReceivers;
+import fr.hugman.mubble.super_mario.network.protocol.common.custom.SuperMarioPayloadTypes;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.attribute.SuperMarioEnvironmentAttributes;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityEvents;
@@ -40,6 +43,7 @@ public class SuperMario implements ModInitializer {
 
         Reflection.initialize(SuperMarioParticleTypes.class);
         Reflection.initialize(SuperMarioEnvironmentAttributes.class);
+        Reflection.initialize(SuperMarioAttachmentTypes.class);
         SuperMarioEntityTypes.registerAttributes();
 
         SuperMarioCreativeModeTabs.appendItemGroups();
@@ -49,6 +53,9 @@ public class SuperMario implements ModInitializer {
         SuperMarioBuiltInRegistries.register();
 
         SuperMarioBiomeModifications.register();
+
+        SuperMarioPayloadTypes.registerTypes();
+        SuperMarioServerReceivers.register();
 
         // Events
         SuperMarioEntityEvents.registerListeners();

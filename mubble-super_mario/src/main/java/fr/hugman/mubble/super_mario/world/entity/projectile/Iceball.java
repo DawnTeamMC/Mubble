@@ -5,6 +5,7 @@ import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.attribute.SuperMarioEnvironmentAttributes;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.entity.freeze.Freezing;
 import fr.hugman.mubble.world.attribute.BlockTransform;
 import fr.hugman.mubble.world.entity.projectile.Ball;
 import net.minecraft.core.BlockPos;
@@ -13,10 +14,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -58,18 +59,17 @@ public class Iceball extends Ball {
         Entity entity = result.getEntity();
         Entity owner = this.getOwner();
         float damage = entity instanceof SnowGolem ? 1.0F : 3.0F;
+        DamageSource source = this.damageSources().source(SuperMarioDamageTypeIds.ICEBALL, this, owner);
 
         if (owner instanceof LivingEntity livingEntity) {
             livingEntity.setLastHurtMob(entity);
         }
-        if (!this.level().isClientSide()) {
-            if (!(entity instanceof SnowGolem) && entity instanceof LivingEntity) {
-                LivingEntity livingEntity = (LivingEntity) entity;
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.SLOWNESS, 40, 1));
-            }
-        }
 
-        entity.hurt(this.damageSources().source(SuperMarioDamageTypeIds.ICEBALL, this, this.getOwner()), damage);
+        entity.hurt(source, damage);
+        // snow golems are made of the stuff: an ice ball is no more to them than the hit itself
+        if (this.level() instanceof ServerLevel level && !(entity instanceof SnowGolem) && entity instanceof LivingEntity living && living.isAlive()) {
+            Freezing.freeze(level, living, source);
+        }
         this.finalHit(SuperMarioSounds.ICEBALL_HIT_ENTITY);
     }
 
