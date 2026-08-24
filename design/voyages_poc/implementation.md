@@ -9,15 +9,20 @@ implementation.
 ```
 /voyage start <voyage_id> [seed]     omitted seed is generated and reported in chat
 /voyage abandon                      ends as a loss
-/voyage status                       voyage, trial index, seed
+/voyage status                       voyage, trial number, current node, seed
 ```
 
-Inside a trial you hold two marked items: an emerald (**Complete Trial**) and redstone
-(**Forfeit Voyage**). Right-click to use. They stand in for real objectives, which the POC does not
-have.
+Inside a node you hold marked items. Right-click to use:
 
-Testmod content: `mubble-testmod:voyage_poc` runs `trial_dawn` → `trial_shifting` → `trial_toxic` and
-pays one carrot. `trial_plain` exists unused, as proof a fourth trial needs no Java.
+- **Complete Trial** (emerald) — finish this node, when there is one way on.
+- **Go to ‹name›** (ender pearl) — one per route, when the node branches.
+- **Forfeit Voyage** (redstone) — end as a loss.
+
+They stand in for real objectives and real doors, neither of which the POC has.
+
+Testmod content: `mubble-testmod:voyage_poc` is `trial_dawn` → **Crossroads** waystation →
+(`trial_toxic` | `trial_shifting`) → `trial_plain`, paying one carrot. Two advancements under
+`mubble-testmod:voyage/` show the trigger working.
 
 ## Datapack schema
 
@@ -32,10 +37,37 @@ not `data/<ns>/trial/` as the issue writes it.
 ```
 
 ```json
-// mubble/voyage/<id>.json
+// mubble/voyage/<id>.json — a graph, not a list
 { "display_name": "POC Voyage",
-  "trials": ["mubble-testmod:trial_dawn", "mubble-testmod:trial_toxic"],
+  "start": "dawn",
+  "nodes": {
+    "dawn":       { "trial": "mubble-testmod:trial_dawn",          "next": ["crossroads"] },
+    "crossroads": { "waystation": "mubble-testmod:way_crossroads", "next": ["toxic", "shifting"] },
+    "toxic":      { "trial": "mubble-testmod:trial_toxic",         "next": ["plain"] },
+    "shifting":   { "trial": "mubble-testmod:trial_shifting",      "next": ["plain"] },
+    "plain":      { "trial": "mubble-testmod:trial_plain" }
+  },
   "completion_rewards": [{ "item": "minecraft:carrot", "count": 1 }] }
+```
+
+```json
+// mubble/waystation/<id>.json — same three fields a trial has
+{ "display_name": "Crossroads",
+  "environment": "mubble-testmod:env_empty",
+  "platform": { "block": "minecraft:polished_andesite", "radius": 5, "spawn_y": 65 } }
+```
+
+A node names exactly one of `trial` or `waystation`. No `next` ends the voyage, one entry moves
+straight on, several make the player choose. Loading refuses a voyage whose `start` or whose `next`
+names a node that does not exist, or one that can loop.
+
+```json
+// advancement/<path>.json — earned by finishing a trial
+{ "criteria": { "cleared": {
+    "trigger": "mubble:trial_completed",
+    "conditions": {
+      "trial": "mubble-testmod:trial_toxic",
+      "stats": [{ "type": "minecraft:custom", "stat": "minecraft:jump", "value": { "max": 0 } }] } } } }
 ```
 
 ```json
@@ -65,6 +97,12 @@ Only `display_name` and `environment` are required on a trial; everything else d
 - **`environment` must be an id**, never an inlined profile, because the client is told which
   environment to apply by name.
 - **The client never sees a candidate list or a seed.** It is sent the resolved value.
+- **A node's seed comes from its key alone**, not from the route walked to reach it. That is what
+  lets routes branch and rejoin without breaking a shared seed: the route you did not take was
+  already decided, and the node two routes rejoin at is identical either way.
+- **`stats` on the trigger are deltas over the trial**, not totals. Totals are already available
+  free — every advancement's `player` predicate takes a vanilla `stats` list — but "has never
+  jumped" is not "completed this trial without jumping".
 
 ## Decisions worth knowing
 
@@ -94,13 +132,18 @@ Only `display_name` and `environment` are required on a trial; everything else d
 ## Known limits
 
 - No objectives or rulesets — the two control items stand in. Seam left on `TrialDefinition`.
-- A voyage is a flat list, not the branching Waystation tree. Node paths are already tree addresses.
+- Branches fan out and rejoin, but there are no acts, no bosses, and nothing decides a route for you.
 - Third-party mod state is **restored** on exit but not **cleared** on entry; clearing generically
   needs a hook mods register against.
 - A voyage in progress is not expected to survive a Minecraft version upgrade — the stash holds item
   stacks and no data fixer knows its layout.
 - `/voyage` has no permission level, per the issue. It belongs on `start`, not the root literal —
   gating the root would also hide `status` and `abandon` from someone already inside a voyage.
+- A waystation is bare: somewhere to stand and a place to branch. No shop, no upgrade, and
+  completing one earns nothing.
+- Routes are chosen with an item, not by walking through a door.
+- `trial N of M` takes M from the longest route, so it is exact when branches are the same length
+  and an upper bound otherwise. `/voyage status` also names the node key.
 
 ## Acceptance criteria
 
@@ -128,6 +171,20 @@ unrelated. Everything below marked **needs eyes** is untested by me.
 | 17 | Same voyage id + seed produces an identical run | Met, derivation pinned by test | Run the same seed twice. |
 | 18 | No `random()` in voyage code paths | Met | The one draw is the initial seed, in `VoyageSeeds.random()`. |
 | 19 | No compatibility shims or fallbacks for vanilla clients | Met | None in the diff. |
+
+Added after the original issue, so untested by you:
+
+| # | Feature | Status | How to check |
+|---|---|---|---|
+| 20 | A trial offers two routes that rejoin | Game test | Finish `trial_dawn`, then the Crossroads gives two ender pearls. Take either; both reach `trial_plain`. |
+| 21 | The route not taken does not change the run | Game test | Run seed 1 twice, once each way. The trial you *did* share should look identical both times. |
+| 22 | Waystations sit between trials and can branch | Game test | The Crossroads is a waystation. Chat says "Waystation:", not "Trial n of m", and the trial count does not move. |
+| 23 | A waystation can change the environment like a trial | **Needs eyes** | Point `way_crossroads` at `env_toxic` instead and it should storm in there. |
+| 24 | An advancement is earned by completing a trial | Game test | Finish `trial_toxic`; *Held My Breath* should be granted. |
+| 25 | The advancement decides which trial, with no Java | Met | Both testmod advancements are JSON only. Add a third for another trial. |
+| 26 | Conditions are configurable | Game test | *Feet On The Ground* needs `trial_toxic` finished without jumping. Jump inside it and you should not get it; complete it without jumping and you should. Jumping *before* the trial must not count. |
+| 27 | Entering a trial is not completing it | Game test | Walk into `trial_toxic` and abandon; no advancement. |
+| 28 | A voyage that loops or dangles is refused at load | Game test | Point a `next` at a node that does not exist, or make one loop back; the data pack should fail to load and say which. |
 
 Also worth a look while you are in there, since neither is a listed criterion:
 

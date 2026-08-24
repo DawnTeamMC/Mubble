@@ -8,7 +8,8 @@
     "EntityMixin",
     "ItemStackMixin",
     "PlayerMixin",
-    "ServerLevelMixin"
+    "ServerLevelMixin",
+    "StatsCounterAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

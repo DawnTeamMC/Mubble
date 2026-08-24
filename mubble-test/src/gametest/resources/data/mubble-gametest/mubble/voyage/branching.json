@@ -1,0 +1,34 @@
+{
+  "display_name": "Branching",
+  "start": "seeded",
+  "nodes": {
+    "seeded": {
+      "trial": "mubble-gametest:seeded",
+      "next": [
+        "fork"
+      ]
+    },
+    "fork": {
+      "waystation": "mubble-gametest:fork",
+      "next": [
+        "left",
+        "right"
+      ]
+    },
+    "left": {
+      "trial": "mubble-gametest:defaulted",
+      "next": [
+        "finish"
+      ]
+    },
+    "right": {
+      "trial": "mubble-gametest:defaulted",
+      "next": [
+        "finish"
+      ]
+    },
+    "finish": {
+      "trial": "mubble-gametest:seeded"
+    }
+  }
+}

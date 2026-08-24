@@ -1,13 +1,21 @@
 {
   "display_name": "Two Trials",
-  "trials": [
-    "mubble-gametest:seeded",
-    "mubble-gametest:defaulted"
-  ],
+  "start": "first",
+  "nodes": {
+    "first": {
+      "trial": "mubble-gametest:seeded",
+      "next": [
+        "second"
+      ]
+    },
+    "second": {
+      "trial": "mubble-gametest:defaulted"
+    }
+  },
   "completion_rewards": [
     {
-      "count": 2,
-      "item": "minecraft:carrot"
+      "item": "minecraft:carrot",
+      "count": 2
     }
   ]
 }

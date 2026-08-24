@@ -2,6 +2,7 @@ package fr.hugman.mubble;
 
 import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.commands.MubbleCommands;
+import fr.hugman.mubble.advancements.MubbleCriteriaTriggers;
 import fr.hugman.mubble.core.component.MubbleDataComponents;
 import fr.hugman.mubble.core.registries.MubbleBuiltInRegistries;
 import fr.hugman.mubble.network.protocol.MubbleServerReceivers;
@@ -25,6 +26,7 @@ public class Mubble implements ModInitializer {
     public void onInitialize() {
         Reflection.initialize(MubbleEntityTypes.class);
         Reflection.initialize(MubbleDataComponents.class);
+        Reflection.initialize(MubbleCriteriaTriggers.class);
         Reflection.initialize(MubbleConsumeEffectTypes.class);
         Reflection.initialize(MubbleAttributeTypes.class);
 

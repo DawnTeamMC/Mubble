@@ -1,7 +1,7 @@
 package fr.hugman.mubble.world.voyage.level.fantasy;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.world.voyage.trial.TrialInstance;
+import fr.hugman.mubble.world.voyage.NodeInstance;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldHandle;
 import fr.hugman.mubble.world.level.WeatherOverridable;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldProvider;
@@ -51,7 +51,7 @@ public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
     }
 
     @Override
-    public VoyageWorldHandle open(TrialInstance trial) {
+    public VoyageWorldHandle open(NodeInstance node) {
         this.assertServerThread();
 
         RuntimeLevelConfig config = new RuntimeLevelConfig()
@@ -60,7 +60,7 @@ public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
                 // overworld's; trials differentiate themselves through environment profiles.
                 .setDimensionType(BuiltinDimensionTypes.OVERWORLD)
                 .setGenerator(new VoidChunkGenerator(this.server, Biomes.THE_VOID))
-                .setSeed(trial.nodeSeed())
+                .setSeed(node.nodeSeed())
                 .setShouldTickTime(false)
                 // A trial's weather is whatever its environment profile says and nothing else. The
                 // level owns its weather (see below), so leaving the cycle running would have it
@@ -72,15 +72,15 @@ public final class FantasyVoyageWorldProvider implements VoyageWorldProvider {
         // gives a runtime level its own, but only at creation. Paused as well as set, so a trial that
         // asks for dusk stays at dusk. WorldClocks.OVERWORLD is the default clock of the dimension
         // type chosen above — the two have to agree.
-        trial.definition().fixedTime().ifPresent(time -> config.setClockTime(WorldClocks.OVERWORLD, time, true));
+        node.content().fixedTime().ifPresent(time -> config.setClockTime(WorldClocks.OVERWORLD, time, true));
 
         RuntimeLevelHandle fantasyHandle = Fantasy.get(this.server).openTemporaryLevel(this.freshLevelId(), config);
         this.isolateWeather(fantasyHandle.asLevel());
 
         Handle handle = new Handle(fantasyHandle);
         this.open.add(handle);
-        Mubble.LOGGER.debug("Opened voyage level {} for trial {} at node '{}' (seed {})",
-                handle.dimension().identifier(), trial.id(), trial.nodePath(), trial.nodeSeed());
+        Mubble.LOGGER.debug("Opened voyage level {} for {} at node '{}' (seed {})",
+                handle.dimension().identifier(), node.id(), node.nodePath(), node.nodeSeed());
         return handle;
     }
 

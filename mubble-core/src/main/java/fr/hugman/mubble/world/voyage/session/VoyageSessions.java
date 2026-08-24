@@ -1,14 +1,20 @@
 package fr.hugman.mubble.world.voyage.session;
 
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.advancements.MubbleCriteriaTriggers;
+import fr.hugman.mubble.mixin.StatsCounterAccessor;
+import fr.hugman.mubble.world.voyage.NodeInstance;
 import fr.hugman.mubble.world.voyage.VoyageDefinition;
+import fr.hugman.mubble.world.voyage.VoyageNode;
+import fr.hugman.mubble.world.voyage.VoyageNodeContent;
 import fr.hugman.mubble.world.voyage.VoyageReward;
 import fr.hugman.mubble.world.voyage.environment.EnvironmentController;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldHandle;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldProvider;
 import fr.hugman.mubble.world.voyage.level.fantasy.FantasyVoyageWorldProvider;
-import fr.hugman.mubble.world.voyage.trial.TrialDefinition;
-import fr.hugman.mubble.world.voyage.trial.TrialInstance;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMaps;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +27,12 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stat;
 import net.minecraft.world.attribute.EnvironmentAttributeMap;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
@@ -71,6 +79,8 @@ public final class VoyageSessions {
     private final MinecraftServer server;
     private final FantasyVoyageWorldProvider worlds;
     private final Map<UUID, VoyageSession> sessions = new HashMap<>();
+    /** Each player's statistics as of entering their current node, for {@code stats} conditions. */
+    private final Map<UUID, Object2IntMap<Stat<?>>> statsOnEntry = new HashMap<>();
 
     private VoyageSessions(MinecraftServer server) {
         this.server = server;
@@ -165,7 +175,7 @@ public final class VoyageSessions {
         player.sendSystemMessage(Component.empty()
                 .append(voyage.displayName())
                 .append(Component.literal(" — seed " + seed).withStyle(ChatFormatting.GRAY)));
-        this.enterNextTrial(session, player);
+        this.enterNode(session, player, voyage.start());
         return session;
     }
 
@@ -178,8 +188,8 @@ public final class VoyageSessions {
             return;
         }
 
-        switch (control) {
-            case ADVANCE -> this.advance(player, session);
+        switch (control.kind()) {
+            case ADVANCE -> this.advance(player, session, control.destination().orElse(null));
             case FAIL -> this.end(player, Outcome.FAILED);
         }
     }
@@ -191,42 +201,87 @@ public final class VoyageSessions {
         }
     }
 
-    private void advance(ServerPlayer player, VoyageSession session) {
-        if (session.isOnLastTrial()) {
+    /**
+     * Finishes the current node and moves on, or ends the voyage if there is nowhere to move to.
+     *
+     * @param destination the chosen route, or {@code null} when the node offers at most one
+     */
+    private void advance(ServerPlayer player, VoyageSession session, @Nullable String destination) {
+        List<String> routes = session.routes();
+        String next;
+        if (routes.isEmpty()) {
+            next = null;
+        } else if (destination == null) {
+            // No route named. Fine when there is nothing to choose; otherwise the item is stale, and
+            // picking one on the player's behalf would silently decide their run for them.
+            if (routes.size() > 1) {
+                return;
+            }
+            next = routes.getFirst();
+        } else if (routes.contains(destination)) {
+            next = destination;
+        } else {
+            // A route item kept from an earlier node. Ignored rather than obeyed.
+            return;
+        }
+
+        this.completeCurrentNode(player, session);
+        if (next == null) {
             this.end(player, Outcome.COMPLETED);
             return;
         }
 
         // The player leaves before the old level is destroyed, which means opening the next one
-        // first. Closing first evacuated them to world spawn on the way past — invisible, because
-        // the next teleport happened in the same tick, but it logged an error every trial and it is
-        // exactly the kind of thing that stops being invisible when something else goes wrong.
+        // first. Closing first evacuated them to world spawn on the way past, which was invisible
+        // because the next teleport happened in the same tick, but it logged an error every node.
         VoyageWorldHandle previous = session.handle();
-        this.enterNextTrial(session, player);
+        this.enterNode(session, player, next);
         this.closeTrialLevel(previous);
     }
 
-    private void enterNextTrial(VoyageSession session, ServerPlayer player) {
-        TrialInstance trial = session.advanceToNextTrial();
-        TrialDefinition definition = trial.definition();
+    /** Awards whatever finishing this node is worth. Trials only; a waystation is not an achievement. */
+    private void completeCurrentNode(ServerPlayer player, VoyageSession session) {
+        VoyageNode node = session.node();
+        if (node == null || !node.isTrial()) {
+            return;
+        }
+        Object2IntMap<Stat<?>> onEntry = this.statsOnEntry.getOrDefault(player.getUUID(), Object2IntMaps.emptyMap());
+        MubbleCriteriaTriggers.TRIAL_COMPLETED.trigger(player, node.contentId(), session.voyageId(), onEntry);
+    }
 
-        VoyageWorldHandle handle = this.worlds.open(trial);
+    private void enterNode(VoyageSession session, ServerPlayer player, String key) {
+        NodeInstance instance = session.moveTo(key);
+        VoyageNodeContent content = instance.content();
+
+        VoyageWorldHandle handle = this.worlds.open(instance);
         session.setHandle(handle);
 
         ServerLevel level = handle.level();
-        definition.platform().place(level, 0, 0);
-        EnvironmentController.apply(level, definition.environment().unwrapKey().orElseThrow().identifier(),
-                trial.nodeSeed(), EnvironmentAttributeMap.EMPTY);
+        content.platform().place(level, 0, 0);
+        EnvironmentController.apply(level, content.environment().unwrapKey().orElseThrow().identifier(),
+                instance.nodeSeed(), EnvironmentAttributeMap.EMPTY);
 
-        Vec3 spawn = definition.platform().spawnPos(0, 0);
+        Vec3 spawn = content.platform().spawnPos(0, 0);
         player.teleportTo(level, spawn.x(), spawn.y(), spawn.z(), Set.of(), player.getYRot(), player.getXRot(), false);
         // The environment was applied before the player was in the level, so nothing reached them
         // then; this is the send that makes the sky change.
         EnvironmentController.sendTo(player);
-        VoyageControlItems.give(player);
+        VoyageControlItems.give(player, session.voyage(), session.node());
 
-        player.sendSystemMessage(Component.literal("Trial " + session.trialNumber() + " of " + session.trialCount() + ": ")
-                .append(definition.displayName()));
+        // Taken on entry to every node, so that "without jumping" means during this trial rather
+        // than since the world was made. Cheap, and it needs no idea of what an advancement asks.
+        this.statsOnEntry.put(player.getUUID(),
+                new Object2IntOpenHashMap<>(((StatsCounterAccessor) player.getStats()).mubble$stats()));
+
+        player.sendSystemMessage(describe(session).append(content.displayName()));
+    }
+
+    /** "Trial 2 of 3: " or "Waystation: ", depending on what the player just walked into. */
+    private static MutableComponent describe(VoyageSession session) {
+        if (!session.node().isTrial()) {
+            return Component.literal("Waystation: ");
+        }
+        return Component.literal("Trial " + session.trialNumber() + " of " + session.trialCount() + ": ");
     }
 
     private void closeCurrentTrial(VoyageSession session) {
@@ -259,6 +314,7 @@ public final class VoyageSessions {
         if (session == null) {
             return;
         }
+        this.statsOnEntry.remove(player.getUUID());
 
         VoyageControlItems.strip(player);
 

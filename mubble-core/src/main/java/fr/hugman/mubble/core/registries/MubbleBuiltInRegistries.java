@@ -4,6 +4,7 @@ import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.voyage.VoyageDefinition;
 import fr.hugman.mubble.world.voyage.environment.EnvironmentProfile;
 import fr.hugman.mubble.world.voyage.trial.TrialDefinition;
+import fr.hugman.mubble.world.voyage.waystation.WaystationDefinition;
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionType;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
@@ -28,6 +29,7 @@ public class MubbleBuiltInRegistries {
         // holds seeds and future loot tables that a client has no business reading. Phase 4 wants the
         // display names for the command; that is a payload, not a reason to sync the whole registry.
         DynamicRegistries.register(MubbleRegistries.TRIAL, TrialDefinition.DIRECT_CODEC);
+        DynamicRegistries.register(MubbleRegistries.WAYSTATION, WaystationDefinition.DIRECT_CODEC);
         DynamicRegistries.register(MubbleRegistries.VOYAGE, VoyageDefinition.DIRECT_CODEC);
 
         DynamicRegistries.registerSynced(MubbleRegistries.POWER_UP, PowerUp.DIRECT_CODEC);

@@ -1,0 +1,9 @@
+{
+  "display_name": "Fork",
+  "environment": "mubble-gametest:bare",
+  "platform": {
+    "block": "minecraft:polished_andesite",
+    "radius": 2,
+    "spawn_y": 70
+  }
+}

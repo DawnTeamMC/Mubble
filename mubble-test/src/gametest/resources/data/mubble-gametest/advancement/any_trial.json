@@ -1,0 +1,8 @@
+{
+  "criteria": {
+    "cleared": {
+      "trigger": "mubble:trial_completed",
+      "conditions": {}
+    }
+  }
+}

@@ -108,6 +108,9 @@ public final class VoyageCommand {
         source.sendSuccess(() -> Component.empty()
                 .append(session.voyage().displayName())
                 .append(Component.literal(" — trial " + session.trialNumber() + " of " + session.trialCount()))
+                // The node key as well as the trial number: with branching routes the number no
+                // longer says where you are, only how far.
+                .append(Component.literal(" — at '" + session.nodeKey() + "'"))
                 .append(Component.literal(" — seed " + session.seed()).withStyle(ChatFormatting.GRAY)), false);
         return session.trialNumber();
     }

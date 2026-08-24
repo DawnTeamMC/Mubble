@@ -3,8 +3,8 @@ package fr.hugman.mubble.world.voyage.trial;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
+import fr.hugman.mubble.world.voyage.VoyageNodeContent;
 import fr.hugman.mubble.world.voyage.environment.EnvironmentProfile;
-import java.util.Optional;
 
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -38,7 +38,7 @@ public record TrialDefinition(
         Component displayName,
         Holder<EnvironmentProfile> environment,
         TrialPlatform platform
-) {
+) implements VoyageNodeContent {
     public static final Codec<TrialDefinition> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ComponentSerialization.CODEC.fieldOf("display_name").forGetter(TrialDefinition::displayName),
             EnvironmentProfile.CODEC.fieldOf("environment").forGetter(TrialDefinition::environment),
@@ -49,15 +49,4 @@ public record TrialDefinition(
     public static final Codec<Holder<TrialDefinition>> CODEC =
             RegistryFileCodec.create(MubbleRegistries.TRIAL, DIRECT_CODEC);
 
-    /**
-     * {@return the clock time this trial's level should be parked at, if its environment names one}
-     *
-     * <p>Reached through the environment because that is where a data pack declares it, but it is
-     * not an attribute and cannot be applied as a layer: clocks in 26.2 hang off the server, not the
-     * level, so the only per-trial way to set one is at level creation. Whoever opens the level needs
-     * this, and should not have to know what an environment profile is to get at it.
-     */
-    public Optional<Integer> fixedTime() {
-        return this.environment.value().fixedTime();
-    }
 }
