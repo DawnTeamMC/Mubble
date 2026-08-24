@@ -2,6 +2,7 @@ package fr.hugman.mubble.world.voyage.session;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.world.voyage.VoyageDefinition;
+import fr.hugman.mubble.world.voyage.VoyageReward;
 import fr.hugman.mubble.world.voyage.environment.EnvironmentController;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldHandle;
 import fr.hugman.mubble.world.voyage.level.VoyageWorldProvider;
@@ -276,6 +277,15 @@ public final class VoyageSessions {
         }
 
         this.closeCurrentTrial(session);
+
+        // Only on completion, and only now: the player is back in their own world with their own
+        // inventory, so a reward lands somewhere they keep rather than in a level about to be
+        // deleted. Losing and abandoning pay nothing, which is what makes finishing worth anything.
+        if (outcome == Outcome.COMPLETED) {
+            for (VoyageReward reward : session.voyage().completionRewards()) {
+                reward.grantTo(player);
+            }
+        }
 
         if (outcome.message != null) {
             player.sendSystemMessage(Component.literal(outcome.message).withStyle(outcome.colour));

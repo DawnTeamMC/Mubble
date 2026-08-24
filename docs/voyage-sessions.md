@@ -1,4 +1,4 @@
-# Voyage sessions and the command — phases 3 and 4
+# Voyage sessions, the command and rewards — phases 3 to 5
 
 Notes for [#119](https://github.com/DawnTeamMC/Mubble/issues/119), Minecraft `26.2`.
 
@@ -157,6 +157,29 @@ There is none, per the issue. If one is ever wanted it goes on the root literal 
 `abandon` from a player already inside a voyage, which is the wrong shape. It belongs on `start`
 alone.
 
+## Rewards
+
+Granted on completion only, and only once the player is back in their own world with their own
+inventory. Losing, forfeiting and abandoning pay nothing, which is what makes finishing worth
+anything.
+
+**The ordering is the part worth stating.** Rewards go out *after* the stash is restored. Granting
+them first would put them into an inventory the restore then overwrites, and they would vanish with
+no error anywhere — a silent failure that only shows up as "I finished and got nothing". There is a
+test that finishes with the player's own sword in slot 20 and asserts both the sword and the carrots
+survive.
+
+Anything that will not fit is dropped at the player's feet with no pickup delay, aimed at them. Two
+notes on that:
+
+- Rewards are split by stack size the way `/give` does, since a reward may name more than one stack's
+  worth.
+- **Nothing is dropped for a player with infinite materials.** That is vanilla's doing rather than a
+  gap: `Inventory#add` deletes an overflow outright for them and reports success. It also means the
+  drop path cannot be reached through a game test without taking the ability away first, because the
+  framework's mock player is creative — so that test calls `VoyageReward#grantTo` directly and the
+  voyage plumbing around it is covered by the other tests.
+
 ## Seeding
 
 `VoyageSeeds.random()` is the only place in any of this that draws a random number, and it is not a
@@ -178,6 +201,9 @@ then a sub-seed per attribute.
 | Logging out mid-voyage and back in | Same. |
 | Control items gate on the marker | **Met**, with the negative test being the point. |
 | Chat feedback | **Met.** "Trial 2 of 3: Void Platform", "Voyage complete." |
+| Completing pays the reward, after the restore | **Met**, with a test that finishes holding a sword and asserts both the sword and the carrots survive. |
+| Losing and abandoning pay nothing | **Met**, covered for the fail item, `abandon`, and abandoning partway. |
+| Drop at feet if full | **Met**, tested on the reward directly — vanilla deletes an overflow for a creative player, and the framework's mock player is creative. |
 
 ## Manual test
 
@@ -188,10 +214,11 @@ client disconnecting and a real server stopping.
 /voyage start mubble-testmod:voyage_poc
 ```
 
-1. **You lose everything on entry and get it back on exit.** Go in carrying a full inventory, armour,
-   an effect, a power-up and some levels. Right-click the emerald three times to finish all three
-   trials. Your position, facing, inventory, armour, effect, power-up, health, hunger and XP should
-   all be exactly as they were — and none of them should have come into the trials with you.
+1. **You lose everything on entry and get it back on exit, plus a carrot.** Go in carrying a full
+   inventory, armour, an effect, a power-up and some levels. Right-click the emerald three times to
+   finish all three trials. Your position, facing, inventory, armour, effect, power-up, health,
+   hunger and XP should all be exactly as they were, with one carrot added — and none of it should
+   have come into the trials with you.
 2. **Nothing you pick up inside comes out.** Give yourself a power-up mid-trial and finish the
    voyage; it should be gone.
 3. **The ender chest is yours throughout.** Put something in before a voyage and something else in
@@ -199,24 +226,23 @@ client disconnecting and a real server stopping.
 4. **Each trial looks different**, and the chat says which one you are on. Moving between trials
    should log nothing — an "evacuating to spawn" error there means the old level is being deleted
    before the player has left it.
-5. **Forfeiting works.** Start again, right-click the redstone, and you should land back where you
-   started with everything intact and "Voyage lost."
+5. **Forfeiting works, and pays nothing.** Start again, right-click the redstone, and you should
+   land back where you started with everything intact, "Voyage lost.", and no carrot.
 6. **Dying works.** Start again and die in a trial. The voyage ends as a loss and you are put back
-   where you started the voyage from, not at your bed.
-7. **Logging out mid-voyage.** Quit to title inside a trial, load the world again. You should be back
+   where you started the voyage from, not at your bed, and with no carrot.
+7. **A full inventory keeps the reward.** Fill every slot and finish a voyage in survival; the carrot
+   should be lying at your feet rather than gone.
+8. **Logging out mid-voyage.** Quit to title inside a trial, load the world again. You should be back
    at your starting position with your inventory. Check the log for "Restoring … from an unfinished
    voyage".
-8. **A crash mid-voyage.** Kill the process rather than quitting. On restart the stash on disk should
+9. **A crash mid-voyage.** Kill the process rather than quitting. On restart the stash on disk should
    still put you right. This is the one that exercises the join-time recovery on its own.
-9. **The control items do not escape.** After any ending, you should have no emerald called *Complete
+10. **The control items do not escape.** After any ending, you should have no emerald called *Complete
    Trial* anywhere, and any ordinary emeralds you were carrying should be untouched.
-10. **`<world>/dimensions/mubble/voyage/` is empty** afterwards, including after the crash test.
+11. **`<world>/dimensions/mubble/voyage/` is empty** afterwards, including after the crash test.
 
 ## Still open
 
-- **Phase 5** hands out `completion_rewards`, which the definition has carried since phase 2 and
-  nothing reads yet. It grants them only on completion, only once the player is back in the overworld
-  with their inventory restored, and drops at their feet if there is no room.
 - **Objectives** replace the control items. That is the trial's own business, and phase 2 left the
   seam on `TrialDefinition`.
 - **Clearing third-party mod state on entry.** Restoring already covers it; clearing would need a
