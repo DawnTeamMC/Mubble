@@ -22,24 +22,51 @@ would happen once this existed.
 Both are stand-ins. Phase 4's `/voyage start` / `abandon` / `status` replaces them and deletes the
 spike command.
 
-## The stash
+## The stash is the player's whole save tag
 
-On entry the player's inventory (armour and offhand included), held slot, effects, attribute
-modifiers, game mode, health, hunger, saturation, total experience, and exact position, dimension and
-rotation go into a `PlayerStash`. Then the player is emptied.
+`PlayerStash` holds `saveWithoutId` — the same serialisation the game uses to write a player to disk
+— plus the return dimension, position and rotation.
 
-**The ender chest is deliberately untouched.** It is not in the level being deleted and nothing about
-a voyage reads it, so stashing it would only add a way to lose it.
+**It started as a list of fields** (inventory, effects, attributes, hunger, …) and that was wrong by
+construction: it restores exactly the list somebody thought of and silently ignores everything else.
+Mubble's own power-up walked straight through a voyage that way. Any other mod's player state would
+have too, which is the real problem — a POC that only survives contact with its own mod is not much
+of a POC.
 
-Two details that are not obvious:
+Using the game's own serialisation means anything persisted through `addAdditionalSaveData`, the
+normal way to do it, comes along without this class knowing the mod exists.
 
-- **Experience is stored as the total, not as level plus progress.** The three have to agree, and the
-  total is the only one of them that is authoritative. Restoring sets the level and progress to zero
-  and re-awards the total, which reconstructs the other two exactly.
-- **The inventory is walked by container size, not by 36.** `Inventory#getItem` maps slots 36–42 onto
-  the equipment, so armour, offhand, body and saddle come along without being special-cased. Walking
-  only the main slots would lose someone's armour silently, which is why there is a test that puts a
-  chestplate in slot 38 and asserts it comes back.
+### Clearing cannot be generic, and that is the honest limit
+
+Restoring works from a saved tag, so it covers whatever was in it. **Clearing has to know what to
+reset**, and loading a stripped tag does not do it: the usual way to read persisted state is
+
+```java
+input.read(key, CODEC).ifPresent(value -> …)
+```
+
+so an *absent* key leaves the field exactly as it was. Mubble's power-up reads that way and most mods
+will too.
+
+So `clear()` resets vanilla's player state and Mubble's, and a third party's state will survive into
+a trial. It is still put back correctly on the way out, which is the direction that matters: nothing
+gained inside a voyage escapes it.
+
+That is also why **restoring clears first and loads second**. Loading alone would not undo a power-up
+picked up *during* a voyage — the snapshot has no key for one, and the reader ignores absent keys.
+Clearing first means the snapshot lands on a blank player instead of being layered over whatever the
+voyage left behind. There is a test for each direction.
+
+### The ender chest, which took two goes
+
+It should be untouched: it is not in the level being deleted, and rolling it back would delete
+anything the player put in during a voyage.
+
+Dropping its key from the snapshot is **not** enough on its own. `Player` reads it with
+`listOrEmpty`, so an absent key *empties the chest* rather than leaving it alone — the first attempt
+at this deleted it outright, and a test caught it. The key is dropped on the way in and the player's
+current contents are written back into the tag on the way out, which is the only combination that
+actually leaves it be.
 
 ## Getting out
 
@@ -122,7 +149,8 @@ then a sub-seed per attribute.
 | Criterion | State |
 |---|---|
 | No live `random()` in voyage code paths | **Met.** The one draw is the initial seed, in a method that says so. |
-| Stash and restore everything listed | **Met**, covered by a unit test for the on-disk form and a game test for reading it off a real player and putting it back. Game mode is the one field with no test — the game test framework's mock player hard-codes `gameMode()` to creative, so a round trip through it would prove nothing. |
+| Stash and restore everything listed | **Met, and then some** — the stash is the player's whole save tag rather than the issue's list, so it covers mod state as well. Covered by a unit test for the on-disk form and game tests for reading it off a real player and putting it back. Game mode is the one field with no test: the framework's mock player hard-codes `gameMode()` to creative, so a round trip through it would prove nothing. |
+| Nothing leaks either way | **Out of a voyage: met**, including third-party mod state. **Into a voyage: partial** — see the clearing note above. |
 | Survives a server restart mid-voyage | **Met** by design; **(unverified — needs a human in-game)** end to end. |
 | Logging out mid-voyage and back in | Same. |
 | Control items gate on the marker | **Met**, with the negative test being the point. |
@@ -138,22 +166,28 @@ client disconnecting and a real server stopping.
 ```
 
 1. **You lose everything on entry and get it back on exit.** Go in carrying a full inventory, armour,
-   an effect and some levels. Right-click the emerald three times to finish all three trials. Your
-   position, facing, inventory, armour, effect, health, hunger and XP should all be exactly as they
-   were.
-2. **Each trial looks different**, and the chat says which one you are on.
-3. **Forfeiting works.** Start again, right-click the redstone, and you should land back where you
+   an effect, a power-up and some levels. Right-click the emerald three times to finish all three
+   trials. Your position, facing, inventory, armour, effect, power-up, health, hunger and XP should
+   all be exactly as they were — and none of them should have come into the trials with you.
+2. **Nothing you pick up inside comes out.** Give yourself a power-up mid-trial and finish the
+   voyage; it should be gone.
+3. **The ender chest is yours throughout.** Put something in before a voyage and something else in
+   during one. Both should be there afterwards.
+4. **Each trial looks different**, and the chat says which one you are on. Moving between trials
+   should log nothing — an "evacuating to spawn" error there means the old level is being deleted
+   before the player has left it.
+5. **Forfeiting works.** Start again, right-click the redstone, and you should land back where you
    started with everything intact and "Voyage lost."
-4. **Dying works.** Start again and die in a trial. The voyage ends as a loss and you are put back
+6. **Dying works.** Start again and die in a trial. The voyage ends as a loss and you are put back
    where you started the voyage from, not at your bed.
-5. **Logging out mid-voyage.** Quit to title inside a trial, load the world again. You should be back
+7. **Logging out mid-voyage.** Quit to title inside a trial, load the world again. You should be back
    at your starting position with your inventory. Check the log for "Restoring … from an unfinished
    voyage".
-6. **A crash mid-voyage.** Kill the process rather than quitting. On restart the stash on disk should
+8. **A crash mid-voyage.** Kill the process rather than quitting. On restart the stash on disk should
    still put you right. This is the one that exercises the join-time recovery on its own.
-7. **The control items do not escape.** After any ending, you should have no emerald called *Complete
+9. **The control items do not escape.** After any ending, you should have no emerald called *Complete
    Trial* anywhere, and any ordinary emeralds you were carrying should be untouched.
-8. **`<world>/dimensions/mubble/voyage/` is empty** afterwards, including after the crash test.
+10. **`<world>/dimensions/mubble/voyage/` is empty** afterwards, including after the crash test.
 
 ## Still open
 
@@ -163,5 +197,7 @@ client disconnecting and a real server stopping.
   nothing reads yet.
 - **Objectives** replace the control items. That is the trial's own business, and phase 2 left the
   seam on `TrialDefinition`.
+- **Clearing third-party mod state on entry.** Restoring already covers it; clearing would need a
+  hook mods can register against. Worth doing when there is a second mod to test it with, not before.
 - **Multiplayer sharing.** Sessions are per player, so two players run separate voyages in separate
   levels. Whether a voyage is ever a party activity is a design question, not a gap.
