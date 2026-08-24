@@ -4,6 +4,7 @@ import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
 import fr.hugman.mubble.tags.MubblePowerUpTags;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import fr.hugman.mubble.world.entity.WaterRunner;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpHolder;
@@ -29,7 +30,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Mixin(Player.class)
-public class PlayerMixin implements PowerUpHolder {
+public class PlayerMixin implements PowerUpHolder, WaterRunner {
     @Unique
     private static final EntityDataAccessor<Optional<PowerUpProperties>> POWER_UP_PROPERTIES = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.POWER_UP_PROPERTIES);
     @Unique
@@ -39,6 +40,10 @@ public class PlayerMixin implements PowerUpHolder {
     private static final String POWER_UP_KEY = "power_up";
     @Unique
     private static final String POWER_UP_PROPERTIES_KEY = "power_up_properties";
+
+    /** Whether the sprint the player is on started on the ground, see {@link #mubble$updateRunningOnWater}. */
+    @Unique
+    private boolean mubble$runningOnWater;
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     protected void mubble$initDataTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
@@ -87,6 +92,38 @@ public class PlayerMixin implements PowerUpHolder {
                 }
             }
         });
+    }
+
+    /**
+     * Keeps track of whether the sprint the player is on can carry them over water.
+     * <p>
+     * Holding a power-up tagged {@code mubble:can_run_on_water} only opens the door: the sprint has
+     * to have started on the ground and out of the water, and it is over as soon as the player runs
+     * into a wall or goes under. Leaving the ground is neither, so a jump keeps the run going and the
+     * player lands back on the surface.
+     * <p>
+     * A wall counts the way it does for a vanilla sprint, minor collisions aside: brushing past a
+     * corner, or the step up the surface of the water sometimes is, should not drop anyone in.
+     * <p>
+     * This runs on both sides: the collision shape has to answer the same on the client that predicts
+     * the movement and on the server that validates it, and both know everything the answer needs.
+     */
+    @Inject(method = "tick", at = @At("TAIL"))
+    private void mubble$updateRunningOnWater(CallbackInfo ci) {
+        var this_ = (Player) (Object) this;
+
+        var allowed = this_.getPowerUp().map(entry -> entry.is(MubblePowerUpTags.CAN_RUN_ON_WATER)).orElse(false);
+        if (!allowed || !this_.isSprinting() || (this_.horizontalCollision && !this_.minorHorizontalCollision)) {
+            this.mubble$runningOnWater = false;
+        } else if (this.mubble$runningOnWater) {
+            // the surface carries the runner, so being dunked under it means the run is over
+            if (this_.isUnderWater()) {
+                this.mubble$runningOnWater = false;
+            }
+        } else {
+            // swimming and jumping out of the water is not a start: the sprint has to come from land
+            this.mubble$runningOnWater = this_.onGround() && !this_.isInWater();
+        }
     }
 
     @Inject(method = "aiStep", at = @At("TAIL"))
@@ -156,5 +193,15 @@ public class PlayerMixin implements PowerUpHolder {
             ServerPlayNetworking.send(serverPlayer, new PowerUpChangePayload(previous, Optional.empty()));
         }
         PowerUp.onChange(this_, previous, Optional.empty());
+    }
+
+    @Override
+    public boolean isRunningOnWater() {
+        return this.mubble$runningOnWater;
+    }
+
+    @Override
+    public void setRunningOnWater(boolean runningOnWater) {
+        this.mubble$runningOnWater = runningOnWater;
     }
 }
