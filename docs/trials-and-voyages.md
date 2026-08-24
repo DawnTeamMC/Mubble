@@ -164,9 +164,11 @@ them clear by default, exactly what the profile asked for after that, and unreac
 `/weather` outside.
 
 Both carry the same limit: they belong to a level being **created**. A profile applied to a level
-that already exists cannot change either, so `/voyagespike environment` will never change the time,
-and it refuses to change the weather with a warning rather than quietly writing to the server's.
-That refusal is the point — "make it storm here" must never become "make it storm everywhere".
+that already exists cannot change either. Applying a profile to a shared level refuses to touch the
+weather, with a warning, rather than quietly writing to the server's — "make it storm here" must
+never become "make it storm everywhere". Nothing in the shipped commands does that any more, since
+the spike command that could went away in phase 4, but the guard stays: it is a property of the
+controller, not of who happens to call it.
 
 ## Acceptance criteria
 
@@ -184,17 +186,17 @@ things tests cannot answer are whether the three trials actually look different 
 platform is somewhere sane to stand.
 
 ```
-/voyagespike open mubble-testmod:trial_dawn
-/voyagespike close
-/voyagespike open mubble-testmod:trial_shifting 1
-/voyagespike close
-/voyagespike open mubble-testmod:trial_shifting 2
+/voyage start mubble-testmod:voyage_poc 1
+/voyage start mubble-testmod:voyage_poc 2
 ```
+
+Right-click the emerald to move between trials. Since phase 4 there is no way to open one trial on
+its own — the spike command that did that is gone — so these are run as whole voyages.
 
 1. **Each trial looks obviously different**, and you land on its own block type — sandstone for
    dawn, deepslate tiles for shifting, moss for toxic.
-2. **`trial_shifting` changes with the seed.** Seeds 1 and 2 should give different skies. Re-open
-   seed 1 later and it must be the same sky it was the first time.
+2. **`trial_shifting` changes with the seed.** Seeds 1 and 2 should give it different skies. Run seed
+   1 again later and it must be the same sky it was the first time.
 3. **Sky and fog vary independently.** Across a handful of seeds you should not see the same
    sky-and-fog pairing every time.
 4. **The time of day is per trial.** Dawn sits at 23000 and toxic at 6000, both paused, and the
@@ -207,9 +209,8 @@ platform is somewhere sane to stand.
    `/weather clear` outside, enter `trial_toxic` again — it must still storm in there. And with
    `/weather rain` outside, `trial_dawn` must still be dry. Isolation in both directions is the whole
    change.
-7. **`/voyagespike environment <profile>` in the overworld says no to weather.** It applies the
-   colours and logs a warning that it is ignoring the weather, rather than changing everyone's.
-8. **`/voyagespike voyage mubble-testmod:voyage_poc`** lists three trials in order and one carrot.
+7. **The voyage runs its trials in order**, and `/voyage status` names the voyage, which trial you
+   are on, and the seed.
 
 ## Still open
 

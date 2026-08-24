@@ -242,34 +242,27 @@ reading this version's sources and from the build; the runtime behaviour below i
 your eyes.
 
 ```
-/voyagespike open <trial> [seed]
+/voyage start mubble-testmod:voyage_poc
 ```
 
-Creates a level, builds the trial's platform, applies its environment and teleports you onto it.
-Chat reports the dimension id, the trial name and the node seed. Tab-completion lists the loaded
-trials; the testmod ships `mubble-testmod:trial_dawn`, `trial_shifting`, `trial_toxic` and
-`trial_plain`.
+Opens a level per trial, builds the trial's platform, applies its environment and teleports you in.
+Right-clicking the emerald moves to the next one, which opens another level and deletes the last.
 
-```
-/voyagespike status
-/voyagespike close
-```
-
-`close` returns you to your exact starting position and destroys the level.
+> This was `/voyagespike open <trial>` until phase 4, which opened a single trial level with no
+> session around it. The spike command is gone.
 
 What to check:
 
-1. **F3 shows a new dimension** named `mubble:voyage/<n>` and you are standing on stone in a void.
-2. **No crash, no console spam** on entry or exit.
-3. **`<world>/dimensions/mubble/voyage/` is empty** after `close`. Open and close ten times; the
-   folder must not accumulate.
-4. **Two players can each have one open** simultaneously without interfering.
-5. **Quit to title while inside**, then load the world again. You come back at the overworld's world
-   spawn, because shutdown evacuates you before saving. Landing back where you *started* is a
-   property of a voyage session and not of a bare trial level; `/voyagespike open` has no stash, so
-   it still cannot do it. See `voyage-sessions.md`.
-
-`VoyageSpikeCommand` is throwaway. Phase 4's `/voyage` replaces it and it should be deleted then.
+1. **F3 shows a new dimension** named `mubble:voyage/<n>` and you are standing on a platform in a
+   void.
+2. **No crash, no console spam** on entry, on moving between trials, or on exit. An "evacuating to
+   spawn" error means a level is being deleted before the player has left it.
+3. **`<world>/dimensions/mubble/voyage/` is empty** afterwards. Run the voyage ten times; the folder
+   must not accumulate.
+4. **Two players can each run one** simultaneously without interfering.
+5. **Quit to title while inside**, then load the world again. You come back where you started the
+   voyage, with your inventory — the level provider's own evacuation only puts you at world spawn,
+   and the session's stash is what corrects that. See `voyage-sessions.md`.
 
 ---
 

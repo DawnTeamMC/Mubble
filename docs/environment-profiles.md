@@ -175,8 +175,8 @@ The issue asks for an honest account of which Tier B fields the profile layer ge
 | `gameplay/sky_light_level` | **Real.** An attribute; applied on both sides, so lighting and mob spawning see it. `updateSkyBrightness()` is called on apply so it takes effect immediately. |
 | `visual/ambient_light_color`, `visual/block_light_tint`, `visual/sky_light_color` | **Real**, client-side rendering. |
 | Gameplay booleans (`monsters_burn`, `piglins_zombify`, `water_evaporates`, …) | **Real**, server-side, and free — they are attributes like any other. The issue did not ask for these; they arrive with the vocabulary. |
-| `fixed_time` | **Real since phase 2**, with one limit. Not an attribute, and `ServerClockManager` hangs off the **server**, not the level — `/time` moves every level at once. Fantasy gives a runtime level its own clock manager, so `RuntimeLevelConfig.setClockTime(clock, time, paused)` at creation is the only per-trial way to set one. That is where it is applied, from `TrialDefinition#fixedTime`. The limit follows from the mechanism: a profile applied to a level that already exists cannot change its time, so `/voyagespike environment` never will. |
-| `weather` | **Real since phase 2.** Not an attribute, and `WeatherData` is one object on the server that every level reads through `ServerLevel#getWeatherData`. Trial levels are handed their own, so a trial is isolated in both directions: its storm does not rain on someone's Overworld build, and `/weather` outside cannot cancel it. Applied to a level that does *not* own its weather, the field is refused with a warning rather than written to the server's — that is `/voyagespike environment` in the Overworld. See `trials-and-voyages.md`. |
+| `fixed_time` | **Real since phase 2**, with one limit. Not an attribute, and `ServerClockManager` hangs off the **server**, not the level — `/time` moves every level at once. Fantasy gives a runtime level its own clock manager, so `RuntimeLevelConfig.setClockTime(clock, time, paused)` at creation is the only per-trial way to set one. That is where it is applied, from `TrialDefinition#fixedTime`. The limit follows from the mechanism: a profile applied to a level that already exists cannot change its time. |
+| `weather` | **Real since phase 2.** Not an attribute, and `WeatherData` is one object on the server that every level reads through `ServerLevel#getWeatherData`. Trial levels are handed their own, so a trial is isolated in both directions: its storm does not rain on someone's Overworld build, and `/weather` outside cannot cancel it. Applied to a level that does *not* own its weather, the field is refused with a warning rather than written to the server's. See `trials-and-voyages.md`. |
 | ceiling / skylight | **Not available.** `hasCeiling` and `hasSkyLight` are `DimensionType` fields, not attributes, and the dimension type is shared across all trials by necessity (see `runtime-worlds.md` §2). A trial cannot change them without owning a dimension type, which would break connected clients. |
 
 The short version: **Tier A and Tier B are both fully real**, and mostly for free — they are all just
@@ -195,26 +195,30 @@ The testmod ships four profiles: `mubble-testmod:env_dawn`, `env_toxic`, `env_sh
 > Note the namespace: the module's mod id is `mubble-testmod`, so ids are `mubble-testmod:env_dawn`,
 > not `testmod:env_dawn` as the issue writes them.
 
+Profiles are looked at by running the voyage that uses them:
+
 ```
-/voyagespike environment mubble-testmod:env_dawn
-/voyagespike environment mubble-testmod:env_toxic
-/voyagespike environment clear
+/voyage start mubble-testmod:voyage_poc
 ```
 
-Applies to whatever level you are standing in, so it works in the Overworld — you do not need a
-voyage level to see it.
+> Until phase 4 this was `/voyagespike environment <profile>`, which applied a profile to whatever
+> level you were standing in. That command is gone, along with the rest of the spike. Going through a
+> trial is a step less convenient and a step more honest — it is how a profile is actually used.
 
 1. **The three profiles look obviously different.** Dawn is warm orange with long fog; toxic is green
-   with fog closing in at 28 blocks; shifting is red sky over near-black fog.
-2. **`env_empty` changes nothing.** It is a valid profile that names no attributes, so every field
-   falls through to vanilla.
-3. **`/reload` updates a connected client.** Edit a colour in
+   with fog closing in at 28 blocks and a thunderstorm; shifting is a seed-picked sky over near-black
+   fog. Advance through all three in one run and they should be unmistakable.
+2. **`env_empty` changes nothing.** `mubble-testmod:trial_plain` uses it, so add it to the voyage and
+   it should render like an ordinary overworld sky.
+3. **`/reload` updates a connected client.** While standing in a trial, edit a colour in
    `mubble-testmod/src/main/resources/data/mubble-testmod/mubble/environment_profile/env_dawn.json`,
    run `/reload`, and the sky should change without reconnecting.
 4. **Server-only profile.** Put a profile in a datapack in the server's `world/datapacks/` only, with
-   the client having never seen the file, and apply it. It should render.
-5. **Unknown id is loud.** `/voyagespike environment mubble:nope` should log an error naming the
-   profile and leave the sky untouched.
+   the client having never seen the file, point a trial at it, and run the voyage. It should render.
+5. **Unknown id is loud.** Harder to reach on purpose since phase 2: a trial may only reference a
+   registered profile, so a bad id now fails while the data pack loads rather than mid-voyage. The
+   remaining route is deleting a profile and running `/reload` while a voyage is using it, which
+   should log an error naming the profile and leave the sky alone.
 
 ## Still open
 
