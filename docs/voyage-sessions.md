@@ -1,4 +1,4 @@
-# Voyage sessions — phase 3
+# Voyage sessions and the command — phases 3 and 4
 
 Notes for [#119](https://github.com/DawnTeamMC/Mubble/issues/119), Minecraft `26.2`.
 
@@ -14,13 +14,14 @@ a player's belongings away and giving them back.
 It also absorbed the phase-0 `VoyageWorlds` holder, which is what that class's own javadoc said
 would happen once this existed.
 
-```
-/voyagespike run <voyage> [seed]   start one
-/voyagespike quit                  end it as an abandonment
-```
+Phase 4 then put the only player-facing surface on it, and deleted the spike command that had stood
+in for one since phase 0:
 
-Both are stand-ins. Phase 4's `/voyage start` / `abandon` / `status` replaces them and deletes the
-spike command.
+```
+/voyage start <voyage_id> [seed]
+/voyage abandon
+/voyage status
+```
 
 ## The stash is the player's whole save tag
 
@@ -76,7 +77,7 @@ Five endings, all through one method:
 |---|---|
 | completing the last trial | ADVANCE on the final trial |
 | failing | FAIL item, or dying inside a trial |
-| abandoning | `/voyagespike quit`, later `/voyage abandon` |
+| abandoning | `/voyage abandon` |
 | disconnecting | logging out mid-voyage |
 | the server stopping | clean shutdown |
 
@@ -134,6 +135,28 @@ can move them, and a control item that outlives its voyage is an item that ends 
 These are a placeholder for real objectives. Phase 2 left objectives deliberately unbuilt, so "the
 player decides when the trial is over" is the stand-in.
 
+## The command
+
+`VoyageCommand` is thin on purpose: every branch is one call into `VoyageSessions`. What it owns is
+turning a refusal into a sentence somebody can act on.
+
+- **`start`** checks "already in a voyage" *before* looking the id up, so a player who is mid-voyage
+  is told that rather than being told the id they fat-fingered does not exist.
+- **An omitted seed is generated and reported.** The session already announces the seed on entry,
+  which is the whole point — a seed a player cannot read is a seed they cannot share. There is a test
+  asserting the generated one actually reaches them.
+- **An unknown id names itself** in the refusal, and tab-completion lists the ones that exist.
+- **`abandon` is a loss**: same restore, no rewards. It says something different in chat, which is
+  the only difference.
+- **`status`** reports the voyage, the trial index and the active seed.
+
+### Where a permission level would go
+
+There is none, per the issue. If one is ever wanted it goes on the root literal as
+`.requires(Commands.hasPermission(…))` — but note that gating the root would also hide `status` and
+`abandon` from a player already inside a voyage, which is the wrong shape. It belongs on `start`
+alone.
+
 ## Seeding
 
 `VoyageSeeds.random()` is the only place in any of this that draws a random number, and it is not a
@@ -162,7 +185,7 @@ then a sub-seed per attribute.
 client disconnecting and a real server stopping.
 
 ```
-/voyagespike run mubble-testmod:voyage_poc
+/voyage start mubble-testmod:voyage_poc
 ```
 
 1. **You lose everything on entry and get it back on exit.** Go in carrying a full inventory, armour,
@@ -191,10 +214,9 @@ client disconnecting and a real server stopping.
 
 ## Still open
 
-- **Phase 4** replaces `/voyagespike run|quit` with `/voyage start|abandon|status`, including
-  generating and echoing an omitted seed, and refusing to start a second voyage.
 - **Phase 5** hands out `completion_rewards`, which the definition has carried since phase 2 and
-  nothing reads yet.
+  nothing reads yet. It grants them only on completion, only once the player is back in the overworld
+  with their inventory restored, and drops at their feet if there is no room.
 - **Objectives** replace the control items. That is the trial's own business, and phase 2 left the
   seam on `TrialDefinition`.
 - **Clearing third-party mod state on entry.** Restoring already covers it; clearing would need a

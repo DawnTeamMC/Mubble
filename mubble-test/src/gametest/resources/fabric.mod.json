@@ -17,6 +17,7 @@
       "fr.hugman.mubble.test.gametest.voyage.LevelWeatherGameTest",
       "fr.hugman.mubble.test.gametest.voyage.PlayerStashGameTest",
       "fr.hugman.mubble.test.gametest.voyage.VoyageControlItemsGameTest",
+      "fr.hugman.mubble.test.gametest.voyage.VoyageCommandGameTest",
       "fr.hugman.mubble.test.gametest.network.NetworkPayloadGameTest",
       "fr.hugman.mubble.test.gametest.power_up.PowerUpHolderGameTest",
       "fr.hugman.mubble.test.gametest.power_up.PowerUpPersistenceGameTest",

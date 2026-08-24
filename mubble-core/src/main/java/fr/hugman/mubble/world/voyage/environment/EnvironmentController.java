@@ -161,8 +161,8 @@ public final class EnvironmentController {
 
         // fixed_time is not applied here. It is a clock, and a clock can only be given to a level
         // when the level is created, so the trial's level provider reads it off the definition; see
-        // TrialDefinition#fixedTime. Nothing sets it for a level that already exists, which is why
-        // /voyagespike environment cannot change the time.
+        // TrialDefinition#fixedTime. Nothing sets it for a level that already exists, so applying a
+        // profile to a running level cannot change the time.
         //
         // weather is not an attribute either. It is a level's own since we gave trial levels their
         // own WeatherData; see WeatherOverridable.
