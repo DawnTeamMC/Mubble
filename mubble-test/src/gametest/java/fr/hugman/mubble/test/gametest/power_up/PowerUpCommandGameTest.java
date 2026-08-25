@@ -4,12 +4,10 @@ import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
 import fr.hugman.mubble.test.gametest.datapack.PowerUpFixtures;
 import fr.hugman.mubble.test.gametest.support.TestPlayers;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
-import net.minecraft.commands.CommandSource;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.network.chat.Component;
-import net.minecraft.server.permissions.PermissionSet;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.server.level.ServerPlayer;
+
+import static fr.hugman.mubble.test.gametest.support.TestCommands.run;
+import static fr.hugman.mubble.test.gametest.support.TestCommands.succeeds;
 
 /**
  * {@code /powerup}, the way a power-up is handed out without an item. It is also the only user of
@@ -83,60 +81,5 @@ public class PowerUpCommandGameTest {
         helper.assertTrue(player.getPowerUp().isEmpty(), "and nothing should have been handed out");
 
         helper.succeed();
-    }
-
-    private static void run(GameTestHelper helper, ServerPlayer player, String command) {
-        var outcome = perform(helper, player, command);
-        helper.assertTrue(outcome.succeeded, "`/" + command + "` failed: " + outcome.message);
-    }
-
-    private static boolean succeeds(GameTestHelper helper, ServerPlayer player, String command) {
-        return perform(helper, player, command).succeeded;
-    }
-
-    /** Runs {@code command} as the server, on behalf of {@code player}, keeping whatever it answered. */
-    private static Outcome perform(GameTestHelper helper, ServerPlayer player, String command) {
-        var server = helper.getLevel().getServer();
-        var outcome = new Outcome();
-
-        CommandSourceStack source = new CommandSourceStack(
-                new CommandSource() {
-                    @Override
-                    public void sendSystemMessage(Component message) {
-                        outcome.message = outcome.message + " | " + message.getString();
-                    }
-
-                    @Override
-                    public boolean acceptsSuccess() {
-                        return true;
-                    }
-
-                    @Override
-                    public boolean acceptsFailure() {
-                        return true;
-                    }
-
-                    @Override
-                    public boolean shouldInformAdmins() {
-                        return false;
-                    }
-                },
-                player.position(),
-                player.getRotationVector(),
-                helper.getLevel(),
-                PermissionSet.ALL_PERMISSIONS,
-                "gametest",
-                Component.literal("gametest"),
-                server,
-                player
-        );
-
-        server.getCommands().performPrefixedCommand(source.withCallback((success, result) -> outcome.succeeded = success), command);
-        return outcome;
-    }
-
-    private static final class Outcome {
-        boolean succeeded;
-        String message = "";
     }
 }

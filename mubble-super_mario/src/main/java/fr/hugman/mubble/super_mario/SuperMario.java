@@ -1,6 +1,7 @@
 package fr.hugman.mubble.super_mario;
 
 import com.google.common.reflect.Reflection;
+import fr.hugman.mubble.super_mario.commands.SuperMarioCommands;
 import fr.hugman.mubble.super_mario.core.component.SuperMarioDataComponents;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.core.attachment.SuperMarioAttachmentTypes;
@@ -11,6 +12,7 @@ import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.attribute.SuperMarioEnvironmentAttributes;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityEvents;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.entity.freeze.FreezeEvents;
 import fr.hugman.mubble.super_mario.world.inventory.SuperMarioMenuTypes;
 import fr.hugman.mubble.super_mario.world.item.SuperMarioCreativeModeTabs;
 import fr.hugman.mubble.super_mario.world.item.SuperMarioItems;
@@ -57,8 +59,11 @@ public class SuperMario implements ModInitializer {
         SuperMarioPayloadTypes.registerTypes();
         SuperMarioServerReceivers.register();
 
+        SuperMarioCommands.register();
+
         // Events
         SuperMarioEntityEvents.registerListeners();
+        FreezeEvents.register();
     }
 
     public static Identifier id(String path) {

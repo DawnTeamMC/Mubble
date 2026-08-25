@@ -10,10 +10,12 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Wraps a frozen entity in the block of ice holding it, and holds its animations still while it is
@@ -30,6 +32,21 @@ public class FrozenEntityRendererMixin<T extends Entity, S extends EntityRenderS
         if (freeze != null) {
             // winding the age back to what it was when the ice took hold stops everything driven by it
             state.ageInTicks -= freeze.frozenFor();
+        }
+    }
+
+    /**
+     * Shakes a block of ice that is about to give.
+     * <p>
+     * The offset is added here rather than around the ice cube below, because this is the one the
+     * whole entity is drawn from: the ice and whatever is caught inside it shudder as the one thing.
+     */
+    @Inject(method = "getRenderOffset", at = @At("RETURN"), cancellable = true)
+    private void super_mario$rattleTheIce(S state, CallbackInfoReturnable<Vec3> cir) {
+        var freeze = state.getData(SuperMarioRenderStateDataKeys.FREEZE);
+        // most of a freeze is spent perfectly still, and that half is not worth a vector for
+        if (freeze != null && freeze.rattle() != Vec3.ZERO) {
+            cir.setReturnValue(cir.getReturnValue().add(freeze.rattle()));
         }
     }
 

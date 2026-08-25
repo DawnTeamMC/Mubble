@@ -5,12 +5,10 @@ package fr.hugman.mubble.super_mario.world.entity.freeze;
  * ice ball can have on it.
  */
 public enum FreezeResistance {
-    /** Trapped for the full duration, and none the worse for it once it thaws. */
+    /** Trapped for the full duration. */
     NONE,
-    /**
-     * Big enough to crack the ice open well before it melts, but not without hurting itself doing so.
-     */
+    /** Big enough to crack the ice open well before it melts. */
     TOUGH,
-    /** Far too big to be trapped at all: the ice shatters on impact and only stings. */
+    /** Not to be trapped at all: the ice shatters on impact and leaves nothing behind. */
     IMMUNE
 }

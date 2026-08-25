@@ -28,6 +28,14 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("block." + SuperMario.MOD_ID + ".bumpable.drop.one", "Drop one");
         builder.add("block." + SuperMario.MOD_ID + ".bumpable.drop.one.description", "The block will drop one item per bump");
 
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.frozen", "Froze %s for %s ticks");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.thawed", "Thawed %s");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.already_frozen", "Nothing changed. That entity is already frozen");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.not_frozen", "Nothing changed. That entity is not frozen");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.unfreezable", "Nothing changed. That entity cannot be frozen");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.frozen", "%s is frozen for %s more ticks");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.thawed", "%s is not frozen");
+
         builder.add("entity." + SuperMario.MOD_ID + ".goomba.mini", "Mini Goomba");
         builder.add("item." + SuperMario.MOD_ID + ".mini_goomba_spawn_egg", "Mini Goomba Spawn Egg");
 

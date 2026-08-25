@@ -68,7 +68,7 @@ public class Iceball extends Ball {
         entity.hurt(source, damage);
         // snow golems are made of the stuff: an ice ball is no more to them than the hit itself
         if (this.level() instanceof ServerLevel level && !(entity instanceof SnowGolem) && entity instanceof LivingEntity living && living.isAlive()) {
-            Freezing.freeze(level, living, source);
+            Freezing.freeze(level, living);
         }
         this.finalHit(SuperMarioSounds.ICEBALL_HIT_ENTITY);
     }
