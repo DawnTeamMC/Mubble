@@ -6,7 +6,6 @@ import fr.hugman.mubble.super_mario.world.item.SuperMarioItems;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -160,17 +159,19 @@ public class RedKoopaShell extends KoopaShell {
         if (!(this.level() instanceof ServerLevel serverLevel)) {
             return null;
         }
-        // an owner-less shell, thrown by a dispenser for instance, still homes in: it just has no one to spare
-        Entity owner = this.getOwner();
+        // a shell nobody threw has no one to home in on behalf of, so it never looks for a target at all
+        if (!(this.getOwner() instanceof LivingEntity livingOwner)) {
+            return null;
+        }
         // the search box is a cube, so its corners reach further than the shell is willing to home in from:
         // filtering on the same conditions the target is later kept on avoids locking onto one of those, only
         // to drop it on the very next tick
         var candidates = serverLevel.getEntitiesOfClass(LivingEntity.class, this.getSearchBox(MAX_TARGET_DISTANCE),
-                candidate -> candidate != owner && this.isValidTarget(candidate));
+                candidate -> candidate != livingOwner && this.isValidTarget(candidate));
         return serverLevel.getNearestEntity(
                 candidates,
                 TARGET_PREDICATE,
-                owner instanceof LivingEntity livingOwner ? livingOwner : null,
+                livingOwner,
                 this.getX(),
                 this.getEyeY(),
                 this.getZ());
