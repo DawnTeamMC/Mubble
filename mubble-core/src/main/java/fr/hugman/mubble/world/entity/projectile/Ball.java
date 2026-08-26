@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +22,15 @@ import org.jspecify.annotations.Nullable;
 
 public abstract class Ball extends ThrowableProjectile {
 	public static final String REBOUNDS_KEY = "rebounds";
+
+    /** Trail particles left behind per block travelled. */
+    private static final double TRAIL_PARTICLES_PER_BLOCK = 6.0D;
+    /** Trail particles a single tick may spawn at most, so that a very fast ball cannot flood the screen. */
+    private static final int MAX_TRAIL_PARTICLES_PER_TICK = 8;
+    /** Distance travelled in a tick under which a ball counts as standing still and trails nothing. */
+    private static final double MIN_TRAIL_DISTANCE = 0.01D;
+    /** How far off its path a trail particle may drift, in blocks. */
+    private static final double TRAIL_SPREAD = 0.1D;
 
     protected int rebounds = 3;
     private boolean rotateClockwards = false;
@@ -57,12 +67,24 @@ public abstract class Ball extends ThrowableProjectile {
     @Override
     public void tick() {
         super.tick();
+        if (this.level().isClientSide()) {
+            this.spawnTrailParticles();
+        }
     }
 
     @Nullable
     protected abstract SoundEvent getDeathSound();
 
     protected abstract ParticleOptions getDeathParticle();
+
+    /**
+     * @return the particle the ball trails behind it while it moves, or {@code null} for a ball that
+     * leaves no trail at all
+     */
+    @Nullable
+    protected ParticleOptions getTrailParticle() {
+        return null;
+    }
 
 	@Override
 	protected double getDefaultGravity() {
@@ -125,6 +147,50 @@ public abstract class Ball extends ThrowableProjectile {
         if (state == 3) {
             this.spawnDeathParticles();
         }
+    }
+
+    /**
+     * Spawns the trail a moving ball leaves behind, spread over the path it travelled during this tick.
+     * <p>
+     * Particles are placed along that path rather than all at the current position, since a ball covers
+     * enough ground in a tick for a single burst per tick to show up as a dotted line. A ball only trails
+     * while it actually moves: one that has come to a halt emits nothing.
+     */
+    protected void spawnTrailParticles() {
+        ParticleOptions particle = this.getTrailParticle();
+        if (particle == null || this.isRemoved()) {
+            return;
+        }
+        Vec3 from = new Vec3(this.xo, this.yo, this.zo);
+        Vec3 to = this.position();
+        int count = trailParticleCount(from.distanceTo(to));
+        double middle = this.getBbHeight() / 2.0D;
+
+        for (int i = 0; i < count; i++) {
+            // Each particle sits at a random point of its own slice of the path: spacing them evenly
+            // would line the trails of successive ticks up into a visible grid.
+            Vec3 pos = from.lerp(to, (i + this.random.nextDouble()) / count);
+            this.level().addParticle(particle,
+                    pos.x + this.trailOffset(),
+                    pos.y + middle + this.trailOffset(),
+                    pos.z + this.trailOffset(),
+                    0.0D, 0.0D, 0.0D);
+        }
+    }
+
+    /**
+     * @param distance how far the ball travelled during the tick, in blocks
+     * @return how many particles that distance is worth, none at all for a ball that barely moved
+     */
+    public static int trailParticleCount(double distance) {
+        if (distance < MIN_TRAIL_DISTANCE) {
+            return 0;
+        }
+        return Mth.clamp((int) Math.ceil(distance * TRAIL_PARTICLES_PER_BLOCK), 1, MAX_TRAIL_PARTICLES_PER_TICK);
+    }
+
+    private double trailOffset() {
+        return (this.random.nextDouble() - 0.5D) * TRAIL_SPREAD;
     }
 
     protected void spawnDeathParticles() {

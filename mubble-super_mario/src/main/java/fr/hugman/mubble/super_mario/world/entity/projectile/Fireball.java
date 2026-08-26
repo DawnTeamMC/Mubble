@@ -56,6 +56,12 @@ public class Fireball extends Ball {
     }
 
     @Override
+    protected ParticleOptions getTrailParticle() {
+        // Smaller than the flames of the burst, so that the trail reads as embers rather than as fire.
+        return ParticleTypes.SMALL_FLAME;
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
