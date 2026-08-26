@@ -19,6 +19,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -103,6 +104,8 @@ public final class Freezing {
     private static final double PUSH_REACH = 0.2D;
     /** How far below the top of the ice a player has to stand to shove it rather than ride it. */
     private static final double PUSH_HEADROOM = 0.1D;
+    /** How far below its feet an entity looks for the block of ice it might be standing on. */
+    private static final double STANDING_REACH = 1.0e-3D;
 
     private static final int THAW_PARTICLE_COUNT = 24;
     private static final double THAW_PARTICLE_SPEED = 0.15D;
@@ -145,6 +148,22 @@ public final class Freezing {
             return FreezeResistance.IMMUNE;
         }
         return isBig(entity) ? FreezeResistance.TOUGH : FreezeResistance.NONE;
+    }
+
+    /**
+     * Whether the entity is standing on top of a block of ice someone else is trapped in.
+     * <p>
+     * The sweep behind it is not free, so it is kept behind the one thing that gives a rider away for
+     * nothing: an entity on the ground with no block holding it up is standing on something alive, and
+     * that is rare enough — boats, shulkers, and this — to be worth looking into.
+     */
+    public static boolean isStandingOnFrozen(Entity entity) {
+        if (!entity.onGround() || entity.mainSupportingBlockPos.isPresent()) {
+            return false;
+        }
+        var feet = entity.getBoundingBox();
+        var underfoot = new AABB(feet.minX, feet.minY - STANDING_REACH, feet.minZ, feet.maxX, feet.minY, feet.maxZ);
+        return !entity.level().getEntities(entity, underfoot, Freezing::isFrozen).isEmpty();
     }
 
     public static boolean isBig(Entity entity) {
@@ -278,20 +297,15 @@ public final class Freezing {
      * <p>
      * Vanilla hands out its knockback only once a hit has landed, and a hit the ice turns away never
      * does, so a shielded entity would take a punch without budging an inch. The shove is dealt out
-     * here instead, and it is the same axis-snapped one a player walking into the ice gets rather than
-     * whatever angle the blow came in at — which is what lets a well-aimed punch send it into a wall.
+     * here instead, straight along the line the blow came in on — which is what lets a well-aimed
+     * punch send it into a wall.
      */
     private static void shoveAwayFrom(Entity entity, DamageSource source) {
         var from = source.getSourcePosition();
-        if (from == null) {
-            return;
+        // a hit with nowhere to come from — drowning, starvation — says nothing about where to send it
+        if (from != null) {
+            shove(entity, entity.position().subtract(from));
         }
-        var away = entity.position().subtract(from);
-        // a hit landing right on top of the ice says nothing about which way to send it
-        if (away.horizontalDistanceSqr() < SLIDE_EPSILON * SLIDE_EPSILON) {
-            return;
-        }
-        shove(entity, Direction.getApproximateNearest(away.x(), 0.0D, away.z()));
     }
 
     /**
@@ -339,8 +353,8 @@ public final class Freezing {
     /**
      * Sends the block of ice sliding whenever a player walks into its side.
      * <p>
-     * The shove is snapped to the axis the player is heading along, so that the ice always sets off
-     * straight ahead rather than at whatever angle it was walked into.
+     * It goes off along the heading it was walked into at, so that a player coming at it from a corner
+     * sends it off towards that corner rather than along whichever axis happened to be nearest.
      */
     private static void shoveAroundBy(ServerLevel level, Entity entity) {
         var hitBox = entity.getBoundingBox();
@@ -351,32 +365,56 @@ public final class Freezing {
             if (player.getBoundingBox().minY >= hitBox.maxY - PUSH_HEADROOM) {
                 continue;
             }
-            var heading = player.getKnownMovement();
-            if (heading.horizontalDistanceSqr() < SLIDE_EPSILON * SLIDE_EPSILON) {
+            var heading = flatten(player.getKnownMovement());
+            if (heading == null) {
                 continue;
             }
-            var direction = Direction.getApproximateNearest(heading.x(), 0.0D, heading.z());
             // ...and only when they are heading into the ice, rather than away from it
-            if (hitBox.getCenter().subtract(player.position()).dot(direction.getUnitVec3()) <= 0.0D) {
+            if (hitBox.getCenter().subtract(player.position()).dot(heading) <= 0.0D) {
                 continue;
             }
             // a player chasing the ice they just shoved must not keep resetting its speed
-            if (entity.getDeltaMovement().dot(direction.getUnitVec3()) >= SLIDE_SPEED - SLIDE_EPSILON) {
+            if (entity.getDeltaMovement().dot(heading) >= SLIDE_SPEED - SLIDE_EPSILON) {
                 return;
             }
-            shove(entity, direction);
+            shove(entity, heading);
             return;
         }
     }
 
     /**
-     * Sends the block of ice sliding along a direction, keeping whatever vertical motion it had.
+     * Sends the block of ice sliding along a heading, keeping whatever vertical motion it had.
+     * <p>
+     * The heading is taken as it comes: a shove that lands at an angle sends the ice off at that
+     * angle, rather than along whichever of the four ways round happened to be closest.
      */
-    public static void shove(Entity entity, Direction direction) {
-        entity.setDeltaMovement(direction.getStepX() * SLIDE_SPEED, entity.getDeltaMovement().y(), direction.getStepZ() * SLIDE_SPEED);
+    public static void shove(Entity entity, Vec3 heading) {
+        var flat = flatten(heading);
+        if (flat == null) {
+            return;
+        }
+        var push = flat.scale(SLIDE_SPEED);
+        entity.setDeltaMovement(push.x(), entity.getDeltaMovement().y(), push.z());
         // a frozen player moves itself: the server has to tell it where it is being sent
         if (entity instanceof ServerPlayer player) {
             player.connection.send(new ClientboundSetEntityMotionPacket(player));
         }
+    }
+
+    /** @see #shove(Entity, Vec3) */
+    public static void shove(Entity entity, Direction direction) {
+        shove(entity, direction.getUnitVec3());
+    }
+
+    /**
+     * @return {@code heading} flattened onto the ground and brought down to unit length, or
+     *         {@code null} when there is not enough of it left to point anywhere
+     */
+    @Nullable
+    private static Vec3 flatten(Vec3 heading) {
+        if (heading.horizontalDistanceSqr() < SLIDE_EPSILON * SLIDE_EPSILON) {
+            return null;
+        }
+        return new Vec3(heading.x(), 0.0D, heading.z()).normalize();
     }
 }

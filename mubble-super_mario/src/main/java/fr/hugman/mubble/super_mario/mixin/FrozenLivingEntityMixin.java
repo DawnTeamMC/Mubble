@@ -6,6 +6,7 @@ import fr.hugman.mubble.super_mario.world.entity.freeze.Freezing;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -15,7 +16,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Takes away any say a frozen entity has over where it goes, and holds the pose it was caught in.
+ * Everything a block of ice changes about a living entity: the say it has over where it goes, the
+ * pose it holds while it is in there, what reaches it through the ice — and the footing it gives
+ * whoever climbs on top of it.
  *
  * @see Freezing
  */
@@ -115,5 +118,19 @@ public class FrozenLivingEntityMixin implements FreezeSnapshot {
         if (Freezing.shields((LivingEntity) (Object) this, source)) {
             cir.setReturnValue(true);
         }
+    }
+
+    /**
+     * Gives whoever climbs on top of a block of ice the footing of one.
+     * <p>
+     * Friction is a property of the block underfoot, and there is no block underfoot here: standing on
+     * an entity leaves vanilla reading the air below it and handing out ordinary ground. Reading the
+     * ice off the entity instead is what makes the top of a frozen mob as slippery as it looks.
+     */
+    @ModifyExpressionValue(
+            method = "travelInAir",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/Block;getFriction()F"))
+    private float super_mario$slipperyOnTopOfIce(float friction) {
+        return Freezing.isStandingOnFrozen((LivingEntity) (Object) this) ? Blocks.ICE.getFriction() : friction;
     }
 }

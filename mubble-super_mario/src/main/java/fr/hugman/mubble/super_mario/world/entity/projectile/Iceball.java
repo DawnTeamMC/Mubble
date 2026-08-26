@@ -27,9 +27,17 @@ import net.minecraft.world.level.block.AirBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class Iceball extends Ball {
     private static final ClientAsset.ResourceTexture TEXTURE = new ClientAsset.ResourceTexture(SuperMario.id("entity/iceball"));
+    /**
+     * How far the target may have moved during the hit and still be trapped by it, in blocks.
+     * <p>
+     * Anything further has not been knocked about, it has left: an enderman teleports on being hit by
+     * a projectile, and it lands well clear of this.
+     */
+    private static final double DODGE_LEEWAY = 1.0D;
 
     public Iceball(EntityType<? extends Iceball> type, Level level) {
         super(type, level);
@@ -65,9 +73,13 @@ public class Iceball extends Ball {
             livingEntity.setLastHurtMob(entity);
         }
 
+        Vec3 struckAt = entity.position();
         entity.hurt(source, damage);
-        // snow golems are made of the stuff: an ice ball is no more to them than the hit itself
-        if (this.level() instanceof ServerLevel level && !(entity instanceof SnowGolem) && entity instanceof LivingEntity living && living.isAlive()) {
+        // snow golems are made of the stuff: an ice ball is no more to them than the hit itself. And
+        // whatever blinked out of the way — an enderman — is no longer there for the ice to close on.
+        if (this.level() instanceof ServerLevel level && !(entity instanceof SnowGolem)
+                && entity instanceof LivingEntity living && living.isAlive()
+                && living.distanceToSqr(struckAt) < DODGE_LEEWAY * DODGE_LEEWAY) {
             Freezing.freeze(level, living);
         }
         this.finalHit(SuperMarioSounds.ICEBALL_HIT_ENTITY);

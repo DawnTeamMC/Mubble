@@ -11,8 +11,10 @@ import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.animal.pig.Pig;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Entities caught in a block of ice: how long they stay in there, what it takes out of them, and
@@ -101,6 +103,46 @@ public class FreezeGameTest {
                     helper.assertTrue(Math.abs(pig.getZ() - startZ) < 0.1D, "the shoved block of ice veered off its axis");
                 })
                 .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 60)
+    public void aShoveOffTheAxesSendsTheIceOffAtThatAngle(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Pig pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, SHOVE_START);
+        freeze(helper, pig);
+
+        double startX = pig.getX();
+        double startZ = pig.getZ();
+        // straight between east and south, which snapping to the nearest way round would have flattened
+        Freezing.shove(pig, new Vec3(1.0D, 0.0D, 1.0D));
+
+        helper.startSequence()
+                .thenIdle(10)
+                .thenExecute(() -> {
+                    double east = pig.getX() - startX;
+                    double south = pig.getZ() - startZ;
+                    helper.assertTrue(east > 0.5D && south > 0.5D, "the block of ice went off along an axis rather than the corner");
+                    helper.assertTrue(Math.abs(east - south) < 0.2D, "and it favoured one of the two over the other");
+                })
+                .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 20)
+    public void theTopOfABlockOfIceIsSlippery(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Pig ice = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET);
+        Pig rider = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET.above(2));
+        freeze(helper, ice);
+
+        // dropped the last inch onto the ice, which is the move that works out what is holding it up
+        rider.setPos(ice.getX(), ice.getBoundingBox().maxY + 0.05D, ice.getZ());
+        rider.move(MoverType.SELF, new Vec3(0.0D, -0.2D, 0.0D));
+
+        helper.assertTrue(rider.onGround(), "the rider never came to rest on the block of ice");
+        helper.assertTrue(rider.mainSupportingBlockPos.isEmpty(), "and it found a block under it rather than the ice");
+        helper.assertTrue(Freezing.isStandingOnFrozen(rider), "standing on a frozen mob should count as standing on ice");
+        helper.assertFalse(Freezing.isStandingOnFrozen(ice), "the block of ice is not standing on itself");
+        helper.succeed();
     }
 
     @GameTest(maxTicks = 60)
