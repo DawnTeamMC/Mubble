@@ -67,6 +67,68 @@ public class StompGameTest {
         helper.succeed();
     }
 
+    /**
+     * The stomped flag is what swaps the death sound and the death animation for the flattened ones,
+     * so a stomp that actually lands has to raise it.
+     */
+    @GameTest
+    public void alandedStompMarksTheEnemyAsStomped(GameTestHelper helper) {
+        var goomba = goomba(helper);
+        stomper(helper, GameType.SURVIVAL);
+
+        goomba.tick();
+
+        helper.assertTrue(goomba.isStomped(), "a goomba that took a stomp should be marked as stomped");
+        helper.succeed();
+    }
+
+    /** A jump that deals no damage is not a stomp, whatever it looks like from above. */
+    @GameTest
+    public void astompProofPowerUpDoesNotMarkTheEnemyAsStomped(GameTestHelper helper) {
+        var goomba = goomba(helper);
+        var player = stomper(helper, GameType.SURVIVAL);
+        player.setPowerUp(PowerUpFixtures.get(helper, PowerUpFixtures.STOMP_PROOF));
+
+        goomba.tick();
+
+        helper.assertFalse(goomba.isStomped(), "a harmless jump should leave the goomba unmarked");
+        helper.succeed();
+    }
+
+    /**
+     * A goomba jumped on by a player who cannot stomp, then killed by hand, used to die flattened: the
+     * jump raised the flag for good, and every later death read it.
+     */
+    @GameTest
+    public void aharmlessJumpDoesNotFlattenAlaterDeath(GameTestHelper helper) {
+        var goomba = goomba(helper);
+        var player = stomper(helper, GameType.SURVIVAL);
+        player.setPowerUp(PowerUpFixtures.get(helper, PowerUpFixtures.STOMP_PROOF));
+
+        goomba.tick();
+        kill(helper, goomba, player);
+
+        helper.assertFalse(goomba.isStomped(), "a goomba killed by hand should not die flattened");
+        helper.succeed();
+    }
+
+    /**
+     * Same story for a mark an enemy carries over from any earlier stomp: the hit it dies from is the one
+     * that decides how it dies. A goomba cannot show that on its own, since {@code instant_kills_goombas}
+     * makes every stomp that reaches it lethal, so the mark is set by hand here.
+     */
+    @GameTest
+    public void astaleStompMarkDoesNotFlattenAlaterDeath(GameTestHelper helper) {
+        var goomba = goomba(helper);
+        var player = TestPlayers.at(helper, GROUND.above());
+        goomba.setStomped(true);
+
+        kill(helper, goomba, player);
+
+        helper.assertFalse(goomba.isStomped(), "a goomba killed by hand should not die flattened");
+        helper.succeed();
+    }
+
     @GameTest
     public void anUntaggedPowerUpStillStomps(GameTestHelper helper) {
         var goomba = goomba(helper);
@@ -135,6 +197,15 @@ public class StompGameTest {
 
         helper.assertValueEqual(goomba.getHealth(), health, "the goomba hurt itself with nobody around");
         helper.succeed();
+    }
+
+    /**
+     * Kills {@code goomba} with a plain melee hit. The invulnerability left by an earlier hit is wound
+     * back first, so that this one is the hit the goomba actually dies from.
+     */
+    private static void kill(GameTestHelper helper, Goomba goomba, ServerPlayer player) {
+        goomba.invulnerableTime = 0;
+        goomba.hurtServer(helper.getLevel(), goomba.damageSources().playerAttack(player), Float.MAX_VALUE);
     }
 
     private static Goomba goomba(GameTestHelper helper) {
