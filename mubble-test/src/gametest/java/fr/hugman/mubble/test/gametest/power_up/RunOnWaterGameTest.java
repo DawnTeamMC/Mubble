@@ -9,6 +9,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -18,8 +21,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  * Running on water, in two halves.
  * <p>
  * The first one is the run itself: a sprint only carries a player over the water if it started on
- * the ground, and it is over the moment they hit a wall or go under. That is a state the player tick
- * follows from one tick to the next, so those tests play it out with a moving player.
+ * the ground, and it is over the moment they slow to a walk, hit a wall or go under. That is a
+ * state the player tick follows from one tick to the next, so those tests play it out with a
+ * moving player.
  * <p>
  * The second one is what the water does about it: the collision shape of a block turns solid for a
  * player on such a run, and nothing else. Those tests ask the block state directly, running player
@@ -93,6 +97,75 @@ public class RunOnWaterGameTest {
         helper.startSequence()
                 .thenExecuteFor(SETTLE_TICKS, () -> sprintTick(player))
                 .thenExecute(() -> helper.assertFalse(player.isRunningOnWater(), "water should stay water for everyone else"))
+                .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 100)
+    public void sneakingEndsTheRun(GameTestHelper helper) {
+        var player = onTheShore(helper, PowerUpFixtures.RUNS_ON_WATER);
+
+        helper.startSequence()
+                .thenExecuteFor(SETTLE_TICKS, () -> sprintTick(player))
+                .thenExecute(() -> helper.assertTrue(player.isRunningOnWater(), "the run never started, the test proves nothing"))
+                // the game lets a player hold both keys down, so the sprint is still on here
+                .thenExecute(() -> player.setShiftKeyDown(true))
+                .thenExecute(() -> sprintTick(player))
+                .thenExecute(() -> {
+                    helper.assertTrue(player.isSprinting(), "the sprint was let go of, so the test proves nothing about sneaking");
+                    helper.assertFalse(player.isRunningOnWater(), "sneaking should end the run");
+                })
+                .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 100)
+    public void sneakingNeverStartsARun(GameTestHelper helper) {
+        var player = onTheShore(helper, PowerUpFixtures.RUNS_ON_WATER);
+        player.setShiftKeyDown(true);
+
+        helper.startSequence()
+                .thenExecuteFor(SETTLE_TICKS, () -> sprintTick(player))
+                .thenExecute(() -> helper.assertFalse(player.isRunningOnWater(), "a sneaking player should never be carried by the water"))
+                .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 100)
+    public void usingAnItemEndsTheRun(GameTestHelper helper) {
+        var player = onTheShore(helper, PowerUpFixtures.RUNS_ON_WATER);
+
+        helper.startSequence()
+                .thenExecuteFor(SETTLE_TICKS, () -> sprintTick(player))
+                .thenExecute(() -> helper.assertTrue(player.isRunningOnWater(), "the run never started, the test proves nothing"))
+                .thenExecute(() -> startUsingAnItem(player))
+                .thenExecute(() -> sprintTick(player))
+                .thenExecute(() -> {
+                    helper.assertTrue(player.isUsingItem(), "the item never went up, the test proves nothing");
+                    helper.assertFalse(player.isRunningOnWater(), "using an item should end the run");
+                })
+                .thenSucceed();
+    }
+
+    /** Neither of the two slows a player down in mid-air, so neither is allowed to end a run there. */
+    @GameTest(maxTicks = 100)
+    public void slowingDownInMidAirDoesNotEndTheRun(GameTestHelper helper) {
+        var player = onTheShore(helper, PowerUpFixtures.RUNS_ON_WATER);
+
+        helper.startSequence()
+                .thenExecuteFor(SETTLE_TICKS, () -> sprintTick(player))
+                .thenExecute(() -> helper.assertTrue(player.isRunningOnWater(), "the run never started, the test proves nothing"))
+                // in the air over the pond, on the way down from a jump. A teleport does not clear
+                // the ground flag on its own, so the fall has to be under way before anything else
+                .thenExecute(() -> teleport(helper, player, WATER.above(3)))
+                .thenExecuteFor(2, () -> sprintTick(player))
+                .thenExecute(() -> {
+                    helper.assertFalse(player.onGround(), "the player never left the ground, the test proves nothing");
+                    player.setShiftKeyDown(true);
+                    startUsingAnItem(player);
+                })
+                .thenExecuteFor(2, () -> sprintTick(player))
+                .thenExecute(() -> {
+                    helper.assertFalse(player.onGround(), "the player landed already, the test proves nothing");
+                    helper.assertTrue(player.isRunningOnWater(), "sneaking or using an item in mid-air should not end the run");
+                })
                 .thenSucceed();
     }
 
@@ -230,6 +303,12 @@ public class RunOnWaterGameTest {
         player.setPowerUp(PowerUpFixtures.get(helper, PowerUpFixtures.RUNS_ON_WATER));
         player.setRunningOnWater(true);
         return player;
+    }
+
+    /** Raises a shield, the way a player blocking mid-sprint would. */
+    private static void startUsingAnItem(ServerPlayer player) {
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.SHIELD));
+        player.startUsingItem(InteractionHand.MAIN_HAND);
     }
 
     /** Ticks the player with the sprint key held down, the way a client would keep it on. */

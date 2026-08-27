@@ -12,9 +12,11 @@ import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -41,9 +43,28 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner {
     @Unique
     private static final String POWER_UP_PROPERTIES_KEY = "power_up_properties";
 
-    /** Whether the sprint the player is on started on the ground, see {@link #mubble$updateRunningOnWater}. */
+    /** How far a player runs between two splashes, in blocks. Vanilla footsteps land every 1.7 or so. */
+    @Unique
+    private static final double SPLASH_STEP = 0.8D;
+    /** How many droplets one splash is made of. */
+    @Unique
+    private static final int SPLASH_PARTICLES = 5;
+    /** How many of those go up in a spray instead of back in a trail. */
+    @Unique
+    private static final int SPLASH_RISING_PARTICLES = 2;
+    /** The share of the player's speed the droplets keep, thrown back the way the foot came from. */
+    @Unique
+    private static final double SPLASH_KICK = 0.5D;
+    /** How wide the droplets scatter on top of that, in blocks per tick. */
+    @Unique
+    private static final double SPLASH_SPREAD = 0.1D;
+
+    /** Whether the sprint the player is on started on the ground, see {@link #mubble$tickRunOnWater}. */
     @Unique
     private boolean mubble$runningOnWater;
+    /** How far the player has left to go before the next splash, see {@link #mubble$splashOnTheSurface}. */
+    @Unique
+    private double mubble$distanceToNextSplash;
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     protected void mubble$initDataTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
@@ -95,12 +116,18 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner {
     }
 
     /**
-     * Keeps track of whether the sprint the player is on can carry them over water.
+     * Keeps track of whether the sprint the player is on can carry them over water, and leaves the
+     * splashes of it behind.
      * <p>
      * Holding a power-up tagged {@code mubble:can_run_on_water} only opens the door: the sprint has
-     * to have started on the ground and out of the water, and it is over as soon as the player runs
-     * into a wall or goes under. Leaving the ground is neither, so a jump keeps the run going and the
-     * player lands back on the surface.
+     * to have started on the ground and out of the water, and it is over as soon as the player
+     * slows to a walk, runs into a wall or goes under. Leaving the ground is none of those, so a
+     * jump keeps the run going and the player lands back on the surface.
+     * <p>
+     * Sneaking and using an item are what slowing down means here: the game keeps the sprint on
+     * through either, but both cut the pace down to a walk, and nobody crosses a pond at that
+     * speed. They only count with the ground under the player, though: in mid-air neither of them
+     * slows anyone down, so neither is worth dropping a jumping runner in the water over.
      * <p>
      * A wall counts the way it does for a vanilla sprint, minor collisions aside: brushing past a
      * corner, or the step up the surface of the water sometimes is, should not drop anyone in.
@@ -109,11 +136,12 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner {
      * the movement and on the server that validates it, and both know everything the answer needs.
      */
     @Inject(method = "tick", at = @At("TAIL"))
-    private void mubble$updateRunningOnWater(CallbackInfo ci) {
+    private void mubble$tickRunOnWater(CallbackInfo ci) {
         var this_ = (Player) (Object) this;
 
         var allowed = this_.getPowerUp().map(entry -> entry.is(MubblePowerUpTags.CAN_RUN_ON_WATER)).orElse(false);
-        if (!allowed || !this_.isSprinting() || (this_.horizontalCollision && !this_.minorHorizontalCollision)) {
+        var slowedToAWalk = this_.onGround() && (this_.isShiftKeyDown() || this_.isUsingItem());
+        if (!allowed || !this_.isSprinting() || slowedToAWalk || (this_.horizontalCollision && !this_.minorHorizontalCollision)) {
             this.mubble$runningOnWater = false;
         } else if (this.mubble$runningOnWater) {
             // the surface carries the runner, so being dunked under it means the run is over
@@ -123,6 +151,63 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner {
         } else {
             // swimming and jumping out of the water is not a start: the sprint has to come from land
             this.mubble$runningOnWater = this_.onGround() && !this_.isInWater();
+        }
+
+        this.mubble$splashOnTheSurface(this_);
+    }
+
+    /**
+     * Leaves a splash behind every footstep of a run on the water.
+     * <p>
+     * The rhythm is a distance rather than a delay, so the trail keeps its spacing whatever the run
+     * is worth, and each splash lands where the foot did, a tick back: most of its droplets thrown
+     * the way it came from, a couple of them straight up. Only the ticks actually spent on the
+     * surface count, so a jump leaves the trail where it was until the landing picks it back up.
+     * <p>
+     * Called on both sides like the rest of the run, and that is where it stops being shared:
+     * {@code addParticle} does nothing on a server, so the effect only ever shows up on a client.
+     */
+    @Unique
+    private void mubble$splashOnTheSurface(Player player) {
+        if (!this.mubble$runningOnWater || !player.onGround()) {
+            // the next footfall back on the surface splashes right away
+            this.mubble$distanceToNextSplash = 0.0D;
+            return;
+        }
+
+        var pos = player.getOnPos();
+        var fluid = player.level().getFluidState(pos);
+        if (!fluid.is(FluidTags.WATER)) {
+            // the shore a run carries on over has nothing to splash
+            this.mubble$distanceToNextSplash = 0.0D;
+            return;
+        }
+
+        double movedX = player.getX() - player.xOld;
+        double movedZ = player.getZ() - player.zOld;
+        this.mubble$distanceToNextSplash -= Math.sqrt(movedX * movedX + movedZ * movedZ);
+        if (this.mubble$distanceToNextSplash > 0.0D) {
+            return;
+        }
+        this.mubble$distanceToNextSplash = SPLASH_STEP;
+
+        var level = player.level();
+        var random = player.getRandom();
+        double surface = pos.getY() + fluid.getHeight(level, pos);
+        double width = player.getBbWidth();
+        for (int i = 0; i < SPLASH_PARTICLES; i++) {
+            double x = player.xOld + (random.nextDouble() - 0.5D) * width;
+            double z = player.zOld + (random.nextDouble() - 0.5D) * width;
+            if (i < SPLASH_RISING_PARTICLES) {
+                // a vertical speed of its own is the taller hop, straight up and barely sideways
+                level.addParticle(ParticleTypes.SPLASH, x, surface, z, 0.0D, 1.0D, 0.0D);
+            } else {
+                // no vertical speed at all is the other one: the direction given, and a short hop
+                level.addParticle(ParticleTypes.SPLASH, x, surface, z,
+                        -movedX * SPLASH_KICK + (random.nextDouble() - 0.5D) * SPLASH_SPREAD,
+                        0.0D,
+                        -movedZ * SPLASH_KICK + (random.nextDouble() - 0.5D) * SPLASH_SPREAD);
+            }
         }
     }
 
