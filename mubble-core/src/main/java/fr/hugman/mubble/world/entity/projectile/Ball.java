@@ -163,7 +163,9 @@ public abstract class Ball extends ThrowableProjectile {
         }
         Vec3 movement = this.getDeltaMovement();
         int count = trailParticleCount(movement.length());
-        Vec3 from = this.position().add(0.0D, this.getBbHeight() / 2.0D, 0.0D);
+        // The model of a ball is centred on its position rather than standing on it, so the particles
+        // need no offset of their own to sit in the middle of the sprite.
+        Vec3 from = this.position();
         Vec3 drift = movement.scale(-TRAIL_DRIFT).add(0.0D, TRAIL_RISE, 0.0D);
 
         for (int i = 0; i < count; i++) {
