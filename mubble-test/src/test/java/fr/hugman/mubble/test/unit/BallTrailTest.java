@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * How thick the trail of a {@link Ball} is depends on the ground it covered during the tick. The
+ * Whether a {@link Ball} trails anything at all depends on the ground it covers during the tick. The
  * particles themselves only exist on a client, but the count behind them is plain maths and belongs
  * here rather than in a game test.
  */
@@ -39,21 +39,13 @@ public class BallTrailTest {
     }
 
     @Test
-    @DisplayName("the farther a ball travelled, the thicker its trail")
-    void longerPathsTrailMoreParticles() {
-        int slow = Ball.trailParticleCount(0.1D);
+    @DisplayName("going faster spaces the trail out rather than thickening it")
+    void speedDoesNotThickenTheTrail() {
+        int slow = Ball.trailParticleCount(0.05D);
         int fast = Ball.trailParticleCount(THROWN_BALL_DISTANCE);
-
-        assertTrue(fast > slow, "a ball covering more ground should trail more particles, got " + fast + " against " + slow);
-    }
-
-    @Test
-    @DisplayName("the trail of a single tick stays capped, however fast the ball goes")
-    void veryFastBallsStayCapped() {
-        int fast = Ball.trailParticleCount(THROWN_BALL_DISTANCE * 10.0D);
         int absurd = Ball.trailParticleCount(1000.0D);
 
-        assertEquals(fast, absurd, "past a point, going faster should not add any more particles");
-        assertTrue(absurd <= 16, "a single tick should never spawn a screenful of particles, got " + absurd);
+        assertEquals(slow, fast, "a faster ball should trail no more particles than a slow one");
+        assertEquals(slow, absurd, "however fast a ball goes, a single tick should never spawn a screenful of particles");
     }
 }

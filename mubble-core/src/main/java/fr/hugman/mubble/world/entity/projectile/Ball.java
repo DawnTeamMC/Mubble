@@ -8,7 +8,6 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,14 +22,12 @@ import org.jspecify.annotations.Nullable;
 public abstract class Ball extends ThrowableProjectile {
 	public static final String REBOUNDS_KEY = "rebounds";
 
-    /** Trail particles left behind per block travelled. */
-    private static final double TRAIL_PARTICLES_PER_BLOCK = 6.0D;
-    /** Trail particles a single tick may spawn at most, so that a very fast ball cannot flood the screen. */
-    private static final int MAX_TRAIL_PARTICLES_PER_TICK = 8;
+    /** Trail particles spawned per tick, strung along the ground the ball covers during it. */
+    private static final int TRAIL_PARTICLES_PER_TICK = 2;
     /** Distance travelled in a tick under which a ball counts as standing still and trails nothing. */
     private static final double MIN_TRAIL_DISTANCE = 0.01D;
-    /** How far off its path a trail particle may drift, in blocks. */
-    private static final double TRAIL_SPREAD = 0.1D;
+    /** Upwards drift of a trail particle, so that it lingers behind rather than sinking with the ball. */
+    private static final double TRAIL_RISE = 0.2D;
 
     protected int rebounds = 3;
     private boolean rotateClockwards = false;
@@ -150,47 +147,38 @@ public abstract class Ball extends ThrowableProjectile {
     }
 
     /**
-     * Spawns the trail a moving ball leaves behind, spread over the path it travelled during this tick.
+     * Spawns the trail a moving ball leaves behind, in the manner of the one vanilla arrows leave: a
+     * couple of particles strung along the movement of the tick and pushed back the way the ball came,
+     * so that they fall behind it instead of riding along with it.
      * <p>
-     * Particles are placed along that path rather than all at the current position, since a ball covers
-     * enough ground in a tick for a single burst per tick to show up as a dotted line. A ball only trails
-     * while it actually moves: one that has come to a halt emits nothing.
+     * Spreading them over the movement rather than dropping them all at the current position keeps the
+     * trail from breaking up, as a thrown ball covers about a block per tick. A ball only trails while
+     * it actually moves: one that has come to a halt emits nothing.
      */
     protected void spawnTrailParticles() {
         ParticleOptions particle = this.getTrailParticle();
         if (particle == null || this.isRemoved()) {
             return;
         }
-        Vec3 from = new Vec3(this.xo, this.yo, this.zo);
-        Vec3 to = this.position();
-        int count = trailParticleCount(from.distanceTo(to));
-        double middle = this.getBbHeight() / 2.0D;
+        Vec3 movement = this.getDeltaMovement();
+        int count = trailParticleCount(movement.length());
+        Vec3 from = this.position().add(0.0D, this.getBbHeight() / 2.0D, 0.0D);
 
         for (int i = 0; i < count; i++) {
-            // Each particle sits at a random point of its own slice of the path: spacing them evenly
-            // would line the trails of successive ticks up into a visible grid.
-            Vec3 pos = from.lerp(to, (i + this.random.nextDouble()) / count);
-            this.level().addParticle(particle,
-                    pos.x + this.trailOffset(),
-                    pos.y + middle + this.trailOffset(),
-                    pos.z + this.trailOffset(),
-                    0.0D, 0.0D, 0.0D);
+            Vec3 pos = from.add(movement.scale((double) i / count));
+            this.level().addParticle(particle, pos.x, pos.y, pos.z, -movement.x, -movement.y + TRAIL_RISE, -movement.z);
         }
     }
 
     /**
+     * The trail is worth the same handful of particles whatever the speed: a fast ball spaces them out
+     * further instead of spawning more of them.
+     *
      * @param distance how far the ball travelled during the tick, in blocks
-     * @return how many particles that distance is worth, none at all for a ball that barely moved
+     * @return how many particles to spawn, none at all for a ball that barely moved
      */
     public static int trailParticleCount(double distance) {
-        if (distance < MIN_TRAIL_DISTANCE) {
-            return 0;
-        }
-        return Mth.clamp((int) Math.ceil(distance * TRAIL_PARTICLES_PER_BLOCK), 1, MAX_TRAIL_PARTICLES_PER_TICK);
-    }
-
-    private double trailOffset() {
-        return (this.random.nextDouble() - 0.5D) * TRAIL_SPREAD;
+        return distance < MIN_TRAIL_DISTANCE ? 0 : TRAIL_PARTICLES_PER_TICK;
     }
 
     protected void spawnDeathParticles() {
