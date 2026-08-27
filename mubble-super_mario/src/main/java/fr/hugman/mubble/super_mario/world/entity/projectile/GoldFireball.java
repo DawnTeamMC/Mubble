@@ -43,6 +43,11 @@ public class GoldFireball extends Ball {
     }
 
     @Override
+    protected ParticleOptions getTrailParticle() {
+        return SuperMarioParticleTypes.COIN_SPARKLE;
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult hitResult) {
         super.onHitEntity(hitResult);
         this.finalHit();
