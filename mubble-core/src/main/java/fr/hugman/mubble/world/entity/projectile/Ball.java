@@ -23,11 +23,13 @@ public abstract class Ball extends ThrowableProjectile {
 	public static final String REBOUNDS_KEY = "rebounds";
 
     /** Trail particles spawned per tick, strung along the ground the ball covers during it. */
-    private static final int TRAIL_PARTICLES_PER_TICK = 2;
+    private static final int TRAIL_PARTICLES_PER_TICK = 1;
     /** Distance travelled in a tick under which a ball counts as standing still and trails nothing. */
     private static final double MIN_TRAIL_DISTANCE = 0.01D;
+    /** Share of the speed of the ball a trail particle is pushed back by, the rest of it being shed. */
+    private static final double TRAIL_DRIFT = 0.05D;
     /** Upwards drift of a trail particle, so that it lingers behind rather than sinking with the ball. */
-    private static final double TRAIL_RISE = 0.2D;
+    private static final double TRAIL_RISE = 0.02D;
 
     protected int rebounds = 3;
     private boolean rotateClockwards = false;
@@ -147,13 +149,12 @@ public abstract class Ball extends ThrowableProjectile {
     }
 
     /**
-     * Spawns the trail a moving ball leaves behind, in the manner of the one vanilla arrows leave: a
-     * couple of particles strung along the movement of the tick and pushed back the way the ball came,
-     * so that they fall behind it instead of riding along with it.
+     * Spawns the trail a moving ball leaves behind, in the manner of the one vanilla arrows leave:
+     * particles strung along the movement of the tick and pushed back the way the ball came, so that
+     * they fall behind it instead of riding along with it. Arrows hand the particles their whole speed,
+     * which is far too brisk for a ball, so only a fraction of it is passed on here.
      * <p>
-     * Spreading them over the movement rather than dropping them all at the current position keeps the
-     * trail from breaking up, as a thrown ball covers about a block per tick. A ball only trails while
-     * it actually moves: one that has come to a halt emits nothing.
+     * A ball only trails while it actually moves: one that has come to a halt emits nothing.
      */
     protected void spawnTrailParticles() {
         ParticleOptions particle = this.getTrailParticle();
@@ -163,16 +164,17 @@ public abstract class Ball extends ThrowableProjectile {
         Vec3 movement = this.getDeltaMovement();
         int count = trailParticleCount(movement.length());
         Vec3 from = this.position().add(0.0D, this.getBbHeight() / 2.0D, 0.0D);
+        Vec3 drift = movement.scale(-TRAIL_DRIFT).add(0.0D, TRAIL_RISE, 0.0D);
 
         for (int i = 0; i < count; i++) {
-            Vec3 pos = from.add(movement.scale((double) i / count));
-            this.level().addParticle(particle, pos.x, pos.y, pos.z, -movement.x, -movement.y + TRAIL_RISE, -movement.z);
+            Vec3 pos = from.add(movement.scale((i + 0.5D) / count));
+            this.level().addParticle(particle, pos.x, pos.y, pos.z, drift.x, drift.y, drift.z);
         }
     }
 
     /**
-     * The trail is worth the same handful of particles whatever the speed: a fast ball spaces them out
-     * further instead of spawning more of them.
+     * The trail is worth as many particles whatever the speed: a fast ball spaces them out further
+     * instead of spawning more of them.
      *
      * @param distance how far the ball travelled during the tick, in blocks
      * @return how many particles to spawn, none at all for a ball that barely moved
