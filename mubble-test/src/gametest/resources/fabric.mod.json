@@ -24,6 +24,7 @@
       "fr.hugman.mubble.test.gametest.super_mario.GoombaGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.KoopaShellGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.CloudPlatformGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.SpawnCloudPlatformActionGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.FreezeGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.FreezeCommandGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.BlockTransformGameTest",

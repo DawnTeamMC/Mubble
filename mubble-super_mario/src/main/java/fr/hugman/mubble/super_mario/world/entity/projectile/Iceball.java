@@ -62,6 +62,11 @@ public class Iceball extends Ball {
     }
 
     @Override
+    protected ParticleOptions getTrailParticle() {
+        return ParticleTypes.SNOWFLAKE;
+    }
+
+    @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
