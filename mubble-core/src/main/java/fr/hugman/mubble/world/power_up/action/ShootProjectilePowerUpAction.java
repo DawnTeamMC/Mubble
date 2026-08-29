@@ -7,6 +7,7 @@ import fr.hugman.mubble.keybind.MubbleKeyBindingsKeys;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import fr.hugman.mubble.world.power_up.PowerUpCharges;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -35,9 +36,7 @@ public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
         Optional<Holder<SoundEvent>> sound,
         float speed,
-        Optional<Integer> maxProjectiles,
-        Optional<Integer> cooldown,
-        Optional<Integer> rechargeInterval
+        PowerUpCharges charges
         //TODO: add shooting algorithm
         //TODO: add projectile NBT
 ) implements PowerUpAction, TooltipProvider {
@@ -45,18 +44,14 @@ public record ShootProjectilePowerUpAction(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
             SoundEvent.CODEC.optionalFieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
             Codec.FLOAT.optionalFieldOf("speed", 1.5F).forGetter(ShootProjectilePowerUpAction::speed),
-            Codec.INT.optionalFieldOf("max_projectiles").forGetter(ShootProjectilePowerUpAction::maxProjectiles),
-            Codec.INT.optionalFieldOf("cooldown").forGetter(ShootProjectilePowerUpAction::cooldown),
-            Codec.INT.optionalFieldOf("recharge_interval").forGetter(ShootProjectilePowerUpAction::rechargeInterval)
+            PowerUpCharges.CODEC.optionalFieldOf("charges", PowerUpCharges.DEFAULT).forGetter(ShootProjectilePowerUpAction::charges)
     ).apply(instance, ShootProjectilePowerUpAction::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ShootProjectilePowerUpAction> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.registry(Registries.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
             ByteBufCodecs.optional(SoundEvent.STREAM_CODEC), (ShootProjectilePowerUpAction::sound),
             ByteBufCodecs.FLOAT, (ShootProjectilePowerUpAction::speed),
-            ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::maxProjectiles),
-            ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::cooldown),
-            ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::rechargeInterval),
+            PowerUpCharges.STREAM_CODEC, (ShootProjectilePowerUpAction::charges),
             ShootProjectilePowerUpAction::new
     );
 
@@ -72,10 +67,7 @@ public record ShootProjectilePowerUpAction(
 
     @Override
     public PowerUpProperties setUpProperties() {
-        return rechargeInterval
-                .filter(i -> i > 0)
-                .map(ri -> new PowerUpProperties(PowerUpProperties.ChargeCounting.TIMED_RECHARGE, maxProjectiles.orElse(3), ri))
-                .orElseGet(() -> new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, maxProjectiles.orElse(Integer.MAX_VALUE)));
+        return this.charges.createProperties();
     }
 
     @Override
@@ -123,8 +115,6 @@ public record ShootProjectilePowerUpAction(
             level.addFreshEntity(entity);
             properties.useCharge();
             properties.trackEntity(entity.getUUID());
-            // Only override the cooldown when this action drives it: a timed recharge runs its own countdown.
-            this.cooldown.ifPresent(properties::setCooldown);
         }
         return InteractionResult.SUCCESS;
     }

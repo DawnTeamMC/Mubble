@@ -7,6 +7,7 @@ import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowerUpAction;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
+import fr.hugman.mubble.world.power_up.PowerUpCharges;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
@@ -76,9 +77,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.FIREBALL,
                         Optional.of(SuperMarioSounds.FIREBALL_THROW),
                         0.4f,
-                        Optional.of(3),
-                        Optional.empty(),
-                        Optional.empty()
+                        PowerUpCharges.fromActiveEntities(3)
                 )))
                 .build());
         context.register(ICE, builder(ICE, true)
@@ -87,9 +86,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.ICEBALL,
                         Optional.of(SuperMarioSounds.ICEBALL_THROW),
                         0.4f,
-                        Optional.of(3),
-                        Optional.empty(),
-                        Optional.empty()
+                        PowerUpCharges.fromActiveEntities(3)
                 )))
                 .build());
         context.register(GOLD, builder(GOLD, true)
@@ -100,9 +97,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.GOLD_FIREBALL,
                         Optional.of(SuperMarioSounds.GOLD_FIREBALL_THROW),
                         0.4f,
-                        Optional.of(3),
-                        Optional.empty(),
-                        Optional.empty()
+                        PowerUpCharges.fromActiveEntities(3)
                 )))
                 .particle(SuperMarioParticleTypes.COIN_SPARKLE)
                 .build());
@@ -116,9 +111,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.BUBBLE,
                         Optional.empty(), // the bubble plays its own "appear" sound as it spawns
                         0.4f,
-                        Optional.of(3),
-                        Optional.empty(),
-                        Optional.of(60)
+                        // Wonder gives a 1.2s window per burst, and two bubbles to spend in it.
+                        PowerUpCharges.burst(2, 24)
                 )))
                 .build());
     }
