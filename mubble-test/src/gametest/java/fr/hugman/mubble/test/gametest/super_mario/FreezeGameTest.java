@@ -31,6 +31,8 @@ public class FreezeGameTest {
     private static final BlockPos WALL = new BlockPos(5, Arena.FLOOR_Y + 1, 3);
     /** The waterline of the pool the floating tests fill, in structure-relative coordinates. */
     private static final int POOL_SURFACE_Y = Arena.FLOOR_Y + 5;
+    /** Well clear of the floor, for the tests about ice on its way down. */
+    private static final BlockPos MIDAIR = new BlockPos(4, Arena.FLOOR_Y + 5, 3);
 
     @GameTest(maxTicks = 140)
     public void aRegularMobStaysFrozenForTheWholeDuration(GameTestHelper helper) {
@@ -134,17 +136,100 @@ public class FreezeGameTest {
     public void theTopOfABlockOfIceIsSlippery(GameTestHelper helper) {
         Arena.buildFloor(helper);
         Pig ice = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET);
-        Pig rider = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET.above(2));
-        freeze(helper, ice);
-
-        // dropped the last inch onto the ice, which is the move that works out what is holding it up
-        rider.setPos(ice.getX(), ice.getBoundingBox().maxY + 0.05D, ice.getZ());
-        rider.move(MoverType.SELF, new Vec3(0.0D, -0.2D, 0.0D));
+        Pig rider = rest(helper, ice, helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET.above(2)));
 
         helper.assertTrue(rider.onGround(), "the rider never came to rest on the block of ice");
         helper.assertTrue(rider.mainSupportingBlockPos.isEmpty(), "and it found a block under it rather than the ice");
         helper.assertTrue(Freezing.isStandingOnFrozen(rider), "standing on a frozen mob should count as standing on ice");
         helper.assertFalse(Freezing.isStandingOnFrozen(ice), "the block of ice is not standing on itself");
+        helper.succeed();
+    }
+
+    @GameTest(maxTicks = 60)
+    public void aSlidingBlockOfIceCarriesItsRider(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Pig ice = helper.spawnWithNoFreeWill(EntityTypes.PIG, SHOVE_START);
+        Pig rider = rest(helper, ice, helper.spawnWithNoFreeWill(EntityTypes.PIG, SHOVE_START.above(2)));
+
+        double startX = rider.getX();
+        Freezing.shove(ice, Direction.EAST);
+
+        helper.startSequence()
+                .thenIdle(10)
+                .thenExecute(() -> {
+                    helper.assertTrue(rider.getX() > startX + 1.0D, "the ice slid out from under its rider");
+                    helper.assertTrue(Math.abs(rider.getX() - ice.getX()) < 0.5D, "and the rider drifted off the back of it");
+                })
+                .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 60)
+    public void aBlockOfIceClimbingAStepTakesItsRiderWithIt(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        // a half step to the east, low enough for a block of ice to ride up rather than stop dead
+        for (int x = 3; x < Arena.SIZE; x++) {
+            for (int z = 2; z <= 4; z++) {
+                helper.setBlock(new BlockPos(x, Arena.FLOOR_Y + 1, z), Blocks.SMOOTH_STONE_SLAB);
+            }
+        }
+        Pig ice = helper.spawnWithNoFreeWill(EntityTypes.PIG, SHOVE_START);
+        Pig rider = rest(helper, ice, helper.spawnWithNoFreeWill(EntityTypes.PIG, SHOVE_START.above(2)));
+        // gently enough that the step is climbed rather than shattered against
+        ice.setDeltaMovement(Freezing.SHATTER_SPEED * 0.8D, 0.0D, 0.0D);
+        double startY = ice.getY();
+
+        helper.startSequence()
+                .thenIdle(20)
+                .thenExecute(() -> {
+                    helper.assertTrue(ice.getY() > startY + 0.4D, "the block of ice never climbed the step");
+                    helper.assertTrue(Math.abs(rider.getX() - ice.getX()) < 0.5D,
+                            "the ice climbed the step and left its rider at the foot of it");
+                    helper.assertTrue(rider.getY() > startY + 0.4D, "and the rider never came up with it");
+                })
+                .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 40)
+    public void aFallingBlockOfIceTakesItsRiderDownWithIt(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Pig ice = helper.spawnWithNoFreeWill(EntityTypes.PIG, MIDAIR);
+        Pig rider = rest(helper, ice, helper.spawnWithNoFreeWill(EntityTypes.PIG, MIDAIR.above(2)));
+        // ice falls faster than anything riding it would on its own, which is what pulls them apart
+        ice.setDeltaMovement(0.0D, -0.5D, 0.0D);
+
+        helper.startSequence()
+                .thenIdle(3)
+                .thenExecute(() -> helper.assertTrue(rider.getY() - ice.getBoundingBox().maxY < 0.2D,
+                        "the ice dropped out from under its rider and left it hanging in the air"))
+                .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 20)
+    public void jumpingOffASlidingBlockOfIceCarriesItsSpeed(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Pig ice = helper.spawnWithNoFreeWill(EntityTypes.PIG, SHOVE_START);
+        Pig rider = rest(helper, ice, helper.spawnWithNoFreeWill(EntityTypes.PIG, SHOVE_START.above(2)));
+        Freezing.shove(ice, Direction.EAST);
+
+        helper.assertTrue(rider.getDeltaMovement().x() == 0.0D, "the rider was already going somewhere");
+        rider.jumpFromGround();
+
+        helper.assertTrue(rider.getDeltaMovement().x() > Freezing.SLIDE_SPEED / 2.0D,
+                "the jump left the speed of the ice behind rather than taking it along");
+        helper.assertTrue(rider.getDeltaMovement().y() > 0.0D, "and it was not much of a jump either");
+        helper.succeed();
+    }
+
+    @GameTest(maxTicks = 20)
+    public void jumpingOffSolidGroundPicksUpNothing(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Pig pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET);
+        pig.move(MoverType.SELF, new Vec3(0.0D, -0.2D, 0.0D));
+
+        pig.jumpFromGround();
+
+        helper.assertTrue(pig.getDeltaMovement().horizontalDistanceSqr() == 0.0D,
+                "a jump off plain ground picked up speed from somewhere");
         helper.succeed();
     }
 
@@ -311,6 +396,17 @@ public class FreezeGameTest {
         helper.assertTrue(pig.getDeltaMovement().y() == liftBefore, "the punch sent the block of ice into the air");
         helper.assertTrue(pig.getDeltaMovement().horizontalDistanceSqr() > 0.0D, "and it did not send it skidding either");
         helper.succeed();
+    }
+
+    /**
+     * Freezes {@code ice} and settles {@code rider} on top of it. The last inch is covered by a move
+     * of its own rather than by a fall: that move is what works out what is holding the rider up.
+     */
+    private static <T extends LivingEntity> T rest(GameTestHelper helper, LivingEntity ice, T rider) {
+        freeze(helper, ice);
+        rider.setPos(ice.getX(), ice.getBoundingBox().maxY + 0.05D, ice.getZ());
+        rider.move(MoverType.SELF, new Vec3(0.0D, -0.2D, 0.0D));
+        return rider;
     }
 
     /** A frozen pig two blocks short of a wall, with room to build up speed on the way there. */

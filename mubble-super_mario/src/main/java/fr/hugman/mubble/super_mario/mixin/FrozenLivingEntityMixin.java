@@ -39,6 +39,22 @@ public class FrozenLivingEntityMixin implements FreezeSnapshot {
         this.super_mario$frozenWalkSpeed = this_.walkAnimation.speed();
     }
 
+    /**
+     * Hands the ground the ice covered this tick on to whoever is riding it. It sits at the end of
+     * {@code LivingEntity}'s tick rather than {@code Entity}'s, which runs before the {@code aiStep}
+     * that does the moving and would hand on a tick that had not happened yet.
+     */
+    @Inject(method = "tick", at = @At("RETURN"))
+    private void super_mario$carryRiders(CallbackInfo ci) {
+        Freezing.carryRiders((LivingEntity) (Object) this);
+    }
+
+    /** Sends whoever jumps off a block of ice on the way it was already going. */
+    @Inject(method = "jumpFromGround", at = @At("TAIL"))
+    private void super_mario$jumpOffTheIce(CallbackInfo ci) {
+        Freezing.jumpOffFrozen((LivingEntity) (Object) this);
+    }
+
     @Override
     public float frozenWalkPos() {
         return this.super_mario$frozenWalkPos;
