@@ -107,6 +107,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .action(Holder.direct(new SpawnCloudPlatformPowerUpAction(SuperMarioEntityTypes.CLOUD_PLATFORM, Optional.of(3))))
                 .attributesModifier(Attributes.GRAVITY, -0.5, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.JUMP_STRENGTH, 0.35, ADD_MULTIPLIED_BASE)
+                .attributesModifier(Attributes.SAFE_FALL_DISTANCE, 9, ADD_VALUE)
+                .attributesModifier(Attributes.FALL_DAMAGE_MULTIPLIER, -0.5, ADD_MULTIPLIED_BASE)
                 .build());
     }
 
