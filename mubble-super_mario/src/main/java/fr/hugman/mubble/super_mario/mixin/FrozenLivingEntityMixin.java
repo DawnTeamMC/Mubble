@@ -65,6 +65,30 @@ public class FrozenLivingEntityMixin implements FreezeSnapshot {
         return this.super_mario$frozenWalkSpeed;
     }
 
+    /**
+     * Keeps a block of ice out of the shouldering match entities have when they overlap, which would
+     * otherwise throw a rider off the very thing carrying it. On a client that shove picks out the
+     * local player alone, so it is players it lands on, and their own client makes it stick.
+     */
+    @Inject(method = "isPushable", at = @At("HEAD"), cancellable = true)
+    private void super_mario$notJostledWhileFrozen(CallbackInfoReturnable<Boolean> cir) {
+        if (Freezing.isFrozen((LivingEntity) (Object) this)) {
+            cir.setReturnValue(false);
+        }
+    }
+
+    /**
+     * And the other way about: a block of ice shoulders nobody aside either.
+     *
+     * @see #super_mario$notJostledWhileFrozen
+     */
+    @Inject(method = "pushEntities", at = @At("HEAD"), cancellable = true)
+    private void super_mario$shoulderNobodyWhileFrozen(CallbackInfo ci) {
+        if (Freezing.isFrozen((LivingEntity) (Object) this)) {
+            ci.cancel();
+        }
+    }
+
     @Inject(method = "isImmobile", at = @At("HEAD"), cancellable = true)
     private void super_mario$immobileWhileFrozen(CallbackInfoReturnable<Boolean> cir) {
         if (Freezing.isFrozen((LivingEntity) (Object) this)) {
