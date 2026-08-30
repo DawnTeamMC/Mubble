@@ -20,6 +20,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -88,6 +89,21 @@ public class PowerUpCodecTest {
     }
 
     @Test
+    @DisplayName("the description keeps its lines, in order")
+    void descriptionRoundTrips() {
+        var decoded = CodecAssertions.assertJsonRoundTrip(PowerUp.DIRECT_CODEC, fullyPopulated());
+
+        assertEquals(
+                List.of(
+                        Component.translatable("power_up.mubble.test.description.first"),
+                        Component.translatable("power_up.mubble.test.description.second")
+                ),
+                decoded.description(),
+                "the description lines"
+        );
+    }
+
+    @Test
     @DisplayName("an unknown action type is rejected instead of being ignored")
     void unknownActionTypeIsRejected() {
         CodecAssertions.assertRejects(PowerUp.DIRECT_CODEC, JsonParser.parseString("""
@@ -104,7 +120,7 @@ public class PowerUpCodecTest {
     }
 
     static PowerUp empty() {
-        return new PowerUp(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), PowerUpCosmectics.EMPTY);
+        return new PowerUp(Optional.empty(), List.of(), Optional.empty(), Optional.empty(), Optional.empty(), PowerUpCosmectics.EMPTY);
     }
 
     static PowerUpCosmectics cosmetics() {
@@ -122,6 +138,8 @@ public class PowerUpCodecTest {
     static PowerUp fullyPopulated() {
         return new PowerUpBuilder()
                 .name(Component.translatable("power_up.mubble.test"))
+                .description(Component.translatable("power_up.mubble.test.description.first"))
+                .description(Component.translatable("power_up.mubble.test.description.second"))
                 .spriteId(Identifier.parse("mubble:power_up/test"))
                 .attributesModifier(Attributes.MAX_HEALTH, 4.0D, AttributeModifier.Operation.ADD_VALUE)
                 .obtainSound(sound(SoundEvents.AMETHYST_BLOCK_CHIME))

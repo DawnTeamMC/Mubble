@@ -30,14 +30,25 @@ public record PowerUpComponent(Holder<PowerUp> powerUp) implements TooltipProvid
         }
     }
 
+    /**
+     * Writes what the power-up granted by the item does.
+     * <p>
+     * A power-up describing itself says it in its own words, and its attribute modifiers are then
+     * only spelled out one by one under the advanced tooltips: a form as thorough as the mini or the
+     * mega one moves a dozen attributes at once, and listing them all is a wall of text no player
+     * asked for. One that says nothing keeps showing them, since it is all it has to show — that is
+     * what a data pack adding a power-up gets until it writes a description of its own.
+     */
     public static void buildAutomaticTooltip(PowerUp powerUp, Item.TooltipContext context, Consumer<Component> textConsumer, TooltipFlag type, DataComponentGetter components) {
+        powerUp.description().forEach(line -> textConsumer.accept(line.copy().withStyle(ChatFormatting.GRAY)));
         if (powerUp.action().isPresent()) {
             var action = powerUp.action().get().value();
             if(action instanceof TooltipProvider tooltipAppender) {
                 tooltipAppender.addToTooltip(context, textConsumer, type, components);
             }
         }
-        if (powerUp.attributesModifiers().isPresent() && !powerUp.attributesModifiers().get().isEmpty()) {
+        boolean detailed = powerUp.description().isEmpty() || type.isAdvanced();
+        if (detailed && powerUp.attributesModifiers().isPresent() && !powerUp.attributesModifiers().get().isEmpty()) {
             textConsumer.accept(CommonComponents.EMPTY);
             textConsumer.accept(Component.translatable("potion.whenDrank").withStyle(ChatFormatting.DARK_PURPLE));
 

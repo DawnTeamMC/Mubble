@@ -41,6 +41,9 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
     public static void bootstrap(BootstrapContext<PowerUp> context) {
         //TODO: some power-ups should be lost when taking too much damage
         context.register(MINI, builder(MINI)
+                .description(MINI, "size")
+                .description(MINI, "trade_off")
+                .description(MINI, "water")
                 .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_MINI)
                 .attributesModifier(Attributes.SCALE, -0.67, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.GRAVITY, -0.3, ADD_MULTIPLIED_BASE)
@@ -56,6 +59,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .attributesModifier(Attributes.ENTITY_INTERACTION_RANGE, -0.4, ADD_MULTIPLIED_BASE)
                 .build());
         context.register(MEGA, builder(MEGA)
+                .description(MEGA, "size")
+                .description(MEGA, "trade_off")
                 .attributesModifier(Attributes.SCALE, 2, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.GRAVITY, 0.5, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.MOVEMENT_SPEED, 1.75, ADD_MULTIPLIED_BASE)
@@ -104,6 +109,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .particle(SuperMarioParticleTypes.COIN_SPARKLE)
                 .build());
         context.register(CLOUD, builder(CLOUD)
+                .description(CLOUD, "float")
+                .description(CLOUD, "weather")
                 .action(Holder.direct(new SpawnCloudPlatformPowerUpAction(SuperMarioEntityTypes.CLOUD_PLATFORM, Optional.of(3))))
                 .attributesModifier(Attributes.GRAVITY, -0.5, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.JUMP_STRENGTH, 0.35, ADD_MULTIPLIED_BASE)
