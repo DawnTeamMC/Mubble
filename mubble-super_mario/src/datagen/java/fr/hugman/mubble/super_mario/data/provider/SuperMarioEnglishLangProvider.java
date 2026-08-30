@@ -28,6 +28,15 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("block." + SuperMario.MOD_ID + ".bumpable.drop.one", "Drop one");
         builder.add("block." + SuperMario.MOD_ID + ".bumpable.drop.one.description", "The block will drop one item per bump");
 
+        builder.add("power_up." + SuperMario.MOD_ID + ".mini.description.size", "Shrinks you to a third of your size.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mini.description.trade_off", "Weaker, but a better jumper.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mini.description.water", "Sprint off land to run on water.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mega.description.size", "Grows you to three times your size.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mega.description.trade_off", "Faster, tougher and stronger, but slow to swing.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.float", "You jump higher and fall slower.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.weather", "Water and rain wash it away.");
+        builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
+
         builder.add("entity." + SuperMario.MOD_ID + ".goomba.mini", "Mini Goomba");
         builder.add("item." + SuperMario.MOD_ID + ".mini_goomba_spawn_egg", "Mini Goomba Spawn Egg");
 

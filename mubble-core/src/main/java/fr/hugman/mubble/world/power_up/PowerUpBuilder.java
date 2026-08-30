@@ -19,6 +19,7 @@ import org.jspecify.annotations.Nullable;
 
 public class PowerUpBuilder {
     private @Nullable Component name = null;
+    private final List<Component> description = new ArrayList<>();
     private @Nullable Identifier spriteId = null;
     private @Nullable Holder<PowerUpAction> action = null;
     private final List<EntityAttributeEntry> attributesModifiers = new ArrayList<>();
@@ -41,6 +42,29 @@ public class PowerUpBuilder {
 
     public PowerUpBuilder name(ResourceKey<PowerUp> key) {
         return name(key.identifier());
+    }
+
+    /**
+     * Adds a line to the description shown under the name of the power-up, in the tooltip of the
+     * items granting it. A power-up carrying one hides its attribute modifiers behind the advanced
+     * tooltips, so the description is what players are left with: it has to say what the power-up
+     * does rather than repeat the numbers.
+     */
+    public PowerUpBuilder description(Component line) {
+        this.description.add(line);
+        return this;
+    }
+
+    /**
+     * Adds a description line translated as {@code power_up.<namespace>.<path>.description.<suffix>},
+     * the suffix naming what the line is about so that translators can tell them apart.
+     */
+    public PowerUpBuilder description(Identifier id, String suffix) {
+        return this.description(Component.translatable("power_up." + id.getNamespace() + "." + id.getPath() + ".description." + suffix));
+    }
+
+    public PowerUpBuilder description(ResourceKey<PowerUp> key, String suffix) {
+        return this.description(key.identifier(), suffix);
     }
 
     public PowerUpBuilder spriteId(Identifier spriteId) {
@@ -105,6 +129,7 @@ public class PowerUpBuilder {
     public PowerUp build() {
         return new PowerUp(
                 Optional.ofNullable(name),
+                List.copyOf(description),
                 Optional.ofNullable(spriteId),
                 Optional.ofNullable(action),
                 Optional.ofNullable(attributesModifiers.isEmpty() ? null : attributesModifiers),

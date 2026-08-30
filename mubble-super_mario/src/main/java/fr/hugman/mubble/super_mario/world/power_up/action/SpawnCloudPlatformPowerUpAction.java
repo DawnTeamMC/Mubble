@@ -3,13 +3,17 @@ package fr.hugman.mubble.super_mario.world.power_up.action;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fr.hugman.mubble.keybind.MubbleKeyBindingsKeys;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionType;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
@@ -20,17 +24,21 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
 import java.util.Optional;
 import java.util.OptionalDouble;
+import java.util.function.Consumer;
 
 
 public record SpawnCloudPlatformPowerUpAction(
         EntityType<?> entity,
         Optional<Integer> max
-) implements PowerUpAction {
+) implements PowerUpAction, TooltipProvider {
     /** How far under the player's feet the platform tries to appear. */
     private static final double DROP = 0.5D;
     /** The upward nudge the player gets, so that they land back on the platform they just made. */
@@ -170,5 +178,13 @@ public record SpawnCloudPlatformPowerUpAction(
     /** How far the player has to go up to end up standing on top of the platform. */
     private static double lift(Player player, double platformY, double height) {
         return platformY + height - player.getY();
+    }
+
+    @Override
+    public void addToTooltip(Item.TooltipContext context, Consumer<Component> textConsumer, TooltipFlag type, DataComponentGetter components) {
+        this.getTranslationKey().ifPresent(key -> textConsumer.accept(Component.translatable(
+                key + ".description",
+                Component.keybind(MubbleKeyBindingsKeys.TRIGGER_POWER_UP)
+        ).withStyle(ChatFormatting.GRAY)));
     }
 }
