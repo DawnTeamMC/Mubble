@@ -133,6 +133,18 @@ public class FreezeGameTest {
     }
 
     @GameTest(maxTicks = 20)
+    public void aBlockOfIceIsNotShoulderedAside(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Pig pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET);
+
+        helper.assertTrue(pig.isPushable(), "a pig is shouldered aside like anything else");
+        freeze(helper, pig);
+        helper.assertFalse(pig.isPushable(),
+                "a block of ice should be collided with rather than shouldered aside, or it throws off its own rider");
+        helper.succeed();
+    }
+
+    @GameTest(maxTicks = 20)
     public void theTopOfABlockOfIceIsSlippery(GameTestHelper helper) {
         Arena.buildFloor(helper);
         Pig ice = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET);
