@@ -230,7 +230,7 @@ public class GoldenServerExplosion implements Explosion {
                     entity.setCollectSound(new SoundConfig(SuperMarioSounds.COIN_COLLECT, 0.2f, 1.0f));
                     entity.setBounceSound(new SoundConfig(SuperMarioSounds.COIN_BOUNCE, 1.0f, 1.0f));
                     entity.setCollectParticle(SuperMarioParticleTypes.COIN_SPARKLE);
-                    EntityType.createDefaultStackConfig(level, itemStack, null).accept(entity);
+                    EntityType.createDefaultStackConfig(level, itemStack, null).apply(entity);
                     if (entity != null) {
                         entity.snapTo(entity.getX(), entity.getY(), entity.getZ(), 0.0f, 0.0F);
                         level.addFreshEntityWithPassengers(entity);

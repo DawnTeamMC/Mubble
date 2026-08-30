@@ -163,7 +163,7 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     public void onBumpMiddle(Level level, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
         if (level != null && !level.isClientSide()) {
             if (blockEntity.shouldBreak()) {
-                Vec3 center = blockEntity.getBlockPos().getCenter();
+                Vec3 center = Vec3.atCenterOf(blockEntity.getBlockPos());
 
                 this.loot(level, pos, blockEntity, true);
                 level.destroyBlock(blockEntity.getBlockPos(), false);
@@ -216,7 +216,7 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
         if (blockEntity.isEmpty()) {
             return;
         }
-        var center = pos.getCenter();
+        var center = Vec3.atCenterOf(pos);
         BumpableDropMode dropMode = blockEntity.getDropMode();
         if (atCenter) {
             switch (dropMode) {

@@ -15,18 +15,34 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 
 import java.util.Optional;
+import java.util.OptionalDouble;
 
 
 public record SpawnCloudPlatformPowerUpAction(
         EntityType<?> entity,
         Optional<Integer> max
 ) implements PowerUpAction {
+    /** How far under the player's feet the platform tries to appear. */
+    private static final double DROP = 0.5D;
+    /** The upward nudge the player gets, so that they land back on the platform they just made. */
+    private static final double NUDGE = 0.2D;
+    /** Step taken while looking for a spot free of blocks, between the ideal one and the feet. */
+    private static final double SEARCH_STEP = 0.25D;
+    /**
+     * Width of the box checked for blocks. The platform is far wider than that, and testing it whole
+     * would refuse to place it anywhere near a wall; what decides is the column the player stands in.
+     */
+    private static final double CLEARANCE_WIDTH = 1.0D;
+
     public static final MapCodec<SpawnCloudPlatformPowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(SpawnCloudPlatformPowerUpAction::entity),
             Codec.INT.optionalFieldOf("max").forGetter(SpawnCloudPlatformPowerUpAction::max)
@@ -83,21 +99,76 @@ public record SpawnCloudPlatformPowerUpAction(
             return InteractionResult.SUCCESS;
         }
 
-        if (!level.isClientSide()) {
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), SuperMarioSounds.POWER_UP_SPIN_ATTACK, SoundSource.PLAYERS, 0.5F, 1.0F);
-            var entity = this.entity().create(level, EntitySpawnReason.TRIGGERED);
-            if (null == entity) {
-                return InteractionResult.FAIL;
-            }
-            entity.setPos(player.getX(), player.getY() - 0.5f - entity.getBbHeight(), player.getZ());
-            level.addFreshEntity(entity);
-            properties.useCharge();
-            properties.trackEntity(entity.getUUID());
-
-            player.setDeltaMovement(player.getDeltaMovement().x, 0.2D, player.getDeltaMovement().z);
-            ((ServerPlayer) player).connection.send(new ClientboundSetEntityMotionPacket(player));
-            entity.fallDistance = 0.0F;
+        var dimensions = this.entity().getDimensions();
+        var platformY = findPlatformY(level, player, dimensions.height());
+        if (platformY.isEmpty()) {
+            return InteractionResult.FAIL;
         }
+
+        var entity = this.entity().create(level, EntitySpawnReason.TRIGGERED);
+        if (null == entity) {
+            return InteractionResult.FAIL;
+        }
+
+        level.playSound(null, player.getX(), player.getY(), player.getZ(), SuperMarioSounds.POWER_UP_SPIN_ATTACK, SoundSource.PLAYERS, 0.5F, 1.0F);
+        entity.setPos(player.getX(), platformY.getAsDouble(), player.getZ());
+        level.addFreshEntity(entity);
+        properties.useCharge();
+
+        // The platform had to be raised out of the ground, so the player rides up with it instead of
+        // being left standing next to it.
+        double lift = lift(player, platformY.getAsDouble(), dimensions.height());
+        if (lift > 0.0D && player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.teleportTo(player.getX(), player.getY() + lift, player.getZ());
+        }
+
+        player.setDeltaMovement(player.getDeltaMovement().x, NUDGE, player.getDeltaMovement().z);
+        ((ServerPlayer) player).connection.send(new ClientboundSetEntityMotionPacket(player));
+        entity.fallDistance = 0.0F;
         return InteractionResult.SUCCESS;
+    }
+
+    /**
+     * Looks for the height the platform can appear at, starting from the ideal one under the
+     * player's feet and going up, so that it never ends up buried in the ground.
+     *
+     * @return the Y the bottom of the platform goes to, or empty if there is no room for it at all
+     */
+    private static OptionalDouble findPlatformY(Level level, Player player, double height) {
+        double ideal = player.getY() - DROP - height;
+        // Any higher and the platform would appear above the player rather than under them.
+        double highest = player.getY();
+        int steps = Mth.ceil((highest - ideal) / SEARCH_STEP);
+
+        for (int step = 0; step <= steps; step++) {
+            double y = Math.min(ideal + step * SEARCH_STEP, highest);
+            if (fits(level, player, y, height)) {
+                return OptionalDouble.of(y);
+            }
+        }
+        return OptionalDouble.empty();
+    }
+
+    /**
+     * Whether the platform can appear with its bottom at {@code y}, together with the player it may
+     * have to lift.
+     */
+    private static boolean fits(Level level, Player player, double y, double height) {
+        double half = CLEARANCE_WIDTH / 2.0D;
+        var box = new AABB(
+                player.getX() - half, y, player.getZ() - half,
+                player.getX() + half, y + height, player.getZ() + half
+        );
+        if (!level.noCollision(null, box)) {
+            return false;
+        }
+
+        double lift = lift(player, y, height);
+        return lift <= 0.0D || level.noCollision(player, player.getBoundingBox().move(0.0D, lift, 0.0D));
+    }
+
+    /** How far the player has to go up to end up standing on top of the platform. */
+    private static double lift(Player player, double platformY, double height) {
+        return platformY + height - player.getY();
     }
 }

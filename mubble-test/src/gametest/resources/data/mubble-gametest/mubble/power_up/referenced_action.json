@@ -1,0 +1,6 @@
+{
+  "action": "mubble-gametest:snowball_barrage",
+  "name": {
+    "translate": "power_up.mubble-gametest.referenced_action"
+  }
+}

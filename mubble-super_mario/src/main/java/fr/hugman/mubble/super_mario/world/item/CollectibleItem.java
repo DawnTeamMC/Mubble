@@ -39,7 +39,7 @@ public class CollectibleItem extends Item {
                 if (level instanceof ServerLevel serverLevel) {
                     CollectibleEntity entity = new CollectibleEntity(serverLevel, pos.x(), pos.y(), pos.z(), itemStack.copyWithCount(1));
                     SuperMarioCollectibles.configure(entity, itemStack);
-                    EntityType.createDefaultStackConfig(serverLevel, itemStack, context.getPlayer()).accept(entity);
+                    EntityType.createDefaultStackConfig(serverLevel, itemStack, context.getPlayer()).apply(entity);
                     if (entity == null) {
                         return InteractionResult.FAIL;
                     }

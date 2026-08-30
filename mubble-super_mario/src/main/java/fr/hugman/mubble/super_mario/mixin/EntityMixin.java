@@ -1,5 +1,6 @@
 package fr.hugman.mubble.super_mario.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
 import fr.hugman.mubble.super_mario.tags.SuperMarioEntityTypeTags;
 import fr.hugman.mubble.super_mario.tags.SuperMarioPowerUpTags;
@@ -24,7 +25,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -40,21 +40,31 @@ public class EntityMixin implements Stompable, FallGraced {
 	@Unique
 	private boolean super_mario$fallGraceArmed;
 
-	// Inject right before the second call of setPosition() in the method move()
+	/**
+	 * Bumps whatever the entity hits with the top of its hitbox, right before it is moved there.
+	 * <p>
+	 * The movement is captured from {@code move()} rather than collided for a second time: {@code collide()}
+	 * sweeps every block and entity shape along the way, which makes it the most expensive part of moving an
+	 * entity, and calling it again here doubled that cost for every entity moving in the world.
+	 *
+	 * @param delta    the movement that was requested, which collisions may have cut short
+	 * @param movement the movement {@code move()} resolved out of {@code delta} and is about to apply. It is
+	 *                 the second {@link Vec3} local at this point, {@code delta} itself being the first.
+	 */
 	@Inject(method="move", at=@At(value="INVOKE", target="Lnet/minecraft/world/entity/Entity;setPos(Lnet/minecraft/world/phys/Vec3;)V", ordinal=0))
-	private void mubble$move(MoverType type, Vec3 movement, CallbackInfo ci) {
+	private void mubble$move(MoverType type, Vec3 delta, CallbackInfo ci, @Local(ordinal = 1) Vec3 movement) {
+		if (movement.y() <= 0) {
+			return;
+		}
 		Entity this_ = (Entity) (Object) this;
 		Level level = this_.level();
-		Vec3 vec3d = this.collide(movement);
-		if (vec3d != null && vec3d.y() > 0) {
-			Vec3 headPos = this_.position().add(0, this_.getBbHeight(), 0);
-			BlockHitResult hit = level.clip(new ClipContext(headPos, headPos.add(vec3d).add(0, HittableBlock.HIT_Y_OFFSET, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this_));
-			if (hit.getType() == HitResult.Type.BLOCK && hit.getDirection() == Direction.DOWN) {
-				BlockPos blockPos = hit.getBlockPos();
-				BlockState state = level.getBlockState(blockPos);
-				if (state.getBlock() instanceof HittableBlock hittableBlock) {
-					hittableBlock.onHit(level, state, this_, hit);
-				}
+		Vec3 headPos = this_.position().add(0, this_.getBbHeight(), 0);
+		BlockHitResult hit = level.clip(new ClipContext(headPos, headPos.add(movement).add(0, HittableBlock.HIT_Y_OFFSET, 0), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this_));
+		if (hit.getType() == HitResult.Type.BLOCK && hit.getDirection() == Direction.DOWN) {
+			BlockPos blockPos = hit.getBlockPos();
+			BlockState state = level.getBlockState(blockPos);
+			if (state.getBlock() instanceof HittableBlock hittableBlock) {
+				hittableBlock.onHit(level, state, this_, hit);
 			}
 		}
 	}
@@ -108,11 +118,6 @@ public class EntityMixin implements Stompable, FallGraced {
 			entity.fallDistance -= this.super_mario$fallGrace;
 			this.super_mario$fallGrace = 0.0;
 		}
-	}
-
-	@Shadow
-	private Vec3 collide(Vec3 movement) {
-		return null;
 	}
 
 	@Override
