@@ -19,6 +19,10 @@ public class SuperMarioEntityTypeTags {
      */
     public static final TagKey<EntityType<?>> FREEZE_IMMUNE = bind("freeze_immune");
 
+    public static final TagKey<EntityType<?>> ALL = bind("all");
+    public static final TagKey<EntityType<?>> BUBBLE_CAN_TRAP = bind("bubble_can_trap");
+    public static final TagKey<EntityType<?>> BUBBLE_CANNOT_TRAP = bind("bubble_cannot_trap");
+
     private static TagKey<EntityType<?>> bind(String path) {
         return TagKey.create(Registries.ENTITY_TYPE, SuperMario.id(path));
     }

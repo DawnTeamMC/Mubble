@@ -36,6 +36,15 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.frozen", "%s is frozen for %s more ticks");
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.thawed", "%s is not frozen");
 
+        builder.add("power_up." + SuperMario.MOD_ID + ".mini.description.size", "Shrinks you to a third of your size.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mini.description.trade_off", "Weaker, but a better jumper.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mini.description.water", "Sprint off land to run on water.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mega.description.size", "Grows you to three times your size.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mega.description.trade_off", "Faster, tougher and stronger, but slow to swing.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.float", "You jump higher and fall slower.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.weather", "Water and rain wash it away.");
+        builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
+
         builder.add("entity." + SuperMario.MOD_ID + ".goomba.mini", "Mini Goomba");
         builder.add("item." + SuperMario.MOD_ID + ".mini_goomba_spawn_egg", "Mini Goomba Spawn Egg");
 
@@ -64,6 +73,9 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.iceball.hit", "Iceball hits");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.iceball.throw", "Iceball thrown");
         builder.add(SuperMarioSounds.GOLD_FIREBALL_THROW.value(), "Gold Fireball thrown");
+        builder.add(SuperMarioSounds.BUBBLE_APPEAR.value(), "Bubble appears");
+        builder.add(SuperMarioSounds.BUBBLE_POP.value(), "Bubble pops");
+        builder.add(SuperMarioSounds.BUBBLE_FILL.value(), "Bubble fills");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.refill", "Power-up refilled");

@@ -6,6 +6,7 @@
     "ClientPacketListenerMixin",
     "FrozenEntityRendererMixin",
     "FrozenLivingEntityRendererMixin",
+    "HumanoidMobRendererMixin",
     "LivingEntityRendererMixin",
     "AvatarRendererMixin"
   ],

@@ -35,7 +35,7 @@ public class PowerUpPropertiesTest {
     void spendingAChargeLeavesTheMaximum() {
         var properties = new PowerUpProperties(PowerUpProperties.ChargeCounting.ONLY_DECREASE, 2);
 
-        properties.addEntity(UUID.randomUUID());
+        properties.useCharge();
 
         assertEquals(1, properties.getChargeCount());
         assertFalse(properties.isAtMax());
@@ -44,9 +44,9 @@ public class PowerUpPropertiesTest {
     @Test
     @DisplayName("a running cooldown keeps the power-up away from its maximum")
     void runningCooldownLeavesTheMaximum() {
-        var properties = new PowerUpProperties(PowerUpProperties.ChargeCounting.ONLY_DECREASE, 1);
+        var properties = new PowerUpProperties(
+                PowerUpProperties.ChargeCounting.ONLY_DECREASE, 1, 0, 2, 1, List.of());
 
-        properties.setCooldown(2);
         assertFalse(properties.isAtMax());
 
         properties.tick();
@@ -59,9 +59,9 @@ public class PowerUpPropertiesTest {
     @Test
     @DisplayName("COOLDOWN_RECHARGE gives a charge back once the cooldown runs out")
     void cooldownRechargeGivesAChargeBack() {
-        var properties = new PowerUpProperties(PowerUpProperties.ChargeCounting.COOLDOWN_RECHARGE, 1);
-        properties.addEntity(UUID.randomUUID());
-        properties.setCooldown(2);
+        var properties = new PowerUpProperties(PowerUpProperties.ChargeCounting.COOLDOWN_RECHARGE, 1, 2);
+        // Spending the charge is what starts the countdown, so this is the whole trigger in one call.
+        properties.useCharge();
 
         properties.tick();
         assertEquals(0, properties.getChargeCount());
@@ -77,8 +77,11 @@ public class PowerUpPropertiesTest {
         var properties = new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, 2);
         var firstProjectile = UUID.randomUUID();
 
-        properties.addEntity(firstProjectile);
-        properties.addEntity(UUID.randomUUID());
+        // What a trigger does: spend the charge, then tie it to the entity that was sent out.
+        properties.useCharge();
+        properties.trackEntity(firstProjectile);
+        properties.useCharge();
+        properties.trackEntity(UUID.randomUUID());
         properties.tick();
         assertEquals(0, properties.getChargeCount());
 
@@ -94,7 +97,7 @@ public class PowerUpPropertiesTest {
         var properties = new PowerUpProperties(PowerUpProperties.ChargeCounting.ONLY_DECREASE, 1);
         assertFalse(properties.checkDirty());
 
-        properties.setCooldown(1);
+        properties.useCharge();
 
         assertTrue(properties.checkDirty());
         assertFalse(properties.checkDirty());
@@ -109,6 +112,7 @@ public class PowerUpPropertiesTest {
             var properties = new PowerUpProperties(
                     PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES,
                     3,
+                    5,
                     7,
                     2,
                     List.of(UUID.fromString("f7e5b26e-9e4d-4b6f-9f7c-6c1f0f8f2a11"))
@@ -122,6 +126,7 @@ public class PowerUpPropertiesTest {
             assertEquals(properties.getChargeCount(), decoded.getChargeCount());
             assertEquals(properties.chargeCounting, decoded.chargeCounting);
             assertEquals(properties.maxCharges, decoded.maxCharges);
+            assertEquals(properties.interval, decoded.interval);
         }
 
         @Test
@@ -131,6 +136,7 @@ public class PowerUpPropertiesTest {
             var properties = new PowerUpProperties(
                     PowerUpProperties.ChargeCounting.COOLDOWN_RECHARGE,
                     9,
+                    6,
                     4,
                     2,
                     List.of(UUID.fromString("f7e5b26e-9e4d-4b6f-9f7c-6c1f0f8f2a11"))
@@ -143,6 +149,7 @@ public class PowerUpPropertiesTest {
             assertEquals(0, buf.readableBytes(), "the decoder left unread bytes behind");
             assertEquals(properties.chargeCounting, decoded.chargeCounting, "charge counting");
             assertEquals(properties.maxCharges, decoded.maxCharges, "max charges");
+            assertEquals(properties.interval, decoded.interval, "interval");
             assertEquals(properties.getChargeCount(), decoded.getChargeCount(), "charge count");
             assertEquals(
                     PowerUpProperties.CODEC.encodeStart(JsonOps.INSTANCE, properties).getOrThrow(),

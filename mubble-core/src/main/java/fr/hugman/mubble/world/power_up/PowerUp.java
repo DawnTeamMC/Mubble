@@ -27,6 +27,7 @@ import java.util.function.BiConsumer;
 
 public record PowerUp(
         Optional<Component> name,
+        List<Component> description,
         Optional<Identifier> spriteId,
         Optional<Holder<PowerUpAction>> action,
         Optional<List<EntityAttributeEntry>> attributesModifiers,
@@ -37,6 +38,7 @@ public record PowerUp(
 
     public static final Codec<PowerUp> DIRECT_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ComponentSerialization.CODEC.optionalFieldOf("name").forGetter(PowerUp::name),
+            ComponentSerialization.CODEC.listOf().optionalFieldOf("description", List.of()).forGetter(PowerUp::description),
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
             PowerUpAction.CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
@@ -47,6 +49,7 @@ public record PowerUp(
 
     public static final StreamCodec<RegistryFriendlyByteBuf, PowerUp> DIRECT_STREAM_CODEC = StreamCodec.composite(
             ComponentSerialization.TRUSTED_OPTIONAL_STREAM_CODEC, PowerUp::name,
+            ComponentSerialization.TRUSTED_STREAM_CODEC.apply(ByteBufCodecs.list()), PowerUp::description,
             Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::spriteId,
             PowerUpAction.OPTIONAL_STREAM_CODEC, PowerUp::action,
             EntityAttributeEntry.OPTIONAL_LIST_STREAM_CODEC, PowerUp::attributesModifiers,

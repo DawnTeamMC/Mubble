@@ -10,6 +10,8 @@ public class SuperMarioItemTags {
 	public static final TagKey<Item> COINS = bind("coins");
 	public static final TagKey<Item> KOOPA_SHELLS = bind("koopa_shells");
 
+	public static final TagKey<Item> BUBBLE_CATCH_AS_COLLECTIBLE = bind("bubble/catch_as_collectible");
+
 	public static final TagKey<Item> BRICK_BLOCKS = bind("brick_blocks");
 	public static final TagKey<Item> EXCLAMATION_BLOCKS = bind("exclamation_blocks");
 	public static final TagKey<Item> MARIMBA_BLOCKS = bind("marimba_blocks");

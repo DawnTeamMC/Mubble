@@ -3,5 +3,8 @@
   "projectile": "minecraft:snowball",
   "sound": "minecraft:entity.snowball.throw",
   "speed": 1.0,
-  "max_projectiles": 5
+  "charges": {
+    "counting": "from_active_entities",
+    "max": 5
+  }
 }
