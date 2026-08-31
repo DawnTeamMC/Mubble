@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 
 public class SuperMarioPowerUpActionTypes {
     public static final PowerUpActionType<SpawnCloudPlatformPowerUpAction> SPAWN_CLOUD_PLATFORM = register(SuperMarioPowerUpActionTypesIds.SPAWN_CLOUD_PLATFORM, SpawnCloudPlatformPowerUpAction.CODEC, SpawnCloudPlatformPowerUpAction.STREAM_CODEC);
+    public static final PowerUpActionType<GrowFlowerPowerUpAction> GROW_FLOWER = register(SuperMarioPowerUpActionTypesIds.GROW_FLOWER, GrowFlowerPowerUpAction.CODEC, GrowFlowerPowerUpAction.STREAM_CODEC);
 
     public static <T extends PowerUpAction> PowerUpActionType<T> register(ResourceKey<PowerUpActionType<?>> key, MapCodec<T> codec, StreamCodec<? super RegistryFriendlyByteBuf, T> streamCodec) {
         return Registry.register(MubbleBuiltInRegistries.POWER_UP_ACTION_TYPE, key, new PowerUpActionType<>(codec, streamCodec));

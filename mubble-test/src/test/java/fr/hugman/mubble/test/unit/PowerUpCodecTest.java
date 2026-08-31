@@ -7,6 +7,8 @@ import fr.hugman.mubble.test.unit.support.TestBootstrap;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.PowerUpCosmectics;
+import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
+import fr.hugman.mubble.world.power_up.ability.PowerUpAbilities;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -104,6 +106,32 @@ public class PowerUpCodecTest {
     }
 
     @Test
+    @DisplayName("the flutter ability keeps every one of its numbers")
+    void flutterAbilityRoundTrips() {
+        var decoded = CodecAssertions.assertJsonRoundTrip(PowerUp.DIRECT_CODEC, fullyPopulated());
+        var decodedFlutter = decoded.abilities().flutter().orElseThrow(() -> new AssertionError("the flutter was dropped"));
+
+        assertEquals(flutter(), decodedFlutter, "the flutter ability");
+    }
+
+    @Test
+    @DisplayName("a flutter written with nothing but its defaults reads back as the defaults")
+    void flutterAbilityDefaults() {
+        var decoded = PowerUp.DIRECT_CODEC.parse(
+                        TestBootstrap.registries().createSerializationContext(JsonOps.INSTANCE),
+                        JsonParser.parseString("""
+                                {"abilities": {"flutter": {}}}
+                                """))
+                .getOrThrow(error -> new AssertionError("could not read a bare flutter: " + error));
+
+        assertEquals(
+                FlutterAbility.of(FlutterAbility.DEFAULT_DURATION, FlutterAbility.DEFAULT_RAMP, FlutterAbility.DEFAULT_STRENGTH),
+                decoded.abilities().flutter().orElseThrow(() -> new AssertionError("the flutter was dropped")),
+                "a flutter with no field of its own"
+        );
+    }
+
+    @Test
     @DisplayName("an unknown action type is rejected instead of being ignored")
     void unknownActionTypeIsRejected() {
         CodecAssertions.assertRejects(PowerUp.DIRECT_CODEC, JsonParser.parseString("""
@@ -120,7 +148,7 @@ public class PowerUpCodecTest {
     }
 
     static PowerUp empty() {
-        return new PowerUp(Optional.empty(), List.of(), Optional.empty(), Optional.empty(), Optional.empty(), PowerUpCosmectics.EMPTY);
+        return new PowerUp(Optional.empty(), List.of(), Optional.empty(), Optional.empty(), Optional.empty(), PowerUpAbilities.EMPTY, PowerUpCosmectics.EMPTY);
     }
 
     static PowerUpCosmectics cosmetics() {
@@ -149,7 +177,13 @@ public class PowerUpCodecTest {
                 .particle(ParticleTypes.FLAME)
                 .humanoidOverlay(Identifier.parse("mubble:entity/power_up/humanoid/test"))
                 .emissiveOverlay()
+                .flutter(flutter())
                 .build();
+    }
+
+    /** Every number distinct, so that two of them swapped cannot round trip unnoticed. */
+    static FlutterAbility flutter() {
+        return new FlutterAbility(24, 7, 0.19F, Optional.of(sound(SoundEvents.BAT_LOOP)), Optional.of(ParticleTypes.CHERRY_LEAVES));
     }
 
     /** Most {@code SoundEvents} constants are bare events, but the mod stores them as holders. */
