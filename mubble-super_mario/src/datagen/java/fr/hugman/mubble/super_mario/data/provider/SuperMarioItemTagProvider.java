@@ -22,7 +22,7 @@ public class SuperMarioItemTagProvider extends FabricTagsProvider.ItemTagsProvid
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
 		builder(COINS).add(COIN, RED_COIN, BLUE_COIN, FLOWER_COIN);
 		builder(KOOPA_SHELLS).add(GREEN_KOOPA_SHELL, RED_KOOPA_SHELL);
-		builder(KOOPA_SHELLS).add(GREEN_KOOPA_SHELL, RED_KOOPA_SHELL);
+		builder(BUBBLE_CATCH_AS_COLLECTIBLE).addTag(COINS);
 		builder(ItemTags.PIGLIN_LOVED).add(COIN);
 
 		copy(SuperMarioBlockTags.BRICK_BLOCKS, BRICK_BLOCKS);

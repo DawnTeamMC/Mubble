@@ -32,7 +32,7 @@ public class PowerUpPersistenceGameTest {
         var saved = TestPlayers.mock(helper);
         saved.setPowerUp(PowerUpFixtures.get(helper, PowerUpFixtures.SHOOTER));
         // Spend one of the two charges, so that a reset to full would show.
-        saved.getPowerUpProperties().addEntity(java.util.UUID.randomUUID());
+        saved.getPowerUpProperties().useCharge();
         int spent = saved.getPowerUpProperties().getChargeCount();
 
         var loaded = reload(helper, saved);

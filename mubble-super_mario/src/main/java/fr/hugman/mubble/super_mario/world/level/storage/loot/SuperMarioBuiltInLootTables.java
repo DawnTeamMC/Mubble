@@ -7,6 +7,8 @@ import net.minecraft.world.level.storage.loot.LootTable;
 
 public class SuperMarioBuiltInLootTables {
 	public static final ResourceKey<LootTable> GOLDEN_KILL = register("golden_kill");
+	/** What a bubble ends up holding after swallowing a Super Mario entity. */
+	public static final ResourceKey<LootTable> BUBBLE_CAPTURE = register("gameplay/bubble_capture");
 
 	private static ResourceKey<LootTable> register(final String path) {
 		return ResourceKey.create(Registries.LOOT_TABLE, SuperMario.id(path));

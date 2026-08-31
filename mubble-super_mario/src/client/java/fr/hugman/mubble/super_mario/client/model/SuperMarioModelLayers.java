@@ -1,6 +1,5 @@
 package fr.hugman.mubble.super_mario.client.model;
 
-import fr.hugman.mubble.client.model.BallModel;
 import fr.hugman.mubble.super_mario.SuperMario;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

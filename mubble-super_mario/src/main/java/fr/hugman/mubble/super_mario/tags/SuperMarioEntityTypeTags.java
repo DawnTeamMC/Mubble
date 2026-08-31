@@ -11,6 +11,10 @@ public class SuperMarioEntityTypeTags {
     public static final TagKey<EntityType<?>> CAN_STOMP = bind("can_stomp");
     public static final TagKey<EntityType<?>> STOMPABLE = bind("stompable");
 
+    public static final TagKey<EntityType<?>> ALL = bind("all");
+    public static final TagKey<EntityType<?>> BUBBLE_CAN_TRAP = bind("bubble_can_trap");
+    public static final TagKey<EntityType<?>> BUBBLE_CANNOT_TRAP = bind("bubble_cannot_trap");
+
     private static TagKey<EntityType<?>> bind(String path) {
         return TagKey.create(Registries.ENTITY_TYPE, SuperMario.id(path));
     }

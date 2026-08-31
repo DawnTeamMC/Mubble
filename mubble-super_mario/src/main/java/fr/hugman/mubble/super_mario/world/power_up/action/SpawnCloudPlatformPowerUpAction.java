@@ -121,7 +121,7 @@ public record SpawnCloudPlatformPowerUpAction(
         level.playSound(null, player.getX(), player.getY(), player.getZ(), SuperMarioSounds.POWER_UP_SPIN_ATTACK, SoundSource.PLAYERS, 0.5F, 1.0F);
         entity.setPos(player.getX(), platformY.getAsDouble(), player.getZ());
         level.addFreshEntity(entity);
-        properties.addEntity(entity.getUUID());
+        properties.useCharge();
 
         // The platform had to be raised out of the ground, so the player rides up with it instead of
         // being left standing next to it.

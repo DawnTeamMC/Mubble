@@ -124,7 +124,7 @@ public class PowerUpHolderGameTest {
         helper.assertFalse(PowerUp.canRefill(player, shooter), "a power-up at full charge has nothing to refill");
 
         // Spending a charge is what a trigger does; here it is done directly to keep the test about refilling.
-        player.getPowerUpProperties().addEntity(java.util.UUID.randomUUID());
+        player.getPowerUpProperties().useCharge();
         helper.assertTrue(PowerUp.canRefill(player, shooter), "a power-up that spent a charge should be refillable");
         helper.assertTrue(PowerUp.canChange(player, shooter), "and taking it again should therefore be allowed");
 
