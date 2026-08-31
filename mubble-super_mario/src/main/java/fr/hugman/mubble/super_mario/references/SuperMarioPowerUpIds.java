@@ -13,6 +13,7 @@ public class SuperMarioPowerUpIds {
     public static final ResourceKey<PowerUp> GOLD = createKey("gold");
     public static final ResourceKey<PowerUp> CLOUD = createKey("cloud");
     public static final ResourceKey<PowerUp> BUBBLE = createKey("bubble");
+    public static final ResourceKey<PowerUp> FLOWER = createKey("flower");
 
     private static ResourceKey<PowerUp> createKey(String path) {
         return ResourceKey.create(MubbleRegistries.POWER_UP, SuperMario.id(path));

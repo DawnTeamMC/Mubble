@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
+import fr.hugman.mubble.world.power_up.ability.PowerUpAbilities;
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
@@ -27,6 +29,7 @@ public class PowerUpBuilder {
     private @Nullable Holder<SoundEvent> emitSound = null;
     private @Nullable Holder<SoundEvent> looseSound = null;
     private @Nullable Holder<SoundEvent> refillSound = null;
+    private @Nullable FlutterAbility flutter = null;
     private @Nullable ParticleOptions particle = null;
     private @Nullable Identifier humanoidOverlayAssetId = null;
     private boolean emissiveOverlay = false;
@@ -87,6 +90,14 @@ public class PowerUpBuilder {
         return this.attributesModifier(new EntityAttributeEntry(attribute, new AttributeModifier(Mubble.id("power_up/" + path), value, operation)));
     }
 
+    /**
+     * Lets the holder extend their jumps by fluttering, on the terms the ability is built with.
+     */
+    public PowerUpBuilder flutter(FlutterAbility flutter) {
+        this.flutter = flutter;
+        return this;
+    }
+
     public PowerUpBuilder particle(ParticleOptions particle) {
         this.particle = particle;
         return this;
@@ -133,6 +144,7 @@ public class PowerUpBuilder {
                 Optional.ofNullable(spriteId),
                 Optional.ofNullable(action),
                 Optional.ofNullable(attributesModifiers.isEmpty() ? null : attributesModifiers),
+                new PowerUpAbilities(Optional.ofNullable(this.flutter)),
                 new PowerUpCosmectics(
                         Optional.ofNullable(this.particle),
                         Optional.ofNullable(this.obtainSound),

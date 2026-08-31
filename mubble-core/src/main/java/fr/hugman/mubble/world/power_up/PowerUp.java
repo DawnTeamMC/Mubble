@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.world.entity.ai.attributes.EntityAttributeEntry;
+import fr.hugman.mubble.world.power_up.ability.PowerUpAbilities;
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -31,6 +32,7 @@ public record PowerUp(
         Optional<Identifier> spriteId,
         Optional<Holder<PowerUpAction>> action,
         Optional<List<EntityAttributeEntry>> attributesModifiers,
+        PowerUpAbilities abilities,
         PowerUpCosmectics cosmectics
 ) {
     //TODO: add a predicate/damage tag to determine if you can lose it to damage
@@ -42,6 +44,7 @@ public record PowerUp(
             Identifier.CODEC.optionalFieldOf("sprite_id").forGetter(PowerUp::spriteId),
             PowerUpAction.CODEC.optionalFieldOf("action").forGetter(PowerUp::action),
             EntityAttributeEntry.CODEC.listOf().optionalFieldOf("attribute_modifiers").forGetter(PowerUp::attributesModifiers),
+            PowerUpAbilities.CODEC.optionalFieldOf("abilities", PowerUpAbilities.EMPTY).forGetter(PowerUp::abilities),
             PowerUpCosmectics.CODEC.optionalFieldOf("cosmetics", PowerUpCosmectics.EMPTY).forGetter(PowerUp::cosmectics)
     ).apply(instance, PowerUp::new));
 
@@ -53,6 +56,7 @@ public record PowerUp(
             Identifier.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUp::spriteId,
             PowerUpAction.OPTIONAL_STREAM_CODEC, PowerUp::action,
             EntityAttributeEntry.OPTIONAL_LIST_STREAM_CODEC, PowerUp::attributesModifiers,
+            PowerUpAbilities.STREAM_CODEC, PowerUp::abilities,
             PowerUpCosmectics.STREAM_CODEC, PowerUp::cosmectics,
             PowerUp::new
     );

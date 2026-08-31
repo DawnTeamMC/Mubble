@@ -1,0 +1,12 @@
+{
+  "abilities": {
+    "flutter": {
+      "duration": 10,
+      "ramp": 4,
+      "strength": 0.2
+    }
+  },
+  "name": {
+    "translate": "power_up.mubble-gametest.flutterer"
+  }
+}

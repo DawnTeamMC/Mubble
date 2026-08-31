@@ -27,7 +27,8 @@
     "loom:injected_interfaces": {
       "net/minecraft/world/entity/player/Player": [
         "fr/hugman/mubble/world/power_up/PowerUpHolder",
-        "fr/hugman/mubble/world/entity/WaterRunner"
+        "fr/hugman/mubble/world/entity/WaterRunner",
+        "fr/hugman/mubble/world/entity/Fluttering"
       ]
 	}
   },
