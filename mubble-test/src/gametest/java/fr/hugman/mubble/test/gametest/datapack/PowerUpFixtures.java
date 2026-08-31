@@ -48,6 +48,9 @@ public class PowerUpFixtures {
     /** Shoots two snowballs, so that running out of charges takes two triggers and not a dozen. */
     public static final ResourceKey<PowerUp> SHOOTER = powerUp("shooter");
 
+    /** Grants nothing but a flutter, on numbers of its own rather than on the defaults. */
+    public static final ResourceKey<PowerUp> FLUTTERER = powerUp("flutterer");
+
     /** The power-up registry of the level the test runs in. */
     public static HolderGetter<PowerUp> registry(GameTestHelper helper) {
         return helper.getLevel().registryAccess().lookupOrThrow(MubbleRegistries.POWER_UP);

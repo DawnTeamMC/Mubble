@@ -19,7 +19,8 @@ public class PowerUpItems {
             new Entry(SuperMarioItemIds.ICE_FLOWER, SuperMarioPowerUpIds.ICE),
             new Entry(SuperMarioItemIds.GOLD_FLOWER, SuperMarioPowerUpIds.GOLD),
             new Entry(SuperMarioItemIds.CLOUD_FLOWER, SuperMarioPowerUpIds.CLOUD),
-            new Entry(SuperMarioItemIds.BUBBLE_FLOWER, SuperMarioPowerUpIds.BUBBLE)
+            new Entry(SuperMarioItemIds.BUBBLE_FLOWER, SuperMarioPowerUpIds.BUBBLE),
+            new Entry(SuperMarioItemIds.SUPER_FLOWER_POT, SuperMarioPowerUpIds.FLOWER)
     );
 
     public static ResourceKey<Item> getItem(ResourceKey<PowerUp> powerUp) {

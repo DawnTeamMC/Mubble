@@ -4,10 +4,13 @@ import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.entity.projectile.Flower;
+import fr.hugman.mubble.super_mario.world.power_up.action.GrowFlowerPowerUpAction;
 import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowerUpAction;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.PowerUpCharges;
+import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
@@ -15,6 +18,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.Optional;
@@ -122,6 +128,27 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         0.4f,
                         PowerUpCharges.burst(2, 24)
                 )))
+                .build());
+        context.register(FLOWER, builder(FLOWER)
+                .description(FLOWER, "flutter")
+                .action(Holder.direct(new GrowFlowerPowerUpAction(
+                        SuperMarioEntityTypes.FLOWER,
+                        Flower.DEFAULT_SPEED,
+                        Flower.DEFAULT_LIFETIME,
+                        Flower.DEFAULT_MAX_CLIMB,
+                        false,
+                        // One flower at a time, the next one coming half a second after the last.
+                        PowerUpCharges.cooldownRecharge(1, 10)
+                )))
+                // Placeholders until the flutter gets assets of its own: leaves and a wing beat are what
+                // it should read as, and both come from vanilla for now.
+                .flutter(new FlutterAbility(
+                        FlutterAbility.DEFAULT_DURATION,
+                        FlutterAbility.DEFAULT_RAMP,
+                        FlutterAbility.DEFAULT_STRENGTH,
+                        Optional.of(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BAT_LOOP)),
+                        Optional.of(ParticleTypes.CHERRY_LEAVES)
+                ))
                 .build());
     }
 
