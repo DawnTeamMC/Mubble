@@ -24,8 +24,18 @@ public class SuperMarioDamageTypeTagsProvider extends FabricTagsProvider<DamageT
 
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
+        // what an enderman blinks away from, and what projectile protection is worth anything against
         this.builder(DamageTypeTags.IS_PROJECTILE)
-                .add(SuperMarioDamageTypeIds.KOOPA_SHELL);
+                .add(SuperMarioDamageTypeIds.KOOPA_SHELL)
+                .add(SuperMarioDamageTypeIds.FIREBALL)
+                .add(SuperMarioDamageTypeIds.ICEBALL)
+                .add(SuperMarioDamageTypeIds.GOLD_FIREBALL);
+
+        this.builder(SuperMarioDamageTypeTags.MELTS_FREEZE)
+                // optional only because nothing here generates the vanilla tag for the validator to find
+                .addOptionalTag(DamageTypeTags.IS_FIRE)
+                .add(SuperMarioDamageTypeIds.FIREBALL)
+                .add(SuperMarioDamageTypeIds.GOLD_FIREBALL);
 
         this.builder(SuperMarioDamageTypeTags.INSTANT_KILLS_GOOMBAS)
                 .add(SuperMarioDamageTypeIds.STOMP)

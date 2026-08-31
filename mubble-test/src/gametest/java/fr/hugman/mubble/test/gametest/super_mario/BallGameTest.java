@@ -1,11 +1,11 @@
 package fr.hugman.mubble.test.gametest.super_mario;
 
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.entity.freeze.Freezing;
 import fr.hugman.mubble.world.entity.projectile.Ball;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.pig.Pig;
@@ -68,16 +68,14 @@ public class BallGameTest {
     }
 
     @GameTest(maxTicks = 100)
-    public void iceballSlowsDownWhatItHits(GameTestHelper helper) {
+    public void iceballFreezesWhatItHits(GameTestHelper helper) {
         buildFloor(helper);
         Pig pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET_POS);
 
         shootAt(helper, SuperMarioEntityTypes.ICEBALL, TARGET_POS);
 
         helper.succeedWhen(() -> {
-            // Checked first: the vanilla assertion right below reports failures without any context.
-            helper.assertTrue(pig.hasEffect(MobEffects.SLOWNESS), "the iceball did not slow the pig down");
-            helper.assertLivingEntityHasMobEffect(pig, MobEffects.SLOWNESS, 1);
+            helper.assertTrue(Freezing.isFrozen(pig), "the iceball did not freeze the pig");
             helper.assertTrue(pig.getHealth() < pig.getMaxHealth(), "the iceball did not hurt the pig");
             helper.assertTrue(pig.getRemainingFireTicks() <= 0, "the iceball set the pig on fire");
         });
