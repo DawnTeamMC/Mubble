@@ -31,9 +31,6 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 		// Bosses and anything too big to make sense inside a bubble. Players are here on purpose: they fit the
 		// automatic size and health criteria, but getting stuck inside someone else's bubble is not the point.
 		builder(BUBBLE_CANNOT_TRAP).add(PLAYER, ENDER_DRAGON, WITHER, WARDEN, ELDER_GUARDIAN, RAVAGER, IRON_GOLEM);
-		// Shipped empty on purpose: the opposite exception, for data packs to make something trappable that the
-		// automatic size and health criteria turn down. Still written out, so the tag is there to be added to.
-		builder(BUBBLE_CAN_TRAP);
 
 		// Vanilla
 		builder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA);

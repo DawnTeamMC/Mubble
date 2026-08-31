@@ -80,7 +80,6 @@ public class Bubble extends Projectile implements Stompable {
 
     /** Ticks before an empty bubble pops on its own. */
     public static final int DEFAULT_LIFETIME = 100;
-    /** Ticks before a bubble pops after it caught something. */
     public static final int DEFAULT_FILLED_LIFETIME = 100;
     /** Grace period during which the bubble ignores its owner, so it does not pop right where it spawned. */
     public static final int OWNER_POP_DELAY = 20;
@@ -91,9 +90,7 @@ public class Bubble extends Projectile implements Stompable {
     public static final int OWNER_STOMP_DELAY = 10;
     /** Ticks the capture animation lasts before the caught entity turns into its loot. */
     public static final int ABSORB_DURATION = 12;
-    /** Ticks the squish animation lasts after rebounding against a block. */
     public static final int SQUISH_DURATION = 6;
-    /** Ticks the wobble lasts after the bubble closes around something. */
     public static final int CAPTURE_WOBBLE_DURATION = 10;
 
     public static final double ATTRACT_RADIUS = 2.0;
@@ -112,7 +109,6 @@ public class Bubble extends Projectile implements Stompable {
     private static final double REBOUND_RESTITUTION = 0.6;
     /** Below this, a blocked component is just a bubble resting against a block, not a rebound worth animating. */
     private static final double MIN_REBOUND_SPEED = 0.01;
-    /** How much of the way towards the target the heading turns each tick. */
     private static final double AIM_ASSIST_STRENGTH = 0.09;
     /** Cosine of the half-angle of the cone the target has to be in. Roughly 55 degrees. */
     private static final double AIM_ASSIST_MIN_DOT = 0.57;
@@ -123,9 +119,7 @@ public class Bubble extends Projectile implements Stompable {
      * chaining bounces does not end in a broken ankle.
      */
     private static final double BOUNCE_FALL_GRACE = 2.0;
-    /** How fast the drawn size catches up with the real one when the bubble swallows or releases something. */
     private static final float SIZE_LERP = 0.4F;
-    /** Peak of the squash-and-stretch that runs when the bubble closes around something. */
     private static final float CAPTURE_WOBBLE_AMOUNT = 0.3F;
 
     // Entity events, well above the vanilla range.
@@ -191,7 +185,7 @@ public class Bubble extends Projectile implements Stompable {
         builder.define(DATA_FILLED_LIFETIME, DEFAULT_FILLED_LIFETIME);
     }
 
-    // ---------------------------------------------------------------- state
+    //region State
 
     /**
      * @return the motion the bubble had at the moment it caught what it holds. Purely cosmetic: it tilts the
@@ -236,7 +230,9 @@ public class Bubble extends Projectile implements Stompable {
         this.entityData.set(DATA_FILLED_LIFETIME, filledLifetime);
     }
 
-    // ---------------------------------------------------------------- ticking
+    //endregion
+
+    //region Ticking
 
     @Override
     public void tick() {
@@ -398,7 +394,9 @@ public class Bubble extends Projectile implements Stompable {
         this.setDeltaMovement(heading.lerp(bestDirection, AIM_ASSIST_STRENGTH).normalize().scale(speed));
     }
 
-    // ---------------------------------------------------------------- interactions
+    //endregion
+
+    //region Interactions
 
     /**
      * Checks entities overlapping the bubble, in the priority order defined by the Bubble Flower design.
@@ -567,7 +565,7 @@ public class Bubble extends Projectile implements Stompable {
     }
 
     private static Entity createReward(Level level, ItemStack stack) {
-        if (stack.is(SuperMarioItemTags.SPAWNS_AS_COLLECTIBLE)) {
+        if (stack.is(SuperMarioItemTags.BUBBLE_CATCH_AS_COLLECTIBLE)) {
             CollectibleEntity collectible = new CollectibleEntity(level, 0.0, 0.0, 0.0, stack);
             SuperMarioCollectibles.configure(collectible, stack);
             // Held still by the bubble; it only starts falling once the bubble lets go of it.
@@ -654,7 +652,9 @@ public class Bubble extends Projectile implements Stompable {
         return !this.isRemoved();
     }
 
-    // ---------------------------------------------------------------- passengers
+    //endregion
+
+    //region Passengers
 
     @Override
     protected boolean canAddPassenger(Entity passenger) {
@@ -697,7 +697,6 @@ public class Bubble extends Projectile implements Stompable {
 
     @Override
     public EntityDimensions getDimensions(Pose pose) {
-        // Always a cube, whatever is inside.
         float size = sizeFor(this.getFirstPassenger());
         return EntityDimensions.fixed(size, size);
     }
@@ -720,7 +719,9 @@ public class Bubble extends Projectile implements Stompable {
         return Math.clamp(Math.max(trapped.getBbWidth(), trapped.getBbHeight()) + TRAPPED_PADDING, BASE_SIZE, MAX_SIZE);
     }
 
-    // ---------------------------------------------------------------- stomping
+    //endregion
+
+    //region Stomping
 
     @Override
     public boolean canBeStomped() {
@@ -768,7 +769,9 @@ public class Bubble extends Projectile implements Stompable {
         this.pop();
     }
 
-    // ---------------------------------------------------------------- client animations
+    //endregion
+
+    //region Client animations
 
     private static byte squishEvent(Direction.Axis axis) {
         return switch (axis) {
@@ -940,7 +943,9 @@ public class Bubble extends Projectile implements Stompable {
         return TEXTURES.get(this.getTextureIndex() - 1);
     }
 
-    // ---------------------------------------------------------------- serialization
+    //endregion
+
+    //region Serialization
 
     @Override
     protected void readAdditionalSaveData(ValueInput input) {
@@ -970,4 +975,6 @@ public class Bubble extends Projectile implements Stompable {
         Vector3fc motion = this.getCaptureMotion();
         output.store(CAPTURE_MOTION_KEY, Vec3.CODEC, new Vec3(motion.x(), motion.y(), motion.z()));
     }
+
+    //endregion
 }

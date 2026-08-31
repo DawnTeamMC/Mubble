@@ -111,7 +111,6 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.BUBBLE,
                         Optional.empty(), // the bubble plays its own "appear" sound as it spawns
                         0.4f,
-                        // Wonder gives a 1.2s window per burst, and two bubbles to spend in it.
                         PowerUpCharges.burst(2, 24)
                 )))
                 .build());

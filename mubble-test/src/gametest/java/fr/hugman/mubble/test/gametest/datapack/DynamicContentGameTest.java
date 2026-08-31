@@ -117,21 +117,22 @@ public class DynamicContentGameTest {
     }
 
     /**
-     * Tags that exist so that data packs can put something in them, and that ship empty on purpose. They still
-     * have to be written out, but the emptiness check does not apply to them.
+     * Tags that exist only so that data packs can put something in them. The mod ships nothing for them, not
+     * even the tag file, so neither the presence nor the emptiness check applies.
      */
     private static final java.util.Set<TagKey<?>> DATA_PACK_HOOKS = java.util.Set.of(
             SuperMarioEntityTypeTags.BUBBLE_CAN_TRAP
     );
 
     private static void assertTagIsNotEmpty(GameTestHelper helper, net.minecraft.core.HolderLookup<?> registry, TagKey<?> tag) {
+        if (DATA_PACK_HOOKS.contains(tag)) {
+            return;
+        }
+
         @SuppressWarnings({"unchecked", "rawtypes"})
         var entries = ((net.minecraft.core.HolderLookup) registry).get((TagKey) tag);
 
         helper.assertTrue(entries.isPresent(), tag.location() + " is declared in code but no data pack defines it");
-        if (DATA_PACK_HOOKS.contains(tag)) {
-            return;
-        }
         helper.assertFalse(((net.minecraft.core.HolderSet.Named<?>) entries.get()).size() == 0,
                 tag.location() + " is defined but empty, everything keyed on it does nothing");
     }
