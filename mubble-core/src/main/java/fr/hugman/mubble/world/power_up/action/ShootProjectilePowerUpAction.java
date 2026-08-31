@@ -7,6 +7,7 @@ import fr.hugman.mubble.keybind.MubbleKeyBindingsKeys;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import fr.hugman.mubble.world.power_up.PowerUpCharges;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
@@ -31,30 +32,26 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.phys.Vec3;
 
-//TODO: cooldown is not yet implemented
 public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
-        Holder<SoundEvent> sound,
+        Optional<Holder<SoundEvent>> sound,
         float speed,
-        Optional<Integer> maxProjectiles,
-        Optional<Integer> cooldown
+        PowerUpCharges charges
         //TODO: add shooting algorithm
         //TODO: add projectile NBT
 ) implements PowerUpAction, TooltipProvider {
     public static final MapCodec<ShootProjectilePowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
-            SoundEvent.CODEC.fieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
+            SoundEvent.CODEC.optionalFieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
             Codec.FLOAT.optionalFieldOf("speed", 1.5F).forGetter(ShootProjectilePowerUpAction::speed),
-            Codec.INT.optionalFieldOf("max_projectiles").forGetter(ShootProjectilePowerUpAction::maxProjectiles),
-            Codec.INT.optionalFieldOf("cooldown").forGetter(ShootProjectilePowerUpAction::cooldown)
+            PowerUpCharges.CODEC.optionalFieldOf("charges", PowerUpCharges.DEFAULT).forGetter(ShootProjectilePowerUpAction::charges)
     ).apply(instance, ShootProjectilePowerUpAction::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ShootProjectilePowerUpAction> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.registry(Registries.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
-            SoundEvent.STREAM_CODEC, (ShootProjectilePowerUpAction::sound),
+            ByteBufCodecs.optional(SoundEvent.STREAM_CODEC), (ShootProjectilePowerUpAction::sound),
             ByteBufCodecs.FLOAT, (ShootProjectilePowerUpAction::speed),
-            ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::maxProjectiles),
-            ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::cooldown),
+            PowerUpCharges.STREAM_CODEC, (ShootProjectilePowerUpAction::charges),
             ShootProjectilePowerUpAction::new
     );
 
@@ -70,7 +67,7 @@ public record ShootProjectilePowerUpAction(
 
     @Override
     public PowerUpProperties setUpProperties() {
-        return new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, maxProjectiles.orElse(Integer.MAX_VALUE));
+        return this.charges.createProperties();
     }
 
     @Override
@@ -103,7 +100,7 @@ public record ShootProjectilePowerUpAction(
             return InteractionResult.SUCCESS;
         }
         else {
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 0.5F, 1.0F);
+            this.sound.ifPresent(s -> level.playSound(null, player.getX(), player.getY(), player.getZ(), s, SoundSource.NEUTRAL, 0.5F, 1.0F));
             var entity = this.projectile.create(level, EntitySpawnReason.TRIGGERED);
             if (null == entity) {
                 return InteractionResult.FAIL;
@@ -111,11 +108,13 @@ public record ShootProjectilePowerUpAction(
             if (entity instanceof Projectile projectileEntity) {
                 projectileEntity.setOwner(player);
             }
-            entity.setPos(player.getX(), player.getEyeY() - 0.1F, player.getZ());
+            // setPos places the bottom of the bounding box, so the projectile has to be lowered by half its
+            // height to actually come out centered on the eye line.
+            entity.setPos(player.getX(), player.getEyeY() - 0.1F - entity.getBbHeight() / 2.0F, player.getZ());
             setVelocity(entity, player, player.getXRot(), player.getYRot(), 0.0F, this.speed, 1.0F);
             level.addFreshEntity(entity);
-            properties.addEntity(entity.getUUID());
-            properties.setCooldown(cooldown.orElse(0));
+            properties.useCharge();
+            properties.trackEntity(entity.getUUID());
         }
         return InteractionResult.SUCCESS;
     }

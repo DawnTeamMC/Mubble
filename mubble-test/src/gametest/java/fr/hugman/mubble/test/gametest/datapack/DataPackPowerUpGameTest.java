@@ -64,7 +64,7 @@ public class DataPackPowerUpGameTest {
 
         var shoot = (ShootProjectilePowerUpAction) action.value();
         helper.assertValueEqual(shoot.projectile(), EntityTypes.SNOWBALL, "the projectile of the referenced action");
-        helper.assertValueEqual(shoot.maxProjectiles(), Optional.of(5), "the projectile count of the referenced action");
+        helper.assertValueEqual(shoot.charges().max(), 5, "the projectile count of the referenced action");
 
         helper.succeed();
     }

@@ -2,6 +2,7 @@ package fr.hugman.mubble.super_mario.client.renderer;
 
 import fr.hugman.mubble.super_mario.client.renderer.blockentity.BumpableBlockRenderer;
 import fr.hugman.mubble.client.renderer.entity.BallRenderer;
+import fr.hugman.mubble.super_mario.client.renderer.entity.BubbleRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.CloudPlatformRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.GoombaRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.KoopaShellRenderer;
@@ -20,6 +21,7 @@ public class SuperMarioRenderers {
         EntityRenderers.register(SuperMarioEntityTypes.ICEBALL, BallRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.GOLD_FIREBALL, BallRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.CLOUD_PLATFORM, CloudPlatformRenderer::new);
+        EntityRenderers.register(SuperMarioEntityTypes.BUBBLE, BubbleRenderer::new);
     }
 
     public static void registerBlockEntities() {

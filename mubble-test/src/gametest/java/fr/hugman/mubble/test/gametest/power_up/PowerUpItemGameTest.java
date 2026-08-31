@@ -65,7 +65,7 @@ public class PowerUpItemGameTest {
         player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(SuperMarioItems.FIRE_FLOWER, 2));
 
         SuperMarioItems.FIRE_FLOWER.use(helper.getLevel(), player, InteractionHand.MAIN_HAND);
-        player.getPowerUpProperties().addEntity(java.util.UUID.randomUUID());
+        player.getPowerUpProperties().useCharge();
 
         var refill = SuperMarioItems.FIRE_FLOWER.use(helper.getLevel(), player, InteractionHand.MAIN_HAND);
 

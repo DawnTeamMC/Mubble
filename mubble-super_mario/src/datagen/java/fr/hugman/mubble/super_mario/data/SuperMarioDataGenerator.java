@@ -27,6 +27,7 @@ public class SuperMarioDataGenerator implements DataGeneratorEntrypoint {
 		// - Loot tables
 		pack.addProvider(SuperMarioBlockLootSubProvider::new);
 		pack.addProvider(SuperMarioLootSubProvider::new);
+		pack.addProvider(SuperMarioGameplayLootSubProvider::new);
 
 		// - Variants
 		pack.addProvider(SuperMarioGoombaVariantProvider::new);
