@@ -18,9 +18,6 @@ import net.minecraft.world.entity.LivingEntity;
 /**
  * {@code /freeze}, which puts an entity in a block of ice by hand and reads back whether one is in
  * there.
- * <p>
- * The query is the half data packs care about: it answers with the usual {@code 1} or {@code 0}, so
- * that {@code execute if} can be hung off it.
  *
  * @see Freezing
  */

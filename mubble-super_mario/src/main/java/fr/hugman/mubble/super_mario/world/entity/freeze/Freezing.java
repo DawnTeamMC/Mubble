@@ -27,80 +27,39 @@ import org.jspecify.annotations.Nullable;
  * Everything about entities trapped in a block of ice: freezing them, keeping them there, shoving
  * them around and letting them out.
  * <p>
- * A frozen entity is one carrying a {@link FreezeState} attachment. Nothing else marks it, which is
- * what makes any living entity freezable without each of them having to know about it: the mixins on
- * {@code Entity} and {@code LivingEntity} read that attachment back and hand over to the methods
- * here.
+ * A frozen entity is one carrying a {@link FreezeState} attachment and nothing else, which is what
+ * makes any living entity freezable without each of them having to know about it.
  *
  * @see FreezeState
  */
 public final class Freezing {
     /** How long a regular entity stays trapped, in ticks. */
     public static final int DURATION = 260;
-    /**
-     * How long a {@link FreezeResistance#TOUGH} entity stays trapped, in ticks, before cracking the
-     * ice open by itself.
-     */
+    /** How long a {@link FreezeResistance#TOUGH} entity stays trapped, in ticks. */
     public static final int TOUGH_DURATION = 80;
     /** How much of the remaining freeze a single struggle from a frozen player melts away, in ticks. */
     public static final int STRUGGLE_RELIEF = 15;
-    /**
-     * How much of the remaining freeze a single point of damage melts away, in ticks.
-     * <p>
-     * The ice takes every hit meant for whoever is inside it, so this is what turns it into a shield:
-     * beating on it is how one gets a frozen entity out early, and thirteen points of damage is what a
-     * whole {@link #DURATION} comes to.
-     */
+    /** How much of the remaining freeze a single point of damage melts away, in ticks. */
     public static final int MELT_PER_DAMAGE = 20;
-    /**
-     * How long the ice is left alone after a hit, in ticks.
-     * <p>
-     * It is what vanilla gives a hurt entity, and for the same reason: without it anything hurting
-     * once a tick would grind a whole freeze away in under a second.
-     */
+    /** How long the ice is left alone after a hit, in ticks, so that nothing grinds it away at once. */
     public static final int CRACK_COOLDOWN = 10;
-    /**
-     * How long before the end the block of ice starts rattling, in ticks.
-     * <p>
-     * It is the only warning anyone gets that whatever is in there is about to be let out, which is
-     * why it lasts long enough to be worth reacting to.
-     */
+    /** How long before the end the block of ice starts rattling, in ticks. */
     public static final int RATTLE_DURATION = 40;
 
-    /**
-     * Hitbox volume, in cubic blocks, from which an entity counts as big.
-     * <p>
-     * It sits above a horse and well below an iron golem, which puts the usual mobs a player throws
-     * ice balls at — and the players themselves — comfortably on the freezable side.
-     */
+    /** Hitbox volume, in cubic blocks, from which an entity counts as big: above a horse, below an iron golem. */
     public static final double BIG_HITBOX_VOLUME = 2.0D;
 
     /** Horizontal speed a shoved block of ice sets off at, in blocks per tick. */
     public static final double SLIDE_SPEED = 0.4D;
-    /**
-     * Horizontal speed, in blocks per tick, from which running into a wall shatters the ice outright.
-     * <p>
-     * It sits below {@link #SLIDE_SPEED} but above what a slide has left after a few blocks, so a
-     * shove straight into a wall breaks the ice open while one that has run its course does not.
-     */
+    /** Horizontal speed, in blocks per tick, from which running into a wall shatters the ice outright. */
     public static final double SHATTER_SPEED = 0.25D;
-    /**
-     * How much horizontal speed a sliding block of ice keeps every tick while on the ground.
-     * <p>
-     * Enough friction to bring a full-speed shove to a halt within seven blocks or so: ice that never
-     * slowed down would end up wherever the terrain happened to stop it.
-     */
+    /** How much horizontal speed a sliding block of ice keeps every tick while on the ground. */
     private static final double GROUND_DRAG = 0.94D;
     /** How much horizontal speed a falling block of ice keeps every tick. */
     private static final double AIR_DRAG = 0.98D;
     /** Horizontal speeds below this are rounded down to a standstill, so that ice does not creep. */
     private static final double SLIDE_EPSILON = 1.0e-3D;
-    /**
-     * How far around the block of ice a player is still counted as pushing it.
-     * <p>
-     * Frozen entities are solid, so a player walking into one never overlaps it: without this margin
-     * there would be nothing to find.
-     */
+    /** How far around the block of ice a player counts as pushing it: being solid, it is never overlapped. */
     private static final double PUSH_REACH = 0.2D;
     /** How far below the top of the ice a player has to stand to shove it rather than ride it. */
     private static final double PUSH_HEADROOM = 0.1D;
@@ -132,13 +91,7 @@ public final class Freezing {
         return state == null ? 0 : state.remaining(entity.level().getGameTime());
     }
 
-    /**
-     * How well the entity holds up against being frozen.
-     * <p>
-     * Bosses are named one by one, since nothing about a hitbox tells them apart from any other
-     * oversized mob. Everything else goes by its bulk, so that mobs no data pack ever heard of still
-     * behave the way their size suggests.
-     */
+    /** How well the entity holds up against being frozen. */
     public static FreezeResistance resistanceOf(Entity entity) {
         // a creative player is busy building, and a spectator is not even there to be hit
         if (entity instanceof Player player && (player.isCreative() || player.isSpectator())) {
@@ -150,14 +103,9 @@ public final class Freezing {
         return isBig(entity) ? FreezeResistance.TOUGH : FreezeResistance.NONE;
     }
 
-    /**
-     * Whether the entity is standing on top of a block of ice someone else is trapped in.
-     * <p>
-     * The sweep behind it is not free, so it is kept behind the one thing that gives a rider away for
-     * nothing: an entity on the ground with no block holding it up is standing on something alive, and
-     * that is rare enough — boats, shulkers, and this — to be worth looking into.
-     */
+    /** Whether the entity is standing on top of a block of ice someone else is trapped in. */
     public static boolean isStandingOnFrozen(Entity entity) {
+        // the sweep is not free, so it is kept behind the cheap tell: on the ground with no block holding it up
         if (!entity.onGround() || entity.mainSupportingBlockPos.isPresent()) {
             return false;
         }
@@ -177,13 +125,9 @@ public final class Freezing {
     }
 
     /**
-     * Traps an entity in a block of ice, unless it is one of those nothing can hold.
-     * <p>
-     * Being stuck is the whole of it: the freeze itself costs the entity no health, on the way in or
-     * on the way out. Whatever put it in there did its own damage already.
+     * Traps an entity in a block of ice, unless it is one of those nothing can hold. The freeze
+     * itself costs no health, on the way in or on the way out.
      *
-     * @param level  the level both the entity and whatever froze it live in
-     * @param entity the entity to freeze
      * @return how the entity took it, which tells whether it ended up frozen at all
      */
     public static FreezeResistance freeze(ServerLevel level, LivingEntity entity) {
@@ -195,12 +139,7 @@ public final class Freezing {
         return resistance;
     }
 
-    /**
-     * Traps an entity in a block of ice for a set number of ticks, whatever it is.
-     * <p>
-     * Whatever it was doing stops right there: it is put out, brought to a standstill, and left to
-     * wait the freeze out.
-     */
+    /** Traps an entity in a block of ice for a set number of ticks, whatever it is. */
     public static void freezeFor(ServerLevel level, LivingEntity entity, int ticks) {
         entity.setAttached(SuperMarioAttachmentTypes.FREEZE, FreezeState.lasting(level.getGameTime(), ticks));
         entity.setDeltaMovement(Vec3.ZERO);
@@ -209,11 +148,8 @@ public final class Freezing {
     }
 
     /**
-     * Ticks the freeze of a single entity, thawing it once its time is up.
-     * <p>
-     * Only the server counts: the clients hold the very same {@link FreezeState} and work out where
-     * it is at on their own, and letting them thaw an entity themselves would only make them guess
-     * ahead of the removal the server is about to send them anyway.
+     * Ticks the freeze of a single entity, thawing it once its time is up. Server side only: the
+     * clients hold the same {@link FreezeState} and work out where it is at on their own.
      */
     public static void tick(Entity entity) {
         var state = getState(entity);
@@ -228,11 +164,7 @@ public final class Freezing {
         shoveAroundBy(level, entity);
     }
 
-    /**
-     * Lets the entity out of the ice, at no cost to it.
-     *
-     * @return whether the entity was frozen in the first place
-     */
+    /** @return whether the entity was frozen in the first place */
     public static boolean thaw(ServerLevel level, Entity entity) {
         if (entity.removeAttached(SuperMarioAttachmentTypes.FREEZE) == null) {
             return false;
@@ -247,33 +179,26 @@ public final class Freezing {
     }
 
     /**
-     * Whether the block of ice takes this hit in place of whoever is inside it.
-     * <p>
-     * It takes very nearly everything: a frozen entity is behind a shield rather than merely stuck,
-     * and what gets thrown at it goes into breaking the ice open instead. The two ways past are fire,
-     * which melts the ice rather than being stopped by it, and the handful of damage types nothing is
-     * ever safe from — the void and {@code /kill} — which would otherwise leave an entity in the ice
-     * that no longer has any business being alive.
+     * Whether the block of ice takes this hit in place of whoever is inside it. It takes everything
+     * but fire, which melts it, and what nothing is ever safe from — the void and {@code /kill}.
      */
     public static boolean shields(Entity entity, DamageSource source) {
         return isFrozen(entity)
-                && !source.is(SuperMarioDamageTypeTags.MELTS_FREEZE)
+                && !source.is(SuperMarioDamageTypeTags.MELTS_FROZEN_ENTITIES)
                 && !source.is(DamageTypeTags.BYPASSES_INVULNERABILITY);
     }
 
     /**
-     * Puts a hit into the block of ice rather than into whoever is inside it.
-     * <p>
-     * Nothing is thawed on the spot even when the hit is the last one the ice had in it: the entity
-     * has to still count as frozen for the rest of this hit to be turned away, so the freeze is only
-     * run down to nothing here and {@link #tick} lets it out on the next tick.
+     * Puts a hit into the block of ice rather than into whoever is inside it. A hit that empties the
+     * ice does not thaw it here — the entity has to still count as frozen for the rest of this hit
+     * to be turned away, so {@link #tick} lets it out on the next tick.
      */
     public static void absorb(ServerLevel level, Entity entity, DamageSource source, float amount) {
         var state = getState(entity);
         if (state == null) {
             return;
         }
-        if (source.is(SuperMarioDamageTypeTags.MELTS_FREEZE)) {
+        if (source.is(SuperMarioDamageTypeTags.MELTS_FROZEN_ENTITIES)) {
             // thawed right away, so that the fire that broke the ice still reaches what was inside it
             thaw(level, entity);
             return;
@@ -293,12 +218,8 @@ public final class Freezing {
     }
 
     /**
-     * Sends the block of ice skidding away from whatever just hit it.
-     * <p>
-     * Vanilla hands out its knockback only once a hit has landed, and a hit the ice turns away never
-     * does, so a shielded entity would take a punch without budging an inch. The shove is dealt out
-     * here instead, straight along the line the blow came in on — which is what lets a well-aimed
-     * punch send it into a wall.
+     * Sends the block of ice skidding away from whatever just hit it. Vanilla knocks back only once a
+     * hit has landed, and a hit the ice turns away never does, so the shove is dealt out here.
      */
     private static void shoveAwayFrom(Entity entity, DamageSource source) {
         var from = source.getSourcePosition();
@@ -324,11 +245,8 @@ public final class Freezing {
     }
 
     /**
-     * Moves a frozen entity for the tick, in place of whatever it would have done on its own.
-     * <p>
-     * It only falls and slides: an entity in a block of ice has no say in where it goes. A slide runs
-     * itself out over a few blocks, and one that meets a wall before it has done so shatters against
-     * it.
+     * Moves a frozen entity for the tick: it only falls and slides. A slide that meets a wall before
+     * it has run itself out shatters against it.
      */
     public static void travelFrozen(LivingEntity entity) {
         var movement = entity.getDeltaMovement();
@@ -350,12 +268,7 @@ public final class Freezing {
         }
     }
 
-    /**
-     * Sends the block of ice sliding whenever a player walks into its side.
-     * <p>
-     * It goes off along the heading it was walked into at, so that a player coming at it from a corner
-     * sends it off towards that corner rather than along whichever axis happened to be nearest.
-     */
+    /** Sends the block of ice sliding whenever a player walks into its side. */
     private static void shoveAroundBy(ServerLevel level, Entity entity) {
         var hitBox = entity.getBoundingBox();
         var reach = hitBox.inflate(PUSH_REACH, 0.0D, PUSH_REACH);
@@ -383,10 +296,8 @@ public final class Freezing {
     }
 
     /**
-     * Sends the block of ice sliding along a heading, keeping whatever vertical motion it had.
-     * <p>
-     * The heading is taken as it comes: a shove that lands at an angle sends the ice off at that
-     * angle, rather than along whichever of the four ways round happened to be closest.
+     * Sends the block of ice sliding along a heading, keeping whatever vertical motion it had. The
+     * heading is taken as it comes, so a shove that lands at an angle sends the ice off at that angle.
      */
     public static void shove(Entity entity, Vec3 heading) {
         var flat = flatten(heading);

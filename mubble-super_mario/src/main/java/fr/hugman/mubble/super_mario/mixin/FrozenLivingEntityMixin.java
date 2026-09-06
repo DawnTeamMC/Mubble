@@ -29,17 +29,6 @@ public class FrozenLivingEntityMixin implements FreezeSnapshot {
     @Unique
     private float super_mario$frozenWalkSpeed;
 
-    /**
-     * Keeps the walk animation of the tick just gone within reach, and stops keeping it the moment the
-     * ice takes hold — which leaves behind exactly what the entity was doing when it froze.
-     * <p>
-     * Trailing it a tick behind rather than reading it once the freeze lands is what makes the pose
-     * right from the very first frame: the freeze reaches a client between two ticks, and by the head
-     * of the next one the walk animation has already started running itself down. Both sides keep
-     * their own reading, since the position is a running total that server and client drift apart on
-     * over an entity's life, and handing one over to the other would snap the limbs somewhere else at
-     * the moment the entity froze.
-     */
     @Inject(method = "tick", at = @At("HEAD"))
     private void super_mario$rememberThePose(CallbackInfo ci) {
         LivingEntity this_ = (LivingEntity) (Object) this;
@@ -60,11 +49,6 @@ public class FrozenLivingEntityMixin implements FreezeSnapshot {
         return this.super_mario$frozenWalkSpeed;
     }
 
-    /**
-     * Cuts off the movement input and the AI of a frozen entity, the same way vanilla does for one
-     * that is dying or asleep. It is what keeps frozen players from walking out of their own block of
-     * ice: the check runs on the client that moves them just as much as on the server.
-     */
     @Inject(method = "isImmobile", at = @At("HEAD"), cancellable = true)
     private void super_mario$immobileWhileFrozen(CallbackInfoReturnable<Boolean> cir) {
         if (Freezing.isFrozen((LivingEntity) (Object) this)) {
@@ -99,20 +83,11 @@ public class FrozenLivingEntityMixin implements FreezeSnapshot {
         return onGround && !Freezing.isFrozen((LivingEntity) (Object) this);
     }
 
-    /**
-     * Hands the hit to the block of ice, which stands in for whoever is inside it.
-     * <p>
-     * It runs ahead of the invulnerability the shield rests on, so that fire has already melted the
-     * ice by the time that check is reached and reaches what was inside it after all.
-     */
     @Inject(method = "hurtServer", at = @At("HEAD"))
     private void super_mario$shieldWhileFrozen(ServerLevel level, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         Freezing.absorb(level, (LivingEntity) (Object) this, source, amount);
     }
 
-    /**
-     * Turns away whatever the ice took on the entity's behalf.
-     */
     @Inject(method = "isInvulnerableTo", at = @At("HEAD"), cancellable = true)
     private void super_mario$shieldedWhileFrozen(ServerLevel level, DamageSource source, CallbackInfoReturnable<Boolean> cir) {
         if (Freezing.shields((LivingEntity) (Object) this, source)) {

@@ -1,14 +1,9 @@
 package fr.hugman.mubble.super_mario.world.entity.freeze;
 
 /**
- * The pose an entity was caught in, kept on the entity itself for as long as the ice holds.
- * <p>
- * Every living entity is one of these, through the mixin on {@code LivingEntity}. Winding the render
- * state age back holds everything driven by it still, but the limbs are driven by the walk animation
- * instead, which keeps running down to a standstill however immobile the entity is — an entity frozen
- * mid-stride would ease into a resting pose over the next half second rather than hold the stride.
- * Reading the walk animation back from here instead is what makes the freeze a snapshot: it is taken
- * the moment the ice takes hold and never moves again.
+ * The pose an entity was caught in, implemented by every living entity through the mixin on
+ * {@code LivingEntity}. The walk animation keeps running down to a standstill however immobile the
+ * entity is, so the limbs are read back from here rather than from it.
  */
 public interface FreezeSnapshot {
     /** @return how far into its walk cycle the entity was when it froze */

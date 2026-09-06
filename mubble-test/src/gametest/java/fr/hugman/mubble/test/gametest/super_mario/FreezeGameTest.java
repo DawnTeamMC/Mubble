@@ -254,7 +254,7 @@ public class FreezeGameTest {
         Pig pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET);
         freeze(helper, pig);
 
-        // the mod's own fireballs are fire in everything but the vanilla tag, hence `super_mario:melts_freeze`
+        // the mod's own fireballs are fire in everything but the vanilla tag, hence `super_mario:melts_frozen_entities`
         pig.hurtServer(helper.getLevel(), helper.getLevel().damageSources().source(SuperMarioDamageTypeIds.FIREBALL), 1.0F);
 
         helper.assertFalse(Freezing.isFrozen(pig), "a fireball left the block of ice standing");
