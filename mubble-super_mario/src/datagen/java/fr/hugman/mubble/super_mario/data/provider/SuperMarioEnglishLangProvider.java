@@ -30,11 +30,9 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
 
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.frozen", "Froze %s for %s ticks");
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.thawed", "Thawed %s");
-        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.already_frozen", "Nothing changed. That entity is already frozen");
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.not_frozen", "Nothing changed. That entity is not frozen");
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.unfreezable", "Nothing changed. That entity cannot be frozen");
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.frozen_endlessly", "Froze %s until further notice");
-        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.thaw_duration", "A duration means nothing when thawing");
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.frozen", "%s is frozen for %s more ticks");
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.frozen_endlessly", "%s is frozen until further notice");
         builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.thawed", "%s is not frozen");

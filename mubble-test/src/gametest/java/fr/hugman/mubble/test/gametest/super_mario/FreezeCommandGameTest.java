@@ -24,22 +24,22 @@ public class FreezeCommandGameTest {
     private static final BlockPos TARGET = new BlockPos(4, Arena.FLOOR_Y + 1, 3);
 
     @GameTest
-    public void setTrueFreezesTheTarget(GameTestHelper helper) {
+    public void aTimeFreezesTheTarget(GameTestHelper helper) {
         var pig = target(helper);
 
-        run(helper, operator(helper), "freeze set " + pig.getUUID() + " true");
+        run(helper, operator(helper), "freeze set " + pig.getUUID() + " 100");
 
         helper.assertTrue(Freezing.isFrozen(pig), "the command left the pig unfrozen");
         helper.succeed();
     }
 
     @GameTest
-    public void setFalseThawsTheTarget(GameTestHelper helper) {
+    public void aTimeOfZeroThawsTheTarget(GameTestHelper helper) {
         var pig = target(helper);
         var operator = operator(helper);
-        run(helper, operator, "freeze set " + pig.getUUID() + " true");
+        run(helper, operator, "freeze set " + pig.getUUID() + " 100");
 
-        run(helper, operator, "freeze set " + pig.getUUID() + " false");
+        run(helper, operator, "freeze set " + pig.getUUID() + " 0");
 
         helper.assertFalse(Freezing.isFrozen(pig), "the command left the pig in the ice");
         helper.succeed();
@@ -51,7 +51,7 @@ public class FreezeCommandGameTest {
         var operator = operator(helper);
 
         helper.assertFalse(succeeds(helper, operator, "freeze set " + pig.getUUID()),
-                "the value is mandatory: leaving it off must not quietly flip the target");
+                "the time is mandatory: leaving it off must not quietly flip the target");
         helper.assertFalse(Freezing.isFrozen(pig), "and the pig should have been left alone");
 
         helper.succeed();
@@ -61,7 +61,7 @@ public class FreezeCommandGameTest {
     public void aDurationIsHonoured(GameTestHelper helper) {
         var pig = target(helper);
 
-        run(helper, operator(helper), "freeze set " + pig.getUUID() + " true 7");
+        run(helper, operator(helper), "freeze set " + pig.getUUID() + " 7");
 
         helper.assertTrue(Freezing.getRemainingTicks(pig) == 7,
                 "the freeze should last exactly the number of ticks asked for");
@@ -72,7 +72,7 @@ public class FreezeCommandGameTest {
     public void anInfiniteFreezeNeverRunsOut(GameTestHelper helper) {
         var pig = target(helper);
 
-        run(helper, operator(helper), "freeze set " + pig.getUUID() + " true infinite");
+        run(helper, operator(helper), "freeze set " + pig.getUUID() + " infinite");
 
         var state = Freezing.getState(pig);
         helper.assertTrue(state != null && state.isEndless(), "the freeze should have been endless");
@@ -83,32 +83,25 @@ public class FreezeCommandGameTest {
     }
 
     @GameTest
-    public void aDurationOnThawingFails(GameTestHelper helper) {
+    public void aNewTimeReplacesTheOldOne(GameTestHelper helper) {
         var pig = target(helper);
         var operator = operator(helper);
 
-        run(helper, operator, "freeze set " + pig.getUUID() + " true");
+        run(helper, operator, "freeze set " + pig.getUUID() + " 200");
+        run(helper, operator, "freeze set " + pig.getUUID() + " 20");
 
-        helper.assertFalse(succeeds(helper, operator, "freeze set " + pig.getUUID() + " false 40"),
-                "a duration means nothing when thawing and should be turned down");
-        helper.assertTrue(Freezing.isFrozen(pig), "and the freeze should be left untouched");
-
+        helper.assertTrue(Freezing.isFrozen(pig), "re-setting the time let the pig out");
+        helper.assertTrue(Freezing.getRemainingTicks(pig) == 20,
+                "the second time should have replaced the first, not been turned down");
         helper.succeed();
     }
 
     @GameTest
-    public void settingWhatIsAlreadySetFails(GameTestHelper helper) {
+    public void thawingWhatIsNotFrozenFails(GameTestHelper helper) {
         var pig = target(helper);
-        var operator = operator(helper);
 
-        helper.assertFalse(succeeds(helper, operator, "freeze set " + pig.getUUID() + " false"),
+        helper.assertFalse(succeeds(helper, operator(helper), "freeze set " + pig.getUUID() + " 0"),
                 "thawing a pig that is not frozen should fail");
-
-        run(helper, operator, "freeze set " + pig.getUUID() + " true");
-        helper.assertFalse(succeeds(helper, operator, "freeze set " + pig.getUUID() + " true"),
-                "freezing a pig that is already frozen should fail");
-
-        helper.assertTrue(Freezing.isFrozen(pig), "and the freeze should be left untouched");
         helper.succeed();
     }
 
@@ -118,7 +111,7 @@ public class FreezeCommandGameTest {
         var player = TestPlayers.inLevel(helper);
 
         // an ice ball leaves a creative player alone, but the command is an operator's tool and does not
-        helper.assertTrue(succeeds(helper, player, "freeze set @s true"),
+        helper.assertTrue(succeeds(helper, player, "freeze set @s 100"),
                 "the command turned a creative player down");
         helper.assertTrue(Freezing.isFrozen(player), "and left them out of the ice");
 
@@ -137,7 +130,7 @@ public class FreezeCommandGameTest {
         helper.assertTrue(perform(helper, operator, "freeze query " + pig.getUUID()).result == 0,
                 "a query on an unfrozen entity should answer 0, so that `execute if` reads it as a no");
 
-        run(helper, operator, "freeze set " + pig.getUUID() + " true");
+        run(helper, operator, "freeze set " + pig.getUUID() + " 100");
         helper.assertTrue(perform(helper, operator, "freeze query " + pig.getUUID()).result == 1,
                 "a query on a frozen entity should answer 1");
 
