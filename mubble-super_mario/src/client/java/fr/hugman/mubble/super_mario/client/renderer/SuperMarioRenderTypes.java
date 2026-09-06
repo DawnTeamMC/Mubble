@@ -22,7 +22,25 @@ public class SuperMarioRenderTypes {
         return RenderType.create("super_mario_golden_entity", state);
     });
 
+    // Based on RenderTypes#ENTITY_TRANSLUCENT
+    public static final BiFunction<Identifier, Boolean, RenderType> FROZEN_ENTITY = Util.memoize(
+            (texture, affectsOutline) -> {
+        RenderSetup state = RenderSetup.builder(SuperMarioRenderPipelines.FROZEN_ENTITY_PIPELINE)
+                .withTexture("Sampler0", texture)
+                .useLightmap()
+                .useOverlay()
+                .affectsCrumbling()
+                .sortOnUpload()
+                .setOutline(affectsOutline ? RenderSetup.OutlineProperty.AFFECTS_OUTLINE : RenderSetup.OutlineProperty.NONE)
+                .createRenderSetup();
+        return RenderType.create("super_mario_frozen_entity", state);
+    });
+
     public static RenderType getGoldenEntity(Identifier texture) {
         return GOLDEN_ENTITY.apply(texture, true);
+    }
+
+    public static RenderType getFrozenEntity(Identifier texture) {
+        return FROZEN_ENTITY.apply(texture, true);
     }
 }
