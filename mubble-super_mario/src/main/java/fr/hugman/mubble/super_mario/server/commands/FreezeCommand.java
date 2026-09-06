@@ -16,12 +16,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
 /**
- * {@code /freeze}, which puts an entity in a block of ice by hand and reads back whether one is in
- * there. Being an operator's tool, it freezes what an ice ball would leave alone — a creative
- * player, say — and only turns down what no ice can hold at all.
- * <p>
- * The time is the whole of it: a freeze of {@code 0} ticks is a thaw, and any other length replaces
- * whatever the target was already serving.
+ * {@code /freeze}, which puts an entity in a block of ice and also queries frozen states.
  *
  * @see Freezing
  */
@@ -36,8 +31,6 @@ public class FreezeCommand {
 
     /** Stands in for a tick count on a freeze that never runs out on its own. */
     private static final int INFINITE_TICKS = -1;
-    /** The tick count that thaws instead of freezing. */
-    private static final int THAW_TICKS = 0;
 
     private static final SimpleCommandExceptionType UNFREEZABLE_EXCEPTION = new SimpleCommandExceptionType(
             Component.translatable("commands." + SuperMario.MOD_ID + ".freeze.set.unfreezable")
@@ -51,7 +44,7 @@ public class FreezeCommand {
                 .requires(Commands.hasPermission(Commands.LEVEL_GAMEMASTERS))
                 .then(Commands.literal(SET_ARG)
                         .then(Commands.argument(TARGET_ARG, EntityArgument.entity())
-                                .then(Commands.argument(TICKS_ARG, IntegerArgumentType.integer(THAW_TICKS))
+                                .then(Commands.argument(TICKS_ARG, IntegerArgumentType.integer(0))
                                         .executes(cc -> setFrozen(cc, IntegerArgumentType.getInteger(cc, TICKS_ARG))))
                                 .then(Commands.literal(INFINITE_ARG)
                                         .executes(cc -> setFrozen(cc, INFINITE_TICKS)))))
@@ -60,17 +53,13 @@ public class FreezeCommand {
                                 .executes(cc -> queryFrozen(cc.getSource(), EntityArgument.getEntity(cc, TARGET_ARG))))));
     }
 
-    /**
-     * @param ticks how long to freeze the target for, {@link #THAW_TICKS} to let it out, or
-     *              {@link #INFINITE_TICKS} for a freeze that never runs out on its own
-     */
     private static int setFrozen(CommandContext<CommandSourceStack> cc, int ticks) throws CommandSyntaxException {
         CommandSourceStack source = cc.getSource();
         Entity target = EntityArgument.getEntity(cc, TARGET_ARG);
         // the target's own level, rather than the source's: the two part ways across dimensions
         ServerLevel level = (ServerLevel) target.level();
 
-        if (ticks == THAW_TICKS) {
+        if (ticks == 0) {
             if (!Freezing.thaw(level, target)) {
                 throw NOT_FROZEN_EXCEPTION.create();
             }
