@@ -70,6 +70,12 @@ public class Iceball extends Ball {
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         Entity entity = result.getEntity();
+        // an entity already in a block of ice is a wall as far as the next ice ball is concerned:
+        // it shatters against it, leaving whoever is inside no better and no worse off
+        if (Freezing.isFrozen(entity)) {
+            this.finalHit();
+            return;
+        }
         Entity owner = this.getOwner();
         float damage = entity instanceof SnowGolem ? 1.0F : 3.0F;
         DamageSource source = this.damageSources().source(SuperMarioDamageTypeIds.ICEBALL, this, owner);

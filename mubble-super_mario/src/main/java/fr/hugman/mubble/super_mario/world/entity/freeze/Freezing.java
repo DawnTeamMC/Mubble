@@ -91,13 +91,25 @@ public final class Freezing {
         return state == null ? 0 : state.remaining(entity.level().getGameTime());
     }
 
-    /** How well the entity holds up against being frozen. */
+    /**
+     * Whether no block of ice can hold this entity, whatever put it there — a command included.
+     * <p>
+     * Narrower than {@link #resistanceOf}: a creative player shrugs an ice ball off but can still be
+     * frozen by hand, so creative is not in here.
+     */
+    public static boolean isUnfreezable(Entity entity) {
+        return !(entity instanceof LivingEntity)
+                || entity.isSpectator()
+                || entity.is(SuperMarioEntityTypeTags.FREEZE_IMMUNE);
+    }
+
+    /** How well the entity holds up against being frozen by an ice ball. */
     public static FreezeResistance resistanceOf(Entity entity) {
-        // a creative player is busy building, and a spectator is not even there to be hit
-        if (entity instanceof Player player && (player.isCreative() || player.isSpectator())) {
+        if (isUnfreezable(entity)) {
             return FreezeResistance.IMMUNE;
         }
-        if (entity.is(SuperMarioEntityTypeTags.FREEZE_IMMUNE)) {
+        // a creative player is busy building, and is not there to be caught out by a stray ice ball
+        if (entity instanceof Player player && player.isCreative()) {
             return FreezeResistance.IMMUNE;
         }
         return isBig(entity) ? FreezeResistance.TOUGH : FreezeResistance.NONE;
@@ -141,7 +153,16 @@ public final class Freezing {
 
     /** Traps an entity in a block of ice for a set number of ticks, whatever it is. */
     public static void freezeFor(ServerLevel level, LivingEntity entity, int ticks) {
-        entity.setAttached(SuperMarioAttachmentTypes.FREEZE, FreezeState.lasting(level.getGameTime(), ticks));
+        freezeWith(level, entity, FreezeState.lasting(level.getGameTime(), ticks));
+    }
+
+    /** Traps an entity in a block of ice that never runs out on its own. */
+    public static void freezeEndlessly(ServerLevel level, LivingEntity entity) {
+        freezeWith(level, entity, FreezeState.endless(level.getGameTime()));
+    }
+
+    private static void freezeWith(ServerLevel level, LivingEntity entity, FreezeState state) {
+        entity.setAttached(SuperMarioAttachmentTypes.FREEZE, state);
         entity.setDeltaMovement(Vec3.ZERO);
         entity.clearFire();
         level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.GLASS_PLACE, SoundSource.NEUTRAL, 0.8F, 1.2F);
@@ -156,8 +177,8 @@ public final class Freezing {
         if (state == null || !(entity.level() instanceof ServerLevel level)) {
             return;
         }
-        // an entity that has since turned unfreezable — a player switching to creative, say — is let out
-        if (state.hasExpired(level.getGameTime()) || !entity.isAlive() || resistanceOf(entity) == FreezeResistance.IMMUNE) {
+        // an entity that has since turned unfreezable — a player gone to spectator, say — is let out
+        if (state.hasExpired(level.getGameTime()) || !entity.isAlive() || isUnfreezable(entity)) {
             thaw(level, entity);
             return;
         }

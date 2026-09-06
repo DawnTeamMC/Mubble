@@ -46,15 +46,52 @@ public class FreezeCommandGameTest {
     }
 
     @GameTest
-    public void omittingTheValueTogglesIt(GameTestHelper helper) {
+    public void omittingTheValueFails(GameTestHelper helper) {
         var pig = target(helper);
         var operator = operator(helper);
 
-        run(helper, operator, "freeze set " + pig.getUUID());
-        helper.assertTrue(Freezing.isFrozen(pig), "the first toggle froze nothing");
+        helper.assertFalse(succeeds(helper, operator, "freeze set " + pig.getUUID()),
+                "the value is mandatory: leaving it off must not quietly flip the target");
+        helper.assertFalse(Freezing.isFrozen(pig), "and the pig should have been left alone");
 
-        run(helper, operator, "freeze set " + pig.getUUID());
-        helper.assertFalse(Freezing.isFrozen(pig), "the second toggle thawed nothing");
+        helper.succeed();
+    }
+
+    @GameTest
+    public void aDurationIsHonoured(GameTestHelper helper) {
+        var pig = target(helper);
+
+        run(helper, operator(helper), "freeze set " + pig.getUUID() + " true 7");
+
+        helper.assertTrue(Freezing.getRemainingTicks(pig) == 7,
+                "the freeze should last exactly the number of ticks asked for");
+        helper.succeed();
+    }
+
+    @GameTest
+    public void anInfiniteFreezeNeverRunsOut(GameTestHelper helper) {
+        var pig = target(helper);
+
+        run(helper, operator(helper), "freeze set " + pig.getUUID() + " true infinite");
+
+        var state = Freezing.getState(pig);
+        helper.assertTrue(state != null && state.isEndless(), "the freeze should have been endless");
+        // an endless freeze outlasts anything a countdown could hold
+        helper.assertFalse(state.hasExpired(pig.level().getGameTime() + 1_000_000L),
+                "an endless freeze ran out anyway");
+        helper.succeed();
+    }
+
+    @GameTest
+    public void aDurationOnThawingFails(GameTestHelper helper) {
+        var pig = target(helper);
+        var operator = operator(helper);
+
+        run(helper, operator, "freeze set " + pig.getUUID() + " true");
+
+        helper.assertFalse(succeeds(helper, operator, "freeze set " + pig.getUUID() + " false 40"),
+                "a duration means nothing when thawing and should be turned down");
+        helper.assertTrue(Freezing.isFrozen(pig), "and the freeze should be left untouched");
 
         helper.succeed();
     }
@@ -76,13 +113,18 @@ public class FreezeCommandGameTest {
     }
 
     @GameTest
-    public void aCreativePlayerCannotBeFrozen(GameTestHelper helper) {
+    public void aCreativePlayerCanBeFrozenByHand(GameTestHelper helper) {
         // the framework hands out creative players and nothing else, which is exactly what is needed here
         var player = TestPlayers.inLevel(helper);
 
-        helper.assertFalse(succeeds(helper, player, "freeze set @s true"),
-                "a creative player was put in a block of ice");
-        helper.assertFalse(Freezing.isFrozen(player), "and ended up frozen anyway");
+        // an ice ball leaves a creative player alone, but the command is an operator's tool and does not
+        helper.assertTrue(succeeds(helper, player, "freeze set @s true"),
+                "the command turned a creative player down");
+        helper.assertTrue(Freezing.isFrozen(player), "and left them out of the ice");
+
+        // and the freeze has to survive the tick that lets genuinely unfreezable entities out
+        Freezing.tick(player);
+        helper.assertTrue(Freezing.isFrozen(player), "the next tick thawed them again");
 
         helper.succeed();
     }
