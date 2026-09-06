@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
@@ -28,6 +29,8 @@ public class FreezeGameTest {
     private static final BlockPos SHOVE_START = new BlockPos(1, Arena.FLOOR_Y + 1, 3);
     /** What a sliding mob is aimed at, for the tests about running into something. */
     private static final BlockPos WALL = new BlockPos(5, Arena.FLOOR_Y + 1, 3);
+    /** The waterline of the pool the floating tests fill, in structure-relative coordinates. */
+    private static final int POOL_SURFACE_Y = Arena.FLOOR_Y + 5;
 
     @GameTest(maxTicks = 140)
     public void aRegularMobStaysFrozenForTheWholeDuration(GameTestHelper helper) {
@@ -311,6 +314,58 @@ public class FreezeGameTest {
     }
 
     /** A frozen pig two blocks short of a wall, with room to build up speed on the way there. */
+    @GameTest(maxTicks = 160)
+    public void frozenIceFloatsUpToTheWaterSurface(GameTestHelper helper) {
+        Pig pig = inThePool(helper);
+        freeze(helper, pig);
+
+        double startY = pig.getY();
+        // the pig's position is absolute, the pool was built in structure-relative coordinates
+        double waterline = helper.absolutePos(new BlockPos(0, POOL_SURFACE_Y, 0)).getY();
+
+        helper.startSequence()
+                .thenIdle(120)
+                .thenExecute(() -> {
+                    helper.assertTrue(pig.getY() > startY + 1.0D,
+                            "the block of ice sank instead of floating up");
+                    // it rides the surface rather than popping out of the water and landing back in
+                    helper.assertTrue(pig.getY() < waterline + 0.5D,
+                            "the block of ice was pushed clear of the water");
+                    helper.assertTrue(pig.getY() > waterline - pig.getBbHeight(),
+                            "the block of ice settled below the surface instead of on it");
+                    helper.assertTrue(Math.abs(pig.getDeltaMovement().y()) < 0.05D,
+                            "the block of ice never settled, it is still bobbing");
+                })
+                .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 160)
+    public void aFloatingBlockOfIceKeepsItsRiderOutOfTheWater(GameTestHelper helper) {
+        Pig pig = inThePool(helper);
+        freeze(helper, pig);
+
+        helper.startSequence()
+                .thenIdle(120)
+                .thenExecute(() -> helper.assertFalse(pig.isEyeInFluid(FluidTags.WATER),
+                        "a floating block of ice left the head of whoever is inside it under water"))
+                .thenSucceed();
+    }
+
+    /**
+     * A pig sitting on the bottom of a pool deep enough that it has somewhere to float up to.
+     */
+    private static Pig inThePool(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        for (int x = 0; x < Arena.SIZE; x++) {
+            for (int z = 0; z < Arena.SIZE; z++) {
+                for (int y = Arena.FLOOR_Y + 1; y < POOL_SURFACE_Y; y++) {
+                    helper.setBlock(new BlockPos(x, y, z), Blocks.WATER);
+                }
+            }
+        }
+        return helper.spawnWithNoFreeWill(EntityTypes.PIG, new BlockPos(4, Arena.FLOOR_Y + 1, 3));
+    }
+
     private static Pig walledIn(GameTestHelper helper) {
         Arena.buildFloor(helper);
         helper.setBlock(WALL, Blocks.STONE);

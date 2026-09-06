@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
@@ -57,6 +58,18 @@ public final class Freezing {
     private static final double GROUND_DRAG = 0.94D;
     /** How much horizontal speed a falling block of ice keeps every tick. */
     private static final double AIR_DRAG = 0.98D;
+    /** How much horizontal speed a block of ice keeps every tick while it is in water. */
+    private static final double WATER_DRAG = 0.8D;
+    /** How much vertical speed a block of ice keeps every tick while it is in water. */
+    private static final double WATER_BOB_DRAG = 0.7D;
+    /**
+     * How much of a floating block of ice comes to rest below the waterline, as a fraction of its
+     * height.
+     * <p>
+     * Real ice rides with almost all of itself under, which would leave whoever is inside it out of
+     * air. Sitting this high keeps their head clear and the cube plainly in view.
+     */
+    private static final double FLOAT_SUBMERSION = 0.6D;
     /** Horizontal speeds below this are rounded down to a standstill, so that ice does not creep. */
     private static final double SLIDE_EPSILON = 1.0e-3D;
     /** How far around the block of ice a player counts as pushing it: being solid, it is never overlapped. */
@@ -266,13 +279,24 @@ public final class Freezing {
     }
 
     /**
-     * Moves a frozen entity for the tick: it only falls and slides. A slide that meets a wall before
-     * it has run itself out shatters against it.
+     * Moves a frozen entity for the tick: it only falls, floats and slides. A slide that meets a wall
+     * before it has run itself out shatters against it.
      */
     public static void travelFrozen(LivingEntity entity) {
         var movement = entity.getDeltaMovement();
-        double drag = entity.onGround() ? GROUND_DRAG : AIR_DRAG;
-        entity.setDeltaMovement(movement.x() * drag, movement.y() - entity.getGravity(), movement.z() * drag);
+        double submerged = submergedFraction(entity);
+        double rise = movement.y() - entity.getGravity();
+        double drag;
+        if (submerged > 0.0D) {
+            // Archimedes: the lift is what the ice displaces, scaled so that it exactly cancels
+            // gravity at FLOAT_SUBMERSION. A block riding lower than that is pushed up, one riding
+            // higher falls back, and it comes to rest at the surface.
+            rise = (rise + entity.getGravity() * submerged / FLOAT_SUBMERSION) * WATER_BOB_DRAG;
+            drag = WATER_DRAG;
+        } else {
+            drag = entity.onGround() ? GROUND_DRAG : AIR_DRAG;
+        }
+        entity.setDeltaMovement(movement.x() * drag, rise, movement.z() * drag);
 
         double speed = entity.getDeltaMovement().horizontalDistance();
         entity.move(MoverType.SELF, entity.getDeltaMovement());
@@ -287,6 +311,15 @@ public final class Freezing {
         if (Math.abs(slowed.x()) < SLIDE_EPSILON && Math.abs(slowed.z()) < SLIDE_EPSILON) {
             entity.setDeltaMovement(0.0D, slowed.y(), 0.0D);
         }
+    }
+
+    /** @return how much of the entity's height is under water, from 0 to 1 */
+    private static double submergedFraction(Entity entity) {
+        double height = entity.getBbHeight();
+        if (height <= 0.0D) {
+            return 0.0D;
+        }
+        return Math.min(entity.getFluidHeight(FluidTags.WATER) / height, 1.0D);
     }
 
     /** Sends the block of ice sliding whenever a player walks into its side. */
