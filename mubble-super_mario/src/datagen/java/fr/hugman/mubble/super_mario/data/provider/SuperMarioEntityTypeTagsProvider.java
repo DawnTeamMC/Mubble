@@ -28,6 +28,9 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 		// FIREBALL is qualified because vanilla has one under that name too.
 		builder(ALL).add(GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, SuperMarioEntityTypeIds.FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE);
 
+		// bosses shrug an ice ball off; every other mob is judged on its bulk alone
+		builder(FREEZE_IMMUNE).add(ENDER_DRAGON, WITHER);
+
 		// Bosses and anything too big to make sense inside a bubble. Players are here on purpose: they fit the
 		// automatic size and health criteria, but getting stuck inside someone else's bubble is not the point.
 		builder(BUBBLE_CANNOT_TRAP).add(PLAYER, ENDER_DRAGON, WITHER, WARDEN, ELDER_GUARDIAN, RAVAGER, IRON_GOLEM);
