@@ -144,7 +144,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 // beat are what they should read as, and both come from vanilla for now.
                 .flutter(new FlutterAbility(
                         FlutterAbility.DEFAULT_DURATION,
-                        FlutterAbility.DEFAULT_SPEED,
+                        FlutterAbility.DEFAULT_DROP,
                         FlutterAbility.DEFAULT_ACCELERATION,
                         Optional.of(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BAT_LOOP)),
                         Optional.of(ParticleTypes.CHERRY_LEAVES)

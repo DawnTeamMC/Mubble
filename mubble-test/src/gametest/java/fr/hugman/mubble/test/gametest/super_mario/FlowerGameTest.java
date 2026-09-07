@@ -13,12 +13,13 @@ import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.pig.Pig;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.TripWireHookBlock;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * The huge flower the Super Flower Pot grows: it rises on its own, defeats whatever it grows through, is
- * sent back down and onwards by ceilings, and runs out of both time and distance so that it never travels
- * forever.
+ * The huge flower the Super Flower Pot grows: it rises on its own, defeats whatever it grows through, ducks
+ * out from under the ceilings it meets rather than dying against them, and runs out of both time and
+ * distance so that it never travels forever.
  */
 public class FlowerGameTest {
     /** Where a flower is grown from, in structure-relative coordinates. */
@@ -66,33 +67,33 @@ public class FlowerGameTest {
                 .thenSucceed();
     }
 
-    /** A flower cannot go through blocks: a ceiling sends it back down and onwards instead of stopping it. */
+    /** A flower cannot go through blocks: a ceiling makes it duck down and forward rather than stopping it. */
     @GameTest
-    public void aCeilingSendsAFlowerBackDownAndForward(GameTestHelper helper) {
+    public void aCeilingMakesAFlowerDuckDownAndForward(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var flower = grow(helper);
-        // Facing north, so a bounce should carry it towards a smaller z.
+        // Facing north, so the duck should carry it towards a smaller z.
         flower.setForwardYaw(Direction.NORTH.toYRot());
         ceilingAt(helper, 5);
         double planted = flower.getZ();
 
         helper.startSequence()
-                .thenWaitUntil(() -> helper.assertTrue(flower.hasBounced(), "the flower never bounced off the ceiling"))
+                .thenWaitUntil(() -> helper.assertTrue(flower.isEscaping(), "the flower never ducked out of the ceiling"))
                 .thenExecute(() -> {
                     helper.assertFalse(flower.isRemoved(), "a ceiling should send a flower on rather than end it");
                     helper.assertTrue(flower.getDeltaMovement().y() < 0.0D,
-                            "a bounced flower should be heading back down, was " + flower.getDeltaMovement());
+                            "a flower ducking out should be heading back down, was " + flower.getDeltaMovement());
                     helper.assertTrue(flower.getDeltaMovement().z() < 0.0D,
-                            "a flower thrown north should be carried north by its bounce, was " + flower.getDeltaMovement());
+                            "a flower thrown north should be carried north by its duck, was " + flower.getDeltaMovement());
                 })
                 .thenIdle(3)
-                .thenExecute(() -> helper.assertTrue(flower.getZ() < planted, "the flower never actually moved forward after bouncing"))
+                .thenExecute(() -> helper.assertTrue(flower.getZ() < planted, "the flower never actually moved forward while ducking"))
                 .thenSucceed();
     }
 
-    /** One arc and no more: back on the ground it came from, the flower is spent. */
-    @GameTest
-    public void aBouncedFlowerWiltsWhenItComesBackDown(GameTestHelper helper) {
+    /** The duck is an attempt to get out, not the end of the climb: what follows it is more climbing. */
+    @GameTest(maxTicks = 200)
+    public void aFlowerClimbsAgainAfterDuckingOut(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var flower = grow(helper);
         flower.setLifetime(Integer.MAX_VALUE);
@@ -100,9 +101,42 @@ public class FlowerGameTest {
         ceilingAt(helper, 5);
 
         helper.startSequence()
-                .thenWaitUntil(() -> helper.assertTrue(flower.hasBounced(), "the flower never bounced off the ceiling"))
-                .thenWaitUntil(() -> helper.assertTrue(flower.isRemoved(), "a bounced flower should wilt once it is back on the ground"))
+                .thenWaitUntil(() -> helper.assertTrue(flower.isEscaping(), "the flower never ducked out of the ceiling"))
+                .thenWaitUntil(() -> helper.assertFalse(flower.isEscaping(), "the flower never stopped ducking"))
+                .thenExecute(() -> {
+                    helper.assertFalse(flower.isRemoved(), "a flower should still be around once it has ducked out");
+                    helper.assertValueEqual(flower.getDeltaMovement(), new Vec3(0.0D, flower.getSpeed(), 0.0D),
+                            "the movement of a flower that has gone back to climbing");
+                })
                 .thenSucceed();
+    }
+
+    /** Nothing it runs into ends a flower: it only ever runs out of time or of distance. */
+    @GameTest(maxTicks = 200)
+    public void aFlowerBoxedInKeepsTryingUntilItRunsOut(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var flower = grow(helper);
+        flower.setLifetime(Integer.MAX_VALUE);
+        flower.setRange(8.0D);
+        ceilingAt(helper, 5);
+
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(flower.isRemoved(), "the flower never ran out at all"))
+                .thenExecute(() -> helper.assertTrue(flower.getTravelled() >= 8.0D,
+                        "a boxed-in flower should have run out of distance rather than been stopped, travelled " + flower.getTravelled()))
+                .thenSucceed();
+    }
+
+    /** A flower hits what it runs into the way any projectile does, which is what target blocks answer to. */
+    @GameTest
+    public void aFlowerTriggersTargetBlocks(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        BlockPos target = new BlockPos(GROUND.getX(), 5, GROUND.getZ());
+        helper.setBlock(target, Blocks.TARGET);
+        grow(helper);
+
+        helper.succeedWhen(() -> helper.assertTrue(helper.getBlockState(target).getValue(BlockStateProperties.POWER) > 0,
+                "the flower should trigger the target block it grows into"));
     }
 
     /**

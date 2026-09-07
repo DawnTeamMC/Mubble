@@ -41,8 +41,8 @@ public record FloatAbility(
         fallDamage = Mth.clamp(fallDamage, 0.0F, 1.0F);
     }
 
-    public static final float DEFAULT_SPEED = 0.1F;
-    public static final float DEFAULT_FALL_DAMAGE = 0.25F;
+    public static final float DEFAULT_SPEED = 0.25F;
+    public static final float DEFAULT_FALL_DAMAGE = 0.5F;
 
     public static final Codec<FloatAbility> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.FLOAT.optionalFieldOf("speed", DEFAULT_SPEED).forGetter(FloatAbility::speed),
