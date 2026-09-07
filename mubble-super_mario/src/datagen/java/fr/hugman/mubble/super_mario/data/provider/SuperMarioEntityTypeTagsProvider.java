@@ -26,6 +26,8 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 		builder(STOMPABLE).add(GOOMBA, GREEN_KOOPA_SHELL);
 
 		// FIREBALL is qualified because vanilla has one under that name too.
+		builder(ENEMIES).add(GOOMBA);
+
 		builder(ALL).add(GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, SuperMarioEntityTypeIds.FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE, FLOWER);
 
 		// Bosses and anything too big to make sense inside a bubble. Players are here on purpose: they fit the

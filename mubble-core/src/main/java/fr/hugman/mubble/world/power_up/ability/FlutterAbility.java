@@ -13,23 +13,26 @@ import net.minecraft.sounds.SoundEvent;
 import java.util.Optional;
 
 /**
- * Extends a jump by fluttering: past the peak of it, a holder still leaning on the jump key rises again
- * for a moment instead of falling.
+ * The rising half of a jump held on: past the peak of it, a holder still leaning on the jump key climbs
+ * again for a moment instead of falling.
  * <p>
- * Everything the flutter is worth lives here rather than in whichever form happens to grant it, so that the
- * next form to want one only has to hand over its own numbers. The lift is not handed out whole on the first
- * tick either: it climbs over {@link #ramp} ticks, which is what tells a flutter apart from a second jump.
+ * The climb builds rather than holding one speed — the holder is pushed a little harder on every tick of it,
+ * so the flutter starts as a hesitation and ends as a proper lift. That is what tells it apart from a second
+ * jump, which would hand over all of its height at once.
+ * <p>
+ * What happens once the climb is over is not this ability's business: see {@link FloatAbility}, which a form
+ * is free to grant on its own.
  *
- * @param duration how many ticks a flutter lasts at most
- * @param ramp     how many ticks the lift takes to reach its full strength
- * @param strength the upward speed a flutter is worth once ramped up, in blocks per tick
- * @param sound    the sound played in loop for as long as the flutter lasts
- * @param particle the particle left around the feet of the holder while they flutter
+ * @param duration     how many ticks the climb lasts at most
+ * @param speed        the upward speed the climb opens on, in blocks per tick
+ * @param acceleration how much speed every tick of the climb adds to it, in blocks per tick per tick
+ * @param sound        the sound played in loop for as long as the climb lasts
+ * @param particle     the particle left around the feet of the holder while they climb
  */
 public record FlutterAbility(
         int duration,
-        int ramp,
-        float strength,
+        float speed,
+        float acceleration,
         Optional<Holder<SoundEvent>> sound,
         Optional<ParticleOptions> particle
 ) {
@@ -37,52 +40,46 @@ public record FlutterAbility(
         // A data pack is free to write anything; what it cannot do is send the holder downwards on an
         // ability whose whole point is to hold them up.
         duration = Math.max(0, duration);
-        ramp = Math.max(0, ramp);
-        strength = Math.max(0.0F, strength);
+        speed = Math.max(0.0F, speed);
+        acceleration = Math.max(0.0F, acceleration);
     }
 
     public static final int DEFAULT_DURATION = 20;
-    public static final int DEFAULT_RAMP = 5;
-    public static final float DEFAULT_STRENGTH = 0.12F;
+    public static final float DEFAULT_SPEED = 0.05F;
+    public static final float DEFAULT_ACCELERATION = 0.005F;
 
     public static final Codec<FlutterAbility> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.INT.optionalFieldOf("duration", DEFAULT_DURATION).forGetter(FlutterAbility::duration),
-            Codec.INT.optionalFieldOf("ramp", DEFAULT_RAMP).forGetter(FlutterAbility::ramp),
-            Codec.FLOAT.optionalFieldOf("strength", DEFAULT_STRENGTH).forGetter(FlutterAbility::strength),
+            Codec.FLOAT.optionalFieldOf("speed", DEFAULT_SPEED).forGetter(FlutterAbility::speed),
+            Codec.FLOAT.optionalFieldOf("acceleration", DEFAULT_ACCELERATION).forGetter(FlutterAbility::acceleration),
             SoundEvent.CODEC.optionalFieldOf("sound").forGetter(FlutterAbility::sound),
             ParticleTypes.CODEC.optionalFieldOf("particle").forGetter(FlutterAbility::particle)
     ).apply(instance, FlutterAbility::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FlutterAbility> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, FlutterAbility::duration,
-            ByteBufCodecs.INT, FlutterAbility::ramp,
-            ByteBufCodecs.FLOAT, FlutterAbility::strength,
+            ByteBufCodecs.FLOAT, FlutterAbility::speed,
+            ByteBufCodecs.FLOAT, FlutterAbility::acceleration,
             SoundEvent.STREAM_CODEC.apply(ByteBufCodecs::optional), FlutterAbility::sound,
             ParticleTypes.STREAM_CODEC.apply(ByteBufCodecs::optional), FlutterAbility::particle,
             FlutterAbility::new
     );
 
     /**
-     * A flutter on the default numbers, with nothing to see or hear.
+     * A flutter with nothing to see or hear.
      */
-    public static FlutterAbility of(int duration, int ramp, float strength) {
-        return new FlutterAbility(duration, ramp, strength, Optional.empty(), Optional.empty());
+    public static FlutterAbility of(int duration, float speed, float acceleration) {
+        return new FlutterAbility(duration, speed, acceleration, Optional.empty(), Optional.empty());
     }
 
     /**
      * The upward speed the flutter is worth on one of its ticks.
-     * <p>
-     * The first tick already lifts a little: a flutter that started with nothing would let the holder keep
-     * falling for as long as the ramp lasts, which reads as the jump key being ignored.
      *
      * @param elapsed how many ticks the flutter has already run, the first one being 0
      * @return the upward speed for that tick, in blocks per tick
      */
     public float liftAt(int elapsed) {
-        if (this.ramp <= 0) {
-            return this.strength;
-        }
-        return this.strength * Math.min(1.0F, (float) (elapsed + 1) / (float) this.ramp);
+        return this.speed + this.acceleration * elapsed;
     }
 
     /**

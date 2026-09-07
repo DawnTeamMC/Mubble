@@ -4,16 +4,20 @@ import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
 import fr.hugman.mubble.tags.MubblePowerUpTags;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import fr.hugman.mubble.world.entity.Floating;
 import fr.hugman.mubble.world.entity.Fluttering;
+import fr.hugman.mubble.world.entity.JumpKeyHolder;
 import fr.hugman.mubble.world.entity.WaterRunner;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
+import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -36,7 +40,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Mixin(Player.class)
-public class PlayerMixin implements PowerUpHolder, WaterRunner, Fluttering {
+public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, Fluttering, Floating {
     @Unique
     private static final EntityDataAccessor<Optional<PowerUpProperties>> POWER_UP_PROPERTIES = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.POWER_UP_PROPERTIES);
     @Unique
@@ -47,6 +51,9 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, Fluttering {
      */
     @Unique
     private static final EntityDataAccessor<Boolean> FLUTTERING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
+    /** The other half of the same story, see {@link #mubble$tickAirMoves}. */
+    @Unique
+    private static final EntityDataAccessor<Boolean> FLOATING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
 
     @Unique
     private static final String POWER_UP_KEY = "power_up";
@@ -57,15 +64,15 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, Fluttering {
     @Unique
     private static final String FLUTTER_SPENT_KEY = "flutter_spent";
 
-    /** How many particles a fluttering player leaves around their feet every tick. */
+    /** How many particles a player on a mid-air move leaves around their feet every tick. */
     @Unique
-    private static final int FLUTTER_PARTICLES = 2;
+    private static final int AIR_MOVE_PARTICLES = 2;
     /** How far those scatter around the feet, as a share of the width of the player. */
     @Unique
-    private static final double FLUTTER_PARTICLE_SPREAD = 0.8D;
-    /** How fast they sink, so that they read as being left behind by someone going up. */
+    private static final double AIR_MOVE_PARTICLE_SPREAD = 0.8D;
+    /** How fast they sink, so that they read as being left behind rather than carried along. */
     @Unique
-    private static final double FLUTTER_PARTICLE_FALL = -0.05D;
+    private static final double AIR_MOVE_PARTICLE_FALL = -0.05D;
 
     /** How far a player runs between two splashes, in blocks. Vanilla footsteps land every 1.7 or so. */
     @Unique
@@ -99,12 +106,16 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, Fluttering {
     /** Whether the jump the player is on has already spent its flutter. */
     @Unique
     private boolean mubble$flutterSpent;
+    /** Whether the player is being held to a float, as simulated by this side. */
+    @Unique
+    private boolean mubble$floating;
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     protected void mubble$initDataTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
         builder.define(POWER_UP, Optional.empty());
         builder.define(POWER_UP_PROPERTIES, Optional.empty());
         builder.define(FLUTTERING, false);
+        builder.define(FLOATING, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -124,10 +135,9 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, Fluttering {
         view.read(POWER_UP_PROPERTIES_KEY, PowerUpProperties.CODEC).ifPresent(properties -> this_.getEntityData().set(POWER_UP_PROPERTIES, Optional.of(properties)));
         // A flutter is written as the ticks it had run, and as -1 when there was none going on at all.
         int flutterTicks = view.getIntOr(FLUTTER_TICKS_KEY, -1);
-        this.mubble$fluttering = flutterTicks >= 0;
-        this.mubble$flutterTicks = Math.max(0, flutterTicks);
         this.mubble$flutterSpent = view.getBooleanOr(FLUTTER_SPENT_KEY, false);
-        this.mubble$syncFluttering(this_);
+        this.mubble$setFluttering(this_, flutterTicks >= 0);
+        this.mubble$flutterTicks = Math.max(0, flutterTicks);
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
@@ -324,122 +334,190 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, Fluttering {
     }
 
     /**
-     * Runs the flutter: past the peak of a jump, a player still leaning on the jump key rises again for a
-     * moment instead of falling.
+     * Runs the two halves of a jump held on: the flutter climbing past its peak, and the float bringing the
+     * holder back down at a walking pace once nothing is lifting them any more.
      * <p>
-     * This sits at the head of {@code aiStep} because the lift is written straight into the movement of the
-     * tick, which {@code travel()} then spends a little further down the very same call.
+     * They are checked in that order and never both in the same tick, since a holder still being pushed up
+     * has no fall for the float to slow. Which of the two a power-up grants is up to it: a form with only a
+     * float floats down from wherever its plain jump took it.
+     * <p>
+     * This sits at the head of {@code aiStep} because both write straight into the movement of the tick,
+     * which {@code travel()} then spends a little further down the very same call.
      * <p>
      * Both sides run it, each for the player it is in charge of: the client so that the movement it predicts
-     * for itself actually goes up, the server so that it knows what the movement it is being sent is supposed
-     * to look like. Neither waits on the other, and they agree because they read the same jump key, the same
-     * ground and the same power-up.
+     * for itself actually goes where it should, the server so that it knows what the movement it is being
+     * sent is supposed to look like. Neither waits on the other, and they agree because they read the same
+     * jump key, the same ground and the same power-up.
      */
     @Inject(method = "aiStep", at = @At("HEAD"))
-    private void mubble$tickFlutter(CallbackInfo ci) {
+    private void mubble$tickAirMoves(CallbackInfo ci) {
         var this_ = (Player) (Object) this;
-        this.mubble$flutterParticles(this_);
+        this.mubble$airMoveParticles(this_);
 
         // Landing is what hands the next jump its flutter back, and the only thing that does.
         if (this_.onGround()) {
             this.mubble$flutterSpent = false;
-            this.mubble$endFlutter(this_);
+            this.mubble$endAirMoves(this_);
+            return;
+        }
+        // Anything holding the player up other than the air takes both abilities away with it, and so does
+        // letting go of the key. The flutter never comes back for that jump; the float does, on the next press.
+        if (mubble$heldBySomethingElse(this_) || !this_.isJumpKeyHeld()) {
+            this.mubble$endAirMoves(this_);
             return;
         }
 
-        var ability = this.getFlutterAbility();
-        if (ability.isEmpty()) {
-            // The form can be lost in mid-air, and the flutter goes with it.
-            this.mubble$endFlutter(this_);
+        if (this.mubble$tickFlutter(this_)) {
+            // Still being pushed up, so there is no fall to slow down yet.
+            this.mubble$setFloating(this_, false);
             return;
         }
-        FlutterAbility flutter = ability.get();
-
-        boolean jumpHeld = this_.isJumpKeyHeld();
-        if (this.mubble$fluttering) {
-            // A released key cannot be leaned on again: that jump is done fluttering.
-            if (!jumpHeld || this.mubble$flutterTicks >= flutter.duration() || mubble$flutterCutShort(this_)) {
-                this.mubble$endFlutter(this_);
-                return;
-            }
-        } else {
-            if (this.mubble$flutterSpent || !jumpHeld || mubble$flutterCutShort(this_)) {
-                return;
-            }
-            // Nothing changes on the way up: the flutter waits for the player to start coming back down.
-            if (this_.getKnownMovement().y() >= 0.0D) {
-                return;
-            }
-            this.mubble$fluttering = true;
-            this.mubble$flutterTicks = 0;
-            this.mubble$flutterSpent = true;
-            this.mubble$syncFluttering(this_);
-        }
-
-        Vec3 movement = this_.getDeltaMovement();
-        this_.setDeltaMovement(movement.x(), flutter.liftAt(this.mubble$flutterTicks), movement.z());
-        this.mubble$flutterTicks++;
+        this.mubble$tickFloat(this_);
     }
 
     /**
-     * The states a flutter cannot carry on through, landing aside: they are all ways of being held by
+     * The climb: starts once the player is past the peak of their jump, and builds for as long as it lasts.
+     *
+     * @return whether the flutter took this tick's movement for itself
+     */
+    @Unique
+    private boolean mubble$tickFlutter(Player player) {
+        var ability = this.getFlutterAbility();
+        if (ability.isEmpty()) {
+            // The form can be lost in mid-air, and the flutter goes with it.
+            this.mubble$setFluttering(player, false);
+            return false;
+        }
+        FlutterAbility flutter = ability.get();
+
+        if (this.mubble$fluttering) {
+            if (this.mubble$flutterTicks >= flutter.duration()) {
+                this.mubble$setFluttering(player, false);
+                return false;
+            }
+        } else {
+            // Nothing changes on the way up: the flutter waits for the player to start coming back down.
+            if (this.mubble$flutterSpent || player.getKnownMovement().y() >= 0.0D) {
+                return false;
+            }
+            this.mubble$flutterTicks = 0;
+            this.mubble$flutterSpent = true;
+            this.mubble$setFluttering(player, true);
+        }
+
+        Vec3 movement = player.getDeltaMovement();
+        player.setDeltaMovement(movement.x(), flutter.liftAt(this.mubble$flutterTicks), movement.z());
+        this.mubble$flutterTicks++;
+        return true;
+    }
+
+    /**
+     * The descent: holds the player to a walking pace on the way down, and spares them most of what the fall
+     * would otherwise be worth.
+     * <p>
+     * It only ever slows a fall: a player still climbing under their own steam is left alone, and one already
+     * coming down slower than the float is never sped up to it.
+     */
+    @Unique
+    private void mubble$tickFloat(Player player) {
+        var ability = this.getFloatAbility();
+        if (ability.isEmpty() || player.getKnownMovement().y() >= 0.0D) {
+            this.mubble$setFloating(player, false);
+            return;
+        }
+        FloatAbility floating = ability.get();
+
+        Vec3 movement = player.getDeltaMovement();
+        if (movement.y() < -floating.speed()) {
+            player.setDeltaMovement(movement.x(), -floating.speed(), movement.z());
+        }
+        // The fall damage of a tick spent floating is written off here rather than at the landing: the player
+        // is falling the whole time, so this is the only place that knows the fall was a float and not a drop.
+        player.fallDistance = Math.max(0.0D, player.fallDistance - floating.fallForgivenPerTick());
+        this.mubble$setFloating(player, true);
+    }
+
+    /**
+     * The states a mid-air move cannot carry on through, landing aside: they are all ways of being held by
      * something other than the air.
      */
     @Unique
-    private static boolean mubble$flutterCutShort(Player player) {
+    private static boolean mubble$heldBySomethingElse(Player player) {
         return player.isInWater() || player.onClimbable() || player.isFallFlying() || player.isPassenger();
     }
 
     @Unique
-    private void mubble$endFlutter(Player player) {
-        if (!this.mubble$fluttering) {
+    private void mubble$endAirMoves(Player player) {
+        this.mubble$setFluttering(player, false);
+        this.mubble$setFloating(player, false);
+    }
+
+    @Unique
+    private void mubble$setFluttering(Player player, boolean fluttering) {
+        if (this.mubble$fluttering == fluttering) {
             return;
         }
-        this.mubble$fluttering = false;
-        this.mubble$flutterTicks = 0;
-        this.mubble$syncFluttering(player);
+        this.mubble$fluttering = fluttering;
+        if (!fluttering) {
+            this.mubble$flutterTicks = 0;
+        }
+        this.mubble$sync(player, FLUTTERING, fluttering);
+    }
+
+    @Unique
+    private void mubble$setFloating(Player player, boolean floating) {
+        if (this.mubble$floating == floating) {
+            return;
+        }
+        this.mubble$floating = floating;
+        this.mubble$sync(player, FLOATING, floating);
     }
 
     /**
-     * Tells the other clients about the flutter, which is all they get: they have no business simulating
-     * someone else's keys, they only draw what the flutter looks like.
+     * Tells the other clients about a mid-air move, which is all they get: they have no business simulating
+     * someone else's keys, they only draw what the move looks like.
      */
     @Unique
-    private void mubble$syncFluttering(Player player) {
+    private void mubble$sync(Player player, EntityDataAccessor<Boolean> accessor, boolean value) {
         if (!player.level().isClientSide()) {
-            player.getEntityData().set(FLUTTERING, this.mubble$fluttering);
+            player.getEntityData().set(accessor, value);
         }
     }
 
     /**
-     * Leaves the trail of a flutter around the feet of the player.
+     * Leaves the trail of a mid-air move around the feet of the player.
      * <p>
-     * Every client draws it for every player it can see fluttering, rather than the server broadcasting it:
-     * the player fluttering right here should not have to wait on a round trip to see their own leaves.
-     * It hangs off {@code isFluttering()} rather than off the flutter tick right below, which only ever
-     * runs for the one player this side is in charge of.
+     * Every client draws it for every player it can see on one, rather than the server broadcasting it: the
+     * player fluttering right here should not have to wait on a round trip to see their own leaves. It hangs
+     * off the two states rather than off the tick right above, which only ever runs for the one player this
+     * side is in charge of.
      */
     @Unique
-    private void mubble$flutterParticles(Player player) {
-        if (!player.level().isClientSide() || !player.isFluttering()) {
+    private void mubble$airMoveParticles(Player player) {
+        if (!player.level().isClientSide()) {
             return;
         }
-        var particle = this.getFlutterAbility().flatMap(FlutterAbility::particle);
+        Optional<ParticleOptions> particle = Optional.empty();
+        if (player.isFluttering()) {
+            particle = this.getFlutterAbility().flatMap(FlutterAbility::particle);
+        } else if (player.isFloating()) {
+            particle = this.getFloatAbility().flatMap(FloatAbility::particle);
+        }
         if (particle.isEmpty()) {
             return;
         }
-        double spread = player.getBbWidth() * FLUTTER_PARTICLE_SPREAD;
-        for (int i = 0; i < FLUTTER_PARTICLES; i++) {
+        double spread = player.getBbWidth() * AIR_MOVE_PARTICLE_SPREAD;
+        for (int i = 0; i < AIR_MOVE_PARTICLES; i++) {
             player.level().addParticle(particle.get(),
                     player.getRandomX(spread), player.getY(), player.getRandomZ(spread),
-                    0.0D, FLUTTER_PARTICLE_FALL, 0.0D);
+                    0.0D, AIR_MOVE_PARTICLE_FALL, 0.0D);
         }
     }
 
     /**
      * The server is told the jump key of every player it runs, tick after tick, by the input packets they
      * send. A client only ever knows its own, which {@code LocalPlayerMixin} answers with: the players it
-     * merely watches never start a flutter of their own, they are shown the one the server tells them about.
+     * merely watches never start a move of their own, they are shown the one the server tells them about.
      */
     @Override
     public boolean isJumpKeyHeld() {
@@ -454,11 +532,23 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, Fluttering {
     }
 
     @Override
+    public Optional<FloatAbility> getFloatAbility() {
+        var this_ = (Player) (Object) this;
+        return this_.getPowerUp().flatMap(powerUp -> powerUp.value().abilities().floating());
+    }
+
+    @Override
     public boolean isFluttering() {
         var this_ = (Player) (Object) this;
         // The two are the same truth seen from two places: the side simulating the player writes the field,
         // and the clients watching someone else only ever get the flag.
         return this.mubble$fluttering || this_.getEntityData().get(FLUTTERING);
+    }
+
+    @Override
+    public boolean isFloating() {
+        var this_ = (Player) (Object) this;
+        return this.mubble$floating || this_.getEntityData().get(FLOATING);
     }
 
     @Override

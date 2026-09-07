@@ -5,7 +5,7 @@ import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
 import fr.hugman.mubble.client.model.MubbleModelLayers;
 import fr.hugman.mubble.client.network.MubbleClientPayloadReceivers;
 import fr.hugman.mubble.client.renderer.MubbleRenderers;
-import fr.hugman.mubble.client.sound.FlutterSounds;
+import fr.hugman.mubble.client.sound.AirMoveSounds;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -22,6 +22,6 @@ public class MubbleClient implements ClientModInitializer {
         MubbleKeyBindings.registerEvents();
         MubbleClientPayloadReceivers.register();
 
-        ClientTickEvents.END_CLIENT_TICK.register(FlutterSounds::tick);
+        ClientTickEvents.END_CLIENT_TICK.register(AirMoveSounds::tick);
     }
 }

@@ -8,78 +8,77 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * The shape of a flutter: how much lift each of its ticks is worth.
+ * The shape of the climb half of a jump held on: how much lift each of its ticks is worth.
  * <p>
- * It is the ramp that tells a flutter apart from a second jump, so the curve behind it is worth
- * pinning down on its own, away from a level and a player.
+ * A flutter builds rather than holding one speed, which is what tells it apart from a second jump, so the
+ * curve behind it is worth pinning down on its own, away from a level and a player.
  */
 public class FlutterAbilityTest {
     private static final int DURATION = 20;
-    private static final int RAMP = 5;
-    private static final float STRENGTH = 0.12F;
+    private static final float SPEED = 0.05F;
+    private static final float ACCELERATION = 0.005F;
 
-    private static final FlutterAbility FLUTTER = FlutterAbility.of(DURATION, RAMP, STRENGTH);
+    private static final FlutterAbility FLUTTER = FlutterAbility.of(DURATION, SPEED, ACCELERATION);
     private static final float EPSILON = 1.0E-6F;
 
     @Test
-    @DisplayName("the first tick already lifts, so that the jump key is never ignored")
+    @DisplayName("the flutter opens on its own speed, so that the jump key is never ignored")
     void theFirstTickAlreadyLifts() {
-        assertTrue(FLUTTER.liftAt(0) > 0.0F, "the very first tick of a flutter should already carry the player");
+        assertEquals(SPEED, FLUTTER.liftAt(0), EPSILON, "the very first tick of a flutter");
+        assertTrue(FLUTTER.liftAt(0) > 0.0F, "the very first tick should already carry the player");
     }
 
     @Test
-    @DisplayName("the lift climbs over the ramp instead of snapping to full strength")
-    void theLiftClimbsOverTheRamp() {
-        float previous = 0.0F;
-        for (int tick = 0; tick < RAMP; tick++) {
-            float lift = FLUTTER.liftAt(tick);
-            assertTrue(lift > previous, "tick " + tick + " should lift more than the one before it");
-            assertTrue(lift <= STRENGTH + EPSILON, "no tick of the ramp should lift more than the full strength");
-            previous = lift;
+    @DisplayName("every tick lifts a little harder than the one before it")
+    void theLiftKeepsBuilding() {
+        for (int tick = 1; tick < DURATION; tick++) {
+            assertEquals(ACCELERATION, FLUTTER.liftAt(tick) - FLUTTER.liftAt(tick - 1), EPSILON,
+                    "the speed tick " + tick + " added to the one before it");
         }
     }
 
+    /** A flutter that plateaued would carry its holder the same way a rising platform does. */
     @Test
-    @DisplayName("the lift reaches its full strength at the end of the ramp, and stays there")
-    void theLiftPlateausAfterTheRamp() {
-        assertEquals(STRENGTH, FLUTTER.liftAt(RAMP - 1), EPSILON, "the last tick of the ramp");
-        assertEquals(STRENGTH, FLUTTER.liftAt(RAMP), EPSILON, "the tick right after the ramp");
-        assertEquals(STRENGTH, FLUTTER.liftAt(DURATION - 1), EPSILON, "the last tick of the flutter");
+    @DisplayName("the lift never settles on a top speed")
+    void theLiftNeverPlateaus() {
+        assertTrue(FLUTTER.liftAt(DURATION - 1) > FLUTTER.liftAt(DURATION - 2),
+                "the last tick of a flutter should still be lifting harder than the one before it");
     }
 
     @Test
-    @DisplayName("a flutter without a ramp lifts at full strength from the start")
-    void noRampMeansNoClimb() {
-        var abrupt = FlutterAbility.of(DURATION, 0, STRENGTH);
+    @DisplayName("a flutter without acceleration holds one speed throughout")
+    void noAccelerationMeansOneSpeed() {
+        var steady = FlutterAbility.of(DURATION, SPEED, 0.0F);
 
-        assertEquals(STRENGTH, abrupt.liftAt(0), EPSILON, "the first tick of a flutter with no ramp");
-        assertEquals(STRENGTH, abrupt.liftAt(DURATION - 1), EPSILON, "the last tick of a flutter with no ramp");
+        assertEquals(SPEED, steady.liftAt(0), EPSILON, "the first tick of a flutter with no acceleration");
+        assertEquals(SPEED, steady.liftAt(DURATION - 1), EPSILON, "the last tick of a flutter with no acceleration");
+        assertEquals(SPEED * DURATION, steady.totalLift(), EPSILON, "the whole of a flutter with no acceleration");
     }
 
     @Test
-    @DisplayName("a whole flutter is worth less than its strength held for its whole duration")
-    void theRampCostsSomeHeight() {
-        float held = STRENGTH * DURATION;
+    @DisplayName("a whole flutter is worth its opening speed plus everything the acceleration added")
+    void theAccelerationIsWorthTheClimb() {
+        // The acceleration is added once on the second tick, twice on the third, and so on.
+        float ticks = DURATION;
+        float expected = SPEED * ticks + ACCELERATION * (ticks - 1.0F) * ticks / 2.0F;
 
-        assertTrue(FLUTTER.totalLift() < held, "the ramp should cost the flutter some of its height");
-        assertTrue(FLUTTER.totalLift() > held * 0.5F, "the ramp should not cost the flutter most of its height either");
-        assertEquals(held, FlutterAbility.of(DURATION, 0, STRENGTH).totalLift(), EPSILON,
-                "a flutter with no ramp should be worth its strength on every one of its ticks");
+        assertEquals(expected, FLUTTER.totalLift(), EPSILON, "the height a whole flutter is worth");
+        assertTrue(FLUTTER.totalLift() > SPEED * DURATION, "the acceleration should be worth height of its own");
     }
 
     @Test
     @DisplayName("a flutter that lasts no time at all lifts nothing")
     void anEmptyFlutterLiftsNothing() {
-        assertEquals(0.0F, FlutterAbility.of(0, RAMP, STRENGTH).totalLift(), EPSILON, "a flutter of no duration");
+        assertEquals(0.0F, FlutterAbility.of(0, SPEED, ACCELERATION).totalLift(), EPSILON, "a flutter of no duration");
     }
 
     @Test
     @DisplayName("numbers that would push the holder down are refused")
     void negativeNumbersAreRefused() {
-        var backwards = FlutterAbility.of(-10, -3, -0.5F);
+        var backwards = FlutterAbility.of(-10, -0.5F, -0.1F);
 
         assertEquals(0, backwards.duration(), "a negative duration");
-        assertEquals(0, backwards.ramp(), "a negative ramp");
-        assertEquals(0.0F, backwards.strength(), EPSILON, "a negative strength");
+        assertEquals(0.0F, backwards.speed(), EPSILON, "a negative speed");
+        assertEquals(0.0F, backwards.acceleration(), EPSILON, "a negative acceleration");
     }
 }

@@ -21,8 +21,12 @@ import net.minecraft.util.Mth;
  */
 public class FlowerRenderer extends EntityRenderer<Flower, FlowerRenderState> {
     private static final Identifier TEXTURE = SuperMario.id("textures/entity/flower.png");
-    /** How far the flower turns over one block of growth, in degrees. */
+    /** How far the flower turns over one block travelled, in degrees. */
     private static final float SPIN_PER_BLOCK = 40.0F;
+    /** How much of its height the flower loses at the peak of the squish of a bounce. */
+    private static final float SQUISH_FLATTEN = 0.35F;
+    /** How much wider it goes at the same time, so that the squash keeps its bulk. */
+    private static final float SQUISH_BULGE = 0.2F;
 
     private final FlowerModel model;
 
@@ -39,13 +43,18 @@ public class FlowerRenderer extends EntityRenderer<Flower, FlowerRenderState> {
     @Override
     public void extractRenderState(Flower entity, FlowerRenderState state, float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
-        state.climbed = (float) (entity.getClimbed() + entity.getSpeed() * partialTicks);
+        state.travelled = (float) (entity.getTravelled() + entity.getSpeed() * partialTicks);
+        state.squish = entity.getSquish(partialTicks);
     }
 
     @Override
     public void submit(FlowerRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera) {
         poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees(Mth.wrapDegrees(state.climbed * SPIN_PER_BLOCK)));
+        poseStack.mulPose(Axis.YP.rotationDegrees(Mth.wrapDegrees(state.travelled * SPIN_PER_BLOCK)));
+        // Squashed against the ceiling it hit and spreading sideways, easing back out over the next few ticks.
+        if (state.squish > 0.0F) {
+            poseStack.scale(1.0F + SQUISH_BULGE * state.squish, 1.0F - SQUISH_FLATTEN * state.squish, 1.0F + SQUISH_BULGE * state.squish);
+        }
         submitNodeCollector.submitModel(this.model, state, poseStack, RenderTypes.entityCutout(TEXTURE), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
         poseStack.popPose();
 

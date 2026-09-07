@@ -30,8 +30,7 @@ public class GrowFlowerActionGameTest {
             SuperMarioEntityTypes.FLOWER,
             Flower.DEFAULT_SPEED,
             Flower.DEFAULT_LIFETIME,
-            Flower.DEFAULT_MAX_CLIMB,
-            false,
+            Flower.DEFAULT_RANGE,
             PowerUpCharges.cooldownRecharge(1, 10)
     );
 
@@ -62,15 +61,14 @@ public class GrowFlowerActionGameTest {
     public void theFlowerCarriesTheNumbersOfTheAction(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var player = TestPlayers.at(helper, STAND);
-        var action = new GrowFlowerPowerUpAction(SuperMarioEntityTypes.FLOWER, 0.25D, 17, 5.0D, true, PowerUpCharges.none());
+        var action = new GrowFlowerPowerUpAction(SuperMarioEntityTypes.FLOWER, 0.25D, 17, 5.0D, PowerUpCharges.none());
 
         action.trigger(player);
 
         var flower = flowerOf(helper, player);
         helper.assertValueEqual(flower.getSpeed(), 0.25D, "the speed the action asked for");
         helper.assertValueEqual(flower.getLifetime(), 17, "the lifetime the action asked for");
-        helper.assertValueEqual(flower.getMaxClimb(), 5.0D, "the height limit the action asked for");
-        helper.assertTrue(flower.isStoppedByBlocks(), "the action asked for a flower stopped by blocks");
+        helper.assertValueEqual(flower.getRange(), 5.0D, "the range the action asked for");
         helper.succeed();
     }
 
@@ -127,6 +125,22 @@ public class GrowFlowerActionGameTest {
                     helper.assertValueEqual(flower.getZ(), z, "the z a flower drifted to");
                 })
                 .thenSucceed();
+    }
+
+    /** A ceiling sends the flower on the way its holder was facing, so it has to remember which that was. */
+    @GameTest
+    public void theFlowerRemembersTheWayItWasThrown(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var player = TestPlayers.at(helper, STAND);
+        player.setYRot(Direction.EAST.toYRot());
+
+        ACTION.trigger(player);
+
+        var forward = flowerOf(helper, player).getForward();
+        helper.assertTrue(forward.x() > 1.0D - EPSILON,
+                "a flower grown by a player facing east should carry east as its forward, was " + forward);
+        helper.assertTrue(Math.abs(forward.y()) < EPSILON, "the forward of a flower should be flat");
+        helper.succeed();
     }
 
     @GameTest

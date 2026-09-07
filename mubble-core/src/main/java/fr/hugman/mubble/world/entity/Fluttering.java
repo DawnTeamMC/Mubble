@@ -5,13 +5,14 @@ import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import java.util.Optional;
 
 /**
- * An entity that can extend its jump by fluttering, granted by whichever power-up it holds.
+ * An entity that can climb again past the peak of its jump, granted by whichever power-up it holds.
  * <p>
  * Injected onto {@code Player}. Both sides run the same flutter tick for tick: the client so that the
  * movement it predicts for itself actually rises, the server so that it knows what the movement it is being
  * sent is supposed to look like.
  *
  * @see FlutterAbility
+ * @see Floating for the other half of a jump held on
  */
 public interface Fluttering {
     /**
@@ -19,13 +20,6 @@ public interface Fluttering {
      */
     default Optional<FlutterAbility> getFlutterAbility() {
         return Optional.empty();
-    }
-
-    /**
-     * @return whether the jump key is being held down right now, as far as this side can tell
-     */
-    default boolean isJumpKeyHeld() {
-        return false;
     }
 
     /**

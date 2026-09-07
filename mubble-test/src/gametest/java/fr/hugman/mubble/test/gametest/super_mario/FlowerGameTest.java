@@ -1,20 +1,24 @@
 package fr.hugman.mubble.test.gametest.super_mario;
 
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.entity.monster.goomba.Goomba;
 import fr.hugman.mubble.super_mario.world.entity.projectile.Flower;
 import fr.hugman.mubble.test.gametest.support.Arena;
 import fr.hugman.mubble.test.gametest.support.TestPlayers;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.pig.Pig;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.TripWireHookBlock;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * The huge flower the Super Flower Pot grows: it rises on its own, defeats whatever it grows through,
- * and runs out of both time and height so that it never climbs forever.
+ * The huge flower the Super Flower Pot grows: it rises on its own, defeats whatever it grows through, is
+ * sent back down and onwards by ceilings, and runs out of both time and distance so that it never travels
+ * forever.
  */
 public class FlowerGameTest {
     /** Where a flower is grown from, in structure-relative coordinates. */
@@ -40,7 +44,7 @@ public class FlowerGameTest {
 
     /**
      * Two flowers grown from the same spot have to follow the exact same path, which they only do as long
-     * as nothing touches their speed. Both halves of that are checked from what the flower has climbed so
+     * as nothing touches their speed. Both halves of that are checked from what the flower has travelled so
      * far, rather than from a tick count the test would have to guess at.
      */
     @GameTest
@@ -54,37 +58,79 @@ public class FlowerGameTest {
                 .thenExecute(() -> {
                     helper.assertValueEqual(flower.getDeltaMovement(), new Vec3(0.0D, flower.getSpeed(), 0.0D),
                             "the movement of a flower that gravity and drag should never touch");
-                    helper.assertValueEqual(flower.getClimbed(), flower.getSpeed() * flower.tickCount,
-                            "the height a flower climbed over its whole life");
-                    helper.assertValueEqual(flower.getY() - start, flower.getClimbed(),
-                            "the height a flower climbed, against where it actually ended up");
+                    helper.assertValueEqual(flower.getTravelled(), flower.getSpeed() * flower.tickCount,
+                            "the distance a flower travelled over its whole life");
+                    helper.assertValueEqual(flower.getY() - start, flower.getTravelled(),
+                            "the distance a flower travelled, against where it actually ended up");
                 })
                 .thenSucceed();
     }
 
-    /** Rising through ceilings is the whole point: a flower stopping at the first block is useless indoors. */
+    /** A flower cannot go through blocks: a ceiling sends it back down and onwards instead of stopping it. */
     @GameTest
-    public void aFlowerGrowsThroughBlocks(GameTestHelper helper) {
+    public void aCeilingSendsAFlowerBackDownAndForward(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var flower = grow(helper);
+        // Facing north, so a bounce should carry it towards a smaller z.
+        flower.setForwardYaw(Direction.NORTH.toYRot());
         ceilingAt(helper, 5);
-        double ceiling = helper.absolutePos(new BlockPos(GROUND.getX(), 5, GROUND.getZ())).getY();
+        double planted = flower.getZ();
 
         helper.startSequence()
-                .thenWaitUntil(() -> helper.assertTrue(flower.getY() > ceiling, "the flower never made it past the ceiling"))
-                .thenExecute(() -> helper.assertFalse(flower.isRemoved(), "a flower should grow through a ceiling rather than pop against it"))
+                .thenWaitUntil(() -> helper.assertTrue(flower.hasBounced(), "the flower never bounced off the ceiling"))
+                .thenExecute(() -> {
+                    helper.assertFalse(flower.isRemoved(), "a ceiling should send a flower on rather than end it");
+                    helper.assertTrue(flower.getDeltaMovement().y() < 0.0D,
+                            "a bounced flower should be heading back down, was " + flower.getDeltaMovement());
+                    helper.assertTrue(flower.getDeltaMovement().z() < 0.0D,
+                            "a flower thrown north should be carried north by its bounce, was " + flower.getDeltaMovement());
+                })
+                .thenIdle(3)
+                .thenExecute(() -> helper.assertTrue(flower.getZ() < planted, "the flower never actually moved forward after bouncing"))
                 .thenSucceed();
     }
 
-    /** The other behaviour a data pack can ask for: pop against the first solid block instead. */
+    /** One arc and no more: back on the ground it came from, the flower is spent. */
     @GameTest
-    public void aFlowerCanBeStoppedByBlocksInstead(GameTestHelper helper) {
+    public void aBouncedFlowerWiltsWhenItComesBackDown(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var flower = grow(helper);
-        flower.setStoppedByBlocks(true);
+        flower.setLifetime(Integer.MAX_VALUE);
+        flower.setRange(Double.MAX_VALUE);
         ceilingAt(helper, 5);
 
-        helper.succeedWhen(() -> helper.assertTrue(flower.isRemoved(), "a flower stopped by blocks should pop against the ceiling"));
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(flower.hasBounced(), "the flower never bounced off the ceiling"))
+                .thenWaitUntil(() -> helper.assertTrue(flower.isRemoved(), "a bounced flower should wilt once it is back on the ground"))
+                .thenSucceed();
+    }
+
+    /**
+     * A flower is a projectile like any other as far as the redstone it moves through is concerned: a whole
+     * tripwire, hooks and all, so that the test covers what a player would actually build.
+     */
+    @GameTest
+    public void aFlowerTriggersTripwireHooks(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        int y = GROUND.getY() + 3;
+        int z = GROUND.getZ();
+        // A wire strung between two hooks, running through the column the flower grows in.
+        helper.setBlock(new BlockPos(GROUND.getX() - 2, y, z), Blocks.STONE);
+        helper.setBlock(new BlockPos(GROUND.getX() + 2, y, z), Blocks.STONE);
+        BlockPos hook = new BlockPos(GROUND.getX() - 1, y, z);
+        BlockPos farHook = new BlockPos(GROUND.getX() + 1, y, z);
+        helper.setBlock(hook, Blocks.TRIPWIRE_HOOK.defaultBlockState().setValue(TripWireHookBlock.FACING, Direction.EAST));
+        helper.setBlock(new BlockPos(GROUND.getX(), y, z), Blocks.TRIPWIRE);
+        helper.setBlock(farHook, Blocks.TRIPWIRE_HOOK.defaultBlockState().setValue(TripWireHookBlock.FACING, Direction.WEST));
+        // Placing the blocks outright leaves the hooks unaware of each other; this is the pass vanilla runs
+        // when a player puts one down, and what actually strings the wire between them.
+        attach(helper, hook);
+        attach(helper, farHook);
+
+        helper.assertBlockProperty(hook, TripWireHookBlock.ATTACHED, true);
+        grow(helper);
+
+        helper.succeedWhen(() -> helper.assertBlockProperty(hook, TripWireHookBlock.POWERED, true));
     }
 
     @GameTest
@@ -93,7 +139,7 @@ public class FlowerGameTest {
         var flower = grow(helper);
         flower.setLifetime(6);
         // Well out of reach, so that the height limit cannot be what ends this one.
-        flower.setMaxClimb(Double.MAX_VALUE);
+        flower.setRange(Double.MAX_VALUE);
 
         helper.startSequence()
                 .thenIdle(3)
@@ -103,16 +149,44 @@ public class FlowerGameTest {
     }
 
     @GameTest
-    public void aFlowerWiltsOnceItHasClimbedFarEnough(GameTestHelper helper) {
+    public void aFlowerWiltsOnceItHasTravelledFarEnough(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var flower = grow(helper);
         flower.setLifetime(Integer.MAX_VALUE);
-        flower.setMaxClimb(2.0D);
+        flower.setRange(2.0D);
 
         helper.succeedWhen(() -> {
-            helper.assertTrue(flower.isRemoved(), "the flower should wilt once it has climbed its whole height");
-            helper.assertTrue(flower.getClimbed() >= 2.0D, "the flower wilted before climbing its whole height");
+            helper.assertTrue(flower.isRemoved(), "the flower should wilt once it has travelled its whole range");
+            helper.assertTrue(flower.getTravelled() >= 2.0D, "the flower wilted before travelling its whole range");
         });
+    }
+
+    /** The enemies of the module go down in one, the way they do in the games they come from. */
+    @GameTest
+    public void aFlowerDefeatsMarioEnemiesOutright(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Goomba goomba = helper.spawnWithNoFreeWill(SuperMarioEntityTypes.GOOMBA, GROUND.above(2));
+        helper.assertTrue(goomba.getMaxHealth() > Flower.DAMAGE,
+                "a goomba that a plain hit would kill anyway proves nothing, it has " + goomba.getMaxHealth() + " health");
+        grow(helper);
+
+        helper.succeedWhen(() -> helper.assertTrue(goomba.isDeadOrDying(), "the flower should defeat a Mario enemy outright"));
+    }
+
+    /** Everything else takes what a ball would have dealt, and lives to tell the tale. */
+    @GameTest
+    public void aFlowerOnlyChipsAtEverythingElse(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Pig pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, GROUND.above(2));
+        grow(helper);
+
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(pig.getHealth() < pig.getMaxHealth(), "the pig was never hit at all"))
+                .thenExecute(() -> {
+                    helper.assertFalse(pig.isDeadOrDying(), "only the enemies of the module should go down in one");
+                    helper.assertValueEqual(pig.getHealth(), pig.getMaxHealth() - Flower.DAMAGE, "the health left on a hit pig");
+                })
+                .thenSucceed();
     }
 
     @GameTest
@@ -174,6 +248,11 @@ public class FlowerGameTest {
     }
 
     /** {@code spawn} takes structure-relative coordinates and works the absolute ones out itself. */
+    private static void attach(GameTestHelper helper, BlockPos hook) {
+        var absolute = helper.absolutePos(hook);
+        TripWireHookBlock.calculateState(helper.getLevel(), absolute, helper.getLevel().getBlockState(absolute), false, false, -1, null);
+    }
+
     private static Flower grow(GameTestHelper helper) {
         return helper.spawn(SuperMarioEntityTypes.FLOWER, new Vec3(GROUND.getX() + 0.5D, GROUND.getY(), GROUND.getZ() + 0.5D));
     }
