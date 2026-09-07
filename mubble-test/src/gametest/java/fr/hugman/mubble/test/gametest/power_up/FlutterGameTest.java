@@ -29,9 +29,11 @@ public class FlutterGameTest {
     /** The upward push a jump is worth, near enough to what {@code jumpFromGround} gives a player. */
     private static final Vec3 JUMP = new Vec3(0.0D, 0.42D, 0.0D);
     /** The duration of the fixture, see {@code flutterer.json}. */
-    private static final int FLUTTER_DURATION = 20;
-    /** Long enough for a jump to peak and for the flutter to be under way, with room left in it. */
-    private static final int PEAK_TICKS = 10;
+    private static final int FLUTTER_DURATION = 10;
+    /** Long enough for a jump to peak and for the flutter to have started, with all of it still to run. */
+    private static final int PEAK_TICKS = 8;
+    /** Long enough for a flutter to have turned its opening drop around and won height back. */
+    private static final int CARRY_TICKS = 16;
     /** Long enough for anything left in the air to have come back down. */
     private static final int LANDING_TICKS = 40;
 
@@ -65,12 +67,36 @@ public class FlutterGameTest {
         var fluttering = jumper(helper, PowerUpFixtures.FLUTTERER);
         var plain = jumper(helper, PowerUpFixtures.EMPTY);
 
-        fall(fluttering, JUMP_HELD, PEAK_TICKS);
-        fall(plain, JUMP_HELD, PEAK_TICKS);
+        fall(fluttering, JUMP_HELD, CARRY_TICKS);
+        fall(plain, JUMP_HELD, CARRY_TICKS);
 
         helper.assertTrue(fluttering.getY() > plain.getY(),
                 "a fluttering player should be higher up than one falling plainly, was "
                         + fluttering.getY() + " against " + plain.getY());
+        helper.succeed();
+    }
+
+    /**
+     * The feel of the thing: the holder keeps sinking for a moment after the key catches, and only then is
+     * carried up. A flutter that lifted from its very first tick would just be a second jump.
+     */
+    @GameTest
+    public void theFlutterHangsBeforeItLifts(GameTestHelper helper) {
+        var player = jumper(helper, PowerUpFixtures.FLUTTERER);
+
+        // Up to the very tick the flutter takes over, so that it is that one being measured.
+        double before = player.getY();
+        for (int tick = 0; tick < 20 && !player.isFluttering(); tick++) {
+            before = player.getY();
+            TestPlayers.tick(player, JUMP_HELD);
+        }
+        helper.assertTrue(player.isFluttering(), "the flutter never started, the test proves nothing");
+        helper.assertTrue(player.getY() < before, "the first tick of a flutter should still be sinking, not lifting");
+
+        double hung = player.getY();
+        fall(player, JUMP_HELD, 7);
+
+        helper.assertTrue(player.getY() > hung, "the flutter should turn its own drop around and carry the player up");
         helper.succeed();
     }
 

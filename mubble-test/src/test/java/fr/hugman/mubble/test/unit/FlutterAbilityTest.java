@@ -8,36 +8,55 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * The shape of the climb half of a jump held on: how much lift each of its ticks is worth.
+ * The shape of the climb half of a jump held on: what each of its ticks is worth.
  * <p>
- * A flutter builds rather than holding one speed, which is what tells it apart from a second jump, so the
- * curve behind it is worth pinning down on its own, away from a level and a player.
+ * A flutter opens on a drop and only turns that around a few ticks in, which is what makes the lift land as
+ * a snap rather than as a balloon. The curve behind that is worth pinning down on its own, away from a level
+ * and a player.
  */
 public class FlutterAbilityTest {
-    private static final int DURATION = 20;
-    private static final float SPEED = 0.05F;
-    private static final float ACCELERATION = 0.005F;
+    private static final int DURATION = 8;
+    private static final float DROP = 0.2F;
+    private static final float ACCELERATION = 0.1F;
 
-    private static final FlutterAbility FLUTTER = FlutterAbility.of(DURATION, SPEED, ACCELERATION);
+    private static final FlutterAbility FLUTTER = FlutterAbility.of(DURATION, DROP, ACCELERATION);
     private static final float EPSILON = 1.0E-6F;
 
     @Test
-    @DisplayName("the flutter opens on its own speed, so that the jump key is never ignored")
-    void theFirstTickAlreadyLifts() {
-        assertEquals(SPEED, FLUTTER.liftAt(0), EPSILON, "the very first tick of a flutter");
-        assertTrue(FLUTTER.liftAt(0) > 0.0F, "the very first tick should already carry the player");
+    @DisplayName("the flutter opens on a drop rather than on a lift")
+    void theFlutterOpensOnADrop() {
+        assertEquals(-DROP, FLUTTER.liftAt(0), EPSILON, "the very first tick of a flutter");
+        assertTrue(FLUTTER.liftAt(0) < 0.0F, "the first tick of a flutter should still be sinking");
     }
 
     @Test
-    @DisplayName("every tick lifts a little harder than the one before it")
-    void theLiftKeepsBuilding() {
+    @DisplayName("every tick takes the same bite out of the drop, and then out of the sky")
+    void everyTickIsWorthTheAcceleration() {
         for (int tick = 1; tick < DURATION; tick++) {
             assertEquals(ACCELERATION, FLUTTER.liftAt(tick) - FLUTTER.liftAt(tick - 1), EPSILON,
                     "the speed tick " + tick + " added to the one before it");
         }
     }
 
-    /** A flutter that plateaued would carry its holder the same way a rising platform does. */
+    @Test
+    @DisplayName("the hang lasts until the acceleration has eaten the drop, and no longer")
+    void theHangGivesWayToLift() {
+        int hang = FLUTTER.hangTicks();
+
+        assertTrue(hang > 0, "a flutter should hang for at least a tick before lifting");
+        assertTrue(hang < DURATION, "a flutter that hung for its whole duration would never lift at all");
+        assertTrue(FLUTTER.liftAt(hang - 1) < 0.0F, "the last tick of the hang should still be sinking");
+        assertTrue(FLUTTER.liftAt(hang) >= 0.0F, "the tick after the hang should no longer be sinking");
+    }
+
+    /** A couple of ticks and no more: the hang is an anticipation, not a fall. */
+    @Test
+    @DisplayName("the hang is over in a couple of ticks")
+    void theHangIsShort() {
+        assertEquals(2, FLUTTER.hangTicks(), "the ticks a flutter hangs for");
+    }
+
+    /** A flutter that plateaued would carry its holder the way a rising platform does. */
     @Test
     @DisplayName("the lift never settles on a top speed")
     void theLiftNeverPlateaus() {
@@ -46,39 +65,39 @@ public class FlutterAbilityTest {
     }
 
     @Test
-    @DisplayName("a flutter without acceleration holds one speed throughout")
-    void noAccelerationMeansOneSpeed() {
-        var steady = FlutterAbility.of(DURATION, SPEED, 0.0F);
-
-        assertEquals(SPEED, steady.liftAt(0), EPSILON, "the first tick of a flutter with no acceleration");
-        assertEquals(SPEED, steady.liftAt(DURATION - 1), EPSILON, "the last tick of a flutter with no acceleration");
-        assertEquals(SPEED * DURATION, steady.totalLift(), EPSILON, "the whole of a flutter with no acceleration");
-    }
-
-    @Test
-    @DisplayName("a whole flutter is worth its opening speed plus everything the acceleration added")
-    void theAccelerationIsWorthTheClimb() {
+    @DisplayName("a flutter is worth height overall, drop and all")
+    void theFlutterIsWorthHeightOverall() {
         // The acceleration is added once on the second tick, twice on the third, and so on.
         float ticks = DURATION;
-        float expected = SPEED * ticks + ACCELERATION * (ticks - 1.0F) * ticks / 2.0F;
+        float expected = ACCELERATION * (ticks - 1.0F) * ticks / 2.0F - DROP * ticks;
 
         assertEquals(expected, FLUTTER.totalLift(), EPSILON, "the height a whole flutter is worth");
-        assertTrue(FLUTTER.totalLift() > SPEED * DURATION, "the acceleration should be worth height of its own");
+        assertTrue(FLUTTER.totalLift() > 0.0F, "a flutter should be worth more than the drop it opens on");
     }
 
     @Test
-    @DisplayName("a flutter that lasts no time at all lifts nothing")
-    void anEmptyFlutterLiftsNothing() {
-        assertEquals(0.0F, FlutterAbility.of(0, SPEED, ACCELERATION).totalLift(), EPSILON, "a flutter of no duration");
+    @DisplayName("a flutter that never accelerates never stops sinking")
+    void noAccelerationMeansNoLift() {
+        var stalled = FlutterAbility.of(DURATION, DROP, 0.0F);
+
+        assertEquals(-DROP, stalled.liftAt(DURATION - 1), EPSILON, "the last tick of a flutter with no acceleration");
+        assertEquals(DURATION, stalled.hangTicks(), "a flutter with no acceleration hangs for its whole duration");
+        assertTrue(stalled.totalLift() < 0.0F, "a flutter that never lifts should not be worth any height");
     }
 
     @Test
-    @DisplayName("numbers that would push the holder down are refused")
+    @DisplayName("a flutter that lasts no time at all is worth nothing")
+    void anEmptyFlutterIsWorthNothing() {
+        assertEquals(0.0F, FlutterAbility.of(0, DROP, ACCELERATION).totalLift(), EPSILON, "a flutter of no duration");
+    }
+
+    @Test
+    @DisplayName("numbers written the wrong way round are refused")
     void negativeNumbersAreRefused() {
         var backwards = FlutterAbility.of(-10, -0.5F, -0.1F);
 
         assertEquals(0, backwards.duration(), "a negative duration");
-        assertEquals(0.0F, backwards.speed(), EPSILON, "a negative speed");
+        assertEquals(0.0F, backwards.drop(), EPSILON, "a negative drop");
         assertEquals(0.0F, backwards.acceleration(), EPSILON, "a negative acceleration");
     }
 }

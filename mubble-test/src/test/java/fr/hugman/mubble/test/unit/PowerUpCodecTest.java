@@ -139,7 +139,7 @@ public class PowerUpCodecTest {
                 .abilities();
 
         assertEquals(
-                FlutterAbility.of(FlutterAbility.DEFAULT_DURATION, FlutterAbility.DEFAULT_SPEED, FlutterAbility.DEFAULT_ACCELERATION),
+                FlutterAbility.of(FlutterAbility.DEFAULT_DURATION, FlutterAbility.DEFAULT_DROP, FlutterAbility.DEFAULT_ACCELERATION),
                 decoded.flutter().orElseThrow(() -> new AssertionError("the flutter was dropped")),
                 "a flutter with no field of its own"
         );

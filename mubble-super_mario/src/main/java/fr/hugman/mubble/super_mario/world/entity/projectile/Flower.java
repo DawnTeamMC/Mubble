@@ -7,6 +7,7 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -23,11 +24,14 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -36,13 +40,16 @@ import org.jspecify.annotations.Nullable;
  * <p>
  * It is aimed at nothing: it goes straight up from where it was planted, at a speed of its own that neither
  * gravity nor drag ever touches, and defeats whatever it grows through on the way — outright, for the enemies
- * of the module. Ceilings send it back down and onwards instead of stopping it, along the way its holder was
- * facing when they grew it, so a flower grown indoors sweeps a room rather than dying against the first slab.
- * It is not something to stand on, to shoot down or to bounce off: it is only ever in the way of what it is
- * about to hit.
+ * of the module.
  * <p>
- * Its whole path is worth a set distance and a set number of ticks, whichever runs out first, and anything it
- * runs into other than a ceiling ends it there and then.
+ * It cannot go through blocks, and a ceiling does not stop it either: it ducks down and forward for a moment,
+ * along the way its holder was facing when they grew it, and then goes back to climbing from wherever that
+ * left it. A flower grown under a roof keeps trying to get out from under it rather than dying against the
+ * first slab, and only ever runs out of time or of distance.
+ * <p>
+ * It is not something to stand on, to shoot down or to bounce off: it is only ever in the way of what it is
+ * about to hit. Blocks it runs into are hit the way any projectile hits them, and the ones it passes through
+ * are entered the way any entity enters them.
  *
  * @since v4.0.0
  */
@@ -59,9 +66,13 @@ public class Flower extends Projectile {
     /** The damage a flower deals, the same as the ball projectiles of the mod. */
     public static final float DAMAGE = 3.0F;
 
-    /** The share of its speed a flower carries forward once a ceiling has sent it back down. */
-    private static final double BOUNCE_FORWARD = 0.6D;
-    /** Ticks the squish of a bounce lasts. */
+    /** How many ticks a flower spends ducking out from under a ceiling before it climbs again. */
+    private static final int ESCAPE_TICKS = 6;
+    /** The share of its speed a flower sinks at while it ducks out, which is a dip and not a fall. */
+    private static final double ESCAPE_DROP = 0.5D;
+    /** The share of its speed a flower carries forward while it ducks out, which is what clears the ceiling. */
+    private static final double ESCAPE_FORWARD = 1.0D;
+    /** Ticks the squish of hitting a ceiling lasts. */
     public static final int SQUISH_DURATION = 6;
     private static final byte EVENT_SQUISH = 100;
 
@@ -77,7 +88,7 @@ public class Flower extends Projectile {
     private static final String LIFETIME_KEY = "lifetime";
     private static final String RANGE_KEY = "range";
     private static final String FORWARD_YAW_KEY = "forward_yaw";
-    private static final String BOUNCED_KEY = "bounced";
+    private static final String ESCAPE_TICKS_KEY = "escape_ticks";
 
     private double speed = DEFAULT_SPEED;
     private int lifetime = DEFAULT_LIFETIME;
@@ -87,7 +98,8 @@ public class Flower extends Projectile {
 
     private int age;
     private double travelled;
-    private boolean bounced;
+    /** Ticks left of the duck out of a ceiling, 0 while the flower is climbing. */
+    private int escapeTicks;
     /**
      * Everything already hit, so that a flower only ever hits the same entity once.
      * <p>
@@ -122,9 +134,9 @@ public class Flower extends Projectile {
 
     public void setSpeed(double speed) {
         this.speed = speed;
-        // The heading only ever changes on a bounce, so a flower yet to have one is still going straight up
-        // and takes the new speed right away — including in the packet that spawns it on the clients.
-        if (!this.bounced) {
+        // A flower that is not ducking out of anything is climbing, so it takes the new speed right away —
+        // including in the packet that spawns it on the clients.
+        if (this.escapeTicks <= 0) {
             this.setDeltaMovement(0.0D, speed, 0.0D);
         }
     }
@@ -157,7 +169,7 @@ public class Flower extends Projectile {
     }
 
     /**
-     * @return the way a bounce sends the flower on, as a horizontal unit vector
+     * @return the way ducking out of a ceiling sends the flower on, as a horizontal unit vector
      */
     public Vec3 getForward() {
         float yaw = this.forwardYaw * (float) (Math.PI / 180.0);
@@ -172,10 +184,10 @@ public class Flower extends Projectile {
     }
 
     /**
-     * @return whether a ceiling has already sent the flower back down
+     * @return whether the flower is currently ducking out from under a ceiling rather than climbing
      */
-    public boolean hasBounced() {
-        return this.bounced;
+    public boolean isEscaping() {
+        return this.escapeTicks > 0;
     }
 
     //endregion
@@ -228,28 +240,77 @@ public class Flower extends Projectile {
             this.spawnGrowthParticles();
             return;
         }
-        if (this.horizontalCollision) {
-            // A flower cannot go through a wall, and has nowhere to go but out.
-            this.wilt();
-        } else if (this.verticalCollision) {
-            if (this.bounced) {
-                // Back on the ground it came from: the arc is over.
-                this.wilt();
-            } else {
-                this.bounce();
+
+        boolean blocked = this.horizontalCollision || this.verticalCollision;
+        if (blocked) {
+            this.hitBlocks(movement);
+        }
+        if (this.escapeTicks > 0) {
+            // The duck is over once its time is up, and early if it ran into something of its own.
+            if (--this.escapeTicks <= 0 || blocked) {
+                this.climb();
             }
+        } else if (this.verticalCollision) {
+            this.escape();
         }
     }
 
+    /** Points the flower back the only way it ever really wants to go. */
+    private void climb() {
+        this.escapeTicks = 0;
+        this.setDeltaMovement(0.0D, this.speed, 0.0D);
+    }
+
     /**
-     * Sends the flower back down and onwards after a ceiling, along the way its holder was facing.
+     * Ducks the flower down and forward for a moment, along the way its holder was facing.
+     * <p>
+     * This is not the end of its climb but an attempt to get out from under whatever is in the way: once the
+     * duck is over the flower goes straight back up, from wherever it has got to. A ceiling it fails to clear
+     * simply sends it ducking again, until it runs out of time or of distance.
      */
-    private void bounce() {
-        this.bounced = true;
-        Vec3 forward = this.getForward().scale(this.speed * BOUNCE_FORWARD);
-        this.setDeltaMovement(forward.x(), -this.speed, forward.z());
+    private void escape() {
+        this.escapeTicks = ESCAPE_TICKS;
+        Vec3 forward = this.getForward().scale(this.speed * ESCAPE_FORWARD);
+        this.setDeltaMovement(forward.x(), -this.speed * ESCAPE_DROP, forward.z());
         this.level().broadcastEntityEvent(this, EVENT_SQUISH);
-        this.playSound(this.getBounceSound(), 0.7F, 1.4F);
+        this.playSound(this.getEscapeSound(), 0.7F, 1.4F);
+    }
+
+    /**
+     * Hits whatever the flower ran into the way any projectile would, so that target blocks and everything
+     * else keyed on being shot at answer to it.
+     * <p>
+     * {@link Entity#move} zeroes out whichever component ran into a block, which is how the faces that were
+     * actually hit are found.
+     *
+     * @param requested the movement the flower asked for, before collisions cut it short
+     */
+    private void hitBlocks(Vec3 requested) {
+        Vec3 actual = this.getDeltaMovement();
+        if (blocked(requested.x(), actual.x())) {
+            this.hitBlock(Direction.get(requested.x() > 0.0D ? Direction.AxisDirection.POSITIVE : Direction.AxisDirection.NEGATIVE, Direction.Axis.X));
+        }
+        if (blocked(requested.y(), actual.y())) {
+            this.hitBlock(Direction.get(requested.y() > 0.0D ? Direction.AxisDirection.POSITIVE : Direction.AxisDirection.NEGATIVE, Direction.Axis.Y));
+        }
+        if (blocked(requested.z(), actual.z())) {
+            this.hitBlock(Direction.get(requested.z() > 0.0D ? Direction.AxisDirection.POSITIVE : Direction.AxisDirection.NEGATIVE, Direction.Axis.Z));
+        }
+    }
+
+    private static boolean blocked(double requested, double actual) {
+        return Math.abs(requested) > 1.0E-7D && Math.abs(actual) < 1.0E-7D;
+    }
+
+    private void hitBlock(Direction direction) {
+        Vec3 from = this.getBoundingBox().getCenter();
+        Vec3 to = from.add(Vec3.atLowerCornerOf(direction.getUnitVec3i()).scale(SIZE / 2.0D + 0.25D));
+        BlockHitResult hit = this.level().clip(new ClipContext(from, to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+        if (hit.getType() != HitResult.Type.BLOCK) {
+            return;
+        }
+        BlockState state = this.level().getBlockState(hit.getBlockPos());
+        state.onProjectileHit(this.level(), state, hit, this);
     }
 
     /**
@@ -337,7 +398,7 @@ public class Flower extends Projectile {
         return SoundEvents.BONE_MEAL_USE;
     }
 
-    protected SoundEvent getBounceSound() {
+    protected SoundEvent getEscapeSound() {
         return SoundEvents.AZALEA_LEAVES_HIT;
     }
 
@@ -437,7 +498,7 @@ public class Flower extends Projectile {
         output.putInt(LIFETIME_KEY, this.lifetime);
         output.putDouble(RANGE_KEY, this.range);
         output.putFloat(FORWARD_YAW_KEY, this.forwardYaw);
-        output.putBoolean(BOUNCED_KEY, this.bounced);
+        output.putInt(ESCAPE_TICKS_KEY, this.escapeTicks);
     }
 
     @Override
@@ -449,7 +510,7 @@ public class Flower extends Projectile {
         this.lifetime = input.getIntOr(LIFETIME_KEY, DEFAULT_LIFETIME);
         this.range = input.getDoubleOr(RANGE_KEY, DEFAULT_RANGE);
         this.forwardYaw = input.getFloatOr(FORWARD_YAW_KEY, 0.0F);
-        this.bounced = input.getBooleanOr(BOUNCED_KEY, false);
+        this.escapeTicks = input.getIntOr(ESCAPE_TICKS_KEY, 0);
     }
 
     //endregion
