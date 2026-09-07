@@ -16,8 +16,11 @@ import net.minecraft.world.level.block.TripWireHookBlock;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * The huge flower the Super Flower Pot grows: it rises on its own, defeats whatever it grows through, ducks
+ * The huge flower the Super Flower Pot grows: it rises on its own, defeats whatever it grows through, arcs
  * out from under the ceilings it meets rather than dying against them, and runs out of both time and
  * distance so that it never travels forever.
  */
@@ -26,6 +29,9 @@ public class FlowerGameTest {
     private static final BlockPos GROUND = new BlockPos(3, Arena.FLOOR_Y + 1, 3);
     /** Enough ticks for a flower on its own numbers to be well on its way, and none of them wasted. */
     private static final int RISING_TICKS = 6;
+    /** Enough ticks to catch a whole duck, from the knock of the ceiling back to a full climb. */
+    private static final int ARC_SAMPLE_TICKS = 40;
+    private static final double EPSILON = 1.0E-6D;
 
     @GameTest
     public void aFlowerRisesStraightUp(GameTestHelper helper) {
@@ -67,9 +73,9 @@ public class FlowerGameTest {
                 .thenSucceed();
     }
 
-    /** A flower cannot go through blocks: a ceiling makes it duck down and forward rather than stopping it. */
+    /** A flower cannot go through blocks: a ceiling knocks it down and forward rather than stopping it. */
     @GameTest
-    public void aCeilingMakesAFlowerDuckDownAndForward(GameTestHelper helper) {
+    public void aCeilingKnocksAFlowerDownAndForward(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var flower = grow(helper);
         // Facing north, so the duck should carry it towards a smaller z.
@@ -78,37 +84,66 @@ public class FlowerGameTest {
         double planted = flower.getZ();
 
         helper.startSequence()
-                .thenWaitUntil(() -> helper.assertTrue(flower.isEscaping(), "the flower never ducked out of the ceiling"))
+                .thenWaitUntil(() -> helper.assertTrue(flower.isEscaping(), "the flower never came off the ceiling"))
                 .thenExecute(() -> {
                     helper.assertFalse(flower.isRemoved(), "a ceiling should send a flower on rather than end it");
                     helper.assertTrue(flower.getDeltaMovement().y() < 0.0D,
-                            "a flower ducking out should be heading back down, was " + flower.getDeltaMovement());
+                            "a flower knocked off a ceiling should be heading back down, was " + flower.getDeltaMovement());
                     helper.assertTrue(flower.getDeltaMovement().z() < 0.0D,
-                            "a flower thrown north should be carried north by its duck, was " + flower.getDeltaMovement());
+                            "a flower thrown north should be carried north by the knock, was " + flower.getDeltaMovement());
                 })
                 .thenIdle(3)
-                .thenExecute(() -> helper.assertTrue(flower.getZ() < planted, "the flower never actually moved forward while ducking"))
+                .thenExecute(() -> helper.assertTrue(flower.getZ() < planted, "the flower never actually moved forward off the ceiling"))
                 .thenSucceed();
     }
 
-    /** The duck is an attempt to get out, not the end of the climb: what follows it is more climbing. */
+    /**
+     * The shape of the whole thing: a ceiling has to bend the flower's path rather than break it.
+     * <p>
+     * What that means tick by tick is that the vertical speed only ever climbs back, by no more than the pull
+     * towards the sky each time — a flower that snapped out of its duck would gain the whole of its speed in
+     * one tick, and one that snapped into it would never pass through the speeds in between.
+     */
     @GameTest(maxTicks = 200)
-    public void aFlowerClimbsAgainAfterDuckingOut(GameTestHelper helper) {
+    public void aKnockArcsBackIntoAClimbRatherThanSnapping(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var flower = grow(helper);
         flower.setLifetime(Integer.MAX_VALUE);
         flower.setRange(Double.MAX_VALUE);
-        ceilingAt(helper, 5);
+        // A roof it can actually get out from under: knocked once, it drifts clear and climbs freely, which
+        // is the whole arc in one piece. Boxed in, it would be knocked again halfway back up.
+        roofUpTo(helper, 5, GROUND.getZ());
 
+        List<Double> climb = new ArrayList<>();
         helper.startSequence()
-                .thenWaitUntil(() -> helper.assertTrue(flower.isEscaping(), "the flower never ducked out of the ceiling"))
-                .thenWaitUntil(() -> helper.assertFalse(flower.isEscaping(), "the flower never stopped ducking"))
-                .thenExecute(() -> {
-                    helper.assertFalse(flower.isRemoved(), "a flower should still be around once it has ducked out");
-                    helper.assertValueEqual(flower.getDeltaMovement(), new Vec3(0.0D, flower.getSpeed(), 0.0D),
-                            "the movement of a flower that has gone back to climbing");
-                })
+                .thenExecuteFor(ARC_SAMPLE_TICKS, () -> climb.add(flower.getDeltaMovement().y()))
+                .thenExecute(() -> assertArc(helper, climb, flower.getSpeed(), flower.getLiftPerTick()))
                 .thenSucceed();
+    }
+
+    /**
+     * Walks the vertical speeds of one duck, from the tick the ceiling knocked the flower down to the tick it
+     * is climbing at full speed again, and checks that every step in between is one the pull upwards could
+     * have made.
+     */
+    private static void assertArc(GameTestHelper helper, List<Double> climb, double speed, double lift) {
+        int knock = climb.indexOf(climb.stream().filter(y -> y < 0.0D).findFirst()
+                .orElseThrow(() -> new AssertionError("the flower never came off the ceiling at all, saw " + climb)));
+
+        double previous = climb.get(knock);
+        for (int tick = knock + 1; tick < climb.size(); tick++) {
+            double y = climb.get(tick);
+            if (y >= speed - EPSILON) {
+                // Back to a full climb, and it took more than the one tick a snap would have.
+                helper.assertTrue(tick - knock > 1, "the flower snapped back into its climb in a single tick");
+                return;
+            }
+            helper.assertTrue(y > previous, "the arc should keep coming back up, went from " + previous + " to " + y);
+            helper.assertTrue(y - previous <= lift + EPSILON,
+                    "the arc should gain no more than the pull upwards in a tick, went from " + previous + " to " + y);
+            previous = y;
+        }
+        throw new AssertionError("the flower never got back to a full climb, saw " + climb);
     }
 
     /** Nothing it runs into ends a flower: it only ever runs out of time or of distance. */
@@ -293,8 +328,13 @@ public class FlowerGameTest {
 
     /** Fills a whole layer of the arena, so that nothing can slip past the ceiling sideways. */
     private static void ceilingAt(GameTestHelper helper, int y) {
+        roofUpTo(helper, y, Arena.SIZE - 1);
+    }
+
+    /** The same, but stopping at {@code lastZ}, so that a flower drifting south can get out from under it. */
+    private static void roofUpTo(GameTestHelper helper, int y, int lastZ) {
         for (int x = 0; x < Arena.SIZE; x++) {
-            for (int z = 0; z < Arena.SIZE; z++) {
+            for (int z = 0; z <= lastZ; z++) {
                 helper.setBlock(new BlockPos(x, y, z), Blocks.STONE);
             }
         }
