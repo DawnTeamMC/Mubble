@@ -42,10 +42,12 @@ import org.jspecify.annotations.Nullable;
  * gravity nor drag ever touches, and defeats whatever it grows through on the way — outright, for the enemies
  * of the module.
  * <p>
- * It cannot go through blocks, and a ceiling does not stop it either: it ducks down and forward for a moment,
- * along the way its holder was facing when they grew it, and then goes back to climbing from wherever that
- * left it. A flower grown under a roof keeps trying to get out from under it rather than dying against the
- * first slab, and only ever runs out of time or of distance.
+ * It cannot go through blocks, and a ceiling does not stop it either: it is knocked down and forward, along
+ * the way its holder was facing when they grew it, and then arcs back up. What bends that arc is gravity
+ * upside down — the flower is pulled towards the sky rather than away from it, so a duck reads as a jump
+ * played the wrong way round rather than as two changes of direction. A flower grown under a roof keeps
+ * working its way out from under it rather than dying against the first slab, and only ever runs out of time
+ * or of distance.
  * <p>
  * It is not something to stand on, to shoot down or to bounce off: it is only ever in the way of what it is
  * about to hit. Blocks it runs into are hit the way any projectile hits them, and the ones it passes through
@@ -66,12 +68,19 @@ public class Flower extends Projectile {
     /** The damage a flower deals, the same as the ball projectiles of the mod. */
     public static final float DAMAGE = 3.0F;
 
-    /** How many ticks a flower spends ducking out from under a ceiling before it climbs again. */
-    private static final int ESCAPE_TICKS = 6;
-    /** The share of its speed a flower sinks at while it ducks out, which is a dip and not a fall. */
-    private static final double ESCAPE_DROP = 0.5D;
-    /** The share of its speed a flower carries forward while it ducks out, which is what clears the ceiling. */
+    /**
+     * Gravity, upside down, as a share of the speed of the flower: what it gains towards the sky every tick,
+     * and therefore how tightly a duck arcs back into a climb.
+     */
+    private static final double LIFT = 0.16D;
+    /** The share of its speed a ceiling knocks a flower down by, the way a jump is a push off the ground. */
+    private static final double ESCAPE_DROP = 0.6D;
+    /** The share of its speed a ceiling sends a flower forward by, which is what carries it out from under. */
     private static final double ESCAPE_FORWARD = 1.0D;
+    /** What the forward drift of a knock keeps every tick, so that it eases off rather than being switched off. */
+    private static final double ESCAPE_DRAG = 0.85D;
+    /** Below this, a drift is worth nothing and is dropped, so that a settled flower climbs exactly straight. */
+    private static final double MIN_DRIFT = 1.0E-4D;
     /** Ticks the squish of hitting a ceiling lasts. */
     public static final int SQUISH_DURATION = 6;
     private static final byte EVENT_SQUISH = 100;
@@ -88,7 +97,6 @@ public class Flower extends Projectile {
     private static final String LIFETIME_KEY = "lifetime";
     private static final String RANGE_KEY = "range";
     private static final String FORWARD_YAW_KEY = "forward_yaw";
-    private static final String ESCAPE_TICKS_KEY = "escape_ticks";
 
     private double speed = DEFAULT_SPEED;
     private int lifetime = DEFAULT_LIFETIME;
@@ -98,8 +106,6 @@ public class Flower extends Projectile {
 
     private int age;
     private double travelled;
-    /** Ticks left of the duck out of a ceiling, 0 while the flower is climbing. */
-    private int escapeTicks;
     /**
      * Everything already hit, so that a flower only ever hits the same entity once.
      * <p>
@@ -134,9 +140,10 @@ public class Flower extends Projectile {
 
     public void setSpeed(double speed) {
         this.speed = speed;
-        // A flower that is not ducking out of anything is climbing, so it takes the new speed right away —
-        // including in the packet that spawns it on the clients.
-        if (this.escapeTicks <= 0) {
+        // A flower that has not gone anywhere yet is still pointing straight up, and takes the new speed
+        // right away — including in the packet that spawns it on the clients. One already on its way keeps
+        // whatever heading it is on, and is brought back up to the new speed by the pull towards the sky.
+        if (this.travelled <= 0.0D) {
             this.setDeltaMovement(0.0D, speed, 0.0D);
         }
     }
@@ -184,10 +191,18 @@ public class Flower extends Projectile {
     }
 
     /**
-     * @return whether the flower is currently ducking out from under a ceiling rather than climbing
+     * @return how much a flower gains towards the sky every tick, in blocks per tick per tick
+     */
+    public double getLiftPerTick() {
+        return this.speed * LIFT;
+    }
+
+    /**
+     * @return whether the flower is still winning back the speed a ceiling knocked out of it, rather than
+     * climbing at its own
      */
     public boolean isEscaping() {
-        return this.escapeTicks > 0;
+        return this.getDeltaMovement().y() < this.speed - MIN_DRIFT;
     }
 
     //endregion
@@ -238,38 +253,40 @@ public class Flower extends Projectile {
 
         if (this.level().isClientSide()) {
             this.spawnGrowthParticles();
-            return;
-        }
-
-        boolean blocked = this.horizontalCollision || this.verticalCollision;
-        if (blocked) {
+        } else if (this.horizontalCollision || this.verticalCollision) {
             this.hitBlocks(movement);
-        }
-        if (this.escapeTicks > 0) {
-            // The duck is over once its time is up, and early if it ran into something of its own.
-            if (--this.escapeTicks <= 0 || blocked) {
-                this.climb();
+            // Only a ceiling knocks the flower away. Everything else it runs into, the pull towards the sky
+            // sorts out on its own: the movement it just lost is won back over the ticks that follow.
+            if (this.verticalCollision && movement.y() > 0.0D) {
+                this.escape();
             }
-        } else if (this.verticalCollision) {
-            this.escape();
         }
-    }
-
-    /** Points the flower back the only way it ever really wants to go. */
-    private void climb() {
-        this.escapeTicks = 0;
-        this.setDeltaMovement(0.0D, this.speed, 0.0D);
+        this.accelerate();
     }
 
     /**
-     * Ducks the flower down and forward for a moment, along the way its holder was facing.
+     * Pulls the flower towards the sky, and lets the drift of a duck ease off.
      * <p>
-     * This is not the end of its climb but an attempt to get out from under whatever is in the way: once the
-     * duck is over the flower goes straight back up, from wherever it has got to. A ceiling it fails to clear
-     * simply sends it ducking again, until it runs out of time or of distance.
+     * This is the whole of what bends a duck back into a climb. Gravity upside down turns the knock of a
+     * ceiling around over several ticks rather than at once, and tops the flower out at its own speed on the
+     * way back up, so the path it takes is the arc of a jump rather than two corners.
+     */
+    private void accelerate() {
+        Vec3 movement = this.getDeltaMovement();
+        double y = Math.min(this.speed, movement.y() + this.getLiftPerTick());
+        double x = movement.x() * ESCAPE_DRAG;
+        double z = movement.z() * ESCAPE_DRAG;
+        this.setDeltaMovement(Math.abs(x) < MIN_DRIFT ? 0.0D : x, y, Math.abs(z) < MIN_DRIFT ? 0.0D : z);
+    }
+
+    /**
+     * Knocks the flower down and forward off the ceiling it just hit, along the way its holder was facing.
+     * <p>
+     * This is not the end of its climb but the start of an attempt to get out from under whatever is in the
+     * way: it is a push and nothing more, and {@link #accelerate} is what turns it back into a climb. A
+     * ceiling the flower fails to clear simply knocks it down again, until it runs out of time or distance.
      */
     private void escape() {
-        this.escapeTicks = ESCAPE_TICKS;
         Vec3 forward = this.getForward().scale(this.speed * ESCAPE_FORWARD);
         this.setDeltaMovement(forward.x(), -this.speed * ESCAPE_DROP, forward.z());
         this.level().broadcastEntityEvent(this, EVENT_SQUISH);
@@ -498,7 +515,6 @@ public class Flower extends Projectile {
         output.putInt(LIFETIME_KEY, this.lifetime);
         output.putDouble(RANGE_KEY, this.range);
         output.putFloat(FORWARD_YAW_KEY, this.forwardYaw);
-        output.putInt(ESCAPE_TICKS_KEY, this.escapeTicks);
     }
 
     @Override
@@ -510,7 +526,6 @@ public class Flower extends Projectile {
         this.lifetime = input.getIntOr(LIFETIME_KEY, DEFAULT_LIFETIME);
         this.range = input.getDoubleOr(RANGE_KEY, DEFAULT_RANGE);
         this.forwardYaw = input.getFloatOr(FORWARD_YAW_KEY, 0.0F);
-        this.escapeTicks = input.getIntOr(ESCAPE_TICKS_KEY, 0);
     }
 
     //endregion
