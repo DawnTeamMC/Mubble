@@ -35,7 +35,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("power_up." + SuperMario.MOD_ID + ".mega.description.trade_off", "Faster, tougher and stronger, but slow to swing.");
         builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.float", "You jump higher and fall slower.");
         builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.weather", "Water and rain wash it away.");
-        builder.add("power_up." + SuperMario.MOD_ID + ".flower.description.flutter", "Hold jump past the top of a jump to flutter.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".flower.description.flutter", "Hold jump past the top of a jump to climb, then float down.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".grow_flower.description", "Press %s to grow a huge flower.");
 

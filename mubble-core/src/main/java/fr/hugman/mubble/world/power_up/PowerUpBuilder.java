@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import fr.hugman.mubble.world.power_up.ability.PowerUpAbilities;
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
@@ -30,6 +31,7 @@ public class PowerUpBuilder {
     private @Nullable Holder<SoundEvent> looseSound = null;
     private @Nullable Holder<SoundEvent> refillSound = null;
     private @Nullable FlutterAbility flutter = null;
+    private @Nullable FloatAbility floating = null;
     private @Nullable ParticleOptions particle = null;
     private @Nullable Identifier humanoidOverlayAssetId = null;
     private boolean emissiveOverlay = false;
@@ -91,10 +93,18 @@ public class PowerUpBuilder {
     }
 
     /**
-     * Lets the holder extend their jumps by fluttering, on the terms the ability is built with.
+     * Lets the holder climb again past the peak of their jumps, on the terms the ability is built with.
      */
     public PowerUpBuilder flutter(FlutterAbility flutter) {
         this.flutter = flutter;
+        return this;
+    }
+
+    /**
+     * Lets the holder come down slowly by leaning on the jump key, on the terms the ability is built with.
+     */
+    public PowerUpBuilder floating(FloatAbility floating) {
+        this.floating = floating;
         return this;
     }
 
@@ -144,7 +154,7 @@ public class PowerUpBuilder {
                 Optional.ofNullable(spriteId),
                 Optional.ofNullable(action),
                 Optional.ofNullable(attributesModifiers.isEmpty() ? null : attributesModifiers),
-                new PowerUpAbilities(Optional.ofNullable(this.flutter)),
+                new PowerUpAbilities(Optional.ofNullable(this.flutter), Optional.ofNullable(this.floating)),
                 new PowerUpCosmectics(
                         Optional.ofNullable(this.particle),
                         Optional.ofNullable(this.obtainSound),

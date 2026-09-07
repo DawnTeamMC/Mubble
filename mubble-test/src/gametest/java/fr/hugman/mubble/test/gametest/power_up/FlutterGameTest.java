@@ -14,12 +14,14 @@ import net.minecraft.world.phys.Vec3;
 import fr.hugman.mubble.world.power_up.PowerUp;
 
 /**
- * The flutter: past the top of a jump, a holder still leaning on the jump key rises again instead of
- * falling, once per jump and for as long as the ability lasts.
+ * The climb half of a jump held on: past the top of a jump, a holder still leaning on the jump key rises
+ * again instead of falling, once per jump and for as long as the ability lasts.
  * <p>
- * The fixture behind these tests flutters for 10 ticks over a ramp of 4, short enough to play out whole
- * inside an arena. Every one of them drives the player the way a client would, since the jump key and the
- * movement the flutter reads both only ever reach the server as packets.
+ * The fixture behind these tests climbs for 20 ticks and grants no float, so that what happens after the
+ * climb is a plain fall and nothing else. Every test drives the player the way a client would, since the
+ * jump key and the movement the flutter reads both only ever reach the server as packets.
+ *
+ * @see FloatGameTest for the other half
  */
 public class FlutterGameTest {
     private static final BlockPos STAND = new BlockPos(4, Arena.FLOOR_Y + 1, 3);
@@ -27,9 +29,9 @@ public class FlutterGameTest {
     /** The upward push a jump is worth, near enough to what {@code jumpFromGround} gives a player. */
     private static final Vec3 JUMP = new Vec3(0.0D, 0.42D, 0.0D);
     /** The duration of the fixture, see {@code flutterer.json}. */
-    private static final int FLUTTER_DURATION = 10;
-    /** Long enough for a jump to peak and for the flutter to be well under way. */
-    private static final int PEAK_TICKS = 12;
+    private static final int FLUTTER_DURATION = 20;
+    /** Long enough for a jump to peak and for the flutter to be under way, with room left in it. */
+    private static final int PEAK_TICKS = 10;
     /** Long enough for anything left in the air to have come back down. */
     private static final int LANDING_TICKS = 40;
 
@@ -69,6 +71,25 @@ public class FlutterGameTest {
         helper.assertTrue(fluttering.getY() > plain.getY(),
                 "a fluttering player should be higher up than one falling plainly, was "
                         + fluttering.getY() + " against " + plain.getY());
+        helper.succeed();
+    }
+
+    /** A flutter builds rather than holding one speed, which is what tells it apart from a second jump. */
+    @GameTest
+    public void theClimbKeepsBuilding(GameTestHelper helper) {
+        var player = flutteringPlayer(helper);
+
+        double before = player.getY();
+        fall(player, JUMP_HELD, 3);
+        double early = player.getY() - before;
+
+        before = player.getY();
+        fall(player, JUMP_HELD, 3);
+        double later = player.getY() - before;
+
+        helper.assertTrue(player.isFluttering(), "the flutter ended halfway through, the test proves nothing");
+        helper.assertTrue(later > early,
+                "three later ticks of a flutter should carry further than three earlier ones, was " + later + " against " + early);
         helper.succeed();
     }
 

@@ -35,19 +35,17 @@ import java.util.function.Consumer;
  * Unlike the balls the other forms throw, nothing about the shot is aimed: the flower always goes straight
  * up, and where the holder is looking only decides which side of them it is planted on.
  *
- * @param entity          the flower to grow
- * @param speed           how fast it rises, in blocks per tick
- * @param lifetime        how long it lasts at most, in ticks
- * @param maxClimb        how high it can climb before it wilts, in blocks
- * @param stoppedByBlocks whether it pops against the first solid block, rather than growing through it
- * @param charges         how many flowers the holder gets, and how spent ones come back
+ * @param entity   the flower to grow
+ * @param speed    how fast it travels, in blocks per tick
+ * @param lifetime how long it lasts at most, in ticks
+ * @param range    how far it can travel before it wilts, in blocks
+ * @param charges  how many flowers the holder gets, and how spent ones come back
  */
 public record GrowFlowerPowerUpAction(
         EntityType<?> entity,
         double speed,
         int lifetime,
-        double maxClimb,
-        boolean stoppedByBlocks,
+        double range,
         PowerUpCharges charges
 ) implements PowerUpAction, TooltipProvider {
     /** How far in front of the holder the flower is planted, so that its 2×2 model does not clip into them. */
@@ -57,8 +55,7 @@ public record GrowFlowerPowerUpAction(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("entity").forGetter(GrowFlowerPowerUpAction::entity),
             Codec.DOUBLE.optionalFieldOf("speed", Flower.DEFAULT_SPEED).forGetter(GrowFlowerPowerUpAction::speed),
             Codec.INT.optionalFieldOf("lifetime", Flower.DEFAULT_LIFETIME).forGetter(GrowFlowerPowerUpAction::lifetime),
-            Codec.DOUBLE.optionalFieldOf("max_climb", Flower.DEFAULT_MAX_CLIMB).forGetter(GrowFlowerPowerUpAction::maxClimb),
-            Codec.BOOL.optionalFieldOf("stopped_by_blocks", false).forGetter(GrowFlowerPowerUpAction::stoppedByBlocks),
+            Codec.DOUBLE.optionalFieldOf("range", Flower.DEFAULT_RANGE).forGetter(GrowFlowerPowerUpAction::range),
             PowerUpCharges.CODEC.optionalFieldOf("charges", PowerUpCharges.DEFAULT).forGetter(GrowFlowerPowerUpAction::charges)
     ).apply(instance, GrowFlowerPowerUpAction::new));
 
@@ -66,8 +63,7 @@ public record GrowFlowerPowerUpAction(
             ByteBufCodecs.registry(Registries.ENTITY_TYPE), GrowFlowerPowerUpAction::entity,
             ByteBufCodecs.DOUBLE, GrowFlowerPowerUpAction::speed,
             ByteBufCodecs.INT, GrowFlowerPowerUpAction::lifetime,
-            ByteBufCodecs.DOUBLE, GrowFlowerPowerUpAction::maxClimb,
-            ByteBufCodecs.BOOL, GrowFlowerPowerUpAction::stoppedByBlocks,
+            ByteBufCodecs.DOUBLE, GrowFlowerPowerUpAction::range,
             PowerUpCharges.STREAM_CODEC, GrowFlowerPowerUpAction::charges,
             GrowFlowerPowerUpAction::new
     );
@@ -113,8 +109,9 @@ public record GrowFlowerPowerUpAction(
             flower.setOwner(player);
             flower.setSpeed(this.speed);
             flower.setLifetime(this.lifetime);
-            flower.setMaxClimb(this.maxClimb);
-            flower.setStoppedByBlocks(this.stoppedByBlocks);
+            flower.setRange(this.range);
+            // Where a ceiling will send it on, since the holder is free to turn away in the meantime.
+            flower.setForwardYaw(player.getYRot());
         }
 
         Vec3 spot = plantingSpot(player, entity.getBbWidth());

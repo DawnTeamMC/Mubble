@@ -10,6 +10,7 @@ import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowe
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.PowerUpCharges;
+import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -135,17 +136,22 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.FLOWER,
                         Flower.DEFAULT_SPEED,
                         Flower.DEFAULT_LIFETIME,
-                        Flower.DEFAULT_MAX_CLIMB,
-                        false,
+                        Flower.DEFAULT_RANGE,
                         // One flower at a time, the next one coming half a second after the last.
                         PowerUpCharges.cooldownRecharge(1, 10)
                 )))
-                // Placeholders until the flutter gets assets of its own: leaves and a wing beat are what
-                // it should read as, and both come from vanilla for now.
+                // Placeholders until the two halves of the jump get assets of their own: leaves and a wing
+                // beat are what they should read as, and both come from vanilla for now.
                 .flutter(new FlutterAbility(
                         FlutterAbility.DEFAULT_DURATION,
-                        FlutterAbility.DEFAULT_RAMP,
-                        FlutterAbility.DEFAULT_STRENGTH,
+                        FlutterAbility.DEFAULT_SPEED,
+                        FlutterAbility.DEFAULT_ACCELERATION,
+                        Optional.of(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BAT_LOOP)),
+                        Optional.of(ParticleTypes.CHERRY_LEAVES)
+                ))
+                .floating(new FloatAbility(
+                        FloatAbility.DEFAULT_SPEED,
+                        FloatAbility.DEFAULT_FALL_DAMAGE,
                         Optional.of(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BAT_LOOP)),
                         Optional.of(ParticleTypes.CHERRY_LEAVES)
                 ))

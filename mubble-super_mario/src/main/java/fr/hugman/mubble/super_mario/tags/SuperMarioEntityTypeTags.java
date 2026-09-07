@@ -12,6 +12,8 @@ public class SuperMarioEntityTypeTags {
     public static final TagKey<EntityType<?>> STOMPABLE = bind("stompable");
 
     public static final TagKey<EntityType<?>> ALL = bind("all");
+    /** The enemies of the universe, which some of its attacks defeat outright rather than chip at. */
+    public static final TagKey<EntityType<?>> ENEMIES = bind("enemies");
     public static final TagKey<EntityType<?>> BUBBLE_CAN_TRAP = bind("bubble_can_trap");
     public static final TagKey<EntityType<?>> BUBBLE_CANNOT_TRAP = bind("bubble_cannot_trap");
 
