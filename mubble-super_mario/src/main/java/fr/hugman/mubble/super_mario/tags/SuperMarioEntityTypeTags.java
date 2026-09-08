@@ -11,6 +11,8 @@ public class SuperMarioEntityTypeTags {
     public static final TagKey<EntityType<?>> CAN_STOMP = bind("can_stomp");
     public static final TagKey<EntityType<?>> STOMPABLE = bind("stompable");
 
+    public static final TagKey<EntityType<?>> FREEZE_IMMUNE = bind("freeze_immune");
+
     public static final TagKey<EntityType<?>> ALL = bind("all");
     /** The enemies of the universe, which some of its attacks defeat outright rather than chip at. */
     public static final TagKey<EntityType<?>> ENEMIES = bind("enemies");

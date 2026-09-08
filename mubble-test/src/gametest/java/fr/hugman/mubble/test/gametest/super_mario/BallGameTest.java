@@ -1,11 +1,12 @@
 package fr.hugman.mubble.test.gametest.super_mario;
 
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.entity.freeze.Freezing;
+import fr.hugman.mubble.super_mario.world.entity.projectile.Iceball;
 import fr.hugman.mubble.world.entity.projectile.Ball;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.pig.Pig;
@@ -68,18 +69,39 @@ public class BallGameTest {
     }
 
     @GameTest(maxTicks = 100)
-    public void iceballSlowsDownWhatItHits(GameTestHelper helper) {
+    public void iceballFreezesWhatItHits(GameTestHelper helper) {
         buildFloor(helper);
         Pig pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET_POS);
 
         shootAt(helper, SuperMarioEntityTypes.ICEBALL, TARGET_POS);
 
         helper.succeedWhen(() -> {
-            // Checked first: the vanilla assertion right below reports failures without any context.
-            helper.assertTrue(pig.hasEffect(MobEffects.SLOWNESS), "the iceball did not slow the pig down");
-            helper.assertLivingEntityHasMobEffect(pig, MobEffects.SLOWNESS, 1);
+            helper.assertTrue(Freezing.isFrozen(pig), "the iceball did not freeze the pig");
             helper.assertTrue(pig.getHealth() < pig.getMaxHealth(), "the iceball did not hurt the pig");
             helper.assertTrue(pig.getRemainingFireTicks() <= 0, "the iceball set the pig on fire");
+        });
+    }
+
+    @GameTest(maxTicks = 100)
+    public void iceballShattersOnWhatIsAlreadyFrozen(GameTestHelper helper) {
+        buildFloor(helper);
+        Pig pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, TARGET_POS);
+
+        Freezing.freezeFor(helper.getLevel(), pig, 200);
+        float health = pig.getHealth();
+        // the game time the ice is due to break: unlike the remaining ticks it only moves if something
+        // shortens the freeze, so it tells a chipped block of ice apart from one merely counting down
+        long endsAt = Freezing.getState(pig).endsAt();
+
+        shootAt(helper, SuperMarioEntityTypes.ICEBALL, TARGET_POS);
+
+        // a block of ice is a wall to the next ice ball: it bursts against it and leaves it as it was
+        helper.succeedWhen(() -> {
+            helper.assertTrue(helper.getLevel().getEntitiesOfClass(Iceball.class, helper.getBounds()).isEmpty(),
+                    "the iceball did not burst on the frozen pig");
+            helper.assertTrue(pig.getHealth() == health, "the iceball hurt a pig that was already frozen");
+            helper.assertTrue(Freezing.getState(pig) != null && Freezing.getState(pig).endsAt() == endsAt,
+                    "the iceball chipped away at the ice it burst on");
         });
     }
 
