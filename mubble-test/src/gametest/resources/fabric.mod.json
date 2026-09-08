@@ -29,6 +29,8 @@
       "fr.hugman.mubble.test.gametest.super_mario.FlowerGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.SpawnCloudPlatformActionGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.GrowFlowerActionGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.FreezeGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.FreezeCommandGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.BlockTransformGameTest",
       "fr.hugman.mubble.test.gametest.collectible.CollectibleEntityGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.BumpableBlockGameTest",

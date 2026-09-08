@@ -4,6 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "EntityMixin",
+    "FrozenEntityMixin",
+    "FrozenLivingEntityMixin",
     "LivingEntityMixin"
   ],
   "injectors": {

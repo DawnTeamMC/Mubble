@@ -1,5 +1,6 @@
 package fr.hugman.mubble.super_mario.client.references;
 
+import fr.hugman.mubble.super_mario.client.renderer.entity.state.FreezeRenderData;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.RenderStateDataKey;
@@ -7,6 +8,9 @@ import org.joml.Quaternionfc;
 
 @Environment(EnvType.CLIENT)
 public class SuperMarioRenderStateDataKeys {
+    /** The block of ice around the entity, {@code null} whenever it is not frozen. */
+    public static final RenderStateDataKey<FreezeRenderData> FREEZE = RenderStateDataKey.create(() -> "Freeze");
+
     /** Set on entities held inside a {@link fr.hugman.mubble.super_mario.world.entity.projectile.Bubble}. */
     public static final RenderStateDataKey<BubbleRide> BUBBLE_RIDE = RenderStateDataKey.create(() -> "Bubble ride");
 
