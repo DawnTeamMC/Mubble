@@ -11,6 +11,7 @@ public class SuperMarioDamageTypeIds {
     public static final ResourceKey<DamageType> FIREBALL = createKey("fireball");
     public static final ResourceKey<DamageType> ICEBALL = createKey("iceball");
     public static final ResourceKey<DamageType> GOLD_FIREBALL = createKey("gold_fireball");
+    public static final ResourceKey<DamageType> FLOWER = createKey("flower");
 
     private static ResourceKey<DamageType> createKey(String path) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, SuperMario.id(path));

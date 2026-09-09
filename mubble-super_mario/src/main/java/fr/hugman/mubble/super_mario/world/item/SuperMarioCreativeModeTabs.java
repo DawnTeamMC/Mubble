@@ -50,6 +50,7 @@ public class SuperMarioCreativeModeTabs {
             entries.accept(SuperMarioItems.GOLD_FLOWER);
             entries.accept(SuperMarioItems.CLOUD_FLOWER);
             entries.accept(SuperMarioItems.BUBBLE_FLOWER);
+            entries.accept(SuperMarioItems.SUPER_FLOWER_POT);
             entries.accept(SuperMarioItems.MINI_MUSHROOM);
             entries.accept(SuperMarioItems.MEGA_MUSHROOM);
             entries.accept(SuperMarioBlocks.QUESTION_BLOCK);

@@ -2,6 +2,7 @@ package fr.hugman.mubble.test.gametest.support;
 
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Input;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.GameType;
 
@@ -33,6 +34,27 @@ public final class TestPlayers {
         var absolute = helper.absolutePos(pos);
         player.teleportTo(absolute.getX() + 0.5D, absolute.getY(), absolute.getZ() + 0.5D);
         return player;
+    }
+
+    /**
+     * Advances {@code player} by one tick with a client behind them: the keys they hold down going in, and
+     * the movement they made coming back out.
+     * <p>
+     * Both halves normally arrive as packets, and both are read by the server rather than worked out by it:
+     * {@code getLastClientInput()} is the only place the jump key exists server-side, and
+     * {@code getKnownMovement()} the only honest reading of how a player is actually moving. A mock player
+     * has nobody sending either, so a test standing in for the client has to send both itself.
+     */
+    public static void tick(ServerPlayer player, Input keys) {
+        player.setLastClientInput(keys);
+        var before = player.position();
+        tick(player);
+        player.setKnownMovement(player.position().subtract(before));
+    }
+
+    /** The keys of a player leaning on the jump button, and on nothing else. */
+    public static Input holdingJump() {
+        return new Input(false, false, false, false, true, false, false);
     }
 
     /**

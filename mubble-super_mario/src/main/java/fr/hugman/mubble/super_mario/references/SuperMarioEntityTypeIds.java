@@ -13,6 +13,7 @@ public class SuperMarioEntityTypeIds {
     public static final ResourceKey<EntityType<?>> GOLD_FIREBALL = createKey("gold_fireball");
     public static final ResourceKey<EntityType<?>> CLOUD_PLATFORM = createKey("cloud_platform");
     public static final ResourceKey<EntityType<?>> BUBBLE = createKey("bubble");
+    public static final ResourceKey<EntityType<?>> FLOWER = createKey("flower");
 
     private static ResourceKey<EntityType<?>> createKey(String path) {
         return ResourceKey.create(Registries.ENTITY_TYPE, SuperMario.id(path));
