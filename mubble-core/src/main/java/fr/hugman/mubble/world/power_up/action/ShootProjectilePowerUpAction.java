@@ -32,10 +32,16 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.phys.Vec3;
 
+/**
+ * @param divergence how wide the shot scatters around the aim, 1 being the spread a thrown snowball gets.
+ *                   Zero makes the shot exact, which is what a projectile whose path players are meant to
+ *                   read and repeat needs.
+ */
 public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
         Optional<Holder<SoundEvent>> sound,
         float speed,
+        float divergence,
         PowerUpCharges charges
         //TODO: add shooting algorithm
         //TODO: add projectile NBT
@@ -44,6 +50,7 @@ public record ShootProjectilePowerUpAction(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
             SoundEvent.CODEC.optionalFieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
             Codec.FLOAT.optionalFieldOf("speed", 1.5F).forGetter(ShootProjectilePowerUpAction::speed),
+            Codec.FLOAT.optionalFieldOf("divergence", 1.0F).forGetter(ShootProjectilePowerUpAction::divergence),
             PowerUpCharges.CODEC.optionalFieldOf("charges", PowerUpCharges.DEFAULT).forGetter(ShootProjectilePowerUpAction::charges)
     ).apply(instance, ShootProjectilePowerUpAction::new));
 
@@ -51,6 +58,7 @@ public record ShootProjectilePowerUpAction(
             ByteBufCodecs.registry(Registries.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
             ByteBufCodecs.optional(SoundEvent.STREAM_CODEC), (ShootProjectilePowerUpAction::sound),
             ByteBufCodecs.FLOAT, (ShootProjectilePowerUpAction::speed),
+            ByteBufCodecs.FLOAT, (ShootProjectilePowerUpAction::divergence),
             PowerUpCharges.STREAM_CODEC, (ShootProjectilePowerUpAction::charges),
             ShootProjectilePowerUpAction::new
     );
@@ -111,7 +119,7 @@ public record ShootProjectilePowerUpAction(
             // setPos places the bottom of the bounding box, so the projectile has to be lowered by half its
             // height to actually come out centered on the eye line.
             entity.setPos(player.getX(), player.getEyeY() - 0.1F - entity.getBbHeight() / 2.0F, player.getZ());
-            setVelocity(entity, player, player.getXRot(), player.getYRot(), 0.0F, this.speed, 1.0F);
+            setVelocity(entity, player, player.getXRot(), player.getYRot(), 0.0F, this.speed, this.divergence);
             level.addFreshEntity(entity);
             properties.useCharge();
             properties.trackEntity(entity.getUUID());

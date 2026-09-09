@@ -44,6 +44,8 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("power_up." + SuperMario.MOD_ID + ".mega.description.trade_off", "Faster, tougher and stronger, but slow to swing.");
         builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.float", "You jump higher and fall slower.");
         builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.weather", "Water and rain wash it away.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.ricochet", "Superballs bounce off everything.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.coins", "They collect the coins they touch.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
 
         builder.add("entity." + SuperMario.MOD_ID + ".goomba.mini", "Mini Goomba");
@@ -77,6 +79,9 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add(SuperMarioSounds.BUBBLE_APPEAR.value(), "Bubble appears");
         builder.add(SuperMarioSounds.BUBBLE_POP.value(), "Bubble pops");
         builder.add(SuperMarioSounds.BUBBLE_FILL.value(), "Bubble fills");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".entity.superball.throw", "Superball thrown");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".entity.superball.bounce", "Superball bounces");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".entity.superball.disappear", "Superball disappears");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.refill", "Power-up refilled");
@@ -92,5 +97,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("death.attack." + SuperMario.MOD_ID + ".iceball.player", "%1$s was iceballed while fighting %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".gold_fireball", "%1$s was gold-blasted by %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".gold_fireball.player", "%1$s was gold-blasted while fighting %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".superball", "%1$s was pinballed by %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".superball.player", "%1$s was pinballed while fighting %2$s");
     }
 }

@@ -22,6 +22,7 @@ public class SuperMarioRenderers {
         EntityRenderers.register(SuperMarioEntityTypes.GOLD_FIREBALL, BallRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.CLOUD_PLATFORM, CloudPlatformRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.BUBBLE, BubbleRenderer::new);
+        EntityRenderers.register(SuperMarioEntityTypes.SUPERBALL, BallRenderer::new);
     }
 
     public static void registerBlockEntities() {

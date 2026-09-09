@@ -67,6 +67,12 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
 
         soundExporter.add(SuperMarioSounds.GOLD_FIREBALL_THROW, variantSoundBuilder(SuperMarioSounds.FIREBALL_THROW, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.gold_fireball.throw"));
 
+        // The superball has no recordings of its own yet, so it borrows the closest ones the mod already ships,
+        // the way the gold fireball borrows the fireball throw. Swap the files in once they are made.
+        soundExporter.add(SuperMarioSounds.SUPERBALL_THROW, variantSoundBuilder(SuperMarioSounds.FIREBALL_THROW, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.throw"));
+        soundExporter.add(SuperMarioSounds.SUPERBALL_BOUNCE, variantSoundBuilder(SuperMarioSounds.KOOPA_SHELL_HIT_BLOCK, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.bounce"));
+        soundExporter.add(SuperMarioSounds.SUPERBALL_DISAPPEAR, variantSoundBuilder(SuperMarioSounds.BUBBLE_POP, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.disappear"));
+
         // Power-Up
         var obtainSub = "subtitles." + SuperMario.MOD_ID + ".power_up.obtain";
 
