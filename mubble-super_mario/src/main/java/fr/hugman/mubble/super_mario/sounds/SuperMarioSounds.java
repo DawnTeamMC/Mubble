@@ -51,7 +51,7 @@ public class SuperMarioSounds {
 
     public static final Holder.Reference<SoundEvent> SUPERBALL_THROW = registerForHolder("entity.superball.throw");
     public static final Holder.Reference<SoundEvent> SUPERBALL_HIT_BLOCK = registerForHolder("entity.superball.hit.block");
-    public static final Holder.Reference<SoundEvent> SUPERBALL_HIT_ENTITY = registerForHolder("entity.superball.hit.entity", "entity.superball.hit");
+    public static final Holder.Reference<SoundEvent> SUPERBALL_HIT_ENTITY = registerForHolder("entity.superball.hit.entity");
     public static final Holder.Reference<SoundEvent> SUPERBALL_DISAPPEAR = registerForHolder("entity.superball.disappear");
 
 	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN = registerForHolder("power_up.obtain");

@@ -68,9 +68,10 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.GOLD_FIREBALL_THROW, variantSoundBuilder(SuperMarioSounds.FIREBALL_THROW, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.gold_fireball.throw"));
 
         soundExporter.add(SuperMarioSounds.SUPERBALL_THROW, variantSoundBuilder(SuperMarioSounds.SUPERBALL_THROW, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.throw"));
-        soundExporter.add(SuperMarioSounds.SUPERBALL_HIT_ENTITY, variantSoundBuilder(SuperMarioSounds.SUPERBALL_HIT_ENTITY, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.hit"));
-        soundExporter.add(SuperMarioSounds.SUPERBALL_HIT_BLOCK, variantSoundBuilder(SuperMarioSounds.SUPERBALL_HIT_ENTITY, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.hit"));
-        soundExporter.add(SuperMarioSounds.SUPERBALL_DISAPPEAR, variantSoundBuilder(SuperMarioSounds.SUPERBALL_HIT_ENTITY, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.disappear"));
+        Identifier superballHitSound = SuperMario.id("entity/superball/hit");
+        soundExporter.add(SuperMarioSounds.SUPERBALL_HIT_ENTITY, variantSoundBuilder(1, superballHitSound).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.hit"));
+        soundExporter.add(SuperMarioSounds.SUPERBALL_HIT_BLOCK, variantSoundBuilder(1, superballHitSound).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.hit"));
+        soundExporter.add(SuperMarioSounds.SUPERBALL_DISAPPEAR, variantSoundBuilder(1, superballHitSound).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.disappear"));
 
         // Power-Up
         var obtainSub = "subtitles." + SuperMario.MOD_ID + ".power_up.obtain";
