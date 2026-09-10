@@ -10,6 +10,7 @@
   "entrypoints": {
     "fabric-gametest": [
       "fr.hugman.mubble.test.gametest.super_mario.BallGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.SuperballGameTest",
       "fr.hugman.mubble.test.gametest.datapack.DataPackPowerUpGameTest",
       "fr.hugman.mubble.test.gametest.datapack.DynamicContentGameTest",
       "fr.hugman.mubble.test.gametest.network.NetworkPayloadGameTest",

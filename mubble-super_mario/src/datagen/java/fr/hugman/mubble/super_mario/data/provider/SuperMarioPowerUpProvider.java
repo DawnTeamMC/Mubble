@@ -82,6 +82,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.FIREBALL,
                         Optional.of(SuperMarioSounds.FIREBALL_THROW),
                         0.4f,
+                        1.0f,
+                        true,
                         PowerUpCharges.fromActiveEntities(3)
                 )))
                 .build());
@@ -91,6 +93,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.ICEBALL,
                         Optional.of(SuperMarioSounds.ICEBALL_THROW),
                         0.4f,
+                        1.0f,
+                        true,
                         PowerUpCharges.fromActiveEntities(3)
                 )))
                 .build());
@@ -102,6 +106,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.GOLD_FIREBALL,
                         Optional.of(SuperMarioSounds.GOLD_FIREBALL_THROW),
                         0.4f,
+                        1.0f,
+                        true,
                         PowerUpCharges.fromActiveEntities(3)
                 )))
                 .particle(SuperMarioParticleTypes.COIN_SPARKLE)
@@ -120,7 +126,23 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         SuperMarioEntityTypes.BUBBLE,
                         Optional.empty(), // the bubble plays its own "appear" sound as it spawns
                         0.4f,
+                        1.0f,
+                        true,
                         PowerUpCharges.burst(2, 24)
+                )))
+                .build());
+        context.register(SUPERBALL, builder(SUPERBALL)
+                .description(SUPERBALL, "ricochet")
+                .description(SUPERBALL, "coins")
+                .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_SUPERBALL)
+                .looseSound(SuperMarioSounds.POWER_UP_LOOSE_SUPERBALL)
+                .action(Holder.direct(new ShootProjectilePowerUpAction(
+                        SuperMarioEntityTypes.SUPERBALL,
+                        Optional.of(SuperMarioSounds.SUPERBALL_THROW),
+                        0.4f,
+                        0.0f,
+                        false,
+                        PowerUpCharges.fromActiveEntities(1)
                 )))
                 .build());
     }

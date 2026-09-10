@@ -67,6 +67,12 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
 
         soundExporter.add(SuperMarioSounds.GOLD_FIREBALL_THROW, variantSoundBuilder(SuperMarioSounds.FIREBALL_THROW, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.gold_fireball.throw"));
 
+        soundExporter.add(SuperMarioSounds.SUPERBALL_THROW, variantSoundBuilder(SuperMarioSounds.SUPERBALL_THROW, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.throw"));
+        Identifier superballHitSound = SuperMario.id("entity/superball/hit");
+        soundExporter.add(SuperMarioSounds.SUPERBALL_HIT_ENTITY, variantSoundBuilder(1, superballHitSound).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.hit"));
+        soundExporter.add(SuperMarioSounds.SUPERBALL_HIT_BLOCK, variantSoundBuilder(1, superballHitSound).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.hit"));
+        soundExporter.add(SuperMarioSounds.SUPERBALL_DISAPPEAR, variantSoundBuilder(1, superballHitSound).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.disappear"));
+
         // Power-Up
         var obtainSub = "subtitles." + SuperMario.MOD_ID + ".power_up.obtain";
 
@@ -74,9 +80,11 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_MINI, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_MINI, 1).subtitle(obtainSub));
         soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_SUPER_STAR, 1).subtitle(obtainSub));
         soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_GOLD, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_GOLD, 1).subtitle(obtainSub));
+        soundExporter.add(SuperMarioSounds.POWER_UP_OBTAIN_SUPERBALL, variantSoundBuilder(SuperMarioSounds.POWER_UP_OBTAIN_SUPERBALL, 1).subtitle(obtainSub));
         soundExporter.add(SuperMarioSounds.POWER_UP_EMIT_GOLD, variantSoundBuilder(SuperMarioSounds.POWER_UP_EMIT_GOLD, 1).subtitle(null));
         soundExporter.add(SuperMarioSounds.POWER_UP_SPIN_ATTACK, variantSoundBuilder(SuperMarioSounds.POWER_UP_SPIN_ATTACK, 1).subtitle(null));
         soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE, 1));
+        soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE_SUPERBALL, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE_SUPERBALL, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.loose"));
         soundExporter.add(SuperMarioSounds.POWER_UP_REFILL, variantSoundBuilder(SuperMarioSounds.POWER_UP_REFILL, 1));
 
         // Bubble
