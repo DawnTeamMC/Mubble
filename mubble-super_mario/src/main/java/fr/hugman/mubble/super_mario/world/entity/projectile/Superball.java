@@ -10,7 +10,6 @@ import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.entity.projectile.Ball;
 import net.minecraft.core.ClientAsset;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -95,8 +94,12 @@ public class Superball extends Ball {
         return false;
     }
 
+    /**
+     * A superball is a sprite lifted straight off a Game Boy screen: it always shows the same face, whichever
+     * way it is flying, rather than turning with its heading or rolling on itself.
+     */
     @Override
-    public boolean spins() {
+    public boolean rotates() {
         return false;
     }
 
@@ -120,7 +123,7 @@ public class Superball extends Ball {
         }
         this.collectCoins();
         if (++this.age >= LIFETIME) {
-            this.finalHit(SuperMarioSounds.SUPERBALL_DISAPPEAR.value());
+            this.finalHit();
         }
     }
 
@@ -152,7 +155,7 @@ public class Superball extends Ball {
             livingOwner.setLastHurtMob(entity);
         }
         entity.hurt(this.damageSources().source(SuperMarioDamageTypeIds.SUPERBALL, this, owner), DAMAGE);
-        this.finalHit(SuperMarioSounds.SUPERBALL_DISAPPEAR.value());
+        this.finalHit(SuperMarioSounds.SUPERBALL_HIT_ENTITY.value());
     }
 
     @Override
@@ -177,7 +180,7 @@ public class Superball extends Ball {
 
         this.setDeltaMovement(movement.subtract(normal.scale(2.0D * approach)));
         this.setPos(this.position().add(normal.scale(SURFACE_OFFSET)));
-        this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SuperMarioSounds.SUPERBALL_BOUNCE.value(), SoundSource.NEUTRAL, 0.3F, 1.0F);
+        this.level().playSound(null, this.getX(), this.getY(), this.getZ(), SuperMarioSounds.SUPERBALL_HIT_BLOCK.value(), SoundSource.NEUTRAL, 0.3F, 1.0F);
     }
 
     /**
@@ -214,12 +217,7 @@ public class Superball extends Ball {
 
     @Override
     protected ParticleOptions getDeathParticle() {
-        return ParticleTypes.HAPPY_VILLAGER;
-    }
-
-    @Override
-    protected ParticleOptions getTrailParticle() {
-        return ParticleTypes.HAPPY_VILLAGER;
+        return null;
     }
 
     @Override

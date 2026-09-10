@@ -83,6 +83,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.of(SuperMarioSounds.FIREBALL_THROW),
                         0.4f,
                         1.0f,
+                        true,
                         PowerUpCharges.fromActiveEntities(3)
                 )))
                 .build());
@@ -93,6 +94,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.of(SuperMarioSounds.ICEBALL_THROW),
                         0.4f,
                         1.0f,
+                        true,
                         PowerUpCharges.fromActiveEntities(3)
                 )))
                 .build());
@@ -105,6 +107,7 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.of(SuperMarioSounds.GOLD_FIREBALL_THROW),
                         0.4f,
                         1.0f,
+                        true,
                         PowerUpCharges.fromActiveEntities(3)
                 )))
                 .particle(SuperMarioParticleTypes.COIN_SPARKLE)
@@ -124,19 +127,21 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.empty(), // the bubble plays its own "appear" sound as it spawns
                         0.4f,
                         1.0f,
+                        true,
                         PowerUpCharges.burst(2, 24)
                 )))
                 .build());
         context.register(SUPERBALL, builder(SUPERBALL)
                 .description(SUPERBALL, "ricochet")
                 .description(SUPERBALL, "coins")
+                .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_SUPERBALL)
+                .looseSound(SuperMarioSounds.POWER_UP_LOOSE_SUPERBALL)
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.SUPERBALL,
                         Optional.of(SuperMarioSounds.SUPERBALL_THROW),
                         0.4f,
-                        // No spread at all: the whole appeal of the superball is that the same shot goes to the
-                        // same place, and a bounce or two turns even a slight scatter into a wildly different path.
                         0.0f,
+                        false,
                         PowerUpCharges.fromActiveEntities(1)
                 )))
                 .build());

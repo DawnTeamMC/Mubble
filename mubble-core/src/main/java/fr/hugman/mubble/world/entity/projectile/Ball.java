@@ -61,9 +61,11 @@ public abstract class Ball extends ThrowableProjectile {
     }
 
     /**
-     * @return whether the ball spins on itself while it flies. Purely cosmetic.
+     * @return whether the ball turns as it flies, both to face where it is heading and to spin on itself. A
+     * ball that does not rotate is drawn in the same orientation for its whole life, whichever way it goes.
+     * Purely cosmetic.
      */
-    public boolean spins() {
+    public boolean rotates() {
         return true;
     }
 
@@ -89,6 +91,7 @@ public abstract class Ball extends ThrowableProjectile {
     @Nullable
     protected abstract SoundEvent getDeathSound();
 
+    @Nullable
     protected abstract ParticleOptions getDeathParticle();
 
     /**
@@ -205,6 +208,9 @@ public abstract class Ball extends ThrowableProjectile {
     }
 
     protected void spawnDeathParticles() {
+        if(this.getDeathParticle() == null) {
+            return;
+        }
         for (int i = 0; i < 8; ++i) {
             float s1 = random.nextFloat() * 0.2F - 0.1F;
             float s2 = random.nextFloat() * 0.2F - 0.1F;
