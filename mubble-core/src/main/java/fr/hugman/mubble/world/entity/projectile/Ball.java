@@ -60,6 +60,23 @@ public abstract class Ball extends ThrowableProjectile {
         return rotateClockwards;
     }
 
+    /**
+     * @return whether the ball turns as it flies, both to face where it is heading and to spin on itself. A
+     * ball that does not rotate is drawn in the same orientation for its whole life, whichever way it goes.
+     * Purely cosmetic.
+     */
+    public boolean rotates() {
+        return true;
+    }
+
+    /**
+     * @return whether the ball only has so many rebounds in it. A ball without a rebound budget never runs
+     * out on its own: something else has to end it, be it a lifetime or a hit that always counts.
+     */
+    protected boolean hasReboundLimit() {
+        return true;
+    }
+
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {}
 
@@ -74,6 +91,7 @@ public abstract class Ball extends ThrowableProjectile {
     @Nullable
     protected abstract SoundEvent getDeathSound();
 
+    @Nullable
     protected abstract ParticleOptions getDeathParticle();
 
     /**
@@ -92,6 +110,10 @@ public abstract class Ball extends ThrowableProjectile {
 
     @Override
     protected void onHit(HitResult result) {
+        if (!this.hasReboundLimit()) {
+            super.onHit(result);
+            return;
+        }
         this.rebounds--;
         super.onHit(result);
         if (this.isAlive() && this.rebounds < 0) {
@@ -186,6 +208,9 @@ public abstract class Ball extends ThrowableProjectile {
     }
 
     protected void spawnDeathParticles() {
+        if(this.getDeathParticle() == null) {
+            return;
+        }
         for (int i = 0; i < 8; ++i) {
             float s1 = random.nextFloat() * 0.2F - 0.1F;
             float s2 = random.nextFloat() * 0.2F - 0.1F;
