@@ -37,8 +37,6 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.weather", "Water and rain wash it away.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
 
-        builder.add("entity." + SuperMario.MOD_ID + ".goomba.mini", "Mini Goomba");
-        builder.add("item." + SuperMario.MOD_ID + ".mini_goomba_spawn_egg", "Mini Goomba Spawn Egg");
 
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.bumpable_block.bump", "Block bumped");
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.bumpable_block.change_loot", "Block filled");

@@ -5,16 +5,20 @@ import fr.hugman.mubble.client.renderer.entity.BallRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.BubbleRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.CloudPlatformRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.GoombaRenderer;
+import fr.hugman.mubble.super_mario.client.renderer.entity.layers.ClingingMiniGoombaLayer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.KoopaShellRenderer;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
+import net.fabricmc.fabric.api.client.rendering.v1.LivingEntityRenderLayerRegistrationCallback;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.NoopRenderer;
 
 public class SuperMarioRenderers {
     public static void registerEntities() {
         EntityRenderers.register(SuperMarioEntityTypes.GOOMBA, GoombaRenderer::new);
+        EntityRenderers.register(SuperMarioEntityTypes.MINI_GOOMBA, GoombaRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.GREEN_KOOPA_SHELL, KoopaShellRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.RED_KOOPA_SHELL, KoopaShellRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.FIREBALL, BallRenderer::new);
@@ -22,6 +26,14 @@ public class SuperMarioRenderers {
         EntityRenderers.register(SuperMarioEntityTypes.GOLD_FIREBALL, BallRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.CLOUD_PLATFORM, CloudPlatformRenderer::new);
         EntityRenderers.register(SuperMarioEntityTypes.BUBBLE, BubbleRenderer::new);
+    }
+
+    public static void registerLayers() {
+        LivingEntityRenderLayerRegistrationCallback.EVENT.register((_, entityRenderer, registrationHelper, context) -> {
+            if (entityRenderer instanceof AvatarRenderer<?> avatarRenderer) {
+                registrationHelper.register(new ClingingMiniGoombaLayer(avatarRenderer, context.getModelSet()));
+            }
+        });
     }
 
     public static void registerBlockEntities() {

@@ -3,15 +3,19 @@ package fr.hugman.mubble.super_mario.client.renderer.entity;
 import fr.hugman.mubble.super_mario.client.model.GoombaModel;
 import fr.hugman.mubble.super_mario.client.model.SuperMarioModelLayers;
 import fr.hugman.mubble.super_mario.client.renderer.entity.state.GoombaRenderState;
-import fr.hugman.mubble.super_mario.world.entity.monster.goomba.Goomba;
+import fr.hugman.mubble.super_mario.world.entity.monster.goomba.AbstractGoomba;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;
 
+/**
+ * Draws every goomba, mini ones included: they share a model and an animation set, and the SCALE
+ * attribute is what tells them apart on screen.
+ */
 @Environment(EnvType.CLIENT)
-public class GoombaRenderer extends MobRenderer<Goomba, GoombaRenderState, GoombaModel> {
+public class GoombaRenderer<T extends AbstractGoomba> extends MobRenderer<T, GoombaRenderState, GoombaModel> {
     public GoombaRenderer(EntityRendererProvider.Context context) {
         super(context, new GoombaModel(context.bakeLayer(SuperMarioModelLayers.GOOMBA)), 0.4f);
     }
@@ -27,7 +31,7 @@ public class GoombaRenderer extends MobRenderer<Goomba, GoombaRenderState, Goomb
     }
 
     @Override
-    public void extractRenderState(Goomba goomba, GoombaRenderState state, float f) {
+    public void extractRenderState(T goomba, GoombaRenderState state, float f) {
         super.extractRenderState(goomba, state, f);
         state.surprisedAnimationState.copyFrom(goomba.surprisedAnimationState);
         state.crushAnimationState.copyFrom(goomba.crushAnimationState);

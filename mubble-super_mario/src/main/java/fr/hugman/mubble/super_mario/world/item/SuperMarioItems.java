@@ -45,6 +45,7 @@ public class SuperMarioItems {
 	public static final Item MAKER_GLOVE = register(SuperMarioItemIds.MAKER_GLOVE, new Item.Properties().stacksTo(1));
 
 	public static final SpawnEggItem GOOMBA_SPAWN_EGG = register(SuperMarioItemIds.GOOMBA_SPAWN_EGG, ItemFactory.spawnEgg(SuperMarioEntityTypes.GOOMBA));
+	public static final SpawnEggItem MINI_GOOMBA_SPAWN_EGG = register(SuperMarioItemIds.MINI_GOOMBA_SPAWN_EGG, ItemFactory.spawnEgg(SuperMarioEntityTypes.MINI_GOOMBA));
 
     private static <O extends Item> O register(ResourceKey<Item> key, Function<Item.Properties, O> factory, Item.Properties settings) {
         return Registry.register(BuiltInRegistries.ITEM, key, factory.apply(settings.setId(key)));

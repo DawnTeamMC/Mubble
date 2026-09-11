@@ -26,6 +26,7 @@ public class SuperMarioItemIds {
     public static final ResourceKey<Item> CAPE_FEATHER = createKey("cape_feather");
     public static final ResourceKey<Item> SUPER_CAPE_FEATHER = createKey("super_cape_feather");
     public static final ResourceKey<Item> GOOMBA_SPAWN_EGG = createKey("goomba_spawn_egg");
+    public static final ResourceKey<Item> MINI_GOOMBA_SPAWN_EGG = createKey("mini_goomba_spawn_egg");
 
 	public static final ResourceKey<Item> MAKER_GLOVE = createKey("maker_glove");
 

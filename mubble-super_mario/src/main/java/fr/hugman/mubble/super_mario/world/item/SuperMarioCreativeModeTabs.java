@@ -75,6 +75,7 @@ public class SuperMarioCreativeModeTabs {
             entries.accept(SuperMarioItems.RED_KOOPA_SHELL);
             entries.accept(SuperMarioItems.MAKER_GLOVE);
             entries.accept(SuperMarioItems.GOOMBA_SPAWN_EGG);
+            entries.accept(SuperMarioItems.MINI_GOOMBA_SPAWN_EGG);
             context.holders()
                     .lookup(SuperMarioRegistries.GOOMBA_VARIANT)
                     .ifPresent(registryWrapper -> addGoombaVariantsSpawnEggs(
@@ -86,6 +87,7 @@ public class SuperMarioCreativeModeTabs {
 
         CreativeModeTabEvents.modifyOutputEvent(CreativeModeTabs.SPAWN_EGGS).register(entries -> {
             entries.accept(SuperMarioItems.GOOMBA_SPAWN_EGG);
+            entries.accept(SuperMarioItems.MINI_GOOMBA_SPAWN_EGG);
         });
 
         CreativeModeTabEvents.modifyOutputEvent(SuperMarioCreativeModeTabIds.YOSHI_ISLAND).register(entries -> {

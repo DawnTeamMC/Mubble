@@ -24,6 +24,7 @@ public class SuperMarioClient implements ClientModInitializer {
         registerHandledScreens();
         SuperMarioRenderers.registerEntities();
         SuperMarioRenderers.registerBlockEntities();
+        SuperMarioRenderers.registerLayers();
         SuperMarioParticleResources.register();
     }
 

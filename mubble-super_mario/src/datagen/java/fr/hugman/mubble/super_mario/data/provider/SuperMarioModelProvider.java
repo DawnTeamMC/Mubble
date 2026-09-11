@@ -92,6 +92,7 @@ public class SuperMarioModelProvider extends FabricModelProvider {
         gen.generateFlatItem(SuperMarioItems.MAKER_GLOVE, ModelTemplates.FLAT_ITEM);
 
         gen.generateFlatItem(SuperMarioItems.GOOMBA_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+        gen.generateFlatItem(SuperMarioItems.MINI_GOOMBA_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
     }
 
     private static void registerBeepBlock(BlockModelGenerators gen, Block block, String color) {
@@ -100,28 +101,4 @@ public class SuperMarioModelProvider extends FabricModelProvider {
         gen.blockStateOutput.accept(MultiVariantGenerator.dispatch(block).with(createBooleanModelDispatch(BeepBlock.FRAME, frame, normal)));
     }
 
-    private void registerGoombaVariantSpawnEggs(ItemModelGenerators gen, Item item) {
-        //TODO figure this out
-        ItemModel.Unbaked unbaked = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item));
-
-		/*
-		var miniId = SuperMario.id("item/mini_goomba_spawn_egg");
-		ItemModel.Unbaked mini = ItemModelUtils.plainModel(ModelTemplates.FLAT_ITEM.create(miniId,
-				TextureMapping.layer0(miniId),
-				gen.modelOutput
-		));
-
-		this.registriesFuture.thenAccept(registries -> {
-			var variant = registries.getOrThrow(MubbleRegistryKeys.GOOMBA_VARIANT).getOrThrow(GoombaVariants.MINI);
-			SelectItemModel.SwitchCase<RegistryEntry<GoombaVariant>> switchCase = ItemModels.switchCase(variant, mini);
-			ItemModel.Unbaked model = ItemModels.select(
-					new ComponentSelectProperty<>(MubbleDataComponentTypes.GOOMBA_VARIANT),
-					unbaked,
-					switchCase
-			);
-			gen.output.accept(item, model);
-		});:
-		 */
-        gen.itemModelOutput.accept(item, unbaked);
-    }
 }
