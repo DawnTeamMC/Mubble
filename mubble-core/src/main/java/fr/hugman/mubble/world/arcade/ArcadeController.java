@@ -381,6 +381,9 @@ public final class ArcadeController {
         public int accepted;
         public int rejected;
         public int corrected;
+        /** Why the last rejected step was rejected, for whoever investigates. */
+        @Nullable
+        public String lastRejection;
 
         public void clear() {
             this.expectedPosition = null;
