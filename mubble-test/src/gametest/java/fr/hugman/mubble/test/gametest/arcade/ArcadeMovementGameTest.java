@@ -10,7 +10,6 @@ import fr.hugman.mubble.world.arcade.ArcadeController;
 import fr.hugman.mubble.world.arcade.move.ArcadeMove;
 import fr.hugman.mubble.world.arcade.move.ArcadeMoves;
 import fr.hugman.mubble.world.arcade.sim.ArcadeInputCollector;
-import fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

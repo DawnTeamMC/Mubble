@@ -1,0 +1,1 @@
+{"length": 0.9, "bones": {"right_arm": {"rotation": [-60, 0, 10]}, "left_arm": {"rotation": [-60, 0, -10]}, "right_leg": {"rotation": [-70, 0, 5]}, "left_leg": {"rotation": [-70, 0, -5]}}, "body": {"rotation": {"0.0": [0, 0, 0], "0.05": [0, 0, 0], "0.7": {"post": [-360, 0, 0], "lerp_mode": "catmullrom"}, "0.9": [-360, 0, 0]}}}

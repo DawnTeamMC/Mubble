@@ -15,7 +15,4 @@ public interface CameraInvoker {
 
     @Invoker("move")
     void mubble$move(float forwards, float up, float right);
-
-    @Invoker("getMaxZoom")
-    float mubble$getMaxZoom(float cameraDist);
 }

@@ -49,6 +49,9 @@ dependencies {
 test {
     useJUnitPlatform()
 
+    // Lets tests check the files a module ships, such as the arcade animations of the client.
+    systemProperty 'mubble.core.dir', project(':mubble-core').projectDir.absolutePath
+
     // Minecraft's log4j setup writes next to the working directory: keep it out of the sources.
     workingDir = layout.buildDirectory.dir('test-run').get().asFile
     doFirst {
