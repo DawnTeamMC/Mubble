@@ -7,6 +7,7 @@ import fr.hugman.mubble.client.arcade.hud.ArcadeDebugHud;
 import fr.hugman.mubble.world.arcade.ArcadeLocalDriver;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
@@ -28,6 +29,7 @@ public final class ArcadeClient {
         ArcadeClientNetworking.register();
         ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(Mubble.id("arcade_animations"), new ArcadeAnimationLoader());
         HudElementRegistry.addLast(Mubble.id("arcade_debug"), ArcadeDebugHud::extractRenderState);
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, context) -> ArcadeRecorder.registerCommands(dispatcher));
         ClientTickEvents.END_CLIENT_TICK.register(minecraft -> {
             ArcadeDebugHud.tick(minecraft);
             ArcadePlayerAnimator.tickRemotePlayers(minecraft);

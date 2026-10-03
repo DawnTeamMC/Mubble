@@ -88,6 +88,17 @@ public final class ArcadeTranslations {
         t.put(command("inspect.header"), pair("Arcade movement of %s:", "Déplacements arcade de %s :"));
         t.put(command("gym.success"), pair("Built the movement gym at %s, %s, %s", "Gymnase de déplacement construit en %s, %s, %s"));
         t.put(command("impulse.success"), pair("Pushed %s player(s)", "%s joueur(s) poussé(s)"));
+
+        // the recorder, a client command
+        t.put(clientCommand("not_driving"), pair("Arcade movement is not on", "Les déplacements arcade ne sont pas actifs"));
+        t.put(clientCommand("record.started"), pair("Recording arcade inputs…", "Enregistrement des entrées arcade…"));
+        t.put(clientCommand("record.none"), pair("Nothing is being recorded or replayed", "Aucun enregistrement ni lecture en cours"));
+        t.put(clientCommand("record.saved"), pair("Saved %s steps to %s", "%s pas enregistrés dans %s"));
+        t.put(clientCommand("file_error"), pair("Could not use the recording %s: %s", "Impossible d'utiliser l'enregistrement %s : %s"));
+        t.put(clientCommand("replay.started"), pair("Replaying %s, %s steps", "Lecture de %s, %s pas"));
+        t.put(clientCommand("replay.identical"), pair("Replay of %s: identical to the recording", "Lecture de %s : identique à l'enregistrement"));
+        t.put(clientCommand("replay.diverged"), pair("Replay of %s: left the recording at step %s", "Lecture de %s : écart avec l'enregistrement au pas %s"));
+        t.put(clientCommand("cancelled"), pair("Stopped recording or replaying", "Enregistrement ou lecture arrêté"));
         return t;
     }
 
@@ -119,5 +130,9 @@ public final class ArcadeTranslations {
 
     private static String command(String path) {
         return "commands." + M + ".arcade." + path;
+    }
+
+    private static String clientCommand(String path) {
+        return "commands." + M + "_client.arcade." + path;
     }
 }

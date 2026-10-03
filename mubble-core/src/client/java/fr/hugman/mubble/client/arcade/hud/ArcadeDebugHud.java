@@ -2,6 +2,7 @@ package fr.hugman.mubble.client.arcade.hud;
 
 import fr.hugman.mubble.client.arcade.ArcadeClientConfig;
 import fr.hugman.mubble.client.arcade.ArcadeKeyMappings;
+import fr.hugman.mubble.client.arcade.ArcadeRecorder;
 import fr.hugman.mubble.client.arcade.compat.ArcadeControllerBindings;
 import fr.hugman.mubble.world.arcade.ArcadeController;
 import java.util.ArrayList;
@@ -58,7 +59,9 @@ public final class ArcadeDebugHud {
     public static List<Component> lines(ArcadeController controller) {
         var lines = new ArrayList<Component>();
         var access = controller.access();
-        lines.add(Component.literal("Arcade: " + access.profile().map(key -> key.identifier().toString()).orElse("off") + (controller.isSuspended() ? " (suspended)" : "")));
+        var profile = controller.isActive() ? access.profile().map(key -> key.identifier().toString()).orElse("?") : "off";
+        var recorder = ArcadeRecorder.isRecording() ? "  [recording]" : ArcadeRecorder.isReplaying() ? "  [replaying]" : "";
+        lines.add(Component.literal("Arcade: " + profile + (controller.isSuspended() ? " (suspended)" : "") + recorder));
         if (controller.isDriving()) {
             var state = controller.state();
             lines.add(Component.literal("Move: " + state.move + " #" + state.moveSeq + " t=" + state.moveTicks + " " + state.pose.name().toLowerCase(Locale.ROOT)));

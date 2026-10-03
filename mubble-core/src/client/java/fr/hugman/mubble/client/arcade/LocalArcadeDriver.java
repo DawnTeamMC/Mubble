@@ -25,8 +25,10 @@ public final class LocalArcadeDriver implements ArcadeLocalDriver {
         if (!(player instanceof LocalPlayer localPlayer)) {
             return;
         }
-        var frame = ArcadeClientInput.frame(localPlayer, controller.nextTick());
+        int tick = controller.nextTick();
+        var frame = ArcadeRecorder.replayFrame(tick).orElseGet(() -> ArcadeClientInput.frame(localPlayer, tick));
         var step = ArcadePrediction.step(player, controller, frame);
+        ArcadeRecorder.onStep(localPlayer, step);
         if (!frame.coupled()) {
             ArcadeCamera.aimIfNeeded(Minecraft.getInstance(), localPlayer);
         }
