@@ -3,6 +3,7 @@ package fr.hugman.mubble.test.gametest.arcade;
 import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.ACTION;
 import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.CROUCH;
 import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.JUMP;
+import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.SPIN;
 import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.SPRINT;
 
 import fr.hugman.mubble.references.ArcadeProfileIds;
@@ -339,6 +340,70 @@ public class ArcadeMovementGameTest {
         }
         helper.assertValueEqual(move(player), ArcadeMoves.ROLL, "still rolling at the bottom of the stairs");
         helper.assertTrue(bestSpeed > startSpeed + 0.2D, "rolling down nine steps should gain speed: from " + startSpeed + " to " + bestSpeed);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void crouchingWhileRunningDownStairsSlides(GameTestHelper helper) {
+        ArcadeTestKit.fill(helper, new BlockPos(0, 0, 0), new BlockPos(9, 9, 6), Blocks.STONE.defaultBlockState());
+        var stairs = Blocks.STONE_STAIRS.defaultBlockState().setValue(StairBlock.FACING, Direction.NORTH);
+        for (int step = 0; step < 9; step++) {
+            int z = 7 + step;
+            int top = 9 - step;
+            ArcadeTestKit.fill(helper, new BlockPos(0, 0, z), new BlockPos(9, top - 1, z), Blocks.STONE.defaultBlockState());
+            ArcadeTestKit.fill(helper, new BlockPos(0, top, z), new BlockPos(9, top, z), stairs);
+        }
+        ArcadeTestKit.fill(helper, new BlockPos(0, 0, 16), new BlockPos(9, 0, 47), Blocks.STONE.defaultBlockState());
+        var player = standing(helper, new BlockPos(5, 10, 2));
+        var frames = new ArcadeTestKit.Frames().forward().hold(SPRINT);
+        boolean slid = false;
+        for (int i = 0; i < 40 && !slid; i++) {
+            boolean onTheStairs = player.getZ() > helper.absolutePos(new BlockPos(0, 0, 9)).getZ();
+            ArcadeTestKit.step(player, onTheStairs ? frames.tap(CROUCH) : frames.next());
+            slid = move(player) == ArcadeMoves.SLIDE;
+        }
+        helper.assertTrue(slid, "crouch while running down the stairs");
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void aSpinSlowsTheFallOncePerAir(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = ArcadeTestKit.client(helper, new BlockPos(5, 11, 5), ArcadeProfileIds.TRIAL);
+        var frames = new ArcadeTestKit.Frames();
+        for (int i = 0; i < 8; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        ArcadeTestKit.step(player, frames.tap(SPIN));
+        helper.assertValueEqual(move(player), ArcadeMoves.SPIN, "spin in the air");
+        // the lift, then a slow fall
+        double slowest = 0.0D;
+        for (int i = 0; i < 12; i++) {
+            ArcadeTestKit.step(player, frames.next());
+            slowest = Math.min(slowest, ArcadeController.of(player).state().vy);
+        }
+        helper.assertTrue(slowest >= -0.08D - 1.0E-9D, "a spin falls at most 0.08 b/t, fell at " + -slowest);
+        ArcadeTestKit.step(player, frames.tap(SPIN));
+        helper.assertFalse(move(player) == ArcadeMoves.SPIN && ArcadeController.of(player).state().moveTicks == 0, "a second spin in the same air");
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void turningTheStickAroundSpins(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = ArcadeTestKit.client(helper, new BlockPos(5, 11, 5), ArcadeProfileIds.TRIAL);
+        var frames = new ArcadeTestKit.Frames();
+        ArcadeTestKit.step(player, frames.next());
+        boolean spun = false;
+        // a little more than a full turn, before the fall reaches the floor
+        for (int i = 0; i <= 9 && !spun; i++) {
+            helper.assertFalse(player.onGround(), "the player landed before the stick went around, the test proves nothing");
+            double angle = Math.toRadians(i * 45.0D);
+            frames.stick((float) Math.sin(angle), (float) Math.cos(angle));
+            ArcadeTestKit.step(player, frames.next());
+            spun = move(player) == ArcadeMoves.SPIN;
+        }
+        helper.assertTrue(spun, "a full turn of the stick in the air should spin");
         helper.succeed();
     }
 
