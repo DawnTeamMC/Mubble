@@ -136,14 +136,27 @@ public final class ArcadeValidator {
         if (result.horizontalDistance() > ceiling) {
             return "moved " + result.horizontalDistance() + " in a tick, past the safety ceiling";
         }
-        if (result.onGround()) {
-            var end = ctx.start().add(result.dx(), result.dy(), result.dz());
-            var box = ctx.world().box(end, ctx.pose());
-            if (!ctx.world().collides(box.move(0.0D, -0.05D, 0.0D))) {
-                return "claims to stand on nothing at " + end;
-            }
+        if (result.onGround() && !supported(ctx, result)) {
+            return "claims to stand on nothing at " + ctx.start().add(result.dx(), result.dy(), result.dz());
         }
         return null;
+    }
+
+    /**
+     * Whether something could have held the player up during the step. Collisions resolve the
+     * vertical axis first, so a player walking off an edge lands on it before sliding past it: the
+     * support may be under where a leg of the step started rather than under where it ended.
+     */
+    private static boolean supported(MoveContext ctx, MoveResult result) {
+        var start = ctx.start();
+        var end = start.add(result.dx(), result.dy(), result.dz());
+        var first = ctx.first();
+        for (var at : new Vec3[]{end, new Vec3(start.x, end.y, start.z), new Vec3(start.x + first.x, end.y, start.z + first.z)}) {
+            if (ctx.world().collides(ctx.world().box(at, ctx.pose()).move(0.0D, -0.05D, 0.0D))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static boolean withinAxis(double actual, double planned, double tolerance) {
@@ -156,6 +169,7 @@ public final class ArcadeValidator {
     private static void reject(ServerPlayer player, ArcadeController controller, int tick, String reason) {
         var validation = controller.validation();
         validation.rejected++;
+        validation.lastRejection = "step " + tick + ": " + reason;
         validation.expectedPosition = null;
         LOGGER.debug("Rejected the arcade movement of {}: {}", player.getPlainTextName(), reason);
         validation.ownTeleport = true;

@@ -230,6 +230,9 @@ public class ArcadeCommand {
         source.sendSuccess(() -> Component.literal(" modes: " + access.modes().entrySet().stream().map(e -> e.getKey() + "=" + e.getValue().getSerializedName()).sorted().toList()), false);
         source.sendSuccess(() -> Component.literal(" owned: " + access.unlocks().moves().stream().map(key -> key.identifier().toString()).sorted().toList()), false);
         source.sendSuccess(() -> Component.literal(" validation: " + validation.accepted + " accepted, " + validation.corrected + " corrected, " + validation.rejected + " rejected"), false);
+        if (validation.lastRejection != null) {
+            source.sendSuccess(() -> Component.literal(" last rejection: " + validation.lastRejection), false);
+        }
         return controller.isDriving() ? 1 : 0;
     }
 

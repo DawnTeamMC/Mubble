@@ -237,7 +237,7 @@ public final class ArcadeTestClient {
         } else if (packet instanceof ClientboundCustomPayloadPacket custom && custom.payload() instanceof ArcadeCorrectionPayload correction) {
             if (correction.rejected()) {
                 this.rejections++;
-                this.events.add("rejected at step " + correction.tick());
+                this.events.add("rejected (" + this.serverController().validation().lastRejection + ")");
             } else {
                 this.corrections++;
                 this.events.add("corrected at step " + correction.tick());
