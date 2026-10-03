@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "name": "Fortnite (Data Generation)",
+  "id": "fortnite-datagen",
+  "version": "1.0.0",
+  "authors": [
+    "Hugman"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "fr.hugman.mubble.fortnite.data.FortniteDataGenerator"
+    ]
+  }
+}
