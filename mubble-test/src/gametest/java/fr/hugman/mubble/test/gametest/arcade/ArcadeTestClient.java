@@ -162,6 +162,11 @@ public final class ArcadeTestClient {
         this.server.connection.tick();
     }
 
+    /** One tick of the player on the server alone, as the connection drives it every game tick. */
+    public void tickServer() {
+        this.server.connection.tick();
+    }
+
     /** Stands in for a client that does not run the arcade layer: it only reports {@code position}. */
     public void tickVanilla(Vec3 position, boolean onGround) {
         this.receive();

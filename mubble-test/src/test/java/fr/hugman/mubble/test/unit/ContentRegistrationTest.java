@@ -2,8 +2,10 @@ package fr.hugman.mubble.test.unit;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.core.registries.MubbleBuiltInRegistries;
+import fr.hugman.mubble.references.ArcadeMoveIds;
 import fr.hugman.mubble.references.MubbleConsumeEffectTypeKeys;
 import fr.hugman.mubble.references.MubbleEntityTypeKeys;
+import fr.hugman.mubble.references.MubbleItemIds;
 import fr.hugman.mubble.references.PowerUpActionTypesKeys;
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.references.SuperMarioBlockItemIds;
@@ -88,6 +90,18 @@ public class ContentRegistrationTest {
     @DisplayName("every declared consume effect type key is registered")
     void consumeEffectTypeKeysAreRegistered() {
         assertKeysAreRegistered(MubbleConsumeEffectTypeKeys.class, BuiltInRegistries.CONSUME_EFFECT_TYPE, Mubble.MOD_ID);
+    }
+
+    @Test
+    @DisplayName("every declared arcade move key is registered")
+    void arcadeMoveKeysAreRegistered() {
+        assertKeysAreRegistered(ArcadeMoveIds.class, MubbleBuiltInRegistries.ARCADE_MOVE, Mubble.MOD_ID);
+    }
+
+    @Test
+    @DisplayName("every declared Mubble item key is registered")
+    void mubbleItemKeysAreRegistered() {
+        assertKeysAreRegistered(MubbleItemIds.class, BuiltInRegistries.ITEM, Mubble.MOD_ID);
     }
 
     @Test

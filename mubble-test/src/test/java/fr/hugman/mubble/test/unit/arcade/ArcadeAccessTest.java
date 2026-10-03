@@ -136,6 +136,16 @@ public class ArcadeAccessTest {
     }
 
     @Test
+    @DisplayName("boots enabling moves the player owns none of leave the layer off")
+    void enablingNothingOwnedIsInactive() {
+        var boots = source("equipment/feet/boots", 0, Optional.of(ArcadeProfileIds.OVERWORLD), moves(ArcadeMoveIds.JUMP, AccessMode.ENABLE));
+        assertFalse(ArcadeAccess.resolve(List.of(boots), ArcadeUnlocks.NONE, NOW).isActive(), "nothing owned, nothing to do");
+        assertTrue(ArcadeAccess.resolve(List.of(boots), owning(ArcadeMoveIds.JUMP), NOW).isActive(), "one move owned is enough");
+        var denied = source("ruleset", 10, Optional.empty(), moves(ArcadeMoveIds.JUMP, AccessMode.DENY));
+        assertFalse(ArcadeAccess.resolve(List.of(boots, denied), owning(ArcadeMoveIds.JUMP), NOW).isActive(), "every move denied, nothing to do");
+    }
+
+    @Test
     @DisplayName("an expired source no longer counts")
     void expiredSourcesDoNotCount() {
         var expiring = new ArcadeSource(Mubble.id("timed"), Optional.of(ArcadeProfileIds.TRIAL), moves(ArcadeMoveIds.JUMP, AccessMode.FORCE), 0, Optional.of(NOW));

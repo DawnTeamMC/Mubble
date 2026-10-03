@@ -35,7 +35,8 @@
       "fr.hugman.mubble.test.gametest.super_mario.BeepBlockGameTest",
       "fr.hugman.mubble.test.gametest.datapack.GeneratedDataGameTest",
       "fr.hugman.mubble.test.gametest.arcade.ArcadeMovementGameTest",
-      "fr.hugman.mubble.test.gametest.arcade.ArcadeLockstepGameTest"
+      "fr.hugman.mubble.test.gametest.arcade.ArcadeLockstepGameTest",
+      "fr.hugman.mubble.test.gametest.arcade.ArcadeLifecycleGameTest"
     ]
   },
   "mixins": [

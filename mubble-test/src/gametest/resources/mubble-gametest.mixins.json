@@ -3,6 +3,7 @@
   "package": "fr.hugman.mubble.test.gametest.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "FoodDataAccessor",
     "ServerGamePacketListenerImplFlightMixin"
   ],
   "injectors": {
