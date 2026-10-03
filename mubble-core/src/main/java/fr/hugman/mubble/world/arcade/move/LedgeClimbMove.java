@@ -39,7 +39,9 @@ public class LedgeClimbMove extends ArcadeMove {
         } else {
             var direction = LedgeGrabMove.face(ctx);
             double step = ctx.param(this, FORWARD) / (total - rise);
-            ctx.setDisplacement(direction.getStepX() * step, -0.002D, direction.getStepZ() * step);
+            // over the edge first, then down onto it: collisions resolve the vertical axis first
+            ctx.setDisplacement(0.0D, -0.002D, 0.0D);
+            ctx.nudge(direction.getStepX() * step, 0.0D, direction.getStepZ() * step);
         }
         state.vx = 0.0D;
         state.vy = 0.0D;

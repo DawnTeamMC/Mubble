@@ -2,14 +2,13 @@ package fr.hugman.mubble.test.gametest.arcade;
 
 import fr.hugman.mubble.tags.ArcadeMoveTags;
 import fr.hugman.mubble.world.arcade.ArcadeController;
+import fr.hugman.mubble.world.arcade.ArcadePrediction;
 import fr.hugman.mubble.world.arcade.ArcadeProfile;
 import fr.hugman.mubble.world.arcade.access.AccessMode;
 import fr.hugman.mubble.world.arcade.access.ArcadeSource;
 import fr.hugman.mubble.world.arcade.access.ArcadeSources;
 import fr.hugman.mubble.world.arcade.access.MoveSelector;
-import fr.hugman.mubble.world.arcade.replay.ArcadeReplayer;
 import fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame;
-import fr.hugman.mubble.world.arcade.sim.ArcadeSimulation;
 import fr.hugman.mubble.world.arcade.sim.MoveContext;
 import java.util.Map;
 import java.util.Optional;
@@ -78,16 +77,8 @@ public final class ArcadeTestKit {
     public static MoveContext step(Player player, ArcadeInputFrame frame) {
         var controller = ArcadeController.of(player);
         controller.tick();
-        if (controller.needsReset()) {
-            controller.resetFromEntity();
-        }
         player.setOldPosAndRot();
-        var state = controller.state();
-        var ctx = ArcadeSimulation.step(state, frame, controller.tuning(), controller.world(), new ArcadeReplayer.EntityBody(player));
-        var velocity = new Vec3(state.vx, state.vy, state.vz);
-        player.setDeltaMovement(velocity);
-        controller.setWrittenVelocity(velocity);
-        return ctx;
+        return ArcadePrediction.step(player, controller, frame).context();
     }
 
     /** Builds input frames, coupled to a view looking south (+z), which is where the stick points by default. */

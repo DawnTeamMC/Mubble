@@ -18,8 +18,32 @@ public final class ArcadeSimulation {
     private static final int SPIN_GESTURE_TICKS = 16;
     /** Displacement below which an axis counts as not moving at all, as far as collisions go. */
     private static final double COLLISION_EPSILON = 1.0E-5D;
+    /** Upward speed from which a push launches the player rather than nudging them. */
+    private static final double LAUNCH_THRESHOLD = 1.0E-3D;
 
     private ArcadeSimulation() {
+    }
+
+    /**
+     * Takes in a velocity set from outside the simulation, such as knockback or a launcher. A push
+     * upwards throws the player off whatever move held them: off the ground, off a wall, out of the arc
+     * of a jump, into a plain fall under base gravity.
+     */
+    public static void applyImpulse(ArcadeState state, Vec3 impulse) {
+        state.vx = impulse.x;
+        state.vy = impulse.y;
+        state.vz = impulse.z;
+        if (impulse.y > LAUNCH_THRESHOLD) {
+            state.grounded = false;
+            state.coyote = 0;
+            state.arcGravity = 0.0D;
+            state.jumpCut = true;
+            if (state.move != ArcadeMoves.FALL) {
+                state.move = ArcadeMoves.FALL;
+                state.moveTicks = 0;
+                state.moveSeq++;
+            }
+        }
     }
 
     /** Plans, moves through {@code body}, and settles one tick. */
@@ -63,6 +87,10 @@ public final class ArcadeSimulation {
         state.move.tick(ctx);
         ctx.finishPlan();
         ctx.endPlan();
+        // known before the body moves, since a landing hurts the player during that move
+        if (!state.grounded && (state.move.negatesFallDamage(ctx) || ctx.wouldRollOnLanding())) {
+            state.negateFallDamage = true;
+        }
         return ctx;
     }
 

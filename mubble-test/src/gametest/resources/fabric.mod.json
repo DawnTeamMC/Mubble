@@ -34,9 +34,13 @@
       "fr.hugman.mubble.test.gametest.super_mario.NoteBlockGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.BeepBlockGameTest",
       "fr.hugman.mubble.test.gametest.datapack.GeneratedDataGameTest",
-      "fr.hugman.mubble.test.gametest.arcade.ArcadeMovementGameTest"
+      "fr.hugman.mubble.test.gametest.arcade.ArcadeMovementGameTest",
+      "fr.hugman.mubble.test.gametest.arcade.ArcadeLockstepGameTest"
     ]
   },
+  "mixins": [
+    "mubble-gametest.mixins.json"
+  ],
   "depends": {
     "fabric-gametest-api-v1": "*",
     "mubble": "*",
