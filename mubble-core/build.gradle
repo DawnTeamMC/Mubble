@@ -17,3 +17,21 @@ loom {
         }
     }
 }
+repositories {
+    maven {
+        name = 'isXander'
+        url = 'https://maven.isxander.dev/releases'
+        // only the jar is wanted, not the multi-loader variants its metadata describes
+        metadataSources {
+            artifact()
+        }
+        content {
+            includeGroup 'dev.isxander'
+        }
+    }
+}
+
+dependencies {
+    // Controlify: soft optional dependency, compiled against only to register the controller bindings of the arcade movement layer.
+    clientCompileOnly 'dev.isxander:controlify:3.5.3+mc26.2:fabric@jar'
+}

@@ -1,6 +1,7 @@
 package fr.hugman.mubble.client;
 
 import com.google.common.reflect.Reflection;
+import fr.hugman.mubble.client.arcade.ArcadeClient;
 import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
 import fr.hugman.mubble.client.model.MubbleModelLayers;
 import fr.hugman.mubble.client.network.MubbleClientPayloadReceivers;
@@ -19,5 +20,6 @@ public class MubbleClient implements ClientModInitializer {
         MubbleRenderers.registerLayers();
         MubbleKeyBindings.registerEvents();
         MubbleClientPayloadReceivers.register();
+        ArcadeClient.init();
     }
 }

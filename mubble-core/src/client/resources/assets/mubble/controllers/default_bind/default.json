@@ -1,0 +1,19 @@
+{
+  "defaults": {
+    "mubble:arcade_jump": {
+      "type": "empty"
+    },
+    "mubble:arcade_crouch": {
+      "type": "empty"
+    },
+    "mubble:arcade_action": {
+      "button": "controlify:button/east"
+    },
+    "mubble:arcade_recenter": {
+      "type": "empty"
+    },
+    "mubble:arcade_spin": {
+      "type": "empty"
+    }
+  }
+}

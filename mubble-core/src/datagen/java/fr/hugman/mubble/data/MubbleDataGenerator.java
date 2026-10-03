@@ -1,6 +1,7 @@
 package fr.hugman.mubble.data;
 
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.data.arcade.ArcadeProfileProvider;
 import fr.hugman.mubble.data.provider.*;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -16,9 +17,17 @@ public class MubbleDataGenerator implements DataGeneratorEntrypoint {
 
 		// Resource Pack
 		pack.addProvider(MubbleEnglishLangProvider::new);
+		pack.addProvider(MubbleFrenchLangProvider::new);
 
 		// Data Pack
 		pack.addProvider(MubbleBlockTagsProvider::new);
+		pack.addProvider(ArcadeMoveTagsProvider::new);
+		pack.addProvider(ArcadeProfileProvider::new);
+	}
+
+	@Override
+	public void buildRegistry(RegistrySetBuilder registryBuilder) {
+		registryBuilder.add(MubbleRegistries.ARCADE_PROFILE, ArcadeProfileProvider::bootstrap);
 	}
 
 	@Override
