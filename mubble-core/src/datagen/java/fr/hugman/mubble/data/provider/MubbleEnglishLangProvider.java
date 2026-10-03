@@ -2,6 +2,7 @@ package fr.hugman.mubble.data.provider;
 
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.data.AutomaticEnglish;
+import fr.hugman.mubble.data.arcade.ArcadeTranslations;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
@@ -15,6 +16,8 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
+        // the arcade texts come first: they name the Mario Boots themselves rather than leaving it to the automatic names
+        ArcadeTranslations.addAll(builder, ArcadeTranslations.ENGLISH);
         AutomaticEnglish.generateAutomaticTranslations(Mubble.MOD_ID, wrapperLookup, builder);
 
         builder.add("key." + Mubble.MOD_ID + ".trigger_power_up", "Trigger Power-Up");

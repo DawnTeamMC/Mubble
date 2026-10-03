@@ -11,7 +11,11 @@ import fr.hugman.mubble.super_mario.world.item.SuperMarioItems;
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes;
 import fr.hugman.mubble.super_mario.world.power_up.action.SuperMarioPowerUpActionTypes;
+import fr.hugman.mubble.world.arcade.move.ArcadeMoves;
 import fr.hugman.mubble.world.attribute.MubbleAttributeTypes;
+import fr.hugman.mubble.world.entity.ai.attributes.MubbleAttributes;
+import fr.hugman.mubble.world.item.MubbleItems;
+import fr.hugman.mubble.world.reward.RewardTypes;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import fr.hugman.mubble.world.item.consume_effects.MubbleConsumeEffectTypes;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionTypes;
@@ -40,6 +44,10 @@ public final class Registrations {
         Reflection.initialize(MubbleConsumeEffectTypes.class);
         Reflection.initialize(MubbleAttributeTypes.class);
         Reflection.initialize(PowerUpActionTypes.class);
+        Reflection.initialize(MubbleAttributes.class);
+        Reflection.initialize(ArcadeMoves.class);
+        Reflection.initialize(RewardTypes.class);
+        Reflection.initialize(MubbleItems.class);
 
         Reflection.initialize(SuperMarioBlocks.class);
         Reflection.initialize(SuperMarioBlockEntityTypes.class);

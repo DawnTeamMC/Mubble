@@ -10,6 +10,9 @@
     ],
     "client": [
       "fr.hugman.mubble.client.MubbleClient"
+    ],
+    "controlify": [
+      "fr.hugman.mubble.client.arcade.compat.controlify.ArcadeControlifyEntrypoint"
     ]
   },
   "mixins": [
@@ -23,11 +26,15 @@
     "minecraft": "*",
     "fabric-api": "*"
   },
+  "suggests": {
+    "controlify": "*"
+  },
   "custom": {
     "loom:injected_interfaces": {
       "net/minecraft/world/entity/player/Player": [
         "fr/hugman/mubble/world/power_up/PowerUpHolder",
-        "fr/hugman/mubble/world/entity/WaterRunner"
+        "fr/hugman/mubble/world/entity/WaterRunner",
+      "fr/hugman/mubble/world/arcade/ArcadePlayer"
       ]
 	}
   },
