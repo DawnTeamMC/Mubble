@@ -31,6 +31,7 @@ They come in two flavours:
 ./gradlew runDatagen   # game tests load the generated data pack, so generate it first
 ./gradlew test         # unit tests
 ./gradlew runGameTest  # game tests
+./gradlew runGameTest -PgameTestFilter='mubble-gametest:arcade_*'  # only the game tests matching a pattern
 ```
 
 `./gradlew build` runs both suites, but it still needs `runDatagen` to have been run once beforehand,
