@@ -32,6 +32,7 @@
       "fr.hugman.mubble.test.gametest.collectible.CollectibleEntityGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.BumpableBlockGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.NoteBlockGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.MarioPaintInstrumentGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.BeepBlockGameTest",
       "fr.hugman.mubble.test.gametest.datapack.GeneratedDataGameTest"
     ]
