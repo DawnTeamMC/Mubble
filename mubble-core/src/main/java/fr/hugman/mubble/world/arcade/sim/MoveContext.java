@@ -48,7 +48,7 @@ public final class MoveContext {
     private final double stickMagnitude;
     private final boolean jumpPressed;
     private final boolean jumpReleased;
-    private final boolean crouchPressed;
+    private boolean crouchPressed;
     private final boolean actionPressed;
     private final boolean spinPressed;
 
@@ -207,6 +207,11 @@ public final class MoveContext {
         return this.crouchPressed;
     }
 
+    /** Spends the press of crouch of this tick, so that it does not also start another move. */
+    public void consumeCrouch() {
+        this.crouchPressed = false;
+    }
+
     public boolean crouchHeld() {
         return this.state.crouchHeld;
     }
@@ -344,9 +349,14 @@ public final class MoveContext {
         this.state.events.add(new MoveEvent(type, this.state.move, intensity));
     }
 
+    /** Whether a landing now would go into a roll. */
+    public boolean wouldRollOnLanding() {
+        return this.state.crouchHeld && this.actionBuffered() && this.allowed(ArcadeMoves.ROLL);
+    }
+
     /** The move a landing goes into: a roll when one is asked for, the landing state otherwise. */
     public ArcadeMove landingMove() {
-        if (this.state.crouchHeld && this.actionBuffered() && this.allowed(ArcadeMoves.ROLL)) {
+        if (this.wouldRollOnLanding()) {
             this.consumeAction();
             this.state.negateFallDamage = true;
             return ArcadeMoves.ROLL;

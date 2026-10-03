@@ -109,6 +109,8 @@ public class LedgeGrabMove extends ArcadeMove {
             return ArcadeMoves.LEDGE_CLIMB;
         }
         if (ctx.crouchPressed() || this.ledgeAt(ctx, ctx.start(), face(ctx)) == null) {
+            // letting go is all the press of crouch does: it is no ground pound
+            ctx.consumeCrouch();
             state.ledgeRegrab = ctx.grace().ledgeRegrabTicks();
             return ArcadeMoves.FALL;
         }

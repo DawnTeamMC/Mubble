@@ -66,9 +66,7 @@ public final class ArcadeValidator {
                 reject(player, controller, frame.tick(), "an unexplained change of velocity to " + impulse);
                 return;
             }
-            state.vx = impulse.x;
-            state.vy = impulse.y;
-            state.vz = impulse.z;
+            ArcadeSimulation.applyImpulse(state, impulse);
         }
 
         var tuning = controller.tuning();

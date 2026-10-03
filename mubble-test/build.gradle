@@ -26,6 +26,10 @@ loom {
     runs {
         named('gameTest') {
             property 'fabric-api.gametest.report-file', gameTestReport.get().asFile.absolutePath
+            // Runs a subset of the game tests, e.g. `-PgameTestFilter=mubble-gametest:arcade_*`
+            if (project.hasProperty('gameTestFilter')) {
+                property 'fabric-api.gametest.filter', project.property('gameTestFilter')
+            }
         }
     }
 }

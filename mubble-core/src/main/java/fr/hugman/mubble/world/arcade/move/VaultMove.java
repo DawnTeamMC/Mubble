@@ -68,7 +68,13 @@ public class VaultMove extends ArcadeMove {
     @Override
     public void tick(MoveContext ctx) {
         ctx.groundMotion(ctx.stickTargetSpeed(true));
-        ctx.gravity();
+        if (ctx.state().moveTicks == 0) {
+            // carried over the obstacle at the height of the lift before coming down onto it,
+            // as collisions resolve the vertical axis first
+            ctx.holdVertical();
+        } else {
+            ctx.gravity();
+        }
     }
 
     @Override
