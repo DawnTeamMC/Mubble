@@ -4,6 +4,7 @@ version = getSubprojectVersion(project)
 moduleDependencies(project, [
     'mubble-core',
     'mubble-super_mario',
+    'mubble-fortnite',
 ])
 
 loom {

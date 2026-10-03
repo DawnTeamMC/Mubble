@@ -16,7 +16,8 @@
     "minecraft": "*",
     "fabric-api": "*",
     "mubble": "*",
-    "super_mario": "*"
+    "super_mario": "*",
+    "fortnite": "*"
   },
   "license": "LGPL v3.0"
 }
