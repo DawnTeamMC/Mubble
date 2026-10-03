@@ -33,6 +33,24 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.NOTE_BLOCK_JUMP_HIGH, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_JUMP_HIGH, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".block.note_block.jump"));
         soundExporter.add(SuperMarioSounds.NOTE_BLOCK_JUMP_LOW, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_JUMP_LOW, 2).subtitle("subtitles." + SuperMario.MOD_ID + ".block.note_block.jump"));
 
+        // Played by vanilla note blocks, which already have a subtitle of their own
+        var noteSub = "subtitles.block.note_block.note";
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_MARIO, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_MARIO, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_MUSHROOM, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_MUSHROOM, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_YOSHI, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_YOSHI, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_STAR, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_STAR, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_FLOWER, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_FLOWER, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_GAME_BOY, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_GAME_BOY, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_DOG, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_DOG, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_CAT, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_CAT, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_PIG, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_PIG, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_SWAN, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_SWAN, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_FACE, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_FACE, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_PLANE, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_PLANE, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_BOAT, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_BOAT, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_CAR, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_CAR, 1).subtitle(noteSub));
+        soundExporter.add(SuperMarioSounds.NOTE_BLOCK_HEART, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_HEART, 1).subtitle(noteSub));
+
         // Items
         soundExporter.add(SuperMarioSounds.COIN_COLLECT, variantSoundBuilder(SuperMarioSounds.COIN_COLLECT, 1));
         soundExporter.add(SuperMarioSounds.COIN_BOUNCE, variantSoundBuilder(SuperMarioSounds.COIN_BOUNCE, 1).subtitle(null));
