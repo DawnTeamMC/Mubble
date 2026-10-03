@@ -1,0 +1,1 @@
+{"length": 0.4, "linger": true, "bones": {"right_arm": {"rotation": [0, 0, 45]}, "left_arm": {"rotation": [0, 0, -45]}, "right_leg": {"rotation": [-40, 0, 15]}, "left_leg": {"rotation": [-40, 0, -15]}}, "body": {"position": {"0.0": [0, -4, 0], "0.25": [0, -3, 0], "0.4": [0, 0, 0]}}}

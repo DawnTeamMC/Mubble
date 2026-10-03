@@ -36,7 +36,8 @@
       "fr.hugman.mubble.test.gametest.datapack.GeneratedDataGameTest",
       "fr.hugman.mubble.test.gametest.arcade.ArcadeMovementGameTest",
       "fr.hugman.mubble.test.gametest.arcade.ArcadeLockstepGameTest",
-      "fr.hugman.mubble.test.gametest.arcade.ArcadeLifecycleGameTest"
+      "fr.hugman.mubble.test.gametest.arcade.ArcadeLifecycleGameTest",
+      "fr.hugman.mubble.test.gametest.arcade.ArcadeAimGameTest"
     ]
   },
   "mixins": [
