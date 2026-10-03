@@ -89,7 +89,7 @@ public final class ArcadeController {
         }
         boolean wasDriving = this.isDriving();
         this.access = ArcadeAccess.of(this.player);
-        this.profile = this.access.profile().flatMap(key -> ArcadeProfiles.get(level, key)).orElse(null);
+        this.profile = this.access.isActive() ? this.access.profile().flatMap(key -> ArcadeProfiles.get(level, key)).orElse(null) : null;
         this.applyAttributeBases();
         this.suspended = this.profile != null && this.shouldSuspend();
 

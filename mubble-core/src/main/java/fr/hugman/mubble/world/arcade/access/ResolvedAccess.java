@@ -25,9 +25,13 @@ public record ResolvedAccess(
 ) {
     public static final ResolvedAccess NONE = new ResolvedAccess(Optional.empty(), Map.of(), ArcadeUnlocks.NONE, List.of());
 
-    /** Whether the arcade movement layer is on at all. */
+    /**
+     * Whether the arcade movement layer is on at all: a profile is chosen and at least one move is
+     * available. Boots that only enable moves do nothing for a player who owns none of them, rather
+     * than take over the movement with nothing to do it with.
+     */
     public boolean isActive() {
-        return this.profile.isPresent();
+        return this.profile.isPresent() && this.modes.keySet().stream().anyMatch(this::allows);
     }
 
     @Nullable
