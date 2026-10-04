@@ -35,6 +35,7 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityTypes;
@@ -43,6 +44,7 @@ import net.minecraft.world.entity.Pose;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 
 /**
@@ -181,6 +183,47 @@ public class ArcadeLifecycleGameTest {
         client.tickServer();
         client.tickServer();
         helper.assertTrue(controller.isDriving(), "out of the water again");
+        finish(helper, client);
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void swimmingAtTheSurfaceStaysVanillaUntilOutOfTheWater(GameTestHelper helper) {
+        var client = player(helper);
+        var player = client.server();
+        var controller = ArcadeController.of(player);
+        ArcadeTestKit.force(player, ArcadeProfileIds.TRIAL);
+        // a pool 4 deep, its surface at y = 5
+        ArcadeTestKit.fill(helper, new BlockPos(2, 1, 2), new BlockPos(8, 4, 8), Blocks.WATER.defaultBlockState());
+        var surface = helper.absolutePos(new BlockPos(5, 5, 5));
+        player.setPos(surface.getX() + 0.5D, surface.getY() - 1.2D, surface.getZ() + 0.5D);
+        client.tickServer();
+        client.tickServer();
+        helper.assertTrue(controller.isSuspended(), "swimming is vanilla's");
+
+        // bobbing up: only the feet still in the water, short of the depth that starts swimming
+        player.setPos(surface.getX() + 0.5D, surface.getY() - 0.2D, surface.getZ() + 0.5D);
+        client.tickServer();
+        client.tickServer();
+        helper.assertTrue(player.isInWater() && player.getFluidHeight(FluidTags.WATER) <= player.getFluidJumpThreshold(), "the player should be barely in the water, the test proves nothing otherwise");
+        helper.assertTrue(controller.isSuspended(), "bobbing at the surface should not hand the movement back and forth");
+
+        // straight from swimming to wading in water up to the shins, standing on the bottom
+        var shallow = Blocks.WATER.defaultBlockState().setValue(LiquidBlock.LEVEL, 6);
+        ArcadeTestKit.fill(helper, new BlockPos(2, 1, 12), new BlockPos(8, 1, 16), shallow);
+        var wade = helper.absolutePos(new BlockPos(5, 1, 14));
+        player.setPos(wade.getX() + 0.5D, wade.getY(), wade.getZ() + 0.5D);
+        player.setOnGround(true);
+        client.tickServer();
+        client.tickServer();
+        helper.assertTrue(player.isInWater(), "the player should be in the shallow water, the test proves nothing otherwise");
+        helper.assertTrue(controller.isDriving(), "wading, feet on the bottom");
+
+        // and out of the water
+        player.setPos(surface.getX() + 0.5D, surface.getY() + 0.5D, surface.getZ() + 0.5D);
+        player.setOnGround(false);
+        client.tickServer();
+        client.tickServer();
+        helper.assertTrue(controller.isDriving(), "out of the water");
         finish(helper, client);
     }
 

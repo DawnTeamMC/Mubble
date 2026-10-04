@@ -26,6 +26,7 @@ import java.util.Objects;
 import java.util.Optional;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
@@ -57,6 +58,8 @@ public final class ArcadeController {
     @Nullable
     private ArcadeProfile appliedProfile;
     private boolean suspended;
+    /** Whether the player swims, see {@link #swimming()}. */
+    private boolean swimming;
     private boolean needsReset = true;
 
     // the side predicting the movement
@@ -106,10 +109,26 @@ public final class ArcadeController {
         if (p.isDeadOrDying() || p.isSleeping() || p.isPassenger() || p.isSpectator() || p.isFallFlying() || p.getAbilities().flying || p.onClimbable()) {
             return true;
         }
-        if (p.isInLava() || (p.isInWater() && p.getFluidHeight(net.minecraft.tags.FluidTags.WATER) > p.getFluidJumpThreshold())) {
+        if (this.swimming()) {
             return true;
         }
         return p instanceof ServerPlayer serverPlayer && serverPlayer.isChangingDimension();
+    }
+
+    /**
+     * Whether the player swims, which is vanilla's. Swimming starts deep enough in water, or in any
+     * lava, and only ends out of the fluid or standing on its bottom: at the surface, the depth bobs
+     * around the threshold every tick, and the movement must not change hands with it.
+     */
+    private boolean swimming() {
+        var p = this.player;
+        boolean deep = p.isInLava() || (p.isInWater() && p.getFluidHeight(FluidTags.WATER) > p.getFluidJumpThreshold());
+        if (deep) {
+            this.swimming = true;
+        } else if (this.swimming && ((!p.isInWater() && !p.isInLava()) || p.onGround())) {
+            this.swimming = false;
+        }
+        return this.swimming;
     }
 
     /** Ends the moves cleanly: no state, pose or visual is left behind for vanilla to trip on. */
