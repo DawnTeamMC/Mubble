@@ -69,7 +69,7 @@ public final class ArcadeController {
 
     public ArcadeController(Player player) {
         this.player = player;
-        this.world = new ArcadeWorld(player.level(), player);
+        this.world = new ArcadeWorld(player);
     }
 
     public static ArcadeController of(Player player) {

@@ -22,7 +22,9 @@ import java.util.function.Supplier;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -226,6 +228,40 @@ public class ArcadeLockstepGameTest {
             helper.assertFalse(client.kicked(), "a rejected step sends the player back, it does not kick them");
             helper.assertTrue(client.server().position().distanceTo(client.self().position()) < 1.0E-6D,
                     "both sides should agree again, the server has the player at " + client.server().position() + ", the client at " + client.self().position());
+        });
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 200)
+    public void theLayerKeepsWorkingInAnotherDimension(GameTestHelper helper) {
+        walledLane(helper);
+        var nether = helper.getLevel().getServer().getLevel(Level.NETHER);
+        helper.assertTrue(nether != null, "the test server has no nether");
+        // a floor above the roof of the nether, where nothing else is
+        var origin = helper.absolutePos(BlockPos.ZERO);
+        var floor = new BlockPos(origin.getX() / 8, 200, origin.getZ() / 8);
+        for (var pos : BlockPos.betweenClosed(floor.offset(-3, 0, -3), floor.offset(3, 0, 40))) {
+            nether.setBlockAndUpdate(pos, Blocks.STONE.defaultBlockState());
+        }
+        var client = ArcadeTestClient.join(helper, new BlockPos(5, 1, 3), ArcadeProfileIds.TRIAL);
+        var frames = new ArcadeTestKit.Frames().forward().hold(SPRINT);
+        double[] netherStart = {Double.NaN};
+        drive(helper, client, 80, t -> {
+            if (t == 20) {
+                // what a portal does
+                client.server().teleport(new TeleportTransition(nether, Vec3.atBottomCenterOf(floor.above()), Vec3.ZERO, 0.0F, 0.0F, TeleportTransition.DO_NOTHING));
+            }
+            client.tick(t % 20 == 15 ? frames.tap(JUMP) : frames.next());
+            if (Double.isNaN(netherStart[0]) && client.self().level() == nether) {
+                netherStart[0] = client.self().getZ();
+            }
+        }, () -> {
+            client.receive();
+            helper.assertTrue(client.self().level() == nether && client.server().level() == nether, "both sides should be in the nether");
+            helper.assertValueEqual(client.rejections(), 0, "rejected steps (" + client.events() + ")");
+            helper.assertFalse(client.kicked(), "kicked (" + client.events() + ")");
+            helper.assertTrue(client.self().getZ() > netherStart[0] + 10.0D, "the player should run on in the nether, it went from " + netherStart[0] + " to " + client.self().getZ());
+            helper.assertTrue(client.server().position().distanceTo(client.self().position()) < 1.0E-6D,
+                    "the server has the player at " + client.server().position() + ", the client at " + client.self().position());
         });
     }
 
