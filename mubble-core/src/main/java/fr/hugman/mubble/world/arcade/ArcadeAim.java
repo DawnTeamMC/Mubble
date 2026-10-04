@@ -49,6 +49,26 @@ public final class ArcadeAim {
         return distance;
     }
 
+    /**
+     * One tick of a point trailing {@code target}, as the orbit camera's focus trails the player: the
+     * gap left behind shrinks to {@code keep} of itself every tick, and never grows past
+     * {@code maxGap}, so that at any speed it settles on a steady distance rather than snapping back
+     * now and then. Only a jump of more than {@code snapDistance}, a teleport, resets it.
+     */
+    public static Vec3 follow(Vec3 focus, Vec3 target, double keep, double maxGap, double snapDistance) {
+        var gap = focus.subtract(target);
+        double length = gap.length();
+        if (length > snapDistance) {
+            return target;
+        }
+        gap = gap.scale(keep);
+        length *= keep;
+        if (length > maxGap) {
+            gap = gap.scale(maxGap / length);
+        }
+        return target.add(gap);
+    }
+
     /** Whether a block stands between where the camera means to look from and where it lags behind. */
     public static boolean blocked(Level level, Entity entity, Vec3 target, Vec3 focus) {
         return level.clip(new ClipContext(target, focus, ClipContext.Block.VISUAL, ClipContext.Fluid.NONE, entity)).getType() != HitResult.Type.MISS;

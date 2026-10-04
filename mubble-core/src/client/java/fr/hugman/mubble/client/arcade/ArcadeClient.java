@@ -3,6 +3,7 @@ package fr.hugman.mubble.client.arcade;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.client.arcade.animation.ArcadeAnimationLoader;
 import fr.hugman.mubble.client.arcade.animation.ArcadePlayerAnimator;
+import fr.hugman.mubble.client.arcade.camera.ArcadeCamera;
 import fr.hugman.mubble.client.arcade.hud.ArcadeDebugHud;
 import fr.hugman.mubble.world.arcade.ArcadeLocalDriver;
 import net.fabricmc.api.EnvType;
@@ -32,6 +33,7 @@ public final class ArcadeClient {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, context) -> ArcadeRecorder.registerCommands(dispatcher));
         ClientTickEvents.END_CLIENT_TICK.register(minecraft -> {
             ArcadeDebugHud.tick(minecraft);
+            ArcadeCamera.tick(minecraft);
             ArcadePlayerAnimator.tickRemotePlayers(minecraft);
         });
     }
