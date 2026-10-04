@@ -920,6 +920,33 @@ public final class MoveContext {
         return drop;
     }
 
+    /**
+     * How high the player has to be lifted to get onto what the velocity of this tick runs them into,
+     * if it is a step higher than vanilla steps up on its own but no higher than {@code maxHeight}, with
+     * room above it.
+     *
+     * @return the lift, or 0 when there is nothing to get onto that way
+     */
+    public double liftOver(double maxHeight) {
+        var s = this.state;
+        var box = this.box();
+        var ahead = box.move(s.vx, 0.0D, s.vz);
+        if (!this.world.collides(ahead)) {
+            return 0.0D;
+        }
+        double top = maxHeight + 0.01D;
+        var raised = ahead.move(0.0D, top, 0.0D);
+        if (this.world.collides(raised) || this.world.collides(box.move(0.0D, top, 0.0D))) {
+            return 0.0D;
+        }
+        double drop = this.world.distanceToGround(raised, top);
+        if (drop < 0.0D) {
+            return 0.0D;
+        }
+        double lift = top - drop;
+        return lift > this.tuning.stepHeight() + 1.0E-3D && lift <= maxHeight + 1.0E-3D ? lift + 1.0E-3D : 0.0D;
+    }
+
     /** How far below the feet the next floor may be and still carry the player without a snap. */
     private static final double SUPPORT_PROBE = 0.1D;
 
