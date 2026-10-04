@@ -6,8 +6,7 @@
     "EntityMixin",
     "FrozenEntityMixin",
     "FrozenLivingEntityMixin",
-    "LivingEntityMixin",
-    "NoteBlockMixin"
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
