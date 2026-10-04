@@ -33,27 +33,8 @@ import net.minecraft.world.phys.Vec3;
  * own schedule (sending velocity changes, kicking floating players) happens as it would in a game.
  */
 public class ArcadeLockstepGameTest {
-    /** Plays {@code ticks} ticks, one per game tick, then {@code end}; the client leaves the server either way. */
     private static void drive(GameTestHelper helper, ArcadeTestClient client, int ticks, IntConsumer step, Runnable end) {
-        long start = helper.getTick();
-        for (int i = 0; i < ticks; i++) {
-            int t = i;
-            helper.runAtTickTime(start + 1 + t, () -> guarded(client, () -> step.accept(t)));
-        }
-        helper.runAtTickTime(start + 1 + ticks, () -> guarded(client, () -> {
-            end.run();
-            client.leave();
-            helper.succeed();
-        }));
-    }
-
-    private static void guarded(ArcadeTestClient client, Runnable action) {
-        try {
-            action.run();
-        } catch (RuntimeException e) {
-            client.leave();
-            throw e;
-        }
+        client.play(ticks, step, end);
     }
 
     private static ArcadeMove move(ArcadeController controller) {
