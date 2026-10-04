@@ -11,6 +11,10 @@ public class GroundPoundLandMove extends ArcadeMove {
     public static final MoveParam TICKS = MoveParam.ticks("ticks", 8.0D);
     /** Ticks after the impact during which a jump is a ground pound jump. */
     public static final MoveParam JUMP_WINDOW = MoveParam.ticks("jump_window_ticks", 5.0D);
+    /** Ticks after the impact during which crouch and action roll out of it, faster than a roll from standing. */
+    public static final MoveParam ROLL_WINDOW = MoveParam.ticks("roll_window_ticks", 6.0D);
+    /** Speed a roll out of the impact starts at. */
+    public static final MoveParam ROLL_SPEED = MoveParam.speed("roll_speed", 0.8D);
 
     public GroundPoundLandMove(Properties properties) {
         super(properties);
@@ -30,6 +34,10 @@ public class GroundPoundLandMove extends ArcadeMove {
 
     @Override
     public boolean allowsInterruption(ArcadeMove next, MoveContext ctx) {
-        return next == ArcadeMoves.GROUND_POUND_JUMP;
+        if (next == ArcadeMoves.GROUND_POUND_JUMP) {
+            return true;
+        }
+        // the ground pound roll: the impact turned straight into a roll
+        return next == ArcadeMoves.ROLL && ctx.state().moveTicks < ctx.settings(this).ticks(ROLL_WINDOW);
     }
 }

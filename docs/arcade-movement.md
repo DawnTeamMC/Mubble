@@ -112,6 +112,7 @@ All are in the `mubble` namespace, registered by code (`mubble:arcade_move` regi
 |---|---|
 | Jump | Jump; jump again on landing for a double then a triple jump (needs speed) |
 | Crouch in the air | Ground pound; jump right after landing for a ground pound jump |
+| Keep crouch held through a ground pound, action as it lands | Ground pound roll, starting faster than a roll |
 | Crouch, then jump | Backflip (standing) or long jump (running) |
 | Reverse at speed, then jump | Skid, then side somersault |
 | Crouch + action while running | Roll (action again to boost), jump out of it for a roll jump |
@@ -144,7 +145,7 @@ All are in the `mubble` namespace, registered by code (`mubble:arcade_move` regi
 | `mubble:fall` | — | — |
 | `mubble:ground_pound` | `#mubble:all` `#mubble:aerial` | `drop_speed` 1.2, `hang_ticks` 6, `min_height` 1 |
 | `mubble:ground_pound_jump` | `#mubble:all` `#mubble:aerial` | `air_control` 1, `cancel_window_ticks` 3, `height` 5, `ticks_to_apex` 11, `variable` 0 |
-| `mubble:ground_pound_land` | — | `jump_window_ticks` 5, `ticks` 8 |
+| `mubble:ground_pound_land` | — | `jump_window_ticks` 5, `roll_speed` 0.8, `roll_window_ticks` 6, `ticks` 8 |
 | `mubble:jump` | `#mubble:all` `#mubble:aerial` | `air_control` 1, `cancel_window_ticks` 3, `height` 2.2, `ticks_to_apex` 7, `variable` 1 |
 | `mubble:land` | — | — |
 | `mubble:ledge_climb` | — | `forward` 0.7, `ticks` 8 |
@@ -200,6 +201,8 @@ All are in the `mubble` namespace, registered by code (`mubble:arcade_move` regi
 | `push` | Kicking off a wall: up and away from it. <p> It is accepted while sliding down the wall, and for a few ticks after leaving it, see {@link fr.hugman.mubble.world.arcade.ArcadeGrace#wallJumpLeniencyTicks()}. / public class WallJumpMove extends ArcMove { /** Speed the kick pushes the player away from the wall at. |
 | `reach` | How far the wall may be from the player. |
 | `reverse_dot` | How opposed the stick has to be to the velocity, as the cosine of the angle between them. |
+| `roll_speed` | Speed a roll out of the impact starts at. |
+| `roll_window_ticks` | Ticks after the impact during which crouch and action roll out of it, faster than a roll from standing. |
 | `shimmy_speed` | Speed of the shimmy along the edge. |
 | `side_speed` | Jumping out of a skid: a high somersault towards the new direction. / public class SideSomersaultMove extends ArcMove { /** Speed the somersault carries the player towards the new direction. |
 | `slide_ticks` | The vanilla crouch: slow, low, careful at edges. Crouching at speed slides to a stop first, which is when a jump turns into a long jump. / public class CrouchMove extends ArcadeMove { /** Ticks a crouch started at the run speed takes to slide to a stop. |

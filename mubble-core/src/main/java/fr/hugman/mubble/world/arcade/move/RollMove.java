@@ -42,7 +42,12 @@ public class RollMove extends ArcadeMove {
         var state = ctx.state();
         ctx.consumeAction();
         float yaw = ctx.hasStick() ? ctx.stickYaw() : (ctx.horizontalSpeed() > 0.05D ? ctx.velocityYaw() : state.facing);
-        ctx.setHorizontal(yaw, Math.max(ctx.horizontalSpeed(), ctx.param(this, SPEED)));
+        double speed = ctx.param(this, SPEED);
+        if (ctx.previousMove() == ArcadeMoves.GROUND_POUND_LAND) {
+            // the ground pound roll
+            speed = Math.max(speed, ctx.param(ArcadeMoves.GROUND_POUND_LAND, GroundPoundLandMove.ROLL_SPEED));
+        }
+        ctx.setHorizontal(yaw, Math.max(ctx.horizontalSpeed(), speed));
         ctx.faceYaw(yaw);
         state.rollBoosts = 0;
         state.rollBoostCooldown = ctx.settings(this).ticks(BOOST_COOLDOWN);

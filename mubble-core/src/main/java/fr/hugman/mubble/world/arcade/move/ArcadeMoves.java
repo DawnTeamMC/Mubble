@@ -43,7 +43,7 @@ public final class ArcadeMoves {
             .params(GroundPoundMove.HANG_TICKS, GroundPoundMove.DROP_SPEED, GroundPoundMove.MIN_HEIGHT)));
     public static final ArcadeMove GROUND_POUND_LAND = register(ArcadeMoveIds.GROUND_POUND_LAND, new GroundPoundLandMove(Properties.of(Kind.GROUND).handsBusy()
             .accessParent(() -> ArcadeMoves.GROUND_POUND)
-            .params(GroundPoundLandMove.TICKS, GroundPoundLandMove.JUMP_WINDOW)));
+            .params(GroundPoundLandMove.TICKS, GroundPoundLandMove.JUMP_WINDOW, GroundPoundLandMove.ROLL_WINDOW, GroundPoundLandMove.ROLL_SPEED)));
     public static final ArcadeMove GROUND_POUND_JUMP = register(ArcadeMoveIds.GROUND_POUND_JUMP, new GroundPoundJumpMove(Properties.of(Kind.AIR).entryPriority(100)
             .params(ArcMove.arcParams())));
     public static final ArcadeMove LEDGE_GRAB = register(ArcadeMoveIds.LEDGE_GRAB, new LedgeGrabMove(Properties.of(Kind.ATTACHED).entryPriority(50).handsBusy()
