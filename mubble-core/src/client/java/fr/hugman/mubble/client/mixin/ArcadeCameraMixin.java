@@ -13,8 +13,8 @@ public class ArcadeCameraMixin {
     @Inject(method = "alignWithEntity", at = @At("TAIL"))
     private void mubble$orbit(float partialTicks, CallbackInfo ci) {
         var player = Minecraft.getInstance().player;
-        if (player != null && ArcadeCamera.isOrbiting()) {
-            ArcadeCamera.apply((Camera) (Object) this, player, partialTicks);
+        if (player != null) {
+            ArcadeCamera.frame((Camera) (Object) this, player, partialTicks);
         }
     }
 }

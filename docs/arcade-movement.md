@@ -259,7 +259,7 @@ Input is sampled every **frame**, not every tick: a press is remembered with the
 
 ## Camera
 
-While the layer drives, the third person view is an orbit camera the mouse (or right stick) turns freely around the player. Movement is relative to the camera. It stays out of walls, follows with a slight lag, and widens the field of view with speed. The crosshair aims from the camera, but only picks what the player could reach from their own eyes, so it never selects through walls or past vanilla reach; attacking or using an item turns the player towards it. First person stays fully playable.
+While the layer drives, the third person view is an orbit camera the mouse (or right stick) turns freely around the player. Movement is relative to the camera, and the player looks at the horizon unless aiming. It stays out of walls, follows with a slight lag that never grows past 1.5 blocks, widens the field of view with speed, and blends with the vanilla view over a quarter of a second whenever one takes over from the other (flying in creative, swimming). The crosshair aims from the camera, but only picks what the player could reach from their own eyes, so it never selects through walls or past vanilla reach; attacking or using an item turns the player towards it. First person stays fully playable.
 
 Client settings, in `config/mubble-arcade-client.json`:
 
