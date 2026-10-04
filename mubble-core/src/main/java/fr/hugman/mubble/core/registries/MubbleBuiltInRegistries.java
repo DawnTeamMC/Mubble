@@ -1,5 +1,6 @@
 package fr.hugman.mubble.core.registries;
 
+import fr.hugman.mubble.world.level.block.CustomNoteBlockInstrument;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionType;
@@ -18,5 +19,6 @@ public class MubbleBuiltInRegistries {
     public static void register() {
         DynamicRegistries.registerSynced(MubbleRegistries.POWER_UP, PowerUp.DIRECT_CODEC);
         DynamicRegistries.registerSynced(MubbleRegistries.POWER_UP_ACTION, PowerUpAction.TYPE_CODEC);
+        DynamicRegistries.registerSynced(MubbleRegistries.NOTE_BLOCK_INSTRUMENT, CustomNoteBlockInstrument.DIRECT_CODEC);
     }
 }

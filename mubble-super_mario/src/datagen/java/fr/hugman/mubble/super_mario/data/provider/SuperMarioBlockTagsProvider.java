@@ -50,21 +50,13 @@ public class SuperMarioBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
         );
 
         // Mario Paint instruments, played by a vanilla note block sitting on top of these
-        builder(MARIO_NOTE_BLOCK_INSTRUMENT).add(QUESTION_BLOCK);
-        builder(MUSHROOM_NOTE_BLOCK_INSTRUMENT).add(SuperMarioBlockItemIds.BRICK_BLOCK);
         builder(YOSHI_NOTE_BLOCK_INSTRUMENT).addTag(EGG_BLOCKS).add(GREEN_MARIMBA_BLOCK);
-        builder(STAR_NOTE_BLOCK_INSTRUMENT).add(CRYSTAL_BLOCK, YELLOW_MARIMBA_BLOCK);
         builder(FLOWER_NOTE_BLOCK_INSTRUMENT).add(RED_EXCLAMATION_BLOCK);
-        builder(GAME_BOY_NOTE_BLOCK_INSTRUMENT).addTag(BEEP_BLOCKS);
         builder(DOG_NOTE_BLOCK_INSTRUMENT).add(YELLOW_EXCLAMATION_BLOCK);
         builder(CAT_NOTE_BLOCK_INSTRUMENT).add(GREEN_EXCLAMATION_BLOCK);
         builder(PIG_NOTE_BLOCK_INSTRUMENT).add(BLUE_EXCLAMATION_BLOCK);
         builder(SWAN_NOTE_BLOCK_INSTRUMENT).add(BLUE_MARIMBA_BLOCK);
         builder(FACE_NOTE_BLOCK_INSTRUMENT).add(NOTE_BLOCK);
-        builder(PLANE_NOTE_BLOCK_INSTRUMENT).addTag(SNAKE_BLOCKS);
-        builder(BOAT_NOTE_BLOCK_INSTRUMENT).add(EMPTY_BLOCK);
-        builder(CAR_NOTE_BLOCK_INSTRUMENT).add(GOLD_BLOCK);
-        builder(HEART_NOTE_BLOCK_INSTRUMENT).add(RED_MARIMBA_BLOCK);
 
         // Vanilla
         builder(BlockTags.NEEDS_STONE_TOOL)
