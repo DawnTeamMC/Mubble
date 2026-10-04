@@ -245,6 +245,62 @@ public class ArcadeMovementGameTest {
     }
 
     @GameTest(structure = ArcadeTestKit.LANE)
+    public void rollingOutOfAGroundPoundIsFasterThanARoll(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        // a plain roll from standing, for comparison
+        var roller = standing(helper, new BlockPos(2, 1, 5));
+        var plain = new ArcadeTestKit.Frames().forward().hold(CROUCH);
+        ArcadeTestKit.step(roller, plain.press(ACTION));
+        helper.assertValueEqual(move(roller), ArcadeMoves.ROLL, "crouch and action on the ground");
+        double plainSpeed = ArcadeController.of(roller).state().horizontalSpeed();
+
+        var pounder = standing(helper, new BlockPos(7, 1, 5));
+        var frames = new ArcadeTestKit.Frames().forward();
+        ArcadeTestKit.step(pounder, frames.press(JUMP));
+        for (int i = 0; i < 6; i++) {
+            ArcadeTestKit.step(pounder, frames.next());
+        }
+        frames.letGo(JUMP);
+        ArcadeTestKit.step(pounder, frames.press(CROUCH));
+        helper.assertValueEqual(move(pounder), ArcadeMoves.GROUND_POUND, "crouch in the air");
+        // crouch stays held through the pound, as it does when one rolls out of it
+        for (int i = 0; i < 40 && move(pounder) != ArcadeMoves.GROUND_POUND_LAND; i++) {
+            ArcadeTestKit.step(pounder, frames.next());
+        }
+        helper.assertValueEqual(move(pounder), ArcadeMoves.GROUND_POUND_LAND, "the landing of the ground pound");
+        ArcadeTestKit.step(pounder, frames.press(ACTION));
+        helper.assertValueEqual(move(pounder), ArcadeMoves.ROLL, "action right after a ground pound lands, crouch held");
+        double poundSpeed = ArcadeController.of(pounder).state().horizontalSpeed();
+        helper.assertTrue(poundSpeed > plainSpeed + 0.15D, "a ground pound roll should start faster than a roll: " + poundSpeed + " against " + plainSpeed);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void aGroundPoundLandingTooLongAgoRollsLikeAnyRoll(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var pounder = standing(helper, new BlockPos(5, 1, 5));
+        var frames = new ArcadeTestKit.Frames();
+        ArcadeTestKit.step(pounder, frames.press(JUMP));
+        for (int i = 0; i < 6; i++) {
+            ArcadeTestKit.step(pounder, frames.next());
+        }
+        frames.letGo(JUMP);
+        ArcadeTestKit.step(pounder, frames.press(CROUCH));
+        for (int i = 0; i < 40 && move(pounder) != ArcadeMoves.GROUND_POUND_LAND; i++) {
+            ArcadeTestKit.step(pounder, frames.next());
+        }
+        // the impact plays out, then the player rolls from a crouch
+        for (int i = 0; i < 20 && move(pounder) != ArcadeMoves.CROUCH; i++) {
+            ArcadeTestKit.step(pounder, frames.next());
+        }
+        helper.assertValueEqual(move(pounder), ArcadeMoves.CROUCH, "crouch held once the impact is over");
+        ArcadeTestKit.step(pounder, frames.forward().press(ACTION));
+        helper.assertValueEqual(move(pounder), ArcadeMoves.ROLL, "crouch and action");
+        helper.assertTrue(ArcadeController.of(pounder).state().horizontalSpeed() < 0.7D, "a roll long after a ground pound is a plain roll");
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
     public void ledgeGrabHangsThenClimbs(GameTestHelper helper) {
         ArcadeTestKit.floor(helper);
         // a wall 4 blocks high in front of the player, its top at y = 5

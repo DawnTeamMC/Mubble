@@ -62,6 +62,8 @@ public final class MoveContext {
     private boolean horizontalDecided;
     /** Whether the move decided the displacement itself, rather than leaving it to the velocity. */
     private boolean displacementFixed;
+    @Nullable
+    private ArcadeMove previous;
     private Pose pose = Pose.STANDING;
 
     @Nullable
@@ -336,6 +338,7 @@ public final class MoveContext {
     /** Leaves the current move for {@code next}. */
     public void switchTo(ArcadeMove next) {
         var s = this.state;
+        this.previous = s.move;
         s.move = next;
         s.moveTicks = 0;
         s.moveSeq++;
@@ -343,6 +346,12 @@ public final class MoveContext {
         this.horizontalDecided = false;
         next.enter(this);
         this.emit(CueEvent.START, s.horizontalSpeed());
+    }
+
+    /** The move the last switch of this tick left, which {@link ArcadeMove#enter} can tell where it comes from by. */
+    @Nullable
+    public ArcadeMove previousMove() {
+        return this.previous;
     }
 
     public void emit(CueEvent type, double intensity) {
