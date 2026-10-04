@@ -1,23 +1,21 @@
 {
   "schemaVersion": 1,
-  "name": "Mubble (Test Mod)",
-  "id": "mubble-testmod",
+  "name": "Fortnite",
+  "id": "fortnite",
   "version": "${version}",
-  "authors": [
-    "Hugman"
-  ],
   "environment": "*",
   "entrypoints": {
     "main": [
-      "fr.hugman.mubble.testmod.MubbleTestMod"
+      "fr.hugman.mubble.fortnite.Fortnite"
+    ],
+    "client": [
+      "fr.hugman.mubble.fortnite.client.FortniteClient"
     ]
   },
   "depends": {
     "minecraft": "*",
     "fabric-api": "*",
-    "mubble": "*",
-    "super_mario": "*",
-    "fortnite": "*"
+    "mubble": "*"
   },
   "license": "LGPL v3.0"
 }
