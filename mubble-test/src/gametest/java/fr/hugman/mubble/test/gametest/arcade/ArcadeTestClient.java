@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import fr.hugman.mubble.network.protocol.common.custom.ArcadeCorrectionPayload;
 import fr.hugman.mubble.network.protocol.common.custom.ArcadeInputPayload;
 import fr.hugman.mubble.test.gametest.support.TestFlight;
+import fr.hugman.mubble.world.arcade.ArcadeAttachments;
 import fr.hugman.mubble.world.arcade.ArcadeController;
 import fr.hugman.mubble.world.arcade.ArcadePrediction;
 import fr.hugman.mubble.world.arcade.ArcadeProfile;
@@ -24,6 +25,7 @@ import net.minecraft.network.protocol.common.ClientboundDisconnectPacket;
 import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.minecraft.network.protocol.game.ClientboundBundlePacket;
 import net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket;
+import net.minecraft.network.protocol.game.ClientboundRespawnPacket;
 import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.network.protocol.game.ServerboundAcceptTeleportationPacket;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
@@ -50,7 +52,7 @@ import org.jspecify.annotations.Nullable;
 public final class ArcadeTestClient {
     private final GameTestHelper helper;
     private final ServerPlayer server;
-    private final Player self;
+    private Player self;
     private final Connection connection;
     private final EmbeddedChannel channel;
     private final List<String> events = new ArrayList<>();
@@ -104,6 +106,21 @@ public final class ArcadeTestClient {
             ArcadeTestKit.force(self, profile);
         }
         return client;
+    }
+
+    /** A survival player standing in for the one of the game client, in {@code level}, the way {@link GameTestHelper#makeMockPlayer} makes them. */
+    private static Player mockPlayer(net.minecraft.world.level.Level level) {
+        return new Player(level, new GameProfile(UUID.randomUUID(), "arcade-client-self")) {
+            @Override
+            public GameType gameMode() {
+                return GameType.SURVIVAL;
+            }
+
+            @Override
+            public boolean isClientAuthoritative() {
+                return false;
+            }
+        };
     }
 
     /** The player as the server has it. */
@@ -230,6 +247,16 @@ public final class ArcadeTestClient {
             new ServerboundAcceptTeleportationPacket(position.id()).handle(this.server.connection);
             new ServerboundMovePlayerPacket.PosRot(target.position(), target.yRot(), target.xRot(), false, false).handle(this.server.connection);
             this.lastSent = target.position();
+        } else if (packet instanceof ClientboundRespawnPacket) {
+            // the game client makes a new player for the new dimension, and carries the attachments over
+            var level = this.server.level();
+            var fresh = mockPlayer(level);
+            fresh.setAttached(ArcadeAttachments.SOURCES, this.self.getAttached(ArcadeAttachments.SOURCES));
+            fresh.setAttached(ArcadeAttachments.UNLOCKS, this.self.getAttached(ArcadeAttachments.UNLOCKS));
+            fresh.setPos(this.self.position());
+            this.self = fresh;
+            this.lastSent = null;
+            this.events.add("respawned in " + level.dimension().identifier());
         } else if (packet instanceof ClientboundSetEntityMotionPacket motion) {
             if (motion.id() == this.server.getId()) {
                 this.motions++;

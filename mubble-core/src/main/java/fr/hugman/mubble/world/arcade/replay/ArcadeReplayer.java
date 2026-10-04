@@ -42,7 +42,7 @@ public final class ArcadeReplayer {
      * collisions.
      */
     public static List<Point> playAsClient(Player player, ArcadeState state, List<ArcadeInputFrame> frames, Supplier<ArcadeTuning> tuning) {
-        var world = new ArcadeWorld(player.level(), player);
+        var world = new ArcadeWorld(player);
         var body = new EntityBody(player);
         var points = new ArrayList<Point>(frames.size());
         for (var frame : frames) {
@@ -57,7 +57,7 @@ public final class ArcadeReplayer {
      * position the client reported, and settled with the result it reported.
      */
     public static List<Point> playAsServer(Player player, ArcadeState state, List<ArcadeInputFrame> frames, List<Point> client, Vec3 start, Supplier<ArcadeTuning> tuning) {
-        var world = new ArcadeWorld(player.level(), player);
+        var world = new ArcadeWorld(player);
         var points = new ArrayList<Point>(frames.size());
         var position = start;
         for (int i = 0; i < frames.size(); i++) {
