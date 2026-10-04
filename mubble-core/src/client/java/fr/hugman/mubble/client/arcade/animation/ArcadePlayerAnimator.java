@@ -53,6 +53,19 @@ public final class ArcadePlayerAnimator {
         final AnimationState state = new AnimationState();
         @Nullable
         ArcadeAnimation animation;
+        /** Whether the animation plays on after the end of its move, until its own end. */
+        boolean lingering;
+
+        /** Whether a lingering animation reached its end, past which it would hold its last pose for good. */
+        boolean lingeredOut(Player player) {
+            return this.lingering && this.animation != null && this.state.getTimeInMillis(player.tickCount) >= this.animation.lengthInSeconds() * 1000.0F;
+        }
+
+        void clear() {
+            this.animation = null;
+            this.lingering = false;
+            this.state.stop();
+        }
     }
 
     /** A limb animation baked against one model, with the parts it moves. */
@@ -110,8 +123,11 @@ public final class ArcadePlayerAnimator {
         var current = track.animation;
         boolean lingering = next == null && move != null && current != null && current.linger()
                 && track.state.getTimeInMillis(player.tickCount) < current.lengthInSeconds() * 1000.0F;
-        if (!lingering) {
+        if (lingering) {
+            track.lingering = true;
+        } else {
             track.animation = next;
+            track.lingering = false;
             if (next != null) {
                 track.state.start(player.tickCount);
             } else {
@@ -128,6 +144,15 @@ public final class ArcadePlayerAnimator {
         return ArcadeAnimations.get(id).orElse(null);
     }
 
+    /** The animation {@code player} plays, for the debug HUD. */
+    public static String describe(Player player) {
+        var track = TRACKS.get(player);
+        if (track == null || track.animation == null || !track.state.isStarted()) {
+            return "vanilla";
+        }
+        return track.animation.id() + (track.lingering ? " (lingering)" : "") + String.format(java.util.Locale.ROOT, " %.2fs", track.state.getTimeInMillis(player.tickCount) / 1000.0F);
+    }
+
     /** What the render state of {@code player} carries this frame. */
     public static ArcadeRenderData renderData(Player player) {
         boolean local = player == Minecraft.getInstance().player;
@@ -140,6 +165,10 @@ public final class ArcadePlayerAnimator {
             return ArcadeRenderData.NONE;
         }
         var track = TRACKS.get(player);
+        if (track != null && track.lingeredOut(player)) {
+            // the landing played out over the first steps of a run: vanilla has the legs again
+            track.clear();
+        }
         if (track == null || track.animation == null || !track.state.isStarted()) {
             return ArcadeRenderData.NONE;
         }
