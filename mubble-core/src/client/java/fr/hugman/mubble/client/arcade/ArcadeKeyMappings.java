@@ -23,8 +23,9 @@ public final class ArcadeKeyMappings {
 
     public static final KeyMapping JUMP = register("arcade_jump", InputConstants.UNKNOWN.getValue());
     public static final KeyMapping CROUCH = register("arcade_crouch", InputConstants.UNKNOWN.getValue());
-    public static final KeyMapping ACTION = register("arcade_action", GLFW.GLFW_KEY_LEFT_ALT);
-    public static final KeyMapping RECENTER = register("arcade_recenter", GLFW.GLFW_KEY_Z);
+    // not Alt: Shift + Alt switches the keyboard layout on Windows, and crouch + action is the roll
+    public static final KeyMapping ACTION = register("arcade_action", GLFW.GLFW_KEY_R);
+    public static final KeyMapping RECENTER = register("arcade_recenter", InputConstants.UNKNOWN.getValue());
     public static final KeyMapping SPIN = register("arcade_spin", InputConstants.UNKNOWN.getValue());
     public static final KeyMapping DEBUG_HUD = register("arcade_debug_hud", InputConstants.UNKNOWN.getValue());
 

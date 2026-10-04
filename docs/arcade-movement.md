@@ -244,8 +244,8 @@ The profile sets the base value of these attributes while it is active, and they
 |---|---|---|
 | Arcade Jump | unbound | Falls back to vanilla Jump |
 | Arcade Crouch | unbound | Falls back to vanilla Sneak |
-| Arcade Action | Left Alt | Dive, roll |
-| Recenter Camera | Z | Swings the orbit camera behind the player |
+| Arcade Action | R | Dive, roll |
+| Recenter Camera | unbound | Swings the orbit camera behind the player |
 | Spin | unbound | The stick (or the movement keys) turned all the way around also spins |
 | Arcade Debug HUD | unbound | |
 
