@@ -70,8 +70,18 @@ public final class ArcadeValidator {
         }
 
         var tuning = controller.tuning();
-        var ctx = ArcadeSimulation.plan(state, frame, tuning, controller.world(), from);
-        var reason = implausibility(ctx, result, tuning, settings);
+        // the world is probed as the client probed it: some entities are only solid depending on how
+        // the player moves, and the client's velocity at that point was the one of the state
+        var vanillaVelocity = player.getDeltaMovement();
+        player.setDeltaMovement(state.vx, state.vy, state.vz);
+        MoveContext ctx;
+        String reason;
+        try {
+            ctx = ArcadeSimulation.plan(state, frame, tuning, controller.world(), from);
+            reason = implausibility(ctx, result, tuning, settings);
+        } finally {
+            player.setDeltaMovement(vanillaVelocity);
+        }
         if (reason != null) {
             reject(player, controller, frame.tick(), reason);
             return;

@@ -13,6 +13,7 @@ import io.netty.channel.embedded.EmbeddedChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.IntConsumer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.network.Connection;
@@ -246,6 +247,33 @@ public final class ArcadeTestClient {
         } else if (packet instanceof ClientboundDisconnectPacket disconnect) {
             this.kicked = true;
             this.events.add("kicked: " + disconnect.reason().getString());
+        }
+    }
+
+    /**
+     * Plays {@code ticks} ticks of the client, one per game tick so that the server does what it does on
+     * its own schedule in between, then runs {@code end} and succeeds. The client leaves the server
+     * either way.
+     */
+    public void play(int ticks, IntConsumer step, Runnable end) {
+        long start = this.helper.getTick();
+        for (int i = 0; i < ticks; i++) {
+            int t = i;
+            this.helper.runAtTickTime(start + 1 + t, () -> this.guarded(() -> step.accept(t)));
+        }
+        this.helper.runAtTickTime(start + 1 + ticks, () -> this.guarded(() -> {
+            end.run();
+            this.leave();
+            this.helper.succeed();
+        }));
+    }
+
+    private void guarded(Runnable action) {
+        try {
+            action.run();
+        } catch (RuntimeException e) {
+            this.leave();
+            throw e;
         }
     }
 
