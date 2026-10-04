@@ -253,7 +253,20 @@ The profile sets the base value of these attributes while it is active, and they
 | Spin | unbound | The stick (or the movement keys) turned all the way around also spins |
 | Arcade Debug HUD | unbound | |
 
-With [Controlify](https://modrinth.com/mod/controlify) installed, the same actions are controller bindings (`mubble:arcade_jump`, `arcade_crouch`, `arcade_action`, `arcade_recenter`, `arcade_spin`). Action defaults to the east face button (B on Xbox); jump and crouch follow Controlify's own jump and sneak until bound; recenter and spin have no default button, every one being taken in game. The left stick is read analog: tilting it a little walks, all the way runs. The debug HUD shows the glyph of the action binding.
+With [Controlify](https://modrinth.com/mod/controlify) installed, the controller follows **Super Mario Odyssey's layout while the arcade layer drives** (button positions; on an Xbox pad, A/B and X/Y swap labels):
+
+| Button (Switch) | Arcade layout | Vanilla moves to |
+|---|---|---|
+| A / B | Jump | |
+| Y / X | Action: dive, roll | swap hands, inventory → D-pad ↓ / ↑ |
+| ZL / ZR | Crouch, ground pound | use, attack → D-pad ← / → |
+| L | Recenter the camera | previous hotbar slot → unbound |
+| R | Next hotbar slot (unchanged) | |
+| D-pad | Use, attack, inventory, swap hands | drop, pick block, radial menu, chat → unbound |
+
+Every one of these is a Controlify binding in the *Arcade Movement* category (`mubble:arcade_jump`, `arcade_crouch`, `arcade_crouch_alt`, `arcade_action`, `arcade_action_alt`, `arcade_recenter`, `arcade_spin`, and `arcade_use`, `arcade_attack`, `arcade_inventory`, `arcade_swap_hands`, `arcade_prev_slot`, `arcade_drop`, `arcade_pick_block`, `arcade_open_chat`, `arcade_radial_menu` for where vanilla goes), all rebindable. They belong to a context of their own that only applies while the layer drives: while it does, a vanilla binding sitting on a button of the arcade layout gives way; the rest of the time, the controller is Controlify's usual layout. Spin has no button, as in SMO: turn the stick all the way around. The left stick is read analog: tilting it a little walks, all the way runs.
+
+To try it in the dev client, run the sandbox with `./gradlew :mubble-testmod:runClient -Pcontrolify`, which loads Controlify and what it needs.
 
 Input is sampled every **frame**, not every tick: a press is remembered with the time it happened, so a jump pressed one frame before landing still jumps, however low the tick rate.
 

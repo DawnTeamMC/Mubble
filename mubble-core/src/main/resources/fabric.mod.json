@@ -20,6 +20,10 @@
     {
       "config": "mubble.client.mixins.json",
       "environment": "client"
+    },
+    {
+      "config": "mubble.controlify.mixins.json",
+      "environment": "client"
     }
   ],
   "depends": {

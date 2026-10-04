@@ -52,6 +52,7 @@ nested in the release jar nor published.
 ```sh
 ./gradlew :mubble-testmod:runClient
 ./gradlew :mubble-testmod:runServer
+./gradlew :mubble-testmod:runClient -Pcontrolify  # with Controlify, to play with a controller
 ```
 
 Whatever a data pack can define is defined in `src/main/resources/data`; only the items and the

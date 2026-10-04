@@ -31,3 +31,29 @@ loom {
 
 // Its jars are still built, so that the module behaves like any other, but the root build script
 // keeps them out of the BOM, out of the release jar and out of anything published.
+
+// `-Pcontrolify` loads Controlify in the client of the sandbox, to play the arcade movement with a
+// controller. Off by default: Mubble only compiles against it, and nobody's dev client should change.
+if (project.hasProperty('controlify')) {
+    repositories {
+        maven {
+            name = 'isXander'
+            url = 'https://maven.isxander.dev/releases'
+            // only the jars are wanted, not the multi-loader variants their metadata describes
+            metadataSources {
+                artifact()
+            }
+            content {
+                includeGroup 'dev.isxander'
+            }
+        }
+    }
+    dependencies {
+        clientRuntimeOnly 'dev.isxander:controlify:3.5.3+mc26.2:fabric@jar'
+        // the config library Controlify depends on
+        clientRuntimeOnly 'dev.isxander:yet-another-config-lib:3.9.7+26.2-fabric@jar'
+        // the config library has a @Redirect that MixinExtras only reads from 0.5.5 on, a version past
+        // the one the loader brings
+        clientRuntimeOnly 'io.github.llamalad7:mixinextras-fabric:0.5.5'
+    }
+}
