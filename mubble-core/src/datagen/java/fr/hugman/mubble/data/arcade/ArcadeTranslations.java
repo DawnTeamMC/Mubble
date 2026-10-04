@@ -28,6 +28,18 @@ public final class ArcadeTranslations {
         t.put("key." + M + ".arcade_recenter", pair("Recenter Camera", "Recentrer la caméra"));
         t.put("key." + M + ".arcade_spin", pair("Spin", "Tourbillon"));
         t.put("key." + M + ".arcade_debug_hud", pair("Arcade Debug HUD", "Interface de débogage arcade"));
+        // controller only: the second buttons of SMO, and where vanilla actions go while the arcade layout is on
+        t.put("key." + M + ".arcade_crouch_alt", pair("Arcade Crouch (second button)", "Accroupissement arcade (second bouton)"));
+        t.put("key." + M + ".arcade_action_alt", pair("Arcade Action (second button)", "Action arcade (second bouton)"));
+        t.put("key." + M + ".arcade_use", pair("Use (arcade layout)", "Utiliser (disposition arcade)"));
+        t.put("key." + M + ".arcade_attack", pair("Attack (arcade layout)", "Attaquer (disposition arcade)"));
+        t.put("key." + M + ".arcade_inventory", pair("Inventory (arcade layout)", "Inventaire (disposition arcade)"));
+        t.put("key." + M + ".arcade_swap_hands", pair("Swap Hands (arcade layout)", "Changer de main (disposition arcade)"));
+        t.put("key." + M + ".arcade_prev_slot", pair("Previous Slot (arcade layout)", "Emplacement précédent (disposition arcade)"));
+        t.put("key." + M + ".arcade_drop", pair("Drop (arcade layout)", "Jeter (disposition arcade)"));
+        t.put("key." + M + ".arcade_pick_block", pair("Pick Block (arcade layout)", "Choisir le bloc (disposition arcade)"));
+        t.put("key." + M + ".arcade_open_chat", pair("Chat (arcade layout)", "Discussion (disposition arcade)"));
+        t.put("key." + M + ".arcade_radial_menu", pair("Radial Menu (arcade layout)", "Menu radial (disposition arcade)"));
 
         // moves
         t.put(move("walk"), pair("Walk", "Marche"));
