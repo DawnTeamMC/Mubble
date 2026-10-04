@@ -115,7 +115,7 @@ All are in the `mubble` namespace, registered by code (`mubble:arcade_move` regi
 | Keep crouch held through a ground pound, action as it lands | Ground pound roll, starting faster than a roll |
 | Crouch, then jump | Backflip (standing) or long jump (running) |
 | Reverse at speed, then jump | Skid, then side somersault |
-| Crouch + action while running | Roll (action again to boost), jump out of it for a roll jump |
+| Crouch + action while running | Roll (action again to boost; it climbs steps up to a block), jump out of it for a roll jump |
 | Action in the air | Dive, landing into a rollout |
 | Spin key, or the stick turned all the way around | Spin, once per jump |
 | Fall along a wall | Wall slide; jump to wall jump |
@@ -151,7 +151,7 @@ All are in the `mubble` namespace, registered by code (`mubble:arcade_move` regi
 | `mubble:ledge_climb` | — | `forward` 0.7, `ticks` 8 |
 | `mubble:ledge_grab` | `#mubble:all` `#mubble:ledge` | `grab_band` 0.6, `hang_depth` 0.3, `min_height` 1, `shimmy_speed` 0.1 |
 | `mubble:long_jump` | `#mubble:all` `#mubble:aerial` `#mubble:speed` | `air_control` 0.6, `cancel_window_ticks` 3, `height` 1.6, `min_speed` 0.5, `speed` 0.55, `ticks_to_apex` 7, `variable` 0 |
-| `mubble:roll` | `#mubble:all` `#mubble:speed` `#mubble:ground` | `boost` 0.1, `boost_cooldown_ticks` 4, `decel` 0.004, `max_boosts` 3, `min_speed` 0.15, `slope_gain` 0.12, `speed` 0.6, `turn_speed` 8 |
+| `mubble:roll` | `#mubble:all` `#mubble:speed` `#mubble:ground` | `boost` 0.1, `boost_cooldown_ticks` 4, `climb_height` 1, `decel` 0.004, `max_boosts` 3, `min_speed` 0.15, `slope_gain` 0.12, `speed` 0.6, `turn_speed` 8 |
 | `mubble:roll_jump` | `#mubble:all` `#mubble:aerial` `#mubble:speed` | `air_control` 0.6, `cancel_window_ticks` 3, `height` 1.4, `ticks_to_apex` 6, `variable` 1 |
 | `mubble:rollout` | — | `decel` 0.03, `ticks` 10 |
 | `mubble:run` | `#mubble:all` `#mubble:speed` `#mubble:ground` | `exhaustion_per_block` 0 / 0.08, `slope_gain` 0.02 |
@@ -173,6 +173,7 @@ All are in the `mubble` namespace, registered by code (`mubble:arcade_move` regi
 | `boost_cooldown_ticks` | Ticks between two boosts. |
 | `brake` | Share of its speed the skid loses every tick. |
 | `cancel_window_ticks` | Every move of the arcade movement layer. <p> The entry priorities decide which move wins when several could start on the same tick: the more specific a move is, the higher it ranks, so that crouching and jumping is a backflip before it is a jump, and jumping right after a ground pound is a ground pound jump before anything else. / public final class ArcadeMoves { /** Ticks an airborne move lasts before the aerial follow-ups may cut it short. |
+| `climb_height` | The highest step a roll gets onto without stopping, in blocks: a roll goes up a hill of full blocks. |
 | `decel` | Speed lost every tick on flat ground. |
 | `drop_speed` | Speed of the drop; the base value of {@code mubble:arcade_ground_pound_speed}, which is what the drop reads. |
 | `exhaustion_per_block` | Moving about on the ground: walking, running, and the landing that leads back to either. <p> Running is the move; walking is what the ground is without it, at the vanilla pace. Both share the same locomotion, only the speed they aim for differs. / public class GroundMove extends ArcadeMove { /** Food exhaustion per block travelled, when the profile charges for its moves. |

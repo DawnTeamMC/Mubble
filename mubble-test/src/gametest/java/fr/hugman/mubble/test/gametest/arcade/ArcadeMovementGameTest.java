@@ -373,6 +373,29 @@ public class ArcadeMovementGameTest {
     }
 
     @GameTest(structure = ArcadeTestKit.LANE)
+    public void aRollClimbsAHillOfFullBlocks(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        // a hill going up one full block every 3 blocks, from z = 8
+        for (int step = 0; step < 4; step++) {
+            ArcadeTestKit.fill(helper, new BlockPos(0, 1, 8 + step * 3), new BlockPos(9, 1 + step, 47), Blocks.STONE.defaultBlockState());
+        }
+        var player = standing(helper, new BlockPos(5, 1, 2));
+        var frames = new ArcadeTestKit.Frames().forward().hold(SPRINT);
+        for (int i = 0; i < 4; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        ArcadeTestKit.step(player, frames.press(CROUCH));
+        ArcadeTestKit.step(player, frames.press(ACTION));
+        helper.assertValueEqual(move(player), ArcadeMoves.ROLL, "crouch and action while running");
+        double startY = player.getY();
+        for (int i = 0; i < 40 && move(player) == ArcadeMoves.ROLL; i++) {
+            ArcadeTestKit.step(player, i % 6 == 5 ? frames.tap(ACTION) : frames.next());
+        }
+        helper.assertTrue(player.getY() >= startY + 4.0D - 1.0E-6D, "the roll should have climbed the four steps, it rose " + (player.getY() - startY) + " and is now " + move(player));
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
     public void rollingDownStairsGainsSpeed(GameTestHelper helper) {
         // a flat run up to z = 6, then stairs going down one block per block
         ArcadeTestKit.fill(helper, new BlockPos(0, 0, 0), new BlockPos(9, 9, 6), Blocks.STONE.defaultBlockState());

@@ -22,42 +22,19 @@ public class VaultMove extends ArcadeMove {
     @Override
     public boolean canEnter(MoveContext ctx) {
         var state = ctx.state();
-        if (!state.grounded || (state.move != ArcadeMoves.RUN && state.move != ArcadeMoves.LAND && state.move != ArcadeMoves.ROLL)) {
+        if (!state.grounded || (state.move != ArcadeMoves.RUN && state.move != ArcadeMoves.LAND)) {
             return false;
         }
         double speed = ctx.horizontalSpeed();
         if (speed < ctx.param(this, MIN_SPEED) * ctx.tuning().effectiveRunSpeed() || ctx.stickAlong(state.vx, state.vz) < 0.5D) {
             return false;
         }
-        double lift = this.liftOver(ctx);
+        double lift = ctx.liftOver(ctx.param(this, MAX_HEIGHT));
         if (lift <= 0.0D) {
             return false;
         }
         state.anchorY = lift;
         return true;
-    }
-
-    /** How high the player has to be lifted to clear what is in front of them, or 0 when it is not something to vault. */
-    private double liftOver(MoveContext ctx) {
-        var state = ctx.state();
-        var world = ctx.world();
-        var box = ctx.box();
-        var ahead = box.move(state.vx, 0.0D, state.vz);
-        if (!world.collides(ahead)) {
-            return 0.0D;
-        }
-        double max = ctx.param(this, MAX_HEIGHT);
-        double top = max + 0.01D;
-        var raised = ahead.move(0.0D, top, 0.0D);
-        if (world.collides(raised) || world.collides(box.move(0.0D, top, 0.0D))) {
-            return 0.0D;
-        }
-        double drop = world.distanceToGround(raised, top);
-        if (drop < 0.0D) {
-            return 0.0D;
-        }
-        double lift = top - drop;
-        return lift > ctx.tuning().stepHeight() + 1.0E-3D && lift <= max + 1.0E-3D ? lift + 1.0E-3D : 0.0D;
     }
 
     @Override

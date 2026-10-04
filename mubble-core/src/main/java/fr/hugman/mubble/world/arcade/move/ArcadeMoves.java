@@ -58,7 +58,7 @@ public final class ArcadeMoves {
 
     // tier 2
     public static final ArcadeMove ROLL = register(ArcadeMoveIds.ROLL, new RollMove(Properties.of(Kind.GROUND).entryPriority(30).handsBusy()
-            .params(RollMove.SPEED, RollMove.BOOST, RollMove.MAX_BOOSTS, RollMove.BOOST_COOLDOWN, RollMove.DECEL, RollMove.MIN_SPEED, RollMove.TURN_SPEED, RollMove.SLOPE_GAIN)));
+            .params(RollMove.SPEED, RollMove.BOOST, RollMove.MAX_BOOSTS, RollMove.BOOST_COOLDOWN, RollMove.DECEL, RollMove.MIN_SPEED, RollMove.TURN_SPEED, RollMove.SLOPE_GAIN, RollMove.CLIMB_HEIGHT)));
     public static final ArcadeMove ROLL_JUMP = register(ArcadeMoveIds.ROLL_JUMP, new RollJumpMove(Properties.of(Kind.AIR).entryPriority(85)
             .params(ArcMove.arcParams())));
     public static final ArcadeMove LONG_JUMP = register(ArcadeMoveIds.LONG_JUMP, new LongJumpMove(Properties.of(Kind.AIR).entryPriority(80)

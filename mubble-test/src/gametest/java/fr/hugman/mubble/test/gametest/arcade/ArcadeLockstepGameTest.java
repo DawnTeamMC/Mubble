@@ -232,6 +232,26 @@ public class ArcadeLockstepGameTest {
     }
 
     @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 200)
+    public void rollingUpAHillStaysInLockstep(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        for (int step = 0; step < 4; step++) {
+            ArcadeTestKit.fill(helper, new BlockPos(0, 1, 8 + step * 3), new BlockPos(9, 1 + step, 47), Blocks.STONE.defaultBlockState());
+        }
+        var client = ArcadeTestClient.join(helper, new BlockPos(5, 1, 2), ArcadeProfileIds.TRIAL);
+        var frames = new ArcadeTestKit.Frames().forward().hold(SPRINT);
+        double startY = client.self().getY();
+        drive(helper, client, 50, t -> client.tick(switch (t) {
+            case 6 -> frames.press(CROUCH);
+            case 7, 13, 19, 25 -> frames.press(ACTION);
+            default -> frames.next();
+        }), () -> {
+            client.assertUndisturbed("rolling up a hill of full blocks");
+            helper.assertValueEqual(client.corrections(), 0, "corrections (" + client.events() + ")");
+            helper.assertTrue(client.self().getY() >= startY + 4.0D - 1.0E-6D, "the roll should have climbed the hill, it rose " + (client.self().getY() - startY));
+        });
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 200)
     public void theLayerKeepsWorkingInAnotherDimension(GameTestHelper helper) {
         walledLane(helper);
         var nether = helper.getLevel().getServer().getLevel(Level.NETHER);

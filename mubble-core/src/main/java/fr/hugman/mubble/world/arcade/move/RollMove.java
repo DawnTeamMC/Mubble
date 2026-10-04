@@ -27,6 +27,8 @@ public class RollMove extends ArcadeMove {
     public static final MoveParam TURN_SPEED = MoveParam.degrees("turn_speed", 8.0D);
     /** Speed gained per block of step-down, see {@link MoveContext#hugGround}. */
     public static final MoveParam SLOPE_GAIN = MoveParam.factor("slope_gain", 0.12D);
+    /** The highest step a roll gets onto without stopping, in blocks: a roll goes up a hill of full blocks. */
+    public static final MoveParam CLIMB_HEIGHT = MoveParam.blocks("climb_height", 1.0D);
 
     public RollMove(Properties properties) {
         super(properties);
@@ -73,8 +75,16 @@ public class RollMove extends ArcadeMove {
         }
         ctx.setHorizontal(yaw, speed);
         ctx.faceYaw(yaw);
-        ctx.gravity();
-        ctx.hugGround(ctx.param(this, SLOPE_GAIN));
+        double lift = state.grounded ? ctx.liftOver(ctx.param(this, CLIMB_HEIGHT)) : 0.0D;
+        if (lift > 0.0D) {
+            // up and over the step, then settled onto it, so that the roll stays on the ground
+            ctx.nudge(state.vx, lift, state.vz);
+            ctx.setDisplacement(0.0D, -0.002D, 0.0D);
+            state.vy = 0.0D;
+        } else {
+            ctx.gravity();
+            ctx.hugGround(ctx.param(this, SLOPE_GAIN));
+        }
     }
 
     @Override
@@ -91,7 +101,7 @@ public class RollMove extends ArcadeMove {
 
     @Override
     public boolean allowsInterruption(ArcadeMove next, MoveContext ctx) {
-        return next == ArcadeMoves.ROLL_JUMP || next == ArcadeMoves.VAULT;
+        return next == ArcadeMoves.ROLL_JUMP;
     }
 
     @Override
