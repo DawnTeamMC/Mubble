@@ -3,6 +3,7 @@ package fr.hugman.mubble.client.arcade.hud;
 import fr.hugman.mubble.client.arcade.ArcadeClientConfig;
 import fr.hugman.mubble.client.arcade.ArcadeKeyMappings;
 import fr.hugman.mubble.client.arcade.ArcadeRecorder;
+import fr.hugman.mubble.client.arcade.animation.ArcadePlayerAnimator;
 import fr.hugman.mubble.client.arcade.compat.ArcadeControllerBindings;
 import fr.hugman.mubble.world.arcade.ArcadeController;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public final class ArcadeDebugHud {
         if (controller.isDriving()) {
             var state = controller.state();
             lines.add(Component.literal("Move: " + state.move + " #" + state.moveSeq + " t=" + state.moveTicks + " " + state.pose.name().toLowerCase(Locale.ROOT)));
+            lines.add(Component.literal("Animation: " + ArcadePlayerAnimator.describe(controller.player())));
             lines.add(Component.literal(String.format(Locale.ROOT, "Speed: %.3f b/t  vy=%.3f  %s", state.horizontalSpeed(), state.vy, state.grounded ? "grounded" : "airborne " + state.airTicks)));
             lines.add(Component.literal(String.format(Locale.ROOT, "Slope: %.2f", state.slope())));
             lines.add(Component.literal("Coyote: " + state.coyote + "  Buffer: jump " + state.jumpBufferMs + " ms, action " + state.actionBufferMs + " ms"));

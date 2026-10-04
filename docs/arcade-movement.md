@@ -330,7 +330,7 @@ Client side, `/mubble_client arcade record` starts recording the steps of your p
 
 ## Debug HUD
 
-Bound to the Arcade Debug HUD key, or on at start with `debug_hud`: profile, move with its sequence number and ticks, pose, speeds, slope, coyote and input buffers, jump chain, wall and ledge timers, sources, resolved modes, owned moves, and whether a recording or replay runs.
+Bound to the Arcade Debug HUD key, or on at start with `debug_hud`: profile, move with its sequence number and ticks, pose, the animation playing (or vanilla), speeds, slope, coyote and input buffers, jump chain, wall and ledge timers, sources, resolved modes, owned moves, and whether a recording or replay runs.
 
 ## Multiplayer
 
