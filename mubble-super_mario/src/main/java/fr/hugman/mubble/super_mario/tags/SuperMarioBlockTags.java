@@ -16,6 +16,14 @@ public class SuperMarioBlockTags {
 
 	public static final TagKey<Block> EGG_BLOCKS = bind("egg_blocks");
 
+	public static final TagKey<Block> YOSHI_NOTE_BLOCK_INSTRUMENT = bind("note_block_instruments/yoshi");
+	public static final TagKey<Block> FLOWER_NOTE_BLOCK_INSTRUMENT = bind("note_block_instruments/flower");
+	public static final TagKey<Block> DOG_NOTE_BLOCK_INSTRUMENT = bind("note_block_instruments/dog");
+	public static final TagKey<Block> CAT_NOTE_BLOCK_INSTRUMENT = bind("note_block_instruments/cat");
+	public static final TagKey<Block> PIG_NOTE_BLOCK_INSTRUMENT = bind("note_block_instruments/pig");
+	public static final TagKey<Block> SWAN_NOTE_BLOCK_INSTRUMENT = bind("note_block_instruments/swan");
+	public static final TagKey<Block> FACE_NOTE_BLOCK_INSTRUMENT = bind("note_block_instruments/face");
+
 	public static TagKey<Block> bind(String path) {
 		return TagKey.create(Registries.BLOCK, SuperMario.id(path));
 	}

@@ -49,6 +49,15 @@ public class SuperMarioBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
                 WHITE_EGG_BLOCK
         );
 
+        // Mario Paint instruments, played by a vanilla note block sitting on top of these
+        builder(YOSHI_NOTE_BLOCK_INSTRUMENT).addTag(EGG_BLOCKS).add(GREEN_MARIMBA_BLOCK);
+        builder(FLOWER_NOTE_BLOCK_INSTRUMENT).add(RED_EXCLAMATION_BLOCK);
+        builder(DOG_NOTE_BLOCK_INSTRUMENT).add(YELLOW_EXCLAMATION_BLOCK);
+        builder(CAT_NOTE_BLOCK_INSTRUMENT).add(GREEN_EXCLAMATION_BLOCK);
+        builder(PIG_NOTE_BLOCK_INSTRUMENT).add(BLUE_EXCLAMATION_BLOCK);
+        builder(SWAN_NOTE_BLOCK_INSTRUMENT).add(BLUE_MARIMBA_BLOCK);
+        builder(FACE_NOTE_BLOCK_INSTRUMENT).add(NOTE_BLOCK);
+
         // Vanilla
         builder(BlockTags.NEEDS_STONE_TOOL)
                 .add(EMPTY_BLOCK)
