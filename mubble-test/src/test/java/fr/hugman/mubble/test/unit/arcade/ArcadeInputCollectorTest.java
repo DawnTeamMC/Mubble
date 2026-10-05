@@ -1,7 +1,7 @@
 package fr.hugman.mubble.test.unit.arcade;
 
-import fr.hugman.mubble.world.arcade.sim.ArcadeInputCollector;
-import fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame;
+import fr.hugman.mubble.arcade.sim.ArcadeInputCollector;
+import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

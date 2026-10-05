@@ -1,6 +1,12 @@
 package fr.hugman.mubble.test.unit.support;
 
 import com.google.common.reflect.Reflection;
+import fr.hugman.mubble.arcade.ArcadeAttributes;
+import fr.hugman.mubble.arcade.item.ArcadeDataComponents;
+import fr.hugman.mubble.arcade.item.ArcadeItems;
+import fr.hugman.mubble.arcade.move.ArcadeMoves;
+import fr.hugman.mubble.arcade.registries.ArcadeBuiltInRegistries;
+import fr.hugman.mubble.arcade.reward.ArcadeRewardTypes;
 import fr.hugman.mubble.core.component.MubbleDataComponents;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.core.component.SuperMarioDataComponents;
@@ -11,11 +17,7 @@ import fr.hugman.mubble.super_mario.world.item.SuperMarioItems;
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes;
 import fr.hugman.mubble.super_mario.world.power_up.action.SuperMarioPowerUpActionTypes;
-import fr.hugman.mubble.world.arcade.move.ArcadeMoves;
 import fr.hugman.mubble.world.attribute.MubbleAttributeTypes;
-import fr.hugman.mubble.world.entity.ai.attributes.MubbleAttributes;
-import fr.hugman.mubble.world.item.MubbleItems;
-import fr.hugman.mubble.world.reward.RewardTypes;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import fr.hugman.mubble.world.item.consume_effects.MubbleConsumeEffectTypes;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionTypes;
@@ -44,10 +46,13 @@ public final class Registrations {
         Reflection.initialize(MubbleConsumeEffectTypes.class);
         Reflection.initialize(MubbleAttributeTypes.class);
         Reflection.initialize(PowerUpActionTypes.class);
-        Reflection.initialize(MubbleAttributes.class);
+
+        Reflection.initialize(ArcadeBuiltInRegistries.class);
+        Reflection.initialize(ArcadeDataComponents.class);
+        Reflection.initialize(ArcadeAttributes.class);
         Reflection.initialize(ArcadeMoves.class);
-        Reflection.initialize(RewardTypes.class);
-        Reflection.initialize(MubbleItems.class);
+        Reflection.initialize(ArcadeRewardTypes.class);
+        Reflection.initialize(ArcadeItems.class);
 
         Reflection.initialize(SuperMarioBlocks.class);
         Reflection.initialize(SuperMarioBlockEntityTypes.class);

@@ -1,5 +1,6 @@
 package fr.hugman.mubble.test.unit.arcade;
 
+import fr.hugman.mubble.arcade.registries.ArcadeBuiltInRegistries;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,9 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
-import fr.hugman.mubble.core.registries.MubbleBuiltInRegistries;
 import fr.hugman.mubble.test.unit.support.Registrations;
-import fr.hugman.mubble.world.arcade.animation.ArcadeAnimationData;
+import fr.hugman.mubble.arcade.animation.ArcadeAnimationData;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,7 +37,7 @@ public class ArcadeAnimationDataTest {
     @BeforeAll
     static void readShippedAnimations() throws IOException {
         Registrations.registerEverything();
-        var dir = Path.of(System.getProperty("mubble.core.dir"), "src/client/resources/assets/mubble/animations/arcade");
+        var dir = Path.of(System.getProperty("mubble.arcade.dir"), "src/client/resources/assets/mubble/animations/arcade");
         shipped = new HashMap<>();
         try (Stream<Path> files = Files.list(dir)) {
             for (var file : files.filter(f -> f.toString().endsWith(".json")).toList()) {
@@ -55,7 +55,7 @@ public class ArcadeAnimationDataTest {
     @DisplayName("every move vanilla does not animate has an animation")
     void everyMoveIsAnimated() {
         var missing = new TreeSet<String>();
-        for (var move : MubbleBuiltInRegistries.ARCADE_MOVE) {
+        for (var move : ArcadeBuiltInRegistries.ARCADE_MOVE) {
             var name = move.id().getPath();
             if (!VANILLA_ANIMATED.contains(name) && !shipped.containsKey(name)) {
                 missing.add(name);
@@ -63,7 +63,7 @@ public class ArcadeAnimationDataTest {
         }
         assertTrue(missing.isEmpty(), "moves without an animation: " + missing);
         var unknown = new TreeSet<>(shipped.keySet());
-        MubbleBuiltInRegistries.ARCADE_MOVE.forEach(move -> unknown.remove(move.id().getPath()));
+        ArcadeBuiltInRegistries.ARCADE_MOVE.forEach(move -> unknown.remove(move.id().getPath()));
         assertTrue(unknown.isEmpty(), "animations of no move: " + unknown);
     }
 

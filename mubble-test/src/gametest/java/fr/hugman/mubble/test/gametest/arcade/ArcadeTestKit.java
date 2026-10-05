@@ -1,15 +1,15 @@
 package fr.hugman.mubble.test.gametest.arcade;
 
-import fr.hugman.mubble.tags.ArcadeMoveTags;
-import fr.hugman.mubble.world.arcade.ArcadeController;
-import fr.hugman.mubble.world.arcade.ArcadePrediction;
-import fr.hugman.mubble.world.arcade.ArcadeProfile;
-import fr.hugman.mubble.world.arcade.access.AccessMode;
-import fr.hugman.mubble.world.arcade.access.ArcadeSource;
-import fr.hugman.mubble.world.arcade.access.ArcadeSources;
-import fr.hugman.mubble.world.arcade.access.MoveSelector;
-import fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame;
-import fr.hugman.mubble.world.arcade.sim.MoveContext;
+import fr.hugman.mubble.arcade.tags.ArcadeMoveTags;
+import fr.hugman.mubble.arcade.ArcadeController;
+import fr.hugman.mubble.arcade.ArcadePrediction;
+import fr.hugman.mubble.arcade.ArcadeProfile;
+import fr.hugman.mubble.arcade.access.AccessMode;
+import fr.hugman.mubble.arcade.access.ArcadeSource;
+import fr.hugman.mubble.arcade.access.ArcadeSources;
+import fr.hugman.mubble.arcade.access.MoveSelector;
+import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
+import fr.hugman.mubble.arcade.sim.MoveContext;
 import java.util.Map;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;

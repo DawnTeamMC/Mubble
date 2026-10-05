@@ -1,7 +1,6 @@
 package fr.hugman.mubble.network.syncher;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.world.arcade.ArcadeVisual;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityDataRegistry;
@@ -14,7 +13,6 @@ import java.util.Optional;
 public class MubbleEntityDataSerializers {
     public static final EntityDataSerializer<Optional<Holder<PowerUp>>> OPTIONAL_POWER_UP = register("optional_power_up", PowerUp.OPTIONAL_STREAM_CODEC);
     public static final EntityDataSerializer<Optional<PowerUpProperties>> POWER_UP_PROPERTIES = register("optional_power_up_properties", PowerUpProperties.OPTIONAL_STREAM_CODEC);
-    public static final EntityDataSerializer<ArcadeVisual> ARCADE_VISUAL = register("arcade_visual", ArcadeVisual.STREAM_CODEC);
 
 	public static <T> EntityDataSerializer<T> register(String name, StreamCodec<? super RegistryFriendlyByteBuf, T> codec) {
 		var handler = EntityDataSerializer.forValueType(codec);

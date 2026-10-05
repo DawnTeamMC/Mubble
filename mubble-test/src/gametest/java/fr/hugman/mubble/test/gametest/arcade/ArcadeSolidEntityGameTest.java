@@ -1,17 +1,17 @@
 package fr.hugman.mubble.test.gametest.arcade;
 
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.CROUCH;
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.JUMP;
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.SPRINT;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.CROUCH;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.JUMP;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.SPRINT;
 
-import fr.hugman.mubble.references.ArcadeProfileIds;
+import fr.hugman.mubble.arcade.references.ArcadeProfileIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.entity.platform.CloudPlatform;
 import fr.hugman.mubble.test.gametest.datapack.PowerUpFixtures;
-import fr.hugman.mubble.world.arcade.move.ArcadeMove;
-import fr.hugman.mubble.world.arcade.move.ArcadeMoves;
-import fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame;
+import fr.hugman.mubble.arcade.move.ArcadeMove;
+import fr.hugman.mubble.arcade.move.ArcadeMoves;
+import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
 import java.util.HashSet;
 import java.util.Set;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;

@@ -1,15 +1,15 @@
 package fr.hugman.mubble.test.gametest.arcade;
 
 import com.mojang.authlib.GameProfile;
-import fr.hugman.mubble.network.protocol.common.custom.ArcadeCorrectionPayload;
-import fr.hugman.mubble.network.protocol.common.custom.ArcadeInputPayload;
+import fr.hugman.mubble.arcade.network.ArcadeCorrectionPayload;
+import fr.hugman.mubble.arcade.network.ArcadeInputPayload;
 import fr.hugman.mubble.test.gametest.support.TestFlight;
-import fr.hugman.mubble.world.arcade.ArcadeAttachments;
-import fr.hugman.mubble.world.arcade.ArcadeController;
-import fr.hugman.mubble.world.arcade.ArcadePrediction;
-import fr.hugman.mubble.world.arcade.ArcadeProfile;
-import fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame;
-import fr.hugman.mubble.world.arcade.sim.MoveResult;
+import fr.hugman.mubble.arcade.ArcadeAttachments;
+import fr.hugman.mubble.arcade.ArcadeController;
+import fr.hugman.mubble.arcade.ArcadePrediction;
+import fr.hugman.mubble.arcade.ArcadeProfile;
+import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
+import fr.hugman.mubble.arcade.sim.MoveResult;
 import io.netty.channel.embedded.EmbeddedChannel;
 import java.util.ArrayList;
 import java.util.List;

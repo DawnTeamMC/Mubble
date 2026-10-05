@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "name": "Arcade Movement",
+  "id": "mubble_arcade",
+  "version": "${version}",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.hugman.mubble.arcade.MubbleArcade"
+    ],
+    "client": [
+      "fr.hugman.mubble.arcade.client.ArcadeClient"
+    ],
+    "controlify": [
+      "fr.hugman.mubble.arcade.client.compat.controlify.ArcadeControlifyEntrypoint"
+    ]
+  },
+  "mixins": [
+    "mubble_arcade.mixins.json",
+    {
+      "config": "mubble_arcade.client.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "mubble_arcade.controlify.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "minecraft": "*",
+    "fabric-api": "*",
+    "mubble": "*"
+  },
+  "suggests": {
+    "controlify": "*"
+  },
+  "custom": {
+    "loom:injected_interfaces": {
+      "net/minecraft/world/entity/player/Player": [
+        "fr/hugman/mubble/arcade/ArcadePlayer"
+      ]
+    }
+  },
+  "license": "LGPL v3.0"
+}

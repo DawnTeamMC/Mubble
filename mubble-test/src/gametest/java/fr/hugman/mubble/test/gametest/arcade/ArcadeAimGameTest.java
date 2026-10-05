@@ -1,6 +1,6 @@
 package fr.hugman.mubble.test.gametest.arcade;
 
-import fr.hugman.mubble.world.arcade.ArcadeAim;
+import fr.hugman.mubble.arcade.ArcadeAim;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;

@@ -1,18 +1,18 @@
 package fr.hugman.mubble.test.gametest.arcade;
 
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.ACTION;
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.CROUCH;
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.JUMP;
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.SPRINT;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.ACTION;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.CROUCH;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.JUMP;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.SPRINT;
 
-import fr.hugman.mubble.references.ArcadeProfileIds;
+import fr.hugman.mubble.arcade.references.ArcadeProfileIds;
 import fr.hugman.mubble.test.gametest.support.TestFlight;
-import fr.hugman.mubble.world.arcade.ArcadeController;
-import fr.hugman.mubble.world.arcade.ArcadePlayer;
-import fr.hugman.mubble.world.arcade.move.ArcadeMove;
-import fr.hugman.mubble.world.arcade.move.ArcadeMoves;
-import fr.hugman.mubble.world.arcade.replay.ArcadeReplayer;
-import fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame;
+import fr.hugman.mubble.arcade.ArcadeController;
+import fr.hugman.mubble.arcade.ArcadePlayer;
+import fr.hugman.mubble.arcade.move.ArcadeMove;
+import fr.hugman.mubble.arcade.move.ArcadeMoves;
+import fr.hugman.mubble.arcade.replay.ArcadeReplayer;
+import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

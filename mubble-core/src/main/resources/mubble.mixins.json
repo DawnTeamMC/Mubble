@@ -3,18 +3,11 @@
   "package": "fr.hugman.mubble.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "ArgumentTypeInfosMixin",
     "BlockStateBaseMixin",
+    "ArgumentTypeInfosMixin",
     "EntityMixin",
     "ItemStackMixin",
-    "LivingEntityArcadeMixin",
-    "PlayerArcadeMixin",
-    "PlayerMixin",
-    "ServerCommonPacketListenerImplArcadeMixin",
-    "ServerGamePacketListenerImplAccessor",
-    "ServerGamePacketListenerImplMixin",
-    "ServerPlayerArcadeMixin",
-    "ServerboundCustomPayloadPacketMixin"
+    "PlayerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

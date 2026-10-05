@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.arcade.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "ArcadeAbstractClientPlayerMixin",
+    "ArcadeAvatarRendererMixin",
+    "ArcadeCameraMixin",
+    "ArcadeClientPacketListenerMixin",
+    "ArcadeEntityTurnMixin",
+    "ArcadeHumanoidModelMixin",
+    "ArcadeLocalPlayerMixin",
+    "ArcadeMinecraftMixin",
+    "CameraInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

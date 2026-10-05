@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.arcade.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LivingEntityArcadeMixin",
+    "PlayerArcadeMixin",
+    "ServerCommonPacketListenerImplArcadeMixin",
+    "ServerGamePacketListenerImplAccessor",
+    "ServerGamePacketListenerImplMixin",
+    "ServerPlayerArcadeMixin",
+    "ServerboundCustomPayloadPacketMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -6,16 +6,7 @@ import fr.hugman.mubble.core.component.MubbleDataComponents;
 import fr.hugman.mubble.core.registries.MubbleBuiltInRegistries;
 import fr.hugman.mubble.network.protocol.MubbleServerReceivers;
 import fr.hugman.mubble.network.protocol.common.custom.MubblePayloadTypes;
-import fr.hugman.mubble.world.arcade.ArcadeAttachments;
-import fr.hugman.mubble.world.arcade.ArcadeInteraction;
-import fr.hugman.mubble.world.arcade.ArcadeProfiles;
-import fr.hugman.mubble.world.arcade.move.ArcadeMoves;
-import fr.hugman.mubble.world.arcade.server.ArcadeServerNetworking;
 import fr.hugman.mubble.world.attribute.MubbleAttributeTypes;
-import fr.hugman.mubble.world.entity.ai.attributes.MubbleAttributes;
-import fr.hugman.mubble.world.item.MubbleItems;
-import fr.hugman.mubble.world.reward.RewardTypes;
-import net.fabricmc.fabric.api.resource.v1.DataResourceLoader;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import fr.hugman.mubble.world.item.consume_effects.MubbleConsumeEffectTypes;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionTypes;
@@ -37,22 +28,11 @@ public class Mubble implements ModInitializer {
 
         Reflection.initialize(PowerUpActionTypes.class);
 
-        Reflection.initialize(MubbleAttributes.class);
-        Reflection.initialize(ArcadeMoves.class);
-        Reflection.initialize(ArcadeAttachments.class);
-        Reflection.initialize(RewardTypes.class);
-        Reflection.initialize(MubbleItems.class);
-        MubbleItems.registerCreativeTabs();
-
         MubbleBuiltInRegistries.register();
 
         MubblePayloadTypes.registerTypes();
         MubbleServerReceivers.register();
         MubbleCommands.register();
-
-        DataResourceLoader.get().registerReloadListener(id("arcade_profiles"), ArcadeProfiles.ReloadListener::new);
-        ArcadeServerNetworking.register();
-        ArcadeInteraction.register();
     }
 
     public static Identifier id(String path) {
