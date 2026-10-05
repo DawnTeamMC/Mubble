@@ -29,11 +29,13 @@ public final class ArcadePrediction {
      *
      * @return the step, with the payload that reports it to the server
      */
-    public static Step step(Player player, ArcadeController controller, ArcadeInputFrame frame) {
+    public static Step step(Player player, ArcadeController controller, ArcadeInputFrame input) {
         if (controller.needsReset()) {
             controller.resetFromEntity();
         }
         var state = controller.state();
+        // an item in use slows the player down, as in vanilla; the server holds the client to it
+        var frame = input.slowedFor(player);
 
         // something outside the simulation set the velocity: knockback, an explosion, a bubble column...
         var velocity = player.getDeltaMovement();

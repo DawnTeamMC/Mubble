@@ -4,6 +4,7 @@ import fr.hugman.mubble.arcade.tags.ArcadeBlockTags;
 import fr.hugman.mubble.arcade.cue.CueEvent;
 import fr.hugman.mubble.arcade.move.ArcadeMove;
 import fr.hugman.mubble.arcade.move.ArcadeMoves;
+import fr.hugman.mubble.arcade.move.ClimbMove;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -68,6 +69,7 @@ public final class ArcadeSimulation {
             ctx.switchTo(state.move.isAirborne() || !state.grounded ? ArcadeMoves.FALL : ctx.baseGroundMove());
         }
 
+        climb(ctx);
         water(ctx);
 
         var exit = state.move.exit(ctx);
@@ -94,6 +96,17 @@ public final class ArcadeSimulation {
             state.negateFallDamage = true;
         }
         return ctx;
+    }
+
+    /**
+     * Something to climb catches the player, whatever they were doing, in water too: only a ledge or
+     * a wall they hold already keeps them. The climb itself lets go, see {@link ClimbMove#exit}.
+     */
+    private static void climb(MoveContext ctx) {
+        var move = ctx.state().move;
+        if (move != ArcadeMoves.CLIMB && move.kind() != ArcadeMove.Kind.ATTACHED && ctx.onClimbable()) {
+            ctx.switchTo(ArcadeMoves.CLIMB);
+        }
     }
 
     /**

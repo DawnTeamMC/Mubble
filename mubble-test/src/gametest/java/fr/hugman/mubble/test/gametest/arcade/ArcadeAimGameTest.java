@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.EntityHitResult;
@@ -34,6 +35,31 @@ public class ArcadeAimGameTest {
         double camera = focus.z + distance;
         helper.assertTrue(camera <= wall - 0.1D + 1.0E-6D, "the camera at z=" + camera + " should keep its box out of the wall at z=" + wall);
         helper.assertTrue(distance > 2.0D, "the camera should still back off as far as the wall lets it, got " + distance);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void goingDownAStepPullsTheTrailingFocusInOnlyAsFarAsTheStepRequires(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        // a step a block high: the player went down it, north, and the focus still trails on top of it
+        ArcadeTestKit.fill(helper, new BlockPos(0, 1, 12), new BlockPos(9, 1, 20), Blocks.STONE.defaultBlockState());
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        var target = helper.absoluteVec(new Vec3(5.5D, 1.0D, 10.8D));
+        var focus = helper.absoluteVec(new Vec3(5.5D, 1.45D, 12.2D));
+        // seen from the height of a rolling player's eyes, the edge of the step stands in between
+        double height = 0.4D;
+        var trailed = ArcadeAim.trail(helper.getLevel(), player, target, focus, height);
+        helper.assertTrue(!trailed.equals(target), "the focus jumped onto the player");
+        helper.assertTrue(!trailed.equals(focus), "the focus stayed behind the edge of the step");
+        double along = trailed.subtract(target).length() / focus.subtract(target).length();
+        helper.assertTrue(along > 0.5D && along < 1.0D, "the focus pulled in only as far as the step requires, kept " + along + " of the gap");
+        var from = target.add(0.0D, height, 0.0D);
+        var to = trailed.add(0.0D, height, 0.0D);
+        helper.assertTrue(helper.getLevel().clip(new ClipContext(from, to, ClipContext.Block.VISUAL, ClipContext.Fluid.NONE, player)).getType() == HitResult.Type.MISS, "nothing between the player and the focus any more");
+
+        // in the open, the focus trails where it is
+        var open = helper.absoluteVec(new Vec3(5.5D, 1.0D, 8.5D));
+        helper.assertTrue(ArcadeAim.trail(helper.getLevel(), player, target, open, height).equals(open), "nothing in between, nothing to pull in");
         helper.succeed();
     }
 

@@ -15,8 +15,9 @@ import net.minecraft.util.Mth;
 /**
  * Samples the arcade actions every frame, and hands one input frame per tick to the local driver.
  * <p>
- * Jump, crouch and sprint are the vanilla keys, which Controlify presses for the controller bindings
- * it maps to them; the controller bindings of the arcade layout add theirs on top. Action comes from
+ * Jump, crouch and sprint are the vanilla jump, sneak and sprint: the keys, sampled every frame, and
+ * the input of the player, read every tick, which is where a controller mod such as Controlify puts
+ * them. Crouching is sneaking, then, whatever presses it, and the player shows it. Action comes from
  * attack and use, when {@link ArcadeHands} gives their press to the moves.
  */
 @Environment(EnvType.CLIENT)
@@ -24,6 +25,8 @@ public final class ArcadeClientInput {
     private static final ArcadeInputCollector COLLECTOR = new ArcadeInputCollector();
     private static boolean wasActive;
     private static int down;
+    /** The actions the input of the player held at the last tick. */
+    private static int inputHeld;
 
     private ArcadeClientInput() {
     }
@@ -36,6 +39,7 @@ public final class ArcadeClientInput {
                 COLLECTOR.reset();
                 ArcadeHands.reset();
                 down = 0;
+                inputHeld = 0;
                 wasActive = false;
             }
             return;
@@ -49,23 +53,32 @@ public final class ArcadeClientInput {
             held |= bit(options.keyShift, ArcadeInputFrame.CROUCH);
             held |= bit(options.keySprint, ArcadeInputFrame.SPRINT);
             held |= bit(ArcadeKeyMappings.SPIN, ArcadeInputFrame.SPIN);
+            held |= inputHeld;
             held |= ArcadeHands.onFrame(minecraft);
             // presses shorter than a frame only show up as clicks
             clicks |= clicks(ArcadeKeyMappings.SPIN, ArcadeInputFrame.SPIN);
             var controller = ArcadeControllerBindings.Holder.instance;
             if (controller != null) {
                 held |= controller.held();
-                clicks |= controller.pressed();
-                if (controller.recenterPressed()) {
-                    ArcadeCamera.recenter();
-                }
             }
             while (ArcadeKeyMappings.RECENTER.consumeClick()) {
                 ArcadeCamera.recenter();
             }
         }
+        sample(held, clicks);
+    }
+
+    private static void sample(int held, int clicks) {
         down = held;
         COLLECTOR.sampleFrame(System.nanoTime(), held, clicks);
+    }
+
+    /** The actions the input of the player holds this tick: the keys, or whatever a controller mod pressed in their place. */
+    private static int inputHeld(LocalPlayer player) {
+        var keys = player.input.keyPresses;
+        return (keys.jump() ? ArcadeInputFrame.JUMP : 0)
+                | (keys.shift() ? ArcadeInputFrame.CROUCH : 0)
+                | (keys.sprint() ? ArcadeInputFrame.SPRINT : 0);
     }
 
     /** Whether crouch was held at the last frame. */
@@ -96,6 +109,10 @@ public final class ArcadeClientInput {
      * camera, and every action sampled since the previous tick.
      */
     public static ArcadeInputFrame frame(LocalPlayer player, int tick) {
+        // the input of the player ticked right before: what it holds now stands for what it held before
+        int input = inputHeld(player);
+        sample((down & ~inputHeld) | input, 0);
+        inputHeld = input;
         boolean coupled = !ArcadeCamera.isOrbiting();
         float yaw = yaw(player, coupled);
         float[] stick = stick(player, yaw);
@@ -107,7 +124,7 @@ public final class ArcadeClientInput {
         boolean coupled = !ArcadeCamera.isOrbiting();
         float yaw = yaw(player, coupled);
         float[] stick = stick(player, yaw);
-        return new ArcadeInputFrame(0, stick[0], stick[1], yaw, coupled, (byte) (down & ~ArcadeInputFrame.ACTION), (byte) 0, (short) 0, (short) 0);
+        return new ArcadeInputFrame(0, stick[0], stick[1], yaw, coupled, (byte) (down & ~ArcadeInputFrame.ACTION), (byte) 0, (short) 0, (short) 0).slowedFor(player);
     }
 
     private static float yaw(LocalPlayer player, boolean coupled) {

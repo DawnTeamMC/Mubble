@@ -44,7 +44,7 @@ public final class ArcadeValidator {
         }
         var validation = controller.validation();
         var settings = controller.profile().validation();
-        var frame = payload.frame().sanitized();
+        var frame = payload.frame().sanitized().slowedFor(player);
         var result = payload.result();
         var from = payload.from();
         if (!result.isFinite() || !Double.isFinite(from.x) || !Double.isFinite(from.y) || !Double.isFinite(from.z)) {

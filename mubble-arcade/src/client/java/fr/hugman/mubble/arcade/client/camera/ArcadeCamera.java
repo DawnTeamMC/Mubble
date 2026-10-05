@@ -93,12 +93,9 @@ public final class ArcadeCamera {
         double lag = ArcadeClientConfig.get().followLag();
         double keep = lag > 0.0D ? Math.exp(-0.05D / lag) : 0.0D;
         focus = ArcadeAim.follow(focusO, target, keep, MAX_FOLLOW_GAP, SNAP_DISTANCE);
-        double eye = player.getEyeHeight();
-        if (ArcadeAim.blocked(player.level(), player, target.add(0.0D, eye, 0.0D), focus.add(0.0D, eye, 0.0D))) {
-            // the trailing point slipped behind a block, which would put the camera inside it
-            focus = target;
-            focusO = target;
-        }
+        // the trailing point must not slip behind a block, which would put the camera inside it: going
+        // down steps, the edge left behind hides it for a tick, and it comes closer only that much
+        focus = ArcadeAim.trail(player.level(), player, target, focus, player.getEyeHeight() + ArcadeClientConfig.get().cameraHeight());
     }
 
     public static float yaw() {
@@ -115,7 +112,10 @@ public final class ArcadeCamera {
         double scale = 0.15D * config.orbitSensitivity();
         yaw = Mth.wrapDegrees((float) (yaw + yawDelta * scale));
         pitch = (float) Mth.clamp(pitch + pitchDelta * scale, config.minPitch(), config.maxPitch());
-        recentering = false;
+        if (yawDelta != 0.0D || pitchDelta != 0.0D) {
+            // turning by hand takes over from a recenter; a controller turns by nothing every frame its stick rests
+            recentering = false;
+        }
     }
 
     public static void recenter() {

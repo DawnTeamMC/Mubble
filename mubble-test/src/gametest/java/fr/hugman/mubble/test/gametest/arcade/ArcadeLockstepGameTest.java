@@ -22,6 +22,9 @@ import java.util.function.Supplier;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.portal.TeleportTransition;
@@ -191,6 +194,65 @@ public class ArcadeLockstepGameTest {
             helper.assertValueEqual(client.corrections(), 0, "corrections (" + client.events() + ")");
             helper.assertValueEqual(client.serverController().validation().accepted, swim.size(), "steps the server accepted");
             helper.assertTrue(played.containsAll(Set.of(ArcadeMoves.SWIM, ArcadeMoves.GROUND_POUND, ArcadeMoves.SWIM_DASH)), "the swim should go through every water move, it went through " + played);
+        });
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 300)
+    public void climbingStaysInLockstep(GameTestHelper helper) {
+        ArcadeMovementGameTest.ladder(helper);
+        var client = ArcadeTestClient.join(helper, new BlockPos(5, 1, 4), ArcadeProfileIds.TRIAL);
+        var f = new ArcadeTestKit.Frames();
+        var climb = new ArrayList<ArcadeInputFrame>();
+        // onto the ladder and up, down a little, holding on, then up to the top and onto the wall
+        f.forward();
+        for (int i = 0; i < 30; i++) {
+            climb.add(i == 12 ? f.tap(JUMP) : f.next());
+        }
+        f.release();
+        for (int i = 0; i < 10; i++) {
+            climb.add(f.next());
+        }
+        f.hold(CROUCH);
+        for (int i = 0; i < 10; i++) {
+            climb.add(f.next());
+        }
+        f.letGo(CROUCH).forward();
+        for (int i = 0; i < 70; i++) {
+            climb.add(f.next());
+        }
+        Set<ArcadeMove> played = new HashSet<>();
+        drive(helper, client, climb.size(), t -> {
+            client.tick(climb.get(t));
+            played.add(move(client.controller()));
+        }, () -> {
+            client.assertUndisturbed("climbing");
+            helper.assertValueEqual(client.corrections(), 0, "corrections (" + client.events() + ")");
+            helper.assertValueEqual(client.serverController().validation().accepted, climb.size(), "steps the server accepted");
+            helper.assertTrue(played.contains(ArcadeMoves.CLIMB), "the player never climbed, went through " + played);
+            helper.assertTrue(move(client.controller()) != ArcadeMoves.CLIMB, "the player never got off the ladder");
+        });
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 200)
+    public void usingAnItemStaysInLockstep(GameTestHelper helper) {
+        walledLane(helper);
+        var client = ArcadeTestClient.join(helper, new BlockPos(5, 1, 3), ArcadeProfileIds.TRIAL);
+        var frames = new ArcadeTestKit.Frames().forward().hold(SPRINT);
+        drive(helper, client, 60, t -> {
+            if (t == 10) {
+                // the bow drawn on both sides, as the use packet of the client starts it on the server
+                for (var player : List.of(client.self(), client.server())) {
+                    player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BOW));
+                    player.startUsingItem(InteractionHand.MAIN_HAND);
+                }
+            } else if (t == 40) {
+                client.self().releaseUsingItem();
+                client.server().releaseUsingItem();
+            }
+            client.tick(frames.next());
+        }, () -> {
+            client.assertUndisturbed("drawing a bow");
+            helper.assertValueEqual(client.corrections(), 0, "corrections (" + client.events() + ")");
         });
     }
 

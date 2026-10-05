@@ -36,19 +36,6 @@ loom {
 // `-Pcontrolify` loads Controlify in the client of the sandbox, to play the arcade movement with a
 // controller. Off by default: Mubble only compiles against it, and nobody's dev client should change.
 if (project.hasProperty('controlify')) {
-    repositories {
-        maven {
-            name = 'isXander'
-            url = 'https://maven.isxander.dev/releases'
-            // only the jars are wanted, not the multi-loader variants their metadata describes
-            metadataSources {
-                artifact()
-            }
-            content {
-                includeGroup 'dev.isxander'
-            }
-        }
-    }
     dependencies {
         clientRuntimeOnly 'dev.isxander:controlify:3.5.3+mc26.2:fabric@jar'
         // the config library Controlify depends on

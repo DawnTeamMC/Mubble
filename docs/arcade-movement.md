@@ -29,7 +29,7 @@ The layer is **on** when a profile is chosen *and* at least one move is availabl
 
 ### Suspension
 
-The layer steps aside, and vanilla takes over, while the player is dead, sleeping, riding, a spectator, gliding with an elytra, flying, on a ladder or vine, or in lava, and while changing dimension. It picks up again on the next tick it can. Water is not one of these: the layer swims, see [Swimming](#swimming).
+The layer steps aside, and vanilla takes over, while the player is dead, sleeping, riding, a spectator, gliding with an elytra, flying, or in lava, and while changing dimension. It picks up again on the next tick it can. Water and climbing are not among these: the layer swims and climbs, see [Swimming](#swimming) and [Climbing](#climbing).
 
 ### The item component
 
@@ -125,6 +125,7 @@ All are in the `mubble` namespace, registered by code (`mubble:arcade_move` regi
 | Run into a 1 block step | Vault |
 | Crouch while running down a slope | Slide |
 | In water | Swim, and the moves of the water, see [Swimming](#swimming) |
+| On a ladder, vines, scaffolding | Climb, see [Climbing](#climbing) |
 
 **Action** is not a button of its own: it is attack and use, as Cappy's buttons are in Super Mario Odyssey. A press goes to the moves while crouch is held (a roll, or a dash in water) and while the move keeps the hands busy (a dive out of a ground pound, a roll boost); the rest of the time, the hands hit and use the item they hold. A press given to the moves is kept from the hands until the button is let go.
 
@@ -141,6 +142,19 @@ Water deep enough to swim in (deeper than vanilla wades in) is the layer's own, 
 | Fall next to an edge facing it | Ledge grab, to climb out |
 
 `mubble:swim` is not a move of its own, like walking and falling; `mubble:swim_dash` comes with `mubble:dive`. The player leaves the water moves once out of the water, or standing where it is too shallow to swim. Lava stays vanilla's.
+
+### Climbing
+
+Whatever vanilla lets a player climb (`#minecraft:climbable`: ladders, vines, scaffolding, twisting and weeping vines…, and an open trapdoor over a ladder) catches the player, whatever they were doing, and is the layer's own, on the numbers of vanilla climbing:
+
+| Input | On a ladder |
+|---|---|
+| Stick into the wall, or jump held | Climb, at vanilla's pace (0.2 b/t, 0.12 once gravity has its share) |
+| Nothing | Slide down, no faster than 0.15 b/t |
+| Crouch held | Hold on (not on scaffolding, as in vanilla) |
+| Stick sideways or away | Move along it or off it, at walking pace, no faster than 0.15 b/t |
+
+The player lets go by walking off, or at the top, onto it or into a ledge grab. Climbers take no fall damage. `mubble:climb` is not a move of its own either, and its numbers can be tuned like any other's (`climb_speed`, `speed_cap`, `side_accel`, `turn_speed`).
 ### Tags
 
 | Tag | Moves |
@@ -150,15 +164,16 @@ Water deep enough to swim in (deeper than vanilla wades in) is the layer's own, 
 | `#mubble:wall` | wall slide, wall jump |
 | `#mubble:ledge` | ledge grab, vault |
 | `#mubble:speed` | run, roll, roll jump, long jump, dive, slide |
+| `#mubble:ground` | run, skid, crouch, roll, slide, vault |
 
 Parts of a move are not tagged: ground pound landing, ledge climb, rollout and swim dash follow the move they belong to.
-| `#mubble:ground` | run, skid, crouch, roll, slide, vault |
 
 ### Parameters
 
 | Move | Tags | Parameters (trial / overworld) |
 |---|---|---|
 | `mubble:backflip` | `#mubble:all` `#mubble:aerial` | `air_control` 0.5, `back_speed` 0.08, `cancel_window_ticks` 3, `height` 5.2, `max_speed` 0.3, `ticks_to_apex` 12, `variable` 0 |
+| `mubble:climb` | — | `climb_speed` 0.2, `side_accel` 0.05, `speed_cap` 0.15, `turn_speed` 20 |
 | `mubble:crouch` | `#mubble:all` `#mubble:ground` | `slide_ticks` 12 |
 | `mubble:dive` | `#mubble:all` `#mubble:aerial` `#mubble:speed` | `air_control` 0.3, `lift` 0.25, `speed` 0.5 |
 | `mubble:double_jump` | `#mubble:all` `#mubble:aerial` | `air_control` 1, `cancel_window_ticks` 3, `height` 3.2, `min_speed` 0.2, `ticks_to_apex` 8, `variable` 1 |
@@ -197,6 +212,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `brake` | Share of its speed the skid loses every tick. |
 | `cancel_window_ticks` | Ticks an airborne move lasts before the aerial follow-ups may cut it short. |
 | `climb_height` | The highest step a roll gets onto without stopping, in blocks: a roll goes up a hill of full blocks. |
+| `climb_speed` | Upward speed climbing gives, as vanilla's. |
 | `decel` | Speed lost every tick on flat ground. |
 | `drag` | Share of its speed the dash keeps every tick. |
 | `drop_speed` | Speed of the drop; the base value of {@code mubble:arcade_ground_pound_speed}, which is what the drop reads. |
@@ -230,17 +246,19 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `roll_speed` | Speed a roll out of the impact starts at. |
 | `roll_window_ticks` | Ticks after the impact during which crouch and action roll out of it, faster than a roll from standing. |
 | `shimmy_speed` | Speed of the shimmy along the edge. |
+| `side_accel` | Speed the stick adds or takes away every tick, sideways. |
 | `side_speed` | Speed the somersault carries the player towards the new direction. |
 | `sink` | Downward speed added every tick crouch is held, as vanilla's. |
 | `slide_ticks` | Ticks a crouch started at the run speed takes to slide to a stop. |
 | `slope_gain` | Speed gained per block of step-down, see {@link MoveContext#hugGround}. |
 | `speed` | Speed the long jump launches at, unless the player already goes faster. |
+| `speed_cap` | The fastest the player goes sideways and slides down, on each axis, as vanilla's. |
 | `sprint_drag` | The same with sprint held, as vanilla's sprint swimming. |
 | `stick_dot` | How squarely the stick has to point at the wall, as the cosine of the largest angle allowed. |
 | `stroke` | Upward speed a press of jump strokes up to, under the surface. |
 | `surface_depth` | The deepest the feet may be for jump to jump out of the water rather than stroke: the head is out of it. |
 | `ticks` | How long the pull-up lasts. |
-| `turn_speed` | How fast the stick steers the roll, in degrees per tick. |
+| `turn_speed` | How fast the body turns towards the stick, in degrees per tick. |
 | `variable` | 1 when releasing jump early cuts the arc short, 0 when the arc always goes all the way. |
 | `water_drop` | Share of the drop speed left in water, which slows the pound down. |
 
@@ -249,6 +267,8 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 `interaction` decides what a player with the layer on can do: `full` (everything), `combat_only` (attack and use items, but not break, place or use blocks and entities), `none`. On top of that, moves with busy hands (triple jump, backflip, side somersault, ground pound and its landing, ledge grab and climb, wall slide, roll, dive, swim dash) block attacks and item use while they last.
 
 With the orbit camera on, the hands do not follow the camera: they reach out where the body faces, level with the horizon, to the nearest entity in front within the vanilla reach (a little off to the side still counts, walls do not let it through). Attack hits it, use uses the item, on it or in that direction: a bow shoots where the player faces, food is eaten. Blocks are never targeted, so nothing is mined, placed or used, whatever the policy; first person keeps the vanilla crosshair. The rules are enforced on the server.
+
+Using an item slows the player down as in vanilla: drawing a bow, eating, blocking with a shield, the stick counts for the `use_effects` speed of the item (a fifth by default), and running is off meanwhile. The client slows its own input down, the server holds it to the item it knows is in use: a frame that goes faster than the item allows is slowed down before it is replayed.
 
 ## Block tags
 
@@ -291,27 +311,29 @@ And in the *Arcade Movement* category:
 | Key | Default | |
 |---|---|---|
 | Spin | B | The stick (or the movement keys) turned all the way around also spins |
-| Recenter Camera | unbound | Swings the orbit camera behind the player |
+| Recenter Camera | unbound | Swings the orbit camera behind the player, until the mouse or the stick turns it |
 | Arcade Debug HUD | unbound | |
 
-With [Controlify](https://modrinth.com/mod/controlify) installed, the controller follows **Super Mario Odyssey's layout while the arcade layer drives**. Buttons go by their place: on a Switch controller, A is east; on an Xbox one, B is.
+With [Controlify](https://modrinth.com/mod/controlify) installed, the controller is laid out like **Super Mario Odyssey**, through Controlify's own API only. Buttons go by their place: on a Switch controller, A is east; on an Xbox one, B is.
 
-| Button (Switch) | Arcade layout | Controlify's default there |
-|---|---|---|
-| A / B | Jump | nothing / jump |
-| Y | Attack; roll or dive in a combo | swap hands |
-| X | Use the item; roll or dive in a combo | inventory |
-| ZL / ZR | Crouch, ground pound | use / attack |
-| L | Recenter the camera | previous hotbar slot |
-| R | Radial menu | next hotbar slot |
-| D-pad ↑ / ↓ | Inventory / drop | chat / drop |
-| D-pad ← / → | Previous / next hotbar slot | pick block / radial menu |
+| Button (Switch) | Binding | In the arcade layer | Controlify's own default there |
+|---|---|---|---|
+| A | Jump | Jump | jump |
+| B | Jump (second button), `mubble:arcade_jump` | Jump | nothing |
+| Y | Attack | Hit; roll or dive in a combo | swap hands |
+| X | Use | Use the item; roll or dive in a combo | inventory |
+| ZR | Sneak | Crouch, ground pound | attack |
+| ZL | Trigger Power-Up, `mubble:trigger_power_up` | The power-up | use |
+| L | Recenter Camera, `mubble:arcade_recenter` | Recenter the camera | previous hotbar slot |
+| R | Radial menu | | next hotbar slot |
+| D-pad ↑ / ↓ | Inventory / drop | | chat / drop |
+| D-pad ← / → | Previous / next hotbar slot | | pick block / radial menu |
 
-Every one of these is a Controlify binding in the *Arcade Movement* category, rebindable in Controlify's controls menu: `mubble:arcade_jump`, `arcade_crouch`, `arcade_crouch_alt`, `arcade_recenter`, `arcade_spin` for the moves, and `arcade_attack`, `arcade_use`, `arcade_inventory`, `arcade_drop`, `arcade_prev_slot`, `arcade_next_slot`, `arcade_radial_menu`, `arcade_swap_hands`, `arcade_pick_block`, `arcade_open_chat` for where vanilla goes (the last three unbound: they stay in the radial menu). They belong to a context of their own that only applies while the layer drives: while it does, a vanilla binding moved by the layout reads its arcade binding, and one sitting on a button of the layout gives way; the rest of the time, the controller is Controlify's usual layout. Spin has no button, as in SMO: turn the stick all the way around. The left stick is read analog: tilting it a little walks, all the way runs.
+The arcade layer plays on the vanilla actions, which Controlify binds already: crouching is sneaking, whatever presses it, so the player shows it and the server knows it. Its own keys (Spin, Recenter Camera, Arcade Debug HUD) get a controller binding each, which presses the key, so that Controlify adds none of its own for them; Spin has no button, as in SMO: turn the stick all the way around. The power-up key of Mubble gets one the same way, on B without the arcade layer. Where each binding goes by default is data, `assets/controlify/controllers/default_bind/default.json`, which Controlify layers over its own defaults: swap hands, pick block and the chat are left without a button, in the radial menu. Every one of them can be rebound in Controlify's controls menu, and a binding the player set stays theirs. The left stick is read analog: tilting it a little walks, all the way runs.
 
-**The button guide** of Controlify follows the layout. Every tick, the client plans the next tick on a copy of the state as if each button were pressed, and names the move it would start next to the glyph of the button it is bound to, translated: *Jump*, then *Double Jump* on landing, *Long Jump* or *Backflip* while crouching, *Roll* on attack with crouch held, *Dive* during a ground pound, *Ground Pound* in the air… Vanilla entries move with their action (attack and use on Y and X) or step aside (jump, sneak, sprint, and whatever sat on a button the layout took). The rules are data, `assets/controlify/contextual/guide/in_game.json`, reading the facts `mubble:arcade`, `mubble:arcade_orbiting` and `mubble:arcade/<button>/<move>` the client contributes.
+**The button guide** of Controlify follows the moves. Every tick, the client plans the next tick on a copy of the state as if each button were pressed, and names the move it would start next to the glyph of the button it is bound to, translated: *Jump*, then *Double Jump* on landing, *Long Jump* or *Backflip* while crouching, *Roll* on attack and use with crouch held, *Dive* during a ground pound, *Ground Pound* in the air, *Hold On* on sneak while climbing… A button that would start nothing shows Controlify's own text. The rules are data, `assets/controlify/contextual/guide/in_game.json`, reading the facts `mubble:arcade`, `mubble:arcade_orbiting`, `mubble:arcade_climbing` and `mubble:arcade/<button>/<move>` the client contributes; Controlify reads the rules of the highest resource pack first, so they win the buttons they match.
 
-**Rumble**: see the `rumble` of the cues, under [Profiles](#profiles).
+**Rumble**: see the `rumble` of the cues, under [Profiles](#profiles). It stays light, a hint more than a shake; Controlify's own rumble settings scale it further.
 
 To try it in the dev client, run the sandbox with `./gradlew :mubble-testmod:runClient -Pcontrolify`, which loads Controlify and what it needs.
 
@@ -319,7 +341,7 @@ Input is sampled every **frame**, not every tick: a press is remembered with the
 
 ## Camera
 
-While the layer drives, the third person view is an orbit camera the mouse (or right stick) turns freely around the player. Movement is relative to the camera, and the player looks at the horizon unless aiming. It stays out of walls, follows with a slight lag that never grows past 1.5 blocks, widens the field of view with speed, and blends with the vanilla view over a quarter of a second whenever one takes over from the other (flying in creative, lava). The hands do not aim with it: they reach out where the body faces, see [Hands, attacks and the world](#hands-attacks-and-the-world). First person stays fully playable, with the vanilla crosshair.
+While the layer drives, the third person view is an orbit camera the mouse (or right stick) turns freely around the player. Movement is relative to the camera, and the player looks at the horizon unless aiming. It stays out of walls, follows with a slight lag that never grows past 1.5 blocks (when a step down or a corner hides where it trails, it pulls in only as far as the block requires), widens the field of view with speed, and blends with the vanilla view over a quarter of a second whenever one takes over from the other (flying in creative, lava). The hands do not aim with it: they reach out where the body faces, see [Hands, attacks and the world](#hands-attacks-and-the-world). First person stays fully playable, with the vanilla crosshair.
 
 Client settings, in `config/mubble-arcade-client.json`:
 

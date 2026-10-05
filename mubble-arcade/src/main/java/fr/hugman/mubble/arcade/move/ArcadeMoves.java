@@ -88,6 +88,10 @@ public final class ArcadeMoves {
             .accessParent(() -> ArcadeMoves.DIVE)
             .params(SwimDashMove.SPEED, SwimDashMove.TICKS, SwimDashMove.DRAG, SwimDashMove.TURN_SPEED)));
 
+    // climbing
+    public static final ArcadeMove CLIMB = register(ArcadeMoveIds.CLIMB, new ClimbMove(Properties.of(Kind.ATTACHED).base()
+            .params(ClimbMove.CLIMB_SPEED, ClimbMove.MAX_SPEED, ClimbMove.ACCEL, ClimbMove.TURN_SPEED)));
+
     /** The moves that may cut an airborne move short once its cancel window is over. */
     private static final Set<ArcadeMove> AERIAL_FOLLOW_UPS = Set.of(GROUND_POUND, DIVE, SPIN, LEDGE_GRAB, WALL_SLIDE, WALL_JUMP);
 

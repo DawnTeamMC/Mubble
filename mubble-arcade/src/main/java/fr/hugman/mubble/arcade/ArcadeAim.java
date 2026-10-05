@@ -72,9 +72,23 @@ public final class ArcadeAim {
         return target.add(gap);
     }
 
-    /** Whether a block stands between where the camera means to look from and where it lags behind. */
-    public static boolean blocked(Level level, Entity entity, Vec3 target, Vec3 focus) {
-        return level.clip(new ClipContext(target, focus, ClipContext.Block.VISUAL, ClipContext.Fluid.NONE, entity)).getType() != HitResult.Type.MISS;
+    /**
+     * Where the camera can look from, trailing {@code focus} behind {@code target}, both seen
+     * {@code height} above the feet: the focus itself when nothing stands in between, otherwise the
+     * point of the way to it right before the first block. Pulling the focus in only as far as the
+     * blocks require, rather than all the way, keeps the camera from jumping each time a step down
+     * or a corner hides the trailing point for a tick.
+     */
+    public static Vec3 trail(Level level, Entity entity, Vec3 target, Vec3 focus, double height) {
+        var from = target.add(0.0D, height, 0.0D);
+        var to = focus.add(0.0D, height, 0.0D);
+        var hit = level.clip(new ClipContext(from, to, ClipContext.Block.VISUAL, ClipContext.Fluid.NONE, entity));
+        if (hit.getType() == HitResult.Type.MISS) {
+            return focus;
+        }
+        double length = from.distanceTo(to);
+        double free = Math.max(0.0D, from.distanceTo(hit.getLocation()) - CAMERA_RADIUS);
+        return length < 1.0E-6D ? target : target.add(focus.subtract(target).scale(Math.min(1.0D, free / length)));
     }
 
     /**

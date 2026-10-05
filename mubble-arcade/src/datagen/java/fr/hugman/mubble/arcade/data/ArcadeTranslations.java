@@ -22,23 +22,11 @@ public final class ArcadeTranslations {
 
         // keys
         t.put("key.category." + M + ".arcade", pair("Arcade Movement", "Déplacements arcade"));
-        t.put("key." + M + ".arcade_jump", pair("Jump", "Sauter"));
-        t.put("key." + M + ".arcade_crouch", pair("Crouch, Ground Pound", "S'accroupir, charge au sol"));
         t.put("key." + M + ".arcade_recenter", pair("Recenter Camera", "Recentrer la caméra"));
         t.put("key." + M + ".arcade_spin", pair("Spin", "Tourbillon"));
         t.put("key." + M + ".arcade_debug_hud", pair("Arcade Debug HUD", "Interface de débogage arcade"));
-        // the controller bindings of the arcade layout, see ArcadeControllerLayout
-        t.put("key." + M + ".arcade_crouch_alt", pair("Crouch, Ground Pound (second button)", "S'accroupir, charge au sol (second bouton)"));
-        t.put("key." + M + ".arcade_attack", pair("Attack · Roll, Dive in a combo", "Attaquer · roulade, plongeon en combo"));
-        t.put("key." + M + ".arcade_use", pair("Use Item · Roll, Dive in a combo", "Utiliser l'objet · roulade, plongeon en combo"));
-        t.put("key." + M + ".arcade_inventory", pair("Inventory (arcade layout)", "Inventaire (disposition arcade)"));
-        t.put("key." + M + ".arcade_swap_hands", pair("Swap Hands (arcade layout)", "Changer de main (disposition arcade)"));
-        t.put("key." + M + ".arcade_prev_slot", pair("Previous Slot (arcade layout)", "Emplacement précédent (disposition arcade)"));
-        t.put("key." + M + ".arcade_next_slot", pair("Next Slot (arcade layout)", "Emplacement suivant (disposition arcade)"));
-        t.put("key." + M + ".arcade_drop", pair("Drop (arcade layout)", "Jeter (disposition arcade)"));
-        t.put("key." + M + ".arcade_pick_block", pair("Pick Block (arcade layout)", "Choisir le bloc (disposition arcade)"));
-        t.put("key." + M + ".arcade_open_chat", pair("Chat (arcade layout)", "Discussion (disposition arcade)"));
-        t.put("key." + M + ".arcade_radial_menu", pair("Radial Menu (arcade layout)", "Menu radial (disposition arcade)"));
+        // the second jump button of a controller, see ArcadeControlifyEntrypoint
+        t.put("key." + M + ".arcade_jump", pair("Jump (second button)", "Sauter (second bouton)"));
 
         // moves
         t.put(move("walk"), pair("Walk", "Marche"));
@@ -69,6 +57,9 @@ public final class ArcadeTranslations {
         t.put(move("slide"), pair("Slide", "Glissade"));
         t.put(move("swim"), pair("Swim", "Nage"));
         t.put(move("swim_dash"), pair("Swim Dash", "Élan aquatique"));
+        t.put(move("climb"), pair("Climb", "Escalade"));
+        // the button guide of a controller
+        t.put("arcade." + M + ".guide.hold_on", pair("Hold On", "Se tenir"));
 
         // the item
         t.put("item." + M + ".mario_boots", pair("Mario Boots", "Bottes de Mario"));

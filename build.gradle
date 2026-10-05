@@ -106,6 +106,21 @@ allprojects {
         }
     }
 
+    repositories {
+        // Controlify, the controller mod: Mubble compiles against it, and only the sandbox runs it
+        maven {
+            name = 'isXander'
+            url = 'https://maven.isxander.dev/releases'
+            // only the jars are wanted, not the multi-loader variants their metadata describes
+            metadataSources {
+                artifact()
+            }
+            content {
+                includeGroup 'dev.isxander'
+            }
+        }
+    }
+
     dependencies {
         minecraft "com.mojang:minecraft:$rootProject.minecraft_version"
         implementation "net.fabricmc:fabric-loader:${project.loader_version}"
