@@ -3,7 +3,10 @@ package fr.hugman.mubble.arcade.sim;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.component.UseEffects;
 
 /**
  * What the player asked for during one tick, as the simulation consumes it.
@@ -39,6 +42,11 @@ public record ArcadeInputFrame(
     public static final int ACTION = 1 << 2;
     public static final int SPRINT = 1 << 3;
     public static final int SPIN = 1 << 4;
+    /**
+     * Not a button: the hands use an item, which slows the player down as in vanilla, by the
+     * {@code use_effects} of the item. The stick of the frame is already scaled, and running is off.
+     */
+    public static final int USING_ITEM = 1 << 5;
 
     public static final ArcadeInputFrame IDLE = new ArcadeInputFrame(0, 0.0F, 0.0F, 0.0F, true, (byte) 0, (byte) 0, (short) 0, (short) 0);
 
@@ -89,6 +97,26 @@ public record ArcadeInputFrame(
 
     public double stickMagnitude() {
         return Math.sqrt((double) this.stickX * this.stickX + (double) this.stickZ * this.stickZ);
+    }
+
+    /**
+     * The same frame, slowed down by the item {@code player} uses, if any: the stick scaled by the
+     * speed the item allows, as vanilla scales its input. A frame the client already slowed down
+     * keeps its stick, unless it goes faster than the item allows; one it did not is slowed here,
+     * which is how the server holds a client to the item it knows the player uses.
+     */
+    public ArcadeInputFrame slowedFor(Player player) {
+        if (!player.isUsingItem() || player.isPassenger()) {
+            return this;
+        }
+        var effects = player.getUseItem().getOrDefault(DataComponents.USE_EFFECTS, UseEffects.DEFAULT);
+        float speed = Math.min(1.0F, effects.speedMultiplier());
+        if (effects.canSprint() && speed >= 1.0F) {
+            return this;
+        }
+        double magnitude = this.stickMagnitude();
+        float scale = !this.isHeld(USING_ITEM) ? speed : magnitude > speed ? (float) (speed / magnitude) : 1.0F;
+        return new ArcadeInputFrame(this.tick, this.stickX * scale, this.stickZ * scale, this.viewYaw, this.coupled, (byte) (this.held | USING_ITEM), this.pressed, this.jumpAgeMs, this.actionAgeMs);
     }
 
     public ArcadeInputFrame withTick(int tick) {

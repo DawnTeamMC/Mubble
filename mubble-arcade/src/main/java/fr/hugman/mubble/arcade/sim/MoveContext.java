@@ -14,6 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
@@ -74,6 +75,10 @@ public final class MoveContext {
     private MoveResult result;
     /** How deep in water the player stands, probed on first use. */
     private double waterDepth = -1.0D;
+    /** What the player can climb where they stand, probed on first use: see {@link #climbable()}. */
+    @Nullable
+    private BlockState climbable;
+    private boolean climbableProbed;
 
     MoveContext(ArcadeState state, ArcadeInputFrame input, ArcadeTuning tuning, ArcadeWorld world, Vec3 start) {
         this.state = state;
@@ -237,7 +242,12 @@ public final class MoveContext {
     }
 
     public boolean sprintHeld() {
-        return this.input.isHeld(ArcadeInputFrame.SPRINT);
+        return this.input.isHeld(ArcadeInputFrame.SPRINT) && !this.usingItem();
+    }
+
+    /** Whether the hands use an item, which slows the player down: see {@link ArcadeInputFrame#USING_ITEM}. */
+    public boolean usingItem() {
+        return this.input.isHeld(ArcadeInputFrame.USING_ITEM);
     }
 
     /** Whether a jump press is still waiting to be used, see {@link ArcadeGrace#jumpBufferMs()}. */
@@ -276,6 +286,33 @@ public final class MoveContext {
     /** Whether the water is deep enough to swim in: deeper than vanilla wades in. */
     public boolean inDeepWater() {
         return this.waterDepth() > SWIM_DEPTH;
+    }
+
+    /** What the player can climb where they stand at the start of the step, as vanilla has it; null when nothing. */
+    @Nullable
+    public BlockState climbable() {
+        if (!this.climbableProbed) {
+            this.climbable = this.world.climbable(this.start);
+            this.climbableProbed = true;
+        }
+        return this.climbable;
+    }
+
+    /** Whether the player stands in something to climb. */
+    public boolean onClimbable() {
+        return this.climbable() != null;
+    }
+
+    /**
+     * Whether the stick pushes the player into a wall: on something to climb, that is what climbs
+     * it, as walking into a ladder does in vanilla.
+     */
+    public boolean stickPushesIntoWall() {
+        if (!this.hasStick()) {
+            return false;
+        }
+        double reach = WALL_PROBE / this.stickMagnitude;
+        return this.world.collides(this.box().move(this.stickX * reach, 0.0D, this.stickZ * reach));
     }
 
     /** Whether the stick was spun around fast enough to ask for a spin, and has not asked for one since. */
@@ -456,7 +493,7 @@ public final class MoveContext {
             return 0.0D;
         }
         double walk = this.tuning.walkSpeed();
-        if (!canRun) {
+        if (!canRun || this.usingItem()) {
             return walk * this.stickMagnitude;
         }
         double threshold = this.physics.ground().analogRunThreshold();
@@ -968,6 +1005,9 @@ public final class MoveContext {
         double lift = top - drop;
         return lift > this.tuning.stepHeight() + 1.0E-3D && lift <= maxHeight + 1.0E-3D ? lift + 1.0E-3D : 0.0D;
     }
+
+    /** How far ahead along the stick a wall counts as pushed into, in blocks. */
+    private static final double WALL_PROBE = 0.05D;
 
     /** How far below the feet the next floor may be and still carry the player without a snap. */
     private static final double SUPPORT_PROBE = 0.1D;

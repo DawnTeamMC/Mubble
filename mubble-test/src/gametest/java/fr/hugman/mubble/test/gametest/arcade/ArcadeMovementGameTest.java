@@ -12,13 +12,19 @@ import fr.hugman.mubble.arcade.ArcadePreview;
 import fr.hugman.mubble.arcade.move.ArcadeMove;
 import fr.hugman.mubble.arcade.move.ArcadeMoves;
 import fr.hugman.mubble.arcade.sim.ArcadeInputCollector;
+import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * The moves themselves, played by a stand-in client against real blocks, under {@code mubble:trial}.
@@ -663,6 +669,119 @@ public class ArcadeMovementGameTest {
             ArcadeTestKit.step(player, frames.next());
         }
         helper.assertTrue(player.getY() > y + 0.5D, "the jump rises out of the water");
+        helper.succeed();
+    }
+
+    /** A stone wall across the lane at z = 6, six blocks high, a ladder up its north face at x = 5. */
+    static void ladder(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        ArcadeTestKit.fill(helper, new BlockPos(1, 1, 6), new BlockPos(9, 6, 6), Blocks.STONE.defaultBlockState());
+        ArcadeTestKit.fill(helper, new BlockPos(5, 1, 5), new BlockPos(5, 6, 5), Blocks.LADDER.defaultBlockState().setValue(LadderBlock.FACING, Direction.NORTH));
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void laddersAreClimbedOnTheNumbersOfVanilla(GameTestHelper helper) {
+        ladder(helper);
+        var player = ArcadeTestKit.client(helper, new BlockPos(5, 1, 5), ArcadeProfileIds.TRIAL);
+        var controller = ArcadeController.of(player);
+        var frames = new ArcadeTestKit.Frames();
+        ArcadeTestKit.step(player, frames.next());
+        helper.assertTrue(controller.isDriving(), "a ladder does not hand the player over to vanilla");
+        helper.assertValueEqual(move(player), ArcadeMoves.CLIMB, "on a ladder");
+
+        // pushing into the wall climbs, at the pace of vanilla
+        frames.forward();
+        double rise = 0.0D;
+        for (int i = 0; i < 12; i++) {
+            double y = player.getY();
+            ArcadeTestKit.step(player, frames.next());
+            rise = player.getY() - y;
+        }
+        helper.assertValueEqual(move(player), ArcadeMoves.CLIMB, "climbing");
+        helper.assertTrue(Math.abs(rise - 0.1176D) < 0.005D, "vanilla climbs 0.1176 b/t, got " + rise);
+
+        // let go of the stick, and the player slides down, no faster than in vanilla
+        frames.release();
+        double slide = 0.0D;
+        for (int i = 0; i < 8; i++) {
+            double y = player.getY();
+            ArcadeTestKit.step(player, frames.next());
+            slide = player.getY() - y;
+        }
+        helper.assertTrue(slide < -0.1D && slide > -0.15D - 1.0E-6D, "vanilla slides down at 0.15 b/t, got " + slide);
+
+        // crouch holds on
+        frames.hold(CROUCH);
+        ArcadeTestKit.step(player, frames.next());
+        double held = player.getY();
+        for (int i = 0; i < 5; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        helper.assertValueEqual(move(player), ArcadeMoves.CLIMB, "holding on");
+        helper.assertTrue(Math.abs(player.getY() - held) < 1.0E-6D, "crouch holds on, moved by " + (player.getY() - held));
+
+        // up to the top, and onto the wall
+        frames.letGo(CROUCH).forward();
+        for (int i = 0; i < 100 && (move(player) == ArcadeMoves.CLIMB || !player.onGround()); i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        helper.assertTrue(move(player) != ArcadeMoves.CLIMB && player.onGround(), "the player never got off the ladder, still " + move(player));
+        double top = helper.absoluteVec(Vec3.atLowerCornerOf(new BlockPos(5, 7, 5))).y;
+        helper.assertTrue(Math.abs(player.getY() - top) < 1.0E-3D, "standing on top of the wall, at " + player.getY() + " for " + top);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void usingAnItemSlowsDownAsInVanilla(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = standing(helper, new BlockPos(5, 1, 3));
+        var controller = ArcadeController.of(player);
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BOW));
+        player.startUsingItem(InteractionHand.MAIN_HAND);
+        helper.assertTrue(player.isUsingItem(), "the bow is not drawn, the test proves nothing");
+
+        // drawing a bow, the player walks at a fifth of their pace, sprint or not
+        var frames = new ArcadeTestKit.Frames().forward().hold(SPRINT);
+        double pace = 0.0D;
+        for (int i = 0; i < 20; i++) {
+            var before = player.position();
+            ArcadeTestKit.step(player, frames.next());
+            pace = player.position().subtract(before).horizontalDistance();
+        }
+        double walk = controller.tuning().walkSpeed();
+        helper.assertTrue(Math.abs(pace - walk * 0.2D) < 0.005D, "a fifth of the walking pace " + walk + ", got " + pace);
+        helper.assertTrue(controller.state().move.kind() == ArcadeMove.Kind.GROUND, "still on the ground, " + move(player));
+
+        // the bow let go, the player runs again
+        player.releaseUsingItem();
+        for (int i = 0; i < 20; i++) {
+            var before = player.position();
+            ArcadeTestKit.step(player, frames.next());
+            pace = player.position().subtract(before).horizontalDistance();
+        }
+        helper.assertTrue(pace > walk, "running again, got " + pace);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void theServerHoldsTheClientToTheItemItUses(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = standing(helper, new BlockPos(5, 1, 3));
+        var full = new ArcadeTestKit.Frames().forward().next();
+        helper.assertTrue(full.slowedFor(player) == full, "no item in use, nothing to slow down");
+
+        player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.BOW));
+        player.startUsingItem(InteractionHand.MAIN_HAND);
+        // a client that did not slow down is slowed down
+        var slowed = full.slowedFor(player);
+        helper.assertTrue(slowed.isHeld(ArcadeInputFrame.USING_ITEM), "the frame says the hands use an item");
+        helper.assertTrue(Math.abs(slowed.stickMagnitude() - 0.2D) < 1.0E-6D, "the stick scaled to the use speed of the bow, got " + slowed.stickMagnitude());
+        // one that slowed down keeps its stick, slowing down once is all
+        helper.assertTrue(slowed.slowedFor(player).equals(slowed), "slowing down a slowed frame again changes nothing");
+        // one that claims to have slowed down but did not is held to the item
+        var cheating = new ArcadeInputFrame(full.tick(), full.stickX(), full.stickZ(), full.viewYaw(), full.coupled(),
+                (byte) (full.held() | ArcadeInputFrame.USING_ITEM), full.pressed(), full.jumpAgeMs(), full.actionAgeMs());
+        helper.assertTrue(Math.abs(cheating.slowedFor(player).stickMagnitude() - 0.2D) < 1.0E-6D, "the stick clamped to the use speed of the bow");
         helper.succeed();
     }
 

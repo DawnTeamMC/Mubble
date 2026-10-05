@@ -44,6 +44,9 @@ public class ArcadeMoveIds {
     public static final ResourceKey<ArcadeMove> SWIM = createKey("swim");
     public static final ResourceKey<ArcadeMove> SWIM_DASH = createKey("swim_dash");
 
+    // climbing
+    public static final ResourceKey<ArcadeMove> CLIMB = createKey("climb");
+
     private static ResourceKey<ArcadeMove> createKey(String path) {
         return ResourceKey.create(ArcadeRegistries.ARCADE_MOVE, Mubble.id(path));
     }

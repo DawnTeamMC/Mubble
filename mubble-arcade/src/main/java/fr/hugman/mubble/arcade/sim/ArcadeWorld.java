@@ -2,6 +2,7 @@ package fr.hugman.mubble.arcade.sim;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.Mth;
@@ -11,10 +12,14 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.Shapes;
+import org.jspecify.annotations.Nullable;
 
 /**
  * The read-only questions the simulation asks the world.
@@ -99,6 +104,27 @@ public final class ArcadeWorld {
 
     public boolean is(BlockPos pos, TagKey<Block> tag) {
         return this.level().getBlockState(pos).is(tag);
+    }
+
+    /**
+     * What the player can climb at {@code position}, as vanilla has it: a block tagged climbable
+     * (ladders, vines, scaffolding...), or an open trapdoor over a ladder facing the same way. Null
+     * when there is nothing to climb.
+     */
+    @Nullable
+    public BlockState climbable(Vec3 position) {
+        var pos = BlockPos.containing(position);
+        var state = this.blockState(pos);
+        if (state.is(BlockTags.CLIMBABLE)) {
+            return state;
+        }
+        if (state.getBlock() instanceof TrapDoorBlock && state.getValue(TrapDoorBlock.OPEN)) {
+            var below = this.blockState(pos.below());
+            if (below.is(Blocks.LADDER) && below.getValue(LadderBlock.FACING) == state.getValue(TrapDoorBlock.FACING)) {
+                return state;
+            }
+        }
+        return null;
     }
 
     public BlockPos supportingPos(Vec3 position) {

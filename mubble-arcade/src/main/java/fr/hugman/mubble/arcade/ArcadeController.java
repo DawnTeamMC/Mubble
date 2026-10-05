@@ -42,8 +42,8 @@ import org.jspecify.annotations.Nullable;
  * exactly what they are.
  * <p>
  * While it is on, the layer suspends itself whenever vanilla movement has to take over (lava,
- * climbing, gliding, riding, flying, sleeping, dying, changing dimension) and comes back from a clean
- * state once that is over. Water is the layer's own: it swims, on the numbers of vanilla swimming.
+ * gliding, riding, flying, sleeping, dying, changing dimension) and comes back from a clean state once
+ * that is over. Water and climbing are the layer's own: it swims and climbs on the numbers of vanilla.
  */
 public final class ArcadeController {
     /** How many past steps a client keeps, to replay them on top of a correction from the server. */
@@ -108,7 +108,7 @@ public final class ArcadeController {
     /** Whether vanilla movement has to take over for now. */
     private boolean shouldSuspend() {
         var p = this.player;
-        if (p.isDeadOrDying() || p.isSleeping() || p.isPassenger() || p.isSpectator() || p.isFallFlying() || p.getAbilities().flying || p.onClimbable()) {
+        if (p.isDeadOrDying() || p.isSleeping() || p.isPassenger() || p.isSpectator() || p.isFallFlying() || p.getAbilities().flying) {
             return true;
         }
         if (this.inLava()) {
@@ -273,6 +273,10 @@ public final class ArcadeController {
         if (this.handsBusy()) {
             return true;
         }
+        if (this.state.move == ArcadeMoves.CLIMB) {
+            // crouch holds on to what the player climbs, the hands stay theirs
+            return false;
+        }
         boolean swimming = this.state.move.kind() == ArcadeMove.Kind.WATER;
         return crouchHeld && (swimming ? this.allows(ArcadeMoves.SWIM_DASH) : this.allows(ArcadeMoves.ROLL));
     }
@@ -349,6 +353,10 @@ public final class ArcadeController {
             if (event.move() instanceof ArcMove || event.move() instanceof SpinMove) {
                 this.player.awardStat(Stats.JUMP);
             }
+        }
+        if (this.state.move == ArcadeMoves.CLIMB) {
+            // a climber does not fall, as in vanilla
+            this.player.resetFallDistance();
         }
         if (profile.costs().exhaustion() && this.state.grounded) {
             double perBlock = this.state.move.exhaustionPerBlock(ctx);

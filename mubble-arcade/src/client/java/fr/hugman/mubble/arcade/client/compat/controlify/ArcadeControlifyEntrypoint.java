@@ -1,76 +1,64 @@
 package fr.hugman.mubble.arcade.client.compat.controlify;
 
 import dev.isxander.controlify.api.ControlifyApi;
+import dev.isxander.controlify.api.bind.ControlifyBindApi;
 import dev.isxander.controlify.api.bind.InputBindingSupplier;
 import dev.isxander.controlify.api.entrypoint.ControlifyEntrypoint;
 import dev.isxander.controlify.api.entrypoint.InitContext;
 import dev.isxander.controlify.api.entrypoint.PreInitContext;
 import dev.isxander.controlify.bindings.BindContext;
-import dev.isxander.controlify.bindings.input.AxisInput;
-import dev.isxander.controlify.bindings.input.ButtonInput;
-import dev.isxander.controlify.bindings.input.EmptyInput;
-import dev.isxander.controlify.bindings.input.Input;
 import dev.isxander.controlify.rumble.BasicRumbleEffect;
 import dev.isxander.controlify.rumble.RumbleSource;
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.arcade.client.ArcadeKeyMappings;
 import fr.hugman.mubble.arcade.client.compat.ArcadeControllerBindings;
 import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The controller side of the arcade layer, when Controlify is installed: bindings laid out as in Super
- * Mario Odyssey (see {@link ArcadeControllerLayout}), a button guide that follows them (see
- * {@link ArcadeGuide}), and rumbles. The bindings belong to a context of their own, which only applies
- * while the layer drives, so that they neither act nor show as conflicts with Controlify's bindings
- * the rest of the time; all of them can be rebound in Controlify's controls menu.
+ * The controller side of the arcade layer, when Controlify is installed, through its API only.
+ * <p>
+ * The layer plays on the vanilla actions, which Controlify already binds: jump, sneak (crouch and
+ * ground pound), sprint, attack and use. Its own keys get a binding each, which presses the key, so
+ * that Controlify does not add one of its own for them; the second jump button of Super Mario Odyssey
+ * gets a binding too, as vanilla has a single jump key. Where each binding goes by default is data:
+ * the layout of Super Mario Odyssey, in {@code assets/controlify/controllers/default_bind/default.json},
+ * which Controlify layers over its own defaults. The button guide is data too, along with the facts
+ * {@link ArcadeGuide} contributes, and cues rumble the controller.
  */
 @Environment(EnvType.CLIENT)
 public final class ArcadeControlifyEntrypoint implements ControlifyEntrypoint, ArcadeControllerBindings {
-    /** The context of the arcade layout: the layer drives and no screen is open. */
-    public static final BindContext ARCADE = new BindContext(Mubble.id("arcade"), minecraft -> ArcadeControllerLayout.active());
-
-    private static final Map<String, InputBindingSupplier> BINDINGS = new LinkedHashMap<>();
-    private final Map<String, Integer> bits = Map.of(
-            "arcade_jump", ArcadeInputFrame.JUMP,
-            "arcade_crouch", ArcadeInputFrame.CROUCH,
-            "arcade_crouch_alt", ArcadeInputFrame.CROUCH,
-            "arcade_spin", ArcadeInputFrame.SPIN
-    );
-    private int previouslyHeld;
-    private boolean previousRecenter;
+    @Nullable
+    private InputBindingSupplier secondJump;
 
     @Override
     public void onControlifyPreInit(PreInitContext context) {
-        context.bindings().registerBindContext(ARCADE);
-        var category = Component.translatable("key.category." + Mubble.MOD_ID + ".arcade");
-        ArcadeControllerLayout.BINDINGS.forEach((name, input) -> BINDINGS.put(name, context.bindings().registerBinding(builder -> builder
-                .id(Mubble.id(name))
-                .name(Component.translatable("key." + Mubble.MOD_ID + "." + name))
-                .category(category)
-                .defaultInput(defaultInput(input))
-                .allowedContexts(ARCADE))));
+        var bindings = context.bindings();
+        this.secondJump = bindings.registerBinding(builder -> builder
+                .id(Mubble.id("arcade_jump"))
+                .name(Component.translatable("key." + Mubble.MOD_ID + ".arcade_jump"))
+                .category(ArcadeKeyMappings.CATEGORY.label())
+                .allowedContexts(BindContext.IN_GAME));
+        pressing(bindings, ArcadeKeyMappings.SPIN);
+        pressing(bindings, ArcadeKeyMappings.RECENTER);
+        pressing(bindings, ArcadeKeyMappings.DEBUG_HUD);
         context.contextualDomains().inGame().registerContributor(ArcadeGuide::contribute);
         ArcadeControllerBindings.Holder.instance = this;
     }
 
-    /** The binding of the arcade layout named {@code name}, if Controlify registered it. */
-    @Nullable
-    static InputBindingSupplier binding(String name) {
-        return BINDINGS.get(name);
-    }
-
-    private static Input defaultInput(@Nullable String input) {
-        if (input == null) {
-            return EmptyInput.INSTANCE;
-        }
-        var id = Identifier.fromNamespaceAndPath("controlify", input);
-        return input.startsWith("axis/") ? new AxisInput(id) : new ButtonInput(id);
+    /** A binding pressing {@code key}, named after it: {@code key.mubble.arcade_spin} binds as {@code mubble:arcade_spin}. */
+    private static void pressing(ControlifyBindApi bindings, KeyMapping key) {
+        var name = key.getName();
+        bindings.registerBinding(builder -> builder
+                .id(Mubble.id(name.substring(name.lastIndexOf('.') + 1)))
+                .name(Component.translatable(name))
+                .category(key.getCategory().label())
+                .allowedContexts(BindContext.IN_GAME)
+                .keyEmulation(key));
     }
 
     @Override
@@ -81,40 +69,14 @@ public final class ArcadeControlifyEntrypoint implements ControlifyEntrypoint, A
     public void onControllersDiscovered(ControlifyApi controlify) {
     }
 
-    private boolean isDown(String name) {
-        var controller = ControlifyApi.get().getCurrentController();
-        if (controller.isEmpty()) {
-            return false;
-        }
-        var binding = BINDINGS.get(name).onOrNull(controller.get());
-        return binding != null && binding.digitalNow();
-    }
-
     @Override
     public int held() {
-        int held = 0;
-        for (var entry : this.bits.entrySet()) {
-            if (this.isDown(entry.getKey())) {
-                held |= entry.getValue();
-            }
+        var controller = ControlifyApi.get().getCurrentController();
+        if (this.secondJump == null || controller.isEmpty()) {
+            return 0;
         }
-        return held;
-    }
-
-    @Override
-    public int pressed() {
-        int held = this.held();
-        int pressed = held & ~this.previouslyHeld;
-        this.previouslyHeld = held;
-        return pressed;
-    }
-
-    @Override
-    public boolean recenterPressed() {
-        boolean down = this.isDown("arcade_recenter");
-        boolean pressed = down && !this.previousRecenter;
-        this.previousRecenter = down;
-        return pressed;
+        var binding = this.secondJump.onOrNull(controller.get());
+        return binding != null && binding.digitalNow() ? ArcadeInputFrame.JUMP : 0;
     }
 
     @Override
