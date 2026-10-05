@@ -15,7 +15,8 @@ public class GroundPoundJumpMove extends ArcMove {
         var state = ctx.state();
         return state.move == ArcadeMoves.GROUND_POUND_LAND
                 && state.moveTicks <= ctx.settings(ArcadeMoves.GROUND_POUND_LAND).ticks(GroundPoundLandMove.JUMP_WINDOW)
-                && ctx.jumpBuffered();
+                && ctx.jumpBuffered()
+                && !ctx.inDeepWater();
     }
 
     @Override

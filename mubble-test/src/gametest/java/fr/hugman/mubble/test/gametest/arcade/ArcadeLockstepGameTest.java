@@ -149,6 +149,51 @@ public class ArcadeLockstepGameTest {
         return result;
     }
 
+    @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 400)
+    public void swimmingStaysInLockstep(GameTestHelper helper) {
+        ArcadeMovementGameTest.pool(helper);
+        var client = ArcadeTestClient.join(helper, new BlockPos(5, 3, 3), ArcadeProfileIds.TRIAL);
+        var f = new ArcadeTestKit.Frames();
+        var swim = new ArrayList<ArcadeInputFrame>();
+        for (int i = 0; i < 10; i++) {
+            swim.add(f.next());
+        }
+        f.forward();
+        for (int i = 0; i < 25; i++) {
+            swim.add(i % 8 == 4 ? f.tap(JUMP) : f.next());
+        }
+        swim.add(f.press(CROUCH));
+        for (int i = 0; i < 8; i++) {
+            swim.add(f.next());
+        }
+        swim.add(f.tap(ACTION));
+        f.letGo(CROUCH);
+        for (int i = 0; i < 20; i++) {
+            swim.add(f.next());
+        }
+        f.release().hold(SPRINT | JUMP);
+        for (int i = 0; i < 40; i++) {
+            swim.add(f.next());
+        }
+        f.letGo(SPRINT | JUMP);
+        swim.add(f.next());
+        swim.add(f.press(JUMP));
+        f.letGo(JUMP);
+        for (int i = 0; i < 30; i++) {
+            swim.add(f.next());
+        }
+        Set<ArcadeMove> played = new HashSet<>();
+        drive(helper, client, swim.size(), t -> {
+            client.tick(swim.get(t));
+            played.add(move(client.controller()));
+        }, () -> {
+            client.assertUndisturbed("swimming");
+            helper.assertValueEqual(client.corrections(), 0, "corrections (" + client.events() + ")");
+            helper.assertValueEqual(client.serverController().validation().accepted, swim.size(), "steps the server accepted");
+            helper.assertTrue(played.containsAll(Set.of(ArcadeMoves.SWIM, ArcadeMoves.GROUND_POUND, ArcadeMoves.SWIM_DASH)), "the swim should go through every water move, it went through " + played);
+        });
+    }
+
     @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 200)
     public void aLaunchAtThreeTimesTheRunSpeedIsNotPulledBack(GameTestHelper helper) {
         walledLane(helper);

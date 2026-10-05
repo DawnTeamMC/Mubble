@@ -41,9 +41,9 @@ import org.jspecify.annotations.Nullable;
  * attribute is touched, no hook takes over, and vanilla movement, rendering and networking stay
  * exactly what they are.
  * <p>
- * While it is on, the layer suspends itself whenever vanilla movement has to take over (swimming,
+ * While it is on, the layer suspends itself whenever vanilla movement has to take over (lava,
  * climbing, gliding, riding, flying, sleeping, dying, changing dimension) and comes back from a clean
- * state once that is over.
+ * state once that is over. Water is the layer's own: it swims, on the numbers of vanilla swimming.
  */
 public final class ArcadeController {
     /** How many past steps a client keeps, to replay them on top of a correction from the server. */
@@ -58,8 +58,8 @@ public final class ArcadeController {
     @Nullable
     private ArcadeProfile appliedProfile;
     private boolean suspended;
-    /** Whether the player swims, see {@link #swimming()}. */
-    private boolean swimming;
+    /** Whether the player is in lava, see {@link #inLava()}. */
+    private boolean inLava;
     /** Whether the last step was taken with the orbit camera, see {@link #orbiting()}. */
     private boolean orbiting;
     private boolean needsReset = true;
@@ -111,26 +111,27 @@ public final class ArcadeController {
         if (p.isDeadOrDying() || p.isSleeping() || p.isPassenger() || p.isSpectator() || p.isFallFlying() || p.getAbilities().flying || p.onClimbable()) {
             return true;
         }
-        if (this.swimming()) {
+        if (this.inLava()) {
             return true;
         }
         return p instanceof ServerPlayer serverPlayer && serverPlayer.isChangingDimension();
     }
 
     /**
-     * Whether the player swims, which is vanilla's. Swimming starts deep enough in water, or in any
-     * lava, and only ends out of the fluid or standing on its bottom: at the surface, the depth bobs
-     * around the threshold every tick, and the movement must not change hands with it.
+     * Whether the player is in lava, where vanilla moves them. It starts in any lava, and only ends out
+     * of it or standing on its bottom: at the surface, the depth bobs every tick, and the movement must
+     * not change hands with it. Water is the layer's own, see {@link fr.hugman.mubble.arcade.move.SwimMove}.
      */
-    private boolean swimming() {
+    private boolean inLava() {
         var p = this.player;
-        boolean deep = p.isInLava() || (p.isInWater() && p.getFluidHeight(FluidTags.WATER) > p.getFluidJumpThreshold());
-        if (deep) {
-            this.swimming = true;
-        } else if (this.swimming && ((!p.isInWater() && !p.isInLava()) || p.onGround())) {
-            this.swimming = false;
+        // the fluid height rather than isInLava, which says no on the first tick of the entity
+        boolean touching = p.getFluidHeight(FluidTags.LAVA) > 0.0D;
+        if (touching) {
+            this.inLava = true;
+        } else if (this.inLava && (!touching || p.onGround())) {
+            this.inLava = false;
         }
-        return this.swimming;
+        return this.inLava;
     }
 
     /** Ends the moves cleanly: no state, pose or visual is left behind for vanilla to trip on. */
@@ -261,15 +262,19 @@ public final class ArcadeController {
 
     /**
      * Whether a press of attack or use goes to the moves rather than to the hands: while crouch is
-     * held, where it rolls (on the ground, or on landing), and while the move keeps the hands busy,
-     * where it dives out of a ground pound or boosts a roll. The rest of the time the hands hit and
-     * use the item they hold.
+     * held, where it rolls (on the ground, or on landing) or dashes (in water), and while the move
+     * keeps the hands busy, where it dives out of a ground pound or boosts a roll. The rest of the time
+     * the hands hit and use the item they hold.
      */
     public boolean handsGoToMoves(boolean crouchHeld) {
         if (!this.isDriving()) {
             return false;
         }
-        return this.handsBusy() || crouchHeld && this.allows(ArcadeMoves.ROLL);
+        if (this.handsBusy()) {
+            return true;
+        }
+        boolean swimming = this.state.move.kind() == ArcadeMove.Kind.WATER;
+        return crouchHeld && (swimming ? this.allows(ArcadeMoves.SWIM_DASH) : this.allows(ArcadeMoves.ROLL));
     }
 
     /**
