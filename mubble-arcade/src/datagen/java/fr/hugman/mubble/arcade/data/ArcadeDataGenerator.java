@@ -15,6 +15,7 @@ public class ArcadeDataGenerator implements DataGeneratorEntrypoint {
 		// Resource Pack
 		pack.addProvider((output, registries) -> new ArcadeLangProvider(output, ArcadeTranslations.ENGLISH, "en_us", registries));
 		pack.addProvider((output, registries) -> new ArcadeLangProvider(output, ArcadeTranslations.FRENCH, "fr_fr", registries));
+		pack.addProvider(ArcadeGuideProvider::new);
 
 		// Data Pack
 		pack.addProvider(ArcadeBlockTagsProvider::new);

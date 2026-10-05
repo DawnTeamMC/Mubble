@@ -4,7 +4,8 @@ import fr.hugman.mubble.arcade.sim.MoveContext;
 
 /**
  * Crouching in the air: a brief hang, then a straight, fast drop. Its landing takes no fall damage
- * and can be jumped out of very high, see {@link GroundPoundJumpMove}.
+ * and can be jumped out of very high, see {@link GroundPoundJumpMove}. Action, at any point of it,
+ * dives forward instead, see {@link DiveMove}.
  */
 public class GroundPoundMove extends ArcadeMove {
     /** How long the player hangs before dropping. */
@@ -48,7 +49,7 @@ public class GroundPoundMove extends ArcadeMove {
 
     @Override
     public boolean allowsInterruption(ArcadeMove next, MoveContext ctx) {
-        return false;
+        return next == ArcadeMoves.DIVE;
     }
 
     @Override

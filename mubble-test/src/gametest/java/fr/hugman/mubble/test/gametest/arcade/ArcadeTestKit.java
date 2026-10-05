@@ -88,6 +88,13 @@ public final class ArcadeTestKit {
         private float stickZ;
         private float yaw;
         private int held;
+        private boolean coupled = true;
+
+        /** Frames taken with the orbit camera on, rather than the first person view. */
+        public Frames orbit() {
+            this.coupled = false;
+            return this;
+        }
 
         public Frames stick(float x, float z) {
             this.stickX = x;
@@ -135,7 +142,7 @@ public final class ArcadeTestKit {
         }
 
         private ArcadeInputFrame frame(int pressed) {
-            return new ArcadeInputFrame(this.tick++, this.stickX, this.stickZ, this.yaw, true, (byte) this.held, (byte) pressed, (short) 0, (short) 0);
+            return new ArcadeInputFrame(this.tick++, this.stickX, this.stickZ, this.yaw, this.coupled, (byte) this.held, (byte) pressed, (short) 0, (short) 0);
         }
     }
 }

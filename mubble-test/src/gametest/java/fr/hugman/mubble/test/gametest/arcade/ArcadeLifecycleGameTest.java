@@ -75,7 +75,7 @@ public class ArcadeLifecycleGameTest {
         player.setDeltaMovement(0.0D, 0.0D, 0.0D);
         player.jumpFromGround();
         helper.assertTrue(Math.abs(player.getDeltaMovement().y - 0.42D) < 1.0E-6D, "a vanilla jump should still be one, got " + player.getDeltaMovement().y);
-        helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.WORLD), "nothing is refused to a vanilla player");
+        helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.BLOCK), "nothing is refused to a vanilla player");
         finish(helper, client);
     }
 
@@ -178,7 +178,7 @@ public class ArcadeLifecycleGameTest {
         client.tickServer();
         client.tickServer();
         helper.assertTrue(controller.isActive() && controller.isSuspended(), "swimming is vanilla's");
-        helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.WORLD), "a suspended layer refuses nothing");
+        helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.BLOCK), "a suspended layer refuses nothing");
         ArcadeTestKit.fill(helper, new BlockPos(3, 1, 3), new BlockPos(7, 3, 7), Blocks.AIR.defaultBlockState());
         client.tickServer();
         client.tickServer();
@@ -236,7 +236,7 @@ public class ArcadeLifecycleGameTest {
         ArcadeTestKit.step(player, frames.next());
         // the trial is combat only
         helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.ATTACK), "attacking under combat_only");
-        helper.assertTrue(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.WORLD), "breaking and placing under combat_only");
+        helper.assertTrue(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.BLOCK), "breaking and placing under combat_only");
 
         var target = helper.spawnWithNoFreeWill(EntityTypes.PIG, new BlockPos(5, 1, 7));
         var result = AttackEntityCallback.EVENT.invoker().interact(player, helper.getLevel(), InteractionHand.MAIN_HAND, target, null);
@@ -258,7 +258,19 @@ public class ArcadeLifecycleGameTest {
         for (int i = 0; i < 20; i++) {
             ArcadeTestKit.step(player, standing.next());
         }
-        helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.WORLD), "breaking and placing under full");
+        helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.BLOCK), "breaking and placing under full");
+        var controller = ArcadeController.of(player);
+        helper.assertFalse(controller.handsGoToMoves(false), "attack and use while standing go to the hands");
+        helper.assertTrue(controller.handsGoToMoves(true), "attack and use with crouch held roll");
+
+        // with the orbit camera, the hands reach out where the body faces: never to a block
+        var orbiting = new ArcadeTestKit.Frames().orbit();
+        ArcadeTestKit.step(player, orbiting.next());
+        helper.assertTrue(controller.orbiting(), "a step taken with the orbit camera");
+        helper.assertTrue(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.BLOCK), "breaking and placing with the orbit camera, even under full");
+        helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.ENTITY), "using an entity with the orbit camera");
+        helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.USE_ITEM), "using an item with the orbit camera");
+        helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.ATTACK), "attacking with the orbit camera");
         finish(helper, client);
     }
 

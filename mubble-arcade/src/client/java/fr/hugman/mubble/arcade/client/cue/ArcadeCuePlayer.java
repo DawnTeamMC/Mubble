@@ -4,6 +4,7 @@ import fr.hugman.mubble.arcade.ArcadeController;
 import fr.hugman.mubble.arcade.ArcadePlayer;
 import fr.hugman.mubble.arcade.ArcadeProfile;
 import fr.hugman.mubble.arcade.ArcadeProfiles;
+import fr.hugman.mubble.arcade.client.compat.ArcadeControllerBindings;
 import fr.hugman.mubble.arcade.cue.Cue;
 import fr.hugman.mubble.arcade.cue.CueEvent;
 import fr.hugman.mubble.arcade.move.ArcadeMove;
@@ -31,10 +32,21 @@ public final class ArcadeCuePlayer {
     private ArcadeCuePlayer() {
     }
 
-    /** Plays the cues of the events of a predicted step. */
+    /** Plays the cues of the events of a predicted step, rumbles of the controller included: the step is the player's own. */
     public static void play(Player player, ArcadeProfile profile, List<MoveEvent> events) {
         for (var event : events) {
-            playCue(player, profile, event.move(), event.type(), event.intensity());
+            profile.settingsOrDefault(event.move()).cues().get(event.type()).ifPresent(cue -> {
+                play(player, event.move(), cue, event.intensity());
+                cue.rumble().ifPresent(rumble -> rumble(rumble, event.intensity()));
+            });
+        }
+    }
+
+    private static void rumble(Cue.Rumble rumble, double intensity) {
+        var controller = ArcadeControllerBindings.Holder.instance;
+        float scale = rumble.scale(intensity);
+        if (controller != null && scale > 0.0F) {
+            controller.rumble(rumble.strong() * scale, rumble.weak() * scale, rumble.ticks());
         }
     }
 

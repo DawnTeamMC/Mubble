@@ -4,16 +4,16 @@ import fr.hugman.mubble.arcade.ArcadeAim;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * The orbit camera against real blocks: it never sits inside a wall, and its crosshair only picks
- * what the player could reach from their own eyes.
+ * The orbit camera against real blocks: it never sits inside a wall, and meanwhile the hands of the
+ * player reach out to what stands in front of them, never to a block.
  */
 public class ArcadeAimGameTest {
     /** Looking north, along -z, the way the player stands in these tests. */
@@ -38,45 +38,45 @@ public class ArcadeAimGameTest {
     }
 
     @GameTest(structure = ArcadeTestKit.LANE)
-    public void theCrosshairOnlyPicksWhatTheEyesCanReach(GameTestHelper helper) {
+    public void theHandsReachWhatStandsInFrontAndNeverABlock(GameTestHelper helper) {
         ArcadeTestKit.floor(helper);
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         player.setPos(helper.absoluteVec(new Vec3(5.5D, 1.0D, 20.5D)));
         var eye = player.getEyePosition();
-        // the camera four blocks behind the player and a bit above, looking north and slightly down
-        var origin = eye.add(0.0D, 1.0D, 4.0D);
-        var target = helper.absolutePos(new BlockPos(5, 1, 17));
-        helper.setBlock(new BlockPos(5, 1, 17), Blocks.STONE.defaultBlockState());
-        var forward = Vec3.atCenterOf(target).subtract(origin).normalize();
+        // facing north: a yaw of 180 degrees
+        float north = 180.0F;
 
-        var hit = ArcadeAim.pick(player, origin, forward, eye);
-        helper.assertTrue(hit.getType() == HitResult.Type.BLOCK && ((BlockHitResult) hit).getBlockPos().equals(target), "a block in front of the player, in reach: got " + hit.getType());
-
-        // a block between the camera and the player is not what the crosshair means
-        helper.setBlock(new BlockPos(5, 3, 22), Blocks.STONE.defaultBlockState());
-        hit = ArcadeAim.pick(player, origin, forward, eye);
-        helper.assertTrue(hit.getType() == HitResult.Type.BLOCK && ((BlockHitResult) hit).getBlockPos().equals(target), "a block behind the player, in the way of the camera, should be looked past");
-
-        // the camera sees over a wall the eyes cannot see over
-        helper.setBlock(new BlockPos(5, 2, 19), Blocks.GLASS.defaultBlockState());
-        var high = helper.absolutePos(new BlockPos(5, 1, 16));
-        helper.setBlock(new BlockPos(5, 1, 17), Blocks.AIR.defaultBlockState());
-        helper.setBlock(new BlockPos(5, 1, 16), Blocks.STONE.defaultBlockState());
-        var raised = eye.add(0.0D, 3.0D, 4.0D);
-        var overTheWall = Vec3.atCenterOf(high).add(0.0D, 0.5D, 0.0D).subtract(raised).normalize();
-        helper.assertTrue(helper.getLevel().clip(new ClipContext(raised, Vec3.atCenterOf(high).add(0.0D, 0.49D, 0.0D),
-                ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player)).getBlockPos().equals(high),
-                "the camera should see the block over the wall, the test proves nothing otherwise");
-        hit = ArcadeAim.pick(player, raised, overTheWall, eye);
-        helper.assertFalse(hit.getType() == HitResult.Type.BLOCK && ((BlockHitResult) hit).getBlockPos().equals(high), "a block the eyes cannot see should not be picked");
-
-        // and nothing out of reach is picked, however clear the view
+        // a block right in front of the player is not something the hands reach
+        helper.setBlock(new BlockPos(5, 2, 19), Blocks.STONE.defaultBlockState());
+        var hit = ArcadeAim.pickAhead(player, eye, north);
+        helper.assertTrue(hit.getType() == HitResult.Type.MISS, "a block in front of the player, got " + hit.getType());
         helper.setBlock(new BlockPos(5, 2, 19), Blocks.AIR.defaultBlockState());
-        helper.setBlock(new BlockPos(5, 1, 16), Blocks.AIR.defaultBlockState());
-        var far = helper.absolutePos(new BlockPos(5, 1, 10));
-        helper.setBlock(new BlockPos(5, 1, 10), Blocks.STONE.defaultBlockState());
-        hit = ArcadeAim.pick(player, origin, Vec3.atCenterOf(far).subtract(origin).normalize(), eye);
-        helper.assertTrue(hit.getType() == HitResult.Type.MISS, "a block ten blocks away is out of reach");
+
+        // a small animal two blocks ahead, well below the eyes, is
+        var chicken = helper.spawnWithNoFreeWill(EntityTypes.CHICKEN, new BlockPos(5, 1, 18));
+        hit = ArcadeAim.pickAhead(player, eye, north);
+        helper.assertTrue(hit instanceof EntityHitResult entityHit && entityHit.getEntity() == chicken, "a chicken in front of the player, got " + hit.getType());
+
+        // a bit off to the side still counts
+        hit = ArcadeAim.pickAhead(player, eye, north + 10.0F);
+        helper.assertTrue(hit instanceof EntityHitResult entityHit && entityHit.getEntity() == chicken, "a chicken a little to the side, got " + hit.getType());
+
+        // but not behind the player
+        hit = ArcadeAim.pickAhead(player, eye, 0.0F);
+        helper.assertTrue(hit.getType() == HitResult.Type.MISS, "a chicken behind the player, got " + hit.getType());
+
+        // nor through a wall
+        helper.setBlock(new BlockPos(5, 1, 19), Blocks.STONE.defaultBlockState());
+        helper.setBlock(new BlockPos(5, 2, 19), Blocks.STONE.defaultBlockState());
+        hit = ArcadeAim.pickAhead(player, eye, north);
+        helper.assertTrue(hit.getType() == HitResult.Type.MISS, "a chicken behind a wall, got " + hit.getType());
+        helper.setBlock(new BlockPos(5, 1, 19), Blocks.AIR.defaultBlockState());
+        helper.setBlock(new BlockPos(5, 2, 19), Blocks.AIR.defaultBlockState());
+
+        // nor out of reach
+        chicken.setPos(helper.absoluteVec(new Vec3(5.5D, 1.0D, 12.5D)));
+        hit = ArcadeAim.pickAhead(player, eye, north);
+        helper.assertTrue(hit.getType() == HitResult.Type.MISS, "a chicken eight blocks away, got " + hit.getType());
         helper.succeed();
     }
 }

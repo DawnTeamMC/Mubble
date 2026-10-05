@@ -16,12 +16,17 @@ import net.minecraft.resources.Identifier;
 /**
  * The controller layout of the arcade layer: Super Mario Odyssey's, for as long as the layer drives.
  * <p>
- * SMO puts jump on A and B, Cappy (here the action: dives and rolls) on Y and X, crouch and ground
- * pound on ZL and ZR, and recentering the camera on L, which are buttons Controlify gives to
- * Minecraft: use and attack, inventory, swap hands, the hotbar. While the layer drives, those vanilla
- * actions move to buttons of their own (the D-pad by default, all rebindable in Controlify's menu,
- * under the arcade movement category), and any other vanilla binding sitting on a button of the
- * arcade layout gives way. Once the layer stops, everything is Controlify's again.
+ * SMO puts jump on A and B, Cappy on Y and X, crouch and ground pound on ZL and ZR, and recentering
+ * the camera on L. Here, Cappy's buttons are the hands: attack on Y and use on X, which roll when
+ * crouch is held and dive out of a ground pound, as Cappy's do. Controlify gives those buttons to
+ * other vanilla actions; while the layer drives, these move to buttons of their own: the inventory
+ * and the hotbar to the D-pad, the radial menu to R. Any other vanilla binding sitting on a button of
+ * the layout gives way, and the actions left without a button stay in the radial menu. Every binding
+ * of the layout can be rebound in Controlify's menu, under the arcade movement category. Once the
+ * layer stops, everything is Controlify's again.
+ * <p>
+ * Buttons are named after their place, as Controlify names them: {@code east} is A on a Switch
+ * controller, B on an Xbox one.
  */
 @Environment(EnvType.CLIENT)
 public final class ArcadeControllerLayout {
@@ -31,24 +36,25 @@ public final class ArcadeControllerLayout {
     static final Map<String, String> BINDINGS = new LinkedHashMap<>();
 
     static {
-        // the moves, as in SMO
+        // the moves, as in SMO; vanilla jump stays on south, so that both A and B jump
         BINDINGS.put("arcade_jump", "button/east");
         BINDINGS.put("arcade_crouch", "axis/left_trigger");
         BINDINGS.put("arcade_crouch_alt", "axis/right_trigger");
-        BINDINGS.put("arcade_action", "button/west");
-        BINDINGS.put("arcade_action_alt", "button/north");
         BINDINGS.put("arcade_recenter", "button/left_shoulder");
+        // turning the stick all the way around spins, as in SMO
         BINDINGS.put("arcade_spin", null);
+        // the hands, on Cappy's buttons
+        moved("attack", "arcade_attack", "button/west");
+        moved("use", "arcade_use", "button/north");
         // where vanilla goes meanwhile
-        moved("use", "arcade_use", "button/dpad_left");
-        moved("attack", "arcade_attack", "button/dpad_right");
         moved("inventory", "arcade_inventory", "button/dpad_up");
-        moved("swap_hands", "arcade_swap_hands", "button/dpad_down");
-        moved("prev_slot", "arcade_prev_slot", null);
-        moved("drop", "arcade_drop", null);
+        moved("drop", "arcade_drop", "button/dpad_down");
+        moved("prev_slot", "arcade_prev_slot", "button/dpad_left");
+        moved("next_slot", "arcade_next_slot", "button/dpad_right");
+        moved("radial_menu", "arcade_radial_menu", "button/right_shoulder");
+        moved("swap_hands", "arcade_swap_hands", null);
         moved("pick_block", "arcade_pick_block", null);
         moved("open_chat", "arcade_open_chat", null);
-        moved("radial_menu", "arcade_radial_menu", null);
     }
 
     private ArcadeControllerLayout() {

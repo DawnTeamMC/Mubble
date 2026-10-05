@@ -4,6 +4,7 @@
   "plugin": "fr.hugman.mubble.arcade.client.compat.controlify.ControlifyMixinPlugin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "GuideInstanceImplMixin",
     "InputBindingImplMixin"
   ],
   "injectors": {

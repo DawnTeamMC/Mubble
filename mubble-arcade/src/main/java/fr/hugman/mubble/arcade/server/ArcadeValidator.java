@@ -89,6 +89,7 @@ public final class ArcadeValidator {
         ArcadeSimulation.settle(ctx, result);
 
         controller.setState(state);
+        controller.setOrbiting(!frame.coupled());
         validation.expectedPosition = from.add(result.dx(), result.dy(), result.dz());
         validation.lastTick = frame.tick();
         validation.accepted++;

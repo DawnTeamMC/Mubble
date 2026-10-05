@@ -1,11 +1,12 @@
 package fr.hugman.mubble.arcade;
 
+import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -15,12 +16,14 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * The geometry of the orbit camera that does not need a client: how far back it can sit, and what its
- * crosshair is allowed to pick. Kept here so that tests can hold it against real blocks.
+ * The geometry of the orbit camera that does not need a client: how far back it can sit, and what the
+ * hands of the player reach out to meanwhile. Kept here so that tests can hold it against real blocks.
  */
 public final class ArcadeAim {
     /** Half the size of the box the camera keeps clear around itself, as vanilla's third person camera does. */
     private static final double CAMERA_RADIUS = 0.1D;
+    /** How much wider than an entity what the hands pick ahead is, see {@link #pickAhead}. */
+    private static final double AHEAD_LENIENCY = 0.5D;
 
     private ArcadeAim() {
     }
@@ -75,42 +78,48 @@ public final class ArcadeAim {
     }
 
     /**
-     * What the crosshair of a camera at {@code origin} looking along {@code forward} points at, if the
-     * player could reach it from {@code eye}: within the vanilla reach, and with nothing in the way.
-     * The ray starts level with the player, so that what stands between the camera and the player is
-     * never picked.
+     * What the hands of a player reach out to while the orbit camera is on: the nearest entity in
+     * front of them, along {@code yaw} and level with the horizon, within the vanilla entity reach and
+     * with no block in the way. A target a bit off to the side, above or below still counts, so that
+     * hitting what stands in front needs no pixel-perfect facing.
+     * <p>
+     * Blocks are never picked: with the orbit camera, the hands hit and use the item they hold, they
+     * do not mine nor build.
      */
-    public static HitResult pick(Player player, Vec3 origin, Vec3 forward, Vec3 eye) {
+    public static HitResult pickAhead(Player player, Vec3 eye, float yaw) {
         var level = player.level();
-        double blockRange = player.blockInteractionRange();
-        double entityRange = player.entityInteractionRange();
-        double reach = Math.max(blockRange, entityRange);
-        double startAlong = Math.max(0.0D, eye.subtract(origin).dot(forward) - 0.5D);
-        var start = origin.add(forward.scale(startAlong));
-        var end = start.add(forward.scale(reach + 1.0D));
-
-        HitResult hit = level.clip(new ClipContext(start, end, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
-        double hitDistance = hit.getLocation().distanceToSqr(start);
-        var box = player.getBoundingBox().expandTowards(forward.scale(reach + 1.0D + startAlong)).inflate(1.0D).minmax(new AABB(start, end));
-        EntityHitResult entityHit = ProjectileUtil.getEntityHitResult(player, start, end, box, EntitySelector.CAN_BE_PICKED, hitDistance);
-        if (entityHit != null && entityHit.getEntity() != player) {
-            hit = entityHit;
-        }
-
-        // checked from the eyes: the same reach as vanilla, and no seeing through walls
-        double range = hit instanceof EntityHitResult ? entityRange : blockRange;
-        var location = hit.getLocation();
-        if (hit.getType() == HitResult.Type.MISS || location.distanceToSqr(eye) > range * range) {
-            return miss(location, forward);
-        }
-        var lineOfSight = level.clip(new ClipContext(eye, location, ClipContext.Block.OUTLINE, ClipContext.Fluid.NONE, player));
-        if (lineOfSight.getType() == HitResult.Type.BLOCK) {
-            boolean sameBlock = hit instanceof BlockHitResult blockHit && lineOfSight.getBlockPos().equals(blockHit.getBlockPos());
-            if (!sameBlock) {
-                return miss(location, forward);
+        var forward = Vec3.directionFromRotation(0.0F, yaw);
+        double reach = player.entityInteractionRange();
+        var end = eye.add(forward.scale(reach));
+        var band = player.getBoundingBox();
+        Entity best = null;
+        Vec3 bestAt = null;
+        double bestDistance = Double.MAX_VALUE;
+        for (var entity : level.getEntities(player, new AABB(eye, end).inflate(AHEAD_LENIENCY + 1.0D), EntitySelector.CAN_BE_PICKED)) {
+            var box = entity.getBoundingBox().inflate(entity.getPickRadius() + AHEAD_LENIENCY);
+            if (box.maxY < band.minY || box.minY > band.maxY) {
+                continue;
             }
+            // level with the eyes when the target spans them, at the nearest height of it otherwise
+            double y = Mth.clamp(eye.y, box.minY, box.maxY);
+            var from = new Vec3(eye.x, y, eye.z);
+            var at = box.contains(from) ? Optional.of(from) : box.clip(from, new Vec3(end.x, y, end.z));
+            if (at.isEmpty()) {
+                continue;
+            }
+            double distance = from.distanceToSqr(at.get());
+            if (distance >= bestDistance) {
+                continue;
+            }
+            var lineOfSight = level.clip(new ClipContext(eye, entity.getBoundingBox().getCenter(), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+            if (lineOfSight.getType() != HitResult.Type.MISS && lineOfSight.getLocation().distanceToSqr(eye) < distance - 1.0E-6D) {
+                continue;
+            }
+            best = entity;
+            bestAt = at.get();
+            bestDistance = distance;
         }
-        return hit;
+        return best != null ? new EntityHitResult(best, bestAt) : miss(end, forward);
     }
 
     private static BlockHitResult miss(Vec3 location, Vec3 forward) {
