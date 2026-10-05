@@ -4,6 +4,8 @@ An optional movement layer in the spirit of Super Mario Odyssey and Donkey Kong 
 
 When nothing gives a player the layer, nothing changes for them: vanilla movement, vanilla jump, vanilla camera, vanilla animations.
 
+The layer is a module of its own, `mubble-arcade` (mod id `mubble_arcade`), built on top of the core. Its content keeps the `mubble` namespace, so ids, commands and data read the same as the rest of Mubble.
+
 ## How a player gets it
 
 Movement is **resolved per player** from three things:
@@ -168,23 +170,23 @@ All are in the `mubble` namespace, registered by code (`mubble:arcade_move` regi
 | Parameter | Meaning |
 |---|---|
 | `air_control` | Scale of the air control during the dive. |
-| `back_speed` | Crouching and jumping while standing: very high, drifting slightly backwards. / public class BackflipMove extends ArcMove { /** Speed of the backward drift. |
+| `back_speed` | Speed of the backward drift. |
 | `boost` | Speed a boost adds; the base value of {@code mubble:arcade_roll_boost}, which is what the roll reads. |
 | `boost_cooldown_ticks` | Ticks between two boosts. |
 | `brake` | Share of its speed the skid loses every tick. |
-| `cancel_window_ticks` | Every move of the arcade movement layer. <p> The entry priorities decide which move wins when several could start on the same tick: the more specific a move is, the higher it ranks, so that crouching and jumping is a backflip before it is a jump, and jumping right after a ground pound is a ground pound jump before anything else. / public final class ArcadeMoves { /** Ticks an airborne move lasts before the aerial follow-ups may cut it short. |
+| `cancel_window_ticks` | Ticks an airborne move lasts before the aerial follow-ups may cut it short. |
 | `climb_height` | The highest step a roll gets onto without stopping, in blocks: a roll goes up a hill of full blocks. |
 | `decel` | Speed lost every tick on flat ground. |
 | `drop_speed` | Speed of the drop; the base value of {@code mubble:arcade_ground_pound_speed}, which is what the drop reads. |
-| `exhaustion_per_block` | Moving about on the ground: walking, running, and the landing that leads back to either. <p> Running is the move; walking is what the ground is without it, at the vanilla pace. Both share the same locomotion, only the speed they aim for differs. / public class GroundMove extends ArcadeMove { /** Food exhaustion per block travelled, when the profile charges for its moves. |
+| `exhaustion_per_block` | Food exhaustion per block travelled, when the profile charges for its moves. |
 | `exit_speed` | Speed below which the slide stops. |
-| `fall_speed` | Spinning the stick around (or pressing the spin key): in the air, a small lift and a slowed fall, once per airtime; on the ground with jump, a spinning jump ending the same way. / public class SpinMove extends ArcadeMove { /** The fastest fall while spinning. |
+| `fall_speed` | The fastest fall while spinning. |
 | `flat_decel` | Speed lost every tick on flat ground. |
 | `forward` | How far past the edge the pull-up ends, in blocks. |
 | `gain` | Speed gained every tick for every unit of slope. |
 | `grab_band` | How far below the hanging height an edge still gets caught. |
-| `hang_depth` | Hanging from an edge: caught on the way down, as long as the player faces it. Jump climbs up, crouch lets go, and the stick shimmies along the edge. <p> The edge pulls a player within reach in (ledge magnetism), but it never catches anyone on the way up: a grab must never feel like it stole a jump. / public class LedgeGrabMove extends ArcadeMove { /** How far below the edge the top of the hitbox hangs. |
-| `hang_ticks` | Crouching in the air: a brief hang, then a straight, fast drop. Its landing takes no fall damage and can be jumped out of very high, see {@link GroundPoundJumpMove}. / public class GroundPoundMove extends ArcadeMove { /** How long the player hangs before dropping. |
+| `hang_depth` | How far below the edge the top of the hitbox hangs. |
+| `hang_ticks` | How long the player hangs before dropping. |
 | `jump_height` | Height of the spinning jump. |
 | `jump_ticks` | Ticks the spinning jump takes to reach that height. |
 | `jump_window_ticks` | Ticks after the impact during which a jump is a ground pound jump. |
@@ -194,25 +196,25 @@ All are in the `mubble` namespace, registered by code (`mubble:arcade_move` regi
 | `lock_ticks` | Ticks during which the stick cannot steer back, so that the kick is not undone right away. |
 | `max_boosts` | How many boosts a roll can take. |
 | `max_fall_speed` | The fastest slide down the wall; the base value of {@code mubble:arcade_wall_slide_speed}, which is what the slide reads. |
-| `max_height` | Running into an obstacle up to a block high: the player mantles over it without losing speed. Anything vanilla steps up on its own is left to vanilla. / public class VaultMove extends ArcadeMove { /** The highest obstacle vaulted over, in blocks. |
+| `max_height` | The highest obstacle vaulted over, in blocks. |
 | `max_speed` | Share of the run speed above which crouching and jumping is a long jump rather than a backflip. |
-| `min_height` | Holding towards a wall while falling: the fall is capped, and jump kicks off the wall. Letting go still leaves a few ticks to kick, see {@link WallJumpMove}. / public class WallSlideMove extends ArcadeMove { /** How high above the ground the player has to be. |
+| `min_height` | How high above the ground the player has to be. |
 | `min_slope` | The gentlest descent a slide starts on, as height lost per block travelled. |
 | `min_speed` | Share of the run speed the player needs to move at. |
-| `push` | Kicking off a wall: up and away from it. <p> It is accepted while sliding down the wall, and for a few ticks after leaving it, see {@link fr.hugman.mubble.world.arcade.ArcadeGrace#wallJumpLeniencyTicks()}. / public class WallJumpMove extends ArcMove { /** Speed the kick pushes the player away from the wall at. |
+| `push` | Speed the kick pushes the player away from the wall at. |
 | `reach` | How far the wall may be from the player. |
 | `reverse_dot` | How opposed the stick has to be to the velocity, as the cosine of the angle between them. |
 | `roll_speed` | Speed a roll out of the impact starts at. |
 | `roll_window_ticks` | Ticks after the impact during which crouch and action roll out of it, faster than a roll from standing. |
 | `shimmy_speed` | Speed of the shimmy along the edge. |
-| `side_speed` | Jumping out of a skid: a high somersault towards the new direction. / public class SideSomersaultMove extends ArcMove { /** Speed the somersault carries the player towards the new direction. |
-| `slide_ticks` | The vanilla crouch: slow, low, careful at edges. Crouching at speed slides to a stop first, which is when a jump turns into a long jump. / public class CrouchMove extends ArcadeMove { /** Ticks a crouch started at the run speed takes to slide to a stop. |
+| `side_speed` | Speed the somersault carries the player towards the new direction. |
+| `slide_ticks` | Ticks a crouch started at the run speed takes to slide to a stop. |
 | `slope_gain` | Speed gained per block of step-down, see {@link MoveContext#hugGround}. |
-| `speed` | Crouching and jumping while running: low, far and fast, body flat. / public class LongJumpMove extends ArcMove { /** Speed the long jump launches at, unless the player already goes faster. |
+| `speed` | Speed the long jump launches at, unless the player already goes faster. |
 | `stick_dot` | How squarely the stick has to point at the wall, as the cosine of the largest angle allowed. |
-| `ticks` | Pulling up from a ledge: up along the wall first, then forward onto the edge. / public class LedgeClimbMove extends ArcadeMove { /** How long the pull-up lasts. |
+| `ticks` | How long the pull-up lasts. |
 | `turn_speed` | How fast the stick steers the roll, in degrees per tick. |
-| `variable` | A move launching the player on an arc authored as a height and a number of ticks to its apex: every jump, flip and somersault. / public abstract class ArcMove extends ArcadeMove { public static final MoveParam HEIGHT = MoveParam.blocks("height", 2.2D); public static final MoveParam TICKS_TO_APEX = MoveParam.of("ticks_to_apex", 7.0D, 1.0D, 100.0D, "ticks"); /** 1 when releasing jump early cuts the arc short, 0 when the arc always goes all the way. |
+| `variable` | 1 when releasing jump early cuts the arc short, 0 when the arc always goes all the way. |
 
 ### Hands, attacks and the world
 

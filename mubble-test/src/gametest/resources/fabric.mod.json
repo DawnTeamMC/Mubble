@@ -48,6 +48,7 @@
   "depends": {
     "fabric-gametest-api-v1": "*",
     "mubble": "*",
+    "mubble_arcade": "*",
     "super_mario": "*"
   }
 }

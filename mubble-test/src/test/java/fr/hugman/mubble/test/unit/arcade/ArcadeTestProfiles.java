@@ -1,15 +1,15 @@
 package fr.hugman.mubble.test.unit.arcade;
 
-import fr.hugman.mubble.world.arcade.ArcadeCameraHints;
-import fr.hugman.mubble.world.arcade.ArcadeCosts;
-import fr.hugman.mubble.world.arcade.ArcadeFallDamage;
-import fr.hugman.mubble.world.arcade.ArcadeGrace;
-import fr.hugman.mubble.world.arcade.ArcadePhysics;
-import fr.hugman.mubble.world.arcade.ArcadeProfile;
-import fr.hugman.mubble.world.arcade.ArcadeValidation;
-import fr.hugman.mubble.world.arcade.InteractionPolicy;
-import fr.hugman.mubble.world.arcade.move.ArcadeMove;
-import fr.hugman.mubble.world.arcade.move.MoveSettings;
+import fr.hugman.mubble.arcade.ArcadeCameraHints;
+import fr.hugman.mubble.arcade.ArcadeCosts;
+import fr.hugman.mubble.arcade.ArcadeFallDamage;
+import fr.hugman.mubble.arcade.ArcadeGrace;
+import fr.hugman.mubble.arcade.ArcadePhysics;
+import fr.hugman.mubble.arcade.ArcadeProfile;
+import fr.hugman.mubble.arcade.ArcadeValidation;
+import fr.hugman.mubble.arcade.InteractionPolicy;
+import fr.hugman.mubble.arcade.move.ArcadeMove;
+import fr.hugman.mubble.arcade.move.MoveSettings;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,6 +40,6 @@ public final class ArcadeTestProfiles {
     }
 
     public static MoveSettings settings(Map<String, Double> params) {
-        return new MoveSettings(0.05F, Optional.empty(), Optional.empty(), fr.hugman.mubble.world.arcade.cue.MoveCues.NONE, params);
+        return new MoveSettings(0.05F, Optional.empty(), Optional.empty(), fr.hugman.mubble.arcade.cue.MoveCues.NONE, params);
     }
 }

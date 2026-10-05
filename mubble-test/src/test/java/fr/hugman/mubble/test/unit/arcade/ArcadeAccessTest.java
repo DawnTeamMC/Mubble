@@ -1,16 +1,16 @@
 package fr.hugman.mubble.test.unit.arcade;
 
 import fr.hugman.mubble.Mubble;
-import fr.hugman.mubble.references.ArcadeMoveIds;
-import fr.hugman.mubble.references.ArcadeProfileIds;
+import fr.hugman.mubble.arcade.references.ArcadeMoveIds;
+import fr.hugman.mubble.arcade.references.ArcadeProfileIds;
 import fr.hugman.mubble.test.unit.support.Registrations;
-import fr.hugman.mubble.world.arcade.ArcadeProfile;
-import fr.hugman.mubble.world.arcade.ArcadeUnlocks;
-import fr.hugman.mubble.world.arcade.access.AccessMode;
-import fr.hugman.mubble.world.arcade.access.ArcadeAccess;
-import fr.hugman.mubble.world.arcade.access.ArcadeSource;
-import fr.hugman.mubble.world.arcade.access.MoveSelector;
-import fr.hugman.mubble.world.arcade.move.ArcadeMoves;
+import fr.hugman.mubble.arcade.ArcadeProfile;
+import fr.hugman.mubble.arcade.ArcadeUnlocks;
+import fr.hugman.mubble.arcade.access.AccessMode;
+import fr.hugman.mubble.arcade.access.ArcadeAccess;
+import fr.hugman.mubble.arcade.access.ArcadeSource;
+import fr.hugman.mubble.arcade.access.MoveSelector;
+import fr.hugman.mubble.arcade.move.ArcadeMoves;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -47,7 +47,7 @@ public class ArcadeAccessTest {
         var map = new java.util.LinkedHashMap<MoveSelector, AccessMode>();
         for (int i = 0; i < pairs.length; i += 2) {
             @SuppressWarnings("unchecked")
-            var key = (ResourceKey<fr.hugman.mubble.world.arcade.move.ArcadeMove>) pairs[i];
+            var key = (ResourceKey<fr.hugman.mubble.arcade.move.ArcadeMove>) pairs[i];
             map.put(MoveSelector.move(key), (AccessMode) pairs[i + 1]);
         }
         return map;
@@ -55,7 +55,7 @@ public class ArcadeAccessTest {
 
     private static ArcadeUnlocks owning(ResourceKey<?>... keys) {
         @SuppressWarnings("unchecked")
-        var set = Set.of((ResourceKey<fr.hugman.mubble.world.arcade.move.ArcadeMove>[]) keys);
+        var set = Set.of((ResourceKey<fr.hugman.mubble.arcade.move.ArcadeMove>[]) keys);
         return new ArcadeUnlocks(set);
     }
 

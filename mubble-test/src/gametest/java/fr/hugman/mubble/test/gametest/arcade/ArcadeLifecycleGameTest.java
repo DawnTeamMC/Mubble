@@ -1,30 +1,30 @@
 package fr.hugman.mubble.test.gametest.arcade;
 
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.ACTION;
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.CROUCH;
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.JUMP;
-import static fr.hugman.mubble.world.arcade.sim.ArcadeInputFrame.SPRINT;
+import fr.hugman.mubble.arcade.registries.ArcadeRegistries;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.ACTION;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.CROUCH;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.JUMP;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.SPRINT;
 
-import fr.hugman.mubble.core.registries.MubbleRegistries;
-import fr.hugman.mubble.references.ArcadeMoveIds;
-import fr.hugman.mubble.references.ArcadeProfileIds;
-import fr.hugman.mubble.tags.ArcadeMoveTags;
+import fr.hugman.mubble.arcade.references.ArcadeMoveIds;
+import fr.hugman.mubble.arcade.references.ArcadeProfileIds;
+import fr.hugman.mubble.arcade.tags.ArcadeMoveTags;
 import fr.hugman.mubble.test.gametest.mixin.FoodDataAccessor;
-import fr.hugman.mubble.world.arcade.ArcadeController;
-import fr.hugman.mubble.world.arcade.ArcadeInteraction;
-import fr.hugman.mubble.world.arcade.ArcadePhysics;
-import fr.hugman.mubble.world.arcade.ArcadePlayer;
-import fr.hugman.mubble.world.arcade.ArcadeProfile;
-import fr.hugman.mubble.world.arcade.ArcadeProfiles;
-import fr.hugman.mubble.world.arcade.ArcadeUnlocks;
-import fr.hugman.mubble.world.arcade.access.AccessMode;
-import fr.hugman.mubble.world.arcade.access.ArcadeSource;
-import fr.hugman.mubble.world.arcade.access.ArcadeSources;
-import fr.hugman.mubble.world.arcade.access.MoveSelector;
-import fr.hugman.mubble.world.arcade.move.ArcadeMoves;
-import fr.hugman.mubble.world.entity.ai.attributes.MubbleAttributes;
-import fr.hugman.mubble.world.item.MubbleItems;
-import fr.hugman.mubble.world.reward.ArcadeMoveReward;
+import fr.hugman.mubble.arcade.ArcadeController;
+import fr.hugman.mubble.arcade.ArcadeInteraction;
+import fr.hugman.mubble.arcade.ArcadePhysics;
+import fr.hugman.mubble.arcade.ArcadePlayer;
+import fr.hugman.mubble.arcade.ArcadeProfile;
+import fr.hugman.mubble.arcade.ArcadeProfiles;
+import fr.hugman.mubble.arcade.ArcadeUnlocks;
+import fr.hugman.mubble.arcade.access.AccessMode;
+import fr.hugman.mubble.arcade.access.ArcadeSource;
+import fr.hugman.mubble.arcade.access.ArcadeSources;
+import fr.hugman.mubble.arcade.access.MoveSelector;
+import fr.hugman.mubble.arcade.move.ArcadeMoves;
+import fr.hugman.mubble.arcade.ArcadeAttributes;
+import fr.hugman.mubble.arcade.item.ArcadeItems;
+import fr.hugman.mubble.arcade.reward.ArcadeMoveReward;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +71,7 @@ public class ArcadeLifecycleGameTest {
         client.tickServer();
         var controller = ArcadeController.of(player);
         helper.assertFalse(controller.isActive(), "a player without a source should not have the layer on");
-        helper.assertValueEqual(player.getAttributeBaseValue(MubbleAttributes.ARCADE_RUN_SPEED), MubbleAttributes.ARCADE_RUN_SPEED.value().getDefaultValue(), "base run speed");
+        helper.assertValueEqual(player.getAttributeBaseValue(ArcadeAttributes.ARCADE_RUN_SPEED), ArcadeAttributes.ARCADE_RUN_SPEED.value().getDefaultValue(), "base run speed");
         player.setDeltaMovement(0.0D, 0.0D, 0.0D);
         player.jumpFromGround();
         helper.assertTrue(Math.abs(player.getDeltaMovement().y - 0.42D) < 1.0E-6D, "a vanilla jump should still be one, got " + player.getDeltaMovement().y);
@@ -84,7 +84,7 @@ public class ArcadeLifecycleGameTest {
         var client = player(helper);
         var player = client.server();
         var controller = ArcadeController.of(player);
-        player.setItemSlot(EquipmentSlot.FEET, new ItemStack(MubbleItems.MARIO_BOOTS));
+        player.setItemSlot(EquipmentSlot.FEET, new ItemStack(ArcadeItems.MARIO_BOOTS));
         client.tickServer();
         helper.assertFalse(controller.isActive(), "boots enabling moves the player owns none of should leave the layer off");
 
@@ -117,7 +117,7 @@ public class ArcadeLifecycleGameTest {
         var client = player(helper);
         var player = client.server();
         ArcadeUnlocks.unlock(player, MoveSelector.tag(ArcadeMoveTags.ALL));
-        player.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(MubbleItems.MARIO_BOOTS));
+        player.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ArcadeItems.MARIO_BOOTS));
         client.tickServer();
         helper.assertFalse(ArcadeController.of(player).isActive(), "the component only counts in the slots it names");
         finish(helper, client);
@@ -146,7 +146,7 @@ public class ArcadeLifecycleGameTest {
         var player = client.server();
         var controller = ArcadeController.of(player);
         ArcadeUnlocks.unlock(player, MoveSelector.tag(ArcadeMoveTags.ALL));
-        player.setItemSlot(EquipmentSlot.FEET, new ItemStack(MubbleItems.MARIO_BOOTS));
+        player.setItemSlot(EquipmentSlot.FEET, new ItemStack(ArcadeItems.MARIO_BOOTS));
         var frames = new ArcadeTestKit.Frames().forward().hold(SPRINT);
         for (int i = 0; i < 6; i++) {
             ArcadeTestKit.step(player, frames.next());
@@ -161,7 +161,7 @@ public class ArcadeLifecycleGameTest {
         helper.assertFalse(controller.isActive(), "the layer without the boots");
         helper.assertValueEqual(player.getPose(), Pose.STANDING, "the pose once vanilla is back");
         helper.assertTrue(((ArcadePlayer) player).mubble$arcadeVisual().move() == null, "the move other players see should be cleared");
-        helper.assertValueEqual(player.getAttributeBaseValue(MubbleAttributes.ARCADE_RUN_SPEED), MubbleAttributes.ARCADE_RUN_SPEED.value().getDefaultValue(), "base run speed once the layer is off");
+        helper.assertValueEqual(player.getAttributeBaseValue(ArcadeAttributes.ARCADE_RUN_SPEED), ArcadeAttributes.ARCADE_RUN_SPEED.value().getDefaultValue(), "base run speed once the layer is off");
         helper.assertFalse(ArcadeInteraction.refused(player, ArcadeInteraction.Kind.ATTACK), "hands busy from the roll should not outlive it");
         finish(helper, client);
     }
@@ -271,18 +271,18 @@ public class ArcadeLifecycleGameTest {
                 "the reload listener should have read the profile files, it has " + live.keySet());
 
         // a profile of this test alone, so that tests running alongside keep theirs
-        var key = ResourceKey.create(MubbleRegistries.ARCADE_PROFILE, Identifier.fromNamespaceAndPath("mubble-gametest", "live"));
+        var key = ResourceKey.create(ArcadeRegistries.ARCADE_PROFILE, Identifier.fromNamespaceAndPath("mubble-gametest", "live"));
         var trial = live.get(ArcadeProfileIds.TRIAL);
         try {
             putLive(key, withRunSpeed(trial, 0.55D));
             ArcadeSources.add(player, new ArcadeSource(ArcadeTestKit.SOURCE, Optional.of(key), Map.of(MoveSelector.tag(ArcadeMoveTags.ALL), AccessMode.FORCE), 100, Optional.empty()));
             client.tickServer();
-            helper.assertValueEqual(player.getAttributeBaseValue(MubbleAttributes.ARCADE_RUN_SPEED), 0.55D, "base run speed from the live profile");
+            helper.assertValueEqual(player.getAttributeBaseValue(ArcadeAttributes.ARCADE_RUN_SPEED), 0.55D, "base run speed from the live profile");
 
             // what a reload with an edited file does
             putLive(key, withRunSpeed(trial, 0.25D));
             client.tickServer();
-            helper.assertValueEqual(player.getAttributeBaseValue(MubbleAttributes.ARCADE_RUN_SPEED), 0.25D, "base run speed after the reload");
+            helper.assertValueEqual(player.getAttributeBaseValue(ArcadeAttributes.ARCADE_RUN_SPEED), 0.25D, "base run speed after the reload");
         } finally {
             var restored = new HashMap<>(ArcadeProfiles.serverValues());
             restored.remove(key);

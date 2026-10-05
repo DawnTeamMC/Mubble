@@ -8,9 +8,6 @@ public class MubblePayloadTypes {
     public static final CustomPacketPayload.Type<CollectCollectiblePayload> COLLECT_COLLECTIBLE = of("collectible/collect");
     public static final CustomPacketPayload.Type<PowerUpTriggerPayload> POWER_UP_TRIGGER = of("power_up/trigger");
     public static final CustomPacketPayload.Type<PowerUpChangePayload> POWER_UP_CHANGE = of("power_up/change");
-    public static final CustomPacketPayload.Type<ArcadeInputPayload> ARCADE_INPUT = of("arcade/input");
-    public static final CustomPacketPayload.Type<ArcadeCorrectionPayload> ARCADE_CORRECTION = of("arcade/correction");
-    public static final CustomPacketPayload.Type<ArcadeProfilesPayload> ARCADE_PROFILES = of("arcade/profiles");
 
     public static <T extends CustomPacketPayload> CustomPacketPayload.Type<T> of(String path) {
         return new CustomPacketPayload.Type<>(Mubble.id(path));
@@ -20,8 +17,5 @@ public class MubblePayloadTypes {
         PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.COLLECT_COLLECTIBLE, CollectCollectiblePayload.STREAM_CODEC);
         PayloadTypeRegistry.serverboundPlay().register(MubblePayloadTypes.POWER_UP_TRIGGER, PowerUpTriggerPayload.STREAM_CODEC);
         PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.POWER_UP_CHANGE, PowerUpChangePayload.STREAM_CODEC);
-        PayloadTypeRegistry.serverboundPlay().register(MubblePayloadTypes.ARCADE_INPUT, ArcadeInputPayload.STREAM_CODEC);
-        PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.ARCADE_CORRECTION, ArcadeCorrectionPayload.STREAM_CODEC);
-        PayloadTypeRegistry.clientboundPlay().register(MubblePayloadTypes.ARCADE_PROFILES, ArcadeProfilesPayload.STREAM_CODEC);
     }
 }

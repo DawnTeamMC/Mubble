@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import fr.hugman.mubble.test.unit.support.Registrations;
-import fr.hugman.mubble.world.arcade.ArcadeAim;
+import fr.hugman.mubble.arcade.ArcadeAim;
 import net.minecraft.world.phys.Vec3;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;

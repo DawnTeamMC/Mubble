@@ -1,0 +1,42 @@
+version = getSubprojectVersion(project)
+
+moduleDependencies(project, [
+    'mubble-core',
+])
+
+fabricApi {
+    configureDataGeneration() {
+        outputDirectory = file("src/generated/resources")
+        modId = "mubble_arcade-datagen"
+        createSourceSet = true
+        client = true
+    }
+}
+
+loom {
+    runs {
+        datagen {
+            name "Data Generation"
+            ideConfigGenerated = true
+        }
+    }
+}
+
+repositories {
+    maven {
+        name = 'isXander'
+        url = 'https://maven.isxander.dev/releases'
+        // only the jar is wanted, not the multi-loader variants its metadata describes
+        metadataSources {
+            artifact()
+        }
+        content {
+            includeGroup 'dev.isxander'
+        }
+    }
+}
+
+dependencies {
+    // Controlify: soft optional dependency, compiled against only to give the arcade movement layer its controller bindings, guide and rumble.
+    clientCompileOnly 'dev.isxander:controlify:3.5.3+mc26.2:fabric@jar'
+}
