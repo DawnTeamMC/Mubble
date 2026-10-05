@@ -60,6 +60,8 @@ public final class ArcadeController {
     private boolean suspended;
     /** Whether the player swims, see {@link #swimming()}. */
     private boolean swimming;
+    /** Whether the last step was taken with the orbit camera, see {@link #orbiting()}. */
+    private boolean orbiting;
     private boolean needsReset = true;
 
     // the side predicting the movement
@@ -255,6 +257,31 @@ public final class ArcadeController {
     /** Whether the hands are kept from attacking and using items by the current move. */
     public boolean handsBusy() {
         return this.isDriving() && this.profile.settingsOrDefault(this.state.move).handsBusy(this.state.move);
+    }
+
+    /**
+     * Whether a press of attack or use goes to the moves rather than to the hands: while crouch is
+     * held, where it rolls (on the ground, or on landing), and while the move keeps the hands busy,
+     * where it dives out of a ground pound or boosts a roll. The rest of the time the hands hit and
+     * use the item they hold.
+     */
+    public boolean handsGoToMoves(boolean crouchHeld) {
+        if (!this.isDriving()) {
+            return false;
+        }
+        return this.handsBusy() || crouchHeld && this.allows(ArcadeMoves.ROLL);
+    }
+
+    /**
+     * Whether the player took their last step with the orbit camera on: their hands then reach out
+     * where the body faces, which is never a block, see {@link ArcadeInteraction}.
+     */
+    public boolean orbiting() {
+        return this.isDriving() && this.orbiting;
+    }
+
+    public void setOrbiting(boolean orbiting) {
+        this.orbiting = orbiting;
     }
 
     public InteractionPolicy interaction() {

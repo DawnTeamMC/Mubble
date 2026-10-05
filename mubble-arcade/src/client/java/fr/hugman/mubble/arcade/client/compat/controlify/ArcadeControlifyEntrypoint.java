@@ -10,6 +10,8 @@ import dev.isxander.controlify.bindings.input.AxisInput;
 import dev.isxander.controlify.bindings.input.ButtonInput;
 import dev.isxander.controlify.bindings.input.EmptyInput;
 import dev.isxander.controlify.bindings.input.Input;
+import dev.isxander.controlify.rumble.BasicRumbleEffect;
+import dev.isxander.controlify.rumble.RumbleSource;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.arcade.client.compat.ArcadeControllerBindings;
 import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
@@ -22,23 +24,22 @@ import net.minecraft.resources.Identifier;
 import org.jspecify.annotations.Nullable;
 
 /**
- * The controller bindings of the arcade layer, registered with Controlify when it is installed, laid
- * out as in Super Mario Odyssey: see {@link ArcadeControllerLayout}. They belong to a context of their
- * own, which only applies while the layer drives, so that they neither act nor show as conflicts with
- * Controlify's bindings the rest of the time.
+ * The controller side of the arcade layer, when Controlify is installed: bindings laid out as in Super
+ * Mario Odyssey (see {@link ArcadeControllerLayout}), a button guide that follows them (see
+ * {@link ArcadeGuide}), and rumbles. The bindings belong to a context of their own, which only applies
+ * while the layer drives, so that they neither act nor show as conflicts with Controlify's bindings
+ * the rest of the time; all of them can be rebound in Controlify's controls menu.
  */
 @Environment(EnvType.CLIENT)
 public final class ArcadeControlifyEntrypoint implements ControlifyEntrypoint, ArcadeControllerBindings {
     /** The context of the arcade layout: the layer drives and no screen is open. */
     public static final BindContext ARCADE = new BindContext(Mubble.id("arcade"), minecraft -> ArcadeControllerLayout.active());
 
-    private final Map<String, InputBindingSupplier> bindings = new LinkedHashMap<>();
+    private static final Map<String, InputBindingSupplier> BINDINGS = new LinkedHashMap<>();
     private final Map<String, Integer> bits = Map.of(
             "arcade_jump", ArcadeInputFrame.JUMP,
             "arcade_crouch", ArcadeInputFrame.CROUCH,
             "arcade_crouch_alt", ArcadeInputFrame.CROUCH,
-            "arcade_action", ArcadeInputFrame.ACTION,
-            "arcade_action_alt", ArcadeInputFrame.ACTION,
             "arcade_spin", ArcadeInputFrame.SPIN
     );
     private int previouslyHeld;
@@ -48,13 +49,20 @@ public final class ArcadeControlifyEntrypoint implements ControlifyEntrypoint, A
     public void onControlifyPreInit(PreInitContext context) {
         context.bindings().registerBindContext(ARCADE);
         var category = Component.translatable("key.category." + Mubble.MOD_ID + ".arcade");
-        ArcadeControllerLayout.BINDINGS.forEach((name, input) -> this.bindings.put(name, context.bindings().registerBinding(builder -> builder
+        ArcadeControllerLayout.BINDINGS.forEach((name, input) -> BINDINGS.put(name, context.bindings().registerBinding(builder -> builder
                 .id(Mubble.id(name))
                 .name(Component.translatable("key." + Mubble.MOD_ID + "." + name))
                 .category(category)
                 .defaultInput(defaultInput(input))
                 .allowedContexts(ARCADE))));
+        context.contextualDomains().inGame().registerContributor(ArcadeGuide::contribute);
         ArcadeControllerBindings.Holder.instance = this;
+    }
+
+    /** The binding of the arcade layout named {@code name}, if Controlify registered it. */
+    @Nullable
+    static InputBindingSupplier binding(String name) {
+        return BINDINGS.get(name);
     }
 
     private static Input defaultInput(@Nullable String input) {
@@ -78,7 +86,7 @@ public final class ArcadeControlifyEntrypoint implements ControlifyEntrypoint, A
         if (controller.isEmpty()) {
             return false;
         }
-        var binding = this.bindings.get(name).onOrNull(controller.get());
+        var binding = BINDINGS.get(name).onOrNull(controller.get());
         return binding != null && binding.digitalNow();
     }
 
@@ -110,9 +118,10 @@ public final class ArcadeControlifyEntrypoint implements ControlifyEntrypoint, A
     }
 
     @Override
-    @Nullable
-    public Component glyph(String action) {
-        var supplier = this.bindings.get(action);
-        return supplier == null ? null : supplier.inputGlyph();
+    public void rumble(float strong, float weak, int ticks) {
+        var controlify = ControlifyApi.get();
+        if (!controlify.currentInputMode().isKeyboardMouse()) {
+            controlify.playRumbleEffect(RumbleSource.PLAYER, BasicRumbleEffect.constant(strong, weak, ticks));
+        }
     }
 }

@@ -30,7 +30,7 @@ public final class LocalArcadeDriver implements ArcadeLocalDriver {
         var step = ArcadePrediction.step(player, controller, frame);
         ArcadeRecorder.onStep(localPlayer, step);
         if (!frame.coupled()) {
-            ArcadeCamera.aimIfNeeded(Minecraft.getInstance(), localPlayer);
+            ArcadeCamera.levelHead(localPlayer);
         }
         ClientPlayNetworking.send(step.payload());
         var state = controller.state();

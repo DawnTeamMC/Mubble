@@ -1,10 +1,10 @@
 package fr.hugman.mubble.arcade.client.hud;
 
 import fr.hugman.mubble.arcade.client.ArcadeClientConfig;
+import fr.hugman.mubble.arcade.client.ArcadeClientInput;
 import fr.hugman.mubble.arcade.client.ArcadeKeyMappings;
 import fr.hugman.mubble.arcade.client.ArcadeRecorder;
 import fr.hugman.mubble.arcade.client.animation.ArcadePlayerAnimator;
-import fr.hugman.mubble.arcade.client.compat.ArcadeControllerBindings;
 import fr.hugman.mubble.arcade.ArcadeController;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,11 +75,10 @@ public final class ArcadeDebugHud {
         lines.add(Component.literal("Sources: " + access.sources().stream().map(source -> source.id().toString()).toList()));
         lines.add(Component.literal("Modes: " + access.modes().entrySet().stream().map(entry -> entry.getKey().id().getPath() + "=" + entry.getValue().getSerializedName()).sorted().toList()));
         lines.add(Component.literal("Owned: " + access.unlocks().moves().stream().map(key -> key.identifier().getPath()).sorted().toList()));
-        var controllerBindings = ArcadeControllerBindings.Holder.instance;
-        Component action = controllerBindings != null && controllerBindings.glyph("arcade_action") != null
-                ? controllerBindings.glyph("arcade_action")
-                : ArcadeKeyMappings.ACTION.getTranslatedKeyMessage();
-        lines.add(Component.literal("Action: ").append(action));
+        if (controller.isDriving()) {
+            var hands = controller.handsGoToMoves(ArcadeClientInput.crouchHeld()) ? "moves" : "item";
+            lines.add(Component.literal("Hands: " + hands + (controller.orbiting() ? ", ahead" : ", crosshair")));
+        }
         return lines;
     }
 }

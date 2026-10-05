@@ -4,8 +4,8 @@ import fr.hugman.mubble.arcade.sim.MoveContext;
 import net.minecraft.world.entity.Pose;
 
 /**
- * Action in the air: a forward lunge, body flat, once per airtime. The landing rolls out of it, see
- * {@link RolloutMove}.
+ * Action during a ground pound, as in Super Mario Odyssey: instead of dropping, a forward lunge, body
+ * flat, once per airtime. The landing rolls out of it, see {@link RolloutMove}.
  */
 public class DiveMove extends ArcadeMove {
     /** Speed the dive lunges at, unless the player already goes faster. */
@@ -22,7 +22,7 @@ public class DiveMove extends ArcadeMove {
     @Override
     public boolean canEnter(MoveContext ctx) {
         var state = ctx.state();
-        return !state.grounded && ctx.actionBuffered() && !state.divedThisAir;
+        return !state.grounded && state.move == ArcadeMoves.GROUND_POUND && ctx.actionBuffered() && !state.divedThisAir;
     }
 
     @Override

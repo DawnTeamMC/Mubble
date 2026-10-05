@@ -110,19 +110,20 @@ public class ArcadeProfileProvider extends FabricDynamicRegistryProvider {
         // only the overworld charges food: the trial lists the same moves at no cost
         UnaryOperator<Float> cost = amount -> costs ? amount : 0.0F;
         var dust = cue().surface(5).spread(0.25F).speed(0.04F);
-        var landing = cue().surface(2).perSpeed(14.0F).spread(0.35F).speed(0.06F);
-        var whoosh = cue().sound(SoundEvents.BREEZE_JUMP, 0.35F, 1.6F).surface(5).spread(0.25F).speed(0.04F);
+        // rumbles stay light: a tap of the high frequency motor for a jump, a thud of the low one for an impact
+        var landing = cue().surface(2).perSpeed(14.0F).spread(0.35F).speed(0.06F).rumbleBySpeed(0.3F, 0.15F, 3);
+        var whoosh = cue().sound(SoundEvents.BREEZE_JUMP, 0.35F, 1.6F).surface(5).spread(0.25F).speed(0.04F).rumble(0.0F, 0.25F, 2);
 
         List<MoveBuilder> builders = List.of(
                 move(ArcadeMoves.WALK),
                 move(ArcadeMoves.FALL)
-                        .cue(CueEvent.BOOST, cue().sound(SoundEvents.SLIME_JUMP, 0.8F, 1.0F).particle(ParticleTypes.ITEM_SLIME, 10).spread(0.4F).speed(0.1F)),
+                        .cue(CueEvent.BOOST, cue().sound(SoundEvents.SLIME_JUMP, 0.8F, 1.0F).particle(ParticleTypes.ITEM_SLIME, 10).spread(0.4F).speed(0.1F).rumble(0.3F, 0.3F, 3)),
                 move(ArcadeMoves.LAND)
                         .cue(CueEvent.LAND, landing),
                 move(ArcadeMoves.RUN)
                         .set(GroundMove.EXHAUSTION_PER_BLOCK, costs ? 0.08D : 0.0D),
                 move(ArcadeMoves.SKID)
-                        .cue(CueEvent.START, cue().sound(SoundEvents.GRAVEL_STEP, 0.6F, 1.4F))
+                        .cue(CueEvent.START, cue().sound(SoundEvents.GRAVEL_STEP, 0.6F, 1.4F).rumble(0.0F, 0.15F, 3))
                         .cue(CueEvent.TICK, cue().surface(2).shape(CueShape.TRAIL).spread(0.2F).speed(0.1F)),
                 move(ArcadeMoves.JUMP)
                         .exhaustion(cost.apply(0.05F))
@@ -130,33 +131,33 @@ public class ArcadeProfileProvider extends FabricDynamicRegistryProvider {
                 move(ArcadeMoves.DOUBLE_JUMP)
                         .set(ArcMove.HEIGHT, 3.2D).set(ArcMove.TICKS_TO_APEX, 8.0D).set(JumpMove.MIN_SPEED, 0.2D)
                         .exhaustion(cost.apply(0.07F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_JUMP, 0.4F, 1.3F).surface(7).spread(0.3F).speed(0.05F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_JUMP, 0.4F, 1.3F).surface(7).spread(0.3F).speed(0.05F).rumble(0.05F, 0.3F, 2)),
                 move(ArcadeMoves.TRIPLE_JUMP)
                         .set(ArcMove.HEIGHT, 4.6D).set(ArcMove.TICKS_TO_APEX, 10.0D).set(ArcMove.VARIABLE, 0.0D).set(JumpMove.MIN_SPEED, 0.7D)
                         .exhaustion(cost.apply(0.1F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.PLAYER_ATTACK_SWEEP, 0.5F, 1.4F).particle(ParticleTypes.CLOUD, 6).spread(0.3F).speed(0.05F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.PLAYER_ATTACK_SWEEP, 0.5F, 1.4F).particle(ParticleTypes.CLOUD, 6).spread(0.3F).speed(0.05F).rumble(0.15F, 0.4F, 3)),
                 move(ArcadeMoves.CROUCH),
                 move(ArcadeMoves.GROUND_POUND)
                         .exhaustion(cost.apply(0.05F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.TRIDENT_RIPTIDE_1, 0.5F, 1.6F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.TRIDENT_RIPTIDE_1, 0.5F, 1.6F).rumble(0.0F, 0.2F, 2)),
                 move(ArcadeMoves.GROUND_POUND_LAND)
-                        .cue(CueEvent.LAND, cue().sound(SoundEvents.MACE_SMASH_GROUND, 0.7F, 1.2F).particle(ParticleTypes.CLOUD, 16).shape(CueShape.RING).spread(0.6F).speed(0.3F)),
+                        .cue(CueEvent.LAND, cue().sound(SoundEvents.MACE_SMASH_GROUND, 0.7F, 1.2F).particle(ParticleTypes.CLOUD, 16).shape(CueShape.RING).spread(0.6F).speed(0.3F).rumble(0.6F, 0.4F, 5)),
                 move(ArcadeMoves.GROUND_POUND_JUMP)
                         .set(ArcMove.HEIGHT, 5.0D).set(ArcMove.TICKS_TO_APEX, 11.0D).set(ArcMove.VARIABLE, 0.0D)
                         .exhaustion(cost.apply(0.1F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_WIND_CHARGE_BURST, 0.6F, 1.2F).particle(ParticleTypes.GUST, 1).spread(0.0F).speed(0.0F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_WIND_CHARGE_BURST, 0.6F, 1.2F).particle(ParticleTypes.GUST, 1).spread(0.0F).speed(0.0F).rumble(0.2F, 0.4F, 3)),
                 move(ArcadeMoves.LEDGE_GRAB)
-                        .cue(CueEvent.START, cue().sound(SoundEvents.LADDER_STEP, 0.6F, 1.0F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.LADDER_STEP, 0.6F, 1.0F).rumble(0.0F, 0.2F, 2)),
                 move(ArcadeMoves.LEDGE_CLIMB),
                 move(ArcadeMoves.WALL_SLIDE)
                         .cue(CueEvent.TICK, cue().surface(1).shape(CueShape.TRAIL).spread(0.1F).speed(0.02F).interval(2)),
                 move(ArcadeMoves.WALL_JUMP)
                         .exhaustion(cost.apply(0.1F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_JUMP, 0.4F, 1.4F).particle(ParticleTypes.POOF, 4).spread(0.2F).speed(0.04F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_JUMP, 0.4F, 1.4F).particle(ParticleTypes.POOF, 4).spread(0.2F).speed(0.04F).rumble(0.1F, 0.3F, 2)),
                 move(ArcadeMoves.ROLL)
                         .exhaustion(cost.apply(0.1F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.ARMADILLO_ROLL, 0.6F, 1.2F).surface(4).spread(0.25F).speed(0.05F))
-                        .cue(CueEvent.BOOST, cue().sound(SoundEvents.ARMADILLO_ROLL, 0.6F, 1.5F).particle(ParticleTypes.POOF, 4).shape(CueShape.TRAIL).spread(0.2F).speed(0.05F))
+                        .cue(CueEvent.START, cue().sound(SoundEvents.ARMADILLO_ROLL, 0.6F, 1.2F).surface(4).spread(0.25F).speed(0.05F).rumble(0.25F, 0.2F, 4))
+                        .cue(CueEvent.BOOST, cue().sound(SoundEvents.ARMADILLO_ROLL, 0.6F, 1.5F).particle(ParticleTypes.POOF, 4).shape(CueShape.TRAIL).spread(0.2F).speed(0.05F).rumble(0.1F, 0.3F, 2))
                         .cue(CueEvent.TICK, cue().surface(1).shape(CueShape.TRAIL).spread(0.2F).speed(0.05F).interval(3)),
                 move(ArcadeMoves.ROLL_JUMP)
                         .set(ArcMove.HEIGHT, 1.4D).set(ArcMove.TICKS_TO_APEX, 6.0D).set(ArcMove.AIR_CONTROL, 0.6D)
@@ -166,28 +167,28 @@ public class ArcadeProfileProvider extends FabricDynamicRegistryProvider {
                         .set(ArcMove.HEIGHT, 1.6D).set(ArcMove.TICKS_TO_APEX, 7.0D).set(ArcMove.VARIABLE, 0.0D).set(ArcMove.AIR_CONTROL, 0.6D)
                         .set(LongJumpMove.SPEED, 0.55D).set(LongJumpMove.MIN_SPEED, 0.5D)
                         .exhaustion(cost.apply(0.2F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.PLAYER_ATTACK_SWEEP, 0.4F, 1.1F).surface(6).shape(CueShape.TRAIL).spread(0.3F).speed(0.06F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.PLAYER_ATTACK_SWEEP, 0.4F, 1.1F).surface(6).shape(CueShape.TRAIL).spread(0.3F).speed(0.06F).rumble(0.1F, 0.35F, 3)),
                 move(ArcadeMoves.BACKFLIP)
                         .set(ArcMove.HEIGHT, 5.2D).set(ArcMove.TICKS_TO_APEX, 12.0D).set(ArcMove.VARIABLE, 0.0D).set(ArcMove.AIR_CONTROL, 0.5D)
                         .set(BackflipMove.BACK_SPEED, 0.08D).set(BackflipMove.MAX_SPEED, 0.3D)
                         .exhaustion(cost.apply(0.1F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_JUMP, 0.45F, 1.1F).particle(ParticleTypes.CLOUD, 5).spread(0.3F).speed(0.04F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_JUMP, 0.45F, 1.1F).particle(ParticleTypes.CLOUD, 5).spread(0.3F).speed(0.04F).rumble(0.1F, 0.35F, 3)),
                 move(ArcadeMoves.SIDE_SOMERSAULT)
                         .set(ArcMove.HEIGHT, 4.6D).set(ArcMove.TICKS_TO_APEX, 11.0D).set(ArcMove.VARIABLE, 0.0D).set(ArcMove.AIR_CONTROL, 0.6D)
                         .set(SideSomersaultMove.SIDE_SPEED, 0.15D)
                         .exhaustion(cost.apply(0.1F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_JUMP, 0.45F, 1.2F).particle(ParticleTypes.CLOUD, 5).spread(0.3F).speed(0.04F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.BREEZE_JUMP, 0.45F, 1.2F).particle(ParticleTypes.CLOUD, 5).spread(0.3F).speed(0.04F).rumble(0.1F, 0.35F, 3)),
                 move(ArcadeMoves.DIVE)
                         .exhaustion(cost.apply(0.1F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.PLAYER_ATTACK_SWEEP, 0.5F, 0.8F).particle(ParticleTypes.POOF, 3).shape(CueShape.TRAIL).spread(0.2F).speed(0.03F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.PLAYER_ATTACK_SWEEP, 0.5F, 0.8F).particle(ParticleTypes.POOF, 3).shape(CueShape.TRAIL).spread(0.2F).speed(0.03F).rumble(0.1F, 0.3F, 3)),
                 move(ArcadeMoves.ROLLOUT)
-                        .cue(CueEvent.LAND, cue().sound(SoundEvents.ARMADILLO_ROLL, 0.5F, 1.0F).surface(3).perSpeed(10.0F).spread(0.3F).speed(0.05F)),
+                        .cue(CueEvent.LAND, cue().sound(SoundEvents.ARMADILLO_ROLL, 0.5F, 1.0F).surface(3).perSpeed(10.0F).spread(0.3F).speed(0.05F).rumble(0.2F, 0.2F, 3)),
                 move(ArcadeMoves.SPIN)
                         .exhaustion(cost.apply(0.05F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.TRIDENT_RIPTIDE_1, 0.4F, 2.0F).particle(ParticleTypes.CLOUD, 8).shape(CueShape.RING).spread(0.5F).speed(0.08F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.TRIDENT_RIPTIDE_1, 0.4F, 2.0F).particle(ParticleTypes.CLOUD, 8).shape(CueShape.RING).spread(0.5F).speed(0.08F).rumble(0.0F, 0.25F, 4)),
                 move(ArcadeMoves.VAULT)
                         .exhaustion(cost.apply(0.05F))
-                        .cue(CueEvent.START, cue().sound(SoundEvents.PLAYER_ATTACK_NODAMAGE, 0.4F, 1.3F)),
+                        .cue(CueEvent.START, cue().sound(SoundEvents.PLAYER_ATTACK_NODAMAGE, 0.4F, 1.3F).rumble(0.0F, 0.2F, 2)),
                 move(ArcadeMoves.SLIDE)
                         .cue(CueEvent.START, dust)
                         .cue(CueEvent.TICK, cue().surface(1).shape(CueShape.TRAIL).spread(0.25F).speed(0.05F).interval(2))

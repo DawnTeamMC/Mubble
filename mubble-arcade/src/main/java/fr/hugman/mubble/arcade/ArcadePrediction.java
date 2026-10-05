@@ -51,6 +51,7 @@ public final class ArcadePrediction {
         player.setDeltaMovement(written);
         controller.setWrittenVelocity(written);
         player.setSprinting(false);
+        controller.setOrbiting(!frame.coupled());
         if (!frame.coupled()) {
             player.setYRot(state.facing);
         }

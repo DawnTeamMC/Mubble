@@ -2,7 +2,6 @@ package fr.hugman.mubble.arcade.client.compat;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.network.chat.Component;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -20,9 +19,8 @@ public interface ArcadeControllerBindings {
     /** Whether recenter was pressed since the previous call. */
     boolean recenterPressed();
 
-    /** The glyph of the button bound to {@code action} on the current controller, if any. */
-    @Nullable
-    Component glyph(String action);
+    /** Rumbles the current controller, if the player plays on one, see {@link fr.hugman.mubble.arcade.cue.Cue.Rumble}. */
+    void rumble(float strong, float weak, int ticks);
 
     final class Holder {
         @Nullable

@@ -2,7 +2,6 @@ package fr.hugman.mubble.arcade.client.mixin;
 
 import fr.hugman.mubble.arcade.client.camera.ArcadeCamera;
 import fr.hugman.mubble.arcade.ArcadeController;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.HitResult;
@@ -13,12 +12,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LocalPlayer.class)
 public class ArcadeLocalPlayerMixin {
-    /** The crosshair of the orbit camera, checked from the eyes of the player. */
+    /** With the orbit camera on, the hands reach out where the body faces, and never to a block. */
     @Inject(method = "raycastHitResult", at = @At("HEAD"), cancellable = true)
     private void mubble$pickFromTheOrbit(float partialTicks, Entity cameraEntity, CallbackInfoReturnable<HitResult> cir) {
         var player = (LocalPlayer) (Object) this;
         if (cameraEntity == player && ArcadeCamera.isOrbiting()) {
-            cir.setReturnValue(ArcadeCamera.pick(Minecraft.getInstance(), player, partialTicks));
+            cir.setReturnValue(ArcadeCamera.pick(player, partialTicks));
         }
     }
 

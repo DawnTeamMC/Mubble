@@ -23,6 +23,7 @@ public final class CueBuilder {
     private float spread = 0.3F;
     private float speed = 0.05F;
     private int interval = 1;
+    private Optional<Cue.Rumble> rumble = Optional.empty();
 
     public static CueBuilder cue() {
         return new CueBuilder();
@@ -80,7 +81,19 @@ public final class CueBuilder {
         return this;
     }
 
+    /** A light rumble of the controller of the player making the move. */
+    public CueBuilder rumble(float strong, float weak, int ticks) {
+        this.rumble = Optional.of(new Cue.Rumble(strong, weak, ticks, false));
+        return this;
+    }
+
+    /** A rumble scaled down by the speed of the cue, for landings. */
+    public CueBuilder rumbleBySpeed(float strong, float weak, int ticks) {
+        this.rumble = Optional.of(new Cue.Rumble(strong, weak, ticks, true));
+        return this;
+    }
+
     public Cue build() {
-        return new Cue(this.sound, this.volume, this.pitch, this.particle, this.surface, this.shape, this.count, this.countPerSpeed, this.spread, this.speed, this.interval);
+        return new Cue(this.sound, this.volume, this.pitch, this.particle, this.surface, this.shape, this.count, this.countPerSpeed, this.spread, this.speed, this.interval, this.rumble);
     }
 }

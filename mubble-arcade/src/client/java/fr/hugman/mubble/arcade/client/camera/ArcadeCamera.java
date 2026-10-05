@@ -20,10 +20,10 @@ import org.jspecify.annotations.Nullable;
  * <p>
  * The camera has its own yaw and pitch, moved by the mouse or the right stick, and the stick moves
  * the player relative to it: the body turns towards where it goes, the view does not follow, and the
- * head looks at the horizon unless the player aims at something. The camera trails the player a
- * little, pulls in rather than going through blocks, swings back behind the player on recenter, and
- * blends with the vanilla view when one takes over from the other. Aiming, mining, placing and
- * attacking go where its crosshair is, as long as the player could reach it from their own eyes.
+ * head looks at the horizon. The camera trails the player a little, pulls in rather than going
+ * through blocks, swings back behind the player on recenter, and blends with the vanilla view when
+ * one takes over from the other. The hands do not follow the camera: they hit and use items where the
+ * body faces, see {@link ArcadeAim#pickAhead}.
  */
 @Environment(EnvType.CLIENT)
 public final class ArcadeCamera {
@@ -192,37 +192,18 @@ public final class ArcadeCamera {
         return (float) (1.0D + ArcadeClientConfig.get().fovKick() * hint * share);
     }
 
-    /**
-     * What the crosshair of the orbit camera points at, if the player could reach it from their own
-     * eyes: within the vanilla reach, and with nothing in the way. The ray starts level with the
-     * player, so that what stands between the camera and the player is never picked.
-     */
-    public static HitResult pick(Minecraft minecraft, LocalPlayer player, float partialTicks) {
-        var camera = minecraft.gameRenderer.mainCamera();
-        return ArcadeAim.pick(player, camera.position(), Vec3.directionFromRotation(camera.xRot(), camera.yRot()), player.getEyePosition(partialTicks));
+    /** What the hands of the player reach out to with the orbit camera on: what stands where they face, see {@link ArcadeAim#pickAhead}. */
+    public static HitResult pick(LocalPlayer player, float partialTicks) {
+        return ArcadeAim.pickAhead(player, player.getEyePosition(partialTicks), player.getYRot());
     }
 
     /**
-     * Turns the player towards what the crosshair shows while they attack or use something, so that a
-     * bow shoots, and a block faces, where the camera looks rather than where the body runs.
+     * Keeps the head of the player level with the horizon while the orbit camera is on: the hands
+     * reach out where the body faces, whatever the camera looks at.
      */
-    public static void aimIfNeeded(Minecraft minecraft, LocalPlayer player) {
-        if (!isOrbiting()) {
-            return;
-        }
-        var options = minecraft.options;
-        if (!options.keyUse.isDown() && !options.keyAttack.isDown() && !player.isUsingItem()) {
-            // not aiming at anything: the head goes back to the horizon, the body facing where it runs
+    public static void levelHead(LocalPlayer player) {
+        if (isOrbiting()) {
             player.setXRot(Mth.approach(player.getXRot(), 0.0F, HEAD_LEVEL_SPEED));
-            return;
         }
-        var camera = minecraft.gameRenderer.mainCamera();
-        var forward = Vec3.directionFromRotation(camera.xRot(), camera.yRot());
-        var hit = minecraft.hitResult;
-        var aim = hit != null && hit.getType() != HitResult.Type.MISS ? hit.getLocation() : camera.position().add(forward.scale(64.0D));
-        var direction = aim.subtract(player.getEyePosition());
-        double horizontal = Math.sqrt(direction.x * direction.x + direction.z * direction.z);
-        player.setYRot((float) (Mth.atan2(direction.z, direction.x) * Mth.RAD_TO_DEG) - 90.0F);
-        player.setXRot((float) -(Mth.atan2(direction.y, horizontal) * Mth.RAD_TO_DEG));
     }
 }

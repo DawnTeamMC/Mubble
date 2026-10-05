@@ -8,6 +8,7 @@ import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.SPRINT;
 
 import fr.hugman.mubble.arcade.references.ArcadeProfileIds;
 import fr.hugman.mubble.arcade.ArcadeController;
+import fr.hugman.mubble.arcade.ArcadePreview;
 import fr.hugman.mubble.arcade.move.ArcadeMove;
 import fr.hugman.mubble.arcade.move.ArcadeMoves;
 import fr.hugman.mubble.arcade.sim.ArcadeInputCollector;
@@ -507,19 +508,26 @@ public class ArcadeMovementGameTest {
     @GameTest(structure = ArcadeTestKit.LANE)
     public void diveLandsIntoARollout(GameTestHelper helper) {
         ArcadeTestKit.floor(helper);
-        var player = standing(helper, new BlockPos(5, 1, 4));
+        // a ledge four blocks up to run off, high enough for a ground pound
+        ArcadeTestKit.fill(helper, new BlockPos(3, 1, 1), new BlockPos(7, 3, 4), Blocks.STONE.defaultBlockState());
+        var player = standing(helper, new BlockPos(5, 4, 2));
         var frames = new ArcadeTestKit.Frames().forward().hold(SPRINT);
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 20 && player.onGround(); i++) {
             ArcadeTestKit.step(player, frames.next());
         }
-        ArcadeTestKit.step(player, frames.press(JUMP));
+        helper.assertFalse(player.onGround(), "the stand-in never ran off the ledge, the test proves nothing");
+
+        // action alone in the air is for the hands: no dive
+        ArcadeTestKit.step(player, frames.tap(ACTION));
         ArcadeTestKit.step(player, frames.next());
-        ArcadeTestKit.step(player, frames.press(ACTION));
-        // pressed within the cancel window of the jump, the buffered press dives as soon as it ends
-        for (int i = 0; i < 3 && move(player) != ArcadeMoves.DIVE; i++) {
-            ArcadeTestKit.step(player, frames.next());
-        }
-        helper.assertValueEqual(move(player), ArcadeMoves.DIVE, "action in the air");
+        helper.assertFalse(move(player) == ArcadeMoves.DIVE, "action in the air, without a ground pound");
+
+        // as in Super Mario Odyssey: ground pound, then action
+        ArcadeTestKit.step(player, frames.press(CROUCH));
+        helper.assertValueEqual(move(player), ArcadeMoves.GROUND_POUND, "crouch in the air");
+        ArcadeTestKit.step(player, frames.tap(ACTION));
+        helper.assertValueEqual(move(player), ArcadeMoves.DIVE, "action during a ground pound");
+        frames.letGo(CROUCH);
         // the lunge, less the air drag of the trial profile on the tick it starts
         double lunge = ArcadeController.of(player).state().horizontalSpeed();
         helper.assertTrue(lunge >= 0.5D * 0.99D - 1.0E-9D, "a dive lunges at least at 0.5 b/t, got " + lunge);
@@ -527,6 +535,38 @@ public class ArcadeMovementGameTest {
             ArcadeTestKit.step(player, frames.next());
         }
         helper.assertValueEqual(move(player), ArcadeMoves.ROLLOUT, "the landing of a dive");
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void thePreviewOfTheGuideTellsWhatEachButtonWouldStart(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        ArcadeTestKit.fill(helper, new BlockPos(3, 1, 1), new BlockPos(7, 3, 4), Blocks.STONE.defaultBlockState());
+        var player = standing(helper, new BlockPos(5, 4, 2));
+        var controller = ArcadeController.of(player);
+        var frames = new ArcadeTestKit.Frames();
+        var before = move(player);
+        helper.assertValueEqual(ArcadePreview.ifPressed(controller, frames.next(), JUMP), ArcadeMoves.JUMP, "jump, standing");
+        helper.assertValueEqual(ArcadePreview.ifPressed(controller, frames.next(), CROUCH), ArcadeMoves.CROUCH, "crouch, standing");
+        // previews change nothing
+        helper.assertValueEqual(move(player), before, "the move after the previews");
+
+        ArcadeTestKit.step(player, frames.press(CROUCH));
+        helper.assertValueEqual(ArcadePreview.ifPressed(controller, frames.next(), JUMP), ArcadeMoves.BACKFLIP, "jump, crouching still");
+        helper.assertValueEqual(ArcadePreview.ifPressed(controller, frames.next(), ACTION), ArcadeMoves.ROLL, "action, crouching");
+        helper.assertTrue(ArcadePreview.ifPressed(controller, frames.next(), CROUCH) == null, "crouch, already crouching");
+        frames.letGo(CROUCH);
+        ArcadeTestKit.step(player, frames.next());
+
+        // off the ledge: crouch pounds, and action dives once it does
+        frames.forward().hold(SPRINT);
+        for (int i = 0; i < 20 && player.onGround(); i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        helper.assertValueEqual(ArcadePreview.ifPressed(controller, frames.next(), CROUCH), ArcadeMoves.GROUND_POUND, "crouch, in the air");
+        helper.assertTrue(ArcadePreview.ifPressed(controller, frames.next(), ACTION) == null, "action, in the air without a ground pound");
+        ArcadeTestKit.step(player, frames.press(CROUCH));
+        helper.assertValueEqual(ArcadePreview.ifPressed(controller, frames.next(), ACTION), ArcadeMoves.DIVE, "action, during a ground pound");
         helper.succeed();
     }
 
