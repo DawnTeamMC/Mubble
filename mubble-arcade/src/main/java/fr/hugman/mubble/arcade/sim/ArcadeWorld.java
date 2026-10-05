@@ -2,7 +2,9 @@ package fr.hugman.mubble.arcade.sim;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -120,5 +122,37 @@ public final class ArcadeWorld {
     public float jumpFactor(Vec3 position) {
         float here = this.blockState(BlockPos.containing(position)).getBlock().getJumpFactor();
         return here == 1.0F ? this.blockState(this.supportingPos(position)).getBlock().getJumpFactor() : here;
+    }
+
+    /**
+     * How deep in water {@code box} stands: from its bottom up to the highest water surface it
+     * touches, as vanilla measures the fluid height of an entity. 0 out of water.
+     */
+    public double waterDepth(AABB box) {
+        var inner = box.deflate(0.001D);
+        int minX = Mth.floor(inner.minX);
+        int maxX = Mth.ceil(inner.maxX);
+        int minY = Mth.floor(inner.minY);
+        int maxY = Mth.ceil(inner.maxY);
+        int minZ = Mth.floor(inner.minZ);
+        int maxZ = Mth.ceil(inner.maxZ);
+        var level = this.level();
+        var pos = new BlockPos.MutableBlockPos();
+        double surface = Double.NEGATIVE_INFINITY;
+        for (int x = minX; x < maxX; x++) {
+            for (int y = minY; y < maxY; y++) {
+                for (int z = minZ; z < maxZ; z++) {
+                    pos.set(x, y, z);
+                    var fluid = level.getFluidState(pos);
+                    if (fluid.is(FluidTags.WATER)) {
+                        double height = y + fluid.getHeight(level, pos);
+                        if (height >= inner.minY) {
+                            surface = Math.max(surface, height);
+                        }
+                    }
+                }
+            }
+        }
+        return surface == Double.NEGATIVE_INFINITY ? 0.0D : surface - inner.minY;
     }
 }

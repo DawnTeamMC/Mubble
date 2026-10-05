@@ -67,6 +67,8 @@ public final class ArcadeTranslations {
         t.put(move("spin"), pair("Spin", "Tourbillon"));
         t.put(move("vault"), pair("Vault", "Franchissement"));
         t.put(move("slide"), pair("Slide", "Glissade"));
+        t.put(move("swim"), pair("Swim", "Nage"));
+        t.put(move("swim_dash"), pair("Swim Dash", "Élan aquatique"));
 
         // the item
         t.put("item." + M + ".mario_boots", pair("Mario Boots", "Bottes de Mario"));

@@ -33,7 +33,7 @@ public final class ArcadeSimulation {
         state.vx = impulse.x;
         state.vy = impulse.y;
         state.vz = impulse.z;
-        if (impulse.y > LAUNCH_THRESHOLD) {
+        if (impulse.y > LAUNCH_THRESHOLD && state.move.kind() != ArcadeMove.Kind.WATER) {
             state.grounded = false;
             state.coyote = 0;
             state.arcGravity = 0.0D;
@@ -68,6 +68,8 @@ public final class ArcadeSimulation {
             ctx.switchTo(state.move.isAirborne() || !state.grounded ? ArcadeMoves.FALL : ctx.baseGroundMove());
         }
 
+        water(ctx);
+
         var exit = state.move.exit(ctx);
         if (exit != null && exit != state.move) {
             ctx.switchTo(exit);
@@ -92,6 +94,30 @@ public final class ArcadeSimulation {
             state.negateFallDamage = true;
         }
         return ctx;
+    }
+
+    /**
+     * Water deep enough to swim in takes the player over, and lets go of them once out of it, or once
+     * they stand in water too shallow to swim. A pound carries on down, slowed by the water, a dive
+     * carries on as a dash, and a player rising out of the water is left to rise.
+     */
+    private static void water(MoveContext ctx) {
+        var state = ctx.state();
+        var move = state.move;
+        if (move.kind() == ArcadeMove.Kind.WATER) {
+            if (ctx.waterDepth() <= 0.0D) {
+                ctx.switchTo(state.grounded ? ctx.baseGroundMove() : ArcadeMoves.FALL);
+            } else if (state.grounded && !ctx.inDeepWater()) {
+                ctx.switchTo(ctx.baseGroundMove());
+            }
+            return;
+        }
+        if (!ctx.inDeepWater() || move.kind() == ArcadeMove.Kind.ATTACHED
+                || move == ArcadeMoves.GROUND_POUND || move == ArcadeMoves.GROUND_POUND_LAND
+                || move.kind() == ArcadeMove.Kind.AIR && state.vy > 0.0D) {
+            return;
+        }
+        ctx.switchTo(move == ArcadeMoves.DIVE && ctx.allowed(ArcadeMoves.SWIM_DASH) ? ArcadeMoves.SWIM_DASH : ArcadeMoves.SWIM);
     }
 
     /**

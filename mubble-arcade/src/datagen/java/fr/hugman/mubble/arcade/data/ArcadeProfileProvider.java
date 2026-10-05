@@ -191,7 +191,13 @@ public class ArcadeProfileProvider extends FabricDynamicRegistryProvider {
                         .cue(CueEvent.START, cue().sound(SoundEvents.PLAYER_ATTACK_NODAMAGE, 0.4F, 1.3F).rumble(0.0F, 0.2F, 2)),
                 move(ArcadeMoves.SLIDE)
                         .cue(CueEvent.START, dust)
-                        .cue(CueEvent.TICK, cue().surface(1).shape(CueShape.TRAIL).spread(0.25F).speed(0.05F).interval(2))
+                        .cue(CueEvent.TICK, cue().surface(1).shape(CueShape.TRAIL).spread(0.25F).speed(0.05F).interval(2)),
+                move(ArcadeMoves.SWIM)
+                        .cue(CueEvent.BOOST, cue().sound(SoundEvents.PLAYER_SWIM, 0.4F, 1.2F).particle(ParticleTypes.BUBBLE, 6).spread(0.3F).speed(0.05F).rumble(0.0F, 0.15F, 2)),
+                move(ArcadeMoves.SWIM_DASH)
+                        .exhaustion(cost.apply(0.1F))
+                        .cue(CueEvent.START, cue().sound(SoundEvents.TRIDENT_RIPTIDE_1, 0.4F, 1.4F).particle(ParticleTypes.BUBBLE, 10).shape(CueShape.TRAIL).spread(0.3F).speed(0.08F).rumble(0.1F, 0.3F, 3))
+                        .cue(CueEvent.TICK, cue().particle(ParticleTypes.BUBBLE, 2).shape(CueShape.TRAIL).spread(0.2F).speed(0.05F).interval(2))
         );
 
         // ordered by id, so that the generated files come out the same on every run

@@ -34,6 +34,8 @@ import net.minecraft.world.entity.player.Player;
  * @param stepHeight       value of the vanilla step height attribute
  * @param levitation       amplifier of the levitation effect, or -1
  * @param slowFalling      whether slow falling is on
+ * @param waterEfficiency  value of the vanilla water movement efficiency attribute: depth strider
+ * @param dolphinsGrace    whether dolphin's grace is on
  */
 public record ArcadeTuning(
         ArcadeProfile profile,
@@ -51,7 +53,9 @@ public record ArcadeTuning(
         double sneakingSpeed,
         double stepHeight,
         int levitation,
-        boolean slowFalling
+        boolean slowFalling,
+        double waterEfficiency,
+        boolean dolphinsGrace
 ) {
     /** The vanilla default of the gravity attribute, which the profile gravities are written against. */
     public static final double VANILLA_GRAVITY = 0.08D;
@@ -77,7 +81,9 @@ public record ArcadeTuning(
                 player.getAttributeValue(Attributes.SNEAKING_SPEED),
                 player.getAttributeValue(Attributes.STEP_HEIGHT),
                 levitation == null ? -1 : levitation.getAmplifier(),
-                player.hasEffect(MobEffects.SLOW_FALLING)
+                player.hasEffect(MobEffects.SLOW_FALLING),
+                player.getAttributeValue(Attributes.WATER_MOVEMENT_EFFICIENCY),
+                player.hasEffect(MobEffects.DOLPHINS_GRACE)
         );
     }
 

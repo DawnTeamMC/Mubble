@@ -17,4 +17,12 @@ public class LivingEntityArcadeMixin {
             ci.cancel();
         }
     }
+
+    /** Nor vanilla's strokes in water: the arcade swim rises and sinks on its own, see {@link fr.hugman.mubble.arcade.move.SwimMove}. */
+    @Inject(method = {"jumpInLiquid", "goDownInWater"}, at = @At("HEAD"), cancellable = true)
+    private void mubble$noVanillaStrokes(CallbackInfo ci) {
+        if ((Object) this instanceof Player player && ArcadeController.of(player).isDriving()) {
+            ci.cancel();
+        }
+    }
 }

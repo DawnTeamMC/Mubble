@@ -40,7 +40,7 @@ public final class ArcadeMoves {
     public static final ArcadeMove CROUCH = register(ArcadeMoveIds.CROUCH, new CrouchMove(Properties.of(Kind.GROUND).entryPriority(10)
             .params(CrouchMove.SLIDE_TICKS)));
     public static final ArcadeMove GROUND_POUND = register(ArcadeMoveIds.GROUND_POUND, new GroundPoundMove(Properties.of(Kind.AIR).entryPriority(45).handsBusy()
-            .params(GroundPoundMove.HANG_TICKS, GroundPoundMove.DROP_SPEED, GroundPoundMove.MIN_HEIGHT)));
+            .params(GroundPoundMove.HANG_TICKS, GroundPoundMove.DROP_SPEED, GroundPoundMove.MIN_HEIGHT, GroundPoundMove.WATER_DROP)));
     public static final ArcadeMove GROUND_POUND_LAND = register(ArcadeMoveIds.GROUND_POUND_LAND, new GroundPoundLandMove(Properties.of(Kind.GROUND).handsBusy()
             .accessParent(() -> ArcadeMoves.GROUND_POUND)
             .params(GroundPoundLandMove.TICKS, GroundPoundLandMove.JUMP_WINDOW, GroundPoundLandMove.ROLL_WINDOW, GroundPoundLandMove.ROLL_SPEED)));
@@ -80,6 +80,13 @@ public final class ArcadeMoves {
             .params(VaultMove.MAX_HEIGHT, VaultMove.MIN_SPEED, VaultMove.TICKS)));
     public static final ArcadeMove SLIDE = register(ArcadeMoveIds.SLIDE, new SlideMove(Properties.of(Kind.GROUND).entryPriority(25)
             .params(SlideMove.MIN_SPEED, SlideMove.MIN_SLOPE, SlideMove.GAIN, SlideMove.FLAT_DECEL, SlideMove.EXIT_SPEED, SlideMove.TURN_SPEED, SlideMove.SLOPE_GAIN)));
+
+    // water
+    public static final ArcadeMove SWIM = register(ArcadeMoveIds.SWIM, new SwimMove(Properties.of(Kind.WATER).base()
+            .params(SwimMove.ACCEL, SwimMove.DRAG, SwimMove.SPRINT_DRAG, SwimMove.RISE, SwimMove.SINK, SwimMove.STROKE, SwimMove.SURFACE_DEPTH, SwimMove.TURN_SPEED)));
+    public static final ArcadeMove SWIM_DASH = register(ArcadeMoveIds.SWIM_DASH, new SwimDashMove(Properties.of(Kind.WATER).entryPriority(42).handsBusy()
+            .accessParent(() -> ArcadeMoves.DIVE)
+            .params(SwimDashMove.SPEED, SwimDashMove.TICKS, SwimDashMove.DRAG, SwimDashMove.TURN_SPEED)));
 
     /** The moves that may cut an airborne move short once its cancel window is over. */
     private static final Set<ArcadeMove> AERIAL_FOLLOW_UPS = Set.of(GROUND_POUND, DIVE, SPIN, LEDGE_GRAB, WALL_SLIDE, WALL_JUMP);

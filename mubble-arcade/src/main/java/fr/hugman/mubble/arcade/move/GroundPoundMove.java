@@ -5,7 +5,8 @@ import fr.hugman.mubble.arcade.sim.MoveContext;
 /**
  * Crouching in the air: a brief hang, then a straight, fast drop. Its landing takes no fall damage
  * and can be jumped out of very high, see {@link GroundPoundJumpMove}. Action, at any point of it,
- * dives forward instead, see {@link DiveMove}.
+ * dives forward instead, see {@link DiveMove}. In water, the drop is slower, and action dashes, see
+ * {@link SwimDashMove}.
  */
 public class GroundPoundMove extends ArcadeMove {
     /** How long the player hangs before dropping. */
@@ -14,6 +15,8 @@ public class GroundPoundMove extends ArcadeMove {
     public static final MoveParam DROP_SPEED = MoveParam.speed("drop_speed", 1.2D);
     /** How high above the ground the player has to be. */
     public static final MoveParam MIN_HEIGHT = MoveParam.blocks("min_height", 1.0D);
+    /** Share of the drop speed left in water, which slows the pound down. */
+    public static final MoveParam WATER_DROP = MoveParam.factor("water_drop", 0.35D);
 
     public GroundPoundMove(Properties properties) {
         super(properties);
@@ -42,14 +45,18 @@ public class GroundPoundMove extends ArcadeMove {
         if (state.moveTicks < ctx.settings(this).ticks(HANG_TICKS)) {
             ctx.holdVertical();
         } else {
-            state.vy = -ctx.tuning().groundPoundSpeed();
+            double speed = ctx.tuning().groundPoundSpeed();
+            if (ctx.waterDepth() > 0.0D) {
+                speed *= ctx.param(this, WATER_DROP);
+            }
+            state.vy = -speed;
             ctx.setVerticalDisplacement(state.vy);
         }
     }
 
     @Override
     public boolean allowsInterruption(ArcadeMove next, MoveContext ctx) {
-        return next == ArcadeMoves.DIVE;
+        return next == ArcadeMoves.DIVE || next == ArcadeMoves.SWIM_DASH;
     }
 
     @Override

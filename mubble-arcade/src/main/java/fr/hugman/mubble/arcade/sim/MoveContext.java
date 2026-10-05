@@ -7,6 +7,7 @@ import fr.hugman.mubble.arcade.ArcadeProfile;
 import fr.hugman.mubble.arcade.cue.CueEvent;
 import fr.hugman.mubble.arcade.move.ArcadeMove;
 import fr.hugman.mubble.arcade.move.ArcadeMoves;
+import fr.hugman.mubble.arcade.move.SwimMove;
 import fr.hugman.mubble.arcade.move.MoveParam;
 import fr.hugman.mubble.arcade.move.MoveSettings;
 import net.minecraft.core.BlockPos;
@@ -28,6 +29,9 @@ import org.jspecify.annotations.Nullable;
  * allowed to differ from one JVM, or one JIT tier, to another.
  */
 public final class MoveContext {
+    /** How deep the water has to be to swim in it, as vanilla's fluid jump threshold of a player. */
+    public static final double SWIM_DEPTH = 0.4D;
+
     private static final float DEGREES_TO_RADIANS = Mth.DEG_TO_RAD;
     private static final double EPSILON = 1.0E-7D;
     /** Friction of a plain block, against which the grip of every other block is measured. */
@@ -68,6 +72,8 @@ public final class MoveContext {
 
     @Nullable
     private MoveResult result;
+    /** How deep in water the player stands, probed on first use. */
+    private double waterDepth = -1.0D;
 
     MoveContext(ArcadeState state, ArcadeInputFrame input, ArcadeTuning tuning, ArcadeWorld world, Vec3 start) {
         this.state = state;
@@ -251,9 +257,25 @@ public final class MoveContext {
         this.state.actionBufferMs = 0;
     }
 
-    /** Whether a jump may start from here: on the ground, or still within coyote time. */
+    /** Whether a jump may start from here: on the ground, still within coyote time, or swimming at the surface. */
     public boolean canJumpFromHere() {
+        if (this.state.move == ArcadeMoves.SWIM) {
+            return this.waterDepth() <= this.param(ArcadeMoves.SWIM, SwimMove.SURFACE_DEPTH);
+        }
         return this.state.grounded || this.state.coyote > 0;
+    }
+
+    /** How deep in water the player stands at the start of the step: 0 out of water. */
+    public double waterDepth() {
+        if (this.waterDepth < 0.0D) {
+            this.waterDepth = this.world.waterDepth(this.box());
+        }
+        return this.waterDepth;
+    }
+
+    /** Whether the water is deep enough to swim in: deeper than vanilla wades in. */
+    public boolean inDeepWater() {
+        return this.waterDepth() > SWIM_DEPTH;
     }
 
     /** Whether the stick was spun around fast enough to ask for a spin, and has not asked for one since. */

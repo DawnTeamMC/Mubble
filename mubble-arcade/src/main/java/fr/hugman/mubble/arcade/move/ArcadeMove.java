@@ -114,7 +114,7 @@ public abstract class ArcadeMove {
         return switch (this.properties.kind) {
             case GROUND -> true;
             case AIR -> next.kind() != Kind.GROUND && ArcadeMoves.isAerialFollowUp(next) && ctx.state().moveTicks >= ctx.cancelWindow(this);
-            case ATTACHED -> false;
+            case ATTACHED, WATER -> false;
         };
     }
 
@@ -157,7 +157,9 @@ public abstract class ArcadeMove {
         /** In the air: landing goes back to the ground. */
         AIR,
         /** Held by something: a ledge, a wall. Only the move itself decides how it ends. */
-        ATTACHED
+        ATTACHED,
+        /** In water: leaving it falls, or stands on the ground it reached. */
+        WATER
     }
 
     public static final class Properties {

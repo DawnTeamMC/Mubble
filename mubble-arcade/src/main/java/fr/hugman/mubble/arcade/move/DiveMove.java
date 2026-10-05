@@ -22,7 +22,7 @@ public class DiveMove extends ArcadeMove {
     @Override
     public boolean canEnter(MoveContext ctx) {
         var state = ctx.state();
-        return !state.grounded && state.move == ArcadeMoves.GROUND_POUND && ctx.actionBuffered() && !state.divedThisAir;
+        return !state.grounded && state.move == ArcadeMoves.GROUND_POUND && ctx.actionBuffered() && !state.divedThisAir && !ctx.inDeepWater();
     }
 
     @Override

@@ -570,6 +570,102 @@ public class ArcadeMovementGameTest {
         helper.succeed();
     }
 
+    /** A pool four blocks deep, walled with stone, its surface a little below y = 5. */
+    static void pool(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        ArcadeTestKit.fill(helper, new BlockPos(1, 1, 1), new BlockPos(9, 4, 12), Blocks.STONE.defaultBlockState());
+        ArcadeTestKit.fill(helper, new BlockPos(2, 1, 2), new BlockPos(8, 4, 11), Blocks.WATER.defaultBlockState());
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void waterIsSwumOnTheNumbersOfVanilla(GameTestHelper helper) {
+        pool(helper);
+        var player = ArcadeTestKit.client(helper, new BlockPos(5, 2, 3), ArcadeProfileIds.TRIAL);
+        var controller = ArcadeController.of(player);
+        var frames = new ArcadeTestKit.Frames();
+        ArcadeTestKit.step(player, frames.next());
+        helper.assertValueEqual(move(player), ArcadeMoves.SWIM, "deep in water");
+
+        // left alone, the player sinks slowly, as in vanilla
+        for (int i = 0; i < 15; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        double vy = controller.state().vy;
+        helper.assertTrue(vy < 0.0D && vy > -0.05D, "a slow sink, got " + vy);
+
+        // swimming forward settles on vanilla's pace: a tenth of a block per tick
+        frames.forward();
+        double pace = 0.0D;
+        for (int i = 0; i < 30; i++) {
+            var before = player.position();
+            ArcadeTestKit.step(player, frames.next());
+            pace = player.position().subtract(before).horizontalDistance();
+        }
+        helper.assertValueEqual(move(player), ArcadeMoves.SWIM, "still swimming");
+        helper.assertTrue(Math.abs(pace - 0.1D) < 0.01D, "vanilla swims at 0.1 b/t, got " + pace);
+
+        // under the surface, a press of jump strokes upward
+        frames.release();
+        ArcadeTestKit.step(player, frames.tap(JUMP));
+        helper.assertValueEqual(move(player), ArcadeMoves.SWIM, "a stroke, deep in water");
+        helper.assertTrue(controller.state().vy > 0.1D, "the stroke goes up, got " + controller.state().vy);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void inWaterGroundPoundsAreSlowedAndDivesDash(GameTestHelper helper) {
+        pool(helper);
+        var player = ArcadeTestKit.client(helper, new BlockPos(5, 3, 4), ArcadeProfileIds.TRIAL);
+        var controller = ArcadeController.of(player);
+        var frames = new ArcadeTestKit.Frames();
+        ArcadeTestKit.step(player, frames.next());
+        helper.assertValueEqual(move(player), ArcadeMoves.SWIM, "deep in water");
+
+        ArcadeTestKit.step(player, frames.press(CROUCH));
+        helper.assertValueEqual(move(player), ArcadeMoves.GROUND_POUND, "crouch in water");
+        for (int i = 0; i < 7 && controller.state().vy == 0.0D; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        double drop = -controller.state().vy;
+        double dryDrop = controller.tuning().groundPoundSpeed();
+        helper.assertTrue(drop > 0.0D && drop < dryDrop * 0.5D, "the water slows the pound down: " + drop + " against " + dryDrop + " out of it");
+
+        // ground pound and action: the dive of the water, a dash forward
+        ArcadeTestKit.step(player, frames.tap(ACTION));
+        helper.assertValueEqual(move(player), ArcadeMoves.SWIM_DASH, "action during a ground pound, in water");
+        double dash = controller.state().horizontalSpeed();
+        helper.assertTrue(dash >= 0.4D, "the dash goes fast, got " + dash);
+        frames.letGo(CROUCH);
+        for (int i = 0; i < 20 && move(player) == ArcadeMoves.SWIM_DASH; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        helper.assertValueEqual(move(player), ArcadeMoves.SWIM, "the dash winds down into a swim");
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void jumpLeavesTheWaterFromTheSurface(GameTestHelper helper) {
+        pool(helper);
+        var player = ArcadeTestKit.client(helper, new BlockPos(5, 4, 5), ArcadeProfileIds.TRIAL);
+        var frames = new ArcadeTestKit.Frames();
+        // holding jump at the surface keeps the player bobbing there, swimming all along
+        frames.hold(JUMP);
+        for (int i = 0; i < 40; i++) {
+            ArcadeTestKit.step(player, frames.next());
+            helper.assertValueEqual(move(player), ArcadeMoves.SWIM, "bobbing at the surface, tick " + i);
+        }
+        frames.letGo(JUMP);
+        ArcadeTestKit.step(player, frames.next());
+        ArcadeTestKit.step(player, frames.press(JUMP));
+        helper.assertValueEqual(move(player), ArcadeMoves.JUMP, "a press of jump at the surface");
+        double y = player.getY();
+        for (int i = 0; i < 4; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        helper.assertTrue(player.getY() > y + 0.5D, "the jump rises out of the water");
+        helper.succeed();
+    }
+
     @GameTest(structure = ArcadeTestKit.LANE)
     public void runningIntoAOneBlockStepVaultsOverIt(GameTestHelper helper) {
         ArcadeTestKit.floor(helper);
