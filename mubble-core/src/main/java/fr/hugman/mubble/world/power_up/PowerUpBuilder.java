@@ -8,24 +8,31 @@ import java.util.Optional;
 
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import org.jspecify.annotations.Nullable;
 
 public class PowerUpBuilder {
-    private Optional<Component> name = Optional.empty();
-    private Optional<Identifier> spriteId = Optional.empty();
-    private Optional<Holder<PowerUpAction>> action = Optional.empty();
-    private List<EntityAttributeEntry> attributesModifiers = new ArrayList<>();
-    private Optional<Holder<SoundEvent>> obtainSound;
-    private Optional<Holder<SoundEvent>> looseSound;
-    private boolean canSprintOnWater = false;
+    private @Nullable Component name = null;
+    private final List<Component> description = new ArrayList<>();
+    private @Nullable Identifier spriteId = null;
+    private @Nullable Holder<PowerUpAction> action = null;
+    private final List<EntityAttributeEntry> attributesModifiers = new ArrayList<>();
+    private @Nullable Holder<SoundEvent> obtainSound = null;
+    private @Nullable Holder<SoundEvent> emitSound = null;
+    private @Nullable Holder<SoundEvent> looseSound = null;
+    private @Nullable Holder<SoundEvent> refillSound = null;
+    private @Nullable ParticleOptions particle = null;
+    private @Nullable Identifier humanoidOverlayAssetId = null;
+    private boolean emissiveOverlay = false;
 
     public PowerUpBuilder name(Component name) {
-        this.name = Optional.ofNullable(name);
+        this.name = name;
         return this;
     }
 
@@ -37,13 +44,36 @@ public class PowerUpBuilder {
         return name(key.identifier());
     }
 
+    /**
+     * Adds a line to the description shown under the name of the power-up, in the tooltip of the
+     * items granting it. A power-up carrying one hides its attribute modifiers behind the advanced
+     * tooltips, so the description is what players are left with: it has to say what the power-up
+     * does rather than repeat the numbers.
+     */
+    public PowerUpBuilder description(Component line) {
+        this.description.add(line);
+        return this;
+    }
+
+    /**
+     * Adds a description line translated as {@code power_up.<namespace>.<path>.description.<suffix>},
+     * the suffix naming what the line is about so that translators can tell them apart.
+     */
+    public PowerUpBuilder description(Identifier id, String suffix) {
+        return this.description(Component.translatable("power_up." + id.getNamespace() + "." + id.getPath() + ".description." + suffix));
+    }
+
+    public PowerUpBuilder description(ResourceKey<PowerUp> key, String suffix) {
+        return this.description(key.identifier(), suffix);
+    }
+
     public PowerUpBuilder spriteId(Identifier spriteId) {
-        this.spriteId = Optional.ofNullable(spriteId);
+        this.spriteId = spriteId;
         return this;
     }
 
     public PowerUpBuilder action(Holder<PowerUpAction> action) {
-        this.action = Optional.ofNullable(action);
+        this.action = action;
         return this;
     }
 
@@ -57,31 +87,61 @@ public class PowerUpBuilder {
         return this.attributesModifier(new EntityAttributeEntry(attribute, new AttributeModifier(Mubble.id("power_up/" + path), value, operation)));
     }
 
+    public PowerUpBuilder particle(ParticleOptions particle) {
+        this.particle = particle;
+        return this;
+    }
+
     public PowerUpBuilder obtainSound(Holder<SoundEvent> obtainSound) {
-        this.obtainSound = Optional.of(obtainSound);
+        this.obtainSound = obtainSound;
+        return this;
+    }
+
+    public PowerUpBuilder emitSound(Holder<SoundEvent> emitSound) {
+        this.emitSound = emitSound;
         return this;
     }
 
     public PowerUpBuilder looseSound(Holder<SoundEvent> looseSound) {
-        this.looseSound = Optional.of(looseSound);
+        this.looseSound = looseSound;
         return this;
     }
 
-    public PowerUpBuilder canSprintOnWater(boolean canSprintOnWater) {
-        this.canSprintOnWater = canSprintOnWater;
+    public PowerUpBuilder refillSound(Holder<SoundEvent> refillSound) {
+        this.refillSound = refillSound;
+        return this;
+    }
+
+    public PowerUpBuilder humanoidOverlay(Identifier assetId) {
+        this.humanoidOverlayAssetId = assetId;
+        return this;
+    }
+
+    public PowerUpBuilder humanoidOverlay(ResourceKey<PowerUp> key) {
+        return this.humanoidOverlay(key.identifier().withPath(s -> "entity/power_up/humanoid/" + s));
+    }
+
+    public PowerUpBuilder emissiveOverlay() {
+        this.emissiveOverlay = true;
         return this;
     }
 
     public PowerUp build() {
-        if(attributesModifiers.isEmpty()) attributesModifiers = null;
         return new PowerUp(
-                name,
-                spriteId,
-                action,
-                Optional.ofNullable(attributesModifiers),
-                obtainSound,
-                looseSound,
-                canSprintOnWater
+                Optional.ofNullable(name),
+                List.copyOf(description),
+                Optional.ofNullable(spriteId),
+                Optional.ofNullable(action),
+                Optional.ofNullable(attributesModifiers.isEmpty() ? null : attributesModifiers),
+                new PowerUpCosmectics(
+                        Optional.ofNullable(this.particle),
+                        Optional.ofNullable(this.obtainSound),
+                        Optional.ofNullable(this.emitSound),
+                        Optional.ofNullable(this.looseSound),
+                        Optional.ofNullable(this.refillSound),
+                        Optional.ofNullable(this.humanoidOverlayAssetId),
+                        this.emissiveOverlay
+                )
         );
     }
 }

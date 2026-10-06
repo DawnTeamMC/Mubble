@@ -9,14 +9,14 @@ public class PowerUpKeybindsHandler {
     public static void tick(Minecraft client) {
         if (null != client.player) {
             var powerUpOpt = client.player.getPowerUp();
-            if (powerUpOpt.isPresent()) {
-                var powerUp = powerUpOpt.get().value();
-                // it's great to check the power-up allows certain actions on the client first
-                // to avoid unnecessary network traffic.
-                // let's utilize Minecraft's registry sync to my advantage
-                if(powerUp.canBeTriggered()) {
-                    while(MubbleKeyBindings.TRIGGER_POWER_UP.consumeClick()) {
-                        if(powerUp.trigger(client.player) == InteractionResult.SUCCESS) {
+            while (MubbleKeyBindings.TRIGGER_POWER_UP.consumeClick()) {
+                if (powerUpOpt.isPresent()) {
+                    var powerUp = powerUpOpt.get().value();
+                    // it's great to check the power-up allows certain actions on the client first
+                    // to avoid unnecessary network traffic.
+                    // let's utilize Minecraft's registry sync to my advantage
+                    if (powerUp.canBeTriggered(client.player)) {
+                        if (powerUp.trigger(client.player) == InteractionResult.SUCCESS) {
                             ClientPlayNetworking.send(PowerUpTriggerPayload.INSTANCE);
                         }
                     }

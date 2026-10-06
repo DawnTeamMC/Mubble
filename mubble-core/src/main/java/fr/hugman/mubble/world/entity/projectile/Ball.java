@@ -17,9 +17,19 @@ import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 public abstract class Ball extends ThrowableProjectile {
 	public static final String REBOUNDS_KEY = "rebounds";
+
+    /** Trail particles spawned per tick, strung along the ground the ball covers during it. */
+    private static final int TRAIL_PARTICLES_PER_TICK = 1;
+    /** Distance travelled in a tick under which a ball counts as standing still and trails nothing. */
+    private static final double MIN_TRAIL_DISTANCE = 0.01D;
+    /** Share of the speed of the ball a trail particle is pushed back by, the rest of it being shed. */
+    private static final double TRAIL_DRIFT = 0.05D;
+    /** Upwards drift of a trail particle, so that it lingers behind rather than sinking with the ball. */
+    private static final double TRAIL_RISE = 0.02D;
 
     protected int rebounds = 3;
     private boolean rotateClockwards = false;
@@ -50,17 +60,48 @@ public abstract class Ball extends ThrowableProjectile {
         return rotateClockwards;
     }
 
+    /**
+     * @return whether the ball turns as it flies, both to face where it is heading and to spin on itself. A
+     * ball that does not rotate is drawn in the same orientation for its whole life, whichever way it goes.
+     * Purely cosmetic.
+     */
+    public boolean rotates() {
+        return true;
+    }
+
+    /**
+     * @return whether the ball only has so many rebounds in it. A ball without a rebound budget never runs
+     * out on its own: something else has to end it, be it a lifetime or a hit that always counts.
+     */
+    protected boolean hasReboundLimit() {
+        return true;
+    }
+
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {}
 
     @Override
     public void tick() {
         super.tick();
+        if (this.level().isClientSide()) {
+            this.spawnTrailParticles();
+        }
     }
 
+    @Nullable
     protected abstract SoundEvent getDeathSound();
 
+    @Nullable
     protected abstract ParticleOptions getDeathParticle();
+
+    /**
+     * @return the particle the ball trails behind it while it moves, or {@code null} for a ball that
+     * leaves no trail at all
+     */
+    @Nullable
+    protected ParticleOptions getTrailParticle() {
+        return null;
+    }
 
 	@Override
 	protected double getDefaultGravity() {
@@ -69,6 +110,10 @@ public abstract class Ball extends ThrowableProjectile {
 
     @Override
     protected void onHit(HitResult result) {
+        if (!this.hasReboundLimit()) {
+            super.onHit(result);
+            return;
+        }
         this.rebounds--;
         super.onHit(result);
         if (this.isAlive() && this.rebounds < 0) {
@@ -88,19 +133,21 @@ public abstract class Ball extends ThrowableProjectile {
 	/**
 	 * Triggers after the ball has hit and can no longer rebound.
 	 */
-	protected void finalHit() {
+	protected final void finalHit() {
 		this.finalHit(this.getDeathSound());
 	}
 
     /**
      * Triggers after the ball has hit and can no longer rebound.
      */
-    protected void finalHit(SoundEvent deathSound) {
+    protected void finalHit(@Nullable SoundEvent deathSound) {
         if (!this.level().isClientSide()) {
             this.level().broadcastEntityEvent(this, EntityEvent.DEATH);
             this.remove(RemovalReason.DISCARDED);
         }
-        this.level().playSound(null, getX(), getY(), getZ(), deathSound, SoundSource.NEUTRAL, 0.5F, 1.0F);
+        if(deathSound != null) {
+            this.level().playSound(null, getX(), getY(), getZ(), deathSound, SoundSource.NEUTRAL, 0.5F, 1.0F);
+        }
     }
 
 	@Override
@@ -123,7 +170,47 @@ public abstract class Ball extends ThrowableProjectile {
         }
     }
 
+    /**
+     * Spawns the trail a moving ball leaves behind, in the manner of the one vanilla arrows leave:
+     * particles strung along the movement of the tick and pushed back the way the ball came, so that
+     * they fall behind it instead of riding along with it. Arrows hand the particles their whole speed,
+     * which is far too brisk for a ball, so only a fraction of it is passed on here.
+     * <p>
+     * A ball only trails while it actually moves: one that has come to a halt emits nothing.
+     */
+    protected void spawnTrailParticles() {
+        ParticleOptions particle = this.getTrailParticle();
+        if (particle == null || this.isRemoved()) {
+            return;
+        }
+        Vec3 movement = this.getDeltaMovement();
+        int count = trailParticleCount(movement.length());
+        // The model of a ball is centred on its position rather than standing on it, so the particles
+        // need no offset of their own to sit in the middle of the sprite.
+        Vec3 from = this.position();
+        Vec3 drift = movement.scale(-TRAIL_DRIFT).add(0.0D, TRAIL_RISE, 0.0D);
+
+        for (int i = 0; i < count; i++) {
+            Vec3 pos = from.add(movement.scale((i + 0.5D) / count));
+            this.level().addParticle(particle, pos.x, pos.y, pos.z, drift.x, drift.y, drift.z);
+        }
+    }
+
+    /**
+     * The trail is worth as many particles whatever the speed: a fast ball spaces them out further
+     * instead of spawning more of them.
+     *
+     * @param distance how far the ball travelled during the tick, in blocks
+     * @return how many particles to spawn, none at all for a ball that barely moved
+     */
+    public static int trailParticleCount(double distance) {
+        return distance < MIN_TRAIL_DISTANCE ? 0 : TRAIL_PARTICLES_PER_TICK;
+    }
+
     protected void spawnDeathParticles() {
+        if(this.getDeathParticle() == null) {
+            return;
+        }
         for (int i = 0; i < 8; ++i) {
             float s1 = random.nextFloat() * 0.2F - 0.1F;
             float s2 = random.nextFloat() * 0.2F - 0.1F;

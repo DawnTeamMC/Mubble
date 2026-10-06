@@ -1,0 +1,16 @@
+{
+  "attribute_modifiers": [
+    {
+      "type": "minecraft:max_health",
+      "amount": 10.0,
+      "id": "mubble-gametest:attributes_only/max_health",
+      "operation": "add_value"
+    },
+    {
+      "type": "minecraft:movement_speed",
+      "amount": 0.5,
+      "id": "mubble-gametest:attributes_only/movement_speed",
+      "operation": "add_multiplied_base"
+    }
+  ]
+}

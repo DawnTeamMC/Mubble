@@ -1,0 +1,10 @@
+{
+  "type": "mubble:shoot_projectile",
+  "projectile": "minecraft:snowball",
+  "sound": "minecraft:entity.snowball.throw",
+  "speed": 1.0,
+  "charges": {
+    "counting": "from_active_entities",
+    "max": 5
+  }
+}

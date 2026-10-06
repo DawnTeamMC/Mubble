@@ -55,7 +55,7 @@ public class DecoratedBumpableBlock extends BumpableBlock {
 
     public void playGenericBumpSound(BumpableBlockEntity entity) {
         Level level = entity.getLevel();
-        Vec3 pos = entity.getBlockPos().getCenter();
+        Vec3 pos = Vec3.atCenterOf(entity.getBlockPos());
         if (level != null) {
             level.playSound(null, pos.x(), pos.y(), pos.z(), SuperMarioSounds.BUMPABLE_BLOCK_BUMP, SoundSource.BLOCKS, 1.0F, 1.0F);
         }

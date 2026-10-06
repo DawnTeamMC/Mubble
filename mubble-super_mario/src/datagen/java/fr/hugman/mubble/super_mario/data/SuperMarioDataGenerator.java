@@ -26,6 +26,8 @@ public class SuperMarioDataGenerator implements DataGeneratorEntrypoint {
 
 		// - Loot tables
 		pack.addProvider(SuperMarioBlockLootSubProvider::new);
+		pack.addProvider(SuperMarioLootSubProvider::new);
+		pack.addProvider(SuperMarioGameplayLootSubProvider::new);
 
 		// - Variants
 		pack.addProvider(SuperMarioGoombaVariantProvider::new);
@@ -38,6 +40,7 @@ public class SuperMarioDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider((output, registriesFuture) -> new SuperMarioItemTagProvider(output, registriesFuture, blockTags));
 		pack.addProvider(SuperMarioEntityTypeTagsProvider::new);
 		pack.addProvider(SuperMarioDamageTypeTagsProvider::new);
+		pack.addProvider(SuperMarioPowerUpTagsProvider::new);
 	}
 
 	@Override

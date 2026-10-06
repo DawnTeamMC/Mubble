@@ -3,8 +3,8 @@ package fr.hugman.mubble.super_mario.world.item;
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.core.component.SuperMarioDataComponents;
 import fr.hugman.mubble.super_mario.core.registries.SuperMarioRegistries;
-import fr.hugman.mubble.super_mario.references.GoombaVariantKeys;
-import fr.hugman.mubble.super_mario.references.SuperMarioCreativeModeTabKeys;
+import fr.hugman.mubble.super_mario.references.GoombaVariantIds;
+import fr.hugman.mubble.super_mario.references.SuperMarioCreativeModeTabIds;
 import fr.hugman.mubble.super_mario.world.entity.monster.goomba.GoombaVariant;
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
@@ -18,17 +18,16 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import java.util.Collections;
+
 import java.util.function.Predicate;
 
 public class SuperMarioCreativeModeTabs {
-    public static final CreativeModeTab SUPER_MARIO = register(SuperMarioCreativeModeTabKeys.SUPER_MARIO, FabricCreativeModeTab.builder()
+    public static final CreativeModeTab SUPER_MARIO = register(SuperMarioCreativeModeTabIds.SUPER_MARIO, FabricCreativeModeTab.builder()
             .title(Component.translatable("item_group."+ SuperMario.MOD_ID +".super_mario"))
-            .icon(() -> new ItemStack(SuperMarioBlocks.QUESTION_BLOCK))
+            .icon(() -> new ItemStack(SuperMarioItems.SUPER_MUSHROOM))
             .build());
-    public static final CreativeModeTab YOSHI_ISLAND = register(SuperMarioCreativeModeTabKeys.YOSHI_ISLAND, FabricCreativeModeTab.builder()
+    public static final CreativeModeTab YOSHI_ISLAND = register(SuperMarioCreativeModeTabIds.YOSHI_ISLAND, FabricCreativeModeTab.builder()
             .title(Component.translatable("item_group." + SuperMario.MOD_ID +".yoshi_island"))
             .icon(() -> new ItemStack(SuperMarioBlocks.GREEN_EGG_BLOCK))
             .build());
@@ -38,15 +37,20 @@ public class SuperMarioCreativeModeTabs {
     }
 
     public static void appendItemGroups() {
-        CreativeModeTabEvents.modifyOutputEvent(SuperMarioCreativeModeTabKeys.SUPER_MARIO).register(entries -> {
+        CreativeModeTabEvents.modifyOutputEvent(SuperMarioCreativeModeTabIds.SUPER_MARIO).register(entries -> {
             var context = entries.getContext();
 
 			entries.accept(SuperMarioItems.COIN);
 			entries.accept(SuperMarioItems.RED_COIN);
 			entries.accept(SuperMarioItems.BLUE_COIN);
 			entries.accept(SuperMarioItems.FLOWER_COIN);
+            entries.accept(SuperMarioItems.SUPER_MUSHROOM);
             entries.accept(SuperMarioItems.FIRE_FLOWER);
             entries.accept(SuperMarioItems.ICE_FLOWER);
+            entries.accept(SuperMarioItems.GOLD_FLOWER);
+            entries.accept(SuperMarioItems.CLOUD_FLOWER);
+            entries.accept(SuperMarioItems.BUBBLE_FLOWER);
+            entries.accept(SuperMarioItems.SUPERBALL_FLOWER);
             entries.accept(SuperMarioItems.MINI_MUSHROOM);
             entries.accept(SuperMarioItems.MEGA_MUSHROOM);
             entries.accept(SuperMarioBlocks.QUESTION_BLOCK);
@@ -85,7 +89,7 @@ public class SuperMarioCreativeModeTabs {
             entries.accept(SuperMarioItems.GOOMBA_SPAWN_EGG);
         });
 
-        CreativeModeTabEvents.modifyOutputEvent(SuperMarioCreativeModeTabKeys.YOSHI_ISLAND).register(entries -> {
+        CreativeModeTabEvents.modifyOutputEvent(SuperMarioCreativeModeTabIds.YOSHI_ISLAND).register(entries -> {
             entries.accept(SuperMarioBlocks.BLUE_EGG_BLOCK);
             entries.accept(SuperMarioBlocks.CYAN_EGG_BLOCK);
             entries.accept(SuperMarioBlocks.GREEN_EGG_BLOCK);
@@ -106,7 +110,7 @@ public class SuperMarioCreativeModeTabs {
 		registryWrapper.listElements()
                 .filter(filter)
                 .forEach(entry -> {
-                            if (GoombaVariantKeys.NORMAL.identifier().equals(entry.key().identifier()) || entry.value().spawnEggInfo().isEmpty()) {
+                            if (GoombaVariantIds.NORMAL.identifier().equals(entry.key().identifier()) || entry.value().spawnEggInfo().isEmpty()) {
                                 return;
                             }
                             var stack = new ItemStack(SuperMarioItems.GOOMBA_SPAWN_EGG);

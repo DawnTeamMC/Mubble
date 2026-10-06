@@ -1,13 +1,9 @@
 package fr.hugman.mubble.super_mario.world.item;
 
-import fr.hugman.mubble.sounds.SoundConfig;
-import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
-import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
-import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import fr.hugman.mubble.super_mario.world.entity.item.SuperMarioCollectibles;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -38,29 +34,12 @@ public class CollectibleItem extends Item {
             BlockPlaceContext placeContext = new BlockPlaceContext(context);
             BlockPos blockPos = placeContext.getClickedPos();
             ItemStack itemStack = context.getItemInHand();
-            var dimensions = MubbleEntityTypes.COLLECTIBLE.getDimensions();
-            Vec3 pos = Vec3.atBottomCenterOf(blockPos).add(0, Math.clamp((1 - dimensions.height()) / 2, 0.0f, 0.5f), 0);
-            AABB box = dimensions.makeBoundingBox(pos.x(), pos.y(), pos.z());
-            if (level.noCollision(null, box) && level.getEntities(null, box).isEmpty()) {
+            Vec3 pos = CollectibleEntity.placePos(level, blockPos);
+            if (pos != null) {
                 if (level instanceof ServerLevel serverLevel) {
                     CollectibleEntity entity = new CollectibleEntity(serverLevel, pos.x(), pos.y(), pos.z(), itemStack.copyWithCount(1));
-                    entity.setCollectSound(new SoundConfig(SuperMarioSounds.COIN_COLLECT, 0.2f, 1.0f));
-                    entity.setBounceSound(new SoundConfig(SuperMarioSounds.COIN_BOUNCE, 1.0f, 1.0f));
-                    ParticleOptions particle = null;
-                    if(itemStack.is(SuperMarioItems.COIN)) {
-                        particle = SuperMarioParticleTypes.COIN_SPARKLE;
-                    }
-                    if(itemStack.is(SuperMarioItems.RED_COIN)) {
-                        particle = SuperMarioParticleTypes.RED_COIN_SPARKLE;
-                    }
-                    if(itemStack.is(SuperMarioItems.BLUE_COIN)) {
-                        particle = SuperMarioParticleTypes.BLUE_COIN_SPARKLE;
-                    }
-                    if(itemStack.is(SuperMarioItems.FLOWER_COIN)) {
-                        particle = SuperMarioParticleTypes.FLOWER_COIN_SPARKLE;
-                    }
-                    entity.setCollectParticle(particle);
-                    EntityType.createDefaultStackConfig(serverLevel, itemStack, context.getPlayer()).accept(entity);
+                    SuperMarioCollectibles.configure(entity, itemStack);
+                    EntityType.createDefaultStackConfig(serverLevel, itemStack, context.getPlayer()).apply(entity);
                     if (entity == null) {
                         return InteractionResult.FAIL;
                     }

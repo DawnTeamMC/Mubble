@@ -6,7 +6,7 @@ import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.resources.Identifier;
@@ -22,12 +22,12 @@ public class PowerUpHudRendering {
     private static final int ITEM_OFFSET = OFFSET_FROM_SCREEN_BORDER + (BACKGROUND_TEXTURE_SIZE - ITEM_TEXTURE_SIZE) / 2;
     private static final Identifier EFFECT_BACKGROUND_TEXTURE = Mubble.id("hud/power_up_background");
 
-    public static void renderPowerUpLayer(Minecraft client, GuiGraphics context) {
+    public static void renderPowerUpLayer(Minecraft client, GuiGraphicsExtractor graphics) {
         var powerUpOpt = Optional.ofNullable(client.player).flatMap(PowerUpHolder::getPowerUp);
         if (powerUpOpt.isPresent()) {
-            context.blitSprite(RenderPipelines.GUI_TEXTURED, EFFECT_BACKGROUND_TEXTURE, OFFSET_FROM_SCREEN_BORDER, OFFSET_FROM_SCREEN_BORDER, BACKGROUND_TEXTURE_SIZE, BACKGROUND_TEXTURE_SIZE);
+            graphics.blitSprite(RenderPipelines.GUI_TEXTURED, EFFECT_BACKGROUND_TEXTURE, OFFSET_FROM_SCREEN_BORDER, OFFSET_FROM_SCREEN_BORDER, BACKGROUND_TEXTURE_SIZE, BACKGROUND_TEXTURE_SIZE);
 			var id = PowerUp.getSpriteId(powerUpOpt.get()).orElse(MissingTextureAtlasSprite.getLocation());
-			context.blitSprite(RenderPipelines.GUI_TEXTURED, id, ITEM_OFFSET, ITEM_OFFSET, ITEM_TEXTURE_SIZE, ITEM_TEXTURE_SIZE, ARGB.white(1.0f));
+			graphics.blitSprite(RenderPipelines.GUI_TEXTURED, id, ITEM_OFFSET, ITEM_OFFSET, ITEM_TEXTURE_SIZE, ITEM_TEXTURE_SIZE, ARGB.white(1.0f));
         }
     }
 }

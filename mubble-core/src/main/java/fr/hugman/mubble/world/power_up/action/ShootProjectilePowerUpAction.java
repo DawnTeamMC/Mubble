@@ -6,6 +6,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.keybind.MubbleKeyBindingsKeys;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import fr.hugman.mubble.world.power_up.PowerUpCharges;
+import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
@@ -18,7 +21,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
@@ -30,30 +32,40 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
 import net.minecraft.world.phys.Vec3;
 
-
+/**
+ * @param divergence      how wide the shot scatters around the aim, 1 being the spread a thrown snowball gets.
+ *                        Zero makes the shot exact, which is what a projectile whose path players are meant to
+ *                        read and repeat needs.
+ * @param inheritsMotion  whether the movement of the player is carried into the shot, the way a snowball thrown
+ *                        from a minecart flies further. A projectile whose path is meant to be repeatable leaves
+ *                        at the same speed in the same direction whether the player is running, riding or still.
+ */
 public record ShootProjectilePowerUpAction(
         EntityType<?> projectile,
-        Holder<SoundEvent> sound,
+        Optional<Holder<SoundEvent>> sound,
         float speed,
-        Optional<Integer> maxProjectiles,
-        Optional<Integer> cooldown
+        float divergence,
+        boolean inheritsMotion,
+        PowerUpCharges charges
         //TODO: add shooting algorithm
         //TODO: add projectile NBT
 ) implements PowerUpAction, TooltipProvider {
     public static final MapCodec<ShootProjectilePowerUpAction> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BuiltInRegistries.ENTITY_TYPE.byNameCodec().fieldOf("projectile").forGetter(ShootProjectilePowerUpAction::projectile),
-            SoundEvent.CODEC.fieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
+            SoundEvent.CODEC.optionalFieldOf("sound").forGetter(ShootProjectilePowerUpAction::sound),
             Codec.FLOAT.optionalFieldOf("speed", 1.5F).forGetter(ShootProjectilePowerUpAction::speed),
-            Codec.INT.optionalFieldOf("max_projectiles").forGetter(ShootProjectilePowerUpAction::maxProjectiles),
-            Codec.INT.optionalFieldOf("cooldown").forGetter(ShootProjectilePowerUpAction::cooldown)
+            Codec.FLOAT.optionalFieldOf("divergence", 1.0F).forGetter(ShootProjectilePowerUpAction::divergence),
+            Codec.BOOL.optionalFieldOf("inherits_motion", true).forGetter(ShootProjectilePowerUpAction::inheritsMotion),
+            PowerUpCharges.CODEC.optionalFieldOf("charges", PowerUpCharges.DEFAULT).forGetter(ShootProjectilePowerUpAction::charges)
     ).apply(instance, ShootProjectilePowerUpAction::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ShootProjectilePowerUpAction> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.registry(Registries.ENTITY_TYPE), (ShootProjectilePowerUpAction::projectile),
-            SoundEvent.STREAM_CODEC, (ShootProjectilePowerUpAction::sound),
+            ByteBufCodecs.optional(SoundEvent.STREAM_CODEC), (ShootProjectilePowerUpAction::sound),
             ByteBufCodecs.FLOAT, (ShootProjectilePowerUpAction::speed),
-            ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::maxProjectiles),
-            ByteBufCodecs.optional(ByteBufCodecs.INT), (ShootProjectilePowerUpAction::cooldown),
+            ByteBufCodecs.FLOAT, (ShootProjectilePowerUpAction::divergence),
+            ByteBufCodecs.BOOL, (ShootProjectilePowerUpAction::inheritsMotion),
+            PowerUpCharges.STREAM_CODEC, (ShootProjectilePowerUpAction::charges),
             ShootProjectilePowerUpAction::new
     );
 
@@ -63,26 +75,46 @@ public record ShootProjectilePowerUpAction(
     }
 
     @Override
-    public InteractionResult trigger(Player player) {
+    public boolean canBeRefilled() {
+        return true;
+    }
+
+    @Override
+    public PowerUpProperties setUpProperties() {
+        return this.charges.createProperties();
+    }
+
+    @Override
+    public boolean canBeTriggered(Player player) {
         var properties = player.getPowerUpProperties();
+
+        if(properties == null) {
+            properties = setUpProperties();
+            player.setPowerUpProperties(properties);
+        }
 
         var level = player.level();
         if (!level.isClientSide()) {
-            properties.removeInvalidProjectiles(level);
+            properties.doSoftChecks(player);
         }
-        if(maxProjectiles.isPresent() && properties.getProjectiles().size() >= maxProjectiles.get()) {
-            return InteractionResult.FAIL;
+        return properties.getChargeCount() > 0;
+    }
+
+    @Override
+    public InteractionResult trigger(Player player) {
+        var properties = player.getPowerUpProperties();
+
+        if(properties == null) {
+            properties = setUpProperties();
+            player.setPowerUpProperties(properties);
         }
+        var level = player.level();
 
-        player.swing(InteractionHand.MAIN_HAND);
-
-        if (player.level().isClientSide()) {
-            //TODO once powerup properties are synced, have a check on the client
+        if (level.isClientSide()) {
             return InteractionResult.SUCCESS;
         }
-
-        if (!level.isClientSide()) {
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), this.sound, SoundSource.NEUTRAL, 0.5F, 1.0F);
+        else {
+            this.sound.ifPresent(s -> level.playSound(null, player.getX(), player.getY(), player.getZ(), s, SoundSource.NEUTRAL, 0.5F, 1.0F));
             var entity = this.projectile.create(level, EntitySpawnReason.TRIGGERED);
             if (null == entity) {
                 return InteractionResult.FAIL;
@@ -90,21 +122,30 @@ public record ShootProjectilePowerUpAction(
             if (entity instanceof Projectile projectileEntity) {
                 projectileEntity.setOwner(player);
             }
-            entity.setPos(player.getX(), player.getEyeY() - 0.1F, player.getZ());
-            setVelocity(entity, player, player.getXRot(), player.getYRot(), 0.0F, this.speed, 1.0F);
+            // setPos places the bottom of the bounding box, so the projectile has to be lowered by half its
+            // height to actually come out centered on the eye line.
+            entity.setPos(player.getX(), player.getEyeY() - 0.1F - entity.getBbHeight() / 2.0F, player.getZ());
+            setVelocity(entity, player, player.getXRot(), player.getYRot(), 0.0F, this.speed, this.divergence, this.inheritsMotion);
             level.addFreshEntity(entity);
-            properties.addProjectile(entity.getUUID());
-            properties.setCooldown(cooldown.orElse(0));
+            properties.useCharge();
+            properties.trackEntity(entity.getUUID());
         }
         return InteractionResult.SUCCESS;
     }
 
+    @Override
+    public boolean shouldSwingOtherHand() {
+        return true;
+    }
 
-    public void setVelocity(Entity projectile, Entity shooter, float pitch, float yaw, float roll, float speed, float divergence) {
+    public void setVelocity(Entity projectile, Entity shooter, float pitch, float yaw, float roll, float speed, float divergence, boolean inheritsMotion) {
         float f = -Mth.sin(yaw * (float) (Math.PI / 180.0)) * Mth.cos(pitch * (float) (Math.PI / 180.0));
         float g = -Mth.sin((pitch + roll) * (float) (Math.PI / 180.0));
         float h = Mth.cos(yaw * (float) (Math.PI / 180.0)) * Mth.cos(pitch * (float) (Math.PI / 180.0));
         setVelocity(projectile, f, g, h, speed, divergence);
+        if (!inheritsMotion) {
+            return;
+        }
         Vec3 vec3d = shooter.getKnownMovement();
         projectile.setDeltaMovement(projectile.getDeltaMovement().add(vec3d.x, shooter.onGround() ? 0.0 : vec3d.y, vec3d.z));
     }

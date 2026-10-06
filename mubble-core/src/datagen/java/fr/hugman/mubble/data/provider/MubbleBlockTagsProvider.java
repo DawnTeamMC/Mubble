@@ -3,6 +3,7 @@ package fr.hugman.mubble.data.provider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.references.BlockItemIds;
 import net.minecraft.world.level.block.Blocks;
 import java.util.concurrent.CompletableFuture;
 
@@ -15,8 +16,8 @@ public class MubbleBlockTagsProvider extends FabricTagsProvider.BlockTagsProvide
 
 	@Override
 	protected void addTags(HolderLookup.Provider wrapperLookup) {
-		valueLookupBuilder(MELTABLE_TO_WATER).add(Blocks.ICE);
-		valueLookupBuilder(MELTABLE_TO_ICE).add(Blocks.PACKED_ICE);
-		valueLookupBuilder(FREEZABLE_TO_PACKED_ICE).add(Blocks.ICE);
+		builder(MELTABLE_TO_WATER).add(BlockItemIds.ICE);
+		builder(MELTABLE_TO_ICE).add(BlockItemIds.PACKED_ICE);
+		builder(FREEZABLE_TO_PACKED_ICE).add(BlockItemIds.ICE);
 	}
 }

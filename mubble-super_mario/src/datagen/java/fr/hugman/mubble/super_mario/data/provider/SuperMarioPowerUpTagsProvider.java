@@ -1,0 +1,34 @@
+package fr.hugman.mubble.super_mario.data.provider;
+
+import fr.hugman.mubble.core.registries.MubbleRegistries;
+import fr.hugman.mubble.world.power_up.PowerUp;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.tags.TagAppender;
+import net.minecraft.tags.TagKey;
+
+import static fr.hugman.mubble.super_mario.tags.SuperMarioPowerUpTags.*;
+import static fr.hugman.mubble.tags.MubblePowerUpTags.*;
+import static fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds.*;
+
+import java.util.concurrent.CompletableFuture;
+
+public class SuperMarioPowerUpTagsProvider extends FabricTagsProvider<PowerUp> {
+	public SuperMarioPowerUpTagsProvider(FabricPackOutput output, CompletableFuture<HolderLookup.Provider> registriesFuture) {
+		super(output, MubbleRegistries.POWER_UP, registriesFuture);
+	}
+
+	protected TagAppender<PowerUp> builder(TagKey<PowerUp> tag) {
+		return TagAppender.forBuilder(this.getOrCreateRawBuilder(tag));
+	}
+
+	@Override
+	protected void addTags(HolderLookup.Provider wrapperLookup) {
+		this.builder(CAN_RUN_ON_WATER).add(MINI);
+		this.builder(DISABLES_STOMPING).add(MINI);
+		this.builder(CAN_WALK_ON_CLOUDS).add(CLOUD, MINI);
+		this.builder(LOST_TO_WATER).add(CLOUD);
+		this.builder(LOST_TO_RAIN).add(CLOUD);
+	}
+}

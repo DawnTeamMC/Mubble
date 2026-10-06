@@ -26,6 +26,6 @@ public interface Stompable {
         return EntitySelector.NO_CREATIVE_OR_SPECTATOR;
     }
 
-    default void onStompedBy(List<Entity> entities) {
+    default void onStompedBy(Entity entity) {
     }
 }

@@ -1,7 +1,7 @@
 package fr.hugman.mubble.super_mario.data.provider;
 
 import fr.hugman.mubble.data.AutomaticEnglish;
-import fr.hugman.mubble.super_mario.references.SuperMarioCreativeModeTabKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioCreativeModeTabIds;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.SuperMario;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -19,7 +19,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
 
     @Override
     public void generateTranslations(HolderLookup.Provider wrapperLookup, TranslationBuilder builder) {
-        builder.add(Util.makeDescriptionId("item_group", SuperMarioCreativeModeTabKeys.YOSHI_ISLAND.identifier()), "Yoshi's Island");
+        builder.add(Util.makeDescriptionId("item_group", SuperMarioCreativeModeTabIds.YOSHI_ISLAND.identifier()), "Yoshi's Island");
 
         AutomaticEnglish.generateAutomaticTranslations(SuperMario.MOD_ID, wrapperLookup, builder);
 
@@ -27,6 +27,26 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("block." + SuperMario.MOD_ID + ".bumpable.drop.all.description", "The block will drop the entire item stack when bumped");
         builder.add("block." + SuperMario.MOD_ID + ".bumpable.drop.one", "Drop one");
         builder.add("block." + SuperMario.MOD_ID + ".bumpable.drop.one.description", "The block will drop one item per bump");
+
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.frozen", "Froze %s for %s ticks");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.thawed", "Thawed %s");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.not_frozen", "Nothing changed. That entity is not frozen");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.unfreezable", "Nothing changed. That entity cannot be frozen");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.set.frozen_endlessly", "Froze %s until further notice");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.frozen", "%s is frozen for %s more ticks");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.frozen_endlessly", "%s is frozen until further notice");
+        builder.add("commands." + SuperMario.MOD_ID + ".freeze.query.thawed", "%s is not frozen");
+
+        builder.add("power_up." + SuperMario.MOD_ID + ".mini.description.size", "Shrinks you to a third of your size.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mini.description.trade_off", "Weaker, but a better jumper.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mini.description.water", "Sprint off land to run on water.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mega.description.size", "Grows you to three times your size.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".mega.description.trade_off", "Faster, tougher and stronger, but slow to swing.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.float", "You jump higher and fall slower.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.weather", "Water and rain wash it away.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.ricochet", "Superballs bounce off everything.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.coins", "They collect the coins they touch.");
+        builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
 
         builder.add("entity." + SuperMario.MOD_ID + ".goomba.mini", "Mini Goomba");
         builder.add("item." + SuperMario.MOD_ID + ".mini_goomba_spawn_egg", "Mini Goomba Spawn Egg");
@@ -39,6 +59,9 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.note_block.jump", "Note Block used");
         builder.add(SuperMarioSounds.COIN_COLLECT.value(), "Coin collected");
         builder.add("subtitles." + SuperMario.MOD_ID + ".item.cape_feather.use", "Cape Feather used");
+        builder.add(SuperMarioSounds.GOLDEN_EXPLOSION.value(), "Golden explosion");
+        builder.add(SuperMarioSounds.CLOUD_PLATFORM_APPEAR.value(), "Cloud Platform appears");
+        builder.add(SuperMarioSounds.CLOUD_PLATFORM_DISAPPEAR.value(), "Cloud Platform disappears");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.find_target", "Goomba finds a target");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.death", "Goomba dies");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.stomp", "Goomba stomped");
@@ -52,8 +75,16 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.fireball.throw", "Fireball thrown");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.iceball.hit", "Iceball hits");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.iceball.throw", "Iceball thrown");
+        builder.add(SuperMarioSounds.GOLD_FIREBALL_THROW.value(), "Gold Fireball thrown");
+        builder.add(SuperMarioSounds.BUBBLE_APPEAR.value(), "Bubble appears");
+        builder.add(SuperMarioSounds.BUBBLE_POP.value(), "Bubble pops");
+        builder.add(SuperMarioSounds.BUBBLE_FILL.value(), "Bubble fills");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".entity.superball.throw", "Superball thrown");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".entity.superball.hit", "Superball hits");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".entity.superball.disappear", "Superball disappears");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.refill", "Power-up refilled");
 
         builder.add("gamerule.beepBlockCooldown", "Beep Block cooldown");
 
@@ -64,5 +95,9 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("death.attack." + SuperMario.MOD_ID + ".fireball.player", "%1$s was fireballed while fighting %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".iceball", "%1$s was iceballed by %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".iceball.player", "%1$s was iceballed while fighting %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".gold_fireball", "%1$s was gold-blasted by %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".gold_fireball.player", "%1$s was gold-blasted while fighting %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".superball", "%1$s was pinballed by %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".superball.player", "%1$s was pinballed while fighting %2$s");
     }
 }
