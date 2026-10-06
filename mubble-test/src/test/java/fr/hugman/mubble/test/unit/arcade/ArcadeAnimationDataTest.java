@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Stream;
+import net.minecraft.util.EasingType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -115,6 +116,44 @@ public class ArcadeAnimationDataTest {
         assertEquals(2.0F, body.post().y);
         assertEquals(2.0F, data.bones().get("right_arm").get(ArcadeAnimationData.Target.SCALE).getFirst().post().y);
         assertFalse(data.loop());
+    }
+
+    @Test
+    @DisplayName("keyframes ease the way to them with vanilla's easing types, by name or as a cubic Bezier")
+    void keyframesEase() {
+        var json = parse("""
+                {"length": 1, "blend_in": 0.3, "bones": {"head": {"rotation": {
+                  "0.0": [0, 0, 0],
+                  "0.5": {"post": [10, 0, 0], "easing": "out_back"},
+                  "1.0": {"post": [20, 0, 0], "easing": {"cubic_bezier": [0.4, 0, 0.6, 1]}}
+                }}}}""");
+        var data = ArcadeAnimationData.parse(json);
+        assertEquals(0.3F, data.blendIn());
+        var frames = data.bones().get("head").get(ArcadeAnimationData.Target.ROTATION);
+        assertEquals(EasingType.LINEAR, frames.get(0).easing(), "no easing is a straight line");
+        assertEquals(EasingType.OUT_BACK, frames.get(1).easing());
+        var bezier = frames.get(2).easing();
+        assertEquals(0.0F, bezier.apply(0.0F), 1.0E-4F);
+        assertEquals(0.5F, bezier.apply(0.5F), 1.0E-3F, "a symmetric curve goes through the middle");
+        assertEquals(1.0F, bezier.apply(1.0F), 1.0E-4F);
+        assertEquals(ArcadeAnimationData.DEFAULT_BLEND_IN, ArcadeAnimationData.parse(parse("{\"length\": 1}")).blendIn());
+
+        var unknown = parse("{\"length\": 1, \"bones\": {\"head\": {\"rotation\": {\"1.0\": {\"post\": [0, 0, 0], \"easing\": \"wobbly\"}}}}}");
+        assertThrows(JsonParseException.class, () -> ArcadeAnimationData.parse(unknown));
+    }
+
+    @Test
+    @DisplayName("impacts squash the whole body and spring back to its shape")
+    void impactsSquashAndStretch() {
+        for (var name : List.of("ground_pound_land", "land")) {
+            var scale = shipped.get(name).body().orElseThrow().get(ArcadeAnimationData.Target.SCALE);
+            var first = scale.getFirst().post();
+            assertTrue(first.y < 1.0F && first.x > 1.0F, name + " starts squashed, got " + first);
+            var last = scale.getLast().post();
+            assertEquals(1.0F, last.y, 1.0E-6F, name + " ends in shape");
+        }
+        var drop = shipped.get("ground_pound").body().orElseThrow().get(ArcadeAnimationData.Target.SCALE).getLast().post();
+        assertTrue(drop.y > 1.0F && drop.x < 1.0F, "a ground pound drops stretched, got " + drop);
     }
 
     private static JsonObject parse(String json) {

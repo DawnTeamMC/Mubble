@@ -19,11 +19,22 @@ public class ArcadeMinecraftMixin {
         ArcadeClientInput.onFrame((Minecraft) (Object) this);
     }
 
-    /** The clicks of attack and use the arcade moves take never reach the hands, see {@link ArcadeHands}. */
+    /**
+     * While the arcade layer drives, the hands answer to the arcade attack and use rather than the
+     * vanilla ones, and the clicks the moves take never reach them, see {@link ArcadeHands}.
+     */
     @WrapOperation(method = "handleKeybinds", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyMapping;consumeClick()Z"))
-    private boolean mubble$shareTheHandsWithTheMoves(KeyMapping key, Operation<Boolean> original) {
+    private boolean mubble$arcadeHands(KeyMapping key, Operation<Boolean> original) {
+        var minecraft = (Minecraft) (Object) this;
+        var standIn = ArcadeHands.standIn(minecraft, key);
+        if (standIn == null) {
+            return original.call(key);
+        }
         while (original.call(key)) {
-            if (!ArcadeHands.takeForMoves((Minecraft) (Object) this, key)) {
+            // the vanilla key stands aside
+        }
+        while (original.call(standIn)) {
+            if (!ArcadeHands.takeForMoves(minecraft, standIn)) {
                 return true;
             }
         }
@@ -32,7 +43,8 @@ public class ArcadeMinecraftMixin {
 
     /** Nor does holding them, until they are let go. */
     @WrapOperation(method = "handleKeybinds", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyMapping;isDown()Z"))
-    private boolean mubble$keepHeldKeysFromTheHands(KeyMapping key, Operation<Boolean> original) {
-        return original.call(key) && !ArcadeHands.kept((Minecraft) (Object) this, key);
+    private boolean mubble$arcadeHandsHeld(KeyMapping key, Operation<Boolean> original) {
+        var standIn = ArcadeHands.standIn((Minecraft) (Object) this, key);
+        return standIn == null ? original.call(key) : original.call(standIn) && !ArcadeHands.kept(standIn);
     }
 }

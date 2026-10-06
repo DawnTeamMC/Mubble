@@ -1,6 +1,7 @@
 package fr.hugman.mubble.arcade.client.camera;
 
 import fr.hugman.mubble.arcade.client.ArcadeClientConfig;
+import fr.hugman.mubble.arcade.client.compat.ArcadeControllerBindings;
 import fr.hugman.mubble.arcade.client.mixin.CameraInvoker;
 import fr.hugman.mubble.arcade.ArcadeAim;
 import fr.hugman.mubble.arcade.ArcadeController;
@@ -21,8 +22,8 @@ import org.jspecify.annotations.Nullable;
  * The camera has its own yaw and pitch, moved by the mouse or the right stick, and the stick moves
  * the player relative to it: the body turns towards where it goes, the view does not follow, and the
  * head looks at the horizon. The camera trails the player a little, pulls in rather than going
- * through blocks, swings back behind the player on recenter, and blends with the vanilla view when
- * one takes over from the other. The hands do not follow the camera: they hit and use items where the
+ * through blocks, swings back behind the player on recenter, follows them round as they move if set
+ * to, and blends with the vanilla view when one takes over from the other. The hands do not follow the camera: they hit and use items where the
  * body faces, see {@link ArcadeAim#pickAhead}.
  */
 @Environment(EnvType.CLIENT)
@@ -35,6 +36,10 @@ public final class ArcadeCamera {
     private static final float BLEND_SECONDS = 0.25F;
     /** How fast the head of the player goes back to looking at the horizon, in degrees per tick. */
     private static final float HEAD_LEVEL_SPEED = 8.0F;
+    /** How long the camera lets the player turn it by hand before following them again, in seconds. */
+    private static final float AUTO_CAMERA_DELAY = 0.75F;
+    /** The slowest the player may go for the camera to follow them, in blocks per tick: standing still, it never moves. */
+    private static final double AUTO_CAMERA_MIN_SPEED = 0.02D;
 
     private static float yaw;
     private static float pitch;
@@ -48,6 +53,7 @@ public final class ArcadeCamera {
     /** How far into the orbit the camera is, from the vanilla view (0) to the orbit (1). */
     private static float blend;
     private static long lastFrameNanos;
+    private static long lastManualTurnNanos;
 
     private ArcadeCamera() {
     }
@@ -113,8 +119,9 @@ public final class ArcadeCamera {
         yaw = Mth.wrapDegrees((float) (yaw + yawDelta * scale));
         pitch = (float) Mth.clamp(pitch + pitchDelta * scale, config.minPitch(), config.maxPitch());
         if (yawDelta != 0.0D || pitchDelta != 0.0D) {
-            // turning by hand takes over from a recenter; a controller turns by nothing every frame its stick rests
+            // turning by hand takes over from a recenter and from following; a controller turns by nothing every frame its stick rests
             recentering = false;
+            lastManualTurnNanos = System.nanoTime();
         }
     }
 
@@ -150,6 +157,10 @@ public final class ArcadeCamera {
             }
         }
 
+        if (orbit && !recentering) {
+            follow(player, now, seconds);
+        }
+
         var invoker = (CameraInvoker) camera;
         var feet = focus != null && focusO != null
                 ? focusO.lerp(focus, partialTicks)
@@ -172,6 +183,34 @@ public final class ArcadeCamera {
         float vanillaPitch = camera.xRot();
         invoker.mubble$setRotation(vanillaYaw + Mth.degreesDifference(vanillaYaw, yaw) * t, Mth.lerp(t, vanillaPitch, pitch));
         invoker.mubble$setPosition(vanillaPosition.lerp(orbitPosition, t));
+    }
+
+    /** Whether the camera follows the player round as they move: a setting for the keyboard and mouse, one for controllers. */
+    public static boolean autoCamera() {
+        var config = ArcadeClientConfig.get();
+        var controller = ArcadeControllerBindings.Holder.instance;
+        return controller != null && controller.usingController() ? config.autoCameraController() : config.autoCameraKeyboard();
+    }
+
+    /**
+     * Swings the camera round behind the player as they move, as the cameras of Nintendo's games do:
+     * only while they move, faster the faster they go, and the more they go sideways to the view, so
+     * that running towards the camera never turns it around. Turning it by hand pauses it a moment.
+     */
+    private static void follow(LocalPlayer player, long now, float seconds) {
+        if (!autoCamera() || seconds <= 0.0F || now - lastManualTurnNanos < AUTO_CAMERA_DELAY * 1.0E9F) {
+            return;
+        }
+        var controller = ArcadeController.of(player);
+        var profile = controller.profile();
+        double speed = controller.state().horizontalSpeed();
+        if (profile == null || speed < AUTO_CAMERA_MIN_SPEED) {
+            return;
+        }
+        double share = Math.min(1.0D, speed / Math.max(1.0E-3D, profile.physics().ground().runSpeed()));
+        float target = player.getYRot();
+        double sideways = Math.abs(Math.sin(Mth.degreesDifference(yaw, target) * Mth.DEG_TO_RAD));
+        yaw = Mth.approachDegrees(yaw, target, (float) (ArcadeClientConfig.get().autoCameraSpeed() * share * sideways * seconds));
     }
 
     private static double hintDistanceScale(LocalPlayer player) {

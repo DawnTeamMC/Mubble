@@ -16,17 +16,68 @@ public final class ArcadeTranslations {
     private ArcadeTranslations() {
     }
 
+    private static void settings(java.util.Map<String, String[]> t, String name, String english, String french, String englishTooltip, String frenchTooltip) {
+        t.put("arcade." + M + ".settings." + name, pair(english, french));
+        t.put("arcade." + M + ".settings." + name + ".tooltip", pair(englishTooltip, frenchTooltip));
+    }
+
     /** {@code key -> [english, french]}. */
     public static Map<String, String[]> all() {
         var t = new LinkedHashMap<String, String[]>();
 
         // keys
         t.put("key.category." + M + ".arcade", pair("Arcade Movement", "Déplacements arcade"));
-        t.put("key." + M + ".arcade_recenter", pair("Recenter Camera", "Recentrer la caméra"));
+        t.put("key." + M + ".arcade_forward", pair("Move Forward", "Avancer"));
+        t.put("key." + M + ".arcade_backward", pair("Move Backward", "Reculer"));
+        t.put("key." + M + ".arcade_left", pair("Move Left", "Aller à gauche"));
+        t.put("key." + M + ".arcade_right", pair("Move Right", "Aller à droite"));
+        t.put("key." + M + ".arcade_jump", pair("Jump", "Sauter"));
+        t.put("key." + M + ".arcade_jump_alt", pair("Jump (second key)", "Sauter (seconde touche)"));
+        t.put("key." + M + ".arcade_crouch", pair("Crouch, Ground Pound", "S'accroupir, charge au sol"));
+        t.put("key." + M + ".arcade_sprint", pair("Sprint", "Sprinter"));
+        t.put("key." + M + ".arcade_attack", pair("Attack · Roll, Dive in a combo", "Attaquer · roulade, plongeon en combo"));
+        t.put("key." + M + ".arcade_use", pair("Use Item · Roll, Dive in a combo", "Utiliser l'objet · roulade, plongeon en combo"));
         t.put("key." + M + ".arcade_spin", pair("Spin", "Tourbillon"));
+        t.put("key." + M + ".arcade_recenter", pair("Recenter Camera", "Recentrer la caméra"));
         t.put("key." + M + ".arcade_debug_hud", pair("Arcade Debug HUD", "Interface de débogage arcade"));
-        // the second jump button of a controller, see ArcadeControlifyEntrypoint
-        t.put("key." + M + ".arcade_jump", pair("Jump (second button)", "Sauter (second bouton)"));
+        // the controller bindings bringing back what the arcade layout moves aside, see ArcadeControllerLayout
+        t.put("key." + M + ".arcade_power_up", pair("Trigger Power-Up (arcade layout)", "Déclencher le power-up (disposition arcade)"));
+        t.put("key." + M + ".arcade_inventory", pair("Inventory (arcade layout)", "Inventaire (disposition arcade)"));
+        t.put("key." + M + ".arcade_auto_camera", pair("Toggle Camera Follow (controller)", "Basculer le suivi de la caméra (manette)"));
+        t.put("key." + M + ".arcade_auto_camera.description", pair("Whether the camera swings round behind the player as they move, playing on a controller.",
+                "Si la caméra revient derrière le joueur à mesure qu'il se déplace, en jouant à la manette."));
+
+        // the settings, in the settings of Mubble
+        settings(t, "orbit_camera", "Orbit Camera", "Caméra orbitale",
+                "In the third person view from the back, the camera turns freely around the player, and the player moves relative to it.",
+                "En vue à la troisième personne de dos, la caméra tourne librement autour du joueur, qui se déplace par rapport à elle.");
+        settings(t, "camera_distance", "Camera Distance", "Distance de la caméra",
+                "How far behind the player the orbit camera stays.", "À quelle distance derrière le joueur se tient la caméra orbitale.");
+        settings(t, "auto_camera_keyboard", "Camera Follows (Keyboard)", "Suivi de la caméra (clavier)",
+                "Playing on the keyboard and mouse, the orbit camera swings round behind the player as they move, never while they stand still.",
+                "Au clavier et à la souris, la caméra orbitale revient derrière le joueur à mesure qu'il se déplace, jamais quand il est immobile.");
+        settings(t, "auto_camera_controller", "Camera Follows (Controller)", "Suivi de la caméra (manette)",
+                "Playing on a controller, the orbit camera swings round behind the player as they move, never while they stand still.",
+                "À la manette, la caméra orbitale revient derrière le joueur à mesure qu'il se déplace, jamais quand il est immobile.");
+        settings(t, "auto_camera_speed", "Camera Follow Speed", "Vitesse de suivi de la caméra",
+                "How fast the camera swings round when following the player at full speed.", "La vitesse à laquelle la caméra revient derrière le joueur lancé à pleine vitesse.");
+        settings(t, "follow_lag", "Camera Lag", "Retard de la caméra",
+                "How long the camera takes to catch up with the player. None follows rigidly.", "Le temps que met la caméra à rattraper le joueur. Aucun : elle le suit de près.");
+        settings(t, "orbit_sensitivity", "Camera Sensitivity", "Sensibilité de la caméra",
+                "How fast the mouse and the right stick turn the orbit camera.", "La vitesse à laquelle la souris et le stick droit font tourner la caméra orbitale.");
+        settings(t, "fov_kick", "Speed Field of View", "Champ de vision à pleine vitesse",
+                "How much wider the view gets at full speed.", "De combien le champ de vision s'élargit à pleine vitesse.");
+        settings(t, "respect_profile_hints", "Profile Camera Hints", "Indications des profils",
+                "Let arcade profiles scale the camera distance and the speed field of view.",
+                "Laisser les profils arcade ajuster la distance de la caméra et le champ de vision à pleine vitesse.");
+        settings(t, "debug_hud", "Debug HUD on Start", "Interface de débogage au démarrage",
+                "Show the arcade debug HUD when the game starts.", "Afficher l'interface de débogage arcade au démarrage du jeu.");
+        t.put("arcade." + M + ".settings.unit.degrees_per_second", pair("%s°/s", "%s°/s"));
+        t.put("arcade." + M + ".settings.unit.blocks", pair("%s blocks", "%s blocs"));
+        t.put("arcade." + M + ".settings.unit.milliseconds", pair("%s ms", "%s ms"));
+        t.put("arcade." + M + ".settings.unit.percent", pair("%s%%", "%s %%"));
+        t.put("arcade." + M + ".settings.auto_camera_controller.on", pair("Camera follows the player", "La caméra suit le joueur"));
+        t.put("arcade." + M + ".settings.auto_camera_controller.off", pair("Camera stays put", "La caméra reste en place"));
 
         // moves
         t.put(move("walk"), pair("Walk", "Marche"));

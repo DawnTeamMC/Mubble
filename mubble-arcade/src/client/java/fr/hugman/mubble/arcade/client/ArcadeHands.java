@@ -6,13 +6,14 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
+import org.jspecify.annotations.Nullable;
 
 /**
- * Shares attack and use between the hands and the moves, as Cappy's buttons are in Super Mario
+ * The hands while the arcade layer drives. They answer to the arcade attack and use keys, which stand
+ * in for the vanilla ones, and share them with the moves as Cappy's buttons are in Super Mario
  * Odyssey: a press goes to the moves while crouch is held (a roll) or while the move keeps the hands
  * busy (a dive out of a ground pound, a roll boost), and to the item in hand the rest of the time, see
- * {@link ArcadeController#handsGoToMoves}. It is the same on a keyboard and on a controller, since
- * Controlify presses the vanilla keys.
+ * {@link ArcadeController#handsGoToMoves}.
  * <p>
  * A press given to the moves is kept from the hands until the key is let go, so that holding it does
  * not start eating or mining once the move is over.
@@ -26,20 +27,32 @@ public final class ArcadeHands {
     }
 
     /**
-     * Called for every click of a key vanilla is about to act on: whether the click of attack or use
-     * goes to the moves instead, in which case it becomes an action press.
+     * The arcade key standing in for the vanilla {@code key} right now: the arcade attack or use while
+     * the layer drives, nothing otherwise.
+     */
+    @Nullable
+    public static KeyMapping standIn(Minecraft minecraft, KeyMapping key) {
+        var player = minecraft.player;
+        if (player == null || !ArcadeController.of(player).isDriving()) {
+            return null;
+        }
+        if (key == minecraft.options.keyAttack) {
+            return ArcadeKeyMappings.ATTACK;
+        }
+        return key == minecraft.options.keyUse ? ArcadeKeyMappings.USE : null;
+    }
+
+    /**
+     * Called for every click of an arcade attack or use vanilla is about to act on: whether it goes to
+     * the moves instead, in which case it becomes an action press.
      */
     public static boolean takeForMoves(Minecraft minecraft, KeyMapping key) {
-        boolean attack = key == minecraft.options.keyAttack;
-        if (!attack && key != minecraft.options.keyUse) {
-            return false;
-        }
         var player = minecraft.player;
         if (player == null || !ArcadeController.of(player).handsGoToMoves(ArcadeClientInput.crouchHeld())) {
             return false;
         }
         ArcadeClientInput.pressAction();
-        if (attack) {
+        if (key == ArcadeKeyMappings.ATTACK) {
             attackKept = true;
         } else {
             useKept = true;
@@ -48,14 +61,14 @@ public final class ArcadeHands {
     }
 
     /** Whether {@code key} is kept from the hands, its last press having gone to the moves. */
-    public static boolean kept(Minecraft minecraft, KeyMapping key) {
-        return key == minecraft.options.keyAttack && attackKept || key == minecraft.options.keyUse && useKept;
+    public static boolean kept(KeyMapping key) {
+        return key == ArcadeKeyMappings.ATTACK && attackKept || key == ArcadeKeyMappings.USE && useKept;
     }
 
     /** Every frame: a key let go goes back to the hands. Returns the action bit while a kept key is held. */
-    static int onFrame(Minecraft minecraft) {
-        attackKept &= minecraft.options.keyAttack.isDown();
-        useKept &= minecraft.options.keyUse.isDown();
+    static int onFrame() {
+        attackKept &= ArcadeKeyMappings.ATTACK.isDown();
+        useKept &= ArcadeKeyMappings.USE.isDown();
         return attackKept || useKept ? ArcadeInputFrame.ACTION : 0;
     }
 

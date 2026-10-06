@@ -107,16 +107,32 @@ allprojects {
     }
 
     repositories {
-        // Controlify, the controller mod: Mubble compiles against it, and only the sandbox runs it
-        maven {
-            name = 'isXander'
-            url = 'https://maven.isxander.dev/releases'
-            // only the jars are wanted, not the multi-loader variants their metadata describes
-            metadataSources {
-                artifact()
+        // Controlify, the controller mod, and Mod Menu: Mubble compiles against them, and only the
+        // sandbox runs them. Each group is only ever looked up in its own repository.
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = 'isXander'
+                    url = 'https://maven.isxander.dev/releases'
+                    // only the jars are wanted, not the multi-loader variants their metadata describes
+                    metadataSources {
+                        artifact()
+                    }
+                }
             }
-            content {
+            filter {
                 includeGroup 'dev.isxander'
+            }
+        }
+        exclusiveContent {
+            forRepository {
+                maven {
+                    name = 'TerraformersMC'
+                    url = 'https://maven.terraformersmc.com/releases'
+                }
+            }
+            filter {
+                includeGroup 'com.terraformersmc'
             }
         }
     }

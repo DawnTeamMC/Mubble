@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * Carries the arcade animation of a player into its render state, and turns the whole body for the
+ * Carries the arcade animation of a player into its render state, and moves the whole body for the
  * moves animating it. The data is set on every extraction, to {@link ArcadeRenderData#NONE} outside
  * arcade moves, so that nothing lingers from one frame to the next.
  */
@@ -24,7 +24,7 @@ public class ArcadeAvatarRendererMixin {
     private void mubble$extractArcadeAnimation(Avatar entity, AvatarRenderState state, float partialTicks, CallbackInfo ci) {
         var data = entity instanceof Player player ? ArcadePlayerAnimator.renderData(player) : ArcadeRenderData.NONE;
         state.setData(ArcadePlayerAnimator.DATA, data);
-        if (data.isPlaying() && data.animation().body().isPresent()) {
+        if (data.drivesBody()) {
             // the move turns the whole body itself: vanilla's swimming tilt would only add to it
             state.swimAmount = 0.0F;
             state.isVisuallySwimming = false;
@@ -34,7 +34,7 @@ public class ArcadeAvatarRendererMixin {
     @Inject(method = "setupRotations(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;FF)V", at = @At("HEAD"), cancellable = true)
     private void mubble$rotateArcadeBody(AvatarRenderState state, PoseStack poseStack, float bodyRot, float entityScale, CallbackInfo ci) {
         var data = state.getData(ArcadePlayerAnimator.DATA);
-        if (data == null || !data.isPlaying() || data.animation().body().isEmpty()) {
+        if (data == null || !data.drivesBody()) {
             return;
         }
         // the one rotation every living entity gets, then the whole body of the move
