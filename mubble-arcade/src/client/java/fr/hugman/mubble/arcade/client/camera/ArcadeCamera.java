@@ -21,8 +21,8 @@ import org.jspecify.annotations.Nullable;
  * <p>
  * The camera has its own yaw and pitch, moved by the mouse or the right stick, and the stick moves
  * the player relative to it: the body turns towards where it goes, the view does not follow, and the
- * head looks at the horizon. The camera trails the player a little, pulls in rather than going
- * through blocks, swings back behind the player on recenter, follows them round as they move if set
+ * head looks at the horizon. The camera trails the player a little, eases in when it backs into a
+ * block (the player showing through whatever stands in between otherwise, see {@link ArcadeSilhouette}), swings back behind the player on recenter, follows them round as they move if set
  * to, and blends with the vanilla view when one takes over from the other. The hands do not follow the camera: they hit and use items where the
  * body faces, see {@link ArcadeAim#pickAhead}.
  */
@@ -36,6 +36,13 @@ public final class ArcadeCamera {
     private static final float BLEND_SECONDS = 0.25F;
     /** How fast the head of the player goes back to looking at the horizon, in degrees per tick. */
     private static final float HEAD_LEVEL_SPEED = 8.0F;
+    /** How much room the camera keeps around itself, on top of its own box, before it moves in from a block. */
+    private static final double OBSTRUCTION_MARGIN = 0.3D;
+    /** The box of the camera itself, which never goes inside a block. */
+    private static final double CAMERA_BOX = 0.1D;
+    /** How fast the camera eases in from a block, and back out once there is room: the share of the way left covered per second, as a rate. */
+    private static final double MOVE_IN_RATE = 14.0D;
+    private static final double MOVE_OUT_RATE = 3.0D;
     /** How long the camera lets the player turn it by hand before following them again, in seconds. */
     private static final float AUTO_CAMERA_DELAY = 0.75F;
     /** The slowest the player may go for the camera to follow them, in blocks per tick: standing still, it never moves. */
@@ -54,6 +61,8 @@ public final class ArcadeCamera {
     private static float blend;
     private static long lastFrameNanos;
     private static long lastManualTurnNanos;
+    /** How far behind the focus the camera sits, easing towards where it can, or below 0 before the first frame. */
+    private static double distance = -1.0D;
 
     private ArcadeCamera() {
     }
@@ -169,8 +178,7 @@ public final class ArcadeCamera {
         float eye = Mth.lerp(partialTicks, invoker.mubble$getEyeHeightOld(), invoker.mubble$getEyeHeight());
         var center = feet.add(0.0D, eye + config.cameraHeight(), 0.0D);
         var forward = Vec3.directionFromRotation(pitch, yaw);
-        double distance = config.cameraDistance() * hintDistanceScale(player) * player.getScale();
-        var orbitPosition = center.subtract(forward.scale(ArcadeAim.cameraDistance(player.level(), player, center, forward, distance)));
+        var orbitPosition = center.subtract(forward.scale(distance(player, center, forward, seconds)));
 
         if (blend >= 1.0F) {
             invoker.mubble$setRotation(yaw, pitch);
@@ -183,6 +191,29 @@ public final class ArcadeCamera {
         float vanillaPitch = camera.xRot();
         invoker.mubble$setRotation(vanillaYaw + Mth.degreesDifference(vanillaYaw, yaw) * t, Mth.lerp(t, vanillaPitch, pitch));
         invoker.mubble$setPosition(vanillaPosition.lerp(orbitPosition, t));
+    }
+
+    /**
+     * How far behind the focus the camera sits this frame. Something between the camera and the
+     * player does not move it, the player showing through instead (see {@link ArcadeSilhouette}); the
+     * camera's own spot running into a block does, and the camera eases in, just far enough to stay
+     * out of it, quickly, then back out slowly once there is room again. It only ever cuts to where it
+     * can be when it would otherwise be inside a block.
+     */
+    private static double distance(LocalPlayer player, Vec3 center, Vec3 forward, float seconds) {
+        var level = player.level();
+        double wanted = ArcadeClientConfig.get().cameraDistance() * hintDistanceScale(player) * player.getScale();
+        double target = ArcadeAim.clearDistance(level, player, center, forward, wanted, OBSTRUCTION_MARGIN);
+        if (distance < 0.0D || blend < 1.0F) {
+            distance = target;
+        } else {
+            double rate = target < distance ? MOVE_IN_RATE : MOVE_OUT_RATE;
+            distance += (target - distance) * (1.0D - Math.exp(-rate * seconds));
+            if (!ArcadeAim.cameraFits(level, player, center.subtract(forward.scale(distance)), CAMERA_BOX)) {
+                distance = Math.min(distance, ArcadeAim.clearDistance(level, player, center, forward, distance, 0.0D));
+            }
+        }
+        return distance;
     }
 
     /** Whether the camera follows the player round as they move: a setting for the keyboard and mouse, one for controllers. */

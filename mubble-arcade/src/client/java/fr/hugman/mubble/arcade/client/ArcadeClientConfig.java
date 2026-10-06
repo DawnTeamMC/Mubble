@@ -35,6 +35,7 @@ import org.apache.logging.log4j.Logger;
  * @param fovKick             extra field of view at full run speed, as a share of the base one
  * @param respectProfileHints whether the camera hints of the active profile apply
  * @param debugHud            whether the debug HUD starts shown
+ * @param silhouette          whether the player shows through what hides them from the orbit camera
  */
 @Environment(EnvType.CLIENT)
 public record ArcadeClientConfig(
@@ -51,10 +52,11 @@ public record ArcadeClientConfig(
         double maxPitch,
         double fovKick,
         boolean respectProfileHints,
-        boolean debugHud
+        boolean debugHud,
+        boolean silhouette
 ) {
     private static final Logger LOGGER = LogManager.getLogger(Mubble.MOD_ID);
-    public static final ArcadeClientConfig DEFAULT = new ArcadeClientConfig(true, false, true, 120.0D, 5.0D, 0.3D, 0.08D, 540.0D, 1.0D, -80.0D, 80.0D, 0.08D, true, false);
+    public static final ArcadeClientConfig DEFAULT = new ArcadeClientConfig(true, false, true, 120.0D, 5.0D, 0.3D, 0.08D, 540.0D, 1.0D, -80.0D, 80.0D, 0.08D, true, false, true);
 
     public static final Codec<ArcadeClientConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.optionalFieldOf("orbit_camera", DEFAULT.orbitCamera).forGetter(ArcadeClientConfig::orbitCamera),
@@ -70,7 +72,8 @@ public record ArcadeClientConfig(
             Codec.doubleRange(-90.0D, 90.0D).optionalFieldOf("max_pitch", DEFAULT.maxPitch).forGetter(ArcadeClientConfig::maxPitch),
             Codec.doubleRange(0.0D, 1.0D).optionalFieldOf("fov_kick", DEFAULT.fovKick).forGetter(ArcadeClientConfig::fovKick),
             Codec.BOOL.optionalFieldOf("respect_profile_hints", DEFAULT.respectProfileHints).forGetter(ArcadeClientConfig::respectProfileHints),
-            Codec.BOOL.optionalFieldOf("debug_hud", DEFAULT.debugHud).forGetter(ArcadeClientConfig::debugHud)
+            Codec.BOOL.optionalFieldOf("debug_hud", DEFAULT.debugHud).forGetter(ArcadeClientConfig::debugHud),
+            Codec.BOOL.optionalFieldOf("silhouette", DEFAULT.silhouette).forGetter(ArcadeClientConfig::silhouette)
     ).apply(instance, ArcadeClientConfig::new));
 
     private static ArcadeClientConfig current = DEFAULT;
@@ -99,7 +102,7 @@ public record ArcadeClientConfig(
     /** The same settings, the camera following the player round on a controller or not. */
     public ArcadeClientConfig withAutoCameraController(boolean on) {
         return new ArcadeClientConfig(this.orbitCamera, this.autoCameraKeyboard, on, this.autoCameraSpeed, this.cameraDistance, this.cameraHeight,
-                this.followLag, this.recenterSpeed, this.orbitSensitivity, this.minPitch, this.maxPitch, this.fovKick, this.respectProfileHints, this.debugHud);
+                this.followLag, this.recenterSpeed, this.orbitSensitivity, this.minPitch, this.maxPitch, this.fovKick, this.respectProfileHints, this.debugHud, this.silhouette);
     }
 
     /** Sets the settings, as the settings screen does, and writes them down. */
@@ -137,5 +140,6 @@ public record ArcadeClientConfig(
         object.addProperty("fov_kick", c.fovKick);
         object.addProperty("respect_profile_hints", c.respectProfileHints);
         object.addProperty("debug_hud", c.debugHud);
+        object.addProperty("silhouette", c.silhouette);
     }
 }

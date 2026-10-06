@@ -22,6 +22,8 @@ import net.minecraft.world.phys.Vec3;
 public final class ArcadeAim {
     /** Half the size of the box the camera keeps clear around itself, as vanilla's third person camera does. */
     private static final double CAMERA_RADIUS = 0.1D;
+    /** How far apart the spots the camera tries are, coming closer to get out of a block, in blocks. */
+    private static final double CLEAR_STEP = 0.25D;
     /** How much wider than an entity what the hands pick ahead is, see {@link #pickAhead}. */
     private static final double AHEAD_LENIENCY = 0.5D;
 
@@ -50,6 +52,44 @@ public final class ArcadeAim {
             }
         }
         return distance;
+    }
+
+    /**
+     * How far behind {@code focus}, looking along {@code forward}, the camera can sit, at most
+     * {@code distance}: all of it as long as the spot is clear of blocks, whatever stands between it
+     * and the focus; otherwise only as much closer as it takes to get out of them. A pillar or a
+     * wall between the camera and the player does not move it; the camera backing into one does.
+     *
+     * @param margin how much room the camera keeps around itself on top of its own box, so that it
+     *               starts moving in before it reaches the block rather than once it is in it
+     */
+    public static double clearDistance(Level level, Entity entity, Vec3 focus, Vec3 forward, double distance, double margin) {
+        var back = forward.normalize().scale(-1.0D);
+        double radius = CAMERA_RADIUS + margin;
+        for (double d = distance; d > 0.0D; d -= CLEAR_STEP) {
+            if (cameraFits(level, entity, focus.add(back.scale(d)), radius)) {
+                if (d == distance) {
+                    return d;
+                }
+                // closer in by steps, then back out to the edge of the room it found
+                double inside = d + CLEAR_STEP;
+                for (int i = 0; i < 6; i++) {
+                    double mid = (d + inside) / 2.0D;
+                    if (cameraFits(level, entity, focus.add(back.scale(mid)), radius)) {
+                        d = mid;
+                    } else {
+                        inside = mid;
+                    }
+                }
+                return d;
+            }
+        }
+        return 0.0D;
+    }
+
+    /** Whether the box of the camera, {@code radius} each way around {@code position}, is clear of blocks. */
+    public static boolean cameraFits(Level level, Entity entity, Vec3 position, double radius) {
+        return level.noBlockCollision(entity, new AABB(position, position).inflate(radius));
     }
 
     /**

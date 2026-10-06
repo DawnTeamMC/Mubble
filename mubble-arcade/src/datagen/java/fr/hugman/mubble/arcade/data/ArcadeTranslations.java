@@ -67,6 +67,9 @@ public final class ArcadeTranslations {
                 "How fast the mouse and the right stick turn the orbit camera.", "La vitesse à laquelle la souris et le stick droit font tourner la caméra orbitale.");
         settings(t, "fov_kick", "Speed Field of View", "Champ de vision à pleine vitesse",
                 "How much wider the view gets at full speed.", "De combien le champ de vision s'élargit à pleine vitesse.");
+        settings(t, "silhouette", "Show Player Through Walls", "Joueur visible à travers les murs",
+                "When something stands between the orbit camera and the player, the player shows through it in light gray.",
+                "Quand quelque chose se trouve entre la caméra orbitale et le joueur, le joueur apparaît au travers en gris clair.");
         settings(t, "respect_profile_hints", "Profile Camera Hints", "Indications des profils",
                 "Let arcade profiles scale the camera distance and the speed field of view.",
                 "Laisser les profils arcade ajuster la distance de la caméra et le champ de vision à pleine vitesse.");
