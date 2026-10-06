@@ -6,4 +6,5 @@ public class ShooterInkBulletRenderState extends EntityRenderState {
     public float pitch;
     public float yaw;
     public double speed;
+    public int color = -1;
 }

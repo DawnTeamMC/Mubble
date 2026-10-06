@@ -1,6 +1,7 @@
 package fr.hugman.mubble.splatoon.data;
 
 import fr.hugman.mubble.splatoon.Splatoon;
+import fr.hugman.mubble.splatoon.data.provider.SplatoonBlockTagsProvider;
 import fr.hugman.mubble.splatoon.data.provider.SplatoonEnglishLangProvider;
 import fr.hugman.mubble.splatoon.data.provider.SplatoonModelProvider;
 import fr.hugman.mubble.splatoon.data.provider.SplatoonSoundsProvider;
@@ -18,6 +19,9 @@ public class SplatoonDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(SplatoonEnglishLangProvider::new);
 		pack.addProvider(SplatoonModelProvider::new);
 		pack.addProvider(SplatoonSoundsProvider::new);
+
+		// Data pack
+		pack.addProvider(SplatoonBlockTagsProvider::new);
 	}
 
 	@Override

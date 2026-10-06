@@ -2,6 +2,7 @@ package fr.hugman.mubble.splatoon.client.renderer.entity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import fr.hugman.mubble.splatoon.Splatoon;
 import fr.hugman.mubble.splatoon.client.model.InkBulletModel;
 import fr.hugman.mubble.splatoon.client.model.SplatoonModelLayers;
 import fr.hugman.mubble.splatoon.client.renderer.entity.state.ShooterInkBulletRenderState;
@@ -14,10 +15,11 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import net.minecraft.util.Mth;
 
 public class ShooterInkBulletRenderer extends EntityRenderer<ShooterInkBullet, ShooterInkBulletRenderState> {
-    private static final Identifier TEXTURE = Identifier.withDefaultNamespace("textures/block/light_blue_concrete.png");
+    private static final Identifier TEXTURE = Splatoon.id("textures/block/ink/normal.png");
     private static final RenderType LAYER = RenderTypes.entityTranslucent(TEXTURE);
 
     private final InkBulletModel model;
@@ -33,6 +35,15 @@ public class ShooterInkBulletRenderer extends EntityRenderer<ShooterInkBullet, S
     @Override
     public ShooterInkBulletRenderState createRenderState() {
         return new ShooterInkBulletRenderState();
+    }
+
+    @Override
+    public void extractRenderState(ShooterInkBullet bullet, ShooterInkBulletRenderState state, float partialTicks) {
+        super.extractRenderState(bullet, state, partialTicks);
+        state.pitch = bullet.getXRot(partialTicks);
+        state.yaw = bullet.getYRot(partialTicks);
+        state.speed = bullet.getDeltaMovement().length();
+        state.color = ARGB.opaque(bullet.getInkColor());
     }
 
     @Override
@@ -60,6 +71,8 @@ public class ShooterInkBulletRenderer extends EntityRenderer<ShooterInkBullet, S
                 this.model.renderType(TEXTURE),
                 state.lightCoords,
                 OverlayTexture.NO_OVERLAY,
+                state.color,
+                null,
                 state.outlineColor,
                 null
         );
