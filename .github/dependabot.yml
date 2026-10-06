@@ -1,0 +1,20 @@
+version: 2
+registries:
+  fabric-maven:
+    type: maven-repository
+    url: https://maven.fabricmc.net/
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: "dev"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "gradle"
+    directory: "/"
+    target-branch: "dev"
+    schedule:
+      interval: "weekly"
+    registries:
+      - fabric-maven

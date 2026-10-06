@@ -9,6 +9,24 @@ def metaProjects = [
     'mubble-bom',
 ]
 
+// Projects that only hold tests: they are built and run, but never shipped,
+// nested inside the release jar or published.
+def testProjects = [
+    'mubble-test',
+]
+ext.testProjects = testProjects
+
+// Projects that only exist to be launched in the development environment: sandbox content used to
+// exercise the mod by hand. Never shipped either.
+def devProjects = [
+    'mubble-testmod',
+]
+ext.devProjects = devProjects
+
+// Everything that never makes it into a release.
+def unshippedProjects = testProjects + devProjects
+ext.unshippedProjects = unshippedProjects
+
 def getSubprojectVersion(Project project) {
     return "local" //TODO
 }
@@ -78,7 +96,7 @@ allprojects {
     }
 
     allprojects.each { p ->
-        if (metaProjects.contains(p.name)) {
+        if (metaProjects.contains(p.name) || unshippedProjects.contains(p.name)) {
             return
         }
 
@@ -122,7 +140,7 @@ subprojects {
 
 dependencies {
     subprojects.each {
-        if (metaProjects.contains(it.name)) {
+        if (metaProjects.contains(it.name) || unshippedProjects.contains(it.name)) {
             return
         }
 
@@ -139,7 +157,7 @@ configurations {
 
 dependencies {
     subprojects.each {
-        if (metaProjects.contains(it.name)) {
+        if (metaProjects.contains(it.name) || unshippedProjects.contains(it.name)) {
             return
         }
 

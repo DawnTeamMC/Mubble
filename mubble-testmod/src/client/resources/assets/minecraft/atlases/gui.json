@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "type": "minecraft:single",
+      "resource": "mubble-testmod:item/snowball_flower",
+      "sprite": "mubble-testmod:power_up/snowball"
+    }
+  ]
+}

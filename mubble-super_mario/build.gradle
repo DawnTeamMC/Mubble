@@ -14,6 +14,8 @@ fabricApi {
 }
 
 loom {
+    accessWidenerPath = file("src/main/resources/super_mario.accesswidener")
+
     runs {
         datagen {
             name "Data Generation"

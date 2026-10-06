@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "name": "Mubble (Test Mod)",
+  "id": "mubble-testmod",
+  "version": "${version}",
+  "authors": [
+    "Hugman"
+  ],
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.hugman.mubble.testmod.MubbleTestMod"
+    ]
+  },
+  "depends": {
+    "minecraft": "*",
+    "fabric-api": "*",
+    "mubble": "*",
+    "super_mario": "*"
+  },
+  "license": "LGPL v3.0"
+}

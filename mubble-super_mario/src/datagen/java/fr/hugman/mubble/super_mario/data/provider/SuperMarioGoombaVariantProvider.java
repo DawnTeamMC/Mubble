@@ -1,9 +1,8 @@
 package fr.hugman.mubble.super_mario.data.provider;
 
-import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.core.registries.SuperMarioRegistries;
-import fr.hugman.mubble.super_mario.references.GoombaVariantKeys;
+import fr.hugman.mubble.super_mario.references.GoombaVariantIds;
 import fr.hugman.mubble.super_mario.world.entity.monster.goomba.GoombaVariant;
 import fr.hugman.mubble.world.item.spawn_egg.VariantSpawnEggInfo;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -34,7 +33,7 @@ public class SuperMarioGoombaVariantProvider extends FabricDynamicRegistryProvid
     }
 
     public static void bootstrap(BootstrapContext<GoombaVariant> context) {
-		context.register(GoombaVariantKeys.NORMAL, new GoombaVariant(
+		context.register(GoombaVariantIds.NORMAL, new GoombaVariant(
 				Optional.empty(),
 				new GoombaVariant.GoombaAssetInfo(
 						new ClientAsset.ResourceTexture(SuperMario.id("entity/goomba/normal/normal")),
@@ -43,7 +42,7 @@ public class SuperMarioGoombaVariantProvider extends FabricDynamicRegistryProvid
 				Map.of(),
 				Optional.empty()
 		));
-		context.register(GoombaVariantKeys.MINI, new GoombaVariant(
+		context.register(GoombaVariantIds.MINI, new GoombaVariant(
 				Optional.of(Component.translatable("entity." + SuperMario.MOD_ID + ".goomba.mini")),
 				new GoombaVariant.GoombaAssetInfo(
 						new ClientAsset.ResourceTexture(SuperMario.id("entity/goomba/mini/normal")),

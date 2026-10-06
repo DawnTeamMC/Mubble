@@ -4,7 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import java.util.List;
 import java.util.Optional;
-import net.minecraft.advancements.criterion.TagPredicate;
+
+import net.minecraft.advancements.predicates.TagPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;

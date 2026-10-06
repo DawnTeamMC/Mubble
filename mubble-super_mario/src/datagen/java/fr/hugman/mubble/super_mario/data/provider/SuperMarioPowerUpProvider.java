@@ -1,10 +1,13 @@
 package fr.hugman.mubble.super_mario.data.provider;
 
 import fr.hugman.mubble.core.registries.MubbleRegistries;
+import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowerUpAction;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
+import fr.hugman.mubble.world.power_up.PowerUpCharges;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
@@ -17,7 +20,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
-import static fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys.*;
+import static fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds.*;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_MULTIPLIED_BASE;
 import static net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation.ADD_VALUE;
 
@@ -37,9 +40,12 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
     }
 
     public static void bootstrap(BootstrapContext<PowerUp> context) {
-        context.register(MINI, create(MINI)
+        //TODO: some power-ups should be lost when taking too much damage
+        context.register(MINI, builder(MINI)
+                .description(MINI, "size")
+                .description(MINI, "trade_off")
+                .description(MINI, "water")
                 .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_MINI)
-                .canSprintOnWater(true)
                 .attributesModifier(Attributes.SCALE, -0.67, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.GRAVITY, -0.3, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.JUMP_STRENGTH, 0.25, ADD_MULTIPLIED_BASE)
@@ -53,10 +59,12 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .attributesModifier(Attributes.BLOCK_INTERACTION_RANGE, -0.4, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.ENTITY_INTERACTION_RANGE, -0.4, ADD_MULTIPLIED_BASE)
                 .build());
-        context.register(MEGA, create(MEGA)
+        context.register(MEGA, builder(MEGA)
+                .description(MEGA, "size")
+                .description(MEGA, "trade_off")
                 .attributesModifier(Attributes.SCALE, 2, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.GRAVITY, 0.5, ADD_MULTIPLIED_BASE)
-                .attributesModifier(Attributes.MOVEMENT_SPEED, 2, ADD_MULTIPLIED_BASE)
+                .attributesModifier(Attributes.MOVEMENT_SPEED, 1.75, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.JUMP_STRENGTH, 2, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.SAFE_FALL_DISTANCE, 12, ADD_VALUE)
                 .attributesModifier(Attributes.MAX_HEALTH, 0.6, ADD_MULTIPLIED_BASE)
@@ -68,30 +76,90 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                 .attributesModifier(Attributes.BLOCK_INTERACTION_RANGE, 1.2, ADD_MULTIPLIED_BASE)
                 .attributesModifier(Attributes.ENTITY_INTERACTION_RANGE, 1.2, ADD_MULTIPLIED_BASE)
                 .build());
-        context.register(FIRE, create(FIRE)
+        context.register(FIRE, builder(FIRE, true)
+                .emissiveOverlay()
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.FIREBALL,
-                        SuperMarioSounds.FIREBALL_THROW,
+                        Optional.of(SuperMarioSounds.FIREBALL_THROW),
                         0.4f,
-                        Optional.of(3),
-                        Optional.empty()
+                        1.0f,
+                        true,
+                        PowerUpCharges.fromActiveEntities(3)
                 )))
                 .build());
-        context.register(ICE, create(ICE)
+        context.register(ICE, builder(ICE, true)
+                .emissiveOverlay()
                 .action(Holder.direct(new ShootProjectilePowerUpAction(
                         SuperMarioEntityTypes.ICEBALL,
-                        SuperMarioSounds.ICEBALL_THROW,
+                        Optional.of(SuperMarioSounds.ICEBALL_THROW),
                         0.4f,
-                        Optional.of(3),
-                        Optional.empty()
+                        1.0f,
+                        true,
+                        PowerUpCharges.fromActiveEntities(3)
+                )))
+                .build());
+        context.register(GOLD, builder(GOLD, true)
+                .emissiveOverlay()
+                .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_GOLD)
+                .emitSound(SuperMarioSounds.POWER_UP_EMIT_GOLD)
+                .action(Holder.direct(new ShootProjectilePowerUpAction(
+                        SuperMarioEntityTypes.GOLD_FIREBALL,
+                        Optional.of(SuperMarioSounds.GOLD_FIREBALL_THROW),
+                        0.4f,
+                        1.0f,
+                        true,
+                        PowerUpCharges.fromActiveEntities(3)
+                )))
+                .particle(SuperMarioParticleTypes.COIN_SPARKLE)
+                .build());
+        context.register(CLOUD, builder(CLOUD)
+                .description(CLOUD, "float")
+                .description(CLOUD, "weather")
+                .action(Holder.direct(new SpawnCloudPlatformPowerUpAction(SuperMarioEntityTypes.CLOUD_PLATFORM, Optional.of(3))))
+                .attributesModifier(Attributes.GRAVITY, -0.5, ADD_MULTIPLIED_BASE)
+                .attributesModifier(Attributes.JUMP_STRENGTH, 0.35, ADD_MULTIPLIED_BASE)
+                .attributesModifier(Attributes.SAFE_FALL_DISTANCE, 9, ADD_VALUE)
+                .attributesModifier(Attributes.FALL_DAMAGE_MULTIPLIER, -0.5, ADD_MULTIPLIED_BASE)
+                .build());
+        context.register(BUBBLE, builder(BUBBLE)
+                .action(Holder.direct(new ShootProjectilePowerUpAction(
+                        SuperMarioEntityTypes.BUBBLE,
+                        Optional.empty(), // the bubble plays its own "appear" sound as it spawns
+                        0.4f,
+                        1.0f,
+                        true,
+                        PowerUpCharges.burst(2, 24)
+                )))
+                .build());
+        context.register(SUPERBALL, builder(SUPERBALL)
+                .description(SUPERBALL, "ricochet")
+                .description(SUPERBALL, "coins")
+                .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN_SUPERBALL)
+                .looseSound(SuperMarioSounds.POWER_UP_LOOSE_SUPERBALL)
+                .action(Holder.direct(new ShootProjectilePowerUpAction(
+                        SuperMarioEntityTypes.SUPERBALL,
+                        Optional.of(SuperMarioSounds.SUPERBALL_THROW),
+                        0.4f,
+                        0.0f,
+                        false,
+                        PowerUpCharges.fromActiveEntities(1)
                 )))
                 .build());
     }
 
-    public static PowerUpBuilder create(ResourceKey<PowerUp> key) {
-        return new PowerUpBuilder()
-            .name(key)
-            .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN)
-            .looseSound(SuperMarioSounds.POWER_UP_LOOSE);
+    public static PowerUpBuilder builder(ResourceKey<PowerUp> key, boolean withOverlay) {
+        var builder = new PowerUpBuilder()
+                .name(key)
+                .obtainSound(SuperMarioSounds.POWER_UP_OBTAIN)
+                .refillSound(SuperMarioSounds.POWER_UP_REFILL)
+                .looseSound(SuperMarioSounds.POWER_UP_LOOSE);
+        if (withOverlay) {
+            builder.humanoidOverlay(key);
+        }
+        return builder;
+    }
+
+    public static PowerUpBuilder builder(ResourceKey<PowerUp> key) {
+        return builder(key, false);
     }
 }

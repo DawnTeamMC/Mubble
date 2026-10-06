@@ -3,9 +3,12 @@
   "package": "fr.hugman.mubble.super_mario.client.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "ClientCommonPacketListenerImplAccessor",
     "ClientPacketListenerMixin",
-    "LivingEntityRendererMixin"
+    "FrozenEntityRendererMixin",
+    "FrozenLivingEntityRendererMixin",
+    "HumanoidMobRendererMixin",
+    "LivingEntityRendererMixin",
+    "AvatarRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

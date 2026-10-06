@@ -3,6 +3,7 @@ package fr.hugman.mubble.world.power_up.action;
 import com.mojang.serialization.Codec;
 import fr.hugman.mubble.core.registries.MubbleBuiltInRegistries;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
+import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -11,6 +12,8 @@ import net.minecraft.resources.RegistryFileCodec;
 import net.minecraft.util.Util;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import org.jspecify.annotations.Nullable;
+
 import java.util.Optional;
 
 public interface PowerUpAction {
@@ -23,7 +26,24 @@ public interface PowerUpAction {
 
     PowerUpActionType<?> getType();
 
+    @Nullable
+    default PowerUpProperties setUpProperties() {
+        return null;
+    }
+
+    default boolean canBeRefilled() {
+        return false;
+    }
+
+    default boolean canBeTriggered(Player player) {
+        return true;
+    }
+
     InteractionResult trigger(Player player);
+
+    default boolean shouldSwingOtherHand() {
+        return false;
+    }
 
     default Optional<String> getTranslationKey() {
         return MubbleBuiltInRegistries.POWER_UP_ACTION_TYPE

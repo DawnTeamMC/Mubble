@@ -8,13 +8,14 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.ConstantFloat;
 import net.minecraft.util.valueproviders.FloatProvider;
+import net.minecraft.util.valueproviders.FloatProviders;
 import net.minecraft.world.level.Level;
 
 public final class SoundConfig {
     public static final Codec<SoundConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             SoundEvent.CODEC.fieldOf("sound").forGetter(o -> o.sound),
-            FloatProvider.CODEC.fieldOf("volume").forGetter(o -> o.volume),
-            FloatProvider.CODEC.fieldOf("pitch").forGetter(o -> o.pitch)
+            FloatProviders.CODEC.fieldOf("volume").forGetter(o -> o.volume),
+            FloatProviders.CODEC.fieldOf("pitch").forGetter(o -> o.pitch)
     ).apply(instance, SoundConfig::new));
     private Holder<SoundEvent> sound;
     private FloatProvider volume;

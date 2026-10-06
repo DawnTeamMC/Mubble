@@ -1,0 +1,17 @@
+{
+  "action": {
+    "type": "mubble:shoot_projectile",
+    "projectile": "minecraft:snowball",
+    "sound": "super_mario:entity.iceball.throw",
+    "speed": 0.4,
+    "max_projectiles": 5
+  },
+  "cosmetics": {
+    "loose_sound": "super_mario:power_up.loose",
+    "obtain_sound": "super_mario:power_up.obtain",
+    "refill_sound": "super_mario:power_up.refill"
+  },
+  "name": {
+    "translate": "power_up.mubble-testmod.snowball"
+  }
+}

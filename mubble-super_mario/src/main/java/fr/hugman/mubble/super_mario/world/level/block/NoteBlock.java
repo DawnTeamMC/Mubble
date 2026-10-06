@@ -35,23 +35,10 @@ public class NoteBlock extends DecoratedBumpableBlock {
 	@Override
 	public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
 		// No fall damage
-	}
-
-    @Override
-    public void updateEntityMovementAfterFallOn(BlockGetter view, Entity entity) {
-        // TODO: make a new interface for falling hittable blocks
-        Level level = entity.level();
-        if (level.isClientSide()) {
-            super.updateEntityMovementAfterFallOn(view, entity);
+        if (!level.isClientSide()) {
+            this.onHit(level, state, entity, new BlockHitResult(entity.position(), Direction.UP, pos, false));
         }
-
-        BlockPos pos = entity.blockPosition().below();
-        BlockState state = level.getBlockState(pos);
-
-        this.onHit(level, state, entity, new BlockHitResult(entity.position(), Direction.UP, pos, false));
-
-        super.updateEntityMovementAfterFallOn(view, entity);
-    }
+	}
 
 	@Override
 	public void playGenericBumpSound(BumpableBlockEntity entity) {
@@ -84,7 +71,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
                 break;
             }
         }
-        Vec3 center = pos.getCenter();
+        Vec3 center = Vec3.atCenterOf(pos);
         this.addParticles(level, pos);
         level.playSound(null, center.x(), center.y(), center.z(), shouldPlayHighSound ? this.highJumpSound : this.lowJumpSound, SoundSource.BLOCKS, 1F, 1F);
     }
@@ -96,7 +83,7 @@ public class NoteBlock extends DecoratedBumpableBlock {
     }
 
     public void addParticles(Level level, BlockPos blockPos) {
-        Vec3 center = blockPos.getCenter();
+        Vec3 center = Vec3.atCenterOf(blockPos);
         RandomSource random = level.getRandom();
         for (int i = 0; i < random.nextInt(5) + 1; i++) {
             double x = center.x() + (random.nextInt(7) - 3) / 10D;

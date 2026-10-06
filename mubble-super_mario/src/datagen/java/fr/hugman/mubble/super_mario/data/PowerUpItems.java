@@ -1,7 +1,7 @@
 package fr.hugman.mubble.super_mario.data;
 
-import fr.hugman.mubble.super_mario.references.SuperMarioItemKeys;
-import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpKeys;
+import fr.hugman.mubble.super_mario.references.SuperMarioItemIds;
+import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
@@ -13,10 +13,14 @@ public class PowerUpItems {
     public record Entry(ResourceKey<Item> item, ResourceKey<PowerUp> powerUp) { }
 
     public static final List<Entry> ENTRIES = List.of(
-            new Entry(SuperMarioItemKeys.MINI_MUSHROOM, SuperMarioPowerUpKeys.MINI),
-            new Entry(SuperMarioItemKeys.MEGA_MUSHROOM, SuperMarioPowerUpKeys.MEGA),
-            new Entry(SuperMarioItemKeys.FIRE_FLOWER, SuperMarioPowerUpKeys.FIRE),
-            new Entry(SuperMarioItemKeys.ICE_FLOWER, SuperMarioPowerUpKeys.ICE)
+            new Entry(SuperMarioItemIds.MINI_MUSHROOM, SuperMarioPowerUpIds.MINI),
+            new Entry(SuperMarioItemIds.MEGA_MUSHROOM, SuperMarioPowerUpIds.MEGA),
+            new Entry(SuperMarioItemIds.FIRE_FLOWER, SuperMarioPowerUpIds.FIRE),
+            new Entry(SuperMarioItemIds.ICE_FLOWER, SuperMarioPowerUpIds.ICE),
+            new Entry(SuperMarioItemIds.GOLD_FLOWER, SuperMarioPowerUpIds.GOLD),
+            new Entry(SuperMarioItemIds.CLOUD_FLOWER, SuperMarioPowerUpIds.CLOUD),
+            new Entry(SuperMarioItemIds.BUBBLE_FLOWER, SuperMarioPowerUpIds.BUBBLE),
+            new Entry(SuperMarioItemIds.SUPERBALL_FLOWER, SuperMarioPowerUpIds.SUPERBALL)
     );
 
     public static ResourceKey<Item> getItem(ResourceKey<PowerUp> powerUp) {
