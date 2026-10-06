@@ -136,7 +136,9 @@ public final class ArcadeValidator {
         if (!withinAxis(result.dz(), planned.z, tolerance)) {
             return "moved " + result.dz() + " along z where " + planned.z + " was planned";
         }
-        if (result.dy() < planned.y - tolerance) {
+        // a ceiling takes away from a step going up as a floor does from one going down: only falling
+        // further than planned has nothing to explain it
+        if (result.dy() < Math.min(planned.y, 0.0D) - tolerance) {
             return "fell " + result.dy() + " where " + planned.y + " was planned";
         }
         double maxUp = Math.max(planned.y, 0.0D) + tuning.stepHeight() + tolerance;

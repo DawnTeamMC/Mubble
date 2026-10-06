@@ -64,6 +64,35 @@ public class ArcadeAimGameTest {
     }
 
     @GameTest(structure = ArcadeTestKit.LANE)
+    public void somethingBetweenThePlayerAndTheCameraDoesNotMoveIt(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        var focus = helper.absoluteVec(new Vec3(5.5D, 2.6D, 10.5D));
+        // a pillar between the player and where the camera sits, which stays in the open
+        ArcadeTestKit.fill(helper, new BlockPos(5, 1, 12), new BlockPos(5, 4, 12), Blocks.STONE.defaultBlockState());
+        double distance = ArcadeAim.clearDistance(helper.getLevel(), player, focus, NORTH, 5.0D, 0.3D);
+        helper.assertTrue(Math.abs(distance - 5.0D) < 1.0E-9D, "the camera stays where it is, got " + distance);
+        helper.assertTrue(ArcadeAim.cameraDistance(helper.getLevel(), player, focus, NORTH, 5.0D) < 2.0D, "the pillar does stand in between");
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void aCameraBackingIntoAWallComesInJustEnough(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        var focus = helper.absoluteVec(new Vec3(5.5D, 2.6D, 10.5D));
+        // a thick wall from three blocks behind the player, where the camera would sit
+        ArcadeTestKit.fill(helper, new BlockPos(0, 1, 13), new BlockPos(9, 5, 17), Blocks.STONE.defaultBlockState());
+        double margin = 0.3D;
+        double distance = ArcadeAim.clearDistance(helper.getLevel(), player, focus, NORTH, 5.0D, margin);
+        double wall = helper.absoluteVec(new Vec3(0.0D, 0.0D, 13.0D)).z;
+        double camera = focus.z + distance;
+        helper.assertTrue(camera <= wall - 0.1D - margin + 1.0E-6D, "the camera keeps its room out of the wall, at z=" + camera + " for a wall at z=" + wall);
+        helper.assertTrue(camera >= wall - 0.1D - margin - 0.05D, "the camera comes no closer than it has to, at z=" + camera + " for a wall at z=" + wall);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
     public void theHandsReachWhatStandsInFrontAndNeverABlock(GameTestHelper helper) {
         ArcadeTestKit.floor(helper);
         var player = helper.makeMockPlayer(GameType.SURVIVAL);

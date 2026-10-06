@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import fr.hugman.mubble.arcade.client.animation.ArcadePlayerAnimator;
 import fr.hugman.mubble.arcade.client.animation.ArcadeRenderData;
+import fr.hugman.mubble.arcade.client.camera.ArcadeSilhouette;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.world.entity.Avatar;
@@ -24,6 +25,7 @@ public class ArcadeAvatarRendererMixin {
     private void mubble$extractArcadeAnimation(Avatar entity, AvatarRenderState state, float partialTicks, CallbackInfo ci) {
         var data = entity instanceof Player player ? ArcadePlayerAnimator.renderData(player) : ArcadeRenderData.NONE;
         state.setData(ArcadePlayerAnimator.DATA, data);
+        state.setData(ArcadeSilhouette.SHOWN, ArcadeSilhouette.shown(entity));
         if (data.drivesBody()) {
             // the move turns the whole body itself: vanilla's swimming tilt would only add to it
             state.swimAmount = 0.0F;

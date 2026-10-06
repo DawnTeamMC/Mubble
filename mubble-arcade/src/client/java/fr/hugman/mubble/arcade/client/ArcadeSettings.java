@@ -30,7 +30,8 @@ public final class ArcadeSettings implements MubbleSettings.Section {
             OptionInstance<Integer> orbitSensitivity,
             OptionInstance<Integer> fovKick,
             OptionInstance<Boolean> respectProfileHints,
-            OptionInstance<Boolean> debugHud
+            OptionInstance<Boolean> debugHud,
+            OptionInstance<Boolean> silhouette
     ) {
     }
 
@@ -57,10 +58,11 @@ public final class ArcadeSettings implements MubbleSettings.Section {
                 number("orbit_sensitivity", "percent", 10, 300, (int) Math.round(c.orbitSensitivity() * 100.0D)),
                 number("fov_kick", "percent", 0, 30, (int) Math.round(c.fovKick() * 100.0D)),
                 bool("respect_profile_hints", c.respectProfileHints()),
-                bool("debug_hud", c.debugHud()));
+                bool("debug_hud", c.debugHud()),
+                bool("silhouette", c.silhouette()));
         var o = this.fields;
         return List.of(o.orbitCamera, o.cameraDistance, o.autoCameraKeyboard, o.autoCameraController, o.autoCameraSpeed,
-                o.followLag, o.orbitSensitivity, o.fovKick, o.respectProfileHints, o.debugHud);
+                o.followLag, o.orbitSensitivity, o.fovKick, o.silhouette, o.respectProfileHints, o.debugHud);
     }
 
     @Override
@@ -74,7 +76,7 @@ public final class ArcadeSettings implements MubbleSettings.Section {
                 o.orbitCamera.get(), o.autoCameraKeyboard.get(), o.autoCameraController.get(), o.autoCameraSpeed.get(),
                 o.cameraDistance.get(), c.cameraHeight(), o.followLag.get() / 1000.0D, c.recenterSpeed(),
                 o.orbitSensitivity.get() / 100.0D, c.minPitch(), c.maxPitch(), o.fovKick.get() / 100.0D,
-                o.respectProfileHints.get(), o.debugHud.get()));
+                o.respectProfileHints.get(), o.debugHud.get(), o.silhouette.get()));
     }
 
     private static OptionInstance<Boolean> bool(String name, boolean value) {

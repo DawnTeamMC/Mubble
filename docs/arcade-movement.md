@@ -143,6 +143,10 @@ Water deep enough to swim in (deeper than vanilla wades in) is the layer's own, 
 
 `mubble:swim` is not a move of its own, like walking and falling; `mubble:swim_dash` comes with `mubble:dive`. The player leaves the water moves once out of the water, or standing where it is too shallow to swim. Lava stays vanilla's.
 
+### Blocks
+
+A ground pound landing pounds every block the player lands on, on the server: blocks implementing Mubble's `PoundableBlock` react, as the bricks and question blocks of Super Mario do (a brick breaks and the player falls through; a question block pops up and what it holds comes out of its top). Jumping into a block from below hits it as in vanilla movement, the server moving the player up into it as the client did.
+
 ### Climbing
 
 Whatever vanilla lets a player climb (`#minecraft:climbable`: ladders, vines, scaffolding, twisting and weeping vines…, and an open trapdoor over a ladder) catches the player, whatever they were doing, and is the layer's own, on the numbers of vanilla climbing:
@@ -340,7 +344,9 @@ Input is sampled every **frame**, not every tick: a press is remembered with the
 
 ## Camera
 
-While the layer drives, the third person view is an orbit camera the mouse (or right stick) turns freely around the player. Movement is relative to the camera, and the player looks at the horizon unless aiming. It stays out of walls, follows with a slight lag that never grows past 1.5 blocks (when a step down or a corner hides where it trails, it pulls in only as far as the block requires), widens the field of view with speed, and blends with the vanilla view over a quarter of a second whenever one takes over from the other (flying in creative, lava). The hands do not aim with it: they reach out where the body faces, see [Hands, attacks and the world](#hands-attacks-and-the-world). First person stays fully playable, with the vanilla crosshair.
+While the layer drives, the third person view is an orbit camera the mouse (or right stick) turns freely around the player. Movement is relative to the camera, and the player looks at the horizon unless aiming. It follows with a slight lag that never grows past 1.5 blocks (when a step down or a corner hides where it trails, it pulls in only as far as the block requires), widens the field of view with speed, and blends with the vanilla view over a quarter of a second whenever one takes over from the other (flying in creative, lava). The hands do not aim with it: they reach out where the body faces, see [Hands, attacks and the world](#hands-attacks-and-the-world). First person stays fully playable, with the vanilla crosshair.
+
+**Walls**: what stands between the camera and the player does not move the camera: the player shows through it instead, as a light translucent gray silhouette (the `silhouette` setting). Only the camera's own spot running into a block moves it, and then it eases in quickly, just far enough to keep clear of it with a little room, and back out slowly once there is space again; it only cuts straight to where it can be when it would otherwise end up inside a block. The silhouette is the player's model drawn a second time, flat gray, only where something already drawn stands in front of it, and before the model itself, so that the player never shows through their own limbs.
 
 **Following the player**: as in Nintendo's games, the orbit camera can swing round behind the player as they move. It only ever moves while the player does, faster the faster they go, and the more they go sideways to the view, so that running towards the camera never turns it around; turning it by hand pauses it for a moment. It is a setting of its own for the keyboard and mouse (off by default) and for controllers (on by default), the one that applies following what the player plays on; the controller one can also be switched from Controlify's controls or radial menu.
 
@@ -359,6 +365,7 @@ Client settings, in `config/mubble-arcade-client.json`, and on the settings scre
 | `orbit_sensitivity` | 1 | |
 | `min_pitch` / `max_pitch` | -80 / 80 | |
 | `fov_kick` | 0.08 | Extra field of view at run speed |
+| `silhouette` | true | The player shows through what stands between them and the camera |
 | `respect_profile_hints` | true | Let profiles scale the distance and the field of view kick |
 | `debug_hud` | false | Show the debug HUD on start |
 

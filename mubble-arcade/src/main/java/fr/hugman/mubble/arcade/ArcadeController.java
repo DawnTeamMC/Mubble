@@ -1,7 +1,6 @@
 package fr.hugman.mubble.arcade;
 
-import fr.hugman.mubble.arcade.registries.ArcadeBuiltInRegistries;
-import fr.hugman.mubble.arcade.tags.ArcadeMoveTags;
+import fr.hugman.mubble.arcade.ArcadeAttributes;
 import fr.hugman.mubble.arcade.access.ArcadeAccess;
 import fr.hugman.mubble.arcade.access.ArcadeSources;
 import fr.hugman.mubble.arcade.access.ResolvedAccess;
@@ -13,23 +12,28 @@ import fr.hugman.mubble.arcade.move.GroundPoundMove;
 import fr.hugman.mubble.arcade.move.RollMove;
 import fr.hugman.mubble.arcade.move.SpinMove;
 import fr.hugman.mubble.arcade.move.WallSlideMove;
+import fr.hugman.mubble.arcade.registries.ArcadeBuiltInRegistries;
 import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
 import fr.hugman.mubble.arcade.sim.ArcadeState;
 import fr.hugman.mubble.arcade.sim.ArcadeTuning;
 import fr.hugman.mubble.arcade.sim.ArcadeWorld;
 import fr.hugman.mubble.arcade.sim.MoveContext;
 import fr.hugman.mubble.arcade.sim.MoveResult;
-import fr.hugman.mubble.arcade.ArcadeAttributes;
+import fr.hugman.mubble.arcade.tags.ArcadeMoveTags;
+import fr.hugman.mubble.world.level.block.PoundableBlock;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Objects;
 import java.util.Optional;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -354,6 +358,14 @@ public final class ArcadeController {
                 this.player.awardStat(Stats.JUMP);
             }
         }
+        if (this.state.events.stream().anyMatch(event -> event.type() == CueEvent.START && event.move() == ArcadeMoves.GROUND_POUND_LAND)) {
+            var result = ctx.result();
+            this.poundBlocksUnder(ctx.start().add(result.dx(), result.dy(), result.dz()));
+        }
+        if (this.state.events.stream().anyMatch(event -> event.type() == CueEvent.START && event.move() == ArcadeMoves.GROUND_POUND_LAND)) {
+            var result = ctx.result();
+            this.poundBlocksUnder(ctx.start().add(result.dx(), result.dy(), result.dz()));
+        }
         if (this.state.move == ArcadeMoves.CLIMB) {
             // a climber does not fall, as in vanilla
             this.player.resetFallDistance();
@@ -362,6 +374,22 @@ public final class ArcadeController {
             double perBlock = this.state.move.exhaustionPerBlock(ctx);
             if (perBlock > 0.0D) {
                 this.player.causeFoodExhaustion((float) (perBlock * ctx.result().horizontalDistance()));
+            }
+        }
+    }
+
+    /**
+     * A ground pound landing pounds the blocks under the feet, every one the player stands on: those
+     * that care, such as the bricks and question blocks of Super Mario, react, see {@link PoundableBlock}.
+     */
+    private void poundBlocksUnder(Vec3 feet) {
+        var box = this.world.box(feet, Pose.STANDING);
+        var level = this.player.level();
+        var under = new AABB(box.minX + 1.0E-3D, box.minY - 0.1D, box.minZ + 1.0E-3D, box.maxX - 1.0E-3D, box.minY - 1.0E-3D, box.maxZ - 1.0E-3D);
+        for (var pos : BlockPos.betweenClosed(BlockPos.containing(under.minX, under.minY, under.minZ), BlockPos.containing(under.maxX, under.maxY, under.maxZ))) {
+            var blockState = level.getBlockState(pos);
+            if (blockState.getBlock() instanceof PoundableBlock poundable) {
+                poundable.onPounded(level, blockState, pos.immutable(), this.player);
             }
         }
     }

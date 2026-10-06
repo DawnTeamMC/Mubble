@@ -13,6 +13,9 @@ import fr.hugman.mubble.arcade.move.ArcadeMove;
 import fr.hugman.mubble.arcade.move.ArcadeMoves;
 import fr.hugman.mubble.arcade.replay.ArcadeReplayer;
 import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
+import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
+import fr.hugman.mubble.super_mario.world.level.block.entity.BumpableBlockEntity;
+import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -253,6 +256,49 @@ public class ArcadeLockstepGameTest {
         }, () -> {
             client.assertUndisturbed("drawing a bow");
             helper.assertValueEqual(client.corrections(), 0, "corrections (" + client.events() + ")");
+        });
+    }
+
+    /**
+     * A jump cut short by a ceiling goes through: the server moves its player up into the block as
+     * the client did, which is what bumps the blocks of Super Mario from below.
+     */
+    @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 200)
+    public void jumpingIntoABrickBlockBumpsIt(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var brick = new BlockPos(5, 3, 3);
+        helper.setBlock(brick, SuperMarioBlocks.BRICK_BLOCK.defaultBlockState());
+        var client = ArcadeTestClient.join(helper, new BlockPos(5, 1, 3), ArcadeProfileIds.TRIAL);
+        var frames = new ArcadeTestKit.Frames();
+        double floor = helper.absoluteVec(Vec3.atLowerCornerOf(new BlockPos(5, 1, 3))).y;
+        double[] highest = {Double.NEGATIVE_INFINITY};
+        boolean[] bumped = {false};
+        drive(helper, client, 30, t -> {
+            client.tick(t == 10 ? frames.press(JUMP) : frames.next());
+            highest[0] = Math.max(highest[0], client.server().getY());
+            bumped[0] |= helper.getLevel().getBlockEntity(helper.absolutePos(brick), SuperMarioBlockEntityTypes.BUMPABLE_BLOCK)
+                    .map(BumpableBlockEntity::isBumping).orElse(true);
+        }, () -> {
+            client.assertUndisturbed("jumping into a block");
+            helper.assertTrue(highest[0] > floor + 0.1D, "the server's player never rose into the block, highest at " + (highest[0] - floor));
+            helper.assertTrue(bumped[0], "the brick block was never bumped");
+        });
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 200)
+    public void groundPoundingABrickBlockBreaksIt(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var brick = new BlockPos(5, 1, 3);
+        helper.setBlock(brick, SuperMarioBlocks.BRICK_BLOCK.defaultBlockState());
+        var client = ArcadeTestClient.join(helper, new BlockPos(5, 5, 3), ArcadeProfileIds.TRIAL);
+        var frames = new ArcadeTestKit.Frames();
+        Set<ArcadeMove> played = new HashSet<>();
+        drive(helper, client, 60, t -> {
+            client.tick(t == 2 ? frames.press(CROUCH) : frames.next());
+            played.add(move(client.controller()));
+        }, () -> {
+            helper.assertTrue(played.contains(ArcadeMoves.GROUND_POUND_LAND), "the ground pound never landed, went through " + played);
+            helper.assertBlockPresent(Blocks.AIR, brick);
         });
     }
 
