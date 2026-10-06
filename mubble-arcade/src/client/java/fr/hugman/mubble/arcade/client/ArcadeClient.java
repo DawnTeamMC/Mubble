@@ -1,6 +1,7 @@
 package fr.hugman.mubble.arcade.client;
 
 import fr.hugman.mubble.Mubble;
+import fr.hugman.mubble.client.config.MubbleSettings;
 import fr.hugman.mubble.arcade.client.animation.ArcadeAnimationLoader;
 import fr.hugman.mubble.arcade.client.animation.ArcadePlayerAnimator;
 import fr.hugman.mubble.arcade.client.camera.ArcadeCamera;
@@ -25,6 +26,7 @@ public final class ArcadeClient implements ClientModInitializer {
     public void onInitializeClient() {
         ArcadeKeyMappings.init();
         ArcadeClientConfig.load();
+        MubbleSettings.register(new ArcadeSettings());
         ArcadeLocalDriver.Holder.instance = new LocalArcadeDriver();
         ArcadeClientNetworking.register();
         ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(Mubble.id("arcade_animations"), new ArcadeAnimationLoader());

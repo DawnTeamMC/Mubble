@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.arcade.client.compat.controlify.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "fr.hugman.mubble.arcade.client.compat.controlify.ControlifyMixinPlugin",
+  "client": [
+    "InputBindingImplMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

@@ -11,22 +11,24 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Input;
+import net.minecraft.world.phys.Vec2;
 
 /**
  * Samples the arcade actions every frame, and hands one input frame per tick to the local driver.
  * <p>
- * Jump, crouch and sprint are the vanilla jump, sneak and sprint: the keys, sampled every frame, and
- * the input of the player, read every tick, which is where a controller mod such as Controlify puts
- * them. Crouching is sneaking, then, whatever presses it, and the player shows it. Action comes from
- * attack and use, when {@link ArcadeHands} gives their press to the moves.
+ * Everything comes from the keys of the layer (see {@link ArcadeKeyMappings}), which a controller mod
+ * such as Controlify presses for its own bindings, and the movement stick from the movement keys or
+ * the analog stick of the controller. While the layer drives, the vanilla keys they stand in for
+ * stand aside: the hands answer to the arcade attack and use (see {@link ArcadeHands}), and the jump,
+ * sneak and sprint of the player are the arcade ones (see {@link #standIn}), so that crouching shows
+ * and the server knows of it whatever key it is on.
  */
 @Environment(EnvType.CLIENT)
 public final class ArcadeClientInput {
     private static final ArcadeInputCollector COLLECTOR = new ArcadeInputCollector();
     private static boolean wasActive;
     private static int down;
-    /** The actions the input of the player held at the last tick. */
-    private static int inputHeld;
 
     private ArcadeClientInput() {
     }
@@ -34,13 +36,18 @@ public final class ArcadeClientInput {
     /** Called at the very start of every frame, right after the window events were polled. */
     public static void onFrame(Minecraft minecraft) {
         var player = minecraft.player;
-        if (player == null || !ArcadeController.of(player).isActive()) {
+        if (player == null || !ArcadeController.of(player).isDriving()) {
             if (wasActive) {
                 COLLECTOR.reset();
                 ArcadeHands.reset();
                 down = 0;
-                inputHeld = 0;
                 wasActive = false;
+            }
+            // the keys of the layer mean nothing meanwhile: their presses must not pile up for later
+            for (var key : ArcadeKeyMappings.DRIVING) {
+                while (key.consumeClick()) {
+                    // dropped
+                }
             }
             return;
         }
@@ -48,37 +55,36 @@ public final class ArcadeClientInput {
         int held = 0;
         int clicks = 0;
         if (minecraft.gui.screen() == null) {
-            var options = minecraft.options;
-            held |= bit(options.keyJump, ArcadeInputFrame.JUMP);
-            held |= bit(options.keyShift, ArcadeInputFrame.CROUCH);
-            held |= bit(options.keySprint, ArcadeInputFrame.SPRINT);
+            held |= bit(ArcadeKeyMappings.JUMP, ArcadeInputFrame.JUMP);
+            held |= bit(ArcadeKeyMappings.JUMP_ALT, ArcadeInputFrame.JUMP);
+            held |= bit(ArcadeKeyMappings.CROUCH, ArcadeInputFrame.CROUCH);
+            held |= bit(ArcadeKeyMappings.SPRINT, ArcadeInputFrame.SPRINT);
             held |= bit(ArcadeKeyMappings.SPIN, ArcadeInputFrame.SPIN);
-            held |= inputHeld;
-            held |= ArcadeHands.onFrame(minecraft);
+            held |= ArcadeHands.onFrame();
             // presses shorter than a frame only show up as clicks
+            clicks |= clicks(ArcadeKeyMappings.JUMP, ArcadeInputFrame.JUMP);
+            clicks |= clicks(ArcadeKeyMappings.JUMP_ALT, ArcadeInputFrame.JUMP);
+            clicks |= clicks(ArcadeKeyMappings.CROUCH, ArcadeInputFrame.CROUCH);
             clicks |= clicks(ArcadeKeyMappings.SPIN, ArcadeInputFrame.SPIN);
-            var controller = ArcadeControllerBindings.Holder.instance;
-            if (controller != null) {
-                held |= controller.held();
-            }
             while (ArcadeKeyMappings.RECENTER.consumeClick()) {
                 ArcadeCamera.recenter();
             }
         }
-        sample(held, clicks);
-    }
-
-    private static void sample(int held, int clicks) {
         down = held;
         COLLECTOR.sampleFrame(System.nanoTime(), held, clicks);
     }
 
-    /** The actions the input of the player holds this tick: the keys, or whatever a controller mod pressed in their place. */
-    private static int inputHeld(LocalPlayer player) {
-        var keys = player.input.keyPresses;
-        return (keys.jump() ? ArcadeInputFrame.JUMP : 0)
-                | (keys.shift() ? ArcadeInputFrame.CROUCH : 0)
-                | (keys.sprint() ? ArcadeInputFrame.SPRINT : 0);
+    /**
+     * The input of the player while the layer drives, once vanilla read it from its keys: the jump,
+     * sneak and sprint vanilla knows are the arcade ones, whatever keys they are on.
+     */
+    public static Input standIn(Input vanilla) {
+        return new Input(vanilla.forward(), vanilla.backward(), vanilla.left(), vanilla.right(), jumpHeld(), crouchHeld(), false);
+    }
+
+    /** Whether jump was held at the last frame. */
+    public static boolean jumpHeld() {
+        return (down & ArcadeInputFrame.JUMP) != 0;
     }
 
     /** Whether crouch was held at the last frame. */
@@ -109,10 +115,6 @@ public final class ArcadeClientInput {
      * camera, and every action sampled since the previous tick.
      */
     public static ArcadeInputFrame frame(LocalPlayer player, int tick) {
-        // the input of the player ticked right before: what it holds now stands for what it held before
-        int input = inputHeld(player);
-        sample((down & ~inputHeld) | input, 0);
-        inputHeld = input;
         boolean coupled = !ArcadeCamera.isOrbiting();
         float yaw = yaw(player, coupled);
         float[] stick = stick(player, yaw);
@@ -132,10 +134,28 @@ public final class ArcadeClientInput {
     }
 
     private static float[] stick(LocalPlayer player, float yaw) {
-        var move = player.input.getMoveVector();
+        var move = move();
         float radians = yaw * Mth.DEG_TO_RAD;
         float sin = Mth.sin(radians);
         float cos = Mth.cos(radians);
         return new float[]{move.x * cos - move.y * sin, move.y * cos + move.x * sin};
+    }
+
+    /** The movement stick, relative to the view: x to the left, y forward, as vanilla's. */
+    private static Vec2 move() {
+        if (Minecraft.getInstance().gui.screen() != null) {
+            return Vec2.ZERO;
+        }
+        float forward = axis(ArcadeKeyMappings.FORWARD, ArcadeKeyMappings.BACKWARD);
+        float left = axis(ArcadeKeyMappings.LEFT, ArcadeKeyMappings.RIGHT);
+        var keys = new Vec2(left, forward).normalized();
+        var controller = ArcadeControllerBindings.Holder.instance;
+        var move = controller == null ? keys : keys.add(controller.stick());
+        float length = move.length();
+        return length > 1.0F ? move.scale(1.0F / length) : move;
+    }
+
+    private static float axis(KeyMapping positive, KeyMapping negative) {
+        return (positive.isDown() ? 1.0F : 0.0F) - (negative.isDown() ? 1.0F : 0.0F);
     }
 }

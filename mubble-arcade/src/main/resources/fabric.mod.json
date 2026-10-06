@@ -20,6 +20,10 @@
     {
       "config": "mubble_arcade.client.mixins.json",
       "environment": "client"
+    },
+    {
+      "config": "mubble_arcade.controlify.mixins.json",
+      "environment": "client"
     }
   ],
   "depends": {
@@ -31,6 +35,9 @@
     "controlify": "*"
   },
   "custom": {
+    "modmenu": {
+      "parent": "mubble"
+    },
     "loom:injected_interfaces": {
       "net/minecraft/world/entity/player/Player": [
         "fr/hugman/mubble/arcade/ArcadePlayer"

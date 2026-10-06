@@ -19,6 +19,7 @@ import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimplePreparableReloadListener;
+import net.minecraft.util.EasingType;
 import net.minecraft.util.profiling.ProfilerFiller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -34,20 +35,23 @@ import org.joml.Vector3f;
  *   "length": 0.6,                       // seconds
  *   "loop": false,
  *   "linger": false,                     // keep playing to the end when the next move has no animation
+ *   "blend_in": 0.12,                    // seconds to ease from the pose before into this animation
  *   "axes": "java",                      // "bedrock" for values written the way Bedrock files are
  *   "bones": {
  *     "right_arm": {
- *       "rotation": { "0.0": [0, 0, 0], "0.3": { "post": [-160, 0, 20], "lerp_mode": "catmullrom" } },
+ *       "rotation": { "0.0": [0, 0, 0], "0.3": { "post": [-160, 0, 20], "lerp_mode": "catmullrom", "easing": "out_back" } },
  *       "position": [ { "time": 0.0, "value": [0, 0, 0] } ],
  *       "scale": { "0.0": [1, 1, 1] }
  *     }
  *   },
  *   "body": {                            // the whole body, through the pose stack
  *     "pivot": [0, 0.9, 0],              // blocks above the feet
- *     "rotation": { "0.0": [0, 0, 0], "0.6": [-360, 0, 0] }
+ *     "rotation": { "0.0": [0, 0, 0], "0.6": [-360, 0, 0] },
+ *     "scale": { "0.0": [1, 1, 1], "0.1": [1.15, 0.8, 1.15] }   // squash and stretch, from the feet
  *   }
  * }
  * }</pre>
+ * The {@code easing} of a keyframe is any of vanilla's {@link EasingType}s, by name or as a cubic Bézier.
  * Rotations are in degrees, positions in model pixels, scales as factors: the numbers
  * {@link KeyframeAnimations#degreeVec}, {@link KeyframeAnimations#posVec} and
  * {@link KeyframeAnimations#scaleVec} take, which is what Blockbench writes in its Java animations.
@@ -92,7 +96,7 @@ public final class ArcadeAnimationLoader extends SimplePreparableReloadListener<
             addChannels(builder, ArcadeAnimation.BODY_BONE, channels, data.bedrock());
             return builder.build();
         });
-        return new ArcadeAnimation(id, limbs.build(), body, new Vector3f(data.pivot()), data.linger());
+        return new ArcadeAnimation(id, limbs.build(), body, new Vector3f(data.pivot()), data.linger(), data.blendIn());
     }
 
     private static void addChannels(AnimationDefinition.Builder builder, String bone, Map<ArcadeAnimationData.Target, List<ArcadeAnimationData.Frame>> channels, boolean bedrock) {
@@ -111,7 +115,11 @@ public final class ArcadeAnimationLoader extends SimplePreparableReloadListener<
     }
 
     private static Keyframe keyframe(ArcadeAnimationData.Frame frame, ArcadeAnimationData.Target target, boolean bedrock) {
-        var interpolation = frame.smooth() ? AnimationChannel.Interpolations.CATMULLROM : AnimationChannel.Interpolations.LINEAR;
+        var curve = frame.smooth() ? AnimationChannel.Interpolations.CATMULLROM : AnimationChannel.Interpolations.LINEAR;
+        var easing = frame.easing();
+        // vanilla interpolates towards a keyframe with that keyframe's interpolation: its easing shapes the way to it
+        AnimationChannel.Interpolation interpolation = easing == EasingType.LINEAR ? curve
+                : (vector, alpha, keyframes, prev, next, scale) -> curve.apply(vector, easing.apply(alpha), keyframes, prev, next, scale);
         return new Keyframe(frame.time(), convert(frame.pre(), target, bedrock), convert(frame.post(), target, bedrock), interpolation);
     }
 

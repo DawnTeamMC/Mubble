@@ -296,46 +296,45 @@ The profile sets the base value of these attributes while it is active, and they
 
 ## Controls
 
-On a keyboard, the layer plays on the vanilla keys, so their defaults show in the controls menu and never clash:
-
-| Key | Default | In the arcade layer |
-|---|---|---|
-| Jump | Space | Jump, and every jump of the chain |
-| Sneak | Left Shift | Crouch, ground pound |
-| Sprint | Left Control | Full speed right away; faster swimming |
-| Attack | Left mouse button | Hit; roll with crouch held, dive out of a ground pound |
-| Use Item | Right mouse button | Use the item; roll and dive like attack |
-
-And in the *Arcade Movement* category:
+Every arcade action has its own key, in the *Arcade Movement* category of the controls menu, and can be rebound without touching vanilla's. The basic ones default to the keys of their vanilla counterparts; vanilla flags no conflict between two keys left on their defaults, and the two never act at once: while the layer drives, the vanilla jump, sneak, sprint, attack and use stand aside (what vanilla does with them, such as the server hearing of sneaking, follows the arcade keys), and the rest of the time the arcade keys do nothing.
 
 | Key | Default | |
 |---|---|---|
+| Move Forward / Backward / Left / Right | W / S / A / D | The stick: relative to the orbit camera |
+| Jump | Space | Jump, and every jump of the chain |
+| Jump (second key) | unbound | For the second jump button of a controller |
+| Crouch, Ground Pound | Left Shift | Crouching shows, and the server knows it |
+| Sprint | Left Control | Full speed right away; faster swimming |
+| Attack · Roll, Dive in a combo | Left mouse button | Hit; roll with crouch held, dive out of a ground pound |
+| Use Item · Roll, Dive in a combo | Right mouse button | Use the item; roll and dive like attack |
 | Spin | B | The stick (or the movement keys) turned all the way around also spins |
 | Recenter Camera | unbound | Swings the orbit camera behind the player, until the mouse or the stick turns it |
 | Arcade Debug HUD | unbound | |
 
-With [Controlify](https://modrinth.com/mod/controlify) installed, the controller is laid out like **Super Mario Odyssey**, through Controlify's own API only. Buttons go by their place: on a Switch controller, A is east; on an Xbox one, B is.
+With [Controlify](https://modrinth.com/mod/controlify) installed, every arcade action also has a controller binding of its own, in the *Arcade Movement* category of Controlify's controls, laid out by default like **Super Mario Odyssey**. Controlify's own bindings and their defaults are left as they are: the arcade bindings belong to a context of their own, which only applies while the layer drives and no screen is open. Buttons go by their place: on a Switch controller, A is east; on an Xbox one, B is.
 
-| Button (Switch) | Binding | In the arcade layer | Controlify's own default there |
-|---|---|---|---|
-| A | Jump | Jump | jump |
-| B | Jump (second button), `mubble:arcade_jump` | Jump | nothing |
-| Y | Attack | Hit; roll or dive in a combo | swap hands |
-| X | Use | Use the item; roll or dive in a combo | inventory |
-| ZR | Sneak | Crouch, ground pound | attack |
-| ZL | Trigger Power-Up, `mubble:trigger_power_up` | The power-up | use |
-| L | Recenter Camera, `mubble:arcade_recenter` | Recenter the camera | previous hotbar slot |
-| R | Radial menu | | next hotbar slot |
-| D-pad ↑ / ↓ | Inventory / drop | | chat / drop |
-| D-pad ← / → | Previous / next hotbar slot | | pick block / radial menu |
+| Button (Switch) | Arcade binding | Controlify's own binding there, which gives way meanwhile |
+|---|---|---|
+| Left stick | Move | walk |
+| A / B | Jump / Jump (second key) | jump / — |
+| Y | Attack · roll, dive in a combo | swap hands (in the radial menu) |
+| X | Use Item · roll, dive in a combo | inventory |
+| ZR | Crouch, Ground Pound | attack |
+| ZL | Trigger Power-Up (arcade layout) | use |
+| Left stick press | Sprint | sprint |
+| Right stick press | Recenter Camera | sneak |
+| D-pad ↑ | Inventory (arcade layout) | chat (in the radial menu) |
+| — | Spin, Arcade Debug HUD, Toggle Camera Follow (controller) | |
 
-The arcade layer plays on the vanilla actions, which Controlify binds already: crouching is sneaking, whatever presses it, so the player shows it and the server knows it. Its own keys (Spin, Recenter Camera, Arcade Debug HUD) get a controller binding each, which presses the key, so that Controlify adds none of its own for them; Spin has no button, as in SMO: turn the stick all the way around. The power-up key of Mubble gets one the same way, on B without the arcade layer. Where each binding goes by default is data, `assets/controlify/controllers/default_bind/default.json`, which Controlify layers over its own defaults: swap hands, pick block and the chat are left without a button, in the radial menu. Every one of them can be rebound in Controlify's controls menu, and a binding the player set stays theirs. The left stick is read analog: tilting it a little walks, all the way runs.
+The buttons press the arcade keys, so that the layer reads one set of keys whatever plays it, and the stick is read analog: tilting it a little walks, all the way runs. Spin has no button, as in SMO: turn the stick all the way around. Everything else (the hotbar on L and R, drop, pick block, the radial menu, pause) stays where Controlify puts it. Toggle Camera Follow (controller) switches the [camera following the player](#camera), and can be put in Controlify's radial menu, with an icon. The power-up key of Mubble has a binding of its own too, on B, without the arcade layout.
 
-**The button guide** of Controlify follows the moves. Every tick, the client plans the next tick on a copy of the state as if each button were pressed, and names the move it would start next to the glyph of the button it is bound to, translated: *Jump*, then *Double Jump* on landing, *Long Jump* or *Backflip* while crouching, *Roll* on attack and use with crouch held, *Dive* during a ground pound, *Ground Pound* in the air, *Hold On* on sneak while climbing… A button that would start nothing shows Controlify's own text. The rules are data, `assets/controlify/contextual/guide/in_game.json`, reading the facts `mubble:arcade`, `mubble:arcade_orbiting`, `mubble:arcade_climbing` and `mubble:arcade/<button>/<move>` the client contributes; Controlify reads the rules of the highest resource pack first, so they win the buttons they match.
+While the layer drives, a binding of Controlify's on a button an arcade binding uses reads as unbound: it neither acts, nor presses its key, nor shows in the button guide. Controlify has no API for a mod to take buttons over for a while, so this one hook (`InputBindingImplMixin`) reaches into it, only while the arcade layout is in use: any screen, its controls menu and radial menu among them, sees every binding as it is.
+
+**The button guide** of Controlify follows the moves. Every tick, the client plans the next tick on a copy of the state as if each button were pressed, and names the move it would start next to the glyph of the arcade binding, translated: *Jump*, then *Double Jump* on landing, *Long Jump* or *Backflip* while crouching, *Roll* on attack and use with crouch held, *Dive* during a ground pound, *Ground Pound* in the air, *Hold On* on crouch while climbing… The rules are data, `assets/controlify/contextual/guide/in_game.json`, reading the facts `mubble:arcade`, `mubble:arcade_orbiting`, `mubble:arcade_climbing`, `mubble:arcade_power_up` and `mubble:arcade/<button>/<move>` the client contributes.
 
 **Rumble**: see the `rumble` of the cues, under [Profiles](#profiles). It stays light, a hint more than a shake; Controlify's own rumble settings scale it further.
 
-To try it in the dev client, run the sandbox with `./gradlew :mubble-testmod:runClient -Pcontrolify`, which loads Controlify and what it needs.
+To try it in the dev client, run the sandbox with `./gradlew :mubble-testmod:runClient -Pcontrolify`, which loads Controlify and what it needs; `-Pmodmenu` adds Mod Menu, to open the settings.
 
 Input is sampled every **frame**, not every tick: a press is remembered with the time it happened, so a jump pressed one frame before landing still jumps, however low the tick rate.
 
@@ -343,11 +342,16 @@ Input is sampled every **frame**, not every tick: a press is remembered with the
 
 While the layer drives, the third person view is an orbit camera the mouse (or right stick) turns freely around the player. Movement is relative to the camera, and the player looks at the horizon unless aiming. It stays out of walls, follows with a slight lag that never grows past 1.5 blocks (when a step down or a corner hides where it trails, it pulls in only as far as the block requires), widens the field of view with speed, and blends with the vanilla view over a quarter of a second whenever one takes over from the other (flying in creative, lava). The hands do not aim with it: they reach out where the body faces, see [Hands, attacks and the world](#hands-attacks-and-the-world). First person stays fully playable, with the vanilla crosshair.
 
-Client settings, in `config/mubble-arcade-client.json`:
+**Following the player**: as in Nintendo's games, the orbit camera can swing round behind the player as they move. It only ever moves while the player does, faster the faster they go, and the more they go sideways to the view, so that running towards the camera never turns it around; turning it by hand pauses it for a moment. It is a setting of its own for the keyboard and mouse (off by default) and for controllers (on by default), the one that applies following what the player plays on; the controller one can also be switched from Controlify's controls or radial menu.
+
+Client settings, in `config/mubble-arcade-client.json`, and on the settings screen of Mubble, which Mod Menu opens from the entry of Mubble or of the arcade movement (the camera height, recenter speed and pitch limits are only in the file):
 
 | Setting | Default | |
 |---|---|---|
 | `orbit_camera` | true | Off: the vanilla third person camera |
+| `auto_camera_keyboard` | false | The camera follows the player round, on the keyboard and mouse |
+| `auto_camera_controller` | true | The same, on a controller |
+| `auto_camera_speed` | 120 | Degrees per second, at run speed |
 | `camera_distance` | 5 | Blocks |
 | `camera_height` | 0.3 | Above the eyes |
 | `follow_lag` | 0.08 | Seconds; 0 follows rigidly |
@@ -360,34 +364,40 @@ Client settings, in `config/mubble-arcade-client.json`:
 
 ## Animations
 
-Moves animate the player model with vanilla's keyframe animation system: the limbs through the model, the whole body through the pose stack (for flips and spins), for the local player and for everyone watching. Only moves play animations; walking, running and crouching stay vanilla.
+Moves animate the player model with vanilla's keyframe animation system: the limbs through the model, the whole body through the pose stack (for flips, spins, and squash and stretch), for the local player and for everyone watching. Only moves play animations; walking, running and crouching stay vanilla.
+
+Going from one animation to the next, or between an animation and the vanilla pose, the model never snaps: it is posed both ways and eased from one into the other (`in_out_sine`) over the `blend_in` of the animation it goes into, 0.15 s back to vanilla. Flips ease out the short way round. The debug HUD shows the blend as it happens.
 
 Animations are JSON files in a resource pack, `assets/<namespace>/animations/arcade/<move>.json`, reloaded with F3+T. A move plays the animation with its own id unless its profile settings name another.
 
 ```json
 {
-  "length": 1.05,
+  "length": 0.6,
   "loop": false,
   "linger": false,
+  "blend_in": 0.06,
   "axes": "java",
   "bones": {
-    "right_arm": { "rotation": { "0.0": [0, 0, 0], "0.3": { "post": [-170, 0, 10], "lerp_mode": "catmullrom" } } },
+    "right_arm": { "rotation": { "0.0": [-60, 0, 10], "0.35": { "post": [0, 0, 30], "easing": "out_back" } } },
     "left_leg":  { "rotation": [{ "time": 0.0, "value": [0, 0, 0] }, { "time": 0.3, "value": [-70, 0, 0] }] }
   },
   "body": {
     "pivot": [0, 0.9, 0],
-    "rotation": { "0.0": [0, 0, 0], "0.85": { "post": [360, 0, 0], "lerp_mode": "catmullrom" } }
+    "rotation": { "0.0": [0, 0, 0], "0.3": { "post": [-360, 0, 0], "easing": "in_out_quad" } },
+    "scale": { "0.0": [1, 1, 1], "0.38": { "post": [0.82, 1.28, 0.82], "easing": "out_cubic" } }
   }
 }
 ```
 
-- `length` in seconds; `loop` repeats it; `linger` lets it finish after the move ends.
+- `length` in seconds; `loop` repeats it; `linger` lets it finish after the move ends; `blend_in` is how long the model takes to ease into it, in seconds (0.12 by default).
 - `bones`: `head`, `hat`, `body`, `right_arm`, `left_arm`, `right_leg`, `left_leg`, each with `rotation` (degrees), `position` (pixels) and `scale` channels.
-- `body`: the whole player, turned around `pivot` (blocks above the feet). A positive X rotation tips the head backwards, so `360` is a backflip and `-360` a front flip.
-- A channel is a list of `{time, value}`, an object keyed by time, or one value held all along. A keyframe value is three numbers, or `{post, pre?, lerp_mode?}` (`linear` or `catmullrom`).
+- `body`: the whole player, turned around `pivot` (blocks above the feet), and scaled from the feet: squash and stretch. A positive X rotation tips the head backwards, so `360` is a backflip and `-360` a front flip.
+- A channel is a list of `{time, value}`, an object keyed by time, or one value held all along. A keyframe value is three numbers, or `{post, pre?, lerp_mode?, easing?}`: `lerp_mode` is `linear` or `catmullrom`, and `easing` shapes the way to that keyframe, with any of vanilla's easing types (`in_sine`, `out_quad`, `in_out_cubic`, `out_back`, `out_elastic`, `out_bounce`… all of `in_`, `out_` and `in_out_` with `sine`, `quad`, `cubic`, `quart`, `quint`, `expo`, `circ`, `back`, `elastic` and `bounce`), or `{"cubic_bezier": [x1, y1, x2, y2]}`.
 - `axes: "bedrock"` takes numbers as Blockbench exports them for Bedrock models.
 
-A file naming a bone the player does not have, or a keyframe past its length, is refused with an error in the log.
+The shipped animations stretch the body on take-offs (jumps, wall jumps, the ground pound jump), squash it on landings, and drop a ground pound stretched along its fall, flattened on impact before it springs back past its shape.
+
+A file naming a bone the player does not have, a keyframe past its length or an unknown easing is refused with an error in the log.
 
 ## Commands
 

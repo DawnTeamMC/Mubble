@@ -20,11 +20,12 @@ import org.joml.Vector3f;
  * @param body   the keyframes of the whole body, applied to the pose stack around {@code pivot}: flips,
  *               rolls, tilts
  * @param pivot  the point the whole body turns around, in blocks above the feet
- * @param linger whether the animation keeps playing to its end when the move it belongs to gives way
- *               to a move without an animation of its own: landings, skids, pull-ups
+ * @param linger  whether the animation keeps playing to its end when the move it belongs to gives way
+ *                to a move without an animation of its own: landings, skids, pull-ups
+ * @param blendIn how long the model takes to ease from the pose before into this animation, in seconds
  */
 @Environment(EnvType.CLIENT)
-public record ArcadeAnimation(Identifier id, AnimationDefinition limbs, Optional<AnimationDefinition> body, Vector3f pivot, boolean linger) {
+public record ArcadeAnimation(Identifier id, AnimationDefinition limbs, Optional<AnimationDefinition> body, Vector3f pivot, boolean linger, float blendIn) {
     /** The name of the only bone of the whole body channel. */
     public static final String BODY_BONE = "body_transform";
     /** A model of a single bone, which the whole body channel animates to read the values back. */

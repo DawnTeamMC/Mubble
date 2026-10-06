@@ -45,3 +45,13 @@ if (project.hasProperty('controlify')) {
         clientRuntimeOnly 'io.github.llamalad7:mixinextras-fabric:0.5.5'
     }
 }
+
+// `-Pmodmenu` loads Mod Menu in the client of the sandbox, to open the settings of Mubble from its list of mods.
+if (project.hasProperty('modmenu')) {
+    dependencies {
+        clientRuntimeOnly('com.terraformersmc:modmenu:20.0.3') {
+            // the Fabric API modules it lists are the sandbox's already
+            transitive = false
+        }
+    }
+}
