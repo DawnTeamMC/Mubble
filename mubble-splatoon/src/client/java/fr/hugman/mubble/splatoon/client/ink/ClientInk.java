@@ -3,7 +3,9 @@ package fr.hugman.mubble.splatoon.client.ink;
 import fr.hugman.mubble.splatoon.network.protocol.common.custom.InkSyncPayload;
 import fr.hugman.mubble.splatoon.world.level.ink.ChunkInk;
 import fr.hugman.mubble.splatoon.world.level.ink.InkFace;
+import fr.hugman.mubble.splatoon.world.level.ink.InkStyle;
 import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMaps;
 import it.unimi.dsi.fastutil.longs.Long2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
@@ -31,16 +33,16 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public final class ClientInk {
     private static final Long2ObjectMap<ChunkInk> CHUNKS = new Long2ObjectOpenHashMap<>();
-    private static final Map<Long, List<Face>> SECTIONS = new ConcurrentHashMap<>();
+    private static final Map<Long, Section> SECTIONS = new ConcurrentHashMap<>();
 
     private ClientInk() {
     }
 
     /**
-     * @return the faces holding ink in the given section, or {@code null} if there are none
+     * @return the ink of the given section, or {@code null} if there is none
      */
     @Nullable
-    public static List<Face> section(long sectionKey) {
+    public static Section section(long sectionKey) {
         return SECTIONS.get(sectionKey);
     }
 
@@ -62,6 +64,7 @@ public final class ClientInk {
         var ink = CHUNKS.get(key);
         if (payload.replace() && ink != null) {
             ink.forEach((pos, side, face) -> changedSections.add(SectionPos.asLong(pos)));
+            ink.forEachCoat((pos, coat) -> changedSections.add(SectionPos.asLong(pos)));
             ink.clear();
         }
         if (ink == null) {
@@ -70,6 +73,10 @@ public final class ClientInk {
         }
         for (var entry : payload.faces()) {
             ink.set(entry.pos(), entry.side(), entry.face().orElse(null));
+            changedSections.add(SectionPos.asLong(entry.pos()));
+        }
+        for (var entry : payload.coats()) {
+            ink.setCoat(entry.pos(), entry.coat().orElse(null));
             changedSections.add(SectionPos.asLong(entry.pos()));
         }
         if (ink.isEmpty()) {
@@ -90,10 +97,16 @@ public final class ClientInk {
                 faces.add(new Face(pos, side, face));
             }
         });
-        if (faces.isEmpty()) {
+        Long2ObjectMap<InkStyle> coats = new Long2ObjectOpenHashMap<>();
+        ink.forEachCoat((pos, coat) -> {
+            if (SectionPos.asLong(pos) == sectionKey) {
+                coats.put(pos.asLong(), coat.style());
+            }
+        });
+        if (faces.isEmpty() && coats.isEmpty()) {
             SECTIONS.remove(sectionKey);
         } else {
-            SECTIONS.put(sectionKey, List.copyOf(faces));
+            SECTIONS.put(sectionKey, new Section(List.copyOf(faces), Long2ObjectMaps.unmodifiable(coats)));
         }
     }
 
@@ -112,5 +125,14 @@ public final class ClientInk {
     }
 
     public record Face(BlockPos pos, Direction side, InkFace ink) {
+    }
+
+    /**
+     * The ink of one section, as meshing threads see it.
+     *
+     * @param faces the faces holding ink
+     * @param coats the style of the coated blocks, by {@linkplain BlockPos#asLong() position}
+     */
+    public record Section(List<Face> faces, Long2ObjectMap<InkStyle> coats) {
     }
 }

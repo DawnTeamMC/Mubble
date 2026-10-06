@@ -16,24 +16,36 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * All the ink painted on the blocks of one chunk, attached to that chunk and saved with it.
+ * All the ink painted on the blocks of one chunk, attached to that chunk and saved with it: the faces of blocks, and
+ * the {@linkplain InkCoat coats} of plants.
  *
- * <p>Only faces holding ink are stored, so a chunk nobody painted carries nothing at all.
+ * <p>Only faces and blocks holding ink are stored, so a chunk nobody painted carries nothing at all.
  *
  * @author Hugman
  * @since v4.0.0
  */
 public final class ChunkInk {
-    public static final Codec<ChunkInk> CODEC = Entry.CODEC.listOf().xmap(ChunkInk::fromEntries, ChunkInk::entries);
+    private static final Codec<ChunkInk> FULL_CODEC = RecordCodecBuilder.create(instance -> instance.group(
+            Entry.CODEC.listOf().optionalFieldOf("faces", List.of()).forGetter(ChunkInk::entries),
+            CoatEntry.CODEC.listOf().optionalFieldOf("coats", List.of()).forGetter(ChunkInk::coatEntries)
+    ).apply(instance, ChunkInk::of));
+    /**
+     * Also reads the first format, a plain list of faces.
+     */
+    public static final Codec<ChunkInk> CODEC = Codec.withAlternative(FULL_CODEC, Entry.CODEC.listOf().xmap(faces -> of(faces, List.of()), ChunkInk::entries));
 
     private static final Direction[] DIRECTIONS = Direction.values();
 
     private final Long2ObjectMap<InkFace[]> faces = new Long2ObjectOpenHashMap<>();
+    private final Long2ObjectMap<InkCoat> coats = new Long2ObjectOpenHashMap<>();
 
-    private static ChunkInk fromEntries(List<Entry> entries) {
+    private static ChunkInk of(List<Entry> faces, List<CoatEntry> coats) {
         var ink = new ChunkInk();
-        for (var entry : entries) {
+        for (var entry : faces) {
             entry.face().ifPresent(face -> ink.set(entry.pos(), entry.side(), face));
+        }
+        for (var entry : coats) {
+            entry.coat().ifPresent(coat -> ink.setCoat(entry.pos(), coat));
         }
         return ink;
     }
@@ -42,6 +54,36 @@ public final class ChunkInk {
         List<Entry> entries = new ArrayList<>();
         this.forEach((pos, side, face) -> entries.add(new Entry(pos, side, Optional.of(face))));
         return entries;
+    }
+
+    public List<CoatEntry> coatEntries() {
+        List<CoatEntry> entries = new ArrayList<>(this.coats.size());
+        for (var entry : this.coats.long2ObjectEntrySet()) {
+            entries.add(new CoatEntry(BlockPos.of(entry.getLongKey()), Optional.of(entry.getValue())));
+        }
+        return entries;
+    }
+
+    @Nullable
+    public InkCoat getCoat(BlockPos pos) {
+        return this.coats.get(pos.asLong());
+    }
+
+    /**
+     * Puts a coat, or removes it if it is {@code null}.
+     */
+    public void setCoat(BlockPos pos, @Nullable InkCoat coat) {
+        if (coat == null) {
+            this.coats.remove(pos.asLong());
+        } else {
+            this.coats.put(pos.asLong(), coat);
+        }
+    }
+
+    public void forEachCoat(CoatConsumer consumer) {
+        for (var entry : this.coats.long2ObjectEntrySet()) {
+            consumer.accept(BlockPos.of(entry.getLongKey()), entry.getValue());
+        }
     }
 
     @Nullable
@@ -107,11 +149,12 @@ public final class ChunkInk {
     }
 
     public boolean isEmpty() {
-        return this.faces.isEmpty();
+        return this.faces.isEmpty() && this.coats.isEmpty();
     }
 
     public void clear() {
         this.faces.clear();
+        this.coats.clear();
     }
 
     public void forEach(FaceConsumer consumer) {
@@ -130,6 +173,27 @@ public final class ChunkInk {
     @FunctionalInterface
     public interface FaceConsumer {
         void accept(BlockPos pos, Direction side, InkFace face);
+    }
+
+    @FunctionalInterface
+    public interface CoatConsumer {
+        void accept(BlockPos pos, InkCoat coat);
+    }
+
+    /**
+     * One block, with the coat of ink it holds or {@linkplain Optional#empty() none} when it was cleaned.
+     */
+    public record CoatEntry(BlockPos pos, Optional<InkCoat> coat) {
+        public static final Codec<CoatEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                BlockPos.CODEC.fieldOf("pos").forGetter(CoatEntry::pos),
+                InkCoat.MAP_CODEC.forGetter(entry -> entry.coat().orElseThrow())
+        ).apply(instance, (pos, coat) -> new CoatEntry(pos, Optional.of(coat))));
+
+        public static final StreamCodec<ByteBuf, CoatEntry> STREAM_CODEC = StreamCodec.composite(
+                BlockPos.STREAM_CODEC, CoatEntry::pos,
+                ByteBufCodecs.optional(InkCoat.STREAM_CODEC), CoatEntry::coat,
+                CoatEntry::new
+        );
     }
 
     /**

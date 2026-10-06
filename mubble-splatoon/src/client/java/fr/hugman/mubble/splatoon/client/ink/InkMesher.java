@@ -4,21 +4,31 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import fr.hugman.mubble.splatoon.world.level.ink.InkGrid;
 import fr.hugman.mubble.splatoon.world.level.ink.InkStyle;
 import fr.hugman.mubble.splatoon.world.level.ink.InkSurfaces;
+import it.unimi.dsi.fastutil.longs.Long2ObjectMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FaceInfo;
+import net.minecraft.client.model.geom.builders.UVPair;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.client.renderer.block.BlockStateModelSet;
+import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.SectionPos;
 import net.minecraft.data.AtlasIds;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
 import net.minecraft.util.LightCoordsUtil;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.level.block.Block;
 import org.joml.Vector3f;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 /**
@@ -29,6 +39,10 @@ import java.util.function.Supplier;
  * textured with the sprite of its type: {@code <namespace>:block/ink/<path>} in the block atlas. Any texture placed
  * there by a resource pack is picked up, animated ones included, and unknown types fall back on the normal ink.
  *
+ * <p>Coated blocks are drawn a second time, right over themselves, in the color of their ink: the quads of their own
+ * model, with their own texture, which keeps the shape of every blade of grass. Textures meant to be tinted (grass,
+ * leaves, vines...) take the color of the ink fully.
+ *
  * @author Hugman
  * @since v4.0.0
  */
@@ -38,12 +52,71 @@ public final class InkMesher {
      */
     private static final float OFFSET = 1.0F / 512.0F;
 
+    private static final Direction[] DIRECTIONS = Direction.values();
+
     private InkMesher() {
     }
 
-    public static void mesh(SectionPos sectionPos, BlockAndTintGetter region, Supplier<VertexConsumer> output) {
-        List<ClientInk.Face> faces = ClientInk.section(sectionPos.asLong());
-        if (faces == null) {
+    public static void mesh(SectionPos sectionPos, BlockAndTintGetter region, Function<ChunkSectionLayer, VertexConsumer> layers, BlockStateModelSet models) {
+        var section = ClientInk.section(sectionPos.asLong());
+        if (section == null) {
+            return;
+        }
+        meshFaces(section.faces(), region, () -> layers.apply(ChunkSectionLayer.CUTOUT));
+        if (!section.coats().isEmpty()) {
+            meshCoats(section.coats(), region, layers, models);
+        }
+    }
+
+    private static void meshCoats(Long2ObjectMap<InkStyle> coats, BlockAndTintGetter region, Function<ChunkSectionLayer, VertexConsumer> layers, BlockStateModelSet models) {
+        var random = RandomSource.createThreadLocalInstance(0L);
+        List<BlockStateModelPart> parts = new ArrayList<>();
+        var lighting = region.cardinalLighting();
+
+        for (var entry : coats.long2ObjectEntrySet()) {
+            var pos = BlockPos.of(entry.getLongKey());
+            var state = region.getBlockState(pos);
+            if (state.isAir()) {
+                continue;
+            }
+            // the same parts the block itself was drawn with
+            random.setSeed(state.getSeed(pos));
+            parts.clear();
+            models.get(state).collectParts(random, parts);
+
+            var offset = state.getOffset(pos);
+            float x = SectionPos.sectionRelative(pos.getX()) + (float) offset.x;
+            float y = SectionPos.sectionRelative(pos.getY()) + (float) offset.y;
+            float z = SectionPos.sectionRelative(pos.getZ()) + (float) offset.z;
+            int color = ARGB.opaque(entry.getValue().color());
+            int light = LightCoordsUtil.getLightCoords(region, pos);
+
+            for (var part : parts) {
+                for (int d = -1; d < DIRECTIONS.length; d++) {
+                    var cullFace = d < 0 ? null : DIRECTIONS[d];
+                    if (cullFace != null && !Block.shouldRenderFace(state, region.getBlockState(pos.relative(cullFace)), cullFace)) {
+                        continue;
+                    }
+                    for (var quad : part.getQuads(cullFace)) {
+                        var material = quad.materialInfo();
+                        var consumer = layers.apply(material.layer());
+                        int shaded = material.shade() ? ARGB.scaleRGB(color, lighting.byFace(quad.direction())) : color;
+                        var normal = quad.direction().getUnitVec3f();
+                        for (int vertex = 0; vertex < 4; vertex++) {
+                            var position = quad.position(vertex);
+                            long uv = quad.packedUV(vertex);
+                            consumer.addVertex(x + position.x(), y + position.y(), z + position.z(), shaded,
+                                    UVPair.unpackU(uv), UVPair.unpackV(uv), OverlayTexture.NO_OVERLAY, light,
+                                    normal.x(), normal.y(), normal.z());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private static void meshFaces(List<ClientInk.Face> faces, BlockAndTintGetter region, Supplier<VertexConsumer> output) {
+        if (faces.isEmpty()) {
             return;
         }
         var atlas = Minecraft.getInstance().getAtlasManager().getAtlasOrThrow(AtlasIds.BLOCKS);

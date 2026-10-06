@@ -42,6 +42,12 @@ public final class InkLevel {
         return ink == null ? null : ink.get(pos, side);
     }
 
+    @Nullable
+    public static InkCoat getCoat(Level level, BlockPos pos) {
+        var ink = get(loadedChunk(level, pos));
+        return ink == null ? null : ink.getCoat(pos);
+    }
+
     /**
      * Whether ink sticks to the given block at all. Blocks without collision (plants, torches, rails...) are left
      * alone, and so are the ones in {@link SplatoonBlockTags#UNINKABLE}.
@@ -50,6 +56,24 @@ public final class InkLevel {
         return !state.isAir()
                 && !state.is(SplatoonBlockTags.UNINKABLE)
                 && !state.getCollisionShape(EmptyBlockGetter.INSTANCE, BlockPos.ZERO).isEmpty();
+    }
+
+    /**
+     * Whether ink covers the given block as a whole, as an {@link InkCoat}: the blocks of
+     * {@link SplatoonBlockTags#INK_COATED} that have no collision, and so no surface to paint.
+     */
+    public static boolean isCoatable(BlockState state) {
+        return state.is(SplatoonBlockTags.INK_COATED)
+                && !state.is(SplatoonBlockTags.UNINKABLE)
+                && state.getCollisionShape(EmptyBlockGetter.INSTANCE, BlockPos.ZERO).isEmpty();
+    }
+
+    /**
+     * @return the cells of the neighbor's face that the given block covers, on the boundary they share
+     */
+    public static long covers(BlockState state, Direction towardsNeighbor) {
+        // what ink covers as a whole lets ink through to the surface under it
+        return isCoatable(state) ? 0L : InkSurfaces.of(state).flush(towardsNeighbor);
     }
 
     public static boolean liquidsWashInk(Level level, BlockPos pos) {
@@ -87,7 +111,66 @@ public final class InkLevel {
         if (!neighbor.getFluidState().isEmpty() && liquidsWashInk(level, neighborPos)) {
             cells &= ~flush;
         }
-        return cells & ~(flush & InkSurfaces.of(neighbor).flush(side.getOpposite()));
+        return cells & ~(flush & covers(neighbor, side.getOpposite()));
+    }
+
+    /**
+     * Whether the given block can be coated with ink right now.
+     */
+    public static boolean canCoat(Level level, BlockPos pos) {
+        if (!level.isLoaded(pos)) {
+            return false;
+        }
+        var state = level.getBlockState(pos);
+        return isCoatable(state) && !(!state.getFluidState().isEmpty() && liquidsWashInk(level, pos));
+    }
+
+    /**
+     * Coats a whole block with ink, if it {@linkplain #canCoat can be}.
+     *
+     * @return whether the block changed color
+     */
+    public static boolean coat(ServerLevel level, BlockPos pos, InkStyle style) {
+        if (!canCoat(level, pos)) {
+            return false;
+        }
+        var chunk = loadedChunk(level, pos);
+        if (chunk == null) {
+            return false;
+        }
+        var ink = chunk.getAttachedOrCreate(SplatoonAttachmentTypes.CHUNK_INK);
+        var previous = ink.getCoat(pos);
+        ink.setCoat(pos.immutable(), new InkCoat(style, level.getGameTime()));
+        chunk.markUnsaved();
+        InkWeathering.track(level, chunk.getPos());
+        boolean changed = previous == null || !previous.style().equals(style);
+        if (changed) {
+            InkSync.markDirty(level, pos, null);
+        }
+        return changed;
+    }
+
+    /**
+     * Takes the coat of ink off a block.
+     *
+     * @return whether the block had one
+     */
+    public static boolean uncoat(ServerLevel level, BlockPos pos) {
+        return uncoat(level, loadedChunk(level, pos), pos);
+    }
+
+    static boolean uncoat(ServerLevel level, @Nullable LevelChunk chunk, BlockPos pos) {
+        var ink = get(chunk);
+        if (ink == null || ink.getCoat(pos) == null) {
+            return false;
+        }
+        ink.setCoat(pos, null);
+        if (ink.isEmpty()) {
+            chunk.removeAttached(SplatoonAttachmentTypes.CHUNK_INK);
+        }
+        chunk.markUnsaved();
+        InkSync.markDirty(level, pos, null);
+        return true;
     }
 
     /**
@@ -147,7 +230,7 @@ public final class InkLevel {
     }
 
     /**
-     * Cleans every face of the given block.
+     * Cleans every face of the given block, and its coat.
      *
      * @return whether any cell changed
      */
@@ -157,10 +240,13 @@ public final class InkLevel {
 
     static boolean clear(ServerLevel level, @Nullable LevelChunk chunk, BlockPos pos) {
         var ink = get(chunk);
-        if (ink == null || !ink.has(pos)) {
+        if (ink == null) {
             return false;
         }
-        boolean changed = false;
+        boolean changed = uncoat(level, chunk, pos);
+        if (!ink.has(pos)) {
+            return changed;
+        }
         for (var side : DIRECTIONS) {
             changed |= erase(level, chunk, pos, side, InkGrid.ALL_CELLS);
         }

@@ -1,8 +1,11 @@
 package fr.hugman.mubble.test.gametest.splatoon;
 
 import fr.hugman.mubble.splatoon.world.attribute.SplatoonEnvironmentAttributes;
+import fr.hugman.mubble.splatoon.world.entity.SplatoonEntityTypes;
+import fr.hugman.mubble.splatoon.world.entity.projectile.InkDrop;
 import fr.hugman.mubble.splatoon.world.entity.projectile.ShooterInkBullet;
 import fr.hugman.mubble.splatoon.world.entity.projectile.ShooterInkBulletConfig;
+import fr.hugman.mubble.splatoon.world.item.weapon.AutomaticShooterConfig;
 import fr.hugman.mubble.splatoon.world.level.ink.InkFace;
 import fr.hugman.mubble.splatoon.world.level.ink.InkGrid;
 import fr.hugman.mubble.splatoon.world.level.ink.InkLevel;
@@ -36,12 +39,20 @@ public class InkGameTest {
         return 1L << InkGrid.cell(u, v);
     }
 
+    private static final Vec3 UP = new Vec3(0, 1, 0);
+    private static final AutomaticShooterConfig SPLATTERSHOT = new AutomaticShooterConfig(ShooterInkBulletConfig.SPLATTERSHOT, 6, 0.0F, 0.0F, 0.072F, 0.0F);
+
+    private static boolean splat(GameTestHelper helper, Vec3 relativeCenter, Vec3 normal, Vec3 direction, double widthHalf, double depthHalf) {
+        var center = helper.absoluteVec(relativeCenter);
+        return InkPainter.splat(helper.getLevel(), new InkPainter.Splat(center, normal, direction, widthHalf, depthHalf, 0L), PINK);
+    }
+
     @GameTest
     public void aSplatPaintsTheFloorAroundIt(GameTestHelper helper) {
         Arena.buildFloor(helper);
-        var center = Vec3.atCenterOf(helper.absolutePos(TARGET)).add(0, 0.5, 0);
+        var center = Vec3.atCenterOf(TARGET).add(0, 0.5, 0);
 
-        helper.assertTrue(InkPainter.splat(helper.getLevel(), center, 1.0, PINK), "the splat painted nothing");
+        helper.assertTrue(splat(helper, center, UP, new Vec3(1, -1, 0), 1.0, 1.0), "the splat painted nothing");
 
         var hit = face(helper, TARGET, Direction.UP);
         helper.assertTrue(hit != null && hit.cells() == InkGrid.ALL_CELLS, "the face under the splat should be fully painted");
@@ -171,13 +182,152 @@ public class InkGameTest {
         });
     }
 
+    @GameTest
+    public void aSplatIsStretchedInItsDirection(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var center = Vec3.atCenterOf(TARGET).add(0, 0.5, 0);
+
+        // three times as long as wide, going east
+        splat(helper, center, UP, new Vec3(1, -0.2, 0), 0.7, 2.1);
+
+        helper.assertTrue(face(helper, TARGET.east(2), Direction.UP) != null, "the splat did not reach ahead");
+        helper.assertTrue(face(helper, TARGET.south(2), Direction.UP) == null, "the splat is as wide as it is long");
+        helper.succeed();
+    }
+
+    @GameTest
+    public void aSplatNearTheTopOfAWallWrapsOverIt(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var wall = TARGET.above(2);
+        helper.setBlock(TARGET.above(), Blocks.STONE);
+        helper.setBlock(wall, Blocks.STONE);
+
+        // on the west side of the wall, a little under its top
+        splat(helper, new Vec3(wall.getX(), wall.getY() + 0.9, wall.getZ() + 0.5), new Vec3(-1, 0, 0), new Vec3(1, 0, 0), 1.0, 1.31);
+
+        helper.assertTrue(face(helper, wall, Direction.WEST) != null, "the wall itself got no ink");
+        var top = face(helper, wall, Direction.UP);
+        helper.assertTrue(top != null, "the top of the wall got no ink");
+        helper.assertTrue(top.cells() != InkGrid.ALL_CELLS, "the top of the wall should only get a little ink");
+        helper.assertTrue(face(helper, wall, Direction.EAST) == null, "the back of the wall got ink");
+        helper.succeed();
+    }
+
+    @GameTest
+    public void aSplatDoesNotGoThroughWalls(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        for (int y = 1; y <= 3; y++) {
+            for (int z = 0; z < Arena.SIZE; z++) {
+                helper.setBlock(new BlockPos(TARGET.getX() + 1, y, z), Blocks.STONE);
+            }
+        }
+        // right against the wall, wide enough to reach past it
+        splat(helper, Vec3.atCenterOf(TARGET).add(0.45, 0.5, 0), UP, new Vec3(0, -1, 0), 1.6, 1.6);
+
+        helper.assertTrue(face(helper, TARGET, Direction.UP) != null, "the floor got no ink");
+        helper.assertTrue(face(helper, TARGET.east(2), Direction.UP) == null, "the floor behind the wall got ink");
+        helper.succeed();
+    }
+
+    @GameTest
+    public void plantsGetInkedAndKeepNoInkOffTheGround(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        helper.setBlock(TARGET.above(), Blocks.SHORT_GRASS);
+
+        splat(helper, Vec3.atCenterOf(TARGET).add(0, 0.5, 0), UP, new Vec3(0, -1, 0), 1.0, 1.0);
+
+        var coat = InkLevel.getCoat(helper.getLevel(), helper.absolutePos(TARGET.above()));
+        helper.assertTrue(coat != null && coat.style().equals(PINK), "the grass did not get inked");
+        var ground = face(helper, TARGET, Direction.UP);
+        helper.assertTrue(ground != null && ground.get(InkGrid.cell(4, 4)) != null, "the ground under the grass got no ink");
+
+        helper.destroyBlock(TARGET.above());
+        helper.assertTrue(InkLevel.getCoat(helper.getLevel(), helper.absolutePos(TARGET.above())) == null, "the ink of the grass outlived it");
+        helper.succeed();
+    }
+
+    @GameTest
+    public void plantingOnInkKeepsIt(GameTestHelper helper) {
+        Arena.buildFloor(helper, Blocks.GRASS_BLOCK.defaultBlockState());
+        paintTop(helper, TARGET);
+
+        helper.setBlock(TARGET.above(), Blocks.POPPY);
+
+        helper.assertValueEqual(face(helper, TARGET, Direction.UP).cells(), InkGrid.ALL_CELLS, "the cells left after planting a flower");
+        helper.succeed();
+    }
+
+    @GameTest(maxTicks = 60)
+    public void shotsDieInWater(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        // a one block pool, with a rim around it
+        for (var pos : BlockPos.betweenClosed(TARGET.above().offset(-1, 0, -1), TARGET.above().offset(1, 0, 1))) {
+            helper.setBlock(pos, Blocks.STONE);
+        }
+        helper.setBlock(TARGET.above(), Blocks.WATER);
+        var shooter = helper.spawn(EntityTypes.ARMOR_STAND, TARGET.above(3));
+        shooter.setXRot(90.0F);
+
+        var bullet = new ShooterInkBullet(helper.getLevel(), shooter, SPLATTERSHOT, PINK, 0);
+        helper.getLevel().addFreshEntity(bullet);
+
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(bullet.isRemoved(), "the shot never landed"))
+                .thenExecute(() -> {
+                    helper.assertTrue(face(helper, TARGET, Direction.UP) == null, "ink got under the water");
+                    helper.assertTrue(face(helper, TARGET.above().east(), Direction.UP) == null, "ink landing in water splashed on its rim");
+                })
+                .thenSucceed();
+    }
+
+    @GameTest(maxTicks = 60)
+    public void aShotHurtsWhatItHits(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var pig = helper.spawn(EntityTypes.PIG, TARGET.above());
+        pig.setNoAi(true);
+        var shooter = helper.spawn(EntityTypes.ARMOR_STAND, TARGET.above(4));
+        shooter.setXRot(90.0F);
+
+        helper.getLevel().addFreshEntity(new ShooterInkBullet(helper.getLevel(), shooter, SPLATTERSHOT, PINK, 0));
+
+        // 360 out of 1000 in Splatoon is 7.2 out of 20 here, and nothing knocks the pig away
+        helper.succeedWhen(() -> helper.assertValueEqual(Math.round((pig.getMaxHealth() - pig.getHealth()) * 10), 72, "the damage of a close shot, in tenths"));
+    }
+
+    @GameTest(maxTicks = 60)
+    public void aDropletPaintsWhereItLands(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var drop = new InkDrop(helper.getLevel(), null, ShooterInkBulletConfig.SPLATTERSHOT, PINK,
+                helper.absoluteVec(Vec3.atCenterOf(TARGET.above(4))), new Vec3(1, 0, 0), false);
+        helper.getLevel().addFreshEntity(drop);
+
+        helper.succeedWhen(() -> {
+            helper.assertTrue(drop.isRemoved(), "the droplet is still falling");
+            helper.assertTrue(face(helper, TARGET, Direction.UP) != null, "the droplet left no ink");
+        });
+    }
+
+    @GameTest(maxTicks = 60)
+    public void someShotsLetDropletsFall(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var shooter = helper.spawn(EntityTypes.ARMOR_STAND, new BlockPos(0, FLOOR + 1, 3));
+        shooter.setYRot(-90.0F);
+        shooter.setXRot(30.0F);
+
+        // the 4th shot of a Splattershot cycle drops ink in front of its shooter
+        helper.getLevel().addFreshEntity(new ShooterInkBullet(helper.getLevel(), shooter, SPLATTERSHOT, PINK, 3));
+
+        helper.succeedWhen(() -> helper.assertTrue(!helper.getEntities(SplatoonEntityTypes.INK_DROP).isEmpty()
+                || face(helper, new BlockPos(1, FLOOR, 3), Direction.UP) != null, "no droplet fell"));
+    }
+
     @GameTest(maxTicks = 60)
     public void aShotPaintsWithTheInkOfItsWeapon(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var shooter = helper.spawn(EntityTypes.ARMOR_STAND, TARGET.above());
         shooter.setXRot(90.0F);
 
-        var bullet = new ShooterInkBullet(helper.getLevel(), shooter, ShooterInkBulletConfig.DEFAULT, PINK, 0.0F);
+        var bullet = new ShooterInkBullet(helper.getLevel(), shooter, SPLATTERSHOT, PINK, 0);
         helper.getLevel().addFreshEntity(bullet);
 
         helper.succeedWhen(() -> {

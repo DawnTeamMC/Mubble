@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 
 public class SplatoonEntityTypeKeys {
     public static final ResourceKey<EntityType<?>> SHOOTER_INK_BULLET = createKey("shooter_ink_bullet");
+    public static final ResourceKey<EntityType<?>> INK_DROP = createKey("ink_drop");
 
     private static ResourceKey<EntityType<?>> createKey(String path) {
         return ResourceKey.create(Registries.ENTITY_TYPE, Splatoon.id(path));
