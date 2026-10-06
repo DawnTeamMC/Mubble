@@ -15,6 +15,12 @@ Ink painted by the Splatoon weapons lives on the faces of blocks, each face bein
 It sticks to any block with a collision shape (slabs, stairs and other partial blocks included), and gets cleaned
 wherever a block is placed over it: a torch only cleans the middle of the face it stands on.
 
+Plants (grass, flowers, vines...) are inked as a whole instead, over their own texture, and do not keep ink off the
+ground they stand on.
+
+Shots leave splats stretched in the direction they were going, which wrap a little around edges and corners, and let
+droplets fall on their way. Ink landing in a liquid that washes ink away paints nothing.
+
 ### Environment attributes
 
 Like any [environment attribute](https://minecraft.wiki/w/Environment_attribute), these can be set per dimension type
@@ -35,6 +41,7 @@ or per biome by data packs, so that an arena can keep its ink forever while the 
 ### Block tags
 
 - `splatoon:uninkable`: blocks ink does not stick to.
+- `splatoon:ink_coated`: blocks without collision that ink covers as a whole, over their own texture.
 
 ### Item component
 
@@ -43,6 +50,16 @@ The ink a weapon shoots comes from its `splatoon:ink` component, so any weapon c
 /give @s splatoon:splattershot[splatoon:ink={color:"#F02D7D"}]
 /give @s splatoon:splattershot[splatoon:ink={color:"#F0E22D",type:"splatoon:glitter"}]
 ```
+
+### Weapons
+
+The `splatoon:splatoon_weapon` component holds the parameters of a weapon, named and grouped like in the parameter
+tables of Splatoon 3 (see [Leanny's database](https://leanny.github.io/splat3/parameters.html)), in snake case:
+`MoveParam.SpawnSpeed` becomes `bullet.move_param.spawn_speed`. Lengths are in units (1 unit = 1 block), durations in
+frames (60 per second, so 3 per tick) and damage out of 1000. Like in the game's tables, values left out take the
+defaults of the game, such as `brake_air_resist` (0.36) or `repeat_frame` (6).
+
+Ink damage (`splatoon:ink`) neither knocks back nor gives a moment of invulnerability, so every shot counts.
 
 ### Resource packs
 

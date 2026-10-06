@@ -21,5 +21,8 @@ public class SplatoonEnglishLangProvider extends FabricLanguageProvider {
 
         builder.add(SplatoonSounds.INK_SPLASH, "Ink splashes");
         builder.add(SplatoonSounds.SPLATTERSHOT_SHOOT, "Splattershot shoots"); //TODO: make it generic for all automatic shooters...
+
+        builder.add("death.attack." + Splatoon.MOD_ID + ".ink", "%1$s was splatted");
+        builder.add("death.attack." + Splatoon.MOD_ID + ".ink.player", "%1$s was splatted by %2$s");
     }
 }

@@ -5,6 +5,7 @@ import com.mojang.serialization.JsonOps;
 import fr.hugman.mubble.splatoon.Splatoon;
 import fr.hugman.mubble.splatoon.network.protocol.common.custom.InkSyncPayload;
 import fr.hugman.mubble.splatoon.world.level.ink.ChunkInk;
+import fr.hugman.mubble.splatoon.world.level.ink.InkCoat;
 import fr.hugman.mubble.splatoon.world.level.ink.InkFace;
 import fr.hugman.mubble.splatoon.world.level.ink.InkGrid;
 import fr.hugman.mubble.splatoon.world.level.ink.InkStyle;
@@ -121,6 +122,9 @@ public class InkTest {
         var payload = new InkSyncPayload(new ChunkPos(2, -1), false, List.of(
                 new ChunkInk.Entry(new BlockPos(32, 70, -10), Direction.EAST, Optional.of(painted)),
                 new ChunkInk.Entry(new BlockPos(33, 70, -10), Direction.UP, Optional.empty())
+        ), List.of(
+                new ChunkInk.CoatEntry(new BlockPos(34, 71, -10), Optional.of(new InkCoat(RED, 5L))),
+                new ChunkInk.CoatEntry(new BlockPos(35, 71, -10), Optional.empty())
         ));
 
         var buf = new FriendlyByteBuf(Unpooled.buffer());
@@ -132,6 +136,27 @@ public class InkTest {
         assertEquals(2, decoded.faces().size());
         assertFaceEquals(painted, decoded.faces().get(0).face().orElseThrow(), false);
         assertTrue(decoded.faces().get(1).face().isEmpty(), "a cleaned face must arrive as no face");
+        assertEquals(RED, decoded.coats().get(0).coat().orElseThrow().style());
+        assertTrue(decoded.coats().get(1).coat().isEmpty(), "a cleaned coat must arrive as no coat");
+    }
+
+    @Test
+    @DisplayName("coats are saved with the faces, and the first format of saved ink still loads")
+    void coatsRoundTripAndOldInkStillLoads() {
+        var ink = new ChunkInk();
+        var pos = new BlockPos(1, 2, 3);
+        ink.getOrCreate(pos, Direction.UP).paint(MIDDLE, RED, 1L);
+        ink.setCoat(pos.above(), new InkCoat(BLUE, 42L));
+
+        var nbt = ChunkInk.CODEC.encodeStart(NbtOps.INSTANCE, ink).getOrThrow();
+        var decoded = ChunkInk.CODEC.parse(NbtOps.INSTANCE, nbt).getOrThrow();
+        assertEquals(new InkCoat(BLUE, 42L), decoded.getCoat(pos.above()));
+        assertFaceEquals(ink.get(pos, Direction.UP), decoded.get(pos, Direction.UP), true);
+
+        // before coats, the ink of a chunk was saved as a plain list of faces
+        var oldFormat = ChunkInk.Entry.CODEC.listOf().encodeStart(NbtOps.INSTANCE, ink.entries()).getOrThrow();
+        var fromOld = ChunkInk.CODEC.parse(NbtOps.INSTANCE, oldFormat).getOrThrow();
+        assertFaceEquals(ink.get(pos, Direction.UP), fromOld.get(pos, Direction.UP), true);
     }
 
     @Test

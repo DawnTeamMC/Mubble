@@ -13,7 +13,8 @@ import net.minecraft.world.level.chunk.LevelChunk;
  *     <li>ink on the block itself goes away if the block is replaced, and shrinks to what is left of its surface
  *     if only its state changes (a door opening, a cake being eaten);</li>
  *     <li>ink on the neighbors goes away where the new block covers them, and only there: a torch placed on the
- *     floor cleans the middle of the face it stands on;</li>
+ *     floor cleans the middle of the face it stands on, while grass growing on it cleans nothing;</li>
+ *     <li>the coat of a plant goes away with the plant;</li>
  *     <li>a liquid washes away the ink it touches, unless {@link fr.hugman.mubble.splatoon.world.attribute.SplatoonEnvironmentAttributes#LIQUIDS_WASH_INK}
  *     says otherwise.</li>
  * </ul>
@@ -35,6 +36,10 @@ public final class InkBlockChanges {
 
         // the block itself
         var ink = InkLevel.get(chunk);
+        if (ink != null && ink.getCoat(pos) != null
+                && (liquid || oldState.getBlock() != newState.getBlock() || !InkLevel.isCoatable(newState))) {
+            InkLevel.uncoat(level, chunk, pos);
+        }
         if (ink != null && ink.has(pos)) {
             if (liquid || oldState.getBlock() != newState.getBlock() || !InkLevel.isInkable(newState)) {
                 InkLevel.clear(level, chunk, pos);
@@ -47,7 +52,6 @@ public final class InkBlockChanges {
         }
 
         // its neighbors, on the boundary they share with it
-        var surfaces = InkSurfaces.of(newState);
         for (var direction : DIRECTIONS) {
             var neighborPos = pos.relative(direction);
             var side = direction.getOpposite();
@@ -57,7 +61,7 @@ public final class InkBlockChanges {
                 continue;
             }
 
-            long covered = liquid ? InkGrid.ALL_CELLS : surfaces.flush(direction);
+            long covered = liquid ? InkGrid.ALL_CELLS : InkLevel.covers(newState, direction);
             if (covered == 0L) {
                 continue;
             }

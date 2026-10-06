@@ -14,50 +14,79 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
+/**
+ * A Splatoon weapon, which fires as long as it is used.
+ *
+ * <p>Shots are timed in frames, like in Splatoon 3: a weapon firing every 4 frames fires 3 times every 4 ticks, not
+ * once per tick. Letting go keeps the weapon cooling down until its next shot was due, so tapping does not fire
+ * faster than holding.
+ *
+ * @author Hugman
+ * @since v4.0.0
+ */
 public class SplatoonWeaponItem extends Item {
+    public static final int USE_DURATION = 72000;
+
     public SplatoonWeaponItem(Properties properties) {
         super(properties);
+    }
+
+    @Nullable
+    private static AutomaticShooterConfig shooter(ItemStack stack) {
+        var weapon = stack.get(SplatoonDataComponents.SPLATOON_WEAPON);
+        return weapon != null && weapon.value() instanceof AutomaticShooterConfig config ? config : null;
     }
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
+        if (shooter(itemStack) == null) {
+            return InteractionResult.PASS;
+        }
         player.startUsingItem(hand);
         return InteractionResult.CONSUME.heldItemTransformedTo(itemStack);
     }
 
     @Override
     public void onUseTick(Level level, LivingEntity living, ItemStack stack, int ticksRemaining) {
-        var weaponEntry = stack.get(SplatoonDataComponents.SPLATOON_WEAPON);
-        if(weaponEntry == null) {
+        var config = shooter(stack);
+        if (config == null) {
             return;
         }
-        var weapon = weaponEntry.value();
-
-        if(living instanceof Player player) {
-            if(weapon instanceof AutomaticShooterConfig config) {
-                if(!player.getCooldowns().isOnCooldown(stack)) {
-                    this.shootShooterInkBullet(level,player, stack, config);
-                }
+        int ticksUsed = this.getUseDuration(stack, living) - ticksRemaining;
+        int shots = config.shotsAt(ticksUsed);
+        if (shots <= 0) {
+            return;
+        }
+        if (!level.isClientSide()) {
+            var ink = stack.getOrDefault(SplatoonDataComponents.INK, InkStyle.DEFAULT);
+            int firstShot = config.shotsBefore(ticksUsed);
+            for (int i = 0; i < shots; i++) {
+                level.addFreshEntity(new ShooterInkBullet(level, living, config, ink, firstShot + i));
             }
+            level.playSound(null, living.getX(), living.getY(), living.getZ(), SplatoonSounds.SPLATTERSHOT_SHOOT, SoundSource.PLAYERS, 0.5f, 1.0F);
+        }
+        if (living instanceof Player player) {
+            player.awardStat(Stats.ITEM_USED.get(this));
         }
     }
 
-    private void shootShooterInkBullet(Level level, Player player, ItemStack stack, AutomaticShooterConfig config) {
-        level.playSound(null, player.getX(), player.getY(), player.getZ(), SplatoonSounds.SPLATTERSHOT_SHOOT, SoundSource.PLAYERS, 0.5f, 1.0F);
-        player.getCooldowns().addCooldown(stack, (int) config.cooldown());
-        if (!level.isClientSide()) {
-            float angleDeviation = (player.onGround() ? config.angleDeviation() : config.jumpingAngleDeviation());
-            var ink = stack.getOrDefault(SplatoonDataComponents.INK, InkStyle.DEFAULT);
-            var bullet = new ShooterInkBullet(level, player, config.bulletConfig(), ink, angleDeviation);
-            level.addFreshEntity(bullet);
+    @Override
+    public boolean releaseUsing(ItemStack stack, Level level, LivingEntity living, int remainingTime) {
+        var config = shooter(stack);
+        if (config != null && living instanceof Player player) {
+            int cooldown = config.cooldownAfter(this.getUseDuration(stack, living) - remainingTime);
+            if (cooldown > 0) {
+                player.getCooldowns().addCooldown(stack, cooldown);
+            }
         }
-        player.awardStat(Stats.ITEM_USED.get(this));
+        return false;
     }
 
     @Override
     public int getUseDuration(ItemStack itemStack, LivingEntity user) {
-        return 72000;
+        return USE_DURATION;
     }
 }

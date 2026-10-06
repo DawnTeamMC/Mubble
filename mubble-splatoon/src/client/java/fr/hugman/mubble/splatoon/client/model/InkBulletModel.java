@@ -1,6 +1,6 @@
 package fr.hugman.mubble.splatoon.client.model;
 
-import fr.hugman.mubble.splatoon.client.renderer.entity.state.ShooterInkBulletRenderState;
+import fr.hugman.mubble.splatoon.client.renderer.entity.state.InkProjectileRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 
-public class InkBulletModel extends EntityModel<ShooterInkBulletRenderState>
+public class InkBulletModel extends EntityModel<InkProjectileRenderState>
 {
     public static final String MAIN = "main";
     public static final float SIZE = 1;

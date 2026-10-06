@@ -5,6 +5,7 @@ import fr.hugman.mubble.splatoon.core.component.SplatoonDataComponents;
 import fr.hugman.mubble.splatoon.core.registries.SplatoonBuiltInRegistries;
 import fr.hugman.mubble.splatoon.core.registries.SplatoonRegistries;
 import fr.hugman.mubble.splatoon.network.protocol.common.custom.SplatoonPayloadTypes;
+import fr.hugman.mubble.splatoon.network.syncher.SplatoonEntityDataSerializers;
 import fr.hugman.mubble.splatoon.sounds.SplatoonSounds;
 import fr.hugman.mubble.splatoon.world.attribute.SplatoonEnvironmentAttributes;
 import fr.hugman.mubble.splatoon.world.entity.SplatoonEntityTypes;
@@ -33,6 +34,7 @@ public class Splatoon implements ModInitializer {
         Reflection.initialize(SplatoonItems.class);
         Reflection.initialize(SplatoonCreativeModeTabs.class);
         Reflection.initialize(SplatoonSounds.class);
+        Reflection.initialize(SplatoonEntityDataSerializers.class);
         Reflection.initialize(SplatoonEntityTypes.class);
         Reflection.initialize(SplatoonDataComponents.class);
         Reflection.initialize(SplatoonWeaponTypes.class);

@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.chunk.LevelChunk;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
@@ -36,7 +37,10 @@ public final class InkSync {
     private InkSync() {
     }
 
-    static void markDirty(ServerLevel level, BlockPos pos, Direction side) {
+    /**
+     * @param side the face that changed, or {@code null} for the coat of the block
+     */
+    static void markDirty(ServerLevel level, BlockPos pos, @Nullable Direction side) {
         DIRTY.computeIfAbsent(level, l -> new Long2ObjectOpenHashMap<>())
                 .computeIfAbsent(ChunkPos.containing(pos).pack(), key -> new LinkedHashSet<>())
                 .add(new Face(pos.immutable(), side));
@@ -57,12 +61,17 @@ public final class InkSync {
                 continue;
             }
 
-            List<ChunkInk.Entry> faces = new ArrayList<>(entry.getValue().size());
+            List<ChunkInk.Entry> faces = new ArrayList<>();
+            List<ChunkInk.CoatEntry> coats = new ArrayList<>();
             for (var face : entry.getValue()) {
-                var ink = InkLevel.get(level, face.pos(), face.side());
-                faces.add(new ChunkInk.Entry(face.pos(), face.side(), Optional.ofNullable(ink).map(InkFace::copy)));
+                if (face.side() == null) {
+                    coats.add(new ChunkInk.CoatEntry(face.pos(), Optional.ofNullable(InkLevel.getCoat(level, face.pos()))));
+                } else {
+                    var ink = InkLevel.get(level, face.pos(), face.side());
+                    faces.add(new ChunkInk.Entry(face.pos(), face.side(), Optional.ofNullable(ink).map(InkFace::copy)));
+                }
             }
-            var payload = new InkSyncPayload(chunkPos, false, faces);
+            var payload = new InkSyncPayload(chunkPos, false, faces, coats);
             for (var player : players) {
                 send(player, payload);
             }
@@ -79,7 +88,7 @@ public final class InkSync {
         }
         List<ChunkInk.Entry> faces = new ArrayList<>();
         ink.forEach((pos, side, face) -> faces.add(new ChunkInk.Entry(pos, side, Optional.of(face.copy()))));
-        send(player, new InkSyncPayload(chunk.getPos(), true, faces));
+        send(player, new InkSyncPayload(chunk.getPos(), true, faces, ink.coatEntries()));
     }
 
     public static void forget(ServerLevel level) {
@@ -92,6 +101,6 @@ public final class InkSync {
         }
     }
 
-    private record Face(BlockPos pos, Direction side) {
+    private record Face(BlockPos pos, @Nullable Direction side) {
     }
 }

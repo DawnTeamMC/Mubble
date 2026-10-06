@@ -111,8 +111,27 @@ public final class InkWeathering {
                 }
             }
         });
+        List<BlockPos> dried = new ArrayList<>();
+        ink.forEachCoat((pos, coat) -> {
+            if (dry) {
+                int lifetime = level.environmentAttributes().getValue(SplatoonEnvironmentAttributes.INK_LIFETIME, pos);
+                if (lifetime > 0 && time - coat.paintedAt() >= lifetime) {
+                    dried.add(pos);
+                    return;
+                }
+            }
+            if (rain && level.isRainingAt(pos)
+                    && level.environmentAttributes().getValue(SplatoonEnvironmentAttributes.RAIN_WASHES_INK, pos)
+                    && level.getRandom().nextFloat() < RAIN_WASH_CHANCE) {
+                dried.add(pos);
+            }
+        });
+
         for (var wash : washes) {
             InkLevel.erase(level, chunk, wash.pos(), wash.side(), wash.cells());
+        }
+        for (var pos : dried) {
+            InkLevel.uncoat(level, chunk, pos);
         }
     }
 

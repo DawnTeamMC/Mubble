@@ -16,12 +16,14 @@ import java.util.List;
  * @param replace whether these faces are all the ink of the chunk, which is the case when the chunk is first sent,
  *                rather than the faces that changed since the last update
  * @param faces   the faces, each with its ink or with none when it was cleaned
+ * @param coats   the coated blocks, each with its coat or with none when it was cleaned
  */
-public record InkSyncPayload(ChunkPos chunk, boolean replace, List<ChunkInk.Entry> faces) implements CustomPacketPayload {
+public record InkSyncPayload(ChunkPos chunk, boolean replace, List<ChunkInk.Entry> faces, List<ChunkInk.CoatEntry> coats) implements CustomPacketPayload {
     public static final StreamCodec<FriendlyByteBuf, InkSyncPayload> STREAM_CODEC = StreamCodec.composite(
             ChunkPos.STREAM_CODEC, InkSyncPayload::chunk,
             ByteBufCodecs.BOOL, InkSyncPayload::replace,
             ChunkInk.Entry.STREAM_CODEC.apply(ByteBufCodecs.list()), InkSyncPayload::faces,
+            ChunkInk.CoatEntry.STREAM_CODEC.apply(ByteBufCodecs.list()), InkSyncPayload::coats,
             InkSyncPayload::new
     );
 
