@@ -12,6 +12,13 @@
       "fr.hugman.mubble.splatoon.client.SplatoonClient"
     ]
   },
+  "mixins": [
+    "splatoon.mixins.json",
+    {
+      "config": "splatoon.client.mixins.json",
+      "environment": "client"
+    }
+  ],
   "depends": {
     "minecraft": "*",
     "fabric-api": "*",

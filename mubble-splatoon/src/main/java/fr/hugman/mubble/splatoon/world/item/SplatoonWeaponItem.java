@@ -4,6 +4,7 @@ import fr.hugman.mubble.splatoon.core.component.SplatoonDataComponents;
 import fr.hugman.mubble.splatoon.sounds.SplatoonSounds;
 import fr.hugman.mubble.splatoon.world.entity.projectile.ShooterInkBullet;
 import fr.hugman.mubble.splatoon.world.item.weapon.AutomaticShooterConfig;
+import fr.hugman.mubble.splatoon.world.level.ink.InkStyle;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -48,7 +49,8 @@ public class SplatoonWeaponItem extends Item {
         player.getCooldowns().addCooldown(stack, (int) config.cooldown());
         if (!level.isClientSide()) {
             float angleDeviation = (player.onGround() ? config.angleDeviation() : config.jumpingAngleDeviation());
-            var bullet = new ShooterInkBullet(level, player, config.bulletConfig(), angleDeviation);
+            var ink = stack.getOrDefault(SplatoonDataComponents.INK, InkStyle.DEFAULT);
+            var bullet = new ShooterInkBullet(level, player, config.bulletConfig(), ink, angleDeviation);
             level.addFreshEntity(bullet);
         }
         player.awardStat(Stats.ITEM_USED.get(this));

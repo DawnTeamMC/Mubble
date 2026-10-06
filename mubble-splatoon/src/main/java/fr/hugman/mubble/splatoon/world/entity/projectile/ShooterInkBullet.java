@@ -2,10 +2,12 @@ package fr.hugman.mubble.splatoon.world.entity.projectile;
 
 import fr.hugman.mubble.splatoon.sounds.SplatoonSounds;
 import fr.hugman.mubble.splatoon.world.entity.SplatoonEntityTypes;
-import fr.hugman.mubble.splatoon.world.level.block.SplatoonBlocks;
+import fr.hugman.mubble.splatoon.world.level.ink.InkPainter;
+import fr.hugman.mubble.splatoon.world.level.ink.InkStyle;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,9 +24,12 @@ import org.jetbrains.annotations.Nullable;
 public class ShooterInkBullet extends Projectile {
     public static final String LIFE_KEY = "life";
     public static final String CONFIG_KEY = "config";
+    public static final String INK_KEY = "ink";
 
     private int life;
     private ShooterInkBulletConfig config;
+    private InkStyle ink = InkStyle.DEFAULT;
+    private static final EntityDataAccessor<Integer> INK_COLOR = SynchedEntityData.defineId(ShooterInkBullet.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> FREE_GRAVITY = SynchedEntityData.defineId(ShooterInkBullet.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> BRAKED = SynchedEntityData.defineId(ShooterInkBullet.class, EntityDataSerializers.BOOLEAN);
 
@@ -32,8 +37,9 @@ public class ShooterInkBullet extends Projectile {
         super(entityType, level);
     }
 
-    public ShooterInkBullet(Level level, LivingEntity shooter, @Nullable ShooterInkBulletConfig config, float angleDeviation) {
+    public ShooterInkBullet(Level level, LivingEntity shooter, @Nullable ShooterInkBulletConfig config, InkStyle ink, float angleDeviation) {
         this(SplatoonEntityTypes.SHOOTER_INK_BULLET, level);
+        this.setInk(ink);
 
         // owner
         this.setOwner(shooter);
@@ -127,6 +133,23 @@ public class ShooterInkBullet extends Projectile {
     protected void defineSynchedData(SynchedEntityData.Builder entityData) {
         entityData.define(FREE_GRAVITY, false);
         entityData.define(BRAKED, false);
+        entityData.define(INK_COLOR, InkStyle.DEFAULT.color());
+    }
+
+    public InkStyle getInk() {
+        return this.ink;
+    }
+
+    public void setInk(InkStyle ink) {
+        this.ink = ink;
+        this.entityData.set(INK_COLOR, ink.color());
+    }
+
+    /**
+     * @return the color of the ink, which is all the client knows of it
+     */
+    public int getInkColor() {
+        return this.entityData.get(INK_COLOR);
     }
 
     public boolean hasBraked() {
@@ -145,6 +168,7 @@ public class ShooterInkBullet extends Projectile {
             output.store(CONFIG_KEY, ShooterInkBulletConfig.CODEC, this.config);
         }
         output.putShort(LIFE_KEY, (short) this.life);
+        output.store(INK_KEY, InkStyle.CODEC, this.ink);
     }
 
     @Override
@@ -152,21 +176,14 @@ public class ShooterInkBullet extends Projectile {
         super.readAdditionalSaveData(input);
         input.read(CONFIG_KEY, ShooterInkBulletConfig.CODEC).ifPresent(config -> this.config = config);
         this.life = input.getShortOr(LIFE_KEY, (short) 0);
+        this.setInk(input.read(INK_KEY, InkStyle.CODEC).orElse(InkStyle.DEFAULT));
     }
 
     @Override
     protected void onHitBlock(BlockHitResult hitResult) {
-        var level = this.level();
-        var pos = hitResult.getBlockPos();
-        var side = hitResult.getDirection();
-
-        if(!level.isClientSide()) {
-            var inkPos = pos.relative(side);
-            var currentState = level.getBlockState(inkPos);
-            var inkState = SplatoonBlocks.INK_BLOCK.getStateForPlacement(currentState, level, inkPos, side.getOpposite());
-
-            if (inkState != null) {
-                level.setBlockAndUpdate(inkPos, inkState);
+        if (this.level() instanceof ServerLevel level) {
+            if (this.config != null) {
+                InkPainter.splat(level, hitResult.getLocation(), this.config.paintRadius(), this.ink);
             }
             this.playSound(SplatoonSounds.INK_SPLASH, 0.3F, 1.0f);
             this.discard();

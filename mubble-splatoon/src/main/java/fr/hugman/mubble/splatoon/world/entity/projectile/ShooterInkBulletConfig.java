@@ -3,7 +3,6 @@ package fr.hugman.mubble.splatoon.world.entity.projectile;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fr.hugman.mubble.codec.MubbleCodecs;
-import fr.hugman.mubble.codec.StreamCodecXL;
 import fr.hugman.mubble.splatoon.SplatoonConversions;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -20,6 +19,7 @@ import net.minecraft.network.codec.StreamCodec;
  *   <li> The bullet will travel at an initial speed when shot, and will travel in a straight until the brake tick.
  *   <li> After the brake tick, the bullet's speed will be maximized to a certain value for 1 frame.
  *   <li> After that frame, the bullet's speed will gradually decreases until it reaches the free gravity threshold.
+ *   <li> Where the bullet lands, it leaves a splat of ink of the paint radius.
  * </ul>
  *
  * @author Hugman
@@ -34,10 +34,11 @@ public class ShooterInkBulletConfig {
             MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("initial_speed").forGetter(config -> config.initialSpeed),
             MubbleCodecs.NONNEGATIVE_LONG.fieldOf("brake_tick").forGetter(config -> config.brakeTick),
             MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("brake_max_speed").forGetter(config -> config.brakeMaxSpeed),
-            MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("free_gravity_threshold").forGetter(config -> config.freeGravityThreshold)
+            MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("free_gravity_threshold").forGetter(config -> config.freeGravityThreshold),
+            MubbleCodecs.NONNEGATIVE_FLOAT.fieldOf("paint_radius").forGetter(config -> config.paintRadius)
     ).apply(instance, ShooterInkBulletConfig::of));
 
-    public static final StreamCodec<ByteBuf, ShooterInkBulletConfig> STREAM_CODEC = StreamCodecXL.composite(
+    public static final StreamCodec<ByteBuf, ShooterInkBulletConfig> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, ShooterInkBulletConfig::maxDamage,
             ByteBufCodecs.FLOAT, ShooterInkBulletConfig::minDamage,
             ByteBufCodecs.VAR_LONG, ShooterInkBulletConfig::startReduceTick,
@@ -46,10 +47,11 @@ public class ShooterInkBulletConfig {
             ByteBufCodecs.VAR_LONG, ShooterInkBulletConfig::brakeTick,
             ByteBufCodecs.FLOAT, ShooterInkBulletConfig::brakeMaxSpeed,
             ByteBufCodecs.FLOAT, ShooterInkBulletConfig::freeGravityThreshold,
+            ByteBufCodecs.FLOAT, ShooterInkBulletConfig::paintRadius,
             ShooterInkBulletConfig::new
     );
 
-    public static final ShooterInkBulletConfig DEFAULT = ShooterInkBulletConfig.ofSplat(40, 8, 360, 180, 1.4495F, 4, 2.2F, 0.016f);
+    public static final ShooterInkBulletConfig DEFAULT = ShooterInkBulletConfig.ofSplat(40, 8, 360, 180, 1.4495F, 4, 2.2F, 0.016f, 1.0F);
 
     private final float maxDamage;
     private final float minDamage;
@@ -59,8 +61,9 @@ public class ShooterInkBulletConfig {
     private final long brakeTick;
     private final float brakeMaxSpeed;
     private final float freeGravityThreshold;
+    private final float paintRadius;
 
-    private ShooterInkBulletConfig(float maxDamage, float minDamage, long startReduceTick, long endReduceTick, float initialSpeed, long brakeTick, float brakeMaxSpeed, float freeGravityThreshold) {
+    private ShooterInkBulletConfig(float maxDamage, float minDamage, long startReduceTick, long endReduceTick, float initialSpeed, long brakeTick, float brakeMaxSpeed, float freeGravityThreshold, float paintRadius) {
         this.maxDamage = maxDamage;
         this.minDamage = minDamage;
         this.startReduceTick = startReduceTick;
@@ -69,6 +72,7 @@ public class ShooterInkBulletConfig {
         this.brakeTick = brakeTick;
         this.brakeMaxSpeed = brakeMaxSpeed;
         this.freeGravityThreshold = freeGravityThreshold;
+        this.paintRadius = paintRadius;
     }
 
     /**
@@ -82,8 +86,9 @@ public class ShooterInkBulletConfig {
      * @param brakeTick            the tick at which the bullet brakes
      * @param brakeMaxSpeed        the maximum speed of the bullet when braking, in blocks per second
      * @param freeGravityThreshold the speed threshold at which the bullet will start to free fall after it braked, in blocks per second
+     * @param paintRadius          the radius of the splat of ink the bullet leaves where it lands, in blocks
      */
-    public static ShooterInkBulletConfig of(float maxDamage, float minDamage, long startReduceTick, long endReduceTick, float initialSpeed, long brakeTick, float brakeMaxSpeed, float freeGravityThreshold) {
+    public static ShooterInkBulletConfig of(float maxDamage, float minDamage, long startReduceTick, long endReduceTick, float initialSpeed, long brakeTick, float brakeMaxSpeed, float freeGravityThreshold, float paintRadius) {
         if (maxDamage < 0) {
             throw new IllegalArgumentException("Weapon maximum damage must be non-negative (>=0).");
         }
@@ -114,7 +119,10 @@ public class ShooterInkBulletConfig {
         if (freeGravityThreshold < 0) {
             throw new IllegalArgumentException("The free gravity threshold must be non-negative (>=0).");
         }
-        return new ShooterInkBulletConfig(maxDamage, minDamage, startReduceTick, endReduceTick, initialSpeed, brakeTick, brakeMaxSpeed, freeGravityThreshold);
+        if (paintRadius < 0) {
+            throw new IllegalArgumentException("The paint radius must be non-negative (>=0).");
+        }
+        return new ShooterInkBulletConfig(maxDamage, minDamage, startReduceTick, endReduceTick, initialSpeed, brakeTick, brakeMaxSpeed, freeGravityThreshold, paintRadius);
     }
 
     /**
@@ -129,8 +137,9 @@ public class ShooterInkBulletConfig {
      * @param goStraightToBrakeStateFrame the frame at which the bullet brakes
      * @param spawnSpeed                  the initial speed of the bullet, in units per second
      * @param freeGravity                 the speed threshold at which the bullet will start to free fall after it braked, in units per second
+     * @param paintRadius                 the radius of the splat of ink the bullet leaves where it lands, in units
      */
-    public static ShooterInkBulletConfig ofSplat(int reduceEndFrame, int reduceStartFrame, int valueMax, int valueMin, float goStraightStateEndMaxSpeed, int goStraightToBrakeStateFrame, float spawnSpeed, float freeGravity) {
+    public static ShooterInkBulletConfig ofSplat(int reduceEndFrame, int reduceStartFrame, int valueMax, int valueMin, float goStraightStateEndMaxSpeed, int goStraightToBrakeStateFrame, float spawnSpeed, float freeGravity, float paintRadius) {
         return of(
                 SplatoonConversions.damage(valueMax),
                 SplatoonConversions.damage(valueMin),
@@ -139,7 +148,8 @@ public class ShooterInkBulletConfig {
                 SplatoonConversions.speed(spawnSpeed),
                 SplatoonConversions.time(goStraightToBrakeStateFrame),
                 SplatoonConversions.speed(goStraightStateEndMaxSpeed),
-                SplatoonConversions.speed(freeGravity)
+                SplatoonConversions.speed(freeGravity),
+                SplatoonConversions.distance(paintRadius)
         );
     }
 
@@ -175,7 +185,11 @@ public class ShooterInkBulletConfig {
         return freeGravityThreshold;
     }
 
+    public float paintRadius() {
+        return paintRadius;
+    }
+
     public ShooterInkBulletConfig copy() {
-        return of(this.maxDamage, this.minDamage, this.startReduceTick, this.endReduceTick, this.initialSpeed, this.brakeTick, this.brakeMaxSpeed, this.freeGravityThreshold);
+        return of(this.maxDamage, this.minDamage, this.startReduceTick, this.endReduceTick, this.initialSpeed, this.brakeTick, this.brakeMaxSpeed, this.freeGravityThreshold, this.paintRadius);
     }
 }
