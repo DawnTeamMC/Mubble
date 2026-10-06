@@ -33,12 +33,14 @@
       "fr.hugman.mubble.test.gametest.super_mario.BumpableBlockGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.NoteBlockGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.BeepBlockGameTest",
-      "fr.hugman.mubble.test.gametest.datapack.GeneratedDataGameTest"
+      "fr.hugman.mubble.test.gametest.datapack.GeneratedDataGameTest",
+      "fr.hugman.mubble.test.gametest.splatoon.InkGameTest"
     ]
   },
   "depends": {
     "fabric-gametest-api-v1": "*",
     "mubble": "*",
-    "super_mario": "*"
+    "super_mario": "*",
+    "splatoon": "*"
   }
 }

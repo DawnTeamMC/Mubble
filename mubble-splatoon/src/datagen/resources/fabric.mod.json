@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "name": "Splatoon (Data Generation)",
+  "id": "splatoon-datagen",
+  "version": "1.0.0",
+  "authors": [
+    "Hugman"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "fr.hugman.mubble.splatoon.data.SplatoonDataGenerator"
+    ]
+  }
+}
