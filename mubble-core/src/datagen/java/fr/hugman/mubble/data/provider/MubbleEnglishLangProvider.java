@@ -18,6 +18,8 @@ public class MubbleEnglishLangProvider extends FabricLanguageProvider {
         AutomaticEnglish.generateAutomaticTranslations(Mubble.MOD_ID, wrapperLookup, builder);
 
         builder.add("key." + Mubble.MOD_ID + ".trigger_power_up", "Trigger Power-Up");
+        builder.add(Mubble.MOD_ID + ".settings.title", "Mubble Settings");
+        builder.add(Mubble.MOD_ID + ".settings.empty", "Nothing to set up yet");
 
         builder.add("commands." + Mubble.MOD_ID + ".power_up.set.success", "Changed %s's power-up");
         builder.add("commands." + Mubble.MOD_ID + ".power_up.set.success_named", "Changed %s's power-up to %s");

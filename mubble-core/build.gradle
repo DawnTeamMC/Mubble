@@ -17,3 +17,9 @@ loom {
         }
     }
 }
+dependencies {
+    // Controlify: soft optional dependency, compiled against only to give the keys of Mubble controller bindings of their own.
+    clientCompileOnly 'dev.isxander:controlify:3.5.3+mc26.2:fabric@jar'
+    // Mod Menu: soft optional dependency, compiled against only to open the settings of Mubble from its list of mods.
+    clientCompileOnly 'com.terraformersmc:modmenu:20.0.3'
+}

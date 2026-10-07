@@ -31,6 +31,7 @@ They come in two flavours:
 ./gradlew runDatagen   # game tests load the generated data pack, so generate it first
 ./gradlew test         # unit tests
 ./gradlew runGameTest  # game tests
+./gradlew runGameTest -PgameTestFilter='mubble-gametest:arcade_*'  # only the game tests matching a pattern
 ```
 
 `./gradlew build` runs both suites, but it still needs `runDatagen` to have been run once beforehand,
@@ -51,6 +52,7 @@ nested in the release jar nor published.
 ```sh
 ./gradlew :mubble-testmod:runClient
 ./gradlew :mubble-testmod:runServer
+./gradlew :mubble-testmod:runClient -Pcontrolify  # with Controlify, to play with a controller
 ```
 
 Whatever a data pack can define is defined in `src/main/resources/data`; only the items and the

@@ -1,9 +1,12 @@
 package fr.hugman.mubble.test.unit;
 
+import fr.hugman.mubble.arcade.registries.ArcadeBuiltInRegistries;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.core.registries.MubbleBuiltInRegistries;
+import fr.hugman.mubble.arcade.references.ArcadeMoveIds;
 import fr.hugman.mubble.references.MubbleConsumeEffectTypeKeys;
 import fr.hugman.mubble.references.MubbleEntityTypeKeys;
+import fr.hugman.mubble.arcade.references.ArcadeItemIds;
 import fr.hugman.mubble.references.PowerUpActionTypesKeys;
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.references.SuperMarioBlockItemIds;
@@ -79,6 +82,18 @@ public class ReferencesCoverageTest {
     @DisplayName("every registered consume effect type is declared")
     void consumeEffectTypesAreDeclared() {
         assertEveryEntryIsDeclared(BuiltInRegistries.CONSUME_EFFECT_TYPE, Mubble.MOD_ID, MubbleConsumeEffectTypeKeys.class);
+    }
+
+    @Test
+    @DisplayName("every registered arcade move is declared")
+    void arcadeMovesAreDeclared() {
+        assertEveryEntryIsDeclared(ArcadeBuiltInRegistries.ARCADE_MOVE, Mubble.MOD_ID, ArcadeMoveIds.class);
+    }
+
+    @Test
+    @DisplayName("every registered Mubble item is declared")
+    void mubbleItemsAreDeclared() {
+        assertEveryEntryIsDeclared(BuiltInRegistries.ITEM, Mubble.MOD_ID, ArcadeItemIds.class);
     }
 
     private static void assertEveryEntryIsDeclared(Registry<?> registry, String namespace, Class<?> holder) {

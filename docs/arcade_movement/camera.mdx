@@ -1,0 +1,54 @@
+---
+title: Camera
+---
+
+With [arcade movement]($arcade_movement/overview), the third-person view from behind becomes an **orbit camera**: the mouse or the right stick turns it freely around the player, and the player moves relative to it, as in 3D platformers. The first-person view and the front view stay vanilla, and arcade movement plays fully in first person too.
+
+## Orbit camera
+
+- The mouse or the right stick turns the camera all the way around the player, and up or down to 80°.
+- The player faces where they move, and looks toward the horizon.
+- The camera follows the player with a slight lag, never falling more than 1.5 blocks behind.
+- The field of view widens slightly with speed.
+- *Recenter Camera* swings the camera behind the player, until the mouse or the stick turns it again.
+- When vanilla movement takes over, for example while flying or in lava, the view eases between the orbit camera and the vanilla camera over a quarter of a second.
+
+The hands do not aim with the camera: see [Aiming with the orbit camera]($arcade_movement/items_and_blocks#aiming-with-the-orbit-camera).
+
+## Following the player
+
+As in Nintendo's games, the camera can swing around behind the player on its own as they move. It only ever moves while the player moves: faster the faster they go, and the more they move sideways to the view. Running toward the camera never turns it around, and turning the camera by hand pauses the following for a moment.
+
+Following has two settings: *Camera Follows (Keyboard)*, off by default, and *Camera Follows (Controller)*, on by default. The one that applies depends on whether the player is playing on the keyboard and mouse or on a controller. The controller one can also be switched in game with the *Toggle Camera Follow (controller)* control of Controlify.
+
+## Walls
+
+Blocks between the camera and the player do not move the camera. Instead, the player shows through them as a light gray silhouette, which the *Show Player Through Walls* setting turns off.
+
+The camera only moves when it runs into blocks itself, for example when the player backs into a wall. It then eases in quickly, only as far as it needs to stay clear of the blocks, and eases back out slowly once there is room again.
+
+## Settings
+
+The settings are on the *Arcade Movement* section of the Mubble settings screen. With the [Mod Menu](https://modrinth.com/mod/modmenu) mod installed, the settings button of Mubble or of its *Arcade Movement* entry opens that screen.
+
+| Setting | Default | Range | Description |
+|---|---|---|---|
+| Orbit Camera | On | | Off, the third-person view from behind stays vanilla |
+| Camera Distance | 5 blocks | 1 to 16 blocks | How far behind the player the camera stays |
+| Camera Follows (Keyboard) | Off | | Whether the camera follows the player when playing on the keyboard and mouse |
+| Camera Follows (Controller) | On | | Whether the camera follows the player when playing on a controller |
+| Camera Follow Speed | 120°/s | 30 to 360°/s | How fast the camera swings around when following the player at full speed |
+| Camera Lag | 80 ms | 0 to 300 ms | How long the camera takes to catch up with the player; 0 follows rigidly |
+| Camera Sensitivity | 100% | 10 to 300% | How fast the mouse and the right stick turn the camera |
+| Speed Field of View | 8% | 0 to 30% | How much wider the view gets at full speed |
+| Show Player Through Walls | On | | Whether the player shows through the blocks between them and the camera |
+| Profile Camera Hints | On | | Whether [profiles]($arcade_movement/overview#profiles) may scale the camera distance and the speed field of view |
+| Debug HUD on Start | Off | | Whether the arcade debug HUD shows when the game starts |
+
+The settings are saved in `config/mubble-arcade-client.json`, in the game directory. A few more can only be changed in that file:
+
+| Setting | Default | Description |
+|---|---|---|
+| `camera_height` | 0.3 | How far above the player's eyes the camera looks from, in blocks |
+| `recenter_speed` | 540 | How fast *Recenter Camera* swings the camera, in degrees per second |
+| `min_pitch`, `max_pitch` | -80, 80 | How far up and down the camera can turn, in degrees, as in vanilla: -90 looks straight up and 90 straight down |

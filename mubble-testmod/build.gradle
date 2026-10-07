@@ -4,6 +4,7 @@ version = getSubprojectVersion(project)
 moduleDependencies(project, [
     'mubble-core',
     'mubble-super_mario',
+    'mubble-arcade',
 ])
 
 loom {
@@ -31,3 +32,26 @@ loom {
 
 // Its jars are still built, so that the module behaves like any other, but the root build script
 // keeps them out of the BOM, out of the release jar and out of anything published.
+
+// `-Pcontrolify` loads Controlify in the client of the sandbox, to play the arcade movement with a
+// controller. Off by default: Mubble only compiles against it, and nobody's dev client should change.
+if (project.hasProperty('controlify')) {
+    dependencies {
+        clientRuntimeOnly 'dev.isxander:controlify:3.5.3+mc26.2:fabric@jar'
+        // the config library Controlify depends on
+        clientRuntimeOnly 'dev.isxander:yet-another-config-lib:3.9.7+26.2-fabric@jar'
+        // the config library has a @Redirect that MixinExtras only reads from 0.5.5 on, a version past
+        // the one the loader brings
+        clientRuntimeOnly 'io.github.llamalad7:mixinextras-fabric:0.5.5'
+    }
+}
+
+// `-Pmodmenu` loads Mod Menu in the client of the sandbox, to open the settings of Mubble from its list of mods.
+if (project.hasProperty('modmenu')) {
+    dependencies {
+        clientRuntimeOnly('com.terraformersmc:modmenu:20.0.3') {
+            // the Fabric API modules it lists are the sandbox's already
+            transitive = false
+        }
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "name": "Arcade Movement (Data Generation)",
+  "id": "mubble_arcade-datagen",
+  "version": "1.0.0",
+  "authors": [
+    "Hugman"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "fr.hugman.mubble.arcade.data.ArcadeDataGenerator"
+    ]
+  }
+}

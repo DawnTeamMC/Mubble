@@ -1,0 +1,5 @@
+{
+  "mubble:arcade_auto_camera": { "model": "minecraft:compass" },
+  "mubble:arcade_recenter": { "model": "minecraft:spyglass" },
+  "mubble:arcade_debug_hud": { "model": "minecraft:command_block" }
+}

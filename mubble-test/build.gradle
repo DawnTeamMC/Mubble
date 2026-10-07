@@ -4,6 +4,7 @@ version = getSubprojectVersion(project)
 moduleDependencies(project, [
     'mubble-core',
     'mubble-super_mario',
+    'mubble-arcade',
 ])
 
 // Creates the `gametest` source set and the `runGameTest` task, and hooks the latter into `check`.
@@ -26,6 +27,10 @@ loom {
     runs {
         named('gameTest') {
             property 'fabric-api.gametest.report-file', gameTestReport.get().asFile.absolutePath
+            // Runs a subset of the game tests, e.g. `-PgameTestFilter=mubble-gametest:arcade_*`
+            if (project.hasProperty('gameTestFilter')) {
+                property 'fabric-api.gametest.filter', project.property('gameTestFilter')
+            }
         }
     }
 }
@@ -44,6 +49,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+
+    // Lets tests check the files a module ships, such as the arcade animations of the client.
+    systemProperty 'mubble.arcade.dir', project(':mubble-arcade').projectDir.absolutePath
 
     // Minecraft's log4j setup writes next to the working directory: keep it out of the sources.
     workingDir = layout.buildDirectory.dir('test-run').get().asFile
