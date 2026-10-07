@@ -1,0 +1,60 @@
+---
+title: Controls
+---
+
+[Arcade movement]($arcade_movement/overview) has its own **controls**, in the *Arcade Movement* category of the controls menu (Options → Controls → Key Binds). They can be rebound without changing the vanilla controls.
+
+The basic arcade controls default to the same keys as their vanilla counterparts, and the controls menu does not show them as conflicting. Only one set works at a time: while arcade movement is on, the vanilla movement, *Jump*, *Sneak*, *Sprint*, *Attack* and *Use Item* controls do nothing and the arcade ones take over; the rest of the time, the arcade controls do nothing. All the other controls, such as the inventory, the hotbar or Mubble's *Trigger Power-Up*, work as usual.
+
+## Keyboard and mouse
+
+| Control | Default | Use |
+|---|---|---|
+| Move Forward, Move Backward, Move Left, Move Right | W, S, A, D | Move, relative to the camera |
+| Jump | Space | Every [jump]($arcade_movement/moves#jumps) |
+| Jump (second key) | Not bound | A second *Jump* control, for controllers |
+| Crouch, Ground Pound | Left Shift | Crouch on the ground, [ground pound]($arcade_movement/moves#ground-pound) in the air |
+| Sprint | Left Control | Reach the running speed right away, swim faster |
+| Attack · Roll, Dive in a combo | Left Button | Attack, or [roll]($arcade_movement/moves#roll) with *Crouch* held and [dive]($arcade_movement/moves#dive) during a ground pound |
+| Use Item · Roll, Dive in a combo | Right Button | Use the held item, or roll and dive as *Attack* does |
+| Spin | B | [Spin]($arcade_movement/moves#spin) |
+| Recenter Camera | Not bound | Swing the [camera]($arcade_movement/camera) behind the player |
+| Arcade Debug HUD | Not bound | Show technical details about the player's movement |
+
+Turning the movement keys all the way around (for example W, D, S, A in a row) also spins.
+
+## Controllers
+
+With the [Controlify](https://modrinth.com/mod/controlify) mod installed, every arcade control also has a controller binding, in the *Arcade Movement* category of Controlify's controls. By default, they are laid out as in *Super Mario Odyssey*.
+
+The arcade bindings only work while arcade movement is on and no menu is open. Meanwhile, Controlify's own bindings on the same buttons are paused; the rest of the time, they work as usual. Controlify's own defaults are left unchanged, so playing without arcade movement feels the same as before.
+
+| Control | Xbox | PlayStation | Switch | Paused Controlify binding |
+|---|---|---|---|---|
+| Move | Left stick | Left stick | Left stick | Movement |
+| Jump | A | Cross | B | Jump |
+| Jump (second key) | B | Circle | A | Mubble's *Trigger Power-Up* |
+| Crouch, Ground Pound | RT | R2 | ZR | Attack |
+| Attack · Roll, Dive in a combo | X | Square | Y | Swap Hands |
+| Use Item · Roll, Dive in a combo | Y | Triangle | X | Inventory |
+| Sprint | Left stick press | L3 | Left stick press | Sprint |
+| Recenter Camera | Right stick press | R3 | Right stick press | Sneak |
+| Trigger Power-Up (arcade layout) | LT | L2 | ZL | Use |
+| Inventory (arcade layout) | D-pad up | D-pad up | D-pad up | Open Chat |
+| Spin | Not bound | Not bound | Not bound | |
+| Toggle Camera Follow (controller) | Not bound | Not bound | Not bound | |
+| Arcade Debug HUD | Not bound | Not bound | Not bound | |
+
+- The left stick is analog: tilting it partway walks, and tilting it all the way runs.
+- As in *Super Mario Odyssey*, *Spin* has no button: turning the left stick all the way around spins.
+- *Trigger Power-Up (arcade layout)* and *Inventory (arcade layout)* bring back the two actions whose buttons the arcade layout takes.
+- *Toggle Camera Follow (controller)* turns the [camera following the player]($arcade_movement/camera#following-the-player) on or off. It can also be added to Controlify's radial menu.
+- Everything else, such as the hotbar on the bumpers, dropping items, the radial menu and pausing, stays where Controlify puts it.
+
+### Button guide
+
+Controlify's button guide shows what each button would do at that moment: *Jump*, then *Double Jump* right after landing, *Long Jump* or *Backflip* while crouching, *Ground Pound* in the air, *Dive* during a ground pound, *Roll* on *Attack* and *Use Item* while crouching, *Hold On* on *Crouch* while climbing, and so on.
+
+### Rumble
+
+Moves make the controller rumble lightly: a short tap for jumps, a thud for impacts. Only the player performing the move feels it, and only while playing on a controller. Controlify's own rumble settings can scale it down or turn it off.
