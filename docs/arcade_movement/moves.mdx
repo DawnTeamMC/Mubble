@@ -1,0 +1,159 @@
+---
+title: Moves
+---
+
+**Moves** are the actions of [arcade movement]($arcade_movement/overview). Each one starts from a press of a button and what the player is doing at the time: the same *Jump* button jumps, double jumps, backflips or kicks off a wall depending on when it is pressed.
+
+This page names the [controls]($arcade_movement/controls) *Jump*, *Crouch*, *Sprint* and *Spin*. *Action* stands for either *Attack* or *Use Item*: like Cappy's buttons in *Super Mario Odyssey*, they perform moves while *Crouch* is held, during a ground pound and during a roll, and attack and use items the rest of the time (see [Items and blocks]($arcade_movement/items_and_blocks)). The *stick* is the left stick of a controller, or the movement keys on a keyboard; the player moves relative to the camera.
+
+## Summary
+
+| Move | How to perform it |
+|---|---|
+| Run | Move at full tilt |
+| Crouch | Hold *Crouch* on the ground |
+| Skid | Reverse direction while running |
+| Roll | Hold *Crouch* and press *Action* on the ground |
+| Slide | Hold *Crouch* while running down a slope |
+| Vault | Run into a one-block step |
+| Jump, double jump, triple jump | Press *Jump*, then again right after each landing |
+| Backflip | Hold *Crouch* and press *Jump* while standing |
+| Long jump | Hold *Crouch* and press *Jump* while running |
+| Side somersault | Press *Jump* during a skid |
+| Roll jump | Press *Jump* during a roll |
+| Ground pound | Press *Crouch* in the air |
+| Ground pound jump | Press *Jump* right after a ground pound lands |
+| Ground pound roll | Keep *Crouch* held through a ground pound and press *Action* as it lands |
+| Dive | Press *Action* during a ground pound |
+| Spin | Press *Spin*, or turn the stick all the way around |
+| Wall slide, wall jump | Fall along a wall while moving toward it, then press *Jump* |
+| Ledge grab | Fall past the edge of a block while facing it |
+| Swim, swim dash | See [Swimming]($arcade_movement/swimming_and_climbing#swimming) |
+| Climb | See [Climbing]($arcade_movement/swimming_and_climbing#climbing) |
+
+## On the ground
+
+### Walking and running
+
+Tilting the stick slightly walks, at the vanilla walking speed (4.3 blocks/s). Tilting it all the way, or holding a movement key, runs: the player speeds up for 0.4 seconds until they reach the running speed (6.8 blocks/s with the Overworld profile, 8 blocks/s with the Trial profile). Holding *Sprint* reaches the running speed right away. The player turns to face where they go.
+
+Speed above the running speed, gained from a roll, a long jump or a slope, fades slowly instead of stopping at once, so momentum carries from one move to the next. Running down a slope speeds the player up a little.
+
+Running is a speed move: without enough food, the player only walks (see [Food]($arcade_movement/overview#food)).
+
+### Crouching
+
+Holding *Crouch* on the ground crouches as in vanilla: the player is slower and lower, and does not walk off edges. Crouching while running first slides to a stop over 0.6 seconds. Pressing *Jump* during that slide performs a [long jump](#long-jump).
+
+### Skid
+
+Reversing direction while running at 60% of the running speed or more makes the player skid: a short brake, after which they run off the other way. Pressing *Jump* during the skid performs a [side somersault](#side-somersault).
+
+### Roll
+
+Holding *Crouch* and pressing *Action* on the ground rolls forward at 12 blocks/s, toward the stick or wherever the player faces. The roll lasts as long as *Crouch* is held. It barely slows down on flat ground, speeds up going downhill, and climbs steps up to one block high.
+
+- Pressing *Action* again boosts the roll by 2 blocks/s, up to 3 times.
+- Pressing *Jump* performs a [roll jump](#roll-jump).
+- Releasing *Crouch* ends the roll, as does slowing down below 3 blocks/s.
+
+Holding *Crouch* and pressing *Action* right before landing lands straight into a roll, without fall damage.
+
+### Slide
+
+Holding *Crouch* while running at 60% of the running speed or more down a slope (at least one block down every four blocks) slides. The slide gains speed as long as the ground goes down, and the stick steers it slowly. It ends once the player slows down below 3 blocks/s on flat ground.
+
+### Vault
+
+Running at half the running speed or more into an obstacle up to one block high vaults over it without losing speed. Lower steps, such as slabs, are stepped up as in vanilla.
+
+## Jumps
+
+### Jump, double jump and triple jump {#jump}
+
+Pressing *Jump* on the ground jumps. Jumping again within 0.2 seconds of landing, while moving, performs a **double jump**, and jumping again after that a **triple jump**, a forward flip. Each jump of the chain goes higher than the one before. The triple jump needs the player to move at 70% of the running speed or more; otherwise, the third jump is a plain jump and the chain starts over.
+
+### Backflip
+
+Holding *Crouch* and pressing *Jump* while standing still, or moving at less than 30% of the running speed, performs a backflip: the highest jump of all, drifting slightly backward.
+
+### Long jump
+
+Holding *Crouch* and pressing *Jump* while running at half the running speed or more performs a long jump: a low, far jump with the body flat, launching at 11 blocks/s or at the player's speed if they already go faster.
+
+### Side somersault
+
+Pressing *Jump* during a [skid](#skid) performs a side somersault: a high flip carrying the player toward their new direction.
+
+### Roll jump
+
+Pressing *Jump* during a [roll](#roll) performs a roll jump: a low, long arc that keeps all the speed of the roll.
+
+### Heights
+
+| Jump | Height (Overworld) | Height (Trial) | Lower when *Jump* is released early |
+|---|---|---|---|
+| Jump | 2 blocks | 2.2 blocks | Yes |
+| Double jump | 2.9 blocks | 3.2 blocks | Yes |
+| Triple jump | 4.1 blocks | 4.6 blocks | No |
+| Backflip | 4.7 blocks | 5.2 blocks | No |
+| Long jump | 1.4 blocks | 1.6 blocks | No |
+| Side somersault | 4.1 blocks | 4.6 blocks | No |
+| Ground pound jump | 4.5 blocks | 5 blocks | No |
+| Roll jump | 1.3 blocks | 1.4 blocks | Yes |
+| Wall jump | 2 blocks | 2.2 blocks | Yes |
+| Spin jump | 2.7 blocks | 3 blocks | Yes |
+
+Heights are measured from where the player takes off. For comparison, a vanilla jump is 1.25 blocks high. Jump Boost raises every jump by 35% per level, and honey blocks lower them as in vanilla.
+
+## In the air
+
+### Ground pound
+
+Pressing *Crouch* in the air, at least one block above the ground, ground pounds: the player hangs in the air for 0.3 seconds, then drops straight down at 24 blocks/s. The landing takes no fall damage, and pounds the blocks underneath: some Super Mario blocks react to it (see [Blocks]($arcade_movement/items_and_blocks#blocks)).
+
+Right after the landing:
+
+- Pressing *Jump* within 0.25 seconds performs a **ground pound jump**: a very high, straight jump.
+- Keeping *Crouch* held through the ground pound and pressing *Action* within 0.3 seconds performs a **ground pound roll**: a [roll](#roll) that starts at 16 blocks/s instead of 12.
+
+### Dive and rollout {#dive}
+
+Pressing *Action* at any point of a ground pound dives forward instead of dropping: a lunge at 10 blocks/s with the body flat, once per jump. Pressing *Crouch* then *Action* in quick succession dives almost at once.
+
+A dive takes no fall damage. It lands into a **rollout**, which *Jump* recovers from right away; otherwise, the player rolls to a stop within half a second. A dive that plunges into water carries on as a [swim dash]($arcade_movement/swimming_and_climbing#swimming).
+
+### Spin
+
+Pressing *Spin*, or turning the stick (or the movement keys) all the way around within 0.8 seconds, spins:
+
+- In the air, the player rises slightly, then falls no faster than 1.6 blocks/s for 0.7 seconds. This can only be done once per jump.
+- On the ground, pressing *Spin*, or turning the stick around and pressing *Jump*, performs a **spin jump**, which ends the same way.
+
+## Walls and ledges
+
+### Wall slide and wall jump
+
+Falling along a wall while moving toward it, at least one block above the ground, slides down it, no faster than 3 blocks/s. Pressing *Jump* kicks off the wall in a **wall jump**: up, and away from the wall. A wall jump still works for 0.2 seconds after leaving the wall. For a moment after the kick, the stick cannot steer the player back toward the wall, so that two facing walls can be climbed by jumping from one to the other.
+
+Ice, packed ice and blue ice are too slippery to slide down or jump off.
+
+### Ledge grab
+
+Falling past the edge of a block while facing it catches the edge, and the player hangs from it. Edges are only caught on the way down, never during a jump. An edge less than one block above the player's feet is a step, which the player lands on instead. An edge within 0.3 blocks pulls the player in.
+
+| Input | While hanging |
+|---|---|
+| *Jump* | Climbs up onto the edge |
+| *Crouch* | Lets go |
+| Stick sideways | Moves along the edge, at 2 blocks/s |
+
+Edges of leaves cannot be grabbed.
+
+## Timing
+
+Arcade movement accepts inputs that are slightly early or late:
+
+- *Jump* still works for 0.15 seconds after walking off an edge.
+- *Jump* and *Action* pressed up to 0.15 seconds before they can do anything (just before landing, for example) are remembered and performed as soon as they can. Inputs are read every frame rather than every tick, so a press right before landing is never missed.
+- A jump that hits the corner of a ceiling slides past it if less than 0.35 blocks of the head would hit.

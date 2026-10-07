@@ -1,0 +1,47 @@
+---
+title: Items and blocks
+---
+
+With [arcade movement]($arcade_movement/overview), the player keeps fighting, using items and building as in vanilla, with a few changes, and some blocks react to the player's moves.
+
+## Attacking and using items
+
+*Attack* and *Use Item* still attack and use items. They perform [moves]($arcade_movement/moves) instead while *Crouch* is held (a roll), during a ground pound (a dive) and during a roll (a boost). A press that performs a move does not attack or use anything, even if the button is held afterward.
+
+The player cannot attack or use items during these moves, which keep their hands busy:
+
+- triple jump, backflip and side somersault
+- ground pound and its landing
+- dive and rollout
+- roll
+- wall slide
+- ledge grab, and climbing up a ledge
+- swim dash
+
+With the Trial [profile]($arcade_movement/overview#profiles), the player can only fight and use items: blocks and entities cannot be mined, placed or used.
+
+### Aiming with the orbit camera
+
+With the [orbit camera]($arcade_movement/camera), the hands do not aim where the camera looks. They reach out where the player faces, level with the horizon, to the nearest entity in front of them within reach. An entity slightly off to the side still counts, but not one behind a wall.
+
+- *Attack* hits that entity.
+- *Use Item* uses the held item on it, or in the direction the player faces: a bow shoots straight ahead, and food is eaten.
+- Blocks are never targeted, so nothing can be mined, placed or used in this view.
+
+> [!TIP]
+> To mine, build or use blocks, switch to the first-person view: it keeps the vanilla crosshair and plays like vanilla.
+
+### Slowing down
+
+Using an item slows the player down as in vanilla: while drawing a bow, eating, drinking or blocking with a shield, they move at a fraction of the walking speed (a fifth for most items), and cannot run or sprint.
+
+## Blocks
+
+| Block | Effect |
+|---|---|
+| Super Mario blocks that react to hits, such as the ? Block and the Brick Block | Bumped by a jump into them from below, and by a ground pound from above. A ? Block releases its contents (out of its top, when pounded); a Brick Block breaks, and a player pounding it drops through |
+| Slime block | Landing on it at 4 blocks/s or more bounces the player back up: 3.6 blocks high (4 with the Trial profile), or 6.3 blocks out of a ground pound (7 with the Trial profile), without fall damage. Holding *Crouch* lands normally |
+| Ice, packed ice and blue ice | The player keeps their speed when letting go of the stick, and cannot wall slide or wall jump against them |
+| Leaves | Their edges cannot be grabbed |
+| Honey block | Jumps are lower, as in vanilla |
+| Ladders, vines, scaffolding and other climbable blocks | Climbed, see [Climbing]($arcade_movement/swimming_and_climbing#climbing) |

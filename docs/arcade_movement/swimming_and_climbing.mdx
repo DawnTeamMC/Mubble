@@ -1,0 +1,34 @@
+---
+title: Swimming and climbing
+---
+
+[Arcade movement]($arcade_movement/overview) has its own **swimming** and **climbing**. Both move at the speeds of vanilla swimming and climbing, and add moves of their own on top.
+
+## Swimming
+
+Water deep enough to swim in, where vanilla would no longer let the player wade, makes the player swim. They swim toward the stick at the vanilla swimming pace, and faster with *Sprint* held. Left alone, they slowly sink; holding *Jump* rises and holding *Crouch* sinks faster. Depth Strider and Dolphin's Grace work as in vanilla.
+
+| Input | In water |
+|---|---|
+| *Jump*, under the surface | A stroke upward |
+| *Jump*, with the head out of the water | Jumps out of the water |
+| *Crouch* | A ground pound, slowed down by the water |
+| *Action* during a ground pound, or *Crouch* and *Action* | A **swim dash**: a dash forward at 9 blocks/s with the body flat, which the water slows down until the player swims again |
+| Falling past the edge of a block while facing it | A [ledge grab]($arcade_movement/moves#ledge-grab), to climb out of the water |
+
+A [dive]($arcade_movement/moves#dive) that plunges into water carries on as a swim dash. Falling into water never hurts.
+
+The player stops swimming once out of the water, or where it is too shallow to swim: there, they walk and jump as on land. Lava keeps vanilla movement.
+
+## Climbing
+
+Anything vanilla lets the player climb catches them, whatever they were doing, even in the middle of a jump: ladders, vines, scaffolding, twisting and weeping vines, and a trapdoor left open above a ladder.
+
+| Input | On a ladder |
+|---|---|
+| Stick toward the wall, or *Jump* held | Climbs up, at the vanilla pace |
+| Nothing | Slides down, no faster than 3 blocks/s |
+| *Crouch* held | Holds on, except on scaffolding, which the player climbs down as in vanilla |
+| Stick sideways or away from the wall | Moves along it or off it, no faster than 3 blocks/s |
+
+The player lets go by moving off what they climb, or by reaching the top, where they step onto it or [grab its edge]($arcade_movement/moves#ledge-grab). Climbing players take no fall damage.

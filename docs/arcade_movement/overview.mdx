@@ -1,0 +1,95 @@
+---
+title: Arcade movement
+---
+
+**Arcade movement** is a way of moving around inspired by 3D platformers such as *Super Mario Odyssey* and *Donkey Kong Bananza*. It gives the player a set of acrobatic [moves]($arcade_movement/moves) (chained jumps, backflips, long jumps, ground pounds, dives, rolls, wall jumps, ledge grabs and spins) and an [orbit camera]($arcade_movement/camera) that turns freely around them.
+
+It stays Minecraft: the player keeps the same hitbox, collides with the same blocks and plays by the same rules as everyone else. A player who does not have arcade movement moves exactly as in vanilla.
+
+## Pages
+
+- [Moves]($arcade_movement/moves): every move, how to perform it and how high it goes.
+- [Swimming and climbing]($arcade_movement/swimming_and_climbing): moving in water and on ladders.
+- [Items and blocks]($arcade_movement/items_and_blocks): attacking, using items, and the blocks that react to the player.
+- [Controls]($arcade_movement/controls): the keys and controller buttons.
+- [Camera]($arcade_movement/camera): the orbit camera and its settings.
+
+## When it applies
+
+Arcade movement drives the player as soon as something gives it to them. Which moves are available depends on what gave it; walking, falling and landing are always available.
+
+Vanilla movement takes over for as long as the player:
+
+- is dead or sleeping
+- rides an entity, such as a boat, a horse or a minecart
+- is in Spectator mode
+- glides with an elytra
+- flies in Creative mode
+- is in lava
+- changes dimension
+
+Arcade movement picks up again on its own once none of these apply. Water and ladders are not on the list: arcade movement has its own [swimming and climbing]($arcade_movement/swimming_and_climbing).
+
+## Profiles
+
+How arcade movement plays depends on its **profile**, which comes with whatever gives arcade movement. Mubble comes with two:
+
+| | Overworld | Trial |
+|---|---|---|
+| Made for | Survival | Minigames and parkour maps |
+| Running speed | 6.8 blocks/s | 8 blocks/s |
+| Jump heights | 90% | 100% |
+| Food | Moves cost food | Free |
+| Fall damage | Starts 3 blocks later than in vanilla | None |
+| Interactions | Everything vanilla allows | Fighting and using items only: blocks and entities cannot be mined, placed or used |
+
+For comparison, vanilla walking is 4.3 blocks/s and vanilla sprinting 5.6 blocks/s.
+
+## Food
+
+With the Overworld profile, moves cost food the way vanilla actions do. Each move adds some exhaustion when it starts, and running adds 0.08 exhaustion per block, a little less than vanilla sprinting.
+
+The speed moves (running, rolls, roll jumps, long jumps, dives and slides) need more than 6 hunger points (3 drumsticks), as sprinting does. With 6 or less, the player only walks.
+
+> [!NOTE]- Exhaustion of each move
+> | Move | Exhaustion |
+> |---|---|
+> | Jump, ground pound, spin, vault | 0.05 |
+> | Double jump | 0.07 |
+> | Triple jump, backflip, side somersault, ground pound jump, wall jump, dive, roll, roll jump, swim dash | 0.1 |
+> | Long jump | 0.2 |
+> | Running | 0.08 per block |
+>
+> In vanilla, a jump costs 0.05, a sprinting jump 0.2 and sprinting 0.1 per block.
+
+## Fall damage
+
+With the Overworld profile, fall damage starts 3 blocks later than in vanilla: after a 6-block fall instead of 3. With the Trial profile, falls never hurt.
+
+Some landings never hurt, whatever the profile:
+
+- the end of a [ground pound]($arcade_movement/moves#ground-pound) or a [dive]($arcade_movement/moves#dive)
+- a [roll]($arcade_movement/moves#roll) started right as the player lands
+- a bounce on a [slime block]($arcade_movement/items_and_blocks#blocks)
+- [swimming and climbing]($arcade_movement/swimming_and_climbing)
+
+## Status effects
+
+| Effect | With arcade movement |
+|---|---|
+| Jump Boost | Every jump is 35% higher per level |
+| Slow Falling | The player falls no faster than 2 blocks/s |
+| Levitation | The player rises as in vanilla |
+| Speed, Slowness | The running speed changes as the vanilla walking speed does |
+
+Depth Strider and Dolphin's Grace work as in vanilla, see [Swimming]($arcade_movement/swimming_and_climbing#swimming).
+
+## Animations and effects
+
+Moves animate the whole player, for everyone to see: flips and spins, the body stretching on take-offs and squashing on landings. The model eases from one animation into the next instead of snapping. Walking, running and crouching keep the vanilla animations.
+
+Moves also play sounds and particles, which every player nearby sees and hears. On a controller, they make it [rumble]($arcade_movement/controls#rumble) lightly.
+
+## Multiplayer
+
+Arcade movement works the same in single player and on servers. The server checks every move against the player's input, and sends back a player whose movement does not match.
