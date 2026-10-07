@@ -24,6 +24,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
+import java.util.function.Predicate;
+
 /**
  * Everything about entities trapped in a block of ice: freezing them, keeping them there, shoving
  * them around and letting them out.
@@ -76,8 +78,20 @@ public final class Freezing {
     private static final double PUSH_REACH = 0.2D;
     /** How far below the top of the ice a player has to stand to shove it rather than ride it. */
     private static final double PUSH_HEADROOM = 0.1D;
-    /** How far below its feet an entity looks for the block of ice it might be standing on. */
+    /**
+     * The hair's breadth between a rider's feet and the ice underneath: how far an entity looks below
+     * itself for it, and how far a carried rider is pressed back down onto it.
+     */
     private static final double STANDING_REACH = 1.0e-3D;
+    /** How thick a slice above the ice counts as riding it, and so gets carried along with it. */
+    private static final double CARRY_HEADROOM = 0.05D;
+    /**
+     * What the ice carries: whatever sits on top of it and is not on its way up. Deliberately not a
+     * test of being grounded, since a rider falling alongside the ice is no more grounded than the
+     * ice is, and heading upwards is the one thing that means a rider is leaving of its own accord.
+     */
+    private static final Predicate<Entity> RIDING = EntitySelector.NO_SPECTATORS
+            .and(rider -> !rider.isPassenger() && rider.getDeltaMovement().y() <= 0.0D);
 
     private static final int THAW_PARTICLE_COUNT = 24;
     private static final double THAW_PARTICLE_SPEED = 0.15D;
@@ -128,15 +142,64 @@ public final class Freezing {
         return isBig(entity) ? FreezeResistance.TOUGH : FreezeResistance.NONE;
     }
 
+    /**
+     * Drags whatever is standing on the block of ice along with it, the way a piston does to what it
+     * pushes: nothing in vanilla carries what rides on top of it. It runs on both sides, a client
+     * having the last word on where its own player stands, and hands on the ground the ice actually
+     * covered rather than the speed it meant to go at.
+     */
+    public static void carryRiders(Entity entity) {
+        if (!isFrozen(entity)) {
+            return;
+        }
+        var travelled = entity.position().subtract(entity.xOld, entity.yOld, entity.zOld);
+        if (travelled.lengthSqr() < SLIDE_EPSILON * SLIDE_EPSILON) {
+            return;
+        }
+        // riders are picked up from where the ice was when they stood on it: ice dropping off a ledge
+        // leaves its old top well above their feet
+        var startBox = entity.getBoundingBox().move(-travelled.x(), -travelled.y(), -travelled.z());
+        var deck = new AABB(startBox.minX, startBox.maxY - STANDING_REACH, startBox.minZ,
+                startBox.maxX, startBox.maxY + CARRY_HEADROOM, startBox.maxZ);
+        // the clearance goes whichever way keeps the rider off the ice's own box: down while the ice is
+        // level or dropping, since vanilla only calls an entity grounded when the move that put it there
+        // headed downwards, and up when the ice has climbed into where the rider was standing
+        double clearance = travelled.y() > 0.0D ? STANDING_REACH : -STANDING_REACH;
+        var carry = new Vec3(travelled.x(), travelled.y() + clearance, travelled.z());
+        for (Entity rider : entity.level().getEntities(entity, deck, RIDING)) {
+            rider.move(MoverType.SELF, carry);
+        }
+    }
+
+    /** Hands a rider the ice's own speed as it jumps off, so it leaves the way it was already going. */
+    public static void jumpOffFrozen(LivingEntity entity) {
+        var ice = frozenUnderfoot(entity);
+        if (ice == null) {
+            return;
+        }
+        var speed = ice.getDeltaMovement();
+        entity.setDeltaMovement(entity.getDeltaMovement().add(speed.x(), 0.0D, speed.z()));
+    }
+
     /** Whether the entity is standing on top of a block of ice someone else is trapped in. */
     public static boolean isStandingOnFrozen(Entity entity) {
+        return frozenUnderfoot(entity) != null;
+    }
+
+    /**
+     * @return the block of ice the entity is standing on, or {@code null} when it is standing on
+     * anything else
+     */
+    @Nullable
+    public static Entity frozenUnderfoot(Entity entity) {
         // the sweep is not free, so it is kept behind the cheap tell: on the ground with no block holding it up
         if (!entity.onGround() || entity.mainSupportingBlockPos.isPresent()) {
-            return false;
+            return null;
         }
         var feet = entity.getBoundingBox();
         var underfoot = new AABB(feet.minX, feet.minY - STANDING_REACH, feet.minZ, feet.maxX, feet.minY, feet.maxZ);
-        return !entity.level().getEntities(entity, underfoot, Freezing::isFrozen).isEmpty();
+        var found = entity.level().getEntities(entity, underfoot, Freezing::isFrozen);
+        return found.isEmpty() ? null : found.getFirst();
     }
 
     public static boolean isBig(Entity entity) {
