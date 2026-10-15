@@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityTypes;
+import net.minecraft.world.level.block.Blocks;
 
 /**
  * A snake actually walking: the body standing still while the head grows and the tail shrinks, what
@@ -185,6 +186,8 @@ public class SnakeMovementGameTest {
             helper.assertTrue(Snakes.isSnake(helper, TAIL.relative(Direction.SOUTH), SnakeBlockState.IDLE),
                     "and so should the rest of the body");
             helper.assertTrue(helper.getBlockState(TAIL).getValue(SnakeBlock.RESPAWNABLE), "a respawned snake is still respawnable");
+            helper.assertTrue(Snakes.isPath(helper, TAIL.relative(Direction.SOUTH, 2)), "with its whole route in front of it again");
+            helper.assertTrue(Snakes.isPath(helper, TAIL.relative(Direction.SOUTH, 3)), "with its whole route in front of it again");
         });
     }
 
@@ -209,6 +212,57 @@ public class SnakeMovementGameTest {
                     helper.assertFalse(Snakes.isPath(helper, TAIL.relative(Direction.SOUTH)),
                             "a snake that cannot come back takes its whole path with it");
                 })
+                .thenSucceed();
+    }
+
+    /**
+     * The head shoves whatever is standing where it is about to be, rather than swallowing it.
+     * <p>
+     * The push is a move and not a velocity, so whatever is pushed keeps the momentum it had — which
+     * is the whole reason a snake can be run across without the parkour falling apart. A cow stands
+     * in for the player here: the push goes through {@code Entity.move} and does not care what it is
+     * shoving, and the only player a game test can make has no connection behind it to keep it where
+     * the test put it.
+     */
+    @GameTest(maxTicks = 60)
+    public void thegrowingHeadPushesWhatIsInItsWay(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var head = Snakes.build(helper, SuperMarioBlocks.FAST_SNAKE_BLOCK, TAIL, Direction.SOUTH, 1);
+        Snakes.drawPath(helper, head, Direction.SOUTH, 3);
+        var cow = helper.spawnWithNoFreeWill(EntityTypes.COW, head.relative(Direction.SOUTH));
+        double startZ = cow.getZ();
+
+        start(helper, TAIL);
+
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(cow.getZ() > startZ + 0.4D,
+                        "a head growing into an occupied cell should shove what is standing there along"))
+                .thenSucceed();
+    }
+
+    /**
+     * With nowhere left to be shoved, the thing in the way gets crushed instead of pushed through.
+     * <p>
+     * A cow rather than a player: the only player a game test can make is in creative, and nothing
+     * crushes those.
+     */
+    @GameTest(maxTicks = 60)
+    public void anentityPushedIntoAwallIsCrushed(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var head = Snakes.build(helper, SuperMarioBlocks.FAST_SNAKE_BLOCK, TAIL, Direction.SOUTH, 1);
+        Snakes.drawPath(helper, head, Direction.SOUTH, 1);
+        BlockPos squeezed = head.relative(Direction.SOUTH);
+        for (int dy = 0; dy <= 2; dy++) {
+            helper.setBlock(squeezed.relative(Direction.SOUTH).above(dy), Blocks.OBSIDIAN);
+        }
+        var cow = helper.spawnWithNoFreeWill(EntityTypes.COW, squeezed);
+        float health = cow.getHealth();
+
+        start(helper, TAIL);
+
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(cow.getHealth() < health,
+                        "an entity with a wall behind it should be crushed, not shoved through"))
                 .thenSucceed();
     }
 

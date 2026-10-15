@@ -287,6 +287,15 @@ public class MovingSnake {
                 .setValue(SnakeBlock.POWERED, false), Block.UPDATE_ALL);
         FallingBlockEntity falling = FallingBlockEntity.fall(level, pos, level.getBlockState(pos));
         falling.dropItem = !this.respawnable;
+
+        // A respawnable snake leaves its route behind whatever way a block of it goes, not just
+        // behind the tail: the blocks it is standing on when it reaches the end of its path, and the
+        // ones broken off it on the way, are cells the tail would have laid a path block in later.
+        // Without this the last stretch of the route would be missing when the snake comes back.
+        if (this.respawnable) {
+            level.setBlock(pos, this.leftBehind(snakeState.getValue(SnakeBlock.FACING), pos.equals(this.startBody.getFirst())),
+                    Block.UPDATE_ALL);
+        }
     }
 
     /**
@@ -425,8 +434,13 @@ public class MovingSnake {
      * snake that is gone, not an excuse to break the build around it.
      */
     private void clearPath(ServerLevel level) {
-        BlockPos current = this.startBody.getFirst();
-        for (int i = 0; i < SnakeChain.MAX_BODY_LENGTH + SnakeChain.MAX_PATH_LENGTH; i++) {
+        // The stretch the body stood on is walked by position rather than by following the chain,
+        // since one of those cells is the very thing that blocked the respawn and is not ours.
+        for (BlockPos pos : this.startBody) {
+            removeIfPath(level, pos);
+        }
+        BlockPos current = this.startBody.getLast().relative(this.startFacing);
+        for (int i = 0; i < SnakeChain.MAX_PATH_LENGTH; i++) {
             if (!level.isLoaded(current)) {
                 return;
             }
@@ -437,6 +451,12 @@ public class MovingSnake {
             BlockPos next = current.relative(state.getValue(SnakePathBlock.FACING));
             level.removeBlock(current, false);
             current = next;
+        }
+    }
+
+    private static void removeIfPath(ServerLevel level, BlockPos pos) {
+        if (level.isLoaded(pos) && level.getBlockState(pos).getBlock() instanceof SnakePathBlock) {
+            level.removeBlock(pos, false);
         }
     }
 
