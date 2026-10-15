@@ -1,6 +1,8 @@
 package fr.hugman.mubble.super_mario.client.renderer;
 
 import fr.hugman.mubble.super_mario.client.renderer.blockentity.BumpableBlockRenderer;
+import fr.hugman.mubble.super_mario.client.renderer.blockentity.SnakeMovingBlockRenderer;
+import fr.hugman.mubble.super_mario.client.renderer.blockentity.SnakePathBlockRenderer;
 import fr.hugman.mubble.client.renderer.entity.BallRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.BubbleRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.CloudPlatformRenderer;
@@ -27,5 +29,7 @@ public class SuperMarioRenderers {
 
     public static void registerBlockEntities() {
         BlockEntityRenderers.register(SuperMarioBlockEntityTypes.BUMPABLE_BLOCK, context -> new BumpableBlockRenderer());
+        BlockEntityRenderers.register(SuperMarioBlockEntityTypes.SNAKE_PATH, context -> new SnakePathBlockRenderer());
+        BlockEntityRenderers.register(SuperMarioBlockEntityTypes.SNAKE_MOVING_BLOCK, context -> new SnakeMovingBlockRenderer());
     }
 }

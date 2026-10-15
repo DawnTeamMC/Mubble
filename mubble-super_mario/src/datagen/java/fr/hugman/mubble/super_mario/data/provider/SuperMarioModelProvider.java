@@ -5,6 +5,8 @@ import fr.hugman.mubble.super_mario.data.models.SuperMarioTextureMaps;
 import fr.hugman.mubble.super_mario.data.models.SuperMarioTexturedModels;
 import fr.hugman.mubble.super_mario.world.item.SuperMarioItems;
 import fr.hugman.mubble.super_mario.world.level.block.BeepBlock;
+import fr.hugman.mubble.super_mario.world.level.block.SnakeBlock;
+import fr.hugman.mubble.super_mario.world.level.block.SnakeBlockState;
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -12,11 +14,13 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.MultiVariant;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ItemModelUtils;
 import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.client.renderer.item.ItemModel;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -50,9 +54,13 @@ public class SuperMarioModelProvider extends FabricModelProvider {
         gen.createTrivialBlock(SuperMarioBlocks.GREEN_MARIMBA_BLOCK, SuperMarioTexturedModels.marimbaBlock("green"));
         gen.createTrivialBlock(SuperMarioBlocks.YELLOW_MARIMBA_BLOCK, SuperMarioTexturedModels.marimbaBlock("yellow"));
         gen.createTrivialBlock(SuperMarioBlocks.RED_MARIMBA_BLOCK, SuperMarioTexturedModels.marimbaBlock("red"));
-        gen.createTrivialBlock(SuperMarioBlocks.SNAKE_BLOCK, SuperMarioTexturedModels.snakeBlock("normal"));
-        gen.createTrivialBlock(SuperMarioBlocks.FAST_SNAKE_BLOCK, SuperMarioTexturedModels.snakeBlock("fast"));
-        gen.createTrivialBlock(SuperMarioBlocks.SLOW_SNAKE_BLOCK, SuperMarioTexturedModels.snakeBlock("slow"));
+        registerSnakeBlock(gen, SuperMarioBlocks.SNAKE_BLOCK, "normal");
+        registerSnakeBlock(gen, SuperMarioBlocks.FAST_SNAKE_BLOCK, "fast");
+        registerSnakeBlock(gen, SuperMarioBlocks.SLOW_SNAKE_BLOCK, "slow");
+        registerSnakePath(gen);
+        // Nothing of the moving block is ever drawn from its own state: its renderer submits the
+        // snake block it is carrying instead. All it needs is a particle to break into.
+        gen.createAirLikeBlock(SuperMarioBlocks.SNAKE_MOVING_BLOCK, new Material(SuperMario.id("block/snake_block/normal/side")));
         registerBeepBlock(gen, SuperMarioBlocks.RED_BEEP_BLOCK, "red");
         registerBeepBlock(gen, SuperMarioBlocks.BLUE_BEEP_BLOCK, "blue");
 
@@ -93,6 +101,28 @@ public class SuperMarioModelProvider extends FabricModelProvider {
         gen.generateFlatItem(SuperMarioItems.MAKER_GLOVE, ModelTemplates.FLAT_ITEM);
 
         gen.generateFlatItem(SuperMarioItems.GOOMBA_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
+    }
+
+    /**
+     * A snake block turns with the chain it belongs to, so its model follows {@link SnakeBlock#FACING}
+     * the way a log follows its axis, and swaps for a grayed-out one once the block is knocked out.
+     */
+    private static void registerSnakeBlock(BlockModelGenerators gen, Block block, String variant) {
+        MultiVariant normal = plainVariant(SuperMarioTexturedModels.snakeBlock(variant).create(block, gen.modelOutput));
+        MultiVariant deactivated = plainVariant(SuperMarioTexturedModels.snakeBlock(variant, "deactivated_")
+                .createWithSuffix(block, "_deactivated", gen.modelOutput));
+        gen.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                .with(PropertyDispatch.initial(SnakeBlock.SNAKE_STATE)
+                        .select(SnakeBlockState.IDLE, normal)
+                        .select(SnakeBlockState.MOVING, normal)
+                        .select(SnakeBlockState.DEACTIVATED, deactivated))
+                .with(BlockModelGenerators.ROTATIONS_COLUMN_WITH_FACING));
+    }
+
+    private static void registerSnakePath(BlockModelGenerators gen) {
+        MultiVariant model = plainVariant(SuperMarioTexturedModels.snakeBlock("path").create(SuperMarioBlocks.SNAKE_PATH, gen.modelOutput));
+        gen.blockStateOutput.accept(MultiVariantGenerator.dispatch(SuperMarioBlocks.SNAKE_PATH, model)
+                .with(BlockModelGenerators.ROTATIONS_COLUMN_WITH_FACING));
     }
 
     private static void registerBeepBlock(BlockModelGenerators gen, Block block, String color) {

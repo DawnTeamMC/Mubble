@@ -57,6 +57,10 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.bumpable_block.loot", "Block dropped item");
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.bumpable_block.loot.coin", "Block dropped coin");
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.note_block.jump", "Note Block used");
+        builder.add(SuperMarioSounds.SNAKE_BLOCK_MOVE.value(), "Snake Block moves");
+        builder.add(SuperMarioSounds.SNAKE_BLOCK_SHAKE.value(), "Snake Block shakes");
+        builder.add(SuperMarioSounds.SNAKE_PATH_PLACE.value(), "Snake path drawn");
+        builder.add(SuperMarioSounds.SNAKE_PATH_BREAK.value(), "Snake path erased");
         builder.add(SuperMarioSounds.COIN_COLLECT.value(), "Coin collected");
         builder.add("subtitles." + SuperMario.MOD_ID + ".item.cape_feather.use", "Cape Feather used");
         builder.add(SuperMarioSounds.GOLDEN_EXPLOSION.value(), "Golden explosion");
