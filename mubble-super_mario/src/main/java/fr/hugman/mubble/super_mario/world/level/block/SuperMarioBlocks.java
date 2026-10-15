@@ -1,7 +1,9 @@
 package fr.hugman.mubble.super_mario.world.level.block;
 
+import fr.hugman.mubble.super_mario.references.SuperMarioBlockIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioBlockItemIds;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,12 +13,15 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
@@ -36,9 +41,40 @@ public class SuperMarioBlocks {
     public static final NoteBlock GREEN_MARIMBA_BLOCK = registerMarimbaBlock(SuperMarioBlockItemIds.GREEN_MARIMBA_BLOCK, MapColor.COLOR_GREEN);
     public static final NoteBlock YELLOW_MARIMBA_BLOCK = registerMarimbaBlock(SuperMarioBlockItemIds.YELLOW_MARIMBA_BLOCK, MapColor.COLOR_YELLOW);
     public static final NoteBlock RED_MARIMBA_BLOCK = registerMarimbaBlock(SuperMarioBlockItemIds.RED_MARIMBA_BLOCK, MapColor.COLOR_RED);
-    public static final SnakeBlock SNAKE_BLOCK = register(SuperMarioBlockItemIds.SNAKE_BLOCK, SnakeBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN));
-    public static final SnakeBlock FAST_SNAKE_BLOCK = register(SuperMarioBlockItemIds.FAST_SNAKE_BLOCK, SnakeBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(MapColor.LAPIS));
-    public static final SnakeBlock SLOW_SNAKE_BLOCK = register(SuperMarioBlockItemIds.SLOW_SNAKE_BLOCK, SnakeBlock::new, BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(MapColor.COLOR_RED));
+    public static final SnakeBlock SNAKE_BLOCK = registerSnakeBlock(SuperMarioBlockItemIds.SNAKE_BLOCK, SnakeSpeed.NORMAL, MapColor.COLOR_LIGHT_GREEN);
+    public static final SnakeBlock FAST_SNAKE_BLOCK = registerSnakeBlock(SuperMarioBlockItemIds.FAST_SNAKE_BLOCK, SnakeSpeed.FAST, MapColor.LAPIS);
+    public static final SnakeBlock SLOW_SNAKE_BLOCK = registerSnakeBlock(SuperMarioBlockItemIds.SLOW_SNAKE_BLOCK, SnakeSpeed.SLOW, MapColor.COLOR_RED);
+    public static final SnakePathBlock SNAKE_PATH = noItem(SuperMarioBlockIds.SNAKE_PATH, SnakePathBlock::new, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.NONE)
+            .noCollision()
+            .noOcclusion()
+            .noTerrainParticles()
+            .dynamicShape()
+            .noLootTable()
+            // Instant to break, and impossible to blow up: a path is a plan, not a build, and an
+            // explosion going off next to one would be a silent way to break the snake it belongs to.
+            .strength(0.0F, 3600000.0F)
+            // Everything a path block does to the world it is sent to the right players by hand, so
+            // that only those holding a snake block hear or see it. See SnakePathBlock.
+            .sound(SoundType.EMPTY)
+            .pushReaction(PushReaction.DESTROY)
+            .isValidSpawn(SuperMarioBlocks::never)
+            .isRedstoneConductor(SuperMarioBlocks::never)
+            .isSuffocating(SuperMarioBlocks::never)
+            .isViewBlocking(SuperMarioBlocks::never));
+    public static final SnakeMovingBlock SNAKE_MOVING_BLOCK = noItem(SuperMarioBlockIds.SNAKE_MOVING_BLOCK, SnakeMovingBlock::new, BlockBehaviour.Properties.of()
+            .mapColor(MapColor.NONE)
+            .forceSolidOn()
+            .strength(-1.0F)
+            .dynamicShape()
+            .noLootTable()
+            .noOcclusion()
+            .isValidSpawn(SuperMarioBlocks::never)
+            .isRedstoneConductor(SuperMarioBlocks::never)
+            // The snake does its own crushing, with a moving box rather than the cell it stands in.
+            .isSuffocating(SuperMarioBlocks::never)
+            .isViewBlocking(SuperMarioBlocks::never)
+            .pushReaction(PushReaction.BLOCK));
     public static final BeepBlock RED_BEEP_BLOCK = register(SuperMarioBlockItemIds.RED_BEEP_BLOCK, s -> new BeepBlock(s, false), BeepBlock.settings(MapColor.COLOR_RED));
     public static final BeepBlock BLUE_BEEP_BLOCK = register(SuperMarioBlockItemIds.BLUE_BEEP_BLOCK, s -> new BeepBlock(s, true), BeepBlock.settings(MapColor.COLOR_BLUE));
 
@@ -51,6 +87,31 @@ public class SuperMarioBlocks {
     public static final DecoratedBumpableBlock PINK_EGG_BLOCK = registerEggBlock(SuperMarioBlockItemIds.PINK_EGG_BLOCK, MapColor.COLOR_PINK);
     public static final DecoratedBumpableBlock BLACK_EGG_BLOCK = registerEggBlock(SuperMarioBlockItemIds.BLACK_EGG_BLOCK, MapColor.COLOR_BLACK);
     public static final DecoratedBumpableBlock WHITE_EGG_BLOCK = registerEggBlock(SuperMarioBlockItemIds.WHITE_EGG_BLOCK, MapColor.SNOW);
+
+    /** The snake block of a given speed: the one a snake of that speed is rebuilt out of. */
+    public static SnakeBlock snakeBlock(SnakeSpeed speed) {
+        return switch (speed) {
+            case SLOW -> SLOW_SNAKE_BLOCK;
+            case NORMAL -> SNAKE_BLOCK;
+            case FAST -> FAST_SNAKE_BLOCK;
+        };
+    }
+
+    private static boolean never(BlockState state, BlockGetter level, BlockPos pos) {
+        return false;
+    }
+
+    private static boolean never(BlockState state, BlockGetter level, BlockPos pos, EntityType<?> type) {
+        return false;
+    }
+
+    private static <B extends Block> B noItem(ResourceKey<Block> id, Function<BlockBehaviour.Properties, B> factory, BlockBehaviour.Properties blockSettings) {
+        return Registry.register(BuiltInRegistries.BLOCK, id, factory.apply(blockSettings.setId(id)));
+    }
+
+    private static SnakeBlock registerSnakeBlock(BlockItemId key, SnakeSpeed speed, MapColor mapColor) {
+        return register(key, s -> new SnakeBlock(s, speed), BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_BLOCK).mapColor(mapColor));
+    }
 
     private static <B extends Block> B noItem(BlockItemId id, Function<BlockBehaviour.Properties, B> factory, BlockBehaviour.Properties blockSettings) {
         B block = factory.apply(blockSettings.setId(id.block()));
