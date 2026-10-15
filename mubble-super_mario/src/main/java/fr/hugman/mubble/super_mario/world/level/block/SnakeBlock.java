@@ -189,10 +189,19 @@ public class SnakeBlock extends Block implements Fallable {
     /**
      * A respawnable block never lands: the snake it came from is going to be rebuilt whole, so letting
      * the pieces pile up would hand the player a free copy of every block it ever lost.
+     * <p>
+     * Whatever it came down on is put back rather than cleared, because what it lands on is very
+     * often a block of the snake's own route: a respawnable snake lays its path again as it comes
+     * apart, and a block of it falling through that would tear a hole in the way home.
      */
     @Override
     public void onLand(Level level, BlockPos pos, BlockState state, BlockState replacedState, FallingBlockEntity entity) {
-        if (state.getValue(RESPAWNABLE)) {
+        if (!state.getValue(RESPAWNABLE)) {
+            return;
+        }
+        if (replacedState.getBlock() instanceof SnakePathBlock) {
+            level.setBlock(pos, replacedState, Block.UPDATE_ALL);
+        } else {
             level.removeBlock(pos, false);
         }
     }
