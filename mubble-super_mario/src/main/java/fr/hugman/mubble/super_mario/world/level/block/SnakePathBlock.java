@@ -268,7 +268,8 @@ public class SnakePathBlock extends BaseEntityBlock implements SimpleWaterlogged
 
         BlockState fromState = level.getBlockState(from);
         boolean waterlogged = targetState.getFluidState().is(Fluids.WATER);
-        level.setBlockAndUpdate(from, fromState.setValue(fromState.getBlock() instanceof SnakeBlock ? SnakeBlock.FACING : FACING, direction));
+        // The head and a path block link on through the same property, so one line points either.
+        level.setBlockAndUpdate(from, fromState.setValue(FACING, direction));
         level.setBlockAndUpdate(target, SuperMarioBlocks.SNAKE_PATH.defaultBlockState()
                 .setValue(FACING, direction)
                 .setValue(WATERLOGGED, waterlogged));
