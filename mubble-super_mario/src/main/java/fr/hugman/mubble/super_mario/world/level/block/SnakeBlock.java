@@ -109,7 +109,7 @@ public class SnakeBlock extends Block implements Fallable {
         }
         // The back of the tail is the face opposite the one it points at, and a tail is a block with
         // nothing of its own chain pointing at it.
-        if (againstState.getValue(FACING) != face
+        if (againstState.getValue(FACING) != face.getOpposite()
                 || SnakeChain.predecessor(level, against, this, SnakeBlockState.IDLE) != null) {
             return false;
         }

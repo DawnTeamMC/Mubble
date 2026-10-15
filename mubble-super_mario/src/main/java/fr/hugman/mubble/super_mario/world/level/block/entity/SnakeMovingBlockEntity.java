@@ -68,6 +68,8 @@ public class SnakeMovingBlockEntity extends BlockEntity {
     private static final float CRUSH_DAMAGE = 2.0F;
     /** Ticks a finished block waits for the manager before putting itself away. */
     private static final int ORPHAN_TICKS = 20;
+    /** The same, for a trembling one: it is meant to stand there for a couple of seconds. */
+    private static final int SHAKE_ORPHAN_TICKS = 200;
 
     /**
      * The direction the block currently being moved is travelling in, while it is being moved.
@@ -203,14 +205,11 @@ public class SnakeMovingBlockEntity extends BlockEntity {
 
     public static void tick(Level level, BlockPos pos, BlockState state, SnakeMovingBlockEntity entity) {
         entity.progressO = entity.progress;
-        if (!entity.movement.travels()) {
-            return;
-        }
-        if (entity.progress >= 1.0F) {
-            // The manager swaps a finished block for the real thing at the end of the same tick. If
-            // it never does — the snake was wiped out mid-step, say — the block tidies itself away
-            // rather than staying there as an invisible wall.
-            if (!level.isClientSide() && ++entity.orphanTicks > ORPHAN_TICKS) {
+        if (!entity.movement.travels() || entity.isDone()) {
+            // The manager swaps a block for the real thing on the tick it is done with it. If it
+            // never does — the record was lost, say — the block tidies itself away rather than
+            // staying in the world as an invisible wall.
+            if (!level.isClientSide() && ++entity.orphanTicks > entity.orphanLimit()) {
                 entity.place(level, pos);
             }
             return;
@@ -219,6 +218,10 @@ public class SnakeMovingBlockEntity extends BlockEntity {
         float newProgress = Math.min(1.0F, entity.progress + 1.0F / entity.ticksPerBlock);
         moveCollidedEntities(level, pos, newProgress, entity);
         entity.progress = newProgress;
+    }
+
+    private int orphanLimit() {
+        return this.movement.travels() ? ORPHAN_TICKS : SHAKE_ORPHAN_TICKS;
     }
 
     /** Replaces this block with whatever the snake leaves behind here. */
