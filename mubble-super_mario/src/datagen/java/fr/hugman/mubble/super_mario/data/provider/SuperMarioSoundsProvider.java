@@ -30,6 +30,10 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.BUMPABLE_BLOCK_DESTROY, variantSoundBuilder(SuperMarioSounds.BUMPABLE_BLOCK_DESTROY, 1));
         soundExporter.add(SuperMarioSounds.BUMPABLE_BLOCK_LOOT, variantSoundBuilder(SuperMarioSounds.BUMPABLE_BLOCK_LOOT, 1));
         soundExporter.add(SuperMarioSounds.BUMPABLE_BLOCK_LOOT_COIN, variantSoundBuilder(SuperMarioSounds.BUMPABLE_BLOCK_LOOT_COIN, 1));
+        soundExporter.add(SuperMarioSounds.SNAKE_BLOCK_MOVE, variantSoundBuilder(SuperMarioSounds.SNAKE_BLOCK_MOVE, 1));
+        soundExporter.add(SuperMarioSounds.SNAKE_BLOCK_SHAKE, variantSoundBuilder(SuperMarioSounds.SNAKE_BLOCK_SHAKE, 1));
+        soundExporter.add(SuperMarioSounds.SNAKE_PATH_PLACE, variantSoundBuilder(SuperMarioSounds.SNAKE_PATH_PLACE, 1));
+        soundExporter.add(SuperMarioSounds.SNAKE_PATH_BREAK, variantSoundBuilder(SuperMarioSounds.SNAKE_PATH_BREAK, 1));
         soundExporter.add(SuperMarioSounds.NOTE_BLOCK_JUMP_HIGH, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_JUMP_HIGH, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".block.note_block.jump"));
         soundExporter.add(SuperMarioSounds.NOTE_BLOCK_JUMP_LOW, variantSoundBuilder(SuperMarioSounds.NOTE_BLOCK_JUMP_LOW, 2).subtitle("subtitles." + SuperMario.MOD_ID + ".block.note_block.jump"));
 

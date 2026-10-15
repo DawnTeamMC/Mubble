@@ -6,6 +6,7 @@ import fr.hugman.mubble.references.MubbleConsumeEffectTypeKeys;
 import fr.hugman.mubble.references.MubbleEntityTypeKeys;
 import fr.hugman.mubble.references.PowerUpActionTypesKeys;
 import fr.hugman.mubble.super_mario.SuperMario;
+import fr.hugman.mubble.super_mario.references.SuperMarioBlockIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioBlockItemIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioEntityTypeIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioItemIds;
@@ -64,8 +65,11 @@ public class ReferencesCoverageTest {
         var declared = ContentRegistrationTest.declaredBlockItemIds(SuperMarioBlockItemIds.class).stream()
                 .map(id -> id.block().identifier())
                 .collect(Collectors.toCollection(TreeSet::new));
+        // Blocks nobody ever holds — the snake path and the moving ends of a snake — have no item to
+        // pair them with, so their keys live on their own.
+        declared.addAll(declaredIdentifiers(SuperMarioBlockIds.class));
 
-        assertEveryEntryIsDeclared(BuiltInRegistries.BLOCK, SuperMario.MOD_ID, declared, "SuperMarioBlockItemIds");
+        assertEveryEntryIsDeclared(BuiltInRegistries.BLOCK, SuperMario.MOD_ID, declared, "SuperMarioBlockItemIds or SuperMarioBlockIds");
     }
 
     @Test

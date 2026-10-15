@@ -38,6 +38,11 @@ public class SuperMarioBlockEntityTypes {
             SuperMarioBlocks.WHITE_EGG_BLOCK
     ));
 
+    public static final BlockEntityType<SnakePathBlockEntity> SNAKE_PATH = register("snake_path",
+            FabricBlockEntityTypeBuilder.create(SnakePathBlockEntity::new, SuperMarioBlocks.SNAKE_PATH));
+    public static final BlockEntityType<SnakeMovingBlockEntity> SNAKE_MOVING_BLOCK = register("snake_moving_block",
+            FabricBlockEntityTypeBuilder.create(SnakeMovingBlockEntity::new, SuperMarioBlocks.SNAKE_MOVING_BLOCK));
+
     private static <T extends BlockEntity> BlockEntityType<T> register(String path, FabricBlockEntityTypeBuilder<T> blockEntityType) {
         Util.fetchChoiceType(References.BLOCK_ENTITY, path);
         return Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, SuperMario.id(path), blockEntityType.build());
