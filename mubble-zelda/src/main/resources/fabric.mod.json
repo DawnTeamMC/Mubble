@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "name": "The Legend of Zelda",
+  "id": "zelda",
+  "version": "${version}",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.hugman.mubble.zelda.Zelda"
+    ],
+    "client": [
+      "fr.hugman.mubble.zelda.client.ZeldaClient"
+    ]
+  },
+  "accessWidener": "zelda.accesswidener",
+  "depends": {
+    "minecraft": "*",
+    "fabric-api": "*",
+    "mubble": "*"
+  },
+  "license": "LGPL v3.0"
+}

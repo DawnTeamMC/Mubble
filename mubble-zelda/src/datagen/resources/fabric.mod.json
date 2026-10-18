@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "name": "The Legend of Zelda (Data Generation)",
+  "id": "zelda-datagen",
+  "version": "1.0.0",
+  "authors": [
+    "Hugman"
+  ],
+  "environment": "client",
+  "entrypoints": {
+    "fabric-datagen": [
+      "fr.hugman.mubble.zelda.data.ZeldaDataGenerator"
+    ]
+  }
+}

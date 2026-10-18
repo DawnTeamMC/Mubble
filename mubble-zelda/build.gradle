@@ -1,0 +1,25 @@
+version = getSubprojectVersion(project)
+
+moduleDependencies(project, [
+    'mubble-core',
+])
+
+fabricApi {
+    configureDataGeneration() {
+        outputDirectory = file("src/generated/resources")
+        modId = "zelda-datagen"
+        createSourceSet = true
+        client = true
+    }
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/zelda.accesswidener")
+
+    runs {
+        datagen {
+            name "Data Generation"
+            ideConfigGenerated = true
+        }
+    }
+}
