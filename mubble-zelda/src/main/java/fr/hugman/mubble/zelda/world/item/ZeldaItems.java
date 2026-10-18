@@ -12,12 +12,20 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SpawnEggItem;
+import net.minecraft.world.item.component.UseRemainder;
 import net.minecraft.world.item.equipment.Equippable;
 
 import java.util.function.Function;
 
 public class ZeldaItems {
+	/** What a hurt loftwing is nursed back on, and what two of them are bred with. */
+	public static final Item MUSHROOM_SPORES_BOTTLE = register(ZeldaItemIds.MUSHROOM_SPORES_BOTTLE, new Item.Properties()
+			.stacksTo(16)
+			.component(DataComponents.USE_REMAINDER, new UseRemainder(new ItemStackTemplate(Items.GLASS_BOTTLE))));
+
 	/** Blown anywhere, it brings your loftwing to you, falling or not. */
 	public static final LoftwingWhistleItem LOFTWING_WHISTLE = register(ZeldaItemIds.LOFTWING_WHISTLE, LoftwingWhistleItem::new, new Item.Properties().stacksTo(1));
 

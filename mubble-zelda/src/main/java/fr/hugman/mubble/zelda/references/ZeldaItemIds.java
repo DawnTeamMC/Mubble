@@ -6,6 +6,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
 public class ZeldaItemIds {
+    public static final ResourceKey<Item> MUSHROOM_SPORES_BOTTLE = createKey("mushroom_spores_bottle");
+
     public static final ResourceKey<Item> LOFTWING_WHISTLE = createKey("loftwing_whistle");
     public static final ResourceKey<Item> LOFTWING_BELT = createKey("loftwing_belt");
 

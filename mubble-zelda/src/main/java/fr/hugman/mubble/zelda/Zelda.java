@@ -37,6 +37,8 @@ public class Zelda implements ModInitializer {
         ZeldaBuiltInRegistries.register();
 
         ZeldaBiomeModifications.register();
+
+        ZeldaInteraction.register();
     }
 
     public static Identifier id(String path) {
