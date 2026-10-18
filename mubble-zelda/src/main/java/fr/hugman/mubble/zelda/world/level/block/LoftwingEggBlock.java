@@ -10,8 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.clock.ClockTimeMarker;
-import net.minecraft.world.clock.ClockTimeMarkers;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -36,6 +34,9 @@ public class LoftwingEggBlock extends Block {
 
 	/** One in twenty per midday: roughly twenty days from laying to hatching. */
 	public static final float HATCH_CHANCE = 0.05F;
+	/** Midday, in ticks since dawn. */
+	private static final int NOON = 6000;
+	private static final int DAY_LENGTH = 24000;
 
 	private static final VoxelShape SHAPE = Block.box(3.0, 0.0, 3.0, 13.0, 12.0, 13.0);
 
@@ -93,14 +94,10 @@ public class LoftwingEggBlock extends Block {
 		level.addFreshEntity(chick);
 	}
 
-	/**
-	 * Aims a tick at the next midday, whether that is later today or tomorrow. Noon is read from
-	 * the game's own clock markers, so an egg follows whatever a data pack calls midday.
-	 */
+	/** Aims a tick at the next midday, whether that is later today or tomorrow. */
 	private static void scheduleNextNoon(Level level, BlockPos pos, Block block) {
-		ClockTimeMarker noon = level.registryAccess().lookupOrThrow(ClockTimeMarkers.ROOT_ID).getOrThrow(ClockTimeMarkers.NOON).value();
-		long now = level.clockManager().getTotalTicks(noon.clock());
-		long delay = noon.resolveTimeToMoveTo(now) - now;
+		long timeOfDay = Math.floorMod(level.getDefaultClockTime(), DAY_LENGTH);
+		long delay = timeOfDay < NOON ? NOON - timeOfDay : DAY_LENGTH - timeOfDay + NOON;
 		level.scheduleTick(pos, block, (int) Math.max(1L, delay));
 	}
 }
