@@ -2,6 +2,7 @@ package fr.hugman.mubble.zelda.core.component;
 
 import fr.hugman.mubble.zelda.Zelda;
 import fr.hugman.mubble.zelda.world.entity.animal.loftwing.LoftwingVariant;
+import fr.hugman.mubble.zelda.world.item.component.LoftwingHelmetComponent;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
@@ -12,6 +13,10 @@ import java.util.function.UnaryOperator;
 public class ZeldaDataComponents {
     public static final DataComponentType<Holder<LoftwingVariant>> LOFTWING_VARIANT = register(
             "loftwing/variant", builder -> builder.persistent(LoftwingVariant.CODEC).networkSynchronized(LoftwingVariant.STREAM_CODEC)
+    );
+
+    public static final DataComponentType<LoftwingHelmetComponent> LOFTWING_HELMET = register(
+            "loftwing/helmet", builder -> builder.persistent(LoftwingHelmetComponent.CODEC).networkSynchronized(LoftwingHelmetComponent.STREAM_CODEC)
     );
 
     private static <T> DataComponentType<T> register(String path, UnaryOperator<DataComponentType.Builder<T>> builderOperator) {

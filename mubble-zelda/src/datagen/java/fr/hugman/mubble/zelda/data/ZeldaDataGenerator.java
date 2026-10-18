@@ -6,6 +6,7 @@ import fr.hugman.mubble.zelda.data.provider.ZeldaEnglishLangProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaGameplayLootSubProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaLoftwingVariantProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaModelProvider;
+import fr.hugman.mubble.zelda.data.provider.ZeldaRecipeProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaSoundsProvider;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
@@ -23,6 +24,7 @@ public class ZeldaDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ZeldaEnglishLangProvider::new);
 
 		// Data Pack
+		pack.addProvider(ZeldaRecipeProvider::new);
 		pack.addProvider(ZeldaGameplayLootSubProvider::new);
 		pack.addProvider(ZeldaLoftwingVariantProvider::new);
 	}

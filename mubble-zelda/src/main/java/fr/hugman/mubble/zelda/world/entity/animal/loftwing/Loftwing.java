@@ -6,6 +6,7 @@ import fr.hugman.mubble.zelda.network.syncher.ZeldaEntityDataSerializers;
 import fr.hugman.mubble.zelda.references.LoftwingVariantIds;
 import fr.hugman.mubble.zelda.sounds.ZeldaSounds;
 import fr.hugman.mubble.zelda.world.entity.ZeldaEntityTypes;
+import fr.hugman.mubble.zelda.world.item.component.LoftwingHelmetComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.UUIDUtil;
@@ -29,6 +30,7 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.TamableAnimal;
@@ -105,6 +107,9 @@ public class Loftwing extends TamableAnimal {
 	public Loftwing(EntityType<? extends Loftwing> type, Level level) {
 		super(type, level);
 		this.moveControl = new FlyingMoveControl(this, 10, false);
+		// Gear a player fitted comes back when the bird dies, like a horse's saddle.
+		this.setDropChance(EquipmentSlot.SADDLE, 1.0F);
+		this.setDropChance(EquipmentSlot.HEAD, 1.0F);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -134,6 +139,7 @@ public class Loftwing extends TamableAnimal {
 		// It defends itself and nothing else: it never joins a fight its owner picked.
 		this.goalSelector.addGoal(2, new LoftwingWingFlapGoal(this));
 		this.goalSelector.addGoal(5, new LoftwingLostGoal(this));
+		this.goalSelector.addGoal(5, new LoftwingGiftGoal(this));
 		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 	}
 
@@ -180,6 +186,30 @@ public class Loftwing extends TamableAnimal {
 
 	public boolean isDrying() {
 		return this.dryingTicks > 0;
+	}
+
+	// GEAR
+
+	/** The belt and the helmet, and nothing else: a loftwing is not a mob that picks up armour. */
+	@Override
+	public boolean canUseSlot(EquipmentSlot slot) {
+		return slot == EquipmentSlot.SADDLE || slot == EquipmentSlot.HEAD;
+	}
+
+	@Override
+	protected boolean canDispenserEquipIntoSlot(EquipmentSlot slot) {
+		return this.canUseSlot(slot);
+	}
+
+	/** Whether this bird is wearing the belt that lets its owner ride it. */
+	public boolean hasBelt() {
+		return !this.getItemBySlot(EquipmentSlot.SADDLE).isEmpty();
+	}
+
+	/** What the helmet it wears is worth, or what a bare head is worth when there is none. */
+	public LoftwingHelmetComponent getHelmetSettings() {
+		LoftwingHelmetComponent helmet = this.getItemBySlot(EquipmentSlot.HEAD).get(ZeldaDataComponents.LOFTWING_HELMET);
+		return helmet != null ? helmet : LoftwingHelmetComponent.BAREHEADED;
 	}
 
 	// THE BOND
