@@ -27,7 +27,9 @@ import org.apache.logging.log4j.Logger;
  * @param autoCameraSpeed     how fast it swings round at run speed, in degrees per second
  * @param cameraDistance      distance between the orbit camera and the player, in blocks, at scale 1
  * @param cameraHeight        height of the point the camera looks at, above the eyes, in blocks
- * @param followLag           how long the camera takes to catch up with the player, in seconds
+ * @param cameraMargin        how much room the camera leaves around the player before following them,
+ *                            as a scale of the margins of {@link fr.hugman.mubble.arcade.ArcadeFraming}: 0
+ *                            keeps the player in the middle
  * @param recenterSpeed       how fast the camera swings back behind the player, in degrees per second
  * @param orbitSensitivity    scale of the mouse and right stick while orbiting
  * @param minPitch            how far up the camera may look, in degrees
@@ -45,7 +47,7 @@ public record ArcadeClientConfig(
         double autoCameraSpeed,
         double cameraDistance,
         double cameraHeight,
-        double followLag,
+        double cameraMargin,
         double recenterSpeed,
         double orbitSensitivity,
         double minPitch,
@@ -56,7 +58,7 @@ public record ArcadeClientConfig(
         boolean silhouette
 ) {
     private static final Logger LOGGER = LogManager.getLogger(Mubble.MOD_ID);
-    public static final ArcadeClientConfig DEFAULT = new ArcadeClientConfig(true, false, true, 120.0D, 5.0D, 0.3D, 0.08D, 540.0D, 1.0D, -80.0D, 80.0D, 0.08D, true, false, true);
+    public static final ArcadeClientConfig DEFAULT = new ArcadeClientConfig(true, false, true, 120.0D, 5.0D, 0.3D, 1.0D, 540.0D, 1.0D, -80.0D, 80.0D, 0.08D, true, false, true);
 
     public static final Codec<ArcadeClientConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.optionalFieldOf("orbit_camera", DEFAULT.orbitCamera).forGetter(ArcadeClientConfig::orbitCamera),
@@ -65,7 +67,7 @@ public record ArcadeClientConfig(
             Codec.doubleRange(0.0D, 1000.0D).optionalFieldOf("auto_camera_speed", DEFAULT.autoCameraSpeed).forGetter(ArcadeClientConfig::autoCameraSpeed),
             Codec.doubleRange(1.0D, 32.0D).optionalFieldOf("camera_distance", DEFAULT.cameraDistance).forGetter(ArcadeClientConfig::cameraDistance),
             Codec.doubleRange(-2.0D, 4.0D).optionalFieldOf("camera_height", DEFAULT.cameraHeight).forGetter(ArcadeClientConfig::cameraHeight),
-            Codec.doubleRange(0.0D, 2.0D).optionalFieldOf("follow_lag", DEFAULT.followLag).forGetter(ArcadeClientConfig::followLag),
+            Codec.doubleRange(0.0D, 2.0D).optionalFieldOf("camera_margin", DEFAULT.cameraMargin).forGetter(ArcadeClientConfig::cameraMargin),
             Codec.doubleRange(0.0D, 10000.0D).optionalFieldOf("recenter_speed", DEFAULT.recenterSpeed).forGetter(ArcadeClientConfig::recenterSpeed),
             Codec.doubleRange(0.0D, 10.0D).optionalFieldOf("orbit_sensitivity", DEFAULT.orbitSensitivity).forGetter(ArcadeClientConfig::orbitSensitivity),
             Codec.doubleRange(-90.0D, 90.0D).optionalFieldOf("min_pitch", DEFAULT.minPitch).forGetter(ArcadeClientConfig::minPitch),
@@ -102,7 +104,7 @@ public record ArcadeClientConfig(
     /** The same settings, the camera following the player round on a controller or not. */
     public ArcadeClientConfig withAutoCameraController(boolean on) {
         return new ArcadeClientConfig(this.orbitCamera, this.autoCameraKeyboard, on, this.autoCameraSpeed, this.cameraDistance, this.cameraHeight,
-                this.followLag, this.recenterSpeed, this.orbitSensitivity, this.minPitch, this.maxPitch, this.fovKick, this.respectProfileHints, this.debugHud, this.silhouette);
+                this.cameraMargin, this.recenterSpeed, this.orbitSensitivity, this.minPitch, this.maxPitch, this.fovKick, this.respectProfileHints, this.debugHud, this.silhouette);
     }
 
     /** Sets the settings, as the settings screen does, and writes them down. */
@@ -132,7 +134,7 @@ public record ArcadeClientConfig(
         object.addProperty("auto_camera_speed", c.autoCameraSpeed);
         object.addProperty("camera_distance", c.cameraDistance);
         object.addProperty("camera_height", c.cameraHeight);
-        object.addProperty("follow_lag", c.followLag);
+        object.addProperty("camera_margin", c.cameraMargin);
         object.addProperty("recenter_speed", c.recenterSpeed);
         object.addProperty("orbit_sensitivity", c.orbitSensitivity);
         object.addProperty("min_pitch", c.minPitch);

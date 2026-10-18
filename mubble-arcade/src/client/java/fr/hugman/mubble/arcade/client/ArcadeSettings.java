@@ -26,7 +26,7 @@ public final class ArcadeSettings implements MubbleSettings.Section {
             OptionInstance<Boolean> autoCameraController,
             OptionInstance<Integer> autoCameraSpeed,
             OptionInstance<Integer> cameraDistance,
-            OptionInstance<Integer> followLag,
+            OptionInstance<Integer> cameraMargin,
             OptionInstance<Integer> orbitSensitivity,
             OptionInstance<Integer> fovKick,
             OptionInstance<Boolean> respectProfileHints,
@@ -54,7 +54,7 @@ public final class ArcadeSettings implements MubbleSettings.Section {
                 bool("auto_camera_controller", c.autoCameraController()),
                 number("auto_camera_speed", "degrees_per_second", 30, 360, (int) Math.round(c.autoCameraSpeed())),
                 number("camera_distance", "blocks", 1, 16, (int) Math.round(c.cameraDistance())),
-                number("follow_lag", "milliseconds", 0, 300, (int) Math.round(c.followLag() * 1000.0D)),
+                number("camera_margin", "percent", 0, 200, (int) Math.round(c.cameraMargin() * 100.0D)),
                 number("orbit_sensitivity", "percent", 10, 300, (int) Math.round(c.orbitSensitivity() * 100.0D)),
                 number("fov_kick", "percent", 0, 30, (int) Math.round(c.fovKick() * 100.0D)),
                 bool("respect_profile_hints", c.respectProfileHints()),
@@ -62,7 +62,7 @@ public final class ArcadeSettings implements MubbleSettings.Section {
                 bool("silhouette", c.silhouette()));
         var o = this.fields;
         return List.of(o.orbitCamera, o.cameraDistance, o.autoCameraKeyboard, o.autoCameraController, o.autoCameraSpeed,
-                o.followLag, o.orbitSensitivity, o.fovKick, o.silhouette, o.respectProfileHints, o.debugHud);
+                o.cameraMargin, o.orbitSensitivity, o.fovKick, o.silhouette, o.respectProfileHints, o.debugHud);
     }
 
     @Override
@@ -74,7 +74,7 @@ public final class ArcadeSettings implements MubbleSettings.Section {
         var c = ArcadeClientConfig.get();
         ArcadeClientConfig.set(new ArcadeClientConfig(
                 o.orbitCamera.get(), o.autoCameraKeyboard.get(), o.autoCameraController.get(), o.autoCameraSpeed.get(),
-                o.cameraDistance.get(), c.cameraHeight(), o.followLag.get() / 1000.0D, c.recenterSpeed(),
+                o.cameraDistance.get(), c.cameraHeight(), o.cameraMargin.get() / 100.0D, c.recenterSpeed(),
                 o.orbitSensitivity.get() / 100.0D, c.minPitch(), c.maxPitch(), o.fovKick.get() / 100.0D,
                 o.respectProfileHints.get(), o.debugHud.get(), o.silhouette.get()));
     }
