@@ -1,1 +1,4 @@
 accessWidener	v1	official
+
+# Spawn placements are registered by a private method in 26.x, and Fabric no longer wraps it.
+accessible	method	net/minecraft/world/entity/SpawnPlacements	register	(Lnet/minecraft/world/entity/EntityType;Lnet/minecraft/world/entity/SpawnPlacementType;Lnet/minecraft/world/level/levelgen/Heightmap$Types;Lnet/minecraft/world/entity/SpawnPlacements$SpawnPredicate;)V
