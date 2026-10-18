@@ -41,7 +41,8 @@
       "fr.hugman.mubble.test.gametest.arcade.ArcadeGymGameTest",
       "fr.hugman.mubble.test.gametest.arcade.ArcadeSolidEntityGameTest",
       "fr.hugman.mubble.test.gametest.zelda.LoftwingGameTest",
-      "fr.hugman.mubble.test.gametest.zelda.LoftwingEggGameTest"
+      "fr.hugman.mubble.test.gametest.zelda.LoftwingEggGameTest",
+      "fr.hugman.mubble.test.gametest.zelda.LoftwingFlightGameTest"
     ]
   },
   "mixins": [

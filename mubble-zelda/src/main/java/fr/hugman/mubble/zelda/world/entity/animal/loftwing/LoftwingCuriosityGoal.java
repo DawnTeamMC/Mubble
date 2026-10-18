@@ -58,6 +58,11 @@ public class LoftwingCuriosityGoal extends Goal {
 	}
 
 	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
+	@Override
 	public void start() {
 		this.ticksLeft = this.loftwing.getRandom().nextIntBetweenInclusive(MIN_TICKS, MAX_TICKS);
 		this.angle = this.loftwing.getRandom().nextFloat() * (float) (Math.PI * 2.0);

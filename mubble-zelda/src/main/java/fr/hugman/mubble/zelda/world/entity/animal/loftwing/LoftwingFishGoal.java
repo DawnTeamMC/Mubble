@@ -100,9 +100,12 @@ public class LoftwingFishGoal extends Goal {
 			this.water = null;
 			return;
 		}
-		if (!this.loftwing.getMoveControl().hasWanted()) {
-			this.flyToWater();
-		}
+		this.flyToWater();
+	}
+
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
 	}
 
 	private void flyToWater() {
