@@ -30,6 +30,13 @@ public class ZeldaCreativeModeTabs {
 
 	public static void appendItemGroups() {
 		CreativeModeTabEvents.modifyOutputEvent(ZeldaCreativeModeTabIds.ZELDA).register(entries -> {
+			entries.accept(ZeldaItems.LOFTWING_BELT);
+			entries.accept(ZeldaItems.LEATHER_LOFTWING_HELMET);
+			entries.accept(ZeldaItems.GOLDEN_LOFTWING_HELMET);
+			entries.accept(ZeldaItems.CHAINMAIL_LOFTWING_HELMET);
+			entries.accept(ZeldaItems.IRON_LOFTWING_HELMET);
+			entries.accept(ZeldaItems.DIAMOND_LOFTWING_HELMET);
+			entries.accept(ZeldaItems.NETHERITE_LOFTWING_HELMET);
 			entries.accept(ZeldaItems.LOFTWING_SPAWN_EGG);
 			entries.getContext().holders()
 					.lookup(ZeldaRegistries.LOFTWING_VARIANT)
