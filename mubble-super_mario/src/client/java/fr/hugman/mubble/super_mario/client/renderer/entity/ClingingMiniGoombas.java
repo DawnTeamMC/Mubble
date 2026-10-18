@@ -66,21 +66,26 @@ public final class ClingingMiniGoombas {
     /** How far a goomba in front of the view sways from side to side, having no edge to cling to. */
     private static final float SCREEN_SWAY = 0.2F;
 
-    /** How long one takes to leap onto the screen, and to be flung back off it, in ticks. */
-    private static final float ENTER_TICKS = 10.0F;
-    private static final float EXIT_TICKS = 12.0F;
-    /**
-     * How far past their spot the ones leaping on overshoot before settling, and how far the ones being
-     * flung off wind back first. Enough for a bit of give, kept short of a rubber band.
-     */
-    private static final float BACK_OVERSHOOT = 1.4F;
+    /** How long one takes to slam onto the screen, and to be sent flying back off it, in ticks. */
+    private static final float ENTER_TICKS = 4.0F;
+    private static final float EXIT_TICKS = 6.0F;
+    /** How far past their spot the ones slamming on overshoot before settling. */
+    private static final float BACK_OVERSHOOT = 1.6F;
     /** How much they squash out sideways as they slam into place. */
-    private static final float LANDING_SQUASH = 0.2F;
-    /** How long they wobble for once there, as a share of the leap, and how far. */
+    private static final float LANDING_SQUASH = 0.3F;
+    /** How far they wobble once there. */
     private static final float LANDING_WOBBLE = 0.35F;
-    /** How far they stretch, and how many half turns they spin, on their way off. */
-    private static final float FLUNG_STRETCH = 0.3F;
-    private static final float FLUNG_SPIN = 1.0F;
+    /** The share of the way off spent taking the hit, flattened against the screen, before flying. */
+    private static final float FLUNG_HIT = 0.15F;
+    /** How flat the hit squashes them. */
+    private static final float FLUNG_SQUASH = 0.4F;
+    /** How far past the edge of the screen they are sent, as a share of the way off it. */
+    private static final float FLUNG_REACH = 1.3F;
+    /** How many turns they spin round in the screen, and tumble end over end, on their way off. */
+    private static final float FLUNG_SPIN = 1.5F;
+    private static final float FLUNG_TUMBLE = 1.0F;
+    /** How much bigger they get as they fly off, coming at the camera. */
+    private static final float FLUNG_GROW = 0.6F;
     /** How far out of the middle a spot is pushed to be clear off the screen, from -1 to 1 across it. */
     private static final float OFF_SCREEN = 1.45F;
 
@@ -180,8 +185,10 @@ public final class ClingingMiniGoombas {
             float outV = outLength > 1.0E-3F ? spot.v() / outLength : -1.0F;
             float clear = (OFF_SCREEN - Math.max(Math.abs(spot.u()), Math.abs(spot.v()))) / Math.max(Math.abs(outU), Math.abs(outV));
 
-            float push;
+            float push = 0.0F;
             float roll = 0.0F;
+            float tumble = 0.0F;
+            float grow = 1.0F;
             float squashX = 1.0F;
             float squashY = 1.0F;
             if (goomba.leaving) {
@@ -189,16 +196,24 @@ public final class ClingingMiniGoombas {
                 if (progress >= 1.0F) {
                     continue;
                 }
-                // A short wind-up towards the middle, then off it goes, spinning and stretched by the speed.
-                push = easeInBack(progress) * clear;
-                roll = progress * progress * FLUNG_SPIN * Mth.PI * (i % 2 == 0 ? 1.0F : -1.0F);
-                squashY = 1.0F + FLUNG_STRETCH * progress;
-                squashX = 1.0F - FLUNG_STRETCH * 0.5F * progress;
+                if (progress < FLUNG_HIT) {
+                    // The hit: flattened against the screen for an instant before it goes.
+                    float hit = Mth.sin(progress / FLUNG_HIT * Mth.PI) * FLUNG_SQUASH;
+                    squashX = 1.0F + hit;
+                    squashY = 1.0F - hit;
+                } else {
+                    // Sent flying: fastest right off the hit, spinning, tumbling, and coming at the camera.
+                    float flight = (progress - FLUNG_HIT) / (1.0F - FLUNG_HIT);
+                    push = flight * (2.0F - flight) * clear * FLUNG_REACH;
+                    roll = flight * FLUNG_SPIN * Mth.TWO_PI * (i % 2 == 0 ? 1.0F : -1.0F);
+                    tumble = flight * FLUNG_TUMBLE * Mth.TWO_PI;
+                    grow = 1.0F + FLUNG_GROW * flight;
+                }
             } else {
                 float progress = Mth.clamp((time - goomba.since) / ENTER_TICKS, 0.0F, 1.0F);
-                // Leaps in from off the screen, a little too far, and settles back with a wobble.
+                // Slams in from off the screen, a little too far, and settles back with a wobble.
                 push = (1.0F - easeOutBack(progress)) * clear;
-                roll = Mth.sin(progress * 3.0F * Mth.PI) * (1.0F - progress) * LANDING_WOBBLE;
+                roll = Mth.sin(progress * 2.0F * Mth.PI) * (1.0F - progress) * LANDING_WOBBLE;
                 float squash = Mth.sin(progress * Mth.PI) * LANDING_SQUASH;
                 squashX = 1.0F + squash;
                 squashY = 1.0F - squash;
@@ -219,8 +234,8 @@ public final class ClingingMiniGoombas {
             poseStack.mulPose(Axis.ZP.rotation(roll));
             poseStack.scale(squashX, squashY, 1.0F);
             poseStack.mulPose(Axis.YP.rotation(Mth.PI));
-            poseStack.mulPose(Axis.XP.rotation(-(SCREEN_LEAN + chew)));
-            poseStack.scale(SCREEN_SCALE, SCREEN_SCALE, SCREEN_SCALE);
+            poseStack.mulPose(Axis.XP.rotation(tumble - (SCREEN_LEAN + chew)));
+            poseStack.scale(SCREEN_SCALE * grow, SCREEN_SCALE * grow, SCREEN_SCALE * grow);
             // The same turn the entity renderer gives every model, which is built upside down.
             poseStack.scale(-1.0F, -1.0F, 1.0F);
             poseStack.translate(0.0F, MODEL_MIDDLE, 0.0F);
@@ -272,10 +287,6 @@ public final class ClingingMiniGoombas {
     private static float easeOutBack(float progress) {
         float t = progress - 1.0F;
         return 1.0F + (BACK_OVERSHOOT + 1.0F) * t * t * t + BACK_OVERSHOOT * t * t;
-    }
-
-    private static float easeInBack(float progress) {
-        return (BACK_OVERSHOOT + 1.0F) * progress * progress * progress - BACK_OVERSHOOT * progress * progress;
     }
 
     private static float chew(float ageInTicks, int index) {
