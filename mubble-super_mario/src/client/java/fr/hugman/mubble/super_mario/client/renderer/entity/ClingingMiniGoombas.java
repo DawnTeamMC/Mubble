@@ -16,18 +16,18 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.ClientAsset;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.HumanoidArm;
 import org.joml.Quaternionf;
 import org.jspecify.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Draws mini goombas that are holding onto a player, wherever that player is seen from.
  * <p>
  * By the time they are drawn they are no longer entities — the player only carries a count — so every
- * one of them is placed from its index alone: on the surface of a body part in third person and on the
- * first-person arm, or around the edges of the screen for the player they are holding.
+ * one of them is placed from its index alone: on the surface of a body part in third person, or around
+ * the edges of the screen for the player they are holding.
  */
 @Environment(EnvType.CLIENT)
 public final class ClingingMiniGoombas {
@@ -66,6 +66,24 @@ public final class ClingingMiniGoombas {
     /** How far a goomba in front of the view sways from side to side, having no edge to cling to. */
     private static final float SCREEN_SWAY = 0.2F;
 
+    /** How long one takes to leap onto the screen, and to be flung back off it, in ticks. */
+    private static final float ENTER_TICKS = 10.0F;
+    private static final float EXIT_TICKS = 12.0F;
+    /**
+     * How far past their spot the ones leaping on overshoot before settling, and how far the ones being
+     * flung off wind back first. Enough for a bit of give, kept short of a rubber band.
+     */
+    private static final float BACK_OVERSHOOT = 1.4F;
+    /** How much they squash out sideways as they slam into place. */
+    private static final float LANDING_SQUASH = 0.2F;
+    /** How long they wobble for once there, as a share of the leap, and how far. */
+    private static final float LANDING_WOBBLE = 0.35F;
+    /** How far they stretch, and how many half turns they spin, on their way off. */
+    private static final float FLUNG_STRETCH = 0.3F;
+    private static final float FLUNG_SPIN = 1.0F;
+    /** How far out of the middle a spot is pushed to be clear off the screen, from -1 to 1 across it. */
+    private static final float OFF_SCREEN = 1.45F;
+
     /**
      * Where they hold on to the screen, in the order they take the spots: around the edges first, with
      * the last two in front of the view, so it only gets blocked once there are really many of them.
@@ -82,22 +100,11 @@ public final class ClingingMiniGoombas {
             ScreenSpot.front(0.28F, -0.12F)
     );
 
-    /** How far the ones on the first-person arm turn their face towards the camera, off the arm. */
-    private static final float ARM_TWIST = Mth.PI / 3.0F;
-
     /**
-     * Where they hold on to the right arm in first person, as it is held out with nothing in the hand.
-     * The front and the outer side are the faces turned towards the camera there, and only the hand end
-     * of the arm is on screen, with the hand end at the top of it, so they hang head up towards the
-     * hand rather than towards the shoulder. Biting straight into either of them would only ever show their backs, so
-     * each one turns its face part of the way towards the other, and the camera, as it gnaws. The left
-     * arm takes the mirror image of these.
+     * The mini goombas on the screen, spot by spot, as far as their leap on or off has got. A spot is
+     * only let go of once the one in it has been flung all the way off, so letting go is seen too.
      */
-    private static final List<Spot> RIGHT_ARM_SPOTS = List.of(
-            Spot.side(-1.0F, 8.5F, -2.0F, 0.5F, Side.FRONT).twisted(-ARM_TWIST).headFirst(),
-            Spot.side(-3.0F, 7.0F, 0.5F, 1.0F, Side.RIGHT).twisted(ARM_TWIST).headFirst(),
-            Spot.side(-2.0F, 6.0F, -2.0F, 0.5F, Side.FRONT).twisted(-ARM_TWIST).headFirst()
-    );
+    private static final List<OnScreen> ON_SCREEN = new ArrayList<>();
 
     @Nullable
     private static EntityModelSet bakedFrom;
@@ -117,16 +124,6 @@ public final class ClingingMiniGoombas {
         return model;
     }
 
-    /** How many of the mini goombas on a player show on their arm in first person: a few, not all. */
-    public static int onArm(int clinging) {
-        return Math.min(RIGHT_ARM_SPOTS.size(), (clinging + 2) / 3);
-    }
-
-    public static Spot armSpot(HumanoidArm arm, int index) {
-        Spot spot = RIGHT_ARM_SPOTS.get(index % RIGHT_ARM_SPOTS.size());
-        return arm == HumanoidArm.RIGHT ? spot : spot.mirrored();
-    }
-
     /**
      * Draws one mini goomba biting into a body part, the pose stack being in that part's own space.
      *
@@ -137,7 +134,7 @@ public final class ClingingMiniGoombas {
         float outX = Mth.sin(spot.yaw());
         float outZ = Mth.cos(spot.yaw());
         float gap = spot.onTop() ? 0.0F : GAP;
-        float drop = spot.onTop() ? 0.0F : spot.flipped() ? -HALF_HEIGHT : HALF_HEIGHT;
+        float drop = spot.onTop() ? 0.0F : HALF_HEIGHT;
         float x = spot.x() + (slim ? spot.slimShift() : 0.0F) + outX * gap;
         float y = spot.y() + drop;
         float z = spot.z() + outZ * gap;
@@ -145,10 +142,7 @@ public final class ClingingMiniGoombas {
         poseStack.pushPose();
         poseStack.translate(x / 16.0F, y / 16.0F, z / 16.0F);
         // Turned to face the body part, then tipped over from the feet so the head bites into it.
-        poseStack.mulPose(Axis.YP.rotation(spot.yaw() + spot.twist()));
-        if (spot.flipped()) {
-            poseStack.mulPose(Axis.ZP.rotation(Mth.PI));
-        }
+        poseStack.mulPose(Axis.YP.rotation(spot.yaw()));
         poseStack.mulPose(Axis.XP.rotation((spot.onTop() ? TOP_LEAN : LEAN) + chew(ageInTicks, index)));
         poseStack.scale(BODY_SCALE, BODY_SCALE, BODY_SCALE);
         poseStack.translate(0.0F, MODEL_ANCHOR, 0.0F);
@@ -159,20 +153,63 @@ public final class ClingingMiniGoombas {
     /**
      * Draws the mini goombas holding onto the player whose eyes the camera is in, around the edges of
      * their view. The pose stack has to be in camera space, as it is at the start of the hand pass.
+     * <p>
+     * Meant to be called every first-person frame, none holding on included: a mini goomba that was just
+     * shaken off is still on its way off the screen.
+     *
+     * @param time the player's age in ticks, partial tick included, which the leaps are timed against
      */
-    public static void submitOnScreen(GoombaModel model, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, float ageInTicks, int count) {
+    public static void submitOnScreen(GoombaModel model, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, float time, int count) {
+        settleOnScreen(time, count);
+        if (ON_SCREEN.isEmpty()) {
+            return;
+        }
         Window window = Minecraft.getInstance().getWindow();
         float aspect = (float) window.getWidth() / Math.max(1, window.getHeight());
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < ON_SCREEN.size(); i++) {
+            OnScreen goomba = ON_SCREEN.get(i);
             ScreenSpot spot = SCREEN_SPOTS.get(i % SCREEN_SPOTS.size());
             // Past the last spot they start over, a little further back so they do not sit exactly in one another.
             float depth = spot.depth() + 0.1F * (i / SCREEN_SPOTS.size());
             float halfHeight = depth * HAND_HALF_FOV_TAN;
-            float x = spot.u() * halfHeight * aspect;
-            float y = spot.v() * halfHeight;
-            float chew = chew(ageInTicks, i);
+            float chew = chew(time, i);
+
+            // The way out of the screen from the spot, along which they leap on and are flung off.
+            float outLength = Mth.sqrt(spot.u() * spot.u() + spot.v() * spot.v());
+            float outU = outLength > 1.0E-3F ? spot.u() / outLength : 0.0F;
+            float outV = outLength > 1.0E-3F ? spot.v() / outLength : -1.0F;
+            float clear = (OFF_SCREEN - Math.max(Math.abs(spot.u()), Math.abs(spot.v()))) / Math.max(Math.abs(outU), Math.abs(outV));
+
+            float push;
+            float roll = 0.0F;
+            float squashX = 1.0F;
+            float squashY = 1.0F;
+            if (goomba.leaving) {
+                float progress = Mth.clamp((time - goomba.since) / EXIT_TICKS, 0.0F, 1.0F);
+                if (progress >= 1.0F) {
+                    continue;
+                }
+                // A short wind-up towards the middle, then off it goes, spinning and stretched by the speed.
+                push = easeInBack(progress) * clear;
+                roll = progress * progress * FLUNG_SPIN * Mth.PI * (i % 2 == 0 ? 1.0F : -1.0F);
+                squashY = 1.0F + FLUNG_STRETCH * progress;
+                squashX = 1.0F - FLUNG_STRETCH * 0.5F * progress;
+            } else {
+                float progress = Mth.clamp((time - goomba.since) / ENTER_TICKS, 0.0F, 1.0F);
+                // Leaps in from off the screen, a little too far, and settles back with a wobble.
+                push = (1.0F - easeOutBack(progress)) * clear;
+                roll = Mth.sin(progress * 3.0F * Mth.PI) * (1.0F - progress) * LANDING_WOBBLE;
+                float squash = Mth.sin(progress * Mth.PI) * LANDING_SQUASH;
+                squashX = 1.0F + squash;
+                squashY = 1.0F - squash;
+            }
+
+            float x = (spot.u() + outU * push) * halfHeight * aspect;
+            float y = (spot.v() + outV * push) * halfHeight;
             // The ones on an edge climb in from it, their head turned towards the middle of the screen.
-            float roll = spot.edge() ? (float) Mth.atan2(x, -y) : chew * SCREEN_SWAY / CHEW_AMPLITUDE;
+            float settledX = spot.u() * halfHeight * aspect;
+            float settledY = spot.v() * halfHeight;
+            roll += spot.edge() ? (float) Mth.atan2(settledX, -settledY) : chew * SCREEN_SWAY / CHEW_AMPLITUDE;
 
             poseStack.pushPose();
             poseStack.translate(x, y, -depth);
@@ -180,15 +217,65 @@ public final class ClingingMiniGoombas {
             // straight ahead is seen from the side, and the edge ones would only show the top of their head.
             poseStack.mulPose(new Quaternionf().rotationTo(0.0F, 0.0F, 1.0F, -x, -y, depth));
             poseStack.mulPose(Axis.ZP.rotation(roll));
+            poseStack.scale(squashX, squashY, 1.0F);
             poseStack.mulPose(Axis.YP.rotation(Mth.PI));
             poseStack.mulPose(Axis.XP.rotation(-(SCREEN_LEAN + chew)));
             poseStack.scale(SCREEN_SCALE, SCREEN_SCALE, SCREEN_SCALE);
             // The same turn the entity renderer gives every model, which is built upside down.
             poseStack.scale(-1.0F, -1.0F, 1.0F);
             poseStack.translate(0.0F, MODEL_MIDDLE, 0.0F);
-            submit(model, poseStack, submitNodeCollector, lightCoords, 0, ageInTicks);
+            submit(model, poseStack, submitNodeCollector, lightCoords, 0, time);
             poseStack.popPose();
         }
+    }
+
+    /**
+     * Brings the goombas on the screen in line with how many are holding on: new ones leap on into the
+     * first free spots, and the ones in the last spots are flung off as they are shaken loose.
+     */
+    private static void settleOnScreen(float time, int count) {
+        for (OnScreen goomba : ON_SCREEN) {
+            // The player's age starts over with a new player entity, after dying or changing dimension.
+            if (time < goomba.since) {
+                goomba.since = time - Math.max(ENTER_TICKS, EXIT_TICKS);
+            }
+        }
+        for (int i = 0; i < count; i++) {
+            if (i >= ON_SCREEN.size()) {
+                ON_SCREEN.add(new OnScreen(time));
+                continue;
+            }
+            OnScreen goomba = ON_SCREEN.get(i);
+            if (goomba.leaving) {
+                // Caught again on the way off: it leaps back from wherever it had got to.
+                float gone = Mth.clamp((time - goomba.since) / EXIT_TICKS, 0.0F, 1.0F);
+                goomba.leaving = false;
+                goomba.since = time - (1.0F - gone) * ENTER_TICKS;
+            }
+        }
+        for (int i = count; i < ON_SCREEN.size(); i++) {
+            OnScreen goomba = ON_SCREEN.get(i);
+            if (!goomba.leaving) {
+                goomba.leaving = true;
+                goomba.since = time;
+            }
+        }
+        while (!ON_SCREEN.isEmpty()) {
+            OnScreen last = ON_SCREEN.getLast();
+            if (!last.leaving || time - last.since < EXIT_TICKS) {
+                break;
+            }
+            ON_SCREEN.removeLast();
+        }
+    }
+
+    private static float easeOutBack(float progress) {
+        float t = progress - 1.0F;
+        return 1.0F + (BACK_OVERSHOOT + 1.0F) * t * t * t + BACK_OVERSHOOT * t * t;
+    }
+
+    private static float easeInBack(float progress) {
+        return (BACK_OVERSHOOT + 1.0F) * progress * progress * progress - BACK_OVERSHOOT * progress * progress;
     }
 
     private static float chew(float ageInTicks, int index) {
@@ -222,31 +309,16 @@ public final class ClingingMiniGoombas {
      *
      * @param slimShift how far the spot moves along x on a slim arm, which is a pixel thinner
      * @param yaw       the turn that has the goomba facing the body part it is on
-     * @param twist     how far it then turns away from facing the part head-on
      * @param onTop     whether it stands on top of the part rather than hanging off one of its sides
-     * @param flipped   whether it hangs head first along the part, towards its far end, instead of upright
      */
-    public record Spot(float x, float y, float z, float slimShift, float yaw, float twist, boolean onTop, boolean flipped) {
+    public record Spot(float x, float y, float z, float slimShift, float yaw, boolean onTop) {
         public static Spot side(float x, float y, float z, float slimShift, Side side) {
-            return new Spot(x, y, z, slimShift, side.yaw, 0.0F, false, false);
+            return new Spot(x, y, z, slimShift, side.yaw, false);
         }
 
         /** Faces the way the part does, so it bends over the front of the part it stands on. */
         public static Spot top(float x, float y, float z) {
-            return new Spot(x, y, z, 0.0F, 0.0F, 0.0F, true, false);
-        }
-
-        public Spot twisted(float twist) {
-            return new Spot(this.x, this.y, this.z, this.slimShift, this.yaw, twist, this.onTop, this.flipped);
-        }
-
-        public Spot headFirst() {
-            return new Spot(this.x, this.y, this.z, this.slimShift, this.yaw, this.twist, this.onTop, true);
-        }
-
-        /** The same spot on the other side of the body. */
-        public Spot mirrored() {
-            return new Spot(-this.x, this.y, this.z, -this.slimShift, -this.yaw, -this.twist, this.onTop, this.flipped);
+            return new Spot(x, y, z, 0.0F, 0.0F, true);
         }
     }
 
@@ -262,6 +334,16 @@ public final class ClingingMiniGoombas {
 
         static ScreenSpot front(float u, float v) {
             return new ScreenSpot(u, v, 0.7F, false);
+        }
+    }
+
+    /** A mini goomba on the screen, and when it started leaping onto it or being flung off. */
+    private static final class OnScreen {
+        private float since;
+        private boolean leaving;
+
+        private OnScreen(float since) {
+            this.since = since;
         }
     }
 }
