@@ -8,12 +8,22 @@ With [arcade movement]($arcade_movement/overview), the third-person view from be
 
 - The mouse or the right stick turns the camera all the way around the player, and up or down to 80°.
 - The player faces where they move, and looks toward the horizon.
-- The camera follows the player with a slight lag, never falling more than 1.5 blocks behind.
+- The camera leaves the player some room instead of keeping them in the exact middle of the screen, see [Framing](#framing).
 - The field of view widens slightly with speed.
 - *Recenter Camera* swings the camera behind the player, until the mouse or the stick turns it again.
 - When vanilla movement takes over, for example while flying or in lava, the view eases between the orbit camera and the vanilla camera over a quarter of a second.
 
 The hands do not aim with the camera: see [Aiming with the orbit camera]($arcade_movement/items_and_blocks#aiming-with-the-orbit-camera).
+
+## Framing
+
+As in 3D platformers, the camera does not move for every step the player takes:
+
+- A step aside leaves it still. The player moves freely within about 0.8 blocks of the point the camera looks at; past that, the camera follows smoothly, and never lets them get more than 1.8 blocks away.
+- Once the player keeps moving for a quarter of a second, the camera catches up a little faster than they go, so that a run ends with the player back in the middle.
+- Jumps leave the height of the camera alone, up to 2.5 blocks above where it looks. It only rises or sinks with the ground: once the player lands higher or lower, or on a ladder, a wall or in water, it eases to their new height. A fall more than 0.75 blocks below it is followed right away.
+
+The *Camera Margin* setting scales all of this: 0% keeps the player in the middle of the screen at all times.
 
 ## Following the player
 
@@ -38,7 +48,7 @@ The settings are on the *Arcade Movement* section of the Mubble settings screen.
 | Camera Follows (Keyboard) | Off | | Whether the camera follows the player when playing on the keyboard and mouse |
 | Camera Follows (Controller) | On | | Whether the camera follows the player when playing on a controller |
 | Camera Follow Speed | 120°/s | 30 to 360°/s | How fast the camera swings around when following the player at full speed |
-| Camera Lag | 80 ms | 0 to 300 ms | How long the camera takes to catch up with the player; 0 follows rigidly |
+| Camera Margin | 100% | 0 to 200% | How much room the camera leaves around the player before following them, see [Framing](#framing); 0% keeps the player in the middle |
 | Camera Sensitivity | 100% | 10 to 300% | How fast the mouse and the right stick turn the camera |
 | Speed Field of View | 8% | 0 to 30% | How much wider the view gets at full speed |
 | Show Player Through Walls | On | | Whether the player shows through the blocks between them and the camera |

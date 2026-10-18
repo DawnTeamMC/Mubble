@@ -93,26 +93,6 @@ public final class ArcadeAim {
     }
 
     /**
-     * One tick of a point trailing {@code target}, as the orbit camera's focus trails the player: the
-     * gap left behind shrinks to {@code keep} of itself every tick, and never grows past
-     * {@code maxGap}, so that at any speed it settles on a steady distance rather than snapping back
-     * now and then. Only a jump of more than {@code snapDistance}, a teleport, resets it.
-     */
-    public static Vec3 follow(Vec3 focus, Vec3 target, double keep, double maxGap, double snapDistance) {
-        var gap = focus.subtract(target);
-        double length = gap.length();
-        if (length > snapDistance) {
-            return target;
-        }
-        gap = gap.scale(keep);
-        length *= keep;
-        if (length > maxGap) {
-            gap = gap.scale(maxGap / length);
-        }
-        return target.add(gap);
-    }
-
-    /**
      * Where the camera can look from, trailing {@code focus} behind {@code target}, both seen
      * {@code height} above the feet: the focus itself when nothing stands in between, otherwise the
      * point of the way to it right before the first block. Pulling the focus in only as far as the

@@ -5,6 +5,8 @@ import fr.hugman.mubble.arcade.client.compat.ArcadeControllerBindings;
 import fr.hugman.mubble.arcade.client.mixin.CameraInvoker;
 import fr.hugman.mubble.arcade.ArcadeAim;
 import fr.hugman.mubble.arcade.ArcadeController;
+import fr.hugman.mubble.arcade.ArcadeFraming;
+import fr.hugman.mubble.arcade.move.ArcadeMove;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Camera;
@@ -21,17 +23,13 @@ import org.jspecify.annotations.Nullable;
  * <p>
  * The camera has its own yaw and pitch, moved by the mouse or the right stick, and the stick moves
  * the player relative to it: the body turns towards where it goes, the view does not follow, and the
- * head looks at the horizon. The camera trails the player a little, eases in when it backs into a
+ * head looks at the horizon. The camera frames the player with some room around them rather than nailing them to the middle (see {@link ArcadeFraming}), eases in when it backs into a
  * block (the player showing through whatever stands in between otherwise, see {@link ArcadeSilhouette}), swings back behind the player on recenter, follows them round as they move if set
  * to, and blends with the vanilla view when one takes over from the other. The hands do not follow the camera: they hit and use items where the
  * body faces, see {@link ArcadeAim#pickAhead}.
  */
 @Environment(EnvType.CLIENT)
 public final class ArcadeCamera {
-    /** The farthest the focus trails behind the player, in blocks: past it, the camera keeps up. */
-    private static final double MAX_FOLLOW_GAP = 1.5D;
-    /** A jump of the player farther than this, in blocks, is a teleport, and the camera snaps to it. */
-    private static final double SNAP_DISTANCE = 8.0D;
     /** How long the camera takes to go from the vanilla view to the orbit and back, in seconds. */
     private static final float BLEND_SECONDS = 0.25F;
     /** How fast the head of the player goes back to looking at the horizon, in degrees per tick. */
@@ -52,7 +50,9 @@ public final class ArcadeCamera {
     private static float pitch;
     private static boolean orbiting;
     private static boolean recentering;
-    /** Where the feet of the player trail, on the last two ticks: the camera interpolates between them. */
+    /** What the camera looks at, framing the feet of the player, see {@link ArcadeFraming}. */
+    private static final ArcadeFraming FRAMING = new ArcadeFraming();
+    /** The focus on the last two ticks: the camera interpolates between them. */
     @Nullable
     private static Vec3 focus;
     @Nullable
@@ -99,18 +99,28 @@ public final class ArcadeCamera {
     public static void tick(Minecraft minecraft) {
         var player = minecraft.player;
         if (player == null || (!isOrbiting() && blend <= 0.0F)) {
+            FRAMING.reset();
             focus = null;
             focusO = null;
             return;
         }
         var target = player.position();
         focusO = focus == null ? target : focus;
-        double lag = ArcadeClientConfig.get().followLag();
-        double keep = lag > 0.0D ? Math.exp(-0.05D / lag) : 0.0D;
-        focus = ArcadeAim.follow(focusO, target, keep, MAX_FOLLOW_GAP, SNAP_DISTANCE);
-        // the trailing point must not slip behind a block, which would put the camera inside it: going
-        // down steps, the edge left behind hides it for a tick, and it comes closer only that much
+        focus = FRAMING.tick(target, supported(player), ArcadeClientConfig.get().cameraMargin());
+        // the focus must not slip behind a block, which would put the camera inside it: going down
+        // steps, the edge left behind hides it for a tick, and it comes closer only that much
         focus = ArcadeAim.trail(player.level(), player, target, focus, player.getEyeHeight() + ArcadeClientConfig.get().cameraHeight());
+        FRAMING.set(focus);
+    }
+
+    /** Whether the height of the camera follows the player: on the ground, a ladder, a wall or in water, not in the air. */
+    private static boolean supported(LocalPlayer player) {
+        var controller = ArcadeController.of(player);
+        if (controller.isDriving()) {
+            var state = controller.state();
+            return state.grounded || state.move.kind() != ArcadeMove.Kind.AIR;
+        }
+        return player.onGround() || player.isInWater() || player.onClimbable();
     }
 
     public static float yaw() {

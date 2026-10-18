@@ -27,4 +27,4 @@ An optional movement layer for Mubble, in the spirit of *Super Mario Odyssey*: c
 | Unit tests | `./gradlew :mubble-test:test` |
 | Game tests | `./gradlew :mubble-test:runGameTest`, or a subset with `-PgameTestFilter='mubble-gametest:arcade*'` |
 
-The tests of the module live in `mubble-test`, under `arcade` packages. Generated files in `src/generated` are committed: regenerate them rather than editing them by hand.
+The tests of the module live in `mubble-test`, under `arcade` packages. Generated files in `src/generated` are not committed: run the datagen after changing what it generates.

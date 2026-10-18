@@ -61,8 +61,9 @@ public final class ArcadeTranslations {
                 "À la manette, la caméra orbitale revient derrière le joueur à mesure qu'il se déplace, jamais quand il est immobile.");
         settings(t, "auto_camera_speed", "Camera Follow Speed", "Vitesse de suivi de la caméra",
                 "How fast the camera swings round when following the player at full speed.", "La vitesse à laquelle la caméra revient derrière le joueur lancé à pleine vitesse.");
-        settings(t, "follow_lag", "Camera Lag", "Retard de la caméra",
-                "How long the camera takes to catch up with the player. None follows rigidly.", "Le temps que met la caméra à rattraper le joueur. Aucun : elle le suit de près.");
+        settings(t, "camera_margin", "Camera Margin", "Marge de la caméra",
+                "How much room the camera leaves around the player before following them: a step aside or a jump leaves it still, moving on brings the player back to the middle. 0% keeps the player in the middle.",
+                "La marge que laisse la caméra autour du joueur avant de le suivre : un pas de côté ou un saut la laissent immobile, et c'est en avançant que le joueur revient au centre. 0 % garde le joueur au centre.");
         settings(t, "orbit_sensitivity", "Camera Sensitivity", "Sensibilité de la caméra",
                 "How fast the mouse and the right stick turn the orbit camera.", "La vitesse à laquelle la souris et le stick droit font tourner la caméra orbitale.");
         settings(t, "fov_kick", "Speed Field of View", "Champ de vision à pleine vitesse",
@@ -77,7 +78,6 @@ public final class ArcadeTranslations {
                 "Show the arcade debug HUD when the game starts.", "Afficher l'interface de débogage arcade au démarrage du jeu.");
         t.put("arcade." + M + ".settings.unit.degrees_per_second", pair("%s°/s", "%s°/s"));
         t.put("arcade." + M + ".settings.unit.blocks", pair("%s blocks", "%s blocs"));
-        t.put("arcade." + M + ".settings.unit.milliseconds", pair("%s ms", "%s ms"));
         t.put("arcade." + M + ".settings.unit.percent", pair("%s%%", "%s %%"));
         t.put("arcade." + M + ".settings.auto_camera_controller.on", pair("Camera follows the player", "La caméra suit le joueur"));
         t.put("arcade." + M + ".settings.auto_camera_controller.off", pair("Camera stays put", "La caméra reste en place"));
