@@ -152,10 +152,26 @@ public class SnakeMovingBlockEntity extends BlockEntity {
      * where it is and leaves a whole block forward; a shaking block never goes anywhere.
      */
     public float getOffset(float partialTick) {
+        return this.offsetOf(this.getProgress(partialTick));
+    }
+
+    /**
+     * The same, for collision and pushing, which run on the position the block has reached this tick
+     * rather than the one being drawn.
+     * <p>
+     * Those are not the same number: the renderer interpolates from last tick's progress towards
+     * this one, so it trails by up to a tick. Colliding against the drawn position leaves whatever
+     * stands on the block a step inside it by the time the step ends, and vanilla answers an entity
+     * inside a solid block by shoving it out sideways and overwriting its horizontal speed.
+     */
+    private float collisionOffset() {
+        return this.offsetOf(this.progress);
+    }
+
+    private float offsetOf(float progress) {
         if (!this.movement.travels()) {
             return 0.0F;
         }
-        float progress = this.getProgress(partialTick);
         return this.movement == SnakeMovement.HEAD ? progress - 1.0F : progress;
     }
 
@@ -228,9 +244,14 @@ public class SnakeMovingBlockEntity extends BlockEntity {
     public void place(Level level, BlockPos pos) {
         this.setRemoved();
         level.removeBlockEntity(pos);
-        if (level.getBlockState(pos).getBlock() == this.getBlockState().getBlock()) {
-            level.setBlock(pos, this.finalState, Block.UPDATE_ALL);
+        if (level.getBlockState(pos).getBlock() != this.getBlockState().getBlock()) {
+            return;
         }
+        // The last line of defence for anything the step did not quite finish shoving clear: lifting
+        // it keeps a snake rising under a player feeling like a lift, where vanilla would shove it
+        // out sideways and wipe its horizontal speed on the way.
+        Block.pushEntitiesUp(Blocks.AIR.defaultBlockState(), this.finalState, level, pos);
+        level.setBlock(pos, this.finalState, Block.UPDATE_ALL);
     }
 
     /*===========*/
@@ -241,7 +262,7 @@ public class SnakeMovingBlockEntity extends BlockEntity {
         if (this.movement.travels() && this.progress < 1.0F && NOCLIP.get() == this.direction) {
             return Shapes.empty();
         }
-        float offset = this.getOffset(0.0F);
+        float offset = this.collisionOffset();
         return this.movedState.getCollisionShape(level, pos)
                 .move(this.direction.getStepX() * offset, this.direction.getStepY() * offset, this.direction.getStepZ() * offset);
     }
@@ -294,11 +315,18 @@ public class SnakeMovingBlockEntity extends BlockEntity {
     private static void pushEntity(Direction movement, Entity entity, double distance) {
         NOCLIP.set(movement);
         Vec3 before = entity.position();
+        boolean wasOnGround = entity.onGround();
         entity.move(MoverType.PISTON, new Vec3(distance * movement.getStepX(), distance * movement.getStepY(), distance * movement.getStepZ()));
         entity.applyEffectsFromBlocks(before, entity.position());
         // The push is the block's doing, not the entity's: leaving it in the movement log would have
         // the entity pay for it in step sounds and fall damage.
         entity.removeLatestMovementRecording();
+        // Being carried by the ground is not leaving it. Entity.move clears the grounded flag on any
+        // move that does not end in a collision below, and a player counted as airborne cannot jump:
+        // a snake lifting someone would otherwise take their jump away for as long as it carried them.
+        if (wasOnGround) {
+            entity.setOnGround(true);
+        }
         NOCLIP.set(null);
     }
 
@@ -321,7 +349,7 @@ public class SnakeMovingBlockEntity extends BlockEntity {
 
     /** The block's box, placed where the block is right now. */
     private AABB offsetToProgress(BlockPos pos, AABB box) {
-        float offset = this.getOffset(0.0F);
+        float offset = this.collisionOffset();
         return box.move(pos.getX() + this.direction.getStepX() * offset,
                 pos.getY() + this.direction.getStepY() * offset,
                 pos.getZ() + this.direction.getStepZ() * offset);

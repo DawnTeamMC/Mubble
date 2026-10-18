@@ -23,30 +23,51 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 public class SnakePathGameTest {
     private static final BlockPos TAIL = new BlockPos(1, Arena.FLOOR_Y + 1, 1);
 
+    /** Whichever block the path is drawn from becomes the head: the clump has no end until then. */
     @GameTest
-    public void clickingTheHeadWithAsnakeBlockDrawsThePath(GameTestHelper helper) {
+    public void clickingAsnakeBlockWithAsnakeBlockDrawsThePath(GameTestHelper helper) {
         Arena.buildFloor(helper);
-        var head = Snakes.build(helper, SuperMarioBlocks.SNAKE_BLOCK, TAIL, Direction.SOUTH, 2);
+        var end = Snakes.build(helper, SuperMarioBlocks.SNAKE_BLOCK, TAIL, Direction.SOUTH, 2);
         Player player = Snakes.holdingSnakeBlock(helper);
 
-        Snakes.clickFace(helper, player, head, Direction.SOUTH);
+        Snakes.clickFace(helper, player, end, Direction.SOUTH);
 
-        BlockPos drawn = head.relative(Direction.SOUTH);
-        helper.assertTrue(Snakes.isPath(helper, drawn), "clicking the head of a snake should draw a path block, not place one");
-        helper.assertBlockProperty(head, SnakeBlock.FACING, Direction.SOUTH);
+        BlockPos drawn = end.relative(Direction.SOUTH);
+        helper.assertTrue(Snakes.isPath(helper, drawn), "clicking a snake block should draw a path block, not place one");
+        helper.assertBlockProperty(end, SnakeBlock.FACING, Direction.SOUTH);
+        helper.assertValueEqual(SnakeChain.head(helper.getLevel(), helper.absolutePos(TAIL)), helper.absolutePos(end),
+                "and should make that block the head of the snake");
         helper.succeed();
     }
 
     @GameTest
-    public void clickingAnyOtherFaceOfTheHeadTurnsThePath(GameTestHelper helper) {
+    public void apathMayStartOnAnyFace(GameTestHelper helper) {
         Arena.buildFloor(helper);
-        var head = Snakes.build(helper, SuperMarioBlocks.SNAKE_BLOCK, TAIL, Direction.SOUTH, 2);
+        var end = Snakes.build(helper, SuperMarioBlocks.SNAKE_BLOCK, TAIL, Direction.SOUTH, 2);
         Player player = Snakes.holdingSnakeBlock(helper);
 
-        Snakes.clickFace(helper, player, head, Direction.EAST);
+        Snakes.clickFace(helper, player, end, Direction.EAST);
 
-        helper.assertTrue(Snakes.isPath(helper, head.relative(Direction.EAST)), "a path may start on any face of the head");
-        helper.assertBlockProperty(head, SnakeBlock.FACING, Direction.EAST);
+        helper.assertTrue(Snakes.isPath(helper, end.relative(Direction.EAST)), "a path may start on any face");
+        helper.assertBlockProperty(end, SnakeBlock.FACING, Direction.EAST);
+        helper.succeed();
+    }
+
+    /**
+     * Once a clump has a path, clicking one of its blocks goes back to placing a snake block against
+     * it: a snake has one head, and the path carries on from its own last block.
+     */
+    @GameTest
+    public void asecondPathIsNeverDrawnOffTheSameSnake(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var head = Snakes.build(helper, SuperMarioBlocks.SNAKE_BLOCK, TAIL, Direction.SOUTH, 2);
+        Snakes.drawPath(helper, head, Direction.SOUTH, 1);
+        Player player = Snakes.holdingSnakeBlock(helper);
+
+        Snakes.clickFace(helper, player, TAIL, Direction.WEST);
+
+        helper.assertFalse(Snakes.isPath(helper, TAIL.relative(Direction.WEST)),
+                "a snake that already has a path should not grow a second one");
         helper.succeed();
     }
 
@@ -57,6 +78,7 @@ public class SnakePathGameTest {
         Player player = Snakes.holdingSnakeBlock(helper);
         Snakes.clickFace(helper, player, head, Direction.SOUTH);
         BlockPos first = head.relative(Direction.SOUTH);
+
 
         Snakes.clickFace(helper, player, first, Direction.EAST);
 

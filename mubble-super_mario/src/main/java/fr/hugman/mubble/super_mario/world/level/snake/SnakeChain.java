@@ -11,7 +11,10 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,107 +22,144 @@ import java.util.Set;
 /**
  * Reading a snake out of the world.
  * <p>
- * A snake is never stored anywhere while it is idle: it only exists as a run of snake blocks whose
- * {@link SnakeBlock#FACING} each point at the next one, tail first, then the head, then the path
- * blocks it will walk. Everything here walks that chain, which is why breaking a block in the middle
- * of an idle snake simply splits it in two without anything having to be told.
+ * A snake is never stored anywhere while it is idle: it is a clump of snake blocks touching each
+ * other, and nothing more. Lay them out however you like — the blocks carry no orientation a player
+ * can see, and none that matters until the snake runs.
+ * <p>
+ * What turns a clump into a snake is the path. The block a path was drawn from is the head, and the
+ * body is read off from there by stepping to a touching block over and over, carrying on straight
+ * wherever it can. A clump with no path on it is not a snake yet and has no head to find, which is
+ * why stepping on one does nothing.
  *
  * @author Hugman
  * @since v4.0.0
  */
 public final class SnakeChain {
-    /** Longest a snake body may be, in blocks. */
+    /** Longest a snake body may be, in blocks. A longer clump simply leaves its far end behind. */
     public static final int MAX_BODY_LENGTH = 16;
     /** Longest a path may be, in blocks. MarioWiki gives 120 blocks as a snake's maximum travel. */
     public static final int MAX_PATH_LENGTH = 120;
+    /** How far the hunt for a head is willing to wander through a clump of snake blocks. */
+    private static final int MAX_GROUP_SIZE = MAX_BODY_LENGTH * 4;
 
     private SnakeChain() {
     }
 
-    /** Whether {@code state} is a link of a chain made of {@code block} in {@code snakeState}. */
+    /** Whether {@code state} belongs to the same snake as a block made of {@code block} in {@code snakeState}. */
     public static boolean isLink(BlockState state, Block block, SnakeBlockState snakeState) {
         return state.is(block) && state.getValue(SnakeBlock.SNAKE_STATE) == snakeState;
     }
 
-    /** The direction {@code state} points at, or {@code null} if it is not a snake block at all. */
-    @Nullable
-    public static Direction facingOf(BlockState state) {
-        return state.getBlock() instanceof SnakeBlock ? state.getValue(SnakeBlock.FACING) : null;
-    }
+    /*========*/
+    /*  HEAD  */
+    /*========*/
 
     /**
-     * The block of the same chain pointing at {@code pos}, if there is one.
-     * <p>
-     * Two snakes may well sit next to each other, so a neighbour only counts when it is the very same
-     * block — the same speed, that is — in the same state, and actually facing this way.
+     * The head of the snake {@code pos} belongs to: the one block of the clump with a path drawn
+     * off it.
+     *
+     * @return the head, or {@code null} when the clump has no path and so is not a snake yet
      */
     @Nullable
-    public static BlockPos predecessor(BlockGetter level, BlockPos pos, Block block, SnakeBlockState snakeState) {
-        for (Direction direction : Direction.values()) {
-            BlockPos neighbour = pos.relative(direction);
-            BlockState state = level.getBlockState(neighbour);
-            if (isLink(state, block, snakeState) && state.getValue(SnakeBlock.FACING) == direction.getOpposite()) {
-                return neighbour;
+    public static BlockPos head(BlockGetter level, BlockPos pos) {
+        BlockState state = level.getBlockState(pos);
+        if (!(state.getBlock() instanceof SnakeBlock)) {
+            return null;
+        }
+        Block block = state.getBlock();
+        SnakeBlockState snakeState = state.getValue(SnakeBlock.SNAKE_STATE);
+
+        Set<BlockPos> seen = new HashSet<>();
+        Deque<BlockPos> queue = new ArrayDeque<>();
+        seen.add(pos);
+        queue.add(pos);
+        while (!queue.isEmpty() && seen.size() <= MAX_GROUP_SIZE) {
+            BlockPos current = queue.poll();
+            if (startsApath(level, current)) {
+                return current;
+            }
+            for (Direction direction : Direction.values()) {
+                BlockPos neighbour = current.relative(direction);
+                if (isLink(level.getBlockState(neighbour), block, snakeState) && seen.add(neighbour)) {
+                    queue.add(neighbour);
+                }
             }
         }
         return null;
     }
 
-    /** The block {@code pos} points at, if it carries on the same chain. */
-    @Nullable
-    public static BlockPos successor(BlockGetter level, BlockPos pos, Block block, SnakeBlockState snakeState) {
+    /** Whether the block at {@code pos} is a snake block with a path hanging off the face it points at. */
+    public static boolean startsApath(BlockGetter level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-        if (!isLink(state, block, snakeState)) {
-            return null;
-        }
-        BlockPos next = pos.relative(state.getValue(SnakeBlock.FACING));
-        return isLink(level.getBlockState(next), block, snakeState) ? next : null;
+        return state.getBlock() instanceof SnakeBlock
+                && level.getBlockState(pos.relative(state.getValue(SnakeBlock.FACING))).getBlock() instanceof SnakePathBlock;
     }
 
-    /** Walks backwards from {@code pos} to the tail of its snake. Returns {@code pos} if it is the tail. */
-    public static BlockPos tailOf(BlockGetter level, BlockPos pos, Block block, SnakeBlockState snakeState) {
-        Set<BlockPos> seen = new HashSet<>();
-        BlockPos current = pos;
-        seen.add(current);
-        for (int i = 0; i < MAX_BODY_LENGTH; i++) {
-            BlockPos previous = predecessor(level, current, block, snakeState);
-            // A ring of snake blocks all pointing at each other has no tail: stop where we started.
-            if (previous == null || !seen.add(previous)) {
-                return current;
-            }
-            current = previous;
-        }
-        return current;
-    }
+    /*========*/
+    /*  BODY  */
+    /*========*/
 
-    /** Every block of the snake {@code pos} belongs to, tail first and head last. */
-    public static List<BlockPos> body(BlockGetter level, BlockPos pos) {
-        BlockState state = level.getBlockState(pos);
+    /**
+     * The chain running back from {@code head} through the blocks touching it, tail first and head
+     * last.
+     * <p>
+     * At every block the walk carries on the way it was going if it can, and only turns when it has
+     * to, so a straight line and a line with a bend in it both read the way they look. A clump that
+     * is not a line has no one right answer: the walk takes the first chain it finds and whatever it
+     * does not reach is simply not part of the snake.
+     */
+    public static List<BlockPos> bodyFromHead(BlockGetter level, BlockPos head) {
+        BlockState state = level.getBlockState(head);
         if (!(state.getBlock() instanceof SnakeBlock)) {
             return List.of();
         }
-        return bodyFromTail(level, tailOf(level, pos, state.getBlock(), state.getValue(SnakeBlock.SNAKE_STATE)),
-                state.getBlock(), state.getValue(SnakeBlock.SNAKE_STATE));
-    }
+        Block block = state.getBlock();
+        SnakeBlockState snakeState = state.getValue(SnakeBlock.SNAKE_STATE);
 
-    /** Every block of the snake starting at {@code tail}, tail first and head last. */
-    public static List<BlockPos> bodyFromTail(BlockGetter level, BlockPos tail, Block block, SnakeBlockState snakeState) {
         List<BlockPos> body = new ArrayList<>();
         Set<BlockPos> seen = new HashSet<>();
-        BlockPos current = tail;
-        while (body.size() < MAX_BODY_LENGTH && isLink(level.getBlockState(current), block, snakeState) && seen.add(current)) {
+        BlockPos current = head;
+        Direction carryOn = null;
+        while (body.size() < MAX_BODY_LENGTH && seen.add(current)) {
             body.add(current);
-            current = current.relative(level.getBlockState(current).getValue(SnakeBlock.FACING));
+            Direction next = step(level, current, carryOn, seen, block, snakeState);
+            if (next == null) {
+                break;
+            }
+            carryOn = next;
+            current = current.relative(next);
         }
+        Collections.reverse(body);
         return body;
     }
 
-    /** The head of the snake {@code pos} belongs to, or {@code null} if {@code pos} is not a snake block. */
     @Nullable
-    public static BlockPos headOf(BlockGetter level, BlockPos pos) {
-        List<BlockPos> body = body(level, pos);
-        return body.isEmpty() ? null : body.getLast();
+    private static Direction step(BlockGetter level, BlockPos pos, @Nullable Direction carryOn, Set<BlockPos> seen,
+                                  Block block, SnakeBlockState snakeState) {
+        if (carryOn != null && leadsOn(level, pos.relative(carryOn), seen, block, snakeState)) {
+            return carryOn;
+        }
+        for (Direction direction : Direction.values()) {
+            if (leadsOn(level, pos.relative(direction), seen, block, snakeState)) {
+                return direction;
+            }
+        }
+        return null;
     }
+
+    private static boolean leadsOn(BlockGetter level, BlockPos pos, Set<BlockPos> seen, Block block, SnakeBlockState snakeState) {
+        return !seen.contains(pos) && isLink(level.getBlockState(pos), block, snakeState);
+    }
+
+    /** The whole snake {@code pos} belongs to, tail first, or nothing when its clump has no path. */
+    public static List<BlockPos> body(BlockGetter level, BlockPos pos) {
+        BlockPos head = head(level, pos);
+        return head == null ? List.of() : bodyFromHead(level, head);
+    }
+
+    /*========*/
+    /*  PATH  */
+    /*========*/
 
     /**
      * The path blocks laid out in front of {@code head}, in the order the snake will walk them.
@@ -162,9 +202,7 @@ public final class SnakeChain {
     public static BlockPos pathPredecessor(BlockGetter level, BlockPos pos) {
         for (Direction direction : Direction.values()) {
             BlockPos neighbour = pos.relative(direction);
-            BlockState state = level.getBlockState(neighbour);
-            Direction facing = pointsAt(state);
-            if (facing == direction.getOpposite()) {
+            if (pointsAt(level.getBlockState(neighbour)) == direction.getOpposite()) {
                 return neighbour;
             }
         }

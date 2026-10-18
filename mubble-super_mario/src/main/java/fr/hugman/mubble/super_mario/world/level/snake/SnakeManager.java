@@ -7,6 +7,7 @@ import fr.hugman.mubble.super_mario.world.level.block.SnakeBlock;
 import fr.hugman.mubble.super_mario.world.level.block.SnakeBlockState;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.datafix.DataFixTypes;
 import net.minecraft.world.level.block.Block;
@@ -104,9 +105,16 @@ public class SnakeManager extends SavedData {
     /**
      * Sets off the snake {@code pos} belongs to.
      * <p>
-     * The head has the last word on {@link SnakeBlock#RESPAWNABLE}: it is the block a player builds
-     * towards and the one a command is most likely aimed at, and a snake half of which comes back
-     * would make no sense. Its value is written onto every block as the snake starts.
+     * A clump of snake blocks with no path drawn on it is not a snake yet, and walking over one does
+     * nothing: it has no head, nowhere to go, and starting it would only have it shake and fall to
+     * pieces where it stands.
+     * <p>
+     * The shape is worked out here and nowhere else. The blocks are laid out without an orientation
+     * of their own, so the body is read off the ones that touch, starting from the block the path
+     * was drawn from; the order that comes out is then written into {@link SnakeBlock#FACING} so the
+     * running snake has a chain to follow. The head also has the last word on
+     * {@link SnakeBlock#RESPAWNABLE}: it is the block a command is most likely aimed at, and a snake
+     * half of which comes back would make no sense.
      *
      * @return the snake that was set off, or {@code null} if there was nothing to set off
      */
@@ -116,21 +124,31 @@ public class SnakeManager extends SavedData {
         if (!(state.getBlock() instanceof SnakeBlock snakeBlock) || state.getValue(SnakeBlock.SNAKE_STATE) != SnakeBlockState.IDLE) {
             return null;
         }
-        List<BlockPos> body = SnakeChain.body(level, pos);
+        BlockPos head = SnakeChain.head(level, pos);
+        if (head == null || SnakeChain.path(level, head).isEmpty()) {
+            return null;
+        }
+        List<BlockPos> body = SnakeChain.bodyFromHead(level, head);
         if (body.isEmpty()) {
             return null;
         }
 
-        BlockState headState = level.getBlockState(body.getLast());
+        BlockState headState = level.getBlockState(head);
+        Direction startFacing = headState.getValue(SnakeBlock.FACING);
         boolean respawnable = headState.getValue(SnakeBlock.RESPAWNABLE);
-        for (BlockPos blockPos : body) {
+        for (int i = 0; i < body.size(); i++) {
+            BlockPos blockPos = body.get(i);
+            // Every block but the head points at the one in front of it; the head keeps pointing
+            // into its path.
+            Direction facing = i + 1 < body.size() ? MovingSnake.directionBetween(blockPos, body.get(i + 1)) : startFacing;
             level.setBlock(blockPos, level.getBlockState(blockPos)
+                    .setValue(SnakeBlock.FACING, facing)
                     .setValue(SnakeBlock.SNAKE_STATE, SnakeBlockState.MOVING)
                     .setValue(SnakeBlock.RESPAWNABLE, respawnable), Block.UPDATE_ALL);
         }
 
         MovingSnake snake = new MovingSnake(this.nextId++, snakeBlock.speed(), respawnable, body, body,
-                headState.getValue(SnakeBlock.FACING), SnakePhase.MOVING, 0, Optional.empty());
+                startFacing, SnakePhase.MOVING, 0, Optional.empty());
         this.snakes.add(snake);
         this.setDirty();
         return snake;

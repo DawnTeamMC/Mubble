@@ -104,8 +104,9 @@ public class SuperMarioModelProvider extends FabricModelProvider {
     }
 
     /**
-     * A snake block turns with the chain it belongs to, so its model follows {@link SnakeBlock#FACING}
-     * the way a log follows its axis, and swaps for a grayed-out one once the block is knocked out.
+     * A snake block never turns. Its shape comes from the blocks it is laid next to, not from a
+     * facing, so showing one would only tell the player about a link they cannot change and do not
+     * need to see. The one thing the model does say is whether the block has been knocked out.
      */
     private static void registerSnakeBlock(BlockModelGenerators gen, Block block, String variant) {
         MultiVariant normal = plainVariant(SuperMarioTexturedModels.snakeBlock(variant).create(block, gen.modelOutput));
@@ -115,8 +116,7 @@ public class SuperMarioModelProvider extends FabricModelProvider {
                 .with(PropertyDispatch.initial(SnakeBlock.SNAKE_STATE)
                         .select(SnakeBlockState.IDLE, normal)
                         .select(SnakeBlockState.MOVING, normal)
-                        .select(SnakeBlockState.DEACTIVATED, deactivated))
-                .with(BlockModelGenerators.ROTATIONS_COLUMN_WITH_FACING));
+                        .select(SnakeBlockState.DEACTIVATED, deactivated)));
     }
 
     private static void registerSnakePath(BlockModelGenerators gen) {
