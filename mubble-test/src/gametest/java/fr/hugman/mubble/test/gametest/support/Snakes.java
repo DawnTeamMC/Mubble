@@ -20,31 +20,44 @@ import net.minecraft.world.phys.Vec3;
 /**
  * Building snakes for the tests to take apart.
  * <p>
- * Everything here works in the structure-relative coordinates the tests use, and goes through the
- * same chain the game does — a snake is nothing but blocks pointing at each other, so a test that
- * hand-places the whole thing is testing the same world an in-game one would.
+ * Everything here works in the structure-relative coordinates the tests use, and lays the blocks out
+ * the way a player would: a snake is a clump of blocks touching each other, so a test that drops
+ * them in place is testing the same world an in-game one would.
+ * <p>
+ * The blocks are deliberately laid down all facing {@link Direction#DOWN}, into the floor. Nothing
+ * reads a snake block's facing except the head, where it points into the path, so a test that passes
+ * with every block pointing the wrong way is a test that the shape really does come from which
+ * blocks touch.
  */
 public final class Snakes {
     private Snakes() {
     }
 
     /**
-     * Lays a straight idle snake of {@code length} blocks, its tail at {@code tail} and every block
-     * pointing {@code direction}.
+     * Lays {@code length} blocks in a straight line, from {@code tail} towards {@code direction}.
      *
-     * @return where the head ended up
+     * @return the far end of the line, which is where a path would normally be drawn from
      */
     public static BlockPos build(GameTestHelper helper, Block block, BlockPos tail, Direction direction, int length) {
         BlockPos pos = tail;
         for (int i = 0; i < length; i++) {
-            helper.setBlock(pos, block.defaultBlockState().setValue(SnakeBlock.FACING, direction));
+            place(helper, block, pos);
             pos = pos.relative(direction);
         }
         return tail.relative(direction, length - 1);
     }
 
-    /** Draws a straight path of {@code length} blocks out of the face {@code head} points at. */
+    /** Lays one snake block, pointing nowhere in particular. */
+    public static void place(GameTestHelper helper, Block block, BlockPos pos) {
+        helper.setBlock(pos, block.defaultBlockState().setValue(SnakeBlock.FACING, Direction.DOWN));
+    }
+
+    /**
+     * Draws a straight path of {@code length} blocks out of the {@code direction} face of
+     * {@code head}, and points the head into it, which is what makes the clump a snake.
+     */
     public static void drawPath(GameTestHelper helper, BlockPos head, Direction direction, int length) {
+        helper.setBlock(head, helper.getBlockState(head).setValue(SnakeBlock.FACING, direction));
         BlockPos pos = head.relative(direction);
         for (int i = 0; i < length; i++) {
             helper.setBlock(pos, SuperMarioBlocks.SNAKE_PATH.defaultBlockState().setValue(SnakePathBlock.FACING, direction));

@@ -31,17 +31,25 @@ import org.jetbrains.annotations.Nullable;
  * A snake block: one link of a chain that, once a player steps on it, walks the path drawn in front
  * of its head one block at a time, growing at the head and shrinking at the tail.
  * <p>
- * While the snake is {@link SnakeBlockState#IDLE} it is nothing more than the blocks themselves —
- * {@link SnakeChain} reads the chain out of the world through {@link #FACING}. The moment it starts,
- * {@link SnakeManager} takes over and drives it from a record of its own, and the blocks only carry
- * the state the renderer and the player can see.
+ * While the snake is {@link SnakeBlockState#IDLE} it is nothing more than the blocks themselves,
+ * touching each other in whatever shape they were laid out: they carry no orientation a player can
+ * see, and {@link SnakeChain} reads the body off the blocks that touch. The moment it starts,
+ * {@link SnakeManager} takes over and drives it from a record of its own.
+ * <p>
+ * {@link #FACING} is not that orientation. It is only ever read on the head, where it says which way
+ * the path goes, and {@link SnakeManager} writes the rest of the chain into it as the snake starts so
+ * that the running snake has an order to it. Nothing about it shows in the model.
  *
  * @author komerish
  * @author Hugman
  * @since v4.0.0
  */
 public class SnakeBlock extends Block implements Fallable {
-    /** The next block of the chain: the one closer to the head, then the path in front of it. */
+    /**
+     * Where this block links on: the way into the path for a head, and the next block along for the
+     * rest of a snake that is already running. It is never drawn, and means nothing on an idle block
+     * that no path was drawn from.
+     */
     public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
     public static final EnumProperty<SnakeBlockState> SNAKE_STATE = EnumProperty.create("snake_state", SnakeBlockState.class);
     /**
@@ -81,39 +89,20 @@ public class SnakeBlock extends Block implements Fallable {
     /*=============*/
 
     /**
-     * Points the fresh block at the tail it is lengthening, or away from whatever it was placed
-     * against when it is a snake of its own.
+     * A snake block is laid down the same way round whichever face it was placed against: the shape
+     * of a snake is the shape the blocks were laid out in, not the order they were placed in.
      * <p>
-     * A block only joins the snake behind it when it is the very same one — speeds never mix — when
-     * that snake is still idle, when the clicked face really is its back, and when there is room left
-     * under {@link SnakeChain#MAX_BODY_LENGTH}. Anything else starts a snake one block long.
+     * All the state carries is a default link direction, which means nothing until a path is drawn
+     * off this block, and whether the block it was placed against comes back — so that a respawnable
+     * snake stays respawnable as it is built.
      */
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         Direction face = ctx.getClickedFace();
         BlockState base = this.defaultBlockState().setValue(FACING, face);
-        BlockPos against = ctx.getClickedPos().relative(face.getOpposite());
-        BlockState againstState = ctx.getLevel().getBlockState(against);
-
-        if (!this.extendsTail(ctx.getLevel(), against, againstState, face)) {
-            return base;
-        }
-        return base.setValue(FACING, face.getOpposite())
-                .setValue(RESPAWNABLE, againstState.getValue(RESPAWNABLE));
-    }
-
-    private boolean extendsTail(Level level, BlockPos against, BlockState againstState, Direction face) {
-        if (!SnakeChain.isLink(againstState, this, SnakeBlockState.IDLE)) {
-            return false;
-        }
-        // The back of the tail is the face opposite the one it points at, and a tail is a block with
-        // nothing of its own chain pointing at it.
-        if (againstState.getValue(FACING) != face.getOpposite()
-                || SnakeChain.predecessor(level, against, this, SnakeBlockState.IDLE) != null) {
-            return false;
-        }
-        return SnakeChain.body(level, against).size() < SnakeChain.MAX_BODY_LENGTH;
+        BlockState againstState = ctx.getLevel().getBlockState(ctx.getClickedPos().relative(face.getOpposite()));
+        return againstState.is(this) ? base.setValue(RESPAWNABLE, againstState.getValue(RESPAWNABLE)) : base;
     }
 
     /*========*/
@@ -121,17 +110,20 @@ public class SnakeBlock extends Block implements Fallable {
     /*========*/
 
     /**
-     * Draws the first block of the path when the head is clicked with a snake block in hand, rather
-     * than placing that block against it.
+     * Starts the path off this block when it is clicked with a snake block in hand, rather than
+     * placing that block against it. Whichever block the path is drawn from becomes the head.
+     * <p>
+     * Only a clump with no path yet answers: once one has been drawn, clicking a snake block places
+     * another and the path carries on from its own last block instead. To stack blocks against each
+     * other before there is a path, sneak — vanilla already takes that to mean "place it, do not use
+     * what I clicked".
      */
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (!stack.is(SuperMarioItemTags.SNAKE_BLOCKS) || state.getValue(SNAKE_STATE) != SnakeBlockState.IDLE) {
             return InteractionResult.PASS;
         }
-        // Only the head starts a path, and only while it has none: once there is one, the player
-        // carries on from its last block instead.
-        if (!pos.equals(SnakeChain.headOf(level, pos)) || !SnakeChain.path(level, pos).isEmpty()) {
+        if (SnakeChain.head(level, pos) != null) {
             return InteractionResult.PASS;
         }
         return SnakePathBlock.extendPath(level, player, pos, hit.getDirection());

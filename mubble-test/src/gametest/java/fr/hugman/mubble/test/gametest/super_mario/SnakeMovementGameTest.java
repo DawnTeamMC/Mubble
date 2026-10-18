@@ -241,6 +241,42 @@ public class SnakeMovementGameTest {
     }
 
     /**
+     * A snake rising under something carries it straight up, and never sideways.
+     * <p>
+     * Getting this wrong is not subtle. Vanilla answers an entity caught inside a solid block by
+     * shoving it out of the nearest side and overwriting its horizontal speed as it does, so a head
+     * that leaves whatever stands on it even slightly inside itself throws that thing off the snake
+     * and takes its momentum with it. The collider therefore has to sit where the block is this
+     * tick, not where it is being drawn, which trails by up to a tick.
+     */
+    @GameTest(maxTicks = 80)
+    public void arisingSnakeCarriesWhatStandsOnItStraightUp(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Snakes.build(helper, SuperMarioBlocks.FAST_SNAKE_BLOCK, TAIL, Direction.UP, 1);
+        Snakes.drawPath(helper, TAIL, Direction.UP, 3);
+        var cow = helper.spawnWithNoFreeWill(EntityTypes.COW, TAIL.above());
+        double[] origin = new double[3];
+
+        helper.startSequence()
+                // Let it settle onto the block before anything starts moving.
+                .thenIdle(4)
+                .thenExecute(() -> {
+                    origin[0] = cow.getX();
+                    origin[1] = cow.getY();
+                    origin[2] = cow.getZ();
+                    start(helper, TAIL);
+                })
+                .thenIdle(FAST_STEP * 2 + 2)
+                .thenExecute(() -> {
+                    helper.assertTrue(cow.getY() > origin[1] + 1.5D,
+                            "a rising snake should have carried what stands on it up with it");
+                    helper.assertTrue(Math.abs(cow.getX() - origin[0]) < 0.1D && Math.abs(cow.getZ() - origin[2]) < 0.1D,
+                            "and should never have shoved it out sideways");
+                })
+                .thenSucceed();
+    }
+
+    /**
      * With nowhere left to be shoved, the thing in the way gets crushed instead of pushed through.
      * <p>
      * A cow rather than a player: the only player a game test can make is in creative, and nothing
