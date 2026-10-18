@@ -36,6 +36,9 @@ public class ZeldaEnglishLangProvider extends FabricLanguageProvider {
         builder.add(ZeldaSounds.LOFTWING_CALL, "Loftwing calls for its owner");
         builder.add(ZeldaSounds.LOFTWING_BOND, "Loftwing picks its owner");
         builder.add(ZeldaSounds.LOFTWING_CRASH, "Loftwing crashes");
+        builder.add(ZeldaSounds.LOFTWING_WHISTLE, "Whistle blows");
+
+        builder.add("item." + Zelda.MOD_ID + ".loftwing_whistle.no_answer", "No loftwing answers");
 
         builder.add("death.attack." + Zelda.MOD_ID + ".loftwing_crash", "%1$s flew into a wall");
         builder.add("death.attack." + Zelda.MOD_ID + ".loftwing_crash.entity", "%1$s was flown into a wall by %2$s");

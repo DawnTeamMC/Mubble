@@ -29,6 +29,7 @@ public class ZeldaSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(ZeldaSounds.LOFTWING_CALL, soundBuilder(ZeldaSounds.LOFTWING_CALL));
         soundExporter.add(ZeldaSounds.LOFTWING_BOND, soundBuilder(ZeldaSounds.LOFTWING_BOND));
         soundExporter.add(ZeldaSounds.LOFTWING_CRASH, soundBuilder(ZeldaSounds.LOFTWING_CRASH));
+        soundExporter.add(ZeldaSounds.LOFTWING_WHISTLE, soundBuilder(ZeldaSounds.LOFTWING_WHISTLE));
         soundExporter.add(ZeldaSounds.LOFTWING_STEP, soundBuilder(ZeldaSounds.LOFTWING_STEP).subtitle("subtitles.block.generic.footsteps"));
     }
 

@@ -18,6 +18,9 @@ import net.minecraft.world.item.equipment.Equippable;
 import java.util.function.Function;
 
 public class ZeldaItems {
+	/** Blown anywhere, it brings your loftwing to you, falling or not. */
+	public static final LoftwingWhistleItem LOFTWING_WHISTLE = register(ZeldaItemIds.LOFTWING_WHISTLE, LoftwingWhistleItem::new, new Item.Properties().stacksTo(1));
+
 	/** Four leads knotted into a harness: without one, a loftwing carries nobody. */
 	public static final Item LOFTWING_BELT = register(ZeldaItemIds.LOFTWING_BELT, new Item.Properties()
 			.stacksTo(1)

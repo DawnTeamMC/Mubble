@@ -17,6 +17,7 @@ public class ZeldaSounds {
     public static final SoundEvent LOFTWING_CALL = register("entity.loftwing.call");
     public static final SoundEvent LOFTWING_BOND = register("entity.loftwing.bond");
     public static final SoundEvent LOFTWING_CRASH = register("entity.loftwing.crash");
+    public static final SoundEvent LOFTWING_WHISTLE = register("item.loftwing_whistle.blow");
 
     private static SoundEvent register(String name) {
         Identifier id = Zelda.id(name);

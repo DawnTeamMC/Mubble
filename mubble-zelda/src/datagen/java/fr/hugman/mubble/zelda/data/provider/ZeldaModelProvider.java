@@ -18,6 +18,7 @@ public class ZeldaModelProvider extends FabricModelProvider {
 
     @Override
     public void generateItemModels(ItemModelGenerators gen) {
+        gen.generateFlatItem(ZeldaItems.LOFTWING_WHISTLE, ModelTemplates.FLAT_ITEM);
         gen.generateFlatItem(ZeldaItems.LOFTWING_BELT, ModelTemplates.FLAT_ITEM);
         gen.generateFlatItem(ZeldaItems.LEATHER_LOFTWING_HELMET, ModelTemplates.FLAT_ITEM);
         gen.generateFlatItem(ZeldaItems.GOLDEN_LOFTWING_HELMET, ModelTemplates.FLAT_ITEM);

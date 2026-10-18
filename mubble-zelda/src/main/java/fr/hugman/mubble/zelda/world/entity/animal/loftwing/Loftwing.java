@@ -7,6 +7,7 @@ import fr.hugman.mubble.zelda.references.LoftwingVariantIds;
 import fr.hugman.mubble.zelda.references.ZeldaDamageTypeIds;
 import fr.hugman.mubble.zelda.sounds.ZeldaSounds;
 import fr.hugman.mubble.zelda.world.entity.ZeldaEntityTypes;
+import fr.hugman.mubble.zelda.world.item.ZeldaItems;
 import fr.hugman.mubble.zelda.world.item.component.LoftwingHelmetComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -109,6 +110,9 @@ public class Loftwing extends TamableAnimal {
 	/** How far a rider may have drifted and still be put back in the saddle. */
 	private static final double CLING_RANGE_SQR = 16.0;
 
+	/** How long a bird keeps flying towards a whistle before it gives up on finding its owner. */
+	private static final int CALL_TICKS = 600;
+
 	public final AnimationState flapAnimationState = new AnimationState();
 	public final AnimationState roostAnimationState = new AnimationState();
 	public final AnimationState preenAnimationState = new AnimationState();
@@ -125,6 +129,11 @@ public class Loftwing extends TamableAnimal {
 	/** Someone who tried to get off mid-flight and is about to find themselves back in the saddle. */
 	@Nullable
 	private LivingEntity clingingRider;
+
+	/** The owner who last blew the whistle, and how long the bird keeps looking for them. */
+	@Nullable
+	private Player caller;
+	private int callTicks;
 
 	public Loftwing(EntityType<? extends Loftwing> type, Level level) {
 		super(type, level);
@@ -147,6 +156,7 @@ public class Loftwing extends TamableAnimal {
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
+		this.goalSelector.addGoal(0, new LoftwingAnswerCallGoal(this));
 		this.goalSelector.addGoal(1, new LoftwingPanicGoal(this, 1.25));
 		// The errands that take a loftwing below the clouds, in the order it drops everything for them.
 		this.goalSelector.addGoal(2, new LoftwingRoostGoal(this));
@@ -376,6 +386,9 @@ public class Loftwing extends TamableAnimal {
 		if (!this.horizontalCollision || this.getDeltaMovement().horizontalDistance() < LoftwingFlight.CRASH_SPEED) {
 			return;
 		}
+		if (!(this.level() instanceof ServerLevel level)) {
+			return;
+		}
 		DamageSource source = this.damageSources().source(ZeldaDamageTypeIds.LOFTWING_CRASH, this);
 		Vec3 recoil = this.getLookAngle().scale(-LoftwingFlight.CRASH_EJECT_SPEED).add(0.0, LoftwingFlight.CRASH_EJECT_SPEED, 0.0);
 
@@ -384,11 +397,11 @@ public class Loftwing extends TamableAnimal {
 		rider.stopRiding();
 		this.clingingRider = null;
 		rider.push(recoil.x(), recoil.y(), recoil.z());
-		rider.hurt(source, LoftwingFlight.CRASH_DAMAGE_TO_RIDER);
+		rider.hurtServer(level, source, LoftwingFlight.CRASH_DAMAGE_TO_RIDER);
 
 		float padded = LoftwingFlight.CRASH_DAMAGE_TO_LOFTWING - this.getHelmetSettings().crashProtection();
 		if (padded > 0.0F) {
-			this.hurt(source, padded);
+			this.hurtServer(level, source, padded);
 		}
 	}
 
@@ -438,6 +451,9 @@ public class Loftwing extends TamableAnimal {
 			this.setNoGravity(false);
 			this.dashTicks = 0;
 		}
+		if (this.caller != null && --this.callTicks <= 0) {
+			this.clearCall();
+		}
 		if (!this.isTame() && --this.bondCooldown <= 0) {
 			this.bondCooldown = BOND_INTERVAL;
 			this.lookForSomeoneToBondWith();
@@ -462,8 +478,44 @@ public class Loftwing extends TamableAnimal {
 		return player.isAlive() && !player.isSpectator() && !this.hasRejected(player);
 	}
 
+	/**
+	 * Whistling is the bird's own call, and it teaches it to the person it picked. Losing the
+	 * whistle is no disaster: one can be made again.
+	 */
+	private void giveWhistle(Player player) {
+		if (!player.getInventory().contains(stack -> stack.is(ZeldaItems.LOFTWING_WHISTLE))) {
+			player.getInventory().placeItemBackInInventory(new ItemStack(ZeldaItems.LOFTWING_WHISTLE));
+		}
+	}
+
+	// ANSWERING THE WHISTLE
+
+	/** Whether this bird is in any state to come when called. */
+	public boolean answerCall(Player player) {
+		if (!this.isOwnedBy(player) || this.isLeashed() || this.isVehicle() || this.isBaby()) {
+			return false;
+		}
+		this.caller = player;
+		this.callTicks = CALL_TICKS;
+		this.setOrderedToSit(false);
+		this.setRoosting(false);
+		this.playSound(ZeldaSounds.LOFTWING_CALL, 2.0F, 1.0F);
+		return true;
+	}
+
+	@Nullable
+	public Player getCaller() {
+		return this.caller;
+	}
+
+	public void clearCall() {
+		this.caller = null;
+		this.callTicks = 0;
+	}
+
 	public void bondWith(Player player) {
 		this.tame(player);
+		this.giveWhistle(player);
 		this.setOrderedToSit(false);
 		this.setTarget(null);
 		this.level().broadcastEntityEvent(this, EntityEvent.TAMING_SUCCEEDED);
