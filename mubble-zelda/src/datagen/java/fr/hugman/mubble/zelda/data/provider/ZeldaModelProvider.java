@@ -1,6 +1,7 @@
 package fr.hugman.mubble.zelda.data.provider;
 
 import fr.hugman.mubble.zelda.world.item.ZeldaItems;
+import fr.hugman.mubble.zelda.world.level.block.ZeldaBlocks;
 import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.minecraft.client.data.models.BlockModelGenerators;
@@ -14,6 +15,10 @@ public class ZeldaModelProvider extends FabricModelProvider {
 
     @Override
     public void generateBlockStateModels(BlockModelGenerators gen) {
+        // TODO: placeholder cubes. Replace with a proper egg model once the textures exist.
+        gen.createTrivialCube(ZeldaBlocks.LOFTWING_EGG);
+        gen.createTrivialCube(ZeldaBlocks.CRACKED_LOFTWING_EGG);
+        gen.createTrivialCube(ZeldaBlocks.HATCHING_LOFTWING_EGG);
     }
 
     @Override

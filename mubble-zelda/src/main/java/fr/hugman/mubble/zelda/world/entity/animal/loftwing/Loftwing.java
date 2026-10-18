@@ -8,6 +8,7 @@ import fr.hugman.mubble.zelda.references.ZeldaDamageTypeIds;
 import fr.hugman.mubble.zelda.sounds.ZeldaSounds;
 import fr.hugman.mubble.zelda.world.entity.ZeldaEntityTypes;
 import fr.hugman.mubble.zelda.world.item.ZeldaItems;
+import fr.hugman.mubble.zelda.world.level.block.ZeldaBlocks;
 import fr.hugman.mubble.zelda.world.item.component.LoftwingHelmetComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -22,6 +23,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -42,6 +44,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
@@ -618,9 +621,25 @@ public class Loftwing extends TamableAnimal {
 		return stack.is(ZeldaItems.MUSHROOM_SPORES_BOTTLE);
 	}
 
+	/**
+	 * Loftwings are birds: a pair does not produce a chick on the spot, it leaves an egg behind,
+	 * and the egg takes the best part of a month to come to anything.
+	 */
+	@Override
+	public void spawnChildFromBreeding(ServerLevel level, Animal mate) {
+		BlockPos nest = this.blockPosition();
+		if (level.getBlockState(nest).canBeReplaced() && ZeldaBlocks.LOFTWING_EGG.defaultBlockState().canSurvive(level, nest)) {
+			level.setBlockAndUpdate(nest, ZeldaBlocks.LOFTWING_EGG.defaultBlockState());
+			level.playSound(null, nest, ZeldaSounds.LOFTWING_EGG_CRACK, SoundSource.BLOCKS, 1.0F, 1.0F);
+		}
+		this.finalizeSpawnChildFromBreeding(level, mate, null);
+	}
+
 	@Nullable
 	@Override
 	public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob mate) {
+		// Never called in practice: the pair lays an egg instead. Here for anything that breeds
+		// loftwings through another path, such as a command or another mod.
 		Loftwing chick = ZeldaEntityTypes.LOFTWING.create(level, EntitySpawnReason.BREEDING);
 		if (chick != null) {
 			chick.setVariant(this.getVariant());

@@ -9,6 +9,7 @@ import fr.hugman.mubble.zelda.world.entity.ZeldaEntityTypes;
 import fr.hugman.mubble.zelda.world.item.ZeldaCreativeModeTabs;
 import fr.hugman.mubble.zelda.world.item.ZeldaItems;
 import fr.hugman.mubble.zelda.world.level.biome.ZeldaBiomeModifications;
+import fr.hugman.mubble.zelda.world.level.block.ZeldaBlocks;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +24,7 @@ public class Zelda implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        Reflection.initialize(ZeldaBlocks.class);
         Reflection.initialize(ZeldaEntityDataSerializers.class);
         Reflection.initialize(ZeldaEntityTypes.class);
         Reflection.initialize(ZeldaDataComponents.class);
