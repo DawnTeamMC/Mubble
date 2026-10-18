@@ -33,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
 	public static final int BUMP_LENGTH = SharedConstants.TICKS_PER_SECOND / 4;
 	public static final int BUMP_MIDDLE_TICK = BUMP_LENGTH / 2;
+	private static final int BUMP_EVENT = 1;
 
     private static final String BUMPED_STATE_KEY = "bumped_state";
     private static final String DROP_MODE_KEY = "drop_mode";
@@ -120,6 +121,9 @@ public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
 
         this.dropMode = view.read(DROP_MODE_KEY, BumpableDropMode.CODEC).orElse(BumpableDropMode.ALL);
 		this.bumpTicks = view.getIntOr(BUMP_TICKS_KEY, 0);
+		// The flag itself is not saved: a bump in progress always has ticks behind it once it has ticked.
+		// Left off, a block saved on its middle tick would replay onBumpMiddle on every tick after loading.
+		this.bumping = this.bumpTicks > 0;
 		view.read(BUMP_DIRECTION_KEY, Direction.LEGACY_ID_CODEC).ifPresent(this::setBumpDirection);
 		this.bumpAuthor = EntityReference.read(view, BUMP_AUTHOR_KEY);
     }
@@ -232,25 +236,36 @@ public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
     /*============*/
 
 	public boolean triggerEvent(int type, int data) {
-		if (type == 1) {
-			this.bumping = true;
-			this.bumpTicks = 0;
-			this.bumpDirection = Direction.from3DDataValue(data);
+		if (type == BUMP_EVENT) {
+			// The server already started the bump in bump(): the event is only there to start it on clients.
+			if (this.level == null || this.level.isClientSide()) {
+				this.startBump(Direction.from3DDataValue(data));
+			}
 			return true;
 		} else {
 			return super.triggerEvent(type, data);
 		}
 	}
 
+	private void startBump(Direction direction) {
+		this.bumping = true;
+		this.bumpTicks = 0;
+		this.bumpDirection = direction;
+	}
+
     /**
      * Bumps the block.
+     * <p>
+     * The bump starts right away on the server, so that the hooks called after this one see the new direction
+     * and any further hit in the same tick is turned down; the block event only replays it on clients.
      *
      * @param direction the direction of the bump
      * @param entity    the entity that bumped the block
      */
     public void bump(BlockPos pos, Entity entity, Direction direction) {
 		if(this.level == null || this.level.isClientSide()) return;
-		this.level.blockEvent(pos, this.getBlockState().getBlock(), 1, direction.get3DDataValue());
+		this.startBump(direction);
+		this.level.blockEvent(pos, this.getBlockState().getBlock(), BUMP_EVENT, direction.get3DDataValue());
 		this.setBumpAuthor(entity);
 		this.setChanged();
     }
@@ -260,13 +275,13 @@ public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
 			this.bumpTicks++;
 		}
 
-		if (this.bumpTicks == BUMP_MIDDLE_TICK) {
+		if (this.bumping && this.bumpTicks == BUMP_MIDDLE_TICK) {
 			if (state.getBlock() instanceof BumpableBlock bumpable) {
 				bumpable.onBumpMiddle(level, pos, state, this);
 			}
 		}
 
-		if (this.bumpTicks >= BUMP_LENGTH) {
+		if (this.bumping && this.bumpTicks >= BUMP_LENGTH) {
 			if (state.getBlock() instanceof BumpableBlock bumpable) {
 				this.bumping = false;
 				this.bumpTicks = 0;
