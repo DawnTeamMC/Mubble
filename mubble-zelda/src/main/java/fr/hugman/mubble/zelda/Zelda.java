@@ -1,5 +1,14 @@
 package fr.hugman.mubble.zelda;
 
+import com.google.common.reflect.Reflection;
+import fr.hugman.mubble.zelda.core.component.ZeldaDataComponents;
+import fr.hugman.mubble.zelda.core.registries.ZeldaBuiltInRegistries;
+import fr.hugman.mubble.zelda.network.syncher.ZeldaEntityDataSerializers;
+import fr.hugman.mubble.zelda.sounds.ZeldaSounds;
+import fr.hugman.mubble.zelda.world.entity.ZeldaEntityTypes;
+import fr.hugman.mubble.zelda.world.item.ZeldaCreativeModeTabs;
+import fr.hugman.mubble.zelda.world.item.ZeldaItems;
+import fr.hugman.mubble.zelda.world.level.biome.ZeldaBiomeModifications;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.resources.Identifier;
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +23,20 @@ public class Zelda implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        Reflection.initialize(ZeldaEntityDataSerializers.class);
+        Reflection.initialize(ZeldaEntityTypes.class);
+        Reflection.initialize(ZeldaDataComponents.class);
+        Reflection.initialize(ZeldaItems.class);
+        Reflection.initialize(ZeldaSounds.class);
+
+        ZeldaEntityTypes.registerAttributes();
+        ZeldaEntityTypes.registerSpawnPlacements();
+
+        ZeldaCreativeModeTabs.appendItemGroups();
+
+        ZeldaBuiltInRegistries.register();
+
+        ZeldaBiomeModifications.register();
     }
 
     public static Identifier id(String path) {
