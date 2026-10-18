@@ -20,6 +20,9 @@ public class AvatarRendererMixin {
             if (powerUp.get().is(SuperMarioPowerUpIds.GOLD)) {
                 return SuperMarioRenderTypes.getGoldenEntity(texture);
             }
+            if (powerUp.get().is(SuperMarioPowerUpIds.SUPERBALL)) {
+                return SuperMarioRenderTypes.getSuperMarioLandEntity(texture);
+            }
         }
         return RenderTypes.entityTranslucent(texture);
     }
