@@ -6,7 +6,8 @@
     "ClientPacketListenerMixin",
     "HumanoidMobRendererMixin",
     "LivingEntityRendererMixin",
-    "AvatarRendererMixin"
+    "AvatarRendererMixin",
+    "ItemInHandRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
