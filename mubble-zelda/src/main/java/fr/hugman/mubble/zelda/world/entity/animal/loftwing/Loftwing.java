@@ -8,6 +8,7 @@ import fr.hugman.mubble.zelda.sounds.ZeldaSounds;
 import fr.hugman.mubble.zelda.world.entity.ZeldaEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
@@ -19,10 +20,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
@@ -34,6 +38,7 @@ import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.player.Player;
@@ -45,6 +50,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * The giant bird the people of Skyloft ride. It lives above the clouds and, unlike every other
@@ -72,11 +81,26 @@ public class Loftwing extends TamableAnimal {
 	/** How long a loftwing keeps shaking the water off after a dip. */
 	private static final int DRYING_TICKS = 300;
 
+	/** How far a loftwing will size someone up from. */
+	private static final double BOND_RANGE = 8.0;
+	/** How often it makes up its mind about the people around it. */
+	private static final int BOND_INTERVAL = 20;
+	/** One meeting in four ends in a bond; the other three end in a refusal that sticks. */
+	private static final int BOND_CHANCE = 4;
+	/** How many refusals it keeps in mind, oldest forgotten first, so the save data stays bounded. */
+	public static final int REJECTED_MEMORY = 32;
+
+	private static final String REJECTED_KEY = "rejected_players";
+
 	public final AnimationState flapAnimationState = new AnimationState();
 	public final AnimationState roostAnimationState = new AnimationState();
 	public final AnimationState preenAnimationState = new AnimationState();
 
 	private int dryingTicks;
+
+	/** Everyone this bird has already turned down. Insertion order is what makes the cap a queue. */
+	private final Set<UUID> rejectedPlayers = new LinkedHashSet<>();
+	private int bondCooldown;
 
 	public Loftwing(EntityType<? extends Loftwing> type, Level level) {
 		super(type, level);
@@ -106,6 +130,11 @@ public class Loftwing extends TamableAnimal {
 		this.goalSelector.addGoal(6, new LoftwingSoarGoal(this));
 		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 10.0F));
 		this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
+
+		// It defends itself and nothing else: it never joins a fight its owner picked.
+		this.goalSelector.addGoal(2, new LoftwingWingFlapGoal(this));
+		this.goalSelector.addGoal(5, new LoftwingLostGoal(this));
+		this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
 	}
 
 	@Override
@@ -146,11 +175,84 @@ public class Loftwing extends TamableAnimal {
 
 	/** Whether this loftwing would fly down to take a closer look at {@code player}. */
 	public boolean isCuriousAbout(Player player) {
-		return !this.isOwnedBy(player) && !player.isSpectator();
+		return !this.isOwnedBy(player) && !player.isSpectator() && !this.hasRejected(player);
 	}
 
 	public boolean isDrying() {
 		return this.dryingTicks > 0;
+	}
+
+	// THE BOND
+
+	@Override
+	public void tick() {
+		super.tick();
+		if (!this.level().isClientSide() && !this.isTame() && --this.bondCooldown <= 0) {
+			this.bondCooldown = BOND_INTERVAL;
+			this.lookForSomeoneToBondWith();
+		}
+	}
+
+	/**
+	 * Nobody tames a loftwing. The bird sizes up whoever comes near, and either takes to them on
+	 * the spot or turns them down for good: there is no feeding it until it gives in.
+	 */
+	private void lookForSomeoneToBondWith() {
+		for (Player player : this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(BOND_RANGE), this::mayJudge)) {
+			if (this.random.nextInt(BOND_CHANCE) == 0) {
+				this.bondWith(player);
+				return;
+			}
+			this.reject(player);
+		}
+	}
+
+	private boolean mayJudge(Player player) {
+		return player.isAlive() && !player.isSpectator() && !this.hasRejected(player);
+	}
+
+	public void bondWith(Player player) {
+		this.tame(player);
+		this.setOrderedToSit(false);
+		this.setTarget(null);
+		this.level().broadcastEntityEvent(this, EntityEvent.TAMING_SUCCEEDED);
+		this.playSound(ZeldaSounds.LOFTWING_BOND, 1.0F, 1.0F);
+	}
+
+	/** Turns a player down, and remembers it. The oldest refusal is forgotten to keep the list short. */
+	public void reject(Player player) {
+		this.rejectedPlayers.add(player.getUUID());
+		var refusals = this.rejectedPlayers.iterator();
+		while (this.rejectedPlayers.size() > REJECTED_MEMORY && refusals.hasNext()) {
+			refusals.next();
+			refusals.remove();
+		}
+		this.level().broadcastEntityEvent(this, EntityEvent.TAMING_FAILED);
+	}
+
+	public boolean hasRejected(Player player) {
+		return this.rejectedPlayers.contains(player.getUUID());
+	}
+
+	/** A loftwing that has lost its owner calls out for them. It never blinks across the world. */
+	@Override
+	public boolean shouldTryTeleportToOwner() {
+		return false;
+	}
+
+	@Override
+	public InteractionResult mobInteract(Player player, InteractionHand hand) {
+		InteractionResult result = super.mobInteract(player, hand);
+		if (result.consumesAction() || !this.isOwnedBy(player)) {
+			return result;
+		}
+		if (!this.level().isClientSide()) {
+			this.setOrderedToSit(!this.isOrderedToSit());
+			this.jumping = false;
+			this.getNavigation().stop();
+			this.setTarget(null);
+		}
+		return InteractionResult.SUCCESS;
 	}
 
 	// SHAPE
@@ -344,11 +446,16 @@ public class Loftwing extends TamableAnimal {
 	protected void addAdditionalSaveData(ValueOutput output) {
 		super.addAdditionalSaveData(output);
 		VariantUtils.writeVariant(output, this.getVariant());
+		if (!this.rejectedPlayers.isEmpty()) {
+			output.store(REJECTED_KEY, UUIDUtil.CODEC_LINKED_SET, this.rejectedPlayers);
+		}
 	}
 
 	@Override
 	protected void readAdditionalSaveData(ValueInput input) {
 		super.readAdditionalSaveData(input);
 		VariantUtils.readVariant(input, ZeldaRegistries.LOFTWING_VARIANT).ifPresent(this::setVariant);
+		this.rejectedPlayers.clear();
+		input.read(REJECTED_KEY, UUIDUtil.CODEC_LINKED_SET).ifPresent(this.rejectedPlayers::addAll);
 	}
 }
