@@ -3,6 +3,7 @@ package fr.hugman.mubble.zelda.data;
 import fr.hugman.mubble.zelda.Zelda;
 import fr.hugman.mubble.zelda.core.registries.ZeldaRegistries;
 import fr.hugman.mubble.zelda.data.provider.ZeldaEnglishLangProvider;
+import fr.hugman.mubble.zelda.data.provider.ZeldaGameplayLootSubProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaLoftwingVariantProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaModelProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaSoundsProvider;
@@ -22,6 +23,7 @@ public class ZeldaDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ZeldaEnglishLangProvider::new);
 
 		// Data Pack
+		pack.addProvider(ZeldaGameplayLootSubProvider::new);
 		pack.addProvider(ZeldaLoftwingVariantProvider::new);
 	}
 

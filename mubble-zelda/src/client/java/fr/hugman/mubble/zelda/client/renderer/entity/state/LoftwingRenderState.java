@@ -12,6 +12,10 @@ public class LoftwingRenderState extends LivingEntityRenderState {
     private static final Identifier DEFAULT_TEXTURE = Zelda.id("textures/entity/loftwing/blue.png");
 
     public final AnimationState flapAnimationState = new AnimationState();
+    public final AnimationState roostAnimationState = new AnimationState();
+    public final AnimationState preenAnimationState = new AnimationState();
     public Identifier texture = DEFAULT_TEXTURE;
     public boolean flying = false;
+    public boolean roosting = false;
+    public boolean preening = false;
 }
