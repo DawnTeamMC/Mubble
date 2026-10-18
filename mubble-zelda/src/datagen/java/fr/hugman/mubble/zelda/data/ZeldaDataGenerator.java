@@ -2,6 +2,7 @@ package fr.hugman.mubble.zelda.data;
 
 import fr.hugman.mubble.zelda.Zelda;
 import fr.hugman.mubble.zelda.core.registries.ZeldaRegistries;
+import fr.hugman.mubble.zelda.data.provider.ZeldaBlockLootSubProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaBlockTagsProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaDamageTypeProvider;
 import fr.hugman.mubble.zelda.data.provider.ZeldaEnglishLangProvider;
@@ -29,6 +30,8 @@ public class ZeldaDataGenerator implements DataGeneratorEntrypoint {
 		// Data Pack
 		pack.addProvider(ZeldaDamageTypeProvider::new);
 		pack.addProvider(ZeldaRecipeProvider::new);
+		// - Loot tables
+		pack.addProvider(ZeldaBlockLootSubProvider::new);
 		pack.addProvider(ZeldaGameplayLootSubProvider::new);
 		pack.addProvider(ZeldaLoftwingVariantProvider::new);
 

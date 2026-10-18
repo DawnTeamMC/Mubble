@@ -5,6 +5,7 @@ import fr.hugman.mubble.zelda.core.component.ZeldaDataComponents;
 import fr.hugman.mubble.zelda.core.registries.ZeldaRegistries;
 import fr.hugman.mubble.zelda.references.ZeldaCreativeModeTabIds;
 import fr.hugman.mubble.zelda.world.entity.animal.loftwing.LoftwingVariant;
+import fr.hugman.mubble.zelda.world.level.block.ZeldaBlocks;
 import net.fabricmc.fabric.api.creativetab.v1.CreativeModeTabEvents;
 import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.minecraft.core.Holder;
@@ -39,6 +40,9 @@ public class ZeldaCreativeModeTabs {
 			entries.accept(ZeldaItems.IRON_LOFTWING_HELMET);
 			entries.accept(ZeldaItems.DIAMOND_LOFTWING_HELMET);
 			entries.accept(ZeldaItems.NETHERITE_LOFTWING_HELMET);
+			entries.accept(ZeldaBlocks.LOFTWING_EGG);
+			entries.accept(ZeldaBlocks.CRACKED_LOFTWING_EGG);
+			entries.accept(ZeldaBlocks.HATCHING_LOFTWING_EGG);
 			entries.accept(ZeldaItems.LOFTWING_SPAWN_EGG);
 			entries.getContext().holders()
 					.lookup(ZeldaRegistries.LOFTWING_VARIANT)
