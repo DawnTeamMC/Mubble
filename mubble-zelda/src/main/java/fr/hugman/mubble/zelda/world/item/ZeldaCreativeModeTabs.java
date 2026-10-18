@@ -30,6 +30,7 @@ public class ZeldaCreativeModeTabs {
 
 	public static void appendItemGroups() {
 		CreativeModeTabEvents.modifyOutputEvent(ZeldaCreativeModeTabIds.ZELDA).register(entries -> {
+			entries.accept(ZeldaItems.MUSHROOM_SPORES_BOTTLE);
 			entries.accept(ZeldaItems.LOFTWING_WHISTLE);
 			entries.accept(ZeldaItems.LOFTWING_BELT);
 			entries.accept(ZeldaItems.LEATHER_LOFTWING_HELMET);

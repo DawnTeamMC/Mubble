@@ -45,9 +45,11 @@ import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
@@ -158,6 +160,8 @@ public class Loftwing extends TamableAnimal {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(0, new LoftwingAnswerCallGoal(this));
 		this.goalSelector.addGoal(1, new LoftwingPanicGoal(this, 1.25));
+		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
+		this.goalSelector.addGoal(3, new TemptGoal(this, 1.1, stack -> stack.is(ZeldaItems.MUSHROOM_SPORES_BOTTLE), false));
 		// The errands that take a loftwing below the clouds, in the order it drops everything for them.
 		this.goalSelector.addGoal(2, new LoftwingRoostGoal(this));
 		this.goalSelector.addGoal(3, new LoftwingFishGoal(this));
@@ -608,9 +612,10 @@ public class Loftwing extends TamableAnimal {
 
 	// BREEDING
 
+	/** Mushroom spores, the way Orielle nurses hers back to health in Skyward Sword. */
 	@Override
 	public boolean isFood(ItemStack stack) {
-		return false;
+		return stack.is(ZeldaItems.MUSHROOM_SPORES_BOTTLE);
 	}
 
 	@Nullable
