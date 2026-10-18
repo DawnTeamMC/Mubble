@@ -17,7 +17,7 @@ public class SplashManagerMixin {
 	private void mubble$addExtraSplashes(CallbackInfoReturnable<List<Component>> cir) {
 		List<Component> splashes = new ArrayList<>(cir.getReturnValue());
 		for (String splash : MubbleSplashes.all()) {
-			splashes.add(Component.literal(splash));
+			splashes.add(Component.literal(splash).withStyle(SplashManager.DEFAULT_STYLE));
 		}
 		cir.setReturnValue(splashes);
 	}
