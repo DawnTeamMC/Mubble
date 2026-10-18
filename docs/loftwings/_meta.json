@@ -1,0 +1,22 @@
+{
+  "overview.mdx": {
+    "name": "Overview",
+    "icon": "BookOpen"
+  },
+  "finding.mdx": {
+    "name": "Finding one",
+    "icon": "Binoculars"
+  },
+  "bond.mdx": {
+    "name": "The bond",
+    "icon": "Heart"
+  },
+  "flying.mdx": {
+    "name": "Flying",
+    "icon": "Feather"
+  },
+  "eggs.mdx": {
+    "name": "Eggs",
+    "icon": "Egg"
+  }
+}
