@@ -4,6 +4,7 @@ import fr.hugman.mubble.zelda.core.component.ZeldaDataComponents;
 import fr.hugman.mubble.zelda.core.registries.ZeldaRegistries;
 import fr.hugman.mubble.zelda.network.syncher.ZeldaEntityDataSerializers;
 import fr.hugman.mubble.zelda.references.LoftwingVariantIds;
+import fr.hugman.mubble.zelda.references.ZeldaDamageTypeIds;
 import fr.hugman.mubble.zelda.sounds.ZeldaSounds;
 import fr.hugman.mubble.zelda.world.entity.ZeldaEntityTypes;
 import fr.hugman.mubble.zelda.world.item.component.LoftwingHelmetComponent;
@@ -18,7 +19,9 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
@@ -26,11 +29,15 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityAttachment;
+import net.minecraft.world.entity.EntityAttachments;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.TamableAnimal;
@@ -43,6 +50,7 @@ import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import net.minecraft.world.entity.player.Input;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.item.ItemStack;
@@ -51,6 +59,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashSet;
@@ -62,10 +71,12 @@ import java.util.UUID;
  * tamable animal, it is the one that picks its owner.
  */
 public class Loftwing extends TamableAnimal {
-	/** On the ground, wings folded: tall and narrow. */
-	public static final EntityDimensions STANDING_DIMENSIONS = EntityDimensions.scalable(1.5F, 2.5F).withEyeHeight(2.2F);
-	/** In the air, wings spread: flat and wide, with room for a rider on top. */
-	public static final EntityDimensions FLYING_DIMENSIONS = EntityDimensions.scalable(4.0F, 1.0F).withEyeHeight(0.7F);
+	/** On the ground, wings folded: tall and narrow, with the rider sitting high on its back. */
+	public static final EntityDimensions STANDING_DIMENSIONS = EntityDimensions.scalable(1.5F, 2.5F).withEyeHeight(2.2F)
+			.withAttachments(EntityAttachments.builder().attach(EntityAttachment.PASSENGER, 0.0F, 2.3F, 0.0F));
+	/** In the air, wings spread: flat and wide, the rider lying low over it. */
+	public static final EntityDimensions FLYING_DIMENSIONS = EntityDimensions.scalable(4.0F, 1.0F).withEyeHeight(0.7F)
+			.withAttachments(EntityAttachments.builder().attach(EntityAttachment.PASSENGER, 0.0F, 0.9F, 0.0F));
 	/** Startled, wings beating: as wide as in flight and as tall as on the ground. */
 	public static final EntityDimensions PANICKING_DIMENSIONS = EntityDimensions.scalable(4.0F, 2.5F).withEyeHeight(2.2F);
 
@@ -74,6 +85,7 @@ public class Loftwing extends TamableAnimal {
 
 	private static final EntityDataAccessor<Holder<LoftwingVariant>> VARIANT = SynchedEntityData.defineId(Loftwing.class, ZeldaEntityDataSerializers.LOFTWING_VARIANT);
 	private static final EntityDataAccessor<Byte> LOFTWING_FLAGS = SynchedEntityData.defineId(Loftwing.class, EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Integer> STAMINA = SynchedEntityData.defineId(Loftwing.class, EntityDataSerializers.INT);
 
 	private static final int FLYING_FLAG = 1;
 	private static final int PANICKING_FLAG = 2;
@@ -94,6 +106,9 @@ public class Loftwing extends TamableAnimal {
 
 	private static final String REJECTED_KEY = "rejected_players";
 
+	/** How far a rider may have drifted and still be put back in the saddle. */
+	private static final double CLING_RANGE_SQR = 16.0;
+
 	public final AnimationState flapAnimationState = new AnimationState();
 	public final AnimationState roostAnimationState = new AnimationState();
 	public final AnimationState preenAnimationState = new AnimationState();
@@ -103,6 +118,13 @@ public class Loftwing extends TamableAnimal {
 	/** Everyone this bird has already turned down. Insertion order is what makes the cap a queue. */
 	private final Set<UUID> rejectedPlayers = new LinkedHashSet<>();
 	private int bondCooldown;
+
+	private int dashTicks;
+	private int dashCooldown;
+	private int glideTicks;
+	/** Someone who tried to get off mid-flight and is about to find themselves back in the saddle. */
+	@Nullable
+	private LivingEntity clingingRider;
 
 	public Loftwing(EntityType<? extends Loftwing> type, Level level) {
 		super(type, level);
@@ -169,7 +191,9 @@ public class Loftwing extends TamableAnimal {
 		} else if (this.dryingTicks > 0) {
 			this.dryingTicks--;
 		}
-		if (!this.level().isClientSide()) {
+		// Left to itself a loftwing has its wings out whenever its feet are off the ground; under a
+		// rider, powered flight starts and ends on the jump button instead.
+		if (!this.level().isClientSide() && this.getControllingPassenger() == null) {
 			this.setFlying(!this.onGround() && !this.isInWater());
 		}
 	}
@@ -212,12 +236,209 @@ public class Loftwing extends TamableAnimal {
 		return helmet != null ? helmet : LoftwingHelmetComponent.BAREHEADED;
 	}
 
+	// RIDING
+
+	/** Only its owner, and only with the belt on. Anyone else is just a passenger it ignores. */
+	@Nullable
+	@Override
+	public LivingEntity getControllingPassenger() {
+		return this.hasBelt() && this.getFirstPassenger() instanceof LivingEntity rider && this.isOwnedBy(rider) ? rider : null;
+	}
+
+	@Override
+	public boolean isFlyingVehicle() {
+		return this.isFlying();
+	}
+
+	@Override
+	protected float getRiddenSpeed(Player rider) {
+		return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
+	}
+
+	/**
+	 * On the ground the rider steers like any mount. In the air the bird drives itself: it never
+	 * stops going forward, and the only say the rider has is where to point it.
+	 */
+	@Override
+	protected Vec3 getRiddenInput(Player rider, Vec3 travelVector) {
+		return this.isFlying() ? Vec3.ZERO : new Vec3(rider.xxa * 0.5F, 0.0, rider.zza);
+	}
+
+	@Override
+	protected void tickRidden(Player rider, Vec3 travelVector) {
+		super.tickRidden(rider, travelVector);
+		Input input = rider instanceof ServerPlayer serverRider ? serverRider.getLastClientInput() : Input.EMPTY;
+
+		if (!this.isFlying()) {
+			this.tickOnFoot(rider, input);
+			return;
+		}
+		this.aimWithRider(rider);
+		this.tickDash(input);
+		this.flyForward();
+		this.checkForCrash(rider);
+	}
+
+	/** Walking under the reins, and the second jump that throws the bird into the air. */
+	private void tickOnFoot(Player rider, Input input) {
+		this.setRot(rider.getYRot(), rider.getXRot() * 0.5F);
+		this.yBodyRot = this.getYRot();
+		this.yHeadRot = this.getYRot();
+		if (!input.jump()) {
+			return;
+		}
+		if (this.onGround()) {
+			this.setJumping(true);
+		} else {
+			this.setFlying(true);
+			this.setNoGravity(true);
+			this.playSound(ZeldaSounds.LOFTWING_FLAP, 1.0F, 1.0F);
+		}
+	}
+
+	/** The bird comes round to where the rider is looking, no faster than its helmet allows. */
+	private void aimWithRider(Player rider) {
+		float maxTurn = this.getHelmetSettings().maxTurnPerTick();
+		float yaw = Mth.approachDegrees(this.getYRot(), rider.getYRot(), maxTurn);
+		float pitch = Mth.approachDegrees(this.getXRot(), Mth.clamp(rider.getXRot(), -60.0F, 60.0F), maxTurn);
+		if (this.getStamina() <= 0) {
+			// Out of wingbeats: it can still glide down, but it cannot pull up any more.
+			pitch = Math.max(pitch, 0.0F);
+		}
+		this.setRot(yaw, pitch);
+		this.yBodyRot = yaw;
+		this.yHeadRot = yaw;
+	}
+
+	private void tickDash(Input input) {
+		if (this.dashCooldown > 0) {
+			this.dashCooldown--;
+		}
+		if (this.dashTicks > 0) {
+			this.dashTicks--;
+			return;
+		}
+		if (input.shift() && this.dashCooldown <= 0 && this.getStamina() >= LoftwingFlight.DASH_COST * LoftwingFlight.DASH_TICKS) {
+			this.dashTicks = LoftwingFlight.DASH_TICKS;
+			this.dashCooldown = LoftwingFlight.DASH_COOLDOWN;
+			this.playSound(ZeldaSounds.LOFTWING_FLAP, 1.0F, 1.2F);
+		}
+	}
+
+	/**
+	 * Forward, always, along whatever the bird is pointing at. Climbing costs wingbeats and gliding
+	 * gives them back, so a rider who keeps pulling up eventually has to level out.
+	 */
+	private void flyForward() {
+		Vec3 heading = this.getLookAngle();
+		double speed = this.isDashing() ? LoftwingFlight.DASH_SPEED : LoftwingFlight.CRUISE_SPEED;
+		if (heading.y() > 0.05) {
+			speed *= LoftwingFlight.CLIMB_FACTOR;
+			this.spendStamina(LoftwingFlight.CLIMB_COST);
+		} else if (heading.y() < -0.05) {
+			speed *= LoftwingFlight.DIVE_FACTOR;
+			this.recoverStamina();
+		} else {
+			this.recoverStamina();
+		}
+		if (this.isDashing()) {
+			this.spendStamina(LoftwingFlight.DASH_COST);
+		}
+		this.setDeltaMovement(heading.scale(speed));
+	}
+
+	public boolean isDashing() {
+		return this.dashTicks > 0;
+	}
+
+	public int getStamina() {
+		return this.entityData.get(STAMINA);
+	}
+
+	private void setStamina(int stamina) {
+		this.entityData.set(STAMINA, Mth.clamp(stamina, 0, LoftwingFlight.MAX_STAMINA));
+	}
+
+	private void spendStamina(int cost) {
+		this.glideTicks = 0;
+		this.setStamina(this.getStamina() - cost);
+	}
+
+	private void recoverStamina() {
+		if (++this.glideTicks >= LoftwingFlight.GLIDE_INTERVAL) {
+			this.glideTicks = 0;
+			this.setStamina(this.getStamina() + LoftwingFlight.GLIDE_GAIN);
+		}
+	}
+
+	/** Flying into a wall throws the rider clear and hurts them both, the bird less the better its helmet. */
+	private void checkForCrash(Player rider) {
+		if (!this.horizontalCollision || this.getDeltaMovement().horizontalDistance() < LoftwingFlight.CRASH_SPEED) {
+			return;
+		}
+		DamageSource source = this.damageSources().source(ZeldaDamageTypeIds.LOFTWING_CRASH, this);
+		Vec3 recoil = this.getLookAngle().scale(-LoftwingFlight.CRASH_EJECT_SPEED).add(0.0, LoftwingFlight.CRASH_EJECT_SPEED, 0.0);
+
+		this.playSound(ZeldaSounds.LOFTWING_CRASH, 1.5F, 1.0F);
+		this.stopFlying();
+		rider.stopRiding();
+		this.clingingRider = null;
+		rider.push(recoil.x(), recoil.y(), recoil.z());
+		rider.hurt(source, LoftwingFlight.CRASH_DAMAGE_TO_RIDER);
+
+		float padded = LoftwingFlight.CRASH_DAMAGE_TO_LOFTWING - this.getHelmetSettings().crashProtection();
+		if (padded > 0.0F) {
+			this.hurt(source, padded);
+		}
+	}
+
+	private void stopFlying() {
+		this.setFlying(false);
+		this.setNoGravity(false);
+		this.dashTicks = 0;
+		this.setDeltaMovement(this.getDeltaMovement().scale(0.2));
+	}
+
+	/**
+	 * Nobody steps off a loftwing in mid-air. Whoever tries is back on its back the very next tick,
+	 * which is what the belt is for.
+	 */
+	@Override
+	protected void removePassenger(Entity passenger) {
+		boolean wasFlying = this.isFlying();
+		super.removePassenger(passenger);
+		if (wasFlying && !this.level().isClientSide() && passenger instanceof LivingEntity rider && rider.isAlive() && this.isOwnedBy(rider)) {
+			this.clingingRider = rider;
+		}
+	}
+
 	// THE BOND
 
 	@Override
 	public void tick() {
 		super.tick();
-		if (!this.level().isClientSide() && !this.isTame() && --this.bondCooldown <= 0) {
+		if (this.level().isClientSide()) {
+			return;
+		}
+		if (this.clingingRider != null) {
+			LivingEntity rider = this.clingingRider;
+			this.clingingRider = null;
+			if (this.isFlying() && rider.isAlive() && rider.distanceToSqr(this) < CLING_RANGE_SQR) {
+				rider.startRiding(this);
+			}
+		}
+		boolean ridden = this.getControllingPassenger() != null;
+		if (ridden) {
+			// Touching down ends powered flight; the rider has to jump again to take off.
+			if (this.isFlying() && this.onGround()) {
+				this.stopFlying();
+			}
+		} else if (this.isNoGravity()) {
+			// The rider is gone: the bird goes back to flying under its own weight.
+			this.setNoGravity(false);
+			this.dashTicks = 0;
+		}
+		if (!this.isTame() && --this.bondCooldown <= 0) {
 			this.bondCooldown = BOND_INTERVAL;
 			this.lookForSomeoneToBondWith();
 		}
@@ -270,11 +491,22 @@ public class Loftwing extends TamableAnimal {
 		return false;
 	}
 
+	/**
+	 * Crouch to sit the bird down or stand it up; otherwise climb on, if it is wearing its belt.
+	 * Fitting the belt and the helmet goes through the equipment handling of {@code super} first.
+	 */
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		InteractionResult result = super.mobInteract(player, hand);
 		if (result.consumesAction() || !this.isOwnedBy(player)) {
 			return result;
+		}
+		if (!player.isSecondaryUseActive() && this.hasBelt() && !this.isVehicle() && !this.isBaby()) {
+			if (!this.level().isClientSide()) {
+				this.setOrderedToSit(false);
+				player.startRiding(this);
+			}
+			return InteractionResult.SUCCESS;
 		}
 		if (!this.level().isClientSide()) {
 			this.setOrderedToSit(!this.isOrderedToSit());
@@ -361,6 +593,7 @@ public class Loftwing extends TamableAnimal {
 	protected void defineSynchedData(SynchedEntityData.Builder entityData) {
 		super.defineSynchedData(entityData);
 		entityData.define(LOFTWING_FLAGS, (byte) 0);
+		entityData.define(STAMINA, LoftwingFlight.MAX_STAMINA);
 		entityData.define(VARIANT, VariantUtils.getDefaultOrAny(this.registryAccess(), LoftwingVariantIds.BLUE));
 	}
 
