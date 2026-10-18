@@ -58,16 +58,23 @@ public class LoftwingSoarGoal extends Goal {
 	}
 
 	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
+	}
+
+	@Override
 	public void tick() {
 		if (++this.ticksOnCircle > CIRCLE_TICKS) {
 			this.pickCircle();
 		}
 		Vec3 waypoint = this.waypoint();
-		if (!this.loftwing.getMoveControl().hasWanted() || this.loftwing.position().distanceTo(waypoint) < WAYPOINT_REACHED) {
+		if (this.loftwing.position().distanceTo(waypoint) < WAYPOINT_REACHED) {
 			this.angle += STEP;
 			waypoint = this.waypoint();
-			this.loftwing.getMoveControl().setWantedPosition(waypoint.x(), waypoint.y(), waypoint.z(), SPEED);
 		}
+		// A flying move control only steers for the one tick after it is told where to go, and lets
+		// the bird fall the rest of the time: it has to be aimed again every single tick.
+		this.loftwing.getMoveControl().setWantedPosition(waypoint.x(), waypoint.y(), waypoint.z(), SPEED);
 	}
 
 	/** Centres a fresh circle on where the bird is now, at cruising height. */

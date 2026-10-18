@@ -40,6 +40,7 @@ import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.SpawnGroupData;
@@ -308,7 +309,6 @@ public class Loftwing extends TamableAnimal {
 			this.setJumping(true);
 		} else {
 			this.setFlying(true);
-			this.setNoGravity(true);
 			this.playSound(ZeldaSounds.LOFTWING_FLAP, 1.0F, 1.0F);
 		}
 	}
@@ -414,9 +414,26 @@ public class Loftwing extends TamableAnimal {
 
 	private void stopFlying() {
 		this.setFlying(false);
-		this.setNoGravity(false);
 		this.dashTicks = 0;
 		this.setDeltaMovement(this.getDeltaMovement().scale(0.2));
+	}
+
+	/**
+	 * Under a rider in powered flight the bird moves by the heading {@link #flyForward()} just set,
+	 * with no gravity and no drag applied on top.
+	 * <p>
+	 * This deliberately does not go through {@code setNoGravity}: that flag belongs to
+	 * {@link FlyingMoveControl}, which turns it back off on every tick it is not steering, and the
+	 * two fought each other into a bird that hopped on the spot.
+	 */
+	@Override
+	public void travel(Vec3 travelVector) {
+		if (this.isFlying() && this.getControllingPassenger() != null) {
+			this.move(MoverType.SELF, this.getDeltaMovement());
+			this.calculateEntityAnimation(true);
+			return;
+		}
+		super.travel(travelVector);
 	}
 
 	/**
@@ -447,16 +464,9 @@ public class Loftwing extends TamableAnimal {
 				rider.startRiding(this);
 			}
 		}
-		boolean ridden = this.getControllingPassenger() != null;
-		if (ridden) {
-			// Touching down ends powered flight; the rider has to jump again to take off.
-			if (this.isFlying() && this.onGround()) {
-				this.stopFlying();
-			}
-		} else if (this.isNoGravity()) {
-			// The rider is gone: the bird goes back to flying under its own weight.
-			this.setNoGravity(false);
-			this.dashTicks = 0;
+		// Touching down ends powered flight; the rider has to jump again to take off.
+		if (this.isFlying() && this.onGround() && this.getControllingPassenger() != null) {
+			this.stopFlying();
 		}
 		if (this.caller != null && --this.callTicks <= 0) {
 			this.clearCall();

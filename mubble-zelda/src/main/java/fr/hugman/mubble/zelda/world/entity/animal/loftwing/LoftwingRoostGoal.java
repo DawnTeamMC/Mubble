@@ -86,9 +86,12 @@ public class LoftwingRoostGoal extends Goal {
 			this.perch = null;
 			return;
 		}
-		if (!this.loftwing.getMoveControl().hasWanted()) {
-			this.flyToPerch();
-		}
+		this.flyToPerch();
+	}
+
+	@Override
+	public boolean requiresUpdateEveryTick() {
+		return true;
 	}
 
 	private void flyToPerch() {
