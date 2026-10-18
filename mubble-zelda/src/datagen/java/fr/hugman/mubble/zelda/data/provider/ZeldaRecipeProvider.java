@@ -9,6 +9,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
@@ -31,6 +32,13 @@ public class ZeldaRecipeProvider extends FabricRecipeProvider {
 			@Override
 			public void buildRecipes() {
 				var items = registries.lookupOrThrow(Registries.ITEM);
+
+				// A feather and a copper ingot: the bird teaches you its call, this is just what you blow it on.
+				ShapelessRecipeBuilder.shapeless(items, RecipeCategory.TRANSPORTATION, ZeldaItems.LOFTWING_WHISTLE)
+						.requires(Items.FEATHER)
+						.requires(Items.COPPER_INGOT)
+						.unlockedBy("has_feather", this.has(Items.FEATHER))
+						.save(output);
 
 				// Four leads knotted into a ring, the way the issue draws it.
 				ShapedRecipeBuilder.shaped(items, RecipeCategory.TRANSPORTATION, ZeldaItems.LOFTWING_BELT)
