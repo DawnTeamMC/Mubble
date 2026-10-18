@@ -52,6 +52,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.find_target", "Goomba finds a target");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.death", "Goomba dies");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.stomp", "Goomba stomped");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".entity.mini_goomba.nibble", "Mini Goomba nibbles");
         builder.add(SuperMarioSounds.KOOPA_SHELL_SLIDE, "Koopa Shell slides");
         builder.add(SuperMarioSounds.KOOPA_SHELL_HOMING, "Koopa Shell homing");
         builder.add(SuperMarioSounds.KOOPA_SHELL_HIT_BLOCK, "Koopa Shell hits block");

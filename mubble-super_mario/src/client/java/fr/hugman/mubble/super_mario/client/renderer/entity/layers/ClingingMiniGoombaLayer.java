@@ -1,6 +1,7 @@
 package fr.hugman.mubble.super_mario.client.renderer.entity.layers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.client.model.GoombaModel;
 import fr.hugman.mubble.super_mario.client.model.SuperMarioModelLayers;
@@ -9,6 +10,7 @@ import fr.hugman.mubble.super_mario.client.renderer.entity.state.GoombaRenderSta
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.model.geom.EntityModelSet;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.player.PlayerModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -18,14 +20,17 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.ClientAsset;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
-import com.mojang.math.Axis;
+import net.minecraft.world.entity.player.PlayerModelType;
+
+import java.util.List;
 
 /**
- * Draws the mini goombas hanging off a player.
+ * Draws the mini goombas hanging off a player, gnawing at them.
  * <p>
- * They are no longer entities by the time they get here — the player only carries a count — so this
- * places that many of them around the torso from the count alone. Their spots are worked out from the
- * index rather than drawn at random, so a goomba stays where it was between two frames.
+ * They are no longer entities by the time they get here — the player only carries a count — so each one
+ * is given a spot from a fixed list, the first ones spread over the head, the torso, the arms and the legs
+ * so that even a couple of them do not bunch up. Every spot is held by a body part, which keeps them
+ * stuck to that part through the walk swing, crouching and looking around.
  */
 @Environment(EnvType.CLIENT)
 public class ClingingMiniGoombaLayer extends RenderLayer<AvatarRenderState, PlayerModel> {
@@ -40,19 +45,39 @@ public class ClingingMiniGoombaLayer extends RenderLayer<AvatarRenderState, Play
     /** How small they are drawn against a player, rather than against a goomba. */
     private static final float SCALE = 0.45F;
 
-    /** How far out from the middle of the player they sit. */
-    private static final float RADIUS = 0.3F;
+    /** How far out from the surface of the body part they stand, in model pixels, so their face meets it. */
+    private static final float GAP = 1.6F;
+    /** How far below the spot their feet go, in model pixels, so that it is their middle that sits on it. */
+    private static final float HALF_HEIGHT = 2.6F;
 
-    /** The band of the body they spread over, measured down from the shoulders. */
-    private static final float TOP = 0.05F;
-    private static final float DEPTH = 0.55F;
-    /** Crouching brings the shoulders forward and down, as it does for a parrot. */
-    private static final float CROUCH_LIFT = 0.2F;
+    /** How far they lean into the body part they are biting. */
+    private static final float LEAN = 0.5F;
+    /** The one on top of the head bends further over, to bite down into it. */
+    private static final float TOP_LEAN = 0.9F;
+    /** The gnawing: a quick nod into the body part and back. */
+    private static final float CHEW_SPEED = 0.9F;
+    private static final float CHEW_AMPLITUDE = 0.18F;
+    /** Sets each one's gnawing apart from the next, so they do not all nod in step. */
+    private static final float CHEW_PHASE = 1.7F;
 
-    /** The turn between one mini goomba and the next, so a crowd of them spreads instead of stacking. */
-    private static final float SPREAD_ANGLE = 2.3999632F;
-    /** How far down the band each further mini goomba moves, wrapped back to the top. */
-    private static final float SPREAD_DEPTH = 0.37F;
+    /**
+     * Where they hold on, in the order they take the spots. Coordinates are in the body part's own model
+     * pixels, on the surface of the part, for the wide arm model; the arm spots move in for slim arms.
+     */
+    private static final List<Spot> SPOTS = List.of(
+            Spot.side(Limb.BODY, 1.5F, 4.0F, -2.0F, 0.0F, Side.FRONT),
+            Spot.top(Limb.HEAD, 0.5F, -8.0F, 0.0F),
+            Spot.side(Limb.LEFT_ARM, 3.0F, 4.0F, 0.0F, -1.0F, Side.LEFT),
+            Spot.side(Limb.RIGHT_LEG, 0.0F, 5.0F, -2.0F, 0.0F, Side.FRONT),
+            Spot.side(Limb.BODY, -1.5F, 6.0F, 2.0F, 0.0F, Side.BACK),
+            Spot.side(Limb.RIGHT_ARM, -3.0F, 6.0F, 0.0F, 1.0F, Side.RIGHT),
+            Spot.side(Limb.LEFT_LEG, 2.0F, 9.5F, 0.0F, 0.0F, Side.LEFT),
+            Spot.side(Limb.HEAD, -4.0F, -3.5F, 0.5F, 0.0F, Side.RIGHT),
+            Spot.side(Limb.RIGHT_LEG, 0.0F, 10.0F, 2.0F, 0.0F, Side.BACK),
+            Spot.side(Limb.HEAD, 1.5F, -2.5F, -4.0F, 0.0F, Side.FRONT),
+            Spot.side(Limb.LEFT_ARM, 1.0F, 7.0F, -2.0F, -0.5F, Side.FRONT),
+            Spot.side(Limb.LEFT_LEG, 0.0F, 10.5F, -2.0F, 0.0F, Side.FRONT)
+    );
 
     private final GoombaModel model;
 
@@ -73,29 +98,87 @@ public class ClingingMiniGoombaLayer extends RenderLayer<AvatarRenderState, Play
     }
 
     private void submitOne(PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int lightCoords, AvatarRenderState playerState, int index) {
-        float angle = index * SPREAD_ANGLE;
-        float depth = TOP + (index * SPREAD_DEPTH % 1.0F) * DEPTH - (playerState.isCrouching ? CROUCH_LIFT : 0.0F);
+        Spot spot = SPOTS.get(index % SPOTS.size());
+        PlayerModel parent = this.getParentModel();
+        boolean slim = playerState.skin != null && playerState.skin.model() == PlayerModelType.SLIM;
+
+        // Outwards from the surface the spot is on, which is the opposite of the way the goomba faces.
+        float outX = Mth.sin(spot.yaw());
+        float outZ = Mth.cos(spot.yaw());
+        float gap = spot.onTop() ? 0.0F : GAP;
+        float drop = spot.onTop() ? 0.0F : HALF_HEIGHT;
+        float x = spot.x() + (slim ? spot.slimShift() : 0.0F) + outX * gap;
+        float y = spot.y() + drop;
+        float z = spot.z() + outZ * gap;
+
+        float chew = Mth.sin(playerState.ageInTicks * CHEW_SPEED + index * CHEW_PHASE) * CHEW_AMPLITUDE;
+        float lean = (spot.onTop() ? TOP_LEAN : LEAN) + chew;
 
         poseStack.pushPose();
-        // The layer works in the entity's own frame, where up is negative and one unit is one block.
-        poseStack.translate(Mth.sin(angle) * RADIUS, depth, Mth.cos(angle) * RADIUS);
-        // Faces away from the player, so whoever is looking at them sees the faces rather than the backs.
-        poseStack.mulPose(Axis.YP.rotation(angle + Mth.PI));
+        parent.root().translateAndRotate(poseStack);
+        spot.limb().of(parent).translateAndRotate(poseStack);
+        poseStack.translate(x / 16.0F, y / 16.0F, z / 16.0F);
+        // Turned to face the body part, then tipped over from the feet so the head bites into it.
+        poseStack.mulPose(Axis.YP.rotation(spot.yaw()));
+        poseStack.mulPose(Axis.XP.rotation(lean));
         poseStack.scale(SCALE, SCALE, SCALE);
         poseStack.translate(0.0F, MODEL_ANCHOR, 0.0F);
 
         // A fresh state per mini goomba: the model is only posed once the submitted node is drawn, so a
-        // shared one would have every goomba drawn in the pose of the last.
+        // shared one would have every goomba drawn in the pose of the last. Its walk is left at rest: they
+        // are holding on, not walking, however fast the player is.
         GoombaRenderState goombaState = new GoombaRenderState();
         goombaState.texture = TEXTURE;
         goombaState.ageInTicks = playerState.ageInTicks;
-        // Offset per goomba so they scrabble out of step with each other instead of in lockstep.
-        goombaState.walkAnimationPos = playerState.walkAnimationPos + index;
-        goombaState.walkAnimationSpeed = Math.max(playerState.walkAnimationSpeed, 0.35F);
 
         submitNodeCollector.submitModel(
                 this.model, goombaState, poseStack, TEXTURE, lightCoords, OverlayTexture.NO_OVERLAY, playerState.outlineColor, null
         );
         poseStack.popPose();
+    }
+
+    private enum Limb {
+        HEAD, BODY, RIGHT_ARM, LEFT_ARM, RIGHT_LEG, LEFT_LEG;
+
+        ModelPart of(PlayerModel model) {
+            return switch (this) {
+                case HEAD -> model.head;
+                case BODY -> model.body;
+                case RIGHT_ARM -> model.rightArm;
+                case LEFT_ARM -> model.leftArm;
+                case RIGHT_LEG -> model.rightLeg;
+                case LEFT_LEG -> model.leftLeg;
+            };
+        }
+    }
+
+    /** Which face of a body part a spot is on, as the way out of it in the part's own model space. */
+    private enum Side {
+        FRONT(0.0F, -1.0F), BACK(0.0F, 1.0F), LEFT(1.0F, 0.0F), RIGHT(-1.0F, 0.0F);
+
+        /** The turn that has a goomba on this face looking back into the part. */
+        private final float yaw;
+
+        Side(float outX, float outZ) {
+            this.yaw = (float) Mth.atan2(outX, outZ);
+        }
+    }
+
+    /**
+     * One place a mini goomba can hold on.
+     *
+     * @param slimShift how far the spot moves along x on a slim-armed player, whose arms are a pixel thinner
+     * @param yaw       the turn that has the goomba facing the body part it is on
+     * @param onTop     whether it stands on top of the part rather than hanging off one of its sides
+     */
+    private record Spot(Limb limb, float x, float y, float z, float slimShift, float yaw, boolean onTop) {
+        static Spot side(Limb limb, float x, float y, float z, float slimShift, Side side) {
+            return new Spot(limb, x, y, z, slimShift, side.yaw, false);
+        }
+
+        /** Faces the way the player does, so it bends over the front of the part it stands on. */
+        static Spot top(Limb limb, float x, float y, float z) {
+            return new Spot(limb, x, y, z, 0.0F, 0.0F, true);
+        }
     }
 }

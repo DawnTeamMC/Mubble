@@ -145,9 +145,8 @@ public class PlayerMixin implements MiniGoombaCarrier {
         if (player.tickCount % NIBBLE_INTERVAL != 0) {
             return;
         }
-        //TODO: a mini goomba nibble of its own, rather than a goomba footstep pitched up
         float pitch = 1.6F + level.getRandom().nextFloat() * 0.3F;
-        level.playSound(null, player, SuperMarioSounds.GOOMBA_WALK_STEP, SoundSource.HOSTILE, 0.3F + 0.05F * count, pitch);
+        level.playSound(null, player, SuperMarioSounds.MINI_GOOMBA_NIBBLE, SoundSource.HOSTILE, 0.3F + 0.05F * count, pitch);
     }
 
     /**
