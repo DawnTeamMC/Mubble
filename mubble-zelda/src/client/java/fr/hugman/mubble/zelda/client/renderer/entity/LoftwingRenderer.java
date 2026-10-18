@@ -30,7 +30,11 @@ public class LoftwingRenderer extends MobRenderer<Loftwing, LoftwingRenderState,
     public void extractRenderState(Loftwing loftwing, LoftwingRenderState state, float partialTick) {
         super.extractRenderState(loftwing, state, partialTick);
         state.flapAnimationState.copyFrom(loftwing.flapAnimationState);
+        state.roostAnimationState.copyFrom(loftwing.roostAnimationState);
+        state.preenAnimationState.copyFrom(loftwing.preenAnimationState);
         state.texture = loftwing.getTexture();
         state.flying = loftwing.isFlying();
+        state.roosting = loftwing.isRoosting();
+        state.preening = loftwing.isPreening();
     }
 }

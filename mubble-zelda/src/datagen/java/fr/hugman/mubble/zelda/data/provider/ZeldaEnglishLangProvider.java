@@ -32,6 +32,7 @@ public class ZeldaEnglishLangProvider extends FabricLanguageProvider {
         builder.add(ZeldaSounds.LOFTWING_HURT, "Loftwing hurts");
         builder.add(ZeldaSounds.LOFTWING_DEATH, "Loftwing dies");
         builder.add(ZeldaSounds.LOFTWING_FLAP, "Loftwing flaps");
+        builder.add(ZeldaSounds.LOFTWING_PREEN, "Loftwing preens");
     }
 
     private static void variant(TranslationBuilder builder, String name, String english) {

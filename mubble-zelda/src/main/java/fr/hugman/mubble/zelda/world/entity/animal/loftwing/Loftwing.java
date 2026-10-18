@@ -30,9 +30,12 @@ import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.control.FlyingMoveControl;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
+import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.item.ItemStack;
@@ -63,11 +66,21 @@ public class Loftwing extends TamableAnimal {
 
 	private static final int FLYING_FLAG = 1;
 	private static final int PANICKING_FLAG = 2;
+	private static final int ROOSTING_FLAG = 4;
+	private static final int PREENING_FLAG = 8;
+
+	/** How long a loftwing keeps shaking the water off after a dip. */
+	private static final int DRYING_TICKS = 300;
 
 	public final AnimationState flapAnimationState = new AnimationState();
+	public final AnimationState roostAnimationState = new AnimationState();
+	public final AnimationState preenAnimationState = new AnimationState();
+
+	private int dryingTicks;
 
 	public Loftwing(EntityType<? extends Loftwing> type, Level level) {
 		super(type, level);
+		this.moveControl = new FlyingMoveControl(this, 10, false);
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
@@ -84,8 +97,60 @@ public class Loftwing extends TamableAnimal {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(1, new LoftwingPanicGoal(this, 1.25));
+		// The errands that take a loftwing below the clouds, in the order it drops everything for them.
+		this.goalSelector.addGoal(2, new LoftwingRoostGoal(this));
+		this.goalSelector.addGoal(3, new LoftwingFishGoal(this));
+		this.goalSelector.addGoal(4, new LoftwingPreenGoal(this));
+		this.goalSelector.addGoal(5, new LoftwingCuriosityGoal(this));
+		// And what it does the rest of the time, which is most of the time.
+		this.goalSelector.addGoal(6, new LoftwingSoarGoal(this));
 		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 10.0F));
 		this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
+	}
+
+	@Override
+	protected PathNavigation createNavigation(Level level) {
+		FlyingPathNavigation navigation = new FlyingPathNavigation(this, level);
+		navigation.setCanOpenDoors(false);
+		navigation.setCanFloat(true);
+		return navigation;
+	}
+
+	/** A bird does not hurt itself landing. Crashing into a wall under a rider is another matter. */
+	@Override
+	protected void checkFallDamage(double fallDistance, boolean onGround, BlockState state, BlockPos pos) {
+	}
+
+	@Override
+	protected boolean isFlapping() {
+		return this.isFlying();
+	}
+
+	@Override
+	public void aiStep() {
+		super.aiStep();
+		if (this.isInWater()) {
+			this.dryingTicks = DRYING_TICKS;
+		} else if (this.dryingTicks > 0) {
+			this.dryingTicks--;
+		}
+		if (!this.level().isClientSide()) {
+			this.setFlying(!this.onGround() && !this.isInWater());
+		}
+	}
+
+	/** Whether the bird is its own master right now, and free to go about its day. */
+	public boolean isFreeToRoam() {
+		return !this.isOrderedToSit() && !this.isLeashed() && !this.isVehicle() && !this.isPassenger() && !this.isBaby();
+	}
+
+	/** Whether this loftwing would fly down to take a closer look at {@code player}. */
+	public boolean isCuriousAbout(Player player) {
+		return !this.isOwnedBy(player) && !player.isSpectator();
+	}
+
+	public boolean isDrying() {
+		return this.dryingTicks > 0;
 	}
 
 	// SHAPE
@@ -196,12 +261,41 @@ public class Loftwing extends TamableAnimal {
 		this.setLoftwingFlag(PANICKING_FLAG, panicking);
 	}
 
+	/** Settled on a perch for the night. */
+	public boolean isRoosting() {
+		return this.hasLoftwingFlag(ROOSTING_FLAG);
+	}
+
+	public void setRoosting(boolean roosting) {
+		this.setLoftwingFlag(ROOSTING_FLAG, roosting);
+	}
+
+	/** Standing still, running its beak through its feathers. */
+	public boolean isPreening() {
+		return this.hasLoftwingFlag(PREENING_FLAG);
+	}
+
+	public void setPreening(boolean preening) {
+		this.setLoftwingFlag(PREENING_FLAG, preening);
+	}
+
 	@Override
 	public void onSyncedDataUpdated(EntityDataAccessor<?> accessor) {
 		if (LOFTWING_FLAGS.equals(accessor)) {
 			this.refreshDimensions();
+			animate(this.flapAnimationState, this.isFlying(), this.tickCount);
+			animate(this.roostAnimationState, this.isRoosting(), this.tickCount);
+			animate(this.preenAnimationState, this.isPreening(), this.tickCount);
 		}
 		super.onSyncedDataUpdated(accessor);
+	}
+
+	private static void animate(AnimationState state, boolean running, int tickCount) {
+		if (running) {
+			state.startIfStopped(tickCount);
+		} else {
+			state.stop();
+		}
 	}
 
 	// VARIANT
