@@ -21,8 +21,11 @@ clouds, pick their own owner, and carry them.
   `EntityDimensions`, picked in `getDefaultDimensions` and refreshed whenever the flags change.
 - **Wild life is goals, riding is `tickRidden`.** Left alone, the bird soars above the cloud level
   and comes down only on an errand (`LoftwingSoarGoal` and friends). Under a rider those goals all
-  stand down, and `Loftwing#tickRidden` drives it instead: the jump button takes off, the bird comes
-  round to where the rider looks as fast as its helmet allows, and wingbeats pay for height.
+  stand down, and `Loftwing#tickRidden` drives it instead, as a glider with a wingbeat: one scalar
+  of speed runs along the bird's nose and gravity works on *that* rather than on the bird, so a dive
+  buys a climb no amount of level flight would give; the jump key beats the wings for height out of
+  a reserve; and the bird leans onto the velocity it wants instead of being put on it. Every number
+  of it is in `LoftwingFlight` and nothing else is.
 - **Numbers are data.** Breeds are a synced dynamic registry (`zelda:loftwing_variant`) with a
   weight that makes the crimson one rare; what a helmet is worth is a data component on the item;
   what a bird catches when it fishes is a loot table.
