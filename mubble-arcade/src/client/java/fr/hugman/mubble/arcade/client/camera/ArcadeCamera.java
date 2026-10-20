@@ -26,7 +26,7 @@ import org.jspecify.annotations.Nullable;
  * The camera has its own yaw and pitch, moved by the mouse or the right stick, and the stick moves
  * the player relative to it: the body turns towards where it goes, the view does not follow, and the
  * head looks at the horizon. The camera frames the player with some room around them rather than nailing them to the middle (see {@link ArcadeFraming}), eases in when it backs into a
- * block (the player showing through whatever stands in between otherwise, see {@link ArcadeSilhouette}), swings back behind the player on recenter, follows them round as they move if set
+ * block (the player showing through whatever stands in between otherwise, see {@link ArcadeSilhouette}), swings back behind the player, level with the horizon and with the player in the middle, on recenter, follows them round as they move if set
  * to, and blends with the vanilla view when one takes over from the other. The hands do not follow the camera: they hit and use items where the
  * body faces, see {@link ArcadeAim#pickAhead}.
  * <p>
@@ -64,6 +64,9 @@ public final class ArcadeCamera {
 
     private static float yaw;
     private static float pitch;
+    /** The rotation of the camera on the last tick, to tell how far it turned since. */
+    private static float tickYaw;
+    private static float tickPitch;
     private static boolean orbiting;
     private static boolean recentering;
     /** What the camera looks at, framing the feet of the player, see {@link ArcadeFraming}. */
@@ -145,7 +148,11 @@ public final class ArcadeCamera {
         }
         var target = player.position();
         focusO = focus == null ? target : focus;
-        focus = FRAMING.tick(target, supported(player), ArcadeClientConfig.get().cameraMargin());
+        // however it turned (the mouse, the stick, following the player), turning lets go of the offset
+        double turned = Math.abs(Mth.degreesDifference(tickYaw, yaw)) + Math.abs(pitch - tickPitch);
+        tickYaw = yaw;
+        tickPitch = pitch;
+        focus = FRAMING.tick(target, supported(player), ArcadeClientConfig.get().cameraMargin(), turned);
         // the focus must not slip behind a block, which would put the camera inside it: going down
         // steps, the edge left behind hides it for a tick, and it comes closer only that much
         focus = ArcadeAim.trail(player.level(), player, target, focus, player.getEyeHeight() + ArcadeClientConfig.get().cameraHeight());
@@ -184,8 +191,10 @@ public final class ArcadeCamera {
         }
     }
 
+    /** Swings the camera behind the player, level with the horizon, and brings the player back to the middle of the screen. */
     public static void recenter() {
         recentering = true;
+        FRAMING.recenter();
     }
 
     /** How far up the view may look: the orbit's limit, opening up to the first person one while aiming. */
@@ -227,8 +236,11 @@ public final class ArcadeCamera {
         }
         if (recentering && orbit) {
             float target = player.getYRot();
-            yaw = Mth.approachDegrees(yaw, target, (float) (config.recenterSpeed() * seconds));
-            if (Math.abs(Mth.degreesDifference(yaw, target)) < 0.5F) {
+            float step = (float) (config.recenterSpeed() * seconds);
+            yaw = Mth.approachDegrees(yaw, target, step);
+            float horizon = (float) Mth.clamp(0.0D, config.minPitch(), config.maxPitch());
+            pitch = Mth.approach(pitch, horizon, step);
+            if (Math.abs(Mth.degreesDifference(yaw, target)) < 0.5F && Math.abs(pitch - horizon) < 0.5F) {
                 recentering = false;
             }
         }
