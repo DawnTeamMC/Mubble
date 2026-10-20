@@ -301,13 +301,19 @@ public class Loftwing extends TamableAnimal {
 		return (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
 	}
 
+	/** A rider may sprint on a loftwing's back, since the sprint key is what asks it for a dash. */
+	@Override
+	public boolean canSprint() {
+		return true;
+	}
+
 	/**
 	 * On the ground the rider steers like any mount. In the air the bird drives itself: it never
 	 * stops going forward, and the rider's say is where to point it, when to beat its wings and when
 	 * to dash.
 	 * <p>
 	 * The rider's keys are read through {@link LivingEntity#isJumping()} and
-	 * {@link #isShiftKeyDown()} rather than through the server's copy of the input packet: a mount
+	 * {@link Entity#isSprinting()} rather than through the server's copy of the input packet: a mount
 	 * with a player aboard is simulated by that player's client, where no {@code ServerPlayer}
 	 * exists, so anything read off one would be empty exactly where it matters.
 	 */
@@ -380,6 +386,7 @@ public class Loftwing extends TamableAnimal {
 		this.yHeadRot = yaw;
 	}
 
+	/** The dash, on the sprint key: crouching is how vanilla gets off a mount, so it cannot be that. */
 	private void tickDash(Player rider) {
 		if (this.dashCooldown > 0) {
 			this.dashCooldown--;
@@ -389,7 +396,7 @@ public class Loftwing extends TamableAnimal {
 			this.spendStamina(LoftwingFlight.DASH_COST);
 			return;
 		}
-		if (rider.isShiftKeyDown() && this.dashCooldown <= 0 && this.getStamina() >= LoftwingFlight.DASH_COST * LoftwingFlight.DASH_TICKS) {
+		if (rider.isSprinting() && this.dashCooldown <= 0 && this.getStamina() >= LoftwingFlight.DASH_COST * LoftwingFlight.DASH_TICKS) {
 			this.dashTicks = LoftwingFlight.DASH_TICKS;
 			this.dashCooldown = LoftwingFlight.DASH_COOLDOWN;
 			this.playSound(ZeldaSounds.LOFTWING_FLAP, 1.0F, 1.2F);
