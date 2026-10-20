@@ -28,9 +28,18 @@ public class SuperMarioTexturedModels {
     }
 
     public static TexturedModel.Provider snakeBlock(String type) {
+        return snakeBlock(type, "");
+    }
+
+    /**
+     * A snake block, or the grayed-out version of it a knocked-out one wears.
+     *
+     * @param prefix {@code "deactivated_"} for the grayed-out set, or nothing for the normal one
+     */
+    public static TexturedModel.Provider snakeBlock(String type, String prefix) {
         return TexturedModel.createDefault(block -> TextureMapping.column(
-                new Material(SuperMario.id("block/snake_block/" + type + "/side")),
-                new Material(SuperMario.id("block/snake_block/" + type + "/end"))
+                new Material(SuperMario.id("block/snake_block/" + type + "/" + prefix + "side")),
+                new Material(SuperMario.id("block/snake_block/" + type + "/" + prefix + "end"))
         ), ModelTemplates.CUBE_COLUMN);
     }
 

@@ -20,6 +20,7 @@ import fr.hugman.mubble.super_mario.world.level.biome.SuperMarioBiomeModificatio
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes;
 import fr.hugman.mubble.super_mario.world.level.gamerules.SuperMarioGameRules;
+import fr.hugman.mubble.super_mario.world.level.snake.SnakeManager;
 import fr.hugman.mubble.super_mario.world.power_up.action.SuperMarioPowerUpActionTypes;
 import fr.hugman.mubble.world.power_up.action.PowerUpActionTypes;
 import net.fabricmc.api.ModInitializer;
@@ -64,6 +65,7 @@ public class SuperMario implements ModInitializer {
         // Events
         SuperMarioEntityEvents.registerListeners();
         FreezeEvents.register();
+        SnakeManager.register();
     }
 
     public static Identifier id(String path) {

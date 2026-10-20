@@ -14,6 +14,11 @@ public class SuperMarioSounds {
     public static final SoundEvent BUMPABLE_BLOCK_LOOT = register("block.bumpable_block.loot");
     public static final SoundEvent BUMPABLE_BLOCK_LOOT_COIN = register("block.bumpable_block.loot_coin");
 
+    public static final Holder.Reference<SoundEvent> SNAKE_BLOCK_MOVE = registerForHolder("block.snake_block.move");
+    public static final Holder.Reference<SoundEvent> SNAKE_BLOCK_SHAKE = registerForHolder("block.snake_block.shake");
+    public static final Holder.Reference<SoundEvent> SNAKE_PATH_PLACE = registerForHolder("block.snake_path.place");
+    public static final Holder.Reference<SoundEvent> SNAKE_PATH_BREAK = registerForHolder("block.snake_path.break");
+
     public static final SoundEvent NOTE_BLOCK_JUMP_LOW = register("block.note_block.jump.low");
     public static final SoundEvent NOTE_BLOCK_JUMP_HIGH = register("block.note_block.jump.high");
 
