@@ -15,6 +15,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -62,6 +63,7 @@ import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.equipment.Equippable;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
@@ -586,13 +588,20 @@ public class Loftwing extends TamableAnimal {
 
 	/**
 	 * Crouch to sit the bird down or stand it up; otherwise climb on, if it is wearing its belt.
-	 * Fitting the belt and the helmet goes through the equipment handling of {@code super} first.
+	 * <p>
+	 * Anything the bird can wear is handed straight back to vanilla. {@code Player.interactOn} asks
+	 * the entity first and only reaches its equip-on-interact handling if the entity did not take
+	 * the interaction, so consuming it here would make the belt impossible to put on at all — and
+	 * with no belt there is no riding.
 	 */
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		InteractionResult result = super.mobInteract(player, hand);
 		if (result.consumesAction() || !this.isOwnedBy(player)) {
 			return result;
+		}
+		if (this.isGearForMe(player.getItemInHand(hand))) {
+			return InteractionResult.PASS;
 		}
 		if (!player.isSecondaryUseActive() && this.hasBelt() && !this.isVehicle() && !this.isBaby()) {
 			if (!this.level().isClientSide()) {
@@ -601,6 +610,11 @@ public class Loftwing extends TamableAnimal {
 			}
 			return InteractionResult.SUCCESS;
 		}
+		// Sitting is something you ask of a bird standing in front of you. Asking it of one on the
+		// wing would stop everything steering it and drop it out of the sky.
+		if (this.isFlying()) {
+			return InteractionResult.PASS;
+		}
 		if (!this.level().isClientSide()) {
 			this.setOrderedToSit(!this.isOrderedToSit());
 			this.jumping = false;
@@ -608,6 +622,15 @@ public class Loftwing extends TamableAnimal {
 			this.setTarget(null);
 		}
 		return InteractionResult.SUCCESS;
+	}
+
+	/** Whether {@code stack} is a piece of gear vanilla would put on this bird for a right click. */
+	private boolean isGearForMe(ItemStack stack) {
+		Equippable equippable = stack.get(DataComponents.EQUIPPABLE);
+		return equippable != null
+				&& equippable.equipOnInteract()
+				&& equippable.canBeEquippedBy(this.getType().builtInRegistryHolder())
+				&& this.canUseSlot(equippable.slot());
 	}
 
 	// SHAPE
