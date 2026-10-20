@@ -21,7 +21,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -49,15 +48,17 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.control.FlyingMoveControl;
+import net.minecraft.world.entity.ai.control.LookControl;
 import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.ai.navigation.FlyingPathNavigation;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.player.Input;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.variant.VariantUtils;
 import net.minecraft.world.item.ItemStack;
@@ -144,6 +145,17 @@ public class Loftwing extends TamableAnimal {
 	public Loftwing(EntityType<? extends Loftwing> type, Level level) {
 		super(type, level);
 		this.moveControl = new FlyingMoveControl(this, 10, false);
+		// While somebody is steering, nothing else turns the bird's head: the look goals and the
+		// rider were both writing its pitch in the same tick, and the bird flew wherever the loser
+		// of that race pointed it.
+		this.lookControl = new LookControl(this) {
+			@Override
+			public void tick() {
+				if (Loftwing.this.getControllingPassenger() == null) {
+					super.tick();
+				}
+			}
+		};
 		// Gear a player fitted comes back when the bird dies, like a horse's saddle.
 		this.setDropChance(EquipmentSlot.SADDLE, 1.0F);
 		this.setDropChance(EquipmentSlot.HEAD, 1.0F);
@@ -173,6 +185,9 @@ public class Loftwing extends TamableAnimal {
 		this.goalSelector.addGoal(5, new LoftwingCuriosityGoal(this));
 		// And what it does the rest of the time, which is most of the time.
 		this.goalSelector.addGoal(6, new LoftwingSoarGoal(this));
+		// Chicks are too young to soar, so without these they would stand still their whole childhood.
+		this.goalSelector.addGoal(7, new FollowParentGoal(this, 1.1));
+		this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 0.8));
 		this.goalSelector.addGoal(8, new LookAtPlayerGoal(this, Player.class, 10.0F));
 		this.goalSelector.addGoal(9, new RandomLookAroundGoal(this));
 
@@ -216,9 +231,15 @@ public class Loftwing extends TamableAnimal {
 		}
 	}
 
-	/** Whether the bird is its own master right now, and free to go about its day. */
+	/**
+	 * Whether the bird is its own master right now, and free to go about its day.
+	 * <p>
+	 * Chicks count. They hatch and spawn above the clouds like everyone else, so a chick that could
+	 * only walk would be stranded on the peak it was born on; what it cannot do is carry a rider or
+	 * answer a whistle.
+	 */
 	public boolean isFreeToRoam() {
-		return !this.isOrderedToSit() && !this.isLeashed() && !this.isVehicle() && !this.isPassenger() && !this.isBaby();
+		return !this.isOrderedToSit() && !this.isLeashed() && !this.isVehicle() && !this.isPassenger();
 	}
 
 	/** Whether this loftwing would fly down to take a closer look at {@code player}. */
@@ -276,6 +297,11 @@ public class Loftwing extends TamableAnimal {
 	/**
 	 * On the ground the rider steers like any mount. In the air the bird drives itself: it never
 	 * stops going forward, and the only say the rider has is where to point it.
+	 * <p>
+	 * The rider's keys are read through {@link LivingEntity#isJumping()} and
+	 * {@link #isShiftKeyDown()} rather than through the server's copy of the input packet: a mount
+	 * with a player aboard is simulated by that player's client, where no {@code ServerPlayer}
+	 * exists, so anything read off one would be empty exactly where it matters.
 	 */
 	@Override
 	protected Vec3 getRiddenInput(Player rider, Vec3 travelVector) {
@@ -285,24 +311,22 @@ public class Loftwing extends TamableAnimal {
 	@Override
 	protected void tickRidden(Player rider, Vec3 travelVector) {
 		super.tickRidden(rider, travelVector);
-		Input input = rider instanceof ServerPlayer serverRider ? serverRider.getLastClientInput() : Input.EMPTY;
-
 		if (!this.isFlying()) {
-			this.tickOnFoot(rider, input);
+			this.tickOnFoot(rider);
 			return;
 		}
 		this.aimWithRider(rider);
-		this.tickDash(input);
+		this.tickDash(rider);
 		this.flyForward();
 		this.checkForCrash(rider);
 	}
 
 	/** Walking under the reins, and the second jump that throws the bird into the air. */
-	private void tickOnFoot(Player rider, Input input) {
+	private void tickOnFoot(Player rider) {
 		this.setRot(rider.getYRot(), rider.getXRot() * 0.5F);
 		this.yBodyRot = this.getYRot();
 		this.yHeadRot = this.getYRot();
-		if (!input.jump()) {
+		if (!rider.isJumping()) {
 			return;
 		}
 		if (this.onGround()) {
@@ -327,7 +351,7 @@ public class Loftwing extends TamableAnimal {
 		this.yHeadRot = yaw;
 	}
 
-	private void tickDash(Input input) {
+	private void tickDash(Player rider) {
 		if (this.dashCooldown > 0) {
 			this.dashCooldown--;
 		}
@@ -335,7 +359,7 @@ public class Loftwing extends TamableAnimal {
 			this.dashTicks--;
 			return;
 		}
-		if (input.shift() && this.dashCooldown <= 0 && this.getStamina() >= LoftwingFlight.DASH_COST * LoftwingFlight.DASH_TICKS) {
+		if (rider.isShiftKeyDown() && this.dashCooldown <= 0 && this.getStamina() >= LoftwingFlight.DASH_COST * LoftwingFlight.DASH_TICKS) {
 			this.dashTicks = LoftwingFlight.DASH_TICKS;
 			this.dashCooldown = LoftwingFlight.DASH_COOLDOWN;
 			this.playSound(ZeldaSounds.LOFTWING_FLAP, 1.0F, 1.2F);
