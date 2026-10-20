@@ -135,6 +135,11 @@ public class Loftwing extends TamableAnimal {
 	private int dashTicks;
 	private int dashCooldown;
 	private int glideTicks;
+	/** How fast the bird is going along its own nose, in blocks a tick. The state a dive fills and a climb spends. */
+	private double flightSpeed;
+	/** What is left of the last wingbeat's lift, in blocks a tick. */
+	private double flapLift;
+	private int flapCooldown;
 	/** Someone who tried to get off mid-flight and is about to find themselves back in the saddle. */
 	@Nullable
 	private LivingEntity clingingRider;
@@ -298,7 +303,8 @@ public class Loftwing extends TamableAnimal {
 
 	/**
 	 * On the ground the rider steers like any mount. In the air the bird drives itself: it never
-	 * stops going forward, and the only say the rider has is where to point it.
+	 * stops going forward, and the rider's say is where to point it, when to beat its wings and when
+	 * to dash.
 	 * <p>
 	 * The rider's keys are read through {@link LivingEntity#isJumping()} and
 	 * {@link #isShiftKeyDown()} rather than through the server's copy of the input packet: a mount
@@ -313,41 +319,62 @@ public class Loftwing extends TamableAnimal {
 	@Override
 	protected void tickRidden(Player rider, Vec3 travelVector) {
 		super.tickRidden(rider, travelVector);
+		if (this.flapCooldown > 0) {
+			this.flapCooldown--;
+		}
 		if (!this.isFlying()) {
 			this.tickOnFoot(rider);
 			return;
 		}
 		this.aimWithRider(rider);
 		this.tickDash(rider);
+		this.tickWingbeats(rider);
 		this.flyForward();
 		this.checkForCrash(rider);
 	}
 
-	/** Walking under the reins, and the second jump that throws the bird into the air. */
+	/**
+	 * Walking under the reins, and the wingbeat that takes the bird off the ground.
+	 * <p>
+	 * Standing is also how a tired bird catches its breath. Without that, one that came down on an
+	 * empty reserve could never beat its wings again, and nothing else gets a loftwing airborne.
+	 */
 	private void tickOnFoot(Player rider) {
 		this.setRot(rider.getYRot(), rider.getXRot() * 0.5F);
 		this.yBodyRot = this.getYRot();
 		this.yHeadRot = this.getYRot();
-		if (!rider.isJumping()) {
-			return;
-		}
-		if (this.onGround()) {
-			this.setJumping(true);
+		if (rider.isJumping() && this.canFlap()) {
+			this.takeOff();
 		} else {
-			this.setFlying(true);
-			this.playSound(ZeldaSounds.LOFTWING_FLAP, 1.0F, 1.0F);
+			this.recoverStamina();
 		}
 	}
 
-	/** The bird comes round to where the rider is looking, no faster than its helmet allows. */
+	/** A loftwing leaves the ground the way it gains height in the air: straight up, on its wings. */
+	private void takeOff() {
+		this.setFlying(true);
+		this.flightSpeed = LoftwingFlight.MIN_SPEED;
+		this.flap();
+	}
+
+	/**
+	 * The bird comes round to where the rider is looking, and takes its time about it: the body and
+	 * the nose have rates of their own, and speed widens a turn rather than tightening it, so one
+	 * that has just dived out of the clouds banks in a long arc.
+	 * <p>
+	 * What the helmet allows is still the ceiling on both. Nothing here ever moves the nose on its
+	 * own, whatever is left in the reserve: a loftwing does not stall, and the pitch is the rider's
+	 * from the moment they leave the ground to the moment they are back on it.
+	 */
 	private void aimWithRider(Player rider) {
-		float maxTurn = this.getHelmetSettings().maxTurnPerTick();
-		float yaw = Mth.approachDegrees(this.getYRot(), rider.getYRot(), maxTurn);
-		float pitch = Mth.approachDegrees(this.getXRot(), Mth.clamp(rider.getXRot(), -60.0F, 60.0F), maxTurn);
-		if (this.getStamina() <= 0) {
-			// Out of wingbeats: it can still glide down, but it cannot pull up any more.
-			pitch = Math.max(pitch, 0.0F);
-		}
+		float ceiling = this.getHelmetSettings().maxTurnPerTick();
+		double overGlide = Math.max(0.0, this.flightSpeed - LoftwingFlight.MIN_SPEED);
+		float yawRate = Math.min(ceiling, (float) (LoftwingFlight.YAW_DEGREES_PER_TICK / (1.0 + overGlide / LoftwingFlight.YAW_WIDENING_SPEED)));
+		float pitchRate = Math.min(ceiling, LoftwingFlight.PITCH_DEGREES_PER_TICK);
+
+		float wantedPitch = Mth.clamp(rider.getXRot(), -LoftwingFlight.MAX_CLIMB_PITCH, LoftwingFlight.MAX_DIVE_PITCH);
+		float yaw = Mth.approachDegrees(this.getYRot(), rider.getYRot(), yawRate);
+		float pitch = Mth.approachDegrees(this.getXRot(), wantedPitch, pitchRate);
 		this.setRot(yaw, pitch);
 		this.yBodyRot = yaw;
 		this.yHeadRot = yaw;
@@ -359,6 +386,7 @@ public class Loftwing extends TamableAnimal {
 		}
 		if (this.dashTicks > 0) {
 			this.dashTicks--;
+			this.spendStamina(LoftwingFlight.DASH_COST);
 			return;
 		}
 		if (rider.isShiftKeyDown() && this.dashCooldown <= 0 && this.getStamina() >= LoftwingFlight.DASH_COST * LoftwingFlight.DASH_TICKS) {
@@ -369,25 +397,78 @@ public class Loftwing extends TamableAnimal {
 	}
 
 	/**
-	 * Forward, always, along whatever the bird is pointing at. Climbing costs wingbeats and gliding
-	 * gives them back, so a rider who keeps pulling up eventually has to level out.
+	 * The wingbeat, on the jump key: height at once, a little speed with it, for a slice of the
+	 * reserve. It is the only thing that puts energy back into the flight model, which makes it both
+	 * what lets a loftwing climb without end and the thing the rider runs out of.
+	 * <p>
+	 * A bird only catches its breath once the key is let go, rather than between one beat and the
+	 * next: paying it back across the pause in the rhythm came to all but the whole of what a beat
+	 * costs, and a rider could climb for ever on a reserve that never went down.
+	 */
+	private void tickWingbeats(Player rider) {
+		if (rider.isJumping()) {
+			if (this.canFlap()) {
+				this.flap();
+			}
+		} else if (!this.isDashing()) {
+			this.recoverStamina();
+		}
+	}
+
+	private boolean canFlap() {
+		return this.flapCooldown <= 0 && this.getStamina() >= LoftwingFlight.FLAP_COST;
+	}
+
+	private void flap() {
+		this.flapLift = LoftwingFlight.FLAP_LIFT;
+		this.flightSpeed = Math.min(this.flightSpeed + LoftwingFlight.FLAP_SPEED_GAIN, LoftwingFlight.MAX_SPEED);
+		// Felt on the tick it happens, and only upwards: a beat buys height without taking the rider
+		// off the heading they were already on, the way pulling the stick down does in Skyward Sword.
+		Vec3 delta = this.getDeltaMovement();
+		this.setDeltaMovement(delta.x(), LoftwingFlight.FLAP_LIFT, delta.z());
+		this.spendStamina(LoftwingFlight.FLAP_COST);
+		this.flapCooldown = LoftwingFlight.FLAP_INTERVAL;
+		this.playSound(ZeldaSounds.LOFTWING_FLAP, 1.0F, 1.0F);
+	}
+
+	/**
+	 * Forward along the bird's own nose, at the speed it has built up. Gravity works on that speed
+	 * and not on the bird, so a dive spends height to buy speed and a climb spends the speed back:
+	 * a rider who dives first climbs far higher than one who pulls up out of a glide, and keeps
+	 * climbing until the dive is paid out.
+	 * <p>
+	 * The bird then leans onto the velocity it wants instead of being put on it. That velocity used
+	 * to be assigned outright, which gave a bird that turned on a pin and carried nothing into a
+	 * climb.
 	 */
 	private void flyForward() {
-		Vec3 heading = this.getLookAngle();
-		double speed = this.isDashing() ? LoftwingFlight.DASH_SPEED : LoftwingFlight.CRUISE_SPEED;
-		if (heading.y() > 0.05) {
-			speed *= LoftwingFlight.CLIMB_FACTOR;
-			this.spendStamina(LoftwingFlight.CLIMB_COST);
-		} else if (heading.y() < -0.05) {
-			speed *= LoftwingFlight.DIVE_FACTOR;
-			this.recoverStamina();
-		} else {
-			this.recoverStamina();
-		}
+		// The y of a unit heading is the sine of the angle it climbs at, and so the share of gravity
+		// that works along the bird's own nose.
+		double climb = this.getLookAngle().y();
+		this.flightSpeed -= LoftwingFlight.GRAVITY * climb + LoftwingFlight.DRAG * this.flightSpeed * this.flightSpeed;
 		if (this.isDashing()) {
-			this.spendStamina(LoftwingFlight.DASH_COST);
+			this.flightSpeed += LoftwingFlight.DASH_THRUST;
 		}
-		this.setDeltaMovement(heading.scale(speed));
+		this.flightSpeed = Mth.clamp(this.flightSpeed, LoftwingFlight.MIN_SPEED, LoftwingFlight.MAX_SPEED);
+
+		this.setDeltaMovement(this.getDeltaMovement().lerp(this.getFlightVelocity(), LoftwingFlight.HEADING_INERTIA));
+		this.flapLift *= LoftwingFlight.FLAP_LIFT_DECAY;
+	}
+
+	/**
+	 * Where the flight model is taking the bird this tick: along its nose at the speed it holds, less
+	 * the height a glide always costs, plus whatever is left of the last wingbeat.
+	 * <p>
+	 * This is the model's own answer, and the bird's velocity is no place to read it back from: under
+	 * a rider that velocity is the business of the rider's client, and the server holds a zero.
+	 */
+	public Vec3 getFlightVelocity() {
+		return this.getLookAngle().scale(this.flightSpeed).add(0.0, this.flapLift - LoftwingFlight.GLIDE_SINK, 0.0);
+	}
+
+	/** How fast the bird is going along its own nose, in blocks a tick. */
+	public double getFlightSpeed() {
+		return this.flightSpeed;
 	}
 
 	public boolean isDashing() {
@@ -441,12 +522,15 @@ public class Loftwing extends TamableAnimal {
 	private void stopFlying() {
 		this.setFlying(false);
 		this.dashTicks = 0;
+		this.flightSpeed = 0.0;
+		this.flapLift = 0.0;
 		this.setDeltaMovement(this.getDeltaMovement().scale(0.2));
 	}
 
 	/**
-	 * Under a rider in powered flight the bird moves by the heading {@link #flyForward()} just set,
-	 * with no gravity and no drag applied on top.
+	 * Under a rider in powered flight the bird moves by the velocity {@link #flyForward()} just set,
+	 * with nothing of the world's applied on top: the flight model brings its own gravity and its own
+	 * drag.
 	 * <p>
 	 * This deliberately does not go through {@code setNoGravity}: that flag belongs to
 	 * {@link FlyingMoveControl}, which turns it back off on every tick it is not steering, and the
