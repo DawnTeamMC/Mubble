@@ -18,6 +18,8 @@ import org.jspecify.annotations.Nullable;
  *     a band above it and do not fall below it. Back on the ground, on a ladder, a wall or in water,
  *     it eases to the height of the feet.</li>
  * </ul>
+ * Turning the camera lets go of the offset too, gently, as much as it turns: the offset only stays
+ * while neither the camera nor the player moves.
  * Every distance scales with a margin setting: at 0, the focus sits on the player.
  */
 public final class ArcadeFraming {
@@ -39,9 +41,15 @@ public final class ArcadeFraming {
     public static final double MOVING_SPEED = 0.05D;
     /** How many ticks of moving it takes for the focus to catch up at full speed, and of standing still for it to stop. */
     public static final double ENGAGE_TICKS = 12.0D;
+    public static final double RELEASE_TICKS = 6.0D;
     /** How far into moving the player has to be before the focus starts catching up: a step or two is not moving on. */
     public static final double ENGAGE_DELAY = 0.4D;
-    public static final double RELEASE_TICKS = 6.0D;
+    /** Share of the way to the player the focus leaves every tick of a recenter, whatever the margins. */
+    public static final double RECENTER_KEEP = 0.6D;
+    /** How close to the player the focus has to come for a recenter to be over, in blocks. */
+    public static final double RECENTERED = 0.01D;
+    /** How far the camera has to turn, in degrees, for the player to come about two thirds of the way back to the middle. */
+    public static final double TURN_RECENTER_DEGREES = 90.0D;
     /** Farther than this, in blocks, the player was teleported, and the focus snaps to them. */
     public static final double SNAP_DISTANCE = 8.0D;
 
@@ -51,6 +59,8 @@ public final class ArcadeFraming {
     private Vec3 previousTarget;
     /** How far into catching up the focus is, from 0 (the player stands, or only just moved) to 1. */
     private double engagement;
+    /** Whether the focus is on its way back onto the player, see {@link #recenter()}. */
+    private boolean recentering;
 
     /** The focus, or {@code null} before the first tick. */
     @Nullable
@@ -63,6 +73,17 @@ public final class ArcadeFraming {
         this.focus = null;
         this.previousTarget = null;
         this.engagement = 0.0D;
+        this.recentering = false;
+    }
+
+    /** Brings the focus back onto the player, quickly, margins aside: the player ends in the middle of the screen. */
+    public void recenter() {
+        this.recentering = true;
+    }
+
+    /** Whether the focus is still on its way back onto the player. */
+    public boolean isRecentering() {
+        return this.recentering;
     }
 
     /** Corrects the focus from outside, as when it would sit behind a block. */
@@ -76,14 +97,25 @@ public final class ArcadeFraming {
      * @param target    where the feet of the player are
      * @param supported whether the player stands on something: the ground, a ladder, a wall, water
      * @param margin    the scale of every margin, 1 by default, 0 for a focus on the player
+     * @param turned    how far the camera turned since the last tick, in degrees: turning it brings the
+     *                  player back to the middle, gently, as moving on does
      */
-    public Vec3 tick(Vec3 target, boolean supported, double margin) {
+    public Vec3 tick(Vec3 target, boolean supported, double margin, double turned) {
         var focus = this.focus;
         var previous = this.previousTarget;
         this.previousTarget = target;
         if (focus == null || previous == null || focus.distanceTo(target) > SNAP_DISTANCE || previous.distanceTo(target) > SNAP_DISTANCE) {
             this.engagement = 0.0D;
+            this.recentering = false;
             return this.focus = target;
+        }
+        if (this.recentering) {
+            var gap = target.subtract(focus).scale(RECENTER_KEEP);
+            if (gap.length() < RECENTERED) {
+                this.recentering = false;
+                return this.focus = target;
+            }
+            return this.focus = target.subtract(gap);
         }
         margin = Math.max(0.0D, margin);
 
@@ -110,6 +142,11 @@ public final class ArcadeFraming {
         } else {
             height = -soften(-height, BELOW_MARGIN * margin, (BELOW_MARGIN + HARD_LIMIT) * margin);
         }
+
+        // turning the camera lets go of the offset, as much as it turned: still, it stays
+        double keep = Math.exp(-Math.abs(turned) / TURN_RECENTER_DEGREES);
+        scale *= keep;
+        height *= keep;
 
         return this.focus = new Vec3(target.x - gapX * scale, target.y - height, target.z - gapZ * scale);
     }
