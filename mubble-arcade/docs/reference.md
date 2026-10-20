@@ -229,7 +229,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 
 `interaction` decides what a player with the layer on can do: `full` (everything), `combat_only` (attack and use items, but not break, place or use blocks and entities), `none`. On top of that, moves with busy hands (triple jump, backflip, side somersault, ground pound and its landing, ledge grab and climb, wall slide, roll, dive, swim dash) block attacks and item use while they last.
 
-With the orbit camera on, the hands pick with `ArcadeAim.pickAhead` rather than the crosshair: the nearest entity ahead of the body within the vanilla reach, never a block. The server enforces the same rules.
+With the orbit camera on, the hands pick with `ArcadeAim.pickAhead` rather than the crosshair: the nearest entity ahead of the body within the vanilla reach, never a block. The server enforces the same rules. Aiming over the shoulder is the exception, see [Camera](#camera): the input frames are coupled again, so the body faces the crosshair, the hands pick with vanilla's raycast, and the server treats the player as it does in first person.
 
 Using an item slows the player down as in vanilla: the client sets `ArcadeInputFrame.USING_ITEM` and scales its stick by the `use_effects` speed of the item, and the server applies `ArcadeInputFrame.slowedFor` to every frame before replaying it, so that a frame going faster than the item in use allows is slowed down.
 
@@ -241,6 +241,12 @@ Using an item slows the player down as in vanilla: the client sets `ArcadeInputF
 | `#mubble:no_ledge_grab` | Edges of these cannot be grabbed | `#minecraft:leaves` |
 | `#mubble:bounce` | Landing on these at speed bounces the player back up (higher out of a ground pound); crouching lands normally | slime block |
 | `#mubble:keeps_momentum` | Ground speed is barely lost on these | ice, packed ice, blue ice |
+
+## Item tags
+
+| Tag | Effect | Default |
+|---|---|---|
+| `#mubble:aims_while_held` | Holding one of these aims over the shoulder, not only while it charges | empty |
 
 ## Attributes
 
@@ -276,6 +282,8 @@ Input is sampled every **frame**, not every tick: a press is remembered with the
 ## Camera
 
 How the camera behaves is on the wiki's *Camera* page. What it looks at is `ArcadeFraming`, common code so that unit tests hold it: a margin around the player sideways, a band above and below that only the ground moves, and a catch-up once the player keeps moving. What stands between the camera and the player does not move it: `ArcadeAim.clearDistance` only brings it closer when its own spot, plus a margin, is inside blocks, and `ArcadeCamera` eases its distance in and out. The silhouette (`ArcadeSilhouette`) is the player's model drawn twice more with a `LESS_THAN` depth test and no depth writes: among the solid models, before any entity's, to mark in the frame's alpha where the world hides the player, then among the translucent ones to tint the marked pixels gray and put their alpha back. Translucent models are drawn after every solid one, so tinting in one go would test against the player's own skin layers, armor and held items too.
+
+**Aiming over the shoulder.** `ArcadeShoulder.aims` decides it, in common code: an item in use whose use animation is `bow`, `crossbow` or `trident`, a loaded crossbow in either hand, or an item of `#mubble:aims_while_held` in either hand (meant for weapons that aim as long as they are held, such as Splatoon's). `ArcadeCamera` then eases a second blend, `aim`, to 1 over 0.15 s: the camera leaves the framing for the player's own position, sits 1.6 blocks behind the eyes and 0.6 to their right (`ArcadeAim.clearDistance` sideways keeps it out of a wall on the right), turns at vanilla's sensitivity, opens the pitch to ±90°, and drops the speed field of view. Meanwhile the input frames are coupled (`ArcadeCamera.coupled`), and every frame `aimBody` rotates the player so that their eyes look at `ArcadeAim.shoulderTarget`, the first block or entity along the view, cast from the depth of the eyes so that nothing between the camera and the player is aimed at: projectiles, which leave from the eyes, fly to what the crosshair shows. `ArcadeHudMixin` shows vanilla's crosshair once `aim` passes 0.5.
 
 The client settings, as `config/mubble-arcade-client.json` names them (`ArcadeClientConfig`). The settings screen (`ArcadeSettings`, a section of the core's Mubble settings screen) shows all but the camera height, recenter speed and pitch limits:
 
@@ -357,7 +365,7 @@ Client side, `/mubble_client arcade record` starts recording the steps of your p
 
 ## Debug HUD
 
-Bound to the Arcade Debug HUD key, or on at start with `debug_hud`: profile, move with its sequence number and ticks, pose, the animation playing (or vanilla), speeds, slope, coyote and input buffers, jump chain, wall and ledge timers, sources, resolved modes, owned moves, and whether a recording or replay runs.
+Bound to the Arcade Debug HUD key, or on at start with `debug_hud`: profile, move with its sequence number and ticks, pose, the animation playing (or vanilla), speeds, slope, coyote and input buffers, jump chain, wall and ledge timers, sources, resolved modes, owned moves, where the hands pick, the camera (`vanilla`, `orbit` or `shoulder`) with its `aim` blend, and whether a recording or replay runs.
 
 ## Multiplayer
 

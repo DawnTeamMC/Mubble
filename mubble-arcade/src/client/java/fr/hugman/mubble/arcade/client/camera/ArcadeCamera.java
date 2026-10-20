@@ -6,6 +6,7 @@ import fr.hugman.mubble.arcade.client.mixin.CameraInvoker;
 import fr.hugman.mubble.arcade.ArcadeAim;
 import fr.hugman.mubble.arcade.ArcadeController;
 import fr.hugman.mubble.arcade.ArcadeFraming;
+import fr.hugman.mubble.arcade.ArcadeShoulder;
 import fr.hugman.mubble.arcade.move.ArcadeMove;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -15,6 +16,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.Nullable;
 
@@ -27,6 +29,10 @@ import org.jspecify.annotations.Nullable;
  * block (the player showing through whatever stands in between otherwise, see {@link ArcadeSilhouette}), swings back behind the player on recenter, follows them round as they move if set
  * to, and blends with the vanilla view when one takes over from the other. The hands do not follow the camera: they hit and use items where the
  * body faces, see {@link ArcadeAim#pickAhead}.
+ * <p>
+ * Charging a bow, a crossbow or a trident, or holding a weapon that aims (see {@link ArcadeShoulder}),
+ * the camera moves in close behind the right shoulder and the body turns to face the crosshair, as in
+ * the first person view: the hands then reach out to what the crosshair points at.
  */
 @Environment(EnvType.CLIENT)
 public final class ArcadeCamera {
@@ -45,6 +51,16 @@ public final class ArcadeCamera {
     private static final float AUTO_CAMERA_DELAY = 0.75F;
     /** The slowest the player may go for the camera to follow them, in blocks per tick: standing still, it never moves. */
     private static final double AUTO_CAMERA_MIN_SPEED = 0.02D;
+    /** How long the camera takes to go to the shoulder and back, in seconds. */
+    private static final float AIM_SECONDS = 0.15F;
+    /** Where the camera sits while aiming, in blocks at the scale of a player: behind the eyes, to their right, above them. */
+    private static final double AIM_DISTANCE = 1.6D;
+    private static final double AIM_SIDE = 0.6D;
+    private static final double AIM_HEIGHT = 0.15D;
+    /** How far the crosshair reaches while aiming, in blocks: past it, the body looks along the view. */
+    private static final double AIM_RANGE = 96.0D;
+    /** How far the view may look up or down while aiming, in degrees, as in the first person view. */
+    private static final float AIM_PITCH = 90.0F;
 
     private static float yaw;
     private static float pitch;
@@ -59,6 +75,8 @@ public final class ArcadeCamera {
     private static Vec3 focusO;
     /** How far into the orbit the camera is, from the vanilla view (0) to the orbit (1). */
     private static float blend;
+    /** How far the camera has moved to the shoulder, from framing the player (0) to aiming (1). */
+    private static float aim;
     private static long lastFrameNanos;
     private static long lastManualTurnNanos;
     /** How far behind the focus the camera sits, easing towards where it can, or below 0 before the first frame. */
@@ -90,6 +108,27 @@ public final class ArcadeCamera {
         }
         orbiting = now;
         return now;
+    }
+
+    /** Whether the orbit camera aims over the shoulder: the body then faces the crosshair, see {@link ArcadeShoulder}. */
+    public static boolean isAiming() {
+        var player = Minecraft.getInstance().player;
+        return isOrbiting() && ArcadeShoulder.aims(player);
+    }
+
+    /** Whether the body of the player follows the view, as in the first person view: off the orbit, or aiming. */
+    public static boolean coupled() {
+        return !isOrbiting() || isAiming();
+    }
+
+    /** How far the camera has moved to the shoulder, from 0 to 1, for the debug HUD and the crosshair. */
+    public static float aim() {
+        return aim;
+    }
+
+    /** Whether the crosshair shows, as in the first person view: once the camera is most of the way to the shoulder. */
+    public static boolean showsCrosshair() {
+        return aim >= 0.5F && isAiming();
     }
 
     /**
@@ -134,9 +173,10 @@ public final class ArcadeCamera {
     /** Turns the camera, the way {@code Entity.turn} turns the view: called with what the mouse or right stick moved. */
     public static void turn(double yawDelta, double pitchDelta) {
         var config = ArcadeClientConfig.get();
-        double scale = 0.15D * config.orbitSensitivity();
+        // aiming turns the view as the first person view does
+        double scale = 0.15D * Mth.lerp(aim, config.orbitSensitivity(), 1.0D);
         yaw = Mth.wrapDegrees((float) (yaw + yawDelta * scale));
-        pitch = (float) Mth.clamp(pitch + pitchDelta * scale, config.minPitch(), config.maxPitch());
+        pitch = Mth.clamp((float) (pitch + pitchDelta * scale), minPitch(), maxPitch());
         if (yawDelta != 0.0D || pitchDelta != 0.0D) {
             // turning by hand takes over from a recenter and from following; a controller turns by nothing every frame its stick rests
             recentering = false;
@@ -146,6 +186,15 @@ public final class ArcadeCamera {
 
     public static void recenter() {
         recentering = true;
+    }
+
+    /** How far up the view may look: the orbit's limit, opening up to the first person one while aiming. */
+    private static float minPitch() {
+        return Mth.lerp(aim, (float) ArcadeClientConfig.get().minPitch(), -AIM_PITCH);
+    }
+
+    private static float maxPitch() {
+        return Mth.lerp(aim, (float) ArcadeClientConfig.get().maxPitch(), AIM_PITCH);
     }
 
     /**
@@ -163,11 +212,19 @@ public final class ArcadeCamera {
         boolean blendable = Minecraft.getInstance().options.getCameraType() == CameraType.THIRD_PERSON_BACK;
         float targetBlend = orbit ? 1.0F : 0.0F;
         blend = blendable ? Mth.approach(blend, targetBlend, seconds / BLEND_SECONDS) : targetBlend;
+        boolean aiming = orbit && ArcadeShoulder.aims(player);
+        float previousAim = aim;
+        aim = blend > 0.0F ? Mth.approach(aim, aiming ? 1.0F : 0.0F, seconds / AIM_SECONDS) : 0.0F;
         if (blend <= 0.0F) {
             return;
         }
+        // back from aiming, the view leaves the first person's pitch for the orbit's, as quickly
+        pitch = Mth.clamp(pitch, minPitch(), maxPitch());
 
         var config = ArcadeClientConfig.get();
+        if (aiming) {
+            recentering = false;
+        }
         if (recentering && orbit) {
             float target = player.getYRot();
             yaw = Mth.approachDegrees(yaw, target, (float) (config.recenterSpeed() * seconds));
@@ -176,31 +233,43 @@ public final class ArcadeCamera {
             }
         }
 
-        if (orbit && !recentering) {
+        if (orbit && !recentering && !aiming) {
             follow(player, now, seconds);
         }
 
         var invoker = (CameraInvoker) camera;
+        var position = player.getPosition(partialTicks);
         var feet = focus != null && focusO != null
                 ? focusO.lerp(focus, partialTicks)
-                : player.getPosition(partialTicks);
+                : position;
+        // aiming, the camera leaves the framing for the player themselves
+        feet = feet.lerp(position, aim);
         // the eye height vanilla smooths, so that changing pose (a roll, a dive) does not jerk the view
         float eye = Mth.lerp(partialTicks, invoker.mubble$getEyeHeightOld(), invoker.mubble$getEyeHeight());
-        var center = feet.add(0.0D, eye + config.cameraHeight(), 0.0D);
+        var center = feet.add(0.0D, eye + Mth.lerp(aim, config.cameraHeight(), AIM_HEIGHT * player.getScale()), 0.0D);
         var forward = Vec3.directionFromRotation(pitch, yaw);
-        var orbitPosition = center.subtract(forward.scale(distance(player, center, forward, seconds)));
+        if (aim > 0.0F) {
+            // to the right of the eyes, as far as the blocks let it
+            var right = Vec3.directionFromRotation(0.0F, yaw + 90.0F);
+            double side = ArcadeAim.clearDistance(player.level(), player, center, right.scale(-1.0D), AIM_SIDE * player.getScale() * aim, CAMERA_BOX);
+            center = center.add(right.scale(side));
+        }
+        var orbitPosition = center.subtract(forward.scale(distance(player, center, forward, seconds, aim != previousAim)));
 
         if (blend >= 1.0F) {
             invoker.mubble$setRotation(yaw, pitch);
             invoker.mubble$setPosition(orbitPosition);
-            return;
+        } else {
+            float t = blend * blend * (3.0F - 2.0F * blend);
+            var vanillaPosition = camera.position();
+            float vanillaYaw = camera.yRot();
+            float vanillaPitch = camera.xRot();
+            invoker.mubble$setRotation(vanillaYaw + Mth.degreesDifference(vanillaYaw, yaw) * t, Mth.lerp(t, vanillaPitch, pitch));
+            invoker.mubble$setPosition(vanillaPosition.lerp(orbitPosition, t));
         }
-        float t = blend * blend * (3.0F - 2.0F * blend);
-        var vanillaPosition = camera.position();
-        float vanillaYaw = camera.yRot();
-        float vanillaPitch = camera.xRot();
-        invoker.mubble$setRotation(vanillaYaw + Mth.degreesDifference(vanillaYaw, yaw) * t, Mth.lerp(t, vanillaPitch, pitch));
-        invoker.mubble$setPosition(vanillaPosition.lerp(orbitPosition, t));
+        if (aiming) {
+            aimBody(player, player.getEyePosition(partialTicks), camera.position(), Vec3.directionFromRotation(camera.xRot(), camera.yRot()));
+        }
     }
 
     /**
@@ -210,11 +279,12 @@ public final class ArcadeCamera {
      * out of it, quickly, then back out slowly once there is room again. It only ever cuts to where it
      * can be when it would otherwise be inside a block.
      */
-    private static double distance(LocalPlayer player, Vec3 center, Vec3 forward, float seconds) {
+    private static double distance(LocalPlayer player, Vec3 center, Vec3 forward, float seconds, boolean aimMoving) {
         var level = player.level();
-        double wanted = ArcadeClientConfig.get().cameraDistance() * hintDistanceScale(player) * player.getScale();
+        double wanted = Mth.lerp(aim, ArcadeClientConfig.get().cameraDistance() * hintDistanceScale(player), AIM_DISTANCE) * player.getScale();
         double target = ArcadeAim.clearDistance(level, player, center, forward, wanted, OBSTRUCTION_MARGIN);
-        if (distance < 0.0D || blend < 1.0F) {
+        // going to the shoulder and back is already eased
+        if (distance < 0.0D || blend < 1.0F || aimMoving) {
             distance = target;
         } else {
             double rate = target < distance ? MOVE_IN_RATE : MOVE_OUT_RATE;
@@ -224,6 +294,22 @@ public final class ArcadeCamera {
             }
         }
         return distance;
+    }
+
+    /**
+     * Turns the body of the player to face what the crosshair points at, seen from the camera at
+     * {@code camera}: the eyes look at it, so that what they shoot or reach out to is what the
+     * crosshair shows, wherever the camera sits beside them. Too close to tell, they look along the view.
+     */
+    private static void aimBody(LocalPlayer player, Vec3 eye, Vec3 camera, Vec3 forward) {
+        var target = ArcadeAim.shoulderTarget(player.level(), player, camera, forward, eye, AIM_RANGE);
+        var look = target.subtract(eye);
+        var rotation = look.lengthSqr() > 1.0D && look.dot(forward) > 0.0D
+                ? ArcadeShoulder.lookAt(eye, target)
+                : new Vec2(pitch, yaw);
+        player.setXRot(rotation.x);
+        player.setYRot(rotation.y);
+        player.setYHeadRot(rotation.y);
     }
 
     /** Whether the camera follows the player round as they move: a setting for the keyboard and mouse, one for controllers. */
@@ -269,7 +355,8 @@ public final class ArcadeCamera {
         double run = Math.max(1.0E-3D, profile.physics().ground().runSpeed());
         double share = Math.min(1.5D, controller.state().horizontalSpeed() / run);
         double hint = ArcadeClientConfig.get().respectProfileHints() ? profile.camera().fovKickScale() : 1.0D;
-        return (float) (1.0D + ArcadeClientConfig.get().fovKick() * hint * share);
+        // aiming, the view keeps still: a drawn bow zooms in already
+        return (float) (1.0D + ArcadeClientConfig.get().fovKick() * hint * share * (1.0F - aim));
     }
 
     /** What the hands of the player reach out to with the orbit camera on: what stands where they face, see {@link ArcadeAim#pickAhead}. */
