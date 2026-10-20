@@ -19,6 +19,8 @@ public class LoftwingSoarGoal extends Goal {
 	/** How far above the clouds it settles. */
 	private static final int MIN_HEIGHT_ABOVE_CLOUDS = 4;
 	private static final int MAX_HEIGHT_ABOVE_CLOUDS = 28;
+	/** However low the clouds are, the bird keeps at least this much air under it. */
+	private static final int MIN_CLEARANCE_ABOVE_GROUND = 12;
 	/** How close is close enough to aim at the next point of the circle. */
 	private static final double WAYPOINT_REACHED = 6.0;
 	/** A circle is left behind after this long, so that birds drift instead of grinding a groove in the sky. */
@@ -83,15 +85,27 @@ public class LoftwingSoarGoal extends Goal {
 		this.centerX = this.loftwing.getX();
 		this.centerZ = this.loftwing.getZ();
 		this.angle = random.nextFloat() * (float) (Math.PI * 2.0);
+
 		float clouds = LoftwingSky.cloudLevel(this.loftwing.level(), this.loftwing.blockPosition());
 		this.altitude = clouds + MIN_HEIGHT_ABOVE_CLOUDS + random.nextInt(MAX_HEIGHT_ABOVE_CLOUDS - MIN_HEIGHT_ABOVE_CLOUDS);
 		this.ticksOnCircle = 0;
 	}
 
+	/**
+	 * The height to actually aim for. A bird already in the air makes for the cruising altitude,
+	 * above or below it; a bird with its feet on something always aims up, whatever the clouds of
+	 * this dimension are doing, because the alternative is pressing itself into the floor.
+	 */
+	private double targetAltitude() {
+		return this.loftwing.onGround()
+				? Math.max(this.altitude, this.loftwing.getY() + MIN_CLEARANCE_ABOVE_GROUND)
+				: this.altitude;
+	}
+
 	private Vec3 waypoint() {
 		return new Vec3(
 				this.centerX + Math.cos(this.angle) * RADIUS,
-				this.altitude,
+				this.targetAltitude(),
 				this.centerZ + Math.sin(this.angle) * RADIUS
 		);
 	}
