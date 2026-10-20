@@ -50,6 +50,30 @@ public class MiniGoomba extends AbstractGoomba implements Stompable {
     /** How many mini goombas one carrier can hold at once. */
     public static final int MAX_CLINGING = 8;
 
+    /** Where a carrier saves how many mini goombas are holding onto it. */
+    public static final String CLINGING_KEY = "clinging_mini_goombas";
+
+    /** The attribute modifiers clinging mini goombas weigh their carrier down with. */
+    public static final Identifier CLING_MODIFIER_ID = SuperMario.id("clinging_mini_goombas");
+
+    /** How much of the carrier's speed each clinging mini goomba takes away. */
+    public static final double SLOWDOWN_PER_GOOMBA = 0.12D;
+    /** However many pile on, they never take more than this share of the carrier's speed. */
+    public static final double MAX_SLOWDOWN = 0.6D;
+    /** How much of the carrier's jump each clinging mini goomba takes away, as in Super Mario Bros. 3. */
+    public static final double JUMP_PENALTY_PER_GOOMBA = 0.08D;
+    public static final double MAX_JUMP_PENALTY = 0.5D;
+
+    /**
+     * How many sneak presses shake one mini goomba loose, and how long the carrier has between two of them
+     * before the struggle is counted as given up on, in ticks.
+     */
+    public static final int STRUGGLE_TOGGLES = 4;
+    public static final int STRUGGLE_WINDOW = 20;
+
+    /** How often a clinging mini goomba is heard gnawing away, in ticks. */
+    public static final int NIBBLE_INTERVAL = 15;
+
     /**
      * How long a shaken-off mini goomba has to wait before it can hold on again, in ticks.
      * <p>
