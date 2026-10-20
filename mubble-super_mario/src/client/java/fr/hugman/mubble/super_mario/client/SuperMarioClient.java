@@ -28,6 +28,7 @@ public class SuperMarioClient implements ClientModInitializer {
         SuperMarioSplashes.register();
         SuperMarioRenderers.registerEntities();
         SuperMarioRenderers.registerBlockEntities();
+        SuperMarioRenderers.registerLayers();
         SuperMarioParticleResources.register();
         ClientTickEvents.END_CLIENT_TICK.register(FreezeStruggleHandler::tick);
     }

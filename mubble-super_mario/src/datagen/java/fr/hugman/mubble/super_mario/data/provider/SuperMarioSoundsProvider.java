@@ -49,6 +49,8 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.GOOMBA_FIND_TARGET, variantSoundBuilder(SuperMarioSounds.GOOMBA_FIND_TARGET, 1));
         soundExporter.add(SuperMarioSounds.GOOMBA_DEATH, variantSoundBuilder(SuperMarioSounds.GOOMBA_DEATH, 1));
         soundExporter.add(SuperMarioSounds.GOOMBA_STOMP, variantSoundBuilder(SuperMarioSounds.GOOMBA_STOMP, 1));
+        // Same file as a goomba footstep, played higher, but captioned as what it is rather than as footsteps.
+        soundExporter.add(SuperMarioSounds.MINI_GOOMBA_NIBBLE, variantSoundBuilder(SuperMarioSounds.MINI_GOOMBA_NIBBLE, 1, SuperMarioSounds.GOOMBA_WALK_STEP.location()));
 
         soundExporter.add(SuperMarioSounds.KOOPA_SHELL_SLIDE, variantSoundBuilder(SuperMarioSounds.KOOPA_SHELL_SLIDE, 1));
         soundExporter.add(SuperMarioSounds.KOOPA_SHELL_HOMING, variantSoundBuilder(SuperMarioSounds.KOOPA_SHELL_HOMING, 1));

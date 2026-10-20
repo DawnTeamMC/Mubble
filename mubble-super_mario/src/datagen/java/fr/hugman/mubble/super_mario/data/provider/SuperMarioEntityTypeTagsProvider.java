@@ -23,10 +23,10 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 		// Mod
 		builder(KOOPA_SHELLS).add(GREEN_KOOPA_SHELL, RED_KOOPA_SHELL);
 		builder(CAN_STOMP).add(PLAYER);
-		builder(STOMPABLE).add(GOOMBA, GREEN_KOOPA_SHELL);
+		builder(STOMPABLE).add(GOOMBA, MINI_GOOMBA, GREEN_KOOPA_SHELL);
 
 		// FIREBALL is qualified because vanilla has one under that name too.
-		builder(ALL).add(GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, SuperMarioEntityTypeIds.FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE, SUPERBALL);
+		builder(ALL).add(GOOMBA, MINI_GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, SuperMarioEntityTypeIds.FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE, SUPERBALL);
 
 		// bosses shrug an ice ball off; every other mob is judged on its bulk alone
 		builder(FREEZE_IMMUNE).add(ENDER_DRAGON, WITHER);
@@ -36,7 +36,7 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 		builder(BUBBLE_CANNOT_TRAP).add(PLAYER, ENDER_DRAGON, WITHER, WARDEN, ELDER_GUARDIAN, RAVAGER, IRON_GOLEM);
 
 		// Vanilla
-		builder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA);
-		builder(EntityTypeTags.NOT_SCARY_FOR_PUFFERFISH).add(GOOMBA);
+		builder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA, MINI_GOOMBA);
+		builder(EntityTypeTags.NOT_SCARY_FOR_PUFFERFISH).add(GOOMBA, MINI_GOOMBA);
 	}
 }

@@ -93,6 +93,8 @@ public class ContentRegistrationTest {
     @Test
     @DisplayName("projectile entity types are the ones their key points at")
     void projectileEntityTypesMatchTheirKey() {
+        assertRegisteredAs(SuperMarioEntityTypes.GOOMBA, SuperMarioEntityTypeIds.GOOMBA);
+        assertRegisteredAs(SuperMarioEntityTypes.MINI_GOOMBA, SuperMarioEntityTypeIds.MINI_GOOMBA);
         assertRegisteredAs(SuperMarioEntityTypes.FIREBALL, SuperMarioEntityTypeIds.FIREBALL);
         assertRegisteredAs(SuperMarioEntityTypes.ICEBALL, SuperMarioEntityTypeIds.ICEBALL);
         assertRegisteredAs(SuperMarioEntityTypes.GOLD_FIREBALL, SuperMarioEntityTypeIds.GOLD_FIREBALL);
@@ -134,6 +136,7 @@ public class ContentRegistrationTest {
         assertSame(SuperMarioItems.FIRE_FLOWER, BuiltInRegistries.ITEM.getValue(SuperMarioItemIds.FIRE_FLOWER), "the fire flower");
         assertSame(SuperMarioItems.MINI_MUSHROOM, BuiltInRegistries.ITEM.getValue(SuperMarioItemIds.MINI_MUSHROOM), "the mini mushroom");
         assertSame(SuperMarioItems.GOOMBA_SPAWN_EGG, BuiltInRegistries.ITEM.getValue(SuperMarioItemIds.GOOMBA_SPAWN_EGG), "the goomba spawn egg");
+        assertSame(SuperMarioItems.MINI_GOOMBA_SPAWN_EGG, BuiltInRegistries.ITEM.getValue(SuperMarioItemIds.MINI_GOOMBA_SPAWN_EGG), "the mini goomba spawn egg");
     }
 
     private static void assertRegisteredAs(EntityType<?> type, ResourceKey<EntityType<?>> key) {

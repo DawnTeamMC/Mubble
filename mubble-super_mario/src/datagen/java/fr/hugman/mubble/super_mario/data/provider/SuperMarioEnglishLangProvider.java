@@ -48,8 +48,6 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.coins", "They collect the coins they touch.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
 
-        builder.add("entity." + SuperMario.MOD_ID + ".goomba.mini", "Mini Goomba");
-        builder.add("item." + SuperMario.MOD_ID + ".mini_goomba_spawn_egg", "Mini Goomba Spawn Egg");
 
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.bumpable_block.bump", "Block bumped");
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.bumpable_block.change_loot", "Block filled");
@@ -65,6 +63,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.find_target", "Goomba finds a target");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.death", "Goomba dies");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.goomba.stomp", "Goomba stomped");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".entity.mini_goomba.nibble", "Mini Goomba nibbles");
         builder.add(SuperMarioSounds.KOOPA_SHELL_SLIDE, "Koopa Shell slides");
         builder.add(SuperMarioSounds.KOOPA_SHELL_HOMING, "Koopa Shell homing");
         builder.add(SuperMarioSounds.KOOPA_SHELL_HIT_BLOCK, "Koopa Shell hits block");
