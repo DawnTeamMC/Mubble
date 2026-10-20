@@ -115,7 +115,7 @@ public final class ArcadeClientInput {
      * camera, and every action sampled since the previous tick.
      */
     public static ArcadeInputFrame frame(LocalPlayer player, int tick) {
-        boolean coupled = !ArcadeCamera.isOrbiting();
+        boolean coupled = ArcadeCamera.coupled();
         float yaw = yaw(player, coupled);
         float[] stick = stick(player, yaw);
         return COLLECTOR.tick(tick, System.nanoTime(), stick[0], stick[1], yaw, coupled);
@@ -123,7 +123,7 @@ public final class ArcadeClientInput {
 
     /** The input of the player as it stands, with nothing pressed: what the previews of the button guide start from. */
     public static ArcadeInputFrame current(LocalPlayer player) {
-        boolean coupled = !ArcadeCamera.isOrbiting();
+        boolean coupled = ArcadeCamera.coupled();
         float yaw = yaw(player, coupled);
         float[] stick = stick(player, yaw);
         return new ArcadeInputFrame(0, stick[0], stick[1], yaw, coupled, (byte) (down & ~ArcadeInputFrame.ACTION), (byte) 0, (short) 0, (short) 0).slowedFor(player);

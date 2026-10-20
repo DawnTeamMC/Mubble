@@ -8,6 +8,7 @@
     "ArcadeCameraMixin",
     "ArcadeClientPacketListenerMixin",
     "ArcadeEntityTurnMixin",
+    "ArcadeHudMixin",
     "ArcadeHumanoidModelMixin",
     "ArcadeLivingEntityRendererMixin",
     "ArcadeLocalPlayerMixin",

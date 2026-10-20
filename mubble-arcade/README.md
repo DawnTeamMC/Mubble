@@ -16,7 +16,7 @@ An optional movement layer for Mubble, in the spirit of *Super Mario Odyssey*: c
 - **Moves are code, numbers are data.** Each move (`move/`) is a state of one simulation (`sim/`), shared by the client and the server. Profiles, a dynamic registry, give every move its numbers.
 - **Client prediction, server validation.** The client steps the simulation every tick and sends each step with its input. The server (`server/ArcadeValidator`) replays it from the reported start, checks the result, and sends back or corrects what the input cannot explain.
 - **Who gets what.** Sources, from items or commands, and unlocks decide, per player, the profile and which moves are available (`access/`).
-- **Client side** (`src/client`): input sampled every frame, the orbit camera and its silhouette, JSON keyframe animations played with vanilla's animation system, sounds and particles, the settings, and the Controlify integration (`compat/controlify`).
+- **Client side** (`src/client`): input sampled every frame, the orbit camera, its silhouette and its aim over the shoulder, JSON keyframe animations played with vanilla's animation system, sounds and particles, the settings, and the Controlify integration (`compat/controlify`).
 
 ## Working on it
 
