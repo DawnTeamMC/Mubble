@@ -1,0 +1,13 @@
+{
+  "name": {
+    "text": "Tiny Goomba"
+  },
+  "assets": {
+    "texture": "super_mario:entity/goomba/normal/normal",
+    "surprised": "super_mario:entity/goomba/normal/surprised"
+  },
+  "base_attribute_values": {
+    "minecraft:max_health": 2.0,
+    "minecraft:scale": 0.5
+  }
+}

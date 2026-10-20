@@ -166,7 +166,7 @@ public class EntityMixin implements Stompable, FallGraced {
 			// A player's real momentum only lives on their client; the server-side delta is stale, and sending it
 			// back would kill the horizontal speed they came in with. getKnownMovement() is what the client reported.
 			Vec3 momentum = entity.getKnownMovement();
-			entity.setDeltaMovement(momentum.x(), 0.5D, momentum.z());
+			entity.setDeltaMovement(momentum.x(), this.getStompBounce(), momentum.z());
 			if (entity instanceof Player player) {
 				((ServerPlayer) player).connection.send(new ClientboundSetEntityMotionPacket(player));
 			}
