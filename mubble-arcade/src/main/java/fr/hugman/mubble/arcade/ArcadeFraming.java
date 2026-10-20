@@ -18,6 +18,8 @@ import org.jspecify.annotations.Nullable;
  *     a band above it and do not fall below it. Back on the ground, on a ladder, a wall or in water,
  *     it eases to the height of the feet.</li>
  * </ul>
+ * Turning the camera lets go of the offset too, gently, as much as it turns: the offset only stays
+ * while neither the camera nor the player moves.
  * Every distance scales with a margin setting: at 0, the focus sits on the player.
  */
 public final class ArcadeFraming {
@@ -46,6 +48,8 @@ public final class ArcadeFraming {
     public static final double RECENTER_KEEP = 0.6D;
     /** How close to the player the focus has to come for a recenter to be over, in blocks. */
     public static final double RECENTERED = 0.01D;
+    /** How far the camera has to turn, in degrees, for the player to come about two thirds of the way back to the middle. */
+    public static final double TURN_RECENTER_DEGREES = 90.0D;
     /** Farther than this, in blocks, the player was teleported, and the focus snaps to them. */
     public static final double SNAP_DISTANCE = 8.0D;
 
@@ -93,8 +97,10 @@ public final class ArcadeFraming {
      * @param target    where the feet of the player are
      * @param supported whether the player stands on something: the ground, a ladder, a wall, water
      * @param margin    the scale of every margin, 1 by default, 0 for a focus on the player
+     * @param turned    how far the camera turned since the last tick, in degrees: turning it brings the
+     *                  player back to the middle, gently, as moving on does
      */
-    public Vec3 tick(Vec3 target, boolean supported, double margin) {
+    public Vec3 tick(Vec3 target, boolean supported, double margin, double turned) {
         var focus = this.focus;
         var previous = this.previousTarget;
         this.previousTarget = target;
@@ -136,6 +142,11 @@ public final class ArcadeFraming {
         } else {
             height = -soften(-height, BELOW_MARGIN * margin, (BELOW_MARGIN + HARD_LIMIT) * margin);
         }
+
+        // turning the camera lets go of the offset, as much as it turned: still, it stays
+        double keep = Math.exp(-Math.abs(turned) / TURN_RECENTER_DEGREES);
+        scale *= keep;
+        height *= keep;
 
         return this.focus = new Vec3(target.x - gapX * scale, target.y - height, target.z - gapZ * scale);
     }

@@ -21,6 +21,7 @@ As in 3D platformers, the camera does not move for every step the player takes:
 
 - A step aside leaves it still. The player moves freely within about 0.8 blocks of the point the camera looks at; past that, the camera follows smoothly, and never lets them get more than 1.8 blocks away.
 - Once the player keeps moving for a quarter of a second, the camera catches up a little faster than they go, so that a run ends with the player back in the middle.
+- Turning the camera also brings the player back to the middle, gently, as much as it turns: about two thirds of the way over a quarter turn. The player only stays off-center while neither the camera nor the player moves.
 - Jumps leave the height of the camera alone, up to 2.5 blocks above where it looks. It only rises or sinks with the ground: once the player lands higher or lower, or on a ladder, a wall or in water, it eases to their new height. A fall more than 0.75 blocks below it is followed right away.
 
 The *Camera Margin* setting scales all of this: 0% keeps the player in the middle of the screen at all times.

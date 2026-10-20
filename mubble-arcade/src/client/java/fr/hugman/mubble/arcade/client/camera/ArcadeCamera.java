@@ -48,6 +48,9 @@ public final class ArcadeCamera {
 
     private static float yaw;
     private static float pitch;
+    /** The rotation of the camera on the last tick, to tell how far it turned since. */
+    private static float tickYaw;
+    private static float tickPitch;
     private static boolean orbiting;
     private static boolean recentering;
     /** What the camera looks at, framing the feet of the player, see {@link ArcadeFraming}. */
@@ -106,7 +109,11 @@ public final class ArcadeCamera {
         }
         var target = player.position();
         focusO = focus == null ? target : focus;
-        focus = FRAMING.tick(target, supported(player), ArcadeClientConfig.get().cameraMargin());
+        // however it turned (the mouse, the stick, following the player), turning lets go of the offset
+        double turned = Math.abs(Mth.degreesDifference(tickYaw, yaw)) + Math.abs(pitch - tickPitch);
+        tickYaw = yaw;
+        tickPitch = pitch;
+        focus = FRAMING.tick(target, supported(player), ArcadeClientConfig.get().cameraMargin(), turned);
         // the focus must not slip behind a block, which would put the camera inside it: going down
         // steps, the edge left behind hides it for a tick, and it comes closer only that much
         focus = ArcadeAim.trail(player.level(), player, target, focus, player.getEyeHeight() + ArcadeClientConfig.get().cameraHeight());
