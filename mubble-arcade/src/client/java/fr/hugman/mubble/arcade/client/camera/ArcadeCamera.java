@@ -24,7 +24,7 @@ import org.jspecify.annotations.Nullable;
  * The camera has its own yaw and pitch, moved by the mouse or the right stick, and the stick moves
  * the player relative to it: the body turns towards where it goes, the view does not follow, and the
  * head looks at the horizon. The camera frames the player with some room around them rather than nailing them to the middle (see {@link ArcadeFraming}), eases in when it backs into a
- * block (the player showing through whatever stands in between otherwise, see {@link ArcadeSilhouette}), swings back behind the player on recenter, follows them round as they move if set
+ * block (the player showing through whatever stands in between otherwise, see {@link ArcadeSilhouette}), swings back behind the player, level with the horizon and with the player in the middle, on recenter, follows them round as they move if set
  * to, and blends with the vanilla view when one takes over from the other. The hands do not follow the camera: they hit and use items where the
  * body faces, see {@link ArcadeAim#pickAhead}.
  */
@@ -144,8 +144,10 @@ public final class ArcadeCamera {
         }
     }
 
+    /** Swings the camera behind the player, level with the horizon, and brings the player back to the middle of the screen. */
     public static void recenter() {
         recentering = true;
+        FRAMING.recenter();
     }
 
     /**
@@ -170,8 +172,11 @@ public final class ArcadeCamera {
         var config = ArcadeClientConfig.get();
         if (recentering && orbit) {
             float target = player.getYRot();
-            yaw = Mth.approachDegrees(yaw, target, (float) (config.recenterSpeed() * seconds));
-            if (Math.abs(Mth.degreesDifference(yaw, target)) < 0.5F) {
+            float step = (float) (config.recenterSpeed() * seconds);
+            yaw = Mth.approachDegrees(yaw, target, step);
+            float horizon = (float) Mth.clamp(0.0D, config.minPitch(), config.maxPitch());
+            pitch = Mth.approach(pitch, horizon, step);
+            if (Math.abs(Mth.degreesDifference(yaw, target)) < 0.5F && Math.abs(pitch - horizon) < 0.5F) {
                 recentering = false;
             }
         }

@@ -126,4 +126,25 @@ public class ArcadeFramingTest {
         framing.tick(target, false, 1.0D);
         assertEquals(target, framing.focus());
     }
+
+    @Test
+    @DisplayName("a recenter brings the player back to the middle, margins aside, then the margins hold again")
+    void aRecenterBringsThePlayerBack() {
+        var framing = settledAt(Vec3.ZERO);
+        // standing half a block aside, mid-jump: within every margin, so the framing alone leaves it
+        var target = new Vec3(0.5D, 2.0D, 0.0D);
+        framing.tick(target, false, 1.0D);
+        framing.tick(target, false, 1.0D);
+        assertEquals(Vec3.ZERO, framing.focus(), "within the margins, the camera should not have moved");
+        framing.recenter();
+        int ticks = 0;
+        while (framing.isRecentering() && ticks < 40) {
+            framing.tick(target, false, 1.0D);
+            ticks++;
+        }
+        assertTrue(!framing.isRecentering() && ticks <= 12, "the recenter should be over within 12 ticks, took " + ticks);
+        assertEquals(target, framing.focus(), "after a recenter, the player should be in the middle");
+        framing.tick(target.add(0.3D, 0.0D, 0.0D), true, 1.0D);
+        assertEquals(target.x, framing.focus().x, 1.0E-9D, "once recentered, a step aside should leave the camera again");
+    }
 }
