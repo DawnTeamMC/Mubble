@@ -22,7 +22,7 @@ import net.minecraft.world.phys.Vec3;
 
 /**
  * The orbit camera against real blocks: it never sits inside a wall, and meanwhile the hands of the
- * player reach out to what stands in front of them, never to a block. Charging a weapon, it aims
+ * player reach out to what stands in front of them, never to a block. Holding a weapon, it aims
  * over the shoulder, and the eyes of the player look at what its crosshair points at.
  */
 public class ArcadeAimGameTest {
@@ -178,26 +178,29 @@ public class ArcadeAimGameTest {
     }
 
     @GameTest(structure = ArcadeTestKit.LANE)
-    public void chargingABowACrossbowOrATridentAimsOverTheShoulder(GameTestHelper helper) {
+    public void holdingABowACrossbowOrATridentAimsOverTheShoulder(GameTestHelper helper) {
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         for (var item : new Item[]{Items.BOW, Items.CROSSBOW, Items.TRIDENT}) {
+            // held, before charging, while charging, and once shot: the camera stays at the shoulder
             player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item));
-            helper.assertFalse(ArcadeShoulder.aims(player), "holding " + item + " before charging it");
+            helper.assertTrue(ArcadeShoulder.aims(player), "holding " + item);
             player.startUsingItem(InteractionHand.MAIN_HAND);
             helper.assertTrue(ArcadeShoulder.aims(player), "charging " + item);
             player.stopUsingItem();
+            helper.assertTrue(ArcadeShoulder.aims(player), "after shooting " + item);
         }
         // what charges nothing does not
-        for (var item : new Item[]{Items.BREAD, Items.SHIELD, Items.SPYGLASS}) {
-            helper.assertFalse(ArcadeShoulder.aimsWhileUsing(new ItemStack(item)), "using " + item);
+        for (var item : new Item[]{Items.BREAD, Items.SHIELD, Items.SPYGLASS, Items.DIAMOND_SWORD}) {
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item));
+            helper.assertFalse(ArcadeShoulder.aims(player), "holding " + item);
         }
 
-        // a loaded crossbow aims as long as it is held, in either hand
+        // a loaded crossbow aims too, in either hand
         var loaded = new ItemStack(Items.CROSSBOW);
         loaded.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.ofNonEmpty(List.of(new ItemStack(Items.ARROW))));
         player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         player.setItemInHand(InteractionHand.OFF_HAND, loaded);
-        helper.assertTrue(ArcadeShoulder.aims(player), "holding a loaded crossbow");
+        helper.assertTrue(ArcadeShoulder.aims(player), "holding a loaded crossbow in the off hand");
         helper.succeed();
     }
 }

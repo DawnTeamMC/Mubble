@@ -6,7 +6,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public class ArcadeItemTags {
-    /** Items the orbit camera aims over the shoulder for as long as they are held, not only while they charge. */
+    /** Items the orbit camera aims over the shoulder for as long as they are held, on top of bows, crossbows and tridents. */
     public static final TagKey<Item> AIMS_WHILE_HELD = bind("aims_while_held");
 
     public static TagKey<Item> bind(String path) {

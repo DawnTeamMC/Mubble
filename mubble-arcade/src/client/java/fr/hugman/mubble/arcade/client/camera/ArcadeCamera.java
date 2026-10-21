@@ -30,7 +30,7 @@ import org.jspecify.annotations.Nullable;
  * to, and blends with the vanilla view when one takes over from the other. The hands do not follow the camera: they hit and use items where the
  * body faces, see {@link ArcadeAim#pickAhead}.
  * <p>
- * Charging a bow, a crossbow or a trident, or holding a weapon that aims (see {@link ArcadeShoulder}),
+ * Holding a bow, a crossbow, a trident or another weapon that aims (see {@link ArcadeShoulder}),
  * the camera moves in close behind the right shoulder and the body turns to face the crosshair, as in
  * the first person view: the hands then reach out to what the crosshair points at.
  */
