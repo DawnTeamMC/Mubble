@@ -55,6 +55,7 @@ import net.minecraft.world.entity.ai.goal.FloatGoal;
 import net.minecraft.world.entity.ai.goal.FollowParentGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.SitWhenOrderedToGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -177,6 +178,11 @@ public class Loftwing extends TamableAnimal {
 	protected void registerGoals() {
 		this.goalSelector.addGoal(0, new FloatGoal(this));
 		this.goalSelector.addGoal(0, new LoftwingAnswerCallGoal(this));
+		// Holds the move and the jump for as long as the bird is sitting. Without it nothing in the
+		// goals answers to having been sat down: the loftwing goals all stand aside on their own,
+		// but vanilla's wander does not, and wandering a bird whose navigation flies means a sitting
+		// loftwing strolling off into the air with its gravity switched off behind it.
+		this.goalSelector.addGoal(0, new SitWhenOrderedToGoal(this));
 		this.goalSelector.addGoal(1, new LoftwingPanicGoal(this, 1.25));
 		this.goalSelector.addGoal(2, new BreedGoal(this, 1.0));
 		this.goalSelector.addGoal(3, new TemptGoal(this, 1.1, stack -> stack.is(ZeldaItems.MUSHROOM_SPORES_BOTTLE), false));
@@ -230,6 +236,12 @@ public class Loftwing extends TamableAnimal {
 		// rider, powered flight starts and ends on the jump button instead.
 		if (!this.level().isClientSide() && this.getControllingPassenger() == null) {
 			this.setFlying(!this.onGround() && !this.isInWater());
+			// A bird that is not its own master is not holding itself up. Gravity is the move
+			// control's to switch off while it steers, and it leaves it off on the tick it stops:
+			// without this, a loftwing sat down after a moment of flight simply hangs there.
+			if (!this.isFreeToRoam()) {
+				this.setNoGravity(false);
+			}
 		}
 	}
 

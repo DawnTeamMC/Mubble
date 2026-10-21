@@ -2,6 +2,7 @@ package fr.hugman.mubble.test.gametest.zelda;
 
 import fr.hugman.mubble.test.gametest.support.LoftwingPlateau;
 import fr.hugman.mubble.test.gametest.support.TestEnvironments;
+import fr.hugman.mubble.test.gametest.support.TestPlayers;
 import fr.hugman.mubble.zelda.world.entity.ZeldaEntityTypes;
 import fr.hugman.mubble.zelda.world.entity.animal.loftwing.Loftwing;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
@@ -12,8 +13,8 @@ import net.minecraft.world.phys.Vec3;
 
 /**
  * What a loftwing does with its feet on the ground, which is where every absurd thing one did in a
- * live world happened: spinning on the spot, and hauling itself back towards a circle it rode long
- * ago.
+ * live world happened: spinning on the spot, hauling itself back towards a circle it rode long ago,
+ * and sitting in mid-air.
  * <p>
  * These run the real AI in a plateau wide enough for the bird to behave: it looks for a perch within
  * twenty-four blocks and rides circles twenty blocks across, so nothing it does fits in the eight
@@ -46,6 +47,10 @@ public class LoftwingGroundGameTest {
 	private static final BlockPos CARRIED_OFF = new BlockPos(LoftwingPlateau.SIZE - 6, LoftwingPlateau.FLOOR_Y + 1, LoftwingPlateau.SIZE - 6);
 	/** One radius of the circle, plus enough slack for the bird to have drifted before it was picked. */
 	private static final double OFF_THE_OLD_CIRCLE = 28.0;
+	/** A sitting bird may settle a fraction onto its feet; a floating one climbs away. */
+	private static final double SITTING_SLACK = 0.25;
+	/** Long enough for the goals that ignore a sitting bird to have had several turns at it. */
+	private static final int SITTING_TICKS = 600;
 
 	/** Everything worth knowing when one of these fails, so the message does the diagnosing. */
 	private static String describe(Loftwing loftwing) {
@@ -109,6 +114,56 @@ public class LoftwingGroundGameTest {
 							"the loftwing was carried right across the plateau and still steers for a point "
 									+ String.format("%.1f", steersFromOldCircle) + " blocks from where it picked its circle: "
 									+ "it is going back to where it was " + describe(loftwing));
+				})
+				.thenSucceed();
+	}
+
+	/**
+	 * Sitting is the one thing that takes a loftwing out of the sky for good, so a bird that has been
+	 * told to sit has to be subject to gravity like anything else. Being able to leave one hanging at
+	 * whatever height it drifted up to is the giveaway.
+	 */
+	@GameTest(structure = LoftwingPlateau.STRUCTURE, environment = TestEnvironments.MIDDAY, maxTicks = 661, padding = LoftwingPlateau.PADDING)
+	public void asittingLoftwingStaysOnTheGround(GameTestHelper helper) {
+		LoftwingPlateau.buildPlateau(helper);
+		Loftwing loftwing = helper.spawn(ZeldaEntityTypes.LOFTWING, MIDDLE);
+		loftwing.bondWith(TestPlayers.at(helper, MIDDLE.offset(2, 0, 0)));
+		double[] sittingY = new double[1];
+		double[] highest = new double[1];
+		int[] weightlessTicks = new int[1];
+
+		helper.startSequence()
+				// A few ticks of being its own bird first, which is the state a player sits one from.
+				.thenExecuteFor(10, () -> {
+				})
+				.thenExecute(() -> {
+					Vec3 onTheGround = helper.absoluteVec(new Vec3(MIDDLE.getX() + 0.5, MIDDLE.getY(), MIDDLE.getZ() + 0.5));
+					loftwing.snapTo(onTheGround.x(), onTheGround.y(), onTheGround.z(), loftwing.getYRot(), loftwing.getXRot());
+					loftwing.setDeltaMovement(Vec3.ZERO);
+					loftwing.setOrderedToSit(true);
+					sittingY[0] = loftwing.getY();
+					highest[0] = loftwing.getY();
+				})
+				// One tick for the hand-over: whatever was steering the bird a moment ago left
+				// gravity switched off, and the bird gets it back on the tick after it sits.
+				.thenIdle(1)
+				.thenExecuteFor(SITTING_TICKS, () -> {
+					highest[0] = Math.max(highest[0], loftwing.getY());
+					if (loftwing.isNoGravity()) {
+						weightlessTicks[0]++;
+					}
+				})
+				.thenExecute(() -> {
+					// Checked first because it holds every tick rather than only once something has
+					// tried to steer the bird: nothing in its goals answers to having been sat down.
+					helper.assertTrue(loftwing.isInSittingPose(),
+							"a loftwing told to sit never took the sitting pose, so nothing that steers it knows it is sitting " + describe(loftwing));
+					helper.assertTrue(weightlessTicks[0] == 0,
+							"a loftwing told to sit had gravity switched off under it for " + weightlessTicks[0]
+									+ " of " + SITTING_TICKS + " ticks, so it can be left hanging at any height " + describe(loftwing));
+					helper.assertTrue(highest[0] - sittingY[0] <= SITTING_SLACK,
+							"a loftwing told to sit drifted " + String.format("%.2f", highest[0] - sittingY[0])
+									+ " blocks off the ground it was sat on " + describe(loftwing));
 				})
 				.thenSucceed();
 	}
