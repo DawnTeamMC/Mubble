@@ -43,7 +43,8 @@
       "fr.hugman.mubble.test.gametest.zelda.LoftwingGameTest",
       "fr.hugman.mubble.test.gametest.zelda.LoftwingEggGameTest",
       "fr.hugman.mubble.test.gametest.zelda.LoftwingFlightGameTest",
-      "fr.hugman.mubble.test.gametest.zelda.LoftwingInteractionGameTest"
+      "fr.hugman.mubble.test.gametest.zelda.LoftwingInteractionGameTest",
+      "fr.hugman.mubble.test.gametest.zelda.LoftwingWhistleGameTest"
     ]
   },
   "mixins": [

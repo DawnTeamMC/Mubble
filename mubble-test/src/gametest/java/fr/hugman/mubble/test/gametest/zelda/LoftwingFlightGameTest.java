@@ -1,17 +1,16 @@
 package fr.hugman.mubble.test.gametest.zelda;
 
 import fr.hugman.mubble.test.gametest.support.Arena;
+import fr.hugman.mubble.test.gametest.support.TestClock;
 import fr.hugman.mubble.test.gametest.support.TestPlayers;
 import fr.hugman.mubble.zelda.world.entity.ZeldaEntityTypes;
 import fr.hugman.mubble.zelda.world.entity.animal.loftwing.Loftwing;
 import fr.hugman.mubble.zelda.world.item.ZeldaItems;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.clock.WorldClocks;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -31,12 +30,8 @@ public class LoftwingFlightGameTest {
 	 * These tests are about flying, so put the sun up first.
 	 */
 	private static void makeItMidday(GameTestHelper helper) {
-		var level = helper.getLevel();
-		var clock = level.registryAccess().lookupOrThrow(Registries.WORLD_CLOCK).getOrThrow(WorldClocks.OVERWORLD);
-		level.clockManager().setTotalTicks(clock, MIDDAY);
+		TestClock.midday(helper);
 	}
-
-	private static final long MIDDAY = 6000L;
 
 	/** Everything worth knowing when one of these fails, so the message does the diagnosing. */
 	private static String describe(Loftwing loftwing, double startY) {
