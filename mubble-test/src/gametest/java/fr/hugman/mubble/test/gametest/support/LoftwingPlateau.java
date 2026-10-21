@@ -38,6 +38,15 @@ public final class LoftwingPlateau {
         fill(helper, 0, SIZE, FLOOR_Y, FLOOR_Y);
     }
 
+    /**
+     * A thick mass of stone covering a square corner of the structure, so that a bird standing on
+     * top of it near the far side has rock beside and below it and a long drop in front: the shape
+     * of the peaks it picks to sleep on.
+     */
+    public static void buildPlateau(GameTestHelper helper, int from, int to, int fromY, int toY) {
+        fill(helper, from, to, FLOOR_Y + fromY, FLOOR_Y + toY);
+    }
+
     private static void fill(GameTestHelper helper, int from, int to, int fromY, int toY) {
         for (int x = from; x < to; x++) {
             for (int z = from; z < to; z++) {

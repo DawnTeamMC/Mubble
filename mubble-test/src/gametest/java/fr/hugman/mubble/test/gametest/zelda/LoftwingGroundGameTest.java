@@ -14,7 +14,7 @@ import net.minecraft.world.phys.Vec3;
 /**
  * What a loftwing does with its feet on the ground, which is where every absurd thing one did in a
  * live world happened: spinning on the spot, hauling itself back towards a circle it rode long ago,
- * and sitting in mid-air.
+ * sitting in mid-air, and whirling at the edge of the very perch it chose.
  * <p>
  * These run the real AI in a plateau wide enough for the bird to behave: it looks for a perch within
  * twenty-four blocks and rides circles twenty blocks across, so nothing it does fits in the eight
@@ -82,6 +82,28 @@ public class LoftwingGroundGameTest {
 		Loftwing loftwing = helper.spawn(ZeldaEntityTypes.LOFTWING, MIDDLE);
 
 		watchTheTurning(helper, loftwing, "a loftwing under an overhang", () -> {
+		});
+	}
+
+	/**
+	 * Being hurt is a reason to leave a perch, not a reason to whirl on it. This is the same bird at
+	 * the same perch, with something taking bites out of it in the dark, which is the state a player
+	 * finds one in at night.
+	 */
+	@GameTest(structure = LoftwingPlateau.STRUCTURE, environment = TestEnvironments.MIDNIGHT, skyAccess = true,
+			maxTicks = SETTLING_TICKS + WATCH_TICKS + 40, padding = LoftwingPlateau.PADDING)
+	public void astartledLoftwingDoesNotWhirlAtTheEdgeOfItsPerch(GameTestHelper helper) {
+		// A thick mass of stone that stops short, so the bird stands on an edge with rock beside and
+		// below it: the shape of the peak it picks to sleep on.
+		LoftwingPlateau.buildPlateau(helper, LoftwingPlateau.SIZE / 2 - 12, LoftwingPlateau.SIZE / 2, 0, 4);
+		Loftwing loftwing = helper.spawn(ZeldaEntityTypes.LOFTWING, new BlockPos(LoftwingPlateau.SIZE / 2 - 1, LoftwingPlateau.FLOOR_Y + 5, LoftwingPlateau.SIZE / 2 - 1));
+		var attacker = TestPlayers.at(helper, new BlockPos(LoftwingPlateau.SIZE / 2 - 4, LoftwingPlateau.FLOOR_Y + 5, LoftwingPlateau.SIZE / 2 - 1));
+
+		watchTheTurning(helper, loftwing, "a loftwing being bitten at the edge of its perch", () -> {
+			// Bitten about as often as something in the dark would manage.
+			if (loftwing.tickCount % 60 == 0) {
+				loftwing.hurtServer(helper.getLevel(), helper.getLevel().damageSources().playerAttack(attacker), 1.0F);
+			}
 		});
 	}
 

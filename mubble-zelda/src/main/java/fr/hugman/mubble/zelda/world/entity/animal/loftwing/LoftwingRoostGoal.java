@@ -39,7 +39,7 @@ public class LoftwingRoostGoal extends Goal {
 
 	@Override
 	public boolean canUse() {
-		if (this.loftwing.level().isBrightOutside() || !this.loftwing.isFreeToRoam()) {
+		if (!this.wouldRatherBeAsleep()) {
 			return false;
 		}
 		this.perch = this.findPerch();
@@ -48,8 +48,19 @@ public class LoftwingRoostGoal extends Goal {
 
 	@Override
 	public boolean canContinueToUse() {
-		return this.perch != null
-				&& !this.loftwing.level().isBrightOutside()
+		return this.perch != null && this.wouldRatherBeAsleep();
+	}
+
+	/**
+	 * Night, nothing biting it and nobody standing over it: the only time a loftwing wants a perch.
+	 * <p>
+	 * Starting and carrying on have to ask the very same question. Being hurt used to end the goal
+	 * without stopping it starting again, so a bird that something was taking bites out of in the
+	 * dark picked a fresh perch somewhere across the map every single tick — and a move control
+	 * aimed at a new point every tick is a bird spinning on the spot.
+	 */
+	private boolean wouldRatherBeAsleep() {
+		return !this.loftwing.level().isBrightOutside()
 				&& this.loftwing.isFreeToRoam()
 				&& this.loftwing.getLastHurtByMob() == null
 				&& !this.isCrowded();
