@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:clock_time",
+  "clock": "minecraft:overworld",
+  "time": 6000
+}
