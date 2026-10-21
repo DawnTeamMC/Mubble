@@ -119,9 +119,6 @@ public class Loftwing extends TamableAnimal {
 	/** How far a rider may have drifted and still be put back in the saddle. */
 	private static final double CLING_RANGE_SQR = 16.0;
 
-	/** How long a bird keeps flying towards a whistle before it gives up on finding its owner. */
-	private static final int CALL_TICKS = 600;
-
 	public final AnimationState flapAnimationState = new AnimationState();
 	public final AnimationState roostAnimationState = new AnimationState();
 	public final AnimationState preenAnimationState = new AnimationState();
@@ -539,11 +536,54 @@ public class Loftwing extends TamableAnimal {
 			return false;
 		}
 		this.caller = player;
-		this.callTicks = CALL_TICKS;
+		this.callTicks = LoftwingCall.GIVE_UP_TICKS;
 		this.setOrderedToSit(false);
 		this.setRoosting(false);
 		this.playSound(ZeldaSounds.LOFTWING_CALL, 2.0F, 1.0F);
 		return true;
+	}
+
+	/**
+	 * Whether this bird could take {@code player} out of the air right now. A fall is survived by
+	 * riding, and nothing rides a loftwing that is not wearing its belt: a bare-backed bird still
+	 * comes when called, it just arrives to watch.
+	 */
+	public boolean canCatch(Player player) {
+		return this.hasBelt() && isFalling(player);
+	}
+
+	/** Someone on their way down with nothing holding them up. A jump is not a fall. */
+	private static boolean isFalling(Player player) {
+		return !player.onGround()
+				&& !player.isPassenger()
+				&& !player.isFallFlying()
+				&& !player.getAbilities().flying
+				&& player.fallDistance > LoftwingCall.RESCUE_FALL_DISTANCE;
+	}
+
+	/**
+	 * The save. The bird crosses the last of the distance in one beat, comes in under its owner and
+	 * takes them on its back, which turns a fall into a flight.
+	 * <p>
+	 * Nothing flies fast enough to catch a fall honestly, and a loftwing that arrived a moment late
+	 * every time would be a bird nobody trusted. The blink is the mechanic, not a shortcut around
+	 * it, which is why it is reserved for a fall: a bird appearing beside an owner standing safely
+	 * on the ground would be both free and far less of a sight than one gliding in.
+	 */
+	public void catchFalling(Player player) {
+		if (!this.canCatch(player)) {
+			return;
+		}
+		this.snapTo(player.getX(), player.getY() - LoftwingCall.RESCUE_DROP, player.getZ(), player.getYRot(), 0.0F);
+		this.setFlying(true);
+		this.getNavigation().stop();
+		// The dive ends here; from the next tick the rider's own client is flying the bird.
+		this.setDeltaMovement(Vec3.ZERO);
+		this.playSound(ZeldaSounds.LOFTWING_FLAP, 1.5F, 1.0F);
+		if (player.startRiding(this)) {
+			player.resetFallDistance();
+		}
+		this.clearCall();
 	}
 
 	@Nullable

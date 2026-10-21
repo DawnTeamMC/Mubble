@@ -23,6 +23,12 @@ clouds, pick their own owner, and carry them.
   and comes down only on an errand (`LoftwingSoarGoal` and friends). Under a rider those goals all
   stand down, and `Loftwing#tickRidden` drives it instead: the jump button takes off, the bird comes
   round to where the rider looks as fast as its helmet allows, and wingbeats pay for height.
+- **The rescue blinks, on purpose.** A fall is over in under two seconds and nothing with wings
+  crosses a hundred blocks in that time, so a whistled bird flies for half a second and then
+  appears under its falling owner and takes them on its back (`Loftwing#catchFalling`). The blink
+  is the mechanic rather than a shortcut around it, which is why it is reserved for a fall: called
+  to someone standing safely on the ground, the bird flies the whole way. Every number behind a
+  call — how far the whistle carries, how long the bird gets — lives in `LoftwingCall`.
 - **Numbers are data.** Breeds are a synced dynamic registry (`zelda:loftwing_variant`) with a
   weight that makes the crimson one rare; what a helmet is worth is a data component on the item;
   what a bird catches when it fishes is a loot table.
