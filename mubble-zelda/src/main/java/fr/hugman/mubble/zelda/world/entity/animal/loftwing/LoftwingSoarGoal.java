@@ -1,5 +1,6 @@
 package fr.hugman.mubble.zelda.world.entity.animal.loftwing;
 
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.phys.Vec3;
 
@@ -14,15 +15,19 @@ public class LoftwingSoarGoal extends Goal {
 	private static final double SPEED = 1.0;
 	/** How wide the circle is, in blocks. */
 	private static final double RADIUS = 20.0;
-	/** How far round the circle the bird aims each time, in radians: a twelfth of a lap. */
-	private static final float STEP = (float) (Math.PI / 6.0);
+	/** How far round the circle the bird keeps its aim ahead of itself, in degrees: a twelfth of a lap. */
+	private static final float LEAD = 30.0F;
+	/** How far round the circle the aim may slide in one tick, in degrees. */
+	private static final float AIM_SLIDE = 3.0F;
+	/** A yaw is measured from south and the angle round the circle from east: a quarter turn apart. */
+	private static final float YAW_TO_CIRCLE = 90.0F;
 	/** How far above the clouds it settles. */
 	private static final int MIN_HEIGHT_ABOVE_CLOUDS = 4;
 	private static final int MAX_HEIGHT_ABOVE_CLOUDS = 28;
 	/** However low the clouds are, the bird keeps at least this much air under it. */
 	private static final int MIN_CLEARANCE_ABOVE_GROUND = 12;
-	/** How close is close enough to aim at the next point of the circle. */
-	private static final double WAYPOINT_REACHED = 6.0;
+	/** How far outside its own circle the bird can be found before that circle is somewhere it used to be. */
+	private static final double OFF_THE_CIRCLE = RADIUS / 2.0;
 	/** A circle is left behind after this long, so that birds drift instead of grinding a groove in the sky. */
 	private static final int CIRCLE_TICKS = 600;
 
@@ -66,14 +71,11 @@ public class LoftwingSoarGoal extends Goal {
 
 	@Override
 	public void tick() {
-		if (++this.ticksOnCircle > CIRCLE_TICKS) {
+		if (++this.ticksOnCircle > CIRCLE_TICKS || this.hasLeftTheCircle()) {
 			this.pickCircle();
 		}
+		this.aimAhead();
 		Vec3 waypoint = this.waypoint();
-		if (this.loftwing.position().distanceTo(waypoint) < WAYPOINT_REACHED) {
-			this.angle += STEP;
-			waypoint = this.waypoint();
-		}
 		// A flying move control only steers for the one tick after it is told where to go, and lets
 		// the bird fall the rest of the time: it has to be aimed again every single tick.
 		this.loftwing.getMoveControl().setWantedPosition(waypoint.x(), waypoint.y(), waypoint.z(), SPEED);
@@ -84,11 +86,44 @@ public class LoftwingSoarGoal extends Goal {
 		var random = this.loftwing.getRandom();
 		this.centerX = this.loftwing.getX();
 		this.centerZ = this.loftwing.getZ();
-		this.angle = random.nextFloat() * (float) (Math.PI * 2.0);
+		// A fresh circle starts from wherever the bird is already pointed, so that picking one is a
+		// lean and not a snap: the point it steers for stays straight ahead of its beak.
+		this.angle = this.loftwing.getYRot() + YAW_TO_CIRCLE;
 
 		float clouds = LoftwingSky.cloudLevel(this.loftwing.level(), this.loftwing.blockPosition());
 		this.altitude = clouds + MIN_HEIGHT_ABOVE_CLOUDS + random.nextInt(MAX_HEIGHT_ABOVE_CLOUDS - MIN_HEIGHT_ABOVE_CLOUDS);
 		this.ticksOnCircle = 0;
+	}
+
+	/**
+	 * Whether the bird has ended up somewhere its circle no longer explains: knocked out of the sky,
+	 * carried off, or simply fallen. A circle is a stretch of sky the bird rides, not a destination
+	 * it owes anything to, so once the bird is off it, steering for it is steering back to where the
+	 * bird used to be — which is exactly how one that had come down kept hauling itself towards the
+	 * spot it fell from.
+	 */
+	private boolean hasLeftTheCircle() {
+		return Math.hypot(this.loftwing.getX() - this.centerX, this.loftwing.getZ() - this.centerZ) > RADIUS + OFF_THE_CIRCLE;
+	}
+
+	/**
+	 * Slides the aim round the circle so that it stays a twelfth of a lap ahead of wherever the bird
+	 * has got to, rather than being a point the bird arrives at and then has to be given a new one.
+	 * <p>
+	 * Which is the whole trick. A point the bird can reach is a point it ends up sitting on, and the
+	 * direction to a point underfoot is rounding error; a flying move control is allowed a quarter
+	 * turn a tick to chase that direction, which is how a perched loftwing span like a top. Kept a
+	 * lap-twelfth ahead, the aim is never close enough to the bird to be ill-aimed.
+	 * <p>
+	 * It slides rather than jumps, by a few degrees a tick, for the same reason: a bird at the very
+	 * middle of its own circle has no bearing worth reading, and rate-limiting the slide lets that
+	 * rounding error pass by instead of being steered on.
+	 */
+	private void aimAhead() {
+		double dx = this.loftwing.getX() - this.centerX;
+		double dz = this.loftwing.getZ() - this.centerZ;
+		float bearing = (float) (Math.atan2(dz, dx) * Mth.RAD_TO_DEG);
+		this.angle = Mth.approachDegrees(this.angle, bearing + LEAD, AIM_SLIDE);
 	}
 
 	/**
@@ -103,10 +138,11 @@ public class LoftwingSoarGoal extends Goal {
 	}
 
 	private Vec3 waypoint() {
+		float radians = this.angle * Mth.DEG_TO_RAD;
 		return new Vec3(
-				this.centerX + Math.cos(this.angle) * RADIUS,
+				this.centerX + Math.cos(radians) * RADIUS,
 				this.targetAltitude(),
-				this.centerZ + Math.sin(this.angle) * RADIUS
+				this.centerZ + Math.sin(radians) * RADIUS
 		);
 	}
 }
