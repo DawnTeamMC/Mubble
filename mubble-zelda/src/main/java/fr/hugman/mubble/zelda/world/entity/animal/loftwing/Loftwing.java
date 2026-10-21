@@ -544,6 +544,15 @@ public class Loftwing extends TamableAnimal {
 	}
 
 	/**
+	 * Whether a whistle blown by {@code player} carries this far. A loftwing spends its days above
+	 * the clouds, so the range has to cover most of the height of the world; past it the bird
+	 * simply never hears the call, whatever state it is otherwise in.
+	 */
+	public boolean canHear(Player player) {
+		return this.distanceToSqr(player) <= LoftwingCall.RANGE * LoftwingCall.RANGE;
+	}
+
+	/**
 	 * Whether this bird could take {@code player} out of the air right now. A fall is survived by
 	 * riding, and nothing rides a loftwing that is not wearing its belt: a bare-backed bird still
 	 * comes when called, it just arrives to watch.

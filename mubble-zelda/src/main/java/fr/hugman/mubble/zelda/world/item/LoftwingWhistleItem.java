@@ -38,18 +38,32 @@ public class LoftwingWhistleItem extends Item {
 
 		List<? extends Loftwing> answering = serverLevel.getEntities(ZeldaEntityTypes.LOFTWING, loftwing -> loftwing.isOwnedBy(player));
 		boolean anyAnswered = false;
+		boolean anyOutOfEarshot = false;
 		for (Loftwing loftwing : answering) {
+			// A whistle is a sound before it is a command: a bird too far off never hears it, and
+			// whatever else it was doing at the time never comes into it.
+			if (!loftwing.canHear(player)) {
+				anyOutOfEarshot = true;
+				continue;
+			}
 			anyAnswered |= loftwing.answerCall(player);
 		}
 		if (!anyAnswered) {
-			// Chunks it is not loaded in, a lead holding it, a command telling it to stay put.
-			if (player instanceof ServerPlayer serverPlayer) {
-				serverPlayer.sendSystemMessage(Component.translatable("item." + Zelda.MOD_ID + ".loftwing_whistle.no_answer"), true);
-			}
+			// Out of earshot is the one silence worth telling apart, since it is the one the player
+			// can do something about. Every other — chunks the bird is not loaded in, a lead
+			// holding it, a command telling it to stay put — is the same shrug.
+			tell(player, anyOutOfEarshot ? "too_far" : "no_answer");
 			return InteractionResult.CONSUME;
 		}
 		player.getCooldowns().addCooldown(stack, WHISTLE_COOLDOWN_TICKS);
 		return InteractionResult.SUCCESS;
+	}
+
+	/** Above the action bar, where a message about a bird that is not coming belongs. */
+	private static void tell(Player player, String reason) {
+		if (player instanceof ServerPlayer serverPlayer) {
+			serverPlayer.sendSystemMessage(Component.translatable("item." + Zelda.MOD_ID + ".loftwing_whistle." + reason), true);
+		}
 	}
 
 	/** Long enough that the whistle is a call, not a steering wheel. */

@@ -41,6 +41,7 @@ public class ZeldaEnglishLangProvider extends FabricLanguageProvider {
         builder.add(ZeldaSounds.LOFTWING_EGG_HATCH, "Loftwing egg hatches");
 
         builder.add("item." + Zelda.MOD_ID + ".loftwing_whistle.no_answer", "No loftwing answers");
+        builder.add("item." + Zelda.MOD_ID + ".loftwing_whistle.too_far", "Your loftwing is too far away to hear you");
 
         builder.add("death.attack." + Zelda.MOD_ID + ".loftwing_crash", "%1$s flew into a wall");
         builder.add("death.attack." + Zelda.MOD_ID + ".loftwing_crash.entity", "%1$s was flown into a wall by %2$s");
