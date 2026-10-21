@@ -4,44 +4,42 @@ import fr.hugman.mubble.arcade.tags.ArcadeItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUseAnimation;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
 /**
- * When the orbit camera aims over the shoulder rather than framing the player: while they charge a
- * weapon that shoots where the view points (a bow, a crossbow, a trident), hold a loaded crossbow, or
- * hold an item of {@link ArcadeItemTags#AIMS_WHILE_HELD}. The body then faces the crosshair, as in
- * the first person view, and the camera sits close behind the right shoulder.
+ * When the orbit camera aims over the shoulder rather than framing the player: as long as they hold
+ * a weapon that shoots where the view points (a bow, a crossbow, a trident, or an item of
+ * {@link ArcadeItemTags#AIMS_WHILE_HELD}), not only while it charges, so that shooting several times
+ * in a row keeps the camera where it is. The body then faces the crosshair, as in the first person
+ * view, and the camera sits close behind the right shoulder.
  */
 public final class ArcadeShoulder {
     private ArcadeShoulder() {
     }
 
-    /** Whether {@code entity} aims over the shoulder right now. */
+    /** Whether {@code entity} aims over the shoulder right now: a weapon that aims is in either hand. */
     public static boolean aims(LivingEntity entity) {
-        if (entity.isUsingItem() && aimsWhileUsing(entity.getUseItem())) {
-            return true;
-        }
         for (var hand : InteractionHand.values()) {
-            if (aimsWhileHeld(entity.getItemInHand(hand))) {
+            if (aimsWith(entity.getItemInHand(hand))) {
                 return true;
             }
         }
         return false;
     }
 
-    /** Whether using {@code stack} is charging a shot: what draws a bow, loads a crossbow or raises a trident. */
-    public static boolean aimsWhileUsing(ItemStack stack) {
+    /**
+     * Whether holding {@code stack} aims: its use draws a bow, loads a crossbow or raises a trident,
+     * or it is an item of {@link ArcadeItemTags#AIMS_WHILE_HELD}.
+     */
+    public static boolean aimsWith(ItemStack stack) {
+        if (stack.is(ArcadeItemTags.AIMS_WHILE_HELD)) {
+            return true;
+        }
         var animation = stack.getUseAnimation();
         return animation == ItemUseAnimation.BOW || animation == ItemUseAnimation.CROSSBOW || animation == ItemUseAnimation.TRIDENT;
-    }
-
-    /** Whether holding {@code stack} is enough to aim: a loaded crossbow, or an item of {@link ArcadeItemTags#AIMS_WHILE_HELD}. */
-    public static boolean aimsWhileHeld(ItemStack stack) {
-        return stack.is(ArcadeItemTags.AIMS_WHILE_HELD) || stack.getItem() instanceof CrossbowItem && CrossbowItem.isCharged(stack);
     }
 
     /** The rotation that looks from {@code eye} at {@code target}, as vanilla's {@code Entity.lookAt}: pitch in x, yaw in y. */
