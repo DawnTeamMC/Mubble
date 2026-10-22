@@ -222,15 +222,16 @@ public class ArcadeAnimationDataTest {
     }
 
     @Test
-    @DisplayName("a long jump flies flat, feet first and arms swept back")
+    @DisplayName("a long jump flies feet first, legs reaching out level, arms swept back")
     void longJumpFliesFeetFirst() {
         var animation = shipped.get("long_jump");
         float body = animation.body().orElseThrow().get(ArcadeAnimationData.Target.ROTATION).get(1).post().x;
-        assertTrue(body <= -60.0F, "the body leans far forwards, got " + body);
+        assertTrue(body < -15.0F && body > -45.0F, "the chest leans forwards, but stays up, got " + body);
         for (var side : List.of("right", "left")) {
             float leg = animation.bones().get(side + "_leg").get(ArcadeAnimationData.Target.ROTATION).get(1).post().x;
-            // the leg hangs along the leaning body: swung forwards past it, the foot leads
-            assertTrue(leg < body, "the " + side + " leg reaches forwards past the body, got " + leg);
+            // the leg hangs along the leaning body: swung forwards from there, how far up from straight down it reaches
+            float reach = body - leg;
+            assertTrue(reach >= 65.0F && reach <= 90.0F, "the " + side + " leg reaches out ahead, close to level, got " + reach + " degrees up from straight down");
             float arm = animation.bones().get(side + "_arm").get(ArcadeAnimationData.Target.ROTATION).get(1).post().x;
             assertTrue(arm > 0.0F, "the " + side + " arm is swept back, got " + arm);
         }
