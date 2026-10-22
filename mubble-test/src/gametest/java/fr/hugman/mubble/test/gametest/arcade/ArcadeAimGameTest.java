@@ -1,8 +1,18 @@
 package fr.hugman.mubble.test.gametest.arcade;
 
 import fr.hugman.mubble.arcade.ArcadeAim;
+import fr.hugman.mubble.arcade.ArcadeShoulder;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
+import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
+import fr.hugman.mubble.test.gametest.datapack.PowerUpFixtures;
+import java.util.List;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.level.ClipContext;
@@ -14,7 +24,8 @@ import net.minecraft.world.phys.Vec3;
 
 /**
  * The orbit camera against real blocks: it never sits inside a wall, and meanwhile the hands of the
- * player reach out to what stands in front of them, never to a block.
+ * player reach out to what stands in front of them, never to a block. Holding a weapon, it aims
+ * over the shoulder, and the eyes of the player look at what its crosshair points at.
  */
 public class ArcadeAimGameTest {
     /** Looking north, along -z, the way the player stands in these tests. */
@@ -132,6 +143,81 @@ public class ArcadeAimGameTest {
         chicken.setPos(helper.absoluteVec(new Vec3(5.5D, 1.0D, 12.5D)));
         hit = ArcadeAim.pickAhead(player, eye, north);
         helper.assertTrue(hit.getType() == HitResult.Type.MISS, "a chicken eight blocks away, got " + hit.getType());
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void aimingOverTheShoulderTheEyesLookAtWhatTheCrosshairPointsAt(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        player.setPos(helper.absoluteVec(new Vec3(5.5D, 1.0D, 20.5D)));
+        var eye = player.getEyePosition();
+        // a wall eight blocks north, and the camera behind the right shoulder of a player facing it
+        ArcadeTestKit.fill(helper, new BlockPos(0, 1, 12), new BlockPos(9, 5, 12), Blocks.STONE.defaultBlockState());
+        var camera = eye.add(0.6D, 0.15D, 1.6D);
+        var target = ArcadeAim.shoulderTarget(helper.getLevel(), player, camera, NORTH, eye, 96.0D);
+        double wall = helper.absoluteVec(new Vec3(0.0D, 0.0D, 13.0D)).z;
+        helper.assertTrue(Math.abs(target.z - wall) < 1.0E-6D, "the crosshair points at the wall at z=" + wall + ", got z=" + target.z);
+        helper.assertTrue(Math.abs(target.x - camera.x) < 1.0E-6D && Math.abs(target.y - camera.y) < 1.0E-6D, "straight ahead of the camera, got " + target);
+
+        // the eyes, beside the camera, look at the same spot of the wall
+        var rotation = ArcadeShoulder.lookAt(eye, target);
+        var reach = eye.add(Vec3.directionFromRotation(rotation.x, rotation.y).scale(16.0D));
+        var hit = helper.getLevel().clip(new ClipContext(eye, reach, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, player));
+        helper.assertTrue(hit.getLocation().distanceTo(target) < 1.0E-3D, "the eyes should hit " + target + ", hit " + hit.getLocation());
+
+        // a block between the camera and the player is never aimed at
+        helper.setBlock(new BlockPos(6, 2, 21), Blocks.STONE.defaultBlockState());
+        var behind = ArcadeAim.shoulderTarget(helper.getLevel(), player, camera, NORTH, eye, 96.0D);
+        helper.assertTrue(behind.distanceTo(target) < 1.0E-6D, "the block behind the eyes is ignored, got " + behind);
+
+        // nor is the player, and an entity in front is
+        var chicken = helper.spawnWithNoFreeWill(EntityTypes.CHICKEN, new BlockPos(6, 1, 16));
+        chicken.setPos(new Vec3(camera.x, camera.y - 0.3D, chicken.getZ()));
+        var atChicken = ArcadeAim.shoulderTarget(helper.getLevel(), player, camera, NORTH, eye, 96.0D);
+        helper.assertTrue(atChicken.z > target.z + 2.0D, "the crosshair points at the chicken in front of the wall, got " + atChicken);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void holdingABowACrossbowOrATridentAimsOverTheShoulder(GameTestHelper helper) {
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        for (var item : new Item[]{Items.BOW, Items.CROSSBOW, Items.TRIDENT}) {
+            // held, before charging, while charging, and once shot: the camera stays at the shoulder
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item));
+            helper.assertTrue(ArcadeShoulder.aims(player), "holding " + item);
+            player.startUsingItem(InteractionHand.MAIN_HAND);
+            helper.assertTrue(ArcadeShoulder.aims(player), "charging " + item);
+            player.stopUsingItem();
+            helper.assertTrue(ArcadeShoulder.aims(player), "after shooting " + item);
+        }
+        // what charges nothing does not
+        for (var item : new Item[]{Items.BREAD, Items.SHIELD, Items.SPYGLASS, Items.DIAMOND_SWORD}) {
+            player.setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(item));
+            helper.assertFalse(ArcadeShoulder.aims(player), "holding " + item);
+        }
+
+        // a loaded crossbow aims too, in either hand
+        var loaded = new ItemStack(Items.CROSSBOW);
+        loaded.set(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.ofNonEmpty(List.of(new ItemStack(Items.ARROW))));
+        player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+        player.setItemInHand(InteractionHand.OFF_HAND, loaded);
+        helper.assertTrue(ArcadeShoulder.aims(player), "holding a loaded crossbow in the off hand");
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void aPowerUpThatShootsAimsOverTheShoulder(GameTestHelper helper) {
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        var powerUps = PowerUpFixtures.registry(helper);
+        // the fire flower shoots fireballs where the player looks
+        player.setPowerUp(powerUps.getOrThrow(SuperMarioPowerUpIds.FIRE));
+        helper.assertTrue(ArcadeShoulder.aims(player), "with the fire power-up, empty-handed");
+        // the cloud flower makes platforms, the mega mushroom shoots nothing
+        player.setPowerUp(powerUps.getOrThrow(SuperMarioPowerUpIds.CLOUD));
+        helper.assertFalse(ArcadeShoulder.aims(player), "with the cloud power-up");
+        player.setPowerUp(powerUps.getOrThrow(SuperMarioPowerUpIds.MEGA));
+        helper.assertFalse(ArcadeShoulder.aims(player), "with the mega power-up");
         helper.succeed();
     }
 }

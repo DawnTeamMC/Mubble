@@ -1,6 +1,7 @@
 package fr.hugman.mubble.arcade.move;
 
 import fr.hugman.mubble.arcade.registries.ArcadeBuiltInRegistries;
+import fr.hugman.mubble.arcade.sim.ArcadeInputFrame;
 import fr.hugman.mubble.arcade.sim.MoveContext;
 import java.util.List;
 import java.util.Optional;
@@ -72,6 +73,15 @@ public abstract class ArcadeMove {
 
     public boolean handsBusyByDefault() {
         return this.properties.handsBusy;
+    }
+
+    /**
+     * Whether the move turns the body a way of its own (along a roll, a dive, off a wall) rather than
+     * where the player looks: aiming over the shoulder, the body leaves the crosshair for it, so that
+     * a roll backwards rolls backwards. See {@link ArcadeInputFrame#AIMING}.
+     */
+    public boolean facesItsOwnWay() {
+        return this.properties.facesItsOwnWay;
     }
 
     public int entryPriority() {
@@ -168,6 +178,7 @@ public abstract class ArcadeMove {
         @Nullable
         private Supplier<ArcadeMove> accessParent;
         private boolean handsBusy;
+        private boolean facesItsOwnWay;
         private int entryPriority = -1;
         private List<MoveParam> params = List.of();
 
@@ -189,6 +200,11 @@ public abstract class ArcadeMove {
 
         public Properties handsBusy() {
             this.handsBusy = true;
+            return this;
+        }
+
+        public Properties facesItsOwnWay() {
+            this.facesItsOwnWay = true;
             return this;
         }
 

@@ -115,22 +115,28 @@ public final class ArcadeClientInput {
      * camera, and every action sampled since the previous tick.
      */
     public static ArcadeInputFrame frame(LocalPlayer player, int tick) {
-        boolean coupled = !ArcadeCamera.isOrbiting();
-        float yaw = yaw(player, coupled);
+        boolean coupled = ArcadeCamera.coupled();
+        float yaw = yaw(player);
         float[] stick = stick(player, yaw);
-        return COLLECTOR.tick(tick, System.nanoTime(), stick[0], stick[1], yaw, coupled);
+        var frame = COLLECTOR.tick(tick, System.nanoTime(), stick[0], stick[1], yaw, coupled);
+        return ArcadeCamera.facesCrosshair() ? frame.aiming() : frame;
     }
 
     /** The input of the player as it stands, with nothing pressed: what the previews of the button guide start from. */
     public static ArcadeInputFrame current(LocalPlayer player) {
-        boolean coupled = !ArcadeCamera.isOrbiting();
-        float yaw = yaw(player, coupled);
+        boolean coupled = ArcadeCamera.coupled();
+        float yaw = yaw(player);
         float[] stick = stick(player, yaw);
-        return new ArcadeInputFrame(0, stick[0], stick[1], yaw, coupled, (byte) (down & ~ArcadeInputFrame.ACTION), (byte) 0, (short) 0, (short) 0).slowedFor(player);
+        var frame = new ArcadeInputFrame(0, stick[0], stick[1], yaw, coupled, (byte) (down & ~ArcadeInputFrame.ACTION), (byte) 0, (short) 0, (short) 0).slowedFor(player);
+        return ArcadeCamera.facesCrosshair() ? frame.aiming() : frame;
     }
 
-    private static float yaw(LocalPlayer player, boolean coupled) {
-        return coupled ? player.getYRot() : ArcadeCamera.yaw();
+    /**
+     * The yaw of the view: the camera's while it orbits, aiming included, where the body looks at the
+     * crosshair from beside the camera, a few degrees off it; the player's otherwise.
+     */
+    private static float yaw(LocalPlayer player) {
+        return ArcadeCamera.isOrbiting() ? ArcadeCamera.yaw() : player.getYRot();
     }
 
     private static float[] stick(LocalPlayer player, float yaw) {

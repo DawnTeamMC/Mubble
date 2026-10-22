@@ -13,7 +13,20 @@ With [arcade movement]($arcade_movement/overview), the third-person view from be
 - *Recenter Camera* swings the camera behind the player, level with the horizon, and brings the player back to the middle of the screen, margins aside.
 - When vanilla movement takes over, for example while flying or in lava, the view eases between the orbit camera and the vanilla camera over a quarter of a second.
 
-The hands do not aim with the camera: see [Aiming with the orbit camera]($arcade_movement/items_and_blocks#aiming-with-the-orbit-camera).
+The hands do not aim with the camera: see [Aiming with the orbit camera]($arcade_movement/items_and_blocks#aiming-with-the-orbit-camera). Weapons that shoot are the exception, see [Aiming over the shoulder](#aiming-over-the-shoulder).
+
+## Aiming over the shoulder
+
+As long as the player holds a bow, a crossbow or a trident, in either hand, or has a power-up that shoots, such as the Fire Flower, the camera sits over their right shoulder, and a crosshair shows in the middle of the screen. Taking one in hand moves the camera there in less than a fifth of a second, and it stays there between shots:
+
+- The player still turns the way they walk, as with the orbit camera.
+- Using the weapon turns them to face the crosshair at once: drawing the bow, loading or shooting the crossbow, raising the trident, or triggering the power-up. They keep facing it while the weapon is in use and for half a second after, moving relative to it as in first person: they walk sideways instead of turning around. Rolls, dives, long jumps, side somersaults, slides and moves on walls and ledges still turn the player the way they go.
+- Arrows, bolts, tridents and fireballs fly toward what the crosshair points at, even though the camera sits beside the player.
+- The camera turns as fast as in first person, whatever *Camera Sensitivity* is, and up or down all the way.
+- The camera stays close to the player and does not follow them on its own. Against a wall on the right, it comes closer to the player's head.
+- The speed field of view goes away, leaving only the zoom of the bow.
+
+Once the weapon is put away, or the power-up lost, the camera eases back to the orbit just as quickly.
 
 ## Framing
 

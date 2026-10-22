@@ -7,6 +7,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -154,6 +155,24 @@ public final class ArcadeAim {
             bestDistance = distance;
         }
         return best != null ? new EntityHitResult(best, bestAt) : miss(end, forward);
+    }
+
+    /**
+     * What the crosshair of a camera aiming over the shoulder points at: the first block or entity
+     * along {@code forward}, at most {@code range} away. The ray starts level with {@code eye} rather
+     * than at the camera, so that nothing between the camera and the player, the player included,
+     * is ever aimed at; its end when nothing stands in the way.
+     */
+    public static Vec3 shoulderTarget(Level level, Entity entity, Vec3 camera, Vec3 forward, Vec3 eye, double range) {
+        forward = forward.normalize();
+        var from = camera.add(forward.scale(Math.max(0.0D, eye.subtract(camera).dot(forward))));
+        var to = from.add(forward.scale(range));
+        var block = level.clip(new ClipContext(from, to, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity));
+        if (block.getType() != HitResult.Type.MISS) {
+            to = block.getLocation();
+        }
+        var hit = ProjectileUtil.getEntityHitResult(entity, from, to, new AABB(from, to).inflate(1.0D), target -> !target.isSpectator() && target.isPickable(), from.distanceToSqr(to));
+        return hit != null ? hit.getLocation() : to;
     }
 
     private static BlockHitResult miss(Vec3 location, Vec3 forward) {

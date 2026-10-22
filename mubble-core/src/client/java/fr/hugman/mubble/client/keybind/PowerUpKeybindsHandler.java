@@ -1,12 +1,25 @@
 package fr.hugman.mubble.client.keybind;
 
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpTriggerPayload;
+import fr.hugman.mubble.world.power_up.PowerUp;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.EventFactory;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.InteractionResult;
 
 public class PowerUpKeybindsHandler {
+    /**
+     * Called on the client right before the power-up of the player is triggered, and the server told
+     * so: what turns the player first does it here, the server shooting where they then look.
+     */
+    public static final Event<BeforeTrigger> BEFORE_TRIGGER = EventFactory.createArrayBacked(BeforeTrigger.class, callbacks -> (player, powerUp) -> {
+        for (var callback : callbacks) {
+            callback.beforeTrigger(player, powerUp);
+        }
+    });
+
     public static void tick(Minecraft client) {
         if (null != client.player) {
             while (MubbleKeyBindings.TRIGGER_POWER_UP.consumeClick()) {
@@ -24,10 +37,16 @@ public class PowerUpKeybindsHandler {
             // to avoid unnecessary network traffic.
             // let's utilize Minecraft's registry sync to my advantage
             if (powerUp.canBeTriggered(player)) {
+                BEFORE_TRIGGER.invoker().beforeTrigger(player, powerUp);
                 if (powerUp.trigger(player) == InteractionResult.SUCCESS) {
                     ClientPlayNetworking.send(PowerUpTriggerPayload.INSTANCE);
                 }
             }
         }
+    }
+
+    @FunctionalInterface
+    public interface BeforeTrigger {
+        void beforeTrigger(LocalPlayer player, PowerUp powerUp);
     }
 }

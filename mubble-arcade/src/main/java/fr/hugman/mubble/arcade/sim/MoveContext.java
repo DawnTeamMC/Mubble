@@ -370,9 +370,14 @@ public final class MoveContext {
         s.spinTurns[s.spinIndex] = turn;
         s.spinIndex = (s.spinIndex + 1) % ArcadeState.SPIN_GESTURE_TICKS;
 
-        if (this.input.coupled()) {
+        if (this.input.coupled() && !(this.aiming() && s.move.facesItsOwnWay())) {
             s.facing = this.input.viewYaw();
         }
+    }
+
+    /** Whether the camera aims over the shoulder: the body follows the view, but moves that face a way of their own turn it. */
+    private boolean aiming() {
+        return this.input.isHeld(ArcadeInputFrame.AIMING);
     }
 
     /** Counts the timers down, once the move of the tick is decided. */
@@ -479,8 +484,9 @@ public final class MoveContext {
         }
     }
 
+    /** Faces {@code yaw} at once. Ignored while the body follows the view, unless the camera aims over the shoulder, see {@link ArcadeInputFrame#AIMING}. */
     public void faceYaw(float yaw) {
-        if (!this.input.coupled()) {
+        if (!this.input.coupled() || this.aiming()) {
             this.state.facing = Mth.wrapDegrees(yaw);
         }
     }
