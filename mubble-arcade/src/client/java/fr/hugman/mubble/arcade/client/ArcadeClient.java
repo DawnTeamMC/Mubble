@@ -12,6 +12,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
+import fr.hugman.mubble.client.keybind.PowerUpKeybindsHandler;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
@@ -34,6 +35,7 @@ public final class ArcadeClient implements ClientModInitializer {
         ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(Mubble.id("arcade_animations"), new ArcadeAnimationLoader());
         HudElementRegistry.addLast(Mubble.id("arcade_debug"), ArcadeDebugHud::extractRenderState);
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, context) -> ArcadeRecorder.registerCommands(dispatcher));
+        PowerUpKeybindsHandler.BEFORE_TRIGGER.register(ArcadeCamera::beforePowerUp);
         ClientTickEvents.END_CLIENT_TICK.register(minecraft -> {
             ArcadeDebugHud.tick(minecraft);
             ArcadeCamera.tick(minecraft);

@@ -138,6 +138,11 @@ public record ShootProjectilePowerUpAction(
         return true;
     }
 
+    @Override
+    public boolean aims() {
+        return true;
+    }
+
     public void setVelocity(Entity projectile, Entity shooter, float pitch, float yaw, float roll, float speed, float divergence, boolean inheritsMotion) {
         float f = -Mth.sin(yaw * (float) (Math.PI / 180.0)) * Mth.cos(pitch * (float) (Math.PI / 180.0));
         float g = -Mth.sin((pitch + roll) * (float) (Math.PI / 180.0));
