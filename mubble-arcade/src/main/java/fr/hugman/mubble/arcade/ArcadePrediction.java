@@ -54,7 +54,7 @@ public final class ArcadePrediction {
         controller.setWrittenVelocity(written);
         player.setSprinting(false);
         controller.setOrbiting(!frame.coupled());
-        if (!frame.coupled()) {
+        if (!frame.coupled() || frame.isHeld(ArcadeInputFrame.AIMING) && state.move.facesItsOwnWay()) {
             player.setYRot(state.facing);
         }
         if (player.isUsingItem() && controller.handsBusy()) {
