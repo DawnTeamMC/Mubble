@@ -3,6 +3,8 @@ package fr.hugman.mubble.test.gametest.arcade;
 import fr.hugman.mubble.arcade.ArcadeAim;
 import fr.hugman.mubble.arcade.ArcadeShoulder;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
+import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
+import fr.hugman.mubble.test.gametest.datapack.PowerUpFixtures;
 import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
@@ -201,6 +203,21 @@ public class ArcadeAimGameTest {
         player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
         player.setItemInHand(InteractionHand.OFF_HAND, loaded);
         helper.assertTrue(ArcadeShoulder.aims(player), "holding a loaded crossbow in the off hand");
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void aPowerUpThatShootsAimsOverTheShoulder(GameTestHelper helper) {
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        var powerUps = PowerUpFixtures.registry(helper);
+        // the fire flower shoots fireballs where the player looks
+        player.setPowerUp(powerUps.getOrThrow(SuperMarioPowerUpIds.FIRE));
+        helper.assertTrue(ArcadeShoulder.aims(player), "with the fire power-up, empty-handed");
+        // the cloud flower makes platforms, the mega mushroom shoots nothing
+        player.setPowerUp(powerUps.getOrThrow(SuperMarioPowerUpIds.CLOUD));
+        helper.assertFalse(ArcadeShoulder.aims(player), "with the cloud power-up");
+        player.setPowerUp(powerUps.getOrThrow(SuperMarioPowerUpIds.MEGA));
+        helper.assertFalse(ArcadeShoulder.aims(player), "with the mega power-up");
         helper.succeed();
     }
 }

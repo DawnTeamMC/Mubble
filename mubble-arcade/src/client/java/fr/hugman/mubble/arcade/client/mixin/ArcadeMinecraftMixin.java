@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import fr.hugman.mubble.arcade.client.ArcadeClientInput;
 import fr.hugman.mubble.arcade.client.ArcadeHands;
+import fr.hugman.mubble.arcade.client.camera.ArcadeCamera;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,6 +40,18 @@ public class ArcadeMinecraftMixin {
             }
         }
         return false;
+    }
+
+    /**
+     * Aiming over the shoulder, the body turns to the crosshair right before the hands use what they
+     * hold, and what they reach out to is picked again from there: a loaded crossbow shoots on the click.
+     */
+    @Inject(method = "startUseItem", at = @At("HEAD"))
+    private void mubble$faceTheCrosshair(CallbackInfo ci) {
+        var minecraft = (Minecraft) (Object) this;
+        if (ArcadeCamera.onUse(minecraft)) {
+            ((MinecraftInvoker) minecraft).mubble$pick(1.0F);
+        }
     }
 
     /** Nor does holding them, until they are let go. */
