@@ -15,8 +15,6 @@ import net.minecraft.world.phys.Vec3;
  * on: given the same state, input frame, tuning and world, it always ends in the same state.
  */
 public final class ArcadeSimulation {
-    /** Ticks a stick spin has to come full circle in to count as one. */
-    private static final int SPIN_GESTURE_TICKS = 16;
     /** Displacement below which an axis counts as not moving at all, as far as collisions go. */
     private static final double COLLISION_EPSILON = 1.0E-5D;
     /** Upward speed from which a push launches the player rather than nudging them. */
@@ -62,7 +60,7 @@ public final class ArcadeSimulation {
         state.events.clear();
         state.negateFallDamage = false;
         var ctx = new MoveContext(state, input, tuning, world, position);
-        ctx.beginTick(SPIN_GESTURE_TICKS);
+        ctx.beginTick();
 
         // a move taken away mid-way falls back to the plain state of where the player is
         if (!ctx.allowed(state.move)) {

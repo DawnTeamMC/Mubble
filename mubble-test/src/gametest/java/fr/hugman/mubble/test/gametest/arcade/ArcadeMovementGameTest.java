@@ -493,6 +493,51 @@ public class ArcadeMovementGameTest {
         helper.succeed();
     }
 
+    /** Turns the stick of {@code frames} by {@code step} degrees a tick, {@code ticks} times, the view turned by {@code view} degrees a tick along. */
+    private static void turnStick(Player player, ArcadeTestKit.Frames frames, float step, int ticks, float view) {
+        for (int i = 1; i <= ticks; i++) {
+            float yaw = view * i;
+            double angle = Math.toRadians(step * i + yaw);
+            frames.yaw(yaw).stick((float) -Math.sin(angle), (float) Math.cos(angle));
+            ArcadeTestKit.step(player, frames.next());
+        }
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void aQuickTurnOfTheStickThenJumpSpinJumps(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = standing(helper, new BlockPos(5, 1, 5));
+        var frames = new ArcadeTestKit.Frames();
+        turnStick(player, frames, 45.0F, 9, 0.0F);
+        ArcadeTestKit.step(player, frames.tap(JUMP));
+        helper.assertTrue(move(player) == ArcadeMoves.SPIN, "a full turn of the stick in 8 ticks, then jump, should spin jump, got " + move(player));
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void aSlowSweepOfTheStickDoesNotSpin(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = standing(helper, new BlockPos(5, 1, 5));
+        var frames = new ArcadeTestKit.Frames();
+        // a turn and a quarter, steering round over more than a second
+        turnStick(player, frames, 18.0F, 25, 0.0F);
+        ArcadeTestKit.step(player, frames.tap(JUMP));
+        helper.assertTrue(move(player) == ArcadeMoves.JUMP, "a slow sweep of the stick is steering, not spinning: should jump, got " + move(player));
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void turningTheCameraWithTheStickHeldDoesNotSpin(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = standing(helper, new BlockPos(5, 1, 5));
+        var frames = new ArcadeTestKit.Frames();
+        // the stick held forward while the camera goes all the way round: in the world, the stick turns
+        turnStick(player, frames, 0.0F, 9, 45.0F);
+        ArcadeTestKit.step(player, frames.tap(JUMP));
+        helper.assertTrue(move(player) == ArcadeMoves.JUMP, "turning the camera is not turning the stick: should jump, got " + move(player));
+        helper.succeed();
+    }
+
     @GameTest(structure = ArcadeTestKit.LANE)
     public void reversingAtSpeedSkidsIntoASideSomersault(GameTestHelper helper) {
         ArcadeTestKit.floor(helper);

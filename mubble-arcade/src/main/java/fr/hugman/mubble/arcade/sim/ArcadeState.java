@@ -25,6 +25,11 @@ import net.minecraft.world.entity.Pose;
 public final class ArcadeState {
     /** How many ticks of slope history are kept at most, whatever a profile asks for. */
     public static final int MAX_SLOPE_WINDOW = 10;
+    /**
+     * How many ticks the stick has to come full circle within to spin: half a second, so that a
+     * quick turn of the stick spins and the slow sweeps of steering never do.
+     */
+    public static final int SPIN_GESTURE_TICKS = 10;
 
     public static final StreamCodec<ByteBuf, ArcadeState> STREAM_CODEC = StreamCodec.of(
             (buf, state) -> state.write(new FriendlyByteBuf(buf)),
@@ -84,9 +89,12 @@ public final class ArcadeState {
     public double anchorX;
     public double anchorY;
     public double anchorZ;
+    /** Where the stick pointed on the last tick, relative to the view, while tilted far enough to count. */
     public float stickAngle;
-    public float spinAccum;
-    public int spinWindow;
+    public boolean stickTracked;
+    /** How far the stick turned on each of the last ticks, as a ring buffer, see {@link #SPIN_GESTURE_TICKS}. */
+    public final float[] spinTurns = new float[SPIN_GESTURE_TICKS];
+    public int spinIndex;
 
     // slope history, as a ring buffer of grounded height changes and horizontal distances
     public final double[] slopeDy = new double[MAX_SLOPE_WINDOW];
@@ -169,8 +177,11 @@ public final class ArcadeState {
         buf.writeDouble(this.anchorY);
         buf.writeDouble(this.anchorZ);
         buf.writeFloat(this.stickAngle);
-        buf.writeFloat(this.spinAccum);
-        buf.writeVarInt(this.spinWindow);
+        buf.writeBoolean(this.stickTracked);
+        for (float turn : this.spinTurns) {
+            buf.writeFloat(turn);
+        }
+        buf.writeVarInt(this.spinIndex);
         for (int i = 0; i < MAX_SLOPE_WINDOW; i++) {
             buf.writeDouble(this.slopeDy[i]);
             buf.writeDouble(this.slopeDxz[i]);
@@ -218,8 +229,11 @@ public final class ArcadeState {
         state.anchorY = buf.readDouble();
         state.anchorZ = buf.readDouble();
         state.stickAngle = buf.readFloat();
-        state.spinAccum = buf.readFloat();
-        state.spinWindow = buf.readVarInt();
+        state.stickTracked = buf.readBoolean();
+        for (int i = 0; i < SPIN_GESTURE_TICKS; i++) {
+            state.spinTurns[i] = buf.readFloat();
+        }
+        state.spinIndex = buf.readVarInt();
         for (int i = 0; i < MAX_SLOPE_WINDOW; i++) {
             state.slopeDy[i] = buf.readDouble();
             state.slopeDxz[i] = buf.readDouble();
@@ -282,8 +296,9 @@ public final class ArcadeState {
         this.anchorY = copy.anchorY;
         this.anchorZ = copy.anchorZ;
         this.stickAngle = copy.stickAngle;
-        this.spinAccum = copy.spinAccum;
-        this.spinWindow = copy.spinWindow;
+        this.stickTracked = copy.stickTracked;
+        System.arraycopy(copy.spinTurns, 0, this.spinTurns, 0, SPIN_GESTURE_TICKS);
+        this.spinIndex = copy.spinIndex;
         System.arraycopy(copy.slopeDy, 0, this.slopeDy, 0, MAX_SLOPE_WINDOW);
         System.arraycopy(copy.slopeDxz, 0, this.slopeDxz, 0, MAX_SLOPE_WINDOW);
         this.slopeIndex = copy.slopeIndex;
