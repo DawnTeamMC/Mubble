@@ -251,7 +251,7 @@ public final class ArcadePlayerAnimator {
 
     /** The yaw from the camera of this client to {@code player}, the way the camera sees it. */
     private static float viewYaw(Player player) {
-        var camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+        var camera = Minecraft.getInstance().gameRenderer.mainCamera();
         var position = camera.position();
         double dx = player.getX() - position.x;
         double dz = player.getZ() - position.z;
