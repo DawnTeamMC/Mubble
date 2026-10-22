@@ -24,7 +24,8 @@ import org.apache.logging.log4j.Logger;
  * @param autoCameraKeyboard  whether the orbit camera swings round behind the player as they move,
  *                            playing on the keyboard and mouse
  * @param autoCameraController the same, playing on a controller
- * @param autoCameraSpeed     how fast it swings round at run speed, in degrees per second
+ * @param autoCameraSpeed     how fast it swings round at its quickest, rolling sideways past the run speed,
+ *                            in degrees per second, see {@link fr.hugman.mubble.arcade.ArcadeCameraFollow}
  * @param cameraDistance      distance between the orbit camera and the player, in blocks, at scale 1
  * @param cameraHeight        height of the point the camera looks at, above the eyes, in blocks
  * @param cameraMargin        how much room the camera leaves around the player before following them,
@@ -58,7 +59,7 @@ public record ArcadeClientConfig(
         boolean silhouette
 ) {
     private static final Logger LOGGER = LogManager.getLogger(Mubble.MOD_ID);
-    public static final ArcadeClientConfig DEFAULT = new ArcadeClientConfig(true, false, true, 120.0D, 5.0D, 0.3D, 1.0D, 540.0D, 1.0D, -80.0D, 80.0D, 0.08D, true, false, true);
+    public static final ArcadeClientConfig DEFAULT = new ArcadeClientConfig(true, false, true, 90.0D, 5.0D, 0.3D, 1.0D, 540.0D, 1.0D, -80.0D, 80.0D, 0.08D, true, false, true);
 
     public static final Codec<ArcadeClientConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.BOOL.optionalFieldOf("orbit_camera", DEFAULT.orbitCamera).forGetter(ArcadeClientConfig::orbitCamera),

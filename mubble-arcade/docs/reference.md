@@ -275,7 +275,7 @@ Input is sampled every **frame**, not every tick: a press is remembered with the
 
 ## Camera
 
-How the camera behaves is on the wiki's *Camera* page. What it looks at is `ArcadeFraming`, common code so that unit tests hold it: a margin around the player sideways, a band above and below that only the ground moves, and a catch-up once the player keeps moving. What stands between the camera and the player does not move it: `ArcadeAim.clearDistance` only brings it closer when its own spot, plus a margin, is inside blocks, and `ArcadeCamera` eases its distance in and out. The silhouette (`ArcadeSilhouette`) is the player's model drawn twice more with a `LESS_THAN` depth test and no depth writes: among the solid models, before any entity's, to mark in the frame's alpha where the world hides the player, then among the translucent ones to tint the marked pixels gray and put their alpha back. Translucent models are drawn after every solid one, so tinting in one go would test against the player's own skin layers, armor and held items too.
+How the camera behaves is on the wiki's *Camera* page. What it looks at is `ArcadeFraming`, common code so that unit tests hold it: a margin around the player sideways, a band above and below that only the ground moves, and a catch-up once the player keeps moving. How the camera swings round on its own is `ArcadeCameraFollow`, common code too: a rate that grows with the speed past the run speed and with the distance gone in one direction (walking, it hardly moves), held for 2.5 s after the player turns the camera and eased back in over 1.5 s, zero within 45° of running at the camera, and smoothed by a capped angular acceleration so that it never jolts. What stands between the camera and the player does not move it: `ArcadeAim.clearDistance` only brings it closer when its own spot, plus a margin, is inside blocks, and `ArcadeCamera` eases its distance in and out. The silhouette (`ArcadeSilhouette`) is the player's model drawn twice more with a `LESS_THAN` depth test and no depth writes: among the solid models, before any entity's, to mark in the frame's alpha where the world hides the player, then among the translucent ones to tint the marked pixels gray and put their alpha back. Translucent models are drawn after every solid one, so tinting in one go would test against the player's own skin layers, armor and held items too.
 
 The client settings, as `config/mubble-arcade-client.json` names them (`ArcadeClientConfig`). The settings screen (`ArcadeSettings`, a section of the core's Mubble settings screen) shows all but the camera height, recenter speed and pitch limits:
 
@@ -284,7 +284,7 @@ The client settings, as `config/mubble-arcade-client.json` names them (`ArcadeCl
 | `orbit_camera` | true | Off: the vanilla third person camera |
 | `auto_camera_keyboard` | false | The camera follows the player round, on the keyboard and mouse |
 | `auto_camera_controller` | true | The same, on a controller |
-| `auto_camera_speed` | 120 | Degrees per second, at run speed |
+| `auto_camera_speed` | 90 | Degrees per second at the quickest, rolling sideways (`ArcadeCameraFollow`) |
 | `camera_distance` | 5 | Blocks |
 | `camera_height` | 0.3 | Above the eyes |
 | `camera_margin` | 1 | Scale of the margins of `ArcadeFraming`; 0 keeps the player in the middle |

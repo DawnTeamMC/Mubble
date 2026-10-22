@@ -11,8 +11,9 @@ import org.jspecify.annotations.Nullable;
  * <ul>
  *     <li><b>Sideways</b>, the player moves freely within a margin around the focus. Past it, the
  *     focus is pushed along, softly, and never lets the player more than a hard limit away. While the
- *     player keeps moving, the focus catches up faster than they go, so that a run ends with the
- *     player in the middle; a step or two does not.</li>
+ *     player keeps moving, the focus catches up a little faster than they go, so that a run ends with
+ *     the player in the middle, after a couple of seconds: the camera trails behind rather than
+ *     sticking to them, and a step or two does not move it at all.</li>
  *     <li><b>Upwards</b>, as in platformers since Super Mario World, the height of the camera only
  *     follows the ground: while the player is in the air, it stays put, as long as they stay within
  *     a band above it and do not fall below it. Back on the ground, on a ladder, a wall or in water,
@@ -24,26 +25,26 @@ import org.jspecify.annotations.Nullable;
  */
 public final class ArcadeFraming {
     /** How far the player may stray sideways before the focus moves, in blocks. */
-    public static final double SIDE_MARGIN = 0.8D;
+    public static final double SIDE_MARGIN = 1.0D;
     /** How far above the focus the player may jump before it rises, in blocks: past a plain jump. */
     public static final double ABOVE_MARGIN = 2.5D;
     /** How far below the focus the player may fall before it follows, in blocks. */
     public static final double BELOW_MARGIN = 0.75D;
     /** How far past a margin the player may get, once it pushes the focus, in blocks. */
-    public static final double HARD_LIMIT = 1.0D;
+    public static final double HARD_LIMIT = 1.2D;
     /** Share of how far past a margin the player is that the focus leaves every tick: it follows softly rather than locked. */
     public static final double EDGE_KEEP = 0.5D;
     /** Share of the height between the focus and the feet of a player on the ground left every tick. */
     public static final double GROUND_KEEP = 0.75D;
     /** How much faster than the player the focus catches up, once they keep moving. */
-    public static final double CATCH_UP = 1.25D;
+    public static final double CATCH_UP = 1.15D;
     /** The slowest the player may go, in blocks per tick, for the focus to catch up with them. */
     public static final double MOVING_SPEED = 0.05D;
     /** How many ticks of moving it takes for the focus to catch up at full speed, and of standing still for it to stop. */
-    public static final double ENGAGE_TICKS = 12.0D;
+    public static final double ENGAGE_TICKS = 20.0D;
     public static final double RELEASE_TICKS = 6.0D;
     /** How far into moving the player has to be before the focus starts catching up: a step or two is not moving on. */
-    public static final double ENGAGE_DELAY = 0.4D;
+    public static final double ENGAGE_DELAY = 0.5D;
     /** Share of the way to the player the focus leaves every tick of a recenter, whatever the margins. */
     public static final double RECENTER_KEEP = 0.6D;
     /** How close to the player the focus has to come for a recenter to be over, in blocks. */
