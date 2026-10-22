@@ -311,6 +311,7 @@ Animations are JSON files in a resource pack, `assets/<namespace>/animations/arc
   "linger": false,
   "blend_in": 0.06,
   "axes": "java",
+  "face": "forward",
   "bones": {
     "right_arm": { "rotation": { "0.0": [-60, 0, 10], "0.35": { "post": [0, 0, 30], "easing": "out_back" } } },
     "left_leg":  { "rotation": [{ "time": 0.0, "value": [0, 0, 0] }, { "time": 0.3, "value": [-70, 0, 0] }] }
@@ -328,6 +329,7 @@ Animations are JSON files in a resource pack, `assets/<namespace>/animations/arc
 - `body`: the whole player, turned around `pivot` (blocks above the feet), and scaled from the feet: squash and stretch. A positive X rotation tips the head backwards, so `360` is a backflip and `-360` a front flip.
 - A channel is a list of `{time, value}`, an object keyed by time, or one value held all along. A keyframe value is three numbers, or `{post, pre?, lerp_mode?, easing?}`: `lerp_mode` is `linear` or `catmullrom`, and `easing` shapes the way to that keyframe, with any of vanilla's easing types (`in_sine`, `out_quad`, `in_out_cubic`, `out_back`, `out_elastic`, `out_bounce`… all of `in_`, `out_` and `in_out_` with `sine`, `quad`, `cubic`, `quart`, `quint`, `expo`, `circ`, `back`, `elastic` and `bounce`), or `{"cubic_bezier": [x1, y1, x2, y2]}`.
 - `axes: "bedrock"` takes numbers as Blockbench exports them for Bedrock models.
+- `face: "side_to_camera"` plays the animation side on to the path, the body a quarter turn from the way the move faces it, so that a cartwheel turns in the plane of the jump; of the two sides, the one looking at the camera of whoever watches, chosen once when the animation starts and eased in and out with its blend. Crossing the screen, the player faces the camera; going straight towards it or away from it, it shows a side. The animation is authored for a path to the left of the player (a positive Z rotation tips the head that way) and plays mirrored, left for right, when the path is to its right. It only changes what is drawn, never where the player faces in the simulation. `forward` by default; the side somersault plays side on.
 
 The shipped animations stretch the body on take-offs (jumps, wall jumps, the ground pound jump), squash it on landings, and drop a ground pound stretched along its fall, flattened on impact before it springs back past its shape.
 

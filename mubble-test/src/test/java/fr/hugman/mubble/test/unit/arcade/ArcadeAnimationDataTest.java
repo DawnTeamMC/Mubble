@@ -156,6 +156,88 @@ public class ArcadeAnimationDataTest {
         assertTrue(drop.y > 1.0F && drop.x < 1.0F, "a ground pound drops stretched, got " + drop);
     }
 
+    @Test
+    @DisplayName("a side somersault plays side on, the side looking at the camera; everything else faces forward")
+    void sideSomersaultFacesTheCamera() {
+        assertEquals(ArcadeAnimationData.Facing.SIDE_TO_CAMERA, shipped.get("side_somersault").face());
+        assertEquals(ArcadeAnimationData.Facing.FORWARD, shipped.get("backflip").face());
+        assertEquals(ArcadeAnimationData.Facing.FORWARD, ArcadeAnimationData.parse(parse("{\"length\": 1}")).face());
+        assertThrows(JsonParseException.class, () -> ArcadeAnimationData.parse(parse("{\"length\": 1, \"face\": \"backwards\"}")));
+    }
+
+    @Test
+    @DisplayName("a mirrored animation swaps its sides, and turns and moves sideways the other way")
+    void mirroring() {
+        var data = ArcadeAnimationData.parse(parse("""
+                {"length": 1, "face": "side_to_camera", "bones": {
+                  "right_arm": {"rotation": {"0.0": [0, 0, 0], "1.0": {"post": [-20, 10, 90], "easing": "out_back"}}},
+                  "left_leg": {"position": [1, 2, 3]},
+                  "head": {"rotation": [5, 6, 7], "scale": [1, 2, 3]}
+                }, "body": {"pivot": [0.25, 0.9, 0], "rotation": {"0.0": [0, 0, 0], "1.0": [30, 0, 360]}}}""")).mirrored();
+        var arm = data.bones().get("left_arm").get(ArcadeAnimationData.Target.ROTATION).getLast();
+        assertEquals(-20.0F, arm.post().x, "a limb swinging forward still swings forward");
+        assertEquals(-10.0F, arm.post().y);
+        assertEquals(-90.0F, arm.post().z, "a right arm raised to its side is a left arm raised to the other side");
+        assertEquals(EasingType.OUT_BACK, arm.easing(), "the timing stays");
+        assertFalse(data.bones().containsKey("right_arm"));
+        assertEquals(-1.0F, data.bones().get("right_leg").get(ArcadeAnimationData.Target.POSITION).getFirst().post().x);
+        var head = data.bones().get("head");
+        assertEquals(-6.0F, head.get(ArcadeAnimationData.Target.ROTATION).getFirst().post().y);
+        assertEquals(2.0F, head.get(ArcadeAnimationData.Target.SCALE).getFirst().post().y, "scales stay");
+        var body = data.body().orElseThrow().get(ArcadeAnimationData.Target.ROTATION).getLast().post();
+        assertEquals(30.0F, body.x);
+        assertEquals(-360.0F, body.z, "a cartwheel to the left becomes one to the right");
+        assertEquals(-0.25F, data.pivot().x);
+        assertEquals(ArcadeAnimationData.Facing.SIDE_TO_CAMERA, data.face());
+
+        assertEquals(-360.0F, shipped.get("side_somersault").mirrored().body().orElseThrow().get(ArcadeAnimationData.Target.ROTATION).getLast().post().z);
+    }
+
+    @Test
+    @DisplayName("side on, the player turns to the camera, and wheels the way it goes")
+    void sideTurnLooksAtTheCamera() {
+        // a camera looking south, at a player crossing its screen from left to right, westwards
+        float turn = ArcadeAnimationData.sideTurnToCamera(90.0F, 0.0F);
+        assertEquals(90.0F, turn);
+        assertEquals(-1.0F, facingDotView(90.0F + turn, 0.0F), 1.0E-4F, "it faces the camera");
+        // and from right to left, eastwards
+        turn = ArcadeAnimationData.sideTurnToCamera(-90.0F, 0.0F);
+        assertEquals(-90.0F, turn);
+        assertEquals(-1.0F, facingDotView(-90.0F + turn, 0.0F), 1.0E-4F, "it faces the camera");
+        // straight towards the camera or away from it: side on either way, always the same
+        assertEquals(ArcadeAnimationData.sideTurnToCamera(180.0F, 0.0F), ArcadeAnimationData.sideTurnToCamera(-180.0F, 0.0F));
+        assertEquals(ArcadeAnimationData.sideTurnToCamera(0.0F, 0.0F), ArcadeAnimationData.sideTurnToCamera(360.0F, 0.0F));
+        for (float travel = -180.0F; travel < 180.0F; travel += 7.5F) {
+            for (float view = -180.0F; view < 180.0F; view += 15.0F) {
+                float side = ArcadeAnimationData.sideTurnToCamera(travel, view);
+                assertEquals(90.0F, Math.abs(side), "a quarter turn");
+                assertTrue(facingDotView(travel + side, view) <= 1.0E-3F, "turned away from the camera going " + travel + " seen towards " + view);
+            }
+        }
+    }
+
+    /** How much a player facing {@code facing} looks the way a camera looking towards {@code view} does: -1 when it faces the camera. */
+    private static float facingDotView(float facing, float view) {
+        return (float) Math.cos(Math.toRadians(facing - view));
+    }
+
+    @Test
+    @DisplayName("a long jump flies flat, feet first and arms swept back")
+    void longJumpFliesFeetFirst() {
+        var animation = shipped.get("long_jump");
+        float body = animation.body().orElseThrow().get(ArcadeAnimationData.Target.ROTATION).get(1).post().x;
+        assertTrue(body <= -60.0F, "the body leans far forwards, got " + body);
+        for (var side : List.of("right", "left")) {
+            float leg = animation.bones().get(side + "_leg").get(ArcadeAnimationData.Target.ROTATION).get(1).post().x;
+            // the leg hangs along the leaning body: swung forwards past it, the foot leads
+            assertTrue(leg < body, "the " + side + " leg reaches forwards past the body, got " + leg);
+            float arm = animation.bones().get(side + "_arm").get(ArcadeAnimationData.Target.ROTATION).get(1).post().x;
+            assertTrue(arm > 0.0F, "the " + side + " arm is swept back, got " + arm);
+        }
+        var stretch = animation.body().orElseThrow().get(ArcadeAnimationData.Target.SCALE).getFirst().post();
+        assertTrue(stretch.y > 1.0F && stretch.x < 1.0F, "it takes off stretched, got " + stretch);
+    }
+
     private static JsonObject parse(String json) {
         return JsonParser.parseString(json).getAsJsonObject();
     }
