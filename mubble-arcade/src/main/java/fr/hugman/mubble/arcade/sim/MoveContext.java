@@ -10,6 +10,7 @@ import fr.hugman.mubble.arcade.move.ArcadeMoves;
 import fr.hugman.mubble.arcade.move.SwimMove;
 import fr.hugman.mubble.arcade.move.MoveParam;
 import fr.hugman.mubble.arcade.move.MoveSettings;
+import java.util.Arrays;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
@@ -35,6 +36,8 @@ public final class MoveContext {
 
     private static final float DEGREES_TO_RADIANS = Mth.DEG_TO_RAD;
     private static final double EPSILON = 1.0E-7D;
+    /** How far the stick has to be tilted for its turns to count towards a spin: nearly all the way. */
+    private static final double SPIN_STICK_TILT = 0.75D;
     /** Friction of a plain block, against which the grip of every other block is measured. */
     private static final double PLAIN_FRICTION = 0.6D;
     /** How long one tick lasts, which is what an input buffer loses every tick. */
@@ -315,20 +318,26 @@ public final class MoveContext {
         return this.world.collides(this.box().move(this.stickX * reach, 0.0D, this.stickZ * reach));
     }
 
-    /** Whether the stick was spun around fast enough to ask for a spin, and has not asked for one since. */
+    /**
+     * Whether the stick came full circle over the last {@link ArcadeState#SPIN_GESTURE_TICKS} ticks,
+     * tilted well over, and has not asked for a spin since.
+     */
     public boolean spinGesture() {
-        return this.state.spinWindow > 0 && Math.abs(this.state.spinAccum) >= 360.0F;
+        float turned = 0.0F;
+        for (float turn : this.state.spinTurns) {
+            turned += turn;
+        }
+        return Math.abs(turned) >= 360.0F;
     }
 
     public void consumeSpinGesture() {
-        this.state.spinAccum = 0.0F;
-        this.state.spinWindow = 0;
+        Arrays.fill(this.state.spinTurns, 0.0F);
     }
 
     // -- the start of the tick ------------------------------------------------------------------
 
     /** Reads the input of the tick into the state: held keys, buffered presses, the spin gesture. */
-    void beginTick(int spinWindowTicks) {
+    void beginTick() {
         var s = this.state;
         if (this.jumpPressed) {
             s.jumpBufferMs = Math.max(s.jumpBufferMs - TICK_MS, this.grace.jumpBufferMs() - this.input.jumpAgeMs());
@@ -344,22 +353,22 @@ public final class MoveContext {
         s.crouchHeld = this.input.isHeld(ArcadeInputFrame.CROUCH);
         s.actionHeld = this.input.isHeld(ArcadeInputFrame.ACTION);
 
-        // the spin gesture: the stick turned all the way around within a short window
-        if (this.hasStick() && this.stickMagnitude > 0.5D) {
-            float angle = this.stickYaw();
-            if (s.spinWindow > 0) {
-                s.spinAccum += Mth.degreesDifference(s.stickAngle, angle);
-            } else {
-                s.spinAccum = 0.0F;
+        // the spin gesture: how far the stick turned this tick, relative to the view so that turning
+        // the camera with the stick held is not spinning it, and only while tilted well over: letting
+        // it back to the middle, or barely tilting it, breaks the turn
+        float turn = 0.0F;
+        if (this.hasStick() && this.stickMagnitude >= SPIN_STICK_TILT) {
+            float angle = Mth.wrapDegrees(this.stickYaw() - this.input.viewYaw());
+            if (s.stickTracked) {
+                turn = Mth.degreesDifference(s.stickAngle, angle);
             }
             s.stickAngle = angle;
-            s.spinWindow = spinWindowTicks;
-        } else if (s.spinWindow > 0) {
-            s.spinWindow--;
-            if (s.spinWindow == 0) {
-                s.spinAccum = 0.0F;
-            }
+            s.stickTracked = true;
+        } else {
+            s.stickTracked = false;
         }
+        s.spinTurns[s.spinIndex] = turn;
+        s.spinIndex = (s.spinIndex + 1) % ArcadeState.SPIN_GESTURE_TICKS;
 
         if (this.input.coupled()) {
             s.facing = this.input.viewYaw();
