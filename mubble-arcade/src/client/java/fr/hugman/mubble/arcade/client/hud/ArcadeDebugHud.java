@@ -5,6 +5,7 @@ import fr.hugman.mubble.arcade.client.ArcadeClientInput;
 import fr.hugman.mubble.arcade.client.ArcadeKeyMappings;
 import fr.hugman.mubble.arcade.client.ArcadeRecorder;
 import fr.hugman.mubble.arcade.client.animation.ArcadePlayerAnimator;
+import fr.hugman.mubble.arcade.client.camera.ArcadeCamera;
 import fr.hugman.mubble.arcade.ArcadeController;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +79,8 @@ public final class ArcadeDebugHud {
         if (controller.isDriving()) {
             var hands = controller.handsGoToMoves(ArcadeClientInput.crouchHeld()) ? "moves" : "item";
             lines.add(Component.literal("Hands: " + hands + (controller.orbiting() ? ", ahead" : ", crosshair")));
+            var camera = !ArcadeCamera.isOrbiting() ? "vanilla" : ArcadeCamera.facesCrosshair() ? "shoulder, facing the crosshair" : ArcadeCamera.isAiming() ? "shoulder" : "orbit";
+            lines.add(Component.literal(String.format(Locale.ROOT, "Camera: %s  aim=%.2f", camera, ArcadeCamera.aim())));
         }
         return lines;
     }

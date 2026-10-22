@@ -1,6 +1,7 @@
 package fr.hugman.mubble.test.gametest.arcade;
 
 import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.ACTION;
+import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.AIMING;
 import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.CROUCH;
 import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.JUMP;
 import static fr.hugman.mubble.arcade.sim.ArcadeInputFrame.SPIN;
@@ -17,6 +18,7 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -975,6 +977,40 @@ public class ArcadeMovementGameTest {
             peak = Math.max(peak, player.getY() - startY);
         }
         helper.assertTrue(peak > 3.5D, "a landing on a bounce block should send the player about 4 blocks up, got " + peak);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void aimingOverTheShoulderARollFacesTheWayItGoes(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var player = standing(helper, new BlockPos(5, 1, 20));
+        var controller = ArcadeController.of(player);
+        // the view looks south, a yaw of 0, and the stick points back, north
+        var frames = new ArcadeTestKit.Frames().hold(AIMING).stick(0.0F, -1.0F).hold(CROUCH);
+        ArcadeTestKit.step(player, frames.press(ACTION));
+        helper.assertValueEqual(move(player), ArcadeMoves.ROLL, "crouch and action on the ground");
+        for (int i = 0; i < 3; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        var state = controller.state();
+        helper.assertTrue(state.vz < 0.0D, "the roll goes north, vz=" + state.vz);
+        helper.assertTrue(Math.abs(Mth.degreesDifference(state.facing, 180.0F)) < 1.0F, "the body faces the way it rolls, north, got " + state.facing);
+        helper.assertTrue(Math.abs(Mth.degreesDifference(player.getYRot(), 180.0F)) < 1.0F, "and so does the player, got " + player.getYRot());
+
+        // once the roll is over, the body faces the view again
+        frames.letGo(CROUCH).release();
+        for (int i = 0; i < 4; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        helper.assertTrue(move(player) != ArcadeMoves.ROLL, "the roll should be over");
+        helper.assertTrue(Math.abs(Mth.degreesDifference(controller.state().facing, 0.0F)) < 1.0F, "the body faces the view again, got " + controller.state().facing);
+
+        // walking backwards meanwhile keeps facing the view, as in first person
+        frames.stick(0.0F, -1.0F);
+        for (int i = 0; i < 4; i++) {
+            ArcadeTestKit.step(player, frames.next());
+        }
+        helper.assertTrue(Math.abs(Mth.degreesDifference(controller.state().facing, 0.0F)) < 1.0F, "walking backwards faces the view, got " + controller.state().facing);
         helper.succeed();
     }
 }
