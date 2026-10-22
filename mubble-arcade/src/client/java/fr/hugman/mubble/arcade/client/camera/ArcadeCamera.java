@@ -7,6 +7,7 @@ import fr.hugman.mubble.arcade.ArcadeAim;
 import fr.hugman.mubble.arcade.ArcadeController;
 import fr.hugman.mubble.arcade.ArcadeFraming;
 import fr.hugman.mubble.arcade.ArcadeShoulder;
+import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.arcade.move.ArcadeMove;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -14,6 +15,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.CameraType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec2;
@@ -31,8 +33,10 @@ import org.jspecify.annotations.Nullable;
  * body faces, see {@link ArcadeAim#pickAhead}.
  * <p>
  * Holding a bow, a crossbow, a trident or another weapon that aims (see {@link ArcadeShoulder}),
- * the camera moves in close behind the right shoulder and the body turns to face the crosshair, as in
- * the first person view: the hands then reach out to what the crosshair points at.
+ * the camera moves in close behind the right shoulder and shows a crosshair. The body still faces
+ * where it goes, as in the orbit; using the weapon (drawing the bow, shooting the loaded crossbow)
+ * turns it to face the crosshair, as in the first person view, until a moment after the last use,
+ * see {@link #facesCrosshair}: the hands then reach out to what the crosshair points at.
  */
 @Environment(EnvType.CLIENT)
 public final class ArcadeCamera {
@@ -59,6 +63,8 @@ public final class ArcadeCamera {
     private static final double AIM_HEIGHT = 0.15D;
     /** How far the crosshair reaches while aiming, in blocks: past it, the body looks along the view. */
     private static final double AIM_RANGE = 96.0D;
+    /** How long the body keeps facing the crosshair once the weapon was last used, in seconds, so that shots in a row do not swing it back and forth. */
+    private static final float AIM_LINGER_SECONDS = 0.5F;
     /** How far the view may look up or down while aiming, in degrees, as in the first person view. */
     private static final float AIM_PITCH = 90.0F;
 
@@ -80,6 +86,7 @@ public final class ArcadeCamera {
     private static float blend;
     /** How far the camera has moved to the shoulder, from framing the player (0) to aiming (1). */
     private static float aim;
+    private static long lastUseNanos;
     private static long lastFrameNanos;
     private static long lastManualTurnNanos;
     /** How far behind the focus the camera sits, easing towards where it can, or below 0 before the first frame. */
@@ -113,15 +120,53 @@ public final class ArcadeCamera {
         return now;
     }
 
-    /** Whether the orbit camera aims over the shoulder: the body then faces the crosshair, see {@link ArcadeShoulder}. */
+    /** Whether the orbit camera aims over the shoulder, a weapon that aims in hand, see {@link ArcadeShoulder}. */
     public static boolean isAiming() {
         var player = Minecraft.getInstance().player;
         return isOrbiting() && ArcadeShoulder.aims(player);
     }
 
-    /** Whether the body of the player follows the view, as in the first person view: off the orbit, or aiming. */
+    /**
+     * Whether the body faces the crosshair, as in the first person view: aiming, while the weapon is
+     * in use (a bow drawn, a crossbow loading, a trident raised) and for a moment after it last was.
+     * The rest of the time, it faces where it goes, as in the orbit.
+     */
+    public static boolean facesCrosshair() {
+        var player = Minecraft.getInstance().player;
+        return isAiming() && (player.isUsingItem() || System.nanoTime() - lastUseNanos < AIM_LINGER_SECONDS * 1.0E9F);
+    }
+
+    /** Whether the body of the player follows the view, as in the first person view: off the orbit, or facing the crosshair. */
     public static boolean coupled() {
-        return !isOrbiting() || isAiming();
+        return !isOrbiting() || facesCrosshair();
+    }
+
+    /**
+     * Called right before the hands use what they hold: aiming, the body turns to the crosshair at
+     * once, so that what shoots on the click, a loaded crossbow, shoots where the crosshair points.
+     *
+     * @return whether the body turned, and what the hands reach out to has to be picked again
+     */
+    public static boolean onUse(Minecraft minecraft) {
+        var player = minecraft.player;
+        if (player == null || !isAiming()) {
+            return false;
+        }
+        lastUseNanos = System.nanoTime();
+        var camera = minecraft.gameRenderer.mainCamera();
+        aimBody(player, player.getEyePosition(), camera.position(), Vec3.directionFromRotation(camera.xRot(), camera.yRot()));
+        return true;
+    }
+
+    /**
+     * Called right before a power-up is triggered: one that shoots, a fire flower, turns the body to
+     * the crosshair as a weapon does, and the server hears of the turn before the trigger, so that it
+     * shoots where the crosshair points.
+     */
+    public static void beforePowerUp(LocalPlayer player, PowerUp powerUp) {
+        if (powerUp.aims() && onUse(Minecraft.getInstance())) {
+            player.connection.send(new ServerboundMovePlayerPacket.Rot(player.getYRot(), player.getXRot(), player.onGround(), player.horizontalCollision));
+        }
     }
 
     /** How far the camera has moved to the shoulder, from 0 to 1, for the debug HUD and the crosshair. */
@@ -279,7 +324,8 @@ public final class ArcadeCamera {
             invoker.mubble$setRotation(vanillaYaw + Mth.degreesDifference(vanillaYaw, yaw) * t, Mth.lerp(t, vanillaPitch, pitch));
             invoker.mubble$setPosition(vanillaPosition.lerp(orbitPosition, t));
         }
-        if (aiming) {
+        // a roll or a dive turns the body its own way meanwhile, see ArcadeInputFrame.AIMING
+        if (facesCrosshair() && !ArcadeController.of(player).state().move.facesItsOwnWay()) {
             aimBody(player, player.getEyePosition(partialTicks), camera.position(), Vec3.directionFromRotation(camera.xRot(), camera.yRot()));
         }
     }
@@ -314,10 +360,6 @@ public final class ArcadeCamera {
      * crosshair shows, wherever the camera sits beside them. Too close to tell, they look along the view.
      */
     private static void aimBody(LocalPlayer player, Vec3 eye, Vec3 camera, Vec3 forward) {
-        if (ArcadeController.of(player).state().move.facesItsOwnWay()) {
-            // a roll or a dive turns the body its own way, see ArcadeInputFrame.AIMING
-            return;
-        }
         var target = ArcadeAim.shoulderTarget(player.level(), player, camera, forward, eye, AIM_RANGE);
         var look = target.subtract(eye);
         var rotation = look.lengthSqr() > 1.0D && look.dot(forward) > 0.0D

@@ -13,7 +13,8 @@
     "ArcadeLivingEntityRendererMixin",
     "ArcadeLocalPlayerMixin",
     "ArcadeMinecraftMixin",
-    "CameraInvoker"
+    "CameraInvoker",
+    "MinecraftInvoker"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -119,7 +119,7 @@ public final class ArcadeClientInput {
         float yaw = yaw(player);
         float[] stick = stick(player, yaw);
         var frame = COLLECTOR.tick(tick, System.nanoTime(), stick[0], stick[1], yaw, coupled);
-        return ArcadeCamera.isAiming() ? frame.aiming() : frame;
+        return ArcadeCamera.facesCrosshair() ? frame.aiming() : frame;
     }
 
     /** The input of the player as it stands, with nothing pressed: what the previews of the button guide start from. */
@@ -128,7 +128,7 @@ public final class ArcadeClientInput {
         float yaw = yaw(player);
         float[] stick = stick(player, yaw);
         var frame = new ArcadeInputFrame(0, stick[0], stick[1], yaw, coupled, (byte) (down & ~ArcadeInputFrame.ACTION), (byte) 0, (short) 0, (short) 0).slowedFor(player);
-        return ArcadeCamera.isAiming() ? frame.aiming() : frame;
+        return ArcadeCamera.facesCrosshair() ? frame.aiming() : frame;
     }
 
     /**

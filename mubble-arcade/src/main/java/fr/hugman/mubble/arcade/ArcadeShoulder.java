@@ -1,6 +1,8 @@
 package fr.hugman.mubble.arcade;
 
 import fr.hugman.mubble.arcade.tags.ArcadeItemTags;
+import fr.hugman.mubble.world.power_up.PowerUp;
+import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,15 +15,19 @@ import net.minecraft.world.phys.Vec3;
  * When the orbit camera aims over the shoulder rather than framing the player: as long as they hold
  * a weapon that shoots where the view points (a bow, a crossbow, a trident, or an item of
  * {@link ArcadeItemTags#AIMS_WHILE_HELD}), not only while it charges, so that shooting several times
- * in a row keeps the camera where it is. The body then faces the crosshair, as in the first person
- * view, and the camera sits close behind the right shoulder.
+ * in a row keeps the camera where it is, or have a power-up that shoots, as the fire flower does (see
+ * {@link PowerUp#aims()}). The camera then sits close behind the right shoulder, and using the weapon
+ * turns the body to face the crosshair.
  */
 public final class ArcadeShoulder {
     private ArcadeShoulder() {
     }
 
-    /** Whether {@code entity} aims over the shoulder right now: a weapon that aims is in either hand. */
+    /** Whether {@code entity} aims over the shoulder right now: a weapon that aims is in either hand, or its power-up aims. */
     public static boolean aims(LivingEntity entity) {
+        if (entity instanceof PowerUpHolder holder && holder.getPowerUp().map(powerUp -> powerUp.value().aims()).orElse(false)) {
+            return true;
+        }
         for (var hand : InteractionHand.values()) {
             if (aimsWith(entity.getItemInHand(hand))) {
                 return true;
