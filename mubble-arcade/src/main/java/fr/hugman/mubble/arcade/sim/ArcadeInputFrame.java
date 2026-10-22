@@ -47,6 +47,12 @@ public record ArcadeInputFrame(
      * {@code use_effects} of the item. The stick of the frame is already scaled, and running is off.
      */
     public static final int USING_ITEM = 1 << 5;
+    /**
+     * Not a button: the camera aims over the shoulder. The frame is coupled, the body facing the
+     * view, except while a move {@linkplain fr.hugman.mubble.arcade.move.ArcadeMove#facesItsOwnWay
+     * faces a way of its own}, a roll or a dive, which then turns it as with the orbit camera.
+     */
+    public static final int AIMING = 1 << 6;
 
     public static final ArcadeInputFrame IDLE = new ArcadeInputFrame(0, 0.0F, 0.0F, 0.0F, true, (byte) 0, (byte) 0, (short) 0, (short) 0);
 
@@ -117,6 +123,11 @@ public record ArcadeInputFrame(
         double magnitude = this.stickMagnitude();
         float scale = !this.isHeld(USING_ITEM) ? speed : magnitude > speed ? (float) (speed / magnitude) : 1.0F;
         return new ArcadeInputFrame(this.tick, this.stickX * scale, this.stickZ * scale, this.viewYaw, this.coupled, (byte) (this.held | USING_ITEM), this.pressed, this.jumpAgeMs, this.actionAgeMs);
+    }
+
+    /** This frame, taken while the camera aims over the shoulder, see {@link #AIMING}. */
+    public ArcadeInputFrame aiming() {
+        return new ArcadeInputFrame(this.tick, this.stickX, this.stickZ, this.viewYaw, this.coupled, (byte) (this.held | AIMING), this.pressed, this.jumpAgeMs, this.actionAgeMs);
     }
 
     public ArcadeInputFrame withTick(int tick) {

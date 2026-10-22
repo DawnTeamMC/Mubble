@@ -15,11 +15,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LocalPlayer.class)
 public class ArcadeLocalPlayerMixin {
-    /** With the orbit camera on, the hands reach out where the body faces, and never to a block. */
+    /**
+     * With the orbit camera on, the hands reach out where the body faces, and never to a block;
+     * aiming over the shoulder, the body faces the crosshair, and they reach out to it as vanilla's do.
+     */
     @Inject(method = "raycastHitResult", at = @At("HEAD"), cancellable = true)
     private void mubble$pickFromTheOrbit(float partialTicks, Entity cameraEntity, CallbackInfoReturnable<HitResult> cir) {
         var player = (LocalPlayer) (Object) this;
-        if (cameraEntity == player && ArcadeCamera.isOrbiting()) {
+        if (cameraEntity == player && !ArcadeCamera.coupled()) {
             cir.setReturnValue(ArcadeCamera.pick(player, partialTicks));
         }
     }
