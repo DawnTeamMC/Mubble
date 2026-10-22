@@ -94,6 +94,18 @@ public class ArcadeFramingTest {
     }
 
     @Test
+    @DisplayName("the camera trails a run rather than sticking to the player")
+    void theCameraTrailsARun() {
+        var framing = settledAt(Vec3.ZERO);
+        var target = Vec3.ZERO;
+        for (int i = 0; i < 20; i++) {
+            target = target.add(RUN, 0.0D, 0.0D);
+            framing.tick(target, true, 1.0D, 0.0D);
+        }
+        assertTrue(side(target, framing.focus()) > 0.5D, "a second into a run, the player should still be off the middle, only " + side(target, framing.focus()) + " away");
+    }
+
+    @Test
     @DisplayName("however fast the player goes, they stay within the hard limit")
     void theHardLimitHolds() {
         for (double speed : new double[]{0.5D, 1.2D, 3.0D}) {

@@ -54,13 +54,14 @@ public final class ArcadeTranslations {
         settings(t, "camera_distance", "Camera Distance", "Distance de la caméra",
                 "How far behind the player the orbit camera stays.", "À quelle distance derrière le joueur se tient la caméra orbitale.");
         settings(t, "auto_camera_keyboard", "Camera Follows (Keyboard)", "Suivi de la caméra (clavier)",
-                "Playing on the keyboard and mouse, the orbit camera swings round behind the player as they move, never while they stand still.",
-                "Au clavier et à la souris, la caméra orbitale revient derrière le joueur à mesure qu'il se déplace, jamais quand il est immobile.");
+                "Playing on the keyboard and mouse, the orbit camera slowly swings round behind the player as they move on, never while they stand still or just after the camera was turned.",
+                "Au clavier et à la souris, la caméra orbitale revient doucement derrière le joueur à mesure qu'il avance, jamais quand il est immobile ou juste après qu'il a tourné la caméra.");
         settings(t, "auto_camera_controller", "Camera Follows (Controller)", "Suivi de la caméra (manette)",
-                "Playing on a controller, the orbit camera swings round behind the player as they move, never while they stand still.",
-                "À la manette, la caméra orbitale revient derrière le joueur à mesure qu'il se déplace, jamais quand il est immobile.");
+                "Playing on a controller, the orbit camera slowly swings round behind the player as they move on, never while they stand still or just after the camera was turned.",
+                "À la manette, la caméra orbitale revient doucement derrière le joueur à mesure qu'il avance, jamais quand il est immobile ou juste après qu'il a tourné la caméra.");
         settings(t, "auto_camera_speed", "Camera Follow Speed", "Vitesse de suivi de la caméra",
-                "How fast the camera swings round when following the player at full speed.", "La vitesse à laquelle la caméra revient derrière le joueur lancé à pleine vitesse.");
+                "How fast the camera swings round at its quickest, when the player rolls or dives sideways. Walking, it hardly moves, unless the player goes a long way.",
+                "La vitesse à laquelle la caméra revient derrière le joueur au plus vite, quand il roule ou plonge de côté. En marchant, elle bouge à peine, sauf si le joueur va loin.");
         settings(t, "camera_margin", "Camera Margin", "Marge de la caméra",
                 "How much room the camera leaves around the player before following them: a step aside or a jump leaves it still, moving on brings the player back to the middle. 0% keeps the player in the middle.",
                 "La marge que laisse la caméra autour du joueur avant de le suivre : un pas de côté ou un saut la laissent immobile, et c'est en avançant que le joueur revient au centre. 0 % garde le joueur au centre.");
