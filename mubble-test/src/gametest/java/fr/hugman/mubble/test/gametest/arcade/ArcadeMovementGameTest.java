@@ -846,6 +846,100 @@ public class ArcadeMovementGameTest {
         helper.succeed();
     }
 
+    /** A step a block high along the whole lane, its face at z = 6, right in front of a player standing at z = 5. */
+    private static void stepAhead(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        ArcadeTestKit.fill(helper, new BlockPos(0, 1, 6), new BlockPos(9, 1, 8), Blocks.STONE.defaultBlockState());
+    }
+
+    /** Steps with {@code frames} until the feet reach {@code top}, and returns the moves gone through. */
+    private static String climb(GameTestHelper helper, Player player, ArcadeTestKit.Frames frames, int jumpAt, double top, int maxTicks) {
+        var trace = new StringBuilder();
+        for (int i = 0; i < maxTicks && !(player.onGround() && player.getY() > top - 1.0E-3D); i++) {
+            ArcadeTestKit.step(player, i == jumpAt ? frames.press(JUMP) : frames.next());
+            trace.append(' ').append(move(player).id().getPath());
+        }
+        return trace.toString();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void pressedAgainstAOneBlockStepVaultsOverIt(GameTestHelper helper) {
+        stepAhead(helper);
+        var player = standing(helper, new BlockPos(5, 1, 5));
+        // right against the face of the step, where any push is stopped dead
+        player.setPos(player.getX(), player.getY(), helper.absolutePos(BlockPos.ZERO).getZ() + 6.0D - player.getBbWidth() * 0.5D);
+        var frames = new ArcadeTestKit.Frames().forward();
+        double top = helper.absolutePos(BlockPos.ZERO).getY() + 2.0D;
+        var trace = climb(helper, player, frames, -1, top, 15);
+        helper.assertTrue(trace.contains("vault"), "pushing into a block high step from right against it should vault it:" + trace);
+        helper.assertTrue(player.onGround() && Math.abs(player.getY() - top) < 1.0E-2D, "the vault should end standing on the step, at " + player.getY() + ":" + trace);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void walkingIntoAOneBlockStepDoesNotClimbIt(GameTestHelper helper) {
+        stepAhead(helper);
+        var player = standing(helper, new BlockPos(5, 1, 5));
+        // a light push of the stick is a walk, and Mario does not walk up a whole block
+        var frames = new ArcadeTestKit.Frames().stick(0.0F, 0.3F);
+        double floor = player.getY();
+        for (int i = 0; i < 20; i++) {
+            ArcadeTestKit.step(player, frames.next());
+            helper.assertFalse(move(player) == ArcadeMoves.VAULT, "a walk should not vault a block high step");
+        }
+        helper.assertTrue(Math.abs(player.getY() - floor) < 1.0E-3D, "a walk should stay below the step");
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void runningAlongAOneBlockStepDoesNotClimbIt(GameTestHelper helper) {
+        stepAhead(helper);
+        var player = standing(helper, new BlockPos(1, 1, 5));
+        // along the step, leaning into it a little
+        var frames = new ArcadeTestKit.Frames().stick(0.95F, 0.3F).hold(SPRINT);
+        double floor = player.getY();
+        for (int i = 0; i < 20; i++) {
+            ArcadeTestKit.step(player, frames.next());
+            helper.assertFalse(move(player) == ArcadeMoves.VAULT, "a run along a step should not vault it");
+        }
+        helper.assertTrue(Math.abs(player.getY() - floor) < 1.0E-3D, "a run along a step should stay below it");
+        helper.succeed();
+    }
+
+    /**
+     * An inside corner of steps for a player standing at (5, 1, 5): a step a block high to the east and
+     * to the south, and two blocks high diagonally between them, as far as the lane goes.
+     */
+    static void corner(GameTestHelper helper) {
+        ArcadeTestKit.floor(helper);
+        var stone = Blocks.STONE.defaultBlockState();
+        ArcadeTestKit.fill(helper, new BlockPos(6, 1, 5), new BlockPos(9, 1, 5), stone);
+        ArcadeTestKit.fill(helper, new BlockPos(5, 1, 6), new BlockPos(5, 1, 15), stone);
+        ArcadeTestKit.fill(helper, new BlockPos(6, 1, 6), new BlockPos(9, 2, 15), stone);
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void runningIntoACornerOfStepsClimbsBoth(GameTestHelper helper) {
+        corner(helper);
+        var player = standing(helper, new BlockPos(5, 1, 5));
+        var frames = new ArcadeTestKit.Frames().stick(0.7071F, 0.7071F).hold(SPRINT);
+        double top = helper.absolutePos(BlockPos.ZERO).getY() + 3.0D;
+        var trace = climb(helper, player, frames, -1, top, 40);
+        helper.assertTrue(Math.abs(player.getY() - top) < 1.0E-2D, "pushing into a corner of steps should climb both, ended at " + player.getY() + ":" + trace);
+        helper.succeed();
+    }
+
+    @GameTest(structure = ArcadeTestKit.LANE)
+    public void jumpingIntoACornerOfStepsEndsOnTop(GameTestHelper helper) {
+        corner(helper);
+        var player = standing(helper, new BlockPos(5, 1, 5));
+        var frames = new ArcadeTestKit.Frames().stick(0.7071F, 0.7071F);
+        double top = helper.absolutePos(BlockPos.ZERO).getY() + 3.0D;
+        var trace = climb(helper, player, frames, 3, top, 40);
+        helper.assertTrue(Math.abs(player.getY() - top) < 1.0E-2D, "jumping into a corner of steps should end on top of it, ended at " + player.getY() + ":" + trace);
+        helper.succeed();
+    }
+
     @GameTest(structure = ArcadeTestKit.LANE)
     public void iceKeepsMomentum(GameTestHelper helper) {
         ArcadeTestKit.floor(helper, Blocks.ICE.defaultBlockState());

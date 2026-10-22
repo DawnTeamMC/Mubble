@@ -160,7 +160,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `mubble:swim` | — | `accel` 0.02, `drag` 0.8, `rise` 0.04, `sink` 0.04, `sprint_drag` 0.9, `stroke` 0.2, `surface_depth` 1.4, `turn_speed` 15 |
 | `mubble:swim_dash` | — | `drag` 0.92, `speed` 0.45, `ticks` 12, `turn_speed` 4 |
 | `mubble:triple_jump` | `#mubble:all` `#mubble:aerial` | `air_control` 1, `cancel_window_ticks` 3, `height` 4.6, `min_speed` 0.7, `ticks_to_apex` 10, `variable` 0 |
-| `mubble:vault` | `#mubble:all` `#mubble:ledge` `#mubble:ground` | `max_height` 1, `min_speed` 0.5, `ticks` 4 |
+| `mubble:vault` | `#mubble:all` `#mubble:ledge` `#mubble:ground` | `max_height` 1, `min_speed` 0.5, `reach` 0.1, `stick_dot` 0.5, `ticks` 4 |
 | `mubble:walk` | — | — |
 | `mubble:wall_jump` | `#mubble:all` `#mubble:aerial` `#mubble:wall` | `air_control` 1, `cancel_window_ticks` 3, `height` 2.2, `lock_ticks` 6, `push` 0.35, `ticks_to_apex` 7, `variable` 1 |
 | `mubble:wall_slide` | `#mubble:all` `#mubble:wall` | `max_fall_speed` 0.15, `min_height` 1, `reach` 0.1, `stick_dot` 0.4 |
@@ -201,9 +201,9 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `max_speed` | Share of the run speed above which crouching and jumping is a long jump rather than a backflip. |
 | `min_height` | How high above the ground the player has to be. |
 | `min_slope` | The gentlest descent a slide starts on, as height lost per block travelled. |
-| `min_speed` | Share of the run speed the player needs to move at. |
+| `min_speed` | Share of the run speed the player needs to move at. A vault also takes a stick pushed for that speed, from a player the obstacle has stopped. |
 | `push` | Speed the kick pushes the player away from the wall at. |
-| `reach` | How far the wall may be from the player. |
+| `reach` | How far the wall may be from the player. For a vault, how far the obstacle may be from a player pushing towards it without the speed to reach it this tick. |
 | `reverse_dot` | How opposed the stick has to be to the velocity, as the cosine of the angle between them. |
 | `rise` | Upward speed added every tick jump is held, as vanilla's. |
 | `roll_speed` | Speed a roll out of the impact starts at. |
@@ -217,7 +217,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `speed` | Speed the long jump launches at, unless the player already goes faster. |
 | `speed_cap` | The fastest the player goes sideways and slides down, on each axis, as vanilla's. |
 | `sprint_drag` | The same with sprint held, as vanilla's sprint swimming. |
-| `stick_dot` | How squarely the stick has to point at the wall, as the cosine of the largest angle allowed. |
+| `stick_dot` | How squarely the stick has to point at the wall, or at the obstacle of a vault, as the cosine of the largest angle allowed. A vault checks each axis on its own, so that a stick pointed into a corner of steps climbs the lower one. |
 | `stroke` | Upward speed a press of jump strokes up to, under the surface. |
 | `surface_depth` | The deepest the feet may be for jump to jump out of the water rather than stroke: the head is out of it. |
 | `ticks` | How long the pull-up lasts. |

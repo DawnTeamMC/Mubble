@@ -77,7 +77,7 @@ public final class ArcadeMoves {
     public static final ArcadeMove SPIN = register(ArcadeMoveIds.SPIN, new SpinMove(Properties.of(Kind.AIR).entryPriority(60)
             .params(SpinMove.FALL_SPEED, SpinMove.TICKS, SpinMove.LIFT_HEIGHT, SpinMove.LIFT_TICKS, SpinMove.JUMP_HEIGHT, SpinMove.JUMP_TICKS, SpinMove.AIR_CONTROL, CANCEL_WINDOW)));
     public static final ArcadeMove VAULT = register(ArcadeMoveIds.VAULT, new VaultMove(Properties.of(Kind.GROUND).entryPriority(20)
-            .params(VaultMove.MAX_HEIGHT, VaultMove.MIN_SPEED, VaultMove.TICKS)));
+            .params(VaultMove.MAX_HEIGHT, VaultMove.MIN_SPEED, VaultMove.STICK_DOT, VaultMove.REACH, VaultMove.TICKS)));
     public static final ArcadeMove SLIDE = register(ArcadeMoveIds.SLIDE, new SlideMove(Properties.of(Kind.GROUND).entryPriority(25)
             .params(SlideMove.MIN_SPEED, SlideMove.MIN_SLOPE, SlideMove.GAIN, SlideMove.FLAT_DECEL, SlideMove.EXIT_SPEED, SlideMove.TURN_SPEED, SlideMove.SLOPE_GAIN)));
 

@@ -326,6 +326,24 @@ public class ArcadeLockstepGameTest {
         });
     }
 
+    /** Up an inside corner of steps from right against it, one vault after the other, with nothing sent back. */
+    @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 200)
+    public void climbingACornerOfStepsIsNotPulledBack(GameTestHelper helper) {
+        ArcadeMovementGameTest.corner(helper);
+        var client = ArcadeTestClient.join(helper, new BlockPos(5, 1, 5), ArcadeProfileIds.TRIAL);
+        var frames = new ArcadeTestKit.Frames();
+        double top = helper.absoluteVec(Vec3.atLowerCornerOf(new BlockPos(6, 3, 6))).y;
+        Set<ArcadeMove> played = new HashSet<>();
+        drive(helper, client, 40, t -> {
+            client.tick(t < 4 ? frames.next() : frames.stick(0.7071F, 0.7071F).next());
+            played.add(move(client.controller()));
+        }, () -> {
+            client.assertUndisturbed("climbing a corner of steps");
+            helper.assertTrue(played.contains(ArcadeMoves.VAULT), "the corner was never vaulted, went through " + played);
+            helper.assertTrue(Math.abs(client.server().getY() - top) < 1.0E-2D, "the climb should end on top of the corner, the server has the player at " + client.server().getY());
+        });
+    }
+
     @GameTest(structure = ArcadeTestKit.LANE, maxTicks = 300)
     public void aFiveSecondLedgeHangIsNeitherPulledBackNorKicked(GameTestHelper helper) {
         ArcadeTestKit.floor(helper);

@@ -996,9 +996,49 @@ public final class MoveContext {
      * @return the lift, or 0 when there is nothing to get onto that way
      */
     public double liftOver(double maxHeight) {
-        var s = this.state;
+        return this.liftOver(maxHeight, this.state.vx, this.state.vz);
+    }
+
+    /**
+     * The same as {@link #liftOver(double)}, for what the stick pushes the player into rather than what
+     * the velocity carries them into: pressed against a step, the collisions took the speed away, not the
+     * will to go on.
+     * <p>
+     * Each axis is probed on its own, the one the stick leans on most first, and only if the stick
+     * points at it squarely enough: a stick pointed into a corner gets onto the lower step of the two
+     * even when the higher one stands in the way diagonally, and a stick pointed along a step does not
+     * get onto it.
+     *
+     * @param reach     how far ahead of the player the step may be, in blocks
+     * @param facingDot how squarely the stick has to point at the step, as the cosine of the largest
+     *                  angle allowed
+     * @return the lift, or 0 when there is nothing to get onto that way
+     */
+    public double liftOverStick(double maxHeight, double reach, double facingDot) {
+        if (!this.hasStick()) {
+            return 0.0D;
+        }
+        double alongX = this.stickX / this.stickMagnitude;
+        double alongZ = this.stickZ / this.stickMagnitude;
+        boolean xFirst = Math.abs(alongX) >= Math.abs(alongZ);
+        for (int i = 0; i < 2; i++) {
+            boolean onX = xFirst == (i == 0);
+            double along = onX ? alongX : alongZ;
+            if (Math.abs(along) < facingDot || Math.abs(along) < EPSILON) {
+                continue;
+            }
+            double step = Math.signum(along) * reach;
+            double lift = this.liftOver(maxHeight, onX ? step : 0.0D, onX ? 0.0D : step);
+            if (lift > 0.0D) {
+                return lift;
+            }
+        }
+        return 0.0D;
+    }
+
+    private double liftOver(double maxHeight, double x, double z) {
         var box = this.box();
-        var ahead = box.move(s.vx, 0.0D, s.vz);
+        var ahead = box.move(x, 0.0D, z);
         if (!this.world.collides(ahead)) {
             return 0.0D;
         }
