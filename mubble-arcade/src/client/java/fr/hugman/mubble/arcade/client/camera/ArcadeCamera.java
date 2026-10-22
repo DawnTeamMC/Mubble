@@ -314,6 +314,10 @@ public final class ArcadeCamera {
      * crosshair shows, wherever the camera sits beside them. Too close to tell, they look along the view.
      */
     private static void aimBody(LocalPlayer player, Vec3 eye, Vec3 camera, Vec3 forward) {
+        if (ArcadeController.of(player).state().move.facesItsOwnWay()) {
+            // a roll or a dive turns the body its own way, see ArcadeInputFrame.AIMING
+            return;
+        }
         var target = ArcadeAim.shoulderTarget(player.level(), player, camera, forward, eye, AIM_RANGE);
         var look = target.subtract(eye);
         var rotation = look.lengthSqr() > 1.0D && look.dot(forward) > 0.0D

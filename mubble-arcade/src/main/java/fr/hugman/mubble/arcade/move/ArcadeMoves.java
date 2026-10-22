@@ -29,7 +29,7 @@ public final class ArcadeMoves {
     // tier 1
     public static final ArcadeMove RUN = register(ArcadeMoveIds.RUN, new GroundMove(Properties.of(Kind.GROUND)
             .params(GroundMove.EXHAUSTION_PER_BLOCK, GroundMove.SLOPE_GAIN), GroundMove.Variant.RUN));
-    public static final ArcadeMove SKID = register(ArcadeMoveIds.SKID, new SkidMove(Properties.of(Kind.GROUND).entryPriority(15)
+    public static final ArcadeMove SKID = register(ArcadeMoveIds.SKID, new SkidMove(Properties.of(Kind.GROUND).facesItsOwnWay().entryPriority(15)
             .params(SkidMove.MIN_SPEED, SkidMove.REVERSE_DOT, SkidMove.TICKS, SkidMove.BRAKE, SkidMove.EXIT_SPEED)));
     public static final ArcadeMove JUMP = register(ArcadeMoveIds.JUMP, new JumpMove(Properties.of(Kind.AIR).entryPriority(55)
             .params(ArcMove.arcParams()), 0));
@@ -46,30 +46,30 @@ public final class ArcadeMoves {
             .params(GroundPoundLandMove.TICKS, GroundPoundLandMove.JUMP_WINDOW, GroundPoundLandMove.ROLL_WINDOW, GroundPoundLandMove.ROLL_SPEED)));
     public static final ArcadeMove GROUND_POUND_JUMP = register(ArcadeMoveIds.GROUND_POUND_JUMP, new GroundPoundJumpMove(Properties.of(Kind.AIR).entryPriority(100)
             .params(ArcMove.arcParams())));
-    public static final ArcadeMove LEDGE_GRAB = register(ArcadeMoveIds.LEDGE_GRAB, new LedgeGrabMove(Properties.of(Kind.ATTACHED).entryPriority(50).handsBusy()
+    public static final ArcadeMove LEDGE_GRAB = register(ArcadeMoveIds.LEDGE_GRAB, new LedgeGrabMove(Properties.of(Kind.ATTACHED).facesItsOwnWay().entryPriority(50).handsBusy()
             .params(LedgeGrabMove.HANG_DEPTH, LedgeGrabMove.GRAB_BAND, LedgeGrabMove.MIN_HEIGHT, LedgeGrabMove.SHIMMY_SPEED)));
-    public static final ArcadeMove LEDGE_CLIMB = register(ArcadeMoveIds.LEDGE_CLIMB, new LedgeClimbMove(Properties.of(Kind.ATTACHED).handsBusy()
+    public static final ArcadeMove LEDGE_CLIMB = register(ArcadeMoveIds.LEDGE_CLIMB, new LedgeClimbMove(Properties.of(Kind.ATTACHED).facesItsOwnWay().handsBusy()
             .accessParent(() -> ArcadeMoves.LEDGE_GRAB)
             .params(LedgeClimbMove.TICKS, LedgeClimbMove.FORWARD)));
-    public static final ArcadeMove WALL_SLIDE = register(ArcadeMoveIds.WALL_SLIDE, new WallSlideMove(Properties.of(Kind.ATTACHED).entryPriority(35).handsBusy()
+    public static final ArcadeMove WALL_SLIDE = register(ArcadeMoveIds.WALL_SLIDE, new WallSlideMove(Properties.of(Kind.ATTACHED).facesItsOwnWay().entryPriority(35).handsBusy()
             .params(WallSlideMove.MAX_FALL_SPEED, WallSlideMove.MIN_HEIGHT, WallSlideMove.STICK_DOT, WallSlideMove.REACH)));
-    public static final ArcadeMove WALL_JUMP = register(ArcadeMoveIds.WALL_JUMP, new WallJumpMove(Properties.of(Kind.AIR).entryPriority(95)
+    public static final ArcadeMove WALL_JUMP = register(ArcadeMoveIds.WALL_JUMP, new WallJumpMove(Properties.of(Kind.AIR).facesItsOwnWay().entryPriority(95)
             .params(ArcMove.arcParams(WallJumpMove.PUSH, WallJumpMove.LOCK_TICKS))));
 
     // tier 2
-    public static final ArcadeMove ROLL = register(ArcadeMoveIds.ROLL, new RollMove(Properties.of(Kind.GROUND).entryPriority(30).handsBusy()
+    public static final ArcadeMove ROLL = register(ArcadeMoveIds.ROLL, new RollMove(Properties.of(Kind.GROUND).facesItsOwnWay().entryPriority(30).handsBusy()
             .params(RollMove.SPEED, RollMove.BOOST, RollMove.MAX_BOOSTS, RollMove.BOOST_COOLDOWN, RollMove.DECEL, RollMove.MIN_SPEED, RollMove.TURN_SPEED, RollMove.SLOPE_GAIN, RollMove.CLIMB_HEIGHT)));
-    public static final ArcadeMove ROLL_JUMP = register(ArcadeMoveIds.ROLL_JUMP, new RollJumpMove(Properties.of(Kind.AIR).entryPriority(85)
+    public static final ArcadeMove ROLL_JUMP = register(ArcadeMoveIds.ROLL_JUMP, new RollJumpMove(Properties.of(Kind.AIR).facesItsOwnWay().entryPriority(85)
             .params(ArcMove.arcParams())));
-    public static final ArcadeMove LONG_JUMP = register(ArcadeMoveIds.LONG_JUMP, new LongJumpMove(Properties.of(Kind.AIR).entryPriority(80)
+    public static final ArcadeMove LONG_JUMP = register(ArcadeMoveIds.LONG_JUMP, new LongJumpMove(Properties.of(Kind.AIR).facesItsOwnWay().entryPriority(80)
             .params(ArcMove.arcParams(LongJumpMove.SPEED, LongJumpMove.MIN_SPEED))));
     public static final ArcadeMove BACKFLIP = register(ArcadeMoveIds.BACKFLIP, new BackflipMove(Properties.of(Kind.AIR).entryPriority(75).handsBusy()
             .params(ArcMove.arcParams(BackflipMove.BACK_SPEED, BackflipMove.MAX_SPEED))));
-    public static final ArcadeMove SIDE_SOMERSAULT = register(ArcadeMoveIds.SIDE_SOMERSAULT, new SideSomersaultMove(Properties.of(Kind.AIR).entryPriority(90).handsBusy()
+    public static final ArcadeMove SIDE_SOMERSAULT = register(ArcadeMoveIds.SIDE_SOMERSAULT, new SideSomersaultMove(Properties.of(Kind.AIR).facesItsOwnWay().entryPriority(90).handsBusy()
             .params(ArcMove.arcParams(SideSomersaultMove.SIDE_SPEED))));
-    public static final ArcadeMove DIVE = register(ArcadeMoveIds.DIVE, new DiveMove(Properties.of(Kind.AIR).entryPriority(40).handsBusy()
+    public static final ArcadeMove DIVE = register(ArcadeMoveIds.DIVE, new DiveMove(Properties.of(Kind.AIR).facesItsOwnWay().entryPriority(40).handsBusy()
             .params(DiveMove.SPEED, DiveMove.LIFT, DiveMove.AIR_CONTROL)));
-    public static final ArcadeMove ROLLOUT = register(ArcadeMoveIds.ROLLOUT, new RolloutMove(Properties.of(Kind.GROUND).handsBusy()
+    public static final ArcadeMove ROLLOUT = register(ArcadeMoveIds.ROLLOUT, new RolloutMove(Properties.of(Kind.GROUND).facesItsOwnWay().handsBusy()
             .accessParent(() -> ArcadeMoves.DIVE)
             .params(RolloutMove.TICKS, RolloutMove.DECEL)));
 
@@ -78,13 +78,13 @@ public final class ArcadeMoves {
             .params(SpinMove.FALL_SPEED, SpinMove.TICKS, SpinMove.LIFT_HEIGHT, SpinMove.LIFT_TICKS, SpinMove.JUMP_HEIGHT, SpinMove.JUMP_TICKS, SpinMove.AIR_CONTROL, CANCEL_WINDOW)));
     public static final ArcadeMove VAULT = register(ArcadeMoveIds.VAULT, new VaultMove(Properties.of(Kind.GROUND).entryPriority(20)
             .params(VaultMove.MAX_HEIGHT, VaultMove.MIN_SPEED, VaultMove.TICKS)));
-    public static final ArcadeMove SLIDE = register(ArcadeMoveIds.SLIDE, new SlideMove(Properties.of(Kind.GROUND).entryPriority(25)
+    public static final ArcadeMove SLIDE = register(ArcadeMoveIds.SLIDE, new SlideMove(Properties.of(Kind.GROUND).facesItsOwnWay().entryPriority(25)
             .params(SlideMove.MIN_SPEED, SlideMove.MIN_SLOPE, SlideMove.GAIN, SlideMove.FLAT_DECEL, SlideMove.EXIT_SPEED, SlideMove.TURN_SPEED, SlideMove.SLOPE_GAIN)));
 
     // water
     public static final ArcadeMove SWIM = register(ArcadeMoveIds.SWIM, new SwimMove(Properties.of(Kind.WATER).base()
             .params(SwimMove.ACCEL, SwimMove.DRAG, SwimMove.SPRINT_DRAG, SwimMove.RISE, SwimMove.SINK, SwimMove.STROKE, SwimMove.SURFACE_DEPTH, SwimMove.TURN_SPEED)));
-    public static final ArcadeMove SWIM_DASH = register(ArcadeMoveIds.SWIM_DASH, new SwimDashMove(Properties.of(Kind.WATER).entryPriority(42).handsBusy()
+    public static final ArcadeMove SWIM_DASH = register(ArcadeMoveIds.SWIM_DASH, new SwimDashMove(Properties.of(Kind.WATER).facesItsOwnWay().entryPriority(42).handsBusy()
             .accessParent(() -> ArcadeMoves.DIVE)
             .params(SwimDashMove.SPEED, SwimDashMove.TICKS, SwimDashMove.DRAG, SwimDashMove.TURN_SPEED)));
 
