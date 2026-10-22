@@ -24,6 +24,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.joml.Vector3f;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Loads the arcade animations from {@code assets/<namespace>/animations/arcade/<path>.json}, the id
@@ -37,6 +38,7 @@ import org.joml.Vector3f;
  *   "linger": false,                     // keep playing to the end when the next move has no animation
  *   "blend_in": 0.12,                    // seconds to ease from the pose before into this animation
  *   "axes": "java",                      // "bedrock" for values written the way Bedrock files are
+ *   "face": "forward",                   // "side_to_camera": side on to the path, looking at the camera
  *   "bones": {
  *     "right_arm": {
  *       "rotation": { "0.0": [0, 0, 0], "0.3": { "post": [-160, 0, 20], "lerp_mode": "catmullrom", "easing": "out_back" } },
@@ -82,6 +84,14 @@ public final class ArcadeAnimationLoader extends SimplePreparableReloadListener<
 
     public static ArcadeAnimation parse(Identifier id, JsonObject json) {
         var data = ArcadeAnimationData.parse(json);
+        // an animation played side on goes either way, and so comes with its mirror image
+        var mirror = data.face() == ArcadeAnimationData.Facing.SIDE_TO_CAMERA
+                ? build(id.withPath(path -> path + "/mirrored"), data.mirrored(), null)
+                : null;
+        return build(id, data, mirror);
+    }
+
+    private static ArcadeAnimation build(Identifier id, ArcadeAnimationData data, @Nullable ArcadeAnimation mirror) {
         var limbs = AnimationDefinition.Builder.withLength(data.length());
         if (data.loop()) {
             limbs.looping();
@@ -96,7 +106,7 @@ public final class ArcadeAnimationLoader extends SimplePreparableReloadListener<
             addChannels(builder, ArcadeAnimation.BODY_BONE, channels, data.bedrock());
             return builder.build();
         });
-        return new ArcadeAnimation(id, limbs.build(), body, new Vector3f(data.pivot()), data.linger(), data.blendIn());
+        return new ArcadeAnimation(id, limbs.build(), body, new Vector3f(data.pivot()), data.linger(), data.blendIn(), data.face(), mirror);
     }
 
     private static void addChannels(AnimationDefinition.Builder builder, String bone, Map<ArcadeAnimationData.Target, List<ArcadeAnimationData.Frame>> channels, boolean bedrock) {

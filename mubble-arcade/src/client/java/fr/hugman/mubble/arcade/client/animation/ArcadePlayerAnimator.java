@@ -1,9 +1,11 @@
 package fr.hugman.mubble.arcade.client.animation;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import fr.hugman.mubble.arcade.client.cue.ArcadeCuePlayer;
 import fr.hugman.mubble.arcade.ArcadeController;
 import fr.hugman.mubble.arcade.ArcadePlayer;
+import fr.hugman.mubble.arcade.animation.ArcadeAnimationData;
 import fr.hugman.mubble.arcade.cue.CueEvent;
 import fr.hugman.mubble.arcade.move.ArcadeMove;
 import fr.hugman.mubble.arcade.sim.ArcadeState;
@@ -67,6 +69,14 @@ public final class ArcadePlayerAnimator {
         @Nullable
         ArcadeAnimation previous;
         final AnimationState previousState = new AnimationState();
+        /**
+         * The quarter turn the body takes for an animation played side on, from the way the move faces
+         * it, in degrees; {@link Float#NaN} until the first frame decides it, from the camera of that
+         * frame, after which it holds for the whole animation. Then the same for the animation the
+         * model eases out of.
+         */
+        float turn;
+        float previousTurn;
         long blendStart;
         float blendSeconds;
 
@@ -82,18 +92,24 @@ public final class ArcadePlayerAnimator {
         /** Plays {@code next} from now on, easing into it from the pose the model has. */
         void play(@Nullable ArcadeAnimation next, int tickCount) {
             if (this.animation != null || next != null) {
-                this.previous = this.animation;
+                this.previous = this.animation == null ? null : this.animation.turned(this.decidedTurn());
+                this.previousTurn = this.decidedTurn();
                 this.previousState.copyFrom(this.state);
                 this.blendStart = Util.getMillis();
                 this.blendSeconds = next != null ? next.blendIn() : BLEND_OUT_SECONDS;
             }
             this.animation = next;
+            this.turn = next != null && next.face() == ArcadeAnimationData.Facing.SIDE_TO_CAMERA ? Float.NaN : 0.0F;
             this.lingering = false;
             if (next != null) {
                 this.state.start(tickCount);
             } else {
                 this.state.stop();
             }
+        }
+
+        float decidedTurn() {
+            return Float.isNaN(this.turn) ? 0.0F : this.turn;
         }
 
         /** How far the model is into the animation it plays, eased in and out, from 0 to 1. */
@@ -193,7 +209,8 @@ public final class ArcadePlayerAnimator {
         if (track.animation == null || !track.state.isStarted()) {
             return "vanilla" + blend;
         }
-        return track.animation.id() + (track.lingering ? " (lingering)" : "") + String.format(java.util.Locale.ROOT, " %.2fs", track.state.getTimeInMillis(player.tickCount) / 1000.0F) + blend;
+        var turn = track.decidedTurn() == 0.0F ? "" : String.format(java.util.Locale.ROOT, " turned %+.0f°", track.decidedTurn());
+        return track.animation.turned(track.decidedTurn()).id() + turn + (track.lingering ? " (lingering)" : "") + String.format(java.util.Locale.ROOT, " %.2fs", track.state.getTimeInMillis(player.tickCount) / 1000.0F) + blend;
     }
 
     /** What the render state of {@code player} carries this frame. */
@@ -217,11 +234,32 @@ public final class ArcadePlayerAnimator {
         if (animation == null && previous == null) {
             return ArcadeRenderData.NONE;
         }
+        if (animation != null && Float.isNaN(track.turn)) {
+            // whoever watches decides, once: the side turned to their camera stays so for the whole jump
+            track.turn = ArcadeAnimationData.sideTurnToCamera(player.getYRot(), viewYaw(player));
+        }
+        if (animation != null) {
+            animation = animation.turned(track.turn);
+        }
+        float turn = Mth.lerp(weight, track.previousTurn, track.decidedTurn());
         var state = new AnimationState();
         state.copyFrom(track.state);
         var previousState = new AnimationState();
         previousState.copyFrom(track.previousState);
-        return new ArcadeRenderData(animation, state, previous, previousState, weight);
+        return new ArcadeRenderData(animation, state, previous, previousState, weight, turn);
+    }
+
+    /** The yaw from the camera of this client to {@code player}, the way the camera sees it. */
+    private static float viewYaw(Player player) {
+        var camera = Minecraft.getInstance().gameRenderer.getMainCamera();
+        var position = camera.position();
+        double dx = player.getX() - position.x;
+        double dz = player.getZ() - position.z;
+        if (dx * dx + dz * dz < 1.0E-4D) {
+            // a camera standing on the player, looking from its eyes
+            return camera.yRot();
+        }
+        return (float) (Mth.atan2(-dx, dz) * Mth.RAD_TO_DEG);
     }
 
     /**
@@ -279,9 +317,10 @@ public final class ArcadePlayerAnimator {
     }
 
     /**
-     * Moves the whole body for the frame: squashed or stretched from the feet, turned around the pivot
-     * of the animation. Between two animations, the body eases from the one into the other, a body the
-     * animation leaves alone standing as vanilla has it.
+     * Moves the whole body for the frame: turned side on for the animations played so, squashed or
+     * stretched from the feet, turned around the pivot of the animation. Between two animations, the
+     * body eases from the one into the other, a body the animation leaves alone standing as vanilla has
+     * it.
      *
      * @return whether the animation drives the whole body, in which case vanilla's own body rotations stay out of it
      */
@@ -293,6 +332,8 @@ public final class ArcadePlayerAnimator {
         var transform = data.blending()
                 ? BodyTransform.lerp(bodyTransform(data.previous(), data.previousState(), ageInTicks), to, data.weight())
                 : to;
+        // a turn towards the left of the way the body faces, the pose stack turning the other way round
+        poseStack.mulPose(Axis.YP.rotationDegrees(-data.turn()));
         transform.apply(poseStack);
         return true;
     }

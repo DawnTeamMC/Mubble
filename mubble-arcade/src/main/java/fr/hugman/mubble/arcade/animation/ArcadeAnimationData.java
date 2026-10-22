@@ -15,6 +15,7 @@ import java.util.Set;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.util.EasingType;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.Mth;
 import org.joml.Vector3f;
 
 /**
@@ -30,6 +31,7 @@ import org.joml.Vector3f;
  *   "linger": false,          // keeps playing after the move ends, until its length is reached
  *   "blend_in": 0.12,         // seconds the model takes to ease from the pose before into this one
  *   "axes": "java",           // or "bedrock", for numbers exported from Blockbench
+ *   "face": "forward",        // or "side_to_camera": side on to the jump, the side looking at the camera
  *   "bones": {                // the parts of the player model: head, hat, body, arms and legs
  *     "right_arm": {
  *       "rotation": { "0.0": [0, 0, 0], "0.3": { "post": [-160, 0, 20], "easing": "out_back" } }
@@ -49,7 +51,7 @@ import org.joml.Vector3f;
  * keyframe: any of vanilla's easing types ({@code in_sine}, {@code out_back}, {@code in_out_cubic},
  * {@code out_bounce}, {@code out_elastic}...), or {@code {"cubic_bezier": [x1, y1, x2, y2]}}.
  */
-public record ArcadeAnimationData(float length, boolean loop, boolean linger, float blendIn, boolean bedrock,
+public record ArcadeAnimationData(float length, boolean loop, boolean linger, float blendIn, boolean bedrock, Facing face,
                                   Map<String, Map<Target, List<Frame>>> bones, Optional<Map<Target, List<Frame>>> body, Vector3f pivot) {
     /** The bones a player model has, and so the only ones an animation may name. */
     public static final Set<String> PLAYER_BONES = Set.of("head", "hat", "body", "right_arm", "left_arm", "right_leg", "left_leg");
@@ -67,6 +69,90 @@ public record ArcadeAnimationData(float length, boolean loop, boolean linger, fl
         Target(String key) {
             this.key = key;
         }
+    }
+
+    /** Which way the body faces while the animation plays, next to the way the move faces it. */
+    public enum Facing {
+        /** The way the move faces it. */
+        FORWARD("forward"),
+        /**
+         * A quarter turn either way, side on to where the player goes, so that a cartwheel turns in the
+         * plane of its own path; of the two sides, the one that looks at the camera of whoever watches.
+         * The animation is authored for a player going towards its left, and plays mirrored when the
+         * player turns the other way, to go towards its right.
+         */
+        SIDE_TO_CAMERA("side_to_camera");
+
+        private final String key;
+
+        Facing(String key) {
+            this.key = key;
+        }
+
+        static Facing byKey(String key) {
+            for (var facing : values()) {
+                if (facing.key.equals(key)) {
+                    return facing;
+                }
+            }
+            throw new JsonParseException("Unknown face '" + key + "', expected 'forward' or 'side_to_camera'");
+        }
+    }
+
+    /**
+     * The quarter turn that puts a player going towards {@code travelYaw} side on to its path, looking
+     * at a camera that sees it towards {@code viewYaw}, the yaw from the camera to the player: a player
+     * crossing the screen faces the camera, one going straight towards it or away from it, which can
+     * only show it a side, always turns the same way.
+     *
+     * @return {@code 90} to turn towards the left of the path, which leaves the path to the left of the
+     * player, or {@code -90} the other way
+     */
+    public static float sideTurnToCamera(float travelYaw, float viewYaw) {
+        // the player faces the camera as much as it can: its front against the line of sight
+        return Mth.sin((travelYaw - viewYaw) * Mth.DEG_TO_RAD) >= -1.0E-4F ? 90.0F : -90.0F;
+    }
+
+    /**
+     * This animation the other way round, left for right: the bones of each side swap their keyframes,
+     * and everything turning or moving sideways turns or moves the other way.
+     */
+    public ArcadeAnimationData mirrored() {
+        Map<String, Map<Target, List<Frame>>> bones = new LinkedHashMap<>();
+        this.bones.forEach((bone, channels) -> bones.put(mirroredBone(bone), mirrored(channels)));
+        return new ArcadeAnimationData(this.length, this.loop, this.linger, this.blendIn, this.bedrock, this.face,
+                bones, this.body.map(ArcadeAnimationData::mirrored), new Vector3f(-this.pivot.x, this.pivot.y, this.pivot.z));
+    }
+
+    private static String mirroredBone(String bone) {
+        if (bone.startsWith("right_")) {
+            return "left_" + bone.substring("right_".length());
+        }
+        if (bone.startsWith("left_")) {
+            return "right_" + bone.substring("left_".length());
+        }
+        return bone;
+    }
+
+    private static Map<Target, List<Frame>> mirrored(Map<Target, List<Frame>> channels) {
+        Map<Target, List<Frame>> mirrored = new EnumMap<>(Target.class);
+        channels.forEach((target, frames) -> mirrored.put(target, frames.stream()
+                .map(frame -> new Frame(frame.time, mirrored(frame.pre, target), mirrored(frame.post, target), frame.smooth, frame.easing))
+                .toList()));
+        return mirrored;
+    }
+
+    /**
+     * {@code value} seen in a mirror across the middle of the body: a turn around the axis going
+     * sideways stays, the turns around the two others go the other way, a move sideways goes to the
+     * other side. Both kinds of axes flip the same numbers.
+     */
+    private static Vector3f mirrored(Vector3f value, Target target) {
+        return switch (target) {
+            case ROTATION -> new Vector3f(value.x, -value.y, -value.z);
+            case POSITION -> new Vector3f(-value.x, value.y, value.z);
+            case SCALE -> new Vector3f(value);
+        };
     }
 
     /**
@@ -91,6 +177,7 @@ public record ArcadeAnimationData(float length, boolean loop, boolean linger, fl
         if (!axes.equals("java") && !axes.equals("bedrock")) {
             throw new JsonParseException("Unknown axes '" + axes + "', expected 'java' or 'bedrock'");
         }
+        var face = Facing.byKey(GsonHelper.getAsString(json, "face", "forward"));
 
         Map<String, Map<Target, List<Frame>>> bones = new LinkedHashMap<>();
         for (var bone : GsonHelper.getAsJsonObject(json, "bones", new JsonObject()).entrySet()) {
@@ -109,7 +196,7 @@ public record ArcadeAnimationData(float length, boolean loop, boolean linger, fl
                 pivot = vector(GsonHelper.getAsJsonArray(bodyJson, "pivot"));
             }
         }
-        return new ArcadeAnimationData(length, loop, linger, blendIn, axes.equals("bedrock"), bones, body, pivot);
+        return new ArcadeAnimationData(length, loop, linger, blendIn, axes.equals("bedrock"), face, bones, body, pivot);
     }
 
     private static Map<Target, List<Frame>> channels(JsonObject json, float length) {
