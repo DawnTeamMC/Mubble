@@ -53,14 +53,18 @@ public final class Snakes {
     }
 
     /**
-     * Draws a straight path of {@code length} blocks out of the {@code direction} face of
-     * {@code head}, and points the head into it, which is what makes the clump a snake.
+     * Draws a straight route of {@code length} blocks out of the {@code direction} face of
+     * {@code from}.
+     * <p>
+     * Nothing is done to {@code from} itself: a snake takes up a route it is merely standing
+     * against, so a test that never points a block at its path is a test of that.
      */
-    public static void drawPath(GameTestHelper helper, BlockPos head, Direction direction, int length) {
-        helper.setBlock(head, helper.getBlockState(head).setValue(SnakeBlock.FACING, direction));
-        BlockPos pos = head.relative(direction);
+    public static void drawPath(GameTestHelper helper, BlockPos from, Direction direction, int length) {
+        BlockPos pos = from.relative(direction);
         for (int i = 0; i < length; i++) {
-            helper.setBlock(pos, SuperMarioBlocks.SNAKE_PATH.defaultBlockState().setValue(SnakePathBlock.FACING, direction));
+            helper.setBlock(pos, SuperMarioBlocks.SNAKE_PATH.defaultBlockState()
+                    .setValue(SnakePathBlock.FACING, direction)
+                    .setValue(SnakePathBlock.ROOT, i == 0));
             pos = pos.relative(direction);
         }
     }

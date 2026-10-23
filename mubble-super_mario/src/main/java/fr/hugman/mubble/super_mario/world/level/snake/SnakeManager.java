@@ -125,16 +125,16 @@ public class SnakeManager extends SavedData {
             return null;
         }
         BlockPos head = SnakeChain.head(level, pos);
-        if (head == null || SnakeChain.path(level, head).isEmpty()) {
+        if (head == null) {
             return null;
         }
+        Direction startFacing = SnakeChain.routeFrom(level, head);
         List<BlockPos> body = SnakeChain.bodyFromHead(level, head);
-        if (body.isEmpty()) {
+        if (startFacing == null || body.isEmpty()) {
             return null;
         }
 
         BlockState headState = level.getBlockState(head);
-        Direction startFacing = headState.getValue(SnakeBlock.FACING);
         boolean respawnable = headState.getValue(SnakeBlock.RESPAWNABLE);
         for (int i = 0; i < body.size(); i++) {
             BlockPos blockPos = body.get(i);

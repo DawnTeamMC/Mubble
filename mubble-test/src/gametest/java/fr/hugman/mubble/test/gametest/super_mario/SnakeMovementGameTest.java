@@ -119,6 +119,61 @@ public class SnakeMovementGameTest {
     }
 
     /**
+     * What is left of a route stays standing when the snake walking it is destroyed, so the blocks
+     * that come off it can be picked up and sent down the rest.
+     * <p>
+     * It survives because the head hands the start of the route to the next block as it eats one.
+     * Without that, the stretch ahead would lose the only thing pointing at it the moment the head
+     * went, and take itself away one block update later.
+     */
+    @GameTest(maxTicks = 80)
+    public void whatIsLeftOfArouteOutlivesItsSnake(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Snakes.build(helper, SuperMarioBlocks.SLOW_SNAKE_BLOCK, TAIL, Direction.SOUTH, 1);
+        Snakes.drawPath(helper, TAIL, Direction.SOUTH, 4);
+        var snake = start(helper, TAIL);
+
+        helper.startSequence()
+                // Long enough for the first block of the route to have been eaten, and the next to
+                // have taken over as its start.
+                .thenIdle(SnakeSpeed.SLOW.ticksPerBlock() + 2)
+                .thenExecute(() -> helper.getLevel().destroyBlock(snake.head(), false))
+                .thenIdle(6)
+                .thenExecute(() -> {
+                    helper.assertTrue(isForgotten(helper, snake), "the snake itself should be gone");
+                    helper.assertTrue(Snakes.isPath(helper, TAIL.relative(Direction.SOUTH, 3)),
+                            "the rest of the route should still be standing");
+                    helper.assertTrue(Snakes.isPath(helper, TAIL.relative(Direction.SOUTH, 4)),
+                            "all the way to its end");
+                })
+                .thenSucceed();
+    }
+
+    /** And a block dropped back on the spot takes that route up and walks what is left of it. */
+    @GameTest(maxTicks = 120)
+    public void ablockPutBackCarriesOnDownWhatIsLeft(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Snakes.build(helper, SuperMarioBlocks.SLOW_SNAKE_BLOCK, TAIL, Direction.SOUTH, 1);
+        Snakes.drawPath(helper, TAIL, Direction.SOUTH, 4);
+        var snake = start(helper, TAIL);
+        BlockPos again = TAIL.relative(Direction.SOUTH, 2);
+
+        helper.startSequence()
+                .thenIdle(SnakeSpeed.SLOW.ticksPerBlock() + 2)
+                .thenExecute(() -> helper.getLevel().destroyBlock(snake.head(), false))
+                .thenIdle(6)
+                .thenExecute(() -> {
+                    // Nothing is pointed anywhere: the block simply stands against what is left.
+                    Snakes.place(helper, SuperMarioBlocks.FAST_SNAKE_BLOCK, again);
+                    helper.assertTrue(SnakeManager.get(helper.getLevel()).start(helper.getLevel(), helper.absolutePos(again)) != null,
+                            "a block standing against the rest of a route should be a snake again");
+                })
+                .thenWaitUntil(() -> helper.assertFalse(Snakes.isPath(helper, TAIL.relative(Direction.SOUTH, 4)),
+                        "and should walk the rest of the route"))
+                .thenSucceed();
+    }
+
+    /**
      * A snake eating its own path must not set off the chain reaction that breaking a path block
      * does, or the whole route would vanish the moment its head left the ground.
      */

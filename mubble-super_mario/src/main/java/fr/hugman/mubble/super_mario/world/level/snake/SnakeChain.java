@@ -26,10 +26,14 @@ import java.util.Set;
  * other, and nothing more. Lay them out however you like — the blocks carry no orientation a player
  * can see, and none that matters until the snake runs.
  * <p>
- * What turns a clump into a snake is the path. The block a path was drawn from is the head, and the
- * body is read off from there by stepping to a touching block over and over, carrying on straight
- * wherever it can. A clump with no path on it is not a snake yet and has no head to find, which is
- * why stepping on one does nothing.
+ * What turns a clump into a snake is a route to take. Any block of the clump touching the start of
+ * one is the head, and the body is read off from there by stepping to a touching block over and
+ * over, carrying on straight wherever it can. A clump touching no route is not a snake yet and has
+ * no head to find, which is why stepping on one does nothing.
+ * <p>
+ * Nothing about that is settled when the blocks are laid down, so a snake that has come apart is
+ * not finished with: drop its blocks next to a route that is still standing and they are a snake
+ * again.
  *
  * @author Hugman
  * @since v4.0.0
@@ -55,10 +59,10 @@ public final class SnakeChain {
     /*========*/
 
     /**
-     * The head of the snake {@code pos} belongs to: the one block of the clump with a path drawn
-     * off it.
+     * The head of the snake {@code pos} belongs to: a block of the clump standing against the start
+     * of a route.
      *
-     * @return the head, or {@code null} when the clump has no path and so is not a snake yet
+     * @return the head, or {@code null} when the clump has no route to take and so is not a snake yet
      */
     @Nullable
     public static BlockPos head(BlockGetter level, BlockPos pos) {
@@ -75,7 +79,7 @@ public final class SnakeChain {
         queue.add(pos);
         while (!queue.isEmpty() && seen.size() <= MAX_GROUP_SIZE) {
             BlockPos current = queue.poll();
-            if (startsApath(level, current)) {
+            if (routeFrom(level, current) != null) {
                 return current;
             }
             for (Direction direction : Direction.values()) {
@@ -88,11 +92,32 @@ public final class SnakeChain {
         return null;
     }
 
-    /** Whether the block at {@code pos} is a snake block with a path hanging off the face it points at. */
-    public static boolean startsApath(BlockGetter level, BlockPos pos) {
-        BlockState state = level.getBlockState(pos);
-        return state.getBlock() instanceof SnakeBlock
-                && level.getBlockState(pos.relative(state.getValue(SnakeBlock.FACING))).getBlock() instanceof SnakePathBlock;
+    /**
+     * Which way out of {@code pos} a route begins, if one does.
+     * <p>
+     * Only the start of a route counts. A path running along the side of a snake is somebody else's
+     * route, or the stretch this one has already walked, and neither is something to set off down.
+     */
+    @Nullable
+    public static Direction routeFrom(BlockGetter level, BlockPos pos) {
+        if (!(level.getBlockState(pos).getBlock() instanceof SnakeBlock)) {
+            return null;
+        }
+        for (Direction direction : Direction.values()) {
+            if (startsAroute(level, pos.relative(direction))) {
+                return direction;
+            }
+        }
+        return null;
+    }
+
+    /** Whether {@code pos} is a path block that no other path block leads into. */
+    public static boolean startsAroute(BlockGetter level, BlockPos pos) {
+        if (!(level.getBlockState(pos).getBlock() instanceof SnakePathBlock)) {
+            return false;
+        }
+        BlockPos predecessor = pathPredecessor(level, pos);
+        return predecessor == null || !(level.getBlockState(predecessor).getBlock() instanceof SnakePathBlock);
     }
 
     /*========*/
@@ -168,25 +193,18 @@ public final class SnakeChain {
      * simply stops there, and the snake will reach the end of its path when it gets that far.
      */
     public static List<BlockPos> path(BlockGetter level, BlockPos head) {
-        BlockState headState = level.getBlockState(head);
-        if (!(headState.getBlock() instanceof SnakeBlock)) {
+        Direction route = routeFrom(level, head);
+        if (route == null) {
             return List.of();
         }
         List<BlockPos> path = new ArrayList<>();
         Set<BlockPos> seen = new HashSet<>();
-        BlockPos current = head.relative(headState.getValue(SnakeBlock.FACING));
+        BlockPos current = head.relative(route);
         while (path.size() < MAX_PATH_LENGTH && level.getBlockState(current).getBlock() instanceof SnakePathBlock && seen.add(current)) {
             path.add(current);
             current = current.relative(level.getBlockState(current).getValue(SnakePathBlock.FACING));
         }
         return path;
-    }
-
-    /** The last path block in front of {@code head}, or {@code null} when no path has been drawn yet. */
-    @Nullable
-    public static BlockPos pathEnd(BlockGetter level, BlockPos head) {
-        List<BlockPos> path = path(level, head);
-        return path.isEmpty() ? null : path.getLast();
     }
 
     /**
