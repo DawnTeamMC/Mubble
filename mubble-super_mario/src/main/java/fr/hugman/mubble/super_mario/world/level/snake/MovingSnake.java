@@ -272,10 +272,12 @@ public class MovingSnake {
     }
 
     /**
-     * Turns one block of the snake into a grayed-out falling block.
+     * Drops one block of the snake.
      * <p>
-     * A respawnable one drops nothing and vanishes where it lands: the snake is about to be rebuilt
-     * whole, so anything it leaves behind would be a free copy of itself.
+     * It falls as the ordinary snake block it is and lands as one, ready to be walked on again the
+     * moment it has a route to take. A respawnable one drops nothing and vanishes where it lands:
+     * the snake is about to be rebuilt whole, so anything it leaves behind would be a free copy of
+     * itself.
      */
     private void dropAsFallingBlock(ServerLevel level, BlockPos pos) {
         BlockState snakeState = takeSnakeState(level, pos);
@@ -283,7 +285,7 @@ public class MovingSnake {
             return;
         }
         level.setBlock(pos, snakeState
-                .setValue(SnakeBlock.SNAKE_STATE, SnakeBlockState.DEACTIVATED)
+                .setValue(SnakeBlock.SNAKE_STATE, SnakeBlockState.IDLE)
                 .setValue(SnakeBlock.POWERED, false), Block.UPDATE_ALL);
         FallingBlockEntity falling = FallingBlockEntity.fall(level, pos, level.getBlockState(pos));
         falling.dropItem = !this.respawnable;

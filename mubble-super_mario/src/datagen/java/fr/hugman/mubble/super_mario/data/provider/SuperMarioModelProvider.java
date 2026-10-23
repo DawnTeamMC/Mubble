@@ -54,9 +54,11 @@ public class SuperMarioModelProvider extends FabricModelProvider {
         gen.createTrivialBlock(SuperMarioBlocks.GREEN_MARIMBA_BLOCK, SuperMarioTexturedModels.marimbaBlock("green"));
         gen.createTrivialBlock(SuperMarioBlocks.YELLOW_MARIMBA_BLOCK, SuperMarioTexturedModels.marimbaBlock("yellow"));
         gen.createTrivialBlock(SuperMarioBlocks.RED_MARIMBA_BLOCK, SuperMarioTexturedModels.marimbaBlock("red"));
-        registerSnakeBlock(gen, SuperMarioBlocks.SNAKE_BLOCK, "normal");
-        registerSnakeBlock(gen, SuperMarioBlocks.FAST_SNAKE_BLOCK, "fast");
-        registerSnakeBlock(gen, SuperMarioBlocks.SLOW_SNAKE_BLOCK, "slow");
+        // A snake block never turns and never changes colour: its shape comes from the blocks it is
+        // laid next to, and a block that has come off a snake is an ordinary one again.
+        gen.createTrivialBlock(SuperMarioBlocks.SNAKE_BLOCK, SuperMarioTexturedModels.snakeBlock("normal"));
+        gen.createTrivialBlock(SuperMarioBlocks.FAST_SNAKE_BLOCK, SuperMarioTexturedModels.snakeBlock("fast"));
+        gen.createTrivialBlock(SuperMarioBlocks.SLOW_SNAKE_BLOCK, SuperMarioTexturedModels.snakeBlock("slow"));
         registerSnakePath(gen);
         // Nothing of the moving block is ever drawn from its own state: its renderer submits the
         // snake block it is carrying instead. All it needs is a particle to break into.
@@ -101,22 +103,6 @@ public class SuperMarioModelProvider extends FabricModelProvider {
         gen.generateFlatItem(SuperMarioItems.MAKER_GLOVE, ModelTemplates.FLAT_ITEM);
 
         gen.generateFlatItem(SuperMarioItems.GOOMBA_SPAWN_EGG, ModelTemplates.FLAT_ITEM);
-    }
-
-    /**
-     * A snake block never turns. Its shape comes from the blocks it is laid next to, not from a
-     * facing, so showing one would only tell the player about a link they cannot change and do not
-     * need to see. The one thing the model does say is whether the block has been knocked out.
-     */
-    private static void registerSnakeBlock(BlockModelGenerators gen, Block block, String variant) {
-        MultiVariant normal = plainVariant(SuperMarioTexturedModels.snakeBlock(variant).create(block, gen.modelOutput));
-        MultiVariant deactivated = plainVariant(SuperMarioTexturedModels.snakeBlock(variant, "deactivated_")
-                .createWithSuffix(block, "_deactivated", gen.modelOutput));
-        gen.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
-                .with(PropertyDispatch.initial(SnakeBlock.SNAKE_STATE)
-                        .select(SnakeBlockState.IDLE, normal)
-                        .select(SnakeBlockState.MOVING, normal)
-                        .select(SnakeBlockState.DEACTIVATED, deactivated)));
     }
 
     private static void registerSnakePath(BlockModelGenerators gen) {

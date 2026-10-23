@@ -3,18 +3,20 @@ package fr.hugman.mubble.super_mario.world.level.block;
 import net.minecraft.util.StringRepresentable;
 
 /**
- * Where a snake block is in its life: being built, running along its path, or knocked out.
+ * Whether a snake block is sitting still or walking.
+ * <p>
+ * There is no third state for a block that has come off a snake. A block that has fallen is an
+ * ordinary snake block again, ready to be walked on the moment it has a route to take, which is
+ * what makes a snake something a map can take apart and put back together.
  *
  * @author Hugman
  * @since v4.0.0
  */
 public enum SnakeBlockState implements StringRepresentable {
-    /** The snake is being built. Blocks can be added to its tail and a path drawn from its head. */
+    /** Sitting still. Blocks can be added around it and a path drawn off it. */
     IDLE("idle"),
     /** The snake has started and is walking its path. */
-    MOVING("moving"),
-    /** The block has broken off a snake. Grayed out, and only a redstone pulse brings it back. */
-    DEACTIVATED("deactivated");
+    MOVING("moving");
 
     private final String name;
 

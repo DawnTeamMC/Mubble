@@ -92,9 +92,9 @@ public class SnakeMovementGameTest {
                         "a snake out of path should be trembling in place"))
                 .thenIdle(MovingSnake.SHAKE_TICKS + MovingSnake.FALL_INTERVAL * 4 + 20)
                 .thenExecute(() -> {
-                    helper.assertTrue(Snakes.isSnake(helper, TAIL.relative(Direction.SOUTH), SnakeBlockState.DEACTIVATED)
-                                    || Snakes.isSnake(helper, TAIL.relative(Direction.SOUTH, 2), SnakeBlockState.DEACTIVATED),
-                            "a snake that ran out of path should have landed as deactivated blocks");
+                    helper.assertTrue(Snakes.isSnake(helper, TAIL.relative(Direction.SOUTH), SnakeBlockState.IDLE)
+                                    || Snakes.isSnake(helper, TAIL.relative(Direction.SOUTH, 2), SnakeBlockState.IDLE),
+                            "a snake that ran out of path should have landed as ordinary blocks, ready to go again");
                     helper.assertTrue(isForgotten(helper, snake), "the record should be gone with it");
                 })
                 .thenSucceed();
