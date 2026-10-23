@@ -58,8 +58,9 @@ public class SnakeBlock extends Block implements Fallable {
      */
     public static final BooleanProperty RESPAWNABLE = BooleanProperty.create("respawnable");
     /**
-     * Whether a redstone signal currently reaches the block. Kept in the state so that one pulse only
-     * ever moves a deactivated block one step along: wake up first, start on the next pulse.
+     * Whether a redstone signal currently reaches the block, so that only the moment it arrives sets
+     * a snake off. A signal left switched on would otherwise try again on every block update around
+     * it, and a snake coming back from a respawn next to one would never get to sit still.
      */
     public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
 
@@ -146,12 +147,8 @@ public class SnakeBlock extends Block implements Fallable {
     }
 
     /**
-     * Redstone drives both of the things a signal can do to a snake block: set an idle one off, and
-     * bring a deactivated one back.
-     * <p>
-     * Only the rising edge counts, which is what {@link #POWERED} is for. Without it a single pulse
-     * would wake a deactivated block and start it in the same breath, and the two-pulse sequence the
-     * deactivated state is built around could never be performed.
+     * A signal arriving next to any block of a snake sets it off, the same as a player stepping on
+     * one. Only the moment it arrives counts, which is what {@link #POWERED} is for.
      */
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighbourBlock, @Nullable Orientation orientation, boolean movedByPiston) {
@@ -166,11 +163,8 @@ public class SnakeBlock extends Block implements Fallable {
         if (!powered) {
             return;
         }
-        switch (state.getValue(SNAKE_STATE)) {
-            case DEACTIVATED -> level.setBlock(pos, level.getBlockState(pos).setValue(SNAKE_STATE, SnakeBlockState.IDLE), Block.UPDATE_ALL);
-            case IDLE -> SnakeManager.get(serverLevel).start(serverLevel, pos);
-            case MOVING -> {
-            }
+        if (state.getValue(SNAKE_STATE) == SnakeBlockState.IDLE) {
+            SnakeManager.get(serverLevel).start(serverLevel, pos);
         }
     }
 

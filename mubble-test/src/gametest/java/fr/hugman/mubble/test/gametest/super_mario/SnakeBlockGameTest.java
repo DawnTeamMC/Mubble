@@ -175,47 +175,6 @@ public class SnakeBlockGameTest {
         helper.succeed();
     }
 
-    /**
-     * The two-pulse sequence a knocked-out block answers to: the first brings it back as a snake one
-     * block long, and the second starts it — if by then it has somewhere to go.
-     */
-    @GameTest(maxTicks = 60)
-    public void thefirstPulseBringsAdeactivatedBlockBack(GameTestHelper helper) {
-        Arena.buildFloor(helper);
-        helper.setBlock(TAIL, SuperMarioBlocks.SNAKE_BLOCK.defaultBlockState()
-                .setValue(SnakeBlock.FACING, Direction.SOUTH)
-                .setValue(SnakeBlock.SNAKE_STATE, SnakeBlockState.DEACTIVATED));
-
-        helper.startSequence()
-                .thenExecute(() -> helper.setBlock(TAIL.above(), Blocks.REDSTONE_BLOCK))
-                .thenExecuteAfter(2, () -> helper.setBlock(TAIL.above(), Blocks.AIR))
-                .thenExecuteAfter(2, () -> helper.assertTrue(Snakes.isSnake(helper, TAIL, SnakeBlockState.IDLE),
-                        "the first pulse should wake a deactivated block into an idle snake"))
-                .thenExecute(() -> helper.setBlock(TAIL.above(), Blocks.REDSTONE_BLOCK))
-                .thenExecuteAfter(4, () -> helper.assertTrue(Snakes.isSnake(helper, TAIL, SnakeBlockState.IDLE),
-                        "and with no path drawn, the second should leave it alone"))
-                .thenSucceed();
-    }
-
-    @GameTest(maxTicks = 60)
-    public void thesecondPulseStartsAwokenBlockThatHasApath(GameTestHelper helper) {
-        Arena.buildFloor(helper);
-        helper.setBlock(TAIL, SuperMarioBlocks.SNAKE_BLOCK.defaultBlockState()
-                .setValue(SnakeBlock.FACING, Direction.SOUTH)
-                .setValue(SnakeBlock.SNAKE_STATE, SnakeBlockState.DEACTIVATED));
-        Snakes.drawPath(helper, TAIL, Direction.SOUTH, 3);
-
-        helper.startSequence()
-                .thenExecute(() -> helper.setBlock(TAIL.above(), Blocks.REDSTONE_BLOCK))
-                .thenExecuteAfter(2, () -> helper.setBlock(TAIL.above(), Blocks.AIR))
-                .thenExecuteAfter(2, () -> helper.assertTrue(Snakes.isSnake(helper, TAIL, SnakeBlockState.IDLE),
-                        "the first pulse should wake a deactivated block into an idle snake"))
-                .thenExecute(() -> helper.setBlock(TAIL.above(), Blocks.REDSTONE_BLOCK))
-                .thenExecuteAfter(4, () -> helper.assertFalse(Snakes.isSnake(helper, TAIL, SnakeBlockState.IDLE),
-                        "and the second should send it on its way"))
-                .thenSucceed();
-    }
-
     @GameTest
     public void asnakeTakesItsRespawnableFlagFromItsHead(GameTestHelper helper) {
         Arena.buildFloor(helper);
