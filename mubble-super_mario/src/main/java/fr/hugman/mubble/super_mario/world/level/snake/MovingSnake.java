@@ -170,6 +170,13 @@ public class MovingSnake {
             return this.beginShake(level);
         }
         Direction nextFacing = nextState.getValue(SnakePathBlock.FACING);
+        // The block about to be eaten is the start of the route, so the one after it inherits that:
+        // what is left of the route then stands on its own, and outlives the snake if it is broken.
+        BlockPos following = next.relative(nextFacing);
+        BlockState followingState = level.getBlockState(following);
+        if (followingState.getBlock() instanceof SnakePathBlock && !followingState.getValue(SnakePathBlock.ROOT)) {
+            level.setBlock(following, followingState.setValue(SnakePathBlock.ROOT, true), Block.UPDATE_CLIENTS);
+        }
 
         BlockPos tail = this.body.getFirst();
         Direction tailDirection = this.body.size() > 1 ? directionBetween(tail, this.body.get(1)) : direction;

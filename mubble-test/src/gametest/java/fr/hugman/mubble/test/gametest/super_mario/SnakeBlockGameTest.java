@@ -150,6 +150,42 @@ public class SnakeBlockGameTest {
         helper.succeed();
     }
 
+    /**
+     * A block that has come off a snake is an ordinary one, and takes up any route it happens to be
+     * standing against. It is never pointed at the route here, and never was part of a snake: all
+     * that makes it a head is touching the start of one.
+     */
+    @GameTest
+    public void ablockStandingAgainstArouteTakesItUp(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Snakes.drawPath(helper, TAIL, Direction.SOUTH, 3);
+        Snakes.place(helper, SuperMarioBlocks.SNAKE_BLOCK, TAIL);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+
+        SuperMarioBlocks.SNAKE_BLOCK.stepOn(helper.getLevel(), helper.absolutePos(TAIL), helper.getBlockState(TAIL), player);
+
+        helper.assertTrue(Snakes.isSnake(helper, TAIL, SnakeBlockState.MOVING),
+                "a block left beside a route should be able to set off down it");
+        helper.succeed();
+    }
+
+    /** Only the start of a route counts: a path running past a block is somebody else's. */
+    @GameTest
+    public void ablockBesideTheMiddleOfArouteTakesNothingUp(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Snakes.drawPath(helper, TAIL, Direction.SOUTH, 4);
+        // Beside the second block of the route, which something on the path already leads into.
+        BlockPos beside = TAIL.relative(Direction.SOUTH, 2).relative(Direction.EAST);
+        Snakes.place(helper, SuperMarioBlocks.SNAKE_BLOCK, beside);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+
+        SuperMarioBlocks.SNAKE_BLOCK.stepOn(helper.getLevel(), helper.absolutePos(beside), helper.getBlockState(beside), player);
+
+        helper.assertTrue(Snakes.isSnake(helper, beside, SnakeBlockState.IDLE),
+                "a block alongside a route it does not start should stay where it is");
+        helper.succeed();
+    }
+
     @GameTest
     public void aspectatorDoesNot(GameTestHelper helper) {
         Arena.buildFloor(helper);
