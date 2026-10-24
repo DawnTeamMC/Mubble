@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 /**
  * The test server allows flight, so it never kicks anyone for floating. A dedicated server does not,
- * and that is the setting the arcade layer has to hold up under: {@link TestFlight} turns it back on
+ * and that is the setting the platformer layer has to hold up under: {@link TestFlight} turns it back on
  * for the players of the tests that ask for it, and for them only.
  */
 @Mixin(ServerGamePacketListenerImpl.class)

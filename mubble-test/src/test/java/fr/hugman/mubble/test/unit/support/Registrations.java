@@ -1,12 +1,12 @@
 package fr.hugman.mubble.test.unit.support;
 
 import com.google.common.reflect.Reflection;
-import fr.hugman.mubble.arcade.ArcadeAttributes;
-import fr.hugman.mubble.arcade.item.ArcadeDataComponents;
-import fr.hugman.mubble.arcade.item.ArcadeItems;
-import fr.hugman.mubble.arcade.move.ArcadeMoves;
-import fr.hugman.mubble.arcade.registries.ArcadeBuiltInRegistries;
-import fr.hugman.mubble.arcade.reward.ArcadeRewardTypes;
+import fr.hugman.mubble.platformer.PlatformerAttributes;
+import fr.hugman.mubble.platformer.item.PlatformerDataComponents;
+import fr.hugman.mubble.platformer.item.PlatformerItems;
+import fr.hugman.mubble.platformer.move.PlatformerMoves;
+import fr.hugman.mubble.platformer.registries.PlatformerBuiltInRegistries;
+import fr.hugman.mubble.platformer.reward.PlatformerRewardTypes;
 import fr.hugman.mubble.core.component.MubbleDataComponents;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.core.component.SuperMarioDataComponents;
@@ -47,12 +47,12 @@ public final class Registrations {
         Reflection.initialize(MubbleAttributeTypes.class);
         Reflection.initialize(PowerUpActionTypes.class);
 
-        Reflection.initialize(ArcadeBuiltInRegistries.class);
-        Reflection.initialize(ArcadeDataComponents.class);
-        Reflection.initialize(ArcadeAttributes.class);
-        Reflection.initialize(ArcadeMoves.class);
-        Reflection.initialize(ArcadeRewardTypes.class);
-        Reflection.initialize(ArcadeItems.class);
+        Reflection.initialize(PlatformerBuiltInRegistries.class);
+        Reflection.initialize(PlatformerDataComponents.class);
+        Reflection.initialize(PlatformerAttributes.class);
+        Reflection.initialize(PlatformerMoves.class);
+        Reflection.initialize(PlatformerRewardTypes.class);
+        Reflection.initialize(PlatformerItems.class);
 
         Reflection.initialize(SuperMarioBlocks.class);
         Reflection.initialize(SuperMarioBlockEntityTypes.class);

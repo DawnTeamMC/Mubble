@@ -1,0 +1,5 @@
+{
+  "mubble:platformer_auto_camera": { "model": "minecraft:compass" },
+  "mubble:platformer_recenter": { "model": "minecraft:spyglass" },
+  "mubble:platformer_debug_hud": { "model": "minecraft:command_block" }
+}

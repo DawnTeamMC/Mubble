@@ -1,12 +1,12 @@
 package fr.hugman.mubble.test.unit;
 
-import fr.hugman.mubble.arcade.registries.ArcadeBuiltInRegistries;
+import fr.hugman.mubble.platformer.registries.PlatformerBuiltInRegistries;
 import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.core.registries.MubbleBuiltInRegistries;
-import fr.hugman.mubble.arcade.references.ArcadeMoveIds;
+import fr.hugman.mubble.platformer.references.PlatformerMoveIds;
 import fr.hugman.mubble.references.MubbleConsumeEffectTypeKeys;
 import fr.hugman.mubble.references.MubbleEntityTypeKeys;
-import fr.hugman.mubble.arcade.references.ArcadeItemIds;
+import fr.hugman.mubble.platformer.references.PlatformerItemIds;
 import fr.hugman.mubble.references.PowerUpActionTypesKeys;
 import fr.hugman.mubble.super_mario.SuperMario;
 import fr.hugman.mubble.super_mario.references.SuperMarioBlockItemIds;
@@ -94,15 +94,15 @@ public class ContentRegistrationTest {
     }
 
     @Test
-    @DisplayName("every declared arcade move key is registered")
-    void arcadeMoveKeysAreRegistered() {
-        assertKeysAreRegistered(ArcadeMoveIds.class, ArcadeBuiltInRegistries.ARCADE_MOVE, Mubble.MOD_ID);
+    @DisplayName("every declared platformer move key is registered")
+    void platformerMoveKeysAreRegistered() {
+        assertKeysAreRegistered(PlatformerMoveIds.class, PlatformerBuiltInRegistries.PLATFORMER_MOVE, Mubble.MOD_ID);
     }
 
     @Test
     @DisplayName("every declared Mubble item key is registered")
     void mubbleItemKeysAreRegistered() {
-        assertKeysAreRegistered(ArcadeItemIds.class, BuiltInRegistries.ITEM, Mubble.MOD_ID);
+        assertKeysAreRegistered(PlatformerItemIds.class, BuiltInRegistries.ITEM, Mubble.MOD_ID);
     }
 
     @Test

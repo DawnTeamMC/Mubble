@@ -4,7 +4,7 @@ version = getSubprojectVersion(project)
 moduleDependencies(project, [
     'mubble-core',
     'mubble-super_mario',
-    'mubble-arcade',
+    'mubble-platformer',
 ])
 
 loom {
@@ -33,7 +33,7 @@ loom {
 // Its jars are still built, so that the module behaves like any other, but the root build script
 // keeps them out of the BOM, out of the release jar and out of anything published.
 
-// `-Pcontrolify` loads Controlify in the client of the sandbox, to play the arcade movement with a
+// `-Pcontrolify` loads Controlify in the client of the sandbox, to play the platformer movement with a
 // controller. Off by default: Mubble only compiles against it, and nobody's dev client should change.
 if (project.hasProperty('controlify')) {
     dependencies {
