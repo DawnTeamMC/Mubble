@@ -45,6 +45,11 @@ public interface PowerUpAction {
         return false;
     }
 
+    /** Whether the action shoots where the player looks, as a fireball does: a camera that can aim over the shoulder aims for it. */
+    default boolean aims() {
+        return false;
+    }
+
     default Optional<String> getTranslationKey() {
         return MubbleBuiltInRegistries.POWER_UP_ACTION_TYPE
                 .getResourceKey(this.getType())

@@ -60,6 +60,13 @@ public record PowerUp(
     public static final StreamCodec<RegistryFriendlyByteBuf, Optional<Holder<PowerUp>>> OPTIONAL_STREAM_CODEC = ByteBufCodecs.optional(STREAM_CODEC);
 
     /**
+     * @return whether triggering the power-up shoots where the player looks, see {@link PowerUpAction#aims()}.
+     */
+    public boolean aims() {
+        return this.action.map(action -> action.value().aims()).orElse(false);
+    }
+
+    /**
      * @return whether the power-up can be triggered with the "power-up trigger" key.
      */
     public boolean canBeTriggered(Player player) {

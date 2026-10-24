@@ -1,0 +1,22 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "fabric:false"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "R R",
+    "BLB"
+  ],
+  "key": {
+    "R": "minecraft:red_mushroom",
+    "L": "minecraft:leather_boots",
+    "B": "minecraft:brown_dye"
+  },
+  "result": {
+    "id": "mubble:mario_boots",
+    "count": 1
+  }
+}
