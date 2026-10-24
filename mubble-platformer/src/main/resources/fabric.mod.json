@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "name": "Platformer Movement",
+  "id": "mubble_platformer",
+  "version": "${version}",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.hugman.mubble.platformer.MubblePlatformer"
+    ],
+    "client": [
+      "fr.hugman.mubble.platformer.client.PlatformerClient"
+    ],
+    "controlify": [
+      "fr.hugman.mubble.platformer.client.compat.controlify.PlatformerControlifyEntrypoint"
+    ]
+  },
+  "mixins": [
+    "mubble_platformer.mixins.json",
+    {
+      "config": "mubble_platformer.client.mixins.json",
+      "environment": "client"
+    },
+    {
+      "config": "mubble_platformer.controlify.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "minecraft": "*",
+    "fabric-api": "*",
+    "mubble": "*"
+  },
+  "suggests": {
+    "controlify": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "parent": "mubble"
+    },
+    "loom:injected_interfaces": {
+      "net/minecraft/world/entity/player/Player": [
+        "fr/hugman/mubble/platformer/PlatformerPlayer"
+      ]
+    }
+  },
+  "license": "LGPL v3.0"
+}

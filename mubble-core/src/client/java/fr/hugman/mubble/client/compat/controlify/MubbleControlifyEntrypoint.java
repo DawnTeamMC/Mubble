@@ -29,7 +29,7 @@ public final class MubbleControlifyEntrypoint implements ControlifyEntrypoint {
                 .category(KeyMapping.Category.GAMEPLAY.label())
                 .allowedContexts(BindContext.IN_GAME)
                 .keyEmulation(MubbleKeyBindings.TRIGGER_POWER_UP)
-                // B, the one button Controlify leaves free in game; a resource pack may move it, as the arcade movement does
+                // B, the one button Controlify leaves free in game; a resource pack may move it, as the platformer movement does
                 .defaultInput(new ButtonInput(Identifier.fromNamespaceAndPath("controlify", "button/east"))));
     }
 
