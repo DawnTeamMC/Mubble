@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.splatoon.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LevelChunkMixin",
+    "PlayerChunkSenderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
