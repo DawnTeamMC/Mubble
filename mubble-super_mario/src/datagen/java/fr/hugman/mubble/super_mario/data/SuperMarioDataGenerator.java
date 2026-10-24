@@ -32,6 +32,9 @@ public class SuperMarioDataGenerator implements DataGeneratorEntrypoint {
 		// - Variants
 		pack.addProvider(SuperMarioGoombaVariantProvider::new);
 
+		// - Note block instruments
+		pack.addProvider(SuperMarioNoteBlockInstrumentProvider::new);
+
         // - Power-Ups
         pack.addProvider(SuperMarioPowerUpProvider::new);
 
@@ -48,6 +51,7 @@ public class SuperMarioDataGenerator implements DataGeneratorEntrypoint {
 		registryBuilder.add(Registries.DAMAGE_TYPE, SuperMarioDamageTypeProvider::bootstrap);
 		registryBuilder.add(SuperMarioRegistries.GOOMBA_VARIANT, SuperMarioGoombaVariantProvider::bootstrap);
 		registryBuilder.add(MubbleRegistries.POWER_UP, SuperMarioPowerUpProvider::bootstrap);
+		registryBuilder.add(MubbleRegistries.NOTE_BLOCK_INSTRUMENT, SuperMarioNoteBlockInstrumentProvider::bootstrap);
 	}
 
 	@Override
