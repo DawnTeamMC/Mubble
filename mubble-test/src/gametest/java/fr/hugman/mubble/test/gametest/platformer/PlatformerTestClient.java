@@ -85,7 +85,8 @@ public final class PlatformerTestClient {
         var level = helper.getLevel();
         var minecraftServer = level.getServer();
         var uuid = UUID.randomUUID();
-        var cookie = CommonListenerCookie.createInitial(new GameProfile(uuid, "platformer-" + uuid.toString().substring(0, 8)), false);
+        // at most 16 characters, the limit of a player name, since the commands of the tests resolve the player by name
+        var cookie = CommonListenerCookie.createInitial(new GameProfile(uuid, "plat-" + uuid.toString().substring(0, 8)), false);
         var player = new ServerPlayer(minecraftServer, level, cookie.gameProfile(), cookie.clientInformation());
         var connection = new Connection(PacketFlow.SERVERBOUND);
         var channel = new EmbeddedChannel(connection);
@@ -110,7 +111,7 @@ public final class PlatformerTestClient {
 
     /** A survival player standing in for the one of the game client, in {@code level}, the way {@link GameTestHelper#makeMockPlayer} makes them. */
     private static Player mockPlayer(net.minecraft.world.level.Level level) {
-        return new Player(level, new GameProfile(UUID.randomUUID(), "platformer-client-self")) {
+        return new Player(level, new GameProfile(UUID.randomUUID(), "plat-client-self")) {
             @Override
             public GameType gameMode() {
                 return GameType.SURVIVAL;
