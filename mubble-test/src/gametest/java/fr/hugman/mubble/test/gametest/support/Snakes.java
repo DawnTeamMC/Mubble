@@ -24,10 +24,8 @@ import net.minecraft.world.phys.Vec3;
  * the way a player would: a snake is a clump of blocks touching each other, so a test that drops
  * them in place is testing the same world an in-game one would.
  * <p>
- * The blocks are deliberately laid down all facing {@link Direction#DOWN}, into the floor. Nothing
- * reads a snake block's facing except the head, where it points into the path, so a test that passes
- * with every block pointing the wrong way is a test that the shape really does come from which
- * blocks touch.
+ * Snake blocks carry no direction, so there is nothing to set up wrong: a snake is whichever blocks
+ * touch each other, and whichever of them is standing against the start of a route is its head.
  */
 public final class Snakes {
     private Snakes() {
@@ -47,9 +45,9 @@ public final class Snakes {
         return tail.relative(direction, length - 1);
     }
 
-    /** Lays one snake block, pointing nowhere in particular. */
+    /** Lays one snake block. There is nothing to point it at: they carry no direction. */
     public static void place(GameTestHelper helper, Block block, BlockPos pos) {
-        helper.setBlock(pos, block.defaultBlockState().setValue(SnakeBlock.FACING, Direction.DOWN));
+        helper.setBlock(pos, block.defaultBlockState());
     }
 
     /**

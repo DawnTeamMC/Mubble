@@ -55,7 +55,8 @@ public class MovingSnake {
             Direction.CODEC.fieldOf("start_facing").forGetter(snake -> snake.startFacing),
             SnakePhase.CODEC.fieldOf("phase").forGetter(snake -> snake.phase),
             Codec.INT.fieldOf("phase_ticks").forGetter(snake -> snake.phaseTicks),
-            BlockPos.CODEC.optionalFieldOf("moving_tail").forGetter(snake -> snake.movingTail)
+            BlockPos.CODEC.optionalFieldOf("moving_tail").forGetter(snake -> snake.movingTail),
+            Direction.CODEC.optionalFieldOf("heading", Direction.NORTH).forGetter(snake -> snake.heading)
     ).apply(instance, MovingSnake::new));
 
     private final int id;
@@ -71,9 +72,18 @@ public class MovingSnake {
     private int phaseTicks;
     /** The cell the tail is sliding out of, while a step is under way. */
     private Optional<BlockPos> movingTail;
+    /**
+     * The way out of the head: where the route carries on from the cell the head is standing in.
+     * <p>
+     * This is the one thing about a running snake that cannot be read back out of the world. Which
+     * route block touches the head is not enough to go on, because a respawnable snake lays its
+     * route again behind its tail and the block it has just left points back the way it came.
+     */
+    private Direction heading;
 
     public MovingSnake(int id, SnakeSpeed speed, boolean respawnable, List<BlockPos> body, List<BlockPos> startBody,
-                       Direction startFacing, SnakePhase phase, int phaseTicks, Optional<BlockPos> movingTail) {
+                       Direction startFacing, SnakePhase phase, int phaseTicks, Optional<BlockPos> movingTail,
+                       Direction heading) {
         this.id = id;
         this.speed = speed;
         this.respawnable = respawnable;
@@ -83,6 +93,7 @@ public class MovingSnake {
         this.phase = phase;
         this.phaseTicks = phaseTicks;
         this.movingTail = movingTail;
+        this.heading = heading;
     }
 
     public int id() {
@@ -159,7 +170,10 @@ public class MovingSnake {
             return true;
         }
 
-        Direction direction = headState.getValue(SnakeBlock.FACING);
+        // Where the route goes from here, rather than whatever route block happens to be touching
+        // the head: a respawnable snake lays its route again behind its tail, and the block it just
+        // left is the start of a perfectly good route pointing the way it came.
+        Direction direction = this.heading;
         BlockPos next = head.relative(direction);
         // A snake whose next block has drifted out of the loaded world waits there until it is back.
         if (!level.isLoaded(next)) {
@@ -185,12 +199,12 @@ public class MovingSnake {
         BlockState tailMoved = this.body.size() > 1 ? level.getBlockState(tail) : Blocks.AIR.defaultBlockState();
         BlockState leftBehind = this.leftBehind(tailDirection, tail.equals(this.startBody.getFirst()));
 
-        this.placeMovingBlock(level, next, headState.setValue(SnakeBlock.FACING, nextFacing),
-                headState.setValue(SnakeBlock.FACING, nextFacing), direction, nextFacing, SnakeMovement.HEAD);
-        this.placeMovingBlock(level, tail, tailMoved, leftBehind, tailDirection, tailDirection, SnakeMovement.TAIL);
+        this.placeMovingBlock(level, next, headState, headState, direction, SnakeMovement.HEAD);
+        this.placeMovingBlock(level, tail, tailMoved, leftBehind, tailDirection, SnakeMovement.TAIL);
 
         this.body.removeFirst();
         this.body.add(next);
+        this.heading = nextFacing;
         this.movingTail = Optional.of(tail);
         this.phaseTicks = 0;
         return true;
@@ -221,8 +235,8 @@ public class MovingSnake {
     }
 
     private void placeMovingBlock(ServerLevel level, BlockPos pos, BlockState moved, BlockState finalState,
-                                  Direction direction, Direction link, SnakeMovement movement) {
-        BlockState blockState = SuperMarioBlocks.SNAKE_MOVING_BLOCK.defaultBlockState().setValue(SnakeMovingBlock.FACING, link);
+                                  Direction direction, SnakeMovement movement) {
+        BlockState blockState = SuperMarioBlocks.SNAKE_MOVING_BLOCK.defaultBlockState();
         level.setBlock(pos, blockState, Block.UPDATE_ALL);
         level.setBlockEntity(new SnakeMovingBlockEntity(pos, blockState, moved, finalState, direction, movement,
                 this.speed, this.id));
@@ -247,8 +261,7 @@ public class MovingSnake {
         for (BlockPos pos : this.body) {
             BlockState state = level.getBlockState(pos);
             if (state.getBlock() instanceof SnakeBlock) {
-                this.placeMovingBlock(level, pos, state, state, state.getValue(SnakeBlock.FACING),
-                        state.getValue(SnakeBlock.FACING), SnakeMovement.SHAKE);
+                this.placeMovingBlock(level, pos, state, state, this.heading, SnakeMovement.SHAKE);
             }
         }
         BlockPos head = this.head();
@@ -273,7 +286,8 @@ public class MovingSnake {
             return true;
         }
         if (!this.body.isEmpty()) {
-            this.dropAsFallingBlock(level, this.body.removeFirst());
+            Direction trail = this.trailFrom(0);
+            this.dropAsFallingBlock(level, this.body.removeFirst(), trail);
         }
         return !this.body.isEmpty() || this.finish(level);
     }
@@ -286,7 +300,7 @@ public class MovingSnake {
      * the snake is about to be rebuilt whole, so anything it leaves behind would be a free copy of
      * itself.
      */
-    private void dropAsFallingBlock(ServerLevel level, BlockPos pos) {
+    private void dropAsFallingBlock(ServerLevel level, BlockPos pos, Direction trail) {
         BlockState snakeState = takeSnakeState(level, pos);
         if (snakeState == null) {
             return;
@@ -302,9 +316,16 @@ public class MovingSnake {
         // ones broken off it on the way, are cells the tail would have laid a path block in later.
         // Without this the last stretch of the route would be missing when the snake comes back.
         if (this.respawnable) {
-            level.setBlock(pos, this.leftBehind(snakeState.getValue(SnakeBlock.FACING), pos.equals(this.startBody.getFirst())),
-                    Block.UPDATE_ALL);
+            level.setBlock(pos, this.leftBehind(trail, pos.equals(this.startBody.getFirst())), Block.UPDATE_ALL);
         }
+    }
+
+    /**
+     * The way the route block left by {@code body[index]} should point: at the block in front of it,
+     * or, for the head, the way the snake was last going.
+     */
+    private Direction trailFrom(int index) {
+        return index + 1 < this.body.size() ? directionBetween(this.body.get(index), this.body.get(index + 1)) : this.heading;
     }
 
     /**
@@ -367,7 +388,7 @@ public class MovingSnake {
     private boolean splitAt(ServerLevel level, int index) {
         this.cancelStep(level);
         for (int i = 0; i < index; i++) {
-            this.dropAsFallingBlock(level, this.body.get(i));
+            this.dropAsFallingBlock(level, this.body.get(i), this.trailFrom(i));
         }
         this.body = new ArrayList<>(this.body.subList(Math.min(index + 1, this.body.size()), this.body.size()));
         this.phaseTicks = 0;
@@ -424,11 +445,7 @@ public class MovingSnake {
 
         Block block = SuperMarioBlocks.snakeBlock(this.speed);
         for (int i = 0; i < this.startBody.size(); i++) {
-            Direction facing = i + 1 < this.startBody.size()
-                    ? directionBetween(this.startBody.get(i), this.startBody.get(i + 1))
-                    : this.startFacing;
             level.setBlock(this.startBody.get(i), block.defaultBlockState()
-                    .setValue(SnakeBlock.FACING, facing)
                     .setValue(SnakeBlock.SNAKE_STATE, SnakeBlockState.IDLE)
                     .setValue(SnakeBlock.RESPAWNABLE, true)
                     .setValue(SnakeBlock.POWERED, false), Block.UPDATE_ALL);

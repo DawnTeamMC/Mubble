@@ -4,7 +4,6 @@ import fr.hugman.mubble.super_mario.tags.SuperMarioItemTags;
 import fr.hugman.mubble.super_mario.world.level.snake.SnakeChain;
 import fr.hugman.mubble.super_mario.world.level.snake.SnakeManager;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -16,8 +15,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Fallable;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -36,21 +33,15 @@ import org.jetbrains.annotations.Nullable;
  * see, and {@link SnakeChain} reads the body off the blocks that touch. The moment it starts,
  * {@link SnakeManager} takes over and drives it from a record of its own.
  * <p>
- * {@link #FACING} is not that orientation. It is only ever read on the head, where it says which way
- * the path goes, and {@link SnakeManager} writes the rest of the chain into it as the snake starts so
- * that the running snake has an order to it. Nothing about it shows in the model.
+ * The block carries no direction of any kind. Which end is the head, which way round the body runs
+ * and which route it takes are all worked out from the world when the snake sets off, and held by
+ * {@link SnakeManager} for as long as it is running.
  *
  * @author komerish
  * @author Hugman
  * @since v4.0.0
  */
 public class SnakeBlock extends Block implements Fallable {
-    /**
-     * Where this block links on: the way into the path for a head, and the next block along for the
-     * rest of a snake that is already running. It is never drawn, and means nothing on an idle block
-     * that no path was drawn from.
-     */
-    public static final EnumProperty<Direction> FACING = BlockStateProperties.FACING;
     public static final EnumProperty<SnakeBlockState> SNAKE_STATE = EnumProperty.create("snake_state", SnakeBlockState.class);
     /**
      * Whether the snake puts itself back together once it is done. Only commands set this: there is
@@ -70,7 +61,6 @@ public class SnakeBlock extends Block implements Fallable {
         super(settings);
         this.speed = speed;
         this.registerDefaultState(this.defaultBlockState()
-                .setValue(FACING, Direction.NORTH)
                 .setValue(SNAKE_STATE, SnakeBlockState.IDLE)
                 .setValue(RESPAWNABLE, false)
                 .setValue(POWERED, false));
@@ -82,7 +72,7 @@ public class SnakeBlock extends Block implements Fallable {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, SNAKE_STATE, RESPAWNABLE, POWERED);
+        builder.add(SNAKE_STATE, RESPAWNABLE, POWERED);
     }
 
     /*=============*/
@@ -90,19 +80,18 @@ public class SnakeBlock extends Block implements Fallable {
     /*=============*/
 
     /**
-     * A snake block is laid down the same way round whichever face it was placed against: the shape
-     * of a snake is the shape the blocks were laid out in, not the order they were placed in.
+     * A snake block is laid down the same way round whichever face it was placed against, because
+     * there is no way round: the shape of a snake is the shape the blocks were laid out in, and it
+     * is worked out when the snake sets off rather than carried about by the blocks.
      * <p>
-     * All the state carries is a default link direction, which means nothing until a path is drawn
-     * off this block, and whether the block it was placed against comes back — so that a respawnable
-     * snake stays respawnable as it is built.
+     * The one thing placement passes on is whether the block it was put against comes back, so that
+     * a respawnable snake stays respawnable as it is built.
      */
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext ctx) {
-        Direction face = ctx.getClickedFace();
-        BlockState base = this.defaultBlockState().setValue(FACING, face);
-        BlockState againstState = ctx.getLevel().getBlockState(ctx.getClickedPos().relative(face.getOpposite()));
+        BlockState base = this.defaultBlockState();
+        BlockState againstState = ctx.getLevel().getBlockState(ctx.getClickedPos().relative(ctx.getClickedFace().getOpposite()));
         return againstState.is(this) ? base.setValue(RESPAWNABLE, againstState.getValue(RESPAWNABLE)) : base;
     }
 
@@ -192,17 +181,4 @@ public class SnakeBlock extends Block implements Fallable {
         }
     }
 
-    /*============*/
-    /*  ROTATION  */
-    /*============*/
-
-    @Override
-    protected BlockState rotate(BlockState state, Rotation rotation) {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-    }
-
-    @Override
-    protected BlockState mirror(BlockState state, Mirror mirror) {
-        return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
 }
