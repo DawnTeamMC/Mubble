@@ -49,6 +49,15 @@ public class SnakeMovementGameTest {
         helper.succeed();
     }
 
+    /** One recording covers all three variants, so the pitch has to follow the speed. */
+    @GameTest
+    public void thepitchOfTheLoopFollowsTheSpeed(GameTestHelper helper) {
+        helper.assertTrue(SnakeSpeed.SLOW.pitch() < SnakeSpeed.NORMAL.pitch(), "a slow snake should rumble lower");
+        helper.assertTrue(SnakeSpeed.NORMAL.pitch() < SnakeSpeed.FAST.pitch(), "and a fast one higher");
+        helper.assertValueEqual(SnakeSpeed.NORMAL.pitch(), 1.0F, "the normal variant is the recording as it was made");
+        helper.succeed();
+    }
+
     /**
      * The whole point of a snake: the blocks in the middle never move, one appears at the head and
      * one disappears at the tail.

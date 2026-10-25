@@ -66,7 +66,7 @@ public class SnakeMovingBlockRenderer implements BlockEntityRenderer<SnakeMoving
         state.offsetZ = direction.getStepZ() * offset;
 
         if (blockEntity.getMovement() == SnakeMovement.HEAD && blockEntity.getSnakeId() != 0) {
-            SnakeSounds.heardAt(blockEntity.getSnakeId(),
+            SnakeSounds.heardAt(blockEntity.getSnakeId(), blockEntity.getSpeed(),
                     pos.getX() + 0.5D + state.offsetX, pos.getY() + 0.5D + state.offsetY, pos.getZ() + 0.5D + state.offsetZ);
         }
     }

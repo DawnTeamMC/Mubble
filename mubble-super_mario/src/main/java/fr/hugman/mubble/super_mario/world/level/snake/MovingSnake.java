@@ -225,7 +225,7 @@ public class MovingSnake {
         BlockState blockState = SuperMarioBlocks.SNAKE_MOVING_BLOCK.defaultBlockState().setValue(SnakeMovingBlock.FACING, link);
         level.setBlock(pos, blockState, Block.UPDATE_ALL);
         level.setBlockEntity(new SnakeMovingBlockEntity(pos, blockState, moved, finalState, direction, movement,
-                this.speed.ticksPerBlock(), this.id));
+                this.speed, this.id));
     }
 
     private static void placeFinalState(ServerLevel level, BlockPos pos) {

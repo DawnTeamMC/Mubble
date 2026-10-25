@@ -1,6 +1,7 @@
 package fr.hugman.mubble.super_mario.world.level.block.entity;
 
 import fr.hugman.mubble.super_mario.world.level.block.SnakeMovement;
+import fr.hugman.mubble.super_mario.world.level.block.SnakeSpeed;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -83,7 +84,7 @@ public class SnakeMovingBlockEntity extends BlockEntity {
     private static final String FINAL_STATE_KEY = "final_state";
     private static final String DIRECTION_KEY = "direction";
     private static final String MOVEMENT_KEY = "movement";
-    private static final String TICKS_PER_BLOCK_KEY = "ticks_per_block";
+    private static final String SPEED_KEY = "speed";
     private static final String PROGRESS_KEY = "progress";
     private static final String SNAKE_ID_KEY = "snake_id";
 
@@ -91,7 +92,7 @@ public class SnakeMovingBlockEntity extends BlockEntity {
     private BlockState finalState = Blocks.AIR.defaultBlockState();
     private Direction direction = Direction.NORTH;
     private SnakeMovement movement = SnakeMovement.HEAD;
-    private int ticksPerBlock = 1;
+    private SnakeSpeed speed = SnakeSpeed.NORMAL;
     private float progress;
     private float progressO;
     private int snakeId;
@@ -102,13 +103,13 @@ public class SnakeMovingBlockEntity extends BlockEntity {
     }
 
     public SnakeMovingBlockEntity(BlockPos pos, BlockState state, BlockState movedState, BlockState finalState,
-                                  Direction direction, SnakeMovement movement, int ticksPerBlock, int snakeId) {
+                                  Direction direction, SnakeMovement movement, SnakeSpeed speed, int snakeId) {
         this(pos, state);
         this.movedState = movedState;
         this.finalState = finalState;
         this.direction = direction;
         this.movement = movement;
-        this.ticksPerBlock = Math.max(1, ticksPerBlock);
+        this.speed = speed;
         this.snakeId = snakeId;
     }
 
@@ -130,6 +131,10 @@ public class SnakeMovingBlockEntity extends BlockEntity {
 
     public SnakeMovement getMovement() {
         return this.movement;
+    }
+
+    public SnakeSpeed getSpeed() {
+        return this.speed;
     }
 
     public int getSnakeId() {
@@ -186,7 +191,7 @@ public class SnakeMovingBlockEntity extends BlockEntity {
         output.store(FINAL_STATE_KEY, BlockState.CODEC, this.finalState);
         output.store(DIRECTION_KEY, Direction.LEGACY_ID_CODEC, this.direction);
         output.store(MOVEMENT_KEY, SnakeMovement.CODEC, this.movement);
-        output.putInt(TICKS_PER_BLOCK_KEY, this.ticksPerBlock);
+        output.store(SPEED_KEY, SnakeSpeed.CODEC, this.speed);
         output.putFloat(PROGRESS_KEY, this.progressO);
         output.putInt(SNAKE_ID_KEY, this.snakeId);
     }
@@ -198,7 +203,7 @@ public class SnakeMovingBlockEntity extends BlockEntity {
         this.finalState = input.read(FINAL_STATE_KEY, BlockState.CODEC).orElse(Blocks.AIR.defaultBlockState());
         this.direction = input.read(DIRECTION_KEY, Direction.LEGACY_ID_CODEC).orElse(Direction.NORTH);
         this.movement = input.read(MOVEMENT_KEY, SnakeMovement.CODEC).orElse(SnakeMovement.HEAD);
-        this.ticksPerBlock = Math.max(1, input.getIntOr(TICKS_PER_BLOCK_KEY, 1));
+        this.speed = input.read(SPEED_KEY, SnakeSpeed.CODEC).orElse(SnakeSpeed.NORMAL);
         this.progress = input.getFloatOr(PROGRESS_KEY, 0.0F);
         this.progressO = this.progress;
         this.snakeId = input.getIntOr(SNAKE_ID_KEY, 0);
@@ -231,7 +236,7 @@ public class SnakeMovingBlockEntity extends BlockEntity {
             return;
         }
 
-        float newProgress = Math.min(1.0F, entity.progress + 1.0F / entity.ticksPerBlock);
+        float newProgress = Math.min(1.0F, entity.progress + 1.0F / entity.speed.ticksPerBlock());
         moveCollidedEntities(level, pos, newProgress, entity);
         entity.progress = newProgress;
     }
