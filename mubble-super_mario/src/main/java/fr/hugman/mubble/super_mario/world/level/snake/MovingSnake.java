@@ -24,6 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +59,8 @@ public class MovingSnake {
             BlockPos.CODEC.optionalFieldOf("moving_tail").forGetter(snake -> snake.movingTail),
             Direction.CODEC.optionalFieldOf("heading", Direction.NORTH).forGetter(snake -> snake.heading),
             Codec.INT.optionalFieldOf("route_length", SnakeChain.MAX_PATH_LENGTH).forGetter(snake -> snake.routeLength),
-            Codec.INT.optionalFieldOf("steps_taken", 0).forGetter(snake -> snake.stepsTaken)
+            Codec.INT.optionalFieldOf("steps_taken", 0).forGetter(snake -> snake.stepsTaken),
+            BlockPos.CODEC.listOf().optionalFieldOf("drop_order", List.of()).forGetter(snake -> snake.dropOrder)
     ).apply(instance, MovingSnake::new));
 
     private final int id;
@@ -91,10 +93,18 @@ public class MovingSnake {
      */
     private final int routeLength;
     private int stepsTaken;
+    /**
+     * The blocks still to let go of once the snake starts coming apart, lowest first.
+     * <p>
+     * Not the order of the body. A snake standing on end has to drop from the bottom up, or every
+     * block lands on the one below it — which is still solid, and about to fall itself — and the
+     * whole snake ends up stacked in mid-air with only its lowest block reaching the ground.
+     */
+    private List<BlockPos> dropOrder;
 
     public MovingSnake(int id, SnakeSpeed speed, boolean respawnable, List<BlockPos> body, List<BlockPos> startBody,
                        Direction startFacing, SnakePhase phase, int phaseTicks, Optional<BlockPos> movingTail,
-                       Direction heading, int routeLength, int stepsTaken) {
+                       Direction heading, int routeLength, int stepsTaken, List<BlockPos> dropOrder) {
         this.id = id;
         this.speed = speed;
         this.respawnable = respawnable;
@@ -107,6 +117,7 @@ public class MovingSnake {
         this.heading = heading;
         this.routeLength = routeLength;
         this.stepsTaken = stepsTaken;
+        this.dropOrder = new ArrayList<>(dropOrder);
     }
 
     public int id() {
@@ -297,19 +308,25 @@ public class MovingSnake {
         }
         this.phase = SnakePhase.FALLING;
         this.phaseTicks = 0;
+        // Lowest first, so that every block has air under it by the time it lets go. The sort is
+        // stable, so a snake lying flat still comes apart from the tail.
+        this.dropOrder = new ArrayList<>(this.body);
+        this.dropOrder.sort(Comparator.comparingInt(BlockPos::getY));
         return true;
     }
 
-    /** Lets go of one block at a time, starting at the tail. */
+    /** Lets go of one block at a time, from the bottom of the snake up. */
     private boolean tickFalling(ServerLevel level) {
         if (this.phaseTicks++ % FALL_INTERVAL != 0) {
             return true;
         }
-        if (!this.body.isEmpty()) {
-            Direction trail = this.trailFrom(0);
-            this.dropAsFallingBlock(level, this.body.removeFirst(), trail);
+        if (!this.dropOrder.isEmpty()) {
+            // The body is left as it was: the route block a falling block leaves behind has to point
+            // at the one in front of it along the snake, which the dropping order no longer tells.
+            BlockPos pos = this.dropOrder.removeFirst();
+            this.dropAsFallingBlock(level, pos, this.trailFrom(this.body.indexOf(pos)));
         }
-        return !this.body.isEmpty() || this.finish(level);
+        return !this.dropOrder.isEmpty() || this.finish(level);
     }
 
     /**
@@ -345,7 +362,9 @@ public class MovingSnake {
      * or, for the head, the way the snake was last going.
      */
     private Direction trailFrom(int index) {
-        return index + 1 < this.body.size() ? directionBetween(this.body.get(index), this.body.get(index + 1)) : this.heading;
+        return index >= 0 && index + 1 < this.body.size()
+                ? directionBetween(this.body.get(index), this.body.get(index + 1))
+                : this.heading;
     }
 
     /**
