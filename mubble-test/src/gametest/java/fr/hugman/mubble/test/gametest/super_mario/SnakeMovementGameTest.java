@@ -6,6 +6,7 @@ import fr.hugman.mubble.super_mario.world.level.block.SnakePathBlock;
 import fr.hugman.mubble.super_mario.world.level.block.SnakeSpeed;
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import fr.hugman.mubble.super_mario.world.level.snake.MovingSnake;
+import fr.hugman.mubble.super_mario.world.level.snake.SnakeChain;
 import fr.hugman.mubble.super_mario.world.level.snake.SnakeManager;
 import fr.hugman.mubble.test.gametest.support.Arena;
 import fr.hugman.mubble.test.gametest.support.Snakes;
@@ -257,6 +258,42 @@ public class SnakeMovementGameTest {
                         "every block should have come to rest in a pile on the floor");
             }
         });
+    }
+
+    /**
+     * Breaking a respawnable snake in the middle leaves no route block stranded where its head died.
+     * <p>
+     * The break puts a hole in the trail, so everything the head half lays after it is cut off from
+     * the snake and has to go. Each of those is swept up by the next one falling — but the last one
+     * has nothing following it to nudge it, and used to sit there on its own.
+     */
+    @GameTest(maxTicks = 200)
+    public void breakingAsnakeInTwoStrandsNoRouteBlock(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        var head = Snakes.build(helper, SuperMarioBlocks.FAST_SNAKE_BLOCK, TAIL, Direction.SOUTH, 3);
+        helper.setBlock(head, helper.getBlockState(head).setValue(SnakeBlock.RESPAWNABLE, true));
+        Snakes.drawPath(helper, head, Direction.SOUTH, 4);
+        var snake = start(helper, TAIL);
+
+        helper.startSequence()
+                // Far enough along that the break lands past where the snake will come back to.
+                .thenIdle(FAST_STEP * 2 + 1)
+                .thenExecute(() -> helper.destroyBlock(TAIL.relative(Direction.SOUTH, 3)))
+                .thenWaitUntil(() -> helper.assertTrue(isForgotten(helper, snake), "the snake should have finished"))
+                .thenIdle(10)
+                .thenExecute(() -> {
+                    BlockPos back = SnakeChain.head(helper.getLevel(), helper.absolutePos(TAIL));
+                    int onTheRoute = back == null ? 0 : SnakeChain.path(helper.getLevel(), back).size();
+                    int inTheWorld = 0;
+                    for (int i = 0; i < 8; i++) {
+                        if (Snakes.isPath(helper, TAIL.relative(Direction.SOUTH, i))) {
+                            inTheWorld++;
+                        }
+                    }
+                    helper.assertValueEqual(inTheWorld, onTheRoute,
+                            "every route block left standing should belong to the snake's own route");
+                })
+                .thenSucceed();
     }
 
     /** A plain snake eats its path; nothing is left where it has been. */
