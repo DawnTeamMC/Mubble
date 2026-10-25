@@ -113,11 +113,7 @@ public final class SnakeChain {
 
     /** Whether {@code pos} is a path block that no other path block leads into. */
     public static boolean startsAroute(BlockGetter level, BlockPos pos) {
-        if (!(level.getBlockState(pos).getBlock() instanceof SnakePathBlock)) {
-            return false;
-        }
-        BlockPos predecessor = pathPredecessor(level, pos);
-        return predecessor == null || !(level.getBlockState(predecessor).getBlock() instanceof SnakePathBlock);
+        return level.getBlockState(pos).getBlock() instanceof SnakePathBlock && pathLeadingInto(level, pos) == null;
     }
 
     /*========*/
@@ -208,38 +204,44 @@ public final class SnakeChain {
     }
 
     /**
-     * Whatever still points at the path block at {@code pos}: the block before it on the path, the
-     * head of the snake about to walk it, or that head caught halfway into its next cell.
+     * The path block leading into the one at {@code pos}, if any.
      * <p>
-     * A path block with nothing pointing at it has been cut loose and takes itself away, which is how
-     * breaking one block of a path clears everything after it. The moving block counts for exactly
-     * that reason: a snake eating its own path would otherwise wipe out the rest of it the moment its
-     * head left the ground.
+     * Only a path block counts here. A snake standing against a route block keeps it in the world,
+     * but it is not <em>on</em> the route, which is the difference between the start of a route and
+     * the middle of one.
      */
     @Nullable
-    public static BlockPos pathPredecessor(BlockGetter level, BlockPos pos) {
+    public static BlockPos pathLeadingInto(BlockGetter level, BlockPos pos) {
         for (Direction direction : Direction.values()) {
             BlockPos neighbour = pos.relative(direction);
-            if (pointsAt(level.getBlockState(neighbour)) == direction.getOpposite()) {
+            BlockState state = level.getBlockState(neighbour);
+            if (state.getBlock() instanceof SnakePathBlock && state.getValue(SnakePathBlock.FACING) == direction.getOpposite()) {
                 return neighbour;
             }
         }
         return null;
     }
 
-    /** The way {@code state} links on, whether it is a snake block, a path block or a moving end. */
-    @Nullable
-    private static Direction pointsAt(BlockState state) {
-        if (state.getBlock() instanceof SnakeBlock) {
-            return state.getValue(SnakeBlock.FACING);
+    /**
+     * Whether anything still lays claim to the path block at {@code pos}: a path block leading into
+     * it, or a snake standing against it that could set off down it.
+     * <p>
+     * A route block nothing claims has been cut loose and takes itself away, which is how breaking
+     * one block of a route clears everything after it. A snake counts because a route is drawn off
+     * one and walked by one; a moving end counts for the same reason, or a snake eating its own
+     * route would wipe out the rest of it the moment its head left the ground.
+     */
+    public static boolean isClaimed(BlockGetter level, BlockPos pos) {
+        if (pathLeadingInto(level, pos) != null) {
+            return true;
         }
-        if (state.getBlock() instanceof SnakePathBlock) {
-            return state.getValue(SnakePathBlock.FACING);
+        for (Direction direction : Direction.values()) {
+            Block neighbour = level.getBlockState(pos.relative(direction)).getBlock();
+            if (neighbour instanceof SnakeBlock || neighbour instanceof SnakeMovingBlock) {
+                return true;
+            }
         }
-        if (state.getBlock() instanceof SnakeMovingBlock) {
-            return state.getValue(SnakeMovingBlock.FACING);
-        }
-        return null;
+        return false;
     }
 
     /** How many path blocks have been drawn up to and including {@code pos}. */
@@ -249,7 +251,7 @@ public final class SnakeChain {
         BlockPos current = pos;
         while (level.getBlockState(current).getBlock() instanceof SnakePathBlock && seen.add(current) && length <= MAX_PATH_LENGTH) {
             length++;
-            BlockPos previous = pathPredecessor(level, current);
+            BlockPos previous = pathLeadingInto(level, current);
             if (previous == null) {
                 break;
             }

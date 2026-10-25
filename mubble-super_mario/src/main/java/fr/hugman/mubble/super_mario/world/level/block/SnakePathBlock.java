@@ -212,8 +212,8 @@ public class SnakePathBlock extends BaseEntityBlock implements SimpleWaterlogged
     /*==================*/
 
     /**
-     * Falls apart as soon as whatever pointed at this block stops doing so, which is what carries the
-     * break down the rest of the path one block update at a time.
+     * Falls apart as soon as nothing lays claim to this block any more, which is what carries the
+     * break down the rest of the route one block update at a time.
      */
     @Override
     protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos,
@@ -221,7 +221,7 @@ public class SnakePathBlock extends BaseEntityBlock implements SimpleWaterlogged
         if (state.getValue(WATERLOGGED)) {
             ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        if (!state.getValue(ROOT) && SnakeChain.pathPredecessor(level, pos) == null) {
+        if (!state.getValue(ROOT) && !SnakeChain.isClaimed(level, pos)) {
             return state.getValue(WATERLOGGED) ? Fluids.WATER.defaultFluidState().createLegacyBlock() : Blocks.AIR.defaultBlockState();
         }
         return state;
@@ -268,8 +268,11 @@ public class SnakePathBlock extends BaseEntityBlock implements SimpleWaterlogged
 
         BlockState fromState = level.getBlockState(from);
         boolean waterlogged = targetState.getFluidState().is(Fluids.WATER);
-        // The head and a path block link on through the same property, so one line points either.
-        level.setBlockAndUpdate(from, fromState.setValue(FACING, direction));
+        // Only a route block is pointed anywhere. A snake block carries no direction at all: it owns
+        // the route simply by standing against the start of it.
+        if (fromState.getBlock() instanceof SnakePathBlock) {
+            level.setBlockAndUpdate(from, fromState.setValue(FACING, direction));
+        }
         level.setBlockAndUpdate(target, SuperMarioBlocks.SNAKE_PATH.defaultBlockState()
                 .setValue(FACING, direction)
                 .setValue(WATERLOGGED, waterlogged));

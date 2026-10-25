@@ -34,7 +34,6 @@ public class SnakePathGameTest {
 
         BlockPos drawn = end.relative(Direction.SOUTH);
         helper.assertTrue(Snakes.isPath(helper, drawn), "clicking a snake block should draw a path block, not place one");
-        helper.assertBlockProperty(end, SnakeBlock.FACING, Direction.SOUTH);
         helper.assertValueEqual(SnakeChain.head(helper.getLevel(), helper.absolutePos(TAIL)), helper.absolutePos(end),
                 "and should make that block the head of the snake");
         helper.succeed();
@@ -49,7 +48,8 @@ public class SnakePathGameTest {
         Snakes.clickFace(helper, player, end, Direction.EAST);
 
         helper.assertTrue(Snakes.isPath(helper, end.relative(Direction.EAST)), "a path may start on any face");
-        helper.assertBlockProperty(end, SnakeBlock.FACING, Direction.EAST);
+        helper.assertValueEqual(SnakeChain.routeFrom(helper.getLevel(), helper.absolutePos(end)), Direction.EAST,
+                "and the snake should be able to see it from there");
         helper.succeed();
     }
 
@@ -256,17 +256,16 @@ public class SnakePathGameTest {
         helper.succeed();
     }
 
-    /** A path that runs into the snake it belongs to is a dead end, not a loop. */
+    /** A route that runs back into the snake it belongs to is a dead end, not a loop. */
     @GameTest
-    public void apathRunningIntoTheSnakeStopsThere(GameTestHelper helper) {
+    public void arouteRunningIntoTheSnakeStopsThere(GameTestHelper helper) {
         Arena.buildFloor(helper);
         var head = Snakes.build(helper, SuperMarioBlocks.SNAKE_BLOCK, TAIL, Direction.SOUTH, 2);
         helper.setBlock(head.relative(Direction.EAST), SuperMarioBlocks.SNAKE_PATH.defaultBlockState()
                 .setValue(SnakePathBlock.FACING, Direction.NORTH));
-        helper.setBlock(head, helper.getBlockState(head).setValue(SnakeBlock.FACING, Direction.EAST));
 
         helper.assertValueEqual(SnakeChain.path(helper.getLevel(), helper.absolutePos(head)).size(), 1,
-                "a path pointing back at a snake block should end where it meets it");
+                "a route pointing back at a snake block should end where it meets it");
         helper.succeed();
     }
 }

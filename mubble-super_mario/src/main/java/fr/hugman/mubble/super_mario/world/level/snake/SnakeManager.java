@@ -109,10 +109,10 @@ public class SnakeManager extends SavedData {
      * nothing: it has no head, nowhere to go, and starting it would only have it shake and fall to
      * pieces where it stands.
      * <p>
-     * The shape is worked out here and nowhere else. The blocks are laid out without an orientation
-     * of their own, so the body is read off the ones that touch, starting from the block the path
-     * was drawn from; the order that comes out is then written into {@link SnakeBlock#FACING} so the
-     * running snake has a chain to follow. The head also has the last word on
+     * The shape is worked out here and nowhere else. The blocks carry no orientation of their own,
+     * so the body is read off the ones that touch, starting from the block standing against the
+     * route; the order that comes out is held in the record for as long as the snake runs, and the
+     * blocks themselves are left exactly as they were laid. The head has the last word on
      * {@link SnakeBlock#RESPAWNABLE}: it is the block a command is most likely aimed at, and a snake
      * half of which comes back would make no sense.
      *
@@ -134,21 +134,15 @@ public class SnakeManager extends SavedData {
             return null;
         }
 
-        BlockState headState = level.getBlockState(head);
-        boolean respawnable = headState.getValue(SnakeBlock.RESPAWNABLE);
-        for (int i = 0; i < body.size(); i++) {
-            BlockPos blockPos = body.get(i);
-            // Every block but the head points at the one in front of it; the head keeps pointing
-            // into its path.
-            Direction facing = i + 1 < body.size() ? MovingSnake.directionBetween(blockPos, body.get(i + 1)) : startFacing;
+        boolean respawnable = level.getBlockState(head).getValue(SnakeBlock.RESPAWNABLE);
+        for (BlockPos blockPos : body) {
             level.setBlock(blockPos, level.getBlockState(blockPos)
-                    .setValue(SnakeBlock.FACING, facing)
                     .setValue(SnakeBlock.SNAKE_STATE, SnakeBlockState.MOVING)
                     .setValue(SnakeBlock.RESPAWNABLE, respawnable), Block.UPDATE_ALL);
         }
 
         MovingSnake snake = new MovingSnake(this.nextId++, snakeBlock.speed(), respawnable, body, body,
-                startFacing, SnakePhase.MOVING, 0, Optional.empty());
+                startFacing, SnakePhase.MOVING, 0, Optional.empty(), startFacing);
         this.snakes.add(snake);
         this.setDirty();
         return snake;
