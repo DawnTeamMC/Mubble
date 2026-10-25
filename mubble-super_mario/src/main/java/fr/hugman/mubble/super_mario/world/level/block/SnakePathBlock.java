@@ -212,6 +212,30 @@ public class SnakePathBlock extends BaseEntityBlock implements SimpleWaterlogged
     /*==================*/
 
     /**
+     * Looks at itself once, on its own account, as soon as it is put down.
+     * <p>
+     * A route block otherwise only ever hears about its neighbours when one of them changes, and the
+     * very last block a snake lays as it comes apart is put into a world where nothing beside it is
+     * ever going to move again. Every earlier one is swept up by the next block falling; that one
+     * has nothing following it, so without this it sits where the head died, claimed by nothing.
+     */
+    @Override
+    protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
+        if (!level.isClientSide()) {
+            level.scheduleTick(pos, this, 1);
+        }
+    }
+
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!state.getValue(ROOT) && !SnakeChain.isClaimed(level, pos)) {
+            level.setBlockAndUpdate(pos, state.getValue(WATERLOGGED)
+                    ? Fluids.WATER.defaultFluidState().createLegacyBlock()
+                    : Blocks.AIR.defaultBlockState());
+        }
+    }
+
+    /**
      * Falls apart as soon as nothing lays claim to this block any more, which is what carries the
      * break down the rest of the route one block update at a time.
      */
