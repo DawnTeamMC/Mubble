@@ -272,10 +272,7 @@ public class SnakePathBlock extends BaseEntityBlock implements SimpleWaterlogged
         level.setBlockAndUpdate(from, fromState.setValue(FACING, direction));
         level.setBlockAndUpdate(target, SuperMarioBlocks.SNAKE_PATH.defaultBlockState()
                 .setValue(FACING, direction)
-                .setValue(WATERLOGGED, waterlogged)
-                // The first block of a route answers to nothing on a path, so it has to be allowed
-                // to stand without one: a route outlives the snake that was going to walk it.
-                .setValue(ROOT, fromState.getBlock() instanceof SnakeBlock));
+                .setValue(WATERLOGGED, waterlogged));
 
         if (level instanceof ServerLevel serverLevel) {
             playForViewers(serverLevel, target, SuperMarioSounds.SNAKE_PATH_PLACE, 0.8F);
