@@ -2,6 +2,7 @@ package fr.hugman.mubble.test.gametest.super_mario;
 
 import fr.hugman.mubble.super_mario.world.level.block.SnakeBlock;
 import fr.hugman.mubble.super_mario.world.level.block.SnakeBlockState;
+import fr.hugman.mubble.super_mario.world.level.block.SnakePathBlock;
 import fr.hugman.mubble.super_mario.world.level.block.SnakeSpeed;
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import fr.hugman.mubble.super_mario.world.level.snake.MovingSnake;
@@ -201,6 +202,35 @@ public class SnakeMovementGameTest {
                     helper.assertTrue(Snakes.isPath(helper, head.relative(Direction.SOUTH, 4)), "the path ahead should still be there");
                 })
                 .thenSucceed();
+    }
+
+    /**
+     * A route that comes back round on itself is walked once and no more.
+     * <p>
+     * A respawnable snake lays its route again behind its tail, so a route whose last block points
+     * back at where the snake started joins up into a ring the moment the tail moves off: the snake
+     * can then follow it forever, because there is never an end to run out of. It stops itself after
+     * as many blocks as there were to walk when it set off.
+     */
+    @GameTest(maxTicks = 140)
+    public void arouteThatLoopsIsWalkedOnlyOnce(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        BlockPos start = new BlockPos(2, Arena.FLOOR_Y + 1, 2);
+        Snakes.place(helper, SuperMarioBlocks.FAST_SNAKE_BLOCK, start);
+        helper.setBlock(start, helper.getBlockState(start).setValue(SnakeBlock.RESPAWNABLE, true));
+        // A square of route whose last block points back at the cell the snake is standing in.
+        path(helper, start.relative(Direction.SOUTH), Direction.EAST);
+        path(helper, start.relative(Direction.SOUTH).relative(Direction.EAST), Direction.NORTH);
+        path(helper, start.relative(Direction.EAST), Direction.WEST);
+
+        var snake = start(helper, start);
+
+        helper.succeedWhen(() -> helper.assertTrue(isForgotten(helper, snake),
+                "a snake on a ring should stop after one lap rather than going round forever"));
+    }
+
+    private static void path(GameTestHelper helper, BlockPos pos, Direction facing) {
+        helper.setBlock(pos, SuperMarioBlocks.SNAKE_PATH.defaultBlockState().setValue(SnakePathBlock.FACING, facing));
     }
 
     /** A plain snake eats its path; nothing is left where it has been. */

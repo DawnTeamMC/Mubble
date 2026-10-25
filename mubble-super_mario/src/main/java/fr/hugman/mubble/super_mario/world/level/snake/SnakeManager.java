@@ -133,6 +133,8 @@ public class SnakeManager extends SavedData {
         if (startFacing == null || body.isEmpty()) {
             return null;
         }
+        // Measured once, here: a route that loops has no end, and this is how far the snake gets.
+        int routeLength = SnakeChain.path(level, head).size();
 
         boolean respawnable = level.getBlockState(head).getValue(SnakeBlock.RESPAWNABLE);
         for (BlockPos blockPos : body) {
@@ -142,7 +144,7 @@ public class SnakeManager extends SavedData {
         }
 
         MovingSnake snake = new MovingSnake(this.nextId++, snakeBlock.speed(), respawnable, body, body,
-                startFacing, SnakePhase.MOVING, 0, Optional.empty(), startFacing);
+                startFacing, SnakePhase.MOVING, 0, Optional.empty(), startFacing, routeLength, 0);
         this.snakes.add(snake);
         this.setDirty();
         return snake;
