@@ -6,6 +6,7 @@ import fr.hugman.mubble.references.MubbleConsumeEffectTypeKeys;
 import fr.hugman.mubble.references.MubbleEntityTypeKeys;
 import fr.hugman.mubble.references.PowerUpActionTypesKeys;
 import fr.hugman.mubble.super_mario.SuperMario;
+import fr.hugman.mubble.super_mario.references.SuperMarioBlockIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioBlockItemIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioEntityTypeIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioItemIds;
@@ -63,6 +64,12 @@ public class ContentRegistrationTest {
     @DisplayName("every declared item key is registered")
     void itemKeysAreRegistered() {
         assertKeysAreRegistered(SuperMarioItemIds.class, BuiltInRegistries.ITEM, SuperMario.MOD_ID);
+    }
+
+    @Test
+    @DisplayName("every declared item-less block key is registered")
+    void itemLessBlockKeysAreRegistered() {
+        assertKeysAreRegistered(SuperMarioBlockIds.class, BuiltInRegistries.BLOCK, SuperMario.MOD_ID);
     }
 
     @Test
