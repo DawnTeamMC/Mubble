@@ -56,7 +56,9 @@ public class MovingSnake {
             SnakePhase.CODEC.fieldOf("phase").forGetter(snake -> snake.phase),
             Codec.INT.fieldOf("phase_ticks").forGetter(snake -> snake.phaseTicks),
             BlockPos.CODEC.optionalFieldOf("moving_tail").forGetter(snake -> snake.movingTail),
-            Direction.CODEC.optionalFieldOf("heading", Direction.NORTH).forGetter(snake -> snake.heading)
+            Direction.CODEC.optionalFieldOf("heading", Direction.NORTH).forGetter(snake -> snake.heading),
+            Codec.INT.optionalFieldOf("route_length", SnakeChain.MAX_PATH_LENGTH).forGetter(snake -> snake.routeLength),
+            Codec.INT.optionalFieldOf("steps_taken", 0).forGetter(snake -> snake.stepsTaken)
     ).apply(instance, MovingSnake::new));
 
     private final int id;
@@ -80,10 +82,19 @@ public class MovingSnake {
      * route again behind its tail and the block it has just left points back the way it came.
      */
     private Direction heading;
+    /**
+     * How many blocks of route there were to walk when the snake set off.
+     * <p>
+     * A snake walks its route once and no more. Without a count there is nothing to stop a loop: a
+     * respawnable snake lays its route again behind its tail, so a route that bites its own tail
+     * feeds itself forever and the snake never reaches an end to stop at.
+     */
+    private final int routeLength;
+    private int stepsTaken;
 
     public MovingSnake(int id, SnakeSpeed speed, boolean respawnable, List<BlockPos> body, List<BlockPos> startBody,
                        Direction startFacing, SnakePhase phase, int phaseTicks, Optional<BlockPos> movingTail,
-                       Direction heading) {
+                       Direction heading, int routeLength, int stepsTaken) {
         this.id = id;
         this.speed = speed;
         this.respawnable = respawnable;
@@ -94,6 +105,8 @@ public class MovingSnake {
         this.phaseTicks = phaseTicks;
         this.movingTail = movingTail;
         this.heading = heading;
+        this.routeLength = routeLength;
+        this.stepsTaken = stepsTaken;
     }
 
     public int id() {
@@ -170,6 +183,12 @@ public class MovingSnake {
             return true;
         }
 
+        // One lap and no more. A route that comes back round on itself has no end to run out of, so
+        // the snake stops itself the moment it has walked as much of one as there was to begin with.
+        if (this.stepsTaken >= this.routeLength) {
+            return this.beginShake(level);
+        }
+
         // Where the route goes from here, rather than whatever route block happens to be touching
         // the head: a respawnable snake lays its route again behind its tail, and the block it just
         // left is the start of a perfectly good route pointing the way it came.
@@ -205,6 +224,7 @@ public class MovingSnake {
         this.body.removeFirst();
         this.body.add(next);
         this.heading = nextFacing;
+        this.stepsTaken++;
         this.movingTail = Optional.of(tail);
         this.phaseTicks = 0;
         return true;
