@@ -144,7 +144,7 @@ public class SnakeManager extends SavedData {
         }
 
         MovingSnake snake = new MovingSnake(this.nextId++, snakeBlock.speed(), respawnable, body, body,
-                startFacing, SnakePhase.MOVING, 0, Optional.empty(), startFacing, routeLength, 0);
+                startFacing, SnakePhase.MOVING, 0, Optional.empty(), startFacing, routeLength, 0, List.of());
         this.snakes.add(snake);
         this.setDirty();
         return snake;

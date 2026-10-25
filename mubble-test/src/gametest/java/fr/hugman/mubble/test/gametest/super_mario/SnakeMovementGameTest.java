@@ -233,6 +233,32 @@ public class SnakeMovementGameTest {
         helper.setBlock(pos, SuperMarioBlocks.SNAKE_PATH.defaultBlockState().setValue(SnakePathBlock.FACING, facing));
     }
 
+    /**
+     * A snake standing on end comes apart from the bottom up, so every block reaches the ground.
+     * <p>
+     * Coming apart in snake order does not work when the snake is vertical: the tail is the highest
+     * block, the one under it is still solid and about to fall itself, so the tail lands on it on
+     * the spot. Do that all the way down and the snake ends up stacked where it stood, with only
+     * its lowest block ever reaching the floor.
+     */
+    @GameTest(maxTicks = 160)
+    public void asnakeStandingOnEndComesApartFromTheBottom(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        // Hanging in the air, head at the bottom, with a route leading further down.
+        BlockPos head = new BlockPos(2, Arena.FLOOR_Y + 4, 2);
+        Snakes.build(helper, SuperMarioBlocks.FAST_SNAKE_BLOCK, head, Direction.UP, 3);
+        Snakes.drawPath(helper, head, Direction.DOWN, 2);
+
+        start(helper, head);
+
+        helper.succeedWhen(() -> {
+            for (int y = 1; y <= 3; y++) {
+                helper.assertTrue(Snakes.isSnake(helper, new BlockPos(2, Arena.FLOOR_Y + y, 2), SnakeBlockState.IDLE),
+                        "every block should have come to rest in a pile on the floor");
+            }
+        });
+    }
+
     /** A plain snake eats its path; nothing is left where it has been. */
     @GameTest(maxTicks = 60)
     public void aplainSnakeEatsItsPath(GameTestHelper helper) {
