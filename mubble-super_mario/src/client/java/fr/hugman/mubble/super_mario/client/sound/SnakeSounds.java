@@ -3,6 +3,7 @@ package fr.hugman.mubble.super_mario.client.sound;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import fr.hugman.mubble.super_mario.world.level.block.SnakeSpeed;
 import net.minecraft.client.Minecraft;
 
 import java.util.HashMap;
@@ -30,10 +31,10 @@ public final class SnakeSounds {
     }
 
     /** Tells the sound of snake {@code snakeId} where its head is now, starting it if need be. */
-    public static void heardAt(int snakeId, double x, double y, double z) {
+    public static void heardAt(int snakeId, SnakeSpeed speed, double x, double y, double z) {
         SnakeMoveSoundInstance instance = ACTIVE.get(snakeId);
         if (instance == null || instance.isStopped()) {
-            instance = new SnakeMoveSoundInstance(x, y, z);
+            instance = new SnakeMoveSoundInstance(speed, x, y, z);
             ACTIVE.put(snakeId, instance);
             Minecraft.getInstance().getSoundManager().play(instance);
             return;
