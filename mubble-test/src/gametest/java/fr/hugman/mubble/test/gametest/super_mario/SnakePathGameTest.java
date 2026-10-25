@@ -135,6 +135,27 @@ public class SnakePathGameTest {
                 "a path block replaced by anything should take the rest of the path with it"));
     }
 
+    /**
+     * A route that has never been walked belongs to the snake it was drawn off, and goes when that
+     * snake does. Only a route a snake has actually set off down outlives it.
+     */
+    @GameTest(maxTicks = 40)
+    public void adrawnRouteGoesWithTheSnakeItWasDrawnFrom(GameTestHelper helper) {
+        Arena.buildFloor(helper);
+        Snakes.place(helper, SuperMarioBlocks.SNAKE_BLOCK, TAIL);
+        Player player = Snakes.holdingSnakeBlock(helper);
+        Snakes.clickFace(helper, player, TAIL, Direction.SOUTH);
+        Snakes.clickFace(helper, player, TAIL.relative(Direction.SOUTH), Direction.SOUTH);
+
+        helper.destroyBlock(TAIL);
+
+        helper.succeedWhen(() -> {
+            helper.assertFalse(Snakes.isPath(helper, TAIL.relative(Direction.SOUTH)),
+                    "the route should go when the snake it hangs off does");
+            helper.assertFalse(Snakes.isPath(helper, TAIL.relative(Direction.SOUTH, 2)), "all of it");
+        });
+    }
+
     @GameTest
     public void breakingTheLastPathBlockOnlyRemovesIt(GameTestHelper helper) {
         Arena.buildFloor(helper);
