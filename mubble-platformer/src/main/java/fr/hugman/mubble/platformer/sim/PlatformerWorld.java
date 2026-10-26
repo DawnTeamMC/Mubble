@@ -10,9 +10,11 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockCollisions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -127,8 +129,47 @@ public final class PlatformerWorld {
         return null;
     }
 
+    /**
+     * The block whose friction, speed and jump factors apply to the player standing at {@code position},
+     * as vanilla's {@code getBlockPosBelowThatAffectsMyMovement}: the block the feet rest on, the one
+     * closest to the player when they rest on several, so that the edge of a block of ice still slides
+     * with the center over air. Walls and fence gates count as they are, any other block through the
+     * one {@link #SUPPORT_OFFSET} below the feet in its column. With nothing under the feet, it is the
+     * block {@link #SUPPORT_OFFSET} below the center.
+     */
     public BlockPos supportingPos(Vec3 position) {
-        return BlockPos.containing(position.x, position.y - SUPPORT_OFFSET, position.z);
+        var support = this.supportingBlock(position);
+        if (support == null) {
+            return BlockPos.containing(position.x, position.y - SUPPORT_OFFSET, position.z);
+        }
+        var state = this.blockState(support);
+        if (state.is(BlockTags.WALLS) || state.getBlock() instanceof FenceGateBlock) {
+            return support;
+        }
+        return support.atY(Mth.floor(position.y - SUPPORT_OFFSET));
+    }
+
+    /**
+     * The block the feet rest on, as vanilla's {@code checkSupportingBlock} finds it, or null. Vanilla's
+     * {@code Level.findSupportingBlock} measures distances from where the entity stands now, which the
+     * server only knows up to the last validated step: this measures them from {@code position} instead.
+     */
+    @Nullable
+    private BlockPos supportingBlock(Vec3 position) {
+        var box = this.box(position, Pose.STANDING);
+        var feet = new AABB(box.minX, box.minY - 1.0E-6D, box.minZ, box.maxX, box.minY, box.maxZ);
+        var collisions = new BlockCollisions<>(this.level(), this.player, feet, false, (pos, shape) -> pos);
+        BlockPos closest = null;
+        double closestDistance = Double.MAX_VALUE;
+        while (collisions.hasNext()) {
+            var pos = collisions.next();
+            double distance = pos.distToCenterSqr(position);
+            if (distance < closestDistance || distance == closestDistance && (closest == null || closest.compareTo(pos) < 0)) {
+                closest = pos.immutable();
+                closestDistance = distance;
+            }
+        }
+        return closest;
     }
 
     /** The friction of the block under {@code position}, with the friction modifier attribute applied like vanilla does. */
