@@ -13,17 +13,15 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
  * @param gravity       vertical motion
  * @param slope         how stairs, slabs and step-downs are read as slopes
  * @param bounce        what blocks tagged {@code mubble:bounce} do
- * @param effects       how vanilla effects bend the physics
  * @param safetyCeiling the speed nothing may exceed, enforced again by the server validator
  */
-public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope slope, Bounce bounce, Effects effects, double safetyCeiling) {
+public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope slope, Bounce bounce, double safetyCeiling) {
     public static final Codec<PlatformerPhysics> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Ground.CODEC.fieldOf("ground").forGetter(PlatformerPhysics::ground),
             Air.CODEC.fieldOf("air").forGetter(PlatformerPhysics::air),
             Gravity.CODEC.fieldOf("gravity").forGetter(PlatformerPhysics::gravity),
             Slope.CODEC.fieldOf("slope").forGetter(PlatformerPhysics::slope),
             Bounce.CODEC.fieldOf("bounce").forGetter(PlatformerPhysics::bounce),
-            Effects.CODEC.fieldOf("effects").forGetter(PlatformerPhysics::effects),
             Codec.doubleRange(0.1D, 16.0D).fieldOf("safety_ceiling").forGetter(PlatformerPhysics::safetyCeiling)
     ).apply(instance, PlatformerPhysics::new));
 
@@ -81,7 +79,9 @@ public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope s
      * @param apexHangMultiplier   what is left of gravity just after the apex, as long as jump is held
      * @param apexHangThreshold    downward speed under which the apex hang applies
      * @param releaseCut           what upward speed keeps when jump is released early
-     * @param terminalVelocity     the fastest fall
+     * @param terminalVelocity     the fastest fall, at the default value of the vanilla gravity attribute:
+     *                             it goes with gravity like vanilla's, which is how slow falling slows
+     *                             the fall down
      * @param jumpHeightMultiplier scale of every jump height; the base value of
      *                             {@code mubble:platformer_jump_height}
      */
@@ -122,21 +122,5 @@ public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope s
                 Codec.doubleRange(0.0D, 64.0D).fieldOf("ground_pound_height").forGetter(Bounce::groundPoundHeight),
                 Codec.doubleRange(0.0D, 16.0D).fieldOf("min_fall_speed").forGetter(Bounce::minFallSpeed)
         ).apply(instance, Bounce::new));
-    }
-
-    /**
-     * Jump boost needs nothing here: it raises the take-off speed as in vanilla, see
-     * {@link fr.hugman.mubble.platformer.sim.PlatformerTuning#jumpHeight()}.
-     *
-     * @param slowFallingMaxFallSpeed the fastest fall under slow falling
-     * @param levitationSpeedPerLevel upward speed every level of levitation aims for
-     * @param levitationResponse      how fast the vertical speed reaches it, per tick
-     */
-    public record Effects(double slowFallingMaxFallSpeed, double levitationSpeedPerLevel, double levitationResponse) {
-        public static final Codec<Effects> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.doubleRange(0.0D, 4.0D).fieldOf("slow_falling_max_fall_speed").forGetter(Effects::slowFallingMaxFallSpeed),
-                Codec.doubleRange(0.0D, 4.0D).fieldOf("levitation_speed_per_level").forGetter(Effects::levitationSpeedPerLevel),
-                Codec.doubleRange(0.0D, 1.0D).fieldOf("levitation_response").forGetter(Effects::levitationResponse)
-        ).apply(instance, Effects::new));
     }
 }

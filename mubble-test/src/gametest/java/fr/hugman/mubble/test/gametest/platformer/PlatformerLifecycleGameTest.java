@@ -279,7 +279,7 @@ public class PlatformerLifecycleGameTest {
         var physics = profile.physics();
         var g = physics.ground();
         var ground = new PlatformerPhysics.Ground(g.walkSpeed(), runSpeed, g.accelTicks(), g.decelTicks(), g.turnSpeed(), g.overCapDrag(), g.analogRunThreshold(), g.stickDeadzone(), g.minGrip());
-        var newPhysics = new PlatformerPhysics(ground, physics.air(), physics.gravity(), physics.slope(), physics.bounce(), physics.effects(), physics.safetyCeiling());
+        var newPhysics = new PlatformerPhysics(ground, physics.air(), physics.gravity(), physics.slope(), physics.bounce(), physics.safetyCeiling());
         return new PlatformerProfile(newPhysics, profile.grace(), profile.interaction(), profile.costs(), profile.fallDamage(), profile.camera(), profile.validation(), profile.moves());
     }
 

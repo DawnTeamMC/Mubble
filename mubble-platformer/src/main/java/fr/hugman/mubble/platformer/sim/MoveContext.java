@@ -42,6 +42,10 @@ public final class MoveContext {
     private static final double PLAIN_FRICTION = 0.6D;
     /** How long one tick lasts, which is what an input buffer loses every tick. */
     public static final int TICK_MS = 50;
+    /** Upward speed every level of levitation aims for, as vanilla's {@code LivingEntity.travelInAir}. */
+    private static final double LEVITATION_SPEED_PER_LEVEL = 0.05D;
+    /** Share of the way to that speed the vertical speed goes every tick, as vanilla's {@code LivingEntity.travelInAir}. */
+    private static final double LEVITATION_RESPONSE = 0.2D;
 
     private final PlatformerState state;
     private final PlatformerInputFrame input;
@@ -618,7 +622,10 @@ public final class MoveContext {
      * The displacement is integrated with the trapezoidal rule ({@code dy = vy - g / 2}), which lands a
      * jump authored as a height and a number of ticks exactly on that height. Gravity is the one of
      * the current arc while climbing, a fraction of it just past the apex as long as jump is held, and
-     * a multiple of it on the way down.
+     * a multiple of it on the way down, all scaled by the vanilla gravity (see
+     * {@link PlatformerTuning#gravityScale}). So is the terminal velocity: vanilla's comes from its
+     * gravity and drag, which is why slow falling, lowering the gravity, also slows the fall down.
+     * Levitation lifts the player as in vanilla.
      */
     public void gravity() {
         var gravity = this.physics.gravity();
@@ -629,13 +636,13 @@ public final class MoveContext {
         }
         double displacement;
         if (this.tuning.levitation() >= 0) {
-            var effects = this.physics.effects();
-            double target = effects.levitationSpeedPerLevel() * (this.tuning.levitation() + 1);
-            double next = vy + (target - vy) * effects.levitationResponse();
+            double target = LEVITATION_SPEED_PER_LEVEL * (this.tuning.levitation() + 1);
+            double next = vy + (target - vy) * LEVITATION_RESPONSE;
             displacement = (vy + next) * 0.5D;
             vy = next;
         } else {
             double arc = this.state.arcGravity > 0.0D ? this.state.arcGravity : this.tuning.baseGravity();
+            boolean falling = vy <= 0.0D;
             double g;
             if (vy > 0.0D) {
                 g = arc;
@@ -644,13 +651,10 @@ public final class MoveContext {
             } else {
                 g = arc * gravity.fallMultiplier();
             }
-            g *= this.tuning.gravityScale();
+            g *= this.tuning.gravityScale(falling);
             displacement = vy - g * 0.5D;
             vy -= g;
-            double terminal = gravity.terminalVelocity();
-            if (this.tuning.slowFalling()) {
-                terminal = Math.min(terminal, this.physics.effects().slowFallingMaxFallSpeed());
-            }
+            double terminal = gravity.terminalVelocity() * this.tuning.gravityScale(true);
             vy = Math.max(vy, -terminal);
             displacement = Math.max(displacement, -terminal);
         }

@@ -1,6 +1,5 @@
 package fr.hugman.mubble.platformer.move;
 
-import fr.hugman.mubble.platformer.sim.PlatformerTuning;
 import fr.hugman.mubble.platformer.sim.MoveContext;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Blocks;
@@ -61,6 +60,7 @@ public class ClimbMove extends PlatformerMove {
         // as vanilla: the player moves with the speed of the tick, no faster down than a climber
         // slides, not at all while holding on; climbing sets the speed after the move, gravity follows.
         // Crouch climbs down scaffolding, and sinks into powder snow, rather than holding on
+        boolean falling = state.vy <= 0.0D;
         double vy = Math.max(state.vy, -max);
         var climbable = ctx.climbable();
         if (vy < 0.0D && ctx.crouchHeld() && (climbable == null || !climbable.is(Blocks.SCAFFOLDING) && !climbable.is(Blocks.POWDER_SNOW))) {
@@ -70,7 +70,7 @@ public class ClimbMove extends PlatformerMove {
         if (ctx.jumpHeld() || ctx.stickPushesIntoWall()) {
             vy = ctx.param(this, CLIMB_SPEED);
         }
-        state.vy = (vy - PlatformerTuning.VANILLA_GRAVITY * ctx.tuning().gravityScale()) * ctx.tuning().modifiedAirDrag(VERTICAL_DRAG);
+        state.vy = (vy - ctx.tuning().effectiveGravity(falling)) * ctx.tuning().modifiedAirDrag(VERTICAL_DRAG);
     }
 
     /** Off what there is to climb, the player stands or falls. */
