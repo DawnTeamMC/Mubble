@@ -179,10 +179,19 @@ public final class PlatformerWorld {
         return Math.clamp(1.0F - (1.0F - friction) * modifier, 0.0F, 1.0F);
     }
 
-    /** The speed factor of the blocks at and under {@code position}: soul sand, honey... */
+    /**
+     * The speed factor of the blocks at and under {@code position} (soul sand, honey...), as vanilla's
+     * {@code LivingEntity.getBlockSpeedFactor}: water and bubble columns keep their own factor whatever
+     * lies under them, and the movement efficiency attribute (soul speed) brings the factor back
+     * towards 1.
+     */
     public float speedFactor(Vec3 position) {
-        float here = this.blockState(BlockPos.containing(position)).getBlock().getSpeedFactor();
-        return here == 1.0F ? this.blockState(this.supportingPos(position)).getBlock().getSpeedFactor() : here;
+        var here = this.blockState(BlockPos.containing(position));
+        float factor = here.getBlock().getSpeedFactor();
+        if (factor == 1.0F && !here.is(Blocks.WATER) && !here.is(Blocks.BUBBLE_COLUMN)) {
+            factor = this.blockState(this.supportingPos(position)).getBlock().getSpeedFactor();
+        }
+        return Mth.lerp((float) this.player.getAttributeValue(Attributes.MOVEMENT_EFFICIENCY), factor, 1.0F);
     }
 
     /** The jump factor of the blocks at and under {@code position}: honey... */
