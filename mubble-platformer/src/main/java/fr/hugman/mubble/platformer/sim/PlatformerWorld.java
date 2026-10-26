@@ -10,10 +10,13 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockCollisions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.PowderSnowBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -108,11 +111,12 @@ public final class PlatformerWorld {
 
     /**
      * What the player can climb at {@code position}, as vanilla has it: a block tagged climbable
-     * (ladders, vines, scaffolding...), or an open trapdoor over a ladder facing the same way. Null
-     * when there is nothing to climb.
+     * (ladders, vines, scaffolding...), an open trapdoor over a ladder facing the same way, or powder
+     * snow the hitbox {@code box} is in, for a player who can walk on it (see {@link #powderSnow}).
+     * Null when there is nothing to climb.
      */
     @Nullable
-    public BlockState climbable(Vec3 position) {
+    public BlockState climbable(Vec3 position, AABB box) {
         var pos = BlockPos.containing(position);
         var state = this.blockState(pos);
         if (state.is(BlockTags.CLIMBABLE)) {
@@ -124,11 +128,70 @@ public final class PlatformerWorld {
                 return state;
             }
         }
+        return this.powderSnow(box);
+    }
+
+    /**
+     * Powder snow {@code box} is in, when the player can walk on it: vanilla lets such a player climb
+     * out of powder snow they were in, as out of a ladder ({@code handleRelativeFrictionAndCalculateMovement}).
+     * Whether they can walk on it only depends on their boots, which both sides know alike.
+     */
+    @Nullable
+    private BlockState powderSnow(AABB box) {
+        if (!PowderSnowBlock.canEntityWalkOnPowderSnow(this.player)) {
+            return null;
+        }
+        var inner = box.deflate(1.0E-5D);
+        for (var pos : BlockPos.betweenClosed(BlockPos.containing(inner.minX, inner.minY, inner.minZ), BlockPos.containing(inner.maxX, inner.maxY, inner.maxZ))) {
+            var state = this.blockState(pos);
+            if (state.is(Blocks.POWDER_SNOW)) {
+                return state;
+            }
+        }
         return null;
     }
 
+    /**
+     * The block whose friction, speed and jump factors apply to the player standing at {@code position},
+     * as vanilla's {@code getBlockPosBelowThatAffectsMyMovement}: the block the feet rest on, the one
+     * closest to the player when they rest on several, so that the edge of a block of ice still slides
+     * with the center over air. Walls and fence gates count as they are, any other block through the
+     * one {@link #SUPPORT_OFFSET} below the feet in its column. With nothing under the feet, it is the
+     * block {@link #SUPPORT_OFFSET} below the center.
+     */
     public BlockPos supportingPos(Vec3 position) {
-        return BlockPos.containing(position.x, position.y - SUPPORT_OFFSET, position.z);
+        var support = this.supportingBlock(position);
+        if (support == null) {
+            return BlockPos.containing(position.x, position.y - SUPPORT_OFFSET, position.z);
+        }
+        var state = this.blockState(support);
+        if (state.is(BlockTags.WALLS) || state.getBlock() instanceof FenceGateBlock) {
+            return support;
+        }
+        return support.atY(Mth.floor(position.y - SUPPORT_OFFSET));
+    }
+
+    /**
+     * The block the feet rest on, as vanilla's {@code checkSupportingBlock} finds it, or null. Vanilla's
+     * {@code Level.findSupportingBlock} measures distances from where the entity stands now, which the
+     * server only knows up to the last validated step: this measures them from {@code position} instead.
+     */
+    @Nullable
+    private BlockPos supportingBlock(Vec3 position) {
+        var box = this.box(position, Pose.STANDING);
+        var feet = new AABB(box.minX, box.minY - 1.0E-6D, box.minZ, box.maxX, box.minY, box.maxZ);
+        var collisions = new BlockCollisions<>(this.level(), this.player, feet, false, (pos, shape) -> pos);
+        BlockPos closest = null;
+        double closestDistance = Double.MAX_VALUE;
+        while (collisions.hasNext()) {
+            var pos = collisions.next();
+            double distance = pos.distToCenterSqr(position);
+            if (distance < closestDistance || distance == closestDistance && (closest == null || closest.compareTo(pos) < 0)) {
+                closest = pos.immutable();
+                closestDistance = distance;
+            }
+        }
+        return closest;
     }
 
     /** The friction of the block under {@code position}, with the friction modifier attribute applied like vanilla does. */
@@ -138,10 +201,19 @@ public final class PlatformerWorld {
         return Math.clamp(1.0F - (1.0F - friction) * modifier, 0.0F, 1.0F);
     }
 
-    /** The speed factor of the blocks at and under {@code position}: soul sand, honey... */
+    /**
+     * The speed factor of the blocks at and under {@code position} (soul sand, honey...), as vanilla's
+     * {@code LivingEntity.getBlockSpeedFactor}: water and bubble columns keep their own factor whatever
+     * lies under them, and the movement efficiency attribute (soul speed) brings the factor back
+     * towards 1.
+     */
     public float speedFactor(Vec3 position) {
-        float here = this.blockState(BlockPos.containing(position)).getBlock().getSpeedFactor();
-        return here == 1.0F ? this.blockState(this.supportingPos(position)).getBlock().getSpeedFactor() : here;
+        var here = this.blockState(BlockPos.containing(position));
+        float factor = here.getBlock().getSpeedFactor();
+        if (factor == 1.0F && !here.is(Blocks.WATER) && !here.is(Blocks.BUBBLE_COLUMN)) {
+            factor = this.blockState(this.supportingPos(position)).getBlock().getSpeedFactor();
+        }
+        return Mth.lerp((float) this.player.getAttributeValue(Attributes.MOVEMENT_EFFICIENCY), factor, 1.0F);
     }
 
     /** The jump factor of the blocks at and under {@code position}: honey... */

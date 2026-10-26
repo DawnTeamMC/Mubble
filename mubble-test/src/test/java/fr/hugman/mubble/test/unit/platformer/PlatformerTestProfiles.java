@@ -28,7 +28,6 @@ public final class PlatformerTestProfiles {
                         new PlatformerPhysics.Gravity(0.09D, 1.6D, 0.5D, 0.08D, 0.5D, 3.92D, 1.0D),
                         new PlatformerPhysics.Slope(4, 1.0D),
                         new PlatformerPhysics.Bounce(4.0D, 10.0D, 7.0D, 0.2D),
-                        new PlatformerPhysics.Effects(0.35D, 0.1D, 0.05D, 0.2D),
                         4.0D),
                 new PlatformerGrace(3, 150, 150, 4, 0.3D, 0.5D, 8, 0.35D, 4, 1),
                 InteractionPolicy.FULL,

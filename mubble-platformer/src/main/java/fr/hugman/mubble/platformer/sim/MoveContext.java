@@ -45,6 +45,10 @@ public final class MoveContext {
     private static final double SLIPPERY_FRICTION = 0.9D;
     /** How long one tick lasts, which is what an input buffer loses every tick. */
     public static final int TICK_MS = 50;
+    /** Upward speed every level of levitation aims for, as vanilla's {@code LivingEntity.travelInAir}. */
+    private static final double LEVITATION_SPEED_PER_LEVEL = 0.05D;
+    /** Share of the way to that speed the vertical speed goes every tick, as vanilla's {@code LivingEntity.travelInAir}. */
+    private static final double LEVITATION_RESPONSE = 0.2D;
 
     private final PlatformerState state;
     private final PlatformerInputFrame input;
@@ -282,7 +286,7 @@ public final class MoveContext {
     @Nullable
     public BlockState climbable() {
         if (!this.climbableProbed) {
-            this.climbable = this.world.climbable(this.start);
+            this.climbable = this.world.climbable(this.start, this.box());
             this.climbableProbed = true;
         }
         return this.climbable;
@@ -586,8 +590,9 @@ public final class MoveContext {
     public void airMotion(double controlScale) {
         var air = this.physics.air();
         double control = this.tuning.airControl() * controlScale;
-        double vx = this.state.vx * this.tuning.airDrag();
-        double vz = this.state.vz * this.tuning.airDrag();
+        double drag = this.tuning.effectiveAirDrag();
+        double vx = this.state.vx * drag;
+        double vz = this.state.vz * drag;
         if (this.hasStick() && control > 0.0D) {
             double runSpeed = this.tuning.effectiveRunSpeed();
             double cap = runSpeed * this.stickMagnitude;
@@ -627,7 +632,10 @@ public final class MoveContext {
      * The displacement is integrated with the trapezoidal rule ({@code dy = vy - g / 2}), which lands a
      * jump authored as a height and a number of ticks exactly on that height. Gravity is the one of
      * the current arc while climbing, a fraction of it just past the apex as long as jump is held, and
-     * a multiple of it on the way down.
+     * a multiple of it on the way down, all scaled by the vanilla gravity (see
+     * {@link PlatformerTuning#gravityScale}). So is the terminal velocity: vanilla's comes from its
+     * gravity and drag, which is why slow falling, lowering the gravity, also slows the fall down.
+     * Levitation lifts the player as in vanilla.
      */
     public void gravity() {
         var gravity = this.physics.gravity();
@@ -638,13 +646,13 @@ public final class MoveContext {
         }
         double displacement;
         if (this.tuning.levitation() >= 0) {
-            var effects = this.physics.effects();
-            double target = effects.levitationSpeedPerLevel() * (this.tuning.levitation() + 1);
-            double next = vy + (target - vy) * effects.levitationResponse();
+            double target = LEVITATION_SPEED_PER_LEVEL * (this.tuning.levitation() + 1);
+            double next = vy + (target - vy) * LEVITATION_RESPONSE;
             displacement = (vy + next) * 0.5D;
             vy = next;
         } else {
             double arc = this.state.arcGravity > 0.0D ? this.state.arcGravity : this.tuning.baseGravity();
+            boolean falling = vy <= 0.0D;
             double g;
             if (vy > 0.0D) {
                 g = arc;
@@ -653,13 +661,10 @@ public final class MoveContext {
             } else {
                 g = arc * gravity.fallMultiplier();
             }
-            g *= this.tuning.gravityScale();
+            g *= this.tuning.gravityScale(falling);
             displacement = vy - g * 0.5D;
             vy -= g;
-            double terminal = gravity.terminalVelocity();
-            if (this.tuning.slowFalling()) {
-                terminal = Math.min(terminal, this.physics.effects().slowFallingMaxFallSpeed());
-            }
+            double terminal = gravity.terminalVelocity() * this.tuning.gravityScale(true);
             vy = Math.max(vy, -terminal);
             displacement = Math.max(displacement, -terminal);
         }
@@ -683,8 +688,9 @@ public final class MoveContext {
      * Starts an arc reaching {@code height} blocks in {@code ticksToApex} ticks.
      * <p>
      * The gravity and the take-off speed are derived from both ({@code g = 2h/t²}, {@code v = 2h/t}),
-     * the height being scaled by {@code mubble:platformer_jump_height} (jump boost included) and by the
-     * jump factor of the block underfoot. A variable arc is cut short when jump is released early.
+     * the height being scaled by {@link PlatformerTuning#jumpHeight()} ({@code mubble:platformer_jump_height},
+     * the vanilla jump strength and jump boost) and by the jump factor of the block underfoot. A variable
+     * arc is cut short when jump is released early.
      */
     public void launch(double height, double ticksToApex, boolean variable) {
         double h = height * this.tuning.jumpHeight() * this.world.jumpFactor(this.start);

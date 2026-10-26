@@ -97,7 +97,6 @@ public class PlatformerProfileProvider extends FabricDynamicRegistryProvider {
                 new PlatformerPhysics.Gravity(0.09D, 1.6D, 0.5D, 0.08D, 0.5D, 3.92D, jumpHeightMultiplier),
                 new PlatformerPhysics.Slope(4, 1.0D),
                 new PlatformerPhysics.Bounce(4.0D, 10.0D, 7.0D, 0.2D),
-                new PlatformerPhysics.Effects(0.35D, 0.1D, 0.05D, 0.2D),
                 safetyCeiling
         );
     }

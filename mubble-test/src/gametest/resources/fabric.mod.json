@@ -42,7 +42,8 @@
       "fr.hugman.mubble.test.gametest.platformer.PlatformerLifecycleGameTest",
       "fr.hugman.mubble.test.gametest.platformer.PlatformerAimGameTest",
       "fr.hugman.mubble.test.gametest.platformer.PlatformerGymGameTest",
-      "fr.hugman.mubble.test.gametest.platformer.PlatformerSolidEntityGameTest"
+      "fr.hugman.mubble.test.gametest.platformer.PlatformerSolidEntityGameTest",
+      "fr.hugman.mubble.test.gametest.platformer.PlatformerEffectsGameTest"
     ]
   },
   "mixins": [
