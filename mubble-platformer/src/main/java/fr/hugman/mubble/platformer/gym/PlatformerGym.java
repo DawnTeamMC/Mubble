@@ -39,9 +39,9 @@ public final class PlatformerGym {
         LEDGES("Ledges", "2 to 6 high"),
         STAIRS("Stair descent", "roll and slide"),
         WALL_JUMP("Wall jump shaft", "3 wide, 12 high"),
-        NO_WALL_JUMP("No wall jump", "packed ice"),
+        NO_WALL_JUMP("No wall jump", "slippery ice"),
         BOUNCE("Bounce", "slime"),
-        MOMENTUM("Keeps momentum", "ice"),
+        MOMENTUM("Keeps momentum", "slippery ice"),
         VAULT("Vault", "1 high");
 
         private final String title;

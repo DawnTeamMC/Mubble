@@ -949,6 +949,41 @@ public class PlatformerMovementGameTest {
     public void iceKeepsMomentum(GameTestHelper helper) {
         PlatformerTestKit.floor(helper, Blocks.ICE.defaultBlockState());
         var player = standing(helper, new BlockPos(5, 1, 2));
+        assertKeepsMomentum(helper, player, "ice");
+        helper.succeed();
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
+    public void aFrictionModifierMakesStoneKeepMomentum(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        var player = standing(helper, new BlockPos(5, 1, 2));
+        makeSlippery(player);
+        assertKeepsMomentum(helper, player, "stone made slippery by the friction modifier");
+        helper.succeed();
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
+    public void aFrictionModifierMakesStoneWallsRefuseWallJumps(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        PlatformerTestKit.fill(helper, new BlockPos(0, 1, 7), new BlockPos(9, 11, 7), Blocks.STONE.defaultBlockState());
+        var player = PlatformerTestKit.client(helper, new BlockPos(5, 9, 6), PlatformerProfileIds.TRIAL);
+        makeSlippery(player);
+        var frames = new PlatformerTestKit.Frames().forward();
+        for (int i = 0; i < 30 && !player.onGround(); i++) {
+            PlatformerTestKit.step(player, frames.next());
+            helper.assertFalse(move(player) == PlatformerMoves.WALL_SLIDE, "a wall made slippery by the friction modifier should not be slid down");
+        }
+        helper.assertTrue(player.onGround(), "the player never landed, the test proves nothing");
+        helper.succeed();
+    }
+
+    /** Makes every block as slippery as ice for {@code player}: a plain friction of 0.6 becomes 0.96. */
+    private static void makeSlippery(Player player) {
+        player.getAttribute(Attributes.FRICTION_MODIFIER).addTransientModifier(new AttributeModifier(Identifier.fromNamespaceAndPath("mubble", "test_friction"), -0.9D, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+    }
+
+    /** Runs {@code player} up to speed, then lets go of the stick, and checks the speed carries on. */
+    private static void assertKeepsMomentum(GameTestHelper helper, Player player, String floor) {
         var frames = new PlatformerTestKit.Frames().forward().hold(SPRINT);
         for (int i = 0; i < 20; i++) {
             PlatformerTestKit.step(player, frames.next());
@@ -959,9 +994,8 @@ public class PlatformerMovementGameTest {
             PlatformerTestKit.step(player, frames.next());
         }
         double after = PlatformerController.of(player).state().horizontalSpeed();
-        helper.assertTrue(speed > 0.1D, "the run on ice never picked up speed, the test proves nothing: " + speed);
-        helper.assertTrue(after > speed * 0.9D, "letting go of the stick on ice should keep the speed: from " + speed + " to " + after);
-        helper.succeed();
+        helper.assertTrue(speed > 0.1D, "the run on " + floor + " never picked up speed, the test proves nothing: " + speed);
+        helper.assertTrue(after > speed * 0.9D, "letting go of the stick on " + floor + " should keep the speed: from " + speed + " to " + after);
     }
 
     /** Drops a player from 3 blocks above the floor, and returns the highest the feet went after the landing. */

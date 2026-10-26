@@ -237,9 +237,12 @@ Using an item slows the player down as in vanilla: the client sets `PlatformerIn
 
 | Tag | Effect | Default |
 |---|---|---|
-| `#mubble:no_wall_jump` | No wall slide or wall jump against these | ice, packed ice, blue ice |
+| `#mubble:no_wall_jump` | No wall slide or wall jump against these, on top of the slippery blocks | empty |
 | `#mubble:no_ledge_grab` | Edges of these cannot be grabbed | `#minecraft:leaves` |
-| `#mubble:keeps_momentum` | Ground speed is barely lost on these | ice, packed ice, blue ice |
+| `#mubble:keeps_momentum` | Ground speed is barely lost on these, on top of the slippery blocks | empty |
+| `#mubble:not_slippery` | Never slippery, whatever their friction: they only keep momentum or refuse wall jumps when tagged for it | empty |
+
+A block is slippery when its friction, with the player's `minecraft:friction_modifier` attribute applied as vanilla does, reaches 0.9: ice, packed ice and blue ice (0.98 and up) are, slime (0.8) is not, since vanilla makes it sticky to walk on. Slippery blocks keep momentum underfoot and refuse wall jumps, so a modded block with an icy friction, or a player whose friction modifier makes stone slippery, behaves like ice without a tag. The tags only force the behaviour either way: tag a block `#mubble:not_slippery` to cancel both, then `#mubble:keeps_momentum` or `#mubble:no_wall_jump` to bring back one.
 
 Bounces come from vanilla's own: a landing bounces when the block has a bounce restitution (slime 1, beds 0.75) or the player has the `minecraft:bounciness` attribute, unless the block is tagged `#minecraft:suppresses_bounce`, the player holds crouch (the platformer's sneak) or falls slower than a tick of gravity, as in `Entity.restituteMovementAfterCollisions`. The highest of the two restitutions scales the heights of `physics.bounce`, which keeps its `min_fall_speed` on top. Vanilla still mirrors the velocity of the entity as it moves, but the step writes its own over it right after, so a landing never bounces twice.
 
@@ -364,7 +367,7 @@ Client side, `/mubble_client platformer record` starts recording the steps of yo
 
 ## The gym
 
-`/mubble platformer gym` builds nine 64 block lanes side by side, each with a sign: gaps of 2 to 8 blocks, walls and ledges of 2 to 6 blocks, a 10 block stair descent, a wall jump shaft, the same shaft in packed ice (no wall jump), slime (bounce), ice (keeps momentum) and 1 block steps (vault). Gold blocks mark take-off points.
+`/mubble platformer gym` builds nine 64 block lanes side by side, each with a sign: gaps of 2 to 8 blocks, walls and ledges of 2 to 6 blocks, a 10 block stair descent, a wall jump shaft, the same shaft in packed ice (slippery, no wall jump), slime (bounce), ice (slippery, keeps momentum) and 1 block steps (vault). Gold blocks mark take-off points.
 
 ## Debug HUD
 
