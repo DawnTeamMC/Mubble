@@ -70,8 +70,6 @@ A data pack reload (`/reload`) re-reads every profile file and sends the new val
                  "release_cut": 0.5, "terminal_velocity": 3.92, "jump_height_multiplier": 0.9 },
     "slope": { "window_ticks": 4, "snap_down": 1.0 },
     "bounce": { "height": 4, "ticks_to_apex": 10, "ground_pound_height": 7, "min_fall_speed": 0.2 },
-    "effects": { "jump_boost_height_per_level": 0.35, "slow_falling_max_fall_speed": 0.1,
-                 "levitation_speed_per_level": 0.05, "levitation_response": 0.2 },
     "safety_ceiling": 2.0
   },
   "grace": { "coyote_ticks": 3, "jump_buffer_ms": 150, "action_buffer_ms": 150, "chain_window_ticks": 4,
@@ -102,7 +100,14 @@ Speeds are in blocks per tick, durations in ticks unless the name says `_ms`, he
 
 **Grace.** Coyote time, a jump/action input buffer counted in milliseconds from the frame the key went down (not the tick), the window to chain a jump into the next, ledge magnetism, head-bonk corner correction, and wall jump leniency.
 
-**Effects.** Jump Boost adds height per level, Slow Falling caps the fall, Levitation lifts. Speed and Slowness scale the run speed.
+**Effects and vanilla attributes.** The physics read vanilla's effects and attributes through vanilla's own getters (`PlatformerTuning`), so that what any mod does with them bends the platformer moves as it bends vanilla movement. The profile has no numbers of its own for them:
+
+- Take-off speeds scale with `minecraft:jump_strength` plus Jump Boost (`getJumpBoostPower`), over the default jump strength, and heights with the square of that: Jump Boost I jumps 53% higher, as in vanilla. The jump factor of blocks (honey) applies on top, from the block underfoot.
+- Every gravity of the profile, and `terminal_velocity`, is written against the default `minecraft:gravity` (0.08) and scales with the gravity the player has, as `LivingEntity.getEffectiveGravity` has it: Slow Falling brings it down to 0.01 at most on the way down, an eighth, which lands the fall on vanilla's 0.49 b/t. Levitation lifts at vanilla's 0.05 b/t per level, reached at vanilla's pace.
+- Speed and Slowness, and any other modifier of `minecraft:movement_speed` but sprinting's, scale the walk and run speeds. Blindness rules out the `#mubble:speed` moves, as it rules out sprinting.
+- `minecraft:air_drag_modifier` bends `air.drag` and the vertical drag of climbing as it bends vanilla's drags; `minecraft:friction_modifier` bends the friction of blocks.
+- Friction, speed and jump factors come from the block the feet rest on, found as vanilla finds it: the edge of a block of ice still slides with the center over air. `minecraft:movement_efficiency` (Soul Speed) brings the speed factor back towards 1.
+- Swimming and climbing run on vanilla's constants (`LivingEntity.WATER_DRAG` and the others); `minecraft:water_movement_efficiency` (Depth Strider) and Dolphin's Grace work as in `travelInWater`. A player who can walk on powder snow climbs out of it, as in vanilla.
 
 **Cues** (sound, particles and rumble) are data: per move, `start`, `tick`, `land` and `boost` cues with `sound`, `volume`, `pitch`, `particle`, `surface` (particles of the block underfoot), `shape` (`burst`, `ring`, `trail`), `count`, `count_per_speed`, `spread`, `speed`, `interval` (ticks, for `tick` cues), and `rumble`: `{"strong": 0–1, "weak": 0–1, "ticks": n, "scale_with_speed": bool}`, the two motors of the controller, felt only by the player making the move, only on a controller (through Controlify). Other players' clients play the sounds and particles too. The shipped moves rumble lightly: a tap for jumps, a thud for impacts.
 
