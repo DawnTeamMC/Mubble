@@ -5,6 +5,7 @@ import fr.hugman.mubble.platformer.move.PlatformerMove;
 import fr.hugman.mubble.platformer.PlatformerAttributes;
 import java.util.function.Predicate;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -26,6 +27,7 @@ import net.minecraft.world.entity.player.Player;
  *                         strength attribute and jump boost (see {@link #jumpStrengthScale})
  * @param gravityScale     vanilla gravity attribute over its default value
  * @param airDrag          value of {@code mubble:platformer_air_drag}
+ * @param airDragModifier  value of the vanilla air drag modifier attribute, see {@link #modifiedAirDrag}
  * @param airControl       value of {@code mubble:platformer_air_control}
  * @param coyoteTicks      value of {@code mubble:platformer_coyote_ticks}
  * @param rollBoost        value of {@code mubble:platformer_roll_boost}
@@ -46,6 +48,7 @@ public record PlatformerTuning(
         double jumpHeight,
         double gravityScale,
         double airDrag,
+        double airDragModifier,
         double airControl,
         int coyoteTicks,
         double rollBoost,
@@ -72,6 +75,7 @@ public record PlatformerTuning(
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_JUMP_HEIGHT) * jumpStrengthScale(player),
                 player.getAttributeValue(Attributes.GRAVITY) / VANILLA_GRAVITY,
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_AIR_DRAG),
+                player.getAttributeValue(Attributes.AIR_DRAG_MODIFIER),
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_AIR_CONTROL),
                 (int) Math.round(player.getAttributeValue(PlatformerAttributes.PLATFORMER_COYOTE_TICKS)),
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_ROLL_BOOST),
@@ -122,6 +126,20 @@ public record PlatformerTuning(
 
     public double effectiveRunSpeed() {
         return this.runSpeed * this.speedRatio;
+    }
+
+    /** What horizontal speed keeps each tick in the air, the vanilla air drag modifier applied. */
+    public double effectiveAirDrag() {
+        return this.modifiedAirDrag(this.airDrag);
+    }
+
+    /**
+     * {@code drag} with the vanilla air drag modifier attribute applied, the way vanilla applies it to
+     * its own air drags ({@code LivingEntity.computeModifiedFriction}): above 1 it takes more speed
+     * away, below 1 less, and at 0 none.
+     */
+    public double modifiedAirDrag(double drag) {
+        return Mth.clamp(1.0D - (1.0D - drag) * this.airDragModifier, 0.0D, 1.0D);
     }
 
     /** Gravity of the states that are not a jump, before the vanilla gravity attribute scales it. */

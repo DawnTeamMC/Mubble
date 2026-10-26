@@ -576,8 +576,9 @@ public final class MoveContext {
     public void airMotion(double controlScale) {
         var air = this.physics.air();
         double control = this.tuning.airControl() * controlScale;
-        double vx = this.state.vx * this.tuning.airDrag();
-        double vz = this.state.vz * this.tuning.airDrag();
+        double drag = this.tuning.effectiveAirDrag();
+        double vx = this.state.vx * drag;
+        double vz = this.state.vz * drag;
         if (this.hasStick() && control > 0.0D) {
             double runSpeed = this.tuning.effectiveRunSpeed();
             double cap = runSpeed * this.stickMagnitude;
