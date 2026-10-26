@@ -372,3 +372,5 @@ Bound to the Platformer Debug HUD key, or on at start with `debug_hud`: profile,
 ## Multiplayer
 
 The client predicts its own movement with the same simulation the server runs, and sends each step with its input. The server replays the step from the reported start and checks it against what the input allows, axis by axis, within the collisions of its own world; a step it cannot explain sends the player back, a state that drifted is corrected, and the client replays its later steps on top. Vanilla's "moved too quickly" check and its floating kick are left to the validator for the moves it vouches for, and stay on for everything else. Pushes from the server (knockback, explosions) are taken in by both sides.
+
+A step only climbs higher than planned by the step height of vanilla, and only where vanilla steps up: going sideways, from the ground or landing on it. A player in the air rises by what the simulation planned (a vault, a ledge climb, a corner correction), nothing more.

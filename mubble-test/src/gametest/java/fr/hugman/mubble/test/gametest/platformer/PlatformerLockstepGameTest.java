@@ -402,6 +402,25 @@ public class PlatformerLockstepGameTest {
         });
     }
 
+    /** The step a player on the ground may take up a block is not a lift a player in the air can claim every tick. */
+    @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 100)
+    public void anAirborneClientLyingUpwardsIsPulledBack(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        var client = PlatformerTestClient.join(helper, new BlockPos(5, 8, 20), PlatformerProfileIds.TRIAL);
+        var frames = new PlatformerTestKit.Frames();
+        double startY = client.server().getY();
+        double[] highest = {startY};
+        drive(helper, client, 40, t -> {
+            client.tickTampered(frames.next(), new Vec3(0.0D, client.controller().tuning().stepHeight(), 0.0D));
+            highest[0] = Math.max(highest[0], client.server().getY());
+        }, () -> {
+            client.receive();
+            helper.assertTrue(client.rejections() > 0, "the server should not take the lift, it never rejected a step (" + client.events() + ")");
+            helper.assertTrue(highest[0] <= startY + 1.0E-6D, "the server should never have the player rise, it had them " + (highest[0] - startY) + " above the start");
+            helper.assertFalse(client.kicked(), "a rejected step sends the player back, it does not kick them");
+        });
+    }
+
     @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 200)
     public void rollingUpAHillStaysInLockstep(GameTestHelper helper) {
         PlatformerTestKit.floor(helper);
