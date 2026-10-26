@@ -1,5 +1,8 @@
 package fr.hugman.mubble.platformer.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import fr.hugman.mubble.platformer.network.PlatformerEntityDataSerializers;
 import fr.hugman.mubble.platformer.PlatformerController;
 import fr.hugman.mubble.platformer.PlatformerLocalDriver;
@@ -9,6 +12,7 @@ import fr.hugman.mubble.platformer.move.PlatformerMoves;
 import fr.hugman.mubble.platformer.PlatformerAttributes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -75,21 +79,17 @@ public abstract class PlayerPlatformerMixin implements PlatformerPlayer {
         }
     }
 
-    @Inject(method = "updatePlayerPose", at = @At("HEAD"), cancellable = true)
-    private void mubble$platformerPose(CallbackInfo ci) {
+    @WrapOperation(method = "updatePlayerPose", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setPose(Lnet/minecraft/world/entity/Pose;)V"))
+    private void mubble$platformerPose(Player player, Pose pose, Operation<Void> original) {
         var controller = this.mubble$platformer();
-        if (controller.isDriving()) {
-            ((Player) (Object) this).setPose(controller.state().pose);
-            ci.cancel();
-        }
+        // the move decides the pose, rather than what the player does in vanilla terms (swimming, sneaking...)
+        original.call(player, controller.isDriving() ? controller.state().pose : pose);
     }
 
-    @Inject(method = "isStayingOnGroundSurface", at = @At("RETURN"), cancellable = true)
-    private void mubble$platformerEdgeGuard(CallbackInfoReturnable<Boolean> cir) {
+    @ModifyReturnValue(method = "isStayingOnGroundSurface", at = @At("RETURN"))
+    private boolean mubble$platformerEdgeGuard(boolean staying) {
         var controller = this.mubble$platformer();
-        if (controller.isDriving()) {
-            // the edge guard of sneaking only belongs to the crouch: a long jump or a roll must be able to leave the edge
-            cir.setReturnValue(cir.getReturnValueZ() && controller.state().move == PlatformerMoves.CROUCH);
-        }
+        // the edge guard of sneaking only belongs to the crouch: a long jump or a roll must be able to leave the edge
+        return controller.isDriving() ? staying && controller.state().move == PlatformerMoves.CROUCH : staying;
     }
 }
