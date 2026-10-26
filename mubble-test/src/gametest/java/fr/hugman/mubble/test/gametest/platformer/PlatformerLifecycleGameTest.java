@@ -185,6 +185,15 @@ public class PlatformerLifecycleGameTest {
         client.tickServer();
         helper.assertTrue(controller.isActive() && controller.isSuspended(), "lava is vanilla's");
         helper.assertFalse(PlatformerInteraction.refused(player, PlatformerInteraction.Kind.BLOCK), "a suspended layer refuses nothing");
+        // holding jump, vanilla lifts the player out of the surface, and they fall back in
+        var inLava = player.position();
+        player.setPos(inLava.add(0.0D, 3.2D, 0.0D));
+        player.setOnGround(false);
+        client.tickServer();
+        client.tickServer();
+        helper.assertTrue(controller.isSuspended(), "bobbing out of the surface of the lava is still vanilla's");
+        player.setPos(inLava);
+        player.setOnGround(true);
         PlatformerTestKit.fill(helper, new BlockPos(3, 1, 3), new BlockPos(7, 3, 7), Blocks.AIR.defaultBlockState());
         player.clearFire();
         client.tickServer();

@@ -122,17 +122,17 @@ public final class PlatformerController {
     }
 
     /**
-     * Whether the player is in lava, where vanilla moves them. It starts in any lava, and only ends out
-     * of it or standing on its bottom: at the surface, the depth bobs every tick, and the movement must
-     * not change hands with it. Water is the layer's own, see {@link fr.hugman.mubble.platformer.move.SwimMove}.
+     * Whether the player is in lava, where vanilla moves them. It starts in any lava, and only ends once
+     * out of it and standing on something: holding jump, vanilla lifts the player out of the surface and
+     * lets them fall back in, over and over, and the movement must not change hands with every bob.
+     * Water is the layer's own, see {@link fr.hugman.mubble.platformer.move.SwimMove}.
      */
     private boolean inLava() {
         var p = this.player;
         // the fluid height rather than isInLava, which says no on the first tick of the entity
-        boolean touching = p.getFluidHeight(FluidTags.LAVA) > 0.0D;
-        if (touching) {
+        if (p.getFluidHeight(FluidTags.LAVA) > 0.0D) {
             this.inLava = true;
-        } else if (this.inLava && (!touching || p.onGround())) {
+        } else if (p.onGround()) {
             this.inLava = false;
         }
         return this.inLava;
