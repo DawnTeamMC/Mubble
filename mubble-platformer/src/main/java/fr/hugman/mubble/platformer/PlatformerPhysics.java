@@ -125,14 +125,15 @@ public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope s
     }
 
     /**
-     * @param jumpBoostHeightPerLevel share of height every level of jump boost adds to a jump
+     * Jump boost needs nothing here: it raises the take-off speed as in vanilla, see
+     * {@link fr.hugman.mubble.platformer.sim.PlatformerTuning#jumpHeight()}.
+     *
      * @param slowFallingMaxFallSpeed the fastest fall under slow falling
      * @param levitationSpeedPerLevel upward speed every level of levitation aims for
      * @param levitationResponse      how fast the vertical speed reaches it, per tick
      */
-    public record Effects(double jumpBoostHeightPerLevel, double slowFallingMaxFallSpeed, double levitationSpeedPerLevel, double levitationResponse) {
+    public record Effects(double slowFallingMaxFallSpeed, double levitationSpeedPerLevel, double levitationResponse) {
         public static final Codec<Effects> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                Codec.doubleRange(0.0D, 4.0D).fieldOf("jump_boost_height_per_level").forGetter(Effects::jumpBoostHeightPerLevel),
                 Codec.doubleRange(0.0D, 4.0D).fieldOf("slow_falling_max_fall_speed").forGetter(Effects::slowFallingMaxFallSpeed),
                 Codec.doubleRange(0.0D, 4.0D).fieldOf("levitation_speed_per_level").forGetter(Effects::levitationSpeedPerLevel),
                 Codec.doubleRange(0.0D, 1.0D).fieldOf("levitation_response").forGetter(Effects::levitationResponse)
