@@ -110,6 +110,8 @@ Speeds are in blocks per tick, durations in ticks unless the name says `_ms`, he
 - Friction, speed and jump factors come from the block the feet rest on, found as vanilla finds it: the edge of a block of ice still slides with the center over air. `minecraft:movement_efficiency` (Soul Speed) brings the speed factor back towards 1.
 - Swimming and climbing run on vanilla's constants (`LivingEntity.WATER_DRAG` and the others); `minecraft:water_movement_efficiency` (Depth Strider) and Dolphin's Grace work as in `travelInWater`. A player who can walk on powder snow climbs out of it, as in vanilla.
 
+**Fall damage.** While the profile is active, suspended or not, `fall_damage.safe_distance_bonus` is added to `minecraft:safe_fall_distance` and `fall_damage.multiplier` scales `minecraft:fall_damage_multiplier`, through the same transient modifier as the [attributes](#attributes) of the layer. Vanilla hurts a falling player as usual, reading them, so that the fall distance, the statistics and what the landing does to the block underneath stay vanilla's. A ground pound landing, a dive and a roll out of a landing negate the fall whatever these say (`PlatformerState.negateFallDamage`): the step resets the fall distance, as vanilla does on a ladder or in water, right before the move that lands. On the server, that is the validated step, ahead of the vanilla move packet that follows it.
+
 **Cues** (sound, particles and rumble) are data: per move, `start`, `tick`, `land` and `boost` cues with `sound`, `volume`, `pitch`, `particle`, `surface` (particles of the block underfoot), `shape` (`burst`, `ring`, `trail`), `count`, `count_per_speed`, `spread`, `speed`, `interval` (ticks, for `tick` cues), and `rumble`: `{"strong": 0–1, "weak": 0–1, "ticks": n, "scale_with_speed": bool}`, the two motors of the controller, felt only by the player making the move, only on a controller (through Controlify). Other players' clients play the sounds and particles too. The shipped moves rumble lightly: a tap for jumps, a thud for impacts.
 
 ## Moves
@@ -176,7 +178,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `accel` | Speed the stick adds every tick, as vanilla's. |
 | `air_control` | Scale of the air control during the dive. |
 | `back_speed` | Speed of the backward drift. |
-| `boost` | Speed a boost adds; the base value of {@code mubble:platformer_roll_boost}, which is what the roll reads. |
+| `boost` | Speed a boost adds; the value the profile gives `mubble:platformer_roll_boost`, which is what the roll reads. |
 | `boost_cooldown_ticks` | Ticks between two boosts. |
 | `brake` | Share of its speed the skid loses every tick. |
 | `cancel_window_ticks` | Ticks an airborne move lasts before the aerial follow-ups may cut it short. |
@@ -184,7 +186,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `climb_speed` | Upward speed climbing gives, as vanilla's. |
 | `decel` | Speed lost every tick on flat ground. |
 | `drag` | Share of its speed the dash keeps every tick. |
-| `drop_speed` | Speed of the drop; the base value of {@code mubble:platformer_ground_pound_speed}, which is what the drop reads. |
+| `drop_speed` | Speed of the drop; the value the profile gives `mubble:platformer_ground_pound_speed`, which is what the drop reads. |
 | `exhaustion_per_block` | Food exhaustion per block travelled, when the profile charges for its moves. |
 | `exit_speed` | Speed below which the slide stops. |
 | `fall_speed` | The fastest fall while spinning. |
@@ -202,7 +204,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `lift_ticks` | Ticks the lift takes to reach that height. |
 | `lock_ticks` | Ticks during which the stick cannot steer back, so that the kick is not undone right away. |
 | `max_boosts` | How many boosts a roll can take. |
-| `max_fall_speed` | The fastest slide down the wall; the base value of {@code mubble:platformer_wall_slide_speed}, which is what the slide reads. |
+| `max_fall_speed` | The fastest slide down the wall; the value the profile gives `mubble:platformer_wall_slide_speed`, which is what the slide reads. |
 | `max_height` | The highest obstacle vaulted over, in blocks. |
 | `max_speed` | Share of the run speed above which crouching and jumping is a long jump rather than a backflip. |
 | `min_height` | How high above the ground the player has to be. |
@@ -260,7 +262,9 @@ Bounces come from vanilla's own: a landing bounces when the block has a bounce r
 
 ## Attributes
 
-The profile sets the base value of these attributes while it is active, and they go back to their defaults when the layer turns off. Equipment, effects and commands can add modifiers like for any attribute.
+While a profile is active, it brings these attributes to its own values through a transient modifier, `mubble:platformer_profile`, which adds the gap between the value of the profile and the default (`PlatformerAttributes.PROFILE`). The modifier comes off when the layer turns off, and is never saved with the player: the base value is left to vanilla, and to commands. Equipment, effects and commands can add modifiers like for any attribute: added to the base before it is multiplied, the one of the profile is scaled by `add_multiplied_base` and `add_multiplied_total` modifiers alike, so they read relative to the profile in use.
+
+Saves made before the modifier, when the profile wrote its values in the base, get their base values put back to the defaults the first time the player is loaded (`PlatformerAttributes.resetLegacyBases`, remembered in the `mubble:platformer_legacy_bases_reset` attachment).
 
 | Attribute | Default | From the profile |
 |---|---|---|
@@ -291,7 +295,7 @@ Input is sampled every **frame**, not every tick: a press is remembered with the
 
 ## Camera
 
-How the camera behaves is on the wiki's *Camera* page. What it looks at is `PlatformerFraming`, common code so that unit tests hold it: a margin around the player sideways, a band above and below that only the ground moves, and a catch-up once the player keeps moving. How the camera swings round on its own is `PlatformerCameraFollow`, common code too: a rate that grows with the speed past the run speed and with the distance gone in one direction (walking, it hardly moves), held for 2.5 s after the player turns the camera and eased back in over 1.5 s, zero within 45° of running at the camera, and smoothed by a capped angular acceleration so that it never jolts. What stands between the camera and the player does not move it: `PlatformerAim.clearDistance` only brings it closer when its own spot, plus a margin, is inside blocks, and `PlatformerCamera` eases its distance in and out. The silhouette (`PlatformerSilhouette`) is the player's model drawn twice more with a `LESS_THAN` depth test and no depth writes: among the solid models, before any entity's, to mark in the frame's alpha where the world hides the player, then among the translucent ones to tint the marked pixels gray and put their alpha back. Translucent models are drawn after every solid one, so tinting in one go would test against the player's own skin layers, armor and held items too.
+How the camera behaves is on the wiki's *Camera* page. What it looks at is `PlatformerFraming`, common code so that unit tests hold it: a margin around the player sideways, a band above and below that only the ground moves, and a catch-up once the player keeps moving. How the camera swings round on its own is `PlatformerCameraFollow`, common code too: a rate that grows with the speed past the run speed and with the distance gone in one direction (walking, it hardly moves), held for 2.5 s after the player turns the camera and eased back in over 1.5 s, zero within 45° of running at the camera, and smoothed by a capped angular acceleration so that it never jolts. How far the camera sits is `minecraft:camera_distance`, the attribute vanilla's third person camera reads, times the `camera_distance_scale` setting and the `distance_scale` hint of the profile, at the scale of the player: whatever changes the vanilla distance changes the orbit's alike. The hint stays a scale the client applies rather than a modifier on the attribute, so that a player can turn it off, and that it leaves the vanilla camera alone. What stands between the camera and the player does not move it: `PlatformerAim.clearDistance` only brings it closer when its own spot, plus a margin, is inside blocks, and `PlatformerCamera` eases its distance in and out. The silhouette (`PlatformerSilhouette`) is the player's model drawn twice more with a `LESS_THAN` depth test and no depth writes: among the solid models, before any entity's, to mark in the frame's alpha where the world hides the player, then among the translucent ones to tint the marked pixels gray and put their alpha back. Translucent models are drawn after every solid one, so tinting in one go would test against the player's own skin layers, armor and held items too.
 
 **Aiming over the shoulder.** `PlatformerShoulder.aims` decides it, in common code: an item in either hand whose use animation is `bow`, `crossbow` or `trident`, or of `#mubble:aims_while_held` (meant for other weapons, such as Splatoon's), or a power-up whose action `aims()` (`ShootProjectilePowerUpAction` does, so the fire, ice and other projectile flowers aim). Holding is enough, not only charging, so that shots in a row do not send the camera back and forth. `PlatformerCamera` then eases a second blend, `aim`, to 1 over 0.15 s: the camera leaves the framing for the player's own position, sits 1.6 blocks behind the eyes and 0.6 to their right (`PlatformerAim.clearDistance` sideways keeps it out of a wall on the right), turns at vanilla's sensitivity, opens the pitch to ±90°, and drops the speed field of view. Meanwhile the stick is turned by the yaw of the camera, and the body faces where it goes, as in the orbit, until the weapon is used: while the player uses the item, and for 0.5 s after the last use (`PlatformerCamera.facesCrosshair`), the input frames are coupled (`PlatformerCamera.coupled`) and carry `PlatformerInputFrame.AIMING`. A use turns the body to the crosshair at once: `PlatformerMinecraftMixin` calls `PlatformerCamera.onUse` at the head of `startUseItem` and picks again from there, so that a loaded crossbow, which shoots on the click, shoots where the crosshair points (vanilla's use packet carries the rotation). A power-up that aims does the same through the core's `PowerUpKeybindsHandler.BEFORE_TRIGGER`, then sends a rotation packet ahead of the trigger, which carries none: the server shoots along the rotation it knows. With that bit, a move that `facesItsOwnWay` (roll, roll jump, dive, rollout, long jump, side somersault, slide, skid, wall slide and jump, ledge grab and climb, swim dash) turns the body as with the orbit camera, so that a roll backwards faces backwards; every other move leaves it facing the view. Otherwise, every frame `aimBody` rotates the player so that their eyes look at `PlatformerAim.shoulderTarget`, the first block or entity along the view, cast from the depth of the eyes so that nothing between the camera and the player is aimed at: projectiles, which leave from the eyes, fly to what the crosshair shows. `PlatformerHudMixin` shows vanilla's crosshair once `aim` passes 0.5.
 
@@ -303,7 +307,7 @@ The client settings, as `config/mubble-platformer-client.json` names them (`Plat
 | `auto_camera_keyboard` | false | The camera follows the player round, on the keyboard and mouse |
 | `auto_camera_controller` | true | The same, on a controller |
 | `auto_camera_speed` | 90 | Degrees per second at the quickest, rolling sideways (`PlatformerCameraFollow`) |
-| `camera_distance` | 5 | Blocks |
+| `camera_distance_scale` | 1.25 | Scale of `minecraft:camera_distance`, the distance of the vanilla third person camera (4 blocks by default, so 5); a `camera_distance` in blocks from an older file is turned into the same scale on load |
 | `camera_height` | 0.3 | Above the eyes |
 | `camera_margin` | 1 | Scale of the margins of `PlatformerFraming`; 0 keeps the player in the middle |
 | `recenter_speed` | 540 | Degrees per second |

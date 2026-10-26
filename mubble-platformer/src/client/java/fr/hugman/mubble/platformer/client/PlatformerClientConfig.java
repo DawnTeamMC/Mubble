@@ -1,7 +1,10 @@
 package fr.hugman.mubble.platformer.client;
 
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.MapCodec;
@@ -13,6 +16,7 @@ import java.nio.file.Path;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,7 +32,9 @@ import org.apache.logging.log4j.Logger;
  * @param autoCameraController the same, playing on a controller
  * @param autoCameraSpeed     how fast it swings round at its quickest, rolling sideways past the run speed,
  *                            in degrees per second, see {@link fr.hugman.mubble.platformer.PlatformerCameraFollow}
- * @param cameraDistance      distance between the orbit camera and the player, in blocks, at scale 1
+ * @param cameraDistanceScale distance between the orbit camera and the player, as a scale of the one of
+ *                            the vanilla third person camera ({@code minecraft:camera_distance}, 4 blocks
+ *                            unless something changes it)
  * @param cameraHeight        height of the point the camera looks at, above the eyes, in blocks
  * @param cameraMargin        how much room the camera leaves around the player before following them,
  *                            as a scale of the margins of {@link fr.hugman.mubble.platformer.PlatformerFraming}: 0
@@ -48,7 +54,7 @@ public record PlatformerClientConfig(
         boolean autoCameraKeyboard,
         boolean autoCameraController,
         double autoCameraSpeed,
-        double cameraDistance,
+        double cameraDistanceScale,
         double cameraHeight,
         double cameraMargin,
         double recenterSpeed,
@@ -61,14 +67,14 @@ public record PlatformerClientConfig(
         boolean silhouette
 ) {
     private static final Logger LOGGER = LogManager.getLogger(Mubble.MOD_ID);
-    public static final PlatformerClientConfig DEFAULT = new PlatformerClientConfig(true, false, true, 90.0D, 5.0D, 0.3D, 1.0D, 540.0D, 1.0D, -80.0D, 80.0D, 0.08D, true, false, true);
+    public static final PlatformerClientConfig DEFAULT = new PlatformerClientConfig(true, false, true, 90.0D, 1.25D, 0.3D, 1.0D, 540.0D, 1.0D, -80.0D, 80.0D, 0.08D, true, false, true);
 
     public static final Codec<PlatformerClientConfig> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             field(Codec.BOOL, "orbit_camera", DEFAULT.orbitCamera).forGetter(PlatformerClientConfig::orbitCamera),
             field(Codec.BOOL, "auto_camera_keyboard", DEFAULT.autoCameraKeyboard).forGetter(PlatformerClientConfig::autoCameraKeyboard),
             field(Codec.BOOL, "auto_camera_controller", DEFAULT.autoCameraController).forGetter(PlatformerClientConfig::autoCameraController),
             field(Codec.doubleRange(0.0D, 1000.0D), "auto_camera_speed", DEFAULT.autoCameraSpeed).forGetter(PlatformerClientConfig::autoCameraSpeed),
-            field(Codec.doubleRange(1.0D, 32.0D), "camera_distance", DEFAULT.cameraDistance).forGetter(PlatformerClientConfig::cameraDistance),
+            field(Codec.doubleRange(0.25D, 8.0D), "camera_distance_scale", DEFAULT.cameraDistanceScale).forGetter(PlatformerClientConfig::cameraDistanceScale),
             field(Codec.doubleRange(-2.0D, 4.0D), "camera_height", DEFAULT.cameraHeight).forGetter(PlatformerClientConfig::cameraHeight),
             field(Codec.doubleRange(0.0D, 2.0D), "camera_margin", DEFAULT.cameraMargin).forGetter(PlatformerClientConfig::cameraMargin),
             field(Codec.doubleRange(0.0D, 10000.0D), "recenter_speed", DEFAULT.recenterSpeed).forGetter(PlatformerClientConfig::recenterSpeed),
@@ -96,6 +102,7 @@ public record PlatformerClientConfig(
         try {
             if (Files.exists(path)) {
                 var json = JsonParser.parseString(Files.readString(path));
+                migrateCameraDistance(json);
                 current = CODEC.parse(JsonOps.INSTANCE, json).resultOrPartial(PlatformerClientConfig::warnInvalid).orElse(DEFAULT);
             }
             write(path);
@@ -104,9 +111,20 @@ public record PlatformerClientConfig(
         }
     }
 
+    /**
+     * Turns the camera distance of a file written before it was a scale, in blocks, into the scale of
+     * the vanilla distance that gives the same distance.
+     */
+    private static void migrateCameraDistance(JsonElement json) {
+        if (json instanceof JsonObject object && !object.has("camera_distance_scale")
+                && object.get("camera_distance") instanceof JsonPrimitive blocks && blocks.isNumber()) {
+            object.addProperty("camera_distance_scale", blocks.getAsDouble() / Attributes.CAMERA_DISTANCE.value().getDefaultValue());
+        }
+    }
+
     /** The same settings, the camera following the player round on a controller or not. */
     public PlatformerClientConfig withAutoCameraController(boolean on) {
-        return new PlatformerClientConfig(this.orbitCamera, this.autoCameraKeyboard, on, this.autoCameraSpeed, this.cameraDistance, this.cameraHeight,
+        return new PlatformerClientConfig(this.orbitCamera, this.autoCameraKeyboard, on, this.autoCameraSpeed, this.cameraDistanceScale, this.cameraHeight,
                 this.cameraMargin, this.recenterSpeed, this.orbitSensitivity, this.minPitch, this.maxPitch, this.fovKick, this.respectProfileHints, this.debugHud, this.silhouette);
     }
 

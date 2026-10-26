@@ -1,6 +1,7 @@
 package fr.hugman.mubble.platformer;
 
 import fr.hugman.mubble.Mubble;
+import com.mojang.serialization.Codec;
 import fr.hugman.mubble.platformer.access.PlatformerSources;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
@@ -23,4 +24,13 @@ public class PlatformerAttachments {
             .copyOnDeath()
             .syncWith(PlatformerUnlocks.STREAM_CODEC, AttachmentSyncPredicate.targetOnly())
             .buildAndRegister(Mubble.id("platformer_unlocks"));
+
+    /**
+     * Whether the platformer attributes of a player had their base put back to the default, see
+     * {@link PlatformerAttributes#resetLegacyBases}. Only the server needs to know.
+     */
+    public static final AttachmentType<Boolean> LEGACY_BASES_RESET = AttachmentRegistry.<Boolean>builder()
+            .persistent(Codec.BOOL)
+            .copyOnDeath()
+            .buildAndRegister(Mubble.id("platformer_legacy_bases_reset"));
 }
