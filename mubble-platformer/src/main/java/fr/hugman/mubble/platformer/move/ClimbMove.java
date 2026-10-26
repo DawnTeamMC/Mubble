@@ -7,10 +7,11 @@ import net.minecraft.world.level.block.Blocks;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Being on something to climb (a ladder, vines, scaffolding...), on the numbers of vanilla climbing:
- * the stick moves the player at walking pace, never faster than vanilla lets a climber go sideways;
- * pushing into a wall, or holding jump, climbs; otherwise the player slides down, no faster than
- * vanilla, and holding crouch holds on. The player lets go by walking off, or at the top.
+ * Being on something to climb (a ladder, vines, scaffolding, powder snow in leather boots...), on the
+ * numbers of vanilla climbing: the stick moves the player at walking pace, never faster than vanilla
+ * lets a climber go sideways; pushing into a wall, or holding jump, climbs; otherwise the player slides
+ * down, no faster than vanilla, and holding crouch holds on. The player lets go by walking off, or at
+ * the top.
  */
 public class ClimbMove extends PlatformerMove {
     /** Upward speed climbing gives, as vanilla's. */
@@ -58,10 +59,11 @@ public class ClimbMove extends PlatformerMove {
         }
 
         // as vanilla: the player moves with the speed of the tick, no faster down than a climber
-        // slides, not at all while holding on; climbing sets the speed after the move, gravity follows
+        // slides, not at all while holding on; climbing sets the speed after the move, gravity follows.
+        // Crouch climbs down scaffolding, and sinks into powder snow, rather than holding on
         double vy = Math.max(state.vy, -max);
         var climbable = ctx.climbable();
-        if (vy < 0.0D && ctx.crouchHeld() && (climbable == null || !climbable.is(Blocks.SCAFFOLDING))) {
+        if (vy < 0.0D && ctx.crouchHeld() && (climbable == null || !climbable.is(Blocks.SCAFFOLDING) && !climbable.is(Blocks.POWDER_SNOW))) {
             vy = 0.0D;
         }
         ctx.setDisplacement(state.vx, vy, state.vz);

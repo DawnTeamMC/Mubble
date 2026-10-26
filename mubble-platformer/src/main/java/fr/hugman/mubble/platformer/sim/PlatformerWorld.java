@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.LadderBlock;
+import net.minecraft.world.level.block.PowderSnowBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
@@ -110,11 +111,12 @@ public final class PlatformerWorld {
 
     /**
      * What the player can climb at {@code position}, as vanilla has it: a block tagged climbable
-     * (ladders, vines, scaffolding...), or an open trapdoor over a ladder facing the same way. Null
-     * when there is nothing to climb.
+     * (ladders, vines, scaffolding...), an open trapdoor over a ladder facing the same way, or powder
+     * snow the hitbox {@code box} is in, for a player who can walk on it (see {@link #powderSnow}).
+     * Null when there is nothing to climb.
      */
     @Nullable
-    public BlockState climbable(Vec3 position) {
+    public BlockState climbable(Vec3 position, AABB box) {
         var pos = BlockPos.containing(position);
         var state = this.blockState(pos);
         if (state.is(BlockTags.CLIMBABLE)) {
@@ -123,6 +125,26 @@ public final class PlatformerWorld {
         if (state.getBlock() instanceof TrapDoorBlock && state.getValue(TrapDoorBlock.OPEN)) {
             var below = this.blockState(pos.below());
             if (below.is(Blocks.LADDER) && below.getValue(LadderBlock.FACING) == state.getValue(TrapDoorBlock.FACING)) {
+                return state;
+            }
+        }
+        return this.powderSnow(box);
+    }
+
+    /**
+     * Powder snow {@code box} is in, when the player can walk on it: vanilla lets such a player climb
+     * out of powder snow they were in, as out of a ladder ({@code handleRelativeFrictionAndCalculateMovement}).
+     * Whether they can walk on it only depends on their boots, which both sides know alike.
+     */
+    @Nullable
+    private BlockState powderSnow(AABB box) {
+        if (!PowderSnowBlock.canEntityWalkOnPowderSnow(this.player)) {
+            return null;
+        }
+        var inner = box.deflate(1.0E-5D);
+        for (var pos : BlockPos.betweenClosed(BlockPos.containing(inner.minX, inner.minY, inner.minZ), BlockPos.containing(inner.maxX, inner.maxY, inner.maxZ))) {
+            var state = this.blockState(pos);
+            if (state.is(Blocks.POWDER_SNOW)) {
                 return state;
             }
         }
