@@ -459,6 +459,10 @@ public final class PlatformerController {
         public long lastImpulseTime = Long.MIN_VALUE;
         /** How strong that push was, in blocks per tick. */
         public double lastImpulseStrength;
+        /** How much of the free impulse budget is spent, in blocks per tick, as of {@link #freeImpulseTime}. */
+        public double freeImpulseSpent;
+        /** Game time of the last free impulse taken in. */
+        public long freeImpulseTime;
         /** The tick number of the last input frame processed. */
         public int lastTick = -1;
         /** Whether the last vanilla move packet was announced by a validated step, which keeps the floating kick off. */
@@ -482,6 +486,23 @@ public final class PlatformerController {
             // two pushes on the same tick add up, at worst
             this.lastImpulseStrength = gameTime == this.lastImpulseTime ? this.lastImpulseStrength + strength : strength;
             this.lastImpulseTime = gameTime;
+        }
+
+        /**
+         * Takes {@code amount} out of the free impulse budget, which fills back up by {@code recovery}
+         * every tick, up to {@code budget}.
+         *
+         * @return whether the budget had that much left
+         */
+        public boolean spendFreeImpulse(long gameTime, double amount, double budget, double recovery) {
+            long elapsed = Math.max(0L, gameTime - this.freeImpulseTime);
+            double spent = Math.max(0.0D, this.freeImpulseSpent - elapsed * recovery);
+            if (spent + amount > budget) {
+                return false;
+            }
+            this.freeImpulseSpent = spent + amount;
+            this.freeImpulseTime = gameTime;
+            return true;
         }
     }
 }
