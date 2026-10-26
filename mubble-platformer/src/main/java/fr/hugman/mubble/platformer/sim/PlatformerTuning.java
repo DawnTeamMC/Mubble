@@ -7,9 +7,11 @@ import java.util.function.Predicate;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import org.jspecify.annotations.Nullable;
 
 /**
  * The numbers one step runs on: the profile, read through the attributes and vanilla effects of the
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
  * @param profile          the active profile
  * @param allowed          which moves may be entered right now
  * @param runSpeed         value of {@code mubble:platformer_run_speed}
+ * @param movementSpeed    value of the vanilla movement speed attribute, sprinting aside
  * @param speedRatio       how much faster than its base the vanilla movement speed is, sprinting aside:
  *                         speed and slowness scale every run speed through it
  * @param jumpHeight       value of {@code mubble:platformer_jump_height}, scaled by the vanilla jump
@@ -44,6 +47,7 @@ public record PlatformerTuning(
         PlatformerProfile profile,
         Predicate<PlatformerMove> allowed,
         double runSpeed,
+        double movementSpeed,
         double speedRatio,
         double jumpHeight,
         double gravity,
@@ -67,11 +71,14 @@ public record PlatformerTuning(
 
     public static PlatformerTuning of(Player player, PlatformerProfile profile, Predicate<PlatformerMove> allowed) {
         var levitation = player.getEffect(MobEffects.LEVITATION);
+        var movementSpeed = player.getAttribute(Attributes.MOVEMENT_SPEED);
+        double walkingSpeed = walkingSpeed(movementSpeed);
         return new PlatformerTuning(
                 profile,
                 allowed,
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_RUN_SPEED),
-                speedRatio(player),
+                walkingSpeed,
+                movementSpeed == null || movementSpeed.getBaseValue() <= 0.0D ? 1.0D : walkingSpeed / movementSpeed.getBaseValue(),
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_JUMP_HEIGHT) * jumpStrengthScale(player),
                 player.getAttributeValue(Attributes.GRAVITY),
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_AIR_DRAG),
@@ -103,21 +110,19 @@ public record PlatformerTuning(
     }
 
     /**
-     * The vanilla movement speed over its base value, without the sprinting bonus: the platformer layer
-     * has its own run, and only wants to hear about speed, slowness and whatever else modifies the
-     * walking pace.
+     * The vanilla movement speed, without the sprinting bonus: the platformer layer has its own run, and
+     * only wants to hear about speed, slowness and whatever else modifies the walking pace.
      */
-    private static double speedRatio(Player player) {
-        var instance = player.getAttribute(Attributes.MOVEMENT_SPEED);
-        if (instance == null || instance.getBaseValue() <= 0.0D) {
-            return 1.0D;
+    private static double walkingSpeed(@Nullable AttributeInstance instance) {
+        if (instance == null) {
+            return 0.0D;
         }
         double value = instance.getValue();
         var sprinting = instance.getModifier(SPRINTING_MODIFIER);
         if (sprinting != null && sprinting.operation() == AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL) {
             value /= 1.0D + sprinting.amount();
         }
-        return value / instance.getBaseValue();
+        return value;
     }
 
     public double walkSpeed() {

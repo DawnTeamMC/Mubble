@@ -2,6 +2,7 @@ package fr.hugman.mubble.platformer.move;
 
 import fr.hugman.mubble.platformer.cue.CueEvent;
 import fr.hugman.mubble.platformer.sim.MoveContext;
+import net.minecraft.world.entity.LivingEntity;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -14,11 +15,11 @@ import org.jspecify.annotations.Nullable;
  */
 public class SwimMove extends PlatformerMove {
     /** Speed the stick adds every tick, as vanilla's. */
-    public static final MoveParam ACCEL = MoveParam.speed("accel", 0.02D);
+    public static final MoveParam ACCEL = MoveParam.speed("accel", LivingEntity.BASE_SWIM_SPEED);
     /** Share of the horizontal speed kept every tick, as vanilla's. */
-    public static final MoveParam DRAG = MoveParam.factor("drag", 0.8D);
+    public static final MoveParam DRAG = MoveParam.factor("drag", LivingEntity.WATER_DRAG);
     /** The same with sprint held, as vanilla's sprint swimming. */
-    public static final MoveParam SPRINT_DRAG = MoveParam.factor("sprint_drag", 0.9D);
+    public static final MoveParam SPRINT_DRAG = MoveParam.factor("sprint_drag", LivingEntity.SPRINTING_WATER_DRAG);
     /** Upward speed added every tick jump is held, as vanilla's. */
     public static final MoveParam RISE = MoveParam.speed("rise", 0.04D);
     /** Downward speed added every tick crouch is held, as vanilla's. */
@@ -30,14 +31,8 @@ public class SwimMove extends PlatformerMove {
     /** How fast the body turns towards the stick, in degrees per tick. */
     public static final MoveParam TURN_SPEED = MoveParam.degrees("turn_speed", 15.0D);
 
-    /** Share of the vertical speed kept every tick, as vanilla's. */
-    private static final double VERTICAL_DRAG = 0.8D;
-    /** Drag with depth strider at its fullest, as vanilla's. */
+    /** Drag with depth strider at its fullest, as vanilla's, which only writes it out in {@code LivingEntity.travelInWater}. */
     private static final double STRIDER_DRAG = 0.546D;
-    /** Drag with dolphin's grace, as vanilla's. */
-    private static final double DOLPHINS_GRACE_DRAG = 0.96D;
-    /** Vanilla's walking speed, which depth strider brings the strokes towards. */
-    private static final double WALKING_SPEED = 0.1D;
 
     public SwimMove(Properties properties) {
         super(properties);
@@ -76,10 +71,10 @@ public class SwimMove extends PlatformerMove {
         double strider = tuning.waterEfficiency() * (state.grounded ? 1.0D : 0.5D);
         if (strider > 0.0D) {
             drag += (STRIDER_DRAG - drag) * strider;
-            accel += (WALKING_SPEED * tuning.speedRatio() - accel) * strider;
+            accel += (tuning.movementSpeed() - accel) * strider;
         }
         if (tuning.dolphinsGrace()) {
-            drag = DOLPHINS_GRACE_DRAG;
+            drag = LivingEntity.DOLPHINS_GRACE_WATER_DRAG;
         }
         state.vx += ctx.stickX() * accel;
         state.vz += ctx.stickZ() * accel;
@@ -91,8 +86,9 @@ public class SwimMove extends PlatformerMove {
         ctx.setDisplacement(state.vx, state.vy, state.vz);
         state.vx *= drag;
         state.vz *= drag;
-        // the slow sink of a player who does nothing in water: vanilla's gravity over 16
-        state.vy = state.vy * VERTICAL_DRAG - tuning.effectiveGravity(falling) / 16.0D;
+        // the vertical drag is vanilla's, the water drag of a player who does not sprint, and the slow
+        // sink of a player who does nothing in water is vanilla's gravity over 16
+        state.vy = state.vy * LivingEntity.WATER_DRAG - tuning.effectiveGravity(falling) / 16.0D;
     }
 
     /** In water, the moves that make sense: jumping out, pounding, dashing, grabbing a ledge to climb out. */
