@@ -430,12 +430,12 @@ public final class MoveContext {
         return PlatformerMoves.LAND;
     }
 
-    /** The plain move of the ground: running when it is available, walking otherwise. */
+    /** The plain move of the ground: crouching while crouch is held, running or walking otherwise, see {@link PlatformerMoves#runOrWalk}. */
     public PlatformerMove baseGroundMove() {
         if (this.state.crouchHeld && this.allowed(PlatformerMoves.CROUCH)) {
             return PlatformerMoves.CROUCH;
         }
-        return this.allowed(PlatformerMoves.RUN) ? PlatformerMoves.RUN : PlatformerMoves.WALK;
+        return PlatformerMoves.runOrWalk(this::allowed);
     }
 
     // -- motion ---------------------------------------------------------------------------------

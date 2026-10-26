@@ -37,7 +37,7 @@ public class CrouchMove extends PlatformerMove {
     @Override
     @Nullable
     public PlatformerMove exit(MoveContext ctx) {
-        return ctx.crouchHeld() ? null : (ctx.allowed(PlatformerMoves.RUN) ? PlatformerMoves.RUN : PlatformerMoves.WALK);
+        return ctx.crouchHeld() ? null : ctx.baseGroundMove();
     }
 
     @Override
