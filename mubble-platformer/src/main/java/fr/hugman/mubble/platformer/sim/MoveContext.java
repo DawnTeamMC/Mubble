@@ -15,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -40,6 +41,8 @@ public final class MoveContext {
     private static final double SPIN_STICK_TILT = 0.75D;
     /** Friction of a plain block, against which the grip of every other block is measured. */
     private static final double PLAIN_FRICTION = 0.6D;
+    /** Friction from which a block is slippery: ice and its kinds, from 0.98, but not slime, at 0.8, which vanilla makes sticky to walk on. */
+    private static final double SLIPPERY_FRICTION = 0.9D;
     /** How long one tick lasts, which is what an input buffer loses every tick. */
     public static final int TICK_MS = 50;
 
@@ -482,8 +485,31 @@ public final class MoveContext {
         return Mth.clamp(grip, this.physics.ground().minGrip(), 1.0D);
     }
 
+    /** Whether the block underfoot keeps the player's speed: slippery, or tagged {@code mubble:keeps_momentum}. */
     public boolean onMomentumBlock() {
-        return this.world.is(this.world.supportingPos(this.start), PlatformerBlockTags.KEEPS_MOMENTUM);
+        var pos = this.world.supportingPos(this.start);
+        return this.world.is(pos, PlatformerBlockTags.KEEPS_MOMENTUM) || this.slippery(pos, this.world.friction(this.start));
+    }
+
+    /** Whether the wall at {@code pos} is too slippery to slide down or kick off, or tagged {@code mubble:no_wall_jump}. */
+    private boolean refusesWallJump(BlockPos pos) {
+        return this.world.is(pos, PlatformerBlockTags.NO_WALL_JUMP) || this.slippery(pos, this.modifiedFriction(pos));
+    }
+
+    /**
+     * Whether the block at {@code pos} is slippery, going by its {@code friction}, the friction modifier
+     * attribute included, unless it is tagged {@code mubble:not_slippery}. The tags on top let a data
+     * pack force either way what the friction says by default.
+     */
+    private boolean slippery(BlockPos pos, double friction) {
+        return friction >= SLIPPERY_FRICTION && !this.world.is(pos, PlatformerBlockTags.NOT_SLIPPERY);
+    }
+
+    /** The friction of the block at {@code pos}, with the friction modifier attribute applied like vanilla does. */
+    private double modifiedFriction(BlockPos pos) {
+        float friction = this.world.blockState(pos).getBlock().getFriction();
+        float modifier = (float) this.world.player().getAttributeValue(Attributes.FRICTION_MODIFIER);
+        return Math.clamp(1.0F - (1.0F - friction) * modifier, 0.0F, 1.0F);
     }
 
     /** The speed a ground move aims for under the stick: walking when it is barely tilted, running at full tilt. */
@@ -721,7 +747,7 @@ public final class MoveContext {
      * body.
      *
      * @param reach how far the wall may be, in blocks
-     * @return the wall, or {@code null} when there is none, or when it is tagged {@code mubble:no_wall_jump}
+     * @return the wall, or {@code null} when there is none, or when it is slippery or tagged {@code mubble:no_wall_jump}
      */
     @Nullable
     public Wall findWall(Direction direction, double reach) {
@@ -738,7 +764,7 @@ public final class MoveContext {
         }
         double distance = Math.abs(allowed);
         var contact = this.contactPos(box, direction, distance, (box.minY + box.maxY) * 0.5D);
-        if (this.world.is(contact, PlatformerBlockTags.NO_WALL_JUMP)) {
+        if (this.refusesWallJump(contact)) {
             return null;
         }
         return new Wall(direction, distance, contact);
