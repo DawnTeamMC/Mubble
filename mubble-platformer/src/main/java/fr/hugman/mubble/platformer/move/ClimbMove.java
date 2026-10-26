@@ -70,7 +70,7 @@ public class ClimbMove extends PlatformerMove {
         if (ctx.jumpHeld() || ctx.stickPushesIntoWall()) {
             vy = ctx.param(this, CLIMB_SPEED);
         }
-        state.vy = (vy - PlatformerTuning.VANILLA_GRAVITY * ctx.tuning().gravityScale()) * VERTICAL_DRAG;
+        state.vy = (vy - PlatformerTuning.VANILLA_GRAVITY * ctx.tuning().gravityScale()) * ctx.tuning().modifiedAirDrag(VERTICAL_DRAG);
     }
 
     /** Off what there is to climb, the player stands or falls. */
