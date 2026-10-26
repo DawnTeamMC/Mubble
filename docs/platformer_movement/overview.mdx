@@ -49,7 +49,7 @@ For comparison, vanilla walking is 4.3 blocks/s and vanilla sprinting 5.6 blocks
 
 With the Overworld profile, moves cost food the way vanilla actions do. Each move adds some exhaustion when it starts, and running adds 0.08 exhaustion per block, a little less than vanilla sprinting.
 
-The speed moves (running, rolls, roll jumps, long jumps, dives and slides) need more than 6 hunger points (3 drumsticks), as sprinting does. With 6 or less, the player only walks.
+The speed moves (running, rolls, roll jumps, long jumps, dives and slides) need more than 6 hunger points (3 drumsticks), as sprinting does. With 6 or less, the player only walks. Whatever the profile, a blind player only walks too.
 
 > [!NOTE]- Exhaustion of each move
 > | Move | Exhaustion |
@@ -75,14 +75,17 @@ Some landings never hurt, whatever the profile:
 
 ## Status effects
 
+Effects work as they do in vanilla, scaled to the moves:
+
 | Effect | With platformer movement |
 |---|---|
-| Jump Boost | Every jump is 35% higher per level |
-| Slow Falling | The player falls no faster than 2 blocks/s |
+| Jump Boost | Every jump takes off faster, as in vanilla: 53% higher at level I, 118% higher at level II |
+| Slow Falling | Gravity drops to an eighth on the way down, as in vanilla: falls are slow and reach no more than 9.8 blocks/s |
 | Levitation | The player rises as in vanilla |
 | Speed, Slowness | The running speed changes as the vanilla walking speed does |
+| Blindness | No speed moves, as no sprinting in vanilla |
 
-Depth Strider and Dolphin's Grace work as in vanilla, see [Swimming]($platformer_movement/swimming_and_climbing#swimming).
+So do the vanilla attributes that equipment, enchantments and other mods change: jump strength and gravity bend every jump, movement efficiency (Soul Speed) undoes the slowdown of soul sand, and the air drag modifier and friction modifier change how the air and the ground hold the player. Depth Strider and Dolphin's Grace work as in vanilla, see [Swimming]($platformer_movement/swimming_and_climbing#swimming).
 
 ## Animations and effects
 
