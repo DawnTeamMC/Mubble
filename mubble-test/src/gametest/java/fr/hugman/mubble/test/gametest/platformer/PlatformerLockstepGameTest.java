@@ -30,6 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BubbleColumnBlock;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.phys.Vec3;
 
@@ -399,6 +400,96 @@ public class PlatformerLockstepGameTest {
             helper.assertFalse(client.kicked(), "a rejected step sends the player back, it does not kick them");
             helper.assertTrue(client.server().position().distanceTo(client.self().position()) < 1.0E-6D,
                     "both sides should agree again, the server has the player at " + client.server().position() + ", the client at " + client.self().position());
+        });
+    }
+
+    /** The step a player on the ground may take up a block is not a lift a player in the air can claim every tick. */
+    @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 100)
+    public void anAirborneClientLyingUpwardsIsPulledBack(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        var client = PlatformerTestClient.join(helper, new BlockPos(5, 8, 20), PlatformerProfileIds.TRIAL);
+        var frames = new PlatformerTestKit.Frames();
+        double startY = client.server().getY();
+        double[] highest = {startY};
+        drive(helper, client, 40, t -> {
+            client.tickTampered(frames.next(), new Vec3(0.0D, client.controller().tuning().stepHeight(), 0.0D));
+            highest[0] = Math.max(highest[0], client.server().getY());
+        }, () -> {
+            client.receive();
+            helper.assertTrue(client.rejections() > 0, "the server should not take the lift, it never rejected a step (" + client.events() + ")");
+            helper.assertTrue(highest[0] <= startY + 1.0E-6D, "the server should never have the player rise, it had them " + (highest[0] - startY) + " above the start");
+            helper.assertFalse(client.kicked(), "a rejected step sends the player back, it does not kick them");
+        });
+    }
+
+    /** Pushes small enough to come from the world are taken in, but not one every tick for ever. */
+    @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 100)
+    public void aClientStackingSmallPushesIsPulledBack(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        var client = PlatformerTestClient.join(helper, new BlockPos(5, 1, 20), PlatformerProfileIds.TRIAL);
+        var frames = new PlatformerTestKit.Frames();
+        double push = 0.9D * client.controller().profile().validation().freeImpulse();
+        double startY = client.server().getY();
+        double[] highest = {startY};
+        drive(helper, client, 60, t -> {
+            // what a tampered client does: a push of its own making, under the free impulse, every tick
+            client.self().push(0.0D, push, 0.0D);
+            client.tick(frames.next());
+            highest[0] = Math.max(highest[0], client.server().getY());
+        }, () -> {
+            client.receive();
+            helper.assertTrue(client.rejections() > 0, "the server should not take a push every tick, it never rejected a step (" + client.events() + ")");
+            helper.assertTrue(highest[0] < startY + 1.5D, "the pushes should not have lifted the player far, the server had them " + (highest[0] - startY) + " above the start");
+            helper.assertFalse(client.kicked(), "a rejected step sends the player back, it does not kick them");
+        });
+    }
+
+    /** A column of bubbles up through water, out of soul sand, walled in. */
+    private static void bubbleColumn(GameTestHelper helper, BlockPos bottom, int height) {
+        PlatformerTestKit.floor(helper);
+        var stone = Blocks.STONE.defaultBlockState();
+        PlatformerTestKit.fill(helper, bottom.offset(-1, 0, -1), bottom.offset(1, height, 1), stone);
+        helper.setBlock(bottom.below(), Blocks.SOUL_SAND);
+        PlatformerTestKit.fill(helper, bottom, bottom.above(height - 1), Blocks.BUBBLE_COLUMN.defaultBlockState().setValue(BubbleColumnBlock.DRAG_DOWN, false));
+        helper.setBlock(bottom.above(height), Blocks.AIR);
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 200)
+    public void ridingABubbleColumnIsNotPulledBack(GameTestHelper helper) {
+        var bottom = new BlockPos(5, 1, 20);
+        bubbleColumn(helper, bottom, 8);
+        var client = PlatformerTestClient.join(helper, bottom, PlatformerProfileIds.TRIAL);
+        var frames = new PlatformerTestKit.Frames();
+        double startY = client.self().getY();
+        int[] impulses = {0};
+        drive(helper, client, 80, t -> {
+            client.tick(frames.next());
+            if (client.controller().history().getLast().impulse().isPresent()) {
+                impulses[0]++;
+            }
+        }, () -> {
+            client.assertUndisturbed("riding a bubble column");
+            helper.assertTrue(impulses[0] > 20, "the bubbles should have pushed the player every tick, they did " + impulses[0] + " times");
+            helper.assertTrue(client.self().getY() > startY + 3.0D, "the bubbles should have carried the player up, they rose " + (client.self().getY() - startY));
+        });
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 200)
+    public void slidingDownHoneyIsNotPulledBack(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        PlatformerTestKit.fill(helper, new BlockPos(4, 1, 21), new BlockPos(6, 10, 21), Blocks.HONEY_BLOCK.defaultBlockState());
+        // against the honey, where vanilla has it slow the fall down: the hitbox inside its cell, past the shape of the block
+        var client = PlatformerTestClient.join(helper, Vec3.atBottomCenterOf(new BlockPos(5, 10, 20)).add(0.0D, 0.0D, 0.26D), PlatformerProfileIds.TRIAL);
+        var frames = new PlatformerTestKit.Frames();
+        int[] impulses = {0};
+        drive(helper, client, 60, t -> {
+            client.tick(frames.next());
+            if (client.controller().history().getLast().impulse().isPresent()) {
+                impulses[0]++;
+            }
+        }, () -> {
+            client.assertUndisturbed("sliding down honey");
+            helper.assertTrue(impulses[0] > 5, "the honey should have slowed the slide down, it did " + impulses[0] + " times");
         });
     }
 

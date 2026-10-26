@@ -82,7 +82,8 @@ A data pack reload (`/reload`) re-reads every profile file and sends the new val
   "fall_damage": { "multiplier": 1.0, "safe_distance_bonus": 3.0 },
   "camera": { "distance_scale": 1.0, "fov_kick_scale": 1.0 },          // optional, hints for clients
   "validation": { "position_tolerance": 0.1, "displacement_tolerance": 0.05, "impulse_window_ticks": 40,
-                  "free_impulse": 0.15, "impulse_margin": 0.3 },        // optional
+                  "free_impulse": 0.15, "impulse_margin": 0.3,
+                  "free_impulse_budget": 0.45, "free_impulse_recovery": 0.02 },   // optional, and so are the last two fields
   "moves": {
     "mubble:jump": {
       "exhaustion": 0.05,                   // food exhaustion each time the move starts
@@ -372,3 +373,7 @@ Bound to the Platformer Debug HUD key, or on at start with `debug_hud`: profile,
 ## Multiplayer
 
 The client predicts its own movement with the same simulation the server runs, and sends each step with its input. The server replays the step from the reported start and checks it against what the input allows, axis by axis, within the collisions of its own world; a step it cannot explain sends the player back, a state that drifted is corrected, and the client replays its later steps on top. Vanilla's "moved too quickly" check and its floating kick are left to the validator for the moves it vouches for, and stay on for everything else. Pushes from the server (knockback, explosions) are taken in by both sides.
+
+A step only climbs higher than planned by the step height of vanilla, and only where vanilla steps up: going sideways, from the ground or landing on it. A player in the air rises by what the simulation planned (a vault, a ledge climb, a corner correction), nothing more.
+
+A change of velocity the simulation did not make is reported along with the step, and has to be explained. A bubble column explains a vertical change of up to `free_impulse` per cell of the column the player is in, honey and slime explain anything that only slows the player down, and a push the server sent in the last `impulse_window_ticks` explains one about that strong (`impulse_margin`). Anything else, such as entities shoving or a water current, is accepted up to `free_impulse` at a time, out of a budget of `free_impulse_budget` that fills back up by `free_impulse_recovery` a tick: under gravity, so that claiming one every tick does not lift a player.

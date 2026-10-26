@@ -11,6 +11,12 @@ import fr.hugman.mubble.platformer.sim.MoveContext;
 import fr.hugman.mubble.platformer.sim.MoveResult;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BubbleColumnBlock;
+import net.minecraft.world.level.block.HoneyBlock;
+import net.minecraft.world.level.block.SlimeBlock;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +34,8 @@ import org.jspecify.annotations.Nullable;
  */
 public final class PlatformerValidator {
     private static final Logger LOGGER = LogManager.getLogger("mubble");
+    /** Below this, a difference between two velocities is rounding. */
+    private static final double IMPULSE_EPSILON = 1.0E-6D;
 
     private PlatformerValidator() {
     }
@@ -60,9 +68,12 @@ public final class PlatformerValidator {
         }
 
         var state = controller.state().copy();
+        // what vanilla steps up from: the ground as the last step left it, which a push of this tick does not change yet
+        boolean startedGrounded = state.grounded;
         if (payload.impulse().isPresent()) {
             var impulse = payload.impulse().get();
-            if (!impulseHoldsUp(player, controller, settings, new Vec3(state.vx, state.vy, state.vz), impulse)) {
+            var box = controller.world().box(from, state.pose);
+            if (!impulseHoldsUp(player, controller, settings, box, new Vec3(state.vx, state.vy, state.vz), impulse)) {
                 reject(player, controller, frame.tick(), "an unexplained change of velocity to " + impulse);
                 return;
             }
@@ -78,7 +89,7 @@ public final class PlatformerValidator {
         String reason;
         try {
             ctx = PlatformerSimulation.plan(state, frame, tuning, controller.world(), from);
-            reason = implausibility(ctx, result, tuning, settings);
+            reason = implausibility(ctx, result, startedGrounded, tuning, settings);
         } finally {
             player.setDeltaMovement(vanillaVelocity);
         }
@@ -108,18 +119,41 @@ public final class PlatformerValidator {
     }
 
     /**
-     * Whether a change of velocity the client did not simulate can be explained: either it is small
-     * enough to come from the world (bubble columns, entities shoving), or the server pushed the
-     * player recently and about that hard.
+     * Whether a change of velocity the client did not simulate can be explained: a block the player is
+     * in or on did it, or it is small enough to come from the world and there is budget left for it,
+     * or the server pushed the player recently and about that hard.
      */
-    private static boolean impulseHoldsUp(ServerPlayer player, PlatformerController controller, PlatformerValidation settings, Vec3 current, Vec3 impulse) {
-        double change = impulse.subtract(current).length();
-        if (change <= settings.freeImpulse()) {
+    private static boolean impulseHoldsUp(ServerPlayer player, PlatformerController controller, PlatformerValidation settings, AABB box, Vec3 current, Vec3 impulse) {
+        if (explainedByBlocks(player.level(), box, current, impulse, settings)) {
             return true;
         }
         var validation = controller.validation();
+        double change = impulse.subtract(current).length();
+        if (change <= settings.freeImpulse()) {
+            return validation.spendFreeImpulse(player.level().getGameTime(), change, settings.freeImpulseBudget(), settings.freeImpulseRecovery());
+        }
         long age = player.level().getGameTime() - validation.lastImpulseTime;
         return age >= 0 && age <= settings.impulseWindowTicks() && impulse.length() <= validation.lastImpulseStrength + current.length() + settings.impulseMargin();
+    }
+
+    /**
+     * Whether a block the player is in or stands on sets velocities like this one every tick, the way
+     * vanilla's do after the player moved: each cell of a bubble column the player is in changes only
+     * their vertical speed, by a little, while honey and slime only ever slow the player down.
+     */
+    private static boolean explainedByBlocks(Level level, AABB box, Vec3 current, Vec3 impulse, PlatformerValidation settings) {
+        var change = impulse.subtract(current);
+        if (change.horizontalDistance() < IMPULSE_EPSILON) {
+            long bubbles = level.getBlockStates(box).filter(state -> state.getBlock() instanceof BubbleColumnBlock).count();
+            if (Math.abs(change.y) <= bubbles * settings.freeImpulse()) {
+                return true;
+            }
+        }
+        boolean slows = impulse.horizontalDistance() <= current.horizontalDistance() + IMPULSE_EPSILON
+                && impulse.y * current.y >= 0.0D && Math.abs(impulse.y) <= Math.abs(current.y) + IMPULSE_EPSILON;
+        // down to the block vanilla has the player step on
+        return slows && level.getBlockStates(box.expandTowards(0.0D, -Entity.DELTA_AFFECTED_BY_BLOCKS_BELOW_0_2, 0.0D))
+                .anyMatch(state -> state.getBlock() instanceof HoneyBlock || state.getBlock() instanceof SlimeBlock);
     }
 
     /**
@@ -127,7 +161,7 @@ public final class PlatformerValidator {
      * away from a displacement, along each axis; stepping up a block is the one thing vanilla adds.
      */
     @Nullable
-    static String implausibility(MoveContext ctx, MoveResult result, PlatformerTuning tuning, PlatformerValidation settings) {
+    static String implausibility(MoveContext ctx, MoveResult result, boolean startedGrounded, PlatformerTuning tuning, PlatformerValidation settings) {
         var planned = ctx.total();
         double tolerance = settings.displacementTolerance();
         if (!withinAxis(result.dx(), planned.x, tolerance)) {
@@ -141,7 +175,8 @@ public final class PlatformerValidator {
         if (result.dy() < Math.min(planned.y, 0.0D) - tolerance) {
             return "fell " + result.dy() + " where " + planned.y + " was planned";
         }
-        double maxUp = Math.max(planned.y, 0.0D) + tuning.stepHeight() + tolerance;
+        double step = canStepUp(planned, result, startedGrounded) ? tuning.stepHeight() : 0.0D;
+        double maxUp = Math.max(planned.y, 0.0D) + step + tolerance;
         if (result.dy() > maxUp) {
             return "rose " + result.dy() + " where at most " + maxUp + " was possible";
         }
@@ -153,6 +188,15 @@ public final class PlatformerValidator {
             return "claims to stand on nothing at " + ctx.start().add(result.dx(), result.dy(), result.dz());
         }
         return null;
+    }
+
+    /**
+     * Whether vanilla would have stepped the player up during the step: only going sideways, and only
+     * from the ground or onto it, as in {@code Entity.collide}. A player in the air is lifted by nothing
+     * but what the simulation planned, such as a vault or a ledge climb.
+     */
+    private static boolean canStepUp(Vec3 planned, MoveResult result, boolean startedGrounded) {
+        return planned.horizontalDistanceSqr() > 0.0D && (startedGrounded || result.onGround());
     }
 
     /**
