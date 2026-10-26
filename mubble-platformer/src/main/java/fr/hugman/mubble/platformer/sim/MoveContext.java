@@ -295,7 +295,7 @@ public final class MoveContext {
     @Nullable
     public BlockState climbable() {
         if (!this.climbableProbed) {
-            this.climbable = this.world.climbable(this.start);
+            this.climbable = this.world.climbable(this.start, this.box());
             this.climbableProbed = true;
         }
         return this.climbable;
