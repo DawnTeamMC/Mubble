@@ -1,10 +1,12 @@
 package fr.hugman.mubble.platformer.sim;
 
-import fr.hugman.mubble.platformer.tags.PlatformerBlockTags;
 import fr.hugman.mubble.platformer.cue.CueEvent;
 import fr.hugman.mubble.platformer.move.PlatformerMove;
 import fr.hugman.mubble.platformer.move.PlatformerMoves;
 import fr.hugman.mubble.platformer.move.ClimbMove;
+import net.minecraft.core.BlockPos;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.Vec3;
 
 /**
@@ -213,16 +215,17 @@ public final class PlatformerSimulation {
             state.negateFallDamage = true;
         }
 
-        // a bounce block sends the player back up, unless they crouch on it like on a slime block
+        // a bouncy block sends the player back up, as high as it is bouncy, unless they crouch on it like vanilla's sneak
         var bounce = ctx.physics().bounce();
         var below = ctx.world().supportingPos(ctx.start().add(ctx.result().dx(), ctx.result().dy(), ctx.result().dz()));
-        if (!state.crouchHeld && landingSpeed >= bounce.minFallSpeed() && ctx.world().is(below, PlatformerBlockTags.BOUNCE)) {
+        double restitution = bounceRestitution(ctx, below, landingSpeed);
+        if (restitution > 0.0D && landingSpeed >= bounce.minFallSpeed()) {
             boolean pound = landedFrom == PlatformerMoves.GROUND_POUND;
             state.negateFallDamage = true;
             state.chainIndex = 0;
             state.chainWindow = 0;
             ctx.switchTo(PlatformerMoves.FALL);
-            ctx.launch(pound ? bounce.groundPoundHeight() : bounce.height(), bounce.ticksToApex(), false);
+            ctx.launch((pound ? bounce.groundPoundHeight() : bounce.height()) * restitution, bounce.ticksToApex(), false);
             state.grounded = false;
             ctx.emit(CueEvent.BOOST, landingSpeed);
             return;
@@ -233,5 +236,31 @@ public final class PlatformerSimulation {
             ctx.switchTo(next);
         }
         ctx.emit(CueEvent.LAND, landingSpeed);
+    }
+
+    /**
+     * How bouncy a landing on {@code below} is, the way vanilla restitutes a fall onto a block: the
+     * most of the block's bounce restitution (slime, beds...) and of the player's bounciness attribute,
+     * none when the block suppresses bounce, when the player holds crouch, vanilla's sneak, or when the
+     * fall was too slow to be more than a tick of gravity.
+     * <p>
+     * The platformer layer only borrows the trigger and the strength: rather than vanilla's mirrored
+     * velocity, the bounce reaches the heights of the profile, scaled by the restitution, whatever the
+     * fall. Vanilla still restitutes the velocity of the entity as it moves, which is harmless: the step
+     * writes its own velocity over it right after.
+     */
+    private static double bounceRestitution(MoveContext ctx, BlockPos below, double landingSpeed) {
+        var block = ctx.world().blockState(below);
+        if (ctx.state().crouchHeld || block.is(BlockTags.SUPPRESSES_BOUNCE) || landingSpeed < effectiveGravity(ctx.tuning())) {
+            return 0.0D;
+        }
+        double bounciness = ctx.world().player().getAttributeValue(Attributes.BOUNCINESS);
+        return Math.max(bounciness, block.getBlock().getBounceRestitution());
+    }
+
+    /** The gravity of a falling player, as vanilla has it: slow falling softens it. */
+    private static double effectiveGravity(PlatformerTuning tuning) {
+        double gravity = PlatformerTuning.VANILLA_GRAVITY * tuning.gravityScale();
+        return tuning.slowFalling() ? Math.min(gravity, 0.01D) : gravity;
     }
 }

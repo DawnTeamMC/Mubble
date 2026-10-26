@@ -19,7 +19,6 @@ public class PlatformerBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
 		// level design of the platformer movement: ice is too slippery to kick off, and carries speed along
 		builder(NO_WALL_JUMP).add(BlockItemIds.ICE, BlockItemIds.PACKED_ICE, BlockItemIds.BLUE_ICE);
 		builder(NO_LEDGE_GRAB).addOptionalTag(BlockTags.LEAVES);
-		builder(BOUNCE).add(BlockItemIds.SLIME_BLOCK);
 		builder(KEEPS_MOMENTUM).add(BlockItemIds.ICE, BlockItemIds.PACKED_ICE, BlockItemIds.BLUE_ICE);
 	}
 }

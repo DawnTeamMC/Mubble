@@ -239,8 +239,9 @@ Using an item slows the player down as in vanilla: the client sets `PlatformerIn
 |---|---|---|
 | `#mubble:no_wall_jump` | No wall slide or wall jump against these | ice, packed ice, blue ice |
 | `#mubble:no_ledge_grab` | Edges of these cannot be grabbed | `#minecraft:leaves` |
-| `#mubble:bounce` | Landing on these at speed bounces the player back up (higher out of a ground pound); crouching lands normally | slime block |
 | `#mubble:keeps_momentum` | Ground speed is barely lost on these | ice, packed ice, blue ice |
+
+Bounces come from vanilla's own: a landing bounces when the block has a bounce restitution (slime 1, beds 0.75) or the player has the `minecraft:bounciness` attribute, unless the block is tagged `#minecraft:suppresses_bounce`, the player holds crouch (the platformer's sneak) or falls slower than a tick of gravity, as in `Entity.restituteMovementAfterCollisions`. The highest of the two restitutions scales the heights of `physics.bounce`, which keeps its `min_fall_speed` on top. Vanilla still mirrors the velocity of the entity as it moves, but the step writes its own over it right after, so a landing never bounces twice.
 
 ## Item tags
 
