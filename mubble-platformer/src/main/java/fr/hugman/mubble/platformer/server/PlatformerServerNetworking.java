@@ -1,6 +1,5 @@
 package fr.hugman.mubble.platformer.server;
 
-import fr.hugman.mubble.platformer.network.PlatformerPayloadTypes;
 import fr.hugman.mubble.platformer.network.PlatformerProfilesPayload;
 import fr.hugman.mubble.platformer.PlatformerProfiles;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -13,9 +12,7 @@ public final class PlatformerServerNetworking {
     }
 
     public static void register() {
-        // handled right away on the server thread, so that it keeps its place before the vanilla move packet of the same tick
-        ServerPlayNetworking.registerGlobalReceiver(PlatformerPayloadTypes.PLATFORMER_INPUT, (payload, context) -> PlatformerValidator.handleInput(context.player(), payload));
-
+        // the input has no receiver here: ServerboundCustomPayloadPacketMixin takes it before Fabric does, to keep it in order
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) ->
                 sender.sendPacket(new PlatformerProfilesPayload(PlatformerProfiles.serverValues())));
         ServerLifecycleEvents.END_DATA_PACK_RELOAD.register((server, resourceManager, success) -> {
