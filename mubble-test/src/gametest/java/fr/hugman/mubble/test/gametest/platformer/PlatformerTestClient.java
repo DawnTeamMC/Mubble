@@ -82,6 +82,11 @@ public final class PlatformerTestClient {
      * when {@code profile} is {@code null}.
      */
     public static PlatformerTestClient join(GameTestHelper helper, BlockPos pos, @Nullable ResourceKey<PlatformerProfile> profile) {
+        return join(helper, Vec3.atBottomCenterOf(pos), profile);
+    }
+
+    /** The same as {@link #join(GameTestHelper, BlockPos, ResourceKey)}, standing at {@code position} exactly. */
+    public static PlatformerTestClient join(GameTestHelper helper, Vec3 position, @Nullable ResourceKey<PlatformerProfile> profile) {
         var level = helper.getLevel();
         var minecraftServer = level.getServer();
         var uuid = UUID.randomUUID();
@@ -96,7 +101,7 @@ public final class PlatformerTestClient {
 
         var self = helper.makeMockPlayer(GameType.SURVIVAL);
         var client = new PlatformerTestClient(helper, player, self, connection, channel);
-        var at = helper.absoluteVec(Vec3.atBottomCenterOf(pos));
+        var at = helper.absoluteVec(position);
         player.connection.teleport(at.x, at.y, at.z, 0.0F, 0.0F);
         client.receive();
         client.teleports = 0;
@@ -155,6 +160,7 @@ public final class PlatformerTestClient {
         controller.tick();
         this.self.setOldPosAndRot();
         var step = PlatformerPrediction.step(this.self, controller, frame);
+        this.applyEffectsFromBlocks(step.payload());
         new ServerboundCustomPayloadPacket(step.payload()).handle(this.server.connection);
         this.sendPosition();
         this.server.connection.tick();
@@ -187,6 +193,15 @@ public final class PlatformerTestClient {
         new ServerboundCustomPayloadPacket(new PlatformerInputPayload(payload.frame(), payload.from(), forged, payload.fingerprint(), payload.impulse())).handle(this.server.connection);
         this.sendPosition();
         this.server.connection.tick();
+    }
+
+    /**
+     * What vanilla does right after the player travelled, as the game client does in {@code aiStep}:
+     * the blocks the step went through, and the one under the player, act on them. Bubble columns,
+     * honey and slime set the velocity there, which the next step reports as an impulse.
+     */
+    private void applyEffectsFromBlocks(PlatformerInputPayload step) {
+        this.self.applyEffectsFromBlocks(step.from(), this.self.position());
     }
 
     /** One tick of the player on the server alone, as the connection drives it every game tick. */
