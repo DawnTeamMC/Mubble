@@ -1,7 +1,6 @@
 package fr.hugman.mubble.platformer.client.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import fr.hugman.mubble.platformer.client.animation.PlatformerPlayerAnimator;
 import fr.hugman.mubble.platformer.client.animation.PlatformerRenderData;
 import fr.hugman.mubble.platformer.client.camera.PlatformerSilhouette;
@@ -33,15 +32,13 @@ public class PlatformerAvatarRendererMixin {
         }
     }
 
-    @Inject(method = "setupRotations(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;FF)V", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "setupRotations(Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;FF)V", at = @At("TAIL"))
     private void mubble$rotatePlatformerBody(AvatarRenderState state, PoseStack poseStack, float bodyRot, float entityScale, CallbackInfo ci) {
         var data = state.getData(PlatformerPlayerAnimator.DATA);
-        if (data == null || !data.drivesBody()) {
-            return;
+        if (data != null && data.drivesBody()) {
+            // vanilla turned the body the way it faces, and shook it or turned it upside down as it does any
+            // player's, without its swimming tilt, left out on extraction: the whole body of the move goes on top
+            PlatformerPlayerAnimator.applyBody(poseStack, data, state.ageInTicks);
         }
-        // the one rotation every living entity gets, then the whole body of the move
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - bodyRot));
-        PlatformerPlayerAnimator.applyBody(poseStack, data, state.ageInTicks);
-        ci.cancel();
     }
 }
