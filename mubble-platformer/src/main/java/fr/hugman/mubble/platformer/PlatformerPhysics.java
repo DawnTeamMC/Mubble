@@ -12,7 +12,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
  * @param air           horizontal control in the air
  * @param gravity       vertical motion
  * @param slope         how stairs, slabs and step-downs are read as slopes
- * @param bounce        what blocks tagged {@code mubble:bounce} do
+ * @param bounce        how high landings bounce off the blocks and players vanilla makes bouncy
  * @param safetyCeiling the speed nothing may exceed, enforced again by the server validator
  */
 public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope slope, Bounce bounce, double safetyCeiling) {
@@ -28,7 +28,7 @@ public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope s
     /**
      * @param walkSpeed          top speed when running is not available, or when an analog stick is
      *                           only tilted a little
-     * @param runSpeed           top speed input can reach; the base value of {@code mubble:platformer_run_speed}
+     * @param runSpeed           top speed input can reach; the value the profile gives {@code mubble:platformer_run_speed}
      * @param accelTicks         ticks from standing still to the run speed, on a normal block
      * @param decelTicks         ticks from the run speed to a stop once the stick is released
      * @param turnSpeed          how fast the run turns towards the stick at full speed, in degrees per tick
@@ -54,9 +54,9 @@ public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope s
     }
 
     /**
-     * @param drag       what horizontal speed keeps each tick in the air; the base value of
+     * @param drag       what horizontal speed keeps each tick in the air; the value the profile gives
      *                   {@code mubble:platformer_air_drag}
-     * @param control    how strongly the stick steers in the air; the base value of
+     * @param control    how strongly the stick steers in the air; the value the profile gives
      *                   {@code mubble:platformer_air_control}
      * @param accelTicks ticks from standing still to the run speed in the air, at full control
      * @param turnSpeed  how fast the velocity turns towards the stick, in degrees per tick at full control
@@ -82,7 +82,7 @@ public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope s
      * @param terminalVelocity     the fastest fall, at the default value of the vanilla gravity attribute:
      *                             it goes with gravity like vanilla's, which is how slow falling slows
      *                             the fall down
-     * @param jumpHeightMultiplier scale of every jump height; the base value of
+     * @param jumpHeightMultiplier scale of every jump height; the value the profile gives
      *                             {@code mubble:platformer_jump_height}
      */
     public record Gravity(double baseGravity, double fallMultiplier, double apexHangMultiplier, double apexHangThreshold,
@@ -110,7 +110,8 @@ public record PlatformerPhysics(Ground ground, Air air, Gravity gravity, Slope s
     }
 
     /**
-     * @param height           height of the bounce off a {@code mubble:bounce} block
+     * @param height           height of the bounce off a fully bouncy block, such as slime; less
+     *                          bouncy ones, a bed, bounce as much lower as their restitution says
      * @param ticksToApex      ticks it takes to reach it
      * @param groundPoundHeight height of the bounce when landing a ground pound on it
      * @param minFallSpeed     landings slower than this do not bounce

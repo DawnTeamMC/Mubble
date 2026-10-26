@@ -538,7 +538,8 @@ public final class MoveContext {
      * released, and lets speed above the run speed decay on its own rather than cutting it.
      * <p>
      * Everything is scaled by how well the block grips (ice stays ice) and by its speed factor (soul
-     * sand stays slow), and blocks tagged {@code mubble:keeps_momentum} neither brake nor drag.
+     * sand stays slow), and blocks that keep momentum (slippery ones, or tagged
+     * {@code mubble:keeps_momentum}, see {@link #onMomentumBlock}) neither brake nor drag.
      */
     public void groundMotion(double targetSpeed) {
         var ground = this.physics.ground();
