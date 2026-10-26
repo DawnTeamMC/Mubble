@@ -98,6 +98,10 @@ public final class PlatformerValidator {
             return;
         }
         PlatformerSimulation.settle(ctx, result);
+        if (state.negateFallDamage) {
+            // the vanilla move packet right behind this one lands the player: the fall is forgotten before, as on a ladder
+            player.resetFallDistance();
+        }
 
         controller.setState(state);
         controller.setOrbiting(!frame.coupled());

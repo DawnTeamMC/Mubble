@@ -18,6 +18,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.protocol.game.ServerboundMovePlayerPacket;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
@@ -331,7 +332,8 @@ public final class PlatformerCamera {
     }
 
     /**
-     * How far behind the focus the camera sits this frame. Something between the camera and the
+     * How far behind the focus the camera sits this frame: as far as the vanilla third person camera,
+     * {@code minecraft:camera_distance}, times the distance setting. Something between the camera and the
      * player does not move it, the player showing through instead (see {@link PlatformerSilhouette}); the
      * camera's own spot running into a block does, and the camera eases in, just far enough to stay
      * out of it, quickly, then back out slowly once there is room again. It only ever cuts to where it
@@ -339,7 +341,8 @@ public final class PlatformerCamera {
      */
     private static double distance(LocalPlayer player, Vec3 center, Vec3 forward, float seconds, boolean aimMoving) {
         var level = player.level();
-        double wanted = Mth.lerp(aim, PlatformerClientConfig.get().cameraDistance() * hintDistanceScale(player), AIM_DISTANCE) * player.getScale();
+        double orbit = player.getAttributeValue(Attributes.CAMERA_DISTANCE) * PlatformerClientConfig.get().cameraDistanceScale() * hintDistanceScale(player);
+        double wanted = Mth.lerp(aim, orbit, AIM_DISTANCE) * player.getScale();
         double target = PlatformerAim.clearDistance(level, player, center, forward, wanted, OBSTRUCTION_MARGIN);
         // going to the shoulder and back is already eased
         if (distance < 0.0D || blend < 1.0F || aimMoving) {

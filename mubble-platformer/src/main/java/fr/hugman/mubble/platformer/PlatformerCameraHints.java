@@ -5,9 +5,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 /**
  * What a profile suggests to the camera. The camera itself is configured per client: these only
- * scale its values, and a player can tell the client to ignore them.
+ * scale its values, and a player can tell the client to ignore them. This is why the distance is a
+ * scale rather than a modifier on {@code minecraft:camera_distance}: a modifier would come from the
+ * server, the client could not leave it out, and it would move the vanilla third person camera too.
  *
- * @param distanceScale scale of the distance between the camera and the player
+ * @param distanceScale scale of the distance between the orbit camera and the player
  * @param fovKickScale  scale of the speed-based field of view kick
  */
 public record PlatformerCameraHints(double distanceScale, double fovKickScale) {

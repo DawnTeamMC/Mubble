@@ -51,8 +51,9 @@ public final class PlatformerTranslations {
         settings(t, "orbit_camera", "Orbit Camera", "Caméra orbitale",
                 "In the third person view from the back, the camera turns freely around the player, and the player moves relative to it.",
                 "En vue à la troisième personne de dos, la caméra tourne librement autour du joueur, qui se déplace par rapport à elle.");
-        settings(t, "camera_distance", "Camera Distance", "Distance de la caméra",
-                "How far behind the player the orbit camera stays.", "À quelle distance derrière le joueur se tient la caméra orbitale.");
+        settings(t, "camera_distance_scale", "Camera Distance", "Distance de la caméra",
+                "How far behind the player the orbit camera stays, as a share of the distance of the usual third person view: 4 blocks, unless something changes it.",
+                "À quelle distance derrière le joueur se tient la caméra orbitale, par rapport à celle de la vue à la troisième personne habituelle : 4 blocs, sauf si quelque chose la modifie.");
         settings(t, "auto_camera_keyboard", "Camera Follows (Keyboard)", "Suivi de la caméra (clavier)",
                 "Playing on the keyboard and mouse, the orbit camera slowly swings round behind the player as they move on, never while they stand still or just after the camera was turned.",
                 "Au clavier et à la souris, la caméra orbitale revient doucement derrière le joueur à mesure qu'il avance, jamais quand il est immobile ou juste après qu'il a tourné la caméra.");
@@ -78,7 +79,6 @@ public final class PlatformerTranslations {
         settings(t, "debug_hud", "Debug HUD on Start", "Interface de débogage au démarrage",
                 "Show the platformer debug HUD when the game starts.", "Afficher l'interface de débogage plateforme au démarrage du jeu.");
         t.put("platformer." + M + ".settings.unit.degrees_per_second", pair("%s°/s", "%s°/s"));
-        t.put("platformer." + M + ".settings.unit.blocks", pair("%s blocks", "%s blocs"));
         t.put("platformer." + M + ".settings.unit.percent", pair("%s%%", "%s %%"));
         t.put("platformer." + M + ".settings.auto_camera_controller.on", pair("Camera follows the player", "La caméra suit le joueur"));
         t.put("platformer." + M + ".settings.auto_camera_controller.off", pair("Camera stays put", "La caméra reste en place"));

@@ -46,7 +46,13 @@ public final class PlatformerPrediction {
         }
 
         var from = player.position();
-        var ctx = PlatformerSimulation.step(state, frame, controller.tuning(), controller.world(), new PlatformerReplayer.EntityBody(player));
+        var ctx = PlatformerSimulation.plan(state, frame, controller.tuning(), controller.world(), from);
+        if (state.negateFallDamage) {
+            // the landing hurts during the move: the fall is forgotten before, as on a ladder
+            player.resetFallDistance();
+        }
+        var result = new PlatformerReplayer.EntityBody(player).move(ctx.pose(), ctx.first(), ctx.second());
+        PlatformerSimulation.settle(ctx, result);
         controller.remember(new PlatformerController.HistoryEntry(frame, from, ctx.result(), impulse));
 
         var written = new Vec3(state.vx, state.vy, state.vz);
