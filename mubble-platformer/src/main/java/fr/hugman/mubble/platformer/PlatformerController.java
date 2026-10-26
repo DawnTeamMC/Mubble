@@ -318,7 +318,7 @@ public final class PlatformerController {
     public void resetFromEntity() {
         var fresh = new PlatformerState();
         fresh.grounded = this.player.onGround();
-        fresh.move = fresh.grounded ? (this.allows(PlatformerMoves.RUN) ? PlatformerMoves.RUN : PlatformerMoves.WALK) : PlatformerMoves.FALL;
+        fresh.move = fresh.grounded ? PlatformerMoves.runOrWalk(this::allows) : PlatformerMoves.FALL;
         var velocity = this.player.getDeltaMovement();
         double ceiling = this.profile == null ? 0.0D : this.profile.physics().safetyCeiling();
         double speed = velocity.length();
