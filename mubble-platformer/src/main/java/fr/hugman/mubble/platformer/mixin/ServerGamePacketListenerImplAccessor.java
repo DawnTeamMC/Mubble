@@ -11,7 +11,4 @@ public interface ServerGamePacketListenerImplAccessor {
     @Accessor("awaitingPositionFromClient")
     @Nullable
     Vec3 mubble$getAwaitingPositionFromClient();
-
-    @Accessor("aboveGroundTickCount")
-    int mubble$getAboveGroundTickCount();
 }

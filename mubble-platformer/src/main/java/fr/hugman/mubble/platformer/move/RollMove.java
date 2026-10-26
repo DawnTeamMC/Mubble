@@ -90,13 +90,7 @@ public class RollMove extends PlatformerMove {
     @Override
     @Nullable
     public PlatformerMove exit(MoveContext ctx) {
-        if (!ctx.crouchHeld()) {
-            return ctx.allowed(PlatformerMoves.RUN) ? PlatformerMoves.RUN : PlatformerMoves.WALK;
-        }
-        if (ctx.horizontalSpeed() < ctx.param(this, MIN_SPEED)) {
-            return ctx.baseGroundMove();
-        }
-        return null;
+        return !ctx.crouchHeld() || ctx.horizontalSpeed() < ctx.param(this, MIN_SPEED) ? ctx.baseGroundMove() : null;
     }
 
     @Override
