@@ -2,11 +2,13 @@ package fr.hugman.mubble.platformer.client.compat.controlify;
 
 import dev.isxander.controlify.api.ControlifyApi;
 import dev.isxander.controlify.api.bind.ControlifyBindApi;
+import dev.isxander.controlify.api.bind.InputBinding;
 import dev.isxander.controlify.api.bind.InputBindingSupplier;
 import dev.isxander.controlify.api.entrypoint.ControlifyEntrypoint;
 import dev.isxander.controlify.api.entrypoint.InitContext;
 import dev.isxander.controlify.api.entrypoint.PreInitContext;
 import dev.isxander.controlify.bindings.BindContext;
+import dev.isxander.controlify.bindings.KeyMappingHandle;
 import dev.isxander.controlify.bindings.input.AxisInput;
 import dev.isxander.controlify.bindings.input.ButtonInput;
 import dev.isxander.controlify.bindings.input.Input;
@@ -16,13 +18,12 @@ import fr.hugman.mubble.Mubble;
 import fr.hugman.mubble.platformer.client.PlatformerClientConfig;
 import fr.hugman.mubble.platformer.client.PlatformerKeyMappings;
 import fr.hugman.mubble.platformer.client.compat.PlatformerControllerBindings;
-import fr.hugman.mubble.client.keybind.PowerUpKeybindsHandler;
+import fr.hugman.mubble.client.keybind.MubbleKeyBindings;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec2;
@@ -43,7 +44,7 @@ import org.jspecify.annotations.Nullable;
 @Environment(EnvType.CLIENT)
 public final class PlatformerControlifyEntrypoint implements ControlifyEntrypoint, PlatformerControllerBindings {
     @Nullable
-    private InputBindingSupplier forward, backward, left, right, powerUp, inventory, autoCamera;
+    private InputBindingSupplier forward, backward, left, right, inventory, autoCamera;
 
     @Override
     public void onControlifyPreInit(PreInitContext context) {
@@ -64,9 +65,10 @@ public final class PlatformerControlifyEntrypoint implements ControlifyEntrypoin
         pressing(bindings, PlatformerKeyMappings.SPIN, null);
         pressing(bindings, PlatformerKeyMappings.RECENTER, button("right_stick"));
         pressing(bindings, PlatformerKeyMappings.DEBUG_HUD, null);
-        // what the layout moves aside comes back on buttons of its own
-        this.powerUp = layout(bindings, "platformer_power_up", axis("left_trigger"));
-        this.inventory = layout(bindings, "platformer_inventory", button("dpad_up"));
+        // what the layout moves aside comes back on buttons of its own; the inventory key is pressed on
+        // tick, as the options that hold it do not exist yet
+        layout(bindings, "platformer_power_up", axis("left_trigger"), builder -> builder.keyEmulation(MubbleKeyBindings.TRIGGER_POWER_UP));
+        this.inventory = layout(bindings, "platformer_inventory", button("dpad_up"), builder -> builder);
         // the camera following the player round, the one setting of the layer about controllers, at hand
         // in Controlify's controls and radial menu, which gives it an icon
         this.autoCamera = bindings.registerBinding(builder -> builder
@@ -87,8 +89,8 @@ public final class PlatformerControlifyEntrypoint implements ControlifyEntrypoin
         register(bindings, key.getName(), input, builder -> builder.keyEmulation(key));
     }
 
-    private static InputBindingSupplier layout(ControlifyBindApi bindings, String name, Input input) {
-        return register(bindings, "key." + Mubble.MOD_ID + "." + name, input, builder -> builder);
+    private static InputBindingSupplier layout(ControlifyBindApi bindings, String name, Input input, ControlifyBindApi.RegistryCallback more) {
+        return register(bindings, "key." + Mubble.MOD_ID + "." + name, input, more);
     }
 
     /** A binding of the platformer layout, named after the translation key {@code key.mubble.<name>}, as {@code mubble:<name>}. */
@@ -124,7 +126,10 @@ public final class PlatformerControlifyEntrypoint implements ControlifyEntrypoin
     public void onControllersDiscovered(ControlifyApi controlify) {
     }
 
-    /** The bindings the layout brings back what it moves aside with: they act themselves, the context keeping them to the layout. */
+    /**
+     * The bindings that act themselves, the context keeping them to the layout: the auto camera, and the
+     * inventory, which presses the key the way {@code keyEmulation} would.
+     */
     private void tick(Minecraft minecraft) {
         var player = minecraft.player;
         if (player == null || minecraft.gui.screen() != null) {
@@ -135,35 +140,25 @@ public final class PlatformerControlifyEntrypoint implements ControlifyEntrypoin
             PlatformerClientConfig.set(PlatformerClientConfig.get().withAutoCameraController(on));
             player.sendOverlayMessage(Component.translatable("platformer." + Mubble.MOD_ID + ".settings.auto_camera_controller." + (on ? "on" : "off")));
         }
-        if (this.justPressed(this.powerUp)) {
-            PowerUpKeybindsHandler.trigger(player);
-        }
-        if (this.justPressed(this.inventory)) {
-            // as the inventory key does
-            if (minecraft.gameMode != null && minecraft.gameMode.isServerControlledInventory()) {
-                player.sendOpenInventory();
-            } else {
-                minecraft.getTutorial().onOpenInventory();
-                minecraft.gui.setScreen(new InventoryScreen(player));
-            }
+        var inventory = this.binding(this.inventory);
+        if (inventory != null && (inventory.justPressed() || inventory.justReleased())) {
+            ((KeyMappingHandle) minecraft.options.keyInventory).controlify$setPressed(inventory.justPressed());
         }
     }
 
     private boolean justPressed(@Nullable InputBindingSupplier supplier) {
-        var controller = ControlifyApi.get().getCurrentController();
-        if (supplier == null || controller.isEmpty()) {
-            return false;
-        }
-        var binding = supplier.onOrNull(controller.get());
+        var binding = this.binding(supplier);
         return binding != null && binding.justPressed();
     }
 
-    private float analogue(@Nullable InputBindingSupplier supplier) {
+    @Nullable
+    private InputBinding binding(@Nullable InputBindingSupplier supplier) {
         var controller = ControlifyApi.get().getCurrentController();
-        if (supplier == null || controller.isEmpty()) {
-            return 0.0F;
-        }
-        var binding = supplier.onOrNull(controller.get());
+        return supplier == null || controller.isEmpty() ? null : supplier.onOrNull(controller.get());
+    }
+
+    private float analogue(@Nullable InputBindingSupplier supplier) {
+        var binding = this.binding(supplier);
         return binding == null ? 0.0F : binding.analogueNow();
     }
 
