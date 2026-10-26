@@ -43,6 +43,7 @@ import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
@@ -196,6 +197,34 @@ public class PlatformerLifecycleGameTest {
         }
         helper.assertTrue(player.getAttribute(PlatformerAttributes.PLATFORMER_RUN_SPEED).hasModifier(perk), "the modifier of the perk stays");
         finish(helper, client);
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
+    public void theFallDamageOfTheProfileGoesThroughTheAttributesOfVanilla(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        var fall = player.damageSources().fall();
+        PlatformerTestKit.force(player, PlatformerProfileIds.OVERWORLD);
+        var overworld = PlatformerController.of(player).profile().fallDamage();
+        helper.assertValueEqual(player.getAttributeValue(Attributes.SAFE_FALL_DISTANCE), 3.0D + overworld.safeDistanceBonus(), "the safe fall distance of vanilla and the bonus of the profile");
+        helper.assertValueEqual(player.getAttributeValue(Attributes.FALL_DAMAGE_MULTIPLIER), overworld.multiplier(), "the fall damage multiplier of the profile");
+        float health = player.getHealth();
+        player.causeFallDamage(8.0D, 1.0F, fall);
+        helper.assertValueEqual(health - player.getHealth(), (float) Math.floor(8.0D - 3.0D - overworld.safeDistanceBonus()), "the damage of an 8 block fall under the overworld profile");
+
+        // the trial takes no fall damage at all
+        PlatformerTestKit.force(player, PlatformerProfileIds.TRIAL);
+        helper.assertValueEqual(player.getAttributeValue(Attributes.FALL_DAMAGE_MULTIPLIER), 0.0D, "the fall damage multiplier of the trial");
+        player.invulnerableTime = 0;
+        health = player.getHealth();
+        player.causeFallDamage(20.0D, 1.0F, fall);
+        helper.assertValueEqual(player.getHealth(), health, "health after a 20 block fall under the trial profile");
+
+        PlatformerSources.remove(player, PlatformerTestKit.SOURCE);
+        PlatformerController.of(player).tick();
+        helper.assertValueEqual(player.getAttributeValue(Attributes.SAFE_FALL_DISTANCE), 3.0D, "the safe fall distance of vanilla once the layer is off");
+        helper.assertValueEqual(player.getAttributeValue(Attributes.FALL_DAMAGE_MULTIPLIER), 1.0D, "the fall damage multiplier of vanilla once the layer is off");
+        helper.succeed();
     }
 
     @GameTest(structure = PlatformerTestKit.LANE)

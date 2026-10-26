@@ -17,7 +17,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -101,19 +100,5 @@ public abstract class PlayerPlatformerMixin implements PlatformerPlayer {
         if (controller.isDriving() && controller.state().negateFallDamage) {
             cir.setReturnValue(false);
         }
-    }
-
-    @ModifyVariable(method = "causeFallDamage", at = @At("HEAD"), argsOnly = true)
-    private double mubble$platformerSafeFall(double fallDistance) {
-        var controller = this.mubble$platformer();
-        var profile = controller.profile();
-        return controller.isDriving() && profile != null ? Math.max(0.0D, fallDistance - profile.fallDamage().safeDistanceBonus()) : fallDistance;
-    }
-
-    @ModifyVariable(method = "causeFallDamage", at = @At("HEAD"), argsOnly = true)
-    private float mubble$platformerFallMultiplier(float damageModifier) {
-        var controller = this.mubble$platformer();
-        var profile = controller.profile();
-        return controller.isDriving() && profile != null ? (float) (damageModifier * profile.fallDamage().multiplier()) : damageModifier;
     }
 }

@@ -15,6 +15,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.entity.player.Player;
 
@@ -52,6 +53,8 @@ public class PlatformerAttributes {
      * <p>
      * A platformer attribute takes the value of the profile: the modifier adds the gap between it and the
      * default. Being added to the base, it is scaled along with it by the modifiers that multiply the base.
+     * The fall damage of the profile goes on the attributes of vanilla, which read it where vanilla
+     * hurts a falling player, along with whatever else changes them.
      */
     public static final Map<Holder<Attribute>, Function<PlatformerProfile, AttributeModifier>> PROFILE = Map.ofEntries(
             value(PLATFORMER_RUN_SPEED, profile -> profile.physics().ground().runSpeed()),
@@ -61,7 +64,9 @@ public class PlatformerAttributes {
             value(PLATFORMER_AIR_CONTROL, profile -> profile.physics().air().control()),
             value(PLATFORMER_COYOTE_TICKS, profile -> profile.grace().coyoteTicks()),
             value(PLATFORMER_WALL_SLIDE_SPEED, profile -> profile.settingsOrDefault(PlatformerMoves.WALL_SLIDE).get(WallSlideMove.MAX_FALL_SPEED)),
-            value(PLATFORMER_GROUND_POUND_SPEED, profile -> profile.settingsOrDefault(PlatformerMoves.GROUND_POUND).get(GroundPoundMove.DROP_SPEED))
+            value(PLATFORMER_GROUND_POUND_SPEED, profile -> profile.settingsOrDefault(PlatformerMoves.GROUND_POUND).get(GroundPoundMove.DROP_SPEED)),
+            modifier(Attributes.SAFE_FALL_DISTANCE, AttributeModifier.Operation.ADD_VALUE, profile -> profile.fallDamage().safeDistanceBonus()),
+            modifier(Attributes.FALL_DAMAGE_MULTIPLIER, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL, profile -> profile.fallDamage().multiplier() - 1.0D)
     );
 
     private static Holder<Attribute> register(String path, double defaultValue, double min, double max) {
