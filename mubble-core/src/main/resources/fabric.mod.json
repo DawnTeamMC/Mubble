@@ -10,6 +10,12 @@
     ],
     "client": [
       "fr.hugman.mubble.client.MubbleClient"
+    ],
+    "controlify": [
+      "fr.hugman.mubble.client.compat.controlify.MubbleControlifyEntrypoint"
+    ],
+    "modmenu": [
+      "fr.hugman.mubble.client.compat.modmenu.MubbleModMenu"
     ]
   },
   "mixins": [
@@ -22,6 +28,10 @@
   "depends": {
     "minecraft": "*",
     "fabric-api": "*"
+  },
+  "suggests": {
+    "controlify": "*",
+    "modmenu": "*"
   },
   "custom": {
     "loom:injected_interfaces": {

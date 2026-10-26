@@ -1,0 +1,489 @@
+package fr.hugman.mubble.platformer;
+
+import fr.hugman.mubble.platformer.access.PlatformerAccess;
+import fr.hugman.mubble.platformer.access.PlatformerSources;
+import fr.hugman.mubble.platformer.access.ResolvedAccess;
+import fr.hugman.mubble.platformer.cue.CueEvent;
+import fr.hugman.mubble.platformer.move.ArcMove;
+import fr.hugman.mubble.platformer.move.PlatformerMove;
+import fr.hugman.mubble.platformer.move.PlatformerMoves;
+import fr.hugman.mubble.platformer.move.SpinMove;
+import fr.hugman.mubble.platformer.registries.PlatformerBuiltInRegistries;
+import fr.hugman.mubble.platformer.sim.PlatformerInputFrame;
+import fr.hugman.mubble.platformer.sim.PlatformerState;
+import fr.hugman.mubble.platformer.sim.PlatformerTuning;
+import fr.hugman.mubble.platformer.sim.PlatformerWorld;
+import fr.hugman.mubble.platformer.sim.MoveContext;
+import fr.hugman.mubble.platformer.sim.MoveResult;
+import fr.hugman.mubble.platformer.tags.PlatformerMoveTags;
+import fr.hugman.mubble.world.level.block.PoundableBlock;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Objects;
+import java.util.Optional;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
+
+/**
+ * The platformer movement layer of one player, on one side.
+ * <p>
+ * Every tick it works out what the sources of the player allow and whether the layer is on, and
+ * keeps the simulation state in between steps. Without an active source it does nothing else: no
+ * attribute is touched, no hook takes over, and vanilla movement, rendering and networking stay
+ * exactly what they are.
+ * <p>
+ * While it is on, the layer suspends itself whenever vanilla movement has to take over (lava,
+ * gliding, riding, flying, sleeping, dying, changing dimension) and comes back from a clean state once
+ * that is over. Water and climbing are the layer's own: it swims and climbs on the numbers of vanilla.
+ */
+public final class PlatformerController {
+    /** How many past steps a client keeps, to replay them on top of a correction from the server. */
+    public static final int HISTORY_SIZE = 64;
+
+    private final Player player;
+    private final PlatformerWorld world;
+    private PlatformerState state = new PlatformerState();
+    private ResolvedAccess access = ResolvedAccess.NONE;
+    @Nullable
+    private PlatformerProfile profile;
+    private boolean suspended;
+    /** Whether the player is in lava, see {@link #inLava()}. */
+    private boolean inLava;
+    /** Whether the last step was taken with the orbit camera, see {@link #orbiting()}. */
+    private boolean orbiting;
+    private boolean needsReset = true;
+
+    // the side predicting the movement
+    private final Deque<HistoryEntry> history = new ArrayDeque<>();
+    private int nextTick;
+    private Vec3 writtenVelocity = Vec3.ZERO;
+
+    // the side validating it
+    private final Validation validation = new Validation();
+
+    public PlatformerController(Player player) {
+        this.player = player;
+        this.world = new PlatformerWorld(player);
+    }
+
+    public static PlatformerController of(Player player) {
+        return ((PlatformerPlayer) player).mubble$platformer();
+    }
+
+    // -- the state of the layer -----------------------------------------------------------------
+
+    /**
+     * Brings the layer up to date with the sources of the player. Called at the start of every
+     * player tick, on both sides.
+     */
+    public void tick() {
+        var level = this.player.level();
+        if (!level.isClientSide()) {
+            PlatformerSources.pruneExpired(this.player, level.getGameTime());
+        }
+        boolean wasDriving = this.isDriving();
+        this.access = PlatformerAccess.of(this.player);
+        this.profile = this.access.isActive() ? this.access.profile().flatMap(key -> PlatformerProfiles.get(level, key)).orElse(null) : null;
+        this.applyProfileModifiers();
+        this.suspended = this.profile != null && this.shouldSuspend();
+
+        if (wasDriving && !this.isDriving()) {
+            this.stop();
+        } else if (!wasDriving && this.isDriving()) {
+            this.needsReset = true;
+        }
+    }
+
+    /** Whether vanilla movement has to take over for now. */
+    private boolean shouldSuspend() {
+        var p = this.player;
+        if (p.isDeadOrDying() || p.isSleeping() || p.isPassenger() || p.isSpectator() || p.isFallFlying() || p.getAbilities().flying) {
+            return true;
+        }
+        if (this.inLava()) {
+            return true;
+        }
+        return p instanceof ServerPlayer serverPlayer && serverPlayer.isChangingDimension();
+    }
+
+    /**
+     * Whether the player is in lava, where vanilla moves them. It starts in any lava, and only ends once
+     * out of it and standing on something: holding jump, vanilla lifts the player out of the surface and
+     * lets them fall back in, over and over, and the movement must not change hands with every bob.
+     * Water is the layer's own, see {@link fr.hugman.mubble.platformer.move.SwimMove}.
+     */
+    private boolean inLava() {
+        var p = this.player;
+        // the fluid height rather than isInLava, which says no on the first tick of the entity
+        if (p.getFluidHeight(FluidTags.LAVA) > 0.0D) {
+            this.inLava = true;
+        } else if (p.onGround()) {
+            this.inLava = false;
+        }
+        return this.inLava;
+    }
+
+    /** Ends the moves cleanly: no state, pose or visual is left behind for vanilla to trip on. */
+    private void stop() {
+        this.state = new PlatformerState();
+        this.needsReset = true;
+        this.history.clear();
+        this.validation.clear();
+        ((PlatformerPlayer) this.player).mubble$setPlatformerVisual(PlatformerVisual.NONE);
+    }
+
+    /**
+     * Puts the modifiers of the active profile on the attributes it sets, see {@link PlatformerAttributes#PROFILE},
+     * and takes them off once no profile is active. Checked every tick, so that a profile reloaded with
+     * other values, or a client told otherwise by the server, catches up right away.
+     */
+    private void applyProfileModifiers() {
+        if (!this.player.level().isClientSide()) {
+            PlatformerAttributes.resetLegacyBases(this.player);
+        }
+        for (var entry : PlatformerAttributes.PROFILE.entrySet()) {
+            var instance = this.player.getAttribute(entry.getKey());
+            if (instance == null) {
+                continue;
+            }
+            if (this.profile == null) {
+                instance.removeModifier(PlatformerAttributes.PROFILE_MODIFIER_ID);
+                continue;
+            }
+            var modifier = entry.getValue().apply(this.profile);
+            // put back only when it changed: every change sends the attribute to the clients
+            if (!modifier.equals(instance.getModifier(PlatformerAttributes.PROFILE_MODIFIER_ID))) {
+                instance.addOrUpdateTransientModifier(modifier);
+            }
+        }
+    }
+
+    /** Whether a profile is active, suspended or not. */
+    public boolean isActive() {
+        return this.profile != null;
+    }
+
+    public boolean isSuspended() {
+        return this.suspended;
+    }
+
+    /** Whether the layer is driving the movement right now: a profile is active and nothing suspends it. */
+    public boolean isDriving() {
+        return this.profile != null && !this.suspended;
+    }
+
+    @Nullable
+    public PlatformerProfile profile() {
+        return this.profile;
+    }
+
+    public ResolvedAccess access() {
+        return this.access;
+    }
+
+    public PlatformerState state() {
+        return this.state;
+    }
+
+    public void setState(PlatformerState state) {
+        this.state = state;
+    }
+
+    public PlatformerWorld world() {
+        return this.world;
+    }
+
+    public Player player() {
+        return this.player;
+    }
+
+    /**
+     * Whether {@code move} may be entered: allowed by the sources, supported by the profile, and, for
+     * the moves tagged {@code mubble:speed}, possible the way sprinting is.
+     */
+    public boolean allows(PlatformerMove move) {
+        if (move.isBase()) {
+            return true;
+        }
+        var profile = this.profile;
+        if (profile == null || !profile.supports(move.accessRoot()) || !this.access.allows(move)) {
+            return false;
+        }
+        if (!this.isSprintingPossible(profile) && isTagged(move, PlatformerMoveTags.SPEED)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Whether the player could sprint, as vanilla's {@code LocalPlayer.isSprintingPossible} has it: not
+     * while blind, nor, when the profile makes food count, while too hungry, unless they may fly.
+     */
+    private boolean isSprintingPossible(PlatformerProfile profile) {
+        if (this.player.isMobilityRestricted()) {
+            return false;
+        }
+        return !profile.costs().hungerGatesSpeedMoves() || this.player.getFoodData().hasEnoughFood() || this.player.getAbilities().mayfly;
+    }
+
+    private static boolean isTagged(PlatformerMove move, net.minecraft.tags.TagKey<PlatformerMove> tag) {
+        return PlatformerBuiltInRegistries.PLATFORMER_MOVE.getResourceKey(move.accessRoot())
+                .flatMap(PlatformerBuiltInRegistries.PLATFORMER_MOVE::get)
+                .map(holder -> holder.is(tag))
+                .orElse(false);
+    }
+
+    public PlatformerTuning tuning() {
+        return PlatformerTuning.of(this.player, Objects.requireNonNull(this.profile, "No active profile"), this::allows);
+    }
+
+    /** Whether the hands are kept from attacking and using items by the current move. */
+    public boolean handsBusy() {
+        return this.isDriving() && this.profile.settingsOrDefault(this.state.move).handsBusy(this.state.move);
+    }
+
+    /**
+     * Whether a press of attack or use goes to the moves rather than to the hands: while crouch is
+     * held, where it rolls (on the ground, or on landing) or dashes (in water), and while the move
+     * keeps the hands busy, where it dives out of a ground pound or boosts a roll. The rest of the time
+     * the hands hit and use the item they hold.
+     */
+    public boolean handsGoToMoves(boolean crouchHeld) {
+        if (!this.isDriving()) {
+            return false;
+        }
+        if (this.handsBusy()) {
+            return true;
+        }
+        if (this.state.move == PlatformerMoves.CLIMB) {
+            // crouch holds on to what the player climbs, the hands stay theirs
+            return false;
+        }
+        boolean swimming = this.state.move.kind() == PlatformerMove.Kind.WATER;
+        return crouchHeld && (swimming ? this.allows(PlatformerMoves.SWIM_DASH) : this.allows(PlatformerMoves.ROLL));
+    }
+
+    /**
+     * Whether the player took their last step with the orbit camera on: their hands then reach out
+     * where the body faces, which is never a block, see {@link PlatformerInteraction}.
+     */
+    public boolean orbiting() {
+        return this.isDriving() && this.orbiting;
+    }
+
+    public void setOrbiting(boolean orbiting) {
+        this.orbiting = orbiting;
+    }
+
+    public InteractionPolicy interaction() {
+        return this.isDriving() ? this.profile.interaction() : InteractionPolicy.FULL;
+    }
+
+    // -- starting over --------------------------------------------------------------------------
+
+    public boolean needsReset() {
+        return this.needsReset;
+    }
+
+    public void markReset() {
+        this.needsReset = true;
+    }
+
+    /**
+     * Starts the simulation over from what the entity looks like right now: on the ground or not,
+     * moving as fast as it does (within the safety ceiling), facing where it faces.
+     */
+    public void resetFromEntity() {
+        var fresh = new PlatformerState();
+        fresh.grounded = this.player.onGround();
+        fresh.move = fresh.grounded ? PlatformerMoves.runOrWalk(this::allows) : PlatformerMoves.FALL;
+        var velocity = this.player.getDeltaMovement();
+        double ceiling = this.profile == null ? 0.0D : this.profile.physics().safetyCeiling();
+        double speed = velocity.length();
+        if (speed > ceiling && speed > 0.0D) {
+            velocity = velocity.scale(ceiling / speed);
+        }
+        fresh.vx = velocity.x;
+        fresh.vy = fresh.grounded ? 0.0D : velocity.y;
+        fresh.vz = velocity.z;
+        fresh.facing = this.player.getYRot();
+        fresh.pose = this.player.getPose();
+        this.state = fresh;
+        this.needsReset = false;
+        this.history.clear();
+        this.writtenVelocity = velocity;
+    }
+
+    // -- effects of a step ----------------------------------------------------------------------
+
+    /**
+     * What a step costs and counts on the server: exhaustion when the profile charges for its moves,
+     * the jump statistic for every jump.
+     */
+    public void applyServerEffects(MoveContext ctx) {
+        var profile = ctx.profile();
+        for (var event : this.state.events) {
+            if (event.type() != CueEvent.START) {
+                continue;
+            }
+            if (profile.costs().exhaustion()) {
+                float exhaustion = ctx.settings(event.move()).exhaustion();
+                if (exhaustion > 0.0F) {
+                    this.player.causeFoodExhaustion(exhaustion);
+                }
+            }
+            if (event.move() instanceof ArcMove || event.move() instanceof SpinMove) {
+                this.player.awardStat(Stats.JUMP);
+            }
+        }
+        if (this.state.events.stream().anyMatch(event -> event.type() == CueEvent.START && event.move() == PlatformerMoves.GROUND_POUND_LAND)) {
+            var result = ctx.result();
+            this.poundBlocksUnder(ctx.start().add(result.dx(), result.dy(), result.dz()));
+        }
+        if (this.state.move == PlatformerMoves.CLIMB) {
+            // a climber does not fall, as in vanilla
+            this.player.resetFallDistance();
+        }
+        if (profile.costs().exhaustion() && this.state.grounded) {
+            double perBlock = this.state.move.exhaustionPerBlock(ctx);
+            if (perBlock > 0.0D) {
+                this.player.causeFoodExhaustion((float) (perBlock * ctx.result().horizontalDistance()));
+            }
+        }
+    }
+
+    /**
+     * A ground pound landing pounds the blocks under the feet, every one the player stands on: those
+     * that care, such as the bricks and question blocks of Super Mario, react, see {@link PoundableBlock}.
+     */
+    private void poundBlocksUnder(Vec3 feet) {
+        var box = this.world.box(feet, Pose.STANDING);
+        var level = this.player.level();
+        var under = new AABB(box.minX + 1.0E-3D, box.minY - 0.1D, box.minZ + 1.0E-3D, box.maxX - 1.0E-3D, box.minY - 1.0E-3D, box.maxZ - 1.0E-3D);
+        for (var pos : BlockPos.betweenClosed(BlockPos.containing(under.minX, under.minY, under.minZ), BlockPos.containing(under.maxX, under.maxY, under.maxZ))) {
+            var blockState = level.getBlockState(pos);
+            if (blockState.getBlock() instanceof PoundableBlock poundable) {
+                poundable.onPounded(level, blockState, pos.immutable(), this.player);
+            }
+        }
+    }
+
+    /** Publishes the move to the other players, when it changed. */
+    public void updateVisual() {
+        var platformerPlayer = (PlatformerPlayer) this.player;
+        var current = platformerPlayer.mubble$platformerVisual();
+        if (current.move() != this.state.move || current.seq() != this.state.moveSeq) {
+            float intensity = this.state.events.stream()
+                    .filter(event -> event.move() == this.state.move)
+                    .map(event -> (float) event.intensity())
+                    .reduce((first, second) -> second)
+                    .orElse((float) this.state.horizontalSpeed());
+            platformerPlayer.mubble$setPlatformerVisual(new PlatformerVisual(this.state.move, this.state.moveSeq, intensity, this.access.profile().orElse(null)));
+        }
+    }
+
+    // -- the predicting side --------------------------------------------------------------------
+
+    public int nextTick() {
+        return this.nextTick++;
+    }
+
+    public void remember(HistoryEntry entry) {
+        this.history.addLast(entry);
+        while (this.history.size() > HISTORY_SIZE) {
+            this.history.removeFirst();
+        }
+    }
+
+    public Deque<HistoryEntry> history() {
+        return this.history;
+    }
+
+    public Vec3 writtenVelocity() {
+        return this.writtenVelocity;
+    }
+
+    public void setWrittenVelocity(Vec3 velocity) {
+        this.writtenVelocity = velocity;
+    }
+
+    /**
+     * One step as the predicting side took it, kept to be replayed.
+     *
+     * @param frame   the input of the step
+     * @param from    where the step started
+     * @param result  what the world did with it
+     * @param impulse the velocity something outside the simulation set right before the step, if any
+     */
+    public record HistoryEntry(PlatformerInputFrame frame, Vec3 from, MoveResult result, Optional<Vec3> impulse) {
+    }
+
+    // -- the validating side --------------------------------------------------------------------
+
+    public Validation validation() {
+        return this.validation;
+    }
+
+    /** What the server remembers about the movement of a player it validates. */
+    public static final class Validation {
+        /** Where the last validated step left the player, which the next vanilla move packet has to match. */
+        @Nullable
+        public Vec3 expectedPosition;
+        /** Game time of the last push the server gave the player: knockback, explosion... */
+        public long lastImpulseTime = Long.MIN_VALUE;
+        /** How strong that push was, in blocks per tick. */
+        public double lastImpulseStrength;
+        /** How much of the free impulse budget is spent, in blocks per tick, as of {@link #freeImpulseTime}. */
+        public double freeImpulseSpent;
+        /** Game time of the last free impulse taken in. */
+        public long freeImpulseTime;
+        /** The tick number of the last input frame processed. */
+        public int lastTick = -1;
+        /** Whether the last vanilla move packet was announced by a validated step, which keeps the floating kick off. */
+        public boolean vouched;
+        /** Whether the teleport being sent is a rejection from the validator itself. */
+        public boolean ownTeleport;
+        public int accepted;
+        public int rejected;
+        public int corrected;
+        /** Why the last rejected step was rejected, for whoever investigates. */
+        @Nullable
+        public String lastRejection;
+
+        public void clear() {
+            this.expectedPosition = null;
+            this.lastTick = -1;
+            this.vouched = false;
+        }
+
+        public void recordImpulse(long gameTime, double strength) {
+            // two pushes on the same tick add up, at worst
+            this.lastImpulseStrength = gameTime == this.lastImpulseTime ? this.lastImpulseStrength + strength : strength;
+            this.lastImpulseTime = gameTime;
+        }
+
+        /**
+         * Takes {@code amount} out of the free impulse budget, which fills back up by {@code recovery}
+         * every tick, up to {@code budget}.
+         *
+         * @return whether the budget had that much left
+         */
+        public boolean spendFreeImpulse(long gameTime, double amount, double budget, double recovery) {
+            long elapsed = Math.max(0L, gameTime - this.freeImpulseTime);
+            double spent = Math.max(0.0D, this.freeImpulseSpent - elapsed * recovery);
+            if (spent + amount > budget) {
+                return false;
+            }
+            this.freeImpulseSpent = spent + amount;
+            this.freeImpulseTime = gameTime;
+            return true;
+        }
+    }
+}

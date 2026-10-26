@@ -1,0 +1,12 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "minecraft:item/leather_boots",
+    "tints": [
+      {
+        "type": "minecraft:dye",
+        "default": 7027231
+      }
+    ]
+  }
+}

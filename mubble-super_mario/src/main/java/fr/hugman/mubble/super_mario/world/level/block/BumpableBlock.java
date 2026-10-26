@@ -207,6 +207,15 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
         });
     }
 
+    /**
+     * Pounded from above, the block bumps as if hit from below: it pops up, and what it holds comes
+     * out of its top, where the one pounding it stands. A block that breaks lets them fall through.
+     */
+    @Override
+    public void onPounded(Level level, BlockState state, BlockPos pos, Entity entity) {
+        this.onHit(level, state, entity, new BlockHitResult(Vec3.atBottomCenterOf(pos), Direction.DOWN, pos, false));
+    }
+
     @Override
     public void onProjectileHit(Level level, BlockState state, BlockHitResult hit, Projectile projectile) {
         this.onHit(level, state, projectile, hit);
