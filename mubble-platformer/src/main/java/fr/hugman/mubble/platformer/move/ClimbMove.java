@@ -2,6 +2,7 @@ package fr.hugman.mubble.platformer.move;
 
 import fr.hugman.mubble.platformer.sim.MoveContext;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.block.Blocks;
 import org.jspecify.annotations.Nullable;
 
@@ -21,9 +22,6 @@ public class ClimbMove extends PlatformerMove {
     public static final MoveParam ACCEL = MoveParam.speed("side_accel", 0.05D);
     /** How fast the body turns towards the stick, in degrees per tick. */
     public static final MoveParam TURN_SPEED = MoveParam.degrees("turn_speed", 20.0D);
-
-    /** Share of the vertical speed kept every tick, as vanilla's. */
-    private static final double VERTICAL_DRAG = 0.98D;
 
     public ClimbMove(Properties properties) {
         super(properties);
@@ -70,7 +68,7 @@ public class ClimbMove extends PlatformerMove {
         if (ctx.jumpHeld() || ctx.stickPushesIntoWall()) {
             vy = ctx.param(this, CLIMB_SPEED);
         }
-        state.vy = (vy - ctx.tuning().effectiveGravity(falling)) * ctx.tuning().modifiedAirDrag(VERTICAL_DRAG);
+        state.vy = (vy - ctx.tuning().effectiveGravity(falling)) * ctx.tuning().modifiedAirDrag(LivingEntity.BASE_VERTICAL_AIR_DRAG);
     }
 
     /** Off what there is to climb, the player stands or falls. */
