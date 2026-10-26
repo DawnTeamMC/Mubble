@@ -207,14 +207,6 @@ public final class MoveContext {
         return length < EPSILON ? 0.0D : (this.stickX * x + this.stickZ * z) / (this.stickMagnitude * length);
     }
 
-    public boolean jumpPressed() {
-        return this.jumpPressed;
-    }
-
-    public boolean jumpReleased() {
-        return this.jumpReleased;
-    }
-
     public boolean jumpHeld() {
         return this.state.jumpHeld;
     }
@@ -230,14 +222,6 @@ public final class MoveContext {
 
     public boolean crouchHeld() {
         return this.state.crouchHeld;
-    }
-
-    public boolean actionPressed() {
-        return this.actionPressed;
-    }
-
-    public boolean actionHeld() {
-        return this.state.actionHeld;
     }
 
     public boolean spinPressed() {
@@ -1070,10 +1054,6 @@ public final class MoveContext {
     public void setVerticalDisplacement(double dy) {
         this.dy = dy;
         this.verticalDecided = true;
-    }
-
-    public double plannedVertical() {
-        return this.dy;
     }
 
     // -- angles ---------------------------------------------------------------------------------

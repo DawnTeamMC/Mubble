@@ -59,9 +59,4 @@ public record PlatformerRecording(Vec3 start, List<Step> steps) {
             Vec3.CODEC.fieldOf("start").forGetter(PlatformerRecording::start),
             Step.CODEC.listOf().fieldOf("steps").forGetter(PlatformerRecording::steps)
     ).apply(instance, PlatformerRecording::new));
-
-    /** A recording of inputs only, for the client path to play. */
-    public static PlatformerRecording ofInputs(List<PlatformerInputFrame> frames) {
-        return new PlatformerRecording(Vec3.ZERO, frames.stream().map(frame -> new Step(frame, Vec3.ZERO, Optional.empty(), Optional.empty())).toList());
-    }
 }
