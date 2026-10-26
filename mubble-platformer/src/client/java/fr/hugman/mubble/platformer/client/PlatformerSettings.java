@@ -25,7 +25,7 @@ public final class PlatformerSettings implements MubbleSettings.Section {
             OptionInstance<Boolean> autoCameraKeyboard,
             OptionInstance<Boolean> autoCameraController,
             OptionInstance<Integer> autoCameraSpeed,
-            OptionInstance<Integer> cameraDistance,
+            OptionInstance<Integer> cameraDistanceScale,
             OptionInstance<Integer> cameraMargin,
             OptionInstance<Integer> orbitSensitivity,
             OptionInstance<Integer> fovKick,
@@ -53,7 +53,7 @@ public final class PlatformerSettings implements MubbleSettings.Section {
                 bool("auto_camera_keyboard", c.autoCameraKeyboard()),
                 bool("auto_camera_controller", c.autoCameraController()),
                 number("auto_camera_speed", "degrees_per_second", 30, 360, (int) Math.round(c.autoCameraSpeed())),
-                number("camera_distance", "blocks", 1, 16, (int) Math.round(c.cameraDistance())),
+                number("camera_distance_scale", "percent", 25, 400, (int) Math.round(c.cameraDistanceScale() * 100.0D)),
                 number("camera_margin", "percent", 0, 200, (int) Math.round(c.cameraMargin() * 100.0D)),
                 number("orbit_sensitivity", "percent", 10, 300, (int) Math.round(c.orbitSensitivity() * 100.0D)),
                 number("fov_kick", "percent", 0, 30, (int) Math.round(c.fovKick() * 100.0D)),
@@ -61,7 +61,7 @@ public final class PlatformerSettings implements MubbleSettings.Section {
                 bool("debug_hud", c.debugHud()),
                 bool("silhouette", c.silhouette()));
         var o = this.fields;
-        return List.of(o.orbitCamera, o.cameraDistance, o.autoCameraKeyboard, o.autoCameraController, o.autoCameraSpeed,
+        return List.of(o.orbitCamera, o.cameraDistanceScale, o.autoCameraKeyboard, o.autoCameraController, o.autoCameraSpeed,
                 o.cameraMargin, o.orbitSensitivity, o.fovKick, o.silhouette, o.respectProfileHints, o.debugHud);
     }
 
@@ -74,7 +74,7 @@ public final class PlatformerSettings implements MubbleSettings.Section {
         var c = PlatformerClientConfig.get();
         PlatformerClientConfig.set(new PlatformerClientConfig(
                 o.orbitCamera.get(), o.autoCameraKeyboard.get(), o.autoCameraController.get(), o.autoCameraSpeed.get(),
-                o.cameraDistance.get(), c.cameraHeight(), o.cameraMargin.get() / 100.0D, c.recenterSpeed(),
+                o.cameraDistanceScale.get() / 100.0D, c.cameraHeight(), o.cameraMargin.get() / 100.0D, c.recenterSpeed(),
                 o.orbitSensitivity.get() / 100.0D, c.minPitch(), c.maxPitch(), o.fovKick.get() / 100.0D,
                 o.respectProfileHints.get(), o.debugHud.get(), o.silhouette.get()));
     }
