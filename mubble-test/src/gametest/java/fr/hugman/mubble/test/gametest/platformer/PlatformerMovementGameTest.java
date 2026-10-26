@@ -18,8 +18,11 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -961,10 +964,8 @@ public class PlatformerMovementGameTest {
         helper.succeed();
     }
 
-    @GameTest(structure = PlatformerTestKit.LANE)
-    public void bounceBlocksLaunchBackUp(GameTestHelper helper) {
-        PlatformerTestKit.floor(helper, Blocks.SLIME_BLOCK.defaultBlockState());
-        var player = PlatformerTestKit.client(helper, new BlockPos(5, 4, 5), PlatformerProfileIds.TRIAL);
+    /** Drops a player from 3 blocks above the floor, and returns the highest the feet went after the landing. */
+    private static double bouncePeak(GameTestHelper helper, Player player) {
         var frames = new PlatformerTestKit.Frames();
         for (int i = 0; i < 30 && player.getY() > helper.absolutePos(BlockPos.ZERO).getY() + 1.05D; i++) {
             PlatformerTestKit.step(player, frames.next());
@@ -976,7 +977,40 @@ public class PlatformerMovementGameTest {
             PlatformerTestKit.step(player, frames.next());
             peak = Math.max(peak, player.getY() - startY);
         }
+        return peak;
+    }
+
+    private static void addBounciness(Player player, double bounciness) {
+        player.getAttribute(Attributes.BOUNCINESS).addTransientModifier(new AttributeModifier(Identifier.fromNamespaceAndPath("mubble", "test_bounciness"), bounciness, AttributeModifier.Operation.ADD_VALUE));
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
+    public void bounceBlocksLaunchBackUp(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper, Blocks.SLIME_BLOCK.defaultBlockState());
+        var player = PlatformerTestKit.client(helper, new BlockPos(5, 4, 5), PlatformerProfileIds.TRIAL);
+        double peak = bouncePeak(helper, player);
         helper.assertTrue(peak > 3.5D, "a landing on a bounce block should send the player about 4 blocks up, got " + peak);
+        helper.succeed();
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
+    public void bouncinessBouncesOffAnyBlockAsHighAsItSays(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        var player = PlatformerTestKit.client(helper, new BlockPos(5, 4, 5), PlatformerProfileIds.TRIAL);
+        addBounciness(player, 0.5D);
+        double peak = bouncePeak(helper, player);
+        helper.assertTrue(peak > 1.75D && peak < 2.25D, "a bounciness of 0.5 should bounce off stone half as high as off slime, about 2 blocks, got " + peak);
+        helper.succeed();
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
+    public void blocksSuppressingBounceLandNormally(GameTestHelper helper) {
+        // honey is tagged minecraft:suppresses_bounce
+        PlatformerTestKit.floor(helper, Blocks.HONEY_BLOCK.defaultBlockState());
+        var player = PlatformerTestKit.client(helper, new BlockPos(5, 4, 5), PlatformerProfileIds.TRIAL);
+        addBounciness(player, 1.0D);
+        double peak = bouncePeak(helper, player);
+        helper.assertTrue(peak < 0.1D, "a block suppressing bounce should not bounce even a bouncy player, got " + peak);
         helper.succeed();
     }
 
