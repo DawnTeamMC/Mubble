@@ -170,7 +170,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `accel` | Speed the stick adds every tick, as vanilla's. |
 | `air_control` | Scale of the air control during the dive. |
 | `back_speed` | Speed of the backward drift. |
-| `boost` | Speed a boost adds; the base value of {@code mubble:platformer_roll_boost}, which is what the roll reads. |
+| `boost` | Speed a boost adds; the value the profile gives `mubble:platformer_roll_boost`, which is what the roll reads. |
 | `boost_cooldown_ticks` | Ticks between two boosts. |
 | `brake` | Share of its speed the skid loses every tick. |
 | `cancel_window_ticks` | Ticks an airborne move lasts before the aerial follow-ups may cut it short. |
@@ -178,7 +178,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `climb_speed` | Upward speed climbing gives, as vanilla's. |
 | `decel` | Speed lost every tick on flat ground. |
 | `drag` | Share of its speed the dash keeps every tick. |
-| `drop_speed` | Speed of the drop; the base value of {@code mubble:platformer_ground_pound_speed}, which is what the drop reads. |
+| `drop_speed` | Speed of the drop; the value the profile gives `mubble:platformer_ground_pound_speed`, which is what the drop reads. |
 | `exhaustion_per_block` | Food exhaustion per block travelled, when the profile charges for its moves. |
 | `exit_speed` | Speed below which the slide stops. |
 | `fall_speed` | The fastest fall while spinning. |
@@ -196,7 +196,7 @@ Parts of a move are not tagged: ground pound landing, ledge climb, rollout and s
 | `lift_ticks` | Ticks the lift takes to reach that height. |
 | `lock_ticks` | Ticks during which the stick cannot steer back, so that the kick is not undone right away. |
 | `max_boosts` | How many boosts a roll can take. |
-| `max_fall_speed` | The fastest slide down the wall; the base value of {@code mubble:platformer_wall_slide_speed}, which is what the slide reads. |
+| `max_fall_speed` | The fastest slide down the wall; the value the profile gives `mubble:platformer_wall_slide_speed`, which is what the slide reads. |
 | `max_height` | The highest obstacle vaulted over, in blocks. |
 | `max_speed` | Share of the run speed above which crouching and jumping is a long jump rather than a backflip. |
 | `min_height` | How high above the ground the player has to be. |
@@ -250,7 +250,9 @@ Using an item slows the player down as in vanilla: the client sets `PlatformerIn
 
 ## Attributes
 
-The profile sets the base value of these attributes while it is active, and they go back to their defaults when the layer turns off. Equipment, effects and commands can add modifiers like for any attribute.
+While a profile is active, it brings these attributes to its own values through a transient modifier, `mubble:platformer_profile`, which adds the gap between the value of the profile and the default (`PlatformerAttributes.PROFILE`). The modifier comes off when the layer turns off, and is never saved with the player: the base value is left to vanilla, and to commands. Equipment, effects and commands can add modifiers like for any attribute: added to the base before it is multiplied, the one of the profile is scaled by `add_multiplied_base` and `add_multiplied_total` modifiers alike, so they read relative to the profile in use.
+
+Saves made before the modifier, when the profile wrote its values in the base, get their base values put back to the defaults the first time the player is loaded (`PlatformerAttributes.resetLegacyBases`, remembered in the `mubble:platformer_legacy_bases_reset` attachment).
 
 | Attribute | Default | From the profile |
 |---|---|---|

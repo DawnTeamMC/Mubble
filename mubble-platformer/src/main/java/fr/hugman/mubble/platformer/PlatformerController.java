@@ -1,6 +1,5 @@
 package fr.hugman.mubble.platformer;
 
-import fr.hugman.mubble.platformer.PlatformerAttributes;
 import fr.hugman.mubble.platformer.access.PlatformerAccess;
 import fr.hugman.mubble.platformer.access.PlatformerSources;
 import fr.hugman.mubble.platformer.access.ResolvedAccess;
@@ -8,10 +7,7 @@ import fr.hugman.mubble.platformer.cue.CueEvent;
 import fr.hugman.mubble.platformer.move.ArcMove;
 import fr.hugman.mubble.platformer.move.PlatformerMove;
 import fr.hugman.mubble.platformer.move.PlatformerMoves;
-import fr.hugman.mubble.platformer.move.GroundPoundMove;
-import fr.hugman.mubble.platformer.move.RollMove;
 import fr.hugman.mubble.platformer.move.SpinMove;
-import fr.hugman.mubble.platformer.move.WallSlideMove;
 import fr.hugman.mubble.platformer.registries.PlatformerBuiltInRegistries;
 import fr.hugman.mubble.platformer.sim.PlatformerInputFrame;
 import fr.hugman.mubble.platformer.sim.PlatformerState;
@@ -26,12 +22,10 @@ import java.util.Deque;
 import java.util.Objects;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -59,8 +53,6 @@ public final class PlatformerController {
     private ResolvedAccess access = ResolvedAccess.NONE;
     @Nullable
     private PlatformerProfile profile;
-    @Nullable
-    private PlatformerProfile appliedProfile;
     private boolean suspended;
     /** Whether the player is in lava, see {@link #inLava()}. */
     private boolean inLava;
@@ -99,7 +91,7 @@ public final class PlatformerController {
         boolean wasDriving = this.isDriving();
         this.access = PlatformerAccess.of(this.player);
         this.profile = this.access.isActive() ? this.access.profile().flatMap(key -> PlatformerProfiles.get(level, key)).orElse(null) : null;
-        this.applyAttributeBases();
+        this.applyProfileModifiers();
         this.suspended = this.profile != null && this.shouldSuspend();
 
         if (wasDriving && !this.isDriving()) {
@@ -148,43 +140,29 @@ public final class PlatformerController {
     }
 
     /**
-     * Makes the values of the active profile the base values of the platformer attributes, and puts them
-     * back to their defaults once no profile is active.
+     * Puts the modifiers of the active profile on the attributes it sets, see {@link PlatformerAttributes#PROFILE},
+     * and takes them off once no profile is active. Checked every tick, so that a profile reloaded with
+     * other values, or a client told otherwise by the server, catches up right away.
      */
-    private void applyAttributeBases() {
-        if (this.profile == this.appliedProfile) {
-            return;
+    private void applyProfileModifiers() {
+        if (!this.player.level().isClientSide()) {
+            PlatformerAttributes.resetLegacyBases(this.player);
         }
-        this.appliedProfile = this.profile;
-        for (var attribute : PlatformerAttributes.PLATFORMER) {
-            var instance = this.player.getAttribute(attribute);
-            if (instance != null) {
-                instance.setBaseValue(this.profile == null ? attribute.value().getDefaultValue() : baseValue(attribute, this.profile));
+        for (var entry : PlatformerAttributes.PROFILE.entrySet()) {
+            var instance = this.player.getAttribute(entry.getKey());
+            if (instance == null) {
+                continue;
+            }
+            if (this.profile == null) {
+                instance.removeModifier(PlatformerAttributes.PROFILE_MODIFIER_ID);
+                continue;
+            }
+            var modifier = entry.getValue().apply(this.profile);
+            // put back only when it changed: every change sends the attribute to the clients
+            if (!modifier.equals(instance.getModifier(PlatformerAttributes.PROFILE_MODIFIER_ID))) {
+                instance.addOrUpdateTransientModifier(modifier);
             }
         }
-    }
-
-    /** What {@code profile} says the base value of {@code attribute} is. */
-    public static double baseValue(Holder<Attribute> attribute, PlatformerProfile profile) {
-        var physics = profile.physics();
-        if (attribute == PlatformerAttributes.PLATFORMER_RUN_SPEED) {
-            return physics.ground().runSpeed();
-        } else if (attribute == PlatformerAttributes.PLATFORMER_JUMP_HEIGHT) {
-            return physics.gravity().jumpHeightMultiplier();
-        } else if (attribute == PlatformerAttributes.PLATFORMER_ROLL_BOOST) {
-            return profile.settingsOrDefault(PlatformerMoves.ROLL).get(RollMove.BOOST);
-        } else if (attribute == PlatformerAttributes.PLATFORMER_AIR_DRAG) {
-            return physics.air().drag();
-        } else if (attribute == PlatformerAttributes.PLATFORMER_AIR_CONTROL) {
-            return physics.air().control();
-        } else if (attribute == PlatformerAttributes.PLATFORMER_COYOTE_TICKS) {
-            return profile.grace().coyoteTicks();
-        } else if (attribute == PlatformerAttributes.PLATFORMER_WALL_SLIDE_SPEED) {
-            return profile.settingsOrDefault(PlatformerMoves.WALL_SLIDE).get(WallSlideMove.MAX_FALL_SPEED);
-        } else if (attribute == PlatformerAttributes.PLATFORMER_GROUND_POUND_SPEED) {
-            return profile.settingsOrDefault(PlatformerMoves.GROUND_POUND).get(GroundPoundMove.DROP_SPEED);
-        }
-        return attribute.value().getDefaultValue();
     }
 
     /** Whether a profile is active, suspended or not. */

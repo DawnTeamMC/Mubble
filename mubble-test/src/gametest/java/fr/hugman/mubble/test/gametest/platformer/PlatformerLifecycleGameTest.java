@@ -10,6 +10,7 @@ import fr.hugman.mubble.platformer.references.PlatformerMoveIds;
 import fr.hugman.mubble.platformer.references.PlatformerProfileIds;
 import fr.hugman.mubble.platformer.tags.PlatformerMoveTags;
 import fr.hugman.mubble.test.gametest.mixin.FoodDataAccessor;
+import fr.hugman.mubble.platformer.PlatformerAttachments;
 import fr.hugman.mubble.platformer.PlatformerController;
 import fr.hugman.mubble.platformer.PlatformerInteraction;
 import fr.hugman.mubble.platformer.PlatformerPhysics;
@@ -35,14 +36,19 @@ import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Pose;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.TagValueInput;
+import net.minecraft.world.level.storage.TagValueOutput;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 
 /**
@@ -165,6 +171,78 @@ public class PlatformerLifecycleGameTest {
     }
 
     @GameTest(structure = PlatformerTestKit.LANE)
+    public void theProfileSetsTheAttributesThroughATransientModifier(GameTestHelper helper) {
+        var client = player(helper);
+        var player = client.server();
+        PlatformerTestKit.force(player, PlatformerProfileIds.TRIAL);
+        client.tickServer();
+        var trial = PlatformerController.of(player).profile();
+        for (var attribute : PlatformerAttributes.PLATFORMER) {
+            var instance = player.getAttribute(attribute);
+            helper.assertTrue(instance.hasModifier(PlatformerAttributes.PROFILE_MODIFIER_ID), "the modifier of the profile on " + attribute.getRegisteredName());
+            helper.assertValueEqual(instance.getBaseValue(), attribute.value().getDefaultValue(), "the base of " + attribute.getRegisteredName() + ", left to vanilla");
+        }
+        helper.assertTrue(Math.abs(player.getAttributeValue(PlatformerAttributes.PLATFORMER_RUN_SPEED) - trial.physics().ground().runSpeed()) < 1.0E-9D, "the run speed of the profile");
+
+        // a modifier of some perk reads relative to the profile
+        var perk = Identifier.fromNamespaceAndPath("mubble-gametest", "perk");
+        player.getAttribute(PlatformerAttributes.PLATFORMER_RUN_SPEED).addTransientModifier(new AttributeModifier(perk, 0.5D, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        helper.assertTrue(Math.abs(player.getAttributeValue(PlatformerAttributes.PLATFORMER_RUN_SPEED) - trial.physics().ground().runSpeed() * 1.5D) < 1.0E-9D, "half again the run speed of the profile");
+
+        PlatformerSources.remove(player, PlatformerTestKit.SOURCE);
+        client.tickServer();
+        for (var attribute : PlatformerAttributes.PLATFORMER) {
+            helper.assertFalse(player.getAttribute(attribute).hasModifier(PlatformerAttributes.PROFILE_MODIFIER_ID), "the modifier of the profile on " + attribute.getRegisteredName() + " once the layer is off");
+        }
+        helper.assertTrue(player.getAttribute(PlatformerAttributes.PLATFORMER_RUN_SPEED).hasModifier(perk), "the modifier of the perk stays");
+        finish(helper, client);
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
+    public void aSaveKeepsNothingOfTheProfile(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        var player = PlatformerTestKit.client(helper, new BlockPos(5, 1, 5), PlatformerProfileIds.TRIAL);
+        var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
+        player.saveWithoutId(output);
+
+        var reloaded = helper.makeMockPlayer(GameType.SURVIVAL);
+        reloaded.load(TagValueInput.create(ProblemReporter.DISCARDING, registries, output.buildResult()));
+        for (var attribute : PlatformerAttributes.PLATFORMER) {
+            var instance = reloaded.getAttribute(attribute);
+            helper.assertFalse(instance.hasModifier(PlatformerAttributes.PROFILE_MODIFIER_ID), "the modifier of the profile on " + attribute.getRegisteredName() + ", through the save");
+            helper.assertValueEqual(instance.getValue(), attribute.value().getDefaultValue(), attribute.getRegisteredName() + " through the save, before the layer is up to date");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
+    public void theBasesASaveFromBeforeTheModifiersCarriesAreReset(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        // the profile used to write its values in the base
+        var old = helper.makeMockPlayer(GameType.SURVIVAL);
+        old.getAttribute(PlatformerAttributes.PLATFORMER_RUN_SPEED).setBaseValue(0.55D);
+        old.removeAttached(PlatformerAttachments.LEGACY_BASES_RESET);
+        var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
+        old.saveWithoutId(output);
+
+        var reloaded = helper.makeMockPlayer(GameType.SURVIVAL);
+        reloaded.load(TagValueInput.create(ProblemReporter.DISCARDING, registries, output.buildResult()));
+        helper.assertValueEqual(reloaded.getAttributeBaseValue(PlatformerAttributes.PLATFORMER_RUN_SPEED), 0.55D, "the stale base, read from the save");
+        PlatformerController.of(reloaded).tick();
+        helper.assertValueEqual(reloaded.getAttributeBaseValue(PlatformerAttributes.PLATFORMER_RUN_SPEED), PlatformerAttributes.PLATFORMER_RUN_SPEED.value().getDefaultValue(), "the base once the player is loaded");
+
+        // only once: a base set afterwards, by a command, is the player's to keep
+        reloaded.getAttribute(PlatformerAttributes.PLATFORMER_RUN_SPEED).setBaseValue(0.5D);
+        output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
+        reloaded.saveWithoutId(output);
+        var again = helper.makeMockPlayer(GameType.SURVIVAL);
+        again.load(TagValueInput.create(ProblemReporter.DISCARDING, registries, output.buildResult()));
+        PlatformerController.of(again).tick();
+        helper.assertValueEqual(again.getAttributeBaseValue(PlatformerAttributes.PLATFORMER_RUN_SPEED), 0.5D, "a base set after the reset");
+        helper.succeed();
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
     public void waterIsSwumAndLavaSuspendsTheLayer(GameTestHelper helper) {
         var client = player(helper);
         var player = client.server();
@@ -255,12 +333,12 @@ public class PlatformerLifecycleGameTest {
             putLive(key, withRunSpeed(trial, 0.55D));
             PlatformerSources.add(player, new PlatformerSource(PlatformerTestKit.SOURCE, Optional.of(key), Map.of(MoveSelector.tag(PlatformerMoveTags.ALL), AccessMode.FORCE), 100, Optional.empty()));
             client.tickServer();
-            helper.assertValueEqual(player.getAttributeBaseValue(PlatformerAttributes.PLATFORMER_RUN_SPEED), 0.55D, "base run speed from the live profile");
+            helper.assertValueEqual(player.getAttributeValue(PlatformerAttributes.PLATFORMER_RUN_SPEED), 0.55D, "run speed from the live profile");
 
             // what a reload with an edited file does
             putLive(key, withRunSpeed(trial, 0.25D));
             client.tickServer();
-            helper.assertValueEqual(player.getAttributeBaseValue(PlatformerAttributes.PLATFORMER_RUN_SPEED), 0.25D, "base run speed after the reload");
+            helper.assertValueEqual(player.getAttributeValue(PlatformerAttributes.PLATFORMER_RUN_SPEED), 0.25D, "run speed after the reload");
         } finally {
             var restored = new HashMap<>(PlatformerProfiles.serverValues());
             restored.remove(key);
