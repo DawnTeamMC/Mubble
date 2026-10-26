@@ -13,7 +13,7 @@ public class WallSlideMove extends PlatformerMove {
     public static final MoveParam MIN_HEIGHT = MoveParam.blocks("min_height", 1.0D);
     /** How squarely the stick has to point at the wall, as the cosine of the largest angle allowed. */
     public static final MoveParam STICK_DOT = MoveParam.of("stick_dot", 0.4D, -1.0D, 1.0D, "cosine");
-    /** The fastest slide down the wall; the base value of {@code mubble:platformer_wall_slide_speed}, which is what the slide reads. */
+    /** The fastest slide down the wall; the value the profile gives {@code mubble:platformer_wall_slide_speed}, which is what the slide reads. */
     public static final MoveParam MAX_FALL_SPEED = MoveParam.speed("max_fall_speed", 0.15D);
     /** How far the wall may be from the player. */
     public static final MoveParam REACH = MoveParam.blocks("reach", 0.1D);

@@ -251,16 +251,10 @@ public final class PlatformerSimulation {
      */
     private static double bounceRestitution(MoveContext ctx, BlockPos below, double landingSpeed) {
         var block = ctx.world().blockState(below);
-        if (ctx.state().crouchHeld || block.is(BlockTags.SUPPRESSES_BOUNCE) || landingSpeed < effectiveGravity(ctx.tuning())) {
+        if (ctx.state().crouchHeld || block.is(BlockTags.SUPPRESSES_BOUNCE) || landingSpeed < ctx.tuning().effectiveGravity(true)) {
             return 0.0D;
         }
         double bounciness = ctx.world().player().getAttributeValue(Attributes.BOUNCINESS);
         return Math.max(bounciness, block.getBlock().getBounceRestitution());
-    }
-
-    /** The gravity of a falling player, as vanilla has it: slow falling softens it. */
-    private static double effectiveGravity(PlatformerTuning tuning) {
-        double gravity = PlatformerTuning.VANILLA_GRAVITY * tuning.gravityScale();
-        return tuning.slowFalling() ? Math.min(gravity, 0.01D) : gravity;
     }
 }

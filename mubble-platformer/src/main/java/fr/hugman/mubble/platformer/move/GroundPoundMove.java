@@ -11,7 +11,7 @@ import fr.hugman.mubble.platformer.sim.MoveContext;
 public class GroundPoundMove extends PlatformerMove {
     /** How long the player hangs before dropping. */
     public static final MoveParam HANG_TICKS = MoveParam.ticks("hang_ticks", 6.0D);
-    /** Speed of the drop; the base value of {@code mubble:platformer_ground_pound_speed}, which is what the drop reads. */
+    /** Speed of the drop; the value the profile gives {@code mubble:platformer_ground_pound_speed}, which is what the drop reads. */
     public static final MoveParam DROP_SPEED = MoveParam.speed("drop_speed", 1.2D);
     /** How high above the ground the player has to be. */
     public static final MoveParam MIN_HEIGHT = MoveParam.blocks("min_height", 1.0D);

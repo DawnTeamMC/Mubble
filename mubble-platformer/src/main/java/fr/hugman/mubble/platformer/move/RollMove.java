@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
 public class RollMove extends PlatformerMove {
     /** Speed the roll starts at, unless the player already goes faster. */
     public static final MoveParam SPEED = MoveParam.speed("speed", 0.6D);
-    /** Speed a boost adds; the base value of {@code mubble:platformer_roll_boost}, which is what the roll reads. */
+    /** Speed a boost adds; the value the profile gives {@code mubble:platformer_roll_boost}, which is what the roll reads. */
     public static final MoveParam BOOST = MoveParam.speed("boost", 0.1D);
     /** How many boosts a roll can take. */
     public static final MoveParam MAX_BOOSTS = MoveParam.of("max_boosts", 3.0D, 0.0D, 64.0D, "count");
