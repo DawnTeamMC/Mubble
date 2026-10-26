@@ -122,17 +122,17 @@ public final class PlatformerController {
     }
 
     /**
-     * Whether the player is in lava, where vanilla moves them. It starts in any lava, and only ends out
-     * of it or standing on its bottom: at the surface, the depth bobs every tick, and the movement must
-     * not change hands with it. Water is the layer's own, see {@link fr.hugman.mubble.platformer.move.SwimMove}.
+     * Whether the player is in lava, where vanilla moves them. It starts in any lava, and only ends once
+     * out of it and standing on something: holding jump, vanilla lifts the player out of the surface and
+     * lets them fall back in, over and over, and the movement must not change hands with every bob.
+     * Water is the layer's own, see {@link fr.hugman.mubble.platformer.move.SwimMove}.
      */
     private boolean inLava() {
         var p = this.player;
         // the fluid height rather than isInLava, which says no on the first tick of the entity
-        boolean touching = p.getFluidHeight(FluidTags.LAVA) > 0.0D;
-        if (touching) {
+        if (p.getFluidHeight(FluidTags.LAVA) > 0.0D) {
             this.inLava = true;
-        } else if (this.inLava && (!touching || p.onGround())) {
+        } else if (p.onGround()) {
             this.inLava = false;
         }
         return this.inLava;
@@ -318,7 +318,7 @@ public final class PlatformerController {
     public void resetFromEntity() {
         var fresh = new PlatformerState();
         fresh.grounded = this.player.onGround();
-        fresh.move = fresh.grounded ? (this.allows(PlatformerMoves.RUN) ? PlatformerMoves.RUN : PlatformerMoves.WALK) : PlatformerMoves.FALL;
+        fresh.move = fresh.grounded ? PlatformerMoves.runOrWalk(this::allows) : PlatformerMoves.FALL;
         var velocity = this.player.getDeltaMovement();
         double ceiling = this.profile == null ? 0.0D : this.profile.physics().safetyCeiling();
         double speed = velocity.length();
@@ -357,10 +357,6 @@ public final class PlatformerController {
             if (event.move() instanceof ArcMove || event.move() instanceof SpinMove) {
                 this.player.awardStat(Stats.JUMP);
             }
-        }
-        if (this.state.events.stream().anyMatch(event -> event.type() == CueEvent.START && event.move() == PlatformerMoves.GROUND_POUND_LAND)) {
-            var result = ctx.result();
-            this.poundBlocksUnder(ctx.start().add(result.dx(), result.dy(), result.dz()));
         }
         if (this.state.events.stream().anyMatch(event -> event.type() == CueEvent.START && event.move() == PlatformerMoves.GROUND_POUND_LAND)) {
             var result = ctx.result();

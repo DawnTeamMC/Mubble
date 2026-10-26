@@ -7,6 +7,7 @@ import fr.hugman.mubble.platformer.move.PlatformerMove.Properties;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 
@@ -102,6 +103,11 @@ public final class PlatformerMoves {
 
     private static PlatformerMove register(ResourceKey<PlatformerMove> key, PlatformerMove move) {
         return Registry.register(PlatformerBuiltInRegistries.PLATFORMER_MOVE, key, move);
+    }
+
+    /** The plain move of the ground when crouch is not held: running when {@code allowed} lets it, walking otherwise. */
+    public static PlatformerMove runOrWalk(Predicate<PlatformerMove> allowed) {
+        return allowed.test(RUN) ? RUN : WALK;
     }
 
     public static boolean isAerialFollowUp(PlatformerMove move) {

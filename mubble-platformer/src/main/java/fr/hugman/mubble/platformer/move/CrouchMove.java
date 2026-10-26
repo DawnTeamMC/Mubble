@@ -37,16 +37,11 @@ public class CrouchMove extends PlatformerMove {
     @Override
     @Nullable
     public PlatformerMove exit(MoveContext ctx) {
-        return ctx.crouchHeld() ? null : (ctx.allowed(PlatformerMoves.RUN) ? PlatformerMoves.RUN : PlatformerMoves.WALK);
+        return ctx.crouchHeld() ? null : ctx.baseGroundMove();
     }
 
     @Override
     public Pose pose(MoveContext ctx) {
         return Pose.CROUCHING;
-    }
-
-    /** Whether the crouch is slow enough for vanilla's edge guard to apply, which keeps a crawling player from falling off. */
-    public static boolean guardsEdges(MoveContext ctx) {
-        return ctx.horizontalSpeed() <= ctx.tuning().walkSpeed() * ctx.tuning().sneakingSpeed() + 1.0E-3D;
     }
 }

@@ -258,54 +258,6 @@ public final class PlatformerState {
         return read(buf);
     }
 
-    public void copyFrom(PlatformerState other) {
-        var buf = new FriendlyByteBuf(Unpooled.wrappedBuffer(other.toBytes()));
-        var copy = read(buf);
-        this.move = copy.move;
-        this.moveTicks = copy.moveTicks;
-        this.moveSeq = copy.moveSeq;
-        this.vx = copy.vx;
-        this.vy = copy.vy;
-        this.vz = copy.vz;
-        this.facing = copy.facing;
-        this.grounded = copy.grounded;
-        this.pose = copy.pose;
-        this.airTicks = copy.airTicks;
-        this.arcGravity = copy.arcGravity;
-        this.jumpHeld = copy.jumpHeld;
-        this.crouchHeld = copy.crouchHeld;
-        this.actionHeld = copy.actionHeld;
-        this.jumpBufferMs = copy.jumpBufferMs;
-        this.actionBufferMs = copy.actionBufferMs;
-        this.jumpCut = copy.jumpCut;
-        this.coyote = copy.coyote;
-        this.chainIndex = copy.chainIndex;
-        this.chainWindow = copy.chainWindow;
-        this.wallLeniency = copy.wallLeniency;
-        this.wallNormalX = copy.wallNormalX;
-        this.wallNormalZ = copy.wallNormalZ;
-        this.controlLock = copy.controlLock;
-        this.ledgeRegrab = copy.ledgeRegrab;
-        this.divedThisAir = copy.divedThisAir;
-        this.spunThisAir = copy.spunThisAir;
-        this.rollBoosts = copy.rollBoosts;
-        this.rollBoostCooldown = copy.rollBoostCooldown;
-        this.ledgeFace = copy.ledgeFace;
-        this.ledgeY = copy.ledgeY;
-        this.anchorX = copy.anchorX;
-        this.anchorY = copy.anchorY;
-        this.anchorZ = copy.anchorZ;
-        this.stickAngle = copy.stickAngle;
-        this.stickTracked = copy.stickTracked;
-        System.arraycopy(copy.spinTurns, 0, this.spinTurns, 0, SPIN_GESTURE_TICKS);
-        this.spinIndex = copy.spinIndex;
-        System.arraycopy(copy.slopeDy, 0, this.slopeDy, 0, MAX_SLOPE_WINDOW);
-        System.arraycopy(copy.slopeDxz, 0, this.slopeDxz, 0, MAX_SLOPE_WINDOW);
-        this.slopeIndex = copy.slopeIndex;
-        this.lastLandingSpeed = copy.lastLandingSpeed;
-        this.negateFallDamage = copy.negateFallDamage;
-    }
-
     public boolean sameAs(PlatformerState other) {
         return Arrays.equals(this.toBytes(), other.toBytes());
     }

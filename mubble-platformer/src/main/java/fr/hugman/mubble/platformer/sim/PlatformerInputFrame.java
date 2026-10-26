@@ -129,8 +129,4 @@ public record PlatformerInputFrame(
     public PlatformerInputFrame aiming() {
         return new PlatformerInputFrame(this.tick, this.stickX, this.stickZ, this.viewYaw, this.coupled, (byte) (this.held | AIMING), this.pressed, this.jumpAgeMs, this.actionAgeMs);
     }
-
-    public PlatformerInputFrame withTick(int tick) {
-        return new PlatformerInputFrame(tick, this.stickX, this.stickZ, this.viewYaw, this.coupled, this.held, this.pressed, this.jumpAgeMs, this.actionAgeMs);
-    }
 }
