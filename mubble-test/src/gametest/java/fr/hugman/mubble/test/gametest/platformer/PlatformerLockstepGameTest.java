@@ -6,6 +6,8 @@ import static fr.hugman.mubble.platformer.sim.PlatformerInputFrame.JUMP;
 import static fr.hugman.mubble.platformer.sim.PlatformerInputFrame.SPRINT;
 
 import fr.hugman.mubble.platformer.references.PlatformerProfileIds;
+import fr.hugman.mubble.test.gametest.support.PoundCountingBlock;
+import fr.hugman.mubble.test.gametest.support.TestBlocks;
 import fr.hugman.mubble.test.gametest.support.TestFlight;
 import fr.hugman.mubble.platformer.PlatformerController;
 import fr.hugman.mubble.platformer.PlatformerPlayer;
@@ -299,6 +301,23 @@ public class PlatformerLockstepGameTest {
         }, () -> {
             helper.assertTrue(played.contains(PlatformerMoves.GROUND_POUND_LAND), "the ground pound never landed, went through " + played);
             helper.assertBlockPresent(Blocks.AIR, brick);
+        });
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 200)
+    public void aGroundPoundLandingPoundsOnce(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        var block = new BlockPos(5, 1, 3);
+        helper.setBlock(block, TestBlocks.POUND_COUNTING_BLOCK.defaultBlockState());
+        var client = PlatformerTestClient.join(helper, new BlockPos(5, 5, 3), PlatformerProfileIds.TRIAL);
+        var frames = new PlatformerTestKit.Frames();
+        Set<PlatformerMove> played = new HashSet<>();
+        drive(helper, client, 60, t -> {
+            client.tick(t == 2 ? frames.press(CROUCH) : frames.next());
+            played.add(move(client.controller()));
+        }, () -> {
+            helper.assertTrue(played.contains(PlatformerMoves.GROUND_POUND_LAND), "the ground pound never landed, went through " + played);
+            helper.assertValueEqual(PoundCountingBlock.pounds(helper.absolutePos(block)), 1, "pounds of the block landed on");
         });
     }
 

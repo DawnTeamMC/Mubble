@@ -8,6 +8,9 @@
   ],
   "environment": "*",
   "entrypoints": {
+    "main": [
+      "fr.hugman.mubble.test.gametest.support.TestBlocks"
+    ],
     "fabric-gametest": [
       "fr.hugman.mubble.test.gametest.super_mario.BallGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.SuperballGameTest",

@@ -362,10 +362,6 @@ public final class PlatformerController {
             var result = ctx.result();
             this.poundBlocksUnder(ctx.start().add(result.dx(), result.dy(), result.dz()));
         }
-        if (this.state.events.stream().anyMatch(event -> event.type() == CueEvent.START && event.move() == PlatformerMoves.GROUND_POUND_LAND)) {
-            var result = ctx.result();
-            this.poundBlocksUnder(ctx.start().add(result.dx(), result.dy(), result.dz()));
-        }
         if (this.state.move == PlatformerMoves.CLIMB) {
             // a climber does not fall, as in vanilla
             this.player.resetFallDistance();
