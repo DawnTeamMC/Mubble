@@ -228,7 +228,7 @@ public final class PlatformerController {
 
     /**
      * Whether {@code move} may be entered: allowed by the sources, supported by the profile, and, for
-     * the moves tagged {@code mubble:speed}, affordable when the profile makes food count.
+     * the moves tagged {@code mubble:speed}, possible the way sprinting is.
      */
     public boolean allows(PlatformerMove move) {
         if (move.isBase()) {
@@ -238,14 +238,21 @@ public final class PlatformerController {
         if (profile == null || !profile.supports(move.accessRoot()) || !this.access.allows(move)) {
             return false;
         }
-        if (profile.costs().hungerGatesSpeedMoves() && !this.hasEnoughFood() && isTagged(move, PlatformerMoveTags.SPEED)) {
+        if (!this.isSprintingPossible(profile) && isTagged(move, PlatformerMoveTags.SPEED)) {
             return false;
         }
         return true;
     }
 
-    private boolean hasEnoughFood() {
-        return this.player.getFoodData().hasEnoughFood() || this.player.getAbilities().mayfly;
+    /**
+     * Whether the player could sprint, as vanilla's {@code LocalPlayer.isSprintingPossible} has it: not
+     * while blind, nor, when the profile makes food count, while too hungry, unless they may fly.
+     */
+    private boolean isSprintingPossible(PlatformerProfile profile) {
+        if (this.player.isMobilityRestricted()) {
+            return false;
+        }
+        return !profile.costs().hungerGatesSpeedMoves() || this.player.getFoodData().hasEnoughFood() || this.player.getAbilities().mayfly;
     }
 
     private static boolean isTagged(PlatformerMove move, net.minecraft.tags.TagKey<PlatformerMove> tag) {
