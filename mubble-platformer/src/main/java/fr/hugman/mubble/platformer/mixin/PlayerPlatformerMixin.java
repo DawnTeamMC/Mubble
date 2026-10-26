@@ -9,7 +9,6 @@ import fr.hugman.mubble.platformer.move.PlatformerMoves;
 import fr.hugman.mubble.platformer.PlatformerAttributes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
@@ -91,14 +90,6 @@ public abstract class PlayerPlatformerMixin implements PlatformerPlayer {
         if (controller.isDriving()) {
             // the edge guard of sneaking only belongs to the crouch: a long jump or a roll must be able to leave the edge
             cir.setReturnValue(cir.getReturnValueZ() && controller.state().move == PlatformerMoves.CROUCH);
-        }
-    }
-
-    @Inject(method = "causeFallDamage", at = @At("HEAD"), cancellable = true)
-    private void mubble$platformerNegatedFall(double fallDistance, float damageModifier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
-        var controller = this.mubble$platformer();
-        if (controller.isDriving() && controller.state().negateFallDamage) {
-            cir.setReturnValue(false);
         }
     }
 }
