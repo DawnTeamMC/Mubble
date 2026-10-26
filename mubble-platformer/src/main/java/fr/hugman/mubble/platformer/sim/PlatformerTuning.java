@@ -22,7 +22,8 @@ import net.minecraft.world.entity.player.Player;
  * @param runSpeed         value of {@code mubble:platformer_run_speed}
  * @param speedRatio       how much faster than its base the vanilla movement speed is, sprinting aside:
  *                         speed and slowness scale every run speed through it
- * @param jumpHeight       value of {@code mubble:platformer_jump_height}, jump boost included
+ * @param jumpHeight       value of {@code mubble:platformer_jump_height}, scaled by the vanilla jump
+ *                         strength attribute and jump boost (see {@link #jumpStrengthScale})
  * @param gravityScale     vanilla gravity attribute over its default value
  * @param airDrag          value of {@code mubble:platformer_air_drag}
  * @param airControl       value of {@code mubble:platformer_air_control}
@@ -62,15 +63,13 @@ public record PlatformerTuning(
     private static final Identifier SPRINTING_MODIFIER = Identifier.withDefaultNamespace("sprinting");
 
     public static PlatformerTuning of(Player player, PlatformerProfile profile, Predicate<PlatformerMove> allowed) {
-        var jumpBoost = player.getEffect(MobEffects.JUMP_BOOST);
         var levitation = player.getEffect(MobEffects.LEVITATION);
-        double jumpBoostScale = jumpBoost == null ? 1.0D : 1.0D + profile.physics().effects().jumpBoostHeightPerLevel() * (jumpBoost.getAmplifier() + 1);
         return new PlatformerTuning(
                 profile,
                 allowed,
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_RUN_SPEED),
                 speedRatio(player),
-                player.getAttributeValue(PlatformerAttributes.PLATFORMER_JUMP_HEIGHT) * jumpBoostScale,
+                player.getAttributeValue(PlatformerAttributes.PLATFORMER_JUMP_HEIGHT) * jumpStrengthScale(player),
                 player.getAttributeValue(Attributes.GRAVITY) / VANILLA_GRAVITY,
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_AIR_DRAG),
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_AIR_CONTROL),
@@ -85,6 +84,18 @@ public record PlatformerTuning(
                 player.getAttributeValue(Attributes.WATER_MOVEMENT_EFFICIENCY),
                 player.hasEffect(MobEffects.DOLPHINS_GRACE)
         );
+    }
+
+    /**
+     * How much higher than a plain vanilla jump the vanilla jump strength attribute and jump boost make
+     * a jump: vanilla takes off at their sum ({@code LivingEntity.getJumpPower}), and a height goes
+     * with the square of the take-off speed. The jump factor of the block underfoot, which vanilla
+     * also folds in there, is left to {@link PlatformerWorld#jumpFactor}.
+     */
+    private static double jumpStrengthScale(Player player) {
+        double strength = player.getAttributeValue(Attributes.JUMP_STRENGTH) + player.getJumpBoostPower();
+        double ratio = strength / Attributes.JUMP_STRENGTH.value().getDefaultValue();
+        return ratio * ratio;
     }
 
     /**

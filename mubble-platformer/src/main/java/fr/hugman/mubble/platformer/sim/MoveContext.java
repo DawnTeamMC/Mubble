@@ -673,8 +673,9 @@ public final class MoveContext {
      * Starts an arc reaching {@code height} blocks in {@code ticksToApex} ticks.
      * <p>
      * The gravity and the take-off speed are derived from both ({@code g = 2h/t²}, {@code v = 2h/t}),
-     * the height being scaled by {@code mubble:platformer_jump_height} (jump boost included) and by the
-     * jump factor of the block underfoot. A variable arc is cut short when jump is released early.
+     * the height being scaled by {@link PlatformerTuning#jumpHeight()} ({@code mubble:platformer_jump_height},
+     * the vanilla jump strength and jump boost) and by the jump factor of the block underfoot. A variable
+     * arc is cut short when jump is released early.
      */
     public void launch(double height, double ticksToApex, boolean variable) {
         double h = height * this.tuning.jumpHeight() * this.world.jumpFactor(this.start);
