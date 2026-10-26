@@ -25,7 +25,7 @@ import net.minecraft.world.entity.player.Player;
  *                         speed and slowness scale every run speed through it
  * @param jumpHeight       value of {@code mubble:platformer_jump_height}, scaled by the vanilla jump
  *                         strength attribute and jump boost (see {@link #jumpStrengthScale})
- * @param gravityScale     vanilla gravity attribute over its default value
+ * @param gravity          value of the vanilla gravity attribute, see {@link #effectiveGravity}
  * @param airDrag          value of {@code mubble:platformer_air_drag}
  * @param airDragModifier  value of the vanilla air drag modifier attribute, see {@link #modifiedAirDrag}
  * @param airControl       value of {@code mubble:platformer_air_control}
@@ -36,7 +36,7 @@ import net.minecraft.world.entity.player.Player;
  * @param sneakingSpeed    value of the vanilla sneaking speed attribute
  * @param stepHeight       value of the vanilla step height attribute
  * @param levitation       amplifier of the levitation effect, or -1
- * @param slowFalling      whether slow falling is on
+ * @param slowFalling      whether slow falling is on, which lowers gravity on the way down
  * @param waterEfficiency  value of the vanilla water movement efficiency attribute: depth strider
  * @param dolphinsGrace    whether dolphin's grace is on
  */
@@ -46,7 +46,7 @@ public record PlatformerTuning(
         double runSpeed,
         double speedRatio,
         double jumpHeight,
-        double gravityScale,
+        double gravity,
         double airDrag,
         double airDragModifier,
         double airControl,
@@ -61,8 +61,8 @@ public record PlatformerTuning(
         double waterEfficiency,
         boolean dolphinsGrace
 ) {
-    /** The vanilla default of the gravity attribute, which the profile gravities are written against. */
-    public static final double VANILLA_GRAVITY = 0.08D;
+    /** The most gravity slow falling leaves on the way down, as vanilla's {@code LivingEntity.getEffectiveGravity}. */
+    private static final double SLOW_FALLING_GRAVITY = 0.01D;
     private static final Identifier SPRINTING_MODIFIER = Identifier.withDefaultNamespace("sprinting");
 
     public static PlatformerTuning of(Player player, PlatformerProfile profile, Predicate<PlatformerMove> allowed) {
@@ -73,7 +73,7 @@ public record PlatformerTuning(
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_RUN_SPEED),
                 speedRatio(player),
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_JUMP_HEIGHT) * jumpStrengthScale(player),
-                player.getAttributeValue(Attributes.GRAVITY) / VANILLA_GRAVITY,
+                player.getAttributeValue(Attributes.GRAVITY),
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_AIR_DRAG),
                 player.getAttributeValue(Attributes.AIR_DRAG_MODIFIER),
                 player.getAttributeValue(PlatformerAttributes.PLATFORMER_AIR_CONTROL),
@@ -145,5 +145,24 @@ public record PlatformerTuning(
     /** Gravity of the states that are not a jump, before the vanilla gravity attribute scales it. */
     public double baseGravity() {
         return this.profile.physics().gravity().baseGravity();
+    }
+
+    /**
+     * The vanilla gravity of the player, as {@code LivingEntity.getEffectiveGravity}: the gravity
+     * attribute, which slow falling lowers on the way down.
+     *
+     * @param falling whether the player is going down, or not up at least
+     */
+    public double effectiveGravity(boolean falling) {
+        return falling && this.slowFalling ? Math.min(this.gravity, SLOW_FALLING_GRAVITY) : this.gravity;
+    }
+
+    /**
+     * How much the vanilla gravity scales the gravities of the profile, which are written against the
+     * default value of the gravity attribute: a gravity modifier, or slow falling, bends the platformer
+     * arcs in the same proportion as vanilla's.
+     */
+    public double gravityScale(boolean falling) {
+        return this.effectiveGravity(falling) / Attributes.GRAVITY.value().getDefaultValue();
     }
 }

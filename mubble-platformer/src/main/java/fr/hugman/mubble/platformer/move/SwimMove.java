@@ -1,7 +1,6 @@
 package fr.hugman.mubble.platformer.move;
 
 import fr.hugman.mubble.platformer.cue.CueEvent;
-import fr.hugman.mubble.platformer.sim.PlatformerTuning;
 import fr.hugman.mubble.platformer.sim.MoveContext;
 import org.jspecify.annotations.Nullable;
 
@@ -57,6 +56,7 @@ public class SwimMove extends PlatformerMove {
     @Override
     public void tick(MoveContext ctx) {
         var state = ctx.state();
+        boolean falling = state.vy <= 0.0D;
         if (ctx.jumpBuffered()) {
             // under the surface, jump strokes up; from the surface, it jumps out (see MoveContext#canJumpFromHere)
             ctx.consumeJump();
@@ -91,12 +91,8 @@ public class SwimMove extends PlatformerMove {
         ctx.setDisplacement(state.vx, state.vy, state.vz);
         state.vx *= drag;
         state.vz *= drag;
-        state.vy = state.vy * VERTICAL_DRAG - sinkGravity(tuning);
-    }
-
-    /** The slow sink of a player who does nothing in water: vanilla's gravity over 16. */
-    static double sinkGravity(PlatformerTuning tuning) {
-        return PlatformerTuning.VANILLA_GRAVITY * tuning.gravityScale() / 16.0D;
+        // the slow sink of a player who does nothing in water: vanilla's gravity over 16
+        state.vy = state.vy * VERTICAL_DRAG - tuning.effectiveGravity(falling) / 16.0D;
     }
 
     /** In water, the moves that make sense: jumping out, pounding, dashing, grabbing a ledge to climb out. */
