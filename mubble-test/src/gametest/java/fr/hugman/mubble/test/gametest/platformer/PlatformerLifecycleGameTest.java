@@ -228,6 +228,37 @@ public class PlatformerLifecycleGameTest {
     }
 
     @GameTest(structure = PlatformerTestKit.LANE)
+    public void aGroundPoundAndARollLandWithoutFallDamageOnTheServer(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        var pounder = PlatformerTestClient.join(helper, new BlockPos(1, 10, 5), PlatformerProfileIds.OVERWORLD);
+        var roller = PlatformerTestClient.join(helper, new BlockPos(5, 10, 5), PlatformerProfileIds.OVERWORLD);
+        var faller = PlatformerTestClient.join(helper, new BlockPos(8, 10, 5), PlatformerProfileIds.OVERWORLD);
+        var pound = new PlatformerTestKit.Frames();
+        // crouch held from the start, never pressed in the air, so that it does not ground pound
+        var roll = new PlatformerTestKit.Frames().hold(CROUCH);
+        var fall = new PlatformerTestKit.Frames();
+        pounder.tick(pound.press(CROUCH));
+        helper.assertValueEqual(pounder.controller().state().move, PlatformerMoves.GROUND_POUND, "crouch in the air");
+        boolean rolled = false;
+        for (int i = 0; i < 40; i++) {
+            pounder.tick(pound.next());
+            roller.tick(roller.self().onGround() ? roll.next() : roll.tap(ACTION));
+            rolled |= roller.controller().state().move == PlatformerMoves.ROLL;
+            faller.tick(fall.next());
+        }
+        helper.assertTrue(rolled, "action held in for the landing, crouch held, rolls");
+        helper.assertTrue(faller.server().getHealth() < faller.server().getMaxHealth(), "the same fall without a ground pound or a roll should hurt, the test proves nothing otherwise");
+        helper.assertValueEqual(pounder.server().getHealth(), pounder.server().getMaxHealth(), "health after a ground pound landing");
+        helper.assertValueEqual(roller.server().getHealth(), roller.server().getMaxHealth(), "health after rolling out of a landing");
+        pounder.assertUndisturbed("the ground pound");
+        roller.assertUndisturbed("the roll");
+        pounder.leave();
+        roller.leave();
+        faller.leave();
+        helper.succeed();
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE)
     public void aSaveKeepsNothingOfTheProfile(GameTestHelper helper) {
         var registries = helper.getLevel().registryAccess();
         var player = PlatformerTestKit.client(helper, new BlockPos(5, 1, 5), PlatformerProfileIds.TRIAL);
