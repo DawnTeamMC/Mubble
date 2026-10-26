@@ -165,6 +165,14 @@ public final class PlatformerTestClient {
      * along x than the simulation took it.
      */
     public void tickTampered(PlatformerInputFrame frame, double extraX) {
+        this.tickTampered(frame, new Vec3(extraX, 0.0D, 0.0D));
+    }
+
+    /**
+     * One tick of a client lying about its step: it reports, and moves, {@code extra} further than the
+     * simulation took it.
+     */
+    public void tickTampered(PlatformerInputFrame frame, Vec3 extra) {
         this.receive();
         if (this.kicked) {
             return;
@@ -174,8 +182,8 @@ public final class PlatformerTestClient {
         this.self.setOldPosAndRot();
         var payload = PlatformerPrediction.step(this.self, controller, frame).payload();
         var result = payload.result();
-        var forged = new MoveResult(result.dx() + extraX, result.dy(), result.dz(), result.onGround(), result.horizontalCollision(), result.verticalCollision());
-        this.self.setPos(this.self.position().add(extraX, 0.0D, 0.0D));
+        var forged = new MoveResult(result.dx() + extra.x, result.dy() + extra.y, result.dz() + extra.z, result.onGround(), result.horizontalCollision(), result.verticalCollision());
+        this.self.setPos(this.self.position().add(extra));
         new ServerboundCustomPayloadPacket(new PlatformerInputPayload(payload.frame(), payload.from(), forged, payload.fingerprint(), payload.impulse())).handle(this.server.connection);
         this.sendPosition();
         this.server.connection.tick();

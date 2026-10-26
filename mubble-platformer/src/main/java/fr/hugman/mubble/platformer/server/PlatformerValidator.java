@@ -60,6 +60,8 @@ public final class PlatformerValidator {
         }
 
         var state = controller.state().copy();
+        // what vanilla steps up from: the ground as the last step left it, which a push of this tick does not change yet
+        boolean startedGrounded = state.grounded;
         if (payload.impulse().isPresent()) {
             var impulse = payload.impulse().get();
             if (!impulseHoldsUp(player, controller, settings, new Vec3(state.vx, state.vy, state.vz), impulse)) {
@@ -78,7 +80,7 @@ public final class PlatformerValidator {
         String reason;
         try {
             ctx = PlatformerSimulation.plan(state, frame, tuning, controller.world(), from);
-            reason = implausibility(ctx, result, tuning, settings);
+            reason = implausibility(ctx, result, startedGrounded, tuning, settings);
         } finally {
             player.setDeltaMovement(vanillaVelocity);
         }
@@ -127,7 +129,7 @@ public final class PlatformerValidator {
      * away from a displacement, along each axis; stepping up a block is the one thing vanilla adds.
      */
     @Nullable
-    static String implausibility(MoveContext ctx, MoveResult result, PlatformerTuning tuning, PlatformerValidation settings) {
+    static String implausibility(MoveContext ctx, MoveResult result, boolean startedGrounded, PlatformerTuning tuning, PlatformerValidation settings) {
         var planned = ctx.total();
         double tolerance = settings.displacementTolerance();
         if (!withinAxis(result.dx(), planned.x, tolerance)) {
@@ -141,7 +143,8 @@ public final class PlatformerValidator {
         if (result.dy() < Math.min(planned.y, 0.0D) - tolerance) {
             return "fell " + result.dy() + " where " + planned.y + " was planned";
         }
-        double maxUp = Math.max(planned.y, 0.0D) + tuning.stepHeight() + tolerance;
+        double step = canStepUp(planned, result, startedGrounded) ? tuning.stepHeight() : 0.0D;
+        double maxUp = Math.max(planned.y, 0.0D) + step + tolerance;
         if (result.dy() > maxUp) {
             return "rose " + result.dy() + " where at most " + maxUp + " was possible";
         }
@@ -153,6 +156,15 @@ public final class PlatformerValidator {
             return "claims to stand on nothing at " + ctx.start().add(result.dx(), result.dy(), result.dz());
         }
         return null;
+    }
+
+    /**
+     * Whether vanilla would have stepped the player up during the step: only going sideways, and only
+     * from the ground or onto it, as in {@code Entity.collide}. A player in the air is lifted by nothing
+     * but what the simulation planned, such as a vault or a ledge climb.
+     */
+    private static boolean canStepUp(Vec3 planned, MoveResult result, boolean startedGrounded) {
+        return planned.horizontalDistanceSqr() > 0.0D && (startedGrounded || result.onGround());
     }
 
     /**
