@@ -26,7 +26,14 @@ public class ServerCommonPacketListenerImplPlatformerMixin {
     @Inject(method = "send(Lnet/minecraft/network/protocol/Packet;Lio/netty/channel/ChannelFutureListener;)V", at = @At("HEAD"))
     private void mubble$watchPlatformerMotion(Packet<?> packet, @Nullable ChannelFutureListener listener, CallbackInfo ci) {
         if ((Object) this instanceof ServerGamePacketListenerImpl game && game.player != null) {
-            mubble$watch(game.player, packet);
+            var player = game.player;
+            var server = player.level().getServer();
+            if (server.isSameThread()) {
+                mubble$watch(player, packet);
+            } else {
+                // a packet can be sent from another thread, and what the validator keeps is the server thread's
+                server.execute(() -> mubble$watch(player, packet));
+            }
         }
     }
 
