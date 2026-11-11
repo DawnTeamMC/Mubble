@@ -94,8 +94,17 @@ public final class PlatformerCamera {
     private PlatformerCamera() {
     }
 
-    /** Whether the orbit camera is the one in use. */
+    /** Whether the orbit camera is the one in use, as of the last tick or frame, see {@link #settleOrbit}. */
     public static boolean isOrbiting() {
+        return orbiting && Minecraft.getInstance().player != null;
+    }
+
+    /**
+     * Works out whether the orbit camera is the one in use, and hands the view over when that changes.
+     * Called once a tick and before the camera of a frame is placed, never while the frame is drawn:
+     * handing over turns the player.
+     */
+    private static boolean settleOrbit() {
         var minecraft = Minecraft.getInstance();
         var player = minecraft.player;
         boolean now = player != null
@@ -184,7 +193,11 @@ public final class PlatformerCamera {
      */
     public static void tick(Minecraft minecraft) {
         var player = minecraft.player;
-        if (player == null || (!isOrbiting() && blend <= 0.0F)) {
+        if (player == null) {
+            reset();
+            return;
+        }
+        if (!settleOrbit() && blend <= 0.0F) {
             FRAMING.reset();
             focus = null;
             focusO = null;
@@ -201,6 +214,21 @@ public final class PlatformerCamera {
         // steps, the edge left behind hides it for a tick, and it comes closer only that much
         focus = PlatformerAim.trail(player.level(), player, target, focus, player.getEyeHeight() + PlatformerClientConfig.get().cameraHeight());
         FRAMING.set(focus);
+    }
+
+    /** Forgets the world the player left: the camera of the next one starts from the vanilla view, not from where this one looked. */
+    public static void reset() {
+        orbiting = false;
+        recentering = false;
+        blend = 0.0F;
+        aim = 0.0F;
+        distance = -1.0D;
+        focus = null;
+        focusO = null;
+        lastUseNanos = 0L;
+        lastFrameNanos = 0L;
+        FRAMING.reset();
+        FOLLOW.reset();
     }
 
     /** Whether the height of the camera follows the player: on the ground, a ladder, a wall or in water, not in the air. */
@@ -260,7 +288,7 @@ public final class PlatformerCamera {
         float seconds = lastFrameNanos == 0L ? 0.0F : Math.min(0.25F, (now - lastFrameNanos) / 1.0E9F);
         lastFrameNanos = now;
 
-        boolean orbit = isOrbiting();
+        boolean orbit = settleOrbit();
         // only the third person view from the back is something to blend with
         boolean blendable = Minecraft.getInstance().options.getCameraType() == CameraType.THIRD_PERSON_BACK;
         float targetBlend = orbit ? 1.0F : 0.0F;
