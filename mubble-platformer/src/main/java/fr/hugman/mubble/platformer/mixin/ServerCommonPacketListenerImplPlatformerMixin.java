@@ -49,6 +49,8 @@ public class ServerCommonPacketListenerImplPlatformerMixin {
             validation.expectedPosition = null;
             if (!validation.ownTeleport) {
                 controller.markReset();
+                // a client sent to another dimension starts over with a new player, counting its steps from zero
+                validation.lastTick = -1;
             }
         } else if (packet instanceof ClientboundBundlePacket bundle) {
             bundle.subPackets().forEach(sub -> mubble$watch(player, sub));

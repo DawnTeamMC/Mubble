@@ -51,6 +51,11 @@ public final class PlatformerValidator {
             return;
         }
         var validation = controller.validation();
+        if (payload.frame().tick() <= validation.lastTick || !validation.takesStep(player.level().getServer().getTickCount())) {
+            // a step sent twice, or a flood of them: the simulation only ever goes forward, a few steps a tick
+            return;
+        }
+        validation.lastTick = payload.frame().tick();
         var settings = controller.profile().validation();
         var frame = payload.frame().sanitized().slowedFor(player);
         var result = payload.result();
@@ -106,7 +111,6 @@ public final class PlatformerValidator {
         controller.setState(state);
         controller.setOrbiting(!frame.coupled());
         validation.expectedPosition = from.add(result.dx(), result.dy(), result.dz());
-        validation.lastTick = frame.tick();
         validation.accepted++;
         // the vanilla move packet right behind this one moves the hitbox: it has to have the pose of the step already
         player.setPose(state.pose);

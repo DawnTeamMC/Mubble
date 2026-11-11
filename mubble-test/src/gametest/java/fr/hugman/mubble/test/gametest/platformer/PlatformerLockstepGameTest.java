@@ -13,7 +13,9 @@ import fr.hugman.mubble.platformer.PlatformerController;
 import fr.hugman.mubble.platformer.PlatformerPlayer;
 import fr.hugman.mubble.platformer.move.PlatformerMove;
 import fr.hugman.mubble.platformer.move.PlatformerMoves;
+import fr.hugman.mubble.platformer.network.PlatformerInputPayload;
 import fr.hugman.mubble.platformer.replay.PlatformerReplayer;
+import fr.hugman.mubble.platformer.sim.MoveResult;
 import fr.hugman.mubble.platformer.sim.PlatformerInputFrame;
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
 import fr.hugman.mubble.super_mario.world.level.block.entity.BumpableBlockEntity;
@@ -21,12 +23,14 @@ import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEnti
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.IntConsumer;
 import java.util.function.Supplier;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.network.protocol.common.ServerboundCustomPayloadPacket;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -397,6 +401,49 @@ public class PlatformerLockstepGameTest {
         // the first report after the setting changed comes with the reminder a second later, then 4 seconds of floating
         drive(helper, client, 130, t -> client.tickVanilla(hover, false), () ->
                 helper.assertTrue(client.kicked(), "a vanilla player floating for 5 seconds should be kicked, which makes the hang test meaningful"));
+    }
+
+    /** A step standing still where the server has the player has nothing implausible in it: only its number tells it was taken in already. */
+    private static PlatformerInputPayload standingStill(PlatformerTestClient client, PlatformerInputFrame frame) {
+        return new PlatformerInputPayload(frame, client.server().position(), new MoveResult(0.0D, 0.0D, 0.0D, false, false, false), 0L, Optional.empty());
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 100)
+    public void aStepSentAgainIsNotTakenInTwice(GameTestHelper helper) {
+        walledLane(helper);
+        var client = PlatformerTestClient.join(helper, new BlockPos(5, 1, 3), PlatformerProfileIds.TRIAL);
+        var frames = new PlatformerTestKit.Frames().forward();
+        drive(helper, client, 20, t -> {
+            var frame = frames.next();
+            client.tick(frame);
+            if (t == 10) {
+                var validation = client.serverController().validation();
+                int accepted = validation.accepted;
+                for (int i = 0; i < 50; i++) {
+                    new ServerboundCustomPayloadPacket(standingStill(client, frame)).handle(client.server().connection);
+                }
+                helper.assertValueEqual(validation.accepted, accepted, "steps taken in once the last one was sent again");
+            }
+        }, () -> client.assertUndisturbed("a step sent again"));
+    }
+
+    @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 100)
+    public void aFloodOfStepsIsLeftUnansweredPastAFewATick(GameTestHelper helper) {
+        walledLane(helper);
+        var client = PlatformerTestClient.join(helper, new BlockPos(5, 1, 3), PlatformerProfileIds.TRIAL);
+        var frames = new PlatformerTestKit.Frames().forward();
+        drive(helper, client, 10, t -> {
+            client.tick(frames.next());
+            if (t == 9) {
+                var validation = client.serverController().validation();
+                int accepted = validation.accepted;
+                for (int i = 0; i < 100; i++) {
+                    new ServerboundCustomPayloadPacket(standingStill(client, frames.next())).handle(client.server().connection);
+                }
+                helper.assertTrue(validation.accepted - accepted < PlatformerController.Validation.MAX_STEPS_PER_TICK,
+                        "the server should take in a few steps a tick at most, it took in " + (validation.accepted - accepted) + " of 100");
+            }
+        }, () -> helper.assertFalse(client.kicked(), "a flood of steps goes unanswered, it does not kick the player"));
     }
 
     @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 100)

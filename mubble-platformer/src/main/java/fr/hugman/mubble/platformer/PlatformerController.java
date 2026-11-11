@@ -433,6 +433,9 @@ public final class PlatformerController {
 
     /** What the server remembers about the movement of a player it validates. */
     public static final class Validation {
+        /** How many steps of a player the server takes in within one tick of its own: enough for a client catching up after a stall. */
+        public static final int MAX_STEPS_PER_TICK = 20;
+
         /** Where the last validated step left the player, which the next vanilla move packet has to match. */
         @Nullable
         public Vec3 expectedPosition;
@@ -444,8 +447,11 @@ public final class PlatformerController {
         public double freeImpulseSpent;
         /** Game time of the last free impulse taken in. */
         public long freeImpulseTime;
-        /** The tick number of the last input frame processed. */
+        /** The tick number of the last input frame processed: the next one has to come after it. */
         public int lastTick = -1;
+        /** The server tick steps are being counted on, and how many it took in so far, see {@link #takesStep}. */
+        private int stepsTick = -1;
+        private int steps;
         /** Whether the last vanilla move packet was announced by a validated step, which keeps the floating kick off. */
         public boolean vouched;
         /** Whether the teleport being sent is a rejection from the validator itself. */
@@ -461,6 +467,19 @@ public final class PlatformerController {
             this.expectedPosition = null;
             this.lastTick = -1;
             this.vouched = false;
+        }
+
+        /**
+         * Counts one more step on the server tick {@code serverTick}.
+         *
+         * @return whether the server takes it in: past {@link #MAX_STEPS_PER_TICK}, steps are left unanswered
+         */
+        public boolean takesStep(int serverTick) {
+            if (serverTick != this.stepsTick) {
+                this.stepsTick = serverTick;
+                this.steps = 0;
+            }
+            return ++this.steps <= MAX_STEPS_PER_TICK;
         }
 
         public void recordImpulse(long gameTime, double strength) {
