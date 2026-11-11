@@ -362,7 +362,7 @@ public final class MoveContext {
         s.spinIndex = (s.spinIndex + 1) % PlatformerState.SPIN_GESTURE_TICKS;
 
         if (this.input.coupled() && !(this.aiming() && s.move.facesItsOwnWay())) {
-            s.facing = this.input.viewYaw();
+            s.facing = Mth.wrapDegrees(this.input.viewYaw());
         }
     }
 

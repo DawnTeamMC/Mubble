@@ -403,6 +403,22 @@ public class PlatformerLockstepGameTest {
                 helper.assertTrue(client.kicked(), "a vanilla player floating for 5 seconds should be kicked, which makes the hang test meaningful"));
     }
 
+    /**
+     * What a game client sends: a view that turned round more than once without ever wrapping, and a
+     * stick that rotating it by the view left a rounding past full tilt. The server sanitizes both, and
+     * the client has to have predicted on the very same frame.
+     */
+    @GameTest(structure = PlatformerTestKit.LANE, maxTicks = 100)
+    public void anUnwrappedViewAndAStickPastFullTiltStayInLockstep(GameTestHelper helper) {
+        walledLane(helper);
+        var client = PlatformerTestClient.join(helper, new BlockPos(5, 1, 3), PlatformerProfileIds.TRIAL);
+        var frames = new PlatformerTestKit.Frames().yaw(560.0F).stick(0.0F, 1.00005F).hold(SPRINT);
+        drive(helper, client, 40, t -> client.tick(t % 20 == 10 ? frames.tap(JUMP) : frames.next()), () -> {
+            client.assertUndisturbed("an unwrapped view and a stick past full tilt");
+            helper.assertValueEqual(client.corrections(), 0, "corrections (" + client.events() + ")");
+        });
+    }
+
     /** A step standing still where the server has the player has nothing implausible in it: only its number tells it was taken in already. */
     private static PlatformerInputPayload standingStill(PlatformerTestClient client, PlatformerInputFrame frame) {
         return new PlatformerInputPayload(frame, client.server().position(), new MoveResult(0.0D, 0.0D, 0.0D, false, false, false), 0L, Optional.empty());

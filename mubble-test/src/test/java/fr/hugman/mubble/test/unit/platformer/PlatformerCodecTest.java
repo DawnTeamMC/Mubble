@@ -165,6 +165,20 @@ public class PlatformerCodecTest {
     }
 
     @Test
+    @DisplayName("sanitizing a frame again changes nothing, wherever the stick points")
+    void sanitizingIsStable() {
+        for (float degrees = 0.0F; degrees < 360.0F; degrees += 0.37F) {
+            double angle = Math.toRadians(degrees);
+            // a stick a rounding past full tilt, as rotating one by the view leaves it, and one well past it
+            for (float length : new float[]{1.00005F, 1.3F}) {
+                var frame = new PlatformerInputFrame(5, (float) Math.cos(angle) * length, (float) Math.sin(angle) * length, degrees + 720.0F, true, (byte) 3, (byte) 1, (short) 20, (short) 0);
+                var once = frame.sanitized();
+                assertEquals(once, once.sanitized(), "a stick at " + degrees + " degrees, " + length + " long");
+            }
+        }
+    }
+
+    @Test
     @DisplayName("a recording survives a round trip")
     void recordingRoundTrips() {
         var frame = new PlatformerInputFrame(1, 0.0F, 1.0F, 0.0F, true, (byte) 1, (byte) 1, (short) 10, (short) 0);

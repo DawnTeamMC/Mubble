@@ -25,6 +25,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
@@ -313,7 +314,8 @@ public final class PlatformerController {
         fresh.vx = velocity.x;
         fresh.vy = fresh.grounded ? 0.0D : velocity.y;
         fresh.vz = velocity.z;
-        fresh.facing = this.player.getYRot();
+        // wrapped, as the server has it: the view of a client turns round and round without ever wrapping
+        fresh.facing = Mth.wrapDegrees(this.player.getYRot());
         fresh.pose = this.player.getPose();
         this.state = fresh;
         this.needsReset = false;

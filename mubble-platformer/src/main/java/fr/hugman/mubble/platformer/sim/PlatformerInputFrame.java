@@ -78,12 +78,16 @@ public record PlatformerInputFrame(
         return frame.sanitized();
     }
 
-    /** The same frame, with whatever a hostile client could send clamped back into range. */
+    /**
+     * The same frame, with whatever a hostile client could send clamped back into range. Both sides
+     * step on the frame that comes out of here, and it comes out the same however many times it goes
+     * through: the client sanitizes before it predicts, the server whatever it receives.
+     */
     public PlatformerInputFrame sanitized() {
         float x = Float.isFinite(this.stickX) ? this.stickX : 0.0F;
         float z = Float.isFinite(this.stickZ) ? this.stickZ : 0.0F;
-        float length = Mth.sqrt(x * x + z * z);
-        if (length > 1.0F) {
+        // as long as it takes: rounding can leave the stick a hair too long after one division
+        for (float length = Mth.sqrt(x * x + z * z); length > 1.0F; length = Mth.sqrt(x * x + z * z)) {
             x /= length;
             z /= length;
         }

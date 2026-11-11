@@ -35,7 +35,7 @@ public final class PlatformerPrediction {
         }
         var state = controller.state();
         // an item in use slows the player down, as in vanilla; the server holds the client to it
-        var frame = input.slowedFor(player);
+        var frame = input.sanitized().slowedFor(player);
 
         // something outside the simulation set the velocity: knockback, an explosion, a bubble column...
         var velocity = player.getDeltaMovement();
