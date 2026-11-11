@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Pose;
 
 /**
@@ -30,6 +31,7 @@ public final class PlatformerState {
      * quick turn of the stick spins and the slow sweeps of steering never do.
      */
     public static final int SPIN_GESTURE_TICKS = 10;
+    private static final Pose[] POSES = Pose.values();
 
     public static final StreamCodec<ByteBuf, PlatformerState> STREAM_CODEC = StreamCodec.of(
             (buf, state) -> state.write(new FriendlyByteBuf(buf)),
@@ -191,6 +193,7 @@ public final class PlatformerState {
         buf.writeBoolean(this.negateFallDamage);
     }
 
+    /** Reads a state, keeping what indexes an array in range: a state can come off the wire. */
     public static PlatformerState read(FriendlyByteBuf buf) {
         var state = new PlatformerState();
         var move = PlatformerBuiltInRegistries.PLATFORMER_MOVE.byId(buf.readVarInt());
@@ -202,7 +205,7 @@ public final class PlatformerState {
         state.vz = buf.readDouble();
         state.facing = buf.readFloat();
         state.grounded = buf.readBoolean();
-        state.pose = buf.readEnum(Pose.class);
+        state.pose = POSES[Mth.clamp(buf.readVarInt(), 0, POSES.length - 1)];
         state.airTicks = buf.readVarInt();
         state.arcGravity = buf.readDouble();
         state.jumpHeld = buf.readBoolean();
@@ -233,12 +236,12 @@ public final class PlatformerState {
         for (int i = 0; i < SPIN_GESTURE_TICKS; i++) {
             state.spinTurns[i] = buf.readFloat();
         }
-        state.spinIndex = buf.readVarInt();
+        state.spinIndex = Mth.clamp(buf.readVarInt(), 0, SPIN_GESTURE_TICKS - 1);
         for (int i = 0; i < MAX_SLOPE_WINDOW; i++) {
             state.slopeDy[i] = buf.readDouble();
             state.slopeDxz[i] = buf.readDouble();
         }
-        state.slopeIndex = buf.readVarInt();
+        state.slopeIndex = Mth.clamp(buf.readVarInt(), 0, MAX_SLOPE_WINDOW - 1);
         state.lastLandingSpeed = buf.readDouble();
         state.negateFallDamage = buf.readBoolean();
         return state;

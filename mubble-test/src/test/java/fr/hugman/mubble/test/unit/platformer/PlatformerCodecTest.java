@@ -179,6 +179,17 @@ public class PlatformerCodecTest {
     }
 
     @Test
+    @DisplayName("a state read off the wire keeps what indexes its ring buffers in range")
+    void statesOffTheWireStayInRange() {
+        var state = new PlatformerState();
+        state.spinIndex = 50;
+        state.slopeIndex = -3;
+        var decoded = PlatformerState.read(new FriendlyByteBuf(Unpooled.wrappedBuffer(state.toBytes())));
+        assertEquals(PlatformerState.SPIN_GESTURE_TICKS - 1, decoded.spinIndex);
+        assertEquals(0, decoded.slopeIndex);
+    }
+
+    @Test
     @DisplayName("a recording survives a round trip")
     void recordingRoundTrips() {
         var frame = new PlatformerInputFrame(1, 0.0F, 1.0F, 0.0F, true, (byte) 1, (byte) 1, (short) 10, (short) 0);
