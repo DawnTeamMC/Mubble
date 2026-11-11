@@ -3,6 +3,7 @@ package fr.hugman.mubble.platformer.access;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import io.netty.buffer.ByteBuf;
+import io.netty.handler.codec.DecoderException;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.ByIdMap;
@@ -28,6 +29,13 @@ public enum AccessMode implements StringRepresentable {
     public static final Codec<AccessMode> ITEM_CODEC = CODEC.validate(mode -> mode == DENY
             ? DataResult.error(() -> "Items cannot deny a move, only rulesets and commands can")
             : DataResult.success(mode));
+    /** The modes an item may carry over the network, as {@link #ITEM_CODEC}: a stack a client sends, in creative mode, is held to what a data pack could give it. */
+    public static final StreamCodec<ByteBuf, AccessMode> ITEM_STREAM_CODEC = STREAM_CODEC.map(mode -> {
+        if (mode == DENY) {
+            throw new DecoderException("Items cannot deny a move, only rulesets and commands can");
+        }
+        return mode;
+    }, mode -> mode);
 
     private final String name;
 

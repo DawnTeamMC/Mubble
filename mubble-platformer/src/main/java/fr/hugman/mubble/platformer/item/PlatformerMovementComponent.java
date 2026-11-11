@@ -54,7 +54,7 @@ public record PlatformerMovementComponent(
     public static final StreamCodec<RegistryFriendlyByteBuf, PlatformerMovementComponent> STREAM_CODEC = StreamCodec.composite(
             ResourceKey.streamCodec(PlatformerRegistries.PLATFORMER_PROFILE).apply(ByteBufCodecs::optional), PlatformerMovementComponent::profile,
             EquipmentSlotGroup.STREAM_CODEC, PlatformerMovementComponent::slots,
-            ByteBufCodecs.map(HashMap::new, MoveSelector.STREAM_CODEC, AccessMode.STREAM_CODEC), PlatformerMovementComponent::moves,
+            ByteBufCodecs.map(HashMap::new, MoveSelector.STREAM_CODEC, AccessMode.ITEM_STREAM_CODEC), PlatformerMovementComponent::moves,
             PlatformerMovementComponent::new
     );
 

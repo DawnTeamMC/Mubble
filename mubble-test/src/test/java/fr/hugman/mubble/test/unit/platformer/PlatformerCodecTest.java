@@ -23,6 +23,7 @@ import fr.hugman.mubble.platformer.item.PlatformerMovementComponent;
 import fr.hugman.mubble.platformer.reward.PlatformerMoveReward;
 import fr.hugman.mubble.platformer.reward.Reward;
 import io.netty.buffer.Unpooled;
+import io.netty.handler.codec.DecoderException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -37,6 +38,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -65,6 +67,17 @@ public class PlatformerCodecTest {
     void itemsCannotDeny() {
         CodecAssertions.assertRejects(AccessMode.ITEM_CODEC, JsonParser.parseString("\"deny\""));
         CodecAssertions.assertRejects(PlatformerMovementComponent.CODEC, JsonParser.parseString("{\"slots\": \"feet\", \"moves\": {\"mubble:jump\": \"deny\"}}"));
+    }
+
+    @Test
+    @DisplayName("items cannot deny a move over the network either")
+    void itemsCannotDenyOverTheNetwork() {
+        var denied = Unpooled.buffer();
+        AccessMode.STREAM_CODEC.encode(denied, AccessMode.DENY);
+        assertThrows(DecoderException.class, () -> AccessMode.ITEM_STREAM_CODEC.decode(denied));
+        var forced = Unpooled.buffer();
+        AccessMode.ITEM_STREAM_CODEC.encode(forced, AccessMode.FORCE);
+        assertEquals(AccessMode.FORCE, AccessMode.ITEM_STREAM_CODEC.decode(forced));
     }
 
     @Test
