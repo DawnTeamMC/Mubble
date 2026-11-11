@@ -891,8 +891,15 @@ public final class MoveContext {
         if (!this.displacementFixed) {
             this.dx = s.vx;
             this.dz = s.vz;
-            this.dy = Mth.clamp(this.dy, -ceiling, ceiling);
+        } else {
+            // a displacement a move set itself was set before the ceiling held the velocity
+            double fixed = Math.sqrt(this.dx * this.dx + this.dz * this.dz);
+            if (fixed > ceiling) {
+                this.dx *= ceiling / fixed;
+                this.dz *= ceiling / fixed;
+            }
         }
+        this.dy = Mth.clamp(this.dy, -ceiling, ceiling);
 
         this.pose = this.resolvePose(s.move.pose(this));
         if (!s.grounded && !this.displacementFixed) {
