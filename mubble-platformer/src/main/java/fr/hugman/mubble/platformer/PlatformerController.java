@@ -297,6 +297,11 @@ public final class PlatformerController {
         this.needsReset = true;
     }
 
+    /** Calls the reset off: the state was just set from outside, and is the one to go on from. */
+    public void clearReset() {
+        this.needsReset = false;
+    }
+
     /**
      * Starts the simulation over from what the entity looks like right now: on the ground or not,
      * moving as fast as it does (within the safety ceiling), facing where it faces.

@@ -479,6 +479,7 @@ public class PlatformerLockstepGameTest {
         }, () -> {
             client.receive();
             helper.assertValueEqual(client.rejections(), 1, "rejected steps (" + client.events() + ")");
+            helper.assertValueEqual(client.corrections(), 0, "corrections once the client took the state of the rejection (" + client.events() + ")");
             helper.assertFalse(client.kicked(), "a rejected step sends the player back, it does not kick them");
             helper.assertTrue(client.server().position().distanceTo(client.self().position()) < 1.0E-6D,
                     "both sides should agree again, the server has the player at " + client.server().position() + ", the client at " + client.self().position());

@@ -34,6 +34,7 @@ public final class PlatformerPrediction {
             controller.resetFromEntity();
         }
         var state = controller.state();
+        // sanitized as the server sanitizes whatever it receives, so that both step on the same frame, bit for bit
         // an item in use slows the player down, as in vanilla; the server holds the client to it
         var frame = input.sanitized().slowedFor(player);
 
@@ -91,6 +92,10 @@ public final class PlatformerPrediction {
             }
         } else {
             controller.history().clear();
+        }
+        if (payload.rejected()) {
+            // the teleport that came with it asked to start over: this state is that start
+            controller.clearReset();
         }
         state.events.clear();
         controller.setState(state);
