@@ -141,6 +141,7 @@ public final class PlatformerSimulation {
         var state = ctx.state();
         var planned = ctx.total();
         boolean wasGrounded = state.grounded;
+        int moveSeq = state.moveSeq;
         double landingSpeed = Math.max(0.0D, -planned.y);
 
         if (result.horizontalCollision()) {
@@ -179,13 +180,16 @@ public final class PlatformerSimulation {
             state.airTicks++;
         }
 
-        // the cue of the ticks spent in a move, such as the scrape of a wall slide
-        ctx.settings(state.move).cues().get(CueEvent.TICK).ifPresent(cue -> {
-            if (state.moveTicks % cue.interval() == 0) {
-                ctx.emit(CueEvent.TICK, state.horizontalSpeed());
-            }
-        });
-        state.moveTicks++;
+        // a move entered just now, landing or leaving the ground, has not taken a tick yet
+        if (state.moveSeq == moveSeq) {
+            // the cue of the ticks spent in a move, such as the scrape of a wall slide
+            ctx.settings(state.move).cues().get(CueEvent.TICK).ifPresent(cue -> {
+                if (state.moveTicks % cue.interval() == 0) {
+                    ctx.emit(CueEvent.TICK, state.horizontalSpeed());
+                }
+            });
+            state.moveTicks++;
+        }
     }
 
     private static void land(MoveContext ctx, double landingSpeed) {

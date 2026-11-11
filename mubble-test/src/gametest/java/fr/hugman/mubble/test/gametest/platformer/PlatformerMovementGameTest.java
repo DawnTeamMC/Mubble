@@ -84,6 +84,20 @@ public class PlatformerMovementGameTest {
         helper.succeed();
     }
 
+    /** A move entered on landing has not taken a tick yet: its first one is its tick zero, as for a move entered any other way. */
+    @GameTest(structure = PlatformerTestKit.LANE)
+    public void aMoveEnteredOnLandingStartsAtItsFirstTick(GameTestHelper helper) {
+        PlatformerTestKit.floor(helper);
+        var player = standing(helper, new BlockPos(5, 1, 5));
+        var frames = new PlatformerTestKit.Frames();
+        PlatformerTestKit.step(player, frames.tap(JUMP));
+        peakUntilLanding(helper, player, frames, player.getY(), 60);
+        var state = PlatformerController.of(player).state();
+        helper.assertValueEqual(state.move, PlatformerMoves.LAND, "move right after touching down");
+        helper.assertValueEqual(state.moveTicks, 0, "ticks the landing took before its first one");
+        helper.succeed();
+    }
+
     @GameTest(structure = PlatformerTestKit.LANE)
     public void releasingJumpEarlyCutsTheJump(GameTestHelper helper) {
         PlatformerTestKit.floor(helper);
