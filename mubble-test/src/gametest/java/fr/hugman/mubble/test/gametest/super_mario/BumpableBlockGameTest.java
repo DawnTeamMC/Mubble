@@ -10,11 +10,14 @@ import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.TagValueInput;
+import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -41,19 +44,39 @@ public class BumpableBlockGameTest {
     }
 
     /**
-     * A hit does not raise the bump itself: it posts a block event, which the level dispatches on its
-     * next pass. So everything about a bump in progress is only readable a tick later.
+     * The server starts the bump as soon as the block is hit. The block event it posts on the way is only
+     * there to replay the bump on clients.
      */
-    @GameTest(maxTicks = 100)
+    @GameTest
     public void hittingFromBelowStartsABump(GameTestHelper helper) {
         var entity = place(helper, SuperMarioBlocks.QUESTION_BLOCK.defaultBlockState());
 
         bumpFromBelow(helper);
 
-        helper.startSequence()
-                .thenIdle(2)
-                .thenExecute(() -> helper.assertTrue(entity.isBumping(), "hitting the block from below did not start a bump"))
-                .thenSucceed();
+        helper.assertTrue(entity.isBumping(), "hitting the block from below did not start a bump");
+        helper.succeed();
+    }
+
+    /**
+     * Several hits can land within the same tick, from two entities at once or from a player's movement
+     * packets piling up. Only the first one may bump the block, or its sound plays once per hit.
+     */
+    @GameTest
+    public void asecondHitInTheSameTickIsIgnored(GameTestHelper helper) {
+        var entity = place(helper, SuperMarioBlocks.QUESTION_BLOCK.defaultBlockState());
+        var absolute = helper.absolutePos(BLOCK);
+        var level = helper.getLevel();
+        var state = level.getBlockState(absolute);
+        var block = SuperMarioBlocks.QUESTION_BLOCK;
+
+        var pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, BLOCK.below());
+        helper.assertTrue(block.canBump(level, absolute, state, entity, pig, fromBelow(absolute)), "a block at rest should take a hit");
+
+        bumpFromBelow(helper);
+
+        helper.assertFalse(block.canBump(level, absolute, state, entity, pig, fromBelow(absolute)),
+                "the block took a second hit before the first one's block event went out");
+        helper.succeed();
     }
 
     @GameTest(maxTicks = 100)
@@ -135,18 +158,46 @@ public class BumpableBlockGameTest {
         helper.succeed();
     }
 
-    /** The author is kept straight away, the direction only once the block event comes back round. */
-    @GameTest(maxTicks = 100)
+    /**
+     * Both are kept straight away: the hooks run right after the hit, such as the note block deciding
+     * whether to play the bump sound, read them before the block event has gone out.
+     */
+    @GameTest
     public void thebumpAuthorAndDirectionAreRemembered(GameTestHelper helper) {
         var entity = place(helper, SuperMarioBlocks.QUESTION_BLOCK.defaultBlockState());
         var pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, BLOCK.below());
 
         entity.bump(helper.absolutePos(BLOCK), pig, Direction.UP);
+
         helper.assertTrue(entity.getBumpAuthor() == pig, "the block forgot who hit it");
+        helper.assertValueEqual(entity.getBumpDirection(), Direction.UP, "the direction the bump came from");
+        helper.succeed();
+    }
+
+    /**
+     * A block saved halfway through a bump has to come back still bumping. Otherwise it is left sitting on
+     * its middle tick for good, and a note block would throw whatever is on top and play its sound on every
+     * tick after that.
+     */
+    @GameTest(maxTicks = 100)
+    public void abumpSavedHalfwayIsStillGoingAfterLoading(GameTestHelper helper) {
+        var entity = place(helper, SuperMarioBlocks.QUESTION_BLOCK.defaultBlockState());
+        var registries = helper.getLevel().registryAccess();
+
+        bumpFromBelow(helper);
 
         helper.startSequence()
-                .thenIdle(2)
-                .thenExecute(() -> helper.assertValueEqual(entity.getBumpDirection(), Direction.UP, "the direction the bump came from"))
+                .thenWaitUntil(() -> helper.assertValueEqual(entity.getBumpTicks(), BumpableBlockEntity.BUMP_MIDDLE_TICK, "the bump ticks"))
+                .thenExecute(() -> {
+                    var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
+                    entity.saveWithoutMetadata(output);
+
+                    var loaded = new BumpableBlockEntity(entity.getBlockPos(), entity.getBlockState());
+                    loaded.loadWithComponents(TagValueInput.create(ProblemReporter.DISCARDING, registries, output.buildResult()));
+
+                    helper.assertTrue(loaded.isBumping(), "a block saved mid-bump came back at rest, stuck on its middle tick");
+                    helper.assertValueEqual(loaded.getBumpTicks(), BumpableBlockEntity.BUMP_MIDDLE_TICK, "the bump ticks after loading");
+                })
                 .thenSucceed();
     }
 
@@ -185,8 +236,11 @@ public class BumpableBlockGameTest {
         var state = level.getBlockState(absolute);
         var pig = helper.spawnWithNoFreeWill(EntityTypes.PIG, BLOCK.below());
 
-        var hit = new BlockHitResult(Vec3.atCenterOf(absolute), Direction.DOWN, absolute, false);
-        ((HittableBlock) state.getBlock()).onHit(level, state, pig, hit);
+        ((HittableBlock) state.getBlock()).onHit(level, state, pig, fromBelow(absolute));
+    }
+
+    private static BlockHitResult fromBelow(BlockPos absolute) {
+        return new BlockHitResult(Vec3.atCenterOf(absolute), Direction.DOWN, absolute, false);
     }
 
     private static int droppedIngots(GameTestHelper helper) {

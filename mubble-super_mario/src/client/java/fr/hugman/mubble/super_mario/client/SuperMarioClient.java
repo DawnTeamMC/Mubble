@@ -1,5 +1,6 @@
 package fr.hugman.mubble.super_mario.client;
 
+import fr.hugman.mubble.super_mario.client.gui.screens.SuperMarioSplashes;
 import fr.hugman.mubble.super_mario.client.gui.screens.inventory.BumpableScreen;
 import fr.hugman.mubble.super_mario.client.keybind.FreezeStruggleHandler;
 import fr.hugman.mubble.super_mario.client.model.SuperMarioModelLayers;
@@ -24,8 +25,10 @@ public class SuperMarioClient implements ClientModInitializer {
         Reflection.initialize(SuperMarioRenderTypes.class);
 
         registerHandledScreens();
+        SuperMarioSplashes.register();
         SuperMarioRenderers.registerEntities();
         SuperMarioRenderers.registerBlockEntities();
+        SuperMarioRenderers.registerLayers();
         SuperMarioParticleResources.register();
         ClientTickEvents.END_CLIENT_TICK.register(FreezeStruggleHandler::tick);
     }

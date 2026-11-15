@@ -31,6 +31,7 @@ public class SuperMarioSounds {
     public static final SoundEvent GOOMBA_FIND_TARGET = register("entity.goomba.find_target");
     public static final SoundEvent GOOMBA_DEATH = register("entity.goomba.death");
     public static final SoundEvent GOOMBA_STOMP = register("entity.goomba.stomp");
+    public static final SoundEvent MINI_GOOMBA_NIBBLE = register("entity.mini_goomba.nibble");
 
     public static final SoundEvent KOOPA_SHELL_SLIDE = register("entity.koopa_shell.slide");
     public static final SoundEvent KOOPA_SHELL_HOMING = register("entity.koopa_shell.homing");

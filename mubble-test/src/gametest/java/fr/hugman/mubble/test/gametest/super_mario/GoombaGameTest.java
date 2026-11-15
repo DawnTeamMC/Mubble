@@ -1,9 +1,9 @@
 package fr.hugman.mubble.test.gametest.super_mario;
 
 import fr.hugman.mubble.super_mario.references.GoombaVariantIds;
-import fr.hugman.mubble.super_mario.core.registries.SuperMarioRegistries;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.entity.monster.goomba.Goomba;
+import fr.hugman.mubble.test.gametest.datapack.GoombaVariantFixtures;
 import fr.hugman.mubble.test.gametest.support.Arena;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
@@ -95,9 +95,7 @@ public class GoombaGameTest {
     @GameTest
     public void thevariantSurvivesSaveAndLoad(GameTestHelper helper) {
         var goomba = goomba(helper);
-        var mini = helper.getLevel().registryAccess()
-                .lookupOrThrow(SuperMarioRegistries.GOOMBA_VARIANT).getOrThrow(GoombaVariantIds.MINI);
-        goomba.setVariant(mini);
+        goomba.setVariant(GoombaVariantFixtures.get(helper, GoombaVariantFixtures.TINY));
 
         var registries = helper.getLevel().registryAccess();
         var output = TagValueOutput.createWithContext(ProblemReporter.DISCARDING, registries);
@@ -106,20 +104,19 @@ public class GoombaGameTest {
         var reloaded = helper.spawnWithNoFreeWill(SuperMarioEntityTypes.GOOMBA, GROUND);
         reloaded.load(TagValueInput.create(ProblemReporter.DISCARDING, registries, output.buildResult()));
 
-        helper.assertTrue(reloaded.getVariant().is(GoombaVariantIds.MINI), "the variant was lost through the save file");
+        helper.assertTrue(reloaded.getVariant().is(GoombaVariantFixtures.TINY), "the variant was lost through the save file");
         helper.succeed();
     }
 
     /** A variant carries attribute modifiers, so picking one has to actually change the goomba. */
     @GameTest
-    public void theminiVariantIsSmallerThanTheNormalOne(GameTestHelper helper) {
+    public void avariantChangesTheGoombaItIsPutOn(GameTestHelper helper) {
         var normal = goomba(helper);
-        var mini = helper.spawnWithNoFreeWill(SuperMarioEntityTypes.GOOMBA, GROUND);
-        mini.setVariant(helper.getLevel().registryAccess()
-                .lookupOrThrow(SuperMarioRegistries.GOOMBA_VARIANT).getOrThrow(GoombaVariantIds.MINI));
+        var tiny = helper.spawnWithNoFreeWill(SuperMarioEntityTypes.GOOMBA, GROUND);
+        tiny.setVariant(GoombaVariantFixtures.get(helper, GoombaVariantFixtures.TINY));
 
-        helper.assertTrue(mini.getBbWidth() < normal.getBbWidth() || mini.getMaxHealth() != normal.getMaxHealth(),
-                "the mini variant should differ from the normal one somewhere");
+        helper.assertTrue(tiny.getBbWidth() < normal.getBbWidth() || tiny.getMaxHealth() != normal.getMaxHealth(),
+                "a variant with its own attributes should differ from the normal one somewhere");
 
         helper.succeed();
     }
