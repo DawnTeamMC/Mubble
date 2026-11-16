@@ -7,6 +7,7 @@ import net.minecraft.tags.EntityTypeTags;
 
 import java.util.concurrent.CompletableFuture;
 
+import fr.hugman.mubble.references.MubbleEntityTypeKeys;
 import fr.hugman.mubble.super_mario.references.SuperMarioEntityTypeIds;
 
 import static fr.hugman.mubble.super_mario.tags.SuperMarioEntityTypeTags.*;
@@ -26,7 +27,7 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 		builder(STOMPABLE).add(GOOMBA, MINI_GOOMBA, GREEN_KOOPA_SHELL);
 
 		// FIREBALL is qualified because vanilla has one under that name too.
-		builder(ALL).add(GOOMBA, MINI_GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, SuperMarioEntityTypeIds.FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE, SUPERBALL);
+		builder(ALL).add(GOOMBA, MINI_GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, SuperMarioEntityTypeIds.FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE, SUPERBALL, SuperMarioEntityTypeIds.BOOMERANG);
 
 		// bosses shrug an ice ball off; every other mob is judged on its bulk alone
 		builder(FREEZE_IMMUNE).add(ENDER_DRAGON, WITHER);
@@ -34,6 +35,10 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 		// Bosses and anything too big to make sense inside a bubble. Players are here on purpose: they fit the
 		// automatic size and health criteria, but getting stuck inside someone else's bubble is not the point.
 		builder(BUBBLE_CANNOT_TRAP).add(PLAYER, ENDER_DRAGON, WITHER, WARDEN, ELDER_GUARDIAN, RAVAGER, IRON_GOLEM);
+
+		builder(BOOMERANG_CAN_CARRY).add(ITEM, EXPERIENCE_ORB, MubbleEntityTypeKeys.COLLECTIBLE);
+		// what a player would hate to lose, and the boomerangs themselves
+		builder(BOOMERANG_CANNOT_DESTROY).add(SuperMarioEntityTypeIds.BOOMERANG, BUBBLE, TRIDENT, FISHING_BOBBER, FIREWORK_ROCKET);
 
 		// Vanilla
 		builder(EntityTypeTags.DISMOUNTS_UNDERWATER).add(GOOMBA, MINI_GOOMBA);

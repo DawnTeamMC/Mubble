@@ -5,6 +5,7 @@ import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowerUpAction;
+import fr.hugman.mubble.super_mario.world.power_up.action.ThrowBoomerangPowerUpAction;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.PowerUpCharges;
@@ -144,6 +145,12 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         false,
                         PowerUpCharges.fromActiveEntities(1)
                 )))
+                .build());
+        // humanoidOverlay(BOOMERANG) once the costume texture exists
+        context.register(BOOMERANG, builder(BOOMERANG)
+                .description(BOOMERANG, "throw")
+                .description(BOOMERANG, "carry")
+                .action(Holder.direct(ThrowBoomerangPowerUpAction.DEFAULT))
                 .build());
     }
 

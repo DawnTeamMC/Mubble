@@ -14,6 +14,7 @@ public class SuperMarioPowerUpIds {
     public static final ResourceKey<PowerUp> CLOUD = createKey("cloud");
     public static final ResourceKey<PowerUp> BUBBLE = createKey("bubble");
     public static final ResourceKey<PowerUp> SUPERBALL = createKey("superball");
+    public static final ResourceKey<PowerUp> BOOMERANG = createKey("boomerang");
 
     private static ResourceKey<PowerUp> createKey(String path) {
         return ResourceKey.create(MubbleRegistries.POWER_UP, SuperMario.id(path));

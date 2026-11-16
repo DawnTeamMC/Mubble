@@ -75,6 +75,13 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.SUPERBALL_HIT_BLOCK, variantSoundBuilder(1, superballHitSound).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.hit"));
         soundExporter.add(SuperMarioSounds.SUPERBALL_DISAPPEAR, variantSoundBuilder(1, superballHitSound).subtitle("subtitles." + SuperMario.MOD_ID + ".entity.superball.disappear"));
 
+        // Stand-ins until the boomerang has sounds of its own
+        soundExporter.add(SuperMarioSounds.BOOMERANG_THROW, variantSoundBuilder(SuperMarioSounds.BOOMERANG_THROW.value(), 1, SuperMarioSounds.SUPERBALL_THROW.value().location()));
+        soundExporter.add(SuperMarioSounds.BOOMERANG_REBOUND, variantSoundBuilder(SuperMarioSounds.BOOMERANG_REBOUND.value(), 1, SuperMario.id("entity/superball/hit")));
+        soundExporter.add(SuperMarioSounds.BOOMERANG_CATCH, variantSoundBuilder(SuperMarioSounds.BOOMERANG_CATCH.value(), 1, Identifier.withDefaultNamespace("item/trident/return1")));
+        soundExporter.add(SuperMarioSounds.BOOMERANG_VANISH, variantSoundBuilder(SuperMarioSounds.BOOMERANG_VANISH.value(), 1, SuperMarioSounds.BUBBLE_POP.value().location()));
+        soundExporter.add(SuperMarioSounds.BOOMERANG_READY, variantSoundBuilder(SuperMarioSounds.BOOMERANG_READY.value(), 1, Identifier.withDefaultNamespace("block/amethyst/shimmer")));
+
         // Power-Up
         var obtainSub = "subtitles." + SuperMario.MOD_ID + ".power_up.obtain";
 

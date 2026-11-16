@@ -46,7 +46,10 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.weather", "Water and rain wash it away.");
         builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.ricochet", "Superballs bounce off everything.");
         builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.coins", "They collect the coins they touch.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".boomerang.description.throw", "Boomerangs fly out and come back to you.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".boomerang.description.carry", "They bring back the items they touch.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
+        builder.add("power_up_action_type." + SuperMario.MOD_ID + ".throw_boomerang.description", "Press %s to throw a boomerang.");
 
 
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.bumpable_block.bump", "Block bumped");
@@ -81,6 +84,11 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.superball.throw", "Superball thrown");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.superball.hit", "Superball hits");
         builder.add("subtitles." + SuperMario.MOD_ID + ".entity.superball.disappear", "Superball disappears");
+        builder.add(SuperMarioSounds.BOOMERANG_THROW.value(), "Boomerang thrown");
+        builder.add(SuperMarioSounds.BOOMERANG_REBOUND.value(), "Boomerang rebounds");
+        builder.add(SuperMarioSounds.BOOMERANG_CATCH.value(), "Boomerang caught");
+        builder.add(SuperMarioSounds.BOOMERANG_VANISH.value(), "Boomerang vanishes");
+        builder.add(SuperMarioSounds.BOOMERANG_READY.value(), "Boomerang ready");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.refill", "Power-up refilled");
@@ -98,5 +106,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("death.attack." + SuperMario.MOD_ID + ".gold_fireball.player", "%1$s was gold-blasted while fighting %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".superball", "%1$s was pinballed by %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".superball.player", "%1$s was pinballed while fighting %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".boomerang", "%1$s was boomeranged by %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".boomerang.player", "%1$s was boomeranged while fighting %2$s");
     }
 }

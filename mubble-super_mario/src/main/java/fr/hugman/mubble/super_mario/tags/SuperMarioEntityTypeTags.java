@@ -16,6 +16,8 @@ public class SuperMarioEntityTypeTags {
     public static final TagKey<EntityType<?>> ALL = bind("all");
     public static final TagKey<EntityType<?>> BUBBLE_CAN_TRAP = bind("bubble_can_trap");
     public static final TagKey<EntityType<?>> BUBBLE_CANNOT_TRAP = bind("bubble_cannot_trap");
+    public static final TagKey<EntityType<?>> BOOMERANG_CAN_CARRY = bind("boomerang_can_carry");
+    public static final TagKey<EntityType<?>> BOOMERANG_CANNOT_DESTROY = bind("boomerang_cannot_destroy");
 
     private static TagKey<EntityType<?>> bind(String path) {
         return TagKey.create(Registries.ENTITY_TYPE, SuperMario.id(path));

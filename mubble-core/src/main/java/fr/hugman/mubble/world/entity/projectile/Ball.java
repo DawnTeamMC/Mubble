@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityEvent;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -179,20 +180,25 @@ public abstract class Ball extends ThrowableProjectile {
      * A ball only trails while it actually moves: one that has come to a halt emits nothing.
      */
     protected void spawnTrailParticles() {
-        ParticleOptions particle = this.getTrailParticle();
-        if (particle == null || this.isRemoved()) {
+        if (!this.isRemoved()) {
+            spawnTrailParticles(this, this.getTrailParticle());
+        }
+    }
+
+    public static void spawnTrailParticles(Entity entity, @Nullable ParticleOptions particle) {
+        if (particle == null) {
             return;
         }
-        Vec3 movement = this.getDeltaMovement();
+        Vec3 movement = entity.getDeltaMovement();
         int count = trailParticleCount(movement.length());
         // The model of a ball is centred on its position rather than standing on it, so the particles
         // need no offset of their own to sit in the middle of the sprite.
-        Vec3 from = this.position();
+        Vec3 from = entity.position();
         Vec3 drift = movement.scale(-TRAIL_DRIFT).add(0.0D, TRAIL_RISE, 0.0D);
 
         for (int i = 0; i < count; i++) {
             Vec3 pos = from.add(movement.scale((i + 0.5D) / count));
-            this.level().addParticle(particle, pos.x, pos.y, pos.z, drift.x, drift.y, drift.z);
+            entity.level().addParticle(particle, pos.x, pos.y, pos.z, drift.x, drift.y, drift.z);
         }
     }
 

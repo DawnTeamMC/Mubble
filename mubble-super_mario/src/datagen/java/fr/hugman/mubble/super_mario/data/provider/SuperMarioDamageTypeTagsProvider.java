@@ -29,7 +29,8 @@ public class SuperMarioDamageTypeTagsProvider extends FabricTagsProvider<DamageT
                 .add(SuperMarioDamageTypeIds.KOOPA_SHELL)
                 .add(SuperMarioDamageTypeIds.FIREBALL)
                 .add(SuperMarioDamageTypeIds.ICEBALL)
-                .add(SuperMarioDamageTypeIds.GOLD_FIREBALL);
+                .add(SuperMarioDamageTypeIds.GOLD_FIREBALL)
+                .add(SuperMarioDamageTypeIds.BOOMERANG);
 
         this.builder(SuperMarioDamageTypeTags.MELTS_FROZEN_ENTITIES)
                 // optional only because nothing here generates the vanilla tag for the validator to find

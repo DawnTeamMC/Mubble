@@ -103,6 +103,39 @@ public class PowerUpPropertiesTest {
         assertFalse(properties.checkDirty());
     }
 
+    @Test
+    @DisplayName("a started cooldown holds FROM_ACTIVE_ENTITIES charges back until it runs out")
+    void startedCooldownHoldsActiveEntityChargesBack() {
+        var properties = new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, 1);
+        var boomerang = UUID.randomUUID();
+        properties.useCharge();
+        properties.trackEntity(boomerang);
+
+        assertTrue(properties.removeEntity(boomerang));
+        properties.startCooldown(2);
+
+        properties.tick();
+        assertEquals(0, properties.getChargeCount());
+        assertTrue(properties.isCoolingDown());
+
+        properties.tick();
+        assertFalse(properties.isCoolingDown());
+        assertEquals(1, properties.getChargeCount());
+        assertTrue(properties.isAtMax());
+    }
+
+    @Test
+    @DisplayName("removing an entity says whether it was tied to a charge")
+    void removingAnEntityTellsWhetherItWasTracked() {
+        var properties = new PowerUpProperties(PowerUpProperties.ChargeCounting.FROM_ACTIVE_ENTITIES, 1);
+        var tracked = UUID.randomUUID();
+        properties.trackEntity(tracked);
+
+        assertFalse(properties.removeEntity(UUID.randomUUID()));
+        assertTrue(properties.removeEntity(tracked));
+        assertFalse(properties.removeEntity(tracked));
+    }
+
     @Nested
     @DisplayName("codec")
     class Codec {
