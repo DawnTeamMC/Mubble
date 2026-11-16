@@ -36,4 +36,17 @@ public class SuperMarioRenderPipelines {
                     .withCull(false)
                     .build()
     );
+
+    // Same as GOLDEN_ENTITY_PIPELINE, over the four greens of a Game Boy screen instead
+    public static final RenderPipeline SUPER_MARIO_LAND_ENTITY_PIPELINE = RenderPipelines.register(
+            RenderPipeline.builder(RenderPipelines.ENTITY_SNIPPET)
+                    .withLocation(SuperMario.id("pipeline/super_mario_land_entity"))
+                    .withShaderDefine("ALPHA_CUTOUT", 0.1F)
+                    .withShaderDefine("PER_FACE_LIGHTING")
+                    .withFragmentShader(SuperMario.id("core/super_mario_land_entity"))
+                    .withBindGroupLayout(BindGroupLayouts.SAMPLER1)
+                    .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
+                    .withCull(false)
+                    .build()
+    );
 }

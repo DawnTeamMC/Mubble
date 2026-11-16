@@ -1,9 +1,11 @@
 package fr.hugman.mubble.test.gametest.super_mario;
 
 import fr.hugman.mubble.super_mario.world.level.block.SuperMarioBlocks;
+import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes;
 import fr.hugman.mubble.test.gametest.support.Arena;
 import net.fabricmc.fabric.api.gametest.v1.GameTest;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.animal.pig.Pig;
@@ -55,26 +57,26 @@ public class NoteBlockGameTest {
         helper.succeed();
     }
 
-    @GameTest(maxTicks = 100)
-    public void fallingOnItBumpsTheBlock(GameTestHelper helper) {
+    /**
+     * Landing on the block is what starts the bump, through fallOn. The bump has to be known as a downward
+     * one right away: that is what keeps the generic bump sound from playing over the bounce, and it is
+     * read before the block event posted by the hit has gone out.
+     */
+    @GameTest
+    public void fallingOnItBumpsTheBlockDownwards(GameTestHelper helper) {
         Arena.buildFloor(helper);
         helper.setBlock(BLOCK, SuperMarioBlocks.NOTE_BLOCK);
         var absolute = helper.absolutePos(BLOCK);
+        var entity = helper.getLevel().getBlockEntity(absolute, SuperMarioBlockEntityTypes.BUMPABLE_BLOCK)
+                .orElseThrow(() -> new AssertionError("the note block has no block entity"));
 
         var pig = helper.spawn(EntityTypes.PIG, BLOCK.above(3));
 
-        // Landing on the block is what starts the bump, through fallOn.
         SuperMarioBlocks.NOTE_BLOCK.fallOn(helper.getLevel(), helper.getLevel().getBlockState(absolute), absolute, pig, 3.0D);
 
-        // The hit posts a block event, so the bump only shows up on the level's next pass.
-        helper.startSequence()
-                .thenIdle(2)
-                .thenExecute(() -> helper.assertTrue(
-                        helper.getLevel().getBlockEntity(absolute, fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes.BUMPABLE_BLOCK)
-                                .orElseThrow(() -> new AssertionError("the note block has no block entity"))
-                                .isBumping(),
-                        "landing on the note block did not bump it"))
-                .thenSucceed();
+        helper.assertTrue(entity.isBumping(), "landing on the note block did not bump it");
+        helper.assertValueEqual(entity.getBumpDirection(), Direction.DOWN, "the direction of a bump from landing on top");
+        helper.succeed();
     }
 
     @GameTest
@@ -83,7 +85,7 @@ public class NoteBlockGameTest {
         helper.setBlock(BLOCK, SuperMarioBlocks.NOTE_BLOCK);
 
         var entity = helper.getLevel()
-                .getBlockEntity(helper.absolutePos(BLOCK), fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes.BUMPABLE_BLOCK)
+                .getBlockEntity(helper.absolutePos(BLOCK), SuperMarioBlockEntityTypes.BUMPABLE_BLOCK)
                 .orElseThrow(() -> new AssertionError("the note block has no block entity"));
 
         helper.assertTrue(entity.getBumpedState() == null, "a note block should stay a note block for good");

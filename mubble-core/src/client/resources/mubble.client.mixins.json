@@ -8,7 +8,8 @@
     "HudMixin",
     "ItemInHandRendererMixin",
     "LivingEntityRendererMixin",
-    "LocalPlayerMixin"
+    "LocalPlayerMixin",
+    "SplashManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

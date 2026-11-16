@@ -20,6 +20,7 @@ public class PowerUpItems {
             new Entry(SuperMarioItemIds.GOLD_FLOWER, SuperMarioPowerUpIds.GOLD),
             new Entry(SuperMarioItemIds.CLOUD_FLOWER, SuperMarioPowerUpIds.CLOUD),
             new Entry(SuperMarioItemIds.BUBBLE_FLOWER, SuperMarioPowerUpIds.BUBBLE),
+            new Entry(SuperMarioItemIds.SUPERBALL_FLOWER, SuperMarioPowerUpIds.SUPERBALL),
             new Entry(SuperMarioItemIds.SUPER_FLOWER_POT, SuperMarioPowerUpIds.FLOWER)
     );
 

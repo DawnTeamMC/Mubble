@@ -39,6 +39,7 @@ public class SuperMarioItems {
     public static final PowerUpItem GOLD_FLOWER = registerPowerUp(SuperMarioItemIds.GOLD_FLOWER, SuperMarioPowerUpIds.GOLD);
     public static final PowerUpItem CLOUD_FLOWER = registerPowerUp(SuperMarioItemIds.CLOUD_FLOWER, SuperMarioPowerUpIds.CLOUD);
     public static final PowerUpItem BUBBLE_FLOWER = registerPowerUp(SuperMarioItemIds.BUBBLE_FLOWER, SuperMarioPowerUpIds.BUBBLE);
+    public static final PowerUpItem SUPERBALL_FLOWER = registerPowerUp(SuperMarioItemIds.SUPERBALL_FLOWER, SuperMarioPowerUpIds.SUPERBALL);
     public static final PowerUpItem SUPER_FLOWER_POT = registerPowerUp(SuperMarioItemIds.SUPER_FLOWER_POT, SuperMarioPowerUpIds.FLOWER);
     public static final CapeFeatherItem CAPE_FEATHER = register(SuperMarioItemIds.CAPE_FEATHER, s -> new CapeFeatherItem(s, false));
     public static final CapeFeatherItem SUPER_CAPE_FEATHER = register(SuperMarioItemIds.SUPER_CAPE_FEATHER, s -> new CapeFeatherItem(s.rarity(Rarity.EPIC), true));
@@ -46,6 +47,7 @@ public class SuperMarioItems {
 	public static final Item MAKER_GLOVE = register(SuperMarioItemIds.MAKER_GLOVE, new Item.Properties().stacksTo(1));
 
 	public static final SpawnEggItem GOOMBA_SPAWN_EGG = register(SuperMarioItemIds.GOOMBA_SPAWN_EGG, ItemFactory.spawnEgg(SuperMarioEntityTypes.GOOMBA));
+	public static final SpawnEggItem MINI_GOOMBA_SPAWN_EGG = register(SuperMarioItemIds.MINI_GOOMBA_SPAWN_EGG, ItemFactory.spawnEgg(SuperMarioEntityTypes.MINI_GOOMBA));
 
     private static <O extends Item> O register(ResourceKey<Item> key, Function<Item.Properties, O> factory, Item.Properties settings) {
         return Registry.register(BuiltInRegistries.ITEM, key, factory.apply(settings.setId(key)));

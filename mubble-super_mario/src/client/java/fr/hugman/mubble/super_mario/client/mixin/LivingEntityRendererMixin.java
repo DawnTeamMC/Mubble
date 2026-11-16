@@ -5,6 +5,7 @@ import fr.hugman.mubble.super_mario.client.references.SuperMarioRenderStateDataK
 import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderTypes;
 import fr.hugman.mubble.super_mario.client.renderer.entity.state.GoombaRenderState;
 import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
+import fr.hugman.mubble.super_mario.world.entity.monster.goomba.MiniGoombaCarrier;
 import fr.hugman.mubble.super_mario.world.entity.projectile.Bubble;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -36,6 +37,13 @@ public class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingE
             return 0;
         }
         return state.deathTime;
+    }
+
+    @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("TAIL"))
+    private void super_mario$extractClingingMiniGoombas(T entity, S state, float partialTicks, CallbackInfo ci) {
+        // Render states are pooled, so the key has to be cleared for anything nothing is holding onto.
+        int clinging = entity instanceof MiniGoombaCarrier carrier ? carrier.getClingingMiniGoombas() : 0;
+        state.setData(SuperMarioRenderStateDataKeys.CLINGING_MINI_GOOMBAS, clinging > 0 ? clinging : null);
     }
 
     @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("TAIL"))
@@ -109,11 +117,19 @@ public class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingE
     @Inject(method = "getRenderType", at = @At("HEAD"), cancellable = true)
     private void super_mario$getRenderType(S state, boolean isBodyVisible, boolean forceTransparent, boolean appearGlowing, CallbackInfoReturnable<RenderType> cir) {
         var powerUp = state.getData(fr.hugman.mubble.client.references.MubbleRenderStateDataKeys.POWER_UP);
+        if(powerUp == null) {
+            return;
+        }
         //TODO: make this more dynamic
-        if(powerUp != null && powerUp.is(SuperMarioPowerUpIds.GOLD)) {
+        if(powerUp.is(SuperMarioPowerUpIds.GOLD)) {
             Identifier texture = this.getTextureLocation(state);
             //TODO: do the vanillas checks and add translucency support
             cir.setReturnValue(SuperMarioRenderTypes.getGoldenEntity(texture));
+        }
+        // The Superball form wears the four greens of a Game Boy screen, the way Super Mario Maker 2 draws it.
+        else if(powerUp.is(SuperMarioPowerUpIds.SUPERBALL)) {
+            Identifier texture = this.getTextureLocation(state);
+            cir.setReturnValue(SuperMarioRenderTypes.getSuperMarioLandEntity(texture));
         }
     }
 }

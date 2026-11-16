@@ -38,14 +38,19 @@ public class BallRenderer extends EntityRenderer<Ball, BallRenderState> {
         state.texture = ball.getTexture();
         state.lightCoords = LightCoordsUtil.FULL_BRIGHT;
         state.rotateClockwards = ball.rotatesClockwards();
+        state.rotates = ball.rotates();
     }
 
     @Override
     public void submit(BallRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         poseStack.pushPose();
-		poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot + 180.0F));
-		poseStack.mulPose(Axis.XP.rotationDegrees(state.xRot));
-        poseStack.mulPose(Axis.ZP.rotationDegrees(state.ageInTicks * (state.rotateClockwards ? -20.0F : 20.0F)));
+        // A ball that does not rotate keeps the orientation the model was built in, facing north for its whole
+        // flight instead of turning to follow where it is going.
+        if (state.rotates) {
+            poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot + 180.0F));
+            poseStack.mulPose(Axis.XP.rotationDegrees(state.xRot));
+            poseStack.mulPose(Axis.ZP.rotationDegrees(state.ageInTicks * (state.rotateClockwards ? -20.0F : 20.0F)));
+        }
 		var size = 4;
 		poseStack.scale(state.boundingBoxWidth * size, state.boundingBoxHeight * size, state.boundingBoxWidth * size);
 		submitNodeCollector.submitModel(this.model, state, poseStack, RenderTypes.entityCutout(state.texture.texturePath()), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);

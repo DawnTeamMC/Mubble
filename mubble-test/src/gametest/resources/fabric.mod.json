@@ -10,6 +10,7 @@
   "entrypoints": {
     "fabric-gametest": [
       "fr.hugman.mubble.test.gametest.super_mario.BallGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.SuperballGameTest",
       "fr.hugman.mubble.test.gametest.datapack.DataPackPowerUpGameTest",
       "fr.hugman.mubble.test.gametest.datapack.DynamicContentGameTest",
       "fr.hugman.mubble.test.gametest.network.NetworkPayloadGameTest",
@@ -24,6 +25,7 @@
       "fr.hugman.mubble.test.gametest.power_up.FloatGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.StompGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.GoombaGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.MiniGoombaGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.KoopaShellGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.CloudPlatformGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.FlowerGameTest",

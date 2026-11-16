@@ -31,6 +31,7 @@ public class SuperMarioSounds {
     public static final SoundEvent GOOMBA_FIND_TARGET = register("entity.goomba.find_target");
     public static final SoundEvent GOOMBA_DEATH = register("entity.goomba.death");
     public static final SoundEvent GOOMBA_STOMP = register("entity.goomba.stomp");
+    public static final SoundEvent MINI_GOOMBA_NIBBLE = register("entity.mini_goomba.nibble");
 
     public static final SoundEvent KOOPA_SHELL_SLIDE = register("entity.koopa_shell.slide");
     public static final SoundEvent KOOPA_SHELL_HOMING = register("entity.koopa_shell.homing");
@@ -49,14 +50,21 @@ public class SuperMarioSounds {
 
     public static final Holder.Reference<SoundEvent> GOLD_FIREBALL_THROW = registerForHolder("entity.gold_fireball.throw");
 
+    public static final Holder.Reference<SoundEvent> SUPERBALL_THROW = registerForHolder("entity.superball.throw");
+    public static final Holder.Reference<SoundEvent> SUPERBALL_HIT_BLOCK = registerForHolder("entity.superball.hit.block");
+    public static final Holder.Reference<SoundEvent> SUPERBALL_HIT_ENTITY = registerForHolder("entity.superball.hit.entity");
+    public static final Holder.Reference<SoundEvent> SUPERBALL_DISAPPEAR = registerForHolder("entity.superball.disappear");
+
 	public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN = registerForHolder("power_up.obtain");
     public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_MINI = registerForHolder("power_up.obtain.mini");
     public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_SUPER_STAR = registerForHolder("power_up.obtain.super_star");
     public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_GOLD = registerForHolder("power_up.obtain.gold");
+    public static final Holder.Reference<SoundEvent> POWER_UP_OBTAIN_SUPERBALL = registerForHolder("power_up.obtain.superball");
     public static final Holder.Reference<SoundEvent> POWER_UP_SPIN_ATTACK = registerForHolder("power_up.spin_attack");
     public static final Holder.Reference<SoundEvent> POWER_UP_EMIT_GOLD = registerForHolder("power_up.emit.gold");
     public static final Holder.Reference<SoundEvent> POWER_UP_REFILL = registerForHolder("power_up.refill");
     public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE = registerForHolder("power_up.loose");
+    public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE_SUPERBALL = registerForHolder("power_up.loose.superball");
 
     public static final Holder.Reference<SoundEvent> BUBBLE_APPEAR = registerForHolder("entity.bubble.appear");
     public static final Holder.Reference<SoundEvent> BUBBLE_POP = registerForHolder("entity.bubble.pop");
@@ -68,7 +76,10 @@ public class SuperMarioSounds {
     }
 
     private static Holder.Reference<SoundEvent> registerForHolder(String path) {
-        Identifier id = SuperMario.id(path);
-        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, id, SoundEvent.createVariableRangeEvent(id));
+        return registerForHolder(path, path);
+    }
+
+    private static Holder.Reference<SoundEvent> registerForHolder(String path, String location) {
+        return Registry.registerForHolder(BuiltInRegistries.SOUND_EVENT, SuperMario.id(path), SoundEvent.createVariableRangeEvent(SuperMario.id(location)));
     }
 }

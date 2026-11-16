@@ -14,6 +14,12 @@ import java.util.function.Predicate;
  * @since v4.0.0
  */
 public interface Stompable {
+    /**
+     * How hard a stomp throws whoever landed it back up, in blocks per tick, for an enemy with a full-grown
+     * goomba's worth of give underfoot.
+     */
+    double DEFAULT_STOMP_BOUNCE = 0.5D;
+
     default boolean canBeStomped() {
         return false;
     }
@@ -24,6 +30,14 @@ public interface Stompable {
 
     default Predicate<? super Entity> getStompableBy() {
         return EntitySelector.NO_CREATIVE_OR_SPECTATOR;
+    }
+
+    /**
+     * How hard stomping this throws the stomper back up, in blocks per tick. The smaller the enemy, the
+     * less there is to push off.
+     */
+    default double getStompBounce() {
+        return DEFAULT_STOMP_BOUNCE;
     }
 
     default void onStompedBy(Entity entity) {

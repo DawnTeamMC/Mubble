@@ -22,11 +22,13 @@ public class SuperMarioItemIds {
     public static final ResourceKey<Item> CLOUD_FLOWER = createKey("cloud_flower");
 
     public static final ResourceKey<Item> BUBBLE_FLOWER = createKey("bubble_flower");
+    public static final ResourceKey<Item> SUPERBALL_FLOWER = createKey("superball_flower");
     public static final ResourceKey<Item> SUPER_FLOWER_POT = createKey("super_flower_pot");
 
     public static final ResourceKey<Item> CAPE_FEATHER = createKey("cape_feather");
     public static final ResourceKey<Item> SUPER_CAPE_FEATHER = createKey("super_cape_feather");
     public static final ResourceKey<Item> GOOMBA_SPAWN_EGG = createKey("goomba_spawn_egg");
+    public static final ResourceKey<Item> MINI_GOOMBA_SPAWN_EGG = createKey("mini_goomba_spawn_egg");
 
 	public static final ResourceKey<Item> MAKER_GLOVE = createKey("maker_glove");
 

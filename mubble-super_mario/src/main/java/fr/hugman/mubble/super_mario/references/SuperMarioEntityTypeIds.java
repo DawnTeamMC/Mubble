@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntityType;
 
 public class SuperMarioEntityTypeIds {
     public static final ResourceKey<EntityType<?>> GOOMBA = createKey("goomba");
+    public static final ResourceKey<EntityType<?>> MINI_GOOMBA = createKey("mini_goomba");
     public static final ResourceKey<EntityType<?>> GREEN_KOOPA_SHELL = createKey("green_koopa_shell");
     public static final ResourceKey<EntityType<?>> RED_KOOPA_SHELL = createKey("red_koopa_shell");
     public static final ResourceKey<EntityType<?>> FIREBALL = createKey("fireball");
@@ -13,6 +14,7 @@ public class SuperMarioEntityTypeIds {
     public static final ResourceKey<EntityType<?>> GOLD_FIREBALL = createKey("gold_fireball");
     public static final ResourceKey<EntityType<?>> CLOUD_PLATFORM = createKey("cloud_platform");
     public static final ResourceKey<EntityType<?>> BUBBLE = createKey("bubble");
+    public static final ResourceKey<EntityType<?>> SUPERBALL = createKey("superball");
     public static final ResourceKey<EntityType<?>> FLOWER = createKey("flower");
 
     private static ResourceKey<EntityType<?>> createKey(String path) {

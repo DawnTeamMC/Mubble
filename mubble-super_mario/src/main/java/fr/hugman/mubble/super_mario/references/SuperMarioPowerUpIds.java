@@ -13,6 +13,7 @@ public class SuperMarioPowerUpIds {
     public static final ResourceKey<PowerUp> GOLD = createKey("gold");
     public static final ResourceKey<PowerUp> CLOUD = createKey("cloud");
     public static final ResourceKey<PowerUp> BUBBLE = createKey("bubble");
+    public static final ResourceKey<PowerUp> SUPERBALL = createKey("superball");
     public static final ResourceKey<PowerUp> FLOWER = createKey("flower");
 
     private static ResourceKey<PowerUp> createKey(String path) {
