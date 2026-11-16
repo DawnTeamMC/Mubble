@@ -16,6 +16,8 @@ public class SuperMarioBlockTags {
 
 	public static final TagKey<Block> EGG_BLOCKS = bind("egg_blocks");
 
+	public static final TagKey<Block> BEE_CLIMBABLE = bind("bee_climbable");
+
 	public static TagKey<Block> bind(String path) {
 		return TagKey.create(Registries.BLOCK, SuperMario.id(path));
 	}

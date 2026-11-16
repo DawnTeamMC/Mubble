@@ -7,10 +7,13 @@ import fr.hugman.mubble.test.unit.support.TestBootstrap;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.PowerUpCosmectics;
+import fr.hugman.mubble.world.power_up.ability.ClingAbility;
+import fr.hugman.mubble.world.power_up.ability.FlightAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import fr.hugman.mubble.world.power_up.ability.PowerUpAbilities;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -19,12 +22,15 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.block.Blocks;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -113,6 +119,21 @@ public class PowerUpCodecTest {
 
         assertEquals(flutter(), decoded.flutter().orElseThrow(() -> new AssertionError("the flutter was dropped")), "the flutter ability");
         assertEquals(floating(), decoded.floating().orElseThrow(() -> new AssertionError("the float was dropped")), "the float ability");
+        assertEquals(flight(), decoded.flight().orElseThrow(() -> new AssertionError("the flight was dropped")), "the flight ability");
+        assertEquals(cling(), decoded.cling().orElseThrow(() -> new AssertionError("the cling was dropped")), "the cling ability");
+    }
+
+    @Test
+    @DisplayName("a power-up without a flight or a cling writes neither of them")
+    void absentAbilitiesAreNotWritten() {
+        var ops = TestBootstrap.registries().createSerializationContext(JsonOps.INSTANCE);
+        var powerUp = new PowerUpBuilder().flutter(flutter()).floating(floating()).build();
+
+        var abilities = PowerUp.DIRECT_CODEC.encodeStart(ops, powerUp)
+                .getOrThrow(error -> new AssertionError("could not encode a power-up: " + error))
+                .getAsJsonObject().getAsJsonObject("abilities");
+
+        assertEquals(Set.of("flutter", "float"), abilities.keySet(), "the abilities written");
     }
 
     /** The Tanooki form will grant the float on its own, so a power-up has to be able to carry just the one. */
@@ -133,7 +154,7 @@ public class PowerUpCodecTest {
         var decoded = PowerUp.DIRECT_CODEC.parse(
                         TestBootstrap.registries().createSerializationContext(JsonOps.INSTANCE),
                         JsonParser.parseString("""
-                                {"abilities": {"flutter": {}, "float": {}}}
+                                {"abilities": {"flutter": {}, "float": {}, "flight": {}, "cling": {"blocks": []}}}
                                 """))
                 .getOrThrow(error -> new AssertionError("could not read bare abilities: " + error))
                 .abilities();
@@ -147,6 +168,16 @@ public class PowerUpCodecTest {
                 FloatAbility.of(FloatAbility.DEFAULT_SPEED, FloatAbility.DEFAULT_FALL_DAMAGE),
                 decoded.floating().orElseThrow(() -> new AssertionError("the float was dropped")),
                 "a float with no field of its own"
+        );
+        assertEquals(
+                FlightAbility.of(FlightAbility.DEFAULT_GAUGE, FlightAbility.DEFAULT_RESTART, Map.of()),
+                decoded.flight().orElseThrow(() -> new AssertionError("the flight was dropped")),
+                "a flight with no field of its own"
+        );
+        assertEquals(
+                ClingAbility.of(HolderSet.direct()),
+                decoded.cling().orElseThrow(() -> new AssertionError("the cling was dropped")),
+                "a cling with no field but its blocks"
         );
     }
 
@@ -198,6 +229,8 @@ public class PowerUpCodecTest {
                 .emissiveOverlay()
                 .flutter(flutter())
                 .floating(floating())
+                .flight(flight())
+                .cling(cling())
                 .build();
     }
 
@@ -209,6 +242,17 @@ public class PowerUpCodecTest {
     /** Distinct from the flutter above in every field, for the same reason. */
     static FloatAbility floating() {
         return new FloatAbility(0.13F, 0.4F, Optional.of(sound(SoundEvents.BEACON_AMBIENT)), Optional.of(ParticleTypes.COMPOSTER));
+    }
+
+    static FlightAbility flight() {
+        return new FlightAbility(140, 35, 0.31F, 0.07F, 1.8F, 0.45F, 9, Map.of(Identifier.parse("mubble:test_coin"), 15),
+                Optional.of(sound(SoundEvents.BEE_LOOP)), Optional.of(ParticleTypes.FALLING_NECTAR), Optional.of(ParticleTypes.POOF),
+                Optional.of(new FlightAbility.Bar(Identifier.parse("mubble:hud/test_background"), Identifier.parse("mubble:hud/test_progress"))));
+    }
+
+    static ClingAbility cling() {
+        return new ClingAbility(HolderSet.direct(Blocks.HONEY_BLOCK.builtInRegistryHolder()), 0.12F,
+                Optional.of(sound(SoundEvents.HONEY_BLOCK_SLIDE)), Optional.of(ParticleTypes.FALLING_HONEY));
     }
 
     /** Most {@code SoundEvents} constants are bare events, but the mod stores them as holders. */

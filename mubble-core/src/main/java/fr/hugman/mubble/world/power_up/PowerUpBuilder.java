@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import fr.hugman.mubble.world.power_up.ability.ClingAbility;
+import fr.hugman.mubble.world.power_up.ability.FlightAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import fr.hugman.mubble.world.power_up.ability.PowerUpAbilities;
@@ -32,6 +34,8 @@ public class PowerUpBuilder {
     private @Nullable Holder<SoundEvent> refillSound = null;
     private @Nullable FlutterAbility flutter = null;
     private @Nullable FloatAbility floating = null;
+    private @Nullable FlightAbility flight = null;
+    private @Nullable ClingAbility cling = null;
     private @Nullable ParticleOptions particle = null;
     private @Nullable Identifier humanoidOverlayAssetId = null;
     private boolean emissiveOverlay = false;
@@ -108,6 +112,16 @@ public class PowerUpBuilder {
         return this;
     }
 
+    public PowerUpBuilder flight(FlightAbility flight) {
+        this.flight = flight;
+        return this;
+    }
+
+    public PowerUpBuilder cling(ClingAbility cling) {
+        this.cling = cling;
+        return this;
+    }
+
     public PowerUpBuilder particle(ParticleOptions particle) {
         this.particle = particle;
         return this;
@@ -154,7 +168,7 @@ public class PowerUpBuilder {
                 Optional.ofNullable(spriteId),
                 Optional.ofNullable(action),
                 Optional.ofNullable(attributesModifiers.isEmpty() ? null : attributesModifiers),
-                new PowerUpAbilities(Optional.ofNullable(this.flutter), Optional.ofNullable(this.floating)),
+                new PowerUpAbilities(Optional.ofNullable(this.flutter), Optional.ofNullable(this.floating), Optional.ofNullable(this.flight), Optional.ofNullable(this.cling)),
                 new PowerUpCosmectics(
                         Optional.ofNullable(this.particle),
                         Optional.ofNullable(this.obtainSound),

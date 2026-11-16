@@ -5,6 +5,8 @@ import fr.hugman.mubble.super_mario.client.references.SuperMarioRenderStateDataK
 import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderTypes;
 import fr.hugman.mubble.super_mario.client.renderer.entity.state.GoombaRenderState;
 import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
+import fr.hugman.mubble.super_mario.tags.SuperMarioPowerUpTags;
+import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import fr.hugman.mubble.super_mario.world.entity.monster.goomba.MiniGoombaCarrier;
 import fr.hugman.mubble.super_mario.world.entity.projectile.Bubble;
 import net.minecraft.client.model.EntityModel;
@@ -44,6 +46,11 @@ public class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingE
         // Render states are pooled, so the key has to be cleared for anything nothing is holding onto.
         int clinging = entity instanceof MiniGoombaCarrier carrier ? carrier.getClingingMiniGoombas() : 0;
         state.setData(SuperMarioRenderStateDataKeys.CLINGING_MINI_GOOMBAS, clinging > 0 ? clinging : null);
+    }
+
+    @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("TAIL"))
+    private void super_mario$extractStinger(T entity, S state, float partialTicks, CallbackInfo ci) {
+        state.setData(SuperMarioRenderStateDataKeys.STINGER, PowerUpHolder.holdsTagged(entity, SuperMarioPowerUpTags.HAS_STINGER) ? Boolean.TRUE : null);
     }
 
     @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("TAIL"))

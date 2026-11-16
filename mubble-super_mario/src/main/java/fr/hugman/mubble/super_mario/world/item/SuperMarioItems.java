@@ -41,6 +41,7 @@ public class SuperMarioItems {
     public static final PowerUpItem BUBBLE_FLOWER = registerPowerUp(SuperMarioItemIds.BUBBLE_FLOWER, SuperMarioPowerUpIds.BUBBLE);
     public static final PowerUpItem SUPERBALL_FLOWER = registerPowerUp(SuperMarioItemIds.SUPERBALL_FLOWER, SuperMarioPowerUpIds.SUPERBALL);
     public static final PowerUpItem SUPER_FLOWER_POT = registerPowerUp(SuperMarioItemIds.SUPER_FLOWER_POT, SuperMarioPowerUpIds.FLOWER);
+    public static final PowerUpItem BEE_MUSHROOM = registerPowerUp(SuperMarioItemIds.BEE_MUSHROOM, SuperMarioPowerUpIds.BEE);
     public static final CapeFeatherItem CAPE_FEATHER = register(SuperMarioItemIds.CAPE_FEATHER, s -> new CapeFeatherItem(s, false));
     public static final CapeFeatherItem SUPER_CAPE_FEATHER = register(SuperMarioItemIds.SUPER_CAPE_FEATHER, s -> new CapeFeatherItem(s.rarity(Rarity.EPIC), true));
 

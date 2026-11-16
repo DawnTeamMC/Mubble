@@ -2,6 +2,7 @@ package fr.hugman.mubble.super_mario.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
+import fr.hugman.mubble.super_mario.references.SuperMarioFlightRefillIds;
 import fr.hugman.mubble.super_mario.tags.SuperMarioEntityTypeTags;
 import fr.hugman.mubble.super_mario.tags.SuperMarioPowerUpTags;
 import fr.hugman.mubble.super_mario.world.entity.FallGraced;
@@ -169,6 +170,7 @@ public class EntityMixin implements Stompable, FallGraced {
 			entity.setDeltaMovement(momentum.x(), this.getStompBounce(), momentum.z());
 			if (entity instanceof Player player) {
 				((ServerPlayer) player).connection.send(new ClientboundSetEntityMotionPacket(player));
+				player.refillFlight(SuperMarioFlightRefillIds.STOMP);
 			}
 			entity.fallDistance = 0.0F;
 		}

@@ -4,14 +4,18 @@ import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
 import fr.hugman.mubble.tags.MubblePowerUpTags;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import fr.hugman.mubble.world.entity.Clinging;
 import fr.hugman.mubble.world.entity.Floating;
 import fr.hugman.mubble.world.entity.Fluttering;
+import fr.hugman.mubble.world.entity.Flying;
 import fr.hugman.mubble.world.entity.JumpKeyHolder;
 import fr.hugman.mubble.world.entity.WaterRunner;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
+import fr.hugman.mubble.world.power_up.ability.ClingAbility;
+import fr.hugman.mubble.world.power_up.ability.FlightAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -22,6 +26,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
@@ -35,12 +40,13 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 import java.util.Optional;
 
 @Mixin(Player.class)
-public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, Fluttering, Floating {
+public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, Fluttering, Floating, Flying, Clinging {
     @Unique
     private static final EntityDataAccessor<Optional<PowerUpProperties>> POWER_UP_PROPERTIES = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.POWER_UP_PROPERTIES);
     @Unique
@@ -54,6 +60,19 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     /** The other half of the same story, see {@link #mubble$tickAirMoves}. */
     @Unique
     private static final EntityDataAccessor<Boolean> FLOATING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
+    @Unique
+    private static final EntityDataAccessor<Byte> FLIGHT = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BYTE);
+    /** The ticks of flight spent, as last told by the server, which the owning client predicts in between. */
+    @Unique
+    private static final EntityDataAccessor<Integer> FLIGHT_SPENT = SynchedEntityData.defineId(Player.class, EntityDataSerializers.INT);
+    @Unique
+    private static final EntityDataAccessor<Boolean> CLINGING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
+    @Unique
+    private static final byte NOT_FLYING = 0;
+    @Unique
+    private static final byte FLYING = 1;
+    @Unique
+    private static final byte SPUTTERING = 2;
 
     @Unique
     private static final String POWER_UP_KEY = "power_up";
@@ -63,6 +82,14 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     private static final String FLUTTER_TICKS_KEY = "flutter_ticks";
     @Unique
     private static final String FLUTTER_SPENT_KEY = "flutter_spent";
+    @Unique
+    private static final String FLIGHT_SPENT_KEY = "flight_spent";
+    @Unique
+    private static final String FLIGHT_EXHAUSTED_KEY = "flight_exhausted";
+    @Unique
+    private static final int SPUTTER_PUFF_PARTICLES = 8;
+    @Unique
+    private static final int CLING_PARTICLES = 6;
 
     /** How many particles a player on a mid-air move leaves around their feet every tick. */
     @Unique
@@ -110,12 +137,32 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     @Unique
     private boolean mubble$floating;
 
+    @Unique
+    private byte mubble$flight;
+    @Unique
+    private float mubble$flightSpeed;
+    @Unique
+    private int mubble$flightSpent;
+    @Unique
+    private boolean mubble$flightExhausted;
+    @Unique
+    private int mubble$adoptedFlightSpent;
+    @Unique
+    private boolean mubble$clinging;
+    @Unique
+    private boolean mubble$shownSputtering;
+    @Unique
+    private boolean mubble$shownClinging;
+
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     protected void mubble$initDataTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
         builder.define(POWER_UP, Optional.empty());
         builder.define(POWER_UP_PROPERTIES, Optional.empty());
         builder.define(FLUTTERING, false);
         builder.define(FLOATING, false);
+        builder.define(FLIGHT, NOT_FLYING);
+        builder.define(FLIGHT_SPENT, 0);
+        builder.define(CLINGING, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -126,6 +173,8 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         view.storeNullable(POWER_UP_PROPERTIES_KEY, PowerUpProperties.CODEC, this_.getPowerUpProperties());
         view.putInt(FLUTTER_TICKS_KEY, this.mubble$fluttering ? this.mubble$flutterTicks : -1);
         view.putBoolean(FLUTTER_SPENT_KEY, this.mubble$flutterSpent);
+        view.putInt(FLIGHT_SPENT_KEY, this.mubble$flightSpent);
+        view.putBoolean(FLIGHT_EXHAUSTED_KEY, this.mubble$flightExhausted);
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
@@ -138,6 +187,9 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         this.mubble$flutterSpent = view.getBooleanOr(FLUTTER_SPENT_KEY, false);
         this.mubble$setFluttering(this_, flutterTicks >= 0);
         this.mubble$flutterTicks = Math.max(0, flutterTicks);
+        this.mubble$flightExhausted = view.getBooleanOr(FLIGHT_EXHAUSTED_KEY, false);
+        this.mubble$setFlightSpent(view.getIntOr(FLIGHT_SPENT_KEY, 0));
+        this.mubble$syncFlightGauge(this_);
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
@@ -316,6 +368,7 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         var this_ = (Player) (Object) this;
         var previous = this_.getPowerUp();
         this_.getEntityData().set(POWER_UP, Optional.of(powerUp));
+        this.mubble$resetFlight(this_);
         if (this_ instanceof ServerPlayer serverPlayer) {
             ServerPlayNetworking.send(serverPlayer, new PowerUpChangePayload(previous, Optional.of(powerUp)));
         }
@@ -327,6 +380,7 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         var this_ = (Player) (Object) this;
         var previous = this_.getPowerUp();
         this_.getEntityData().set(POWER_UP, Optional.empty());
+        this.mubble$resetFlight(this_);
         if (this_ instanceof ServerPlayer serverPlayer) {
             ServerPlayNetworking.send(serverPlayer, new PowerUpChangePayload(previous, Optional.empty()));
         }
@@ -353,12 +407,23 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     private void mubble$tickAirMoves(CallbackInfo ci) {
         var this_ = (Player) (Object) this;
         this.mubble$airMoveParticles(this_);
+        this.mubble$adoptSyncedFlightGauge(this_);
+        this.mubble$tickCling(this_);
 
         // Landing is what hands the next jump its flutter back, and the only thing that does.
         if (this_.onGround()) {
             this.mubble$flutterSpent = false;
             this.mubble$endAirMoves(this_);
+            if (this.mubble$refill(FlightAbility.GROUND)) {
+                this.mubble$syncFlightGauge(this_);
+            }
             return;
+        }
+        if (this_.onClimbable()) {
+            this.mubble$refill(FlightAbility.CLIMBING);
+        }
+        if (this.mubble$clinging) {
+            this.mubble$refill(FlightAbility.CLINGING);
         }
         // Anything holding the player up other than the air takes both abilities away with it, and so does
         // letting go of the key. The flutter never comes back for that jump; the float does, on the next press.
@@ -367,6 +432,11 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
             return;
         }
 
+        if (this.mubble$tickFlight(this_)) {
+            this.mubble$setFluttering(this_, false);
+            this.mubble$setFloating(this_, false);
+            return;
+        }
         if (this.mubble$tickFlutter(this_)) {
             // Still being pushed up, so there is no fall to slow down yet.
             this.mubble$setFloating(this_, false);
@@ -443,13 +513,148 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
      */
     @Unique
     private static boolean mubble$heldBySomethingElse(Player player) {
-        return player.isInWater() || player.onClimbable() || player.isFallFlying() || player.isPassenger();
+        return player.isInWater() || player.onClimbable() || player.isFallFlying() || player.isPassenger() || player.getAbilities().flying;
     }
 
     @Unique
     private void mubble$endAirMoves(Player player) {
+        this.mubble$setFlight(player, NOT_FLYING);
         this.mubble$setFluttering(player, false);
         this.mubble$setFloating(player, false);
+    }
+
+    @Unique
+    private boolean mubble$tickFlight(Player player) {
+        var ability = this.getFlightAbility();
+        if (ability.isEmpty()) {
+            this.mubble$setFlight(player, NOT_FLYING);
+            return false;
+        }
+        FlightAbility flight = ability.get();
+        if (this.mubble$flight == NOT_FLYING) {
+            if (this.mubble$flightExhausted || this.getFlightGauge() <= 0) {
+                return false;
+            }
+            this.mubble$flightSpeed = (float) player.getKnownMovement().y();
+        }
+        this.mubble$setFlightSpent(this.mubble$flightSpent + 1);
+        int left = this.getFlightGauge();
+        if (left <= 0) {
+            this.mubble$flightExhausted = true;
+            this.mubble$setFlight(player, NOT_FLYING);
+            return false;
+        }
+        this.mubble$setFlight(player, flight.isSputtering(left) ? SPUTTERING : FLYING);
+
+        this.mubble$flightSpeed = flight.speedAfter(this.mubble$flightSpeed);
+        Vec3 movement = player.getDeltaMovement();
+        player.setDeltaMovement(movement.x(), flight.liftFor(this.mubble$flightSpeed, left), movement.z());
+        player.fallDistance *= flight.fallDamage();
+        return true;
+    }
+
+    @Unique
+    private void mubble$setFlight(Player player, byte flight) {
+        if (this.mubble$flight == flight) {
+            return;
+        }
+        boolean startsOrStops = (this.mubble$flight == NOT_FLYING) != (flight == NOT_FLYING);
+        this.mubble$flight = flight;
+        if (!player.level().isClientSide()) {
+            player.getEntityData().set(FLIGHT, flight);
+            if (startsOrStops) {
+                this.mubble$syncFlightGauge(player);
+            }
+        }
+    }
+
+    @Unique
+    private void mubble$setFlightSpent(int spent) {
+        int gauge = this.getFlightAbility().map(FlightAbility::gauge).orElse(0);
+        this.mubble$flightSpent = Math.clamp(spent, 0, Math.max(0, gauge));
+        if (this.mubble$flightExhausted && this.getFlightAbility().map(flight -> this.getFlightGauge() >= flight.restart()).orElse(true)) {
+            this.mubble$flightExhausted = false;
+        }
+    }
+
+    /**
+     * @return whether the gauge changed
+     */
+    @Unique
+    private boolean mubble$refill(Identifier source) {
+        int amount = this.getFlightAbility().map(flight -> flight.refillFor(source)).orElse(0);
+        int before = this.mubble$flightSpent;
+        if (amount > 0 && before > 0) {
+            this.mubble$setFlightSpent(before - amount);
+        }
+        return this.mubble$flightSpent != before;
+    }
+
+    @Unique
+    private void mubble$resetFlight(Player player) {
+        this.mubble$flightExhausted = false;
+        this.mubble$flightSpent = 0;
+        this.mubble$setFlight(player, NOT_FLYING);
+        this.mubble$syncFlightGauge(player);
+    }
+
+    @Unique
+    private void mubble$syncFlightGauge(Player player) {
+        if (!player.level().isClientSide()) {
+            player.getEntityData().set(FLIGHT_SPENT, this.mubble$flightSpent);
+        }
+    }
+
+    @Unique
+    private void mubble$adoptSyncedFlightGauge(Player player) {
+        if (!player.isLocalPlayer()) {
+            return;
+        }
+        int synced = player.getEntityData().get(FLIGHT_SPENT);
+        if (synced != this.mubble$adoptedFlightSpent) {
+            this.mubble$adoptedFlightSpent = synced;
+            this.mubble$setFlightSpent(synced);
+        }
+    }
+
+    @Unique
+    private void mubble$tickCling(Player player) {
+        if (player.level().isClientSide() && !player.isLocalPlayer()) {
+            return;
+        }
+        boolean clinging = this.mubble$canClingNow(player);
+        if (clinging == this.mubble$clinging) {
+            return;
+        }
+        this.mubble$clinging = clinging;
+        if (clinging) {
+            this.getClingAbility().flatMap(ClingAbility::sound).ifPresent(sound -> player.playSound(sound.value(), 1.0F, 1.0F));
+        }
+        if (!player.level().isClientSide()) {
+            player.getEntityData().set(CLINGING, clinging);
+        }
+    }
+
+    @Unique
+    private boolean mubble$canClingNow(Player player) {
+        if (player.isSpectator() || player.getAbilities().flying || !(player.horizontalCollision || !player.onGround())) {
+            return false;
+        }
+        return this.getClingAbility().flatMap(cling -> cling.wallBeside(player)).isPresent();
+    }
+
+    @Inject(method = "onClimbable", at = @At("RETURN"), cancellable = true)
+    private void mubble$climbClingableBlocks(CallbackInfoReturnable<Boolean> cir) {
+        if (!cir.getReturnValueZ() && this.mubble$canClingNow((Player) (Object) this)) {
+            cir.setReturnValue(true);
+        }
+    }
+
+    @Inject(method = "getFlyingSpeed", at = @At("RETURN"), cancellable = true)
+    private void mubble$steerFlight(CallbackInfoReturnable<Float> cir) {
+        if (this.mubble$flight != NOT_FLYING) {
+            this.getFlightAbility().ifPresent(flight -> cir.setReturnValue(cir.getReturnValueF() * flight.airControl()));
+        }
     }
 
     @Unique
@@ -497,8 +702,11 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         if (!player.level().isClientSide()) {
             return;
         }
+        this.mubble$flightAndClingBursts(player);
         Optional<ParticleOptions> particle = Optional.empty();
-        if (player.isFluttering()) {
+        if (player.isFlying()) {
+            particle = this.getFlightAbility().flatMap(FlightAbility::particle);
+        } else if (player.isFluttering()) {
             particle = this.getFlutterAbility().flatMap(FlutterAbility::particle);
         } else if (player.isFloating()) {
             particle = this.getFloatAbility().flatMap(FloatAbility::particle);
@@ -511,6 +719,28 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
             player.level().addParticle(particle.get(),
                     player.getRandomX(spread), player.getY(), player.getRandomZ(spread),
                     0.0D, AIR_MOVE_PARTICLE_FALL, 0.0D);
+        }
+    }
+
+    @Unique
+    private void mubble$flightAndClingBursts(Player player) {
+        boolean sputtering = player.isFlightSputtering();
+        if (this.mubble$shownSputtering && !player.isFlying()) {
+            this.getFlightAbility().flatMap(FlightAbility::sputterParticle).ifPresent(particle -> mubble$burst(player, particle, SPUTTER_PUFF_PARTICLES, player.getY()));
+        }
+        this.mubble$shownSputtering = sputtering;
+
+        boolean clinging = player.isClinging();
+        if (clinging && !this.mubble$shownClinging) {
+            this.getClingAbility().flatMap(ClingAbility::particle).ifPresent(particle -> mubble$burst(player, particle, CLING_PARTICLES, player.getY(0.6D)));
+        }
+        this.mubble$shownClinging = clinging;
+    }
+
+    @Unique
+    private static void mubble$burst(Player player, ParticleOptions particle, int count, double y) {
+        for (int i = 0; i < count; i++) {
+            player.level().addParticle(particle, player.getRandomX(1.0D), y + (player.getRandom().nextDouble() - 0.5D) * 0.5D, player.getRandomZ(1.0D), 0.0D, 0.0D, 0.0D);
         }
     }
 
@@ -535,6 +765,48 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     public Optional<FloatAbility> getFloatAbility() {
         var this_ = (Player) (Object) this;
         return this_.getPowerUp().flatMap(powerUp -> powerUp.value().abilities().floating());
+    }
+
+    @Override
+    public Optional<FlightAbility> getFlightAbility() {
+        var this_ = (Player) (Object) this;
+        return this_.getPowerUp().flatMap(powerUp -> powerUp.value().abilities().flight());
+    }
+
+    @Override
+    public boolean isFlying() {
+        var this_ = (Player) (Object) this;
+        return this.mubble$flight != NOT_FLYING || this_.getEntityData().get(FLIGHT) != NOT_FLYING;
+    }
+
+    @Override
+    public boolean isFlightSputtering() {
+        var this_ = (Player) (Object) this;
+        return this.mubble$flight == SPUTTERING || this_.getEntityData().get(FLIGHT) == SPUTTERING;
+    }
+
+    @Override
+    public int getFlightGauge() {
+        return this.getFlightAbility().map(flight -> Math.max(0, flight.gauge() - this.mubble$flightSpent)).orElse(0);
+    }
+
+    @Override
+    public void refillFlight(Identifier source) {
+        if (this.mubble$refill(source)) {
+            this.mubble$syncFlightGauge((Player) (Object) this);
+        }
+    }
+
+    @Override
+    public Optional<ClingAbility> getClingAbility() {
+        var this_ = (Player) (Object) this;
+        return this_.getPowerUp().flatMap(powerUp -> powerUp.value().abilities().cling());
+    }
+
+    @Override
+    public boolean isClinging() {
+        var this_ = (Player) (Object) this;
+        return this.mubble$clinging || this_.getEntityData().get(CLINGING);
     }
 
     @Override

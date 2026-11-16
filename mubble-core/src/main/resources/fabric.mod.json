@@ -30,7 +30,9 @@
         "fr/hugman/mubble/world/entity/WaterRunner",
         "fr/hugman/mubble/world/entity/JumpKeyHolder",
         "fr/hugman/mubble/world/entity/Fluttering",
-        "fr/hugman/mubble/world/entity/Floating"
+        "fr/hugman/mubble/world/entity/Floating",
+        "fr/hugman/mubble/world/entity/Flying",
+        "fr/hugman/mubble/world/entity/Clinging"
       ]
 	}
   },

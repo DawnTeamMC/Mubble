@@ -5,9 +5,14 @@
   "mixins": [
     "BlockStateBaseMixin",
     "ArgumentTypeInfosMixin",
+    "BigDripleafBlockMixin",
     "EntityMixin",
+    "FarmlandBlockMixin",
     "ItemStackMixin",
-    "PlayerMixin"
+    "PlayerMixin",
+    "PowderSnowBlockMixin",
+    "ServerGamePacketListenerImplMixin",
+    "TurtleEggBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1
