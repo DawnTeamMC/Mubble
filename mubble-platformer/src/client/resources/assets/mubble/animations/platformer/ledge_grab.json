@@ -1,0 +1,1 @@
+{"length": 0.2, "bones": {"right_arm": {"rotation": [-165, 0, 12]}, "left_arm": {"rotation": [-165, 0, -12]}, "right_leg": {"rotation": [10, 0, 3]}, "left_leg": {"rotation": [10, 0, -3]}}, "body": {"scale": {"0.0": [0.94, 1.1, 0.94], "0.2": {"post": [1, 1, 1], "easing": "out_back"}}}}

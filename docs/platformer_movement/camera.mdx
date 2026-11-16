@@ -1,0 +1,85 @@
+---
+title: Camera
+---
+
+With [platformer movement]($platformer_movement/overview), the third-person view from behind becomes an **orbit camera**: the mouse or the right stick turns it freely around the player, and the player moves relative to it, as in 3D platformers. The first-person view and the front view stay vanilla, and platformer movement plays fully in first person too.
+
+## Orbit camera
+
+- The mouse or the right stick turns the camera all the way around the player, and up or down to 80°.
+- The player faces where they move, and looks toward the horizon.
+- The camera leaves the player some room instead of keeping them in the exact middle of the screen, see [Framing](#framing).
+- The field of view widens slightly with speed.
+- *Recenter Camera* swings the camera behind the player, level with the horizon, and brings the player back to the middle of the screen, margins aside.
+- When vanilla movement takes over, for example while flying or in lava, the view eases between the orbit camera and the vanilla camera over a quarter of a second.
+
+The hands do not aim with the camera: see [Aiming with the orbit camera]($platformer_movement/items_and_blocks#aiming-with-the-orbit-camera). Weapons that shoot are the exception, see [Aiming over the shoulder](#aiming-over-the-shoulder).
+
+## Aiming over the shoulder
+
+As long as the player holds a bow, a crossbow or a trident, in either hand, or has a power-up that shoots, such as the Fire Flower, the camera sits over their right shoulder, and a crosshair shows in the middle of the screen. Taking one in hand moves the camera there in less than a fifth of a second, and it stays there between shots:
+
+- The player still turns the way they walk, as with the orbit camera.
+- Using the weapon turns them to face the crosshair at once: drawing the bow, loading or shooting the crossbow, raising the trident, or triggering the power-up. They keep facing it while the weapon is in use and for half a second after, moving relative to it as in first person: they walk sideways instead of turning around. Rolls, dives, long jumps, side somersaults, slides and moves on walls and ledges still turn the player the way they go.
+- Arrows, bolts, tridents and fireballs fly toward what the crosshair points at, even though the camera sits beside the player.
+- The camera turns as fast as in first person, whatever *Camera Sensitivity* is, and up or down all the way.
+- The camera stays close to the player and does not follow them on its own. Against a wall on the right, it comes closer to the player's head.
+- The speed field of view goes away, leaving only the zoom of the bow.
+
+Once the weapon is put away, or the power-up lost, the camera eases back to the orbit just as quickly.
+
+## Framing
+
+As in 3D platformers, the camera does not move for every step the player takes:
+
+- A step aside leaves it still. The player moves freely within about 1 block of the point the camera looks at; past that, the camera follows smoothly, and never lets them get more than 2.2 blocks away.
+- Once the player keeps moving for half a second, the camera catches up a little faster than they go: it trails behind a run rather than sticking to the player, and brings them back to the middle after about two seconds.
+- Turning the camera also brings the player back to the middle, gently, as much as it turns: about two thirds of the way over a quarter turn. The player only stays off-center while neither the camera nor the player moves.
+- Jumps leave the height of the camera alone, up to 2.5 blocks above where it looks. It only rises or sinks with the ground: once the player lands higher or lower, or on a ladder, a wall or in water, it eases to their new height. A fall more than 0.75 blocks below it is followed right away.
+
+The *Camera Margin* setting scales all of this: 0% keeps the player in the middle of the screen at all times.
+
+## Following the player
+
+As in *Super Mario Odyssey*, the camera can swing around behind the player on its own as they move, so slowly that it is hardly noticeable. The camera is the player's to turn; following only catches up with where they go:
+
+- It only ever moves while the player moves, and the more they move sideways to the view, the faster it turns.
+- Walking, it does not turn, and running, it barely does, unless the player keeps going the same way for a long while: past about 10 blocks in one direction, it slowly comes around. A sharp turn or a stop starts the count again.
+- Rolling, diving or long jumping past the run speed, it follows more readily.
+- Running toward the camera never turns it around: within 45° of straight at it, it does not follow at all.
+- After the player turns the camera by hand, it stays where they left it for 2.5 seconds, then the following comes back gradually over another 1.5 seconds.
+- It always starts and stops turning gently, never with a jolt.
+
+Following has two settings: *Camera Follows (Keyboard)*, off by default, and *Camera Follows (Controller)*, on by default. The one that applies depends on whether the player is playing on the keyboard and mouse or on a controller. The controller one can also be switched in game with the *Toggle Camera Follow (controller)* control of Controlify.
+
+## Walls
+
+Blocks between the camera and the player do not move the camera. Instead, the player shows through them as a light gray silhouette, which the *Show Player Through Walls* setting turns off.
+
+The camera only moves when it runs into blocks itself, for example when the player backs into a wall. It then eases in quickly, only as far as it needs to stay clear of the blocks, and eases back out slowly once there is room again.
+
+## Settings
+
+The settings are on the *Platformer Movement* section of the Mubble settings screen. With the [Mod Menu](https://modrinth.com/mod/modmenu) mod installed, the settings button of Mubble or of its *Platformer Movement* entry opens that screen.
+
+| Setting | Default | Range | Description |
+|---|---|---|---|
+| Orbit Camera | On | | Off, the third-person view from behind stays vanilla |
+| Camera Distance | 125% | 25 to 400% | How far behind the player the camera stays, as a share of the distance of the usual third-person view: 4 blocks, so 5 blocks by default. Whatever makes the usual view move further back or closer, a [camera distance](https://minecraft.wiki/w/Attribute#Camera_distance) attribute modifier for example, does the same to the orbit camera |
+| Camera Follows (Keyboard) | Off | | Whether the camera follows the player when playing on the keyboard and mouse |
+| Camera Follows (Controller) | On | | Whether the camera follows the player when playing on a controller |
+| Camera Follow Speed | 90°/s | 30 to 360°/s | How fast the camera swings around at its quickest, when the player rolls or dives sideways; walking, it hardly turns |
+| Camera Margin | 100% | 0 to 200% | How much room the camera leaves around the player before following them, see [Framing](#framing); 0% keeps the player in the middle |
+| Camera Sensitivity | 100% | 10 to 300% | How fast the mouse and the right stick turn the camera |
+| Speed Field of View | 8% | 0 to 30% | How much wider the view gets at full speed |
+| Show Player Through Walls | On | | Whether the player shows through the blocks between them and the camera |
+| Profile Camera Hints | On | | Whether [profiles]($platformer_movement/overview#profiles) may scale the camera distance and the speed field of view |
+| Debug HUD on Start | Off | | Whether the platformer debug HUD shows when the game starts |
+
+The settings are saved in `config/mubble-platformer-client.json`, in the game directory. A few more can only be changed in that file:
+
+| Setting | Default | Description |
+|---|---|---|
+| `camera_height` | 0.3 | How far above the player's eyes the camera looks from, in blocks |
+| `recenter_speed` | 540 | How fast *Recenter Camera* swings the camera, in degrees per second |
+| `min_pitch`, `max_pitch` | -80, 80 | How far up and down the camera can turn, in degrees, as in vanilla: -90 looks straight up and 90 straight down |
