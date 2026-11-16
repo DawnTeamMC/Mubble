@@ -21,4 +21,11 @@ public interface HittableBlock {
     double HIT_Y_OFFSET = 0.001;
 
     void onHit(Level level, BlockState state, Entity entity, BlockHitResult hit);
+
+    /**
+     * Called when an entity drilling down goes through the block from above, server-side.
+     */
+    default void onSmash(Level level, BlockState state, Entity entity, BlockHitResult hit) {
+        this.onHit(level, state, entity, hit);
+    }
 }

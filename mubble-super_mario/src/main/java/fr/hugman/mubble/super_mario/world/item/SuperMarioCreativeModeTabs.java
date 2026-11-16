@@ -54,6 +54,7 @@ public class SuperMarioCreativeModeTabs {
             entries.accept(SuperMarioItems.SUPER_FLOWER_POT);
             entries.accept(SuperMarioItems.MINI_MUSHROOM);
             entries.accept(SuperMarioItems.MEGA_MUSHROOM);
+            entries.accept(SuperMarioItems.PROPELLER_MUSHROOM);
             entries.accept(SuperMarioBlocks.QUESTION_BLOCK);
             entries.accept(SuperMarioBlocks.EMPTY_BLOCK);
             entries.accept(SuperMarioBlocks.BRICK_BLOCK);

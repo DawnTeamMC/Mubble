@@ -10,8 +10,10 @@ import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowe
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.PowerUpCharges;
+import fr.hugman.mubble.world.power_up.ability.DrillAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
+import fr.hugman.mubble.world.power_up.ability.LaunchAbility;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricDynamicRegistryProvider;
@@ -176,6 +178,30 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         FloatAbility.DEFAULT_FALL_DAMAGE,
                         Optional.of(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BAT_LOOP)),
                         Optional.of(ParticleTypes.CHERRY_LEAVES)
+                ))
+                .build());
+        context.register(PROPELLER, builder(PROPELLER)
+                .description(PROPELLER, "launch")
+                .description(PROPELLER, "drill")
+                .launch(new LaunchAbility(
+                        LaunchAbility.DEFAULT_DOUBLE_TAP_WINDOW,
+                        LaunchAbility.DEFAULT_HEIGHT,
+                        Optional.of(SuperMarioSounds.POWER_UP_PROPELLER_LAUNCH),
+                        Optional.of(ParticleTypes.CLOUD),
+                        Optional.of(new FloatAbility(
+                                0.15F,
+                                0.0F,
+                                Optional.of(SuperMarioSounds.POWER_UP_PROPELLER_FALL),
+                                Optional.of(ParticleTypes.WHITE_SMOKE)
+                        ))
+                ))
+                .drill(new DrillAbility(
+                        DrillAbility.DEFAULT_SPEED,
+                        DrillAbility.DEFAULT_CONTROL,
+                        DrillAbility.DEFAULT_FALL_DAMAGE,
+                        Optional.of(SuperMarioSounds.POWER_UP_PROPELLER_DRILL),
+                        Optional.of(ParticleTypes.CRIT),
+                        Optional.of(SuperMarioSounds.POWER_UP_PROPELLER_DRILL_LAND)
                 ))
                 .build());
     }

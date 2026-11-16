@@ -65,6 +65,10 @@ public class SuperMarioSounds {
     public static final Holder.Reference<SoundEvent> POWER_UP_REFILL = registerForHolder("power_up.refill");
     public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE = registerForHolder("power_up.loose");
     public static final Holder.Reference<SoundEvent> POWER_UP_LOOSE_SUPERBALL = registerForHolder("power_up.loose.superball");
+    public static final Holder.Reference<SoundEvent> POWER_UP_PROPELLER_LAUNCH = registerForHolder("power_up.propeller.launch");
+    public static final Holder.Reference<SoundEvent> POWER_UP_PROPELLER_FALL = registerForHolder("power_up.propeller.fall");
+    public static final Holder.Reference<SoundEvent> POWER_UP_PROPELLER_DRILL = registerForHolder("power_up.propeller.drill");
+    public static final Holder.Reference<SoundEvent> POWER_UP_PROPELLER_DRILL_LAND = registerForHolder("power_up.propeller.drill_land");
 
     public static final Holder.Reference<SoundEvent> BUBBLE_APPEAR = registerForHolder("entity.bubble.appear");
     public static final Holder.Reference<SoundEvent> BUBBLE_POP = registerForHolder("entity.bubble.pop");

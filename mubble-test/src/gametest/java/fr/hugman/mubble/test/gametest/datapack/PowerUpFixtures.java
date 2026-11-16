@@ -54,6 +54,12 @@ public class PowerUpFixtures {
     /** Grants nothing but the descent half, which is the shape the Tanooki form will take. */
     public static final ResourceKey<PowerUp> FLOATER = powerUp("floater");
 
+    /** Launches on a double tap with the default height, then slow falls at 0.15 with no fall damage. */
+    public static final ResourceKey<PowerUp> LAUNCHER = powerUp("launcher");
+
+    /** The same launch, plus a drill at 0.8 blocks per tick. */
+    public static final ResourceKey<PowerUp> DRILLER = powerUp("driller");
+
     /** The power-up registry of the level the test runs in. */
     public static HolderGetter<PowerUp> registry(GameTestHelper helper) {
         return helper.getLevel().registryAccess().lookupOrThrow(MubbleRegistries.POWER_UP);

@@ -47,6 +47,8 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.ricochet", "Superballs bounce off everything.");
         builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.coins", "They collect the coins they touch.");
         builder.add("power_up." + SuperMario.MOD_ID + ".flower.description.flutter", "Hold jump past the top of a jump to climb, then float down.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".propeller.description.launch", "Double-tap jump to spin up high, then drift down.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".propeller.description.drill", "Sneak in the air to drill down through bricks.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".grow_flower.description", "Press %s to grow a huge flower.");
 
@@ -86,6 +88,10 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.refill", "Power-up refilled");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.launch", "Propeller spins up");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.fall", "Propeller whirs");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.drill", "Propeller drills");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.drill_land", "Drill lands");
 
         builder.add("gamerule.beepBlockCooldown", "Beep Block cooldown");
 
