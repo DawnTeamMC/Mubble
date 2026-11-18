@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceKey;
 public class SuperMarioPowerUpActionTypesIds {
     public static final ResourceKey<PowerUpActionType<?>> SPAWN_CLOUD_PLATFORM = createKey("spawn_cloud_platform");
     public static final ResourceKey<PowerUpActionType<?>> GROW_FLOWER = createKey("grow_flower");
+    public static final ResourceKey<PowerUpActionType<?>> TAIL_WHIP = createKey("tail_whip");
 
     private static ResourceKey<PowerUpActionType<?>> createKey(String path) {
         return ResourceKey.create(MubbleRegistries.POWER_UP_ACTION_TYPE, SuperMario.id(path));

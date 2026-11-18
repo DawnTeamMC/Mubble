@@ -95,6 +95,12 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.POWER_UP_PROPELLER_DRILL, SoundTypeBuilder.of(SuperMarioSounds.POWER_UP_PROPELLER_DRILL.value()).sound(SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.MINECART_RIDING)).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.drill"));
         soundExporter.add(SuperMarioSounds.POWER_UP_PROPELLER_DRILL_LAND, variantSoundBuilder(SuperMarioSounds.POWER_UP_PROPELLER_DRILL_LAND.value(), 1, SuperMario.id("entity.goomba.large_stomp")).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.drill_land"));
 
+        // Stand-ins until the Tanooki forms get sounds of their own.
+        soundExporter.add(SuperMarioSounds.POWER_UP_TANOOKI_GLIDE, SoundTypeBuilder.of(SuperMarioSounds.POWER_UP_TANOOKI_GLIDE.value()).sound(SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.ELYTRA_FLYING)).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.tanooki.glide"));
+        soundExporter.add(SuperMarioSounds.POWER_UP_STATUE_ENTER, SoundTypeBuilder.of(SuperMarioSounds.POWER_UP_STATUE_ENTER.value()).sound(SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.STONE_PLACE)).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.statue.enter"));
+        soundExporter.add(SuperMarioSounds.POWER_UP_STATUE_LEAVE, SoundTypeBuilder.of(SuperMarioSounds.POWER_UP_STATUE_LEAVE.value()).sound(SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.STONE_BREAK)).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.statue.leave"));
+        soundExporter.add(SuperMarioSounds.POWER_UP_GROUND_POUND_LAND, SoundTypeBuilder.of(SuperMarioSounds.POWER_UP_GROUND_POUND_LAND.value()).sound(SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.ANVIL_LAND)).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.ground_pound.land"));
+
         // Bubble
         soundExporter.add(SuperMarioSounds.BUBBLE_APPEAR, variantSoundBuilder(SuperMarioSounds.BUBBLE_APPEAR, 1));
         soundExporter.add(SuperMarioSounds.BUBBLE_POP, variantSoundBuilder(SuperMarioSounds.BUBBLE_POP, 1));

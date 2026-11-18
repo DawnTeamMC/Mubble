@@ -214,6 +214,7 @@ public class PowerUpCodecTest {
                 .floating(floating())
                 .launch(LaunchAbilityTest.launch())
                 .drill(DrillAbilityTest.drill())
+                .groundPound(GroundPoundAbilityTest.ability())
                 .build();
     }
 
@@ -224,7 +225,7 @@ public class PowerUpCodecTest {
 
     /** Distinct from the flutter above in every field, for the same reason. */
     static FloatAbility floating() {
-        return new FloatAbility(0.13F, 0.4F, Optional.of(sound(SoundEvents.BEACON_AMBIENT)), Optional.of(ParticleTypes.COMPOSTER));
+        return new FloatAbility(0.13F, 0.4F, Optional.of(sound(SoundEvents.BEACON_AMBIENT)), Optional.of(ParticleTypes.COMPOSTER), Optional.empty());
     }
 
     /** Most {@code SoundEvents} constants are bare events, but the mod stores them as holders. */

@@ -5,6 +5,7 @@ import fr.hugman.mubble.super_mario.world.entity.freeze.FreezeState;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
+import net.minecraft.network.codec.ByteBufCodecs;
 
 public class SuperMarioAttachmentTypes {
     /**
@@ -17,4 +18,9 @@ public class SuperMarioAttachmentTypes {
             .persistent(FreezeState.CODEC)
             .syncWith(FreezeState.STREAM_CODEC, AttachmentSyncPredicate.all())
             .buildAndRegister(SuperMario.id("freeze"));
+
+    /** How many tail whips the holder has made, which the clients watching them play the spin of. */
+    public static final AttachmentType<Integer> TAIL_WHIP = AttachmentRegistry.<Integer>builder()
+            .syncWith(ByteBufCodecs.VAR_INT, AttachmentSyncPredicate.all())
+            .buildAndRegister(SuperMario.id("tail_whip"));
 }

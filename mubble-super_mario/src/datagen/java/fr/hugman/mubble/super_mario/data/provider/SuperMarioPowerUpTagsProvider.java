@@ -30,5 +30,6 @@ public class SuperMarioPowerUpTagsProvider extends FabricTagsProvider<PowerUp> {
 		this.builder(CAN_WALK_ON_CLOUDS).add(CLOUD, MINI);
 		this.builder(LOST_TO_WATER).add(CLOUD);
 		this.builder(LOST_TO_RAIN).add(CLOUD);
+		this.builder(TANOOKI_FORMS).add(TANOOKI, STATUE_TANOOKI);
 	}
 }

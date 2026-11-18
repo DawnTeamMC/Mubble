@@ -3,6 +3,7 @@ package fr.hugman.mubble.super_mario.world.entity.projectile;
 import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
 import fr.hugman.mubble.super_mario.tags.SuperMarioEntityTypeTags;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
+import fr.hugman.mubble.world.entity.FriendlyFire;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import net.fabricmc.api.EnvType;
@@ -21,7 +22,6 @@ import net.minecraft.world.entity.EntityReference;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileDeflection;
 import net.minecraft.world.level.ClipContext;
@@ -368,11 +368,7 @@ public class Flower extends Projectile {
         if (owner == null) {
             return true;
         }
-        if (target == owner || owner.isAlliedTo(target) || target.isAlliedTo(owner)) {
-            return false;
-        }
-        // A pet is spared whatever the teams say: it belongs to the very player who grew the flower.
-        return !(target instanceof OwnableEntity ownable) || ownable.getRootOwner() != owner;
+        return !FriendlyFire.spares(owner, target);
     }
 
     private void wilt() {

@@ -9,6 +9,7 @@ import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderPipelines;
 import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderTypes;
 import fr.hugman.mubble.super_mario.client.renderer.SuperMarioRenderers;
 import fr.hugman.mubble.super_mario.client.renderer.entity.PropellerPose;
+import fr.hugman.mubble.super_mario.client.renderer.entity.TanookiPose;
 import com.google.common.reflect.Reflection;
 import fr.hugman.mubble.super_mario.world.inventory.SuperMarioMenuTypes;
 import net.fabricmc.api.ClientModInitializer;
@@ -33,6 +34,7 @@ public class SuperMarioClient implements ClientModInitializer {
         SuperMarioParticleResources.register();
         ClientTickEvents.END_CLIENT_TICK.register(FreezeStruggleHandler::tick);
         PropellerPose.register();
+        TanookiPose.register();
     }
 
     private static void registerHandledScreens() {

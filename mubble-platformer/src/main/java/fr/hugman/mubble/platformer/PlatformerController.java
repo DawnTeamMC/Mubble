@@ -95,6 +95,7 @@ public final class PlatformerController {
         this.applyProfileModifiers();
         this.suspended = this.profile != null && this.shouldSuspend();
 
+        this.player.setGroundPoundDrivenElsewhere(this.isDriving());
         if (wasDriving && !this.isDriving()) {
             this.stop();
         } else if (!wasDriving && this.isDriving()) {
@@ -350,9 +351,14 @@ public final class PlatformerController {
                 this.player.awardStat(Stats.JUMP);
             }
         }
+        if (this.state.events.stream().anyMatch(event -> event.type() == CueEvent.START && event.move() == PlatformerMoves.GROUND_POUND)) {
+            this.player.startGroundPound();
+        }
         if (this.state.events.stream().anyMatch(event -> event.type() == CueEvent.START && event.move() == PlatformerMoves.GROUND_POUND_LAND)) {
             var result = ctx.result();
-            this.poundBlocksUnder(ctx.start().add(result.dx(), result.dy(), result.dz()));
+            var feet = ctx.start().add(result.dx(), result.dy(), result.dz());
+            this.poundBlocksUnder(feet);
+            this.player.landGroundPound(feet);
         }
         if (this.state.move == PlatformerMoves.CLIMB) {
             // a climber does not fall, as in vanilla

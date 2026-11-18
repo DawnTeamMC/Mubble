@@ -28,15 +28,15 @@ public interface HittableBlock extends PoundableBlock {
     void onHit(Level level, BlockState state, Entity entity, BlockHitResult hit);
 
     /**
-     * Called when an entity drilling down goes through the block from above, server-side.
+     * Called when an entity drilling or pounding down goes through the block from above, or whips it, server-side.
      */
     default void onSmash(Level level, BlockState state, Entity entity, BlockHitResult hit) {
         this.onHit(level, state, entity, hit);
     }
 
-    /** A pound from above hits the top of the block. */
+    /** A pound from above smashes the top of the block. */
     @Override
     default void onPounded(Level level, BlockState state, BlockPos pos, Entity entity) {
-        this.onHit(level, state, entity, new BlockHitResult(Vec3.upFromBottomCenterOf(pos, 1.0D), Direction.UP, pos, false));
+        this.onSmash(level, state, entity, new BlockHitResult(Vec3.upFromBottomCenterOf(pos, 1.0D), Direction.UP, pos, false));
     }
 }

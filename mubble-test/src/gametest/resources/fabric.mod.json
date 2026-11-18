@@ -28,6 +28,9 @@
       "fr.hugman.mubble.test.gametest.power_up.FloatGameTest",
       "fr.hugman.mubble.test.gametest.power_up.LaunchGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.DrillGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.GroundPoundGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.TailWhipActionGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.AirControlGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.StompGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.GoombaGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.MiniGoombaGameTest",
@@ -50,7 +53,8 @@
       "fr.hugman.mubble.test.gametest.platformer.PlatformerAimGameTest",
       "fr.hugman.mubble.test.gametest.platformer.PlatformerGymGameTest",
       "fr.hugman.mubble.test.gametest.platformer.PlatformerSolidEntityGameTest",
-      "fr.hugman.mubble.test.gametest.platformer.PlatformerEffectsGameTest"
+      "fr.hugman.mubble.test.gametest.platformer.PlatformerEffectsGameTest",
+      "fr.hugman.mubble.test.gametest.platformer.PlatformerStatueGameTest"
     ]
   },
   "mixins": [

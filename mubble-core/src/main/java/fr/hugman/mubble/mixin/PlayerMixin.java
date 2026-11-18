@@ -7,6 +7,7 @@ import fr.hugman.mubble.world.entity.MubbleEntityTypes;
 import fr.hugman.mubble.world.entity.Drilling;
 import fr.hugman.mubble.world.entity.Floating;
 import fr.hugman.mubble.world.entity.Fluttering;
+import fr.hugman.mubble.world.entity.GroundPounding;
 import fr.hugman.mubble.world.entity.JumpKeyHolder;
 import fr.hugman.mubble.world.entity.Launching;
 import fr.hugman.mubble.world.entity.WaterRunner;
@@ -17,6 +18,7 @@ import fr.hugman.mubble.world.power_up.PowerUpProperties;
 import fr.hugman.mubble.world.power_up.ability.DrillAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
+import fr.hugman.mubble.world.power_up.ability.GroundPoundAbility;
 import fr.hugman.mubble.world.power_up.ability.LaunchAbility;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
@@ -27,9 +29,11 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -40,13 +44,15 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 import java.util.Optional;
 
 @Mixin(Player.class)
-public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, Fluttering, Floating, Launching, Drilling {
+public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, Fluttering, Floating, Launching, Drilling, GroundPounding {
     @Unique
     private static final EntityDataAccessor<Optional<PowerUpProperties>> POWER_UP_PROPERTIES = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.POWER_UP_PROPERTIES);
     @Unique
@@ -66,6 +72,10 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     private static final EntityDataAccessor<Boolean> SLOW_FALLING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
     @Unique
     private static final EntityDataAccessor<Boolean> DRILLING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
+    @Unique
+    private static final EntityDataAccessor<Boolean> GROUND_POUNDING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
+    @Unique
+    private static final EntityDataAccessor<Boolean> STATUE = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
 
     @Unique
     private static final String POWER_UP_KEY = "power_up";
@@ -83,6 +93,10 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     private static final String SLOW_FALLING_KEY = "slow_falling";
     @Unique
     private static final String DRILLING_KEY = "drilling";
+    @Unique
+    private static final String GROUND_POUNDING_KEY = "ground_pounding";
+    @Unique
+    private static final String STATUE_TICKS_KEY = "statue_ticks";
 
     /** How many ticks a launch waits to be seen rising before its peak can be called, movement packets lagging. */
     @Unique
@@ -91,6 +105,8 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     private static final int AIR_MOVE_BURST_PARTICLES = 12;
     @Unique
     private static final double AIR_MOVE_BURST_SPEED = 0.2D;
+    @Unique
+    private static final int STATUE_POOF_PARTICLES = 16;
 
     /** How many particles a player on a mid-air move leaves around their feet every tick. */
     @Unique
@@ -162,6 +178,23 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     private boolean mubble$wasLaunching;
     @Unique
     private boolean mubble$wasDrilling;
+    @Unique
+    private boolean mubble$groundPounding;
+    @Unique
+    private int mubble$poundTicks;
+    @Unique
+    private double mubble$poundFromY;
+    /** Whether something else than vanilla moves the player, and so the pound, see {@link GroundPounding}. */
+    @Unique
+    private boolean mubble$poundDrivenElsewhere;
+    @Unique
+    private boolean mubble$statue;
+    @Unique
+    private int mubble$statueTicks;
+    @Unique
+    private boolean mubble$wasGroundPounding;
+    @Unique
+    private boolean mubble$wasStatue;
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     protected void mubble$initDataTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
@@ -172,6 +205,8 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         builder.define(LAUNCHING, false);
         builder.define(SLOW_FALLING, false);
         builder.define(DRILLING, false);
+        builder.define(GROUND_POUNDING, false);
+        builder.define(STATUE, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -186,6 +221,8 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         view.putBoolean(LAUNCHING_KEY, this.mubble$launching);
         view.putBoolean(SLOW_FALLING_KEY, this.mubble$slowFalling);
         view.putBoolean(DRILLING_KEY, this.mubble$drilling);
+        view.putBoolean(GROUND_POUNDING_KEY, this.mubble$groundPounding && !this.mubble$poundDrivenElsewhere);
+        view.putInt(STATUE_TICKS_KEY, this.mubble$statue ? this.mubble$statueTicks : -1);
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
@@ -202,6 +239,11 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         this.mubble$setLaunching(this_, view.getBooleanOr(LAUNCHING_KEY, false));
         this.mubble$setSlowFalling(this_, view.getBooleanOr(SLOW_FALLING_KEY, false));
         this.mubble$setDrilling(this_, view.getBooleanOr(DRILLING_KEY, false));
+        this.mubble$poundFromY = this_.getY();
+        this.mubble$setGroundPounding(this_, view.getBooleanOr(GROUND_POUNDING_KEY, false));
+        int statueTicks = view.getIntOr(STATUE_TICKS_KEY, -1);
+        this.mubble$statueTicks = Math.max(0, statueTicks);
+        this.mubble$setStatue(this_, statueTicks >= 0);
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
@@ -419,6 +461,11 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         this.mubble$airMoveParticles(this_);
         this.mubble$tickLaunchAndDrill(this_);
 
+        if (this.mubble$groundPounding || this.mubble$statue) {
+            this.mubble$endAirMoves(this_);
+            return;
+        }
+
         // Landing is what hands the next jump its flutter back, and the only thing that does.
         if (this_.onGround()) {
             this.mubble$flutterSpent = false;
@@ -507,6 +554,45 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         return true;
     }
 
+    @Inject(method = "travel", at = @At("HEAD"))
+    private void mubble$steerWhileFloating(Vec3 input, CallbackInfo ci) {
+        var control = this.mubble$currentFloat().flatMap(FloatAbility::airControl);
+        if (control.isEmpty()) {
+            return;
+        }
+        var player = (Player) (Object) this;
+        Vec3 before = player.getDeltaMovement();
+        player.moveRelative(control.get().acceleration(), input);
+        Vec3 after = player.getDeltaMovement();
+        // steering never slows a holder already faster than its top speed, it only stops adding to it
+        double limit = Math.max(control.get().topSpeed(), before.horizontalDistance());
+        double speed = after.horizontalDistance();
+        if (speed > limit) {
+            player.setDeltaMovement(after.x() * limit / speed, after.y(), after.z() * limit / speed);
+        }
+    }
+
+    @ModifyVariable(method = "travel", at = @At("HEAD"), argsOnly = true)
+    private Vec3 mubble$holdStatueStill(Vec3 input) {
+        return this.mubble$statue && !this.mubble$poundDrivenElsewhere ? new Vec3(0.0D, input.y(), 0.0D) : input;
+    }
+
+    @Inject(method = "isInvulnerableTo", at = @At("RETURN"), cancellable = true)
+    private void mubble$statueInvulnerability(ServerLevel level, DamageSource source, CallbackInfoReturnable<Boolean> cir) {
+        if (!cir.getReturnValueZ() && this.isStatue()
+                && this.getGroundPoundAbility().flatMap(GroundPoundAbility::statue).filter(statue -> statue.invulnerable() && !source.is(statue.vulnerableTo())).isPresent()) {
+            cir.setReturnValue(true);
+        }
+    }
+
+    @Unique
+    private Optional<FloatAbility> mubble$currentFloat() {
+        if (this.mubble$slowFalling) {
+            return this.getLaunchAbility().flatMap(LaunchAbility::slowFall);
+        }
+        return this.mubble$floating ? this.getFloatAbility() : Optional.empty();
+    }
+
     /**
      * The launch on a double tap of the jump key, the slow fall from its peak, and the drill on a fresh press
      * of sneak in the air. Run like the flutter, by each side for the player it is in charge of, from the same
@@ -522,6 +608,9 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         this.mubble$sneakKeyWasHeld = sneakHeld;
         if (this.mubble$doubleTapTicks > 0) {
             this.mubble$doubleTapTicks--;
+        }
+        if (this.mubble$tickGroundPound(player, sneakPressed)) {
+            return;
         }
 
         var launch = this.getLaunchAbility();
@@ -590,6 +679,105 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
                 mubble$applyFloat(player, slowFall.get());
             }
         }
+    }
+
+    /**
+     * The pound and the statue it turns the player into, run like the drill by each side for the player it is in
+     * charge of.
+     *
+     * @return whether a pound took the movement of this tick, which leaves nothing to the launch and the drill
+     */
+    @Unique
+    private boolean mubble$tickGroundPound(Player player, boolean sneakPressed) {
+        var ability = this.getGroundPoundAbility();
+        if (ability.isEmpty()) {
+            this.mubble$setGroundPounding(player, false);
+            this.mubble$setStatue(player, false);
+            return false;
+        }
+        GroundPoundAbility pound = ability.get();
+        boolean held = player.onGround() || mubble$heldBySomethingElse(player) || player.getAbilities().flying;
+        if (this.mubble$groundPounding && held) {
+            if (player.onGround() && !this.mubble$poundDrivenElsewhere) {
+                this.mubble$landGroundPound(player, pound, player.position());
+            }
+            this.mubble$setGroundPounding(player, false);
+        }
+        this.mubble$tickStatue(player, pound);
+
+        if (!this.mubble$groundPounding && sneakPressed && !held && !this.mubble$poundDrivenElsewhere
+                && player.level().noCollision(player, player.getBoundingBox().expandTowards(0.0D, -pound.minHeight(), 0.0D))) {
+            this.mubble$beginGroundPound(player, pound);
+        }
+        if (!this.mubble$groundPounding) {
+            return false;
+        }
+        if (!this.mubble$poundDrivenElsewhere) {
+            double drop = this.mubble$poundTicks++ < pound.hangTicks() ? 0.0D : -pound.dropSpeed();
+            player.setDeltaMovement(0.0D, drop, 0.0D);
+            player.resetFallDistance();
+        }
+        return true;
+    }
+
+    @Unique
+    private void mubble$beginGroundPound(Player player, GroundPoundAbility pound) {
+        this.mubble$setLaunching(player, false);
+        this.mubble$setSlowFalling(player, false);
+        this.mubble$setDrilling(player, false);
+        this.mubble$poundTicks = 0;
+        this.mubble$poundFromY = player.getY();
+        this.mubble$setGroundPounding(player, true);
+        if (pound.statue().isPresent()) {
+            this.mubble$statueTicks = 0;
+            this.mubble$setStatue(player, true);
+            pound.statue().flatMap(GroundPoundAbility.Statue::enterSound).ifPresent(sound -> this.mubble$playGroundPoundSound(player, sound));
+        }
+    }
+
+    /** The statue holds for as long as sneak does, up to its maximum, and does not move sideways. */
+    @Unique
+    private void mubble$tickStatue(Player player, GroundPoundAbility pound) {
+        if (!this.mubble$statue) {
+            return;
+        }
+        var statue = pound.statue();
+        if (statue.isEmpty() || !player.isShiftKeyDown() || this.mubble$statueTicks++ >= statue.get().maxTicks()) {
+            statue.flatMap(GroundPoundAbility.Statue::leaveSound).ifPresent(sound -> this.mubble$playGroundPoundSound(player, sound));
+            this.mubble$setStatue(player, false);
+            return;
+        }
+        Vec3 movement = player.getDeltaMovement();
+        player.setDeltaMovement(0.0D, movement.y(), 0.0D);
+    }
+
+    @Unique
+    private void mubble$landGroundPound(Player player, GroundPoundAbility pound, Vec3 feet) {
+        pound.landSound().ifPresent(sound -> this.mubble$playGroundPoundSound(player, sound));
+        if (player.level() instanceof ServerLevel level) {
+            pound.hurtAround(level, player, feet, this.mubble$poundFromY - feet.y());
+            if (!this.mubble$poundDrivenElsewhere) {
+                pound.poundBlocks(level, player, feet);
+            }
+        }
+    }
+
+    /** Heard by everyone, the player making the move included only when no client predicted it for them. */
+    @Unique
+    private void mubble$playGroundPoundSound(Player player, Holder<SoundEvent> sound) {
+        player.level().playSound(this.mubble$poundDrivenElsewhere ? null : player, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0F, 1.0F);
+    }
+
+    @Unique
+    private void mubble$setGroundPounding(Player player, boolean groundPounding) {
+        this.mubble$groundPounding = groundPounding;
+        this.mubble$sync(player, GROUND_POUNDING, groundPounding);
+    }
+
+    @Unique
+    private void mubble$setStatue(Player player, boolean statue) {
+        this.mubble$statue = statue;
+        this.mubble$sync(player, STATUE, statue);
     }
 
     /**
@@ -700,6 +888,7 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
             return;
         }
         this.mubble$burstParticles(player);
+        this.mubble$poofStatue(player);
         Optional<ParticleOptions> particle = Optional.empty();
         double y = player.getY();
         if (player.isDrilling()) {
@@ -723,19 +912,40 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         }
     }
 
-    /** A ring thrown out from the feet when a launch takes off and when a drill hits the ground. */
+    @Unique
+    private void mubble$poofStatue(Player player) {
+        boolean statue = player.isStatue();
+        if (statue == this.mubble$wasStatue) {
+            return;
+        }
+        this.mubble$wasStatue = statue;
+        var poof = this.getGroundPoundAbility().flatMap(GroundPoundAbility::statue)
+                .flatMap(ability -> statue ? ability.enterParticle() : ability.leaveParticle());
+        if (poof.isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < STATUE_POOF_PARTICLES; i++) {
+            player.level().addParticle(poof.get(), player.getRandomX(1.0D), player.getRandomY(), player.getRandomZ(1.0D), 0.0D, 0.02D, 0.0D);
+        }
+    }
+
+    /** A ring thrown out from the feet when a launch takes off and when a drill or a pound hits the ground. */
     @Unique
     private void mubble$burstParticles(Player player) {
         boolean launching = player.isLaunching();
         boolean drilling = player.isDrilling();
+        boolean pounding = player.isGroundPounding();
         Optional<ParticleOptions> particle = Optional.empty();
         if (launching && !this.mubble$wasLaunching) {
             particle = this.getLaunchAbility().flatMap(LaunchAbility::particle);
         } else if (!drilling && this.mubble$wasDrilling && player.onGround()) {
             particle = this.getDrillAbility().flatMap(DrillAbility::particle);
+        } else if (!pounding && this.mubble$wasGroundPounding && player.onGround()) {
+            particle = this.getGroundPoundAbility().flatMap(GroundPoundAbility::particle);
         }
         this.mubble$wasLaunching = launching;
         this.mubble$wasDrilling = drilling;
+        this.mubble$wasGroundPounding = pounding;
         if (particle.isEmpty()) {
             return;
         }
@@ -779,6 +989,49 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     public Optional<DrillAbility> getDrillAbility() {
         var this_ = (Player) (Object) this;
         return this_.getPowerUp().flatMap(powerUp -> powerUp.value().abilities().drill());
+    }
+
+    @Override
+    public Optional<GroundPoundAbility> getGroundPoundAbility() {
+        var this_ = (Player) (Object) this;
+        return this_.getPowerUp().flatMap(powerUp -> powerUp.value().abilities().groundPound());
+    }
+
+    /** The side in charge of the player has the truth at once, the others are told by the flags. */
+    @Override
+    public boolean isGroundPounding() {
+        var this_ = (Player) (Object) this;
+        return this_.isLocalPlayer() && !this.mubble$poundDrivenElsewhere ? this.mubble$groundPounding : this_.getEntityData().get(GROUND_POUNDING);
+    }
+
+    @Override
+    public boolean isStatue() {
+        var this_ = (Player) (Object) this;
+        return this_.isLocalPlayer() && !this.mubble$poundDrivenElsewhere ? this.mubble$statue : this_.getEntityData().get(STATUE);
+    }
+
+    @Override
+    public void setGroundPoundDrivenElsewhere(boolean drivenElsewhere) {
+        this.mubble$poundDrivenElsewhere = drivenElsewhere;
+    }
+
+    @Override
+    public void startGroundPound() {
+        var this_ = (Player) (Object) this;
+        this.getGroundPoundAbility().ifPresent(pound -> {
+            if (!this.mubble$groundPounding) {
+                this.mubble$beginGroundPound(this_, pound);
+            }
+        });
+    }
+
+    @Override
+    public void landGroundPound(Vec3 feet) {
+        var this_ = (Player) (Object) this;
+        if (this.mubble$groundPounding) {
+            this.getGroundPoundAbility().ifPresent(pound -> this.mubble$landGroundPound(this_, pound, feet));
+            this.mubble$setGroundPounding(this_, false);
+        }
     }
 
     @Override

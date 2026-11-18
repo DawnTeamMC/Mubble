@@ -3,16 +3,19 @@ package fr.hugman.mubble.super_mario.data.provider;
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
+import fr.hugman.mubble.super_mario.tags.SuperMarioEntityTypeTags;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.entity.projectile.Flower;
 import fr.hugman.mubble.super_mario.world.power_up.action.GrowFlowerPowerUpAction;
 import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowerUpAction;
+import fr.hugman.mubble.super_mario.world.power_up.action.TailWhipPowerUpAction;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.PowerUpCharges;
 import fr.hugman.mubble.world.power_up.ability.DrillAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
+import fr.hugman.mubble.world.power_up.ability.GroundPoundAbility;
 import fr.hugman.mubble.world.power_up.ability.LaunchAbility;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
 import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
@@ -21,9 +24,12 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.Optional;
@@ -177,7 +183,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         FloatAbility.DEFAULT_SPEED,
                         FloatAbility.DEFAULT_FALL_DAMAGE,
                         Optional.of(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BAT_LOOP)),
-                        Optional.of(ParticleTypes.CHERRY_LEAVES)
+                        Optional.of(ParticleTypes.CHERRY_LEAVES),
+                        Optional.empty()
                 ))
                 .build());
         context.register(PROPELLER, builder(PROPELLER)
@@ -192,7 +199,8 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                                 0.15F,
                                 0.0F,
                                 Optional.of(SuperMarioSounds.POWER_UP_PROPELLER_FALL),
-                                Optional.of(ParticleTypes.WHITE_SMOKE)
+                                Optional.of(ParticleTypes.WHITE_SMOKE),
+                                Optional.empty()
                         ))
                 ))
                 .drill(new DrillAbility(
@@ -204,6 +212,54 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         Optional.of(SuperMarioSounds.POWER_UP_PROPELLER_DRILL_LAND)
                 ))
                 .build());
+        context.register(TANOOKI, tanooki(TANOOKI).build());
+        context.register(STATUE_TANOOKI, tanooki(STATUE_TANOOKI)
+                .description(STATUE_TANOOKI, "statue")
+                .groundPound(new GroundPoundAbility(
+                        GroundPoundAbility.DEFAULT_HANG_TICKS,
+                        GroundPoundAbility.DEFAULT_DROP_SPEED,
+                        GroundPoundAbility.DEFAULT_MIN_HEIGHT,
+                        GroundPoundAbility.DEFAULT_REACH,
+                        Optional.of(context.lookup(Registries.ENTITY_TYPE).getOrThrow(SuperMarioEntityTypeTags.ENEMIES)),
+                        GroundPoundAbility.DEFAULT_DAMAGE_PER_BLOCK,
+                        GroundPoundAbility.DEFAULT_MAX_DAMAGE,
+                        Optional.of(ParticleTypes.CLOUD),
+                        Optional.of(SuperMarioSounds.POWER_UP_GROUND_POUND_LAND),
+                        Optional.of(new GroundPoundAbility.Statue(
+                                GroundPoundAbility.Statue.DEFAULT_MAX_TICKS,
+                                true,
+                                DamageTypeTags.BYPASSES_INVULNERABILITY,
+                                Optional.of(ParticleTypes.POOF),
+                                Optional.of(ParticleTypes.POOF),
+                                Optional.of(SuperMarioSounds.POWER_UP_STATUE_ENTER),
+                                Optional.of(SuperMarioSounds.POWER_UP_STATUE_LEAVE)
+                        ))
+                ))
+                .build());
+    }
+
+    /** What both Tanooki forms share. The Statue form only adds its statue on top, the JSON of each being its own. */
+    private static PowerUpBuilder tanooki(ResourceKey<PowerUp> key) {
+        return builder(key)
+                .description(key, "whip")
+                .description(key, "glide")
+                .action(Holder.direct(new TailWhipPowerUpAction(
+                        TailWhipPowerUpAction.DEFAULT_RADIUS,
+                        TailWhipPowerUpAction.DEFAULT_VERTICAL_REACH,
+                        Optional.empty(),
+                        TailWhipPowerUpAction.DEFAULT_UPWARD_SPEED,
+                        Optional.empty(),
+                        Optional.of(SuperMarioSounds.POWER_UP_SPIN_ATTACK),
+                        Optional.of(ParticleTypes.SWEEP_ATTACK),
+                        TailWhipPowerUpAction.DEFAULT_CHARGES
+                )))
+                .floating(new FloatAbility(
+                        0.2F,
+                        0.0F,
+                        Optional.of(SuperMarioSounds.POWER_UP_TANOOKI_GLIDE),
+                        Optional.of(ColorParticleOption.create(ParticleTypes.TINTED_LEAVES, 0xC8742A)),
+                        Optional.of(new FloatAbility.AirControl(FloatAbility.AirControl.DEFAULT_ACCELERATION, FloatAbility.AirControl.DEFAULT_TOP_SPEED))
+                ));
     }
 
     public static PowerUpBuilder builder(ResourceKey<PowerUp> key, boolean withOverlay) {

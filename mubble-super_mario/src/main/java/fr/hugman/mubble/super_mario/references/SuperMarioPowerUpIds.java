@@ -16,6 +16,8 @@ public class SuperMarioPowerUpIds {
     public static final ResourceKey<PowerUp> SUPERBALL = createKey("superball");
     public static final ResourceKey<PowerUp> FLOWER = createKey("flower");
     public static final ResourceKey<PowerUp> PROPELLER = createKey("propeller");
+    public static final ResourceKey<PowerUp> TANOOKI = createKey("tanooki");
+    public static final ResourceKey<PowerUp> STATUE_TANOOKI = createKey("statue_tanooki");
 
     private static ResourceKey<PowerUp> createKey(String path) {
         return ResourceKey.create(MubbleRegistries.POWER_UP, SuperMario.id(path));

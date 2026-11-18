@@ -60,6 +60,15 @@ public class PowerUpFixtures {
     /** The same launch, plus a drill at 0.8 blocks per tick. */
     public static final ResourceKey<PowerUp> DRILLER = powerUp("driller");
 
+    /** The descent of the floater, plus steering: 0.05 of acceleration up to 0.4 blocks per tick. */
+    public static final ResourceKey<PowerUp> GLIDER = powerUp("glider");
+
+    /** Pounds after a hang of two ticks at 0.8 blocks per tick, and turns to nothing. */
+    public static final ResourceKey<PowerUp> POUNDER = powerUp("pounder");
+
+    /** The same pound, turning to a statue that lasts 30 ticks at most. */
+    public static final ResourceKey<PowerUp> STATUE = powerUp("statue");
+
     /** The power-up registry of the level the test runs in. */
     public static HolderGetter<PowerUp> registry(GameTestHelper helper) {
         return helper.getLevel().registryAccess().lookupOrThrow(MubbleRegistries.POWER_UP);

@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import org.joml.Quaternionf;
 import org.joml.Vector3fc;
 import org.spongepowered.asm.mixin.Mixin;
@@ -114,8 +115,18 @@ public class LivingEntityRendererMixin<T extends LivingEntity, S extends LivingE
         poseStack.translate(0.0F, -centerY, 0.0F);
     }
 
+    @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V", at = @At("TAIL"))
+    private void super_mario$extractStatue(T entity, S state, float partialTicks, CallbackInfo ci) {
+        // Render states are pooled, so the key has to be cleared for everything that is not a statue.
+        state.setData(SuperMarioRenderStateDataKeys.STATUE, entity instanceof Player player && player.isStatue() ? Boolean.TRUE : null);
+    }
+
     @Inject(method = "getRenderType", at = @At("HEAD"), cancellable = true)
     private void super_mario$getRenderType(S state, boolean isBodyVisible, boolean forceTransparent, boolean appearGlowing, CallbackInfoReturnable<RenderType> cir) {
+        if (state.getData(SuperMarioRenderStateDataKeys.STATUE) != null && isBodyVisible) {
+            cir.setReturnValue(SuperMarioRenderTypes.getStatueEntity(this.getTextureLocation(state)));
+            return;
+        }
         var powerUp = state.getData(fr.hugman.mubble.client.references.MubbleRenderStateDataKeys.POWER_UP);
         if(powerUp == null) {
             return;

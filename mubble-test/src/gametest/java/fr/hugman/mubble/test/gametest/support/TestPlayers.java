@@ -56,6 +56,9 @@ public final class TestPlayers {
         player.setLastClientInput(keys);
         // What the connection does with the sneak key of an input packet.
         player.setShiftKeyDown(keys.shift());
+        // What the client does with the movement keys.
+        player.xxa = (keys.left() ? 1.0F : 0.0F) - (keys.right() ? 1.0F : 0.0F);
+        player.zza = (keys.forward() ? 1.0F : 0.0F) - (keys.backward() ? 1.0F : 0.0F);
         var before = player.position();
         tick(player);
         player.setKnownMovement(player.position().subtract(before));
@@ -64,6 +67,16 @@ public final class TestPlayers {
     /** The keys of a player leaning on the jump button, and on nothing else. */
     public static Input holdingJump() {
         return new Input(false, false, false, false, true, false, false);
+    }
+
+    /** The keys of a player leaning on jump and forward. */
+    public static Input holdingJumpAndForward() {
+        return new Input(true, false, false, false, true, false, false);
+    }
+
+    /** The keys of a player leaning on sneak and forward. */
+    public static Input holdingSneakAndForward() {
+        return new Input(true, false, false, false, false, true, false);
     }
 
     /** The keys of a player leaning on sneak, and on nothing else. */
