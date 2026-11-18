@@ -25,8 +25,10 @@ public class SuperMarioEntityTypeTagsProvider extends FabricTagsProvider.EntityT
 		builder(CAN_STOMP).add(PLAYER);
 		builder(STOMPABLE).add(GOOMBA, MINI_GOOMBA, GREEN_KOOPA_SHELL);
 
+		builder(ENEMIES).add(GOOMBA, MINI_GOOMBA);
+
 		// FIREBALL is qualified because vanilla has one under that name too.
-		builder(ALL).add(GOOMBA, MINI_GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, SuperMarioEntityTypeIds.FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE, SUPERBALL);
+		builder(ALL).add(GOOMBA, MINI_GOOMBA, GREEN_KOOPA_SHELL, RED_KOOPA_SHELL, SuperMarioEntityTypeIds.FIREBALL, ICEBALL, GOLD_FIREBALL, CLOUD_PLATFORM, BUBBLE, SUPERBALL, FLOWER);
 
 		// bosses shrug an ice ball off; every other mob is judged on its bulk alone
 		builder(FREEZE_IMMUNE).add(ENDER_DRAGON, WITHER);

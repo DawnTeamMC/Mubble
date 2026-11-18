@@ -1,0 +1,11 @@
+{
+  "abilities": {
+    "float": {
+      "speed": 0.1,
+      "fall_damage": 0.25
+    }
+  },
+  "name": {
+    "translate": "power_up.mubble-gametest.floater"
+  }
+}

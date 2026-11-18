@@ -46,7 +46,9 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("power_up." + SuperMario.MOD_ID + ".cloud.description.weather", "Water and rain wash it away.");
         builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.ricochet", "Superballs bounce off everything.");
         builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.coins", "They collect the coins they touch.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".flower.description.flutter", "Hold jump past the top of a jump to climb, then float down.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
+        builder.add("power_up_action_type." + SuperMario.MOD_ID + ".grow_flower.description", "Press %s to grow a huge flower.");
 
 
         builder.add("subtitles." + SuperMario.MOD_ID + ".block.bumpable_block.bump", "Block bumped");
@@ -98,5 +100,7 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("death.attack." + SuperMario.MOD_ID + ".gold_fireball.player", "%1$s was gold-blasted while fighting %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".superball", "%1$s was pinballed by %2$s");
         builder.add("death.attack." + SuperMario.MOD_ID + ".superball.player", "%1$s was pinballed while fighting %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".flower", "%1$s was uprooted by %2$s");
+        builder.add("death.attack." + SuperMario.MOD_ID + ".flower.player", "%1$s was uprooted while fighting %2$s");
     }
 }

@@ -7,6 +7,9 @@ import fr.hugman.mubble.test.unit.support.TestBootstrap;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.PowerUpCosmectics;
+import fr.hugman.mubble.world.power_up.ability.FloatAbility;
+import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
+import fr.hugman.mubble.world.power_up.ability.PowerUpAbilities;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -104,6 +107,50 @@ public class PowerUpCodecTest {
     }
 
     @Test
+    @DisplayName("both halves of a jump held on keep every one of their numbers, and their own field")
+    void abilitiesRoundTrip() {
+        var decoded = CodecAssertions.assertJsonRoundTrip(PowerUp.DIRECT_CODEC, fullyPopulated()).abilities();
+
+        assertEquals(flutter(), decoded.flutter().orElseThrow(() -> new AssertionError("the flutter was dropped")), "the flutter ability");
+        assertEquals(floating(), decoded.floating().orElseThrow(() -> new AssertionError("the float was dropped")), "the float ability");
+    }
+
+    /** The Tanooki form will grant the float on its own, so a power-up has to be able to carry just the one. */
+    @Test
+    @DisplayName("a power-up can grant the float without the flutter")
+    void floatWithoutFlutterRoundTrips() {
+        var powerUp = new PowerUpBuilder().floating(floating()).build();
+
+        var decoded = CodecAssertions.assertJsonRoundTrip(PowerUp.DIRECT_CODEC, powerUp).abilities();
+
+        assertTrue(decoded.flutter().isEmpty(), "a power-up granting only a float should have no flutter");
+        assertEquals(floating(), decoded.floating().orElseThrow(() -> new AssertionError("the float was dropped")), "the float ability");
+    }
+
+    @Test
+    @DisplayName("abilities written with nothing but their defaults read back as the defaults")
+    void abilityDefaults() {
+        var decoded = PowerUp.DIRECT_CODEC.parse(
+                        TestBootstrap.registries().createSerializationContext(JsonOps.INSTANCE),
+                        JsonParser.parseString("""
+                                {"abilities": {"flutter": {}, "float": {}}}
+                                """))
+                .getOrThrow(error -> new AssertionError("could not read bare abilities: " + error))
+                .abilities();
+
+        assertEquals(
+                FlutterAbility.of(FlutterAbility.DEFAULT_DURATION, FlutterAbility.DEFAULT_DROP, FlutterAbility.DEFAULT_ACCELERATION),
+                decoded.flutter().orElseThrow(() -> new AssertionError("the flutter was dropped")),
+                "a flutter with no field of its own"
+        );
+        assertEquals(
+                FloatAbility.of(FloatAbility.DEFAULT_SPEED, FloatAbility.DEFAULT_FALL_DAMAGE),
+                decoded.floating().orElseThrow(() -> new AssertionError("the float was dropped")),
+                "a float with no field of its own"
+        );
+    }
+
+    @Test
     @DisplayName("an unknown action type is rejected instead of being ignored")
     void unknownActionTypeIsRejected() {
         CodecAssertions.assertRejects(PowerUp.DIRECT_CODEC, JsonParser.parseString("""
@@ -120,7 +167,7 @@ public class PowerUpCodecTest {
     }
 
     static PowerUp empty() {
-        return new PowerUp(Optional.empty(), List.of(), Optional.empty(), Optional.empty(), Optional.empty(), PowerUpCosmectics.EMPTY);
+        return new PowerUp(Optional.empty(), List.of(), Optional.empty(), Optional.empty(), Optional.empty(), PowerUpAbilities.EMPTY, PowerUpCosmectics.EMPTY);
     }
 
     static PowerUpCosmectics cosmetics() {
@@ -149,7 +196,19 @@ public class PowerUpCodecTest {
                 .particle(ParticleTypes.FLAME)
                 .humanoidOverlay(Identifier.parse("mubble:entity/power_up/humanoid/test"))
                 .emissiveOverlay()
+                .flutter(flutter())
+                .floating(floating())
                 .build();
+    }
+
+    /** Every number distinct, so that two of them swapped cannot round trip unnoticed. */
+    static FlutterAbility flutter() {
+        return new FlutterAbility(24, 0.07F, 0.003F, Optional.of(sound(SoundEvents.BAT_LOOP)), Optional.of(ParticleTypes.CHERRY_LEAVES));
+    }
+
+    /** Distinct from the flutter above in every field, for the same reason. */
+    static FloatAbility floating() {
+        return new FloatAbility(0.13F, 0.4F, Optional.of(sound(SoundEvents.BEACON_AMBIENT)), Optional.of(ParticleTypes.COMPOSTER));
     }
 
     /** Most {@code SoundEvents} constants are bare events, but the mod stores them as holders. */

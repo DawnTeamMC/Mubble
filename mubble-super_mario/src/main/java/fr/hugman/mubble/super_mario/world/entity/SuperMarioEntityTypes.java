@@ -26,6 +26,7 @@ public final class SuperMarioEntityTypes {
     public static final EntityType<Bubble> BUBBLE = register(SuperMarioEntityTypeIds.BUBBLE, EntityType.Builder.<Bubble>of(Bubble::new, MobCategory.MISC).sized(0.75F, 0.75F).clientTrackingRange(4).updateInterval(2));
     // A superball changes heading on every bounce, so it is synced far more often than the balls that fly straight.
     public static final EntityType<Superball> SUPERBALL = register(SuperMarioEntityTypeIds.SUPERBALL, EntityType.Builder.<Superball>of(Superball::new, MobCategory.MISC).sized(0.3F, 0.3F).clientTrackingRange(4).updateInterval(2));
+    public static final EntityType<Flower> FLOWER = register(SuperMarioEntityTypeIds.FLOWER, EntityType.Builder.<Flower>of(Flower::new, MobCategory.MISC).sized(Flower.SIZE, Flower.SIZE).clientTrackingRange(10).updateInterval(2));
 
     private static <T extends Entity> EntityType<T> register(ResourceKey<EntityType<?>> id, EntityType.Builder<T> type) {
         return Registry.register(BuiltInRegistries.ENTITY_TYPE, id, type.build(id));

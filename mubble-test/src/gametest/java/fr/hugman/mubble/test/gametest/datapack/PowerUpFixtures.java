@@ -48,6 +48,12 @@ public class PowerUpFixtures {
     /** Shoots two snowballs, so that running out of charges takes two triggers and not a dozen. */
     public static final ResourceKey<PowerUp> SHOOTER = powerUp("shooter");
 
+    /** Grants nothing but the climb half of a jump held on, on numbers of its own rather than the defaults. */
+    public static final ResourceKey<PowerUp> FLUTTERER = powerUp("flutterer");
+
+    /** Grants nothing but the descent half, which is the shape the Tanooki form will take. */
+    public static final ResourceKey<PowerUp> FLOATER = powerUp("floater");
+
     /** The power-up registry of the level the test runs in. */
     public static HolderGetter<PowerUp> registry(GameTestHelper helper) {
         return helper.getLevel().registryAccess().lookupOrThrow(MubbleRegistries.POWER_UP);
