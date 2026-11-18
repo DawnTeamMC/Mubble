@@ -23,6 +23,8 @@
       "fr.hugman.mubble.test.gametest.power_up.RunOnWaterGameTest",
       "fr.hugman.mubble.test.gametest.power_up.FlutterGameTest",
       "fr.hugman.mubble.test.gametest.power_up.FloatGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.LaunchGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.DrillGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.StompGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.GoombaGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.MiniGoombaGameTest",

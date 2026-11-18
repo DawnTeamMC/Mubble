@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -113,6 +114,19 @@ public class PowerUpCodecTest {
 
         assertEquals(flutter(), decoded.flutter().orElseThrow(() -> new AssertionError("the flutter was dropped")), "the flutter ability");
         assertEquals(floating(), decoded.floating().orElseThrow(() -> new AssertionError("the float was dropped")), "the float ability");
+        assertEquals(LaunchAbilityTest.launch(), decoded.launch().orElseThrow(() -> new AssertionError("the launch was dropped")), "the launch ability");
+        assertEquals(DrillAbilityTest.drill(), decoded.drill().orElseThrow(() -> new AssertionError("the drill was dropped")), "the drill ability");
+    }
+
+    @Test
+    @DisplayName("a power-up without a launch or a drill writes neither")
+    void abilitiesLeftOutWriteNothing() {
+        var ops = TestBootstrap.registries().createSerializationContext(JsonOps.INSTANCE);
+        var encoded = PowerUp.DIRECT_CODEC.encodeStart(ops, new PowerUpBuilder().floating(floating()).build())
+                .getOrThrow(error -> new AssertionError("could not encode: " + error));
+
+        var abilities = encoded.getAsJsonObject().getAsJsonObject("abilities");
+        assertEquals(Set.of("float"), abilities.keySet(), "the only ability written");
     }
 
     /** The Tanooki form will grant the float on its own, so a power-up has to be able to carry just the one. */
@@ -198,6 +212,8 @@ public class PowerUpCodecTest {
                 .emissiveOverlay()
                 .flutter(flutter())
                 .floating(floating())
+                .launch(LaunchAbilityTest.launch())
+                .drill(DrillAbilityTest.drill())
                 .build();
     }
 

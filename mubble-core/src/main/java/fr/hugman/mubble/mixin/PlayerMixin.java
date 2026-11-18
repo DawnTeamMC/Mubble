@@ -4,16 +4,20 @@ import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
 import fr.hugman.mubble.tags.MubblePowerUpTags;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import fr.hugman.mubble.world.entity.Drilling;
 import fr.hugman.mubble.world.entity.Floating;
 import fr.hugman.mubble.world.entity.Fluttering;
 import fr.hugman.mubble.world.entity.JumpKeyHolder;
+import fr.hugman.mubble.world.entity.Launching;
 import fr.hugman.mubble.world.entity.WaterRunner;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpHolder;
 import fr.hugman.mubble.world.power_up.PowerUpProperties;
+import fr.hugman.mubble.world.power_up.ability.DrillAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
+import fr.hugman.mubble.world.power_up.ability.LaunchAbility;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -23,6 +27,8 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
@@ -40,7 +46,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Mixin(Player.class)
-public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, Fluttering, Floating {
+public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, Fluttering, Floating, Launching, Drilling {
     @Unique
     private static final EntityDataAccessor<Optional<PowerUpProperties>> POWER_UP_PROPERTIES = SynchedEntityData.defineId(Player.class, MubbleEntityDataSerializers.POWER_UP_PROPERTIES);
     @Unique
@@ -54,6 +60,12 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     /** The other half of the same story, see {@link #mubble$tickAirMoves}. */
     @Unique
     private static final EntityDataAccessor<Boolean> FLOATING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
+    @Unique
+    private static final EntityDataAccessor<Boolean> LAUNCHING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
+    @Unique
+    private static final EntityDataAccessor<Boolean> SLOW_FALLING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
+    @Unique
+    private static final EntityDataAccessor<Boolean> DRILLING = SynchedEntityData.defineId(Player.class, EntityDataSerializers.BOOLEAN);
 
     @Unique
     private static final String POWER_UP_KEY = "power_up";
@@ -63,6 +75,22 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     private static final String FLUTTER_TICKS_KEY = "flutter_ticks";
     @Unique
     private static final String FLUTTER_SPENT_KEY = "flutter_spent";
+    @Unique
+    private static final String LAUNCH_SPENT_KEY = "launch_spent";
+    @Unique
+    private static final String LAUNCHING_KEY = "launching";
+    @Unique
+    private static final String SLOW_FALLING_KEY = "slow_falling";
+    @Unique
+    private static final String DRILLING_KEY = "drilling";
+
+    /** How many ticks a launch waits to be seen rising before its peak can be called, movement packets lagging. */
+    @Unique
+    private static final int LAUNCH_RISE_GRACE = 5;
+    @Unique
+    private static final int AIR_MOVE_BURST_PARTICLES = 12;
+    @Unique
+    private static final double AIR_MOVE_BURST_SPEED = 0.2D;
 
     /** How many particles a player on a mid-air move leaves around their feet every tick. */
     @Unique
@@ -110,12 +138,40 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     @Unique
     private boolean mubble$floating;
 
+    @Unique
+    private boolean mubble$jumpKeyWasHeld;
+    @Unique
+    private boolean mubble$sneakKeyWasHeld;
+    /** Ticks left for a second tap of the jump key to count as a double tap. */
+    @Unique
+    private int mubble$doubleTapTicks;
+    @Unique
+    private boolean mubble$launchSpent;
+    @Unique
+    private boolean mubble$launching;
+    @Unique
+    private int mubble$launchTicks;
+    @Unique
+    private boolean mubble$launchRose;
+    @Unique
+    private boolean mubble$slowFalling;
+    @Unique
+    private boolean mubble$drilling;
+    /** What a client last drew a burst for, the launch taking off and the drill landing. */
+    @Unique
+    private boolean mubble$wasLaunching;
+    @Unique
+    private boolean mubble$wasDrilling;
+
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     protected void mubble$initDataTracker(SynchedEntityData.Builder builder, CallbackInfo ci) {
         builder.define(POWER_UP, Optional.empty());
         builder.define(POWER_UP_PROPERTIES, Optional.empty());
         builder.define(FLUTTERING, false);
         builder.define(FLOATING, false);
+        builder.define(LAUNCHING, false);
+        builder.define(SLOW_FALLING, false);
+        builder.define(DRILLING, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -126,6 +182,10 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         view.storeNullable(POWER_UP_PROPERTIES_KEY, PowerUpProperties.CODEC, this_.getPowerUpProperties());
         view.putInt(FLUTTER_TICKS_KEY, this.mubble$fluttering ? this.mubble$flutterTicks : -1);
         view.putBoolean(FLUTTER_SPENT_KEY, this.mubble$flutterSpent);
+        view.putBoolean(LAUNCH_SPENT_KEY, this.mubble$launchSpent);
+        view.putBoolean(LAUNCHING_KEY, this.mubble$launching);
+        view.putBoolean(SLOW_FALLING_KEY, this.mubble$slowFalling);
+        view.putBoolean(DRILLING_KEY, this.mubble$drilling);
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
@@ -138,6 +198,10 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         this.mubble$flutterSpent = view.getBooleanOr(FLUTTER_SPENT_KEY, false);
         this.mubble$setFluttering(this_, flutterTicks >= 0);
         this.mubble$flutterTicks = Math.max(0, flutterTicks);
+        this.mubble$launchSpent = view.getBooleanOr(LAUNCH_SPENT_KEY, false);
+        this.mubble$setLaunching(this_, view.getBooleanOr(LAUNCHING_KEY, false));
+        this.mubble$setSlowFalling(this_, view.getBooleanOr(SLOW_FALLING_KEY, false));
+        this.mubble$setDrilling(this_, view.getBooleanOr(DRILLING_KEY, false));
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
@@ -353,6 +417,7 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     private void mubble$tickAirMoves(CallbackInfo ci) {
         var this_ = (Player) (Object) this;
         this.mubble$airMoveParticles(this_);
+        this.mubble$tickLaunchAndDrill(this_);
 
         // Landing is what hands the next jump its flutter back, and the only thing that does.
         if (this_.onGround()) {
@@ -421,12 +486,17 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     @Unique
     private void mubble$tickFloat(Player player) {
         var ability = this.getFloatAbility();
-        if (ability.isEmpty() || player.getKnownMovement().y() >= 0.0D) {
-            this.mubble$setFloating(player, false);
-            return;
-        }
-        FloatAbility floating = ability.get();
+        this.mubble$setFloating(player, ability.isPresent() && mubble$applyFloat(player, ability.get()));
+    }
 
+    /**
+     * @return whether the player was falling, and so held to the float
+     */
+    @Unique
+    private static boolean mubble$applyFloat(Player player, FloatAbility floating) {
+        if (player.getKnownMovement().y() >= 0.0D) {
+            return false;
+        }
         Vec3 movement = player.getDeltaMovement();
         if (movement.y() < -floating.speed()) {
             player.setDeltaMovement(movement.x(), -floating.speed(), movement.z());
@@ -434,7 +504,139 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         // The fall damage of a tick spent floating is written off here rather than at the landing: the player
         // is falling the whole time, so this is the only place that knows the fall was a float and not a drop.
         player.fallDistance = Math.max(0.0D, player.fallDistance - floating.fallForgivenPerTick());
-        this.mubble$setFloating(player, true);
+        return true;
+    }
+
+    /**
+     * The launch on a double tap of the jump key, the slow fall from its peak, and the drill on a fresh press
+     * of sneak in the air. Run like the flutter, by each side for the player it is in charge of, from the same
+     * keys: the server only tells the other clients through the synced flags.
+     */
+    @Unique
+    private void mubble$tickLaunchAndDrill(Player player) {
+        boolean jumpHeld = player.isJumpKeyHeld();
+        boolean jumpPressed = jumpHeld && !this.mubble$jumpKeyWasHeld;
+        this.mubble$jumpKeyWasHeld = jumpHeld;
+        boolean sneakHeld = player.isShiftKeyDown();
+        boolean sneakPressed = sneakHeld && !this.mubble$sneakKeyWasHeld;
+        this.mubble$sneakKeyWasHeld = sneakHeld;
+        if (this.mubble$doubleTapTicks > 0) {
+            this.mubble$doubleTapTicks--;
+        }
+
+        var launch = this.getLaunchAbility();
+        var drill = this.getDrillAbility();
+        if (launch.isEmpty()) {
+            this.mubble$setLaunching(player, false);
+            this.mubble$setSlowFalling(player, false);
+        }
+        if (drill.isEmpty()) {
+            this.mubble$setDrilling(player, false);
+        }
+
+        boolean held = player.onGround() || mubble$heldBySomethingElse(player) || player.getAbilities().flying;
+        if (held) {
+            if (this.mubble$drilling && player.onGround()) {
+                drill.flatMap(DrillAbility::landSound).ifPresent(sound -> mubble$playSound(player, sound));
+            }
+            this.mubble$launchSpent = false;
+            this.mubble$setLaunching(player, false);
+            this.mubble$setSlowFalling(player, false);
+            this.mubble$setDrilling(player, false);
+        }
+
+        if (jumpPressed && launch.isPresent()) {
+            if (this.mubble$doubleTapTicks > 0) {
+                this.mubble$doubleTapTicks = 0;
+                if (this.mubble$tryLaunch(player, launch.get())) {
+                    return;
+                }
+            } else {
+                this.mubble$doubleTapTicks = launch.get().doubleTapWindow();
+            }
+        }
+        if (held) {
+            return;
+        }
+
+        if (sneakPressed && drill.isPresent()) {
+            this.mubble$setLaunching(player, false);
+            this.mubble$setSlowFalling(player, false);
+            this.mubble$setDrilling(player, true);
+        }
+        if (this.mubble$drilling) {
+            DrillAbility drilling = drill.get();
+            Vec3 movement = player.getDeltaMovement();
+            player.setDeltaMovement(movement.x() * drilling.control(), -drilling.speed(), movement.z() * drilling.control());
+            player.fallDistance = Math.max(0.0D, player.fallDistance - drilling.fallForgivenPerTick());
+            return;
+        }
+
+        if (this.mubble$launching) {
+            double climb = player.getKnownMovement().y();
+            this.mubble$launchRose |= climb > 0.0D;
+            this.mubble$launchTicks++;
+            if (climb > 0.0D || (!this.mubble$launchRose && this.mubble$launchTicks <= LAUNCH_RISE_GRACE)) {
+                return;
+            }
+            this.mubble$setLaunching(player, false);
+            this.mubble$setSlowFalling(player, launch.get().slowFall().isPresent());
+        }
+        if (this.mubble$slowFalling) {
+            var slowFall = launch.flatMap(LaunchAbility::slowFall);
+            if (sneakHeld || slowFall.isEmpty()) {
+                this.mubble$setSlowFalling(player, false);
+            } else {
+                mubble$applyFloat(player, slowFall.get());
+            }
+        }
+    }
+
+    /**
+     * Boosts the player straight up on the very tick of the second tap, from the ground or from the air.
+     * A player who may fly keeps the double tap for vanilla's flight toggle.
+     */
+    @Unique
+    private boolean mubble$tryLaunch(Player player, LaunchAbility launch) {
+        if (this.mubble$launchSpent || player.getAbilities().mayfly || mubble$heldBySomethingElse(player)) {
+            return false;
+        }
+        Vec3 movement = player.getDeltaMovement();
+        player.setDeltaMovement(movement.x(), launch.takeOffSpeed(player.getGravity()), movement.z());
+        // Off the ground already, so that the vanilla jump of this very tick does not take the boost back.
+        player.setOnGround(false);
+        this.mubble$launchSpent = true;
+        this.mubble$launchTicks = 0;
+        this.mubble$launchRose = false;
+        this.mubble$setDrilling(player, false);
+        this.mubble$setSlowFalling(player, false);
+        this.mubble$setLaunching(player, true);
+        launch.sound().ifPresent(sound -> mubble$playSound(player, sound));
+        return true;
+    }
+
+    /** Heard at once by the player making the move, their client predicting it, and sent to everyone else. */
+    @Unique
+    private static void mubble$playSound(Player player, Holder<SoundEvent> sound) {
+        player.level().playSound(player, player.getX(), player.getY(), player.getZ(), sound, SoundSource.PLAYERS, 1.0F, 1.0F);
+    }
+
+    @Unique
+    private void mubble$setLaunching(Player player, boolean launching) {
+        this.mubble$launching = launching;
+        this.mubble$sync(player, LAUNCHING, launching);
+    }
+
+    @Unique
+    private void mubble$setSlowFalling(Player player, boolean slowFalling) {
+        this.mubble$slowFalling = slowFalling;
+        this.mubble$sync(player, SLOW_FALLING, slowFalling);
+    }
+
+    @Unique
+    private void mubble$setDrilling(Player player, boolean drilling) {
+        this.mubble$drilling = drilling;
+        this.mubble$sync(player, DRILLING, drilling);
     }
 
     /**
@@ -497,8 +699,15 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         if (!player.level().isClientSide()) {
             return;
         }
+        this.mubble$burstParticles(player);
         Optional<ParticleOptions> particle = Optional.empty();
-        if (player.isFluttering()) {
+        double y = player.getY();
+        if (player.isDrilling()) {
+            particle = this.getDrillAbility().flatMap(DrillAbility::particle);
+        } else if (player.isSlowFalling()) {
+            particle = this.getLaunchAbility().flatMap(LaunchAbility::slowFall).flatMap(FloatAbility::particle);
+            y += player.getBbHeight();
+        } else if (player.isFluttering()) {
             particle = this.getFlutterAbility().flatMap(FlutterAbility::particle);
         } else if (player.isFloating()) {
             particle = this.getFloatAbility().flatMap(FloatAbility::particle);
@@ -509,8 +718,31 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
         double spread = player.getBbWidth() * AIR_MOVE_PARTICLE_SPREAD;
         for (int i = 0; i < AIR_MOVE_PARTICLES; i++) {
             player.level().addParticle(particle.get(),
-                    player.getRandomX(spread), player.getY(), player.getRandomZ(spread),
+                    player.getRandomX(spread), y, player.getRandomZ(spread),
                     0.0D, AIR_MOVE_PARTICLE_FALL, 0.0D);
+        }
+    }
+
+    /** A ring thrown out from the feet when a launch takes off and when a drill hits the ground. */
+    @Unique
+    private void mubble$burstParticles(Player player) {
+        boolean launching = player.isLaunching();
+        boolean drilling = player.isDrilling();
+        Optional<ParticleOptions> particle = Optional.empty();
+        if (launching && !this.mubble$wasLaunching) {
+            particle = this.getLaunchAbility().flatMap(LaunchAbility::particle);
+        } else if (!drilling && this.mubble$wasDrilling && player.onGround()) {
+            particle = this.getDrillAbility().flatMap(DrillAbility::particle);
+        }
+        this.mubble$wasLaunching = launching;
+        this.mubble$wasDrilling = drilling;
+        if (particle.isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < AIR_MOVE_BURST_PARTICLES; i++) {
+            double angle = i * Math.PI * 2.0D / AIR_MOVE_BURST_PARTICLES;
+            player.level().addParticle(particle.get(), player.getX(), player.getY(), player.getZ(),
+                    Math.cos(angle) * AIR_MOVE_BURST_SPEED, 0.0D, Math.sin(angle) * AIR_MOVE_BURST_SPEED);
         }
     }
 
@@ -535,6 +767,41 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner, JumpKeyHolder, F
     public Optional<FloatAbility> getFloatAbility() {
         var this_ = (Player) (Object) this;
         return this_.getPowerUp().flatMap(powerUp -> powerUp.value().abilities().floating());
+    }
+
+    @Override
+    public Optional<LaunchAbility> getLaunchAbility() {
+        var this_ = (Player) (Object) this;
+        return this_.getPowerUp().flatMap(powerUp -> powerUp.value().abilities().launch());
+    }
+
+    @Override
+    public Optional<DrillAbility> getDrillAbility() {
+        var this_ = (Player) (Object) this;
+        return this_.getPowerUp().flatMap(powerUp -> powerUp.value().abilities().drill());
+    }
+
+    @Override
+    public boolean isLaunching() {
+        var this_ = (Player) (Object) this;
+        return this.mubble$launching || this_.getEntityData().get(LAUNCHING);
+    }
+
+    @Override
+    public boolean isSlowFalling() {
+        var this_ = (Player) (Object) this;
+        return this.mubble$slowFalling || this_.getEntityData().get(SLOW_FALLING);
+    }
+
+    @Override
+    public boolean hasLaunched() {
+        return this.mubble$launchSpent;
+    }
+
+    @Override
+    public boolean isDrilling() {
+        var this_ = (Player) (Object) this;
+        return this.mubble$drilling || this_.getEntityData().get(DRILLING);
     }
 
     @Override

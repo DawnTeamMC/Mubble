@@ -36,6 +36,13 @@ public final class TestPlayers {
         return player;
     }
 
+    /** The mock server player is in creative, which comes with the right to fly. */
+    public static ServerPlayer survival(ServerPlayer player) {
+        player.getAbilities().mayfly = false;
+        player.getAbilities().flying = false;
+        return player;
+    }
+
     /**
      * Advances {@code player} by one tick with a client behind them: the keys they hold down going in, and
      * the movement they made coming back out.
@@ -47,6 +54,8 @@ public final class TestPlayers {
      */
     public static void tick(ServerPlayer player, Input keys) {
         player.setLastClientInput(keys);
+        // What the connection does with the sneak key of an input packet.
+        player.setShiftKeyDown(keys.shift());
         var before = player.position();
         tick(player);
         player.setKnownMovement(player.position().subtract(before));
@@ -55,6 +64,11 @@ public final class TestPlayers {
     /** The keys of a player leaning on the jump button, and on nothing else. */
     public static Input holdingJump() {
         return new Input(false, false, false, false, true, false, false);
+    }
+
+    /** The keys of a player leaning on sneak, and on nothing else. */
+    public static Input holdingSneak() {
+        return new Input(false, false, false, false, false, true, false);
     }
 
     /**

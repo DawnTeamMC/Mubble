@@ -1,0 +1,15 @@
+{
+  "abilities": {
+    "launch": {
+      "slow_fall": {
+        "speed": 0.15
+      }
+    },
+    "drill": {
+      "speed": 0.8
+    }
+  },
+  "name": {
+    "translate": "power_up.mubble-gametest.driller"
+  }
+}

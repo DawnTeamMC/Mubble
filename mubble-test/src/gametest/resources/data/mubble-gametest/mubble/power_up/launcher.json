@@ -1,0 +1,13 @@
+{
+  "abilities": {
+    "launch": {
+      "slow_fall": {
+        "speed": 0.15,
+        "fall_damage": 0.0
+      }
+    }
+  },
+  "name": {
+    "translate": "power_up.mubble-gametest.launcher"
+  }
+}

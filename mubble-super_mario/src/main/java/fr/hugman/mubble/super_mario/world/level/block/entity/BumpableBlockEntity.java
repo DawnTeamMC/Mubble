@@ -6,7 +6,9 @@ import fr.hugman.mubble.super_mario.world.level.block.BumpableDropMode;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.ContainerHelper;
@@ -290,6 +292,14 @@ public class BumpableBlockEntity extends RandomizableContainerBlockEntity {
 				bumpable.onBumpEnd(level, pos, state, this);
 			}
 		}
+    }
+
+    /** Clients need to know whether the block breaks, see {@link BumpableBlock#getCollisionShape}. */
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        CompoundTag tag = new CompoundTag();
+        tag.storeNullable(BUMPED_STATE_KEY, BlockState.CODEC, this.bumpedState);
+        return tag;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package fr.hugman.mubble.client.sound;
 
+import fr.hugman.mubble.world.power_up.ability.DrillAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
+import fr.hugman.mubble.world.power_up.ability.LaunchAbility;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.Minecraft;
@@ -32,6 +34,12 @@ public final class AirMoveSounds {
      * the tick or two in which a client believes they are on both
      */
     public static Optional<Holder<SoundEvent>> soundFor(Player player) {
+        if (player.isDrilling()) {
+            return player.getDrillAbility().flatMap(DrillAbility::sound);
+        }
+        if (player.isSlowFalling()) {
+            return player.getLaunchAbility().flatMap(LaunchAbility::slowFall).flatMap(FloatAbility::sound);
+        }
         if (player.isFluttering()) {
             return player.getFlutterAbility().flatMap(FlutterAbility::sound);
         }

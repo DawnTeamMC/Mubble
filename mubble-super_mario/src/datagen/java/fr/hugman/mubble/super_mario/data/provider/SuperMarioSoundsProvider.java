@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -88,6 +89,11 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE, 1));
         soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE_SUPERBALL, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE_SUPERBALL, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.loose"));
         soundExporter.add(SuperMarioSounds.POWER_UP_REFILL, variantSoundBuilder(SuperMarioSounds.POWER_UP_REFILL, 1));
+        // Stand-ins until the Propeller gets sounds of its own.
+        soundExporter.add(SuperMarioSounds.POWER_UP_PROPELLER_LAUNCH, variantSoundBuilder(SuperMarioSounds.POWER_UP_PROPELLER_LAUNCH.value(), 1, SuperMarioSounds.POWER_UP_SPIN_ATTACK.value().location()).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.launch"));
+        soundExporter.add(SuperMarioSounds.POWER_UP_PROPELLER_FALL, SoundTypeBuilder.of(SuperMarioSounds.POWER_UP_PROPELLER_FALL.value()).sound(SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.ELYTRA_FLYING)).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.fall"));
+        soundExporter.add(SuperMarioSounds.POWER_UP_PROPELLER_DRILL, SoundTypeBuilder.of(SuperMarioSounds.POWER_UP_PROPELLER_DRILL.value()).sound(SoundTypeBuilder.RegistrationBuilder.ofEvent(SoundEvents.MINECART_RIDING)).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.drill"));
+        soundExporter.add(SuperMarioSounds.POWER_UP_PROPELLER_DRILL_LAND, variantSoundBuilder(SuperMarioSounds.POWER_UP_PROPELLER_DRILL_LAND.value(), 1, SuperMario.id("entity.goomba.large_stomp")).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.drill_land"));
 
         // Bubble
         soundExporter.add(SuperMarioSounds.BUBBLE_APPEAR, variantSoundBuilder(SuperMarioSounds.BUBBLE_APPEAR, 1));

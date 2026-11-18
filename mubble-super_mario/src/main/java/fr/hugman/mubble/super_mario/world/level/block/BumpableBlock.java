@@ -14,6 +14,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityTypes;
@@ -30,8 +31,13 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.EntityCollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -163,13 +169,16 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     public void onBumpMiddle(Level level, BlockPos pos, BlockState state, BumpableBlockEntity blockEntity) {
         if (level != null && !level.isClientSide()) {
             if (blockEntity.shouldBreak()) {
-                Vec3 center = Vec3.atCenterOf(blockEntity.getBlockPos());
-
-                this.loot(level, pos, blockEntity, true);
-                level.destroyBlock(blockEntity.getBlockPos(), false);
-                level.playSound(null, center.x(), center.y(), center.z(), SuperMarioSounds.BUMPABLE_BLOCK_DESTROY, SoundSource.BLOCKS, 1.0F, 1.0F);
+                this.breakFromBump(level, pos, blockEntity);
             }
         }
+    }
+
+    public void breakFromBump(Level level, BlockPos pos, BumpableBlockEntity blockEntity) {
+        Vec3 center = Vec3.atCenterOf(pos);
+        this.loot(level, pos, blockEntity, true);
+        level.destroyBlock(pos, false);
+        level.playSound(null, center.x(), center.y(), center.z(), SuperMarioSounds.BUMPABLE_BLOCK_DESTROY, SoundSource.BLOCKS, 1.0F, 1.0F);
     }
 
     /**
@@ -205,6 +214,44 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
 				onBumpStart(level, pos, state, blockEntity);
             }
         });
+    }
+
+    /** A block that would break when bumped breaks at once, without waiting for the bump. */
+    @Override
+    public void onSmash(Level level, BlockState state, Entity entity, BlockHitResult hit) {
+        if (level.isClientSide()) {
+            return;
+        }
+        BlockPos pos = hit.getBlockPos();
+        if (level.getBlockEntity(pos) instanceof BumpableBlockEntity blockEntity && blockEntity.shouldBreak()) {
+            this.breakFromBump(level, pos, blockEntity);
+        } else {
+            this.onHit(level, state, entity, hit);
+        }
+    }
+
+    /**
+     * A block a drilling player is about to smash, or still going through, is not solid to them, the same on
+     * both sides, so that the client never lands on a block the server is breaking. Only the blocks of the
+     * column they are in: the ones beside it stay solid.
+     */
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        if (context instanceof EntityCollisionContext entityContext
+                && entityContext.getEntity() instanceof Player player
+                && player.isDrilling()
+                && isInDrillColumn(player.getBoundingBox(), pos)
+                && level.getBlockEntity(pos) instanceof BumpableBlockEntity blockEntity
+                && blockEntity.shouldBreak()) {
+            return Shapes.empty();
+        }
+        return super.getCollisionShape(state, level, pos, context);
+    }
+
+    private static boolean isInDrillColumn(AABB box, BlockPos pos) {
+        return box.maxY > pos.getY()
+                && box.maxX > pos.getX() && box.minX < pos.getX() + 1.0D
+                && box.maxZ > pos.getZ() && box.minZ < pos.getZ() + 1.0D;
     }
 
     @Override
