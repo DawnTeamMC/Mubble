@@ -6,6 +6,7 @@
     "BlockStateBaseMixin",
     "ArgumentTypeInfosMixin",
     "EntityMixin",
+    "ItemEntityMixin",
     "ItemStackMixin",
     "PlayerMixin"
   ],

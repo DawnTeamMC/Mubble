@@ -107,6 +107,17 @@ public final class PowerUpProperties {
         return false;
     }
 
+    public boolean isCoolingDown() {
+        return this.cooldown > 0;
+    }
+
+    /**
+     * Holds the power-up back for {@code ticks}. With {@link ChargeCounting#FROM_ACTIVE_ENTITIES}, no charge is available until it runs out.
+     */
+    public void startCooldown(int ticks) {
+        this.setCooldown(Math.max(this.cooldown, ticks));
+    }
+
     public boolean isAtMax() {
         return this.chargeCount >= this.maxCharges && this.cooldown == 0;
     }
@@ -138,9 +149,6 @@ public final class PowerUpProperties {
     }
 
     public void tick() {
-        if (this.chargeCounting == ChargeCounting.FROM_ACTIVE_ENTITIES) {
-            this.setChargeCount(this.maxCharges - this.chargeEntities.size());
-        }
         // A timed recharge always keeps a countdown running while charges are missing.
         if (this.chargeCounting == ChargeCounting.TIMED_RECHARGE && this.interval > 0 && this.cooldown <= 0 && this.chargeCount < this.maxCharges) {
             this.cooldown = this.interval;
@@ -160,6 +168,9 @@ public final class PowerUpProperties {
                 }
             }
         }
+        if (this.chargeCounting == ChargeCounting.FROM_ACTIVE_ENTITIES) {
+            this.setChargeCount(this.cooldown > 0 ? 0 : this.maxCharges - this.chargeEntities.size());
+        }
     }
 
     /**
@@ -178,10 +189,15 @@ public final class PowerUpProperties {
         }
     }
 
-    public void removeEntity(UUID uuid) {
+    /**
+     * @return whether the entity was tied to a charge
+     */
+    public boolean removeEntity(UUID uuid) {
         if (this.chargeEntities.remove(uuid)) {
             this.dirty = true;
+            return true;
         }
+        return false;
     }
 
     public enum ChargeCounting implements StringRepresentable {

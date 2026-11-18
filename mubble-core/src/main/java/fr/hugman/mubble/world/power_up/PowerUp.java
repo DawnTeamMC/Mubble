@@ -76,10 +76,16 @@ public record PowerUp(
         }
         var result = action.trigger(player);
         if(result == InteractionResult.SUCCESS && action.shouldSwingOtherHand()) {
-            // swing the empty hand or main hand if both are occupied
-            player.swing(!player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && player.getItemInHand(InteractionHand.OFF_HAND).isEmpty() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+            player.swing(otherHand(player));
         }
         return result;
+    }
+
+    /**
+     * @return the empty hand, or the main hand if both are occupied
+     */
+    public static InteractionHand otherHand(Player player) {
+        return !player.getItemInHand(InteractionHand.MAIN_HAND).isEmpty() && player.getItemInHand(InteractionHand.OFF_HAND).isEmpty() ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
     }
 
     /**

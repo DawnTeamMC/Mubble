@@ -41,6 +41,12 @@ public interface PowerUpAction {
 
     InteractionResult trigger(Player player);
 
+    /**
+     * Called on the server when a cooldown started on the properties of {@code player} runs out.
+     */
+    default void onCooldownEnd(Player player) {
+    }
+
     default boolean shouldSwingOtherHand() {
         return false;
     }

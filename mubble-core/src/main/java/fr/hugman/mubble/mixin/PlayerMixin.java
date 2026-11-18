@@ -4,6 +4,7 @@ import fr.hugman.mubble.network.syncher.MubbleEntityDataSerializers;
 import fr.hugman.mubble.network.protocol.common.custom.PowerUpChangePayload;
 import fr.hugman.mubble.tags.MubblePowerUpTags;
 import fr.hugman.mubble.world.entity.MubbleEntityTypes;
+import fr.hugman.mubble.world.entity.PickupKeeper;
 import fr.hugman.mubble.world.entity.WaterRunner;
 import fr.hugman.mubble.world.entity.item.collectible.CollectibleEntity;
 import fr.hugman.mubble.world.power_up.PowerUp;
@@ -17,6 +18,7 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -103,7 +105,11 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner {
             }
             var properties = this.getPowerUpProperties();
             if(properties != null) {
+                boolean wasCoolingDown = properties.isCoolingDown();
                 properties.tick();
+                if (wasCoolingDown && !properties.isCoolingDown()) {
+                    entry.value().action().ifPresent(action -> action.value().onCooldownEnd(this_));
+                }
                 // safe check
                 if(this_.tickCount % 20 == 0) {
                     properties.doSoftChecks(this_);
@@ -226,7 +232,7 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner {
             List<CollectibleEntity> collectibles = this_.level().getEntities(MubbleEntityTypes.COLLECTIBLE, collectArea, _ -> true);
 
             for (var collectible : collectibles) {
-                if (!collectible.isRemoved()) {
+                if (!collectible.isRemoved() && !PickupKeeper.isKeptFrom(collectible, this_)) {
                     collectible.collect(this_);
                 }
             }
@@ -236,6 +242,13 @@ public class PlayerMixin implements PowerUpHolder, WaterRunner {
         if(powerUp.isPresent()) {
             var particle = powerUp.get().value().cosmectics().particle();
             particle.ifPresent(particleOptions -> this_.level().addParticle(particleOptions, this_.getRandomX(0.6), this_.getRandomY(), this_.getRandomZ(0.6), 0.0, 0.0, 0.0));
+        }
+    }
+
+    @Inject(method = "touch", at = @At("HEAD"), cancellable = true)
+    private void mubble$touch(Entity entity, CallbackInfo ci) {
+        if (PickupKeeper.isKeptFrom(entity, (Player) (Object) this)) {
+            ci.cancel();
         }
     }
 
