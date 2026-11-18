@@ -2,6 +2,8 @@ package fr.hugman.mubble.super_mario.data.provider;
 
 import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.super_mario.core.particles.SuperMarioParticleTypes;
+import fr.hugman.mubble.super_mario.references.SuperMarioFlightRefillIds;
+import fr.hugman.mubble.super_mario.tags.SuperMarioBlockTags;
 import fr.hugman.mubble.super_mario.sounds.SuperMarioSounds;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.entity.projectile.Flower;
@@ -10,6 +12,8 @@ import fr.hugman.mubble.super_mario.world.power_up.action.SpawnCloudPlatformPowe
 import fr.hugman.mubble.world.power_up.PowerUp;
 import fr.hugman.mubble.world.power_up.PowerUpBuilder;
 import fr.hugman.mubble.world.power_up.PowerUpCharges;
+import fr.hugman.mubble.world.power_up.ability.ClingAbility;
+import fr.hugman.mubble.world.power_up.ability.FlightAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import fr.hugman.mubble.world.power_up.action.ShootProjectilePowerUpAction;
@@ -21,9 +25,11 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -176,6 +182,37 @@ public class SuperMarioPowerUpProvider extends FabricDynamicRegistryProvider {
                         FloatAbility.DEFAULT_FALL_DAMAGE,
                         Optional.of(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.BAT_LOOP)),
                         Optional.of(ParticleTypes.CHERRY_LEAVES)
+                ))
+                .build());
+        context.register(BEE, builder(BEE)
+                .description(BEE, "flight")
+                .description(BEE, "honey")
+                .description(BEE, "weather")
+                .flight(new FlightAbility(
+                        FlightAbility.DEFAULT_GAUGE,
+                        FlightAbility.DEFAULT_RESTART,
+                        FlightAbility.DEFAULT_LIFT,
+                        FlightAbility.DEFAULT_ACCELERATION,
+                        FlightAbility.DEFAULT_AIR_CONTROL,
+                        FlightAbility.DEFAULT_FALL_DAMAGE,
+                        FlightAbility.DEFAULT_SPUTTER,
+                        Map.of(
+                                FlightAbility.GROUND, FlightAbility.DEFAULT_GAUGE,
+                                FlightAbility.CLINGING, 2,
+                                SuperMarioFlightRefillIds.COIN, 15,
+                                SuperMarioFlightRefillIds.STOMP, 60
+                        ),
+                        Optional.of(SuperMarioSounds.POWER_UP_BEE_FLY),
+                        Optional.of(ParticleTypes.FALLING_NECTAR),
+                        Optional.of(ParticleTypes.POOF),
+                        // reserved sprites: super_mario:hud/flight_bar/bee_background and bee_progress
+                        Optional.empty()
+                ))
+                .cling(new ClingAbility(
+                        context.lookup(Registries.BLOCK).getOrThrow(SuperMarioBlockTags.BEE_CLIMBABLE),
+                        ClingAbility.DEFAULT_REACH,
+                        Optional.of(SuperMarioSounds.POWER_UP_BEE_CLING),
+                        Optional.of(ParticleTypes.FALLING_HONEY)
                 ))
                 .build());
     }

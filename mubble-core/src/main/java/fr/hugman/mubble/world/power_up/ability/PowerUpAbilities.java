@@ -21,21 +21,29 @@ import java.util.Optional;
  *
  * @param flutter  how the holder climbs again past the peak of a jump, if they can at all
  * @param floating how the holder comes down once nothing is lifting them any more, if they do it slowly
+ * @param flight   how the holder flies on a held jump key, checked before the two above
+ * @param cling    which blocks the holder climbs like a ladder
  */
 public record PowerUpAbilities(
         Optional<FlutterAbility> flutter,
-        Optional<FloatAbility> floating
+        Optional<FloatAbility> floating,
+        Optional<FlightAbility> flight,
+        Optional<ClingAbility> cling
 ) {
-    public static final PowerUpAbilities EMPTY = new PowerUpAbilities(Optional.empty(), Optional.empty());
+    public static final PowerUpAbilities EMPTY = new PowerUpAbilities(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
 
     public static final Codec<PowerUpAbilities> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             FlutterAbility.CODEC.optionalFieldOf("flutter").forGetter(PowerUpAbilities::flutter),
-            FloatAbility.CODEC.optionalFieldOf("float").forGetter(PowerUpAbilities::floating)
+            FloatAbility.CODEC.optionalFieldOf("float").forGetter(PowerUpAbilities::floating),
+            FlightAbility.CODEC.optionalFieldOf("flight").forGetter(PowerUpAbilities::flight),
+            ClingAbility.CODEC.optionalFieldOf("cling").forGetter(PowerUpAbilities::cling)
     ).apply(instance, PowerUpAbilities::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpAbilities> STREAM_CODEC = StreamCodec.composite(
             FlutterAbility.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpAbilities::flutter,
             FloatAbility.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpAbilities::floating,
+            FlightAbility.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpAbilities::flight,
+            ClingAbility.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpAbilities::cling,
             PowerUpAbilities::new
     );
 }

@@ -1,0 +1,18 @@
+{
+  "abilities": {
+    "flight": {
+      "refills": {
+        "mubble:ground": 100,
+        "mubble:clinging": 2,
+        "super_mario:coin": 15,
+        "super_mario:stomp": 60
+      }
+    },
+    "cling": {
+      "blocks": "#super_mario:bee_climbable"
+    }
+  },
+  "name": {
+    "translate": "power_up.mubble-gametest.flier"
+  }
+}

@@ -7,6 +7,7 @@ import fr.hugman.mubble.super_mario.client.renderer.entity.CloudPlatformRenderer
 import fr.hugman.mubble.super_mario.client.renderer.entity.FlowerRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.GoombaRenderer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.layers.ClingingMiniGoombaLayer;
+import fr.hugman.mubble.super_mario.client.renderer.entity.layers.StingerLayer;
 import fr.hugman.mubble.super_mario.client.renderer.entity.KoopaShellRenderer;
 import fr.hugman.mubble.super_mario.world.entity.SuperMarioEntityTypes;
 import fr.hugman.mubble.super_mario.world.level.block.entity.SuperMarioBlockEntityTypes;
@@ -35,6 +36,7 @@ public class SuperMarioRenderers {
         LivingEntityRenderLayerRegistrationCallback.EVENT.register((_, entityRenderer, registrationHelper, context) -> {
             if (entityRenderer instanceof AvatarRenderer<?> avatarRenderer) {
                 registrationHelper.register(new ClingingMiniGoombaLayer(avatarRenderer, context.getModelSet()));
+                registrationHelper.register(new StingerLayer(avatarRenderer, context.getModelSet()));
             }
         });
     }

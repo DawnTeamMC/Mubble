@@ -17,6 +17,8 @@ public class SuperMarioRenderStateDataKeys {
     /** How many mini goombas are clinging to the entity, set on players carrying any. */
     public static final RenderStateDataKey<Integer> CLINGING_MINI_GOOMBAS = RenderStateDataKey.create(() -> "Clinging mini goombas");
 
+    public static final RenderStateDataKey<Boolean> STINGER = RenderStateDataKey.create(() -> "Stinger");
+
     /**
      * How an entity held inside a bubble is drawn: tumbling around, and shrinking away while the bubble
      * swallows it.

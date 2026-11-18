@@ -1,5 +1,6 @@
 package fr.hugman.mubble.client.sound;
 
+import fr.hugman.mubble.world.power_up.ability.FlightAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
 import net.fabricmc.api.EnvType;
@@ -32,6 +33,9 @@ public final class AirMoveSounds {
      * the tick or two in which a client believes they are on both
      */
     public static Optional<Holder<SoundEvent>> soundFor(Player player) {
+        if (player.isFlying()) {
+            return player.getFlightAbility().flatMap(FlightAbility::sound);
+        }
         if (player.isFluttering()) {
             return player.getFlutterAbility().flatMap(FlutterAbility::sound);
         }

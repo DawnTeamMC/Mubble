@@ -28,7 +28,9 @@ public class SuperMarioPowerUpTagsProvider extends FabricTagsProvider<PowerUp> {
 		this.builder(CAN_RUN_ON_WATER).add(MINI);
 		this.builder(DISABLES_STOMPING).add(MINI);
 		this.builder(CAN_WALK_ON_CLOUDS).add(CLOUD, MINI);
-		this.builder(LOST_TO_WATER).add(CLOUD);
-		this.builder(LOST_TO_RAIN).add(CLOUD);
+		this.builder(LOST_TO_WATER).add(CLOUD, BEE);
+		this.builder(LOST_TO_RAIN).add(CLOUD, BEE);
+		this.builder(LIGHT_FOOTED).add(BEE);
+		this.builder(HAS_STINGER).add(BEE);
 	}
 }

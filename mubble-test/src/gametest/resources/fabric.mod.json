@@ -23,6 +23,10 @@
       "fr.hugman.mubble.test.gametest.power_up.RunOnWaterGameTest",
       "fr.hugman.mubble.test.gametest.power_up.FlutterGameTest",
       "fr.hugman.mubble.test.gametest.power_up.FloatGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.FlightGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.ClingGameTest",
+      "fr.hugman.mubble.test.gametest.power_up.LightFootedGameTest",
+      "fr.hugman.mubble.test.gametest.super_mario.BeeGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.StompGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.GoombaGameTest",
       "fr.hugman.mubble.test.gametest.super_mario.MiniGoombaGameTest",
@@ -41,6 +45,9 @@
       "fr.hugman.mubble.test.gametest.datapack.GeneratedDataGameTest"
     ]
   },
+  "mixins": [
+    "mubble-gametest.mixins.json"
+  ],
   "depends": {
     "fabric-gametest-api-v1": "*",
     "mubble": "*",

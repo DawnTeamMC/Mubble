@@ -47,6 +47,9 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.ricochet", "Superballs bounce off everything.");
         builder.add("power_up." + SuperMario.MOD_ID + ".superball.description.coins", "They collect the coins they touch.");
         builder.add("power_up." + SuperMario.MOD_ID + ".flower.description.flutter", "Hold jump past the top of a jump to climb, then float down.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".bee.description.flight", "Hold jump in mid-air to fly for a while.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".bee.description.honey", "Cling to honey and hives to climb them.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".bee.description.weather", "Water and rain wash it away.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".grow_flower.description", "Press %s to grow a huge flower.");
 
@@ -86,6 +89,8 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.obtain", "Power-up obtained");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.loose", "Power-up lost");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.refill", "Power-up refilled");
+        builder.add(SuperMarioSounds.POWER_UP_BEE_FLY.value(), "Bee buzzes");
+        builder.add(SuperMarioSounds.POWER_UP_BEE_CLING.value(), "Bee clings to honey");
 
         builder.add("gamerule.beepBlockCooldown", "Beep Block cooldown");
 

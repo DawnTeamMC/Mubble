@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -48,6 +49,11 @@ public class SuperMarioBlockTagsProvider extends FabricTagsProvider.BlockTagsPro
                 BLACK_EGG_BLOCK,
                 WHITE_EGG_BLOCK
         );
+
+        builder(BEE_CLIMBABLE)
+                .add(Blocks.HONEY_BLOCK.builtInRegistryHolder().key())
+                .add(Blocks.HONEYCOMB_BLOCK.builtInRegistryHolder().key())
+                .forceAddTag(BlockTags.BEEHIVES);
 
         // Vanilla
         builder(BlockTags.NEEDS_STONE_TOOL)

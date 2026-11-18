@@ -88,6 +88,9 @@ public class SuperMarioSoundsProvider extends FabricSoundsProvider {
         soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE, 1));
         soundExporter.add(SuperMarioSounds.POWER_UP_LOOSE_SUPERBALL, variantSoundBuilder(SuperMarioSounds.POWER_UP_LOOSE_SUPERBALL, 1).subtitle("subtitles." + SuperMario.MOD_ID + ".power_up.loose"));
         soundExporter.add(SuperMarioSounds.POWER_UP_REFILL, variantSoundBuilder(SuperMarioSounds.POWER_UP_REFILL, 1));
+        // Stand-ins from vanilla until the Bee form gets sounds of its own.
+        soundExporter.add(SuperMarioSounds.POWER_UP_BEE_FLY, variantSoundBuilder(SuperMarioSounds.POWER_UP_BEE_FLY.value(), 1, Identifier.withDefaultNamespace("mob/bee/loop1")));
+        soundExporter.add(SuperMarioSounds.POWER_UP_BEE_CLING, variantSoundBuilder(SuperMarioSounds.POWER_UP_BEE_CLING.value(), 1, Identifier.withDefaultNamespace("block/honeyblock/slide1")));
 
         // Bubble
         soundExporter.add(SuperMarioSounds.BUBBLE_APPEAR, variantSoundBuilder(SuperMarioSounds.BUBBLE_APPEAR, 1));
