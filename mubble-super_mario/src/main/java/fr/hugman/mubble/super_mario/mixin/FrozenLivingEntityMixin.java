@@ -39,6 +39,22 @@ public class FrozenLivingEntityMixin implements FreezeSnapshot {
         this.super_mario$frozenWalkSpeed = this_.walkAnimation.speed();
     }
 
+    /**
+     * Hands the ground the ice covered this tick on to whoever is riding it. It sits at the end of
+     * {@code LivingEntity}'s tick rather than {@code Entity}'s, which runs before the {@code aiStep}
+     * that does the moving and would hand on a tick that had not happened yet.
+     */
+    @Inject(method = "tick", at = @At("RETURN"))
+    private void super_mario$carryRiders(CallbackInfo ci) {
+        Freezing.carryRiders((LivingEntity) (Object) this);
+    }
+
+    /** Sends whoever jumps off a block of ice on the way it was already going. */
+    @Inject(method = "jumpFromGround", at = @At("TAIL"))
+    private void super_mario$jumpOffTheIce(CallbackInfo ci) {
+        Freezing.jumpOffFrozen((LivingEntity) (Object) this);
+    }
+
     @Override
     public float frozenWalkPos() {
         return this.super_mario$frozenWalkPos;
@@ -47,6 +63,30 @@ public class FrozenLivingEntityMixin implements FreezeSnapshot {
     @Override
     public float frozenWalkSpeed() {
         return this.super_mario$frozenWalkSpeed;
+    }
+
+    /**
+     * Keeps a block of ice out of the shouldering match entities have when they overlap, which would
+     * otherwise throw a rider off the very thing carrying it. On a client that shove picks out the
+     * local player alone, so it is players it lands on, and their own client makes it stick.
+     */
+    @Inject(method = "isPushable", at = @At("HEAD"), cancellable = true)
+    private void super_mario$notJostledWhileFrozen(CallbackInfoReturnable<Boolean> cir) {
+        if (Freezing.isFrozen((LivingEntity) (Object) this)) {
+            cir.setReturnValue(false);
+        }
+    }
+
+    /**
+     * And the other way about: a block of ice shoulders nobody aside either.
+     *
+     * @see #super_mario$notJostledWhileFrozen
+     */
+    @Inject(method = "pushEntities", at = @At("HEAD"), cancellable = true)
+    private void super_mario$shoulderNobodyWhileFrozen(CallbackInfo ci) {
+        if (Freezing.isFrozen((LivingEntity) (Object) this)) {
+            ci.cancel();
+        }
     }
 
     @Inject(method = "isImmobile", at = @At("HEAD"), cancellable = true)
