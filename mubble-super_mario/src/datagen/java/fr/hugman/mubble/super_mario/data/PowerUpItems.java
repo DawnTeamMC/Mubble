@@ -22,7 +22,9 @@ public class PowerUpItems {
             new Entry(SuperMarioItemIds.BUBBLE_FLOWER, SuperMarioPowerUpIds.BUBBLE),
             new Entry(SuperMarioItemIds.SUPERBALL_FLOWER, SuperMarioPowerUpIds.SUPERBALL),
             new Entry(SuperMarioItemIds.SUPER_FLOWER_POT, SuperMarioPowerUpIds.FLOWER),
-            new Entry(SuperMarioItemIds.PROPELLER_MUSHROOM, SuperMarioPowerUpIds.PROPELLER)
+            new Entry(SuperMarioItemIds.PROPELLER_MUSHROOM, SuperMarioPowerUpIds.PROPELLER),
+            new Entry(SuperMarioItemIds.SUPER_LEAF, SuperMarioPowerUpIds.TANOOKI),
+            new Entry(SuperMarioItemIds.STATUE_LEAF, SuperMarioPowerUpIds.STATUE_TANOOKI)
     );
 
     public static ResourceKey<Item> getItem(ResourceKey<PowerUp> powerUp) {

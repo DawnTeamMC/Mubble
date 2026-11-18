@@ -49,6 +49,12 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("power_up." + SuperMario.MOD_ID + ".flower.description.flutter", "Hold jump past the top of a jump to climb, then float down.");
         builder.add("power_up." + SuperMario.MOD_ID + ".propeller.description.launch", "Double-tap jump to spin up high, then drift down.");
         builder.add("power_up." + SuperMario.MOD_ID + ".propeller.description.drill", "Sneak in the air to drill down through bricks.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".tanooki.description.whip", "Spin your tail to hit everything around you.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".tanooki.description.glide", "Hold jump in the air to glide.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".statue_tanooki.description.whip", "Spin your tail to hit everything around you.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".statue_tanooki.description.glide", "Hold jump in the air to glide.");
+        builder.add("power_up." + SuperMario.MOD_ID + ".statue_tanooki.description.statue", "Sneak in the air to pound down as a statue, for as long as you hold sneak.");
+        builder.add("power_up_action_type." + SuperMario.MOD_ID + ".tail_whip.description", "Press %s to spin your tail.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".spawn_cloud_platform.description", "Press %s to summon a cloud platform.");
         builder.add("power_up_action_type." + SuperMario.MOD_ID + ".grow_flower.description", "Press %s to grow a huge flower.");
 
@@ -92,6 +98,11 @@ public class SuperMarioEnglishLangProvider extends FabricLanguageProvider {
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.fall", "Propeller whirs");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.drill", "Propeller drills");
         builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.propeller.drill_land", "Drill lands");
+
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.tanooki.glide", "Tail glides");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.statue.enter", "Turns to stone");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.statue.leave", "Stone crumbles");
+        builder.add("subtitles." + SuperMario.MOD_ID + ".power_up.ground_pound.land", "Ground pound lands");
 
         builder.add("gamerule.beepBlockCooldown", "Beep Block cooldown");
 

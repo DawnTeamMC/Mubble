@@ -23,20 +23,23 @@ import java.util.Optional;
  * @param floating how the holder comes down once nothing is lifting them any more, if they do it slowly
  * @param launch   how the holder is boosted straight up on a double tap of the jump key
  * @param drill    how the holder drills down on a press of sneak in the air
+ * @param groundPound how the holder pounds down on a press of sneak in the air, and turns to stone doing it
  */
 public record PowerUpAbilities(
         Optional<FlutterAbility> flutter,
         Optional<FloatAbility> floating,
         Optional<LaunchAbility> launch,
-        Optional<DrillAbility> drill
+        Optional<DrillAbility> drill,
+        Optional<GroundPoundAbility> groundPound
 ) {
-    public static final PowerUpAbilities EMPTY = new PowerUpAbilities(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+    public static final PowerUpAbilities EMPTY = new PowerUpAbilities(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
 
     public static final Codec<PowerUpAbilities> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             FlutterAbility.CODEC.optionalFieldOf("flutter").forGetter(PowerUpAbilities::flutter),
             FloatAbility.CODEC.optionalFieldOf("float").forGetter(PowerUpAbilities::floating),
             LaunchAbility.CODEC.optionalFieldOf("launch").forGetter(PowerUpAbilities::launch),
-            DrillAbility.CODEC.optionalFieldOf("drill").forGetter(PowerUpAbilities::drill)
+            DrillAbility.CODEC.optionalFieldOf("drill").forGetter(PowerUpAbilities::drill),
+            GroundPoundAbility.CODEC.optionalFieldOf("ground_pound").forGetter(PowerUpAbilities::groundPound)
     ).apply(instance, PowerUpAbilities::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, PowerUpAbilities> STREAM_CODEC = StreamCodec.composite(
@@ -44,6 +47,7 @@ public record PowerUpAbilities(
             FloatAbility.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpAbilities::floating,
             LaunchAbility.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpAbilities::launch,
             DrillAbility.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpAbilities::drill,
+            GroundPoundAbility.STREAM_CODEC.apply(ByteBufCodecs::optional), PowerUpAbilities::groundPound,
             PowerUpAbilities::new
     );
 }

@@ -70,13 +70,13 @@ public class EntityMixin implements Stompable, FallGraced {
 	}
 
 	/**
-	 * Smashes every hittable block the feet of a drilling player are about to go through, block after block.
+	 * Smashes every hittable block the feet of a drilling or pounding player are about to go through, block after block.
 	 * {@code delta} rather than the resolved movement, so that a block the drill lands on is still hit.
 	 */
 	@Inject(method="move", at=@At(value="INVOKE", target="Lnet/minecraft/world/entity/Entity;setPos(Lnet/minecraft/world/phys/Vec3;)V", ordinal=0))
 	private void mubble$smashUnderDrill(MoverType type, Vec3 delta, CallbackInfo ci) {
 		Entity this_ = (Entity) (Object) this;
-		if (delta.y() >= 0 || !(this_ instanceof Player player) || !player.isDrilling() || !(this_.level() instanceof ServerLevel level)) {
+		if (delta.y() >= 0 || !(this_ instanceof Player player) || !(player.isDrilling() || player.isGroundPounding()) || !(this_.level() instanceof ServerLevel level)) {
 			return;
 		}
 		AABB box = player.getBoundingBox();

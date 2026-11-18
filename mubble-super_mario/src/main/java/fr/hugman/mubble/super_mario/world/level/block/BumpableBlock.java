@@ -231,7 +231,7 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     }
 
     /**
-     * A block a drilling player is about to smash, or still going through, is not solid to them, the same on
+     * A block a drilling or pounding player is about to smash, or still going through, is not solid to them, the same on
      * both sides, so that the client never lands on a block the server is breaking. Only the blocks of the
      * column they are in: the ones beside it stay solid.
      */
@@ -239,7 +239,7 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         if (context instanceof EntityCollisionContext entityContext
                 && entityContext.getEntity() instanceof Player player
-                && player.isDrilling()
+                && (player.isDrilling() || player.isGroundPounding())
                 && isInDrillColumn(player.getBoundingBox(), pos)
                 && level.getBlockEntity(pos) instanceof BumpableBlockEntity blockEntity
                 && blockEntity.shouldBreak()) {
@@ -256,11 +256,11 @@ public class BumpableBlock extends BaseEntityBlock implements HittableBlock {
 
     /**
      * Pounded from above, the block bumps as if hit from below: it pops up, and what it holds comes
-     * out of its top, where the one pounding it stands. A block that breaks lets them fall through.
+     * out of its top, where the one pounding it stands. A block that breaks does so at once.
      */
     @Override
     public void onPounded(Level level, BlockState state, BlockPos pos, Entity entity) {
-        this.onHit(level, state, entity, new BlockHitResult(Vec3.atBottomCenterOf(pos), Direction.DOWN, pos, false));
+        this.onSmash(level, state, entity, new BlockHitResult(Vec3.atBottomCenterOf(pos), Direction.DOWN, pos, false));
     }
 
     @Override

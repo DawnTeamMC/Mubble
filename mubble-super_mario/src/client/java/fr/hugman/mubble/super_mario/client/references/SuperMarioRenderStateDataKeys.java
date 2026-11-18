@@ -14,6 +14,9 @@ public class SuperMarioRenderStateDataKeys {
     /** Set on entities held inside a {@link fr.hugman.mubble.super_mario.world.entity.projectile.Bubble}. */
     public static final RenderStateDataKey<BubbleRide> BUBBLE_RIDE = RenderStateDataKey.create(() -> "Bubble ride");
 
+    /** Set on players turned to stone, {@code null} otherwise. */
+    public static final RenderStateDataKey<Boolean> STATUE = RenderStateDataKey.create(() -> "Statue");
+
     /** How many mini goombas are clinging to the entity, set on players carrying any. */
     public static final RenderStateDataKey<Integer> CLINGING_MINI_GOOMBAS = RenderStateDataKey.create(() -> "Clinging mini goombas");
 

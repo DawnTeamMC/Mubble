@@ -1,0 +1,15 @@
+{
+  "abilities": {
+    "ground_pound": {
+      "hang_ticks": 2,
+      "drop_speed": 0.8,
+      "kills": "#super_mario:enemies",
+      "statue": {
+        "max_ticks": 30
+      }
+    }
+  },
+  "name": {
+    "translate": "power_up.mubble-gametest.statue"
+  }
+}

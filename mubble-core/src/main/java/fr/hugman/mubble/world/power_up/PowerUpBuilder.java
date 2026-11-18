@@ -9,6 +9,7 @@ import java.util.Optional;
 import fr.hugman.mubble.world.power_up.ability.DrillAbility;
 import fr.hugman.mubble.world.power_up.ability.FloatAbility;
 import fr.hugman.mubble.world.power_up.ability.FlutterAbility;
+import fr.hugman.mubble.world.power_up.ability.GroundPoundAbility;
 import fr.hugman.mubble.world.power_up.ability.LaunchAbility;
 import fr.hugman.mubble.world.power_up.ability.PowerUpAbilities;
 import fr.hugman.mubble.world.power_up.action.PowerUpAction;
@@ -36,6 +37,7 @@ public class PowerUpBuilder {
     private @Nullable FloatAbility floating = null;
     private @Nullable LaunchAbility launch = null;
     private @Nullable DrillAbility drill = null;
+    private @Nullable GroundPoundAbility groundPound = null;
     private @Nullable ParticleOptions particle = null;
     private @Nullable Identifier humanoidOverlayAssetId = null;
     private boolean emissiveOverlay = false;
@@ -122,6 +124,11 @@ public class PowerUpBuilder {
         return this;
     }
 
+    public PowerUpBuilder groundPound(GroundPoundAbility groundPound) {
+        this.groundPound = groundPound;
+        return this;
+    }
+
     public PowerUpBuilder particle(ParticleOptions particle) {
         this.particle = particle;
         return this;
@@ -168,7 +175,7 @@ public class PowerUpBuilder {
                 Optional.ofNullable(spriteId),
                 Optional.ofNullable(action),
                 Optional.ofNullable(attributesModifiers.isEmpty() ? null : attributesModifiers),
-                new PowerUpAbilities(Optional.ofNullable(this.flutter), Optional.ofNullable(this.floating), Optional.ofNullable(this.launch), Optional.ofNullable(this.drill)),
+                new PowerUpAbilities(Optional.ofNullable(this.flutter), Optional.ofNullable(this.floating), Optional.ofNullable(this.launch), Optional.ofNullable(this.drill), Optional.ofNullable(this.groundPound)),
                 new PowerUpCosmectics(
                         Optional.ofNullable(this.particle),
                         Optional.ofNullable(this.obtainSound),

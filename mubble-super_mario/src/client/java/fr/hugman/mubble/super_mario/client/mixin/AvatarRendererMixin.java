@@ -15,6 +15,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 public class AvatarRendererMixin {
     @Redirect(method = "renderHand", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/rendertype/RenderTypes;entityTranslucent(Lnet/minecraft/resources/Identifier;)Lnet/minecraft/client/renderer/rendertype/RenderType;"))
     private RenderType super_mario$renderHand(Identifier texture) {
+        if (Minecraft.getInstance().player.isStatue()) {
+            return SuperMarioRenderTypes.getStatueEntity(texture);
+        }
         var powerUp = Minecraft.getInstance().player.getPowerUp();
         if (powerUp.isPresent()) {
             if (powerUp.get().is(SuperMarioPowerUpIds.GOLD)) {

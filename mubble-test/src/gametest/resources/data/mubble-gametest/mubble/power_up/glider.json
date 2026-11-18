@@ -1,0 +1,15 @@
+{
+  "abilities": {
+    "float": {
+      "speed": 0.1,
+      "fall_damage": 0.25,
+      "air_control": {
+        "acceleration": 0.05,
+        "top_speed": 0.4
+      }
+    }
+  },
+  "name": {
+    "translate": "power_up.mubble-gametest.glider"
+  }
+}

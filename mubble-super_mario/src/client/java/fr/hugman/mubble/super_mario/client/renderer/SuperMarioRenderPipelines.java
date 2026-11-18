@@ -49,4 +49,17 @@ public class SuperMarioRenderPipelines {
                     .withCull(false)
                     .build()
     );
+
+    // Same as GOLDEN_ENTITY_PIPELINE, over the grays of a carved statue instead
+    public static final RenderPipeline STATUE_ENTITY_PIPELINE = RenderPipelines.register(
+            RenderPipeline.builder(RenderPipelines.ENTITY_SNIPPET)
+                    .withLocation(SuperMario.id("pipeline/statue_entity"))
+                    .withShaderDefine("ALPHA_CUTOUT", 0.1F)
+                    .withShaderDefine("PER_FACE_LIGHTING")
+                    .withFragmentShader(SuperMario.id("core/statue_entity"))
+                    .withBindGroupLayout(BindGroupLayouts.SAMPLER1)
+                    .withColorTargetState(new ColorTargetState(BlendFunction.TRANSLUCENT))
+                    .withCull(false)
+                    .build()
+    );
 }

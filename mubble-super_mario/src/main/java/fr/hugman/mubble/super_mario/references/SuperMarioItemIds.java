@@ -25,6 +25,8 @@ public class SuperMarioItemIds {
     public static final ResourceKey<Item> SUPERBALL_FLOWER = createKey("superball_flower");
     public static final ResourceKey<Item> SUPER_FLOWER_POT = createKey("super_flower_pot");
     public static final ResourceKey<Item> PROPELLER_MUSHROOM = createKey("propeller_mushroom");
+    public static final ResourceKey<Item> SUPER_LEAF = createKey("super_leaf");
+    public static final ResourceKey<Item> STATUE_LEAF = createKey("statue_leaf");
 
     public static final ResourceKey<Item> CAPE_FEATHER = createKey("cape_feather");
     public static final ResourceKey<Item> SUPER_CAPE_FEATHER = createKey("super_cape_feather");
