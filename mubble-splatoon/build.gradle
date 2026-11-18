@@ -1,0 +1,23 @@
+version = getSubprojectVersion(project)
+
+moduleDependencies(project, [
+    'mubble-core',
+])
+
+fabricApi {
+    configureDataGeneration() {
+        outputDirectory = file("src/generated/resources")
+        modId = "splatoon-datagen"
+        createSourceSet = true
+        client = true
+    }
+}
+
+loom {
+    runs {
+        datagen {
+            name "Data Generation"
+            ideConfigGenerated = true
+        }
+    }
+}

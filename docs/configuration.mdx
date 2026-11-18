@@ -9,3 +9,60 @@ Mubble adds 1 game rule to the game:
   - **Description**: Sets the cooldown (in ticks) for beep blocks.
   - **Type**: `int` (min: 1)
   - **Default**: 80
+## Ink
+
+Ink painted by the Splatoon weapons lives on the faces of blocks, each face being split into 8×8 cells.
+It sticks to any block with a collision shape (slabs, stairs and other partial blocks included), and gets cleaned
+wherever a block is placed over it: a torch only cleans the middle of the face it stands on.
+
+Plants (grass, flowers, vines...) are inked as a whole instead, over their own texture, and do not keep ink off the
+ground they stand on.
+
+Shots leave splats stretched in the direction they were going, which wrap a little around edges and corners, and let
+droplets fall on their way. Ink landing in a liquid that washes ink away paints nothing.
+
+### Environment attributes
+
+Like any [environment attribute](https://minecraft.wiki/w/Environment_attribute), these can be set per dimension type
+or per biome by data packs, so that an arena can keep its ink forever while the rest of the world lets it dry off.
+- `splatoon:gameplay/ink_lifetime`
+  - **Description**: How long ink stays after it was last painted, in ticks. Zero or less keeps it forever.
+  - **Type**: `int`
+  - **Default**: 96000 (4 in-game days)
+- `splatoon:gameplay/rain_washes_ink`
+  - **Description**: Whether rain washes away the ink on the surfaces it falls on.
+  - **Type**: `boolean`
+  - **Default**: `true`
+- `splatoon:gameplay/liquids_wash_ink`
+  - **Description**: Whether liquids wash away the ink they touch, and keep ink from being painted under them.
+  - **Type**: `boolean`
+  - **Default**: `true`
+
+### Block tags
+
+- `splatoon:uninkable`: blocks ink does not stick to.
+- `splatoon:ink_coated`: blocks without collision that ink covers as a whole, over their own texture.
+
+### Item component
+
+The ink a weapon shoots comes from its `splatoon:ink` component, so any weapon can shoot any color:
+```
+/give @s splatoon:splattershot[splatoon:ink={color:"#F02D7D"}]
+/give @s splatoon:splattershot[splatoon:ink={color:"#F0E22D",type:"splatoon:glitter"}]
+```
+
+### Weapons
+
+The `splatoon:splatoon_weapon` component holds the parameters of a weapon, named and grouped like in the parameter
+tables of Splatoon 3 (see [Leanny's database](https://leanny.github.io/splat3/parameters.html)), in snake case:
+`MoveParam.SpawnSpeed` becomes `bullet.move_param.spawn_speed`. Lengths are in units (1 unit = 1 block), durations in
+frames (60 per second, so 3 per tick) and damage out of 1000. Like in the game's tables, values left out take the
+defaults of the game, such as `brake_air_resist` (0.36) or `repeat_frame` (6).
+
+Ink damage (`splatoon:ink`) neither knocks back nor gives a moment of invulnerability, so every shot counts.
+
+### Resource packs
+
+An ink type is drawn with the `<namespace>:block/ink/<path>` texture of the block atlas, tinted with the color of the
+ink. Animated textures (with a `.mcmeta` file) are supported, which is how `splatoon:glitter` sparkles. Types without
+a texture fall back on `splatoon:block/ink/normal`.

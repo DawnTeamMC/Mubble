@@ -14,6 +14,7 @@ include 'mubble-bom'
 
 include 'mubble-core'
 include 'mubble-super_mario'
+include 'mubble-splatoon'
 
 include 'mubble-testmod'
 

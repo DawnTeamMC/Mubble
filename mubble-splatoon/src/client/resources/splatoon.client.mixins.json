@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.splatoon.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "SectionCompilerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
