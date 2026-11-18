@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.platformer.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "LivingEntityPlatformerMixin",
+    "PlayerPlatformerMixin",
+    "ServerCommonPacketListenerImplPlatformerMixin",
+    "ServerGamePacketListenerImplAccessor",
+    "ServerGamePacketListenerImplMixin",
+    "ServerPlayerPlatformerMixin",
+    "ServerboundCustomPayloadPacketMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

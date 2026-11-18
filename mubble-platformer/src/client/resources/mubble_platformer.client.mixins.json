@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "package": "fr.hugman.mubble.platformer.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "PlatformerAbstractClientPlayerMixin",
+    "PlatformerAvatarRendererMixin",
+    "PlatformerCameraMixin",
+    "PlatformerClientPacketListenerMixin",
+    "PlatformerEntityTurnMixin",
+    "PlatformerHudMixin",
+    "PlatformerHumanoidModelMixin",
+    "PlatformerLivingEntityRendererMixin",
+    "PlatformerLocalPlayerMixin",
+    "PlatformerMinecraftMixin",
+    "CameraInvoker",
+    "MinecraftInvoker"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
