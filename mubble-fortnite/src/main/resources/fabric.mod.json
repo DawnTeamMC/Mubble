@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "name": "Fortnite",
+  "id": "fortnite",
+  "version": "${version}",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "fr.hugman.mubble.fortnite.Fortnite"
+    ],
+    "client": [
+      "fr.hugman.mubble.fortnite.client.FortniteClient"
+    ]
+  },
+  "depends": {
+    "minecraft": "*",
+    "fabric-api": "*",
+    "mubble": "*"
+  },
+  "license": "LGPL v3.0"
+}
