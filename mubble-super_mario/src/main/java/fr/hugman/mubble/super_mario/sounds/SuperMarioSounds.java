@@ -17,6 +17,22 @@ public class SuperMarioSounds {
     public static final SoundEvent NOTE_BLOCK_JUMP_LOW = register("block.note_block.jump.low");
     public static final SoundEvent NOTE_BLOCK_JUMP_HIGH = register("block.note_block.jump.high");
 
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_MARIO = registerForHolder("block.note_block.instrument.mario");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_MUSHROOM = registerForHolder("block.note_block.instrument.mushroom");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_YOSHI = registerForHolder("block.note_block.instrument.yoshi");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_STAR = registerForHolder("block.note_block.instrument.star");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_FLOWER = registerForHolder("block.note_block.instrument.flower");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_GAME_BOY = registerForHolder("block.note_block.instrument.game_boy");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_DOG = registerForHolder("block.note_block.instrument.dog");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_CAT = registerForHolder("block.note_block.instrument.cat");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_PIG = registerForHolder("block.note_block.instrument.pig");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_SWAN = registerForHolder("block.note_block.instrument.swan");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_FACE = registerForHolder("block.note_block.instrument.face");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_PLANE = registerForHolder("block.note_block.instrument.plane");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_BOAT = registerForHolder("block.note_block.instrument.boat");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_CAR = registerForHolder("block.note_block.instrument.car");
+    public static final Holder.Reference<SoundEvent> NOTE_BLOCK_HEART = registerForHolder("block.note_block.instrument.heart");
+
     public static final Holder.Reference<SoundEvent> COIN_COLLECT = registerForHolder("item.coin.collect");
     public static final Holder.Reference<SoundEvent> COIN_BOUNCE = registerForHolder("item.coin.bounce");
     public static final SoundEvent CAPE_FEATHER_USE = register("item.cape_feather.use");

@@ -4,6 +4,7 @@ import fr.hugman.mubble.core.registries.MubbleRegistries;
 import fr.hugman.mubble.super_mario.core.registries.SuperMarioRegistries;
 import fr.hugman.mubble.super_mario.references.GoombaVariantIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioDamageTypeIds;
+import fr.hugman.mubble.super_mario.references.SuperMarioNoteBlockInstrumentIds;
 import fr.hugman.mubble.super_mario.references.SuperMarioPowerUpIds;
 import fr.hugman.mubble.super_mario.tags.SuperMarioBlockTags;
 import fr.hugman.mubble.super_mario.tags.SuperMarioDamageTypeTags;
@@ -48,6 +49,12 @@ public class DynamicContentGameTest {
     @GameTest
     public void everyDeclaredGoombaVariantIsLoaded(GameTestHelper helper) {
         assertKeysResolve(helper, GoombaVariantIds.class, helper.getLevel().registryAccess().lookupOrThrow(SuperMarioRegistries.GOOMBA_VARIANT));
+        helper.succeed();
+    }
+
+    @GameTest
+    public void everyDeclaredNoteBlockInstrumentIsLoaded(GameTestHelper helper) {
+        assertKeysResolve(helper, SuperMarioNoteBlockInstrumentIds.class, helper.getLevel().registryAccess().lookupOrThrow(MubbleRegistries.NOTE_BLOCK_INSTRUMENT));
         helper.succeed();
     }
 

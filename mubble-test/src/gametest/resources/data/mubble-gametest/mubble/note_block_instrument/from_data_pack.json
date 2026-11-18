@@ -1,0 +1,6 @@
+{
+  "sound": {
+    "sound_id": "mubble-gametest:block.note_block.from_data_pack"
+  },
+  "blocks_below": "minecraft:sponge"
+}
